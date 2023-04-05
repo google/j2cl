@@ -55,6 +55,7 @@ _J2KT_JVM_PACKAGES = [
 # rules.
 _J2KT_NATIVE_PACKAGES = [
     "third_party/java_src/animal_sniffer",
+    "java/com/google/thirdparty/publicsuffix",
     "build_defs/internal_do_not_use",
     "transpiler/javatests/com/google/j2cl/integration/java",
     "transpiler/javatests/com/google/j2cl/integration/testing",
