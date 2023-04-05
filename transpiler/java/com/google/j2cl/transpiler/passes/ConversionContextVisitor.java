@@ -137,14 +137,26 @@ public final class ConversionContextVisitor extends AbstractRewriter {
       return operand;
     }
 
-    /** An {@code expression} is of a JsEnum type and needs boxing. */
+    /** An {@code expression} that is of a JsEnum type and needs boxing. */
     public Expression rewriteJsEnumBoxingConversionContext(Expression expression) {
       return expression;
     }
 
-    /** A {@code castExpression} requesting and explicit type conversion. */
+    /** A {@code castExpression} requesting an explicit type conversion. */
     public Expression rewriteCastContext(CastExpression castExpression) {
       return castExpression;
+    }
+
+    /** An {@code expression} that is subject of a switch statement. */
+    public Expression rewriteSwitchExpressionContext(Expression expression) {
+      TypeDescriptor typeDescriptor = expression.getTypeDescriptor();
+      if (!TypeDescriptors.isBoxedOrPrimitiveType(typeDescriptor)) {
+        return expression;
+      }
+      return (TypeDescriptors.isJavaLangBoolean(typeDescriptor.toRawTypeDescriptor())
+              || TypeDescriptors.isPrimitiveBoolean(typeDescriptor))
+          ? rewriteBooleanConversionContext(expression)
+          : rewriteUnaryNumericPromotionContext(expression);
     }
 
     /** An {@code expression} that is used as a qualifier of a member of a particular type. */
@@ -590,13 +602,10 @@ public final class ConversionContextVisitor extends AbstractRewriter {
 
   @Override
   public SwitchStatement rewriteSwitchStatement(SwitchStatement switchStatement) {
-    // unary numeric promotion
     return SwitchStatement.newBuilder()
         .setSourcePosition(switchStatement.getSourcePosition())
         .setSwitchExpression(
-            // TODO(b/238147260): Unary numeric promotion should not be applied here.
-            contextRewriter.rewriteUnaryNumericPromotionContext(
-                switchStatement.getSwitchExpression()))
+            contextRewriter.rewriteSwitchExpressionContext(switchStatement.getSwitchExpression()))
         .setCases(switchStatement.getCases())
         .build();
   }
