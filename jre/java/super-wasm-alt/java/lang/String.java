@@ -32,7 +32,6 @@ import java.util.StringJoiner;
 import javaemul.internal.ArrayHelper;
 import javaemul.internal.EmulatedCharset;
 import javaemul.internal.NativeRegExp;
-import javaemul.internal.WasmExtern;
 import javaemul.internal.annotations.HasNoSideEffects;
 import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
@@ -852,24 +851,22 @@ public final class String implements Serializable, Comparable<String>, CharSeque
 
   // TODO: should live on a utility instead of the String API.
   public String nativeReplace(NativeRegExp regExp, char replacement) {
-    return fromJsString(
-        toJsString().replace(regExp.toJs(), NativeString.fromCharCode(replacement)));
+    return fromJsString(toJsString().replace(regExp, NativeString.fromCharCode(replacement)));
   }
 
   // TODO: should live on a utility instead of the String API.
   public String nativeReplace(NativeRegExp regExp, String replacement) {
-    return fromJsString(toJsString().replace(regExp.toJs(), replacement.toJsString()));
+    return fromJsString(toJsString().replace(regExp, replacement.toJsString()));
   }
 
   private String nativeReplaceAll(String regex, String replace) {
-    return fromJsString(
-        toJsString().replace(new NativeRegExp(regex, "g").toJs(), replace.toJsString()));
+    return fromJsString(toJsString().replace(new NativeRegExp(regex, "g"), replace.toJsString()));
   }
 
   public String replaceFirst(String regex, String replace) {
     replace = translateReplaceString(replace);
     NativeRegExp jsRegEx = new NativeRegExp(regex);
-    return fromJsString(toJsString().replace(jsRegEx.toJs(), replace.toJsString()));
+    return fromJsString(toJsString().replace(jsRegEx, replace.toJsString()));
   }
 
   private static String translateReplaceString(String replaceStr) {
@@ -1007,7 +1004,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
   public static class NativeString {
     static native NativeString fromCharCode(char x);
 
-    native NativeString replace(WasmExtern regex, NativeString replace);
+    native NativeString replace(NativeRegExp regex, NativeString replace);
 
     native NativeString toLowerCase();
 

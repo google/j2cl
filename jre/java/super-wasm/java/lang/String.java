@@ -32,7 +32,6 @@ import javaemul.internal.ArrayHelper;
 import javaemul.internal.EmulatedCharset;
 import javaemul.internal.NativeRegExp;
 import javaemul.internal.StringUtil;
-import javaemul.internal.WasmExtern;
 import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsNonNull;
@@ -574,12 +573,12 @@ public final class String implements Comparable<String>, CharSequence, Serializa
 
   // TODO: should live on a utility instead of the String API.
   public String nativeReplace(NativeRegExp regExp, char replacement) {
-    return new String(value.replace(regExp.toJs(), nativeFromCodePoint(replacement)));
+    return new String(value.replace(regExp, nativeFromCodePoint(replacement)));
   }
 
   // TODO: should live on a utility instead of the String API.
   public String nativeReplace(NativeRegExp regExp, String replacement) {
-    return new String(value.replace(regExp.toJs(), replacement.value));
+    return new String(value.replace(regExp, replacement.value));
   }
 
   /**
@@ -766,7 +765,7 @@ public final class String implements Comparable<String>, CharSequence, Serializa
 
     native int lastIndexOf(NativeString str, int start);
 
-    native NativeString replace(WasmExtern regex, NativeString replace);
+    native NativeString replace(NativeRegExp regex, NativeString replace);
 
     native NativeString toLocaleLowerCase();
 

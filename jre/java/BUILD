@@ -156,7 +156,6 @@ closure_js_library(
         "super-wasm/console_utils.js",
         "super-wasm/double_utils.js",
         "super-wasm/exception_utils.js",
-        "super-wasm/regexp_utils.js",
         "super-wasm/string_utils.js",
     ],
     visibility = ["//visibility:private"],
