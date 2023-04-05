@@ -17,8 +17,6 @@ package java.util;
 
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
-import javaemul.internal.ArrayHelper;
-
 /**
  * Skeletal implementation of the Collection interface. <a
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/AbstractCollection.html">[Sun
@@ -115,24 +113,16 @@ public abstract class AbstractCollection<E> implements Collection<E> {
 
   @Override
   public Object[] toArray() {
-    return toArray(new Object[size()]);
+    // This is equivalent to just not defining the method at all, but this serves as a marker for
+    // Kotlin as it knows about AbstractCollection but not the base Collection type.
+    return Collection.super.toArray();
   }
 
   @Override
   public <T> T[] toArray(T[] a) {
-    int size = size();
-    if (a.length < size) {
-      a = ArrayHelper.createFrom(a, size);
-    }
-    Object[] result = a;
-    Iterator<E> it = iterator();
-    for (int i = 0; i < size; ++i) {
-      result[i] = it.next();
-    }
-    if (a.length > size) {
-      a[size] = null;
-    }
-    return a;
+    // This is equivalent to just not defining the method at all, but this serves as a marker for
+    // Kotlin as it knows about AbstractCollection but not the base Collection type.
+    return Collection.super.toArray(a);
   }
 
   @Override
