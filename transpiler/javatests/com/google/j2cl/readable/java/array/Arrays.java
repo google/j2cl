@@ -77,6 +77,15 @@ public class Arrays {
     // Assignment
     ints[0] = 1;
     ints2d[0][1] = 1;
+
+    // Widening conversion
+    byte b = 1;
+    char c = 'a';
+    ints = new int[b];
+    ints[b] = b;
+    ints = new int[c];
+    ints[c] = c;
+    ints = new int[] {b, c};
   }
 
   void testLongArrays() {
@@ -96,6 +105,14 @@ public class Arrays {
     longs[0] = 1;
     longs2d[0][1] = 1;
 
+    // Widening conversion
+    byte b = 1;
+    char c = 'a';
+    longs = new long[b];
+    longs[b] = b;
+    longs = new long[c];
+    longs[c] = c;
+    longs = new long[] {b, c};
   }
 
   void testDevirtualizedTypeArrays() {

@@ -17,6 +17,8 @@ package wideningfloatconversion;
 
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
+import com.google.j2cl.integration.testing.TestUtils;
+
 public class Main {
   public static void main(String[] args) {
     testAssignment();
@@ -27,8 +29,15 @@ public class Main {
     int mi = 2147483647; // Integer.MAX_VALUE;
     long ll = 2415919103L; // max_int < ll < max_int * 2, used for testing for signs.
 
-    assertTrue(((float) mi == 2.147483647E9)); // we don't honor float-double precision differences
-    assertTrue(((float) ll == 2.415919103E9)); // we don't honor float-double precision differences
+    if (TestUtils.isJavaScript()) {
+      // we don't honor float-double precision differences in JS
+      assertTrue(((float) mi == 2.147483647E9));
+      assertTrue(((float) ll == 2.415919103E9));
+    } else {
+      // JVM and Wasm
+      assertTrue(((float) mi == 2.1474836E9f));
+      assertTrue(((float) ll == 2.415919E9f));
+    }
   }
 
   private static void testAssignment() {
@@ -38,9 +47,17 @@ public class Main {
 
     float rf = 0;
 
-    assertTrue(((rf = mi) == 2.147483647E9)); // we don't honor float-double precision differences
-    assertTrue(((rf = ll) == 2.415919103E9)); // we don't honor float-double precision differences
-    assertTrue(
-        ((rf = ml) == 9.223372036854776E18)); // we don't honor float-double precision differences
+    if (TestUtils.isJavaScript()) {
+      // we don't honor float-double precision differences in JS
+      assertTrue(((rf = mi) == 2.147483647E9));
+      assertTrue(((rf = ll) == 2.415919103E9));
+    } else {
+      // JVM and Wasm
+      assertTrue(((rf = mi) == 2.1474836E9f));
+      assertTrue(((rf = ll) == 2.415919E9f));
+      assertTrue(((rf = ml) == 9.223372E18f));
+    }
+
+    assertTrue(((rf = ml) == 9.223372036854776E18));
   }
 }

@@ -9,6 +9,8 @@ import java.io.Serializable
 import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
+import kotlin.Byte
+import kotlin.Char
 import kotlin.Cloneable
 import kotlin.Int
 import kotlin.IntArray
@@ -76,6 +78,13 @@ open class Arrays {
   n = ints2d!![0]!![1]
   ints!![0] = 1
   ints2d!![0]!![1] = 1
+  val b: Byte = 1.toByte()
+  val c: Char = 'a'
+  ints = IntArray(b)
+  ints!![b.toInt()] = b.toInt()
+  ints = IntArray(c)
+  ints!![c.code] = c.code
+  ints = intArrayOf(b.toInt(), c.code)
  }
 
  @HiddenFromObjC
@@ -92,6 +101,13 @@ open class Arrays {
   n = longs2d!![0]!![1]
   longs!![0] = 1L
   longs2d!![0]!![1] = 1L
+  val b: Byte = 1.toByte()
+  val c: Char = 'a'
+  longs = LongArray(b)
+  longs!![b.toInt()] = b.toLong()
+  longs = LongArray(c)
+  longs!![c.code] = c.code.toLong()
+  longs = longArrayOf(b.toLong(), c.code.toLong())
  }
 
  @HiddenFromObjC
