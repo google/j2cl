@@ -18,9 +18,11 @@ set -e
 # Build and test Hello World sample in its own workspace
 (cd samples/helloworld && bazel test ...)
 
-# Build Guava sample in its own workspace
-(cd samples/guava && bazel build ...)
+if [[ $1 == "CI" ]]; then
+  # Build Guava sample in its own workspace
+  (cd samples/guava && bazel build ...)
 
-# Build Wasm sample in its own workspace
-# Note that since binaryen dep is not available, we only build the wat file.
-(cd samples/wasm && bazel build src/main/java/com/google/j2cl/samples/wasm:app.wat)
+  # Build Wasm sample in its own workspace
+  # Note that since binaryen dep is not available, we only build the wat file.
+  (cd samples/wasm && bazel build src/main/java/com/google/j2cl/samples/wasm:app.wat)
+fi

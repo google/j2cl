@@ -16,11 +16,6 @@
 # Script that can be used by CI server for testing j2cl builds.
 set -e
 
-if [[ $1 == "SAMPLES" ]]; then
-  ./build_test_samples.sh
-  exit 0
-fi
-
 bazel build :all {jre,transpiler,tools,junit/generator,junit/emul}/java/...
 
 # Do a quick smoke check of integration test
