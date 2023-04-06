@@ -33,7 +33,6 @@ public class Tester115 {
     }
   }
 
-  @SuppressWarnings("unchecked")
   static class C2 extends C1<String> implements I1 {
     C2() {}
   }
