@@ -20,7 +20,7 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
-import javaemul.internal.ArrayHelper;
+import javaemul.internal.CollectionHelper;
 import jsinterop.annotations.JsIgnore;
 import jsinterop.annotations.JsType;
 
@@ -85,23 +85,11 @@ public interface Collection<E> extends Iterable<E> {
   }
 
   default Object[] toArray() {
-    return toArray(new Object[size()]);
+    return CollectionHelper.toArray(this);
   }
 
   @JsIgnore
   default <T> T[] toArray(T[] a) {
-    int size = size();
-    if (a.length < size) {
-      a = ArrayHelper.createFrom(a, size);
-    }
-    Object[] result = a;
-    Iterator<E> it = iterator();
-    for (int i = 0; i < size; ++i) {
-      result[i] = it.next();
-    }
-    if (a.length > size) {
-      a[size] = null;
-    }
-    return a;
+    return CollectionHelper.toArray(this, a);
   }
 }
