@@ -15,16 +15,12 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import com.google.j2cl.transpiler.ast.AbstractRewriter;
-import com.google.j2cl.transpiler.ast.ArrayAccess;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
-import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 
@@ -38,20 +34,6 @@ public class InsertWideningPrimitiveConversionsKotlin extends NormalizationPass 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(new ConversionContextVisitor(getContextRewriter()));
-
-    // TODO(b/238147260): Move to rewriteUnaryNumericPromotionContext() when the bug is fixed.
-    compilationUnit.accept(
-        new AbstractRewriter() {
-          @Override
-          public Node rewriteArrayAccess(ArrayAccess arrayAccess) {
-            Expression indexExpression = arrayAccess.getIndexExpression();
-            return shouldWiden(PrimitiveTypes.INT, indexExpression)
-                ? ArrayAccess.Builder.from(arrayAccess)
-                    .setIndexExpression(widenTo(PrimitiveTypes.INT, indexExpression))
-                    .build()
-                : arrayAccess;
-          }
-        });
   }
 
   private ConversionContextVisitor.ContextRewriter getContextRewriter() {
@@ -84,10 +66,29 @@ public class InsertWideningPrimitiveConversionsKotlin extends NormalizationPass 
       }
 
       @Override
+      public Expression rewriteUnaryNumericPromotionContext(Expression operand) {
+        if (!isBasicNumericType(operand.getTypeDescriptor())) {
+          return operand;
+        }
+        TypeDescriptor widenedTypeDescriptor =
+            AstUtils.getNumericUnaryExpressionTypeDescriptor(
+                operand.getTypeDescriptor().toUnboxedType());
+        return shouldWiden(widenedTypeDescriptor, operand)
+            ? widenTo(widenedTypeDescriptor, operand)
+            : operand;
+      }
+
+      @Override
       public Expression rewriteCastContext(CastExpression castExpression) {
         return shouldWiden(castExpression.getCastTypeDescriptor(), castExpression.getExpression())
             ? widenTo(castExpression.getCastTypeDescriptor(), castExpression.getExpression())
             : castExpression;
+      }
+
+      @Override
+      public Expression rewriteSwitchExpressionContext(Expression expression) {
+        // Don't apply unary numeric promotion to switch expression.
+        return expression;
       }
     };
   }

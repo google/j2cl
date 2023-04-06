@@ -80,9 +80,9 @@ open class Arrays {
   ints2d!![0]!![1] = 1
   val b: Byte = 1.toByte()
   val c: Char = 'a'
-  ints = IntArray(b)
+  ints = IntArray(b.toInt())
   ints!![b.toInt()] = b.toInt()
-  ints = IntArray(c)
+  ints = IntArray(c.code)
   ints!![c.code] = c.code
   ints = intArrayOf(b.toInt(), c.code)
  }
@@ -103,9 +103,9 @@ open class Arrays {
   longs2d!![0]!![1] = 1L
   val b: Byte = 1.toByte()
   val c: Char = 'a'
-  longs = LongArray(b)
+  longs = LongArray(b.toInt())
   longs!![b.toInt()] = b.toLong()
-  longs = LongArray(c)
+  longs = LongArray(c.code)
   longs!![c.code] = c.code.toLong()
   longs = longArrayOf(b.toLong(), c.code.toLong())
  }
