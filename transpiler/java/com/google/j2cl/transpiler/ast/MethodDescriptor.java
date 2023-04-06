@@ -688,10 +688,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     if (thisVisibility.isPrivate() || thatVisibility.isPrivate()) {
       return false;
     }
-    // An overriding method can not reduce visibility.
-    if (thisVisibility.level < thatVisibility.level) {
-      return false;
-    }
     // To override a package private method one must reside in the same package.
     if (thatVisibility.isPackagePrivate()
         && !getEnclosingTypeDescriptor().isInSamePackage(that.getEnclosingTypeDescriptor())) {
