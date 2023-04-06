@@ -19,7 +19,6 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 public class TestCase10015 {
   static interface CI1 {
-    @SuppressWarnings("unused")
     default String get(String value) {
       return "CI1 get String";
     }
@@ -27,7 +26,6 @@ public class TestCase10015 {
 
   static class C implements CI1 {}
 
-  @SuppressWarnings("unchecked")
   public static void test() {
     C c = new C();
     assertTrue(c.get("").equals("CI1 get String"));

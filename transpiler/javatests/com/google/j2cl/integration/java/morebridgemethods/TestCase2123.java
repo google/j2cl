@@ -19,7 +19,6 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 public class TestCase2123 {
   static interface BI1 {
-    @SuppressWarnings("unused")
     default String get(String value) {
       return "BI1 get String";
     }
@@ -34,7 +33,6 @@ public class TestCase2123 {
     }
   }
 
-  @SuppressWarnings("unchecked")
   public static void test() {
     C c = new C();
     assertTrue(((B) c).get("").equals("C get String"));

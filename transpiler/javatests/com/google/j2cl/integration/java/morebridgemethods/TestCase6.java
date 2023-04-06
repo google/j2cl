@@ -21,21 +21,18 @@ import jsinterop.annotations.JsType;
 
 public class TestCase6 {
   static interface BI1 {
-    @SuppressWarnings("unused")
     default String get(String value) {
       return "BI1 get String";
     }
   }
 
   static class B<B1> implements BI1 {
-    @SuppressWarnings("unused")
     public String get(B1 value) {
       return "B get B1";
     }
   }
 
   @JsType
-  @SuppressWarnings("unchecked")
   static class C extends B<String> {
     @Override
     public String get(String value) {
@@ -43,7 +40,6 @@ public class TestCase6 {
     }
   }
 
-  @SuppressWarnings({"unchecked", "rawtypes"})
   public static void test() {
     C c = new C();
     assertTrue(((B) c).get("").equals("C get String"));

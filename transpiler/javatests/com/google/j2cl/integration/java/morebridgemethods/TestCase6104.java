@@ -23,14 +23,13 @@ public class TestCase6104 {
   @JsType
   static class B {
     private B() {}
-    @SuppressWarnings("unused")
+
     public String get(String value) {
       return "B get String";
     }
   }
 
   static interface CI1 {
-    @SuppressWarnings("unused")
     default String get(String value) {
       return "CI1 get String";
     }
@@ -38,7 +37,6 @@ public class TestCase6104 {
 
   static class C extends B implements CI1 {}
 
-  @SuppressWarnings("unchecked")
   public static void test() {
     C c = new C();
     assertTrue(((B) c).get("").equals("B get String"));

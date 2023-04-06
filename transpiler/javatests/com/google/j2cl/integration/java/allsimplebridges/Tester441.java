@@ -28,16 +28,15 @@ public class Tester441 {
     }
   }
 
-  @SuppressWarnings("unchecked")
   static class C2 extends C1 {
     C2() {}
-    @SuppressWarnings("MissingOverride")
+
+    @Override
     public String get(Object value) {
       return "C2.get";
     }
   }
 
-  @SuppressWarnings("unchecked")
   public static void test() {
     C2 s = new C2();
     assertTrue(s.get(new Object()).equals("C2.get"));

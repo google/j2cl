@@ -36,6 +36,7 @@ public class BridgeJsMethodMain {
     }
   }
 
+  @SuppressWarnings({"unchecked", "rawtypes"})
   public static Object callFunByA(A a, Object o) {
     return a.fun(o);
   }

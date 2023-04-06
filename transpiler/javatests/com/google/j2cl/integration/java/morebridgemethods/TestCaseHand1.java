@@ -21,7 +21,6 @@ import jsinterop.annotations.JsMethod;
 
 public class TestCaseHand1 {
   private static class A<A1> {
-    @SuppressWarnings("unused")
     public String get(A1 a1) {
       return "A get Object";
     }

@@ -28,7 +28,6 @@ public class TestCaseHand2 {
   }
 
   abstract static class B<B1, B2> implements I<B1> {
-    @SuppressWarnings("unused")
     public String get(B2 consumer) {
       return "B get B2";
     }

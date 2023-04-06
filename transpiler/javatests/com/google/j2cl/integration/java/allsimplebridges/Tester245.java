@@ -34,7 +34,7 @@ public class Tester245 {
     }
   }
 
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   static class C2 extends C1 implements I1 {
     C2() {}
   }

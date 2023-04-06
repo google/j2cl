@@ -30,15 +30,16 @@ public class Tester132 {
     public abstract String get(T value);
   }
 
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   static class C2 extends C1 implements I1 {
     C2() {}
-    @SuppressWarnings("MissingOverride")
+
+    @Override
     public String get(Object value) {
       return "C2.get";
     }
 
-    @SuppressWarnings("MissingOverride")
+    @Override
     public String get(String value) {
       return "C2.get";
     }

@@ -22,7 +22,6 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
  * inheritance and accidental overrides.
  */
 class Parent<T extends Error> {
-  @SuppressWarnings("unused")
   public int foo(T t) {
     return 1;
   }

@@ -22,7 +22,6 @@ import jsinterop.annotations.JsType;
 public class TestCase9366 {
   @SuppressWarnings("rawtypes")
   static class B<B1 extends Comparable> {
-    @SuppressWarnings("unused")
     public String get(String value) {
       return "B get String";
     }
@@ -36,7 +35,7 @@ public class TestCase9366 {
     }
   }
 
-  @SuppressWarnings({"unchecked", "rawtypes"})
+  @SuppressWarnings({"rawtypes"})
   public static void test() {
     C c = new C();
     assertTrue(((B) c).get("").equals("C get String"));

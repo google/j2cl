@@ -19,13 +19,11 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 public class TestCase5828 {
   static class C {
-    @SuppressWarnings("unused")
     public String get(Object value) {
       return "C get Object";
     }
   }
 
-  @SuppressWarnings("unchecked")
   public static void test() {
     C c = new C();
     assertTrue(c.get("").equals("C get Object"));

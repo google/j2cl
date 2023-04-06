@@ -23,7 +23,6 @@ public class MultipleAbstractParentsMain {
   }
 
   public abstract static class AbstractCollection<T> {
-    @SuppressWarnings("unused")
     public String getFoo(T t) {
       return "AbstractCollection";
     }

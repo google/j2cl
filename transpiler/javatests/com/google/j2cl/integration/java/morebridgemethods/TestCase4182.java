@@ -19,7 +19,6 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 public class TestCase4182 {
   static class B<B1> {
-    @SuppressWarnings("unused")
     public String get(String value) {
       return "B get String";
     }
@@ -32,7 +31,7 @@ public class TestCase4182 {
     }
   }
 
-  @SuppressWarnings({"unchecked", "rawtypes"})
+  @SuppressWarnings("rawtypes")
   public static void test() {
     C c = new C();
     assertTrue(((B) c).get("").equals("C get String"));

@@ -21,7 +21,6 @@ import jsinterop.annotations.JsType;
 
 public class TestCase10020 {
   static class B<B1> {
-    @SuppressWarnings("unused")
     public String get(String value) {
       return "B get String";
     }
@@ -35,7 +34,6 @@ public class TestCase10020 {
   @SuppressWarnings("rawtypes")
   static class C extends B implements CI1 {}
 
-  @SuppressWarnings({"unchecked", "rawtypes"})
   public static void test() {
     C c = new C();
     assertTrue(((B) c).get("").equals("B get String"));

@@ -21,7 +21,6 @@ import jsinterop.annotations.JsType;
 
 public class TestCase8939 {
   static interface BI1 {
-    @SuppressWarnings("unused")
     default String get(String value) {
       return "BI1 get String";
     }
@@ -30,7 +29,6 @@ public class TestCase8939 {
   static class B<B1> implements BI1 {
     B() {}
 
-    @SuppressWarnings("unused")
     public String get(B1 value) {
       return "B get B1";
     }
@@ -45,7 +43,6 @@ public class TestCase8939 {
     C() {}
   }
 
-  @SuppressWarnings("unchecked")
   public static void test() {
     C c = new C();
     assertTrue(((B) c).get("").equals("B get B1"));

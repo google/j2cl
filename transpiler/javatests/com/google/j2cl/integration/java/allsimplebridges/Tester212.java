@@ -32,10 +32,11 @@ public class Tester212 {
     }
   }
 
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   static class C2 extends C1 implements I1 {
     C2() {}
-    @SuppressWarnings("MissingOverride")
+
+    @Override
     public String get(String value) {
       return "C2.get";
     }

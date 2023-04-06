@@ -21,7 +21,6 @@ import jsinterop.annotations.JsType;
 
 public class TestCase10332 {
   static class B {
-    @SuppressWarnings("unused")
     public String get(String value) {
       return "B get String";
     }
@@ -35,7 +34,6 @@ public class TestCase10332 {
     }
   }
 
-  @SuppressWarnings("unchecked")
   public static void test() {
     C c = new C();
     assertTrue(((B) c).get("").equals("C get String"));

@@ -26,10 +26,10 @@ public class Tester257 {
     public abstract String get(T value);
   }
 
-  @SuppressWarnings("unchecked")
   static class C2 extends C1<String> {
     C2() {}
-    @SuppressWarnings("MissingOverride")
+
+    @Override
     public String get(String value) {
       return "C2.get";
     }

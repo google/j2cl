@@ -22,7 +22,6 @@ import jsinterop.annotations.JsType;
 public class Tester5 {
   @JsType
   static interface I1 {
-    @SuppressWarnings("unused")
     default String get(String value) {
       return "I1.get";
     }
@@ -32,7 +31,6 @@ public class Tester5 {
     public abstract String get(T value);
   }
 
-  @SuppressWarnings("unchecked")
   static class C2 extends C1<String> implements I1 {
     @Override
     public String get(String value) {

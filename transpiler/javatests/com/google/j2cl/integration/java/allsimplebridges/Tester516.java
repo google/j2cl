@@ -22,16 +22,15 @@ public class Tester516 {
     String get(String value);
   }
 
-  @SuppressWarnings("unchecked")
   static class C1 implements I1 {
     C1() {}
-    @SuppressWarnings("MissingOverride")
+
+    @Override
     public String get(String value) {
       return "C1.get";
     }
   }
 
-  @SuppressWarnings("unchecked")
   public static void test() {
     C1 s = new C1();
     assertTrue(s.get("").equals("C1.get"));

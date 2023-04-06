@@ -21,7 +21,6 @@ import jsinterop.annotations.JsType;
 
 public class TestCase8166 {
   static interface CI3 {
-    @SuppressWarnings("unused")
     default String get(String value) {
       return "CI3 get String";
     }
@@ -37,7 +36,6 @@ public class TestCase8166 {
 
   static class C implements CI1 {}
 
-  @SuppressWarnings("unchecked")
   public static void test() {
     C c = new C();
     assertTrue(c.get("").equals("CI1 get String"));

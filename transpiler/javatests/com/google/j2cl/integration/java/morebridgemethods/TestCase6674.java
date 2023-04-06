@@ -19,14 +19,12 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 public class TestCase6674 {
   static interface BI1 {
-    @SuppressWarnings("unused")
     default String get(String value) {
       return "BI1 get String";
     }
   }
 
   static class B<B1> implements BI1 {
-    @SuppressWarnings("unused")
     public String get(B1 value) {
       return "B get B1";
     }
@@ -34,7 +32,7 @@ public class TestCase6674 {
 
   static class C extends B<String> {}
 
-  @SuppressWarnings({"unchecked", "rawtypes"})
+  @SuppressWarnings("rawtypes")
   public static void test() {
     C c = new C();
     assertTrue(((B) c).get("").equals("B get B1"));

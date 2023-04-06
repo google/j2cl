@@ -25,10 +25,11 @@ public class Tester437 {
     }
   }
 
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   static class C2 extends C1 {
     C2() {}
-    @SuppressWarnings("MissingOverride")
+
+    @Override
     public String get(Object value) {
       return "C2.get";
     }
