@@ -33,7 +33,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        test-type: [CI, SAMPLES]
+        test-target: [DEFAULT, SAMPLES]
         os: [macos-latest, ubuntu-latest]
 
     runs-on: ${{ matrix.os }}
@@ -72,4 +72,8 @@ jobs:
           echo "build --verbose_failures" >> ~/.bazelrc
           bazel info
       - name: Run tests
-        run: ./build_test.sh ${{ matrix['test-type'] }}
+        if: matrix.target == DEFAULT
+        run: ./build_test.sh CI
+      - name: Run tests
+        if: matrix.target == SAMPLES
+        run: ./build_test_samples.sh CI
