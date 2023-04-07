@@ -74,6 +74,6 @@ jobs:
       - name: Run tests
         if: matrix.target == DEFAULT
         run: ./build_test.sh CI
-      - name: Run tests
+      - name: Run samples tests
         if: matrix.target == SAMPLES
         run: ./build_test_samples.sh CI
