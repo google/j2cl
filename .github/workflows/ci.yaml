@@ -72,8 +72,8 @@ jobs:
           echo "build --verbose_failures" >> ~/.bazelrc
           bazel info
       - name: Run tests
-        if: matrix.target == DEFAULT
+        if: matrix.test-target == DEFAULT
         run: ./build_test.sh CI
       - name: Run samples tests
-        if: matrix.target == SAMPLES
+        if: matrix.test-target == SAMPLES
         run: ./build_test_samples.sh CI
