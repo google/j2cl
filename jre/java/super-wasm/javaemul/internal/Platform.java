@@ -42,6 +42,21 @@ public final class Platform {
   @Wasm("f32.reinterpret_i32")
   public static native float intBitsToFloat(int value);
 
+  public static int compareDouble(double x, double y) {
+    if (x < y) {
+      return -1;
+    }
+    if (x > y) {
+      return 1;
+    }
+
+    // Use MAX_VALUE (which is avalid NaN) for NaN so it is always larger than any other number that
+    // is not NaN.
+    long xBits = isNaN(x) ? Long.MAX_VALUE : doubleToRawLongBits(x);
+    long yBits = isNaN(y) ? Long.MAX_VALUE : doubleToRawLongBits(y);
+    return Long.compare(xBits, yBits);
+  }
+
   public static boolean objectsStringEquals(String x, String y) {
     return (x == y) || (x != null && x.equals(y));
   }

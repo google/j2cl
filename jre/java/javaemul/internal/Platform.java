@@ -80,6 +80,33 @@ public final class Platform {
     return JsUtils.<double[]>uncheckedCast(new Float64Array(buf))[0];
   }
 
+  public static int compareDouble(double x, double y) {
+    if (x < y) {
+      return -1;
+    }
+    if (x > y) {
+      return 1;
+    }
+    if (x == y) {
+      if (x != 0) {
+        return 0;
+      }
+      // Convert zero to +/- Infinity so we can compare.
+      x = 1 / x;
+      y = 1 / y;
+      return x == y ? 0 : x < y ? -1 : 1;
+    }
+    if (isNaN(x)) {
+      if (isNaN(y)) {
+        return 0;
+      } else {
+        return 1;
+      }
+    } else {
+      return -1;
+    }
+  }
+
   @SuppressWarnings("StringEquality")
   public static boolean objectsStringEquals(String x, String y) {
     // In JS, strings have identity equality.

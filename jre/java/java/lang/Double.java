@@ -40,25 +40,7 @@ public final class Double extends Number implements Comparable<Double> {
   public static final Class<Double> TYPE = double.class;
 
   public static int compare(double x, double y) {
-    if (x < y) {
-      return -1;
-    }
-    if (x > y) {
-      return 1;
-    }
-    if (x == y) {
-      return x == 0 ? Double.compare(1 / x, 1 / y) : 0;
-    }
-
-    if (isNaN(x)) {
-      if (isNaN(y)) {
-        return 0;
-      } else {
-        return 1;
-      }
-    } else {
-      return -1;
-    }
+    return Platform.compareDouble(x, y);
   }
 
   public static long doubleToLongBits(double value) {
