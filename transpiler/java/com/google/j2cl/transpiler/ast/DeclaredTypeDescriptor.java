@@ -1211,8 +1211,11 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
     @SuppressWarnings("ReferenceEquality")
     public DeclaredTypeDescriptor build() {
-      if (getTypeDeclaration().isJsEnum()) {
+      if (getTypeDeclaration().isEnum() && getTypeDeclaration().getJsEnumInfo() != null) {
         // JsEnums don't extend Enum but Object. Fix it up on construction.
+        // Cannot use isJsEnum() directly here since the construction happens before validation and
+        // there might be invalid code, e.g. an interface marked as JsEnum, where the fix up should
+        // not happen. Otherwise other invariants will be broken.
         setSuperTypeDescriptorFactory(() -> TypeDescriptors.get().javaLangObject);
       }
 
