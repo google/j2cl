@@ -24,6 +24,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.SetMultimap;
+import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Field;
@@ -267,6 +268,19 @@ class GenerationEnvironment {
   int getInterfaceSlot(TypeDeclaration typeDeclaration) {
     // Interfaces with no implementors will not have a slot assigned. Use -1 to signal that fact.
     return slotByInterfaceTypeDeclaration.getOrDefault(typeDeclaration, -1);
+  }
+
+  /** The data index for the array literals that can be emitted as data. */
+  private final Map<ArrayLiteral, Integer> dataIndexByLiteral = new LinkedHashMap<>();
+
+  /** Registers the ArrayLiteral as a data segment and returns true if it was not present. */
+  public boolean registerDataSegmentLiteral(ArrayLiteral arrayLiteral) {
+    return dataIndexByLiteral.put(arrayLiteral, dataIndexByLiteral.size()) == null;
+  }
+
+  /** Returns the data segment index for this literal and null if it does not have one. */
+  public Integer getDataSegmentForLiteral(ArrayLiteral arrayLiteral) {
+    return dataIndexByLiteral.get(arrayLiteral);
   }
 
   private int numberOfInterfaceSlots = -1;

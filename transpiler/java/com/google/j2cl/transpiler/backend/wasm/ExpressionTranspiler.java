@@ -329,6 +329,16 @@ final class ExpressionTranspiler {
 
         String arrayType = environment.getWasmTypeName(arrayLiteral.getTypeDescriptor());
 
+        Integer dataIndex = environment.getDataSegmentForLiteral(arrayLiteral);
+        if (dataIndex != null) {
+          // The literal is in a data segment.
+          sourceBuilder.append(
+              format(
+                  "(array.new_data %s %d (i32.const 0) (i32.const %d))",
+                  arrayType, dataIndex, arrayLiteral.getValueExpressions().size()));
+          return false;
+        }
+
         sourceBuilder.append(format("(array.init_static %s ", arrayType));
         arrayLiteral.getValueExpressions().forEach(this::render);
         sourceBuilder.append(")");

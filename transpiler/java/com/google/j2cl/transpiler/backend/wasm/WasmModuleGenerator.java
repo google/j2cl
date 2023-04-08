@@ -20,6 +20,7 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableSet.toImmutableSet;
 import static java.lang.String.format;
 import static java.util.Arrays.stream;
+import static java.util.stream.Collectors.joining;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
@@ -28,6 +29,7 @@ import com.google.common.collect.Sets;
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
+import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
@@ -35,6 +37,8 @@ import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.NumberLiteral;
+import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
@@ -110,6 +114,7 @@ public class WasmModuleGenerator {
             + "(throw $exception.event (local.get $param)))");
 
     // Emit all the globals, e.g. vtable instances, etc.
+    emitDataSegments(library);
     emitDispatchTablesInitialization(library);
     emitEmptyArraySingletons(usedNativeArrayTypes);
     emitGlobals(library);
@@ -128,6 +133,39 @@ public class WasmModuleGenerator {
     if (!unmatchedPatterns.isEmpty()) {
       problems.error("No entry points matched the following patterns \"%s\".", unmatchedPatterns);
     }
+  }
+
+  private void emitDataSegments(Library library) {
+    library.accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitArrayLiteral(ArrayLiteral arrayLiteral) {
+            if (canBeData(arrayLiteral) && environment.registerDataSegmentLiteral(arrayLiteral)) {
+              builder.append(format("(data \"%s\")", toDataString(arrayLiteral)));
+            }
+          }
+        });
+  }
+
+  private boolean canBeData(ArrayLiteral arrayLiteral) {
+    if (!arrayLiteral
+        .getTypeDescriptor()
+        .getComponentTypeDescriptor()
+        .equals(PrimitiveTypes.CHAR)) {
+      // For now only char array initialization is considered to be moved to the data segments.
+      return false;
+    }
+    return arrayLiteral.getValueExpressions().stream().allMatch(NumberLiteral.class::isInstance);
+  }
+
+  /** Encodes a char array literal as a sequence of bytes, 2 per char. */
+  private String toDataString(ArrayLiteral arrayLiteral) {
+    return arrayLiteral.getValueExpressions().stream()
+        .map(NumberLiteral.class::cast)
+        .map(NumberLiteral::getValue)
+        .map(Number::intValue)
+        .map(c -> format("\\%02x\\%02x", c & 0xFF, c >>> 8))
+        .collect(joining());
   }
 
   /** Emits all wasm type definitions into a single rec group. */

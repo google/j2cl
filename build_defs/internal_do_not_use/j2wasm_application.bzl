@@ -102,6 +102,7 @@ def _impl_j2wasm_application(ctx):
     args.add("--enable-sign-ext")
     args.add("--enable-strings")
     args.add("--enable-nontrapping-float-to-int")
+    args.add("--enable-bulk-memory")
     args.add("--closed-world")
     args.add("--traps-never-happen")
 
