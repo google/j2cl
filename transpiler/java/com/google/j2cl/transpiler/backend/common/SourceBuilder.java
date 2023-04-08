@@ -134,7 +134,11 @@ public class SourceBuilder {
 
     sb.append(indentedSource);
     currentLine += CharMatcher.is(LINE_SEPARATOR_CHAR).countIn(indentedSource);
-    currentColumn = sb.length() - sb.lastIndexOf(LINE_SEPARATOR) - 1;
+    int newLineSeperatorIndex = indentedSource.lastIndexOf(LINE_SEPARATOR);
+    currentColumn =
+        newLineSeperatorIndex == -1
+            ? currentColumn + indentedSource.length()
+            : indentedSource.length() - newLineSeperatorIndex - 1;
   }
 
   public void appendLines(String... lines) {
