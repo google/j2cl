@@ -2058,7 +2058,8 @@ public class JsInteropRestrictionsChecker {
 
     MethodDescriptor method = (MethodDescriptor) member.getDeclarationDescriptor();
     MethodDescriptor potentiallyOverriddenMethod = (MethodDescriptor) potentiallyOverriddenMember;
-    return method.isOverride(potentiallyOverriddenMethod);
+    return method.isOverride(potentiallyOverriddenMethod)
+        || method.isOverride(potentiallyOverriddenMethod.getDeclarationDescriptor());
   }
 
   private void checkUnusableByJs(Member member) {
