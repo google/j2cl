@@ -141,6 +141,7 @@ public class WasmModuleGenerator {
           @Override
           public void exitArrayLiteral(ArrayLiteral arrayLiteral) {
             if (canBeData(arrayLiteral) && environment.registerDataSegmentLiteral(arrayLiteral)) {
+              builder.newLine();
               builder.append(format("(data \"%s\")", toDataString(arrayLiteral)));
             }
           }
