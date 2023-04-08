@@ -553,7 +553,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 + "('void IBuggy2.show(boolean)' with JavaScript name 'show').");
   }
 
-  // TODO(b/36232268): enable once the bug is fixed.
   public void testCollidingSubclassMethodToBridgeFails() {
     assertTranspileFails(
             "test.Buggy",
