@@ -20,7 +20,6 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableSet.toImmutableSet;
 import static java.lang.String.format;
 import static java.util.Arrays.stream;
-import static java.util.stream.Collectors.joining;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
@@ -28,17 +27,19 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems;
+import com.google.j2cl.common.StringUtils;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
+import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
-import com.google.j2cl.transpiler.ast.PrimitiveTypes;
+import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
@@ -140,7 +141,8 @@ public class WasmModuleGenerator {
         new AbstractVisitor() {
           @Override
           public void exitArrayLiteral(ArrayLiteral arrayLiteral) {
-            if (canBeData(arrayLiteral) && environment.registerDataSegmentLiteral(arrayLiteral)) {
+            if (canBeMovedToDataSegment(arrayLiteral)
+                && environment.registerDataSegmentLiteral(arrayLiteral)) {
               builder.newLine();
               builder.append(format("(data \"%s\")", toDataString(arrayLiteral)));
             }
@@ -148,25 +150,41 @@ public class WasmModuleGenerator {
         });
   }
 
-  private boolean canBeData(ArrayLiteral arrayLiteral) {
-    if (!arrayLiteral
-        .getTypeDescriptor()
-        .getComponentTypeDescriptor()
-        .equals(PrimitiveTypes.CHAR)) {
-      // For now only char array initialization is considered to be moved to the data segments.
-      return false;
-    }
-    return arrayLiteral.getValueExpressions().stream().allMatch(NumberLiteral.class::isInstance);
+  private boolean canBeMovedToDataSegment(ArrayLiteral arrayLiteral) {
+    return TypeDescriptors.isNonVoidPrimitiveType(
+            arrayLiteral.getTypeDescriptor().getComponentTypeDescriptor())
+        && arrayLiteral.getValueExpressions().stream().allMatch(NumberLiteral.class::isInstance);
   }
 
-  /** Encodes a char array literal as a sequence of bytes, 2 per char. */
+  /**
+   * Encodes an array literal of primitive values as a sequence of bytes, in UTF8 encoding for
+   * readability.
+   */
   private String toDataString(ArrayLiteral arrayLiteral) {
-    return arrayLiteral.getValueExpressions().stream()
-        .map(NumberLiteral.class::cast)
-        .map(NumberLiteral::getValue)
-        .map(Number::intValue)
-        .map(c -> format("\\%02x\\%02x", c & 0xFF, c >>> 8))
-        .collect(joining());
+    PrimitiveTypeDescriptor componentTypeDescriptor =
+        (PrimitiveTypeDescriptor) arrayLiteral.getTypeDescriptor().getComponentTypeDescriptor();
+    int sizeInBits = componentTypeDescriptor.getWidth();
+    List<Expression> valueExpressions = arrayLiteral.getValueExpressions();
+
+    // Preallocate the stringbuilder to hold the encoded data since its size its already known.
+    StringBuilder sb = new StringBuilder(valueExpressions.size() * (sizeInBits / 8));
+    for (Expression expression : valueExpressions) {
+      NumberLiteral literal = (NumberLiteral) expression;
+      long value;
+      PrimitiveTypeDescriptor typeDescriptor = literal.getTypeDescriptor();
+      if (TypeDescriptors.isPrimitiveFloat(typeDescriptor)) {
+        value = Float.floatToRawIntBits(literal.getValue().floatValue());
+      } else if (TypeDescriptors.isPrimitiveDouble(typeDescriptor)) {
+        value = Double.doubleToRawLongBits(literal.getValue().doubleValue());
+      } else {
+        value = literal.getValue().longValue();
+      }
+
+      for (int s = sizeInBits; s > 0; s -= 8, value >>>= 8) {
+        sb.append(StringUtils.escapeAsUtf8((int) (value & 0xFF)));
+      }
+    }
+    return sb.toString();
   }
 
   /** Emits all wasm type definitions into a single rec group. */

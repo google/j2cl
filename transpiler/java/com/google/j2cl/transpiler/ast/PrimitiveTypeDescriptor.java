@@ -27,6 +27,7 @@ public class PrimitiveTypeDescriptor extends TypeDescriptor {
   private final String signature;
   private final String boxedClassName;
   private final int precisionOrder;
+  private final int width;
 
   public String getSimpleSourceName() {
     return name;
@@ -40,6 +41,11 @@ public class PrimitiveTypeDescriptor extends TypeDescriptor {
   /** Returns the qualified source name of the corresponding boxed class. */
   public String getBoxedClassName() {
     return boxedClassName;
+  }
+
+  /* The width of the type in bits. */
+  public int getWidth() {
+    return width;
   }
 
   @Override
@@ -211,10 +217,11 @@ public class PrimitiveTypeDescriptor extends TypeDescriptor {
   }
 
   PrimitiveTypeDescriptor(
-      String name, String signature, String boxedClassName, int precisionOrder) {
+      String name, String signature, String boxedClassName, int precisionOrder, int width) {
     this.name = name;
     this.signature = signature;
     this.boxedClassName = boxedClassName;
     this.precisionOrder = precisionOrder;
+    this.width = width;
   }
 }

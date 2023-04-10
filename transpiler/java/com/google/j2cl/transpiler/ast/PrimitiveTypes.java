@@ -20,23 +20,23 @@ import com.google.common.collect.ImmutableList;
 /** Exhaustive enumeration of primitive types. */
 public final class PrimitiveTypes {
   public static final PrimitiveTypeDescriptor VOID =
-      new PrimitiveTypeDescriptor("void", "V", "java.lang.Void", -1);
+      new PrimitiveTypeDescriptor("void", "V", "java.lang.Void", -1, -1);
   public static final PrimitiveTypeDescriptor BOOLEAN =
-      new PrimitiveTypeDescriptor("boolean", "Z", "java.lang.Boolean", -1);
+      new PrimitiveTypeDescriptor("boolean", "Z", "java.lang.Boolean", -1, 8);
   public static final PrimitiveTypeDescriptor BYTE =
-      new PrimitiveTypeDescriptor("byte", "B", "java.lang.Byte", 1);
+      new PrimitiveTypeDescriptor("byte", "B", "java.lang.Byte", 1, 8);
   public static final PrimitiveTypeDescriptor SHORT =
-      new PrimitiveTypeDescriptor("short", "S", "java.lang.Short", 2);
+      new PrimitiveTypeDescriptor("short", "S", "java.lang.Short", 2, 16);
   public static final PrimitiveTypeDescriptor CHAR =
-      new PrimitiveTypeDescriptor("char", "C", "java.lang.Character", 2);
+      new PrimitiveTypeDescriptor("char", "C", "java.lang.Character", 2, 16);
   public static final PrimitiveTypeDescriptor INT =
-      new PrimitiveTypeDescriptor("int", "I", "java.lang.Integer", 3);
+      new PrimitiveTypeDescriptor("int", "I", "java.lang.Integer", 3, 32);
   public static final PrimitiveTypeDescriptor LONG =
-      new PrimitiveTypeDescriptor("long", "J", "java.lang.Long", 4);
+      new PrimitiveTypeDescriptor("long", "J", "java.lang.Long", 4, 64);
   public static final PrimitiveTypeDescriptor FLOAT =
-      new PrimitiveTypeDescriptor("float", "F", "java.lang.Float", 5);
+      new PrimitiveTypeDescriptor("float", "F", "java.lang.Float", 5, 32);
   public static final PrimitiveTypeDescriptor DOUBLE =
-      new PrimitiveTypeDescriptor("double", "D", "java.lang.Double", 6);
+      new PrimitiveTypeDescriptor("double", "D", "java.lang.Double", 6, 64);
 
   public static final ImmutableList<PrimitiveTypeDescriptor> TYPES =
       ImmutableList.of(VOID, BOOLEAN, BYTE, SHORT, CHAR, INT, LONG, FLOAT, DOUBLE);

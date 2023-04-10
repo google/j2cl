@@ -38,6 +38,7 @@ public final class StringUtils {
   public static String escapeAsWtf16(int c) {
     return escape(c, /* forUtf8= */ false);
   }
+
   /** Converts a potentially ill-formed UTF-16 string (WTF-16) into a UTF-8 string literal. */
   public static String escapeAsUtf8(String string) {
     StringBuilder escaped = new StringBuilder();
@@ -64,7 +65,7 @@ public final class StringUtils {
     return escaped.toString();
   }
 
-  private static String escapeAsUtf8(int c) {
+  public static String escapeAsUtf8(int c) {
     return escape(c, /* forUtf8= */ true);
   }
 
