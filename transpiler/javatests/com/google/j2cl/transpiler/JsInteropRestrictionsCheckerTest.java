@@ -61,6 +61,34 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         .assertNoWarnings();
   }
 
+  public void testCollidingNamePackagePrivateFails() {
+    newTesterWithDefaults()
+        .addCompilationUnit(
+            "test.Buggy",
+            "import jsinterop.annotations.*;",
+            "public class Buggy {",
+            "  @JsMethod",
+            "  void m() {}",
+            "  @JsMethod",
+            "  void n() {}",
+            "}")
+        .addCompilationUnit(
+            "somePackage.SubBuggy",
+            "import jsinterop.annotations.*;",
+            "public class SubBuggy extends test.Buggy{",
+            "  @JsMethod",
+            "  void m() {}",
+            "  @JsMethod",
+            "  public void n() {}", // public but not overriding due to different packages.
+            "}")
+        .assertTranspileFails()
+        .assertErrorsWithoutSourcePosition(
+            "'void SubBuggy.m()' and 'void Buggy.m()' cannot both use the same JavaScript name"
+                + " 'm'.",
+            "'void SubBuggy.n()' and 'void Buggy.n()' cannot both use the same JavaScript name"
+                + " 'n'.");
+  }
+
   public void testCollidingNameInInterfaceFails() {
     assertTranspileFails(
             "test.Buggy",
