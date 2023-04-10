@@ -61,6 +61,23 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         .assertNoWarnings();
   }
 
+  public void testCollidingNameInInterfaceFails() {
+    assertTranspileFails(
+            "test.Buggy",
+            "import jsinterop.annotations.*;",
+            "interface Foo {",
+            "  @JsMethod(name = \"doIt\")",
+            "  default void maybeDoIt(Foo foo) {}",
+            "}",
+            "public class Buggy implements Foo {",
+            "  @JsMethod",
+            "  void doIt(Foo foo) {}",
+            "}")
+        .assertErrorsWithoutSourcePosition(
+            "'void Buggy.doIt(Foo)' and 'void Foo.maybeDoIt(Foo)' cannot both use the same"
+                + " JavaScript name 'doIt'.");
+  }
+
   // TODO(b/37579830): Finalize checker implementation and enable this test.
   public void disabled_testCollidingAccidentalOverrideConcreteMethodFails() {
     assertTranspileFails(

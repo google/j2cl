@@ -173,6 +173,7 @@ public class JsInteropRestrictionsChecker {
         collectInstanceNames(type.getTypeDescriptor());
     Multimap<String, MemberDescriptor> staticJsMembersByName =
         collectStaticNames(type.getTypeDescriptor());
+
     for (Member member : type.getMembers()) {
       checkMember(member, instanceJsMembersByName, staticJsMembersByName);
     }
@@ -2010,26 +2011,27 @@ public class JsInteropRestrictionsChecker {
 
   private static Multimap<String, MemberDescriptor> collectInstanceNames(
       DeclaredTypeDescriptor typeDescriptor) {
+    LinkedHashMultimap<String, MemberDescriptor> instanceJsMembersByName =
+        LinkedHashMultimap.create();
+    collectInstanceNames(typeDescriptor, instanceJsMembersByName);
+    return instanceJsMembersByName;
+  }
+
+  private static void collectInstanceNames(
+      DeclaredTypeDescriptor typeDescriptor,
+      Multimap<String, MemberDescriptor> instanceJsMembersByName) {
     if (typeDescriptor == null) {
-      return LinkedHashMultimap.create();
+      return;
     }
 
-    // The supertype of an interface is java.lang.Object. java.lang.Object methods need to be
-    // considered when checking for name collisions.
-    // TODO(b/135140069): remove if the model starts including java.lang.Object as the supertype of
-    // interfaces.
-    DeclaredTypeDescriptor superTypeDescriptor =
-        typeDescriptor.isInterface() && !typeDescriptor.isNative()
-            ? TypeDescriptors.get().javaLangObject
-            : typeDescriptor.getSuperTypeDescriptor();
-    Multimap<String, MemberDescriptor> instanceMembersByName =
-        collectInstanceNames(superTypeDescriptor);
+    typeDescriptor
+        .getSuperTypesStream()
+        .forEach(t -> collectInstanceNames(t, instanceJsMembersByName));
     for (MemberDescriptor member : typeDescriptor.getDeclaredMemberDescriptors()) {
       if (isInstanceJsMember(member)) {
-        addMember(instanceMembersByName, member);
+        addMember(instanceJsMembersByName, member);
       }
     }
-    return instanceMembersByName;
   }
 
   private static Multimap<String, MemberDescriptor> collectStaticNames(
