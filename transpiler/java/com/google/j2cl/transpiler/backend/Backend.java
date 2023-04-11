@@ -185,6 +185,9 @@ public enum Backend {
     @Override
     public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
       return ImmutableList.of(
+          // Early run of determining whether variables are effectively final so that passes that
+          // depend on Expression.isEffectivelyInvariant it can take advantage.
+          MakeVariablesFinal::new,
           ConvertMethodReferencesToLambdas::new,
           ResolveImplicitInstanceQualifiers::new,
           () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ true),
@@ -341,6 +344,11 @@ public enum Backend {
     @Override
     public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
       return ImmutableList.of(
+          // Early run of determining whether variables are effectively final so that passes that
+          // depend on Expression.isEffectivelyInvariant it can take advantage.
+          // TODO(b/277799806): Consider removing this pass if the immutable field optimization is
+          // removed.
+          MakeVariablesFinal::new,
           ConvertMethodReferencesToLambdas::new,
           ResolveImplicitInstanceQualifiers::new,
           () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ false),
@@ -441,7 +449,6 @@ public enum Backend {
 
           // Passes required for immutable fields.
           MakeFieldsFinal::new,
-          MakeVariablesFinal::new,
           NormalizeInstantiationThroughFactoryMethods::new,
           NormalizeNullLiterals::new,
           RemoveIsInstanceMethods::new,

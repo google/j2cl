@@ -33,12 +33,15 @@ open class AssertSimple {
     "null"
    }
    assert(1 + 2 == 3) {
-    if (args == null) "null" else args!!
+    run {
+     val tmp: Array<String?>? = args
+     if (tmp == null) "null" else tmp!!
+    }
    }
    assert(1 + 2 == 3) {
     run {
-     val tmp: String? = args!![0]
-     if (tmp == null) "null" else tmp!!
+     val tmp_1: String? = args!![0]
+     if (tmp_1 == null) "null" else tmp_1!!
     }
    }
    assert(1 + 2 == 3) {

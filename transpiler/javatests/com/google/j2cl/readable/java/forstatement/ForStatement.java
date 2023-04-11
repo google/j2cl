@@ -55,6 +55,14 @@ public class ForStatement {
     }
   }
 
+  public void testForStatementInsideDeadCode() {
+    if (false) {
+      // The variable i is inferred to be effectively final by JDT because the code here is
+      // unreachable.
+      for (int i = 0; i < 100; i++) {}
+    }
+  }
+
   private static int returnsValue() {
     return 1;
   }

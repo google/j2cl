@@ -13,6 +13,7 @@
   (field $m_test__void (ref $function.m_test__void))
   (field $m_testContinue__void (ref $function.m_testContinue__void))
   (field $m_testInitializeInForCondition__void (ref $function.m_testInitializeInForCondition__void))
+  (field $m_testForStatementInsideDeadCode__void (ref $function.m_testForStatementInsideDeadCode__void))
    $java.lang.Object.vtable)
  )
  (type $forstatement.ForStatement.itable (struct_subtype 
@@ -35,6 +36,7 @@
   (ref.func $m_test__void@forstatement.ForStatement)
   (ref.func $m_testContinue__void@forstatement.ForStatement)
   (ref.func $m_testInitializeInForCondition__void@forstatement.ForStatement)
+  (ref.func $m_testForStatementInsideDeadCode__void@forstatement.ForStatement)
  )
 )
 
@@ -306,13 +308,49 @@
 )
 (elem declare func $m_testInitializeInForCondition__void@forstatement.ForStatement)
 
+;;; void ForStatement.testForStatementInsideDeadCode()
+(func $m_testForStatementInsideDeadCode__void@forstatement.ForStatement
+ (type $function.m_testForStatementInsideDeadCode__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ forstatement/ForStatement.java:58:14
+ (local $i i32)
+ (local $this (ref null $forstatement.ForStatement))
+ (local.set $this (ref.cast_static $forstatement.ForStatement (local.get $this.untyped)))
+ (block
+  ;; if (false) {
+  ;;@ forstatement/ForStatement.java:59:4
+  (if (i32.const 0)
+   (then
+    (block
+     ;; LOOP: for (int i = 0;(i < 100);(i = (i + 1))) {
+     ;;@ forstatement/ForStatement.java:62:6
+     (local.set $i (i32.const 0))
+     (block $LOOP.BREAK
+      (loop
+       (br_if 1 (i32.eqz (i32.lt_s (local.get $i) (i32.const 100))))
+       (block $LOOP.CONTINUE
+        (block
+        )
+       )
+       (local.set $i (i32.add (local.get $i) (i32.const 1)))
+       (br 0)
+       
+      )
+     )
+    )
+   )
+  )
+ )
+)
+(elem declare func $m_testForStatementInsideDeadCode__void@forstatement.ForStatement)
+
 ;;; int ForStatement.returnsValue()
 (func $m_returnsValue__int@forstatement.ForStatement
  (result i32)
- ;;@ forstatement/ForStatement.java:58:21
+ ;;@ forstatement/ForStatement.java:66:21
  (block
   ;; return 1;
-  ;;@ forstatement/ForStatement.java:59:4
+  ;;@ forstatement/ForStatement.java:67:4
   (return (i32.const 1))
  )
 )

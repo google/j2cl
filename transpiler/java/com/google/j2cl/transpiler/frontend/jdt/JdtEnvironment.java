@@ -207,7 +207,7 @@ class JdtEnvironment {
     if (!variableBinding.isParameter()) {
       typeDescriptor = typeDescriptor.toNullable();
     }
-    boolean isFinal = variableBinding.isEffectivelyFinal();
+    boolean isFinal = isFinal(variableBinding);
     boolean isParameter = variableBinding.isParameter();
     boolean isUnusableByJsSuppressed =
         JsInteropAnnotationUtils.isUnusableByJsSuppressed(variableBinding);

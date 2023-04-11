@@ -88,6 +88,16 @@ open class ForStatement {
   }
  }
 
+ @ObjCName("testForStatementInsideDeadCode")
+ open fun testForStatementInsideDeadCode() {
+  if (false) {
+   var i: Int = 0
+   while (i < 100) {
+    i = i + 1
+   }
+  }
+ }
+
  @ObjCName("ForstatementForStatementCompanion", exact = true)
  companion object {
   @JvmStatic
