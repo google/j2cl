@@ -69,7 +69,7 @@ import java.util.List;
 public final class ExpressionTranspiler {
   public static void render(
       Expression expression,
-      final GenerationEnvironment environment,
+      final ClosureGenerationEnvironment environment,
       final SourceBuilder sourceBuilder) {
 
     if (expression == null) {

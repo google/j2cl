@@ -306,7 +306,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.closeBrace();
   }
 
-  private static String getExtendsClause(Type type, GenerationEnvironment environment) {
+  private static String getExtendsClause(Type type, ClosureGenerationEnvironment environment) {
     DeclaredTypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
     if (superTypeDescriptor == null || superTypeDescriptor.isStarOrUnknown()) {
       return "";

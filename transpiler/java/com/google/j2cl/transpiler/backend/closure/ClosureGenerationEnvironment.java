@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /** Contains aliases for variables and Type Descriptors. */
-public class GenerationEnvironment {
+public class ClosureGenerationEnvironment {
   /**
    * A map from type binary named (e.g. a.b.Foo) to alias for that type. Keyed by binary name so
    * generic and non-generic permutations of a class all map to the same type.
@@ -39,7 +39,7 @@ public class GenerationEnvironment {
 
   private final ClosureTypesGenerator closureTypesGenerator = new ClosureTypesGenerator(this);
 
-  public GenerationEnvironment(
+  public ClosureGenerationEnvironment(
       Collection<Import> imports, Map<HasName, String> uniqueNameByVariable) {
     for (Import anImport : imports) {
       String alias = anImport.getAlias();

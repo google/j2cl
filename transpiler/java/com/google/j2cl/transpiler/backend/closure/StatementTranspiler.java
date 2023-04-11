@@ -48,9 +48,9 @@ import java.util.List;
  */
 public class StatementTranspiler {
   SourceBuilder builder;
-  GenerationEnvironment environment;
+  ClosureGenerationEnvironment environment;
 
-  public StatementTranspiler(SourceBuilder builder, GenerationEnvironment environment) {
+  public StatementTranspiler(SourceBuilder builder, ClosureGenerationEnvironment environment) {
     this.builder = builder;
     this.environment = environment;
   }

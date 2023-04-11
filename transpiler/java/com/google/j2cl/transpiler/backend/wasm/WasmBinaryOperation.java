@@ -17,7 +17,7 @@ package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveFloatOrDouble;
-import static com.google.j2cl.transpiler.backend.wasm.GenerationEnvironment.getWasmTypeForPrimitive;
+import static com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment.getWasmTypeForPrimitive;
 
 import com.google.common.base.Ascii;
 import com.google.common.collect.ImmutableMap;

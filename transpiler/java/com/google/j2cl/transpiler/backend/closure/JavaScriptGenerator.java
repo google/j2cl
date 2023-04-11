@@ -39,7 +39,7 @@ import java.util.Map;
  */
 public abstract class JavaScriptGenerator {
   protected final Type type;
-  protected final GenerationEnvironment environment;
+  protected final ClosureGenerationEnvironment environment;
   protected final List<Import> imports;
   protected final SourceBuilder sourceBuilder = new SourceBuilder();
   protected final Problems problems;
@@ -60,7 +60,7 @@ public abstract class JavaScriptGenerator {
     Map<HasName, String> uniqueNameByVariable =
         UniqueNamesResolver.computeUniqueNames(
             Sets.union(namesUsedInAliases, JsKeywords.getKeywords()), type);
-    environment = new GenerationEnvironment(imports, uniqueNameByVariable);
+    environment = new ClosureGenerationEnvironment(imports, uniqueNameByVariable);
   }
 
   public Map<SourcePosition, SourcePosition> getSourceMappings() {

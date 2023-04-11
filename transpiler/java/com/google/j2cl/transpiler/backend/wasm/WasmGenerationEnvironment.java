@@ -46,7 +46,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /** Allows mapping of middle end constructors to the backend. */
-class GenerationEnvironment {
+class WasmGenerationEnvironment {
 
   private static final ImmutableMap<PrimitiveTypeDescriptor, String> WASM_TYPES_BY_PRIMITIVE_TYPES =
       ImmutableMap.<PrimitiveTypeDescriptor, String>builder()
@@ -289,7 +289,7 @@ class GenerationEnvironment {
     return numberOfInterfaceSlots;
   }
 
-  GenerationEnvironment(Library library) {
+  WasmGenerationEnvironment(Library library) {
     // Resolve variable names into unique wasm identifiers.
     library
         .streamTypes()

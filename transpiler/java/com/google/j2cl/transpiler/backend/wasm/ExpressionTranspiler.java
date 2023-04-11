@@ -19,7 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.j2cl.common.StringUtils.escapeAsUtf8;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid;
-import static com.google.j2cl.transpiler.backend.wasm.GenerationEnvironment.getGetterInstruction;
+import static com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment.getGetterInstruction;
 import static java.lang.String.format;
 
 import com.google.common.collect.Iterables;
@@ -67,7 +67,7 @@ import java.util.List;
 final class ExpressionTranspiler {
 
   public static void renderWithUnusedResult(
-      Expression expression, SourceBuilder sourceBuilder, GenerationEnvironment environment) {
+      Expression expression, SourceBuilder sourceBuilder, WasmGenerationEnvironment environment) {
     if (returnsVoid(expression)) {
       render(expression, sourceBuilder, environment);
     } else {
@@ -80,7 +80,7 @@ final class ExpressionTranspiler {
   public static void render(
       Expression expression,
       final SourceBuilder sourceBuilder,
-      final GenerationEnvironment environment) {
+      final WasmGenerationEnvironment environment) {
 
     new AbstractVisitor() {
       @Override

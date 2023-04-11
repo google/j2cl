@@ -55,7 +55,9 @@ import java.util.List;
 final class StatementTranspiler {
 
   public static void render(
-      Statement statement, final SourceBuilder builder, final GenerationEnvironment environment) {
+      Statement statement,
+      final SourceBuilder builder,
+      final WasmGenerationEnvironment environment) {
 
     class SourceTransformer extends AbstractVisitor {
       @Override

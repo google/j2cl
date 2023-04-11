@@ -42,9 +42,9 @@ import java.util.stream.Collectors;
 
 /** Transforms J2cl type abstractions into Closure JavaScript type system abstractions. */
 class ClosureTypesGenerator {
-  private final GenerationEnvironment environment;
+  private final ClosureGenerationEnvironment environment;
 
-  ClosureTypesGenerator(GenerationEnvironment environment) {
+  ClosureTypesGenerator(ClosureGenerationEnvironment environment) {
     this.environment = environment;
   }
 
