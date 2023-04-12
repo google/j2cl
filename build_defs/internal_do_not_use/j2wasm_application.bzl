@@ -95,70 +95,73 @@ def _impl_j2wasm_application(ctx):
         command = "cp %s/imports.txt %s" % (transpile_out.path, ctx.outputs.jsimports.path),
     )
 
-    args = ctx.actions.args()
-    args.add("--enable-exception-handling")
-    args.add("--enable-gc")
-    args.add("--enable-reference-types")
-    args.add("--enable-sign-ext")
-    args.add("--enable-strings")
-    args.add("--enable-nontrapping-float-to-int")
-    args.add("--enable-bulk-memory")
-    args.add("--closed-world")
-    args.add("--traps-never-happen")
-
-    args.add("--debuginfo")
-
-    # TODO(b/204138842): Only use one stage when compiling dev.
-
-    intermediate_wasm_output = ctx.actions.declare_file(ctx.label.name + "_intermediate_wasm_output.wasm")
-    intermediate_source_map = ctx.actions.declare_file(ctx.label.name + "_intermediate_source_map")
-
-    ctx.actions.run(
-        executable = ctx.executable._binaryen,
-        arguments = [args] + ctx.attr.binaryen_stage1_args + [
-            "-o",
-            intermediate_wasm_output.path,
-            "--output-source-map",
-            intermediate_source_map.path,
-            ctx.outputs.wat.path,
-        ],
-        inputs = [ctx.outputs.wat],
-        outputs = [intermediate_source_map, intermediate_wasm_output],
-        mnemonic = "J2wasm",
-        progress_message = "Compiling to Wasm (stage 1)",
-        # Binaryen can leverage 4 cores with some amount of parallelism.
-        execution_requirements = {"cpu:4": ""},
-    )
-
     debug_dir_name = ctx.label.name + "_debug"
 
-    outputs.append(ctx.outputs.symbolmap)
+    input = ctx.outputs.wat
+    input_source_map = None
+    stages = _extract_stages(ctx.attr.binaryen_args)
+    current_stage = 0
+    for stage_args in stages:
+        current_stage += 1
 
-    args.add("-o", ctx.outputs.wasm)
-    outputs.append(ctx.outputs.wasm)
+        args = ctx.actions.args()
+        args.add("--enable-exception-handling")
+        args.add("--enable-gc")
+        args.add("--enable-reference-types")
+        args.add("--enable-sign-ext")
+        args.add("--enable-strings")
+        args.add("--enable-nontrapping-float-to-int")
+        args.add("--enable-bulk-memory")
+        args.add("--closed-world")
+        args.add("--traps-never-happen")
+        args.add("--debuginfo")
+        args.add_all(stage_args)
+
+        inputs = []
+        outputs = []
+
+        if current_stage == len(stages):
+            # last stage
+            output = ctx.outputs.wasm
+            output_source_map = ctx.outputs.srcmap
+
+            # Add the extra flag that are only needed in for the final run.
+            args.add("--output-source-map-url", debug_dir_name + "/" + ctx.outputs.srcmap.basename)
+
+            # SymbolMap flag must be after optimization passes to get the final symbol names.
+            args.add("--symbolmap=" + ctx.outputs.symbolmap.path)
+            outputs.append(ctx.outputs.symbolmap)
+        else:
+            output = ctx.actions.declare_file(ctx.label.name + "_intermediate_%s.wasm" % current_stage)
+            output_source_map = ctx.actions.declare_file(ctx.label.name + "_intermediate_%s_map" % current_stage)
+
+        args.add("-o", output)
+        outputs.append(output)
+        args.add("--output-source-map", output_source_map)
+        outputs.append(output_source_map)
+
+        if input_source_map:
+            args.add("--input-source-map", input_source_map)
+            inputs.append(input_source_map)
+        args.add(input)
+        inputs.append(input)
+
+        ctx.actions.run(
+            executable = ctx.executable._binaryen,
+            arguments = [args],
+            inputs = inputs,
+            outputs = outputs,
+            mnemonic = "J2wasm",
+            progress_message = "Compiling to Wasm (stage %s)" % current_stage,
+            # Binaryen can leverage 4 cores with some amount of parallelism.
+            execution_requirements = {"cpu:4": ""},
+        )
+
+        # Outputs of stage 'n' are now the inputs for stage 'n+1'
+        input = output
+        input_source_map = output_source_map
+
     runfiles.append(ctx.outputs.wasm)
-
-    args.add("--output-source-map", ctx.outputs.srcmap)
-    outputs.append(ctx.outputs.srcmap)
-    args.add("--output-source-map-url", debug_dir_name + "/" + ctx.outputs.srcmap.basename)
-
-    ctx.actions.run(
-        executable = ctx.executable._binaryen,
-        arguments = [args] + ctx.attr.binaryen_stage2_args + [
-            # SymbolMap flag must be after optimization passes to get the final
-            # symbol names.
-            "--symbolmap=" + ctx.outputs.symbolmap.path,
-            "--input-source-map",
-            intermediate_source_map.path,
-            intermediate_wasm_output.path,
-        ],
-        inputs = [intermediate_wasm_output, intermediate_source_map],
-        outputs = outputs,
-        mnemonic = "J2wasm",
-        progress_message = "Compiling to Wasm (stage 2)",
-        # Binaryen can leverage 4 cores with some amount of parallelism.
-        execution_requirements = {"cpu:4": ""},
-    )
 
     # Make the debugging data available in runfiles.
     # Note that we are making sure that the sourcemap file is in the root next to
@@ -205,6 +208,19 @@ def _get_transitive_srcs(deps):
 def _get_transitive_classpath(deps):
     return depset(transitive = [d[J2wasmInfo]._private_.transitive_classpath for d in deps])
 
+_STAGE_SEPARATOR = "--NEW_STAGE--"
+
+def _extract_stages(args):
+    current_stage_args = []
+    stages = [current_stage_args]
+    for arg in args:
+        if arg == _STAGE_SEPARATOR:
+            current_stage_args = []
+            stages.append(current_stage_args)
+        else:
+            current_stage_args.append(arg)
+    return stages
+
 # Trigger a parallel Javac build to provide better error messages than JDT.
 def _trigger_javac_build(deps):
     return depset(transitive = [d[J2wasmInfo]._private_.java_info.transitive_runtime_jars for d in deps])
@@ -212,8 +228,7 @@ def _trigger_javac_build(deps):
 _J2WASM_APP_ATTRS = {
     "deps": attr.label_list(providers = [J2wasmInfo]),
     "entry_points": attr.string_list(),
-    "binaryen_stage1_args": attr.string_list(),
-    "binaryen_stage2_args": attr.string_list(),
+    "binaryen_args": attr.string_list(),
     "transpiler_args": attr.string_list(),
     "defines": attr.string_list(),
     "_jre": attr.label(default = Label("//build_defs/internal_do_not_use:j2wasm_jre")),
@@ -277,15 +292,17 @@ def j2wasm_application(name, defines = dict(), **kwargs):
 
     _j2wasm_application(
         name = name,
-        binaryen_stage1_args = [
+        binaryen_args = [
+            # Stage 1
             # Specific list of passes: The order and count of these flags does
             # matter. First -O3 will be the slowest, so we isolate it in a
             # stage1 invocation (due to go/forge-limits for time).
             "-O3",
             "--gufa",
             "-O3",
-        ],
-        binaryen_stage2_args = [
+
+            # Stage 2
+            _STAGE_SEPARATOR,
             # Optimization flags (affecting passes in general) included at top.
             "--partial-inlining-ifs=4",
             "-fimfs=50",
@@ -309,7 +326,7 @@ def j2wasm_application(name, defines = dict(), **kwargs):
     )
     _j2wasm_application(
         name = name + "_dev",
-        binaryen_stage1_args = [
+        binaryen_args = [
             "--intrinsic-lowering",
             # Remove the intrinsic import declarations which are not removed by lowering itself.
             "--remove-unused-module-elements",
