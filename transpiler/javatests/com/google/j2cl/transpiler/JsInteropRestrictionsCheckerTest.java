@@ -3490,7 +3490,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         .addCompilationUnit(
             "test.Buggy", "@org.jspecify.nullness.NullMarked", "class NullMarkedType {", "}")
         .assertTranspileFails()
-        .assertErrorsWithoutSourcePosition("@NullMarked annotation is not supported.");
+        .assertErrorsWithoutSourcePosition(
+            "@NullMarked annotation is not supported without enabling static analysis.");
   }
 
   public void testAutoValueExtendsFails() {

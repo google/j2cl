@@ -185,7 +185,7 @@ public class JsInteropRestrictionsChecker {
 
   private boolean checkJSpecifyUsage(TypeDeclaration typeDeclaration) {
     if (typeDeclaration.isNullMarked()) {
-      problems.error("@NullMarked annotation is not supported.");
+      problems.error("@NullMarked annotation is not supported without enabling static analysis.");
       return false;
     }
     return true;
