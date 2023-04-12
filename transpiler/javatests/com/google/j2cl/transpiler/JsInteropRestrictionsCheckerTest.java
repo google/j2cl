@@ -3158,6 +3158,56 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         .assertNoWarnings();
   }
 
+  public void testOneLiveImplementationRuleViolationFails() {
+    assertTranspileFails(
+            "test.A",
+            "import jsinterop.annotations.*;",
+            "@JsType(isNative = true)",
+            "interface I {",
+            "  void m();",
+            "}",
+            "@JsType",
+            "interface J extends I {",
+            "  default void m() {}",
+            "}",
+            "abstract class A implements I, J {",
+            "  @JsMethod(name = \"m\") public void x() {}",
+            "}",
+            "abstract class B implements J, I {",
+            "  @JsMethod(name = \"m\") public void y() {}",
+            "}")
+        .assertErrorsWithoutSourcePosition(
+            // TODO(rluble): The traversal of all supertypes introduces a bug that suppresses
+            // this error.
+            // "'void B.y()' and 'void J.m()' cannot both use the same JavaScript name 'm'."
+            "'void A.x()' and 'void J.m()' cannot both use the same JavaScript name 'm'.");
+  }
+
+  public void testOneLiveImplementationRuleComplianceSucceeds() {
+    assertTranspileSucceeds(
+            "test.A",
+            "import jsinterop.annotations.*;",
+            "@JsType(isNative = true)",
+            "interface I {",
+            "  void m();",
+            "}",
+            "@JsType",
+            "interface J extends I {",
+            "  default void m() {}",
+            "}",
+            "class A implements I, J {",
+            //  Redirects I.m and J.m to A.x
+            "  @JsMethod public native void m();",
+            "  @JsMethod(name = \"m\") public void x() {}",
+            "}",
+            "class B implements J, I {",
+            //  Redirects I.m and J.m to B.y
+            "  @JsMethod public native void m();",
+            "  @JsMethod(name = \"m\") public void y() {}",
+            "}")
+        .assertNoWarnings();
+  }
+
   public void testNonSingleOverloadImplementationFails() {
     assertTranspileFails(
             "test.Buggy",
