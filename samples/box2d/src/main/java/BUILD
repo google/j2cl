@@ -1,4 +1,4 @@
-load("//build_defs:rules.bzl", "j2cl_library")
+load("//build_defs:rules.bzl", "j2cl_library", "j2kt_jvm_library", "j2kt_native_library")
 
 licenses(["notice"])
 
@@ -25,6 +25,29 @@ j2cl_library(
     ) + glob(["**/gwtemul/**/*.java"]),
     javacopts = _JAVACOPTS,
     deps = ["//:jsinterop-annotations-j2cl"],
+)
+
+j2kt_jvm_library(
+    name = "box2d_library-j2kt-jvm",
+    srcs = glob(
+        ["**/*.java"],
+        exclude = ["**/gwtemul/**/*.java"],
+    ),
+    deps = [
+        "//third_party/java/jsinterop:jsinterop-annotations-j2kt-jvm",
+    ],
+)
+
+j2kt_native_library(
+    name = "box2d_library-j2kt-native",
+    srcs = glob(
+        ["**/*.java"],
+        exclude = ["**/gwtemul/**/*.java"],
+    ),
+    target_compatible_with = ["//third_party/bazel_platforms/os:ios"],
+    deps = [
+        "//third_party/java/jsinterop:jsinterop-annotations-j2kt-native",
+    ],
 )
 
 java_library(
