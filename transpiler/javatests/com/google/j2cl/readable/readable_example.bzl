@@ -82,6 +82,7 @@ def readable_example(
         readable_library_info = generate_library_info,
         generate_j2kt_jvm_library = generate_kt_readables,
         generate_j2kt_native_library = build_kt_native_readables,
+        generate_j2wasm_library = None if generate_wasm_readables else False,
         **kwargs
     )
 
