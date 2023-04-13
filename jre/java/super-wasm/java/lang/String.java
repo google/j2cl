@@ -319,9 +319,9 @@ public final class String implements Comparable<String>, CharSequence, Serializa
         if (c1 > 127 && c2 > 127) {
           // Branch into native implementation since we cannot handle case folding for non-ascii
           // chars.
-          return nativeCompareTo(
-              nativeSubstr(asStringView(value), i - 1, length()),
-              nativeSubstr(asStringView(other.value), i - 1, other.length()));
+          return nativeCompareToIgnoreCase(
+              nativeSubstr(asStringView(value), i, length()),
+              nativeSubstr(asStringView(other.value), i, other.length()));
         }
 
         int result = foldCaseAscii(c1) - foldCaseAscii(c2);
@@ -802,6 +802,9 @@ public final class String implements Comparable<String>, CharSequence, Serializa
 
   @Wasm("string.compare")
   private static native int nativeCompareTo(NativeString a, NativeString b);
+
+  @JsMethod(namespace = "j2wasm.StringUtils", name = "compareToIgnoreCase")
+  private static native int nativeCompareToIgnoreCase(NativeString a, NativeString b);
 
   @JsMethod(namespace = "j2wasm.StringUtils", name = "equalsIgnoreCase")
   private static native boolean nativeEqualsIgnoreCase(NativeString a, NativeString b);

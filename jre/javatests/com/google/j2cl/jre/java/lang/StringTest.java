@@ -167,6 +167,7 @@ public class StringTest extends GWTTestCase {
     assertTrue(hideFromCompiler("aä").compareToIgnoreCase("aa") > 0);
     assertTrue(hideFromCompiler("aä").compareToIgnoreCase("ab") > 0);
     assertEquals(0, hideFromCompiler("aä").compareToIgnoreCase("aä"));
+    assertTrue(hideFromCompiler("삼").compareToIgnoreCase("집") < 0);
   }
 
   public void testConcat() {
