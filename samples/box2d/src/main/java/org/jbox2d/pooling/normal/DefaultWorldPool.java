@@ -27,7 +27,6 @@
 package org.jbox2d.pooling.normal;
 
 import java.util.HashMap;
-
 import org.jbox2d.collision.AABB;
 import org.jbox2d.collision.Collision;
 import org.jbox2d.collision.Distance;
@@ -48,6 +47,7 @@ import org.jbox2d.dynamics.contacts.PolygonAndCircleContact;
 import org.jbox2d.dynamics.contacts.PolygonContact;
 import org.jbox2d.pooling.IDynamicStack;
 import org.jbox2d.pooling.IWorldPool;
+import org.jspecify.nullness.Nullable;
 
 /**
  * Provides object pooling for all objects used in the engine. Objects retrieved from here should
@@ -66,7 +66,8 @@ public class DefaultWorldPool implements IWorldPool {
 
   private final HashMap<Integer, float[]> afloats = new HashMap<Integer, float[]>();
   private final HashMap<Integer, int[]> aints = new HashMap<Integer, int[]>();
-  private final HashMap<Integer, Vec2[]> avecs = new HashMap<Integer, Vec2[]>();
+  // TODO(b/253062274): Explicit @Nullable is needed for J2KT.
+  private final HashMap<Integer, @Nullable Vec2[]> avecs = new HashMap<Integer, Vec2[]>();
 
   private final IWorldPool world = this;
 
