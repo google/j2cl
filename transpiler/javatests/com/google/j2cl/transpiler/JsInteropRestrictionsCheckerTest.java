@@ -361,6 +361,29 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 + "cannot both use the same JavaScript name 'x'.");
   }
 
+  public void testMultipleCollidingJsPropertiesFails() {
+    assertTranspileFails(
+            "test.Buggy",
+            "import jsinterop.annotations.*;",
+            "@JsType",
+            "public interface Buggy {",
+            "  @JsProperty",
+            "  void setY(boolean x);",
+            "  @JsProperty",
+            "  boolean getY();",
+            "  @JsMethod",
+            "  void y(boolean x);",
+            "}")
+        .assertErrorsWithoutSourcePosition(
+            // TODO(b/277967621): This error message is incorrect, in this case there are multiple
+            //  members colliding on the same name but the error reporter selects the wrong ones to
+            //  emit the message.
+            "'void Buggy.setY(boolean)' and 'boolean Buggy.getY()' cannot both use the same"
+                + " JavaScript name 'y'.",
+            "'boolean Buggy.getY()' and 'void Buggy.y(boolean)' cannot both use the same JavaScript"
+                + " name 'y'.");
+  }
+
   public void testCollidingJsMethodAndJsPropertyGetterFails() {
     assertTranspileFails(
             "test.Buggy",
