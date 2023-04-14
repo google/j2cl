@@ -106,8 +106,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 + " JavaScript name 'doIt'.");
   }
 
-  // TODO(b/37579830): Finalize checker implementation and enable this test.
-  public void disabled_testCollidingAccidentalOverrideConcreteMethodFails() {
+  public void testCollidingAccidentalOverrideConcreteMethodFails() {
     assertTranspileFails(
             "test.Buggy",
             "import jsinterop.annotations.*;",
@@ -126,8 +125,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "public class Buggy extends ParentBuggy implements Foo, Bar {",
             "}")
         .assertErrorsWithoutSourcePosition(
-            "'void Baz.doIt(Bar)' and "
-                + "'void Baz.doIt(Foo)' cannot both use the same JavaScript name 'doIt'.");
+            "'void Bar.doIt(Bar)' and "
+                + "'void Foo.doIt(Foo)' cannot both use the same JavaScript name 'doIt'.");
   }
 
   public void testCollidingAccidentalOverrideAbstractMethodFails() {
@@ -148,12 +147,11 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "}",
             "public class Buggy {}  // Unrelated class")
         .assertErrorsWithoutSourcePosition(
-            "'void Baz.doIt(Foo)' and "
-                + "'void Baz.doIt(Bar)' cannot both use the same JavaScript name 'doIt'.");
+            "'void Baz.doIt(Bar)' and "
+                + "'void Baz.doIt(Foo)' cannot both use the same JavaScript name 'doIt'.");
   }
 
-  // TODO(b/37579830): Finalize checker implementation and enable this test.
-  public void disabled_testCollidingAccidentalOverrideHalfAndHalfFails() {
+  public void testCollidingAccidentalOverrideHalfAndHalfFails() {
     assertTranspileFails(
             "test.Buggy",
             "import jsinterop.annotations.*;",
@@ -173,8 +171,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "}",
             "public class Buggy extends Parent implements Bar {}")
         .assertErrorsWithoutSourcePosition(
-            "'void Baz.doIt(Bar)' and "
-                + "'void Baz.doIt(Foo)' cannot both use the same JavaScript name 'doIt'.");
+            "'void Parent.doIt(Foo)' and "
+                + "'void Bar.doIt(Bar)' cannot both use the same JavaScript name 'doIt'.");
   }
 
   public void testOverrideNoNameSucceeds() {
@@ -357,7 +355,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  void setX(int x);",
             "}")
         .assertErrorsWithoutSourcePosition(
-            "'void Buggy.setX(boolean)' and 'void Buggy.setX(int)' "
+            "'void Buggy.setX(int)' and 'void Buggy.setX(boolean)' "
                 + "cannot both use the same JavaScript name 'x'.");
   }
 
@@ -369,19 +367,17 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "public interface Buggy {",
             "  @JsProperty",
             "  void setY(boolean x);",
+            "  @JsMethod(name = \"y\")",
+            "  void setX(boolean x);",
             "  @JsProperty",
             "  boolean getY();",
-            "  @JsMethod",
-            "  void y(boolean x);",
             "}")
         .assertErrorsWithoutSourcePosition(
             // TODO(b/277967621): This error message is incorrect, in this case there are multiple
-            //  members colliding on the same name but the error reporter selects the wrong ones to
-            //  emit the message.
+            // members colliding on the same name but the error reporter selects the wrong ones to
+            // emit the message.
             "'void Buggy.setY(boolean)' and 'boolean Buggy.getY()' cannot both use the same"
-                + " JavaScript name 'y'.",
-            "'boolean Buggy.getY()' and 'void Buggy.y(boolean)' cannot both use the same JavaScript"
-                + " name 'y'.");
+                + " JavaScript name 'y'.");
   }
 
   public void testCollidingJsMethodAndJsPropertyGetterFails() {
@@ -437,7 +433,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  public static void setDisplay2(int x) {}",
             "}")
         .assertErrorsWithoutSourcePosition(
-            "'void Buggy.setDisplay(int)' and 'void Buggy.setDisplay2(int)' cannot both use the "
+            "'void Buggy.setDisplay2(int)' and 'void Buggy.setDisplay(int)' cannot both use the "
                 + "same JavaScript name 'display'.");
   }
 
@@ -467,7 +463,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  public static void show() {}",
             "}")
         .assertErrorsWithoutSourcePosition(
-            "'void Buggy.setShow(int)' and 'void Buggy.show()' cannot both use the same "
+            "'void Buggy.show()' and 'void Buggy.setShow(int)' cannot both use the same "
                 + "JavaScript name 'show'.");
   }
 
@@ -482,7 +478,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  public static final int show = 0;",
             "}")
         .assertErrorsWithoutSourcePosition(
-            "'void Buggy.show()' and 'Buggy.show' cannot both use the same "
+            "'Buggy.show' and 'void Buggy.show()' cannot both use the same "
                 + "JavaScript name 'show'.");
   }
 
@@ -496,7 +492,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  public final int show = 0;",
             "}")
         .assertErrorsWithoutSourcePosition(
-            "'void Buggy.show()' and 'Buggy.show' "
+            "'Buggy.show' and 'void Buggy.show()' "
                 + "cannot both use the same JavaScript name 'show'.");
   }
 
@@ -523,8 +519,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  public void show() {}",
             "}")
         .assertErrorsWithoutSourcePosition(
-            "'void Buggy.show(int)' and "
-                + "'void Buggy.show()' cannot both use the same JavaScript name 'show'.");
+            "'void Buggy.show()' and "
+                + "'void Buggy.show(int)' cannot both use the same JavaScript name 'show'.");
   }
 
   public void testValidCollidingSubclassMembersSucceeds() {
@@ -3200,9 +3196,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  @JsMethod(name = \"m\") public void y() {}",
             "}")
         .assertErrorsWithoutSourcePosition(
-            // TODO(rluble): The traversal of all supertypes introduces a bug that suppresses
-            // this error.
-            // "'void B.y()' and 'void J.m()' cannot both use the same JavaScript name 'm'."
+            "'void B.y()' and 'void J.m()' cannot both use the same JavaScript name 'm'.",
             "'void A.x()' and 'void J.m()' cannot both use the same JavaScript name 'm'.");
   }
 

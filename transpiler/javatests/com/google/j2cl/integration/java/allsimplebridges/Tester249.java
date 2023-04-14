@@ -20,8 +20,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import jsinterop.annotations.JsType;
 
 public class Tester249 {
-  @JsType
-  static interface I1 {
+  interface I1 {
     default String get(String value) {
       return "I1.get";
     }

@@ -18,13 +18,16 @@ package com.google.j2cl.transpiler.passes;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static com.google.common.collect.MoreCollectors.onlyElement;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
@@ -71,8 +74,11 @@ import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableReference;
 import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewriter;
 import java.util.ArrayDeque;
+import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Queue;
 import java.util.Set;
@@ -169,13 +175,9 @@ public class JsInteropRestrictionsChecker {
     checkTypeVariables(type);
     checkSuperTypes(type);
 
-    Multimap<String, MemberDescriptor> instanceJsMembersByName =
-        collectInstanceNames(type.getTypeDescriptor());
-    Multimap<String, MemberDescriptor> staticJsMembersByName =
-        collectStaticNames(type.getTypeDescriptor());
-
+    checkNameCollisions(type);
     for (Member member : type.getMembers()) {
-      checkMember(member, instanceJsMembersByName, staticJsMembersByName);
+      checkMember(member);
     }
     checkTypeReferences(type);
     checkJsEnumUsages(type);
@@ -993,10 +995,7 @@ public class JsInteropRestrictionsChecker {
     }
   }
 
-  private void checkMember(
-      Member member,
-      Multimap<String, MemberDescriptor> instanceJsMembersByName,
-      Multimap<String, MemberDescriptor> staticJsMembersByName) {
+  private void checkMember(Member member) {
     MemberDescriptor memberDescriptor = member.getDescriptor();
     if ((!member.isMethod() && !member.isField()) || memberDescriptor.isSynthetic()) {
       return;
@@ -1043,18 +1042,10 @@ public class JsInteropRestrictionsChecker {
     }
 
     if (!checkQualifiedJsName(member)) {
-      // Do not check for name collisions if the member has an invalid name.
-      // This avoids reporting cascading error that are irrelevant.
       return;
     }
 
-    if (isInstanceJsMember(memberDescriptor)) {
-      checkNameCollisions(instanceJsMembersByName, member);
-    }
-
-    if (isStaticJsMember(memberDescriptor)) {
-      checkNameCollisions(staticJsMembersByName, member);
-    }
+    checkOverrideConsistency(member);
   }
 
   private void checkMemberOfSubclassOfNativeClass(Member member) {
@@ -1925,12 +1916,13 @@ public class JsInteropRestrictionsChecker {
     return true;
   }
 
+  @CanIgnoreReturnValue
   private boolean checkJsPropertyConsistency(
       SourcePosition sourcePosition, MethodDescriptor thisMember, MethodDescriptor thatMember) {
     MethodDescriptor setter = thisMember.isJsPropertySetter() ? thisMember : thatMember;
     MethodDescriptor getter = thisMember.isJsPropertyGetter() ? thisMember : thatMember;
 
-    List<TypeDescriptor> setterParams = setter.getParameterTypeDescriptors();
+    ImmutableList<TypeDescriptor> setterParams = setter.getParameterTypeDescriptors();
     if (!getter.getReturnTypeDescriptor().isSameBaseType(setterParams.get(0))) {
       problems.error(
           sourcePosition,
@@ -1942,52 +1934,91 @@ public class JsInteropRestrictionsChecker {
     return true;
   }
 
+  /**
+   * Checks whether a type accidentally overrides a JsMethod with another of different signature
+   * creating a name collision.
+   */
+  private void checkNameCollisions(Type type) {
+    Multimap<String, MemberDescriptor> instanceJsMembersByName =
+        collectInstanceNames(type.getTypeDescriptor());
+    Multimap<String, MemberDescriptor> staticJsMembersByName =
+        collectStaticNames(type.getTypeDescriptor());
+
+    ImmutableMap<MemberDescriptor, SourcePosition> sourcePositionByDescriptor =
+        type.getMembers().stream()
+            .filter(Predicates.not(Member::isInitializerBlock))
+            .filter(m -> m.getDescriptor().isJsMember())
+            .collect(toImmutableMap(Member::getDescriptor, Member::getSourcePosition));
+
+    checkNameCollisions(type, sourcePositionByDescriptor, instanceJsMembersByName);
+    checkNameCollisions(type, sourcePositionByDescriptor, staticJsMembersByName);
+  }
+
   private void checkNameCollisions(
-      Multimap<String, MemberDescriptor> jsMembersByName, Member member) {
-    checkOverrideConsistency(member);
-    if (member.isNative()) {
-      return;
-    }
-
-    String name = member.getDescriptor().getSimpleJsName();
-
-    Set<MemberDescriptor> potentiallyCollidingMembers =
-        new LinkedHashSet<>(jsMembersByName.get(name));
-
-    // Remove self.
-    boolean removed = potentiallyCollidingMembers.removeIf(member.getDescriptor()::isSameMember);
-    checkState(removed);
-
-    // Remove native members.
-    potentiallyCollidingMembers.removeIf(MemberDescriptor::isNative);
-
-    if (potentiallyCollidingMembers.isEmpty()) {
-      // No conflicting members, proceed.
-      return;
-    }
-
-    MemberDescriptor potentiallyCollidingMember = potentiallyCollidingMembers.iterator().next();
-    if (potentiallyCollidingMembers.size() == 1
-        && isJsPropertyAccessorPair(member.getDescriptor(), potentiallyCollidingMember)) {
-      if (!checkJsPropertyConsistency(
-          member.getSourcePosition(),
-          (MethodDescriptor) member.getDescriptor(),
-          (MethodDescriptor) potentiallyCollidingMember)) {
-        // remove colliding method, to avoid duplicate error messages.
-        jsMembersByName.get(name).removeIf(member.getDescriptor()::isSameMember);
+      Type type,
+      Map<MemberDescriptor, SourcePosition> sourcePositionsByDescriptor,
+      Multimap<String, MemberDescriptor> membersByJsName) {
+    for (Entry<String, Collection<MemberDescriptor>> entry : membersByJsName.asMap().entrySet()) {
+      String name = entry.getKey();
+      if (name == null || !JsUtils.isValidJsIdentifier(name)) {
+        // Don't check for collisions if the jsname is invalid, as validity of the names is
+        // checked independently.
+        continue;
       }
+
+      Collection<MemberDescriptor> potentiallyCollidingMembers = entry.getValue();
+      if (potentiallyCollidingMembers.size() < 2) {
+        // At most one member, so no collision is possible.
+        continue;
+      }
+
+      // At this point potentiallyCollidingMembers has members for the current type and super types
+      // that are not overrides of each other but have the same js name.
+
+      // We select the last member on this list to prefer a member for current type, which we have
+      // the source position of, so that we can report the error line accurately for the most
+      // common case, which is when the conflict happens due to a member of the current type.
+      MemberDescriptor memberDescriptor = Iterables.getLast(potentiallyCollidingMembers);
+
+      // If the member has a source position use it; otherwise the conflict was introduced by
+      // subclassing supertypes, hence use the type source position to report the error.
+      SourcePosition sourcePosition =
+          sourcePositionsByDescriptor.getOrDefault(memberDescriptor, type.getSourcePosition());
+
+      checkNameCollisions(sourcePosition, memberDescriptor, potentiallyCollidingMembers);
+    }
+  }
+
+  private void checkNameCollisions(
+      SourcePosition sourcePosition,
+      MemberDescriptor memberDescriptor,
+      Collection<MemberDescriptor> potentiallyCollidingMembers) {
+    // At this point memberDescriptor is the last member in potentiallyCollidingMembers, so
+    // select a different one to check for collisions and report the error.
+
+    // We are currently selecting the first member, which in the case of multiple colliding members
+    // it would potentially be the furthest up the hierarchy since supers are collected first. This
+    // might result in suboptimal error messages in the unlikely situation that there are multiple
+    // collisions on a name that happen up in the hierarchy and the collision is not detected
+    // in other types.
+    MemberDescriptor potentiallyCollidingMember = potentiallyCollidingMembers.iterator().next();
+    checkState(memberDescriptor != potentiallyCollidingMember);
+
+    if (potentiallyCollidingMembers.size() == 2
+        && isJsPropertyAccessorPair(memberDescriptor, potentiallyCollidingMember)) {
+      checkJsPropertyConsistency(
+          sourcePosition,
+          (MethodDescriptor) memberDescriptor,
+          (MethodDescriptor) potentiallyCollidingMember);
       return;
     }
 
     problems.error(
-        member.getSourcePosition(),
+        sourcePosition,
         "'%s' and '%s' cannot both use the same JavaScript name '%s'.",
-        member.getDescriptor().getReadableDescription(),
+        memberDescriptor.getReadableDescription(),
         potentiallyCollidingMember.getReadableDescription(),
-        name);
-
-    // remove colliding method, to avoid duplicate error messages.
-    jsMembersByName.get(name).removeIf(member.getDescriptor()::isSameMember);
+        memberDescriptor.getSimpleJsName());
   }
 
   private static boolean isJsPropertyAccessorPair(
@@ -2048,8 +2079,27 @@ public class JsInteropRestrictionsChecker {
   private static void addMember(
       Multimap<String, MemberDescriptor> memberByMemberName, MemberDescriptor member) {
     String name = member.getSimpleJsName();
-    Iterables.removeIf(memberByMemberName.get(name), m -> overrides(member, m));
-    memberByMemberName.put(name, member);
+
+    // Remove methods that overridden by this member to keep only one representative method
+    // for each override signature in the collision list;
+    Collection<MemberDescriptor> members = memberByMemberName.get(name);
+    if (!member.isNative() || !member.getEnclosingTypeDescriptor().isInterface()) {
+      // To achieve  what we call "one live implementation" rule, only remove overrides for
+      // (1) non-native methods since member will be added as a representative override for that
+      // name; and (2) from native methods if it is a class, since those explicitly remove the
+      // conflict.
+
+      // Match also the declaration to allow for the cases in which the types in kotlin and
+      // Java disagree. For example MyList<String>.contains(String) needs to be considered an
+      // override of List<String>.contains(Object).
+      members.removeIf(
+          m -> overrides(member, m) || overrides(member.getDeclarationDescriptor(), m));
+    }
+
+    // Don't collect native members since those are never involved in collisions.
+    if (!member.isNative()) {
+      members.add(member);
+    }
   }
 
   private static boolean overrides(
@@ -2058,7 +2108,7 @@ public class JsInteropRestrictionsChecker {
       return false;
     }
 
-    MethodDescriptor method = (MethodDescriptor) member.getDeclarationDescriptor();
+    MethodDescriptor method = (MethodDescriptor) member;
     MethodDescriptor potentiallyOverriddenMethod = (MethodDescriptor) potentiallyOverriddenMember;
     return method.isOverride(potentiallyOverriddenMethod)
         || method.isOverride(potentiallyOverriddenMethod.getDeclarationDescriptor());
