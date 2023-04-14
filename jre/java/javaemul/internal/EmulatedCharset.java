@@ -113,6 +113,12 @@ public abstract class EmulatedCharset extends Charset {
           throw new IndexOutOfBoundsException();
         }
 
+        // If none of the bits have been set and this isn't NUL, then this is an over-long encoding
+        // and should be rejected.
+        if (ch == 0 && count > 1) {
+          invalid = true;
+        }
+
         while (!invalid && --count > 0) {
           byte b = bytes[ofs + i++];
           if ((b & 0xC0) != 0x80) {
@@ -215,7 +221,7 @@ public abstract class EmulatedCharset extends Charset {
   public abstract byte[] getBytes(char[] buffer, int offset, int count);
 
   public final char[] decodeString(byte[] bytes, int ofs, int len) {
-    return decodeString(bytes, ofs, len, /* throwOnInvalid= */ true);
+    return decodeString(bytes, ofs, len, /* throwOnInvalid= */ false);
   }
 
   public abstract char[] decodeString(byte[] bytes, int ofs, int len, boolean throwOnInvalid);

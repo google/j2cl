@@ -18,6 +18,7 @@ package java.lang;
 
 import static javaemul.internal.InternalPreconditions.checkCriticalStringBounds;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
+import static javaemul.internal.InternalPreconditions.checkPositionIndexes;
 import static javaemul.internal.InternalPreconditions.checkStringBounds;
 import static javaemul.internal.InternalPreconditions.checkStringElementIndex;
 
@@ -242,6 +243,7 @@ public final class String implements Comparable<String>, CharSequence, Serializa
   }
 
   private static NativeString createImpl(byte[] bytes, int ofs, int len, Charset charset) {
+    checkPositionIndexes(ofs, ofs + len, bytes.length);
     return String.valueOf(((EmulatedCharset) charset).decodeString(bytes, ofs, len)).value;
   }
 

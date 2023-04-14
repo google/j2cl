@@ -366,34 +366,109 @@ public class StringTest extends GWTTestCase {
     assertEquals("ßçÐ", str);
     try {
       new String(bytes, 2, 12, encoding);
-      assertTrue("Should have thrown IOOB in JVM", !isJvm());
+      fail("Should have thrown IOOB");
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, -1, 2, encoding);
-      assertTrue("Should have thrown IOOB in JVM", !isJvm());
+      fail("Should have thrown IOOB");
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, 12, 2, encoding);
-      assertTrue("Should have thrown IOOB in JVM", !isJvm());
+      fail("Should have thrown IOOB");
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, 2, 12, Charset.forName(encoding));
-      assertTrue("Should have thrown IOOB in JVM", !isJvm());
+      fail("Should have thrown IOOB");
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, -1, 2, Charset.forName(encoding));
-      assertTrue("Should have thrown IOOB in JVM", !isJvm());
+      fail("Should have thrown IOOB");
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, 12, 2, Charset.forName(encoding));
-      assertTrue("Should have thrown IOOB in JVM", !isJvm());
+      fail("Should have thrown IOOB");
     } catch (IndexOutOfBoundsException expected) {
     }
+
+    // Malformed case 1: Overlong encoding for '$'. We'll attempt 2, 3, and 4 bytes.
+    bytes =
+        new byte[] {
+          (byte) 0xC0, // len 2
+          (byte) 0xA4, // continuation | 0x24
+        };
+    assertEquals(utf8Replacement(2), new String(bytes, encoding));
+    assertEquals(utf8Replacement(2), new String(bytes, Charset.forName(encoding)));
+
+    bytes =
+        new byte[] {
+          (byte) 0xE0, // len 3
+          (byte) 0x80, // continuation
+          (byte) 0xA4, // continuation | 0x24
+        };
+    assertEquals(utf8Replacement(3), new String(bytes, encoding));
+    assertEquals(utf8Replacement(3), new String(bytes, Charset.forName(encoding)));
+
+    bytes =
+        new byte[] {
+          (byte) 0xF0, // len 4
+          (byte) 0x80, // continuation
+          (byte) 0x80, // continuation
+          (byte) 0xA4, // continuation | 0x24
+        };
+    assertEquals(utf8Replacement(4), new String(bytes, encoding));
+    assertEquals(utf8Replacement(4), new String(bytes, Charset.forName(encoding)));
+
+    // Malformed case 2: First byte show length 4 but following byte is non-continuation.
+    bytes =
+        new byte[] {
+          (byte) 0xF0, // len 4
+          (byte) 0xC0, // non-continuation
+          (byte) 0x80, // continuation
+          (byte) 0x80, // continuation
+          (byte) 0x80, // continuation, but a start should be here!
+          (byte) 0xC2, // copyright symbol, length 2
+          (byte) 0xA9, // copyright symbol, end
+        };
+    assertEquals(utf8Replacement(5) + "©", new String(bytes, encoding));
+    assertEquals(utf8Replacement(5) + "©", new String(bytes, Charset.forName(encoding)));
+
+    // Malformed case 3: First byte is continuation. Last two bytes are continuations of nothing.
+    bytes =
+        new byte[] {
+          (byte) 0xF0, // len 4
+          (byte) 0x80, // continuation
+          (byte) 0xC2, // copyright symbol, length 2
+          (byte) 0xA9, // copyright symbol, end
+        };
+    assertEquals(utf8Replacement(2) + "©", new String(bytes, encoding));
+    assertEquals(utf8Replacement(2) + "©", new String(bytes, Charset.forName(encoding)));
+
+    // Malformed case 4: First byte is length 4, but we see a new start before then
+    bytes =
+        new byte[] {
+          (byte) 0x80, // continuation
+          (byte) 0xC2, // copyright symbol, length 2
+          (byte) 0xA9, // copyright symbol, end
+          (byte) 0x80, // continuation
+          (byte) 0x80, // continuation
+        };
+    assertEquals(utf8Replacement(1) + "©" + utf8Replacement(2), new String(bytes, encoding));
+    assertEquals(
+        utf8Replacement(1) + "©" + utf8Replacement(2),
+        new String(bytes, Charset.forName(encoding)));
+
+    // Malformed case 5: 0xFF and 0xFE are never valid, anywhere.
+    bytes =
+        new byte[] {
+          (byte) 0xFF, (byte) 0xFF, (byte) 0xFE, (byte) 0xFE,
+        };
+    assertEquals(utf8Replacement(4), new String(bytes, encoding));
+    assertEquals(utf8Replacement(4), new String(bytes, Charset.forName(encoding)));
   }
 
   public void testContains() {
@@ -1140,4 +1215,16 @@ public class StringTest extends GWTTestCase {
     return Character.toString(from);
   }
 
+  private static String utf8Replacement(int times) {
+    if (times < 0) {
+      throw new IllegalArgumentException();
+    }
+    // Naive String repeat implementation just using string concatenation to avoid using other
+    // String APIs that may be under test.
+    String str = "";
+    for (int i = 0; i < times; i++) {
+      str += "\uFFFD";
+    }
+    return str;
+  }
 }

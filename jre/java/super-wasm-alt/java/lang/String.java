@@ -18,6 +18,7 @@ package java.lang;
 
 import static javaemul.internal.InternalPreconditions.checkCriticalStringBounds;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
+import static javaemul.internal.InternalPreconditions.checkPositionIndexes;
 import static javaemul.internal.InternalPreconditions.checkStringBounds;
 import static javaemul.internal.InternalPreconditions.checkStringElementIndex;
 
@@ -107,8 +108,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
   }
 
   public String(byte[] data, int offset, int byteCount, Charset charset) {
-    checkCriticalStringBounds(offset, offset + byteCount, data.length);
-
+    checkPositionIndexes(offset, offset + byteCount, data.length);
     this.value = ((EmulatedCharset) charset).decodeString(data, offset, byteCount);
     this.offset = 0;
     this.count = this.value.length;
