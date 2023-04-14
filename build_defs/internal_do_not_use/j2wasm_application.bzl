@@ -303,17 +303,22 @@ def j2wasm_application(name, defines = dict(), **kwargs):
 
             # Stage 2
             _STAGE_SEPARATOR,
-            # Optimization flags (affecting passes in general) included at top.
+            # Optimization flags (affecting passes in general) included at the beginning of stage.
             "--partial-inlining-ifs=4",
             "-fimfs=50",
             # Specific list of passes:
             "--gufa",
-            # Get several rounds of -O3 before intrinsic lowering.
             "-O3",
             "-O3",
             "-O3",
             "--gufa",
             "-O3",
+
+            # Stage 3
+            _STAGE_SEPARATOR,
+            # Optimization flags (affecting passes in general) included at the beginning of stage.
+            "--partial-inlining-ifs=4",
+            "-fimfs=50",
             "--intrinsic-lowering",
             "--gufa",
             # Get several rounds of -O3 after intrinsic lowering.
