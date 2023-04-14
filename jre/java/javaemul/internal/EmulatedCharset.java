@@ -58,7 +58,7 @@ public abstract class EmulatedCharset extends Charset {
     }
 
     @Override
-    public char[] decodeString(byte[] bytes, int ofs, int len) {
+    public char[] decodeString(byte[] bytes, int ofs, int len, boolean throwOnInvalid) {
       char[] chars = new char[0];
       // Pre-allocate to avoid re-sizing. Not using "new char[n]" to avoid unnecessary init w/ `0`.
       ArrayHelper.setLength(chars, len);
@@ -74,8 +74,10 @@ public abstract class EmulatedCharset extends Charset {
       super(name);
     }
 
+    private static final char REPLACEMENT_CHAR = '\uFFFD';
+
     @Override
-    public char[] decodeString(byte[] bytes, int ofs, int len) {
+    public char[] decodeString(byte[] bytes, int ofs, int len, boolean throwOnInvalid) {
       // TODO(b/229151472): Consider using TextEncoder/TextDecoder instead.
 
       char[] chars = new char[0];
@@ -86,6 +88,8 @@ public abstract class EmulatedCharset extends Charset {
       int outIdx = 0;
       int count = 0;
       for (int i = 0; i < len; ) {
+        boolean invalid = false;
+        int runStartIdx = i;
         int ch = bytes[ofs + i++];
         if ((ch & 0x80) == 0) {
           count = 1;
@@ -100,21 +104,39 @@ public abstract class EmulatedCharset extends Charset {
           count = 4;
           ch &= 7;
         } else {
-          // no 5+ byte sequences since max codepoint is less than 2^21
-          throw new IllegalArgumentException();
+          // no 5+ byte sequences since max codepoint is less than 2^21, or this is an unexpected
+          // continuation.
+          invalid = true;
+          count = 1;
         }
         if (i + count - 1 > len) {
           throw new IndexOutOfBoundsException();
         }
 
-        while (--count > 0) {
+        while (!invalid && --count > 0) {
           byte b = bytes[ofs + i++];
           if ((b & 0xC0) != 0x80) {
-            throw new IllegalArgumentException();
+            // If the byte doesn't have continuation markers then this is unexpected as this is a
+            // start of a new char. We'll break and a start a new run from here.
+            invalid = true;
+          } else {
+            ch = (ch << 6) | (b & 63);
           }
-          ch = (ch << 6) | (b & 63);
         }
-        outIdx += Character.toChars(ch, chars, outIdx);
+        if (invalid) {
+          if (throwOnInvalid) {
+            throw new IllegalArgumentException();
+          } else {
+            // All the bytes we've read in this run are invalid, for each byte output a replacement
+            // char.
+            int j = runStartIdx;
+            while (j++ < i) {
+              chars[outIdx++] = REPLACEMENT_CHAR;
+            }
+          }
+        } else {
+          outIdx += Character.toChars(ch, chars, outIdx);
+        }
       }
       // We might have over allocated initially; resize back.
       ArrayHelper.setLength(chars, outIdx);
@@ -192,5 +214,9 @@ public abstract class EmulatedCharset extends Charset {
 
   public abstract byte[] getBytes(char[] buffer, int offset, int count);
 
-  public abstract char[] decodeString(byte[] bytes, int ofs, int len);
+  public final char[] decodeString(byte[] bytes, int ofs, int len) {
+    return decodeString(bytes, ofs, len, /* throwOnInvalid= */ true);
+  }
+
+  public abstract char[] decodeString(byte[] bytes, int ofs, int len, boolean throwOnInvalid);
 }
