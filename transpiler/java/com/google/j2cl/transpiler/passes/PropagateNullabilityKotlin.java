@@ -26,7 +26,7 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 
-/** Propagates non-nullability of method return type in overrides in Kotlin. */
+/** Propagates nullability in overrides in non-null-marked types. */
 public class PropagateNullabilityKotlin extends NormalizationPass {
 
   @Override
@@ -35,6 +35,12 @@ public class PropagateNullabilityKotlin extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Node rewriteMethod(Method method) {
+            // Don't propagate nullability in null-marked types, since it's assumed to be correct
+            // there. Propagate nullability in non-null-marked types only.
+            if (getCurrentType().getDeclaration().isNullMarked()) {
+              return method;
+            }
+
             return propagateNullability(method);
           }
         });
