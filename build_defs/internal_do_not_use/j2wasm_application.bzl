@@ -53,6 +53,9 @@ def _impl_j2wasm_application(ctx):
     runfiles = []
     outputs = []
 
+    # TODO(b/272381112): Remove after non-stringref experiment.
+    default_entry_points = ["java.lang.String.charArraySet", "java.lang.String.charArrayGet"]
+
     transpile_out = ctx.actions.declare_directory(ctx.label.name + "_out")
     args = ctx.actions.args()
     args.use_param_file("@%s", use_always = True)
@@ -60,7 +63,7 @@ def _impl_j2wasm_application(ctx):
     args.add_joined("-classpath", classpath, join_with = ctx.configuration.host_path_separator)
     args.add("-output", transpile_out.path)
     args.add("-experimentalBackend", "WASM")
-    args.add_all(ctx.attr.entry_points, before_each = "-experimentalGenerateWasmExport")
+    args.add_all(default_entry_points + ctx.attr.entry_points, before_each = "-experimentalGenerateWasmExport")
     args.add_all(ctx.attr.defines, before_each = "-experimentalDefineForWasm")
     args.add_all(ctx.attr.transpiler_args)
 

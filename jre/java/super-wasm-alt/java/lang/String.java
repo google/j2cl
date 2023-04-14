@@ -32,6 +32,7 @@ import java.util.StringJoiner;
 import javaemul.internal.ArrayHelper;
 import javaemul.internal.EmulatedCharset;
 import javaemul.internal.NativeRegExp;
+import javaemul.internal.WasmExtern;
 import javaemul.internal.annotations.HasNoSideEffects;
 import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
@@ -980,26 +981,29 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     if (jsString == null) {
       return null;
     }
-    int count = nativeGetLength(asStringView(jsString));
+    int count = nativeGetLength(jsString);
     char[] array = new char[count];
-    int unused = nativeGetChars(jsString, array, 0);
+    nativeGetChars(jsString, externalize(array), 0);
     return new String(0, count, array);
   }
 
-  @Wasm("string.new_wtf16_array")
-  private static native NativeString nativeFromCharCodeArray(char[] x, int start, int end);
+  private static NativeString nativeFromCharCodeArray(char[] x, int start, int end) {
+    return nativeStringNew(externalize(x), start, end);
+  }
 
-  @Wasm("stringview_wtf16.length")
-  private static native int nativeGetLength(NativeStringView stringView);
+  @JsMethod(namespace = "j2wasm.StringUtils", name = "stringNew")
+  private static native NativeString nativeStringNew(WasmExtern x, int start, int end);
 
-  @Wasm("string.encode_wtf16_array")
-  private static native int nativeGetChars(NativeString s, char[] x, int start);
+  @JsMethod(namespace = "j2wasm.StringUtils", name = "stringLength")
+  private static native int nativeGetLength(NativeString stringView);
+
+  @JsMethod(namespace = "j2wasm.StringUtils", name = "stringGetChars")
+  private static native void nativeGetChars(NativeString s, WasmExtern x, int start);
 
   /** Native JS compatible representation of a string. */
   // TODO(b/268386628): Hide NativeString once external references are cleaned up. Once NativeString
   // is hidden, the methods should be made PUBLIC, for consistency with NativeString in Closure, and
   // J2CL practices around go/java-practices/redundancy#visibility-specifiers-in-private-classes.
-  @Wasm("string")
   @JsType(isNative = true, name = "String", namespace = JsPackage.GLOBAL)
   public static class NativeString {
     static native NativeString fromCharCode(char x);
@@ -1015,9 +1019,23 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     native NativeString toLocaleUpperCase();
   }
 
-  @Wasm("stringview_wtf16")
-  private interface NativeStringView {}
+  // TODO(b/272381112): Remove after non-stringref experiment.
+  static void charArraySet(WasmExtern extern, int index, char c) {
+    char[] array = internalize(extern);
+    array[index] = c;
+  }
 
-  @Wasm("string.as_wtf16")
-  private static native NativeStringView asStringView(NativeString stringView);
+  // TODO(b/272381112): Remove after non-stringref experiment.
+  static char charArrayGet(WasmExtern extern, int index) {
+    char[] array = internalize(extern);
+    return array[index];
+  }
+
+  // TODO(b/272381112): Remove after non-stringref experiment.
+  @Wasm("extern.externalize")
+  private static native WasmExtern externalize(Object result);
+
+  // TODO(b/272381112): Remove after non-stringref experiment.
+  @Wasm("extern.internalize")
+  private static native <T> T internalize(WasmExtern result);
 }

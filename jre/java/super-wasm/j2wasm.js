@@ -46,6 +46,7 @@ async function instantiateStreamingOverridingImports(urlOrResponse, imports) {
   const response =
       typeof urlOrResponse == 'string' ? fetch(urlOrResponse) : urlOrResponse;
   const {instance} = await WebAssembly.instantiateStreaming(response, imports);
+  goog.global['j2wasm_exports'] = instance.exports;
   return instance;
 }
 
@@ -80,8 +81,12 @@ function instantiateBlocking(moduleObject, userImports) {
  * @return {!WebAssembly.Instance}
  */
 function instantiateBlockingOverridingImports(moduleObject, imports) {
-  return new WebAssembly.Instance(
+  const instance = new WebAssembly.Instance(
       new WebAssembly.Module(moduleObject), imports);
+  // TODO(b/272381112): Remove after non-stringref experiment. This is generally
+  // a bad idea as it assumes single app.
+  goog.global['j2wasm_exports'] = instance.exports;
+  return instance;
 }
 
 /**
@@ -135,6 +140,11 @@ function createImportObject(userImports) {
     'String.toLocaleUpperCase': (/** string */ s) => s.toLocaleUpperCase(),
     'j2wasm.StringUtils.equalsIgnoreCase': StringUtils.equalsIgnoreCase,
     'j2wasm.StringUtils.compareToIgnoreCase': StringUtils.compareToIgnoreCase,
+    // TODO(b/272381112): Remove after non-stringref experiment.
+    'j2wasm.StringUtils.stringNew': StringUtils.stringNew,
+    'j2wasm.StringUtils.stringGetChars': StringUtils.stringGetChars,
+    'j2wasm.StringUtils.stringLength': StringUtils.stringLength,
+    // End of non-stringref experiment APIs.
     'Number.prototype.toString.call': (/** number */ n, /** number */ r) =>
         Number.prototype.toString.call(n, r),
     // Regex
