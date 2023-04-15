@@ -46,6 +46,7 @@ _J2KT_JVM_PACKAGES = [
     "junit/generator/java/com/google/j2cl/junit/runtime",
     "junit/generator/javatests/com/google/j2cl/junit/integration",
     "third_party/java_src/j2objc/annotations",
+    "third_party/java/checker_framework_annotations",
     "third_party/java/error_prone",
     "third_party/java/j2objc",
     "third_party/java/junit",
