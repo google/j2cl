@@ -576,6 +576,15 @@ public class CharacterTest extends GWTTestCase {
     assertTrue(Arrays.equals(expectedTitleCaseChars, foundChars));
   }
 
+  public void test_toTitleCaseC() {
+    assertEquals('ǲ', Character.toTitleCase('Ǳ'));
+    assertEquals('ǲ', Character.toTitleCase('ǲ'));
+    assertEquals('ǲ', Character.toTitleCase('ǳ'));
+    assertEquals('ა', Character.toTitleCase('ა'));
+    assertEquals('A', Character.toTitleCase('a'));
+    assertEquals('A', Character.toTitleCase('A'));
+  }
+
   public void testToString() {
     assertEquals(" ", new Character((char) 32).toString());
     assertEquals("a", Character.toString('a'));

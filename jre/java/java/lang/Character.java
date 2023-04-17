@@ -25,12 +25,12 @@ import javaemul.internal.annotations.HasNoSideEffects;
 /**
  * Wraps a native <code>char</code> as an object.
  *
- * TODO(jat): many of the classification methods implemented here are not
- * correct in that they only handle ASCII characters, and many other methods
- * are not currently implemented.  I think the proper approach is to introduce * a deferred binding parameter which substitutes an implementation using
- * a fully-correct Unicode character database, at the expense of additional
- * data being downloaded.  That way developers that need the functionality
- * can get it without those who don't need it paying for it.
+ * <p>TODO(jat): many of the classification methods implemented here are not correct in that they
+ * only handle ASCII characters, and many other methods are not currently implemented. I think the
+ * proper approach is to introduce * a deferred binding parameter which substitutes an
+ * implementation using a fully-correct Unicode character database, at the expense of additional
+ * data being downloaded. That way developers that need the functionality can get it without those
+ * who don't need it paying for it.
  *
  * <pre>
  * The following methods are still not implemented -- most would require Unicode
@@ -50,7 +50,7 @@ import javaemul.internal.annotations.HasNoSideEffects;
  *  - getNumericValue(*)
  *  - getType(*)
  *  - reverseBytes(char) -- any use for this at all in the browser?
- *  - toTitleCase(*)
+ *  - toTitleCase(int codepoint)
  *  - all the category constants for classification
  *
  * The following do not properly handle characters outside of ASCII:
@@ -333,6 +333,23 @@ public final class Character implements Comparable<Character>, Serializable {
   public static boolean isTitleCase(char c) {
     // https://www.compart.com/en/unicode/category/Lt
     return c != toUpperCase(c) && c != toLowerCase(c);
+  }
+
+  public static char toTitleCase(char c) {
+    // In the vast majority of cases titlecase == uppercase, but there are some exceptions. A list
+    // of codepoints where this isn't the case can be generated with:
+    //   curl https://unicode.org/Public/UNIDATA/UnicodeData.txt 2>/dev/null \
+    //     | awk -F';' '{ if ($13 != $15) print "cp: ",$1,"uc: ",$13,"tc: ",$15 }'
+    if ((c >= '\u01C4' && c <= '\u01CC') || (c >= '\u01F1' && c <= '\u01F3')) {
+      // In these ranges characters are grouped in sets of three consisting of (UC,Tc,lc).
+      // Coincidentally the titlecase char is always on a value divisible by three, so we can abuse
+      // integer division here.
+      return (char) (((c + 1) / 3) * 3);
+    } else if ((c >= '\u10D0' && c <= '\u10FA') || (c >= '\u10FD' && c <= '\u10FF')) {
+      // In these ranges titlecase is equal to the original character.
+      return c;
+    }
+    return toUpperCase(c);
   }
 
   /*
