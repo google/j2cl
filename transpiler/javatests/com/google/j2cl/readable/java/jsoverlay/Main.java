@@ -17,6 +17,7 @@ package jsoverlay;
 
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 public class Main {
@@ -132,4 +133,14 @@ public class Main {
     foo.m();
     foo.callM();
   }
+}
+
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
+interface ParameterizedNativeInterface<T> {
+
+  @JsOverlay
+  default <T, S> void shadowsTypeVariable(T param1, S param2) {}
+
+  @JsOverlay
+  default <T, S> void shadowsTypeVariable(T param1, int param2) {}
 }
