@@ -749,8 +749,6 @@ class JdtEnvironment {
       declarationFieldDescriptor = createFieldDescriptor(variableBinding.getVariableDeclaration());
     }
 
-    JsInfo jsInfo = JsInteropUtils.getJsInfo(variableBinding);
-    KtInfo ktInfo = computeKtInfo(variableBinding);
     boolean isCompileTimeConstant = variableBinding.getConstantValue() != null;
     if (isCompileTimeConstant) {
       thisTypeDescriptor = thisTypeDescriptor.toNonNullable();
@@ -762,8 +760,8 @@ class JdtEnvironment {
         .setTypeDescriptor(thisTypeDescriptor)
         .setStatic(isStatic)
         .setVisibility(visibility)
-        .setOriginalJsInfo(jsInfo)
-        .setKtInfo(ktInfo)
+        .setOriginalJsInfo(JsInteropUtils.getJsInfo(variableBinding))
+        .setOriginalKtInfo(KtInteropUtils.getKtInfo(variableBinding))
         .setFinal(isFinal)
         .setCompileTimeConstant(isCompileTimeConstant)
         .setDeclarationDescriptor(declarationFieldDescriptor)
@@ -794,7 +792,7 @@ class JdtEnvironment {
     Visibility visibility = getVisibility(methodBinding);
     boolean isDefault = isDefaultMethod(methodBinding);
     JsInfo jsInfo = JsInteropUtils.getJsInfo(methodBinding);
-    KtInfo ktInfo = computeKtInfo(methodBinding);
+    KtInfo ktInfo = KtInteropUtils.getKtInfo(methodBinding);
 
     boolean isNative =
         Modifier.isNative(methodBinding.getModifiers())
@@ -881,7 +879,7 @@ class JdtEnvironment {
         .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
         .setTypeArgumentTypeDescriptors(typeArgumentTypeDescriptors)
         .setOriginalJsInfo(jsInfo)
-        .setKtInfo(ktInfo)
+        .setOriginalKtInfo(ktInfo)
         .setKtObjcInfo(KtInteropUtils.getKtObjcInfo(methodBinding))
         .setWasmInfo(getWasmInfo(methodBinding))
         .setJsFunction(isOrOverridesJsFunctionMethod(methodBinding))
@@ -961,27 +959,6 @@ class JdtEnvironment {
       }
     }
     return false;
-  }
-
-  /** Checks overriding chain to compute KtInfo. */
-  private KtInfo computeKtInfo(IMethodBinding methodBinding) {
-    KtInfo ktInfo = KtInteropUtils.getKtInfo(methodBinding);
-
-    for (IMethodBinding overriddenMethod :
-        getOverriddenMethods(methodBinding.getMethodDeclaration())) {
-      KtInfo overriddenKtInfo = KtInteropUtils.getKtInfo(overriddenMethod);
-      ktInfo =
-          KtInfo.newBuilder()
-              .setProperty(ktInfo.isProperty() || overriddenKtInfo.isProperty())
-              .setName(ktInfo.getName() == null ? overriddenKtInfo.getName() : ktInfo.getName())
-              .build();
-    }
-
-    return ktInfo;
-  }
-
-  private static KtInfo computeKtInfo(IVariableBinding variableBinding) {
-    return KtInteropUtils.getKtInfo(variableBinding);
   }
 
   public Set<IMethodBinding> getOverriddenMethods(IMethodBinding methodBinding) {

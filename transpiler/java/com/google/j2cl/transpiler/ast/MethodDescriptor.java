@@ -448,6 +448,29 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   @Nullable
   abstract KtObjcInfo getKtObjcInfo();
 
+  /** Compute the KtInfo of the function by traversing its overriding chain. */
+  @Override
+  @Memoized
+  public KtInfo getKtInfo() {
+    if (getManglingDescriptor() != this) {
+      return getManglingDescriptor().getKtInfo();
+    }
+
+    KtInfo ktInfo = getDeclarationDescriptor().getOriginalKtInfo();
+
+    for (MethodDescriptor overriddenMethodDescriptor : getJavaOverriddenMethodDescriptors()) {
+      KtInfo overriddenKtInfo =
+          overriddenMethodDescriptor.getDeclarationDescriptor().getOriginalKtInfo();
+      ktInfo =
+          KtInfo.newBuilder()
+              .setProperty(ktInfo.isProperty() || overriddenKtInfo.isProperty())
+              .setName(ktInfo.getName() == null ? overriddenKtInfo.getName() : ktInfo.getName())
+              .build();
+    }
+
+    return ktInfo;
+  }
+
   /** Compute the JsInfo of the function by traversing its overriding chain. */
   @Override
   @Memoized
@@ -778,7 +801,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         // Default values.
         .setVisibility(Visibility.PUBLIC)
         .setOriginalJsInfo(JsInfo.NONE)
-        .setKtInfo(KtInfo.NONE)
+        .setOriginalKtInfo(KtInfo.NONE)
         .setAbstract(false)
         .setSynchronized(false)
         .setConstructor(false)
@@ -1101,7 +1124,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public abstract Builder setOriginalJsInfo(JsInfo jsInfo);
 
-    public abstract Builder setKtInfo(KtInfo ktInfo);
+    public abstract Builder setOriginalKtInfo(KtInfo ktInfo);
 
     public abstract Builder setKtObjcInfo(KtObjcInfo ktObjcInfo);
 

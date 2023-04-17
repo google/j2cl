@@ -147,6 +147,11 @@ public abstract class FieldDescriptor extends MemberDescriptor {
   }
 
   @Override
+  public KtInfo getKtInfo() {
+    return getOriginalKtInfo();
+  }
+
+  @Override
   @Memoized
   public String getBinaryName() {
     return getName();
@@ -194,7 +199,7 @@ public abstract class FieldDescriptor extends MemberDescriptor {
         // Default values.
         .setVisibility(Visibility.PUBLIC)
         .setOriginalJsInfo(JsInfo.NONE)
-        .setKtInfo(KtInfo.NONE)
+        .setOriginalKtInfo(KtInfo.NONE)
         .setCompileTimeConstant(false)
         .setStatic(false)
         .setFinal(false)
@@ -237,7 +242,7 @@ public abstract class FieldDescriptor extends MemberDescriptor {
 
     public abstract Builder setOriginalJsInfo(JsInfo jsInfo);
 
-    public abstract Builder setKtInfo(KtInfo ktInfo);
+    public abstract Builder setOriginalKtInfo(KtInfo ktInfo);
 
     public abstract Builder setUnusableByJsSuppressed(boolean isUnusableByJsSuppressed);
 
