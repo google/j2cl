@@ -18,7 +18,6 @@ package javaemul.internal;
 import static javaemul.internal.InternalPreconditions.checkCriticalArrayBounds;
 
 import java.util.Comparator;
-import java.util.Iterator;
 import javaemul.internal.annotations.DoNotAutobox;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
@@ -277,79 +276,6 @@ public final class ArrayHelper {
 
   private static CompareFunction getLongComparator() {
     return JsUtils.uncheckedCast((CompareLongFunction) Long::compare);
-  }
-
-  // TODO(b/234777938): Remove once the stdlib is in with their implementation of ArrayIterators.
-  public static <T> Iterator<T> arrayIterator(T[] array) {
-    return new ArrayIterator<>(array);
-  }
-
-  public static Iterator arrayIterator(byte[] array) {
-    throw new UnsupportedOperationException();
-  }
-
-  public static Iterator arrayIterator(short[] array) {
-    throw new UnsupportedOperationException();
-  }
-
-  public static Iterator arrayIterator(char[] array) {
-    throw new UnsupportedOperationException();
-  }
-
-  public static IntArrayIterator arrayIterator(int[] array) {
-    return new IntArrayIterator(array);
-  }
-
-  public static Iterator arrayIterator(long[] array) {
-    throw new UnsupportedOperationException();
-  }
-
-  public static Iterator arrayIterator(float[] array) {
-    throw new UnsupportedOperationException();
-  }
-
-  public static Iterator arrayIterator(double[] array) {
-    throw new UnsupportedOperationException();
-  }
-
-  public static Iterator arrayIterator(boolean[] array) {
-    throw new UnsupportedOperationException();
-  }
-
-  private static final class IntArrayIterator {
-    private int index = 0;
-    private int[] array;
-
-    private IntArrayIterator(int[] array) {
-      this.array = array;
-    }
-
-    public boolean hasNext() {
-      return index < array.length;
-    }
-
-    public int next() {
-      return array[index++];
-    }
-  }
-
-  private static final class ArrayIterator<T> implements Iterator<T> {
-    private int index = 0;
-    private T[] array;
-
-    private ArrayIterator(T[] array) {
-      this.array = array;
-    }
-
-    @Override
-    public boolean hasNext() {
-      return index < array.length;
-    }
-
-    @Override
-    public T next() {
-      return array[index++];
-    }
   }
 
   private static NativeArray asNativeArray(Object array) {
