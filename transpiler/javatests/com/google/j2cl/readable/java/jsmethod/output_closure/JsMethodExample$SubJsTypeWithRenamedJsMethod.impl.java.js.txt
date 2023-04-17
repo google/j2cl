@@ -1,0 +1,56 @@
+goog.module('jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod$impl');
+
+const Base = goog.require('jsmethod.JsMethodExample.Base$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @extends {Base<?string>}
+ */
+class SubJsTypeWithRenamedJsMethod extends Base {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!SubJsTypeWithRenamedJsMethod} */
+ static $create__() {
+  SubJsTypeWithRenamedJsMethod.$clinit();
+  let $instance = new SubJsTypeWithRenamedJsMethod();
+  $instance.$ctor__jsmethod_JsMethodExample_SubJsTypeWithRenamedJsMethod__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsmethod_JsMethodExample_SubJsTypeWithRenamedJsMethod__void() {
+  this.$ctor__jsmethod_JsMethodExample_Base__void();
+ }
+ 
+ renamedM(/** ?string */ s) {}
+ //Bridge method.
+ /** @final @override */
+ m(/** ?string */ arg0) {
+  this.renamedM(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
+ }
+ /** @nodts */
+ static $clinit() {
+  SubJsTypeWithRenamedJsMethod.$clinit = () =>{};
+  SubJsTypeWithRenamedJsMethod.$loadModules();
+  Base.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SubJsTypeWithRenamedJsMethod;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(SubJsTypeWithRenamedJsMethod, 'jsmethod.JsMethodExample$SubJsTypeWithRenamedJsMethod');
+
+exports = SubJsTypeWithRenamedJsMethod;
+
+//# sourceMappingURL=JsMethodExample$SubJsTypeWithRenamedJsMethod.js.map

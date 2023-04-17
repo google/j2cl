@@ -29,12 +29,15 @@ class ChildWithOverrides extends Parent {
   this.$outer_this__bridgejsmethod_Main_ChildWithOverrides = $outer_this;
   this.$ctor__bridgejsmethod_Main_Parent__bridgejsmethod_Main__void($outer_this);
  }
- /** @override */
- jsMethod(/** T */ t) {
-  let t_1 = /**@type {T}*/ ($Casts.$to(t, ChildWithOverrides));
- }
+ /** @nodts */
+ m_jsMethod__bridgejsmethod_Main_ChildWithOverrides__void(/** T */ t) {}
  /** @nodts */
  m_method__bridgejsmethod_Main_ChildWithOverrides__void(/** T */ t) {}
+ //Bridge method.
+ /** @final @override @nodts */
+ m_jsMethod__bridgejsmethod_Main_Parent__void(/** T */ arg0) {
+  this.m_jsMethod__bridgejsmethod_Main_ChildWithOverrides__void(/**@type {T}*/ ($Casts.$to(arg0, ChildWithOverrides)));
+ }
  //Bridge method.
  /** @final @override @nodts */
  m_method__bridgejsmethod_Main_Parent__void(/** T */ arg0) {

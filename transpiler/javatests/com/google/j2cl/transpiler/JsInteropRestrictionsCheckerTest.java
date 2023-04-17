@@ -617,8 +617,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 + "('void IBuggy2.show(boolean)' with JavaScript name 'show').");
   }
 
-  public void testCollidingSubclassMethodToBridgeFails() {
-    assertTranspileFails(
+  public void testRenamedSubclassMethodToBridgeSucceeds() {
+    assertTranspileSucceeds(
             "test.Buggy",
             "import jsinterop.annotations.*;",
             "public class Buggy<T> {",
@@ -630,10 +630,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "class SubBuggy extends Buggy<String> {",
             "  public void show(String s) {}",
             "}")
-        .assertErrorsWithoutSourcePosition(
-            "'void SubBuggy.show(String s)' cannot be assigned JavaScript name 'display' that is "
-                + "different from the JavaScript name of a method it overrides "
-                + "('void Buggy.show(String)' with JavaScript name 'show').");
+        .assertNoWarnings();
   }
 
   public void testCollidingSubclassMethodToMethodJsTypeFails() {

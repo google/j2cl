@@ -112,13 +112,16 @@ public class BridgeMethodsCreator extends NormalizationPass {
 
   private static MethodDescriptor adjustTargetForJsFunction(
       MethodDescriptor causeMethod, MethodDescriptor targetMethod) {
+    if (!targetMethod.isJsFunction()) {
+      return targetMethod;
+    }
     // The MethodDescriptor of the targeted method.
     MethodDescriptor.Builder methodDescriptorBuilder = MethodDescriptor.Builder.from(targetMethod);
 
     // If a JsFunction method needs a bridge, only the bridge method is a JsFunction method, and it
     // targets to *real* implementation, which is not a JsFunction method.
     // If both a method and the bridge method are JsMethod, only the bridge method is a JsMethod,
-    // and it targets the *real* implementation, which should be emit as non-JsMethod.
+    // and it targets the *real* implementation, which should emit as non-JsMethod.
     if (causeMethod.isJsMethod() && targetMethod.inSameTypeAs(causeMethod)) {
       methodDescriptorBuilder.removeParameterOptionality().setOriginalJsInfo(JsInfo.NONE);
     }

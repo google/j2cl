@@ -363,11 +363,11 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       jsDocBuilder.append(" @").append(methodDescriptor.getJsVisibility().jsText);
     }
     if (methodDescriptor.isFinal()
-        // TODO(b/270966851): Remove the JsMember exclusion once general bridges are enabled for
-        // JsMethods.
-        && !methodDescriptor.isJsMember()
+        // Don't emit @final on static JsMethods since this are always dispatched statically via
+        // collapse properties and j2cl allows the name to be reused.
+        && !(methodDescriptor.isStatic() && methodDescriptor.isJsMember())
         // TODO(b/269866419): Enable final for Kotlin, once it is guaranteed that final methods are
-        //  never overridden by synthetic methods from the lowerings.
+        // never overridden by synthetic methods from the lowerings.
         && methodDescriptor
             .getEnclosingTypeDescriptor()
             .getTypeDeclaration()

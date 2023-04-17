@@ -210,7 +210,15 @@ class ClosureTypesGenerator {
       ParameterDescriptor parameterDescriptor,
       TypeDescriptor parameterTypeDescriptor) {
     boolean isJsVarargs = parameterDescriptor.isVarargs() && methodDescriptor.isJsMethodVarargs();
-    boolean isOptional = parameterDescriptor.isJsOptional();
+    // Only emit a parameter as optional (i.e. {X=} instead of {X}) if the method is actually
+    // a JsMethod or JsFunction. A method might have been marked as a JsMethod but if it overrides
+    // a JsMethod specializing the signature, it is emitted as a non-js method with a bridge.
+    // This now non-js method would still have the parameter marked as JsOptional (since this is
+    // a JsMethod in the source) but it can not be emitted as optional in closure because it might
+    // be followed by a regular Java varargs parameter which is not optional nor a js varargs.
+    boolean isOptional =
+        parameterDescriptor.isJsOptional()
+            && (methodDescriptor.isJsMember() || methodDescriptor.isJsFunction());
     parameterTypeDescriptor =
         isJsVarargs
             ? ((ArrayTypeDescriptor) parameterTypeDescriptor).getComponentTypeDescriptor()

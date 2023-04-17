@@ -1119,13 +1119,21 @@ public class JsInteropRestrictionsChecker {
     }
     Method method = (Method) member;
     String jsName = method.getSimpleJsName();
+    MethodDescriptor methodDescriptor = method.getDescriptor();
     for (MethodDescriptor overriddenMethodDescriptor :
-        method.getDescriptor().getJavaOverriddenMethodDescriptors()) {
+        methodDescriptor.getJavaOverriddenMethodDescriptors()) {
       if (!overriddenMethodDescriptor.isJsMember()) {
         continue;
       }
 
-      if (overriddenMethodDescriptor.isJsMethod() != method.getDescriptor().isJsMethod()) {
+      if (!methodDescriptor.canInheritsJsInfoFrom(overriddenMethodDescriptor)) {
+        // Only methods that have the same jsinfo compatibility signature have to agree in the
+        // name. An override that specializes the parameters needs to have a different name than
+        // the method it overrides.
+        continue;
+      }
+
+      if (overriddenMethodDescriptor.isJsMethod() != methodDescriptor.isJsMethod()) {
         // Overrides can not change JsMethod to JsProperty nor vice versa.
         problems.error(
             method.getSourcePosition(),
@@ -1683,7 +1691,14 @@ public class JsInteropRestrictionsChecker {
     MethodDescriptor methodDescriptor = method.getDescriptor();
 
     int numberOfParameters = method.getParameters().size();
-    Variable varargsParameter = method.getJsVarargsParameter();
+    Variable varargsParameter = method.getVarargsParameter();
+    if (!methodDescriptor.isJsMethodVarargs() && !methodDescriptor.isOrOverridesJsMethod()) {
+      // Consider the varargs parameter to be a JsVarargs if this method overrides a JsMethod but
+      // it is not a JsMethod itself, just with the purpose to avoid reporting an error when
+      // there is a JsOptional parameters before a varargs and the JsMethod becomes a regular
+      // method due to signature incompatibility.
+      varargsParameter = null;
+    }
     for (int i = 0; i < numberOfParameters; i++) {
       Variable parameter = method.getParameters().get(i);
       ParameterDescriptor parameterDescriptor = methodDescriptor.getParameterDescriptors().get(i);
@@ -1716,9 +1731,12 @@ public class JsInteropRestrictionsChecker {
       }
     }
     if (hasOptionalParameters
-        && !methodDescriptor.isJsMethod()
         && !methodDescriptor.isJsConstructor()
-        && !methodDescriptor.isJsFunction()) {
+        && !methodDescriptor.isJsFunction()
+        // Allow parameters to be marked @JsOptional even if we decide that a method will not
+        // be considered a JsMethod due to having a different signature than a JsMethod it
+        // overrides.
+        && !methodDescriptor.isOrOverridesJsMethod()) {
       problems.error(
           method.getSourcePosition(),
           "JsOptional parameter in '%s' can only be declared in a JsMethod, a JsConstructor or a "
@@ -2093,7 +2111,9 @@ public class JsInteropRestrictionsChecker {
       // Java disagree. For example MyList<String>.contains(String) needs to be considered an
       // override of List<String>.contains(Object).
       members.removeIf(
-          m -> overrides(member, m) || overrides(member.getDeclarationDescriptor(), m));
+          m ->
+              isCompatibleOverride(member, m)
+                  || isCompatibleOverride(member.getDeclarationDescriptor(), m));
     }
 
     // Don't collect native members since those are never involved in collisions.
@@ -2102,16 +2122,22 @@ public class JsInteropRestrictionsChecker {
     }
   }
 
-  private static boolean overrides(
+  private static boolean isCompatibleOverride(
       MemberDescriptor member, MemberDescriptor potentiallyOverriddenMember) {
     if (!member.isMethod() || !potentiallyOverriddenMember.isMethod()) {
       return false;
     }
 
-    MethodDescriptor method = (MethodDescriptor) member;
+    // TODO(b/254859483): Remove getDeclarationDescriptor in the next line and in the return
+    // statement once this is fixed. The treatment of methods like Collections.contains(Object) as
+    // being overridden by SomeCollectionSubclass.contains(T) breaks the check here since there
+    // is an inconsistency on whether they are considered overrides and whether they inherit the
+    // JsInfo.
+    MethodDescriptor method = (MethodDescriptor) member.getDeclarationDescriptor();
     MethodDescriptor potentiallyOverriddenMethod = (MethodDescriptor) potentiallyOverriddenMember;
-    return method.isOverride(potentiallyOverriddenMethod)
-        || method.isOverride(potentiallyOverriddenMethod.getDeclarationDescriptor());
+    return (method.isOverride(potentiallyOverriddenMethod)
+            || method.isOverride(potentiallyOverriddenMethod.getDeclarationDescriptor()))
+        && method.canInheritsJsInfoFrom(potentiallyOverriddenMethod);
   }
 
   private void checkUnusableByJs(Member member) {

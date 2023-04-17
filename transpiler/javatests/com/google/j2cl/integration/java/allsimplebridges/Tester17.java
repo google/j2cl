@@ -17,11 +17,13 @@ package allsimplebridges;
 
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
 
 public class Tester17 {
   @JsType
   static interface I1 {
+    @JsMethod(name = "getString")
     default String get(String value) {
       return "I1.get";
     }

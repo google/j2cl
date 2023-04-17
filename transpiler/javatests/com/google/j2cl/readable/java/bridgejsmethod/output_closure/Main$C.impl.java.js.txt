@@ -25,10 +25,14 @@ class C extends A {
  $ctor__bridgejsmethod_Main_C__void() {
   this.$ctor__bridgejsmethod_Main_A__void();
  }
- /** @override @return {Integer} */
- fun(/** Integer */ i) {
-  let i_1 = /**@type {Integer}*/ ($Casts.$to(i, Integer));
-  return i_1;
+ /** @nodts @return {Integer} */
+ m_fun__java_lang_Integer__java_lang_Integer(/** Integer */ i) {
+  return i;
+ }
+ //Bridge method.
+ /** @final @override @return {Integer} */
+ fun(/** Integer */ arg0) {
+  return this.m_fun__java_lang_Integer__java_lang_Integer(/**@type {Integer}*/ ($Casts.$to(arg0, Integer)));
  }
  /** @nodts */
  static $clinit() {

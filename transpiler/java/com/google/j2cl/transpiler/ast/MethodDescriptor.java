@@ -21,6 +21,7 @@ import static java.util.stream.Collectors.joining;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
+import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
@@ -479,7 +480,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return getManglingDescriptor().getJsInfo();
     }
 
-    JsInfo originalJsInfo = getDeclarationDescriptor().getOriginalJsInfo();
+    checkState(isDeclaration());
+    JsInfo originalJsInfo = getOriginalJsInfo();
 
     if (originalJsInfo.isJsOverlay()
         || originalJsInfo.getJsName() != null
@@ -493,8 +495,12 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     JsInfo defaultJsInfo = originalJsInfo;
 
     for (MethodDescriptor overriddenMethodDescriptor : getJavaOverriddenMethodDescriptors()) {
-      JsInfo inheritedJsInfo =
-          overriddenMethodDescriptor.getDeclarationDescriptor().getOriginalJsInfo();
+      if (!isNative() && !canInheritsJsInfoFrom(overriddenMethodDescriptor)) {
+        // Only propagate the JsInfo from methods with the same signature.
+        continue;
+      }
+
+      JsInfo inheritedJsInfo = overriddenMethodDescriptor.getOriginalJsInfo();
 
       if (inheritedJsInfo.getJsMemberType() == JsMemberType.NONE) {
         continue;
@@ -523,11 +529,52 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       }
     }
 
+    if (!isNative()
+        && getJavaOverriddenMethodDescriptors().stream()
+            .filter(MethodDescriptor::isJsMember)
+            .anyMatch(Predicates.not(this::canInheritsJsInfoFrom))) {
+      // This is a Java override of a method that does not have the same signature and its
+      // JsMethod annotation does not specify a name; in this case the method will not be considered
+      // a JsMethod but instead it will be the target of a JsMethod bridge.
+      return JsInfo.Builder.from(JsInfo.NONE).setJsAsync(originalJsInfo.isJsAsync()).build();
+    }
+
     // Don't inherit @JsAsync annotation from overridden methods.
     return JsInfo.Builder.from(defaultJsInfo)
         .setJsAsync(originalJsInfo.isJsAsync())
         .setHasJsMemberAnnotation(hasExplicitJsMemberAnnotation)
         .build();
+  }
+
+  /** Returns true if the method inherits the JsInfo from {@code methodDescriptor}. */
+  public boolean canInheritsJsInfoFrom(MethodDescriptor methodDescriptor) {
+    return getJsMemberCompatibilitySignature()
+        .equals(methodDescriptor.getJsMemberCompatibilitySignature());
+  }
+
+  /**
+   * Returns a signature used to decided whether two JsMethods can or not share the same property
+   * name.
+   *
+   * <p>The Java signature, returned by getSignature(), that is used to compute overrides only
+   * considers parameters but not return types. Since specializing the return types does not affect
+   * the contract. In Kotlin, on the other hand, you can specialize the return to a primitive type
+   * which can not be used if the contract assumed a reference type as a return. So two methods that
+   * only differ in the return type, with one returning a primitive and the other a reference type,
+   * cannot both use the same name.
+   */
+  @Memoized
+  String getJsMemberCompatibilitySignature() {
+    if (getManglingDescriptor() != this) {
+      return getManglingDescriptor().getJsMemberCompatibilitySignature();
+    }
+    // TODO(b/118301700): Extend this to cover the case of JsEnums which behave like primitives
+    // w.r.t. to boxed/unboxed contracts.
+    String returnType =
+        getReturnTypeDescriptor().isPrimitive()
+            ? getSignatureStringForParameter(getReturnTypeDescriptor())
+            : "Reference";
+    return getSignature() + ":" + returnType;
   }
 
   public boolean isPropertyGetter() {
@@ -559,6 +606,13 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     return TypeDescriptors.get().javaLangObject.getDeclaredMethodDescriptors().stream()
         .anyMatch(this::isOverride);
+  }
+
+  /** Returns {@code true} if this method overrides a JsMethod. */
+  @Memoized
+  public boolean isOrOverridesJsMethod() {
+    return isJsMethod()
+        || getJavaOverriddenMethodDescriptors().stream().anyMatch(MethodDescriptor::isJsMethod);
   }
 
   @Override
@@ -643,7 +697,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   }
 
   /**
-   * Returns the type desciptor that is needed to determine the actual types for the method
+   * Returns the type descriptor that is needed to determine the actual types for the method
    * parameters used for determining the method mangled name and the types that can actually flow to
    * the method.
    */
@@ -1350,6 +1404,10 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       checkState(
           declaration.getReturnTypeDescriptor().isPrimitive()
               == methodDescriptor.getReturnTypeDescriptor().isPrimitive());
+
+      checkState(
+          !methodDescriptor.isGeneralizingdBridge()
+              || methodDescriptor.isJsMethod() == methodDescriptor.getBridgeOrigin().isJsMethod());
     }
 
     public static Builder from(MethodDescriptor methodDescriptor) {

@@ -1,7 +1,6 @@
-goog.module('jsmethod.JsMethodExample.Sub$impl');
+goog.module('jsmethod.JsMethodExample.SubJsType$impl');
 
 const Base = goog.require('jsmethod.JsMethodExample.Base$impl');
-const I = goog.require('jsmethod.JsMethodExample.I$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
@@ -9,40 +8,39 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 /**
  * @extends {Base<?string>}
- * @implements {I}
  */
-class Sub extends Base {
+class SubJsType extends Base {
  /** @protected @nodts */
  constructor() {
   super();
  }
- /** @nodts @return {!Sub} */
+ /** @nodts @return {!SubJsType} */
  static $create__() {
-  Sub.$clinit();
-  let $instance = new Sub();
-  $instance.$ctor__jsmethod_JsMethodExample_Sub__void();
+  SubJsType.$clinit();
+  let $instance = new SubJsType();
+  $instance.$ctor__jsmethod_JsMethodExample_SubJsType__void();
   return $instance;
  }
  /** @nodts */
- $ctor__jsmethod_JsMethodExample_Sub__void() {
+ $ctor__jsmethod_JsMethodExample_SubJsType__void() {
   this.$ctor__jsmethod_JsMethodExample_Base__void();
  }
- /** @override */
- mString(/** ?string */ s) {}
+ /** @nodts */
+ m_m__java_lang_String__void(/** ?string */ s) {}
  //Bridge method.
  /** @final @override */
  m(/** ?string */ arg0) {
-  this.mString(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
+  this.m_m__java_lang_String__void(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
  }
  /** @nodts */
  static $clinit() {
-  Sub.$clinit = () =>{};
-  Sub.$loadModules();
+  SubJsType.$clinit = () =>{};
+  SubJsType.$loadModules();
   Base.$clinit();
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
-  return instance instanceof Sub;
+  return instance instanceof SubJsType;
  }
  
  /** @nodts */
@@ -51,9 +49,8 @@ class Sub extends Base {
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
  }
 }
-I.$markImplementor(Sub);
-$Util.$setClassMetadata(Sub, 'jsmethod.JsMethodExample$Sub');
+$Util.$setClassMetadata(SubJsType, 'jsmethod.JsMethodExample$SubJsType');
 
-exports = Sub;
+exports = SubJsType;
 
-//# sourceMappingURL=JsMethodExample$Sub.js.map
+//# sourceMappingURL=JsMethodExample$SubJsType.js.map

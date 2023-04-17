@@ -41,7 +41,7 @@ public class Main {
 
   /** Interface with JsMethod. */
   interface I<T extends Number> {
-    @JsMethod
+    @JsMethod(name = "fNumber")
     T fun(T t);
   }
 

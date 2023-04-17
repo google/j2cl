@@ -711,6 +711,8 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   private Map<String, String> getMangledNameToOverrideKeyMap(SourceLanguage sourceLanguage) {
     Map<String, String> overrideKeysByMangledName = new LinkedHashMap<>();
 
+    // Collect the mapping of mangled names to override keys from supertypes, these override keys
+    // are parameterized.
     getSuperTypesStream()
         .forEach(
             t ->
@@ -720,10 +722,22 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
       if (!declaredMethod.isPolymorphic()) {
         continue;
       }
-      // Two different JsMethods with different override key might have the same name. In
-      // those cases, we choose the last one in the super type hierarchy. It is safe because all
-      // the override keys corresponding to a JsMethod will have the same target otherwise it
-      // would not have passed restriction checking.
+
+      // Under normal circumstances, for each mangled name there would be exactly one
+      // override key, i.e. all the methods that are seen from this type and its supers with the
+      // same mangled name will have the same override key.
+
+      // But there are 2 exceptions:
+      //  - native JsMethods are exempt from the restrictions, so their different override keys can
+      //    map into the same name (here mangled name is a js name).
+      //  - kotlin redefines some collection methods that have the type variable instead of Object,
+      //    so those would have different override keys in the subtypes.
+      // These override keys are used to resolve the implementation that should handle it to
+      // eventually create the bridge, so in these two situations the target of the bridge might
+      // be incorrect.
+
+      // TODO(b/278288771): Assert that only one override key is added to the map after the bug is
+      // fixed.
       overrideKeysByMangledName.put(
           declaredMethod.getMangledName(), declaredMethod.getOverrideKey(sourceLanguage));
     }
@@ -827,13 +841,27 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
       MethodDescriptor bridgeMethodDescriptor,
       MethodDescriptor targetMethodDescriptor) {
 
+    boolean exposesJsMethod =
+        bridgeMethodDescriptor.isJsMember()
+            && getSuperTypeDescriptor() != null
+            && getSuperTypeDescriptor().getPolymorphicMethods().stream()
+                .noneMatch(
+                    m -> bridgeMethodDescriptor.getSimpleJsName().equals(m.getSimpleJsName()));
+
+    // Generalizing bridges are normally final since, in general, they will delegate to
+    // a specialized method that is the one that can be overridden by subclasses. The only
+    // exception is that when an accidental override exposes a JsMethod there isn't necessarily
+    // a specialized delegation and those can be overridden.
+    // TODO(b/271144313): Cleanup when a category EXPOSING_JSNAME_BRIDGE is added.
+    boolean isFinal = origin == MethodOrigin.GENERALIZING_BRIDGE && !exposesJsMethod;
+
     return MethodDescriptor.Builder.from(
             adjustParametersAndReturn(origin, targetMethodDescriptor, bridgeMethodDescriptor))
         .setOriginalJsInfo(bridgeMethodDescriptor.getJsInfo())
         .setEnclosingTypeDescriptor(this)
         .setDeclarationDescriptor(null)
         .makeBridge(origin, bridgeMethodDescriptor, targetMethodDescriptor)
-        .setFinal(origin == MethodOrigin.GENERALIZING_BRIDGE)
+        .setFinal(isFinal)
         .build();
   }
 

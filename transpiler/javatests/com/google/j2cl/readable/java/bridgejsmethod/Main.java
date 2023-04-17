@@ -31,7 +31,7 @@ public class Main {
 
   /** Interface with JsMethod. */
   public interface I<T extends Number> {
-    @JsMethod
+    @JsMethod(name = "mNumber")
     T fun(T t);
   }
 
@@ -191,7 +191,7 @@ public class Main {
     public void method(T t) {}
   }
 
-  class Parent<T extends Parent<T>> extends GrandParent<T> {
+  class Parent<T extends Parent<?>> extends GrandParent<T> {
     @Override
     @JsMethod
     // This method would have the signature jsMethod(Parent) hence it would be mangled as
@@ -220,5 +220,12 @@ public class Main {
 
     @Override
     public void method(T t) {}
+  }
+
+  class ChildWithRenamedOverride extends GrandParent<ChildWithRenamedOverride> {
+    @Override
+    @JsMethod(name = "renamedJsMethod")
+    // This method will be a JsMethod that is bridged from another JsMethod with a different name.
+    public void jsMethod(ChildWithRenamedOverride t) {}
   }
 }

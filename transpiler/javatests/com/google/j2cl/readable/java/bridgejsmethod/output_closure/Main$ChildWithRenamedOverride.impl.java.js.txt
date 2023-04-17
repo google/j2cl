@@ -1,0 +1,58 @@
+goog.module('bridgejsmethod.Main.ChildWithRenamedOverride$impl');
+
+const GrandParent = goog.require('bridgejsmethod.Main.GrandParent$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Main = goog.forwardDeclare('bridgejsmethod.Main$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @extends {GrandParent<ChildWithRenamedOverride>}
+ */
+class ChildWithRenamedOverride extends GrandParent {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {Main} @nodts*/
+  this.$outer_this__bridgejsmethod_Main_ChildWithRenamedOverride;
+ }
+ /** @nodts @return {!ChildWithRenamedOverride} */
+ static $create__bridgejsmethod_Main(/** Main */ $outer_this) {
+  ChildWithRenamedOverride.$clinit();
+  let $instance = new ChildWithRenamedOverride();
+  $instance.$ctor__bridgejsmethod_Main_ChildWithRenamedOverride__bridgejsmethod_Main__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__bridgejsmethod_Main_ChildWithRenamedOverride__bridgejsmethod_Main__void(/** Main */ $outer_this) {
+  this.$outer_this__bridgejsmethod_Main_ChildWithRenamedOverride = $outer_this;
+  this.$ctor__bridgejsmethod_Main_GrandParent__bridgejsmethod_Main__void($outer_this);
+ }
+ 
+ renamedJsMethod(/** ChildWithRenamedOverride */ t) {}
+ //Bridge method.
+ /** @final @override */
+ jsMethod(/** ChildWithRenamedOverride */ arg0) {
+  this.renamedJsMethod(/**@type {ChildWithRenamedOverride}*/ ($Casts.$to(arg0, ChildWithRenamedOverride)));
+ }
+ /** @nodts */
+ static $clinit() {
+  ChildWithRenamedOverride.$clinit = () =>{};
+  ChildWithRenamedOverride.$loadModules();
+  GrandParent.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ChildWithRenamedOverride;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(ChildWithRenamedOverride, 'bridgejsmethod.Main$ChildWithRenamedOverride');
+
+exports = ChildWithRenamedOverride;
+
+//# sourceMappingURL=Main$ChildWithRenamedOverride.js.map
