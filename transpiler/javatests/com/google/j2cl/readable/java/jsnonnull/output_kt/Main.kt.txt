@@ -122,7 +122,7 @@ open class Main {
 
  @ObjCName("JsnonnullMain_NonNullableStringSubNullableComparator", exact = true)
  open class NonNullableStringSubNullableComparator: Main.NullableStringComparator() {
-  open override fun compare(a: String, b: String): Int {
+  open override fun compare(a: String?, b: String?): Int {
    return 0
   }
  }
