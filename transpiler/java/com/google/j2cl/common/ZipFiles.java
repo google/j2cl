@@ -20,9 +20,11 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.common.collect.FluentIterable;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterators;
 import com.google.common.io.ByteSource;
 import com.google.common.io.Files;
+import com.google.j2cl.common.SourceUtils.FileInfo;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,7 +33,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 /** Small fill in for io.ZipFiles since it's not open source yet. */
-// TODO(dankurka): remove this once io.ZipFiles is open source.
 final class ZipFiles {
 
   private static final class ZipEntryByteSource extends ByteSource {
@@ -55,13 +56,15 @@ final class ZipFiles {
     }
   }
 
-  public static void unzipFile(File zipFile, File targetDirectory) throws IOException {
+  public static ImmutableList<FileInfo> unzipFile(File zipFile, File targetDirectory)
+      throws IOException {
     checkNotNull(zipFile);
     checkNotNull(targetDirectory);
     checkArgument(
         targetDirectory.isDirectory(),
         "%s is not a valid directory",
         targetDirectory.getAbsolutePath());
+    ImmutableList.Builder<FileInfo> results = new ImmutableList.Builder<>();
     final ZipFile zipFileObj = new ZipFile(zipFile);
     try {
       for (ZipEntry entry : entries(zipFileObj)) {
@@ -80,11 +83,13 @@ final class ZipFiles {
           }
           // Write the file to the destination.
           asByteSource(zipFileObj, entry).copyTo(Files.asByteSink(targetFile));
+          results.add(FileInfo.create(targetFile.toString(), entry.getName()));
         }
       }
     } finally {
       zipFileObj.close();
     }
+    return results.build();
   }
 
   /**

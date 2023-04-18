@@ -35,7 +35,7 @@ public class SourceUtils {
   @AutoValue
   public abstract static class FileInfo implements Comparable<FileInfo> {
 
-    private static FileInfo create(String sourcePath, String originalPath) {
+    static FileInfo create(String sourcePath, String originalPath) {
       return create(sourcePath, originalPath, originalPath);
     }
 
@@ -102,13 +102,7 @@ public class SourceUtils {
   private static ImmutableList<FileInfo> extractZip(
       String zipPath, Path sourcesDir, Problems problems) {
     try {
-      ZipFiles.unzipFile(new File(zipPath), sourcesDir.toFile());
-      try (Stream<Path> stream = Files.walk(sourcesDir)) {
-        return stream
-            .filter(Files::isRegularFile)
-            .map(p -> FileInfo.create(p.toString(), sourcesDir.relativize(p).toString()))
-            .collect(ImmutableList.toImmutableList());
-      }
+      return ZipFiles.unzipFile(new File(zipPath), sourcesDir.toFile());
     } catch (IOException e) {
       problems.fatal(FatalError.CANNOT_EXTRACT_ZIP, zipPath);
       return null;
