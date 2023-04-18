@@ -34,7 +34,7 @@ public abstract class EmulatedCharset extends Charset {
     }
 
     @Override
-    public byte[] getBytes(char[] buffer, int offset, int count) {
+    public byte[] getBytes(char[] buffer, int offset, int count, boolean throwOnInvalid) {
       int n = offset + count;
       byte[] bytes = new byte[0];
       // Pre-allocate to avoid re-sizing. Not using "new byte[n]" to avoid unnecessary init w/ `0`.
@@ -46,7 +46,7 @@ public abstract class EmulatedCharset extends Charset {
     }
 
     @Override
-    public byte[] getBytes(String str) {
+    public byte[] getBytes(String str, boolean throwOnInvalid) {
       int n = str.length();
       byte[] bytes = new byte[0];
       // Pre-allocate to avoid re-sizing. Not using "new byte[n]" to avoid unnecessary init w/ `0`.
@@ -150,28 +150,62 @@ public abstract class EmulatedCharset extends Charset {
     }
 
     @Override
-    public byte[] getBytes(char[] buffer, int offset, int count) {
+    public byte[] getBytes(char[] buffer, int offset, int count, boolean throwOnInvalid) {
       int n = offset + count;
       byte[] bytes = new byte[0];
       for (int i = offset; i < n; ) {
-        int ch = Character.codePointAt(buffer, i, n);
+        int ch = getCodePointAt(buffer, i, throwOnInvalid);
         i += Character.charCount(ch);
-        encodeUtf8(bytes, ch);
+        encodeUtf8(bytes, ch, throwOnInvalid);
       }
       return bytes;
     }
 
+    private static int getCodePointAt(char[] buffer, int pos, boolean throwOnInvalid) {
+      char high = buffer[pos];
+      // If it's not a surrogate we can just return the char directly.
+      if (!Character.isHighSurrogate(high)) {
+        return high;
+      }
+      char low = pos + 1 < buffer.length ? buffer[pos + 1] : 0xFF;
+      if (!Character.isLowSurrogate(low)) {
+        if (throwOnInvalid) {
+          throw new IllegalArgumentException("Invalid surrogate pair");
+        } else {
+          return '?';
+        }
+      }
+      return Character.toCodePoint(high, low);
+    }
+
     @Override
-    public byte[] getBytes(String str) {
+    public byte[] getBytes(String str, boolean throwOnInvalid) {
       // TODO(jat): consider using unescape(encodeURIComponent(bytes)) instead
       int n = str.length();
       byte[] bytes = new byte[0];
       for (int i = 0; i < n;) {
-        int ch = str.codePointAt(i);
+        int ch = getCodePointAt(str, i, n, throwOnInvalid);
         i += Character.charCount(ch);
-        encodeUtf8(bytes, ch);
+        encodeUtf8(bytes, ch, throwOnInvalid);
       }
       return bytes;
+    }
+
+    private static int getCodePointAt(String str, int pos, int length, boolean throwOnInvalid) {
+      char high = str.charAt(pos);
+      // If it's not a surrogate we can just return the char directly.
+      if (!Character.isHighSurrogate(high)) {
+        return high;
+      }
+      char low = pos + 1 < length ? str.charAt(pos + 1) : 0xFF;
+      if (!Character.isLowSurrogate(low)) {
+        if (throwOnInvalid) {
+          throw new IllegalArgumentException("Invalid surrogate pair");
+        } else {
+          return '?';
+        }
+      }
+      return Character.toCodePoint(high, low);
     }
 
     /**
@@ -181,7 +215,14 @@ public abstract class EmulatedCharset extends Charset {
      * @param codePoint character to encode
      * @throws IllegalArgumentException if codepoint >= 2^26
      */
-    private void encodeUtf8(byte[] bytes, int codePoint) {
+    private void encodeUtf8(byte[] bytes, int codePoint, boolean throwOnInvalid) {
+      if (codePoint >= (1 << 26)) {
+        if (throwOnInvalid) {
+          throw new IllegalArgumentException("Character out of range: " + codePoint);
+        } else {
+          codePoint = REPLACEMENT_CHAR;
+        }
+      }
       if (codePoint < (1 << 7)) {
         ArrayHelper.push(bytes, (byte) (codePoint & 127));
       } else if (codePoint < (1 << 11)) {
@@ -199,15 +240,13 @@ public abstract class EmulatedCharset extends Charset {
         ArrayHelper.push(bytes, (byte) (((codePoint >> 12) & 63) | 0x80));
         ArrayHelper.push(bytes, (byte) (((codePoint >> 6) & 63) | 0x80));
         ArrayHelper.push(bytes, (byte) ((codePoint & 63) | 0x80));
-      } else if (codePoint < (1 << 26)) {
+      } else { // codePoint < (1 << 26)
         // 111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx
         ArrayHelper.push(bytes, (byte) (((codePoint >> 24) & 3) | 0xF8));
         ArrayHelper.push(bytes, (byte) (((codePoint >> 18) & 63) | 0x80));
         ArrayHelper.push(bytes, (byte) (((codePoint >> 12) & 63) | 0x80));
         ArrayHelper.push(bytes, (byte) (((codePoint >> 6) & 63) | 0x80));
         ArrayHelper.push(bytes, (byte) ((codePoint & 63) | 0x80));
-      } else {
-        throw new IllegalArgumentException("Character out of range: " + codePoint);
       }
     }
   }
@@ -216,9 +255,17 @@ public abstract class EmulatedCharset extends Charset {
     super(name, null);
   }
 
-  public abstract byte[] getBytes(String string);
+  public final byte[] getBytes(String string) {
+    return getBytes(string, /* throwOnInvalid= */ false);
+  }
 
-  public abstract byte[] getBytes(char[] buffer, int offset, int count);
+  public abstract byte[] getBytes(String string, boolean throwOnInvalid);
+
+  public final byte[] getBytes(char[] buffer, int offset, int count) {
+    return getBytes(buffer, offset, count, /* throwOnInvalid= */ false);
+  }
+
+  public abstract byte[] getBytes(char[] buffer, int offset, int count, boolean throwOnInvalid);
 
   public final char[] decodeString(byte[] bytes, int ofs, int len) {
     return decodeString(bytes, ofs, len, /* throwOnInvalid= */ false);

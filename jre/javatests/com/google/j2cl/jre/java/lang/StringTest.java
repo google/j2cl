@@ -704,6 +704,27 @@ public class StringTest extends GWTTestCase {
       assertEquals("4th byte of " + i, (byte) 0x80 + (i & 63),
           bytes[4 * i + 3]);
     }
+
+    // Invalid unicode code point.
+    str = "\uFFFF";
+    bytes = str.getBytes(encoding);
+    assertEquals(3, bytes.length);
+    assertEquals((byte) 0xEF, bytes[0]);
+    assertEquals((byte) 0xBF, bytes[1]);
+    assertEquals((byte) 0xBF, bytes[2]);
+
+    // Invalid surrogate pair -- missing the second codepoint.
+    str = "\uD801";
+    bytes = str.getBytes(encoding);
+    assertEquals(1, bytes.length);
+    assertEquals((byte) 0x3F, bytes[0]);
+
+    // Invalid surrogate pair -- invalid low surrogate.
+    str = "\uD801 ";
+    bytes = str.getBytes(encoding);
+    assertEquals(2, bytes.length);
+    assertEquals((byte) 0x3F, bytes[0]);
+    assertEquals((byte) 0x20, bytes[1]);
   }
 
   /**

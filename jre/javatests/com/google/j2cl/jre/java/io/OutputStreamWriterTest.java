@@ -125,4 +125,26 @@ public class OutputStreamWriterTest extends GWTTestCase {
     } catch (IndexOutOfBoundsException expected) {
     }
   }
+
+  public void testWriteArrayInvalidCodepoint() throws IOException {
+    char[] chars = {'\uFFFF'};
+    writer.write(chars);
+    writer.close();
+    assertTrue(
+        Arrays.equals(new byte[] {(byte) 0xEF, (byte) 0xBF, (byte) 0xBF}, baos.toByteArray()));
+  }
+
+  public void testWriteArrayHighSurrogateAtEnd() throws IOException {
+    char[] chars = {'\uD801'};
+    writer.write(chars);
+    writer.close();
+    assertTrue(Arrays.equals(new byte[] {'?'}, baos.toByteArray()));
+  }
+
+  public void testWriteArrayHighSurrogateWithoutLowSurrogate() throws IOException {
+    char[] chars = {'\uD801', ' '};
+    writer.write(chars);
+    writer.close();
+    assertTrue(Arrays.equals(new byte[] {'?', ' '}, baos.toByteArray()));
+  }
 }
