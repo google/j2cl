@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Google Inc.
+ * Copyright 2023 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,25 +15,22 @@
  */
 package com.google.j2cl.integration.testing;
 
-import javaemul.internal.annotations.Wasm;
-
 /** Utility functions needed by integration tests. */
 public final class TestUtils {
   public static boolean isJvm() {
     return System.getProperty("java.version", null) != null;
   }
 
-  @Wasm("i32.const 1")
   public static boolean isWasm() {
     return false;
   }
 
   public static boolean isJavaScript() {
-    return !isJvm() && !isWasm();
+    return false;
   }
 
   public static boolean isJ2Kt() {
-    return false;
+    return true;
   }
 
   @SuppressWarnings({"TypeParameterUnusedInFormals", "unchecked"})
