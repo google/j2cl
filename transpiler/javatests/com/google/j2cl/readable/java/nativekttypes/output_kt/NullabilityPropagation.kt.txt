@@ -5,6 +5,7 @@
 package nativekttypes
 
 import javaemul.lang.*
+import kotlin.Any
 import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
@@ -13,63 +14,175 @@ import kotlin.native.ObjCName
 
 @ObjCName("NativekttypesNullabilityPropagation", exact = true)
 class NullabilityPropagation {
- interface NullabilityToPropagate {
-  @ObjCName("nullableReturnType1")
-  fun nullableReturnType1(): String?
+ interface NullabilityToPropagate<ExtendsNullable, ExtendsNonNull: Any> {
+  @ObjCName("getNullableString1")
+  fun getNullableString1(): String?
 
-  @ObjCName("nullableReturnType2")
-  fun nullableReturnType2(): String?
+  @ObjCName("getNullableString2")
+  fun getNullableString2(): String?
 
-  @ObjCName("nonNullReturnType1")
-  fun nonNullReturnType1(): String
+  @ObjCName("getNonNullString1")
+  fun getNonNullString1(): String
 
-  @ObjCName("nonNullReturnType2")
-  fun nonNullReturnType2(): String
+  @ObjCName("getNonNullString2")
+  fun getNonNullString2(): String
 
-  @ObjCName("nullableParameter1")
-  fun nullableParameter1(
+  @ObjCName("setNullableString1")
+  fun setNullableString1(
    @ObjCName("withNSString") s: String?
   )
 
-  @ObjCName("nullableParameter2")
-  fun nullableParameter2(
+  @ObjCName("setNullableString2")
+  fun setNullableString2(
    @ObjCName("withNSString") s: String?
   )
 
-  @ObjCName("nonNullParameter1")
-  fun nonNullParameter1(
+  @ObjCName("setNonNullString1")
+  fun setNonNullString1(
    @ObjCName("withNSString") s: String
   )
 
-  @ObjCName("nonNullParameter2")
-  fun nonNullParameter2(
+  @ObjCName("setNonNullString2")
+  fun setNonNullString2(
    @ObjCName("withNSString") s: String
+  )
+
+  @ObjCName("getNullableExtendsNullable1")
+  fun getNullableExtendsNullable1(): ExtendsNullable?
+
+  @ObjCName("getNullableExtendsNullable2")
+  fun getNullableExtendsNullable2(): ExtendsNullable?
+
+  @ObjCName("getNonNullExtendsNullable1")
+  fun getNonNullExtendsNullable1(): ExtendsNullable
+
+  @ObjCName("getNonNullExtendsNullable2")
+  fun getNonNullExtendsNullable2(): ExtendsNullable
+
+  @ObjCName("setNullableExtendsNullable1")
+  fun setNullableExtendsNullable1(
+   @ObjCName("withId") s: ExtendsNullable?
+  )
+
+  @ObjCName("setNullableExtendsNullable2")
+  fun setNullableExtendsNullable2(
+   @ObjCName("withId") s: ExtendsNullable?
+  )
+
+  @ObjCName("setNonNullExtendsNullable1")
+  fun setNonNullExtendsNullable1(
+   @ObjCName("withId") s: ExtendsNullable
+  )
+
+  @ObjCName("setNonNullExtendsNullable2")
+  fun setNonNullExtendsNullable2(
+   @ObjCName("withId") s: ExtendsNullable
+  )
+
+  @ObjCName("getNullableExtendsNonNull1")
+  fun getNullableExtendsNonNull1(): ExtendsNonNull?
+
+  @ObjCName("getNullableExtendsNonNull2")
+  fun getNullableExtendsNonNull2(): ExtendsNonNull?
+
+  @ObjCName("getNonNullExtendsNonNull1")
+  fun getNonNullExtendsNonNull1(): ExtendsNonNull
+
+  @ObjCName("getNonNullExtendsNonNull2")
+  fun getNonNullExtendsNonNull2(): ExtendsNonNull
+
+  @ObjCName("setNullableExtendsNonNull1")
+  fun setNullableExtendsNonNull1(
+   @ObjCName("withId") s: ExtendsNonNull?
+  )
+
+  @ObjCName("setNullableExtendsNonNull2")
+  fun setNullableExtendsNonNull2(
+   @ObjCName("withId") s: ExtendsNonNull?
+  )
+
+  @ObjCName("setNonNullExtendsNonNull1")
+  fun setNonNullExtendsNonNull1(
+   @ObjCName("withId") s: ExtendsNonNull
+  )
+
+  @ObjCName("setNonNullExtendsNonNull2")
+  fun setNonNullExtendsNonNull2(
+   @ObjCName("withId") s: ExtendsNonNull
   )
  }
 
- open inner class Subtype: NullabilityPropagation.NullabilityToPropagate {
-  open override fun nullableReturnType1(): String? {
+ open inner class Subtype: NullabilityPropagation.NullabilityToPropagate<String?, String> {
+  open override fun getNullableString1(): String? {
    return ""
   }
 
-  open override fun nullableReturnType2(): String {
+  open override fun getNullableString2(): String {
    return ""
   }
 
-  open override fun nonNullReturnType1(): String {
+  open override fun getNonNullString1(): String {
    return ""
   }
 
-  open override fun nonNullReturnType2(): String {
+  open override fun getNonNullString2(): String {
    return ""
   }
 
-  open override fun nullableParameter1(s: String?) {}
+  open override fun setNullableString1(s: String?) {}
 
-  open override fun nullableParameter2(s: String?) {}
+  open override fun setNullableString2(s: String?) {}
 
-  open override fun nonNullParameter1(s: String) {}
+  open override fun setNonNullString1(s: String) {}
 
-  open override fun nonNullParameter2(s: String) {}
+  open override fun setNonNullString2(s: String) {}
+
+  open override fun getNullableExtendsNullable1(): String? {
+   return ""
+  }
+
+  open override fun getNullableExtendsNullable2(): String {
+   return ""
+  }
+
+  open override fun getNonNullExtendsNullable1(): String? {
+   return ""
+  }
+
+  open override fun getNonNullExtendsNullable2(): String {
+   return ""
+  }
+
+  open override fun setNullableExtendsNullable1(s: String?) {}
+
+  open override fun setNullableExtendsNullable2(s: String?) {}
+
+  open override fun setNonNullExtendsNullable1(s: String?) {}
+
+  open override fun setNonNullExtendsNullable2(s: String?) {}
+
+  open override fun getNullableExtendsNonNull1(): String? {
+   return ""
+  }
+
+  open override fun getNullableExtendsNonNull2(): String {
+   return ""
+  }
+
+  open override fun getNonNullExtendsNonNull1(): String {
+   return ""
+  }
+
+  open override fun getNonNullExtendsNonNull2(): String {
+   return ""
+  }
+
+  open override fun setNullableExtendsNonNull1(s: String?) {}
+
+  open override fun setNullableExtendsNonNull2(s: String?) {}
+
+  open override fun setNonNullExtendsNonNull1(s: String) {}
+
+  open override fun setNonNullExtendsNonNull2(s: String) {}
  }
 }

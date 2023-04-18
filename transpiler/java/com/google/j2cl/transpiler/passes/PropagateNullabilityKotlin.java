@@ -25,6 +25,8 @@ import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeVariable;
+import java.util.Map;
 
 /** Propagates nullability in overrides in non-null-marked types. */
 public class PropagateNullabilityKotlin extends NormalizationPass {
@@ -61,20 +63,25 @@ public class PropagateNullabilityKotlin extends NormalizationPass {
         .findFirst()
         .map(
             overriddenMethodDescriptor ->
-                propagateNullability(overriddenMethodDescriptor, methodDescriptor))
+                propagateNullability(
+                    overriddenMethodDescriptor.getDeclarationDescriptor(), methodDescriptor))
         .orElse(methodDescriptor);
   }
 
   private static MethodDescriptor propagateNullability(MethodDescriptor from, MethodDescriptor to) {
+    Map<TypeVariable, TypeDescriptor> parametrization =
+        to.getEnclosingTypeDescriptor().getTransitiveParameterization();
     return MethodDescriptor.Builder.from(to)
         .setReturnTypeDescriptor(
             propagateReturnTypeNullability(
-                from.getReturnTypeDescriptor(), to.getReturnTypeDescriptor()))
+                specialize(parametrization, from.getReturnTypeDescriptor()),
+                to.getReturnTypeDescriptor()))
         .setParameterTypeDescriptors(
             Streams.zip(
                     from.getParameterTypeDescriptors().stream(),
                     to.getParameterTypeDescriptors().stream(),
-                    PropagateNullabilityKotlin::propagateParameterNullability)
+                    (fromTd, toTd) ->
+                        propagateParameterNullability(specialize(parametrization, fromTd), toTd))
                 .collect(toImmutableList()))
         .build();
   }
@@ -102,5 +109,21 @@ public class PropagateNullabilityKotlin extends NormalizationPass {
         method.getDescriptor().getParameterDescriptors().stream(),
         method.getParameters().stream(),
         (descriptor, parameter) -> parameter.setTypeDescriptor(descriptor.getTypeDescriptor()));
+  }
+
+  private static TypeDescriptor specialize(
+      Map<TypeVariable, TypeDescriptor> parametrization, TypeDescriptor parameter) {
+    if (parameter instanceof TypeVariable) {
+      TypeVariable typeVariable = (TypeVariable) parameter;
+      TypeDescriptor td = parametrization.get(typeVariable);
+      if (td != null) {
+        parameter = td;
+        if (!typeVariable.canBeNull()) {
+          parameter = parameter.toNonNullable();
+        }
+      }
+    }
+
+    return parameter;
   }
 }
