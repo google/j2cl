@@ -12,5 +12,4 @@ integration_test(
     name = "arithmeticexception",
     srcs = glob(["*.java"]),
     closure_defines = {"jre.checks.numeric": "'ENABLED'"},
-    enable_kt = True,
 )
