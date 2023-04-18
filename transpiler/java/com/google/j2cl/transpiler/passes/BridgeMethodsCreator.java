@@ -23,7 +23,6 @@ import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.JsInfo;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.SuperReference;
@@ -53,7 +52,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
   /** Returns bridge method that calls the targeted method in its body. */
   private static Method createBridgeMethod(Type type, MethodDescriptor bridgeMethodDescriptor) {
     MethodDescriptor targetMethod =
-        adjustTargetForJsFunction(bridgeMethodDescriptor, bridgeMethodDescriptor.getBridgeTarget());
+        adjustTargetForJsFunction(bridgeMethodDescriptor.getBridgeTarget());
 
     List<Variable> parameters =
         AstUtils.createParameterVariables(
@@ -110,23 +109,16 @@ public class BridgeMethodsCreator extends NormalizationPass {
             .build();
   }
 
-  private static MethodDescriptor adjustTargetForJsFunction(
-      MethodDescriptor causeMethod, MethodDescriptor targetMethod) {
+  private static MethodDescriptor adjustTargetForJsFunction(MethodDescriptor targetMethod) {
     if (!targetMethod.isJsFunction()) {
       return targetMethod;
     }
-    // The MethodDescriptor of the targeted method.
-    MethodDescriptor.Builder methodDescriptorBuilder = MethodDescriptor.Builder.from(targetMethod);
 
-    // If a JsFunction method needs a bridge, only the bridge method is a JsFunction method, and it
-    // targets to *real* implementation, which is not a JsFunction method.
-    // If both a method and the bridge method are JsMethod, only the bridge method is a JsMethod,
-    // and it targets the *real* implementation, which should emit as non-JsMethod.
-    if (causeMethod.isJsMethod() && targetMethod.inSameTypeAs(causeMethod)) {
-      methodDescriptorBuilder.removeParameterOptionality().setOriginalJsInfo(JsInfo.NONE);
-    }
-
-    return methodDescriptorBuilder.setJsFunction(false).build();
+    // If a JsFunction method needs a bridge, only the bridge method is actually a JsFunction
+    // method; the method that this bridge targets, which contains the *actual* implementation,
+    // becomes a regular method that is no longer a JsFunction method. This is done so that
+    // the forwarding call is correctly emitted as a method call.
+    return MethodDescriptor.Builder.from(targetMethod).setJsFunction(false).build();
   }
 
   private static String getJsDocDescription(MethodDescriptor bridgeMethodDescriptor) {
