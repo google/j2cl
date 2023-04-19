@@ -1025,16 +1025,7 @@ public class Assert {
      * #expectThrows}, this is sufficient, since exceptions are never interfaces.
      */
     private static boolean isInstanceOfTypeJ2cl(Object instance, Class<?> clazz) {
-        String className = clazz.getName();
-        // TODO(b/257126642): Remove the super-source file after getSuperClass is supported in j2kt.
-        // for (Class<?> type = instance.getClass(); type != null; type = type.getSuperclass()) {
-        //     if (type.getName().equals(className)) {
-        //       return true;
-        //     }
-        // }
-        // return false;
-
-        throw new AssertionError("not supported");
+      return clazz.isInstance(instance);
     }
 
     private static String buildPrefix(String message) {
