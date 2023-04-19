@@ -489,6 +489,15 @@ public class StringTest extends GWTTestCase {
         };
     assertEquals(utf8Replacement(4), new String(bytes, encoding));
     assertEquals(utf8Replacement(4), new String(bytes, Charset.forName(encoding)));
+
+    // Malformed case 6: First byte states length of 4 but actual length is 2.
+    bytes =
+        new byte[] {
+          (byte) 0xF0, // len 4
+          'a', // continuation
+        };
+    assertEquals(utf8Replacement(1) + "a", new String(bytes, encoding));
+    assertEquals(utf8Replacement(1) + "a", new String(bytes, Charset.forName(encoding)));
   }
 
   public void testContains() {

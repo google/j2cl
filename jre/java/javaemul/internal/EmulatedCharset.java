@@ -112,7 +112,11 @@ public abstract class EmulatedCharset extends Charset {
 
         int end = i + count - 1;
         if (end > len) {
-          throw new IndexOutOfBoundsException();
+          if (throwOnInvalid) {
+            throw new IndexOutOfBoundsException();
+          } else {
+            invalid = true;
+          }
         }
 
         while (!invalid && i < end) {
