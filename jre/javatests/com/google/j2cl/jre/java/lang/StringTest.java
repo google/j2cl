@@ -395,6 +395,26 @@ public class StringTest extends GWTTestCase {
     } catch (IndexOutOfBoundsException expected) {
     }
 
+    // Byte count edge boundaries.
+    bytes = new byte[] {0x00};
+    assertEquals("\u0000", new String(bytes, encoding));
+    assertEquals("\u0000", new String(bytes, Charset.forName(encoding)));
+    bytes = new byte[] {0x7F};
+    assertEquals("\u007F", new String(bytes, encoding));
+    assertEquals("\u007F", new String(bytes, Charset.forName(encoding)));
+    bytes = new byte[] {(byte) 0xC2, (byte) 0x80};
+    assertEquals("\u0080", new String(bytes, encoding));
+    assertEquals("\u0080", new String(bytes, Charset.forName(encoding)));
+    bytes = new byte[] {(byte) 0xDF, (byte) 0xBF};
+    assertEquals("\u07FF", new String(bytes, encoding));
+    assertEquals("\u07FF", new String(bytes, Charset.forName(encoding)));
+    bytes = new byte[] {(byte) 0xE0, (byte) 0xA0, (byte) 0x80};
+    assertEquals("\u0800", new String(bytes, encoding));
+    assertEquals("\u0800", new String(bytes, Charset.forName(encoding)));
+    bytes = new byte[] {(byte) 0xEF, (byte) 0xBF, (byte) 0xBD};
+    assertEquals("\uFFFD", new String(bytes, encoding));
+    assertEquals("\uFFFD", new String(bytes, Charset.forName(encoding)));
+
     // Malformed case 1: Overlong encoding for '$'. We'll attempt 2, 3, and 4 bytes.
     bytes =
         new byte[] {

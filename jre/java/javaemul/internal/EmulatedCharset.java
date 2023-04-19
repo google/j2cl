@@ -109,27 +109,25 @@ public abstract class EmulatedCharset extends Charset {
           invalid = true;
           count = 1;
         }
-        if (i + count - 1 > len) {
+
+        int end = i + count - 1;
+        if (end > len) {
           throw new IndexOutOfBoundsException();
         }
 
-        // If none of the bits have been set and this isn't NUL, then this is an over-long encoding
-        // and should be rejected.
-        if (ch == 0 && count > 1) {
-          invalid = true;
-        }
-
-        while (!invalid && --count > 0) {
+        while (!invalid && i < end) {
           byte b = bytes[ofs + i++];
           if ((b & 0xC0) != 0x80) {
             // If the byte doesn't have continuation markers then this is unexpected as this is a
-            // start of a new char. We'll break and a start a new run from here.
+            // start of a new char. We'll break here, decrement the i, and reread it as if it were
+            // the start of a new run.
             invalid = true;
+            i--;
           } else {
             ch = (ch << 6) | (b & 63);
           }
         }
-        if (invalid) {
+        if (invalid || isOverlong(ch, count)) {
           if (throwOnInvalid) {
             throw new IllegalArgumentException();
           } else {
@@ -147,6 +145,12 @@ public abstract class EmulatedCharset extends Charset {
       // We might have over allocated initially; resize back.
       ArrayHelper.setLength(chars, outIdx);
       return chars;
+    }
+
+    private static boolean isOverlong(int codepoint, int count) {
+      return (codepoint <= 0x7F && count > 1)
+          || (codepoint <= 0x07FF && count > 2)
+          || (codepoint <= 0xFFFF && count > 3);
     }
 
     @Override
