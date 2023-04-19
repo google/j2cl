@@ -21,7 +21,6 @@ import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_NA
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_NATIVE_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_OBJECTIVE_C_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_OUT_ANNOTATION_NAME;
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_PROPAGATE_NULLABILITY_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_PROPERTY_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.SUPPRESS_WARNINGS_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.findAnnotationBindingByName;
@@ -49,12 +48,6 @@ public class KtInteropAnnotationUtils {
   public static IAnnotationBinding getKtDisabledAnnotation(
       IAnnotationBinding[] annotationBindings) {
     return findAnnotationBindingByName(annotationBindings, KT_DISABLED_ANNOTATION_NAME);
-  }
-
-  public static IAnnotationBinding getKtPropagateNullabilityAnnotation(
-      IAnnotationBinding[] annotationBindings) {
-    return findAnnotationBindingByName(
-        annotationBindings, KT_PROPAGATE_NULLABILITY_ANNOTATION_NAME);
   }
 
   public static String getKtObjectiveCName(IAnnotationBinding annotationBinding) {

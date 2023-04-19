@@ -15,174 +15,145 @@ import kotlin.native.ObjCName
 @ObjCName("NativekttypesNullabilityPropagation", exact = true)
 class NullabilityPropagation {
  interface NullabilityToPropagate<ExtendsNullable, ExtendsNonNull: Any> {
-  @ObjCName("getNullableString1")
-  fun getNullableString1(): String?
-
-  @ObjCName("getNullableString2")
-  fun getNullableString2(): String?
-
-  @ObjCName("getNonNullString1")
-  fun getNonNullString1(): String
-
-  @ObjCName("getNonNullString2")
-  fun getNonNullString2(): String
-
-  @ObjCName("setNullableString1")
-  fun setNullableString1(
+  @ObjCName("nullableString1")
+  fun nullableString1(
    @ObjCName("withNSString") s: String?
-  )
+  ): String?
 
-  @ObjCName("setNullableString2")
-  fun setNullableString2(
+  @ObjCName("nullableString2")
+  fun nullableString2(
    @ObjCName("withNSString") s: String?
-  )
+  ): String?
 
-  @ObjCName("setNonNullString1")
-  fun setNonNullString1(
+  @ObjCName("nonNullString1")
+  fun nonNullString1(
    @ObjCName("withNSString") s: String
-  )
+  ): String
 
-  @ObjCName("setNonNullString2")
-  fun setNonNullString2(
+  @ObjCName("nonNullString2")
+  fun nonNullString2(
    @ObjCName("withNSString") s: String
-  )
+  ): String
 
-  @ObjCName("getNullableExtendsNullable1")
-  fun getNullableExtendsNullable1(): ExtendsNullable?
-
-  @ObjCName("getNullableExtendsNullable2")
-  fun getNullableExtendsNullable2(): ExtendsNullable?
-
-  @ObjCName("getNonNullExtendsNullable1")
-  fun getNonNullExtendsNullable1(): ExtendsNullable
-
-  @ObjCName("getNonNullExtendsNullable2")
-  fun getNonNullExtendsNullable2(): ExtendsNullable
-
-  @ObjCName("setNullableExtendsNullable1")
-  fun setNullableExtendsNullable1(
+  @ObjCName("nullableExtendsNullable1")
+  fun nullableExtendsNullable1(
    @ObjCName("withId") s: ExtendsNullable?
-  )
+  ): ExtendsNullable?
 
-  @ObjCName("setNullableExtendsNullable2")
-  fun setNullableExtendsNullable2(
+  @ObjCName("nullableExtendsNullable2")
+  fun nullableExtendsNullable2(
    @ObjCName("withId") s: ExtendsNullable?
-  )
+  ): ExtendsNullable?
 
-  @ObjCName("setNonNullExtendsNullable1")
-  fun setNonNullExtendsNullable1(
+  @ObjCName("nonNullExtendsNullable1")
+  fun nonNullExtendsNullable1(
    @ObjCName("withId") s: ExtendsNullable
-  )
+  ): ExtendsNullable
 
-  @ObjCName("setNonNullExtendsNullable2")
-  fun setNonNullExtendsNullable2(
+  @ObjCName("nonNullExtendsNullable2")
+  fun nonNullExtendsNullable2(
    @ObjCName("withId") s: ExtendsNullable
-  )
+  ): ExtendsNullable
 
-  @ObjCName("getNullableExtendsNonNull1")
-  fun getNullableExtendsNonNull1(): ExtendsNonNull?
-
-  @ObjCName("getNullableExtendsNonNull2")
-  fun getNullableExtendsNonNull2(): ExtendsNonNull?
-
-  @ObjCName("getNonNullExtendsNonNull1")
-  fun getNonNullExtendsNonNull1(): ExtendsNonNull
-
-  @ObjCName("getNonNullExtendsNonNull2")
-  fun getNonNullExtendsNonNull2(): ExtendsNonNull
-
-  @ObjCName("setNullableExtendsNonNull1")
-  fun setNullableExtendsNonNull1(
+  @ObjCName("nullableExtendsNonNull1")
+  fun nullableExtendsNonNull1(
    @ObjCName("withId") s: ExtendsNonNull?
-  )
+  ): ExtendsNonNull?
 
-  @ObjCName("setNullableExtendsNonNull2")
-  fun setNullableExtendsNonNull2(
+  @ObjCName("nullableExtendsNonNull2")
+  fun nullableExtendsNonNull2(
    @ObjCName("withId") s: ExtendsNonNull?
-  )
+  ): ExtendsNonNull?
 
-  @ObjCName("setNonNullExtendsNonNull1")
-  fun setNonNullExtendsNonNull1(
+  @ObjCName("nonNullExtendsNonNull1")
+  fun nonNullExtendsNonNull1(
    @ObjCName("withId") s: ExtendsNonNull
-  )
+  ): ExtendsNonNull
 
-  @ObjCName("setNonNullExtendsNonNull2")
-  fun setNonNullExtendsNonNull2(
+  @ObjCName("nonNullExtendsNonNull2")
+  fun nonNullExtendsNonNull2(
    @ObjCName("withId") s: ExtendsNonNull
-  )
+  ): ExtendsNonNull
+
+  @ObjCName("nonNullStringTransitive")
+  fun nonNullStringTransitive(
+   @ObjCName("withNSString") s: String
+  ): String
+
+  @ObjCName("nonNullStringDoubleOverride")
+  fun nonNullStringDoubleOverride(
+   @ObjCName("withNSString") s: String
+  ): String
  }
 
- open inner class Subtype: NullabilityPropagation.NullabilityToPropagate<String?, String> {
-  open override fun getNullableString1(): String? {
-   return ""
+ fun interface Interface {
+  @ObjCName("nonNullStringDoubleOverride")
+  fun nonNullStringDoubleOverride(
+   @ObjCName("withNSString") s: String
+  ): String
+ }
+
+ open inner class Subtype: NullabilityPropagation.NullabilityToPropagate<String?, String>, NullabilityPropagation.Interface {
+  open override fun nullableString1(s: String?): String? {
+   return s
   }
 
-  open override fun getNullableString2(): String {
-   return ""
+  open override fun nullableString2(s: String?): String {
+   return s!!
   }
 
-  open override fun getNonNullString1(): String {
-   return ""
+  open override fun nonNullString1(s: String): String {
+   return s
   }
 
-  open override fun getNonNullString2(): String {
-   return ""
+  open override fun nonNullString2(s: String): String {
+   return s
   }
 
-  open override fun setNullableString1(s: String?) {}
-
-  open override fun setNullableString2(s: String?) {}
-
-  open override fun setNonNullString1(s: String) {}
-
-  open override fun setNonNullString2(s: String) {}
-
-  open override fun getNullableExtendsNullable1(): String? {
-   return ""
+  open override fun nullableExtendsNullable1(s: String?): String? {
+   return s
   }
 
-  open override fun getNullableExtendsNullable2(): String {
-   return ""
+  open override fun nullableExtendsNullable2(s: String?): String {
+   return s!!
   }
 
-  open override fun getNonNullExtendsNullable1(): String? {
-   return ""
+  open override fun nonNullExtendsNullable1(s: String?): String? {
+   return s
   }
 
-  open override fun getNonNullExtendsNullable2(): String {
-   return ""
+  open override fun nonNullExtendsNullable2(s: String?): String {
+   return s!!
   }
 
-  open override fun setNullableExtendsNullable1(s: String?) {}
-
-  open override fun setNullableExtendsNullable2(s: String?) {}
-
-  open override fun setNonNullExtendsNullable1(s: String?) {}
-
-  open override fun setNonNullExtendsNullable2(s: String?) {}
-
-  open override fun getNullableExtendsNonNull1(): String? {
-   return ""
+  open override fun nullableExtendsNonNull1(s: String?): String? {
+   return s
   }
 
-  open override fun getNullableExtendsNonNull2(): String {
-   return ""
+  open override fun nullableExtendsNonNull2(s: String?): String {
+   return s!!
   }
 
-  open override fun getNonNullExtendsNonNull1(): String {
-   return ""
+  open override fun nonNullExtendsNonNull1(s: String): String {
+   return s
   }
 
-  open override fun getNonNullExtendsNonNull2(): String {
-   return ""
+  open override fun nonNullExtendsNonNull2(s: String): String {
+   return s
   }
 
-  open override fun setNullableExtendsNonNull1(s: String?) {}
+  open override fun nonNullStringTransitive(s: String): String {
+   return s
+  }
 
-  open override fun setNullableExtendsNonNull2(s: String?) {}
+  open override fun nonNullStringDoubleOverride(s: String): String {
+   return s
+  }
+ }
 
-  open override fun setNonNullExtendsNonNull1(s: String) {}
-
-  open override fun setNonNullExtendsNonNull2(s: String) {}
+ open inner class SubSubType: NullabilityPropagation.Subtype() {
+  open override fun nonNullStringTransitive(s: String): String {
+   return s
+  }
  }
 }

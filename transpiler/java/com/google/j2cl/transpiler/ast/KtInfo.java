@@ -28,8 +28,6 @@ public abstract class KtInfo {
 
   public abstract boolean isDisabled();
 
-  public abstract boolean isNullabilityPropagationEnabled();
-
   public abstract boolean isUninitializedWarningSuppressed();
 
   @Nullable
@@ -41,7 +39,6 @@ public abstract class KtInfo {
     return new AutoValue_KtInfo.Builder()
         .setProperty(false)
         .setDisabled(false)
-        .setNullabilityPropagationEnabled(false)
         .setUninitializedWarningSuppressed(false);
   }
 
@@ -51,8 +48,6 @@ public abstract class KtInfo {
     public abstract Builder setProperty(boolean isProperty);
 
     public abstract Builder setDisabled(boolean isDisabled);
-
-    public abstract Builder setNullabilityPropagationEnabled(boolean isEnabled);
 
     public abstract Builder setUninitializedWarningSuppressed(boolean isLateInit);
 

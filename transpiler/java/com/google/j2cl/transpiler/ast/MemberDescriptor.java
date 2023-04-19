@@ -60,10 +60,6 @@ public abstract class MemberDescriptor
     return getKtInfo().isProperty() ? KtInfo.computePropertyName(name) : name;
   }
 
-  public boolean isNullabilityPropagationEnabled() {
-    return getKtInfo().isNullabilityPropagationEnabled();
-  }
-
   public boolean isKtDisabled() {
     return getKtInfo().isDisabled();
   }

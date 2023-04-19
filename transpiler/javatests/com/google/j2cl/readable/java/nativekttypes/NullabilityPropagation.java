@@ -15,7 +15,6 @@
  */
 package nativekttypes;
 
-import javaemul.internal.annotations.KtPropagateNullability;
 import jsinterop.annotations.JsNonNull;
 import org.jspecify.nullness.NullMarked;
 import org.jspecify.nullness.Nullable;
@@ -23,174 +22,116 @@ import org.jspecify.nullness.Nullable;
 public final class NullabilityPropagation {
   @NullMarked
   interface NullabilityToPropagate<ExtendsNullable extends @Nullable Object, ExtendsNonNull> {
-    @KtPropagateNullability
-    @Nullable String getNullableString1();
+    @Nullable String nullableString1(@Nullable String s);
 
-    @KtPropagateNullability
-    @Nullable String getNullableString2();
+    @Nullable String nullableString2(@Nullable String s);
 
-    @KtPropagateNullability
-    String getNonNullString1();
+    String nonNullString1(String s);
 
-    @KtPropagateNullability
-    String getNonNullString2();
+    String nonNullString2(String s);
 
-    @KtPropagateNullability
-    void setNullableString1(@Nullable String s);
+    @Nullable ExtendsNullable nullableExtendsNullable1(@Nullable ExtendsNullable s);
 
-    @KtPropagateNullability
-    void setNullableString2(@Nullable String s);
+    @Nullable ExtendsNullable nullableExtendsNullable2(@Nullable ExtendsNullable s);
 
-    @KtPropagateNullability
-    void setNonNullString1(String s);
+    ExtendsNullable nonNullExtendsNullable1(ExtendsNullable s);
 
-    @KtPropagateNullability
-    void setNonNullString2(String s);
+    ExtendsNullable nonNullExtendsNullable2(ExtendsNullable s);
 
-    @KtPropagateNullability
-    @Nullable ExtendsNullable getNullableExtendsNullable1();
+    @Nullable ExtendsNonNull nullableExtendsNonNull1(@Nullable ExtendsNonNull s);
 
-    @KtPropagateNullability
-    @Nullable ExtendsNullable getNullableExtendsNullable2();
+    @Nullable ExtendsNonNull nullableExtendsNonNull2(@Nullable ExtendsNonNull s);
 
-    @KtPropagateNullability
-    ExtendsNullable getNonNullExtendsNullable1();
+    ExtendsNonNull nonNullExtendsNonNull1(ExtendsNonNull s);
 
-    @KtPropagateNullability
-    ExtendsNullable getNonNullExtendsNullable2();
+    ExtendsNonNull nonNullExtendsNonNull2(ExtendsNonNull s);
 
-    @KtPropagateNullability
-    void setNullableExtendsNullable1(@Nullable ExtendsNullable s);
+    String nonNullStringTransitive(String s);
 
-    @KtPropagateNullability
-    void setNullableExtendsNullable2(@Nullable ExtendsNullable s);
-
-    @KtPropagateNullability
-    void setNonNullExtendsNullable1(ExtendsNullable s);
-
-    @KtPropagateNullability
-    void setNonNullExtendsNullable2(ExtendsNullable s);
-
-    @KtPropagateNullability
-    @Nullable ExtendsNonNull getNullableExtendsNonNull1();
-
-    @KtPropagateNullability
-    @Nullable ExtendsNonNull getNullableExtendsNonNull2();
-
-    @KtPropagateNullability
-    ExtendsNonNull getNonNullExtendsNonNull1();
-
-    @KtPropagateNullability
-    ExtendsNonNull getNonNullExtendsNonNull2();
-
-    @KtPropagateNullability
-    void setNullableExtendsNonNull1(@Nullable ExtendsNonNull s);
-
-    @KtPropagateNullability
-    void setNullableExtendsNonNull2(@Nullable ExtendsNonNull s);
-
-    @KtPropagateNullability
-    void setNonNullExtendsNonNull1(ExtendsNonNull s);
-
-    @KtPropagateNullability
-    void setNonNullExtendsNonNull2(ExtendsNonNull s);
+    String nonNullStringDoubleOverride(String s);
   }
 
-  class Subtype implements NullabilityToPropagate<String, String> {
+  @NullMarked
+  interface Interface {
+    String nonNullStringDoubleOverride(String s);
+  }
+
+  class Subtype implements NullabilityToPropagate<String, String>, Interface {
     @Override
-    public String getNullableString1() {
-      return "";
+    public String nullableString1(String s) {
+      return s;
     }
 
     @Override
-    public @JsNonNull String getNullableString2() {
-      return "";
+    public @JsNonNull String nullableString2(@JsNonNull String s) {
+      return s;
     }
 
     @Override
-    public String getNonNullString1() {
-      return "";
+    public String nonNullString1(String s) {
+      return s;
     }
 
     @Override
-    public @JsNonNull String getNonNullString2() {
-      return "";
+    public @JsNonNull String nonNullString2(@JsNonNull String s) {
+      return s;
     }
 
     @Override
-    public void setNullableString1(String s) {}
-
-    @Override
-    public void setNullableString2(@JsNonNull String s) {}
-
-    @Override
-    public void setNonNullString1(String s) {}
-
-    @Override
-    public void setNonNullString2(@JsNonNull String s) {}
-
-    @Override
-    public String getNullableExtendsNullable1() {
-      return "";
+    public String nullableExtendsNullable1(String s) {
+      return s;
     }
 
     @Override
-    public @JsNonNull String getNullableExtendsNullable2() {
-      return "";
+    public @JsNonNull String nullableExtendsNullable2(@JsNonNull String s) {
+      return s;
     }
 
     @Override
-    public String getNonNullExtendsNullable1() {
-      return "";
+    public String nonNullExtendsNullable1(String s) {
+      return s;
     }
 
     @Override
-    public @JsNonNull String getNonNullExtendsNullable2() {
-      return "";
+    public @JsNonNull String nonNullExtendsNullable2(@JsNonNull String s) {
+      return s;
     }
 
     @Override
-    public void setNullableExtendsNullable1(String s) {}
-
-    @Override
-    public void setNullableExtendsNullable2(@JsNonNull String s) {}
-
-    @Override
-    public void setNonNullExtendsNullable1(String s) {}
-
-    @Override
-    public void setNonNullExtendsNullable2(@JsNonNull String s) {}
-
-    @Override
-    public String getNullableExtendsNonNull1() {
-      return "";
+    public String nullableExtendsNonNull1(String s) {
+      return s;
     }
 
     @Override
-    public @JsNonNull String getNullableExtendsNonNull2() {
-      return "";
+    public @JsNonNull String nullableExtendsNonNull2(@JsNonNull String s) {
+      return s;
     }
 
     @Override
-    public String getNonNullExtendsNonNull1() {
-      return "";
+    public String nonNullExtendsNonNull1(String s) {
+      return s;
     }
 
     @Override
-    public @JsNonNull String getNonNullExtendsNonNull2() {
-      return "";
+    public @JsNonNull String nonNullExtendsNonNull2(@JsNonNull String s) {
+      return s;
     }
 
     @Override
-    public void setNullableExtendsNonNull1(String s) {}
+    public String nonNullStringTransitive(String s) {
+      return s;
+    }
 
     @Override
-    public void setNullableExtendsNonNull2(@JsNonNull String s) {}
+    public String nonNullStringDoubleOverride(String s) {
+      return s;
+    }
+  }
 
+  class SubSubType extends Subtype {
     @Override
-    public void setNonNullExtendsNonNull1(String s) {}
-
-    @Override
-    public void setNonNullExtendsNonNull2(@JsNonNull String s) {}
+    public String nonNullStringTransitive(String s) {
+      return s;
+    }
   }
 }

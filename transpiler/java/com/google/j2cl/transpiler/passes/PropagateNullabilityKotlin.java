@@ -20,7 +20,6 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import com.google.common.collect.Streams;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
-import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Node;
@@ -42,7 +41,6 @@ public class PropagateNullabilityKotlin extends NormalizationPass {
             if (getCurrentType().getDeclaration().isNullMarked()) {
               return method;
             }
-
             return propagateNullability(method);
           }
         });
@@ -59,7 +57,7 @@ public class PropagateNullabilityKotlin extends NormalizationPass {
 
   private static MethodDescriptor propagateNullability(MethodDescriptor methodDescriptor) {
     return methodDescriptor.getJavaOverriddenMethodDescriptors().stream()
-        .filter(MemberDescriptor::isNullabilityPropagationEnabled)
+        .filter(md -> md.getEnclosingTypeDescriptor().getTypeDeclaration().isNullMarked())
         .findFirst()
         .map(
             overriddenMethodDescriptor ->
