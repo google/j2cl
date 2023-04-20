@@ -37,6 +37,7 @@ load(":j2wasm_library.bzl", "J2WASM_LIB_ATTRS", "j2wasm_library")
 # Packages that j2cl rule will generage j2kt jvm packages by default. Used to simplify test
 # rules.
 _J2KT_JVM_PACKAGES = [
+    "third_party/java_src/google_common/current/java/com/google/common/annotations",
     "benchmarking/java/com/google/j2cl/benchmarks/octane/raytrace",
     "build_defs/internal_do_not_use",
     "transpiler/javatests/com/google/j2cl/integration/java",
