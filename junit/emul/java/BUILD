@@ -33,7 +33,7 @@ j2kt_native_library(
     srcs = glob(
         ["**/*.java"],
         exclude = [
-            "org/junit/Assert.java",
+            "org/junit/Platform.java",
         ],
     ),
     javacopts = [

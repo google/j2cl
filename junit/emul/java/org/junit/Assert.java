@@ -991,13 +991,13 @@ public class Assert {
      */
     public static <T extends Throwable> T assertThrows(String message, Class<T> expectedThrowable,
             ThrowingRunnable runnable) {
-        // Sanity check due to b/31386321.
-        assertFalse("Class metadata is corrupt", isInstanceOfTypeJ2cl(new Object(), String.class));
+    // Sanity check due to b/31386321.
+    assertFalse("Class metadata is corrupt", Platform.isInstanceOfType(new Object(), String.class));
 
         try {
             runnable.run();
         } catch (Throwable actualThrown) {
-            if (isInstanceOfTypeJ2cl(actualThrown, expectedThrowable)) {
+      if (Platform.isInstanceOfType(actualThrown, expectedThrowable)) {
                 @SuppressWarnings("unchecked") T retVal = (T) actualThrown;
                 return retVal;
             } else {
@@ -1016,22 +1016,6 @@ public class Assert {
             + expectedThrowable.getName()
             + " to be thrown, but nothing was thrown";
         throw new AssertionError(notThrownMessage);
-    }
-
-    // ADDED FOR J2CL
-    /**
-     * Returns true if the {@code instance} is assignable to the type {@code clazz}. In J2CL,
-     * {@code clazz} can only be a concrete type, not an interface. For the purposes of {@link
-     * #expectThrows}, this is sufficient, since exceptions are never interfaces.
-     */
-    private static boolean isInstanceOfTypeJ2cl(Object instance, Class<?> clazz) {
-        String className = clazz.getName();
-        for (Class<?> type = instance.getClass(); type != null; type = type.getSuperclass()) {
-            if (type.getName().equals(className)) {
-              return true;
-            }
-        }
-        return false;
     }
 
     private static String buildPrefix(String message) {
