@@ -11,5 +11,4 @@ package(
 integration_test(
     name = "wideningfloat",
     srcs = ["Main.java"],
-    enable_kt_native = False,
 )
