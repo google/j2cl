@@ -588,7 +588,7 @@ fun Renderer.variableSource(variable: Variable): Source =
   colonSeparated(
     nameSource(variable),
     variable.typeDescriptor.let {
-      sourceIf(it.isKtDenotable && !it.isProtobufBuilder()) { typeDescriptorSource(it) }
+      sourceIf(it.isKtDenotableNonWildcard && !it.isProtobufBuilder()) { typeDescriptorSource(it) }
     }
   )
 

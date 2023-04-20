@@ -40,7 +40,7 @@ private fun TypeArgument.makeNonNull() = copy(typeDescriptor = typeDescriptor.ma
 internal fun TypeArgument.toNonNullable() = copy(typeDescriptor = typeDescriptor.toNonNullable())
 
 internal val TypeArgument.isDenotable
-  get() = typeDescriptor.isKtDenotableAsTypeArgument
+  get() = typeDescriptor.isKtDenotableNonWildcard
 
 internal val ArrayTypeDescriptor.typeArgument
   get() = typeArgument(TypeVariable.createWildcard(), componentTypeDescriptor)

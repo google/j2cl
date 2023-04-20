@@ -96,7 +96,7 @@ internal fun TypeDescriptor.contains(
     else -> false
   }
 
-internal val TypeDescriptor.isKtDenotableAsTypeArgument: Boolean
+internal val TypeDescriptor.isKtDenotableNonWildcard: Boolean
   get() =
     when (this) {
       is TypeVariable -> !isWildcard && isKtDenotable
