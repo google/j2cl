@@ -567,7 +567,15 @@ public class NormalizeConstructors extends NormalizationPass {
                 .setStatic(true)
                 .setName(MethodDescriptor.CREATE_METHOD_NAME)
                 .setConstructor(false)
-                .setReturnTypeDescriptor(builder.getEnclosingTypeDescriptor().toNonNullable())
+                .setReturnTypeDescriptor(
+                    // JsFunction implementation constructors actually return a function, not an
+                    // object of the class.
+                    builder.getEnclosingTypeDescriptor().isJsFunctionImplementation()
+                        ? builder
+                            .getEnclosingTypeDescriptor()
+                            .getFunctionalInterface()
+                            .toNonNullable()
+                        : builder.getEnclosingTypeDescriptor().toNonNullable())
                 .addTypeParameterTypeDescriptors(
                     0,
                     builder

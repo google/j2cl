@@ -20,20 +20,55 @@ import static com.google.common.base.Preconditions.checkState;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.Method;
+import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.Type;
-import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 
 /** Creates the devirtualized methods for devirtualized boxed types. */
 public class DevirtualizeBoxedTypesAndJsFunctionImplementations extends NormalizationPass {
+
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
+    rewriteJsFunctionImplementationCalls(compilationUnit);
+    devirtualizeTypes(compilationUnit);
+  }
+
+  /**
+   * Eliminates calls to the JsFunction implementation method and replaces them for calls to the
+   * interface method. This is done so that in the final state there are no calls to implementation
+   * method since it only exposed as the function and is not devirtualized, nor accessible by its
+   * property name. This also allows further simplifications of the backend.
+   */
+  private void rewriteJsFunctionImplementationCalls(CompilationUnit compilationUnit) {
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          @Override
+          public Expression rewriteMethodCall(MethodCall methodCall) {
+            MethodDescriptor target = methodCall.getTarget();
+            DeclaredTypeDescriptor enclosingTypeDescriptor = target.getEnclosingTypeDescriptor();
+            if (target.isJsFunction() && enclosingTypeDescriptor.isJsFunctionImplementation()) {
+              // Replace the call to the method in the implementation for the JsFunction method it
+              // overrides, which is a method in the JsFunction interface.
+              MethodDescriptor jsFunctionInterfaceMethodDescriptor =
+                  enclosingTypeDescriptor.getJsFunctionMethodDescriptor();
+              checkState(target.isOverride(jsFunctionInterfaceMethodDescriptor));
+              return MethodCall.Builder.from(methodCall)
+                  .setTarget(jsFunctionInterfaceMethodDescriptor)
+                  .build();
+            }
+            return methodCall;
+          }
+        });
+  }
+
+  private void devirtualizeTypes(CompilationUnit compilationUnit) {
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
@@ -87,30 +122,11 @@ public class DevirtualizeBoxedTypesAndJsFunctionImplementations extends Normaliz
               return false;
             }
 
-            if (isActualJsFunction(methodDescriptor)) {
+            if (methodDescriptor.isJsFunction()) {
               return false;
             }
             return true;
           }
         });
-  }
-
-  private static boolean isActualJsFunction(MethodDescriptor methodDescriptor) {
-    // If the user specialized the JsFunction, then the JsFunction method will have a different
-    // signature from the overridden method from the JsFunction interface.
-    // In this case there will be a bridge that will become the actual JsFunction implementation
-    // that delegates to the user written JsFunction method. Both methods are marked as JsFunction
-    // (it would be better if the bridge creator removed the JsFunction property on the specialized
-    // method). The user written specialized would need to be devirtualized.
-    TypeDescriptor enclosingTypeDescriptor = methodDescriptor.getEnclosingTypeDescriptor();
-    return methodDescriptor.isJsFunction()
-        && methodDescriptor
-            .getMangledName()
-            .equals(
-                enclosingTypeDescriptor
-                    .getFunctionalInterface()
-                    .getJsFunctionMethodDescriptor()
-                    .getDeclarationDescriptor()
-                    .getMangledName());
   }
 }

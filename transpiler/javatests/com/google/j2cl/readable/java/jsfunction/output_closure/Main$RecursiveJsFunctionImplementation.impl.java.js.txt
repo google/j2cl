@@ -1,0 +1,61 @@
+goog.module('jsfunction.Main.RecursiveJsFunctionImplementation$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
+
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ */
+class RecursiveJsFunctionImplementation extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {function(RecursiveJsFunctionImplementation):void} */
+ static $create__() {
+  let $instance = new RecursiveJsFunctionImplementation();
+  $instance.$ctor__jsfunction_Main_RecursiveJsFunctionImplementation__void();
+  return $Util.$makeLambdaFunction(RecursiveJsFunctionImplementation.prototype.m_call__java_lang_Object__void, $instance, RecursiveJsFunctionImplementation.$copy);
+ }
+ /** @nodts */
+ $ctor__jsfunction_Main_RecursiveJsFunctionImplementation__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_call__jsfunction_Main_RecursiveJsFunctionImplementation__jsfunction_Main_RecursiveJsFunctionImplementation__void(/** !RecursiveJsFunctionImplementation */ $thisArg, /** RecursiveJsFunctionImplementation */ t) {
+  RecursiveJsFunctionImplementation.$clinit();
+ }
+ //Bridge method.
+ /** @final */
+ m_call__java_lang_Object__void(/** RecursiveJsFunctionImplementation */ arg0) {
+  RecursiveJsFunctionImplementation.m_call__jsfunction_Main_RecursiveJsFunctionImplementation__jsfunction_Main_RecursiveJsFunctionImplementation__void(this, /**@type {RecursiveJsFunctionImplementation}*/ ($Casts.$to(arg0, RecursiveJsFunctionImplementation)));
+ }
+ /** @nodts */
+ static $clinit() {
+  RecursiveJsFunctionImplementation.$clinit = () =>{};
+  RecursiveJsFunctionImplementation.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$is__jsfunction_Main_RecursiveJsFunctionImplementation;
+ }
+ /** @nodts */
+ static $copy(/** ? */ from, /** ? */ to) {
+  to.$is__jsfunction_Main_RecursiveJsFunctionImplementation = true;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$JavaScriptFunction.$markImplementor(RecursiveJsFunctionImplementation);
+$Util.$setClassMetadata(RecursiveJsFunctionImplementation, 'jsfunction.Main$RecursiveJsFunctionImplementation');
+
+exports = RecursiveJsFunctionImplementation;
+
+//# sourceMappingURL=Main$RecursiveJsFunctionImplementation.js.map

@@ -1425,9 +1425,12 @@ public class JsInteropRestrictionsChecker {
       return;
     }
 
-    if (memberDescriptor.isJsFunction()) {
-      checkJsFunctionMethodSignature(type, (Method) member);
-      return;
+    if (member.isMethod()) {
+      Method method = (Method) member;
+      if (method.getDescriptor().isOrOverridesJsFunction()) {
+        checkJsFunctionMethodSignature(type, method);
+        return;
+      }
     }
 
     checkMustBeJsOverlay(member, messagePrefix);
@@ -1437,7 +1440,7 @@ public class JsInteropRestrictionsChecker {
     Set<TypeDeclaration> foundJsFunctions = new LinkedHashSet<>();
 
     Queue<MethodDescriptor> unexploredJsFunctionMethods = new ArrayDeque<>();
-    unexploredJsFunctionMethods.offer(type.getTypeDescriptor().getJsFunctionMethodDescriptor());
+    unexploredJsFunctionMethods.offer(method.getDescriptor());
 
     MethodDescriptor jsFunctionMethod;
     while ((jsFunctionMethod = unexploredJsFunctionMethods.poll()) != null) {
@@ -1453,7 +1456,7 @@ public class JsInteropRestrictionsChecker {
       // only explore further the newly found jsfunctions.
       referencedTypes.forEach(
           t -> {
-            if (!t.isJsFunctionInterface() && !t.isJsFunctionImplementation()) {
+            if (!t.isJsFunctionInterface()) {
               return;
             }
             DeclaredTypeDescriptor jsFunctionType = (DeclaredTypeDescriptor) t;
@@ -1562,9 +1565,11 @@ public class JsInteropRestrictionsChecker {
 
     checkImplementableStatically(member, "JsFunction implementation");
 
-    if (memberDescriptor.isJsFunction()) {
-      checkJsFunctionMethodSignature(type, (Method) member);
-      return;
+    if (member.isMethod()) {
+      Method method = (Method) member;
+      if (method.getDescriptor().isOrOverridesJsFunction()) {
+        checkJsFunctionMethodSignature(type, method);
+      }
     }
   }
 

@@ -164,8 +164,13 @@ public class ConvertMethodReferencesToLambdas extends NormalizationPass {
       MethodDescriptor targetMethodDescriptor,
       boolean isStaticDispatch) {
 
+    // Remove type parameters for the JsFunction method to avoid introducing them in the parameters
+    // of the lambda expression. That is done because the type for functions in Closure can not
+    // define templates.
+    MethodDescriptor jsFunctionMethodDescriptor =
+        functionalMethodDescriptor.withoutTypeParameters();
     List<Variable> parameters =
-        AstUtils.createParameterVariables(functionalMethodDescriptor.getParameterTypeDescriptors());
+        AstUtils.createParameterVariables(jsFunctionMethodDescriptor.getParameterTypeDescriptors());
 
     // Does the method reference have a qualifier? I.e., the qualifier is not null and is not a
     // class name (modeled as a JavaScriptConstructorReference). Used in unqualified instance

@@ -106,8 +106,7 @@ class ClosureTypesGenerator {
 
     DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
 
-    if (declaredTypeDescriptor.isJsFunctionInterface()
-        || declaredTypeDescriptor.isJsFunctionImplementation()) {
+    if (declaredTypeDescriptor.isJsFunctionInterface()) {
       return getClosureTypeForJsFunction(declaredTypeDescriptor);
     }
 
@@ -180,9 +179,11 @@ class ClosureTypesGenerator {
 
   /** Returns the Closure type for a @JsFunction type descriptor. */
   private ClosureType getClosureTypeForJsFunction(DeclaredTypeDescriptor typeDescriptor) {
-    checkArgument(
-        typeDescriptor.isJsFunctionInterface() || typeDescriptor.isJsFunctionImplementation());
-    MethodDescriptor functionalMethodDescriptor = typeDescriptor.getJsFunctionMethodDescriptor();
+    checkArgument(typeDescriptor.isJsFunctionInterface());
+    // Remove type parameters from the JsFunction method since there we cant declare in closure
+    // a template on a function type.
+    MethodDescriptor functionalMethodDescriptor =
+        typeDescriptor.getJsFunctionMethodDescriptor().withoutTypeParameters();
     return withNullability(
         new ClosureFunctionType(
             toClosureTypeParameters(functionalMethodDescriptor),

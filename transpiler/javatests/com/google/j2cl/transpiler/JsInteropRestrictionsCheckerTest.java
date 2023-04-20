@@ -1626,13 +1626,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "    T extends Comparable<T> & TypeVariableWithIntersectionBound<T>> {",
             "  void m(T f);",
             "}",
-            "@JsFunction interface JsFunctionWithErrorInImplementation {",
-            "  void m(RecursiveJsFunctionImplementation f);",
-            "}",
-            "final class RecursiveJsFunctionImplementation implements",
-            "    JsFunctionWithErrorInImplementation {",
-            "  public void m(RecursiveJsFunctionImplementation f) {}",
-            "}",
             "@JsFunction interface JsFunctionWithRecursiveBoundInMethod {",
             "  <T extends JsFunctionWithRecursiveBoundInMethod> void m(T f);",
             "}",
@@ -1702,9 +1695,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "JsFunction 'void IndirectReferenceThroughJsFunction.m("
                 + "JsFunctionNotInvolvedInCycle<IndirectReferenceThroughJsFunction> f)' cannot "
                 + "refer recursively to itself (b/153591461).",
-            "JsFunction 'void RecursiveJsFunctionImplementation.m("
-                + "RecursiveJsFunctionImplementation f)' cannot refer recursively to "
-                + "itself (b/153591461).",
             "JsFunction 'void JsFunctionWithRecursiveBoundInMethod.m(T f)' cannot refer "
                 + "recursively to itself (b/153591461).");
   }

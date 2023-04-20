@@ -265,7 +265,7 @@ public final class LambdaAdaptorTypeDescriptors {
   /** Returns the MethodDescriptor for the single method in the synthetic @JsFunction interface. */
   private static MethodDescriptor createJsFunctionMethodDescriptor(
       DeclaredTypeDescriptor jsfunctionTypeDescriptor, MethodDescriptor singleAbstractMethod) {
-    // TODO(rluble): Migrate to MethodDescriptor.tranform.
+    // TODO(rluble): Migrate to MethodDescriptor.transform.
     return MethodDescriptor.Builder.from(singleAbstractMethod)
         .setEnclosingTypeDescriptor(jsfunctionTypeDescriptor)
         .setDeclarationDescriptor(
@@ -280,7 +280,6 @@ public final class LambdaAdaptorTypeDescriptors {
                 .setJsAsync(singleAbstractMethod.getJsInfo().isJsAsync())
                 .build())
         .setNative(false)
-        .setJsFunction(true)
         .build()
         .withoutTypeParameters();
   }

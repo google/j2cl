@@ -204,7 +204,7 @@ class Lambdas extends j_l_Object {
  static m_identity__lambdas_Lambdas_GenericJsFunction() {
   Lambdas.$clinit();
   if ($Equality.$same(Lambdas.f_identityFunction__lambdas_Lambdas_, null)) {
-   Lambdas.f_identityFunction__lambdas_Lambdas_ = IdentityFunction.$create__();
+   Lambdas.f_identityFunction__lambdas_Lambdas_ = /**@type {IdentityFunction}*/ (IdentityFunction.$create__());
   }
   return /**@type {?function(E):E}*/ (Lambdas.f_identityFunction__lambdas_Lambdas_);
  }
@@ -303,7 +303,7 @@ class Lambdas extends j_l_Object {
   $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
  }
 }
-/**@type {?function(*):*} @nodts*/
+/**@type {IdentityFunction} @nodts*/
 Lambdas.f_identityFunction__lambdas_Lambdas_;
 $Util.$setClassMetadata(Lambdas, 'lambdas.Lambdas');
 

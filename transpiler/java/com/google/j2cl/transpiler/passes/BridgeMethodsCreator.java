@@ -51,8 +51,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
 
   /** Returns bridge method that calls the targeted method in its body. */
   private static Method createBridgeMethod(Type type, MethodDescriptor bridgeMethodDescriptor) {
-    MethodDescriptor targetMethod =
-        adjustTargetForJsFunction(bridgeMethodDescriptor.getBridgeTarget());
+    MethodDescriptor targetMethod = bridgeMethodDescriptor.getBridgeTarget();
 
     List<Variable> parameters =
         AstUtils.createParameterVariables(
@@ -107,18 +106,6 @@ public class BridgeMethodsCreator extends NormalizationPass {
             .setExpression(parameterReference)
             .setCastTypeDescriptor(requiredType)
             .build();
-  }
-
-  private static MethodDescriptor adjustTargetForJsFunction(MethodDescriptor targetMethod) {
-    if (!targetMethod.isJsFunction()) {
-      return targetMethod;
-    }
-
-    // If a JsFunction method needs a bridge, only the bridge method is actually a JsFunction
-    // method; the method that this bridge targets, which contains the *actual* implementation,
-    // becomes a regular method that is no longer a JsFunction method. This is done so that
-    // the forwarding call is correctly emitted as a method call.
-    return MethodDescriptor.Builder.from(targetMethod).setJsFunction(false).build();
   }
 
   private static String getJsDocDescription(MethodDescriptor bridgeMethodDescriptor) {

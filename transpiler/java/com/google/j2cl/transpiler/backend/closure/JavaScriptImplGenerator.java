@@ -36,7 +36,6 @@ import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.SourceLanguage;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
-import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.Visibility;
 import java.util.HashMap;
@@ -393,30 +392,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       jsDocBuilder.append(" @template ").append(templateParamNames);
     }
 
-    if (type.getDeclaration().isJsFunctionImplementation()
-        && methodDescriptor.isInstanceMember()
-        && !method.getBody().getStatements().isEmpty()) {
-      // TODO(b/120800425): Solve the object<->function duality in JsFunction implementations in a
-      // more principled way.
-      if (methodDescriptor.getName().startsWith("$ctor")) {
-        // ctor treats the JsFunction implementation as a class to invoke java.lang.Object ctor
-        // method. Do not redefine @this, instead suppress invalid casts to allow casting this to
-        // a function if needed.
-        jsDocBuilder.append(" @suppress {invalidCasts}");
-      } else {
-        // Using @this redefines enclosing class of a method, hence any template variables defined
-        // in the class need to be declared in the method.
-        for (TypeVariable typeVariable : type.getDeclaration().getTypeParameterDescriptors()) {
-          jsDocBuilder
-              .append(" @template ")
-              .append(closureTypesGenerator.getClosureTypeString(typeVariable));
-        }
-        jsDocBuilder
-            .append(" @this {")
-            .append(closureTypesGenerator.getClosureTypeString(type.getTypeDescriptor()))
-            .append("}");
-      }
-    }
     String returnTypeName =
         closureTypesGenerator.getClosureTypeString(methodDescriptor.getReturnTypeDescriptor());
     if (needsReturnJsDoc(methodDescriptor)) {

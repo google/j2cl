@@ -130,15 +130,15 @@ class Main extends j_l_Object {
  }
  /** @nodts */
  m_testJsFunction__void() {
-  let a = AFunction.$create__();
+  let a = /**@type {AFunction}*/ (AFunction.$create__());
   let o1 = j_l_Object.$create__();
   let o2 = j_l_Object.$create__();
-  a(0, o1, o2);
-  a(0);
-  a(0, o1, o2);
-  a(0);
+  /**@type {function(number, ...*):*}*/ (a)(0, o1, o2);
+  /**@type {function(number, ...*):*}*/ (a)(0);
+  /**@type {function(number, ...*):*}*/ (a)(0, o1, o2);
+  /**@type {function(number, ...*):*}*/ (a)(0);
   let os = [o1, o2];
-  a(0, ...InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(os));
+  /**@type {function(number, ...*):*}*/ (a)(0, ...InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(os));
  }
  /** @nodts */
  m_testSideEffect__void() {

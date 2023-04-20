@@ -242,9 +242,9 @@
       // Lazy initialize the field.
       identityFunction = new IdentityFunction();
     }] => [if ($Equality.$same(Lambdas.f_identityFunction__lambdas_Lambdas_, null)) {
-   Lambdas.f_identityFunction__lambdas_Lambdas_ = IdentityFunction.$create__();
+   Lambdas.f_identityFunction__lambdas_Lambdas_ = /**@type {IdentityFunction}*/ (IdentityFunction.$create__());
   }] "lambdas.Lambdas.identity"
-[identityFunction = new IdentityFunction();] => [Lambdas.f_identityFunction__lambdas_Lambdas_ = IdentityFunction.$create__();] "lambdas.Lambdas.identity"
+[identityFunction = new IdentityFunction();] => [Lambdas.f_identityFunction__lambdas_Lambdas_ = /**@type {IdentityFunction}*/ (IdentityFunction.$create__());] "lambdas.Lambdas.identity"
 [return (GenericJsFunction<E, E>) identityFunction;] => [return /**@type {?function(E):E}*/ (Lambdas.f_identityFunction__lambdas_Lambdas_);] "lambdas.Lambdas.identity"
 [testJsInteropLambdas] => [m_testJsInteropLambdas__void]
 [{
@@ -332,6 +332,6 @@
 [Lambdas] => [Lambdas.$loadModules();] "lambdas.Lambdas.<clinit>"
 [Lambdas] => [j_l_Object.$clinit();] "lambdas.Lambdas.<clinit>"
 [private static IdentityFunction identityFunction = null;] => [Lambdas.f_identityFunction__lambdas_Lambdas_ = null;] "lambdas.Lambdas.<clinit>"
-[Lambdas] => [/**@type {?function(*):*} @nodts*/
+[Lambdas] => [/**@type {IdentityFunction} @nodts*/
 Lambdas.f_identityFunction__lambdas_Lambdas_;]
 [identityFunction] => [f_identityFunction__lambdas_Lambdas_]

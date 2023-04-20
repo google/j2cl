@@ -436,11 +436,10 @@ public final class AstUtils {
       DeclaredTypeDescriptor lambdaType, Expression instance) {
     checkArgument(lambdaType.isJsFunctionImplementation());
 
-    // Use the method from the interface instead instead of the implementation method, since it is
-    // the appropriate semantic behaviour. The function might be called(directly as a function) from
+    // Use the method from the interface instead of the implementation method, since it is the
+    // appropriate semantic behaviour. The function might be called (directly as a function) from
     // as a @JsFunction which might require dispatch through the bridge.
-    MethodDescriptor jsFunctionMethodDescriptor =
-        lambdaType.getFunctionalInterface().getJsFunctionMethodDescriptor();
+    MethodDescriptor jsFunctionMethodDescriptor = lambdaType.getJsFunctionMethodDescriptor();
 
     // Class.prototype.apply
     String functionalMethodMangledName = jsFunctionMethodDescriptor.getMangledName();

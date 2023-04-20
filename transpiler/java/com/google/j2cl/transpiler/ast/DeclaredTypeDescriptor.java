@@ -196,17 +196,17 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         .collect(onlyElement());
   }
 
+  /**
+   * Returns the functional method of the JsFunction interface for JsFunction interfaces and
+   * implementations, otherwise {@code null},
+   */
   @Memoized
   @Nullable
   public MethodDescriptor getJsFunctionMethodDescriptor() {
-    // TODO(b/208830469): When a function expression is a JsFunction we remove the type parameters
-    // from the method descriptor. This is due to closure not supporting template variables in
-    // function types. This removal instead should happen in the backend when emitting the type.
-    return getDeclaredMethodDescriptors().stream()
-        .filter(MethodDescriptor::isJsFunction)
-        .findFirst()
-        .map(MethodDescriptor::withoutTypeParameters)
-        .orElse(null);
+    DeclaredTypeDescriptor functionalInterface = getFunctionalInterface();
+    return functionalInterface.isJsFunctionInterface()
+        ? functionalInterface.getSingleAbstractMethodDescriptor()
+        : null;
   }
 
   @Nullable

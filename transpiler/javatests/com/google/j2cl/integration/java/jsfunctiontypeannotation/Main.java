@@ -110,5 +110,5 @@ public class Main {
   }
 
   @JsMethod
-  public static native double callOnFunction(A f);
+  public static native double callOnFunction(ApplyFunction<Double, Double> f);
 }

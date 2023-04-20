@@ -54,10 +54,8 @@ import com.google.j2cl.transpiler.frontend.common.PackageInfoCache;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
@@ -79,9 +77,6 @@ import org.eclipse.jdt.core.dom.PrefixExpression;
 
 /** Environment used to manipulate JDT internal representations. */
 class JdtEnvironment {
-
-  private ITypeBinding javaLangObjectTypeBinding;
-
   private final Map<ITypeBinding, DeclaredTypeDescriptor>
       cachedDeclaredTypeDescriptorByTypeBindingInNullMarkedScope = new HashMap<>();
 
@@ -882,7 +877,6 @@ class JdtEnvironment {
         .setOriginalKtInfo(ktInfo)
         .setKtObjcInfo(KtInteropUtils.getKtObjcInfo(methodBinding))
         .setWasmInfo(getWasmInfo(methodBinding))
-        .setJsFunction(isOrOverridesJsFunctionMethod(methodBinding))
         .setVisibility(visibility)
         .setStatic(isStatic)
         .setConstructor(isConstructor)
@@ -945,66 +939,6 @@ class JdtEnvironment {
         "value");
   }
 
-  private boolean isOrOverridesJsFunctionMethod(IMethodBinding methodBinding) {
-    ITypeBinding declaringType = methodBinding.getDeclaringClass();
-    if (JsInteropUtils.isJsFunction(declaringType)
-        && declaringType.getFunctionalInterfaceMethod() != null
-        && methodBinding.getMethodDeclaration()
-            == declaringType.getFunctionalInterfaceMethod().getMethodDeclaration()) {
-      return true;
-    }
-    for (IMethodBinding overriddenMethodBinding : getOverriddenMethods(methodBinding)) {
-      if (isOrOverridesJsFunctionMethod(overriddenMethodBinding)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  public Set<IMethodBinding> getOverriddenMethods(IMethodBinding methodBinding) {
-    return getOverriddenMethodsInType(methodBinding, methodBinding.getDeclaringClass());
-  }
-
-  private Set<IMethodBinding> getOverriddenMethodsInType(
-      IMethodBinding methodBinding, ITypeBinding typeBinding) {
-    Set<IMethodBinding> overriddenMethods = new HashSet<>();
-    for (IMethodBinding declaredMethod : typeBinding.getDeclaredMethods()) {
-      if (methodBinding.overrides(declaredMethod) && !methodBinding.isConstructor()) {
-        checkArgument(!Modifier.isStatic(methodBinding.getModifiers()));
-        overriddenMethods.add(declaredMethod);
-      }
-    }
-    // Recurse into immediate super class and interfaces for overridden method.
-    if (typeBinding.getSuperclass() != null) {
-      overriddenMethods.addAll(
-          getOverriddenMethodsInType(methodBinding, typeBinding.getSuperclass()));
-    }
-    for (ITypeBinding interfaceBinding : typeBinding.getInterfaces()) {
-      overriddenMethods.addAll(getOverriddenMethodsInType(methodBinding, interfaceBinding));
-    }
-
-    ITypeBinding javaLangObjectTypeBinding = this.javaLangObjectTypeBinding;
-    if (typeBinding != javaLangObjectTypeBinding) {
-      for (IMethodBinding objectMethodBinding : javaLangObjectTypeBinding.getDeclaredMethods()) {
-        if (!isPolymorphic(objectMethodBinding)) {
-          continue;
-        }
-        checkState(!getVisibility(objectMethodBinding).isPackagePrivate());
-        if (methodBinding.isSubsignature(objectMethodBinding)) {
-          overriddenMethods.add(objectMethodBinding);
-        }
-      }
-    }
-
-    return overriddenMethods;
-  }
-
-  private static boolean isPolymorphic(IMethodBinding methodBinding) {
-    return !methodBinding.isConstructor()
-        && !isStatic(methodBinding)
-        && !Modifier.isPrivate(methodBinding.getModifiers());
-  }
-
   private static boolean isLocal(ITypeBinding typeBinding) {
     return typeBinding.isLocal();
   }
@@ -1022,8 +956,6 @@ class JdtEnvironment {
   }
 
   public void initWellKnownTypes(AST ast, Iterable<ITypeBinding> typeBindings) {
-    javaLangObjectTypeBinding = ast.resolveWellKnownType("java.lang.Object");
-
     if (TypeDescriptors.isInitialized()) {
       return;
     }

@@ -74,7 +74,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import javax.annotation.Nullable;
@@ -665,21 +664,6 @@ class JavaEnvironment {
         returnTypeDescriptor);
   }
 
-  boolean isOrOverridesJsFunctionMethod(ExecutableElement methodBinding) {
-    Element declaringType = methodBinding.getEnclosingElement();
-    if (JsInteropUtils.isJsFunction(declaringType)
-        && methodBinding.equals(
-            getFunctionalInterfaceMethodDecl(declaringType.asType()).baseSymbol())) {
-      return true;
-    }
-    for (MethodSymbol overriddenMethodBinding : getOverriddenMethods(methodBinding)) {
-      if (isOrOverridesJsFunctionMethod(overriddenMethodBinding)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   /** Create a MethodDescriptor directly based on the given JavaC ExecutableElement. */
   MethodDescriptor createDeclarationMethodDescriptor(ExecutableElement methodElement) {
     DeclaredTypeDescriptor enclosingTypeDescriptor =
@@ -881,7 +865,6 @@ class JavaEnvironment {
         .setReturnTypeDescriptor(isConstructor ? enclosingTypeDescriptor : returnTypeDescriptor)
         .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
         .setOriginalJsInfo(jsInfo)
-        .setJsFunction(isOrOverridesJsFunctionMethod(declarationMethodElement))
         .setVisibility(visibility)
         .setStatic(isStatic)
         .setConstructor(isConstructor)
@@ -907,10 +890,6 @@ class JavaEnvironment {
   /** Returns true if the element is annotated with @HasNoSideEffects. */
   private static boolean isAnnotatedWithHasNoSideEffects(Element element) {
     return AnnotationUtils.hasAnnotation(element, "javaemul.internal.annotations.HasNoSideEffects");
-  }
-
-  public Set<MethodSymbol> getOverriddenMethods(ExecutableElement method) {
-    return javacTypes.getOverriddenMethods(method);
   }
 
   private boolean isJavaLangObjectOverride(MethodSymbol method) {

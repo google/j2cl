@@ -138,6 +138,10 @@ public class VerifyNormalizedUnits extends NormalizationPass {
             verifyStaticMemberQualifiers(methodCall);
             if (verifyForWasm) {
               checkState(!methodCall.isPolymorphic() || methodCall.getQualifier().isIdempotent());
+            } else if (methodCall.getTarget().isJsFunction()) {
+              // There are no calls to the JsFunction implementation method.
+              checkState(
+                  methodCall.getTarget().getEnclosingTypeDescriptor().isJsFunctionInterface());
             }
           }
 

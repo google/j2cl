@@ -1,0 +1,62 @@
+goog.module('jsfunction.Main.RecursiveParametricJsFunctionImplementation$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
+
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @template T
+ */
+class RecursiveParametricJsFunctionImplementation extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {function(T):void} */
+ static $create__() {
+  let $instance = new RecursiveParametricJsFunctionImplementation();
+  $instance.$ctor__jsfunction_Main_RecursiveParametricJsFunctionImplementation__void();
+  return $Util.$makeLambdaFunction(RecursiveParametricJsFunctionImplementation.prototype.m_call__java_lang_Object__void, $instance, RecursiveParametricJsFunctionImplementation.$copy);
+ }
+ /** @nodts */
+ $ctor__jsfunction_Main_RecursiveParametricJsFunctionImplementation__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @template T */
+ static m_call__jsfunction_Main_RecursiveParametricJsFunctionImplementation__jsfunction_Main_ParametricJsFunction__void(/** !RecursiveParametricJsFunctionImplementation<T> */ $thisArg, /** T */ t) {
+  RecursiveParametricJsFunctionImplementation.$clinit();
+ }
+ //Bridge method.
+ /** @final */
+ m_call__java_lang_Object__void(/** T */ arg0) {
+  RecursiveParametricJsFunctionImplementation.m_call__jsfunction_Main_RecursiveParametricJsFunctionImplementation__jsfunction_Main_ParametricJsFunction__void(this, /**@type {T}*/ ($Casts.$to(arg0, $JavaScriptFunction)));
+ }
+ /** @nodts */
+ static $clinit() {
+  RecursiveParametricJsFunctionImplementation.$clinit = () =>{};
+  RecursiveParametricJsFunctionImplementation.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$is__jsfunction_Main_RecursiveParametricJsFunctionImplementation;
+ }
+ /** @nodts */
+ static $copy(/** ? */ from, /** ? */ to) {
+  to.$is__jsfunction_Main_RecursiveParametricJsFunctionImplementation = true;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$JavaScriptFunction.$markImplementor(RecursiveParametricJsFunctionImplementation);
+$Util.$setClassMetadata(RecursiveParametricJsFunctionImplementation, 'jsfunction.Main$RecursiveParametricJsFunctionImplementation');
+
+exports = RecursiveParametricJsFunctionImplementation;
+
+//# sourceMappingURL=Main$RecursiveParametricJsFunctionImplementation.js.map

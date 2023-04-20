@@ -340,7 +340,7 @@ public class Main {
   }
 
   @JsMethod
-  public static native double callOnFunction(DoubleDoubleJsBiFunction f);
+  public static native double callOnFunction(JsBiFunction<Double, Double> f);
 
   public static void testCast() {
     Object o = new TIntegerJsBiFunction<String>();
@@ -362,12 +362,24 @@ public class Main {
 
   @JsType(isNative = true, name = "Array", namespace = JsPackage.GLOBAL)
   interface TestJsFunctionInJsOverlayCapturingOuter {
+
     @JsOverlay
     default void test() {
       sort(a -> TestJsFunctionInJsOverlayCapturingOuter.this == null ? 0 : 1);
     }
 
     void sort(JsFunctionInterface func);
+  }
+
+  private static final class RecursiveParametricJsFunctionImplementation<
+          T extends ParametricJsFunction<T>>
+      implements ParametricJsFunction<T> {
+    public void call(T t) {}
+  }
+
+  private static final class RecursiveJsFunctionImplementation
+      implements ParametricJsFunction<RecursiveJsFunctionImplementation> {
+    public void call(RecursiveJsFunctionImplementation t) {}
   }
 
   @JsFunction
@@ -377,4 +389,5 @@ public class Main {
 
   // Repro for b/153176433.
   private static void acceptsParameterizedMethod(ParameterizedMethod m) {}
+
 }

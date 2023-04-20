@@ -51,8 +51,8 @@ class Main extends j_l_Object {
  }
  /** @nodts */
  m_testJsFunction__void() {
-  let func = JsFunctionImplementation.$create__();
-  func(10);
+  let func = /**@type {JsFunctionImplementation}*/ (JsFunctionImplementation.$create__());
+  /**@type {function(number):number}*/ (func)(10);
   Main.m_callFn__jsfunction_Main_JsFunctionInterface__int__int(Main.createNativeFunction(), 10);
   let a = func.f_field__jsfunction_Main_JsFunctionImplementation;
   JsFunctionImplementation.m_bar__jsfunction_Main_JsFunctionImplementation__int(func);
@@ -207,27 +207,27 @@ class Main extends j_l_Object {
   return f(u, v);
  }
  /** @nodts @return {*} */
- static m_callImplementorRaw__jsfunction_Main_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer__java_lang_Object(/** ?function(*, Integer):* */ f, /** * */ o, /** Integer */ n) {
+ static m_callImplementorRaw__jsfunction_Main_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer__java_lang_Object(/** TIntegerJsBiFunction */ f, /** * */ o, /** Integer */ n) {
   Main.$clinit();
-  return f(o, n);
+  return TIntegerJsBiFunction.m_apply__jsfunction_Main_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer__java_lang_Object(f, o, n);
  }
  /** @nodts @return {?string} */
- static m_callImplementorParameterized__jsfunction_Main_TIntegerJsBiFunction__java_lang_String__java_lang_String(/** ?function(?string, Integer):?string */ f, /** ?string */ s) {
+ static m_callImplementorParameterized__jsfunction_Main_TIntegerJsBiFunction__java_lang_String__java_lang_String(/** TIntegerJsBiFunction<?string> */ f, /** ?string */ s) {
   Main.$clinit();
-  return /**@type {?string}*/ ($Casts.$to(f(s, Integer.m_valueOf__int__java_lang_Integer(1)), j_l_String));
+  return /**@type {?string}*/ ($Casts.$to(TIntegerJsBiFunction.m_apply__jsfunction_Main_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer__java_lang_Object(f, s, Integer.m_valueOf__int__java_lang_Integer(1)), j_l_String));
  }
  /** @nodts */
  static m_testParameterTypes__void() {
   Main.$clinit();
-  let tIntegerJsBiFunction = /**@type {function(?string, Integer):?string}*/ (TIntegerJsBiFunction.$create__());
+  let tIntegerJsBiFunction = /**@type {?function(*, (Number|number)):*}*/ (TIntegerJsBiFunction.$create__());
   let doubleDoubleJsBiFunction = DoubleDoubleJsBiFunction.$create__();
   Main.m_callInterfaceRaw__jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object(tIntegerJsBiFunction, 'a', Integer.m_valueOf__int__java_lang_Integer(1));
   Main.m_callInterfaceRaw__jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object(doubleDoubleJsBiFunction, 1.1, 1.1);
   Main.m_callInterfaceParameterized__jsfunction_Main_JsBiFunction__java_lang_String__java_lang_String(tIntegerJsBiFunction, 'a');
   Main.m_callInterfaceUnparameterized__jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object(tIntegerJsBiFunction, 'a', Integer.m_valueOf__int__java_lang_Integer(1));
   Main.m_callInterfaceUnparameterized__jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object(doubleDoubleJsBiFunction, 1.1, 1.1);
-  Main.m_callImplementorRaw__jsfunction_Main_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer__java_lang_Object(/**@type {function(?number, Integer):?number}*/ (TIntegerJsBiFunction.$create__()), 1.1, Integer.m_valueOf__int__java_lang_Integer(1));
-  Main.m_callImplementorParameterized__jsfunction_Main_TIntegerJsBiFunction__java_lang_String__java_lang_String(/**@type {function(?string, Integer):?string}*/ (TIntegerJsBiFunction.$create__()), '');
+  Main.m_callImplementorRaw__jsfunction_Main_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer__java_lang_Object(/**@type {!TIntegerJsBiFunction<?number>}*/ (TIntegerJsBiFunction.$create__()), 1.1, Integer.m_valueOf__int__java_lang_Integer(1));
+  Main.m_callImplementorParameterized__jsfunction_Main_TIntegerJsBiFunction__java_lang_String__java_lang_String(/**@type {!TIntegerJsBiFunction<?string>}*/ (TIntegerJsBiFunction.$create__()), '');
   tIntegerJsBiFunction('a', Integer.m_valueOf__int__java_lang_Integer(1));
   doubleDoubleJsBiFunction(1.1, 1.1);
   Main.callOnFunction(DoubleDoubleJsBiFunction.$create__());
@@ -237,18 +237,18 @@ class Main extends j_l_Object {
  /** @nodts */
  static m_testCast__void() {
   Main.$clinit();
-  let o = /**@type {function(?string, Integer):?string}*/ (TIntegerJsBiFunction.$create__());
-  let rawTIntegerJsBiFunction = /**@type {?function(*, Integer):*}*/ ($Casts.$to(o, TIntegerJsBiFunction));
-  let parameterizedTIntegerJsBiFunction = /**@type {?function(?string, Integer):?string}*/ ($Casts.$to(o, TIntegerJsBiFunction));
+  let o = /**@type {!TIntegerJsBiFunction<?string>}*/ (TIntegerJsBiFunction.$create__());
+  let rawTIntegerJsBiFunction = /**@type {TIntegerJsBiFunction}*/ ($Casts.$to(o, TIntegerJsBiFunction));
+  let parameterizedTIntegerJsBiFunction = /**@type {TIntegerJsBiFunction<?string>}*/ ($Casts.$to(o, TIntegerJsBiFunction));
   let anotherRawJsBiFunction = /**@type {?function(*, (Number|number)):*}*/ ($Casts.$to(o, $JavaScriptFunction));
   let anotherParameterizedJsBiFunction = /**@type {?function(?string, Integer):?string}*/ ($Casts.$to(o, $JavaScriptFunction));
-  let doubleDoubleJsBiFunction = /**@type {?function(?number, ?number):?number}*/ ($Casts.$to(o, DoubleDoubleJsBiFunction));
+  let doubleDoubleJsBiFunction = /**@type {DoubleDoubleJsBiFunction}*/ ($Casts.$to(o, DoubleDoubleJsBiFunction));
  }
  /** @nodts */
  static m_testNewInstance__void() {
   Main.$clinit();
-  let rawTIntegerJsBiFunction = /**@type {function(*, Integer):*}*/ (TIntegerJsBiFunction.$create__());
-  let parameterizedTIntegerJsBiFunction = /**@type {?function(*, Integer):*}*/ (TIntegerJsBiFunction.$create__());
+  let rawTIntegerJsBiFunction = /**@type {TIntegerJsBiFunction}*/ (TIntegerJsBiFunction.$create__());
+  let parameterizedTIntegerJsBiFunction = /**@type {TIntegerJsBiFunction}*/ (TIntegerJsBiFunction.$create__());
   let rawJsBiFunction = DoubleDoubleJsBiFunction.$create__();
  }
  /** @nodts */

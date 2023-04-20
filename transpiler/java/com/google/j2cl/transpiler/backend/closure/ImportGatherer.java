@@ -285,17 +285,15 @@ class ImportGatherer extends AbstractVisitor {
           ImportCategory.AJD_DEPENDENCY);
     }
 
-    if (typeDescriptor.isJsFunctionInterface() || typeDescriptor.isJsFunctionImplementation()) {
-      // Both JsFunction interfaces and implementations emit a function signature that is derived
-      // from the functional method. Such method might refer to types that need to be collected.
-      collectTypeDescriptorsIntroducedByJsFunction(declaredTypeDescriptor);
-    }
-
     if (AstUtils.isNonNativeJsEnum(typeDescriptor)) {
       collectForJsDoc(TypeDescriptors.getEnumBoxType(typeDescriptor.toRawTypeDescriptor()));
     }
 
-    if (typeDescriptor.isJsFunctionInterface()) {
+    if (declaredTypeDescriptor.isJsFunctionInterface()) {
+      // Both JsFunction interfaces emit a function signature that is derived from the functional
+      // method. Such method might refer to types that need to be collected.
+      collectTypeDescriptorsIntroducedByJsFunction(declaredTypeDescriptor);
+
       // In contrast to other native classes, JsFunction classes do not exist at all at runtime.
       return;
     }
@@ -310,6 +308,7 @@ class ImportGatherer extends AbstractVisitor {
    * return type.
    */
   private void collectTypeDescriptorsIntroducedByJsFunction(DeclaredTypeDescriptor typeDescriptor) {
+    checkState(typeDescriptor.isJsFunctionInterface());
     MethodDescriptor jsFunctionMethodDescriptor = typeDescriptor.getJsFunctionMethodDescriptor();
     for (TypeDescriptor parameterTypeDescriptor :
         jsFunctionMethodDescriptor.getParameterTypeDescriptors()) {

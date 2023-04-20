@@ -22,14 +22,14 @@ class $3 extends j_l_Object {
   $instance.$ctor__jsasync_Main_3__jsasync_Main__void($outer_this);
   return $Util.$makeLambdaFunction($3.prototype.m_doSomething__jsasync_Main_IThenable, $instance, $3.$copy);
  }
- /** @nodts @suppress {invalidCasts} */
+ /** @nodts */
  $ctor__jsasync_Main_3__jsasync_Main__void(/** Main */ $outer_this) {
   this.$outer_this__jsasync_Main_3 = $outer_this;
   this.$ctor__java_lang_Object__void();
  }
- /** @this {?function():IThenable<Integer>} @return {IThenable<Integer>} */
+ /** @return {IThenable<Integer>} */
  async m_doSomething__jsasync_Main_IThenable() {
-  let tmp = this;
+  let tmp = /**@type {?function():IThenable<Integer>}*/ (this);
   return /**@type {Promise<Integer>}*/ (Promise.resolve(/**@type {Integer}*/ ($Casts.$to(await this.$outer_this__jsasync_Main_3.f_x__jsasync_Main_, Integer))));
  }
  /** @nodts */

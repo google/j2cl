@@ -68,6 +68,7 @@ import com.google.j2cl.transpiler.passes.InsertExplicitSuperCalls;
 import com.google.j2cl.transpiler.passes.InsertIntegerCoercions;
 import com.google.j2cl.transpiler.passes.InsertJsDocCastsToTypeBounds;
 import com.google.j2cl.transpiler.passes.InsertJsEnumBoxingAndUnboxingConversions;
+import com.google.j2cl.transpiler.passes.InsertJsFunctionImplementationConversionCasts;
 import com.google.j2cl.transpiler.passes.InsertNarrowingPrimitiveConversions;
 import com.google.j2cl.transpiler.passes.InsertNarrowingPrimitiveConversionsKotlin;
 import com.google.j2cl.transpiler.passes.InsertNarrowingReferenceConversions;
@@ -281,6 +282,7 @@ public enum Backend {
           NormalizeInstanceOfs::new,
           NormalizeEquality::new,
           NormalizeStaticNativeMemberReferences::new,
+          InsertJsFunctionImplementationConversionCasts::new,
 
           // Needs to run after passes that do code synthesis are run so that it handles the
           // synthesize code as well.

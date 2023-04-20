@@ -413,6 +413,34 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   }
 
   /**
+   * Returns {@code true} if the method has a JsFunction calling contract in JavaScript.
+   *
+   * <p>Note that the Java overriding method in the JsFunction implementation class may or may not
+   * be a JsFunction. It is only a JsFunction if it wouldn't need a bridge.
+   */
+  @Override
+  @Memoized
+  public boolean isJsFunction() {
+    if (!isDeclaration()) {
+      return getDeclarationDescriptor().isJsFunction();
+    }
+
+    DeclaredTypeDescriptor enclosingType = getEnclosingTypeDescriptor();
+    if (enclosingType.isJsFunctionInterface()) {
+      return this == enclosingType.getSingleAbstractMethodDescriptor();
+    }
+
+    return enclosingType.isJsFunctionImplementation()
+        && getJsOverriddenMethodDescriptors().stream().anyMatch(MethodDescriptor::isJsFunction);
+  }
+
+  @Memoized
+  public boolean isOrOverridesJsFunction() {
+    return isJsFunction()
+        || getJavaOverriddenMethodDescriptors().stream().anyMatch(MethodDescriptor::isJsFunction);
+  }
+
+  /**
    * Returns true if it is a vararg method that can be referenced by JavaScript side. A
    * non-JsOverlay JsMethod, and a JsFunction can be referenced by JavaScript side.
    *
@@ -865,7 +893,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setFinal(false)
         .setSynthetic(false)
         .setEnumSyntheticMethod(false)
-        .setJsFunction(false)
         .setUnusableByJsSuppressed(false)
         .setDeprecated(false)
         .setUncheckedCast(false)
@@ -1152,8 +1179,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public abstract Builder setWasmInfo(String value);
 
     public abstract Builder setEnumSyntheticMethod(boolean isEnumSyntheticMethod);
-
-    public abstract Builder setJsFunction(boolean isJsFunction);
 
     public abstract Builder setUnusableByJsSuppressed(boolean isUnusableByJsSuppressed);
 
