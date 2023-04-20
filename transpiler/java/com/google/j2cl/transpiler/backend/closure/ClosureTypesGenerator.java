@@ -595,11 +595,28 @@ class ClosureTypesGenerator {
    */
   private static final ThreadLocal<Map<TypeDeclaration, ClosureType>> closureTypeByTypeDeclaration =
       ThreadLocal.withInitial(
-          () ->
-              ImmutableMap.of(
-                  TypeDescriptors.get().javaLangObject.getTypeDeclaration(), ANY.toNullable(),
-                  TypeDescriptors.get().javaLangString.getTypeDeclaration(), STRING.toNullable(),
-                  TypeDescriptors.get().javaLangDouble.getTypeDeclaration(), NUMBER.toNullable(),
-                  TypeDescriptors.get().javaLangBoolean.getTypeDeclaration(), BOOLEAN.toNullable(),
-                  TypeDescriptors.get().javaLangVoid.getTypeDeclaration(), VOID.toNullable()));
+          () -> {
+            ImmutableMap.Builder<TypeDeclaration, ClosureType> builder =
+                ImmutableMap.<TypeDeclaration, ClosureType>builder()
+                    .put(
+                        TypeDescriptors.get().javaLangObject.getTypeDeclaration(), ANY.toNullable())
+                    .put(
+                        TypeDescriptors.get().javaLangString.getTypeDeclaration(),
+                        STRING.toNullable())
+                    .put(
+                        TypeDescriptors.get().javaLangDouble.getTypeDeclaration(),
+                        NUMBER.toNullable())
+                    .put(
+                        TypeDescriptors.get().javaLangBoolean.getTypeDeclaration(),
+                        BOOLEAN.toNullable())
+                    .put(
+                        TypeDescriptors.get().javaLangVoid.getTypeDeclaration(), VOID.toNullable());
+            DeclaredTypeDescriptor nothing = TypeDescriptors.get().kotlinNothing;
+            if (nothing != null) {
+              builder.put(
+                  TypeDescriptors.get().kotlinNothing.getTypeDeclaration(),
+                  UNKNOWN.toNonNullable());
+            }
+            return builder.build();
+          });
 }
