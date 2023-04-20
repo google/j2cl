@@ -147,4 +147,18 @@ public class OutputStreamWriterTest extends GWTTestCase {
     writer.close();
     assertTrue(Arrays.equals(new byte[] {'?', ' '}, baos.toByteArray()));
   }
+
+  public void testWriteArrayLowSurrogateWithoutHighSurrogate() throws IOException {
+    char[] chars = {' ', '\uDDCB'};
+    writer.write(chars);
+    writer.close();
+    assertTrue(Arrays.equals(new byte[] {' ', '?'}, baos.toByteArray()));
+  }
+
+  public void testWriteArraySurrogatesReversed() throws IOException {
+    char[] chars = {'\uDDCB', '\uDDCB'};
+    writer.write(chars);
+    writer.close();
+    assertTrue(Arrays.equals(new byte[] {'?', '?'}, baos.toByteArray()));
+  }
 }

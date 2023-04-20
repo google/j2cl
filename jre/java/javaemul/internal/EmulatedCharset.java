@@ -131,6 +131,13 @@ public abstract class EmulatedCharset extends Charset {
             ch = (ch << 6) | (b & 63);
           }
         }
+
+        // We should have a code point for a full pair. If we ended up in the surrogate range then
+        // we have a unpaired high/low.
+        if (ch <= Character.MAX_VALUE && Character.isSurrogate((char) ch)) {
+          invalid = true;
+        }
+
         if (invalid || isOverlong(ch, count)) {
           if (throwOnInvalid) {
             throw new IllegalArgumentException();
@@ -170,13 +177,14 @@ public abstract class EmulatedCharset extends Charset {
     }
 
     private static int getCodePointAt(char[] buffer, int pos, boolean throwOnInvalid) {
-      char high = buffer[pos];
+      char ch = buffer[pos];
       // If it's not a surrogate we can just return the char directly.
-      if (!Character.isHighSurrogate(high)) {
-        return high;
+      if (!Character.isSurrogate(ch)) {
+        return ch;
       }
+      char high = ch;
       char low = pos + 1 < buffer.length ? buffer[pos + 1] : 0xFF;
-      if (!Character.isLowSurrogate(low)) {
+      if (!Character.isSurrogatePair(high, low)) {
         if (throwOnInvalid) {
           throw new IllegalArgumentException("Invalid surrogate pair");
         } else {
@@ -200,13 +208,14 @@ public abstract class EmulatedCharset extends Charset {
     }
 
     private static int getCodePointAt(String str, int pos, int length, boolean throwOnInvalid) {
-      char high = str.charAt(pos);
+      char ch = str.charAt(pos);
       // If it's not a surrogate we can just return the char directly.
-      if (!Character.isHighSurrogate(high)) {
-        return high;
+      if (!Character.isSurrogate(ch)) {
+        return ch;
       }
+      char high = ch;
       char low = pos + 1 < length ? str.charAt(pos + 1) : 0xFF;
-      if (!Character.isLowSurrogate(low)) {
+      if (!Character.isSurrogatePair(high, low)) {
         if (throwOnInvalid) {
           throw new IllegalArgumentException("Invalid surrogate pair");
         } else {

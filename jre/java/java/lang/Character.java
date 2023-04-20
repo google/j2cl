@@ -285,6 +285,10 @@ public final class Character implements Comparable<Character>, Serializable {
     return ch >= MIN_LOW_SURROGATE && ch <= MAX_LOW_SURROGATE;
   }
 
+  public static boolean isSurrogate(char ch) {
+    return ch >= MIN_SURROGATE && ch <= MAX_SURROGATE;
+  }
+
   /**
    * Deprecated - see isWhitespace(char).
    */

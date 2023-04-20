@@ -498,6 +498,24 @@ public class StringTest extends GWTTestCase {
         };
     assertEquals(utf8Replacement(1) + "a", new String(bytes, encoding));
     assertEquals(utf8Replacement(1) + "a", new String(bytes, Charset.forName(encoding)));
+
+    // Malformed case 7: Unpaired high surrogate followed by a surrogate pair.
+    bytes =
+        new byte[] {
+          (byte) 0xed,
+          (byte) 0xa0,
+          (byte) 0x81,
+          (byte) 0xF0, // start U+1F9CB
+          (byte) 0x9F,
+          (byte) 0xA7,
+          (byte) 0x8B, // end U+1F9CB
+        };
+    // JVM replaces the unpaired surrogate with a single replacement character, whereas the J2CL
+    // emulation replaces each of the three bytes.
+    assertEquals(utf8Replacement(isJvm() ? 1 : 3) + "\uD83E\uDDCB", new String(bytes, encoding));
+    assertEquals(
+        utf8Replacement(isJvm() ? 1 : 3) + "\uD83E\uDDCB",
+        new String(bytes, Charset.forName(encoding)));
   }
 
   public void testContains() {
@@ -746,14 +764,28 @@ public class StringTest extends GWTTestCase {
     str = "\uD801";
     bytes = str.getBytes(encoding);
     assertEquals(1, bytes.length);
-    assertEquals((byte) 0x3F, bytes[0]);
+    assertEquals('?', bytes[0]);
 
     // Invalid surrogate pair -- invalid low surrogate.
     str = "\uD801 ";
     bytes = str.getBytes(encoding);
     assertEquals(2, bytes.length);
-    assertEquals((byte) 0x3F, bytes[0]);
-    assertEquals((byte) 0x20, bytes[1]);
+    assertEquals('?', bytes[0]);
+    assertEquals(' ', bytes[1]);
+
+    // Invalid surrogate pair -- low surrogate without preceding high surrogate.
+    str = " \uDDCB";
+    bytes = str.getBytes(encoding);
+    assertEquals(2, bytes.length);
+    assertEquals(' ', bytes[0]);
+    assertEquals('?', bytes[1]);
+
+    // Invalid surrogate pair -- low and high surrogate reversed
+    str = "\uDDCB\uD83E";
+    bytes = str.getBytes(encoding);
+    assertEquals(2, bytes.length);
+    assertEquals('?', bytes[0]);
+    assertEquals('?', bytes[1]);
   }
 
   /**

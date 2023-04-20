@@ -272,10 +272,13 @@ public class CharacterTest extends GWTTestCase {
   public void testSurrogates() {
     assertFalse(Character.isHighSurrogate('\uDF46'));
     assertTrue(Character.isLowSurrogate('\uDF46'));
+    assertTrue(Character.isSurrogate('\uDF46'));
     assertTrue(Character.isHighSurrogate('\uD800'));
     assertFalse(Character.isLowSurrogate('\uD800'));
+    assertTrue(Character.isSurrogate('\uD800'));
     assertFalse(Character.isHighSurrogate('X'));
     assertFalse(Character.isLowSurrogate('X'));
+    assertFalse(Character.isSurrogate('X'));
     assertTrue(Character.isSurrogatePair('\uD800', '\uDF46'));
     assertFalse(Character.isSurrogatePair('\uDF46', '\uD800'));
     assertFalse(Character.isSurrogatePair('A', '\uDF46'));
