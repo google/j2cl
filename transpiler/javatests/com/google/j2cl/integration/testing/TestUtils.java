@@ -15,25 +15,23 @@
  */
 package com.google.j2cl.integration.testing;
 
-import javaemul.internal.annotations.Wasm;
-
 /** Utility functions needed by integration tests. */
 public final class TestUtils {
   public static boolean isJvm() {
     return System.getProperty("java.version", null) != null;
   }
 
-  @Wasm("i32.const 1")
   public static boolean isWasm() {
-    return false;
+    return Platform.IS_WASM;
   }
 
   public static boolean isJavaScript() {
-    return !isJvm() && !isWasm();
+    // TODO(b/278942389): should return true for J2KT-JS.
+    return !isJvm() && !isWasm() && !isJ2Kt();
   }
 
   public static boolean isJ2Kt() {
-    return false;
+    return Platform.IS_J2KT;
   }
 
   @SuppressWarnings({"TypeParameterUnusedInFormals", "unchecked"})

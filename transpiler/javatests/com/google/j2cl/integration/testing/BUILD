@@ -15,6 +15,7 @@ j2wasm_library(
         "Asserts.java",
         "TestUtils.java",
         "super-wasm/AssertsBase.java",
+        "super-wasm/Platform.java",
     ],
     deps = [
         "//jre/java:javaemul_internal_annotations-j2wasm",
@@ -27,7 +28,8 @@ j2kt_jvm_library(
     srcs = [
         "Asserts.java",
         "AssertsBase.java",
-        "super-j2kt/TestUtils.java",
+        "TestUtils.java",
+        "super-j2kt/Platform.java",
     ],
     deps = [
         "//jre/java:javaemul_internal_annotations-j2kt-jvm",
@@ -40,9 +42,9 @@ j2kt_native_library(
     srcs = [
         "Asserts.java",
         "AssertsBase.java",
-        "super-j2kt/TestUtils.java",
+        "TestUtils.java",
+        "super-j2kt/Platform.java",
     ],
-    target_compatible_with = ["//third_party/bazel_platforms/os:ios"],
     deps = [
         "//jre/java:javaemul_internal_annotations-j2kt-native",
         "//third_party:gwt-jsinterop-annotations-j2kt-native",
@@ -54,6 +56,7 @@ j2cl_library(
     srcs = [
         "Asserts.java",
         "AssertsBase.java",
+        "Platform.java",
         "TestUtils.java",
     ],
     deps = [
@@ -67,6 +70,7 @@ java_library(
     srcs = [
         "Asserts.java",
         "AssertsBase.java",
+        "Platform.java",
         "TestUtils.java",
     ],
     deps = [
