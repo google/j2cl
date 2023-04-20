@@ -37,8 +37,8 @@ alias(
 )
 
 alias(
-    name = "BazelJ2clBuilderWithKolinSupport",
-    actual = "//transpiler/java/com/google/j2cl/transpiler:BazelJ2clBuilderWithKolinSupport",
+    name = "BazelJ2clBuilderWithKotlinSupport",
+    actual = "//transpiler/java/com/google/j2cl/transpiler:BazelJ2clBuilderWithKotlinSupport",
     visibility = ["//build_defs/internal_do_not_use:kotlin_allowlist"],
 )
 

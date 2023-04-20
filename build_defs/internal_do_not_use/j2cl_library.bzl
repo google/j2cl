@@ -143,7 +143,7 @@ def j2cl_library(
     if has_kotlin_srcs:
         # TODO(b/217287994): Replace with more traditional allow-listing.
         args["j2cl_transpiler_override"] = (
-            "//build_defs/internal_do_not_use:BazelJ2clBuilderWithKolinSupport"
+            "//build_defs/internal_do_not_use:BazelJ2clBuilderWithKotlinSupport"
         )
 
         if target_name != "//ktstdlib:j2cl_kt_stdlib":

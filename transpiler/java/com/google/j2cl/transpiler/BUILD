@@ -76,7 +76,7 @@ java_binary(
 # J2CL binary with Kotlin compiler dependency.
 # TODO(b/217287994): Remove after a regular dependency is allowed.
 java_binary(
-    name = "BazelJ2clBuilderWithKolinSupport",
+    name = "BazelJ2clBuilderWithKotlinSupport",
     jvm_flags = [
         "-XX:+TieredCompilation",
         "-Dj2cl.deterministicTimestamps=true",
