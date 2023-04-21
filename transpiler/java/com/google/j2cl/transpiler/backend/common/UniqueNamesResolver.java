@@ -92,14 +92,17 @@ public final class UniqueNamesResolver {
           @CanIgnoreReturnValue
           private String registerUniqueName(
               MemberDescriptor currentMemberDescriptor, HasName variable) {
-            return uniqueNameByVariable.computeIfAbsent(
-                variable,
-                v -> {
-                  String uniqueName =
-                      computeUniqueName(v, name -> isNameAvailable(currentMemberDescriptor, name));
-                  variableUniqueNamesByMember.put(currentMemberDescriptor, uniqueName);
-                  return uniqueName;
-                });
+            String uniqueName =
+                uniqueNameByVariable.computeIfAbsent(
+                    variable,
+                    v ->
+                        computeUniqueName(
+                            v, name -> isNameAvailable(currentMemberDescriptor, name)));
+            // Register the variable to the member descriptor, even if it already had a name,
+            // that is because for some transformations, like devirtualization, type variables might
+            // be moved from the enclosing class to the method.
+            variableUniqueNamesByMember.put(currentMemberDescriptor, uniqueName);
+            return uniqueName;
           }
 
           private boolean isNameAvailable(
