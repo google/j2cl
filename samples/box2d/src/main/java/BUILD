@@ -26,7 +26,7 @@ j2cl_library(
     javacopts = _JAVACOPTS,
     deps = [
         "//:jsinterop-annotations-j2cl",
-        "//third_party/java/jspecify_annotations:jspecify_annotations-j2cl",
+        "//third_party:jspecify_annotations-j2cl",
     ],
 )
 
@@ -37,8 +37,8 @@ j2kt_jvm_library(
         exclude = ["**/gwtemul/**/*.java"],
     ),
     deps = [
-        "//third_party/java/jsinterop:jsinterop-annotations-j2kt-jvm",
-        "//third_party/java/jspecify_annotations:jspecify_annotations-j2kt-jvm",
+        "//:jsinterop-annotations-j2kt-jvm",
+        "//third_party:jspecify_annotations-j2kt-jvm",
     ],
 )
 
@@ -50,8 +50,8 @@ j2kt_native_library(
     ),
     target_compatible_with = ["//third_party/bazel_platforms/os:ios"],
     deps = [
-        "//third_party/java/jsinterop:jsinterop-annotations-j2kt-native",
-        "//third_party/java/jspecify_annotations:jspecify_annotations-j2kt-native",
+        "//:jsinterop-annotations-j2kt-native",
+        "//third_party:jspecify_annotations-j2kt-native",
     ],
 )
 
@@ -63,7 +63,7 @@ java_library(
     ),
     javacopts = _JAVACOPTS,
     deps = [
-        "//third_party/java/gwt:gwt-jsinterop-annotations",
-        "//third_party/java/jspecify_annotations",
+        "//:jsinterop-annotations",
+        "//third_party:jspecify_annotations",
     ],
 )
