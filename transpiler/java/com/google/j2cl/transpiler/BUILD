@@ -61,13 +61,17 @@ java_library(
     ],
 )
 
+JVM_FLAGS = [
+    "-XX:+TieredCompilation",
+    "-Xss2M",
+    # Disable bytecode verification to save from class-loading time.
+    "-Xverify:none",
+    "-Dj2cl.deterministicTimestamps=true",
+]
+
 java_binary(
     name = "BazelJ2clBuilder",
-    jvm_flags = [
-        "-XX:+TieredCompilation",
-        "-Dj2cl.deterministicTimestamps=true",
-        "-Xss2M",
-    ],
+    jvm_flags = JVM_FLAGS,
     main_class = "com.google.j2cl.transpiler.BazelJ2clBuilder",
     visibility = ["//build_defs/internal_do_not_use:__pkg__"],
     runtime_deps = [":bazelbuilder_lib"],
@@ -77,11 +81,7 @@ java_binary(
 # TODO(b/217287994): Remove after a regular dependency is allowed.
 java_binary(
     name = "BazelJ2clBuilderWithKotlinSupport",
-    jvm_flags = [
-        "-XX:+TieredCompilation",
-        "-Dj2cl.deterministicTimestamps=true",
-        "-Xss2M",
-    ],
+    jvm_flags = JVM_FLAGS,
     main_class = "com.google.j2cl.transpiler.BazelJ2clBuilder",
     visibility = ["//build_defs/internal_do_not_use:__pkg__"],
     runtime_deps = [
