@@ -189,8 +189,7 @@ public class OutputGeneratorStage {
       Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition) {
     KytheIndexingMetadata metadata = new KytheIndexingMetadata();
 
-    for (Map.Entry<SourcePosition, SourcePosition> entry :
-        javaSourcePositionByOutputSourcePosition.entrySet()) {
+    for (var entry : javaSourcePositionByOutputSourcePosition.entrySet()) {
 
       SourcePosition javaSourcePosition = entry.getValue();
       SourcePosition javaScriptSourcePosition = entry.getKey();
