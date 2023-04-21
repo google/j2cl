@@ -378,7 +378,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
   }
 
   public byte[] getBytes(Charset charset) {
-    return ((EmulatedCharset) charset).getBytes(this);
+    return ((EmulatedCharset) charset).getBytes(value, offset, count);
   }
 
   private static Charset getCharset(String charsetName) throws UnsupportedEncodingException {
