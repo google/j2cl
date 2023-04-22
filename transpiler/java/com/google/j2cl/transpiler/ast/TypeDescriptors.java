@@ -34,6 +34,7 @@ import java.util.function.Function;
 /** Utility class holding type descriptors that need to be referenced directly. */
 public class TypeDescriptors {
 
+  // Boxed types.
   public DeclaredTypeDescriptor javaLangBoolean;
   public DeclaredTypeDescriptor javaLangByte;
   public DeclaredTypeDescriptor javaLangCharacter;
@@ -42,29 +43,28 @@ public class TypeDescriptors {
   public DeclaredTypeDescriptor javaLangInteger;
   public DeclaredTypeDescriptor javaLangLong;
   public DeclaredTypeDescriptor javaLangShort;
-  public DeclaredTypeDescriptor javaLangString;
-  public DeclaredTypeDescriptor javaLangStringBuilder;
   public DeclaredTypeDescriptor javaLangVoid;
 
+  public DeclaredTypeDescriptor javaLangCharSequence;
   public DeclaredTypeDescriptor javaLangClass;
-  public DeclaredTypeDescriptor javaLangObject;
-  public DeclaredTypeDescriptor javaUtilArrays;
-  public DeclaredTypeDescriptor javaUtilObjects;
-  public DeclaredTypeDescriptor javaLangThrowable;
-  public DeclaredTypeDescriptor javaLangNulPointerException;
+  public DeclaredTypeDescriptor javaLangCloneable;
+  public DeclaredTypeDescriptor javaLangComparable;
   public DeclaredTypeDescriptor javaLangEnum;
-  public DeclaredTypeDescriptor javaLangRunnable;
   public DeclaredTypeDescriptor javaLangIterable;
+  public DeclaredTypeDescriptor javaLangNulPointerException;
+  public DeclaredTypeDescriptor javaLangNumber;
+  public DeclaredTypeDescriptor javaLangObject;
+  public DeclaredTypeDescriptor javaLangRunnable;
+  public DeclaredTypeDescriptor javaLangString;
+  public DeclaredTypeDescriptor javaLangStringBuilder;
+  public DeclaredTypeDescriptor javaLangThrowable;
+
+  public DeclaredTypeDescriptor javaUtilArrays;
   public DeclaredTypeDescriptor javaUtilCollection;
   public DeclaredTypeDescriptor javaUtilIterator;
-  public DeclaredTypeDescriptor javaUtilList;
   public DeclaredTypeDescriptor javaUtilMap;
-  public DeclaredTypeDescriptor javaUtilSet;
+  public DeclaredTypeDescriptor javaUtilObjects;
 
-  public DeclaredTypeDescriptor javaLangNumber;
-  public DeclaredTypeDescriptor javaLangComparable;
-  public DeclaredTypeDescriptor javaLangCharSequence;
-  public DeclaredTypeDescriptor javaLangCloneable;
   public DeclaredTypeDescriptor javaIoSerializable;
 
   public DeclaredTypeDescriptor javaemulInternalWasmArray;
@@ -78,7 +78,6 @@ public class TypeDescriptors {
   public DeclaredTypeDescriptor javaemulInternalWasmArrayOfBoolean;
   public DeclaredTypeDescriptor javaemulInternalWasmArrayOfObject;
 
-  public DeclaredTypeDescriptor javaemulInternalArrayHelper;
   public DeclaredTypeDescriptor javaemulInternalAsserts;
   public DeclaredTypeDescriptor javaemulInternalValueType;
   public DeclaredTypeDescriptor javaemulInternalPreconditions;
@@ -268,10 +267,6 @@ public class TypeDescriptors {
 
   public static boolean isJavaLangCloneable(TypeDescriptor typeDescriptor) {
     return typeDescriptor.isSameBaseType(get().javaLangCloneable);
-  }
-
-  public static boolean isJavaLangClass(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.isSameBaseType(get().javaLangClass);
   }
 
   public static boolean isJavaLangEnum(TypeDescriptor typeDescriptor) {
@@ -617,14 +612,8 @@ public class TypeDescriptors {
         case "java.util.Iterator":
           typeDescriptors.javaUtilIterator = referenceType;
           break;
-        case "java.util.List":
-          typeDescriptors.javaUtilList = referenceType;
-          break;
         case "java.util.Map":
           typeDescriptors.javaUtilMap = referenceType;
-          break;
-        case "java.util.Set":
-          typeDescriptors.javaUtilSet = referenceType;
           break;
         case "javaemul.internal.ValueType":
           typeDescriptors.javaemulInternalValueType = referenceType;
@@ -682,9 +671,6 @@ public class TypeDescriptors {
           break;
         case "javaemul.internal.WasmArray.OfObject":
           typeDescriptors.javaemulInternalWasmArrayOfObject = referenceType;
-          break;
-        case "javaemul.internal.ArrayHelper":
-          typeDescriptors.javaemulInternalArrayHelper = referenceType;
           break;
         case "javaemul.internal.Asserts":
           typeDescriptors.javaemulInternalAsserts = referenceType;
