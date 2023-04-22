@@ -247,7 +247,7 @@
     JsBiFunction tIntegerJsBiFunction = new TIntegerJsBiFunction<String>();
 ...    callOnFunction(new DoubleDoubleJsBiFunction());
   }] => [Main.$clinit();] "jsfunction.Main.testParameterTypes"
-[JsBiFunction tIntegerJsBiFunction = new TIntegerJsBiFunction<String>();] => [let tIntegerJsBiFunction = /**@type {?function(*, (Number|number)):*}*/ (TIntegerJsBiFunction.$create__());] "jsfunction.Main.testParameterTypes"
+[JsBiFunction tIntegerJsBiFunction = new TIntegerJsBiFunction<String>();] => [let tIntegerJsBiFunction = /**@type {?function(?, ?):?}*/ (TIntegerJsBiFunction.$create__());] "jsfunction.Main.testParameterTypes"
 [tIntegerJsBiFunction] => [tIntegerJsBiFunction] "tIntegerJsBiFunction"
 [JsBiFunction doubleDoubleJsBiFunction = new DoubleDoubleJsBiFunction();] => [let doubleDoubleJsBiFunction = DoubleDoubleJsBiFunction.$create__();] "jsfunction.Main.testParameterTypes"
 [doubleDoubleJsBiFunction] => [doubleDoubleJsBiFunction] "doubleDoubleJsBiFunction"
@@ -275,7 +275,7 @@
 [TIntegerJsBiFunction<String> parameterizedTIntegerJsBiFunction =
         (TIntegerJsBiFunction<String>) o;] => [let parameterizedTIntegerJsBiFunction = /**@type {TIntegerJsBiFunction<?string>}*/ ($Casts.$to(o, TIntegerJsBiFunction));] "jsfunction.Main.testCast"
 [parameterizedTIntegerJsBiFunction] => [parameterizedTIntegerJsBiFunction] "parameterizedTIntegerJsBiFunction"
-[JsBiFunction anotherRawJsBiFunction = (JsBiFunction) o;] => [let anotherRawJsBiFunction = /**@type {?function(*, (Number|number)):*}*/ ($Casts.$to(o, $JavaScriptFunction));] "jsfunction.Main.testCast"
+[JsBiFunction anotherRawJsBiFunction = (JsBiFunction) o;] => [let anotherRawJsBiFunction = /**@type {?function(?, ?):?}*/ ($Casts.$to(o, $JavaScriptFunction));] "jsfunction.Main.testCast"
 [anotherRawJsBiFunction] => [anotherRawJsBiFunction] "anotherRawJsBiFunction"
 [JsBiFunction<String, Integer> anotherParameterizedJsBiFunction =
         (JsBiFunction<String, Integer>) o;] => [let anotherParameterizedJsBiFunction = /**@type {?function(?string, Integer):?string}*/ ($Casts.$to(o, $JavaScriptFunction));] "jsfunction.Main.testCast"

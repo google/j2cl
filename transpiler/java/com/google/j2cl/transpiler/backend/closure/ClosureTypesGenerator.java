@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.backend.closure;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static java.util.stream.Collectors.joining;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -36,9 +37,10 @@ import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 /** Transforms J2cl type abstractions into Closure JavaScript type system abstractions. */
 class ClosureTypesGenerator {
@@ -63,10 +65,9 @@ class ClosureTypesGenerator {
    */
   public String getCommaSeparatedClosureTypesString(
       Collection<? extends TypeDescriptor> typeDescriptors) {
-    return getClosureTypes(typeDescriptors)
-        .stream()
+    return getClosureTypes(typeDescriptors).stream()
         .map(ClosureType::render)
-        .collect(Collectors.joining(", "));
+        .collect(joining(", "));
   }
 
   /**
@@ -180,6 +181,28 @@ class ClosureTypesGenerator {
   /** Returns the Closure type for a @JsFunction type descriptor. */
   private ClosureType getClosureTypeForJsFunction(DeclaredTypeDescriptor typeDescriptor) {
     checkArgument(typeDescriptor.isJsFunctionInterface());
+
+    if (typeDescriptor.isRaw()) {
+      // The closure type system treats raw types in a similar manner to Java; where if you use
+      // just the type name, all the templates in the type declaration are considered unknown (?).
+      // But function types are emitted with type parameters already propagated into the arguments
+      // and return type (they are not templated types in closure); So here we construct the Java
+      // type with wildcards for each type argument, so that they are propagated in the JsFunction
+      // method signature which we then utilize to construct the function type in closure. This in
+      // practice results in constructing a "function(...)" type with unknowns (?) in all the right
+      // places.
+      Set<TypeVariable> typeParameterDescriptors =
+          new HashSet<>(typeDescriptor.getTypeDeclaration().getTypeParameterDescriptors());
+      typeDescriptor =
+          typeDescriptor
+              .toUnparameterizedTypeDescriptor()
+              .specializeTypeVariables(
+                  t ->
+                      typeParameterDescriptors.contains(t)
+                          ? TypeVariable.createWildcardWithUpperBound(t.toRawTypeDescriptor())
+                          : t);
+    }
+
     // Remove type parameters from the JsFunction method since there we cant declare in closure
     // a template on a function type.
     MethodDescriptor functionalMethodDescriptor =
@@ -409,10 +432,7 @@ class ClosureTypesGenerator {
       return name
           + (typeParameters.isEmpty()
               ? ""
-              : typeParameters
-                  .stream()
-                  .map(ClosureType::render)
-                  .collect(Collectors.joining(", ", "<", ">")));
+              : typeParameters.stream().map(ClosureType::render).collect(joining(", ", "<", ">")));
     }
   }
 
@@ -451,7 +471,7 @@ class ClosureTypesGenerator {
 
     @Override
     String render() {
-      return types.stream().map(ClosureType::render).collect(Collectors.joining("|", "(", ")"));
+      return types.stream().map(ClosureType::render).collect(joining("|", "(", ")"));
     }
   }
 
@@ -556,7 +576,7 @@ class ClosureTypesGenerator {
     public String render() {
       return String.format(
           "function(%s):%s",
-          parameters.stream().map(Parameter::render).collect(Collectors.joining(", ")),
+          parameters.stream().map(Parameter::render).collect(joining(", ")),
           returnClosureType.render());
     }
   }
