@@ -185,7 +185,6 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
    * Returns the erasure type (see definition of erasure type at
    * http://help.eclipse.org/luna/index.jsp) with an empty type arguments list.
    */
-  @Nullable
   public abstract TypeDescriptor toRawTypeDescriptor();
 
   /** Returns whether this is a raw type. */

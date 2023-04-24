@@ -41,7 +41,7 @@ internal fun DeclaredTypeDescriptor.directlyDeclaredNonRawTypeArgumentDescriptor
     projectToWildcards.or(typeDeclaration.hasRecursiveTypeBounds()).let { mapToWildcard ->
       typeDeclaration.directlyDeclaredTypeParameterDescriptors.map {
         if (mapToWildcard) TypeVariable.createWildcard()
-        else it.upperBoundTypeDescriptor.toRawTypeDescriptor()!!
+        else it.upperBoundTypeDescriptor.toRawTypeDescriptor()
       }
     }
 
