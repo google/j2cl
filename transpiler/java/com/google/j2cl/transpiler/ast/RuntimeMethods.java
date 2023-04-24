@@ -362,6 +362,21 @@ public final class RuntimeMethods {
         .build();
   }
 
+  public static MethodCall createObjectsEqualsMethodCall(
+      Expression firstArgument, Expression secondArgument) {
+    MethodDescriptor equalsMethodDescriptor =
+        TypeDescriptors.get()
+            .javaUtilObjects
+            .getMethodDescriptor(
+                "equals",
+                TypeDescriptors.get().javaLangObject,
+                TypeDescriptors.get().javaLangObject);
+
+    return MethodCall.Builder.from(equalsMethodDescriptor)
+        .setArguments(firstArgument, secondArgument)
+        .build();
+  }
+
   /** Create a call to a Primitives method. */
   public static MethodCall createPrimitivesMethodCall(String methodName, Expression argument) {
     MethodDescriptor narrowMethodDescriptor =
