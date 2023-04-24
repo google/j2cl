@@ -60,6 +60,9 @@ public class Main {
     // assertTrue(faihu.codePointCount(0, faihu.length()) == 1);
     // This string has 1 codepoint but its length as a string is 2.
     assertTrue(faihu.length() == 2);
+
+    assertTrue("\uFFFF".charAt(0) == 0xFFFF);
+    assertTrue("\uFFFF".length() == 1);
   }
 
   private static void testOctalEscapes() {
