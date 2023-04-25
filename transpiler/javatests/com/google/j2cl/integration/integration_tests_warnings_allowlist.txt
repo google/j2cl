@@ -28,269 +28,52 @@ transpiler/javatests/com/google/j2cl/integration/java/bridgejsmethod/bridgejsmet
 #found   : *
 #required: (null|string)
 
-ktstdlib/j2cl_kt_stdlib.js/kotlin/UByteArray.impl.java.js:86  mismatch of the contains property on type module$exports$kotlin$UByteArray$impl and the type of the property it overrides from interface module$exports$java$util$Collection$impl
+# TODO(b/279627347): This set of errors is due to expect/actual mismatches in ArrayList.
+transpiler/javatests/com/google/j2cl/integration/kotlin/primitivespecialization/primitvespecialization-j2cl.js/primitivespecialization/TestIntArrayIntList.impl.java.js:88  mismatch of the contains property on type module$exports$primitivespecialization$TestIntArrayIntList$impl and the type of the property it overrides from interface module$exports$java$util$Collection$impl
 #original: function(this:module$exports$java$util$Collection$impl, *): boolean
-#override: function(this:module$exports$kotlin$UByteArray$impl, module$exports$kotlin$UByte$impl): boolean
+#override: function(this:module$exports$primitivespecialization$TestIntArrayIntList$impl, module$exports$java$lang$Integer$impl): boolean
 
-ktstdlib/j2cl_kt_stdlib.js/kotlin/UIntArray.impl.java.js:86  mismatch of the contains property on type module$exports$kotlin$UIntArray$impl and the type of the property it overrides from interface module$exports$java$util$Collection$impl
+transpiler/javatests/com/google/j2cl/integration/kotlin/primitivespecialization/primitvespecialization-j2cl.js/primitivespecialization/TestIntArrayIntList.impl.java.js:88  mismatch of the contains property type and the type of the property it overrides from superclass module$exports$java$util$ArrayList$impl
+#original: function(this:module$exports$java$util$ArrayList$impl, *): boolean
+#override: function(this:module$exports$primitivespecialization$TestIntArrayIntList$impl, module$exports$java$lang$Integer$impl): boolean
+
+transpiler/javatests/com/google/j2cl/integration/kotlin/primitivespecialization/primitvespecialization-j2cl.js/primitivespecialization/TestIntArrayIntList.impl.java.js:93  mismatch of the remove property on type module$exports$primitivespecialization$TestIntArrayIntList$impl and the type of the property it overrides from interface module$exports$java$util$Collection$impl
 #original: function(this:module$exports$java$util$Collection$impl, *): boolean
-#override: function(this:module$exports$kotlin$UIntArray$impl, module$exports$kotlin$UInt$impl): boolean
+#override: function(this:module$exports$primitivespecialization$TestIntArrayIntList$impl, module$exports$java$lang$Integer$impl): number
 
-ktstdlib/j2cl_kt_stdlib.js/kotlin/ULongArray.impl.java.js:87  mismatch of the contains property on type module$exports$kotlin$ULongArray$impl and the type of the property it overrides from interface module$exports$java$util$Collection$impl
-#original: function(this:module$exports$java$util$Collection$impl, *): boolean
-#override: function(this:module$exports$kotlin$ULongArray$impl, module$exports$kotlin$ULong$impl): boolean
+transpiler/javatests/com/google/j2cl/integration/kotlin/primitivespecialization/primitvespecialization-j2cl.js/primitivespecialization/TestIntArrayIntList.impl.java.js:93  mismatch of the remove property type and the type of the property it overrides from superclass module$exports$java$util$ArrayList$impl
+#original: function(this:module$exports$java$util$ArrayList$impl, *): boolean
+#override: function(this:module$exports$primitivespecialization$TestIntArrayIntList$impl, module$exports$java$lang$Integer$impl): number
 
-ktstdlib/j2cl_kt_stdlib.js/kotlin/UShortArray.impl.java.js:86  mismatch of the contains property on type module$exports$kotlin$UShortArray$impl and the type of the property it overrides from interface module$exports$java$util$Collection$impl
-#original: function(this:module$exports$java$util$Collection$impl, *): boolean
-#override: function(this:module$exports$kotlin$UShortArray$impl, module$exports$kotlin$UShort$impl): boolean
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$24.impl.java.js:45  mismatch of the contains property on type module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$24$impl and the type of the property it overrides from interface module$exports$java$util$Collection$impl
-#original: function(this:module$exports$java$util$Collection$impl, *): boolean
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$24$impl, number): boolean
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$24.impl.java.js:45  mismatch of the contains property type and the type of the property it overrides from superclass module$exports$kotlin$collections$AbstractCollection$impl
-#original: function(this:module$exports$kotlin$collections$AbstractCollection$impl, module$exports$java$lang$Byte$impl): boolean
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$24$impl, number): boolean
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$24.impl.java.js:49  mismatch of the getAtIndex property on type module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$24$impl and the type of the property it overrides from interface module$exports$java$util$List$impl
-#original: function(this:module$exports$java$util$List$impl, number): module$exports$java$lang$Byte$impl
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$24$impl, number): number
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$24.impl.java.js:49  mismatch of the getAtIndex property type and the type of the property it overrides from superclass module$exports$kotlin$collections$AbstractList$impl
-#original: function(this:module$exports$kotlin$collections$AbstractList$impl, number): module$exports$java$lang$Byte$impl
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$24$impl, number): number
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$24.impl.java.js:53  mismatch of the indexOf property on type module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$24$impl and the type of the property it overrides from interface module$exports$java$util$List$impl
+transpiler/javatests/com/google/j2cl/integration/kotlin/primitivespecialization/primitvespecialization-j2cl.js/primitivespecialization/TestIntArrayIntList.impl.java.js:103  mismatch of the indexOf property on type module$exports$primitivespecialization$TestIntArrayIntList$impl and the type of the property it overrides from interface module$exports$java$util$List$impl
 #original: function(this:module$exports$java$util$List$impl, *): number
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$24$impl, number): number
+#override: function(this:module$exports$primitivespecialization$TestIntArrayIntList$impl, module$exports$java$lang$Integer$impl): number
 
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$24.impl.java.js:53  mismatch of the indexOf property type and the type of the property it overrides from superclass module$exports$kotlin$collections$AbstractList$impl
-#original: function(this:module$exports$kotlin$collections$AbstractList$impl, module$exports$java$lang$Byte$impl): number
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$24$impl, number): number
+transpiler/javatests/com/google/j2cl/integration/kotlin/primitivespecialization/primitvespecialization-j2cl.js/primitivespecialization/TestIntArrayIntList.impl.java.js:103  mismatch of the indexOf property type and the type of the property it overrides from superclass module$exports$java$util$ArrayList$impl
+#original: function(this:module$exports$java$util$ArrayList$impl, *): number
+#override: function(this:module$exports$primitivespecialization$TestIntArrayIntList$impl, module$exports$java$lang$Integer$impl): number
 
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$24.impl.java.js:57  mismatch of the lastIndexOf property on type module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$24$impl and the type of the property it overrides from interface module$exports$java$util$List$impl
+transpiler/javatests/com/google/j2cl/integration/kotlin/primitivespecialization/primitvespecialization-j2cl.js/primitivespecialization/TestIntArrayIntList.impl.java.js:108  mismatch of the lastIndexOf property on type module$exports$primitivespecialization$TestIntArrayIntList$impl and the type of the property it overrides from interface module$exports$java$util$List$impl
 #original: function(this:module$exports$java$util$List$impl, *): number
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$24$impl, number): number
+#override: function(this:module$exports$primitivespecialization$TestIntArrayIntList$impl, module$exports$java$lang$Integer$impl): number
 
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$24.impl.java.js:57  mismatch of the lastIndexOf property type and the type of the property it overrides from superclass module$exports$kotlin$collections$AbstractList$impl
-#original: function(this:module$exports$kotlin$collections$AbstractList$impl, module$exports$java$lang$Byte$impl): number
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$24$impl, number): number
+transpiler/javatests/com/google/j2cl/integration/kotlin/primitivespecialization/primitvespecialization-j2cl.js/primitivespecialization/TestIntArrayIntList.impl.java.js:108  mismatch of the lastIndexOf property type and the type of the property it overrides from superclass module$exports$java$util$ArrayList$impl
+#original: function(this:module$exports$java$util$ArrayList$impl, *): number
+#override: function(this:module$exports$primitivespecialization$TestIntArrayIntList$impl, module$exports$java$lang$Integer$impl): number
 
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$25.impl.java.js:45  mismatch of the contains property on type module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$25$impl and the type of the property it overrides from interface module$exports$java$util$Collection$impl
-#original: function(this:module$exports$java$util$Collection$impl, *): boolean
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$25$impl, number): boolean
+# TODO(b/254859483): This set of errors is due to the different in parameterization of containsAll(Collection<@UnsafeVariance E>) instead of containsAll(Collection<out @UnsafeVariance E>)
+ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/UArraysKt__UArraysImplKt$32.impl.java.js:51  mismatch of the containsAll property type and the type of the property it overrides from superclass module$exports$kotlin$collections$AbstractCollection$impl
+#original: function(this:module$exports$kotlin$collections$AbstractCollection$impl, module$exports$java$util$Collection$impl<*>): boolean
+#override: function(this:module$exports$kotlin$collections$UArraysKt__UArraysImplKt$$32$impl, module$exports$java$util$Collection$impl<module$exports$kotlin$UInt$impl>): boolean
 
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$25.impl.java.js:45  mismatch of the contains property type and the type of the property it overrides from superclass module$exports$kotlin$collections$AbstractCollection$impl
-#original: function(this:module$exports$kotlin$collections$AbstractCollection$impl, module$exports$java$lang$Short$impl): boolean
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$25$impl, number): boolean
+ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/UArraysKt__UArraysImplKt$33.impl.java.js:51  mismatch of the containsAll property type and the type of the property it overrides from superclass module$exports$kotlin$collections$AbstractCollection$impl
+#original: function(this:module$exports$kotlin$collections$AbstractCollection$impl, module$exports$java$util$Collection$impl<*>): boolean
+#override: function(this:module$exports$kotlin$collections$UArraysKt__UArraysImplKt$$33$impl, module$exports$java$util$Collection$impl<module$exports$kotlin$ULong$impl>): boolean
 
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$25.impl.java.js:49  mismatch of the getAtIndex property on type module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$25$impl and the type of the property it overrides from interface module$exports$java$util$List$impl
-#original: function(this:module$exports$java$util$List$impl, number): module$exports$java$lang$Short$impl
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$25$impl, number): number
+ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/UArraysKt__UArraysImplKt$34.impl.java.js:51  mismatch of the containsAll property type and the type of the property it overrides from superclass module$exports$kotlin$collections$AbstractCollection$impl
+#original: function(this:module$exports$kotlin$collections$AbstractCollection$impl, module$exports$java$util$Collection$impl<*>): boolean
+#override: function(this:module$exports$kotlin$collections$UArraysKt__UArraysImplKt$$34$impl, module$exports$java$util$Collection$impl<module$exports$kotlin$UByte$impl>): boolean
 
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$25.impl.java.js:49  mismatch of the getAtIndex property type and the type of the property it overrides from superclass module$exports$kotlin$collections$AbstractList$impl
-#original: function(this:module$exports$kotlin$collections$AbstractList$impl, number): module$exports$java$lang$Short$impl
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$25$impl, number): number
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$25.impl.java.js:53  mismatch of the indexOf property on type module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$25$impl and the type of the property it overrides from interface module$exports$java$util$List$impl
-#original: function(this:module$exports$java$util$List$impl, *): number
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$25$impl, number): number
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$25.impl.java.js:53  mismatch of the indexOf property type and the type of the property it overrides from superclass module$exports$kotlin$collections$AbstractList$impl
-#original: function(this:module$exports$kotlin$collections$AbstractList$impl, module$exports$java$lang$Short$impl): number
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$25$impl, number): number
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$25.impl.java.js:57  mismatch of the lastIndexOf property on type module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$25$impl and the type of the property it overrides from interface module$exports$java$util$List$impl
-#original: function(this:module$exports$java$util$List$impl, *): number
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$25$impl, number): number
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$25.impl.java.js:57  mismatch of the lastIndexOf property type and the type of the property it overrides from superclass module$exports$kotlin$collections$AbstractList$impl
-#original: function(this:module$exports$kotlin$collections$AbstractList$impl, module$exports$java$lang$Short$impl): number
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$25$impl, number): number
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$26.impl.java.js:45  mismatch of the contains property on type module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$26$impl and the type of the property it overrides from interface module$exports$java$util$Collection$impl
-#original: function(this:module$exports$java$util$Collection$impl, *): boolean
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$26$impl, number): boolean
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$26.impl.java.js:45  mismatch of the contains property type and the type of the property it overrides from superclass module$exports$kotlin$collections$AbstractCollection$impl
-#original: function(this:module$exports$kotlin$collections$AbstractCollection$impl, module$exports$java$lang$Integer$impl): boolean
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$26$impl, number): boolean
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$26.impl.java.js:49  mismatch of the getAtIndex property on type module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$26$impl and the type of the property it overrides from interface module$exports$java$util$List$impl
-#original: function(this:module$exports$java$util$List$impl, number): module$exports$java$lang$Integer$impl
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$26$impl, number): number
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$26.impl.java.js:49  mismatch of the getAtIndex property type and the type of the property it overrides from superclass module$exports$kotlin$collections$AbstractList$impl
-#original: function(this:module$exports$kotlin$collections$AbstractList$impl, number): module$exports$java$lang$Integer$impl
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$26$impl, number): number
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$26.impl.java.js:53  mismatch of the indexOf property on type module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$26$impl and the type of the property it overrides from interface module$exports$java$util$List$impl
-#original: function(this:module$exports$java$util$List$impl, *): number
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$26$impl, number): number
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$26.impl.java.js:53  mismatch of the indexOf property type and the type of the property it overrides from superclass module$exports$kotlin$collections$AbstractList$impl
-#original: function(this:module$exports$kotlin$collections$AbstractList$impl, module$exports$java$lang$Integer$impl): number
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$26$impl, number): number
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$26.impl.java.js:57  mismatch of the lastIndexOf property on type module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$26$impl and the type of the property it overrides from interface module$exports$java$util$List$impl
-#original: function(this:module$exports$java$util$List$impl, *): number
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$26$impl, number): number
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$26.impl.java.js:57  mismatch of the lastIndexOf property type and the type of the property it overrides from superclass module$exports$kotlin$collections$AbstractList$impl
-#original: function(this:module$exports$kotlin$collections$AbstractList$impl, module$exports$java$lang$Integer$impl): number
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$26$impl, number): number
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$27.impl.java.js:46  mismatch of the contains property on type module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$27$impl and the type of the property it overrides from interface module$exports$java$util$Collection$impl
-#original: function(this:module$exports$java$util$Collection$impl, *): boolean
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$27$impl, module$contents$goog$math$Long_Long): boolean
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$27.impl.java.js:46  mismatch of the contains property type and the type of the property it overrides from superclass module$exports$kotlin$collections$AbstractCollection$impl
-#original: function(this:module$exports$kotlin$collections$AbstractCollection$impl, module$exports$java$lang$Long$impl): boolean
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$27$impl, module$contents$goog$math$Long_Long): boolean
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$27.impl.java.js:50  mismatch of the getAtIndex property on type module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$27$impl and the type of the property it overrides from interface module$exports$java$util$List$impl
-#original: function(this:module$exports$java$util$List$impl, number): module$exports$java$lang$Long$impl
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$27$impl, number): module$contents$goog$math$Long_Long
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$27.impl.java.js:50  mismatch of the getAtIndex property type and the type of the property it overrides from superclass module$exports$kotlin$collections$AbstractList$impl
-#original: function(this:module$exports$kotlin$collections$AbstractList$impl, number): module$exports$java$lang$Long$impl
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$27$impl, number): module$contents$goog$math$Long_Long
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$27.impl.java.js:54  mismatch of the indexOf property on type module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$27$impl and the type of the property it overrides from interface module$exports$java$util$List$impl
-#original: function(this:module$exports$java$util$List$impl, *): number
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$27$impl, module$contents$goog$math$Long_Long): number
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$27.impl.java.js:54  mismatch of the indexOf property type and the type of the property it overrides from superclass module$exports$kotlin$collections$AbstractList$impl
-#original: function(this:module$exports$kotlin$collections$AbstractList$impl, module$exports$java$lang$Long$impl): number
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$27$impl, module$contents$goog$math$Long_Long): number
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$27.impl.java.js:58  mismatch of the lastIndexOf property on type module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$27$impl and the type of the property it overrides from interface module$exports$java$util$List$impl
-#original: function(this:module$exports$java$util$List$impl, *): number
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$27$impl, module$contents$goog$math$Long_Long): number
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$27.impl.java.js:58  mismatch of the lastIndexOf property type and the type of the property it overrides from superclass module$exports$kotlin$collections$AbstractList$impl
-#original: function(this:module$exports$kotlin$collections$AbstractList$impl, module$exports$java$lang$Long$impl): number
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$27$impl, module$contents$goog$math$Long_Long): number
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$28.impl.java.js:47  mismatch of the contains property on type module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$28$impl and the type of the property it overrides from interface module$exports$java$util$Collection$impl
-#original: function(this:module$exports$java$util$Collection$impl, *): boolean
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$28$impl, number): boolean
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$28.impl.java.js:47  mismatch of the contains property type and the type of the property it overrides from superclass module$exports$kotlin$collections$AbstractCollection$impl
-#original: function(this:module$exports$kotlin$collections$AbstractCollection$impl, module$exports$java$lang$Float$impl): boolean
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$28$impl, number): boolean
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$28.impl.java.js:63  mismatch of the getAtIndex property on type module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$28$impl and the type of the property it overrides from interface module$exports$java$util$List$impl
-#original: function(this:module$exports$java$util$List$impl, number): module$exports$java$lang$Float$impl
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$28$impl, number): number
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$28.impl.java.js:63  mismatch of the getAtIndex property type and the type of the property it overrides from superclass module$exports$kotlin$collections$AbstractList$impl
-#original: function(this:module$exports$kotlin$collections$AbstractList$impl, number): module$exports$java$lang$Float$impl
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$28$impl, number): number
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$28.impl.java.js:67  mismatch of the indexOf property on type module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$28$impl and the type of the property it overrides from interface module$exports$java$util$List$impl
-#original: function(this:module$exports$java$util$List$impl, *): number
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$28$impl, number): number
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$28.impl.java.js:67  mismatch of the indexOf property type and the type of the property it overrides from superclass module$exports$kotlin$collections$AbstractList$impl
-#original: function(this:module$exports$kotlin$collections$AbstractList$impl, module$exports$java$lang$Float$impl): number
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$28$impl, number): number
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$28.impl.java.js:84  mismatch of the lastIndexOf property on type module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$28$impl and the type of the property it overrides from interface module$exports$java$util$List$impl
-#original: function(this:module$exports$java$util$List$impl, *): number
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$28$impl, number): number
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$28.impl.java.js:84  mismatch of the lastIndexOf property type and the type of the property it overrides from superclass module$exports$kotlin$collections$AbstractList$impl
-#original: function(this:module$exports$kotlin$collections$AbstractList$impl, module$exports$java$lang$Float$impl): number
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$28$impl, number): number
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$29.impl.java.js:47  mismatch of the contains property on type module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$29$impl and the type of the property it overrides from interface module$exports$java$util$Collection$impl
-#original: function(this:module$exports$java$util$Collection$impl, *): boolean
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$29$impl, number): boolean
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$29.impl.java.js:67  mismatch of the indexOf property on type module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$29$impl and the type of the property it overrides from interface module$exports$java$util$List$impl
-#original: function(this:module$exports$java$util$List$impl, *): number
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$29$impl, number): number
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$29.impl.java.js:84  mismatch of the lastIndexOf property on type module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$29$impl and the type of the property it overrides from interface module$exports$java$util$List$impl
-#original: function(this:module$exports$java$util$List$impl, *): number
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$29$impl, number): number
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$30.impl.java.js:44  mismatch of the contains property on type module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$30$impl and the type of the property it overrides from interface module$exports$java$util$Collection$impl
-#original: function(this:module$exports$java$util$Collection$impl, *): boolean
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$30$impl, boolean): boolean
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$30.impl.java.js:52  mismatch of the indexOf property on type module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$30$impl and the type of the property it overrides from interface module$exports$java$util$List$impl
-#original: function(this:module$exports$java$util$List$impl, *): number
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$30$impl, boolean): number
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$30.impl.java.js:56  mismatch of the lastIndexOf property on type module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$30$impl and the type of the property it overrides from interface module$exports$java$util$List$impl
-#original: function(this:module$exports$java$util$List$impl, *): number
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$30$impl, boolean): number
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$31.impl.java.js:45  mismatch of the contains property on type module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$31$impl and the type of the property it overrides from interface module$exports$java$util$Collection$impl
-#original: function(this:module$exports$java$util$Collection$impl, *): boolean
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$31$impl, number): boolean
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$31.impl.java.js:45  mismatch of the contains property type and the type of the property it overrides from superclass module$exports$kotlin$collections$AbstractCollection$impl
-#original: function(this:module$exports$kotlin$collections$AbstractCollection$impl, module$exports$java$lang$Character$impl): boolean
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$31$impl, number): boolean
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$31.impl.java.js:49  mismatch of the getAtIndex property on type module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$31$impl and the type of the property it overrides from interface module$exports$java$util$List$impl
-#original: function(this:module$exports$java$util$List$impl, number): module$exports$java$lang$Character$impl
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$31$impl, number): number
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$31.impl.java.js:49  mismatch of the getAtIndex property type and the type of the property it overrides from superclass module$exports$kotlin$collections$AbstractList$impl
-#original: function(this:module$exports$kotlin$collections$AbstractList$impl, number): module$exports$java$lang$Character$impl
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$31$impl, number): number
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$31.impl.java.js:53  mismatch of the indexOf property on type module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$31$impl and the type of the property it overrides from interface module$exports$java$util$List$impl
-#original: function(this:module$exports$java$util$List$impl, *): number
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$31$impl, number): number
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$31.impl.java.js:53  mismatch of the indexOf property type and the type of the property it overrides from superclass module$exports$kotlin$collections$AbstractList$impl
-#original: function(this:module$exports$kotlin$collections$AbstractList$impl, module$exports$java$lang$Character$impl): number
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$31$impl, number): number
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$31.impl.java.js:57  mismatch of the lastIndexOf property on type module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$31$impl and the type of the property it overrides from interface module$exports$java$util$List$impl
-#original: function(this:module$exports$java$util$List$impl, *): number
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$31$impl, number): number
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/ArraysKt__ArraysImplKt$31.impl.java.js:57  mismatch of the lastIndexOf property type and the type of the property it overrides from superclass module$exports$kotlin$collections$AbstractList$impl
-#original: function(this:module$exports$kotlin$collections$AbstractList$impl, module$exports$java$lang$Character$impl): number
-#override: function(this:module$exports$kotlin$collections$ArraysKt__ArraysImplKt$$31$impl, number): number
-
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/UByteArray.impl.java.js:29  property contains on interface module$exports$java$util$Collection$impl is not implemented by type module$exports$kotlin$UByteArray$impl
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/UIntArray.impl.java.js:29  property contains on interface module$exports$java$util$Collection$impl is not implemented by type module$exports$kotlin$UIntArray$impl
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/ULongArray.impl.java.js:30  property contains on interface module$exports$java$util$Collection$impl is not implemented by type module$exports$kotlin$ULongArray$impl
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/UShortArray.impl.java.js:29  property contains on interface module$exports$java$util$Collection$impl is not implemented by type module$exports$kotlin$UShortArray$impl
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/EmptyList.impl.java.js:31  property contains on interface module$exports$java$util$Collection$impl is not implemented by type module$exports$kotlin$collections$EmptyList$impl
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/EmptyList.impl.java.js:31  property indexOf on interface module$exports$java$util$List$impl is not implemented by type module$exports$kotlin$collections$EmptyList$impl
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/EmptyList.impl.java.js:31  property lastIndexOf on interface module$exports$java$util$List$impl is not implemented by type module$exports$kotlin$collections$EmptyList$impl
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/EmptySet.impl.java.js:24  property contains on interface module$exports$java$util$Collection$impl is not implemented by type module$exports$kotlin$collections$EmptySet$impl
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/EmptyMap.impl.java.js:23  property containsValue on interface module$exports$java$util$Map$impl is not implemented by type module$exports$kotlin$collections$EmptyMap$impl
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/UArraysKt__UArraysImplKt$32.impl.java.js:61  mismatch of the contains property on type module$exports$kotlin$collections$UArraysKt__UArraysImplKt$$32$impl and the type of the property it overrides from interface module$exports$java$util$Collection$impl
-#original: function(this:module$exports$java$util$Collection$impl, *): boolean
-#override: function(this:module$exports$kotlin$collections$UArraysKt__UArraysImplKt$$32$impl, module$exports$kotlin$UInt$impl): boolean
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/UArraysKt__UArraysImplKt$33.impl.java.js:61  mismatch of the contains property on type module$exports$kotlin$collections$UArraysKt__UArraysImplKt$$33$impl and the type of the property it overrides from interface module$exports$java$util$Collection$impl
-#original: function(this:module$exports$java$util$Collection$impl, *): boolean
-#override: function(this:module$exports$kotlin$collections$UArraysKt__UArraysImplKt$$33$impl, module$exports$kotlin$ULong$impl): boolean
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/UArraysKt__UArraysImplKt$34.impl.java.js:61  mismatch of the contains property on type module$exports$kotlin$collections$UArraysKt__UArraysImplKt$$34$impl and the type of the property it overrides from interface module$exports$java$util$Collection$impl
-#original: function(this:module$exports$java$util$Collection$impl, *): boolean
-#override: function(this:module$exports$kotlin$collections$UArraysKt__UArraysImplKt$$34$impl, module$exports$kotlin$UByte$impl): boolean
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/UArraysKt__UArraysImplKt$35.impl.java.js:61  mismatch of the contains property on type module$exports$kotlin$collections$UArraysKt__UArraysImplKt$$35$impl and the type of the property it overrides from interface module$exports$java$util$Collection$impl
-#original: function(this:module$exports$java$util$Collection$impl, *): boolean
-#override: function(this:module$exports$kotlin$collections$UArraysKt__UArraysImplKt$$35$impl, module$exports$kotlin$UShort$impl): boolean
+ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/UArraysKt__UArraysImplKt$35.impl.java.js:51  mismatch of the containsAll property type and the type of the property it overrides from superclass module$exports$kotlin$collections$AbstractCollection$impl
+#original: function(this:module$exports$kotlin$collections$AbstractCollection$impl, module$exports$java$util$Collection$impl<*>): boolean
+#override: function(this:module$exports$kotlin$collections$UArraysKt__UArraysImplKt$$35$impl, module$exports$java$util$Collection$impl<module$exports$kotlin$UShort$impl>): boolean
