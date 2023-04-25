@@ -22,7 +22,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Kotlin {@code in} variance declaration.
+ * Kotlin {@code out} variance declaration.
  *
  * <p>Type parameters annotated with this annotation are rendered with {@code in} variance
  * declaration in Kotlin. When used in {@code KtNative} types, it provides variance information
