@@ -26,6 +26,8 @@ class Bar {
   }
 
   product() { return this.x * this.y; }
+
+  static getStatic() { return 1; }
 };
 
 /**
@@ -39,6 +41,10 @@ Bar.Inner = class {
     /** @public {number} */
     this.n = n;
   }
+
+  square() { return this.n * this.n; }
+
+  static getInnerStatic() { return 2; }
 };
 
 exports = Bar;

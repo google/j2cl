@@ -25,6 +25,16 @@ class Foo {
   sum(a, b) {
     return a + b;
   }
+
+  /**
+   * @param {number} a
+   * @param {number} b
+   * @return {number}
+   * @public
+   */
+  static mult(a, b) {
+    return a * b;
+  }
 }
 
-exports = {Foo};
+exports = Foo;

@@ -30,9 +30,15 @@ public class Bar {
 
   public native int product();
 
+  public static native int getStatic();
+
   @JsType(isNative = true)
   static class Inner {
     public Inner(int n) {}
+
+    public native int square();
+
+    public static native int getInnerStatic();
   }
 }
 
@@ -40,9 +46,17 @@ public class Bar {
 @JsType(isNative = true, name = "Bar.Inner")
 class BarInnerWithDotInName {
   public BarInnerWithDotInName(int n) {}
+
+  public native int square();
+
+  public static native int getInnerStatic();
 }
 
 @JsType(isNative = true, namespace = "nativejstypes", name = "Bar.Inner")
 class BarInnerWithDotInNameAndHasNamespace {
   public BarInnerWithDotInNameAndHasNamespace(int n) {}
+
+  public native int square();
+
+  public static native int getInnerStatic();
 }

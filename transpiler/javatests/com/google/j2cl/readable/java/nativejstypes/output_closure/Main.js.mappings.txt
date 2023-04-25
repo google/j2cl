@@ -11,13 +11,20 @@
 [testNativeJsTypeWithNamespace] => [m_testNativeJsTypeWithNamespace__int]
 [{
     Foo foo = new Foo();
-...    return foo.sum();
+    return foo.sum();
   }] => [Main.$clinit();] "nativejstypes.Main.testNativeJsTypeWithNamespace"
 [Foo foo = new Foo();] => [let foo = new Foo();] "nativejstypes.Main.testNativeJsTypeWithNamespace"
 [foo] => [foo] "foo"
-[foo.x = 50;] => [foo.x = 50;] "nativejstypes.Main.testNativeJsTypeWithNamespace"
-[foo.y = 5;] => [foo.y = 5;] "nativejstypes.Main.testNativeJsTypeWithNamespace"
 [return foo.sum();] => [return foo.sum();] "nativejstypes.Main.testNativeJsTypeWithNamespace"
+[testNativeJsTypeWithNamespaceJsProperties] => [m_testNativeJsTypeWithNamespaceJsProperties__void]
+[{
+    Foo foo = new Foo();
+...    foo.y = 5;
+  }] => [Main.$clinit();] "nativejstypes.Main.testNativeJsTypeWithNamespaceJsProperties"
+[Foo foo = new Foo();] => [let foo = new Foo();] "nativejstypes.Main.testNativeJsTypeWithNamespaceJsProperties"
+[foo] => [foo] "foo"
+[foo.x = 50;] => [foo.x = 50;] "nativejstypes.Main.testNativeJsTypeWithNamespaceJsProperties"
+[foo.y = 5;] => [foo.y = 5;] "nativejstypes.Main.testNativeJsTypeWithNamespaceJsProperties"
 [testNativeJsTypeWithoutNamespace] => [m_testNativeJsTypeWithoutNamespace__int]
 [{
     Bar bar = new Bar(6, 7);
@@ -25,19 +32,32 @@
   }] => [Main.$clinit();] "nativejstypes.Main.testNativeJsTypeWithoutNamespace"
 [Bar bar = new Bar(6, 7);] => [let bar = new Bar(6, 7);] "nativejstypes.Main.testNativeJsTypeWithoutNamespace"
 [bar] => [bar] "bar"
-[bar.x = 50;] => [bar.x = 50;] "nativejstypes.Main.testNativeJsTypeWithoutNamespace"
-[bar.y = 5;] => [bar.y = 5;] "nativejstypes.Main.testNativeJsTypeWithoutNamespace"
-[Bar.f = 10;] => [Bar.f = 10;] "nativejstypes.Main.testNativeJsTypeWithoutNamespace"
+[int unused = Bar.getStatic();] => [let unused = Bar.getStatic();] "nativejstypes.Main.testNativeJsTypeWithoutNamespace"
+[unused] => [unused] "unused"
 [return bar.product();] => [return bar.product();] "nativejstypes.Main.testNativeJsTypeWithoutNamespace"
+[testNativeJsTypeWithoutNamespaceJsProperties] => [m_testNativeJsTypeWithoutNamespaceJsProperties__void]
+[{
+    Bar bar = new Bar(6, 7);
+...    Bar.f = 10;
+  }] => [Main.$clinit();] "nativejstypes.Main.testNativeJsTypeWithoutNamespaceJsProperties"
+[Bar bar = new Bar(6, 7);] => [let bar = new Bar(6, 7);] "nativejstypes.Main.testNativeJsTypeWithoutNamespaceJsProperties"
+[bar] => [bar] "bar"
+[bar.x = 50;] => [bar.x = 50;] "nativejstypes.Main.testNativeJsTypeWithoutNamespaceJsProperties"
+[bar.y = 5;] => [bar.y = 5;] "nativejstypes.Main.testNativeJsTypeWithoutNamespaceJsProperties"
+[Bar.f = 10;] => [Bar.f = 10;] "nativejstypes.Main.testNativeJsTypeWithoutNamespaceJsProperties"
 [testInnerNativeJsType] => [m_testInnerNativeJsType__void]
 [{
-    Bar.Inner unusedBarInner = new Bar.Inner(1);
-    BarInnerWithDotInName unusedBarInnerWithDotInName = new BarInnerWithDotInName(2);
+    Bar.Inner barInner = new Bar.Inner(1);
+...    BarInnerWithDotInName.getInnerStatic();
   }] => [Main.$clinit();] "nativejstypes.Main.testInnerNativeJsType"
-[Bar.Inner unusedBarInner = new Bar.Inner(1);] => [let unusedBarInner = new Bar.Inner(1);] "nativejstypes.Main.testInnerNativeJsType"
-[unusedBarInner] => [unusedBarInner] "unusedBarInner"
-[BarInnerWithDotInName unusedBarInnerWithDotInName = new BarInnerWithDotInName(2);] => [let unusedBarInnerWithDotInName = new $synthetic_nativejstypes_Bar.Inner(2);] "nativejstypes.Main.testInnerNativeJsType"
-[unusedBarInnerWithDotInName] => [unusedBarInnerWithDotInName] "unusedBarInnerWithDotInName"
+[Bar.Inner barInner = new Bar.Inner(1);] => [let barInner = new Bar.Inner(1);] "nativejstypes.Main.testInnerNativeJsType"
+[barInner] => [barInner] "barInner"
+[BarInnerWithDotInName barInnerWithDotInName = new BarInnerWithDotInName(2);] => [let barInnerWithDotInName = new $synthetic_nativejstypes_Bar.Inner(2);] "nativejstypes.Main.testInnerNativeJsType"
+[barInnerWithDotInName] => [barInnerWithDotInName] "barInnerWithDotInName"
+[barInner.square();] => [barInner.square();] "nativejstypes.Main.testInnerNativeJsType"
+[barInnerWithDotInName.square();] => [barInnerWithDotInName.square();] "nativejstypes.Main.testInnerNativeJsType"
+[Bar.Inner.getInnerStatic();] => [Bar.Inner.getInnerStatic();] "nativejstypes.Main.testInnerNativeJsType"
+[BarInnerWithDotInName.getInnerStatic();] => [$synthetic_nativejstypes_Bar.Inner.getInnerStatic();] "nativejstypes.Main.testInnerNativeJsType"
 [testGlobalNativeJsType] => [m_testGlobalNativeJsType__void]
 [{
     Headers header = new Headers();
@@ -57,13 +77,16 @@
 [testNativeTypeObjectMethods] => [m_testNativeTypeObjectMethods__void]
 [{
     Bar bar = new Bar(6, 7);
-...    bar.equals(new Object());
+...    boolean unusedEq = bar.equals(new Object());
   }] => [Main.$clinit();] "nativejstypes.Main.testNativeTypeObjectMethods"
 [Bar bar = new Bar(6, 7);] => [let bar = new Bar(6, 7);] "nativejstypes.Main.testNativeTypeObjectMethods"
 [bar] => [bar] "bar"
-[bar.toString();] => [$Objects.m_toString__java_lang_Object__java_lang_String(bar);] "nativejstypes.Main.testNativeTypeObjectMethods"
-[bar.hashCode();] => [$Objects.m_hashCode__java_lang_Object__int(bar);] "nativejstypes.Main.testNativeTypeObjectMethods"
-[bar.equals(new Object());] => [$Objects.m_equals__java_lang_Object__java_lang_Object__boolean(bar, j_l_Object.$create__());] "nativejstypes.Main.testNativeTypeObjectMethods"
+[String unusedStr = bar.toString();] => [let unusedStr = $Objects.m_toString__java_lang_Object__java_lang_String(bar);] "nativejstypes.Main.testNativeTypeObjectMethods"
+[unusedStr] => [unusedStr] "unusedStr"
+[int unusedHash = bar.hashCode();] => [let unusedHash = $Objects.m_hashCode__java_lang_Object__int(bar);] "nativejstypes.Main.testNativeTypeObjectMethods"
+[unusedHash] => [unusedHash] "unusedHash"
+[boolean unusedEq = bar.equals(new Object());] => [let unusedEq = $Objects.m_equals__java_lang_Object__java_lang_Object__boolean(bar, j_l_Object.$create__());] "nativejstypes.Main.testNativeTypeObjectMethods"
+[unusedEq] => [unusedEq] "unusedEq"
 [Main] => [$clinit]
 [Main] => [Main.$clinit = () =>{};] "nativejstypes.Main.<clinit>"
 [Main] => [Main.$loadModules();] "nativejstypes.Main.<clinit>"

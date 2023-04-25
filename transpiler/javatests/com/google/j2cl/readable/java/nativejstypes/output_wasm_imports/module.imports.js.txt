@@ -3,6 +3,9 @@ const j2wasm_StringUtils = goog.require('j2wasm.StringUtils');
 const j2wasm_DoubleUtils = goog.require('j2wasm.DoubleUtils');
 const j2wasm_ConsoleUtils = goog.require('j2wasm.ConsoleUtils');
 const j2wasm_ExceptionUtils = goog.require('j2wasm.ExceptionUtils');
+const nativejstypes_Bar = goog.require('nativejstypes.Bar');
+const nativejstypes_Bar_Inner = goog.require('nativejstypes.Bar.Inner');
+const com_acme_MyFoo = goog.require('com.acme.MyFoo');
 
 /** @return {!Object<string, !Object<string, !*>>} Wasm import object */
 function getImports() {
@@ -89,8 +92,27 @@ function getImports() {
    'get RegExpResult.index': (/** !RegExpResult */ $instance, ) => $instance.index,
    'get RegExpResult.length': (/** !RegExpResult */ $instance, ) => $instance.length,
    'RegExpResult.at': (/** !RegExpResult */ $instance, /** number */ index, ) => $instance.at(index, ),
-   'Number.isInteger': Number.isInteger,
-   'RegExp.toString': (/** !RegExp */ $instance, ) => $instance.toString(),
+   'nativejstypes.Bar.constructor': (/** number */ x, /** number */ y, ) => new nativejstypes_Bar(x, y, ),
+   'nativejstypes.Bar.product': (/** !nativejstypes_Bar */ $instance, ) => $instance.product(),
+   'nativejstypes.Bar.getStatic': nativejstypes_Bar.getStatic,
+   'get nativejstypes.Bar.x': (/** !nativejstypes_Bar */ $instance, ) => $instance.x,
+   'set nativejstypes.Bar.x': (/** !nativejstypes_Bar */ $instance, /** number */ value, ) => $instance.x = value,
+   'get nativejstypes.Bar.y': (/** !nativejstypes_Bar */ $instance, ) => $instance.y,
+   'set nativejstypes.Bar.y': (/** !nativejstypes_Bar */ $instance, /** number */ value, ) => $instance.y = value,
+   'get nativejstypes.Bar.f': () => nativejstypes_Bar.f,
+   'set nativejstypes.Bar.f': (/** number */ value, ) => nativejstypes_Bar.f = value,
+   'nativejstypes.Bar.Inner.constructor': (/** number */ n, ) => new nativejstypes_Bar.Inner(n, ),
+   'nativejstypes.Bar.Inner.square': (/** !nativejstypes_Bar.Inner */ $instance, ) => $instance.square(),
+   'nativejstypes.Bar.Inner.getInnerStatic': nativejstypes_Bar.Inner.getInnerStatic,
+   'com.acme.MyFoo.constructor': () => new com_acme_MyFoo(),
+   'com.acme.MyFoo.sum': (/** !com_acme_MyFoo */ $instance, ) => $instance.sum(),
+   'get com.acme.MyFoo.x': (/** !com_acme_MyFoo */ $instance, ) => $instance.x,
+   'set com.acme.MyFoo.x': (/** !com_acme_MyFoo */ $instance, /** number */ value, ) => $instance.x = value,
+   'get com.acme.MyFoo.y': (/** !com_acme_MyFoo */ $instance, ) => $instance.y,
+   'set com.acme.MyFoo.y': (/** !com_acme_MyFoo */ $instance, /** number */ value, ) => $instance.y = value,
+   'Headers.constructor': () => new Headers(),
+   'Headers.append': (/** !Headers */ $instance, /** String */ name, /** String */ value, ) => $instance.append(name, value, ),
+   'Headers.get': (/** !Headers */ $instance, /** String */ name, ) => $instance.get(name, ),
   }
  };
 }

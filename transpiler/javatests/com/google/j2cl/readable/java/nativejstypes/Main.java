@@ -20,22 +20,35 @@ import javaemul.internal.annotations.Wasm;
 public class Main {
   public static int testNativeJsTypeWithNamespace() {
     Foo foo = new Foo();
+    return foo.sum();
+  }
+
+  public static void testNativeJsTypeWithNamespaceJsProperties() {
+    Foo foo = new Foo();
     foo.x = 50;
     foo.y = 5;
-    return foo.sum();
   }
 
   public static int testNativeJsTypeWithoutNamespace() {
     Bar bar = new Bar(6, 7);
-    bar.x = 50;
-    bar.y = 5;
-    Bar.f = 10;
+    int unused = Bar.getStatic();
     return bar.product();
   }
 
+  public static void testNativeJsTypeWithoutNamespaceJsProperties() {
+    Bar bar = new Bar(6, 7);
+    bar.x = 50;
+    bar.y = 5;
+    Bar.f = 10;
+  }
+
   public static void testInnerNativeJsType() {
-    Bar.Inner unusedBarInner = new Bar.Inner(1);
-    BarInnerWithDotInName unusedBarInnerWithDotInName = new BarInnerWithDotInName(2);
+    Bar.Inner barInner = new Bar.Inner(1);
+    BarInnerWithDotInName barInnerWithDotInName = new BarInnerWithDotInName(2);
+    barInner.square();
+    barInnerWithDotInName.square();
+    Bar.Inner.getInnerStatic();
+    BarInnerWithDotInName.getInnerStatic();
   }
 
   public static void testGlobalNativeJsType() {
@@ -52,8 +65,8 @@ public class Main {
   @Wasm("nop") // Not supported in WASM.
   public static void testNativeTypeObjectMethods() {
     Bar bar = new Bar(6, 7);
-    bar.toString();
-    bar.hashCode();
-    bar.equals(new Object());
+    String unusedStr = bar.toString();
+    int unusedHash = bar.hashCode();
+    boolean unusedEq = bar.equals(new Object());
   }
 }

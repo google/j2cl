@@ -38,6 +38,7 @@ readable_example(
     ]),
     # TODO(b/202515129): Allow dependencies on native code (like js & iOS) in J2KT.
     generate_kt_readables = False,
+    generate_wasm_imports = True,
     deps = [
         "//jre/java:javaemul_internal_annotations-j2cl",
         "//third_party:gwt-jsinterop-annotations-j2cl",

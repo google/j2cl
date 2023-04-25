@@ -14,6 +14,7 @@ java_library(
         "//third_party:jsr305_annotations",
         "//transpiler/java/com/google/j2cl/common",
         "//transpiler/java/com/google/j2cl/transpiler/ast",
+        "//transpiler/java/com/google/j2cl/transpiler/backend/closure",
         "//transpiler/java/com/google/j2cl/transpiler/backend/common",
     ],
 )

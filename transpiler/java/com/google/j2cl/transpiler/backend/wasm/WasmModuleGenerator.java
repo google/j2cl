@@ -105,6 +105,7 @@ public class WasmModuleGenerator {
     // the Throwable object being thrown by the throw instruction.
     // The throw instruction will refer to this tag and will expect a single element in the stack
     // with the type $java.lang.Throwable.
+    // TODO(b/277970998): Decide how to handle this hard coded import w.r.t. import generation.
     builder.newLine();
     builder.append(
         "(import \"imports\" \"j2wasm.ExceptionUtils.tag\" (tag $exception.event (param"

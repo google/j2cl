@@ -355,19 +355,19 @@
 
 ;;; void $Overlay.$clinit()
 (func $$clinit__void@nativejstypes.BarInnerWithDotInName.$Overlay
- ;;@ nativejstypes/Bar.java:41:6
+ ;;@ nativejstypes/Bar.java:47:6
  (block
   ;; if (nativejstypes.BarInnerWithDotInName.$Overlay.$initialized) return;
-  ;;@ nativejstypes/Bar.java:41:6
+  ;;@ nativejstypes/Bar.java:47:6
   (if (global.get $f_$initialized__nativejstypes_BarInnerWithDotInName_$Overlay)
    (then
     ;; return;
-    ;;@ nativejstypes/Bar.java:41:6
+    ;;@ nativejstypes/Bar.java:47:6
     (return )
    )
   )
   ;; (nativejstypes.BarInnerWithDotInName.$Overlay.$initialized = true);
-  ;;@ nativejstypes/Bar.java:41:6
+  ;;@ nativejstypes/Bar.java:47:6
   (global.set $f_$initialized__nativejstypes_BarInnerWithDotInName_$Overlay (i32.const 1))
  )
 )
@@ -390,19 +390,19 @@
 
 ;;; void $Overlay.$clinit()
 (func $$clinit__void@nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay
- ;;@ nativejstypes/Bar.java:46:6
+ ;;@ nativejstypes/Bar.java:56:6
  (block
   ;; if (nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay.$initialized) return;
-  ;;@ nativejstypes/Bar.java:46:6
+  ;;@ nativejstypes/Bar.java:56:6
   (if (global.get $f_$initialized__nativejstypes_BarInnerWithDotInNameAndHasNamespace_$Overlay)
    (then
     ;; return;
-    ;;@ nativejstypes/Bar.java:46:6
+    ;;@ nativejstypes/Bar.java:56:6
     (return )
    )
   )
   ;; (nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay.$initialized = true);
-  ;;@ nativejstypes/Bar.java:46:6
+  ;;@ nativejstypes/Bar.java:56:6
   (global.set $f_$initialized__nativejstypes_BarInnerWithDotInNameAndHasNamespace_$Overlay (i32.const 1))
  )
 )
@@ -425,19 +425,19 @@
 
 ;;; void $Overlay.$clinit()
 (func $$clinit__void@nativejstypes.Bar.Inner.$Overlay
- ;;@ nativejstypes/Bar.java:34:15
+ ;;@ nativejstypes/Bar.java:36:15
  (block
   ;; if (nativejstypes.Bar.Inner.$Overlay.$initialized) return;
-  ;;@ nativejstypes/Bar.java:34:15
+  ;;@ nativejstypes/Bar.java:36:15
   (if (global.get $f_$initialized__nativejstypes_Bar_Inner_$Overlay)
    (then
     ;; return;
-    ;;@ nativejstypes/Bar.java:34:15
+    ;;@ nativejstypes/Bar.java:36:15
     (return )
    )
   )
   ;; (nativejstypes.Bar.Inner.$Overlay.$initialized = true);
-  ;;@ nativejstypes/Bar.java:34:15
+  ;;@ nativejstypes/Bar.java:36:15
   (global.set $f_$initialized__nativejstypes_Bar_Inner_$Overlay (i32.const 1))
  )
 )
@@ -541,6 +541,11 @@
  (result i32)
 )
 
+;;; int Bar.getStatic()
+(func $m_getStatic__int@nativejstypes.Bar (import "imports" "nativejstypes.Bar.getStatic") 
+ (result i32)
+)
+
 ;;; int Bar.x()
 (func $f_x__int@nativejstypes.Bar (import "imports" "get nativejstypes.Bar.x") 
  (param $this (ref null extern))
@@ -583,6 +588,17 @@
  (result (ref null extern))
 )
 
+;;; int BarInnerWithDotInName.square()
+(func $m_square__int@nativejstypes.BarInnerWithDotInName (import "imports" "nativejstypes.Bar.Inner.square") 
+ (param $this (ref null extern))
+ (result i32)
+)
+
+;;; int BarInnerWithDotInName.getInnerStatic()
+(func $m_getInnerStatic__int@nativejstypes.BarInnerWithDotInName (import "imports" "nativejstypes.Bar.Inner.getInnerStatic") 
+ (result i32)
+)
+
 ;;; Code for nativejstypes.BarInnerWithDotInNameAndHasNamespace [methods]
 
 ;;; BarInnerWithDotInNameAndHasNamespace(int n)
@@ -591,12 +607,34 @@
  (result (ref null extern))
 )
 
+;;; int BarInnerWithDotInNameAndHasNamespace.square()
+(func $m_square__int@nativejstypes.BarInnerWithDotInNameAndHasNamespace (import "imports" "nativejstypes.Bar.Inner.square") 
+ (param $this (ref null extern))
+ (result i32)
+)
+
+;;; int BarInnerWithDotInNameAndHasNamespace.getInnerStatic()
+(func $m_getInnerStatic__int@nativejstypes.BarInnerWithDotInNameAndHasNamespace (import "imports" "nativejstypes.Bar.Inner.getInnerStatic") 
+ (result i32)
+)
+
 ;;; Code for nativejstypes.Bar.Inner [methods]
 
 ;;; Inner(int n)
 (func $m_<init>__int@nativejstypes.Bar.Inner (import "imports" "nativejstypes.Bar.Inner.constructor") 
  (param $n i32)
  (result (ref null extern))
+)
+
+;;; int Inner.square()
+(func $m_square__int@nativejstypes.Bar.Inner (import "imports" "nativejstypes.Bar.Inner.square") 
+ (param $this (ref null extern))
+ (result i32)
+)
+
+;;; int Inner.getInnerStatic()
+(func $m_getInnerStatic__int@nativejstypes.Bar.Inner (import "imports" "nativejstypes.Bar.Inner.getInnerStatic") 
+ (result i32)
 )
 
 ;;; Code for nativejstypes.Foo [methods]
@@ -703,94 +741,138 @@
   ;; Foo foo = new Foo.<init>();
   ;;@ nativejstypes/Main.java:22:4
   (local.set $foo (call $m_<init>__@nativejstypes.Foo ))
-  ;; foo.x(50);
+  ;; return foo.sum();
   ;;@ nativejstypes/Main.java:23:4
+  (return (call $m_sum__int@nativejstypes.Foo (ref.as_non_null (local.get $foo))))
+ )
+)
+
+;;; void Main.testNativeJsTypeWithNamespaceJsProperties()
+(func $m_testNativeJsTypeWithNamespaceJsProperties__void@nativejstypes.Main
+ ;;@ nativejstypes/Main.java:26:21
+ (local $foo (ref null extern))
+ (block
+  ;; nativejstypes.Main.$clinit();
+  ;;@ nativejstypes/Main.java:26:65
+  (call $$clinit__void@nativejstypes.Main )
+  ;; Foo foo = new Foo.<init>();
+  ;;@ nativejstypes/Main.java:27:4
+  (local.set $foo (call $m_<init>__@nativejstypes.Foo ))
+  ;; foo.x(50);
+  ;;@ nativejstypes/Main.java:28:4
   (call $f_x__int__void@nativejstypes.Foo (ref.as_non_null (local.get $foo))(i32.const 50))
   ;; foo.y(5);
-  ;;@ nativejstypes/Main.java:24:4
+  ;;@ nativejstypes/Main.java:29:4
   (call $f_y__int__void@nativejstypes.Foo (ref.as_non_null (local.get $foo))(i32.const 5))
-  ;; return foo.sum();
-  ;;@ nativejstypes/Main.java:25:4
-  (return (call $m_sum__int@nativejstypes.Foo (ref.as_non_null (local.get $foo))))
  )
 )
 
 ;;; int Main.testNativeJsTypeWithoutNamespace()
 (func $m_testNativeJsTypeWithoutNamespace__int@nativejstypes.Main
  (result i32)
- ;;@ nativejstypes/Main.java:28:20
+ ;;@ nativejstypes/Main.java:32:20
+ (local $bar (ref null extern))
+ (local $unused i32)
+ (block
+  ;; nativejstypes.Main.$clinit();
+  ;;@ nativejstypes/Main.java:32:55
+  (call $$clinit__void@nativejstypes.Main )
+  ;; Bar bar = new Bar.<init>(6,7);
+  ;;@ nativejstypes/Main.java:33:4
+  (local.set $bar (call $m_<init>__int__int@nativejstypes.Bar (i32.const 6)(i32.const 7)))
+  ;; int unused = nativejstypes.Bar.getStatic();
+  ;;@ nativejstypes/Main.java:34:4
+  (local.set $unused (call $m_getStatic__int@nativejstypes.Bar ))
+  ;; return bar.product();
+  ;;@ nativejstypes/Main.java:35:4
+  (return (call $m_product__int@nativejstypes.Bar (ref.as_non_null (local.get $bar))))
+ )
+)
+
+;;; void Main.testNativeJsTypeWithoutNamespaceJsProperties()
+(func $m_testNativeJsTypeWithoutNamespaceJsProperties__void@nativejstypes.Main
+ ;;@ nativejstypes/Main.java:38:21
  (local $bar (ref null extern))
  (block
   ;; nativejstypes.Main.$clinit();
-  ;;@ nativejstypes/Main.java:28:55
+  ;;@ nativejstypes/Main.java:38:68
   (call $$clinit__void@nativejstypes.Main )
   ;; Bar bar = new Bar.<init>(6,7);
-  ;;@ nativejstypes/Main.java:29:4
+  ;;@ nativejstypes/Main.java:39:4
   (local.set $bar (call $m_<init>__int__int@nativejstypes.Bar (i32.const 6)(i32.const 7)))
   ;; bar.x(50);
-  ;;@ nativejstypes/Main.java:30:4
+  ;;@ nativejstypes/Main.java:40:4
   (call $f_x__int__void@nativejstypes.Bar (ref.as_non_null (local.get $bar))(i32.const 50))
   ;; bar.y(5);
-  ;;@ nativejstypes/Main.java:31:4
+  ;;@ nativejstypes/Main.java:41:4
   (call $f_y__int__void@nativejstypes.Bar (ref.as_non_null (local.get $bar))(i32.const 5))
   ;; nativejstypes.Bar.f(10);
-  ;;@ nativejstypes/Main.java:32:4
+  ;;@ nativejstypes/Main.java:42:4
   (call $f_f__int__void@nativejstypes.Bar (i32.const 10))
-  ;; return bar.product();
-  ;;@ nativejstypes/Main.java:33:4
-  (return (call $m_product__int@nativejstypes.Bar (ref.as_non_null (local.get $bar))))
  )
 )
 
 ;;; void Main.testInnerNativeJsType()
 (func $m_testInnerNativeJsType__void@nativejstypes.Main
- ;;@ nativejstypes/Main.java:36:21
- (local $unusedBarInner (ref null extern))
- (local $unusedBarInnerWithDotInName (ref null extern))
+ ;;@ nativejstypes/Main.java:45:21
+ (local $barInner (ref null extern))
+ (local $barInnerWithDotInName (ref null extern))
  (block
   ;; nativejstypes.Main.$clinit();
-  ;;@ nativejstypes/Main.java:36:45
+  ;;@ nativejstypes/Main.java:45:45
   (call $$clinit__void@nativejstypes.Main )
-  ;; Inner unusedBarInner = new Inner.<init>(1);
-  ;;@ nativejstypes/Main.java:37:4
-  (local.set $unusedBarInner (call $m_<init>__int@nativejstypes.Bar.Inner (i32.const 1)))
-  ;; BarInnerWithDotInName unusedBarInnerWithDotInName = new BarInnerWithDotInName.<init>(2);
-  ;;@ nativejstypes/Main.java:38:4
-  (local.set $unusedBarInnerWithDotInName (call $m_<init>__int@nativejstypes.BarInnerWithDotInName (i32.const 2)))
+  ;; Inner barInner = new Inner.<init>(1);
+  ;;@ nativejstypes/Main.java:46:4
+  (local.set $barInner (call $m_<init>__int@nativejstypes.Bar.Inner (i32.const 1)))
+  ;; BarInnerWithDotInName barInnerWithDotInName = new BarInnerWithDotInName.<init>(2);
+  ;;@ nativejstypes/Main.java:47:4
+  (local.set $barInnerWithDotInName (call $m_<init>__int@nativejstypes.BarInnerWithDotInName (i32.const 2)))
+  ;; barInner.square();
+  ;;@ nativejstypes/Main.java:48:4
+  (drop (call $m_square__int@nativejstypes.Bar.Inner (ref.as_non_null (local.get $barInner))))
+  ;; barInnerWithDotInName.square();
+  ;;@ nativejstypes/Main.java:49:4
+  (drop (call $m_square__int@nativejstypes.BarInnerWithDotInName (ref.as_non_null (local.get $barInnerWithDotInName))))
+  ;; nativejstypes.Bar.Inner.getInnerStatic();
+  ;;@ nativejstypes/Main.java:50:4
+  (drop (call $m_getInnerStatic__int@nativejstypes.Bar.Inner ))
+  ;; nativejstypes.BarInnerWithDotInName.getInnerStatic();
+  ;;@ nativejstypes/Main.java:51:4
+  (drop (call $m_getInnerStatic__int@nativejstypes.BarInnerWithDotInName ))
  )
 )
 
 ;;; void Main.testGlobalNativeJsType()
 (func $m_testGlobalNativeJsType__void@nativejstypes.Main
- ;;@ nativejstypes/Main.java:41:21
+ ;;@ nativejstypes/Main.java:54:21
  (local $header (ref null extern))
  (block
   ;; nativejstypes.Main.$clinit();
-  ;;@ nativejstypes/Main.java:41:46
+  ;;@ nativejstypes/Main.java:54:46
   (call $$clinit__void@nativejstypes.Main )
   ;; Headers header = new Headers.<init>();
-  ;;@ nativejstypes/Main.java:42:4
+  ;;@ nativejstypes/Main.java:55:4
   (local.set $header (call $m_<init>__@nativejstypes.Headers ))
   ;; header.append(java.lang.String.toJsString(javaemul.internal.StringPool.$getString_|Content_Type|()),java.lang.String.toJsString(javaemul.internal.StringPool.$getString_|text_xml|()));
-  ;;@ nativejstypes/Main.java:43:4
+  ;;@ nativejstypes/Main.java:56:4
   (call $m_append__java_lang_String_NativeString__java_lang_String_NativeString__void@nativejstypes.Headers (ref.as_non_null (local.get $header))(call $m_toJsString__java_lang_String__java_lang_String_NativeString@java.lang.String (call $function.no.side.effects.$getString_|Content_Type|__java_lang_String (ref.func $$getString_|Content_Type|__java_lang_String@javaemul.internal.StringPool) ))(call $m_toJsString__java_lang_String__java_lang_String_NativeString@java.lang.String (call $function.no.side.effects.$getString_|text_xml|__java_lang_String (ref.func $$getString_|text_xml|__java_lang_String@javaemul.internal.StringPool) )))
  )
 )
 
 ;;; void Main.testNativeTypeClassLiteral()
 (func $m_testNativeTypeClassLiteral__void@nativejstypes.Main
- ;;@ nativejstypes/Main.java:47:21
+ ;;@ nativejstypes/Main.java:60:21
  (local $o1 (ref null $java.lang.Object))
  (local $$qualifier (ref null $java.lang.Class))
  (block
   ;; nativejstypes.Main.$clinit();
-  ;;@ nativejstypes/Main.java:47:50
+  ;;@ nativejstypes/Main.java:60:50
   (call $$clinit__void@nativejstypes.Main )
   ;; Object o1 = javaemul.internal.ClassLiteralPool.$getNativejstypes.Bar();
-  ;;@ nativejstypes/Main.java:48:4
+  ;;@ nativejstypes/Main.java:61:4
   (local.set $o1 (call $function.no.side.effects.$getNativejstypes.Bar__java_lang_Class (ref.func $$getNativejstypes.Bar__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
   ;; (o1 = (Class<?> $qualifier = javaemul.internal.ClassLiteralPool.$getNativejstypes.Bar(),$qualifier.getArrayType(2)));
-  ;;@ nativejstypes/Main.java:49:4
+  ;;@ nativejstypes/Main.java:62:4
   (local.set $o1 (block (result (ref null $java.lang.Class))
    (local.set $$qualifier (call $function.no.side.effects.$getNativejstypes.Bar__java_lang_Class (ref.func $$getNativejstypes.Bar__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier))(i32.const 2)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier))))
