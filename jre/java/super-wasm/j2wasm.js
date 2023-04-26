@@ -128,16 +128,17 @@ function createImportObject(userImports) {
     'performance.now': () => performance.now(),
 
     // String
-    'String.indexOf': (/** string */ s, /** string */ r, /** number */ i) =>
+    'String.fromCharCode': String.fromCharCode,
+    'string.indexOf': (/** string */ s, /** string */ r, /** number */ i) =>
         s.indexOf(r, i),
-    'String.lastIndexOf': (/** string */ s, /** string */ r, /** number */ i) =>
+    'string.lastIndexOf': (/** string */ s, /** string */ r, /** number */ i) =>
         s.lastIndexOf(r, i),
-    'String.replace': (/** string */ s, /** !RegExp */ re, /** string */ r) =>
+    'string.replace': (/** string */ s, /** !RegExp */ re, /** string */ r) =>
         s.replace(re, r),
-    'String.toLowerCase': (/** string */ s) => s.toLowerCase(),
-    'String.toUpperCase': (/** string */ s) => s.toUpperCase(),
-    'String.toLocaleLowerCase': (/** string */ s) => s.toLocaleLowerCase(),
-    'String.toLocaleUpperCase': (/** string */ s) => s.toLocaleUpperCase(),
+    'string.toLowerCase': (/** string */ s) => s.toLowerCase(),
+    'string.toUpperCase': (/** string */ s) => s.toUpperCase(),
+    'string.toLocaleLowerCase': (/** string */ s) => s.toLocaleLowerCase(),
+    'string.toLocaleUpperCase': (/** string */ s) => s.toLocaleUpperCase(),
     'j2wasm.StringUtils.equalsIgnoreCase': StringUtils.equalsIgnoreCase,
     'j2wasm.StringUtils.compareToIgnoreCase': StringUtils.compareToIgnoreCase,
     // TODO(b/272381112): Remove after non-stringref experiment.

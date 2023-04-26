@@ -852,7 +852,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
 
   // TODO: should live on a utility instead of the String API.
   public String nativeReplace(NativeRegExp regExp, char replacement) {
-    return fromJsString(toJsString().replace(regExp, NativeString.fromCharCode(replacement)));
+    return fromJsString(toJsString().replace(regExp, nativeFromCharCode(replacement)));
   }
 
   // TODO: should live on a utility instead of the String API.
@@ -1000,23 +1000,22 @@ public final class String implements Serializable, Comparable<String>, CharSeque
   @JsMethod(namespace = "j2wasm.StringUtils", name = "stringGetChars")
   private static native void nativeGetChars(NativeString s, WasmExtern x, int start);
 
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "String.fromCharCode")
+  private static native NativeString nativeFromCharCode(char x);
+
   /** Native JS compatible representation of a string. */
-  // TODO(b/268386628): Hide NativeString once external references are cleaned up. Once NativeString
-  // is hidden, the methods should be made PUBLIC, for consistency with NativeString in Closure, and
-  // J2CL practices around go/java-practices/redundancy#visibility-specifiers-in-private-classes.
-  @JsType(isNative = true, name = "String", namespace = JsPackage.GLOBAL)
-  public static class NativeString {
-    static native NativeString fromCharCode(char x);
+  // TODO(b/268386628): Hide NativeString once external references are cleaned up.
+  @JsType(isNative = true, name = "string", namespace = JsPackage.GLOBAL)
+  public interface NativeString {
+    NativeString replace(NativeRegExp regex, NativeString replace);
 
-    native NativeString replace(NativeRegExp regex, NativeString replace);
+    NativeString toLowerCase();
 
-    native NativeString toLowerCase();
+    NativeString toUpperCase();
 
-    native NativeString toUpperCase();
+    NativeString toLocaleLowerCase();
 
-    native NativeString toLocaleLowerCase();
-
-    native NativeString toLocaleUpperCase();
+    NativeString toLocaleUpperCase();
   }
 
   // TODO(b/272381112): Remove after non-stringref experiment.

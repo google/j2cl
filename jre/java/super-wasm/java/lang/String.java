@@ -752,30 +752,28 @@ public final class String implements Comparable<String>, CharSequence, Serializa
   }
 
   /** Native JS compatible representation of a string. */
-  // TODO(b/268386628): Hide NativeString once external references are cleaned up. Once NativeString
-  // is hidden, the methods should be made PUBLIC, for consistency with NativeString in Closure, and
-  // J2CL practices around go/java-practices/redundancy#visibility-specifiers-in-private-classes.
+  // TODO(b/268386628): Hide NativeString once external references are cleaned up.
   @Wasm("string")
-  @JsType(isNative = true, name = "String", namespace = JsPackage.GLOBAL)
-  public static class NativeString {
+  @JsType(isNative = true, name = "string", namespace = JsPackage.GLOBAL)
+  public interface NativeString {
 
-    native int indexOf(NativeString str);
+    int indexOf(NativeString str);
 
-    native int indexOf(NativeString str, int startIndex);
+    int indexOf(NativeString str, int startIndex);
 
-    native int lastIndexOf(NativeString str);
+    int lastIndexOf(NativeString str);
 
-    native int lastIndexOf(NativeString str, int start);
+    int lastIndexOf(NativeString str, int start);
 
-    native NativeString replace(NativeRegExp regex, NativeString replace);
+    NativeString replace(NativeRegExp regex, NativeString replace);
 
-    native NativeString toLocaleLowerCase();
+    NativeString toLocaleLowerCase();
 
-    native NativeString toLocaleUpperCase();
+    NativeString toLocaleUpperCase();
 
-    native NativeString toLowerCase();
+    NativeString toLowerCase();
 
-    native NativeString toUpperCase();
+    NativeString toUpperCase();
   }
 
   @Wasm("stringview_wtf16")
