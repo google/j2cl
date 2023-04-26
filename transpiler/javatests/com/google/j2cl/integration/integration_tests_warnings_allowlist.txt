@@ -60,20 +60,3 @@ transpiler/javatests/com/google/j2cl/integration/kotlin/primitivespecialization/
 transpiler/javatests/com/google/j2cl/integration/kotlin/primitivespecialization/primitvespecialization-j2cl.js/primitivespecialization/TestIntArrayIntList.impl.java.js:108  mismatch of the lastIndexOf property type and the type of the property it overrides from superclass module$exports$java$util$ArrayList$impl
 #original: function(this:module$exports$java$util$ArrayList$impl, *): number
 #override: function(this:module$exports$primitivespecialization$TestIntArrayIntList$impl, module$exports$java$lang$Integer$impl): number
-
-# TODO(b/254859483): This set of errors is due to the different in parameterization of containsAll(Collection<@UnsafeVariance E>) instead of containsAll(Collection<out @UnsafeVariance E>)
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/UArraysKt__UArraysImplKt$32.impl.java.js:51  mismatch of the containsAll property type and the type of the property it overrides from superclass module$exports$kotlin$collections$AbstractCollection$impl
-#original: function(this:module$exports$kotlin$collections$AbstractCollection$impl, module$exports$java$util$Collection$impl<*>): boolean
-#override: function(this:module$exports$kotlin$collections$UArraysKt__UArraysImplKt$$32$impl, module$exports$java$util$Collection$impl<module$exports$kotlin$UInt$impl>): boolean
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/UArraysKt__UArraysImplKt$33.impl.java.js:51  mismatch of the containsAll property type and the type of the property it overrides from superclass module$exports$kotlin$collections$AbstractCollection$impl
-#original: function(this:module$exports$kotlin$collections$AbstractCollection$impl, module$exports$java$util$Collection$impl<*>): boolean
-#override: function(this:module$exports$kotlin$collections$UArraysKt__UArraysImplKt$$33$impl, module$exports$java$util$Collection$impl<module$exports$kotlin$ULong$impl>): boolean
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/UArraysKt__UArraysImplKt$34.impl.java.js:51  mismatch of the containsAll property type and the type of the property it overrides from superclass module$exports$kotlin$collections$AbstractCollection$impl
-#original: function(this:module$exports$kotlin$collections$AbstractCollection$impl, module$exports$java$util$Collection$impl<*>): boolean
-#override: function(this:module$exports$kotlin$collections$UArraysKt__UArraysImplKt$$34$impl, module$exports$java$util$Collection$impl<module$exports$kotlin$UByte$impl>): boolean
-
-ktstdlib/j2cl_kt_stdlib.js/kotlin/collections/UArraysKt__UArraysImplKt$35.impl.java.js:51  mismatch of the containsAll property type and the type of the property it overrides from superclass module$exports$kotlin$collections$AbstractCollection$impl
-#original: function(this:module$exports$kotlin$collections$AbstractCollection$impl, module$exports$java$util$Collection$impl<*>): boolean
-#override: function(this:module$exports$kotlin$collections$UArraysKt__UArraysImplKt$$35$impl, module$exports$java$util$Collection$impl<module$exports$kotlin$UShort$impl>): boolean
