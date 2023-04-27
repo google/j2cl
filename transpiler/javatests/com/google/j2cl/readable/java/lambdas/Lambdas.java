@@ -170,6 +170,7 @@ public class Lambdas {
         (x, y) -> {
           throw new RuntimeException();
         });
+    callWithBiFunction((x, y) -> 3.0);
     Function<? super T, ?> f = item -> 1L;
   }
 

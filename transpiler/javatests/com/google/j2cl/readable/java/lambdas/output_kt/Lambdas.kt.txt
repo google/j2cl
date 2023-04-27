@@ -155,6 +155,9 @@ open class Lambdas {
   this.callWithBiFunction_pp_lambdas<Any?>(Lambdas.BiFunction<Any?, String?, Double?> { x: Any?, y: String? ->
    throw RuntimeException()
   })
+  this.callWithBiFunction_pp_lambdas<Any?>(Lambdas.BiFunction<Any?, String?, Double?> { x_1: Any?, y_1: String? ->
+   return@BiFunction Double.valueOf(3.0)
+  })
   val f: Lambdas.Function<in T, *>? = Lambdas.Function { item: T ->
    return@Function Long.valueOf(1L)
   }

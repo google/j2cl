@@ -197,6 +197,15 @@
         }] => [let y_1 = /**@type {?string}*/ ($Casts.$to(y, j_l_String));] "lambdas.Lambdas.<lambda in testLambdaWithGenerics>"
 [y] => [y_1] "y"
 [throw new RuntimeException();] => [throw $Exceptions.toJs(RuntimeException.$create__());] "lambdas.Lambdas.<lambda in testLambdaWithGenerics>"
+[callWithBiFunction((x, y) -> 3.0);] => [this.m_callWithBiFunction__lambdas_Lambdas_BiFunction__lambdas_Lambdas_GenericFunctionalInterface_$pp_lambdas(BiFunction.$adapt((/** * */ x_1, y_2) =>{
+   let y_3 = /**@type {?string}*/ ($Casts.$to(y_2, j_l_String));
+   return 3;
+  }));] "lambdas.Lambdas.testLambdaWithGenerics"
+[x] => [x_1] "x"
+[y] => [y_2] "y"
+[(x, y) -> 3.0] => [let y_3 = /**@type {?string}*/ ($Casts.$to(y_2, j_l_String));] "lambdas.Lambdas.<lambda in testLambdaWithGenerics>"
+[y] => [y_3] "y"
+[3.0] => [return 3;] "lambdas.Lambdas.<lambda in testLambdaWithGenerics>"
 [Function<? super T, ?> f = item -> 1L;] => [let f = Lambdas_Function.$adapt((item) =>{
    let item_1 = /**@type {Enum}*/ ($Casts.$to(item, Enum));
    return Long.m_valueOf__long__java_lang_Long($Long.fromInt(1));
