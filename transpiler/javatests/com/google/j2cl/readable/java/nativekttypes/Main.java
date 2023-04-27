@@ -16,7 +16,6 @@
 package nativekttypes;
 
 import javaemul.internal.annotations.KtDisabled;
-import jsinterop.annotations.JsConstructor;
 
 public class Main {
   public NativeTopLevel<String> topLevelField;
@@ -159,7 +158,6 @@ public class Main {
 }
 
 class Subclass<V> extends NativeTopLevel<V> implements NativeInterface<V> {
-  @JsConstructor
   Subclass(V v) {
     super(v);
   }
@@ -221,7 +219,6 @@ class Subclass<V> extends NativeTopLevel<V> implements NativeInterface<V> {
 }
 
 class Subsubclass<V> extends Subclass<V> {
-  @JsConstructor
   Subsubclass(V v) {
     super(v);
   }
