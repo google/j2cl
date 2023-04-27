@@ -14,56 +14,6 @@
 
 goog.module('j2wasm.StringUtils');
 
-// TODO(b/272381112): Remove after non-stringref experiment.
-/**
- * @param {!Object} wasmArray
- * @param {number} start
- * @param {number} end
- * @return {string}
- */
-function stringNew(wasmArray, start, end) {
-  const charArrayGet = goog.global['j2wasm_exports']['charArrayGet'];
-
-  let result = '';
-
-  let buffer;
-  do {
-    const bufferSize = Math.min(end - start, 1000);
-    if (buffer == null || buffer.length != bufferSize) {
-      buffer = new Array(bufferSize);
-    }
-    for (let i = 0; i < bufferSize; i++) {
-      buffer[i] = charArrayGet(wasmArray, start + i);
-    }
-    result += String.fromCharCode.apply(null, buffer);
-    start += bufferSize;
-  } while (start < end);
-
-  return result;
-}
-
-// TODO(b/272381112): Remove after non-stringref experiment.
-/**
- * @param {string} string
- * @param {!Object} wasmArray
- * @param {number} start
- */
-function stringGetChars(string, wasmArray, start) {
-  const charArraySet = goog.global['j2wasm_exports']['charArraySet'];
-  for (let i = 0; i < string.length; i++) {
-    charArraySet(wasmArray, start + i, string.charCodeAt(i));
-  }
-}
-
-// TODO(b/272381112): Remove after non-stringref experiment.
-/**
- * @param {string} string
- * @return {number}
- */
-function stringLength(string) {
-  return string.length;
-}
-
 /**
  * @param {string} a
  * @param {string} b
@@ -86,8 +36,5 @@ function compareToIgnoreCase(a, b) {
 
 exports = {
   equalsIgnoreCase,
-  compareToIgnoreCase,
-  stringNew,
-  stringGetChars,
-  stringLength
+  compareToIgnoreCase
 };

@@ -33,7 +33,6 @@ import java.util.StringJoiner;
 import javaemul.internal.ArrayHelper;
 import javaemul.internal.EmulatedCharset;
 import javaemul.internal.NativeRegExp;
-import javaemul.internal.WasmExtern;
 import javaemul.internal.annotations.HasNoSideEffects;
 import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
@@ -981,30 +980,27 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     if (jsString == null) {
       return null;
     }
-    int count = nativeGetLength(jsString);
+    int count = nativeGetLength(asStringView(jsString));
     char[] array = new char[count];
-    nativeGetChars(jsString, externalize(array), 0);
+    int unused = nativeGetChars(jsString, array, 0);
     return new String(0, count, array);
   }
 
-  private static NativeString nativeFromCharCodeArray(char[] x, int start, int end) {
-    return nativeStringNew(externalize(x), start, end);
-  }
+  @Wasm("string.new_wtf16_array")
+  private static native NativeString nativeFromCharCodeArray(char[] x, int start, int end);
 
-  @JsMethod(namespace = "j2wasm.StringUtils", name = "stringNew")
-  private static native NativeString nativeStringNew(WasmExtern x, int start, int end);
+  @Wasm("stringview_wtf16.length")
+  private static native int nativeGetLength(NativeStringView stringView);
 
-  @JsMethod(namespace = "j2wasm.StringUtils", name = "stringLength")
-  private static native int nativeGetLength(NativeString stringView);
-
-  @JsMethod(namespace = "j2wasm.StringUtils", name = "stringGetChars")
-  private static native void nativeGetChars(NativeString s, WasmExtern x, int start);
+  @Wasm("string.encode_wtf16_array")
+  private static native int nativeGetChars(NativeString s, char[] x, int start);
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "String.fromCharCode")
   private static native NativeString nativeFromCharCode(char x);
 
   /** Native JS compatible representation of a string. */
   // TODO(b/268386628): Hide NativeString once external references are cleaned up.
+  @Wasm("string")
   @JsType(isNative = true, name = "string", namespace = JsPackage.GLOBAL)
   public interface NativeString {
     NativeString replace(NativeRegExp regex, NativeString replace);
@@ -1018,23 +1014,9 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     NativeString toLocaleUpperCase();
   }
 
-  // TODO(b/272381112): Remove after non-stringref experiment.
-  static void charArraySet(WasmExtern extern, int index, char c) {
-    char[] array = internalize(extern);
-    array[index] = c;
-  }
+  @Wasm("stringview_wtf16")
+  private interface NativeStringView {}
 
-  // TODO(b/272381112): Remove after non-stringref experiment.
-  static char charArrayGet(WasmExtern extern, int index) {
-    char[] array = internalize(extern);
-    return array[index];
-  }
-
-  // TODO(b/272381112): Remove after non-stringref experiment.
-  @Wasm("extern.externalize")
-  private static native WasmExtern externalize(Object result);
-
-  // TODO(b/272381112): Remove after non-stringref experiment.
-  @Wasm("extern.internalize")
-  private static native <T> T internalize(WasmExtern result);
+  @Wasm("string.as_wtf16")
+  private static native NativeStringView asStringView(NativeString stringView);
 }
