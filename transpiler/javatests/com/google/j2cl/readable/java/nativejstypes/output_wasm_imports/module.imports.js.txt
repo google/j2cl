@@ -6,6 +6,7 @@ const j2wasm_ExceptionUtils = goog.require('j2wasm.ExceptionUtils');
 const nativejstypes_Bar = goog.require('nativejstypes.Bar');
 const nativejstypes_Bar_Inner = goog.require('nativejstypes.Bar.Inner');
 const com_acme_MyFoo = goog.require('com.acme.MyFoo');
+const nativejstypes_Nullability = goog.require('nativejstypes.Nullability');
 
 /** @return {!Object<string, !Object<string, !*>>} Wasm import object */
 function getImports() {
@@ -110,6 +111,9 @@ function getImports() {
    'Headers.constructor': () => new Headers(),
    'Headers.append': (/** !Headers */ $instance, /** ?string */ name, /** ?string */ value, ) => $instance.append(name, value, ),
    'Headers.get': (/** !Headers */ $instance, /** ?string */ name, ) => $instance.get(name, ),
+   'nativejstypes.Nullability.constructor': () => new nativejstypes_Nullability(),
+   'nativejstypes.Nullability.acceptsNull': (/** !nativejstypes_Nullability */ $instance, /** ?string */ arg, ) => $instance.acceptsNull(arg, ),
+   'nativejstypes.Nullability.doesNotAcceptNull': (/** !nativejstypes_Nullability */ $instance, /** string */ arg, ) => $instance.doesNotAcceptNull(arg, ),
   }
  };
 }

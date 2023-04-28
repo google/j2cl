@@ -118,6 +118,46 @@
  (field $slot6 (ref null struct))
   $itable))
 
+ ;;; Code for nativejstypes.Nullability.$Overlay [type definition]
+ (type $nativejstypes.Nullability.$Overlay (struct 
+  (field $vtable (ref $nativejstypes.Nullability.$Overlay.vtable)) 
+  (field $itable (ref $nativejstypes.Nullability.$Overlay.itable))
+  )
+ )
+ (type $nativejstypes.Nullability.$Overlay.vtable (struct 
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  )
+ )
+ (type $nativejstypes.Nullability.$Overlay.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $itable))
+
+ ;;; Code for nativejstypes.NullabilityNullMarked.$Overlay [type definition]
+ (type $nativejstypes.NullabilityNullMarked.$Overlay (struct 
+  (field $vtable (ref $nativejstypes.NullabilityNullMarked.$Overlay.vtable)) 
+  (field $itable (ref $nativejstypes.NullabilityNullMarked.$Overlay.itable))
+  )
+ )
+ (type $nativejstypes.NullabilityNullMarked.$Overlay.vtable (struct 
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  )
+ )
+ (type $nativejstypes.NullabilityNullMarked.$Overlay.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $itable))
+
  ;;; Code for nativejstypes.Bar [type definition]
 
  ;;; Code for nativejstypes.BarInnerWithDotInName [type definition]
@@ -153,6 +193,10 @@
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
   $java.lang.Object.itable))
+
+ ;;; Code for nativejstypes.Nullability [type definition]
+
+ ;;; Code for nativejstypes.NullabilityNullMarked [type definition]
 
 ;;; Code for nativejstypes.Bar.$Overlay [vtable.init]
 (global $nativejstypes.Bar.$Overlay.vtable (ref $nativejstypes.Bar.$Overlay.vtable) 
@@ -283,6 +327,42 @@
   (ref.null struct)
  ))
 
+;;; Code for nativejstypes.Nullability.$Overlay [vtable.init]
+(global $nativejstypes.Nullability.$Overlay.vtable (ref $nativejstypes.Nullability.$Overlay.vtable) 
+ (struct.new $nativejstypes.Nullability.$Overlay.vtable
+  (ref.func $m_getClass__java_lang_Class@nativejstypes.Nullability.$Overlay)
+ )
+)
+
+;;; Code for nativejstypes.Nullability.$Overlay [itable.init]
+(global $nativejstypes.Nullability.$Overlay.itable (ref $nativejstypes.Nullability.$Overlay.itable) (struct.new $nativejstypes.Nullability.$Overlay.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+ ))
+
+;;; Code for nativejstypes.NullabilityNullMarked.$Overlay [vtable.init]
+(global $nativejstypes.NullabilityNullMarked.$Overlay.vtable (ref $nativejstypes.NullabilityNullMarked.$Overlay.vtable) 
+ (struct.new $nativejstypes.NullabilityNullMarked.$Overlay.vtable
+  (ref.func $m_getClass__java_lang_Class@nativejstypes.NullabilityNullMarked.$Overlay)
+ )
+)
+
+;;; Code for nativejstypes.NullabilityNullMarked.$Overlay [itable.init]
+(global $nativejstypes.NullabilityNullMarked.$Overlay.itable (ref $nativejstypes.NullabilityNullMarked.$Overlay.itable) (struct.new $nativejstypes.NullabilityNullMarked.$Overlay.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+ ))
+
 ;;; Code for nativejstypes.Bar [static fields]
 
 ;;; Code for nativejstypes.BarInnerWithDotInName [static fields]
@@ -315,6 +395,16 @@
 
 ;;; Code for nativejstypes.Main [static fields]
 (global $f_$initialized__nativejstypes_Main (mut i32) (i32.const 0))
+
+;;; Code for nativejstypes.Nullability [static fields]
+
+;;; Code for nativejstypes.NullabilityNullMarked [static fields]
+
+;;; Code for nativejstypes.Nullability.$Overlay [static fields]
+(global $f_$initialized__nativejstypes_Nullability_$Overlay (mut i32) (i32.const 0))
+
+;;; Code for nativejstypes.NullabilityNullMarked.$Overlay [static fields]
+(global $f_$initialized__nativejstypes_NullabilityNullMarked_$Overlay (mut i32) (i32.const 0))
 
 ;;; Code for nativejstypes.Bar.$Overlay [methods]
 
@@ -525,6 +615,76 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nativejstypes.Headers.$Overlay)
+
+;;; Code for nativejstypes.Nullability.$Overlay [methods]
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void@nativejstypes.Nullability.$Overlay
+ ;;@ nativejstypes/Nullability.java:25:13
+ (block
+  ;; if (nativejstypes.Nullability.$Overlay.$initialized) return;
+  ;;@ nativejstypes/Nullability.java:25:13
+  (if (global.get $f_$initialized__nativejstypes_Nullability_$Overlay)
+   (then
+    ;; return;
+    ;;@ nativejstypes/Nullability.java:25:13
+    (return )
+   )
+  )
+  ;; (nativejstypes.Nullability.$Overlay.$initialized = true);
+  ;;@ nativejstypes/Nullability.java:25:13
+  (global.set $f_$initialized__nativejstypes_Nullability_$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<?> $Overlay.getClass()
+(func $m_getClass__java_lang_Class@nativejstypes.Nullability.$Overlay
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nativejstypes.Nullability.$Overlay))
+ (local.set $this (ref.cast_static $nativejstypes.Nullability.$Overlay (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNativejstypes.Nullability.$Overlay();
+  (return (call $function.no.side.effects.$getNativejstypes.Nullability.$Overlay__java_lang_Class (ref.func $$getNativejstypes.Nullability.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nativejstypes.Nullability.$Overlay)
+
+;;; Code for nativejstypes.NullabilityNullMarked.$Overlay [methods]
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void@nativejstypes.NullabilityNullMarked.$Overlay
+ ;;@ nativejstypes/Nullability.java:34:6
+ (block
+  ;; if (nativejstypes.NullabilityNullMarked.$Overlay.$initialized) return;
+  ;;@ nativejstypes/Nullability.java:34:6
+  (if (global.get $f_$initialized__nativejstypes_NullabilityNullMarked_$Overlay)
+   (then
+    ;; return;
+    ;;@ nativejstypes/Nullability.java:34:6
+    (return )
+   )
+  )
+  ;; (nativejstypes.NullabilityNullMarked.$Overlay.$initialized = true);
+  ;;@ nativejstypes/Nullability.java:34:6
+  (global.set $f_$initialized__nativejstypes_NullabilityNullMarked_$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<?> $Overlay.getClass()
+(func $m_getClass__java_lang_Class@nativejstypes.NullabilityNullMarked.$Overlay
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nativejstypes.NullabilityNullMarked.$Overlay))
+ (local.set $this (ref.cast_static $nativejstypes.NullabilityNullMarked.$Overlay (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNativejstypes.NullabilityNullMarked.$Overlay();
+  (return (call $function.no.side.effects.$getNativejstypes.NullabilityNullMarked.$Overlay__java_lang_Class (ref.func $$getNativejstypes.NullabilityNullMarked.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nativejstypes.NullabilityNullMarked.$Overlay)
 
 ;;; Code for nativejstypes.Bar [methods]
 
@@ -915,3 +1075,41 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nativejstypes.Main)
+
+;;; Code for nativejstypes.Nullability [methods]
+
+;;; Nullability()
+(func $m_<init>__@nativejstypes.Nullability (import "imports" "nativejstypes.Nullability.constructor") 
+ (result (ref null extern))
+)
+
+;;; void Nullability.acceptsNull(NativeString arg)
+(func $m_acceptsNull__java_lang_String_NativeString__void@nativejstypes.Nullability (import "imports" "nativejstypes.Nullability.acceptsNull") 
+ (param $this (ref null extern))
+ (param $arg (ref null string))
+)
+
+;;; void Nullability.doesNotAcceptNull(NativeString arg)
+(func $m_doesNotAcceptNull__java_lang_String_NativeString__void@nativejstypes.Nullability (import "imports" "nativejstypes.Nullability.doesNotAcceptNull") 
+ (param $this (ref null extern))
+ (param $arg (ref null string))
+)
+
+;;; Code for nativejstypes.NullabilityNullMarked [methods]
+
+;;; NullabilityNullMarked()
+(func $m_<init>__@nativejstypes.NullabilityNullMarked (import "imports" "nativejstypes.Nullability.constructor") 
+ (result (ref null extern))
+)
+
+;;; void NullabilityNullMarked.acceptsNull(NativeString arg)
+(func $m_acceptsNull__java_lang_String_NativeString__void@nativejstypes.NullabilityNullMarked (import "imports" "nativejstypes.Nullability.acceptsNull") 
+ (param $this (ref null extern))
+ (param $arg (ref null string))
+)
+
+;;; void NullabilityNullMarked.doesNotAcceptNull(NativeString arg)
+(func $m_doesNotAcceptNull__java_lang_String_NativeString__void@nativejstypes.NullabilityNullMarked (import "imports" "nativejstypes.Nullability.doesNotAcceptNull") 
+ (param $this (ref null extern))
+ (param $arg (ref null string))
+)

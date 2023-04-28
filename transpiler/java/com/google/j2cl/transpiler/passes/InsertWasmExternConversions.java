@@ -100,7 +100,7 @@ public class InsertWasmExternConversions extends NormalizationPass {
 
   private static TypeDescriptor replaceStringWithNativeString(TypeDescriptor typeDescriptor) {
     if (TypeDescriptors.isJavaLangString(typeDescriptor)) {
-      return TypeDescriptors.getNativeStringType();
+      return TypeDescriptors.getNativeStringType().toNullable(typeDescriptor.isNullable());
     }
     return typeDescriptor;
   }
