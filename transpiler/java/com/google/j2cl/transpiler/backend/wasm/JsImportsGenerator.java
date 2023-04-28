@@ -224,15 +224,7 @@ final class JsImportsGenerator {
   }
 
   private void emitImportBody(JsMethodImport methodImport) {
-    // As an optimization, if the method is static we can just assign the method reference EXCEPT
-    // if it's a method on the Function prototype (e.g. `call`) or some other known exception.
-    if (!methodImport.isInstance()
-        && !methodImport.isConstructor()
-        && !methodImport.isPropertyGetter()
-        && !methodImport.isPropertySetter()
-        // TODO(b/279080129) Figure out a more permanent solution for special cases here.
-        && !methodImport.getJsName().equals("call")
-        && !methodImport.getImportKey().equals("performance.now")) {
+    if (methodImport.emitAsMethodReference()) {
       builder.append(
           AstUtils.buildQualifiedName(methodImport.getJsQualifier(), methodImport.getJsName()));
       return;
@@ -372,6 +364,18 @@ final class JsImportsGenerator {
       return getMethod().getParameters();
     }
 
+    public boolean emitAsMethodReference() {
+      // As an optimization, if the method is static we can just assign the method reference EXCEPT
+      // if it's a method on the Function prototype (e.g. `call`) or some other known exception.
+      return !isInstance()
+          && !isConstructor()
+          && !isPropertyGetter()
+          && !isPropertySetter()
+          // TODO(b/279080129) Figure out a more permanent solution for special cases here.
+          && !getJsName().equals("call")
+          && !getImportKey().equals("performance.now");
+    }
+
     /**
      * Combines the parameter information of this method with the specified other method, and
      * verifies that the methods can share an import.
@@ -401,6 +405,11 @@ final class JsImportsGenerator {
         return existingImport;
       }
 
+      // Skip parameter compatibility checks if the method can be imported as a method reference.
+      if (existingImport.emitAsMethodReference()) {
+        return existingImport;
+      }
+
       // Select which import to use. If parameters are compatible (one list is a prefix of the
       // other), we use the lengthier one.
       if (existingImport.getSignature().startsWith(newImport.getSignature())) {
@@ -410,13 +419,17 @@ final class JsImportsGenerator {
         return newImport;
       }
 
+      // If neither signature is a prefix of the other, that means parameters conflict. Currently,
+      // this results in an error.
       // TODO(b/279081023) Support conflicting parameters by generating numbered imports.
       problems.error(
-          "'%s' and '%s' import the same JavaScript method '%s' with conflicting parameter types,"
-              + " currently disallowed due to performance concerns.",
+          "'%s' and '%s' import the same JavaScript method '%s' with conflicting parameter types"
+              + " ('%s' vs '%s'), currently disallowed due to performance concerns.",
           existingImport.getMethod().getReadableDescription(),
           newImport.getMethod().getReadableDescription(),
-          existingImport.getImportKey());
+          existingImport.getImportKey(),
+          existingImport.getSignature(),
+          newImport.getSignature());
       return existingImport;
     }
 
