@@ -1,0 +1,49 @@
+goog.module('jsbridgebackward.SubInterfaceImpl$impl');
+
+const InterfaceImpl = goog.require('jsbridgebackward.InterfaceImpl$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class SubInterfaceImpl extends InterfaceImpl {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!SubInterfaceImpl} */
+ static $create__() {
+  SubInterfaceImpl.$clinit();
+  let $instance = new SubInterfaceImpl();
+  $instance.$ctor__jsbridgebackward_SubInterfaceImpl__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsbridgebackward_SubInterfaceImpl__void() {
+  this.$ctor__jsbridgebackward_InterfaceImpl__void();
+ }
+ /** @override @return {number} */
+ foo(/** number */ a) {
+  return 0;
+ }
+ //Bridge method.
+ /** @final @override @nodts @return {number} */
+ m_foo__int__int(/** number */ arg0) {
+  return this.foo(arg0);
+ }
+ /** @nodts */
+ static $clinit() {
+  SubInterfaceImpl.$clinit = () =>{};
+  SubInterfaceImpl.$loadModules();
+  InterfaceImpl.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SubInterfaceImpl;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(SubInterfaceImpl, 'jsbridgebackward.SubInterfaceImpl');
+
+exports = SubInterfaceImpl;
+
+//# sourceMappingURL=SubInterfaceImpl.js.map

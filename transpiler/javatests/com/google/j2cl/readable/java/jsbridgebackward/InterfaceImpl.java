@@ -29,5 +29,14 @@ class A {
 }
 
 public class InterfaceImpl extends A implements MyJsInterface {
-  // A bridge method from MyJsInterface.foo to A.foo__int should be generated.
+  // A bridge method from MyJsInterface.foo to A.foo__int should be generated. That bridge method
+  // exposes a JsMethod and even though it is a bridge it should not be final.
+}
+
+class SubInterfaceImpl extends InterfaceImpl {
+  // Overrides the bridge in InterfaceImpl.foo(int) which is a JsMethod and does not specialize
+  // its signature.
+  public int foo(int a) {
+    return 0;
+  }
 }

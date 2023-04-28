@@ -29,3 +29,9 @@ open class A {
 
 @ObjCName("JsbridgebackwardInterfaceImpl", exact = true)
 open class InterfaceImpl: A(), MyJsInterface {}
+
+open class SubInterfaceImpl: InterfaceImpl() {
+ open override fun foo(a: Int): Int {
+  return 0
+ }
+}
