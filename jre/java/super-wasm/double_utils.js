@@ -24,4 +24,17 @@ function isValidDouble(str) {
       .test(str);
 }
 
-exports = {isValidDouble};
+/**
+ * @param {number} x
+ * @param {number} y
+ * @return {number}
+ */
+function dmod(x, y) {
+  return x % y;
+}
+
+
+exports = {
+  isValidDouble,
+  dmod
+};

@@ -16,6 +16,7 @@
 package javaemul.internal;
 
 import javaemul.internal.annotations.Wasm;
+import jsinterop.annotations.JsMethod;
 
 /** Static Primitive helper. */
 public class Primitives {
@@ -195,29 +196,127 @@ public class Primitives {
   @Wasm("i64.div_s")
   private static native long wasmDivision(long dividend, long divisor);
 
-  public static double dmod(double x, double y) {
-    if (Double.isNaN(x) || Double.isNaN(y) || Double.isInfinite(x) || y == 0.0d) {
-      return Double.NaN;
+  @JsMethod(namespace = "j2wasm.DoubleUtils")
+  public static native double dmod(double x, double y);
+
+  @SuppressWarnings("IdentityBinaryExpression")
+  public static float fmod(float x, float y) {
+    // Derived from FreeBSD's src/e_fmodf.c which came with this notice.
+    /*
+     * ====================================================
+     * Copyright (C) 1993 by Sun Microsystems, Inc. All rights reserved.
+     *
+     * Developed at SunPro, a Sun Microsystems, Inc. business.
+     * Permission to use, copy, modify, and distribute this
+     * software is freely granted, provided that this notice
+     * is preserved.
+     * ====================================================
+     */
+
+    int n, hz;
+    int hx = Platform.floatToRawIntBits(x);
+    int hy = Platform.floatToRawIntBits(y);
+    int sx = hx & 0x80000000; /* sign of x */
+    hx ^= sx; /* |x| */
+    hy &= 0x7fffffff; /* |y| */
+
+    /* purge off exception values */
+    if (hy == 0 /* y=0 */
+        || (hx >= 0x7f800000) /* or x not finite*/
+        || (hy > 0x7f800000) /* or y is NaN */) {
+      return (x * y) / (x * y);
+    }
+    if (hx < hy) {
+      return x; /* |x|<|y| return x */
+    }
+    if (hx == hy) {
+      return signedZero(sx); /* |x|=|y| return x*0 */
     }
 
-    if (Double.isInfinite(y) || x == 0.0d) {
-      return x;
+    /* determine ix = ilogb(x) */
+    int ix;
+    if (hx < 0x00800000) {
+      /* subnormal x */
+      ix = -126;
+      for (int i = (hx << 8); i > 0; i <<= 1) {
+        ix -= 1;
+      }
+    } else {
+      ix = (hx >> 23) - 127;
     }
-    // See https://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html#jls-15.17.3
-    // and https://en.wikipedia.org/wiki/Modulo_operation#Variants_of_the_definition
-    return x - (y * narrowDoubleToInt(x / y));
+
+    /* determine iy = ilogb(y) */
+    int iy;
+    if (hy < 0x00800000) {
+      /* subnormal y */
+      iy = -126;
+      for (int i = (hy << 8); i >= 0; i <<= 1) {
+        iy -= 1;
+      }
+    } else {
+      iy = (hy >> 23) - 127;
+    }
+
+    /* set up {hx,lx}, {hy,ly} and align y to x */
+    if (ix >= -126) {
+      hx = 0x00800000 | (0x007fffff & hx);
+    } else {
+      /* subnormal x, shift x to normal */
+      n = -126 - ix;
+      hx = hx << n;
+    }
+    if (iy >= -126) {
+      hy = 0x00800000 | (0x007fffff & hy);
+    } else {
+      /* subnormal y, shift y to normal */
+      n = -126 - iy;
+      hy = hy << n;
+    }
+
+    /* fix point fmod */
+    n = ix - iy;
+    while (n-- != 0) {
+      hz = hx - hy;
+      if (hz < 0) {
+        hx = hx + hx;
+      } else {
+        if (hz == 0) {
+          return signedZero(sx);
+        }
+        hx = hz + hz;
+      }
+    }
+    hz = hx - hy;
+    if (hz >= 0) {
+      hx = hz;
+    }
+
+    /* convert back to floating value and restore the sign */
+    if (hx == 0) {
+      return signedZero(sx);
+    }
+    while (hx < 0x00800000) {
+      /* normalize x */
+      hx = hx + hx;
+      iy -= 1;
+    }
+    if (iy >= -126) {
+      /* normalize output */
+      hx = ((hx - 0x00800000) | ((iy + 127) << 23));
+      x = Float.intBitsToFloat(hx | sx);
+    } else {
+      /* subnormal output */
+      n = -126 - iy;
+      hx >>= n;
+      x = Float.intBitsToFloat(hx | sx);
+      x *= 1.0f; /* create necessary signal */
+    }
+
+    return x; /* exact output */
   }
 
-  public static float fmod(float x, float y) {
-    if (Float.isNaN(x) || Float.isNaN(y) || Float.isInfinite(x) || y == 0.0f) {
-      return Float.NaN;
-    }
-
-    if (Float.isInfinite(y) || x == 0.0f) {
-      return x;
-    }
-
-    return x - (y * narrowFloatToInt(x / y));
+  private static float signedZero(int sx) {
+    return sx == 0 ? .0f : -.0f;
   }
 
   /** Narrows a number to an unsigned 16-bit number. */

@@ -15,6 +15,7 @@
  */
 package binaryexpressions;
 
+import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertEqualsDelta;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
@@ -110,8 +111,16 @@ public class Main {
     assertTrue(Double.isNaN(-1.2 % 0.0));
     assertTrue(1.2 % Double.POSITIVE_INFINITY == 1.2);
     assertTrue(1.2 % Double.NEGATIVE_INFINITY == 1.2);
-    assertTrue(0.0 % 1.2 == 0.0);
-    assertTrue(-0.0 % 1.2 == -0.0);
+    assertTrue(Long.MAX_VALUE % 3.0 == 2.0);
+    assertTrue(Long.MAX_VALUE % -3.0 == 2.0);
+    assertTrue(Long.MIN_VALUE % 3.0 == -2.0);
+    assertTrue(Long.MIN_VALUE % -3.0 == -2.0);
+    assertEquals(1.0 % 1.0, 0.0);
+    assertEquals(-1.0 % 1.0, -0.0);
+    assertEquals(1.0 % -1.0, 0.0);
+    assertEquals(-1.0 % -1.0, -0.0);
+    assertEquals(0.0 % 1.2, 0.0);
+    assertEquals(-0.0 % 1.2, -0.0);
     assertEqualsDelta(.2, .7 % .5, 1e-15);
     assertEqualsDelta(.2, .7 % -.5, 1e-15);
     assertEqualsDelta(-.2, -.7 % .5, 1e-15);
@@ -125,8 +134,16 @@ public class Main {
     assertTrue(Float.isNaN(-1.2f % 0.0f));
     assertTrue(1.2f % Float.POSITIVE_INFINITY == 1.2f);
     assertTrue(1.2f % Float.NEGATIVE_INFINITY == 1.2f);
-    assertTrue(0.0f % 1.2f == 0.0f);
-    assertTrue(-0.0f % 1.2f == -0.0f);
+    assertTrue(Long.MAX_VALUE % 3.0f == 2.0f);
+    assertTrue(Long.MAX_VALUE % -3.0f == 2.0f);
+    assertTrue(Long.MIN_VALUE % 3.0f == -2.0f);
+    assertTrue(Long.MIN_VALUE % -3.0f == -2.0f);
+    assertEquals(1.0f % 1.0f, 0.0f);
+    assertEquals(-1.0f % 1.0f, -0.0f);
+    assertEquals(1.0f % -1.0f, 0.0f);
+    assertEquals(-1.0f % -1.0f, -0.0f);
+    assertEquals(0.0f % 1.2f, 0.0f);
+    assertEquals(-0.0f % 1.2f, -0.0f);
     assertEqualsDelta(.2f, .7f % .5f, 1e-7);
     assertEqualsDelta(.2f, .7f % -.5f, 1e-7);
     assertEqualsDelta(-.2f, -.7f % .5f, 1e-7);

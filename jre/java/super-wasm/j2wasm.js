@@ -119,6 +119,7 @@ function createImportObject(userImports) {
     'j2wasm.CharUtils.charToUpperCase': CharUtils.charToUpperCase,
     'j2wasm.ConsoleUtils.log': ConsoleUtils.log,
     'j2wasm.DoubleUtils.isValidDouble': DoubleUtils.isValidDouble,
+    'j2wasm.DoubleUtils.dmod': DoubleUtils.dmod,
     'parseFloat': parseFloat,
     'performance.now': () => performance.now(),
 
