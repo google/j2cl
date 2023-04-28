@@ -246,7 +246,7 @@ def _j2cl_transpile(
         # TODO(b/214609427): JavaInfo created through Starlark does not have compilation_info set.
         # We will compute the classpath manually using transitive_compile_time_jars (note that
         # transitive_compile_time_jars contains current compiled code which should be excluded.)
-        compiled_jars = {jar: True for jar in jvm_provider.compile_jars.to_list()}
+        compiled_jars = [output.compile_jar for output in jvm_provider.java_outputs if output.compile_jar]
         compilation_classpath = [
             jar
             for jar in jvm_provider.transitive_compile_time_jars.to_list()
