@@ -116,6 +116,8 @@ public class StringTest extends GWTTestCase {
     // Ensure it's not a locale-sensitive comparison per Java spec.
     assertEquals(0, hideFromCompiler("ä").compareTo("ä"));
     assertTrue(hideFromCompiler("ä").compareTo("z") > 0);
+    assertEquals(0, hideFromCompiler("İ").compareTo("İ"));
+    assertTrue(hideFromCompiler("İ").compareTo("z") > 0);
   }
 
   public static void testCompareToNull() {
@@ -168,6 +170,8 @@ public class StringTest extends GWTTestCase {
     assertTrue(hideFromCompiler("aä").compareToIgnoreCase("ab") > 0);
     assertEquals(0, hideFromCompiler("aä").compareToIgnoreCase("aä"));
     assertTrue(hideFromCompiler("삼").compareToIgnoreCase("집") < 0);
+    assertEquals(0, hideFromCompiler("İ").compareToIgnoreCase("İ"));
+    assertTrue(hideFromCompiler("İ").compareToIgnoreCase("z") < 0);
   }
 
   public void testConcat() {

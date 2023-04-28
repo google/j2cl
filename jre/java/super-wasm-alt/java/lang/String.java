@@ -213,7 +213,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
       char c1 = thisArray[o1];
       char c2 = otherArray[o2];
       if (c1 != c2) {
-        if (c1 > 127 && c2 > 127) {
+        if (c1 > 127 || c2 > 127) {
           // Branch into native implementation since we cannot handle case folding for non-ascii
           // chars.
           return nativeCompareToIgnoreCase(

@@ -318,7 +318,7 @@ public final class String implements Comparable<String>, CharSequence, Serializa
       char c1 = charAt(i);
       char c2 = other.charAt(i);
       if (c1 != c2) {
-        if (c1 > 127 && c2 > 127) {
+        if (c1 > 127 || c2 > 127) {
           // Branch into native implementation since we cannot handle case folding for non-ascii
           // chars.
           return nativeCompareToIgnoreCase(
