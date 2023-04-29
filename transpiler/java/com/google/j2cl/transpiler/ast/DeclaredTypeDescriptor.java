@@ -845,13 +845,18 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         bridgeMethodDescriptor.isJsMember()
             && getSuperTypeDescriptor() != null
             && getSuperTypeDescriptor().getPolymorphicMethods().stream()
-                .noneMatch(
-                    m -> bridgeMethodDescriptor.getSimpleJsName().equals(m.getSimpleJsName()));
+                // TODO(b/280121371): cleanup and choose better names for .getSimpleJsName() and
+                // getMandleName() to avoid confusions.
+                // Compare with .getMangledName() instead of with .getSimpleJsName() because
+                // .getSimpleJsName() computes the potential jsname for any member which will not
+                // be the JavaScript property name for non JsMethods.
+                .noneMatch(m -> bridgeMethodDescriptor.getMangledName().equals(m.getMangledName()));
 
     // Generalizing bridges are normally final since, in general, they will delegate to
     // a specialized method that is the one that can be overridden by subclasses. The only
-    // exception is that when an accidental override exposes a JsMethod there isn't necessarily
-    // a specialized delegation and those can be overridden.
+    // exception is that when an accidental override that newly exposes a JsMethod. This
+    // is a shortcut because a newly exposed jsname could be also bridge to a regular Java
+    // implementation.
     // TODO(b/271144313): Cleanup when a category EXPOSING_JSNAME_BRIDGE is added.
     boolean isFinal = origin == MethodOrigin.GENERALIZING_BRIDGE && !exposesJsMethod;
 
