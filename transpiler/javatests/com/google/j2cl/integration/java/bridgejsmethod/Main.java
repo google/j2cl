@@ -20,6 +20,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastE
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsType;
 
 public class Main {
   public static void main(String... args) {
@@ -199,4 +200,30 @@ public class Main {
         },
         String.class);
   }
+
+  interface InterfaceWithMethod {
+    String m();
+  }
+
+  interface InterfaceWithDefaultJsMethod extends InterfaceWithMethod {
+    @JsMethod
+    default String m() {
+      return "from Java default";
+    }
+  }
+
+  static class ExposesOverrideableJsMethod implements InterfaceWithDefaultJsMethod {}
+
+  private static void testJsMethodOverriddenInJs() {
+    assertEquals("from Java default", new ExposesOverrideableJsMethod().m());
+    assertEquals(
+        "from Java default", ((InterfaceWithMethod) new ExposesOverrideableJsMethod()).m());
+    assertEquals("from Js", new NativeSubclass().m());
+    assertEquals("from Js", ((InterfaceWithMethod) new NativeSubclass()).m());
+  }
+}
+
+@JsType(isNative = true)
+class NativeSubclass {
+  public native String m();
 }

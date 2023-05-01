@@ -59,4 +59,17 @@ public class JsMethodExample {
     @JsMethod(name = "renamedM")
     public void m(String s) {}
   }
+
+  interface InterfaceWithMethod<T> {
+    String m();
+  }
+
+  interface InterfaceWithDefaultJsMethod<T> extends InterfaceWithMethod<T> {
+    @JsMethod
+    default String m() {
+      return "from Java default";
+    }
+  }
+
+  static class ExposesOverrideableJsMethod<T> implements InterfaceWithDefaultJsMethod<T> {}
 }

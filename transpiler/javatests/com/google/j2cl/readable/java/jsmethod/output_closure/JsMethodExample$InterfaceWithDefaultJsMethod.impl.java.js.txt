@@ -1,0 +1,42 @@
+goog.module('jsmethod.JsMethodExample.InterfaceWithDefaultJsMethod$impl');
+
+const InterfaceWithMethod = goog.require('jsmethod.JsMethodExample.InterfaceWithMethod$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template T
+ * @extends {InterfaceWithMethod<T>}
+ */
+class InterfaceWithDefaultJsMethod {
+ /** @abstract @return {?string} */
+ m() {}
+ /** @nodts @template T @return {?string} */
+ static m_m__$default__jsmethod_JsMethodExample_InterfaceWithDefaultJsMethod__java_lang_String(/** !InterfaceWithDefaultJsMethod<T> */ $thisArg) {
+  InterfaceWithDefaultJsMethod.$clinit();
+  return 'from Java default';
+ }
+ /** @nodts */
+ static $clinit() {
+  InterfaceWithDefaultJsMethod.$clinit = () =>{};
+  InterfaceWithDefaultJsMethod.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  InterfaceWithMethod.$markImplementor(ctor);
+  ctor.prototype.$implements__jsmethod_JsMethodExample_InterfaceWithDefaultJsMethod = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__jsmethod_JsMethodExample_InterfaceWithDefaultJsMethod;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+InterfaceWithDefaultJsMethod.$markImplementor(/**@type {Function}*/ (InterfaceWithDefaultJsMethod));
+$Util.$setClassMetadataForInterface(InterfaceWithDefaultJsMethod, 'jsmethod.JsMethodExample$InterfaceWithDefaultJsMethod');
+
+exports = InterfaceWithDefaultJsMethod;
+
+//# sourceMappingURL=JsMethodExample$InterfaceWithDefaultJsMethod.js.map

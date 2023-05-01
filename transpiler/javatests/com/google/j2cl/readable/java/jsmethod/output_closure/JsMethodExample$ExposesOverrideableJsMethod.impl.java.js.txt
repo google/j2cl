@@ -1,0 +1,57 @@
+goog.module('jsmethod.JsMethodExample.ExposesOverrideableJsMethod$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const InterfaceWithDefaultJsMethod = goog.require('jsmethod.JsMethodExample.InterfaceWithDefaultJsMethod$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ * @implements {InterfaceWithDefaultJsMethod<T>}
+ */
+class ExposesOverrideableJsMethod extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!ExposesOverrideableJsMethod<T>} */
+ static $create__() {
+  ExposesOverrideableJsMethod.$clinit();
+  let $instance = new ExposesOverrideableJsMethod();
+  $instance.$ctor__jsmethod_JsMethodExample_ExposesOverrideableJsMethod__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsmethod_JsMethodExample_ExposesOverrideableJsMethod__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ //Bridge method.
+ /** @final @override @nodts @return {?string} */
+ m_m__java_lang_String() {
+  return this.m();
+ }
+ //Default method forwarding stub.
+ /** @override @return {?string} */
+ m() {
+  return InterfaceWithDefaultJsMethod.m_m__$default__jsmethod_JsMethodExample_InterfaceWithDefaultJsMethod__java_lang_String(this);
+ }
+ /** @nodts */
+ static $clinit() {
+  ExposesOverrideableJsMethod.$clinit = () =>{};
+  ExposesOverrideableJsMethod.$loadModules();
+  j_l_Object.$clinit();
+  InterfaceWithDefaultJsMethod.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ExposesOverrideableJsMethod;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+InterfaceWithDefaultJsMethod.$markImplementor(ExposesOverrideableJsMethod);
+$Util.$setClassMetadata(ExposesOverrideableJsMethod, 'jsmethod.JsMethodExample$ExposesOverrideableJsMethod');
+
+exports = ExposesOverrideableJsMethod;
+
+//# sourceMappingURL=JsMethodExample$ExposesOverrideableJsMethod.js.map
