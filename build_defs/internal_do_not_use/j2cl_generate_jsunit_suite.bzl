@@ -84,5 +84,5 @@ def j2cl_generate_jsunit_suite(name, test_class, deps, tags = []):
         ]),
         testonly = 1,
         tags = ["manual", "notap"],
-        exec_tools = [out_jar],
+        tools = [out_jar],
     )
