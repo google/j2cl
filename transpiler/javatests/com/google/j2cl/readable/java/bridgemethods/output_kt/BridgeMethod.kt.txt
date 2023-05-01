@@ -193,3 +193,19 @@ open class ReparametrerizedChild<E: ReparametrerizedChild<E>?>: ParameterizedPar
 }
 
 open class LeafChild: ReparametrerizedChild<LeafChild?>() {}
+
+fun interface StringConsumer {
+ @ObjCName("accept")
+ fun accept(
+  @ObjCName("withNSString") s: String?
+ )
+}
+
+open class Consumer<T> {
+ @ObjCName("accept")
+ fun accept(
+  @ObjCName("withId") t: T
+ ) {}
+}
+
+open class StringConsumerImpl: Consumer<String?>(), StringConsumer {}

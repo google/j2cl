@@ -163,3 +163,15 @@ class ReparametrerizedChild<E extends ReparametrerizedChild<E>> extends Paramete
 }
 
 class LeafChild extends ReparametrerizedChild<LeafChild> {}
+
+// Bridges that override final methods. Repro for b/280123980.
+interface StringConsumer {
+  void accept(String s);
+}
+
+class Consumer<T> {
+  public final void accept(T t) {}
+}
+
+// Needs a specializing bridge from accept(String) to super.accept(Object).
+class StringConsumerImpl extends Consumer<String> implements StringConsumer {}

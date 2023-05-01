@@ -1,0 +1,42 @@
+goog.module('bridgemethods.StringConsumer$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('bridgemethods.StringConsumer.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class StringConsumer {
+ /** @abstract @nodts */
+ m_accept__java_lang_String__void(/** ?string */ s) {}
+ /** @nodts @return {StringConsumer} */
+ static $adapt(/** ?function(?string):void */ fn) {
+  StringConsumer.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts */
+ static $clinit() {
+  StringConsumer.$clinit = () =>{};
+  StringConsumer.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__bridgemethods_StringConsumer = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__bridgemethods_StringConsumer;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('bridgemethods.StringConsumer.$LambdaAdaptor$impl');
+ }
+}
+StringConsumer.$markImplementor(/**@type {Function}*/ (StringConsumer));
+$Util.$setClassMetadataForInterface(StringConsumer, 'bridgemethods.StringConsumer');
+
+exports = StringConsumer;
+
+//# sourceMappingURL=StringConsumer.js.map

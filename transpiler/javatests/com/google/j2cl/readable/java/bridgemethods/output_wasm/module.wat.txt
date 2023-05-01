@@ -30,6 +30,12 @@
   )
  )
 
+ ;;; Code for bridgemethods.StringConsumer [type definition]
+ (type $bridgemethods.StringConsumer.vtable (struct 
+  (field $m_accept__java_lang_String__void (ref $function.m_accept__java_lang_String__void))
+  )
+ )
+
  ;;; Code for bridgemethods.TestCase10036.BI3 [type definition]
  (type $bridgemethods.TestCase10036.BI3.vtable (struct 
   (field $m_get__java_lang_String__java_lang_String (ref $function.m_get__java_lang_String__java_lang_String))
@@ -285,6 +291,31 @@
    $java.lang.Object.vtable)
  )
  (type $bridgemethods.ParameterizedParent.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
+
+ ;;; Code for bridgemethods.Consumer [type definition]
+ (type $bridgemethods.Consumer (struct_subtype 
+  (field $vtable (ref $bridgemethods.Consumer.vtable)) 
+  (field $itable (ref $bridgemethods.Consumer.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $bridgemethods.Consumer.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_accept__java_lang_Object__void (ref $function.m_accept__java_lang_Object__void))
+   $java.lang.Object.vtable)
+ )
+ (type $bridgemethods.Consumer.itable (struct_subtype 
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -657,6 +688,32 @@
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
   $bridgemethods.ParameterizedParent.itable))
+
+ ;;; Code for bridgemethods.StringConsumerImpl [type definition]
+ (type $bridgemethods.StringConsumerImpl (struct_subtype 
+  (field $vtable (ref $bridgemethods.StringConsumerImpl.vtable)) 
+  (field $itable (ref $bridgemethods.StringConsumerImpl.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $bridgemethods.Consumer)
+ )
+ (type $bridgemethods.StringConsumerImpl.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_accept__java_lang_Object__void (ref $function.m_accept__java_lang_Object__void))
+  (field $m_accept__java_lang_String__void (ref $function.m_accept__java_lang_String__void))
+   $bridgemethods.Consumer.vtable)
+ )
+ (type $bridgemethods.StringConsumerImpl.itable (struct_subtype 
+ (field $slot0 (ref $bridgemethods.StringConsumer.vtable))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $bridgemethods.Consumer.itable))
 
  ;;; Code for bridgemethods.TestCase102.C [type definition]
  (type $bridgemethods.TestCase102.C (struct_subtype 
@@ -1217,6 +1274,53 @@
   (ref.null struct)
  ))
 
+;;; Code for bridgemethods.Consumer [vtable.init]
+(global $bridgemethods.Consumer.vtable (ref $bridgemethods.Consumer.vtable) 
+ (struct.new $bridgemethods.Consumer.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@bridgemethods.Consumer)
+  (ref.func $m_accept__java_lang_Object__void@bridgemethods.Consumer)
+ )
+)
+
+;;; Code for bridgemethods.Consumer [itable.init]
+(global $bridgemethods.Consumer.itable (ref $bridgemethods.Consumer.itable) (struct.new $bridgemethods.Consumer.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+ ))
+
+;;; Code for bridgemethods.StringConsumerImpl [vtable.init]
+(global $bridgemethods.StringConsumerImpl.vtable (ref $bridgemethods.StringConsumerImpl.vtable) 
+ (struct.new $bridgemethods.StringConsumerImpl.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@bridgemethods.StringConsumerImpl)
+  (ref.func $m_accept__java_lang_Object__void@bridgemethods.StringConsumerImpl)
+  (ref.func $m_accept__java_lang_String__void@bridgemethods.StringConsumerImpl)
+ )
+)
+
+;;; Code for bridgemethods.StringConsumerImpl [itable.init]
+(global $bridgemethods.StringConsumerImpl.itable (ref $bridgemethods.StringConsumerImpl.itable) (struct.new $bridgemethods.StringConsumerImpl.itable 
+ (struct.new $bridgemethods.StringConsumer.vtable
+  (ref.func $m_accept__java_lang_String__void@bridgemethods.StringConsumerImpl)
+ )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+ ))
+
 ;;; Code for bridgemethods.TestCase102.C [vtable.init]
 (global $bridgemethods.TestCase102.C.vtable (ref $bridgemethods.TestCase102.C.vtable) 
  (struct.new $bridgemethods.TestCase102.C.vtable
@@ -1502,6 +1606,15 @@
 ;;; Code for bridgemethods.LeafChild [static fields]
 (global $f_$initialized__bridgemethods_LeafChild (mut i32) (i32.const 0))
 
+;;; Code for bridgemethods.StringConsumer [static fields]
+(global $f_$initialized__bridgemethods_StringConsumer (mut i32) (i32.const 0))
+
+;;; Code for bridgemethods.Consumer [static fields]
+(global $f_$initialized__bridgemethods_Consumer (mut i32) (i32.const 0))
+
+;;; Code for bridgemethods.StringConsumerImpl [static fields]
+(global $f_$initialized__bridgemethods_StringConsumerImpl (mut i32) (i32.const 0))
+
 ;;; Code for bridgemethods.TestCase10036.BI3 [static fields]
 (global $f_$initialized__bridgemethods_TestCase10036_BI3 (mut i32) (i32.const 0))
 
@@ -1670,6 +1783,27 @@
   ;; (bridgemethods.Getter.$initialized = true);
   ;;@ bridgemethods/BridgeMethod.java:85:10
   (global.set $f_$initialized__bridgemethods_Getter (i32.const 1))
+ )
+)
+
+;;; Code for bridgemethods.StringConsumer [methods]
+
+;;; void StringConsumer.$clinit()
+(func $$clinit__void@bridgemethods.StringConsumer
+ ;;@ bridgemethods/BridgeMethod.java:168:10
+ (block
+  ;; if (bridgemethods.StringConsumer.$initialized) return;
+  ;;@ bridgemethods/BridgeMethod.java:168:10
+  (if (global.get $f_$initialized__bridgemethods_StringConsumer)
+   (then
+    ;; return;
+    ;;@ bridgemethods/BridgeMethod.java:168:10
+    (return )
+   )
+  )
+  ;; (bridgemethods.StringConsumer.$initialized = true);
+  ;;@ bridgemethods/BridgeMethod.java:168:10
+  (global.set $f_$initialized__bridgemethods_StringConsumer (i32.const 1))
  )
 )
 
@@ -2667,6 +2801,89 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.ParameterizedParent)
+
+;;; Code for bridgemethods.Consumer [methods]
+
+;;; Consumer<T> Consumer.$create()
+(func $$create__@bridgemethods.Consumer
+ (result (ref null $bridgemethods.Consumer))
+ ;;@ bridgemethods/BridgeMethod.java:172:6
+ (local $$instance (ref null $bridgemethods.Consumer))
+ (block
+  ;; Consumer<T> $instance = new Consumer.<init>(0);
+  ;;@ bridgemethods/BridgeMethod.java:172:6
+  (local.set $$instance (struct.new $bridgemethods.Consumer (ref.as_non_null (global.get $bridgemethods.Consumer.vtable)) (ref.as_non_null (global.get $bridgemethods.Consumer.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ bridgemethods/BridgeMethod.java:172:6
+  (call $$ctor__void_$p_bridgemethods_Consumer@bridgemethods.Consumer (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ bridgemethods/BridgeMethod.java:172:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Consumer.$ctor()
+(func $$ctor__void_$p_bridgemethods_Consumer@bridgemethods.Consumer
+ (param $this (ref null $bridgemethods.Consumer))
+ ;;@ bridgemethods/BridgeMethod.java:172:6
+ (block
+  ;; bridgemethods.Consumer.$clinit();
+  ;;@ bridgemethods/BridgeMethod.java:172:6
+  (call $$clinit__void@bridgemethods.Consumer )
+  ;; Object.this.$ctor();
+  ;;@ bridgemethods/BridgeMethod.java:172:6
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Consumer.accept(T t)
+(func $m_accept__java_lang_Object__void@bridgemethods.Consumer
+ (type $function.m_accept__java_lang_Object__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
+ ;;@ bridgemethods/BridgeMethod.java:173:20
+ (local $this (ref null $bridgemethods.Consumer))
+ (local.set $this (ref.cast_static $bridgemethods.Consumer (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_accept__java_lang_Object__void@bridgemethods.Consumer)
+
+;;; void Consumer.$clinit()
+(func $$clinit__void@bridgemethods.Consumer
+ ;;@ bridgemethods/BridgeMethod.java:172:6
+ (block
+  ;; if (bridgemethods.Consumer.$initialized) return;
+  ;;@ bridgemethods/BridgeMethod.java:172:6
+  (if (global.get $f_$initialized__bridgemethods_Consumer)
+   (then
+    ;; return;
+    ;;@ bridgemethods/BridgeMethod.java:172:6
+    (return )
+   )
+  )
+  ;; (bridgemethods.Consumer.$initialized = true);
+  ;;@ bridgemethods/BridgeMethod.java:172:6
+  (global.set $f_$initialized__bridgemethods_Consumer (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ bridgemethods/BridgeMethod.java:172:6
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> Consumer.getClass()
+(func $m_getClass__java_lang_Class@bridgemethods.Consumer
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $bridgemethods.Consumer))
+ (local.set $this (ref.cast_static $bridgemethods.Consumer (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.Consumer();
+  (return (call $function.no.side.effects.$getBridgemethods.Consumer__java_lang_Class (ref.func $$getBridgemethods.Consumer__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@bridgemethods.Consumer)
 
 ;;; Code for bridgemethods.TestCase10036.B [methods]
 
@@ -3947,6 +4164,108 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.ReparametrerizedChild)
+
+;;; Code for bridgemethods.StringConsumerImpl [methods]
+
+;;; StringConsumerImpl StringConsumerImpl.$create()
+(func $$create__@bridgemethods.StringConsumerImpl
+ (result (ref null $bridgemethods.StringConsumerImpl))
+ ;;@ bridgemethods/BridgeMethod.java:177:6
+ (local $$instance (ref null $bridgemethods.StringConsumerImpl))
+ (block
+  ;; StringConsumerImpl $instance = new StringConsumerImpl.<init>(0);
+  ;;@ bridgemethods/BridgeMethod.java:177:6
+  (local.set $$instance (struct.new $bridgemethods.StringConsumerImpl (ref.as_non_null (global.get $bridgemethods.StringConsumerImpl.vtable)) (ref.as_non_null (global.get $bridgemethods.StringConsumerImpl.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ bridgemethods/BridgeMethod.java:177:6
+  (call $$ctor__void_$p_bridgemethods_StringConsumerImpl@bridgemethods.StringConsumerImpl (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ bridgemethods/BridgeMethod.java:177:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void StringConsumerImpl.$ctor()
+(func $$ctor__void_$p_bridgemethods_StringConsumerImpl@bridgemethods.StringConsumerImpl
+ (param $this (ref null $bridgemethods.StringConsumerImpl))
+ ;;@ bridgemethods/BridgeMethod.java:177:6
+ (block
+  ;; bridgemethods.StringConsumerImpl.$clinit();
+  ;;@ bridgemethods/BridgeMethod.java:177:6
+  (call $$clinit__void@bridgemethods.StringConsumerImpl )
+  ;; Consumer.this.$ctor();
+  ;;@ bridgemethods/BridgeMethod.java:177:6
+  (call $$ctor__void_$p_bridgemethods_Consumer@bridgemethods.Consumer (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void StringConsumerImpl.accept(String arg0)
+(func $m_accept__java_lang_String__void@bridgemethods.StringConsumerImpl
+ (type $function.m_accept__java_lang_String__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.String))
+ ;;@ bridgemethods/BridgeMethod.java:177:6
+ (local $this (ref null $bridgemethods.StringConsumerImpl))
+ (local.set $this (ref.cast_static $bridgemethods.StringConsumerImpl (local.get $this.untyped)))
+ (block
+  ;; super.accept(arg0);
+  ;;@ bridgemethods/BridgeMethod.java:177:6
+  (call $m_accept__java_lang_Object__void@bridgemethods.Consumer (ref.as_non_null (local.get $this))(local.get $arg0))
+ )
+)
+(elem declare func $m_accept__java_lang_String__void@bridgemethods.StringConsumerImpl)
+
+;;; void StringConsumerImpl.accept(T arg0)
+(func $m_accept__java_lang_Object__void@bridgemethods.StringConsumerImpl
+ (type $function.m_accept__java_lang_Object__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ ;;@ bridgemethods/BridgeMethod.java:177:6
+ (local $this (ref null $bridgemethods.StringConsumerImpl))
+ (local.set $this (ref.cast_static $bridgemethods.StringConsumerImpl (local.get $this.untyped)))
+ (block
+  ;; StringConsumerImpl.this.accept(((String) arg0));
+  ;;@ bridgemethods/BridgeMethod.java:177:6
+  (call_ref $function.m_accept__java_lang_String__void (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $bridgemethods.StringConsumerImpl.vtable $m_accept__java_lang_String__void (struct.get $bridgemethods.StringConsumerImpl $vtable(local.get $this))))
+ )
+)
+(elem declare func $m_accept__java_lang_Object__void@bridgemethods.StringConsumerImpl)
+
+;;; void StringConsumerImpl.$clinit()
+(func $$clinit__void@bridgemethods.StringConsumerImpl
+ ;;@ bridgemethods/BridgeMethod.java:177:6
+ (block
+  ;; if (bridgemethods.StringConsumerImpl.$initialized) return;
+  ;;@ bridgemethods/BridgeMethod.java:177:6
+  (if (global.get $f_$initialized__bridgemethods_StringConsumerImpl)
+   (then
+    ;; return;
+    ;;@ bridgemethods/BridgeMethod.java:177:6
+    (return )
+   )
+  )
+  ;; (bridgemethods.StringConsumerImpl.$initialized = true);
+  ;;@ bridgemethods/BridgeMethod.java:177:6
+  (global.set $f_$initialized__bridgemethods_StringConsumerImpl (i32.const 1))
+  ;; bridgemethods.Consumer.$clinit();
+  ;;@ bridgemethods/BridgeMethod.java:177:6
+  (call $$clinit__void@bridgemethods.Consumer )
+ )
+)
+
+;;; Class<?> StringConsumerImpl.getClass()
+(func $m_getClass__java_lang_Class@bridgemethods.StringConsumerImpl
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $bridgemethods.StringConsumerImpl))
+ (local.set $this (ref.cast_static $bridgemethods.StringConsumerImpl (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.StringConsumerImpl();
+  (return (call $function.no.side.effects.$getBridgemethods.StringConsumerImpl__java_lang_Class (ref.func $$getBridgemethods.StringConsumerImpl__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@bridgemethods.StringConsumerImpl)
 
 ;;; Code for bridgemethods.TestCase102.C [methods]
 
