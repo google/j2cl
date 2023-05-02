@@ -3,7 +3,6 @@
 See corresponding bzl files for the documentation.
 """
 
-load("//build_defs/internal_do_not_use:j2cl_workspace.bzl", _setup_j2cl_workspace = "setup_j2cl_workspace")
 load("//build_defs/internal_do_not_use:j2cl_application.bzl", _j2cl_application = "j2cl_application")
 load("//build_defs/internal_do_not_use:j2cl_library.bzl", _j2cl_library = "j2cl_library")
 load("//build_defs/internal_do_not_use:j2cl_alias.bzl", _j2cl_alias = "j2cl_alias")
@@ -26,7 +25,10 @@ load(
     _J2CL_TEST_DEFS = "J2CL_TEST_DEFS",
 )
 
-setup_j2cl_workspace = _setup_j2cl_workspace
+def setup_j2cl_workspace():
+    fail("""Use build_defs/workspace.bzl to setup the workspace:
+    load("@com_google_j2cl//build_defs:workspace.bzl", "setup_j2cl_workspace")
+    setup_j2cl_workspace()""")
 
 j2cl_application = _j2cl_application
 
