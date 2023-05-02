@@ -26,6 +26,7 @@ public class Main {
   public static void main(String... args) {
     testJsMethods();
     testJsMethodForwarding();
+    testJsMethodOverriddenInJs();
   }
 
   private static class A<T> {
