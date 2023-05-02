@@ -15,9 +15,7 @@
  */
 package morebridgemethods;
 
-import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
-import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 
 import java.util.function.Consumer;
 
@@ -39,12 +37,7 @@ public class TestCaseHand2 {
   public static void test() {
     C c = new C();
 
-    // TODO(b/254148464): J2CL is more strict about erasure casts than JVM. Here JVM does not throw
-    // assertThrows while J2CL does.
-    if (!isJvm()) {
-      assertThrowsClassCastException(() -> ((B) c).get(""), Consumer.class);
-    }
-
+    assertTrue(((B) c).get("").equals("B get B2"));
     assertTrue(((B) c).get((String) null).equals("B get B2"));
     assertTrue(c.get((String) null).equals("B get B2"));
     assertTrue(((I) c).get(null).equals("B get B2"));

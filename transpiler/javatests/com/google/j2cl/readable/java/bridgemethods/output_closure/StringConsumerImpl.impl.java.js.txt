@@ -4,9 +4,6 @@ const Consumer = goog.require('bridgemethods.Consumer$impl');
 const StringConsumer = goog.require('bridgemethods.StringConsumer$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let j_l_String = goog.forwardDeclare('java.lang.String$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-
 /**
  * @extends {Consumer<?string>}
  * @implements {StringConsumer}
@@ -32,11 +29,6 @@ class StringConsumerImpl extends Consumer {
  m_accept__java_lang_String__void(/** ?string */ arg0) {
   super.m_accept__java_lang_Object__void(arg0);
  }
- //Bridge method.
- /** @final @override @nodts */
- m_accept__java_lang_Object__void(/** ?string */ arg0) {
-  this.m_accept__java_lang_String__void(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
- }
  /** @nodts */
  static $clinit() {
   StringConsumerImpl.$clinit = () =>{};
@@ -49,10 +41,7 @@ class StringConsumerImpl extends Consumer {
  }
  
  /** @nodts */
- static $loadModules() {
-  j_l_String = goog.module.get('java.lang.String$impl');
-  $Casts = goog.module.get('vmbootstrap.Casts$impl');
- }
+ static $loadModules() {}
 }
 StringConsumer.$markImplementor(StringConsumerImpl);
 $Util.$setClassMetadata(StringConsumerImpl, 'bridgemethods.StringConsumerImpl');

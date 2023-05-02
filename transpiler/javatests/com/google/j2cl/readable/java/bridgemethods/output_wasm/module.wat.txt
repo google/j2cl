@@ -932,7 +932,7 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@bridgemethods.AccidentalOverride)
-  (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.AccidentalOverride)
+  (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.A)
   (ref.func $m_get__java_lang_Object@bridgemethods.A)
   (ref.func $m_fun__java_lang_String__java_lang_String@bridgemethods.AccidentalOverride)
   (ref.func $m_get__java_lang_String@bridgemethods.AccidentalOverride)
@@ -1145,7 +1145,7 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@bridgemethods.AccidentalOverrideBridge)
-  (ref.func $m_get__java_lang_Object__java_lang_Object@bridgemethods.AccidentalOverrideBridge)
+  (ref.func $m_get__java_lang_Object__java_lang_Object@bridgemethods.ClassWithParameterizedGet)
   (ref.func $m_test__void@bridgemethods.AccidentalOverrideBridge)
   (ref.func $m_get__java_lang_String__java_lang_String@bridgemethods.AccidentalOverrideBridge)
  )
@@ -1303,7 +1303,7 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@bridgemethods.StringConsumerImpl)
-  (ref.func $m_accept__java_lang_Object__void@bridgemethods.StringConsumerImpl)
+  (ref.func $m_accept__java_lang_Object__void@bridgemethods.Consumer)
   (ref.func $m_accept__java_lang_String__void@bridgemethods.StringConsumerImpl)
  )
 )
@@ -1476,7 +1476,7 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@bridgemethods.BridgeMethodShadowedSignature.C)
-  (ref.func $m_get__java_lang_Object__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.C)
+  (ref.func $m_get__java_lang_Object__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.B)
   (ref.func $m_get__java_util_function_Consumer__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.C)
  )
 )
@@ -3104,7 +3104,7 @@
  (block
   ;; A.this.m(((String) arg0));
   ;;@ bridgemethods/BridgeMethodDefault.java:30:15
-  (call_ref $function.m_m__java_lang_String__void (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $bridgemethods.BridgeMethodDefault.A.vtable $m_m__java_lang_String__void (struct.get $bridgemethods.BridgeMethodDefault.A $vtable(local.get $this))))
+  (call $m_m__java_lang_String__void@bridgemethods.BridgeMethodDefault.II (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0)))
  )
 )
 (elem declare func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.A)
@@ -3637,23 +3637,6 @@
 )
 (elem declare func $m_get__java_lang_String@bridgemethods.AccidentalOverride)
 
-;;; String AccidentalOverride.fun(S arg0)
-(func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.AccidentalOverride
- (type $function.m_fun__java_lang_Object__java_lang_Object)
- (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
- (result (ref null $java.lang.Object))
- ;;@ bridgemethods/AccidentalOverride.java:48:6
- (local $this (ref null $bridgemethods.AccidentalOverride))
- (local.set $this (ref.cast_static $bridgemethods.AccidentalOverride (local.get $this.untyped)))
- (block
-  ;; return AccidentalOverride.this.fun(((String) arg0));
-  ;;@ bridgemethods/AccidentalOverride.java:48:6
-  (return (call_ref $function.m_fun__java_lang_String__java_lang_String (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $bridgemethods.AccidentalOverride.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgemethods.AccidentalOverride $vtable(local.get $this)))))
- )
-)
-(elem declare func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.AccidentalOverride)
-
 ;;; void AccidentalOverride.$clinit()
 (func $$clinit__void@bridgemethods.AccidentalOverride
  ;;@ bridgemethods/AccidentalOverride.java:48:6
@@ -4008,23 +3991,6 @@
 )
 (elem declare func $m_get__java_lang_String__java_lang_String@bridgemethods.AccidentalOverrideBridge)
 
-;;; String AccidentalOverrideBridge.get(T arg0)
-(func $m_get__java_lang_Object__java_lang_Object@bridgemethods.AccidentalOverrideBridge
- (type $function.m_get__java_lang_Object__java_lang_Object)
- (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
- (result (ref null $java.lang.Object))
- ;;@ bridgemethods/BridgeMethod.java:95:6
- (local $this (ref null $bridgemethods.AccidentalOverrideBridge))
- (local.set $this (ref.cast_static $bridgemethods.AccidentalOverrideBridge (local.get $this.untyped)))
- (block
-  ;; return AccidentalOverrideBridge.this.get(((String) arg0));
-  ;;@ bridgemethods/BridgeMethod.java:95:6
-  (return (call_ref $function.m_get__java_lang_String__java_lang_String (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $bridgemethods.AccidentalOverrideBridge.vtable $m_get__java_lang_String__java_lang_String (struct.get $bridgemethods.AccidentalOverrideBridge $vtable(local.get $this)))))
- )
-)
-(elem declare func $m_get__java_lang_Object__java_lang_Object@bridgemethods.AccidentalOverrideBridge)
-
 ;;; void AccidentalOverrideBridge.$clinit()
 (func $$clinit__void@bridgemethods.AccidentalOverrideBridge
  ;;@ bridgemethods/BridgeMethod.java:95:6
@@ -4214,22 +4180,6 @@
  )
 )
 (elem declare func $m_accept__java_lang_String__void@bridgemethods.StringConsumerImpl)
-
-;;; void StringConsumerImpl.accept(T arg0)
-(func $m_accept__java_lang_Object__void@bridgemethods.StringConsumerImpl
- (type $function.m_accept__java_lang_Object__void)
- (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
- ;;@ bridgemethods/BridgeMethod.java:177:6
- (local $this (ref null $bridgemethods.StringConsumerImpl))
- (local.set $this (ref.cast_static $bridgemethods.StringConsumerImpl (local.get $this.untyped)))
- (block
-  ;; StringConsumerImpl.this.accept(((String) arg0));
-  ;;@ bridgemethods/BridgeMethod.java:177:6
-  (call_ref $function.m_accept__java_lang_String__void (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $bridgemethods.StringConsumerImpl.vtable $m_accept__java_lang_String__void (struct.get $bridgemethods.StringConsumerImpl $vtable(local.get $this))))
- )
-)
-(elem declare func $m_accept__java_lang_Object__void@bridgemethods.StringConsumerImpl)
 
 ;;; void StringConsumerImpl.$clinit()
 (func $$clinit__void@bridgemethods.StringConsumerImpl
@@ -4498,23 +4448,6 @@
  )
 )
 (elem declare func $m_get__java_util_function_Consumer__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.C)
-
-;;; String C.get(B2 arg0)
-(func $m_get__java_lang_Object__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.C
- (type $function.m_get__java_lang_Object__java_lang_String)
- (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
- (result (ref null $java.lang.String))
- ;;@ bridgemethods/BridgeMethodShadowedSignature.java:32:15
- (local $this (ref null $bridgemethods.BridgeMethodShadowedSignature.C))
- (local.set $this (ref.cast_static $bridgemethods.BridgeMethodShadowedSignature.C (local.get $this.untyped)))
- (block
-  ;; return C.this.get(((Consumer<? super C1>) arg0));
-  ;;@ bridgemethods/BridgeMethodShadowedSignature.java:32:15
-  (return (call_ref $function.m_get__java_util_function_Consumer__java_lang_String (ref.as_non_null (local.get $this))(local.get $arg0)(struct.get $bridgemethods.BridgeMethodShadowedSignature.C.vtable $m_get__java_util_function_Consumer__java_lang_String (struct.get $bridgemethods.BridgeMethodShadowedSignature.C $vtable(local.get $this)))))
- )
-)
-(elem declare func $m_get__java_lang_Object__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.C)
 
 ;;; void C.$clinit()
 (func $$clinit__void@bridgemethods.BridgeMethodShadowedSignature.C

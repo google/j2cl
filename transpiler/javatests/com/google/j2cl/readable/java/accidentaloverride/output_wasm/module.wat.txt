@@ -111,7 +111,7 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@accidentaloverride.AnotherAccidentalOverride)
-  (ref.func $m_foo__java_lang_Error__void@accidentaloverride.AnotherAccidentalOverride)
+  (ref.func $m_foo__java_lang_Error__void@accidentaloverride.Parent)
   (ref.func $m_foo__java_lang_Object__void@accidentaloverride.AnotherAccidentalOverride)
   (ref.func $m_foo__java_lang_AssertionError__void@accidentaloverride.AnotherAccidentalOverride)
  )
@@ -316,26 +316,10 @@
  (block
   ;; AnotherAccidentalOverride.this.foo(((AssertionError) arg0));
   ;;@ accidentaloverride/AccidentalOverride.java:31:6
-  (call_ref $function.m_foo__java_lang_AssertionError__void (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.AssertionError (local.get $arg0))(struct.get $accidentaloverride.AnotherAccidentalOverride.vtable $m_foo__java_lang_AssertionError__void (struct.get $accidentaloverride.AnotherAccidentalOverride $vtable(local.get $this))))
+  (call_ref $function.m_foo__java_lang_Error__void (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.AssertionError (local.get $arg0))(struct.get $accidentaloverride.Parent.vtable $m_foo__java_lang_Error__void (struct.get $accidentaloverride.Parent $vtable(local.get $this))))
  )
 )
 (elem declare func $m_foo__java_lang_Object__void@accidentaloverride.AnotherAccidentalOverride)
-
-;;; void AnotherAccidentalOverride.foo(T arg0)
-(func $m_foo__java_lang_Error__void@accidentaloverride.AnotherAccidentalOverride
- (type $function.m_foo__java_lang_Error__void)
- (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Error))
- ;;@ accidentaloverride/AccidentalOverride.java:31:6
- (local $this (ref null $accidentaloverride.AnotherAccidentalOverride))
- (local.set $this (ref.cast_static $accidentaloverride.AnotherAccidentalOverride (local.get $this.untyped)))
- (block
-  ;; AnotherAccidentalOverride.this.foo(((AssertionError) arg0));
-  ;;@ accidentaloverride/AccidentalOverride.java:31:6
-  (call_ref $function.m_foo__java_lang_AssertionError__void (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.AssertionError (local.get $arg0))(struct.get $accidentaloverride.AnotherAccidentalOverride.vtable $m_foo__java_lang_AssertionError__void (struct.get $accidentaloverride.AnotherAccidentalOverride $vtable(local.get $this))))
- )
-)
-(elem declare func $m_foo__java_lang_Error__void@accidentaloverride.AnotherAccidentalOverride)
 
 ;;; void AnotherAccidentalOverride.foo(AssertionError arg0)
 (func $m_foo__java_lang_AssertionError__void@accidentaloverride.AnotherAccidentalOverride

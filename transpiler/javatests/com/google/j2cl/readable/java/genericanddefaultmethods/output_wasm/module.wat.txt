@@ -84,7 +84,7 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@genericanddefaultmethods.ConcreteClass)
-  (ref.func $m_foo__java_lang_Object__void@genericanddefaultmethods.ConcreteClass)
+  (ref.func $m_foo__java_lang_Object__void@genericanddefaultmethods.GenericClass)
   (ref.func $m_foo__java_lang_String__void@genericanddefaultmethods.ConcreteClass)
  )
 )
@@ -298,22 +298,6 @@
  )
 )
 (elem declare func $m_foo__java_lang_String__void@genericanddefaultmethods.ConcreteClass)
-
-;;; void ConcreteClass.foo(T arg0)
-(func $m_foo__java_lang_Object__void@genericanddefaultmethods.ConcreteClass
- (type $function.m_foo__java_lang_Object__void)
- (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
- ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
- (local $this (ref null $genericanddefaultmethods.ConcreteClass))
- (local.set $this (ref.cast_static $genericanddefaultmethods.ConcreteClass (local.get $this.untyped)))
- (block
-  ;; ConcreteClass.this.foo(((String) arg0));
-  ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
-  (call_ref $function.m_foo__java_lang_String__void (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $genericanddefaultmethods.ConcreteClass.vtable $m_foo__java_lang_String__void (struct.get $genericanddefaultmethods.ConcreteClass $vtable(local.get $this))))
- )
-)
-(elem declare func $m_foo__java_lang_Object__void@genericanddefaultmethods.ConcreteClass)
 
 ;;; void ConcreteClass.$clinit()
 (func $$clinit__void@genericanddefaultmethods.ConcreteClass

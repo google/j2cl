@@ -343,7 +343,7 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@multipleabstractparents.MultipleAbstractParents.StringList)
-  (ref.func $m_getFoo__java_lang_Object__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractStringList)
+  (ref.func $m_getFoo__java_lang_Object__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractCollection)
   (ref.func $m_getFoo__java_lang_String__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractStringList)
  )
 )
@@ -351,7 +351,7 @@
 ;;; Code for multipleabstractparents.MultipleAbstractParents.StringList [itable.init]
 (global $multipleabstractparents.MultipleAbstractParents.StringList.itable (ref $multipleabstractparents.MultipleAbstractParents.StringList.itable) (struct.new $multipleabstractparents.MultipleAbstractParents.StringList.itable 
  (struct.new $multipleabstractparents.MultipleAbstractParents.List.vtable
-  (ref.func $m_getFoo__java_lang_Object__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractStringList)
+  (ref.func $m_getFoo__java_lang_Object__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractCollection)
  )
  (struct.new $multipleabstractparents.MultipleAbstractParents.IStringList.vtable
   (ref.func $m_getFoo__java_lang_String__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractStringList)
@@ -370,7 +370,7 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@multipleabstractparents.MultipleAbstractParents.StringListChild)
-  (ref.func $m_getFoo__java_lang_Object__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractStringList)
+  (ref.func $m_getFoo__java_lang_Object__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractCollection)
   (ref.func $m_getFoo__java_lang_String__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractStringList)
  )
 )
@@ -378,7 +378,7 @@
 ;;; Code for multipleabstractparents.MultipleAbstractParents.StringListChild [itable.init]
 (global $multipleabstractparents.MultipleAbstractParents.StringListChild.itable (ref $multipleabstractparents.MultipleAbstractParents.StringListChild.itable) (struct.new $multipleabstractparents.MultipleAbstractParents.StringListChild.itable 
  (struct.new $multipleabstractparents.MultipleAbstractParents.List.vtable
-  (ref.func $m_getFoo__java_lang_Object__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractStringList)
+  (ref.func $m_getFoo__java_lang_Object__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractCollection)
  )
  (struct.new $multipleabstractparents.MultipleAbstractParents.IStringList.vtable
   (ref.func $m_getFoo__java_lang_String__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractStringList)
@@ -923,23 +923,6 @@
   (call $$ctor__void_$p_multipleabstractparents_MultipleAbstractParents_AbstractList@multipleabstractparents.MultipleAbstractParents.AbstractList (ref.as_non_null (local.get $this)))
  )
 )
-
-;;; String AbstractStringList.getFoo(T arg0)
-(func $m_getFoo__java_lang_Object__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractStringList
- (type $function.m_getFoo__java_lang_Object__java_lang_String)
- (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
- (result (ref null $java.lang.String))
- ;;@ multipleabstractparents/MultipleAbstractParents.java:47:31
- (local $this (ref null $multipleabstractparents.MultipleAbstractParents.AbstractStringList))
- (local.set $this (ref.cast_static $multipleabstractparents.MultipleAbstractParents.AbstractStringList (local.get $this.untyped)))
- (block
-  ;; return AbstractStringList.this.getFoo(((String) arg0));
-  ;;@ multipleabstractparents/MultipleAbstractParents.java:47:31
-  (return (call_ref $function.m_getFoo__java_lang_String__java_lang_String (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $multipleabstractparents.MultipleAbstractParents.AbstractStringList.vtable $m_getFoo__java_lang_String__java_lang_String (struct.get $multipleabstractparents.MultipleAbstractParents.AbstractStringList $vtable(local.get $this)))))
- )
-)
-(elem declare func $m_getFoo__java_lang_Object__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractStringList)
 
 ;;; String AbstractStringList.getFoo(String arg0)
 (func $m_getFoo__java_lang_String__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractStringList

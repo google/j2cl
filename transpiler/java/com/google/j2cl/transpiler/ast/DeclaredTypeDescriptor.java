@@ -638,9 +638,16 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
             createBridgeMethodDescriptor(methodOrigin, currentTarget, targetImplementation);
         methodsByMangledName.put(newBridge.getMangledName(), newBridge);
 
-        // Now that the specializing bridge is in the class, it acts exactly as if a user wrote
-        // the override by hand and this method becomes the target for the other bridges.
-        targetMethodsByOverrideKey.put(newBridge.getOverrideKey(sourceLanguage), newBridge);
+        if (newBridge.isJsMember()) {
+          // Register this new bride as the target if is a JsMember to make sure that other bridges
+          // are rerouted through the js method bridge to the actual implementation.
+          // This guarantees that all the bridges created in this class will target the
+          // implementation in the native JavaScript subclasses if the method was overridden there.
+
+          // By registering in this map, it acts exactly as if a user wrote the override by hand
+          // and this method becomes the target for the other bridges.
+          targetMethodsByOverrideKey.put(newBridge.getOverrideKey(sourceLanguage), newBridge);
+        }
       }
     }
 

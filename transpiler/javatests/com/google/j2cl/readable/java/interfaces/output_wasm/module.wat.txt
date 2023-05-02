@@ -408,7 +408,7 @@
  (block
   ;; Implementor.this.defaultMethod(((String) arg0));
   ;;@ interfaces/Main.java:41:8
-  (call_ref $function.m_defaultMethod__java_lang_String__void (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $interfaces.Main.Implementor.vtable $m_defaultMethod__java_lang_String__void (struct.get $interfaces.Main.Implementor $vtable(local.get $this))))
+  (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0)))
  )
 )
 (elem declare func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Implementor)
@@ -499,7 +499,7 @@
  (block
   ;; AbstractImplementor.this.defaultMethod(((String) arg0));
   ;;@ interfaces/Main.java:47:17
-  (call_ref $function.m_defaultMethod__java_lang_String__void (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $interfaces.Main.AbstractImplementor.vtable $m_defaultMethod__java_lang_String__void (struct.get $interfaces.Main.AbstractImplementor $vtable(local.get $this))))
+  (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0)))
  )
 )
 (elem declare func $m_defaultMethod__java_lang_Object__void@interfaces.Main.AbstractImplementor)

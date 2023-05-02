@@ -5,7 +5,6 @@ const I = goog.require('bridgemethods.BridgeMethodShadowedSignature.I$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 /**
  * @template C1
@@ -33,11 +32,6 @@ class C extends B {
  m_get__java_util_function_Consumer__java_lang_String(/** Consumer<?> */ arg0) {
   return super.m_get__java_lang_Object__java_lang_String(arg0);
  }
- //Bridge method.
- /** @final @override @nodts @return {?string} */
- m_get__java_lang_Object__java_lang_String(/** Consumer<?> */ arg0) {
-  return this.m_get__java_util_function_Consumer__java_lang_String(/**@type {Consumer<*>}*/ ($Casts.$to(arg0, Consumer)));
- }
  /** @nodts */
  static $clinit() {
   C.$clinit = () =>{};
@@ -50,10 +44,7 @@ class C extends B {
  }
  
  /** @nodts */
- static $loadModules() {
-  Consumer = goog.module.get('java.util.function.Consumer$impl');
-  $Casts = goog.module.get('vmbootstrap.Casts$impl');
- }
+ static $loadModules() {}
 }
 I.$markImplementor(C);
 $Util.$setClassMetadata(C, 'bridgemethods.BridgeMethodShadowedSignature$C');
