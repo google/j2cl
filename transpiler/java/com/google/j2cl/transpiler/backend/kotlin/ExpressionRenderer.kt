@@ -46,6 +46,7 @@ import com.google.j2cl.transpiler.ast.NewInstance
 import com.google.j2cl.transpiler.ast.NullLiteral
 import com.google.j2cl.transpiler.ast.NumberLiteral
 import com.google.j2cl.transpiler.ast.PostfixExpression
+import com.google.j2cl.transpiler.ast.PostfixOperator
 import com.google.j2cl.transpiler.ast.PrefixExpression
 import com.google.j2cl.transpiler.ast.PrefixOperator
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
@@ -226,8 +227,44 @@ private fun BinaryOperator.ktSymbol(useEquality: Boolean): String =
     BinaryOperator.CONDITIONAL_AND -> "&&"
     BinaryOperator.CONDITIONAL_OR -> "||"
     BinaryOperator.ASSIGN -> "="
-    else -> throw InternalCompilerError("$this.ktSymbol")
+    BinaryOperator.LEFT_SHIFT,
+    BinaryOperator.RIGHT_SHIFT_SIGNED,
+    BinaryOperator.RIGHT_SHIFT_UNSIGNED,
+    BinaryOperator.BIT_XOR,
+    BinaryOperator.BIT_AND,
+    BinaryOperator.BIT_OR,
+    BinaryOperator.PLUS_ASSIGN,
+    BinaryOperator.MINUS_ASSIGN,
+    BinaryOperator.TIMES_ASSIGN,
+    BinaryOperator.DIVIDE_ASSIGN,
+    BinaryOperator.BIT_AND_ASSIGN,
+    BinaryOperator.BIT_OR_ASSIGN,
+    BinaryOperator.BIT_XOR_ASSIGN,
+    BinaryOperator.REMAINDER_ASSIGN,
+    BinaryOperator.LEFT_SHIFT_ASSIGN,
+    BinaryOperator.RIGHT_SHIFT_SIGNED_ASSIGN,
+    BinaryOperator.RIGHT_SHIFT_UNSIGNED_ASSIGN -> throw InternalCompilerError("$this.ktSymbol")
   }
+
+private val PrefixOperator.ktSymbol: String
+  get() =
+    when (this) {
+      PrefixOperator.PLUS -> "+"
+      PrefixOperator.MINUS -> "-"
+      PrefixOperator.NOT -> "!"
+      PrefixOperator.SPREAD -> "*"
+      PrefixOperator.INCREMENT -> "++"
+      PrefixOperator.DECREMENT -> "--"
+      PrefixOperator.COMPLEMENT -> throw InternalCompilerError("$this.ktSymbol")
+    }
+
+private val PostfixOperator.ktSymbol: String
+  get() =
+    when (this) {
+      PostfixOperator.DECREMENT -> "--"
+      PostfixOperator.INCREMENT -> "++"
+      PostfixOperator.NOT_NULL_ASSERTION -> "!!"
+    }
 
 private fun Renderer.conditionalExpressionSource(
   conditionalExpression: ConditionalExpression
@@ -518,12 +555,12 @@ private val DeclaredTypeDescriptor.nonAnonymousTypeDescriptor: DeclaredTypeDescr
 private fun Renderer.postfixExpressionSource(expression: PostfixExpression): Source =
   join(
     leftSubExpressionSource(expression.precedence, expression.operand),
-    source(expression.operator.symbol)
+    source(expression.operator.ktSymbol)
   )
 
 private fun Renderer.prefixExpressionSource(expression: PrefixExpression): Source =
   expression.operator.let { operator ->
-    source(operator.symbol).let { symbolSource ->
+    source(operator.ktSymbol).let { symbolSource ->
       rightSubExpressionSource(expression.precedence, expression.operand).let { operandSource ->
         if (operator.needsSpace) spaceSeparated(symbolSource, operandSource)
         else join(symbolSource, operandSource)
