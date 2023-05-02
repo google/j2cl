@@ -356,22 +356,25 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   private String getJsDoc(Method method) {
     MethodDescriptor methodDescriptor = method.getDescriptor();
+    boolean isKotlinSource =
+        methodDescriptor.getEnclosingTypeDescriptor().getTypeDeclaration().getSourceLanguage()
+            == SourceLanguage.KOTLIN;
 
     StringBuilder jsDocBuilder = new StringBuilder();
+
     if (methodDescriptor.getJsVisibility() != Visibility.PUBLIC) {
       jsDocBuilder.append(" @").append(methodDescriptor.getJsVisibility().jsText);
     }
+
     if (methodDescriptor.isFinal()
-        // Don't emit @final on static JsMethods since this are always dispatched statically via
-        // collapse properties and j2cl allows the name to be reused.
-        && !(methodDescriptor.isStatic() && methodDescriptor.isJsMember())
-        // TODO(b/269866419): Enable final for Kotlin, once it is guaranteed that final methods are
-        // never overridden by synthetic methods from the lowerings.
-        && methodDescriptor
-            .getEnclosingTypeDescriptor()
-            .getTypeDeclaration()
-            .getSourceLanguage()
-            .equals(SourceLanguage.JAVA)) {
+        // Don't emit @final on static methods since this are always dispatched statically via
+        // collapse properties and j2cl allows the name to be reused. This situation might arise
+        // from the use of JsMethod or from Kotlin sources.
+        // TODO(b/280321528): remove the special handling for kotlin once this is fixed.
+        && !(methodDescriptor.isStatic() && (methodDescriptor.isJsMember() || isKotlinSource))
+        // TODO(b/280160727): Remove this when the bug in jscompiler is fixed.
+        && !methodDescriptor.isPropertyGetter()
+        && !methodDescriptor.isPropertySetter()) {
       jsDocBuilder.append(" @final");
     }
     if (methodDescriptor.isAbstract()) {
@@ -385,6 +388,17 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         && !methodDescriptor.getName().equals(MethodDescriptor.MARK_IMPLEMENTOR_METHOD_NAME)) {
       jsDocBuilder.append(" @nodts");
     }
+
+    // TODO(b/280315375): Remove the kotlin special case due to disagreement between how we the
+    //  classes in the type model vs their implementation.
+    if (methodDescriptor.isBridge()
+        && (isKotlinSource
+            || methodDescriptor.getJsOverriddenMethodDescriptors().stream()
+                .anyMatch(m -> m.isFinal()))) {
+      // Allow bridges to override final methods.
+      jsDocBuilder.append(" @suppress{visibility}");
+    }
+
     if (!methodDescriptor.getTypeParameterTypeDescriptors().isEmpty()) {
       String templateParamNames =
           closureTypesGenerator.getCommaSeparatedClosureTypesString(

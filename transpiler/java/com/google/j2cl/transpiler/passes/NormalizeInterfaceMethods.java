@@ -73,6 +73,7 @@ public class NormalizeInterfaceMethods extends NormalizationPass {
         .setMethodDescriptor(
             MethodDescriptor.Builder.from(methodDescriptor)
                 .setAbstract(true)
+                .setFinal(false)
                 .setDefaultMethod(false)
                 .build())
         .setParameters(AstUtils.clone(method.getParameters()))
