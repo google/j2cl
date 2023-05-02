@@ -132,6 +132,7 @@ import com.google.j2cl.transpiler.passes.NormalizeSwitchStatements;
 import com.google.j2cl.transpiler.passes.NormalizeSwitchStatementsKotlin;
 import com.google.j2cl.transpiler.passes.NormalizeSynchronizedMethods;
 import com.google.j2cl.transpiler.passes.NormalizeTryWithResources;
+import com.google.j2cl.transpiler.passes.NormalizeVarargInvocationsKotlin;
 import com.google.j2cl.transpiler.passes.NormalizeVarargParametersKotlin;
 import com.google.j2cl.transpiler.passes.NormalizeVariableInitialization;
 import com.google.j2cl.transpiler.passes.OptimizeAnonymousInnerClassesToFunctionExpressions;
@@ -534,6 +535,9 @@ public enum Backend {
           NormalizeMultiExpressions::new,
           RemoveNestedBlocks::new,
           RemoveNoopStatements::new,
+
+          // Passes that breaks the invariants for running ConversionContextVisitor related passes.
+          NormalizeVarargInvocationsKotlin::new,
 
           // Verification
           VerifySingleAstReference::new,

@@ -122,6 +122,16 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
     return PrefixExpression.newBuilder().setOperator(prefixOperator).setOperand(this).build();
   }
 
+  /** Returns expression with not-null assertion operator. */
+  public Expression postfixNotNullAssertion() {
+    return postfix(PostfixOperator.NOT_NULL_ASSERTION);
+  }
+
+  /** Returns expression postfixed with unary operator {@code postfixOperator}. */
+  public Expression postfix(PostfixOperator postfixOperator) {
+    return PostfixExpression.newBuilder().setOperator(postfixOperator).setOperand(this).build();
+  }
+
   /** Return the logical or of this expression and {@code rhs}. */
   public Expression infixOr(Expression rhs) {
     return infix(BinaryOperator.CONDITIONAL_OR, this, rhs);

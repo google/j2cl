@@ -398,37 +398,7 @@ private fun Renderer.invocationTypeArgumentsSource(typeArguments: List<TypeArgum
   }
 
 internal fun Renderer.invocationSource(invocation: Invocation) =
-  inRoundBrackets(
-    // Take last argument if it's an array literal passed as a vararg parameter.
-    invocation.varargArrayLiteral.let { varargArrayLiteral ->
-      if (varargArrayLiteral != null)
-        commaSeparated(
-          invocation.arguments
-            .dropLast(1)
-            .plus(varargArrayLiteral.valueExpressions)
-            .map(::expressionSource)
-        )
-      else
-        commaSeparated(
-          invocation.target.parameterDescriptors.zip(invocation.arguments).map {
-            (parameterDescriptor, argument) ->
-            // TODO(b/216523245): Handle spread operator using a pass in the AST.
-            if (parameterDescriptor.isVarargs)
-              spreadExpression(
-                inRoundBrackets(expressionSource(argument))
-                  .letIf(argument.typeDescriptor.isNullable, ::nonNull)
-              )
-            else expressionSource(argument)
-          }
-        )
-    }
-  )
-
-private val Invocation.varargArrayLiteral
-  get() =
-    (arguments.lastOrNull() as? ArrayLiteral).takeIf {
-      target.parameterDescriptors.lastOrNull()?.isVarargs == true
-    }
+  inRoundBrackets(commaSeparated(invocation.arguments.map(::expressionSource)))
 
 private fun Renderer.multiExpressionSource(multiExpression: MultiExpression): Source =
   spaceSeparated(

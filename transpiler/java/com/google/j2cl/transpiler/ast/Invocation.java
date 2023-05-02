@@ -117,7 +117,7 @@ public abstract class Invocation extends MemberReference {
     }
 
     public final T replaceVarargsArgument(List<Expression> replacementArguments) {
-      checkState(getTarget().isJsMethodVarargs());
+      checkState(getTarget().isVarargs());
       int lastArgumentPosition = arguments.size() - 1;
       arguments.remove(lastArgumentPosition);
       arguments.addAll(replacementArguments);
