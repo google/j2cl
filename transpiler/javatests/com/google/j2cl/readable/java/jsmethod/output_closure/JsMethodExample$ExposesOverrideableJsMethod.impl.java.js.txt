@@ -1,19 +1,18 @@
 goog.module('jsmethod.JsMethodExample.ExposesOverrideableJsMethod$impl');
 
-const j_l_Object = goog.require('java.lang.Object$impl');
-const InterfaceWithDefaultJsMethod = goog.require('jsmethod.JsMethodExample.InterfaceWithDefaultJsMethod$impl');
+const InterfaceExposingJsMethods = goog.require('jsmethod.JsMethodExample.InterfaceExposingJsMethods$impl');
+const SuperClassWithFinalMethod = goog.require('jsmethod.JsMethodExample.SuperClassWithFinalMethod$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 /**
- * @template T
- * @implements {InterfaceWithDefaultJsMethod<T>}
+ * @implements {InterfaceExposingJsMethods}
  */
-class ExposesOverrideableJsMethod extends j_l_Object {
+class ExposesOverrideableJsMethod extends SuperClassWithFinalMethod {
  /** @protected @nodts */
  constructor() {
   super();
  }
- /** @nodts @template T @return {!ExposesOverrideableJsMethod<T>} */
+ /** @nodts @return {!ExposesOverrideableJsMethod} */
  static $create__() {
   ExposesOverrideableJsMethod.$clinit();
   let $instance = new ExposesOverrideableJsMethod();
@@ -22,24 +21,29 @@ class ExposesOverrideableJsMethod extends j_l_Object {
  }
  /** @nodts */
  $ctor__jsmethod_JsMethodExample_ExposesOverrideableJsMethod__void() {
-  this.$ctor__java_lang_Object__void();
+  this.$ctor__jsmethod_JsMethodExample_SuperClassWithFinalMethod__void();
  }
  //Bridge method.
- /** @final @override @nodts @return {?string} */
- m_m__java_lang_String() {
-  return this.m();
+ /** @final @override @nodts */
+ m_m__void() {
+  this.m();
  }
  //Default method forwarding stub.
- /** @override @return {?string} */
+ /** @override */
  m() {
-  return InterfaceWithDefaultJsMethod.m_m__$default__jsmethod_JsMethodExample_InterfaceWithDefaultJsMethod__java_lang_String(this);
+  InterfaceExposingJsMethods.m_m__$default__jsmethod_JsMethodExample_InterfaceExposingJsMethods__void(this);
+ }
+ //Bridge method.
+ /** @override */
+ n() {
+  this.m_n__void();
  }
  /** @nodts */
  static $clinit() {
   ExposesOverrideableJsMethod.$clinit = () =>{};
   ExposesOverrideableJsMethod.$loadModules();
-  j_l_Object.$clinit();
-  InterfaceWithDefaultJsMethod.$clinit();
+  SuperClassWithFinalMethod.$clinit();
+  InterfaceExposingJsMethods.$clinit();
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
@@ -49,7 +53,7 @@ class ExposesOverrideableJsMethod extends j_l_Object {
  /** @nodts */
  static $loadModules() {}
 }
-InterfaceWithDefaultJsMethod.$markImplementor(ExposesOverrideableJsMethod);
+InterfaceExposingJsMethods.$markImplementor(ExposesOverrideableJsMethod);
 $Util.$setClassMetadata(ExposesOverrideableJsMethod, 'jsmethod.JsMethodExample$ExposesOverrideableJsMethod');
 
 exports = ExposesOverrideableJsMethod;

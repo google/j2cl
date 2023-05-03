@@ -1,0 +1,51 @@
+goog.module('jsmethod.JsMethodExample.InterfaceExposingJsMethods$impl');
+
+const InterfaceWithMethod = goog.require('jsmethod.JsMethodExample.InterfaceWithMethod$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('jsmethod.JsMethodExample.InterfaceExposingJsMethods.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @extends {InterfaceWithMethod}
+ */
+class InterfaceExposingJsMethods {
+ /** @abstract */
+ m() {}
+ /** @abstract */
+ n() {}
+ /** @nodts @return {InterfaceExposingJsMethods} */
+ static $adapt(/** ?function():void */ fn) {
+  InterfaceExposingJsMethods.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts */
+ static m_m__$default__jsmethod_JsMethodExample_InterfaceExposingJsMethods__void(/** !InterfaceExposingJsMethods */ $thisArg) {
+  InterfaceExposingJsMethods.$clinit();
+ }
+ /** @nodts */
+ static $clinit() {
+  InterfaceExposingJsMethods.$clinit = () =>{};
+  InterfaceExposingJsMethods.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  InterfaceWithMethod.$markImplementor(ctor);
+  ctor.prototype.$implements__jsmethod_JsMethodExample_InterfaceExposingJsMethods = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__jsmethod_JsMethodExample_InterfaceExposingJsMethods;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('jsmethod.JsMethodExample.InterfaceExposingJsMethods.$LambdaAdaptor$impl');
+ }
+}
+InterfaceExposingJsMethods.$markImplementor(/**@type {Function}*/ (InterfaceExposingJsMethods));
+$Util.$setClassMetadataForInterface(InterfaceExposingJsMethods, 'jsmethod.JsMethodExample$InterfaceExposingJsMethods');
+
+exports = InterfaceExposingJsMethods;
+
+//# sourceMappingURL=JsMethodExample$InterfaceExposingJsMethods.js.map

@@ -21,7 +21,15 @@ class NativeSubclass extends JavaSuperClass {
    * @return {string}
    */
   m() {
-    return 'from Js';
+    return 'm from Js';
+  }
+
+  /**
+   * @override
+   * @return {string}
+   */
+  n() {
+    return 'n from Js';
   }
 }
 

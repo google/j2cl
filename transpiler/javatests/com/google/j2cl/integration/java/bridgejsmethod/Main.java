@@ -209,22 +209,41 @@ public class Main {
   interface InterfaceWithDefaultJsMethod extends InterfaceWithMethod {
     @JsMethod
     default String m() {
-      return "from Java default";
+      return "m from Java default";
+    }
+
+    @JsMethod
+    String n();
+  }
+
+  static class SuperClassWithFinalMethod {
+    public final String n() {
+      return "n from Java";
     }
   }
 
-  static class ExposesOverrideableJsMethod implements InterfaceWithDefaultJsMethod {}
+  static class ExposesOverrideableJsMethod extends SuperClassWithFinalMethod
+      implements InterfaceWithDefaultJsMethod {}
 
   private static void testJsMethodOverriddenInJs() {
-    assertEquals("from Java default", new ExposesOverrideableJsMethod().m());
+    assertEquals("m from Java default", new ExposesOverrideableJsMethod().m());
     assertEquals(
-        "from Java default", ((InterfaceWithMethod) new ExposesOverrideableJsMethod()).m());
-    assertEquals("from Js", new NativeSubclass().m());
-    assertEquals("from Js", ((InterfaceWithMethod) new NativeSubclass()).m());
+        "m from Java default", ((InterfaceWithMethod) new ExposesOverrideableJsMethod()).m());
+    assertEquals("m from Js", new NativeSubclass().m());
+    assertEquals("m from Js", ((InterfaceWithMethod) new NativeSubclass()).m());
+
+    assertEquals("n from Java", new ExposesOverrideableJsMethod().n());
+    assertEquals(
+        "n from Java", ((SuperClassWithFinalMethod) new ExposesOverrideableJsMethod()).n());
+    assertEquals("n from Js", new NativeSubclass().n());
+    // TODO(b/280451858): uncomment when bug is fixed.
+    // assertEquals("n from Js", ((SuperClassWithFinalMethod) (Object) new NativeSubclass()).n());
   }
 }
 
 @JsType(isNative = true)
 class NativeSubclass {
   public native String m();
+
+  public native String n();
 }

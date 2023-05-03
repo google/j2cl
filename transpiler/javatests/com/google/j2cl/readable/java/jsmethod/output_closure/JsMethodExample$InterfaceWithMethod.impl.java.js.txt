@@ -2,20 +2,14 @@ goog.module('jsmethod.JsMethodExample.InterfaceWithMethod$impl');
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $LambdaAdaptor = goog.forwardDeclare('jsmethod.JsMethodExample.InterfaceWithMethod.$LambdaAdaptor$impl');
-
 /**
  * @interface
- * @template T
  */
 class InterfaceWithMethod {
- /** @abstract @nodts @return {?string} */
- m_m__java_lang_String() {}
- /** @nodts @template T @return {InterfaceWithMethod<T>} */
- static $adapt(/** ?function():?string */ fn) {
-  InterfaceWithMethod.$clinit();
-  return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
- }
+ /** @abstract @nodts */
+ m_m__void() {}
+ /** @abstract @nodts */
+ m_n__void() {}
  /** @nodts */
  static $clinit() {
   InterfaceWithMethod.$clinit = () =>{};
@@ -31,9 +25,7 @@ class InterfaceWithMethod {
  }
  
  /** @nodts */
- static $loadModules() {
-  $LambdaAdaptor = goog.module.get('jsmethod.JsMethodExample.InterfaceWithMethod.$LambdaAdaptor$impl');
- }
+ static $loadModules() {}
 }
 InterfaceWithMethod.$markImplementor(/**@type {Function}*/ (InterfaceWithMethod));
 $Util.$setClassMetadataForInterface(InterfaceWithMethod, 'jsmethod.JsMethodExample$InterfaceWithMethod');

@@ -60,16 +60,26 @@ public class JsMethodExample {
     public void m(String s) {}
   }
 
-  interface InterfaceWithMethod<T> {
-    String m();
+  interface InterfaceWithMethod {
+    void m();
+
+    void n();
   }
 
-  interface InterfaceWithDefaultJsMethod<T> extends InterfaceWithMethod<T> {
+  interface InterfaceExposingJsMethods extends InterfaceWithMethod {
     @JsMethod
-    default String m() {
-      return "from Java default";
-    }
+    default void m() {}
+
+    @JsMethod
+    void n();
   }
 
-  static class ExposesOverrideableJsMethod<T> implements InterfaceWithDefaultJsMethod<T> {}
+  static class SuperClassWithFinalMethod {
+    public final void n() {}
+  }
+
+  // This class inherits implementations from supertypes and needs to exposes both the Java
+  // contracts and js contracts.
+  static class ExposesOverrideableJsMethod extends SuperClassWithFinalMethod
+      implements InterfaceExposingJsMethods {}
 }

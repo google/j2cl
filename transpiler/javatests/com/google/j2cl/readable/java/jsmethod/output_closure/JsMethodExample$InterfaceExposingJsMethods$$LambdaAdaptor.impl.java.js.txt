@@ -1,0 +1,66 @@
+goog.module('jsmethod.JsMethodExample.InterfaceExposingJsMethods.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const InterfaceExposingJsMethods = goog.require('jsmethod.JsMethodExample.InterfaceExposingJsMethods$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @implements {InterfaceExposingJsMethods}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function():void */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function():void} @nodts*/
+  this.f_fn__jsmethod_JsMethodExample_InterfaceExposingJsMethods_$LambdaAdaptor;
+  this.$ctor__jsmethod_JsMethodExample_InterfaceExposingJsMethods_$LambdaAdaptor__jsmethod_JsMethodExample_InterfaceExposingJsMethods_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__jsmethod_JsMethodExample_InterfaceExposingJsMethods_$LambdaAdaptor__jsmethod_JsMethodExample_InterfaceExposingJsMethods_$JsFunction__void(/** ?function():void */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__jsmethod_JsMethodExample_InterfaceExposingJsMethods_$LambdaAdaptor = fn;
+ }
+ /** @override */
+ n() {
+  {
+   let $function = this.f_fn__jsmethod_JsMethodExample_InterfaceExposingJsMethods_$LambdaAdaptor;
+   $function();
+  }
+ }
+ //Bridge method.
+ /** @final @override @nodts */
+ m_m__void() {
+  this.m();
+ }
+ //Bridge method.
+ /** @final @override @nodts */
+ m_n__void() {
+  this.n();
+ }
+ //Default method forwarding stub.
+ /** @override */
+ m() {
+  InterfaceExposingJsMethods.m_m__$default__jsmethod_JsMethodExample_InterfaceExposingJsMethods__void(this);
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+  InterfaceExposingJsMethods.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+InterfaceExposingJsMethods.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'jsmethod.JsMethodExample$InterfaceExposingJsMethods$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=JsMethodExample$InterfaceExposingJsMethods$$LambdaAdaptor.js.map
