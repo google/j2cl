@@ -20,9 +20,11 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static java.util.Comparator.comparingInt;
 
 import com.google.common.base.Predicates;
+import com.google.common.collect.HashMultiset;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.Multiset;
 import com.google.common.collect.SetMultimap;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
@@ -271,16 +273,33 @@ class WasmGenerationEnvironment {
   }
 
   /** The data index for the array literals that can be emitted as data. */
-  private final Map<ArrayLiteral, Integer> dataIndexByLiteral = new LinkedHashMap<>();
+  private final Map<ArrayLiteral, String> dataNameByLiteral = new LinkedHashMap<>();
+
+  /**
+   * Data elements for array literal will be given a name relative to the type they appear in.
+   *
+   * <p>Keep track how many literals have been given for a given type.
+   */
+  private final Multiset<String> lastIndexByName = HashMultiset.create();
 
   /** Registers the ArrayLiteral as a data segment and returns true if it was not present. */
-  public boolean registerDataSegmentLiteral(ArrayLiteral arrayLiteral) {
-    return dataIndexByLiteral.put(arrayLiteral, dataIndexByLiteral.size()) == null;
+  public boolean registerDataSegmentLiteral(ArrayLiteral arrayLiteral, String typeQualifiedName) {
+    if (dataNameByLiteral.containsKey(arrayLiteral)) {
+      return false;
+    }
+
+    // Create names that are relative to the type they are first created in.
+    lastIndexByName.add(typeQualifiedName);
+    var name =
+        "$arrayliteral@" + typeQualifiedName + "-" + lastIndexByName.count(typeQualifiedName);
+
+    dataNameByLiteral.put(arrayLiteral, name);
+    return true;
   }
 
   /** Returns the data segment index for this literal and null if it does not have one. */
-  public Integer getDataSegmentForLiteral(ArrayLiteral arrayLiteral) {
-    return dataIndexByLiteral.get(arrayLiteral);
+  public String getDataElementNameForLiteral(ArrayLiteral arrayLiteral) {
+    return dataNameByLiteral.get(arrayLiteral);
   }
 
   private int numberOfInterfaceSlots = -1;

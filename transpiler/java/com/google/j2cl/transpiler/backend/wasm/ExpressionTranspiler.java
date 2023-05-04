@@ -329,13 +329,13 @@ final class ExpressionTranspiler {
 
         String arrayType = environment.getWasmTypeName(arrayLiteral.getTypeDescriptor());
 
-        Integer dataIndex = environment.getDataSegmentForLiteral(arrayLiteral);
-        if (dataIndex != null) {
+        var dataElementName = environment.getDataElementNameForLiteral(arrayLiteral);
+        if (dataElementName != null) {
           // The literal is in a data segment.
           sourceBuilder.append(
               format(
-                  "(array.new_data %s %d (i32.const 0) (i32.const %d))",
-                  arrayType, dataIndex, arrayLiteral.getValueExpressions().size()));
+                  "(array.new_data %s %s (i32.const 0) (i32.const %d))",
+                  arrayType, dataElementName, arrayLiteral.getValueExpressions().size()));
           return false;
         }
 

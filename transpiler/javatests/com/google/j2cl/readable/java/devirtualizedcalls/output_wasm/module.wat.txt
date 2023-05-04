@@ -301,7 +301,7 @@
  (block
   ;; Object[][] array2d = javaemul.internal.WasmArray.createMultiDimensional(javaemul.internal.WasmArray.OfInt.$create([1,1]),-1);
   ;;@ devirtualizedcalls/ArrayCalls.java:20:4
-  (local.set $array2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.new_data $int.array 955 (i32.const 0) (i32.const 2)))(i32.const -1)))
+  (local.set $array2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@devirtualizedcalls.ArrayCalls-1 (i32.const 0) (i32.const 2)))(i32.const -1)))
   ;; int length1 = ((Object[]) array2d.elements[0]).length;
   ;;@ devirtualizedcalls/ArrayCalls.java:22:4
   (local.set $length1 (struct.get $javaemul.internal.WasmArray $f_length__javaemul_internal_WasmArray(ref.cast_static $javaemul.internal.WasmArray.OfObject (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $array2d)) (i32.const 0)))))

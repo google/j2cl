@@ -143,9 +143,12 @@ public class WasmModuleGenerator {
           @Override
           public void exitArrayLiteral(ArrayLiteral arrayLiteral) {
             if (canBeMovedToDataSegment(arrayLiteral)
-                && environment.registerDataSegmentLiteral(arrayLiteral)) {
+                && environment.registerDataSegmentLiteral(
+                    arrayLiteral, getCurrentType().getDeclaration().getQualifiedBinaryName())) {
+              var dataElementName = environment.getDataElementNameForLiteral(arrayLiteral);
               builder.newLine();
-              builder.append(format("(data \"%s\")", toDataString(arrayLiteral)));
+              builder.append(
+                  format("(data %s \"%s\")", dataElementName, toDataString(arrayLiteral)));
             }
           }
         });
