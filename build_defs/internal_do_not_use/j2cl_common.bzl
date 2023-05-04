@@ -14,6 +14,8 @@ def _compile(
         ctx,
         srcs = [],
         kt_common_srcs = [],
+        kt_friend_jars = depset(),
+        kt_exported_friend_jars = depset(),
         deps = [],
         exports = [],
         plugins = [],
@@ -71,6 +73,7 @@ def _compile(
             output_jar,
             javac_opts,
             kotlincopts = kotlincopts,
+            friend_jars = kt_friend_jars,
         )
 
     if has_srcs_to_transpile:
@@ -85,6 +88,7 @@ def _compile(
             internal_transpiler_flags,
             kt_common_srcs,
             kotlincopts,
+            kt_friend_jars,
         )
         library_info = [output_library_info]
     else:
@@ -107,6 +111,7 @@ def _compile(
                 js_exports,
                 artifact_suffix,
             ),
+            kt_exported_friend_jars = kt_exported_friend_jars,
         ),
         _is_j2cl_provider = 1,
     )
@@ -192,7 +197,8 @@ def _kt_compile(
         exported_plugins = [],
         output_jar = None,
         javac_opts = [],
-        kotlincopts = []):
+        kotlincopts = [],
+        friend_jars = depset()):
     fail("Kotlin frontend is disabled")
 
 def _get_java_toolchain(ctx):
@@ -230,7 +236,8 @@ def _j2cl_transpile(
         library_info_output,
         internal_transpiler_flags,
         kt_common_srcs,
-        kotlincopts):
+        kotlincopts,
+        kt_friend_jars):
     """ Takes Java provider and translates it into Closure style JS in a zip bundle."""
 
     # Using source_jars from the jvm compilation since that includes APT generated src.
@@ -274,6 +281,7 @@ def _j2cl_transpile(
     ):
         args.add("-generatekytheindexingmetadata")
     args.add_all(kotlincopts, format_each = "-kotlincOptions=%s")
+    args.add_joined(kt_friend_jars, format_joined = "-kotlincOptions=-Xfriend-paths=%s", join_with = ",")
     args.add_all(srcs)
 
     #  TODO(b/217287994): Remove the ability to do transpiler override.
@@ -286,7 +294,7 @@ def _j2cl_transpile(
         # kt_common_srcs are not read by the transpiler as they are already
         # included in the srcjars of srcs. However, params.add_all requires them
         # to be inputs in order to be properly expanded out into params.
-        inputs = depset(srcs + kt_common_srcs, transitive = [classpath]),
+        inputs = depset(srcs + kt_common_srcs, transitive = [classpath, kt_friend_jars]),
         outputs = [output_dir, library_info_output],
         executable = j2cl_transpiler_override or ctx.executable._j2cl_transpiler,
         arguments = [args],
