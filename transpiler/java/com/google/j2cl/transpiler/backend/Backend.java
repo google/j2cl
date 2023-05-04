@@ -462,6 +462,144 @@ public enum Backend {
           VerifyReferenceScoping::new,
           () -> new VerifyNormalizedUnits(/* verifyForWasm= **/ true));
     }
+
+    @Override
+    public boolean isWasm() {
+      return true;
+    }
+  },
+  WASM_MODULAR {
+    @Override
+    public void generateOutputs(BackendOptions options, Library library, Problems problems) {
+      new WasmModuleGenerator(options.getOutput(), options.getWasmEntryPoints(), problems)
+          .generateOutputs(library);
+    }
+
+    @Override
+    public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
+      return ImmutableList.of(
+          // Early run of determining whether variables are effectively final so that passes that
+          // depend on Expression.isEffectivelyInvariant it can take advantage.
+          // TODO(b/277799806): Consider removing this pass if the immutable field optimization is
+          // removed.
+          MakeVariablesFinal::new,
+          ConvertMethodReferencesToLambdas::new,
+          ResolveImplicitInstanceQualifiers::new,
+          () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ false),
+          NormalizeSuperMemberReferences::new);
+    }
+
+    @Override
+    public void checkRestrictions(BackendOptions options, Library library, Problems problems) {
+      JsInteropRestrictionsChecker.check(
+          library,
+          problems,
+          /* enableWasm= */ true,
+          /* isNullMarkedSupported= */ options.isNullMarkedSupported(),
+          /* optimizeAutoValue= */ options.getOptimizeAutoValue());
+    }
+
+    @Override
+    public ImmutableList<Supplier<NormalizationPass>> getPassFactories(BackendOptions options) {
+      return ImmutableList.of(
+          // Pre-verifications
+          VerifySingleAstReference::new,
+          VerifyParamAndArgCounts::new,
+          VerifyReferenceScoping::new,
+          RemoveWasmAnnotatedMethodBodies::new,
+          ImplementLambdaExpressionsViaImplementorClasses::new,
+
+          // Default constructors and explicit super calls should be synthesized first.
+          CreateImplicitConstructors::new,
+          InsertExplicitSuperCalls::new,
+
+          // Resolve captures
+          ResolveCaptures::new,
+          // ... and flatten the class hierarchy.
+          MoveNestedClassesToTop::new,
+          BridgeMethodsCreator::new,
+          EnumMethodsCreator::new,
+          () -> new ImplementSystemGetProperty(options.getDefinesForWasm()),
+          NormalizeTryWithResources::new,
+          NormalizeCatchClauses::new,
+          NormalizeOverlayMembers::new,
+          NormalizeInstanceCompileTimeConstants::new,
+          () -> new NormalizeEnumClasses(/* useMakeEnumNameIndirection= */ false),
+          () -> new NormalizeShifts(/* narrowAllToInt= */ false),
+          NormalizeStaticMemberQualifiers::new,
+          NormalizeMultiExpressions::new,
+
+          // Rewrite operations that do not have direct support in wasm into ones that have.
+          () -> new ExpandCompoundAssignments(/* expandAll= */ true),
+          InsertErasureTypeSafetyCasts::new,
+          // Rewrite 'a != b' to '!(a == b)'
+          RewriteReferenceEqualityOperations::new,
+          RewriteUnaryExpressions::new,
+          NormalizeSwitchStatements::new,
+          // Propagate constants needs to run after NormalizeSwitchStatements since it introduces
+          // field references to constant fields.
+          PropagateConstants::new,
+          StaticallyEvaluateStringConcatenation::new,
+          StaticallyEvaluateStringComparison::new,
+          ImplementStringConcatenation::new,
+          InsertNarrowingReferenceConversions::new,
+          () -> new InsertUnboxingConversions(/* areBooleanAndDoubleBoxed= */ true),
+          () -> new InsertBoxingConversions(/* areBooleanAndDoubleBoxed= */ true),
+          () -> new InsertNarrowingPrimitiveConversions(/* treatFloatAsDouble= */ false),
+          () -> new InsertWideningPrimitiveConversions(/* needFloatOrDoubleWidening= */ true),
+          ImplementDivisionOperations::new,
+          ImplementFloatingPointRemainderOperation::new,
+          // Rewrite 'a || b' into 'a ? true : b' and 'a && b' into 'a ? b : false'
+          RewriteShortcutOperators::new,
+          NormalizeFieldInitialization::new,
+          ImplementInstanceInitialization::new,
+          NormalizeLabels::new,
+          ImplementStaticInitializationViaConditionChecks::new,
+          ImplementClassMetadataViaGetters::new,
+          ImplementStringCompileTimeConstants::new,
+          NormalizeArrayCreationsWasm::new,
+          InsertCastOnArrayAccess::new,
+          options.getWasmRemoveAssertStatement()
+              ? RemoveAssertStatements::new
+              : ImplementAssertStatements::new,
+
+          // Normalize multiexpressions before rewriting assignments so that whenever there is a
+          // multiexpression, the result is used.
+          NormalizeMultiExpressions::new,
+
+          // a = b => (a = b, a)
+          RewriteAssignmentExpressions::new,
+          // Must happen after RewriteAssignmentExpressions
+          NormalizeNativePropertyAccesses::new,
+          // NormalizeNativePropertyAccesses creates method calls whose qualifiers might need to be
+          // extracted. After extracting qualifiers, we must again normalize multi-expressions.
+          ExtractNonIdempotentExpressions::new,
+          NormalizeMultiExpressions::new,
+          InsertWasmExternConversions::new,
+
+          // Needs to run at the end as the types in the ast will be invalid after the pass.
+          ImplementArraysAsClasses::new,
+          InsertExceptionConversionsWasm::new,
+
+          // Passes required for immutable fields.
+          MakeFieldsFinal::new,
+          NormalizeInstantiationThroughFactoryMethods::new,
+          NormalizeNullLiterals::new,
+          RemoveIsInstanceMethods::new,
+          RemoveNoopStatements::new,
+          UpgradeInterfaceDispatch::new,
+
+          // Post-verifications
+          VerifySingleAstReference::new,
+          VerifyParamAndArgCounts::new,
+          VerifyReferenceScoping::new,
+          () -> new VerifyNormalizedUnits(/* verifyForWasm= **/ true));
+    }
+
+    @Override
+    public boolean isWasm() {
+      return true;
+    }
   },
   KOTLIN {
     @Override
@@ -553,4 +691,8 @@ public enum Backend {
   public void checkRestrictions(BackendOptions options, Library library, Problems problems) {}
 
   public abstract void generateOutputs(BackendOptions options, Library library, Problems problems);
+
+  public boolean isWasm() {
+    return false;
+  }
 }

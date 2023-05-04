@@ -22,7 +22,6 @@ import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
-import com.google.j2cl.transpiler.backend.Backend;
 import com.google.j2cl.transpiler.passes.LibraryNormalizationPass;
 import com.google.j2cl.transpiler.passes.NormalizationPass;
 import java.util.concurrent.ExecutionException;
@@ -66,7 +65,7 @@ class J2clTranspiler {
   }
 
   private void transpileImpl() {
-    if (options.getBackend() == Backend.WASM) {
+    if (options.getBackend().isWasm()) {
       // TODO(b/178738483): Remove hack that makes mangling backend dependent.
       MemberDescriptor.setWasmManglingPatterns();
       // TODO(b/181615162): Remove hack that makes it possible to ignore JsEnum in Wasm.
