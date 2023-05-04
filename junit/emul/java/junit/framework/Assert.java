@@ -151,12 +151,13 @@ public class Assert {
         assertEquals(null, expected, actual, delta);
     }
 
-    /**
-     * Asserts that two longs are equal. If they are not
-     * an AssertionFailedError is thrown with the given message.
-     */
-    static public void assertEquals(String message, long expected, long actual) {
-        assertEquals(message, Long.valueOf(expected), Long.valueOf(actual));
+  /**
+   * Asserts that two longs are equal. If they are not an AssertionFailedError is thrown with the
+   * given message.
+   */
+  // TODO(b/279936148): Revert Object casts here and below when cl/527842488 is in.
+  public static void assertEquals(String message, long expected, long actual) {
+    assertEquals(message, (Object) Long.valueOf(expected), (Object) Long.valueOf(actual));
     }
 
     /**
@@ -171,7 +172,7 @@ public class Assert {
      * an AssertionFailedError is thrown with the given message.
      */
     static public void assertEquals(String message, boolean expected, boolean actual) {
-        assertEquals(message, Boolean.valueOf(expected), Boolean.valueOf(actual));
+    assertEquals(message, (Object) Boolean.valueOf(expected), (Object) Boolean.valueOf(actual));
     }
 
     /**
@@ -186,7 +187,7 @@ public class Assert {
      * an AssertionFailedError is thrown with the given message.
      */
     static public void assertEquals(String message, byte expected, byte actual) {
-        assertEquals(message, Byte.valueOf(expected), Byte.valueOf(actual));
+    assertEquals(message, (Object) Byte.valueOf(expected), (Object) Byte.valueOf(actual));
     }
 
     /**
@@ -201,7 +202,7 @@ public class Assert {
      * an AssertionFailedError is thrown with the given message.
      */
     static public void assertEquals(String message, char expected, char actual) {
-        assertEquals(message, Character.valueOf(expected), Character.valueOf(actual));
+    assertEquals(message, (Object) Character.valueOf(expected), (Object) Character.valueOf(actual));
     }
 
     /**
@@ -216,7 +217,7 @@ public class Assert {
      * an AssertionFailedError is thrown with the given message.
      */
     static public void assertEquals(String message, short expected, short actual) {
-        assertEquals(message, Short.valueOf(expected), Short.valueOf(actual));
+    assertEquals(message, (Object) Short.valueOf(expected), (Object) Short.valueOf(actual));
     }
 
     /**
@@ -231,7 +232,7 @@ public class Assert {
      * an AssertionFailedError is thrown with the given message.
      */
     static public void assertEquals(String message, int expected, int actual) {
-        assertEquals(message, Integer.valueOf(expected), Integer.valueOf(actual));
+    assertEquals(message, (Object) Integer.valueOf(expected), (Object) Integer.valueOf(actual));
     }
 
     /**
