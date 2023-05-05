@@ -22,7 +22,8 @@ import com.google.j2cl.integration.testing.Asserts.JsRunnable;
  * exception emulation. This will allow us to enable some integration tests for Wasm that uses these
  * methods without modifying them directly.
  */
-// TODO(b/170691676): Get rid of this class when proper exception support is implemented by J2WASM.
+// TODO(b/183769034): Get rid of this class when exception support is completely implemented by
+// J2WASM, including the ability to catch traps like divide by 0.
 class AssertsBase {
   public static void fail() {
     throw new AssertionError();
