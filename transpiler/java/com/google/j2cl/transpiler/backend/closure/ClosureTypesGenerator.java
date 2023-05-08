@@ -17,10 +17,13 @@ package com.google.j2cl.transpiler.backend.closure;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static java.util.stream.Collectors.joining;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Streams;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
@@ -107,27 +110,55 @@ class ClosureTypesGenerator {
 
     DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
 
+    // TODO(b/118615488): Surface enum boxed types so that this hack is not needed.
+    declaredTypeDescriptor = replaceJsEnumArguments(declaredTypeDescriptor);
+
     if (declaredTypeDescriptor.isJsFunctionInterface()) {
       return getClosureTypeForJsFunction(declaredTypeDescriptor);
     }
 
-    // TODO(b/118615488): Surface enum boxed types so that this hack is not needed.
-    List<ClosureType> typeArguments =
-        TypeDescriptors.isBoxedEnum(typeDescriptor)
-            // Avoid replacing typeargs in BoxedEnum<SomeJsEnum> to avoid infinite recursion.
-            ? getClosureTypes(declaredTypeDescriptor.getTypeArgumentDescriptors())
-            : getClosureTypes(
-                declaredTypeDescriptor.getTypeArgumentDescriptors().stream()
-                    .map(
-                        td ->
-                            AstUtils.isNonNativeJsEnum(td)
-                                ? TypeDescriptors.getEnumBoxType(td)
-                                : td)
-                    .collect(toImmutableList()));
-
     return withNullability(
-        getClosureTypeForDeclaration(declaredTypeDescriptor.getTypeDeclaration(), typeArguments),
+        getClosureTypeForDeclaration(
+            declaredTypeDescriptor.getTypeDeclaration(),
+            getClosureTypes(declaredTypeDescriptor.getTypeArgumentDescriptors())),
         typeDescriptor.isNullable());
+  }
+
+  /**
+   * Replaces non-native JsEnums by the boxed class counterpart in arguments of types descriptors.
+   *
+   * <p>The replacement does not need to be done recursively since it happens at the rendering of
+   * the type which will be called recursively to render each type argument. This is only done in
+   * declared type descriptors; there is no need to replace in places like bounds in type variables
+   * since those are not currently supported to be JsEnums.
+   */
+  private DeclaredTypeDescriptor replaceJsEnumArguments(DeclaredTypeDescriptor typeDescriptor) {
+    if (TypeDescriptors.isBoxedEnum(typeDescriptor)) {
+      // Don't replace the type parameters if it is already represented as a boxed JsEnum. Boxed
+      // JsEnum types might appear already in the AST as a result of transformations performed by
+      // passes that surface the actual boxing methods from the runtime library.
+      return typeDescriptor;
+    }
+    ImmutableList<TypeDescriptor> replacedTypeArguments =
+        typeDescriptor.getTypeArgumentDescriptors().stream()
+            .map(t -> AstUtils.isNonNativeJsEnum(t) ? TypeDescriptors.getEnumBoxType(t) : t)
+            .collect(toImmutableList());
+
+    if (replacedTypeArguments.equals(typeDescriptor.getTypeArgumentDescriptors())) {
+      // If there was no replacement avoid re-parametrizing the type.
+      return typeDescriptor;
+    }
+
+    // Construct a map from the type variables that are the type parameters of the class to the new
+    // values and specialize to replace the type arguments.
+    ImmutableMap<TypeVariable, TypeDescriptor> specializationMap =
+        Streams.zip(
+                typeDescriptor.getTypeDeclaration().getTypeParameterDescriptors().stream(),
+                replacedTypeArguments.stream(),
+                Maps::immutableEntry)
+            .collect(toImmutableMap(Map.Entry::getKey, Map.Entry::getValue));
+    return (DeclaredTypeDescriptor)
+        typeDescriptor.toUnparameterizedTypeDescriptor().specializeTypeVariables(specializationMap);
   }
 
   /** Returns the Closure type for a primitive type descriptor */
