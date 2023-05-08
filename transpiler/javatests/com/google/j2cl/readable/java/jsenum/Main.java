@@ -20,6 +20,7 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import jsinterop.annotations.JsEnum;
+import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsNonNull;
 
 public class Main {
@@ -132,7 +133,19 @@ public class Main {
 
     Supplier<ComparableJsEnum> supplier = () -> ComparableJsEnum.ONE;
     Consumer<ComparableJsEnum> consummer = e -> e.ordinal();
+
+    acceptsJsFunctionSupplier(() -> ComparableJsEnum.ONE);
+    acceptsSupplierOfSupplier(() -> (() -> ComparableJsEnum.ONE));
   }
+
+  @JsFunction
+  interface JsFunctionSuppiler<T> {
+    T get();
+  }
+
+  private static void acceptsJsFunctionSupplier(JsFunctionSuppiler<ComparableJsEnum> supplier) {}
+
+  private static void acceptsSupplierOfSupplier(Supplier<Supplier<ComparableJsEnum>> supplier) {}
 
   private static void testBoxUnboxWithTypeInference() {
     // Make sure the enum is boxed even when assigned to a field that is inferred to be JsEnum.

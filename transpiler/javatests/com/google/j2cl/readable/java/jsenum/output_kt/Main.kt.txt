@@ -76,7 +76,23 @@ open class Main {
    val consummer: Consumer<Main.ComparableJsEnum?>? = Consumer<Main.ComparableJsEnum?> { e: Main.ComparableJsEnum? ->
     e!!.ordinal
    }
+   Main.acceptsJsFunctionSupplier_private_2(Main.JsFunctionSuppiler<Main.ComparableJsEnum?> {
+    return@JsFunctionSuppiler Main.ComparableJsEnum.ONE
+   })
+   Main.acceptsSupplierOfSupplier_private_2(Supplier<Supplier<Main.ComparableJsEnum?>?> {
+    return@Supplier Supplier<Main.ComparableJsEnum?> {
+     return@Supplier Main.ComparableJsEnum.ONE
+    } as Supplier<Main.ComparableJsEnum>
+   })
   }
+
+  @JvmStatic
+  @HiddenFromObjC
+  fun acceptsJsFunctionSupplier_private_2(supplier: Main.JsFunctionSuppiler<Main.ComparableJsEnum?>?) {}
+
+  @JvmStatic
+  @HiddenFromObjC
+  fun acceptsSupplierOfSupplier_private_2(supplier: Supplier<Supplier<Main.ComparableJsEnum?>?>?) {}
 
   @JvmStatic
   @HiddenFromObjC
@@ -172,6 +188,11 @@ open class Main {
  enum class NativeStringEnum {
   ONE,
   THREE;
+ }
+
+ fun interface JsFunctionSuppiler<T> {
+  @ObjCName("get")
+  fun get(): T
  }
 
  open class TemplatedField<T> {

@@ -11,7 +11,7 @@
 [testJsEnumSwitch] => [m_testJsEnumSwitch__void]
 [{
     ComparableJsEnum comparableJsEnum =
-...    Consumer<ComparableJsEnum> consummer = e -> e.ordinal();
+...    acceptsSupplierOfSupplier(() -> (() -> ComparableJsEnum.ONE));
   }] => [Main.$clinit();] "jsenum.Main.testJsEnumSwitch"
 [ComparableJsEnum comparableJsEnum =
         ComparableJsEnum.ONE.getValue() == 1 ? ComparableJsEnum.TWO : null;] => [let comparableJsEnum = $Overlay.m_getValue__$devirt__jsenum_Main_ComparableJsEnum__int(ComparableJsEnum.ONE) == 1 ? ComparableJsEnum.TWO : /**@type {?ComparableJsEnum}*/ ($Enums.unbox(null));] "jsenum.Main.testJsEnumSwitch"
@@ -71,6 +71,22 @@
 [e] => [e] "e"
 [e -> e.ordinal()] => [let e_1 = /**@type {?ComparableJsEnum}*/ ($Enums.unbox(/**@type {$Enums_BoxedComparableLightEnum<?ComparableJsEnum>}*/ ($Casts.$to(e, $Overlay))));] "jsenum.Main.<lambda in testJsEnumSwitch>"
 [e] => [e_1] "e"
+[acceptsJsFunctionSupplier(() -> ComparableJsEnum.ONE);] => [Main.m_acceptsJsFunctionSupplier__jsenum_Main_JsFunctionSuppiler__void(() =>{
+   return /**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay));
+  });] "jsenum.Main.testJsEnumSwitch"
+[ComparableJsEnum.ONE] => [return /**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay));] "jsenum.Main.<lambda in testJsEnumSwitch>"
+[acceptsSupplierOfSupplier(() -> (() -> ComparableJsEnum.ONE));] => [Main.m_acceptsSupplierOfSupplier__java_util_function_Supplier__void(Supplier.$adapt(() =>{
+   return Supplier.$adapt(() =>{
+...   });
+  }));] "jsenum.Main.testJsEnumSwitch"
+[(() -> ComparableJsEnum.ONE)] => [return Supplier.$adapt(() =>{
+    return /**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay));
+   });] "jsenum.Main.<lambda in testJsEnumSwitch>"
+[ComparableJsEnum.ONE] => [return /**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay));] "jsenum.Main.<lambda in testJsEnumSwitch>"
+[acceptsJsFunctionSupplier] => [m_acceptsJsFunctionSupplier__jsenum_Main_JsFunctionSuppiler__void]
+[supplier] => [supplier] "supplier"
+[acceptsSupplierOfSupplier] => [m_acceptsSupplierOfSupplier__java_util_function_Supplier__void]
+[supplier] => [supplier] "supplier"
 [testBoxUnboxWithTypeInference] => [m_testBoxUnboxWithTypeInference__void]
 [TemplatedField<ComparableJsEnum> templatedField =
         new TemplatedField<ComparableJsEnum>(ComparableJsEnum.ONE);] => [let templatedField = /**@type {!TemplatedField<$Enums_BoxedComparableLightEnum<?ComparableJsEnum>>}*/ (TemplatedField.$create__java_lang_Object(/**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay))));] "jsenum.Main.testBoxUnboxWithTypeInference"
