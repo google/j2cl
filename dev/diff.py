@@ -13,6 +13,7 @@
 # limitations under the License.
 """Diffs optimized integration test JS with current CL changes."""
 
+import argparse
 import shutil
 import subprocess
 
@@ -40,11 +41,35 @@ def main(argv):
   shutil.copyfile(js_file_path, modified_js_file)
   repo_util.run_cmd(["clang-format", "-i", orig_js_file, modified_js_file])
 
+  if argv.filter_noise:
+    print("  Reducing noise")
+    # Replace the numeric part of the variable id generation from JsCompiler to
+    # reduce noise in the final diff.
+    # The patterns we want to match are:
+    #   $jscomp$1234
+    #   $jscomp$inline_1234
+    #   JSC$1234
+    # The numeric part of these patterns will be replaced by the character '#'
+    repo_util.run_cmd([
+        "sed",
+        "-i",
+        "-E",
+        r"s/(\$jscomp\$(inline_)?|JSC\$)[0-9]+/\1#/g",
+        orig_js_file,
+        modified_js_file,
+    ])
+
   print("  Starting diff")
   subprocess.call(
       "${P4DIFF:-diff} %s %s" % (orig_js_file, modified_js_file), shell=True)
 
 
 def add_arguments(parser):
+  parser.add_argument(
+      "--filter_noise",
+      default=True,
+      action=argparse.BooleanOptionalAction,
+      help="Filter noise in the diff due to difference in variable indexes.",
+  )
   parser.add_argument(
       "test_name", nargs=1, metavar="<name>", help="integration test name")
