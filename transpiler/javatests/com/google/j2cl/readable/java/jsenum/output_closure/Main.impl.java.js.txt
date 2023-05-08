@@ -6,17 +6,17 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
 let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
 let Optional = goog.forwardDeclare('java.util.Optional$impl');
-let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
-let Supplier = goog.forwardDeclare('java.util.function.Supplier$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let ComparableJsEnum = goog.forwardDeclare('jsenum.Main.ComparableJsEnum$impl');
 let $Overlay = goog.forwardDeclare('jsenum.Main.ComparableJsEnum.$Overlay$impl');
+let Consumer = goog.forwardDeclare('jsenum.Main.Consumer$impl');
 let Foo = goog.forwardDeclare('jsenum.Main.Foo$impl');
 let IntJsEnum = goog.forwardDeclare('jsenum.Main.IntJsEnum$impl');
 let IntJsEnum_$Overlay = goog.forwardDeclare('jsenum.Main.IntJsEnum.$Overlay$impl');
 let NativeStringEnum = goog.forwardDeclare('jsenum.Main.NonNullableStringJsEnum');
 let StringJsEnum = goog.forwardDeclare('jsenum.Main.StringJsEnum$impl');
 let StringJsEnum_$Overlay = goog.forwardDeclare('jsenum.Main.StringJsEnum.$Overlay$impl');
+let Supplier = goog.forwardDeclare('jsenum.Main.Supplier$impl');
 let TemplatedField = goog.forwardDeclare('jsenum.Main.TemplatedField$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
@@ -83,7 +83,7 @@ class Main extends j_l_Object {
   Main.m_acceptsJsFunctionSupplier__jsenum_Main_JsFunctionSuppiler__void(() =>{
    return /**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay));
   });
-  Main.m_acceptsSupplierOfSupplier__java_util_function_Supplier__void(Supplier.$adapt(() =>{
+  Main.m_acceptsSupplierOfSupplier__jsenum_Main_Supplier__void(Supplier.$adapt(() =>{
    return Supplier.$adapt(() =>{
     return /**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay));
    });
@@ -92,7 +92,7 @@ class Main extends j_l_Object {
  /** @nodts */
  static m_acceptsJsFunctionSupplier__jsenum_Main_JsFunctionSuppiler__void(/** ?function():?ComparableJsEnum */ supplier) {}
  /** @nodts */
- static m_acceptsSupplierOfSupplier__java_util_function_Supplier__void(/** Supplier<Supplier<$Enums_BoxedComparableLightEnum<?ComparableJsEnum>>> */ supplier) {}
+ static m_acceptsSupplierOfSupplier__jsenum_Main_Supplier__void(/** Supplier<Supplier<$Enums_BoxedComparableLightEnum<?ComparableJsEnum>>> */ supplier) {}
  /** @nodts */
  static m_testBoxUnboxWithTypeInference__void() {
   let templatedField = /**@type {!TemplatedField<$Enums_BoxedComparableLightEnum<?ComparableJsEnum>>}*/ (TemplatedField.$create__java_lang_Object(/**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay))));
@@ -128,17 +128,17 @@ class Main extends j_l_Object {
   Comparable = goog.module.get('java.lang.Comparable$impl');
   Arrays = goog.module.get('java.util.Arrays$impl');
   Optional = goog.module.get('java.util.Optional$impl');
-  Consumer = goog.module.get('java.util.function.Consumer$impl');
-  Supplier = goog.module.get('java.util.function.Supplier$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   ComparableJsEnum = goog.module.get('jsenum.Main.ComparableJsEnum$impl');
   $Overlay = goog.module.get('jsenum.Main.ComparableJsEnum.$Overlay$impl');
+  Consumer = goog.module.get('jsenum.Main.Consumer$impl');
   Foo = goog.module.get('jsenum.Main.Foo$impl');
   IntJsEnum = goog.module.get('jsenum.Main.IntJsEnum$impl');
   IntJsEnum_$Overlay = goog.module.get('jsenum.Main.IntJsEnum.$Overlay$impl');
   NativeStringEnum = goog.module.get('jsenum.Main.NonNullableStringJsEnum');
   StringJsEnum = goog.module.get('jsenum.Main.StringJsEnum$impl');
   StringJsEnum_$Overlay = goog.module.get('jsenum.Main.StringJsEnum.$Overlay$impl');
+  Supplier = goog.module.get('jsenum.Main.Supplier$impl');
   TemplatedField = goog.module.get('jsenum.Main.TemplatedField$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');

@@ -1,0 +1,43 @@
+goog.module('jsenum.Main.Consumer$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('jsenum.Main.Consumer.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class Consumer {
+ /** @abstract @nodts */
+ m_accept__java_lang_Object__void(/** T */ t) {}
+ /** @nodts @template T @return {Consumer<T>} */
+ static $adapt(/** ?function(T):void */ fn) {
+  Consumer.$clinit();
+  return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
+ }
+ /** @nodts */
+ static $clinit() {
+  Consumer.$clinit = () =>{};
+  Consumer.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__jsenum_Main_Consumer = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__jsenum_Main_Consumer;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('jsenum.Main.Consumer.$LambdaAdaptor$impl');
+ }
+}
+Consumer.$markImplementor(/**@type {Function}*/ (Consumer));
+$Util.$setClassMetadataForInterface(Consumer, 'jsenum.Main$Consumer');
+
+exports = Consumer;
+
+//# sourceMappingURL=Main$Consumer.js.map

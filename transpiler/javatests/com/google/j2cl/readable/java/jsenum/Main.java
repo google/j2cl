@@ -17,13 +17,18 @@ package jsenum;
 
 import java.util.Arrays;
 import java.util.Optional;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
 import jsinterop.annotations.JsEnum;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsNonNull;
 
 public class Main {
+  interface Supplier<T> {
+    T get();
+  }
+
+  interface Consumer<T> {
+    void accept(T t);
+  }
 
   @JsEnum
   enum ComparableJsEnum {

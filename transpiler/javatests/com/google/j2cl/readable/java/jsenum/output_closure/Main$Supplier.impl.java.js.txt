@@ -1,0 +1,43 @@
+goog.module('jsenum.Main.Supplier$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('jsenum.Main.Supplier.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class Supplier {
+ /** @abstract @nodts @return {T} */
+ m_get__java_lang_Object() {}
+ /** @nodts @template T @return {Supplier<T>} */
+ static $adapt(/** ?function():T */ fn) {
+  Supplier.$clinit();
+  return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
+ }
+ /** @nodts */
+ static $clinit() {
+  Supplier.$clinit = () =>{};
+  Supplier.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__jsenum_Main_Supplier = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__jsenum_Main_Supplier;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('jsenum.Main.Supplier.$LambdaAdaptor$impl');
+ }
+}
+Supplier.$markImplementor(/**@type {Function}*/ (Supplier));
+$Util.$setClassMetadataForInterface(Supplier, 'jsenum.Main$Supplier');
+
+exports = Supplier;
+
+//# sourceMappingURL=Main$Supplier.js.map

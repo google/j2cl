@@ -13,8 +13,6 @@ readable_example(
         "*.java",
         "*.native.js",
     ]),
-    # TODO(b/281361470): Enable j2kt readable build test when the nullaibilty type error is fixed.
-    build_kt_readables = False,
     generate_wasm_readables = False,
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

@@ -1,0 +1,51 @@
+goog.module('jsenum.Main.Consumer.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const Consumer = goog.require('jsenum.Main.Consumer$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ * @implements {Consumer<T>}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function(T):void */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function(T):void} @nodts*/
+  this.f_fn__jsenum_Main_Consumer_$LambdaAdaptor;
+  this.$ctor__jsenum_Main_Consumer_$LambdaAdaptor__jsenum_Main_Consumer_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__jsenum_Main_Consumer_$LambdaAdaptor__jsenum_Main_Consumer_$JsFunction__void(/** ?function(T):void */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__jsenum_Main_Consumer_$LambdaAdaptor = fn;
+ }
+ /** @override @nodts */
+ m_accept__java_lang_Object__void(/** T */ arg0) {
+  {
+   let $function = this.f_fn__jsenum_Main_Consumer_$LambdaAdaptor;
+   $function(arg0);
+  }
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Consumer.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'jsenum.Main$Consumer$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=Main$Consumer$$LambdaAdaptor.js.map

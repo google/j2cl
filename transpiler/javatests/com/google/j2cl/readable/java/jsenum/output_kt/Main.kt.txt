@@ -7,8 +7,6 @@ package jsenum
 import javaemul.lang.*
 import java.util.Arrays
 import java.util.Optional
-import java.util.function.Consumer
-import java.util.function.Supplier
 import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
@@ -70,19 +68,19 @@ open class Main {
    Main.NativeStringEnum.ONE.equals(Main.NativeStringEnum.THREE)
    Main.ComparableJsEnum.ONE.compareTo(Main.ComparableJsEnum.ZERO)
    Main.ComparableJsEnum.ONE.equals(Main.ComparableJsEnum.ZERO)
-   val supplier: Supplier<Main.ComparableJsEnum?>? = Supplier<Main.ComparableJsEnum?> {
+   val supplier: Main.Supplier<Main.ComparableJsEnum?>? = Main.Supplier<Main.ComparableJsEnum?> {
     return@Supplier Main.ComparableJsEnum.ONE
    }
-   val consummer: Consumer<Main.ComparableJsEnum?>? = Consumer<Main.ComparableJsEnum?> { e: Main.ComparableJsEnum? ->
+   val consummer: Main.Consumer<Main.ComparableJsEnum?>? = Main.Consumer<Main.ComparableJsEnum?> { e: Main.ComparableJsEnum? ->
     e!!.ordinal
    }
    Main.acceptsJsFunctionSupplier_private_2(Main.JsFunctionSuppiler<Main.ComparableJsEnum?> {
     return@JsFunctionSuppiler Main.ComparableJsEnum.ONE
    })
-   Main.acceptsSupplierOfSupplier_private_2(Supplier<Supplier<Main.ComparableJsEnum?>?> {
-    return@Supplier Supplier<Main.ComparableJsEnum?> {
+   Main.acceptsSupplierOfSupplier_private_2(Main.Supplier<Main.Supplier<Main.ComparableJsEnum?>?> {
+    return@Supplier Main.Supplier<Main.ComparableJsEnum?> {
      return@Supplier Main.ComparableJsEnum.ONE
-    } as Supplier<Main.ComparableJsEnum>
+    }
    })
   }
 
@@ -92,7 +90,7 @@ open class Main {
 
   @JvmStatic
   @HiddenFromObjC
-  fun acceptsSupplierOfSupplier_private_2(supplier: Supplier<Supplier<Main.ComparableJsEnum?>?>?) {}
+  fun acceptsSupplierOfSupplier_private_2(supplier: Main.Supplier<Main.Supplier<Main.ComparableJsEnum?>?>?) {}
 
   @JvmStatic
   @HiddenFromObjC
@@ -117,6 +115,18 @@ open class Main {
   fun boxingWithGenerics_pp_jsenum() {
    Main.Foo<Any?>(Optional.of<Main.IntJsEnum>(Main.IntJsEnum.MINUSONE) as Optional<Main.IntJsEnum>?)
   }
+ }
+
+ fun interface Supplier<T> {
+  @ObjCName("get")
+  fun get(): T
+ }
+
+ fun interface Consumer<T> {
+  @ObjCName("accept")
+  fun accept(
+   @ObjCName("withId") t: T
+  )
  }
 
  enum class ComparableJsEnum {
