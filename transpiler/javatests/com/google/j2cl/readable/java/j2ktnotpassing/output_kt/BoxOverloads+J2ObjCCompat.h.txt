@@ -6,15 +6,9 @@
 
 @class J2ktnotpassingBoxOverloadsCompanion;
 
+@protocol J2ktnotpassingBoxOverloads_Generic;
+
 NS_ASSUME_NONNULL_BEGIN
-
-NS_INLINE void J2ktnotpassingBoxOverloads_nullableBoxedOverloadWithDouble_(jdouble d) {
- [J2ktnotpassingBoxOverloadsCompanion.shared nullableBoxedOverloadWithDouble:d];
-}
-
-NS_INLINE void J2ktnotpassingBoxOverloads_testNullableBoxedOverload(void) {
- [J2ktnotpassingBoxOverloadsCompanion.shared testNullableBoxedOverload];
-}
 
 NS_INLINE void J2ktnotpassingBoxOverloads_boxedOverloadWithDouble_(jdouble d) {
  [J2ktnotpassingBoxOverloadsCompanion.shared boxedOverloadWithDouble:d];
@@ -24,56 +18,8 @@ NS_INLINE void J2ktnotpassingBoxOverloads_testBoxedOverload(void) {
  [J2ktnotpassingBoxOverloadsCompanion.shared testBoxedOverload];
 }
 
-NS_INLINE void J2ktnotpassingBoxOverloads_nullableNumberOverloadWithDouble_(jdouble d) {
- [J2ktnotpassingBoxOverloadsCompanion.shared nullableNumberOverloadWithDouble:d];
-}
-
-NS_INLINE void J2ktnotpassingBoxOverloads_nullableNumberOverloadWithNSNumber_(NSNumber* _Nullable n) {
- [J2ktnotpassingBoxOverloadsCompanion.shared nullableNumberOverloadWithNSNumber:n];
-}
-
-NS_INLINE void J2ktnotpassingBoxOverloads_testNullableNumberOverload(void) {
- [J2ktnotpassingBoxOverloadsCompanion.shared testNullableNumberOverload];
-}
-
-NS_INLINE void J2ktnotpassingBoxOverloads_numberOverloadWithDouble_(jdouble d) {
- [J2ktnotpassingBoxOverloadsCompanion.shared numberOverloadWithDouble:d];
-}
-
-NS_INLINE void J2ktnotpassingBoxOverloads_numberOverloadWithNSNumber_(NSNumber* n) {
- [J2ktnotpassingBoxOverloadsCompanion.shared numberOverloadWithNSNumber:n];
-}
-
-NS_INLINE void J2ktnotpassingBoxOverloads_testNumberOverload(void) {
- [J2ktnotpassingBoxOverloadsCompanion.shared testNumberOverload];
-}
-
-NS_INLINE void J2ktnotpassingBoxOverloads_nullableObjectOverloadWithDouble_(jdouble d) {
- [J2ktnotpassingBoxOverloadsCompanion.shared nullableObjectOverloadWithDouble:d];
-}
-
-NS_INLINE void J2ktnotpassingBoxOverloads_nullableObjectOverloadWithId_(id _Nullable o) {
- [J2ktnotpassingBoxOverloadsCompanion.shared nullableObjectOverloadWithId:o];
-}
-
-NS_INLINE void J2ktnotpassingBoxOverloads_testNullableObjectOverload(void) {
- [J2ktnotpassingBoxOverloadsCompanion.shared testNullableObjectOverload];
-}
-
-NS_INLINE void J2ktnotpassingBoxOverloads_objectOverloadWithDouble_(jdouble d) {
- [J2ktnotpassingBoxOverloadsCompanion.shared objectOverloadWithDouble:d];
-}
-
-NS_INLINE void J2ktnotpassingBoxOverloads_objectOverloadWithId_(id o) {
- [J2ktnotpassingBoxOverloadsCompanion.shared objectOverloadWithId:o];
-}
-
-NS_INLINE void J2ktnotpassingBoxOverloads_testObjectOverload(void) {
- [J2ktnotpassingBoxOverloadsCompanion.shared testObjectOverload];
-}
-
-NS_INLINE id J2ktnotpassingBoxOverloads_firstNonNullWithId_withId_(id _Nullable t1, id t2) {
- return [J2ktnotpassingBoxOverloadsCompanion.shared firstNonNullWithId:t1 withId:t2];
+NS_INLINE void J2ktnotpassingBoxOverloads_testGenericBoxedOverloadWithJ2ktnotpassingBoxOverloads_Generic_(id<J2ktnotpassingBoxOverloads_Generic> generic) {
+ [J2ktnotpassingBoxOverloadsCompanion.shared testGenericBoxedOverloadWithJ2ktnotpassingBoxOverloads_Generic:generic];
 }
 
 NS_ASSUME_NONNULL_END

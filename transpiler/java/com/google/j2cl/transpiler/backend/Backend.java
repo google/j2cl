@@ -59,6 +59,7 @@ import com.google.j2cl.transpiler.passes.InsertBoxingConversions;
 import com.google.j2cl.transpiler.passes.InsertCastForLowerBounds;
 import com.google.j2cl.transpiler.passes.InsertCastOnArrayAccess;
 import com.google.j2cl.transpiler.passes.InsertCastOnNewInstances;
+import com.google.j2cl.transpiler.passes.InsertCastsForBoxedTypes;
 import com.google.j2cl.transpiler.passes.InsertCastsOnNullabilityMismatch;
 import com.google.j2cl.transpiler.passes.InsertErasureTypeSafetyCasts;
 import com.google.j2cl.transpiler.passes.InsertExceptionConversions;
@@ -658,6 +659,7 @@ public enum Backend {
           InsertCastsOnNullabilityMismatch::new,
           InsertCastForLowerBounds::new,
           InsertRawTypeCasts::new,
+          InsertCastsForBoxedTypes::new,
 
           // Needs to run after non-null assertions are inserted.
           InsertStringConversionsKotlin::new,

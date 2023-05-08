@@ -20,24 +20,6 @@ import org.jspecify.nullness.Nullable;
 
 @NullMarked
 public class BoxOverloads {
-  public static void nullableBoxedOverload(double d) {}
-
-  public static void nullableBoxedOverload(@Nullable Double d) {}
-
-  public static void testNullableBoxedOverload() {
-    // Dispatches nullableBoxedOverload(double)
-    nullableBoxedOverload(1.25);
-
-    // Dispatches nullableBoxedOverload(@Nullable Double)
-    nullableBoxedOverload(Double.valueOf(1.25));
-
-    // Dispatches nullableBoxedOverload(@Nullable Double)
-    nullableBoxedOverload(new Double(1.25));
-
-    // Dispatches nullableBoxedOverload(double)
-    nullableBoxedOverload(1);
-  }
-
   public static void boxedOverload(double d) {}
 
   public static void boxedOverload(Double d) {}
@@ -56,114 +38,20 @@ public class BoxOverloads {
     boxedOverload(1);
   }
 
-  public static void nullableNumberOverload(double d) {}
+  public interface Generic<T extends @Nullable Object> {
+    void overload(double d);
 
-  public static void nullableNumberOverload(@Nullable Number n) {}
-
-  public static void testNullableNumberOverload() {
-    // Dispatches nullableNumberOverload(double)
-    nullableNumberOverload(1.25);
-
-    // Dispatches nullableNumberOverload(@Nullable Number)
-    nullableNumberOverload(Double.valueOf(1.25));
-
-    // Dispatches nullableNumberOverload(@Nullable Number)
-    nullableNumberOverload(new Double(1.25));
-
-    // Dispatches nullableNumberOverload(double)
-    nullableNumberOverload(1);
-
-    // Dispatches nullableNumberOverload(@Nullable Number)
-    nullableNumberOverload(Integer.valueOf(1));
-
-    // Dispatches nullableNumberOverload(@Nullable Number)
-    nullableNumberOverload(new Integer(1));
+    void overload(T t);
   }
 
-  public static void numberOverload(double d) {}
+  public static void testGenericBoxedOverload(Generic<Double> generic) {
+    // Dispatches overload(double)
+    generic.overload(1.25);
 
-  public static void numberOverload(Number n) {}
+    // Dispatches overload(T)
+    generic.overload(Double.valueOf(1.25));
 
-  public static void testNumberOverload() {
-    // Dispatches numberOverload(double)
-    numberOverload(1.25);
-
-    // Dispatches numberOverload(Number)
-    numberOverload(Double.valueOf(1.25));
-
-    // Dispatches numberOverload(Number)
-    numberOverload(new Double(1.25));
-
-    // Dispatches numberOverload(double)
-    numberOverload(1);
-
-    // Dispatches numberOverload(Number)
-    numberOverload(Integer.valueOf(1));
-
-    // Dispatches numberOverload(Number)
-    numberOverload(new Integer(1));
-  }
-
-  public static void nullableObjectOverload(double d) {}
-
-  public static void nullableObjectOverload(@Nullable Object o) {}
-
-  public static void testNullableObjectOverload() {
-    // Dispatches nullableObjectOverload(double)
-    nullableObjectOverload(1.25);
-
-    // Dispatches nullableObjectOverload(@Nullable Object)
-    nullableObjectOverload(Double.valueOf(1.25));
-
-    // Dispatches nullableObjectOverload(@Nullable Object)
-    nullableObjectOverload(new Double(1.25));
-
-    // Dispatches nullableObjectOverload(double)
-    nullableObjectOverload(1);
-
-    // Dispatches nullableObjectOverload(@Nullable Object)
-    nullableObjectOverload(Integer.valueOf(1));
-
-    // Dispatches nullableObjectOverload(@Nullable Object)
-    nullableObjectOverload(new Integer(1));
-
-    // Dispatches nullableObjectOverload(@Nullable Object)
-    nullableObjectOverload("foo");
-  }
-
-  public static void objectOverload(double d) {}
-
-  public static void objectOverload(Object o) {}
-
-  public static void testObjectOverload() {
-    // Dispatches objectOverload(double)
-    objectOverload(1.25);
-
-    // Dispatches objectOverload(Object)
-    objectOverload(Double.valueOf(1.25));
-
-    // Dispatches objectOverload(Object)
-    objectOverload(new Double(1.25));
-
-    // Dispatches objectOverload(double)
-    objectOverload(1);
-
-    // Dispatches objectOverload(Object)
-    objectOverload(Integer.valueOf(1));
-
-    // Dispatches objectOverload(Object)
-    objectOverload(new Integer(1));
-
-    // Dispatches objectOverload(@Object)
-    objectOverload("foo");
-  }
-
-  // A case from com.google.common.base.MoreObjects.
-  public static <T> T firstNonNull(@Nullable T t1, T t2) {
-    return t1 != null ? t1 : t2;
-  }
-
-  public static void testFirstNonNull(@Nullable Integer i) {
-    firstNonNull(i, 0);
+    // Dispatches overload(double)
+    generic.overload(1);
   }
 }

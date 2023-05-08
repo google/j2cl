@@ -235,14 +235,14 @@ open class AutoBoxing {
   boxS = Short.valueOf(1.toShort())
   boxC = Char.valueOf('\u0001')
   boxC = Char.valueOf('a')
-  bool = this.unbox(Boolean.valueOf(bool))
-  d = this.unbox(Double.valueOf(d))
-  b = this.unbox(Byte.valueOf(b))
-  f = this.unbox(Float.valueOf(f))
-  i = this.unbox(Int.valueOf(i))
-  l = this.unbox(Long.valueOf(l))
-  s = this.unbox(Short.valueOf(s))
-  c = this.unbox(Char.valueOf(c))
+  bool = this.unbox(Boolean.valueOf(bool) as Boolean?)
+  d = this.unbox(Double.valueOf(d) as Double?)
+  b = this.unbox(Byte.valueOf(b) as Byte?)
+  f = this.unbox(Float.valueOf(f) as Float?)
+  i = this.unbox(Int.valueOf(i) as Int?)
+  l = this.unbox(Long.valueOf(l) as Long?)
+  s = this.unbox(Short.valueOf(s) as Short?)
+  c = this.unbox(Char.valueOf(c) as Char?)
   var unusedDouble: Double = this.takesObjectAndReturnsPrimitiveDouble(4)
   unusedDouble = this.sumWithoutBoxing(1, 2.2, 1.toByte(), 1.toShort(), 2.2.toFloat())
   unusedDouble = this.sumWithoutBoxingJsVarargs(1, 2.2, 1.toByte(), 1.toShort(), 2.2.toFloat())
@@ -482,7 +482,7 @@ open class AutoBoxing {
    open class ___1Local<T: Long?> {
     @HiddenFromObjC
     open fun toLong_pp_autoboxing(l: T): Long {
-     assert(l!!.equals(Long.valueOf(11L)))
+     assert(l!!.equals(Long.valueOf(11L) as Any?))
      return l!!.toLong()
     }
    }
@@ -510,7 +510,7 @@ open class AutoBoxing {
    open class ___2Local<T> where T: Long?, T: Comparable<Long>?, T: Long?, T: Comparable<Long>? {
     @HiddenFromObjC
     open fun toLong_pp_autoboxing(l: T): Long {
-     assert(l!!.equals(Long.valueOf(11L)))
+     assert(l!!.equals(Long.valueOf(11L) as Any?))
      return l!!.toLong()
     }
    }
