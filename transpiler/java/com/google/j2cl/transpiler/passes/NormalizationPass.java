@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.visitor.ProcessorError;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Type;
@@ -22,6 +23,15 @@ import com.google.j2cl.transpiler.ast.Type;
 /** The base class for all J2cl Normalization passes. */
 public abstract class NormalizationPass {
   private CompilationUnit currentCompilationUnit;
+  private Problems problems;
+
+  public final void setProblems(Problems problems) {
+    this.problems = problems;
+  }
+
+  protected Problems getProblems() {
+    return problems;
+  }
 
   public final void execute(CompilationUnit compilationUnit) {
     currentCompilationUnit = compilationUnit;

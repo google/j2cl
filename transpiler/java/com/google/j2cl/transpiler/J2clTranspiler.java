@@ -97,17 +97,20 @@ class J2clTranspiler {
     runPasses(library, options.getBackend().getPassFactories(options));
   }
 
-  private static void runPasses(
+  private void runPasses(
       Library library, ImmutableList<Supplier<NormalizationPass>> passFactories) {
     for (Supplier<NormalizationPass> passFactory : passFactories) {
       NormalizationPass pass = passFactory.get();
+      pass.setProblems(problems);
       if (pass instanceof LibraryNormalizationPass) {
         ((LibraryNormalizationPass) pass).execute(library);
+        problems.abortIfHasErrors();
         continue;
       }
       for (CompilationUnit compilationUnit : library.getCompilationUnits()) {
         passFactory.get().execute(compilationUnit);
       }
+      problems.abortIfHasErrors();
     }
   }
 }
