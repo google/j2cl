@@ -25,11 +25,6 @@ load(
     _J2CL_TEST_DEFS = "J2CL_TEST_DEFS",
 )
 
-def setup_j2cl_workspace():
-    fail("""Use build_defs/workspace.bzl to setup the workspace:
-    load("@com_google_j2cl//build_defs:workspace.bzl", "setup_j2cl_workspace")
-    setup_j2cl_workspace()""")
-
 j2cl_application = _j2cl_application
 
 j2cl_library = _j2cl_library
