@@ -37,6 +37,7 @@ public class Main {
     testNestedLambdas();
     testArbitraryNesting();
     testIntersectionTypeLambdas();
+    testInStaticContextWithInnerClasses();
   }
 
   private interface IntToIntFunction {
@@ -55,9 +56,14 @@ public class Main {
       assertTrue(result == 111);
       result =
           test(
-              i -> {
-                return i + 2;
-              },
+              i ->
+                  new Object() {
+                    int storedValue = i;
+
+                    int addTwo() {
+                      return this.storedValue + 2;
+                    }
+                  }.addTwo(),
               10);
       assertTrue(result == 112);
     }
@@ -245,5 +251,18 @@ public class Main {
     assertEquals(obj, ((IdentityWithDefault<String>) obj).self());
     assertEquals(
         InterfaceWithDefaultMethod.MY_TEXT, ((InterfaceWithDefaultMethod) obj).defaultMethod());
+  }
+
+  private static void testInStaticContextWithInnerClasses() {
+    IntToIntFunction addTwo =
+        i ->
+            new Object() {
+              int storedValue = i;
+
+              int addTwo() {
+                return this.storedValue + 2;
+              }
+            }.addTwo();
+    assertEquals(5, addTwo.apply(3));
   }
 }

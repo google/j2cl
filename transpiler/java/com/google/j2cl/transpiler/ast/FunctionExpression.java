@@ -24,6 +24,7 @@ import com.google.j2cl.common.visitor.Visitable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 import javax.annotation.Nullable;
 
 /** Class for an inline (lambda) function expression. */
@@ -88,9 +89,29 @@ public class FunctionExpression extends Expression implements MethodLike {
         new AbstractVisitor() {
           @Override
           public void exitThisOrSuperReference(ThisOrSuperReference receiverReference) {
+            if (isDeclaredWithinFunctionExpression(
+                receiverReference.getTypeDescriptor().getTypeDeclaration())) {
+              // This is a reference to this of an anonymous or local class declared inside a
+              // lambda. This reference is not capturing an enclosing instance.
+              return;
+            }
             hasEnclosingInstanceReferences[0] = true;
           }
+
+          /**
+           * Returns {@code true} if the type object declaring {@code typeDeclaration} was seen
+           * enclosing the traversal.
+           *
+           * <p>Note this relies on the fact the traversal starts at the function expression and
+           * does not see the types that enclose it, only types that are defined in its body.
+           */
+          private boolean isDeclaredWithinFunctionExpression(TypeDeclaration typeDeclaration) {
+            Predicate<Object> matchesTypeDeclaration =
+                n -> n instanceof Type && ((Type) n).getDeclaration() == typeDeclaration;
+            return getParent(matchesTypeDeclaration) != null;
+          }
         });
+
     return hasEnclosingInstanceReferences[0];
   }
 
