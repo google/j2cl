@@ -43,7 +43,6 @@ import java.util.ArrayDeque;
 import java.util.Collection;
 import java.util.Deque;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -255,7 +254,7 @@ public class ResolveCaptures extends NormalizationPass {
             TypeDeclaration typeDeclaration = getCurrentType().getDeclaration();
             Method.Builder methodBuilder = Method.Builder.from(method);
             boolean isDelegatingConstructor = AstUtils.hasThisCall(method);
-            Map<Variable, Variable> parameterByCapturedVariable = new LinkedHashMap<>();
+            Map<Variable, Variable> parameterByCapturedVariable = new HashMap<>();
 
             // Declare a parameter for each captured variable and initialize the backing field
             // only if this constructor is not a delegating constructor.

@@ -26,6 +26,7 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.Variable;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,7 +55,7 @@ public class AddDisambiguatingSuperMethodForwardingStubs extends NormalizationPa
 
     // Index the all the declared methods in these classes and super classes by their signature.
     // But keep only the closest to the type in question.
-    Map<String, MethodDescriptor> classMethodsBySignature = new LinkedHashMap<>();
+    Map<String, MethodDescriptor> classMethodsBySignature = new HashMap<>();
     // Collect all the methods defined in the class and super classes.
     addClassMethodsBySignature(type.getTypeDescriptor(), classMethodsBySignature);
 

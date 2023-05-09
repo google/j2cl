@@ -35,13 +35,13 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Visibility;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
 
 /** Implements lazy initialization of String literals. */
 public class ImplementStringCompileTimeConstants extends LibraryNormalizationPass {
 
-  private final Map<String, MethodDescriptor> literalMethodByString = new LinkedHashMap<>();
+  private final Map<String, MethodDescriptor> literalMethodByString = new HashMap<>();
 
   @Override
   public void applyTo(Library library) {

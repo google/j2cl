@@ -264,8 +264,7 @@ class WasmGenerationEnvironment {
     return prefix + "." + methodDescriptor.getMangledName();
   }
 
-  private final Map<TypeDeclaration, Integer> slotByInterfaceTypeDeclaration =
-      new LinkedHashMap<>();
+  private final Map<TypeDeclaration, Integer> slotByInterfaceTypeDeclaration = new HashMap<>();
 
   int getInterfaceSlot(TypeDeclaration typeDeclaration) {
     // Interfaces with no implementors will not have a slot assigned. Use -1 to signal that fact.
@@ -273,7 +272,7 @@ class WasmGenerationEnvironment {
   }
 
   /** The data index for the array literals that can be emitted as data. */
-  private final Map<ArrayLiteral, String> dataNameByLiteral = new LinkedHashMap<>();
+  private final Map<ArrayLiteral, String> dataNameByLiteral = new HashMap<>();
 
   /**
    * Data elements for array literal will be given a name relative to the type they appear in.

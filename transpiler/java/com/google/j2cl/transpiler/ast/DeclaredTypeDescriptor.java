@@ -35,6 +35,7 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.SourceLanguage;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -596,7 +597,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     SourceLanguage sourceLanguage = getTypeDeclaration().getSourceLanguage();
     Map<String, String> overrideKeysByMangledName = getMangledNameToOverrideKeyMap(sourceLanguage);
     Map<String, MethodDescriptor> targetMethodsByOverrideKey =
-        new LinkedHashMap<>(getOverrideKeyToTargetMap(sourceLanguage));
+        new HashMap<>(getOverrideKeyToTargetMap(sourceLanguage));
 
     // Bridge method creation proceeds in two stages: the first stage determines the bridges that
     // are specialized overrides of the targets (see MethodDescriptor.isSpecializingBridge); since

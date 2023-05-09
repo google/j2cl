@@ -27,7 +27,7 @@ import com.google.j2cl.transpiler.ast.Literal;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.TypeLiteral;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Nullable;
 
@@ -42,7 +42,7 @@ public class PropagateConstants extends LibraryNormalizationPass {
 
   /** Removes all string compile constant fields and returns their values indexed by them. */
   private Map<FieldDescriptor, Literal> removeCompileTimeConstantFields(Library library) {
-    Map<FieldDescriptor, Literal> literalsByField = new LinkedHashMap<>();
+    Map<FieldDescriptor, Literal> literalsByField = new HashMap<>();
     library.accept(
         new AbstractRewriter() {
           @Nullable
