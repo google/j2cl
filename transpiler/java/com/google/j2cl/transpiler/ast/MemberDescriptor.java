@@ -151,7 +151,7 @@ public abstract class MemberDescriptor
   }
 
   public boolean isJsConstructor() {
-    return getJsInfo().getJsMemberType() == JsMemberType.CONSTRUCTOR;
+    return isConstructor() && getJsInfo().getJsMemberType() == JsMemberType.CONSTRUCTOR;
   }
 
   public boolean isJsPropertyGetter() {

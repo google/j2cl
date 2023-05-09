@@ -1353,12 +1353,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         // Static methods cannot be abstract
         checkState(!methodDescriptor.isStatic() || !methodDescriptor.isAbstract());
 
-        // Only constructors can be JsConstructor
-        checkState(!methodDescriptor.isJsConstructor() || methodDescriptor.isConstructor());
-
-        // Constructors can not be JsMethods.
-        checkState(!methodDescriptor.isJsMethod() || !methodDescriptor.isConstructor());
-
         // Default methods can not be static.
         checkState(!methodDescriptor.isDefaultMethod() || !methodDescriptor.isStatic());
 
