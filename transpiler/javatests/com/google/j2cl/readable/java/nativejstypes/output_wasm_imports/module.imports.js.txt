@@ -1,6 +1,6 @@
 const j2wasm_CharUtils = goog.require('j2wasm.CharUtils');
-const j2wasm_StringUtils = goog.require('j2wasm.StringUtils');
 const j2wasm_DoubleUtils = goog.require('j2wasm.DoubleUtils');
+const j2wasm_StringUtils = goog.require('j2wasm.StringUtils');
 const j2wasm_ConsoleUtils = goog.require('j2wasm.ConsoleUtils');
 const j2wasm_ExceptionUtils = goog.require('j2wasm.ExceptionUtils');
 const nativejstypes_Bar = goog.require('nativejstypes.Bar');
@@ -47,14 +47,7 @@ function getImports() {
    'j2wasm.CharUtils.codePointToUpperCase': j2wasm_CharUtils.codePointToUpperCase,
    'j2wasm.CharUtils.charToLowerCase': j2wasm_CharUtils.charToLowerCase,
    'j2wasm.CharUtils.charToUpperCase': j2wasm_CharUtils.charToUpperCase,
-   'j2wasm.StringUtils.compareToIgnoreCase': j2wasm_StringUtils.compareToIgnoreCase,
-   'j2wasm.StringUtils.equalsIgnoreCase': j2wasm_StringUtils.equalsIgnoreCase,
-   'String.fromCharCode': String.fromCharCode,
-   'string.replace': (/** string */ $instance, /** RegExp */ regex, /** ?string */ replace, ) => $instance.replace(regex, replace, ),
-   'string.toLowerCase': (/** string */ $instance, ) => $instance.toLowerCase(),
-   'string.toUpperCase': (/** string */ $instance, ) => $instance.toUpperCase(),
-   'string.toLocaleLowerCase': (/** string */ $instance, ) => $instance.toLocaleLowerCase(),
-   'string.toLocaleUpperCase': (/** string */ $instance, ) => $instance.toLocaleUpperCase(),
+   'Number.prototype.toString.call': (/** number */ i, /** number */ radix, ) => Number.prototype.toString.call(i, radix, ),
    'Math.acos': Math.acos,
    'Math.asin': Math.asin,
    'Math.atan': Math.atan,
@@ -78,7 +71,15 @@ function getImports() {
    'Math.tanh': Math.tanh,
    'j2wasm.DoubleUtils.isValidDouble': j2wasm_DoubleUtils.isValidDouble,
    'parseFloat': parseFloat,
-   'Number.prototype.toString.call': (/** number */ d, ) => Number.prototype.toString.call(d, ),
+   'j2wasm.StringUtils.compareToIgnoreCase': j2wasm_StringUtils.compareToIgnoreCase,
+   'j2wasm.StringUtils.equalsIgnoreCase': j2wasm_StringUtils.equalsIgnoreCase,
+   'string.indexOf': (/** string */ $instance, /** ?string */ str, /** number */ startIndex, ) => $instance.indexOf(str, startIndex, ),
+   'string.lastIndexOf': (/** string */ $instance, /** ?string */ str, /** number */ start, ) => $instance.lastIndexOf(str, start, ),
+   'string.replace': (/** string */ $instance, /** RegExp */ regex, /** ?string */ replace, ) => $instance.replace(regex, replace, ),
+   'string.toLocaleLowerCase': (/** string */ $instance, ) => $instance.toLocaleLowerCase(),
+   'string.toLocaleUpperCase': (/** string */ $instance, ) => $instance.toLocaleUpperCase(),
+   'string.toLowerCase': (/** string */ $instance, ) => $instance.toLowerCase(),
+   'string.toUpperCase': (/** string */ $instance, ) => $instance.toUpperCase(),
    'j2wasm.ConsoleUtils.log': j2wasm_ConsoleUtils.log,
    'j2wasm.ExceptionUtils.create': j2wasm_ExceptionUtils.create,
    'j2wasm.ExceptionUtils.throwException': j2wasm_ExceptionUtils.throwException,
