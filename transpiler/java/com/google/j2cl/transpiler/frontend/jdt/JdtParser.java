@@ -92,6 +92,10 @@ public class JdtParser {
 
           @Override
           public void acceptBinding(String bindingKey, IBinding binding) {
+            if (binding == null) {
+              // Type was requested but wasn't found, ignore.
+              return;
+            }
             wellKnownTypeBindings.add((ITypeBinding) binding);
           }
         };
@@ -102,7 +106,7 @@ public class JdtParser {
             .filter(f -> !f.endsWith("module-info.java"))
             .toArray(String[]::new),
         getEncodings(filePaths.size()),
-        FrontendConstants.REQUIRED_QUALIFIED_BINARY_NAMES.stream()
+        FrontendConstants.KNOWN_QUALIFIED_BINARY_NAMES.stream()
             .map(BindingKey::createTypeBindingKey)
             .toArray(String[]::new),
         astRequestor,

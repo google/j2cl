@@ -46,8 +46,8 @@ public final class FrontendConstants {
   public static final String DO_NOT_AUTOBOX_ANNOTATION_NAME =
       "javaemul.internal.annotations.DoNotAutobox";
 
-  /** Classes that are assumed to be always present. */
-  public static final ImmutableList<String> REQUIRED_QUALIFIED_BINARY_NAMES =
+  /** Classes that that might be needed by the different transpilation paths. */
+  public static final ImmutableList<String> KNOWN_QUALIFIED_BINARY_NAMES =
       ImmutableList.of(
           "java.io.Serializable",
           "java.lang.CharSequence",
