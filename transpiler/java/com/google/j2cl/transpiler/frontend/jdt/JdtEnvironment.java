@@ -83,6 +83,15 @@ class JdtEnvironment {
   private final Map<ITypeBinding, DeclaredTypeDescriptor>
       cachedDeclaredTypeDescriptorByTypeBindingOutOfNullMarkedScope = new HashMap<>();
 
+  private final Map<ITypeBinding, TypeDeclaration> cachedTypeDeclarationByTypeBinding =
+      new HashMap<>();
+
+  private final Map<IMethodBinding, MethodDescriptor> cachedMethodDescriptorByMethodBinding =
+      new HashMap<>();
+
+  private final Map<IVariableBinding, FieldDescriptor> cachedFieldDescriptorByVariableBinding =
+      new HashMap<>();
+
   @Nullable
   public static BinaryOperator getBinaryOperator(InfixExpression.Operator operator) {
     switch (operator.toString()) {
@@ -716,6 +725,11 @@ class JdtEnvironment {
 
   /** Create a FieldDescriptor directly based on the given JDT field variable binding. */
   public FieldDescriptor createFieldDescriptor(IVariableBinding variableBinding) {
+    FieldDescriptor fieldDescriptor = cachedFieldDescriptorByVariableBinding.get(variableBinding);
+    if (fieldDescriptor != null) {
+      return fieldDescriptor;
+    }
+
     checkArgument(!isArrayLengthBinding(variableBinding));
 
     // Always create the field descriptor consistently using the @NullMarked context of the
@@ -749,22 +763,25 @@ class JdtEnvironment {
       thisTypeDescriptor = thisTypeDescriptor.toNonNullable();
     }
     boolean isFinal = isFinal(variableBinding);
-    return FieldDescriptor.newBuilder()
-        .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
-        .setName(fieldName)
-        .setTypeDescriptor(thisTypeDescriptor)
-        .setStatic(isStatic)
-        .setVisibility(visibility)
-        .setOriginalJsInfo(JsInteropUtils.getJsInfo(variableBinding))
-        .setOriginalKtInfo(KtInteropUtils.getKtInfo(variableBinding))
-        .setFinal(isFinal)
-        .setCompileTimeConstant(isCompileTimeConstant)
-        .setDeclarationDescriptor(declarationFieldDescriptor)
-        .setEnumConstant(variableBinding.isEnumConstant())
-        .setUnusableByJsSuppressed(
-            JsInteropAnnotationUtils.isUnusableByJsSuppressed(variableBinding))
-        .setDeprecated(isDeprecated(variableBinding))
-        .build();
+    fieldDescriptor =
+        FieldDescriptor.newBuilder()
+            .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
+            .setName(fieldName)
+            .setTypeDescriptor(thisTypeDescriptor)
+            .setStatic(isStatic)
+            .setVisibility(visibility)
+            .setOriginalJsInfo(JsInteropUtils.getJsInfo(variableBinding))
+            .setOriginalKtInfo(KtInteropUtils.getKtInfo(variableBinding))
+            .setFinal(isFinal)
+            .setCompileTimeConstant(isCompileTimeConstant)
+            .setDeclarationDescriptor(declarationFieldDescriptor)
+            .setEnumConstant(variableBinding.isEnumConstant())
+            .setUnusableByJsSuppressed(
+                JsInteropAnnotationUtils.isUnusableByJsSuppressed(variableBinding))
+            .setDeprecated(isDeprecated(variableBinding))
+            .build();
+    cachedFieldDescriptorByVariableBinding.put(variableBinding, fieldDescriptor);
+    return fieldDescriptor;
   }
 
   /** Create a MethodDescriptor directly based on the given JDT method binding. */
@@ -772,6 +789,11 @@ class JdtEnvironment {
   public MethodDescriptor createMethodDescriptor(IMethodBinding methodBinding) {
     if (methodBinding == null) {
       return null;
+    }
+
+    MethodDescriptor methodDescriptor = cachedMethodDescriptorByMethodBinding.get(methodBinding);
+    if (methodDescriptor != null) {
+      return methodDescriptor;
     }
 
     // Always create the method descriptor consistently using the @NullMarked context of the
@@ -865,33 +887,37 @@ class JdtEnvironment {
     }
 
     boolean hasUncheckedCast = hasUncheckedCastAnnotation(methodBinding);
-    return MethodDescriptor.newBuilder()
-        .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
-        .setName(isConstructor ? null : methodName)
-        .setParameterDescriptors(parameterDescriptorBuilder.build())
-        .setDeclarationDescriptor(declarationMethodDescriptor)
-        .setReturnTypeDescriptor(returnTypeDescriptor)
-        .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
-        .setTypeArgumentTypeDescriptors(typeArgumentTypeDescriptors)
-        .setOriginalJsInfo(jsInfo)
-        .setOriginalKtInfo(ktInfo)
-        .setKtObjcInfo(KtInteropUtils.getKtObjcInfo(methodBinding))
-        .setWasmInfo(getWasmInfo(methodBinding))
-        .setVisibility(visibility)
-        .setStatic(isStatic)
-        .setConstructor(isConstructor)
-        .setNative(isNative)
-        .setFinal(isFinal(methodBinding))
-        .setDefaultMethod(isDefault)
-        .setAbstract(Modifier.isAbstract(methodBinding.getModifiers()))
-        .setSynchronized(Modifier.isSynchronized(methodBinding.getModifiers()))
-        .setSynthetic(methodBinding.isSynthetic())
-        .setEnumSyntheticMethod(isEnumSyntheticMethod(methodBinding))
-        .setUnusableByJsSuppressed(JsInteropAnnotationUtils.isUnusableByJsSuppressed(methodBinding))
-        .setSideEffectFree(isAnnotatedWithHasNoSideEffects(methodBinding))
-        .setDeprecated(isDeprecated(methodBinding))
-        .setUncheckedCast(hasUncheckedCast)
-        .build();
+    methodDescriptor =
+        MethodDescriptor.newBuilder()
+            .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
+            .setName(isConstructor ? null : methodName)
+            .setParameterDescriptors(parameterDescriptorBuilder.build())
+            .setDeclarationDescriptor(declarationMethodDescriptor)
+            .setReturnTypeDescriptor(returnTypeDescriptor)
+            .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
+            .setTypeArgumentTypeDescriptors(typeArgumentTypeDescriptors)
+            .setOriginalJsInfo(jsInfo)
+            .setOriginalKtInfo(ktInfo)
+            .setKtObjcInfo(KtInteropUtils.getKtObjcInfo(methodBinding))
+            .setWasmInfo(getWasmInfo(methodBinding))
+            .setVisibility(visibility)
+            .setStatic(isStatic)
+            .setConstructor(isConstructor)
+            .setNative(isNative)
+            .setFinal(isFinal(methodBinding))
+            .setDefaultMethod(isDefault)
+            .setAbstract(Modifier.isAbstract(methodBinding.getModifiers()))
+            .setSynchronized(Modifier.isSynchronized(methodBinding.getModifiers()))
+            .setSynthetic(methodBinding.isSynthetic())
+            .setEnumSyntheticMethod(isEnumSyntheticMethod(methodBinding))
+            .setUnusableByJsSuppressed(
+                JsInteropAnnotationUtils.isUnusableByJsSuppressed(methodBinding))
+            .setSideEffectFree(isAnnotatedWithHasNoSideEffects(methodBinding))
+            .setDeprecated(isDeprecated(methodBinding))
+            .setUncheckedCast(hasUncheckedCast)
+            .build();
+    cachedMethodDescriptorByMethodBinding.put(methodBinding, methodDescriptor);
+    return methodDescriptor;
   }
 
   /**
@@ -1124,6 +1150,11 @@ class JdtEnvironment {
       return null;
     }
 
+    TypeDeclaration typeDeclaration = cachedTypeDeclarationByTypeBinding.get(typeBinding);
+    if (typeDeclaration != null) {
+      return typeDeclaration;
+    }
+
     checkArgument(typeBinding.getTypeDeclaration() == typeBinding);
     checkArgument(!typeBinding.isArray());
     checkArgument(!typeBinding.isParameterizedType());
@@ -1164,58 +1195,62 @@ class JdtEnvironment {
     boolean isNullMarked = isNullMarked(typeBinding, packageInfoCache);
     IBinding declaringMemberBinding = getDeclaringMethodOrFieldBinding(typeBinding);
 
-    return TypeDeclaration.newBuilder()
-        .setClassComponents(getClassComponents(typeBinding))
-        .setEnclosingTypeDeclaration(createDeclarationForType(typeBinding.getDeclaringClass()))
-        .setEnclosingMethodDescriptorFactory(
-            () ->
-                createMethodDescriptor(
-                    declaringMemberBinding instanceof IMethodBinding
-                        ? (IMethodBinding) declaringMemberBinding
-                        : null))
-        .setSuperTypeDescriptorFactory(
-            () -> createDeclaredTypeDescriptor(typeBinding.getSuperclass(), isNullMarked))
-        .setInterfaceTypeDescriptorsFactory(
-            () ->
-                createTypeDescriptors(
-                    typeBinding.getInterfaces(), isNullMarked, DeclaredTypeDescriptor.class))
-        .setUnparameterizedTypeDescriptorFactory(
-            () -> createDeclaredTypeDescriptor(typeBinding, isNullMarked))
-        .setHasAbstractModifier(isAbstract)
-        .setKind(getKindFromTypeBinding(typeBinding))
-        .setCapturingEnclosingInstance(capturesEnclosingInstance(typeBinding))
-        .setFinal(isFinal)
-        .setFunctionalInterface(
-            !typeBinding.isAnnotation() && typeBinding.getFunctionalInterfaceMethod() != null)
-        .setJsFunctionInterface(JsInteropUtils.isJsFunction(typeBinding))
-        .setAnnotatedWithFunctionalInterface(isAnnotatedWithFunctionalInterface(typeBinding))
-        .setAnnotatedWithAutoValue(isAnnotatedWithAutoValue(typeBinding))
-        .setAnnotatedWithAutoValueBuilder(isAnnotatedWithAutoValueBuilder(typeBinding))
-        .setJsType(JsInteropUtils.isJsType(typeBinding))
-        .setJsEnumInfo(JsInteropUtils.getJsEnumInfo(typeBinding))
-        .setWasmInfo(getWasmInfo(typeBinding))
-        .setNative(JsInteropUtils.isJsNativeType(typeBinding))
-        .setAnonymous(typeBinding.isAnonymous())
-        .setLocal(isLocal(typeBinding))
-        .setSimpleJsName(getJsName(typeBinding))
-        .setCustomizedJsNamespace(getJsNamespace(typeBinding, packageInfoCache))
-        .setObjectiveCNamePrefix(getObjectiveCNamePrefix(typeBinding, packageInfoCache))
-        .setKtTypeInfo(KtInteropUtils.getKtTypeInfo(typeBinding))
-        .setKtObjcInfo(KtInteropUtils.getKtObjcInfo(typeBinding))
-        .setNullMarked(isNullMarked)
-        .setPackageName(packageName)
-        .setTypeParameterDescriptors(
-            getTypeArgumentTypeDescriptors(
-                    typeBinding, /* inNullMarkedScope= */ isNullMarked, TypeVariable.class)
-                .stream()
-                .map(TypeVariable::toNonNullable)
-                .collect(ImmutableList.toImmutableList()))
-        .setVisibility(getVisibility(typeBinding))
-        .setDeclaredMethodDescriptorsFactory(declaredMethods)
-        .setDeclaredFieldDescriptorsFactory(declaredFields)
-        .setUnusableByJsSuppressed(JsInteropAnnotationUtils.isUnusableByJsSuppressed(typeBinding))
-        .setDeprecated(isDeprecated(typeBinding))
-        .build();
+    typeDeclaration =
+        TypeDeclaration.newBuilder()
+            .setClassComponents(getClassComponents(typeBinding))
+            .setEnclosingTypeDeclaration(createDeclarationForType(typeBinding.getDeclaringClass()))
+            .setEnclosingMethodDescriptorFactory(
+                () ->
+                    createMethodDescriptor(
+                        declaringMemberBinding instanceof IMethodBinding
+                            ? (IMethodBinding) declaringMemberBinding
+                            : null))
+            .setSuperTypeDescriptorFactory(
+                () -> createDeclaredTypeDescriptor(typeBinding.getSuperclass(), isNullMarked))
+            .setInterfaceTypeDescriptorsFactory(
+                () ->
+                    createTypeDescriptors(
+                        typeBinding.getInterfaces(), isNullMarked, DeclaredTypeDescriptor.class))
+            .setUnparameterizedTypeDescriptorFactory(
+                () -> createDeclaredTypeDescriptor(typeBinding, isNullMarked))
+            .setHasAbstractModifier(isAbstract)
+            .setKind(getKindFromTypeBinding(typeBinding))
+            .setCapturingEnclosingInstance(capturesEnclosingInstance(typeBinding))
+            .setFinal(isFinal)
+            .setFunctionalInterface(
+                !typeBinding.isAnnotation() && typeBinding.getFunctionalInterfaceMethod() != null)
+            .setJsFunctionInterface(JsInteropUtils.isJsFunction(typeBinding))
+            .setAnnotatedWithFunctionalInterface(isAnnotatedWithFunctionalInterface(typeBinding))
+            .setAnnotatedWithAutoValue(isAnnotatedWithAutoValue(typeBinding))
+            .setAnnotatedWithAutoValueBuilder(isAnnotatedWithAutoValueBuilder(typeBinding))
+            .setJsType(JsInteropUtils.isJsType(typeBinding))
+            .setJsEnumInfo(JsInteropUtils.getJsEnumInfo(typeBinding))
+            .setWasmInfo(getWasmInfo(typeBinding))
+            .setNative(JsInteropUtils.isJsNativeType(typeBinding))
+            .setAnonymous(typeBinding.isAnonymous())
+            .setLocal(isLocal(typeBinding))
+            .setSimpleJsName(getJsName(typeBinding))
+            .setCustomizedJsNamespace(getJsNamespace(typeBinding, packageInfoCache))
+            .setObjectiveCNamePrefix(getObjectiveCNamePrefix(typeBinding, packageInfoCache))
+            .setKtTypeInfo(KtInteropUtils.getKtTypeInfo(typeBinding))
+            .setKtObjcInfo(KtInteropUtils.getKtObjcInfo(typeBinding))
+            .setNullMarked(isNullMarked)
+            .setPackageName(packageName)
+            .setTypeParameterDescriptors(
+                getTypeArgumentTypeDescriptors(
+                        typeBinding, /* inNullMarkedScope= */ isNullMarked, TypeVariable.class)
+                    .stream()
+                    .map(TypeVariable::toNonNullable)
+                    .collect(ImmutableList.toImmutableList()))
+            .setVisibility(getVisibility(typeBinding))
+            .setDeclaredMethodDescriptorsFactory(declaredMethods)
+            .setDeclaredFieldDescriptorsFactory(declaredFields)
+            .setUnusableByJsSuppressed(
+                JsInteropAnnotationUtils.isUnusableByJsSuppressed(typeBinding))
+            .setDeprecated(isDeprecated(typeBinding))
+            .build();
+    cachedTypeDeclarationByTypeBinding.put(typeBinding, typeDeclaration);
+    return typeDeclaration;
   }
 
   public static boolean isNullMarked(PackageDeclaration packageDeclaration) {
