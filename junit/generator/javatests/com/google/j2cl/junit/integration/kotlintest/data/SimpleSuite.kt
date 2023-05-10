@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Google Inc.
+ * Copyright 2023 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -15,15 +15,8 @@
  */
 package com.google.j2cl.junit.integration.kotlintest.data
 
-import kotlin.test.Ignore
-import kotlin.test.Test
+import org.junit.runner.RunWith
+import org.junit.runners.Suite
+import org.junit.runners.Suite.SuiteClasses
 
-class IgnoreTest : IgnoreTestParent() {
-  @Test override fun testOverriddenWithTest() {}
-
-  override fun testOverriddenWithoutTest() {}
-
-  @Ignore @Test override fun testOverriddenWithTestAndIgnore() {}
-
-  @Ignore override fun testOverriddenWithIgnoreButNoTest() {}
-}
+@RunWith(Suite::class) @SuiteClasses(SimplePassingTest::class) class SimpleSuite {}

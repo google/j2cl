@@ -21,6 +21,8 @@ j2cl_test_integration_test(
         "//junit/generator/javatests/com/google/j2cl/junit/integration/kotlintest/data:MethodOrderingTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/kotlintest/data:SimpleFailingTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/kotlintest/data:SimplePassingTest",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/kotlintest/data:SimpleSuite",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/kotlintest/data:SuiteOfSuite",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/kotlintest/data:ThrowsInAfterTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/kotlintest/data:ThrowsInBeforeTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/kotlintest/data:ThrowsOnConstructionTest",

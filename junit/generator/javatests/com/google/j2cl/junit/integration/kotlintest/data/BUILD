@@ -104,6 +104,31 @@ j2cl_test_integration_test_data(
     ],
 )
 
+kotlin_and_j2cl_library(
+    name = "SimplePassingLib",
+    srcs = ["SimplePassingTest.kt"],
+)
+
+j2cl_test_integration_test_data(
+    name = "SimpleSuite",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
+    platforms = [
+        "CLOSURE",
+    ],
+    deps = [":SimplePassingLib"],
+)
+
+j2cl_test_integration_test_data(
+    name = "SuiteOfSuite",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
+    platforms = [
+        "CLOSURE",
+    ],
+    deps = [":SimpleSuite-lib"],
+)
+
 j2cl_test_integration_test_data(
     name = "ThrowsInAfterTest",
     # TODO(b/225411185): Enable when RTA works with Kotlin output.

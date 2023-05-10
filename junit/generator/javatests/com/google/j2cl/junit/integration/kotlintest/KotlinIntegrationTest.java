@@ -194,6 +194,24 @@ public class KotlinIntegrationTest extends IntegrationTestBase {
     assertThat(logLines).matches(testResult);
   }
 
+  @Test
+  public void testSuite() throws Exception {
+    String testName = "SimpleSuite";
+    TestResult testResult = createTestResultForSimplePassingTest(testName);
+
+    List<String> logLines = runTest(testName);
+    assertThat(logLines).matches(testResult);
+  }
+
+  @Test
+  public void testSuiteOfSuite() throws Exception {
+    String testName = "SuiteOfSuite";
+    TestResult testResult = createTestResultForSimplePassingTest(testName);
+
+    List<String> logLines = runTest(testName);
+    assertThat(logLines).matches(testResult);
+  }
+
   private TestResult createTestResultForSimplePassingTest(String suiteName) {
     return newTestResultBuilder()
         .testClassName(suiteName)
