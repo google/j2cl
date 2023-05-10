@@ -17,6 +17,7 @@ j2cl_test_integration_test(
         "CLOSURE",
         "WASM",
     ],
+    tags = ["not_run:arm"],
     test_data = [
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:BeforeAndAfterTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:ChildTest",

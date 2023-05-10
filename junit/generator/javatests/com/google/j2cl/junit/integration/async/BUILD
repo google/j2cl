@@ -13,6 +13,7 @@ package(
 # blaze test --test_arg=--output_command_line junit/generator/javatests/com/google/j2cl/junit/integration/async:J2clAsyncTest
 j2cl_test_integration_test(
     name = "J2clAsyncTest",
+    tags = ["not_run:arm"],
     test_data = [
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestAfterWithFailingAsyncTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestAsyncAfterWillTimeOut",
