@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.ast;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 import java.util.ArrayList;
@@ -76,12 +77,14 @@ public class VariableDeclarationExpression extends Expression {
           .setVariableDeclarationFragments(variableDeclarationExpression.getFragments());
     }
 
+    @CanIgnoreReturnValue
     public Builder setVariableDeclarationFragments(
         List<VariableDeclarationFragment> variableDeclarationFragments) {
       this.fragments = new ArrayList<>(variableDeclarationFragments);
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder addVariableDeclaration(Variable variable, Expression initializer) {
       fragments.add(
           VariableDeclarationFragment.newBuilder()
@@ -91,10 +94,12 @@ public class VariableDeclarationExpression extends Expression {
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder addVariableDeclarations(Variable... variables) {
       return addVariableDeclarations(Arrays.asList(variables));
     }
 
+    @CanIgnoreReturnValue
     public Builder addVariableDeclarations(Collection<Variable> variables) {
       return addVariableDeclarationFragments(
           variables.stream()
@@ -102,11 +107,13 @@ public class VariableDeclarationExpression extends Expression {
               .collect(toImmutableList()));
     }
 
+    @CanIgnoreReturnValue
     public Builder addVariableDeclarationFragments(
         VariableDeclarationFragment... variableDeclarationFragments) {
       return addVariableDeclarationFragments(Arrays.asList(variableDeclarationFragments));
     }
 
+    @CanIgnoreReturnValue
     public Builder addVariableDeclarationFragments(
         Collection<VariableDeclarationFragment> variableDeclarationFragment) {
       fragments.addAll(variableDeclarationFragment);

@@ -40,6 +40,7 @@ import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.SwitchCase;
+import com.google.j2cl.transpiler.ast.TryStatement;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.TypeLiteral;
@@ -188,6 +189,16 @@ public class VerifyNormalizedUnits extends NormalizationPass {
               checkState(
                   newArray.getDimensionExpressions().size() == 1
                       && newArray.getArrayLiteral() == null);
+            }
+          }
+
+          @Override
+          public void exitTryStatement(TryStatement tryStatement) {
+            // Try statements have been normalized to have at most 1 catch clause.
+            checkState(tryStatement.getCatchClauses().size() <= 1);
+            if (verifyForWasm) {
+              // Finally has been rewritten.
+              checkState(tryStatement.getFinallyBlock() == null);
             }
           }
 

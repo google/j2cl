@@ -425,9 +425,7 @@ final class StatementTranspiler {
         } else {
           render(tryStatement.getBody());
         }
-        if (tryStatement.getFinallyBlock() != null) {
-          render(tryStatement.getFinallyBlock());
-        }
+        checkState(tryStatement.getFinallyBlock() == null);
         return false;
       }
 

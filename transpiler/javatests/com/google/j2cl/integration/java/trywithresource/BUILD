@@ -11,7 +11,4 @@ package(
 integration_test(
     name = "trywithresource",
     srcs = glob(["*.java"]),
-    # TODO(b/170691676): Enable when full try/catch/finally semantics are
-    # implemented.
-    enable_wasm = False,
 )

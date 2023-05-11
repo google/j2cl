@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.transpiler.ast;
 
-
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
@@ -65,11 +65,13 @@ public class ReturnStatement extends Statement {
           .setSourcePosition(returnStatement.getSourcePosition());
     }
 
+    @CanIgnoreReturnValue
     public Builder setExpression(Expression expression) {
       this.expression = expression;
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder setSourcePosition(SourcePosition sourcePosition) {
       this.sourcePosition = sourcePosition;
       return this;

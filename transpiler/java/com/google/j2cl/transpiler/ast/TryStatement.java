@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
@@ -79,6 +80,7 @@ public class TryStatement extends Statement {
   }
 
   @Override
+  @CanIgnoreReturnValue
   public Node accept(Processor processor) {
     return Visitor_TryStatement.visit(processor, this);
   }
@@ -110,29 +112,41 @@ public class TryStatement extends Statement {
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder setResourceDeclarations(VariableDeclarationExpression... resourceDeclarations) {
       return setResourceDeclarations(Arrays.asList(resourceDeclarations));
     }
 
+    @CanIgnoreReturnValue
     public Builder setCatchClauses(List<CatchClause> catchClauses) {
       this.catchClauses = new ArrayList<>(catchClauses);
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder setCatchClauses(CatchClause... catchClauses) {
       return setCatchClauses(Arrays.asList(catchClauses));
     }
 
+    @CanIgnoreReturnValue
     public Builder setBody(Block body) {
       this.body = body;
       return this;
     }
 
+    @CanIgnoreReturnValue
+    public Builder setBody(Statement... body) {
+      this.body = Block.newBuilder().setStatements(body).build();
+      return this;
+    }
+
+    @CanIgnoreReturnValue
     public Builder setFinallyBlock(Block finallyBlock) {
       this.finallyBlock = finallyBlock;
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder setSourcePosition(SourcePosition sourcePosition) {
       this.sourcePosition = sourcePosition;
       return this;

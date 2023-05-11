@@ -41,6 +41,7 @@ import com.google.j2cl.transpiler.passes.ImplementAssertStatements;
 import com.google.j2cl.transpiler.passes.ImplementClassMetadataViaConstructors;
 import com.google.j2cl.transpiler.passes.ImplementClassMetadataViaGetters;
 import com.google.j2cl.transpiler.passes.ImplementDivisionOperations;
+import com.google.j2cl.transpiler.passes.ImplementFinallyViaControlFlow;
 import com.google.j2cl.transpiler.passes.ImplementFloatingPointRemainderOperation;
 import com.google.j2cl.transpiler.passes.ImplementInstanceInitialization;
 import com.google.j2cl.transpiler.passes.ImplementInstanceOfs;
@@ -444,6 +445,7 @@ public enum Backend {
           ExtractNonIdempotentExpressions::new,
           NormalizeMultiExpressions::new,
           InsertWasmExternConversions::new,
+          ImplementFinallyViaControlFlow::new,
 
           // Needs to run at the end as the types in the ast will be invalid after the pass.
           ImplementArraysAsClasses::new,
