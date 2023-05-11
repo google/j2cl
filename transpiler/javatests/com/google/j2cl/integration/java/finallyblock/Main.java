@@ -26,16 +26,24 @@ import java.util.List;
 public class Main {
   public static void main(String[] args) {
     testFinally_basic();
+    testFinally_basic_inConstructor();
+    testFinally_basic_inFieldInitializer();
+    testFinally_evaluationOrder_returnExpression();
     testFinally_fallThrough();
     testFinally_returnCancelledByOuterBreak();
-    testFinally_innerReturnSuperSeededByOuterReturn();
-    testFinally_innerReturnSuperByOuterContinue();
+    testFinally_returnCancelledByOuterContinue();
+    testFinally_returnSupersededByOuterReturn();
+    testFinally_returnCancelledByBreak_inLambda();
+    testFinally_exceptionSupersededByOuterException();
     testFinally_exceptionCancelledByOuterBreak();
-    testFinally_exceptionSuperseededByOuterException();
+    testFinally_exceptionCancelledByOuterBreak_inConstructor();
+    testFinally_exceptionCancelledByOuterBreak_inInstanceInitializerBlock();
+    testFinally_exceptionCancelledByOuterBreak_inStaticInitializerBlock();
   }
 
   private static void testFinally_basic() {
-    assertTrue(basicFinallyMethod() == Main.value);
+    assertEquals(10, basicFinallyMethod());
+    assertEquals(42, value);
   }
 
   private static int value = 0;
@@ -44,8 +52,63 @@ public class Main {
     try {
       return 10;
     } finally {
-      value = 10;
+      value = 42;
     }
+  }
+
+  private static void testFinally_basic_inConstructor() {
+    value = 0;
+    class Local {
+      Local() {
+        try {
+          return;
+        } finally {
+          value = 54;
+        }
+      }
+    }
+    assertTrue(new Local() instanceof Local);
+    assertEquals(54, value);
+  }
+
+  private static void testFinally_basic_inFieldInitializer() {
+    List<String> steps = fieldWithTryFinally.get();
+    assertEquals(new Object[] {"inTry", "inFinally"}, steps.toArray());
+  }
+
+  private static Supplier<List<String>> fieldWithTryFinally =
+      () -> {
+        List<String> steps = new ArrayList<>();
+        try {
+          steps.add("inTry");
+          if (true) { // Fool javac to not complain about unreachable code.
+            return steps;
+          }
+        } finally {
+          steps.add("inFinally");
+        }
+        steps.add("afterTry");
+        return null;
+      };
+
+  private static void testFinally_evaluationOrder_returnExpression() {
+    List<String> steps = new ArrayList<>();
+    testFinally_evaluationOrder_returnExpression(steps);
+    assertEquals(
+        new Object[] {"innerTry", "evaluatedReturnExpression", "innerFinally"}, steps.toArray());
+  }
+
+  private static boolean testFinally_evaluationOrder_returnExpression(List<String> steps) {
+    try {
+      steps.add("innerTry");
+      if (true) { // Fool javac to not complain about unreachable code.
+        return steps.add("evaluatedReturnExpression");
+      }
+    } finally {
+      steps.add("innerFinally");
+    }
+    steps.add("atEnd");
+    return false;
   }
 
   private static void testFinally_fallThrough() {
@@ -96,13 +159,13 @@ public class Main {
     return "end";
   }
 
-  private static void testFinally_innerReturnSuperSeededByOuterReturn() {
+  private static void testFinally_returnSupersededByOuterReturn() {
     List<String> steps = new ArrayList<>();
-    assertEquals("outerFinally", testFinally_innerReturnSuperSeededByOuterReturn(steps));
+    assertEquals("outerFinally", testFinally_returnSupersededByOuterReturn(steps));
     assertEquals(new Object[] {"innerTry", "innerFinally", "outerFinally"}, steps.toArray());
   }
 
-  private static String testFinally_innerReturnSuperSeededByOuterReturn(List<String> steps) {
+  private static String testFinally_returnSupersededByOuterReturn(List<String> steps) {
     try {
       OUT:
       try {
@@ -124,13 +187,13 @@ public class Main {
     return "end";
   }
 
-  private static void testFinally_innerReturnSuperByOuterContinue() {
+  private static void testFinally_returnCancelledByOuterContinue() {
     List<String> steps = new ArrayList<>();
-    assertEquals("topOfLoop", testFinally_innerReturnSuperByOuterContinue(steps));
+    assertEquals("topOfLoop", testFinally_returnCancelledByOuterContinue(steps));
     assertEquals(new Object[] {"innerTry", "innerFinally", "outerFinally"}, steps.toArray());
   }
 
-  private static String testFinally_innerReturnSuperByOuterContinue(List<String> steps) {
+  private static String testFinally_returnCancelledByOuterContinue(List<String> steps) {
     for (int i = 0; i < 2; i++) {
       if (i == 1) {
         return "topOfLoop";
@@ -153,6 +216,64 @@ public class Main {
         }
       }
       steps.add("bottomOfLoop");
+    }
+    steps.add("end");
+    return "end";
+  }
+
+  private static void testFinally_returnCancelledByBreak_inLambda() {
+    List<String> steps = new ArrayList<>();
+    Supplier<String> functionWithFinally =
+        () -> {
+          OUT:
+          try {
+            steps.add("inTry");
+            if (true) { // Fool javac to not complain about unreachable code.
+              return "inTry";
+            }
+          } finally {
+            steps.add("inFinally");
+            break OUT;
+          }
+          steps.add("afterTry");
+          return "atEnd";
+        };
+
+    steps.clear();
+    assertEquals("atEnd", functionWithFinally.get());
+    assertEquals(new Object[] {"inTry", "inFinally", "afterTry"}, steps.toArray());
+  }
+
+  private static void testFinally_exceptionSupersededByOuterException() {
+    List<String> steps = new ArrayList<>();
+    try {
+      testFinally_exceptionSupersededByOuterException(steps);
+      fail();
+    } catch (RuntimeException e) {
+      assertEquals(new Object[] {"innerTry", "innerFinally", "outerFinally"}, steps.toArray());
+      assertEquals("outerFinally", e.getMessage());
+      // The original exceptions gets dropped and is not added to the suppressed ones.
+      assertEquals(0, e.getSuppressed().length);
+    }
+  }
+
+  private static String testFinally_exceptionSupersededByOuterException(List<String> steps) {
+    OUT:
+    try {
+      try {
+        steps.add("innerTry");
+        if (true) { // Fool javac to not complain about unreachable code.
+          throw new RuntimeException("innerTry");
+        }
+      } finally {
+        steps.add("innerFinally");
+      }
+      steps.add("endOuterTry");
+    } finally {
+      steps.add("outerFinally");
+      if (true) { // Fool javac to not complain about unreachable code.
+        throw new RuntimeException("outerFinally");
+      }
     }
     steps.add("end");
     return "end";
@@ -186,39 +307,95 @@ public class Main {
     return "end";
   }
 
-  private static void testFinally_exceptionSuperseededByOuterException() {
+  private static void testFinally_exceptionCancelledByOuterBreak_inConstructor() {
     List<String> steps = new ArrayList<>();
-    try {
-      testFinally_exceptionSuperseededByOuterException(steps);
-      fail();
-    } catch (RuntimeException e) {
-      assertEquals(new Object[] {"innerTry", "innerFinally", "outerFinally"}, steps.toArray());
-      assertEquals("outerFinally", e.getMessage());
-      // The original exceptions gets dropped and is not added to the suppressed ones.
-      assertEquals(0, e.getSuppressed().length);
+    class Local {
+      Local() {
+        OUT:
+        try {
+          try {
+            steps.add("beforeThrow");
+            if (true) { // Fool javac to not complain about unreachable code.
+              throw new RuntimeException();
+            }
+          } finally {
+            steps.add("innerFinally");
+          }
+          steps.add("normalFlowAfterTry");
+
+        } finally {
+          steps.add("outerFinally");
+          break OUT;
+        }
+        steps.add("atNormalExit");
+      }
+    }
+    assertTrue(new Local() instanceof Local);
+    assertEquals(
+        new Object[] {"beforeThrow", "innerFinally", "outerFinally", "atNormalExit"},
+        steps.toArray());
+  }
+
+  private static void testFinally_exceptionCancelledByOuterBreak_inInstanceInitializerBlock() {
+    List<String> steps = new ArrayList<>();
+
+    class Local {
+      {
+        OUT:
+        try {
+          try {
+            steps.add("beforeThrow");
+            if (true) { // Fool javac to not complain about unreachable code.
+              throw new RuntimeException();
+            }
+          } finally {
+            steps.add("innerFinally");
+          }
+          steps.add("normalFlowAfterFinally");
+        } finally {
+          steps.add("outerFinally");
+          break OUT;
+        }
+        steps.add("atNormalExit");
+      }
+    }
+    Local l = new Local();
+    assertEquals(
+        new Object[] {"beforeThrow", "innerFinally", "outerFinally", "atNormalExit"},
+        steps.toArray());
+  }
+
+  private static void testFinally_exceptionCancelledByOuterBreak_inStaticInitializerBlock() {
+    assertEquals(
+        new Object[] {"beforeThrow", "innerFinally", "outerFinally", "atNormalExit"},
+        FinallyInStaticInitializer.steps.toArray());
+  }
+
+  private static class FinallyInStaticInitializer {
+    static List<String> steps = new ArrayList<>();
+
+    static {
+      OUT:
+      try {
+        try {
+          steps.add("beforeThrow");
+          if (true) { // Fool javac to not complain about unreachable code.
+            throw new RuntimeException();
+          }
+        } finally {
+          steps.add("innerFinally");
+        }
+        steps.add("normalFlowAfterFinally");
+      } finally {
+        steps.add("outerFinally");
+        break OUT;
+      }
+      steps.add("atNormalExit");
     }
   }
 
-  private static String testFinally_exceptionSuperseededByOuterException(List<String> steps) {
-    OUT:
-    try {
-      try {
-        steps.add("innerTry");
-        if (true) { // Fool javac to not complain about unreachable code.
-          throw new RuntimeException("innerTry");
-        }
-      } finally {
-        steps.add("innerFinally");
-      }
-      steps.add("endOuterTry");
-    } finally {
-      steps.add("outerFinally");
-      if (true) { // Fool javac to not complain about unreachable code.
-        throw new RuntimeException("outerFinally");
-      }
-    }
-    steps.add("end");
-    return "end";
+  // Declare a local Supplier to avoid j2kt errors.
+  interface Supplier<T> {
+    T get();
   }
 }
- 
