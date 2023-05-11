@@ -17,9 +17,12 @@ package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
+import com.google.j2cl.transpiler.backend.kotlin.source.commaAndNewLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.dotSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.inNewLine
 import com.google.j2cl.transpiler.backend.kotlin.source.inRoundBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.indented
 import com.google.j2cl.transpiler.backend.kotlin.source.infix
 import com.google.j2cl.transpiler.backend.kotlin.source.join
 import com.google.j2cl.transpiler.backend.kotlin.source.source
@@ -78,8 +81,6 @@ fun classLiteral(type: Source) = join(type, source("::class"))
 
 fun nonNull(type: Source) = join(type, source("!!"))
 
-fun spreadExpression(array: Source) = join(source("*"), array)
-
 fun asExpression(lhs: Source, rhs: Source) = infix(lhs, "as", rhs)
 
 fun isExpression(lhs: Source, rhs: Source) = infix(lhs, "is", rhs)
@@ -93,11 +94,14 @@ fun annotation(name: Source) = join(at(name))
 fun annotation(name: Source, parameter: Source, vararg parameters: Source) =
   join(at(name), inRoundBrackets(commaSeparated(parameter, *parameters)))
 
-fun annotation(name: Source, parameters: Iterable<Source>) =
-  join(at(name), inRoundBrackets(commaSeparated(parameters)))
+fun annotation(name: Source, parameters: List<Source>) =
+  join(
+    at(name),
+    inRoundBrackets(
+      if (parameters.size <= 2) commaSeparated(parameters)
+      else indented(inNewLine(commaAndNewLineSeparated(parameters)))
+    )
+  )
 
-fun fileAnnotation(name: Source, parameter: Source, vararg parameters: Source) =
-  fileAnnotation(name, listOf(parameter, *parameters))
-
-fun fileAnnotation(name: Source, parameters: Iterable<Source>) =
+fun fileAnnotation(name: Source, parameters: List<Source>) =
   annotation(join(source("file:"), name), parameters)

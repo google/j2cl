@@ -37,14 +37,19 @@ private val Renderer.suppressFileAnnotationsSource: Source
     fileAnnotation(
       topLevelQualifiedNameSource("kotlin.Suppress"),
       listOf(
-          "REPEATED_BOUND",
-          "UNNECESSARY_NOT_NULL_ASSERTION",
-          "VARIABLE_WITH_REDUNDANT_INITIALIZER",
-          "UNCHECKED_CAST",
-          "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
           "ALWAYS_NULL",
+          "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+          "REPEATED_BOUND",
           "SENSELESS_COMPARISON",
-          "UNUSED_PARAMETER"
+          "UNCHECKED_CAST",
+          "UNNECESSARY_LATEINIT",
+          "UNNECESSARY_NOT_NULL_ASSERTION",
+          "UNREACHABLE_CODE",
+          "UNUSED_PARAMETER",
+          "UNUSED_VARIABLE",
+          "USELESS_CAST",
+          "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+          "VARIABLE_WITH_REDUNDANT_INITIALIZER"
         )
         .map(::literalSource)
     )
