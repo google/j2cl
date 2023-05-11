@@ -49,23 +49,26 @@ def j2cl_import(
     j2wasm_args = dict(kwargs)
     j2wasm_args["tags"] = (j2wasm_args.get("tags") or []) + ["manual", "notap"]
 
-    j2wasm_import(
-        name = j2wasm_common.to_j2wasm_name(name),
-        jar = jar,
-        visibility = visibility,
-        **j2wasm_args
-    )
+    if not native.existing_rule(j2wasm_common.to_j2wasm_name(name)):
+        j2wasm_import(
+            name = j2wasm_common.to_j2wasm_name(name),
+            jar = jar,
+            visibility = visibility,
+            **j2wasm_args
+        )
 
-    j2kt_jvm_import(
-        name = j2kt_common.to_j2kt_jvm_name(name),
-        jar = jar,
-        visibility = visibility,
-        **kwargs
-    )
+    if not native.existing_rule(j2kt_common.to_j2kt_jvm_name(name)):
+        j2kt_jvm_import(
+            name = j2kt_common.to_j2kt_jvm_name(name),
+            jar = jar,
+            visibility = visibility,
+            **kwargs
+        )
 
-    j2kt_native_import(
-        name = j2kt_common.to_j2kt_native_name(name),
-        jar = jar,
-        visibility = visibility,
-        **kwargs
-    )
+    if not native.existing_rule(j2kt_common.to_j2kt_native_name(name)):
+        j2kt_native_import(
+            name = j2kt_common.to_j2kt_native_name(name),
+            jar = jar,
+            visibility = visibility,
+            **kwargs
+        )
