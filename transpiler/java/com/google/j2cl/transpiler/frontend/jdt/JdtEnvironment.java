@@ -452,6 +452,11 @@ class JdtEnvironment {
       boolean inNullMarkedScope) {
     checkArgument(!typeBinding.isPrimitive());
 
+    if (typeBinding.getQualifiedName().equals("java.lang.Void")) {
+      // Void is always nullable.
+      return true;
+    }
+
     switch (getNullabilityAnnotation(typeBinding, elementAnnotations)) {
       case NULLABLE:
         return true;
