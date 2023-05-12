@@ -24,6 +24,7 @@ def j2wasm_test(
         name = name,
         data = data + extra_data,
         compile = 0,
+        enable_rta = False,
         platform = "WASM",
         optimize_wasm = optimize,
         browsers = None,

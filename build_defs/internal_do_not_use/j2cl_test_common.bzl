@@ -272,7 +272,7 @@ def j2cl_test_common(
         "//testing/web/js/browser_services:console_poster.js",
     ]
 
-    if compile or platform == "WASM":
+    if compile:
         defs.append("--define=goog.ENABLE_DEBUG_LOADER=true")
     else:
         # enforce bundled mode since the debug loader is disabled
