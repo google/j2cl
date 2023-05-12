@@ -14,7 +14,7 @@ def _gen_src_from_template(
         subtypes):
     target_name = "src_" + name + template.replace(".", "_")
     template_name = template + ".template"
-    subtype_files = ["%s.java.txt" % subtype for subtype in subtypes]
+    subtype_files = ["%s.java" % subtype for subtype in subtypes]
 
     native.genrule(
         name = target_name,
@@ -36,7 +36,7 @@ def generate_wasm_array_subtype(name, **kwargs):
 
     native.filegroup(
         name = "src_" + name,
-        srcs = [_gen_subtype_src_from_template("OfType.java.txt", name, **kwargs)],
+        srcs = [_gen_subtype_src_from_template("OfType.java", name, **kwargs)],
     )
 
 def _gen_subtype_src_from_template(
