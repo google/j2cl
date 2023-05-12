@@ -16,6 +16,11 @@
  */
 package java.util;
 
+import static javaemul.internal.InternalPreconditions.checkArgument;
+import static javaemul.internal.InternalPreconditions.checkConcurrentModification;
+import static javaemul.internal.InternalPreconditions.checkElement;
+import static javaemul.internal.InternalPreconditions.checkState;
+
 import java.io.Serializable;
 
 /** Wasm specific {@code IdentityHashMap} implementation based on Android. */
@@ -128,17 +133,10 @@ public class IdentityHashMap<K, V> extends AbstractMap<K, V>
       return false;
     }
 
-    void checkConcurrentMod() throws ConcurrentModificationException {
-      if (expectedModCount != associatedMap.modCount) {
-        throw new ConcurrentModificationException();
-      }
-    }
-
     public E next() {
-      checkConcurrentMod();
-      if (!hasNext()) {
-        throw new NoSuchElementException();
-      }
+      checkConcurrentModification(expectedModCount, associatedMap.modCount);
+      checkElement(hasNext());
+
       IdentityHashMapEntry<KT, VT> result = associatedMap.getEntry(position);
       lastPosition = position;
       position += 2;
@@ -147,10 +145,9 @@ public class IdentityHashMap<K, V> extends AbstractMap<K, V>
     }
 
     public void remove() {
-      checkConcurrentMod();
-      if (!canRemove) {
-        throw new IllegalStateException();
-      }
+      checkState(canRemove);
+      checkConcurrentModification(expectedModCount, associatedMap.modCount);
+
       canRemove = false;
       associatedMap.remove(associatedMap.elementData[lastPosition]);
       position = lastPosition;
@@ -215,9 +212,7 @@ public class IdentityHashMap<K, V> extends AbstractMap<K, V>
   }
 
   public IdentityHashMap(int maxSize) {
-    if (maxSize < 0) {
-      throw new IllegalArgumentException("maxSize < 0: " + maxSize);
-    }
+    checkArgument(maxSize >= 0);
     size = 0;
     threshold = getThreshold(maxSize);
     elementData = newElementArray(computeElementArraySize());

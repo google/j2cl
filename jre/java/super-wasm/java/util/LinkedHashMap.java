@@ -21,6 +21,10 @@
 
 package java.util;
 
+import static javaemul.internal.InternalPreconditions.checkConcurrentModification;
+import static javaemul.internal.InternalPreconditions.checkElement;
+import static javaemul.internal.InternalPreconditions.checkState;
+
 /**
  * LinkedHashMap is an implementation of {@link Map} that guarantees iteration order. All optional
  * operations are supported.
@@ -240,24 +244,18 @@ public class LinkedHashMap<K, V> extends HashMap<K, V> {
     }
 
     final LinkedEntry<K, V> nextEntry() {
-      if (modCount != expectedModCount) {
-        throw new ConcurrentModificationException();
-      }
+      checkConcurrentModification(modCount, expectedModCount);
+      checkElement(next != header);
+
       LinkedEntry<K, V> e = next;
-      if (e == header) {
-        throw new NoSuchElementException();
-      }
       next = e.nxt;
       return lastReturned = e;
     }
 
     public final void remove() {
-      if (modCount != expectedModCount) {
-        throw new ConcurrentModificationException();
-      }
-      if (lastReturned == null) {
-        throw new IllegalStateException();
-      }
+      checkState(lastReturned != null);
+      checkConcurrentModification(modCount, expectedModCount);
+
       LinkedHashMap.this.remove(lastReturned.key);
       lastReturned = null;
       expectedModCount = modCount;

@@ -16,6 +16,8 @@
  */
 package java.lang;
 
+import static javaemul.internal.InternalPreconditions.checkArgument;
+import static javaemul.internal.InternalPreconditions.checkNotNull;
 import static javaemul.internal.InternalPreconditions.checkStringBounds;
 import static javaemul.internal.InternalPreconditions.checkStringElementIndex;
 
@@ -46,9 +48,6 @@ abstract class AbstractStringBuilder {
   }
 
   AbstractStringBuilder(int capacity) {
-    if (capacity < 0) {
-      throw new NegativeArraySizeException(Integer.toString(capacity));
-    }
     value = new char[capacity];
   }
 
@@ -122,9 +121,6 @@ abstract class AbstractStringBuilder {
   final void append0(CharSequence s, int start, int end) {
     if (s == null) {
       s = "null";
-    }
-    if ((start | end) < 0 || start > end || end > s.length()) {
-      throw new IndexOutOfBoundsException();
     }
     int length = end - start;
     int newCount = count + length;
@@ -288,9 +284,7 @@ abstract class AbstractStringBuilder {
     checkStringBounds(start, end, count);
 
     if (start == end) {
-      if (string == null) {
-        throw new NullPointerException("string == null");
-      }
+      checkNotNull(string);
       insert0(start, string);
       return;
     }
@@ -413,9 +407,7 @@ abstract class AbstractStringBuilder {
   }
 
   public void setLength(int length) {
-    if (length < 0) {
-      throw new StringIndexOutOfBoundsException("length < 0: " + length);
-    }
+    checkArgument(length >= 0);
     if (length > value.length) {
       enlargeBuffer(length);
     } else {

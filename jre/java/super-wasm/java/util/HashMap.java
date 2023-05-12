@@ -16,6 +16,11 @@
  */
 package java.util;
 
+import static javaemul.internal.InternalPreconditions.checkArgument;
+import static javaemul.internal.InternalPreconditions.checkConcurrentModification;
+import static javaemul.internal.InternalPreconditions.checkElement;
+import static javaemul.internal.InternalPreconditions.checkState;
+
 import java.io.Serializable;
 import java.util.function.Function;
 
@@ -84,9 +89,7 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Seria
   }
 
   public HashMap(int capacity) {
-    if (capacity < 0) {
-      throw new IllegalArgumentException("Capacity: " + capacity);
-    }
+    checkArgument(capacity >= 0, "Negative initial capacity");
     if (capacity == 0) {
       @SuppressWarnings("unchecked")
       HashMapEntry<K, V>[] tab = (HashMapEntry<K, V>[]) EMPTY_TABLE;
@@ -106,9 +109,7 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Seria
 
   public HashMap(int capacity, float loadFactor) {
     this(capacity);
-    if (loadFactor <= 0 || Float.isNaN(loadFactor)) {
-      throw new IllegalArgumentException("Load factor: " + loadFactor);
-    }
+    checkArgument(loadFactor > 0, "Non-positive load factor");
     /*
      * Note that this implementation ignores loadFactor; it always uses
      * a load factor of 3/4. This simplifies the code and generally
@@ -639,12 +640,9 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Seria
     }
 
     HashMapEntry<K, V> nextEntry() {
-      if (modCount != expectedModCount) {
-        throw new ConcurrentModificationException();
-      }
-      if (nextEntry == null) {
-        throw new NoSuchElementException();
-      }
+      checkConcurrentModification(modCount, expectedModCount);
+      checkElement(nextEntry != null);
+
       HashMapEntry<K, V> entryToReturn = nextEntry;
       HashMapEntry<K, V>[] tab = table;
       HashMapEntry<K, V> next = entryToReturn.next;
@@ -657,12 +655,9 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Seria
     }
 
     public void remove() {
-      if (lastEntryReturned == null) {
-        throw new IllegalStateException();
-      }
-      if (modCount != expectedModCount) {
-        throw new ConcurrentModificationException();
-      }
+      checkState(lastEntryReturned != null);
+      checkConcurrentModification(modCount, expectedModCount);
+
       HashMap.this.remove(lastEntryReturned.key);
       lastEntryReturned = null;
       expectedModCount = modCount;

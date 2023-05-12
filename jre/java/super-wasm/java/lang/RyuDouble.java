@@ -13,6 +13,9 @@
 // limitations under the License.
 package java.lang;
 
+import static javaemul.internal.InternalPreconditions.checkArgument;
+import static javaemul.internal.InternalPreconditions.checkState;
+
 import java.math.BigInteger;
 
 /** An implementation of Ryu for double. Adapted from https://github.com/ulfjack/ryu */
@@ -47,9 +50,7 @@ final class RyuDouble {
       BigInteger pow = BigInteger.valueOf(5).pow(i);
       int pow5len = pow.bitLength();
       int expectedPow5Bits = pow5bits(i);
-      if (expectedPow5Bits != pow5len) {
-        throw new IllegalStateException(pow5len + " != " + expectedPow5Bits);
-      }
+      checkState(expectedPow5Bits == pow5len);
       if (i < POW5_SPLIT.length) {
         for (int j = 0; j < 4; j++) {
           POW5_SPLIT[i][j] =
@@ -408,7 +409,7 @@ final class RyuDouble {
       value /= 5;
       count++;
     }
-    throw new IllegalArgumentException("" + value);
+    throw new IllegalArgumentException();
   }
 
   /**
@@ -429,9 +430,7 @@ final class RyuDouble {
     long bits10 = mHigh * POW5_SPLIT[i][3]; // 31
     long bits00 = mLow * POW5_SPLIT[i][3]; // 0
     int actualShift = j - 3 * 31 - 21;
-    if (actualShift < 0) {
-      throw new IllegalArgumentException("" + actualShift);
-    }
+    checkArgument(actualShift >= 0);
     return ((((((((bits00 >>> 31) + bits01 + bits10) >>> 31) + bits02 + bits11) >>> 31)
                     + bits03
                     + bits12)
@@ -458,9 +457,7 @@ final class RyuDouble {
     long bits00 = mLow * POW5_INV_SPLIT[i][3];
 
     int actualShift = j - 3 * 31 - 21;
-    if (actualShift < 0) {
-      throw new IllegalArgumentException("" + actualShift);
-    }
+    checkArgument(actualShift >= 0);
     return ((((((((bits00 >>> 31) + bits01 + bits10) >>> 31) + bits02 + bits11) >>> 31)
                     + bits03
                     + bits12)

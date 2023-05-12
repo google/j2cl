@@ -14,6 +14,9 @@
 
 package java.lang;
 
+import static javaemul.internal.InternalPreconditions.checkArgument;
+import static javaemul.internal.InternalPreconditions.checkState;
+
 import java.math.BigInteger;
 
 /** An implementation of Ryu for float. Adapted from https://github.com/ulfjack/ryu */
@@ -59,9 +62,7 @@ final class RyuFloat {
       BigInteger pow = BigInteger.valueOf(5).pow(i);
       int pow5len = pow.bitLength();
       int expectedPow5Bits = pow5bits(i);
-      if (expectedPow5Bits != pow5len) {
-        throw new IllegalStateException(pow5len + " != " + expectedPow5Bits);
-      }
+      checkState(expectedPow5Bits == pow5len);
       if (i < POW5_SPLIT.length) {
         POW5_SPLIT[i][0] =
             pow.shiftRight(pow5len - POW5_BITCOUNT + POW5_HALF_BITCOUNT).intValueExact();
@@ -321,7 +322,7 @@ final class RyuFloat {
       value /= 5;
       count++;
     }
-    throw new IllegalArgumentException("" + value);
+    throw new IllegalArgumentException();
   }
 
   /**
@@ -329,9 +330,7 @@ final class RyuFloat {
    * q)/2^k] / 2^(q - k)] = [m * POW5[i] / 2^j].
    */
   private static long mulPow5divPow2(int m, int i, int j) {
-    if (j - POW5_HALF_BITCOUNT < 0) {
-      throw new IllegalArgumentException();
-    }
+    checkArgument(j - POW5_HALF_BITCOUNT >= 0);
     long bits0 = m * (long) POW5_SPLIT[i][0];
     long bits1 = m * (long) POW5_SPLIT[i][1];
     return (bits0 + (bits1 >> POW5_HALF_BITCOUNT)) >> (j - POW5_HALF_BITCOUNT);
@@ -342,9 +341,7 @@ final class RyuFloat {
    * 2^-(p - q - k)] = [m * POW5_INV[q] / 2^j].
    */
   private static long mulPow5InvDivPow2(int m, int q, int j) {
-    if (j - POW5_INV_HALF_BITCOUNT < 0) {
-      throw new IllegalArgumentException();
-    }
+    checkArgument(j - POW5_INV_HALF_BITCOUNT >= 0);
     long bits0 = m * (long) POW5_INV_SPLIT[q][0];
     long bits1 = m * (long) POW5_INV_SPLIT[q][1];
     return (bits0 + (bits1 >> POW5_INV_HALF_BITCOUNT)) >> (j - POW5_INV_HALF_BITCOUNT);
