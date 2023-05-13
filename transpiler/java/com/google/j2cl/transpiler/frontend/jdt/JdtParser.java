@@ -29,7 +29,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import javax.annotation.Nullable;
 import org.eclipse.jdt.core.BindingKey;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.compiler.IProblem;
@@ -151,30 +150,5 @@ public class JdtParser {
       }
     }
     return hasErrors;
-  }
-
-  @Nullable
-  private ITypeBinding findTypeBindingByName(ITypeBinding typeBinding, String soughtTypeName) {
-    if (typeBinding == null) {
-      return null;
-    }
-    if (soughtTypeName.equals(typeBinding.getQualifiedName())) {
-      return typeBinding;
-    }
-    ITypeBinding superTypeBinding =
-        findTypeBindingByName(typeBinding.getSuperclass(), soughtTypeName);
-
-    if (superTypeBinding != null) {
-      return superTypeBinding;
-    }
-
-    for (ITypeBinding superInterfaceBinding : typeBinding.getInterfaces()) {
-      superTypeBinding = findTypeBindingByName(superInterfaceBinding, soughtTypeName);
-      if (superTypeBinding != null) {
-        return superTypeBinding;
-      }
-    }
-
-    return null;
   }
 }
