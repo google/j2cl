@@ -112,7 +112,6 @@ def _impl_j2wasm_application(ctx):
         args.add("--enable-bulk-memory")
         args.add("--closed-world")
         args.add("--traps-never-happen")
-        args.add("--debuginfo")
         args.add_all(stage_args)
 
         inputs = []
@@ -129,9 +128,16 @@ def _impl_j2wasm_application(ctx):
             # SymbolMap flag must be after optimization passes to get the final symbol names.
             args.add("--symbolmap=" + ctx.outputs.symbolmap.path)
             outputs.append(ctx.outputs.symbolmap)
+
+            # Always maintain debug information if explicitly asked by user.
+            if ctx.var.get("J2CL_APP_STYLE", "") == "PRETTY":
+                args.add("--debuginfo")
         else:
             output = ctx.actions.declare_file(ctx.label.name + "_intermediate_%s.wasm" % current_stage)
             output_source_map = ctx.actions.declare_file(ctx.label.name + "_intermediate_%s_map" % current_stage)
+
+            # Maintain debug information in intermediate stages.
+            args.add("--debuginfo")
 
         args.add("-o", output)
         outputs.append(output)
@@ -330,6 +336,7 @@ def j2wasm_application(name, defines = dict(), **kwargs):
     _j2wasm_application(
         name = name + "_dev",
         binaryen_args = [
+            "--debuginfo",
             "--intrinsic-lowering",
             # Remove the intrinsic import declarations which are not removed by lowering itself.
             "--remove-unused-module-elements",
