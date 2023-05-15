@@ -39,7 +39,8 @@ public class ExtractNonIdempotentExpressions extends NormalizationPass {
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(
         new AbstractRewriter() {
-          public Expression rewriteInstanceOf(InstanceOfExpression instanceOfExpression) {
+          @Override
+          public Expression rewriteInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
             Expression expression = instanceOfExpression.getExpression();
 
             // instanceof Interface evaluates the expression twice.

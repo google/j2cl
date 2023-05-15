@@ -15,6 +15,7 @@
  */
 package instanceofs;
 
+import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.TestUtils.isWasm;
@@ -45,21 +46,20 @@ public class Main {
   }
 
   private static void testInstanceOf_sideEffects() {
-    try {
-      assertTrue(hasSideEffect() instanceof Object);
-      assertTrue(false);
-    } catch (IllegalArgumentException expected) {
-    }
-
-    try {
-      assertTrue(hasSideEffect() instanceof ThreadLocal);
-      assertTrue(false);
-    } catch (IllegalArgumentException expected) {
-    }
+    counter = 0;
+    assertTrue(incrementCounter() instanceof Object);
+    assertEquals(1, counter);
+    assertFalse(incrementCounter() instanceof Number);
+    assertEquals(2, counter);
+    assertFalse(incrementCounter() instanceof Serializable);
+    assertEquals(3, counter);
   }
 
-  private static Object hasSideEffect() {
-    throw new IllegalArgumentException();
+  private static int counter = 0;
+
+  private static Object incrementCounter() {
+    counter++;
+    return new Object();
   }
 
   private static void testInstanceOf_interface() {
