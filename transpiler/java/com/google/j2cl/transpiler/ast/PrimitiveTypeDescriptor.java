@@ -92,11 +92,6 @@ public class PrimitiveTypeDescriptor extends TypeDescriptor {
     return precisionOrder > 0;
   }
 
-  /** Returns the wider type descriptor, {@code this} if both have the same width */
-  public PrimitiveTypeDescriptor widerTypeDescriptor(PrimitiveTypeDescriptor thatTypeDescriptor) {
-    return thatTypeDescriptor.isWiderThan(this) ? thatTypeDescriptor : this;
-  }
-
   @Override
   public PrimitiveTypeDescriptor toRawTypeDescriptor() {
     return this;

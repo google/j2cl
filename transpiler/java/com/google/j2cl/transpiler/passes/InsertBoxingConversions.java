@@ -35,10 +35,6 @@ import com.google.j2cl.transpiler.ast.TypeVariable;
 public class InsertBoxingConversions extends NormalizationPass {
   private final boolean areBooleanAndDoubleBoxed;
 
-  public InsertBoxingConversions() {
-    this(false);
-  }
-
   public InsertBoxingConversions(boolean areBooleanAndDoubleBoxed) {
     this.areBooleanAndDoubleBoxed = areBooleanAndDoubleBoxed;
   }

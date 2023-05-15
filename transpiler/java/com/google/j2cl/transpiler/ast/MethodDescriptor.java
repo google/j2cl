@@ -119,7 +119,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     SYNTHETIC_PROPERTY_GETTER("<synthetic: getter>"),
     SYNTHETIC_ADAPT_LAMBDA("<synthetic: adapt_lambda>"),
     SYNTHETIC_LAMBDA_ADAPTOR_CONSTRUCTOR("<synthetic: lambda_adaptor_ctor>"),
-    SYNTHETIC_LAMBDA_IMPLEMENTOR_CONSTRUCTOR("<synthetic: lambda_implementor_ctor>"),
     INSTANCE_OF_SUPPORT_METHOD,
     GENERALIZING_BRIDGE, // Bridges a more general signature to a more specific one.
     SPECIALIZING_BRIDGE, // Bridges a more specific signature to a more general one.
@@ -1271,8 +1270,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public abstract Builder setTypeArgumentTypeDescriptors(List<TypeDescriptor> typeArguments);
 
-    abstract MethodDescriptor getDeclarationDescriptorOrNullIfSelf();
-
     abstract ImmutableList<ParameterDescriptor> getParameterDescriptors();
 
     public ImmutableList<TypeDescriptor> getParameterTypeDescriptors() {
@@ -1321,8 +1318,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         MethodDescriptor declarationMethodDescriptor);
 
     abstract boolean isConstructor();
-
-    abstract String getName();
 
     abstract MethodDescriptor autoBuild();
 

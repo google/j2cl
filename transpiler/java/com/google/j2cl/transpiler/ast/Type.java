@@ -27,7 +27,6 @@ import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Context;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
-import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -66,10 +65,6 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
    */
   public DeclaredTypeDescriptor getTypeDescriptor() {
     return getDeclaration().toUnparameterizedTypeDescriptor();
-  }
-
-  public Kind getKind() {
-    return typeDeclaration.getKind();
   }
 
   public void setStatic(boolean isStatic) {

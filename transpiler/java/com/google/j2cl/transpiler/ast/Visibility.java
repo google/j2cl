@@ -19,17 +19,15 @@ package com.google.j2cl.transpiler.ast;
  * An enum for visibility.
  */
 public enum Visibility {
-  PUBLIC("public", 3),
-  PROTECTED("protected", 2),
-  PACKAGE_PRIVATE("package", 1),
-  PRIVATE("private", 0);
+  PUBLIC("public"),
+  PROTECTED("protected"),
+  PACKAGE_PRIVATE("package"),
+  PRIVATE("private");
 
   public final String jsText;
-  public final int level;
 
-  Visibility(String jsText, int level) {
+  Visibility(String jsText) {
     this.jsText = jsText;
-    this.level = level;
   }
 
   public boolean isPublic() {
