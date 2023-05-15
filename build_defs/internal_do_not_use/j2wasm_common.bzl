@@ -1,12 +1,8 @@
 """Common utilities for creating J2WASM targets and providers."""
 
-load(
-    "//build_defs/internal_do_not_use:j2cl_common.bzl",
-    "j2cl_common",
-)
-load("//build_defs/internal_do_not_use:provider.bzl", "J2wasmInfo")
-load(":j2cl_common.bzl", "split_deps", "split_srcs")
+load(":j2cl_common.bzl", "j2cl_common", "split_deps", "split_srcs")
 load(":j2cl_js_common.bzl", "j2cl_js_provider")
+load(":provider.bzl", "J2wasmInfo")
 
 def _compile(
         ctx,
@@ -17,23 +13,21 @@ def _compile(
         plugins = [],
         exported_plugins = [],
         output_jar = None,
-        javac_opts = [],
-        mnemonic = "J2Wasm"):
-    java_srcs, js_srcs = split_srcs(srcs)
-    java_deps, js_deps = split_deps(deps)
-    java_exports, js_exports = split_deps(exports)
+        javac_opts = []):
+    _, js_srcs = split_srcs(srcs)
+    _, js_deps = split_deps(deps)
+    _, js_exports = split_deps(exports)
 
-    java_provider = j2cl_common.java_compile(
+    j2cl_provider = j2cl_common.compile(
         ctx = ctx,
-        name = name,
-        srcs = java_srcs,
-        deps = java_deps,
-        exports = java_exports,
+        srcs = srcs,
+        deps = deps,
+        exports = exports,
         plugins = plugins,
         exported_plugins = exported_plugins,
+        backend = "WASM_MODULAR",
         output_jar = output_jar,
         javac_opts = javac_opts,
-        mnemonic = mnemonic,
     )
 
     js_provider = j2cl_js_provider(
@@ -42,23 +36,29 @@ def _compile(
         # These are exports, because they will need to be referenced by the j2wasm_application
         # eventually downstream. They may not be direct dependencies.
         exports = js_deps + js_exports,
+        artifact_suffix = "j2wasm",
     )
 
-    return _create_j2wasm_provider(java_provider, js_provider, deps + exports)
+    return _create_j2wasm_provider(
+        j2cl_provider,
+        js_provider,
+        deps + exports,
+    )
 
-def _create_j2wasm_provider(java_provider, js_provider, deps):
+def _create_j2wasm_provider(j2cl_provider, js_provider, deps):
     j2wasm_deps = [d for d in deps if hasattr(d, "_is_j2cl_provider")]
     return J2wasmInfo(
         _private_ = struct(
             transitive_srcs = depset(
-                java_provider.source_jars,
+                j2cl_provider._private_.java_info.source_jars,
                 transitive = [d._private_.transitive_srcs for d in j2wasm_deps],
             ),
             transitive_classpath = depset(
                 transitive = [d._private_.transitive_classpath for d in j2wasm_deps],
             ),
-            java_info = java_provider,
+            java_info = j2cl_provider._private_.java_info,
             js_info = js_provider,
+            wasm_modular_info = j2cl_provider,
         ),
         _is_j2cl_provider = 1,
     )

@@ -19,6 +19,10 @@ def create_js_lib_struct(j2cl_info, extra_providers = []):
 def j2cl_js_provider(ctx, srcs = [], deps = [], exports = [], artifact_suffix = ""):
     """ Creates a js provider from provided sources, deps and exports. """
 
+    if artifact_suffix == "j2wasm":
+        # TODO(b/282247604): wire the modular wasm pipeline.
+        return struct()
+
     default_j2cl_suppresses = [
         "analyzerChecks",
         "underscore",
@@ -133,7 +137,7 @@ def j2cl_web_test(
             "  echo \"%s\"" % fail_suiteclass,
             "  exit 1",
             "fi",
-            "mv \"$$testsuite\" ../$@;"
+            "mv \"$$testsuite\" ../$@;",
         ]),
         testonly = 1,
     )

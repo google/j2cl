@@ -20,6 +20,7 @@ def _compile(
         exports = [],
         plugins = [],
         exported_plugins = [],
+        backend = "CLOSURE",
         output_jar = None,
         javac_opts = [],
         kotlincopts = [],
@@ -85,6 +86,7 @@ def _compile(
             js_srcs,
             output_js,
             output_library_info,
+            backend,
             internal_transpiler_flags,
             kt_common_srcs,
             kotlincopts,
@@ -234,6 +236,7 @@ def _j2cl_transpile(
         js_srcs,
         output_dir,
         library_info_output,
+        backend,
         internal_transpiler_flags,
         kt_common_srcs,
         kotlincopts,
@@ -271,6 +274,7 @@ def _j2cl_transpile(
     args.add("-output", output_dir.path)
     args.add("-libraryinfooutput", library_info_output)
     args.add("-experimentalJavaFrontend", ctx.attr._java_frontend[BuildSettingInfo].value)
+    args.add("-experimentalBackend", backend)
     for flag, value in internal_transpiler_flags.items():
         if value:
             args.add("-" + flag.replace("_", ""))

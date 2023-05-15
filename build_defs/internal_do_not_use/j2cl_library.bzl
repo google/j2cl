@@ -26,13 +26,13 @@ j2cl_library(
 """
 
 load(":j2cl_library_build_test.bzl", "build_test")
-load(":j2cl_common.bzl", "J2clInfo")
 load(":j2cl_java_library.bzl", j2cl_library_rule = "j2cl_library")
 load(":j2cl_util.bzl", "to_parallel_targets")
 load(":j2kt_common.bzl", "j2kt_common")
 load(":j2kt_library.bzl", "J2KT_JVM_LIB_ATTRS", "J2KT_NATIVE_LIB_ATTRS", "j2kt_jvm_library", "j2kt_native_library")
 load(":j2wasm_common.bzl", "j2wasm_common")
 load(":j2wasm_library.bzl", "J2WASM_LIB_ATTRS", "j2wasm_library")
+load(":provider.bzl", "J2clInfo", "J2wasmInfo")
 
 # Packages that j2cl rule will generage j2kt jvm packages by default. Used to simplify test
 # rules.
@@ -104,8 +104,12 @@ _J2WASM_PACKAGES = [
 ]
 
 def _tree_artifact_proxy_impl(ctx):
-    js_files = ctx.attr.j2cl_library[J2clInfo]._private_.output_js
-    return DefaultInfo(files = depset([js_files]), runfiles = ctx.runfiles([js_files]))
+    files = []
+    if J2clInfo in ctx.attr.j2cl_library:
+        files = ctx.attr.j2cl_library[J2clInfo]._private_.output_js
+    elif J2wasmInfo in ctx.attr.j2cl_library:
+        files = ctx.attr.j2cl_library[J2wasmInfo]._private_.wasm_modular_info._private_.output_js
+    return DefaultInfo(files = depset([files]), runfiles = ctx.runfiles([files]))
 
 _tree_artifact_proxy = rule(
     implementation = _tree_artifact_proxy_impl,
@@ -155,20 +159,20 @@ def j2cl_library(
         **args
     )
 
+    auto_generated_targets_tags = kwargs.get("tags", []) + ["manual", "notap", "no-ide"]
+
     # TODO(b/36549068): remove this workaround when tree artifacts can be
     # declared as the rule output.
     _tree_artifact_proxy(
         name = name + ".js",
         j2cl_library = ":" + name,
         visibility = ["//visibility:private"],
-        tags = ["manual", "notap", "no-ide"],
+        tags = auto_generated_targets_tags,
         testonly = args.get("testonly", 0),
     )
 
     if args.get("srcs") and (generate_build_test == None or generate_build_test):
         build_test(name, kwargs.get("tags", []))
-
-    auto_generated_targets_tags = kwargs.get("tags", []) + ["manual", "notap", "no-ide"]
 
     j2wasm_library_name = j2wasm_common.to_j2wasm_name(name)
 
@@ -189,6 +193,16 @@ def j2cl_library(
             name = j2wasm_library_name,
             tags = auto_generated_targets_tags + ["j2wasm"],
             **j2wasm_args
+        )
+
+        # TODO(b/36549068): remove this workaround when tree artifacts can be
+        # declared as the rule output.
+        _tree_artifact_proxy(
+            name = j2wasm_library_name + ".wasm",
+            j2cl_library = ":" + j2wasm_library_name,
+            visibility = ["//visibility:private"],
+            tags = auto_generated_targets_tags,
+            testonly = args.get("testonly", 0),
         )
 
     j2kt_native_library_name = j2kt_common.to_j2kt_native_name(name)

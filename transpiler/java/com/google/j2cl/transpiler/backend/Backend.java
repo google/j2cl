@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.backend;
 
 import com.google.common.collect.ImmutableList;
+import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.backend.closure.OutputGeneratorStage;
@@ -500,6 +501,7 @@ public enum Backend {
           /* enableWasm= */ true,
           /* isNullMarkedSupported= */ options.isNullMarkedSupported(),
           /* optimizeAutoValue= */ options.getOptimizeAutoValue());
+      throw new InternalCompilerError("WASM_MODULAR backend is unimplemented.");
     }
 
     @Override
