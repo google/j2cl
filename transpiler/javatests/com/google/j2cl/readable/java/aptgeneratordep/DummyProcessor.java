@@ -21,7 +21,6 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.RoundEnvironment;
-import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.TypeElement;
 import javax.tools.JavaFileObject;
@@ -30,8 +29,12 @@ import javax.tools.JavaFileObject;
  * A trivially small annotation processor existing only to verify that annotation processors can and
  * will be correctly run and translated to JS inside of j2cl_library() rules.
  */
-@SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class DummyProcessor extends AbstractProcessor {
+
+  @Override
+  public SourceVersion getSupportedSourceVersion() {
+    return SourceVersion.latestSupported();
+  }
 
   private boolean createdDummy;
 
