@@ -1,6 +1,7 @@
 """J2CL library rules."""
 
-load(":j2cl_common.bzl", "J2CL_TOOLCHAIN_ATTRS", "J2clInfo", "j2cl_common")
+load(":provider.bzl", "J2clInfo")
+load(":j2cl_common.bzl", "J2CL_TOOLCHAIN_ATTRS", "j2cl_common")
 load(":j2cl_js_common.bzl", "J2CL_JS_ATTRS", "JS_PROVIDER_NAME", "j2cl_js_provider")
 
 def _impl_j2cl_library(ctx):
