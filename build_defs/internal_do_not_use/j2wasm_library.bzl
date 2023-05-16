@@ -15,6 +15,7 @@ J2WASM_LIB_ATTRS = {
     "exports": attr.label_list(providers = [J2wasmInfo]),
     "plugins": attr.label_list(allow_rules = ["java_plugin", "java_library"], cfg = "exec"),
     "exported_plugins": attr.label_list(allow_rules = ["java_plugin", "java_library"], cfg = "exec"),
+    "optimize_autovalue": attr.bool(default = True),
     "javacopts": attr.string_list(),
 }
 
@@ -28,6 +29,10 @@ J2WASM_LIB_ATTRS.update({
 })
 
 def _impl_j2wasm_library_rule(ctx):
+    extra_javacopts = ["-Adagger.fastInit=enabled"]
+    if ctx.attr.optimize_autovalue:
+        extra_javacopts.append("-Acom.google.auto.value.OmitIdentifiers")
+
     plugin_provider = getattr(java_common, "JavaPluginInfo") if hasattr(java_common, "JavaPluginInfo") else JavaInfo
     return [j2wasm_common.compile(
         ctx = ctx,
@@ -38,7 +43,7 @@ def _impl_j2wasm_library_rule(ctx):
         plugins = [p[plugin_provider] for p in ctx.attr.plugins],
         exported_plugins = [p[plugin_provider] for p in ctx.attr.exported_plugins],
         output_jar = ctx.outputs.jar,
-        javac_opts = ctx.attr.javacopts,
+        javac_opts = extra_javacopts + ctx.attr.javacopts,
     )]
 
 def _j2wasm_or_js_providers_of(deps):
