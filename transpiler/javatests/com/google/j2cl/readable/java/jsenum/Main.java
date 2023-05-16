@@ -20,6 +20,7 @@ import java.util.Optional;
 import jsinterop.annotations.JsEnum;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsNonNull;
+import jsinterop.annotations.JsProperty;
 
 public class Main {
   interface Supplier<T> {
@@ -186,5 +187,17 @@ public class Main {
 
   static class Foo<T> {
     Foo(Optional<IntJsEnum> c) {}
+  }
+
+  @JsEnum
+  enum JsEnumWithRenamedProperties {
+    @JsProperty(name = "NAUGHT")
+    ZERO,
+    ONE,
+    TWO;
+
+    public int getValue() {
+      return ordinal();
+    }
   }
 }

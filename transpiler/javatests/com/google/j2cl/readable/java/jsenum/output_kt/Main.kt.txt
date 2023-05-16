@@ -236,4 +236,15 @@ open class Main {
  open class Foo<T> {
   constructor(c: Optional<Main.IntJsEnum>?)
  }
+
+ enum class JsEnumWithRenamedProperties {
+  ZERO,
+  ONE,
+  TWO;
+
+  @ObjCName("getValue")
+  fun getValue(): Int {
+   return this.ordinal
+  }
+ }
 }
