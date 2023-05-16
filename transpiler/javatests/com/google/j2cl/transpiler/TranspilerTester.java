@@ -23,6 +23,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.io.MoreFiles;
 import com.google.common.truth.Correspondence;
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.Problems;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -57,6 +58,27 @@ public class TranspilerTester {
   public static TranspilerTester newTesterWithDefaults() {
     return newTester()
         .setClassPathArg("transpiler/javatests/com/google/j2cl/transpiler/jre_bundle_deploy.jar");
+  }
+
+  /** Creates a new transpiler tester initialized with WASM defaults. */
+  public static TranspilerTester newTesterWithDefaultsWasm() {
+    return newTester()
+        .addArgs("-backend", "WASM")
+        .setClassPathArg(
+            "transpiler/javatests/com/google/j2cl/transpiler/jre_bundle-j2wasm_deploy.jar")
+        .addArgs("-defineForWasm", "J2WASM_DEBUG=TRUE")
+        .addArgs("-defineForWasm", "jre.strictFpToString=DISABLED")
+        .addArgs("-defineForWasm", "jre.checkedMode=ENABLED")
+        .addArgs("-defineForWasm", "jre.checks.checkLevel=NORMAL")
+        .addArgs("-defineForWasm", "jre.checks.bounds=AUTO")
+        .addArgs("-defineForWasm", "jre.checks.api=AUTO")
+        .addArgs("-defineForWasm", "jre.checks.numeric=AUTO")
+        .addArgs("-defineForWasm", "jre.checks.type=AUTO")
+        .addArgs("-defineForWasm", "jre.logging.logLevel=ALL")
+        .addArgs("-defineForWasm", "jre.logging.simpleConsoleHandler=ENABLED")
+        .addArgs("-defineForWasm", "jre.classMetadata=SIMPLE")
+        .addSourcePathArg(
+            "transpiler/javatests/com/google/j2cl/transpiler/jre_bundle-j2wasm_deploy-src.jar");
   }
 
   private abstract static class File {
@@ -239,6 +261,7 @@ public class TranspilerTester {
     return this;
   }
 
+  @CanIgnoreReturnValue
   public TranspilerTester addArgs(String... args) {
     return addArgs(Arrays.asList(args));
   }

@@ -140,7 +140,10 @@ j2wasm_library(
         ":jre_java_files-j2wasm",
     ],
     javacopts = JRE_JAVAC_OPTS,
-    visibility = ["//build_defs/internal_do_not_use:__pkg__"],
+    visibility = [
+        "//build_defs/internal_do_not_use:__pkg__",
+        "//transpiler/javatests/com/google/j2cl/transpiler:__pkg__",
+    ],
     deps = [
         ":j2wasm_jsutils",
         ":javaemul_internal_annotations-j2wasm",
@@ -209,6 +212,7 @@ java_library(
     name = "jre_bootclasspath-j2wasm",
     srcs = [":jre_java_files-j2wasm"],
     javacopts = JRE_JAVAC_OPTS,
+    visibility = ["//transpiler/javatests/com/google/j2cl/transpiler:__pkg__"],
     deps = [
         ":javaemul_internal_annotations",
         "//third_party:gwt-jsinterop-annotations",

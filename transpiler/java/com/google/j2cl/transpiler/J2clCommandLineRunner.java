@@ -18,6 +18,8 @@ import static com.google.j2cl.common.SourceUtils.checkSourceFiles;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.common.CommandLineTool;
 import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.OutputUtils.Output;
@@ -29,9 +31,12 @@ import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.Option;
+import org.kohsuke.args4j.spi.MapOptionHandler;
 
 /** A javac-like command line driver for J2clTranspiler. */
 public final class J2clCommandLineRunner extends CommandLineTool {
@@ -93,6 +98,12 @@ public final class J2clCommandLineRunner extends CommandLineTool {
   @Option(name = "-kotlincOptions", hidden = true)
   List<String> kotlincOptions = new ArrayList<>();
 
+  @Option(name = "-generateWasmExport", hidden = true)
+  List<String> wasmEntryPoints = new ArrayList<>();
+
+  @Option(name = "-defineForWasm", handler = MapOptionHandler.class, hidden = true)
+  Map<String, String> definesForWasm = new HashMap<>();
+
   private J2clCommandLineRunner() {
     super("j2cl");
   }
@@ -131,6 +142,8 @@ public final class J2clCommandLineRunner extends CommandLineTool {
         .setFrontend(this.frontEnd)
         .setKotlincOptions(ImmutableList.copyOf(kotlincOptions))
         .setBackend(this.backend)
+        .setWasmEntryPoints(ImmutableSet.copyOf(wasmEntryPoints))
+        .setDefinesForWasm(ImmutableMap.copyOf(definesForWasm))
         .build();
   }
 

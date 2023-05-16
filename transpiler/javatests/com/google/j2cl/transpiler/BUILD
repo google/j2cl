@@ -28,6 +28,23 @@ java_binary(
     runtime_deps = [":jre"],
 )
 
+java_import(
+    name = "jre-j2wasm",
+    jars = ["//jre/java:libjre-j2wasm.jar"],
+    srcjar = "//jre/java:libjre-j2wasm-src.jar",
+    tags = [
+        "incomplete-deps",
+    ],
+    deps = ["//jre/java:jre_bootclasspath-j2wasm"],
+)
+
+# A java_binary to create a merged jar of all deps of the standard runtime for Wasm.
+java_binary(
+    name = "jre_bundle-j2wasm",
+    create_executable = 0,
+    runtime_deps = [":jre-j2wasm"],
+)
+
 java_test(
     name = "CommandLineInvocationTest",
     srcs = ["CommandLineInvocationTest.java"],
@@ -74,6 +91,20 @@ java_test(
     data = [":jre_bundle_deploy.jar"],
     deps = [
         ":TranspilerTester",
+        "//third_party:junit",
+    ],
+)
+
+java_test(
+    name = "J2wasmTranspilerTest",
+    srcs = ["J2wasmTranspilerTest.java"],
+    data = [
+        ":jre_bundle-j2wasm_deploy.jar",
+        ":jre_bundle-j2wasm_deploy-src.jar",
+    ],
+    deps = [
+        ":TranspilerTester",
+        "//third_party:guava",
         "//third_party:junit",
     ],
 )
