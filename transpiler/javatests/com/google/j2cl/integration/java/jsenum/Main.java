@@ -34,6 +34,7 @@ import javaemul.internal.annotations.UncheckedCast;
 import jsinterop.annotations.JsEnum;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsProperty;
 
 public class Main {
 
@@ -62,14 +63,15 @@ public class Main {
 
   @JsEnum(isNative = true, namespace = "test")
   enum NativeEnum {
-    OK,
+    @JsProperty(name = "OK")
+    ACCEPT,
     CANCEL
   }
 
   private static void testNativeJsEnum() {
-    NativeEnum v = NativeEnum.OK;
+    NativeEnum v = NativeEnum.ACCEPT;
     switch (v) {
-      case OK:
+      case ACCEPT:
         break;
       case CANCEL:
         fail();
@@ -87,31 +89,31 @@ public class Main {
           }
         });
 
-    assertTrue(v == NativeEnum.OK);
+    assertTrue(v == NativeEnum.ACCEPT);
     assertTrue(v != NativeEnum.CANCEL);
     // Native JsEnums are not boxed.
     assertTrue(v == OK_STRING);
     assertTrue(v == (Object) StringNativeEnum.OK);
 
     // No boxing
-    Object o = NativeEnum.OK;
-    assertTrue(o == NativeEnum.OK);
+    Object o = NativeEnum.ACCEPT;
+    assertTrue(o == NativeEnum.ACCEPT);
 
     // Object methods calls on a variable of JsEnum type.
-    assertTrue(v.hashCode() == NativeEnum.OK.hashCode());
+    assertTrue(v.hashCode() == NativeEnum.ACCEPT.hashCode());
     assertTrue(v.hashCode() != NativeEnum.CANCEL.hashCode());
     assertTrue(v.hashCode() == StringNativeEnum.OK.hashCode());
     assertTrue(v.toString().equals(OK_STRING));
-    assertTrue(v.equals(NativeEnum.OK));
+    assertTrue(v.equals(NativeEnum.ACCEPT));
     assertTrue(v.equals(OK_STRING));
     assertTrue(v.equals(StringNativeEnum.OK));
 
     // Object methods calls on a variable of Object type.
-    assertTrue(o.hashCode() == NativeEnum.OK.hashCode());
+    assertTrue(o.hashCode() == NativeEnum.ACCEPT.hashCode());
     assertTrue(o.hashCode() != NativeEnum.CANCEL.hashCode());
     assertTrue(o.hashCode() == StringNativeEnum.OK.hashCode());
     assertTrue(o.toString().equals(OK_STRING));
-    assertTrue(o.equals(NativeEnum.OK));
+    assertTrue(o.equals(NativeEnum.ACCEPT));
     assertTrue(o.equals(OK_STRING));
     assertTrue(v.equals(StringNativeEnum.OK));
 
@@ -137,7 +139,7 @@ public class Main {
         },
         Boolean.class);
 
-    assertTrue(asSeenFromJs(NativeEnum.OK) == OK_STRING);
+    assertTrue(asSeenFromJs(NativeEnum.ACCEPT) == OK_STRING);
   }
 
   @JsMethod(name = "passThrough")
@@ -180,7 +182,7 @@ public class Main {
     assertTrue(v == StringNativeEnum.OK);
     assertTrue(v != StringNativeEnum.CANCEL);
     assertTrue((Object) v == OK_STRING);
-    assertTrue(v == (Object) NativeEnum.OK);
+    assertTrue(v == (Object) NativeEnum.ACCEPT);
 
     Object o = StringNativeEnum.OK;
     assertTrue(o == StringNativeEnum.OK);
@@ -190,7 +192,7 @@ public class Main {
     assertTrue(v.hashCode() != StringNativeEnum.CANCEL.hashCode());
     assertTrue(v.toString().equals(OK_STRING));
     assertTrue(v.equals(StringNativeEnum.OK));
-    assertTrue(v.equals(NativeEnum.OK));
+    assertTrue(v.equals(NativeEnum.ACCEPT));
     assertTrue(v.equals(OK_STRING));
 
     // Object methods calls on a variable of Object type.
@@ -198,7 +200,7 @@ public class Main {
     assertTrue(o.hashCode() != StringNativeEnum.CANCEL.hashCode());
     assertTrue(o.toString().equals(OK_STRING));
     assertTrue(o.equals(StringNativeEnum.OK));
-    assertTrue(o.equals(NativeEnum.OK));
+    assertTrue(o.equals(NativeEnum.ACCEPT));
     assertTrue(o.equals(OK_STRING));
 
     assertTrue(v.getValue().equals(v.toString()));
@@ -241,7 +243,7 @@ public class Main {
   }
 
   public static void testCastOnNative() {
-    castToNativeEnum(NativeEnum.OK);
+    castToNativeEnum(NativeEnum.ACCEPT);
     castToNativeEnum(StringNativeEnum.OK);
     castToNativeEnum(NumberNativeEnum.ONE);
     castToNativeEnum(PlainJsEnum.ONE);
@@ -250,7 +252,7 @@ public class Main {
     castToNativeEnum((Integer) 1);
 
     castToStringNativeEnum(StringNativeEnum.OK);
-    castToStringNativeEnum(NativeEnum.OK);
+    castToStringNativeEnum(NativeEnum.ACCEPT);
     castToStringNativeEnum(OK_STRING);
     assertThrowsClassCastException(() -> castToStringNativeEnum(NumberNativeEnum.ONE));
     assertThrowsClassCastException(() -> castToStringNativeEnum(PlainJsEnum.ONE));
@@ -259,7 +261,7 @@ public class Main {
 
     castToNumberNativeEnum(NumberNativeEnum.ONE);
     castToNumberNativeEnum((Double) 2.0);
-    assertThrowsClassCastException(() -> castToNumberNativeEnum(NativeEnum.OK));
+    assertThrowsClassCastException(() -> castToNumberNativeEnum(NativeEnum.ACCEPT));
     assertThrowsClassCastException(() -> castToNumberNativeEnum(StringNativeEnum.OK));
     assertThrowsClassCastException(() -> castToNumberNativeEnum(PlainJsEnum.ONE));
     assertThrowsClassCastException(() -> castToNumberNativeEnum((Integer) 1));
@@ -283,6 +285,7 @@ public class Main {
 
   @JsEnum
   enum PlainJsEnum {
+    @JsProperty(name = "NAUGHT")
     ZERO,
     ONE,
     TWO,
