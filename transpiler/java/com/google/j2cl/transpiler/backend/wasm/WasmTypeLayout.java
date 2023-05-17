@@ -55,15 +55,13 @@ abstract class WasmTypeLayout {
   }
 
   /** Returns all the methods that will be part of the vtable for the Java class. */
-  Collection<Method> getAllPolymorphicMethods() {
+  Collection<MethodDescriptor> getAllPolymorphicMethods() {
     return getAllPolymorphicMethodsByMangledName().values();
   }
 
   /** Returns the descriptor for the method implementing {@code methodDescriptor} in this type. */
   MethodDescriptor getImplementationMethod(MethodDescriptor methodDescriptor) {
-    return getAllPolymorphicMethodsByMangledName()
-        .get(methodDescriptor.getMangledName())
-        .getDescriptor();
+    return getAllPolymorphicMethodsByMangledName().get(methodDescriptor.getMangledName());
   }
 
   /**
@@ -73,8 +71,8 @@ abstract class WasmTypeLayout {
    * private methods that do not require dynamic dispatch.
    */
   @Memoized
-  Map<String, Method> getAllPolymorphicMethodsByMangledName() {
-    Map<String, Method> instanceMethodsByMangledName = new LinkedHashMap<>();
+  Map<String, MethodDescriptor> getAllPolymorphicMethodsByMangledName() {
+    Map<String, MethodDescriptor> instanceMethodsByMangledName = new LinkedHashMap<>();
     if (getWasmSupertypeLayout() != null) {
       instanceMethodsByMangledName.putAll(
           getWasmSupertypeLayout().getAllPolymorphicMethodsByMangledName());
@@ -82,7 +80,7 @@ abstract class WasmTypeLayout {
     for (Method method : getJavaType().getMethods()) {
       MethodDescriptor methodDescriptor = method.getDescriptor();
       if (methodDescriptor.isPolymorphic()) {
-        instanceMethodsByMangledName.put(methodDescriptor.getMangledName(), method);
+        instanceMethodsByMangledName.put(methodDescriptor.getMangledName(), methodDescriptor);
       }
     }
     return instanceMethodsByMangledName;

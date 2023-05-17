@@ -329,11 +329,7 @@ public class WasmModuleGenerator {
   /** Renders the struct for the vtable of a class. */
   private void renderClassVtableStruct(Type type) {
     WasmTypeLayout wasmTypeLayout = environment.getWasmTypeLayout(type.getDeclaration());
-    renderVtableStruct(
-        type,
-        wasmTypeLayout.getAllPolymorphicMethods().stream()
-            .map(Method::getDescriptor)
-            .collect(Collectors.toList()));
+    renderVtableStruct(type, wasmTypeLayout.getAllPolymorphicMethods());
   }
 
   /**
@@ -622,11 +618,7 @@ public class WasmModuleGenerator {
             environment.getWasmVtableGlobalName(typeDeclaration),
             environment.getWasmVtableTypeName(typeDeclaration)));
     builder.indent();
-    emitVtableInitialization(
-        typeDeclaration,
-        wasmTypeLayout.getAllPolymorphicMethods().stream()
-            .map(Method::getDescriptor)
-            .collect(toImmutableList()));
+    emitVtableInitialization(typeDeclaration, wasmTypeLayout.getAllPolymorphicMethods());
     builder.unindent();
     builder.newLine();
     builder.append(")");
@@ -721,7 +713,7 @@ public class WasmModuleGenerator {
    * interface it implements to implement interface dispatch.
    */
   private void emitVtableInitialization(
-      TypeDeclaration implementedType, List<MethodDescriptor> methodDescriptors) {
+      TypeDeclaration implementedType, Collection<MethodDescriptor> methodDescriptors) {
     builder.newLine();
     // Create an instance of the vtable for the type initializing it with the methods that are
     // passed in methodDescriptors.
