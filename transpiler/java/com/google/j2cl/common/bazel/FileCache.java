@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.j2cl.tools.rta;
+package com.google.j2cl.common.bazel;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
@@ -31,9 +31,10 @@ import java.util.concurrent.ForkJoinPool;
  * <p>The cache makes sure that if the underlying file is updated, the output will be refreshed as
  * well.
  */
-final class FileCache<T> {
+public final class FileCache<T> {
 
-  interface FileFunction<V> {
+  /** Interface for function to obtain the information to cache for a file. */
+  public interface FileFunction<V> {
     V apply(Path path) throws IOException;
   }
 
@@ -67,7 +68,7 @@ final class FileCache<T> {
     }
 
     private T get() {
-      // Note that the method is not syncronized and it is ok to calculate cached object twice in
+      // Note that the method is not synchronized and it is ok to calculate cached object twice in
       // case of unlike event of a race condition.
       try {
         FileTime newLastModified = Files.getLastModifiedTime(path);
