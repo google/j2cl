@@ -136,11 +136,12 @@ import org.eclipse.jdt.core.dom.VariableDeclaration;
 /** Creates a J2CL Java AST from the AST provided by JDT. */
 public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
+  private final JdtEnvironment environment = new JdtEnvironment();
+
   private class ASTConverter {
     private org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit;
     private final Map<IVariableBinding, Variable> variableByJdtBinding = new HashMap<>();
     private final Map<String, Label> labelsInScope = new HashMap<>();
-    private final JdtEnvironment environment = new JdtEnvironment();
 
     private CompilationUnit convert(
         String sourceFilePath,

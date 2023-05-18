@@ -950,6 +950,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return checkNotNull(TypeDescriptors.getPrimitiveTypeFromBoxType(this));
   }
 
+  @Memoized
   @Override
   public DeclaredTypeDescriptor toNullable() {
     if (isNullable()) {
@@ -959,6 +960,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return DeclaredTypeDescriptor.Builder.from(this).setNullable(true).build();
   }
 
+  @Memoized
   @Override
   public DeclaredTypeDescriptor toNonNullable() {
     if (!isNullable()) {
