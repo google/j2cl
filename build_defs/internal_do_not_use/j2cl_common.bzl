@@ -290,8 +290,9 @@ def _j2cl_transpile(
     if hasattr(ctx.executable, "j2cl_transpiler_override"):
         j2cl_transpiler_override = ctx.executable.j2cl_transpiler_override
 
+    output_type = "JavaScript" if backend == "CLOSURE" else "Wasm (Modular)"
     ctx.actions.run(
-        progress_message = "Transpiling to JavaScript %s" % ctx.label,
+        progress_message = "Transpiling to %s %s" % (output_type, ctx.label),
         # kt_common_srcs are not read by the transpiler as they are already
         # included in the srcjars of srcs. However, params.add_all requires them
         # to be inputs in order to be properly expanded out into params.

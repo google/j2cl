@@ -16,6 +16,9 @@ def _j2wasm_import_impl(ctx):
         _private_ = struct(
             transitive_srcs = depset(),
             transitive_classpath = java_info.compile_jars,
+            wasm_modular_info = struct(
+                transitive_modules = depset(),
+            ),
             java_info = java_info,
             js_info = j2cl_js_provider(ctx),
         ),

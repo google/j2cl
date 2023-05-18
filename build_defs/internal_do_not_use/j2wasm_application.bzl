@@ -49,6 +49,7 @@ def _impl_j2wasm_application(ctx):
     deps = ctx.attr.deps + [ctx.attr._jre]
     srcs = _get_transitive_srcs(deps)
     classpath = _get_transitive_classpath(deps)
+    module_outputs = _get_transitive_modules(deps)
 
     runfiles = []
     outputs = []
@@ -91,6 +92,21 @@ def _impl_j2wasm_application(ctx):
         outputs = [ctx.outputs.jsimports],
         # TODO(b/176105504): Link instead copying when Blaze native tree support lands.
         command = "cp %s/imports.txt %s" % (transpile_out.path, ctx.outputs.jsimports.path),
+    )
+
+    # Bundle the module outputs.
+    bundler_args = ctx.actions.args()
+    bundler_args.add_all(module_outputs.to_list(), expand_directories = False)
+    bundler_args.add("-output", ctx.outputs.bundle)
+    ctx.actions.run(
+        progress_message = "Bundling modules for Wasm %s" % ctx.label,
+        inputs = module_outputs,
+        outputs = [ctx.outputs.bundle],
+        executable = ctx.executable._bundler,
+        arguments = [bundler_args],
+        env = dict(LANG = "en_US.UTF-8"),
+        execution_requirements = {"supports-workers": "1"},
+        mnemonic = "J2wasm",
     )
 
     debug_dir_name = ctx.label.name + "_debug"
@@ -201,7 +217,16 @@ def _impl_j2wasm_application(ctx):
     )
 
     return [
-        DefaultInfo(data_runfiles = ctx.runfiles(files = runfiles)),
+        DefaultInfo(
+            files = depset([
+                ctx.outputs.wat,
+                ctx.outputs.wasm,
+                ctx.outputs.srcmap,
+                ctx.outputs.jsimports,
+                ctx.outputs.symbolmap,
+            ]),
+            data_runfiles = ctx.runfiles(files = runfiles),
+        ),
         OutputGroupInfo(_validation = _trigger_javac_build(ctx.attr.deps)),
         js_info,
     ]
@@ -211,6 +236,9 @@ def _get_transitive_srcs(deps):
 
 def _get_transitive_classpath(deps):
     return depset(transitive = [d[J2wasmInfo]._private_.transitive_classpath for d in deps])
+
+def _get_transitive_modules(deps):
+    return depset(transitive = [d[J2wasmInfo]._private_.wasm_modular_info.transitive_modules for d in deps])
 
 _STAGE_SEPARATOR = "--NEW_STAGE--"
 
@@ -251,6 +279,13 @@ _J2WASM_APP_ATTRS = {
             "//build_defs/internal_do_not_use:binaryen",
         ),
     ),
+    "_bundler": attr.label(
+        cfg = "exec",
+        executable = True,
+        default = Label(
+            "//build_defs/internal_do_not_use:J2wasmBundler",
+        ),
+    ),
 }
 _J2WASM_APP_ATTRS.update(J2CL_JS_TOOLCHAIN_ATTRS)
 
@@ -264,6 +299,7 @@ _j2wasm_application = rule(
         "srcmap": "%{name}.wasm.map",
         "jsimports": "%{name}.imports.js.txt",
         "symbolmap": "%{name}.symbols",
+        "bundle": "%{name}.bundle",
     },
 )
 

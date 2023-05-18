@@ -16,7 +16,7 @@
 package com.google.j2cl.transpiler.backend;
 
 import com.google.common.collect.ImmutableList;
-import com.google.j2cl.common.InternalCompilerError;
+import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.backend.closure.OutputGeneratorStage;
@@ -475,6 +475,10 @@ public enum Backend {
   WASM_MODULAR {
     @Override
     public void generateOutputs(BackendOptions options, Library library, Problems problems) {
+      // TODO(b/283154838): Add the modular summaries and the library info output.
+      if (options.getLibraryInfoOutput() != null) {
+        OutputUtils.writeToFile(options.getLibraryInfoOutput(), new byte[0], problems);
+      }
       new WasmModuleGenerator(options.getOutput(), options.getWasmEntryPoints(), problems)
           .generateOutputs(library);
     }
@@ -501,7 +505,6 @@ public enum Backend {
           /* enableWasm= */ true,
           /* isNullMarkedSupported= */ options.isNullMarkedSupported(),
           /* optimizeAutoValue= */ options.getOptimizeAutoValue());
-      throw new InternalCompilerError("WASM_MODULAR backend is unimplemented.");
     }
 
     @Override
@@ -524,7 +527,8 @@ public enum Backend {
           MoveNestedClassesToTop::new,
           BridgeMethodsCreator::new,
           EnumMethodsCreator::new,
-          () -> new ImplementSystemGetProperty(options.getDefinesForWasm()),
+          // TODO(b/283156060): Implement the modular version of System.getProperty.
+          // () -> new ImplementSystemGetProperty(options.getDefinesForWasm()),
           NormalizeTryWithResources::new,
           NormalizeCatchClauses::new,
           NormalizeOverlayMembers::new,
@@ -581,6 +585,7 @@ public enum Backend {
           ExtractNonIdempotentExpressions::new,
           NormalizeMultiExpressions::new,
           InsertWasmExternConversions::new,
+          ImplementFinallyViaControlFlow::new,
 
           // Needs to run at the end as the types in the ast will be invalid after the pass.
           ImplementArraysAsClasses::new,
@@ -588,7 +593,8 @@ public enum Backend {
 
           // Passes required for immutable fields.
           MakeFieldsFinal::new,
-          NormalizeInstantiationThroughFactoryMethods::new,
+          // TODO(b/283154656): Fork the instantiation code for the modular pipeline.
+          // NormalizeInstantiationThroughFactoryMethods::new,
           NormalizeNullLiterals::new,
           RemoveIsInstanceMethods::new,
           RemoveNoopStatements::new,
@@ -597,8 +603,10 @@ public enum Backend {
           // Post-verifications
           VerifySingleAstReference::new,
           VerifyParamAndArgCounts::new,
-          VerifyReferenceScoping::new,
-          () -> new VerifyNormalizedUnits(/* verifyForWasm= **/ true));
+          VerifyReferenceScoping::new
+          // TODO(b/283154833): Add the invariants for modular_wasm
+          // () -> new VerifyNormalizedUnits(/* verifyForWasm= **/ true)
+          );
     }
 
     @Override

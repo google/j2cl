@@ -47,6 +47,9 @@ def _compile(
 
 def _create_j2wasm_provider(j2cl_provider, js_provider, deps):
     j2wasm_deps = [d for d in deps if hasattr(d, "_is_j2cl_provider")]
+
+    # The output_js could be "None" if there are no sources.
+    modular_output = [j2cl_provider._private_.output_js] if j2cl_provider._private_.output_js else []
     return J2wasmInfo(
         _private_ = struct(
             transitive_srcs = depset(
@@ -58,7 +61,16 @@ def _create_j2wasm_provider(j2cl_provider, js_provider, deps):
             ),
             java_info = j2cl_provider._private_.java_info,
             js_info = js_provider,
-            wasm_modular_info = j2cl_provider,
+            wasm_modular_info = struct(
+                transitive_modules = depset(
+                    modular_output,
+                    transitive = [
+                        d._private_.wasm_modular_info.transitive_modules
+                        for d in j2wasm_deps
+                    ],
+                ),
+                provider = j2cl_provider,
+            ),
         ),
         _is_j2cl_provider = 1,
     )

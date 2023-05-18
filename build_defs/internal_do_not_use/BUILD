@@ -111,6 +111,11 @@ alias(
 )
 
 alias(
+    name = "J2wasmBundler",
+    actual = "//tools/java/com/google/j2cl/tools/bundler:J2wasmBundler_worker",
+)
+
+alias(
     name = "binaryen",
     actual = "//third_party:binaryen",
 )
