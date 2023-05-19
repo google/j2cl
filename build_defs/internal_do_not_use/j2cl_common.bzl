@@ -27,11 +27,14 @@ def _compile(
 
     jvm_srcs, js_srcs = split_srcs(srcs)
 
-    has_srcs_to_transpile = jvm_srcs or kt_common_srcs
+    # TODO(b/283501840): Reenable WASM_MODULAR after indexing issue is fixed.
+    enabled = backend != "WASM_MODULAR"
+
+    has_srcs_to_transpile = (jvm_srcs or kt_common_srcs) and enabled
     has_kotlin_srcs = any([src for src in jvm_srcs if src.extension == "kt"]) or kt_common_srcs
 
     # Validate the attributes.
-    if not has_srcs_to_transpile:
+    if not has_srcs_to_transpile and enabled:
         if deps:
             fail("deps not allowed without java or kotlin srcs")
         if js_srcs:

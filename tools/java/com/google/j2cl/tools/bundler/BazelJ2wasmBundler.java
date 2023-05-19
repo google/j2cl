@@ -27,6 +27,7 @@ import com.google.j2cl.common.bazel.FileCache;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.Option;
@@ -40,8 +41,9 @@ final class BazelJ2wasmBundler extends BazelWorker {
   private static final FileCache<String> moduleContents =
       new FileCache<>(BazelJ2wasmBundler::readModule, CACHE_SIZE);
 
-  @Argument(required = true, usage = "The list of modular oputput directories", multiValued = true)
-  List<String> inputs = null;
+  // TODO(b/283501840): make argument required after indexing issue is fixed.
+  @Argument(required = false, usage = "The list of modular oputput directories", multiValued = true)
+  List<String> inputs = new ArrayList<>();
 
   @Option(
       name = "-output",
