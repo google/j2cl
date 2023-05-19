@@ -15,7 +15,6 @@
  */
 package java.util;
 
-import static javaemul.internal.InternalPreconditions.checkArgument;
 import static javaemul.internal.InternalPreconditions.checkState;
 
 import javaemul.internal.ArrayHelper;
@@ -113,26 +112,14 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> implements 
     }
   }
 
-  private EnumSet<K> keySet;
+  private EnumSet<K> keySet = new EnumSet<K>();
 
-  private V[] values;
+  private V[] values = (V[]) new Object[0];
 
-  public EnumMap(Class<K> type) {
-    init(type);
-  }
-
-  public EnumMap(EnumMap<K, ? extends V> m) {
-    init(m);
-  }
+  public EnumMap(Class<K> type) {}
 
   public EnumMap(Map<K, ? extends V> m) {
-    if (m instanceof EnumMap) {
-      init((EnumMap<K, ? extends V>) m);
-    } else {
-      checkArgument(!m.isEmpty(), "Specified map is empty");
-      init(m.keySet().iterator().next().getDeclaringClass());
-      putAll(m);
-    }
+    putAll(m);
   }
 
   @SuppressWarnings("unchecked")
@@ -199,16 +186,5 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> implements 
 
   private int asOrdinal(Object key) {
     return asKey(key).ordinal();
-  }
-
-  @SuppressWarnings("unchecked")
-  private void init(Class<K> type) {
-    keySet = EnumSet.noneOf(type);
-    values = (V[]) new Object[keySet.capacity()];
-  }
-
-  private void init(EnumMap<K, ? extends V> m) {
-    keySet = m.keySet.clone();
-    values = ArrayHelper.clone(m.values);
   }
 }

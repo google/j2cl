@@ -117,11 +117,6 @@ public class EnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clonea
     return EnumSet.copyOf(this);
   }
 
-  // Used in EnumMap.
-  int capacity() {
-    return size();
-  }
-
   // TODO(b/138399086): Remove these from the API if possible to make it a compile time error.
   public static <E extends Enum<E>> EnumSet<E> complementOf(EnumSet<E> other) {
     throw new UnsupportedOperationException();
