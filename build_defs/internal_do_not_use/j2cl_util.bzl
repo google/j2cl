@@ -33,16 +33,21 @@ def get_java_path(path):
 def _get_java_segments(path):
     segments = path.split("/")
 
-    # Find different root start indecies based on potential java roots.
-    java_root_start_indecies = [_find(segments, root) for root in ["java", "javatests", "kotlin"]]
+    # Find different root start indices based on potential java roots.
+    java_root_start_indices = [_find(segments, root) for root in ["java", "javatests"]]
 
     # Choose the root that starts latest.
-    start_index = max(java_root_start_indecies)
+    start_index = max(java_root_start_indices)
 
-    if start_index < 0:
-        # return segments as workspace-rooted if no matches are found from source root
-        return segments
-    return segments[start_index + 1:]
+    kotlin_start_index = _find(segments, "kotlin")
+
+    if start_index >= 0:
+        return segments[start_index + 1:]
+    elif kotlin_start_index >= 0:
+        return segments[kotlin_start_index + 1:]
+
+    # return segments as workspace-rooted if no matches are found from source root
+    return segments
 
 def _find(segments, s):
     for i in reversed(range(len(segments))):
