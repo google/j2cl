@@ -591,14 +591,11 @@ public enum Backend {
           ImplementArraysAsClasses::new,
           InsertExceptionConversionsWasm::new,
 
-          // Passes required for immutable fields.
-          MakeFieldsFinal::new,
           // TODO(b/283154656): Fork the instantiation code for the modular pipeline.
           // NormalizeInstantiationThroughFactoryMethods::new,
           NormalizeNullLiterals::new,
           RemoveIsInstanceMethods::new,
           RemoveNoopStatements::new,
-          UpgradeInterfaceDispatch::new,
 
           // Post-verifications
           VerifySingleAstReference::new,
