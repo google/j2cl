@@ -68,6 +68,8 @@ def gen_j2cl_tests(
             plugins = lib_plugins + plugins,
             testonly = 1,
             generate_build_test = generate_build_test,
+            # Safe here as this is for tests only and there are no downstream users.
+            experimental_enable_jspecify_support_do_not_enable_without_jspecify_static_checking_or_you_might_cause_an_outage = 1,
         )
 
     for test_file in test_files:
