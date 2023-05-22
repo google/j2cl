@@ -27,8 +27,9 @@ def _compile(
 
     jvm_srcs, js_srcs = split_srcs(srcs)
 
-    # TODO(b/283501840): Reenable WASM_MODULAR after indexing issue is fixed.
-    enabled = backend != "WASM_MODULAR"
+    # TODO(b/283155439): Remove hack when j2wasm protos have their own aspect and the
+    # modular compilation action is no longer triggered when building grok output.
+    enabled = backend != "WASM_MODULAR" or not ctx.var.get("GROK_ELLIPSIS_BUILD", None)
 
     has_srcs_to_transpile = (jvm_srcs or kt_common_srcs) and enabled
     has_kotlin_srcs = any([src for src in jvm_srcs if src.extension == "kt"]) or kt_common_srcs

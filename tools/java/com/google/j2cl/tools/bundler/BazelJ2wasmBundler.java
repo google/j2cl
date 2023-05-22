@@ -41,7 +41,8 @@ final class BazelJ2wasmBundler extends BazelWorker {
   private static final FileCache<String> moduleContents =
       new FileCache<>(BazelJ2wasmBundler::readModule, CACHE_SIZE);
 
-  // TODO(b/283501840): make argument required after indexing issue is fixed.
+  // TODO(b/283155439): make argument required after indexing issue is fixed to not trigger the
+  // j2wasm build.
   @Argument(required = false, usage = "The list of modular oputput directories", multiValued = true)
   List<String> inputs = new ArrayList<>();
 
