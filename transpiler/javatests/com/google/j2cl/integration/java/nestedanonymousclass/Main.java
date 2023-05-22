@@ -15,6 +15,7 @@
  */
 package nestedanonymousclass;
 
+import static com.google.j2cl.integration.testing.Asserts.assertSame;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 /**
@@ -54,7 +55,8 @@ public class Main {
 
     InterfaceWithThisReference o = new InterfaceWithThisReference() {};
     // TODO(b/178447142): Uncomment when the bug is fixed.
-    // assertSame(o, o.foo());
+    assertSame(o, o.foo());
+    assertSame(o, o.baz());
   }
 
   interface InterfaceWithThisReference {
@@ -65,6 +67,16 @@ public class Main {
         }
       }
       return new Super() {}.bar();
+    }
+
+    default Object baz() {
+      class Super implements InterfaceWithThisReference {
+        Object bar() {
+          return InterfaceWithThisReference.this;
+        }
+      }
+      class Sub extends Super {}
+      return new Sub().bar();
     }
   }
 }

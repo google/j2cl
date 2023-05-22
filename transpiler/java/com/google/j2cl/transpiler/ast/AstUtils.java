@@ -184,7 +184,7 @@ public final class AstUtils {
         fromMethodDescriptor,
         toMethodDescriptor,
         jsDocDescription,
-        /* isStaticDispatch */ false);
+        /* isStaticDispatch= */ false);
   }
 
   private static Method createForwardingMethod(
@@ -1073,11 +1073,63 @@ public final class AstUtils {
     }
   }
 
+  /** Sets the implicit qualifier for a member reference if it needs a qualifier. */
+  public static MemberReference resolveImplicitQualifier(
+      MemberReference memberReference, DeclaredTypeDescriptor contextTypeDescriptor) {
+    MemberDescriptor target = memberReference.getTarget();
+    DeclaredTypeDescriptor targetQualifierType = getTargetQualifierTypeDescriptor(target);
+    if (memberReference.getQualifier() != null || targetQualifierType == null) {
+      return memberReference;
+    }
+
+    // Normally unqualified instance references would get the implicit instance of the current type
+    // as their qualifier, but this() and super() constructor calls can never be qualified by
+    // themselves (they happen in the constructor and the implicit instance is the one being
+    // constructed). In this case the enclosing instance of the class is the starting point of the
+    // search of for the qualifier.
+    contextTypeDescriptor =
+        memberReference instanceof MethodCall && target.isConstructor()
+            ? contextTypeDescriptor.getEnclosingTypeDescriptor()
+            : contextTypeDescriptor;
+
+    return MemberReference.Builder.from(memberReference)
+        .setQualifier(createImplicitQualifierExpression(contextTypeDescriptor, targetQualifierType))
+        .build();
+  }
+
+  @Nullable
+  private static DeclaredTypeDescriptor getTargetQualifierTypeDescriptor(
+      MemberDescriptor memberDescriptor) {
+    if (memberDescriptor.isStatic()) {
+      return null;
+    }
+
+    DeclaredTypeDescriptor typeContainingMember = memberDescriptor.getEnclosingTypeDescriptor();
+    if (memberDescriptor.isConstructor()) {
+      if (!typeContainingMember.getTypeDeclaration().isCapturingEnclosingInstance()) {
+        return null;
+      }
+      // Return the type that is captured which is the enclosing instance.
+      // E.g.
+      //  class A {
+      //    class B {
+      //      B() {}
+      //    }
+      //  }
+      //
+      // The enclosing type of the constructor B() is the type B, but the qualifier that is needed
+      // for creating instances (a.new B()) is A, the enclosing type of the class B.
+      return typeContainingMember.getEnclosingTypeDescriptor();
+    }
+    return typeContainingMember;
+  }
+
   /**
    * Given a target type (where the field or method is declared) and a context type, finds the
-   * closest enclosing type of the context type that is a subclass of the target type.
+   * closest enclosing type of the context type that is a subclass of the target type and creates a
+   * (qualified) this reference.
    */
-  public static Expression resolveImplicitQualifier(
+  private static Expression createImplicitQualifierExpression(
       DeclaredTypeDescriptor contextTypeDescriptor, DeclaredTypeDescriptor targetTypeDescriptor) {
     // The implicit qualifier is the first class from inner to outer context that has
     // a targetTypeDescriptor supertype.
@@ -1085,8 +1137,11 @@ public final class AstUtils {
         qualifierTypeDescriptor != null;
         qualifierTypeDescriptor = qualifierTypeDescriptor.getEnclosingTypeDescriptor()) {
       if (qualifierTypeDescriptor.isSubtypeOf(targetTypeDescriptor)) {
-        // If the reference is to an enclosing type, then mark it as qualified.
-        boolean isQualified = !qualifierTypeDescriptor.hasSameRawType(contextTypeDescriptor);
+        // If the reference is to an enclosing type or to an interface type, then mark it as
+        // qualified to make it consistent of how a user should write it in the source code.
+        boolean isQualified =
+            !qualifierTypeDescriptor.hasSameRawType(contextTypeDescriptor)
+                || qualifierTypeDescriptor.isInterface();
         return new ThisReference(qualifierTypeDescriptor, isQualified);
       }
     }

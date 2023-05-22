@@ -23,7 +23,6 @@ import com.google.common.collect.Iterables;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
-import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
@@ -62,25 +61,17 @@ public class InsertExplicitSuperCalls extends NormalizationPass {
 
   private static void synthesizeSuperCall(Method constructor, Type type) {
     MethodDescriptor superConstructor = getDefaultSuperConstructorTarget(type);
+    MethodCall superMethodCall =
+        MethodCall.Builder.from(superConstructor)
+            .setArguments(AstUtils.maybePackageVarargs(superConstructor, ImmutableList.of()))
+            .build();
 
-    // If the super class is a nested inner class, we need to resolve the qualifier of the super()
-    // call explicitly at this time. The pass that resolves the implicit qualifiers has already run
-    // by now.
-    Expression qualifier =
-        type.getSuperTypeDescriptor().getTypeDeclaration().isCapturingEnclosingInstance()
-            ? AstUtils.resolveImplicitQualifier(
-                type.getDeclaration().toUnparameterizedTypeDescriptor(),
-                type.getSuperTypeDescriptor().getEnclosingTypeDescriptor())
-            : null;
     constructor
         .getBody()
         .getStatements()
         .add(
             0,
-            MethodCall.Builder.from(superConstructor)
-                .setArguments(AstUtils.maybePackageVarargs(superConstructor, ImmutableList.of()))
-                .setQualifier(qualifier)
-                .build()
+            AstUtils.resolveImplicitQualifier(superMethodCall, type.getTypeDescriptor())
                 .makeStatement(constructor.getBody().getSourcePosition()));
   }
 

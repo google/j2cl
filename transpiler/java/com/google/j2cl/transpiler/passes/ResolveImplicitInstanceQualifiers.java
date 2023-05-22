@@ -16,8 +16,6 @@ package com.google.j2cl.transpiler.passes;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
-import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
-import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.MemberReference;
 
 /** Resolves implicit qualifiers for instance members and constructors. */
@@ -29,35 +27,9 @@ public class ResolveImplicitInstanceQualifiers extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public MemberReference rewriteMemberReference(MemberReference memberReference) {
-            if (!needsImplicitQualifierResolution(memberReference)) {
-              return memberReference;
-            }
-            MemberDescriptor memberDescriptor = memberReference.getTarget();
-            DeclaredTypeDescriptor targetType = memberDescriptor.getEnclosingTypeDescriptor();
-
-            // The target type for this/super constructor calls is the enclosing instance.
-            targetType =
-                memberDescriptor.isConstructor()
-                    ? targetType.getEnclosingTypeDescriptor()
-                    : targetType;
-
-            return MemberReference.Builder.from(memberReference)
-                .setQualifier(
-                    AstUtils.resolveImplicitQualifier(
-                        getCurrentType().getTypeDescriptor(), targetType))
-                .build();
+            return AstUtils.resolveImplicitQualifier(
+                memberReference, getCurrentType().getTypeDescriptor());
           }
         });
-  }
-
-  private boolean needsImplicitQualifierResolution(MemberReference memberReference) {
-    if (memberReference.getQualifier() != null) {
-      return false;
-    }
-    MemberDescriptor memberDescriptor = memberReference.getTarget();
-    DeclaredTypeDescriptor targetType = memberDescriptor.getEnclosingTypeDescriptor();
-    return memberDescriptor.isInstanceMember()
-        || (memberDescriptor.isConstructor()
-            && targetType.getTypeDeclaration().isCapturingEnclosingInstance());
   }
 }
