@@ -143,6 +143,7 @@ import com.google.j2cl.transpiler.passes.OptimizeAutoValue;
 import com.google.j2cl.transpiler.passes.OptimizeEnums;
 import com.google.j2cl.transpiler.passes.PropagateConstants;
 import com.google.j2cl.transpiler.passes.PropagateNullabilityKotlin;
+import com.google.j2cl.transpiler.passes.RecoverShortcutBooleanOperator;
 import com.google.j2cl.transpiler.passes.RemoveAssertStatements;
 import com.google.j2cl.transpiler.passes.RemoveIsInstanceMethods;
 import com.google.j2cl.transpiler.passes.RemoveNativeTypes;
@@ -196,7 +197,8 @@ public enum Backend {
           ResolveImplicitInstanceQualifiers::new,
           () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ true),
           RestoreVariableScoping::new,
-          NormalizeSuperMemberReferences::new);
+          NormalizeSuperMemberReferences::new,
+          RecoverShortcutBooleanOperator::new);
     }
 
     @Override
