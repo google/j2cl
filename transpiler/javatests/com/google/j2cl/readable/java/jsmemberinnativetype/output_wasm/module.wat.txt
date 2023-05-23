@@ -5,7 +5,7 @@
   )
  )
  (type $jsmemberinnativetype.MyNativeType.$Overlay.vtable (struct 
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   )
  )
  (type $jsmemberinnativetype.MyNativeType.$Overlay.itable (struct_subtype 
@@ -23,7 +23,7 @@
 ;;; Code for jsmemberinnativetype.MyNativeType.$Overlay [vtable.init]
 (global $jsmemberinnativetype.MyNativeType.$Overlay.vtable (ref $jsmemberinnativetype.MyNativeType.$Overlay.vtable) 
  (struct.new $jsmemberinnativetype.MyNativeType.$Overlay.vtable
-  (ref.func $m_getClass__java_lang_Class@jsmemberinnativetype.MyNativeType.$Overlay)
+  (ref.func $$getClassImpl__java_lang_Class@jsmemberinnativetype.MyNativeType.$Overlay)
  )
 )
 
@@ -101,9 +101,9 @@
  )
 )
 
-;;; Class<?> $Overlay.getClass()
-(func $m_getClass__java_lang_Class@jsmemberinnativetype.MyNativeType.$Overlay
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsmemberinnativetype.MyNativeType.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsmemberinnativetype.MyNativeType.$Overlay))
@@ -113,7 +113,7 @@
   (return (call $function.no.side.effects.$getJsmemberinnativetype.MyNativeType.$Overlay__java_lang_Class (ref.func $$getJsmemberinnativetype.MyNativeType.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@jsmemberinnativetype.MyNativeType.$Overlay)
+(elem declare func $$getClassImpl__java_lang_Class@jsmemberinnativetype.MyNativeType.$Overlay)
 
 ;;; Code for jsmemberinnativetype.MyNativeType [methods]
 

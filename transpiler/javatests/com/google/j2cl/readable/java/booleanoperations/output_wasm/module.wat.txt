@@ -10,6 +10,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_test__void (ref $function.m_test__void))
    $java.lang.Object.vtable)
  )
@@ -36,6 +37,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $booleanoperations.BooleanOperations.1Outer.Inner.itable (struct_subtype 
@@ -62,6 +64,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $booleanoperations.BooleanOperations.1Outer.itable (struct_subtype 
@@ -80,7 +83,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@booleanoperations.BooleanOperations)
   (ref.func $m_test__void@booleanoperations.BooleanOperations)
  )
 )
@@ -102,7 +106,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations.1Outer.Inner)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@booleanoperations.BooleanOperations.1Outer.Inner)
  )
 )
 
@@ -123,7 +128,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations.1Outer)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@booleanoperations.BooleanOperations.1Outer)
  )
 )
 
@@ -427,9 +433,9 @@
  )
 )
 
-;;; Class<?> BooleanOperations.getClass()
-(func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> BooleanOperations.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@booleanoperations.BooleanOperations
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $booleanoperations.BooleanOperations))
@@ -439,7 +445,7 @@
   (return (call $function.no.side.effects.$getBooleanoperations.BooleanOperations__java_lang_Class (ref.func $$getBooleanoperations.BooleanOperations__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations)
+(elem declare func $$getClassImpl__java_lang_Class@booleanoperations.BooleanOperations)
 
 ;;; Code for booleanoperations.BooleanOperations.1Outer.Inner [methods]
 
@@ -513,9 +519,9 @@
  )
 )
 
-;;; Class<?> Inner.getClass()
-(func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations.1Outer.Inner
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Inner.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@booleanoperations.BooleanOperations.1Outer.Inner
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $booleanoperations.BooleanOperations.1Outer.Inner))
@@ -525,7 +531,7 @@
   (return (call $function.no.side.effects.$getBooleanoperations.BooleanOperations.1Outer.Inner__java_lang_Class (ref.func $$getBooleanoperations.BooleanOperations.1Outer.Inner__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations.1Outer.Inner)
+(elem declare func $$getClassImpl__java_lang_Class@booleanoperations.BooleanOperations.1Outer.Inner)
 
 ;;; Code for booleanoperations.BooleanOperations.1Outer [methods]
 
@@ -585,9 +591,9 @@
  )
 )
 
-;;; Class<?> Outer.getClass()
-(func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations.1Outer
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Outer.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@booleanoperations.BooleanOperations.1Outer
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $booleanoperations.BooleanOperations.1Outer))
@@ -597,4 +603,4 @@
   (return (call $function.no.side.effects.$getBooleanoperations.BooleanOperations.1Outer__java_lang_Class (ref.func $$getBooleanoperations.BooleanOperations.1Outer__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations.1Outer)
+(elem declare func $$getClassImpl__java_lang_Class@booleanoperations.BooleanOperations.1Outer)

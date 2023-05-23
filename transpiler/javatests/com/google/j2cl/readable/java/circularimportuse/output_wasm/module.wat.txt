@@ -10,6 +10,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_createRight__circularimportuse_Right_$pp_circularimportuse (ref $function.m_createRight__circularimportuse_Right_$pp_circularimportuse))
    $java.lang.Object.vtable)
  )
@@ -35,6 +36,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $circularimportuse.Main.itable (struct_subtype 
@@ -59,6 +61,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_createLeft__circularimportuse_Left_$pp_circularimportuse (ref $function.m_createLeft__circularimportuse_Left_$pp_circularimportuse))
    $java.lang.Object.vtable)
  )
@@ -78,7 +81,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@circularimportuse.Left)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@circularimportuse.Left)
   (ref.func $m_createRight__circularimportuse_Right_$pp_circularimportuse@circularimportuse.Left)
  )
 )
@@ -100,7 +104,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@circularimportuse.Main)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@circularimportuse.Main)
  )
 )
 
@@ -121,7 +126,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@circularimportuse.Right)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@circularimportuse.Right)
   (ref.func $m_createLeft__circularimportuse_Left_$pp_circularimportuse@circularimportuse.Right)
  )
 )
@@ -218,9 +224,9 @@
  )
 )
 
-;;; Class<?> Left.getClass()
-(func $m_getClass__java_lang_Class@circularimportuse.Left
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Left.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@circularimportuse.Left
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $circularimportuse.Left))
@@ -230,7 +236,7 @@
   (return (call $function.no.side.effects.$getCircularimportuse.Left__java_lang_Class (ref.func $$getCircularimportuse.Left__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@circularimportuse.Left)
+(elem declare func $$getClassImpl__java_lang_Class@circularimportuse.Left)
 
 ;;; Code for circularimportuse.Main [methods]
 
@@ -307,9 +313,9 @@
  )
 )
 
-;;; Class<?> Main.getClass()
-(func $m_getClass__java_lang_Class@circularimportuse.Main
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Main.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@circularimportuse.Main
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $circularimportuse.Main))
@@ -319,7 +325,7 @@
   (return (call $function.no.side.effects.$getCircularimportuse.Main__java_lang_Class (ref.func $$getCircularimportuse.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@circularimportuse.Main)
+(elem declare func $$getClassImpl__java_lang_Class@circularimportuse.Main)
 
 ;;; Code for circularimportuse.Right [methods]
 
@@ -393,9 +399,9 @@
  )
 )
 
-;;; Class<?> Right.getClass()
-(func $m_getClass__java_lang_Class@circularimportuse.Right
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Right.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@circularimportuse.Right
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $circularimportuse.Right))
@@ -405,4 +411,4 @@
   (return (call $function.no.side.effects.$getCircularimportuse.Right__java_lang_Class (ref.func $$getCircularimportuse.Right__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@circularimportuse.Right)
+(elem declare func $$getClassImpl__java_lang_Class@circularimportuse.Right)

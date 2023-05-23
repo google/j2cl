@@ -354,17 +354,12 @@ public class Main {
   }
 
   private static void testSuperCall() {
-    if (isWasm()) {
-      // TODO(b/283372041): Remove once the bug is fixed.
-      return;
-    }
     class A {}
     class B extends A {
       Class<?> superGetClass() {
         return super.getClass();
       }
     }
-
     assertEquals(B.class, new B().superGetClass());
   }
 }

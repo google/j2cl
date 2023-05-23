@@ -56,7 +56,7 @@ public class ImplementClassMetadataViaGetters extends LibraryNormalizationPass {
 
   @Override
   public void applyTo(Library library) {
-    synthesizeGetClassMethods(library);
+    synthesizeGetClassImplememntationsMethods(library);
     replaceTypeLiterals(library);
     // Add the ClassLiteralPool type at the beginning of the library so that it does not
     // accidentally inherit an unrelated source position.
@@ -64,8 +64,10 @@ public class ImplementClassMetadataViaGetters extends LibraryNormalizationPass {
     library.getCompilationUnits().get(0).addType(/* position= */ 0, classLiteralPoolType);
   }
 
+  private static final String GET_CLASS_IMPL_METHOD_NAME = "$getClassImpl";
+
   /** Synthesizes the getClass() override for this class. */
-  private static void synthesizeGetClassMethods(Library library) {
+  private static void synthesizeGetClassImplememntationsMethods(Library library) {
     library
         .streamTypes()
         .filter(not(Type::isInterface))
@@ -74,14 +76,16 @@ public class ImplementClassMetadataViaGetters extends LibraryNormalizationPass {
         .forEach(
             t -> {
               if (TypeDescriptors.isJavaLangObject(t.getTypeDescriptor())) {
-                // Remove getClass from object since it will be synthesized to return Object.class.
-                t.getMembers().removeIf(m -> m.getDescriptor().getName().equals("getClass"));
+                // Remove $getClassImpl from object since it will be synthesized to return
+                // Object.class.
+                t.getMembers()
+                    .removeIf(m -> m.getDescriptor().getName().equals(GET_CLASS_IMPL_METHOD_NAME));
               }
 
               // return Type.class;
               t.addMember(
                   Method.newBuilder()
-                      .setMethodDescriptor(getGetClassMethodDescriptor(t.getTypeDescriptor()))
+                      .setMethodDescriptor(getGetClassImplMethodDescriptor(t.getTypeDescriptor()))
                       .addStatements(
                           ReturnStatement.newBuilder()
                               .setExpression(
@@ -93,10 +97,10 @@ public class ImplementClassMetadataViaGetters extends LibraryNormalizationPass {
             });
   }
 
-  private static MethodDescriptor getGetClassMethodDescriptor(
+  private static MethodDescriptor getGetClassImplMethodDescriptor(
       DeclaredTypeDescriptor typeDescriptor) {
     return MethodDescriptor.Builder.from(
-            TypeDescriptors.get().javaLangObject.getMethodDescriptor("getClass"))
+            TypeDescriptors.get().javaLangObject.getMethodDescriptor(GET_CLASS_IMPL_METHOD_NAME))
         .setEnclosingTypeDescriptor(typeDescriptor)
         .setSynthetic(true)
         .build();

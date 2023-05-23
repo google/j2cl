@@ -28,6 +28,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_foo__int__int (ref $function.m_foo__int__int))
    $java.lang.Object.vtable)
  )
@@ -53,6 +54,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_test__void (ref $function.m_test__void))
    $java.lang.Object.vtable)
  )
@@ -72,7 +74,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@interfacejsbridge.InterfaceImpl)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@interfacejsbridge.InterfaceImpl)
   (ref.func $m_foo__int__int@interfacejsbridge.InterfaceImpl)
  )
 )
@@ -100,7 +103,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@interfacejsbridge.Main)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@interfacejsbridge.Main)
   (ref.func $m_test__void@interfacejsbridge.Main)
  )
 )
@@ -267,9 +271,9 @@
  )
 )
 
-;;; Class<?> InterfaceImpl.getClass()
-(func $m_getClass__java_lang_Class@interfacejsbridge.InterfaceImpl
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> InterfaceImpl.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@interfacejsbridge.InterfaceImpl
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $interfacejsbridge.InterfaceImpl))
@@ -279,7 +283,7 @@
   (return (call $function.no.side.effects.$getInterfacejsbridge.InterfaceImpl__java_lang_Class (ref.func $$getInterfacejsbridge.InterfaceImpl__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@interfacejsbridge.InterfaceImpl)
+(elem declare func $$getClassImpl__java_lang_Class@interfacejsbridge.InterfaceImpl)
 
 ;;; Code for interfacejsbridge.Main [methods]
 
@@ -377,9 +381,9 @@
  )
 )
 
-;;; Class<?> Main.getClass()
-(func $m_getClass__java_lang_Class@interfacejsbridge.Main
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Main.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@interfacejsbridge.Main
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $interfacejsbridge.Main))
@@ -389,4 +393,4 @@
   (return (call $function.no.side.effects.$getInterfacejsbridge.Main__java_lang_Class (ref.func $$getInterfacejsbridge.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@interfacejsbridge.Main)
+(elem declare func $$getClassImpl__java_lang_Class@interfacejsbridge.Main)

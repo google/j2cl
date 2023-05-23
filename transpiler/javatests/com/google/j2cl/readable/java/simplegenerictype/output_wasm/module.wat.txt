@@ -12,6 +12,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_test__void (ref $function.m_test__void))
    $java.lang.Object.vtable)
  )
@@ -31,7 +32,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@simplegenerictype.SimpleGenericType)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@simplegenerictype.SimpleGenericType)
   (ref.func $m_test__void@simplegenerictype.SimpleGenericType)
  )
 )
@@ -126,9 +128,9 @@
  )
 )
 
-;;; Class<?> SimpleGenericType.getClass()
-(func $m_getClass__java_lang_Class@simplegenerictype.SimpleGenericType
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> SimpleGenericType.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@simplegenerictype.SimpleGenericType
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplegenerictype.SimpleGenericType))
@@ -138,4 +140,4 @@
   (return (call $function.no.side.effects.$getSimplegenerictype.SimpleGenericType__java_lang_Class (ref.func $$getSimplegenerictype.SimpleGenericType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@simplegenerictype.SimpleGenericType)
+(elem declare func $$getClassImpl__java_lang_Class@simplegenerictype.SimpleGenericType)

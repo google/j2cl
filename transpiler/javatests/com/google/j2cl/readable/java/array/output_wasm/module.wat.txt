@@ -5,7 +5,7 @@
   )
  )
  (type $array.Arrays.NativeType.$Overlay.vtable (struct 
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   )
  )
  (type $array.Arrays.NativeType.$Overlay.itable (struct_subtype 
@@ -30,6 +30,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_testObjectArray__void (ref $function.m_testObjectArray__void))
   (field $m_testJavaTypeArray__void (ref $function.m_testJavaTypeArray__void))
   (field $m_testIntArrays__void_$pp_array (ref $function.m_testIntArrays__void_$pp_array))
@@ -66,6 +67,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $array.Arrays.SomeObject.itable (struct_subtype 
@@ -93,6 +95,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $array.Arrays.ArrayContainer.itable (struct_subtype 
@@ -111,7 +114,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@array.Arrays)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@array.Arrays)
   (ref.func $m_testObjectArray__void@array.Arrays)
   (ref.func $m_testJavaTypeArray__void@array.Arrays)
   (ref.func $m_testIntArrays__void_$pp_array@array.Arrays)
@@ -143,7 +147,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@array.Arrays.SomeObject)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@array.Arrays.SomeObject)
  )
 )
 
@@ -164,7 +169,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@array.Arrays.ArrayContainer)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@array.Arrays.ArrayContainer)
  )
 )
 
@@ -182,7 +188,7 @@
 ;;; Code for array.Arrays.NativeType.$Overlay [vtable.init]
 (global $array.Arrays.NativeType.$Overlay.vtable (ref $array.Arrays.NativeType.$Overlay.vtable) 
  (struct.new $array.Arrays.NativeType.$Overlay.vtable
-  (ref.func $m_getClass__java_lang_Class@array.Arrays.NativeType.$Overlay)
+  (ref.func $$getClassImpl__java_lang_Class@array.Arrays.NativeType.$Overlay)
  )
 )
 
@@ -232,9 +238,9 @@
  )
 )
 
-;;; Class<?> $Overlay.getClass()
-(func $m_getClass__java_lang_Class@array.Arrays.NativeType.$Overlay
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@array.Arrays.NativeType.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $array.Arrays.NativeType.$Overlay))
@@ -244,7 +250,7 @@
   (return (call $function.no.side.effects.$getArray.Arrays.NativeType.$Overlay__java_lang_Class (ref.func $$getArray.Arrays.NativeType.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@array.Arrays.NativeType.$Overlay)
+(elem declare func $$getClassImpl__java_lang_Class@array.Arrays.NativeType.$Overlay)
 
 ;;; Code for array.Arrays [methods]
 
@@ -717,9 +723,9 @@
  )
 )
 
-;;; Class<?> Arrays.getClass()
-(func $m_getClass__java_lang_Class@array.Arrays
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Arrays.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@array.Arrays
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $array.Arrays))
@@ -729,7 +735,7 @@
   (return (call $function.no.side.effects.$getArray.Arrays__java_lang_Class (ref.func $$getArray.Arrays__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@array.Arrays)
+(elem declare func $$getClassImpl__java_lang_Class@array.Arrays)
 
 ;;; Code for array.Arrays.SomeObject [methods]
 
@@ -786,9 +792,9 @@
  )
 )
 
-;;; Class<?> SomeObject.getClass()
-(func $m_getClass__java_lang_Class@array.Arrays.SomeObject
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> SomeObject.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@array.Arrays.SomeObject
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $array.Arrays.SomeObject))
@@ -798,7 +804,7 @@
   (return (call $function.no.side.effects.$getArray.Arrays.SomeObject__java_lang_Class (ref.func $$getArray.Arrays.SomeObject__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@array.Arrays.SomeObject)
+(elem declare func $$getClassImpl__java_lang_Class@array.Arrays.SomeObject)
 
 ;;; Code for array.Arrays.NativeType [methods]
 
@@ -860,9 +866,9 @@
  )
 )
 
-;;; Class<?> ArrayContainer.getClass()
-(func $m_getClass__java_lang_Class@array.Arrays.ArrayContainer
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> ArrayContainer.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@array.Arrays.ArrayContainer
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $array.Arrays.ArrayContainer))
@@ -872,4 +878,4 @@
   (return (call $function.no.side.effects.$getArray.Arrays.ArrayContainer__java_lang_Class (ref.func $$getArray.Arrays.ArrayContainer__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@array.Arrays.ArrayContainer)
+(elem declare func $$getClassImpl__java_lang_Class@array.Arrays.ArrayContainer)

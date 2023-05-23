@@ -10,6 +10,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_test__void (ref $function.m_test__void))
    $java.lang.Object.vtable)
  )
@@ -38,6 +39,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.itable (struct_subtype 
@@ -63,6 +65,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $nestedinstanceinnerclass.OuterClass.InnerClass.itable (struct_subtype 
@@ -81,7 +84,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@nestedinstanceinnerclass.OuterClass)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@nestedinstanceinnerclass.OuterClass)
   (ref.func $m_test__void@nestedinstanceinnerclass.OuterClass)
  )
 )
@@ -103,7 +107,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass)
  )
 )
 
@@ -124,7 +129,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass)
  )
 )
 
@@ -219,9 +225,9 @@
  )
 )
 
-;;; Class<?> OuterClass.getClass()
-(func $m_getClass__java_lang_Class@nestedinstanceinnerclass.OuterClass
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> OuterClass.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nestedinstanceinnerclass.OuterClass
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedinstanceinnerclass.OuterClass))
@@ -231,7 +237,7 @@
   (return (call $function.no.side.effects.$getNestedinstanceinnerclass.OuterClass__java_lang_Class (ref.func $$getNestedinstanceinnerclass.OuterClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@nestedinstanceinnerclass.OuterClass)
+(elem declare func $$getClassImpl__java_lang_Class@nestedinstanceinnerclass.OuterClass)
 
 ;;; Code for nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass [methods]
 
@@ -308,9 +314,9 @@
  )
 )
 
-;;; Class<?> InnerInnerClass.getClass()
-(func $m_getClass__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> InnerInnerClass.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass))
@@ -320,7 +326,7 @@
   (return (call $function.no.side.effects.$getNestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass__java_lang_Class (ref.func $$getNestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass)
+(elem declare func $$getClassImpl__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass)
 
 ;;; Code for nestedinstanceinnerclass.OuterClass.InnerClass [methods]
 
@@ -380,9 +386,9 @@
  )
 )
 
-;;; Class<?> InnerClass.getClass()
-(func $m_getClass__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> InnerClass.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedinstanceinnerclass.OuterClass.InnerClass))
@@ -392,4 +398,4 @@
   (return (call $function.no.side.effects.$getNestedinstanceinnerclass.OuterClass.InnerClass__java_lang_Class (ref.func $$getNestedinstanceinnerclass.OuterClass.InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass)
+(elem declare func $$getClassImpl__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass)

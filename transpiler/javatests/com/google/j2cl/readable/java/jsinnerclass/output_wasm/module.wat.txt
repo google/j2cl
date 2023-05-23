@@ -10,6 +10,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $jsinnerclass.Main.itable (struct_subtype 
@@ -36,6 +37,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_getB__int (ref $function.m_getB__int))
    $java.lang.Object.vtable)
  )
@@ -62,6 +64,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_method__int (ref $function.m_method__int))
    $java.lang.Object.vtable)
  )
@@ -81,7 +84,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@jsinnerclass.Main)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@jsinnerclass.Main)
  )
 )
 
@@ -102,7 +106,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@jsinnerclass.Main.Outer.Inner)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@jsinnerclass.Main.Outer.Inner)
   (ref.func $m_getB__int@jsinnerclass.Main.Outer.Inner)
  )
 )
@@ -124,7 +129,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@jsinnerclass.Main.Outer)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@jsinnerclass.Main.Outer)
   (ref.func $m_method__int@jsinnerclass.Main.Outer)
  )
 )
@@ -216,9 +222,9 @@
  )
 )
 
-;;; Class<?> Main.getClass()
-(func $m_getClass__java_lang_Class@jsinnerclass.Main
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Main.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsinnerclass.Main
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsinnerclass.Main))
@@ -228,7 +234,7 @@
   (return (call $function.no.side.effects.$getJsinnerclass.Main__java_lang_Class (ref.func $$getJsinnerclass.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@jsinnerclass.Main)
+(elem declare func $$getClassImpl__java_lang_Class@jsinnerclass.Main)
 
 ;;; Code for jsinnerclass.Main.Outer.Inner [methods]
 
@@ -307,9 +313,9 @@
  )
 )
 
-;;; Class<?> Inner.getClass()
-(func $m_getClass__java_lang_Class@jsinnerclass.Main.Outer.Inner
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Inner.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsinnerclass.Main.Outer.Inner
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsinnerclass.Main.Outer.Inner))
@@ -319,7 +325,7 @@
   (return (call $function.no.side.effects.$getJsinnerclass.Main.Outer.Inner__java_lang_Class (ref.func $$getJsinnerclass.Main.Outer.Inner__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@jsinnerclass.Main.Outer.Inner)
+(elem declare func $$getClassImpl__java_lang_Class@jsinnerclass.Main.Outer.Inner)
 
 ;;; Code for jsinnerclass.Main.Outer [methods]
 
@@ -408,9 +414,9 @@
  )
 )
 
-;;; Class<?> Outer.getClass()
-(func $m_getClass__java_lang_Class@jsinnerclass.Main.Outer
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Outer.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsinnerclass.Main.Outer
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsinnerclass.Main.Outer))
@@ -420,4 +426,4 @@
   (return (call $function.no.side.effects.$getJsinnerclass.Main.Outer__java_lang_Class (ref.func $$getJsinnerclass.Main.Outer__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@jsinnerclass.Main.Outer)
+(elem declare func $$getClassImpl__java_lang_Class@jsinnerclass.Main.Outer)

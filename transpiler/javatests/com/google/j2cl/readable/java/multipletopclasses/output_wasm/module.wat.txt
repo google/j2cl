@@ -10,6 +10,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $multipletopclasses.AnotherClass.itable (struct_subtype 
@@ -34,6 +35,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $multipletopclasses.AnotherClass.vtable)
  )
  (type $multipletopclasses.MultipleTopClasses.itable (struct_subtype 
@@ -52,7 +54,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@multipletopclasses.AnotherClass)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@multipletopclasses.AnotherClass)
  )
 )
 
@@ -73,7 +76,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@multipletopclasses.MultipleTopClasses)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@multipletopclasses.MultipleTopClasses)
  )
 )
 
@@ -150,9 +154,9 @@
  )
 )
 
-;;; Class<?> AnotherClass.getClass()
-(func $m_getClass__java_lang_Class@multipletopclasses.AnotherClass
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> AnotherClass.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@multipletopclasses.AnotherClass
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $multipletopclasses.AnotherClass))
@@ -162,7 +166,7 @@
   (return (call $function.no.side.effects.$getMultipletopclasses.AnotherClass__java_lang_Class (ref.func $$getMultipletopclasses.AnotherClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@multipletopclasses.AnotherClass)
+(elem declare func $$getClassImpl__java_lang_Class@multipletopclasses.AnotherClass)
 
 ;;; Code for multipletopclasses.MultipleTopClasses [methods]
 
@@ -220,9 +224,9 @@
  )
 )
 
-;;; Class<?> MultipleTopClasses.getClass()
-(func $m_getClass__java_lang_Class@multipletopclasses.MultipleTopClasses
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> MultipleTopClasses.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@multipletopclasses.MultipleTopClasses
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $multipletopclasses.MultipleTopClasses))
@@ -232,4 +236,4 @@
   (return (call $function.no.side.effects.$getMultipletopclasses.MultipleTopClasses__java_lang_Class (ref.func $$getMultipletopclasses.MultipleTopClasses__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@multipletopclasses.MultipleTopClasses)
+(elem declare func $$getClassImpl__java_lang_Class@multipletopclasses.MultipleTopClasses)

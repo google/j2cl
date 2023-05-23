@@ -10,6 +10,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $packageinfo.Outer.itable (struct_subtype 
@@ -35,6 +36,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $packageinfo.Outer.Inner.itable (struct_subtype 
@@ -60,6 +62,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $packageinfo.subpackage.Foo.itable (struct_subtype 
@@ -78,7 +81,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@packageinfo.Outer)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@packageinfo.Outer)
  )
 )
 
@@ -99,7 +103,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@packageinfo.Outer.Inner)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@packageinfo.Outer.Inner)
  )
 )
 
@@ -120,7 +125,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@packageinfo.subpackage.Foo)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@packageinfo.subpackage.Foo)
  )
 )
 
@@ -200,9 +206,9 @@
  )
 )
 
-;;; Class<?> Outer.getClass()
-(func $m_getClass__java_lang_Class@packageinfo.Outer
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Outer.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@packageinfo.Outer
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageinfo.Outer))
@@ -212,7 +218,7 @@
   (return (call $function.no.side.effects.$getPackageinfo.Outer__java_lang_Class (ref.func $$getPackageinfo.Outer__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@packageinfo.Outer)
+(elem declare func $$getClassImpl__java_lang_Class@packageinfo.Outer)
 
 ;;; Code for packageinfo.Outer.Inner [methods]
 
@@ -272,9 +278,9 @@
  )
 )
 
-;;; Class<?> Inner.getClass()
-(func $m_getClass__java_lang_Class@packageinfo.Outer.Inner
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Inner.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@packageinfo.Outer.Inner
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageinfo.Outer.Inner))
@@ -284,7 +290,7 @@
   (return (call $function.no.side.effects.$getPackageinfo.Outer.Inner__java_lang_Class (ref.func $$getPackageinfo.Outer.Inner__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@packageinfo.Outer.Inner)
+(elem declare func $$getClassImpl__java_lang_Class@packageinfo.Outer.Inner)
 
 ;;; Code for packageinfo.subpackage.Foo [methods]
 
@@ -356,9 +362,9 @@
  )
 )
 
-;;; Class<?> Foo.getClass()
-(func $m_getClass__java_lang_Class@packageinfo.subpackage.Foo
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Foo.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@packageinfo.subpackage.Foo
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageinfo.subpackage.Foo))
@@ -368,4 +374,4 @@
   (return (call $function.no.side.effects.$getPackageinfo.subpackage.Foo__java_lang_Class (ref.func $$getPackageinfo.subpackage.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@packageinfo.subpackage.Foo)
+(elem declare func $$getClassImpl__java_lang_Class@packageinfo.subpackage.Foo)

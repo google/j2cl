@@ -10,6 +10,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_localScopes__void (ref $function.m_localScopes__void))
   (field $m_nestedScopes__void (ref $function.m_nestedScopes__void))
    $java.lang.Object.vtable)
@@ -30,7 +31,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@blockscoping.BlockScoping)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@blockscoping.BlockScoping)
   (ref.func $m_localScopes__void@blockscoping.BlockScoping)
   (ref.func $m_nestedScopes__void@blockscoping.BlockScoping)
  )
@@ -166,9 +168,9 @@
  )
 )
 
-;;; Class<?> BlockScoping.getClass()
-(func $m_getClass__java_lang_Class@blockscoping.BlockScoping
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> BlockScoping.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@blockscoping.BlockScoping
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $blockscoping.BlockScoping))
@@ -178,4 +180,4 @@
   (return (call $function.no.side.effects.$getBlockscoping.BlockScoping__java_lang_Class (ref.func $$getBlockscoping.BlockScoping__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@blockscoping.BlockScoping)
+(elem declare func $$getClassImpl__java_lang_Class@blockscoping.BlockScoping)

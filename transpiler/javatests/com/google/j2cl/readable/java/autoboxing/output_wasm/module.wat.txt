@@ -10,6 +10,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_box__boolean__java_lang_Boolean (ref $function.m_box__boolean__java_lang_Boolean))
   (field $m_box__double__java_lang_Double (ref $function.m_box__double__java_lang_Double))
   (field $m_box__byte__java_lang_Byte (ref $function.m_box__byte__java_lang_Byte))
@@ -63,6 +64,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_toLong__java_lang_Long__long_$pp_autoboxing (ref $function.m_toLong__java_lang_Long__long_$pp_autoboxing))
    $java.lang.Object.vtable)
  )
@@ -88,6 +90,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_toLong__java_lang_Long__long_$pp_autoboxing (ref $function.m_toLong__java_lang_Long__long_$pp_autoboxing))
    $java.lang.Object.vtable)
  )
@@ -114,6 +117,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_get__java_lang_Object_$pp_autoboxing (ref $function.m_get__java_lang_Object_$pp_autoboxing))
    $java.lang.Object.vtable)
  )
@@ -133,7 +137,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@autoboxing.AutoBoxing)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@autoboxing.AutoBoxing)
   (ref.func $m_box__boolean__java_lang_Boolean@autoboxing.AutoBoxing)
   (ref.func $m_box__double__java_lang_Double@autoboxing.AutoBoxing)
   (ref.func $m_box__byte__java_lang_Byte@autoboxing.AutoBoxing)
@@ -183,7 +188,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@autoboxing.AutoBoxing.1Local)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@autoboxing.AutoBoxing.1Local)
   (ref.func $m_toLong__java_lang_Long__long_$pp_autoboxing@autoboxing.AutoBoxing.1Local)
  )
 )
@@ -205,7 +211,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@autoboxing.AutoBoxing.2Local)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@autoboxing.AutoBoxing.2Local)
   (ref.func $m_toLong__java_lang_Long__long_$pp_autoboxing@autoboxing.AutoBoxing.2Local)
  )
 )
@@ -227,7 +234,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@autoboxing.AutoBoxing.1Supplier)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@autoboxing.AutoBoxing.1Supplier)
   (ref.func $m_get__java_lang_Object_$pp_autoboxing@autoboxing.AutoBoxing.1Supplier)
  )
 )
@@ -1570,9 +1578,9 @@
  )
 )
 
-;;; Class<?> AutoBoxing.getClass()
-(func $m_getClass__java_lang_Class@autoboxing.AutoBoxing
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> AutoBoxing.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@autoboxing.AutoBoxing
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $autoboxing.AutoBoxing))
@@ -1582,7 +1590,7 @@
   (return (call $function.no.side.effects.$getAutoboxing.AutoBoxing__java_lang_Class (ref.func $$getAutoboxing.AutoBoxing__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@autoboxing.AutoBoxing)
+(elem declare func $$getClassImpl__java_lang_Class@autoboxing.AutoBoxing)
 
 ;;; Code for autoboxing.AutoBoxing.1Local [methods]
 
@@ -1657,9 +1665,9 @@
  )
 )
 
-;;; Class<?> Local.getClass()
-(func $m_getClass__java_lang_Class@autoboxing.AutoBoxing.1Local
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Local.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@autoboxing.AutoBoxing.1Local
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $autoboxing.AutoBoxing.1Local))
@@ -1669,7 +1677,7 @@
   (return (call $function.no.side.effects.$getAutoboxing.AutoBoxing.1Local__java_lang_Class (ref.func $$getAutoboxing.AutoBoxing.1Local__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@autoboxing.AutoBoxing.1Local)
+(elem declare func $$getClassImpl__java_lang_Class@autoboxing.AutoBoxing.1Local)
 
 ;;; Code for autoboxing.AutoBoxing.2Local [methods]
 
@@ -1744,9 +1752,9 @@
  )
 )
 
-;;; Class<?> Local.getClass()
-(func $m_getClass__java_lang_Class@autoboxing.AutoBoxing.2Local
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Local.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@autoboxing.AutoBoxing.2Local
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $autoboxing.AutoBoxing.2Local))
@@ -1756,7 +1764,7 @@
   (return (call $function.no.side.effects.$getAutoboxing.AutoBoxing.2Local__java_lang_Class (ref.func $$getAutoboxing.AutoBoxing.2Local__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@autoboxing.AutoBoxing.2Local)
+(elem declare func $$getClassImpl__java_lang_Class@autoboxing.AutoBoxing.2Local)
 
 ;;; Code for autoboxing.AutoBoxing.1Supplier [methods]
 
@@ -1832,9 +1840,9 @@
  )
 )
 
-;;; Class<?> Supplier.getClass()
-(func $m_getClass__java_lang_Class@autoboxing.AutoBoxing.1Supplier
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Supplier.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@autoboxing.AutoBoxing.1Supplier
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $autoboxing.AutoBoxing.1Supplier))
@@ -1844,4 +1852,4 @@
   (return (call $function.no.side.effects.$getAutoboxing.AutoBoxing.1Supplier__java_lang_Class (ref.func $$getAutoboxing.AutoBoxing.1Supplier__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@autoboxing.AutoBoxing.1Supplier)
+(elem declare func $$getClassImpl__java_lang_Class@autoboxing.AutoBoxing.1Supplier)

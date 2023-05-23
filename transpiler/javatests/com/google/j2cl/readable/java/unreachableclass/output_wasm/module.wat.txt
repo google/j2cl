@@ -10,6 +10,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $unreachableclass.Main.itable (struct_subtype 
@@ -35,6 +36,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $unreachableclass.Main.1.itable (struct_subtype 
@@ -60,6 +62,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $unreachableclass.Main.1A.1B.itable (struct_subtype 
@@ -85,6 +88,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_m__void_$pp_unreachableclass (ref $function.m_m__void_$pp_unreachableclass))
    $java.lang.Object.vtable)
  )
@@ -104,7 +108,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@unreachableclass.Main)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@unreachableclass.Main)
  )
 )
 
@@ -125,7 +130,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@unreachableclass.Main.1)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@unreachableclass.Main.1)
  )
 )
 
@@ -146,7 +152,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@unreachableclass.Main.1A.1B)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@unreachableclass.Main.1A.1B)
  )
 )
 
@@ -167,7 +174,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@unreachableclass.Main.1A)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@unreachableclass.Main.1A)
   (ref.func $m_m__void_$pp_unreachableclass@unreachableclass.Main.1A)
  )
 )
@@ -305,9 +313,9 @@
  )
 )
 
-;;; Class<?> Main.getClass()
-(func $m_getClass__java_lang_Class@unreachableclass.Main
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Main.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@unreachableclass.Main
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $unreachableclass.Main))
@@ -317,7 +325,7 @@
   (return (call $function.no.side.effects.$getUnreachableclass.Main__java_lang_Class (ref.func $$getUnreachableclass.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@unreachableclass.Main)
+(elem declare func $$getClassImpl__java_lang_Class@unreachableclass.Main)
 
 ;;; Code for unreachableclass.Main.1 [methods]
 
@@ -377,9 +385,9 @@
  )
 )
 
-;;; Class<?> <anonymous> extends Object.getClass()
-(func $m_getClass__java_lang_Class@unreachableclass.Main.1
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> <anonymous> extends Object.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@unreachableclass.Main.1
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $unreachableclass.Main.1))
@@ -389,7 +397,7 @@
   (return (call $function.no.side.effects.$getUnreachableclass.Main.1__java_lang_Class (ref.func $$getUnreachableclass.Main.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@unreachableclass.Main.1)
+(elem declare func $$getClassImpl__java_lang_Class@unreachableclass.Main.1)
 
 ;;; Code for unreachableclass.Main.1A.1B [methods]
 
@@ -457,9 +465,9 @@
  )
 )
 
-;;; Class<?> B.getClass()
-(func $m_getClass__java_lang_Class@unreachableclass.Main.1A.1B
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> B.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@unreachableclass.Main.1A.1B
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $unreachableclass.Main.1A.1B))
@@ -469,7 +477,7 @@
   (return (call $function.no.side.effects.$getUnreachableclass.Main.1A.1B__java_lang_Class (ref.func $$getUnreachableclass.Main.1A.1B__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@unreachableclass.Main.1A.1B)
+(elem declare func $$getClassImpl__java_lang_Class@unreachableclass.Main.1A.1B)
 
 ;;; Code for unreachableclass.Main.1A [methods]
 
@@ -541,9 +549,9 @@
  )
 )
 
-;;; Class<?> A.getClass()
-(func $m_getClass__java_lang_Class@unreachableclass.Main.1A
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> A.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@unreachableclass.Main.1A
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $unreachableclass.Main.1A))
@@ -553,4 +561,4 @@
   (return (call $function.no.side.effects.$getUnreachableclass.Main.1A__java_lang_Class (ref.func $$getUnreachableclass.Main.1A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@unreachableclass.Main.1A)
+(elem declare func $$getClassImpl__java_lang_Class@unreachableclass.Main.1A)

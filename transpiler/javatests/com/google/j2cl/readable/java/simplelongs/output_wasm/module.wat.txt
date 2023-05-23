@@ -12,6 +12,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_getBar__long (ref $function.m_getBar__long))
   (field $m_getWithSideEffect__simplelongs_SimpleLongs (ref $function.m_getWithSideEffect__simplelongs_SimpleLongs))
   (field $m_main__void (ref $function.m_main__void))
@@ -33,7 +34,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@simplelongs.SimpleLongs)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@simplelongs.SimpleLongs)
   (ref.func $m_getBar__long@simplelongs.SimpleLongs)
   (ref.func $m_getWithSideEffect__simplelongs_SimpleLongs@simplelongs.SimpleLongs)
   (ref.func $m_main__void@simplelongs.SimpleLongs)
@@ -264,9 +266,9 @@
  )
 )
 
-;;; Class<?> SimpleLongs.getClass()
-(func $m_getClass__java_lang_Class@simplelongs.SimpleLongs
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> SimpleLongs.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@simplelongs.SimpleLongs
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplelongs.SimpleLongs))
@@ -276,4 +278,4 @@
   (return (call $function.no.side.effects.$getSimplelongs.SimpleLongs__java_lang_Class (ref.func $$getSimplelongs.SimpleLongs__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@simplelongs.SimpleLongs)
+(elem declare func $$getClassImpl__java_lang_Class@simplelongs.SimpleLongs)

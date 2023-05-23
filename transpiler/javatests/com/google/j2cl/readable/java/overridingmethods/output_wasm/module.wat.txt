@@ -16,6 +16,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_fun__void (ref $function.m_fun__void))
    $java.lang.Object.vtable)
  )
@@ -41,6 +42,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_fun__void (ref $function.m_fun__void))
   (field $m_bar__void (ref $function.m_bar__void))
    $overridingmethods.Parent.vtable)
@@ -61,7 +63,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@overridingmethods.Parent)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@overridingmethods.Parent)
   (ref.func $m_fun__void@overridingmethods.Parent)
  )
 )
@@ -83,7 +86,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@overridingmethods.Child)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@overridingmethods.Child)
   (ref.func $m_fun__void@overridingmethods.Child)
   (ref.func $m_bar__void@overridingmethods.Child)
  )
@@ -200,9 +204,9 @@
  )
 )
 
-;;; Class<?> Parent.getClass()
-(func $m_getClass__java_lang_Class@overridingmethods.Parent
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Parent.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@overridingmethods.Parent
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $overridingmethods.Parent))
@@ -212,7 +216,7 @@
   (return (call $function.no.side.effects.$getOverridingmethods.Parent__java_lang_Class (ref.func $$getOverridingmethods.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@overridingmethods.Parent)
+(elem declare func $$getClassImpl__java_lang_Class@overridingmethods.Parent)
 
 ;;; Code for overridingmethods.Child [methods]
 
@@ -294,9 +298,9 @@
  )
 )
 
-;;; Class<?> Child.getClass()
-(func $m_getClass__java_lang_Class@overridingmethods.Child
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Child.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@overridingmethods.Child
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $overridingmethods.Child))
@@ -306,4 +310,4 @@
   (return (call $function.no.side.effects.$getOverridingmethods.Child__java_lang_Class (ref.func $$getOverridingmethods.Child__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@overridingmethods.Child)
+(elem declare func $$getClassImpl__java_lang_Class@overridingmethods.Child)

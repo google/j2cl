@@ -11,6 +11,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $innerclasswithconstructor.InnerClassWithConstructor.itable (struct_subtype 
@@ -37,6 +38,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.itable (struct_subtype 
@@ -63,6 +65,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor.itable (struct_subtype 
@@ -81,7 +84,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor)
  )
 )
 
@@ -102,7 +106,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor.InnerClass)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor.InnerClass)
  )
 )
 
@@ -123,7 +128,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor)
  )
 )
 
@@ -203,9 +209,9 @@
  )
 )
 
-;;; Class<?> InnerClassWithConstructor.getClass()
-(func $m_getClass__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> InnerClassWithConstructor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclasswithconstructor.InnerClassWithConstructor))
@@ -215,7 +221,7 @@
   (return (call $function.no.side.effects.$getInnerclasswithconstructor.InnerClassWithConstructor__java_lang_Class (ref.func $$getInnerclasswithconstructor.InnerClassWithConstructor__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor)
+(elem declare func $$getClassImpl__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor)
 
 ;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClass [methods]
 
@@ -314,9 +320,9 @@
  )
 )
 
-;;; Class<?> InnerClass.getClass()
-(func $m_getClass__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor.InnerClass
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> InnerClass.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor.InnerClass
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass))
@@ -326,7 +332,7 @@
   (return (call $function.no.side.effects.$getInnerclasswithconstructor.InnerClassWithConstructor.InnerClass__java_lang_Class (ref.func $$getInnerclasswithconstructor.InnerClassWithConstructor.InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor.InnerClass)
+(elem declare func $$getClassImpl__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor.InnerClass)
 
 ;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor [methods]
 
@@ -391,9 +397,9 @@
  )
 )
 
-;;; Class<?> InnerClassWithSingleConstructor.getClass()
-(func $m_getClass__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> InnerClassWithSingleConstructor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor))
@@ -403,4 +409,4 @@
   (return (call $function.no.side.effects.$getInnerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor__java_lang_Class (ref.func $$getInnerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor)
+(elem declare func $$getClassImpl__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor)

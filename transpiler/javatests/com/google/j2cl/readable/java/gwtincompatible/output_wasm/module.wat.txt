@@ -25,6 +25,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $gwtincompatible.Interface.ClassWithAbstractMethod.itable (struct_subtype 
@@ -49,6 +50,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_compatibleMethod__void (ref $function.m_compatibleMethod__void))
    $gwtincompatible.Interface.ClassWithAbstractMethod.vtable)
  )
@@ -76,6 +78,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_getDeclaringClass__java_lang_Class (ref $function.m_getDeclaringClass__java_lang_Class))
   (field $m_name__java_lang_String (ref $function.m_name__java_lang_String))
   (field $m_ordinal__int (ref $function.m_ordinal__int))
@@ -108,6 +111,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_getDeclaringClass__java_lang_Class (ref $function.m_getDeclaringClass__java_lang_Class))
   (field $m_name__java_lang_String (ref $function.m_name__java_lang_String))
   (field $m_ordinal__int (ref $function.m_ordinal__int))
@@ -132,7 +136,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@gwtincompatible.Implementor)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@gwtincompatible.Implementor)
   (ref.func $m_compatibleMethod__void@gwtincompatible.Implementor)
  )
 )
@@ -156,7 +161,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Enum)
-  (ref.func $m_getClass__java_lang_Class@gwtincompatible.Implementor.SomeEnum.1)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@gwtincompatible.Implementor.SomeEnum.1)
   (ref.func $m_getDeclaringClass__java_lang_Class@java.lang.Enum)
   (ref.func $m_name__java_lang_String@java.lang.Enum)
   (ref.func $m_ordinal__int@java.lang.Enum)
@@ -376,9 +382,9 @@
  )
 )
 
-;;; Class<?> Implementor.getClass()
-(func $m_getClass__java_lang_Class@gwtincompatible.Implementor
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Implementor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@gwtincompatible.Implementor
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $gwtincompatible.Implementor))
@@ -388,7 +394,7 @@
   (return (call $function.no.side.effects.$getGwtincompatible.Implementor__java_lang_Class (ref.func $$getGwtincompatible.Implementor__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@gwtincompatible.Implementor)
+(elem declare func $$getClassImpl__java_lang_Class@gwtincompatible.Implementor)
 
 ;;; Code for gwtincompatible.Implementor.SomeEnum [methods]
 
@@ -551,9 +557,9 @@
  )
 )
 
-;;; Class<?> <anonymous> extends SomeEnum.getClass()
-(func $m_getClass__java_lang_Class@gwtincompatible.Implementor.SomeEnum.1
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> <anonymous> extends SomeEnum.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@gwtincompatible.Implementor.SomeEnum.1
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $gwtincompatible.Implementor.SomeEnum.1))
@@ -563,4 +569,4 @@
   (return (call $function.no.side.effects.$getGwtincompatible.Implementor.SomeEnum.1__java_lang_Class (ref.func $$getGwtincompatible.Implementor.SomeEnum.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@gwtincompatible.Implementor.SomeEnum.1)
+(elem declare func $$getClassImpl__java_lang_Class@gwtincompatible.Implementor.SomeEnum.1)

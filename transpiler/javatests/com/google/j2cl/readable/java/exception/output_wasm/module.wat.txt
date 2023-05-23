@@ -17,6 +17,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_privateInitError__java_lang_Object__void_$pp_java_lang (ref $function.m_privateInitError__java_lang_Object__void_$pp_java_lang))
   (field $m_getBackingJsObject__java_lang_Object (ref $function.m_getBackingJsObject__java_lang_Object))
   (field $m_addSuppressed__java_lang_Throwable__void (ref $function.m_addSuppressed__java_lang_Throwable__void))
@@ -61,6 +62,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_privateInitError__java_lang_Object__void_$pp_java_lang (ref $function.m_privateInitError__java_lang_Object__void_$pp_java_lang))
   (field $m_getBackingJsObject__java_lang_Object (ref $function.m_getBackingJsObject__java_lang_Object))
   (field $m_addSuppressed__java_lang_Throwable__void (ref $function.m_addSuppressed__java_lang_Throwable__void))
@@ -92,7 +94,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Throwable)
-  (ref.func $m_getClass__java_lang_Class@exception.MyException)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@exception.MyException)
   (ref.func $m_privateInitError__java_lang_Object__void_$pp_java_lang@java.lang.Throwable)
   (ref.func $m_getBackingJsObject__java_lang_Object@java.lang.Throwable)
   (ref.func $m_addSuppressed__java_lang_Throwable__void@java.lang.Throwable)
@@ -127,7 +130,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Throwable)
-  (ref.func $m_getClass__java_lang_Class@exception.MyJsException)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@exception.MyJsException)
   (ref.func $m_privateInitError__java_lang_Object__void_$pp_java_lang@java.lang.Throwable)
   (ref.func $m_getBackingJsObject__java_lang_Object@java.lang.Throwable)
   (ref.func $m_addSuppressed__java_lang_Throwable__void@java.lang.Throwable)
@@ -258,9 +262,9 @@
  )
 )
 
-;;; Class<?> MyException.getClass()
-(func $m_getClass__java_lang_Class@exception.MyException
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> MyException.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@exception.MyException
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $exception.MyException))
@@ -270,7 +274,7 @@
   (return (call $function.no.side.effects.$getException.MyException__java_lang_Class (ref.func $$getException.MyException__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@exception.MyException)
+(elem declare func $$getClassImpl__java_lang_Class@exception.MyException)
 
 ;;; Code for exception.MyJsException [methods]
 
@@ -368,9 +372,9 @@
  )
 )
 
-;;; Class<?> MyJsException.getClass()
-(func $m_getClass__java_lang_Class@exception.MyJsException
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> MyJsException.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@exception.MyJsException
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $exception.MyJsException))
@@ -380,4 +384,4 @@
   (return (call $function.no.side.effects.$getException.MyJsException__java_lang_Class (ref.func $$getException.MyJsException__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@exception.MyJsException)
+(elem declare func $$getClassImpl__java_lang_Class@exception.MyJsException)

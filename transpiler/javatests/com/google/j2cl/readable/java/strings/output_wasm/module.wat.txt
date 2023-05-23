@@ -13,6 +13,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_test__void (ref $function.m_test__void))
    $java.lang.Object.vtable)
  )
@@ -39,6 +40,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $strings.Strings.StringHolder.itable (struct_subtype 
@@ -57,7 +59,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@strings.Strings)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@strings.Strings)
   (ref.func $m_test__void@strings.Strings)
  )
 )
@@ -79,7 +82,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@strings.Strings.StringHolder)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@strings.Strings.StringHolder)
  )
 )
 
@@ -380,9 +384,9 @@
  )
 )
 
-;;; Class<?> Strings.getClass()
-(func $m_getClass__java_lang_Class@strings.Strings
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Strings.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@strings.Strings
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $strings.Strings))
@@ -392,7 +396,7 @@
   (return (call $function.no.side.effects.$getStrings.Strings__java_lang_Class (ref.func $$getStrings.Strings__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@strings.Strings)
+(elem declare func $$getClassImpl__java_lang_Class@strings.Strings)
 
 ;;; Code for strings.Strings.StringHolder [methods]
 
@@ -464,9 +468,9 @@
  )
 )
 
-;;; Class<?> StringHolder.getClass()
-(func $m_getClass__java_lang_Class@strings.Strings.StringHolder
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> StringHolder.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@strings.Strings.StringHolder
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $strings.Strings.StringHolder))
@@ -476,4 +480,4 @@
   (return (call $function.no.side.effects.$getStrings.Strings.StringHolder__java_lang_Class (ref.func $$getStrings.Strings.StringHolder__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@strings.Strings.StringHolder)
+(elem declare func $$getClassImpl__java_lang_Class@strings.Strings.StringHolder)

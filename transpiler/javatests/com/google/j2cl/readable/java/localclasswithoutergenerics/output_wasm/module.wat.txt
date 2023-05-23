@@ -10,6 +10,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $localclasswithoutergenerics.LocalClassWithOuterGenerics.itable (struct_subtype 
@@ -34,6 +35,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Bar__void_$pp_localclasswithoutergenerics (ref $function.m_baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Bar__void_$pp_localclasswithoutergenerics))
    $java.lang.Object.vtable)
  )
@@ -59,6 +61,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_qux__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__void_$pp_localclasswithoutergenerics (ref $function.m_qux__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__void_$pp_localclasswithoutergenerics))
    $java.lang.Object.vtable)
  )
@@ -78,7 +81,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics)
  )
 )
 
@@ -99,7 +103,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar)
   (ref.func $m_baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Bar__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar)
  )
 )
@@ -121,7 +126,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz)
   (ref.func $m_qux__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz)
  )
 )
@@ -220,9 +226,9 @@
  )
 )
 
-;;; Class<?> LocalClassWithOuterGenerics.getClass()
-(func $m_getClass__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> LocalClassWithOuterGenerics.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics))
@@ -232,7 +238,7 @@
   (return (call $function.no.side.effects.$getLocalclasswithoutergenerics.LocalClassWithOuterGenerics__java_lang_Class (ref.func $$getLocalclasswithoutergenerics.LocalClassWithOuterGenerics__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics)
+(elem declare func $$getClassImpl__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics)
 
 ;;; Code for localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar [methods]
 
@@ -303,9 +309,9 @@
  )
 )
 
-;;; Class<?> Bar.getClass()
-(func $m_getClass__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Bar.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar))
@@ -315,7 +321,7 @@
   (return (call $function.no.side.effects.$getLocalclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar__java_lang_Class (ref.func $$getLocalclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar)
+(elem declare func $$getClassImpl__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar)
 
 ;;; Code for localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz [methods]
 
@@ -388,9 +394,9 @@
  )
 )
 
-;;; Class<?> Baz.getClass()
-(func $m_getClass__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Baz.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz))
@@ -400,4 +406,4 @@
   (return (call $function.no.side.effects.$getLocalclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz__java_lang_Class (ref.func $$getLocalclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz)
+(elem declare func $$getClassImpl__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz)

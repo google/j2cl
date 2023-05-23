@@ -12,6 +12,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_testCoercions__void (ref $function.m_testCoercions__void))
   (field $m_testPrimitives__void (ref $function.m_testPrimitives__void))
   (field $m_testCompoundArray__void (ref $function.m_testCompoundArray__void))
@@ -44,6 +45,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $arithmeticexpressions.ArithmeticExpressions.1Ref.itable (struct_subtype 
@@ -62,7 +64,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@arithmeticexpressions.ArithmeticExpressions)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@arithmeticexpressions.ArithmeticExpressions)
   (ref.func $m_testCoercions__void@arithmeticexpressions.ArithmeticExpressions)
   (ref.func $m_testPrimitives__void@arithmeticexpressions.ArithmeticExpressions)
   (ref.func $m_testCompoundArray__void@arithmeticexpressions.ArithmeticExpressions)
@@ -89,7 +92,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@arithmeticexpressions.ArithmeticExpressions.1Ref)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@arithmeticexpressions.ArithmeticExpressions.1Ref)
  )
 )
 
@@ -854,9 +858,9 @@
  )
 )
 
-;;; Class<?> ArithmeticExpressions.getClass()
-(func $m_getClass__java_lang_Class@arithmeticexpressions.ArithmeticExpressions
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> ArithmeticExpressions.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@arithmeticexpressions.ArithmeticExpressions
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $arithmeticexpressions.ArithmeticExpressions))
@@ -866,7 +870,7 @@
   (return (call $function.no.side.effects.$getArithmeticexpressions.ArithmeticExpressions__java_lang_Class (ref.func $$getArithmeticexpressions.ArithmeticExpressions__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@arithmeticexpressions.ArithmeticExpressions)
+(elem declare func $$getClassImpl__java_lang_Class@arithmeticexpressions.ArithmeticExpressions)
 
 ;;; Code for arithmeticexpressions.ArithmeticExpressions.1Ref [methods]
 
@@ -926,9 +930,9 @@
  )
 )
 
-;;; Class<?> Ref.getClass()
-(func $m_getClass__java_lang_Class@arithmeticexpressions.ArithmeticExpressions.1Ref
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Ref.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@arithmeticexpressions.ArithmeticExpressions.1Ref
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $arithmeticexpressions.ArithmeticExpressions.1Ref))
@@ -938,4 +942,4 @@
   (return (call $function.no.side.effects.$getArithmeticexpressions.ArithmeticExpressions.1Ref__java_lang_Class (ref.func $$getArithmeticexpressions.ArithmeticExpressions.1Ref__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@arithmeticexpressions.ArithmeticExpressions.1Ref)
+(elem declare func $$getClassImpl__java_lang_Class@arithmeticexpressions.ArithmeticExpressions.1Ref)

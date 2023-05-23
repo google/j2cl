@@ -5,7 +5,7 @@
   )
  )
  (type $nestednativetype.NativeArray.$Overlay.vtable (struct 
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   )
  )
  (type $nestednativetype.NativeArray.$Overlay.itable (struct_subtype 
@@ -33,6 +33,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $nestednativetype.NativeArray.1.itable (struct_subtype 
@@ -51,7 +52,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@nestednativetype.NativeArray.1)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@nestednativetype.NativeArray.1)
  )
 )
 
@@ -69,7 +71,7 @@
 ;;; Code for nestednativetype.NativeArray.$Overlay [vtable.init]
 (global $nestednativetype.NativeArray.$Overlay.vtable (ref $nestednativetype.NativeArray.$Overlay.vtable) 
  (struct.new $nestednativetype.NativeArray.$Overlay.vtable
-  (ref.func $m_getClass__java_lang_Class@nestednativetype.NativeArray.$Overlay)
+  (ref.func $$getClassImpl__java_lang_Class@nestednativetype.NativeArray.$Overlay)
  )
 )
 
@@ -128,9 +130,9 @@
  )
 )
 
-;;; Class<?> $Overlay.getClass()
-(func $m_getClass__java_lang_Class@nestednativetype.NativeArray.$Overlay
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nestednativetype.NativeArray.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestednativetype.NativeArray.$Overlay))
@@ -140,7 +142,7 @@
   (return (call $function.no.side.effects.$getNestednativetype.NativeArray.$Overlay__java_lang_Class (ref.func $$getNestednativetype.NativeArray.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@nestednativetype.NativeArray.$Overlay)
+(elem declare func $$getClassImpl__java_lang_Class@nestednativetype.NativeArray.$Overlay)
 
 ;;; Code for nestednativetype.NativeArray [methods]
 
@@ -207,9 +209,9 @@
  )
 )
 
-;;; Class<?> <anonymous> extends Object.getClass()
-(func $m_getClass__java_lang_Class@nestednativetype.NativeArray.1
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> <anonymous> extends Object.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nestednativetype.NativeArray.1
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestednativetype.NativeArray.1))
@@ -219,4 +221,4 @@
   (return (call $function.no.side.effects.$getNestednativetype.NativeArray.1__java_lang_Class (ref.func $$getNestednativetype.NativeArray.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@nestednativetype.NativeArray.1)
+(elem declare func $$getClassImpl__java_lang_Class@nestednativetype.NativeArray.1)

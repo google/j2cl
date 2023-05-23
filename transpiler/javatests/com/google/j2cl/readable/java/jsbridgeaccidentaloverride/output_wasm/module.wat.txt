@@ -23,6 +23,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_test__void (ref $function.m_test__void))
    $java.lang.Object.vtable)
  )
@@ -48,6 +49,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_foo__int__int (ref $function.m_foo__int__int))
   (field $m_bar__int__int (ref $function.m_bar__int__int))
   (field $m_fun__int__int (ref $function.m_fun__int__int))
@@ -75,6 +77,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_foo__int__int (ref $function.m_foo__int__int))
   (field $m_bar__int__int (ref $function.m_bar__int__int))
   (field $m_fun__int__int (ref $function.m_fun__int__int))
@@ -96,7 +99,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@jsbridgeaccidentaloverride.Main)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@jsbridgeaccidentaloverride.Main)
   (ref.func $m_test__void@jsbridgeaccidentaloverride.Main)
  )
 )
@@ -118,7 +122,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@jsbridgeaccidentaloverride.MyJsType)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@jsbridgeaccidentaloverride.MyJsType)
   (ref.func $m_foo__int__int@jsbridgeaccidentaloverride.MyJsType)
   (ref.func $m_bar__int__int@jsbridgeaccidentaloverride.MyJsType)
   (ref.func $m_fun__int__int@jsbridgeaccidentaloverride.MyJsType)
@@ -144,7 +149,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@jsbridgeaccidentaloverride.SubJsType)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@jsbridgeaccidentaloverride.SubJsType)
   (ref.func $m_foo__int__int@jsbridgeaccidentaloverride.MyJsType)
   (ref.func $m_bar__int__int@jsbridgeaccidentaloverride.SubJsType)
   (ref.func $m_fun__int__int@jsbridgeaccidentaloverride.MyJsType)
@@ -335,9 +341,9 @@
  )
 )
 
-;;; Class<?> Main.getClass()
-(func $m_getClass__java_lang_Class@jsbridgeaccidentaloverride.Main
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Main.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsbridgeaccidentaloverride.Main
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsbridgeaccidentaloverride.Main))
@@ -347,7 +353,7 @@
   (return (call $function.no.side.effects.$getJsbridgeaccidentaloverride.Main__java_lang_Class (ref.func $$getJsbridgeaccidentaloverride.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@jsbridgeaccidentaloverride.Main)
+(elem declare func $$getClassImpl__java_lang_Class@jsbridgeaccidentaloverride.Main)
 
 ;;; Code for jsbridgeaccidentaloverride.MyJsType [methods]
 
@@ -456,9 +462,9 @@
  )
 )
 
-;;; Class<?> MyJsType.getClass()
-(func $m_getClass__java_lang_Class@jsbridgeaccidentaloverride.MyJsType
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> MyJsType.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsbridgeaccidentaloverride.MyJsType
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsbridgeaccidentaloverride.MyJsType))
@@ -468,7 +474,7 @@
   (return (call $function.no.side.effects.$getJsbridgeaccidentaloverride.MyJsType__java_lang_Class (ref.func $$getJsbridgeaccidentaloverride.MyJsType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@jsbridgeaccidentaloverride.MyJsType)
+(elem declare func $$getClassImpl__java_lang_Class@jsbridgeaccidentaloverride.MyJsType)
 
 ;;; Code for jsbridgeaccidentaloverride.SubJsType [methods]
 
@@ -543,9 +549,9 @@
  )
 )
 
-;;; Class<?> SubJsType.getClass()
-(func $m_getClass__java_lang_Class@jsbridgeaccidentaloverride.SubJsType
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> SubJsType.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsbridgeaccidentaloverride.SubJsType
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsbridgeaccidentaloverride.SubJsType))
@@ -555,4 +561,4 @@
   (return (call $function.no.side.effects.$getJsbridgeaccidentaloverride.SubJsType__java_lang_Class (ref.func $$getJsbridgeaccidentaloverride.SubJsType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@jsbridgeaccidentaloverride.SubJsType)
+(elem declare func $$getClassImpl__java_lang_Class@jsbridgeaccidentaloverride.SubJsType)

@@ -18,7 +18,7 @@
   )
  )
  (type $jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay.vtable (struct 
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   )
  )
  (type $jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay.itable (struct_subtype 
@@ -43,6 +43,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_test__void (ref $function.m_test__void))
   (field $m_testOverlayInterface__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay__void (ref $function.m_testOverlayInterface__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay__void))
    $java.lang.Object.vtable)
@@ -70,6 +71,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_run__void (ref $function.m_run__void))
    $java.lang.Object.vtable)
  )
@@ -91,7 +93,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@jsoverlay.Main)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@jsoverlay.Main)
   (ref.func $m_test__void@jsoverlay.Main)
   (ref.func $m_testOverlayInterface__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay__void@jsoverlay.Main)
  )
@@ -114,7 +117,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@jsoverlay.Main.NativeJsTypeWithOverlay.1)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@jsoverlay.Main.NativeJsTypeWithOverlay.1)
   (ref.func $m_run__void@jsoverlay.Main.NativeJsTypeWithOverlay.1)
  )
 )
@@ -135,7 +139,7 @@
 ;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay [vtable.init]
 (global $jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay.vtable (ref $jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay.vtable) 
  (struct.new $jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay.vtable
-  (ref.func $m_getClass__java_lang_Class@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay)
+  (ref.func $$getClassImpl__java_lang_Class@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay)
  )
 )
 
@@ -393,9 +397,9 @@
  )
 )
 
-;;; Class<?> $Overlay.getClass()
-(func $m_getClass__java_lang_Class@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay))
@@ -405,7 +409,7 @@
   (return (call $function.no.side.effects.$getJsoverlay.Main.NativeJsTypeWithOverlay.$Overlay__java_lang_Class (ref.func $$getJsoverlay.Main.NativeJsTypeWithOverlay.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay)
+(elem declare func $$getClassImpl__java_lang_Class@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay)
 
 ;;; Code for jsoverlay.Main [methods]
 
@@ -544,9 +548,9 @@
  )
 )
 
-;;; Class<?> Main.getClass()
-(func $m_getClass__java_lang_Class@jsoverlay.Main
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Main.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsoverlay.Main
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsoverlay.Main))
@@ -556,7 +560,7 @@
   (return (call $function.no.side.effects.$getJsoverlay.Main__java_lang_Class (ref.func $$getJsoverlay.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@jsoverlay.Main)
+(elem declare func $$getClassImpl__java_lang_Class@jsoverlay.Main)
 
 ;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay.1 [methods]
 
@@ -628,9 +632,9 @@
  )
 )
 
-;;; Class<?> <anonymous> implements Intf.getClass()
-(func $m_getClass__java_lang_Class@jsoverlay.Main.NativeJsTypeWithOverlay.1
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> <anonymous> implements Intf.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsoverlay.Main.NativeJsTypeWithOverlay.1
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsoverlay.Main.NativeJsTypeWithOverlay.1))
@@ -640,7 +644,7 @@
   (return (call $function.no.side.effects.$getJsoverlay.Main.NativeJsTypeWithOverlay.1__java_lang_Class (ref.func $$getJsoverlay.Main.NativeJsTypeWithOverlay.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@jsoverlay.Main.NativeJsTypeWithOverlay.1)
+(elem declare func $$getClassImpl__java_lang_Class@jsoverlay.Main.NativeJsTypeWithOverlay.1)
 
 ;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay [methods]
 

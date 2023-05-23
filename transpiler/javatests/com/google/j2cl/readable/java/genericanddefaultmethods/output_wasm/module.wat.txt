@@ -16,6 +16,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_foo__java_lang_Object__void (ref $function.m_foo__java_lang_Object__void))
    $java.lang.Object.vtable)
  )
@@ -41,6 +42,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_foo__java_lang_Object__void (ref $function.m_foo__java_lang_Object__void))
   (field $m_foo__java_lang_String__void (ref $function.m_foo__java_lang_String__void))
    $genericanddefaultmethods.GenericClass.vtable)
@@ -61,7 +63,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@genericanddefaultmethods.GenericClass)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@genericanddefaultmethods.GenericClass)
   (ref.func $m_foo__java_lang_Object__void@genericanddefaultmethods.GenericClass)
  )
 )
@@ -83,7 +86,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@genericanddefaultmethods.ConcreteClass)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@genericanddefaultmethods.ConcreteClass)
   (ref.func $m_foo__java_lang_Object__void@genericanddefaultmethods.GenericClass)
   (ref.func $m_foo__java_lang_String__void@genericanddefaultmethods.ConcreteClass)
  )
@@ -235,9 +239,9 @@
  )
 )
 
-;;; Class<?> GenericClass.getClass()
-(func $m_getClass__java_lang_Class@genericanddefaultmethods.GenericClass
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> GenericClass.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@genericanddefaultmethods.GenericClass
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $genericanddefaultmethods.GenericClass))
@@ -247,7 +251,7 @@
   (return (call $function.no.side.effects.$getGenericanddefaultmethods.GenericClass__java_lang_Class (ref.func $$getGenericanddefaultmethods.GenericClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@genericanddefaultmethods.GenericClass)
+(elem declare func $$getClassImpl__java_lang_Class@genericanddefaultmethods.GenericClass)
 
 ;;; Code for genericanddefaultmethods.ConcreteClass [methods]
 
@@ -324,9 +328,9 @@
  )
 )
 
-;;; Class<?> ConcreteClass.getClass()
-(func $m_getClass__java_lang_Class@genericanddefaultmethods.ConcreteClass
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> ConcreteClass.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@genericanddefaultmethods.ConcreteClass
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $genericanddefaultmethods.ConcreteClass))
@@ -336,4 +340,4 @@
   (return (call $function.no.side.effects.$getGenericanddefaultmethods.ConcreteClass__java_lang_Class (ref.func $$getGenericanddefaultmethods.ConcreteClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@genericanddefaultmethods.ConcreteClass)
+(elem declare func $$getClassImpl__java_lang_Class@genericanddefaultmethods.ConcreteClass)

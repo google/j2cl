@@ -16,6 +16,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_foo__java_lang_Error__void (ref $function.m_foo__java_lang_Error__void))
    $java.lang.Object.vtable)
  )
@@ -41,6 +42,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_foo__java_lang_Error__void (ref $function.m_foo__java_lang_Error__void))
   (field $m_foo__java_lang_Object__void (ref $function.m_foo__java_lang_Object__void))
   (field $m_foo__java_lang_AssertionError__void (ref $function.m_foo__java_lang_AssertionError__void))
@@ -68,6 +70,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_foo__java_lang_Error__void (ref $function.m_foo__java_lang_Error__void))
   (field $m_foo__java_lang_Object__void (ref $function.m_foo__java_lang_Object__void))
    $accidentaloverride.Parent.vtable)
@@ -88,7 +91,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@accidentaloverride.Parent)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@accidentaloverride.Parent)
   (ref.func $m_foo__java_lang_Error__void@accidentaloverride.Parent)
  )
 )
@@ -110,7 +114,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@accidentaloverride.AnotherAccidentalOverride)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@accidentaloverride.AnotherAccidentalOverride)
   (ref.func $m_foo__java_lang_Error__void@accidentaloverride.Parent)
   (ref.func $m_foo__java_lang_Object__void@accidentaloverride.AnotherAccidentalOverride)
   (ref.func $m_foo__java_lang_AssertionError__void@accidentaloverride.AnotherAccidentalOverride)
@@ -136,7 +141,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@accidentaloverride.AccidentalOverride)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@accidentaloverride.AccidentalOverride)
   (ref.func $m_foo__java_lang_Error__void@accidentaloverride.Parent)
   (ref.func $m_foo__java_lang_Object__void@accidentaloverride.AccidentalOverride)
  )
@@ -257,9 +263,9 @@
  )
 )
 
-;;; Class<?> Parent.getClass()
-(func $m_getClass__java_lang_Class@accidentaloverride.Parent
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Parent.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@accidentaloverride.Parent
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $accidentaloverride.Parent))
@@ -269,7 +275,7 @@
   (return (call $function.no.side.effects.$getAccidentaloverride.Parent__java_lang_Class (ref.func $$getAccidentaloverride.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@accidentaloverride.Parent)
+(elem declare func $$getClassImpl__java_lang_Class@accidentaloverride.Parent)
 
 ;;; Code for accidentaloverride.AnotherAccidentalOverride [methods]
 
@@ -359,9 +365,9 @@
  )
 )
 
-;;; Class<?> AnotherAccidentalOverride.getClass()
-(func $m_getClass__java_lang_Class@accidentaloverride.AnotherAccidentalOverride
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> AnotherAccidentalOverride.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@accidentaloverride.AnotherAccidentalOverride
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $accidentaloverride.AnotherAccidentalOverride))
@@ -371,7 +377,7 @@
   (return (call $function.no.side.effects.$getAccidentaloverride.AnotherAccidentalOverride__java_lang_Class (ref.func $$getAccidentaloverride.AnotherAccidentalOverride__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@accidentaloverride.AnotherAccidentalOverride)
+(elem declare func $$getClassImpl__java_lang_Class@accidentaloverride.AnotherAccidentalOverride)
 
 ;;; Code for accidentaloverride.AccidentalOverride [methods]
 
@@ -445,9 +451,9 @@
  )
 )
 
-;;; Class<?> AccidentalOverride.getClass()
-(func $m_getClass__java_lang_Class@accidentaloverride.AccidentalOverride
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> AccidentalOverride.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@accidentaloverride.AccidentalOverride
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $accidentaloverride.AccidentalOverride))
@@ -457,4 +463,4 @@
   (return (call $function.no.side.effects.$getAccidentaloverride.AccidentalOverride__java_lang_Class (ref.func $$getAccidentaloverride.AccidentalOverride__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@accidentaloverride.AccidentalOverride)
+(elem declare func $$getClassImpl__java_lang_Class@accidentaloverride.AccidentalOverride)

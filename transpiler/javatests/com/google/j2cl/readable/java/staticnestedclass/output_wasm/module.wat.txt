@@ -10,6 +10,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $staticnestedclass.StaticNestedClassParent.itable (struct_subtype 
@@ -34,6 +35,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $staticnestedclass.StaticNestedClassParent.StaticNestedClass.itable (struct_subtype 
@@ -52,7 +54,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@staticnestedclass.StaticNestedClassParent)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@staticnestedclass.StaticNestedClassParent)
  )
 )
 
@@ -73,7 +76,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@staticnestedclass.StaticNestedClassParent.StaticNestedClass)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@staticnestedclass.StaticNestedClassParent.StaticNestedClass)
  )
 )
 
@@ -150,9 +154,9 @@
  )
 )
 
-;;; Class<?> StaticNestedClassParent.getClass()
-(func $m_getClass__java_lang_Class@staticnestedclass.StaticNestedClassParent
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> StaticNestedClassParent.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@staticnestedclass.StaticNestedClassParent
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $staticnestedclass.StaticNestedClassParent))
@@ -162,7 +166,7 @@
   (return (call $function.no.side.effects.$getStaticnestedclass.StaticNestedClassParent__java_lang_Class (ref.func $$getStaticnestedclass.StaticNestedClassParent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@staticnestedclass.StaticNestedClassParent)
+(elem declare func $$getClassImpl__java_lang_Class@staticnestedclass.StaticNestedClassParent)
 
 ;;; Code for staticnestedclass.StaticNestedClassParent.StaticNestedClass [methods]
 
@@ -220,9 +224,9 @@
  )
 )
 
-;;; Class<?> StaticNestedClass.getClass()
-(func $m_getClass__java_lang_Class@staticnestedclass.StaticNestedClassParent.StaticNestedClass
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> StaticNestedClass.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@staticnestedclass.StaticNestedClassParent.StaticNestedClass
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $staticnestedclass.StaticNestedClassParent.StaticNestedClass))
@@ -232,4 +236,4 @@
   (return (call $function.no.side.effects.$getStaticnestedclass.StaticNestedClassParent.StaticNestedClass__java_lang_Class (ref.func $$getStaticnestedclass.StaticNestedClassParent.StaticNestedClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@staticnestedclass.StaticNestedClassParent.StaticNestedClass)
+(elem declare func $$getClassImpl__java_lang_Class@staticnestedclass.StaticNestedClassParent.StaticNestedClass)

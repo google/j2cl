@@ -10,6 +10,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_test__int__void (ref $function.m_test__int__void))
    $java.lang.Object.vtable)
  )
@@ -39,6 +40,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.itable (struct_subtype 
@@ -57,7 +59,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor)
   (ref.func $m_test__int__void@localclasswithconstructor.LocalClassWithConstructor)
  )
 )
@@ -79,7 +82,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor.1LocalClass)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor.1LocalClass)
  )
 )
 
@@ -176,9 +180,9 @@
  )
 )
 
-;;; Class<?> LocalClassWithConstructor.getClass()
-(func $m_getClass__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> LocalClassWithConstructor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localclasswithconstructor.LocalClassWithConstructor))
@@ -188,7 +192,7 @@
   (return (call $function.no.side.effects.$getLocalclasswithconstructor.LocalClassWithConstructor__java_lang_Class (ref.func $$getLocalclasswithconstructor.LocalClassWithConstructor__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor)
+(elem declare func $$getClassImpl__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor)
 
 ;;; Code for localclasswithconstructor.LocalClassWithConstructor.1LocalClass [methods]
 
@@ -302,9 +306,9 @@
  )
 )
 
-;;; Class<?> LocalClass.getClass()
-(func $m_getClass__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor.1LocalClass
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> LocalClass.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor.1LocalClass
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass))
@@ -314,4 +318,4 @@
   (return (call $function.no.side.effects.$getLocalclasswithconstructor.LocalClassWithConstructor.1LocalClass__java_lang_Class (ref.func $$getLocalclasswithconstructor.LocalClassWithConstructor.1LocalClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor.1LocalClass)
+(elem declare func $$getClassImpl__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor.1LocalClass)

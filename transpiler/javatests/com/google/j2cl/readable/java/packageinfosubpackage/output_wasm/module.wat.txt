@@ -5,7 +5,7 @@
   )
  )
  (type $packageinfosubpackage.Foo.NativeBar.$Overlay.vtable (struct 
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   )
  )
  (type $packageinfosubpackage.Foo.NativeBar.$Overlay.itable (struct_subtype 
@@ -31,6 +31,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $packageinfosubpackage.Foo.itable (struct_subtype 
@@ -57,6 +58,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $packageinfosubpackage.subpackage.Bar.itable (struct_subtype 
@@ -75,7 +77,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@packageinfosubpackage.Foo)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@packageinfosubpackage.Foo)
  )
 )
 
@@ -93,7 +96,7 @@
 ;;; Code for packageinfosubpackage.Foo.NativeBar.$Overlay [vtable.init]
 (global $packageinfosubpackage.Foo.NativeBar.$Overlay.vtable (ref $packageinfosubpackage.Foo.NativeBar.$Overlay.vtable) 
  (struct.new $packageinfosubpackage.Foo.NativeBar.$Overlay.vtable
-  (ref.func $m_getClass__java_lang_Class@packageinfosubpackage.Foo.NativeBar.$Overlay)
+  (ref.func $$getClassImpl__java_lang_Class@packageinfosubpackage.Foo.NativeBar.$Overlay)
  )
 )
 
@@ -114,7 +117,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@packageinfosubpackage.subpackage.Bar)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@packageinfosubpackage.subpackage.Bar)
  )
 )
 
@@ -161,9 +165,9 @@
  )
 )
 
-;;; Class<?> $Overlay.getClass()
-(func $m_getClass__java_lang_Class@packageinfosubpackage.Foo.NativeBar.$Overlay
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@packageinfosubpackage.Foo.NativeBar.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageinfosubpackage.Foo.NativeBar.$Overlay))
@@ -173,7 +177,7 @@
   (return (call $function.no.side.effects.$getPackageinfosubpackage.Foo.NativeBar.$Overlay__java_lang_Class (ref.func $$getPackageinfosubpackage.Foo.NativeBar.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@packageinfosubpackage.Foo.NativeBar.$Overlay)
+(elem declare func $$getClassImpl__java_lang_Class@packageinfosubpackage.Foo.NativeBar.$Overlay)
 
 ;;; Code for packageinfosubpackage.Foo [methods]
 
@@ -245,9 +249,9 @@
  )
 )
 
-;;; Class<?> Foo.getClass()
-(func $m_getClass__java_lang_Class@packageinfosubpackage.Foo
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Foo.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@packageinfosubpackage.Foo
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageinfosubpackage.Foo))
@@ -257,7 +261,7 @@
   (return (call $function.no.side.effects.$getPackageinfosubpackage.Foo__java_lang_Class (ref.func $$getPackageinfosubpackage.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@packageinfosubpackage.Foo)
+(elem declare func $$getClassImpl__java_lang_Class@packageinfosubpackage.Foo)
 
 ;;; Code for packageinfosubpackage.Foo.NativeBar [methods]
 
@@ -322,9 +326,9 @@
  )
 )
 
-;;; Class<?> Bar.getClass()
-(func $m_getClass__java_lang_Class@packageinfosubpackage.subpackage.Bar
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Bar.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@packageinfosubpackage.subpackage.Bar
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageinfosubpackage.subpackage.Bar))
@@ -334,4 +338,4 @@
   (return (call $function.no.side.effects.$getPackageinfosubpackage.subpackage.Bar__java_lang_Class (ref.func $$getPackageinfosubpackage.subpackage.Bar__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@packageinfosubpackage.subpackage.Bar)
+(elem declare func $$getClassImpl__java_lang_Class@packageinfosubpackage.subpackage.Bar)

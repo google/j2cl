@@ -10,6 +10,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_test__void (ref $function.m_test__void))
    $java.lang.Object.vtable)
  )
@@ -37,6 +38,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_n__void (ref $function.m_n__void))
    $java.lang.Object.vtable)
  )
@@ -66,6 +68,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_n__void (ref $function.m_n__void))
    $localclassinheritance.LocalClassInheritance.1Parent.vtable)
  )
@@ -85,7 +88,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@localclassinheritance.LocalClassInheritance)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@localclassinheritance.LocalClassInheritance)
   (ref.func $m_test__void@localclassinheritance.LocalClassInheritance)
  )
 )
@@ -107,7 +111,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@localclassinheritance.LocalClassInheritance.1Parent)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@localclassinheritance.LocalClassInheritance.1Parent)
   (ref.func $m_n__void@localclassinheritance.LocalClassInheritance.1Parent)
  )
 )
@@ -129,7 +134,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@localclassinheritance.LocalClassInheritance.1Child)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@localclassinheritance.LocalClassInheritance.1Child)
   (ref.func $m_n__void@localclassinheritance.LocalClassInheritance.1Child)
  )
 )
@@ -226,9 +232,9 @@
  )
 )
 
-;;; Class<?> LocalClassInheritance.getClass()
-(func $m_getClass__java_lang_Class@localclassinheritance.LocalClassInheritance
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> LocalClassInheritance.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@localclassinheritance.LocalClassInheritance
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localclassinheritance.LocalClassInheritance))
@@ -238,7 +244,7 @@
   (return (call $function.no.side.effects.$getLocalclassinheritance.LocalClassInheritance__java_lang_Class (ref.func $$getLocalclassinheritance.LocalClassInheritance__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@localclassinheritance.LocalClassInheritance)
+(elem declare func $$getClassImpl__java_lang_Class@localclassinheritance.LocalClassInheritance)
 
 ;;; Code for localclassinheritance.LocalClassInheritance.1Parent [methods]
 
@@ -316,9 +322,9 @@
  )
 )
 
-;;; Class<?> Parent.getClass()
-(func $m_getClass__java_lang_Class@localclassinheritance.LocalClassInheritance.1Parent
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Parent.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@localclassinheritance.LocalClassInheritance.1Parent
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localclassinheritance.LocalClassInheritance.1Parent))
@@ -328,7 +334,7 @@
   (return (call $function.no.side.effects.$getLocalclassinheritance.LocalClassInheritance.1Parent__java_lang_Class (ref.func $$getLocalclassinheritance.LocalClassInheritance.1Parent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@localclassinheritance.LocalClassInheritance.1Parent)
+(elem declare func $$getClassImpl__java_lang_Class@localclassinheritance.LocalClassInheritance.1Parent)
 
 ;;; Code for localclassinheritance.LocalClassInheritance.1Child [methods]
 
@@ -406,9 +412,9 @@
  )
 )
 
-;;; Class<?> Child.getClass()
-(func $m_getClass__java_lang_Class@localclassinheritance.LocalClassInheritance.1Child
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Child.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@localclassinheritance.LocalClassInheritance.1Child
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localclassinheritance.LocalClassInheritance.1Child))
@@ -418,4 +424,4 @@
   (return (call $function.no.side.effects.$getLocalclassinheritance.LocalClassInheritance.1Child__java_lang_Class (ref.func $$getLocalclassinheritance.LocalClassInheritance.1Child__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@localclassinheritance.LocalClassInheritance.1Child)
+(elem declare func $$getClassImpl__java_lang_Class@localclassinheritance.LocalClassInheritance.1Child)

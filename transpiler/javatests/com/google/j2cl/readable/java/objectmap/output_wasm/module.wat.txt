@@ -5,7 +5,7 @@
   )
  )
  (type $objectmap.ObjectMap.$Overlay.vtable (struct 
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   )
  )
  (type $objectmap.ObjectMap.$Overlay.itable (struct_subtype 
@@ -23,7 +23,7 @@
 ;;; Code for objectmap.ObjectMap.$Overlay [vtable.init]
 (global $objectmap.ObjectMap.$Overlay.vtable (ref $objectmap.ObjectMap.$Overlay.vtable) 
  (struct.new $objectmap.ObjectMap.$Overlay.vtable
-  (ref.func $m_getClass__java_lang_Class@objectmap.ObjectMap.$Overlay)
+  (ref.func $$getClassImpl__java_lang_Class@objectmap.ObjectMap.$Overlay)
  )
 )
 
@@ -92,9 +92,9 @@
  )
 )
 
-;;; Class<?> $Overlay.getClass()
-(func $m_getClass__java_lang_Class@objectmap.ObjectMap.$Overlay
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@objectmap.ObjectMap.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $objectmap.ObjectMap.$Overlay))
@@ -104,7 +104,7 @@
   (return (call $function.no.side.effects.$getObjectmap.ObjectMap.$Overlay__java_lang_Class (ref.func $$getObjectmap.ObjectMap.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@objectmap.ObjectMap.$Overlay)
+(elem declare func $$getClassImpl__java_lang_Class@objectmap.ObjectMap.$Overlay)
 
 ;;; Code for objectmap.ObjectMap [methods]
 

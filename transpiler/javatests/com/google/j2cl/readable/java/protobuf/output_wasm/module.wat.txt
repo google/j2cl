@@ -10,6 +10,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_test__void (ref $function.m_test__void))
    $java.lang.Object.vtable)
  )
@@ -36,6 +37,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_getTestField__int (ref $function.m_getTestField__int))
    $com.google.protobuf.GeneratedMessage.vtable)
  )
@@ -62,6 +64,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_getTestField__int (ref $function.m_getTestField__int))
   (field $m_setTestField__int__protobuf_MyMessage_Builder (ref $function.m_setTestField__int__protobuf_MyMessage_Builder))
   (field $m_build__protobuf_MyMessage (ref $function.m_build__protobuf_MyMessage))
@@ -83,7 +86,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@protobuf.MyMessage)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@protobuf.MyMessage)
   (ref.func $m_getTestField__int@protobuf.MyMessage)
  )
 )
@@ -105,7 +109,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@protobuf.MyMessage.Builder)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@protobuf.MyMessage.Builder)
   (ref.func $m_getTestField__int@protobuf.MyMessage.Builder)
   (ref.func $m_setTestField__int__protobuf_MyMessage_Builder@protobuf.MyMessage.Builder)
   (ref.func $m_build__protobuf_MyMessage@protobuf.MyMessage.Builder)
@@ -129,7 +134,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@protobuf.Protobuf)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@protobuf.Protobuf)
   (ref.func $m_test__void@protobuf.Protobuf)
  )
 )
@@ -246,9 +252,9 @@
  )
 )
 
-;;; Class<?> Protobuf.getClass()
-(func $m_getClass__java_lang_Class@protobuf.Protobuf
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Protobuf.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@protobuf.Protobuf
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $protobuf.Protobuf))
@@ -258,7 +264,7 @@
   (return (call $function.no.side.effects.$getProtobuf.Protobuf__java_lang_Class (ref.func $$getProtobuf.Protobuf__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@protobuf.Protobuf)
+(elem declare func $$getClassImpl__java_lang_Class@protobuf.Protobuf)
 
 ;;; Code for protobuf.MyMessage [methods]
 
@@ -362,9 +368,9 @@
  )
 )
 
-;;; Class<?> MyMessage.getClass()
-(func $m_getClass__java_lang_Class@protobuf.MyMessage
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> MyMessage.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@protobuf.MyMessage
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $protobuf.MyMessage))
@@ -374,7 +380,7 @@
   (return (call $function.no.side.effects.$getProtobuf.MyMessage__java_lang_Class (ref.func $$getProtobuf.MyMessage__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@protobuf.MyMessage)
+(elem declare func $$getClassImpl__java_lang_Class@protobuf.MyMessage)
 
 ;;; Code for protobuf.MyMessage.Builder [methods]
 
@@ -484,9 +490,9 @@
  )
 )
 
-;;; Class<?> Builder.getClass()
-(func $m_getClass__java_lang_Class@protobuf.MyMessage.Builder
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Builder.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@protobuf.MyMessage.Builder
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $protobuf.MyMessage.Builder))
@@ -496,4 +502,4 @@
   (return (call $function.no.side.effects.$getProtobuf.MyMessage.Builder__java_lang_Class (ref.func $$getProtobuf.MyMessage.Builder__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@protobuf.MyMessage.Builder)
+(elem declare func $$getClassImpl__java_lang_Class@protobuf.MyMessage.Builder)

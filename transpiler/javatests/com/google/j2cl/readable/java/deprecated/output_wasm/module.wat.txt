@@ -23,6 +23,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_deprecatedInstanceMethod__java_lang_String__void (ref $function.m_deprecatedInstanceMethod__java_lang_String__void))
    $java.lang.Object.vtable)
  )
@@ -50,6 +51,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_getDeclaringClass__java_lang_Class (ref $function.m_getDeclaringClass__java_lang_Class))
   (field $m_name__java_lang_String (ref $function.m_name__java_lang_String))
   (field $m_ordinal__int (ref $function.m_ordinal__int))
@@ -81,6 +83,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_getDeclaringClass__java_lang_Class (ref $function.m_getDeclaringClass__java_lang_Class))
   (field $m_name__java_lang_String (ref $function.m_name__java_lang_String))
   (field $m_ordinal__int (ref $function.m_ordinal__int))
@@ -104,7 +107,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@deprecated.DeprecatedExample)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@deprecated.DeprecatedExample)
   (ref.func $m_deprecatedInstanceMethod__java_lang_String__void@deprecated.DeprecatedExample)
  )
 )
@@ -126,7 +130,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Enum)
-  (ref.func $m_getClass__java_lang_Class@deprecated.DeprecatedExample.DeprecatedEnum)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@deprecated.DeprecatedExample.DeprecatedEnum)
   (ref.func $m_getDeclaringClass__java_lang_Class@java.lang.Enum)
   (ref.func $m_name__java_lang_String@java.lang.Enum)
   (ref.func $m_ordinal__int@java.lang.Enum)
@@ -155,7 +160,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Enum)
-  (ref.func $m_getClass__java_lang_Class@deprecated.DeprecatedExample.DeprecatedJsEnum)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@deprecated.DeprecatedExample.DeprecatedJsEnum)
   (ref.func $m_getDeclaringClass__java_lang_Class@java.lang.Enum)
   (ref.func $m_name__java_lang_String@java.lang.Enum)
   (ref.func $m_ordinal__int@java.lang.Enum)
@@ -330,9 +336,9 @@
  )
 )
 
-;;; Class<?> DeprecatedExample.getClass()
-(func $m_getClass__java_lang_Class@deprecated.DeprecatedExample
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> DeprecatedExample.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@deprecated.DeprecatedExample
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $deprecated.DeprecatedExample))
@@ -342,7 +348,7 @@
   (return (call $function.no.side.effects.$getDeprecated.DeprecatedExample__java_lang_Class (ref.func $$getDeprecated.DeprecatedExample__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@deprecated.DeprecatedExample)
+(elem declare func $$getClassImpl__java_lang_Class@deprecated.DeprecatedExample)
 
 ;;; Code for deprecated.DeprecatedExample.DeprecatedEnum [methods]
 
@@ -450,9 +456,9 @@
  )
 )
 
-;;; Class<?> DeprecatedEnum.getClass()
-(func $m_getClass__java_lang_Class@deprecated.DeprecatedExample.DeprecatedEnum
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> DeprecatedEnum.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@deprecated.DeprecatedExample.DeprecatedEnum
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $deprecated.DeprecatedExample.DeprecatedEnum))
@@ -462,7 +468,7 @@
   (return (call $function.no.side.effects.$getDeprecated.DeprecatedExample.DeprecatedEnum__java_lang_Class (ref.func $$getDeprecated.DeprecatedExample.DeprecatedEnum__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@deprecated.DeprecatedExample.DeprecatedEnum)
+(elem declare func $$getClassImpl__java_lang_Class@deprecated.DeprecatedExample.DeprecatedEnum)
 
 ;;; Code for deprecated.DeprecatedExample.DeprecatedJsEnum [methods]
 
@@ -570,9 +576,9 @@
  )
 )
 
-;;; Class<?> DeprecatedJsEnum.getClass()
-(func $m_getClass__java_lang_Class@deprecated.DeprecatedExample.DeprecatedJsEnum
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> DeprecatedJsEnum.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@deprecated.DeprecatedExample.DeprecatedJsEnum
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum))
@@ -582,4 +588,4 @@
   (return (call $function.no.side.effects.$getDeprecated.DeprecatedExample.DeprecatedJsEnum__java_lang_Class (ref.func $$getDeprecated.DeprecatedExample.DeprecatedJsEnum__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@deprecated.DeprecatedExample.DeprecatedJsEnum)
+(elem declare func $$getClassImpl__java_lang_Class@deprecated.DeprecatedExample.DeprecatedJsEnum)

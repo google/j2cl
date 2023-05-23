@@ -5,7 +5,7 @@
   )
  )
  (type $collisions.Blah.$Overlay.vtable (struct 
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   )
  )
  (type $collisions.Blah.$Overlay.itable (struct_subtype 
@@ -30,6 +30,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $collisions.goog.itable (struct_subtype 
@@ -56,6 +57,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $collisions.KtBlah.itable (struct_subtype 
@@ -80,6 +82,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $collisions.foo.itable (struct_subtype 
@@ -104,6 +107,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $collisions.bar.itable (struct_subtype 
@@ -128,6 +132,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_m__java_lang_Object_$pp_collisions (ref $function.m_m__java_lang_Object_$pp_collisions))
    $java.lang.Object.vtable)
  )
@@ -153,6 +158,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_m__java_lang_Number_$pp_collisions (ref $function.m_m__java_lang_Number_$pp_collisions))
   (field $m_n__java_lang_Number_$pp_collisions (ref $function.m_n__java_lang_Number_$pp_collisions))
    $java.lang.Object.vtable)
@@ -173,7 +179,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@collisions.goog)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@collisions.goog)
  )
 )
 
@@ -194,7 +201,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@collisions.KtBlah)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@collisions.KtBlah)
  )
 )
 
@@ -215,7 +223,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@collisions.foo)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@collisions.foo)
  )
 )
 
@@ -236,7 +245,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@collisions.bar)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@collisions.bar)
  )
 )
 
@@ -257,7 +267,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@collisions.Other)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@collisions.Other)
   (ref.func $m_m__java_lang_Object_$pp_collisions@collisions.Other)
  )
 )
@@ -279,7 +290,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@collisions.T)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@collisions.T)
   (ref.func $m_m__java_lang_Number_$pp_collisions@collisions.T)
   (ref.func $m_n__java_lang_Number_$pp_collisions@collisions.T)
  )
@@ -299,7 +311,7 @@
 ;;; Code for collisions.Blah.$Overlay [vtable.init]
 (global $collisions.Blah.$Overlay.vtable (ref $collisions.Blah.$Overlay.vtable) 
  (struct.new $collisions.Blah.$Overlay.vtable
-  (ref.func $m_getClass__java_lang_Class@collisions.Blah.$Overlay)
+  (ref.func $$getClassImpl__java_lang_Class@collisions.Blah.$Overlay)
  )
 )
 
@@ -358,9 +370,9 @@
  )
 )
 
-;;; Class<?> $Overlay.getClass()
-(func $m_getClass__java_lang_Class@collisions.Blah.$Overlay
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@collisions.Blah.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $collisions.Blah.$Overlay))
@@ -370,7 +382,7 @@
   (return (call $function.no.side.effects.$getCollisions.Blah.$Overlay__java_lang_Class (ref.func $$getCollisions.Blah.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@collisions.Blah.$Overlay)
+(elem declare func $$getClassImpl__java_lang_Class@collisions.Blah.$Overlay)
 
 ;;; Code for collisions.goog [methods]
 
@@ -428,9 +440,9 @@
  )
 )
 
-;;; Class<?> goog.getClass()
-(func $m_getClass__java_lang_Class@collisions.goog
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> goog.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@collisions.goog
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $collisions.goog))
@@ -440,7 +452,7 @@
   (return (call $function.no.side.effects.$getCollisions.goog__java_lang_Class (ref.func $$getCollisions.goog__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@collisions.goog)
+(elem declare func $$getClassImpl__java_lang_Class@collisions.goog)
 
 ;;; Code for collisions.Blah [methods]
 
@@ -538,9 +550,9 @@
  )
 )
 
-;;; Class<?> KtBlah.getClass()
-(func $m_getClass__java_lang_Class@collisions.KtBlah
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> KtBlah.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@collisions.KtBlah
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $collisions.KtBlah))
@@ -550,7 +562,7 @@
   (return (call $function.no.side.effects.$getCollisions.KtBlah__java_lang_Class (ref.func $$getCollisions.KtBlah__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@collisions.KtBlah)
+(elem declare func $$getClassImpl__java_lang_Class@collisions.KtBlah)
 
 ;;; Code for collisions.foo [methods]
 
@@ -608,9 +620,9 @@
  )
 )
 
-;;; Class<?> foo.getClass()
-(func $m_getClass__java_lang_Class@collisions.foo
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> foo.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@collisions.foo
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $collisions.foo))
@@ -620,7 +632,7 @@
   (return (call $function.no.side.effects.$getCollisions.foo__java_lang_Class (ref.func $$getCollisions.foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@collisions.foo)
+(elem declare func $$getClassImpl__java_lang_Class@collisions.foo)
 
 ;;; Code for collisions.bar [methods]
 
@@ -720,9 +732,9 @@
  )
 )
 
-;;; Class<?> bar.getClass()
-(func $m_getClass__java_lang_Class@collisions.bar
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> bar.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@collisions.bar
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $collisions.bar))
@@ -732,7 +744,7 @@
   (return (call $function.no.side.effects.$getCollisions.bar__java_lang_Class (ref.func $$getCollisions.bar__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@collisions.bar)
+(elem declare func $$getClassImpl__java_lang_Class@collisions.bar)
 
 ;;; Code for collisions.Other [methods]
 
@@ -833,9 +845,9 @@
  )
 )
 
-;;; Class<?> Other.getClass()
-(func $m_getClass__java_lang_Class@collisions.Other
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Other.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@collisions.Other
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $collisions.Other))
@@ -845,7 +857,7 @@
   (return (call $function.no.side.effects.$getCollisions.Other__java_lang_Class (ref.func $$getCollisions.Other__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@collisions.Other)
+(elem declare func $$getClassImpl__java_lang_Class@collisions.Other)
 
 ;;; Code for collisions.T [methods]
 
@@ -946,9 +958,9 @@
  )
 )
 
-;;; Class<?> T.getClass()
-(func $m_getClass__java_lang_Class@collisions.T
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> T.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@collisions.T
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $collisions.T))
@@ -958,4 +970,4 @@
   (return (call $function.no.side.effects.$getCollisions.T__java_lang_Class (ref.func $$getCollisions.T__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@collisions.T)
+(elem declare func $$getClassImpl__java_lang_Class@collisions.T)

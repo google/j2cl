@@ -12,6 +12,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_method__void (ref $function.m_method__void))
    $java.lang.Object.vtable)
  )
@@ -31,7 +32,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@synchronizedmethod.SynchronizedMethod)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@synchronizedmethod.SynchronizedMethod)
   (ref.func $m_method__void@synchronizedmethod.SynchronizedMethod)
  )
 )
@@ -142,9 +144,9 @@
  )
 )
 
-;;; Class<?> SynchronizedMethod.getClass()
-(func $m_getClass__java_lang_Class@synchronizedmethod.SynchronizedMethod
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> SynchronizedMethod.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@synchronizedmethod.SynchronizedMethod
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $synchronizedmethod.SynchronizedMethod))
@@ -154,4 +156,4 @@
   (return (call $function.no.side.effects.$getSynchronizedmethod.SynchronizedMethod__java_lang_Class (ref.func $$getSynchronizedmethod.SynchronizedMethod__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@synchronizedmethod.SynchronizedMethod)
+(elem declare func $$getClassImpl__java_lang_Class@synchronizedmethod.SynchronizedMethod)

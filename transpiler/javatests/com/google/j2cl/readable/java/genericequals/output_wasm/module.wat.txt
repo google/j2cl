@@ -12,6 +12,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_foo__genericequals_GenericEquals__java_lang_Object (ref $function.m_foo__genericequals_GenericEquals__java_lang_Object))
    $java.lang.Object.vtable)
  )
@@ -31,7 +32,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@genericequals.GenericEquals)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@genericequals.GenericEquals)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@genericequals.GenericEquals)
   (ref.func $m_foo__genericequals_GenericEquals__java_lang_Object@genericequals.GenericEquals)
  )
 )
@@ -168,9 +170,9 @@
  )
 )
 
-;;; Class<?> GenericEquals.getClass()
-(func $m_getClass__java_lang_Class@genericequals.GenericEquals
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> GenericEquals.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@genericequals.GenericEquals
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $genericequals.GenericEquals))
@@ -180,4 +182,4 @@
   (return (call $function.no.side.effects.$getGenericequals.GenericEquals__java_lang_Class (ref.func $$getGenericequals.GenericEquals__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@genericequals.GenericEquals)
+(elem declare func $$getClassImpl__java_lang_Class@genericequals.GenericEquals)

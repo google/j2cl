@@ -10,6 +10,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_main__void (ref $function.m_main__void))
    $java.lang.Object.vtable)
  )
@@ -35,6 +36,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_test__java_lang_CharSequence__void (ref $function.m_test__java_lang_CharSequence__void))
   (field $m_main__void (ref $function.m_main__void))
    $java.lang.Object.vtable)
@@ -61,6 +63,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_main__void (ref $function.m_main__void))
    $java.lang.Object.vtable)
  )
@@ -86,6 +89,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_main__void (ref $function.m_main__void))
   (field $m_test__void (ref $function.m_test__void))
   (field $m_testNotEquals__boolean (ref $function.m_testNotEquals__boolean))
@@ -113,6 +117,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_main__void (ref $function.m_main__void))
    $java.lang.Object.vtable)
  )
@@ -132,7 +137,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@devirtualizedcalls.ArrayCalls)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@devirtualizedcalls.ArrayCalls)
   (ref.func $m_main__void@devirtualizedcalls.ArrayCalls)
  )
 )
@@ -154,7 +160,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@devirtualizedcalls.CharSequenceCalls)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@devirtualizedcalls.CharSequenceCalls)
   (ref.func $m_test__java_lang_CharSequence__void@devirtualizedcalls.CharSequenceCalls)
   (ref.func $m_main__void@devirtualizedcalls.CharSequenceCalls)
  )
@@ -177,7 +184,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@devirtualizedcalls.NumberCalls)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@devirtualizedcalls.NumberCalls)
   (ref.func $m_main__void@devirtualizedcalls.NumberCalls)
  )
 )
@@ -199,7 +207,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@devirtualizedcalls.ObjectCalls)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@devirtualizedcalls.ObjectCalls)
   (ref.func $m_main__void@devirtualizedcalls.ObjectCalls)
   (ref.func $m_test__void@devirtualizedcalls.ObjectCalls)
   (ref.func $m_testNotEquals__boolean@devirtualizedcalls.ObjectCalls)
@@ -223,7 +232,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@devirtualizedcalls.StringCalls)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@devirtualizedcalls.StringCalls)
   (ref.func $m_main__void@devirtualizedcalls.StringCalls)
  )
 )
@@ -334,9 +344,9 @@
  )
 )
 
-;;; Class<?> ArrayCalls.getClass()
-(func $m_getClass__java_lang_Class@devirtualizedcalls.ArrayCalls
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> ArrayCalls.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@devirtualizedcalls.ArrayCalls
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $devirtualizedcalls.ArrayCalls))
@@ -346,7 +356,7 @@
   (return (call $function.no.side.effects.$getDevirtualizedcalls.ArrayCalls__java_lang_Class (ref.func $$getDevirtualizedcalls.ArrayCalls__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@devirtualizedcalls.ArrayCalls)
+(elem declare func $$getClassImpl__java_lang_Class@devirtualizedcalls.ArrayCalls)
 
 ;;; Code for devirtualizedcalls.CharSequenceCalls [methods]
 
@@ -439,9 +449,9 @@
  )
 )
 
-;;; Class<?> CharSequenceCalls.getClass()
-(func $m_getClass__java_lang_Class@devirtualizedcalls.CharSequenceCalls
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> CharSequenceCalls.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@devirtualizedcalls.CharSequenceCalls
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $devirtualizedcalls.CharSequenceCalls))
@@ -451,7 +461,7 @@
   (return (call $function.no.side.effects.$getDevirtualizedcalls.CharSequenceCalls__java_lang_Class (ref.func $$getDevirtualizedcalls.CharSequenceCalls__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@devirtualizedcalls.CharSequenceCalls)
+(elem declare func $$getClassImpl__java_lang_Class@devirtualizedcalls.CharSequenceCalls)
 
 ;;; Code for devirtualizedcalls.NumberCalls [methods]
 
@@ -799,9 +809,9 @@
  )
 )
 
-;;; Class<?> NumberCalls.getClass()
-(func $m_getClass__java_lang_Class@devirtualizedcalls.NumberCalls
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> NumberCalls.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@devirtualizedcalls.NumberCalls
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $devirtualizedcalls.NumberCalls))
@@ -811,7 +821,7 @@
   (return (call $function.no.side.effects.$getDevirtualizedcalls.NumberCalls__java_lang_Class (ref.func $$getDevirtualizedcalls.NumberCalls__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@devirtualizedcalls.NumberCalls)
+(elem declare func $$getClassImpl__java_lang_Class@devirtualizedcalls.NumberCalls)
 
 ;;; Code for devirtualizedcalls.ObjectCalls [methods]
 
@@ -965,9 +975,9 @@
  )
 )
 
-;;; Class<?> ObjectCalls.getClass()
-(func $m_getClass__java_lang_Class@devirtualizedcalls.ObjectCalls
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> ObjectCalls.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@devirtualizedcalls.ObjectCalls
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $devirtualizedcalls.ObjectCalls))
@@ -977,7 +987,7 @@
   (return (call $function.no.side.effects.$getDevirtualizedcalls.ObjectCalls__java_lang_Class (ref.func $$getDevirtualizedcalls.ObjectCalls__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@devirtualizedcalls.ObjectCalls)
+(elem declare func $$getClassImpl__java_lang_Class@devirtualizedcalls.ObjectCalls)
 
 ;;; Code for devirtualizedcalls.StringCalls [methods]
 
@@ -1067,9 +1077,9 @@
  )
 )
 
-;;; Class<?> StringCalls.getClass()
-(func $m_getClass__java_lang_Class@devirtualizedcalls.StringCalls
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> StringCalls.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@devirtualizedcalls.StringCalls
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $devirtualizedcalls.StringCalls))
@@ -1079,4 +1089,4 @@
   (return (call $function.no.side.effects.$getDevirtualizedcalls.StringCalls__java_lang_Class (ref.func $$getDevirtualizedcalls.StringCalls__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@devirtualizedcalls.StringCalls)
+(elem declare func $$getClassImpl__java_lang_Class@devirtualizedcalls.StringCalls)

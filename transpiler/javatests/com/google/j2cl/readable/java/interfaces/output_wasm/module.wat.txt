@@ -23,6 +23,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_testInterfaceMembers__void_$pp_interfaces (ref $function.m_testInterfaceMembers__void_$pp_interfaces))
    $java.lang.Object.vtable)
  )
@@ -49,6 +50,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
   (field $m_defaultMethod__java_lang_Object__void (ref $function.m_defaultMethod__java_lang_Object__void))
   (field $m_defaultMethod__java_lang_String__void (ref $function.m_defaultMethod__java_lang_String__void))
@@ -77,6 +79,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_defaultMethod__java_lang_Object__void (ref $function.m_defaultMethod__java_lang_Object__void))
   (field $m_defaultMethod__java_lang_String__void (ref $function.m_defaultMethod__java_lang_String__void))
    $java.lang.Object.vtable)
@@ -97,7 +100,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@interfaces.Main)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@interfaces.Main)
   (ref.func $m_testInterfaceMembers__void_$pp_interfaces@interfaces.Main)
  )
 )
@@ -119,7 +123,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@interfaces.Main.Implementor)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@interfaces.Main.Implementor)
   (ref.func $m_interfaceMethod__void@interfaces.Main.Implementor)
   (ref.func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Implementor)
   (ref.func $m_defaultMethod__java_lang_String__void@interfaces.Main.Implementor)
@@ -335,9 +340,9 @@
  )
 )
 
-;;; Class<?> Main.getClass()
-(func $m_getClass__java_lang_Class@interfaces.Main
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Main.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@interfaces.Main
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $interfaces.Main))
@@ -347,7 +352,7 @@
   (return (call $function.no.side.effects.$getInterfaces.Main__java_lang_Class (ref.func $$getInterfaces.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@interfaces.Main)
+(elem declare func $$getClassImpl__java_lang_Class@interfaces.Main)
 
 ;;; Code for interfaces.Main.Implementor [methods]
 
@@ -457,9 +462,9 @@
  )
 )
 
-;;; Class<?> Implementor.getClass()
-(func $m_getClass__java_lang_Class@interfaces.Main.Implementor
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Implementor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@interfaces.Main.Implementor
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $interfaces.Main.Implementor))
@@ -469,7 +474,7 @@
   (return (call $function.no.side.effects.$getInterfaces.Main.Implementor__java_lang_Class (ref.func $$getInterfaces.Main.Implementor__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@interfaces.Main.Implementor)
+(elem declare func $$getClassImpl__java_lang_Class@interfaces.Main.Implementor)
 
 ;;; Code for interfaces.Main.AbstractImplementor [methods]
 

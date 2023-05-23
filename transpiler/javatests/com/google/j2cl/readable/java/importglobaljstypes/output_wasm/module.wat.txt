@@ -5,7 +5,7 @@
   )
  )
  (type $importglobaljstypes.Date.NativeDate.$Overlay.vtable (struct 
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   )
  )
  (type $importglobaljstypes.Date.NativeDate.$Overlay.itable (struct_subtype 
@@ -39,7 +39,7 @@
   )
  )
  (type $importglobaljstypes.RegExp.NativeRegExp.$Overlay.vtable (struct 
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   )
  )
  (type $importglobaljstypes.RegExp.NativeRegExp.$Overlay.itable (struct_subtype 
@@ -64,6 +64,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_copy__importglobaljstypes_Date_NativeDate__importglobaljstypes_Date_NativeDate (ref $function.m_copy__importglobaljstypes_Date_NativeDate__importglobaljstypes_Date_NativeDate))
    $java.lang.Object.vtable)
  )
@@ -91,6 +92,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_testJsDocForLiteralType__importglobaljstypes_Number_MyLiteralType__importglobaljstypes_Number_MyLiteralType (ref $function.m_testJsDocForLiteralType__importglobaljstypes_Number_MyLiteralType__importglobaljstypes_Number_MyLiteralType))
    $java.lang.Object.vtable)
  )
@@ -116,6 +118,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $importglobaljstypes.RegExp.itable (struct_subtype 
@@ -136,7 +139,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@importglobaljstypes.Date)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@importglobaljstypes.Date)
   (ref.func $m_copy__importglobaljstypes_Date_NativeDate__importglobaljstypes_Date_NativeDate@importglobaljstypes.Date)
  )
 )
@@ -155,7 +159,7 @@
 ;;; Code for importglobaljstypes.Date.NativeDate.$Overlay [vtable.init]
 (global $importglobaljstypes.Date.NativeDate.$Overlay.vtable (ref $importglobaljstypes.Date.NativeDate.$Overlay.vtable) 
  (struct.new $importglobaljstypes.Date.NativeDate.$Overlay.vtable
-  (ref.func $m_getClass__java_lang_Class@importglobaljstypes.Date.NativeDate.$Overlay)
+  (ref.func $$getClassImpl__java_lang_Class@importglobaljstypes.Date.NativeDate.$Overlay)
  )
 )
 
@@ -176,7 +180,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@importglobaljstypes.Number)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@importglobaljstypes.Number)
   (ref.func $m_testJsDocForLiteralType__importglobaljstypes_Number_MyLiteralType__importglobaljstypes_Number_MyLiteralType@importglobaljstypes.Number)
  )
 )
@@ -198,7 +203,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@importglobaljstypes.RegExp)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@importglobaljstypes.RegExp)
  )
 )
 
@@ -216,7 +222,7 @@
 ;;; Code for importglobaljstypes.RegExp.NativeRegExp.$Overlay [vtable.init]
 (global $importglobaljstypes.RegExp.NativeRegExp.$Overlay.vtable (ref $importglobaljstypes.RegExp.NativeRegExp.$Overlay.vtable) 
  (struct.new $importglobaljstypes.RegExp.NativeRegExp.$Overlay.vtable
-  (ref.func $m_getClass__java_lang_Class@importglobaljstypes.RegExp.NativeRegExp.$Overlay)
+  (ref.func $$getClassImpl__java_lang_Class@importglobaljstypes.RegExp.NativeRegExp.$Overlay)
  )
 )
 
@@ -281,9 +287,9 @@
  )
 )
 
-;;; Class<?> $Overlay.getClass()
-(func $m_getClass__java_lang_Class@importglobaljstypes.Date.NativeDate.$Overlay
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@importglobaljstypes.Date.NativeDate.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $importglobaljstypes.Date.NativeDate.$Overlay))
@@ -293,7 +299,7 @@
   (return (call $function.no.side.effects.$getImportglobaljstypes.Date.NativeDate.$Overlay__java_lang_Class (ref.func $$getImportglobaljstypes.Date.NativeDate.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@importglobaljstypes.Date.NativeDate.$Overlay)
+(elem declare func $$getClassImpl__java_lang_Class@importglobaljstypes.Date.NativeDate.$Overlay)
 
 ;;; Code for importglobaljstypes.Number.NativeFunction [methods]
 
@@ -362,9 +368,9 @@
  )
 )
 
-;;; Class<?> $Overlay.getClass()
-(func $m_getClass__java_lang_Class@importglobaljstypes.RegExp.NativeRegExp.$Overlay
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@importglobaljstypes.RegExp.NativeRegExp.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $importglobaljstypes.RegExp.NativeRegExp.$Overlay))
@@ -374,7 +380,7 @@
   (return (call $function.no.side.effects.$getImportglobaljstypes.RegExp.NativeRegExp.$Overlay__java_lang_Class (ref.func $$getImportglobaljstypes.RegExp.NativeRegExp.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@importglobaljstypes.RegExp.NativeRegExp.$Overlay)
+(elem declare func $$getClassImpl__java_lang_Class@importglobaljstypes.RegExp.NativeRegExp.$Overlay)
 
 ;;; Code for importglobaljstypes.Date [methods]
 
@@ -464,9 +470,9 @@
  )
 )
 
-;;; Class<?> Date.getClass()
-(func $m_getClass__java_lang_Class@importglobaljstypes.Date
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Date.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@importglobaljstypes.Date
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $importglobaljstypes.Date))
@@ -476,7 +482,7 @@
   (return (call $function.no.side.effects.$getImportglobaljstypes.Date__java_lang_Class (ref.func $$getImportglobaljstypes.Date__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@importglobaljstypes.Date)
+(elem declare func $$getClassImpl__java_lang_Class@importglobaljstypes.Date)
 
 ;;; Code for importglobaljstypes.Date.NativeDate [methods]
 
@@ -590,9 +596,9 @@
  )
 )
 
-;;; Class<?> Number.getClass()
-(func $m_getClass__java_lang_Class@importglobaljstypes.Number
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Number.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@importglobaljstypes.Number
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $importglobaljstypes.Number))
@@ -602,7 +608,7 @@
   (return (call $function.no.side.effects.$getImportglobaljstypes.Number__java_lang_Class (ref.func $$getImportglobaljstypes.Number__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@importglobaljstypes.Number)
+(elem declare func $$getClassImpl__java_lang_Class@importglobaljstypes.Number)
 
 ;;; Code for importglobaljstypes.RegExp [methods]
 
@@ -681,9 +687,9 @@
  )
 )
 
-;;; Class<?> RegExp.getClass()
-(func $m_getClass__java_lang_Class@importglobaljstypes.RegExp
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> RegExp.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@importglobaljstypes.RegExp
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $importglobaljstypes.RegExp))
@@ -693,7 +699,7 @@
   (return (call $function.no.side.effects.$getImportglobaljstypes.RegExp__java_lang_Class (ref.func $$getImportglobaljstypes.RegExp__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@importglobaljstypes.RegExp)
+(elem declare func $$getClassImpl__java_lang_Class@importglobaljstypes.RegExp)
 
 ;;; Code for importglobaljstypes.RegExp.NativeRegExp [methods]
 

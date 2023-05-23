@@ -10,6 +10,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.itable (struct_subtype 
@@ -35,6 +36,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_test__void (ref $function.m_test__void))
    $java.lang.Object.vtable)
  )
@@ -61,6 +63,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.itable (struct_subtype 
@@ -86,6 +89,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.itable (struct_subtype 
@@ -104,7 +108,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter)
  )
 )
 
@@ -125,7 +130,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A)
   (ref.func $m_test__void@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A)
  )
 )
@@ -147,7 +153,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B)
  )
 )
 
@@ -168,7 +175,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C)
  )
 )
 
@@ -251,9 +259,9 @@
  )
 )
 
-;;; Class<?> NewInnerClassWithSameOuter.getClass()
-(func $m_getClass__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> NewInnerClassWithSameOuter.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter))
@@ -263,7 +271,7 @@
   (return (call $function.no.side.effects.$getNewinnerclasswithsameouter.NewInnerClassWithSameOuter__java_lang_Class (ref.func $$getNewinnerclasswithsameouter.NewInnerClassWithSameOuter__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter)
+(elem declare func $$getClassImpl__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter)
 
 ;;; Code for newinnerclasswithsameouter.NewInnerClassWithSameOuter.A [methods]
 
@@ -341,9 +349,9 @@
  )
 )
 
-;;; Class<?> A.getClass()
-(func $m_getClass__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> A.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A))
@@ -353,7 +361,7 @@
   (return (call $function.no.side.effects.$getNewinnerclasswithsameouter.NewInnerClassWithSameOuter.A__java_lang_Class (ref.func $$getNewinnerclasswithsameouter.NewInnerClassWithSameOuter.A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A)
+(elem declare func $$getClassImpl__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A)
 
 ;;; Code for newinnerclasswithsameouter.NewInnerClassWithSameOuter.B [methods]
 
@@ -413,9 +421,9 @@
  )
 )
 
-;;; Class<?> B.getClass()
-(func $m_getClass__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> B.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B))
@@ -425,7 +433,7 @@
   (return (call $function.no.side.effects.$getNewinnerclasswithsameouter.NewInnerClassWithSameOuter.B__java_lang_Class (ref.func $$getNewinnerclasswithsameouter.NewInnerClassWithSameOuter.B__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B)
+(elem declare func $$getClassImpl__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B)
 
 ;;; Code for newinnerclasswithsameouter.NewInnerClassWithSameOuter.C [methods]
 
@@ -485,9 +493,9 @@
  )
 )
 
-;;; Class<?> C.getClass()
-(func $m_getClass__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> C.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C))
@@ -497,4 +505,4 @@
   (return (call $function.no.side.effects.$getNewinnerclasswithsameouter.NewInnerClassWithSameOuter.C__java_lang_Class (ref.func $$getNewinnerclasswithsameouter.NewInnerClassWithSameOuter.C__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C)
+(elem declare func $$getClassImpl__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C)

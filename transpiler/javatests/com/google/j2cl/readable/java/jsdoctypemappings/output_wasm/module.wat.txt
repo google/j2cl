@@ -27,7 +27,7 @@
   )
  )
  (type $jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay.vtable (struct 
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   )
  )
  (type $jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay.itable (struct_subtype 
@@ -92,6 +92,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_returnComparatorWildcard__java_util_Comparator_$pp_jsdoctypemappings (ref $function.m_returnComparatorWildcard__java_util_Comparator_$pp_jsdoctypemappings))
   (field $m_returnComparable__java_lang_Comparable_$pp_jsdoctypemappings (ref $function.m_returnComparable__java_lang_Comparable_$pp_jsdoctypemappings))
   (field $m_returnJavaLangString__java_lang_String_$pp_jsdoctypemappings (ref $function.m_returnJavaLangString__java_lang_String_$pp_jsdoctypemappings))
@@ -152,6 +153,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $jsdoctypemappings.JsDocTypeMappings.ExportedType.itable (struct_subtype 
@@ -170,7 +172,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@jsdoctypemappings.JsDocTypeMappings)
   (ref.func $m_returnComparatorWildcard__java_util_Comparator_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
   (ref.func $m_returnComparable__java_lang_Comparable_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
   (ref.func $m_returnJavaLangString__java_lang_String_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
@@ -224,7 +227,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.ExportedType)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.ExportedType)
  )
 )
 
@@ -242,7 +246,7 @@
 ;;; Code for jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay [vtable.init]
 (global $jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay.vtable (ref $jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay.vtable) 
  (struct.new $jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay.vtable
-  (ref.func $m_getClass__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay)
+  (ref.func $$getClassImpl__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay)
  )
 )
 
@@ -369,9 +373,9 @@
  )
 )
 
-;;; Class<?> $Overlay.getClass()
-(func $m_getClass__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay))
@@ -381,7 +385,7 @@
   (return (call $function.no.side.effects.$getJsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay__java_lang_Class (ref.func $$getJsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay)
+(elem declare func $$getClassImpl__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay)
 
 ;;; Code for jsdoctypemappings.JsDocTypeMappings.NativeNumber.$Overlay [methods]
 
@@ -1131,9 +1135,9 @@
  )
 )
 
-;;; Class<?> JsDocTypeMappings.getClass()
-(func $m_getClass__java_lang_Class@jsdoctypemappings.JsDocTypeMappings
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> JsDocTypeMappings.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsdoctypemappings.JsDocTypeMappings
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
@@ -1143,7 +1147,7 @@
   (return (call $function.no.side.effects.$getJsdoctypemappings.JsDocTypeMappings__java_lang_Class (ref.func $$getJsdoctypemappings.JsDocTypeMappings__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@jsdoctypemappings.JsDocTypeMappings)
+(elem declare func $$getClassImpl__java_lang_Class@jsdoctypemappings.JsDocTypeMappings)
 
 ;;; Code for jsdoctypemappings.JsDocTypeMappings.NativeType [methods]
 
@@ -1210,9 +1214,9 @@
  )
 )
 
-;;; Class<?> ExportedType.getClass()
-(func $m_getClass__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.ExportedType
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> ExportedType.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.ExportedType
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings.ExportedType))
@@ -1222,4 +1226,4 @@
   (return (call $function.no.side.effects.$getJsdoctypemappings.JsDocTypeMappings.ExportedType__java_lang_Class (ref.func $$getJsdoctypemappings.JsDocTypeMappings.ExportedType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.ExportedType)
+(elem declare func $$getClassImpl__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.ExportedType)

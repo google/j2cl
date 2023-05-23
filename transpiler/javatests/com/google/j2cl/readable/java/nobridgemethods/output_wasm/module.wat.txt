@@ -15,6 +15,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry (ref $function.m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry))
    $java.lang.Object.vtable)
  )
@@ -40,6 +41,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $nobridgemethods.CharSet.itable (struct_subtype 
@@ -64,6 +66,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $nobridgemethods.TreeMap.InnerEntry.itable (struct_subtype 
@@ -88,6 +91,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry (ref $function.m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry))
   (field $m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry (ref $function.m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry))
    $nobridgemethods.Map.vtable)
@@ -114,6 +118,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry (ref $function.m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry))
   (field $m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry (ref $function.m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry))
    $nobridgemethods.TreeMap.vtable)
@@ -134,7 +139,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@nobridgemethods.TreeMap)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@nobridgemethods.TreeMap)
   (ref.func $m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry@nobridgemethods.TreeMap)
   (ref.func $m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry@nobridgemethods.TreeMap)
  )
@@ -157,7 +163,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@nobridgemethods.CharSet)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@nobridgemethods.CharSet)
  )
 )
 
@@ -178,7 +185,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@nobridgemethods.TreeMap.InnerEntry)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@nobridgemethods.TreeMap.InnerEntry)
  )
 )
 
@@ -200,7 +208,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@nobridgemethods.CharSet.1)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@nobridgemethods.CharSet.1)
   (ref.func $m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry@nobridgemethods.TreeMap)
   (ref.func $m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry@nobridgemethods.TreeMap)
  )
@@ -365,9 +374,9 @@
  )
 )
 
-;;; Class<?> CharSet.getClass()
-(func $m_getClass__java_lang_Class@nobridgemethods.CharSet
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> CharSet.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nobridgemethods.CharSet
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nobridgemethods.CharSet))
@@ -377,7 +386,7 @@
   (return (call $function.no.side.effects.$getNobridgemethods.CharSet__java_lang_Class (ref.func $$getNobridgemethods.CharSet__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@nobridgemethods.CharSet)
+(elem declare func $$getClassImpl__java_lang_Class@nobridgemethods.CharSet)
 
 ;;; Code for nobridgemethods.TreeMap.InnerEntry [methods]
 
@@ -435,9 +444,9 @@
  )
 )
 
-;;; Class<?> InnerEntry.getClass()
-(func $m_getClass__java_lang_Class@nobridgemethods.TreeMap.InnerEntry
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> InnerEntry.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nobridgemethods.TreeMap.InnerEntry
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nobridgemethods.TreeMap.InnerEntry))
@@ -447,7 +456,7 @@
   (return (call $function.no.side.effects.$getNobridgemethods.TreeMap.InnerEntry__java_lang_Class (ref.func $$getNobridgemethods.TreeMap.InnerEntry__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@nobridgemethods.TreeMap.InnerEntry)
+(elem declare func $$getClassImpl__java_lang_Class@nobridgemethods.TreeMap.InnerEntry)
 
 ;;; Code for nobridgemethods.TreeMap [methods]
 
@@ -539,9 +548,9 @@
  )
 )
 
-;;; Class<?> TreeMap.getClass()
-(func $m_getClass__java_lang_Class@nobridgemethods.TreeMap
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> TreeMap.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nobridgemethods.TreeMap
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nobridgemethods.TreeMap))
@@ -551,7 +560,7 @@
   (return (call $function.no.side.effects.$getNobridgemethods.TreeMap__java_lang_Class (ref.func $$getNobridgemethods.TreeMap__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@nobridgemethods.TreeMap)
+(elem declare func $$getClassImpl__java_lang_Class@nobridgemethods.TreeMap)
 
 ;;; Code for nobridgemethods.CharSet.1 [methods]
 
@@ -609,9 +618,9 @@
  )
 )
 
-;;; Class<?> <anonymous> extends TreeMap<String>.getClass()
-(func $m_getClass__java_lang_Class@nobridgemethods.CharSet.1
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> <anonymous> extends TreeMap<String>.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nobridgemethods.CharSet.1
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nobridgemethods.CharSet.1))
@@ -621,4 +630,4 @@
   (return (call $function.no.side.effects.$getNobridgemethods.CharSet.1__java_lang_Class (ref.func $$getNobridgemethods.CharSet.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@nobridgemethods.CharSet.1)
+(elem declare func $$getClassImpl__java_lang_Class@nobridgemethods.CharSet.1)

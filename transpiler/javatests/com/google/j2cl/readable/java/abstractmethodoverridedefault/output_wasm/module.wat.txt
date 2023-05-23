@@ -24,6 +24,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $abstractmethodoverridedefault.AbstractMethodOverrideDefault.itable (struct_subtype 
@@ -48,6 +49,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_foo__void (ref $function.m_foo__void))
   (field $m_bar__void (ref $function.m_bar__void))
    $java.lang.Object.vtable)
@@ -74,6 +76,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_foo__void (ref $function.m_foo__void))
   (field $m_bar__void (ref $function.m_bar__void))
    $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.vtable)
@@ -100,6 +103,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_foo__void (ref $function.m_foo__void))
   (field $m_bar__void (ref $function.m_bar__void))
    $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.vtable)
@@ -120,7 +124,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault)
  )
 )
 
@@ -141,7 +146,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C)
   (ref.func $m_foo__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C)
   (ref.func $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C)
  )
@@ -295,9 +301,9 @@
  )
 )
 
-;;; Class<?> AbstractMethodOverrideDefault.getClass()
-(func $m_getClass__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> AbstractMethodOverrideDefault.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault))
@@ -307,7 +313,7 @@
   (return (call $function.no.side.effects.$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault__java_lang_Class (ref.func $$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault)
+(elem declare func $$getClassImpl__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault)
 
 ;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault.A [methods]
 
@@ -512,9 +518,9 @@
  )
 )
 
-;;; Class<?> C.getClass()
-(func $m_getClass__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> C.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C))
@@ -524,4 +530,4 @@
   (return (call $function.no.side.effects.$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault.C__java_lang_Class (ref.func $$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault.C__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C)
+(elem declare func $$getClassImpl__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C)

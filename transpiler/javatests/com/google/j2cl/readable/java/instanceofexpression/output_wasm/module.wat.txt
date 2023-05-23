@@ -10,6 +10,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_testInstanceofClass__void (ref $function.m_testInstanceofClass__void))
   (field $m_testInstanceofInterface__void (ref $function.m_testInstanceofInterface__void))
   (field $m_testInstanceofBoxedType__void (ref $function.m_testInstanceofBoxedType__void))
@@ -40,6 +41,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $instanceofexpression.InstanceofExpressions.1.itable (struct_subtype 
@@ -58,7 +60,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@instanceofexpression.InstanceofExpressions)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@instanceofexpression.InstanceofExpressions)
   (ref.func $m_testInstanceofClass__void@instanceofexpression.InstanceofExpressions)
   (ref.func $m_testInstanceofInterface__void@instanceofexpression.InstanceofExpressions)
   (ref.func $m_testInstanceofBoxedType__void@instanceofexpression.InstanceofExpressions)
@@ -84,7 +87,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@instanceofexpression.InstanceofExpressions.1)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@instanceofexpression.InstanceofExpressions.1)
  )
 )
 
@@ -399,9 +403,9 @@
  )
 )
 
-;;; Class<?> InstanceofExpressions.getClass()
-(func $m_getClass__java_lang_Class@instanceofexpression.InstanceofExpressions
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> InstanceofExpressions.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@instanceofexpression.InstanceofExpressions
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $instanceofexpression.InstanceofExpressions))
@@ -411,7 +415,7 @@
   (return (call $function.no.side.effects.$getInstanceofexpression.InstanceofExpressions__java_lang_Class (ref.func $$getInstanceofexpression.InstanceofExpressions__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@instanceofexpression.InstanceofExpressions)
+(elem declare func $$getClassImpl__java_lang_Class@instanceofexpression.InstanceofExpressions)
 
 ;;; Code for instanceofexpression.InstanceofExpressions.1 [methods]
 
@@ -471,9 +475,9 @@
  )
 )
 
-;;; Class<?> <anonymous> implements Serializable.getClass()
-(func $m_getClass__java_lang_Class@instanceofexpression.InstanceofExpressions.1
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> <anonymous> implements Serializable.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@instanceofexpression.InstanceofExpressions.1
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $instanceofexpression.InstanceofExpressions.1))
@@ -483,4 +487,4 @@
   (return (call $function.no.side.effects.$getInstanceofexpression.InstanceofExpressions.1__java_lang_Class (ref.func $$getInstanceofexpression.InstanceofExpressions.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@instanceofexpression.InstanceofExpressions.1)
+(elem declare func $$getClassImpl__java_lang_Class@instanceofexpression.InstanceofExpressions.1)

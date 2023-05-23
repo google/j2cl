@@ -20,6 +20,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $implementsgenericinterface.GenericInterfaceGenericImpl.itable (struct_subtype 
@@ -44,6 +45,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $implementsgenericinterface.GenericInterfaceImpl.itable (struct_subtype 
@@ -62,7 +64,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@implementsgenericinterface.GenericInterfaceGenericImpl)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@implementsgenericinterface.GenericInterfaceGenericImpl)
  )
 )
 
@@ -84,7 +87,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@implementsgenericinterface.GenericInterfaceImpl)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@implementsgenericinterface.GenericInterfaceImpl)
  )
 )
 
@@ -210,9 +214,9 @@
  )
 )
 
-;;; Class<?> GenericInterfaceGenericImpl.getClass()
-(func $m_getClass__java_lang_Class@implementsgenericinterface.GenericInterfaceGenericImpl
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> GenericInterfaceGenericImpl.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@implementsgenericinterface.GenericInterfaceGenericImpl
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $implementsgenericinterface.GenericInterfaceGenericImpl))
@@ -222,7 +226,7 @@
   (return (call $function.no.side.effects.$getImplementsgenericinterface.GenericInterfaceGenericImpl__java_lang_Class (ref.func $$getImplementsgenericinterface.GenericInterfaceGenericImpl__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@implementsgenericinterface.GenericInterfaceGenericImpl)
+(elem declare func $$getClassImpl__java_lang_Class@implementsgenericinterface.GenericInterfaceGenericImpl)
 
 ;;; Code for implementsgenericinterface.GenericInterfaceImpl [methods]
 
@@ -280,9 +284,9 @@
  )
 )
 
-;;; Class<?> GenericInterfaceImpl.getClass()
-(func $m_getClass__java_lang_Class@implementsgenericinterface.GenericInterfaceImpl
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> GenericInterfaceImpl.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@implementsgenericinterface.GenericInterfaceImpl
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $implementsgenericinterface.GenericInterfaceImpl))
@@ -292,4 +296,4 @@
   (return (call $function.no.side.effects.$getImplementsgenericinterface.GenericInterfaceImpl__java_lang_Class (ref.func $$getImplementsgenericinterface.GenericInterfaceImpl__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@implementsgenericinterface.GenericInterfaceImpl)
+(elem declare func $$getClassImpl__java_lang_Class@implementsgenericinterface.GenericInterfaceImpl)

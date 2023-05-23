@@ -10,6 +10,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
  (type $boundedtypesupercall.Main.itable (struct_subtype 
@@ -34,6 +35,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_foo__void (ref $function.m_foo__void))
    $java.lang.Object.vtable)
  )
@@ -59,6 +61,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_getSomething__java_lang_Comparable (ref $function.m_getSomething__java_lang_Comparable))
   (field $m_doSomething__boundedtypesupercall_Main_Foo (ref $function.m_doSomething__boundedtypesupercall_Main_Foo))
    $java.lang.Object.vtable)
@@ -86,6 +89,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_foo__void (ref $function.m_foo__void))
    $boundedtypesupercall.Main.Foo.vtable)
  )
@@ -105,7 +109,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@boundedtypesupercall.Main)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@boundedtypesupercall.Main)
  )
 )
 
@@ -126,7 +131,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@boundedtypesupercall.Main.Bar.1)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@boundedtypesupercall.Main.Bar.1)
   (ref.func $m_foo__void@boundedtypesupercall.Main.Bar.1)
  )
 )
@@ -148,7 +154,8 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@boundedtypesupercall.Main.Bar)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $$getClassImpl__java_lang_Class@boundedtypesupercall.Main.Bar)
   (ref.func $m_getSomething__java_lang_Comparable@boundedtypesupercall.Main.Bar)
   (ref.func $m_doSomething__boundedtypesupercall_Main_Foo@boundedtypesupercall.Main.Bar)
  )
@@ -233,9 +240,9 @@
  )
 )
 
-;;; Class<?> Main.getClass()
-(func $m_getClass__java_lang_Class@boundedtypesupercall.Main
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Main.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@boundedtypesupercall.Main
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $boundedtypesupercall.Main))
@@ -245,7 +252,7 @@
   (return (call $function.no.side.effects.$getBoundedtypesupercall.Main__java_lang_Class (ref.func $$getBoundedtypesupercall.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@boundedtypesupercall.Main)
+(elem declare func $$getClassImpl__java_lang_Class@boundedtypesupercall.Main)
 
 ;;; Code for boundedtypesupercall.Main.Foo [methods]
 
@@ -374,9 +381,9 @@
  )
 )
 
-;;; Class<?> Bar.getClass()
-(func $m_getClass__java_lang_Class@boundedtypesupercall.Main.Bar
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> Bar.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@boundedtypesupercall.Main.Bar
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $boundedtypesupercall.Main.Bar))
@@ -386,7 +393,7 @@
   (return (call $function.no.side.effects.$getBoundedtypesupercall.Main.Bar__java_lang_Class (ref.func $$getBoundedtypesupercall.Main.Bar__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@boundedtypesupercall.Main.Bar)
+(elem declare func $$getClassImpl__java_lang_Class@boundedtypesupercall.Main.Bar)
 
 ;;; Code for boundedtypesupercall.Main.Bar.1 [methods]
 
@@ -460,9 +467,9 @@
  )
 )
 
-;;; Class<?> <anonymous> extends Foo<T>.getClass()
-(func $m_getClass__java_lang_Class@boundedtypesupercall.Main.Bar.1
- (type $function.m_getClass__java_lang_Class)
+;;; Class<?> <anonymous> extends Foo<T>.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@boundedtypesupercall.Main.Bar.1
+ (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $boundedtypesupercall.Main.Bar.1))
@@ -472,4 +479,4 @@
   (return (call $function.no.side.effects.$getBoundedtypesupercall.Main.Bar.1__java_lang_Class (ref.func $$getBoundedtypesupercall.Main.Bar.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@boundedtypesupercall.Main.Bar.1)
+(elem declare func $$getClassImpl__java_lang_Class@boundedtypesupercall.Main.Bar.1)

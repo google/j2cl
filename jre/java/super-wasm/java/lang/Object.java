@@ -36,8 +36,12 @@ public class Object {
     return getClass().getName() + "@" + Integer.toHexString(hashCode());
   }
 
-  // Stub method. Replaced by the compiler.
   public final Class<?> getClass() {
+    return $getClassImpl();
+  }
+
+  // Stub method. Replaced by the compiler.
+  public Class<?> $getClassImpl() {
     return null;
   }
 }
