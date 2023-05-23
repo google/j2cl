@@ -178,15 +178,19 @@
 
 ;;; Code for varargs.Varargs [static fields]
 (global $f_$initialized__varargs_Varargs (mut i32) (i32.const 0))
+(global $f_$class__varargs_Varargs (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for varargs.Child [static fields]
 (global $f_$initialized__varargs_Child (mut i32) (i32.const 0))
+(global $f_$class__varargs_Child (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for varargs.Varargs.$LambdaImplementor$1 [static fields]
 (global $f_$initialized__varargs_Varargs_$LambdaImplementor$1 (mut i32) (i32.const 0))
+(global $f_$class__varargs_Varargs_$LambdaImplementor$1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for varargs.Varargs.FunctionalInterface [static fields]
 (global $f_$initialized__varargs_Varargs_FunctionalInterface (mut i32) (i32.const 0))
+(global $f_$class__varargs_Varargs_FunctionalInterface (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for varargs.Varargs.FunctionalInterface [methods]
 
@@ -206,6 +210,22 @@
   ;; (varargs.Varargs.FunctionalInterface.$initialized = true);
   ;;@ varargs/Varargs.java:21:12
   (global.set $f_$initialized__varargs_Varargs_FunctionalInterface (i32.const 1))
+ )
+)
+
+;;; Class<T> FunctionalInterface.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@varargs.Varargs.FunctionalInterface
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((varargs.Varargs.FunctionalInterface.$class == null)) (varargs.Varargs.FunctionalInterface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|varargs.Vara...|_1()));
+  (if (ref.eq (global.get $f_$class__varargs_Varargs_FunctionalInterface) (ref.null $java.lang.Class))
+   (then
+    ;; (varargs.Varargs.FunctionalInterface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|varargs.Vara...|_1()));
+    (global.set $f_$class__varargs_Varargs_FunctionalInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|varargs.Vara...|_1__java_lang_String (ref.func $$getString_|varargs.Vara...|_1__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return varargs.Varargs.FunctionalInterface.$class;
+  (return (global.get $f_$class__varargs_Varargs_FunctionalInterface))
  )
 )
 
@@ -434,6 +454,22 @@
  )
 )
 
+;;; Class<T> Varargs.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@varargs.Varargs
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((varargs.Varargs.$class == null)) (varargs.Varargs.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|varargs.Varargs|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__varargs_Varargs) (ref.null $java.lang.Class))
+   (then
+    ;; (varargs.Varargs.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|varargs.Varargs|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__varargs_Varargs (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|varargs.Varargs|__java_lang_String (ref.func $$getString_|varargs.Varargs|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return varargs.Varargs.$class;
+  (return (global.get $f_$class__varargs_Varargs))
+ )
+)
+
 ;;; Class<?> Varargs.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@varargs.Varargs
  (type $function.$getClassImpl__java_lang_Class)
@@ -442,8 +478,8 @@
  (local $this (ref null $varargs.Varargs))
  (local.set $this (ref.cast_static $varargs.Varargs (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getVarargs.Varargs();
-  (return (call $function.no.side.effects.$getVarargs.Varargs__java_lang_Class (ref.func $$getVarargs.Varargs__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return varargs.Varargs.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@varargs.Varargs) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@varargs.Varargs)
@@ -522,6 +558,22 @@
  )
 )
 
+;;; Class<T> $LambdaImplementor$1.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@varargs.Varargs.$LambdaImplementor$1
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((varargs.Varargs.$LambdaImplementor$1.$class == null)) (varargs.Varargs.$LambdaImplementor$1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|varargs.Vara...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__varargs_Varargs_$LambdaImplementor$1) (ref.null $java.lang.Class))
+   (then
+    ;; (varargs.Varargs.$LambdaImplementor$1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|varargs.Vara...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__varargs_Varargs_$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|varargs.Vara...|__java_lang_String (ref.func $$getString_|varargs.Vara...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return varargs.Varargs.$LambdaImplementor$1.$class;
+  (return (global.get $f_$class__varargs_Varargs_$LambdaImplementor$1))
+ )
+)
+
 ;;; Class<?> $LambdaImplementor$1.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@varargs.Varargs.$LambdaImplementor$1
  (type $function.$getClassImpl__java_lang_Class)
@@ -530,8 +582,8 @@
  (local $this (ref null $varargs.Varargs.$LambdaImplementor$1))
  (local.set $this (ref.cast_static $varargs.Varargs.$LambdaImplementor$1 (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getVarargs.Varargs.$LambdaImplementor$1();
-  (return (call $function.no.side.effects.$getVarargs.Varargs.$LambdaImplementor$1__java_lang_Class (ref.func $$getVarargs.Varargs.$LambdaImplementor$1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return varargs.Varargs.$LambdaImplementor$1.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@varargs.Varargs.$LambdaImplementor$1) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@varargs.Varargs.$LambdaImplementor$1)
@@ -592,6 +644,22 @@
  )
 )
 
+;;; Class<T> Child.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@varargs.Child
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((varargs.Child.$class == null)) (varargs.Child.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|varargs.Child|(),varargs.Varargs.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__varargs_Child) (ref.null $java.lang.Class))
+   (then
+    ;; (varargs.Child.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|varargs.Child|(),varargs.Varargs.$getClassMetadata()));
+    (global.set $f_$class__varargs_Child (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|varargs.Child|__java_lang_String (ref.func $$getString_|varargs.Child|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@varargs.Varargs) )))
+   )
+  )
+  ;; return varargs.Child.$class;
+  (return (global.get $f_$class__varargs_Child))
+ )
+)
+
 ;;; Class<?> Child.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@varargs.Child
  (type $function.$getClassImpl__java_lang_Class)
@@ -600,8 +668,8 @@
  (local $this (ref null $varargs.Child))
  (local.set $this (ref.cast_static $varargs.Child (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getVarargs.Child();
-  (return (call $function.no.side.effects.$getVarargs.Child__java_lang_Class (ref.func $$getVarargs.Child__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return varargs.Child.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@varargs.Child) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@varargs.Child)

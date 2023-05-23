@@ -299,21 +299,27 @@
 
 ;;; Code for simplelocalclass.SimpleLocalClass [static fields]
 (global $f_$initialized__simplelocalclass_SimpleLocalClass (mut i32) (i32.const 0))
+(global $f_$class__simplelocalclass_SimpleLocalClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for simplelocalclass.SimpleLocalClass.1InnerClass [static fields]
 (global $f_$initialized__simplelocalclass_SimpleLocalClass_1InnerClass (mut i32) (i32.const 0))
+(global $f_$class__simplelocalclass_SimpleLocalClass_1InnerClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures [static fields]
 (global $f_$initialized__simplelocalclass_SimpleLocalClass_1InnerClassWithoutCaptures (mut i32) (i32.const 0))
+(global $f_$class__simplelocalclass_SimpleLocalClass_1InnerClassWithoutCaptures (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for simplelocalclass.SimpleLocalClass.2InnerClass [static fields]
 (global $f_$initialized__simplelocalclass_SimpleLocalClass_2InnerClass (mut i32) (i32.const 0))
+(global $f_$class__simplelocalclass_SimpleLocalClass_2InnerClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for simplelocalclass.SimpleLocalClass.1Abc$InnerClass [static fields]
 (global $f_$initialized__simplelocalclass_SimpleLocalClass_1Abc$InnerClass (mut i32) (i32.const 0))
+(global $f_$class__simplelocalclass_SimpleLocalClass_1Abc$InnerClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for simplelocalclass.SimpleLocalClass.1Klm$InnerClass [static fields]
 (global $f_$initialized__simplelocalclass_SimpleLocalClass_1Klm$InnerClass (mut i32) (i32.const 0))
+(global $f_$class__simplelocalclass_SimpleLocalClass_1Klm$InnerClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for simplelocalclass.SimpleLocalClass [methods]
 
@@ -428,6 +434,22 @@
  )
 )
 
+;;; Class<T> SimpleLocalClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@simplelocalclass.SimpleLocalClass
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((simplelocalclass.SimpleLocalClass.$class == null)) (simplelocalclass.SimpleLocalClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|simplelocalc...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__simplelocalclass_SimpleLocalClass) (ref.null $java.lang.Class))
+   (then
+    ;; (simplelocalclass.SimpleLocalClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|simplelocalc...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__simplelocalclass_SimpleLocalClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplelocalc...|__java_lang_String (ref.func $$getString_|simplelocalc...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return simplelocalclass.SimpleLocalClass.$class;
+  (return (global.get $f_$class__simplelocalclass_SimpleLocalClass))
+ )
+)
+
 ;;; Class<?> SimpleLocalClass.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@simplelocalclass.SimpleLocalClass
  (type $function.$getClassImpl__java_lang_Class)
@@ -436,8 +458,8 @@
  (local $this (ref null $simplelocalclass.SimpleLocalClass))
  (local.set $this (ref.cast_static $simplelocalclass.SimpleLocalClass (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getSimplelocalclass.SimpleLocalClass();
-  (return (call $function.no.side.effects.$getSimplelocalclass.SimpleLocalClass__java_lang_Class (ref.func $$getSimplelocalclass.SimpleLocalClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return simplelocalclass.SimpleLocalClass.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simplelocalclass.SimpleLocalClass) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@simplelocalclass.SimpleLocalClass)
@@ -520,6 +542,22 @@
  )
 )
 
+;;; Class<T> InnerClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@simplelocalclass.SimpleLocalClass.1InnerClass
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((simplelocalclass.SimpleLocalClass.1InnerClass.$class == null)) (simplelocalclass.SimpleLocalClass.1InnerClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|simplelocalc...|_1(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__simplelocalclass_SimpleLocalClass_1InnerClass) (ref.null $java.lang.Class))
+   (then
+    ;; (simplelocalclass.SimpleLocalClass.1InnerClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|simplelocalc...|_1(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__simplelocalclass_SimpleLocalClass_1InnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplelocalc...|_1__java_lang_String (ref.func $$getString_|simplelocalc...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return simplelocalclass.SimpleLocalClass.1InnerClass.$class;
+  (return (global.get $f_$class__simplelocalclass_SimpleLocalClass_1InnerClass))
+ )
+)
+
 ;;; Class<?> InnerClass.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@simplelocalclass.SimpleLocalClass.1InnerClass
  (type $function.$getClassImpl__java_lang_Class)
@@ -528,8 +566,8 @@
  (local $this (ref null $simplelocalclass.SimpleLocalClass.1InnerClass))
  (local.set $this (ref.cast_static $simplelocalclass.SimpleLocalClass.1InnerClass (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getSimplelocalclass.SimpleLocalClass.1InnerClass();
-  (return (call $function.no.side.effects.$getSimplelocalclass.SimpleLocalClass.1InnerClass__java_lang_Class (ref.func $$getSimplelocalclass.SimpleLocalClass.1InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return simplelocalclass.SimpleLocalClass.1InnerClass.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simplelocalclass.SimpleLocalClass.1InnerClass) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@simplelocalclass.SimpleLocalClass.1InnerClass)
@@ -592,6 +630,22 @@
  )
 )
 
+;;; Class<T> InnerClassWithoutCaptures.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.$class == null)) (simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|simplelocalc...|_2(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__simplelocalclass_SimpleLocalClass_1InnerClassWithoutCaptures) (ref.null $java.lang.Class))
+   (then
+    ;; (simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|simplelocalc...|_2(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__simplelocalclass_SimpleLocalClass_1InnerClassWithoutCaptures (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplelocalc...|_2__java_lang_String (ref.func $$getString_|simplelocalc...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.$class;
+  (return (global.get $f_$class__simplelocalclass_SimpleLocalClass_1InnerClassWithoutCaptures))
+ )
+)
+
 ;;; Class<?> InnerClassWithoutCaptures.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures
  (type $function.$getClassImpl__java_lang_Class)
@@ -600,8 +654,8 @@
  (local $this (ref null $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures))
  (local.set $this (ref.cast_static $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getSimplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures();
-  (return (call $function.no.side.effects.$getSimplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures__java_lang_Class (ref.func $$getSimplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures)
@@ -680,6 +734,22 @@
  )
 )
 
+;;; Class<T> InnerClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@simplelocalclass.SimpleLocalClass.2InnerClass
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((simplelocalclass.SimpleLocalClass.2InnerClass.$class == null)) (simplelocalclass.SimpleLocalClass.2InnerClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|simplelocalc...|_3(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__simplelocalclass_SimpleLocalClass_2InnerClass) (ref.null $java.lang.Class))
+   (then
+    ;; (simplelocalclass.SimpleLocalClass.2InnerClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|simplelocalc...|_3(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__simplelocalclass_SimpleLocalClass_2InnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplelocalc...|_3__java_lang_String (ref.func $$getString_|simplelocalc...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return simplelocalclass.SimpleLocalClass.2InnerClass.$class;
+  (return (global.get $f_$class__simplelocalclass_SimpleLocalClass_2InnerClass))
+ )
+)
+
 ;;; Class<?> InnerClass.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@simplelocalclass.SimpleLocalClass.2InnerClass
  (type $function.$getClassImpl__java_lang_Class)
@@ -688,8 +758,8 @@
  (local $this (ref null $simplelocalclass.SimpleLocalClass.2InnerClass))
  (local.set $this (ref.cast_static $simplelocalclass.SimpleLocalClass.2InnerClass (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getSimplelocalclass.SimpleLocalClass.2InnerClass();
-  (return (call $function.no.side.effects.$getSimplelocalclass.SimpleLocalClass.2InnerClass__java_lang_Class (ref.func $$getSimplelocalclass.SimpleLocalClass.2InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return simplelocalclass.SimpleLocalClass.2InnerClass.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simplelocalclass.SimpleLocalClass.2InnerClass) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@simplelocalclass.SimpleLocalClass.2InnerClass)
@@ -752,6 +822,22 @@
  )
 )
 
+;;; Class<T> Abc$InnerClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@simplelocalclass.SimpleLocalClass.1Abc$InnerClass
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((simplelocalclass.SimpleLocalClass.1Abc$InnerClass.$class == null)) (simplelocalclass.SimpleLocalClass.1Abc$InnerClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|simplelocalc...|_4(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__simplelocalclass_SimpleLocalClass_1Abc$InnerClass) (ref.null $java.lang.Class))
+   (then
+    ;; (simplelocalclass.SimpleLocalClass.1Abc$InnerClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|simplelocalc...|_4(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__simplelocalclass_SimpleLocalClass_1Abc$InnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplelocalc...|_4__java_lang_String (ref.func $$getString_|simplelocalc...|_4__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return simplelocalclass.SimpleLocalClass.1Abc$InnerClass.$class;
+  (return (global.get $f_$class__simplelocalclass_SimpleLocalClass_1Abc$InnerClass))
+ )
+)
+
 ;;; Class<?> Abc$InnerClass.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@simplelocalclass.SimpleLocalClass.1Abc$InnerClass
  (type $function.$getClassImpl__java_lang_Class)
@@ -760,8 +846,8 @@
  (local $this (ref null $simplelocalclass.SimpleLocalClass.1Abc$InnerClass))
  (local.set $this (ref.cast_static $simplelocalclass.SimpleLocalClass.1Abc$InnerClass (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getSimplelocalclass.SimpleLocalClass.1Abc$InnerClass();
-  (return (call $function.no.side.effects.$getSimplelocalclass.SimpleLocalClass.1Abc$InnerClass__java_lang_Class (ref.func $$getSimplelocalclass.SimpleLocalClass.1Abc$InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return simplelocalclass.SimpleLocalClass.1Abc$InnerClass.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simplelocalclass.SimpleLocalClass.1Abc$InnerClass) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@simplelocalclass.SimpleLocalClass.1Abc$InnerClass)
@@ -824,6 +910,22 @@
  )
 )
 
+;;; Class<T> Klm$InnerClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@simplelocalclass.SimpleLocalClass.1Klm$InnerClass
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((simplelocalclass.SimpleLocalClass.1Klm$InnerClass.$class == null)) (simplelocalclass.SimpleLocalClass.1Klm$InnerClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|simplelocalc...|_5(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__simplelocalclass_SimpleLocalClass_1Klm$InnerClass) (ref.null $java.lang.Class))
+   (then
+    ;; (simplelocalclass.SimpleLocalClass.1Klm$InnerClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|simplelocalc...|_5(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__simplelocalclass_SimpleLocalClass_1Klm$InnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplelocalc...|_5__java_lang_String (ref.func $$getString_|simplelocalc...|_5__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return simplelocalclass.SimpleLocalClass.1Klm$InnerClass.$class;
+  (return (global.get $f_$class__simplelocalclass_SimpleLocalClass_1Klm$InnerClass))
+ )
+)
+
 ;;; Class<?> Klm$InnerClass.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@simplelocalclass.SimpleLocalClass.1Klm$InnerClass
  (type $function.$getClassImpl__java_lang_Class)
@@ -832,8 +934,8 @@
  (local $this (ref null $simplelocalclass.SimpleLocalClass.1Klm$InnerClass))
  (local.set $this (ref.cast_static $simplelocalclass.SimpleLocalClass.1Klm$InnerClass (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getSimplelocalclass.SimpleLocalClass.1Klm$InnerClass();
-  (return (call $function.no.side.effects.$getSimplelocalclass.SimpleLocalClass.1Klm$InnerClass__java_lang_Class (ref.func $$getSimplelocalclass.SimpleLocalClass.1Klm$InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return simplelocalclass.SimpleLocalClass.1Klm$InnerClass.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simplelocalclass.SimpleLocalClass.1Klm$InnerClass) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@simplelocalclass.SimpleLocalClass.1Klm$InnerClass)

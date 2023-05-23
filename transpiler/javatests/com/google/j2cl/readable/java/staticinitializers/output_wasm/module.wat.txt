@@ -50,6 +50,7 @@
 (global $f_b__staticinitializers_StaticInitializers (mut i32) (i32.const 0))
 (global $f_c__staticinitializers_StaticInitializers (mut i32) (i32.const 0))
 (global $f_$initialized__staticinitializers_StaticInitializers (mut i32) (i32.const 0))
+(global $f_$class__staticinitializers_StaticInitializers (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for staticinitializers.StaticInitializers [methods]
 
@@ -127,6 +128,22 @@
  )
 )
 
+;;; Class<T> StaticInitializers.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@staticinitializers.StaticInitializers
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((staticinitializers.StaticInitializers.$class == null)) (staticinitializers.StaticInitializers.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|staticinitia...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__staticinitializers_StaticInitializers) (ref.null $java.lang.Class))
+   (then
+    ;; (staticinitializers.StaticInitializers.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|staticinitia...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__staticinitializers_StaticInitializers (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|staticinitia...|__java_lang_String (ref.func $$getString_|staticinitia...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return staticinitializers.StaticInitializers.$class;
+  (return (global.get $f_$class__staticinitializers_StaticInitializers))
+ )
+)
+
 ;;; Class<?> StaticInitializers.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@staticinitializers.StaticInitializers
  (type $function.$getClassImpl__java_lang_Class)
@@ -135,8 +152,8 @@
  (local $this (ref null $staticinitializers.StaticInitializers))
  (local.set $this (ref.cast_static $staticinitializers.StaticInitializers (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getStaticinitializers.StaticInitializers();
-  (return (call $function.no.side.effects.$getStaticinitializers.StaticInitializers__java_lang_Class (ref.func $$getStaticinitializers.StaticInitializers__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return staticinitializers.StaticInitializers.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@staticinitializers.StaticInitializers) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@staticinitializers.StaticInitializers)

@@ -148,12 +148,15 @@
 
 ;;; Code for jsinnerclass.Main [static fields]
 (global $f_$initialized__jsinnerclass_Main (mut i32) (i32.const 0))
+(global $f_$class__jsinnerclass_Main (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for jsinnerclass.Main.Outer.Inner [static fields]
 (global $f_$initialized__jsinnerclass_Main_Outer_Inner (mut i32) (i32.const 0))
+(global $f_$class__jsinnerclass_Main_Outer_Inner (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for jsinnerclass.Main.Outer [static fields]
 (global $f_$initialized__jsinnerclass_Main_Outer (mut i32) (i32.const 0))
+(global $f_$class__jsinnerclass_Main_Outer (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for jsinnerclass.Main [methods]
 
@@ -222,6 +225,22 @@
  )
 )
 
+;;; Class<T> Main.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@jsinnerclass.Main
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((jsinnerclass.Main.$class == null)) (jsinnerclass.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsinnerclass...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__jsinnerclass_Main) (ref.null $java.lang.Class))
+   (then
+    ;; (jsinnerclass.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsinnerclass...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__jsinnerclass_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsinnerclass...|__java_lang_String (ref.func $$getString_|jsinnerclass...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return jsinnerclass.Main.$class;
+  (return (global.get $f_$class__jsinnerclass_Main))
+ )
+)
+
 ;;; Class<?> Main.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@jsinnerclass.Main
  (type $function.$getClassImpl__java_lang_Class)
@@ -230,8 +249,8 @@
  (local $this (ref null $jsinnerclass.Main))
  (local.set $this (ref.cast_static $jsinnerclass.Main (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJsinnerclass.Main();
-  (return (call $function.no.side.effects.$getJsinnerclass.Main__java_lang_Class (ref.func $$getJsinnerclass.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return jsinnerclass.Main.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsinnerclass.Main) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsinnerclass.Main)
@@ -313,6 +332,22 @@
  )
 )
 
+;;; Class<T> Inner.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@jsinnerclass.Main.Outer.Inner
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((jsinnerclass.Main.Outer.Inner.$class == null)) (jsinnerclass.Main.Outer.Inner.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsinnerclass...|_1(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__jsinnerclass_Main_Outer_Inner) (ref.null $java.lang.Class))
+   (then
+    ;; (jsinnerclass.Main.Outer.Inner.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsinnerclass...|_1(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__jsinnerclass_Main_Outer_Inner (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsinnerclass...|_1__java_lang_String (ref.func $$getString_|jsinnerclass...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return jsinnerclass.Main.Outer.Inner.$class;
+  (return (global.get $f_$class__jsinnerclass_Main_Outer_Inner))
+ )
+)
+
 ;;; Class<?> Inner.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@jsinnerclass.Main.Outer.Inner
  (type $function.$getClassImpl__java_lang_Class)
@@ -321,8 +356,8 @@
  (local $this (ref null $jsinnerclass.Main.Outer.Inner))
  (local.set $this (ref.cast_static $jsinnerclass.Main.Outer.Inner (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJsinnerclass.Main.Outer.Inner();
-  (return (call $function.no.side.effects.$getJsinnerclass.Main.Outer.Inner__java_lang_Class (ref.func $$getJsinnerclass.Main.Outer.Inner__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return jsinnerclass.Main.Outer.Inner.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsinnerclass.Main.Outer.Inner) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsinnerclass.Main.Outer.Inner)
@@ -414,6 +449,22 @@
  )
 )
 
+;;; Class<T> Outer.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@jsinnerclass.Main.Outer
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((jsinnerclass.Main.Outer.$class == null)) (jsinnerclass.Main.Outer.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsinnerclass...|_2(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__jsinnerclass_Main_Outer) (ref.null $java.lang.Class))
+   (then
+    ;; (jsinnerclass.Main.Outer.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsinnerclass...|_2(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__jsinnerclass_Main_Outer (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsinnerclass...|_2__java_lang_String (ref.func $$getString_|jsinnerclass...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return jsinnerclass.Main.Outer.$class;
+  (return (global.get $f_$class__jsinnerclass_Main_Outer))
+ )
+)
+
 ;;; Class<?> Outer.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@jsinnerclass.Main.Outer
  (type $function.$getClassImpl__java_lang_Class)
@@ -422,8 +473,8 @@
  (local $this (ref null $jsinnerclass.Main.Outer))
  (local.set $this (ref.cast_static $jsinnerclass.Main.Outer (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJsinnerclass.Main.Outer();
-  (return (call $function.no.side.effects.$getJsinnerclass.Main.Outer__java_lang_Class (ref.func $$getJsinnerclass.Main.Outer__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return jsinnerclass.Main.Outer.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsinnerclass.Main.Outer) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsinnerclass.Main.Outer)

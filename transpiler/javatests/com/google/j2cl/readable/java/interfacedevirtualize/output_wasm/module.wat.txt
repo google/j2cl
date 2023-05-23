@@ -63,6 +63,7 @@
 
 ;;; Code for interfacedevirtualize.InterfaceDevirtualize [static fields]
 (global $f_$initialized__interfacedevirtualize_InterfaceDevirtualize (mut i32) (i32.const 0))
+(global $f_$class__interfacedevirtualize_InterfaceDevirtualize (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for interfacedevirtualize.InterfaceDevirtualize [methods]
 
@@ -264,6 +265,22 @@
  )
 )
 
+;;; Class<T> InterfaceDevirtualize.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@interfacedevirtualize.InterfaceDevirtualize
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((interfacedevirtualize.InterfaceDevirtualize.$class == null)) (interfacedevirtualize.InterfaceDevirtualize.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|interfacedev...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__interfacedevirtualize_InterfaceDevirtualize) (ref.null $java.lang.Class))
+   (then
+    ;; (interfacedevirtualize.InterfaceDevirtualize.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|interfacedev...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__interfacedevirtualize_InterfaceDevirtualize (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfacedev...|__java_lang_String (ref.func $$getString_|interfacedev...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return interfacedevirtualize.InterfaceDevirtualize.$class;
+  (return (global.get $f_$class__interfacedevirtualize_InterfaceDevirtualize))
+ )
+)
+
 ;;; Class<?> InterfaceDevirtualize.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@interfacedevirtualize.InterfaceDevirtualize
  (type $function.$getClassImpl__java_lang_Class)
@@ -272,8 +289,8 @@
  (local $this (ref null $interfacedevirtualize.InterfaceDevirtualize))
  (local.set $this (ref.cast_static $interfacedevirtualize.InterfaceDevirtualize (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getInterfacedevirtualize.InterfaceDevirtualize();
-  (return (call $function.no.side.effects.$getInterfacedevirtualize.InterfaceDevirtualize__java_lang_Class (ref.func $$getInterfacedevirtualize.InterfaceDevirtualize__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return interfacedevirtualize.InterfaceDevirtualize.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@interfacedevirtualize.InterfaceDevirtualize) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@interfacedevirtualize.InterfaceDevirtualize)

@@ -49,6 +49,7 @@
 
 ;;; Code for whilestatement.WhileStatement [static fields]
 (global $f_$initialized__whilestatement_WhileStatement (mut i32) (i32.const 0))
+(global $f_$class__whilestatement_WhileStatement (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for whilestatement.WhileStatement [methods]
 
@@ -138,6 +139,22 @@
  )
 )
 
+;;; Class<T> WhileStatement.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@whilestatement.WhileStatement
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((whilestatement.WhileStatement.$class == null)) (whilestatement.WhileStatement.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|whilestateme...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__whilestatement_WhileStatement) (ref.null $java.lang.Class))
+   (then
+    ;; (whilestatement.WhileStatement.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|whilestateme...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__whilestatement_WhileStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|whilestateme...|__java_lang_String (ref.func $$getString_|whilestateme...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return whilestatement.WhileStatement.$class;
+  (return (global.get $f_$class__whilestatement_WhileStatement))
+ )
+)
+
 ;;; Class<?> WhileStatement.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@whilestatement.WhileStatement
  (type $function.$getClassImpl__java_lang_Class)
@@ -146,8 +163,8 @@
  (local $this (ref null $whilestatement.WhileStatement))
  (local.set $this (ref.cast_static $whilestatement.WhileStatement (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getWhilestatement.WhileStatement();
-  (return (call $function.no.side.effects.$getWhilestatement.WhileStatement__java_lang_Class (ref.func $$getWhilestatement.WhileStatement__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return whilestatement.WhileStatement.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@whilestatement.WhileStatement) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@whilestatement.WhileStatement)

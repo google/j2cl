@@ -385,27 +385,35 @@
 ;;; Code for localclassinstaticcontext.LocalClassInStaticContext [static fields]
 (global $f_f__localclassinstaticcontext_LocalClassInStaticContext (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
 (global $f_$initialized__localclassinstaticcontext_LocalClassInStaticContext (mut i32) (i32.const 0))
+(global $f_$class__localclassinstaticcontext_LocalClassInStaticContext (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for localclassinstaticcontext.LocalClassInStaticContext.1 [static fields]
 (global $f_$initialized__localclassinstaticcontext_LocalClassInStaticContext_1 (mut i32) (i32.const 0))
+(global $f_$class__localclassinstaticcontext_LocalClassInStaticContext_1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for localclassinstaticcontext.LocalClassInStaticContext.3 [static fields]
 (global $f_$initialized__localclassinstaticcontext_LocalClassInStaticContext_3 (mut i32) (i32.const 0))
+(global $f_$class__localclassinstaticcontext_LocalClassInStaticContext_3 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for localclassinstaticcontext.LocalClassInStaticContext.2 [static fields]
 (global $f_$initialized__localclassinstaticcontext_LocalClassInStaticContext_2 (mut i32) (i32.const 0))
+(global $f_$class__localclassinstaticcontext_LocalClassInStaticContext_2 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for localclassinstaticcontext.LocalClassInStaticContext.C.1D [static fields]
 (global $f_$initialized__localclassinstaticcontext_LocalClassInStaticContext_C_1D (mut i32) (i32.const 0))
+(global $f_$class__localclassinstaticcontext_LocalClassInStaticContext_C_1D (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for localclassinstaticcontext.LocalClassInStaticContext.C [static fields]
 (global $f_$initialized__localclassinstaticcontext_LocalClassInStaticContext_C (mut i32) (i32.const 0))
+(global $f_$class__localclassinstaticcontext_LocalClassInStaticContext_C (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for localclassinstaticcontext.LocalClassInStaticContext.1A [static fields]
 (global $f_$initialized__localclassinstaticcontext_LocalClassInStaticContext_1A (mut i32) (i32.const 0))
+(global $f_$class__localclassinstaticcontext_LocalClassInStaticContext_1A (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for localclassinstaticcontext.LocalClassInStaticContext.1B [static fields]
 (global $f_$initialized__localclassinstaticcontext_LocalClassInStaticContext_1B (mut i32) (i32.const 0))
+(global $f_$class__localclassinstaticcontext_LocalClassInStaticContext_1B (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for localclassinstaticcontext.LocalClassInStaticContext [methods]
 
@@ -490,6 +498,22 @@
  )
 )
 
+;;; Class<T> LocalClassInStaticContext.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((localclassinstaticcontext.LocalClassInStaticContext.$class == null)) (localclassinstaticcontext.LocalClassInStaticContext.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__localclassinstaticcontext_LocalClassInStaticContext) (ref.null $java.lang.Class))
+   (then
+    ;; (localclassinstaticcontext.LocalClassInStaticContext.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__localclassinstaticcontext_LocalClassInStaticContext (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclassin...|__java_lang_String (ref.func $$getString_|localclassin...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return localclassinstaticcontext.LocalClassInStaticContext.$class;
+  (return (global.get $f_$class__localclassinstaticcontext_LocalClassInStaticContext))
+ )
+)
+
 ;;; Class<?> LocalClassInStaticContext.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext
  (type $function.$getClassImpl__java_lang_Class)
@@ -498,8 +522,8 @@
  (local $this (ref null $localclassinstaticcontext.LocalClassInStaticContext))
  (local.set $this (ref.cast_static $localclassinstaticcontext.LocalClassInStaticContext (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getLocalclassinstaticcontext.LocalClassInStaticContext();
-  (return (call $function.no.side.effects.$getLocalclassinstaticcontext.LocalClassInStaticContext__java_lang_Class (ref.func $$getLocalclassinstaticcontext.LocalClassInStaticContext__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return localclassinstaticcontext.LocalClassInStaticContext.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext)
@@ -560,6 +584,22 @@
  )
 )
 
+;;; Class<T> <anonymous> extends Object.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.1
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((localclassinstaticcontext.LocalClassInStaticContext.1.$class == null)) (localclassinstaticcontext.LocalClassInStaticContext.1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|_1(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__localclassinstaticcontext_LocalClassInStaticContext_1) (ref.null $java.lang.Class))
+   (then
+    ;; (localclassinstaticcontext.LocalClassInStaticContext.1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|_1(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__localclassinstaticcontext_LocalClassInStaticContext_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclassin...|_1__java_lang_String (ref.func $$getString_|localclassin...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return localclassinstaticcontext.LocalClassInStaticContext.1.$class;
+  (return (global.get $f_$class__localclassinstaticcontext_LocalClassInStaticContext_1))
+ )
+)
+
 ;;; Class<?> <anonymous> extends Object.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.1
  (type $function.$getClassImpl__java_lang_Class)
@@ -568,8 +608,8 @@
  (local $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.1))
  (local.set $this (ref.cast_static $localclassinstaticcontext.LocalClassInStaticContext.1 (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getLocalclassinstaticcontext.LocalClassInStaticContext.1();
-  (return (call $function.no.side.effects.$getLocalclassinstaticcontext.LocalClassInStaticContext.1__java_lang_Class (ref.func $$getLocalclassinstaticcontext.LocalClassInStaticContext.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return localclassinstaticcontext.LocalClassInStaticContext.1.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.1) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.1)
@@ -645,6 +685,22 @@
  )
 )
 
+;;; Class<T> <anonymous> extends Object.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.3
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((localclassinstaticcontext.LocalClassInStaticContext.3.$class == null)) (localclassinstaticcontext.LocalClassInStaticContext.3.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|_2(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__localclassinstaticcontext_LocalClassInStaticContext_3) (ref.null $java.lang.Class))
+   (then
+    ;; (localclassinstaticcontext.LocalClassInStaticContext.3.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|_2(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__localclassinstaticcontext_LocalClassInStaticContext_3 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclassin...|_2__java_lang_String (ref.func $$getString_|localclassin...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return localclassinstaticcontext.LocalClassInStaticContext.3.$class;
+  (return (global.get $f_$class__localclassinstaticcontext_LocalClassInStaticContext_3))
+ )
+)
+
 ;;; Class<?> <anonymous> extends Object.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.3
  (type $function.$getClassImpl__java_lang_Class)
@@ -653,8 +709,8 @@
  (local $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.3))
  (local.set $this (ref.cast_static $localclassinstaticcontext.LocalClassInStaticContext.3 (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getLocalclassinstaticcontext.LocalClassInStaticContext.3();
-  (return (call $function.no.side.effects.$getLocalclassinstaticcontext.LocalClassInStaticContext.3__java_lang_Class (ref.func $$getLocalclassinstaticcontext.LocalClassInStaticContext.3__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return localclassinstaticcontext.LocalClassInStaticContext.3.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.3) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.3)
@@ -715,6 +771,22 @@
  )
 )
 
+;;; Class<T> <anonymous> extends Object.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.2
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((localclassinstaticcontext.LocalClassInStaticContext.2.$class == null)) (localclassinstaticcontext.LocalClassInStaticContext.2.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|_3(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__localclassinstaticcontext_LocalClassInStaticContext_2) (ref.null $java.lang.Class))
+   (then
+    ;; (localclassinstaticcontext.LocalClassInStaticContext.2.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|_3(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__localclassinstaticcontext_LocalClassInStaticContext_2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclassin...|_3__java_lang_String (ref.func $$getString_|localclassin...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return localclassinstaticcontext.LocalClassInStaticContext.2.$class;
+  (return (global.get $f_$class__localclassinstaticcontext_LocalClassInStaticContext_2))
+ )
+)
+
 ;;; Class<?> <anonymous> extends Object.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.2
  (type $function.$getClassImpl__java_lang_Class)
@@ -723,8 +795,8 @@
  (local $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.2))
  (local.set $this (ref.cast_static $localclassinstaticcontext.LocalClassInStaticContext.2 (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getLocalclassinstaticcontext.LocalClassInStaticContext.2();
-  (return (call $function.no.side.effects.$getLocalclassinstaticcontext.LocalClassInStaticContext.2__java_lang_Class (ref.func $$getLocalclassinstaticcontext.LocalClassInStaticContext.2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return localclassinstaticcontext.LocalClassInStaticContext.2.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.2) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.2)
@@ -803,6 +875,22 @@
  )
 )
 
+;;; Class<T> D.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.C.1D
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((localclassinstaticcontext.LocalClassInStaticContext.C.1D.$class == null)) (localclassinstaticcontext.LocalClassInStaticContext.C.1D.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|_4(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__localclassinstaticcontext_LocalClassInStaticContext_C_1D) (ref.null $java.lang.Class))
+   (then
+    ;; (localclassinstaticcontext.LocalClassInStaticContext.C.1D.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|_4(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__localclassinstaticcontext_LocalClassInStaticContext_C_1D (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclassin...|_4__java_lang_String (ref.func $$getString_|localclassin...|_4__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return localclassinstaticcontext.LocalClassInStaticContext.C.1D.$class;
+  (return (global.get $f_$class__localclassinstaticcontext_LocalClassInStaticContext_C_1D))
+ )
+)
+
 ;;; Class<?> D.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.C.1D
  (type $function.$getClassImpl__java_lang_Class)
@@ -811,8 +899,8 @@
  (local $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.C.1D))
  (local.set $this (ref.cast_static $localclassinstaticcontext.LocalClassInStaticContext.C.1D (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getLocalclassinstaticcontext.LocalClassInStaticContext.C.1D();
-  (return (call $function.no.side.effects.$getLocalclassinstaticcontext.LocalClassInStaticContext.C.1D__java_lang_Class (ref.func $$getLocalclassinstaticcontext.LocalClassInStaticContext.C.1D__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return localclassinstaticcontext.LocalClassInStaticContext.C.1D.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.C.1D) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.C.1D)
@@ -905,6 +993,22 @@
  )
 )
 
+;;; Class<T> C.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.C
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((localclassinstaticcontext.LocalClassInStaticContext.C.$class == null)) (localclassinstaticcontext.LocalClassInStaticContext.C.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|_5(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__localclassinstaticcontext_LocalClassInStaticContext_C) (ref.null $java.lang.Class))
+   (then
+    ;; (localclassinstaticcontext.LocalClassInStaticContext.C.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|_5(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__localclassinstaticcontext_LocalClassInStaticContext_C (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclassin...|_5__java_lang_String (ref.func $$getString_|localclassin...|_5__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return localclassinstaticcontext.LocalClassInStaticContext.C.$class;
+  (return (global.get $f_$class__localclassinstaticcontext_LocalClassInStaticContext_C))
+ )
+)
+
 ;;; Class<?> C.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.C
  (type $function.$getClassImpl__java_lang_Class)
@@ -913,8 +1017,8 @@
  (local $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.C))
  (local.set $this (ref.cast_static $localclassinstaticcontext.LocalClassInStaticContext.C (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getLocalclassinstaticcontext.LocalClassInStaticContext.C();
-  (return (call $function.no.side.effects.$getLocalclassinstaticcontext.LocalClassInStaticContext.C__java_lang_Class (ref.func $$getLocalclassinstaticcontext.LocalClassInStaticContext.C__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return localclassinstaticcontext.LocalClassInStaticContext.C.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.C) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.C)
@@ -975,6 +1079,22 @@
  )
 )
 
+;;; Class<T> A.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.1A
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((localclassinstaticcontext.LocalClassInStaticContext.1A.$class == null)) (localclassinstaticcontext.LocalClassInStaticContext.1A.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|_6(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__localclassinstaticcontext_LocalClassInStaticContext_1A) (ref.null $java.lang.Class))
+   (then
+    ;; (localclassinstaticcontext.LocalClassInStaticContext.1A.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|_6(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__localclassinstaticcontext_LocalClassInStaticContext_1A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclassin...|_6__java_lang_String (ref.func $$getString_|localclassin...|_6__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return localclassinstaticcontext.LocalClassInStaticContext.1A.$class;
+  (return (global.get $f_$class__localclassinstaticcontext_LocalClassInStaticContext_1A))
+ )
+)
+
 ;;; Class<?> A.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.1A
  (type $function.$getClassImpl__java_lang_Class)
@@ -983,8 +1103,8 @@
  (local $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.1A))
  (local.set $this (ref.cast_static $localclassinstaticcontext.LocalClassInStaticContext.1A (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getLocalclassinstaticcontext.LocalClassInStaticContext.1A();
-  (return (call $function.no.side.effects.$getLocalclassinstaticcontext.LocalClassInStaticContext.1A__java_lang_Class (ref.func $$getLocalclassinstaticcontext.LocalClassInStaticContext.1A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return localclassinstaticcontext.LocalClassInStaticContext.1A.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.1A) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.1A)
@@ -1045,6 +1165,22 @@
  )
 )
 
+;;; Class<T> B.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.1B
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((localclassinstaticcontext.LocalClassInStaticContext.1B.$class == null)) (localclassinstaticcontext.LocalClassInStaticContext.1B.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|_7(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__localclassinstaticcontext_LocalClassInStaticContext_1B) (ref.null $java.lang.Class))
+   (then
+    ;; (localclassinstaticcontext.LocalClassInStaticContext.1B.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|_7(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__localclassinstaticcontext_LocalClassInStaticContext_1B (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclassin...|_7__java_lang_String (ref.func $$getString_|localclassin...|_7__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return localclassinstaticcontext.LocalClassInStaticContext.1B.$class;
+  (return (global.get $f_$class__localclassinstaticcontext_LocalClassInStaticContext_1B))
+ )
+)
+
 ;;; Class<?> B.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.1B
  (type $function.$getClassImpl__java_lang_Class)
@@ -1053,8 +1189,8 @@
  (local $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.1B))
  (local.set $this (ref.cast_static $localclassinstaticcontext.LocalClassInStaticContext.1B (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getLocalclassinstaticcontext.LocalClassInStaticContext.1B();
-  (return (call $function.no.side.effects.$getLocalclassinstaticcontext.LocalClassInStaticContext.1B__java_lang_Class (ref.func $$getLocalclassinstaticcontext.LocalClassInStaticContext.1B__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return localclassinstaticcontext.LocalClassInStaticContext.1B.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.1B) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.1B)

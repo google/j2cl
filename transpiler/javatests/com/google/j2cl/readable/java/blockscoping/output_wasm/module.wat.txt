@@ -51,6 +51,7 @@
 
 ;;; Code for blockscoping.BlockScoping [static fields]
 (global $f_$initialized__blockscoping_BlockScoping (mut i32) (i32.const 0))
+(global $f_$class__blockscoping_BlockScoping (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for blockscoping.BlockScoping [methods]
 
@@ -168,6 +169,22 @@
  )
 )
 
+;;; Class<T> BlockScoping.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@blockscoping.BlockScoping
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((blockscoping.BlockScoping.$class == null)) (blockscoping.BlockScoping.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|blockscoping...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__blockscoping_BlockScoping) (ref.null $java.lang.Class))
+   (then
+    ;; (blockscoping.BlockScoping.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|blockscoping...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__blockscoping_BlockScoping (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|blockscoping...|__java_lang_String (ref.func $$getString_|blockscoping...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return blockscoping.BlockScoping.$class;
+  (return (global.get $f_$class__blockscoping_BlockScoping))
+ )
+)
+
 ;;; Class<?> BlockScoping.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@blockscoping.BlockScoping
  (type $function.$getClassImpl__java_lang_Class)
@@ -176,8 +193,8 @@
  (local $this (ref null $blockscoping.BlockScoping))
  (local.set $this (ref.cast_static $blockscoping.BlockScoping (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getBlockscoping.BlockScoping();
-  (return (call $function.no.side.effects.$getBlockscoping.BlockScoping__java_lang_Class (ref.func $$getBlockscoping.BlockScoping__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return blockscoping.BlockScoping.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@blockscoping.BlockScoping) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@blockscoping.BlockScoping)

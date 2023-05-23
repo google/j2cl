@@ -49,6 +49,7 @@
 
 ;;; Code for ifstatement.IfStatement [static fields]
 (global $f_$initialized__ifstatement_IfStatement (mut i32) (i32.const 0))
+(global $f_$class__ifstatement_IfStatement (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for ifstatement.IfStatement [methods]
 
@@ -170,6 +171,22 @@
  )
 )
 
+;;; Class<T> IfStatement.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@ifstatement.IfStatement
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((ifstatement.IfStatement.$class == null)) (ifstatement.IfStatement.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|ifstatement....|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__ifstatement_IfStatement) (ref.null $java.lang.Class))
+   (then
+    ;; (ifstatement.IfStatement.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|ifstatement....|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__ifstatement_IfStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|ifstatement....|__java_lang_String (ref.func $$getString_|ifstatement....|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return ifstatement.IfStatement.$class;
+  (return (global.get $f_$class__ifstatement_IfStatement))
+ )
+)
+
 ;;; Class<?> IfStatement.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@ifstatement.IfStatement
  (type $function.$getClassImpl__java_lang_Class)
@@ -178,8 +195,8 @@
  (local $this (ref null $ifstatement.IfStatement))
  (local.set $this (ref.cast_static $ifstatement.IfStatement (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getIfstatement.IfStatement();
-  (return (call $function.no.side.effects.$getIfstatement.IfStatement__java_lang_Class (ref.func $$getIfstatement.IfStatement__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return ifstatement.IfStatement.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@ifstatement.IfStatement) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@ifstatement.IfStatement)

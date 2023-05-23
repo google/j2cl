@@ -163,15 +163,19 @@
 
 ;;; Code for accidentaloverride.Parent [static fields]
 (global $f_$initialized__accidentaloverride_Parent (mut i32) (i32.const 0))
+(global $f_$class__accidentaloverride_Parent (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for accidentaloverride.SuperInterface [static fields]
 (global $f_$initialized__accidentaloverride_SuperInterface (mut i32) (i32.const 0))
+(global $f_$class__accidentaloverride_SuperInterface (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for accidentaloverride.AnotherAccidentalOverride [static fields]
 (global $f_$initialized__accidentaloverride_AnotherAccidentalOverride (mut i32) (i32.const 0))
+(global $f_$class__accidentaloverride_AnotherAccidentalOverride (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for accidentaloverride.AccidentalOverride [static fields]
 (global $f_$initialized__accidentaloverride_AccidentalOverride (mut i32) (i32.const 0))
+(global $f_$class__accidentaloverride_AccidentalOverride (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for accidentaloverride.SuperInterface [methods]
 
@@ -191,6 +195,22 @@
   ;; (accidentaloverride.SuperInterface.$initialized = true);
   ;;@ accidentaloverride/AccidentalOverride.java:23:10
   (global.set $f_$initialized__accidentaloverride_SuperInterface (i32.const 1))
+ )
+)
+
+;;; Class<T> SuperInterface.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@accidentaloverride.SuperInterface
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((accidentaloverride.SuperInterface.$class == null)) (accidentaloverride.SuperInterface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|accidentalov...|_1()));
+  (if (ref.eq (global.get $f_$class__accidentaloverride_SuperInterface) (ref.null $java.lang.Class))
+   (then
+    ;; (accidentaloverride.SuperInterface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|accidentalov...|_1()));
+    (global.set $f_$class__accidentaloverride_SuperInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|accidentalov...|_1__java_lang_String (ref.func $$getString_|accidentalov...|_1__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return accidentaloverride.SuperInterface.$class;
+  (return (global.get $f_$class__accidentaloverride_SuperInterface))
  )
 )
 
@@ -263,6 +283,22 @@
  )
 )
 
+;;; Class<T> Parent.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@accidentaloverride.Parent
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((accidentaloverride.Parent.$class == null)) (accidentaloverride.Parent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|accidentalov...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__accidentaloverride_Parent) (ref.null $java.lang.Class))
+   (then
+    ;; (accidentaloverride.Parent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|accidentalov...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__accidentaloverride_Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|accidentalov...|__java_lang_String (ref.func $$getString_|accidentalov...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return accidentaloverride.Parent.$class;
+  (return (global.get $f_$class__accidentaloverride_Parent))
+ )
+)
+
 ;;; Class<?> Parent.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@accidentaloverride.Parent
  (type $function.$getClassImpl__java_lang_Class)
@@ -271,8 +307,8 @@
  (local $this (ref null $accidentaloverride.Parent))
  (local.set $this (ref.cast_static $accidentaloverride.Parent (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getAccidentaloverride.Parent();
-  (return (call $function.no.side.effects.$getAccidentaloverride.Parent__java_lang_Class (ref.func $$getAccidentaloverride.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return accidentaloverride.Parent.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@accidentaloverride.Parent) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@accidentaloverride.Parent)
@@ -365,6 +401,22 @@
  )
 )
 
+;;; Class<T> AnotherAccidentalOverride.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@accidentaloverride.AnotherAccidentalOverride
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((accidentaloverride.AnotherAccidentalOverride.$class == null)) (accidentaloverride.AnotherAccidentalOverride.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|accidentalov...|_2(),accidentaloverride.Parent.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__accidentaloverride_AnotherAccidentalOverride) (ref.null $java.lang.Class))
+   (then
+    ;; (accidentaloverride.AnotherAccidentalOverride.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|accidentalov...|_2(),accidentaloverride.Parent.$getClassMetadata()));
+    (global.set $f_$class__accidentaloverride_AnotherAccidentalOverride (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|accidentalov...|_2__java_lang_String (ref.func $$getString_|accidentalov...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@accidentaloverride.Parent) )))
+   )
+  )
+  ;; return accidentaloverride.AnotherAccidentalOverride.$class;
+  (return (global.get $f_$class__accidentaloverride_AnotherAccidentalOverride))
+ )
+)
+
 ;;; Class<?> AnotherAccidentalOverride.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@accidentaloverride.AnotherAccidentalOverride
  (type $function.$getClassImpl__java_lang_Class)
@@ -373,8 +425,8 @@
  (local $this (ref null $accidentaloverride.AnotherAccidentalOverride))
  (local.set $this (ref.cast_static $accidentaloverride.AnotherAccidentalOverride (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getAccidentaloverride.AnotherAccidentalOverride();
-  (return (call $function.no.side.effects.$getAccidentaloverride.AnotherAccidentalOverride__java_lang_Class (ref.func $$getAccidentaloverride.AnotherAccidentalOverride__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return accidentaloverride.AnotherAccidentalOverride.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@accidentaloverride.AnotherAccidentalOverride) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@accidentaloverride.AnotherAccidentalOverride)
@@ -451,6 +503,22 @@
  )
 )
 
+;;; Class<T> AccidentalOverride.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@accidentaloverride.AccidentalOverride
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((accidentaloverride.AccidentalOverride.$class == null)) (accidentaloverride.AccidentalOverride.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|accidentalov...|_3(),accidentaloverride.Parent.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__accidentaloverride_AccidentalOverride) (ref.null $java.lang.Class))
+   (then
+    ;; (accidentaloverride.AccidentalOverride.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|accidentalov...|_3(),accidentaloverride.Parent.$getClassMetadata()));
+    (global.set $f_$class__accidentaloverride_AccidentalOverride (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|accidentalov...|_3__java_lang_String (ref.func $$getString_|accidentalov...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@accidentaloverride.Parent) )))
+   )
+  )
+  ;; return accidentaloverride.AccidentalOverride.$class;
+  (return (global.get $f_$class__accidentaloverride_AccidentalOverride))
+ )
+)
+
 ;;; Class<?> AccidentalOverride.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@accidentaloverride.AccidentalOverride
  (type $function.$getClassImpl__java_lang_Class)
@@ -459,8 +527,8 @@
  (local $this (ref null $accidentaloverride.AccidentalOverride))
  (local.set $this (ref.cast_static $accidentaloverride.AccidentalOverride (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getAccidentaloverride.AccidentalOverride();
-  (return (call $function.no.side.effects.$getAccidentaloverride.AccidentalOverride__java_lang_Class (ref.func $$getAccidentaloverride.AccidentalOverride__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return accidentaloverride.AccidentalOverride.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@accidentaloverride.AccidentalOverride) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@accidentaloverride.AccidentalOverride)

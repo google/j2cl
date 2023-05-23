@@ -19,14 +19,17 @@
 
 ;;; Code for equalsandhashcodeininterface.BothInInterface [static fields]
 (global $f_$initialized__equalsandhashcodeininterface_BothInInterface (mut i32) (i32.const 0))
+(global $f_$class__equalsandhashcodeininterface_BothInInterface (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for equalsandhashcodeininterface.NeitherInInterface [static fields]
 (global $f_$initialized__equalsandhashcodeininterface_NeitherInInterface (mut i32) (i32.const 0))
+(global $f_$class__equalsandhashcodeininterface_NeitherInInterface (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for equalsandhashcodeininterface.ViaJsMethodInInterface [static fields]
 
 ;;; Code for equalsandhashcodeininterface.ViaJsMethodInInterface.$Overlay [static fields]
 (global $f_$initialized__equalsandhashcodeininterface_ViaJsMethodInInterface_$Overlay (mut i32) (i32.const 0))
+(global $f_$class__equalsandhashcodeininterface_ViaJsMethodInInterface_$Overlay (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for equalsandhashcodeininterface.BothInInterface [methods]
 
@@ -49,6 +52,22 @@
  )
 )
 
+;;; Class<T> BothInInterface.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@equalsandhashcodeininterface.BothInInterface
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((equalsandhashcodeininterface.BothInInterface.$class == null)) (equalsandhashcodeininterface.BothInInterface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|equalsandhas...|()));
+  (if (ref.eq (global.get $f_$class__equalsandhashcodeininterface_BothInInterface) (ref.null $java.lang.Class))
+   (then
+    ;; (equalsandhashcodeininterface.BothInInterface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|equalsandhas...|()));
+    (global.set $f_$class__equalsandhashcodeininterface_BothInInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|equalsandhas...|__java_lang_String (ref.func $$getString_|equalsandhas...|__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return equalsandhashcodeininterface.BothInInterface.$class;
+  (return (global.get $f_$class__equalsandhashcodeininterface_BothInInterface))
+ )
+)
+
 ;;; Code for equalsandhashcodeininterface.NeitherInInterface [methods]
 
 ;;; void NeitherInInterface.$clinit()
@@ -67,6 +86,22 @@
   ;; (equalsandhashcodeininterface.NeitherInInterface.$initialized = true);
   ;;@ equalsandhashcodeininterface/NeitherInInterface.java:18:17
   (global.set $f_$initialized__equalsandhashcodeininterface_NeitherInInterface (i32.const 1))
+ )
+)
+
+;;; Class<T> NeitherInInterface.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@equalsandhashcodeininterface.NeitherInInterface
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((equalsandhashcodeininterface.NeitherInInterface.$class == null)) (equalsandhashcodeininterface.NeitherInInterface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|equalsandhas...|_1()));
+  (if (ref.eq (global.get $f_$class__equalsandhashcodeininterface_NeitherInInterface) (ref.null $java.lang.Class))
+   (then
+    ;; (equalsandhashcodeininterface.NeitherInInterface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|equalsandhas...|_1()));
+    (global.set $f_$class__equalsandhashcodeininterface_NeitherInInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|equalsandhas...|_1__java_lang_String (ref.func $$getString_|equalsandhas...|_1__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return equalsandhashcodeininterface.NeitherInInterface.$class;
+  (return (global.get $f_$class__equalsandhashcodeininterface_NeitherInInterface))
  )
 )
 
@@ -100,5 +135,21 @@
   ;; (equalsandhashcodeininterface.ViaJsMethodInInterface.$Overlay.$initialized = true);
   ;;@ equalsandhashcodeininterface/ViaJsMethodInInterface.java:23:17
   (global.set $f_$initialized__equalsandhashcodeininterface_ViaJsMethodInInterface_$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@equalsandhashcodeininterface.ViaJsMethodInInterface.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((equalsandhashcodeininterface.ViaJsMethodInInterface.$Overlay.$class == null)) (equalsandhashcodeininterface.ViaJsMethodInInterface.$Overlay.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|equalsandhas...|_2()));
+  (if (ref.eq (global.get $f_$class__equalsandhashcodeininterface_ViaJsMethodInInterface_$Overlay) (ref.null $java.lang.Class))
+   (then
+    ;; (equalsandhashcodeininterface.ViaJsMethodInInterface.$Overlay.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|equalsandhas...|_2()));
+    (global.set $f_$class__equalsandhashcodeininterface_ViaJsMethodInInterface_$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|equalsandhas...|_2__java_lang_String (ref.func $$getString_|equalsandhas...|_2__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return equalsandhashcodeininterface.ViaJsMethodInInterface.$Overlay.$class;
+  (return (global.get $f_$class__equalsandhashcodeininterface_ViaJsMethodInInterface_$Overlay))
  )
 )

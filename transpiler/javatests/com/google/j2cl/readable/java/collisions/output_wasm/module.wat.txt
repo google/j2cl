@@ -328,26 +328,33 @@
 
 ;;; Code for collisions.goog [static fields]
 (global $f_$initialized__collisions_goog (mut i32) (i32.const 0))
+(global $f_$class__collisions_goog (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for collisions.Blah [static fields]
 
 ;;; Code for collisions.KtBlah [static fields]
 (global $f_$initialized__collisions_KtBlah (mut i32) (i32.const 0))
+(global $f_$class__collisions_KtBlah (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for collisions.foo [static fields]
 (global $f_$initialized__collisions_foo (mut i32) (i32.const 0))
+(global $f_$class__collisions_foo (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for collisions.bar [static fields]
 (global $f_$initialized__collisions_bar (mut i32) (i32.const 0))
+(global $f_$class__collisions_bar (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for collisions.Other [static fields]
 (global $f_$initialized__collisions_Other (mut i32) (i32.const 0))
+(global $f_$class__collisions_Other (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for collisions.T [static fields]
 (global $f_$initialized__collisions_T (mut i32) (i32.const 0))
+(global $f_$class__collisions_T (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for collisions.Blah.$Overlay [static fields]
 (global $f_$initialized__collisions_Blah_$Overlay (mut i32) (i32.const 0))
+(global $f_$class__collisions_Blah_$Overlay (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for collisions.Blah.$Overlay [methods]
 
@@ -370,6 +377,22 @@
  )
 )
 
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@collisions.Blah.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((collisions.Blah.$Overlay.$class == null)) (collisions.Blah.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|collisions.B...|(),null));
+  (if (ref.eq (global.get $f_$class__collisions_Blah_$Overlay) (ref.null $java.lang.Class))
+   (then
+    ;; (collisions.Blah.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|collisions.B...|(),null));
+    (global.set $f_$class__collisions_Blah_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.B...|__java_lang_String (ref.func $$getString_|collisions.B...|__java_lang_String@javaemul.internal.StringPool) )(ref.null $java.lang.Class)))
+   )
+  )
+  ;; return collisions.Blah.$Overlay.$class;
+  (return (global.get $f_$class__collisions_Blah_$Overlay))
+ )
+)
+
 ;;; Class<?> $Overlay.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@collisions.Blah.$Overlay
  (type $function.$getClassImpl__java_lang_Class)
@@ -378,8 +401,8 @@
  (local $this (ref null $collisions.Blah.$Overlay))
  (local.set $this (ref.cast_static $collisions.Blah.$Overlay (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getCollisions.Blah.$Overlay();
-  (return (call $function.no.side.effects.$getCollisions.Blah.$Overlay__java_lang_Class (ref.func $$getCollisions.Blah.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return collisions.Blah.$Overlay.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@collisions.Blah.$Overlay) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@collisions.Blah.$Overlay)
@@ -440,6 +463,22 @@
  )
 )
 
+;;; Class<T> goog.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@collisions.goog
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((collisions.goog.$class == null)) (collisions.goog.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|collisions.goog|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__collisions_goog) (ref.null $java.lang.Class))
+   (then
+    ;; (collisions.goog.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|collisions.goog|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__collisions_goog (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.goog|__java_lang_String (ref.func $$getString_|collisions.goog|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return collisions.goog.$class;
+  (return (global.get $f_$class__collisions_goog))
+ )
+)
+
 ;;; Class<?> goog.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@collisions.goog
  (type $function.$getClassImpl__java_lang_Class)
@@ -448,8 +487,8 @@
  (local $this (ref null $collisions.goog))
  (local.set $this (ref.cast_static $collisions.goog (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getCollisions.goog();
-  (return (call $function.no.side.effects.$getCollisions.goog__java_lang_Class (ref.func $$getCollisions.goog__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return collisions.goog.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@collisions.goog) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@collisions.goog)
@@ -550,6 +589,22 @@
  )
 )
 
+;;; Class<T> KtBlah.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@collisions.KtBlah
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((collisions.KtBlah.$class == null)) (collisions.KtBlah.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|collisions.K...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__collisions_KtBlah) (ref.null $java.lang.Class))
+   (then
+    ;; (collisions.KtBlah.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|collisions.K...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__collisions_KtBlah (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.K...|__java_lang_String (ref.func $$getString_|collisions.K...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return collisions.KtBlah.$class;
+  (return (global.get $f_$class__collisions_KtBlah))
+ )
+)
+
 ;;; Class<?> KtBlah.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@collisions.KtBlah
  (type $function.$getClassImpl__java_lang_Class)
@@ -558,8 +613,8 @@
  (local $this (ref null $collisions.KtBlah))
  (local.set $this (ref.cast_static $collisions.KtBlah (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getCollisions.KtBlah();
-  (return (call $function.no.side.effects.$getCollisions.KtBlah__java_lang_Class (ref.func $$getCollisions.KtBlah__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return collisions.KtBlah.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@collisions.KtBlah) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@collisions.KtBlah)
@@ -620,6 +675,22 @@
  )
 )
 
+;;; Class<T> foo.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@collisions.foo
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((collisions.foo.$class == null)) (collisions.foo.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|collisions.foo|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__collisions_foo) (ref.null $java.lang.Class))
+   (then
+    ;; (collisions.foo.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|collisions.foo|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__collisions_foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.foo|__java_lang_String (ref.func $$getString_|collisions.foo|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return collisions.foo.$class;
+  (return (global.get $f_$class__collisions_foo))
+ )
+)
+
 ;;; Class<?> foo.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@collisions.foo
  (type $function.$getClassImpl__java_lang_Class)
@@ -628,8 +699,8 @@
  (local $this (ref null $collisions.foo))
  (local.set $this (ref.cast_static $collisions.foo (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getCollisions.foo();
-  (return (call $function.no.side.effects.$getCollisions.foo__java_lang_Class (ref.func $$getCollisions.foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return collisions.foo.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@collisions.foo) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@collisions.foo)
@@ -732,6 +803,22 @@
  )
 )
 
+;;; Class<T> bar.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@collisions.bar
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((collisions.bar.$class == null)) (collisions.bar.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|collisions.bar|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__collisions_bar) (ref.null $java.lang.Class))
+   (then
+    ;; (collisions.bar.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|collisions.bar|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__collisions_bar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.bar|__java_lang_String (ref.func $$getString_|collisions.bar|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return collisions.bar.$class;
+  (return (global.get $f_$class__collisions_bar))
+ )
+)
+
 ;;; Class<?> bar.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@collisions.bar
  (type $function.$getClassImpl__java_lang_Class)
@@ -740,8 +827,8 @@
  (local $this (ref null $collisions.bar))
  (local.set $this (ref.cast_static $collisions.bar (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getCollisions.bar();
-  (return (call $function.no.side.effects.$getCollisions.bar__java_lang_Class (ref.func $$getCollisions.bar__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return collisions.bar.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@collisions.bar) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@collisions.bar)
@@ -845,6 +932,22 @@
  )
 )
 
+;;; Class<T> Other.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@collisions.Other
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((collisions.Other.$class == null)) (collisions.Other.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|collisions.O...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__collisions_Other) (ref.null $java.lang.Class))
+   (then
+    ;; (collisions.Other.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|collisions.O...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__collisions_Other (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.O...|__java_lang_String (ref.func $$getString_|collisions.O...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return collisions.Other.$class;
+  (return (global.get $f_$class__collisions_Other))
+ )
+)
+
 ;;; Class<?> Other.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@collisions.Other
  (type $function.$getClassImpl__java_lang_Class)
@@ -853,8 +956,8 @@
  (local $this (ref null $collisions.Other))
  (local.set $this (ref.cast_static $collisions.Other (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getCollisions.Other();
-  (return (call $function.no.side.effects.$getCollisions.Other__java_lang_Class (ref.func $$getCollisions.Other__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return collisions.Other.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@collisions.Other) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@collisions.Other)
@@ -958,6 +1061,22 @@
  )
 )
 
+;;; Class<T> T.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@collisions.T
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((collisions.T.$class == null)) (collisions.T.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|collisions.T|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__collisions_T) (ref.null $java.lang.Class))
+   (then
+    ;; (collisions.T.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|collisions.T|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__collisions_T (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.T|__java_lang_String (ref.func $$getString_|collisions.T|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return collisions.T.$class;
+  (return (global.get $f_$class__collisions_T))
+ )
+)
+
 ;;; Class<?> T.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@collisions.T
  (type $function.$getClassImpl__java_lang_Class)
@@ -966,8 +1085,8 @@
  (local $this (ref null $collisions.T))
  (local.set $this (ref.cast_static $collisions.T (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getCollisions.T();
-  (return (call $function.no.side.effects.$getCollisions.T__java_lang_Class (ref.func $$getCollisions.T__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return collisions.T.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@collisions.T) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@collisions.T)

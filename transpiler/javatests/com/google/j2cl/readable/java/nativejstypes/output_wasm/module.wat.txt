@@ -375,28 +375,35 @@
 
 ;;; Code for nativejstypes.Bar.$Overlay [static fields]
 (global $f_$initialized__nativejstypes_Bar_$Overlay (mut i32) (i32.const 0))
+(global $f_$class__nativejstypes_Bar_$Overlay (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for nativejstypes.BarInnerWithDotInName.$Overlay [static fields]
 (global $f_$initialized__nativejstypes_BarInnerWithDotInName_$Overlay (mut i32) (i32.const 0))
+(global $f_$class__nativejstypes_BarInnerWithDotInName_$Overlay (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay [static fields]
 (global $f_$initialized__nativejstypes_BarInnerWithDotInNameAndHasNamespace_$Overlay (mut i32) (i32.const 0))
+(global $f_$class__nativejstypes_BarInnerWithDotInNameAndHasNamespace_$Overlay (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for nativejstypes.Bar.Inner.$Overlay [static fields]
 (global $f_$initialized__nativejstypes_Bar_Inner_$Overlay (mut i32) (i32.const 0))
+(global $f_$class__nativejstypes_Bar_Inner_$Overlay (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for nativejstypes.Foo [static fields]
 
 ;;; Code for nativejstypes.Foo.$Overlay [static fields]
 (global $f_$initialized__nativejstypes_Foo_$Overlay (mut i32) (i32.const 0))
+(global $f_$class__nativejstypes_Foo_$Overlay (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for nativejstypes.Headers [static fields]
 
 ;;; Code for nativejstypes.Headers.$Overlay [static fields]
 (global $f_$initialized__nativejstypes_Headers_$Overlay (mut i32) (i32.const 0))
+(global $f_$class__nativejstypes_Headers_$Overlay (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for nativejstypes.Main [static fields]
 (global $f_$initialized__nativejstypes_Main (mut i32) (i32.const 0))
+(global $f_$class__nativejstypes_Main (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for nativejstypes.Nullability [static fields]
 
@@ -404,9 +411,11 @@
 
 ;;; Code for nativejstypes.Nullability.$Overlay [static fields]
 (global $f_$initialized__nativejstypes_Nullability_$Overlay (mut i32) (i32.const 0))
+(global $f_$class__nativejstypes_Nullability_$Overlay (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for nativejstypes.NullabilityNullMarked.$Overlay [static fields]
 (global $f_$initialized__nativejstypes_NullabilityNullMarked_$Overlay (mut i32) (i32.const 0))
+(global $f_$class__nativejstypes_NullabilityNullMarked_$Overlay (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for nativejstypes.Bar.$Overlay [methods]
 
@@ -429,6 +438,22 @@
  )
 )
 
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@nativejstypes.Bar.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((nativejstypes.Bar.$Overlay.$class == null)) (nativejstypes.Bar.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nativejstype...|(),null));
+  (if (ref.eq (global.get $f_$class__nativejstypes_Bar_$Overlay) (ref.null $java.lang.Class))
+   (then
+    ;; (nativejstypes.Bar.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nativejstype...|(),null));
+    (global.set $f_$class__nativejstypes_Bar_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nativejstype...|__java_lang_String (ref.func $$getString_|nativejstype...|__java_lang_String@javaemul.internal.StringPool) )(ref.null $java.lang.Class)))
+   )
+  )
+  ;; return nativejstypes.Bar.$Overlay.$class;
+  (return (global.get $f_$class__nativejstypes_Bar_$Overlay))
+ )
+)
+
 ;;; Class<?> $Overlay.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@nativejstypes.Bar.$Overlay
  (type $function.$getClassImpl__java_lang_Class)
@@ -437,8 +462,8 @@
  (local $this (ref null $nativejstypes.Bar.$Overlay))
  (local.set $this (ref.cast_static $nativejstypes.Bar.$Overlay (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getNativejstypes.Bar.$Overlay();
-  (return (call $function.no.side.effects.$getNativejstypes.Bar.$Overlay__java_lang_Class (ref.func $$getNativejstypes.Bar.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return nativejstypes.Bar.$Overlay.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nativejstypes.Bar.$Overlay) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nativejstypes.Bar.$Overlay)
@@ -464,6 +489,22 @@
  )
 )
 
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@nativejstypes.BarInnerWithDotInName.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((nativejstypes.BarInnerWithDotInName.$Overlay.$class == null)) (nativejstypes.BarInnerWithDotInName.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nativejstype...|_1(),null));
+  (if (ref.eq (global.get $f_$class__nativejstypes_BarInnerWithDotInName_$Overlay) (ref.null $java.lang.Class))
+   (then
+    ;; (nativejstypes.BarInnerWithDotInName.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nativejstype...|_1(),null));
+    (global.set $f_$class__nativejstypes_BarInnerWithDotInName_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nativejstype...|_1__java_lang_String (ref.func $$getString_|nativejstype...|_1__java_lang_String@javaemul.internal.StringPool) )(ref.null $java.lang.Class)))
+   )
+  )
+  ;; return nativejstypes.BarInnerWithDotInName.$Overlay.$class;
+  (return (global.get $f_$class__nativejstypes_BarInnerWithDotInName_$Overlay))
+ )
+)
+
 ;;; Class<?> $Overlay.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@nativejstypes.BarInnerWithDotInName.$Overlay
  (type $function.$getClassImpl__java_lang_Class)
@@ -472,8 +513,8 @@
  (local $this (ref null $nativejstypes.BarInnerWithDotInName.$Overlay))
  (local.set $this (ref.cast_static $nativejstypes.BarInnerWithDotInName.$Overlay (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getNativejstypes.BarInnerWithDotInName.$Overlay();
-  (return (call $function.no.side.effects.$getNativejstypes.BarInnerWithDotInName.$Overlay__java_lang_Class (ref.func $$getNativejstypes.BarInnerWithDotInName.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return nativejstypes.BarInnerWithDotInName.$Overlay.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nativejstypes.BarInnerWithDotInName.$Overlay) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nativejstypes.BarInnerWithDotInName.$Overlay)
@@ -499,6 +540,22 @@
  )
 )
 
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay.$class == null)) (nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nativejstype...|_2(),null));
+  (if (ref.eq (global.get $f_$class__nativejstypes_BarInnerWithDotInNameAndHasNamespace_$Overlay) (ref.null $java.lang.Class))
+   (then
+    ;; (nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nativejstype...|_2(),null));
+    (global.set $f_$class__nativejstypes_BarInnerWithDotInNameAndHasNamespace_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nativejstype...|_2__java_lang_String (ref.func $$getString_|nativejstype...|_2__java_lang_String@javaemul.internal.StringPool) )(ref.null $java.lang.Class)))
+   )
+  )
+  ;; return nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay.$class;
+  (return (global.get $f_$class__nativejstypes_BarInnerWithDotInNameAndHasNamespace_$Overlay))
+ )
+)
+
 ;;; Class<?> $Overlay.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay
  (type $function.$getClassImpl__java_lang_Class)
@@ -507,8 +564,8 @@
  (local $this (ref null $nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay))
  (local.set $this (ref.cast_static $nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getNativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay();
-  (return (call $function.no.side.effects.$getNativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay__java_lang_Class (ref.func $$getNativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay)
@@ -534,6 +591,22 @@
  )
 )
 
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@nativejstypes.Bar.Inner.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((nativejstypes.Bar.Inner.$Overlay.$class == null)) (nativejstypes.Bar.Inner.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nativejstype...|_3(),null));
+  (if (ref.eq (global.get $f_$class__nativejstypes_Bar_Inner_$Overlay) (ref.null $java.lang.Class))
+   (then
+    ;; (nativejstypes.Bar.Inner.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nativejstype...|_3(),null));
+    (global.set $f_$class__nativejstypes_Bar_Inner_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nativejstype...|_3__java_lang_String (ref.func $$getString_|nativejstype...|_3__java_lang_String@javaemul.internal.StringPool) )(ref.null $java.lang.Class)))
+   )
+  )
+  ;; return nativejstypes.Bar.Inner.$Overlay.$class;
+  (return (global.get $f_$class__nativejstypes_Bar_Inner_$Overlay))
+ )
+)
+
 ;;; Class<?> $Overlay.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@nativejstypes.Bar.Inner.$Overlay
  (type $function.$getClassImpl__java_lang_Class)
@@ -542,8 +615,8 @@
  (local $this (ref null $nativejstypes.Bar.Inner.$Overlay))
  (local.set $this (ref.cast_static $nativejstypes.Bar.Inner.$Overlay (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getNativejstypes.Bar.Inner.$Overlay();
-  (return (call $function.no.side.effects.$getNativejstypes.Bar.Inner.$Overlay__java_lang_Class (ref.func $$getNativejstypes.Bar.Inner.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return nativejstypes.Bar.Inner.$Overlay.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nativejstypes.Bar.Inner.$Overlay) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nativejstypes.Bar.Inner.$Overlay)
@@ -569,6 +642,22 @@
  )
 )
 
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@nativejstypes.Foo.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((nativejstypes.Foo.$Overlay.$class == null)) (nativejstypes.Foo.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nativejstype...|_4(),null));
+  (if (ref.eq (global.get $f_$class__nativejstypes_Foo_$Overlay) (ref.null $java.lang.Class))
+   (then
+    ;; (nativejstypes.Foo.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nativejstype...|_4(),null));
+    (global.set $f_$class__nativejstypes_Foo_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nativejstype...|_4__java_lang_String (ref.func $$getString_|nativejstype...|_4__java_lang_String@javaemul.internal.StringPool) )(ref.null $java.lang.Class)))
+   )
+  )
+  ;; return nativejstypes.Foo.$Overlay.$class;
+  (return (global.get $f_$class__nativejstypes_Foo_$Overlay))
+ )
+)
+
 ;;; Class<?> $Overlay.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@nativejstypes.Foo.$Overlay
  (type $function.$getClassImpl__java_lang_Class)
@@ -577,8 +666,8 @@
  (local $this (ref null $nativejstypes.Foo.$Overlay))
  (local.set $this (ref.cast_static $nativejstypes.Foo.$Overlay (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getNativejstypes.Foo.$Overlay();
-  (return (call $function.no.side.effects.$getNativejstypes.Foo.$Overlay__java_lang_Class (ref.func $$getNativejstypes.Foo.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return nativejstypes.Foo.$Overlay.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nativejstypes.Foo.$Overlay) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nativejstypes.Foo.$Overlay)
@@ -604,6 +693,22 @@
  )
 )
 
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@nativejstypes.Headers.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((nativejstypes.Headers.$Overlay.$class == null)) (nativejstypes.Headers.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nativejstype...|_5(),null));
+  (if (ref.eq (global.get $f_$class__nativejstypes_Headers_$Overlay) (ref.null $java.lang.Class))
+   (then
+    ;; (nativejstypes.Headers.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nativejstype...|_5(),null));
+    (global.set $f_$class__nativejstypes_Headers_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nativejstype...|_5__java_lang_String (ref.func $$getString_|nativejstype...|_5__java_lang_String@javaemul.internal.StringPool) )(ref.null $java.lang.Class)))
+   )
+  )
+  ;; return nativejstypes.Headers.$Overlay.$class;
+  (return (global.get $f_$class__nativejstypes_Headers_$Overlay))
+ )
+)
+
 ;;; Class<?> $Overlay.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@nativejstypes.Headers.$Overlay
  (type $function.$getClassImpl__java_lang_Class)
@@ -612,8 +717,8 @@
  (local $this (ref null $nativejstypes.Headers.$Overlay))
  (local.set $this (ref.cast_static $nativejstypes.Headers.$Overlay (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getNativejstypes.Headers.$Overlay();
-  (return (call $function.no.side.effects.$getNativejstypes.Headers.$Overlay__java_lang_Class (ref.func $$getNativejstypes.Headers.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return nativejstypes.Headers.$Overlay.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nativejstypes.Headers.$Overlay) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nativejstypes.Headers.$Overlay)
@@ -639,6 +744,22 @@
  )
 )
 
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@nativejstypes.Nullability.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((nativejstypes.Nullability.$Overlay.$class == null)) (nativejstypes.Nullability.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nativejstype...|_7(),null));
+  (if (ref.eq (global.get $f_$class__nativejstypes_Nullability_$Overlay) (ref.null $java.lang.Class))
+   (then
+    ;; (nativejstypes.Nullability.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nativejstype...|_7(),null));
+    (global.set $f_$class__nativejstypes_Nullability_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nativejstype...|_7__java_lang_String (ref.func $$getString_|nativejstype...|_7__java_lang_String@javaemul.internal.StringPool) )(ref.null $java.lang.Class)))
+   )
+  )
+  ;; return nativejstypes.Nullability.$Overlay.$class;
+  (return (global.get $f_$class__nativejstypes_Nullability_$Overlay))
+ )
+)
+
 ;;; Class<?> $Overlay.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@nativejstypes.Nullability.$Overlay
  (type $function.$getClassImpl__java_lang_Class)
@@ -647,8 +768,8 @@
  (local $this (ref null $nativejstypes.Nullability.$Overlay))
  (local.set $this (ref.cast_static $nativejstypes.Nullability.$Overlay (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getNativejstypes.Nullability.$Overlay();
-  (return (call $function.no.side.effects.$getNativejstypes.Nullability.$Overlay__java_lang_Class (ref.func $$getNativejstypes.Nullability.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return nativejstypes.Nullability.$Overlay.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nativejstypes.Nullability.$Overlay) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nativejstypes.Nullability.$Overlay)
@@ -674,6 +795,22 @@
  )
 )
 
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@nativejstypes.NullabilityNullMarked.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((nativejstypes.NullabilityNullMarked.$Overlay.$class == null)) (nativejstypes.NullabilityNullMarked.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nativejstype...|_8(),null));
+  (if (ref.eq (global.get $f_$class__nativejstypes_NullabilityNullMarked_$Overlay) (ref.null $java.lang.Class))
+   (then
+    ;; (nativejstypes.NullabilityNullMarked.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nativejstype...|_8(),null));
+    (global.set $f_$class__nativejstypes_NullabilityNullMarked_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nativejstype...|_8__java_lang_String (ref.func $$getString_|nativejstype...|_8__java_lang_String@javaemul.internal.StringPool) )(ref.null $java.lang.Class)))
+   )
+  )
+  ;; return nativejstypes.NullabilityNullMarked.$Overlay.$class;
+  (return (global.get $f_$class__nativejstypes_NullabilityNullMarked_$Overlay))
+ )
+)
+
 ;;; Class<?> $Overlay.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@nativejstypes.NullabilityNullMarked.$Overlay
  (type $function.$getClassImpl__java_lang_Class)
@@ -682,8 +819,8 @@
  (local $this (ref null $nativejstypes.NullabilityNullMarked.$Overlay))
  (local.set $this (ref.cast_static $nativejstypes.NullabilityNullMarked.$Overlay (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getNativejstypes.NullabilityNullMarked.$Overlay();
-  (return (call $function.no.side.effects.$getNativejstypes.NullabilityNullMarked.$Overlay__java_lang_Class (ref.func $$getNativejstypes.NullabilityNullMarked.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return nativejstypes.NullabilityNullMarked.$Overlay.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nativejstypes.NullabilityNullMarked.$Overlay) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nativejstypes.NullabilityNullMarked.$Overlay)
@@ -1025,20 +1162,16 @@
 (func $m_testNativeTypeClassLiteral__void@nativejstypes.Main
  ;;@ nativejstypes/Main.java:60:21
  (local $o1 (ref null $java.lang.Object))
- (local $$qualifier (ref null $java.lang.Class))
  (block
   ;; nativejstypes.Main.$clinit();
   ;;@ nativejstypes/Main.java:60:50
   (call $$clinit__void@nativejstypes.Main )
-  ;; Object o1 = javaemul.internal.ClassLiteralPool.$getNativejstypes.Bar();
+  ;; Object o1 = null;
   ;;@ nativejstypes/Main.java:61:4
-  (local.set $o1 (call $function.no.side.effects.$getNativejstypes.Bar__java_lang_Class (ref.func $$getNativejstypes.Bar__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
-  ;; (o1 = (Class<?> $qualifier = javaemul.internal.ClassLiteralPool.$getNativejstypes.Bar(),$qualifier.getArrayType(2)));
+  (local.set $o1 (ref.null $java.lang.Object))
+  ;; (o1 = null.getArrayType(2));
   ;;@ nativejstypes/Main.java:62:4
-  (local.set $o1 (block (result (ref null $java.lang.Class))
-   (local.set $$qualifier (call $function.no.side.effects.$getNativejstypes.Bar__java_lang_Class (ref.func $$getNativejstypes.Bar__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
-   (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier))(i32.const 2)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier))))
-  ))
+  (local.set $o1 (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (ref.null $java.lang.Class))(i32.const 2)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(ref.null $java.lang.Class)))))
  )
 )
 
@@ -1064,6 +1197,22 @@
  )
 )
 
+;;; Class<T> Main.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@nativejstypes.Main
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((nativejstypes.Main.$class == null)) (nativejstypes.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nativejstype...|_6(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__nativejstypes_Main) (ref.null $java.lang.Class))
+   (then
+    ;; (nativejstypes.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nativejstype...|_6(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__nativejstypes_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nativejstype...|_6__java_lang_String (ref.func $$getString_|nativejstype...|_6__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return nativejstypes.Main.$class;
+  (return (global.get $f_$class__nativejstypes_Main))
+ )
+)
+
 ;;; Class<?> Main.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@nativejstypes.Main
  (type $function.$getClassImpl__java_lang_Class)
@@ -1072,8 +1221,8 @@
  (local $this (ref null $nativejstypes.Main))
  (local.set $this (ref.cast_static $nativejstypes.Main (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getNativejstypes.Main();
-  (return (call $function.no.side.effects.$getNativejstypes.Main__java_lang_Class (ref.func $$getNativejstypes.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return nativejstypes.Main.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nativejstypes.Main) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nativejstypes.Main)

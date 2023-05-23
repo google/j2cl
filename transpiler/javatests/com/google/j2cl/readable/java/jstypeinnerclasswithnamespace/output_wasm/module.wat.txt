@@ -94,9 +94,11 @@
 
 ;;; Code for jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace [static fields]
 (global $f_$initialized__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace (mut i32) (i32.const 0))
+(global $f_$class__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass [static fields]
 (global $f_$initialized__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace_InnerClass (mut i32) (i32.const 0))
+(global $f_$class__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace_InnerClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace [methods]
 
@@ -154,6 +156,22 @@
  )
 )
 
+;;; Class<T> JsTypeInnerClassWithNamespace.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.$class == null)) (jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jstypeinnerc...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace) (ref.null $java.lang.Class))
+   (then
+    ;; (jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jstypeinnerc...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jstypeinnerc...|__java_lang_String (ref.func $$getString_|jstypeinnerc...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.$class;
+  (return (global.get $f_$class__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace))
+ )
+)
+
 ;;; Class<?> JsTypeInnerClassWithNamespace.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace
  (type $function.$getClassImpl__java_lang_Class)
@@ -162,8 +180,8 @@
  (local $this (ref null $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace))
  (local.set $this (ref.cast_static $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace();
-  (return (call $function.no.side.effects.$getJstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace__java_lang_Class (ref.func $$getJstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace)
@@ -224,6 +242,22 @@
  )
 )
 
+;;; Class<T> InnerClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.$class == null)) (jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jstypeinnerc...|_1(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace_InnerClass) (ref.null $java.lang.Class))
+   (then
+    ;; (jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jstypeinnerc...|_1(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace_InnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jstypeinnerc...|_1__java_lang_String (ref.func $$getString_|jstypeinnerc...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.$class;
+  (return (global.get $f_$class__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace_InnerClass))
+ )
+)
+
 ;;; Class<?> InnerClass.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass
  (type $function.$getClassImpl__java_lang_Class)
@@ -232,8 +266,8 @@
  (local $this (ref null $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass))
  (local.set $this (ref.cast_static $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass();
-  (return (call $function.no.side.effects.$getJstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass__java_lang_Class (ref.func $$getJstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass)

@@ -54,6 +54,7 @@
 
 ;;; Code for jsnullable.Main [static fields]
 (global $f_$initialized__jsnullable_Main (mut i32) (i32.const 0))
+(global $f_$class__jsnullable_Main (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for jsnullable.Main [methods]
 
@@ -141,6 +142,22 @@
  )
 )
 
+;;; Class<T> Main.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@jsnullable.Main
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((jsnullable.Main.$class == null)) (jsnullable.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsnullable.Main|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__jsnullable_Main) (ref.null $java.lang.Class))
+   (then
+    ;; (jsnullable.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsnullable.Main|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__jsnullable_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsnullable.Main|__java_lang_String (ref.func $$getString_|jsnullable.Main|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return jsnullable.Main.$class;
+  (return (global.get $f_$class__jsnullable_Main))
+ )
+)
+
 ;;; Class<?> Main.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@jsnullable.Main
  (type $function.$getClassImpl__java_lang_Class)
@@ -149,8 +166,8 @@
  (local $this (ref null $jsnullable.Main))
  (local.set $this (ref.cast_static $jsnullable.Main (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJsnullable.Main();
-  (return (call $function.no.side.effects.$getJsnullable.Main__java_lang_Class (ref.func $$getJsnullable.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return jsnullable.Main.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsnullable.Main) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsnullable.Main)

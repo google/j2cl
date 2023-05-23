@@ -108,15 +108,19 @@
 
 ;;; Code for abstractinnerclass.InnerClasses [static fields]
 (global $f_$initialized__abstractinnerclass_InnerClasses (mut i32) (i32.const 0))
+(global $f_$class__abstractinnerclass_InnerClasses (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for abstractinnerclass.InnerClasses.A [static fields]
 (global $f_$initialized__abstractinnerclass_InnerClasses_A (mut i32) (i32.const 0))
+(global $f_$class__abstractinnerclass_InnerClasses_A (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for abstractinnerclass.InnerClasses.B [static fields]
 (global $f_$initialized__abstractinnerclass_InnerClasses_B (mut i32) (i32.const 0))
+(global $f_$class__abstractinnerclass_InnerClasses_B (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for abstractinnerclass.InnerClasses.C [static fields]
 (global $f_$initialized__abstractinnerclass_InnerClasses_C (mut i32) (i32.const 0))
+(global $f_$class__abstractinnerclass_InnerClasses_C (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for abstractinnerclass.InnerClasses.A [methods]
 
@@ -136,6 +140,22 @@
   ;; (abstractinnerclass.InnerClasses.A.$initialized = true);
   ;;@ abstractinnerclass/InnerClasses.java:19:12
   (global.set $f_$initialized__abstractinnerclass_InnerClasses_A (i32.const 1))
+ )
+)
+
+;;; Class<T> A.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@abstractinnerclass.InnerClasses.A
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((abstractinnerclass.InnerClasses.A.$class == null)) (abstractinnerclass.InnerClasses.A.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|abstractinne...|_1()));
+  (if (ref.eq (global.get $f_$class__abstractinnerclass_InnerClasses_A) (ref.null $java.lang.Class))
+   (then
+    ;; (abstractinnerclass.InnerClasses.A.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|abstractinne...|_1()));
+    (global.set $f_$class__abstractinnerclass_InnerClasses_A (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|abstractinne...|_1__java_lang_String (ref.func $$getString_|abstractinne...|_1__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return abstractinnerclass.InnerClasses.A.$class;
+  (return (global.get $f_$class__abstractinnerclass_InnerClasses_A))
  )
 )
 
@@ -195,6 +215,22 @@
  )
 )
 
+;;; Class<T> InnerClasses.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@abstractinnerclass.InnerClasses
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((abstractinnerclass.InnerClasses.$class == null)) (abstractinnerclass.InnerClasses.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|abstractinne...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__abstractinnerclass_InnerClasses) (ref.null $java.lang.Class))
+   (then
+    ;; (abstractinnerclass.InnerClasses.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|abstractinne...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__abstractinnerclass_InnerClasses (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|abstractinne...|__java_lang_String (ref.func $$getString_|abstractinne...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return abstractinnerclass.InnerClasses.$class;
+  (return (global.get $f_$class__abstractinnerclass_InnerClasses))
+ )
+)
+
 ;;; Class<?> InnerClasses.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@abstractinnerclass.InnerClasses
  (type $function.$getClassImpl__java_lang_Class)
@@ -203,8 +239,8 @@
  (local $this (ref null $abstractinnerclass.InnerClasses))
  (local.set $this (ref.cast_static $abstractinnerclass.InnerClasses (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getAbstractinnerclass.InnerClasses();
-  (return (call $function.no.side.effects.$getAbstractinnerclass.InnerClasses__java_lang_Class (ref.func $$getAbstractinnerclass.InnerClasses__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return abstractinnerclass.InnerClasses.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@abstractinnerclass.InnerClasses) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@abstractinnerclass.InnerClasses)
@@ -262,6 +298,22 @@
  )
 )
 
+;;; Class<T> B.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@abstractinnerclass.InnerClasses.B
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((abstractinnerclass.InnerClasses.B.$class == null)) (abstractinnerclass.InnerClasses.B.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|abstractinne...|_2(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__abstractinnerclass_InnerClasses_B) (ref.null $java.lang.Class))
+   (then
+    ;; (abstractinnerclass.InnerClasses.B.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|abstractinne...|_2(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__abstractinnerclass_InnerClasses_B (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|abstractinne...|_2__java_lang_String (ref.func $$getString_|abstractinne...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return abstractinnerclass.InnerClasses.B.$class;
+  (return (global.get $f_$class__abstractinnerclass_InnerClasses_B))
+ )
+)
+
 ;;; Code for abstractinnerclass.InnerClasses.C [methods]
 
 ;;; void C.$ctor(InnerClasses $outer_this)
@@ -313,5 +365,21 @@
   ;; java.lang.Object.$clinit();
   ;;@ abstractinnerclass/InnerClasses.java:29:17
   (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<T> C.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@abstractinnerclass.InnerClasses.C
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((abstractinnerclass.InnerClasses.C.$class == null)) (abstractinnerclass.InnerClasses.C.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|abstractinne...|_3(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__abstractinnerclass_InnerClasses_C) (ref.null $java.lang.Class))
+   (then
+    ;; (abstractinnerclass.InnerClasses.C.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|abstractinne...|_3(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__abstractinnerclass_InnerClasses_C (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|abstractinne...|_3__java_lang_String (ref.func $$getString_|abstractinne...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return abstractinnerclass.InnerClasses.C.$class;
+  (return (global.get $f_$class__abstractinnerclass_InnerClasses_C))
  )
 )

@@ -50,6 +50,7 @@
 
 ;;; Code for valueofnullable.ValueOfNullable [static fields]
 (global $f_$initialized__valueofnullable_ValueOfNullable (mut i32) (i32.const 0))
+(global $f_$class__valueofnullable_ValueOfNullable (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for valueofnullable.ValueOfNullable [methods]
 
@@ -127,6 +128,22 @@
  )
 )
 
+;;; Class<T> ValueOfNullable.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@valueofnullable.ValueOfNullable
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((valueofnullable.ValueOfNullable.$class == null)) (valueofnullable.ValueOfNullable.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|valueofnulla...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__valueofnullable_ValueOfNullable) (ref.null $java.lang.Class))
+   (then
+    ;; (valueofnullable.ValueOfNullable.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|valueofnulla...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__valueofnullable_ValueOfNullable (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|valueofnulla...|__java_lang_String (ref.func $$getString_|valueofnulla...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return valueofnullable.ValueOfNullable.$class;
+  (return (global.get $f_$class__valueofnullable_ValueOfNullable))
+ )
+)
+
 ;;; Class<?> ValueOfNullable.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@valueofnullable.ValueOfNullable
  (type $function.$getClassImpl__java_lang_Class)
@@ -135,8 +152,8 @@
  (local $this (ref null $valueofnullable.ValueOfNullable))
  (local.set $this (ref.cast_static $valueofnullable.ValueOfNullable (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getValueofnullable.ValueOfNullable();
-  (return (call $function.no.side.effects.$getValueofnullable.ValueOfNullable__java_lang_Class (ref.func $$getValueofnullable.ValueOfNullable__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return valueofnullable.ValueOfNullable.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@valueofnullable.ValueOfNullable) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@valueofnullable.ValueOfNullable)

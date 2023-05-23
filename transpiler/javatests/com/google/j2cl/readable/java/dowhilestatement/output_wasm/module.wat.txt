@@ -49,6 +49,7 @@
 
 ;;; Code for dowhilestatement.DoWhileStatement [static fields]
 (global $f_$initialized__dowhilestatement_DoWhileStatement (mut i32) (i32.const 0))
+(global $f_$class__dowhilestatement_DoWhileStatement (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for dowhilestatement.DoWhileStatement [methods]
 
@@ -137,6 +138,22 @@
  )
 )
 
+;;; Class<T> DoWhileStatement.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@dowhilestatement.DoWhileStatement
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((dowhilestatement.DoWhileStatement.$class == null)) (dowhilestatement.DoWhileStatement.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|dowhilestate...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__dowhilestatement_DoWhileStatement) (ref.null $java.lang.Class))
+   (then
+    ;; (dowhilestatement.DoWhileStatement.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|dowhilestate...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__dowhilestatement_DoWhileStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|dowhilestate...|__java_lang_String (ref.func $$getString_|dowhilestate...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return dowhilestatement.DoWhileStatement.$class;
+  (return (global.get $f_$class__dowhilestatement_DoWhileStatement))
+ )
+)
+
 ;;; Class<?> DoWhileStatement.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@dowhilestatement.DoWhileStatement
  (type $function.$getClassImpl__java_lang_Class)
@@ -145,8 +162,8 @@
  (local $this (ref null $dowhilestatement.DoWhileStatement))
  (local.set $this (ref.cast_static $dowhilestatement.DoWhileStatement (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getDowhilestatement.DoWhileStatement();
-  (return (call $function.no.side.effects.$getDowhilestatement.DoWhileStatement__java_lang_Class (ref.func $$getDowhilestatement.DoWhileStatement__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return dowhilestatement.DoWhileStatement.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@dowhilestatement.DoWhileStatement) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@dowhilestatement.DoWhileStatement)

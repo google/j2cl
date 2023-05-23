@@ -106,9 +106,11 @@
 
 ;;; Code for instanceofexpression.InstanceofExpressions [static fields]
 (global $f_$initialized__instanceofexpression_InstanceofExpressions (mut i32) (i32.const 0))
+(global $f_$class__instanceofexpression_InstanceofExpressions (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for instanceofexpression.InstanceofExpressions.1 [static fields]
 (global $f_$initialized__instanceofexpression_InstanceofExpressions_1 (mut i32) (i32.const 0))
+(global $f_$class__instanceofexpression_InstanceofExpressions_1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for instanceofexpression.InstanceofExpressions [methods]
 
@@ -403,6 +405,22 @@
  )
 )
 
+;;; Class<T> InstanceofExpressions.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@instanceofexpression.InstanceofExpressions
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((instanceofexpression.InstanceofExpressions.$class == null)) (instanceofexpression.InstanceofExpressions.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|instanceofex...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__instanceofexpression_InstanceofExpressions) (ref.null $java.lang.Class))
+   (then
+    ;; (instanceofexpression.InstanceofExpressions.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|instanceofex...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__instanceofexpression_InstanceofExpressions (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instanceofex...|__java_lang_String (ref.func $$getString_|instanceofex...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return instanceofexpression.InstanceofExpressions.$class;
+  (return (global.get $f_$class__instanceofexpression_InstanceofExpressions))
+ )
+)
+
 ;;; Class<?> InstanceofExpressions.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@instanceofexpression.InstanceofExpressions
  (type $function.$getClassImpl__java_lang_Class)
@@ -411,8 +429,8 @@
  (local $this (ref null $instanceofexpression.InstanceofExpressions))
  (local.set $this (ref.cast_static $instanceofexpression.InstanceofExpressions (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getInstanceofexpression.InstanceofExpressions();
-  (return (call $function.no.side.effects.$getInstanceofexpression.InstanceofExpressions__java_lang_Class (ref.func $$getInstanceofexpression.InstanceofExpressions__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return instanceofexpression.InstanceofExpressions.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@instanceofexpression.InstanceofExpressions) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@instanceofexpression.InstanceofExpressions)
@@ -475,6 +493,22 @@
  )
 )
 
+;;; Class<T> <anonymous> implements Serializable.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@instanceofexpression.InstanceofExpressions.1
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((instanceofexpression.InstanceofExpressions.1.$class == null)) (instanceofexpression.InstanceofExpressions.1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|instanceofex...|_1(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__instanceofexpression_InstanceofExpressions_1) (ref.null $java.lang.Class))
+   (then
+    ;; (instanceofexpression.InstanceofExpressions.1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|instanceofex...|_1(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__instanceofexpression_InstanceofExpressions_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instanceofex...|_1__java_lang_String (ref.func $$getString_|instanceofex...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return instanceofexpression.InstanceofExpressions.1.$class;
+  (return (global.get $f_$class__instanceofexpression_InstanceofExpressions_1))
+ )
+)
+
 ;;; Class<?> <anonymous> implements Serializable.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@instanceofexpression.InstanceofExpressions.1
  (type $function.$getClassImpl__java_lang_Class)
@@ -483,8 +517,8 @@
  (local $this (ref null $instanceofexpression.InstanceofExpressions.1))
  (local.set $this (ref.cast_static $instanceofexpression.InstanceofExpressions.1 (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getInstanceofexpression.InstanceofExpressions.1();
-  (return (call $function.no.side.effects.$getInstanceofexpression.InstanceofExpressions.1__java_lang_Class (ref.func $$getInstanceofexpression.InstanceofExpressions.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return instanceofexpression.InstanceofExpressions.1.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@instanceofexpression.InstanceofExpressions.1) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@instanceofexpression.InstanceofExpressions.1)

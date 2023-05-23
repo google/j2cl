@@ -288,15 +288,19 @@
 
 ;;; Code for foreachstatement.ForEachStatement [static fields]
 (global $f_$initialized__foreachstatement_ForEachStatement (mut i32) (i32.const 0))
+(global $f_$class__foreachstatement_ForEachStatement (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for foreachstatement.ForEachStatement.Exception1 [static fields]
 (global $f_$initialized__foreachstatement_ForEachStatement_Exception1 (mut i32) (i32.const 0))
+(global $f_$class__foreachstatement_ForEachStatement_Exception1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for foreachstatement.ForEachStatement.Exception2 [static fields]
 (global $f_$initialized__foreachstatement_ForEachStatement_Exception2 (mut i32) (i32.const 0))
+(global $f_$class__foreachstatement_ForEachStatement_Exception2 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for foreachstatement.ForEachStatement.IterableReturningTypeVariable [static fields]
 (global $f_$initialized__foreachstatement_ForEachStatement_IterableReturningTypeVariable (mut i32) (i32.const 0))
+(global $f_$class__foreachstatement_ForEachStatement_IterableReturningTypeVariable (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for foreachstatement.ForEachStatement [methods]
 
@@ -546,6 +550,22 @@
  )
 )
 
+;;; Class<T> ForEachStatement.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@foreachstatement.ForEachStatement
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((foreachstatement.ForEachStatement.$class == null)) (foreachstatement.ForEachStatement.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|foreachstate...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__foreachstatement_ForEachStatement) (ref.null $java.lang.Class))
+   (then
+    ;; (foreachstatement.ForEachStatement.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|foreachstate...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__foreachstatement_ForEachStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|foreachstate...|__java_lang_String (ref.func $$getString_|foreachstate...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return foreachstatement.ForEachStatement.$class;
+  (return (global.get $f_$class__foreachstatement_ForEachStatement))
+ )
+)
+
 ;;; Class<?> ForEachStatement.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@foreachstatement.ForEachStatement
  (type $function.$getClassImpl__java_lang_Class)
@@ -554,8 +574,8 @@
  (local $this (ref null $foreachstatement.ForEachStatement))
  (local.set $this (ref.cast_static $foreachstatement.ForEachStatement (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getForeachstatement.ForEachStatement();
-  (return (call $function.no.side.effects.$getForeachstatement.ForEachStatement__java_lang_Class (ref.func $$getForeachstatement.ForEachStatement__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return foreachstatement.ForEachStatement.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@foreachstatement.ForEachStatement) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@foreachstatement.ForEachStatement)
@@ -667,6 +687,22 @@
  )
 )
 
+;;; Class<T> IterableReturningTypeVariable.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@foreachstatement.ForEachStatement.IterableReturningTypeVariable
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((foreachstatement.ForEachStatement.IterableReturningTypeVariable.$class == null)) (foreachstatement.ForEachStatement.IterableReturningTypeVariable.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|foreachstate...|_3(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__foreachstatement_ForEachStatement_IterableReturningTypeVariable) (ref.null $java.lang.Class))
+   (then
+    ;; (foreachstatement.ForEachStatement.IterableReturningTypeVariable.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|foreachstate...|_3(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__foreachstatement_ForEachStatement_IterableReturningTypeVariable (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|foreachstate...|_3__java_lang_String (ref.func $$getString_|foreachstate...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return foreachstatement.ForEachStatement.IterableReturningTypeVariable.$class;
+  (return (global.get $f_$class__foreachstatement_ForEachStatement_IterableReturningTypeVariable))
+ )
+)
+
 ;;; Class<?> IterableReturningTypeVariable.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@foreachstatement.ForEachStatement.IterableReturningTypeVariable
  (type $function.$getClassImpl__java_lang_Class)
@@ -675,8 +711,8 @@
  (local $this (ref null $foreachstatement.ForEachStatement.IterableReturningTypeVariable))
  (local.set $this (ref.cast_static $foreachstatement.ForEachStatement.IterableReturningTypeVariable (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getForeachstatement.ForEachStatement.IterableReturningTypeVariable();
-  (return (call $function.no.side.effects.$getForeachstatement.ForEachStatement.IterableReturningTypeVariable__java_lang_Class (ref.func $$getForeachstatement.ForEachStatement.IterableReturningTypeVariable__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return foreachstatement.ForEachStatement.IterableReturningTypeVariable.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@foreachstatement.ForEachStatement.IterableReturningTypeVariable) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@foreachstatement.ForEachStatement.IterableReturningTypeVariable)
@@ -791,6 +827,22 @@
  )
 )
 
+;;; Class<T> Exception1.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@foreachstatement.ForEachStatement.Exception1
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((foreachstatement.ForEachStatement.Exception1.$class == null)) (foreachstatement.ForEachStatement.Exception1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|foreachstate...|_1(),java.lang.Exception.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__foreachstatement_ForEachStatement_Exception1) (ref.null $java.lang.Class))
+   (then
+    ;; (foreachstatement.ForEachStatement.Exception1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|foreachstate...|_1(),java.lang.Exception.$getClassMetadata()));
+    (global.set $f_$class__foreachstatement_ForEachStatement_Exception1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|foreachstate...|_1__java_lang_String (ref.func $$getString_|foreachstate...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Exception) )))
+   )
+  )
+  ;; return foreachstatement.ForEachStatement.Exception1.$class;
+  (return (global.get $f_$class__foreachstatement_ForEachStatement_Exception1))
+ )
+)
+
 ;;; Class<?> Exception1.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@foreachstatement.ForEachStatement.Exception1
  (type $function.$getClassImpl__java_lang_Class)
@@ -799,8 +851,8 @@
  (local $this (ref null $foreachstatement.ForEachStatement.Exception1))
  (local.set $this (ref.cast_static $foreachstatement.ForEachStatement.Exception1 (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getForeachstatement.ForEachStatement.Exception1();
-  (return (call $function.no.side.effects.$getForeachstatement.ForEachStatement.Exception1__java_lang_Class (ref.func $$getForeachstatement.ForEachStatement.Exception1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return foreachstatement.ForEachStatement.Exception1.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@foreachstatement.ForEachStatement.Exception1) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@foreachstatement.ForEachStatement.Exception1)
@@ -915,6 +967,22 @@
  )
 )
 
+;;; Class<T> Exception2.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@foreachstatement.ForEachStatement.Exception2
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((foreachstatement.ForEachStatement.Exception2.$class == null)) (foreachstatement.ForEachStatement.Exception2.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|foreachstate...|_2(),java.lang.Exception.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__foreachstatement_ForEachStatement_Exception2) (ref.null $java.lang.Class))
+   (then
+    ;; (foreachstatement.ForEachStatement.Exception2.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|foreachstate...|_2(),java.lang.Exception.$getClassMetadata()));
+    (global.set $f_$class__foreachstatement_ForEachStatement_Exception2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|foreachstate...|_2__java_lang_String (ref.func $$getString_|foreachstate...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Exception) )))
+   )
+  )
+  ;; return foreachstatement.ForEachStatement.Exception2.$class;
+  (return (global.get $f_$class__foreachstatement_ForEachStatement_Exception2))
+ )
+)
+
 ;;; Class<?> Exception2.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@foreachstatement.ForEachStatement.Exception2
  (type $function.$getClassImpl__java_lang_Class)
@@ -923,8 +991,8 @@
  (local $this (ref null $foreachstatement.ForEachStatement.Exception2))
  (local.set $this (ref.cast_static $foreachstatement.ForEachStatement.Exception2 (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getForeachstatement.ForEachStatement.Exception2();
-  (return (call $function.no.side.effects.$getForeachstatement.ForEachStatement.Exception2__java_lang_Class (ref.func $$getForeachstatement.ForEachStatement.Exception2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return foreachstatement.ForEachStatement.Exception2.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@foreachstatement.ForEachStatement.Exception2) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@foreachstatement.ForEachStatement.Exception2)

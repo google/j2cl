@@ -477,30 +477,39 @@
 
 ;;; Code for innerclassinheritance.ParentOuter [static fields]
 (global $f_$initialized__innerclassinheritance_ParentOuter (mut i32) (i32.const 0))
+(global $f_$class__innerclassinheritance_ParentOuter (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for innerclassinheritance.ParentInner [static fields]
 (global $f_$initialized__innerclassinheritance_ParentInner (mut i32) (i32.const 0))
+(global $f_$class__innerclassinheritance_ParentInner (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for innerclassinheritance.ChildClass [static fields]
 (global $f_$initialized__innerclassinheritance_ChildClass (mut i32) (i32.const 0))
+(global $f_$class__innerclassinheritance_ChildClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for innerclassinheritance.ChildClass.InnerClass [static fields]
 (global $f_$initialized__innerclassinheritance_ChildClass_InnerClass (mut i32) (i32.const 0))
+(global $f_$class__innerclassinheritance_ChildClass_InnerClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for innerclassinheritance.ChildClass.1LocalClass [static fields]
 (global $f_$initialized__innerclassinheritance_ChildClass_1LocalClass (mut i32) (i32.const 0))
+(global $f_$class__innerclassinheritance_ChildClass_1LocalClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for innerclassinheritance.MultipleNestings [static fields]
 (global $f_$initialized__innerclassinheritance_MultipleNestings (mut i32) (i32.const 0))
+(global $f_$class__innerclassinheritance_MultipleNestings (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for innerclassinheritance.MultipleNestings.Parent [static fields]
 (global $f_$initialized__innerclassinheritance_MultipleNestings_Parent (mut i32) (i32.const 0))
+(global $f_$class__innerclassinheritance_MultipleNestings_Parent (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 [static fields]
 (global $f_$initialized__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2 (mut i32) (i32.const 0))
+(global $f_$class__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for innerclassinheritance.MultipleNestings.InnerClass1 [static fields]
 (global $f_$initialized__innerclassinheritance_MultipleNestings_InnerClass1 (mut i32) (i32.const 0))
+(global $f_$class__innerclassinheritance_MultipleNestings_InnerClass1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for innerclassinheritance.ParentOuter [methods]
 
@@ -570,6 +579,22 @@
  )
 )
 
+;;; Class<T> ParentOuter.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@innerclassinheritance.ParentOuter
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((innerclassinheritance.ParentOuter.$class == null)) (innerclassinheritance.ParentOuter.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|innerclassin...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__innerclassinheritance_ParentOuter) (ref.null $java.lang.Class))
+   (then
+    ;; (innerclassinheritance.ParentOuter.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|innerclassin...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__innerclassinheritance_ParentOuter (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return innerclassinheritance.ParentOuter.$class;
+  (return (global.get $f_$class__innerclassinheritance_ParentOuter))
+ )
+)
+
 ;;; Class<?> ParentOuter.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@innerclassinheritance.ParentOuter
  (type $function.$getClassImpl__java_lang_Class)
@@ -578,8 +603,8 @@
  (local $this (ref null $innerclassinheritance.ParentOuter))
  (local.set $this (ref.cast_static $innerclassinheritance.ParentOuter (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getInnerclassinheritance.ParentOuter();
-  (return (call $function.no.side.effects.$getInnerclassinheritance.ParentOuter__java_lang_Class (ref.func $$getInnerclassinheritance.ParentOuter__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return innerclassinheritance.ParentOuter.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinheritance.ParentOuter) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@innerclassinheritance.ParentOuter)
@@ -652,6 +677,22 @@
  )
 )
 
+;;; Class<T> ParentInner.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@innerclassinheritance.ParentInner
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((innerclassinheritance.ParentInner.$class == null)) (innerclassinheritance.ParentInner.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|innerclassin...|_1(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__innerclassinheritance_ParentInner) (ref.null $java.lang.Class))
+   (then
+    ;; (innerclassinheritance.ParentInner.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|innerclassin...|_1(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__innerclassinheritance_ParentInner (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|_1__java_lang_String (ref.func $$getString_|innerclassin...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return innerclassinheritance.ParentInner.$class;
+  (return (global.get $f_$class__innerclassinheritance_ParentInner))
+ )
+)
+
 ;;; Class<?> ParentInner.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@innerclassinheritance.ParentInner
  (type $function.$getClassImpl__java_lang_Class)
@@ -660,8 +701,8 @@
  (local $this (ref null $innerclassinheritance.ParentInner))
  (local.set $this (ref.cast_static $innerclassinheritance.ParentInner (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getInnerclassinheritance.ParentInner();
-  (return (call $function.no.side.effects.$getInnerclassinheritance.ParentInner__java_lang_Class (ref.func $$getInnerclassinheritance.ParentInner__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return innerclassinheritance.ParentInner.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinheritance.ParentInner) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@innerclassinheritance.ParentInner)
@@ -734,6 +775,22 @@
  )
 )
 
+;;; Class<T> MultipleNestings.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@innerclassinheritance.MultipleNestings
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((innerclassinheritance.MultipleNestings.$class == null)) (innerclassinheritance.MultipleNestings.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|innerclassin...|_5(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__innerclassinheritance_MultipleNestings) (ref.null $java.lang.Class))
+   (then
+    ;; (innerclassinheritance.MultipleNestings.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|innerclassin...|_5(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__innerclassinheritance_MultipleNestings (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|_5__java_lang_String (ref.func $$getString_|innerclassin...|_5__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return innerclassinheritance.MultipleNestings.$class;
+  (return (global.get $f_$class__innerclassinheritance_MultipleNestings))
+ )
+)
+
 ;;; Class<?> MultipleNestings.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@innerclassinheritance.MultipleNestings
  (type $function.$getClassImpl__java_lang_Class)
@@ -742,8 +799,8 @@
  (local $this (ref null $innerclassinheritance.MultipleNestings))
  (local.set $this (ref.cast_static $innerclassinheritance.MultipleNestings (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getInnerclassinheritance.MultipleNestings();
-  (return (call $function.no.side.effects.$getInnerclassinheritance.MultipleNestings__java_lang_Class (ref.func $$getInnerclassinheritance.MultipleNestings__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return innerclassinheritance.MultipleNestings.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinheritance.MultipleNestings) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@innerclassinheritance.MultipleNestings)
@@ -821,6 +878,22 @@
  )
 )
 
+;;; Class<T> Parent.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@innerclassinheritance.MultipleNestings.Parent
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((innerclassinheritance.MultipleNestings.Parent.$class == null)) (innerclassinheritance.MultipleNestings.Parent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|innerclassin...|_6(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__innerclassinheritance_MultipleNestings_Parent) (ref.null $java.lang.Class))
+   (then
+    ;; (innerclassinheritance.MultipleNestings.Parent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|innerclassin...|_6(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__innerclassinheritance_MultipleNestings_Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|_6__java_lang_String (ref.func $$getString_|innerclassin...|_6__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return innerclassinheritance.MultipleNestings.Parent.$class;
+  (return (global.get $f_$class__innerclassinheritance_MultipleNestings_Parent))
+ )
+)
+
 ;;; Class<?> Parent.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@innerclassinheritance.MultipleNestings.Parent
  (type $function.$getClassImpl__java_lang_Class)
@@ -829,8 +902,8 @@
  (local $this (ref null $innerclassinheritance.MultipleNestings.Parent))
  (local.set $this (ref.cast_static $innerclassinheritance.MultipleNestings.Parent (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getInnerclassinheritance.MultipleNestings.Parent();
-  (return (call $function.no.side.effects.$getInnerclassinheritance.MultipleNestings.Parent__java_lang_Class (ref.func $$getInnerclassinheritance.MultipleNestings.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return innerclassinheritance.MultipleNestings.Parent.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinheritance.MultipleNestings.Parent) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@innerclassinheritance.MultipleNestings.Parent)
@@ -924,6 +997,22 @@
  )
 )
 
+;;; Class<T> ChildClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@innerclassinheritance.ChildClass
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((innerclassinheritance.ChildClass.$class == null)) (innerclassinheritance.ChildClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|innerclassin...|_2(),innerclassinheritance.ParentOuter.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__innerclassinheritance_ChildClass) (ref.null $java.lang.Class))
+   (then
+    ;; (innerclassinheritance.ChildClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|innerclassin...|_2(),innerclassinheritance.ParentOuter.$getClassMetadata()));
+    (global.set $f_$class__innerclassinheritance_ChildClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|_2__java_lang_String (ref.func $$getString_|innerclassin...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinheritance.ParentOuter) )))
+   )
+  )
+  ;; return innerclassinheritance.ChildClass.$class;
+  (return (global.get $f_$class__innerclassinheritance_ChildClass))
+ )
+)
+
 ;;; Class<?> ChildClass.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@innerclassinheritance.ChildClass
  (type $function.$getClassImpl__java_lang_Class)
@@ -932,8 +1021,8 @@
  (local $this (ref null $innerclassinheritance.ChildClass))
  (local.set $this (ref.cast_static $innerclassinheritance.ChildClass (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getInnerclassinheritance.ChildClass();
-  (return (call $function.no.side.effects.$getInnerclassinheritance.ChildClass__java_lang_Class (ref.func $$getInnerclassinheritance.ChildClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return innerclassinheritance.ChildClass.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinheritance.ChildClass) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@innerclassinheritance.ChildClass)
@@ -1073,6 +1162,22 @@
  )
 )
 
+;;; Class<T> InnerClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@innerclassinheritance.ChildClass.InnerClass
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((innerclassinheritance.ChildClass.InnerClass.$class == null)) (innerclassinheritance.ChildClass.InnerClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|innerclassin...|_3(),innerclassinheritance.ParentInner.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__innerclassinheritance_ChildClass_InnerClass) (ref.null $java.lang.Class))
+   (then
+    ;; (innerclassinheritance.ChildClass.InnerClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|innerclassin...|_3(),innerclassinheritance.ParentInner.$getClassMetadata()));
+    (global.set $f_$class__innerclassinheritance_ChildClass_InnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|_3__java_lang_String (ref.func $$getString_|innerclassin...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinheritance.ParentInner) )))
+   )
+  )
+  ;; return innerclassinheritance.ChildClass.InnerClass.$class;
+  (return (global.get $f_$class__innerclassinheritance_ChildClass_InnerClass))
+ )
+)
+
 ;;; Class<?> InnerClass.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@innerclassinheritance.ChildClass.InnerClass
  (type $function.$getClassImpl__java_lang_Class)
@@ -1081,8 +1186,8 @@
  (local $this (ref null $innerclassinheritance.ChildClass.InnerClass))
  (local.set $this (ref.cast_static $innerclassinheritance.ChildClass.InnerClass (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getInnerclassinheritance.ChildClass.InnerClass();
-  (return (call $function.no.side.effects.$getInnerclassinheritance.ChildClass.InnerClass__java_lang_Class (ref.func $$getInnerclassinheritance.ChildClass.InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return innerclassinheritance.ChildClass.InnerClass.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinheritance.ChildClass.InnerClass) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@innerclassinheritance.ChildClass.InnerClass)
@@ -1193,6 +1298,22 @@
  )
 )
 
+;;; Class<T> InnerClass2.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.$class == null)) (innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|innerclassin...|_7(),innerclassinheritance.MultipleNestings.Parent.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2) (ref.null $java.lang.Class))
+   (then
+    ;; (innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|innerclassin...|_7(),innerclassinheritance.MultipleNestings.Parent.$getClassMetadata()));
+    (global.set $f_$class__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|_7__java_lang_String (ref.func $$getString_|innerclassin...|_7__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinheritance.MultipleNestings.Parent) )))
+   )
+  )
+  ;; return innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.$class;
+  (return (global.get $f_$class__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2))
+ )
+)
+
 ;;; Class<?> InnerClass2.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2
  (type $function.$getClassImpl__java_lang_Class)
@@ -1201,8 +1322,8 @@
  (local $this (ref null $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2))
  (local.set $this (ref.cast_static $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getInnerclassinheritance.MultipleNestings.InnerClass1.InnerClass2();
-  (return (call $function.no.side.effects.$getInnerclassinheritance.MultipleNestings.InnerClass1.InnerClass2__java_lang_Class (ref.func $$getInnerclassinheritance.MultipleNestings.InnerClass1.InnerClass2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2)
@@ -1277,6 +1398,22 @@
  )
 )
 
+;;; Class<T> InnerClass1.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@innerclassinheritance.MultipleNestings.InnerClass1
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((innerclassinheritance.MultipleNestings.InnerClass1.$class == null)) (innerclassinheritance.MultipleNestings.InnerClass1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|innerclassin...|_8(),innerclassinheritance.MultipleNestings.Parent.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__innerclassinheritance_MultipleNestings_InnerClass1) (ref.null $java.lang.Class))
+   (then
+    ;; (innerclassinheritance.MultipleNestings.InnerClass1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|innerclassin...|_8(),innerclassinheritance.MultipleNestings.Parent.$getClassMetadata()));
+    (global.set $f_$class__innerclassinheritance_MultipleNestings_InnerClass1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|_8__java_lang_String (ref.func $$getString_|innerclassin...|_8__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinheritance.MultipleNestings.Parent) )))
+   )
+  )
+  ;; return innerclassinheritance.MultipleNestings.InnerClass1.$class;
+  (return (global.get $f_$class__innerclassinheritance_MultipleNestings_InnerClass1))
+ )
+)
+
 ;;; Class<?> InnerClass1.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@innerclassinheritance.MultipleNestings.InnerClass1
  (type $function.$getClassImpl__java_lang_Class)
@@ -1285,8 +1422,8 @@
  (local $this (ref null $innerclassinheritance.MultipleNestings.InnerClass1))
  (local.set $this (ref.cast_static $innerclassinheritance.MultipleNestings.InnerClass1 (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getInnerclassinheritance.MultipleNestings.InnerClass1();
-  (return (call $function.no.side.effects.$getInnerclassinheritance.MultipleNestings.InnerClass1__java_lang_Class (ref.func $$getInnerclassinheritance.MultipleNestings.InnerClass1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return innerclassinheritance.MultipleNestings.InnerClass1.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinheritance.MultipleNestings.InnerClass1) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@innerclassinheritance.MultipleNestings.InnerClass1)
@@ -1405,6 +1542,22 @@
  )
 )
 
+;;; Class<T> LocalClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@innerclassinheritance.ChildClass.1LocalClass
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((innerclassinheritance.ChildClass.1LocalClass.$class == null)) (innerclassinheritance.ChildClass.1LocalClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|innerclassin...|_4(),innerclassinheritance.ChildClass.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__innerclassinheritance_ChildClass_1LocalClass) (ref.null $java.lang.Class))
+   (then
+    ;; (innerclassinheritance.ChildClass.1LocalClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|innerclassin...|_4(),innerclassinheritance.ChildClass.$getClassMetadata()));
+    (global.set $f_$class__innerclassinheritance_ChildClass_1LocalClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|_4__java_lang_String (ref.func $$getString_|innerclassin...|_4__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinheritance.ChildClass) )))
+   )
+  )
+  ;; return innerclassinheritance.ChildClass.1LocalClass.$class;
+  (return (global.get $f_$class__innerclassinheritance_ChildClass_1LocalClass))
+ )
+)
+
 ;;; Class<?> LocalClass.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@innerclassinheritance.ChildClass.1LocalClass
  (type $function.$getClassImpl__java_lang_Class)
@@ -1413,8 +1566,8 @@
  (local $this (ref null $innerclassinheritance.ChildClass.1LocalClass))
  (local.set $this (ref.cast_static $innerclassinheritance.ChildClass.1LocalClass (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getInnerclassinheritance.ChildClass.1LocalClass();
-  (return (call $function.no.side.effects.$getInnerclassinheritance.ChildClass.1LocalClass__java_lang_Class (ref.func $$getInnerclassinheritance.ChildClass.1LocalClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return innerclassinheritance.ChildClass.1LocalClass.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinheritance.ChildClass.1LocalClass) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@innerclassinheritance.ChildClass.1LocalClass)

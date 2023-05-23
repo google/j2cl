@@ -47,6 +47,7 @@
 
 ;;; Code for privateconstructor.PrivateConstructor [static fields]
 (global $f_$initialized__privateconstructor_PrivateConstructor (mut i32) (i32.const 0))
+(global $f_$class__privateconstructor_PrivateConstructor (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for privateconstructor.PrivateConstructor [methods]
 
@@ -101,6 +102,22 @@
  )
 )
 
+;;; Class<T> PrivateConstructor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@privateconstructor.PrivateConstructor
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((privateconstructor.PrivateConstructor.$class == null)) (privateconstructor.PrivateConstructor.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|privateconst...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__privateconstructor_PrivateConstructor) (ref.null $java.lang.Class))
+   (then
+    ;; (privateconstructor.PrivateConstructor.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|privateconst...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__privateconstructor_PrivateConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|privateconst...|__java_lang_String (ref.func $$getString_|privateconst...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return privateconstructor.PrivateConstructor.$class;
+  (return (global.get $f_$class__privateconstructor_PrivateConstructor))
+ )
+)
+
 ;;; Class<?> PrivateConstructor.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@privateconstructor.PrivateConstructor
  (type $function.$getClassImpl__java_lang_Class)
@@ -109,8 +126,8 @@
  (local $this (ref null $privateconstructor.PrivateConstructor))
  (local.set $this (ref.cast_static $privateconstructor.PrivateConstructor (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getPrivateconstructor.PrivateConstructor();
-  (return (call $function.no.side.effects.$getPrivateconstructor.PrivateConstructor__java_lang_Class (ref.func $$getPrivateconstructor.PrivateConstructor__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return privateconstructor.PrivateConstructor.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@privateconstructor.PrivateConstructor) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@privateconstructor.PrivateConstructor)

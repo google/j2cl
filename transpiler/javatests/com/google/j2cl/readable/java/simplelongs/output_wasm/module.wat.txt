@@ -55,6 +55,7 @@
 
 ;;; Code for simplelongs.SimpleLongs [static fields]
 (global $f_$initialized__simplelongs_SimpleLongs (mut i32) (i32.const 0))
+(global $f_$class__simplelongs_SimpleLongs (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for simplelongs.SimpleLongs [methods]
 
@@ -266,6 +267,22 @@
  )
 )
 
+;;; Class<T> SimpleLongs.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@simplelongs.SimpleLongs
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((simplelongs.SimpleLongs.$class == null)) (simplelongs.SimpleLongs.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|simplelongs....|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__simplelongs_SimpleLongs) (ref.null $java.lang.Class))
+   (then
+    ;; (simplelongs.SimpleLongs.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|simplelongs....|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__simplelongs_SimpleLongs (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplelongs....|__java_lang_String (ref.func $$getString_|simplelongs....|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return simplelongs.SimpleLongs.$class;
+  (return (global.get $f_$class__simplelongs_SimpleLongs))
+ )
+)
+
 ;;; Class<?> SimpleLongs.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@simplelongs.SimpleLongs
  (type $function.$getClassImpl__java_lang_Class)
@@ -274,8 +291,8 @@
  (local $this (ref null $simplelongs.SimpleLongs))
  (local.set $this (ref.cast_static $simplelongs.SimpleLongs (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getSimplelongs.SimpleLongs();
-  (return (call $function.no.side.effects.$getSimplelongs.SimpleLongs__java_lang_Class (ref.func $$getSimplelongs.SimpleLongs__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return simplelongs.SimpleLongs.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simplelongs.SimpleLongs) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@simplelongs.SimpleLongs)

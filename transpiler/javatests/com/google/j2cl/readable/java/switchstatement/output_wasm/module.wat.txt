@@ -115,9 +115,11 @@
 (global $f_THREE__switchstatement_Numbers (mut (ref null $switchstatement.Numbers)) (ref.null $switchstatement.Numbers))
 (global $f_namesToValuesMap__switchstatement_Numbers_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
 (global $f_$initialized__switchstatement_Numbers (mut i32) (i32.const 0))
+(global $f_$class__switchstatement_Numbers (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for switchstatement.SwitchStatement [static fields]
 (global $f_$initialized__switchstatement_SwitchStatement (mut i32) (i32.const 0))
+(global $f_$class__switchstatement_SwitchStatement (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for switchstatement.SwitchStatement [methods]
 
@@ -1490,6 +1492,22 @@
  )
 )
 
+;;; Class<T> SwitchStatement.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@switchstatement.SwitchStatement
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((switchstatement.SwitchStatement.$class == null)) (switchstatement.SwitchStatement.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|switchstatem...|_1(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__switchstatement_SwitchStatement) (ref.null $java.lang.Class))
+   (then
+    ;; (switchstatement.SwitchStatement.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|switchstatem...|_1(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__switchstatement_SwitchStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|switchstatem...|_1__java_lang_String (ref.func $$getString_|switchstatem...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return switchstatement.SwitchStatement.$class;
+  (return (global.get $f_$class__switchstatement_SwitchStatement))
+ )
+)
+
 ;;; Class<?> SwitchStatement.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@switchstatement.SwitchStatement
  (type $function.$getClassImpl__java_lang_Class)
@@ -1498,8 +1516,8 @@
  (local $this (ref null $switchstatement.SwitchStatement))
  (local.set $this (ref.cast_static $switchstatement.SwitchStatement (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getSwitchstatement.SwitchStatement();
-  (return (call $function.no.side.effects.$getSwitchstatement.SwitchStatement__java_lang_Class (ref.func $$getSwitchstatement.SwitchStatement__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return switchstatement.SwitchStatement.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@switchstatement.SwitchStatement) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@switchstatement.SwitchStatement)
@@ -1616,6 +1634,22 @@
  )
 )
 
+;;; Class<T> Numbers.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@switchstatement.Numbers
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((switchstatement.Numbers.$class == null)) (switchstatement.Numbers.$class = java.lang.Class.createForEnum(javaemul.internal.StringPool.$getString_|switchstatem...|()));
+  (if (ref.eq (global.get $f_$class__switchstatement_Numbers) (ref.null $java.lang.Class))
+   (then
+    ;; (switchstatement.Numbers.$class = java.lang.Class.createForEnum(javaemul.internal.StringPool.$getString_|switchstatem...|()));
+    (global.set $f_$class__switchstatement_Numbers (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|switchstatem...|__java_lang_String (ref.func $$getString_|switchstatem...|__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return switchstatement.Numbers.$class;
+  (return (global.get $f_$class__switchstatement_Numbers))
+ )
+)
+
 ;;; Class<?> Numbers.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@switchstatement.Numbers
  (type $function.$getClassImpl__java_lang_Class)
@@ -1624,8 +1658,8 @@
  (local $this (ref null $switchstatement.Numbers))
  (local.set $this (ref.cast_static $switchstatement.Numbers (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getSwitchstatement.Numbers();
-  (return (call $function.no.side.effects.$getSwitchstatement.Numbers__java_lang_Class (ref.func $$getSwitchstatement.Numbers__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return switchstatement.Numbers.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@switchstatement.Numbers) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@switchstatement.Numbers)

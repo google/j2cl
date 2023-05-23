@@ -364,27 +364,35 @@
 
 ;;; Code for genericmethod.GenericMethod [static fields]
 (global $f_$initialized__genericmethod_GenericMethod (mut i32) (i32.const 0))
+(global $f_$class__genericmethod_GenericMethod (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for genericmethod.GenericMethod.1 [static fields]
 (global $f_$initialized__genericmethod_GenericMethod_1 (mut i32) (i32.const 0))
+(global $f_$class__genericmethod_GenericMethod_1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for genericmethod.GenericMethod.SuperContainer [static fields]
 (global $f_$initialized__genericmethod_GenericMethod_SuperContainer (mut i32) (i32.const 0))
+(global $f_$class__genericmethod_GenericMethod_SuperContainer (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for genericmethod.GenericMethod.Container [static fields]
 (global $f_$initialized__genericmethod_GenericMethod_Container (mut i32) (i32.const 0))
+(global $f_$class__genericmethod_GenericMethod_Container (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for genericmethod.GenericMethod.Content [static fields]
 (global $f_$initialized__genericmethod_GenericMethod_Content (mut i32) (i32.const 0))
+(global $f_$class__genericmethod_GenericMethod_Content (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for genericmethod.GenericMethod.Consumer [static fields]
 (global $f_$initialized__genericmethod_GenericMethod_Consumer (mut i32) (i32.const 0))
+(global $f_$class__genericmethod_GenericMethod_Consumer (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for genericmethod.GenericMethod.Supplier [static fields]
 (global $f_$initialized__genericmethod_GenericMethod_Supplier (mut i32) (i32.const 0))
+(global $f_$class__genericmethod_GenericMethod_Supplier (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for genericmethod.GenericMethod.1LocalClass [static fields]
 (global $f_$initialized__genericmethod_GenericMethod_1LocalClass (mut i32) (i32.const 0))
+(global $f_$class__genericmethod_GenericMethod_1LocalClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for genericmethod.GenericMethod.Consumer [methods]
 
@@ -407,6 +415,22 @@
  )
 )
 
+;;; Class<T> Consumer.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@genericmethod.GenericMethod.Consumer
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((genericmethod.GenericMethod.Consumer.$class == null)) (genericmethod.GenericMethod.Consumer.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|genericmetho...|_5()));
+  (if (ref.eq (global.get $f_$class__genericmethod_GenericMethod_Consumer) (ref.null $java.lang.Class))
+   (then
+    ;; (genericmethod.GenericMethod.Consumer.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|genericmetho...|_5()));
+    (global.set $f_$class__genericmethod_GenericMethod_Consumer (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericmetho...|_5__java_lang_String (ref.func $$getString_|genericmetho...|_5__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return genericmethod.GenericMethod.Consumer.$class;
+  (return (global.get $f_$class__genericmethod_GenericMethod_Consumer))
+ )
+)
+
 ;;; Code for genericmethod.GenericMethod.Supplier [methods]
 
 ;;; void Supplier.$clinit()
@@ -425,6 +449,22 @@
   ;; (genericmethod.GenericMethod.Supplier.$initialized = true);
   ;;@ genericmethod/GenericMethod.java:139:12
   (global.set $f_$initialized__genericmethod_GenericMethod_Supplier (i32.const 1))
+ )
+)
+
+;;; Class<T> Supplier.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@genericmethod.GenericMethod.Supplier
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((genericmethod.GenericMethod.Supplier.$class == null)) (genericmethod.GenericMethod.Supplier.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|genericmetho...|_6()));
+  (if (ref.eq (global.get $f_$class__genericmethod_GenericMethod_Supplier) (ref.null $java.lang.Class))
+   (then
+    ;; (genericmethod.GenericMethod.Supplier.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|genericmetho...|_6()));
+    (global.set $f_$class__genericmethod_GenericMethod_Supplier (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericmetho...|_6__java_lang_String (ref.func $$getString_|genericmetho...|_6__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return genericmethod.GenericMethod.Supplier.$class;
+  (return (global.get $f_$class__genericmethod_GenericMethod_Supplier))
  )
 )
 
@@ -886,6 +926,22 @@
  )
 )
 
+;;; Class<T> GenericMethod.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@genericmethod.GenericMethod
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((genericmethod.GenericMethod.$class == null)) (genericmethod.GenericMethod.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|genericmetho...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__genericmethod_GenericMethod) (ref.null $java.lang.Class))
+   (then
+    ;; (genericmethod.GenericMethod.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|genericmetho...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__genericmethod_GenericMethod (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericmetho...|__java_lang_String (ref.func $$getString_|genericmetho...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return genericmethod.GenericMethod.$class;
+  (return (global.get $f_$class__genericmethod_GenericMethod))
+ )
+)
+
 ;;; Class<?> GenericMethod.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@genericmethod.GenericMethod
  (type $function.$getClassImpl__java_lang_Class)
@@ -894,8 +950,8 @@
  (local $this (ref null $genericmethod.GenericMethod))
  (local.set $this (ref.cast_static $genericmethod.GenericMethod (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getGenericmethod.GenericMethod();
-  (return (call $function.no.side.effects.$getGenericmethod.GenericMethod__java_lang_Class (ref.func $$getGenericmethod.GenericMethod__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return genericmethod.GenericMethod.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@genericmethod.GenericMethod) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@genericmethod.GenericMethod)
@@ -972,6 +1028,22 @@
  )
 )
 
+;;; Class<T> SuperContainer.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@genericmethod.GenericMethod.SuperContainer
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((genericmethod.GenericMethod.SuperContainer.$class == null)) (genericmethod.GenericMethod.SuperContainer.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|genericmetho...|_2(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__genericmethod_GenericMethod_SuperContainer) (ref.null $java.lang.Class))
+   (then
+    ;; (genericmethod.GenericMethod.SuperContainer.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|genericmetho...|_2(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__genericmethod_GenericMethod_SuperContainer (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericmetho...|_2__java_lang_String (ref.func $$getString_|genericmetho...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return genericmethod.GenericMethod.SuperContainer.$class;
+  (return (global.get $f_$class__genericmethod_GenericMethod_SuperContainer))
+ )
+)
+
 ;;; Class<?> SuperContainer.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@genericmethod.GenericMethod.SuperContainer
  (type $function.$getClassImpl__java_lang_Class)
@@ -980,8 +1052,8 @@
  (local $this (ref null $genericmethod.GenericMethod.SuperContainer))
  (local.set $this (ref.cast_static $genericmethod.GenericMethod.SuperContainer (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getGenericmethod.GenericMethod.SuperContainer();
-  (return (call $function.no.side.effects.$getGenericmethod.GenericMethod.SuperContainer__java_lang_Class (ref.func $$getGenericmethod.GenericMethod.SuperContainer__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return genericmethod.GenericMethod.SuperContainer.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@genericmethod.GenericMethod.SuperContainer) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@genericmethod.GenericMethod.SuperContainer)
@@ -1058,6 +1130,22 @@
  )
 )
 
+;;; Class<T> Container.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@genericmethod.GenericMethod.Container
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((genericmethod.GenericMethod.Container.$class == null)) (genericmethod.GenericMethod.Container.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|genericmetho...|_3(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__genericmethod_GenericMethod_Container) (ref.null $java.lang.Class))
+   (then
+    ;; (genericmethod.GenericMethod.Container.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|genericmetho...|_3(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__genericmethod_GenericMethod_Container (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericmetho...|_3__java_lang_String (ref.func $$getString_|genericmetho...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return genericmethod.GenericMethod.Container.$class;
+  (return (global.get $f_$class__genericmethod_GenericMethod_Container))
+ )
+)
+
 ;;; Class<?> Container.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@genericmethod.GenericMethod.Container
  (type $function.$getClassImpl__java_lang_Class)
@@ -1066,8 +1154,8 @@
  (local $this (ref null $genericmethod.GenericMethod.Container))
  (local.set $this (ref.cast_static $genericmethod.GenericMethod.Container (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getGenericmethod.GenericMethod.Container();
-  (return (call $function.no.side.effects.$getGenericmethod.GenericMethod.Container__java_lang_Class (ref.func $$getGenericmethod.GenericMethod.Container__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return genericmethod.GenericMethod.Container.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@genericmethod.GenericMethod.Container) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@genericmethod.GenericMethod.Container)
@@ -1144,6 +1232,22 @@
  )
 )
 
+;;; Class<T> Content.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@genericmethod.GenericMethod.Content
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((genericmethod.GenericMethod.Content.$class == null)) (genericmethod.GenericMethod.Content.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|genericmetho...|_4(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__genericmethod_GenericMethod_Content) (ref.null $java.lang.Class))
+   (then
+    ;; (genericmethod.GenericMethod.Content.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|genericmetho...|_4(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__genericmethod_GenericMethod_Content (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericmetho...|_4__java_lang_String (ref.func $$getString_|genericmetho...|_4__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return genericmethod.GenericMethod.Content.$class;
+  (return (global.get $f_$class__genericmethod_GenericMethod_Content))
+ )
+)
+
 ;;; Class<?> Content.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@genericmethod.GenericMethod.Content
  (type $function.$getClassImpl__java_lang_Class)
@@ -1152,8 +1256,8 @@
  (local $this (ref null $genericmethod.GenericMethod.Content))
  (local.set $this (ref.cast_static $genericmethod.GenericMethod.Content (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getGenericmethod.GenericMethod.Content();
-  (return (call $function.no.side.effects.$getGenericmethod.GenericMethod.Content__java_lang_Class (ref.func $$getGenericmethod.GenericMethod.Content__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return genericmethod.GenericMethod.Content.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@genericmethod.GenericMethod.Content) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@genericmethod.GenericMethod.Content)
@@ -1242,6 +1346,22 @@
  )
 )
 
+;;; Class<T> <anonymous> extends GenericMethod<T>.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@genericmethod.GenericMethod.1
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((genericmethod.GenericMethod.1.$class == null)) (genericmethod.GenericMethod.1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|genericmetho...|_1(),genericmethod.GenericMethod.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__genericmethod_GenericMethod_1) (ref.null $java.lang.Class))
+   (then
+    ;; (genericmethod.GenericMethod.1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|genericmetho...|_1(),genericmethod.GenericMethod.$getClassMetadata()));
+    (global.set $f_$class__genericmethod_GenericMethod_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericmetho...|_1__java_lang_String (ref.func $$getString_|genericmetho...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@genericmethod.GenericMethod) )))
+   )
+  )
+  ;; return genericmethod.GenericMethod.1.$class;
+  (return (global.get $f_$class__genericmethod_GenericMethod_1))
+ )
+)
+
 ;;; Class<?> <anonymous> extends GenericMethod<T>.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@genericmethod.GenericMethod.1
  (type $function.$getClassImpl__java_lang_Class)
@@ -1250,8 +1370,8 @@
  (local $this (ref null $genericmethod.GenericMethod.1))
  (local.set $this (ref.cast_static $genericmethod.GenericMethod.1 (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getGenericmethod.GenericMethod.1();
-  (return (call $function.no.side.effects.$getGenericmethod.GenericMethod.1__java_lang_Class (ref.func $$getGenericmethod.GenericMethod.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return genericmethod.GenericMethod.1.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@genericmethod.GenericMethod.1) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@genericmethod.GenericMethod.1)
@@ -1340,6 +1460,22 @@
  )
 )
 
+;;; Class<T> LocalClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@genericmethod.GenericMethod.1LocalClass
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((genericmethod.GenericMethod.1LocalClass.$class == null)) (genericmethod.GenericMethod.1LocalClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|genericmetho...|_7(),genericmethod.GenericMethod.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__genericmethod_GenericMethod_1LocalClass) (ref.null $java.lang.Class))
+   (then
+    ;; (genericmethod.GenericMethod.1LocalClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|genericmetho...|_7(),genericmethod.GenericMethod.$getClassMetadata()));
+    (global.set $f_$class__genericmethod_GenericMethod_1LocalClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericmetho...|_7__java_lang_String (ref.func $$getString_|genericmetho...|_7__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@genericmethod.GenericMethod) )))
+   )
+  )
+  ;; return genericmethod.GenericMethod.1LocalClass.$class;
+  (return (global.get $f_$class__genericmethod_GenericMethod_1LocalClass))
+ )
+)
+
 ;;; Class<?> LocalClass.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@genericmethod.GenericMethod.1LocalClass
  (type $function.$getClassImpl__java_lang_Class)
@@ -1348,8 +1484,8 @@
  (local $this (ref null $genericmethod.GenericMethod.1LocalClass))
  (local.set $this (ref.cast_static $genericmethod.GenericMethod.1LocalClass (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getGenericmethod.GenericMethod.1LocalClass();
-  (return (call $function.no.side.effects.$getGenericmethod.GenericMethod.1LocalClass__java_lang_Class (ref.func $$getGenericmethod.GenericMethod.1LocalClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return genericmethod.GenericMethod.1LocalClass.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@genericmethod.GenericMethod.1LocalClass) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@genericmethod.GenericMethod.1LocalClass)

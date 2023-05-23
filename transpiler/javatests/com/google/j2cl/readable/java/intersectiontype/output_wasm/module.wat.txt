@@ -338,42 +338,55 @@
 
 ;;; Code for intersectiontype.Getable [static fields]
 (global $f_$initialized__intersectiontype_Getable (mut i32) (i32.const 0))
+(global $f_$class__intersectiontype_Getable (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for intersectiontype.Setable [static fields]
 (global $f_$initialized__intersectiontype_Setable (mut i32) (i32.const 0))
+(global $f_$class__intersectiontype_Setable (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for intersectiontype.Serial [static fields]
 (global $f_$initialized__intersectiontype_Serial (mut i32) (i32.const 0))
+(global $f_$class__intersectiontype_Serial (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for intersectiontype.Cmp [static fields]
 (global $f_$initialized__intersectiontype_Cmp (mut i32) (i32.const 0))
+(global $f_$class__intersectiontype_Cmp (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for intersectiontype.Cmp2 [static fields]
 (global $f_$initialized__intersectiontype_Cmp2 (mut i32) (i32.const 0))
+(global $f_$class__intersectiontype_Cmp2 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for intersectiontype.IntersectionTypeTest [static fields]
 (global $f_$initialized__intersectiontype_IntersectionTypeTest (mut i32) (i32.const 0))
+(global $f_$class__intersectiontype_IntersectionTypeTest (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 [static fields]
 (global $f_$initialized__intersectiontype_IntersectionTypeTest_$LambdaImplementor$1 (mut i32) (i32.const 0))
+(global $f_$class__intersectiontype_IntersectionTypeTest_$LambdaImplementor$1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 [static fields]
 (global $f_$initialized__intersectiontype_IntersectionTypeTest_$LambdaImplementor$2 (mut i32) (i32.const 0))
+(global $f_$class__intersectiontype_IntersectionTypeTest_$LambdaImplementor$2 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for intersectiontype.IntersectionTypeTest.MapEntry [static fields]
 (global $f_$initialized__intersectiontype_IntersectionTypeTest_MapEntry (mut i32) (i32.const 0))
+(global $f_$class__intersectiontype_IntersectionTypeTest_MapEntry (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for intersectiontype.IntersectionTypeTest.A [static fields]
 (global $f_$initialized__intersectiontype_IntersectionTypeTest_A (mut i32) (i32.const 0))
+(global $f_$class__intersectiontype_IntersectionTypeTest_A (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for intersectiontype.IntersectionTypeTest.EmptyA [static fields]
 (global $f_$initialized__intersectiontype_IntersectionTypeTest_EmptyA (mut i32) (i32.const 0))
+(global $f_$class__intersectiontype_IntersectionTypeTest_EmptyA (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for intersectiontype.IntersectionTypeTest.EmptyB [static fields]
 (global $f_$initialized__intersectiontype_IntersectionTypeTest_EmptyB (mut i32) (i32.const 0))
+(global $f_$class__intersectiontype_IntersectionTypeTest_EmptyB (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for intersectiontype.IntersectionTypeTest.SomeConcreteType [static fields]
 (global $f_$initialized__intersectiontype_IntersectionTypeTest_SomeConcreteType (mut i32) (i32.const 0))
+(global $f_$class__intersectiontype_IntersectionTypeTest_SomeConcreteType (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for intersectiontype.Getable [methods]
 
@@ -393,6 +406,22 @@
   ;; (intersectiontype.Getable.$initialized = true);
   ;;@ intersectiontype/IntersectionTypeTest.java:18:10
   (global.set $f_$initialized__intersectiontype_Getable (i32.const 1))
+ )
+)
+
+;;; Class<T> Getable.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@intersectiontype.Getable
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((intersectiontype.Getable.$class == null)) (intersectiontype.Getable.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|intersection...|()));
+  (if (ref.eq (global.get $f_$class__intersectiontype_Getable) (ref.null $java.lang.Class))
+   (then
+    ;; (intersectiontype.Getable.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|intersection...|()));
+    (global.set $f_$class__intersectiontype_Getable (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|intersection...|__java_lang_String (ref.func $$getString_|intersection...|__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return intersectiontype.Getable.$class;
+  (return (global.get $f_$class__intersectiontype_Getable))
  )
 )
 
@@ -417,6 +446,22 @@
  )
 )
 
+;;; Class<T> Setable.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@intersectiontype.Setable
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((intersectiontype.Setable.$class == null)) (intersectiontype.Setable.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|intersection...|_1()));
+  (if (ref.eq (global.get $f_$class__intersectiontype_Setable) (ref.null $java.lang.Class))
+   (then
+    ;; (intersectiontype.Setable.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|intersection...|_1()));
+    (global.set $f_$class__intersectiontype_Setable (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|intersection...|_1__java_lang_String (ref.func $$getString_|intersection...|_1__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return intersectiontype.Setable.$class;
+  (return (global.get $f_$class__intersectiontype_Setable))
+ )
+)
+
 ;;; Code for intersectiontype.Serial [methods]
 
 ;;; void Serial.$clinit()
@@ -435,6 +480,22 @@
   ;; (intersectiontype.Serial.$initialized = true);
   ;;@ intersectiontype/IntersectionTypeTest.java:26:10
   (global.set $f_$initialized__intersectiontype_Serial (i32.const 1))
+ )
+)
+
+;;; Class<T> Serial.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@intersectiontype.Serial
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((intersectiontype.Serial.$class == null)) (intersectiontype.Serial.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|intersection...|_2()));
+  (if (ref.eq (global.get $f_$class__intersectiontype_Serial) (ref.null $java.lang.Class))
+   (then
+    ;; (intersectiontype.Serial.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|intersection...|_2()));
+    (global.set $f_$class__intersectiontype_Serial (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|intersection...|_2__java_lang_String (ref.func $$getString_|intersection...|_2__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return intersectiontype.Serial.$class;
+  (return (global.get $f_$class__intersectiontype_Serial))
  )
 )
 
@@ -459,6 +520,22 @@
  )
 )
 
+;;; Class<T> Cmp.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@intersectiontype.Cmp
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((intersectiontype.Cmp.$class == null)) (intersectiontype.Cmp.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|intersection...|_3()));
+  (if (ref.eq (global.get $f_$class__intersectiontype_Cmp) (ref.null $java.lang.Class))
+   (then
+    ;; (intersectiontype.Cmp.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|intersection...|_3()));
+    (global.set $f_$class__intersectiontype_Cmp (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|intersection...|_3__java_lang_String (ref.func $$getString_|intersection...|_3__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return intersectiontype.Cmp.$class;
+  (return (global.get $f_$class__intersectiontype_Cmp))
+ )
+)
+
 ;;; Code for intersectiontype.Cmp2 [methods]
 
 ;;; void Cmp2.$clinit()
@@ -477,6 +554,22 @@
   ;; (intersectiontype.Cmp2.$initialized = true);
   ;;@ intersectiontype/IntersectionTypeTest.java:32:10
   (global.set $f_$initialized__intersectiontype_Cmp2 (i32.const 1))
+ )
+)
+
+;;; Class<T> Cmp2.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@intersectiontype.Cmp2
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((intersectiontype.Cmp2.$class == null)) (intersectiontype.Cmp2.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|intersection...|_4()));
+  (if (ref.eq (global.get $f_$class__intersectiontype_Cmp2) (ref.null $java.lang.Class))
+   (then
+    ;; (intersectiontype.Cmp2.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|intersection...|_4()));
+    (global.set $f_$class__intersectiontype_Cmp2 (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|intersection...|_4__java_lang_String (ref.func $$getString_|intersection...|_4__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return intersectiontype.Cmp2.$class;
+  (return (global.get $f_$class__intersectiontype_Cmp2))
  )
 )
 
@@ -501,6 +594,22 @@
  )
 )
 
+;;; Class<T> EmptyA.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest.EmptyA
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((intersectiontype.IntersectionTypeTest.EmptyA.$class == null)) (intersectiontype.IntersectionTypeTest.EmptyA.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|intersection...|_10()));
+  (if (ref.eq (global.get $f_$class__intersectiontype_IntersectionTypeTest_EmptyA) (ref.null $java.lang.Class))
+   (then
+    ;; (intersectiontype.IntersectionTypeTest.EmptyA.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|intersection...|_10()));
+    (global.set $f_$class__intersectiontype_IntersectionTypeTest_EmptyA (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|intersection...|_10__java_lang_String (ref.func $$getString_|intersection...|_10__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return intersectiontype.IntersectionTypeTest.EmptyA.$class;
+  (return (global.get $f_$class__intersectiontype_IntersectionTypeTest_EmptyA))
+ )
+)
+
 ;;; Code for intersectiontype.IntersectionTypeTest.EmptyB [methods]
 
 ;;; void EmptyB.$clinit()
@@ -519,6 +628,22 @@
   ;; (intersectiontype.IntersectionTypeTest.EmptyB.$initialized = true);
   ;;@ intersectiontype/IntersectionTypeTest.java:83:20
   (global.set $f_$initialized__intersectiontype_IntersectionTypeTest_EmptyB (i32.const 1))
+ )
+)
+
+;;; Class<T> EmptyB.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest.EmptyB
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((intersectiontype.IntersectionTypeTest.EmptyB.$class == null)) (intersectiontype.IntersectionTypeTest.EmptyB.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|intersection...|_11()));
+  (if (ref.eq (global.get $f_$class__intersectiontype_IntersectionTypeTest_EmptyB) (ref.null $java.lang.Class))
+   (then
+    ;; (intersectiontype.IntersectionTypeTest.EmptyB.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|intersection...|_11()));
+    (global.set $f_$class__intersectiontype_IntersectionTypeTest_EmptyB (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|intersection...|_11__java_lang_String (ref.func $$getString_|intersection...|_11__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return intersectiontype.IntersectionTypeTest.EmptyB.$class;
+  (return (global.get $f_$class__intersectiontype_IntersectionTypeTest_EmptyB))
  )
 )
 
@@ -819,6 +944,22 @@
  )
 )
 
+;;; Class<T> IntersectionTypeTest.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((intersectiontype.IntersectionTypeTest.$class == null)) (intersectiontype.IntersectionTypeTest.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|intersection...|_5(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__intersectiontype_IntersectionTypeTest) (ref.null $java.lang.Class))
+   (then
+    ;; (intersectiontype.IntersectionTypeTest.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|intersection...|_5(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__intersectiontype_IntersectionTypeTest (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|intersection...|_5__java_lang_String (ref.func $$getString_|intersection...|_5__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return intersectiontype.IntersectionTypeTest.$class;
+  (return (global.get $f_$class__intersectiontype_IntersectionTypeTest))
+ )
+)
+
 ;;; Class<?> IntersectionTypeTest.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@intersectiontype.IntersectionTypeTest
  (type $function.$getClassImpl__java_lang_Class)
@@ -827,8 +968,8 @@
  (local $this (ref null $intersectiontype.IntersectionTypeTest))
  (local.set $this (ref.cast_static $intersectiontype.IntersectionTypeTest (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getIntersectiontype.IntersectionTypeTest();
-  (return (call $function.no.side.effects.$getIntersectiontype.IntersectionTypeTest__java_lang_Class (ref.func $$getIntersectiontype.IntersectionTypeTest__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return intersectiontype.IntersectionTypeTest.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@intersectiontype.IntersectionTypeTest)
@@ -905,6 +1046,22 @@
  )
 )
 
+;;; Class<T> $LambdaImplementor$1.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.$class == null)) (intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|intersection...|_6(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__intersectiontype_IntersectionTypeTest_$LambdaImplementor$1) (ref.null $java.lang.Class))
+   (then
+    ;; (intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|intersection...|_6(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__intersectiontype_IntersectionTypeTest_$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|intersection...|_6__java_lang_String (ref.func $$getString_|intersection...|_6__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.$class;
+  (return (global.get $f_$class__intersectiontype_IntersectionTypeTest_$LambdaImplementor$1))
+ )
+)
+
 ;;; Class<?> $LambdaImplementor$1.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1
  (type $function.$getClassImpl__java_lang_Class)
@@ -913,8 +1070,8 @@
  (local $this (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1))
  (local.set $this (ref.cast_static $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getIntersectiontype.IntersectionTypeTest.$LambdaImplementor$1();
-  (return (call $function.no.side.effects.$getIntersectiontype.IntersectionTypeTest.$LambdaImplementor$1__java_lang_Class (ref.func $$getIntersectiontype.IntersectionTypeTest.$LambdaImplementor$1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1)
@@ -992,6 +1149,22 @@
  )
 )
 
+;;; Class<T> $LambdaImplementor$2.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.$class == null)) (intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|intersection...|_7(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__intersectiontype_IntersectionTypeTest_$LambdaImplementor$2) (ref.null $java.lang.Class))
+   (then
+    ;; (intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|intersection...|_7(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__intersectiontype_IntersectionTypeTest_$LambdaImplementor$2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|intersection...|_7__java_lang_String (ref.func $$getString_|intersection...|_7__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.$class;
+  (return (global.get $f_$class__intersectiontype_IntersectionTypeTest_$LambdaImplementor$2))
+ )
+)
+
 ;;; Class<?> $LambdaImplementor$2.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2
  (type $function.$getClassImpl__java_lang_Class)
@@ -1000,8 +1173,8 @@
  (local $this (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2))
  (local.set $this (ref.cast_static $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getIntersectiontype.IntersectionTypeTest.$LambdaImplementor$2();
-  (return (call $function.no.side.effects.$getIntersectiontype.IntersectionTypeTest.$LambdaImplementor$2__java_lang_Class (ref.func $$getIntersectiontype.IntersectionTypeTest.$LambdaImplementor$2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2)
@@ -1081,6 +1254,22 @@
  )
 )
 
+;;; Class<T> MapEntry.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest.MapEntry
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((intersectiontype.IntersectionTypeTest.MapEntry.$class == null)) (intersectiontype.IntersectionTypeTest.MapEntry.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|intersection...|_8(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__intersectiontype_IntersectionTypeTest_MapEntry) (ref.null $java.lang.Class))
+   (then
+    ;; (intersectiontype.IntersectionTypeTest.MapEntry.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|intersection...|_8(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__intersectiontype_IntersectionTypeTest_MapEntry (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|intersection...|_8__java_lang_String (ref.func $$getString_|intersection...|_8__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return intersectiontype.IntersectionTypeTest.MapEntry.$class;
+  (return (global.get $f_$class__intersectiontype_IntersectionTypeTest_MapEntry))
+ )
+)
+
 ;;; Class<?> MapEntry.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@intersectiontype.IntersectionTypeTest.MapEntry
  (type $function.$getClassImpl__java_lang_Class)
@@ -1089,8 +1278,8 @@
  (local $this (ref null $intersectiontype.IntersectionTypeTest.MapEntry))
  (local.set $this (ref.cast_static $intersectiontype.IntersectionTypeTest.MapEntry (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getIntersectiontype.IntersectionTypeTest.MapEntry();
-  (return (call $function.no.side.effects.$getIntersectiontype.IntersectionTypeTest.MapEntry__java_lang_Class (ref.func $$getIntersectiontype.IntersectionTypeTest.MapEntry__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return intersectiontype.IntersectionTypeTest.MapEntry.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest.MapEntry) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@intersectiontype.IntersectionTypeTest.MapEntry)
@@ -1148,6 +1337,22 @@
  )
 )
 
+;;; Class<T> A.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest.A
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((intersectiontype.IntersectionTypeTest.A.$class == null)) (intersectiontype.IntersectionTypeTest.A.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|intersection...|_9(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__intersectiontype_IntersectionTypeTest_A) (ref.null $java.lang.Class))
+   (then
+    ;; (intersectiontype.IntersectionTypeTest.A.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|intersection...|_9(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__intersectiontype_IntersectionTypeTest_A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|intersection...|_9__java_lang_String (ref.func $$getString_|intersection...|_9__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return intersectiontype.IntersectionTypeTest.A.$class;
+  (return (global.get $f_$class__intersectiontype_IntersectionTypeTest_A))
+ )
+)
+
 ;;; Class<?> A.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@intersectiontype.IntersectionTypeTest.A
  (type $function.$getClassImpl__java_lang_Class)
@@ -1156,8 +1361,8 @@
  (local $this (ref null $intersectiontype.IntersectionTypeTest.A))
  (local.set $this (ref.cast_static $intersectiontype.IntersectionTypeTest.A (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getIntersectiontype.IntersectionTypeTest.A();
-  (return (call $function.no.side.effects.$getIntersectiontype.IntersectionTypeTest.A__java_lang_Class (ref.func $$getIntersectiontype.IntersectionTypeTest.A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return intersectiontype.IntersectionTypeTest.A.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest.A) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@intersectiontype.IntersectionTypeTest.A)
@@ -1215,6 +1420,22 @@
  )
 )
 
+;;; Class<T> SomeConcreteType.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest.SomeConcreteType
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((intersectiontype.IntersectionTypeTest.SomeConcreteType.$class == null)) (intersectiontype.IntersectionTypeTest.SomeConcreteType.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|intersection...|_12(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__intersectiontype_IntersectionTypeTest_SomeConcreteType) (ref.null $java.lang.Class))
+   (then
+    ;; (intersectiontype.IntersectionTypeTest.SomeConcreteType.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|intersection...|_12(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__intersectiontype_IntersectionTypeTest_SomeConcreteType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|intersection...|_12__java_lang_String (ref.func $$getString_|intersection...|_12__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return intersectiontype.IntersectionTypeTest.SomeConcreteType.$class;
+  (return (global.get $f_$class__intersectiontype_IntersectionTypeTest_SomeConcreteType))
+ )
+)
+
 ;;; Class<?> SomeConcreteType.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@intersectiontype.IntersectionTypeTest.SomeConcreteType
  (type $function.$getClassImpl__java_lang_Class)
@@ -1223,8 +1444,8 @@
  (local $this (ref null $intersectiontype.IntersectionTypeTest.SomeConcreteType))
  (local.set $this (ref.cast_static $intersectiontype.IntersectionTypeTest.SomeConcreteType (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getIntersectiontype.IntersectionTypeTest.SomeConcreteType();
-  (return (call $function.no.side.effects.$getIntersectiontype.IntersectionTypeTest.SomeConcreteType__java_lang_Class (ref.func $$getIntersectiontype.IntersectionTypeTest.SomeConcreteType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return intersectiontype.IntersectionTypeTest.SomeConcreteType.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest.SomeConcreteType) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@intersectiontype.IntersectionTypeTest.SomeConcreteType)

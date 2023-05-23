@@ -393,27 +393,35 @@
 
 ;;; Code for anonymousinnerclass.A [static fields]
 (global $f_$initialized__anonymousinnerclass_A (mut i32) (i32.const 0))
+(global $f_$class__anonymousinnerclass_A (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for anonymousinnerclass.AnonymousInnerClass [static fields]
 (global $f_$initialized__anonymousinnerclass_AnonymousInnerClass (mut i32) (i32.const 0))
+(global $f_$class__anonymousinnerclass_AnonymousInnerClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for anonymousinnerclass.A.B [static fields]
 (global $f_$initialized__anonymousinnerclass_A_B (mut i32) (i32.const 0))
+(global $f_$class__anonymousinnerclass_A_B (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for anonymousinnerclass.AnonymousInnerClass.1 [static fields]
 (global $f_$initialized__anonymousinnerclass_AnonymousInnerClass_1 (mut i32) (i32.const 0))
+(global $f_$class__anonymousinnerclass_AnonymousInnerClass_1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for anonymousinnerclass.AnonymousInnerClass.2 [static fields]
 (global $f_$initialized__anonymousinnerclass_AnonymousInnerClass_2 (mut i32) (i32.const 0))
+(global $f_$class__anonymousinnerclass_AnonymousInnerClass_2 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for anonymousinnerclass.AnonymousInnerClass.3 [static fields]
 (global $f_$initialized__anonymousinnerclass_AnonymousInnerClass_3 (mut i32) (i32.const 0))
+(global $f_$class__anonymousinnerclass_AnonymousInnerClass_3 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for anonymousinnerclass.AnonymousInnerClass.InnerClass [static fields]
 (global $f_$initialized__anonymousinnerclass_AnonymousInnerClass_InnerClass (mut i32) (i32.const 0))
+(global $f_$class__anonymousinnerclass_AnonymousInnerClass_InnerClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for anonymousinnerclass.AnonymousInnerClass.1C [static fields]
 (global $f_$initialized__anonymousinnerclass_AnonymousInnerClass_1C (mut i32) (i32.const 0))
+(global $f_$class__anonymousinnerclass_AnonymousInnerClass_1C (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for anonymousinnerclass.A [methods]
 
@@ -471,6 +479,22 @@
  )
 )
 
+;;; Class<T> A.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@anonymousinnerclass.A
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((anonymousinnerclass.A.$class == null)) (anonymousinnerclass.A.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|anonymousinn...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__anonymousinnerclass_A) (ref.null $java.lang.Class))
+   (then
+    ;; (anonymousinnerclass.A.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|anonymousinn...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__anonymousinnerclass_A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|anonymousinn...|__java_lang_String (ref.func $$getString_|anonymousinn...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return anonymousinnerclass.A.$class;
+  (return (global.get $f_$class__anonymousinnerclass_A))
+ )
+)
+
 ;;; Class<?> A.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@anonymousinnerclass.A
  (type $function.$getClassImpl__java_lang_Class)
@@ -479,8 +503,8 @@
  (local $this (ref null $anonymousinnerclass.A))
  (local.set $this (ref.cast_static $anonymousinnerclass.A (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getAnonymousinnerclass.A();
-  (return (call $function.no.side.effects.$getAnonymousinnerclass.A__java_lang_Class (ref.func $$getAnonymousinnerclass.A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return anonymousinnerclass.A.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@anonymousinnerclass.A) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@anonymousinnerclass.A)
@@ -570,6 +594,22 @@
  )
 )
 
+;;; Class<T> AnonymousInnerClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@anonymousinnerclass.AnonymousInnerClass
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((anonymousinnerclass.AnonymousInnerClass.$class == null)) (anonymousinnerclass.AnonymousInnerClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|anonymousinn...|_1(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__anonymousinnerclass_AnonymousInnerClass) (ref.null $java.lang.Class))
+   (then
+    ;; (anonymousinnerclass.AnonymousInnerClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|anonymousinn...|_1(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__anonymousinnerclass_AnonymousInnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|anonymousinn...|_1__java_lang_String (ref.func $$getString_|anonymousinn...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return anonymousinnerclass.AnonymousInnerClass.$class;
+  (return (global.get $f_$class__anonymousinnerclass_AnonymousInnerClass))
+ )
+)
+
 ;;; Class<?> AnonymousInnerClass.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@anonymousinnerclass.AnonymousInnerClass
  (type $function.$getClassImpl__java_lang_Class)
@@ -578,8 +618,8 @@
  (local $this (ref null $anonymousinnerclass.AnonymousInnerClass))
  (local.set $this (ref.cast_static $anonymousinnerclass.AnonymousInnerClass (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getAnonymousinnerclass.AnonymousInnerClass();
-  (return (call $function.no.side.effects.$getAnonymousinnerclass.AnonymousInnerClass__java_lang_Class (ref.func $$getAnonymousinnerclass.AnonymousInnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return anonymousinnerclass.AnonymousInnerClass.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@anonymousinnerclass.AnonymousInnerClass) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@anonymousinnerclass.AnonymousInnerClass)
@@ -642,6 +682,22 @@
  )
 )
 
+;;; Class<T> B.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@anonymousinnerclass.A.B
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((anonymousinnerclass.A.B.$class == null)) (anonymousinnerclass.A.B.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|anonymousinn...|_2(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__anonymousinnerclass_A_B) (ref.null $java.lang.Class))
+   (then
+    ;; (anonymousinnerclass.A.B.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|anonymousinn...|_2(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__anonymousinnerclass_A_B (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|anonymousinn...|_2__java_lang_String (ref.func $$getString_|anonymousinn...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return anonymousinnerclass.A.B.$class;
+  (return (global.get $f_$class__anonymousinnerclass_A_B))
+ )
+)
+
 ;;; Class<?> B.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@anonymousinnerclass.A.B
  (type $function.$getClassImpl__java_lang_Class)
@@ -650,8 +706,8 @@
  (local $this (ref null $anonymousinnerclass.A.B))
  (local.set $this (ref.cast_static $anonymousinnerclass.A.B (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getAnonymousinnerclass.A.B();
-  (return (call $function.no.side.effects.$getAnonymousinnerclass.A.B__java_lang_Class (ref.func $$getAnonymousinnerclass.A.B__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return anonymousinnerclass.A.B.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@anonymousinnerclass.A.B) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@anonymousinnerclass.A.B)
@@ -714,6 +770,22 @@
  )
 )
 
+;;; Class<T> InnerClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.InnerClass
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((anonymousinnerclass.AnonymousInnerClass.InnerClass.$class == null)) (anonymousinnerclass.AnonymousInnerClass.InnerClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|anonymousinn...|_6(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__anonymousinnerclass_AnonymousInnerClass_InnerClass) (ref.null $java.lang.Class))
+   (then
+    ;; (anonymousinnerclass.AnonymousInnerClass.InnerClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|anonymousinn...|_6(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__anonymousinnerclass_AnonymousInnerClass_InnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|anonymousinn...|_6__java_lang_String (ref.func $$getString_|anonymousinn...|_6__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return anonymousinnerclass.AnonymousInnerClass.InnerClass.$class;
+  (return (global.get $f_$class__anonymousinnerclass_AnonymousInnerClass_InnerClass))
+ )
+)
+
 ;;; Class<?> InnerClass.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.InnerClass
  (type $function.$getClassImpl__java_lang_Class)
@@ -722,8 +794,8 @@
  (local $this (ref null $anonymousinnerclass.AnonymousInnerClass.InnerClass))
  (local.set $this (ref.cast_static $anonymousinnerclass.AnonymousInnerClass.InnerClass (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getAnonymousinnerclass.AnonymousInnerClass.InnerClass();
-  (return (call $function.no.side.effects.$getAnonymousinnerclass.AnonymousInnerClass.InnerClass__java_lang_Class (ref.func $$getAnonymousinnerclass.AnonymousInnerClass.InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return anonymousinnerclass.AnonymousInnerClass.InnerClass.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.InnerClass) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.InnerClass)
@@ -802,6 +874,22 @@
  )
 )
 
+;;; Class<T> C.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.1C
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((anonymousinnerclass.AnonymousInnerClass.1C.$class == null)) (anonymousinnerclass.AnonymousInnerClass.1C.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|anonymousinn...|_7(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__anonymousinnerclass_AnonymousInnerClass_1C) (ref.null $java.lang.Class))
+   (then
+    ;; (anonymousinnerclass.AnonymousInnerClass.1C.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|anonymousinn...|_7(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__anonymousinnerclass_AnonymousInnerClass_1C (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|anonymousinn...|_7__java_lang_String (ref.func $$getString_|anonymousinn...|_7__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return anonymousinnerclass.AnonymousInnerClass.1C.$class;
+  (return (global.get $f_$class__anonymousinnerclass_AnonymousInnerClass_1C))
+ )
+)
+
 ;;; Class<?> C.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.1C
  (type $function.$getClassImpl__java_lang_Class)
@@ -810,8 +898,8 @@
  (local $this (ref null $anonymousinnerclass.AnonymousInnerClass.1C))
  (local.set $this (ref.cast_static $anonymousinnerclass.AnonymousInnerClass.1C (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getAnonymousinnerclass.AnonymousInnerClass.1C();
-  (return (call $function.no.side.effects.$getAnonymousinnerclass.AnonymousInnerClass.1C__java_lang_Class (ref.func $$getAnonymousinnerclass.AnonymousInnerClass.1C__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return anonymousinnerclass.AnonymousInnerClass.1C.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.1C) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.1C)
@@ -874,6 +962,22 @@
  )
 )
 
+;;; Class<T> <anonymous> extends InnerClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.1
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((anonymousinnerclass.AnonymousInnerClass.1.$class == null)) (anonymousinnerclass.AnonymousInnerClass.1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|anonymousinn...|_3(),anonymousinnerclass.AnonymousInnerClass.InnerClass.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__anonymousinnerclass_AnonymousInnerClass_1) (ref.null $java.lang.Class))
+   (then
+    ;; (anonymousinnerclass.AnonymousInnerClass.1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|anonymousinn...|_3(),anonymousinnerclass.AnonymousInnerClass.InnerClass.$getClassMetadata()));
+    (global.set $f_$class__anonymousinnerclass_AnonymousInnerClass_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|anonymousinn...|_3__java_lang_String (ref.func $$getString_|anonymousinn...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.InnerClass) )))
+   )
+  )
+  ;; return anonymousinnerclass.AnonymousInnerClass.1.$class;
+  (return (global.get $f_$class__anonymousinnerclass_AnonymousInnerClass_1))
+ )
+)
+
 ;;; Class<?> <anonymous> extends InnerClass.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.1
  (type $function.$getClassImpl__java_lang_Class)
@@ -882,8 +986,8 @@
  (local $this (ref null $anonymousinnerclass.AnonymousInnerClass.1))
  (local.set $this (ref.cast_static $anonymousinnerclass.AnonymousInnerClass.1 (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getAnonymousinnerclass.AnonymousInnerClass.1();
-  (return (call $function.no.side.effects.$getAnonymousinnerclass.AnonymousInnerClass.1__java_lang_Class (ref.func $$getAnonymousinnerclass.AnonymousInnerClass.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return anonymousinnerclass.AnonymousInnerClass.1.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.1) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.1)
@@ -948,6 +1052,22 @@
  )
 )
 
+;;; Class<T> <anonymous> extends B.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.2
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((anonymousinnerclass.AnonymousInnerClass.2.$class == null)) (anonymousinnerclass.AnonymousInnerClass.2.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|anonymousinn...|_4(),anonymousinnerclass.A.B.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__anonymousinnerclass_AnonymousInnerClass_2) (ref.null $java.lang.Class))
+   (then
+    ;; (anonymousinnerclass.AnonymousInnerClass.2.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|anonymousinn...|_4(),anonymousinnerclass.A.B.$getClassMetadata()));
+    (global.set $f_$class__anonymousinnerclass_AnonymousInnerClass_2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|anonymousinn...|_4__java_lang_String (ref.func $$getString_|anonymousinn...|_4__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@anonymousinnerclass.A.B) )))
+   )
+  )
+  ;; return anonymousinnerclass.AnonymousInnerClass.2.$class;
+  (return (global.get $f_$class__anonymousinnerclass_AnonymousInnerClass_2))
+ )
+)
+
 ;;; Class<?> <anonymous> extends B.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.2
  (type $function.$getClassImpl__java_lang_Class)
@@ -956,8 +1076,8 @@
  (local $this (ref null $anonymousinnerclass.AnonymousInnerClass.2))
  (local.set $this (ref.cast_static $anonymousinnerclass.AnonymousInnerClass.2 (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getAnonymousinnerclass.AnonymousInnerClass.2();
-  (return (call $function.no.side.effects.$getAnonymousinnerclass.AnonymousInnerClass.2__java_lang_Class (ref.func $$getAnonymousinnerclass.AnonymousInnerClass.2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return anonymousinnerclass.AnonymousInnerClass.2.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.2) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.2)
@@ -1022,6 +1142,22 @@
  )
 )
 
+;;; Class<T> <anonymous> extends C.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.3
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((anonymousinnerclass.AnonymousInnerClass.3.$class == null)) (anonymousinnerclass.AnonymousInnerClass.3.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|anonymousinn...|_5(),anonymousinnerclass.AnonymousInnerClass.1C.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__anonymousinnerclass_AnonymousInnerClass_3) (ref.null $java.lang.Class))
+   (then
+    ;; (anonymousinnerclass.AnonymousInnerClass.3.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|anonymousinn...|_5(),anonymousinnerclass.AnonymousInnerClass.1C.$getClassMetadata()));
+    (global.set $f_$class__anonymousinnerclass_AnonymousInnerClass_3 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|anonymousinn...|_5__java_lang_String (ref.func $$getString_|anonymousinn...|_5__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.1C) )))
+   )
+  )
+  ;; return anonymousinnerclass.AnonymousInnerClass.3.$class;
+  (return (global.get $f_$class__anonymousinnerclass_AnonymousInnerClass_3))
+ )
+)
+
 ;;; Class<?> <anonymous> extends C.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.3
  (type $function.$getClassImpl__java_lang_Class)
@@ -1030,8 +1166,8 @@
  (local $this (ref null $anonymousinnerclass.AnonymousInnerClass.3))
  (local.set $this (ref.cast_static $anonymousinnerclass.AnonymousInnerClass.3 (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getAnonymousinnerclass.AnonymousInnerClass.3();
-  (return (call $function.no.side.effects.$getAnonymousinnerclass.AnonymousInnerClass.3__java_lang_Class (ref.func $$getAnonymousinnerclass.AnonymousInnerClass.3__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return anonymousinnerclass.AnonymousInnerClass.3.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.3) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.3)

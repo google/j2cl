@@ -20,7 +20,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
-import com.google.common.base.CaseFormat;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.SourcePosition;
@@ -339,10 +338,9 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     return Visitor_Type.visit(processor, this);
   }
 
-  /** Synthesizes a getter and a holder for a lazily initialized field and returns the getter. */
-  // TODO(b/182568721): this pattern should be considered size-effect free when optimizing the code.
-  public MethodDescriptor synthesizeLazilyInitializedField(
-      String fieldName, Expression initializationExpression) {
+  /** Synthesizes a getter and a holder for a lazily initialized field. */
+  public void synthesizeLazilyInitializedField(
+      String fieldName, Expression initializationExpression, MethodDescriptor lazyFieldGetter) {
     TypeDescriptor expressionTypeDescriptor = initializationExpression.getTypeDescriptor();
 
     FieldDescriptor holderFieldDescriptor =
@@ -351,10 +349,6 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     // Creates the member that will hold the value.
     addMember(
         Field.Builder.from(holderFieldDescriptor).setSourcePosition(SourcePosition.NONE).build());
-
-    MethodDescriptor lazyFieldGetter =
-        getLazyFieldGetterMethodDescriptor(
-            getTypeDescriptor(), expressionTypeDescriptor, fieldName);
 
     // Synthesizes the getter:
     // $get<fieldName>() {
@@ -383,8 +377,6 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
                     .build())
             .setSourcePosition(SourcePosition.NONE)
             .build());
-
-    return lazyFieldGetter;
   }
 
   private static FieldDescriptor getLazyFieldHolderFieldDescriptor(
@@ -392,25 +384,11 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
       TypeDescriptor fieldTypeDescriptor,
       String name) {
     return FieldDescriptor.newBuilder()
-        .setName("$" + name)
+        .setName(name)
         .setTypeDescriptor(fieldTypeDescriptor)
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setStatic(true)
         .setSynthetic(true)
-        .build();
-  }
-
-  private static MethodDescriptor getLazyFieldGetterMethodDescriptor(
-      DeclaredTypeDescriptor enclosingTypeDescriptor,
-      TypeDescriptor returnTypeDescriptor,
-      String name) {
-    return MethodDescriptor.newBuilder()
-        .setName("$get" + CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, name))
-        .setReturnTypeDescriptor(returnTypeDescriptor)
-        .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
-        .setStatic(true)
-        .setSynthetic(true)
-        .setSideEffectFree(true)
         .build();
   }
 }

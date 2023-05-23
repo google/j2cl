@@ -15,86 +15,71 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import static com.google.common.base.Predicates.not;
+import static com.google.common.base.Preconditions.checkState;
 
-import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.Type;
-import com.google.j2cl.transpiler.ast.TypeDeclaration;
-import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.TypeLiteral;
-import com.google.j2cl.transpiler.ast.Visibility;
-import java.util.HashMap;
-import java.util.Map;
 
 /** Adds support for type literals and getClass(). */
-public class ImplementClassMetadataViaGetters extends LibraryNormalizationPass {
-
-  private final Type classLiteralPoolType =
-      new Type(
-          SourcePosition.NONE,
-          Visibility.PRIVATE,
-          TypeDeclaration.newBuilder()
-              .setClassComponents(ImmutableList.of("javaemul.internal.ClassLiteralPool"))
-              .setKind(Kind.INTERFACE)
-              .build());
+public class ImplementClassMetadataViaGetters extends NormalizationPass {
 
   @Override
-  public void applyTo(Library library) {
-    synthesizeGetClassImplememntationsMethods(library);
-    replaceTypeLiterals(library);
-    // Add the ClassLiteralPool type at the beginning of the library so that it does not
-    // accidentally inherit an unrelated source position.
-    // In the wasm output, code with no source position will inherit the last seen source position.
-    library.getCompilationUnits().get(0).addType(/* position= */ 0, classLiteralPoolType);
+  public void applyTo(Type type) {
+    synthesizeLazyGetClassGetter(type);
+    synthesizeGetClassImplememntationsMethods(type);
+    replaceTypeLiterals(type);
+  }
+
+  private void synthesizeLazyGetClassGetter(Type type) {
+    if (type.isNative()) {
+      return;
+    }
+    createClassLiteralMethod(type);
   }
 
   private static final String GET_CLASS_IMPL_METHOD_NAME = "$getClassImpl";
 
   /** Synthesizes the getClass() override for this class. */
-  private static void synthesizeGetClassImplememntationsMethods(Library library) {
-    library
-        .streamTypes()
-        .filter(not(Type::isInterface))
-        .filter(not(Type::isAbstract))
-        .filter(not(Type::isNative))
-        .forEach(
-            t -> {
-              if (TypeDescriptors.isJavaLangObject(t.getTypeDescriptor())) {
-                // Remove $getClassImpl from object since it will be synthesized to return
-                // Object.class.
-                t.getMembers()
-                    .removeIf(m -> m.getDescriptor().getName().equals(GET_CLASS_IMPL_METHOD_NAME));
+  private static void synthesizeGetClassImplememntationsMethods(Type type) {
+    if (type.isInterface() || type.isAbstract() || type.isNative()) {
+      return;
+    }
+
+    if (TypeDescriptors.isJavaLangObject(type.getTypeDescriptor())) {
+      // Remove $getClassImpl from object since it will be synthesized to return
+      // Object.class.
+      type.getMembers()
+          .removeIf(m -> m.getDescriptor().getName().equals(GET_CLASS_IMPL_METHOD_NAME));
               }
 
-              // return Type.class;
-              t.addMember(
-                  Method.newBuilder()
-                      .setMethodDescriptor(getGetClassImplMethodDescriptor(t.getTypeDescriptor()))
-                      .addStatements(
-                          ReturnStatement.newBuilder()
-                              .setExpression(
-                                  getTypeLiteral(t.getSourcePosition(), t.getTypeDescriptor()))
-                              .setSourcePosition(SourcePosition.NONE)
-                              .build())
-                      .setSourcePosition(SourcePosition.NONE)
-                      .build());
-            });
+    // return Type.class;
+    type.addMember(
+        Method.newBuilder()
+            .setMethodDescriptor(getGetClassImplMethodDescriptor(type.getTypeDescriptor()))
+            .addStatements(
+                ReturnStatement.newBuilder()
+                    .setExpression(
+                        getTypeLiteral(type.getSourcePosition(), type.getTypeDescriptor()))
+                    .setSourcePosition(SourcePosition.NONE)
+                    .build())
+            .setSourcePosition(SourcePosition.NONE)
+            .build());
   }
 
   private static MethodDescriptor getGetClassImplMethodDescriptor(
@@ -121,8 +106,8 @@ public class ImplementClassMetadataViaGetters extends LibraryNormalizationPass {
   }
 
   /** Replaces type literals in the AST for the corresponding call to the synthetic lazy getter. */
-  private void replaceTypeLiterals(Library library) {
-    library.accept(
+  private void replaceTypeLiterals(Type type) {
+    type.accept(
         new AbstractRewriter() {
           @Override
           public Expression rewriteTypeLiteral(TypeLiteral typeLiteral) {
@@ -133,13 +118,22 @@ public class ImplementClassMetadataViaGetters extends LibraryNormalizationPass {
 
   /** Returns a call to obtain the class literal using the corresponding lazy getter. */
   private Expression implementTypeLiteral(TypeDescriptor typeDescriptor) {
+    if (typeDescriptor.isNative()) {
+      // TODO(b/283369109): Decide the semantics of type literal for native types, for now
+      // return a null.
+      getProblems()
+          .warning(
+              "Native type '%s' class literals are not supported (b/283369109).",
+              typeDescriptor.getReadableDescription());
+      return TypeDescriptors.get().javaLangClass.getNullValue();
+    }
     if (typeDescriptor.isArray()) {
       ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
       return MethodCall.Builder.from(
               TypeDescriptors.get()
                   .javaLangClass
                   .getMethodDescriptor("getArrayType", PrimitiveTypes.INT))
-          .setQualifier(getClassLiteralMethodCall(arrayTypeDescriptor.getLeafTypeDescriptor()))
+          .setQualifier(implementTypeLiteral(arrayTypeDescriptor.getLeafTypeDescriptor()))
           .setArguments(NumberLiteral.fromInt(arrayTypeDescriptor.getDimensions()))
           .build();
     }
@@ -147,33 +141,28 @@ public class ImplementClassMetadataViaGetters extends LibraryNormalizationPass {
   }
 
   private Expression getClassLiteralMethodCall(TypeDescriptor typeDescriptor) {
-    return MethodCall.Builder.from(getOrCreateClassLiteralMethod(typeDescriptor))
+    return MethodCall.Builder.from(getLazyClassMetadataGetterMethodDescriptor(typeDescriptor))
         .build();
   }
 
-  private final Map<TypeDescriptor, MethodDescriptor> lazyGettersByType = new HashMap<>();
+  /** Creates the lazy getter for the class literal of {@code type}. */
+  private void createClassLiteralMethod(Type type) {
+    DeclaredTypeDescriptor typeDescriptor = type.getTypeDescriptor();
 
-  /**
-   * Returns the descriptor for the getter of {@code typeDescriptor}, creating it if it did not
-   * exist.
-   */
-  private MethodDescriptor getOrCreateClassLiteralMethod(TypeDescriptor typeDescriptor) {
-    typeDescriptor = typeDescriptor.toUnparameterizedTypeDescriptor();
-    MethodDescriptor getClassLiteralMethod = lazyGettersByType.get(typeDescriptor);
-    if (getClassLiteralMethod == null) {
-      String fieldName =
-          typeDescriptor.isPrimitive()
-              ? ((PrimitiveTypeDescriptor) typeDescriptor).getSimpleSourceName()
-              : ((DeclaredTypeDescriptor) typeDescriptor).getQualifiedSourceName();
+    type.synthesizeLazilyInitializedField(
+        "$class",
+        getClassObjectCreationExpression(typeDescriptor),
+        getLazyClassMetadataGetterMethodDescriptor(typeDescriptor));
 
-      getClassLiteralMethod =
-          classLiteralPoolType.synthesizeLazilyInitializedField(
-              fieldName, getClassObjectCreationExpression(typeDescriptor));
-
-      lazyGettersByType.put(typeDescriptor, getClassLiteralMethod);
+    // If it is a boxed type generate also the getter for the corresponding primitive type literal.
+    if (TypeDescriptors.isBoxedType(typeDescriptor)
+        || TypeDescriptors.isJavaLangVoid(typeDescriptor)) {
+      PrimitiveTypeDescriptor primitiveTypeDescriptor = typeDescriptor.toUnboxedType();
+      type.synthesizeLazilyInitializedField(
+          "$primitiveClass",
+          getClassObjectCreationExpression(primitiveTypeDescriptor),
+          getLazyClassMetadataGetterMethodDescriptor(primitiveTypeDescriptor));
     }
-
-    return getClassLiteralMethod;
   }
 
   /** Creates expression that instantiates the class object for {@code typeDescriptor}. */
@@ -214,6 +203,34 @@ public class ImplementClassMetadataViaGetters extends LibraryNormalizationPass {
     return MethodCall.Builder.from(
             TypeDescriptors.get().javaLangClass.getMethodDescriptorByName(creationMethodName))
         .setArguments(arguments)
+        .build();
+  }
+
+  /** Returns the descriptor for the getter of {@code typeDescriptor}. */
+  private static MethodDescriptor getLazyClassMetadataGetterMethodDescriptor(
+      TypeDescriptor typeDescriptor) {
+    if (typeDescriptor instanceof DeclaredTypeDescriptor) {
+      return getLazyClassMetadataGetterMethodDescriptor(
+          (DeclaredTypeDescriptor) typeDescriptor, "$getClassMetadata");
+    }
+    checkState(typeDescriptor instanceof PrimitiveTypeDescriptor);
+    return getLazyClassMetadataGetterMethodDescriptor(
+        typeDescriptor.toBoxedType(), "$getClassMetadataForPrimitive");
+  }
+  /**
+   * Returns the descriptor for the getter of the class metadata for {@code
+   * enclosingTypeDescriptor}.
+   */
+  private static MethodDescriptor getLazyClassMetadataGetterMethodDescriptor(
+      DeclaredTypeDescriptor enclosingTypeDescriptor, String name) {
+    return MethodDescriptor.newBuilder()
+        .setName(name)
+        .setReturnTypeDescriptor(TypeDescriptors.get().javaLangClass)
+        .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
+        .setOrigin(MethodOrigin.SYNTHETIC_CLASS_LITERAL_GETTER)
+        .setStatic(true)
+        .setSynthetic(true)
+        .setSideEffectFree(true)
         .build();
   }
 }

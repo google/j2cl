@@ -100,9 +100,11 @@
 
 ;;; Code for strings.Strings [static fields]
 (global $f_$initialized__strings_Strings (mut i32) (i32.const 0))
+(global $f_$class__strings_Strings (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for strings.Strings.StringHolder [static fields]
 (global $f_$initialized__strings_Strings_StringHolder (mut i32) (i32.const 0))
+(global $f_$class__strings_Strings_StringHolder (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for strings.Strings [methods]
 
@@ -384,6 +386,22 @@
  )
 )
 
+;;; Class<T> Strings.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@strings.Strings
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((strings.Strings.$class == null)) (strings.Strings.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|strings.Strings|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__strings_Strings) (ref.null $java.lang.Class))
+   (then
+    ;; (strings.Strings.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|strings.Strings|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__strings_Strings (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|strings.Strings|__java_lang_String (ref.func $$getString_|strings.Strings|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return strings.Strings.$class;
+  (return (global.get $f_$class__strings_Strings))
+ )
+)
+
 ;;; Class<?> Strings.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@strings.Strings
  (type $function.$getClassImpl__java_lang_Class)
@@ -392,8 +410,8 @@
  (local $this (ref null $strings.Strings))
  (local.set $this (ref.cast_static $strings.Strings (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getStrings.Strings();
-  (return (call $function.no.side.effects.$getStrings.Strings__java_lang_Class (ref.func $$getStrings.Strings__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return strings.Strings.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@strings.Strings) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@strings.Strings)
@@ -468,6 +486,22 @@
  )
 )
 
+;;; Class<T> StringHolder.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@strings.Strings.StringHolder
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((strings.Strings.StringHolder.$class == null)) (strings.Strings.StringHolder.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|strings.Stri...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__strings_Strings_StringHolder) (ref.null $java.lang.Class))
+   (then
+    ;; (strings.Strings.StringHolder.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|strings.Stri...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__strings_Strings_StringHolder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|strings.Stri...|__java_lang_String (ref.func $$getString_|strings.Stri...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return strings.Strings.StringHolder.$class;
+  (return (global.get $f_$class__strings_Strings_StringHolder))
+ )
+)
+
 ;;; Class<?> StringHolder.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@strings.Strings.StringHolder
  (type $function.$getClassImpl__java_lang_Class)
@@ -476,8 +510,8 @@
  (local $this (ref null $strings.Strings.StringHolder))
  (local.set $this (ref.cast_static $strings.Strings.StringHolder (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getStrings.Strings.StringHolder();
-  (return (call $function.no.side.effects.$getStrings.Strings.StringHolder__java_lang_Class (ref.func $$getStrings.Strings.StringHolder__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return strings.Strings.StringHolder.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@strings.Strings.StringHolder) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@strings.Strings.StringHolder)

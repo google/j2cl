@@ -94,9 +94,11 @@
 
 ;;; Code for aptgeneratorplugin.Dummy [static fields]
 (global $f_$initialized__aptgeneratorplugin_Dummy (mut i32) (i32.const 0))
+(global $f_$class__aptgeneratorplugin_Dummy (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for aptgeneratorplugin.Foo [static fields]
 (global $f_$initialized__aptgeneratorplugin_Foo (mut i32) (i32.const 0))
+(global $f_$class__aptgeneratorplugin_Foo (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for aptgeneratorplugin.Dummy [methods]
 
@@ -154,6 +156,22 @@
  )
 )
 
+;;; Class<T> Dummy.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@aptgeneratorplugin.Dummy
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((aptgeneratorplugin.Dummy.$class == null)) (aptgeneratorplugin.Dummy.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|aptgenerator...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__aptgeneratorplugin_Dummy) (ref.null $java.lang.Class))
+   (then
+    ;; (aptgeneratorplugin.Dummy.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|aptgenerator...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__aptgeneratorplugin_Dummy (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|aptgenerator...|__java_lang_String (ref.func $$getString_|aptgenerator...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return aptgeneratorplugin.Dummy.$class;
+  (return (global.get $f_$class__aptgeneratorplugin_Dummy))
+ )
+)
+
 ;;; Class<?> Dummy.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@aptgeneratorplugin.Dummy
  (type $function.$getClassImpl__java_lang_Class)
@@ -162,8 +180,8 @@
  (local $this (ref null $aptgeneratorplugin.Dummy))
  (local.set $this (ref.cast_static $aptgeneratorplugin.Dummy (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getAptgeneratorplugin.Dummy();
-  (return (call $function.no.side.effects.$getAptgeneratorplugin.Dummy__java_lang_Class (ref.func $$getAptgeneratorplugin.Dummy__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return aptgeneratorplugin.Dummy.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@aptgeneratorplugin.Dummy) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@aptgeneratorplugin.Dummy)
@@ -212,10 +230,10 @@
  (local $this (ref null $aptgeneratorplugin.Foo))
  (local.set $this (ref.cast_static $aptgeneratorplugin.Foo (local.get $this.untyped)))
  (block
-  ;; return (Class<?> $qualifier = javaemul.internal.ClassLiteralPool.$getAptgeneratorplugin.Dummy(),$qualifier.hashCode());
+  ;; return (Class<T> $qualifier = aptgeneratorplugin.Dummy.$getClassMetadata(),$qualifier.hashCode());
   ;;@ aptgeneratorplugin/Foo.java:23:4
   (return (block (result i32)
-   (local.set $$qualifier (call $function.no.side.effects.$getAptgeneratorplugin.Dummy__java_lang_Class (ref.func $$getAptgeneratorplugin.Dummy__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+   (local.set $$qualifier (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@aptgeneratorplugin.Dummy) ))
    (call_ref $function.m_hashCode__int (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Object.vtable $m_hashCode__int (struct.get $java.lang.Object $vtable(local.get $$qualifier))))
   ))
  )
@@ -244,6 +262,22 @@
  )
 )
 
+;;; Class<T> Foo.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@aptgeneratorplugin.Foo
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((aptgeneratorplugin.Foo.$class == null)) (aptgeneratorplugin.Foo.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|aptgenerator...|_1(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__aptgeneratorplugin_Foo) (ref.null $java.lang.Class))
+   (then
+    ;; (aptgeneratorplugin.Foo.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|aptgenerator...|_1(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__aptgeneratorplugin_Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|aptgenerator...|_1__java_lang_String (ref.func $$getString_|aptgenerator...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return aptgeneratorplugin.Foo.$class;
+  (return (global.get $f_$class__aptgeneratorplugin_Foo))
+ )
+)
+
 ;;; Class<?> Foo.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@aptgeneratorplugin.Foo
  (type $function.$getClassImpl__java_lang_Class)
@@ -252,8 +286,8 @@
  (local $this (ref null $aptgeneratorplugin.Foo))
  (local.set $this (ref.cast_static $aptgeneratorplugin.Foo (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getAptgeneratorplugin.Foo();
-  (return (call $function.no.side.effects.$getAptgeneratorplugin.Foo__java_lang_Class (ref.func $$getAptgeneratorplugin.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return aptgeneratorplugin.Foo.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@aptgeneratorplugin.Foo) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@aptgeneratorplugin.Foo)

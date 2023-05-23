@@ -6,6 +6,7 @@
 
 ;;; Code for simplegenericinterface.SimpleGenericInterface [static fields]
 (global $f_$initialized__simplegenericinterface_SimpleGenericInterface (mut i32) (i32.const 0))
+(global $f_$class__simplegenericinterface_SimpleGenericInterface (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for simplegenericinterface.SimpleGenericInterface [methods]
 
@@ -25,5 +26,21 @@
   ;; (simplegenericinterface.SimpleGenericInterface.$initialized = true);
   ;;@ simplegenericinterface/SimpleGenericInterface.java:18:17
   (global.set $f_$initialized__simplegenericinterface_SimpleGenericInterface (i32.const 1))
+ )
+)
+
+;;; Class<T> SimpleGenericInterface.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@simplegenericinterface.SimpleGenericInterface
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((simplegenericinterface.SimpleGenericInterface.$class == null)) (simplegenericinterface.SimpleGenericInterface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|simplegeneri...|()));
+  (if (ref.eq (global.get $f_$class__simplegenericinterface_SimpleGenericInterface) (ref.null $java.lang.Class))
+   (then
+    ;; (simplegenericinterface.SimpleGenericInterface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|simplegeneri...|()));
+    (global.set $f_$class__simplegenericinterface_SimpleGenericInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplegeneri...|__java_lang_String (ref.func $$getString_|simplegeneri...|__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return simplegenericinterface.SimpleGenericInterface.$class;
+  (return (global.get $f_$class__simplegenericinterface_SimpleGenericInterface))
  )
 )

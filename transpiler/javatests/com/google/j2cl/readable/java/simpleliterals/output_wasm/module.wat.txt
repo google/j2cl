@@ -49,6 +49,7 @@
 
 ;;; Code for simpleliterals.SimpleLiterals [static fields]
 (global $f_$initialized__simpleliterals_SimpleLiterals (mut i32) (i32.const 0))
+(global $f_$class__simpleliterals_SimpleLiterals (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for simpleliterals.SimpleLiterals [methods]
 
@@ -178,9 +179,9 @@
   ;; String str = javaemul.internal.StringPool.$getString_|foo|();
   ;;@ simpleliterals/SimpleLiterals.java:40:4
   (local.set $str (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) ))
-  ;; Class<?> c = javaemul.internal.ClassLiteralPool.$getSimpleliterals.SimpleLiterals();
+  ;; Class<?> c = simpleliterals.SimpleLiterals.$getClassMetadata();
   ;;@ simpleliterals/SimpleLiterals.java:41:4
-  (local.set $c (call $function.no.side.effects.$getSimpleliterals.SimpleLiterals__java_lang_Class (ref.func $$getSimpleliterals.SimpleLiterals__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (local.set $c (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simpleliterals.SimpleLiterals) ))
   ;; float zeroF = -0.0;
   ;;@ simpleliterals/SimpleLiterals.java:42:4
   (local.set $zeroF (f32.neg (f32.const 0.0)))
@@ -222,6 +223,22 @@
  )
 )
 
+;;; Class<T> SimpleLiterals.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@simpleliterals.SimpleLiterals
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((simpleliterals.SimpleLiterals.$class == null)) (simpleliterals.SimpleLiterals.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|simplelitera...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__simpleliterals_SimpleLiterals) (ref.null $java.lang.Class))
+   (then
+    ;; (simpleliterals.SimpleLiterals.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|simplelitera...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__simpleliterals_SimpleLiterals (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplelitera...|__java_lang_String (ref.func $$getString_|simplelitera...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return simpleliterals.SimpleLiterals.$class;
+  (return (global.get $f_$class__simpleliterals_SimpleLiterals))
+ )
+)
+
 ;;; Class<?> SimpleLiterals.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@simpleliterals.SimpleLiterals
  (type $function.$getClassImpl__java_lang_Class)
@@ -230,8 +247,8 @@
  (local $this (ref null $simpleliterals.SimpleLiterals))
  (local.set $this (ref.cast_static $simpleliterals.SimpleLiterals (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getSimpleliterals.SimpleLiterals();
-  (return (call $function.no.side.effects.$getSimpleliterals.SimpleLiterals__java_lang_Class (ref.func $$getSimpleliterals.SimpleLiterals__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return simpleliterals.SimpleLiterals.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simpleliterals.SimpleLiterals) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@simpleliterals.SimpleLiterals)

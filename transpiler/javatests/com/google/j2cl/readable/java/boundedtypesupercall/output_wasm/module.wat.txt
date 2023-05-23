@@ -174,15 +174,19 @@
 
 ;;; Code for boundedtypesupercall.Main [static fields]
 (global $f_$initialized__boundedtypesupercall_Main (mut i32) (i32.const 0))
+(global $f_$class__boundedtypesupercall_Main (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for boundedtypesupercall.Main.Foo [static fields]
 (global $f_$initialized__boundedtypesupercall_Main_Foo (mut i32) (i32.const 0))
+(global $f_$class__boundedtypesupercall_Main_Foo (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for boundedtypesupercall.Main.Bar.1 [static fields]
 (global $f_$initialized__boundedtypesupercall_Main_Bar_1 (mut i32) (i32.const 0))
+(global $f_$class__boundedtypesupercall_Main_Bar_1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for boundedtypesupercall.Main.Bar [static fields]
 (global $f_$initialized__boundedtypesupercall_Main_Bar (mut i32) (i32.const 0))
+(global $f_$class__boundedtypesupercall_Main_Bar (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for boundedtypesupercall.Main [methods]
 
@@ -240,6 +244,22 @@
  )
 )
 
+;;; Class<T> Main.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@boundedtypesupercall.Main
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((boundedtypesupercall.Main.$class == null)) (boundedtypesupercall.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|boundedtypes...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__boundedtypesupercall_Main) (ref.null $java.lang.Class))
+   (then
+    ;; (boundedtypesupercall.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|boundedtypes...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__boundedtypesupercall_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|boundedtypes...|__java_lang_String (ref.func $$getString_|boundedtypes...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return boundedtypesupercall.Main.$class;
+  (return (global.get $f_$class__boundedtypesupercall_Main))
+ )
+)
+
 ;;; Class<?> Main.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@boundedtypesupercall.Main
  (type $function.$getClassImpl__java_lang_Class)
@@ -248,8 +268,8 @@
  (local $this (ref null $boundedtypesupercall.Main))
  (local.set $this (ref.cast_static $boundedtypesupercall.Main (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getBoundedtypesupercall.Main();
-  (return (call $function.no.side.effects.$getBoundedtypesupercall.Main__java_lang_Class (ref.func $$getBoundedtypesupercall.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return boundedtypesupercall.Main.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@boundedtypesupercall.Main) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@boundedtypesupercall.Main)
@@ -290,6 +310,22 @@
   ;; java.lang.Object.$clinit();
   ;;@ boundedtypesupercall/Main.java:20:31
   (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<T> Foo.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@boundedtypesupercall.Main.Foo
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((boundedtypesupercall.Main.Foo.$class == null)) (boundedtypesupercall.Main.Foo.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|boundedtypes...|_1(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__boundedtypesupercall_Main_Foo) (ref.null $java.lang.Class))
+   (then
+    ;; (boundedtypesupercall.Main.Foo.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|boundedtypes...|_1(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__boundedtypesupercall_Main_Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|boundedtypes...|_1__java_lang_String (ref.func $$getString_|boundedtypes...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return boundedtypesupercall.Main.Foo.$class;
+  (return (global.get $f_$class__boundedtypesupercall_Main_Foo))
  )
 )
 
@@ -381,6 +417,22 @@
  )
 )
 
+;;; Class<T> Bar.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@boundedtypesupercall.Main.Bar
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((boundedtypesupercall.Main.Bar.$class == null)) (boundedtypesupercall.Main.Bar.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|boundedtypes...|_3(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__boundedtypesupercall_Main_Bar) (ref.null $java.lang.Class))
+   (then
+    ;; (boundedtypesupercall.Main.Bar.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|boundedtypes...|_3(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__boundedtypesupercall_Main_Bar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|boundedtypes...|_3__java_lang_String (ref.func $$getString_|boundedtypes...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return boundedtypesupercall.Main.Bar.$class;
+  (return (global.get $f_$class__boundedtypesupercall_Main_Bar))
+ )
+)
+
 ;;; Class<?> Bar.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@boundedtypesupercall.Main.Bar
  (type $function.$getClassImpl__java_lang_Class)
@@ -389,8 +441,8 @@
  (local $this (ref null $boundedtypesupercall.Main.Bar))
  (local.set $this (ref.cast_static $boundedtypesupercall.Main.Bar (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getBoundedtypesupercall.Main.Bar();
-  (return (call $function.no.side.effects.$getBoundedtypesupercall.Main.Bar__java_lang_Class (ref.func $$getBoundedtypesupercall.Main.Bar__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return boundedtypesupercall.Main.Bar.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@boundedtypesupercall.Main.Bar) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@boundedtypesupercall.Main.Bar)
@@ -467,6 +519,22 @@
  )
 )
 
+;;; Class<T> <anonymous> extends Foo<T>.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@boundedtypesupercall.Main.Bar.1
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((boundedtypesupercall.Main.Bar.1.$class == null)) (boundedtypesupercall.Main.Bar.1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|boundedtypes...|_2(),boundedtypesupercall.Main.Foo.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__boundedtypesupercall_Main_Bar_1) (ref.null $java.lang.Class))
+   (then
+    ;; (boundedtypesupercall.Main.Bar.1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|boundedtypes...|_2(),boundedtypesupercall.Main.Foo.$getClassMetadata()));
+    (global.set $f_$class__boundedtypesupercall_Main_Bar_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|boundedtypes...|_2__java_lang_String (ref.func $$getString_|boundedtypes...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@boundedtypesupercall.Main.Foo) )))
+   )
+  )
+  ;; return boundedtypesupercall.Main.Bar.1.$class;
+  (return (global.get $f_$class__boundedtypesupercall_Main_Bar_1))
+ )
+)
+
 ;;; Class<?> <anonymous> extends Foo<T>.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@boundedtypesupercall.Main.Bar.1
  (type $function.$getClassImpl__java_lang_Class)
@@ -475,8 +543,8 @@
  (local $this (ref null $boundedtypesupercall.Main.Bar.1))
  (local.set $this (ref.cast_static $boundedtypesupercall.Main.Bar.1 (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getBoundedtypesupercall.Main.Bar.1();
-  (return (call $function.no.side.effects.$getBoundedtypesupercall.Main.Bar.1__java_lang_Class (ref.func $$getBoundedtypesupercall.Main.Bar.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return boundedtypesupercall.Main.Bar.1.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@boundedtypesupercall.Main.Bar.1) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@boundedtypesupercall.Main.Bar.1)

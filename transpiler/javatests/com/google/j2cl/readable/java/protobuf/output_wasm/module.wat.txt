@@ -153,12 +153,15 @@
 
 ;;; Code for protobuf.MyMessage [static fields]
 (global $f_$initialized__protobuf_MyMessage (mut i32) (i32.const 0))
+(global $f_$class__protobuf_MyMessage (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for protobuf.MyMessage.Builder [static fields]
 (global $f_$initialized__protobuf_MyMessage_Builder (mut i32) (i32.const 0))
+(global $f_$class__protobuf_MyMessage_Builder (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for protobuf.Protobuf [static fields]
 (global $f_$initialized__protobuf_Protobuf (mut i32) (i32.const 0))
+(global $f_$class__protobuf_Protobuf (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for protobuf.Protobuf [methods]
 
@@ -252,6 +255,22 @@
  )
 )
 
+;;; Class<T> Protobuf.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@protobuf.Protobuf
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((protobuf.Protobuf.$class == null)) (protobuf.Protobuf.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|protobuf.Pro...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__protobuf_Protobuf) (ref.null $java.lang.Class))
+   (then
+    ;; (protobuf.Protobuf.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|protobuf.Pro...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__protobuf_Protobuf (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|protobuf.Pro...|__java_lang_String (ref.func $$getString_|protobuf.Pro...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return protobuf.Protobuf.$class;
+  (return (global.get $f_$class__protobuf_Protobuf))
+ )
+)
+
 ;;; Class<?> Protobuf.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@protobuf.Protobuf
  (type $function.$getClassImpl__java_lang_Class)
@@ -260,8 +279,8 @@
  (local $this (ref null $protobuf.Protobuf))
  (local.set $this (ref.cast_static $protobuf.Protobuf (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getProtobuf.Protobuf();
-  (return (call $function.no.side.effects.$getProtobuf.Protobuf__java_lang_Class (ref.func $$getProtobuf.Protobuf__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return protobuf.Protobuf.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@protobuf.Protobuf) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@protobuf.Protobuf)
@@ -368,6 +387,22 @@
  )
 )
 
+;;; Class<T> MyMessage.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@protobuf.MyMessage
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((protobuf.MyMessage.$class == null)) (protobuf.MyMessage.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|protobuf.MyM...|(),com.google.protobuf.GeneratedMessage.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__protobuf_MyMessage) (ref.null $java.lang.Class))
+   (then
+    ;; (protobuf.MyMessage.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|protobuf.MyM...|(),com.google.protobuf.GeneratedMessage.$getClassMetadata()));
+    (global.set $f_$class__protobuf_MyMessage (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|protobuf.MyM...|__java_lang_String (ref.func $$getString_|protobuf.MyM...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@com.google.protobuf.GeneratedMessage) )))
+   )
+  )
+  ;; return protobuf.MyMessage.$class;
+  (return (global.get $f_$class__protobuf_MyMessage))
+ )
+)
+
 ;;; Class<?> MyMessage.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@protobuf.MyMessage
  (type $function.$getClassImpl__java_lang_Class)
@@ -376,8 +411,8 @@
  (local $this (ref null $protobuf.MyMessage))
  (local.set $this (ref.cast_static $protobuf.MyMessage (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getProtobuf.MyMessage();
-  (return (call $function.no.side.effects.$getProtobuf.MyMessage__java_lang_Class (ref.func $$getProtobuf.MyMessage__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return protobuf.MyMessage.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@protobuf.MyMessage) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@protobuf.MyMessage)
@@ -490,6 +525,22 @@
  )
 )
 
+;;; Class<T> Builder.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@protobuf.MyMessage.Builder
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((protobuf.MyMessage.Builder.$class == null)) (protobuf.MyMessage.Builder.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|protobuf.MyM...|_1(),com.google.protobuf.GeneratedMessage.Builder.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__protobuf_MyMessage_Builder) (ref.null $java.lang.Class))
+   (then
+    ;; (protobuf.MyMessage.Builder.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|protobuf.MyM...|_1(),com.google.protobuf.GeneratedMessage.Builder.$getClassMetadata()));
+    (global.set $f_$class__protobuf_MyMessage_Builder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|protobuf.MyM...|_1__java_lang_String (ref.func $$getString_|protobuf.MyM...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@com.google.protobuf.GeneratedMessage.Builder) )))
+   )
+  )
+  ;; return protobuf.MyMessage.Builder.$class;
+  (return (global.get $f_$class__protobuf_MyMessage_Builder))
+ )
+)
+
 ;;; Class<?> Builder.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@protobuf.MyMessage.Builder
  (type $function.$getClassImpl__java_lang_Class)
@@ -498,8 +549,8 @@
  (local $this (ref null $protobuf.MyMessage.Builder))
  (local.set $this (ref.cast_static $protobuf.MyMessage.Builder (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getProtobuf.MyMessage.Builder();
-  (return (call $function.no.side.effects.$getProtobuf.MyMessage.Builder__java_lang_Class (ref.func $$getProtobuf.MyMessage.Builder__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return protobuf.MyMessage.Builder.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@protobuf.MyMessage.Builder) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@protobuf.MyMessage.Builder)

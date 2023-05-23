@@ -146,12 +146,15 @@
 
 ;;; Code for booleanoperations.BooleanOperations [static fields]
 (global $f_$initialized__booleanoperations_BooleanOperations (mut i32) (i32.const 0))
+(global $f_$class__booleanoperations_BooleanOperations (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for booleanoperations.BooleanOperations.1Outer.Inner [static fields]
 (global $f_$initialized__booleanoperations_BooleanOperations_1Outer_Inner (mut i32) (i32.const 0))
+(global $f_$class__booleanoperations_BooleanOperations_1Outer_Inner (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for booleanoperations.BooleanOperations.1Outer [static fields]
 (global $f_$initialized__booleanoperations_BooleanOperations_1Outer (mut i32) (i32.const 0))
+(global $f_$class__booleanoperations_BooleanOperations_1Outer (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for booleanoperations.BooleanOperations [methods]
 
@@ -433,6 +436,22 @@
  )
 )
 
+;;; Class<T> BooleanOperations.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@booleanoperations.BooleanOperations
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((booleanoperations.BooleanOperations.$class == null)) (booleanoperations.BooleanOperations.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|booleanopera...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__booleanoperations_BooleanOperations) (ref.null $java.lang.Class))
+   (then
+    ;; (booleanoperations.BooleanOperations.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|booleanopera...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__booleanoperations_BooleanOperations (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|booleanopera...|__java_lang_String (ref.func $$getString_|booleanopera...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return booleanoperations.BooleanOperations.$class;
+  (return (global.get $f_$class__booleanoperations_BooleanOperations))
+ )
+)
+
 ;;; Class<?> BooleanOperations.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@booleanoperations.BooleanOperations
  (type $function.$getClassImpl__java_lang_Class)
@@ -441,8 +460,8 @@
  (local $this (ref null $booleanoperations.BooleanOperations))
  (local.set $this (ref.cast_static $booleanoperations.BooleanOperations (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getBooleanoperations.BooleanOperations();
-  (return (call $function.no.side.effects.$getBooleanoperations.BooleanOperations__java_lang_Class (ref.func $$getBooleanoperations.BooleanOperations__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return booleanoperations.BooleanOperations.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@booleanoperations.BooleanOperations) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@booleanoperations.BooleanOperations)
@@ -519,6 +538,22 @@
  )
 )
 
+;;; Class<T> Inner.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@booleanoperations.BooleanOperations.1Outer.Inner
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((booleanoperations.BooleanOperations.1Outer.Inner.$class == null)) (booleanoperations.BooleanOperations.1Outer.Inner.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|booleanopera...|_1(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__booleanoperations_BooleanOperations_1Outer_Inner) (ref.null $java.lang.Class))
+   (then
+    ;; (booleanoperations.BooleanOperations.1Outer.Inner.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|booleanopera...|_1(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__booleanoperations_BooleanOperations_1Outer_Inner (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|booleanopera...|_1__java_lang_String (ref.func $$getString_|booleanopera...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return booleanoperations.BooleanOperations.1Outer.Inner.$class;
+  (return (global.get $f_$class__booleanoperations_BooleanOperations_1Outer_Inner))
+ )
+)
+
 ;;; Class<?> Inner.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@booleanoperations.BooleanOperations.1Outer.Inner
  (type $function.$getClassImpl__java_lang_Class)
@@ -527,8 +562,8 @@
  (local $this (ref null $booleanoperations.BooleanOperations.1Outer.Inner))
  (local.set $this (ref.cast_static $booleanoperations.BooleanOperations.1Outer.Inner (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getBooleanoperations.BooleanOperations.1Outer.Inner();
-  (return (call $function.no.side.effects.$getBooleanoperations.BooleanOperations.1Outer.Inner__java_lang_Class (ref.func $$getBooleanoperations.BooleanOperations.1Outer.Inner__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return booleanoperations.BooleanOperations.1Outer.Inner.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@booleanoperations.BooleanOperations.1Outer.Inner) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@booleanoperations.BooleanOperations.1Outer.Inner)
@@ -591,6 +626,22 @@
  )
 )
 
+;;; Class<T> Outer.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@booleanoperations.BooleanOperations.1Outer
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((booleanoperations.BooleanOperations.1Outer.$class == null)) (booleanoperations.BooleanOperations.1Outer.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|booleanopera...|_2(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__booleanoperations_BooleanOperations_1Outer) (ref.null $java.lang.Class))
+   (then
+    ;; (booleanoperations.BooleanOperations.1Outer.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|booleanopera...|_2(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__booleanoperations_BooleanOperations_1Outer (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|booleanopera...|_2__java_lang_String (ref.func $$getString_|booleanopera...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return booleanoperations.BooleanOperations.1Outer.$class;
+  (return (global.get $f_$class__booleanoperations_BooleanOperations_1Outer))
+ )
+)
+
 ;;; Class<?> Outer.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@booleanoperations.BooleanOperations.1Outer
  (type $function.$getClassImpl__java_lang_Class)
@@ -599,8 +650,8 @@
  (local $this (ref null $booleanoperations.BooleanOperations.1Outer))
  (local.set $this (ref.cast_static $booleanoperations.BooleanOperations.1Outer (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getBooleanoperations.BooleanOperations.1Outer();
-  (return (call $function.no.side.effects.$getBooleanoperations.BooleanOperations.1Outer__java_lang_Class (ref.func $$getBooleanoperations.BooleanOperations.1Outer__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return booleanoperations.BooleanOperations.1Outer.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@booleanoperations.BooleanOperations.1Outer) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@booleanoperations.BooleanOperations.1Outer)

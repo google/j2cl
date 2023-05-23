@@ -47,6 +47,7 @@
 
 ;;; Code for objcnametype.ObjCNameType [static fields]
 (global $f_$initialized__objcnametype_ObjCNameType (mut i32) (i32.const 0))
+(global $f_$class__objcnametype_ObjCNameType (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for objcnametype.ObjCNameType [methods]
 
@@ -104,6 +105,22 @@
  )
 )
 
+;;; Class<T> ObjCNameType.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@objcnametype.ObjCNameType
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((objcnametype.ObjCNameType.$class == null)) (objcnametype.ObjCNameType.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|objcnametype...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__objcnametype_ObjCNameType) (ref.null $java.lang.Class))
+   (then
+    ;; (objcnametype.ObjCNameType.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|objcnametype...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__objcnametype_ObjCNameType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|objcnametype...|__java_lang_String (ref.func $$getString_|objcnametype...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return objcnametype.ObjCNameType.$class;
+  (return (global.get $f_$class__objcnametype_ObjCNameType))
+ )
+)
+
 ;;; Class<?> ObjCNameType.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@objcnametype.ObjCNameType
  (type $function.$getClassImpl__java_lang_Class)
@@ -112,8 +129,8 @@
  (local $this (ref null $objcnametype.ObjCNameType))
  (local.set $this (ref.cast_static $objcnametype.ObjCNameType (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getObjcnametype.ObjCNameType();
-  (return (call $function.no.side.effects.$getObjcnametype.ObjCNameType__java_lang_Class (ref.func $$getObjcnametype.ObjCNameType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return objcnametype.ObjCNameType.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@objcnametype.ObjCNameType) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@objcnametype.ObjCNameType)

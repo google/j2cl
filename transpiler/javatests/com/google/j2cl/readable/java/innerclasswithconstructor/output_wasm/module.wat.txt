@@ -146,12 +146,15 @@
 
 ;;; Code for innerclasswithconstructor.InnerClassWithConstructor [static fields]
 (global $f_$initialized__innerclasswithconstructor_InnerClassWithConstructor (mut i32) (i32.const 0))
+(global $f_$class__innerclasswithconstructor_InnerClassWithConstructor (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClass [static fields]
 (global $f_$initialized__innerclasswithconstructor_InnerClassWithConstructor_InnerClass (mut i32) (i32.const 0))
+(global $f_$class__innerclasswithconstructor_InnerClassWithConstructor_InnerClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor [static fields]
 (global $f_$initialized__innerclasswithconstructor_InnerClassWithConstructor_InnerClassWithSingleConstructor (mut i32) (i32.const 0))
+(global $f_$class__innerclasswithconstructor_InnerClassWithConstructor_InnerClassWithSingleConstructor (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for innerclasswithconstructor.InnerClassWithConstructor [methods]
 
@@ -209,6 +212,22 @@
  )
 )
 
+;;; Class<T> InnerClassWithConstructor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((innerclasswithconstructor.InnerClassWithConstructor.$class == null)) (innerclasswithconstructor.InnerClassWithConstructor.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|innerclasswi...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__innerclasswithconstructor_InnerClassWithConstructor) (ref.null $java.lang.Class))
+   (then
+    ;; (innerclasswithconstructor.InnerClassWithConstructor.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|innerclasswi...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__innerclasswithconstructor_InnerClassWithConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclasswi...|__java_lang_String (ref.func $$getString_|innerclasswi...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return innerclasswithconstructor.InnerClassWithConstructor.$class;
+  (return (global.get $f_$class__innerclasswithconstructor_InnerClassWithConstructor))
+ )
+)
+
 ;;; Class<?> InnerClassWithConstructor.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor
  (type $function.$getClassImpl__java_lang_Class)
@@ -217,8 +236,8 @@
  (local $this (ref null $innerclasswithconstructor.InnerClassWithConstructor))
  (local.set $this (ref.cast_static $innerclasswithconstructor.InnerClassWithConstructor (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getInnerclasswithconstructor.InnerClassWithConstructor();
-  (return (call $function.no.side.effects.$getInnerclasswithconstructor.InnerClassWithConstructor__java_lang_Class (ref.func $$getInnerclasswithconstructor.InnerClassWithConstructor__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return innerclasswithconstructor.InnerClassWithConstructor.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor)
@@ -320,6 +339,22 @@
  )
 )
 
+;;; Class<T> InnerClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor.InnerClass
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((innerclasswithconstructor.InnerClassWithConstructor.InnerClass.$class == null)) (innerclasswithconstructor.InnerClassWithConstructor.InnerClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|innerclasswi...|_1(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__innerclasswithconstructor_InnerClassWithConstructor_InnerClass) (ref.null $java.lang.Class))
+   (then
+    ;; (innerclasswithconstructor.InnerClassWithConstructor.InnerClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|innerclasswi...|_1(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__innerclasswithconstructor_InnerClassWithConstructor_InnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclasswi...|_1__java_lang_String (ref.func $$getString_|innerclasswi...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return innerclasswithconstructor.InnerClassWithConstructor.InnerClass.$class;
+  (return (global.get $f_$class__innerclasswithconstructor_InnerClassWithConstructor_InnerClass))
+ )
+)
+
 ;;; Class<?> InnerClass.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor.InnerClass
  (type $function.$getClassImpl__java_lang_Class)
@@ -328,8 +363,8 @@
  (local $this (ref null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass))
  (local.set $this (ref.cast_static $innerclasswithconstructor.InnerClassWithConstructor.InnerClass (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getInnerclasswithconstructor.InnerClassWithConstructor.InnerClass();
-  (return (call $function.no.side.effects.$getInnerclasswithconstructor.InnerClassWithConstructor.InnerClass__java_lang_Class (ref.func $$getInnerclasswithconstructor.InnerClassWithConstructor.InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return innerclasswithconstructor.InnerClassWithConstructor.InnerClass.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor.InnerClass) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor.InnerClass)
@@ -397,6 +432,22 @@
  )
 )
 
+;;; Class<T> InnerClassWithSingleConstructor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor.$class == null)) (innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|innerclasswi...|_2(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__innerclasswithconstructor_InnerClassWithConstructor_InnerClassWithSingleConstructor) (ref.null $java.lang.Class))
+   (then
+    ;; (innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|innerclasswi...|_2(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__innerclasswithconstructor_InnerClassWithConstructor_InnerClassWithSingleConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclasswi...|_2__java_lang_String (ref.func $$getString_|innerclasswi...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor.$class;
+  (return (global.get $f_$class__innerclasswithconstructor_InnerClassWithConstructor_InnerClassWithSingleConstructor))
+ )
+)
+
 ;;; Class<?> InnerClassWithSingleConstructor.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor
  (type $function.$getClassImpl__java_lang_Class)
@@ -405,8 +456,8 @@
  (local $this (ref null $innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor))
  (local.set $this (ref.cast_static $innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getInnerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor();
-  (return (call $function.no.side.effects.$getInnerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor__java_lang_Class (ref.func $$getInnerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor)

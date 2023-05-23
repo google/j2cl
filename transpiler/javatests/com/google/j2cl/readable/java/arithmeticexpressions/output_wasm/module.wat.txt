@@ -113,9 +113,11 @@
 (global $f_foo__arithmeticexpressions_ArithmeticExpressions (mut i64) (i64.const 0))
 (global $f_counter__arithmeticexpressions_ArithmeticExpressions_ (mut i64) (i64.const 0))
 (global $f_$initialized__arithmeticexpressions_ArithmeticExpressions (mut i32) (i32.const 0))
+(global $f_$class__arithmeticexpressions_ArithmeticExpressions (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for arithmeticexpressions.ArithmeticExpressions.1Ref [static fields]
 (global $f_$initialized__arithmeticexpressions_ArithmeticExpressions_1Ref (mut i32) (i32.const 0))
+(global $f_$class__arithmeticexpressions_ArithmeticExpressions_1Ref (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for arithmeticexpressions.ArithmeticExpressions [methods]
 
@@ -858,6 +860,22 @@
  )
 )
 
+;;; Class<T> ArithmeticExpressions.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@arithmeticexpressions.ArithmeticExpressions
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((arithmeticexpressions.ArithmeticExpressions.$class == null)) (arithmeticexpressions.ArithmeticExpressions.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|arithmeticex...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__arithmeticexpressions_ArithmeticExpressions) (ref.null $java.lang.Class))
+   (then
+    ;; (arithmeticexpressions.ArithmeticExpressions.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|arithmeticex...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__arithmeticexpressions_ArithmeticExpressions (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|arithmeticex...|__java_lang_String (ref.func $$getString_|arithmeticex...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return arithmeticexpressions.ArithmeticExpressions.$class;
+  (return (global.get $f_$class__arithmeticexpressions_ArithmeticExpressions))
+ )
+)
+
 ;;; Class<?> ArithmeticExpressions.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@arithmeticexpressions.ArithmeticExpressions
  (type $function.$getClassImpl__java_lang_Class)
@@ -866,8 +884,8 @@
  (local $this (ref null $arithmeticexpressions.ArithmeticExpressions))
  (local.set $this (ref.cast_static $arithmeticexpressions.ArithmeticExpressions (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getArithmeticexpressions.ArithmeticExpressions();
-  (return (call $function.no.side.effects.$getArithmeticexpressions.ArithmeticExpressions__java_lang_Class (ref.func $$getArithmeticexpressions.ArithmeticExpressions__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return arithmeticexpressions.ArithmeticExpressions.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@arithmeticexpressions.ArithmeticExpressions) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@arithmeticexpressions.ArithmeticExpressions)
@@ -930,6 +948,22 @@
  )
 )
 
+;;; Class<T> Ref.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@arithmeticexpressions.ArithmeticExpressions.1Ref
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((arithmeticexpressions.ArithmeticExpressions.1Ref.$class == null)) (arithmeticexpressions.ArithmeticExpressions.1Ref.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|arithmeticex...|_1(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__arithmeticexpressions_ArithmeticExpressions_1Ref) (ref.null $java.lang.Class))
+   (then
+    ;; (arithmeticexpressions.ArithmeticExpressions.1Ref.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|arithmeticex...|_1(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__arithmeticexpressions_ArithmeticExpressions_1Ref (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|arithmeticex...|_1__java_lang_String (ref.func $$getString_|arithmeticex...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return arithmeticexpressions.ArithmeticExpressions.1Ref.$class;
+  (return (global.get $f_$class__arithmeticexpressions_ArithmeticExpressions_1Ref))
+ )
+)
+
 ;;; Class<?> Ref.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@arithmeticexpressions.ArithmeticExpressions.1Ref
  (type $function.$getClassImpl__java_lang_Class)
@@ -938,8 +972,8 @@
  (local $this (ref null $arithmeticexpressions.ArithmeticExpressions.1Ref))
  (local.set $this (ref.cast_static $arithmeticexpressions.ArithmeticExpressions.1Ref (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getArithmeticexpressions.ArithmeticExpressions.1Ref();
-  (return (call $function.no.side.effects.$getArithmeticexpressions.ArithmeticExpressions.1Ref__java_lang_Class (ref.func $$getArithmeticexpressions.ArithmeticExpressions.1Ref__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return arithmeticexpressions.ArithmeticExpressions.1Ref.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@arithmeticexpressions.ArithmeticExpressions.1Ref) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@arithmeticexpressions.ArithmeticExpressions.1Ref)

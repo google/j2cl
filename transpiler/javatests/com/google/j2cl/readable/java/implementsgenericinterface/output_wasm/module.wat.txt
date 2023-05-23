@@ -106,15 +106,19 @@
 
 ;;; Code for implementsgenericinterface.GenericInterface [static fields]
 (global $f_$initialized__implementsgenericinterface_GenericInterface (mut i32) (i32.const 0))
+(global $f_$class__implementsgenericinterface_GenericInterface (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for implementsgenericinterface.GenericSubInterface [static fields]
 (global $f_$initialized__implementsgenericinterface_GenericSubInterface (mut i32) (i32.const 0))
+(global $f_$class__implementsgenericinterface_GenericSubInterface (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for implementsgenericinterface.GenericInterfaceGenericImpl [static fields]
 (global $f_$initialized__implementsgenericinterface_GenericInterfaceGenericImpl (mut i32) (i32.const 0))
+(global $f_$class__implementsgenericinterface_GenericInterfaceGenericImpl (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for implementsgenericinterface.GenericInterfaceImpl [static fields]
 (global $f_$initialized__implementsgenericinterface_GenericInterfaceImpl (mut i32) (i32.const 0))
+(global $f_$class__implementsgenericinterface_GenericInterfaceImpl (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for implementsgenericinterface.GenericInterface [methods]
 
@@ -137,6 +141,22 @@
  )
 )
 
+;;; Class<T> GenericInterface.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@implementsgenericinterface.GenericInterface
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((implementsgenericinterface.GenericInterface.$class == null)) (implementsgenericinterface.GenericInterface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|implementsge...|()));
+  (if (ref.eq (global.get $f_$class__implementsgenericinterface_GenericInterface) (ref.null $java.lang.Class))
+   (then
+    ;; (implementsgenericinterface.GenericInterface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|implementsge...|()));
+    (global.set $f_$class__implementsgenericinterface_GenericInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|implementsge...|__java_lang_String (ref.func $$getString_|implementsge...|__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return implementsgenericinterface.GenericInterface.$class;
+  (return (global.get $f_$class__implementsgenericinterface_GenericInterface))
+ )
+)
+
 ;;; Code for implementsgenericinterface.GenericSubInterface [methods]
 
 ;;; void GenericSubInterface.$clinit()
@@ -155,6 +175,22 @@
   ;; (implementsgenericinterface.GenericSubInterface.$initialized = true);
   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:20:10
   (global.set $f_$initialized__implementsgenericinterface_GenericSubInterface (i32.const 1))
+ )
+)
+
+;;; Class<T> GenericSubInterface.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@implementsgenericinterface.GenericSubInterface
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((implementsgenericinterface.GenericSubInterface.$class == null)) (implementsgenericinterface.GenericSubInterface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|implementsge...|_1()));
+  (if (ref.eq (global.get $f_$class__implementsgenericinterface_GenericSubInterface) (ref.null $java.lang.Class))
+   (then
+    ;; (implementsgenericinterface.GenericSubInterface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|implementsge...|_1()));
+    (global.set $f_$class__implementsgenericinterface_GenericSubInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|implementsge...|_1__java_lang_String (ref.func $$getString_|implementsge...|_1__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return implementsgenericinterface.GenericSubInterface.$class;
+  (return (global.get $f_$class__implementsgenericinterface_GenericSubInterface))
  )
 )
 
@@ -214,6 +250,22 @@
  )
 )
 
+;;; Class<T> GenericInterfaceGenericImpl.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@implementsgenericinterface.GenericInterfaceGenericImpl
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((implementsgenericinterface.GenericInterfaceGenericImpl.$class == null)) (implementsgenericinterface.GenericInterfaceGenericImpl.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|implementsge...|_2(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__implementsgenericinterface_GenericInterfaceGenericImpl) (ref.null $java.lang.Class))
+   (then
+    ;; (implementsgenericinterface.GenericInterfaceGenericImpl.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|implementsge...|_2(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__implementsgenericinterface_GenericInterfaceGenericImpl (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|implementsge...|_2__java_lang_String (ref.func $$getString_|implementsge...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return implementsgenericinterface.GenericInterfaceGenericImpl.$class;
+  (return (global.get $f_$class__implementsgenericinterface_GenericInterfaceGenericImpl))
+ )
+)
+
 ;;; Class<?> GenericInterfaceGenericImpl.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@implementsgenericinterface.GenericInterfaceGenericImpl
  (type $function.$getClassImpl__java_lang_Class)
@@ -222,8 +274,8 @@
  (local $this (ref null $implementsgenericinterface.GenericInterfaceGenericImpl))
  (local.set $this (ref.cast_static $implementsgenericinterface.GenericInterfaceGenericImpl (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getImplementsgenericinterface.GenericInterfaceGenericImpl();
-  (return (call $function.no.side.effects.$getImplementsgenericinterface.GenericInterfaceGenericImpl__java_lang_Class (ref.func $$getImplementsgenericinterface.GenericInterfaceGenericImpl__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return implementsgenericinterface.GenericInterfaceGenericImpl.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@implementsgenericinterface.GenericInterfaceGenericImpl) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@implementsgenericinterface.GenericInterfaceGenericImpl)
@@ -284,6 +336,22 @@
  )
 )
 
+;;; Class<T> GenericInterfaceImpl.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@implementsgenericinterface.GenericInterfaceImpl
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((implementsgenericinterface.GenericInterfaceImpl.$class == null)) (implementsgenericinterface.GenericInterfaceImpl.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|implementsge...|_3(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__implementsgenericinterface_GenericInterfaceImpl) (ref.null $java.lang.Class))
+   (then
+    ;; (implementsgenericinterface.GenericInterfaceImpl.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|implementsge...|_3(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__implementsgenericinterface_GenericInterfaceImpl (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|implementsge...|_3__java_lang_String (ref.func $$getString_|implementsge...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return implementsgenericinterface.GenericInterfaceImpl.$class;
+  (return (global.get $f_$class__implementsgenericinterface_GenericInterfaceImpl))
+ )
+)
+
 ;;; Class<?> GenericInterfaceImpl.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@implementsgenericinterface.GenericInterfaceImpl
  (type $function.$getClassImpl__java_lang_Class)
@@ -292,8 +360,8 @@
  (local $this (ref null $implementsgenericinterface.GenericInterfaceImpl))
  (local.set $this (ref.cast_static $implementsgenericinterface.GenericInterfaceImpl (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getImplementsgenericinterface.GenericInterfaceImpl();
-  (return (call $function.no.side.effects.$getImplementsgenericinterface.GenericInterfaceImpl__java_lang_Class (ref.func $$getImplementsgenericinterface.GenericInterfaceImpl__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return implementsgenericinterface.GenericInterfaceImpl.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@implementsgenericinterface.GenericInterfaceImpl) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@implementsgenericinterface.GenericInterfaceImpl)

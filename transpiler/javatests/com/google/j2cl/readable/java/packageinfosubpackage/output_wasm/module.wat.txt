@@ -135,14 +135,17 @@
 
 ;;; Code for packageinfosubpackage.Foo [static fields]
 (global $f_$initialized__packageinfosubpackage_Foo (mut i32) (i32.const 0))
+(global $f_$class__packageinfosubpackage_Foo (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for packageinfosubpackage.Foo.NativeBar [static fields]
 
 ;;; Code for packageinfosubpackage.Foo.NativeBar.$Overlay [static fields]
 (global $f_$initialized__packageinfosubpackage_Foo_NativeBar_$Overlay (mut i32) (i32.const 0))
+(global $f_$class__packageinfosubpackage_Foo_NativeBar_$Overlay (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for packageinfosubpackage.subpackage.Bar [static fields]
 (global $f_$initialized__packageinfosubpackage_subpackage_Bar (mut i32) (i32.const 0))
+(global $f_$class__packageinfosubpackage_subpackage_Bar (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for packageinfosubpackage.Foo.NativeBar.$Overlay [methods]
 
@@ -165,6 +168,22 @@
  )
 )
 
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@packageinfosubpackage.Foo.NativeBar.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((packageinfosubpackage.Foo.NativeBar.$Overlay.$class == null)) (packageinfosubpackage.Foo.NativeBar.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|packageinfos...|_1(),null));
+  (if (ref.eq (global.get $f_$class__packageinfosubpackage_Foo_NativeBar_$Overlay) (ref.null $java.lang.Class))
+   (then
+    ;; (packageinfosubpackage.Foo.NativeBar.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|packageinfos...|_1(),null));
+    (global.set $f_$class__packageinfosubpackage_Foo_NativeBar_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|packageinfos...|_1__java_lang_String (ref.func $$getString_|packageinfos...|_1__java_lang_String@javaemul.internal.StringPool) )(ref.null $java.lang.Class)))
+   )
+  )
+  ;; return packageinfosubpackage.Foo.NativeBar.$Overlay.$class;
+  (return (global.get $f_$class__packageinfosubpackage_Foo_NativeBar_$Overlay))
+ )
+)
+
 ;;; Class<?> $Overlay.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@packageinfosubpackage.Foo.NativeBar.$Overlay
  (type $function.$getClassImpl__java_lang_Class)
@@ -173,8 +192,8 @@
  (local $this (ref null $packageinfosubpackage.Foo.NativeBar.$Overlay))
  (local.set $this (ref.cast_static $packageinfosubpackage.Foo.NativeBar.$Overlay (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getPackageinfosubpackage.Foo.NativeBar.$Overlay();
-  (return (call $function.no.side.effects.$getPackageinfosubpackage.Foo.NativeBar.$Overlay__java_lang_Class (ref.func $$getPackageinfosubpackage.Foo.NativeBar.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return packageinfosubpackage.Foo.NativeBar.$Overlay.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@packageinfosubpackage.Foo.NativeBar.$Overlay) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@packageinfosubpackage.Foo.NativeBar.$Overlay)
@@ -249,6 +268,22 @@
  )
 )
 
+;;; Class<T> Foo.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@packageinfosubpackage.Foo
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((packageinfosubpackage.Foo.$class == null)) (packageinfosubpackage.Foo.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|packageinfos...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__packageinfosubpackage_Foo) (ref.null $java.lang.Class))
+   (then
+    ;; (packageinfosubpackage.Foo.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|packageinfos...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__packageinfosubpackage_Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|packageinfos...|__java_lang_String (ref.func $$getString_|packageinfos...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return packageinfosubpackage.Foo.$class;
+  (return (global.get $f_$class__packageinfosubpackage_Foo))
+ )
+)
+
 ;;; Class<?> Foo.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@packageinfosubpackage.Foo
  (type $function.$getClassImpl__java_lang_Class)
@@ -257,8 +292,8 @@
  (local $this (ref null $packageinfosubpackage.Foo))
  (local.set $this (ref.cast_static $packageinfosubpackage.Foo (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getPackageinfosubpackage.Foo();
-  (return (call $function.no.side.effects.$getPackageinfosubpackage.Foo__java_lang_Class (ref.func $$getPackageinfosubpackage.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return packageinfosubpackage.Foo.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@packageinfosubpackage.Foo) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@packageinfosubpackage.Foo)
@@ -326,6 +361,22 @@
  )
 )
 
+;;; Class<T> Bar.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@packageinfosubpackage.subpackage.Bar
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((packageinfosubpackage.subpackage.Bar.$class == null)) (packageinfosubpackage.subpackage.Bar.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|packageinfos...|_2(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__packageinfosubpackage_subpackage_Bar) (ref.null $java.lang.Class))
+   (then
+    ;; (packageinfosubpackage.subpackage.Bar.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|packageinfos...|_2(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__packageinfosubpackage_subpackage_Bar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|packageinfos...|_2__java_lang_String (ref.func $$getString_|packageinfos...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return packageinfosubpackage.subpackage.Bar.$class;
+  (return (global.get $f_$class__packageinfosubpackage_subpackage_Bar))
+ )
+)
+
 ;;; Class<?> Bar.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@packageinfosubpackage.subpackage.Bar
  (type $function.$getClassImpl__java_lang_Class)
@@ -334,8 +385,8 @@
  (local $this (ref null $packageinfosubpackage.subpackage.Bar))
  (local.set $this (ref.cast_static $packageinfosubpackage.subpackage.Bar (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getPackageinfosubpackage.subpackage.Bar();
-  (return (call $function.no.side.effects.$getPackageinfosubpackage.subpackage.Bar__java_lang_Class (ref.func $$getPackageinfosubpackage.subpackage.Bar__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return packageinfosubpackage.subpackage.Bar.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@packageinfosubpackage.subpackage.Bar) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@packageinfosubpackage.subpackage.Bar)

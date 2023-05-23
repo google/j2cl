@@ -946,7 +946,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   @Memoized
   @Override
   public PrimitiveTypeDescriptor toUnboxedType() {
-    checkState(TypeDescriptors.isBoxedType(this));
     return checkNotNull(TypeDescriptors.getPrimitiveTypeFromBoxType(this));
   }
 

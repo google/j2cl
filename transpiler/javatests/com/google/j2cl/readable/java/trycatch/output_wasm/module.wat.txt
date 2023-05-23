@@ -119,9 +119,11 @@
 ;;; Code for trycatch.TryCatch [static fields]
 (global $f_closableThing__trycatch_TryCatch_ (mut (ref null $trycatch.TryCatch.ClosableThing)) (ref.null $trycatch.TryCatch.ClosableThing))
 (global $f_$initialized__trycatch_TryCatch (mut i32) (i32.const 0))
+(global $f_$class__trycatch_TryCatch (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for trycatch.TryCatch.ClosableThing [static fields]
 (global $f_$initialized__trycatch_TryCatch_ClosableThing (mut i32) (i32.const 0))
+(global $f_$class__trycatch_TryCatch_ClosableThing (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for trycatch.TryCatch [methods]
 
@@ -980,6 +982,22 @@
  )
 )
 
+;;; Class<T> TryCatch.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@trycatch.TryCatch
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((trycatch.TryCatch.$class == null)) (trycatch.TryCatch.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|trycatch.Try...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__trycatch_TryCatch) (ref.null $java.lang.Class))
+   (then
+    ;; (trycatch.TryCatch.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|trycatch.Try...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__trycatch_TryCatch (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|trycatch.Try...|__java_lang_String (ref.func $$getString_|trycatch.Try...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return trycatch.TryCatch.$class;
+  (return (global.get $f_$class__trycatch_TryCatch))
+ )
+)
+
 ;;; Class<?> TryCatch.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@trycatch.TryCatch
  (type $function.$getClassImpl__java_lang_Class)
@@ -988,8 +1006,8 @@
  (local $this (ref null $trycatch.TryCatch))
  (local.set $this (ref.cast_static $trycatch.TryCatch (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getTrycatch.TryCatch();
-  (return (call $function.no.side.effects.$getTrycatch.TryCatch__java_lang_Class (ref.func $$getTrycatch.TryCatch__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return trycatch.TryCatch.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@trycatch.TryCatch) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@trycatch.TryCatch)
@@ -1062,6 +1080,22 @@
  )
 )
 
+;;; Class<T> ClosableThing.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@trycatch.TryCatch.ClosableThing
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((trycatch.TryCatch.ClosableThing.$class == null)) (trycatch.TryCatch.ClosableThing.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|trycatch.Try...|_1(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__trycatch_TryCatch_ClosableThing) (ref.null $java.lang.Class))
+   (then
+    ;; (trycatch.TryCatch.ClosableThing.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|trycatch.Try...|_1(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__trycatch_TryCatch_ClosableThing (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|trycatch.Try...|_1__java_lang_String (ref.func $$getString_|trycatch.Try...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return trycatch.TryCatch.ClosableThing.$class;
+  (return (global.get $f_$class__trycatch_TryCatch_ClosableThing))
+ )
+)
+
 ;;; Class<?> ClosableThing.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@trycatch.TryCatch.ClosableThing
  (type $function.$getClassImpl__java_lang_Class)
@@ -1070,8 +1104,8 @@
  (local $this (ref null $trycatch.TryCatch.ClosableThing))
  (local.set $this (ref.cast_static $trycatch.TryCatch.ClosableThing (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getTrycatch.TryCatch.ClosableThing();
-  (return (call $function.no.side.effects.$getTrycatch.TryCatch.ClosableThing__java_lang_Class (ref.func $$getTrycatch.TryCatch.ClosableThing__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return trycatch.TryCatch.ClosableThing.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@trycatch.TryCatch.ClosableThing) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@trycatch.TryCatch.ClosableThing)

@@ -51,6 +51,7 @@
 
 ;;; Code for simplegenerictype.SimpleGenericType [static fields]
 (global $f_$initialized__simplegenerictype_SimpleGenericType (mut i32) (i32.const 0))
+(global $f_$class__simplegenerictype_SimpleGenericType (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for simplegenerictype.SimpleGenericType [methods]
 
@@ -128,6 +129,22 @@
  )
 )
 
+;;; Class<T> SimpleGenericType.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@simplegenerictype.SimpleGenericType
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((simplegenerictype.SimpleGenericType.$class == null)) (simplegenerictype.SimpleGenericType.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|simplegeneri...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__simplegenerictype_SimpleGenericType) (ref.null $java.lang.Class))
+   (then
+    ;; (simplegenerictype.SimpleGenericType.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|simplegeneri...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__simplegenerictype_SimpleGenericType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplegeneri...|__java_lang_String (ref.func $$getString_|simplegeneri...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return simplegenerictype.SimpleGenericType.$class;
+  (return (global.get $f_$class__simplegenerictype_SimpleGenericType))
+ )
+)
+
 ;;; Class<?> SimpleGenericType.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@simplegenerictype.SimpleGenericType
  (type $function.$getClassImpl__java_lang_Class)
@@ -136,8 +153,8 @@
  (local $this (ref null $simplegenerictype.SimpleGenericType))
  (local.set $this (ref.cast_static $simplegenerictype.SimpleGenericType (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getSimplegenerictype.SimpleGenericType();
-  (return (call $function.no.side.effects.$getSimplegenerictype.SimpleGenericType__java_lang_Class (ref.func $$getSimplegenerictype.SimpleGenericType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return simplegenerictype.SimpleGenericType.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simplegenerictype.SimpleGenericType) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@simplegenerictype.SimpleGenericType)

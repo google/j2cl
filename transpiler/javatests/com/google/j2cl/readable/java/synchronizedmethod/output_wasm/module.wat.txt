@@ -53,6 +53,7 @@
 (global $f_sa__synchronizedmethod_SynchronizedMethod_ (mut i32) (i32.const 0))
 (global $f_sb__synchronizedmethod_SynchronizedMethod_ (mut i32) (i32.const 0))
 (global $f_$initialized__synchronizedmethod_SynchronizedMethod (mut i32) (i32.const 0))
+(global $f_$class__synchronizedmethod_SynchronizedMethod (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for synchronizedmethod.SynchronizedMethod [methods]
 
@@ -144,6 +145,22 @@
  )
 )
 
+;;; Class<T> SynchronizedMethod.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@synchronizedmethod.SynchronizedMethod
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((synchronizedmethod.SynchronizedMethod.$class == null)) (synchronizedmethod.SynchronizedMethod.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|synchronized...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__synchronizedmethod_SynchronizedMethod) (ref.null $java.lang.Class))
+   (then
+    ;; (synchronizedmethod.SynchronizedMethod.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|synchronized...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__synchronizedmethod_SynchronizedMethod (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|synchronized...|__java_lang_String (ref.func $$getString_|synchronized...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return synchronizedmethod.SynchronizedMethod.$class;
+  (return (global.get $f_$class__synchronizedmethod_SynchronizedMethod))
+ )
+)
+
 ;;; Class<?> SynchronizedMethod.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@synchronizedmethod.SynchronizedMethod
  (type $function.$getClassImpl__java_lang_Class)
@@ -152,8 +169,8 @@
  (local $this (ref null $synchronizedmethod.SynchronizedMethod))
  (local.set $this (ref.cast_static $synchronizedmethod.SynchronizedMethod (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getSynchronizedmethod.SynchronizedMethod();
-  (return (call $function.no.side.effects.$getSynchronizedmethod.SynchronizedMethod__java_lang_Class (ref.func $$getSynchronizedmethod.SynchronizedMethod__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return synchronizedmethod.SynchronizedMethod.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@synchronizedmethod.SynchronizedMethod) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@synchronizedmethod.SynchronizedMethod)

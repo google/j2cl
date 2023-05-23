@@ -55,6 +55,7 @@
 
 ;;; Code for forstatement.ForStatement [static fields]
 (global $f_$initialized__forstatement_ForStatement (mut i32) (i32.const 0))
+(global $f_$class__forstatement_ForStatement (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for forstatement.ForStatement [methods]
 
@@ -379,6 +380,22 @@
  )
 )
 
+;;; Class<T> ForStatement.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@forstatement.ForStatement
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((forstatement.ForStatement.$class == null)) (forstatement.ForStatement.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|forstatement...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__forstatement_ForStatement) (ref.null $java.lang.Class))
+   (then
+    ;; (forstatement.ForStatement.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|forstatement...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__forstatement_ForStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|forstatement...|__java_lang_String (ref.func $$getString_|forstatement...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return forstatement.ForStatement.$class;
+  (return (global.get $f_$class__forstatement_ForStatement))
+ )
+)
+
 ;;; Class<?> ForStatement.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@forstatement.ForStatement
  (type $function.$getClassImpl__java_lang_Class)
@@ -387,8 +404,8 @@
  (local $this (ref null $forstatement.ForStatement))
  (local.set $this (ref.cast_static $forstatement.ForStatement (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getForstatement.ForStatement();
-  (return (call $function.no.side.effects.$getForstatement.ForStatement__java_lang_Class (ref.func $$getForstatement.ForStatement__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return forstatement.ForStatement.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@forstatement.ForStatement) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@forstatement.ForStatement)

@@ -141,12 +141,15 @@
 
 ;;; Code for subclassgenericclass.GenericClass [static fields]
 (global $f_$initialized__subclassgenericclass_GenericClass (mut i32) (i32.const 0))
+(global $f_$class__subclassgenericclass_GenericClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for subclassgenericclass.GenericSubclassGenericClass [static fields]
 (global $f_$initialized__subclassgenericclass_GenericSubclassGenericClass (mut i32) (i32.const 0))
+(global $f_$class__subclassgenericclass_GenericSubclassGenericClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for subclassgenericclass.SubclassGenericClass [static fields]
 (global $f_$initialized__subclassgenericclass_SubclassGenericClass (mut i32) (i32.const 0))
+(global $f_$class__subclassgenericclass_SubclassGenericClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for subclassgenericclass.GenericClass [methods]
 
@@ -204,6 +207,22 @@
  )
 )
 
+;;; Class<T> GenericClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@subclassgenericclass.GenericClass
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((subclassgenericclass.GenericClass.$class == null)) (subclassgenericclass.GenericClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|subclassgene...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__subclassgenericclass_GenericClass) (ref.null $java.lang.Class))
+   (then
+    ;; (subclassgenericclass.GenericClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|subclassgene...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__subclassgenericclass_GenericClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|subclassgene...|__java_lang_String (ref.func $$getString_|subclassgene...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return subclassgenericclass.GenericClass.$class;
+  (return (global.get $f_$class__subclassgenericclass_GenericClass))
+ )
+)
+
 ;;; Class<?> GenericClass.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@subclassgenericclass.GenericClass
  (type $function.$getClassImpl__java_lang_Class)
@@ -212,8 +231,8 @@
  (local $this (ref null $subclassgenericclass.GenericClass))
  (local.set $this (ref.cast_static $subclassgenericclass.GenericClass (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getSubclassgenericclass.GenericClass();
-  (return (call $function.no.side.effects.$getSubclassgenericclass.GenericClass__java_lang_Class (ref.func $$getSubclassgenericclass.GenericClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return subclassgenericclass.GenericClass.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@subclassgenericclass.GenericClass) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@subclassgenericclass.GenericClass)
@@ -274,6 +293,22 @@
  )
 )
 
+;;; Class<T> GenericSubclassGenericClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@subclassgenericclass.GenericSubclassGenericClass
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((subclassgenericclass.GenericSubclassGenericClass.$class == null)) (subclassgenericclass.GenericSubclassGenericClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|subclassgene...|_1(),subclassgenericclass.GenericClass.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__subclassgenericclass_GenericSubclassGenericClass) (ref.null $java.lang.Class))
+   (then
+    ;; (subclassgenericclass.GenericSubclassGenericClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|subclassgene...|_1(),subclassgenericclass.GenericClass.$getClassMetadata()));
+    (global.set $f_$class__subclassgenericclass_GenericSubclassGenericClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|subclassgene...|_1__java_lang_String (ref.func $$getString_|subclassgene...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@subclassgenericclass.GenericClass) )))
+   )
+  )
+  ;; return subclassgenericclass.GenericSubclassGenericClass.$class;
+  (return (global.get $f_$class__subclassgenericclass_GenericSubclassGenericClass))
+ )
+)
+
 ;;; Class<?> GenericSubclassGenericClass.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@subclassgenericclass.GenericSubclassGenericClass
  (type $function.$getClassImpl__java_lang_Class)
@@ -282,8 +317,8 @@
  (local $this (ref null $subclassgenericclass.GenericSubclassGenericClass))
  (local.set $this (ref.cast_static $subclassgenericclass.GenericSubclassGenericClass (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getSubclassgenericclass.GenericSubclassGenericClass();
-  (return (call $function.no.side.effects.$getSubclassgenericclass.GenericSubclassGenericClass__java_lang_Class (ref.func $$getSubclassgenericclass.GenericSubclassGenericClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return subclassgenericclass.GenericSubclassGenericClass.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@subclassgenericclass.GenericSubclassGenericClass) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@subclassgenericclass.GenericSubclassGenericClass)
@@ -344,6 +379,22 @@
  )
 )
 
+;;; Class<T> SubclassGenericClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@subclassgenericclass.SubclassGenericClass
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((subclassgenericclass.SubclassGenericClass.$class == null)) (subclassgenericclass.SubclassGenericClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|subclassgene...|_2(),subclassgenericclass.GenericClass.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__subclassgenericclass_SubclassGenericClass) (ref.null $java.lang.Class))
+   (then
+    ;; (subclassgenericclass.SubclassGenericClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|subclassgene...|_2(),subclassgenericclass.GenericClass.$getClassMetadata()));
+    (global.set $f_$class__subclassgenericclass_SubclassGenericClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|subclassgene...|_2__java_lang_String (ref.func $$getString_|subclassgene...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@subclassgenericclass.GenericClass) )))
+   )
+  )
+  ;; return subclassgenericclass.SubclassGenericClass.$class;
+  (return (global.get $f_$class__subclassgenericclass_SubclassGenericClass))
+ )
+)
+
 ;;; Class<?> SubclassGenericClass.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@subclassgenericclass.SubclassGenericClass
  (type $function.$getClassImpl__java_lang_Class)
@@ -352,8 +403,8 @@
  (local $this (ref null $subclassgenericclass.SubclassGenericClass))
  (local.set $this (ref.cast_static $subclassgenericclass.SubclassGenericClass (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getSubclassgenericclass.SubclassGenericClass();
-  (return (call $function.no.side.effects.$getSubclassgenericclass.SubclassGenericClass__java_lang_Class (ref.func $$getSubclassgenericclass.SubclassGenericClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return subclassgenericclass.SubclassGenericClass.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@subclassgenericclass.SubclassGenericClass) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@subclassgenericclass.SubclassGenericClass)

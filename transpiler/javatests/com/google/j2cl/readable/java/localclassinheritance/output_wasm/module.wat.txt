@@ -153,12 +153,15 @@
 
 ;;; Code for localclassinheritance.LocalClassInheritance [static fields]
 (global $f_$initialized__localclassinheritance_LocalClassInheritance (mut i32) (i32.const 0))
+(global $f_$class__localclassinheritance_LocalClassInheritance (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for localclassinheritance.LocalClassInheritance.1Parent [static fields]
 (global $f_$initialized__localclassinheritance_LocalClassInheritance_1Parent (mut i32) (i32.const 0))
+(global $f_$class__localclassinheritance_LocalClassInheritance_1Parent (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for localclassinheritance.LocalClassInheritance.1Child [static fields]
 (global $f_$initialized__localclassinheritance_LocalClassInheritance_1Child (mut i32) (i32.const 0))
+(global $f_$class__localclassinheritance_LocalClassInheritance_1Child (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for localclassinheritance.LocalClassInheritance [methods]
 
@@ -232,6 +235,22 @@
  )
 )
 
+;;; Class<T> LocalClassInheritance.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@localclassinheritance.LocalClassInheritance
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((localclassinheritance.LocalClassInheritance.$class == null)) (localclassinheritance.LocalClassInheritance.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__localclassinheritance_LocalClassInheritance) (ref.null $java.lang.Class))
+   (then
+    ;; (localclassinheritance.LocalClassInheritance.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__localclassinheritance_LocalClassInheritance (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclassin...|__java_lang_String (ref.func $$getString_|localclassin...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return localclassinheritance.LocalClassInheritance.$class;
+  (return (global.get $f_$class__localclassinheritance_LocalClassInheritance))
+ )
+)
+
 ;;; Class<?> LocalClassInheritance.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@localclassinheritance.LocalClassInheritance
  (type $function.$getClassImpl__java_lang_Class)
@@ -240,8 +259,8 @@
  (local $this (ref null $localclassinheritance.LocalClassInheritance))
  (local.set $this (ref.cast_static $localclassinheritance.LocalClassInheritance (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getLocalclassinheritance.LocalClassInheritance();
-  (return (call $function.no.side.effects.$getLocalclassinheritance.LocalClassInheritance__java_lang_Class (ref.func $$getLocalclassinheritance.LocalClassInheritance__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return localclassinheritance.LocalClassInheritance.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclassinheritance.LocalClassInheritance) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localclassinheritance.LocalClassInheritance)
@@ -322,6 +341,22 @@
  )
 )
 
+;;; Class<T> Parent.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@localclassinheritance.LocalClassInheritance.1Parent
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((localclassinheritance.LocalClassInheritance.1Parent.$class == null)) (localclassinheritance.LocalClassInheritance.1Parent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|_1(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__localclassinheritance_LocalClassInheritance_1Parent) (ref.null $java.lang.Class))
+   (then
+    ;; (localclassinheritance.LocalClassInheritance.1Parent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|_1(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__localclassinheritance_LocalClassInheritance_1Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclassin...|_1__java_lang_String (ref.func $$getString_|localclassin...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return localclassinheritance.LocalClassInheritance.1Parent.$class;
+  (return (global.get $f_$class__localclassinheritance_LocalClassInheritance_1Parent))
+ )
+)
+
 ;;; Class<?> Parent.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@localclassinheritance.LocalClassInheritance.1Parent
  (type $function.$getClassImpl__java_lang_Class)
@@ -330,8 +365,8 @@
  (local $this (ref null $localclassinheritance.LocalClassInheritance.1Parent))
  (local.set $this (ref.cast_static $localclassinheritance.LocalClassInheritance.1Parent (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getLocalclassinheritance.LocalClassInheritance.1Parent();
-  (return (call $function.no.side.effects.$getLocalclassinheritance.LocalClassInheritance.1Parent__java_lang_Class (ref.func $$getLocalclassinheritance.LocalClassInheritance.1Parent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return localclassinheritance.LocalClassInheritance.1Parent.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclassinheritance.LocalClassInheritance.1Parent) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localclassinheritance.LocalClassInheritance.1Parent)
@@ -412,6 +447,22 @@
  )
 )
 
+;;; Class<T> Child.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@localclassinheritance.LocalClassInheritance.1Child
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((localclassinheritance.LocalClassInheritance.1Child.$class == null)) (localclassinheritance.LocalClassInheritance.1Child.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|_2(),localclassinheritance.LocalClassInheritance.1Parent.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__localclassinheritance_LocalClassInheritance_1Child) (ref.null $java.lang.Class))
+   (then
+    ;; (localclassinheritance.LocalClassInheritance.1Child.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|_2(),localclassinheritance.LocalClassInheritance.1Parent.$getClassMetadata()));
+    (global.set $f_$class__localclassinheritance_LocalClassInheritance_1Child (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclassin...|_2__java_lang_String (ref.func $$getString_|localclassin...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclassinheritance.LocalClassInheritance.1Parent) )))
+   )
+  )
+  ;; return localclassinheritance.LocalClassInheritance.1Child.$class;
+  (return (global.get $f_$class__localclassinheritance_LocalClassInheritance_1Child))
+ )
+)
+
 ;;; Class<?> Child.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@localclassinheritance.LocalClassInheritance.1Child
  (type $function.$getClassImpl__java_lang_Class)
@@ -420,8 +471,8 @@
  (local $this (ref null $localclassinheritance.LocalClassInheritance.1Child))
  (local.set $this (ref.cast_static $localclassinheritance.LocalClassInheritance.1Child (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getLocalclassinheritance.LocalClassInheritance.1Child();
-  (return (call $function.no.side.effects.$getLocalclassinheritance.LocalClassInheritance.1Child__java_lang_Class (ref.func $$getLocalclassinheritance.LocalClassInheritance.1Child__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return localclassinheritance.LocalClassInheritance.1Child.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclassinheritance.LocalClassInheritance.1Child) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localclassinheritance.LocalClassInheritance.1Child)

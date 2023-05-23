@@ -66,6 +66,7 @@
 (global $f_BLUE__jstypeenum_Color (mut (ref null $jstypeenum.Color)) (ref.null $jstypeenum.Color))
 (global $f_namesToValuesMap__jstypeenum_Color_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
 (global $f_$initialized__jstypeenum_Color (mut i32) (i32.const 0))
+(global $f_$class__jstypeenum_Color (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for jstypeenum.Color [methods]
 
@@ -179,6 +180,22 @@
  )
 )
 
+;;; Class<T> Color.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@jstypeenum.Color
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((jstypeenum.Color.$class == null)) (jstypeenum.Color.$class = java.lang.Class.createForEnum(javaemul.internal.StringPool.$getString_|jstypeenum.C...|()));
+  (if (ref.eq (global.get $f_$class__jstypeenum_Color) (ref.null $java.lang.Class))
+   (then
+    ;; (jstypeenum.Color.$class = java.lang.Class.createForEnum(javaemul.internal.StringPool.$getString_|jstypeenum.C...|()));
+    (global.set $f_$class__jstypeenum_Color (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jstypeenum.C...|__java_lang_String (ref.func $$getString_|jstypeenum.C...|__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return jstypeenum.Color.$class;
+  (return (global.get $f_$class__jstypeenum_Color))
+ )
+)
+
 ;;; Class<?> Color.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@jstypeenum.Color
  (type $function.$getClassImpl__java_lang_Class)
@@ -187,8 +204,8 @@
  (local $this (ref null $jstypeenum.Color))
  (local.set $this (ref.cast_static $jstypeenum.Color (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJstypeenum.Color();
-  (return (call $function.no.side.effects.$getJstypeenum.Color__java_lang_Class (ref.func $$getJstypeenum.Color__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return jstypeenum.Color.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jstypeenum.Color) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jstypeenum.Color)

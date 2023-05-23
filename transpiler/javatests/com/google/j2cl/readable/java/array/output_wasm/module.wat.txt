@@ -205,17 +205,21 @@
 
 ;;; Code for array.Arrays [static fields]
 (global $f_$initialized__array_Arrays (mut i32) (i32.const 0))
+(global $f_$class__array_Arrays (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for array.Arrays.SomeObject [static fields]
 (global $f_$initialized__array_Arrays_SomeObject (mut i32) (i32.const 0))
+(global $f_$class__array_Arrays_SomeObject (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for array.Arrays.NativeType [static fields]
 
 ;;; Code for array.Arrays.ArrayContainer [static fields]
 (global $f_$initialized__array_Arrays_ArrayContainer (mut i32) (i32.const 0))
+(global $f_$class__array_Arrays_ArrayContainer (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for array.Arrays.NativeType.$Overlay [static fields]
 (global $f_$initialized__array_Arrays_NativeType_$Overlay (mut i32) (i32.const 0))
+(global $f_$class__array_Arrays_NativeType_$Overlay (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for array.Arrays.NativeType.$Overlay [methods]
 
@@ -238,6 +242,22 @@
  )
 )
 
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@array.Arrays.NativeType.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((array.Arrays.NativeType.$Overlay.$class == null)) (array.Arrays.NativeType.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|array.Arrays...|_2(),null));
+  (if (ref.eq (global.get $f_$class__array_Arrays_NativeType_$Overlay) (ref.null $java.lang.Class))
+   (then
+    ;; (array.Arrays.NativeType.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|array.Arrays...|_2(),null));
+    (global.set $f_$class__array_Arrays_NativeType_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|array.Arrays...|_2__java_lang_String (ref.func $$getString_|array.Arrays...|_2__java_lang_String@javaemul.internal.StringPool) )(ref.null $java.lang.Class)))
+   )
+  )
+  ;; return array.Arrays.NativeType.$Overlay.$class;
+  (return (global.get $f_$class__array_Arrays_NativeType_$Overlay))
+ )
+)
+
 ;;; Class<?> $Overlay.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@array.Arrays.NativeType.$Overlay
  (type $function.$getClassImpl__java_lang_Class)
@@ -246,8 +266,8 @@
  (local $this (ref null $array.Arrays.NativeType.$Overlay))
  (local.set $this (ref.cast_static $array.Arrays.NativeType.$Overlay (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getArray.Arrays.NativeType.$Overlay();
-  (return (call $function.no.side.effects.$getArray.Arrays.NativeType.$Overlay__java_lang_Class (ref.func $$getArray.Arrays.NativeType.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return array.Arrays.NativeType.$Overlay.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@array.Arrays.NativeType.$Overlay) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@array.Arrays.NativeType.$Overlay)
@@ -723,6 +743,22 @@
  )
 )
 
+;;; Class<T> Arrays.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@array.Arrays
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((array.Arrays.$class == null)) (array.Arrays.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|array.Arrays|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__array_Arrays) (ref.null $java.lang.Class))
+   (then
+    ;; (array.Arrays.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|array.Arrays|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__array_Arrays (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|array.Arrays|__java_lang_String (ref.func $$getString_|array.Arrays|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return array.Arrays.$class;
+  (return (global.get $f_$class__array_Arrays))
+ )
+)
+
 ;;; Class<?> Arrays.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@array.Arrays
  (type $function.$getClassImpl__java_lang_Class)
@@ -731,8 +767,8 @@
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast_static $array.Arrays (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getArray.Arrays();
-  (return (call $function.no.side.effects.$getArray.Arrays__java_lang_Class (ref.func $$getArray.Arrays__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return array.Arrays.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@array.Arrays) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@array.Arrays)
@@ -792,6 +828,22 @@
  )
 )
 
+;;; Class<T> SomeObject.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@array.Arrays.SomeObject
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((array.Arrays.SomeObject.$class == null)) (array.Arrays.SomeObject.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|array.Arrays...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__array_Arrays_SomeObject) (ref.null $java.lang.Class))
+   (then
+    ;; (array.Arrays.SomeObject.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|array.Arrays...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__array_Arrays_SomeObject (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|array.Arrays...|__java_lang_String (ref.func $$getString_|array.Arrays...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return array.Arrays.SomeObject.$class;
+  (return (global.get $f_$class__array_Arrays_SomeObject))
+ )
+)
+
 ;;; Class<?> SomeObject.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@array.Arrays.SomeObject
  (type $function.$getClassImpl__java_lang_Class)
@@ -800,8 +852,8 @@
  (local $this (ref null $array.Arrays.SomeObject))
  (local.set $this (ref.cast_static $array.Arrays.SomeObject (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getArray.Arrays.SomeObject();
-  (return (call $function.no.side.effects.$getArray.Arrays.SomeObject__java_lang_Class (ref.func $$getArray.Arrays.SomeObject__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return array.Arrays.SomeObject.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@array.Arrays.SomeObject) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@array.Arrays.SomeObject)
@@ -866,6 +918,22 @@
  )
 )
 
+;;; Class<T> ArrayContainer.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@array.Arrays.ArrayContainer
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((array.Arrays.ArrayContainer.$class == null)) (array.Arrays.ArrayContainer.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|array.Arrays...|_1(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__array_Arrays_ArrayContainer) (ref.null $java.lang.Class))
+   (then
+    ;; (array.Arrays.ArrayContainer.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|array.Arrays...|_1(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__array_Arrays_ArrayContainer (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|array.Arrays...|_1__java_lang_String (ref.func $$getString_|array.Arrays...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return array.Arrays.ArrayContainer.$class;
+  (return (global.get $f_$class__array_Arrays_ArrayContainer))
+ )
+)
+
 ;;; Class<?> ArrayContainer.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@array.Arrays.ArrayContainer
  (type $function.$getClassImpl__java_lang_Class)
@@ -874,8 +942,8 @@
  (local $this (ref null $array.Arrays.ArrayContainer))
  (local.set $this (ref.cast_static $array.Arrays.ArrayContainer (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getArray.Arrays.ArrayContainer();
-  (return (call $function.no.side.effects.$getArray.Arrays.ArrayContainer__java_lang_Class (ref.func $$getArray.Arrays.ArrayContainer__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return array.Arrays.ArrayContainer.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@array.Arrays.ArrayContainer) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@array.Arrays.ArrayContainer)

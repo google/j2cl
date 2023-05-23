@@ -47,6 +47,7 @@
 
 ;;; Code for publicconstructor.PublicConstructor [static fields]
 (global $f_$initialized__publicconstructor_PublicConstructor (mut i32) (i32.const 0))
+(global $f_$class__publicconstructor_PublicConstructor (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for publicconstructor.PublicConstructor [methods]
 
@@ -104,6 +105,22 @@
  )
 )
 
+;;; Class<T> PublicConstructor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@publicconstructor.PublicConstructor
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((publicconstructor.PublicConstructor.$class == null)) (publicconstructor.PublicConstructor.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|publicconstr...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__publicconstructor_PublicConstructor) (ref.null $java.lang.Class))
+   (then
+    ;; (publicconstructor.PublicConstructor.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|publicconstr...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__publicconstructor_PublicConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|publicconstr...|__java_lang_String (ref.func $$getString_|publicconstr...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return publicconstructor.PublicConstructor.$class;
+  (return (global.get $f_$class__publicconstructor_PublicConstructor))
+ )
+)
+
 ;;; Class<?> PublicConstructor.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@publicconstructor.PublicConstructor
  (type $function.$getClassImpl__java_lang_Class)
@@ -112,8 +129,8 @@
  (local $this (ref null $publicconstructor.PublicConstructor))
  (local.set $this (ref.cast_static $publicconstructor.PublicConstructor (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getPublicconstructor.PublicConstructor();
-  (return (call $function.no.side.effects.$getPublicconstructor.PublicConstructor__java_lang_Class (ref.func $$getPublicconstructor.PublicConstructor__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return publicconstructor.PublicConstructor.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@publicconstructor.PublicConstructor) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@publicconstructor.PublicConstructor)

@@ -156,24 +156,29 @@
 
 ;;; Code for jsoverlay.Main [static fields]
 (global $f_$initialized__jsoverlay_Main (mut i32) (i32.const 0))
+(global $f_$class__jsoverlay_Main (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for jsoverlay.Main.NativeJsTypeInterfaceWithOverlay [static fields]
 
 ;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay.1 [static fields]
 (global $f_$initialized__jsoverlay_Main_NativeJsTypeWithOverlay_1 (mut i32) (i32.const 0))
+(global $f_$class__jsoverlay_Main_NativeJsTypeWithOverlay_1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay [static fields]
 
 ;;; Code for jsoverlay.Main.Intf [static fields]
 (global $f_$initialized__jsoverlay_Main_Intf (mut i32) (i32.const 0))
+(global $f_$class__jsoverlay_Main_Intf (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay [static fields]
 (global $f_staticField__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
 (global $f_$initialized__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay (mut i32) (i32.const 0))
+(global $f_$class__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay [static fields]
 (global $f_staticField__jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
 (global $f_$initialized__jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay (mut i32) (i32.const 0))
+(global $f_$class__jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for jsoverlay.Main.NativeJsTypeInterfaceWithOverlay [methods]
 
@@ -201,6 +206,22 @@
   ;; (jsoverlay.Main.Intf.$initialized = true);
   ;;@ jsoverlay/Main.java:99:20
   (global.set $f_$initialized__jsoverlay_Main_Intf (i32.const 1))
+ )
+)
+
+;;; Class<T> Intf.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@jsoverlay.Main.Intf
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((jsoverlay.Main.Intf.$class == null)) (jsoverlay.Main.Intf.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|jsoverlay.Ma...|_1()));
+  (if (ref.eq (global.get $f_$class__jsoverlay_Main_Intf) (ref.null $java.lang.Class))
+   (then
+    ;; (jsoverlay.Main.Intf.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|jsoverlay.Ma...|_1()));
+    (global.set $f_$class__jsoverlay_Main_Intf (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsoverlay.Ma...|_1__java_lang_String (ref.func $$getString_|jsoverlay.Ma...|_1__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return jsoverlay.Main.Intf.$class;
+  (return (global.get $f_$class__jsoverlay_Main_Intf))
  )
 )
 
@@ -240,6 +261,22 @@
   ;; (jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay.staticField = java.lang.Object.$create());
   ;;@ jsoverlay/Main.java:28:4
   (global.set $f_staticField__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay (call $$create__@java.lang.Object ))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay.$class == null)) (jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|jsoverlay.Ma...|_2()));
+  (if (ref.eq (global.get $f_$class__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay) (ref.null $java.lang.Class))
+   (then
+    ;; (jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|jsoverlay.Ma...|_2()));
+    (global.set $f_$class__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsoverlay.Ma...|_2__java_lang_String (ref.func $$getString_|jsoverlay.Ma...|_2__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay.$class;
+  (return (global.get $f_$class__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay))
  )
 )
 
@@ -397,6 +434,22 @@
  )
 )
 
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay.$class == null)) (jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsoverlay.Ma...|_3(),null));
+  (if (ref.eq (global.get $f_$class__jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay) (ref.null $java.lang.Class))
+   (then
+    ;; (jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsoverlay.Ma...|_3(),null));
+    (global.set $f_$class__jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsoverlay.Ma...|_3__java_lang_String (ref.func $$getString_|jsoverlay.Ma...|_3__java_lang_String@javaemul.internal.StringPool) )(ref.null $java.lang.Class)))
+   )
+  )
+  ;; return jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay.$class;
+  (return (global.get $f_$class__jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay))
+ )
+)
+
 ;;; Class<?> $Overlay.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay
  (type $function.$getClassImpl__java_lang_Class)
@@ -405,8 +458,8 @@
  (local $this (ref null $jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay))
  (local.set $this (ref.cast_static $jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJsoverlay.Main.NativeJsTypeWithOverlay.$Overlay();
-  (return (call $function.no.side.effects.$getJsoverlay.Main.NativeJsTypeWithOverlay.$Overlay__java_lang_Class (ref.func $$getJsoverlay.Main.NativeJsTypeWithOverlay.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay)
@@ -548,6 +601,22 @@
  )
 )
 
+;;; Class<T> Main.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@jsoverlay.Main
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((jsoverlay.Main.$class == null)) (jsoverlay.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsoverlay.Main|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__jsoverlay_Main) (ref.null $java.lang.Class))
+   (then
+    ;; (jsoverlay.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsoverlay.Main|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__jsoverlay_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsoverlay.Main|__java_lang_String (ref.func $$getString_|jsoverlay.Main|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return jsoverlay.Main.$class;
+  (return (global.get $f_$class__jsoverlay_Main))
+ )
+)
+
 ;;; Class<?> Main.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@jsoverlay.Main
  (type $function.$getClassImpl__java_lang_Class)
@@ -556,8 +625,8 @@
  (local $this (ref null $jsoverlay.Main))
  (local.set $this (ref.cast_static $jsoverlay.Main (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJsoverlay.Main();
-  (return (call $function.no.side.effects.$getJsoverlay.Main__java_lang_Class (ref.func $$getJsoverlay.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return jsoverlay.Main.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsoverlay.Main) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsoverlay.Main)
@@ -632,6 +701,22 @@
  )
 )
 
+;;; Class<T> <anonymous> implements Intf.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@jsoverlay.Main.NativeJsTypeWithOverlay.1
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((jsoverlay.Main.NativeJsTypeWithOverlay.1.$class == null)) (jsoverlay.Main.NativeJsTypeWithOverlay.1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsoverlay.Ma...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__jsoverlay_Main_NativeJsTypeWithOverlay_1) (ref.null $java.lang.Class))
+   (then
+    ;; (jsoverlay.Main.NativeJsTypeWithOverlay.1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsoverlay.Ma...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__jsoverlay_Main_NativeJsTypeWithOverlay_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsoverlay.Ma...|__java_lang_String (ref.func $$getString_|jsoverlay.Ma...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return jsoverlay.Main.NativeJsTypeWithOverlay.1.$class;
+  (return (global.get $f_$class__jsoverlay_Main_NativeJsTypeWithOverlay_1))
+ )
+)
+
 ;;; Class<?> <anonymous> implements Intf.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@jsoverlay.Main.NativeJsTypeWithOverlay.1
  (type $function.$getClassImpl__java_lang_Class)
@@ -640,8 +725,8 @@
  (local $this (ref null $jsoverlay.Main.NativeJsTypeWithOverlay.1))
  (local.set $this (ref.cast_static $jsoverlay.Main.NativeJsTypeWithOverlay.1 (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJsoverlay.Main.NativeJsTypeWithOverlay.1();
-  (return (call $function.no.side.effects.$getJsoverlay.Main.NativeJsTypeWithOverlay.1__java_lang_Class (ref.func $$getJsoverlay.Main.NativeJsTypeWithOverlay.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return jsoverlay.Main.NativeJsTypeWithOverlay.1.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsoverlay.Main.NativeJsTypeWithOverlay.1) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsoverlay.Main.NativeJsTypeWithOverlay.1)

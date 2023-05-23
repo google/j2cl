@@ -162,9 +162,11 @@
 
 ;;; Code for exception.MyException [static fields]
 (global $f_$initialized__exception_MyException (mut i32) (i32.const 0))
+(global $f_$class__exception_MyException (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for exception.MyJsException [static fields]
 (global $f_$initialized__exception_MyJsException (mut i32) (i32.const 0))
+(global $f_$class__exception_MyJsException (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for exception.MyException [methods]
 
@@ -262,6 +264,22 @@
  )
 )
 
+;;; Class<T> MyException.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@exception.MyException
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((exception.MyException.$class == null)) (exception.MyException.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|exception.My...|(),java.lang.Exception.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__exception_MyException) (ref.null $java.lang.Class))
+   (then
+    ;; (exception.MyException.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|exception.My...|(),java.lang.Exception.$getClassMetadata()));
+    (global.set $f_$class__exception_MyException (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|exception.My...|__java_lang_String (ref.func $$getString_|exception.My...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Exception) )))
+   )
+  )
+  ;; return exception.MyException.$class;
+  (return (global.get $f_$class__exception_MyException))
+ )
+)
+
 ;;; Class<?> MyException.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@exception.MyException
  (type $function.$getClassImpl__java_lang_Class)
@@ -270,8 +288,8 @@
  (local $this (ref null $exception.MyException))
  (local.set $this (ref.cast_static $exception.MyException (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getException.MyException();
-  (return (call $function.no.side.effects.$getException.MyException__java_lang_Class (ref.func $$getException.MyException__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return exception.MyException.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@exception.MyException) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@exception.MyException)
@@ -372,6 +390,22 @@
  )
 )
 
+;;; Class<T> MyJsException.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@exception.MyJsException
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((exception.MyJsException.$class == null)) (exception.MyJsException.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|exception.My...|_1(),java.lang.Exception.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__exception_MyJsException) (ref.null $java.lang.Class))
+   (then
+    ;; (exception.MyJsException.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|exception.My...|_1(),java.lang.Exception.$getClassMetadata()));
+    (global.set $f_$class__exception_MyJsException (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|exception.My...|_1__java_lang_String (ref.func $$getString_|exception.My...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Exception) )))
+   )
+  )
+  ;; return exception.MyJsException.$class;
+  (return (global.get $f_$class__exception_MyJsException))
+ )
+)
+
 ;;; Class<?> MyJsException.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@exception.MyJsException
  (type $function.$getClassImpl__java_lang_Class)
@@ -380,8 +414,8 @@
  (local $this (ref null $exception.MyJsException))
  (local.set $this (ref.cast_static $exception.MyJsException (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getException.MyJsException();
-  (return (call $function.no.side.effects.$getException.MyJsException__java_lang_Class (ref.func $$getException.MyJsException__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return exception.MyJsException.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@exception.MyJsException) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@exception.MyJsException)

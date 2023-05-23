@@ -49,6 +49,7 @@
 
 ;;; Code for characterliteral.CharacterLiteral [static fields]
 (global $f_$initialized__characterliteral_CharacterLiteral (mut i32) (i32.const 0))
+(global $f_$class__characterliteral_CharacterLiteral (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for characterliteral.CharacterLiteral [methods]
 
@@ -485,6 +486,22 @@
  )
 )
 
+;;; Class<T> CharacterLiteral.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@characterliteral.CharacterLiteral
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((characterliteral.CharacterLiteral.$class == null)) (characterliteral.CharacterLiteral.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|characterlit...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__characterliteral_CharacterLiteral) (ref.null $java.lang.Class))
+   (then
+    ;; (characterliteral.CharacterLiteral.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|characterlit...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__characterliteral_CharacterLiteral (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|characterlit...|__java_lang_String (ref.func $$getString_|characterlit...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return characterliteral.CharacterLiteral.$class;
+  (return (global.get $f_$class__characterliteral_CharacterLiteral))
+ )
+)
+
 ;;; Class<?> CharacterLiteral.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@characterliteral.CharacterLiteral
  (type $function.$getClassImpl__java_lang_Class)
@@ -493,8 +510,8 @@
  (local $this (ref null $characterliteral.CharacterLiteral))
  (local.set $this (ref.cast_static $characterliteral.CharacterLiteral (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getCharacterliteral.CharacterLiteral();
-  (return (call $function.no.side.effects.$getCharacterliteral.CharacterLiteral__java_lang_Class (ref.func $$getCharacterliteral.CharacterLiteral__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return characterliteral.CharacterLiteral.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@characterliteral.CharacterLiteral) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@characterliteral.CharacterLiteral)

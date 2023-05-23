@@ -89,9 +89,11 @@
 
 ;;; Code for genericnativetype.BoundedJsArray.$Overlay [static fields]
 (global $f_$initialized__genericnativetype_BoundedJsArray_$Overlay (mut i32) (i32.const 0))
+(global $f_$class__genericnativetype_BoundedJsArray_$Overlay (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for genericnativetype.BoundedJsArrays [static fields]
 (global $f_$initialized__genericnativetype_BoundedJsArrays (mut i32) (i32.const 0))
+(global $f_$class__genericnativetype_BoundedJsArrays (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for genericnativetype.BoundedJsArray.$Overlay [methods]
 
@@ -151,6 +153,22 @@
  )
 )
 
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@genericnativetype.BoundedJsArray.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((genericnativetype.BoundedJsArray.$Overlay.$class == null)) (genericnativetype.BoundedJsArray.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|genericnativ...|(),null));
+  (if (ref.eq (global.get $f_$class__genericnativetype_BoundedJsArray_$Overlay) (ref.null $java.lang.Class))
+   (then
+    ;; (genericnativetype.BoundedJsArray.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|genericnativ...|(),null));
+    (global.set $f_$class__genericnativetype_BoundedJsArray_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericnativ...|__java_lang_String (ref.func $$getString_|genericnativ...|__java_lang_String@javaemul.internal.StringPool) )(ref.null $java.lang.Class)))
+   )
+  )
+  ;; return genericnativetype.BoundedJsArray.$Overlay.$class;
+  (return (global.get $f_$class__genericnativetype_BoundedJsArray_$Overlay))
+ )
+)
+
 ;;; Class<?> $Overlay.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@genericnativetype.BoundedJsArray.$Overlay
  (type $function.$getClassImpl__java_lang_Class)
@@ -159,8 +177,8 @@
  (local $this (ref null $genericnativetype.BoundedJsArray.$Overlay))
  (local.set $this (ref.cast_static $genericnativetype.BoundedJsArray.$Overlay (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getGenericnativetype.BoundedJsArray.$Overlay();
-  (return (call $function.no.side.effects.$getGenericnativetype.BoundedJsArray.$Overlay__java_lang_Class (ref.func $$getGenericnativetype.BoundedJsArray.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return genericnativetype.BoundedJsArray.$Overlay.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@genericnativetype.BoundedJsArray.$Overlay) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@genericnativetype.BoundedJsArray.$Overlay)
@@ -255,6 +273,22 @@
  )
 )
 
+;;; Class<T> BoundedJsArrays.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@genericnativetype.BoundedJsArrays
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((genericnativetype.BoundedJsArrays.$class == null)) (genericnativetype.BoundedJsArrays.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|genericnativ...|_1(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__genericnativetype_BoundedJsArrays) (ref.null $java.lang.Class))
+   (then
+    ;; (genericnativetype.BoundedJsArrays.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|genericnativ...|_1(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__genericnativetype_BoundedJsArrays (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericnativ...|_1__java_lang_String (ref.func $$getString_|genericnativ...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return genericnativetype.BoundedJsArrays.$class;
+  (return (global.get $f_$class__genericnativetype_BoundedJsArrays))
+ )
+)
+
 ;;; Class<?> BoundedJsArrays.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@genericnativetype.BoundedJsArrays
  (type $function.$getClassImpl__java_lang_Class)
@@ -263,8 +297,8 @@
  (local $this (ref null $genericnativetype.BoundedJsArrays))
  (local.set $this (ref.cast_static $genericnativetype.BoundedJsArrays (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getGenericnativetype.BoundedJsArrays();
-  (return (call $function.no.side.effects.$getGenericnativetype.BoundedJsArrays__java_lang_Class (ref.func $$getGenericnativetype.BoundedJsArrays__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return genericnativetype.BoundedJsArrays.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@genericnativetype.BoundedJsArrays) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@genericnativetype.BoundedJsArrays)

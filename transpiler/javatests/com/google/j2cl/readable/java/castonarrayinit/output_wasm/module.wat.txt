@@ -94,9 +94,11 @@
 
 ;;; Code for castonarrayinit.CastOnArrayInit [static fields]
 (global $f_$initialized__castonarrayinit_CastOnArrayInit (mut i32) (i32.const 0))
+(global $f_$class__castonarrayinit_CastOnArrayInit (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for castonarrayinit.CastOnArrayInit.Foo [static fields]
 (global $f_$initialized__castonarrayinit_CastOnArrayInit_Foo (mut i32) (i32.const 0))
+(global $f_$class__castonarrayinit_CastOnArrayInit_Foo (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for castonarrayinit.CastOnArrayInit [methods]
 
@@ -186,6 +188,22 @@
  )
 )
 
+;;; Class<T> CastOnArrayInit.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@castonarrayinit.CastOnArrayInit
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((castonarrayinit.CastOnArrayInit.$class == null)) (castonarrayinit.CastOnArrayInit.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|castonarrayi...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__castonarrayinit_CastOnArrayInit) (ref.null $java.lang.Class))
+   (then
+    ;; (castonarrayinit.CastOnArrayInit.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|castonarrayi...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__castonarrayinit_CastOnArrayInit (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|castonarrayi...|__java_lang_String (ref.func $$getString_|castonarrayi...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return castonarrayinit.CastOnArrayInit.$class;
+  (return (global.get $f_$class__castonarrayinit_CastOnArrayInit))
+ )
+)
+
 ;;; Class<?> CastOnArrayInit.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@castonarrayinit.CastOnArrayInit
  (type $function.$getClassImpl__java_lang_Class)
@@ -194,8 +212,8 @@
  (local $this (ref null $castonarrayinit.CastOnArrayInit))
  (local.set $this (ref.cast_static $castonarrayinit.CastOnArrayInit (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getCastonarrayinit.CastOnArrayInit();
-  (return (call $function.no.side.effects.$getCastonarrayinit.CastOnArrayInit__java_lang_Class (ref.func $$getCastonarrayinit.CastOnArrayInit__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return castonarrayinit.CastOnArrayInit.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@castonarrayinit.CastOnArrayInit) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@castonarrayinit.CastOnArrayInit)
@@ -256,6 +274,22 @@
  )
 )
 
+;;; Class<T> Foo.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@castonarrayinit.CastOnArrayInit.Foo
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((castonarrayinit.CastOnArrayInit.Foo.$class == null)) (castonarrayinit.CastOnArrayInit.Foo.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|castonarrayi...|_1(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__castonarrayinit_CastOnArrayInit_Foo) (ref.null $java.lang.Class))
+   (then
+    ;; (castonarrayinit.CastOnArrayInit.Foo.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|castonarrayi...|_1(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__castonarrayinit_CastOnArrayInit_Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|castonarrayi...|_1__java_lang_String (ref.func $$getString_|castonarrayi...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return castonarrayinit.CastOnArrayInit.Foo.$class;
+  (return (global.get $f_$class__castonarrayinit_CastOnArrayInit_Foo))
+ )
+)
+
 ;;; Class<?> Foo.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@castonarrayinit.CastOnArrayInit.Foo
  (type $function.$getClassImpl__java_lang_Class)
@@ -264,8 +298,8 @@
  (local $this (ref null $castonarrayinit.CastOnArrayInit.Foo))
  (local.set $this (ref.cast_static $castonarrayinit.CastOnArrayInit.Foo (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getCastonarrayinit.CastOnArrayInit.Foo();
-  (return (call $function.no.side.effects.$getCastonarrayinit.CastOnArrayInit.Foo__java_lang_Class (ref.func $$getCastonarrayinit.CastOnArrayInit.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return castonarrayinit.CastOnArrayInit.Foo.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@castonarrayinit.CastOnArrayInit.Foo) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@castonarrayinit.CastOnArrayInit.Foo)

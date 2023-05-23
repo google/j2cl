@@ -145,12 +145,15 @@
 
 ;;; Code for localclasswithoutergenerics.LocalClassWithOuterGenerics [static fields]
 (global $f_$initialized__localclasswithoutergenerics_LocalClassWithOuterGenerics (mut i32) (i32.const 0))
+(global $f_$class__localclasswithoutergenerics_LocalClassWithOuterGenerics (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar [static fields]
 (global $f_$initialized__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Bar (mut i32) (i32.const 0))
+(global $f_$class__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Bar (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz [static fields]
 (global $f_$initialized__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz (mut i32) (i32.const 0))
+(global $f_$class__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for localclasswithoutergenerics.LocalClassWithOuterGenerics [methods]
 
@@ -226,6 +229,22 @@
  )
 )
 
+;;; Class<T> LocalClassWithOuterGenerics.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((localclasswithoutergenerics.LocalClassWithOuterGenerics.$class == null)) (localclasswithoutergenerics.LocalClassWithOuterGenerics.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclasswi...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__localclasswithoutergenerics_LocalClassWithOuterGenerics) (ref.null $java.lang.Class))
+   (then
+    ;; (localclasswithoutergenerics.LocalClassWithOuterGenerics.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclasswi...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__localclasswithoutergenerics_LocalClassWithOuterGenerics (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclasswi...|__java_lang_String (ref.func $$getString_|localclasswi...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return localclasswithoutergenerics.LocalClassWithOuterGenerics.$class;
+  (return (global.get $f_$class__localclasswithoutergenerics_LocalClassWithOuterGenerics))
+ )
+)
+
 ;;; Class<?> LocalClassWithOuterGenerics.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics
  (type $function.$getClassImpl__java_lang_Class)
@@ -234,8 +253,8 @@
  (local $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics))
  (local.set $this (ref.cast_static $localclasswithoutergenerics.LocalClassWithOuterGenerics (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getLocalclasswithoutergenerics.LocalClassWithOuterGenerics();
-  (return (call $function.no.side.effects.$getLocalclasswithoutergenerics.LocalClassWithOuterGenerics__java_lang_Class (ref.func $$getLocalclasswithoutergenerics.LocalClassWithOuterGenerics__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return localclasswithoutergenerics.LocalClassWithOuterGenerics.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics)
@@ -309,6 +328,22 @@
  )
 )
 
+;;; Class<T> Bar.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.$class == null)) (localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclasswi...|_1(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Bar) (ref.null $java.lang.Class))
+   (then
+    ;; (localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclasswi...|_1(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Bar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclasswi...|_1__java_lang_String (ref.func $$getString_|localclasswi...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.$class;
+  (return (global.get $f_$class__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Bar))
+ )
+)
+
 ;;; Class<?> Bar.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar
  (type $function.$getClassImpl__java_lang_Class)
@@ -317,8 +352,8 @@
  (local $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar))
  (local.set $this (ref.cast_static $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getLocalclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar();
-  (return (call $function.no.side.effects.$getLocalclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar__java_lang_Class (ref.func $$getLocalclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar)
@@ -394,6 +429,22 @@
  )
 )
 
+;;; Class<T> Baz.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.$class == null)) (localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclasswi...|_2(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz) (ref.null $java.lang.Class))
+   (then
+    ;; (localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclasswi...|_2(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclasswi...|_2__java_lang_String (ref.func $$getString_|localclasswi...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.$class;
+  (return (global.get $f_$class__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz))
+ )
+)
+
 ;;; Class<?> Baz.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz
  (type $function.$getClassImpl__java_lang_Class)
@@ -402,8 +453,8 @@
  (local $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz))
  (local.set $this (ref.cast_static $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getLocalclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz();
-  (return (call $function.no.side.effects.$getLocalclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz__java_lang_Class (ref.func $$getLocalclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz)

@@ -55,9 +55,11 @@
 
 ;;; Code for functiontype.Function [static fields]
 (global $f_$initialized__functiontype_Function (mut i32) (i32.const 0))
+(global $f_$class__functiontype_Function (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for functiontype.FunctionImpl [static fields]
 (global $f_$initialized__functiontype_FunctionImpl (mut i32) (i32.const 0))
+(global $f_$class__functiontype_FunctionImpl (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for functiontype.Function [methods]
 
@@ -77,6 +79,22 @@
   ;; (functiontype.Function.$initialized = true);
   ;;@ functiontype/FunctionImpl.java:18:10
   (global.set $f_$initialized__functiontype_Function (i32.const 1))
+ )
+)
+
+;;; Class<T> Function.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@functiontype.Function
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((functiontype.Function.$class == null)) (functiontype.Function.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|functiontype...|()));
+  (if (ref.eq (global.get $f_$class__functiontype_Function) (ref.null $java.lang.Class))
+   (then
+    ;; (functiontype.Function.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|functiontype...|()));
+    (global.set $f_$class__functiontype_Function (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functiontype...|__java_lang_String (ref.func $$getString_|functiontype...|__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return functiontype.Function.$class;
+  (return (global.get $f_$class__functiontype_Function))
  )
 )
 
@@ -149,6 +167,22 @@
  )
 )
 
+;;; Class<T> FunctionImpl.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@functiontype.FunctionImpl
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((functiontype.FunctionImpl.$class == null)) (functiontype.FunctionImpl.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|functiontype...|_1(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__functiontype_FunctionImpl) (ref.null $java.lang.Class))
+   (then
+    ;; (functiontype.FunctionImpl.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|functiontype...|_1(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__functiontype_FunctionImpl (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functiontype...|_1__java_lang_String (ref.func $$getString_|functiontype...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return functiontype.FunctionImpl.$class;
+  (return (global.get $f_$class__functiontype_FunctionImpl))
+ )
+)
+
 ;;; Class<?> FunctionImpl.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@functiontype.FunctionImpl
  (type $function.$getClassImpl__java_lang_Class)
@@ -157,8 +191,8 @@
  (local $this (ref null $functiontype.FunctionImpl))
  (local.set $this (ref.cast_static $functiontype.FunctionImpl (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getFunctiontype.FunctionImpl();
-  (return (call $function.no.side.effects.$getFunctiontype.FunctionImpl__java_lang_Class (ref.func $$getFunctiontype.FunctionImpl__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return functiontype.FunctionImpl.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@functiontype.FunctionImpl) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@functiontype.FunctionImpl)

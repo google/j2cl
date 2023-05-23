@@ -49,6 +49,7 @@
 
 ;;; Code for javascriptkeywords.JSKeyWords [static fields]
 (global $f_$initialized__javascriptkeywords_JSKeyWords (mut i32) (i32.const 0))
+(global $f_$class__javascriptkeywords_JSKeyWords (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for javascriptkeywords.JSKeyWords [methods]
 
@@ -127,6 +128,22 @@
  )
 )
 
+;;; Class<T> JSKeyWords.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@javascriptkeywords.JSKeyWords
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((javascriptkeywords.JSKeyWords.$class == null)) (javascriptkeywords.JSKeyWords.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|javascriptke...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__javascriptkeywords_JSKeyWords) (ref.null $java.lang.Class))
+   (then
+    ;; (javascriptkeywords.JSKeyWords.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|javascriptke...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__javascriptkeywords_JSKeyWords (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|javascriptke...|__java_lang_String (ref.func $$getString_|javascriptke...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return javascriptkeywords.JSKeyWords.$class;
+  (return (global.get $f_$class__javascriptkeywords_JSKeyWords))
+ )
+)
+
 ;;; Class<?> JSKeyWords.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@javascriptkeywords.JSKeyWords
  (type $function.$getClassImpl__java_lang_Class)
@@ -135,8 +152,8 @@
  (local $this (ref null $javascriptkeywords.JSKeyWords))
  (local.set $this (ref.cast_static $javascriptkeywords.JSKeyWords (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJavascriptkeywords.JSKeyWords();
-  (return (call $function.no.side.effects.$getJavascriptkeywords.JSKeyWords__java_lang_Class (ref.func $$getJavascriptkeywords.JSKeyWords__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return javascriptkeywords.JSKeyWords.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@javascriptkeywords.JSKeyWords) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@javascriptkeywords.JSKeyWords)

@@ -147,12 +147,15 @@
 
 ;;; Code for nestedinstanceinnerclass.OuterClass [static fields]
 (global $f_$initialized__nestedinstanceinnerclass_OuterClass (mut i32) (i32.const 0))
+(global $f_$class__nestedinstanceinnerclass_OuterClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass [static fields]
 (global $f_$initialized__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass (mut i32) (i32.const 0))
+(global $f_$class__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for nestedinstanceinnerclass.OuterClass.InnerClass [static fields]
 (global $f_$initialized__nestedinstanceinnerclass_OuterClass_InnerClass (mut i32) (i32.const 0))
+(global $f_$class__nestedinstanceinnerclass_OuterClass_InnerClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for nestedinstanceinnerclass.OuterClass [methods]
 
@@ -225,6 +228,22 @@
  )
 )
 
+;;; Class<T> OuterClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@nestedinstanceinnerclass.OuterClass
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((nestedinstanceinnerclass.OuterClass.$class == null)) (nestedinstanceinnerclass.OuterClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nestedinstan...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__nestedinstanceinnerclass_OuterClass) (ref.null $java.lang.Class))
+   (then
+    ;; (nestedinstanceinnerclass.OuterClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nestedinstan...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__nestedinstanceinnerclass_OuterClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nestedinstan...|__java_lang_String (ref.func $$getString_|nestedinstan...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return nestedinstanceinnerclass.OuterClass.$class;
+  (return (global.get $f_$class__nestedinstanceinnerclass_OuterClass))
+ )
+)
+
 ;;; Class<?> OuterClass.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@nestedinstanceinnerclass.OuterClass
  (type $function.$getClassImpl__java_lang_Class)
@@ -233,8 +252,8 @@
  (local $this (ref null $nestedinstanceinnerclass.OuterClass))
  (local.set $this (ref.cast_static $nestedinstanceinnerclass.OuterClass (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getNestedinstanceinnerclass.OuterClass();
-  (return (call $function.no.side.effects.$getNestedinstanceinnerclass.OuterClass__java_lang_Class (ref.func $$getNestedinstanceinnerclass.OuterClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return nestedinstanceinnerclass.OuterClass.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nestedinstanceinnerclass.OuterClass) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nestedinstanceinnerclass.OuterClass)
@@ -314,6 +333,22 @@
  )
 )
 
+;;; Class<T> InnerInnerClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.$class == null)) (nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nestedinstan...|_1(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass) (ref.null $java.lang.Class))
+   (then
+    ;; (nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nestedinstan...|_1(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nestedinstan...|_1__java_lang_String (ref.func $$getString_|nestedinstan...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.$class;
+  (return (global.get $f_$class__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass))
+ )
+)
+
 ;;; Class<?> InnerInnerClass.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass
  (type $function.$getClassImpl__java_lang_Class)
@@ -322,8 +357,8 @@
  (local $this (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass))
  (local.set $this (ref.cast_static $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getNestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass();
-  (return (call $function.no.side.effects.$getNestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass__java_lang_Class (ref.func $$getNestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass)
@@ -386,6 +421,22 @@
  )
 )
 
+;;; Class<T> InnerClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((nestedinstanceinnerclass.OuterClass.InnerClass.$class == null)) (nestedinstanceinnerclass.OuterClass.InnerClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nestedinstan...|_2(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__nestedinstanceinnerclass_OuterClass_InnerClass) (ref.null $java.lang.Class))
+   (then
+    ;; (nestedinstanceinnerclass.OuterClass.InnerClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nestedinstan...|_2(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__nestedinstanceinnerclass_OuterClass_InnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nestedinstan...|_2__java_lang_String (ref.func $$getString_|nestedinstan...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return nestedinstanceinnerclass.OuterClass.InnerClass.$class;
+  (return (global.get $f_$class__nestedinstanceinnerclass_OuterClass_InnerClass))
+ )
+)
+
 ;;; Class<?> InnerClass.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass
  (type $function.$getClassImpl__java_lang_Class)
@@ -394,8 +445,8 @@
  (local $this (ref null $nestedinstanceinnerclass.OuterClass.InnerClass))
  (local.set $this (ref.cast_static $nestedinstanceinnerclass.OuterClass.InnerClass (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getNestedinstanceinnerclass.OuterClass.InnerClass();
-  (return (call $function.no.side.effects.$getNestedinstanceinnerclass.OuterClass.InnerClass__java_lang_Class (ref.func $$getNestedinstanceinnerclass.OuterClass.InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return nestedinstanceinnerclass.OuterClass.InnerClass.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass)

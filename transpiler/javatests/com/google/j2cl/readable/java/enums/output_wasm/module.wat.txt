@@ -314,6 +314,7 @@
 (global $f_V2__enums_Enum1 (mut (ref null $enums.Enum1)) (ref.null $enums.Enum1))
 (global $f_namesToValuesMap__enums_Enum1_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
 (global $f_$initialized__enums_Enum1 (mut i32) (i32.const 0))
+(global $f_$class__enums_Enum1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for enums.Enum2 [static fields]
 (global $f_VALUE1__enums_Enum2 (mut (ref null $enums.Enum2)) (ref.null $enums.Enum2))
@@ -323,17 +324,21 @@
 (global $f_C__enums_Enum2 (mut (ref null $enums.Enum2)) (ref.null $enums.Enum2))
 (global $f_namesToValuesMap__enums_Enum2_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
 (global $f_$initialized__enums_Enum2 (mut i32) (i32.const 0))
+(global $f_$class__enums_Enum2 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for enums.Enum3 [static fields]
 (global $f_VALUE1__enums_Enum3 (mut (ref null $enums.Enum3)) (ref.null $enums.Enum3))
 (global $f_namesToValuesMap__enums_Enum3_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
 (global $f_$initialized__enums_Enum3 (mut i32) (i32.const 0))
+(global $f_$class__enums_Enum3 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for enums.Enum2.1 [static fields]
 (global $f_$initialized__enums_Enum2_1 (mut i32) (i32.const 0))
+(global $f_$class__enums_Enum2_1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for enums.Enum3.$LambdaImplementor$1 [static fields]
 (global $f_$initialized__enums_Enum3_$LambdaImplementor$1 (mut i32) (i32.const 0))
+(global $f_$class__enums_Enum3_$LambdaImplementor$1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for enums.Enum3.$LambdaImplementor$1 [methods]
 
@@ -449,6 +454,22 @@
  )
 )
 
+;;; Class<T> $LambdaImplementor$1.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@enums.Enum3.$LambdaImplementor$1
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((enums.Enum3.$LambdaImplementor$1.$class == null)) (enums.Enum3.$LambdaImplementor$1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|enums.Enum3_...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__enums_Enum3_$LambdaImplementor$1) (ref.null $java.lang.Class))
+   (then
+    ;; (enums.Enum3.$LambdaImplementor$1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|enums.Enum3_...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__enums_Enum3_$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|enums.Enum3_...|__java_lang_String (ref.func $$getString_|enums.Enum3_...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return enums.Enum3.$LambdaImplementor$1.$class;
+  (return (global.get $f_$class__enums_Enum3_$LambdaImplementor$1))
+ )
+)
+
 ;;; Class<?> $LambdaImplementor$1.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@enums.Enum3.$LambdaImplementor$1
  (type $function.$getClassImpl__java_lang_Class)
@@ -457,8 +478,8 @@
  (local $this (ref null $enums.Enum3.$LambdaImplementor$1))
  (local.set $this (ref.cast_static $enums.Enum3.$LambdaImplementor$1 (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getEnums.Enum3.$LambdaImplementor$1();
-  (return (call $function.no.side.effects.$getEnums.Enum3.$LambdaImplementor$1__java_lang_Class (ref.func $$getEnums.Enum3.$LambdaImplementor$1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return enums.Enum3.$LambdaImplementor$1.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@enums.Enum3.$LambdaImplementor$1) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@enums.Enum3.$LambdaImplementor$1)
@@ -572,6 +593,22 @@
  )
 )
 
+;;; Class<T> Enum1.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@enums.Enum1
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((enums.Enum1.$class == null)) (enums.Enum1.$class = java.lang.Class.createForEnum(javaemul.internal.StringPool.$getString_|enums.Enum1|()));
+  (if (ref.eq (global.get $f_$class__enums_Enum1) (ref.null $java.lang.Class))
+   (then
+    ;; (enums.Enum1.$class = java.lang.Class.createForEnum(javaemul.internal.StringPool.$getString_|enums.Enum1|()));
+    (global.set $f_$class__enums_Enum1 (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|enums.Enum1|__java_lang_String (ref.func $$getString_|enums.Enum1|__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return enums.Enum1.$class;
+  (return (global.get $f_$class__enums_Enum1))
+ )
+)
+
 ;;; Class<?> Enum1.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@enums.Enum1
  (type $function.$getClassImpl__java_lang_Class)
@@ -580,8 +617,8 @@
  (local $this (ref null $enums.Enum1))
  (local.set $this (ref.cast_static $enums.Enum1 (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getEnums.Enum1();
-  (return (call $function.no.side.effects.$getEnums.Enum1__java_lang_Class (ref.func $$getEnums.Enum1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return enums.Enum1.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@enums.Enum1) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@enums.Enum1)
@@ -865,6 +902,22 @@
  )
 )
 
+;;; Class<T> Enum2.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@enums.Enum2
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((enums.Enum2.$class == null)) (enums.Enum2.$class = java.lang.Class.createForEnum(javaemul.internal.StringPool.$getString_|enums.Enum2|()));
+  (if (ref.eq (global.get $f_$class__enums_Enum2) (ref.null $java.lang.Class))
+   (then
+    ;; (enums.Enum2.$class = java.lang.Class.createForEnum(javaemul.internal.StringPool.$getString_|enums.Enum2|()));
+    (global.set $f_$class__enums_Enum2 (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|enums.Enum2|__java_lang_String (ref.func $$getString_|enums.Enum2|__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return enums.Enum2.$class;
+  (return (global.get $f_$class__enums_Enum2))
+ )
+)
+
 ;;; Class<?> Enum2.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@enums.Enum2
  (type $function.$getClassImpl__java_lang_Class)
@@ -873,8 +926,8 @@
  (local $this (ref null $enums.Enum2))
  (local.set $this (ref.cast_static $enums.Enum2 (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getEnums.Enum2();
-  (return (call $function.no.side.effects.$getEnums.Enum2__java_lang_Class (ref.func $$getEnums.Enum2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return enums.Enum2.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@enums.Enum2) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@enums.Enum2)
@@ -987,6 +1040,22 @@
  )
 )
 
+;;; Class<T> Enum3.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@enums.Enum3
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((enums.Enum3.$class == null)) (enums.Enum3.$class = java.lang.Class.createForEnum(javaemul.internal.StringPool.$getString_|enums.Enum3|()));
+  (if (ref.eq (global.get $f_$class__enums_Enum3) (ref.null $java.lang.Class))
+   (then
+    ;; (enums.Enum3.$class = java.lang.Class.createForEnum(javaemul.internal.StringPool.$getString_|enums.Enum3|()));
+    (global.set $f_$class__enums_Enum3 (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|enums.Enum3|__java_lang_String (ref.func $$getString_|enums.Enum3|__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return enums.Enum3.$class;
+  (return (global.get $f_$class__enums_Enum3))
+ )
+)
+
 ;;; Class<?> Enum3.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@enums.Enum3
  (type $function.$getClassImpl__java_lang_Class)
@@ -995,8 +1064,8 @@
  (local $this (ref null $enums.Enum3))
  (local.set $this (ref.cast_static $enums.Enum3 (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getEnums.Enum3();
-  (return (call $function.no.side.effects.$getEnums.Enum3__java_lang_Class (ref.func $$getEnums.Enum3__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return enums.Enum3.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@enums.Enum3) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@enums.Enum3)
@@ -1063,6 +1132,22 @@
  )
 )
 
+;;; Class<T> <anonymous> extends Enum2.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@enums.Enum2.1
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((enums.Enum2.1.$class == null)) (enums.Enum2.1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|enums.Enum2_1|(),enums.Enum2.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__enums_Enum2_1) (ref.null $java.lang.Class))
+   (then
+    ;; (enums.Enum2.1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|enums.Enum2_1|(),enums.Enum2.$getClassMetadata()));
+    (global.set $f_$class__enums_Enum2_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|enums.Enum2_1|__java_lang_String (ref.func $$getString_|enums.Enum2_1|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@enums.Enum2) )))
+   )
+  )
+  ;; return enums.Enum2.1.$class;
+  (return (global.get $f_$class__enums_Enum2_1))
+ )
+)
+
 ;;; Class<?> <anonymous> extends Enum2.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@enums.Enum2.1
  (type $function.$getClassImpl__java_lang_Class)
@@ -1071,8 +1156,8 @@
  (local $this (ref null $enums.Enum2.1))
  (local.set $this (ref.cast_static $enums.Enum2.1 (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getEnums.Enum2.1();
-  (return (call $function.no.side.effects.$getEnums.Enum2.1__java_lang_Class (ref.func $$getEnums.Enum2.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return enums.Enum2.1.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@enums.Enum2.1) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@enums.Enum2.1)

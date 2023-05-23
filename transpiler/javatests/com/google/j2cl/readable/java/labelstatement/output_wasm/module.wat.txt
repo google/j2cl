@@ -57,6 +57,7 @@
 
 ;;; Code for labelstatement.LabeledStatement [static fields]
 (global $f_$initialized__labelstatement_LabeledStatement (mut i32) (i32.const 0))
+(global $f_$class__labelstatement_LabeledStatement (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for labelstatement.LabeledStatement [methods]
 
@@ -276,6 +277,22 @@
  )
 )
 
+;;; Class<T> LabeledStatement.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@labelstatement.LabeledStatement
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((labelstatement.LabeledStatement.$class == null)) (labelstatement.LabeledStatement.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|labelstateme...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__labelstatement_LabeledStatement) (ref.null $java.lang.Class))
+   (then
+    ;; (labelstatement.LabeledStatement.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|labelstateme...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__labelstatement_LabeledStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|labelstateme...|__java_lang_String (ref.func $$getString_|labelstateme...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return labelstatement.LabeledStatement.$class;
+  (return (global.get $f_$class__labelstatement_LabeledStatement))
+ )
+)
+
 ;;; Class<?> LabeledStatement.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@labelstatement.LabeledStatement
  (type $function.$getClassImpl__java_lang_Class)
@@ -284,8 +301,8 @@
  (local $this (ref null $labelstatement.LabeledStatement))
  (local.set $this (ref.cast_static $labelstatement.LabeledStatement (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getLabelstatement.LabeledStatement();
-  (return (call $function.no.side.effects.$getLabelstatement.LabeledStatement__java_lang_Class (ref.func $$getLabelstatement.LabeledStatement__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return labelstatement.LabeledStatement.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@labelstatement.LabeledStatement) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@labelstatement.LabeledStatement)

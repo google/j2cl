@@ -239,14 +239,17 @@
 
 ;;; Code for importglobaljstypes.Date [static fields]
 (global $f_$initialized__importglobaljstypes_Date (mut i32) (i32.const 0))
+(global $f_$class__importglobaljstypes_Date (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for importglobaljstypes.Date.NativeDate [static fields]
 
 ;;; Code for importglobaljstypes.Date.NativeDate.$Overlay [static fields]
 (global $f_$initialized__importglobaljstypes_Date_NativeDate_$Overlay (mut i32) (i32.const 0))
+(global $f_$class__importglobaljstypes_Date_NativeDate_$Overlay (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for importglobaljstypes.Number [static fields]
 (global $f_$initialized__importglobaljstypes_Number (mut i32) (i32.const 0))
+(global $f_$class__importglobaljstypes_Number (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for importglobaljstypes.Number.NativeFunction [static fields]
 
@@ -254,17 +257,21 @@
 
 ;;; Code for importglobaljstypes.Number.NativeFunction.$Overlay [static fields]
 (global $f_$initialized__importglobaljstypes_Number_NativeFunction_$Overlay (mut i32) (i32.const 0))
+(global $f_$class__importglobaljstypes_Number_NativeFunction_$Overlay (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for importglobaljstypes.Number.MyLiteralType.$Overlay [static fields]
 (global $f_$initialized__importglobaljstypes_Number_MyLiteralType_$Overlay (mut i32) (i32.const 0))
+(global $f_$class__importglobaljstypes_Number_MyLiteralType_$Overlay (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for importglobaljstypes.RegExp [static fields]
 (global $f_$initialized__importglobaljstypes_RegExp (mut i32) (i32.const 0))
+(global $f_$class__importglobaljstypes_RegExp (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for importglobaljstypes.RegExp.NativeRegExp [static fields]
 
 ;;; Code for importglobaljstypes.RegExp.NativeRegExp.$Overlay [static fields]
 (global $f_$initialized__importglobaljstypes_RegExp_NativeRegExp_$Overlay (mut i32) (i32.const 0))
+(global $f_$class__importglobaljstypes_RegExp_NativeRegExp_$Overlay (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for importglobaljstypes.Date.NativeDate.$Overlay [methods]
 
@@ -287,6 +294,22 @@
  )
 )
 
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@importglobaljstypes.Date.NativeDate.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((importglobaljstypes.Date.NativeDate.$Overlay.$class == null)) (importglobaljstypes.Date.NativeDate.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|importglobal...|_1(),null));
+  (if (ref.eq (global.get $f_$class__importglobaljstypes_Date_NativeDate_$Overlay) (ref.null $java.lang.Class))
+   (then
+    ;; (importglobaljstypes.Date.NativeDate.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|importglobal...|_1(),null));
+    (global.set $f_$class__importglobaljstypes_Date_NativeDate_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|importglobal...|_1__java_lang_String (ref.func $$getString_|importglobal...|_1__java_lang_String@javaemul.internal.StringPool) )(ref.null $java.lang.Class)))
+   )
+  )
+  ;; return importglobaljstypes.Date.NativeDate.$Overlay.$class;
+  (return (global.get $f_$class__importglobaljstypes_Date_NativeDate_$Overlay))
+ )
+)
+
 ;;; Class<?> $Overlay.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@importglobaljstypes.Date.NativeDate.$Overlay
  (type $function.$getClassImpl__java_lang_Class)
@@ -295,8 +318,8 @@
  (local $this (ref null $importglobaljstypes.Date.NativeDate.$Overlay))
  (local.set $this (ref.cast_static $importglobaljstypes.Date.NativeDate.$Overlay (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getImportglobaljstypes.Date.NativeDate.$Overlay();
-  (return (call $function.no.side.effects.$getImportglobaljstypes.Date.NativeDate.$Overlay__java_lang_Class (ref.func $$getImportglobaljstypes.Date.NativeDate.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return importglobaljstypes.Date.NativeDate.$Overlay.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@importglobaljstypes.Date.NativeDate.$Overlay) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@importglobaljstypes.Date.NativeDate.$Overlay)
@@ -326,6 +349,22 @@
  )
 )
 
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@importglobaljstypes.Number.NativeFunction.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((importglobaljstypes.Number.NativeFunction.$Overlay.$class == null)) (importglobaljstypes.Number.NativeFunction.$Overlay.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|importglobal...|_3()));
+  (if (ref.eq (global.get $f_$class__importglobaljstypes_Number_NativeFunction_$Overlay) (ref.null $java.lang.Class))
+   (then
+    ;; (importglobaljstypes.Number.NativeFunction.$Overlay.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|importglobal...|_3()));
+    (global.set $f_$class__importglobaljstypes_Number_NativeFunction_$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|importglobal...|_3__java_lang_String (ref.func $$getString_|importglobal...|_3__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return importglobaljstypes.Number.NativeFunction.$Overlay.$class;
+  (return (global.get $f_$class__importglobaljstypes_Number_NativeFunction_$Overlay))
+ )
+)
+
 ;;; Code for importglobaljstypes.Number.MyLiteralType.$Overlay [methods]
 
 ;;; void $Overlay.$clinit()
@@ -344,6 +383,22 @@
   ;; (importglobaljstypes.Number.MyLiteralType.$Overlay.$initialized = true);
   ;;@ importglobaljstypes/Number.java:61:26
   (global.set $f_$initialized__importglobaljstypes_Number_MyLiteralType_$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@importglobaljstypes.Number.MyLiteralType.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((importglobaljstypes.Number.MyLiteralType.$Overlay.$class == null)) (importglobaljstypes.Number.MyLiteralType.$Overlay.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|importglobal...|_4()));
+  (if (ref.eq (global.get $f_$class__importglobaljstypes_Number_MyLiteralType_$Overlay) (ref.null $java.lang.Class))
+   (then
+    ;; (importglobaljstypes.Number.MyLiteralType.$Overlay.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|importglobal...|_4()));
+    (global.set $f_$class__importglobaljstypes_Number_MyLiteralType_$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|importglobal...|_4__java_lang_String (ref.func $$getString_|importglobal...|_4__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return importglobaljstypes.Number.MyLiteralType.$Overlay.$class;
+  (return (global.get $f_$class__importglobaljstypes_Number_MyLiteralType_$Overlay))
  )
 )
 
@@ -368,6 +423,22 @@
  )
 )
 
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@importglobaljstypes.RegExp.NativeRegExp.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((importglobaljstypes.RegExp.NativeRegExp.$Overlay.$class == null)) (importglobaljstypes.RegExp.NativeRegExp.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|importglobal...|_6(),null));
+  (if (ref.eq (global.get $f_$class__importglobaljstypes_RegExp_NativeRegExp_$Overlay) (ref.null $java.lang.Class))
+   (then
+    ;; (importglobaljstypes.RegExp.NativeRegExp.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|importglobal...|_6(),null));
+    (global.set $f_$class__importglobaljstypes_RegExp_NativeRegExp_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|importglobal...|_6__java_lang_String (ref.func $$getString_|importglobal...|_6__java_lang_String@javaemul.internal.StringPool) )(ref.null $java.lang.Class)))
+   )
+  )
+  ;; return importglobaljstypes.RegExp.NativeRegExp.$Overlay.$class;
+  (return (global.get $f_$class__importglobaljstypes_RegExp_NativeRegExp_$Overlay))
+ )
+)
+
 ;;; Class<?> $Overlay.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@importglobaljstypes.RegExp.NativeRegExp.$Overlay
  (type $function.$getClassImpl__java_lang_Class)
@@ -376,8 +447,8 @@
  (local $this (ref null $importglobaljstypes.RegExp.NativeRegExp.$Overlay))
  (local.set $this (ref.cast_static $importglobaljstypes.RegExp.NativeRegExp.$Overlay (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getImportglobaljstypes.RegExp.NativeRegExp.$Overlay();
-  (return (call $function.no.side.effects.$getImportglobaljstypes.RegExp.NativeRegExp.$Overlay__java_lang_Class (ref.func $$getImportglobaljstypes.RegExp.NativeRegExp.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return importglobaljstypes.RegExp.NativeRegExp.$Overlay.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@importglobaljstypes.RegExp.NativeRegExp.$Overlay) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@importglobaljstypes.RegExp.NativeRegExp.$Overlay)
@@ -470,6 +541,22 @@
  )
 )
 
+;;; Class<T> Date.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@importglobaljstypes.Date
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((importglobaljstypes.Date.$class == null)) (importglobaljstypes.Date.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|importglobal...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__importglobaljstypes_Date) (ref.null $java.lang.Class))
+   (then
+    ;; (importglobaljstypes.Date.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|importglobal...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__importglobaljstypes_Date (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|importglobal...|__java_lang_String (ref.func $$getString_|importglobal...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return importglobaljstypes.Date.$class;
+  (return (global.get $f_$class__importglobaljstypes_Date))
+ )
+)
+
 ;;; Class<?> Date.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@importglobaljstypes.Date
  (type $function.$getClassImpl__java_lang_Class)
@@ -478,8 +565,8 @@
  (local $this (ref null $importglobaljstypes.Date))
  (local.set $this (ref.cast_static $importglobaljstypes.Date (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getImportglobaljstypes.Date();
-  (return (call $function.no.side.effects.$getImportglobaljstypes.Date__java_lang_Class (ref.func $$getImportglobaljstypes.Date__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return importglobaljstypes.Date.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@importglobaljstypes.Date) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@importglobaljstypes.Date)
@@ -596,6 +683,22 @@
  )
 )
 
+;;; Class<T> Number.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@importglobaljstypes.Number
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((importglobaljstypes.Number.$class == null)) (importglobaljstypes.Number.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|importglobal...|_2(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__importglobaljstypes_Number) (ref.null $java.lang.Class))
+   (then
+    ;; (importglobaljstypes.Number.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|importglobal...|_2(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__importglobaljstypes_Number (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|importglobal...|_2__java_lang_String (ref.func $$getString_|importglobal...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return importglobaljstypes.Number.$class;
+  (return (global.get $f_$class__importglobaljstypes_Number))
+ )
+)
+
 ;;; Class<?> Number.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@importglobaljstypes.Number
  (type $function.$getClassImpl__java_lang_Class)
@@ -604,8 +707,8 @@
  (local $this (ref null $importglobaljstypes.Number))
  (local.set $this (ref.cast_static $importglobaljstypes.Number (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getImportglobaljstypes.Number();
-  (return (call $function.no.side.effects.$getImportglobaljstypes.Number__java_lang_Class (ref.func $$getImportglobaljstypes.Number__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return importglobaljstypes.Number.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@importglobaljstypes.Number) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@importglobaljstypes.Number)
@@ -687,6 +790,22 @@
  )
 )
 
+;;; Class<T> RegExp.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@importglobaljstypes.RegExp
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((importglobaljstypes.RegExp.$class == null)) (importglobaljstypes.RegExp.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|importglobal...|_5(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__importglobaljstypes_RegExp) (ref.null $java.lang.Class))
+   (then
+    ;; (importglobaljstypes.RegExp.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|importglobal...|_5(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__importglobaljstypes_RegExp (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|importglobal...|_5__java_lang_String (ref.func $$getString_|importglobal...|_5__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return importglobaljstypes.RegExp.$class;
+  (return (global.get $f_$class__importglobaljstypes_RegExp))
+ )
+)
+
 ;;; Class<?> RegExp.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@importglobaljstypes.RegExp
  (type $function.$getClassImpl__java_lang_Class)
@@ -695,8 +814,8 @@
  (local $this (ref null $importglobaljstypes.RegExp))
  (local.set $this (ref.cast_static $importglobaljstypes.RegExp (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getImportglobaljstypes.RegExp();
-  (return (call $function.no.side.effects.$getImportglobaljstypes.RegExp__java_lang_Class (ref.func $$getImportglobaljstypes.RegExp__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return importglobaljstypes.RegExp.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@importglobaljstypes.RegExp) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@importglobaljstypes.RegExp)

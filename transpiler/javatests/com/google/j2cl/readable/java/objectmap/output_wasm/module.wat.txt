@@ -42,6 +42,7 @@
 
 ;;; Code for objectmap.ObjectMap.$Overlay [static fields]
 (global $f_$initialized__objectmap_ObjectMap_$Overlay (mut i32) (i32.const 0))
+(global $f_$class__objectmap_ObjectMap_$Overlay (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for objectmap.ObjectMap.$Overlay [methods]
 
@@ -92,6 +93,22 @@
  )
 )
 
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@objectmap.ObjectMap.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((objectmap.ObjectMap.$Overlay.$class == null)) (objectmap.ObjectMap.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|objectmap.Ob...|(),null));
+  (if (ref.eq (global.get $f_$class__objectmap_ObjectMap_$Overlay) (ref.null $java.lang.Class))
+   (then
+    ;; (objectmap.ObjectMap.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|objectmap.Ob...|(),null));
+    (global.set $f_$class__objectmap_ObjectMap_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|objectmap.Ob...|__java_lang_String (ref.func $$getString_|objectmap.Ob...|__java_lang_String@javaemul.internal.StringPool) )(ref.null $java.lang.Class)))
+   )
+  )
+  ;; return objectmap.ObjectMap.$Overlay.$class;
+  (return (global.get $f_$class__objectmap_ObjectMap_$Overlay))
+ )
+)
+
 ;;; Class<?> $Overlay.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@objectmap.ObjectMap.$Overlay
  (type $function.$getClassImpl__java_lang_Class)
@@ -100,8 +117,8 @@
  (local $this (ref null $objectmap.ObjectMap.$Overlay))
  (local.set $this (ref.cast_static $objectmap.ObjectMap.$Overlay (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getObjectmap.ObjectMap.$Overlay();
-  (return (call $function.no.side.effects.$getObjectmap.ObjectMap.$Overlay__java_lang_Class (ref.func $$getObjectmap.ObjectMap.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return objectmap.ObjectMap.$Overlay.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@objectmap.ObjectMap.$Overlay) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@objectmap.ObjectMap.$Overlay)

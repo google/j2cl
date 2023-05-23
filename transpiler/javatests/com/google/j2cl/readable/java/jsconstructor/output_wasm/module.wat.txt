@@ -679,45 +679,59 @@
 
 ;;; Code for jsconstructor.JsConstructorClass [static fields]
 (global $f_$initialized__jsconstructor_JsConstructorClass (mut i32) (i32.const 0))
+(global $f_$class__jsconstructor_JsConstructorClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for jsconstructor.JsConstructorClass.A [static fields]
 (global $f_$initialized__jsconstructor_JsConstructorClass_A (mut i32) (i32.const 0))
+(global $f_$class__jsconstructor_JsConstructorClass_A (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for jsconstructor.JsConstructorClass.B [static fields]
 (global $f_$initialized__jsconstructor_JsConstructorClass_B (mut i32) (i32.const 0))
+(global $f_$class__jsconstructor_JsConstructorClass_B (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for jsconstructor.JsConstructorClass.C [static fields]
 (global $f_$initialized__jsconstructor_JsConstructorClass_C (mut i32) (i32.const 0))
+(global $f_$class__jsconstructor_JsConstructorClass_C (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for jsconstructor.JsConstructorClass.D [static fields]
 (global $f_$initialized__jsconstructor_JsConstructorClass_D (mut i32) (i32.const 0))
+(global $f_$class__jsconstructor_JsConstructorClass_D (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for jsconstructor.JsConstructorClass.E [static fields]
 (global $f_$initialized__jsconstructor_JsConstructorClass_E (mut i32) (i32.const 0))
+(global $f_$class__jsconstructor_JsConstructorClass_E (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for jsconstructor.JsConstructorClass.F [static fields]
 (global $f_$initialized__jsconstructor_JsConstructorClass_F (mut i32) (i32.const 0))
+(global $f_$class__jsconstructor_JsConstructorClass_F (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for jsconstructor.JsConstructorClass.G [static fields]
 (global $f_$initialized__jsconstructor_JsConstructorClass_G (mut i32) (i32.const 0))
+(global $f_$class__jsconstructor_JsConstructorClass_G (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for jsconstructor.JsConstructorClass.H [static fields]
 (global $f_$initialized__jsconstructor_JsConstructorClass_H (mut i32) (i32.const 0))
+(global $f_$class__jsconstructor_JsConstructorClass_H (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for jsconstructor.JsConstructorClass.Varargs [static fields]
 (global $f_$initialized__jsconstructor_JsConstructorClass_Varargs (mut i32) (i32.const 0))
+(global $f_$class__jsconstructor_JsConstructorClass_Varargs (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for jsconstructor.JsConstructorClass.SubVarargs [static fields]
 (global $f_$initialized__jsconstructor_JsConstructorClass_SubVarargs (mut i32) (i32.const 0))
+(global $f_$class__jsconstructor_JsConstructorClass_SubVarargs (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for jsconstructor.JsConstructorClass.InstanceVarargs [static fields]
 (global $f_$initialized__jsconstructor_JsConstructorClass_InstanceVarargs (mut i32) (i32.const 0))
+(global $f_$class__jsconstructor_JsConstructorClass_InstanceVarargs (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for jsconstructor.JsConstructorClass.RegularType [static fields]
 (global $f_$initialized__jsconstructor_JsConstructorClass_RegularType (mut i32) (i32.const 0))
+(global $f_$class__jsconstructor_JsConstructorClass_RegularType (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType [static fields]
 (global $f_$initialized__jsconstructor_JsConstructorClass_JsConstructorSubtypeOfRegularType (mut i32) (i32.const 0))
+(global $f_$class__jsconstructor_JsConstructorClass_JsConstructorSubtypeOfRegularType (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for jsconstructor.JsConstructorClass [methods]
 
@@ -775,6 +789,22 @@
  )
 )
 
+;;; Class<T> JsConstructorClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((jsconstructor.JsConstructorClass.$class == null)) (jsconstructor.JsConstructorClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__jsconstructor_JsConstructorClass) (ref.null $java.lang.Class))
+   (then
+    ;; (jsconstructor.JsConstructorClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__jsconstructor_JsConstructorClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsconstructo...|__java_lang_String (ref.func $$getString_|jsconstructo...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return jsconstructor.JsConstructorClass.$class;
+  (return (global.get $f_$class__jsconstructor_JsConstructorClass))
+ )
+)
+
 ;;; Class<?> JsConstructorClass.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass
  (type $function.$getClassImpl__java_lang_Class)
@@ -783,8 +813,8 @@
  (local $this (ref null $jsconstructor.JsConstructorClass))
  (local.set $this (ref.cast_static $jsconstructor.JsConstructorClass (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJsconstructor.JsConstructorClass();
-  (return (call $function.no.side.effects.$getJsconstructor.JsConstructorClass__java_lang_Class (ref.func $$getJsconstructor.JsConstructorClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return jsconstructor.JsConstructorClass.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass)
@@ -899,6 +929,22 @@
  )
 )
 
+;;; Class<T> A.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.A
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((jsconstructor.JsConstructorClass.A.$class == null)) (jsconstructor.JsConstructorClass.A.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_1(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__jsconstructor_JsConstructorClass_A) (ref.null $java.lang.Class))
+   (then
+    ;; (jsconstructor.JsConstructorClass.A.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_1(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__jsconstructor_JsConstructorClass_A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsconstructo...|_1__java_lang_String (ref.func $$getString_|jsconstructo...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return jsconstructor.JsConstructorClass.A.$class;
+  (return (global.get $f_$class__jsconstructor_JsConstructorClass_A))
+ )
+)
+
 ;;; Class<?> A.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.A
  (type $function.$getClassImpl__java_lang_Class)
@@ -907,8 +953,8 @@
  (local $this (ref null $jsconstructor.JsConstructorClass.A))
  (local.set $this (ref.cast_static $jsconstructor.JsConstructorClass.A (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJsconstructor.JsConstructorClass.A();
-  (return (call $function.no.side.effects.$getJsconstructor.JsConstructorClass.A__java_lang_Class (ref.func $$getJsconstructor.JsConstructorClass.A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return jsconstructor.JsConstructorClass.A.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.A) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.A)
@@ -969,6 +1015,22 @@
  )
 )
 
+;;; Class<T> G.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.G
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((jsconstructor.JsConstructorClass.G.$class == null)) (jsconstructor.JsConstructorClass.G.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_7(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__jsconstructor_JsConstructorClass_G) (ref.null $java.lang.Class))
+   (then
+    ;; (jsconstructor.JsConstructorClass.G.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_7(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__jsconstructor_JsConstructorClass_G (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsconstructo...|_7__java_lang_String (ref.func $$getString_|jsconstructo...|_7__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return jsconstructor.JsConstructorClass.G.$class;
+  (return (global.get $f_$class__jsconstructor_JsConstructorClass_G))
+ )
+)
+
 ;;; Class<?> G.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.G
  (type $function.$getClassImpl__java_lang_Class)
@@ -977,8 +1039,8 @@
  (local $this (ref null $jsconstructor.JsConstructorClass.G))
  (local.set $this (ref.cast_static $jsconstructor.JsConstructorClass.G (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJsconstructor.JsConstructorClass.G();
-  (return (call $function.no.side.effects.$getJsconstructor.JsConstructorClass.G__java_lang_Class (ref.func $$getJsconstructor.JsConstructorClass.G__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return jsconstructor.JsConstructorClass.G.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.G) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.G)
@@ -1041,6 +1103,22 @@
  )
 )
 
+;;; Class<T> RegularType.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.RegularType
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((jsconstructor.JsConstructorClass.RegularType.$class == null)) (jsconstructor.JsConstructorClass.RegularType.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_12(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__jsconstructor_JsConstructorClass_RegularType) (ref.null $java.lang.Class))
+   (then
+    ;; (jsconstructor.JsConstructorClass.RegularType.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_12(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__jsconstructor_JsConstructorClass_RegularType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsconstructo...|_12__java_lang_String (ref.func $$getString_|jsconstructo...|_12__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return jsconstructor.JsConstructorClass.RegularType.$class;
+  (return (global.get $f_$class__jsconstructor_JsConstructorClass_RegularType))
+ )
+)
+
 ;;; Class<?> RegularType.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.RegularType
  (type $function.$getClassImpl__java_lang_Class)
@@ -1049,8 +1127,8 @@
  (local $this (ref null $jsconstructor.JsConstructorClass.RegularType))
  (local.set $this (ref.cast_static $jsconstructor.JsConstructorClass.RegularType (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJsconstructor.JsConstructorClass.RegularType();
-  (return (call $function.no.side.effects.$getJsconstructor.JsConstructorClass.RegularType__java_lang_Class (ref.func $$getJsconstructor.JsConstructorClass.RegularType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return jsconstructor.JsConstructorClass.RegularType.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.RegularType) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.RegularType)
@@ -1204,6 +1282,22 @@
  )
 )
 
+;;; Class<T> B.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.B
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((jsconstructor.JsConstructorClass.B.$class == null)) (jsconstructor.JsConstructorClass.B.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_2(),jsconstructor.JsConstructorClass.A.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__jsconstructor_JsConstructorClass_B) (ref.null $java.lang.Class))
+   (then
+    ;; (jsconstructor.JsConstructorClass.B.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_2(),jsconstructor.JsConstructorClass.A.$getClassMetadata()));
+    (global.set $f_$class__jsconstructor_JsConstructorClass_B (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsconstructo...|_2__java_lang_String (ref.func $$getString_|jsconstructo...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.A) )))
+   )
+  )
+  ;; return jsconstructor.JsConstructorClass.B.$class;
+  (return (global.get $f_$class__jsconstructor_JsConstructorClass_B))
+ )
+)
+
 ;;; Class<?> B.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.B
  (type $function.$getClassImpl__java_lang_Class)
@@ -1212,8 +1306,8 @@
  (local $this (ref null $jsconstructor.JsConstructorClass.B))
  (local.set $this (ref.cast_static $jsconstructor.JsConstructorClass.B (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJsconstructor.JsConstructorClass.B();
-  (return (call $function.no.side.effects.$getJsconstructor.JsConstructorClass.B__java_lang_Class (ref.func $$getJsconstructor.JsConstructorClass.B__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return jsconstructor.JsConstructorClass.B.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.B) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.B)
@@ -1274,6 +1368,22 @@
  )
 )
 
+;;; Class<T> H.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.H
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((jsconstructor.JsConstructorClass.H.$class == null)) (jsconstructor.JsConstructorClass.H.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_8(),jsconstructor.JsConstructorClass.G.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__jsconstructor_JsConstructorClass_H) (ref.null $java.lang.Class))
+   (then
+    ;; (jsconstructor.JsConstructorClass.H.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_8(),jsconstructor.JsConstructorClass.G.$getClassMetadata()));
+    (global.set $f_$class__jsconstructor_JsConstructorClass_H (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsconstructo...|_8__java_lang_String (ref.func $$getString_|jsconstructo...|_8__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.G) )))
+   )
+  )
+  ;; return jsconstructor.JsConstructorClass.H.$class;
+  (return (global.get $f_$class__jsconstructor_JsConstructorClass_H))
+ )
+)
+
 ;;; Class<?> H.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.H
  (type $function.$getClassImpl__java_lang_Class)
@@ -1282,8 +1392,8 @@
  (local $this (ref null $jsconstructor.JsConstructorClass.H))
  (local.set $this (ref.cast_static $jsconstructor.JsConstructorClass.H (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJsconstructor.JsConstructorClass.H();
-  (return (call $function.no.side.effects.$getJsconstructor.JsConstructorClass.H__java_lang_Class (ref.func $$getJsconstructor.JsConstructorClass.H__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return jsconstructor.JsConstructorClass.H.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.H) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.H)
@@ -1346,6 +1456,22 @@
  )
 )
 
+;;; Class<T> Varargs.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.Varargs
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((jsconstructor.JsConstructorClass.Varargs.$class == null)) (jsconstructor.JsConstructorClass.Varargs.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_9(),jsconstructor.JsConstructorClass.A.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__jsconstructor_JsConstructorClass_Varargs) (ref.null $java.lang.Class))
+   (then
+    ;; (jsconstructor.JsConstructorClass.Varargs.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_9(),jsconstructor.JsConstructorClass.A.$getClassMetadata()));
+    (global.set $f_$class__jsconstructor_JsConstructorClass_Varargs (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsconstructo...|_9__java_lang_String (ref.func $$getString_|jsconstructo...|_9__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.A) )))
+   )
+  )
+  ;; return jsconstructor.JsConstructorClass.Varargs.$class;
+  (return (global.get $f_$class__jsconstructor_JsConstructorClass_Varargs))
+ )
+)
+
 ;;; Class<?> Varargs.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.Varargs
  (type $function.$getClassImpl__java_lang_Class)
@@ -1354,8 +1480,8 @@
  (local $this (ref null $jsconstructor.JsConstructorClass.Varargs))
  (local.set $this (ref.cast_static $jsconstructor.JsConstructorClass.Varargs (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJsconstructor.JsConstructorClass.Varargs();
-  (return (call $function.no.side.effects.$getJsconstructor.JsConstructorClass.Varargs__java_lang_Class (ref.func $$getJsconstructor.JsConstructorClass.Varargs__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return jsconstructor.JsConstructorClass.Varargs.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.Varargs) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.Varargs)
@@ -1420,6 +1546,22 @@
  )
 )
 
+;;; Class<T> InstanceVarargs.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.InstanceVarargs
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((jsconstructor.JsConstructorClass.InstanceVarargs.$class == null)) (jsconstructor.JsConstructorClass.InstanceVarargs.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_11(),jsconstructor.JsConstructorClass.A.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__jsconstructor_JsConstructorClass_InstanceVarargs) (ref.null $java.lang.Class))
+   (then
+    ;; (jsconstructor.JsConstructorClass.InstanceVarargs.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_11(),jsconstructor.JsConstructorClass.A.$getClassMetadata()));
+    (global.set $f_$class__jsconstructor_JsConstructorClass_InstanceVarargs (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsconstructo...|_11__java_lang_String (ref.func $$getString_|jsconstructo...|_11__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.A) )))
+   )
+  )
+  ;; return jsconstructor.JsConstructorClass.InstanceVarargs.$class;
+  (return (global.get $f_$class__jsconstructor_JsConstructorClass_InstanceVarargs))
+ )
+)
+
 ;;; Class<?> InstanceVarargs.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.InstanceVarargs
  (type $function.$getClassImpl__java_lang_Class)
@@ -1428,8 +1570,8 @@
  (local $this (ref null $jsconstructor.JsConstructorClass.InstanceVarargs))
  (local.set $this (ref.cast_static $jsconstructor.JsConstructorClass.InstanceVarargs (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJsconstructor.JsConstructorClass.InstanceVarargs();
-  (return (call $function.no.side.effects.$getJsconstructor.JsConstructorClass.InstanceVarargs__java_lang_Class (ref.func $$getJsconstructor.JsConstructorClass.InstanceVarargs__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return jsconstructor.JsConstructorClass.InstanceVarargs.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.InstanceVarargs) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.InstanceVarargs)
@@ -1524,6 +1666,22 @@
  )
 )
 
+;;; Class<T> JsConstructorSubtypeOfRegularType.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.$class == null)) (jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_13(),jsconstructor.JsConstructorClass.RegularType.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__jsconstructor_JsConstructorClass_JsConstructorSubtypeOfRegularType) (ref.null $java.lang.Class))
+   (then
+    ;; (jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_13(),jsconstructor.JsConstructorClass.RegularType.$getClassMetadata()));
+    (global.set $f_$class__jsconstructor_JsConstructorClass_JsConstructorSubtypeOfRegularType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsconstructo...|_13__java_lang_String (ref.func $$getString_|jsconstructo...|_13__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.RegularType) )))
+   )
+  )
+  ;; return jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.$class;
+  (return (global.get $f_$class__jsconstructor_JsConstructorClass_JsConstructorSubtypeOfRegularType))
+ )
+)
+
 ;;; Class<?> JsConstructorSubtypeOfRegularType.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType
  (type $function.$getClassImpl__java_lang_Class)
@@ -1532,8 +1690,8 @@
  (local $this (ref null $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType))
  (local.set $this (ref.cast_static $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType();
-  (return (call $function.no.side.effects.$getJsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType__java_lang_Class (ref.func $$getJsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType)
@@ -1652,6 +1810,22 @@
  )
 )
 
+;;; Class<T> C.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.C
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((jsconstructor.JsConstructorClass.C.$class == null)) (jsconstructor.JsConstructorClass.C.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_3(),jsconstructor.JsConstructorClass.B.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__jsconstructor_JsConstructorClass_C) (ref.null $java.lang.Class))
+   (then
+    ;; (jsconstructor.JsConstructorClass.C.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_3(),jsconstructor.JsConstructorClass.B.$getClassMetadata()));
+    (global.set $f_$class__jsconstructor_JsConstructorClass_C (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsconstructo...|_3__java_lang_String (ref.func $$getString_|jsconstructo...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.B) )))
+   )
+  )
+  ;; return jsconstructor.JsConstructorClass.C.$class;
+  (return (global.get $f_$class__jsconstructor_JsConstructorClass_C))
+ )
+)
+
 ;;; Class<?> C.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.C
  (type $function.$getClassImpl__java_lang_Class)
@@ -1660,8 +1834,8 @@
  (local $this (ref null $jsconstructor.JsConstructorClass.C))
  (local.set $this (ref.cast_static $jsconstructor.JsConstructorClass.C (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJsconstructor.JsConstructorClass.C();
-  (return (call $function.no.side.effects.$getJsconstructor.JsConstructorClass.C__java_lang_Class (ref.func $$getJsconstructor.JsConstructorClass.C__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return jsconstructor.JsConstructorClass.C.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.C) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.C)
@@ -1776,6 +1950,22 @@
  )
 )
 
+;;; Class<T> D.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.D
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((jsconstructor.JsConstructorClass.D.$class == null)) (jsconstructor.JsConstructorClass.D.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_4(),jsconstructor.JsConstructorClass.B.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__jsconstructor_JsConstructorClass_D) (ref.null $java.lang.Class))
+   (then
+    ;; (jsconstructor.JsConstructorClass.D.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_4(),jsconstructor.JsConstructorClass.B.$getClassMetadata()));
+    (global.set $f_$class__jsconstructor_JsConstructorClass_D (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsconstructo...|_4__java_lang_String (ref.func $$getString_|jsconstructo...|_4__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.B) )))
+   )
+  )
+  ;; return jsconstructor.JsConstructorClass.D.$class;
+  (return (global.get $f_$class__jsconstructor_JsConstructorClass_D))
+ )
+)
+
 ;;; Class<?> D.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.D
  (type $function.$getClassImpl__java_lang_Class)
@@ -1784,8 +1974,8 @@
  (local $this (ref null $jsconstructor.JsConstructorClass.D))
  (local.set $this (ref.cast_static $jsconstructor.JsConstructorClass.D (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJsconstructor.JsConstructorClass.D();
-  (return (call $function.no.side.effects.$getJsconstructor.JsConstructorClass.D__java_lang_Class (ref.func $$getJsconstructor.JsConstructorClass.D__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return jsconstructor.JsConstructorClass.D.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.D) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.D)
@@ -1902,6 +2092,22 @@
  )
 )
 
+;;; Class<T> SubVarargs.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.SubVarargs
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((jsconstructor.JsConstructorClass.SubVarargs.$class == null)) (jsconstructor.JsConstructorClass.SubVarargs.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_10(),jsconstructor.JsConstructorClass.Varargs.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__jsconstructor_JsConstructorClass_SubVarargs) (ref.null $java.lang.Class))
+   (then
+    ;; (jsconstructor.JsConstructorClass.SubVarargs.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_10(),jsconstructor.JsConstructorClass.Varargs.$getClassMetadata()));
+    (global.set $f_$class__jsconstructor_JsConstructorClass_SubVarargs (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsconstructo...|_10__java_lang_String (ref.func $$getString_|jsconstructo...|_10__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.Varargs) )))
+   )
+  )
+  ;; return jsconstructor.JsConstructorClass.SubVarargs.$class;
+  (return (global.get $f_$class__jsconstructor_JsConstructorClass_SubVarargs))
+ )
+)
+
 ;;; Class<?> SubVarargs.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.SubVarargs
  (type $function.$getClassImpl__java_lang_Class)
@@ -1910,8 +2116,8 @@
  (local $this (ref null $jsconstructor.JsConstructorClass.SubVarargs))
  (local.set $this (ref.cast_static $jsconstructor.JsConstructorClass.SubVarargs (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJsconstructor.JsConstructorClass.SubVarargs();
-  (return (call $function.no.side.effects.$getJsconstructor.JsConstructorClass.SubVarargs__java_lang_Class (ref.func $$getJsconstructor.JsConstructorClass.SubVarargs__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return jsconstructor.JsConstructorClass.SubVarargs.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.SubVarargs) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.SubVarargs)
@@ -1989,6 +2195,22 @@
  )
 )
 
+;;; Class<T> E.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.E
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((jsconstructor.JsConstructorClass.E.$class == null)) (jsconstructor.JsConstructorClass.E.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_5(),jsconstructor.JsConstructorClass.C.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__jsconstructor_JsConstructorClass_E) (ref.null $java.lang.Class))
+   (then
+    ;; (jsconstructor.JsConstructorClass.E.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_5(),jsconstructor.JsConstructorClass.C.$getClassMetadata()));
+    (global.set $f_$class__jsconstructor_JsConstructorClass_E (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsconstructo...|_5__java_lang_String (ref.func $$getString_|jsconstructo...|_5__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.C) )))
+   )
+  )
+  ;; return jsconstructor.JsConstructorClass.E.$class;
+  (return (global.get $f_$class__jsconstructor_JsConstructorClass_E))
+ )
+)
+
 ;;; Class<?> E.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.E
  (type $function.$getClassImpl__java_lang_Class)
@@ -1997,8 +2219,8 @@
  (local $this (ref null $jsconstructor.JsConstructorClass.E))
  (local.set $this (ref.cast_static $jsconstructor.JsConstructorClass.E (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJsconstructor.JsConstructorClass.E();
-  (return (call $function.no.side.effects.$getJsconstructor.JsConstructorClass.E__java_lang_Class (ref.func $$getJsconstructor.JsConstructorClass.E__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return jsconstructor.JsConstructorClass.E.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.E) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.E)
@@ -2078,6 +2300,22 @@
  )
 )
 
+;;; Class<T> F.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.F
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((jsconstructor.JsConstructorClass.F.$class == null)) (jsconstructor.JsConstructorClass.F.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_6(),jsconstructor.JsConstructorClass.C.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__jsconstructor_JsConstructorClass_F) (ref.null $java.lang.Class))
+   (then
+    ;; (jsconstructor.JsConstructorClass.F.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_6(),jsconstructor.JsConstructorClass.C.$getClassMetadata()));
+    (global.set $f_$class__jsconstructor_JsConstructorClass_F (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsconstructo...|_6__java_lang_String (ref.func $$getString_|jsconstructo...|_6__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.C) )))
+   )
+  )
+  ;; return jsconstructor.JsConstructorClass.F.$class;
+  (return (global.get $f_$class__jsconstructor_JsConstructorClass_F))
+ )
+)
+
 ;;; Class<?> F.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.F
  (type $function.$getClassImpl__java_lang_Class)
@@ -2086,8 +2324,8 @@
  (local $this (ref null $jsconstructor.JsConstructorClass.F))
  (local.set $this (ref.cast_static $jsconstructor.JsConstructorClass.F (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJsconstructor.JsConstructorClass.F();
-  (return (call $function.no.side.effects.$getJsconstructor.JsConstructorClass.F__java_lang_Class (ref.func $$getJsconstructor.JsConstructorClass.F__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return jsconstructor.JsConstructorClass.F.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.F) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.F)

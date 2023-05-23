@@ -49,6 +49,7 @@
 
 ;;; Code for multipleconstructors.MultipleConstructors [static fields]
 (global $f_$initialized__multipleconstructors_MultipleConstructors (mut i32) (i32.const 0))
+(global $f_$class__multipleconstructors_MultipleConstructors (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for multipleconstructors.MultipleConstructors [methods]
 
@@ -187,6 +188,22 @@
  )
 )
 
+;;; Class<T> MultipleConstructors.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@multipleconstructors.MultipleConstructors
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((multipleconstructors.MultipleConstructors.$class == null)) (multipleconstructors.MultipleConstructors.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|multiplecons...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__multipleconstructors_MultipleConstructors) (ref.null $java.lang.Class))
+   (then
+    ;; (multipleconstructors.MultipleConstructors.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|multiplecons...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__multipleconstructors_MultipleConstructors (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|multiplecons...|__java_lang_String (ref.func $$getString_|multiplecons...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return multipleconstructors.MultipleConstructors.$class;
+  (return (global.get $f_$class__multipleconstructors_MultipleConstructors))
+ )
+)
+
 ;;; Class<?> MultipleConstructors.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@multipleconstructors.MultipleConstructors
  (type $function.$getClassImpl__java_lang_Class)
@@ -195,8 +212,8 @@
  (local $this (ref null $multipleconstructors.MultipleConstructors))
  (local.set $this (ref.cast_static $multipleconstructors.MultipleConstructors (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getMultipleconstructors.MultipleConstructors();
-  (return (call $function.no.side.effects.$getMultipleconstructors.MultipleConstructors__java_lang_Class (ref.func $$getMultipleconstructors.MultipleConstructors__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return multipleconstructors.MultipleConstructors.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@multipleconstructors.MultipleConstructors) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@multipleconstructors.MultipleConstructors)

@@ -108,15 +108,19 @@
 
 ;;; Code for annotation.Main [static fields]
 (global $f_$initialized__annotation_Main (mut i32) (i32.const 0))
+(global $f_$class__annotation_Main (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for annotation.Main.Foo [static fields]
 (global $f_$initialized__annotation_Main_Foo (mut i32) (i32.const 0))
+(global $f_$class__annotation_Main_Foo (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for annotation.Main.Zoo [static fields]
 (global $f_$initialized__annotation_Main_Zoo (mut i32) (i32.const 0))
+(global $f_$class__annotation_Main_Zoo (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for annotation.Main.Bar [static fields]
 (global $f_$initialized__annotation_Main_Bar (mut i32) (i32.const 0))
+(global $f_$class__annotation_Main_Bar (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for annotation.Main.Foo [methods]
 
@@ -139,6 +143,22 @@
  )
 )
 
+;;; Class<T> Foo.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@annotation.Main.Foo
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((annotation.Main.Foo.$class == null)) (annotation.Main.Foo.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|annotation.M...|()));
+  (if (ref.eq (global.get $f_$class__annotation_Main_Foo) (ref.null $java.lang.Class))
+   (then
+    ;; (annotation.Main.Foo.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|annotation.M...|()));
+    (global.set $f_$class__annotation_Main_Foo (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|annotation.M...|__java_lang_String (ref.func $$getString_|annotation.M...|__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return annotation.Main.Foo.$class;
+  (return (global.get $f_$class__annotation_Main_Foo))
+ )
+)
+
 ;;; Code for annotation.Main.Zoo [methods]
 
 ;;; void Zoo.$clinit()
@@ -157,6 +177,22 @@
   ;; (annotation.Main.Zoo.$initialized = true);
   ;;@ annotation/Main.java:28:13
   (global.set $f_$initialized__annotation_Main_Zoo (i32.const 1))
+ )
+)
+
+;;; Class<T> Zoo.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@annotation.Main.Zoo
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((annotation.Main.Zoo.$class == null)) (annotation.Main.Zoo.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|annotation.M...|_1()));
+  (if (ref.eq (global.get $f_$class__annotation_Main_Zoo) (ref.null $java.lang.Class))
+   (then
+    ;; (annotation.Main.Zoo.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|annotation.M...|_1()));
+    (global.set $f_$class__annotation_Main_Zoo (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|annotation.M...|_1__java_lang_String (ref.func $$getString_|annotation.M...|_1__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return annotation.Main.Zoo.$class;
+  (return (global.get $f_$class__annotation_Main_Zoo))
  )
 )
 
@@ -216,6 +252,22 @@
  )
 )
 
+;;; Class<T> Main.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@annotation.Main
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((annotation.Main.$class == null)) (annotation.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|annotation.Main|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__annotation_Main) (ref.null $java.lang.Class))
+   (then
+    ;; (annotation.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|annotation.Main|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__annotation_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|annotation.Main|__java_lang_String (ref.func $$getString_|annotation.Main|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return annotation.Main.$class;
+  (return (global.get $f_$class__annotation_Main))
+ )
+)
+
 ;;; Class<?> Main.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@annotation.Main
  (type $function.$getClassImpl__java_lang_Class)
@@ -224,8 +276,8 @@
  (local $this (ref null $annotation.Main))
  (local.set $this (ref.cast_static $annotation.Main (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getAnnotation.Main();
-  (return (call $function.no.side.effects.$getAnnotation.Main__java_lang_Class (ref.func $$getAnnotation.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return annotation.Main.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@annotation.Main) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@annotation.Main)
@@ -311,6 +363,22 @@
  )
 )
 
+;;; Class<T> Bar.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@annotation.Main.Bar
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((annotation.Main.Bar.$class == null)) (annotation.Main.Bar.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|annotation.M...|_2(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__annotation_Main_Bar) (ref.null $java.lang.Class))
+   (then
+    ;; (annotation.Main.Bar.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|annotation.M...|_2(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__annotation_Main_Bar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|annotation.M...|_2__java_lang_String (ref.func $$getString_|annotation.M...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return annotation.Main.Bar.$class;
+  (return (global.get $f_$class__annotation_Main_Bar))
+ )
+)
+
 ;;; Class<?> Bar.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@annotation.Main.Bar
  (type $function.$getClassImpl__java_lang_Class)
@@ -319,8 +387,8 @@
  (local $this (ref null $annotation.Main.Bar))
  (local.set $this (ref.cast_static $annotation.Main.Bar (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getAnnotation.Main.Bar();
-  (return (call $function.no.side.effects.$getAnnotation.Main.Bar__java_lang_Class (ref.func $$getAnnotation.Main.Bar__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return annotation.Main.Bar.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@annotation.Main.Bar) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@annotation.Main.Bar)

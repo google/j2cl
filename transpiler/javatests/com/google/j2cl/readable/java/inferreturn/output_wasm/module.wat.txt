@@ -47,6 +47,7 @@
 
 ;;; Code for inferreturn.InferReturn [static fields]
 (global $f_$initialized__inferreturn_InferReturn (mut i32) (i32.const 0))
+(global $f_$class__inferreturn_InferReturn (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for inferreturn.InferReturn [methods]
 
@@ -221,6 +222,22 @@
  )
 )
 
+;;; Class<T> InferReturn.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@inferreturn.InferReturn
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((inferreturn.InferReturn.$class == null)) (inferreturn.InferReturn.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|inferreturn....|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__inferreturn_InferReturn) (ref.null $java.lang.Class))
+   (then
+    ;; (inferreturn.InferReturn.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|inferreturn....|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__inferreturn_InferReturn (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|inferreturn....|__java_lang_String (ref.func $$getString_|inferreturn....|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return inferreturn.InferReturn.$class;
+  (return (global.get $f_$class__inferreturn_InferReturn))
+ )
+)
+
 ;;; Class<?> InferReturn.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@inferreturn.InferReturn
  (type $function.$getClassImpl__java_lang_Class)
@@ -229,8 +246,8 @@
  (local $this (ref null $inferreturn.InferReturn))
  (local.set $this (ref.cast_static $inferreturn.InferReturn (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getInferreturn.InferReturn();
-  (return (call $function.no.side.effects.$getInferreturn.InferReturn__java_lang_Class (ref.func $$getInferreturn.InferReturn__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return inferreturn.InferReturn.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@inferreturn.InferReturn) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@inferreturn.InferReturn)

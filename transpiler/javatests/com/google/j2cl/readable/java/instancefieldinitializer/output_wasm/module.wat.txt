@@ -49,6 +49,7 @@
 
 ;;; Code for instancefieldinitializer.InstanceFieldInitializer [static fields]
 (global $f_$initialized__instancefieldinitializer_InstanceFieldInitializer (mut i32) (i32.const 0))
+(global $f_$class__instancefieldinitializer_InstanceFieldInitializer (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for instancefieldinitializer.InstanceFieldInitializer [methods]
 
@@ -120,6 +121,22 @@
  )
 )
 
+;;; Class<T> InstanceFieldInitializer.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@instancefieldinitializer.InstanceFieldInitializer
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((instancefieldinitializer.InstanceFieldInitializer.$class == null)) (instancefieldinitializer.InstanceFieldInitializer.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|instancefiel...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__instancefieldinitializer_InstanceFieldInitializer) (ref.null $java.lang.Class))
+   (then
+    ;; (instancefieldinitializer.InstanceFieldInitializer.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|instancefiel...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__instancefieldinitializer_InstanceFieldInitializer (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instancefiel...|__java_lang_String (ref.func $$getString_|instancefiel...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return instancefieldinitializer.InstanceFieldInitializer.$class;
+  (return (global.get $f_$class__instancefieldinitializer_InstanceFieldInitializer))
+ )
+)
+
 ;;; Class<?> InstanceFieldInitializer.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@instancefieldinitializer.InstanceFieldInitializer
  (type $function.$getClassImpl__java_lang_Class)
@@ -128,8 +145,8 @@
  (local $this (ref null $instancefieldinitializer.InstanceFieldInitializer))
  (local.set $this (ref.cast_static $instancefieldinitializer.InstanceFieldInitializer (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getInstancefieldinitializer.InstanceFieldInitializer();
-  (return (call $function.no.side.effects.$getInstancefieldinitializer.InstanceFieldInitializer__java_lang_Class (ref.func $$getInstancefieldinitializer.InstanceFieldInitializer__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return instancefieldinitializer.InstanceFieldInitializer.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@instancefieldinitializer.InstanceFieldInitializer) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@instancefieldinitializer.InstanceFieldInitializer)

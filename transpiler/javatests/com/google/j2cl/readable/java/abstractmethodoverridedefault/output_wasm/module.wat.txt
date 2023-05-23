@@ -169,21 +169,27 @@
 
 ;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault [static fields]
 (global $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault (mut i32) (i32.const 0))
+(global $f_$class__abstractmethodoverridedefault_AbstractMethodOverrideDefault (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault.I [static fields]
 (global $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault_I (mut i32) (i32.const 0))
+(global $f_$class__abstractmethodoverridedefault_AbstractMethodOverrideDefault_I (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault.J [static fields]
 (global $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault_J (mut i32) (i32.const 0))
+(global $f_$class__abstractmethodoverridedefault_AbstractMethodOverrideDefault_J (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault.A [static fields]
 (global $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault_A (mut i32) (i32.const 0))
+(global $f_$class__abstractmethodoverridedefault_AbstractMethodOverrideDefault_A (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault.B [static fields]
 (global $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault_B (mut i32) (i32.const 0))
+(global $f_$class__abstractmethodoverridedefault_AbstractMethodOverrideDefault_B (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault.C [static fields]
 (global $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault_C (mut i32) (i32.const 0))
+(global $f_$class__abstractmethodoverridedefault_AbstractMethodOverrideDefault_C (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault.I [methods]
 
@@ -215,6 +221,22 @@
  )
 )
 
+;;; Class<T> I.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault.I
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((abstractmethodoverridedefault.AbstractMethodOverrideDefault.I.$class == null)) (abstractmethodoverridedefault.AbstractMethodOverrideDefault.I.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|abstractmeth...|_1()));
+  (if (ref.eq (global.get $f_$class__abstractmethodoverridedefault_AbstractMethodOverrideDefault_I) (ref.null $java.lang.Class))
+   (then
+    ;; (abstractmethodoverridedefault.AbstractMethodOverrideDefault.I.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|abstractmeth...|_1()));
+    (global.set $f_$class__abstractmethodoverridedefault_AbstractMethodOverrideDefault_I (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|abstractmeth...|_1__java_lang_String (ref.func $$getString_|abstractmeth...|_1__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return abstractmethodoverridedefault.AbstractMethodOverrideDefault.I.$class;
+  (return (global.get $f_$class__abstractmethodoverridedefault_AbstractMethodOverrideDefault_I))
+ )
+)
+
 ;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault.J [methods]
 
 ;;; void J.foo()
@@ -242,6 +264,22 @@
   ;; (abstractmethodoverridedefault.AbstractMethodOverrideDefault.J.$initialized = true);
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:25:12
   (global.set $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault_J (i32.const 1))
+ )
+)
+
+;;; Class<T> J.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault.J
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((abstractmethodoverridedefault.AbstractMethodOverrideDefault.J.$class == null)) (abstractmethodoverridedefault.AbstractMethodOverrideDefault.J.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|abstractmeth...|_2()));
+  (if (ref.eq (global.get $f_$class__abstractmethodoverridedefault_AbstractMethodOverrideDefault_J) (ref.null $java.lang.Class))
+   (then
+    ;; (abstractmethodoverridedefault.AbstractMethodOverrideDefault.J.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|abstractmeth...|_2()));
+    (global.set $f_$class__abstractmethodoverridedefault_AbstractMethodOverrideDefault_J (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|abstractmeth...|_2__java_lang_String (ref.func $$getString_|abstractmeth...|_2__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return abstractmethodoverridedefault.AbstractMethodOverrideDefault.J.$class;
+  (return (global.get $f_$class__abstractmethodoverridedefault_AbstractMethodOverrideDefault_J))
  )
 )
 
@@ -301,6 +339,22 @@
  )
 )
 
+;;; Class<T> AbstractMethodOverrideDefault.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((abstractmethodoverridedefault.AbstractMethodOverrideDefault.$class == null)) (abstractmethodoverridedefault.AbstractMethodOverrideDefault.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|abstractmeth...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__abstractmethodoverridedefault_AbstractMethodOverrideDefault) (ref.null $java.lang.Class))
+   (then
+    ;; (abstractmethodoverridedefault.AbstractMethodOverrideDefault.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|abstractmeth...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__abstractmethodoverridedefault_AbstractMethodOverrideDefault (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|abstractmeth...|__java_lang_String (ref.func $$getString_|abstractmeth...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return abstractmethodoverridedefault.AbstractMethodOverrideDefault.$class;
+  (return (global.get $f_$class__abstractmethodoverridedefault_AbstractMethodOverrideDefault))
+ )
+)
+
 ;;; Class<?> AbstractMethodOverrideDefault.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault
  (type $function.$getClassImpl__java_lang_Class)
@@ -309,8 +363,8 @@
  (local $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault))
  (local.set $this (ref.cast_static $abstractmethodoverridedefault.AbstractMethodOverrideDefault (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault();
-  (return (call $function.no.side.effects.$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault__java_lang_Class (ref.func $$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return abstractmethodoverridedefault.AbstractMethodOverrideDefault.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault)
@@ -368,6 +422,22 @@
   ;; abstractmethodoverridedefault.AbstractMethodOverrideDefault.I.$clinit();
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:31:24
   (call $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.I )
+ )
+)
+
+;;; Class<T> A.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.$class == null)) (abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|abstractmeth...|_3(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__abstractmethodoverridedefault_AbstractMethodOverrideDefault_A) (ref.null $java.lang.Class))
+   (then
+    ;; (abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|abstractmeth...|_3(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__abstractmethodoverridedefault_AbstractMethodOverrideDefault_A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|abstractmeth...|_3__java_lang_String (ref.func $$getString_|abstractmeth...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.$class;
+  (return (global.get $f_$class__abstractmethodoverridedefault_AbstractMethodOverrideDefault_A))
  )
 )
 
@@ -432,6 +502,22 @@
   ;; abstractmethodoverridedefault.AbstractMethodOverrideDefault.J.$clinit();
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:36:24
   (call $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.J )
+ )
+)
+
+;;; Class<T> B.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault.B
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.$class == null)) (abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|abstractmeth...|_4(),abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__abstractmethodoverridedefault_AbstractMethodOverrideDefault_B) (ref.null $java.lang.Class))
+   (then
+    ;; (abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|abstractmeth...|_4(),abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.$getClassMetadata()));
+    (global.set $f_$class__abstractmethodoverridedefault_AbstractMethodOverrideDefault_B (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|abstractmeth...|_4__java_lang_String (ref.func $$getString_|abstractmeth...|_4__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A) )))
+   )
+  )
+  ;; return abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.$class;
+  (return (global.get $f_$class__abstractmethodoverridedefault_AbstractMethodOverrideDefault_B))
  )
 )
 
@@ -518,6 +604,22 @@
  )
 )
 
+;;; Class<T> C.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.$class == null)) (abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|abstractmeth...|_5(),abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__abstractmethodoverridedefault_AbstractMethodOverrideDefault_C) (ref.null $java.lang.Class))
+   (then
+    ;; (abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|abstractmeth...|_5(),abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.$getClassMetadata()));
+    (global.set $f_$class__abstractmethodoverridedefault_AbstractMethodOverrideDefault_C (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|abstractmeth...|_5__java_lang_String (ref.func $$getString_|abstractmeth...|_5__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A) )))
+   )
+  )
+  ;; return abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.$class;
+  (return (global.get $f_$class__abstractmethodoverridedefault_AbstractMethodOverrideDefault_C))
+ )
+)
+
 ;;; Class<?> C.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C
  (type $function.$getClassImpl__java_lang_Class)
@@ -526,8 +628,8 @@
  (local $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C))
  (local.set $this (ref.cast_static $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault.C();
-  (return (call $function.no.side.effects.$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault.C__java_lang_Class (ref.func $$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault.C__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C)

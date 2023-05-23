@@ -620,51 +620,67 @@
 
 ;;; Code for cast.CastGenerics [static fields]
 (global $f_$initialized__cast_CastGenerics (mut i32) (i32.const 0))
+(global $f_$class__cast_CastGenerics (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for cast.CastGenerics.1 [static fields]
 (global $f_$initialized__cast_CastGenerics_1 (mut i32) (i32.const 0))
+(global $f_$class__cast_CastGenerics_1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for cast.CastGenerics.A [static fields]
 (global $f_$initialized__cast_CastGenerics_A (mut i32) (i32.const 0))
+(global $f_$class__cast_CastGenerics_A (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for cast.CastGenerics.B [static fields]
 (global $f_$initialized__cast_CastGenerics_B (mut i32) (i32.const 0))
+(global $f_$class__cast_CastGenerics_B (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for cast.CastGenerics.BaseImplementor [static fields]
 (global $f_$initialized__cast_CastGenerics_BaseImplementor (mut i32) (i32.const 0))
+(global $f_$class__cast_CastGenerics_BaseImplementor (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for cast.CastGenerics.Implementor [static fields]
 (global $f_$initialized__cast_CastGenerics_Implementor (mut i32) (i32.const 0))
+(global $f_$class__cast_CastGenerics_Implementor (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for cast.CastGenerics.Container [static fields]
 (global $f_$initialized__cast_CastGenerics_Container (mut i32) (i32.const 0))
+(global $f_$class__cast_CastGenerics_Container (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for cast.CastGenerics.Empty1 [static fields]
 (global $f_$initialized__cast_CastGenerics_Empty1 (mut i32) (i32.const 0))
+(global $f_$class__cast_CastGenerics_Empty1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for cast.CastGenerics.Empty2 [static fields]
 (global $f_$initialized__cast_CastGenerics_Empty2 (mut i32) (i32.const 0))
+(global $f_$class__cast_CastGenerics_Empty2 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for cast.CastGenerics.Foo [static fields]
 (global $f_$initialized__cast_CastGenerics_Foo (mut i32) (i32.const 0))
+(global $f_$class__cast_CastGenerics_Foo (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for cast.CastGenerics.1Nested [static fields]
 (global $f_$initialized__cast_CastGenerics_1Nested (mut i32) (i32.const 0))
+(global $f_$class__cast_CastGenerics_1Nested (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for cast.CastPrimitives [static fields]
 (global $f_$initialized__cast_CastPrimitives (mut i32) (i32.const 0))
+(global $f_$class__cast_CastPrimitives (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for cast.CastPrimitives.IntValueHolder [static fields]
 (global $f_$initialized__cast_CastPrimitives_IntValueHolder (mut i32) (i32.const 0))
+(global $f_$class__cast_CastPrimitives_IntValueHolder (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for cast.CastPrimitives.LongValueHolder [static fields]
 (global $f_$initialized__cast_CastPrimitives_LongValueHolder (mut i32) (i32.const 0))
+(global $f_$class__cast_CastPrimitives_LongValueHolder (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for cast.Casts [static fields]
 (global $f_$initialized__cast_Casts (mut i32) (i32.const 0))
+(global $f_$class__cast_Casts (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for cast.Casts.Foo [static fields]
 (global $f_$initialized__cast_Casts_Foo (mut i32) (i32.const 0))
+(global $f_$class__cast_Casts_Foo (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for cast.CastGenerics.A [methods]
 
@@ -684,6 +700,22 @@
   ;; (cast.CastGenerics.A.$initialized = true);
   ;;@ cast/CastGenerics.java:25:12
   (global.set $f_$initialized__cast_CastGenerics_A (i32.const 1))
+ )
+)
+
+;;; Class<T> A.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@cast.CastGenerics.A
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((cast.CastGenerics.A.$class == null)) (cast.CastGenerics.A.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|cast.CastGen...|_2()));
+  (if (ref.eq (global.get $f_$class__cast_CastGenerics_A) (ref.null $java.lang.Class))
+   (then
+    ;; (cast.CastGenerics.A.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|cast.CastGen...|_2()));
+    (global.set $f_$class__cast_CastGenerics_A (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cast.CastGen...|_2__java_lang_String (ref.func $$getString_|cast.CastGen...|_2__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return cast.CastGenerics.A.$class;
+  (return (global.get $f_$class__cast_CastGenerics_A))
  )
 )
 
@@ -708,6 +740,22 @@
  )
 )
 
+;;; Class<T> B.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@cast.CastGenerics.B
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((cast.CastGenerics.B.$class == null)) (cast.CastGenerics.B.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|cast.CastGen...|_3()));
+  (if (ref.eq (global.get $f_$class__cast_CastGenerics_B) (ref.null $java.lang.Class))
+   (then
+    ;; (cast.CastGenerics.B.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|cast.CastGen...|_3()));
+    (global.set $f_$class__cast_CastGenerics_B (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cast.CastGen...|_3__java_lang_String (ref.func $$getString_|cast.CastGen...|_3__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return cast.CastGenerics.B.$class;
+  (return (global.get $f_$class__cast_CastGenerics_B))
+ )
+)
+
 ;;; Code for cast.CastGenerics.Empty1 [methods]
 
 ;;; void Empty1.$clinit()
@@ -729,6 +777,22 @@
  )
 )
 
+;;; Class<T> Empty1.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@cast.CastGenerics.Empty1
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((cast.CastGenerics.Empty1.$class == null)) (cast.CastGenerics.Empty1.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|cast.CastGen...|_7()));
+  (if (ref.eq (global.get $f_$class__cast_CastGenerics_Empty1) (ref.null $java.lang.Class))
+   (then
+    ;; (cast.CastGenerics.Empty1.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|cast.CastGen...|_7()));
+    (global.set $f_$class__cast_CastGenerics_Empty1 (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cast.CastGen...|_7__java_lang_String (ref.func $$getString_|cast.CastGen...|_7__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return cast.CastGenerics.Empty1.$class;
+  (return (global.get $f_$class__cast_CastGenerics_Empty1))
+ )
+)
+
 ;;; Code for cast.CastGenerics.Empty2 [methods]
 
 ;;; void Empty2.$clinit()
@@ -747,6 +811,22 @@
   ;; (cast.CastGenerics.Empty2.$initialized = true);
   ;;@ cast/CastGenerics.java:120:12
   (global.set $f_$initialized__cast_CastGenerics_Empty2 (i32.const 1))
+ )
+)
+
+;;; Class<T> Empty2.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@cast.CastGenerics.Empty2
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((cast.CastGenerics.Empty2.$class == null)) (cast.CastGenerics.Empty2.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|cast.CastGen...|_8()));
+  (if (ref.eq (global.get $f_$class__cast_CastGenerics_Empty2) (ref.null $java.lang.Class))
+   (then
+    ;; (cast.CastGenerics.Empty2.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|cast.CastGen...|_8()));
+    (global.set $f_$class__cast_CastGenerics_Empty2 (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cast.CastGen...|_8__java_lang_String (ref.func $$getString_|cast.CastGen...|_8__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return cast.CastGenerics.Empty2.$class;
+  (return (global.get $f_$class__cast_CastGenerics_Empty2))
  )
 )
 
@@ -1134,6 +1214,22 @@
  )
 )
 
+;;; Class<T> CastGenerics.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@cast.CastGenerics
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((cast.CastGenerics.$class == null)) (cast.CastGenerics.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|cast.CastGen...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__cast_CastGenerics) (ref.null $java.lang.Class))
+   (then
+    ;; (cast.CastGenerics.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|cast.CastGen...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__cast_CastGenerics (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cast.CastGen...|__java_lang_String (ref.func $$getString_|cast.CastGen...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return cast.CastGenerics.$class;
+  (return (global.get $f_$class__cast_CastGenerics))
+ )
+)
+
 ;;; Class<?> CastGenerics.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@cast.CastGenerics
  (type $function.$getClassImpl__java_lang_Class)
@@ -1142,8 +1238,8 @@
  (local $this (ref null $cast.CastGenerics))
  (local.set $this (ref.cast_static $cast.CastGenerics (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getCast.CastGenerics();
-  (return (call $function.no.side.effects.$getCast.CastGenerics__java_lang_Class (ref.func $$getCast.CastGenerics__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return cast.CastGenerics.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cast.CastGenerics) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cast.CastGenerics)
@@ -1183,6 +1279,22 @@
   ;; java.lang.Object.$clinit();
   ;;@ cast/CastGenerics.java:33:32
   (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<T> BaseImplementor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@cast.CastGenerics.BaseImplementor
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((cast.CastGenerics.BaseImplementor.$class == null)) (cast.CastGenerics.BaseImplementor.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|cast.CastGen...|_4(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__cast_CastGenerics_BaseImplementor) (ref.null $java.lang.Class))
+   (then
+    ;; (cast.CastGenerics.BaseImplementor.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|cast.CastGen...|_4(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__cast_CastGenerics_BaseImplementor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cast.CastGen...|_4__java_lang_String (ref.func $$getString_|cast.CastGen...|_4__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return cast.CastGenerics.BaseImplementor.$class;
+  (return (global.get $f_$class__cast_CastGenerics_BaseImplementor))
  )
 )
 
@@ -1255,6 +1367,22 @@
  )
 )
 
+;;; Class<T> Container.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@cast.CastGenerics.Container
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((cast.CastGenerics.Container.$class == null)) (cast.CastGenerics.Container.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|cast.CastGen...|_6(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__cast_CastGenerics_Container) (ref.null $java.lang.Class))
+   (then
+    ;; (cast.CastGenerics.Container.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|cast.CastGen...|_6(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__cast_CastGenerics_Container (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cast.CastGen...|_6__java_lang_String (ref.func $$getString_|cast.CastGen...|_6__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return cast.CastGenerics.Container.$class;
+  (return (global.get $f_$class__cast_CastGenerics_Container))
+ )
+)
+
 ;;; Class<?> Container.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@cast.CastGenerics.Container
  (type $function.$getClassImpl__java_lang_Class)
@@ -1263,8 +1391,8 @@
  (local $this (ref null $cast.CastGenerics.Container))
  (local.set $this (ref.cast_static $cast.CastGenerics.Container (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getCast.CastGenerics.Container();
-  (return (call $function.no.side.effects.$getCast.CastGenerics.Container__java_lang_Class (ref.func $$getCast.CastGenerics.Container__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return cast.CastGenerics.Container.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cast.CastGenerics.Container) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cast.CastGenerics.Container)
@@ -1325,6 +1453,22 @@
  )
 )
 
+;;; Class<T> Foo.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@cast.CastGenerics.Foo
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((cast.CastGenerics.Foo.$class == null)) (cast.CastGenerics.Foo.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|cast.CastGen...|_9(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__cast_CastGenerics_Foo) (ref.null $java.lang.Class))
+   (then
+    ;; (cast.CastGenerics.Foo.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|cast.CastGen...|_9(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__cast_CastGenerics_Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cast.CastGen...|_9__java_lang_String (ref.func $$getString_|cast.CastGen...|_9__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return cast.CastGenerics.Foo.$class;
+  (return (global.get $f_$class__cast_CastGenerics_Foo))
+ )
+)
+
 ;;; Class<?> Foo.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@cast.CastGenerics.Foo
  (type $function.$getClassImpl__java_lang_Class)
@@ -1333,8 +1477,8 @@
  (local $this (ref null $cast.CastGenerics.Foo))
  (local.set $this (ref.cast_static $cast.CastGenerics.Foo (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getCast.CastGenerics.Foo();
-  (return (call $function.no.side.effects.$getCast.CastGenerics.Foo__java_lang_Class (ref.func $$getCast.CastGenerics.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return cast.CastGenerics.Foo.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cast.CastGenerics.Foo) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cast.CastGenerics.Foo)
@@ -1410,6 +1554,22 @@
  )
 )
 
+;;; Class<T> Nested.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@cast.CastGenerics.1Nested
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((cast.CastGenerics.1Nested.$class == null)) (cast.CastGenerics.1Nested.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|cast.CastGen...|_10(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__cast_CastGenerics_1Nested) (ref.null $java.lang.Class))
+   (then
+    ;; (cast.CastGenerics.1Nested.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|cast.CastGen...|_10(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__cast_CastGenerics_1Nested (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cast.CastGen...|_10__java_lang_String (ref.func $$getString_|cast.CastGen...|_10__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return cast.CastGenerics.1Nested.$class;
+  (return (global.get $f_$class__cast_CastGenerics_1Nested))
+ )
+)
+
 ;;; Class<?> Nested.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@cast.CastGenerics.1Nested
  (type $function.$getClassImpl__java_lang_Class)
@@ -1418,8 +1578,8 @@
  (local $this (ref null $cast.CastGenerics.1Nested))
  (local.set $this (ref.cast_static $cast.CastGenerics.1Nested (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getCast.CastGenerics.1Nested();
-  (return (call $function.no.side.effects.$getCast.CastGenerics.1Nested__java_lang_Class (ref.func $$getCast.CastGenerics.1Nested__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return cast.CastGenerics.1Nested.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cast.CastGenerics.1Nested) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cast.CastGenerics.1Nested)
@@ -2079,6 +2239,22 @@
  )
 )
 
+;;; Class<T> CastPrimitives.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@cast.CastPrimitives
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((cast.CastPrimitives.$class == null)) (cast.CastPrimitives.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|cast.CastPri...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__cast_CastPrimitives) (ref.null $java.lang.Class))
+   (then
+    ;; (cast.CastPrimitives.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|cast.CastPri...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__cast_CastPrimitives (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cast.CastPri...|__java_lang_String (ref.func $$getString_|cast.CastPri...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return cast.CastPrimitives.$class;
+  (return (global.get $f_$class__cast_CastPrimitives))
+ )
+)
+
 ;;; Class<?> CastPrimitives.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@cast.CastPrimitives
  (type $function.$getClassImpl__java_lang_Class)
@@ -2087,8 +2263,8 @@
  (local $this (ref null $cast.CastPrimitives))
  (local.set $this (ref.cast_static $cast.CastPrimitives (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getCast.CastPrimitives();
-  (return (call $function.no.side.effects.$getCast.CastPrimitives__java_lang_Class (ref.func $$getCast.CastPrimitives__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return cast.CastPrimitives.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cast.CastPrimitives) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cast.CastPrimitives)
@@ -2151,6 +2327,22 @@
  )
 )
 
+;;; Class<T> IntValueHolder.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@cast.CastPrimitives.IntValueHolder
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((cast.CastPrimitives.IntValueHolder.$class == null)) (cast.CastPrimitives.IntValueHolder.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|cast.CastPri...|_1(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__cast_CastPrimitives_IntValueHolder) (ref.null $java.lang.Class))
+   (then
+    ;; (cast.CastPrimitives.IntValueHolder.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|cast.CastPri...|_1(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__cast_CastPrimitives_IntValueHolder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cast.CastPri...|_1__java_lang_String (ref.func $$getString_|cast.CastPri...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return cast.CastPrimitives.IntValueHolder.$class;
+  (return (global.get $f_$class__cast_CastPrimitives_IntValueHolder))
+ )
+)
+
 ;;; Class<?> IntValueHolder.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@cast.CastPrimitives.IntValueHolder
  (type $function.$getClassImpl__java_lang_Class)
@@ -2159,8 +2351,8 @@
  (local $this (ref null $cast.CastPrimitives.IntValueHolder))
  (local.set $this (ref.cast_static $cast.CastPrimitives.IntValueHolder (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getCast.CastPrimitives.IntValueHolder();
-  (return (call $function.no.side.effects.$getCast.CastPrimitives.IntValueHolder__java_lang_Class (ref.func $$getCast.CastPrimitives.IntValueHolder__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return cast.CastPrimitives.IntValueHolder.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cast.CastPrimitives.IntValueHolder) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cast.CastPrimitives.IntValueHolder)
@@ -2223,6 +2415,22 @@
  )
 )
 
+;;; Class<T> LongValueHolder.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@cast.CastPrimitives.LongValueHolder
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((cast.CastPrimitives.LongValueHolder.$class == null)) (cast.CastPrimitives.LongValueHolder.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|cast.CastPri...|_2(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__cast_CastPrimitives_LongValueHolder) (ref.null $java.lang.Class))
+   (then
+    ;; (cast.CastPrimitives.LongValueHolder.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|cast.CastPri...|_2(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__cast_CastPrimitives_LongValueHolder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cast.CastPri...|_2__java_lang_String (ref.func $$getString_|cast.CastPri...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return cast.CastPrimitives.LongValueHolder.$class;
+  (return (global.get $f_$class__cast_CastPrimitives_LongValueHolder))
+ )
+)
+
 ;;; Class<?> LongValueHolder.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@cast.CastPrimitives.LongValueHolder
  (type $function.$getClassImpl__java_lang_Class)
@@ -2231,8 +2439,8 @@
  (local $this (ref null $cast.CastPrimitives.LongValueHolder))
  (local.set $this (ref.cast_static $cast.CastPrimitives.LongValueHolder (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getCast.CastPrimitives.LongValueHolder();
-  (return (call $function.no.side.effects.$getCast.CastPrimitives.LongValueHolder__java_lang_Class (ref.func $$getCast.CastPrimitives.LongValueHolder__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return cast.CastPrimitives.LongValueHolder.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cast.CastPrimitives.LongValueHolder) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cast.CastPrimitives.LongValueHolder)
@@ -2654,6 +2862,22 @@
  )
 )
 
+;;; Class<T> Casts.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@cast.Casts
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((cast.Casts.$class == null)) (cast.Casts.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|cast.Casts|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__cast_Casts) (ref.null $java.lang.Class))
+   (then
+    ;; (cast.Casts.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|cast.Casts|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__cast_Casts (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cast.Casts|__java_lang_String (ref.func $$getString_|cast.Casts|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return cast.Casts.$class;
+  (return (global.get $f_$class__cast_Casts))
+ )
+)
+
 ;;; Class<?> Casts.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@cast.Casts
  (type $function.$getClassImpl__java_lang_Class)
@@ -2662,8 +2886,8 @@
  (local $this (ref null $cast.Casts))
  (local.set $this (ref.cast_static $cast.Casts (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getCast.Casts();
-  (return (call $function.no.side.effects.$getCast.Casts__java_lang_Class (ref.func $$getCast.Casts__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return cast.Casts.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cast.Casts) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cast.Casts)
@@ -2756,6 +2980,22 @@
  )
 )
 
+;;; Class<T> Foo.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@cast.Casts.Foo
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((cast.Casts.Foo.$class == null)) (cast.Casts.Foo.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|cast.Casts_Foo|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__cast_Casts_Foo) (ref.null $java.lang.Class))
+   (then
+    ;; (cast.Casts.Foo.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|cast.Casts_Foo|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__cast_Casts_Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cast.Casts_Foo|__java_lang_String (ref.func $$getString_|cast.Casts_Foo|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return cast.Casts.Foo.$class;
+  (return (global.get $f_$class__cast_Casts_Foo))
+ )
+)
+
 ;;; Class<?> Foo.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@cast.Casts.Foo
  (type $function.$getClassImpl__java_lang_Class)
@@ -2764,8 +3004,8 @@
  (local $this (ref null $cast.Casts.Foo))
  (local.set $this (ref.cast_static $cast.Casts.Foo (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getCast.Casts.Foo();
-  (return (call $function.no.side.effects.$getCast.Casts.Foo__java_lang_Class (ref.func $$getCast.Casts.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return cast.Casts.Foo.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cast.Casts.Foo) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cast.Casts.Foo)
@@ -2826,6 +3066,22 @@
  )
 )
 
+;;; Class<T> <anonymous> extends Foo<T>.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@cast.CastGenerics.1
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((cast.CastGenerics.1.$class == null)) (cast.CastGenerics.1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|cast.CastGen...|_1(),cast.CastGenerics.Foo.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__cast_CastGenerics_1) (ref.null $java.lang.Class))
+   (then
+    ;; (cast.CastGenerics.1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|cast.CastGen...|_1(),cast.CastGenerics.Foo.$getClassMetadata()));
+    (global.set $f_$class__cast_CastGenerics_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cast.CastGen...|_1__java_lang_String (ref.func $$getString_|cast.CastGen...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cast.CastGenerics.Foo) )))
+   )
+  )
+  ;; return cast.CastGenerics.1.$class;
+  (return (global.get $f_$class__cast_CastGenerics_1))
+ )
+)
+
 ;;; Class<?> <anonymous> extends Foo<T>.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@cast.CastGenerics.1
  (type $function.$getClassImpl__java_lang_Class)
@@ -2834,8 +3090,8 @@
  (local $this (ref null $cast.CastGenerics.1))
  (local.set $this (ref.cast_static $cast.CastGenerics.1 (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getCast.CastGenerics.1();
-  (return (call $function.no.side.effects.$getCast.CastGenerics.1__java_lang_Class (ref.func $$getCast.CastGenerics.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return cast.CastGenerics.1.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cast.CastGenerics.1) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cast.CastGenerics.1)
@@ -2917,6 +3173,22 @@
  )
 )
 
+;;; Class<T> Implementor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@cast.CastGenerics.Implementor
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((cast.CastGenerics.Implementor.$class == null)) (cast.CastGenerics.Implementor.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|cast.CastGen...|_5(),cast.CastGenerics.BaseImplementor.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__cast_CastGenerics_Implementor) (ref.null $java.lang.Class))
+   (then
+    ;; (cast.CastGenerics.Implementor.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|cast.CastGen...|_5(),cast.CastGenerics.BaseImplementor.$getClassMetadata()));
+    (global.set $f_$class__cast_CastGenerics_Implementor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cast.CastGen...|_5__java_lang_String (ref.func $$getString_|cast.CastGen...|_5__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cast.CastGenerics.BaseImplementor) )))
+   )
+  )
+  ;; return cast.CastGenerics.Implementor.$class;
+  (return (global.get $f_$class__cast_CastGenerics_Implementor))
+ )
+)
+
 ;;; Class<?> Implementor.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@cast.CastGenerics.Implementor
  (type $function.$getClassImpl__java_lang_Class)
@@ -2925,8 +3197,8 @@
  (local $this (ref null $cast.CastGenerics.Implementor))
  (local.set $this (ref.cast_static $cast.CastGenerics.Implementor (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getCast.CastGenerics.Implementor();
-  (return (call $function.no.side.effects.$getCast.CastGenerics.Implementor__java_lang_Class (ref.func $$getCast.CastGenerics.Implementor__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return cast.CastGenerics.Implementor.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cast.CastGenerics.Implementor) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cast.CastGenerics.Implementor)

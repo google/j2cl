@@ -23,10 +23,12 @@ import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
+import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.StringLiteral;
@@ -88,13 +90,30 @@ public class ImplementStringCompileTimeConstants extends LibraryNormalizationPas
       return literalMethodByString.get(value);
     }
 
-    String holderName = "string_" + createSnippet(value);
+    String snippet = createSnippet(value);
     MethodDescriptor getLiteralMethod =
-        type.synthesizeLazilyInitializedField(holderName, synthesizeStringCreation(stringLiteral));
+        getLazStringLiteralGettterMethodDescriptor(
+            type.getTypeDescriptor(), "$getString_" + snippet);
+    type.synthesizeLazilyInitializedField(
+        "$string_" + snippet, synthesizeStringCreation(stringLiteral), getLiteralMethod);
 
     literalMethodByString.put(value, getLiteralMethod);
 
     return getLiteralMethod;
+  }
+
+  /** Returns the descriptor for the getter of the string literal. */
+  private static MethodDescriptor getLazStringLiteralGettterMethodDescriptor(
+      DeclaredTypeDescriptor enclosingTypeDescriptor, String name) {
+    return MethodDescriptor.newBuilder()
+        .setName(name)
+        .setReturnTypeDescriptor(TypeDescriptors.get().javaLangString)
+        .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
+        .setOrigin(MethodOrigin.SYNTHETIC_STRING_LITERAL_GETTER)
+        .setStatic(true)
+        .setSynthetic(true)
+        .setSideEffectFree(true)
+        .build();
   }
 
   private final Multiset<String> snippets = HashMultiset.create();

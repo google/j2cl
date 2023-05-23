@@ -280,24 +280,31 @@
 
 ;;; Code for typeannotations.ParametricType [static fields]
 (global $f_$initialized__typeannotations_ParametricType (mut i32) (i32.const 0))
+(global $f_$class__typeannotations_ParametricType (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for typeannotations.AbstractType [static fields]
 (global $f_$initialized__typeannotations_AbstractType (mut i32) (i32.const 0))
+(global $f_$class__typeannotations_AbstractType (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for typeannotations.AbstractTypeNonNull [static fields]
 (global $f_$initialized__typeannotations_AbstractTypeNonNull (mut i32) (i32.const 0))
+(global $f_$class__typeannotations_AbstractTypeNonNull (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for typeannotations.Parent [static fields]
 (global $f_$initialized__typeannotations_Parent (mut i32) (i32.const 0))
+(global $f_$class__typeannotations_Parent (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for typeannotations.ChildWithNullableParent [static fields]
 (global $f_$initialized__typeannotations_ChildWithNullableParent (mut i32) (i32.const 0))
+(global $f_$class__typeannotations_ChildWithNullableParent (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for typeannotations.ChildWithNonNullableParent [static fields]
 (global $f_$initialized__typeannotations_ChildWithNonNullableParent (mut i32) (i32.const 0))
+(global $f_$class__typeannotations_ChildWithNonNullableParent (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for typeannotations.TypeAnnotations [static fields]
 (global $f_$initialized__typeannotations_TypeAnnotations (mut i32) (i32.const 0))
+(global $f_$class__typeannotations_TypeAnnotations (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for typeannotations.ParametricType [methods]
 
@@ -331,6 +338,22 @@
   ;; (typeannotations.ParametricType.$initialized = true);
   ;;@ typeannotations/ParametricType.java:23:10
   (global.set $f_$initialized__typeannotations_ParametricType (i32.const 1))
+ )
+)
+
+;;; Class<T> ParametricType.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@typeannotations.ParametricType
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((typeannotations.ParametricType.$class == null)) (typeannotations.ParametricType.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|typeannotati...|()));
+  (if (ref.eq (global.get $f_$class__typeannotations_ParametricType) (ref.null $java.lang.Class))
+   (then
+    ;; (typeannotations.ParametricType.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|typeannotati...|()));
+    (global.set $f_$class__typeannotations_ParametricType (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typeannotati...|__java_lang_String (ref.func $$getString_|typeannotati...|__java_lang_String@javaemul.internal.StringPool) )))
+   )
+  )
+  ;; return typeannotations.ParametricType.$class;
+  (return (global.get $f_$class__typeannotations_ParametricType))
  )
 )
 
@@ -392,6 +415,22 @@
  )
 )
 
+;;; Class<T> AbstractType.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@typeannotations.AbstractType
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((typeannotations.AbstractType.$class == null)) (typeannotations.AbstractType.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|typeannotati...|_1(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__typeannotations_AbstractType) (ref.null $java.lang.Class))
+   (then
+    ;; (typeannotations.AbstractType.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|typeannotati...|_1(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__typeannotations_AbstractType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typeannotati...|_1__java_lang_String (ref.func $$getString_|typeannotati...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return typeannotations.AbstractType.$class;
+  (return (global.get $f_$class__typeannotations_AbstractType))
+ )
+)
+
 ;;; Code for typeannotations.AbstractTypeNonNull [methods]
 
 ;;; void AbstractTypeNonNull.$ctor()
@@ -447,6 +486,22 @@
   ;; typeannotations.ParametricType.$clinit();
   ;;@ typeannotations/TypeAnnotations.java:26:15
   (call $$clinit__void@typeannotations.ParametricType )
+ )
+)
+
+;;; Class<T> AbstractTypeNonNull.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@typeannotations.AbstractTypeNonNull
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((typeannotations.AbstractTypeNonNull.$class == null)) (typeannotations.AbstractTypeNonNull.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|typeannotati...|_2(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__typeannotations_AbstractTypeNonNull) (ref.null $java.lang.Class))
+   (then
+    ;; (typeannotations.AbstractTypeNonNull.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|typeannotati...|_2(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__typeannotations_AbstractTypeNonNull (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typeannotati...|_2__java_lang_String (ref.func $$getString_|typeannotati...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return typeannotations.AbstractTypeNonNull.$class;
+  (return (global.get $f_$class__typeannotations_AbstractTypeNonNull))
  )
 )
 
@@ -542,6 +597,22 @@
  )
 )
 
+;;; Class<T> Parent.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@typeannotations.Parent
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((typeannotations.Parent.$class == null)) (typeannotations.Parent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|typeannotati...|_3(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__typeannotations_Parent) (ref.null $java.lang.Class))
+   (then
+    ;; (typeannotations.Parent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|typeannotati...|_3(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__typeannotations_Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typeannotati...|_3__java_lang_String (ref.func $$getString_|typeannotati...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return typeannotations.Parent.$class;
+  (return (global.get $f_$class__typeannotations_Parent))
+ )
+)
+
 ;;; Class<?> Parent.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@typeannotations.Parent
  (type $function.$getClassImpl__java_lang_Class)
@@ -550,8 +621,8 @@
  (local $this (ref null $typeannotations.Parent))
  (local.set $this (ref.cast_static $typeannotations.Parent (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getTypeannotations.Parent();
-  (return (call $function.no.side.effects.$getTypeannotations.Parent__java_lang_Class (ref.func $$getTypeannotations.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return typeannotations.Parent.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typeannotations.Parent) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@typeannotations.Parent)
@@ -626,6 +697,22 @@
  )
 )
 
+;;; Class<T> TypeAnnotations.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@typeannotations.TypeAnnotations
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((typeannotations.TypeAnnotations.$class == null)) (typeannotations.TypeAnnotations.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|typeannotati...|_6(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__typeannotations_TypeAnnotations) (ref.null $java.lang.Class))
+   (then
+    ;; (typeannotations.TypeAnnotations.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|typeannotati...|_6(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__typeannotations_TypeAnnotations (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typeannotati...|_6__java_lang_String (ref.func $$getString_|typeannotati...|_6__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return typeannotations.TypeAnnotations.$class;
+  (return (global.get $f_$class__typeannotations_TypeAnnotations))
+ )
+)
+
 ;;; Class<?> TypeAnnotations.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@typeannotations.TypeAnnotations
  (type $function.$getClassImpl__java_lang_Class)
@@ -634,8 +721,8 @@
  (local $this (ref null $typeannotations.TypeAnnotations))
  (local.set $this (ref.cast_static $typeannotations.TypeAnnotations (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getTypeannotations.TypeAnnotations();
-  (return (call $function.no.side.effects.$getTypeannotations.TypeAnnotations__java_lang_Class (ref.func $$getTypeannotations.TypeAnnotations__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return typeannotations.TypeAnnotations.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typeannotations.TypeAnnotations) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@typeannotations.TypeAnnotations)
@@ -752,6 +839,22 @@
  )
 )
 
+;;; Class<T> ChildWithNullableParent.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@typeannotations.ChildWithNullableParent
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((typeannotations.ChildWithNullableParent.$class == null)) (typeannotations.ChildWithNullableParent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|typeannotati...|_4(),typeannotations.Parent.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__typeannotations_ChildWithNullableParent) (ref.null $java.lang.Class))
+   (then
+    ;; (typeannotations.ChildWithNullableParent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|typeannotati...|_4(),typeannotations.Parent.$getClassMetadata()));
+    (global.set $f_$class__typeannotations_ChildWithNullableParent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typeannotati...|_4__java_lang_String (ref.func $$getString_|typeannotati...|_4__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typeannotations.Parent) )))
+   )
+  )
+  ;; return typeannotations.ChildWithNullableParent.$class;
+  (return (global.get $f_$class__typeannotations_ChildWithNullableParent))
+ )
+)
+
 ;;; Class<?> ChildWithNullableParent.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@typeannotations.ChildWithNullableParent
  (type $function.$getClassImpl__java_lang_Class)
@@ -760,8 +863,8 @@
  (local $this (ref null $typeannotations.ChildWithNullableParent))
  (local.set $this (ref.cast_static $typeannotations.ChildWithNullableParent (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getTypeannotations.ChildWithNullableParent();
-  (return (call $function.no.side.effects.$getTypeannotations.ChildWithNullableParent__java_lang_Class (ref.func $$getTypeannotations.ChildWithNullableParent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return typeannotations.ChildWithNullableParent.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typeannotations.ChildWithNullableParent) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@typeannotations.ChildWithNullableParent)
@@ -878,6 +981,22 @@
  )
 )
 
+;;; Class<T> ChildWithNonNullableParent.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@typeannotations.ChildWithNonNullableParent
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((typeannotations.ChildWithNonNullableParent.$class == null)) (typeannotations.ChildWithNonNullableParent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|typeannotati...|_5(),typeannotations.Parent.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__typeannotations_ChildWithNonNullableParent) (ref.null $java.lang.Class))
+   (then
+    ;; (typeannotations.ChildWithNonNullableParent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|typeannotati...|_5(),typeannotations.Parent.$getClassMetadata()));
+    (global.set $f_$class__typeannotations_ChildWithNonNullableParent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typeannotati...|_5__java_lang_String (ref.func $$getString_|typeannotati...|_5__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typeannotations.Parent) )))
+   )
+  )
+  ;; return typeannotations.ChildWithNonNullableParent.$class;
+  (return (global.get $f_$class__typeannotations_ChildWithNonNullableParent))
+ )
+)
+
 ;;; Class<?> ChildWithNonNullableParent.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@typeannotations.ChildWithNonNullableParent
  (type $function.$getClassImpl__java_lang_Class)
@@ -886,8 +1005,8 @@
  (local $this (ref null $typeannotations.ChildWithNonNullableParent))
  (local.set $this (ref.cast_static $typeannotations.ChildWithNonNullableParent (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getTypeannotations.ChildWithNonNullableParent();
-  (return (call $function.no.side.effects.$getTypeannotations.ChildWithNonNullableParent__java_lang_Class (ref.func $$getTypeannotations.ChildWithNonNullableParent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return typeannotations.ChildWithNonNullableParent.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typeannotations.ChildWithNonNullableParent) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@typeannotations.ChildWithNonNullableParent)

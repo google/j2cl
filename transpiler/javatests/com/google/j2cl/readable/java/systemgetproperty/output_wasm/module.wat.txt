@@ -47,6 +47,7 @@
 
 ;;; Code for systemgetproperty.Main [static fields]
 (global $f_$initialized__systemgetproperty_Main (mut i32) (i32.const 0))
+(global $f_$class__systemgetproperty_Main (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for systemgetproperty.Main [methods]
 
@@ -162,6 +163,22 @@
  )
 )
 
+;;; Class<T> Main.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@systemgetproperty.Main
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((systemgetproperty.Main.$class == null)) (systemgetproperty.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|systemgetpro...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__systemgetproperty_Main) (ref.null $java.lang.Class))
+   (then
+    ;; (systemgetproperty.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|systemgetpro...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__systemgetproperty_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|systemgetpro...|__java_lang_String (ref.func $$getString_|systemgetpro...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return systemgetproperty.Main.$class;
+  (return (global.get $f_$class__systemgetproperty_Main))
+ )
+)
+
 ;;; Class<?> Main.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@systemgetproperty.Main
  (type $function.$getClassImpl__java_lang_Class)
@@ -170,8 +187,8 @@
  (local $this (ref null $systemgetproperty.Main))
  (local.set $this (ref.cast_static $systemgetproperty.Main (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getSystemgetproperty.Main();
-  (return (call $function.no.side.effects.$getSystemgetproperty.Main__java_lang_Class (ref.func $$getSystemgetproperty.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return systemgetproperty.Main.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@systemgetproperty.Main) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@systemgetproperty.Main)

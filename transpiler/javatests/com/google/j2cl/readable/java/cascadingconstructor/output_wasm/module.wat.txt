@@ -49,6 +49,7 @@
 
 ;;; Code for cascadingconstructor.CascadingConstructor [static fields]
 (global $f_$initialized__cascadingconstructor_CascadingConstructor (mut i32) (i32.const 0))
+(global $f_$class__cascadingconstructor_CascadingConstructor (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for cascadingconstructor.CascadingConstructor [methods]
 
@@ -144,6 +145,22 @@
  )
 )
 
+;;; Class<T> CascadingConstructor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@cascadingconstructor.CascadingConstructor
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((cascadingconstructor.CascadingConstructor.$class == null)) (cascadingconstructor.CascadingConstructor.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|cascadingcon...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__cascadingconstructor_CascadingConstructor) (ref.null $java.lang.Class))
+   (then
+    ;; (cascadingconstructor.CascadingConstructor.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|cascadingcon...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__cascadingconstructor_CascadingConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cascadingcon...|__java_lang_String (ref.func $$getString_|cascadingcon...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return cascadingconstructor.CascadingConstructor.$class;
+  (return (global.get $f_$class__cascadingconstructor_CascadingConstructor))
+ )
+)
+
 ;;; Class<?> CascadingConstructor.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@cascadingconstructor.CascadingConstructor
  (type $function.$getClassImpl__java_lang_Class)
@@ -152,8 +169,8 @@
  (local $this (ref null $cascadingconstructor.CascadingConstructor))
  (local.set $this (ref.cast_static $cascadingconstructor.CascadingConstructor (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getCascadingconstructor.CascadingConstructor();
-  (return (call $function.no.side.effects.$getCascadingconstructor.CascadingConstructor__java_lang_Class (ref.func $$getCascadingconstructor.CascadingConstructor__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return cascadingconstructor.CascadingConstructor.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cascadingconstructor.CascadingConstructor) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cascadingconstructor.CascadingConstructor)

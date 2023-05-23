@@ -193,15 +193,19 @@
 
 ;;; Code for unreachableclass.Main [static fields]
 (global $f_$initialized__unreachableclass_Main (mut i32) (i32.const 0))
+(global $f_$class__unreachableclass_Main (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for unreachableclass.Main.1 [static fields]
 (global $f_$initialized__unreachableclass_Main_1 (mut i32) (i32.const 0))
+(global $f_$class__unreachableclass_Main_1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for unreachableclass.Main.1A.1B [static fields]
 (global $f_$initialized__unreachableclass_Main_1A_1B (mut i32) (i32.const 0))
+(global $f_$class__unreachableclass_Main_1A_1B (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for unreachableclass.Main.1A [static fields]
 (global $f_$initialized__unreachableclass_Main_1A (mut i32) (i32.const 0))
+(global $f_$class__unreachableclass_Main_1A (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for unreachableclass.Main [methods]
 
@@ -313,6 +317,22 @@
  )
 )
 
+;;; Class<T> Main.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@unreachableclass.Main
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((unreachableclass.Main.$class == null)) (unreachableclass.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|unreachablec...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__unreachableclass_Main) (ref.null $java.lang.Class))
+   (then
+    ;; (unreachableclass.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|unreachablec...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__unreachableclass_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|unreachablec...|__java_lang_String (ref.func $$getString_|unreachablec...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return unreachableclass.Main.$class;
+  (return (global.get $f_$class__unreachableclass_Main))
+ )
+)
+
 ;;; Class<?> Main.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@unreachableclass.Main
  (type $function.$getClassImpl__java_lang_Class)
@@ -321,8 +341,8 @@
  (local $this (ref null $unreachableclass.Main))
  (local.set $this (ref.cast_static $unreachableclass.Main (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getUnreachableclass.Main();
-  (return (call $function.no.side.effects.$getUnreachableclass.Main__java_lang_Class (ref.func $$getUnreachableclass.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return unreachableclass.Main.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@unreachableclass.Main) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@unreachableclass.Main)
@@ -385,6 +405,22 @@
  )
 )
 
+;;; Class<T> <anonymous> extends Object.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@unreachableclass.Main.1
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((unreachableclass.Main.1.$class == null)) (unreachableclass.Main.1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|unreachablec...|_1(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__unreachableclass_Main_1) (ref.null $java.lang.Class))
+   (then
+    ;; (unreachableclass.Main.1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|unreachablec...|_1(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__unreachableclass_Main_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|unreachablec...|_1__java_lang_String (ref.func $$getString_|unreachablec...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return unreachableclass.Main.1.$class;
+  (return (global.get $f_$class__unreachableclass_Main_1))
+ )
+)
+
 ;;; Class<?> <anonymous> extends Object.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@unreachableclass.Main.1
  (type $function.$getClassImpl__java_lang_Class)
@@ -393,8 +429,8 @@
  (local $this (ref null $unreachableclass.Main.1))
  (local.set $this (ref.cast_static $unreachableclass.Main.1 (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getUnreachableclass.Main.1();
-  (return (call $function.no.side.effects.$getUnreachableclass.Main.1__java_lang_Class (ref.func $$getUnreachableclass.Main.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return unreachableclass.Main.1.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@unreachableclass.Main.1) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@unreachableclass.Main.1)
@@ -465,6 +501,22 @@
  )
 )
 
+;;; Class<T> B.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@unreachableclass.Main.1A.1B
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((unreachableclass.Main.1A.1B.$class == null)) (unreachableclass.Main.1A.1B.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|unreachablec...|_2(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__unreachableclass_Main_1A_1B) (ref.null $java.lang.Class))
+   (then
+    ;; (unreachableclass.Main.1A.1B.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|unreachablec...|_2(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__unreachableclass_Main_1A_1B (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|unreachablec...|_2__java_lang_String (ref.func $$getString_|unreachablec...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return unreachableclass.Main.1A.1B.$class;
+  (return (global.get $f_$class__unreachableclass_Main_1A_1B))
+ )
+)
+
 ;;; Class<?> B.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@unreachableclass.Main.1A.1B
  (type $function.$getClassImpl__java_lang_Class)
@@ -473,8 +525,8 @@
  (local $this (ref null $unreachableclass.Main.1A.1B))
  (local.set $this (ref.cast_static $unreachableclass.Main.1A.1B (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getUnreachableclass.Main.1A.1B();
-  (return (call $function.no.side.effects.$getUnreachableclass.Main.1A.1B__java_lang_Class (ref.func $$getUnreachableclass.Main.1A.1B__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return unreachableclass.Main.1A.1B.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@unreachableclass.Main.1A.1B) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@unreachableclass.Main.1A.1B)
@@ -549,6 +601,22 @@
  )
 )
 
+;;; Class<T> A.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@unreachableclass.Main.1A
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((unreachableclass.Main.1A.$class == null)) (unreachableclass.Main.1A.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|unreachablec...|_3(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__unreachableclass_Main_1A) (ref.null $java.lang.Class))
+   (then
+    ;; (unreachableclass.Main.1A.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|unreachablec...|_3(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__unreachableclass_Main_1A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|unreachablec...|_3__java_lang_String (ref.func $$getString_|unreachablec...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return unreachableclass.Main.1A.$class;
+  (return (global.get $f_$class__unreachableclass_Main_1A))
+ )
+)
+
 ;;; Class<?> A.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@unreachableclass.Main.1A
  (type $function.$getClassImpl__java_lang_Class)
@@ -557,8 +625,8 @@
  (local $this (ref null $unreachableclass.Main.1A))
  (local.set $this (ref.cast_static $unreachableclass.Main.1A (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getUnreachableclass.Main.1A();
-  (return (call $function.no.side.effects.$getUnreachableclass.Main.1A__java_lang_Class (ref.func $$getUnreachableclass.Main.1A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return unreachableclass.Main.1A.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@unreachableclass.Main.1A) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@unreachableclass.Main.1A)

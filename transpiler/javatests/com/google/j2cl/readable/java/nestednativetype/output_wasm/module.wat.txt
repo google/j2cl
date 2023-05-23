@@ -90,9 +90,11 @@
 
 ;;; Code for nestednativetype.NativeArray.1 [static fields]
 (global $f_$initialized__nestednativetype_NativeArray_1 (mut i32) (i32.const 0))
+(global $f_$class__nestednativetype_NativeArray_1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for nestednativetype.NativeArray.$Overlay [static fields]
 (global $f_$initialized__nestednativetype_NativeArray_$Overlay (mut i32) (i32.const 0))
+(global $f_$class__nestednativetype_NativeArray_$Overlay (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for nestednativetype.NativeArray.$Overlay [methods]
 
@@ -130,6 +132,22 @@
  )
 )
 
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@nestednativetype.NativeArray.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((nestednativetype.NativeArray.$Overlay.$class == null)) (nestednativetype.NativeArray.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nestednative...|_1(),null));
+  (if (ref.eq (global.get $f_$class__nestednativetype_NativeArray_$Overlay) (ref.null $java.lang.Class))
+   (then
+    ;; (nestednativetype.NativeArray.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nestednative...|_1(),null));
+    (global.set $f_$class__nestednativetype_NativeArray_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nestednative...|_1__java_lang_String (ref.func $$getString_|nestednative...|_1__java_lang_String@javaemul.internal.StringPool) )(ref.null $java.lang.Class)))
+   )
+  )
+  ;; return nestednativetype.NativeArray.$Overlay.$class;
+  (return (global.get $f_$class__nestednativetype_NativeArray_$Overlay))
+ )
+)
+
 ;;; Class<?> $Overlay.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@nestednativetype.NativeArray.$Overlay
  (type $function.$getClassImpl__java_lang_Class)
@@ -138,8 +156,8 @@
  (local $this (ref null $nestednativetype.NativeArray.$Overlay))
  (local.set $this (ref.cast_static $nestednativetype.NativeArray.$Overlay (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getNestednativetype.NativeArray.$Overlay();
-  (return (call $function.no.side.effects.$getNestednativetype.NativeArray.$Overlay__java_lang_Class (ref.func $$getNestednativetype.NativeArray.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return nestednativetype.NativeArray.$Overlay.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nestednativetype.NativeArray.$Overlay) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nestednativetype.NativeArray.$Overlay)
@@ -209,6 +227,22 @@
  )
 )
 
+;;; Class<T> <anonymous> extends Object.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@nestednativetype.NativeArray.1
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((nestednativetype.NativeArray.1.$class == null)) (nestednativetype.NativeArray.1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nestednative...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__nestednativetype_NativeArray_1) (ref.null $java.lang.Class))
+   (then
+    ;; (nestednativetype.NativeArray.1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nestednative...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__nestednativetype_NativeArray_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nestednative...|__java_lang_String (ref.func $$getString_|nestednative...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return nestednativetype.NativeArray.1.$class;
+  (return (global.get $f_$class__nestednativetype_NativeArray_1))
+ )
+)
+
 ;;; Class<?> <anonymous> extends Object.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@nestednativetype.NativeArray.1
  (type $function.$getClassImpl__java_lang_Class)
@@ -217,8 +251,8 @@
  (local $this (ref null $nestednativetype.NativeArray.1))
  (local.set $this (ref.cast_static $nestednativetype.NativeArray.1 (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getNestednativetype.NativeArray.1();
-  (return (call $function.no.side.effects.$getNestednativetype.NativeArray.1__java_lang_Class (ref.func $$getNestednativetype.NativeArray.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return nestednativetype.NativeArray.1.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nestednativetype.NativeArray.1) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nestednativetype.NativeArray.1)

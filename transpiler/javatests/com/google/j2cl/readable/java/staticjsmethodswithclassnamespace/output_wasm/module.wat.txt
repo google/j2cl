@@ -98,9 +98,11 @@
 
 ;;; Code for staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace [static fields]
 (global $f_$initialized__staticjsmethodswithclassnamespace_StaticJsMethodsWithClassNamespace (mut i32) (i32.const 0))
+(global $f_$class__staticjsmethodswithclassnamespace_StaticJsMethodsWithClassNamespace (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for staticjsmethodswithclassnamespace.ExternalCaller [static fields]
 (global $f_$initialized__staticjsmethodswithclassnamespace_ExternalCaller (mut i32) (i32.const 0))
+(global $f_$class__staticjsmethodswithclassnamespace_ExternalCaller (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace [methods]
 
@@ -186,6 +188,22 @@
  )
 )
 
+;;; Class<T> StaticJsMethodsWithClassNamespace.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.$class == null)) (staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|staticjsmeth...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__staticjsmethodswithclassnamespace_StaticJsMethodsWithClassNamespace) (ref.null $java.lang.Class))
+   (then
+    ;; (staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|staticjsmeth...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__staticjsmethodswithclassnamespace_StaticJsMethodsWithClassNamespace (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|staticjsmeth...|__java_lang_String (ref.func $$getString_|staticjsmeth...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.$class;
+  (return (global.get $f_$class__staticjsmethodswithclassnamespace_StaticJsMethodsWithClassNamespace))
+ )
+)
+
 ;;; Class<?> StaticJsMethodsWithClassNamespace.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace
  (type $function.$getClassImpl__java_lang_Class)
@@ -194,8 +212,8 @@
  (local $this (ref null $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace))
  (local.set $this (ref.cast_static $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getStaticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace();
-  (return (call $function.no.side.effects.$getStaticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace__java_lang_Class (ref.func $$getStaticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace)
@@ -271,6 +289,22 @@
  )
 )
 
+;;; Class<T> ExternalCaller.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@staticjsmethodswithclassnamespace.ExternalCaller
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((staticjsmethodswithclassnamespace.ExternalCaller.$class == null)) (staticjsmethodswithclassnamespace.ExternalCaller.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|staticjsmeth...|_1(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__staticjsmethodswithclassnamespace_ExternalCaller) (ref.null $java.lang.Class))
+   (then
+    ;; (staticjsmethodswithclassnamespace.ExternalCaller.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|staticjsmeth...|_1(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__staticjsmethodswithclassnamespace_ExternalCaller (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|staticjsmeth...|_1__java_lang_String (ref.func $$getString_|staticjsmeth...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return staticjsmethodswithclassnamespace.ExternalCaller.$class;
+  (return (global.get $f_$class__staticjsmethodswithclassnamespace_ExternalCaller))
+ )
+)
+
 ;;; Class<?> ExternalCaller.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@staticjsmethodswithclassnamespace.ExternalCaller
  (type $function.$getClassImpl__java_lang_Class)
@@ -279,8 +313,8 @@
  (local $this (ref null $staticjsmethodswithclassnamespace.ExternalCaller))
  (local.set $this (ref.cast_static $staticjsmethodswithclassnamespace.ExternalCaller (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getStaticjsmethodswithclassnamespace.ExternalCaller();
-  (return (call $function.no.side.effects.$getStaticjsmethodswithclassnamespace.ExternalCaller__java_lang_Class (ref.func $$getStaticjsmethodswithclassnamespace.ExternalCaller__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return staticjsmethodswithclassnamespace.ExternalCaller.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@staticjsmethodswithclassnamespace.ExternalCaller) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@staticjsmethodswithclassnamespace.ExternalCaller)

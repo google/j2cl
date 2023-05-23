@@ -49,6 +49,7 @@
 
 ;;; Code for breakstatement.BreakStatement [static fields]
 (global $f_$initialized__breakstatement_BreakStatement (mut i32) (i32.const 0))
+(global $f_$class__breakstatement_BreakStatement (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for breakstatement.BreakStatement [methods]
 
@@ -133,6 +134,22 @@
  )
 )
 
+;;; Class<T> BreakStatement.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@breakstatement.BreakStatement
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((breakstatement.BreakStatement.$class == null)) (breakstatement.BreakStatement.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|breakstateme...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__breakstatement_BreakStatement) (ref.null $java.lang.Class))
+   (then
+    ;; (breakstatement.BreakStatement.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|breakstateme...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__breakstatement_BreakStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|breakstateme...|__java_lang_String (ref.func $$getString_|breakstateme...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return breakstatement.BreakStatement.$class;
+  (return (global.get $f_$class__breakstatement_BreakStatement))
+ )
+)
+
 ;;; Class<?> BreakStatement.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@breakstatement.BreakStatement
  (type $function.$getClassImpl__java_lang_Class)
@@ -141,8 +158,8 @@
  (local $this (ref null $breakstatement.BreakStatement))
  (local.set $this (ref.cast_static $breakstatement.BreakStatement (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getBreakstatement.BreakStatement();
-  (return (call $function.no.side.effects.$getBreakstatement.BreakStatement__java_lang_Class (ref.func $$getBreakstatement.BreakStatement__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return breakstatement.BreakStatement.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@breakstatement.BreakStatement) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@breakstatement.BreakStatement)

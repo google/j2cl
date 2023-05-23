@@ -48,6 +48,7 @@
 
 ;;; Code for initmethoddispatch.InitMethodDispatch [static fields]
 (global $f_$initialized__initmethoddispatch_InitMethodDispatch (mut i32) (i32.const 0))
+(global $f_$class__initmethoddispatch_InitMethodDispatch (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for initmethoddispatch.InitMethodDispatch [methods]
 
@@ -139,6 +140,22 @@
  )
 )
 
+;;; Class<T> InitMethodDispatch.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@initmethoddispatch.InitMethodDispatch
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((initmethoddispatch.InitMethodDispatch.$class == null)) (initmethoddispatch.InitMethodDispatch.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|initmethoddi...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__initmethoddispatch_InitMethodDispatch) (ref.null $java.lang.Class))
+   (then
+    ;; (initmethoddispatch.InitMethodDispatch.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|initmethoddi...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__initmethoddispatch_InitMethodDispatch (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|initmethoddi...|__java_lang_String (ref.func $$getString_|initmethoddi...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return initmethoddispatch.InitMethodDispatch.$class;
+  (return (global.get $f_$class__initmethoddispatch_InitMethodDispatch))
+ )
+)
+
 ;;; Class<?> InitMethodDispatch.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@initmethoddispatch.InitMethodDispatch
  (type $function.$getClassImpl__java_lang_Class)
@@ -147,8 +164,8 @@
  (local $this (ref null $initmethoddispatch.InitMethodDispatch))
  (local.set $this (ref.cast_static $initmethoddispatch.InitMethodDispatch (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getInitmethoddispatch.InitMethodDispatch();
-  (return (call $function.no.side.effects.$getInitmethoddispatch.InitMethodDispatch__java_lang_Class (ref.func $$getInitmethoddispatch.InitMethodDispatch__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return initmethoddispatch.InitMethodDispatch.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@initmethoddispatch.InitMethodDispatch) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@initmethoddispatch.InitMethodDispatch)

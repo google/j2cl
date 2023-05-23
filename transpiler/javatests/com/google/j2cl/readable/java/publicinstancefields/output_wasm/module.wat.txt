@@ -49,6 +49,7 @@
 
 ;;; Code for publicinstancefields.PublicInstanceFields [static fields]
 (global $f_$initialized__publicinstancefields_PublicInstanceFields (mut i32) (i32.const 0))
+(global $f_$class__publicinstancefields_PublicInstanceFields (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for publicinstancefields.PublicInstanceFields [methods]
 
@@ -117,6 +118,22 @@
  )
 )
 
+;;; Class<T> PublicInstanceFields.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@publicinstancefields.PublicInstanceFields
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((publicinstancefields.PublicInstanceFields.$class == null)) (publicinstancefields.PublicInstanceFields.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|publicinstan...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__publicinstancefields_PublicInstanceFields) (ref.null $java.lang.Class))
+   (then
+    ;; (publicinstancefields.PublicInstanceFields.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|publicinstan...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__publicinstancefields_PublicInstanceFields (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|publicinstan...|__java_lang_String (ref.func $$getString_|publicinstan...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return publicinstancefields.PublicInstanceFields.$class;
+  (return (global.get $f_$class__publicinstancefields_PublicInstanceFields))
+ )
+)
+
 ;;; Class<?> PublicInstanceFields.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@publicinstancefields.PublicInstanceFields
  (type $function.$getClassImpl__java_lang_Class)
@@ -125,8 +142,8 @@
  (local $this (ref null $publicinstancefields.PublicInstanceFields))
  (local.set $this (ref.cast_static $publicinstancefields.PublicInstanceFields (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getPublicinstancefields.PublicInstanceFields();
-  (return (call $function.no.side.effects.$getPublicinstancefields.PublicInstanceFields__java_lang_Class (ref.func $$getPublicinstancefields.PublicInstanceFields__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return publicinstancefields.PublicInstanceFields.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@publicinstancefields.PublicInstanceFields) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@publicinstancefields.PublicInstanceFields)

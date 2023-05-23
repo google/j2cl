@@ -156,12 +156,15 @@
 
 ;;; Code for devirtualizedsupermethodcall.SubNumber [static fields]
 (global $f_$initialized__devirtualizedsupermethodcall_SubNumber (mut i32) (i32.const 0))
+(global $f_$class__devirtualizedsupermethodcall_SubNumber (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for devirtualizedsupermethodcall.FooCallsSuperObjectMethod [static fields]
 (global $f_$initialized__devirtualizedsupermethodcall_FooCallsSuperObjectMethod (mut i32) (i32.const 0))
+(global $f_$class__devirtualizedsupermethodcall_FooCallsSuperObjectMethod (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for devirtualizedsupermethodcall.Main [static fields]
 (global $f_$initialized__devirtualizedsupermethodcall_Main (mut i32) (i32.const 0))
+(global $f_$class__devirtualizedsupermethodcall_Main (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for devirtualizedsupermethodcall.FooCallsSuperObjectMethod [methods]
 
@@ -235,6 +238,22 @@
  )
 )
 
+;;; Class<T> FooCallsSuperObjectMethod.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@devirtualizedsupermethodcall.FooCallsSuperObjectMethod
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((devirtualizedsupermethodcall.FooCallsSuperObjectMethod.$class == null)) (devirtualizedsupermethodcall.FooCallsSuperObjectMethod.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|devirtualize...|_1(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__devirtualizedsupermethodcall_FooCallsSuperObjectMethod) (ref.null $java.lang.Class))
+   (then
+    ;; (devirtualizedsupermethodcall.FooCallsSuperObjectMethod.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|devirtualize...|_1(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__devirtualizedsupermethodcall_FooCallsSuperObjectMethod (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|devirtualize...|_1__java_lang_String (ref.func $$getString_|devirtualize...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return devirtualizedsupermethodcall.FooCallsSuperObjectMethod.$class;
+  (return (global.get $f_$class__devirtualizedsupermethodcall_FooCallsSuperObjectMethod))
+ )
+)
+
 ;;; Class<?> FooCallsSuperObjectMethod.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@devirtualizedsupermethodcall.FooCallsSuperObjectMethod
  (type $function.$getClassImpl__java_lang_Class)
@@ -243,8 +262,8 @@
  (local $this (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
  (local.set $this (ref.cast_static $devirtualizedsupermethodcall.FooCallsSuperObjectMethod (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getDevirtualizedsupermethodcall.FooCallsSuperObjectMethod();
-  (return (call $function.no.side.effects.$getDevirtualizedsupermethodcall.FooCallsSuperObjectMethod__java_lang_Class (ref.func $$getDevirtualizedsupermethodcall.FooCallsSuperObjectMethod__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return devirtualizedsupermethodcall.FooCallsSuperObjectMethod.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@devirtualizedsupermethodcall.FooCallsSuperObjectMethod) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@devirtualizedsupermethodcall.FooCallsSuperObjectMethod)
@@ -343,6 +362,22 @@
  )
 )
 
+;;; Class<T> Main.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@devirtualizedsupermethodcall.Main
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((devirtualizedsupermethodcall.Main.$class == null)) (devirtualizedsupermethodcall.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|devirtualize...|_2(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__devirtualizedsupermethodcall_Main) (ref.null $java.lang.Class))
+   (then
+    ;; (devirtualizedsupermethodcall.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|devirtualize...|_2(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__devirtualizedsupermethodcall_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|devirtualize...|_2__java_lang_String (ref.func $$getString_|devirtualize...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return devirtualizedsupermethodcall.Main.$class;
+  (return (global.get $f_$class__devirtualizedsupermethodcall_Main))
+ )
+)
+
 ;;; Class<?> Main.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@devirtualizedsupermethodcall.Main
  (type $function.$getClassImpl__java_lang_Class)
@@ -351,8 +386,8 @@
  (local $this (ref null $devirtualizedsupermethodcall.Main))
  (local.set $this (ref.cast_static $devirtualizedsupermethodcall.Main (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getDevirtualizedsupermethodcall.Main();
-  (return (call $function.no.side.effects.$getDevirtualizedsupermethodcall.Main__java_lang_Class (ref.func $$getDevirtualizedsupermethodcall.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return devirtualizedsupermethodcall.Main.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@devirtualizedsupermethodcall.Main) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@devirtualizedsupermethodcall.Main)
@@ -477,6 +512,22 @@
  )
 )
 
+;;; Class<T> SubNumber.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@devirtualizedsupermethodcall.SubNumber
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((devirtualizedsupermethodcall.SubNumber.$class == null)) (devirtualizedsupermethodcall.SubNumber.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|devirtualize...|(),java.lang.Number.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__devirtualizedsupermethodcall_SubNumber) (ref.null $java.lang.Class))
+   (then
+    ;; (devirtualizedsupermethodcall.SubNumber.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|devirtualize...|(),java.lang.Number.$getClassMetadata()));
+    (global.set $f_$class__devirtualizedsupermethodcall_SubNumber (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|devirtualize...|__java_lang_String (ref.func $$getString_|devirtualize...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Number) )))
+   )
+  )
+  ;; return devirtualizedsupermethodcall.SubNumber.$class;
+  (return (global.get $f_$class__devirtualizedsupermethodcall_SubNumber))
+ )
+)
+
 ;;; Class<?> SubNumber.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@devirtualizedsupermethodcall.SubNumber
  (type $function.$getClassImpl__java_lang_Class)
@@ -485,8 +536,8 @@
  (local $this (ref null $devirtualizedsupermethodcall.SubNumber))
  (local.set $this (ref.cast_static $devirtualizedsupermethodcall.SubNumber (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getDevirtualizedsupermethodcall.SubNumber();
-  (return (call $function.no.side.effects.$getDevirtualizedsupermethodcall.SubNumber__java_lang_Class (ref.func $$getDevirtualizedsupermethodcall.SubNumber__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return devirtualizedsupermethodcall.SubNumber.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@devirtualizedsupermethodcall.SubNumber) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@devirtualizedsupermethodcall.SubNumber)

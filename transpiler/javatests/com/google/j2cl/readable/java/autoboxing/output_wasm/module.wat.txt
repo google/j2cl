@@ -253,15 +253,19 @@
 
 ;;; Code for autoboxing.AutoBoxing [static fields]
 (global $f_$initialized__autoboxing_AutoBoxing (mut i32) (i32.const 0))
+(global $f_$class__autoboxing_AutoBoxing (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for autoboxing.AutoBoxing.1Local [static fields]
 (global $f_$initialized__autoboxing_AutoBoxing_1Local (mut i32) (i32.const 0))
+(global $f_$class__autoboxing_AutoBoxing_1Local (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for autoboxing.AutoBoxing.2Local [static fields]
 (global $f_$initialized__autoboxing_AutoBoxing_2Local (mut i32) (i32.const 0))
+(global $f_$class__autoboxing_AutoBoxing_2Local (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for autoboxing.AutoBoxing.1Supplier [static fields]
 (global $f_$initialized__autoboxing_AutoBoxing_1Supplier (mut i32) (i32.const 0))
+(global $f_$class__autoboxing_AutoBoxing_1Supplier (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for autoboxing.AutoBoxing [methods]
 
@@ -1578,6 +1582,22 @@
  )
 )
 
+;;; Class<T> AutoBoxing.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@autoboxing.AutoBoxing
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((autoboxing.AutoBoxing.$class == null)) (autoboxing.AutoBoxing.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|autoboxing.A...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__autoboxing_AutoBoxing) (ref.null $java.lang.Class))
+   (then
+    ;; (autoboxing.AutoBoxing.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|autoboxing.A...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__autoboxing_AutoBoxing (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autoboxing.A...|__java_lang_String (ref.func $$getString_|autoboxing.A...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return autoboxing.AutoBoxing.$class;
+  (return (global.get $f_$class__autoboxing_AutoBoxing))
+ )
+)
+
 ;;; Class<?> AutoBoxing.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@autoboxing.AutoBoxing
  (type $function.$getClassImpl__java_lang_Class)
@@ -1586,8 +1606,8 @@
  (local $this (ref null $autoboxing.AutoBoxing))
  (local.set $this (ref.cast_static $autoboxing.AutoBoxing (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getAutoboxing.AutoBoxing();
-  (return (call $function.no.side.effects.$getAutoboxing.AutoBoxing__java_lang_Class (ref.func $$getAutoboxing.AutoBoxing__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return autoboxing.AutoBoxing.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autoboxing.AutoBoxing) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@autoboxing.AutoBoxing)
@@ -1665,6 +1685,22 @@
  )
 )
 
+;;; Class<T> Local.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@autoboxing.AutoBoxing.1Local
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((autoboxing.AutoBoxing.1Local.$class == null)) (autoboxing.AutoBoxing.1Local.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|autoboxing.A...|_1(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__autoboxing_AutoBoxing_1Local) (ref.null $java.lang.Class))
+   (then
+    ;; (autoboxing.AutoBoxing.1Local.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|autoboxing.A...|_1(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__autoboxing_AutoBoxing_1Local (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autoboxing.A...|_1__java_lang_String (ref.func $$getString_|autoboxing.A...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return autoboxing.AutoBoxing.1Local.$class;
+  (return (global.get $f_$class__autoboxing_AutoBoxing_1Local))
+ )
+)
+
 ;;; Class<?> Local.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@autoboxing.AutoBoxing.1Local
  (type $function.$getClassImpl__java_lang_Class)
@@ -1673,8 +1709,8 @@
  (local $this (ref null $autoboxing.AutoBoxing.1Local))
  (local.set $this (ref.cast_static $autoboxing.AutoBoxing.1Local (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getAutoboxing.AutoBoxing.1Local();
-  (return (call $function.no.side.effects.$getAutoboxing.AutoBoxing.1Local__java_lang_Class (ref.func $$getAutoboxing.AutoBoxing.1Local__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return autoboxing.AutoBoxing.1Local.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autoboxing.AutoBoxing.1Local) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@autoboxing.AutoBoxing.1Local)
@@ -1752,6 +1788,22 @@
  )
 )
 
+;;; Class<T> Local.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@autoboxing.AutoBoxing.2Local
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((autoboxing.AutoBoxing.2Local.$class == null)) (autoboxing.AutoBoxing.2Local.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|autoboxing.A...|_2(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__autoboxing_AutoBoxing_2Local) (ref.null $java.lang.Class))
+   (then
+    ;; (autoboxing.AutoBoxing.2Local.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|autoboxing.A...|_2(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__autoboxing_AutoBoxing_2Local (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autoboxing.A...|_2__java_lang_String (ref.func $$getString_|autoboxing.A...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return autoboxing.AutoBoxing.2Local.$class;
+  (return (global.get $f_$class__autoboxing_AutoBoxing_2Local))
+ )
+)
+
 ;;; Class<?> Local.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@autoboxing.AutoBoxing.2Local
  (type $function.$getClassImpl__java_lang_Class)
@@ -1760,8 +1812,8 @@
  (local $this (ref null $autoboxing.AutoBoxing.2Local))
  (local.set $this (ref.cast_static $autoboxing.AutoBoxing.2Local (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getAutoboxing.AutoBoxing.2Local();
-  (return (call $function.no.side.effects.$getAutoboxing.AutoBoxing.2Local__java_lang_Class (ref.func $$getAutoboxing.AutoBoxing.2Local__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return autoboxing.AutoBoxing.2Local.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autoboxing.AutoBoxing.2Local) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@autoboxing.AutoBoxing.2Local)
@@ -1840,6 +1892,22 @@
  )
 )
 
+;;; Class<T> Supplier.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@autoboxing.AutoBoxing.1Supplier
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((autoboxing.AutoBoxing.1Supplier.$class == null)) (autoboxing.AutoBoxing.1Supplier.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|autoboxing.A...|_3(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__autoboxing_AutoBoxing_1Supplier) (ref.null $java.lang.Class))
+   (then
+    ;; (autoboxing.AutoBoxing.1Supplier.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|autoboxing.A...|_3(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__autoboxing_AutoBoxing_1Supplier (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autoboxing.A...|_3__java_lang_String (ref.func $$getString_|autoboxing.A...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return autoboxing.AutoBoxing.1Supplier.$class;
+  (return (global.get $f_$class__autoboxing_AutoBoxing_1Supplier))
+ )
+)
+
 ;;; Class<?> Supplier.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@autoboxing.AutoBoxing.1Supplier
  (type $function.$getClassImpl__java_lang_Class)
@@ -1848,8 +1916,8 @@
  (local $this (ref null $autoboxing.AutoBoxing.1Supplier))
  (local.set $this (ref.cast_static $autoboxing.AutoBoxing.1Supplier (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getAutoboxing.AutoBoxing.1Supplier();
-  (return (call $function.no.side.effects.$getAutoboxing.AutoBoxing.1Supplier__java_lang_Class (ref.func $$getAutoboxing.AutoBoxing.1Supplier__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return autoboxing.AutoBoxing.1Supplier.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autoboxing.AutoBoxing.1Supplier) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@autoboxing.AutoBoxing.1Supplier)

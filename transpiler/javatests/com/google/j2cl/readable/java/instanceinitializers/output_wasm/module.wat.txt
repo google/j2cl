@@ -48,6 +48,7 @@
 
 ;;; Code for instanceinitializers.InstanceInitializers [static fields]
 (global $f_$initialized__instanceinitializers_InstanceInitializers (mut i32) (i32.const 0))
+(global $f_$class__instanceinitializers_InstanceInitializers (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for instanceinitializers.InstanceInitializers [methods]
 
@@ -122,6 +123,22 @@
  )
 )
 
+;;; Class<T> InstanceInitializers.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@instanceinitializers.InstanceInitializers
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((instanceinitializers.InstanceInitializers.$class == null)) (instanceinitializers.InstanceInitializers.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|instanceinit...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__instanceinitializers_InstanceInitializers) (ref.null $java.lang.Class))
+   (then
+    ;; (instanceinitializers.InstanceInitializers.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|instanceinit...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__instanceinitializers_InstanceInitializers (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instanceinit...|__java_lang_String (ref.func $$getString_|instanceinit...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return instanceinitializers.InstanceInitializers.$class;
+  (return (global.get $f_$class__instanceinitializers_InstanceInitializers))
+ )
+)
+
 ;;; Class<?> InstanceInitializers.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@instanceinitializers.InstanceInitializers
  (type $function.$getClassImpl__java_lang_Class)
@@ -130,8 +147,8 @@
  (local $this (ref null $instanceinitializers.InstanceInitializers))
  (local.set $this (ref.cast_static $instanceinitializers.InstanceInitializers (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getInstanceinitializers.InstanceInitializers();
-  (return (call $function.no.side.effects.$getInstanceinitializers.InstanceInitializers__java_lang_Class (ref.func $$getInstanceinitializers.InstanceInitializers__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return instanceinitializers.InstanceInitializers.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@instanceinitializers.InstanceInitializers) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@instanceinitializers.InstanceInitializers)

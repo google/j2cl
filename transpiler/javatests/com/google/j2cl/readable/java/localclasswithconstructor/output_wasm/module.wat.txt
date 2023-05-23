@@ -100,9 +100,11 @@
 
 ;;; Code for localclasswithconstructor.LocalClassWithConstructor [static fields]
 (global $f_$initialized__localclasswithconstructor_LocalClassWithConstructor (mut i32) (i32.const 0))
+(global $f_$class__localclasswithconstructor_LocalClassWithConstructor (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for localclasswithconstructor.LocalClassWithConstructor.1LocalClass [static fields]
 (global $f_$initialized__localclasswithconstructor_LocalClassWithConstructor_1LocalClass (mut i32) (i32.const 0))
+(global $f_$class__localclasswithconstructor_LocalClassWithConstructor_1LocalClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for localclasswithconstructor.LocalClassWithConstructor [methods]
 
@@ -180,6 +182,22 @@
  )
 )
 
+;;; Class<T> LocalClassWithConstructor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((localclasswithconstructor.LocalClassWithConstructor.$class == null)) (localclasswithconstructor.LocalClassWithConstructor.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclasswi...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__localclasswithconstructor_LocalClassWithConstructor) (ref.null $java.lang.Class))
+   (then
+    ;; (localclasswithconstructor.LocalClassWithConstructor.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclasswi...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__localclasswithconstructor_LocalClassWithConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclasswi...|__java_lang_String (ref.func $$getString_|localclasswi...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return localclasswithconstructor.LocalClassWithConstructor.$class;
+  (return (global.get $f_$class__localclasswithconstructor_LocalClassWithConstructor))
+ )
+)
+
 ;;; Class<?> LocalClassWithConstructor.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor
  (type $function.$getClassImpl__java_lang_Class)
@@ -188,8 +206,8 @@
  (local $this (ref null $localclasswithconstructor.LocalClassWithConstructor))
  (local.set $this (ref.cast_static $localclasswithconstructor.LocalClassWithConstructor (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getLocalclasswithconstructor.LocalClassWithConstructor();
-  (return (call $function.no.side.effects.$getLocalclasswithconstructor.LocalClassWithConstructor__java_lang_Class (ref.func $$getLocalclasswithconstructor.LocalClassWithConstructor__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return localclasswithconstructor.LocalClassWithConstructor.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor)
@@ -306,6 +324,22 @@
  )
 )
 
+;;; Class<T> LocalClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor.1LocalClass
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((localclasswithconstructor.LocalClassWithConstructor.1LocalClass.$class == null)) (localclasswithconstructor.LocalClassWithConstructor.1LocalClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclasswi...|_1(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__localclasswithconstructor_LocalClassWithConstructor_1LocalClass) (ref.null $java.lang.Class))
+   (then
+    ;; (localclasswithconstructor.LocalClassWithConstructor.1LocalClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclasswi...|_1(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__localclasswithconstructor_LocalClassWithConstructor_1LocalClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclasswi...|_1__java_lang_String (ref.func $$getString_|localclasswi...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return localclasswithconstructor.LocalClassWithConstructor.1LocalClass.$class;
+  (return (global.get $f_$class__localclasswithconstructor_LocalClassWithConstructor_1LocalClass))
+ )
+)
+
 ;;; Class<?> LocalClass.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor.1LocalClass
  (type $function.$getClassImpl__java_lang_Class)
@@ -314,8 +348,8 @@
  (local $this (ref null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass))
  (local.set $this (ref.cast_static $localclasswithconstructor.LocalClassWithConstructor.1LocalClass (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getLocalclasswithconstructor.LocalClassWithConstructor.1LocalClass();
-  (return (call $function.no.side.effects.$getLocalclasswithconstructor.LocalClassWithConstructor.1LocalClass__java_lang_Class (ref.func $$getLocalclasswithconstructor.LocalClassWithConstructor.1LocalClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return localclasswithconstructor.LocalClassWithConstructor.1LocalClass.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor.1LocalClass) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor.1LocalClass)

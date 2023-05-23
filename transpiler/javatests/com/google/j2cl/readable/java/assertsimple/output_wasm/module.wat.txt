@@ -47,6 +47,7 @@
 
 ;;; Code for assertsimple.AssertSimple [static fields]
 (global $f_$initialized__assertsimple_AssertSimple (mut i32) (i32.const 0))
+(global $f_$class__assertsimple_AssertSimple (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for assertsimple.AssertSimple [methods]
 
@@ -115,6 +116,22 @@
  )
 )
 
+;;; Class<T> AssertSimple.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@assertsimple.AssertSimple
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((assertsimple.AssertSimple.$class == null)) (assertsimple.AssertSimple.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|assertsimple...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__assertsimple_AssertSimple) (ref.null $java.lang.Class))
+   (then
+    ;; (assertsimple.AssertSimple.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|assertsimple...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__assertsimple_AssertSimple (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|assertsimple...|__java_lang_String (ref.func $$getString_|assertsimple...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return assertsimple.AssertSimple.$class;
+  (return (global.get $f_$class__assertsimple_AssertSimple))
+ )
+)
+
 ;;; Class<?> AssertSimple.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@assertsimple.AssertSimple
  (type $function.$getClassImpl__java_lang_Class)
@@ -123,8 +140,8 @@
  (local $this (ref null $assertsimple.AssertSimple))
  (local.set $this (ref.cast_static $assertsimple.AssertSimple (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getAssertsimple.AssertSimple();
-  (return (call $function.no.side.effects.$getAssertsimple.AssertSimple__java_lang_Class (ref.func $$getAssertsimple.AssertSimple__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return assertsimple.AssertSimple.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@assertsimple.AssertSimple) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@assertsimple.AssertSimple)

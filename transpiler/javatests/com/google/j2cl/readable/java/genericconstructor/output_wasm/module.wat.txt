@@ -49,6 +49,7 @@
 
 ;;; Code for genericconstructor.GenericConstructor [static fields]
 (global $f_$initialized__genericconstructor_GenericConstructor (mut i32) (i32.const 0))
+(global $f_$class__genericconstructor_GenericConstructor (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for genericconstructor.GenericConstructor [methods]
 
@@ -162,6 +163,22 @@
  )
 )
 
+;;; Class<T> GenericConstructor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@genericconstructor.GenericConstructor
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((genericconstructor.GenericConstructor.$class == null)) (genericconstructor.GenericConstructor.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|genericconst...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__genericconstructor_GenericConstructor) (ref.null $java.lang.Class))
+   (then
+    ;; (genericconstructor.GenericConstructor.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|genericconst...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__genericconstructor_GenericConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericconst...|__java_lang_String (ref.func $$getString_|genericconst...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return genericconstructor.GenericConstructor.$class;
+  (return (global.get $f_$class__genericconstructor_GenericConstructor))
+ )
+)
+
 ;;; Class<?> GenericConstructor.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@genericconstructor.GenericConstructor
  (type $function.$getClassImpl__java_lang_Class)
@@ -170,8 +187,8 @@
  (local $this (ref null $genericconstructor.GenericConstructor))
  (local.set $this (ref.cast_static $genericconstructor.GenericConstructor (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getGenericconstructor.GenericConstructor();
-  (return (call $function.no.side.effects.$getGenericconstructor.GenericConstructor__java_lang_Class (ref.func $$getGenericconstructor.GenericConstructor__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return genericconstructor.GenericConstructor.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@genericconstructor.GenericConstructor) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@genericconstructor.GenericConstructor)

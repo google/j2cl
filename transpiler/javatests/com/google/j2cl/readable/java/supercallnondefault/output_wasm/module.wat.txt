@@ -96,9 +96,11 @@
 
 ;;; Code for supercallnondefault.Parent [static fields]
 (global $f_$initialized__supercallnondefault_Parent (mut i32) (i32.const 0))
+(global $f_$class__supercallnondefault_Parent (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for supercallnondefault.Child [static fields]
 (global $f_$initialized__supercallnondefault_Child (mut i32) (i32.const 0))
+(global $f_$class__supercallnondefault_Child (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for supercallnondefault.Parent [methods]
 
@@ -158,6 +160,22 @@
  )
 )
 
+;;; Class<T> Parent.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@supercallnondefault.Parent
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((supercallnondefault.Parent.$class == null)) (supercallnondefault.Parent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|supercallnon...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__supercallnondefault_Parent) (ref.null $java.lang.Class))
+   (then
+    ;; (supercallnondefault.Parent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|supercallnon...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__supercallnondefault_Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|supercallnon...|__java_lang_String (ref.func $$getString_|supercallnon...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return supercallnondefault.Parent.$class;
+  (return (global.get $f_$class__supercallnondefault_Parent))
+ )
+)
+
 ;;; Class<?> Parent.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@supercallnondefault.Parent
  (type $function.$getClassImpl__java_lang_Class)
@@ -166,8 +184,8 @@
  (local $this (ref null $supercallnondefault.Parent))
  (local.set $this (ref.cast_static $supercallnondefault.Parent (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getSupercallnondefault.Parent();
-  (return (call $function.no.side.effects.$getSupercallnondefault.Parent__java_lang_Class (ref.func $$getSupercallnondefault.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return supercallnondefault.Parent.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@supercallnondefault.Parent) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@supercallnondefault.Parent)
@@ -230,6 +248,22 @@
  )
 )
 
+;;; Class<T> Child.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@supercallnondefault.Child
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((supercallnondefault.Child.$class == null)) (supercallnondefault.Child.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|supercallnon...|_1(),supercallnondefault.Parent.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__supercallnondefault_Child) (ref.null $java.lang.Class))
+   (then
+    ;; (supercallnondefault.Child.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|supercallnon...|_1(),supercallnondefault.Parent.$getClassMetadata()));
+    (global.set $f_$class__supercallnondefault_Child (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|supercallnon...|_1__java_lang_String (ref.func $$getString_|supercallnon...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@supercallnondefault.Parent) )))
+   )
+  )
+  ;; return supercallnondefault.Child.$class;
+  (return (global.get $f_$class__supercallnondefault_Child))
+ )
+)
+
 ;;; Class<?> Child.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@supercallnondefault.Child
  (type $function.$getClassImpl__java_lang_Class)
@@ -238,8 +272,8 @@
  (local $this (ref null $supercallnondefault.Child))
  (local.set $this (ref.cast_static $supercallnondefault.Child (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getSupercallnondefault.Child();
-  (return (call $function.no.side.effects.$getSupercallnondefault.Child__java_lang_Class (ref.func $$getSupercallnondefault.Child__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return supercallnondefault.Child.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@supercallnondefault.Child) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@supercallnondefault.Child)

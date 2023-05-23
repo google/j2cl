@@ -49,6 +49,7 @@
 
 ;;; Code for ternaryexpression.TernaryExpression [static fields]
 (global $f_$initialized__ternaryexpression_TernaryExpression (mut i32) (i32.const 0))
+(global $f_$class__ternaryexpression_TernaryExpression (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for ternaryexpression.TernaryExpression [methods]
 
@@ -138,6 +139,22 @@
  )
 )
 
+;;; Class<T> TernaryExpression.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@ternaryexpression.TernaryExpression
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((ternaryexpression.TernaryExpression.$class == null)) (ternaryexpression.TernaryExpression.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|ternaryexpre...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__ternaryexpression_TernaryExpression) (ref.null $java.lang.Class))
+   (then
+    ;; (ternaryexpression.TernaryExpression.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|ternaryexpre...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__ternaryexpression_TernaryExpression (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|ternaryexpre...|__java_lang_String (ref.func $$getString_|ternaryexpre...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return ternaryexpression.TernaryExpression.$class;
+  (return (global.get $f_$class__ternaryexpression_TernaryExpression))
+ )
+)
+
 ;;; Class<?> TernaryExpression.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@ternaryexpression.TernaryExpression
  (type $function.$getClassImpl__java_lang_Class)
@@ -146,8 +163,8 @@
  (local $this (ref null $ternaryexpression.TernaryExpression))
  (local.set $this (ref.cast_static $ternaryexpression.TernaryExpression (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getTernaryexpression.TernaryExpression();
-  (return (call $function.no.side.effects.$getTernaryexpression.TernaryExpression__java_lang_Class (ref.func $$getTernaryexpression.TernaryExpression__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return ternaryexpression.TernaryExpression.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@ternaryexpression.TernaryExpression) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@ternaryexpression.TernaryExpression)

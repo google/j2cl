@@ -47,6 +47,7 @@
 
 ;;; Code for jstypewithnamespace.JsTypeWithNamespace [static fields]
 (global $f_$initialized__jstypewithnamespace_JsTypeWithNamespace (mut i32) (i32.const 0))
+(global $f_$class__jstypewithnamespace_JsTypeWithNamespace (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for jstypewithnamespace.JsTypeWithNamespace [methods]
 
@@ -104,6 +105,22 @@
  )
 )
 
+;;; Class<T> JsTypeWithNamespace.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@jstypewithnamespace.JsTypeWithNamespace
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((jstypewithnamespace.JsTypeWithNamespace.$class == null)) (jstypewithnamespace.JsTypeWithNamespace.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jstypewithna...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__jstypewithnamespace_JsTypeWithNamespace) (ref.null $java.lang.Class))
+   (then
+    ;; (jstypewithnamespace.JsTypeWithNamespace.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jstypewithna...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__jstypewithnamespace_JsTypeWithNamespace (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jstypewithna...|__java_lang_String (ref.func $$getString_|jstypewithna...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return jstypewithnamespace.JsTypeWithNamespace.$class;
+  (return (global.get $f_$class__jstypewithnamespace_JsTypeWithNamespace))
+ )
+)
+
 ;;; Class<?> JsTypeWithNamespace.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@jstypewithnamespace.JsTypeWithNamespace
  (type $function.$getClassImpl__java_lang_Class)
@@ -112,8 +129,8 @@
  (local $this (ref null $jstypewithnamespace.JsTypeWithNamespace))
  (local.set $this (ref.cast_static $jstypewithnamespace.JsTypeWithNamespace (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJstypewithnamespace.JsTypeWithNamespace();
-  (return (call $function.no.side.effects.$getJstypewithnamespace.JsTypeWithNamespace__java_lang_Class (ref.func $$getJstypewithnamespace.JsTypeWithNamespace__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return jstypewithnamespace.JsTypeWithNamespace.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jstypewithnamespace.JsTypeWithNamespace) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jstypewithnamespace.JsTypeWithNamespace)

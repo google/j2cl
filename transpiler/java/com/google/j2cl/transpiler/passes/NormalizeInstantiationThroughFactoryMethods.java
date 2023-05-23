@@ -630,14 +630,8 @@ public class NormalizeInstantiationThroughFactoryMethods extends LibraryNormaliz
     }
 
     // Class and string literals
-    return target
-            .getEnclosingTypeDescriptor()
-            .getQualifiedSourceName()
-            .equals("javaemul.internal.ClassLiteralPool")
-        || target
-            .getEnclosingTypeDescriptor()
-            .getQualifiedSourceName()
-            .equals("javaemul.internal.StringPool");
+    return target.getOrigin() == MethodOrigin.SYNTHETIC_CLASS_LITERAL_GETTER
+        || target.getOrigin() == MethodOrigin.SYNTHETIC_STRING_LITERAL_GETTER;
   }
 
   /** Propagates transitively the constructor summaries. */

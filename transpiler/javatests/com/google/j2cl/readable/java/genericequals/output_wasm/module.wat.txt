@@ -51,6 +51,7 @@
 
 ;;; Code for genericequals.GenericEquals [static fields]
 (global $f_$initialized__genericequals_GenericEquals (mut i32) (i32.const 0))
+(global $f_$class__genericequals_GenericEquals (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for genericequals.GenericEquals [methods]
 
@@ -170,6 +171,22 @@
  )
 )
 
+;;; Class<T> GenericEquals.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@genericequals.GenericEquals
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((genericequals.GenericEquals.$class == null)) (genericequals.GenericEquals.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|genericequal...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__genericequals_GenericEquals) (ref.null $java.lang.Class))
+   (then
+    ;; (genericequals.GenericEquals.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|genericequal...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__genericequals_GenericEquals (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericequal...|__java_lang_String (ref.func $$getString_|genericequal...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return genericequals.GenericEquals.$class;
+  (return (global.get $f_$class__genericequals_GenericEquals))
+ )
+)
+
 ;;; Class<?> GenericEquals.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@genericequals.GenericEquals
  (type $function.$getClassImpl__java_lang_Class)
@@ -178,8 +195,8 @@
  (local $this (ref null $genericequals.GenericEquals))
  (local.set $this (ref.cast_static $genericequals.GenericEquals (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getGenericequals.GenericEquals();
-  (return (call $function.no.side.effects.$getGenericequals.GenericEquals__java_lang_Class (ref.func $$getGenericequals.GenericEquals__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return genericequals.GenericEquals.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@genericequals.GenericEquals) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@genericequals.GenericEquals)

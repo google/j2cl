@@ -49,6 +49,7 @@
 
 ;;; Code for implicitparenthesis.ImplicitParenthesis [static fields]
 (global $f_$initialized__implicitparenthesis_ImplicitParenthesis (mut i32) (i32.const 0))
+(global $f_$class__implicitparenthesis_ImplicitParenthesis (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for implicitparenthesis.ImplicitParenthesis [methods]
 
@@ -282,6 +283,22 @@
  )
 )
 
+;;; Class<T> ImplicitParenthesis.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@implicitparenthesis.ImplicitParenthesis
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((implicitparenthesis.ImplicitParenthesis.$class == null)) (implicitparenthesis.ImplicitParenthesis.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|implicitpare...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__implicitparenthesis_ImplicitParenthesis) (ref.null $java.lang.Class))
+   (then
+    ;; (implicitparenthesis.ImplicitParenthesis.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|implicitpare...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__implicitparenthesis_ImplicitParenthesis (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|implicitpare...|__java_lang_String (ref.func $$getString_|implicitpare...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return implicitparenthesis.ImplicitParenthesis.$class;
+  (return (global.get $f_$class__implicitparenthesis_ImplicitParenthesis))
+ )
+)
+
 ;;; Class<?> ImplicitParenthesis.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@implicitparenthesis.ImplicitParenthesis
  (type $function.$getClassImpl__java_lang_Class)
@@ -290,8 +307,8 @@
  (local $this (ref null $implicitparenthesis.ImplicitParenthesis))
  (local.set $this (ref.cast_static $implicitparenthesis.ImplicitParenthesis (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getImplicitparenthesis.ImplicitParenthesis();
-  (return (call $function.no.side.effects.$getImplicitparenthesis.ImplicitParenthesis__java_lang_Class (ref.func $$getImplicitparenthesis.ImplicitParenthesis__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return implicitparenthesis.ImplicitParenthesis.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@implicitparenthesis.ImplicitParenthesis) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@implicitparenthesis.ImplicitParenthesis)

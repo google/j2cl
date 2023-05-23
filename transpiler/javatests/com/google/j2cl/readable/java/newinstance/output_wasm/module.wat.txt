@@ -47,6 +47,7 @@
 
 ;;; Code for newinstance.NewInstanceExpr [static fields]
 (global $f_$initialized__newinstance_NewInstanceExpr (mut i32) (i32.const 0))
+(global $f_$class__newinstance_NewInstanceExpr (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for newinstance.NewInstanceExpr [methods]
 
@@ -119,6 +120,22 @@
  )
 )
 
+;;; Class<T> NewInstanceExpr.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@newinstance.NewInstanceExpr
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((newinstance.NewInstanceExpr.$class == null)) (newinstance.NewInstanceExpr.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|newinstance....|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__newinstance_NewInstanceExpr) (ref.null $java.lang.Class))
+   (then
+    ;; (newinstance.NewInstanceExpr.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|newinstance....|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__newinstance_NewInstanceExpr (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|newinstance....|__java_lang_String (ref.func $$getString_|newinstance....|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return newinstance.NewInstanceExpr.$class;
+  (return (global.get $f_$class__newinstance_NewInstanceExpr))
+ )
+)
+
 ;;; Class<?> NewInstanceExpr.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@newinstance.NewInstanceExpr
  (type $function.$getClassImpl__java_lang_Class)
@@ -127,8 +144,8 @@
  (local $this (ref null $newinstance.NewInstanceExpr))
  (local.set $this (ref.cast_static $newinstance.NewInstanceExpr (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getNewinstance.NewInstanceExpr();
-  (return (call $function.no.side.effects.$getNewinstance.NewInstanceExpr__java_lang_Class (ref.func $$getNewinstance.NewInstanceExpr__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return newinstance.NewInstanceExpr.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@newinstance.NewInstanceExpr) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@newinstance.NewInstanceExpr)

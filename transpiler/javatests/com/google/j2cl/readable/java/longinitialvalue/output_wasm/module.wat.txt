@@ -26,6 +26,7 @@
 ;;; Code for longinitialvalue.LongInitialValue [static fields]
 (global $f_LONG_VALUE__longinitialvalue_LongInitialValue (mut i64) (i64.const 0))
 (global $f_$initialized__longinitialvalue_LongInitialValue (mut i32) (i32.const 0))
+(global $f_$class__longinitialvalue_LongInitialValue (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for longinitialvalue.LongInitialValue [methods]
 
@@ -62,5 +63,21 @@
   ;; java.lang.Object.$clinit();
   ;;@ longinitialvalue/LongInitialValue.java:18:22
   (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<T> LongInitialValue.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@longinitialvalue.LongInitialValue
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((longinitialvalue.LongInitialValue.$class == null)) (longinitialvalue.LongInitialValue.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|longinitialv...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__longinitialvalue_LongInitialValue) (ref.null $java.lang.Class))
+   (then
+    ;; (longinitialvalue.LongInitialValue.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|longinitialv...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__longinitialvalue_LongInitialValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|longinitialv...|__java_lang_String (ref.func $$getString_|longinitialv...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return longinitialvalue.LongInitialValue.$class;
+  (return (global.get $f_$class__longinitialvalue_LongInitialValue))
  )
 )

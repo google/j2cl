@@ -47,6 +47,7 @@
 
 ;;; Code for emptymethod.EmptyMethod [static fields]
 (global $f_$initialized__emptymethod_EmptyMethod (mut i32) (i32.const 0))
+(global $f_$class__emptymethod_EmptyMethod (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for emptymethod.EmptyMethod [methods]
 
@@ -115,6 +116,22 @@
  )
 )
 
+;;; Class<T> EmptyMethod.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@emptymethod.EmptyMethod
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((emptymethod.EmptyMethod.$class == null)) (emptymethod.EmptyMethod.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|emptymethod....|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__emptymethod_EmptyMethod) (ref.null $java.lang.Class))
+   (then
+    ;; (emptymethod.EmptyMethod.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|emptymethod....|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__emptymethod_EmptyMethod (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|emptymethod....|__java_lang_String (ref.func $$getString_|emptymethod....|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return emptymethod.EmptyMethod.$class;
+  (return (global.get $f_$class__emptymethod_EmptyMethod))
+ )
+)
+
 ;;; Class<?> EmptyMethod.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@emptymethod.EmptyMethod
  (type $function.$getClassImpl__java_lang_Class)
@@ -123,8 +140,8 @@
  (local $this (ref null $emptymethod.EmptyMethod))
  (local.set $this (ref.cast_static $emptymethod.EmptyMethod (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getEmptymethod.EmptyMethod();
-  (return (call $function.no.side.effects.$getEmptymethod.EmptyMethod__java_lang_Class (ref.func $$getEmptymethod.EmptyMethod__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return emptymethod.EmptyMethod.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@emptymethod.EmptyMethod) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@emptymethod.EmptyMethod)

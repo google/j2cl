@@ -47,6 +47,7 @@
 
 ;;; Code for wasmentrypoints.WasmEntryPoints [static fields]
 (global $f_$initialized__wasmentrypoints_WasmEntryPoints (mut i32) (i32.const 0))
+(global $f_$class__wasmentrypoints_WasmEntryPoints (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 
 ;;; Code for wasmentrypoints.WasmEntryPoints [methods]
 
@@ -136,6 +137,22 @@
  )
 )
 
+;;; Class<T> WasmEntryPoints.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@wasmentrypoints.WasmEntryPoints
+ (result (ref null $java.lang.Class))
+ (block
+  ;; if ((wasmentrypoints.WasmEntryPoints.$class == null)) (wasmentrypoints.WasmEntryPoints.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|wasmentrypoi...|(),java.lang.Object.$getClassMetadata()));
+  (if (ref.eq (global.get $f_$class__wasmentrypoints_WasmEntryPoints) (ref.null $java.lang.Class))
+   (then
+    ;; (wasmentrypoints.WasmEntryPoints.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|wasmentrypoi...|(),java.lang.Object.$getClassMetadata()));
+    (global.set $f_$class__wasmentrypoints_WasmEntryPoints (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|wasmentrypoi...|__java_lang_String (ref.func $$getString_|wasmentrypoi...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  ;; return wasmentrypoints.WasmEntryPoints.$class;
+  (return (global.get $f_$class__wasmentrypoints_WasmEntryPoints))
+ )
+)
+
 ;;; Class<?> WasmEntryPoints.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@wasmentrypoints.WasmEntryPoints
  (type $function.$getClassImpl__java_lang_Class)
@@ -144,8 +161,8 @@
  (local $this (ref null $wasmentrypoints.WasmEntryPoints))
  (local.set $this (ref.cast_static $wasmentrypoints.WasmEntryPoints (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getWasmentrypoints.WasmEntryPoints();
-  (return (call $function.no.side.effects.$getWasmentrypoints.WasmEntryPoints__java_lang_Class (ref.func $$getWasmentrypoints.WasmEntryPoints__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return wasmentrypoints.WasmEntryPoints.$getClassMetadata();
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@wasmentrypoints.WasmEntryPoints) ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@wasmentrypoints.WasmEntryPoints)
