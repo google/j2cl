@@ -4,9 +4,8 @@ Takes Java source, translates it into Wasm.
 This is an experimental tool and should not be used.
 """
 
-load(":j2cl_common.bzl", "J2CL_TOOLCHAIN_ATTRS")
 load(":j2cl_js_common.bzl", "JS_PROVIDER_NAME")
-load(":j2wasm_common.bzl", "j2wasm_common")
+load(":j2wasm_common.bzl", "J2WASM_TOOLCHAIN_ATTRS", "j2wasm_common")
 load("//build_defs/internal_do_not_use:provider.bzl", "J2wasmInfo")
 
 J2WASM_LIB_ATTRS = {
@@ -19,14 +18,7 @@ J2WASM_LIB_ATTRS = {
     "javacopts": attr.string_list(),
 }
 
-J2WASM_LIB_ATTRS.update(J2CL_TOOLCHAIN_ATTRS)
-
-# Override the java toolchain to use the j2wasm one.
-J2WASM_LIB_ATTRS.update({
-    "_java_toolchain": attr.label(
-        default = Label("//build_defs/internal_do_not_use:j2wasm_java_toolchain"),
-    ),
-})
+J2WASM_LIB_ATTRS.update(J2WASM_TOOLCHAIN_ATTRS)
 
 def _impl_j2wasm_library_rule(ctx):
     extra_javacopts = ["-Adagger.fastInit=enabled"]

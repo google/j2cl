@@ -27,15 +27,11 @@ def _compile(
 
     jvm_srcs, js_srcs = split_srcs(srcs)
 
-    # TODO(b/283155439): Remove hack when j2wasm protos have their own aspect and the
-    # modular compilation action is no longer triggered when building grok output.
-    enabled = backend != "WASM_MODULAR" or not ctx.var.get("GROK_ELLIPSIS_BUILD", None)
-
-    has_srcs_to_transpile = (jvm_srcs or kt_common_srcs) and enabled
+    has_srcs_to_transpile = (jvm_srcs or kt_common_srcs)
     has_kotlin_srcs = any([src for src in jvm_srcs if src.extension == "kt"]) or kt_common_srcs
 
     # Validate the attributes.
-    if not has_srcs_to_transpile and enabled:
+    if not has_srcs_to_transpile:
         if deps:
             fail("deps not allowed without java or kotlin srcs")
         if js_srcs:

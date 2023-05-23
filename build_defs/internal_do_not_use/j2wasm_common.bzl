@@ -1,6 +1,6 @@
 """Common utilities for creating J2WASM targets and providers."""
 
-load(":j2cl_common.bzl", "j2cl_common", "split_deps", "split_srcs")
+load(":j2cl_common.bzl", "J2CL_TOOLCHAIN_ATTRS", "j2cl_common", "split_deps", "split_srcs")
 load(":j2cl_js_common.bzl", "j2cl_js_provider")
 load(":provider.bzl", "J2wasmInfo")
 
@@ -88,3 +88,11 @@ j2wasm_common = struct(
     compile = _compile,
     to_j2wasm_name = _to_j2wasm_name,
 )
+
+J2WASM_TOOLCHAIN_ATTRS = {}
+J2WASM_TOOLCHAIN_ATTRS.update(J2CL_TOOLCHAIN_ATTRS)
+J2WASM_TOOLCHAIN_ATTRS.update({
+    "_java_toolchain": attr.label(
+        default = Label("//build_defs/internal_do_not_use:j2wasm_java_toolchain"),
+    ),
+})
