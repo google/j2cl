@@ -1887,9 +1887,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "    extends AList<MyJsEnum> implements List<MyJsEnum>  {",
             "    public MyJsEnum getObject() { return null; }",
             "}",
-            "interface Consumer<T> {",
-            "  void accept(T t);",
-            "}",
             "interface EnumList<E extends Enum<E>> {",
             "}")
         .assertErrorsWithoutSourcePosition(
