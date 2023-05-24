@@ -47,6 +47,7 @@ def _j2wasm_or_js_provider_of(dep):
 j2wasm_library = rule(
     implementation = _impl_j2wasm_library_rule,
     attrs = J2WASM_LIB_ATTRS,
+    toolchains = ["@bazel_tools//tools/jdk:toolchain_type"],
     fragments = ["java", "js"],
     outputs = {
         "jar": "lib%{name}.jar",

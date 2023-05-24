@@ -93,6 +93,7 @@ j2cl_library = rule(
     implementation = _impl_j2cl_library,
     attrs = _J2CL_LIB_ATTRS,
     fragments = ["java", "js"],
+    toolchains = ["@bazel_tools//tools/jdk:toolchain_type"],
     outputs = {
         "jar": "lib%{name}.jar",
         "srcjar": "lib%{name}-src.jar",
