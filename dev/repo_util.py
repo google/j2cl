@@ -148,12 +148,20 @@ CLOSURE_LICENSE = """/*
 
 
 def get_compressed_size(file_name):
+  """Returns compressed size for taget or -1 if doesn't exist."""
+
   if not os.path.exists(file_name):
     return -1
-  with open(file_name, "r") as f:
-    # Drop closure license to reduce noise in size tests.
-    contents = f.read().replace(CLOSURE_LICENSE, "")
-    compressed_content = bz2.compress(contents.encode("utf-8"))
+
+  if file_name.endswith(".wasm"):
+    with open(file_name, "rb") as f:
+      contents = f.read()
+  else:
+    with open(file_name, "r") as f:
+      # Drop closure license to reduce noise in size tests.
+      contents = f.read().replace(CLOSURE_LICENSE, "").encode("utf-8")
+
+  compressed_content = bz2.compress(contents)
   return len(compressed_content)
 
 

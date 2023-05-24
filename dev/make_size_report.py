@@ -84,12 +84,12 @@ def make_size_report(path_name, original_bundled_targets, original_opt_targets,
                                              test_name.partition("/"))
     if incremental:
       inc_original, inc_modified = get_files(incremental)
+      original_increment = (
+          get_size(inc_original) - get_size(original) if existing_target else -1
+      )
+      modified_increment = get_size(inc_modified) - get_size(modified)
       incremental_reports.append(
-          create_report(
-              test_name,
-              get_size(inc_original) - get_size(original),
-              get_size(inc_modified) - get_size(modified),
-          )
+          create_report(test_name, original_increment, modified_increment)
       )
 
   changed_reports = [report for report in all_reports if report[0] != 100]
