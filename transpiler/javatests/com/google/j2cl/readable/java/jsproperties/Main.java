@@ -77,6 +77,18 @@ class NativeFoo {
   public static native double getB();
 }
 
+interface InterfaceWithDefaultJsProperties {
+  @JsProperty
+  default int getM() {
+    return 3;
+  }
+
+  @JsProperty
+  default void setM(int value) {}
+}
+
+class ImplementsInterfaceWithDefaultJsProperties implements InterfaceWithDefaultJsProperties {}
+
 public class Main {
   public void testNativeJsProperty() {
     new NativeFoo().getA();

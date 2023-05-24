@@ -1,0 +1,44 @@
+goog.module('jsproperties.InterfaceWithDefaultJsProperties$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class InterfaceWithDefaultJsProperties {
+ /** @abstract @return {number} */
+ get m() {}
+ /** @abstract */
+ set m(/** number */ value) {}
+ /** @nodts @return {number} */
+ static m_getM__$default__jsproperties_InterfaceWithDefaultJsProperties__int(/** !InterfaceWithDefaultJsProperties */ $thisArg) {
+  InterfaceWithDefaultJsProperties.$clinit();
+  return 3;
+ }
+ /** @nodts */
+ static m_setM__$default__jsproperties_InterfaceWithDefaultJsProperties__int__void(/** !InterfaceWithDefaultJsProperties */ $thisArg, /** number */ value) {
+  InterfaceWithDefaultJsProperties.$clinit();
+ }
+ /** @nodts */
+ static $clinit() {
+  InterfaceWithDefaultJsProperties.$clinit = () =>{};
+  InterfaceWithDefaultJsProperties.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__jsproperties_InterfaceWithDefaultJsProperties = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__jsproperties_InterfaceWithDefaultJsProperties;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+InterfaceWithDefaultJsProperties.$markImplementor(/**@type {Function}*/ (InterfaceWithDefaultJsProperties));
+$Util.$setClassMetadataForInterface(InterfaceWithDefaultJsProperties, 'jsproperties.InterfaceWithDefaultJsProperties');
+
+exports = InterfaceWithDefaultJsProperties;
+
+//# sourceMappingURL=InterfaceWithDefaultJsProperties.js.map

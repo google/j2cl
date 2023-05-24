@@ -1,0 +1,56 @@
+goog.module('jsproperties.ImplementsInterfaceWithDefaultJsProperties$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const InterfaceWithDefaultJsProperties = goog.require('jsproperties.InterfaceWithDefaultJsProperties$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @implements {InterfaceWithDefaultJsProperties}
+ */
+class ImplementsInterfaceWithDefaultJsProperties extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!ImplementsInterfaceWithDefaultJsProperties} */
+ static $create__() {
+  ImplementsInterfaceWithDefaultJsProperties.$clinit();
+  let $instance = new ImplementsInterfaceWithDefaultJsProperties();
+  $instance.$ctor__jsproperties_ImplementsInterfaceWithDefaultJsProperties__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsproperties_ImplementsInterfaceWithDefaultJsProperties__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ //Default method forwarding stub.
+ /** @override @return {number} */
+ get m() {
+  return InterfaceWithDefaultJsProperties.m_getM__$default__jsproperties_InterfaceWithDefaultJsProperties__int(this);
+ }
+ //Default method forwarding stub.
+ /** @override */
+ set m(/** number */ arg0) {
+  InterfaceWithDefaultJsProperties.m_setM__$default__jsproperties_InterfaceWithDefaultJsProperties__int__void(this, arg0);
+ }
+ /** @nodts */
+ static $clinit() {
+  ImplementsInterfaceWithDefaultJsProperties.$clinit = () =>{};
+  ImplementsInterfaceWithDefaultJsProperties.$loadModules();
+  j_l_Object.$clinit();
+  InterfaceWithDefaultJsProperties.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ImplementsInterfaceWithDefaultJsProperties;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+InterfaceWithDefaultJsProperties.$markImplementor(ImplementsInterfaceWithDefaultJsProperties);
+$Util.$setClassMetadata(ImplementsInterfaceWithDefaultJsProperties, 'jsproperties.ImplementsInterfaceWithDefaultJsProperties');
+
+exports = ImplementsInterfaceWithDefaultJsProperties;
+
+//# sourceMappingURL=ImplementsInterfaceWithDefaultJsProperties.js.map

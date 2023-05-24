@@ -18,6 +18,7 @@ package jsproperties;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsProperty;
 
 public class Main {
   public static void main(String... args) {
@@ -26,6 +27,7 @@ public class Main {
     m.testNativeInstanceJsProperty();
     m.testNativeStaticJsProperty();
     m.testStaticJsProperty();
+    m.testDefaultMethodJsProperty();
   }
 
   public void testNativeStaticJsProperty() {
@@ -76,6 +78,42 @@ public class Main {
     assertTrue(getBarB(bar) == 35);
     setBarB(bar, 40);
     assertTrue(getBarB(bar) == 47);
+  }
+
+  interface InterfaceWithDefaultJsProperties {
+    int getterCalled();
+
+    void setterCalled(int v);
+
+    @JsProperty
+    default int getValue() {
+      return getterCalled();
+    }
+
+    @JsProperty
+    default void setValue(int value) {
+      setterCalled(value);
+    }
+  }
+
+  class Implementor implements InterfaceWithDefaultJsProperties {
+    private int v = 0;
+
+    @Override
+    public int getterCalled() {
+      return v;
+    }
+
+    @Override
+    public void setterCalled(int v) {
+      this.v = v;
+    }
+  }
+
+  private void testDefaultMethodJsProperty() {
+    InterfaceWithDefaultJsProperties i = new Implementor();
+    i.setValue(3);
+    assertTrue(3 == i.getValue());
   }
 
   @JsMethod
