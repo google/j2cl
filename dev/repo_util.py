@@ -22,8 +22,7 @@ import signal
 import subprocess
 
 INTEGRATION_ROOT = "transpiler/javatests/com/google/j2cl/integration/"
-OBFUSCATED_OPT_TEST_PATTERN = INTEGRATION_ROOT + "%s:optimized_js%s"
-READABLE_OPT_TEST_PATTERN = INTEGRATION_ROOT + "%s:readable_optimized_js%s"
+READABLE_OPT_TEST_PATTERN = INTEGRATION_ROOT + "%s:readable_optimized_js%s.js"
 SIZE_REPORT = INTEGRATION_ROOT + "size_report.txt"
 TEST_LIST = INTEGRATION_ROOT + "optimized_js_list.bzl"
 BENCH_ROOT = "benchmarking/java/com/google/j2cl/benchmarks/"
@@ -70,13 +69,7 @@ def build_original_and_modified(original_targets, modified_targets):
 
 def build_tests(test_targets, cwd=None):
   """Blaze builds provided integration tests in parallel."""
-  js_targets = [t + ".js" for t in test_targets]
-  run_cmd(["blaze", "build"] + js_targets, cwd=cwd)
-
-
-def get_optimized_test(test_name):
-  """Returns the path to the obfuscated opt JS file the given test."""
-  return OBFUSCATED_OPT_TEST_PATTERN % parse_name(test_name)
+  run_cmd(["blaze", "build"] + test_targets, cwd=cwd)
 
 
 def get_readable_optimized_test(test_name):
@@ -115,8 +108,8 @@ def parse_name(test_name):
 def get_all_size_tests(cwd=None):
   """Returns all size tests."""
 
-  bundled = [t + "-bundle" for t in _get_tests_with_tag("j2size_bundle", cwd)]
-  optimized = _get_tests_with_tag("j2size_opt", cwd)
+  bundled = _get_tests_with_tag("j2_size_bundle", cwd)
+  optimized = _get_tests_with_tag("j2_size_opt", cwd)
   return (bundled, optimized)
 
 
@@ -129,7 +122,7 @@ def _get_tests_with_tag(tag, cwd=None):
   return run_cmd(command, cwd=cwd).splitlines()
 
 
-def get_js_files_by_test_name(test_targets):
+def get_files_by_test_name(test_targets):
   """Finds and returns a test_name<->optimized_js_file map."""
 
   # Convert to a map of names<->jsFile pairs
@@ -164,8 +157,8 @@ def get_compressed_size(file_name):
   return len(compressed_content)
 
 
-def get_file_from_target(target, extension=".js"):
-  return target.replace(":", "/") + extension
+def get_file_from_target(target):
+  return target.replace(":", "/")
 
 
 def sync_j2size_repo():

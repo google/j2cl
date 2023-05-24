@@ -43,10 +43,12 @@ def make_size_report(path_name, original_bundled_targets, original_opt_targets,
 
   print("  Collecting original and modified sizes.")
 
-  bundled_by_test_name = repo_util.get_js_files_by_test_name(
-      modified_bundled_targets)
-  optimized_by_test_name = repo_util.get_js_files_by_test_name(
-      modified_opt_targets)
+  bundled_by_test_name = repo_util.get_files_by_test_name(
+      modified_bundled_targets
+  )
+  optimized_by_test_name = repo_util.get_files_by_test_name(
+      modified_opt_targets
+  )
 
   print("  Comparing results.")
 
@@ -54,11 +56,10 @@ def make_size_report(path_name, original_bundled_targets, original_opt_targets,
 
   for test_name in sorted(bundled_by_test_name.keys()):
     test = bundled_by_test_name.get(test_name)
-    original_js_file, modified_js_file = get_files(test)
+    original, modified = get_files(test)
     uncompiled_reports.append(
-        create_report(test_name,
-                      get_size(original_js_file),
-                      get_size(modified_js_file)))
+        create_report(test_name, get_size(original), get_size(modified))
+    )
 
   original_total_size = 0
   modified_total_size = 0
@@ -68,28 +69,28 @@ def make_size_report(path_name, original_bundled_targets, original_opt_targets,
 
   for test_name in sorted(optimized_by_test_name.keys()):
     test = optimized_by_test_name.get(test_name)
-    original_js_file, modified_js_file = get_files(test)
-    original_size = repo_util.get_compressed_size(original_js_file)
-    modified_size = repo_util.get_compressed_size(modified_js_file)
+    original, modified = get_files(test)
+    original_size = repo_util.get_compressed_size(original)
+    modified_size = repo_util.get_compressed_size(modified)
 
-    existing_target = os.path.exists(original_js_file)
+    existing_target = os.path.exists(original)
     if existing_target:
       modified_total_size += modified_size
       original_total_size += original_size
 
-    all_reports.append(
-        create_report(test_name, original_size,
-                      modified_size))
+    all_reports.append(create_report(test_name, original_size, modified_size))
 
     incremental = optimized_by_test_name.get("%s_inc%s%s" %
-                                             test_name.partition("."))
+                                             test_name.partition("/"))
     if incremental:
-      inc_original_js_file, inc_modified_js_file = get_files(incremental)
+      inc_original, inc_modified = get_files(incremental)
       incremental_reports.append(
           create_report(
               test_name,
-              get_size(inc_original_js_file) - get_size(original_js_file),
-              get_size(inc_modified_js_file) - get_size(modified_js_file)))
+              get_size(inc_original) - get_size(original),
+              get_size(inc_modified) - get_size(modified),
+          )
+      )
 
   changed_reports = [report for report in all_reports if report[0] != 100]
   shrinkage_reports = [report for report in changed_reports if report[0] < 100]
@@ -145,9 +146,9 @@ def make_size_report(path_name, original_bundled_targets, original_opt_targets,
 
 
 def get_files(test):
-  modified_js_file = "blaze-bin/" + test
-  original_js_file = repo_util.get_j2size_repo_path() + "/" + modified_js_file
-  return original_js_file, modified_js_file
+  modified = "blaze-bin/" + test
+  original = repo_util.get_j2size_repo_path() + "/" + modified
+  return (original, modified)
 
 
 def get_size(filename):
@@ -172,7 +173,7 @@ def create_report(test_name, original_size, modified_size):
     note = "unchanged" if size_percent == 100 else "%.1f%%" % (
         size_percent - 100)
   else:
-    # The original JS file doesn't exist, this is a new result.
+    # The original file doesn't exist, this is a new result.
     size_percent = 100
     note = "new"
 
