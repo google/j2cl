@@ -21,8 +21,6 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import java.util.List;
-import java.util.function.Function;
-import javax.annotation.Nullable;
 
 /** Utility TypeDescriptors methods used to synthesize lambda implementors. */
 // TODO(b/63118697): Simplify this code once TD refactoring makes it easier to implement.
@@ -117,12 +115,14 @@ public final class LambdaImplementorTypeDescriptors {
         .setVisibility(Visibility.PUBLIC)
         .setCapturingEnclosingInstance(capturesEnclosingInstance)
         .setKind(Kind.CLASS)
+        .setAnonymous(true)
         .build();
   }
 
   /** Returns the MethodDescriptor for the SAM implementation in the LambdaImplementor class. */
   @SuppressWarnings("ReferenceEquality")
-  public static MethodDescriptor getLambdaMethod(DeclaredTypeDescriptor implementorTypeDescriptor) {
+  private static MethodDescriptor getLambdaMethod(
+      DeclaredTypeDescriptor implementorTypeDescriptor) {
     DeclaredTypeDescriptor functionalInterfaceTypeDescriptor =
         implementorTypeDescriptor.getFunctionalInterface();
     checkState(
@@ -131,31 +131,14 @@ public final class LambdaImplementorTypeDescriptors {
 
     MethodDescriptor functionalInterfaceMethodDescriptor =
         functionalInterfaceTypeDescriptor.getSingleAbstractMethodDescriptor();
-    // TODO(rluble): Migrate to MethodDescriptor.tranform.
     return MethodDescriptor.Builder.from(functionalInterfaceMethodDescriptor)
         .setNative(false)
         // This is the declaration.
-        .setDeclarationDescriptor(
-            createRelatedMethodDeclaration(
-                LambdaImplementorTypeDescriptors::getLambdaMethod, implementorTypeDescriptor))
+        .setDeclarationDescriptor(null)
         .setEnclosingTypeDescriptor(implementorTypeDescriptor)
-        // Remove the method type parameters as they when moved to the adaptor type.
-        .setTypeParameterTypeDescriptors(ImmutableList.of())
         .setSynthetic(false)
         .setAbstract(false)
         .build();
-  }
-
-  @Nullable
-  private static MethodDescriptor createRelatedMethodDeclaration(
-      Function<DeclaredTypeDescriptor, MethodDescriptor> creator,
-      DeclaredTypeDescriptor typeDescriptor) {
-    DeclaredTypeDescriptor unparameterizedTypeDescriptor =
-        typeDescriptor.toUnparameterizedTypeDescriptor();
-    if (unparameterizedTypeDescriptor.equals(typeDescriptor)) {
-      return null;
-    }
-    return creator.apply(unparameterizedTypeDescriptor);
   }
 
   private LambdaImplementorTypeDescriptors() {}
