@@ -52,7 +52,6 @@ import com.google.j2cl.transpiler.backend.kotlin.source.infix
 import com.google.j2cl.transpiler.backend.kotlin.source.join
 import com.google.j2cl.transpiler.backend.kotlin.source.newLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.source
-import com.google.j2cl.transpiler.backend.kotlin.source.sourceIf
 import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
 
 internal fun Renderer.statementsSource(statements: List<Statement>): Source =
@@ -143,9 +142,7 @@ private fun Renderer.fieldDeclarationStatementSource(
       assignment(
         colonSeparated(
           identifierSource(fieldDescriptor.name!!),
-          sourceIf(!fieldDescriptor.typeDescriptor.isProtobufBuilder()) {
-            typeDescriptorSource(fieldDescriptor.typeDescriptor)
-          }
+          typeDescriptorSource(fieldDescriptor.typeDescriptor)
         ),
         expressionSource(declaration.expression)
       )
