@@ -45,26 +45,40 @@ def get_benchmarks(bench_name, platforms):
 
 def build_original_and_modified(original_targets, modified_targets):
   """Blaze builds provided original/modified integration tests in parallel."""
+  build_targets_with_workspace(
+      original_targets, modified_targets, get_j2size_repo_path(), None
+  )
 
-  # Create a pool that does not capture ctrl-c.
-  original_sigint_handler = signal.signal(signal.SIGINT, signal.SIG_IGN)
-  pool = multiprocessing.Pool(processes=2)
-  signal.signal(signal.SIGINT, original_sigint_handler)
 
-  original_result = pool.apply_async(
-      build_tests, [original_targets, get_j2size_repo_path()],
-      callback=lambda x: print("    Original done building."))
+def build_targets_with_workspace(targets1, targets2, repo1, repo2):
+  """Blaze builds the two sets of targets in parallel if needed."""
+  if repo1 == repo2:
+    # Just build the two sets of targets in one blaze build
+    build_tests(targets1 + targets2, repo1)
+  else:
+    # Create a pool that does not capture ctrl-c.
+    original_sigint_handler = signal.signal(signal.SIGINT, signal.SIG_IGN)
+    pool = multiprocessing.Pool(processes=2)
+    signal.signal(signal.SIGINT, original_sigint_handler)
 
-  modified_result = pool.apply_async(
-      build_tests, [modified_targets],
-      callback=lambda x: print("    Modified done building."))
-  pool.close()
-  pool.join()
+    result1 = pool.apply_async(
+        build_tests,
+        [targets1, repo1],
+        callback=lambda x: print("    Original done building."),
+    )
 
-  # Invoke get() on async results to "propagate" the exceptions that
-  # were raised if any.
-  original_result.get()
-  modified_result.get()
+    result2 = pool.apply_async(
+        build_tests,
+        [targets2, repo2],
+        callback=lambda x: print("    Modified done building."),
+    )
+    pool.close()
+    pool.join()
+
+    # Invoke get() on async results to "propagate" the exceptions that
+    # were raised if any.
+    result1.get()
+    result2.get()
 
 
 def build_tests(test_targets, cwd=None):
@@ -103,6 +117,20 @@ def parse_name(test_name):
   """Parses a test name into a tuple contains the test name and the version."""
   (name, sep, version) = test_name.partition(".")
   return (name, sep + version)
+
+
+def get_rule_kind(target, cwd=None):
+  """Returns the rule kind of the target if it exists, otherwise return None."""
+  command = ["blaze", "query", '"%s"' % target, "--output=label_kind"]
+
+  try:
+    result = run_cmd(command, cwd=cwd).split()
+    # the output of the cmd is "{rule_kind} rule {target_label}"
+    return result[0]
+  except Exception:
+    # invalid target, just return None to the caller so we know the target does
+    # not exist.
+    return None
 
 
 def get_all_size_tests(cwd=None):
@@ -178,7 +206,11 @@ def sync_j2size_repo():
 
 
 def get_j2size_repo_path():
-  return "/google/src/cloud/%s/j2cl-size/google3" % getpass.getuser()
+  return get_repo_path("j2cl-size")
+
+
+def get_repo_path(workspace):
+  return "/google/src/cloud/%s/%s/google3" % (getpass.getuser(), workspace)
 
 
 def run_cmd(cmd_args, cwd=None, include_stderr=False, shell=False):

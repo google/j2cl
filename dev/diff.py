@@ -14,34 +14,144 @@
 """Diffs optimized integration test JS with current CL changes."""
 
 import argparse
+import os
 import shutil
 import subprocess
 
 import repo_util
 
 
+class TargetInfo:
+  repository_name = None
+  blaze_target = ""
+  original_target = ""
+
+  def __init__(self, repository, blaze_target, original_target):
+    self.repository_name = repository
+    self.blaze_target = blaze_target
+    self.original_target = original_target
+
+  def get_repository_path(self):
+    return (
+        repo_util.get_repo_path(self.repository_name)
+        if self.repository_name
+        else None
+    )
+
+  def get_output_file(self):
+    file_path = "blaze-bin/" + repo_util.get_file_from_target(self.blaze_target)
+    if self.repository_name:
+      file_path = f"{self.get_repository_path()}/{file_path}"
+
+    return file_path
+
+  def get_formatted_file(self):
+    return "/tmp/" + self.get_output_file().replace("/", ".")
+
+  def validate(self):
+    if self.repository_name and not os.path.isdir(self.get_repository_path()):
+      raise argparse.ArgumentTypeError(
+          "Invalid workspace [%s] in argument [%s]"
+          % (self.repository_name, self.original_target)
+      )
+
+    # We only support js_binary target for now.
+    rule_kind = repo_util.get_rule_kind(
+        self.blaze_target, self.get_repository_path()
+    )
+    if not rule_kind:
+      raise argparse.ArgumentTypeError(
+          "Invalid target [%s] in argument[%s]: Target does not exist"
+          % (self.blaze_target, self.original_target)
+      )
+    if rule_kind != "js_binary":
+      raise argparse.ArgumentTypeError(
+          "Invalid target [%s] in argument[%s]: Target is not a js_binary"
+          % (self.blaze_target, self.original_target)
+      )
+
+  def to_j2cl_size_target(self):
+    target_info = _ = TargetInfo("j2cl-size", self.blaze_target, "head")
+    # sync the j2cl-size repo to the same base cl
+    repo_util.sync_j2size_repo()
+    return target_info
+
+
+def _create_target_info(target):
+  decomposed_target = target.split("@", 1)
+  if len(decomposed_target) == 2:
+    repository_name, blaze_target = decomposed_target
+  else:
+    repository_name = None
+    blaze_target = target
+
+  if not blaze_target.startswith("//"):
+    # This is an integration test name. Format: (java|kotlin)/(test)(.version)?
+    blaze_target = repo_util.get_readable_optimized_test(blaze_target)
+  else:
+    # remove the '//'
+    blaze_target = blaze_target[2:]
+
+  target_info = TargetInfo(repository_name, blaze_target, target)
+  target_info.validate()
+
+  return target_info
+
+
 def main(argv):
-  test_name = argv.test_name[0]
+  if len(argv.targets) > 2:
+    raise argparse.ArgumentTypeError(
+        "You cannot pass more than 2 targets to compare."
+    )
 
-  print("Constructing a diff of JS changes in '%s'." % test_name)
+  original = _create_target_info(argv.targets[0])
 
-  repo_util.sync_j2size_repo()
+  if len(argv.targets) == 1:
+    # We do not allow providing a client when there is only one parameter
+    if original.repository_name:
+      raise argparse.ArgumentTypeError(
+          "Invalid parameter [%s]: You cannot specify a citc client for a"
+          " single target diff."
+          % original.original_target
+      )
+    # We are diffing a change against the head version. Reuse the 'j2cl-size'
+    # repo for building the head version of the target.
+    modified = original
+    original = modified.to_j2cl_size_target()
+  else:
+    modified = _create_target_info(argv.targets[1])
 
-  js_target = repo_util.get_readable_optimized_test(test_name)
-  js_file_path = "blaze-bin/" + repo_util.get_file_from_target(js_target)
+  _diff(original, modified, argv.filter_noise)
 
-  print("  blaze building JS for '%s'" % test_name)
-  repo_util.build_original_and_modified([js_target], [js_target])
+
+def _diff(original, modified, filter_noise):
+  print(
+      "Constructing diff of JS changes from '%s' to '%s"
+      % (original.original_target, modified.original_target)
+  )
+
+  print(
+      "  blaze building JS for:\n    '%s'\n    '%s'"
+      % (original.original_target, modified.original_target)
+  )
+  repo_util.build_targets_with_workspace(
+      [original.blaze_target],
+      [modified.blaze_target],
+      original.get_repository_path(),
+      modified.get_repository_path(),
+  )
 
   print("  Formatting")
-  orig_js_file = "/tmp/orig.%s.js" % test_name.replace("/", ".")
-  shutil.copyfile(repo_util.get_j2size_repo_path() + "/" + js_file_path,
-                  orig_js_file)
-  modified_js_file = "/tmp/modified.%s.js" % test_name.replace("/", ".")
-  shutil.copyfile(js_file_path, modified_js_file)
-  repo_util.run_cmd(["clang-format", "-i", orig_js_file, modified_js_file])
+  shutil.copyfile(original.get_output_file(), original.get_formatted_file())
+  shutil.copyfile(modified.get_output_file(), modified.get_formatted_file())
+  repo_util.run_cmd([
+      "clang-format",
+      "-i",
+      original.get_formatted_file(),
+      modified.get_formatted_file(),
+  ])
 
-  if argv.filter_noise:
+  if filter_noise:
     print("  Reducing noise")
     # Replace the numeric part of the variable id generation from JsCompiler to
     # reduce noise in the final diff.
@@ -55,13 +165,16 @@ def main(argv):
         "-i",
         "-E",
         r"s/(\$jscomp\$(inline_)?|JSC\$)[0-9]+/\1#/g",
-        orig_js_file,
-        modified_js_file,
+        original.get_formatted_file(),
+        modified.get_formatted_file(),
     ])
 
   print("  Starting diff")
   subprocess.call(
-      "${P4DIFF:-diff} %s %s" % (orig_js_file, modified_js_file), shell=True)
+      "${P4DIFF:-diff} %s %s"
+      % (original.get_formatted_file(), modified.get_formatted_file()),
+      shell=True,
+  )
 
 
 def add_arguments(parser):
@@ -71,5 +184,16 @@ def add_arguments(parser):
       action=argparse.BooleanOptionalAction,
       help="Filter noise in the diff due to difference in variable indexes.",
   )
+
   parser.add_argument(
-      "test_name", nargs=1, metavar="<name>", help="integration test name")
+      "targets",
+      nargs="+",
+      metavar="<target>",
+      help=(
+          "Targets that need to be compared. Target must be in the format:"
+          " ({workspace}@)?{target_label} with workspace: the name of your"
+          " piper client. Optional. target_label: can be a full blaze target"
+          " label (starting with //) or an integration test name with the"
+          " format: (java|kotlin)/{integration_test_name}.{variant}"
+      ),
+  )
