@@ -23,6 +23,7 @@ import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewriter;
 
@@ -58,7 +59,7 @@ public final class InsertCastsOnNullabilityMismatch extends NormalizationPass {
   }
 
   private static boolean needsCast(TypeDescriptor from, TypeDescriptor to) {
-    if (!to.isDenotable()) {
+    if (!to.isDenotable() || TypeDescriptors.isJavaLangVoid(to)) {
       return false;
     }
 

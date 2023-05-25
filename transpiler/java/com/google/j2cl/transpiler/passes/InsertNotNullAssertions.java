@@ -145,6 +145,7 @@ public final class InsertNotNullAssertions extends NormalizationPass {
                   TypeDescriptor actualTypeDescriptor,
                   Expression expression) {
                 return expression.canBeNull()
+                        && !TypeDescriptors.isJavaLangVoid(inferredTypeDescriptor)
                         && (!inferredTypeDescriptor.canBeNull()
                             || !actualTypeDescriptor.canBeNull())
                     ? insertNotNullAssertion(expression)
