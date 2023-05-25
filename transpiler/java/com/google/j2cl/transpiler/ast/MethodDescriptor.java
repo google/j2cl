@@ -597,10 +597,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     if (getManglingDescriptor() != this) {
       return getManglingDescriptor().getJsMemberCompatibilitySignature();
     }
-    // TODO(b/118301700): Extend this to cover the case of JsEnums which behave like primitives
-    // w.r.t. to boxed/unboxed contracts.
     String returnType =
         getReturnTypeDescriptor().isPrimitive()
+                || AstUtils.isNonNativeJsEnum(getReturnTypeDescriptor())
             ? getSignatureStringForParameter(getReturnTypeDescriptor())
             : "Reference";
     return getSignature() + ":" + returnType;

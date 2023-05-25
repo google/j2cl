@@ -35,6 +35,7 @@ import jsinterop.annotations.JsEnum;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 public class Main {
 
@@ -47,7 +48,7 @@ public class Main {
     testNativeJsEnum();
     testStringNativeJsEnum();
     testCastOnNative();
-    testJsEnum();
+    testComparableJsEnum();
     testBooleanJsEnum();
     testStringJsEnum();
     testJsEnumClassInitialization();
@@ -59,6 +60,7 @@ public class Main {
     testAutoBoxing_specialMethods();
     testAutoBoxing_parameterizedLambda();
     testAutoBoxing_intersectionCasts();
+    testSpecializedSuperType();
   }
 
   @JsEnum(isNative = true, namespace = "test")
@@ -309,7 +311,7 @@ public class Main {
     UNIT
   }
 
-  private static void testJsEnum() {
+  private static void testComparableJsEnum() {
     PlainJsEnum v = PlainJsEnum.ONE;
     switch (v) {
       case ZERO:
@@ -728,6 +730,15 @@ public class Main {
     assertFalse(boxedOne != boxingPassthrough(one));
     assertFalse(boxingPassthrough(one) != one);
     assertFalse(boxingPassthrough(one) != boxedOne);
+
+    // Comparison with a double object which is unboxed. Many of the comparisons, like
+    // `1.0 == PlainJsEnum.ONE` are rejected by the compiler due to type incompatibility.
+    assertFalse((Object) Double.valueOf(1.0) == PlainJsEnum.ONE);
+    assertFalse(Double.valueOf(1.0) == boxedOne);
+    assertThrowsClassCastException(
+        () -> {
+          boolean unused = 1.0 == (Double) boxedOne;
+        });
   }
 
   private static <T> T boxingPassthrough(T t) {
@@ -840,6 +851,77 @@ public class Main {
 
     Supplier<PlainJsEnum> supplier = () -> PlainJsEnum.ONE;
     assertEquals(PlainJsEnum.ONE, supplier.get());
+  }
+
+  private static class Container<T> {
+    T field;
+
+    T get() {
+      return field;
+    }
+
+    void set(T t) {
+      field = t;
+    }
+  }
+
+  private static class PlainJsEnumContainer extends Container<PlainJsEnum> {
+    PlainJsEnum get() {
+      return super.get();
+    }
+
+    void set(PlainJsEnum plainJsEnum) {
+      super.set(plainJsEnum);
+    }
+  }
+
+  @JsType
+  private static class JsTypeContainer<T> {
+    private T field;
+
+    public T get() {
+      return field;
+    }
+
+    public void set(T t) {
+      field = t;
+    }
+  }
+
+  private static class JsTypePlainJsEnumContainer extends JsTypeContainer<PlainJsEnum> {
+    public PlainJsEnum get() {
+      return super.get();
+    }
+
+    public void set(PlainJsEnum plainJsEnum) {
+      super.set(plainJsEnum);
+    }
+  }
+
+  private static void testSpecializedSuperType() {
+    PlainJsEnum five = PlainJsEnum.FIVE;
+    PlainJsEnumContainer pc = new PlainJsEnumContainer();
+    Container<PlainJsEnum> c = pc;
+    pc.set(five);
+    assertTrue(five == pc.get());
+    assertTrue(five == ((Container<?>) c).get());
+    PlainJsEnum six = PlainJsEnum.SIX;
+    c.set(six);
+    assertTrue(six == pc.get());
+    assertTrue(six == ((Container<?>) c).get());
+    assertUnderlyingTypeEquals(PlainJsEnum.class, ((Container<?>) c).get());
+    assertUnderlyingTypeEquals(Double.class, pc.get());
+
+    JsTypePlainJsEnumContainer jpc = new JsTypePlainJsEnumContainer();
+    JsTypeContainer<PlainJsEnum> jc = jpc;
+    jpc.set(five);
+    assertTrue(five == jpc.get());
+    assertTrue(five == ((JsTypeContainer<?>) jc).get());
+    jc.set(six);
+    assertTrue(six == jpc.get());
+    assertTrue(six == ((JsTypeContainer<?>) jc).get());
+    assertUnderlyingTypeEquals(PlainJsEnum.class, ((JsTypeContainer<?>) jc).get());
+    assertUnderlyingTypeEquals(Double.class, jpc.get());
   }
 
   @JsMethod

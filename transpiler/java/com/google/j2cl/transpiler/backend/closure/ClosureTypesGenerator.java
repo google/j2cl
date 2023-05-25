@@ -63,17 +63,6 @@ class ClosureTypesGenerator {
   }
 
   /**
-   * Returns the string representation of a collection of Closure types for use in a JsDoc
-   * annotation.
-   */
-  public String getCommaSeparatedClosureTypesString(
-      Collection<? extends TypeDescriptor> typeDescriptors) {
-    return getClosureTypes(typeDescriptors).stream()
-        .map(ClosureType::render)
-        .collect(joining(", "));
-  }
-
-  /**
    * Returns the {@code JsDoc} annotation for parameter at {@code index} in {@code
    * methodOrFunctionExpression}.
    */

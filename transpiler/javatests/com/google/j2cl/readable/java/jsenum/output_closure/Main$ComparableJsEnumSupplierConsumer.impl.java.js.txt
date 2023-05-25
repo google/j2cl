@@ -1,0 +1,44 @@
+goog.module('jsenum.Main.ComparableJsEnumSupplierConsumer$impl');
+
+const Consumer = goog.require('jsenum.Main.Consumer$impl');
+const Supplier = goog.require('jsenum.Main.Supplier$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ComparableJsEnum = goog.forwardDeclare('jsenum.Main.ComparableJsEnum$impl');
+let $Enums_BoxedComparableLightEnum = goog.forwardDeclare('vmbootstrap.Enums.BoxedComparableLightEnum$impl');
+
+/**
+ * @interface
+ * @extends {Supplier<$Enums_BoxedComparableLightEnum<?ComparableJsEnum>>}
+ * @extends {Consumer<$Enums_BoxedComparableLightEnum<?ComparableJsEnum>>}
+ */
+class ComparableJsEnumSupplierConsumer {
+ /** @abstract @return {?ComparableJsEnum} */
+ get() {}
+ /** @abstract @nodts */
+ m_accept__jsenum_Main_ComparableJsEnum__void(/** ?ComparableJsEnum */ e) {}
+ /** @nodts */
+ static $clinit() {
+  ComparableJsEnumSupplierConsumer.$clinit = () =>{};
+  ComparableJsEnumSupplierConsumer.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  Supplier.$markImplementor(ctor);
+  Consumer.$markImplementor(ctor);
+  ctor.prototype.$implements__jsenum_Main_ComparableJsEnumSupplierConsumer = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__jsenum_Main_ComparableJsEnumSupplierConsumer;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+ComparableJsEnumSupplierConsumer.$markImplementor(/**@type {Function}*/ (ComparableJsEnumSupplierConsumer));
+$Util.$setClassMetadataForInterface(ComparableJsEnumSupplierConsumer, 'jsenum.Main$ComparableJsEnumSupplierConsumer');
+
+exports = ComparableJsEnumSupplierConsumer;
+
+//# sourceMappingURL=Main$ComparableJsEnumSupplierConsumer.js.map

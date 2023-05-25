@@ -165,7 +165,6 @@ public class JsInteropRestrictionsChecker {
     }
 
     checkTypeVariables(type);
-    checkSuperTypes(type);
 
     checkNameCollisions(type);
     for (Member member : type.getMembers()) {
@@ -263,27 +262,6 @@ public class JsInteropRestrictionsChecker {
           "Type '%s' cannot define a type variable with a JsEnum as a bound.",
           type.getReadableDescription());
     }
-  }
-
-  private void checkSuperTypes(Type type) {
-    type.getSuperTypesStream()
-        .filter(JsInteropRestrictionsChecker::hasNonNativeJsEnumTypeArgument)
-        .forEach(
-            t ->
-                problems.error(
-                    type.getSourcePosition(),
-                    t.isClass()
-                        ? "Type '%s' cannot extend a class parameterized by JsEnum. (b/118304241)"
-                        : "Type '%s' cannot implement an interface parameterized by JsEnum."
-                            + " (b/118304241)",
-                    type.getReadableDescription()));
-  }
-
-  private static boolean hasNonNativeJsEnumTypeArgument(DeclaredTypeDescriptor typeDescriptor) {
-    return typeDescriptor != null
-        && typeDescriptor.getTypeArgumentDescriptors().stream()
-            .map(TypeDescriptor::toRawTypeDescriptor)
-            .anyMatch(AstUtils::isNonNativeJsEnum);
   }
 
   /**
@@ -968,22 +946,6 @@ public class JsInteropRestrictionsChecker {
           "Method '%s' cannot override a JsOverlay method '%s'.",
           method.getReadableDescription(),
           jsOverlayOverride.get().getReadableDescription());
-    }
-
-    if (AstUtils.isNonNativeJsEnum(method.getDescriptor().getReturnTypeDescriptor())) {
-      Optional<MethodDescriptor> nonJsEnumReturnOverride =
-          method.getDescriptor().getJavaOverriddenMethodDescriptors().stream()
-              .filter(m -> !m.getReturnTypeDescriptor().toRawTypeDescriptor().isJsEnum())
-              .findFirst();
-
-      if (nonJsEnumReturnOverride.isPresent()) {
-        checkState(!nonJsEnumReturnOverride.get().isSynthetic());
-        problems.error(
-            method.getSourcePosition(),
-            "Method '%s' returning JsEnum cannot override method '%s'. (b/118301700)",
-            method.getReadableDescription(),
-            nonJsEnumReturnOverride.get().getReadableDescription());
-      }
     }
   }
 

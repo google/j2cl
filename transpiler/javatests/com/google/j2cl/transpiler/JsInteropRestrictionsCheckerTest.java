@@ -1881,14 +1881,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  native void o();",
             "  public String toString() { return null; }",
             "}",
-            "interface List<T> { Object getObject(); }",
-            "class AList<T> { }",
-            "class AListSubclass<T extends MyJsEnum>",
-            "    extends AList<MyJsEnum> implements List<MyJsEnum>  {",
-            "    public MyJsEnum getObject() { return null; }",
-            "}",
-            "interface EnumList<E extends Enum<E>> {",
-            "}")
+            "class AListSubclass<T extends MyJsEnum> {}",
+            "interface EnumList<E extends Enum<E>> {}")
         .assertErrorsWithoutSourcePosition(
             "Non-custom-valued JsEnum 'MyJsEnum' cannot have constructor 'MyJsEnum()'.",
             "Non-custom-valued JsEnum 'MyJsEnum' cannot have constructor 'MyJsEnum(int x)'.",
@@ -1920,11 +1914,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "JsEnum 'MyJsEnum' cannot have instance field 'MyJsEnum.instanceField'.",
             "JsEnum 'MyJsEnum' cannot have an instance initializer.",
             "Type 'AListSubclass' cannot define a type variable with a JsEnum as a bound.",
-            "Type 'AListSubclass' cannot extend a class parameterized by JsEnum. (b/118304241)",
-            "Type 'AListSubclass' cannot implement an interface parameterized by JsEnum. "
-                + "(b/118304241)",
-            "Method 'MyJsEnum AListSubclass.getObject()' returning JsEnum cannot override method "
-                + "'Object List.getObject()'. (b/118301700)",
             "Cannot use 'super' in JsOverlay method 'void MyJsEnum.anOverlayMethod()'.",
             "Cannot use 'super' in JsEnum method 'void MyJsEnum.aMethod()'.");
   }
@@ -1952,6 +1941,11 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  public static int aStaticField;",
             "  public void anInstanceMethod() { }",
             "  public static void aStaticMethod() { }",
+            "}",
+            "interface List<T> { Object getObject(); }",
+            "class AList<T> { }",
+            "class AListSubclass extends AList<MyJsEnum> implements List<MyJsEnum> {",
+            "    public MyJsEnum getObject() { return null; }",
             "}")
         .assertNoWarnings();
   }

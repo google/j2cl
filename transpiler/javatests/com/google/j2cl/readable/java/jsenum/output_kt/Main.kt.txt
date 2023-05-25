@@ -247,4 +247,28 @@ open class Main {
    return this.ordinal
   }
  }
+
+ open class SupplierConsumerImpl<T>: Main.Supplier<T>, Main.Consumer<T> {
+  open override fun accept(t: T) {}
+
+  open override fun get(): T {
+   return null as T
+  }
+ }
+
+ interface ComparableJsEnumSupplierConsumer: Main.Supplier<Main.ComparableJsEnum?>, Main.Consumer<Main.ComparableJsEnum?> {
+  override fun get(): Main.ComparableJsEnum?
+
+  override fun accept(e: Main.ComparableJsEnum?)
+ }
+
+ open class ComparableJsEnumSupplierConsumerImpl: Main.SupplierConsumerImpl<Main.ComparableJsEnum?>(), Main.ComparableJsEnumSupplierConsumer {}
+
+ open class ComparableJsEnumSupplierConsumerImplWithOverrides: Main.SupplierConsumerImpl<Main.ComparableJsEnum?>(), Main.ComparableJsEnumSupplierConsumer {
+  open override fun accept(t: Main.ComparableJsEnum?) {}
+
+  open override fun get(): Main.ComparableJsEnum? {
+   return null
+  }
+ }
 }

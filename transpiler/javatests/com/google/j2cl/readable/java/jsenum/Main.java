@@ -19,6 +19,7 @@ import java.util.Arrays;
 import java.util.Optional;
 import jsinterop.annotations.JsEnum;
 import jsinterop.annotations.JsFunction;
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsNonNull;
 import jsinterop.annotations.JsProperty;
 
@@ -198,6 +199,39 @@ public class Main {
 
     public int getValue() {
       return ordinal();
+    }
+  }
+
+  static class SupplierConsumerImpl<T> implements Supplier<T>, Consumer<T> {
+
+    @Override
+    public void accept(T t) {}
+
+    @Override
+    public T get() {
+      return null;
+    }
+  }
+
+  interface ComparableJsEnumSupplierConsumer
+      extends Supplier<ComparableJsEnum>, Consumer<ComparableJsEnum> {
+    @JsMethod
+    ComparableJsEnum get();
+
+    void accept(ComparableJsEnum e);
+  }
+
+  static class ComparableJsEnumSupplierConsumerImpl extends SupplierConsumerImpl<ComparableJsEnum>
+      implements ComparableJsEnumSupplierConsumer {}
+
+  static class ComparableJsEnumSupplierConsumerImplWithOverrides
+      extends SupplierConsumerImpl<ComparableJsEnum> implements ComparableJsEnumSupplierConsumer {
+    @Override
+    public void accept(ComparableJsEnum t) {}
+
+    @Override
+    public ComparableJsEnum get() {
+      return null;
     }
   }
 }

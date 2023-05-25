@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.backend.closure;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static java.lang.String.format;
 import static java.util.stream.Collectors.joining;
 
 import com.google.common.base.CharMatcher;
@@ -36,8 +37,10 @@ import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.SourceLanguage;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.Visibility;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -224,31 +227,33 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
     StringBuilder sb = new StringBuilder();
     if (type.isInterface()) {
-      appendln(sb, " * @interface");
+      appendWithNewLine(sb, " * @interface");
     } else if (type.isAbstract()
         || TypeDescriptors.isBoxedTypeAsJsPrimitives(type.getTypeDescriptor())) {
-      appendln(sb, " * @abstract");
+      appendWithNewLine(sb, " * @abstract");
     }
     if (type.getDeclaration().isFinal()) {
-      appendln(sb, " * @final");
+      appendWithNewLine(sb, " * @final");
     }
     if (type.getDeclaration().hasTypeParameters()) {
-      String templates =
-          closureTypesGenerator.getCommaSeparatedClosureTypesString(
-              type.getDeclaration().getTypeParameterDescriptors());
-      appendln(sb, " * @template " + templates);
+      appendWithNewLine(
+          sb,
+          " *"
+              + getJsDocDeclarationForTypeVariable(
+                  type.getDeclaration().getTypeParameterDescriptors()));
     }
-    if (type.getSuperTypeDescriptor() != null && type.getSuperTypeDescriptor().hasTypeArguments()) {
+    DeclaredTypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
+    if (superTypeDescriptor != null && superTypeDescriptor.hasTypeArguments()) {
       // No need to render if it does not have type arguments as it will also appear in the
       // extends clause of the class definition.
-      renderIfClassExists(" * @extends {%s}", type.getSuperTypeDescriptor(), sb);
+      renderClauseIfTypeExistsInJavaScript("extends", superTypeDescriptor, sb);
     }
-    for (DeclaredTypeDescriptor superInterfaceType : type.getSuperInterfaceTypeDescriptors()) {
-      String superInterfaceJsDoc = type.isInterface() ? "@extends" : "@implements";
-      renderIfClassExists(" * " + superInterfaceJsDoc + " {%s}", superInterfaceType, sb);
-    }
+    String extendsOrImplementsString = type.isInterface() ? "extends" : "implements";
+    type.getSuperInterfaceTypeDescriptors()
+        .forEach(t -> renderClauseIfTypeExistsInJavaScript(extendsOrImplementsString, t, sb));
+
     if (type.getDeclaration().isDeprecated()) {
-      appendln(sb, " * @deprecated");
+      appendWithNewLine(sb, " * @deprecated");
     }
 
     String classJsDoc = sb.toString();
@@ -259,37 +264,28 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
   }
 
-  private static void appendln(StringBuilder sb, String string) {
-    sb.append(string);
-    sb.append("\n");
-  }
-
-  /**
-   * Renders the line using {@code formatString} only if {@code typeDescriptor} is an actual class
-   * in JavaScript.
-   *
-   * <p>Used to render the @extends/@implements clauses.
-   */
-  private void renderIfClassExists(
-      String formatString, DeclaredTypeDescriptor typeDescriptor, StringBuilder sb) {
-    if (doesClassExistInJavaScript(typeDescriptor)) {
-      String typeArgumentsString =
-          typeDescriptor.hasTypeArguments()
-              ? typeDescriptor.getTypeArgumentDescriptors().stream()
-                  .map(closureTypesGenerator::getClosureTypeString)
-                  .collect(joining(", ", "<", ">"))
-              : "";
-
-      appendln(
-          sb,
-          String.format(
-              formatString,
-              environment.aliasForType(typeDescriptor.getTypeDeclaration()) + typeArgumentsString));
+  /*** Renders a JsDoc clause only if the type is an actual class in JavaScript. */
+  private void renderClauseIfTypeExistsInJavaScript(
+      String extendsOrImplementsString, DeclaredTypeDescriptor typeDescriptor, StringBuilder sb) {
+    if (!typeDescriptor.isJavaScriptClass()) {
+      return;
     }
-  }
 
-  private boolean doesClassExistInJavaScript(DeclaredTypeDescriptor type) {
-    return !type.isStarOrUnknown() && !type.isJsFunctionInterface();
+    // Don't render the supertype name using the ClosureTypesGenerator to avoid replacement of types
+    // like {@code Number} by {@code (Number|number)} in supertype declarations.
+    String superTypeString = environment.aliasForType(typeDescriptor.getTypeDeclaration());
+
+    if (typeDescriptor.hasTypeArguments()) {
+      superTypeString +=
+          typeDescriptor.getTypeArgumentDescriptors().stream()
+              // Replace non-native JsEnums with the boxed counterpart since the type
+              // arguments on classes that appear in @implements and @extends clauses are
+              // rendered explicitly.
+              .map(t -> AstUtils.isNonNativeJsEnum(t) ? TypeDescriptors.getEnumBoxType(t) : t)
+              .map(closureTypesGenerator::getClosureTypeString)
+              .collect(joining(", ", "<", ">"));
+    }
+    appendWithNewLine(sb, format(" * @%s {%s}", extendsOrImplementsString, superTypeString));
   }
 
   private void renderClassBody() {
@@ -297,21 +293,18 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.emitWithMapping(
         type.getSourcePosition(),
         () -> sourceBuilder.append(environment.aliasForType(type.getDeclaration())));
-    sourceBuilder.append(" " + getExtendsClause(type, environment));
+
+    DeclaredTypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
+    if (superTypeDescriptor != null && superTypeDescriptor.isJavaScriptClass()) {
+      sourceBuilder.append(format(" extends %s", environment.aliasForType(superTypeDescriptor)));
+    }
+
+    sourceBuilder.append(" ");
     sourceBuilder.openBrace();
     sourceBuilder.newLine();
     renderTypeMethods();
     renderLoadModules();
     sourceBuilder.closeBrace();
-  }
-
-  private static String getExtendsClause(Type type, ClosureGenerationEnvironment environment) {
-    DeclaredTypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
-    if (superTypeDescriptor == null || superTypeDescriptor.isStarOrUnknown()) {
-      return "";
-    }
-    String superTypeName = environment.aliasForType(superTypeDescriptor);
-    return String.format("extends %s ", superTypeName);
   }
 
   private void renderTypeMethods() {
@@ -400,10 +393,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
 
     if (!methodDescriptor.getTypeParameterTypeDescriptors().isEmpty()) {
-      String templateParamNames =
-          closureTypesGenerator.getCommaSeparatedClosureTypesString(
-              methodDescriptor.getTypeParameterTypeDescriptors());
-      jsDocBuilder.append(" @template ").append(templateParamNames);
+      jsDocBuilder.append(
+          getJsDocDeclarationForTypeVariable(methodDescriptor.getTypeParameterTypeDescriptors()));
     }
 
     String returnTypeName =
@@ -508,4 +499,17 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.appendln("exports = " + environment.aliasForType(type.getDeclaration()) + ";");
   }
 
+  /** Returns the JsDoc declaration clause for a collection of type variables. */
+  private String getJsDocDeclarationForTypeVariable(Collection<TypeVariable> typeDescriptors) {
+    return format(
+        " @template %s",
+        typeDescriptors.stream()
+            .map(closureTypesGenerator::getClosureTypeString)
+            .collect(joining(", ")));
+  }
+
+  private static void appendWithNewLine(StringBuilder sb, String string) {
+    sb.append(string);
+    sb.append("\n");
+  }
 }

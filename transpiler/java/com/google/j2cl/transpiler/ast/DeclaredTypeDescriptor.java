@@ -34,6 +34,7 @@ import com.google.j2cl.transpiler.ast.FieldDescriptor.FieldOrigin;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.SourceLanguage;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -128,6 +129,10 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
   public boolean isStarOrUnknown() {
     return getTypeDeclaration().isStarOrUnknown();
+  }
+
+  public boolean isJavaScriptClass() {
+    return !isStarOrUnknown() && !isJsFunctionInterface();
   }
 
   @Override
@@ -868,8 +873,13 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     // TODO(b/271144313): Cleanup when a category EXPOSING_JSNAME_BRIDGE is added.
     boolean isFinal = origin == MethodOrigin.GENERALIZING_BRIDGE && !exposesJsMethod;
 
-    return MethodDescriptor.Builder.from(
-            adjustParametersAndReturn(origin, targetMethodDescriptor, bridgeMethodDescriptor))
+    return MethodDescriptor.Builder.from(bridgeMethodDescriptor)
+        .setParameterDescriptors(
+            computeParameterDescriptors(bridgeMethodDescriptor, targetMethodDescriptor))
+        .setReturnTypeDescriptor(
+            computeReturnType(
+                bridgeMethodDescriptor, targetMethodDescriptor.getReturnTypeDescriptor()))
+        .setTypeParameterTypeDescriptors(targetMethodDescriptor.getTypeParameterTypeDescriptors())
         .setOriginalJsInfo(bridgeMethodDescriptor.getJsInfo())
         .setEnclosingTypeDescriptor(this)
         .setDeclarationDescriptor(null)
@@ -879,54 +889,78 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   }
 
   /**
-   * Adjusts the types of parameters and returns due to Kotlin semantics for non-nullable basic
-   * types.
+   * Computes the parameter descriptors for the bridge accounting for boxing/unboxing needs.
    *
-   * <p>Note that bridges are created to satisfy a method signature, and methods implementing the
-   * same signature need to agree in typing (e.g. an override needs to be a subtype of the methods
-   * it overrides)
-   *
-   * <p>Since bridge method creation computes bridge signatures by specializing a parameterized
-   * method there is some ambiguity in Kotlin whether a return type that is "Int" should be
-   * considered "!java.lang.Integer" or "int". To resolve this ambiguity we need to see what is the
-   * contract implemented by the bridge origin, which is the one that provides the mangled name.
+   * <p>Parameters have to satisfy the overridden method contract; both for the JsEnum boxing and
+   * Koltin's non-nullable basic types overrides.
    */
-  private MethodDescriptor adjustParametersAndReturn(
-      MethodOrigin origin, MethodDescriptor targetMethodDescriptor, MethodDescriptor bridgeOrigin) {
-    if (origin != MethodOrigin.GENERALIZING_BRIDGE) {
-      // Only generalizing bridges use the origin as their mangling descriptor.
-      return targetMethodDescriptor;
-    }
+  @SuppressWarnings("ReferenceEquality")
+  private List<ParameterDescriptor> computeParameterDescriptors(
+      MethodDescriptor bridgeMethodDescriptor, MethodDescriptor targetMethodDescriptor) {
+    List<ParameterDescriptor> parameterDescriptors = new ArrayList<>();
+    for (int i = 0; i < bridgeMethodDescriptor.getParameterDescriptors().size(); i++) {
+      ParameterDescriptor fromBridge = bridgeMethodDescriptor.getParameterDescriptors().get(i);
+      ParameterDescriptor fromBridgeDeclaration =
+          bridgeMethodDescriptor.getDeclarationDescriptor().getParameterDescriptors().get(i);
+      ParameterDescriptor fromTarget = targetMethodDescriptor.getParameterDescriptors().get(i);
 
-    return targetMethodDescriptor.transform(
-        builder ->
-            builder
-                // Use the ParameterDescriptors (rather than just their TypeDescriptors) to avoid
-                // losing information like @JsOptional when creating a JsMethod to JsMethod bridge.
-                .setParameterDescriptors(
-                    Streams.zip(
-                            bridgeOrigin.getParameterDescriptors().stream(),
-                            targetMethodDescriptor.getParameterDescriptors().stream(),
-                            (fromBridge, fromTarget) ->
-                                getParameterOrReturnForBridge(
-                                    fromBridge, fromTarget, ParameterDescriptor::getTypeDescriptor))
-                        .collect(toImmutableList()))
-                .setReturnTypeDescriptor(
-                    getParameterOrReturnForBridge(
-                        bridgeOrigin.getReturnTypeDescriptor(),
-                        targetMethodDescriptor.getReturnTypeDescriptor(),
-                        Function.identity())));
+      if (fromBridge.getTypeDescriptor().isPrimitive()
+          != fromTarget.getTypeDescriptor().isPrimitive()) {
+        // The target specializes to a primitive type (kotlin), so use the type from the bridge
+        // which would be the right one that is consistent with the overridden method.
+        parameterDescriptors.add(fromBridge);
+      } else if (fromTarget.getTypeDescriptor() != fromBridgeDeclaration.getTypeDescriptor()
+          && AstUtils.isNonNativeJsEnum(fromTarget.getTypeDescriptor())) {
+        // Type was specialized to a non-native JsEnum, use the boxed type in the bridge
+        // parameter.
+        parameterDescriptors.add(
+            fromTarget.toBuilder()
+                .setTypeDescriptor(TypeDescriptors.getEnumBoxType(fromTarget.getTypeDescriptor()))
+                .build());
+      } else {
+        // If no conversion was necessary prefer the type from the target, for consistency,
+        // in case it refers to type parameters declared in the method.
+        parameterDescriptors.add(fromTarget);
+      }
+    }
+    return parameterDescriptors;
   }
 
   /**
-   * If the bridge and the target differ w.r.t being a primitive or not, use the type from the
-   * bridge, since the method we are implementing needs to follow the bridge override.
+   * Computes the return descriptors for the bridge accounting for JsEnum boxing/unboxing and Kotlin
+   * primitive specialization needs.
+   *
+   * <p>A bridge method takes the mangled name from the methods that it is bridging; however, it
+   * needs to declare the types for its parameters and return to satisfy the specialization in the
+   * type it is emitted. This is not a problem for parameters since the parameter types are all in
+   * agreement.
+   *
+   * <p>However, return types of the overridden methods might differ (only for jsmethodsm where we
+   * allow specialized returns to use the same name). The return type that needs to be selected is
+   * the more specific of the return types of the overridden methods (which at this point we only
+   * have access to one of them). Luckily the return type of the bridged implementation target would
+   * be exactly the more specific type needed.
+   *
+   * <p>That type might differ in w.r.t. boxing since unboxed types are always more specific. In
+   * this case the chosen type differs in boxing, the return type is adjusted to the corresponding
+   * type.
    */
-  private static <T> T getParameterOrReturnForBridge(
-      T fromBridge, T fromTarget, Function<T, TypeDescriptor> typeGetter) {
-    return typeGetter.apply(fromBridge).isPrimitive() != typeGetter.apply(fromTarget).isPrimitive()
-        ? fromBridge
-        : fromTarget;
+  private TypeDescriptor computeReturnType(
+      MethodDescriptor bridgeMethodDescriptor, TypeDescriptor targetReturnTypeDescriptor) {
+    TypeDescriptor bridgeReturnTypeDescriptor = bridgeMethodDescriptor.getReturnTypeDescriptor();
+    if (targetReturnTypeDescriptor.isPrimitive() != bridgeReturnTypeDescriptor.isPrimitive()) {
+      // Kotlin bridges to method that specializes the return to primitive.
+      return bridgeReturnTypeDescriptor;
+    }
+    if (AstUtils.isNonNativeJsEnum(targetReturnTypeDescriptor)
+        && bridgeMethodDescriptor.getDeclarationDescriptor().getReturnTypeDescriptor()
+            != targetReturnTypeDescriptor) {
+      // Return type descriptor specialized to non native enum, expose it with the proper boxed
+      // class.
+      return TypeDescriptors.getEnumBoxType(targetReturnTypeDescriptor);
+    }
+    // Use the type from the target since it might specialize the actual bridge return type.
+    return targetReturnTypeDescriptor;
   }
 
   /** Returns the default (parameterless) constructor for the type. */

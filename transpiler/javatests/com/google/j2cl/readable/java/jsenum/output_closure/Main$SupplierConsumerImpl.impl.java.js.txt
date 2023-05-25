@@ -1,0 +1,55 @@
+goog.module('jsenum.Main.SupplierConsumerImpl$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const Consumer = goog.require('jsenum.Main.Consumer$impl');
+const Supplier = goog.require('jsenum.Main.Supplier$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ * @implements {Supplier<T>}
+ * @implements {Consumer<T>}
+ */
+class SupplierConsumerImpl extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!SupplierConsumerImpl<T>} */
+ static $create__() {
+  SupplierConsumerImpl.$clinit();
+  let $instance = new SupplierConsumerImpl();
+  $instance.$ctor__jsenum_Main_SupplierConsumerImpl__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsenum_Main_SupplierConsumerImpl__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override @nodts */
+ m_accept__java_lang_Object__void(/** T */ t) {}
+ /** @override @nodts @return {T} */
+ m_get__java_lang_Object() {
+  return null;
+ }
+ /** @nodts */
+ static $clinit() {
+  SupplierConsumerImpl.$clinit = () =>{};
+  SupplierConsumerImpl.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SupplierConsumerImpl;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Supplier.$markImplementor(SupplierConsumerImpl);
+Consumer.$markImplementor(SupplierConsumerImpl);
+$Util.$setClassMetadata(SupplierConsumerImpl, 'jsenum.Main$SupplierConsumerImpl');
+
+exports = SupplierConsumerImpl;
+
+//# sourceMappingURL=Main$SupplierConsumerImpl.js.map
