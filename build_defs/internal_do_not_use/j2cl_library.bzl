@@ -198,7 +198,7 @@ def j2cl_library(
         # TODO(b/36549068): remove this workaround when tree artifacts can be
         # declared as the rule output.
         _tree_artifact_proxy(
-            name = j2wasm_library_name + ".wasm",
+            name = j2wasm_library_name + ".modular",
             j2cl_library = ":" + j2wasm_library_name,
             visibility = ["//visibility:private"],
             tags = auto_generated_targets_tags,

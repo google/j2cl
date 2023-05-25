@@ -39,6 +39,7 @@ def readable_example(
         generate_js_readables = True,
         generate_wasm_readables = True,
         generate_wasm_imports = False,
+        generate_wasm_modular = False,
         wasm_entry_points = [],
         generate_kt_readables = True,
         build_kt_readables = True,
@@ -139,6 +140,14 @@ def readable_example(
             dir_out = "output_wasm",
             tags = ["j2wasm"],
         )
+
+        if generate_wasm_modular:
+            _readable_diff_test(
+                name = "readable_wasm_modular_golden",
+                target = ":readable-j2wasm.modular",
+                dir_out = "output_wasm_modular",
+                tags = ["j2wasm"],
+            )
 
         if generate_wasm_imports:
             _readable_diff_test(
@@ -251,7 +260,7 @@ def _golden_output_impl(ctx):
                 # Rename all files to => {file}.txt
                 "find -type f -exec mv {} {}.txt \\;",
                 # Normalize the path relative to readable_name to avoid extra dirs.
-                "mv ./%s/* ./" % readable_name,
+                "mv ./%s/* ./ || true" % readable_name,
             ]),
         )
     elif input.path.endswith(".wat"):

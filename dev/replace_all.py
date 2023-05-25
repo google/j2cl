@@ -53,14 +53,21 @@ def blaze_clean():
 
 
 def blaze_build(
-    js_readable_dirs, wasm_readable_dirs,
-    wasm_imports_readable_dirs, kt_readable_dirs):
+    js_readable_dirs,
+    wasm_readable_dirs,
+    wasm_modular_readable_dirs,
+    wasm_imports_readable_dirs,
+    kt_readable_dirs,
+):
   """Blaze build everything in 1-go, for speed."""
 
   build_targets = [d + ":readable_golden" for d in js_readable_dirs]
   build_targets += [d + ":readable_wasm_golden" for d in wasm_readable_dirs]
   build_targets += [d + ":readable_wasm_imports_golden"
                     for d in wasm_imports_readable_dirs]
+  build_targets += [
+      d + ":readable_wasm_modular_golden" for d in wasm_modular_readable_dirs
+  ]
   build_targets += [d + ":readable_j2kt_golden" for d in kt_readable_dirs]
   if not args.nologs:
     build_targets += [d + ":readable_binary" for d in js_readable_dirs]
@@ -71,14 +78,25 @@ def blaze_build(
 
 def replace_transpiled_wasm(readable_dirs):
   """Copy and replace with Blaze built Wasm."""
-  _replace_readable_outputs(readable_dirs, "readable_wasm_golden",
-                            "output_wasm")
+  _replace_readable_outputs(
+      readable_dirs, "readable_wasm_golden", "output_wasm"
+  )
+
+
+def replace_transpiled_wasm_modular(readable_dirs):
+  """Copy and replace with Blaze built Wasm modular output."""
+  _replace_readable_outputs(
+      readable_dirs,
+      "readable_wasm_modular_golden",
+      "output_wasm_modular",
+  )
 
 
 def replace_transpiled_wasm_imports(readable_dirs):
   """Copy and replace with Blaze built Wasm imports."""
-  _replace_readable_outputs(readable_dirs, "readable_wasm_imports_golden",
-                            "output_wasm_imports")
+  _replace_readable_outputs(
+      readable_dirs, "readable_wasm_imports_golden", "output_wasm_imports"
+  )
 
 
 def replace_transpiled_js(readable_dirs):
@@ -171,6 +189,11 @@ def main(argv):
       readable_pattern, "_js") if "CLOSURE" in args.platforms else []
   wasm_readable_dirs = get_readable_dirs(
       readable_pattern, "_wasm") if "WASM" in args.platforms else []
+  wasm_modular_readable_dirs = (
+      get_readable_dirs(readable_pattern, "_wasm_modular_golden")
+      if "WASM" in args.platforms
+      else []
+  )
   wasm_imports_readable_dirs = (
       get_readable_dirs(readable_pattern, "_wasm_imports_golden")
       if "WASM" in args.platforms else [])
@@ -197,8 +220,12 @@ def main(argv):
     print("\n".join(["    " + d for d in kt_readable_dirs or ["No matches"]]))
 
   build_log = blaze_build(
-      js_readable_dirs, wasm_readable_dirs,
-      wasm_imports_readable_dirs, kt_readable_dirs)
+      js_readable_dirs,
+      wasm_readable_dirs,
+      wasm_modular_readable_dirs,
+      wasm_imports_readable_dirs,
+      kt_readable_dirs,
+  )
 
   if js_readable_dirs:
     if args.nologs:
@@ -212,6 +239,10 @@ def main(argv):
   if wasm_readable_dirs:
     print("  Copying and reformatting transpiled Wasm")
     replace_transpiled_wasm(wasm_readable_dirs)
+
+  if wasm_modular_readable_dirs:
+    print("  Copying and reformatting transpiled Wasm modular")
+    replace_transpiled_wasm_modular(wasm_modular_readable_dirs)
 
   if wasm_imports_readable_dirs:
     print("  Copying and reformatting transpiled Wasm imports")
