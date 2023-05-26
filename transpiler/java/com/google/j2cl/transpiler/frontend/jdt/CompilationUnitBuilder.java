@@ -144,10 +144,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     private final Map<String, Label> labelsInScope = new HashMap<>();
 
     private CompilationUnit convert(
-        String sourceFilePath,
-        org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit,
-        Iterable<ITypeBinding> wellKnownTypeBindings) {
-      environment.initWellKnownTypes(jdtCompilationUnit.getAST(), wellKnownTypeBindings);
+        String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
       this.jdtCompilationUnit = jdtCompilationUnit;
 
       setCurrentSourceFile(sourceFilePath);
@@ -1462,11 +1459,9 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   private CompilationUnit buildCompilationUnit(
-      String sourceFilePath,
-      org.eclipse.jdt.core.dom.CompilationUnit compilationUnit,
-      Iterable<ITypeBinding> wellKnownTypeBindings) {
+      String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit compilationUnit) {
     ASTConverter converter = new ASTConverter();
-    return converter.convert(sourceFilePath, compilationUnit, wellKnownTypeBindings);
+    return converter.convert(sourceFilePath, compilationUnit);
   }
 
   public static List<CompilationUnit> build(
@@ -1476,7 +1471,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         compilationUnitsAndTypeBindings.getCompilationUnitsByFilePath();
     Iterable<ITypeBinding> wellKnownTypeBindings =
         compilationUnitsAndTypeBindings.getTypeBindings();
-    CompilationUnitBuilder compilationUnitBuilder = new CompilationUnitBuilder();
+    CompilationUnitBuilder compilationUnitBuilder =
+        new CompilationUnitBuilder(wellKnownTypeBindings);
 
     List<Entry<String, org.eclipse.jdt.core.dom.CompilationUnit>> entries =
         new ArrayList<>(jdtUnitsByFilePath.entrySet());
@@ -1485,10 +1481,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     sortPackageInfoFirst(entries);
 
     return entries.stream()
-        .map(
-            entry ->
-                compilationUnitBuilder.buildCompilationUnit(
-                    entry.getKey(), entry.getValue(), wellKnownTypeBindings))
+        .map(entry -> compilationUnitBuilder.buildCompilationUnit(entry.getKey(), entry.getValue()))
         .collect(toImmutableList());
   }
 
@@ -1509,5 +1502,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             }));
   }
 
-  private CompilationUnitBuilder() {}
+  private CompilationUnitBuilder(Iterable<ITypeBinding> wellKnownTypeBindings) {
+    environment.initWellKnownTypes(wellKnownTypeBindings);
+  }
 }

@@ -40,7 +40,6 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.PostfixOperator;
 import com.google.j2cl.transpiler.ast.PrefixOperator;
-import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
@@ -60,7 +59,6 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
-import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.Annotation;
 import org.eclipse.jdt.core.dom.Assignment;
 import org.eclipse.jdt.core.dom.BodyDeclaration;
@@ -976,29 +974,19 @@ class JdtEnvironment {
     return createTypeDescriptors(Arrays.asList(typeBindings), inNullMarkedScope, clazz);
   }
 
-  public void initWellKnownTypes(AST ast, Iterable<ITypeBinding> typeBindings) {
+  public void initWellKnownTypes(Iterable<ITypeBinding> typeBindings) {
     if (TypeDescriptors.isInitialized()) {
       return;
     }
     TypeDescriptors.SingletonBuilder builder = new TypeDescriptors.SingletonBuilder();
-    for (PrimitiveTypeDescriptor typeDescriptor : PrimitiveTypes.TYPES) {
-      addPrimitive(ast, builder, typeDescriptor);
-    }
-    // Add well-known, non-primitive types.
+    // Add well-known reference types.
     for (ITypeBinding typeBinding : typeBindings) {
       builder.addReferenceType(createDeclaredTypeDescriptor(typeBinding));
     }
     builder.buildSingleton();
   }
 
-  private void addPrimitive(
-      AST ast, TypeDescriptors.SingletonBuilder builder, PrimitiveTypeDescriptor typeDescriptor) {
-    DeclaredTypeDescriptor boxedType =
-        createDeclaredTypeDescriptor(ast.resolveWellKnownType(typeDescriptor.getBoxedClassName()));
-    builder.addPrimitiveBoxedTypeDescriptorPair(typeDescriptor, boxedType);
-  }
-
-  private final TypeDescriptor createIntersectionType(
+  private TypeDescriptor createIntersectionType(
       ITypeBinding typeBinding, boolean inNullMarkedScope) {
     // Intersection types created with this method only occur in method bodies, default nullability
     // can be ignored.

@@ -106,7 +106,7 @@ public class JavacParser {
       }
 
       JavaEnvironment javaEnvironment =
-          new JavaEnvironment(task.getContext(), FrontendConstants.KNOWN_QUALIFIED_BINARY_NAMES);
+          new JavaEnvironment(task.getContext(), FrontendConstants.getKnownQualifiedBinaryNames());
       return CompilationUnitBuilder.build(javacCompilationUnits, javaEnvironment);
 
     } catch (IOException e) {

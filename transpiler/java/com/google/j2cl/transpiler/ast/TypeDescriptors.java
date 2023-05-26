@@ -27,6 +27,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -508,20 +509,21 @@ public class TypeDescriptors {
   public static class SingletonBuilder {
 
     private final TypeDescriptors typeDescriptors = new TypeDescriptors();
+    private Map<String, DeclaredTypeDescriptor> knownTypesByQualifiedName = new HashMap<>();
 
     public void buildSingleton() {
+      // All the wellknown reference types are loaded, add the primitive <-> boxed types mapping.
+      for (PrimitiveTypeDescriptor primitiveTypeDescriptor : PrimitiveTypes.TYPES) {
+        addBoxedTypeMapping(
+            primitiveTypeDescriptor,
+            knownTypesByQualifiedName.get(primitiveTypeDescriptor.getBoxedClassName()));
+      }
+
       set(typeDescriptors);
       typeDescriptors.javaLangObjectArray =
           ArrayTypeDescriptor.newBuilder()
               .setComponentTypeDescriptor(typeDescriptors.javaLangObject)
               .build();
-    }
-
-    public SingletonBuilder addPrimitiveBoxedTypeDescriptorPair(
-        PrimitiveTypeDescriptor primitiveType, DeclaredTypeDescriptor boxedType) {
-      addReferenceType(boxedType);
-      addBoxedTypeMapping(primitiveType, boxedType);
-      return this;
     }
 
     public SingletonBuilder addReferenceType(DeclaredTypeDescriptor referenceType) {
@@ -530,6 +532,7 @@ public class TypeDescriptors {
           "%s is not a reference type",
           referenceType.getQualifiedSourceName());
       String name = referenceType.getQualifiedSourceName();
+      knownTypesByQualifiedName.put(name, referenceType);
       switch (name) {
         case "java.io.Serializable":
           typeDescriptors.javaIoSerializable = referenceType;

@@ -105,7 +105,7 @@ public class JdtParser {
             .filter(f -> !f.endsWith("module-info.java"))
             .toArray(String[]::new),
         getEncodings(filePaths.size()),
-        FrontendConstants.KNOWN_QUALIFIED_BINARY_NAMES.stream()
+        FrontendConstants.getKnownQualifiedBinaryNames().stream()
             .map(BindingKey::createTypeBindingKey)
             .toArray(String[]::new),
         astRequestor,

@@ -15,7 +15,12 @@
  */
 package com.google.j2cl.transpiler.frontend.common;
 
+import static com.google.common.collect.ImmutableList.toImmutableList;
+
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Streams;
+import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
+import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 
 /** Constants common to all frontends. */
 public final class FrontendConstants {
@@ -47,7 +52,7 @@ public final class FrontendConstants {
       "javaemul.internal.annotations.DoNotAutobox";
 
   /** Classes that that might be needed by the different transpilation paths. */
-  public static final ImmutableList<String> KNOWN_QUALIFIED_BINARY_NAMES =
+  private static final ImmutableList<String> KNOWN_QUALIFIED_BINARY_NAMES =
       ImmutableList.of(
           "java.io.Serializable",
           "java.lang.CharSequence",
@@ -88,6 +93,13 @@ public final class FrontendConstants {
           "javaemul.internal.WasmArray$OfFloat",
           "javaemul.internal.WasmArray$OfDouble",
           "javaemul.internal.WasmArray$OfBoolean");
+
+  public static ImmutableList<String> getKnownQualifiedBinaryNames() {
+    return Streams.concat(
+            FrontendConstants.KNOWN_QUALIFIED_BINARY_NAMES.stream(),
+            PrimitiveTypes.TYPES.stream().map(PrimitiveTypeDescriptor::getBoxedClassName))
+        .collect(toImmutableList());
+  }
 
   private FrontendConstants() {}
 }

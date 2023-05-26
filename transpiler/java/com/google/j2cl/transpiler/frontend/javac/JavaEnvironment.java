@@ -37,7 +37,6 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.PostfixOperator;
 import com.google.j2cl.transpiler.ast.PrefixOperator;
-import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
@@ -115,9 +114,6 @@ class JavaEnvironment {
       return;
     }
     TypeDescriptors.SingletonBuilder builder = new TypeDescriptors.SingletonBuilder();
-    for (PrimitiveTypeDescriptor typeDescriptor : PrimitiveTypes.TYPES) {
-      addPrimitive(builder, typeDescriptor);
-    }
     // Add well-known, non-primitive types.
     wellKnownQualifiedBinaryNames.forEach(
         binaryName -> {
@@ -975,13 +971,6 @@ class JavaEnvironment {
 
   private PackageElement getPackageOf(TypeElement typeElement) {
     return elements.getPackageOf(typeElement);
-  }
-
-  private void addPrimitive(
-      TypeDescriptors.SingletonBuilder builder, PrimitiveTypeDescriptor typeDescriptor) {
-    DeclaredTypeDescriptor boxedType =
-        createDeclaredTypeDescriptor(getTypeElement(typeDescriptor.getBoxedClassName()).asType());
-    builder.addPrimitiveBoxedTypeDescriptorPair(typeDescriptor, boxedType);
   }
 
   private TypeDescriptor createIntersectionType(IntersectionClassType intersectionType) {
