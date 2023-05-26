@@ -54,7 +54,6 @@ public class Main {
     intf1.foo();
 
     InterfaceWithThisReference o = new InterfaceWithThisReference() {};
-    // TODO(b/178447142): Uncomment when the bug is fixed.
     assertSame(o, o.foo());
     assertSame(o, o.baz());
   }
