@@ -46,6 +46,18 @@ import java.util.stream.Stream;
 
 /** Converts method references into lambdas. */
 public class ConvertMethodReferencesToLambdas extends NormalizationPass {
+
+  /** Whether to preserve or not the type parameters in the functional method. */
+  final boolean preserveTypeParameters;
+
+  public ConvertMethodReferencesToLambdas() {
+    this(false);
+  }
+
+  public ConvertMethodReferencesToLambdas(boolean preserveTypeParameters) {
+    this.preserveTypeParameters = preserveTypeParameters;
+  }
+
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(
@@ -60,6 +72,15 @@ public class ConvertMethodReferencesToLambdas extends NormalizationPass {
             TypeDescriptor typeDescriptor = methodReference.getTypeDescriptor();
             MethodDescriptor interfacedMethodDescriptor =
                 methodReference.getInterfacedMethodDescriptor();
+
+            if (!preserveTypeParameters) {
+              // Remove the type parameters from the functional interface. Functional interfaces
+              // with type parameters in the functional method cannot be instantiated with
+              // lambdas (only with method references or a class); however, in the j2kt backend
+              // the transformed lambda is used to emit the anonymous instantiation and needs
+              // all the information preserved.
+              interfacedMethodDescriptor = interfacedMethodDescriptor.withoutTypeParameters();
+            }
 
             if (referencedMethodDescriptor.isConstructor()) {
               return createInstantiationLambda(
@@ -112,7 +133,7 @@ public class ConvertMethodReferencesToLambdas extends NormalizationPass {
    * <p>depending on whether the qualifier can be evaluated inside the functional expression
    * preserving the original semantics.
    */
-  protected static Expression createMethodReferenceLambda(
+  private static Expression createMethodReferenceLambda(
       SourcePosition sourcePosition,
       Expression qualifier,
       MethodDescriptor referencedMethodDescriptor,
@@ -156,7 +177,7 @@ public class ConvertMethodReferencesToLambdas extends NormalizationPass {
    * Creates a FunctionExpression described by {@code functionalMethodDescriptor} that forwards to
    * {@code targetMethodDescriptor}.
    */
-  protected static FunctionExpression createForwardingFunctionExpression(
+  private static FunctionExpression createForwardingFunctionExpression(
       SourcePosition sourcePosition,
       TypeDescriptor expressionTypeDescriptor,
       MethodDescriptor functionalMethodDescriptor,
@@ -167,8 +188,7 @@ public class ConvertMethodReferencesToLambdas extends NormalizationPass {
     // Remove type parameters for the JsFunction method to avoid introducing them in the parameters
     // of the lambda expression. That is done because the type for functions in Closure can not
     // define templates.
-    MethodDescriptor jsFunctionMethodDescriptor =
-        functionalMethodDescriptor.withoutTypeParameters();
+    MethodDescriptor jsFunctionMethodDescriptor = functionalMethodDescriptor;
     List<Variable> parameters =
         AstUtils.createParameterVariables(jsFunctionMethodDescriptor.getParameterTypeDescriptors());
 

@@ -622,7 +622,8 @@ public enum Backend {
     @Override
     public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
       return ImmutableList.of(
-          ConvertMethodReferencesToLambdas::new, ResolveImplicitInstanceQualifiers::new);
+          () -> new ConvertMethodReferencesToLambdas(/* preserveTypeParameters= */ true),
+          ResolveImplicitInstanceQualifiers::new);
     }
 
     @Override

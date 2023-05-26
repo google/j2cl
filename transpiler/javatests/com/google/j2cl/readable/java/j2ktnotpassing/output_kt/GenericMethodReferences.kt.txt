@@ -43,7 +43,7 @@ open class GenericMethodReferences {
   @JvmStatic
   @HiddenFromObjC
   fun test_pp_j2ktnotpassing() {
-   GenericMethodReferences.accept_pp_j2ktnotpassing(GenericMethodReferences.Fn { arg0 ->
+   GenericMethodReferences.accept_pp_j2ktnotpassing(GenericMethodReferences.Fn { arg0: T ->
     return@Fn GenericMethodReferences.genericMethod_pp_j2ktnotpassing<T>(arg0)
    })
   }

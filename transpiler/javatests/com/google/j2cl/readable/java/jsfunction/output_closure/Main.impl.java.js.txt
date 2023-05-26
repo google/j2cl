@@ -253,6 +253,18 @@ class Main extends j_l_Object {
  }
  /** @nodts */
  static m_acceptsParameterizedMethod__jsfunction_Main_ParameterizedMethod__void(/** ?function(?):? */ m) {}
+ /** @nodts @template T @return {T} */
+ static m_nullFn__java_lang_Object__java_lang_Object(/** T */ t) {
+  Main.$clinit();
+  return null;
+ }
+ /** @nodts */
+ static m_testParameterizedJsFunctionMethod__void() {
+  let /** ?function(?):? */ parameterizedMethod;
+  parameterizedMethod = (arg0) =>{
+   return Main.m_nullFn__java_lang_Object__java_lang_Object(arg0);
+  };
+ }
  /** @private @nodts */
  $init__void_$p_jsfunction_Main() {
   this.f_jsFunctionFieldWildcard__jsfunction_Main = (/** ? */ event) =>{};

@@ -384,10 +384,22 @@ public class Main {
 
   @JsFunction
   interface ParameterizedMethod {
-    <T> T ident(T t);
+    <T> T f(T t);
   }
 
   // Repro for b/153176433.
   private static void acceptsParameterizedMethod(ParameterizedMethod m) {}
 
+  static <T> T nullFn(T t) {
+    return null;
+  }
+
+  private static void testParameterizedJsFunctionMethod() {
+    ParameterizedMethod parameterizedMethod;
+    parameterizedMethod = Main::nullFn;
+    // The equivalent lambda to Main::nullFn cannot be written by hand (both jdt and java reject
+    // the code). A functional interface with type parameters declared in the functional method can
+    // only be instantiated by a method reference or a class.
+    // parameterizedMethod = x -> nullFn(x);
+  }
 }
