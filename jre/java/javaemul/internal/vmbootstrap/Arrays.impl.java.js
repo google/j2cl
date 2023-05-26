@@ -108,6 +108,8 @@ class Arrays {
       // Contains leaf type values.
       // We only initialize if initial value is different than JS default value.
       if (leafTypeInitialValue !== undefined) {
+        // Avoid using array.fill(leafTypeInitialValue) here as this will impact
+        // side-effect computation and cause unused arrays to be retained.
         for (let index = 0; index < length; index++) {
           array[index] = leafTypeInitialValue;
         }

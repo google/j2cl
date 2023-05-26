@@ -805,138 +805,75 @@ public class Arrays {
   }
 
   public static void fill(boolean[] a, boolean val) {
-    fill0(a, 0, a.length, val);
+    ArrayHelper.fill(a, val);
   }
 
   public static void fill(boolean[] a, int fromIndex, int toIndex, boolean val) {
-    checkCriticalArrayBounds(fromIndex, toIndex, a.length);
-    fill0(a, fromIndex, toIndex, val);
-  }
-
-  private static void fill0(boolean[] a, int fromIndex, int toIndex, boolean val) {
-    for (int i = fromIndex; i < toIndex; ++i) {
-      a[i] = val;
-    }
+    ArrayHelper.fill(a, val, fromIndex, toIndex);
   }
 
   public static void fill(byte[] a, byte val) {
-    fill0(a, 0, a.length, val);
+    ArrayHelper.fill(a, val);
   }
 
   public static void fill(byte[] a, int fromIndex, int toIndex, byte val) {
-    checkCriticalArrayBounds(fromIndex, toIndex, a.length);
-    fill0(a, fromIndex, toIndex, val);
-  }
-
-  private static void fill0(byte[] a, int fromIndex, int toIndex, byte val) {
-    for (int i = fromIndex; i < toIndex; ++i) {
-      a[i] = val;
-    }
+    ArrayHelper.fill(a, val, fromIndex, toIndex);
   }
 
   public static void fill(char[] a, char val) {
-    fill0(a, 0, a.length, val);
+    ArrayHelper.fill(a, val);
   }
 
   public static void fill(char[] a, int fromIndex, int toIndex, char val) {
-    checkCriticalArrayBounds(fromIndex, toIndex, a.length);
-    fill0(a, fromIndex, toIndex, val);
-  }
-
-  private static void fill0(char[] a, int fromIndex, int toIndex, char val) {
-    for (int i = fromIndex; i < toIndex; ++i) {
-      a[i] = val;
-    }
+    ArrayHelper.fill(a, val, fromIndex, toIndex);
   }
 
   public static void fill(double[] a, double val) {
-    fill0(a, 0, a.length, val);
+    ArrayHelper.fill(a, val);
   }
 
   public static void fill(double[] a, int fromIndex, int toIndex, double val) {
-    checkCriticalArrayBounds(fromIndex, toIndex, a.length);
-    fill0(a, fromIndex, toIndex, val);
-  }
-
-  private static void fill0(double[] a, int fromIndex, int toIndex, double val) {
-    for (int i = fromIndex; i < toIndex; ++i) {
-      a[i] = val;
-    }
+    ArrayHelper.fill(a, val, fromIndex, toIndex);
   }
 
   public static void fill(float[] a, float val) {
-    fill0(a, 0, a.length, val);
+    ArrayHelper.fill(a, val);
   }
 
   public static void fill(float[] a, int fromIndex, int toIndex, float val) {
-    checkCriticalArrayBounds(fromIndex, toIndex, a.length);
-    fill0(a, fromIndex, toIndex, val);
-  }
-
-  private static void fill0(float[] a, int fromIndex, int toIndex, float val) {
-    for (int i = fromIndex; i < toIndex; ++i) {
-      a[i] = val;
-    }
+    ArrayHelper.fill(a, val, fromIndex, toIndex);
   }
 
   public static void fill(int[] a, int val) {
-    fill0(a, 0, a.length, val);
+    ArrayHelper.fill(a, val);
   }
 
   public static void fill(int[] a, int fromIndex, int toIndex, int val) {
-    checkCriticalArrayBounds(fromIndex, toIndex, a.length);
-    fill0(a, fromIndex, toIndex, val);
-  }
-
-  private static void fill0(int[] a, int fromIndex, int toIndex, int val) {
-    for (int i = fromIndex; i < toIndex; ++i) {
-      a[i] = val;
-    }
+    ArrayHelper.fill(a, val, fromIndex, toIndex);
   }
 
   public static void fill(long[] a, int fromIndex, int toIndex, long val) {
-    checkCriticalArrayBounds(fromIndex, toIndex, a.length);
-    fill0(a, fromIndex, toIndex, val);
-  }
-
-  private static void fill0(long[] a, int fromIndex, int toIndex, long val) {
-    for (int i = fromIndex; i < toIndex; ++i) {
-      a[i] = val;
-    }
+    ArrayHelper.fill(a, val, fromIndex, toIndex);
   }
 
   public static void fill(long[] a, long val) {
-    fill0(a, 0, a.length, val);
+    ArrayHelper.fill(a, val);
   }
 
   public static void fill(Object[] a, int fromIndex, int toIndex, Object val) {
-    checkCriticalArrayBounds(fromIndex, toIndex, a.length);
-    fill0(a, fromIndex, toIndex, val);
-  }
-
-  private static void fill0(Object[] a, int fromIndex, int toIndex, Object val) {
-    for (int i = fromIndex; i < toIndex; ++i) {
-      a[i] = val;
-    }
+    ArrayHelper.fill(a, val, fromIndex, toIndex);
   }
 
   public static void fill(Object[] a, Object val) {
-    fill0(a, 0, a.length, val);
+    ArrayHelper.fill(a, val);
   }
 
   public static void fill(short[] a, int fromIndex, int toIndex, short val) {
-    checkCriticalArrayBounds(fromIndex, toIndex, a.length);
-    fill0(a, fromIndex, toIndex, val);
-  }
-
-  private static void fill0(short[] a, int fromIndex, int toIndex, short val) {
-    for (int i = fromIndex; i < toIndex; ++i) {
-      a[i] = val;
-    }
+    ArrayHelper.fill(a, val, fromIndex, toIndex);
   }
 
   public static void fill(short[] a, short val) {
-    fill0(a, 0, a.length, val);
+    ArrayHelper.fill(a, val);
   }
 
   public static int hashCode(boolean[] a) {

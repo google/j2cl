@@ -78,6 +78,96 @@ public final class ArrayHelper {
     ((WasmArray.OfDouble) asWasmArray(array)).push(o);
   }
 
+  public static void fill(int[] array, int value) {
+    fill(array, value, 0, getLength(array));
+  }
+
+  public static void fill(int[] array, int value, int fromIndex, int toIndex) {
+    for (int i = fromIndex; i < toIndex; i++) {
+      array[i] = value;
+    }
+  }
+
+  public static void fill(double[] array, double value) {
+    fill(array, value, 0, getLength(array));
+  }
+
+  public static void fill(double[] array, double value, int fromIndex, int toIndex) {
+    for (int i = fromIndex; i < toIndex; i++) {
+      array[i] = value;
+    }
+  }
+
+  public static void fill(float[] array, float value) {
+    fill(array, value, 0, getLength(array));
+  }
+
+  public static void fill(float[] array, float value, int fromIndex, int toIndex) {
+    for (int i = fromIndex; i < toIndex; i++) {
+      array[i] = value;
+    }
+  }
+
+  public static void fill(short[] array, short value) {
+    fill(array, value, 0, getLength(array));
+  }
+
+  public static void fill(short[] array, short value, int fromIndex, int toIndex) {
+    for (int i = fromIndex; i < toIndex; i++) {
+      array[i] = value;
+    }
+  }
+
+  public static void fill(long[] array, long value) {
+    fill(array, value, 0, getLength(array));
+  }
+
+  public static void fill(long[] array, long value, int fromIndex, int toIndex) {
+    for (int i = fromIndex; i < toIndex; i++) {
+      array[i] = value;
+    }
+  }
+
+  public static void fill(byte[] array, byte value) {
+    fill(array, value, 0, getLength(array));
+  }
+
+  public static void fill(byte[] array, byte value, int fromIndex, int toIndex) {
+    for (int i = fromIndex; i < toIndex; i++) {
+      array[i] = value;
+    }
+  }
+
+  public static void fill(char[] array, char value) {
+    fill(array, value, 0, getLength(array));
+  }
+
+  public static void fill(char[] array, char value, int fromIndex, int toIndex) {
+    for (int i = fromIndex; i < toIndex; i++) {
+      array[i] = value;
+    }
+  }
+
+  public static void fill(boolean[] array, boolean value) {
+    fill(array, value, 0, getLength(array));
+  }
+
+  public static void fill(boolean[] array, boolean value, int fromIndex, int toIndex) {
+    for (int i = fromIndex; i < toIndex; i++) {
+      array[i] = value;
+    }
+  }
+
+  public static <T> void fill(T[] array, T value) {
+    fill(array, value, 0, getLength(array));
+  }
+
+  public static <T> void fill(T[] array, T value, int fromIndex, int toIndex) {
+    for (int i = fromIndex; i < toIndex; i++) {
+      array[i] = value;
+    }
+  }
+
   public static <T> T setAt(T[] array, int index, T value) {
     WasmArray wasmArray = asWasmArray(array);
     T originalValue;

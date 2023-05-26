@@ -69,6 +69,15 @@ public final class ArrayHelper {
     asNativeArray(array).push(o);
   }
 
+  public static void fill(Object array, @DoNotAutobox Object value, int fromIndex, int toIndex) {
+    checkCriticalArrayBounds(fromIndex, toIndex, getLength(array));
+    asNativeArray(array).fill(value, fromIndex, toIndex);
+  }
+
+  public static void fill(Object array, @DoNotAutobox Object value) {
+    asNativeArray(array).fill(value);
+  }
+
   /**
    * Sets an element of an array.
    *
@@ -293,6 +302,10 @@ public final class ArrayHelper {
     native Object[] slice();
 
     native Object[] slice(int fromIndex, int toIndex);
+
+    native void fill(Object value);
+
+    native void fill(Object value, int fromIndex, int toIndex);
 
     native void splice(int index, int deleteCount, Object... value);
 
