@@ -69,6 +69,8 @@ def _create_target_info(target):
   rule_kind = repo_util.get_rule_kind(blaze_target, workspace_path)
   if rule_kind == "js_binary":
     blaze_target += ".js"
+  if rule_kind == "_j2wasm_application":
+    blaze_target += ".wasm"
   elif rule_kind == "_size_report_rule":
     # Size report targets doesn't need extension.
     pass
@@ -113,15 +115,28 @@ def _diff(original, modified, filter_noise):
       ["--define=J2CL_APP_STYLE=PRETTY"],
   )
 
-  print("  Formatting.")
-  shutil.copyfile(original.get_output_file(), original.get_formatted_file())
-  shutil.copyfile(modified.get_output_file(), modified.get_formatted_file())
-  repo_util.run_cmd([
-      "clang-format",
-      "-i",
-      original.get_formatted_file(),
-      modified.get_formatted_file(),
-  ])
+  if modified.blaze_target.endswith(".wasm"):
+    print("  Disassembling,")
+    repo_util.build(["//third_party/binaryen:wasm-dis"])
+    wasm_dis_cmd = ["blaze-bin/third_party/binaryen/wasm-dis", "--enable-gc"]
+    repo_util.run_cmd(
+        wasm_dis_cmd
+        + [original.get_output_file(), "-o", original.get_formatted_file()]
+    )
+    repo_util.run_cmd(
+        wasm_dis_cmd
+        + [modified.get_output_file(), "-o", modified.get_formatted_file()]
+    )
+  else:
+    print("  Formatting.")
+    shutil.copyfile(original.get_output_file(), original.get_formatted_file())
+    shutil.copyfile(original.get_output_file(), modified.get_formatted_file())
+    repo_util.run_cmd([
+        "clang-format",
+        "-i",
+        original.get_formatted_file(),
+        modified.get_formatted_file(),
+    ])
 
   if filter_noise:
     print("  Reducing noise.")
