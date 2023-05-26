@@ -22,7 +22,7 @@ import signal
 import subprocess
 
 INTEGRATION_ROOT = "transpiler/javatests/com/google/j2cl/integration/"
-READABLE_OPT_TEST_PATTERN = INTEGRATION_ROOT + "%s:readable_optimized_js%s.js"
+OPT_TEST_PATTERN = INTEGRATION_ROOT + "%s:opt%s"
 SIZE_REPORT = INTEGRATION_ROOT + "size_report.txt"
 TEST_LIST = INTEGRATION_ROOT + "optimized_js_list.bzl"
 BENCH_ROOT = "benchmarking/java/com/google/j2cl/benchmarks/"
@@ -50,11 +50,13 @@ def build_original_and_modified(original_targets, modified_targets):
   )
 
 
-def build_targets_with_workspace(targets1, targets2, repo1, repo2):
+def build_targets_with_workspace(
+    targets1, targets2, repo1, repo2, blaze_flags=None
+):
   """Blaze builds the two sets of targets in parallel if needed."""
   if repo1 == repo2:
     # Just build the two sets of targets in one blaze build
-    build_tests(targets1 + targets2, repo1)
+    build(targets1 + targets2, blaze_flags, repo1)
   else:
     # Create a pool that does not capture ctrl-c.
     original_sigint_handler = signal.signal(signal.SIGINT, signal.SIG_IGN)
@@ -62,14 +64,14 @@ def build_targets_with_workspace(targets1, targets2, repo1, repo2):
     signal.signal(signal.SIGINT, original_sigint_handler)
 
     result1 = pool.apply_async(
-        build_tests,
-        [targets1, repo1],
+        build,
+        [targets1, blaze_flags, repo1],
         callback=lambda x: print("    Original done building."),
     )
 
     result2 = pool.apply_async(
-        build_tests,
-        [targets2, repo2],
+        build,
+        [targets2, blaze_flags, repo2],
         callback=lambda x: print("    Modified done building."),
     )
     pool.close()
@@ -81,14 +83,14 @@ def build_targets_with_workspace(targets1, targets2, repo1, repo2):
     result2.get()
 
 
-def build_tests(test_targets, cwd=None):
+def build(test_targets, blaze_flags=None, cwd=None):
   """Blaze builds provided integration tests in parallel."""
-  run_cmd(["blaze", "build"] + test_targets, cwd=cwd)
+  run_cmd(["blaze", "build"] + (blaze_flags or []) + test_targets, cwd=cwd)
 
 
-def get_readable_optimized_test(test_name):
-  """Returns the path to the readable opt JS file the given test."""
-  return READABLE_OPT_TEST_PATTERN % parse_name(test_name)
+def get_optimized_target(test_name):
+  """Returns the path to the optimized file name for the given test."""
+  return OPT_TEST_PATTERN % parse_name(test_name)
 
 
 def get_all_tests(test_name):

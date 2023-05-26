@@ -22,57 +22,28 @@ import repo_util
 
 
 class TargetInfo:
-  repository_name = None
+  workspace_path = None
   blaze_target = ""
-  original_target = ""
 
-  def __init__(self, repository, blaze_target, original_target):
-    self.repository_name = repository
+  def __init__(self, workspace_path, blaze_target):
+    self.workspace_path = workspace_path
     self.blaze_target = blaze_target
-    self.original_target = original_target
-
-  def get_repository_path(self):
-    return (
-        repo_util.get_repo_path(self.repository_name)
-        if self.repository_name
-        else None
-    )
 
   def get_output_file(self):
     file_path = "blaze-bin/" + repo_util.get_file_from_target(self.blaze_target)
-    if self.repository_name:
-      file_path = f"{self.get_repository_path()}/{file_path}"
-
-    return file_path
+    if self.workspace_path:
+      return f"{self.workspace_path}/{file_path}"
+    else:
+      return file_path
 
   def get_formatted_file(self):
     return "/tmp/" + self.get_output_file().replace("/", ".")
 
-  def validate(self):
-    if self.repository_name and not os.path.isdir(self.get_repository_path()):
-      raise argparse.ArgumentTypeError(
-          "Invalid workspace [%s] in argument [%s]"
-          % (self.repository_name, self.original_target)
-      )
-
-    # We only support js_binary target for now.
-    rule_kind = repo_util.get_rule_kind(
-        self.blaze_target, self.get_repository_path()
-    )
-    if not rule_kind:
-      raise argparse.ArgumentTypeError(
-          "Invalid target [%s] in argument[%s]: Target does not exist"
-          % (self.blaze_target, self.original_target)
-      )
-    if rule_kind != "js_binary":
-      raise argparse.ArgumentTypeError(
-          "Invalid target [%s] in argument[%s]: Target is not a js_binary"
-          % (self.blaze_target, self.original_target)
-      )
-
   def to_j2cl_size_target(self):
-    target_info = _ = TargetInfo("j2cl-size", self.blaze_target, "head")
-    # sync the j2cl-size repo to the same base cl
+    target_info = _ = TargetInfo(
+        repo_util.get_repo_path("j2cl-size"), self.blaze_target
+    )
+    # sync the j2cl-size workspace to the same base cl
     repo_util.sync_j2size_repo()
     return target_info
 
@@ -80,39 +51,45 @@ class TargetInfo:
 def _create_target_info(target):
   decomposed_target = target.split("@", 1)
   if len(decomposed_target) == 2:
-    repository_name, blaze_target = decomposed_target
+    workspace_name, blaze_target = decomposed_target
+    workspace_path = repo_util.get_repo_path(workspace_name)
+    if not os.path.isdir(workspace_path):
+      raise argparse.ArgumentTypeError(f"No such workspace {workspace_name}")
   else:
-    repository_name = None
+    workspace_path = None
     blaze_target = target
 
-  if not blaze_target.startswith("//"):
-    # This is an integration test name. Format: (java|kotlin)/(test)(.version)?
-    blaze_target = repo_util.get_readable_optimized_test(blaze_target)
-  else:
+  if blaze_target.startswith("//"):
     # remove the '//'
     blaze_target = blaze_target[2:]
+  else:
+    # This is an integration test name. Format: (java|kotlin)/(test)(.version)?
+    blaze_target = repo_util.get_optimized_target(blaze_target)
 
-  target_info = TargetInfo(repository_name, blaze_target, target)
-  target_info.validate()
+  rule_kind = repo_util.get_rule_kind(blaze_target, workspace_path)
+  if rule_kind == "js_binary":
+    blaze_target += ".js"
+  elif rule_kind == "_size_report_rule":
+    # Size report targets doesn't need extension.
+    pass
+  elif rule_kind:
+    raise argparse.ArgumentTypeError(f"Unknown target kind {rule_kind}")
+  else:
+    raise argparse.ArgumentTypeError(f"No such target {blaze_target}")
 
-  return target_info
+  return TargetInfo(workspace_path, blaze_target)
 
 
 def main(argv):
   if len(argv.targets) > 2:
-    raise argparse.ArgumentTypeError(
-        "You cannot pass more than 2 targets to compare."
-    )
+    raise argparse.ArgumentTypeError("More than 2 targets to compare.")
 
   original = _create_target_info(argv.targets[0])
 
   if len(argv.targets) == 1:
-    # We do not allow providing a client when there is only one parameter
-    if original.repository_name:
+    if original.workspace_path:
       raise argparse.ArgumentTypeError(
-          "Invalid parameter [%s]: You cannot specify a citc client for a"
-          " single target diff."
-          % original.original_target
+          "Workspace is not allowed on a single target compare."
       )
     # We are diffing a change against the head version. Reuse the 'j2cl-size'
     # repo for building the head version of the target.
@@ -125,23 +102,18 @@ def main(argv):
 
 
 def _diff(original, modified, filter_noise):
-  print(
-      "Constructing diff of JS changes from '%s' to '%s"
-      % (original.original_target, modified.original_target)
-  )
+  print("Constructing a diff of changes in '%s'" % modified.blaze_target)
 
-  print(
-      "  blaze building JS for:\n    '%s'\n    '%s'"
-      % (original.original_target, modified.original_target)
-  )
+  print("  Building targets.")
   repo_util.build_targets_with_workspace(
       [original.blaze_target],
       [modified.blaze_target],
-      original.get_repository_path(),
-      modified.get_repository_path(),
+      original.workspace_path,
+      modified.workspace_path,
+      ["--define=J2CL_APP_STYLE=PRETTY"],
   )
 
-  print("  Formatting")
+  print("  Formatting.")
   shutil.copyfile(original.get_output_file(), original.get_formatted_file())
   shutil.copyfile(modified.get_output_file(), modified.get_formatted_file())
   repo_util.run_cmd([
@@ -152,7 +124,7 @@ def _diff(original, modified, filter_noise):
   ])
 
   if filter_noise:
-    print("  Reducing noise")
+    print("  Reducing noise.")
     # Replace the numeric part of the variable id generation from JsCompiler to
     # reduce noise in the final diff.
     # The patterns we want to match are:
@@ -169,7 +141,7 @@ def _diff(original, modified, filter_noise):
         modified.get_formatted_file(),
     ])
 
-  print("  Starting diff")
+  print("  Starting diff...")
   subprocess.call(
       "${P4DIFF:-diff} %s %s"
       % (original.get_formatted_file(), modified.get_formatted_file()),
