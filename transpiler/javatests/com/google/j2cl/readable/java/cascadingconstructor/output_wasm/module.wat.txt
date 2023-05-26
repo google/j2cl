@@ -61,13 +61,10 @@
  ;;@ cascadingconstructor/CascadingConstructor.java:22:10
  (local $$instance (ref null $cascadingconstructor.CascadingConstructor))
  (block
-  ;; CascadingConstructor $instance = new CascadingConstructor.<init>(0,a,0);
   ;;@ cascadingconstructor/CascadingConstructor.java:22:10
   (local.set $$instance (struct.new $cascadingconstructor.CascadingConstructor (ref.as_non_null (global.get $cascadingconstructor.CascadingConstructor.vtable)) (ref.as_non_null (global.get $cascadingconstructor.CascadingConstructor.itable)) (i32.const 0) (local.get $a) (i32.const 0)))
-  ;; $instance.$ctor(a,b);
   ;;@ cascadingconstructor/CascadingConstructor.java:22:10
   (call $$ctor__int__int__void_$p_cascadingconstructor_CascadingConstructor@cascadingconstructor.CascadingConstructor (ref.as_non_null (local.get $$instance))(local.get $a)(local.get $b))
-  ;; return $instance;
   ;;@ cascadingconstructor/CascadingConstructor.java:22:10
   (return (local.get $$instance))
  )
@@ -80,10 +77,8 @@
  (param $b i32)
  ;;@ cascadingconstructor/CascadingConstructor.java:22:10
  (block
-  ;; Object.this.$ctor();
   ;;@ cascadingconstructor/CascadingConstructor.java:22:45
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;; (CascadingConstructor.this.b = b);
   ;;@ cascadingconstructor/CascadingConstructor.java:24:4
   (struct.set $cascadingconstructor.CascadingConstructor $f_b__cascadingconstructor_CascadingConstructor_(local.get $this) (local.get $b))
  )
@@ -96,13 +91,10 @@
  ;;@ cascadingconstructor/CascadingConstructor.java:27:9
  (local $$instance (ref null $cascadingconstructor.CascadingConstructor))
  (block
-  ;; CascadingConstructor $instance = new CascadingConstructor.<init>(0,a,0);
   ;;@ cascadingconstructor/CascadingConstructor.java:27:9
   (local.set $$instance (struct.new $cascadingconstructor.CascadingConstructor (ref.as_non_null (global.get $cascadingconstructor.CascadingConstructor.vtable)) (ref.as_non_null (global.get $cascadingconstructor.CascadingConstructor.itable)) (i32.const 0) (local.get $a) (i32.const 0)))
-  ;; $instance.$ctor(a);
   ;;@ cascadingconstructor/CascadingConstructor.java:27:9
   (call $$ctor__int__void_$p_cascadingconstructor_CascadingConstructor@cascadingconstructor.CascadingConstructor (ref.as_non_null (local.get $$instance))(local.get $a))
-  ;; return $instance;
   ;;@ cascadingconstructor/CascadingConstructor.java:27:9
   (return (local.get $$instance))
  )
@@ -114,10 +106,8 @@
  (param $a i32)
  ;;@ cascadingconstructor/CascadingConstructor.java:27:9
  (block
-  ;; cascadingconstructor.CascadingConstructor.$clinit();
   ;;@ cascadingconstructor/CascadingConstructor.java:27:37
   (call $$clinit__void@cascadingconstructor.CascadingConstructor )
-  ;; CascadingConstructor.this.$ctor(a,(a * 2));
   ;;@ cascadingconstructor/CascadingConstructor.java:28:4
   (call $$ctor__int__int__void_$p_cascadingconstructor_CascadingConstructor@cascadingconstructor.CascadingConstructor (ref.as_non_null (local.get $this))(local.get $a)(i32.mul (local.get $a) (i32.const 2)))
  )
@@ -127,19 +117,15 @@
 (func $$clinit__void@cascadingconstructor.CascadingConstructor
  ;;@ cascadingconstructor/CascadingConstructor.java:18:13
  (block
-  ;; if (cascadingconstructor.CascadingConstructor.$initialized) return;
   ;;@ cascadingconstructor/CascadingConstructor.java:18:13
   (if (global.get $f_$initialized__cascadingconstructor_CascadingConstructor)
    (then
-    ;; return;
     ;;@ cascadingconstructor/CascadingConstructor.java:18:13
     (return )
    )
   )
-  ;; (cascadingconstructor.CascadingConstructor.$initialized = true);
   ;;@ cascadingconstructor/CascadingConstructor.java:18:13
   (global.set $f_$initialized__cascadingconstructor_CascadingConstructor (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ cascadingconstructor/CascadingConstructor.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -149,14 +135,11 @@
 (func $$getClassMetadata__java_lang_Class@cascadingconstructor.CascadingConstructor
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((cascadingconstructor.CascadingConstructor.$class == null)) (cascadingconstructor.CascadingConstructor.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|cascadingcon...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__cascadingconstructor_CascadingConstructor) (ref.null $java.lang.Class))
    (then
-    ;; (cascadingconstructor.CascadingConstructor.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|cascadingcon...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__cascadingconstructor_CascadingConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cascadingcon...|__java_lang_String (ref.func $$getString_|cascadingcon...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return cascadingconstructor.CascadingConstructor.$class;
   (return (global.get $f_$class__cascadingconstructor_CascadingConstructor))
  )
 )
@@ -169,7 +152,6 @@
  (local $this (ref null $cascadingconstructor.CascadingConstructor))
  (local.set $this (ref.cast_static $cascadingconstructor.CascadingConstructor (local.get $this.untyped)))
  (block
-  ;; return cascadingconstructor.CascadingConstructor.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cascadingconstructor.CascadingConstructor) ))
  )
 )

@@ -196,13 +196,10 @@
  ;;@ boundedtypesupercall/Main.java:18:13
  (local $$instance (ref null $boundedtypesupercall.Main))
  (block
-  ;; Main $instance = new Main.<init>(0);
   ;;@ boundedtypesupercall/Main.java:18:13
   (local.set $$instance (struct.new $boundedtypesupercall.Main (ref.as_non_null (global.get $boundedtypesupercall.Main.vtable)) (ref.as_non_null (global.get $boundedtypesupercall.Main.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ boundedtypesupercall/Main.java:18:13
   (call $$ctor__void_$p_boundedtypesupercall_Main@boundedtypesupercall.Main (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ boundedtypesupercall/Main.java:18:13
   (return (local.get $$instance))
  )
@@ -213,10 +210,8 @@
  (param $this (ref null $boundedtypesupercall.Main))
  ;;@ boundedtypesupercall/Main.java:18:13
  (block
-  ;; boundedtypesupercall.Main.$clinit();
   ;;@ boundedtypesupercall/Main.java:18:13
   (call $$clinit__void@boundedtypesupercall.Main )
-  ;; Object.this.$ctor();
   ;;@ boundedtypesupercall/Main.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -226,19 +221,15 @@
 (func $$clinit__void@boundedtypesupercall.Main
  ;;@ boundedtypesupercall/Main.java:18:13
  (block
-  ;; if (boundedtypesupercall.Main.$initialized) return;
   ;;@ boundedtypesupercall/Main.java:18:13
   (if (global.get $f_$initialized__boundedtypesupercall_Main)
    (then
-    ;; return;
     ;;@ boundedtypesupercall/Main.java:18:13
     (return )
    )
   )
-  ;; (boundedtypesupercall.Main.$initialized = true);
   ;;@ boundedtypesupercall/Main.java:18:13
   (global.set $f_$initialized__boundedtypesupercall_Main (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ boundedtypesupercall/Main.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -248,14 +239,11 @@
 (func $$getClassMetadata__java_lang_Class@boundedtypesupercall.Main
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((boundedtypesupercall.Main.$class == null)) (boundedtypesupercall.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|boundedtypes...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__boundedtypesupercall_Main) (ref.null $java.lang.Class))
    (then
-    ;; (boundedtypesupercall.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|boundedtypes...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__boundedtypesupercall_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|boundedtypes...|__java_lang_String (ref.func $$getString_|boundedtypes...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return boundedtypesupercall.Main.$class;
   (return (global.get $f_$class__boundedtypesupercall_Main))
  )
 )
@@ -268,7 +256,6 @@
  (local $this (ref null $boundedtypesupercall.Main))
  (local.set $this (ref.cast_static $boundedtypesupercall.Main (local.get $this.untyped)))
  (block
-  ;; return boundedtypesupercall.Main.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@boundedtypesupercall.Main) ))
  )
 )
@@ -282,10 +269,8 @@
  (param $foo (ref null $java.lang.Object))
  ;;@ boundedtypesupercall/Main.java:21:11
  (block
-  ;; boundedtypesupercall.Main.Foo.$clinit();
   ;;@ boundedtypesupercall/Main.java:21:22
   (call $$clinit__void@boundedtypesupercall.Main.Foo )
-  ;; Object.this.$ctor();
   ;;@ boundedtypesupercall/Main.java:21:22
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -295,19 +280,15 @@
 (func $$clinit__void@boundedtypesupercall.Main.Foo
  ;;@ boundedtypesupercall/Main.java:20:31
  (block
-  ;; if (boundedtypesupercall.Main.Foo.$initialized) return;
   ;;@ boundedtypesupercall/Main.java:20:31
   (if (global.get $f_$initialized__boundedtypesupercall_Main_Foo)
    (then
-    ;; return;
     ;;@ boundedtypesupercall/Main.java:20:31
     (return )
    )
   )
-  ;; (boundedtypesupercall.Main.Foo.$initialized = true);
   ;;@ boundedtypesupercall/Main.java:20:31
   (global.set $f_$initialized__boundedtypesupercall_Main_Foo (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ boundedtypesupercall/Main.java:20:31
   (call $$clinit__void@java.lang.Object )
  )
@@ -317,14 +298,11 @@
 (func $$getClassMetadata__java_lang_Class@boundedtypesupercall.Main.Foo
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((boundedtypesupercall.Main.Foo.$class == null)) (boundedtypesupercall.Main.Foo.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|boundedtypes...|_1(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__boundedtypesupercall_Main_Foo) (ref.null $java.lang.Class))
    (then
-    ;; (boundedtypesupercall.Main.Foo.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|boundedtypes...|_1(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__boundedtypesupercall_Main_Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|boundedtypes...|_1__java_lang_String (ref.func $$getString_|boundedtypes...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return boundedtypesupercall.Main.Foo.$class;
   (return (global.get $f_$class__boundedtypesupercall_Main_Foo))
  )
 )
@@ -337,13 +315,10 @@
  ;;@ boundedtypesupercall/Main.java:25:22
  (local $$instance (ref null $boundedtypesupercall.Main.Bar))
  (block
-  ;; Bar<T> $instance = new Bar.<init>(0);
   ;;@ boundedtypesupercall/Main.java:25:22
   (local.set $$instance (struct.new $boundedtypesupercall.Main.Bar (ref.as_non_null (global.get $boundedtypesupercall.Main.Bar.vtable)) (ref.as_non_null (global.get $boundedtypesupercall.Main.Bar.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ boundedtypesupercall/Main.java:25:22
   (call $$ctor__void_$p_boundedtypesupercall_Main_Bar@boundedtypesupercall.Main.Bar (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ boundedtypesupercall/Main.java:25:22
   (return (local.get $$instance))
  )
@@ -354,10 +329,8 @@
  (param $this (ref null $boundedtypesupercall.Main.Bar))
  ;;@ boundedtypesupercall/Main.java:25:22
  (block
-  ;; boundedtypesupercall.Main.Bar.$clinit();
   ;;@ boundedtypesupercall/Main.java:25:22
   (call $$clinit__void@boundedtypesupercall.Main.Bar )
-  ;; Object.this.$ctor();
   ;;@ boundedtypesupercall/Main.java:25:22
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -372,7 +345,6 @@
  (local $this (ref null $boundedtypesupercall.Main.Bar))
  (local.set $this (ref.cast_static $boundedtypesupercall.Main.Bar (local.get $this.untyped)))
  (block
-  ;; return null;
   ;;@ boundedtypesupercall/Main.java:28:6
   (return (ref.null $java.lang.Object))
  )
@@ -388,7 +360,6 @@
  (local $this (ref null $boundedtypesupercall.Main.Bar))
  (local.set $this (ref.cast_static $boundedtypesupercall.Main.Bar (local.get $this.untyped)))
  (block
-  ;; return boundedtypesupercall.Main.Bar.1.$create(Bar.this,Bar.this.getSomething());
   ;;@ boundedtypesupercall/Main.java:32:6
   (return (call $$create__boundedtypesupercall_Main_Bar__java_lang_Comparable@boundedtypesupercall.Main.Bar.1 (local.get $this)(call_ref $function.m_getSomething__java_lang_Comparable (ref.as_non_null (local.get $this))(struct.get $boundedtypesupercall.Main.Bar.vtable $m_getSomething__java_lang_Comparable (struct.get $boundedtypesupercall.Main.Bar $vtable(local.get $this))))))
  )
@@ -399,19 +370,15 @@
 (func $$clinit__void@boundedtypesupercall.Main.Bar
  ;;@ boundedtypesupercall/Main.java:25:22
  (block
-  ;; if (boundedtypesupercall.Main.Bar.$initialized) return;
   ;;@ boundedtypesupercall/Main.java:25:22
   (if (global.get $f_$initialized__boundedtypesupercall_Main_Bar)
    (then
-    ;; return;
     ;;@ boundedtypesupercall/Main.java:25:22
     (return )
    )
   )
-  ;; (boundedtypesupercall.Main.Bar.$initialized = true);
   ;;@ boundedtypesupercall/Main.java:25:22
   (global.set $f_$initialized__boundedtypesupercall_Main_Bar (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ boundedtypesupercall/Main.java:25:22
   (call $$clinit__void@java.lang.Object )
  )
@@ -421,14 +388,11 @@
 (func $$getClassMetadata__java_lang_Class@boundedtypesupercall.Main.Bar
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((boundedtypesupercall.Main.Bar.$class == null)) (boundedtypesupercall.Main.Bar.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|boundedtypes...|_3(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__boundedtypesupercall_Main_Bar) (ref.null $java.lang.Class))
    (then
-    ;; (boundedtypesupercall.Main.Bar.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|boundedtypes...|_3(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__boundedtypesupercall_Main_Bar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|boundedtypes...|_3__java_lang_String (ref.func $$getString_|boundedtypes...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return boundedtypesupercall.Main.Bar.$class;
   (return (global.get $f_$class__boundedtypesupercall_Main_Bar))
  )
 )
@@ -441,7 +405,6 @@
  (local $this (ref null $boundedtypesupercall.Main.Bar))
  (local.set $this (ref.cast_static $boundedtypesupercall.Main.Bar (local.get $this.untyped)))
  (block
-  ;; return boundedtypesupercall.Main.Bar.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@boundedtypesupercall.Main.Bar) ))
  )
 )
@@ -457,13 +420,10 @@
  ;;@ boundedtypesupercall/Main.java:32:40
  (local $$instance (ref null $boundedtypesupercall.Main.Bar.1))
  (block
-  ;; <anonymous> extends Foo<T><T> $instance = new $1.<init>(0,$outer_this);
   ;;@ boundedtypesupercall/Main.java:32:40
   (local.set $$instance (struct.new $boundedtypesupercall.Main.Bar.1 (ref.as_non_null (global.get $boundedtypesupercall.Main.Bar.1.vtable)) (ref.as_non_null (global.get $boundedtypesupercall.Main.Bar.1.itable)) (i32.const 0) (local.get $$outer_this)))
-  ;; $instance.$ctor($outer_this,$_0);
   ;;@ boundedtypesupercall/Main.java:32:40
   (call $$ctor__boundedtypesupercall_Main_Bar__java_lang_Comparable__void_$p_boundedtypesupercall_Main_Bar_1@boundedtypesupercall.Main.Bar.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$_0))
-  ;; return $instance;
   ;;@ boundedtypesupercall/Main.java:32:40
   (return (local.get $$instance))
  )
@@ -476,10 +436,8 @@
  (param $$_0 (ref null $java.lang.Object))
  ;;@ boundedtypesupercall/Main.java:32:40
  (block
-  ;; boundedtypesupercall.Main.Bar.1.$clinit();
   ;;@ boundedtypesupercall/Main.java:32:40
   (call $$clinit__void@boundedtypesupercall.Main.Bar.1 )
-  ;; Foo.this.$ctor($_0);
   ;;@ boundedtypesupercall/Main.java:32:40
   (call $$ctor__java_lang_Object__void_$p_boundedtypesupercall_Main_Foo@boundedtypesupercall.Main.Foo (ref.as_non_null (local.get $this))(local.get $$_0))
  )
@@ -501,19 +459,15 @@
 (func $$clinit__void@boundedtypesupercall.Main.Bar.1
  ;;@ boundedtypesupercall/Main.java:32:40
  (block
-  ;; if (boundedtypesupercall.Main.Bar.1.$initialized) return;
   ;;@ boundedtypesupercall/Main.java:32:40
   (if (global.get $f_$initialized__boundedtypesupercall_Main_Bar_1)
    (then
-    ;; return;
     ;;@ boundedtypesupercall/Main.java:32:40
     (return )
    )
   )
-  ;; (boundedtypesupercall.Main.Bar.1.$initialized = true);
   ;;@ boundedtypesupercall/Main.java:32:40
   (global.set $f_$initialized__boundedtypesupercall_Main_Bar_1 (i32.const 1))
-  ;; boundedtypesupercall.Main.Foo.$clinit();
   ;;@ boundedtypesupercall/Main.java:32:40
   (call $$clinit__void@boundedtypesupercall.Main.Foo )
  )
@@ -523,14 +477,11 @@
 (func $$getClassMetadata__java_lang_Class@boundedtypesupercall.Main.Bar.1
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((boundedtypesupercall.Main.Bar.1.$class == null)) (boundedtypesupercall.Main.Bar.1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|boundedtypes...|_2(),boundedtypesupercall.Main.Foo.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__boundedtypesupercall_Main_Bar_1) (ref.null $java.lang.Class))
    (then
-    ;; (boundedtypesupercall.Main.Bar.1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|boundedtypes...|_2(),boundedtypesupercall.Main.Foo.$getClassMetadata()));
     (global.set $f_$class__boundedtypesupercall_Main_Bar_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|boundedtypes...|_2__java_lang_String (ref.func $$getString_|boundedtypes...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@boundedtypesupercall.Main.Foo) )))
    )
   )
-  ;; return boundedtypesupercall.Main.Bar.1.$class;
   (return (global.get $f_$class__boundedtypesupercall_Main_Bar_1))
  )
 )
@@ -543,7 +494,6 @@
  (local $this (ref null $boundedtypesupercall.Main.Bar.1))
  (local.set $this (ref.cast_static $boundedtypesupercall.Main.Bar.1 (local.get $this.untyped)))
  (block
-  ;; return boundedtypesupercall.Main.Bar.1.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@boundedtypesupercall.Main.Bar.1) ))
  )
 )

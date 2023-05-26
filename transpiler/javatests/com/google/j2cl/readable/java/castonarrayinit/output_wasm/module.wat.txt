@@ -108,13 +108,10 @@
  ;;@ castonarrayinit/CastOnArrayInit.java:18:13
  (local $$instance (ref null $castonarrayinit.CastOnArrayInit))
  (block
-  ;; CastOnArrayInit $instance = new CastOnArrayInit.<init>(0);
   ;;@ castonarrayinit/CastOnArrayInit.java:18:13
   (local.set $$instance (struct.new $castonarrayinit.CastOnArrayInit (ref.as_non_null (global.get $castonarrayinit.CastOnArrayInit.vtable)) (ref.as_non_null (global.get $castonarrayinit.CastOnArrayInit.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ castonarrayinit/CastOnArrayInit.java:18:13
   (call $$ctor__void_$p_castonarrayinit_CastOnArrayInit@castonarrayinit.CastOnArrayInit (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ castonarrayinit/CastOnArrayInit.java:18:13
   (return (local.get $$instance))
  )
@@ -125,10 +122,8 @@
  (param $this (ref null $castonarrayinit.CastOnArrayInit))
  ;;@ castonarrayinit/CastOnArrayInit.java:18:13
  (block
-  ;; castonarrayinit.CastOnArrayInit.$clinit();
   ;;@ castonarrayinit/CastOnArrayInit.java:18:13
   (call $$clinit__void@castonarrayinit.CastOnArrayInit )
-  ;; Object.this.$ctor();
   ;;@ castonarrayinit/CastOnArrayInit.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -139,7 +134,6 @@
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ castonarrayinit/CastOnArrayInit.java:21:25
  (block
-  ;; castonarrayinit.CastOnArrayInit.$clinit();
   ;;@ castonarrayinit/CastOnArrayInit.java:21:45
   (call $$clinit__void@castonarrayinit.CastOnArrayInit )
  )
@@ -151,16 +145,12 @@
  (local $f1 (ref null $castonarrayinit.CastOnArrayInit.Foo))
  (local $f2 (ref null $castonarrayinit.CastOnArrayInit.Foo))
  (block
-  ;; castonarrayinit.CastOnArrayInit.$clinit();
   ;;@ castonarrayinit/CastOnArrayInit.java:23:32
   (call $$clinit__void@castonarrayinit.CastOnArrayInit )
-  ;; Foo<E> f1 = castonarrayinit.CastOnArrayInit.Foo.$create();
   ;;@ castonarrayinit/CastOnArrayInit.java:24:4
   (local.set $f1 (call $$create__@castonarrayinit.CastOnArrayInit.Foo ))
-  ;; Foo<E> f2 = castonarrayinit.CastOnArrayInit.Foo.$create();
   ;;@ castonarrayinit/CastOnArrayInit.java:25:4
   (local.set $f2 (call $$create__@castonarrayinit.CastOnArrayInit.Foo ))
-  ;; castonarrayinit.CastOnArrayInit.fun(javaemul.internal.WasmArray.OfObject.$create([f1,f2]));
   ;;@ castonarrayinit/CastOnArrayInit.java:26:4
   (call $m_fun__arrayOf_castonarrayinit_CastOnArrayInit_Foo__void@castonarrayinit.CastOnArrayInit (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (local.get $f1)(local.get $f2))))
  )
@@ -170,19 +160,15 @@
 (func $$clinit__void@castonarrayinit.CastOnArrayInit
  ;;@ castonarrayinit/CastOnArrayInit.java:18:13
  (block
-  ;; if (castonarrayinit.CastOnArrayInit.$initialized) return;
   ;;@ castonarrayinit/CastOnArrayInit.java:18:13
   (if (global.get $f_$initialized__castonarrayinit_CastOnArrayInit)
    (then
-    ;; return;
     ;;@ castonarrayinit/CastOnArrayInit.java:18:13
     (return )
    )
   )
-  ;; (castonarrayinit.CastOnArrayInit.$initialized = true);
   ;;@ castonarrayinit/CastOnArrayInit.java:18:13
   (global.set $f_$initialized__castonarrayinit_CastOnArrayInit (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ castonarrayinit/CastOnArrayInit.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -192,14 +178,11 @@
 (func $$getClassMetadata__java_lang_Class@castonarrayinit.CastOnArrayInit
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((castonarrayinit.CastOnArrayInit.$class == null)) (castonarrayinit.CastOnArrayInit.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|castonarrayi...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__castonarrayinit_CastOnArrayInit) (ref.null $java.lang.Class))
    (then
-    ;; (castonarrayinit.CastOnArrayInit.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|castonarrayi...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__castonarrayinit_CastOnArrayInit (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|castonarrayi...|__java_lang_String (ref.func $$getString_|castonarrayi...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return castonarrayinit.CastOnArrayInit.$class;
   (return (global.get $f_$class__castonarrayinit_CastOnArrayInit))
  )
 )
@@ -212,7 +195,6 @@
  (local $this (ref null $castonarrayinit.CastOnArrayInit))
  (local.set $this (ref.cast_static $castonarrayinit.CastOnArrayInit (local.get $this.untyped)))
  (block
-  ;; return castonarrayinit.CastOnArrayInit.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@castonarrayinit.CastOnArrayInit) ))
  )
 )
@@ -226,13 +208,10 @@
  ;;@ castonarrayinit/CastOnArrayInit.java:19:22
  (local $$instance (ref null $castonarrayinit.CastOnArrayInit.Foo))
  (block
-  ;; Foo<T> $instance = new Foo.<init>(0);
   ;;@ castonarrayinit/CastOnArrayInit.java:19:22
   (local.set $$instance (struct.new $castonarrayinit.CastOnArrayInit.Foo (ref.as_non_null (global.get $castonarrayinit.CastOnArrayInit.Foo.vtable)) (ref.as_non_null (global.get $castonarrayinit.CastOnArrayInit.Foo.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ castonarrayinit/CastOnArrayInit.java:19:22
   (call $$ctor__void_$p_castonarrayinit_CastOnArrayInit_Foo@castonarrayinit.CastOnArrayInit.Foo (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ castonarrayinit/CastOnArrayInit.java:19:22
   (return (local.get $$instance))
  )
@@ -243,10 +222,8 @@
  (param $this (ref null $castonarrayinit.CastOnArrayInit.Foo))
  ;;@ castonarrayinit/CastOnArrayInit.java:19:22
  (block
-  ;; castonarrayinit.CastOnArrayInit.Foo.$clinit();
   ;;@ castonarrayinit/CastOnArrayInit.java:19:22
   (call $$clinit__void@castonarrayinit.CastOnArrayInit.Foo )
-  ;; Object.this.$ctor();
   ;;@ castonarrayinit/CastOnArrayInit.java:19:22
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -256,19 +233,15 @@
 (func $$clinit__void@castonarrayinit.CastOnArrayInit.Foo
  ;;@ castonarrayinit/CastOnArrayInit.java:19:22
  (block
-  ;; if (castonarrayinit.CastOnArrayInit.Foo.$initialized) return;
   ;;@ castonarrayinit/CastOnArrayInit.java:19:22
   (if (global.get $f_$initialized__castonarrayinit_CastOnArrayInit_Foo)
    (then
-    ;; return;
     ;;@ castonarrayinit/CastOnArrayInit.java:19:22
     (return )
    )
   )
-  ;; (castonarrayinit.CastOnArrayInit.Foo.$initialized = true);
   ;;@ castonarrayinit/CastOnArrayInit.java:19:22
   (global.set $f_$initialized__castonarrayinit_CastOnArrayInit_Foo (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ castonarrayinit/CastOnArrayInit.java:19:22
   (call $$clinit__void@java.lang.Object )
  )
@@ -278,14 +251,11 @@
 (func $$getClassMetadata__java_lang_Class@castonarrayinit.CastOnArrayInit.Foo
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((castonarrayinit.CastOnArrayInit.Foo.$class == null)) (castonarrayinit.CastOnArrayInit.Foo.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|castonarrayi...|_1(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__castonarrayinit_CastOnArrayInit_Foo) (ref.null $java.lang.Class))
    (then
-    ;; (castonarrayinit.CastOnArrayInit.Foo.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|castonarrayi...|_1(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__castonarrayinit_CastOnArrayInit_Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|castonarrayi...|_1__java_lang_String (ref.func $$getString_|castonarrayi...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return castonarrayinit.CastOnArrayInit.Foo.$class;
   (return (global.get $f_$class__castonarrayinit_CastOnArrayInit_Foo))
  )
 )
@@ -298,7 +268,6 @@
  (local $this (ref null $castonarrayinit.CastOnArrayInit.Foo))
  (local.set $this (ref.cast_static $castonarrayinit.CastOnArrayInit.Foo (local.get $this.untyped)))
  (block
-  ;; return castonarrayinit.CastOnArrayInit.Foo.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@castonarrayinit.CastOnArrayInit.Foo) ))
  )
 )

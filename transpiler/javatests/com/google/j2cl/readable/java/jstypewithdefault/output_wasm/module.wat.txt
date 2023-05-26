@@ -78,16 +78,13 @@
 (func $$clinit__void@jstypewithdefault.Interface
  ;;@ jstypewithdefault/SomeJsType.java:23:10
  (block
-  ;; if (jstypewithdefault.Interface.$initialized) return;
   ;;@ jstypewithdefault/SomeJsType.java:23:10
   (if (global.get $f_$initialized__jstypewithdefault_Interface)
    (then
-    ;; return;
     ;;@ jstypewithdefault/SomeJsType.java:23:10
     (return )
    )
   )
-  ;; (jstypewithdefault.Interface.$initialized = true);
   ;;@ jstypewithdefault/SomeJsType.java:23:10
   (global.set $f_$initialized__jstypewithdefault_Interface (i32.const 1))
  )
@@ -97,14 +94,11 @@
 (func $$getClassMetadata__java_lang_Class@jstypewithdefault.Interface
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jstypewithdefault.Interface.$class == null)) (jstypewithdefault.Interface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|jstypewithde...|_1()));
   (if (ref.eq (global.get $f_$class__jstypewithdefault_Interface) (ref.null $java.lang.Class))
    (then
-    ;; (jstypewithdefault.Interface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|jstypewithde...|_1()));
     (global.set $f_$class__jstypewithdefault_Interface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jstypewithde...|_1__java_lang_String (ref.func $$getString_|jstypewithde...|_1__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return jstypewithdefault.Interface.$class;
   (return (global.get $f_$class__jstypewithdefault_Interface))
  )
 )
@@ -117,13 +111,10 @@
  ;;@ jstypewithdefault/SomeJsType.java:20:13
  (local $$instance (ref null $jstypewithdefault.SomeJsType))
  (block
-  ;; SomeJsType $instance = new SomeJsType.<init>(0);
   ;;@ jstypewithdefault/SomeJsType.java:20:13
   (local.set $$instance (struct.new $jstypewithdefault.SomeJsType (ref.as_non_null (global.get $jstypewithdefault.SomeJsType.vtable)) (ref.as_non_null (global.get $jstypewithdefault.SomeJsType.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ jstypewithdefault/SomeJsType.java:20:13
   (call $$ctor__void_$p_jstypewithdefault_SomeJsType@jstypewithdefault.SomeJsType (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ jstypewithdefault/SomeJsType.java:20:13
   (return (local.get $$instance))
  )
@@ -134,10 +125,8 @@
  (param $this (ref null $jstypewithdefault.SomeJsType))
  ;;@ jstypewithdefault/SomeJsType.java:20:13
  (block
-  ;; jstypewithdefault.SomeJsType.$clinit();
   ;;@ jstypewithdefault/SomeJsType.java:20:13
   (call $$clinit__void@jstypewithdefault.SomeJsType )
-  ;; Object.this.$ctor();
   ;;@ jstypewithdefault/SomeJsType.java:20:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -151,7 +140,6 @@
  (local $this (ref null $jstypewithdefault.SomeJsType))
  (local.set $this (ref.cast_static $jstypewithdefault.SomeJsType (local.get $this.untyped)))
  (block
-  ;; SomeJsType.this.defaultMethod();
   ;;@ jstypewithdefault/SomeJsType.java:20:13
   (call $m_defaultMethod__void@jstypewithdefault.Interface (ref.as_non_null (local.get $this)))
  )
@@ -162,22 +150,17 @@
 (func $$clinit__void@jstypewithdefault.SomeJsType
  ;;@ jstypewithdefault/SomeJsType.java:20:13
  (block
-  ;; if (jstypewithdefault.SomeJsType.$initialized) return;
   ;;@ jstypewithdefault/SomeJsType.java:20:13
   (if (global.get $f_$initialized__jstypewithdefault_SomeJsType)
    (then
-    ;; return;
     ;;@ jstypewithdefault/SomeJsType.java:20:13
     (return )
    )
   )
-  ;; (jstypewithdefault.SomeJsType.$initialized = true);
   ;;@ jstypewithdefault/SomeJsType.java:20:13
   (global.set $f_$initialized__jstypewithdefault_SomeJsType (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ jstypewithdefault/SomeJsType.java:20:13
   (call $$clinit__void@java.lang.Object )
-  ;; jstypewithdefault.Interface.$clinit();
   ;;@ jstypewithdefault/SomeJsType.java:20:13
   (call $$clinit__void@jstypewithdefault.Interface )
  )
@@ -187,14 +170,11 @@
 (func $$getClassMetadata__java_lang_Class@jstypewithdefault.SomeJsType
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jstypewithdefault.SomeJsType.$class == null)) (jstypewithdefault.SomeJsType.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jstypewithde...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__jstypewithdefault_SomeJsType) (ref.null $java.lang.Class))
    (then
-    ;; (jstypewithdefault.SomeJsType.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jstypewithde...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__jstypewithdefault_SomeJsType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jstypewithde...|__java_lang_String (ref.func $$getString_|jstypewithde...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return jstypewithdefault.SomeJsType.$class;
   (return (global.get $f_$class__jstypewithdefault_SomeJsType))
  )
 )
@@ -207,7 +187,6 @@
  (local $this (ref null $jstypewithdefault.SomeJsType))
  (local.set $this (ref.cast_static $jstypewithdefault.SomeJsType (local.get $this.untyped)))
  (block
-  ;; return jstypewithdefault.SomeJsType.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jstypewithdefault.SomeJsType) ))
  )
 )

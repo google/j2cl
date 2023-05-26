@@ -362,16 +362,13 @@
 (func $$clinit__void@collisions.Blah.$Overlay
  ;;@ collisions/goog.java:28:6
  (block
-  ;; if (collisions.Blah.$Overlay.$initialized) return;
   ;;@ collisions/goog.java:28:6
   (if (global.get $f_$initialized__collisions_Blah_$Overlay)
    (then
-    ;; return;
     ;;@ collisions/goog.java:28:6
     (return )
    )
   )
-  ;; (collisions.Blah.$Overlay.$initialized = true);
   ;;@ collisions/goog.java:28:6
   (global.set $f_$initialized__collisions_Blah_$Overlay (i32.const 1))
  )
@@ -381,14 +378,11 @@
 (func $$getClassMetadata__java_lang_Class@collisions.Blah.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((collisions.Blah.$Overlay.$class == null)) (collisions.Blah.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|collisions.B...|(),null));
   (if (ref.eq (global.get $f_$class__collisions_Blah_$Overlay) (ref.null $java.lang.Class))
    (then
-    ;; (collisions.Blah.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|collisions.B...|(),null));
     (global.set $f_$class__collisions_Blah_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.B...|__java_lang_String (ref.func $$getString_|collisions.B...|__java_lang_String@javaemul.internal.StringPool) )(ref.null $java.lang.Class)))
    )
   )
-  ;; return collisions.Blah.$Overlay.$class;
   (return (global.get $f_$class__collisions_Blah_$Overlay))
  )
 )
@@ -401,7 +395,6 @@
  (local $this (ref null $collisions.Blah.$Overlay))
  (local.set $this (ref.cast_static $collisions.Blah.$Overlay (local.get $this.untyped)))
  (block
-  ;; return collisions.Blah.$Overlay.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@collisions.Blah.$Overlay) ))
  )
 )
@@ -415,13 +408,10 @@
  ;;@ collisions/goog.java:24:13
  (local $$instance (ref null $collisions.goog))
  (block
-  ;; goog $instance = new goog.<init>(0);
   ;;@ collisions/goog.java:24:13
   (local.set $$instance (struct.new $collisions.goog (ref.as_non_null (global.get $collisions.goog.vtable)) (ref.as_non_null (global.get $collisions.goog.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ collisions/goog.java:24:13
   (call $$ctor__void_$p_collisions_goog@collisions.goog (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ collisions/goog.java:24:13
   (return (local.get $$instance))
  )
@@ -432,10 +422,8 @@
  (param $this (ref null $collisions.goog))
  ;;@ collisions/goog.java:24:13
  (block
-  ;; collisions.goog.$clinit();
   ;;@ collisions/goog.java:24:13
   (call $$clinit__void@collisions.goog )
-  ;; Object.this.$ctor();
   ;;@ collisions/goog.java:24:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -445,19 +433,15 @@
 (func $$clinit__void@collisions.goog
  ;;@ collisions/goog.java:24:13
  (block
-  ;; if (collisions.goog.$initialized) return;
   ;;@ collisions/goog.java:24:13
   (if (global.get $f_$initialized__collisions_goog)
    (then
-    ;; return;
     ;;@ collisions/goog.java:24:13
     (return )
    )
   )
-  ;; (collisions.goog.$initialized = true);
   ;;@ collisions/goog.java:24:13
   (global.set $f_$initialized__collisions_goog (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ collisions/goog.java:24:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -467,14 +451,11 @@
 (func $$getClassMetadata__java_lang_Class@collisions.goog
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((collisions.goog.$class == null)) (collisions.goog.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|collisions.goog|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__collisions_goog) (ref.null $java.lang.Class))
    (then
-    ;; (collisions.goog.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|collisions.goog|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__collisions_goog (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.goog|__java_lang_String (ref.func $$getString_|collisions.goog|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return collisions.goog.$class;
   (return (global.get $f_$class__collisions_goog))
  )
 )
@@ -487,7 +468,6 @@
  (local $this (ref null $collisions.goog))
  (local.set $this (ref.cast_static $collisions.goog (local.get $this.untyped)))
  (block
-  ;; return collisions.goog.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@collisions.goog) ))
  )
 )
@@ -517,13 +497,10 @@
  ;;@ collisions/goog.java:36:6
  (local $$instance (ref null $collisions.KtBlah))
  (block
-  ;; KtBlah $instance = new KtBlah.<init>(0);
   ;;@ collisions/goog.java:36:6
   (local.set $$instance (struct.new $collisions.KtBlah (ref.as_non_null (global.get $collisions.KtBlah.vtable)) (ref.as_non_null (global.get $collisions.KtBlah.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ collisions/goog.java:36:6
   (call $$ctor__void_$p_collisions_KtBlah@collisions.KtBlah (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ collisions/goog.java:36:6
   (return (local.get $$instance))
  )
@@ -534,10 +511,8 @@
  (param $this (ref null $collisions.KtBlah))
  ;;@ collisions/goog.java:36:6
  (block
-  ;; collisions.KtBlah.$clinit();
   ;;@ collisions/goog.java:36:6
   (call $$clinit__void@collisions.KtBlah )
-  ;; Object.this.$ctor();
   ;;@ collisions/goog.java:36:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -547,7 +522,6 @@
 (func $m_m__void@collisions.KtBlah
  ;;@ collisions/goog.java:37:14
  (block
-  ;; collisions.KtBlah.$clinit();
   ;;@ collisions/goog.java:37:18
   (call $$clinit__void@collisions.KtBlah )
  )
@@ -558,10 +532,8 @@
  (result f64)
  ;;@ collisions/goog.java:39:16
  (block
-  ;; collisions.KtBlah.$clinit();
   ;;@ collisions/goog.java:39:23
   (call $$clinit__void@collisions.KtBlah )
-  ;; return 1.0;
   ;;@ collisions/goog.java:40:4
   (return (f64.const 1.0))
  )
@@ -571,19 +543,15 @@
 (func $$clinit__void@collisions.KtBlah
  ;;@ collisions/goog.java:36:6
  (block
-  ;; if (collisions.KtBlah.$initialized) return;
   ;;@ collisions/goog.java:36:6
   (if (global.get $f_$initialized__collisions_KtBlah)
    (then
-    ;; return;
     ;;@ collisions/goog.java:36:6
     (return )
    )
   )
-  ;; (collisions.KtBlah.$initialized = true);
   ;;@ collisions/goog.java:36:6
   (global.set $f_$initialized__collisions_KtBlah (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ collisions/goog.java:36:6
   (call $$clinit__void@java.lang.Object )
  )
@@ -593,14 +561,11 @@
 (func $$getClassMetadata__java_lang_Class@collisions.KtBlah
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((collisions.KtBlah.$class == null)) (collisions.KtBlah.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|collisions.K...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__collisions_KtBlah) (ref.null $java.lang.Class))
    (then
-    ;; (collisions.KtBlah.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|collisions.K...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__collisions_KtBlah (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.K...|__java_lang_String (ref.func $$getString_|collisions.K...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return collisions.KtBlah.$class;
   (return (global.get $f_$class__collisions_KtBlah))
  )
 )
@@ -613,7 +578,6 @@
  (local $this (ref null $collisions.KtBlah))
  (local.set $this (ref.cast_static $collisions.KtBlah (local.get $this.untyped)))
  (block
-  ;; return collisions.KtBlah.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@collisions.KtBlah) ))
  )
 )
@@ -627,13 +591,10 @@
  ;;@ collisions/goog.java:44:6
  (local $$instance (ref null $collisions.foo))
  (block
-  ;; foo $instance = new foo.<init>(0);
   ;;@ collisions/goog.java:44:6
   (local.set $$instance (struct.new $collisions.foo (ref.as_non_null (global.get $collisions.foo.vtable)) (ref.as_non_null (global.get $collisions.foo.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ collisions/goog.java:44:6
   (call $$ctor__void_$p_collisions_foo@collisions.foo (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ collisions/goog.java:44:6
   (return (local.get $$instance))
  )
@@ -644,10 +605,8 @@
  (param $this (ref null $collisions.foo))
  ;;@ collisions/goog.java:44:6
  (block
-  ;; collisions.foo.$clinit();
   ;;@ collisions/goog.java:44:6
   (call $$clinit__void@collisions.foo )
-  ;; Object.this.$ctor();
   ;;@ collisions/goog.java:44:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -657,19 +616,15 @@
 (func $$clinit__void@collisions.foo
  ;;@ collisions/goog.java:44:6
  (block
-  ;; if (collisions.foo.$initialized) return;
   ;;@ collisions/goog.java:44:6
   (if (global.get $f_$initialized__collisions_foo)
    (then
-    ;; return;
     ;;@ collisions/goog.java:44:6
     (return )
    )
   )
-  ;; (collisions.foo.$initialized = true);
   ;;@ collisions/goog.java:44:6
   (global.set $f_$initialized__collisions_foo (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ collisions/goog.java:44:6
   (call $$clinit__void@java.lang.Object )
  )
@@ -679,14 +634,11 @@
 (func $$getClassMetadata__java_lang_Class@collisions.foo
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((collisions.foo.$class == null)) (collisions.foo.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|collisions.foo|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__collisions_foo) (ref.null $java.lang.Class))
    (then
-    ;; (collisions.foo.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|collisions.foo|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__collisions_foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.foo|__java_lang_String (ref.func $$getString_|collisions.foo|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return collisions.foo.$class;
   (return (global.get $f_$class__collisions_foo))
  )
 )
@@ -699,7 +651,6 @@
  (local $this (ref null $collisions.foo))
  (local.set $this (ref.cast_static $collisions.foo (local.get $this.untyped)))
  (block
-  ;; return collisions.foo.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@collisions.foo) ))
  )
 )
@@ -713,13 +664,10 @@
  ;;@ collisions/goog.java:46:6
  (local $$instance (ref null $collisions.bar))
  (block
-  ;; bar $instance = new bar.<init>(0);
   ;;@ collisions/goog.java:46:6
   (local.set $$instance (struct.new $collisions.bar (ref.as_non_null (global.get $collisions.bar.vtable)) (ref.as_non_null (global.get $collisions.bar.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ collisions/goog.java:46:6
   (call $$ctor__void_$p_collisions_bar@collisions.bar (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ collisions/goog.java:46:6
   (return (local.get $$instance))
  )
@@ -730,13 +678,10 @@
  (param $this (ref null $collisions.bar))
  ;;@ collisions/goog.java:46:6
  (block
-  ;; collisions.bar.$clinit();
   ;;@ collisions/goog.java:46:6
   (call $$clinit__void@collisions.bar )
-  ;; Object.this.$ctor();
   ;;@ collisions/goog.java:46:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;; bar.this.$init();
   ;;@ collisions/goog.java:46:6
   (call $$init__void_$p_collisions_bar@collisions.bar (ref.as_non_null (local.get $this)))
  )
@@ -754,28 +699,20 @@
  (local $delete i32)
  (local $undefined i32)
  (block
-  ;; int foo,int bar,int goog,int flip,int window;
   ;;@ collisions/goog.java:48:4
   
-  ;; collisions.Blah.m();
   ;;@ collisions/goog.java:49:4
   (call $m_m__void@collisions.Blah )
-  ;; collisions.Blah.getN();
   ;;@ collisions/goog.java:50:4
   (drop (call $m_getN__double@collisions.Blah ))
-  ;; new Blah.<init>();
   ;;@ collisions/goog.java:51:4
   (drop (call $m_<init>__@collisions.Blah ))
-  ;; collisions.goog.$create();
   ;;@ collisions/goog.java:52:4
   (drop (call $$create__@collisions.goog ))
-  ;; collisions.foo.$create();
   ;;@ collisions/goog.java:53:4
   (drop (call $$create__@collisions.foo ))
-  ;; int delete = 1;
   ;;@ collisions/goog.java:56:4
   (local.set $delete (i32.const 1))
-  ;; int undefined = 3;
   ;;@ collisions/goog.java:57:4
   (local.set $undefined (i32.const 3))
  )
@@ -785,19 +722,15 @@
 (func $$clinit__void@collisions.bar
  ;;@ collisions/goog.java:46:6
  (block
-  ;; if (collisions.bar.$initialized) return;
   ;;@ collisions/goog.java:46:6
   (if (global.get $f_$initialized__collisions_bar)
    (then
-    ;; return;
     ;;@ collisions/goog.java:46:6
     (return )
    )
   )
-  ;; (collisions.bar.$initialized = true);
   ;;@ collisions/goog.java:46:6
   (global.set $f_$initialized__collisions_bar (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ collisions/goog.java:46:6
   (call $$clinit__void@java.lang.Object )
  )
@@ -807,14 +740,11 @@
 (func $$getClassMetadata__java_lang_Class@collisions.bar
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((collisions.bar.$class == null)) (collisions.bar.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|collisions.bar|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__collisions_bar) (ref.null $java.lang.Class))
    (then
-    ;; (collisions.bar.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|collisions.bar|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__collisions_bar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.bar|__java_lang_String (ref.func $$getString_|collisions.bar|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return collisions.bar.$class;
   (return (global.get $f_$class__collisions_bar))
  )
 )
@@ -827,7 +757,6 @@
  (local $this (ref null $collisions.bar))
  (local.set $this (ref.cast_static $collisions.bar (local.get $this.untyped)))
  (block
-  ;; return collisions.bar.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@collisions.bar) ))
  )
 )
@@ -841,13 +770,10 @@
  ;;@ collisions/goog.java:61:6
  (local $$instance (ref null $collisions.Other))
  (block
-  ;; Other<T> $instance = new Other.<init>(0);
   ;;@ collisions/goog.java:61:6
   (local.set $$instance (struct.new $collisions.Other (ref.as_non_null (global.get $collisions.Other.vtable)) (ref.as_non_null (global.get $collisions.Other.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ collisions/goog.java:61:6
   (call $$ctor__void_$p_collisions_Other@collisions.Other (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ collisions/goog.java:61:6
   (return (local.get $$instance))
  )
@@ -858,13 +784,10 @@
  (param $this (ref null $collisions.Other))
  ;;@ collisions/goog.java:61:6
  (block
-  ;; collisions.Other.$clinit();
   ;;@ collisions/goog.java:61:6
   (call $$clinit__void@collisions.Other )
-  ;; Object.this.$ctor();
   ;;@ collisions/goog.java:61:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;; Other.this.$init();
   ;;@ collisions/goog.java:61:6
   (call $$init__void_$p_collisions_Other@collisions.Other (ref.as_non_null (local.get $this)))
  )
@@ -881,13 +804,10 @@
  (local $this (ref null $collisions.Other))
  (local.set $this (ref.cast_static $collisions.Other (local.get $this.untyped)))
  (block
-  ;; int T = 5;
   ;;@ collisions/goog.java:68:4
   (local.set $T_1 (i32.const 5))
-  ;; Other<T> o = ((Other<T>) null);
   ;;@ collisions/goog.java:69:4
   (local.set $o (ref.cast_static $collisions.Other (ref.null $java.lang.Object)))
-  ;; return null;
   ;;@ collisions/goog.java:70:4
   (return (ref.null $java.lang.Object))
  )
@@ -901,10 +821,8 @@
  (local $T_1 i32)
  (local $o (ref null $collisions.Other))
  (block
-  ;; int T = 3;
   ;;@ collisions/goog.java:63:4
   (local.set $T_1 (i32.const 3))
-  ;; Other<T> o = ((Other<T>) null);
   ;;@ collisions/goog.java:64:4
   (local.set $o (ref.cast_static $collisions.Other (ref.null $java.lang.Object)))
  )
@@ -914,19 +832,15 @@
 (func $$clinit__void@collisions.Other
  ;;@ collisions/goog.java:61:6
  (block
-  ;; if (collisions.Other.$initialized) return;
   ;;@ collisions/goog.java:61:6
   (if (global.get $f_$initialized__collisions_Other)
    (then
-    ;; return;
     ;;@ collisions/goog.java:61:6
     (return )
    )
   )
-  ;; (collisions.Other.$initialized = true);
   ;;@ collisions/goog.java:61:6
   (global.set $f_$initialized__collisions_Other (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ collisions/goog.java:61:6
   (call $$clinit__void@java.lang.Object )
  )
@@ -936,14 +850,11 @@
 (func $$getClassMetadata__java_lang_Class@collisions.Other
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((collisions.Other.$class == null)) (collisions.Other.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|collisions.O...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__collisions_Other) (ref.null $java.lang.Class))
    (then
-    ;; (collisions.Other.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|collisions.O...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__collisions_Other (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.O...|__java_lang_String (ref.func $$getString_|collisions.O...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return collisions.Other.$class;
   (return (global.get $f_$class__collisions_Other))
  )
 )
@@ -956,7 +867,6 @@
  (local $this (ref null $collisions.Other))
  (local.set $this (ref.cast_static $collisions.Other (local.get $this.untyped)))
  (block
-  ;; return collisions.Other.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@collisions.Other) ))
  )
 )
@@ -970,13 +880,10 @@
  ;;@ collisions/goog.java:74:6
  (local $$instance (ref null $collisions.T))
  (block
-  ;; T<T> $instance = new T.<init>(0);
   ;;@ collisions/goog.java:74:6
   (local.set $$instance (struct.new $collisions.T (ref.as_non_null (global.get $collisions.T.vtable)) (ref.as_non_null (global.get $collisions.T.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ collisions/goog.java:74:6
   (call $$ctor__void_$p_collisions_T@collisions.T (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ collisions/goog.java:74:6
   (return (local.get $$instance))
  )
@@ -987,10 +894,8 @@
  (param $this (ref null $collisions.T))
  ;;@ collisions/goog.java:74:6
  (block
-  ;; collisions.T.$clinit();
   ;;@ collisions/goog.java:74:6
   (call $$clinit__void@collisions.T )
-  ;; Object.this.$ctor();
   ;;@ collisions/goog.java:74:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -1005,7 +910,6 @@
  (local $this (ref null $collisions.T))
  (local.set $this (ref.cast_static $collisions.T (local.get $this.untyped)))
  (block
-  ;; return null;
   ;;@ collisions/goog.java:76:4
   (return (ref.null $java.lang.Number))
  )
@@ -1023,16 +927,13 @@
  (local $this (ref null $collisions.T))
  (local.set $this (ref.cast_static $collisions.T (local.get $this.untyped)))
  (block
-  ;; T t = (T<T> $qualifier = collisions.T.$create(),$qualifier.m());
   ;;@ collisions/goog.java:80:4
   (local.set $t (block (result (ref null $java.lang.Number))
    (local.set $$qualifier (call $$create__@collisions.T ))
    (call_ref $function.m_m__java_lang_Number_$pp_collisions (ref.as_non_null (local.get $$qualifier))(struct.get $collisions.T.vtable $m_m__java_lang_Number_$pp_collisions (struct.get $collisions.T $vtable(local.get $$qualifier))))
   ))
-  ;; t.byteValue();
   ;;@ collisions/goog.java:81:4
   (drop (call_ref $function.m_byteValue__byte (ref.as_non_null (local.get $t))(struct.get $java.lang.Number.vtable $m_byteValue__byte (struct.get $java.lang.Number $vtable(local.get $t)))))
-  ;; return t;
   ;;@ collisions/goog.java:82:4
   (return (local.get $t))
  )
@@ -1043,19 +944,15 @@
 (func $$clinit__void@collisions.T
  ;;@ collisions/goog.java:74:6
  (block
-  ;; if (collisions.T.$initialized) return;
   ;;@ collisions/goog.java:74:6
   (if (global.get $f_$initialized__collisions_T)
    (then
-    ;; return;
     ;;@ collisions/goog.java:74:6
     (return )
    )
   )
-  ;; (collisions.T.$initialized = true);
   ;;@ collisions/goog.java:74:6
   (global.set $f_$initialized__collisions_T (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ collisions/goog.java:74:6
   (call $$clinit__void@java.lang.Object )
  )
@@ -1065,14 +962,11 @@
 (func $$getClassMetadata__java_lang_Class@collisions.T
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((collisions.T.$class == null)) (collisions.T.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|collisions.T|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__collisions_T) (ref.null $java.lang.Class))
    (then
-    ;; (collisions.T.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|collisions.T|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__collisions_T (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.T|__java_lang_String (ref.func $$getString_|collisions.T|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return collisions.T.$class;
   (return (global.get $f_$class__collisions_T))
  )
 )
@@ -1085,7 +979,6 @@
  (local $this (ref null $collisions.T))
  (local.set $this (ref.cast_static $collisions.T (local.get $this.untyped)))
  (block
-  ;; return collisions.T.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@collisions.T) ))
  )
 )

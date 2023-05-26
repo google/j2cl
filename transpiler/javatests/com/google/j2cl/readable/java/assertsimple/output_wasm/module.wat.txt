@@ -57,13 +57,10 @@
  ;;@ assertsimple/AssertSimple.java:18:13
  (local $$instance (ref null $assertsimple.AssertSimple))
  (block
-  ;; AssertSimple $instance = new AssertSimple.<init>(0);
   ;;@ assertsimple/AssertSimple.java:18:13
   (local.set $$instance (struct.new $assertsimple.AssertSimple (ref.as_non_null (global.get $assertsimple.AssertSimple.vtable)) (ref.as_non_null (global.get $assertsimple.AssertSimple.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ assertsimple/AssertSimple.java:18:13
   (call $$ctor__void_$p_assertsimple_AssertSimple@assertsimple.AssertSimple (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ assertsimple/AssertSimple.java:18:13
   (return (local.get $$instance))
  )
@@ -74,10 +71,8 @@
  (param $this (ref null $assertsimple.AssertSimple))
  ;;@ assertsimple/AssertSimple.java:18:13
  (block
-  ;; assertsimple.AssertSimple.$clinit();
   ;;@ assertsimple/AssertSimple.java:18:13
   (call $$clinit__void@assertsimple.AssertSimple )
-  ;; Object.this.$ctor();
   ;;@ assertsimple/AssertSimple.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -88,7 +83,6 @@
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ assertsimple/AssertSimple.java:19:21
  (block
-  ;; assertsimple.AssertSimple.$clinit();
   ;;@ assertsimple/AssertSimple.java:19:41
   (call $$clinit__void@assertsimple.AssertSimple )
  )
@@ -98,19 +92,15 @@
 (func $$clinit__void@assertsimple.AssertSimple
  ;;@ assertsimple/AssertSimple.java:18:13
  (block
-  ;; if (assertsimple.AssertSimple.$initialized) return;
   ;;@ assertsimple/AssertSimple.java:18:13
   (if (global.get $f_$initialized__assertsimple_AssertSimple)
    (then
-    ;; return;
     ;;@ assertsimple/AssertSimple.java:18:13
     (return )
    )
   )
-  ;; (assertsimple.AssertSimple.$initialized = true);
   ;;@ assertsimple/AssertSimple.java:18:13
   (global.set $f_$initialized__assertsimple_AssertSimple (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ assertsimple/AssertSimple.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -120,14 +110,11 @@
 (func $$getClassMetadata__java_lang_Class@assertsimple.AssertSimple
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((assertsimple.AssertSimple.$class == null)) (assertsimple.AssertSimple.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|assertsimple...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__assertsimple_AssertSimple) (ref.null $java.lang.Class))
    (then
-    ;; (assertsimple.AssertSimple.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|assertsimple...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__assertsimple_AssertSimple (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|assertsimple...|__java_lang_String (ref.func $$getString_|assertsimple...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return assertsimple.AssertSimple.$class;
   (return (global.get $f_$class__assertsimple_AssertSimple))
  )
 )
@@ -140,7 +127,6 @@
  (local $this (ref null $assertsimple.AssertSimple))
  (local.set $this (ref.cast_static $assertsimple.AssertSimple (local.get $this.untyped)))
  (block
-  ;; return assertsimple.AssertSimple.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@assertsimple.AssertSimple) ))
  )
 )

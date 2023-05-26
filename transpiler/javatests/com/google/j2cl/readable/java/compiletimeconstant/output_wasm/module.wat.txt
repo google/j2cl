@@ -59,13 +59,10 @@
  ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
  (local $$instance (ref null $compiletimeconstant.CompileTimeConstant))
  (block
-  ;; CompileTimeConstant<T> $instance = new CompileTimeConstant.<init>(0);
   ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
   (local.set $$instance (struct.new $compiletimeconstant.CompileTimeConstant (ref.as_non_null (global.get $compiletimeconstant.CompileTimeConstant.vtable)) (ref.as_non_null (global.get $compiletimeconstant.CompileTimeConstant.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
   (call $$ctor__void_$p_compiletimeconstant_CompileTimeConstant@compiletimeconstant.CompileTimeConstant (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
   (return (local.get $$instance))
  )
@@ -76,13 +73,10 @@
  (param $this (ref null $compiletimeconstant.CompileTimeConstant))
  ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
  (block
-  ;; compiletimeconstant.CompileTimeConstant.$clinit();
   ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
   (call $$clinit__void@compiletimeconstant.CompileTimeConstant )
-  ;; Object.this.$ctor();
   ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;; CompileTimeConstant.this.$init();
   ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
   (call $$init__void_$p_compiletimeconstant_CompileTimeConstant@compiletimeconstant.CompileTimeConstant (ref.as_non_null (local.get $this)))
  )
@@ -99,22 +93,16 @@
  (local $n (ref null $java.lang.String))
  (local $c (ref null $java.lang.Class))
  (block
-  ;; boolean b = true;
   ;;@ compiletimeconstant/CompileTimeConstant.java:54:4
   (local.set $b (i32.const 1))
-  ;; String s = javaemul.internal.StringPool.$getString_|10000Tur_tle...|();
   ;;@ compiletimeconstant/CompileTimeConstant.java:55:4
   (local.set $s (call $function.no.side.effects.$getString_|10000Tur_tle...|__java_lang_String (ref.func $$getString_|10000Tur_tle...|__java_lang_String@javaemul.internal.StringPool) ))
-  ;; String l = javaemul.internal.StringPool.$getString_|ThisIsALongS...|();
   ;;@ compiletimeconstant/CompileTimeConstant.java:56:4
   (local.set $l (call $function.no.side.effects.$getString_|ThisIsALongS...|__java_lang_String (ref.func $$getString_|ThisIsALongS...|__java_lang_String@javaemul.internal.StringPool) ))
-  ;; String m = javaemul.internal.StringPool.$getString_|ThisIsALongS...|_1();
   ;;@ compiletimeconstant/CompileTimeConstant.java:57:4
   (local.set $m (call $function.no.side.effects.$getString_|ThisIsALongS...|_1__java_lang_String (ref.func $$getString_|ThisIsALongS...|_1__java_lang_String@javaemul.internal.StringPool) ))
-  ;; String n = javaemul.internal.StringPool.$getString_|ThisIsALongS...|_2();
   ;;@ compiletimeconstant/CompileTimeConstant.java:58:4
   (local.set $n (call $function.no.side.effects.$getString_|ThisIsALongS...|_2__java_lang_String (ref.func $$getString_|ThisIsALongS...|_2__java_lang_String@javaemul.internal.StringPool) ))
-  ;; Class<?> c = compiletimeconstant.CompileTimeConstant.$getClassMetadata();
   ;;@ compiletimeconstant/CompileTimeConstant.java:59:4
   (local.set $c (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@compiletimeconstant.CompileTimeConstant) ))
  )
@@ -124,25 +112,19 @@
 (func $$clinit__void@compiletimeconstant.CompileTimeConstant
  ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
  (block
-  ;; if (compiletimeconstant.CompileTimeConstant.$initialized) return;
   ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
   (if (global.get $f_$initialized__compiletimeconstant_CompileTimeConstant)
    (then
-    ;; return;
     ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
     (return )
    )
   )
-  ;; (compiletimeconstant.CompileTimeConstant.$initialized = true);
   ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
   (global.set $f_$initialized__compiletimeconstant_CompileTimeConstant (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
   (call $$clinit__void@java.lang.Object )
-  ;; (compiletimeconstant.CompileTimeConstant.OBJ = null);
   ;;@ compiletimeconstant/CompileTimeConstant.java:19:2
   (global.set $f_OBJ__compiletimeconstant_CompileTimeConstant (ref.null $java.lang.Object))
-  ;; (compiletimeconstant.CompileTimeConstant.K = null);
   ;;@ compiletimeconstant/CompileTimeConstant.java:29:2
   (global.set $f_K__compiletimeconstant_CompileTimeConstant (ref.null $java.lang.String))
  )
@@ -152,14 +134,11 @@
 (func $$getClassMetadata__java_lang_Class@compiletimeconstant.CompileTimeConstant
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((compiletimeconstant.CompileTimeConstant.$class == null)) (compiletimeconstant.CompileTimeConstant.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|compiletimec...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__compiletimeconstant_CompileTimeConstant) (ref.null $java.lang.Class))
    (then
-    ;; (compiletimeconstant.CompileTimeConstant.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|compiletimec...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__compiletimeconstant_CompileTimeConstant (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|compiletimec...|__java_lang_String (ref.func $$getString_|compiletimec...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return compiletimeconstant.CompileTimeConstant.$class;
   (return (global.get $f_$class__compiletimeconstant_CompileTimeConstant))
  )
 )
@@ -172,7 +151,6 @@
  (local $this (ref null $compiletimeconstant.CompileTimeConstant))
  (local.set $this (ref.cast_static $compiletimeconstant.CompileTimeConstant (local.get $this.untyped)))
  (block
-  ;; return compiletimeconstant.CompileTimeConstant.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@compiletimeconstant.CompileTimeConstant) ))
  )
 )

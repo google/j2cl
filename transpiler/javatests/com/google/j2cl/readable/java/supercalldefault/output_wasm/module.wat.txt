@@ -57,13 +57,10 @@
  ;;@ supercalldefault/SuperCallDefault.java:19:9
  (local $$instance (ref null $supercalldefault.SuperCallDefault))
  (block
-  ;; SuperCallDefault $instance = new SuperCallDefault.<init>(0);
   ;;@ supercalldefault/SuperCallDefault.java:19:9
   (local.set $$instance (struct.new $supercalldefault.SuperCallDefault (ref.as_non_null (global.get $supercalldefault.SuperCallDefault.vtable)) (ref.as_non_null (global.get $supercalldefault.SuperCallDefault.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ supercalldefault/SuperCallDefault.java:19:9
   (call $$ctor__void_$p_supercalldefault_SuperCallDefault@supercalldefault.SuperCallDefault (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ supercalldefault/SuperCallDefault.java:19:9
   (return (local.get $$instance))
  )
@@ -74,10 +71,8 @@
  (param $this (ref null $supercalldefault.SuperCallDefault))
  ;;@ supercalldefault/SuperCallDefault.java:19:9
  (block
-  ;; supercalldefault.SuperCallDefault.$clinit();
   ;;@ supercalldefault/SuperCallDefault.java:19:28
   (call $$clinit__void@supercalldefault.SuperCallDefault )
-  ;; Object.this.$ctor();
   ;;@ supercalldefault/SuperCallDefault.java:20:4
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -87,19 +82,15 @@
 (func $$clinit__void@supercalldefault.SuperCallDefault
  ;;@ supercalldefault/SuperCallDefault.java:18:13
  (block
-  ;; if (supercalldefault.SuperCallDefault.$initialized) return;
   ;;@ supercalldefault/SuperCallDefault.java:18:13
   (if (global.get $f_$initialized__supercalldefault_SuperCallDefault)
    (then
-    ;; return;
     ;;@ supercalldefault/SuperCallDefault.java:18:13
     (return )
    )
   )
-  ;; (supercalldefault.SuperCallDefault.$initialized = true);
   ;;@ supercalldefault/SuperCallDefault.java:18:13
   (global.set $f_$initialized__supercalldefault_SuperCallDefault (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ supercalldefault/SuperCallDefault.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -109,14 +100,11 @@
 (func $$getClassMetadata__java_lang_Class@supercalldefault.SuperCallDefault
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((supercalldefault.SuperCallDefault.$class == null)) (supercalldefault.SuperCallDefault.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|supercalldef...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__supercalldefault_SuperCallDefault) (ref.null $java.lang.Class))
    (then
-    ;; (supercalldefault.SuperCallDefault.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|supercalldef...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__supercalldefault_SuperCallDefault (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|supercalldef...|__java_lang_String (ref.func $$getString_|supercalldef...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return supercalldefault.SuperCallDefault.$class;
   (return (global.get $f_$class__supercalldefault_SuperCallDefault))
  )
 )
@@ -129,7 +117,6 @@
  (local $this (ref null $supercalldefault.SuperCallDefault))
  (local.set $this (ref.cast_static $supercalldefault.SuperCallDefault (local.get $this.untyped)))
  (block
-  ;; return supercalldefault.SuperCallDefault.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@supercalldefault.SuperCallDefault) ))
  )
 )

@@ -741,13 +741,10 @@
  ;;@ jsconstructor/JsConstructorClass.java:41:13
  (local $$instance (ref null $jsconstructor.JsConstructorClass))
  (block
-  ;; JsConstructorClass $instance = new JsConstructorClass.<init>(0);
   ;;@ jsconstructor/JsConstructorClass.java:41:13
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ jsconstructor/JsConstructorClass.java:41:13
   (call $$ctor__void_$p_jsconstructor_JsConstructorClass@jsconstructor.JsConstructorClass (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ jsconstructor/JsConstructorClass.java:41:13
   (return (local.get $$instance))
  )
@@ -758,10 +755,8 @@
  (param $this (ref null $jsconstructor.JsConstructorClass))
  ;;@ jsconstructor/JsConstructorClass.java:41:13
  (block
-  ;; jsconstructor.JsConstructorClass.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:41:13
   (call $$clinit__void@jsconstructor.JsConstructorClass )
-  ;; Object.this.$ctor();
   ;;@ jsconstructor/JsConstructorClass.java:41:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -771,19 +766,15 @@
 (func $$clinit__void@jsconstructor.JsConstructorClass
  ;;@ jsconstructor/JsConstructorClass.java:41:13
  (block
-  ;; if (jsconstructor.JsConstructorClass.$initialized) return;
   ;;@ jsconstructor/JsConstructorClass.java:41:13
   (if (global.get $f_$initialized__jsconstructor_JsConstructorClass)
    (then
-    ;; return;
     ;;@ jsconstructor/JsConstructorClass.java:41:13
     (return )
    )
   )
-  ;; (jsconstructor.JsConstructorClass.$initialized = true);
   ;;@ jsconstructor/JsConstructorClass.java:41:13
   (global.set $f_$initialized__jsconstructor_JsConstructorClass (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:41:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -793,14 +784,11 @@
 (func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jsconstructor.JsConstructorClass.$class == null)) (jsconstructor.JsConstructorClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__jsconstructor_JsConstructorClass) (ref.null $java.lang.Class))
    (then
-    ;; (jsconstructor.JsConstructorClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__jsconstructor_JsConstructorClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsconstructo...|__java_lang_String (ref.func $$getString_|jsconstructo...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return jsconstructor.JsConstructorClass.$class;
   (return (global.get $f_$class__jsconstructor_JsConstructorClass))
  )
 )
@@ -813,7 +801,6 @@
  (local $this (ref null $jsconstructor.JsConstructorClass))
  (local.set $this (ref.cast_static $jsconstructor.JsConstructorClass (local.get $this.untyped)))
  (block
-  ;; return jsconstructor.JsConstructorClass.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass) ))
  )
 )
@@ -828,13 +815,10 @@
  ;;@ jsconstructor/JsConstructorClass.java:48:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.A))
  (block
-  ;; A $instance = new A.<init>(0,0);
   ;;@ jsconstructor/JsConstructorClass.java:48:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.A (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.A.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.A.itable)) (i32.const 0) (i32.const 0)))
-  ;; $instance.$ctor(x);
   ;;@ jsconstructor/JsConstructorClass.java:48:11
   (call $$ctor__int__void_$p_jsconstructor_JsConstructorClass_A@jsconstructor.JsConstructorClass.A (ref.as_non_null (local.get $$instance))(local.get $x))
-  ;; return $instance;
   ;;@ jsconstructor/JsConstructorClass.java:48:11
   (return (local.get $$instance))
  )
@@ -846,16 +830,12 @@
  (param $x i32)
  ;;@ jsconstructor/JsConstructorClass.java:48:11
  (block
-  ;; jsconstructor.JsConstructorClass.A.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:48:20
   (call $$clinit__void@jsconstructor.JsConstructorClass.A )
-  ;; Object.this.$ctor();
   ;;@ jsconstructor/JsConstructorClass.java:48:20
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;; A.this.$init();
   ;;@ jsconstructor/JsConstructorClass.java:48:20
   (call $$init__void_$p_jsconstructor_JsConstructorClass_A@jsconstructor.JsConstructorClass.A (ref.as_non_null (local.get $this)))
-  ;; (A.this.fA = x);
   ;;@ jsconstructor/JsConstructorClass.java:49:6
   (struct.set $jsconstructor.JsConstructorClass.A $f_fA__jsconstructor_JsConstructorClass_A(local.get $this) (local.get $x))
  )
@@ -867,13 +847,10 @@
  ;;@ jsconstructor/JsConstructorClass.java:52:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.A))
  (block
-  ;; A $instance = new A.<init>(0,0);
   ;;@ jsconstructor/JsConstructorClass.java:52:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.A (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.A.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.A.itable)) (i32.const 0) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ jsconstructor/JsConstructorClass.java:52:11
   (call $$ctor__void_$p_jsconstructor_JsConstructorClass_A@jsconstructor.JsConstructorClass.A (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ jsconstructor/JsConstructorClass.java:52:11
   (return (local.get $$instance))
  )
@@ -884,13 +861,10 @@
  (param $this (ref null $jsconstructor.JsConstructorClass.A))
  ;;@ jsconstructor/JsConstructorClass.java:52:11
  (block
-  ;; jsconstructor.JsConstructorClass.A.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:52:15
   (call $$clinit__void@jsconstructor.JsConstructorClass.A )
-  ;; Object.this.$ctor();
   ;;@ jsconstructor/JsConstructorClass.java:52:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;; A.this.$init();
   ;;@ jsconstructor/JsConstructorClass.java:52:15
   (call $$init__void_$p_jsconstructor_JsConstructorClass_A@jsconstructor.JsConstructorClass.A (ref.as_non_null (local.get $this)))
  )
@@ -901,7 +875,6 @@
  (param $this (ref null $jsconstructor.JsConstructorClass.A))
  ;;@ jsconstructor/JsConstructorClass.java:45:22
  (block
-  ;; (A.this.fA = 1);
   ;;@ jsconstructor/JsConstructorClass.java:46:4
   (struct.set $jsconstructor.JsConstructorClass.A $f_fA__jsconstructor_JsConstructorClass_A(local.get $this) (i32.const 1))
  )
@@ -911,19 +884,15 @@
 (func $$clinit__void@jsconstructor.JsConstructorClass.A
  ;;@ jsconstructor/JsConstructorClass.java:45:22
  (block
-  ;; if (jsconstructor.JsConstructorClass.A.$initialized) return;
   ;;@ jsconstructor/JsConstructorClass.java:45:22
   (if (global.get $f_$initialized__jsconstructor_JsConstructorClass_A)
    (then
-    ;; return;
     ;;@ jsconstructor/JsConstructorClass.java:45:22
     (return )
    )
   )
-  ;; (jsconstructor.JsConstructorClass.A.$initialized = true);
   ;;@ jsconstructor/JsConstructorClass.java:45:22
   (global.set $f_$initialized__jsconstructor_JsConstructorClass_A (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:45:22
   (call $$clinit__void@java.lang.Object )
  )
@@ -933,14 +902,11 @@
 (func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.A
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jsconstructor.JsConstructorClass.A.$class == null)) (jsconstructor.JsConstructorClass.A.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_1(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__jsconstructor_JsConstructorClass_A) (ref.null $java.lang.Class))
    (then
-    ;; (jsconstructor.JsConstructorClass.A.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_1(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__jsconstructor_JsConstructorClass_A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsconstructo...|_1__java_lang_String (ref.func $$getString_|jsconstructo...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return jsconstructor.JsConstructorClass.A.$class;
   (return (global.get $f_$class__jsconstructor_JsConstructorClass_A))
  )
 )
@@ -953,7 +919,6 @@
  (local $this (ref null $jsconstructor.JsConstructorClass.A))
  (local.set $this (ref.cast_static $jsconstructor.JsConstructorClass.A (local.get $this.untyped)))
  (block
-  ;; return jsconstructor.JsConstructorClass.A.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.A) ))
  )
 )
@@ -967,13 +932,10 @@
  ;;@ jsconstructor/JsConstructorClass.java:144:22
  (local $$instance (ref null $jsconstructor.JsConstructorClass.G))
  (block
-  ;; G $instance = new G.<init>(0);
   ;;@ jsconstructor/JsConstructorClass.java:144:22
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.G (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.G.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.G.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ jsconstructor/JsConstructorClass.java:144:22
   (call $$ctor__void_$p_jsconstructor_JsConstructorClass_G@jsconstructor.JsConstructorClass.G (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ jsconstructor/JsConstructorClass.java:144:22
   (return (local.get $$instance))
  )
@@ -984,10 +946,8 @@
  (param $this (ref null $jsconstructor.JsConstructorClass.G))
  ;;@ jsconstructor/JsConstructorClass.java:144:22
  (block
-  ;; jsconstructor.JsConstructorClass.G.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:144:22
   (call $$clinit__void@jsconstructor.JsConstructorClass.G )
-  ;; Object.this.$ctor();
   ;;@ jsconstructor/JsConstructorClass.java:144:22
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -997,19 +957,15 @@
 (func $$clinit__void@jsconstructor.JsConstructorClass.G
  ;;@ jsconstructor/JsConstructorClass.java:144:22
  (block
-  ;; if (jsconstructor.JsConstructorClass.G.$initialized) return;
   ;;@ jsconstructor/JsConstructorClass.java:144:22
   (if (global.get $f_$initialized__jsconstructor_JsConstructorClass_G)
    (then
-    ;; return;
     ;;@ jsconstructor/JsConstructorClass.java:144:22
     (return )
    )
   )
-  ;; (jsconstructor.JsConstructorClass.G.$initialized = true);
   ;;@ jsconstructor/JsConstructorClass.java:144:22
   (global.set $f_$initialized__jsconstructor_JsConstructorClass_G (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:144:22
   (call $$clinit__void@java.lang.Object )
  )
@@ -1019,14 +975,11 @@
 (func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.G
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jsconstructor.JsConstructorClass.G.$class == null)) (jsconstructor.JsConstructorClass.G.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_7(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__jsconstructor_JsConstructorClass_G) (ref.null $java.lang.Class))
    (then
-    ;; (jsconstructor.JsConstructorClass.G.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_7(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__jsconstructor_JsConstructorClass_G (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsconstructo...|_7__java_lang_String (ref.func $$getString_|jsconstructo...|_7__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return jsconstructor.JsConstructorClass.G.$class;
   (return (global.get $f_$class__jsconstructor_JsConstructorClass_G))
  )
 )
@@ -1039,7 +992,6 @@
  (local $this (ref null $jsconstructor.JsConstructorClass.G))
  (local.set $this (ref.cast_static $jsconstructor.JsConstructorClass.G (local.get $this.untyped)))
  (block
-  ;; return jsconstructor.JsConstructorClass.G.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.G) ))
  )
 )
@@ -1054,13 +1006,10 @@
  ;;@ jsconstructor/JsConstructorClass.java:184:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.RegularType))
  (block
-  ;; RegularType $instance = new RegularType.<init>(0);
   ;;@ jsconstructor/JsConstructorClass.java:184:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.RegularType (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.RegularType.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.RegularType.itable)) (i32.const 0)))
-  ;; $instance.$ctor(b);
   ;;@ jsconstructor/JsConstructorClass.java:184:11
   (call $$ctor__java_lang_Object__void_$p_jsconstructor_JsConstructorClass_RegularType@jsconstructor.JsConstructorClass.RegularType (ref.as_non_null (local.get $$instance))(local.get $b))
-  ;; return $instance;
   ;;@ jsconstructor/JsConstructorClass.java:184:11
   (return (local.get $$instance))
  )
@@ -1072,10 +1021,8 @@
  (param $b (ref null $java.lang.Object))
  ;;@ jsconstructor/JsConstructorClass.java:184:11
  (block
-  ;; jsconstructor.JsConstructorClass.RegularType.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:184:33
   (call $$clinit__void@jsconstructor.JsConstructorClass.RegularType )
-  ;; Object.this.$ctor();
   ;;@ jsconstructor/JsConstructorClass.java:184:33
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -1085,19 +1032,15 @@
 (func $$clinit__void@jsconstructor.JsConstructorClass.RegularType
  ;;@ jsconstructor/JsConstructorClass.java:183:22
  (block
-  ;; if (jsconstructor.JsConstructorClass.RegularType.$initialized) return;
   ;;@ jsconstructor/JsConstructorClass.java:183:22
   (if (global.get $f_$initialized__jsconstructor_JsConstructorClass_RegularType)
    (then
-    ;; return;
     ;;@ jsconstructor/JsConstructorClass.java:183:22
     (return )
    )
   )
-  ;; (jsconstructor.JsConstructorClass.RegularType.$initialized = true);
   ;;@ jsconstructor/JsConstructorClass.java:183:22
   (global.set $f_$initialized__jsconstructor_JsConstructorClass_RegularType (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:183:22
   (call $$clinit__void@java.lang.Object )
  )
@@ -1107,14 +1050,11 @@
 (func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.RegularType
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jsconstructor.JsConstructorClass.RegularType.$class == null)) (jsconstructor.JsConstructorClass.RegularType.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_12(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__jsconstructor_JsConstructorClass_RegularType) (ref.null $java.lang.Class))
    (then
-    ;; (jsconstructor.JsConstructorClass.RegularType.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_12(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__jsconstructor_JsConstructorClass_RegularType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsconstructo...|_12__java_lang_String (ref.func $$getString_|jsconstructo...|_12__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return jsconstructor.JsConstructorClass.RegularType.$class;
   (return (global.get $f_$class__jsconstructor_JsConstructorClass_RegularType))
  )
 )
@@ -1127,7 +1067,6 @@
  (local $this (ref null $jsconstructor.JsConstructorClass.RegularType))
  (local.set $this (ref.cast_static $jsconstructor.JsConstructorClass.RegularType (local.get $this.untyped)))
  (block
-  ;; return jsconstructor.JsConstructorClass.RegularType.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.RegularType) ))
  )
 )
@@ -1142,13 +1081,10 @@
  ;;@ jsconstructor/JsConstructorClass.java:62:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.B))
  (block
-  ;; B $instance = new B.<init>(0,0,0);
   ;;@ jsconstructor/JsConstructorClass.java:62:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.B (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.B.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.B.itable)) (i32.const 0) (i32.const 0) (i32.const 0)))
-  ;; $instance.$ctor(x);
   ;;@ jsconstructor/JsConstructorClass.java:62:11
   (call $$ctor__int__void_$p_jsconstructor_JsConstructorClass_B@jsconstructor.JsConstructorClass.B (ref.as_non_null (local.get $$instance))(local.get $x))
-  ;; return $instance;
   ;;@ jsconstructor/JsConstructorClass.java:62:11
   (return (local.get $$instance))
  )
@@ -1160,16 +1096,12 @@
  (param $x i32)
  ;;@ jsconstructor/JsConstructorClass.java:62:11
  (block
-  ;; jsconstructor.JsConstructorClass.B.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:62:20
   (call $$clinit__void@jsconstructor.JsConstructorClass.B )
-  ;; A.this.$ctor((x + 1));
   ;;@ jsconstructor/JsConstructorClass.java:63:6
   (call $$ctor__int__void_$p_jsconstructor_JsConstructorClass_A@jsconstructor.JsConstructorClass.A (ref.as_non_null (local.get $this))(i32.add (local.get $x) (i32.const 1)))
-  ;; B.this.$init();
   ;;@ jsconstructor/JsConstructorClass.java:62:20
   (call $$init__void_$p_jsconstructor_JsConstructorClass_B@jsconstructor.JsConstructorClass.B (ref.as_non_null (local.get $this)))
-  ;; (B.this.fB = 3);
   ;;@ jsconstructor/JsConstructorClass.java:64:6
   (struct.set $jsconstructor.JsConstructorClass.B $f_fB__jsconstructor_JsConstructorClass_B(local.get $this) (i32.const 3))
  )
@@ -1181,13 +1113,10 @@
  ;;@ jsconstructor/JsConstructorClass.java:67:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.B))
  (block
-  ;; B $instance = new B.<init>(0,0,0);
   ;;@ jsconstructor/JsConstructorClass.java:67:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.B (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.B.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.B.itable)) (i32.const 0) (i32.const 0) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ jsconstructor/JsConstructorClass.java:67:11
   (call $$ctor__void_$p_jsconstructor_JsConstructorClass_B@jsconstructor.JsConstructorClass.B (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ jsconstructor/JsConstructorClass.java:67:11
   (return (local.get $$instance))
  )
@@ -1198,13 +1127,10 @@
  (param $this (ref null $jsconstructor.JsConstructorClass.B))
  ;;@ jsconstructor/JsConstructorClass.java:67:11
  (block
-  ;; jsconstructor.JsConstructorClass.B.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:67:15
   (call $$clinit__void@jsconstructor.JsConstructorClass.B )
-  ;; B.this.$ctor(10);
   ;;@ jsconstructor/JsConstructorClass.java:68:6
   (call $$ctor__int__void_$p_jsconstructor_JsConstructorClass_B@jsconstructor.JsConstructorClass.B (ref.as_non_null (local.get $this))(i32.const 10))
-  ;; (B.this.fB = 4);
   ;;@ jsconstructor/JsConstructorClass.java:69:6
   (struct.set $jsconstructor.JsConstructorClass.B $f_fB__jsconstructor_JsConstructorClass_B(local.get $this) (i32.const 4))
  )
@@ -1218,13 +1144,10 @@
  ;;@ jsconstructor/JsConstructorClass.java:72:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.B))
  (block
-  ;; B $instance = new B.<init>(0,0,0);
   ;;@ jsconstructor/JsConstructorClass.java:72:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.B (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.B.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.B.itable)) (i32.const 0) (i32.const 0) (i32.const 0)))
-  ;; $instance.$ctor(x,y);
   ;;@ jsconstructor/JsConstructorClass.java:72:11
   (call $$ctor__int__int__void_$p_jsconstructor_JsConstructorClass_B@jsconstructor.JsConstructorClass.B (ref.as_non_null (local.get $$instance))(local.get $x)(local.get $y))
-  ;; return $instance;
   ;;@ jsconstructor/JsConstructorClass.java:72:11
   (return (local.get $$instance))
  )
@@ -1237,13 +1160,10 @@
  (param $y i32)
  ;;@ jsconstructor/JsConstructorClass.java:72:11
  (block
-  ;; jsconstructor.JsConstructorClass.B.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:72:27
   (call $$clinit__void@jsconstructor.JsConstructorClass.B )
-  ;; B.this.$ctor((x + y));
   ;;@ jsconstructor/JsConstructorClass.java:73:6
   (call $$ctor__int__void_$p_jsconstructor_JsConstructorClass_B@jsconstructor.JsConstructorClass.B (ref.as_non_null (local.get $this))(i32.add (local.get $x) (local.get $y)))
-  ;; (B.this.fB = (x * y));
   ;;@ jsconstructor/JsConstructorClass.java:74:6
   (struct.set $jsconstructor.JsConstructorClass.B $f_fB__jsconstructor_JsConstructorClass_B(local.get $this) (i32.mul (local.get $x) (local.get $y)))
  )
@@ -1254,7 +1174,6 @@
  (param $this (ref null $jsconstructor.JsConstructorClass.B))
  ;;@ jsconstructor/JsConstructorClass.java:58:22
  (block
-  ;; (B.this.fB = 2);
   ;;@ jsconstructor/JsConstructorClass.java:59:4
   (struct.set $jsconstructor.JsConstructorClass.B $f_fB__jsconstructor_JsConstructorClass_B(local.get $this) (i32.const 2))
  )
@@ -1264,19 +1183,15 @@
 (func $$clinit__void@jsconstructor.JsConstructorClass.B
  ;;@ jsconstructor/JsConstructorClass.java:58:22
  (block
-  ;; if (jsconstructor.JsConstructorClass.B.$initialized) return;
   ;;@ jsconstructor/JsConstructorClass.java:58:22
   (if (global.get $f_$initialized__jsconstructor_JsConstructorClass_B)
    (then
-    ;; return;
     ;;@ jsconstructor/JsConstructorClass.java:58:22
     (return )
    )
   )
-  ;; (jsconstructor.JsConstructorClass.B.$initialized = true);
   ;;@ jsconstructor/JsConstructorClass.java:58:22
   (global.set $f_$initialized__jsconstructor_JsConstructorClass_B (i32.const 1))
-  ;; jsconstructor.JsConstructorClass.A.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:58:22
   (call $$clinit__void@jsconstructor.JsConstructorClass.A )
  )
@@ -1286,14 +1201,11 @@
 (func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.B
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jsconstructor.JsConstructorClass.B.$class == null)) (jsconstructor.JsConstructorClass.B.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_2(),jsconstructor.JsConstructorClass.A.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__jsconstructor_JsConstructorClass_B) (ref.null $java.lang.Class))
    (then
-    ;; (jsconstructor.JsConstructorClass.B.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_2(),jsconstructor.JsConstructorClass.A.$getClassMetadata()));
     (global.set $f_$class__jsconstructor_JsConstructorClass_B (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsconstructo...|_2__java_lang_String (ref.func $$getString_|jsconstructo...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.A) )))
    )
   )
-  ;; return jsconstructor.JsConstructorClass.B.$class;
   (return (global.get $f_$class__jsconstructor_JsConstructorClass_B))
  )
 )
@@ -1306,7 +1218,6 @@
  (local $this (ref null $jsconstructor.JsConstructorClass.B))
  (local.set $this (ref.cast_static $jsconstructor.JsConstructorClass.B (local.get $this.untyped)))
  (block
-  ;; return jsconstructor.JsConstructorClass.B.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.B) ))
  )
 )
@@ -1320,13 +1231,10 @@
  ;;@ jsconstructor/JsConstructorClass.java:149:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.H))
  (block
-  ;; H $instance = new H.<init>(0);
   ;;@ jsconstructor/JsConstructorClass.java:149:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.H (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.H.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.H.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ jsconstructor/JsConstructorClass.java:149:11
   (call $$ctor__void_$p_jsconstructor_JsConstructorClass_H@jsconstructor.JsConstructorClass.H (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ jsconstructor/JsConstructorClass.java:149:11
   (return (local.get $$instance))
  )
@@ -1337,10 +1245,8 @@
  (param $this (ref null $jsconstructor.JsConstructorClass.H))
  ;;@ jsconstructor/JsConstructorClass.java:149:11
  (block
-  ;; jsconstructor.JsConstructorClass.H.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:149:15
   (call $$clinit__void@jsconstructor.JsConstructorClass.H )
-  ;; G.this.$ctor();
   ;;@ jsconstructor/JsConstructorClass.java:149:15
   (call $$ctor__void_$p_jsconstructor_JsConstructorClass_G@jsconstructor.JsConstructorClass.G (ref.as_non_null (local.get $this)))
  )
@@ -1350,19 +1256,15 @@
 (func $$clinit__void@jsconstructor.JsConstructorClass.H
  ;;@ jsconstructor/JsConstructorClass.java:147:22
  (block
-  ;; if (jsconstructor.JsConstructorClass.H.$initialized) return;
   ;;@ jsconstructor/JsConstructorClass.java:147:22
   (if (global.get $f_$initialized__jsconstructor_JsConstructorClass_H)
    (then
-    ;; return;
     ;;@ jsconstructor/JsConstructorClass.java:147:22
     (return )
    )
   )
-  ;; (jsconstructor.JsConstructorClass.H.$initialized = true);
   ;;@ jsconstructor/JsConstructorClass.java:147:22
   (global.set $f_$initialized__jsconstructor_JsConstructorClass_H (i32.const 1))
-  ;; jsconstructor.JsConstructorClass.G.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:147:22
   (call $$clinit__void@jsconstructor.JsConstructorClass.G )
  )
@@ -1372,14 +1274,11 @@
 (func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.H
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jsconstructor.JsConstructorClass.H.$class == null)) (jsconstructor.JsConstructorClass.H.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_8(),jsconstructor.JsConstructorClass.G.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__jsconstructor_JsConstructorClass_H) (ref.null $java.lang.Class))
    (then
-    ;; (jsconstructor.JsConstructorClass.H.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_8(),jsconstructor.JsConstructorClass.G.$getClassMetadata()));
     (global.set $f_$class__jsconstructor_JsConstructorClass_H (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsconstructo...|_8__java_lang_String (ref.func $$getString_|jsconstructo...|_8__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.G) )))
    )
   )
-  ;; return jsconstructor.JsConstructorClass.H.$class;
   (return (global.get $f_$class__jsconstructor_JsConstructorClass_H))
  )
 )
@@ -1392,7 +1291,6 @@
  (local $this (ref null $jsconstructor.JsConstructorClass.H))
  (local.set $this (ref.cast_static $jsconstructor.JsConstructorClass.H (local.get $this.untyped)))
  (block
-  ;; return jsconstructor.JsConstructorClass.H.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.H) ))
  )
 )
@@ -1407,13 +1305,10 @@
  ;;@ jsconstructor/JsConstructorClass.java:154:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.Varargs))
  (block
-  ;; Varargs $instance = new Varargs.<init>(0,0);
   ;;@ jsconstructor/JsConstructorClass.java:154:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.Varargs (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.Varargs.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.Varargs.itable)) (i32.const 0) (i32.const 0)))
-  ;; $instance.$ctor(args);
   ;;@ jsconstructor/JsConstructorClass.java:154:11
   (call $$ctor__arrayOf_int__void_$p_jsconstructor_JsConstructorClass_Varargs@jsconstructor.JsConstructorClass.Varargs (ref.as_non_null (local.get $$instance))(local.get $args))
-  ;; return $instance;
   ;;@ jsconstructor/JsConstructorClass.java:154:11
   (return (local.get $$instance))
  )
@@ -1425,10 +1320,8 @@
  (param $args (ref null $javaemul.internal.WasmArray.OfInt))
  ;;@ jsconstructor/JsConstructorClass.java:154:11
  (block
-  ;; jsconstructor.JsConstructorClass.Varargs.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:154:32
   (call $$clinit__void@jsconstructor.JsConstructorClass.Varargs )
-  ;; A.this.$ctor(args.elements[1]);
   ;;@ jsconstructor/JsConstructorClass.java:155:6
   (call $$ctor__int__void_$p_jsconstructor_JsConstructorClass_A@jsconstructor.JsConstructorClass.A (ref.as_non_null (local.get $this))(array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt(local.get $args)) (i32.const 1)))
  )
@@ -1438,19 +1331,15 @@
 (func $$clinit__void@jsconstructor.JsConstructorClass.Varargs
  ;;@ jsconstructor/JsConstructorClass.java:152:22
  (block
-  ;; if (jsconstructor.JsConstructorClass.Varargs.$initialized) return;
   ;;@ jsconstructor/JsConstructorClass.java:152:22
   (if (global.get $f_$initialized__jsconstructor_JsConstructorClass_Varargs)
    (then
-    ;; return;
     ;;@ jsconstructor/JsConstructorClass.java:152:22
     (return )
    )
   )
-  ;; (jsconstructor.JsConstructorClass.Varargs.$initialized = true);
   ;;@ jsconstructor/JsConstructorClass.java:152:22
   (global.set $f_$initialized__jsconstructor_JsConstructorClass_Varargs (i32.const 1))
-  ;; jsconstructor.JsConstructorClass.A.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:152:22
   (call $$clinit__void@jsconstructor.JsConstructorClass.A )
  )
@@ -1460,14 +1349,11 @@
 (func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.Varargs
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jsconstructor.JsConstructorClass.Varargs.$class == null)) (jsconstructor.JsConstructorClass.Varargs.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_9(),jsconstructor.JsConstructorClass.A.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__jsconstructor_JsConstructorClass_Varargs) (ref.null $java.lang.Class))
    (then
-    ;; (jsconstructor.JsConstructorClass.Varargs.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_9(),jsconstructor.JsConstructorClass.A.$getClassMetadata()));
     (global.set $f_$class__jsconstructor_JsConstructorClass_Varargs (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsconstructo...|_9__java_lang_String (ref.func $$getString_|jsconstructo...|_9__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.A) )))
    )
   )
-  ;; return jsconstructor.JsConstructorClass.Varargs.$class;
   (return (global.get $f_$class__jsconstructor_JsConstructorClass_Varargs))
  )
 )
@@ -1480,7 +1366,6 @@
  (local $this (ref null $jsconstructor.JsConstructorClass.Varargs))
  (local.set $this (ref.cast_static $jsconstructor.JsConstructorClass.Varargs (local.get $this.untyped)))
  (block
-  ;; return jsconstructor.JsConstructorClass.Varargs.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.Varargs) ))
  )
 )
@@ -1496,13 +1381,10 @@
  ;;@ jsconstructor/JsConstructorClass.java:178:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.InstanceVarargs))
  (block
-  ;; InstanceVarargs $instance = new InstanceVarargs.<init>(0,0,$outer_this);
   ;;@ jsconstructor/JsConstructorClass.java:178:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.InstanceVarargs (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.InstanceVarargs.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.InstanceVarargs.itable)) (i32.const 0) (i32.const 0) (local.get $$outer_this)))
-  ;; $instance.$ctor($outer_this,args);
   ;;@ jsconstructor/JsConstructorClass.java:178:11
   (call $$ctor__jsconstructor_JsConstructorClass__arrayOf_int__void_$p_jsconstructor_JsConstructorClass_InstanceVarargs@jsconstructor.JsConstructorClass.InstanceVarargs (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $args))
-  ;; return $instance;
   ;;@ jsconstructor/JsConstructorClass.java:178:11
   (return (local.get $$instance))
  )
@@ -1515,10 +1397,8 @@
  (param $args (ref null $javaemul.internal.WasmArray.OfInt))
  ;;@ jsconstructor/JsConstructorClass.java:178:11
  (block
-  ;; jsconstructor.JsConstructorClass.InstanceVarargs.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:178:40
   (call $$clinit__void@jsconstructor.JsConstructorClass.InstanceVarargs )
-  ;; A.this.$ctor(args.elements[1]);
   ;;@ jsconstructor/JsConstructorClass.java:179:6
   (call $$ctor__int__void_$p_jsconstructor_JsConstructorClass_A@jsconstructor.JsConstructorClass.A (ref.as_non_null (local.get $this))(array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt(local.get $args)) (i32.const 1)))
  )
@@ -1528,19 +1408,15 @@
 (func $$clinit__void@jsconstructor.JsConstructorClass.InstanceVarargs
  ;;@ jsconstructor/JsConstructorClass.java:176:15
  (block
-  ;; if (jsconstructor.JsConstructorClass.InstanceVarargs.$initialized) return;
   ;;@ jsconstructor/JsConstructorClass.java:176:15
   (if (global.get $f_$initialized__jsconstructor_JsConstructorClass_InstanceVarargs)
    (then
-    ;; return;
     ;;@ jsconstructor/JsConstructorClass.java:176:15
     (return )
    )
   )
-  ;; (jsconstructor.JsConstructorClass.InstanceVarargs.$initialized = true);
   ;;@ jsconstructor/JsConstructorClass.java:176:15
   (global.set $f_$initialized__jsconstructor_JsConstructorClass_InstanceVarargs (i32.const 1))
-  ;; jsconstructor.JsConstructorClass.A.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:176:15
   (call $$clinit__void@jsconstructor.JsConstructorClass.A )
  )
@@ -1550,14 +1426,11 @@
 (func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.InstanceVarargs
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jsconstructor.JsConstructorClass.InstanceVarargs.$class == null)) (jsconstructor.JsConstructorClass.InstanceVarargs.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_11(),jsconstructor.JsConstructorClass.A.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__jsconstructor_JsConstructorClass_InstanceVarargs) (ref.null $java.lang.Class))
    (then
-    ;; (jsconstructor.JsConstructorClass.InstanceVarargs.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_11(),jsconstructor.JsConstructorClass.A.$getClassMetadata()));
     (global.set $f_$class__jsconstructor_JsConstructorClass_InstanceVarargs (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsconstructo...|_11__java_lang_String (ref.func $$getString_|jsconstructo...|_11__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.A) )))
    )
   )
-  ;; return jsconstructor.JsConstructorClass.InstanceVarargs.$class;
   (return (global.get $f_$class__jsconstructor_JsConstructorClass_InstanceVarargs))
  )
 )
@@ -1570,7 +1443,6 @@
  (local $this (ref null $jsconstructor.JsConstructorClass.InstanceVarargs))
  (local.set $this (ref.cast_static $jsconstructor.JsConstructorClass.InstanceVarargs (local.get $this.untyped)))
  (block
-  ;; return jsconstructor.JsConstructorClass.InstanceVarargs.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.InstanceVarargs) ))
  )
 )
@@ -1585,13 +1457,10 @@
  ;;@ jsconstructor/JsConstructorClass.java:189:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType))
  (block
-  ;; JsConstructorSubtypeOfRegularType $instance = new JsConstructorSubtypeOfRegularType.<init>(0);
   ;;@ jsconstructor/JsConstructorClass.java:189:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.itable)) (i32.const 0)))
-  ;; $instance.$ctor(object);
   ;;@ jsconstructor/JsConstructorClass.java:189:11
   (call $$ctor__java_lang_Object__void_$p_jsconstructor_JsConstructorClass_JsConstructorSubtypeOfRegularType@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType (ref.as_non_null (local.get $$instance))(local.get $object))
-  ;; return $instance;
   ;;@ jsconstructor/JsConstructorClass.java:189:11
   (return (local.get $$instance))
  )
@@ -1603,10 +1472,8 @@
  (param $object (ref null $java.lang.Object))
  ;;@ jsconstructor/JsConstructorClass.java:189:11
  (block
-  ;; jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:189:60
   (call $$clinit__void@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType )
-  ;; RegularType.this.$ctor(object);
   ;;@ jsconstructor/JsConstructorClass.java:190:6
   (call $$ctor__java_lang_Object__void_$p_jsconstructor_JsConstructorClass_RegularType@jsconstructor.JsConstructorClass.RegularType (ref.as_non_null (local.get $this))(local.get $object))
  )
@@ -1618,13 +1485,10 @@
  ;;@ jsconstructor/JsConstructorClass.java:193:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType))
  (block
-  ;; JsConstructorSubtypeOfRegularType $instance = new JsConstructorSubtypeOfRegularType.<init>(0);
   ;;@ jsconstructor/JsConstructorClass.java:193:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ jsconstructor/JsConstructorClass.java:193:11
   (call $$ctor__void_$p_jsconstructor_JsConstructorClass_JsConstructorSubtypeOfRegularType@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ jsconstructor/JsConstructorClass.java:193:11
   (return (local.get $$instance))
  )
@@ -1635,10 +1499,8 @@
  (param $this (ref null $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType))
  ;;@ jsconstructor/JsConstructorClass.java:193:11
  (block
-  ;; jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:193:47
   (call $$clinit__void@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType )
-  ;; JsConstructorSubtypeOfRegularType.this.$ctor(java.lang.Object.$create());
   ;;@ jsconstructor/JsConstructorClass.java:194:6
   (call $$ctor__java_lang_Object__void_$p_jsconstructor_JsConstructorClass_JsConstructorSubtypeOfRegularType@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType (ref.as_non_null (local.get $this))(call $$create__@java.lang.Object ))
  )
@@ -1648,19 +1510,15 @@
 (func $$clinit__void@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType
  ;;@ jsconstructor/JsConstructorClass.java:187:22
  (block
-  ;; if (jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.$initialized) return;
   ;;@ jsconstructor/JsConstructorClass.java:187:22
   (if (global.get $f_$initialized__jsconstructor_JsConstructorClass_JsConstructorSubtypeOfRegularType)
    (then
-    ;; return;
     ;;@ jsconstructor/JsConstructorClass.java:187:22
     (return )
    )
   )
-  ;; (jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.$initialized = true);
   ;;@ jsconstructor/JsConstructorClass.java:187:22
   (global.set $f_$initialized__jsconstructor_JsConstructorClass_JsConstructorSubtypeOfRegularType (i32.const 1))
-  ;; jsconstructor.JsConstructorClass.RegularType.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:187:22
   (call $$clinit__void@jsconstructor.JsConstructorClass.RegularType )
  )
@@ -1670,14 +1528,11 @@
 (func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.$class == null)) (jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_13(),jsconstructor.JsConstructorClass.RegularType.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__jsconstructor_JsConstructorClass_JsConstructorSubtypeOfRegularType) (ref.null $java.lang.Class))
    (then
-    ;; (jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_13(),jsconstructor.JsConstructorClass.RegularType.$getClassMetadata()));
     (global.set $f_$class__jsconstructor_JsConstructorClass_JsConstructorSubtypeOfRegularType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsconstructo...|_13__java_lang_String (ref.func $$getString_|jsconstructo...|_13__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.RegularType) )))
    )
   )
-  ;; return jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.$class;
   (return (global.get $f_$class__jsconstructor_JsConstructorClass_JsConstructorSubtypeOfRegularType))
  )
 )
@@ -1690,7 +1545,6 @@
  (local $this (ref null $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType))
  (local.set $this (ref.cast_static $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType (local.get $this.untyped)))
  (block
-  ;; return jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType) ))
  )
 )
@@ -1705,13 +1559,10 @@
  ;;@ jsconstructor/JsConstructorClass.java:85:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.C))
  (block
-  ;; C $instance = new C.<init>(0,0,0,0);
   ;;@ jsconstructor/JsConstructorClass.java:85:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.C (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.C.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.C.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0)))
-  ;; $instance.$ctor(x);
   ;;@ jsconstructor/JsConstructorClass.java:85:11
   (call $$ctor__int__void_$p_jsconstructor_JsConstructorClass_C@jsconstructor.JsConstructorClass.C (ref.as_non_null (local.get $$instance))(local.get $x))
-  ;; return $instance;
   ;;@ jsconstructor/JsConstructorClass.java:85:11
   (return (local.get $$instance))
  )
@@ -1723,16 +1574,12 @@
  (param $x i32)
  ;;@ jsconstructor/JsConstructorClass.java:85:11
  (block
-  ;; jsconstructor.JsConstructorClass.C.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:85:20
   (call $$clinit__void@jsconstructor.JsConstructorClass.C )
-  ;; B.this.$ctor((x * 2));
   ;;@ jsconstructor/JsConstructorClass.java:86:6
   (call $$ctor__int__void_$p_jsconstructor_JsConstructorClass_B@jsconstructor.JsConstructorClass.B (ref.as_non_null (local.get $this))(i32.mul (local.get $x) (i32.const 2)))
-  ;; C.this.$init();
   ;;@ jsconstructor/JsConstructorClass.java:85:20
   (call $$init__void_$p_jsconstructor_JsConstructorClass_C@jsconstructor.JsConstructorClass.C (ref.as_non_null (local.get $this)))
-  ;; (C.this.fC = 6);
   ;;@ jsconstructor/JsConstructorClass.java:87:6
   (struct.set $jsconstructor.JsConstructorClass.C $f_fC__jsconstructor_JsConstructorClass_C(local.get $this) (i32.const 6))
  )
@@ -1746,13 +1593,10 @@
  ;;@ jsconstructor/JsConstructorClass.java:90:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.C))
  (block
-  ;; C $instance = new C.<init>(0,0,0,0);
   ;;@ jsconstructor/JsConstructorClass.java:90:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.C (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.C.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.C.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0)))
-  ;; $instance.$ctor(x,y);
   ;;@ jsconstructor/JsConstructorClass.java:90:11
   (call $$ctor__int__int__void_$p_jsconstructor_JsConstructorClass_C@jsconstructor.JsConstructorClass.C (ref.as_non_null (local.get $$instance))(local.get $x)(local.get $y))
-  ;; return $instance;
   ;;@ jsconstructor/JsConstructorClass.java:90:11
   (return (local.get $$instance))
  )
@@ -1765,13 +1609,10 @@
  (param $y i32)
  ;;@ jsconstructor/JsConstructorClass.java:90:11
  (block
-  ;; jsconstructor.JsConstructorClass.C.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:90:27
   (call $$clinit__void@jsconstructor.JsConstructorClass.C )
-  ;; C.this.$ctor((x + y));
   ;;@ jsconstructor/JsConstructorClass.java:91:6
   (call $$ctor__int__void_$p_jsconstructor_JsConstructorClass_C@jsconstructor.JsConstructorClass.C (ref.as_non_null (local.get $this))(i32.add (local.get $x) (local.get $y)))
-  ;; (C.this.fC = 7);
   ;;@ jsconstructor/JsConstructorClass.java:92:6
   (struct.set $jsconstructor.JsConstructorClass.C $f_fC__jsconstructor_JsConstructorClass_C(local.get $this) (i32.const 7))
  )
@@ -1782,7 +1623,6 @@
  (param $this (ref null $jsconstructor.JsConstructorClass.C))
  ;;@ jsconstructor/JsConstructorClass.java:81:22
  (block
-  ;; (C.this.fC = 1);
   ;;@ jsconstructor/JsConstructorClass.java:82:4
   (struct.set $jsconstructor.JsConstructorClass.C $f_fC__jsconstructor_JsConstructorClass_C(local.get $this) (i32.const 1))
  )
@@ -1792,19 +1632,15 @@
 (func $$clinit__void@jsconstructor.JsConstructorClass.C
  ;;@ jsconstructor/JsConstructorClass.java:81:22
  (block
-  ;; if (jsconstructor.JsConstructorClass.C.$initialized) return;
   ;;@ jsconstructor/JsConstructorClass.java:81:22
   (if (global.get $f_$initialized__jsconstructor_JsConstructorClass_C)
    (then
-    ;; return;
     ;;@ jsconstructor/JsConstructorClass.java:81:22
     (return )
    )
   )
-  ;; (jsconstructor.JsConstructorClass.C.$initialized = true);
   ;;@ jsconstructor/JsConstructorClass.java:81:22
   (global.set $f_$initialized__jsconstructor_JsConstructorClass_C (i32.const 1))
-  ;; jsconstructor.JsConstructorClass.B.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:81:22
   (call $$clinit__void@jsconstructor.JsConstructorClass.B )
  )
@@ -1814,14 +1650,11 @@
 (func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.C
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jsconstructor.JsConstructorClass.C.$class == null)) (jsconstructor.JsConstructorClass.C.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_3(),jsconstructor.JsConstructorClass.B.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__jsconstructor_JsConstructorClass_C) (ref.null $java.lang.Class))
    (then
-    ;; (jsconstructor.JsConstructorClass.C.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_3(),jsconstructor.JsConstructorClass.B.$getClassMetadata()));
     (global.set $f_$class__jsconstructor_JsConstructorClass_C (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsconstructo...|_3__java_lang_String (ref.func $$getString_|jsconstructo...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.B) )))
    )
   )
-  ;; return jsconstructor.JsConstructorClass.C.$class;
   (return (global.get $f_$class__jsconstructor_JsConstructorClass_C))
  )
 )
@@ -1834,7 +1667,6 @@
  (local $this (ref null $jsconstructor.JsConstructorClass.C))
  (local.set $this (ref.cast_static $jsconstructor.JsConstructorClass.C (local.get $this.untyped)))
  (block
-  ;; return jsconstructor.JsConstructorClass.C.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.C) ))
  )
 )
@@ -1848,13 +1680,10 @@
  ;;@ jsconstructor/JsConstructorClass.java:103:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.D))
  (block
-  ;; D $instance = new D.<init>(0,0,0,0);
   ;;@ jsconstructor/JsConstructorClass.java:103:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.D (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.D.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.D.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ jsconstructor/JsConstructorClass.java:103:11
   (call $$ctor__void_$p_jsconstructor_JsConstructorClass_D@jsconstructor.JsConstructorClass.D (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ jsconstructor/JsConstructorClass.java:103:11
   (return (local.get $$instance))
  )
@@ -1865,16 +1694,12 @@
  (param $this (ref null $jsconstructor.JsConstructorClass.D))
  ;;@ jsconstructor/JsConstructorClass.java:103:11
  (block
-  ;; jsconstructor.JsConstructorClass.D.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:103:15
   (call $$clinit__void@jsconstructor.JsConstructorClass.D )
-  ;; B.this.$ctor(9);
   ;;@ jsconstructor/JsConstructorClass.java:104:6
   (call $$ctor__int__void_$p_jsconstructor_JsConstructorClass_B@jsconstructor.JsConstructorClass.B (ref.as_non_null (local.get $this))(i32.const 9))
-  ;; D.this.$init();
   ;;@ jsconstructor/JsConstructorClass.java:103:15
   (call $$init__void_$p_jsconstructor_JsConstructorClass_D@jsconstructor.JsConstructorClass.D (ref.as_non_null (local.get $this)))
-  ;; (D.this.fD = 10);
   ;;@ jsconstructor/JsConstructorClass.java:105:6
   (struct.set $jsconstructor.JsConstructorClass.D $f_fD__jsconstructor_JsConstructorClass_D(local.get $this) (i32.const 10))
  )
@@ -1887,13 +1712,10 @@
  ;;@ jsconstructor/JsConstructorClass.java:108:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.D))
  (block
-  ;; D $instance = new D.<init>(0,0,0,0);
   ;;@ jsconstructor/JsConstructorClass.java:108:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.D (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.D.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.D.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0)))
-  ;; $instance.$ctor(x);
   ;;@ jsconstructor/JsConstructorClass.java:108:11
   (call $$ctor__int__void_$p_jsconstructor_JsConstructorClass_D@jsconstructor.JsConstructorClass.D (ref.as_non_null (local.get $$instance))(local.get $x))
-  ;; return $instance;
   ;;@ jsconstructor/JsConstructorClass.java:108:11
   (return (local.get $$instance))
  )
@@ -1905,13 +1727,10 @@
  (param $x i32)
  ;;@ jsconstructor/JsConstructorClass.java:108:11
  (block
-  ;; jsconstructor.JsConstructorClass.D.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:108:20
   (call $$clinit__void@jsconstructor.JsConstructorClass.D )
-  ;; D.this.$ctor();
   ;;@ jsconstructor/JsConstructorClass.java:109:6
   (call $$ctor__void_$p_jsconstructor_JsConstructorClass_D@jsconstructor.JsConstructorClass.D (ref.as_non_null (local.get $this)))
-  ;; (D.this.fD = x);
   ;;@ jsconstructor/JsConstructorClass.java:110:6
   (struct.set $jsconstructor.JsConstructorClass.D $f_fD__jsconstructor_JsConstructorClass_D(local.get $this) (local.get $x))
  )
@@ -1922,7 +1741,6 @@
  (param $this (ref null $jsconstructor.JsConstructorClass.D))
  ;;@ jsconstructor/JsConstructorClass.java:99:22
  (block
-  ;; (D.this.fD = 8);
   ;;@ jsconstructor/JsConstructorClass.java:100:4
   (struct.set $jsconstructor.JsConstructorClass.D $f_fD__jsconstructor_JsConstructorClass_D(local.get $this) (i32.const 8))
  )
@@ -1932,19 +1750,15 @@
 (func $$clinit__void@jsconstructor.JsConstructorClass.D
  ;;@ jsconstructor/JsConstructorClass.java:99:22
  (block
-  ;; if (jsconstructor.JsConstructorClass.D.$initialized) return;
   ;;@ jsconstructor/JsConstructorClass.java:99:22
   (if (global.get $f_$initialized__jsconstructor_JsConstructorClass_D)
    (then
-    ;; return;
     ;;@ jsconstructor/JsConstructorClass.java:99:22
     (return )
    )
   )
-  ;; (jsconstructor.JsConstructorClass.D.$initialized = true);
   ;;@ jsconstructor/JsConstructorClass.java:99:22
   (global.set $f_$initialized__jsconstructor_JsConstructorClass_D (i32.const 1))
-  ;; jsconstructor.JsConstructorClass.B.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:99:22
   (call $$clinit__void@jsconstructor.JsConstructorClass.B )
  )
@@ -1954,14 +1768,11 @@
 (func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.D
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jsconstructor.JsConstructorClass.D.$class == null)) (jsconstructor.JsConstructorClass.D.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_4(),jsconstructor.JsConstructorClass.B.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__jsconstructor_JsConstructorClass_D) (ref.null $java.lang.Class))
    (then
-    ;; (jsconstructor.JsConstructorClass.D.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_4(),jsconstructor.JsConstructorClass.B.$getClassMetadata()));
     (global.set $f_$class__jsconstructor_JsConstructorClass_D (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsconstructo...|_4__java_lang_String (ref.func $$getString_|jsconstructo...|_4__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.B) )))
    )
   )
-  ;; return jsconstructor.JsConstructorClass.D.$class;
   (return (global.get $f_$class__jsconstructor_JsConstructorClass_D))
  )
 )
@@ -1974,7 +1785,6 @@
  (local $this (ref null $jsconstructor.JsConstructorClass.D))
  (local.set $this (ref.cast_static $jsconstructor.JsConstructorClass.D (local.get $this.untyped)))
  (block
-  ;; return jsconstructor.JsConstructorClass.D.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.D) ))
  )
 )
@@ -1990,13 +1800,10 @@
  ;;@ jsconstructor/JsConstructorClass.java:161:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.SubVarargs))
  (block
-  ;; SubVarargs $instance = new SubVarargs.<init>(0,0);
   ;;@ jsconstructor/JsConstructorClass.java:161:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.SubVarargs (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.SubVarargs.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.SubVarargs.itable)) (i32.const 0) (i32.const 0)))
-  ;; $instance.$ctor(i,args);
   ;;@ jsconstructor/JsConstructorClass.java:161:11
   (call $$ctor__java_lang_Object__arrayOf_int__void_$p_jsconstructor_JsConstructorClass_SubVarargs@jsconstructor.JsConstructorClass.SubVarargs (ref.as_non_null (local.get $$instance))(local.get $i)(local.get $args))
-  ;; return $instance;
   ;;@ jsconstructor/JsConstructorClass.java:161:11
   (return (local.get $$instance))
  )
@@ -2009,10 +1816,8 @@
  (param $args (ref null $javaemul.internal.WasmArray.OfInt))
  ;;@ jsconstructor/JsConstructorClass.java:161:11
  (block
-  ;; jsconstructor.JsConstructorClass.SubVarargs.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:161:45
   (call $$clinit__void@jsconstructor.JsConstructorClass.SubVarargs )
-  ;; Varargs.this.$ctor(args);
   ;;@ jsconstructor/JsConstructorClass.java:162:6
   (call $$ctor__arrayOf_int__void_$p_jsconstructor_JsConstructorClass_Varargs@jsconstructor.JsConstructorClass.Varargs (ref.as_non_null (local.get $this))(local.get $args))
  )
@@ -2025,13 +1830,10 @@
  ;;@ jsconstructor/JsConstructorClass.java:165:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.SubVarargs))
  (block
-  ;; SubVarargs $instance = new SubVarargs.<init>(0,0);
   ;;@ jsconstructor/JsConstructorClass.java:165:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.SubVarargs (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.SubVarargs.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.SubVarargs.itable)) (i32.const 0) (i32.const 0)))
-  ;; $instance.$ctor(j);
   ;;@ jsconstructor/JsConstructorClass.java:165:11
   (call $$ctor__int__void_$p_jsconstructor_JsConstructorClass_SubVarargs@jsconstructor.JsConstructorClass.SubVarargs (ref.as_non_null (local.get $$instance))(local.get $j))
-  ;; return $instance;
   ;;@ jsconstructor/JsConstructorClass.java:165:11
   (return (local.get $$instance))
  )
@@ -2043,10 +1845,8 @@
  (param $j i32)
  ;;@ jsconstructor/JsConstructorClass.java:165:11
  (block
-  ;; jsconstructor.JsConstructorClass.SubVarargs.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:165:29
   (call $$clinit__void@jsconstructor.JsConstructorClass.SubVarargs )
-  ;; SubVarargs.this.$ctor(java.lang.Object.$create(),javaemul.internal.WasmArray.OfInt.$create([j]));
   ;;@ jsconstructor/JsConstructorClass.java:166:6
   (call $$ctor__java_lang_Object__arrayOf_int__void_$p_jsconstructor_JsConstructorClass_SubVarargs@jsconstructor.JsConstructorClass.SubVarargs (ref.as_non_null (local.get $this))(call $$create__@java.lang.Object )(call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (local.get $j))))
  )
@@ -2058,13 +1858,10 @@
  (local $unusedS1 (ref null $jsconstructor.JsConstructorClass.SubVarargs))
  (local $unusedS2 (ref null $jsconstructor.JsConstructorClass.SubVarargs))
  (block
-  ;; jsconstructor.JsConstructorClass.SubVarargs.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:169:38
   (call $$clinit__void@jsconstructor.JsConstructorClass.SubVarargs )
-  ;; SubVarargs unusedS1 = jsconstructor.JsConstructorClass.SubVarargs.$create(2);
   ;;@ jsconstructor/JsConstructorClass.java:170:6
   (local.set $unusedS1 (call $$create__int@jsconstructor.JsConstructorClass.SubVarargs (i32.const 2)))
-  ;; SubVarargs unusedS2 = jsconstructor.JsConstructorClass.SubVarargs.$create(java.lang.Object.$create(),javaemul.internal.WasmArray.OfInt.$create([1,2,3]));
   ;;@ jsconstructor/JsConstructorClass.java:171:6
   (local.set $unusedS2 (call $$create__java_lang_Object__arrayOf_int@jsconstructor.JsConstructorClass.SubVarargs (call $$create__@java.lang.Object )(call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@jsconstructor.JsConstructorClass$SubVarargs-1 (i32.const 0) (i32.const 3)))))
  )
@@ -2074,19 +1871,15 @@
 (func $$clinit__void@jsconstructor.JsConstructorClass.SubVarargs
  ;;@ jsconstructor/JsConstructorClass.java:159:22
  (block
-  ;; if (jsconstructor.JsConstructorClass.SubVarargs.$initialized) return;
   ;;@ jsconstructor/JsConstructorClass.java:159:22
   (if (global.get $f_$initialized__jsconstructor_JsConstructorClass_SubVarargs)
    (then
-    ;; return;
     ;;@ jsconstructor/JsConstructorClass.java:159:22
     (return )
    )
   )
-  ;; (jsconstructor.JsConstructorClass.SubVarargs.$initialized = true);
   ;;@ jsconstructor/JsConstructorClass.java:159:22
   (global.set $f_$initialized__jsconstructor_JsConstructorClass_SubVarargs (i32.const 1))
-  ;; jsconstructor.JsConstructorClass.Varargs.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:159:22
   (call $$clinit__void@jsconstructor.JsConstructorClass.Varargs )
  )
@@ -2096,14 +1889,11 @@
 (func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.SubVarargs
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jsconstructor.JsConstructorClass.SubVarargs.$class == null)) (jsconstructor.JsConstructorClass.SubVarargs.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_10(),jsconstructor.JsConstructorClass.Varargs.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__jsconstructor_JsConstructorClass_SubVarargs) (ref.null $java.lang.Class))
    (then
-    ;; (jsconstructor.JsConstructorClass.SubVarargs.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_10(),jsconstructor.JsConstructorClass.Varargs.$getClassMetadata()));
     (global.set $f_$class__jsconstructor_JsConstructorClass_SubVarargs (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsconstructo...|_10__java_lang_String (ref.func $$getString_|jsconstructo...|_10__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.Varargs) )))
    )
   )
-  ;; return jsconstructor.JsConstructorClass.SubVarargs.$class;
   (return (global.get $f_$class__jsconstructor_JsConstructorClass_SubVarargs))
  )
 )
@@ -2116,7 +1906,6 @@
  (local $this (ref null $jsconstructor.JsConstructorClass.SubVarargs))
  (local.set $this (ref.cast_static $jsconstructor.JsConstructorClass.SubVarargs (local.get $this.untyped)))
  (block
-  ;; return jsconstructor.JsConstructorClass.SubVarargs.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.SubVarargs) ))
  )
 )
@@ -2130,13 +1919,10 @@
  ;;@ jsconstructor/JsConstructorClass.java:121:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.E))
  (block
-  ;; E $instance = new E.<init>(0,0,0,0,0);
   ;;@ jsconstructor/JsConstructorClass.java:121:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.E (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.E.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.E.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ jsconstructor/JsConstructorClass.java:121:11
   (call $$ctor__void_$p_jsconstructor_JsConstructorClass_E@jsconstructor.JsConstructorClass.E (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ jsconstructor/JsConstructorClass.java:121:11
   (return (local.get $$instance))
  )
@@ -2147,16 +1933,12 @@
  (param $this (ref null $jsconstructor.JsConstructorClass.E))
  ;;@ jsconstructor/JsConstructorClass.java:121:11
  (block
-  ;; jsconstructor.JsConstructorClass.E.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:121:15
   (call $$clinit__void@jsconstructor.JsConstructorClass.E )
-  ;; C.this.$ctor(10);
   ;;@ jsconstructor/JsConstructorClass.java:122:6
   (call $$ctor__int__void_$p_jsconstructor_JsConstructorClass_C@jsconstructor.JsConstructorClass.C (ref.as_non_null (local.get $this))(i32.const 10))
-  ;; E.this.$init();
   ;;@ jsconstructor/JsConstructorClass.java:121:15
   (call $$init__void_$p_jsconstructor_JsConstructorClass_E@jsconstructor.JsConstructorClass.E (ref.as_non_null (local.get $this)))
-  ;; (E.this.fE = 12);
   ;;@ jsconstructor/JsConstructorClass.java:123:6
   (struct.set $jsconstructor.JsConstructorClass.E $f_fE__jsconstructor_JsConstructorClass_E(local.get $this) (i32.const 12))
  )
@@ -2167,7 +1949,6 @@
  (param $this (ref null $jsconstructor.JsConstructorClass.E))
  ;;@ jsconstructor/JsConstructorClass.java:117:22
  (block
-  ;; (E.this.fE = 11);
   ;;@ jsconstructor/JsConstructorClass.java:118:4
   (struct.set $jsconstructor.JsConstructorClass.E $f_fE__jsconstructor_JsConstructorClass_E(local.get $this) (i32.const 11))
  )
@@ -2177,19 +1958,15 @@
 (func $$clinit__void@jsconstructor.JsConstructorClass.E
  ;;@ jsconstructor/JsConstructorClass.java:117:22
  (block
-  ;; if (jsconstructor.JsConstructorClass.E.$initialized) return;
   ;;@ jsconstructor/JsConstructorClass.java:117:22
   (if (global.get $f_$initialized__jsconstructor_JsConstructorClass_E)
    (then
-    ;; return;
     ;;@ jsconstructor/JsConstructorClass.java:117:22
     (return )
    )
   )
-  ;; (jsconstructor.JsConstructorClass.E.$initialized = true);
   ;;@ jsconstructor/JsConstructorClass.java:117:22
   (global.set $f_$initialized__jsconstructor_JsConstructorClass_E (i32.const 1))
-  ;; jsconstructor.JsConstructorClass.C.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:117:22
   (call $$clinit__void@jsconstructor.JsConstructorClass.C )
  )
@@ -2199,14 +1976,11 @@
 (func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.E
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jsconstructor.JsConstructorClass.E.$class == null)) (jsconstructor.JsConstructorClass.E.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_5(),jsconstructor.JsConstructorClass.C.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__jsconstructor_JsConstructorClass_E) (ref.null $java.lang.Class))
    (then
-    ;; (jsconstructor.JsConstructorClass.E.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_5(),jsconstructor.JsConstructorClass.C.$getClassMetadata()));
     (global.set $f_$class__jsconstructor_JsConstructorClass_E (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsconstructo...|_5__java_lang_String (ref.func $$getString_|jsconstructo...|_5__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.C) )))
    )
   )
-  ;; return jsconstructor.JsConstructorClass.E.$class;
   (return (global.get $f_$class__jsconstructor_JsConstructorClass_E))
  )
 )
@@ -2219,7 +1993,6 @@
  (local $this (ref null $jsconstructor.JsConstructorClass.E))
  (local.set $this (ref.cast_static $jsconstructor.JsConstructorClass.E (local.get $this.untyped)))
  (block
-  ;; return jsconstructor.JsConstructorClass.E.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.E) ))
  )
 )
@@ -2234,13 +2007,10 @@
  ;;@ jsconstructor/JsConstructorClass.java:134:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.F))
  (block
-  ;; F $instance = new F.<init>(0,0,0,0,0);
   ;;@ jsconstructor/JsConstructorClass.java:134:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.F (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.F.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.F.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0)))
-  ;; $instance.$ctor(x);
   ;;@ jsconstructor/JsConstructorClass.java:134:11
   (call $$ctor__int__void_$p_jsconstructor_JsConstructorClass_F@jsconstructor.JsConstructorClass.F (ref.as_non_null (local.get $$instance))(local.get $x))
-  ;; return $instance;
   ;;@ jsconstructor/JsConstructorClass.java:134:11
   (return (local.get $$instance))
  )
@@ -2252,16 +2022,12 @@
  (param $x i32)
  ;;@ jsconstructor/JsConstructorClass.java:134:11
  (block
-  ;; jsconstructor.JsConstructorClass.F.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:134:20
   (call $$clinit__void@jsconstructor.JsConstructorClass.F )
-  ;; C.this.$ctor((x + 2));
   ;;@ jsconstructor/JsConstructorClass.java:135:6
   (call $$ctor__int__void_$p_jsconstructor_JsConstructorClass_C@jsconstructor.JsConstructorClass.C (ref.as_non_null (local.get $this))(i32.add (local.get $x) (i32.const 2)))
-  ;; F.this.$init();
   ;;@ jsconstructor/JsConstructorClass.java:134:20
   (call $$init__void_$p_jsconstructor_JsConstructorClass_F@jsconstructor.JsConstructorClass.F (ref.as_non_null (local.get $this)))
-  ;; (F.this.fF = (x + 3));
   ;;@ jsconstructor/JsConstructorClass.java:136:6
   (struct.set $jsconstructor.JsConstructorClass.F $f_fF__jsconstructor_JsConstructorClass_F(local.get $this) (i32.add (local.get $x) (i32.const 3)))
  )
@@ -2272,7 +2038,6 @@
  (param $this (ref null $jsconstructor.JsConstructorClass.F))
  ;;@ jsconstructor/JsConstructorClass.java:130:22
  (block
-  ;; (F.this.fF = 13);
   ;;@ jsconstructor/JsConstructorClass.java:131:4
   (struct.set $jsconstructor.JsConstructorClass.F $f_fF__jsconstructor_JsConstructorClass_F(local.get $this) (i32.const 13))
  )
@@ -2282,19 +2047,15 @@
 (func $$clinit__void@jsconstructor.JsConstructorClass.F
  ;;@ jsconstructor/JsConstructorClass.java:130:22
  (block
-  ;; if (jsconstructor.JsConstructorClass.F.$initialized) return;
   ;;@ jsconstructor/JsConstructorClass.java:130:22
   (if (global.get $f_$initialized__jsconstructor_JsConstructorClass_F)
    (then
-    ;; return;
     ;;@ jsconstructor/JsConstructorClass.java:130:22
     (return )
    )
   )
-  ;; (jsconstructor.JsConstructorClass.F.$initialized = true);
   ;;@ jsconstructor/JsConstructorClass.java:130:22
   (global.set $f_$initialized__jsconstructor_JsConstructorClass_F (i32.const 1))
-  ;; jsconstructor.JsConstructorClass.C.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:130:22
   (call $$clinit__void@jsconstructor.JsConstructorClass.C )
  )
@@ -2304,14 +2065,11 @@
 (func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.F
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jsconstructor.JsConstructorClass.F.$class == null)) (jsconstructor.JsConstructorClass.F.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_6(),jsconstructor.JsConstructorClass.C.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__jsconstructor_JsConstructorClass_F) (ref.null $java.lang.Class))
    (then
-    ;; (jsconstructor.JsConstructorClass.F.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsconstructo...|_6(),jsconstructor.JsConstructorClass.C.$getClassMetadata()));
     (global.set $f_$class__jsconstructor_JsConstructorClass_F (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsconstructo...|_6__java_lang_String (ref.func $$getString_|jsconstructo...|_6__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.C) )))
    )
   )
-  ;; return jsconstructor.JsConstructorClass.F.$class;
   (return (global.get $f_$class__jsconstructor_JsConstructorClass_F))
  )
 )
@@ -2324,7 +2082,6 @@
  (local $this (ref null $jsconstructor.JsConstructorClass.F))
  (local.set $this (ref.cast_static $jsconstructor.JsConstructorClass.F (local.get $this.untyped)))
  (block
-  ;; return jsconstructor.JsConstructorClass.F.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsconstructor.JsConstructorClass.F) ))
  )
 )

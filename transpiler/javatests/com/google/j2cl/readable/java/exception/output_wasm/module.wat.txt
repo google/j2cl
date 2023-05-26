@@ -176,16 +176,12 @@
  ;;@ exception/MyException.java:19:2
  (local $$instance (ref null $exception.MyException))
  (block
-  ;; MyException $instance = new MyException.<init>(0,null,null,null,null,false,false,null);
   ;;@ exception/MyException.java:19:2
   (local.set $$instance (struct.new $exception.MyException (ref.as_non_null (global.get $exception.MyException.vtable)) (ref.as_non_null (global.get $exception.MyException.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object)))
-  ;; $instance.$ctor();
   ;;@ exception/MyException.java:19:2
   (call $$ctor__void_$p_exception_MyException@exception.MyException (ref.as_non_null (local.get $$instance)))
-  ;; $instance.privateInitError(javaemul.internal.Exceptions.createJsError($instance));
   ;;@ exception/MyException.java:19:2
   (call_ref $function.m_privateInitError__java_lang_Object__void_$pp_java_lang (ref.as_non_null (local.get $$instance))(call $m_createJsError__java_lang_Throwable__javaemul_internal_Exceptions_JsErrorWrapper@javaemul.internal.Exceptions (local.get $$instance))(struct.get $java.lang.Throwable.vtable $m_privateInitError__java_lang_Object__void_$pp_java_lang (struct.get $java.lang.Throwable $vtable(local.get $$instance))))
-  ;; return $instance;
   ;;@ exception/MyException.java:19:2
   (return (local.get $$instance))
  )
@@ -196,10 +192,8 @@
  (param $this (ref null $exception.MyException))
  ;;@ exception/MyException.java:19:2
  (block
-  ;; exception.MyException.$clinit();
   ;;@ exception/MyException.java:19:16
   (call $$clinit__void@exception.MyException )
-  ;; Exception.this.$ctor();
   ;;@ exception/MyException.java:19:16
   (call $$ctor__void_$p_java_lang_Exception@java.lang.Exception (ref.as_non_null (local.get $this)))
  )
@@ -212,16 +206,12 @@
  ;;@ exception/MyException.java:21:2
  (local $$instance (ref null $exception.MyException))
  (block
-  ;; MyException $instance = new MyException.<init>(0,null,null,null,null,false,false,null);
   ;;@ exception/MyException.java:21:2
   (local.set $$instance (struct.new $exception.MyException (ref.as_non_null (global.get $exception.MyException.vtable)) (ref.as_non_null (global.get $exception.MyException.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object)))
-  ;; $instance.$ctor(cause);
   ;;@ exception/MyException.java:21:2
   (call $$ctor__java_lang_Throwable__void_$p_exception_MyException@exception.MyException (ref.as_non_null (local.get $$instance))(local.get $cause))
-  ;; $instance.privateInitError(javaemul.internal.Exceptions.createJsError($instance));
   ;;@ exception/MyException.java:21:2
   (call_ref $function.m_privateInitError__java_lang_Object__void_$pp_java_lang (ref.as_non_null (local.get $$instance))(call $m_createJsError__java_lang_Throwable__javaemul_internal_Exceptions_JsErrorWrapper@javaemul.internal.Exceptions (local.get $$instance))(struct.get $java.lang.Throwable.vtable $m_privateInitError__java_lang_Object__void_$pp_java_lang (struct.get $java.lang.Throwable $vtable(local.get $$instance))))
-  ;; return $instance;
   ;;@ exception/MyException.java:21:2
   (return (local.get $$instance))
  )
@@ -233,10 +223,8 @@
  (param $cause (ref null $java.lang.Throwable))
  ;;@ exception/MyException.java:21:2
  (block
-  ;; exception.MyException.$clinit();
   ;;@ exception/MyException.java:21:31
   (call $$clinit__void@exception.MyException )
-  ;; Exception.this.$ctor(cause);
   ;;@ exception/MyException.java:22:4
   (call $$ctor__java_lang_Throwable__void_$p_java_lang_Exception@java.lang.Exception (ref.as_non_null (local.get $this))(local.get $cause))
  )
@@ -246,19 +234,15 @@
 (func $$clinit__void@exception.MyException
  ;;@ exception/MyException.java:18:12
  (block
-  ;; if (exception.MyException.$initialized) return;
   ;;@ exception/MyException.java:18:12
   (if (global.get $f_$initialized__exception_MyException)
    (then
-    ;; return;
     ;;@ exception/MyException.java:18:12
     (return )
    )
   )
-  ;; (exception.MyException.$initialized = true);
   ;;@ exception/MyException.java:18:12
   (global.set $f_$initialized__exception_MyException (i32.const 1))
-  ;; java.lang.Exception.$clinit();
   ;;@ exception/MyException.java:18:12
   (call $$clinit__void@java.lang.Exception )
  )
@@ -268,14 +252,11 @@
 (func $$getClassMetadata__java_lang_Class@exception.MyException
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((exception.MyException.$class == null)) (exception.MyException.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|exception.My...|(),java.lang.Exception.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__exception_MyException) (ref.null $java.lang.Class))
    (then
-    ;; (exception.MyException.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|exception.My...|(),java.lang.Exception.$getClassMetadata()));
     (global.set $f_$class__exception_MyException (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|exception.My...|__java_lang_String (ref.func $$getString_|exception.My...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Exception) )))
    )
   )
-  ;; return exception.MyException.$class;
   (return (global.get $f_$class__exception_MyException))
  )
 )
@@ -288,7 +269,6 @@
  (local $this (ref null $exception.MyException))
  (local.set $this (ref.cast_static $exception.MyException (local.get $this.untyped)))
  (block
-  ;; return exception.MyException.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@exception.MyException) ))
  )
 )
@@ -302,16 +282,12 @@
  ;;@ exception/MyJsException.java:23:9
  (local $$instance (ref null $exception.MyJsException))
  (block
-  ;; MyJsException $instance = new MyJsException.<init>(0,null,null,null,null,false,false,null);
   ;;@ exception/MyJsException.java:23:9
   (local.set $$instance (struct.new $exception.MyJsException (ref.as_non_null (global.get $exception.MyJsException.vtable)) (ref.as_non_null (global.get $exception.MyJsException.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object)))
-  ;; $instance.$ctor();
   ;;@ exception/MyJsException.java:23:9
   (call $$ctor__void_$p_exception_MyJsException@exception.MyJsException (ref.as_non_null (local.get $$instance)))
-  ;; $instance.privateInitError(javaemul.internal.Exceptions.createJsError($instance));
   ;;@ exception/MyJsException.java:23:9
   (call_ref $function.m_privateInitError__java_lang_Object__void_$pp_java_lang (ref.as_non_null (local.get $$instance))(call $m_createJsError__java_lang_Throwable__javaemul_internal_Exceptions_JsErrorWrapper@javaemul.internal.Exceptions (local.get $$instance))(struct.get $java.lang.Throwable.vtable $m_privateInitError__java_lang_Object__void_$pp_java_lang (struct.get $java.lang.Throwable $vtable(local.get $$instance))))
-  ;; return $instance;
   ;;@ exception/MyJsException.java:23:9
   (return (local.get $$instance))
  )
@@ -322,10 +298,8 @@
  (param $this (ref null $exception.MyJsException))
  ;;@ exception/MyJsException.java:23:9
  (block
-  ;; exception.MyJsException.$clinit();
   ;;@ exception/MyJsException.java:23:25
   (call $$clinit__void@exception.MyJsException )
-  ;; Exception.this.$ctor();
   ;;@ exception/MyJsException.java:23:25
   (call $$ctor__void_$p_java_lang_Exception@java.lang.Exception (ref.as_non_null (local.get $this)))
  )
@@ -338,16 +312,12 @@
  ;;@ exception/MyJsException.java:26:9
  (local $$instance (ref null $exception.MyJsException))
  (block
-  ;; MyJsException $instance = new MyJsException.<init>(0,null,null,null,null,false,false,null);
   ;;@ exception/MyJsException.java:26:9
   (local.set $$instance (struct.new $exception.MyJsException (ref.as_non_null (global.get $exception.MyJsException.vtable)) (ref.as_non_null (global.get $exception.MyJsException.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object)))
-  ;; $instance.$ctor(cause);
   ;;@ exception/MyJsException.java:26:9
   (call $$ctor__java_lang_Throwable__void_$p_exception_MyJsException@exception.MyJsException (ref.as_non_null (local.get $$instance))(local.get $cause))
-  ;; $instance.privateInitError(javaemul.internal.Exceptions.createJsError($instance));
   ;;@ exception/MyJsException.java:26:9
   (call_ref $function.m_privateInitError__java_lang_Object__void_$pp_java_lang (ref.as_non_null (local.get $$instance))(call $m_createJsError__java_lang_Throwable__javaemul_internal_Exceptions_JsErrorWrapper@javaemul.internal.Exceptions (local.get $$instance))(struct.get $java.lang.Throwable.vtable $m_privateInitError__java_lang_Object__void_$pp_java_lang (struct.get $java.lang.Throwable $vtable(local.get $$instance))))
-  ;; return $instance;
   ;;@ exception/MyJsException.java:26:9
   (return (local.get $$instance))
  )
@@ -359,10 +329,8 @@
  (param $cause (ref null $java.lang.Throwable))
  ;;@ exception/MyJsException.java:26:9
  (block
-  ;; exception.MyJsException.$clinit();
   ;;@ exception/MyJsException.java:26:40
   (call $$clinit__void@exception.MyJsException )
-  ;; MyJsException.this.$ctor();
   ;;@ exception/MyJsException.java:27:4
   (call $$ctor__void_$p_exception_MyJsException@exception.MyJsException (ref.as_non_null (local.get $this)))
  )
@@ -372,19 +340,15 @@
 (func $$clinit__void@exception.MyJsException
  ;;@ exception/MyJsException.java:22:12
  (block
-  ;; if (exception.MyJsException.$initialized) return;
   ;;@ exception/MyJsException.java:22:12
   (if (global.get $f_$initialized__exception_MyJsException)
    (then
-    ;; return;
     ;;@ exception/MyJsException.java:22:12
     (return )
    )
   )
-  ;; (exception.MyJsException.$initialized = true);
   ;;@ exception/MyJsException.java:22:12
   (global.set $f_$initialized__exception_MyJsException (i32.const 1))
-  ;; java.lang.Exception.$clinit();
   ;;@ exception/MyJsException.java:22:12
   (call $$clinit__void@java.lang.Exception )
  )
@@ -394,14 +358,11 @@
 (func $$getClassMetadata__java_lang_Class@exception.MyJsException
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((exception.MyJsException.$class == null)) (exception.MyJsException.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|exception.My...|_1(),java.lang.Exception.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__exception_MyJsException) (ref.null $java.lang.Class))
    (then
-    ;; (exception.MyJsException.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|exception.My...|_1(),java.lang.Exception.$getClassMetadata()));
     (global.set $f_$class__exception_MyJsException (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|exception.My...|_1__java_lang_String (ref.func $$getString_|exception.My...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Exception) )))
    )
   )
-  ;; return exception.MyJsException.$class;
   (return (global.get $f_$class__exception_MyJsException))
  )
 )
@@ -414,7 +375,6 @@
  (local $this (ref null $exception.MyJsException))
  (local.set $this (ref.cast_static $exception.MyJsException (local.get $this.untyped)))
  (block
-  ;; return exception.MyJsException.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@exception.MyJsException) ))
  )
 )

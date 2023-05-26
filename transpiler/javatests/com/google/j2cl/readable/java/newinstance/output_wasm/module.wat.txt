@@ -57,13 +57,10 @@
  ;;@ newinstance/NewInstanceExpr.java:18:13
  (local $$instance (ref null $newinstance.NewInstanceExpr))
  (block
-  ;; NewInstanceExpr $instance = new NewInstanceExpr.<init>(0);
   ;;@ newinstance/NewInstanceExpr.java:18:13
   (local.set $$instance (struct.new $newinstance.NewInstanceExpr (ref.as_non_null (global.get $newinstance.NewInstanceExpr.vtable)) (ref.as_non_null (global.get $newinstance.NewInstanceExpr.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ newinstance/NewInstanceExpr.java:18:13
   (call $$ctor__void_$p_newinstance_NewInstanceExpr@newinstance.NewInstanceExpr (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ newinstance/NewInstanceExpr.java:18:13
   (return (local.get $$instance))
  )
@@ -74,10 +71,8 @@
  (param $this (ref null $newinstance.NewInstanceExpr))
  ;;@ newinstance/NewInstanceExpr.java:18:13
  (block
-  ;; newinstance.NewInstanceExpr.$clinit();
   ;;@ newinstance/NewInstanceExpr.java:18:13
   (call $$clinit__void@newinstance.NewInstanceExpr )
-  ;; Object.this.$ctor();
   ;;@ newinstance/NewInstanceExpr.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -89,10 +84,8 @@
  ;;@ newinstance/NewInstanceExpr.java:19:21
  (local $a (ref null $newinstance.NewInstanceExpr))
  (block
-  ;; newinstance.NewInstanceExpr.$clinit();
   ;;@ newinstance/NewInstanceExpr.java:19:41
   (call $$clinit__void@newinstance.NewInstanceExpr )
-  ;; NewInstanceExpr a = newinstance.NewInstanceExpr.$create();
   ;;@ newinstance/NewInstanceExpr.java:20:4
   (local.set $a (call $$create__@newinstance.NewInstanceExpr ))
  )
@@ -102,19 +95,15 @@
 (func $$clinit__void@newinstance.NewInstanceExpr
  ;;@ newinstance/NewInstanceExpr.java:18:13
  (block
-  ;; if (newinstance.NewInstanceExpr.$initialized) return;
   ;;@ newinstance/NewInstanceExpr.java:18:13
   (if (global.get $f_$initialized__newinstance_NewInstanceExpr)
    (then
-    ;; return;
     ;;@ newinstance/NewInstanceExpr.java:18:13
     (return )
    )
   )
-  ;; (newinstance.NewInstanceExpr.$initialized = true);
   ;;@ newinstance/NewInstanceExpr.java:18:13
   (global.set $f_$initialized__newinstance_NewInstanceExpr (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ newinstance/NewInstanceExpr.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -124,14 +113,11 @@
 (func $$getClassMetadata__java_lang_Class@newinstance.NewInstanceExpr
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((newinstance.NewInstanceExpr.$class == null)) (newinstance.NewInstanceExpr.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|newinstance....|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__newinstance_NewInstanceExpr) (ref.null $java.lang.Class))
    (then
-    ;; (newinstance.NewInstanceExpr.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|newinstance....|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__newinstance_NewInstanceExpr (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|newinstance....|__java_lang_String (ref.func $$getString_|newinstance....|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return newinstance.NewInstanceExpr.$class;
   (return (global.get $f_$class__newinstance_NewInstanceExpr))
  )
 )
@@ -144,7 +130,6 @@
  (local $this (ref null $newinstance.NewInstanceExpr))
  (local.set $this (ref.cast_static $newinstance.NewInstanceExpr (local.get $this.untyped)))
  (block
-  ;; return newinstance.NewInstanceExpr.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@newinstance.NewInstanceExpr) ))
  )
 )

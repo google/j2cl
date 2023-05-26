@@ -59,13 +59,10 @@
  ;;@ classliteral/ClassLiteral.java:18:13
  (local $$instance (ref null $classliteral.ClassLiteral))
  (block
-  ;; ClassLiteral $instance = new ClassLiteral.<init>(0);
   ;;@ classliteral/ClassLiteral.java:18:13
   (local.set $$instance (struct.new $classliteral.ClassLiteral (ref.as_non_null (global.get $classliteral.ClassLiteral.vtable)) (ref.as_non_null (global.get $classliteral.ClassLiteral.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ classliteral/ClassLiteral.java:18:13
   (call $$ctor__void_$p_classliteral_ClassLiteral@classliteral.ClassLiteral (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ classliteral/ClassLiteral.java:18:13
   (return (local.get $$instance))
  )
@@ -76,10 +73,8 @@
  (param $this (ref null $classliteral.ClassLiteral))
  ;;@ classliteral/ClassLiteral.java:18:13
  (block
-  ;; classliteral.ClassLiteral.$clinit();
   ;;@ classliteral/ClassLiteral.java:18:13
   (call $$clinit__void@classliteral.ClassLiteral )
-  ;; Object.this.$ctor();
   ;;@ classliteral/ClassLiteral.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -128,262 +123,209 @@
  (local $this (ref null $classliteral.ClassLiteral))
  (local.set $this (ref.cast_static $classliteral.ClassLiteral (local.get $this.untyped)))
  (block
-  ;; Object o;
   ;;@ classliteral/ClassLiteral.java:21:4
   
-  ;; (o = java.lang.Void.$getClassMetadataForPrimitive());
   ;;@ classliteral/ClassLiteral.java:23:4
   (local.set $o (call $function.no.side.effects.$getClassMetadataForPrimitive__java_lang_Class (ref.func $$getClassMetadataForPrimitive__java_lang_Class@java.lang.Void) ))
-  ;; (o = java.lang.Boolean.$getClassMetadataForPrimitive());
   ;;@ classliteral/ClassLiteral.java:25:4
   (local.set $o (call $function.no.side.effects.$getClassMetadataForPrimitive__java_lang_Class (ref.func $$getClassMetadataForPrimitive__java_lang_Class@java.lang.Boolean) ))
-  ;; (o = (Class<T> $qualifier = java.lang.Boolean.$getClassMetadataForPrimitive(),$qualifier.getArrayType(1)));
   ;;@ classliteral/ClassLiteral.java:26:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier (call $function.no.side.effects.$getClassMetadataForPrimitive__java_lang_Class (ref.func $$getClassMetadataForPrimitive__java_lang_Class@java.lang.Boolean) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier))(i32.const 1)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier))))
   ))
-  ;; (o = (Class<T> $qualifier = java.lang.Boolean.$getClassMetadataForPrimitive(),$qualifier.getArrayType(2)));
   ;;@ classliteral/ClassLiteral.java:27:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_1 (call $function.no.side.effects.$getClassMetadataForPrimitive__java_lang_Class (ref.func $$getClassMetadataForPrimitive__java_lang_Class@java.lang.Boolean) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier_1))(i32.const 2)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier_1))))
   ))
-  ;; (o = java.lang.Boolean.$getClassMetadata());
   ;;@ classliteral/ClassLiteral.java:28:4
   (local.set $o (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Boolean) ))
-  ;; (o = (Class<T> $qualifier = java.lang.Boolean.$getClassMetadata(),$qualifier.getArrayType(1)));
   ;;@ classliteral/ClassLiteral.java:29:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_2 (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Boolean) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier_2))(i32.const 1)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier_2))))
   ))
-  ;; (o = (Class<T> $qualifier = java.lang.Boolean.$getClassMetadata(),$qualifier.getArrayType(2)));
   ;;@ classliteral/ClassLiteral.java:30:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_3 (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Boolean) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier_3))(i32.const 2)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier_3))))
   ))
-  ;; (o = java.lang.Character.$getClassMetadataForPrimitive());
   ;;@ classliteral/ClassLiteral.java:32:4
   (local.set $o (call $function.no.side.effects.$getClassMetadataForPrimitive__java_lang_Class (ref.func $$getClassMetadataForPrimitive__java_lang_Class@java.lang.Character) ))
-  ;; (o = (Class<T> $qualifier = java.lang.Character.$getClassMetadataForPrimitive(),$qualifier.getArrayType(1)));
   ;;@ classliteral/ClassLiteral.java:33:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_4 (call $function.no.side.effects.$getClassMetadataForPrimitive__java_lang_Class (ref.func $$getClassMetadataForPrimitive__java_lang_Class@java.lang.Character) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier_4))(i32.const 1)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier_4))))
   ))
-  ;; (o = (Class<T> $qualifier = java.lang.Character.$getClassMetadataForPrimitive(),$qualifier.getArrayType(2)));
   ;;@ classliteral/ClassLiteral.java:34:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_5 (call $function.no.side.effects.$getClassMetadataForPrimitive__java_lang_Class (ref.func $$getClassMetadataForPrimitive__java_lang_Class@java.lang.Character) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier_5))(i32.const 2)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier_5))))
   ))
-  ;; (o = java.lang.Character.$getClassMetadata());
   ;;@ classliteral/ClassLiteral.java:35:4
   (local.set $o (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Character) ))
-  ;; (o = (Class<T> $qualifier = java.lang.Character.$getClassMetadata(),$qualifier.getArrayType(1)));
   ;;@ classliteral/ClassLiteral.java:36:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_6 (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Character) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier_6))(i32.const 1)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier_6))))
   ))
-  ;; (o = (Class<T> $qualifier = java.lang.Character.$getClassMetadata(),$qualifier.getArrayType(2)));
   ;;@ classliteral/ClassLiteral.java:37:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_7 (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Character) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier_7))(i32.const 2)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier_7))))
   ))
-  ;; (o = java.lang.Byte.$getClassMetadataForPrimitive());
   ;;@ classliteral/ClassLiteral.java:39:4
   (local.set $o (call $function.no.side.effects.$getClassMetadataForPrimitive__java_lang_Class (ref.func $$getClassMetadataForPrimitive__java_lang_Class@java.lang.Byte) ))
-  ;; (o = (Class<T> $qualifier = java.lang.Byte.$getClassMetadataForPrimitive(),$qualifier.getArrayType(1)));
   ;;@ classliteral/ClassLiteral.java:40:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_8 (call $function.no.side.effects.$getClassMetadataForPrimitive__java_lang_Class (ref.func $$getClassMetadataForPrimitive__java_lang_Class@java.lang.Byte) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier_8))(i32.const 1)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier_8))))
   ))
-  ;; (o = (Class<T> $qualifier = java.lang.Byte.$getClassMetadataForPrimitive(),$qualifier.getArrayType(2)));
   ;;@ classliteral/ClassLiteral.java:41:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_9 (call $function.no.side.effects.$getClassMetadataForPrimitive__java_lang_Class (ref.func $$getClassMetadataForPrimitive__java_lang_Class@java.lang.Byte) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier_9))(i32.const 2)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier_9))))
   ))
-  ;; (o = java.lang.Byte.$getClassMetadata());
   ;;@ classliteral/ClassLiteral.java:42:4
   (local.set $o (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Byte) ))
-  ;; (o = (Class<T> $qualifier = java.lang.Byte.$getClassMetadata(),$qualifier.getArrayType(1)));
   ;;@ classliteral/ClassLiteral.java:43:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_10 (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Byte) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier_10))(i32.const 1)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier_10))))
   ))
-  ;; (o = (Class<T> $qualifier = java.lang.Byte.$getClassMetadata(),$qualifier.getArrayType(2)));
   ;;@ classliteral/ClassLiteral.java:44:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_11 (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Byte) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier_11))(i32.const 2)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier_11))))
   ))
-  ;; (o = java.lang.Short.$getClassMetadataForPrimitive());
   ;;@ classliteral/ClassLiteral.java:46:4
   (local.set $o (call $function.no.side.effects.$getClassMetadataForPrimitive__java_lang_Class (ref.func $$getClassMetadataForPrimitive__java_lang_Class@java.lang.Short) ))
-  ;; (o = (Class<T> $qualifier = java.lang.Short.$getClassMetadataForPrimitive(),$qualifier.getArrayType(1)));
   ;;@ classliteral/ClassLiteral.java:47:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_12 (call $function.no.side.effects.$getClassMetadataForPrimitive__java_lang_Class (ref.func $$getClassMetadataForPrimitive__java_lang_Class@java.lang.Short) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier_12))(i32.const 1)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier_12))))
   ))
-  ;; (o = (Class<T> $qualifier = java.lang.Short.$getClassMetadataForPrimitive(),$qualifier.getArrayType(2)));
   ;;@ classliteral/ClassLiteral.java:48:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_13 (call $function.no.side.effects.$getClassMetadataForPrimitive__java_lang_Class (ref.func $$getClassMetadataForPrimitive__java_lang_Class@java.lang.Short) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier_13))(i32.const 2)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier_13))))
   ))
-  ;; (o = java.lang.Short.$getClassMetadata());
   ;;@ classliteral/ClassLiteral.java:49:4
   (local.set $o (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Short) ))
-  ;; (o = (Class<T> $qualifier = java.lang.Short.$getClassMetadata(),$qualifier.getArrayType(1)));
   ;;@ classliteral/ClassLiteral.java:50:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_14 (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Short) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier_14))(i32.const 1)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier_14))))
   ))
-  ;; (o = (Class<T> $qualifier = java.lang.Short.$getClassMetadata(),$qualifier.getArrayType(2)));
   ;;@ classliteral/ClassLiteral.java:51:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_15 (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Short) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier_15))(i32.const 2)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier_15))))
   ))
-  ;; (o = java.lang.Integer.$getClassMetadataForPrimitive());
   ;;@ classliteral/ClassLiteral.java:53:4
   (local.set $o (call $function.no.side.effects.$getClassMetadataForPrimitive__java_lang_Class (ref.func $$getClassMetadataForPrimitive__java_lang_Class@java.lang.Integer) ))
-  ;; (o = (Class<T> $qualifier = java.lang.Integer.$getClassMetadataForPrimitive(),$qualifier.getArrayType(1)));
   ;;@ classliteral/ClassLiteral.java:54:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_16 (call $function.no.side.effects.$getClassMetadataForPrimitive__java_lang_Class (ref.func $$getClassMetadataForPrimitive__java_lang_Class@java.lang.Integer) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier_16))(i32.const 1)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier_16))))
   ))
-  ;; (o = (Class<T> $qualifier = java.lang.Integer.$getClassMetadataForPrimitive(),$qualifier.getArrayType(2)));
   ;;@ classliteral/ClassLiteral.java:55:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_17 (call $function.no.side.effects.$getClassMetadataForPrimitive__java_lang_Class (ref.func $$getClassMetadataForPrimitive__java_lang_Class@java.lang.Integer) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier_17))(i32.const 2)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier_17))))
   ))
-  ;; (o = java.lang.Integer.$getClassMetadata());
   ;;@ classliteral/ClassLiteral.java:56:4
   (local.set $o (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Integer) ))
-  ;; (o = (Class<T> $qualifier = java.lang.Integer.$getClassMetadata(),$qualifier.getArrayType(1)));
   ;;@ classliteral/ClassLiteral.java:57:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_18 (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Integer) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier_18))(i32.const 1)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier_18))))
   ))
-  ;; (o = (Class<T> $qualifier = java.lang.Integer.$getClassMetadata(),$qualifier.getArrayType(2)));
   ;;@ classliteral/ClassLiteral.java:58:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_19 (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Integer) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier_19))(i32.const 2)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier_19))))
   ))
-  ;; (o = java.lang.Long.$getClassMetadataForPrimitive());
   ;;@ classliteral/ClassLiteral.java:60:4
   (local.set $o (call $function.no.side.effects.$getClassMetadataForPrimitive__java_lang_Class (ref.func $$getClassMetadataForPrimitive__java_lang_Class@java.lang.Long) ))
-  ;; (o = (Class<T> $qualifier = java.lang.Long.$getClassMetadataForPrimitive(),$qualifier.getArrayType(1)));
   ;;@ classliteral/ClassLiteral.java:61:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_20 (call $function.no.side.effects.$getClassMetadataForPrimitive__java_lang_Class (ref.func $$getClassMetadataForPrimitive__java_lang_Class@java.lang.Long) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier_20))(i32.const 1)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier_20))))
   ))
-  ;; (o = (Class<T> $qualifier = java.lang.Long.$getClassMetadataForPrimitive(),$qualifier.getArrayType(2)));
   ;;@ classliteral/ClassLiteral.java:62:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_21 (call $function.no.side.effects.$getClassMetadataForPrimitive__java_lang_Class (ref.func $$getClassMetadataForPrimitive__java_lang_Class@java.lang.Long) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier_21))(i32.const 2)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier_21))))
   ))
-  ;; (o = java.lang.Long.$getClassMetadata());
   ;;@ classliteral/ClassLiteral.java:63:4
   (local.set $o (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Long) ))
-  ;; (o = (Class<T> $qualifier = java.lang.Long.$getClassMetadata(),$qualifier.getArrayType(1)));
   ;;@ classliteral/ClassLiteral.java:64:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_22 (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Long) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier_22))(i32.const 1)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier_22))))
   ))
-  ;; (o = (Class<T> $qualifier = java.lang.Long.$getClassMetadata(),$qualifier.getArrayType(2)));
   ;;@ classliteral/ClassLiteral.java:65:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_23 (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Long) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier_23))(i32.const 2)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier_23))))
   ))
-  ;; (o = java.lang.Float.$getClassMetadataForPrimitive());
   ;;@ classliteral/ClassLiteral.java:67:4
   (local.set $o (call $function.no.side.effects.$getClassMetadataForPrimitive__java_lang_Class (ref.func $$getClassMetadataForPrimitive__java_lang_Class@java.lang.Float) ))
-  ;; (o = (Class<T> $qualifier = java.lang.Float.$getClassMetadataForPrimitive(),$qualifier.getArrayType(1)));
   ;;@ classliteral/ClassLiteral.java:68:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_24 (call $function.no.side.effects.$getClassMetadataForPrimitive__java_lang_Class (ref.func $$getClassMetadataForPrimitive__java_lang_Class@java.lang.Float) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier_24))(i32.const 1)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier_24))))
   ))
-  ;; (o = (Class<T> $qualifier = java.lang.Float.$getClassMetadataForPrimitive(),$qualifier.getArrayType(2)));
   ;;@ classliteral/ClassLiteral.java:69:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_25 (call $function.no.side.effects.$getClassMetadataForPrimitive__java_lang_Class (ref.func $$getClassMetadataForPrimitive__java_lang_Class@java.lang.Float) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier_25))(i32.const 2)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier_25))))
   ))
-  ;; (o = java.lang.Float.$getClassMetadata());
   ;;@ classliteral/ClassLiteral.java:70:4
   (local.set $o (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Float) ))
-  ;; (o = (Class<T> $qualifier = java.lang.Float.$getClassMetadata(),$qualifier.getArrayType(1)));
   ;;@ classliteral/ClassLiteral.java:71:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_26 (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Float) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier_26))(i32.const 1)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier_26))))
   ))
-  ;; (o = (Class<T> $qualifier = java.lang.Float.$getClassMetadata(),$qualifier.getArrayType(2)));
   ;;@ classliteral/ClassLiteral.java:72:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_27 (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Float) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier_27))(i32.const 2)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier_27))))
   ))
-  ;; (o = java.lang.Double.$getClassMetadataForPrimitive());
   ;;@ classliteral/ClassLiteral.java:74:4
   (local.set $o (call $function.no.side.effects.$getClassMetadataForPrimitive__java_lang_Class (ref.func $$getClassMetadataForPrimitive__java_lang_Class@java.lang.Double) ))
-  ;; (o = (Class<T> $qualifier = java.lang.Double.$getClassMetadataForPrimitive(),$qualifier.getArrayType(1)));
   ;;@ classliteral/ClassLiteral.java:75:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_28 (call $function.no.side.effects.$getClassMetadataForPrimitive__java_lang_Class (ref.func $$getClassMetadataForPrimitive__java_lang_Class@java.lang.Double) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier_28))(i32.const 1)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier_28))))
   ))
-  ;; (o = (Class<T> $qualifier = java.lang.Double.$getClassMetadataForPrimitive(),$qualifier.getArrayType(2)));
   ;;@ classliteral/ClassLiteral.java:76:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_29 (call $function.no.side.effects.$getClassMetadataForPrimitive__java_lang_Class (ref.func $$getClassMetadataForPrimitive__java_lang_Class@java.lang.Double) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier_29))(i32.const 2)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier_29))))
   ))
-  ;; (o = java.lang.Double.$getClassMetadata());
   ;;@ classliteral/ClassLiteral.java:77:4
   (local.set $o (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Double) ))
-  ;; (o = (Class<T> $qualifier = java.lang.Double.$getClassMetadata(),$qualifier.getArrayType(1)));
   ;;@ classliteral/ClassLiteral.java:78:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_30 (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Double) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier_30))(i32.const 1)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier_30))))
   ))
-  ;; (o = (Class<T> $qualifier = java.lang.Double.$getClassMetadata(),$qualifier.getArrayType(2)));
   ;;@ classliteral/ClassLiteral.java:79:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_31 (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Double) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier_31))(i32.const 2)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier_31))))
   ))
-  ;; (o = classliteral.ClassLiteral.$getClassMetadata());
   ;;@ classliteral/ClassLiteral.java:81:4
   (local.set $o (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@classliteral.ClassLiteral) ))
-  ;; (o = (Class<T> $qualifier = classliteral.ClassLiteral.$getClassMetadata(),$qualifier.getArrayType(1)));
   ;;@ classliteral/ClassLiteral.java:82:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_32 (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@classliteral.ClassLiteral) ))
    (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (local.get $$qualifier_32))(i32.const 1)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier_32))))
   ))
-  ;; (o = (Class<T> $qualifier = classliteral.ClassLiteral.$getClassMetadata(),$qualifier.getArrayType(2)));
   ;;@ classliteral/ClassLiteral.java:83:4
   (local.set $o (block (result (ref null $java.lang.Class))
    (local.set $$qualifier_33 (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@classliteral.ClassLiteral) ))
@@ -397,19 +339,15 @@
 (func $$clinit__void@classliteral.ClassLiteral
  ;;@ classliteral/ClassLiteral.java:18:13
  (block
-  ;; if (classliteral.ClassLiteral.$initialized) return;
   ;;@ classliteral/ClassLiteral.java:18:13
   (if (global.get $f_$initialized__classliteral_ClassLiteral)
    (then
-    ;; return;
     ;;@ classliteral/ClassLiteral.java:18:13
     (return )
    )
   )
-  ;; (classliteral.ClassLiteral.$initialized = true);
   ;;@ classliteral/ClassLiteral.java:18:13
   (global.set $f_$initialized__classliteral_ClassLiteral (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ classliteral/ClassLiteral.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -419,14 +357,11 @@
 (func $$getClassMetadata__java_lang_Class@classliteral.ClassLiteral
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((classliteral.ClassLiteral.$class == null)) (classliteral.ClassLiteral.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|classliteral...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__classliteral_ClassLiteral) (ref.null $java.lang.Class))
    (then
-    ;; (classliteral.ClassLiteral.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|classliteral...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__classliteral_ClassLiteral (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|classliteral...|__java_lang_String (ref.func $$getString_|classliteral...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return classliteral.ClassLiteral.$class;
   (return (global.get $f_$class__classliteral_ClassLiteral))
  )
 )
@@ -439,7 +374,6 @@
  (local $this (ref null $classliteral.ClassLiteral))
  (local.set $this (ref.cast_static $classliteral.ClassLiteral (local.get $this.untyped)))
  (block
-  ;; return classliteral.ClassLiteral.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@classliteral.ClassLiteral) ))
  )
 )

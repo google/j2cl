@@ -57,13 +57,10 @@
  ;;@ inferreturn/InferReturn.java:21:13
  (local $$instance (ref null $inferreturn.InferReturn))
  (block
-  ;; InferReturn<T> $instance = new InferReturn.<init>(0);
   ;;@ inferreturn/InferReturn.java:21:13
   (local.set $$instance (struct.new $inferreturn.InferReturn (ref.as_non_null (global.get $inferreturn.InferReturn.vtable)) (ref.as_non_null (global.get $inferreturn.InferReturn.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ inferreturn/InferReturn.java:21:13
   (call $$ctor__void_$p_inferreturn_InferReturn@inferreturn.InferReturn (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ inferreturn/InferReturn.java:21:13
   (return (local.get $$instance))
  )
@@ -74,10 +71,8 @@
  (param $this (ref null $inferreturn.InferReturn))
  ;;@ inferreturn/InferReturn.java:21:13
  (block
-  ;; inferreturn.InferReturn.$clinit();
   ;;@ inferreturn/InferReturn.java:21:13
   (call $$clinit__void@inferreturn.InferReturn )
-  ;; Object.this.$ctor();
   ;;@ inferreturn/InferReturn.java:21:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -89,10 +84,8 @@
  (result (ref null $inferreturn.InferReturn))
  ;;@ inferreturn/InferReturn.java:23:35
  (block
-  ;; inferreturn.InferReturn.$clinit();
   ;;@ inferreturn/InferReturn.java:23:55
   (call $$clinit__void@inferreturn.InferReturn )
-  ;; return inferreturn.InferReturn.$create();
   ;;@ inferreturn/InferReturn.java:24:4
   (return (call $$create__@inferreturn.InferReturn ))
  )
@@ -104,21 +97,17 @@
  (result (ref null $inferreturn.InferReturn))
  ;;@ inferreturn/InferReturn.java:27:49
  (block
-  ;; inferreturn.InferReturn.$clinit();
   ;;@ inferreturn/InferReturn.java:27:86
   (call $$clinit__void@inferreturn.InferReturn )
-  ;; if (!javaemul.internal.Platform.isNull(foo)) {
   ;;@ inferreturn/InferReturn.java:28:4
   (if (i32.eqz (ref.is_null (local.get $foo)))
    (then
     (block
-     ;; return inferreturn.InferReturn.inferGeneric(foo);
      ;;@ inferreturn/InferReturn.java:31:6
      (return (call $m_inferGeneric__java_lang_Object__inferreturn_InferReturn@inferreturn.InferReturn (local.get $foo)))
     )
    )
   )
-  ;; return null;
   ;;@ inferreturn/InferReturn.java:33:4
   (return (ref.null $inferreturn.InferReturn))
  )
@@ -130,19 +119,14 @@
  (local $list (ref null $java.util.ArrayList))
  (local $array (ref null $javaemul.internal.WasmArray.OfObject))
  (block
-  ;; inferreturn.InferReturn.$clinit();
   ;;@ inferreturn/InferReturn.java:36:28
   (call $$clinit__void@inferreturn.InferReturn )
-  ;; ArrayList<Object> list = inferreturn.InferReturn.newArrayList(javaemul.internal.StringPool.$getString_|foo|());
   ;;@ inferreturn/InferReturn.java:37:4
   (local.set $list (call $m_newArrayList__java_lang_Object__java_util_ArrayList@inferreturn.InferReturn (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )))
-  ;; inferreturn.InferReturn.acceptsArrayListOfObject(list);
   ;;@ inferreturn/InferReturn.java:39:4
   (call $m_acceptsArrayListOfObject__java_util_ArrayList__void@inferreturn.InferReturn (local.get $list))
-  ;; Object[] array = inferreturn.InferReturn.newArray(javaemul.internal.StringPool.$getString_|foo|());
   ;;@ inferreturn/InferReturn.java:41:4
   (local.set $array (call $m_newArray__java_lang_Object__arrayOf_java_lang_Object@inferreturn.InferReturn (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )))
-  ;; inferreturn.InferReturn.acceptsArrayOfObject(array);
   ;;@ inferreturn/InferReturn.java:43:4
   (call $m_acceptsArrayOfObject__arrayOf_java_lang_Object__void@inferreturn.InferReturn (local.get $array))
  )
@@ -154,10 +138,8 @@
  (result (ref null $java.util.ArrayList))
  ;;@ inferreturn/InferReturn.java:46:33
  (block
-  ;; inferreturn.InferReturn.$clinit();
   ;;@ inferreturn/InferReturn.java:46:53
   (call $$clinit__void@inferreturn.InferReturn )
-  ;; return java.util.ArrayList.$create();
   ;;@ inferreturn/InferReturn.java:47:4
   (return (call $$create__@java.util.ArrayList ))
  )
@@ -169,10 +151,8 @@
  (result (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ inferreturn/InferReturn.java:50:24
  (block
-  ;; inferreturn.InferReturn.$clinit();
   ;;@ inferreturn/InferReturn.java:50:40
   (call $$clinit__void@inferreturn.InferReturn )
-  ;; return ((V[]) javaemul.internal.WasmArray.OfObject.$create(0));
   ;;@ inferreturn/InferReturn.java:51:4
   (return (ref.cast_static $javaemul.internal.WasmArray.OfObject (call $$create__int@javaemul.internal.WasmArray.OfObject (i32.const 0))))
  )
@@ -183,7 +163,6 @@
  (param $foo (ref null $java.util.ArrayList))
  ;;@ inferreturn/InferReturn.java:54:21
  (block
-  ;; inferreturn.InferReturn.$clinit();
   ;;@ inferreturn/InferReturn.java:54:69
   (call $$clinit__void@inferreturn.InferReturn )
  )
@@ -194,7 +173,6 @@
  (param $foo (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ inferreturn/InferReturn.java:58:21
  (block
-  ;; inferreturn.InferReturn.$clinit();
   ;;@ inferreturn/InferReturn.java:58:56
   (call $$clinit__void@inferreturn.InferReturn )
  )
@@ -204,19 +182,15 @@
 (func $$clinit__void@inferreturn.InferReturn
  ;;@ inferreturn/InferReturn.java:21:13
  (block
-  ;; if (inferreturn.InferReturn.$initialized) return;
   ;;@ inferreturn/InferReturn.java:21:13
   (if (global.get $f_$initialized__inferreturn_InferReturn)
    (then
-    ;; return;
     ;;@ inferreturn/InferReturn.java:21:13
     (return )
    )
   )
-  ;; (inferreturn.InferReturn.$initialized = true);
   ;;@ inferreturn/InferReturn.java:21:13
   (global.set $f_$initialized__inferreturn_InferReturn (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ inferreturn/InferReturn.java:21:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -226,14 +200,11 @@
 (func $$getClassMetadata__java_lang_Class@inferreturn.InferReturn
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((inferreturn.InferReturn.$class == null)) (inferreturn.InferReturn.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|inferreturn....|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__inferreturn_InferReturn) (ref.null $java.lang.Class))
    (then
-    ;; (inferreturn.InferReturn.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|inferreturn....|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__inferreturn_InferReturn (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|inferreturn....|__java_lang_String (ref.func $$getString_|inferreturn....|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return inferreturn.InferReturn.$class;
   (return (global.get $f_$class__inferreturn_InferReturn))
  )
 )
@@ -246,7 +217,6 @@
  (local $this (ref null $inferreturn.InferReturn))
  (local.set $this (ref.cast_static $inferreturn.InferReturn (local.get $this.untyped)))
  (block
-  ;; return inferreturn.InferReturn.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@inferreturn.InferReturn) ))
  )
 )

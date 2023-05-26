@@ -128,13 +128,11 @@
  (local $$qualifier (ref null $java.io.PrintStream))
  (block
   (block
-   ;; PrintStream $qualifier = (java.lang.System.$clinit(),java.lang.System.out);
    ;;@ genericanddefaultmethods/ConcreteClass.java:20:4
    (local.set $$qualifier (block (result (ref null $java.io.PrintStream))
     (call $$clinit__void@java.lang.System )
     (global.get $f_out__java_lang_System)
    ))
-   ;; $qualifier.println(javaemul.internal.StringPool.$getString_|in_Interface...|());
    ;;@ genericanddefaultmethods/ConcreteClass.java:20:4
    (call_ref $function.m_println__java_lang_String__void (ref.as_non_null (local.get $$qualifier))(call $function.no.side.effects.$getString_|in_Interface...|__java_lang_String (ref.func $$getString_|in_Interface...|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.io.PrintStream.vtable $m_println__java_lang_String__void (struct.get $java.io.PrintStream $vtable(local.get $$qualifier))))
   )
@@ -146,16 +144,13 @@
 (func $$clinit__void@genericanddefaultmethods.InterfaceWithDefault
  ;;@ genericanddefaultmethods/ConcreteClass.java:18:10
  (block
-  ;; if (genericanddefaultmethods.InterfaceWithDefault.$initialized) return;
   ;;@ genericanddefaultmethods/ConcreteClass.java:18:10
   (if (global.get $f_$initialized__genericanddefaultmethods_InterfaceWithDefault)
    (then
-    ;; return;
     ;;@ genericanddefaultmethods/ConcreteClass.java:18:10
     (return )
    )
   )
-  ;; (genericanddefaultmethods.InterfaceWithDefault.$initialized = true);
   ;;@ genericanddefaultmethods/ConcreteClass.java:18:10
   (global.set $f_$initialized__genericanddefaultmethods_InterfaceWithDefault (i32.const 1))
  )
@@ -165,14 +160,11 @@
 (func $$getClassMetadata__java_lang_Class@genericanddefaultmethods.InterfaceWithDefault
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((genericanddefaultmethods.InterfaceWithDefault.$class == null)) (genericanddefaultmethods.InterfaceWithDefault.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|genericandde...|()));
   (if (ref.eq (global.get $f_$class__genericanddefaultmethods_InterfaceWithDefault) (ref.null $java.lang.Class))
    (then
-    ;; (genericanddefaultmethods.InterfaceWithDefault.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|genericandde...|()));
     (global.set $f_$class__genericanddefaultmethods_InterfaceWithDefault (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericandde...|__java_lang_String (ref.func $$getString_|genericandde...|__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return genericanddefaultmethods.InterfaceWithDefault.$class;
   (return (global.get $f_$class__genericanddefaultmethods_InterfaceWithDefault))
  )
 )
@@ -185,13 +177,10 @@
  ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
  (local $$instance (ref null $genericanddefaultmethods.GenericClass))
  (block
-  ;; GenericClass<T> $instance = new GenericClass.<init>(0);
   ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
   (local.set $$instance (struct.new $genericanddefaultmethods.GenericClass (ref.as_non_null (global.get $genericanddefaultmethods.GenericClass.vtable)) (ref.as_non_null (global.get $genericanddefaultmethods.GenericClass.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
   (call $$ctor__void_$p_genericanddefaultmethods_GenericClass@genericanddefaultmethods.GenericClass (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
   (return (local.get $$instance))
  )
@@ -202,10 +191,8 @@
  (param $this (ref null $genericanddefaultmethods.GenericClass))
  ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
  (block
-  ;; genericanddefaultmethods.GenericClass.$clinit();
   ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
   (call $$clinit__void@genericanddefaultmethods.GenericClass )
-  ;; Object.this.$ctor();
   ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -222,13 +209,11 @@
  (local.set $this (ref.cast_static $genericanddefaultmethods.GenericClass (local.get $this.untyped)))
  (block
   (block
-   ;; PrintStream $qualifier = (java.lang.System.$clinit(),java.lang.System.out);
    ;;@ genericanddefaultmethods/ConcreteClass.java:26:4
    (local.set $$qualifier (block (result (ref null $java.io.PrintStream))
     (call $$clinit__void@java.lang.System )
     (global.get $f_out__java_lang_System)
    ))
-   ;; $qualifier.println(javaemul.internal.StringPool.$getString_|in_GenericClass|());
    ;;@ genericanddefaultmethods/ConcreteClass.java:26:4
    (call_ref $function.m_println__java_lang_String__void (ref.as_non_null (local.get $$qualifier))(call $function.no.side.effects.$getString_|in_GenericClass|__java_lang_String (ref.func $$getString_|in_GenericClass|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.io.PrintStream.vtable $m_println__java_lang_String__void (struct.get $java.io.PrintStream $vtable(local.get $$qualifier))))
   )
@@ -240,19 +225,15 @@
 (func $$clinit__void@genericanddefaultmethods.GenericClass
  ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
  (block
-  ;; if (genericanddefaultmethods.GenericClass.$initialized) return;
   ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
   (if (global.get $f_$initialized__genericanddefaultmethods_GenericClass)
    (then
-    ;; return;
     ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
     (return )
    )
   )
-  ;; (genericanddefaultmethods.GenericClass.$initialized = true);
   ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
   (global.set $f_$initialized__genericanddefaultmethods_GenericClass (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
   (call $$clinit__void@java.lang.Object )
  )
@@ -262,14 +243,11 @@
 (func $$getClassMetadata__java_lang_Class@genericanddefaultmethods.GenericClass
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((genericanddefaultmethods.GenericClass.$class == null)) (genericanddefaultmethods.GenericClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|genericandde...|_1(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__genericanddefaultmethods_GenericClass) (ref.null $java.lang.Class))
    (then
-    ;; (genericanddefaultmethods.GenericClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|genericandde...|_1(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__genericanddefaultmethods_GenericClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericandde...|_1__java_lang_String (ref.func $$getString_|genericandde...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return genericanddefaultmethods.GenericClass.$class;
   (return (global.get $f_$class__genericanddefaultmethods_GenericClass))
  )
 )
@@ -282,7 +260,6 @@
  (local $this (ref null $genericanddefaultmethods.GenericClass))
  (local.set $this (ref.cast_static $genericanddefaultmethods.GenericClass (local.get $this.untyped)))
  (block
-  ;; return genericanddefaultmethods.GenericClass.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@genericanddefaultmethods.GenericClass) ))
  )
 )
@@ -296,13 +273,10 @@
  ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
  (local $$instance (ref null $genericanddefaultmethods.ConcreteClass))
  (block
-  ;; ConcreteClass $instance = new ConcreteClass.<init>(0);
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
   (local.set $$instance (struct.new $genericanddefaultmethods.ConcreteClass (ref.as_non_null (global.get $genericanddefaultmethods.ConcreteClass.vtable)) (ref.as_non_null (global.get $genericanddefaultmethods.ConcreteClass.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
   (call $$ctor__void_$p_genericanddefaultmethods_ConcreteClass@genericanddefaultmethods.ConcreteClass (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
   (return (local.get $$instance))
  )
@@ -313,10 +287,8 @@
  (param $this (ref null $genericanddefaultmethods.ConcreteClass))
  ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
  (block
-  ;; genericanddefaultmethods.ConcreteClass.$clinit();
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
   (call $$clinit__void@genericanddefaultmethods.ConcreteClass )
-  ;; GenericClass.this.$ctor();
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
   (call $$ctor__void_$p_genericanddefaultmethods_GenericClass@genericanddefaultmethods.GenericClass (ref.as_non_null (local.get $this)))
  )
@@ -331,7 +303,6 @@
  (local $this (ref null $genericanddefaultmethods.ConcreteClass))
  (local.set $this (ref.cast_static $genericanddefaultmethods.ConcreteClass (local.get $this.untyped)))
  (block
-  ;; super.foo(arg0);
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
   (call $m_foo__java_lang_Object__void@genericanddefaultmethods.GenericClass (ref.as_non_null (local.get $this))(local.get $arg0))
  )
@@ -342,22 +313,17 @@
 (func $$clinit__void@genericanddefaultmethods.ConcreteClass
  ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
  (block
-  ;; if (genericanddefaultmethods.ConcreteClass.$initialized) return;
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
   (if (global.get $f_$initialized__genericanddefaultmethods_ConcreteClass)
    (then
-    ;; return;
     ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
     (return )
    )
   )
-  ;; (genericanddefaultmethods.ConcreteClass.$initialized = true);
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
   (global.set $f_$initialized__genericanddefaultmethods_ConcreteClass (i32.const 1))
-  ;; genericanddefaultmethods.GenericClass.$clinit();
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
   (call $$clinit__void@genericanddefaultmethods.GenericClass )
-  ;; genericanddefaultmethods.InterfaceWithDefault.$clinit();
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
   (call $$clinit__void@genericanddefaultmethods.InterfaceWithDefault )
  )
@@ -367,14 +333,11 @@
 (func $$getClassMetadata__java_lang_Class@genericanddefaultmethods.ConcreteClass
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((genericanddefaultmethods.ConcreteClass.$class == null)) (genericanddefaultmethods.ConcreteClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|genericandde...|_2(),genericanddefaultmethods.GenericClass.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__genericanddefaultmethods_ConcreteClass) (ref.null $java.lang.Class))
    (then
-    ;; (genericanddefaultmethods.ConcreteClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|genericandde...|_2(),genericanddefaultmethods.GenericClass.$getClassMetadata()));
     (global.set $f_$class__genericanddefaultmethods_ConcreteClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericandde...|_2__java_lang_String (ref.func $$getString_|genericandde...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@genericanddefaultmethods.GenericClass) )))
    )
   )
-  ;; return genericanddefaultmethods.ConcreteClass.$class;
   (return (global.get $f_$class__genericanddefaultmethods_ConcreteClass))
  )
 )
@@ -387,7 +350,6 @@
  (local $this (ref null $genericanddefaultmethods.ConcreteClass))
  (local.set $this (ref.cast_static $genericanddefaultmethods.ConcreteClass (local.get $this.untyped)))
  (block
-  ;; return genericanddefaultmethods.ConcreteClass.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@genericanddefaultmethods.ConcreteClass) ))
  )
 )

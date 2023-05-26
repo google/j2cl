@@ -59,13 +59,10 @@
  ;;@ dowhilestatement/DoWhileStatement.java:18:13
  (local $$instance (ref null $dowhilestatement.DoWhileStatement))
  (block
-  ;; DoWhileStatement $instance = new DoWhileStatement.<init>(0);
   ;;@ dowhilestatement/DoWhileStatement.java:18:13
   (local.set $$instance (struct.new $dowhilestatement.DoWhileStatement (ref.as_non_null (global.get $dowhilestatement.DoWhileStatement.vtable)) (ref.as_non_null (global.get $dowhilestatement.DoWhileStatement.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ dowhilestatement/DoWhileStatement.java:18:13
   (call $$ctor__void_$p_dowhilestatement_DoWhileStatement@dowhilestatement.DoWhileStatement (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ dowhilestatement/DoWhileStatement.java:18:13
   (return (local.get $$instance))
  )
@@ -76,10 +73,8 @@
  (param $this (ref null $dowhilestatement.DoWhileStatement))
  ;;@ dowhilestatement/DoWhileStatement.java:18:13
  (block
-  ;; dowhilestatement.DoWhileStatement.$clinit();
   ;;@ dowhilestatement/DoWhileStatement.java:18:13
   (call $$clinit__void@dowhilestatement.DoWhileStatement )
-  ;; Object.this.$ctor();
   ;;@ dowhilestatement/DoWhileStatement.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -94,16 +89,13 @@
  (local $this (ref null $dowhilestatement.DoWhileStatement))
  (local.set $this (ref.cast_static $dowhilestatement.DoWhileStatement (local.get $this.untyped)))
  (block
-  ;; int count = 0;
   ;;@ dowhilestatement/DoWhileStatement.java:20:4
   (local.set $count (i32.const 0))
-  ;; LOOP: do {
   ;;@ dowhilestatement/DoWhileStatement.java:21:4
   (block $LOOP.BREAK
    (loop
     (block $LOOP.CONTINUE
      (block
-      ;; (count = (count + 1));
       ;;@ dowhilestatement/DoWhileStatement.java:22:6
       (local.set $count (i32.add (local.get $count) (i32.const 1)))
      )
@@ -120,19 +112,15 @@
 (func $$clinit__void@dowhilestatement.DoWhileStatement
  ;;@ dowhilestatement/DoWhileStatement.java:18:13
  (block
-  ;; if (dowhilestatement.DoWhileStatement.$initialized) return;
   ;;@ dowhilestatement/DoWhileStatement.java:18:13
   (if (global.get $f_$initialized__dowhilestatement_DoWhileStatement)
    (then
-    ;; return;
     ;;@ dowhilestatement/DoWhileStatement.java:18:13
     (return )
    )
   )
-  ;; (dowhilestatement.DoWhileStatement.$initialized = true);
   ;;@ dowhilestatement/DoWhileStatement.java:18:13
   (global.set $f_$initialized__dowhilestatement_DoWhileStatement (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ dowhilestatement/DoWhileStatement.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -142,14 +130,11 @@
 (func $$getClassMetadata__java_lang_Class@dowhilestatement.DoWhileStatement
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((dowhilestatement.DoWhileStatement.$class == null)) (dowhilestatement.DoWhileStatement.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|dowhilestate...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__dowhilestatement_DoWhileStatement) (ref.null $java.lang.Class))
    (then
-    ;; (dowhilestatement.DoWhileStatement.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|dowhilestate...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__dowhilestatement_DoWhileStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|dowhilestate...|__java_lang_String (ref.func $$getString_|dowhilestate...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return dowhilestatement.DoWhileStatement.$class;
   (return (global.get $f_$class__dowhilestatement_DoWhileStatement))
  )
 )
@@ -162,7 +147,6 @@
  (local $this (ref null $dowhilestatement.DoWhileStatement))
  (local.set $this (ref.cast_static $dowhilestatement.DoWhileStatement (local.get $this.untyped)))
  (block
-  ;; return dowhilestatement.DoWhileStatement.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@dowhilestatement.DoWhileStatement) ))
  )
 )

@@ -43,16 +43,13 @@
 (func $$clinit__void@genericinterfaceabstractimpl.MyInterface
  ;;@ genericinterfaceabstractimpl/AbstractImpl.java:18:10
  (block
-  ;; if (genericinterfaceabstractimpl.MyInterface.$initialized) return;
   ;;@ genericinterfaceabstractimpl/AbstractImpl.java:18:10
   (if (global.get $f_$initialized__genericinterfaceabstractimpl_MyInterface)
    (then
-    ;; return;
     ;;@ genericinterfaceabstractimpl/AbstractImpl.java:18:10
     (return )
    )
   )
-  ;; (genericinterfaceabstractimpl.MyInterface.$initialized = true);
   ;;@ genericinterfaceabstractimpl/AbstractImpl.java:18:10
   (global.set $f_$initialized__genericinterfaceabstractimpl_MyInterface (i32.const 1))
  )
@@ -62,14 +59,11 @@
 (func $$getClassMetadata__java_lang_Class@genericinterfaceabstractimpl.MyInterface
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((genericinterfaceabstractimpl.MyInterface.$class == null)) (genericinterfaceabstractimpl.MyInterface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|genericinter...|()));
   (if (ref.eq (global.get $f_$class__genericinterfaceabstractimpl_MyInterface) (ref.null $java.lang.Class))
    (then
-    ;; (genericinterfaceabstractimpl.MyInterface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|genericinter...|()));
     (global.set $f_$class__genericinterfaceabstractimpl_MyInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericinter...|__java_lang_String (ref.func $$getString_|genericinter...|__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return genericinterfaceabstractimpl.MyInterface.$class;
   (return (global.get $f_$class__genericinterfaceabstractimpl_MyInterface))
  )
 )
@@ -81,10 +75,8 @@
  (param $this (ref null $genericinterfaceabstractimpl.AbstractImpl))
  ;;@ genericinterfaceabstractimpl/AbstractImpl.java:22:22
  (block
-  ;; genericinterfaceabstractimpl.AbstractImpl.$clinit();
   ;;@ genericinterfaceabstractimpl/AbstractImpl.java:22:22
   (call $$clinit__void@genericinterfaceabstractimpl.AbstractImpl )
-  ;; Object.this.$ctor();
   ;;@ genericinterfaceabstractimpl/AbstractImpl.java:22:22
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -94,19 +86,15 @@
 (func $$clinit__void@genericinterfaceabstractimpl.AbstractImpl
  ;;@ genericinterfaceabstractimpl/AbstractImpl.java:22:22
  (block
-  ;; if (genericinterfaceabstractimpl.AbstractImpl.$initialized) return;
   ;;@ genericinterfaceabstractimpl/AbstractImpl.java:22:22
   (if (global.get $f_$initialized__genericinterfaceabstractimpl_AbstractImpl)
    (then
-    ;; return;
     ;;@ genericinterfaceabstractimpl/AbstractImpl.java:22:22
     (return )
    )
   )
-  ;; (genericinterfaceabstractimpl.AbstractImpl.$initialized = true);
   ;;@ genericinterfaceabstractimpl/AbstractImpl.java:22:22
   (global.set $f_$initialized__genericinterfaceabstractimpl_AbstractImpl (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ genericinterfaceabstractimpl/AbstractImpl.java:22:22
   (call $$clinit__void@java.lang.Object )
  )
@@ -116,14 +104,11 @@
 (func $$getClassMetadata__java_lang_Class@genericinterfaceabstractimpl.AbstractImpl
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((genericinterfaceabstractimpl.AbstractImpl.$class == null)) (genericinterfaceabstractimpl.AbstractImpl.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|genericinter...|_1(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__genericinterfaceabstractimpl_AbstractImpl) (ref.null $java.lang.Class))
    (then
-    ;; (genericinterfaceabstractimpl.AbstractImpl.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|genericinter...|_1(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__genericinterfaceabstractimpl_AbstractImpl (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericinter...|_1__java_lang_String (ref.func $$getString_|genericinter...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return genericinterfaceabstractimpl.AbstractImpl.$class;
   (return (global.get $f_$class__genericinterfaceabstractimpl_AbstractImpl))
  )
 )

@@ -177,16 +177,13 @@
 (func $$clinit__void@jsbridgebackward.MyJsInterface
  ;;@ jsbridgebackward/InterfaceImpl.java:21:10
  (block
-  ;; if (jsbridgebackward.MyJsInterface.$initialized) return;
   ;;@ jsbridgebackward/InterfaceImpl.java:21:10
   (if (global.get $f_$initialized__jsbridgebackward_MyJsInterface)
    (then
-    ;; return;
     ;;@ jsbridgebackward/InterfaceImpl.java:21:10
     (return )
    )
   )
-  ;; (jsbridgebackward.MyJsInterface.$initialized = true);
   ;;@ jsbridgebackward/InterfaceImpl.java:21:10
   (global.set $f_$initialized__jsbridgebackward_MyJsInterface (i32.const 1))
  )
@@ -196,14 +193,11 @@
 (func $$getClassMetadata__java_lang_Class@jsbridgebackward.MyJsInterface
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jsbridgebackward.MyJsInterface.$class == null)) (jsbridgebackward.MyJsInterface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|jsbridgeback...|()));
   (if (ref.eq (global.get $f_$class__jsbridgebackward_MyJsInterface) (ref.null $java.lang.Class))
    (then
-    ;; (jsbridgebackward.MyJsInterface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|jsbridgeback...|()));
     (global.set $f_$class__jsbridgebackward_MyJsInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsbridgeback...|__java_lang_String (ref.func $$getString_|jsbridgeback...|__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return jsbridgebackward.MyJsInterface.$class;
   (return (global.get $f_$class__jsbridgebackward_MyJsInterface))
  )
 )
@@ -216,13 +210,10 @@
  ;;@ jsbridgebackward/InterfaceImpl.java:25:6
  (local $$instance (ref null $jsbridgebackward.A))
  (block
-  ;; A $instance = new A.<init>(0);
   ;;@ jsbridgebackward/InterfaceImpl.java:25:6
   (local.set $$instance (struct.new $jsbridgebackward.A (ref.as_non_null (global.get $jsbridgebackward.A.vtable)) (ref.as_non_null (global.get $jsbridgebackward.A.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ jsbridgebackward/InterfaceImpl.java:25:6
   (call $$ctor__void_$p_jsbridgebackward_A@jsbridgebackward.A (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ jsbridgebackward/InterfaceImpl.java:25:6
   (return (local.get $$instance))
  )
@@ -233,10 +224,8 @@
  (param $this (ref null $jsbridgebackward.A))
  ;;@ jsbridgebackward/InterfaceImpl.java:25:6
  (block
-  ;; jsbridgebackward.A.$clinit();
   ;;@ jsbridgebackward/InterfaceImpl.java:25:6
   (call $$clinit__void@jsbridgebackward.A )
-  ;; Object.this.$ctor();
   ;;@ jsbridgebackward/InterfaceImpl.java:25:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -252,7 +241,6 @@
  (local $this (ref null $jsbridgebackward.A))
  (local.set $this (ref.cast_static $jsbridgebackward.A (local.get $this.untyped)))
  (block
-  ;; return a;
   ;;@ jsbridgebackward/InterfaceImpl.java:27:4
   (return (local.get $a))
  )
@@ -263,19 +251,15 @@
 (func $$clinit__void@jsbridgebackward.A
  ;;@ jsbridgebackward/InterfaceImpl.java:25:6
  (block
-  ;; if (jsbridgebackward.A.$initialized) return;
   ;;@ jsbridgebackward/InterfaceImpl.java:25:6
   (if (global.get $f_$initialized__jsbridgebackward_A)
    (then
-    ;; return;
     ;;@ jsbridgebackward/InterfaceImpl.java:25:6
     (return )
    )
   )
-  ;; (jsbridgebackward.A.$initialized = true);
   ;;@ jsbridgebackward/InterfaceImpl.java:25:6
   (global.set $f_$initialized__jsbridgebackward_A (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ jsbridgebackward/InterfaceImpl.java:25:6
   (call $$clinit__void@java.lang.Object )
  )
@@ -285,14 +269,11 @@
 (func $$getClassMetadata__java_lang_Class@jsbridgebackward.A
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jsbridgebackward.A.$class == null)) (jsbridgebackward.A.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsbridgeback...|_1(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__jsbridgebackward_A) (ref.null $java.lang.Class))
    (then
-    ;; (jsbridgebackward.A.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsbridgeback...|_1(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__jsbridgebackward_A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsbridgeback...|_1__java_lang_String (ref.func $$getString_|jsbridgeback...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return jsbridgebackward.A.$class;
   (return (global.get $f_$class__jsbridgebackward_A))
  )
 )
@@ -305,7 +286,6 @@
  (local $this (ref null $jsbridgebackward.A))
  (local.set $this (ref.cast_static $jsbridgebackward.A (local.get $this.untyped)))
  (block
-  ;; return jsbridgebackward.A.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsbridgebackward.A) ))
  )
 )
@@ -319,13 +299,10 @@
  ;;@ jsbridgebackward/InterfaceImpl.java:31:13
  (local $$instance (ref null $jsbridgebackward.InterfaceImpl))
  (block
-  ;; InterfaceImpl $instance = new InterfaceImpl.<init>(0);
   ;;@ jsbridgebackward/InterfaceImpl.java:31:13
   (local.set $$instance (struct.new $jsbridgebackward.InterfaceImpl (ref.as_non_null (global.get $jsbridgebackward.InterfaceImpl.vtable)) (ref.as_non_null (global.get $jsbridgebackward.InterfaceImpl.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ jsbridgebackward/InterfaceImpl.java:31:13
   (call $$ctor__void_$p_jsbridgebackward_InterfaceImpl@jsbridgebackward.InterfaceImpl (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ jsbridgebackward/InterfaceImpl.java:31:13
   (return (local.get $$instance))
  )
@@ -336,10 +313,8 @@
  (param $this (ref null $jsbridgebackward.InterfaceImpl))
  ;;@ jsbridgebackward/InterfaceImpl.java:31:13
  (block
-  ;; jsbridgebackward.InterfaceImpl.$clinit();
   ;;@ jsbridgebackward/InterfaceImpl.java:31:13
   (call $$clinit__void@jsbridgebackward.InterfaceImpl )
-  ;; A.this.$ctor();
   ;;@ jsbridgebackward/InterfaceImpl.java:31:13
   (call $$ctor__void_$p_jsbridgebackward_A@jsbridgebackward.A (ref.as_non_null (local.get $this)))
  )
@@ -349,19 +324,15 @@
 (func $$clinit__void@jsbridgebackward.InterfaceImpl
  ;;@ jsbridgebackward/InterfaceImpl.java:31:13
  (block
-  ;; if (jsbridgebackward.InterfaceImpl.$initialized) return;
   ;;@ jsbridgebackward/InterfaceImpl.java:31:13
   (if (global.get $f_$initialized__jsbridgebackward_InterfaceImpl)
    (then
-    ;; return;
     ;;@ jsbridgebackward/InterfaceImpl.java:31:13
     (return )
    )
   )
-  ;; (jsbridgebackward.InterfaceImpl.$initialized = true);
   ;;@ jsbridgebackward/InterfaceImpl.java:31:13
   (global.set $f_$initialized__jsbridgebackward_InterfaceImpl (i32.const 1))
-  ;; jsbridgebackward.A.$clinit();
   ;;@ jsbridgebackward/InterfaceImpl.java:31:13
   (call $$clinit__void@jsbridgebackward.A )
  )
@@ -371,14 +342,11 @@
 (func $$getClassMetadata__java_lang_Class@jsbridgebackward.InterfaceImpl
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jsbridgebackward.InterfaceImpl.$class == null)) (jsbridgebackward.InterfaceImpl.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsbridgeback...|_2(),jsbridgebackward.A.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__jsbridgebackward_InterfaceImpl) (ref.null $java.lang.Class))
    (then
-    ;; (jsbridgebackward.InterfaceImpl.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsbridgeback...|_2(),jsbridgebackward.A.$getClassMetadata()));
     (global.set $f_$class__jsbridgebackward_InterfaceImpl (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsbridgeback...|_2__java_lang_String (ref.func $$getString_|jsbridgeback...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsbridgebackward.A) )))
    )
   )
-  ;; return jsbridgebackward.InterfaceImpl.$class;
   (return (global.get $f_$class__jsbridgebackward_InterfaceImpl))
  )
 )
@@ -391,7 +359,6 @@
  (local $this (ref null $jsbridgebackward.InterfaceImpl))
  (local.set $this (ref.cast_static $jsbridgebackward.InterfaceImpl (local.get $this.untyped)))
  (block
-  ;; return jsbridgebackward.InterfaceImpl.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsbridgebackward.InterfaceImpl) ))
  )
 )
@@ -405,13 +372,10 @@
  ;;@ jsbridgebackward/InterfaceImpl.java:36:6
  (local $$instance (ref null $jsbridgebackward.SubInterfaceImpl))
  (block
-  ;; SubInterfaceImpl $instance = new SubInterfaceImpl.<init>(0);
   ;;@ jsbridgebackward/InterfaceImpl.java:36:6
   (local.set $$instance (struct.new $jsbridgebackward.SubInterfaceImpl (ref.as_non_null (global.get $jsbridgebackward.SubInterfaceImpl.vtable)) (ref.as_non_null (global.get $jsbridgebackward.SubInterfaceImpl.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ jsbridgebackward/InterfaceImpl.java:36:6
   (call $$ctor__void_$p_jsbridgebackward_SubInterfaceImpl@jsbridgebackward.SubInterfaceImpl (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ jsbridgebackward/InterfaceImpl.java:36:6
   (return (local.get $$instance))
  )
@@ -422,10 +386,8 @@
  (param $this (ref null $jsbridgebackward.SubInterfaceImpl))
  ;;@ jsbridgebackward/InterfaceImpl.java:36:6
  (block
-  ;; jsbridgebackward.SubInterfaceImpl.$clinit();
   ;;@ jsbridgebackward/InterfaceImpl.java:36:6
   (call $$clinit__void@jsbridgebackward.SubInterfaceImpl )
-  ;; InterfaceImpl.this.$ctor();
   ;;@ jsbridgebackward/InterfaceImpl.java:36:6
   (call $$ctor__void_$p_jsbridgebackward_InterfaceImpl@jsbridgebackward.InterfaceImpl (ref.as_non_null (local.get $this)))
  )
@@ -441,7 +403,6 @@
  (local $this (ref null $jsbridgebackward.SubInterfaceImpl))
  (local.set $this (ref.cast_static $jsbridgebackward.SubInterfaceImpl (local.get $this.untyped)))
  (block
-  ;; return 0;
   ;;@ jsbridgebackward/InterfaceImpl.java:40:4
   (return (i32.const 0))
  )
@@ -452,19 +413,15 @@
 (func $$clinit__void@jsbridgebackward.SubInterfaceImpl
  ;;@ jsbridgebackward/InterfaceImpl.java:36:6
  (block
-  ;; if (jsbridgebackward.SubInterfaceImpl.$initialized) return;
   ;;@ jsbridgebackward/InterfaceImpl.java:36:6
   (if (global.get $f_$initialized__jsbridgebackward_SubInterfaceImpl)
    (then
-    ;; return;
     ;;@ jsbridgebackward/InterfaceImpl.java:36:6
     (return )
    )
   )
-  ;; (jsbridgebackward.SubInterfaceImpl.$initialized = true);
   ;;@ jsbridgebackward/InterfaceImpl.java:36:6
   (global.set $f_$initialized__jsbridgebackward_SubInterfaceImpl (i32.const 1))
-  ;; jsbridgebackward.InterfaceImpl.$clinit();
   ;;@ jsbridgebackward/InterfaceImpl.java:36:6
   (call $$clinit__void@jsbridgebackward.InterfaceImpl )
  )
@@ -474,14 +431,11 @@
 (func $$getClassMetadata__java_lang_Class@jsbridgebackward.SubInterfaceImpl
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jsbridgebackward.SubInterfaceImpl.$class == null)) (jsbridgebackward.SubInterfaceImpl.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsbridgeback...|_3(),jsbridgebackward.InterfaceImpl.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__jsbridgebackward_SubInterfaceImpl) (ref.null $java.lang.Class))
    (then
-    ;; (jsbridgebackward.SubInterfaceImpl.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsbridgeback...|_3(),jsbridgebackward.InterfaceImpl.$getClassMetadata()));
     (global.set $f_$class__jsbridgebackward_SubInterfaceImpl (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsbridgeback...|_3__java_lang_String (ref.func $$getString_|jsbridgeback...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsbridgebackward.InterfaceImpl) )))
    )
   )
-  ;; return jsbridgebackward.SubInterfaceImpl.$class;
   (return (global.get $f_$class__jsbridgebackward_SubInterfaceImpl))
  )
 )
@@ -494,7 +448,6 @@
  (local $this (ref null $jsbridgebackward.SubInterfaceImpl))
  (local.set $this (ref.cast_static $jsbridgebackward.SubInterfaceImpl (local.get $this.untyped)))
  (block
-  ;; return jsbridgebackward.SubInterfaceImpl.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsbridgebackward.SubInterfaceImpl) ))
  )
 )

@@ -61,13 +61,10 @@
  ;;@ blockscoping/BlockScoping.java:18:13
  (local $$instance (ref null $blockscoping.BlockScoping))
  (block
-  ;; BlockScoping $instance = new BlockScoping.<init>(0);
   ;;@ blockscoping/BlockScoping.java:18:13
   (local.set $$instance (struct.new $blockscoping.BlockScoping (ref.as_non_null (global.get $blockscoping.BlockScoping.vtable)) (ref.as_non_null (global.get $blockscoping.BlockScoping.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ blockscoping/BlockScoping.java:18:13
   (call $$ctor__void_$p_blockscoping_BlockScoping@blockscoping.BlockScoping (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ blockscoping/BlockScoping.java:18:13
   (return (local.get $$instance))
  )
@@ -78,10 +75,8 @@
  (param $this (ref null $blockscoping.BlockScoping))
  ;;@ blockscoping/BlockScoping.java:18:13
  (block
-  ;; blockscoping.BlockScoping.$clinit();
   ;;@ blockscoping/BlockScoping.java:18:13
   (call $$clinit__void@blockscoping.BlockScoping )
-  ;; Object.this.$ctor();
   ;;@ blockscoping/BlockScoping.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -98,12 +93,10 @@
  (local.set $this (ref.cast_static $blockscoping.BlockScoping (local.get $this.untyped)))
  (block
   (block
-   ;; int i = 0;
    ;;@ blockscoping/BlockScoping.java:22:6
    (local.set $i (i32.const 0))
   )
   (block
-   ;; int i = 1;
    ;;@ blockscoping/BlockScoping.java:25:6
    (local.set $i_1 (i32.const 1))
   )
@@ -121,26 +114,20 @@
  (local $this (ref null $blockscoping.BlockScoping))
  (local.set $this (ref.cast_static $blockscoping.BlockScoping (local.get $this.untyped)))
  (block
-  ;; int x;
   ;;@ blockscoping/BlockScoping.java:31:4
   
-  ;; int y;
   ;;@ blockscoping/BlockScoping.java:32:4
   
   (block
-   ;; (x = 1);
    ;;@ blockscoping/BlockScoping.java:34:6
    (local.set $x (i32.const 1))
    (block
-    ;; (y = 1);
     ;;@ blockscoping/BlockScoping.java:36:8
     (local.set $y (i32.const 1))
    )
-   ;; (y = (y + 1));
    ;;@ blockscoping/BlockScoping.java:38:6
    (local.set $y (i32.add (local.get $y) (i32.const 1)))
   )
-  ;; (x = (x + 1));
   ;;@ blockscoping/BlockScoping.java:40:4
   (local.set $x (i32.add (local.get $x) (i32.const 1)))
  )
@@ -151,19 +138,15 @@
 (func $$clinit__void@blockscoping.BlockScoping
  ;;@ blockscoping/BlockScoping.java:18:13
  (block
-  ;; if (blockscoping.BlockScoping.$initialized) return;
   ;;@ blockscoping/BlockScoping.java:18:13
   (if (global.get $f_$initialized__blockscoping_BlockScoping)
    (then
-    ;; return;
     ;;@ blockscoping/BlockScoping.java:18:13
     (return )
    )
   )
-  ;; (blockscoping.BlockScoping.$initialized = true);
   ;;@ blockscoping/BlockScoping.java:18:13
   (global.set $f_$initialized__blockscoping_BlockScoping (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ blockscoping/BlockScoping.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -173,14 +156,11 @@
 (func $$getClassMetadata__java_lang_Class@blockscoping.BlockScoping
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((blockscoping.BlockScoping.$class == null)) (blockscoping.BlockScoping.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|blockscoping...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__blockscoping_BlockScoping) (ref.null $java.lang.Class))
    (then
-    ;; (blockscoping.BlockScoping.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|blockscoping...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__blockscoping_BlockScoping (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|blockscoping...|__java_lang_String (ref.func $$getString_|blockscoping...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return blockscoping.BlockScoping.$class;
   (return (global.get $f_$class__blockscoping_BlockScoping))
  )
 )
@@ -193,7 +173,6 @@
  (local $this (ref null $blockscoping.BlockScoping))
  (local.set $this (ref.cast_static $blockscoping.BlockScoping (local.get $this.untyped)))
  (block
-  ;; return blockscoping.BlockScoping.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@blockscoping.BlockScoping) ))
  )
 )

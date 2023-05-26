@@ -124,16 +124,13 @@
 (func $$clinit__void@overridingmethods.SomeInterface
  ;;@ overridingmethods/Child.java:18:10
  (block
-  ;; if (overridingmethods.SomeInterface.$initialized) return;
   ;;@ overridingmethods/Child.java:18:10
   (if (global.get $f_$initialized__overridingmethods_SomeInterface)
    (then
-    ;; return;
     ;;@ overridingmethods/Child.java:18:10
     (return )
    )
   )
-  ;; (overridingmethods.SomeInterface.$initialized = true);
   ;;@ overridingmethods/Child.java:18:10
   (global.set $f_$initialized__overridingmethods_SomeInterface (i32.const 1))
  )
@@ -143,14 +140,11 @@
 (func $$getClassMetadata__java_lang_Class@overridingmethods.SomeInterface
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((overridingmethods.SomeInterface.$class == null)) (overridingmethods.SomeInterface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|overridingme...|()));
   (if (ref.eq (global.get $f_$class__overridingmethods_SomeInterface) (ref.null $java.lang.Class))
    (then
-    ;; (overridingmethods.SomeInterface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|overridingme...|()));
     (global.set $f_$class__overridingmethods_SomeInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|overridingme...|__java_lang_String (ref.func $$getString_|overridingme...|__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return overridingmethods.SomeInterface.$class;
   (return (global.get $f_$class__overridingmethods_SomeInterface))
  )
 )
@@ -163,13 +157,10 @@
  ;;@ overridingmethods/Child.java:22:6
  (local $$instance (ref null $overridingmethods.Parent))
  (block
-  ;; Parent $instance = new Parent.<init>(0);
   ;;@ overridingmethods/Child.java:22:6
   (local.set $$instance (struct.new $overridingmethods.Parent (ref.as_non_null (global.get $overridingmethods.Parent.vtable)) (ref.as_non_null (global.get $overridingmethods.Parent.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ overridingmethods/Child.java:22:6
   (call $$ctor__void_$p_overridingmethods_Parent@overridingmethods.Parent (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ overridingmethods/Child.java:22:6
   (return (local.get $$instance))
  )
@@ -180,10 +171,8 @@
  (param $this (ref null $overridingmethods.Parent))
  ;;@ overridingmethods/Child.java:22:6
  (block
-  ;; overridingmethods.Parent.$clinit();
   ;;@ overridingmethods/Child.java:22:6
   (call $$clinit__void@overridingmethods.Parent )
-  ;; Object.this.$ctor();
   ;;@ overridingmethods/Child.java:22:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -205,19 +194,15 @@
 (func $$clinit__void@overridingmethods.Parent
  ;;@ overridingmethods/Child.java:22:6
  (block
-  ;; if (overridingmethods.Parent.$initialized) return;
   ;;@ overridingmethods/Child.java:22:6
   (if (global.get $f_$initialized__overridingmethods_Parent)
    (then
-    ;; return;
     ;;@ overridingmethods/Child.java:22:6
     (return )
    )
   )
-  ;; (overridingmethods.Parent.$initialized = true);
   ;;@ overridingmethods/Child.java:22:6
   (global.set $f_$initialized__overridingmethods_Parent (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ overridingmethods/Child.java:22:6
   (call $$clinit__void@java.lang.Object )
  )
@@ -227,14 +212,11 @@
 (func $$getClassMetadata__java_lang_Class@overridingmethods.Parent
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((overridingmethods.Parent.$class == null)) (overridingmethods.Parent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|overridingme...|_1(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__overridingmethods_Parent) (ref.null $java.lang.Class))
    (then
-    ;; (overridingmethods.Parent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|overridingme...|_1(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__overridingmethods_Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|overridingme...|_1__java_lang_String (ref.func $$getString_|overridingme...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return overridingmethods.Parent.$class;
   (return (global.get $f_$class__overridingmethods_Parent))
  )
 )
@@ -247,7 +229,6 @@
  (local $this (ref null $overridingmethods.Parent))
  (local.set $this (ref.cast_static $overridingmethods.Parent (local.get $this.untyped)))
  (block
-  ;; return overridingmethods.Parent.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@overridingmethods.Parent) ))
  )
 )
@@ -261,13 +242,10 @@
  ;;@ overridingmethods/Child.java:26:13
  (local $$instance (ref null $overridingmethods.Child))
  (block
-  ;; Child $instance = new Child.<init>(0);
   ;;@ overridingmethods/Child.java:26:13
   (local.set $$instance (struct.new $overridingmethods.Child (ref.as_non_null (global.get $overridingmethods.Child.vtable)) (ref.as_non_null (global.get $overridingmethods.Child.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ overridingmethods/Child.java:26:13
   (call $$ctor__void_$p_overridingmethods_Child@overridingmethods.Child (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ overridingmethods/Child.java:26:13
   (return (local.get $$instance))
  )
@@ -278,10 +256,8 @@
  (param $this (ref null $overridingmethods.Child))
  ;;@ overridingmethods/Child.java:26:13
  (block
-  ;; overridingmethods.Child.$clinit();
   ;;@ overridingmethods/Child.java:26:13
   (call $$clinit__void@overridingmethods.Child )
-  ;; Parent.this.$ctor();
   ;;@ overridingmethods/Child.java:26:13
   (call $$ctor__void_$p_overridingmethods_Parent@overridingmethods.Parent (ref.as_non_null (local.get $this)))
  )
@@ -315,19 +291,15 @@
 (func $$clinit__void@overridingmethods.Child
  ;;@ overridingmethods/Child.java:26:13
  (block
-  ;; if (overridingmethods.Child.$initialized) return;
   ;;@ overridingmethods/Child.java:26:13
   (if (global.get $f_$initialized__overridingmethods_Child)
    (then
-    ;; return;
     ;;@ overridingmethods/Child.java:26:13
     (return )
    )
   )
-  ;; (overridingmethods.Child.$initialized = true);
   ;;@ overridingmethods/Child.java:26:13
   (global.set $f_$initialized__overridingmethods_Child (i32.const 1))
-  ;; overridingmethods.Parent.$clinit();
   ;;@ overridingmethods/Child.java:26:13
   (call $$clinit__void@overridingmethods.Parent )
  )
@@ -337,14 +309,11 @@
 (func $$getClassMetadata__java_lang_Class@overridingmethods.Child
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((overridingmethods.Child.$class == null)) (overridingmethods.Child.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|overridingme...|_2(),overridingmethods.Parent.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__overridingmethods_Child) (ref.null $java.lang.Class))
    (then
-    ;; (overridingmethods.Child.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|overridingme...|_2(),overridingmethods.Parent.$getClassMetadata()));
     (global.set $f_$class__overridingmethods_Child (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|overridingme...|_2__java_lang_String (ref.func $$getString_|overridingme...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@overridingmethods.Parent) )))
    )
   )
-  ;; return overridingmethods.Child.$class;
   (return (global.get $f_$class__overridingmethods_Child))
  )
 )
@@ -357,7 +326,6 @@
  (local $this (ref null $overridingmethods.Child))
  (local.set $this (ref.cast_static $overridingmethods.Child (local.get $this.untyped)))
  (block
-  ;; return overridingmethods.Child.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@overridingmethods.Child) ))
  )
 )

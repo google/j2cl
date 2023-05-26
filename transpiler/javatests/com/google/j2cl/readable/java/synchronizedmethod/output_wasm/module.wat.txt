@@ -63,13 +63,10 @@
  ;;@ synchronizedmethod/SynchronizedMethod.java:18:13
  (local $$instance (ref null $synchronizedmethod.SynchronizedMethod))
  (block
-  ;; SynchronizedMethod $instance = new SynchronizedMethod.<init>(0,0,0);
   ;;@ synchronizedmethod/SynchronizedMethod.java:18:13
   (local.set $$instance (struct.new $synchronizedmethod.SynchronizedMethod (ref.as_non_null (global.get $synchronizedmethod.SynchronizedMethod.vtable)) (ref.as_non_null (global.get $synchronizedmethod.SynchronizedMethod.itable)) (i32.const 0) (i32.const 0) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ synchronizedmethod/SynchronizedMethod.java:18:13
   (call $$ctor__void_$p_synchronizedmethod_SynchronizedMethod@synchronizedmethod.SynchronizedMethod (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ synchronizedmethod/SynchronizedMethod.java:18:13
   (return (local.get $$instance))
  )
@@ -80,10 +77,8 @@
  (param $this (ref null $synchronizedmethod.SynchronizedMethod))
  ;;@ synchronizedmethod/SynchronizedMethod.java:18:13
  (block
-  ;; synchronizedmethod.SynchronizedMethod.$clinit();
   ;;@ synchronizedmethod/SynchronizedMethod.java:18:13
   (call $$clinit__void@synchronizedmethod.SynchronizedMethod )
-  ;; Object.this.$ctor();
   ;;@ synchronizedmethod/SynchronizedMethod.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -97,10 +92,8 @@
  (local $this (ref null $synchronizedmethod.SynchronizedMethod))
  (local.set $this (ref.cast_static $synchronizedmethod.SynchronizedMethod (local.get $this.untyped)))
  (block
-  ;; (SynchronizedMethod.this.a = (SynchronizedMethod.this.a + 1));
   ;;@ synchronizedmethod/SynchronizedMethod.java:26:4
   (struct.set $synchronizedmethod.SynchronizedMethod $f_a__synchronizedmethod_SynchronizedMethod_(local.get $this) (i32.add (struct.get $synchronizedmethod.SynchronizedMethod $f_a__synchronizedmethod_SynchronizedMethod_(local.get $this)) (i32.const 1)))
-  ;; (SynchronizedMethod.this.b = (SynchronizedMethod.this.b - 1));
   ;;@ synchronizedmethod/SynchronizedMethod.java:27:4
   (struct.set $synchronizedmethod.SynchronizedMethod $f_b__synchronizedmethod_SynchronizedMethod_(local.get $this) (i32.sub (struct.get $synchronizedmethod.SynchronizedMethod $f_b__synchronizedmethod_SynchronizedMethod_(local.get $this)) (i32.const 1)))
  )
@@ -111,13 +104,10 @@
 (func $m_staticMethod__void@synchronizedmethod.SynchronizedMethod
  ;;@ synchronizedmethod/SynchronizedMethod.java:30:34
  (block
-  ;; synchronizedmethod.SynchronizedMethod.$clinit();
   ;;@ synchronizedmethod/SynchronizedMethod.java:30:49
   (call $$clinit__void@synchronizedmethod.SynchronizedMethod )
-  ;; (synchronizedmethod.SynchronizedMethod.sa = (synchronizedmethod.SynchronizedMethod.sa + 1));
   ;;@ synchronizedmethod/SynchronizedMethod.java:31:4
   (global.set $f_sa__synchronizedmethod_SynchronizedMethod_ (i32.add (global.get $f_sa__synchronizedmethod_SynchronizedMethod_) (i32.const 1)))
-  ;; (synchronizedmethod.SynchronizedMethod.sb = (synchronizedmethod.SynchronizedMethod.sb - 1));
   ;;@ synchronizedmethod/SynchronizedMethod.java:32:4
   (global.set $f_sb__synchronizedmethod_SynchronizedMethod_ (i32.sub (global.get $f_sb__synchronizedmethod_SynchronizedMethod_) (i32.const 1)))
  )
@@ -127,19 +117,15 @@
 (func $$clinit__void@synchronizedmethod.SynchronizedMethod
  ;;@ synchronizedmethod/SynchronizedMethod.java:18:13
  (block
-  ;; if (synchronizedmethod.SynchronizedMethod.$initialized) return;
   ;;@ synchronizedmethod/SynchronizedMethod.java:18:13
   (if (global.get $f_$initialized__synchronizedmethod_SynchronizedMethod)
    (then
-    ;; return;
     ;;@ synchronizedmethod/SynchronizedMethod.java:18:13
     (return )
    )
   )
-  ;; (synchronizedmethod.SynchronizedMethod.$initialized = true);
   ;;@ synchronizedmethod/SynchronizedMethod.java:18:13
   (global.set $f_$initialized__synchronizedmethod_SynchronizedMethod (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ synchronizedmethod/SynchronizedMethod.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -149,14 +135,11 @@
 (func $$getClassMetadata__java_lang_Class@synchronizedmethod.SynchronizedMethod
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((synchronizedmethod.SynchronizedMethod.$class == null)) (synchronizedmethod.SynchronizedMethod.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|synchronized...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__synchronizedmethod_SynchronizedMethod) (ref.null $java.lang.Class))
    (then
-    ;; (synchronizedmethod.SynchronizedMethod.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|synchronized...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__synchronizedmethod_SynchronizedMethod (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|synchronized...|__java_lang_String (ref.func $$getString_|synchronized...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return synchronizedmethod.SynchronizedMethod.$class;
   (return (global.get $f_$class__synchronizedmethod_SynchronizedMethod))
  )
 )
@@ -169,7 +152,6 @@
  (local $this (ref null $synchronizedmethod.SynchronizedMethod))
  (local.set $this (ref.cast_static $synchronizedmethod.SynchronizedMethod (local.get $this.untyped)))
  (block
-  ;; return synchronizedmethod.SynchronizedMethod.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@synchronizedmethod.SynchronizedMethod) ))
  )
 )

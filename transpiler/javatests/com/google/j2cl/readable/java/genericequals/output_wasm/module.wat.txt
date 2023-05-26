@@ -62,13 +62,10 @@
  ;;@ genericequals/GenericEquals.java:23:9
  (local $$instance (ref null $genericequals.GenericEquals))
  (block
-  ;; GenericEquals<T> $instance = new GenericEquals.<init>(0,value,null);
   ;;@ genericequals/GenericEquals.java:23:9
   (local.set $$instance (struct.new $genericequals.GenericEquals (ref.as_non_null (global.get $genericequals.GenericEquals.vtable)) (ref.as_non_null (global.get $genericequals.GenericEquals.itable)) (i32.const 0) (local.get $value) (ref.null $genericequals.GenericEquals)))
-  ;; $instance.$ctor(value);
   ;;@ genericequals/GenericEquals.java:23:9
   (call $$ctor__java_lang_Object__void_$p_genericequals_GenericEquals@genericequals.GenericEquals (ref.as_non_null (local.get $$instance))(local.get $value))
-  ;; return $instance;
   ;;@ genericequals/GenericEquals.java:23:9
   (return (local.get $$instance))
  )
@@ -80,10 +77,8 @@
  (param $value (ref null $java.lang.Object))
  ;;@ genericequals/GenericEquals.java:23:9
  (block
-  ;; genericequals.GenericEquals.$clinit();
   ;;@ genericequals/GenericEquals.java:23:32
   (call $$clinit__void@genericequals.GenericEquals )
-  ;; Object.this.$ctor();
   ;;@ genericequals/GenericEquals.java:23:32
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -99,7 +94,6 @@
  (local $this (ref null $genericequals.GenericEquals))
  (local.set $this (ref.cast_static $genericequals.GenericEquals (local.get $this.untyped)))
  (block
-  ;; return other.value2.value;
   ;;@ genericequals/GenericEquals.java:29:4
   (return (struct.get $genericequals.GenericEquals $f_value__genericequals_GenericEquals_(struct.get $genericequals.GenericEquals $f_value2__genericequals_GenericEquals_(local.get $other))))
  )
@@ -117,32 +111,26 @@
  (local $this (ref null $genericequals.GenericEquals))
  (local.set $this (ref.cast_static $genericequals.GenericEquals (local.get $this.untyped)))
  (block
-  ;; if ((obj == GenericEquals.this)) {
   ;;@ genericequals/GenericEquals.java:34:4
   (if (ref.eq (local.get $obj) (local.get $this))
    (then
     (block
-     ;; return true;
      ;;@ genericequals/GenericEquals.java:35:6
      (return (i32.const 1))
     )
    )
   )
-  ;; if (!obj instanceof GenericEquals) {
   ;;@ genericequals/GenericEquals.java:37:4
   (if (i32.eqz (ref.test_static $genericequals.GenericEquals (local.get $obj)))
    (then
     (block
-     ;; return false;
      ;;@ genericequals/GenericEquals.java:38:6
      (return (i32.const 0))
     )
    )
   )
-  ;; GenericEquals<?> other = ((GenericEquals<?>) obj);
   ;;@ genericequals/GenericEquals.java:40:4
   (local.set $other (ref.cast_static $genericequals.GenericEquals (local.get $obj)))
-  ;; return GenericEquals.this.value.equals(other.value);
   ;;@ genericequals/GenericEquals.java:41:4
   (return (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (struct.get $genericequals.GenericEquals $f_value__genericequals_GenericEquals_(local.get $this)))(struct.get $genericequals.GenericEquals $f_value__genericequals_GenericEquals_(local.get $other))(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(struct.get $genericequals.GenericEquals $f_value__genericequals_GenericEquals_(local.get $this))))))
  )
@@ -153,19 +141,15 @@
 (func $$clinit__void@genericequals.GenericEquals
  ;;@ genericequals/GenericEquals.java:18:13
  (block
-  ;; if (genericequals.GenericEquals.$initialized) return;
   ;;@ genericequals/GenericEquals.java:18:13
   (if (global.get $f_$initialized__genericequals_GenericEquals)
    (then
-    ;; return;
     ;;@ genericequals/GenericEquals.java:18:13
     (return )
    )
   )
-  ;; (genericequals.GenericEquals.$initialized = true);
   ;;@ genericequals/GenericEquals.java:18:13
   (global.set $f_$initialized__genericequals_GenericEquals (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ genericequals/GenericEquals.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -175,14 +159,11 @@
 (func $$getClassMetadata__java_lang_Class@genericequals.GenericEquals
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((genericequals.GenericEquals.$class == null)) (genericequals.GenericEquals.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|genericequal...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__genericequals_GenericEquals) (ref.null $java.lang.Class))
    (then
-    ;; (genericequals.GenericEquals.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|genericequal...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__genericequals_GenericEquals (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericequal...|__java_lang_String (ref.func $$getString_|genericequal...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return genericequals.GenericEquals.$class;
   (return (global.get $f_$class__genericequals_GenericEquals))
  )
 )
@@ -195,7 +176,6 @@
  (local $this (ref null $genericequals.GenericEquals))
  (local.set $this (ref.cast_static $genericequals.GenericEquals (local.get $this.untyped)))
  (block
-  ;; return genericequals.GenericEquals.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@genericequals.GenericEquals) ))
  )
 )

@@ -59,13 +59,10 @@
  ;;@ breakstatement/BreakStatement.java:18:13
  (local $$instance (ref null $breakstatement.BreakStatement))
  (block
-  ;; BreakStatement $instance = new BreakStatement.<init>(0);
   ;;@ breakstatement/BreakStatement.java:18:13
   (local.set $$instance (struct.new $breakstatement.BreakStatement (ref.as_non_null (global.get $breakstatement.BreakStatement.vtable)) (ref.as_non_null (global.get $breakstatement.BreakStatement.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ breakstatement/BreakStatement.java:18:13
   (call $$ctor__void_$p_breakstatement_BreakStatement@breakstatement.BreakStatement (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ breakstatement/BreakStatement.java:18:13
   (return (local.get $$instance))
  )
@@ -76,10 +73,8 @@
  (param $this (ref null $breakstatement.BreakStatement))
  ;;@ breakstatement/BreakStatement.java:18:13
  (block
-  ;; breakstatement.BreakStatement.$clinit();
   ;;@ breakstatement/BreakStatement.java:18:13
   (call $$clinit__void@breakstatement.BreakStatement )
-  ;; Object.this.$ctor();
   ;;@ breakstatement/BreakStatement.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -93,13 +88,11 @@
  (local $this (ref null $breakstatement.BreakStatement))
  (local.set $this (ref.cast_static $breakstatement.BreakStatement (local.get $this.untyped)))
  (block
-  ;; LOOP: for (;true;) {
   ;;@ breakstatement/BreakStatement.java:20:4
   (block $LOOP.BREAK
    (loop
     (block $LOOP.CONTINUE
      (block
-      ;; break LOOP;
       ;;@ breakstatement/BreakStatement.java:21:6
       (br $LOOP.BREAK)
      )
@@ -116,19 +109,15 @@
 (func $$clinit__void@breakstatement.BreakStatement
  ;;@ breakstatement/BreakStatement.java:18:13
  (block
-  ;; if (breakstatement.BreakStatement.$initialized) return;
   ;;@ breakstatement/BreakStatement.java:18:13
   (if (global.get $f_$initialized__breakstatement_BreakStatement)
    (then
-    ;; return;
     ;;@ breakstatement/BreakStatement.java:18:13
     (return )
    )
   )
-  ;; (breakstatement.BreakStatement.$initialized = true);
   ;;@ breakstatement/BreakStatement.java:18:13
   (global.set $f_$initialized__breakstatement_BreakStatement (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ breakstatement/BreakStatement.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -138,14 +127,11 @@
 (func $$getClassMetadata__java_lang_Class@breakstatement.BreakStatement
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((breakstatement.BreakStatement.$class == null)) (breakstatement.BreakStatement.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|breakstateme...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__breakstatement_BreakStatement) (ref.null $java.lang.Class))
    (then
-    ;; (breakstatement.BreakStatement.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|breakstateme...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__breakstatement_BreakStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|breakstateme...|__java_lang_String (ref.func $$getString_|breakstateme...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return breakstatement.BreakStatement.$class;
   (return (global.get $f_$class__breakstatement_BreakStatement))
  )
 )
@@ -158,7 +144,6 @@
  (local $this (ref null $breakstatement.BreakStatement))
  (local.set $this (ref.cast_static $breakstatement.BreakStatement (local.get $this.untyped)))
  (block
-  ;; return breakstatement.BreakStatement.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@breakstatement.BreakStatement) ))
  )
 )

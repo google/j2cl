@@ -65,13 +65,10 @@
  ;;@ forstatement/ForStatement.java:18:13
  (local $$instance (ref null $forstatement.ForStatement))
  (block
-  ;; ForStatement $instance = new ForStatement.<init>(0);
   ;;@ forstatement/ForStatement.java:18:13
   (local.set $$instance (struct.new $forstatement.ForStatement (ref.as_non_null (global.get $forstatement.ForStatement.vtable)) (ref.as_non_null (global.get $forstatement.ForStatement.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ forstatement/ForStatement.java:18:13
   (call $$ctor__void_$p_forstatement_ForStatement@forstatement.ForStatement (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ forstatement/ForStatement.java:18:13
   (return (local.get $$instance))
  )
@@ -82,10 +79,8 @@
  (param $this (ref null $forstatement.ForStatement))
  ;;@ forstatement/ForStatement.java:18:13
  (block
-  ;; forstatement.ForStatement.$clinit();
   ;;@ forstatement/ForStatement.java:18:13
   (call $$clinit__void@forstatement.ForStatement )
-  ;; Object.this.$ctor();
   ;;@ forstatement/ForStatement.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -105,7 +100,6 @@
  (local $this (ref null $forstatement.ForStatement))
  (local.set $this (ref.cast_static $forstatement.ForStatement (local.get $this.untyped)))
  (block
-  ;; LOOP: for (int i = 0,int count = 0;(i < 100);(i = (i + 1))) {
   ;;@ forstatement/ForStatement.java:20:4
   (local.set $i (i32.const 0))
   (local.set $count (i32.const 0))
@@ -114,7 +108,6 @@
     (br_if 1 (i32.eqz (i32.lt_s (local.get $i) (i32.const 100))))
     (block $LOOP.CONTINUE
      (block
-      ;; (count = (count + 1));
       ;;@ forstatement/ForStatement.java:21:6
       (local.set $count (i32.add (local.get $count) (i32.const 1)))
      )
@@ -124,7 +117,6 @@
     
    )
   )
-  ;; LOOP: for (long l = 0,long count = 0;(l < 100);(l = (l + 1)),(l = (l + 1))) {
   ;;@ forstatement/ForStatement.java:24:4
   (local.set $l (i64.const 0))
   (local.set $count_1 (i64.const 0))
@@ -133,7 +125,6 @@
     (br_if 1 (i32.eqz (i64.lt_s (local.get $l) (i64.const 100))))
     (block $LOOP_1.CONTINUE
      (block
-      ;; (count = (count + 1));
       ;;@ forstatement/ForStatement.java:25:6
       (local.set $count_1 (i64.add (local.get $count_1) (i64.const 1)))
      )
@@ -144,10 +135,8 @@
     
    )
   )
-  ;; boolean a = false;
   ;;@ forstatement/ForStatement.java:28:4
   (local.set $a (i32.const 0))
-  ;; LOOP: for (;((a = (a | true)),a);) {
   ;;@ forstatement/ForStatement.java:29:4
   (block $LOOP_2.BREAK
    (loop
@@ -163,10 +152,8 @@
     
    )
   )
-  ;; boolean b = false;
   ;;@ forstatement/ForStatement.java:31:4
   (local.set $b (i32.const 0))
-  ;; LOOP: for (;((b = a),b);) {
   ;;@ forstatement/ForStatement.java:32:4
   (block $LOOP_3.BREAK
    (loop
@@ -182,7 +169,6 @@
     
    )
   )
-  ;; LOOP: for (forstatement.ForStatement.returnsValue();true;forstatement.ForStatement.returnsValue()) {
   ;;@ forstatement/ForStatement.java:34:4
   (drop (call $m_returnsValue__int@forstatement.ForStatement ))
   (block $LOOP_4.BREAK
@@ -212,7 +198,6 @@
  (local $this (ref null $forstatement.ForStatement))
  (local.set $this (ref.cast_static $forstatement.ForStatement (local.get $this.untyped)))
  (block
-  ;; LABEL: for (int i = 0,int j = 0;(i < 10);(i = (i + 1)),(j = (j + 1))) {
   ;;@ forstatement/ForStatement.java:38:4
   (local.set $i (i32.const 0))
   (local.set $j (i32.const 0))
@@ -221,18 +206,15 @@
     (br_if 1 (i32.eqz (i32.lt_s (local.get $i) (i32.const 10))))
     (block $LABEL.CONTINUE
      (block
-      ;; if ((i == 5)) {
       ;;@ forstatement/ForStatement.java:40:6
       (if (i32.eq (local.get $i) (i32.const 5))
        (then
         (block
-         ;; continue LABEL;
          ;;@ forstatement/ForStatement.java:41:8
          (br $LABEL.CONTINUE)
         )
        )
       )
-      ;; LOOP: for (int k = 0,int l = 0;(k < 10);(k = (k + 1)),(l = (l + 1))) {
       ;;@ forstatement/ForStatement.java:43:6
       (local.set $k (i32.const 0))
       (local.set $l (i32.const 0))
@@ -241,12 +223,10 @@
         (br_if 1 (i32.eqz (i32.lt_s (local.get $k) (i32.const 10))))
         (block $LOOP.CONTINUE
          (block
-          ;; if ((j == 5)) {
           ;;@ forstatement/ForStatement.java:44:8
           (if (i32.eq (local.get $j) (i32.const 5))
            (then
             (block
-             ;; continue LABEL;
              ;;@ forstatement/ForStatement.java:45:10
              (br $LABEL.CONTINUE)
             )
@@ -283,7 +263,6 @@
  (local $this (ref null $forstatement.ForStatement))
  (local.set $this (ref.cast_static $forstatement.ForStatement (local.get $this.untyped)))
  (block
-  ;; LOOP: for (int i = 0,int x;((i < 1)) ? ((((x = 3),x) != 0)) : (false);(i = (i + 1))) {
   ;;@ forstatement/ForStatement.java:52:4
   (local.set $i (i32.const 0))
   (block $LOOP.BREAK
@@ -294,10 +273,8 @@
     ) (i32.const 0))) (else (i32.const 0)))))
     (block $LOOP.CONTINUE
      (block
-      ;; int y;
       ;;@ forstatement/ForStatement.java:53:6
       
-      ;; (y = (i + x));
       ;;@ forstatement/ForStatement.java:54:6
       (local.set $y (i32.add (local.get $i) (local.get $x)))
      )
@@ -320,12 +297,10 @@
  (local $this (ref null $forstatement.ForStatement))
  (local.set $this (ref.cast_static $forstatement.ForStatement (local.get $this.untyped)))
  (block
-  ;; if (false) {
   ;;@ forstatement/ForStatement.java:59:4
   (if (i32.const 0)
    (then
     (block
-     ;; LOOP: for (int i = 0;(i < 100);(i = (i + 1))) {
      ;;@ forstatement/ForStatement.java:62:6
      (local.set $i (i32.const 0))
      (block $LOOP.BREAK
@@ -352,7 +327,6 @@
  (result i32)
  ;;@ forstatement/ForStatement.java:66:21
  (block
-  ;; return 1;
   ;;@ forstatement/ForStatement.java:67:4
   (return (i32.const 1))
  )
@@ -362,19 +336,15 @@
 (func $$clinit__void@forstatement.ForStatement
  ;;@ forstatement/ForStatement.java:18:13
  (block
-  ;; if (forstatement.ForStatement.$initialized) return;
   ;;@ forstatement/ForStatement.java:18:13
   (if (global.get $f_$initialized__forstatement_ForStatement)
    (then
-    ;; return;
     ;;@ forstatement/ForStatement.java:18:13
     (return )
    )
   )
-  ;; (forstatement.ForStatement.$initialized = true);
   ;;@ forstatement/ForStatement.java:18:13
   (global.set $f_$initialized__forstatement_ForStatement (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ forstatement/ForStatement.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -384,14 +354,11 @@
 (func $$getClassMetadata__java_lang_Class@forstatement.ForStatement
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((forstatement.ForStatement.$class == null)) (forstatement.ForStatement.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|forstatement...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__forstatement_ForStatement) (ref.null $java.lang.Class))
    (then
-    ;; (forstatement.ForStatement.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|forstatement...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__forstatement_ForStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|forstatement...|__java_lang_String (ref.func $$getString_|forstatement...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return forstatement.ForStatement.$class;
   (return (global.get $f_$class__forstatement_ForStatement))
  )
 )
@@ -404,7 +371,6 @@
  (local $this (ref null $forstatement.ForStatement))
  (local.set $this (ref.cast_static $forstatement.ForStatement (local.get $this.untyped)))
  (block
-  ;; return forstatement.ForStatement.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@forstatement.ForStatement) ))
  )
 )

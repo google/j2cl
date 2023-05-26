@@ -112,13 +112,10 @@
  ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:22:13
  (local $$instance (ref null $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace))
  (block
-  ;; StaticJsMethodsWithClassNamespace $instance = new StaticJsMethodsWithClassNamespace.<init>(0);
   ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:22:13
   (local.set $$instance (struct.new $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace (ref.as_non_null (global.get $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable)) (ref.as_non_null (global.get $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:22:13
   (call $$ctor__void_$p_staticjsmethodswithclassnamespace_StaticJsMethodsWithClassNamespace@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:22:13
   (return (local.get $$instance))
  )
@@ -129,10 +126,8 @@
  (param $this (ref null $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace))
  ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:22:13
  (block
-  ;; staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.$clinit();
   ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:22:13
   (call $$clinit__void@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace )
-  ;; Object.this.$ctor();
   ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:22:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -142,7 +137,6 @@
 (func $m_originalName__void@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace
  ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:24:21
  (block
-  ;; staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.$clinit();
   ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:24:36
   (call $$clinit__void@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace )
  )
@@ -156,10 +150,8 @@
  (local $this (ref null $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace))
  (local.set $this (ref.cast_static $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace (local.get $this.untyped)))
  (block
-  ;; staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.originalName();
   ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:27:4
   (call $m_originalName__void@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace )
-  ;; staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.originalName();
   ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:28:4
   (call $m_originalName__void@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace )
  )
@@ -170,19 +162,15 @@
 (func $$clinit__void@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace
  ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:22:13
  (block
-  ;; if (staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.$initialized) return;
   ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:22:13
   (if (global.get $f_$initialized__staticjsmethodswithclassnamespace_StaticJsMethodsWithClassNamespace)
    (then
-    ;; return;
     ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:22:13
     (return )
    )
   )
-  ;; (staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.$initialized = true);
   ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:22:13
   (global.set $f_$initialized__staticjsmethodswithclassnamespace_StaticJsMethodsWithClassNamespace (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:22:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -192,14 +180,11 @@
 (func $$getClassMetadata__java_lang_Class@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.$class == null)) (staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|staticjsmeth...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__staticjsmethodswithclassnamespace_StaticJsMethodsWithClassNamespace) (ref.null $java.lang.Class))
    (then
-    ;; (staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|staticjsmeth...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__staticjsmethodswithclassnamespace_StaticJsMethodsWithClassNamespace (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|staticjsmeth...|__java_lang_String (ref.func $$getString_|staticjsmeth...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.$class;
   (return (global.get $f_$class__staticjsmethodswithclassnamespace_StaticJsMethodsWithClassNamespace))
  )
 )
@@ -212,7 +197,6 @@
  (local $this (ref null $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace))
  (local.set $this (ref.cast_static $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace (local.get $this.untyped)))
  (block
-  ;; return staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace) ))
  )
 )
@@ -226,13 +210,10 @@
  ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:32:6
  (local $$instance (ref null $staticjsmethodswithclassnamespace.ExternalCaller))
  (block
-  ;; ExternalCaller $instance = new ExternalCaller.<init>(0);
   ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:32:6
   (local.set $$instance (struct.new $staticjsmethodswithclassnamespace.ExternalCaller (ref.as_non_null (global.get $staticjsmethodswithclassnamespace.ExternalCaller.vtable)) (ref.as_non_null (global.get $staticjsmethodswithclassnamespace.ExternalCaller.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:32:6
   (call $$ctor__void_$p_staticjsmethodswithclassnamespace_ExternalCaller@staticjsmethodswithclassnamespace.ExternalCaller (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:32:6
   (return (local.get $$instance))
  )
@@ -243,10 +224,8 @@
  (param $this (ref null $staticjsmethodswithclassnamespace.ExternalCaller))
  ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:32:6
  (block
-  ;; staticjsmethodswithclassnamespace.ExternalCaller.$clinit();
   ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:32:6
   (call $$clinit__void@staticjsmethodswithclassnamespace.ExternalCaller )
-  ;; Object.this.$ctor();
   ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:32:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -260,7 +239,6 @@
  (local $this (ref null $staticjsmethodswithclassnamespace.ExternalCaller))
  (local.set $this (ref.cast_static $staticjsmethodswithclassnamespace.ExternalCaller (local.get $this.untyped)))
  (block
-  ;; staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.originalName();
   ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:34:4
   (call $m_originalName__void@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace )
  )
@@ -271,19 +249,15 @@
 (func $$clinit__void@staticjsmethodswithclassnamespace.ExternalCaller
  ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:32:6
  (block
-  ;; if (staticjsmethodswithclassnamespace.ExternalCaller.$initialized) return;
   ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:32:6
   (if (global.get $f_$initialized__staticjsmethodswithclassnamespace_ExternalCaller)
    (then
-    ;; return;
     ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:32:6
     (return )
    )
   )
-  ;; (staticjsmethodswithclassnamespace.ExternalCaller.$initialized = true);
   ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:32:6
   (global.set $f_$initialized__staticjsmethodswithclassnamespace_ExternalCaller (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:32:6
   (call $$clinit__void@java.lang.Object )
  )
@@ -293,14 +267,11 @@
 (func $$getClassMetadata__java_lang_Class@staticjsmethodswithclassnamespace.ExternalCaller
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((staticjsmethodswithclassnamespace.ExternalCaller.$class == null)) (staticjsmethodswithclassnamespace.ExternalCaller.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|staticjsmeth...|_1(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__staticjsmethodswithclassnamespace_ExternalCaller) (ref.null $java.lang.Class))
    (then
-    ;; (staticjsmethodswithclassnamespace.ExternalCaller.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|staticjsmeth...|_1(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__staticjsmethodswithclassnamespace_ExternalCaller (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|staticjsmeth...|_1__java_lang_String (ref.func $$getString_|staticjsmeth...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return staticjsmethodswithclassnamespace.ExternalCaller.$class;
   (return (global.get $f_$class__staticjsmethodswithclassnamespace_ExternalCaller))
  )
 )
@@ -313,7 +284,6 @@
  (local $this (ref null $staticjsmethodswithclassnamespace.ExternalCaller))
  (local.set $this (ref.cast_static $staticjsmethodswithclassnamespace.ExternalCaller (local.get $this.untyped)))
  (block
-  ;; return staticjsmethodswithclassnamespace.ExternalCaller.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@staticjsmethodswithclassnamespace.ExternalCaller) ))
  )
 )

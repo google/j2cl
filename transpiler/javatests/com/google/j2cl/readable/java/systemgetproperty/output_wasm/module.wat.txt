@@ -57,13 +57,10 @@
  ;;@ systemgetproperty/Main.java:18:13
  (local $$instance (ref null $systemgetproperty.Main))
  (block
-  ;; Main $instance = new Main.<init>(0);
   ;;@ systemgetproperty/Main.java:18:13
   (local.set $$instance (struct.new $systemgetproperty.Main (ref.as_non_null (global.get $systemgetproperty.Main.vtable)) (ref.as_non_null (global.get $systemgetproperty.Main.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ systemgetproperty/Main.java:18:13
   (call $$ctor__void_$p_systemgetproperty_Main@systemgetproperty.Main (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ systemgetproperty/Main.java:18:13
   (return (local.get $$instance))
  )
@@ -74,10 +71,8 @@
  (param $this (ref null $systemgetproperty.Main))
  ;;@ systemgetproperty/Main.java:18:13
  (block
-  ;; systemgetproperty.Main.$clinit();
   ;;@ systemgetproperty/Main.java:18:13
   (call $$clinit__void@systemgetproperty.Main )
-  ;; Object.this.$ctor();
   ;;@ systemgetproperty/Main.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -91,34 +86,25 @@
  (local $$qualifier (ref null $java.lang.String))
  (local $$qualifier_1 (ref null $java.lang.String))
  (block
-  ;; systemgetproperty.Main.$clinit();
   ;;@ systemgetproperty/Main.java:24:41
   (call $$clinit__void@systemgetproperty.Main )
-  ;; boolean x;
   ;;@ systemgetproperty/Main.java:25:4
   
-  ;; (x = true);
   ;;@ systemgetproperty/Main.java:26:4
   (local.set $x (i32.const 1))
-  ;; (x = true);
   ;;@ systemgetproperty/Main.java:27:4
   (local.set $x (i32.const 1))
-  ;; (x = (String $qualifier = javaemul.internal.StringPool.$getString_|SIMPLE|(),$qualifier.equalsIgnoreCase(javaemul.internal.StringPool.$getString_|SIMPLE|())));
   ;;@ systemgetproperty/Main.java:28:4
   (local.set $x (block (result i32)
    (local.set $$qualifier (call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) ))
    (call_ref $function.m_equalsIgnoreCase__java_lang_String__boolean (ref.as_non_null (local.get $$qualifier))(call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.String.vtable $m_equalsIgnoreCase__java_lang_String__boolean (struct.get $java.lang.String $vtable(local.get $$qualifier))))
   ))
-  ;; (x = false);
   ;;@ systemgetproperty/Main.java:29:4
   (local.set $x (i32.const 0))
-  ;; (x = true);
   ;;@ systemgetproperty/Main.java:31:4
   (local.set $x (i32.const 1))
-  ;; (x = true);
   ;;@ systemgetproperty/Main.java:32:4
   (local.set $x (i32.const 1))
-  ;; (x = (String $qualifier = (systemgetproperty.Main.mightHaveSideEffects(),javaemul.internal.StringPool.$getString_|SIMPLE|()),$qualifier.equals(javaemul.internal.StringPool.$getString_|SIMPLE|())));
   ;;@ systemgetproperty/Main.java:33:4
   (local.set $x (block (result i32)
    (local.set $$qualifier_1 (block (result (ref null $java.lang.String))
@@ -135,7 +121,6 @@
  (result (ref null $java.lang.String))
  ;;@ systemgetproperty/Main.java:36:24
  (block
-  ;; return javaemul.internal.StringPool.$getString_|Foo|();
   ;;@ systemgetproperty/Main.java:37:4
   (return (call $function.no.side.effects.$getString_|Foo|__java_lang_String (ref.func $$getString_|Foo|__java_lang_String@javaemul.internal.StringPool) ))
  )
@@ -145,19 +130,15 @@
 (func $$clinit__void@systemgetproperty.Main
  ;;@ systemgetproperty/Main.java:18:13
  (block
-  ;; if (systemgetproperty.Main.$initialized) return;
   ;;@ systemgetproperty/Main.java:18:13
   (if (global.get $f_$initialized__systemgetproperty_Main)
    (then
-    ;; return;
     ;;@ systemgetproperty/Main.java:18:13
     (return )
    )
   )
-  ;; (systemgetproperty.Main.$initialized = true);
   ;;@ systemgetproperty/Main.java:18:13
   (global.set $f_$initialized__systemgetproperty_Main (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ systemgetproperty/Main.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -167,14 +148,11 @@
 (func $$getClassMetadata__java_lang_Class@systemgetproperty.Main
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((systemgetproperty.Main.$class == null)) (systemgetproperty.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|systemgetpro...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__systemgetproperty_Main) (ref.null $java.lang.Class))
    (then
-    ;; (systemgetproperty.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|systemgetpro...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__systemgetproperty_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|systemgetpro...|__java_lang_String (ref.func $$getString_|systemgetpro...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return systemgetproperty.Main.$class;
   (return (global.get $f_$class__systemgetproperty_Main))
  )
 )
@@ -187,7 +165,6 @@
  (local $this (ref null $systemgetproperty.Main))
  (local.set $this (ref.cast_static $systemgetproperty.Main (local.get $this.untyped)))
  (block
-  ;; return systemgetproperty.Main.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@systemgetproperty.Main) ))
  )
 )

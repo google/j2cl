@@ -1136,16 +1136,13 @@
 (func $$clinit__void@bridgejsmethod.Main.I
  ;;@ bridgejsmethod/Main.java:33:19
  (block
-  ;; if (bridgejsmethod.Main.I.$initialized) return;
   ;;@ bridgejsmethod/Main.java:33:19
   (if (global.get $f_$initialized__bridgejsmethod_Main_I)
    (then
-    ;; return;
     ;;@ bridgejsmethod/Main.java:33:19
     (return )
    )
   )
-  ;; (bridgejsmethod.Main.I.$initialized = true);
   ;;@ bridgejsmethod/Main.java:33:19
   (global.set $f_$initialized__bridgejsmethod_Main_I (i32.const 1))
  )
@@ -1155,14 +1152,11 @@
 (func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.I
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((bridgejsmethod.Main.I.$class == null)) (bridgejsmethod.Main.I.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_2()));
   (if (ref.eq (global.get $f_$class__bridgejsmethod_Main_I) (ref.null $java.lang.Class))
    (then
-    ;; (bridgejsmethod.Main.I.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_2()));
     (global.set $f_$class__bridgejsmethod_Main_I (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|_2__java_lang_String (ref.func $$getString_|bridgejsmeth...|_2__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return bridgejsmethod.Main.I.$class;
   (return (global.get $f_$class__bridgejsmethod_Main_I))
  )
 )
@@ -1173,16 +1167,13 @@
 (func $$clinit__void@bridgejsmethod.Main.J
  ;;@ bridgejsmethod/Main.java:39:19
  (block
-  ;; if (bridgejsmethod.Main.J.$initialized) return;
   ;;@ bridgejsmethod/Main.java:39:19
   (if (global.get $f_$initialized__bridgejsmethod_Main_J)
    (then
-    ;; return;
     ;;@ bridgejsmethod/Main.java:39:19
     (return )
    )
   )
-  ;; (bridgejsmethod.Main.J.$initialized = true);
   ;;@ bridgejsmethod/Main.java:39:19
   (global.set $f_$initialized__bridgejsmethod_Main_J (i32.const 1))
  )
@@ -1192,14 +1183,11 @@
 (func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.J
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((bridgejsmethod.Main.J.$class == null)) (bridgejsmethod.Main.J.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_3()));
   (if (ref.eq (global.get $f_$class__bridgejsmethod_Main_J) (ref.null $java.lang.Class))
    (then
-    ;; (bridgejsmethod.Main.J.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_3()));
     (global.set $f_$class__bridgejsmethod_Main_J (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|_3__java_lang_String (ref.func $$getString_|bridgejsmeth...|_3__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return bridgejsmethod.Main.J.$class;
   (return (global.get $f_$class__bridgejsmethod_Main_J))
  )
 )
@@ -1210,16 +1198,13 @@
 (func $$clinit__void@bridgejsmethod.Main.G
  ;;@ bridgejsmethod/Main.java:87:19
  (block
-  ;; if (bridgejsmethod.Main.G.$initialized) return;
   ;;@ bridgejsmethod/Main.java:87:19
   (if (global.get $f_$initialized__bridgejsmethod_Main_G)
    (then
-    ;; return;
     ;;@ bridgejsmethod/Main.java:87:19
     (return )
    )
   )
-  ;; (bridgejsmethod.Main.G.$initialized = true);
   ;;@ bridgejsmethod/Main.java:87:19
   (global.set $f_$initialized__bridgejsmethod_Main_G (i32.const 1))
  )
@@ -1229,14 +1214,11 @@
 (func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.G
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((bridgejsmethod.Main.G.$class == null)) (bridgejsmethod.Main.G.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_9()));
   (if (ref.eq (global.get $f_$class__bridgejsmethod_Main_G) (ref.null $java.lang.Class))
    (then
-    ;; (bridgejsmethod.Main.G.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_9()));
     (global.set $f_$class__bridgejsmethod_Main_G (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|_9__java_lang_String (ref.func $$getString_|bridgejsmeth...|_9__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return bridgejsmethod.Main.G.$class;
   (return (global.get $f_$class__bridgejsmethod_Main_G))
  )
 )
@@ -1247,16 +1229,13 @@
 (func $$clinit__void@bridgejsmethod.Main.M
  ;;@ bridgejsmethod/Main.java:119:12
  (block
-  ;; if (bridgejsmethod.Main.M.$initialized) return;
   ;;@ bridgejsmethod/Main.java:119:12
   (if (global.get $f_$initialized__bridgejsmethod_Main_M)
    (then
-    ;; return;
     ;;@ bridgejsmethod/Main.java:119:12
     (return )
    )
   )
-  ;; (bridgejsmethod.Main.M.$initialized = true);
   ;;@ bridgejsmethod/Main.java:119:12
   (global.set $f_$initialized__bridgejsmethod_Main_M (i32.const 1))
  )
@@ -1266,14 +1245,11 @@
 (func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.M
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((bridgejsmethod.Main.M.$class == null)) (bridgejsmethod.Main.M.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_13()));
   (if (ref.eq (global.get $f_$class__bridgejsmethod_Main_M) (ref.null $java.lang.Class))
    (then
-    ;; (bridgejsmethod.Main.M.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_13()));
     (global.set $f_$class__bridgejsmethod_Main_M (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|_13__java_lang_String (ref.func $$getString_|bridgejsmeth...|_13__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return bridgejsmethod.Main.M.$class;
   (return (global.get $f_$class__bridgejsmethod_Main_M))
  )
 )
@@ -1284,16 +1260,13 @@
 (func $$clinit__void@bridgejsmethod.Main.P
  ;;@ bridgejsmethod/Main.java:141:12
  (block
-  ;; if (bridgejsmethod.Main.P.$initialized) return;
   ;;@ bridgejsmethod/Main.java:141:12
   (if (global.get $f_$initialized__bridgejsmethod_Main_P)
    (then
-    ;; return;
     ;;@ bridgejsmethod/Main.java:141:12
     (return )
    )
   )
-  ;; (bridgejsmethod.Main.P.$initialized = true);
   ;;@ bridgejsmethod/Main.java:141:12
   (global.set $f_$initialized__bridgejsmethod_Main_P (i32.const 1))
  )
@@ -1303,14 +1276,11 @@
 (func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.P
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((bridgejsmethod.Main.P.$class == null)) (bridgejsmethod.Main.P.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_16()));
   (if (ref.eq (global.get $f_$class__bridgejsmethod_Main_P) (ref.null $java.lang.Class))
    (then
-    ;; (bridgejsmethod.Main.P.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_16()));
     (global.set $f_$class__bridgejsmethod_Main_P (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|_16__java_lang_String (ref.func $$getString_|bridgejsmeth...|_16__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return bridgejsmethod.Main.P.$class;
   (return (global.get $f_$class__bridgejsmethod_Main_P))
  )
 )
@@ -1323,13 +1293,10 @@
  ;;@ bridgejsmethod/Main.java:21:13
  (local $$instance (ref null $bridgejsmethod.Main))
  (block
-  ;; Main $instance = new Main.<init>(0);
   ;;@ bridgejsmethod/Main.java:21:13
   (local.set $$instance (struct.new $bridgejsmethod.Main (ref.as_non_null (global.get $bridgejsmethod.Main.vtable)) (ref.as_non_null (global.get $bridgejsmethod.Main.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ bridgejsmethod/Main.java:21:13
   (call $$ctor__void_$p_bridgejsmethod_Main@bridgejsmethod.Main (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ bridgejsmethod/Main.java:21:13
   (return (local.get $$instance))
  )
@@ -1340,10 +1307,8 @@
  (param $this (ref null $bridgejsmethod.Main))
  ;;@ bridgejsmethod/Main.java:21:13
  (block
-  ;; bridgejsmethod.Main.$clinit();
   ;;@ bridgejsmethod/Main.java:21:13
   (call $$clinit__void@bridgejsmethod.Main )
-  ;; Object.this.$ctor();
   ;;@ bridgejsmethod/Main.java:21:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -1360,64 +1325,44 @@
  (local $h (ref null $bridgejsmethod.Main.H))
  (local $l (ref null $bridgejsmethod.Main.L))
  (block
-  ;; bridgejsmethod.Main.$clinit();
   ;;@ bridgejsmethod/Main.java:162:28
   (call $$clinit__void@bridgejsmethod.Main )
-  ;; A a = bridgejsmethod.Main.A.$create();
   ;;@ bridgejsmethod/Main.java:163:4
   (local.set $a (call $$create__@bridgejsmethod.Main.A ))
-  ;; a.fun(java.lang.Integer.valueOf(1));
   ;;@ bridgejsmethod/Main.java:164:4
   (drop (call_ref $function.m_fun__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $a))(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))(struct.get $bridgejsmethod.Main.A.vtable $m_fun__java_lang_Object__java_lang_Object (struct.get $bridgejsmethod.Main.A $vtable(local.get $a)))))
-  ;; a.bar(java.lang.Integer.valueOf(1));
   ;;@ bridgejsmethod/Main.java:165:4
   (call_ref $function.m_bar__java_lang_Object__void (ref.as_non_null (local.get $a))(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))(struct.get $bridgejsmethod.Main.A.vtable $m_bar__java_lang_Object__void (struct.get $bridgejsmethod.Main.A $vtable(local.get $a))))
-  ;; B b = bridgejsmethod.Main.B.$create();
   ;;@ bridgejsmethod/Main.java:166:4
   (local.set $b (call $$create__@bridgejsmethod.Main.B ))
-  ;; b.fun(javaemul.internal.StringPool.$getString_|abc|());
   ;;@ bridgejsmethod/Main.java:167:4
   (drop (call_ref $function.m_fun__java_lang_String__java_lang_String (ref.as_non_null (local.get $b))(call $function.no.side.effects.$getString_|abc|__java_lang_String (ref.func $$getString_|abc|__java_lang_String@javaemul.internal.StringPool) )(struct.get $bridgejsmethod.Main.B.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgejsmethod.Main.B $vtable(local.get $b)))))
-  ;; b.bar(javaemul.internal.StringPool.$getString_|abc|());
   ;;@ bridgejsmethod/Main.java:168:4
   (call_ref $function.m_bar__java_lang_String__void (ref.as_non_null (local.get $b))(call $function.no.side.effects.$getString_|abc|__java_lang_String (ref.func $$getString_|abc|__java_lang_String@javaemul.internal.StringPool) )(struct.get $bridgejsmethod.Main.B.vtable $m_bar__java_lang_String__void (struct.get $bridgejsmethod.Main.B $vtable(local.get $b))))
-  ;; C c = bridgejsmethod.Main.C.$create();
   ;;@ bridgejsmethod/Main.java:169:4
   (local.set $c (call $$create__@bridgejsmethod.Main.C ))
-  ;; c.fun(java.lang.Integer.valueOf(1));
   ;;@ bridgejsmethod/Main.java:170:4
   (drop (call_ref $function.m_fun__java_lang_Integer__java_lang_Integer (ref.as_non_null (local.get $c))(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))(struct.get $bridgejsmethod.Main.C.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.C $vtable(local.get $c)))))
-  ;; c.bar(java.lang.Integer.valueOf(1));
   ;;@ bridgejsmethod/Main.java:171:4
   (call_ref $function.m_bar__java_lang_Object__void (ref.as_non_null (local.get $c))(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))(struct.get $bridgejsmethod.Main.A.vtable $m_bar__java_lang_Object__void (struct.get $bridgejsmethod.Main.A $vtable(local.get $c))))
-  ;; D d = bridgejsmethod.Main.D.$create();
   ;;@ bridgejsmethod/Main.java:172:4
   (local.set $d (call $$create__@bridgejsmethod.Main.D ))
-  ;; d.fun(java.lang.Integer.valueOf(1));
   ;;@ bridgejsmethod/Main.java:173:4
   (drop (call_ref $function.m_fun__java_lang_Integer__java_lang_Integer (ref.as_non_null (local.get $d))(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))(struct.get $bridgejsmethod.Main.D.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.D $vtable(local.get $d)))))
-  ;; d.bar(java.lang.Integer.valueOf(1));
   ;;@ bridgejsmethod/Main.java:174:4
   (call_ref $function.m_bar__java_lang_Object__void (ref.as_non_null (local.get $d))(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))(struct.get $bridgejsmethod.Main.A.vtable $m_bar__java_lang_Object__void (struct.get $bridgejsmethod.Main.A $vtable(local.get $d))))
-  ;; E e = bridgejsmethod.Main.E.$create();
   ;;@ bridgejsmethod/Main.java:175:4
   (local.set $e (call $$create__@bridgejsmethod.Main.E ))
-  ;; e.fun(javaemul.internal.StringPool.$getString_|abc|());
   ;;@ bridgejsmethod/Main.java:176:4
   (drop (call_ref $function.m_fun__java_lang_String__java_lang_String (ref.as_non_null (local.get $e))(call $function.no.side.effects.$getString_|abc|__java_lang_String (ref.func $$getString_|abc|__java_lang_String@javaemul.internal.StringPool) )(struct.get $bridgejsmethod.Main.B.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgejsmethod.Main.B $vtable(local.get $e)))))
-  ;; e.bar(javaemul.internal.StringPool.$getString_|abc|());
   ;;@ bridgejsmethod/Main.java:177:4
   (call_ref $function.m_bar__java_lang_String__void (ref.as_non_null (local.get $e))(call $function.no.side.effects.$getString_|abc|__java_lang_String (ref.func $$getString_|abc|__java_lang_String@javaemul.internal.StringPool) )(struct.get $bridgejsmethod.Main.B.vtable $m_bar__java_lang_String__void (struct.get $bridgejsmethod.Main.B $vtable(local.get $e))))
-  ;; H<Integer> h = bridgejsmethod.Main.H.$create();
   ;;@ bridgejsmethod/Main.java:178:4
   (local.set $h (call $$create__@bridgejsmethod.Main.H ))
-  ;; h.enclose(java.lang.Integer.valueOf(1));
   ;;@ bridgejsmethod/Main.java:179:4
   (drop (call_ref $function.m_enclose__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $h))(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))(struct.get $bridgejsmethod.Main.H.vtable $m_enclose__java_lang_Object__java_lang_Object (struct.get $bridgejsmethod.Main.H $vtable(local.get $h)))))
-  ;; L<Integer> l = bridgejsmethod.Main.L.$create();
   ;;@ bridgejsmethod/Main.java:180:4
   (local.set $l (call $$create__@bridgejsmethod.Main.L ))
-  ;; l.fun(javaemul.internal.StringPool.$getString_|foo|(),java.lang.Integer.valueOf(1));
   ;;@ bridgejsmethod/Main.java:181:4
   (call_ref $function.m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod (ref.as_non_null (local.get $l))(call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))(struct.get $bridgejsmethod.Main.L.vtable $m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod (struct.get $bridgejsmethod.Main.L $vtable(local.get $l))))
  )
@@ -1427,19 +1372,15 @@
 (func $$clinit__void@bridgejsmethod.Main
  ;;@ bridgejsmethod/Main.java:21:13
  (block
-  ;; if (bridgejsmethod.Main.$initialized) return;
   ;;@ bridgejsmethod/Main.java:21:13
   (if (global.get $f_$initialized__bridgejsmethod_Main)
    (then
-    ;; return;
     ;;@ bridgejsmethod/Main.java:21:13
     (return )
    )
   )
-  ;; (bridgejsmethod.Main.$initialized = true);
   ;;@ bridgejsmethod/Main.java:21:13
   (global.set $f_$initialized__bridgejsmethod_Main (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ bridgejsmethod/Main.java:21:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -1449,14 +1390,11 @@
 (func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((bridgejsmethod.Main.$class == null)) (bridgejsmethod.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__bridgejsmethod_Main) (ref.null $java.lang.Class))
    (then
-    ;; (bridgejsmethod.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__bridgejsmethod_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|__java_lang_String (ref.func $$getString_|bridgejsmeth...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return bridgejsmethod.Main.$class;
   (return (global.get $f_$class__bridgejsmethod_Main))
  )
 )
@@ -1469,7 +1407,6 @@
  (local $this (ref null $bridgejsmethod.Main))
  (local.set $this (ref.cast_static $bridgejsmethod.Main (local.get $this.untyped)))
  (block
-  ;; return bridgejsmethod.Main.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main) ))
  )
 )
@@ -1483,13 +1420,10 @@
  ;;@ bridgejsmethod/Main.java:22:22
  (local $$instance (ref null $bridgejsmethod.Main.A))
  (block
-  ;; A<T> $instance = new A.<init>(0);
   ;;@ bridgejsmethod/Main.java:22:22
   (local.set $$instance (struct.new $bridgejsmethod.Main.A (ref.as_non_null (global.get $bridgejsmethod.Main.A.vtable)) (ref.as_non_null (global.get $bridgejsmethod.Main.A.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ bridgejsmethod/Main.java:22:22
   (call $$ctor__void_$p_bridgejsmethod_Main_A@bridgejsmethod.Main.A (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ bridgejsmethod/Main.java:22:22
   (return (local.get $$instance))
  )
@@ -1500,10 +1434,8 @@
  (param $this (ref null $bridgejsmethod.Main.A))
  ;;@ bridgejsmethod/Main.java:22:22
  (block
-  ;; bridgejsmethod.Main.A.$clinit();
   ;;@ bridgejsmethod/Main.java:22:22
   (call $$clinit__void@bridgejsmethod.Main.A )
-  ;; Object.this.$ctor();
   ;;@ bridgejsmethod/Main.java:22:22
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -1519,7 +1451,6 @@
  (local $this (ref null $bridgejsmethod.Main.A))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.A (local.get $this.untyped)))
  (block
-  ;; return t;
   ;;@ bridgejsmethod/Main.java:25:6
   (return (local.get $t))
  )
@@ -1543,19 +1474,15 @@
 (func $$clinit__void@bridgejsmethod.Main.A
  ;;@ bridgejsmethod/Main.java:22:22
  (block
-  ;; if (bridgejsmethod.Main.A.$initialized) return;
   ;;@ bridgejsmethod/Main.java:22:22
   (if (global.get $f_$initialized__bridgejsmethod_Main_A)
    (then
-    ;; return;
     ;;@ bridgejsmethod/Main.java:22:22
     (return )
    )
   )
-  ;; (bridgejsmethod.Main.A.$initialized = true);
   ;;@ bridgejsmethod/Main.java:22:22
   (global.set $f_$initialized__bridgejsmethod_Main_A (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ bridgejsmethod/Main.java:22:22
   (call $$clinit__void@java.lang.Object )
  )
@@ -1565,14 +1492,11 @@
 (func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.A
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((bridgejsmethod.Main.A.$class == null)) (bridgejsmethod.Main.A.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_1(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__bridgejsmethod_Main_A) (ref.null $java.lang.Class))
    (then
-    ;; (bridgejsmethod.Main.A.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_1(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__bridgejsmethod_Main_A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|_1__java_lang_String (ref.func $$getString_|bridgejsmeth...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return bridgejsmethod.Main.A.$class;
   (return (global.get $f_$class__bridgejsmethod_Main_A))
  )
 )
@@ -1585,7 +1509,6 @@
  (local $this (ref null $bridgejsmethod.Main.A))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.A (local.get $this.untyped)))
  (block
-  ;; return bridgejsmethod.Main.A.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.A) ))
  )
 )
@@ -1599,13 +1522,10 @@
  ;;@ bridgejsmethod/Main.java:91:22
  (local $$instance (ref null $bridgejsmethod.Main.H))
  (block
-  ;; H<V> $instance = new H.<init>(0);
   ;;@ bridgejsmethod/Main.java:91:22
   (local.set $$instance (struct.new $bridgejsmethod.Main.H (ref.as_non_null (global.get $bridgejsmethod.Main.H.vtable)) (ref.as_non_null (global.get $bridgejsmethod.Main.H.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ bridgejsmethod/Main.java:91:22
   (call $$ctor__void_$p_bridgejsmethod_Main_H@bridgejsmethod.Main.H (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ bridgejsmethod/Main.java:91:22
   (return (local.get $$instance))
  )
@@ -1616,10 +1536,8 @@
  (param $this (ref null $bridgejsmethod.Main.H))
  ;;@ bridgejsmethod/Main.java:91:22
  (block
-  ;; bridgejsmethod.Main.H.$clinit();
   ;;@ bridgejsmethod/Main.java:91:22
   (call $$clinit__void@bridgejsmethod.Main.H )
-  ;; Object.this.$ctor();
   ;;@ bridgejsmethod/Main.java:91:22
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -1635,7 +1553,6 @@
  (local $this (ref null $bridgejsmethod.Main.H))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.H (local.get $this.untyped)))
  (block
-  ;; return null;
   ;;@ bridgejsmethod/Main.java:101:6
   (return (ref.null $java.lang.Object))
  )
@@ -1646,19 +1563,15 @@
 (func $$clinit__void@bridgejsmethod.Main.H
  ;;@ bridgejsmethod/Main.java:91:22
  (block
-  ;; if (bridgejsmethod.Main.H.$initialized) return;
   ;;@ bridgejsmethod/Main.java:91:22
   (if (global.get $f_$initialized__bridgejsmethod_Main_H)
    (then
-    ;; return;
     ;;@ bridgejsmethod/Main.java:91:22
     (return )
    )
   )
-  ;; (bridgejsmethod.Main.H.$initialized = true);
   ;;@ bridgejsmethod/Main.java:91:22
   (global.set $f_$initialized__bridgejsmethod_Main_H (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ bridgejsmethod/Main.java:91:22
   (call $$clinit__void@java.lang.Object )
  )
@@ -1668,14 +1581,11 @@
 (func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.H
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((bridgejsmethod.Main.H.$class == null)) (bridgejsmethod.Main.H.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_10(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__bridgejsmethod_Main_H) (ref.null $java.lang.Class))
    (then
-    ;; (bridgejsmethod.Main.H.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_10(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__bridgejsmethod_Main_H (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|_10__java_lang_String (ref.func $$getString_|bridgejsmeth...|_10__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return bridgejsmethod.Main.H.$class;
   (return (global.get $f_$class__bridgejsmethod_Main_H))
  )
 )
@@ -1688,7 +1598,6 @@
  (local $this (ref null $bridgejsmethod.Main.H))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.H (local.get $this.untyped)))
  (block
-  ;; return bridgejsmethod.Main.H.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.H) ))
  )
 )
@@ -1702,13 +1611,10 @@
  ;;@ bridgejsmethod/Main.java:105:22
  (local $$instance (ref null $bridgejsmethod.Main.K))
  (block
-  ;; K<K1, K2> $instance = new K.<init>(0);
   ;;@ bridgejsmethod/Main.java:105:22
   (local.set $$instance (struct.new $bridgejsmethod.Main.K (ref.as_non_null (global.get $bridgejsmethod.Main.K.vtable)) (ref.as_non_null (global.get $bridgejsmethod.Main.K.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ bridgejsmethod/Main.java:105:22
   (call $$ctor__void_$p_bridgejsmethod_Main_K@bridgejsmethod.Main.K (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ bridgejsmethod/Main.java:105:22
   (return (local.get $$instance))
  )
@@ -1719,10 +1625,8 @@
  (param $this (ref null $bridgejsmethod.Main.K))
  ;;@ bridgejsmethod/Main.java:105:22
  (block
-  ;; bridgejsmethod.Main.K.$clinit();
   ;;@ bridgejsmethod/Main.java:105:22
   (call $$clinit__void@bridgejsmethod.Main.K )
-  ;; Object.this.$ctor();
   ;;@ bridgejsmethod/Main.java:105:22
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -1746,19 +1650,15 @@
 (func $$clinit__void@bridgejsmethod.Main.K
  ;;@ bridgejsmethod/Main.java:105:22
  (block
-  ;; if (bridgejsmethod.Main.K.$initialized) return;
   ;;@ bridgejsmethod/Main.java:105:22
   (if (global.get $f_$initialized__bridgejsmethod_Main_K)
    (then
-    ;; return;
     ;;@ bridgejsmethod/Main.java:105:22
     (return )
    )
   )
-  ;; (bridgejsmethod.Main.K.$initialized = true);
   ;;@ bridgejsmethod/Main.java:105:22
   (global.set $f_$initialized__bridgejsmethod_Main_K (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ bridgejsmethod/Main.java:105:22
   (call $$clinit__void@java.lang.Object )
  )
@@ -1768,14 +1668,11 @@
 (func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.K
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((bridgejsmethod.Main.K.$class == null)) (bridgejsmethod.Main.K.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_11(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__bridgejsmethod_Main_K) (ref.null $java.lang.Class))
    (then
-    ;; (bridgejsmethod.Main.K.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_11(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__bridgejsmethod_Main_K (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|_11__java_lang_String (ref.func $$getString_|bridgejsmeth...|_11__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return bridgejsmethod.Main.K.$class;
   (return (global.get $f_$class__bridgejsmethod_Main_K))
  )
 )
@@ -1788,7 +1685,6 @@
  (local $this (ref null $bridgejsmethod.Main.K))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.K (local.get $this.untyped)))
  (block
-  ;; return bridgejsmethod.Main.K.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.K) ))
  )
 )
@@ -1802,10 +1698,8 @@
  (param $$outer_this (ref null $bridgejsmethod.Main))
  ;;@ bridgejsmethod/Main.java:126:4
  (block
-  ;; bridgejsmethod.Main.N.$clinit();
   ;;@ bridgejsmethod/Main.java:126:8
   (call $$clinit__void@bridgejsmethod.Main.N )
-  ;; Object.this.$ctor();
   ;;@ bridgejsmethod/Main.java:126:8
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -1815,19 +1709,15 @@
 (func $$clinit__void@bridgejsmethod.Main.N
  ;;@ bridgejsmethod/Main.java:125:17
  (block
-  ;; if (bridgejsmethod.Main.N.$initialized) return;
   ;;@ bridgejsmethod/Main.java:125:17
   (if (global.get $f_$initialized__bridgejsmethod_Main_N)
    (then
-    ;; return;
     ;;@ bridgejsmethod/Main.java:125:17
     (return )
    )
   )
-  ;; (bridgejsmethod.Main.N.$initialized = true);
   ;;@ bridgejsmethod/Main.java:125:17
   (global.set $f_$initialized__bridgejsmethod_Main_N (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ bridgejsmethod/Main.java:125:17
   (call $$clinit__void@java.lang.Object )
  )
@@ -1837,14 +1727,11 @@
 (func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.N
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((bridgejsmethod.Main.N.$class == null)) (bridgejsmethod.Main.N.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_14(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__bridgejsmethod_Main_N) (ref.null $java.lang.Class))
    (then
-    ;; (bridgejsmethod.Main.N.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_14(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__bridgejsmethod_Main_N (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|_14__java_lang_String (ref.func $$getString_|bridgejsmeth...|_14__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return bridgejsmethod.Main.N.$class;
   (return (global.get $f_$class__bridgejsmethod_Main_N))
  )
 )
@@ -1857,10 +1744,8 @@
  (param $$outer_this (ref null $bridgejsmethod.Main))
  ;;@ bridgejsmethod/Main.java:147:17
  (block
-  ;; bridgejsmethod.Main.Q.$clinit();
   ;;@ bridgejsmethod/Main.java:147:17
   (call $$clinit__void@bridgejsmethod.Main.Q )
-  ;; Object.this.$ctor();
   ;;@ bridgejsmethod/Main.java:147:17
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -1870,19 +1755,15 @@
 (func $$clinit__void@bridgejsmethod.Main.Q
  ;;@ bridgejsmethod/Main.java:147:17
  (block
-  ;; if (bridgejsmethod.Main.Q.$initialized) return;
   ;;@ bridgejsmethod/Main.java:147:17
   (if (global.get $f_$initialized__bridgejsmethod_Main_Q)
    (then
-    ;; return;
     ;;@ bridgejsmethod/Main.java:147:17
     (return )
    )
   )
-  ;; (bridgejsmethod.Main.Q.$initialized = true);
   ;;@ bridgejsmethod/Main.java:147:17
   (global.set $f_$initialized__bridgejsmethod_Main_Q (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ bridgejsmethod/Main.java:147:17
   (call $$clinit__void@java.lang.Object )
  )
@@ -1892,14 +1773,11 @@
 (func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.Q
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((bridgejsmethod.Main.Q.$class == null)) (bridgejsmethod.Main.Q.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_17(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__bridgejsmethod_Main_Q) (ref.null $java.lang.Class))
    (then
-    ;; (bridgejsmethod.Main.Q.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_17(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__bridgejsmethod_Main_Q (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|_17__java_lang_String (ref.func $$getString_|bridgejsmeth...|_17__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return bridgejsmethod.Main.Q.$class;
   (return (global.get $f_$class__bridgejsmethod_Main_Q))
  )
 )
@@ -1913,13 +1791,10 @@
  ;;@ bridgejsmethod/Main.java:185:8
  (local $$instance (ref null $bridgejsmethod.Main.GrandParent))
  (block
-  ;; GrandParent<T> $instance = new GrandParent.<init>(0,$outer_this);
   ;;@ bridgejsmethod/Main.java:185:8
   (local.set $$instance (struct.new $bridgejsmethod.Main.GrandParent (ref.as_non_null (global.get $bridgejsmethod.Main.GrandParent.vtable)) (ref.as_non_null (global.get $bridgejsmethod.Main.GrandParent.itable)) (i32.const 0) (local.get $$outer_this)))
-  ;; $instance.$ctor($outer_this);
   ;;@ bridgejsmethod/Main.java:185:8
   (call $$ctor__bridgejsmethod_Main__void_$p_bridgejsmethod_Main_GrandParent@bridgejsmethod.Main.GrandParent (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;; return $instance;
   ;;@ bridgejsmethod/Main.java:185:8
   (return (local.get $$instance))
  )
@@ -1931,10 +1806,8 @@
  (param $$outer_this (ref null $bridgejsmethod.Main))
  ;;@ bridgejsmethod/Main.java:185:8
  (block
-  ;; bridgejsmethod.Main.GrandParent.$clinit();
   ;;@ bridgejsmethod/Main.java:185:8
   (call $$clinit__void@bridgejsmethod.Main.GrandParent )
-  ;; Object.this.$ctor();
   ;;@ bridgejsmethod/Main.java:185:8
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -1970,19 +1843,15 @@
 (func $$clinit__void@bridgejsmethod.Main.GrandParent
  ;;@ bridgejsmethod/Main.java:185:8
  (block
-  ;; if (bridgejsmethod.Main.GrandParent.$initialized) return;
   ;;@ bridgejsmethod/Main.java:185:8
   (if (global.get $f_$initialized__bridgejsmethod_Main_GrandParent)
    (then
-    ;; return;
     ;;@ bridgejsmethod/Main.java:185:8
     (return )
    )
   )
-  ;; (bridgejsmethod.Main.GrandParent.$initialized = true);
   ;;@ bridgejsmethod/Main.java:185:8
   (global.set $f_$initialized__bridgejsmethod_Main_GrandParent (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ bridgejsmethod/Main.java:185:8
   (call $$clinit__void@java.lang.Object )
  )
@@ -1992,14 +1861,11 @@
 (func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.GrandParent
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((bridgejsmethod.Main.GrandParent.$class == null)) (bridgejsmethod.Main.GrandParent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_20(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__bridgejsmethod_Main_GrandParent) (ref.null $java.lang.Class))
    (then
-    ;; (bridgejsmethod.Main.GrandParent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_20(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__bridgejsmethod_Main_GrandParent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|_20__java_lang_String (ref.func $$getString_|bridgejsmeth...|_20__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return bridgejsmethod.Main.GrandParent.$class;
   (return (global.get $f_$class__bridgejsmethod_Main_GrandParent))
  )
 )
@@ -2012,7 +1878,6 @@
  (local $this (ref null $bridgejsmethod.Main.GrandParent))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.GrandParent (local.get $this.untyped)))
  (block
-  ;; return bridgejsmethod.Main.GrandParent.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.GrandParent) ))
  )
 )
@@ -2026,13 +1891,10 @@
  ;;@ bridgejsmethod/Main.java:43:22
  (local $$instance (ref null $bridgejsmethod.Main.B))
  (block
-  ;; B $instance = new B.<init>(0);
   ;;@ bridgejsmethod/Main.java:43:22
   (local.set $$instance (struct.new $bridgejsmethod.Main.B (ref.as_non_null (global.get $bridgejsmethod.Main.B.vtable)) (ref.as_non_null (global.get $bridgejsmethod.Main.B.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ bridgejsmethod/Main.java:43:22
   (call $$ctor__void_$p_bridgejsmethod_Main_B@bridgejsmethod.Main.B (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ bridgejsmethod/Main.java:43:22
   (return (local.get $$instance))
  )
@@ -2043,10 +1905,8 @@
  (param $this (ref null $bridgejsmethod.Main.B))
  ;;@ bridgejsmethod/Main.java:43:22
  (block
-  ;; bridgejsmethod.Main.B.$clinit();
   ;;@ bridgejsmethod/Main.java:43:22
   (call $$clinit__void@bridgejsmethod.Main.B )
-  ;; A.this.$ctor();
   ;;@ bridgejsmethod/Main.java:43:22
   (call $$ctor__void_$p_bridgejsmethod_Main_A@bridgejsmethod.Main.A (ref.as_non_null (local.get $this)))
  )
@@ -2062,7 +1922,6 @@
  (local $this (ref null $bridgejsmethod.Main.B))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.B (local.get $this.untyped)))
  (block
-  ;; return s;
   ;;@ bridgejsmethod/Main.java:50:6
   (return (local.get $s))
  )
@@ -2091,7 +1950,6 @@
  (local $this (ref null $bridgejsmethod.Main.B))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.B (local.get $this.untyped)))
  (block
-  ;; B.this.bar(((String) arg0));
   ;;@ bridgejsmethod/Main.java:43:22
   (call_ref $function.m_bar__java_lang_String__void (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $bridgejsmethod.Main.B.vtable $m_bar__java_lang_String__void (struct.get $bridgejsmethod.Main.B $vtable(local.get $this))))
  )
@@ -2108,7 +1966,6 @@
  (local $this (ref null $bridgejsmethod.Main.B))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.B (local.get $this.untyped)))
  (block
-  ;; return B.this.fun(((String) arg0));
   ;;@ bridgejsmethod/Main.java:43:22
   (return (call_ref $function.m_fun__java_lang_String__java_lang_String (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $bridgejsmethod.Main.B.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgejsmethod.Main.B $vtable(local.get $this)))))
  )
@@ -2119,19 +1976,15 @@
 (func $$clinit__void@bridgejsmethod.Main.B
  ;;@ bridgejsmethod/Main.java:43:22
  (block
-  ;; if (bridgejsmethod.Main.B.$initialized) return;
   ;;@ bridgejsmethod/Main.java:43:22
   (if (global.get $f_$initialized__bridgejsmethod_Main_B)
    (then
-    ;; return;
     ;;@ bridgejsmethod/Main.java:43:22
     (return )
    )
   )
-  ;; (bridgejsmethod.Main.B.$initialized = true);
   ;;@ bridgejsmethod/Main.java:43:22
   (global.set $f_$initialized__bridgejsmethod_Main_B (i32.const 1))
-  ;; bridgejsmethod.Main.A.$clinit();
   ;;@ bridgejsmethod/Main.java:43:22
   (call $$clinit__void@bridgejsmethod.Main.A )
  )
@@ -2141,14 +1994,11 @@
 (func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.B
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((bridgejsmethod.Main.B.$class == null)) (bridgejsmethod.Main.B.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_4(),bridgejsmethod.Main.A.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__bridgejsmethod_Main_B) (ref.null $java.lang.Class))
    (then
-    ;; (bridgejsmethod.Main.B.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_4(),bridgejsmethod.Main.A.$getClassMetadata()));
     (global.set $f_$class__bridgejsmethod_Main_B (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|_4__java_lang_String (ref.func $$getString_|bridgejsmeth...|_4__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.A) )))
    )
   )
-  ;; return bridgejsmethod.Main.B.$class;
   (return (global.get $f_$class__bridgejsmethod_Main_B))
  )
 )
@@ -2161,7 +2011,6 @@
  (local $this (ref null $bridgejsmethod.Main.B))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.B (local.get $this.untyped)))
  (block
-  ;; return bridgejsmethod.Main.B.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.B) ))
  )
 )
@@ -2175,13 +2024,10 @@
  ;;@ bridgejsmethod/Main.java:61:22
  (local $$instance (ref null $bridgejsmethod.Main.C))
  (block
-  ;; C $instance = new C.<init>(0);
   ;;@ bridgejsmethod/Main.java:61:22
   (local.set $$instance (struct.new $bridgejsmethod.Main.C (ref.as_non_null (global.get $bridgejsmethod.Main.C.vtable)) (ref.as_non_null (global.get $bridgejsmethod.Main.C.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ bridgejsmethod/Main.java:61:22
   (call $$ctor__void_$p_bridgejsmethod_Main_C@bridgejsmethod.Main.C (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ bridgejsmethod/Main.java:61:22
   (return (local.get $$instance))
  )
@@ -2192,10 +2038,8 @@
  (param $this (ref null $bridgejsmethod.Main.C))
  ;;@ bridgejsmethod/Main.java:61:22
  (block
-  ;; bridgejsmethod.Main.C.$clinit();
   ;;@ bridgejsmethod/Main.java:61:22
   (call $$clinit__void@bridgejsmethod.Main.C )
-  ;; A.this.$ctor();
   ;;@ bridgejsmethod/Main.java:61:22
   (call $$ctor__void_$p_bridgejsmethod_Main_A@bridgejsmethod.Main.A (ref.as_non_null (local.get $this)))
  )
@@ -2211,7 +2055,6 @@
  (local $this (ref null $bridgejsmethod.Main.C))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.C (local.get $this.untyped)))
  (block
-  ;; return i;
   ;;@ bridgejsmethod/Main.java:66:6
   (return (local.get $i))
  )
@@ -2228,7 +2071,6 @@
  (local $this (ref null $bridgejsmethod.Main.C))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.C (local.get $this.untyped)))
  (block
-  ;; return C.this.fun(((Integer) arg0));
   ;;@ bridgejsmethod/Main.java:61:22
   (return (call_ref $function.m_fun__java_lang_Integer__java_lang_Integer (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.Integer (local.get $arg0))(struct.get $bridgejsmethod.Main.C.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.C $vtable(local.get $this)))))
  )
@@ -2239,19 +2081,15 @@
 (func $$clinit__void@bridgejsmethod.Main.C
  ;;@ bridgejsmethod/Main.java:61:22
  (block
-  ;; if (bridgejsmethod.Main.C.$initialized) return;
   ;;@ bridgejsmethod/Main.java:61:22
   (if (global.get $f_$initialized__bridgejsmethod_Main_C)
    (then
-    ;; return;
     ;;@ bridgejsmethod/Main.java:61:22
     (return )
    )
   )
-  ;; (bridgejsmethod.Main.C.$initialized = true);
   ;;@ bridgejsmethod/Main.java:61:22
   (global.set $f_$initialized__bridgejsmethod_Main_C (i32.const 1))
-  ;; bridgejsmethod.Main.A.$clinit();
   ;;@ bridgejsmethod/Main.java:61:22
   (call $$clinit__void@bridgejsmethod.Main.A )
  )
@@ -2261,14 +2099,11 @@
 (func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.C
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((bridgejsmethod.Main.C.$class == null)) (bridgejsmethod.Main.C.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_5(),bridgejsmethod.Main.A.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__bridgejsmethod_Main_C) (ref.null $java.lang.Class))
    (then
-    ;; (bridgejsmethod.Main.C.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_5(),bridgejsmethod.Main.A.$getClassMetadata()));
     (global.set $f_$class__bridgejsmethod_Main_C (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|_5__java_lang_String (ref.func $$getString_|bridgejsmeth...|_5__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.A) )))
    )
   )
-  ;; return bridgejsmethod.Main.C.$class;
   (return (global.get $f_$class__bridgejsmethod_Main_C))
  )
 )
@@ -2281,7 +2116,6 @@
  (local $this (ref null $bridgejsmethod.Main.C))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.C (local.get $this.untyped)))
  (block
-  ;; return bridgejsmethod.Main.C.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.C) ))
  )
 )
@@ -2295,13 +2129,10 @@
  ;;@ bridgejsmethod/Main.java:70:22
  (local $$instance (ref null $bridgejsmethod.Main.D))
  (block
-  ;; D $instance = new D.<init>(0);
   ;;@ bridgejsmethod/Main.java:70:22
   (local.set $$instance (struct.new $bridgejsmethod.Main.D (ref.as_non_null (global.get $bridgejsmethod.Main.D.vtable)) (ref.as_non_null (global.get $bridgejsmethod.Main.D.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ bridgejsmethod/Main.java:70:22
   (call $$ctor__void_$p_bridgejsmethod_Main_D@bridgejsmethod.Main.D (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ bridgejsmethod/Main.java:70:22
   (return (local.get $$instance))
  )
@@ -2312,10 +2143,8 @@
  (param $this (ref null $bridgejsmethod.Main.D))
  ;;@ bridgejsmethod/Main.java:70:22
  (block
-  ;; bridgejsmethod.Main.D.$clinit();
   ;;@ bridgejsmethod/Main.java:70:22
   (call $$clinit__void@bridgejsmethod.Main.D )
-  ;; A.this.$ctor();
   ;;@ bridgejsmethod/Main.java:70:22
   (call $$ctor__void_$p_bridgejsmethod_Main_A@bridgejsmethod.Main.A (ref.as_non_null (local.get $this)))
  )
@@ -2331,7 +2160,6 @@
  (local $this (ref null $bridgejsmethod.Main.D))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.D (local.get $this.untyped)))
  (block
-  ;; return i;
   ;;@ bridgejsmethod/Main.java:75:6
   (return (local.get $i))
  )
@@ -2348,7 +2176,6 @@
  (local $this (ref null $bridgejsmethod.Main.D))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.D (local.get $this.untyped)))
  (block
-  ;; return D.this.fun(((Integer) arg0));
   ;;@ bridgejsmethod/Main.java:70:22
   (return (call_ref $function.m_fun__java_lang_Integer__java_lang_Integer (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.Integer (local.get $arg0))(struct.get $bridgejsmethod.Main.D.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.D $vtable(local.get $this)))))
  )
@@ -2365,7 +2192,6 @@
  (local $this (ref null $bridgejsmethod.Main.D))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.D (local.get $this.untyped)))
  (block
-  ;; return D.this.fun(((Integer) arg0));
   ;;@ bridgejsmethod/Main.java:70:22
   (return (call_ref $function.m_fun__java_lang_Integer__java_lang_Integer (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.Integer (local.get $arg0))(struct.get $bridgejsmethod.Main.D.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.D $vtable(local.get $this)))))
  )
@@ -2376,19 +2202,15 @@
 (func $$clinit__void@bridgejsmethod.Main.D
  ;;@ bridgejsmethod/Main.java:70:22
  (block
-  ;; if (bridgejsmethod.Main.D.$initialized) return;
   ;;@ bridgejsmethod/Main.java:70:22
   (if (global.get $f_$initialized__bridgejsmethod_Main_D)
    (then
-    ;; return;
     ;;@ bridgejsmethod/Main.java:70:22
     (return )
    )
   )
-  ;; (bridgejsmethod.Main.D.$initialized = true);
   ;;@ bridgejsmethod/Main.java:70:22
   (global.set $f_$initialized__bridgejsmethod_Main_D (i32.const 1))
-  ;; bridgejsmethod.Main.A.$clinit();
   ;;@ bridgejsmethod/Main.java:70:22
   (call $$clinit__void@bridgejsmethod.Main.A )
  )
@@ -2398,14 +2220,11 @@
 (func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.D
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((bridgejsmethod.Main.D.$class == null)) (bridgejsmethod.Main.D.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_6(),bridgejsmethod.Main.A.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__bridgejsmethod_Main_D) (ref.null $java.lang.Class))
    (then
-    ;; (bridgejsmethod.Main.D.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_6(),bridgejsmethod.Main.A.$getClassMetadata()));
     (global.set $f_$class__bridgejsmethod_Main_D (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|_6__java_lang_String (ref.func $$getString_|bridgejsmeth...|_6__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.A) )))
    )
   )
-  ;; return bridgejsmethod.Main.D.$class;
   (return (global.get $f_$class__bridgejsmethod_Main_D))
  )
 )
@@ -2418,7 +2237,6 @@
  (local $this (ref null $bridgejsmethod.Main.D))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.D (local.get $this.untyped)))
  (block
-  ;; return bridgejsmethod.Main.D.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.D) ))
  )
 )
@@ -2432,13 +2250,10 @@
  ;;@ bridgejsmethod/Main.java:85:22
  (local $$instance (ref null $bridgejsmethod.Main.F))
  (block
-  ;; F $instance = new F.<init>(0);
   ;;@ bridgejsmethod/Main.java:85:22
   (local.set $$instance (struct.new $bridgejsmethod.Main.F (ref.as_non_null (global.get $bridgejsmethod.Main.F.vtable)) (ref.as_non_null (global.get $bridgejsmethod.Main.F.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ bridgejsmethod/Main.java:85:22
   (call $$ctor__void_$p_bridgejsmethod_Main_F@bridgejsmethod.Main.F (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ bridgejsmethod/Main.java:85:22
   (return (local.get $$instance))
  )
@@ -2449,10 +2264,8 @@
  (param $this (ref null $bridgejsmethod.Main.F))
  ;;@ bridgejsmethod/Main.java:85:22
  (block
-  ;; bridgejsmethod.Main.F.$clinit();
   ;;@ bridgejsmethod/Main.java:85:22
   (call $$clinit__void@bridgejsmethod.Main.F )
-  ;; A.this.$ctor();
   ;;@ bridgejsmethod/Main.java:85:22
   (call $$ctor__void_$p_bridgejsmethod_Main_A@bridgejsmethod.Main.A (ref.as_non_null (local.get $this)))
  )
@@ -2468,7 +2281,6 @@
  (local $this (ref null $bridgejsmethod.Main.F))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.F (local.get $this.untyped)))
  (block
-  ;; return F.this.fun(((Integer) arg0));
   ;;@ bridgejsmethod/Main.java:85:22
   (return (call_ref $function.m_fun__java_lang_Integer__java_lang_Integer (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.Integer (local.get $arg0))(struct.get $bridgejsmethod.Main.F.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.F $vtable(local.get $this)))))
  )
@@ -2485,7 +2297,6 @@
  (local $this (ref null $bridgejsmethod.Main.F))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.F (local.get $this.untyped)))
  (block
-  ;; return F.this.fun(((Integer) arg0));
   ;;@ bridgejsmethod/Main.java:85:22
   (return (call_ref $function.m_fun__java_lang_Integer__java_lang_Integer (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.Integer (local.get $arg0))(struct.get $bridgejsmethod.Main.F.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.F $vtable(local.get $this)))))
  )
@@ -2502,7 +2313,6 @@
  (local $this (ref null $bridgejsmethod.Main.F))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.F (local.get $this.untyped)))
  (block
-  ;; return ((Integer) super.fun(arg0));
   ;;@ bridgejsmethod/Main.java:85:22
   (return (ref.cast_static $java.lang.Integer (call $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.A (ref.as_non_null (local.get $this))(local.get $arg0))))
  )
@@ -2513,19 +2323,15 @@
 (func $$clinit__void@bridgejsmethod.Main.F
  ;;@ bridgejsmethod/Main.java:85:22
  (block
-  ;; if (bridgejsmethod.Main.F.$initialized) return;
   ;;@ bridgejsmethod/Main.java:85:22
   (if (global.get $f_$initialized__bridgejsmethod_Main_F)
    (then
-    ;; return;
     ;;@ bridgejsmethod/Main.java:85:22
     (return )
    )
   )
-  ;; (bridgejsmethod.Main.F.$initialized = true);
   ;;@ bridgejsmethod/Main.java:85:22
   (global.set $f_$initialized__bridgejsmethod_Main_F (i32.const 1))
-  ;; bridgejsmethod.Main.A.$clinit();
   ;;@ bridgejsmethod/Main.java:85:22
   (call $$clinit__void@bridgejsmethod.Main.A )
  )
@@ -2535,14 +2341,11 @@
 (func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.F
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((bridgejsmethod.Main.F.$class == null)) (bridgejsmethod.Main.F.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_8(),bridgejsmethod.Main.A.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__bridgejsmethod_Main_F) (ref.null $java.lang.Class))
    (then
-    ;; (bridgejsmethod.Main.F.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_8(),bridgejsmethod.Main.A.$getClassMetadata()));
     (global.set $f_$class__bridgejsmethod_Main_F (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|_8__java_lang_String (ref.func $$getString_|bridgejsmeth...|_8__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.A) )))
    )
   )
-  ;; return bridgejsmethod.Main.F.$class;
   (return (global.get $f_$class__bridgejsmethod_Main_F))
  )
 )
@@ -2555,7 +2358,6 @@
  (local $this (ref null $bridgejsmethod.Main.F))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.F (local.get $this.untyped)))
  (block
-  ;; return bridgejsmethod.Main.F.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.F) ))
  )
 )
@@ -2569,13 +2371,10 @@
  ;;@ bridgejsmethod/Main.java:109:22
  (local $$instance (ref null $bridgejsmethod.Main.L))
  (block
-  ;; L<L1> $instance = new L.<init>(0);
   ;;@ bridgejsmethod/Main.java:109:22
   (local.set $$instance (struct.new $bridgejsmethod.Main.L (ref.as_non_null (global.get $bridgejsmethod.Main.L.vtable)) (ref.as_non_null (global.get $bridgejsmethod.Main.L.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ bridgejsmethod/Main.java:109:22
   (call $$ctor__void_$p_bridgejsmethod_Main_L@bridgejsmethod.Main.L (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ bridgejsmethod/Main.java:109:22
   (return (local.get $$instance))
  )
@@ -2586,10 +2385,8 @@
  (param $this (ref null $bridgejsmethod.Main.L))
  ;;@ bridgejsmethod/Main.java:109:22
  (block
-  ;; bridgejsmethod.Main.L.$clinit();
   ;;@ bridgejsmethod/Main.java:109:22
   (call $$clinit__void@bridgejsmethod.Main.L )
-  ;; K.this.$ctor();
   ;;@ bridgejsmethod/Main.java:109:22
   (call $$ctor__void_$p_bridgejsmethod_Main_K@bridgejsmethod.Main.K (ref.as_non_null (local.get $this)))
  )
@@ -2619,7 +2416,6 @@
  (local $this (ref null $bridgejsmethod.Main.L))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.L (local.get $this.untyped)))
  (block
-  ;; L.this.fun(((String) arg0),arg1);
   ;;@ bridgejsmethod/Main.java:109:22
   (call_ref $function.m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(local.get $arg1)(struct.get $bridgejsmethod.Main.L.vtable $m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod (struct.get $bridgejsmethod.Main.L $vtable(local.get $this))))
  )
@@ -2630,19 +2426,15 @@
 (func $$clinit__void@bridgejsmethod.Main.L
  ;;@ bridgejsmethod/Main.java:109:22
  (block
-  ;; if (bridgejsmethod.Main.L.$initialized) return;
   ;;@ bridgejsmethod/Main.java:109:22
   (if (global.get $f_$initialized__bridgejsmethod_Main_L)
    (then
-    ;; return;
     ;;@ bridgejsmethod/Main.java:109:22
     (return )
    )
   )
-  ;; (bridgejsmethod.Main.L.$initialized = true);
   ;;@ bridgejsmethod/Main.java:109:22
   (global.set $f_$initialized__bridgejsmethod_Main_L (i32.const 1))
-  ;; bridgejsmethod.Main.K.$clinit();
   ;;@ bridgejsmethod/Main.java:109:22
   (call $$clinit__void@bridgejsmethod.Main.K )
  )
@@ -2652,14 +2444,11 @@
 (func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.L
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((bridgejsmethod.Main.L.$class == null)) (bridgejsmethod.Main.L.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_12(),bridgejsmethod.Main.K.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__bridgejsmethod_Main_L) (ref.null $java.lang.Class))
    (then
-    ;; (bridgejsmethod.Main.L.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_12(),bridgejsmethod.Main.K.$getClassMetadata()));
     (global.set $f_$class__bridgejsmethod_Main_L (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|_12__java_lang_String (ref.func $$getString_|bridgejsmeth...|_12__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.K) )))
    )
   )
-  ;; return bridgejsmethod.Main.L.$class;
   (return (global.get $f_$class__bridgejsmethod_Main_L))
  )
 )
@@ -2672,7 +2461,6 @@
  (local $this (ref null $bridgejsmethod.Main.L))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.L (local.get $this.untyped)))
  (block
-  ;; return bridgejsmethod.Main.L.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.L) ))
  )
 )
@@ -2687,13 +2475,10 @@
  ;;@ bridgejsmethod/Main.java:132:8
  (local $$instance (ref null $bridgejsmethod.Main.O))
  (block
-  ;; O $instance = new O.<init>(0,$outer_this,$outer_this,null);
   ;;@ bridgejsmethod/Main.java:132:8
   (local.set $$instance (struct.new $bridgejsmethod.Main.O (ref.as_non_null (global.get $bridgejsmethod.Main.O.vtable)) (ref.as_non_null (global.get $bridgejsmethod.Main.O.itable)) (i32.const 0) (local.get $$outer_this) (local.get $$outer_this) (ref.null $bridgejsmethod.Main.B)))
-  ;; $instance.$ctor($outer_this);
   ;;@ bridgejsmethod/Main.java:132:8
   (call $$ctor__bridgejsmethod_Main__void_$p_bridgejsmethod_Main_O@bridgejsmethod.Main.O (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;; return $instance;
   ;;@ bridgejsmethod/Main.java:132:8
   (return (local.get $$instance))
  )
@@ -2705,10 +2490,8 @@
  (param $$outer_this (ref null $bridgejsmethod.Main))
  ;;@ bridgejsmethod/Main.java:132:8
  (block
-  ;; bridgejsmethod.Main.O.$clinit();
   ;;@ bridgejsmethod/Main.java:132:8
   (call $$clinit__void@bridgejsmethod.Main.O )
-  ;; N.this.$ctor($outer_this);
   ;;@ bridgejsmethod/Main.java:132:8
   (call $$ctor__bridgejsmethod_Main__void_$p_bridgejsmethod_Main_N@bridgejsmethod.Main.N (ref.as_non_null (local.get $this))(local.get $$outer_this))
  )
@@ -2723,7 +2506,6 @@
  (local $this (ref null $bridgejsmethod.Main.O))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.O (local.get $this.untyped)))
  (block
-  ;; return O.this.b;
   ;;@ bridgejsmethod/Main.java:137:6
   (return (struct.get $bridgejsmethod.Main.O $f_b__bridgejsmethod_Main_O_(local.get $this)))
  )
@@ -2734,19 +2516,15 @@
 (func $$clinit__void@bridgejsmethod.Main.O
  ;;@ bridgejsmethod/Main.java:132:8
  (block
-  ;; if (bridgejsmethod.Main.O.$initialized) return;
   ;;@ bridgejsmethod/Main.java:132:8
   (if (global.get $f_$initialized__bridgejsmethod_Main_O)
    (then
-    ;; return;
     ;;@ bridgejsmethod/Main.java:132:8
     (return )
    )
   )
-  ;; (bridgejsmethod.Main.O.$initialized = true);
   ;;@ bridgejsmethod/Main.java:132:8
   (global.set $f_$initialized__bridgejsmethod_Main_O (i32.const 1))
-  ;; bridgejsmethod.Main.N.$clinit();
   ;;@ bridgejsmethod/Main.java:132:8
   (call $$clinit__void@bridgejsmethod.Main.N )
  )
@@ -2756,14 +2534,11 @@
 (func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.O
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((bridgejsmethod.Main.O.$class == null)) (bridgejsmethod.Main.O.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_15(),bridgejsmethod.Main.N.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__bridgejsmethod_Main_O) (ref.null $java.lang.Class))
    (then
-    ;; (bridgejsmethod.Main.O.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_15(),bridgejsmethod.Main.N.$getClassMetadata()));
     (global.set $f_$class__bridgejsmethod_Main_O (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|_15__java_lang_String (ref.func $$getString_|bridgejsmeth...|_15__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.N) )))
    )
   )
-  ;; return bridgejsmethod.Main.O.$class;
   (return (global.get $f_$class__bridgejsmethod_Main_O))
  )
 )
@@ -2776,7 +2551,6 @@
  (local $this (ref null $bridgejsmethod.Main.O))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.O (local.get $this.untyped)))
  (block
-  ;; return bridgejsmethod.Main.O.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.O) ))
  )
 )
@@ -2790,10 +2564,8 @@
  (param $$outer_this (ref null $bridgejsmethod.Main))
  ;;@ bridgejsmethod/Main.java:153:17
  (block
-  ;; bridgejsmethod.Main.R.$clinit();
   ;;@ bridgejsmethod/Main.java:153:17
   (call $$clinit__void@bridgejsmethod.Main.R )
-  ;; Q.this.$ctor($outer_this);
   ;;@ bridgejsmethod/Main.java:153:17
   (call $$ctor__bridgejsmethod_Main__void_$p_bridgejsmethod_Main_Q@bridgejsmethod.Main.Q (ref.as_non_null (local.get $this))(local.get $$outer_this))
  )
@@ -2808,7 +2580,6 @@
  (local $this (ref null $bridgejsmethod.Main.R))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.R (local.get $this.untyped)))
  (block
-  ;; return null;
   ;;@ bridgejsmethod/Main.java:156:6
   (return (ref.null $java.lang.String))
  )
@@ -2819,19 +2590,15 @@
 (func $$clinit__void@bridgejsmethod.Main.R
  ;;@ bridgejsmethod/Main.java:153:17
  (block
-  ;; if (bridgejsmethod.Main.R.$initialized) return;
   ;;@ bridgejsmethod/Main.java:153:17
   (if (global.get $f_$initialized__bridgejsmethod_Main_R)
    (then
-    ;; return;
     ;;@ bridgejsmethod/Main.java:153:17
     (return )
    )
   )
-  ;; (bridgejsmethod.Main.R.$initialized = true);
   ;;@ bridgejsmethod/Main.java:153:17
   (global.set $f_$initialized__bridgejsmethod_Main_R (i32.const 1))
-  ;; bridgejsmethod.Main.Q.$clinit();
   ;;@ bridgejsmethod/Main.java:153:17
   (call $$clinit__void@bridgejsmethod.Main.Q )
  )
@@ -2841,14 +2608,11 @@
 (func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.R
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((bridgejsmethod.Main.R.$class == null)) (bridgejsmethod.Main.R.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_18(),bridgejsmethod.Main.Q.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__bridgejsmethod_Main_R) (ref.null $java.lang.Class))
    (then
-    ;; (bridgejsmethod.Main.R.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_18(),bridgejsmethod.Main.Q.$getClassMetadata()));
     (global.set $f_$class__bridgejsmethod_Main_R (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|_18__java_lang_String (ref.func $$getString_|bridgejsmeth...|_18__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.Q) )))
    )
   )
-  ;; return bridgejsmethod.Main.R.$class;
   (return (global.get $f_$class__bridgejsmethod_Main_R))
  )
 )
@@ -2862,13 +2626,10 @@
  ;;@ bridgejsmethod/Main.java:194:8
  (local $$instance (ref null $bridgejsmethod.Main.Parent))
  (block
-  ;; Parent<T> $instance = new Parent.<init>(0,$outer_this,$outer_this);
   ;;@ bridgejsmethod/Main.java:194:8
   (local.set $$instance (struct.new $bridgejsmethod.Main.Parent (ref.as_non_null (global.get $bridgejsmethod.Main.Parent.vtable)) (ref.as_non_null (global.get $bridgejsmethod.Main.Parent.itable)) (i32.const 0) (local.get $$outer_this) (local.get $$outer_this)))
-  ;; $instance.$ctor($outer_this);
   ;;@ bridgejsmethod/Main.java:194:8
   (call $$ctor__bridgejsmethod_Main__void_$p_bridgejsmethod_Main_Parent@bridgejsmethod.Main.Parent (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;; return $instance;
   ;;@ bridgejsmethod/Main.java:194:8
   (return (local.get $$instance))
  )
@@ -2880,10 +2641,8 @@
  (param $$outer_this (ref null $bridgejsmethod.Main))
  ;;@ bridgejsmethod/Main.java:194:8
  (block
-  ;; bridgejsmethod.Main.Parent.$clinit();
   ;;@ bridgejsmethod/Main.java:194:8
   (call $$clinit__void@bridgejsmethod.Main.Parent )
-  ;; GrandParent.this.$ctor($outer_this);
   ;;@ bridgejsmethod/Main.java:194:8
   (call $$ctor__bridgejsmethod_Main__void_$p_bridgejsmethod_Main_GrandParent@bridgejsmethod.Main.GrandParent (ref.as_non_null (local.get $this))(local.get $$outer_this))
  )
@@ -2924,7 +2683,6 @@
  (local $this (ref null $bridgejsmethod.Main.Parent))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.Parent (local.get $this.untyped)))
  (block
-  ;; Parent.this.jsMethod(((T) arg0));
   ;;@ bridgejsmethod/Main.java:194:8
   (call_ref $function.m_jsMethod__bridgejsmethod_Main_Parent__void (ref.as_non_null (local.get $this))(ref.cast_static $bridgejsmethod.Main.Parent (local.get $arg0))(struct.get $bridgejsmethod.Main.Parent.vtable $m_jsMethod__bridgejsmethod_Main_Parent__void (struct.get $bridgejsmethod.Main.Parent $vtable(local.get $this))))
  )
@@ -2940,7 +2698,6 @@
  (local $this (ref null $bridgejsmethod.Main.Parent))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.Parent (local.get $this.untyped)))
  (block
-  ;; Parent.this.method(((T) arg0));
   ;;@ bridgejsmethod/Main.java:194:8
   (call_ref $function.m_method__bridgejsmethod_Main_Parent__void (ref.as_non_null (local.get $this))(ref.cast_static $bridgejsmethod.Main.Parent (local.get $arg0))(struct.get $bridgejsmethod.Main.Parent.vtable $m_method__bridgejsmethod_Main_Parent__void (struct.get $bridgejsmethod.Main.Parent $vtable(local.get $this))))
  )
@@ -2951,19 +2708,15 @@
 (func $$clinit__void@bridgejsmethod.Main.Parent
  ;;@ bridgejsmethod/Main.java:194:8
  (block
-  ;; if (bridgejsmethod.Main.Parent.$initialized) return;
   ;;@ bridgejsmethod/Main.java:194:8
   (if (global.get $f_$initialized__bridgejsmethod_Main_Parent)
    (then
-    ;; return;
     ;;@ bridgejsmethod/Main.java:194:8
     (return )
    )
   )
-  ;; (bridgejsmethod.Main.Parent.$initialized = true);
   ;;@ bridgejsmethod/Main.java:194:8
   (global.set $f_$initialized__bridgejsmethod_Main_Parent (i32.const 1))
-  ;; bridgejsmethod.Main.GrandParent.$clinit();
   ;;@ bridgejsmethod/Main.java:194:8
   (call $$clinit__void@bridgejsmethod.Main.GrandParent )
  )
@@ -2973,14 +2726,11 @@
 (func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.Parent
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((bridgejsmethod.Main.Parent.$class == null)) (bridgejsmethod.Main.Parent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_21(),bridgejsmethod.Main.GrandParent.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__bridgejsmethod_Main_Parent) (ref.null $java.lang.Class))
    (then
-    ;; (bridgejsmethod.Main.Parent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_21(),bridgejsmethod.Main.GrandParent.$getClassMetadata()));
     (global.set $f_$class__bridgejsmethod_Main_Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|_21__java_lang_String (ref.func $$getString_|bridgejsmeth...|_21__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.GrandParent) )))
    )
   )
-  ;; return bridgejsmethod.Main.Parent.$class;
   (return (global.get $f_$class__bridgejsmethod_Main_Parent))
  )
 )
@@ -2993,7 +2743,6 @@
  (local $this (ref null $bridgejsmethod.Main.Parent))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.Parent (local.get $this.untyped)))
  (block
-  ;; return bridgejsmethod.Main.Parent.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.Parent) ))
  )
 )
@@ -3008,13 +2757,10 @@
  ;;@ bridgejsmethod/Main.java:225:8
  (local $$instance (ref null $bridgejsmethod.Main.ChildWithRenamedOverride))
  (block
-  ;; ChildWithRenamedOverride $instance = new ChildWithRenamedOverride.<init>(0,$outer_this,$outer_this);
   ;;@ bridgejsmethod/Main.java:225:8
   (local.set $$instance (struct.new $bridgejsmethod.Main.ChildWithRenamedOverride (ref.as_non_null (global.get $bridgejsmethod.Main.ChildWithRenamedOverride.vtable)) (ref.as_non_null (global.get $bridgejsmethod.Main.ChildWithRenamedOverride.itable)) (i32.const 0) (local.get $$outer_this) (local.get $$outer_this)))
-  ;; $instance.$ctor($outer_this);
   ;;@ bridgejsmethod/Main.java:225:8
   (call $$ctor__bridgejsmethod_Main__void_$p_bridgejsmethod_Main_ChildWithRenamedOverride@bridgejsmethod.Main.ChildWithRenamedOverride (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;; return $instance;
   ;;@ bridgejsmethod/Main.java:225:8
   (return (local.get $$instance))
  )
@@ -3026,10 +2772,8 @@
  (param $$outer_this (ref null $bridgejsmethod.Main))
  ;;@ bridgejsmethod/Main.java:225:8
  (block
-  ;; bridgejsmethod.Main.ChildWithRenamedOverride.$clinit();
   ;;@ bridgejsmethod/Main.java:225:8
   (call $$clinit__void@bridgejsmethod.Main.ChildWithRenamedOverride )
-  ;; GrandParent.this.$ctor($outer_this);
   ;;@ bridgejsmethod/Main.java:225:8
   (call $$ctor__bridgejsmethod_Main__void_$p_bridgejsmethod_Main_GrandParent@bridgejsmethod.Main.GrandParent (ref.as_non_null (local.get $this))(local.get $$outer_this))
  )
@@ -3057,7 +2801,6 @@
  (local $this (ref null $bridgejsmethod.Main.ChildWithRenamedOverride))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.ChildWithRenamedOverride (local.get $this.untyped)))
  (block
-  ;; ChildWithRenamedOverride.this.jsMethod(((ChildWithRenamedOverride) arg0));
   ;;@ bridgejsmethod/Main.java:225:8
   (call_ref $function.m_jsMethod__bridgejsmethod_Main_ChildWithRenamedOverride__void (ref.as_non_null (local.get $this))(ref.cast_static $bridgejsmethod.Main.ChildWithRenamedOverride (local.get $arg0))(struct.get $bridgejsmethod.Main.ChildWithRenamedOverride.vtable $m_jsMethod__bridgejsmethod_Main_ChildWithRenamedOverride__void (struct.get $bridgejsmethod.Main.ChildWithRenamedOverride $vtable(local.get $this))))
  )
@@ -3068,19 +2811,15 @@
 (func $$clinit__void@bridgejsmethod.Main.ChildWithRenamedOverride
  ;;@ bridgejsmethod/Main.java:225:8
  (block
-  ;; if (bridgejsmethod.Main.ChildWithRenamedOverride.$initialized) return;
   ;;@ bridgejsmethod/Main.java:225:8
   (if (global.get $f_$initialized__bridgejsmethod_Main_ChildWithRenamedOverride)
    (then
-    ;; return;
     ;;@ bridgejsmethod/Main.java:225:8
     (return )
    )
   )
-  ;; (bridgejsmethod.Main.ChildWithRenamedOverride.$initialized = true);
   ;;@ bridgejsmethod/Main.java:225:8
   (global.set $f_$initialized__bridgejsmethod_Main_ChildWithRenamedOverride (i32.const 1))
-  ;; bridgejsmethod.Main.GrandParent.$clinit();
   ;;@ bridgejsmethod/Main.java:225:8
   (call $$clinit__void@bridgejsmethod.Main.GrandParent )
  )
@@ -3090,14 +2829,11 @@
 (func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.ChildWithRenamedOverride
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((bridgejsmethod.Main.ChildWithRenamedOverride.$class == null)) (bridgejsmethod.Main.ChildWithRenamedOverride.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_24(),bridgejsmethod.Main.GrandParent.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__bridgejsmethod_Main_ChildWithRenamedOverride) (ref.null $java.lang.Class))
    (then
-    ;; (bridgejsmethod.Main.ChildWithRenamedOverride.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_24(),bridgejsmethod.Main.GrandParent.$getClassMetadata()));
     (global.set $f_$class__bridgejsmethod_Main_ChildWithRenamedOverride (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|_24__java_lang_String (ref.func $$getString_|bridgejsmeth...|_24__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.GrandParent) )))
    )
   )
-  ;; return bridgejsmethod.Main.ChildWithRenamedOverride.$class;
   (return (global.get $f_$class__bridgejsmethod_Main_ChildWithRenamedOverride))
  )
 )
@@ -3110,7 +2846,6 @@
  (local $this (ref null $bridgejsmethod.Main.ChildWithRenamedOverride))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.ChildWithRenamedOverride (local.get $this.untyped)))
  (block
-  ;; return bridgejsmethod.Main.ChildWithRenamedOverride.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.ChildWithRenamedOverride) ))
  )
 )
@@ -3124,13 +2859,10 @@
  ;;@ bridgejsmethod/Main.java:79:22
  (local $$instance (ref null $bridgejsmethod.Main.E))
  (block
-  ;; E $instance = new E.<init>(0);
   ;;@ bridgejsmethod/Main.java:79:22
   (local.set $$instance (struct.new $bridgejsmethod.Main.E (ref.as_non_null (global.get $bridgejsmethod.Main.E.vtable)) (ref.as_non_null (global.get $bridgejsmethod.Main.E.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ bridgejsmethod/Main.java:79:22
   (call $$ctor__void_$p_bridgejsmethod_Main_E@bridgejsmethod.Main.E (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ bridgejsmethod/Main.java:79:22
   (return (local.get $$instance))
  )
@@ -3141,10 +2873,8 @@
  (param $this (ref null $bridgejsmethod.Main.E))
  ;;@ bridgejsmethod/Main.java:79:22
  (block
-  ;; bridgejsmethod.Main.E.$clinit();
   ;;@ bridgejsmethod/Main.java:79:22
   (call $$clinit__void@bridgejsmethod.Main.E )
-  ;; B.this.$ctor();
   ;;@ bridgejsmethod/Main.java:79:22
   (call $$ctor__void_$p_bridgejsmethod_Main_B@bridgejsmethod.Main.B (ref.as_non_null (local.get $this)))
  )
@@ -3154,19 +2884,15 @@
 (func $$clinit__void@bridgejsmethod.Main.E
  ;;@ bridgejsmethod/Main.java:79:22
  (block
-  ;; if (bridgejsmethod.Main.E.$initialized) return;
   ;;@ bridgejsmethod/Main.java:79:22
   (if (global.get $f_$initialized__bridgejsmethod_Main_E)
    (then
-    ;; return;
     ;;@ bridgejsmethod/Main.java:79:22
     (return )
    )
   )
-  ;; (bridgejsmethod.Main.E.$initialized = true);
   ;;@ bridgejsmethod/Main.java:79:22
   (global.set $f_$initialized__bridgejsmethod_Main_E (i32.const 1))
-  ;; bridgejsmethod.Main.B.$clinit();
   ;;@ bridgejsmethod/Main.java:79:22
   (call $$clinit__void@bridgejsmethod.Main.B )
  )
@@ -3176,14 +2902,11 @@
 (func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.E
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((bridgejsmethod.Main.E.$class == null)) (bridgejsmethod.Main.E.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_7(),bridgejsmethod.Main.B.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__bridgejsmethod_Main_E) (ref.null $java.lang.Class))
    (then
-    ;; (bridgejsmethod.Main.E.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_7(),bridgejsmethod.Main.B.$getClassMetadata()));
     (global.set $f_$class__bridgejsmethod_Main_E (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|_7__java_lang_String (ref.func $$getString_|bridgejsmeth...|_7__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.B) )))
    )
   )
-  ;; return bridgejsmethod.Main.E.$class;
   (return (global.get $f_$class__bridgejsmethod_Main_E))
  )
 )
@@ -3196,7 +2919,6 @@
  (local $this (ref null $bridgejsmethod.Main.E))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.E (local.get $this.untyped)))
  (block
-  ;; return bridgejsmethod.Main.E.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.E) ))
  )
 )
@@ -3211,13 +2933,10 @@
  ;;@ bridgejsmethod/Main.java:160:8
  (local $$instance (ref null $bridgejsmethod.Main.S))
  (block
-  ;; S $instance = new S.<init>(0,$outer_this,$outer_this,$outer_this);
   ;;@ bridgejsmethod/Main.java:160:8
   (local.set $$instance (struct.new $bridgejsmethod.Main.S (ref.as_non_null (global.get $bridgejsmethod.Main.S.vtable)) (ref.as_non_null (global.get $bridgejsmethod.Main.S.itable)) (i32.const 0) (local.get $$outer_this) (local.get $$outer_this) (local.get $$outer_this)))
-  ;; $instance.$ctor($outer_this);
   ;;@ bridgejsmethod/Main.java:160:8
   (call $$ctor__bridgejsmethod_Main__void_$p_bridgejsmethod_Main_S@bridgejsmethod.Main.S (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;; return $instance;
   ;;@ bridgejsmethod/Main.java:160:8
   (return (local.get $$instance))
  )
@@ -3229,10 +2948,8 @@
  (param $$outer_this (ref null $bridgejsmethod.Main))
  ;;@ bridgejsmethod/Main.java:160:8
  (block
-  ;; bridgejsmethod.Main.S.$clinit();
   ;;@ bridgejsmethod/Main.java:160:8
   (call $$clinit__void@bridgejsmethod.Main.S )
-  ;; R.this.$ctor($outer_this);
   ;;@ bridgejsmethod/Main.java:160:8
   (call $$ctor__bridgejsmethod_Main__void_$p_bridgejsmethod_Main_R@bridgejsmethod.Main.R (ref.as_non_null (local.get $this))(local.get $$outer_this))
  )
@@ -3242,19 +2959,15 @@
 (func $$clinit__void@bridgejsmethod.Main.S
  ;;@ bridgejsmethod/Main.java:160:8
  (block
-  ;; if (bridgejsmethod.Main.S.$initialized) return;
   ;;@ bridgejsmethod/Main.java:160:8
   (if (global.get $f_$initialized__bridgejsmethod_Main_S)
    (then
-    ;; return;
     ;;@ bridgejsmethod/Main.java:160:8
     (return )
    )
   )
-  ;; (bridgejsmethod.Main.S.$initialized = true);
   ;;@ bridgejsmethod/Main.java:160:8
   (global.set $f_$initialized__bridgejsmethod_Main_S (i32.const 1))
-  ;; bridgejsmethod.Main.R.$clinit();
   ;;@ bridgejsmethod/Main.java:160:8
   (call $$clinit__void@bridgejsmethod.Main.R )
  )
@@ -3264,14 +2977,11 @@
 (func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.S
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((bridgejsmethod.Main.S.$class == null)) (bridgejsmethod.Main.S.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_19(),bridgejsmethod.Main.R.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__bridgejsmethod_Main_S) (ref.null $java.lang.Class))
    (then
-    ;; (bridgejsmethod.Main.S.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_19(),bridgejsmethod.Main.R.$getClassMetadata()));
     (global.set $f_$class__bridgejsmethod_Main_S (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|_19__java_lang_String (ref.func $$getString_|bridgejsmeth...|_19__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.R) )))
    )
   )
-  ;; return bridgejsmethod.Main.S.$class;
   (return (global.get $f_$class__bridgejsmethod_Main_S))
  )
 )
@@ -3284,7 +2994,6 @@
  (local $this (ref null $bridgejsmethod.Main.S))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.S (local.get $this.untyped)))
  (block
-  ;; return bridgejsmethod.Main.S.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.S) ))
  )
 )
@@ -3299,13 +3008,10 @@
  ;;@ bridgejsmethod/Main.java:210:8
  (local $$instance (ref null $bridgejsmethod.Main.ChildWithoutOverrides))
  (block
-  ;; ChildWithoutOverrides $instance = new ChildWithoutOverrides.<init>(0,$outer_this,$outer_this,$outer_this);
   ;;@ bridgejsmethod/Main.java:210:8
   (local.set $$instance (struct.new $bridgejsmethod.Main.ChildWithoutOverrides (ref.as_non_null (global.get $bridgejsmethod.Main.ChildWithoutOverrides.vtable)) (ref.as_non_null (global.get $bridgejsmethod.Main.ChildWithoutOverrides.itable)) (i32.const 0) (local.get $$outer_this) (local.get $$outer_this) (local.get $$outer_this)))
-  ;; $instance.$ctor($outer_this);
   ;;@ bridgejsmethod/Main.java:210:8
   (call $$ctor__bridgejsmethod_Main__void_$p_bridgejsmethod_Main_ChildWithoutOverrides@bridgejsmethod.Main.ChildWithoutOverrides (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;; return $instance;
   ;;@ bridgejsmethod/Main.java:210:8
   (return (local.get $$instance))
  )
@@ -3317,10 +3023,8 @@
  (param $$outer_this (ref null $bridgejsmethod.Main))
  ;;@ bridgejsmethod/Main.java:210:8
  (block
-  ;; bridgejsmethod.Main.ChildWithoutOverrides.$clinit();
   ;;@ bridgejsmethod/Main.java:210:8
   (call $$clinit__void@bridgejsmethod.Main.ChildWithoutOverrides )
-  ;; Parent.this.$ctor($outer_this);
   ;;@ bridgejsmethod/Main.java:210:8
   (call $$ctor__bridgejsmethod_Main__void_$p_bridgejsmethod_Main_Parent@bridgejsmethod.Main.Parent (ref.as_non_null (local.get $this))(local.get $$outer_this))
  )
@@ -3330,19 +3034,15 @@
 (func $$clinit__void@bridgejsmethod.Main.ChildWithoutOverrides
  ;;@ bridgejsmethod/Main.java:210:8
  (block
-  ;; if (bridgejsmethod.Main.ChildWithoutOverrides.$initialized) return;
   ;;@ bridgejsmethod/Main.java:210:8
   (if (global.get $f_$initialized__bridgejsmethod_Main_ChildWithoutOverrides)
    (then
-    ;; return;
     ;;@ bridgejsmethod/Main.java:210:8
     (return )
    )
   )
-  ;; (bridgejsmethod.Main.ChildWithoutOverrides.$initialized = true);
   ;;@ bridgejsmethod/Main.java:210:8
   (global.set $f_$initialized__bridgejsmethod_Main_ChildWithoutOverrides (i32.const 1))
-  ;; bridgejsmethod.Main.Parent.$clinit();
   ;;@ bridgejsmethod/Main.java:210:8
   (call $$clinit__void@bridgejsmethod.Main.Parent )
  )
@@ -3352,14 +3052,11 @@
 (func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.ChildWithoutOverrides
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((bridgejsmethod.Main.ChildWithoutOverrides.$class == null)) (bridgejsmethod.Main.ChildWithoutOverrides.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_22(),bridgejsmethod.Main.Parent.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__bridgejsmethod_Main_ChildWithoutOverrides) (ref.null $java.lang.Class))
    (then
-    ;; (bridgejsmethod.Main.ChildWithoutOverrides.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_22(),bridgejsmethod.Main.Parent.$getClassMetadata()));
     (global.set $f_$class__bridgejsmethod_Main_ChildWithoutOverrides (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|_22__java_lang_String (ref.func $$getString_|bridgejsmeth...|_22__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.Parent) )))
    )
   )
-  ;; return bridgejsmethod.Main.ChildWithoutOverrides.$class;
   (return (global.get $f_$class__bridgejsmethod_Main_ChildWithoutOverrides))
  )
 )
@@ -3372,7 +3069,6 @@
  (local $this (ref null $bridgejsmethod.Main.ChildWithoutOverrides))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.ChildWithoutOverrides (local.get $this.untyped)))
  (block
-  ;; return bridgejsmethod.Main.ChildWithoutOverrides.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.ChildWithoutOverrides) ))
  )
 )
@@ -3387,13 +3083,10 @@
  ;;@ bridgejsmethod/Main.java:212:8
  (local $$instance (ref null $bridgejsmethod.Main.ChildWithOverrides))
  (block
-  ;; ChildWithOverrides<T> $instance = new ChildWithOverrides.<init>(0,$outer_this,$outer_this,$outer_this);
   ;;@ bridgejsmethod/Main.java:212:8
   (local.set $$instance (struct.new $bridgejsmethod.Main.ChildWithOverrides (ref.as_non_null (global.get $bridgejsmethod.Main.ChildWithOverrides.vtable)) (ref.as_non_null (global.get $bridgejsmethod.Main.ChildWithOverrides.itable)) (i32.const 0) (local.get $$outer_this) (local.get $$outer_this) (local.get $$outer_this)))
-  ;; $instance.$ctor($outer_this);
   ;;@ bridgejsmethod/Main.java:212:8
   (call $$ctor__bridgejsmethod_Main__void_$p_bridgejsmethod_Main_ChildWithOverrides@bridgejsmethod.Main.ChildWithOverrides (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;; return $instance;
   ;;@ bridgejsmethod/Main.java:212:8
   (return (local.get $$instance))
  )
@@ -3405,10 +3098,8 @@
  (param $$outer_this (ref null $bridgejsmethod.Main))
  ;;@ bridgejsmethod/Main.java:212:8
  (block
-  ;; bridgejsmethod.Main.ChildWithOverrides.$clinit();
   ;;@ bridgejsmethod/Main.java:212:8
   (call $$clinit__void@bridgejsmethod.Main.ChildWithOverrides )
-  ;; Parent.this.$ctor($outer_this);
   ;;@ bridgejsmethod/Main.java:212:8
   (call $$ctor__bridgejsmethod_Main__void_$p_bridgejsmethod_Main_Parent@bridgejsmethod.Main.Parent (ref.as_non_null (local.get $this))(local.get $$outer_this))
  )
@@ -3449,7 +3140,6 @@
  (local $this (ref null $bridgejsmethod.Main.ChildWithOverrides))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.ChildWithOverrides (local.get $this.untyped)))
  (block
-  ;; ChildWithOverrides.this.jsMethod(((T) arg0));
   ;;@ bridgejsmethod/Main.java:212:8
   (call_ref $function.m_jsMethod__bridgejsmethod_Main_ChildWithOverrides__void (ref.as_non_null (local.get $this))(ref.cast_static $bridgejsmethod.Main.ChildWithOverrides (local.get $arg0))(struct.get $bridgejsmethod.Main.ChildWithOverrides.vtable $m_jsMethod__bridgejsmethod_Main_ChildWithOverrides__void (struct.get $bridgejsmethod.Main.ChildWithOverrides $vtable(local.get $this))))
  )
@@ -3465,7 +3155,6 @@
  (local $this (ref null $bridgejsmethod.Main.ChildWithOverrides))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.ChildWithOverrides (local.get $this.untyped)))
  (block
-  ;; ChildWithOverrides.this.method(((T) arg0));
   ;;@ bridgejsmethod/Main.java:212:8
   (call_ref $function.m_method__bridgejsmethod_Main_ChildWithOverrides__void (ref.as_non_null (local.get $this))(ref.cast_static $bridgejsmethod.Main.ChildWithOverrides (local.get $arg0))(struct.get $bridgejsmethod.Main.ChildWithOverrides.vtable $m_method__bridgejsmethod_Main_ChildWithOverrides__void (struct.get $bridgejsmethod.Main.ChildWithOverrides $vtable(local.get $this))))
  )
@@ -3476,19 +3165,15 @@
 (func $$clinit__void@bridgejsmethod.Main.ChildWithOverrides
  ;;@ bridgejsmethod/Main.java:212:8
  (block
-  ;; if (bridgejsmethod.Main.ChildWithOverrides.$initialized) return;
   ;;@ bridgejsmethod/Main.java:212:8
   (if (global.get $f_$initialized__bridgejsmethod_Main_ChildWithOverrides)
    (then
-    ;; return;
     ;;@ bridgejsmethod/Main.java:212:8
     (return )
    )
   )
-  ;; (bridgejsmethod.Main.ChildWithOverrides.$initialized = true);
   ;;@ bridgejsmethod/Main.java:212:8
   (global.set $f_$initialized__bridgejsmethod_Main_ChildWithOverrides (i32.const 1))
-  ;; bridgejsmethod.Main.Parent.$clinit();
   ;;@ bridgejsmethod/Main.java:212:8
   (call $$clinit__void@bridgejsmethod.Main.Parent )
  )
@@ -3498,14 +3183,11 @@
 (func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.ChildWithOverrides
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((bridgejsmethod.Main.ChildWithOverrides.$class == null)) (bridgejsmethod.Main.ChildWithOverrides.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_23(),bridgejsmethod.Main.Parent.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__bridgejsmethod_Main_ChildWithOverrides) (ref.null $java.lang.Class))
    (then
-    ;; (bridgejsmethod.Main.ChildWithOverrides.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|bridgejsmeth...|_23(),bridgejsmethod.Main.Parent.$getClassMetadata()));
     (global.set $f_$class__bridgejsmethod_Main_ChildWithOverrides (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|_23__java_lang_String (ref.func $$getString_|bridgejsmeth...|_23__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.Parent) )))
    )
   )
-  ;; return bridgejsmethod.Main.ChildWithOverrides.$class;
   (return (global.get $f_$class__bridgejsmethod_Main_ChildWithOverrides))
  )
 )
@@ -3518,7 +3200,6 @@
  (local $this (ref null $bridgejsmethod.Main.ChildWithOverrides))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.ChildWithOverrides (local.get $this.untyped)))
  (block
-  ;; return bridgejsmethod.Main.ChildWithOverrides.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.ChildWithOverrides) ))
  )
 )

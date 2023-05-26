@@ -118,13 +118,10 @@
  ;;@ instanceinnerclass/InstanceInnerClass.java:18:13
  (local $$instance (ref null $instanceinnerclass.InstanceInnerClass))
  (block
-  ;; InstanceInnerClass $instance = new InstanceInnerClass.<init>(0,0);
   ;;@ instanceinnerclass/InstanceInnerClass.java:18:13
   (local.set $$instance (struct.new $instanceinnerclass.InstanceInnerClass (ref.as_non_null (global.get $instanceinnerclass.InstanceInnerClass.vtable)) (ref.as_non_null (global.get $instanceinnerclass.InstanceInnerClass.itable)) (i32.const 0) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ instanceinnerclass/InstanceInnerClass.java:18:13
   (call $$ctor__void_$p_instanceinnerclass_InstanceInnerClass@instanceinnerclass.InstanceInnerClass (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ instanceinnerclass/InstanceInnerClass.java:18:13
   (return (local.get $$instance))
  )
@@ -135,10 +132,8 @@
  (param $this (ref null $instanceinnerclass.InstanceInnerClass))
  ;;@ instanceinnerclass/InstanceInnerClass.java:18:13
  (block
-  ;; instanceinnerclass.InstanceInnerClass.$clinit();
   ;;@ instanceinnerclass/InstanceInnerClass.java:18:13
   (call $$clinit__void@instanceinnerclass.InstanceInnerClass )
-  ;; Object.this.$ctor();
   ;;@ instanceinnerclass/InstanceInnerClass.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -164,7 +159,6 @@
  (local $this (ref null $instanceinnerclass.InstanceInnerClass))
  (local.set $this (ref.cast_static $instanceinnerclass.InstanceInnerClass (local.get $this.untyped)))
  (block
-  ;; instanceinnerclass.InstanceInnerClass.InnerClass.$create(instanceinnerclass.InstanceInnerClass.$create());
   ;;@ instanceinnerclass/InstanceInnerClass.java:34:4
   (drop (call $$create__instanceinnerclass_InstanceInnerClass@instanceinnerclass.InstanceInnerClass.InnerClass (call $$create__@instanceinnerclass.InstanceInnerClass )))
  )
@@ -175,19 +169,15 @@
 (func $$clinit__void@instanceinnerclass.InstanceInnerClass
  ;;@ instanceinnerclass/InstanceInnerClass.java:18:13
  (block
-  ;; if (instanceinnerclass.InstanceInnerClass.$initialized) return;
   ;;@ instanceinnerclass/InstanceInnerClass.java:18:13
   (if (global.get $f_$initialized__instanceinnerclass_InstanceInnerClass)
    (then
-    ;; return;
     ;;@ instanceinnerclass/InstanceInnerClass.java:18:13
     (return )
    )
   )
-  ;; (instanceinnerclass.InstanceInnerClass.$initialized = true);
   ;;@ instanceinnerclass/InstanceInnerClass.java:18:13
   (global.set $f_$initialized__instanceinnerclass_InstanceInnerClass (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ instanceinnerclass/InstanceInnerClass.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -197,14 +187,11 @@
 (func $$getClassMetadata__java_lang_Class@instanceinnerclass.InstanceInnerClass
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((instanceinnerclass.InstanceInnerClass.$class == null)) (instanceinnerclass.InstanceInnerClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|instanceinne...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__instanceinnerclass_InstanceInnerClass) (ref.null $java.lang.Class))
    (then
-    ;; (instanceinnerclass.InstanceInnerClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|instanceinne...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__instanceinnerclass_InstanceInnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instanceinne...|__java_lang_String (ref.func $$getString_|instanceinne...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return instanceinnerclass.InstanceInnerClass.$class;
   (return (global.get $f_$class__instanceinnerclass_InstanceInnerClass))
  )
 )
@@ -217,7 +204,6 @@
  (local $this (ref null $instanceinnerclass.InstanceInnerClass))
  (local.set $this (ref.cast_static $instanceinnerclass.InstanceInnerClass (local.get $this.untyped)))
  (block
-  ;; return instanceinnerclass.InstanceInnerClass.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@instanceinnerclass.InstanceInnerClass) ))
  )
 )
@@ -232,13 +218,10 @@
  ;;@ instanceinnerclass/InstanceInnerClass.java:23:15
  (local $$instance (ref null $instanceinnerclass.InstanceInnerClass.InnerClass))
  (block
-  ;; InnerClass $instance = new InnerClass.<init>(0,$outer_this,0,null);
   ;;@ instanceinnerclass/InstanceInnerClass.java:23:15
   (local.set $$instance (struct.new $instanceinnerclass.InstanceInnerClass.InnerClass (ref.as_non_null (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.vtable)) (ref.as_non_null (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.itable)) (i32.const 0) (local.get $$outer_this) (i32.const 0) (ref.null $instanceinnerclass.InstanceInnerClass)))
-  ;; $instance.$ctor($outer_this);
   ;;@ instanceinnerclass/InstanceInnerClass.java:23:15
   (call $$ctor__instanceinnerclass_InstanceInnerClass__void_$p_instanceinnerclass_InstanceInnerClass_InnerClass@instanceinnerclass.InstanceInnerClass.InnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;; return $instance;
   ;;@ instanceinnerclass/InstanceInnerClass.java:23:15
   (return (local.get $$instance))
  )
@@ -250,13 +233,10 @@
  (param $$outer_this (ref null $instanceinnerclass.InstanceInnerClass))
  ;;@ instanceinnerclass/InstanceInnerClass.java:23:15
  (block
-  ;; instanceinnerclass.InstanceInnerClass.InnerClass.$clinit();
   ;;@ instanceinnerclass/InstanceInnerClass.java:23:15
   (call $$clinit__void@instanceinnerclass.InstanceInnerClass.InnerClass )
-  ;; Object.this.$ctor();
   ;;@ instanceinnerclass/InstanceInnerClass.java:23:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;; InnerClass.this.$init();
   ;;@ instanceinnerclass/InstanceInnerClass.java:23:15
   (call $$init__void_$p_instanceinnerclass_InstanceInnerClass_InnerClass@instanceinnerclass.InstanceInnerClass.InnerClass (ref.as_non_null (local.get $this)))
  )
@@ -270,10 +250,8 @@
  (local $this (ref null $instanceinnerclass.InstanceInnerClass.InnerClass))
  (local.set $this (ref.cast_static $instanceinnerclass.InstanceInnerClass.InnerClass (local.get $this.untyped)))
  (block
-  ;; InnerClass.this.this.funOuter();
   ;;@ instanceinnerclass/InstanceInnerClass.java:28:6
   (call_ref $function.m_funOuter__void (ref.as_non_null (struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass(local.get $this)))(struct.get $instanceinnerclass.InstanceInnerClass.vtable $m_funOuter__void (struct.get $instanceinnerclass.InstanceInnerClass $vtable(struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass(local.get $this)))))
-  ;; InnerClass.this.this.funOuter();
   ;;@ instanceinnerclass/InstanceInnerClass.java:29:6
   (call_ref $function.m_funOuter__void (ref.as_non_null (struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass(local.get $this)))(struct.get $instanceinnerclass.InstanceInnerClass.vtable $m_funOuter__void (struct.get $instanceinnerclass.InstanceInnerClass $vtable(struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass(local.get $this)))))
  )
@@ -285,10 +263,8 @@
  (param $this (ref null $instanceinnerclass.InstanceInnerClass.InnerClass))
  ;;@ instanceinnerclass/InstanceInnerClass.java:23:15
  (block
-  ;; (InnerClass.this.field = (InnerClass.this.this.instanceField + InnerClass.this.this.instanceField));
   ;;@ instanceinnerclass/InstanceInnerClass.java:24:4
   (struct.set $instanceinnerclass.InstanceInnerClass.InnerClass $f_field__instanceinnerclass_InstanceInnerClass_InnerClass(local.get $this) (i32.add (struct.get $instanceinnerclass.InstanceInnerClass $f_instanceField__instanceinnerclass_InstanceInnerClass(struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass(local.get $this))) (struct.get $instanceinnerclass.InstanceInnerClass $f_instanceField__instanceinnerclass_InstanceInnerClass(struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass(local.get $this)))))
-  ;; (InnerClass.this.enclosingInstance = InnerClass.this.this);
   ;;@ instanceinnerclass/InstanceInnerClass.java:25:4
   (struct.set $instanceinnerclass.InstanceInnerClass.InnerClass $f_enclosingInstance__instanceinnerclass_InstanceInnerClass_InnerClass(local.get $this) (struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass(local.get $this)))
  )
@@ -298,19 +274,15 @@
 (func $$clinit__void@instanceinnerclass.InstanceInnerClass.InnerClass
  ;;@ instanceinnerclass/InstanceInnerClass.java:23:15
  (block
-  ;; if (instanceinnerclass.InstanceInnerClass.InnerClass.$initialized) return;
   ;;@ instanceinnerclass/InstanceInnerClass.java:23:15
   (if (global.get $f_$initialized__instanceinnerclass_InstanceInnerClass_InnerClass)
    (then
-    ;; return;
     ;;@ instanceinnerclass/InstanceInnerClass.java:23:15
     (return )
    )
   )
-  ;; (instanceinnerclass.InstanceInnerClass.InnerClass.$initialized = true);
   ;;@ instanceinnerclass/InstanceInnerClass.java:23:15
   (global.set $f_$initialized__instanceinnerclass_InstanceInnerClass_InnerClass (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ instanceinnerclass/InstanceInnerClass.java:23:15
   (call $$clinit__void@java.lang.Object )
  )
@@ -320,14 +292,11 @@
 (func $$getClassMetadata__java_lang_Class@instanceinnerclass.InstanceInnerClass.InnerClass
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((instanceinnerclass.InstanceInnerClass.InnerClass.$class == null)) (instanceinnerclass.InstanceInnerClass.InnerClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|instanceinne...|_1(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__instanceinnerclass_InstanceInnerClass_InnerClass) (ref.null $java.lang.Class))
    (then
-    ;; (instanceinnerclass.InstanceInnerClass.InnerClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|instanceinne...|_1(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__instanceinnerclass_InstanceInnerClass_InnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instanceinne...|_1__java_lang_String (ref.func $$getString_|instanceinne...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return instanceinnerclass.InstanceInnerClass.InnerClass.$class;
   (return (global.get $f_$class__instanceinnerclass_InstanceInnerClass_InnerClass))
  )
 )
@@ -340,7 +309,6 @@
  (local $this (ref null $instanceinnerclass.InstanceInnerClass.InnerClass))
  (local.set $this (ref.cast_static $instanceinnerclass.InstanceInnerClass.InnerClass (local.get $this.untyped)))
  (block
-  ;; return instanceinnerclass.InstanceInnerClass.InnerClass.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@instanceinnerclass.InstanceInnerClass.InnerClass) ))
  )
 )

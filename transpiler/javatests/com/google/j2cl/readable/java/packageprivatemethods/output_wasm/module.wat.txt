@@ -280,16 +280,13 @@
 (func $$clinit__void@packageprivatemethods.package1.Interface
  ;;@ packageprivatemethods/package1/Interface.java:18:17
  (block
-  ;; if (packageprivatemethods.package1.Interface.$initialized) return;
   ;;@ packageprivatemethods/package1/Interface.java:18:17
   (if (global.get $f_$initialized__packageprivatemethods_package1_Interface)
    (then
-    ;; return;
     ;;@ packageprivatemethods/package1/Interface.java:18:17
     (return )
    )
   )
-  ;; (packageprivatemethods.package1.Interface.$initialized = true);
   ;;@ packageprivatemethods/package1/Interface.java:18:17
   (global.set $f_$initialized__packageprivatemethods_package1_Interface (i32.const 1))
  )
@@ -299,14 +296,11 @@
 (func $$getClassMetadata__java_lang_Class@packageprivatemethods.package1.Interface
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((packageprivatemethods.package1.Interface.$class == null)) (packageprivatemethods.package1.Interface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|packagepriva...|_1()));
   (if (ref.eq (global.get $f_$class__packageprivatemethods_package1_Interface) (ref.null $java.lang.Class))
    (then
-    ;; (packageprivatemethods.package1.Interface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|packagepriva...|_1()));
     (global.set $f_$class__packageprivatemethods_package1_Interface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|packagepriva...|_1__java_lang_String (ref.func $$getString_|packagepriva...|_1__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return packageprivatemethods.package1.Interface.$class;
   (return (global.get $f_$class__packageprivatemethods_package1_Interface))
  )
 )
@@ -319,13 +313,10 @@
  ;;@ packageprivatemethods/package1/SuperParent.java:18:13
  (local $$instance (ref null $packageprivatemethods.package1.SuperParent))
  (block
-  ;; SuperParent $instance = new SuperParent.<init>(0);
   ;;@ packageprivatemethods/package1/SuperParent.java:18:13
   (local.set $$instance (struct.new $packageprivatemethods.package1.SuperParent (ref.as_non_null (global.get $packageprivatemethods.package1.SuperParent.vtable)) (ref.as_non_null (global.get $packageprivatemethods.package1.SuperParent.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ packageprivatemethods/package1/SuperParent.java:18:13
   (call $$ctor__void_$p_packageprivatemethods_package1_SuperParent@packageprivatemethods.package1.SuperParent (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ packageprivatemethods/package1/SuperParent.java:18:13
   (return (local.get $$instance))
  )
@@ -336,10 +327,8 @@
  (param $this (ref null $packageprivatemethods.package1.SuperParent))
  ;;@ packageprivatemethods/package1/SuperParent.java:18:13
  (block
-  ;; packageprivatemethods.package1.SuperParent.$clinit();
   ;;@ packageprivatemethods/package1/SuperParent.java:18:13
   (call $$clinit__void@packageprivatemethods.package1.SuperParent )
-  ;; Object.this.$ctor();
   ;;@ packageprivatemethods/package1/SuperParent.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -355,7 +344,6 @@
  (local $this (ref null $packageprivatemethods.package1.SuperParent))
  (local.set $this (ref.cast_static $packageprivatemethods.package1.SuperParent (local.get $this.untyped)))
  (block
-  ;; return (a - 1);
   ;;@ packageprivatemethods/package1/SuperParent.java:21:4
   (return (i32.sub (local.get $a) (i32.const 1)))
  )
@@ -373,7 +361,6 @@
  (local $this (ref null $packageprivatemethods.package1.SuperParent))
  (local.set $this (ref.cast_static $packageprivatemethods.package1.SuperParent (local.get $this.untyped)))
  (block
-  ;; return (a + b);
   ;;@ packageprivatemethods/package1/SuperParent.java:26:4
   (return (i32.add (local.get $a) (local.get $b)))
  )
@@ -391,7 +378,6 @@
  (local $this (ref null $packageprivatemethods.package1.SuperParent))
  (local.set $this (ref.cast_static $packageprivatemethods.package1.SuperParent (local.get $this.untyped)))
  (block
-  ;; return (a + b);
   ;;@ packageprivatemethods/package1/SuperParent.java:30:4
   (return (i32.add (local.get $a) (local.get $b)))
  )
@@ -410,7 +396,6 @@
  (local $this (ref null $packageprivatemethods.package1.SuperParent))
  (local.set $this (ref.cast_static $packageprivatemethods.package1.SuperParent (local.get $this.untyped)))
  (block
-  ;; return ((a + b) + c);
   ;;@ packageprivatemethods/package1/SuperParent.java:35:4
   (return (i32.add (i32.add (local.get $a) (local.get $b)) (local.get $c)))
  )
@@ -421,19 +406,15 @@
 (func $$clinit__void@packageprivatemethods.package1.SuperParent
  ;;@ packageprivatemethods/package1/SuperParent.java:18:13
  (block
-  ;; if (packageprivatemethods.package1.SuperParent.$initialized) return;
   ;;@ packageprivatemethods/package1/SuperParent.java:18:13
   (if (global.get $f_$initialized__packageprivatemethods_package1_SuperParent)
    (then
-    ;; return;
     ;;@ packageprivatemethods/package1/SuperParent.java:18:13
     (return )
    )
   )
-  ;; (packageprivatemethods.package1.SuperParent.$initialized = true);
   ;;@ packageprivatemethods/package1/SuperParent.java:18:13
   (global.set $f_$initialized__packageprivatemethods_package1_SuperParent (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ packageprivatemethods/package1/SuperParent.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -443,14 +424,11 @@
 (func $$getClassMetadata__java_lang_Class@packageprivatemethods.package1.SuperParent
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((packageprivatemethods.package1.SuperParent.$class == null)) (packageprivatemethods.package1.SuperParent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|packagepriva...|_3(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__packageprivatemethods_package1_SuperParent) (ref.null $java.lang.Class))
    (then
-    ;; (packageprivatemethods.package1.SuperParent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|packagepriva...|_3(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__packageprivatemethods_package1_SuperParent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|packagepriva...|_3__java_lang_String (ref.func $$getString_|packagepriva...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return packageprivatemethods.package1.SuperParent.$class;
   (return (global.get $f_$class__packageprivatemethods_package1_SuperParent))
  )
 )
@@ -463,7 +441,6 @@
  (local $this (ref null $packageprivatemethods.package1.SuperParent))
  (local.set $this (ref.cast_static $packageprivatemethods.package1.SuperParent (local.get $this.untyped)))
  (block
-  ;; return packageprivatemethods.package1.SuperParent.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@packageprivatemethods.package1.SuperParent) ))
  )
 )
@@ -476,10 +453,8 @@
  (param $this (ref null $packageprivatemethods.package1.Parent))
  ;;@ packageprivatemethods/package1/Parent.java:18:22
  (block
-  ;; packageprivatemethods.package1.Parent.$clinit();
   ;;@ packageprivatemethods/package1/Parent.java:18:22
   (call $$clinit__void@packageprivatemethods.package1.Parent )
-  ;; SuperParent.this.$ctor();
   ;;@ packageprivatemethods/package1/Parent.java:18:22
   (call $$ctor__void_$p_packageprivatemethods_package1_SuperParent@packageprivatemethods.package1.SuperParent (ref.as_non_null (local.get $this)))
  )
@@ -495,7 +470,6 @@
  (local $this (ref null $packageprivatemethods.package1.Parent))
  (local.set $this (ref.cast_static $packageprivatemethods.package1.Parent (local.get $this.untyped)))
  (block
-  ;; return a;
   ;;@ packageprivatemethods/package1/Parent.java:22:4
   (return (local.get $a))
  )
@@ -514,7 +488,6 @@
  (local $this (ref null $packageprivatemethods.package1.Parent))
  (local.set $this (ref.cast_static $packageprivatemethods.package1.Parent (local.get $this.untyped)))
  (block
-  ;; return Parent.this.exposedAbstractInParent(arg0,arg1,arg2);
   ;;@ packageprivatemethods/package1/Parent.java:18:22
   (return (call_ref $function.m_exposedAbstractInParent__int__int__int__int (ref.as_non_null (local.get $this))(local.get $arg0)(local.get $arg1)(local.get $arg2)(struct.get $packageprivatemethods.package1.Parent.vtable $m_exposedAbstractInParent__int__int__int__int (struct.get $packageprivatemethods.package1.Parent $vtable(local.get $this)))))
  )
@@ -525,19 +498,15 @@
 (func $$clinit__void@packageprivatemethods.package1.Parent
  ;;@ packageprivatemethods/package1/Parent.java:18:22
  (block
-  ;; if (packageprivatemethods.package1.Parent.$initialized) return;
   ;;@ packageprivatemethods/package1/Parent.java:18:22
   (if (global.get $f_$initialized__packageprivatemethods_package1_Parent)
    (then
-    ;; return;
     ;;@ packageprivatemethods/package1/Parent.java:18:22
     (return )
    )
   )
-  ;; (packageprivatemethods.package1.Parent.$initialized = true);
   ;;@ packageprivatemethods/package1/Parent.java:18:22
   (global.set $f_$initialized__packageprivatemethods_package1_Parent (i32.const 1))
-  ;; packageprivatemethods.package1.SuperParent.$clinit();
   ;;@ packageprivatemethods/package1/Parent.java:18:22
   (call $$clinit__void@packageprivatemethods.package1.SuperParent )
  )
@@ -547,14 +516,11 @@
 (func $$getClassMetadata__java_lang_Class@packageprivatemethods.package1.Parent
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((packageprivatemethods.package1.Parent.$class == null)) (packageprivatemethods.package1.Parent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|packagepriva...|_2(),packageprivatemethods.package1.SuperParent.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__packageprivatemethods_package1_Parent) (ref.null $java.lang.Class))
    (then
-    ;; (packageprivatemethods.package1.Parent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|packagepriva...|_2(),packageprivatemethods.package1.SuperParent.$getClassMetadata()));
     (global.set $f_$class__packageprivatemethods_package1_Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|packagepriva...|_2__java_lang_String (ref.func $$getString_|packagepriva...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@packageprivatemethods.package1.SuperParent) )))
    )
   )
-  ;; return packageprivatemethods.package1.Parent.$class;
   (return (global.get $f_$class__packageprivatemethods_package1_Parent))
  )
 )
@@ -567,13 +533,10 @@
  ;;@ packageprivatemethods/package1/Child.java:18:13
  (local $$instance (ref null $packageprivatemethods.package1.Child))
  (block
-  ;; Child $instance = new Child.<init>(0);
   ;;@ packageprivatemethods/package1/Child.java:18:13
   (local.set $$instance (struct.new $packageprivatemethods.package1.Child (ref.as_non_null (global.get $packageprivatemethods.package1.Child.vtable)) (ref.as_non_null (global.get $packageprivatemethods.package1.Child.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ packageprivatemethods/package1/Child.java:18:13
   (call $$ctor__void_$p_packageprivatemethods_package1_Child@packageprivatemethods.package1.Child (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ packageprivatemethods/package1/Child.java:18:13
   (return (local.get $$instance))
  )
@@ -584,10 +547,8 @@
  (param $this (ref null $packageprivatemethods.package1.Child))
  ;;@ packageprivatemethods/package1/Child.java:18:13
  (block
-  ;; packageprivatemethods.package1.Child.$clinit();
   ;;@ packageprivatemethods/package1/Child.java:18:13
   (call $$clinit__void@packageprivatemethods.package1.Child )
-  ;; Parent.this.$ctor();
   ;;@ packageprivatemethods/package1/Child.java:18:13
   (call $$ctor__void_$p_packageprivatemethods_package1_Parent@packageprivatemethods.package1.Parent (ref.as_non_null (local.get $this)))
  )
@@ -603,7 +564,6 @@
  (local $this (ref null $packageprivatemethods.package1.Child))
  (local.set $this (ref.cast_static $packageprivatemethods.package1.Child (local.get $this.untyped)))
  (block
-  ;; return (a + 1);
   ;;@ packageprivatemethods/package1/Child.java:23:4
   (return (i32.add (local.get $a) (i32.const 1)))
  )
@@ -621,7 +581,6 @@
  (local $this (ref null $packageprivatemethods.package1.Child))
  (local.set $this (ref.cast_static $packageprivatemethods.package1.Child (local.get $this.untyped)))
  (block
-  ;; return ((a + b) + 1);
   ;;@ packageprivatemethods/package1/Child.java:29:4
   (return (i32.add (i32.add (local.get $a) (local.get $b)) (i32.const 1)))
  )
@@ -639,7 +598,6 @@
  (local $this (ref null $packageprivatemethods.package1.Child))
  (local.set $this (ref.cast_static $packageprivatemethods.package1.Child (local.get $this.untyped)))
  (block
-  ;; return ((a + b) + 1);
   ;;@ packageprivatemethods/package1/Child.java:36:4
   (return (i32.add (i32.add (local.get $a) (local.get $b)) (i32.const 1)))
  )
@@ -658,7 +616,6 @@
  (local $this (ref null $packageprivatemethods.package1.Child))
  (local.set $this (ref.cast_static $packageprivatemethods.package1.Child (local.get $this.untyped)))
  (block
-  ;; return (((a + b) + c) + 2);
   ;;@ packageprivatemethods/package1/Child.java:42:4
   (return (i32.add (i32.add (i32.add (local.get $a) (local.get $b)) (local.get $c)) (i32.const 2)))
  )
@@ -676,7 +633,6 @@
  (local $this (ref null $packageprivatemethods.package1.Child))
  (local.set $this (ref.cast_static $packageprivatemethods.package1.Child (local.get $this.untyped)))
  (block
-  ;; return Child.this.exposedInChild(arg0,arg1);
   ;;@ packageprivatemethods/package1/Child.java:18:13
   (return (call_ref $function.m_exposedInChild__int__int__int (ref.as_non_null (local.get $this))(local.get $arg0)(local.get $arg1)(struct.get $packageprivatemethods.package1.Child.vtable $m_exposedInChild__int__int__int (struct.get $packageprivatemethods.package1.Child $vtable(local.get $this)))))
  )
@@ -694,7 +650,6 @@
  (local $this (ref null $packageprivatemethods.package1.Child))
  (local.set $this (ref.cast_static $packageprivatemethods.package1.Child (local.get $this.untyped)))
  (block
-  ;; return Child.this.exposedInChildWithInterface(arg0,arg1);
   ;;@ packageprivatemethods/package1/Child.java:18:13
   (return (call_ref $function.m_exposedInChildWithInterface__int__int__int (ref.as_non_null (local.get $this))(local.get $arg0)(local.get $arg1)(struct.get $packageprivatemethods.package1.Child.vtable $m_exposedInChildWithInterface__int__int__int (struct.get $packageprivatemethods.package1.Child $vtable(local.get $this)))))
  )
@@ -711,7 +666,6 @@
  (local $this (ref null $packageprivatemethods.package1.Child))
  (local.set $this (ref.cast_static $packageprivatemethods.package1.Child (local.get $this.untyped)))
  (block
-  ;; return Child.this.overrideInParentExposedInChild(arg0);
   ;;@ packageprivatemethods/package1/Child.java:18:13
   (return (call_ref $function.m_overrideInParentExposedInChild__int__int (ref.as_non_null (local.get $this))(local.get $arg0)(struct.get $packageprivatemethods.package1.Child.vtable $m_overrideInParentExposedInChild__int__int (struct.get $packageprivatemethods.package1.Child $vtable(local.get $this)))))
  )
@@ -722,19 +676,15 @@
 (func $$clinit__void@packageprivatemethods.package1.Child
  ;;@ packageprivatemethods/package1/Child.java:18:13
  (block
-  ;; if (packageprivatemethods.package1.Child.$initialized) return;
   ;;@ packageprivatemethods/package1/Child.java:18:13
   (if (global.get $f_$initialized__packageprivatemethods_package1_Child)
    (then
-    ;; return;
     ;;@ packageprivatemethods/package1/Child.java:18:13
     (return )
    )
   )
-  ;; (packageprivatemethods.package1.Child.$initialized = true);
   ;;@ packageprivatemethods/package1/Child.java:18:13
   (global.set $f_$initialized__packageprivatemethods_package1_Child (i32.const 1))
-  ;; packageprivatemethods.package1.Parent.$clinit();
   ;;@ packageprivatemethods/package1/Child.java:18:13
   (call $$clinit__void@packageprivatemethods.package1.Parent )
  )
@@ -744,14 +694,11 @@
 (func $$getClassMetadata__java_lang_Class@packageprivatemethods.package1.Child
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((packageprivatemethods.package1.Child.$class == null)) (packageprivatemethods.package1.Child.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|packagepriva...|(),packageprivatemethods.package1.Parent.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__packageprivatemethods_package1_Child) (ref.null $java.lang.Class))
    (then
-    ;; (packageprivatemethods.package1.Child.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|packagepriva...|(),packageprivatemethods.package1.Parent.$getClassMetadata()));
     (global.set $f_$class__packageprivatemethods_package1_Child (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|packagepriva...|__java_lang_String (ref.func $$getString_|packagepriva...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@packageprivatemethods.package1.Parent) )))
    )
   )
-  ;; return packageprivatemethods.package1.Child.$class;
   (return (global.get $f_$class__packageprivatemethods_package1_Child))
  )
 )
@@ -764,7 +711,6 @@
  (local $this (ref null $packageprivatemethods.package1.Child))
  (local.set $this (ref.cast_static $packageprivatemethods.package1.Child (local.get $this.untyped)))
  (block
-  ;; return packageprivatemethods.package1.Child.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@packageprivatemethods.package1.Child) ))
  )
 )
@@ -777,10 +723,8 @@
  (param $this (ref null $packageprivatemethods.package2.SubParent))
  ;;@ packageprivatemethods/package2/SubParent.java:20:22
  (block
-  ;; packageprivatemethods.package2.SubParent.$clinit();
   ;;@ packageprivatemethods/package2/SubParent.java:20:22
   (call $$clinit__void@packageprivatemethods.package2.SubParent )
-  ;; Parent.this.$ctor();
   ;;@ packageprivatemethods/package2/SubParent.java:20:22
   (call $$ctor__void_$p_packageprivatemethods_package1_Parent@packageprivatemethods.package1.Parent (ref.as_non_null (local.get $this)))
  )
@@ -796,7 +740,6 @@
  (local $this (ref null $packageprivatemethods.package2.SubParent))
  (local.set $this (ref.cast_static $packageprivatemethods.package2.SubParent (local.get $this.untyped)))
  (block
-  ;; return a;
   ;;@ packageprivatemethods/package2/SubParent.java:22:4
   (return (local.get $a))
  )
@@ -807,19 +750,15 @@
 (func $$clinit__void@packageprivatemethods.package2.SubParent
  ;;@ packageprivatemethods/package2/SubParent.java:20:22
  (block
-  ;; if (packageprivatemethods.package2.SubParent.$initialized) return;
   ;;@ packageprivatemethods/package2/SubParent.java:20:22
   (if (global.get $f_$initialized__packageprivatemethods_package2_SubParent)
    (then
-    ;; return;
     ;;@ packageprivatemethods/package2/SubParent.java:20:22
     (return )
    )
   )
-  ;; (packageprivatemethods.package2.SubParent.$initialized = true);
   ;;@ packageprivatemethods/package2/SubParent.java:20:22
   (global.set $f_$initialized__packageprivatemethods_package2_SubParent (i32.const 1))
-  ;; packageprivatemethods.package1.Parent.$clinit();
   ;;@ packageprivatemethods/package2/SubParent.java:20:22
   (call $$clinit__void@packageprivatemethods.package1.Parent )
  )
@@ -829,14 +768,11 @@
 (func $$getClassMetadata__java_lang_Class@packageprivatemethods.package2.SubParent
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((packageprivatemethods.package2.SubParent.$class == null)) (packageprivatemethods.package2.SubParent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|packagepriva...|_5(),packageprivatemethods.package1.Parent.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__packageprivatemethods_package2_SubParent) (ref.null $java.lang.Class))
    (then
-    ;; (packageprivatemethods.package2.SubParent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|packagepriva...|_5(),packageprivatemethods.package1.Parent.$getClassMetadata()));
     (global.set $f_$class__packageprivatemethods_package2_SubParent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|packagepriva...|_5__java_lang_String (ref.func $$getString_|packagepriva...|_5__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@packageprivatemethods.package1.Parent) )))
    )
   )
-  ;; return packageprivatemethods.package2.SubParent.$class;
   (return (global.get $f_$class__packageprivatemethods_package2_SubParent))
  )
 )
@@ -849,13 +785,10 @@
  ;;@ packageprivatemethods/package2/SubChild.java:20:13
  (local $$instance (ref null $packageprivatemethods.package2.SubChild))
  (block
-  ;; SubChild $instance = new SubChild.<init>(0);
   ;;@ packageprivatemethods/package2/SubChild.java:20:13
   (local.set $$instance (struct.new $packageprivatemethods.package2.SubChild (ref.as_non_null (global.get $packageprivatemethods.package2.SubChild.vtable)) (ref.as_non_null (global.get $packageprivatemethods.package2.SubChild.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ packageprivatemethods/package2/SubChild.java:20:13
   (call $$ctor__void_$p_packageprivatemethods_package2_SubChild@packageprivatemethods.package2.SubChild (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ packageprivatemethods/package2/SubChild.java:20:13
   (return (local.get $$instance))
  )
@@ -866,10 +799,8 @@
  (param $this (ref null $packageprivatemethods.package2.SubChild))
  ;;@ packageprivatemethods/package2/SubChild.java:20:13
  (block
-  ;; packageprivatemethods.package2.SubChild.$clinit();
   ;;@ packageprivatemethods/package2/SubChild.java:20:13
   (call $$clinit__void@packageprivatemethods.package2.SubChild )
-  ;; Child.this.$ctor();
   ;;@ packageprivatemethods/package2/SubChild.java:20:13
   (call $$ctor__void_$p_packageprivatemethods_package1_Child@packageprivatemethods.package1.Child (ref.as_non_null (local.get $this)))
  )
@@ -885,7 +816,6 @@
  (local $this (ref null $packageprivatemethods.package2.SubChild))
  (local.set $this (ref.cast_static $packageprivatemethods.package2.SubChild (local.get $this.untyped)))
  (block
-  ;; return (a + 3);
   ;;@ packageprivatemethods/package2/SubChild.java:23:4
   (return (i32.add (local.get $a) (i32.const 3)))
  )
@@ -896,19 +826,15 @@
 (func $$clinit__void@packageprivatemethods.package2.SubChild
  ;;@ packageprivatemethods/package2/SubChild.java:20:13
  (block
-  ;; if (packageprivatemethods.package2.SubChild.$initialized) return;
   ;;@ packageprivatemethods/package2/SubChild.java:20:13
   (if (global.get $f_$initialized__packageprivatemethods_package2_SubChild)
    (then
-    ;; return;
     ;;@ packageprivatemethods/package2/SubChild.java:20:13
     (return )
    )
   )
-  ;; (packageprivatemethods.package2.SubChild.$initialized = true);
   ;;@ packageprivatemethods/package2/SubChild.java:20:13
   (global.set $f_$initialized__packageprivatemethods_package2_SubChild (i32.const 1))
-  ;; packageprivatemethods.package1.Child.$clinit();
   ;;@ packageprivatemethods/package2/SubChild.java:20:13
   (call $$clinit__void@packageprivatemethods.package1.Child )
  )
@@ -918,14 +844,11 @@
 (func $$getClassMetadata__java_lang_Class@packageprivatemethods.package2.SubChild
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((packageprivatemethods.package2.SubChild.$class == null)) (packageprivatemethods.package2.SubChild.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|packagepriva...|_4(),packageprivatemethods.package1.Child.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__packageprivatemethods_package2_SubChild) (ref.null $java.lang.Class))
    (then
-    ;; (packageprivatemethods.package2.SubChild.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|packagepriva...|_4(),packageprivatemethods.package1.Child.$getClassMetadata()));
     (global.set $f_$class__packageprivatemethods_package2_SubChild (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|packagepriva...|_4__java_lang_String (ref.func $$getString_|packagepriva...|_4__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@packageprivatemethods.package1.Child) )))
    )
   )
-  ;; return packageprivatemethods.package2.SubChild.$class;
   (return (global.get $f_$class__packageprivatemethods_package2_SubChild))
  )
 )
@@ -938,7 +861,6 @@
  (local $this (ref null $packageprivatemethods.package2.SubChild))
  (local.set $this (ref.cast_static $packageprivatemethods.package2.SubChild (local.get $this.untyped)))
  (block
-  ;; return packageprivatemethods.package2.SubChild.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@packageprivatemethods.package2.SubChild) ))
  )
 )

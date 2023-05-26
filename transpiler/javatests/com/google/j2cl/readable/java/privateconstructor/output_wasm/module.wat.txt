@@ -57,13 +57,10 @@
  ;;@ privateconstructor/PrivateConstructor.java:19:10
  (local $$instance (ref null $privateconstructor.PrivateConstructor))
  (block
-  ;; PrivateConstructor $instance = new PrivateConstructor.<init>(0);
   ;;@ privateconstructor/PrivateConstructor.java:19:10
   (local.set $$instance (struct.new $privateconstructor.PrivateConstructor (ref.as_non_null (global.get $privateconstructor.PrivateConstructor.vtable)) (ref.as_non_null (global.get $privateconstructor.PrivateConstructor.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ privateconstructor/PrivateConstructor.java:19:10
   (call $$ctor__void_$p_privateconstructor_PrivateConstructor@privateconstructor.PrivateConstructor (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ privateconstructor/PrivateConstructor.java:19:10
   (return (local.get $$instance))
  )
@@ -74,7 +71,6 @@
  (param $this (ref null $privateconstructor.PrivateConstructor))
  ;;@ privateconstructor/PrivateConstructor.java:19:10
  (block
-  ;; Object.this.$ctor();
   ;;@ privateconstructor/PrivateConstructor.java:19:31
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -84,19 +80,15 @@
 (func $$clinit__void@privateconstructor.PrivateConstructor
  ;;@ privateconstructor/PrivateConstructor.java:18:13
  (block
-  ;; if (privateconstructor.PrivateConstructor.$initialized) return;
   ;;@ privateconstructor/PrivateConstructor.java:18:13
   (if (global.get $f_$initialized__privateconstructor_PrivateConstructor)
    (then
-    ;; return;
     ;;@ privateconstructor/PrivateConstructor.java:18:13
     (return )
    )
   )
-  ;; (privateconstructor.PrivateConstructor.$initialized = true);
   ;;@ privateconstructor/PrivateConstructor.java:18:13
   (global.set $f_$initialized__privateconstructor_PrivateConstructor (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ privateconstructor/PrivateConstructor.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -106,14 +98,11 @@
 (func $$getClassMetadata__java_lang_Class@privateconstructor.PrivateConstructor
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((privateconstructor.PrivateConstructor.$class == null)) (privateconstructor.PrivateConstructor.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|privateconst...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__privateconstructor_PrivateConstructor) (ref.null $java.lang.Class))
    (then
-    ;; (privateconstructor.PrivateConstructor.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|privateconst...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__privateconstructor_PrivateConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|privateconst...|__java_lang_String (ref.func $$getString_|privateconst...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return privateconstructor.PrivateConstructor.$class;
   (return (global.get $f_$class__privateconstructor_PrivateConstructor))
  )
 )
@@ -126,7 +115,6 @@
  (local $this (ref null $privateconstructor.PrivateConstructor))
  (local.set $this (ref.cast_static $privateconstructor.PrivateConstructor (local.get $this.untyped)))
  (block
-  ;; return privateconstructor.PrivateConstructor.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@privateconstructor.PrivateConstructor) ))
  )
 )

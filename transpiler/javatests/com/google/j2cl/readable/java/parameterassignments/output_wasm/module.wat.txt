@@ -319,16 +319,13 @@
 (func $$clinit__void@parameterassignments.Main.Fn
  ;;@ parameterassignments/Main.java:41:12
  (block
-  ;; if (parameterassignments.Main.Fn.$initialized) return;
   ;;@ parameterassignments/Main.java:41:12
   (if (global.get $f_$initialized__parameterassignments_Main_Fn)
    (then
-    ;; return;
     ;;@ parameterassignments/Main.java:41:12
     (return )
    )
   )
-  ;; (parameterassignments.Main.Fn.$initialized = true);
   ;;@ parameterassignments/Main.java:41:12
   (global.set $f_$initialized__parameterassignments_Main_Fn (i32.const 1))
  )
@@ -338,14 +335,11 @@
 (func $$getClassMetadata__java_lang_Class@parameterassignments.Main.Fn
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((parameterassignments.Main.Fn.$class == null)) (parameterassignments.Main.Fn.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|parameterass...|_4()));
   (if (ref.eq (global.get $f_$class__parameterassignments_Main_Fn) (ref.null $java.lang.Class))
    (then
-    ;; (parameterassignments.Main.Fn.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|parameterass...|_4()));
     (global.set $f_$class__parameterassignments_Main_Fn (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|parameterass...|_4__java_lang_String (ref.func $$getString_|parameterass...|_4__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return parameterassignments.Main.Fn.$class;
   (return (global.get $f_$class__parameterassignments_Main_Fn))
  )
 )
@@ -356,16 +350,13 @@
 (func $$clinit__void@parameterassignments.Main.FnPrimitiveVarargs
  ;;@ parameterassignments/Main.java:51:12
  (block
-  ;; if (parameterassignments.Main.FnPrimitiveVarargs.$initialized) return;
   ;;@ parameterassignments/Main.java:51:12
   (if (global.get $f_$initialized__parameterassignments_Main_FnPrimitiveVarargs)
    (then
-    ;; return;
     ;;@ parameterassignments/Main.java:51:12
     (return )
    )
   )
-  ;; (parameterassignments.Main.FnPrimitiveVarargs.$initialized = true);
   ;;@ parameterassignments/Main.java:51:12
   (global.set $f_$initialized__parameterassignments_Main_FnPrimitiveVarargs (i32.const 1))
  )
@@ -375,14 +366,11 @@
 (func $$getClassMetadata__java_lang_Class@parameterassignments.Main.FnPrimitiveVarargs
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((parameterassignments.Main.FnPrimitiveVarargs.$class == null)) (parameterassignments.Main.FnPrimitiveVarargs.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|parameterass...|_5()));
   (if (ref.eq (global.get $f_$class__parameterassignments_Main_FnPrimitiveVarargs) (ref.null $java.lang.Class))
    (then
-    ;; (parameterassignments.Main.FnPrimitiveVarargs.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|parameterass...|_5()));
     (global.set $f_$class__parameterassignments_Main_FnPrimitiveVarargs (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|parameterass...|_5__java_lang_String (ref.func $$getString_|parameterass...|_5__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return parameterassignments.Main.FnPrimitiveVarargs.$class;
   (return (global.get $f_$class__parameterassignments_Main_FnPrimitiveVarargs))
  )
 )
@@ -393,16 +381,13 @@
 (func $$clinit__void@parameterassignments.Main.FnObjectVarargs
  ;;@ parameterassignments/Main.java:60:12
  (block
-  ;; if (parameterassignments.Main.FnObjectVarargs.$initialized) return;
   ;;@ parameterassignments/Main.java:60:12
   (if (global.get $f_$initialized__parameterassignments_Main_FnObjectVarargs)
    (then
-    ;; return;
     ;;@ parameterassignments/Main.java:60:12
     (return )
    )
   )
-  ;; (parameterassignments.Main.FnObjectVarargs.$initialized = true);
   ;;@ parameterassignments/Main.java:60:12
   (global.set $f_$initialized__parameterassignments_Main_FnObjectVarargs (i32.const 1))
  )
@@ -412,14 +397,11 @@
 (func $$getClassMetadata__java_lang_Class@parameterassignments.Main.FnObjectVarargs
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((parameterassignments.Main.FnObjectVarargs.$class == null)) (parameterassignments.Main.FnObjectVarargs.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|parameterass...|_6()));
   (if (ref.eq (global.get $f_$class__parameterassignments_Main_FnObjectVarargs) (ref.null $java.lang.Class))
    (then
-    ;; (parameterassignments.Main.FnObjectVarargs.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|parameterass...|_6()));
     (global.set $f_$class__parameterassignments_Main_FnObjectVarargs (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|parameterass...|_6__java_lang_String (ref.func $$getString_|parameterass...|_6__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return parameterassignments.Main.FnObjectVarargs.$class;
   (return (global.get $f_$class__parameterassignments_Main_FnObjectVarargs))
  )
 )
@@ -435,13 +417,10 @@
  ;;@ parameterassignments/Main.java:19:2
  (local $$instance (ref null $parameterassignments.Main))
  (block
-  ;; Main $instance = new Main.<init>(0,null,null,null);
   ;;@ parameterassignments/Main.java:19:2
   (local.set $$instance (struct.new $parameterassignments.Main (ref.as_non_null (global.get $parameterassignments.Main.vtable)) (ref.as_non_null (global.get $parameterassignments.Main.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
-  ;; $instance.$ctor(nonFinal,explicitFinal,implicitFinal);
   ;;@ parameterassignments/Main.java:19:2
   (call $$ctor__int__int__int__void_$p_parameterassignments_Main@parameterassignments.Main (ref.as_non_null (local.get $$instance))(local.get $nonFinal)(local.get $explicitFinal)(local.get $implicitFinal))
-  ;; return $instance;
   ;;@ parameterassignments/Main.java:19:2
   (return (local.get $$instance))
  )
@@ -455,13 +434,10 @@
  (param $implicitFinal i32)
  ;;@ parameterassignments/Main.java:19:2
  (block
-  ;; parameterassignments.Main.$clinit();
   ;;@ parameterassignments/Main.java:19:65
   (call $$clinit__void@parameterassignments.Main )
-  ;; Main.this.$ctor(nonFinal,explicitFinal,implicitFinal,true);
   ;;@ parameterassignments/Main.java:20:4
   (call $$ctor__int__int__int__boolean__void_$p_parameterassignments_Main@parameterassignments.Main (ref.as_non_null (local.get $this))(local.get $nonFinal)(local.get $explicitFinal)(local.get $implicitFinal)(i32.const 1))
-  ;; (nonFinal = ((nonFinal + explicitFinal) + implicitFinal));
   ;;@ parameterassignments/Main.java:21:4
   (local.set $nonFinal (i32.add (i32.add (local.get $nonFinal) (local.get $explicitFinal)) (local.get $implicitFinal)))
  )
@@ -477,13 +453,10 @@
  ;;@ parameterassignments/Main.java:24:2
  (local $$instance (ref null $parameterassignments.Main))
  (block
-  ;; Main $instance = new Main.<init>(0,null,null,null);
   ;;@ parameterassignments/Main.java:24:2
   (local.set $$instance (struct.new $parameterassignments.Main (ref.as_non_null (global.get $parameterassignments.Main.vtable)) (ref.as_non_null (global.get $parameterassignments.Main.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
-  ;; $instance.$ctor(nonFinal,explicitFinal,implicitFinal,flag);
   ;;@ parameterassignments/Main.java:24:2
   (call $$ctor__int__int__int__boolean__void_$p_parameterassignments_Main@parameterassignments.Main (ref.as_non_null (local.get $$instance))(local.get $nonFinal)(local.get $explicitFinal)(local.get $implicitFinal)(local.get $flag))
-  ;; return $instance;
   ;;@ parameterassignments/Main.java:24:2
   (return (local.get $$instance))
  )
@@ -498,16 +471,12 @@
  (param $flag i32)
  ;;@ parameterassignments/Main.java:24:2
  (block
-  ;; parameterassignments.Main.$clinit();
   ;;@ parameterassignments/Main.java:24:79
   (call $$clinit__void@parameterassignments.Main )
-  ;; Object.this.$ctor();
   ;;@ parameterassignments/Main.java:24:79
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;; Main.this.$init();
   ;;@ parameterassignments/Main.java:24:79
   (call $$init__void_$p_parameterassignments_Main@parameterassignments.Main (ref.as_non_null (local.get $this)))
-  ;; (nonFinal = ((nonFinal + explicitFinal) + implicitFinal));
   ;;@ parameterassignments/Main.java:25:4
   (local.set $nonFinal (i32.add (i32.add (local.get $nonFinal) (local.get $explicitFinal)) (local.get $implicitFinal)))
  )
@@ -525,10 +494,8 @@
  (local $this (ref null $parameterassignments.Main))
  (local.set $this (ref.cast_static $parameterassignments.Main (local.get $this.untyped)))
  (block
-  ;; (nonFinal = ((nonFinal + explicitFinal) + implicitFinal));
   ;;@ parameterassignments/Main.java:29:4
   (local.set $nonFinal (i32.add (i32.add (local.get $nonFinal) (local.get $explicitFinal)) (local.get $implicitFinal)))
-  ;; return nonFinal;
   ;;@ parameterassignments/Main.java:30:4
   (return (local.get $nonFinal))
  )
@@ -545,7 +512,6 @@
  (local $this (ref null $parameterassignments.Main))
  (local.set $this (ref.cast_static $parameterassignments.Main (local.get $this.untyped)))
  (block
-  ;; (oa = javaemul.internal.WasmArray.OfObject.$create([o,((Object) oa.elements[0])]));
   ;;@ parameterassignments/Main.java:34:4
   (local.set $oa (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (local.get $o)(array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $oa)) (i32.const 0)))))
  )
@@ -562,7 +528,6 @@
  (local $this (ref null $parameterassignments.Main))
  (local.set $this (ref.cast_static $parameterassignments.Main (local.get $this.untyped)))
  (block
-  ;; (ia = javaemul.internal.WasmArray.OfInt.$create([i,ia.elements[0]]));
   ;;@ parameterassignments/Main.java:38:4
   (local.set $ia (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (local.get $i)(array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt(local.get $ia)) (i32.const 0)))))
  )
@@ -574,13 +539,10 @@
  (param $this (ref null $parameterassignments.Main))
  ;;@ parameterassignments/Main.java:18:13
  (block
-  ;; (Main.this.fn = parameterassignments.Main.$LambdaImplementor$1.$create());
   ;;@ parameterassignments/Main.java:45:2
   (struct.set $parameterassignments.Main $f_fn__parameterassignments_Main(local.get $this) (call $$create__@parameterassignments.Main.$LambdaImplementor$1 ))
-  ;; (Main.this.fnPrimitiveVarargs = parameterassignments.Main.$LambdaImplementor$2.$create());
   ;;@ parameterassignments/Main.java:55:2
   (struct.set $parameterassignments.Main $f_fnPrimitiveVarargs__parameterassignments_Main(local.get $this) (call $$create__@parameterassignments.Main.$LambdaImplementor$2 ))
-  ;; (Main.this.fnObjectVarargs = parameterassignments.Main.$LambdaImplementor$3.$create());
   ;;@ parameterassignments/Main.java:64:2
   (struct.set $parameterassignments.Main $f_fnObjectVarargs__parameterassignments_Main(local.get $this) (call $$create__@parameterassignments.Main.$LambdaImplementor$3 ))
  )
@@ -590,19 +552,15 @@
 (func $$clinit__void@parameterassignments.Main
  ;;@ parameterassignments/Main.java:18:13
  (block
-  ;; if (parameterassignments.Main.$initialized) return;
   ;;@ parameterassignments/Main.java:18:13
   (if (global.get $f_$initialized__parameterassignments_Main)
    (then
-    ;; return;
     ;;@ parameterassignments/Main.java:18:13
     (return )
    )
   )
-  ;; (parameterassignments.Main.$initialized = true);
   ;;@ parameterassignments/Main.java:18:13
   (global.set $f_$initialized__parameterassignments_Main (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ parameterassignments/Main.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -612,14 +570,11 @@
 (func $$getClassMetadata__java_lang_Class@parameterassignments.Main
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((parameterassignments.Main.$class == null)) (parameterassignments.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|parameterass...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__parameterassignments_Main) (ref.null $java.lang.Class))
    (then
-    ;; (parameterassignments.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|parameterass...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__parameterassignments_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|parameterass...|__java_lang_String (ref.func $$getString_|parameterass...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return parameterassignments.Main.$class;
   (return (global.get $f_$class__parameterassignments_Main))
  )
 )
@@ -632,7 +587,6 @@
  (local $this (ref null $parameterassignments.Main))
  (local.set $this (ref.cast_static $parameterassignments.Main (local.get $this.untyped)))
  (block
-  ;; return parameterassignments.Main.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@parameterassignments.Main) ))
  )
 )
@@ -646,13 +600,10 @@
  ;;@ parameterassignments/Main.java:46:6
  (local $$instance (ref null $parameterassignments.Main.$LambdaImplementor$1))
  (block
-  ;; <anonymous> implements Fn $instance = new $LambdaImplementor$1.<init>(0);
   ;;@ parameterassignments/Main.java:46:6
   (local.set $$instance (struct.new $parameterassignments.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $parameterassignments.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $parameterassignments.Main.$LambdaImplementor$1.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ parameterassignments/Main.java:46:6
   (call $$ctor__void_$p_parameterassignments_Main_$LambdaImplementor$1@parameterassignments.Main.$LambdaImplementor$1 (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ parameterassignments/Main.java:46:6
   (return (local.get $$instance))
  )
@@ -663,10 +614,8 @@
  (param $this (ref null $parameterassignments.Main.$LambdaImplementor$1))
  ;;@ parameterassignments/Main.java:46:6
  (block
-  ;; parameterassignments.Main.$LambdaImplementor$1.$clinit();
   ;;@ parameterassignments/Main.java:46:6
   (call $$clinit__void@parameterassignments.Main.$LambdaImplementor$1 )
-  ;; Object.this.$ctor();
   ;;@ parameterassignments/Main.java:46:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -683,10 +632,8 @@
  (local $this (ref null $parameterassignments.Main.$LambdaImplementor$1))
  (local.set $this (ref.cast_static $parameterassignments.Main.$LambdaImplementor$1 (local.get $this.untyped)))
  (block
-  ;; (nonFinal = (nonFinal + implicitFinal));
   ;;@ parameterassignments/Main.java:47:8
   (local.set $nonFinal (i32.add (local.get $nonFinal) (local.get $implicitFinal)))
-  ;; return nonFinal;
   ;;@ parameterassignments/Main.java:48:8
   (return (local.get $nonFinal))
  )
@@ -697,19 +644,15 @@
 (func $$clinit__void@parameterassignments.Main.$LambdaImplementor$1
  ;;@ parameterassignments/Main.java:46:6
  (block
-  ;; if (parameterassignments.Main.$LambdaImplementor$1.$initialized) return;
   ;;@ parameterassignments/Main.java:46:6
   (if (global.get $f_$initialized__parameterassignments_Main_$LambdaImplementor$1)
    (then
-    ;; return;
     ;;@ parameterassignments/Main.java:46:6
     (return )
    )
   )
-  ;; (parameterassignments.Main.$LambdaImplementor$1.$initialized = true);
   ;;@ parameterassignments/Main.java:46:6
   (global.set $f_$initialized__parameterassignments_Main_$LambdaImplementor$1 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ parameterassignments/Main.java:46:6
   (call $$clinit__void@java.lang.Object )
  )
@@ -719,14 +662,11 @@
 (func $$getClassMetadata__java_lang_Class@parameterassignments.Main.$LambdaImplementor$1
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((parameterassignments.Main.$LambdaImplementor$1.$class == null)) (parameterassignments.Main.$LambdaImplementor$1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|parameterass...|_1(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__parameterassignments_Main_$LambdaImplementor$1) (ref.null $java.lang.Class))
    (then
-    ;; (parameterassignments.Main.$LambdaImplementor$1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|parameterass...|_1(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__parameterassignments_Main_$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|parameterass...|_1__java_lang_String (ref.func $$getString_|parameterass...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return parameterassignments.Main.$LambdaImplementor$1.$class;
   (return (global.get $f_$class__parameterassignments_Main_$LambdaImplementor$1))
  )
 )
@@ -739,7 +679,6 @@
  (local $this (ref null $parameterassignments.Main.$LambdaImplementor$1))
  (local.set $this (ref.cast_static $parameterassignments.Main.$LambdaImplementor$1 (local.get $this.untyped)))
  (block
-  ;; return parameterassignments.Main.$LambdaImplementor$1.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@parameterassignments.Main.$LambdaImplementor$1) ))
  )
 )
@@ -753,13 +692,10 @@
  ;;@ parameterassignments/Main.java:56:6
  (local $$instance (ref null $parameterassignments.Main.$LambdaImplementor$2))
  (block
-  ;; <anonymous> implements FnPrimitiveVarargs $instance = new $LambdaImplementor$2.<init>(0);
   ;;@ parameterassignments/Main.java:56:6
   (local.set $$instance (struct.new $parameterassignments.Main.$LambdaImplementor$2 (ref.as_non_null (global.get $parameterassignments.Main.$LambdaImplementor$2.vtable)) (ref.as_non_null (global.get $parameterassignments.Main.$LambdaImplementor$2.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ parameterassignments/Main.java:56:6
   (call $$ctor__void_$p_parameterassignments_Main_$LambdaImplementor$2@parameterassignments.Main.$LambdaImplementor$2 (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ parameterassignments/Main.java:56:6
   (return (local.get $$instance))
  )
@@ -770,10 +706,8 @@
  (param $this (ref null $parameterassignments.Main.$LambdaImplementor$2))
  ;;@ parameterassignments/Main.java:56:6
  (block
-  ;; parameterassignments.Main.$LambdaImplementor$2.$clinit();
   ;;@ parameterassignments/Main.java:56:6
   (call $$clinit__void@parameterassignments.Main.$LambdaImplementor$2 )
-  ;; Object.this.$ctor();
   ;;@ parameterassignments/Main.java:56:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -789,7 +723,6 @@
  (local $this (ref null $parameterassignments.Main.$LambdaImplementor$2))
  (local.set $this (ref.cast_static $parameterassignments.Main.$LambdaImplementor$2 (local.get $this.untyped)))
  (block
-  ;; (is.elements[0] = is.elements[1]);
   ;;@ parameterassignments/Main.java:57:8
   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt(local.get $is)) (i32.const 0) (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt(local.get $is)) (i32.const 1)))
  )
@@ -800,19 +733,15 @@
 (func $$clinit__void@parameterassignments.Main.$LambdaImplementor$2
  ;;@ parameterassignments/Main.java:56:6
  (block
-  ;; if (parameterassignments.Main.$LambdaImplementor$2.$initialized) return;
   ;;@ parameterassignments/Main.java:56:6
   (if (global.get $f_$initialized__parameterassignments_Main_$LambdaImplementor$2)
    (then
-    ;; return;
     ;;@ parameterassignments/Main.java:56:6
     (return )
    )
   )
-  ;; (parameterassignments.Main.$LambdaImplementor$2.$initialized = true);
   ;;@ parameterassignments/Main.java:56:6
   (global.set $f_$initialized__parameterassignments_Main_$LambdaImplementor$2 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ parameterassignments/Main.java:56:6
   (call $$clinit__void@java.lang.Object )
  )
@@ -822,14 +751,11 @@
 (func $$getClassMetadata__java_lang_Class@parameterassignments.Main.$LambdaImplementor$2
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((parameterassignments.Main.$LambdaImplementor$2.$class == null)) (parameterassignments.Main.$LambdaImplementor$2.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|parameterass...|_2(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__parameterassignments_Main_$LambdaImplementor$2) (ref.null $java.lang.Class))
    (then
-    ;; (parameterassignments.Main.$LambdaImplementor$2.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|parameterass...|_2(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__parameterassignments_Main_$LambdaImplementor$2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|parameterass...|_2__java_lang_String (ref.func $$getString_|parameterass...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return parameterassignments.Main.$LambdaImplementor$2.$class;
   (return (global.get $f_$class__parameterassignments_Main_$LambdaImplementor$2))
  )
 )
@@ -842,7 +768,6 @@
  (local $this (ref null $parameterassignments.Main.$LambdaImplementor$2))
  (local.set $this (ref.cast_static $parameterassignments.Main.$LambdaImplementor$2 (local.get $this.untyped)))
  (block
-  ;; return parameterassignments.Main.$LambdaImplementor$2.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@parameterassignments.Main.$LambdaImplementor$2) ))
  )
 )
@@ -856,13 +781,10 @@
  ;;@ parameterassignments/Main.java:65:6
  (local $$instance (ref null $parameterassignments.Main.$LambdaImplementor$3))
  (block
-  ;; <anonymous> implements FnObjectVarargs $instance = new $LambdaImplementor$3.<init>(0);
   ;;@ parameterassignments/Main.java:65:6
   (local.set $$instance (struct.new $parameterassignments.Main.$LambdaImplementor$3 (ref.as_non_null (global.get $parameterassignments.Main.$LambdaImplementor$3.vtable)) (ref.as_non_null (global.get $parameterassignments.Main.$LambdaImplementor$3.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ parameterassignments/Main.java:65:6
   (call $$ctor__void_$p_parameterassignments_Main_$LambdaImplementor$3@parameterassignments.Main.$LambdaImplementor$3 (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ parameterassignments/Main.java:65:6
   (return (local.get $$instance))
  )
@@ -873,10 +795,8 @@
  (param $this (ref null $parameterassignments.Main.$LambdaImplementor$3))
  ;;@ parameterassignments/Main.java:65:6
  (block
-  ;; parameterassignments.Main.$LambdaImplementor$3.$clinit();
   ;;@ parameterassignments/Main.java:65:6
   (call $$clinit__void@parameterassignments.Main.$LambdaImplementor$3 )
-  ;; Object.this.$ctor();
   ;;@ parameterassignments/Main.java:65:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -892,7 +812,6 @@
  (local $this (ref null $parameterassignments.Main.$LambdaImplementor$3))
  (local.set $this (ref.cast_static $parameterassignments.Main.$LambdaImplementor$3 (local.get $this.untyped)))
  (block
-  ;; (os.elements[0] = ((Object) os.elements[1]));
   ;;@ parameterassignments/Main.java:66:8
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $os)) (i32.const 0) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $os)) (i32.const 1)))
  )
@@ -903,19 +822,15 @@
 (func $$clinit__void@parameterassignments.Main.$LambdaImplementor$3
  ;;@ parameterassignments/Main.java:65:6
  (block
-  ;; if (parameterassignments.Main.$LambdaImplementor$3.$initialized) return;
   ;;@ parameterassignments/Main.java:65:6
   (if (global.get $f_$initialized__parameterassignments_Main_$LambdaImplementor$3)
    (then
-    ;; return;
     ;;@ parameterassignments/Main.java:65:6
     (return )
    )
   )
-  ;; (parameterassignments.Main.$LambdaImplementor$3.$initialized = true);
   ;;@ parameterassignments/Main.java:65:6
   (global.set $f_$initialized__parameterassignments_Main_$LambdaImplementor$3 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ parameterassignments/Main.java:65:6
   (call $$clinit__void@java.lang.Object )
  )
@@ -925,14 +840,11 @@
 (func $$getClassMetadata__java_lang_Class@parameterassignments.Main.$LambdaImplementor$3
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((parameterassignments.Main.$LambdaImplementor$3.$class == null)) (parameterassignments.Main.$LambdaImplementor$3.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|parameterass...|_3(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__parameterassignments_Main_$LambdaImplementor$3) (ref.null $java.lang.Class))
    (then
-    ;; (parameterassignments.Main.$LambdaImplementor$3.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|parameterass...|_3(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__parameterassignments_Main_$LambdaImplementor$3 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|parameterass...|_3__java_lang_String (ref.func $$getString_|parameterass...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return parameterassignments.Main.$LambdaImplementor$3.$class;
   (return (global.get $f_$class__parameterassignments_Main_$LambdaImplementor$3))
  )
 )
@@ -945,7 +857,6 @@
  (local $this (ref null $parameterassignments.Main.$LambdaImplementor$3))
  (local.set $this (ref.cast_static $parameterassignments.Main.$LambdaImplementor$3 (local.get $this.untyped)))
  (block
-  ;; return parameterassignments.Main.$LambdaImplementor$3.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@parameterassignments.Main.$LambdaImplementor$3) ))
  )
 )
@@ -962,13 +873,10 @@
  ;;@ parameterassignments/Main.java:70:11
  (local $$instance (ref null $parameterassignments.Main.SubMain))
  (block
-  ;; SubMain $instance = new SubMain.<init>(0,null,null,null);
   ;;@ parameterassignments/Main.java:70:11
   (local.set $$instance (struct.new $parameterassignments.Main.SubMain (ref.as_non_null (global.get $parameterassignments.Main.SubMain.vtable)) (ref.as_non_null (global.get $parameterassignments.Main.SubMain.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
-  ;; $instance.$ctor(nonFinal,explicitFinal,implicitFinal);
   ;;@ parameterassignments/Main.java:70:11
   (call $$ctor__int__int__int__void_$p_parameterassignments_Main_SubMain@parameterassignments.Main.SubMain (ref.as_non_null (local.get $$instance))(local.get $nonFinal)(local.get $explicitFinal)(local.get $implicitFinal))
-  ;; return $instance;
   ;;@ parameterassignments/Main.java:70:11
   (return (local.get $$instance))
  )
@@ -982,13 +890,10 @@
  (param $implicitFinal i32)
  ;;@ parameterassignments/Main.java:70:11
  (block
-  ;; parameterassignments.Main.SubMain.$clinit();
   ;;@ parameterassignments/Main.java:70:77
   (call $$clinit__void@parameterassignments.Main.SubMain )
-  ;; Main.this.$ctor(nonFinal,explicitFinal,implicitFinal);
   ;;@ parameterassignments/Main.java:71:6
   (call $$ctor__int__int__int__void_$p_parameterassignments_Main@parameterassignments.Main (ref.as_non_null (local.get $this))(local.get $nonFinal)(local.get $explicitFinal)(local.get $implicitFinal))
-  ;; (nonFinal = ((nonFinal + explicitFinal) + implicitFinal));
   ;;@ parameterassignments/Main.java:72:6
   (local.set $nonFinal (i32.add (i32.add (local.get $nonFinal) (local.get $explicitFinal)) (local.get $implicitFinal)))
  )
@@ -1006,10 +911,8 @@
  (local $this (ref null $parameterassignments.Main.SubMain))
  (local.set $this (ref.cast_static $parameterassignments.Main.SubMain (local.get $this.untyped)))
  (block
-  ;; (nonFinal = ((nonFinal + explicitFinal) + implicitFinal));
   ;;@ parameterassignments/Main.java:76:6
   (local.set $nonFinal (i32.add (i32.add (local.get $nonFinal) (local.get $explicitFinal)) (local.get $implicitFinal)))
-  ;; return super.test(nonFinal,explicitFinal,implicitFinal);
   ;;@ parameterassignments/Main.java:77:6
   (return (call $m_test__int__int__int__int_$pp_parameterassignments@parameterassignments.Main (ref.as_non_null (local.get $this))(local.get $nonFinal)(local.get $explicitFinal)(local.get $implicitFinal)))
  )
@@ -1020,19 +923,15 @@
 (func $$clinit__void@parameterassignments.Main.SubMain
  ;;@ parameterassignments/Main.java:69:22
  (block
-  ;; if (parameterassignments.Main.SubMain.$initialized) return;
   ;;@ parameterassignments/Main.java:69:22
   (if (global.get $f_$initialized__parameterassignments_Main_SubMain)
    (then
-    ;; return;
     ;;@ parameterassignments/Main.java:69:22
     (return )
    )
   )
-  ;; (parameterassignments.Main.SubMain.$initialized = true);
   ;;@ parameterassignments/Main.java:69:22
   (global.set $f_$initialized__parameterassignments_Main_SubMain (i32.const 1))
-  ;; parameterassignments.Main.$clinit();
   ;;@ parameterassignments/Main.java:69:22
   (call $$clinit__void@parameterassignments.Main )
  )
@@ -1042,14 +941,11 @@
 (func $$getClassMetadata__java_lang_Class@parameterassignments.Main.SubMain
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((parameterassignments.Main.SubMain.$class == null)) (parameterassignments.Main.SubMain.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|parameterass...|_7(),parameterassignments.Main.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__parameterassignments_Main_SubMain) (ref.null $java.lang.Class))
    (then
-    ;; (parameterassignments.Main.SubMain.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|parameterass...|_7(),parameterassignments.Main.$getClassMetadata()));
     (global.set $f_$class__parameterassignments_Main_SubMain (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|parameterass...|_7__java_lang_String (ref.func $$getString_|parameterass...|_7__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@parameterassignments.Main) )))
    )
   )
-  ;; return parameterassignments.Main.SubMain.$class;
   (return (global.get $f_$class__parameterassignments_Main_SubMain))
  )
 )
@@ -1062,7 +958,6 @@
  (local $this (ref null $parameterassignments.Main.SubMain))
  (local.set $this (ref.cast_static $parameterassignments.Main.SubMain (local.get $this.untyped)))
  (block
-  ;; return parameterassignments.Main.SubMain.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@parameterassignments.Main.SubMain) ))
  )
 )

@@ -57,13 +57,10 @@
  ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
  (local $$instance (ref null $jstypewithnamespace.JsTypeWithNamespace))
  (block
-  ;; JsTypeWithNamespace $instance = new JsTypeWithNamespace.<init>(0);
   ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
   (local.set $$instance (struct.new $jstypewithnamespace.JsTypeWithNamespace (ref.as_non_null (global.get $jstypewithnamespace.JsTypeWithNamespace.vtable)) (ref.as_non_null (global.get $jstypewithnamespace.JsTypeWithNamespace.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
   (call $$ctor__void_$p_jstypewithnamespace_JsTypeWithNamespace@jstypewithnamespace.JsTypeWithNamespace (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
   (return (local.get $$instance))
  )
@@ -74,10 +71,8 @@
  (param $this (ref null $jstypewithnamespace.JsTypeWithNamespace))
  ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
  (block
-  ;; jstypewithnamespace.JsTypeWithNamespace.$clinit();
   ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
   (call $$clinit__void@jstypewithnamespace.JsTypeWithNamespace )
-  ;; Object.this.$ctor();
   ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -87,19 +82,15 @@
 (func $$clinit__void@jstypewithnamespace.JsTypeWithNamespace
  ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
  (block
-  ;; if (jstypewithnamespace.JsTypeWithNamespace.$initialized) return;
   ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
   (if (global.get $f_$initialized__jstypewithnamespace_JsTypeWithNamespace)
    (then
-    ;; return;
     ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
     (return )
    )
   )
-  ;; (jstypewithnamespace.JsTypeWithNamespace.$initialized = true);
   ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
   (global.set $f_$initialized__jstypewithnamespace_JsTypeWithNamespace (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -109,14 +100,11 @@
 (func $$getClassMetadata__java_lang_Class@jstypewithnamespace.JsTypeWithNamespace
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jstypewithnamespace.JsTypeWithNamespace.$class == null)) (jstypewithnamespace.JsTypeWithNamespace.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jstypewithna...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__jstypewithnamespace_JsTypeWithNamespace) (ref.null $java.lang.Class))
    (then
-    ;; (jstypewithnamespace.JsTypeWithNamespace.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jstypewithna...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__jstypewithnamespace_JsTypeWithNamespace (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jstypewithna...|__java_lang_String (ref.func $$getString_|jstypewithna...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return jstypewithnamespace.JsTypeWithNamespace.$class;
   (return (global.get $f_$class__jstypewithnamespace_JsTypeWithNamespace))
  )
 )
@@ -129,7 +117,6 @@
  (local $this (ref null $jstypewithnamespace.JsTypeWithNamespace))
  (local.set $this (ref.cast_static $jstypewithnamespace.JsTypeWithNamespace (local.get $this.untyped)))
  (block
-  ;; return jstypewithnamespace.JsTypeWithNamespace.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jstypewithnamespace.JsTypeWithNamespace) ))
  )
 )

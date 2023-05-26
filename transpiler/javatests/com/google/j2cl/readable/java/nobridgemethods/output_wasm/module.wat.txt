@@ -256,16 +256,13 @@
 (func $$clinit__void@nobridgemethods.Entry
  ;;@ nobridgemethods/CharSet.java:18:10
  (block
-  ;; if (nobridgemethods.Entry.$initialized) return;
   ;;@ nobridgemethods/CharSet.java:18:10
   (if (global.get $f_$initialized__nobridgemethods_Entry)
    (then
-    ;; return;
     ;;@ nobridgemethods/CharSet.java:18:10
     (return )
    )
   )
-  ;; (nobridgemethods.Entry.$initialized = true);
   ;;@ nobridgemethods/CharSet.java:18:10
   (global.set $f_$initialized__nobridgemethods_Entry (i32.const 1))
  )
@@ -275,14 +272,11 @@
 (func $$getClassMetadata__java_lang_Class@nobridgemethods.Entry
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((nobridgemethods.Entry.$class == null)) (nobridgemethods.Entry.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|nobridgemeth...|()));
   (if (ref.eq (global.get $f_$class__nobridgemethods_Entry) (ref.null $java.lang.Class))
    (then
-    ;; (nobridgemethods.Entry.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|nobridgemeth...|()));
     (global.set $f_$class__nobridgemethods_Entry (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nobridgemeth...|__java_lang_String (ref.func $$getString_|nobridgemeth...|__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return nobridgemethods.Entry.$class;
   (return (global.get $f_$class__nobridgemethods_Entry))
  )
 )
@@ -294,10 +288,8 @@
  (param $this (ref null $nobridgemethods.Map))
  ;;@ nobridgemethods/CharSet.java:20:15
  (block
-  ;; nobridgemethods.Map.$clinit();
   ;;@ nobridgemethods/CharSet.java:20:15
   (call $$clinit__void@nobridgemethods.Map )
-  ;; Object.this.$ctor();
   ;;@ nobridgemethods/CharSet.java:20:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -307,19 +299,15 @@
 (func $$clinit__void@nobridgemethods.Map
  ;;@ nobridgemethods/CharSet.java:20:15
  (block
-  ;; if (nobridgemethods.Map.$initialized) return;
   ;;@ nobridgemethods/CharSet.java:20:15
   (if (global.get $f_$initialized__nobridgemethods_Map)
    (then
-    ;; return;
     ;;@ nobridgemethods/CharSet.java:20:15
     (return )
    )
   )
-  ;; (nobridgemethods.Map.$initialized = true);
   ;;@ nobridgemethods/CharSet.java:20:15
   (global.set $f_$initialized__nobridgemethods_Map (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ nobridgemethods/CharSet.java:20:15
   (call $$clinit__void@java.lang.Object )
  )
@@ -329,14 +317,11 @@
 (func $$getClassMetadata__java_lang_Class@nobridgemethods.Map
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((nobridgemethods.Map.$class == null)) (nobridgemethods.Map.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nobridgemeth...|_1(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__nobridgemethods_Map) (ref.null $java.lang.Class))
    (then
-    ;; (nobridgemethods.Map.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nobridgemeth...|_1(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__nobridgemethods_Map (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nobridgemeth...|_1__java_lang_String (ref.func $$getString_|nobridgemeth...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return nobridgemethods.Map.$class;
   (return (global.get $f_$class__nobridgemethods_Map))
  )
 )
@@ -349,13 +334,10 @@
  ;;@ nobridgemethods/CharSet.java:33:13
  (local $$instance (ref null $nobridgemethods.CharSet))
  (block
-  ;; CharSet $instance = new CharSet.<init>(0);
   ;;@ nobridgemethods/CharSet.java:33:13
   (local.set $$instance (struct.new $nobridgemethods.CharSet (ref.as_non_null (global.get $nobridgemethods.CharSet.vtable)) (ref.as_non_null (global.get $nobridgemethods.CharSet.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ nobridgemethods/CharSet.java:33:13
   (call $$ctor__void_$p_nobridgemethods_CharSet@nobridgemethods.CharSet (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ nobridgemethods/CharSet.java:33:13
   (return (local.get $$instance))
  )
@@ -366,10 +348,8 @@
  (param $this (ref null $nobridgemethods.CharSet))
  ;;@ nobridgemethods/CharSet.java:33:13
  (block
-  ;; nobridgemethods.CharSet.$clinit();
   ;;@ nobridgemethods/CharSet.java:33:13
   (call $$clinit__void@nobridgemethods.CharSet )
-  ;; Object.this.$ctor();
   ;;@ nobridgemethods/CharSet.java:33:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -381,10 +361,8 @@
  ;;@ nobridgemethods/CharSet.java:35:21
  (local $treeMap (ref null $nobridgemethods.TreeMap))
  (block
-  ;; nobridgemethods.CharSet.$clinit();
   ;;@ nobridgemethods/CharSet.java:35:42
   (call $$clinit__void@nobridgemethods.CharSet )
-  ;; TreeMap<String> treeMap = nobridgemethods.CharSet.1.$create();
   ;;@ nobridgemethods/CharSet.java:36:4
   (local.set $treeMap (call $$create__@nobridgemethods.CharSet.1 ))
  )
@@ -394,19 +372,15 @@
 (func $$clinit__void@nobridgemethods.CharSet
  ;;@ nobridgemethods/CharSet.java:33:13
  (block
-  ;; if (nobridgemethods.CharSet.$initialized) return;
   ;;@ nobridgemethods/CharSet.java:33:13
   (if (global.get $f_$initialized__nobridgemethods_CharSet)
    (then
-    ;; return;
     ;;@ nobridgemethods/CharSet.java:33:13
     (return )
    )
   )
-  ;; (nobridgemethods.CharSet.$initialized = true);
   ;;@ nobridgemethods/CharSet.java:33:13
   (global.set $f_$initialized__nobridgemethods_CharSet (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ nobridgemethods/CharSet.java:33:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -416,14 +390,11 @@
 (func $$getClassMetadata__java_lang_Class@nobridgemethods.CharSet
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((nobridgemethods.CharSet.$class == null)) (nobridgemethods.CharSet.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nobridgemeth...|_3(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__nobridgemethods_CharSet) (ref.null $java.lang.Class))
    (then
-    ;; (nobridgemethods.CharSet.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nobridgemeth...|_3(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__nobridgemethods_CharSet (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nobridgemeth...|_3__java_lang_String (ref.func $$getString_|nobridgemeth...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return nobridgemethods.CharSet.$class;
   (return (global.get $f_$class__nobridgemethods_CharSet))
  )
 )
@@ -436,7 +407,6 @@
  (local $this (ref null $nobridgemethods.CharSet))
  (local.set $this (ref.cast_static $nobridgemethods.CharSet (local.get $this.untyped)))
  (block
-  ;; return nobridgemethods.CharSet.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nobridgemethods.CharSet) ))
  )
 )
@@ -450,13 +420,10 @@
  ;;@ nobridgemethods/CharSet.java:25:15
  (local $$instance (ref null $nobridgemethods.TreeMap.InnerEntry))
  (block
-  ;; InnerEntry<K> $instance = new InnerEntry.<init>(0);
   ;;@ nobridgemethods/CharSet.java:25:15
   (local.set $$instance (struct.new $nobridgemethods.TreeMap.InnerEntry (ref.as_non_null (global.get $nobridgemethods.TreeMap.InnerEntry.vtable)) (ref.as_non_null (global.get $nobridgemethods.TreeMap.InnerEntry.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ nobridgemethods/CharSet.java:25:15
   (call $$ctor__void_$p_nobridgemethods_TreeMap_InnerEntry@nobridgemethods.TreeMap.InnerEntry (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ nobridgemethods/CharSet.java:25:15
   (return (local.get $$instance))
  )
@@ -467,10 +434,8 @@
  (param $this (ref null $nobridgemethods.TreeMap.InnerEntry))
  ;;@ nobridgemethods/CharSet.java:25:15
  (block
-  ;; nobridgemethods.TreeMap.InnerEntry.$clinit();
   ;;@ nobridgemethods/CharSet.java:25:15
   (call $$clinit__void@nobridgemethods.TreeMap.InnerEntry )
-  ;; Object.this.$ctor();
   ;;@ nobridgemethods/CharSet.java:25:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -480,19 +445,15 @@
 (func $$clinit__void@nobridgemethods.TreeMap.InnerEntry
  ;;@ nobridgemethods/CharSet.java:25:15
  (block
-  ;; if (nobridgemethods.TreeMap.InnerEntry.$initialized) return;
   ;;@ nobridgemethods/CharSet.java:25:15
   (if (global.get $f_$initialized__nobridgemethods_TreeMap_InnerEntry)
    (then
-    ;; return;
     ;;@ nobridgemethods/CharSet.java:25:15
     (return )
    )
   )
-  ;; (nobridgemethods.TreeMap.InnerEntry.$initialized = true);
   ;;@ nobridgemethods/CharSet.java:25:15
   (global.set $f_$initialized__nobridgemethods_TreeMap_InnerEntry (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ nobridgemethods/CharSet.java:25:15
   (call $$clinit__void@java.lang.Object )
  )
@@ -502,14 +463,11 @@
 (func $$getClassMetadata__java_lang_Class@nobridgemethods.TreeMap.InnerEntry
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((nobridgemethods.TreeMap.InnerEntry.$class == null)) (nobridgemethods.TreeMap.InnerEntry.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nobridgemeth...|_4(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__nobridgemethods_TreeMap_InnerEntry) (ref.null $java.lang.Class))
    (then
-    ;; (nobridgemethods.TreeMap.InnerEntry.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nobridgemeth...|_4(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__nobridgemethods_TreeMap_InnerEntry (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nobridgemeth...|_4__java_lang_String (ref.func $$getString_|nobridgemeth...|_4__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return nobridgemethods.TreeMap.InnerEntry.$class;
   (return (global.get $f_$class__nobridgemethods_TreeMap_InnerEntry))
  )
 )
@@ -522,7 +480,6 @@
  (local $this (ref null $nobridgemethods.TreeMap.InnerEntry))
  (local.set $this (ref.cast_static $nobridgemethods.TreeMap.InnerEntry (local.get $this.untyped)))
  (block
-  ;; return nobridgemethods.TreeMap.InnerEntry.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nobridgemethods.TreeMap.InnerEntry) ))
  )
 )
@@ -536,13 +493,10 @@
  ;;@ nobridgemethods/CharSet.java:24:6
  (local $$instance (ref null $nobridgemethods.TreeMap))
  (block
-  ;; TreeMap<K> $instance = new TreeMap.<init>(0);
   ;;@ nobridgemethods/CharSet.java:24:6
   (local.set $$instance (struct.new $nobridgemethods.TreeMap (ref.as_non_null (global.get $nobridgemethods.TreeMap.vtable)) (ref.as_non_null (global.get $nobridgemethods.TreeMap.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ nobridgemethods/CharSet.java:24:6
   (call $$ctor__void_$p_nobridgemethods_TreeMap@nobridgemethods.TreeMap (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ nobridgemethods/CharSet.java:24:6
   (return (local.get $$instance))
  )
@@ -553,10 +507,8 @@
  (param $this (ref null $nobridgemethods.TreeMap))
  ;;@ nobridgemethods/CharSet.java:24:6
  (block
-  ;; nobridgemethods.TreeMap.$clinit();
   ;;@ nobridgemethods/CharSet.java:24:6
   (call $$clinit__void@nobridgemethods.TreeMap )
-  ;; Map.this.$ctor();
   ;;@ nobridgemethods/CharSet.java:24:6
   (call $$ctor__void_$p_nobridgemethods_Map@nobridgemethods.Map (ref.as_non_null (local.get $this)))
  )
@@ -572,7 +524,6 @@
  (local $this (ref null $nobridgemethods.TreeMap))
  (local.set $this (ref.cast_static $nobridgemethods.TreeMap (local.get $this.untyped)))
  (block
-  ;; return nobridgemethods.TreeMap.InnerEntry.$create();
   ;;@ nobridgemethods/CharSet.java:29:4
   (return (call $$create__@nobridgemethods.TreeMap.InnerEntry ))
  )
@@ -589,7 +540,6 @@
  (local $this (ref null $nobridgemethods.TreeMap))
  (local.set $this (ref.cast_static $nobridgemethods.TreeMap (local.get $this.untyped)))
  (block
-  ;; return TreeMap.this.getCeilingEntry(arg0);
   ;;@ nobridgemethods/CharSet.java:24:6
   (return (call_ref $function.m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry (ref.as_non_null (local.get $this))(local.get $arg0)(struct.get $nobridgemethods.TreeMap.vtable $m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry (struct.get $nobridgemethods.TreeMap $vtable(local.get $this)))))
  )
@@ -600,19 +550,15 @@
 (func $$clinit__void@nobridgemethods.TreeMap
  ;;@ nobridgemethods/CharSet.java:24:6
  (block
-  ;; if (nobridgemethods.TreeMap.$initialized) return;
   ;;@ nobridgemethods/CharSet.java:24:6
   (if (global.get $f_$initialized__nobridgemethods_TreeMap)
    (then
-    ;; return;
     ;;@ nobridgemethods/CharSet.java:24:6
     (return )
    )
   )
-  ;; (nobridgemethods.TreeMap.$initialized = true);
   ;;@ nobridgemethods/CharSet.java:24:6
   (global.set $f_$initialized__nobridgemethods_TreeMap (i32.const 1))
-  ;; nobridgemethods.Map.$clinit();
   ;;@ nobridgemethods/CharSet.java:24:6
   (call $$clinit__void@nobridgemethods.Map )
  )
@@ -622,14 +568,11 @@
 (func $$getClassMetadata__java_lang_Class@nobridgemethods.TreeMap
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((nobridgemethods.TreeMap.$class == null)) (nobridgemethods.TreeMap.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nobridgemeth...|_2(),nobridgemethods.Map.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__nobridgemethods_TreeMap) (ref.null $java.lang.Class))
    (then
-    ;; (nobridgemethods.TreeMap.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nobridgemeth...|_2(),nobridgemethods.Map.$getClassMetadata()));
     (global.set $f_$class__nobridgemethods_TreeMap (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nobridgemeth...|_2__java_lang_String (ref.func $$getString_|nobridgemeth...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nobridgemethods.Map) )))
    )
   )
-  ;; return nobridgemethods.TreeMap.$class;
   (return (global.get $f_$class__nobridgemethods_TreeMap))
  )
 )
@@ -642,7 +585,6 @@
  (local $this (ref null $nobridgemethods.TreeMap))
  (local.set $this (ref.cast_static $nobridgemethods.TreeMap (local.get $this.untyped)))
  (block
-  ;; return nobridgemethods.TreeMap.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nobridgemethods.TreeMap) ))
  )
 )
@@ -656,13 +598,10 @@
  ;;@ nobridgemethods/CharSet.java:36:52
  (local $$instance (ref null $nobridgemethods.CharSet.1))
  (block
-  ;; <anonymous> extends TreeMap<String> $instance = new $1.<init>(0);
   ;;@ nobridgemethods/CharSet.java:36:52
   (local.set $$instance (struct.new $nobridgemethods.CharSet.1 (ref.as_non_null (global.get $nobridgemethods.CharSet.1.vtable)) (ref.as_non_null (global.get $nobridgemethods.CharSet.1.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ nobridgemethods/CharSet.java:36:52
   (call $$ctor__void_$p_nobridgemethods_CharSet_1@nobridgemethods.CharSet.1 (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ nobridgemethods/CharSet.java:36:52
   (return (local.get $$instance))
  )
@@ -673,10 +612,8 @@
  (param $this (ref null $nobridgemethods.CharSet.1))
  ;;@ nobridgemethods/CharSet.java:36:52
  (block
-  ;; nobridgemethods.CharSet.1.$clinit();
   ;;@ nobridgemethods/CharSet.java:36:52
   (call $$clinit__void@nobridgemethods.CharSet.1 )
-  ;; TreeMap.this.$ctor();
   ;;@ nobridgemethods/CharSet.java:36:52
   (call $$ctor__void_$p_nobridgemethods_TreeMap@nobridgemethods.TreeMap (ref.as_non_null (local.get $this)))
  )
@@ -686,19 +623,15 @@
 (func $$clinit__void@nobridgemethods.CharSet.1
  ;;@ nobridgemethods/CharSet.java:36:52
  (block
-  ;; if (nobridgemethods.CharSet.1.$initialized) return;
   ;;@ nobridgemethods/CharSet.java:36:52
   (if (global.get $f_$initialized__nobridgemethods_CharSet_1)
    (then
-    ;; return;
     ;;@ nobridgemethods/CharSet.java:36:52
     (return )
    )
   )
-  ;; (nobridgemethods.CharSet.1.$initialized = true);
   ;;@ nobridgemethods/CharSet.java:36:52
   (global.set $f_$initialized__nobridgemethods_CharSet_1 (i32.const 1))
-  ;; nobridgemethods.TreeMap.$clinit();
   ;;@ nobridgemethods/CharSet.java:36:52
   (call $$clinit__void@nobridgemethods.TreeMap )
  )
@@ -708,14 +641,11 @@
 (func $$getClassMetadata__java_lang_Class@nobridgemethods.CharSet.1
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((nobridgemethods.CharSet.1.$class == null)) (nobridgemethods.CharSet.1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nobridgemeth...|_5(),nobridgemethods.TreeMap.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__nobridgemethods_CharSet_1) (ref.null $java.lang.Class))
    (then
-    ;; (nobridgemethods.CharSet.1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|nobridgemeth...|_5(),nobridgemethods.TreeMap.$getClassMetadata()));
     (global.set $f_$class__nobridgemethods_CharSet_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nobridgemeth...|_5__java_lang_String (ref.func $$getString_|nobridgemeth...|_5__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nobridgemethods.TreeMap) )))
    )
   )
-  ;; return nobridgemethods.CharSet.1.$class;
   (return (global.get $f_$class__nobridgemethods_CharSet_1))
  )
 )
@@ -728,7 +658,6 @@
  (local $this (ref null $nobridgemethods.CharSet.1))
  (local.set $this (ref.cast_static $nobridgemethods.CharSet.1 (local.get $this.untyped)))
  (block
-  ;; return nobridgemethods.CharSet.1.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nobridgemethods.CharSet.1) ))
  )
 )

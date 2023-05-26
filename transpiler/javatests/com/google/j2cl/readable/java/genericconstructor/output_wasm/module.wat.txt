@@ -61,13 +61,10 @@
  ;;@ genericconstructor/GenericConstructor.java:20:13
  (local $$instance (ref null $genericconstructor.GenericConstructor))
  (block
-  ;; GenericConstructor<T> $instance = new GenericConstructor.<init>(0);
   ;;@ genericconstructor/GenericConstructor.java:20:13
   (local.set $$instance (struct.new $genericconstructor.GenericConstructor (ref.as_non_null (global.get $genericconstructor.GenericConstructor.vtable)) (ref.as_non_null (global.get $genericconstructor.GenericConstructor.itable)) (i32.const 0)))
-  ;; $instance.$ctor(s,t);
   ;;@ genericconstructor/GenericConstructor.java:20:13
   (call $$ctor__java_lang_Object__java_lang_Object__void_$p_genericconstructor_GenericConstructor@genericconstructor.GenericConstructor (ref.as_non_null (local.get $$instance))(local.get $s)(local.get $t))
-  ;; return $instance;
   ;;@ genericconstructor/GenericConstructor.java:20:13
   (return (local.get $$instance))
  )
@@ -80,10 +77,8 @@
  (param $t (ref null $java.lang.Object))
  ;;@ genericconstructor/GenericConstructor.java:20:13
  (block
-  ;; genericconstructor.GenericConstructor.$clinit();
   ;;@ genericconstructor/GenericConstructor.java:20:42
   (call $$clinit__void@genericconstructor.GenericConstructor )
-  ;; Object.this.$ctor();
   ;;@ genericconstructor/GenericConstructor.java:20:42
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -96,13 +91,10 @@
  ;;@ genericconstructor/GenericConstructor.java:23:13
  (local $$instance (ref null $genericconstructor.GenericConstructor))
  (block
-  ;; GenericConstructor<T> $instance = new GenericConstructor.<init>(0);
   ;;@ genericconstructor/GenericConstructor.java:23:13
   (local.set $$instance (struct.new $genericconstructor.GenericConstructor (ref.as_non_null (global.get $genericconstructor.GenericConstructor.vtable)) (ref.as_non_null (global.get $genericconstructor.GenericConstructor.itable)) (i32.const 0)))
-  ;; $instance.$ctor(t);
   ;;@ genericconstructor/GenericConstructor.java:23:13
   (call $$ctor__java_lang_Object__void_$p_genericconstructor_GenericConstructor@genericconstructor.GenericConstructor (ref.as_non_null (local.get $$instance))(local.get $t))
-  ;; return $instance;
   ;;@ genericconstructor/GenericConstructor.java:23:13
   (return (local.get $$instance))
  )
@@ -114,10 +106,8 @@
  (param $t (ref null $java.lang.Object))
  ;;@ genericconstructor/GenericConstructor.java:23:13
  (block
-  ;; genericconstructor.GenericConstructor.$clinit();
   ;;@ genericconstructor/GenericConstructor.java:23:37
   (call $$clinit__void@genericconstructor.GenericConstructor )
-  ;; Object.this.$ctor();
   ;;@ genericconstructor/GenericConstructor.java:23:37
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -131,10 +121,8 @@
  (local $this (ref null $genericconstructor.GenericConstructor))
  (local.set $this (ref.cast_static $genericconstructor.GenericConstructor (local.get $this.untyped)))
  (block
-  ;; genericconstructor.GenericConstructor.$create(java.lang.Exception.$create(),java.lang.Error.$create());
   ;;@ genericconstructor/GenericConstructor.java:26:4
   (drop (call $$create__java_lang_Object__java_lang_Object@genericconstructor.GenericConstructor (call $$create__@java.lang.Exception )(call $$create__@java.lang.Error )))
-  ;; genericconstructor.GenericConstructor.$create(java.lang.Exception.$create());
   ;;@ genericconstructor/GenericConstructor.java:27:4
   (drop (call $$create__java_lang_Object@genericconstructor.GenericConstructor (call $$create__@java.lang.Exception )))
  )
@@ -145,19 +133,15 @@
 (func $$clinit__void@genericconstructor.GenericConstructor
  ;;@ genericconstructor/GenericConstructor.java:18:13
  (block
-  ;; if (genericconstructor.GenericConstructor.$initialized) return;
   ;;@ genericconstructor/GenericConstructor.java:18:13
   (if (global.get $f_$initialized__genericconstructor_GenericConstructor)
    (then
-    ;; return;
     ;;@ genericconstructor/GenericConstructor.java:18:13
     (return )
    )
   )
-  ;; (genericconstructor.GenericConstructor.$initialized = true);
   ;;@ genericconstructor/GenericConstructor.java:18:13
   (global.set $f_$initialized__genericconstructor_GenericConstructor (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ genericconstructor/GenericConstructor.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -167,14 +151,11 @@
 (func $$getClassMetadata__java_lang_Class@genericconstructor.GenericConstructor
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((genericconstructor.GenericConstructor.$class == null)) (genericconstructor.GenericConstructor.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|genericconst...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__genericconstructor_GenericConstructor) (ref.null $java.lang.Class))
    (then
-    ;; (genericconstructor.GenericConstructor.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|genericconst...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__genericconstructor_GenericConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericconst...|__java_lang_String (ref.func $$getString_|genericconst...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return genericconstructor.GenericConstructor.$class;
   (return (global.get $f_$class__genericconstructor_GenericConstructor))
  )
 )
@@ -187,7 +168,6 @@
  (local $this (ref null $genericconstructor.GenericConstructor))
  (local.set $this (ref.cast_static $genericconstructor.GenericConstructor (local.get $this.untyped)))
  (block
-  ;; return genericconstructor.GenericConstructor.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@genericconstructor.GenericConstructor) ))
  )
 )

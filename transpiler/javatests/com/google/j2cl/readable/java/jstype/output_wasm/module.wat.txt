@@ -97,16 +97,13 @@
 (func $$clinit__void@jstype.SomeJsType.Star.$Overlay
  ;;@ jstype/SomeJsType.java:47:12
  (block
-  ;; if (jstype.SomeJsType.Star.$Overlay.$initialized) return;
   ;;@ jstype/SomeJsType.java:47:12
   (if (global.get $f_$initialized__jstype_SomeJsType_Star_$Overlay)
    (then
-    ;; return;
     ;;@ jstype/SomeJsType.java:47:12
     (return )
    )
   )
-  ;; (jstype.SomeJsType.Star.$Overlay.$initialized = true);
   ;;@ jstype/SomeJsType.java:47:12
   (global.set $f_$initialized__jstype_SomeJsType_Star_$Overlay (i32.const 1))
  )
@@ -116,14 +113,11 @@
 (func $$getClassMetadata__java_lang_Class@jstype.SomeJsType.Star.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jstype.SomeJsType.Star.$Overlay.$class == null)) (jstype.SomeJsType.Star.$Overlay.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|jstype.SomeJ...|_1()));
   (if (ref.eq (global.get $f_$class__jstype_SomeJsType_Star_$Overlay) (ref.null $java.lang.Class))
    (then
-    ;; (jstype.SomeJsType.Star.$Overlay.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|jstype.SomeJ...|_1()));
     (global.set $f_$class__jstype_SomeJsType_Star_$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jstype.SomeJ...|_1__java_lang_String (ref.func $$getString_|jstype.SomeJ...|_1__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return jstype.SomeJsType.Star.$Overlay.$class;
   (return (global.get $f_$class__jstype_SomeJsType_Star_$Overlay))
  )
 )
@@ -134,16 +128,13 @@
 (func $$clinit__void@jstype.SomeJsType.Wildcard.$Overlay
  ;;@ jstype/SomeJsType.java:50:12
  (block
-  ;; if (jstype.SomeJsType.Wildcard.$Overlay.$initialized) return;
   ;;@ jstype/SomeJsType.java:50:12
   (if (global.get $f_$initialized__jstype_SomeJsType_Wildcard_$Overlay)
    (then
-    ;; return;
     ;;@ jstype/SomeJsType.java:50:12
     (return )
    )
   )
-  ;; (jstype.SomeJsType.Wildcard.$Overlay.$initialized = true);
   ;;@ jstype/SomeJsType.java:50:12
   (global.set $f_$initialized__jstype_SomeJsType_Wildcard_$Overlay (i32.const 1))
  )
@@ -153,14 +144,11 @@
 (func $$getClassMetadata__java_lang_Class@jstype.SomeJsType.Wildcard.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jstype.SomeJsType.Wildcard.$Overlay.$class == null)) (jstype.SomeJsType.Wildcard.$Overlay.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|jstype.SomeJ...|_2()));
   (if (ref.eq (global.get $f_$class__jstype_SomeJsType_Wildcard_$Overlay) (ref.null $java.lang.Class))
    (then
-    ;; (jstype.SomeJsType.Wildcard.$Overlay.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|jstype.SomeJ...|_2()));
     (global.set $f_$class__jstype_SomeJsType_Wildcard_$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jstype.SomeJ...|_2__java_lang_String (ref.func $$getString_|jstype.SomeJ...|_2__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return jstype.SomeJsType.Wildcard.$Overlay.$class;
   (return (global.get $f_$class__jstype_SomeJsType_Wildcard_$Overlay))
  )
 )
@@ -173,13 +161,10 @@
  ;;@ jstype/SomeJsType.java:23:13
  (local $$instance (ref null $jstype.SomeJsType))
  (block
-  ;; SomeJsType<T> $instance = new SomeJsType.<init>(0,0,0,0,0);
   ;;@ jstype/SomeJsType.java:23:13
   (local.set $$instance (struct.new $jstype.SomeJsType (ref.as_non_null (global.get $jstype.SomeJsType.vtable)) (ref.as_non_null (global.get $jstype.SomeJsType.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ jstype/SomeJsType.java:23:13
   (call $$ctor__void_$p_jstype_SomeJsType@jstype.SomeJsType (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ jstype/SomeJsType.java:23:13
   (return (local.get $$instance))
  )
@@ -190,10 +175,8 @@
  (param $this (ref null $jstype.SomeJsType))
  ;;@ jstype/SomeJsType.java:23:13
  (block
-  ;; jstype.SomeJsType.$clinit();
   ;;@ jstype/SomeJsType.java:23:13
   (call $$clinit__void@jstype.SomeJsType )
-  ;; Object.this.$ctor();
   ;;@ jstype/SomeJsType.java:23:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -252,19 +235,14 @@
  (local $this (ref null $jstype.SomeJsType))
  (local.set $this (ref.cast_static $jstype.SomeJsType (local.get $this.untyped)))
  (block
-  ;; int value = (((SomeJsType.this.publicField + SomeJsType.this.privateField) + SomeJsType.this.packageField) + SomeJsType.this.protectedField);
   ;;@ jstype/SomeJsType.java:38:4
   (local.set $value (i32.add (i32.add (i32.add (struct.get $jstype.SomeJsType $f_publicField__jstype_SomeJsType(local.get $this)) (struct.get $jstype.SomeJsType $f_privateField__jstype_SomeJsType_(local.get $this))) (struct.get $jstype.SomeJsType $f_packageField__jstype_SomeJsType(local.get $this))) (struct.get $jstype.SomeJsType $f_protectedField__jstype_SomeJsType(local.get $this))))
-  ;; SomeJsType.this.publicMethod();
   ;;@ jstype/SomeJsType.java:40:4
   (call_ref $function.m_publicMethod__void (ref.as_non_null (local.get $this))(struct.get $jstype.SomeJsType.vtable $m_publicMethod__void (struct.get $jstype.SomeJsType $vtable(local.get $this))))
-  ;; SomeJsType.this.privateMethod();
   ;;@ jstype/SomeJsType.java:41:4
   (call $m_privateMethod__void_$p_jstype_SomeJsType@jstype.SomeJsType (ref.as_non_null (local.get $this)))
-  ;; SomeJsType.this.packageMethod();
   ;;@ jstype/SomeJsType.java:42:4
   (call_ref $function.m_packageMethod__void_$pp_jstype (ref.as_non_null (local.get $this))(struct.get $jstype.SomeJsType.vtable $m_packageMethod__void_$pp_jstype (struct.get $jstype.SomeJsType $vtable(local.get $this))))
-  ;; SomeJsType.this.protectedMethod();
   ;;@ jstype/SomeJsType.java:43:4
   (call_ref $function.m_protectedMethod__void (ref.as_non_null (local.get $this))(struct.get $jstype.SomeJsType.vtable $m_protectedMethod__void (struct.get $jstype.SomeJsType $vtable(local.get $this))))
  )
@@ -275,19 +253,15 @@
 (func $$clinit__void@jstype.SomeJsType
  ;;@ jstype/SomeJsType.java:23:13
  (block
-  ;; if (jstype.SomeJsType.$initialized) return;
   ;;@ jstype/SomeJsType.java:23:13
   (if (global.get $f_$initialized__jstype_SomeJsType)
    (then
-    ;; return;
     ;;@ jstype/SomeJsType.java:23:13
     (return )
    )
   )
-  ;; (jstype.SomeJsType.$initialized = true);
   ;;@ jstype/SomeJsType.java:23:13
   (global.set $f_$initialized__jstype_SomeJsType (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ jstype/SomeJsType.java:23:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -297,14 +271,11 @@
 (func $$getClassMetadata__java_lang_Class@jstype.SomeJsType
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jstype.SomeJsType.$class == null)) (jstype.SomeJsType.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jstype.SomeJ...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__jstype_SomeJsType) (ref.null $java.lang.Class))
    (then
-    ;; (jstype.SomeJsType.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jstype.SomeJ...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__jstype_SomeJsType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jstype.SomeJ...|__java_lang_String (ref.func $$getString_|jstype.SomeJ...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return jstype.SomeJsType.$class;
   (return (global.get $f_$class__jstype_SomeJsType))
  )
 )
@@ -317,7 +288,6 @@
  (local $this (ref null $jstype.SomeJsType))
  (local.set $this (ref.cast_static $jstype.SomeJsType (local.get $this.untyped)))
  (block
-  ;; return jstype.SomeJsType.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jstype.SomeJsType) ))
  )
 )

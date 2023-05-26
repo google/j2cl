@@ -166,13 +166,10 @@
  ;;@ qualifiedsupercall/QualifiedSuperCall.java:18:6
  (local $$instance (ref null $qualifiedsupercall.Parent))
  (block
-  ;; Parent $instance = new Parent.<init>(0);
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:18:6
   (local.set $$instance (struct.new $qualifiedsupercall.Parent (ref.as_non_null (global.get $qualifiedsupercall.Parent.vtable)) (ref.as_non_null (global.get $qualifiedsupercall.Parent.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:18:6
   (call $$ctor__void_$p_qualifiedsupercall_Parent@qualifiedsupercall.Parent (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:18:6
   (return (local.get $$instance))
  )
@@ -183,10 +180,8 @@
  (param $this (ref null $qualifiedsupercall.Parent))
  ;;@ qualifiedsupercall/QualifiedSuperCall.java:18:6
  (block
-  ;; qualifiedsupercall.Parent.$clinit();
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:18:6
   (call $$clinit__void@qualifiedsupercall.Parent )
-  ;; Object.this.$ctor();
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:18:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -208,19 +203,15 @@
 (func $$clinit__void@qualifiedsupercall.Parent
  ;;@ qualifiedsupercall/QualifiedSuperCall.java:18:6
  (block
-  ;; if (qualifiedsupercall.Parent.$initialized) return;
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:18:6
   (if (global.get $f_$initialized__qualifiedsupercall_Parent)
    (then
-    ;; return;
     ;;@ qualifiedsupercall/QualifiedSuperCall.java:18:6
     (return )
    )
   )
-  ;; (qualifiedsupercall.Parent.$initialized = true);
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:18:6
   (global.set $f_$initialized__qualifiedsupercall_Parent (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:18:6
   (call $$clinit__void@java.lang.Object )
  )
@@ -230,14 +221,11 @@
 (func $$getClassMetadata__java_lang_Class@qualifiedsupercall.Parent
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((qualifiedsupercall.Parent.$class == null)) (qualifiedsupercall.Parent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|qualifiedsup...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__qualifiedsupercall_Parent) (ref.null $java.lang.Class))
    (then
-    ;; (qualifiedsupercall.Parent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|qualifiedsup...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__qualifiedsupercall_Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|qualifiedsup...|__java_lang_String (ref.func $$getString_|qualifiedsup...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return qualifiedsupercall.Parent.$class;
   (return (global.get $f_$class__qualifiedsupercall_Parent))
  )
 )
@@ -250,7 +238,6 @@
  (local $this (ref null $qualifiedsupercall.Parent))
  (local.set $this (ref.cast_static $qualifiedsupercall.Parent (local.get $this.untyped)))
  (block
-  ;; return qualifiedsupercall.Parent.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@qualifiedsupercall.Parent) ))
  )
 )
@@ -265,13 +252,10 @@
  ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
  (local $$instance (ref null $qualifiedsupercall.QualifiedSuperCall.InnerClass))
  (block
-  ;; InnerClass $instance = new InnerClass.<init>(0,$outer_this);
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
   (local.set $$instance (struct.new $qualifiedsupercall.QualifiedSuperCall.InnerClass (ref.as_non_null (global.get $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable)) (ref.as_non_null (global.get $qualifiedsupercall.QualifiedSuperCall.InnerClass.itable)) (i32.const 0) (local.get $$outer_this)))
-  ;; $instance.$ctor($outer_this);
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
   (call $$ctor__qualifiedsupercall_QualifiedSuperCall__void_$p_qualifiedsupercall_QualifiedSuperCall_InnerClass@qualifiedsupercall.QualifiedSuperCall.InnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;; return $instance;
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
   (return (local.get $$instance))
  )
@@ -283,10 +267,8 @@
  (param $$outer_this (ref null $qualifiedsupercall.QualifiedSuperCall))
  ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
  (block
-  ;; qualifiedsupercall.QualifiedSuperCall.InnerClass.$clinit();
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
   (call $$clinit__void@qualifiedsupercall.QualifiedSuperCall.InnerClass )
-  ;; Object.this.$ctor();
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -300,7 +282,6 @@
  (local $this (ref null $qualifiedsupercall.QualifiedSuperCall.InnerClass))
  (local.set $this (ref.cast_static $qualifiedsupercall.QualifiedSuperCall.InnerClass (local.get $this.untyped)))
  (block
-  ;; InnerClass.this.this.fun();
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:25:6
   (call $m_fun__void@qualifiedsupercall.Parent (ref.as_non_null (struct.get $qualifiedsupercall.QualifiedSuperCall.InnerClass $$outer_this__qualifiedsupercall_QualifiedSuperCall_InnerClass(local.get $this))))
  )
@@ -311,19 +292,15 @@
 (func $$clinit__void@qualifiedsupercall.QualifiedSuperCall.InnerClass
  ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
  (block
-  ;; if (qualifiedsupercall.QualifiedSuperCall.InnerClass.$initialized) return;
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
   (if (global.get $f_$initialized__qualifiedsupercall_QualifiedSuperCall_InnerClass)
    (then
-    ;; return;
     ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
     (return )
    )
   )
-  ;; (qualifiedsupercall.QualifiedSuperCall.InnerClass.$initialized = true);
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
   (global.set $f_$initialized__qualifiedsupercall_QualifiedSuperCall_InnerClass (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
   (call $$clinit__void@java.lang.Object )
  )
@@ -333,14 +310,11 @@
 (func $$getClassMetadata__java_lang_Class@qualifiedsupercall.QualifiedSuperCall.InnerClass
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((qualifiedsupercall.QualifiedSuperCall.InnerClass.$class == null)) (qualifiedsupercall.QualifiedSuperCall.InnerClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|qualifiedsup...|_2(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__qualifiedsupercall_QualifiedSuperCall_InnerClass) (ref.null $java.lang.Class))
    (then
-    ;; (qualifiedsupercall.QualifiedSuperCall.InnerClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|qualifiedsup...|_2(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__qualifiedsupercall_QualifiedSuperCall_InnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|qualifiedsup...|_2__java_lang_String (ref.func $$getString_|qualifiedsup...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return qualifiedsupercall.QualifiedSuperCall.InnerClass.$class;
   (return (global.get $f_$class__qualifiedsupercall_QualifiedSuperCall_InnerClass))
  )
 )
@@ -353,7 +327,6 @@
  (local $this (ref null $qualifiedsupercall.QualifiedSuperCall.InnerClass))
  (local.set $this (ref.cast_static $qualifiedsupercall.QualifiedSuperCall.InnerClass (local.get $this.untyped)))
  (block
-  ;; return qualifiedsupercall.QualifiedSuperCall.InnerClass.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@qualifiedsupercall.QualifiedSuperCall.InnerClass) ))
  )
 )
@@ -367,13 +340,10 @@
  ;;@ qualifiedsupercall/QualifiedSuperCall.java:22:13
  (local $$instance (ref null $qualifiedsupercall.QualifiedSuperCall))
  (block
-  ;; QualifiedSuperCall $instance = new QualifiedSuperCall.<init>(0);
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:22:13
   (local.set $$instance (struct.new $qualifiedsupercall.QualifiedSuperCall (ref.as_non_null (global.get $qualifiedsupercall.QualifiedSuperCall.vtable)) (ref.as_non_null (global.get $qualifiedsupercall.QualifiedSuperCall.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:22:13
   (call $$ctor__void_$p_qualifiedsupercall_QualifiedSuperCall@qualifiedsupercall.QualifiedSuperCall (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:22:13
   (return (local.get $$instance))
  )
@@ -384,10 +354,8 @@
  (param $this (ref null $qualifiedsupercall.QualifiedSuperCall))
  ;;@ qualifiedsupercall/QualifiedSuperCall.java:22:13
  (block
-  ;; qualifiedsupercall.QualifiedSuperCall.$clinit();
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:22:13
   (call $$clinit__void@qualifiedsupercall.QualifiedSuperCall )
-  ;; Parent.this.$ctor();
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:22:13
   (call $$ctor__void_$p_qualifiedsupercall_Parent@qualifiedsupercall.Parent (ref.as_non_null (local.get $this)))
  )
@@ -397,19 +365,15 @@
 (func $$clinit__void@qualifiedsupercall.QualifiedSuperCall
  ;;@ qualifiedsupercall/QualifiedSuperCall.java:22:13
  (block
-  ;; if (qualifiedsupercall.QualifiedSuperCall.$initialized) return;
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:22:13
   (if (global.get $f_$initialized__qualifiedsupercall_QualifiedSuperCall)
    (then
-    ;; return;
     ;;@ qualifiedsupercall/QualifiedSuperCall.java:22:13
     (return )
    )
   )
-  ;; (qualifiedsupercall.QualifiedSuperCall.$initialized = true);
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:22:13
   (global.set $f_$initialized__qualifiedsupercall_QualifiedSuperCall (i32.const 1))
-  ;; qualifiedsupercall.Parent.$clinit();
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:22:13
   (call $$clinit__void@qualifiedsupercall.Parent )
  )
@@ -419,14 +383,11 @@
 (func $$getClassMetadata__java_lang_Class@qualifiedsupercall.QualifiedSuperCall
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((qualifiedsupercall.QualifiedSuperCall.$class == null)) (qualifiedsupercall.QualifiedSuperCall.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|qualifiedsup...|_1(),qualifiedsupercall.Parent.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__qualifiedsupercall_QualifiedSuperCall) (ref.null $java.lang.Class))
    (then
-    ;; (qualifiedsupercall.QualifiedSuperCall.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|qualifiedsup...|_1(),qualifiedsupercall.Parent.$getClassMetadata()));
     (global.set $f_$class__qualifiedsupercall_QualifiedSuperCall (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|qualifiedsup...|_1__java_lang_String (ref.func $$getString_|qualifiedsup...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@qualifiedsupercall.Parent) )))
    )
   )
-  ;; return qualifiedsupercall.QualifiedSuperCall.$class;
   (return (global.get $f_$class__qualifiedsupercall_QualifiedSuperCall))
  )
 )
@@ -439,7 +400,6 @@
  (local $this (ref null $qualifiedsupercall.QualifiedSuperCall))
  (local.set $this (ref.cast_static $qualifiedsupercall.QualifiedSuperCall (local.get $this.untyped)))
  (block
-  ;; return qualifiedsupercall.QualifiedSuperCall.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@qualifiedsupercall.QualifiedSuperCall) ))
  )
 )

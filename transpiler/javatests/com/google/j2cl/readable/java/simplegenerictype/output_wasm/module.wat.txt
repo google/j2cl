@@ -63,13 +63,10 @@
  ;;@ simplegenerictype/SimpleGenericType.java:22:9
  (local $$instance (ref null $simplegenerictype.SimpleGenericType))
  (block
-  ;; SimpleGenericType<T, S> $instance = new SimpleGenericType.<init>(0,t,s);
   ;;@ simplegenerictype/SimpleGenericType.java:22:9
   (local.set $$instance (struct.new $simplegenerictype.SimpleGenericType (ref.as_non_null (global.get $simplegenerictype.SimpleGenericType.vtable)) (ref.as_non_null (global.get $simplegenerictype.SimpleGenericType.itable)) (i32.const 0) (local.get $t) (local.get $s)))
-  ;; $instance.$ctor(t,s);
   ;;@ simplegenerictype/SimpleGenericType.java:22:9
   (call $$ctor__java_lang_Object__java_lang_Object__void_$p_simplegenerictype_SimpleGenericType@simplegenerictype.SimpleGenericType (ref.as_non_null (local.get $$instance))(local.get $t)(local.get $s))
-  ;; return $instance;
   ;;@ simplegenerictype/SimpleGenericType.java:22:9
   (return (local.get $$instance))
  )
@@ -82,10 +79,8 @@
  (param $s (ref null $java.lang.Object))
  ;;@ simplegenerictype/SimpleGenericType.java:22:9
  (block
-  ;; simplegenerictype.SimpleGenericType.$clinit();
   ;;@ simplegenerictype/SimpleGenericType.java:22:37
   (call $$clinit__void@simplegenerictype.SimpleGenericType )
-  ;; Object.this.$ctor();
   ;;@ simplegenerictype/SimpleGenericType.java:22:37
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -100,7 +95,6 @@
  (local $this (ref null $simplegenerictype.SimpleGenericType))
  (local.set $this (ref.cast_static $simplegenerictype.SimpleGenericType (local.get $this.untyped)))
  (block
-  ;; SimpleGenericType<Object, Error> g = simplegenerictype.SimpleGenericType.$create(java.lang.Object.$create(),java.lang.Error.$create());
   ;;@ simplegenerictype/SimpleGenericType.java:28:4
   (local.set $g (call $$create__java_lang_Object__java_lang_Object@simplegenerictype.SimpleGenericType (call $$create__@java.lang.Object )(call $$create__@java.lang.Error )))
  )
@@ -111,19 +105,15 @@
 (func $$clinit__void@simplegenerictype.SimpleGenericType
  ;;@ simplegenerictype/SimpleGenericType.java:18:13
  (block
-  ;; if (simplegenerictype.SimpleGenericType.$initialized) return;
   ;;@ simplegenerictype/SimpleGenericType.java:18:13
   (if (global.get $f_$initialized__simplegenerictype_SimpleGenericType)
    (then
-    ;; return;
     ;;@ simplegenerictype/SimpleGenericType.java:18:13
     (return )
    )
   )
-  ;; (simplegenerictype.SimpleGenericType.$initialized = true);
   ;;@ simplegenerictype/SimpleGenericType.java:18:13
   (global.set $f_$initialized__simplegenerictype_SimpleGenericType (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ simplegenerictype/SimpleGenericType.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -133,14 +123,11 @@
 (func $$getClassMetadata__java_lang_Class@simplegenerictype.SimpleGenericType
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((simplegenerictype.SimpleGenericType.$class == null)) (simplegenerictype.SimpleGenericType.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|simplegeneri...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__simplegenerictype_SimpleGenericType) (ref.null $java.lang.Class))
    (then
-    ;; (simplegenerictype.SimpleGenericType.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|simplegeneri...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__simplegenerictype_SimpleGenericType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplegeneri...|__java_lang_String (ref.func $$getString_|simplegeneri...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return simplegenerictype.SimpleGenericType.$class;
   (return (global.get $f_$class__simplegenerictype_SimpleGenericType))
  )
 )
@@ -153,7 +140,6 @@
  (local $this (ref null $simplegenerictype.SimpleGenericType))
  (local.set $this (ref.cast_static $simplegenerictype.SimpleGenericType (local.get $this.untyped)))
  (block
-  ;; return simplegenerictype.SimpleGenericType.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simplegenerictype.SimpleGenericType) ))
  )
 )

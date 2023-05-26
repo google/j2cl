@@ -57,13 +57,10 @@
  ;;@ exportimport/Main.java:19:13
  (local $$instance (ref null $exportimport.Main))
  (block
-  ;; Main $instance = new Main.<init>(0);
   ;;@ exportimport/Main.java:19:13
   (local.set $$instance (struct.new $exportimport.Main (ref.as_non_null (global.get $exportimport.Main.vtable)) (ref.as_non_null (global.get $exportimport.Main.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ exportimport/Main.java:19:13
   (call $$ctor__void_$p_exportimport_Main@exportimport.Main (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ exportimport/Main.java:19:13
   (return (local.get $$instance))
  )
@@ -74,10 +71,8 @@
  (param $this (ref null $exportimport.Main))
  ;;@ exportimport/Main.java:19:13
  (block
-  ;; exportimport.Main.$clinit();
   ;;@ exportimport/Main.java:19:13
   (call $$clinit__void@exportimport.Main )
-  ;; Object.this.$ctor();
   ;;@ exportimport/Main.java:19:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -87,19 +82,15 @@
 (func $$clinit__void@exportimport.Main
  ;;@ exportimport/Main.java:19:13
  (block
-  ;; if (exportimport.Main.$initialized) return;
   ;;@ exportimport/Main.java:19:13
   (if (global.get $f_$initialized__exportimport_Main)
    (then
-    ;; return;
     ;;@ exportimport/Main.java:19:13
     (return )
    )
   )
-  ;; (exportimport.Main.$initialized = true);
   ;;@ exportimport/Main.java:19:13
   (global.set $f_$initialized__exportimport_Main (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ exportimport/Main.java:19:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -109,14 +100,11 @@
 (func $$getClassMetadata__java_lang_Class@exportimport.Main
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((exportimport.Main.$class == null)) (exportimport.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|exportimport...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__exportimport_Main) (ref.null $java.lang.Class))
    (then
-    ;; (exportimport.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|exportimport...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__exportimport_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|exportimport...|__java_lang_String (ref.func $$getString_|exportimport...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return exportimport.Main.$class;
   (return (global.get $f_$class__exportimport_Main))
  )
 )
@@ -129,7 +117,6 @@
  (local $this (ref null $exportimport.Main))
  (local.set $this (ref.cast_static $exportimport.Main (local.get $this.untyped)))
  (block
-  ;; return exportimport.Main.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@exportimport.Main) ))
  )
 )

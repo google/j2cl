@@ -58,13 +58,10 @@
  ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
  (local $$instance (ref null $importsfullyqualified.ImportsFullyQualified))
  (block
-  ;; ImportsFullyQualified $instance = new ImportsFullyQualified.<init>(0);
   ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
   (local.set $$instance (struct.new $importsfullyqualified.ImportsFullyQualified (ref.as_non_null (global.get $importsfullyqualified.ImportsFullyQualified.vtable)) (ref.as_non_null (global.get $importsfullyqualified.ImportsFullyQualified.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
   (call $$ctor__void_$p_importsfullyqualified_ImportsFullyQualified@importsfullyqualified.ImportsFullyQualified (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
   (return (local.get $$instance))
  )
@@ -75,10 +72,8 @@
  (param $this (ref null $importsfullyqualified.ImportsFullyQualified))
  ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
  (block
-  ;; importsfullyqualified.ImportsFullyQualified.$clinit();
   ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
   (call $$clinit__void@importsfullyqualified.ImportsFullyQualified )
-  ;; Object.this.$ctor();
   ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -88,19 +83,15 @@
 (func $$clinit__void@importsfullyqualified.ImportsFullyQualified
  ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
  (block
-  ;; if (importsfullyqualified.ImportsFullyQualified.$initialized) return;
   ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
   (if (global.get $f_$initialized__importsfullyqualified_ImportsFullyQualified)
    (then
-    ;; return;
     ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
     (return )
    )
   )
-  ;; (importsfullyqualified.ImportsFullyQualified.$initialized = true);
   ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
   (global.set $f_$initialized__importsfullyqualified_ImportsFullyQualified (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -110,14 +101,11 @@
 (func $$getClassMetadata__java_lang_Class@importsfullyqualified.ImportsFullyQualified
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((importsfullyqualified.ImportsFullyQualified.$class == null)) (importsfullyqualified.ImportsFullyQualified.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|importsfully...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__importsfullyqualified_ImportsFullyQualified) (ref.null $java.lang.Class))
    (then
-    ;; (importsfullyqualified.ImportsFullyQualified.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|importsfully...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__importsfullyqualified_ImportsFullyQualified (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|importsfully...|__java_lang_String (ref.func $$getString_|importsfully...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return importsfullyqualified.ImportsFullyQualified.$class;
   (return (global.get $f_$class__importsfullyqualified_ImportsFullyQualified))
  )
 )
@@ -130,7 +118,6 @@
  (local $this (ref null $importsfullyqualified.ImportsFullyQualified))
  (local.set $this (ref.cast_static $importsfullyqualified.ImportsFullyQualified (local.get $this.untyped)))
  (block
-  ;; return importsfullyqualified.ImportsFullyQualified.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@importsfullyqualified.ImportsFullyQualified) ))
  )
 )

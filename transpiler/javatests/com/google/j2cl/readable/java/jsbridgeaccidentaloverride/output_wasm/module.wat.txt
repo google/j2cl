@@ -199,16 +199,13 @@
 (func $$clinit__void@jsbridgeaccidentaloverride.OtherInterface
  ;;@ jsbridgeaccidentaloverride/MyJsType.java:20:10
  (block
-  ;; if (jsbridgeaccidentaloverride.OtherInterface.$initialized) return;
   ;;@ jsbridgeaccidentaloverride/MyJsType.java:20:10
   (if (global.get $f_$initialized__jsbridgeaccidentaloverride_OtherInterface)
    (then
-    ;; return;
     ;;@ jsbridgeaccidentaloverride/MyJsType.java:20:10
     (return )
    )
   )
-  ;; (jsbridgeaccidentaloverride.OtherInterface.$initialized = true);
   ;;@ jsbridgeaccidentaloverride/MyJsType.java:20:10
   (global.set $f_$initialized__jsbridgeaccidentaloverride_OtherInterface (i32.const 1))
  )
@@ -218,14 +215,11 @@
 (func $$getClassMetadata__java_lang_Class@jsbridgeaccidentaloverride.OtherInterface
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jsbridgeaccidentaloverride.OtherInterface.$class == null)) (jsbridgeaccidentaloverride.OtherInterface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|jsbridgeacci...|_1()));
   (if (ref.eq (global.get $f_$class__jsbridgeaccidentaloverride_OtherInterface) (ref.null $java.lang.Class))
    (then
-    ;; (jsbridgeaccidentaloverride.OtherInterface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|jsbridgeacci...|_1()));
     (global.set $f_$class__jsbridgeaccidentaloverride_OtherInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsbridgeacci...|_1__java_lang_String (ref.func $$getString_|jsbridgeacci...|_1__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return jsbridgeaccidentaloverride.OtherInterface.$class;
   (return (global.get $f_$class__jsbridgeaccidentaloverride_OtherInterface))
  )
 )
@@ -236,16 +230,13 @@
 (func $$clinit__void@jsbridgeaccidentaloverride.MyInterface
  ;;@ jsbridgeaccidentaloverride/MyJsType.java:53:10
  (block
-  ;; if (jsbridgeaccidentaloverride.MyInterface.$initialized) return;
   ;;@ jsbridgeaccidentaloverride/MyJsType.java:53:10
   (if (global.get $f_$initialized__jsbridgeaccidentaloverride_MyInterface)
    (then
-    ;; return;
     ;;@ jsbridgeaccidentaloverride/MyJsType.java:53:10
     (return )
    )
   )
-  ;; (jsbridgeaccidentaloverride.MyInterface.$initialized = true);
   ;;@ jsbridgeaccidentaloverride/MyJsType.java:53:10
   (global.set $f_$initialized__jsbridgeaccidentaloverride_MyInterface (i32.const 1))
  )
@@ -255,14 +246,11 @@
 (func $$getClassMetadata__java_lang_Class@jsbridgeaccidentaloverride.MyInterface
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jsbridgeaccidentaloverride.MyInterface.$class == null)) (jsbridgeaccidentaloverride.MyInterface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|jsbridgeacci...|_3()));
   (if (ref.eq (global.get $f_$class__jsbridgeaccidentaloverride_MyInterface) (ref.null $java.lang.Class))
    (then
-    ;; (jsbridgeaccidentaloverride.MyInterface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|jsbridgeacci...|_3()));
     (global.set $f_$class__jsbridgeaccidentaloverride_MyInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsbridgeacci...|_3__java_lang_String (ref.func $$getString_|jsbridgeacci...|_3__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return jsbridgeaccidentaloverride.MyInterface.$class;
   (return (global.get $f_$class__jsbridgeaccidentaloverride_MyInterface))
  )
 )
@@ -275,13 +263,10 @@
  ;;@ jsbridgeaccidentaloverride/Main.java:18:13
  (local $$instance (ref null $jsbridgeaccidentaloverride.Main))
  (block
-  ;; Main $instance = new Main.<init>(0);
   ;;@ jsbridgeaccidentaloverride/Main.java:18:13
   (local.set $$instance (struct.new $jsbridgeaccidentaloverride.Main (ref.as_non_null (global.get $jsbridgeaccidentaloverride.Main.vtable)) (ref.as_non_null (global.get $jsbridgeaccidentaloverride.Main.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ jsbridgeaccidentaloverride/Main.java:18:13
   (call $$ctor__void_$p_jsbridgeaccidentaloverride_Main@jsbridgeaccidentaloverride.Main (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ jsbridgeaccidentaloverride/Main.java:18:13
   (return (local.get $$instance))
  )
@@ -292,10 +277,8 @@
  (param $this (ref null $jsbridgeaccidentaloverride.Main))
  ;;@ jsbridgeaccidentaloverride/Main.java:18:13
  (block
-  ;; jsbridgeaccidentaloverride.Main.$clinit();
   ;;@ jsbridgeaccidentaloverride/Main.java:18:13
   (call $$clinit__void@jsbridgeaccidentaloverride.Main )
-  ;; Object.this.$ctor();
   ;;@ jsbridgeaccidentaloverride/Main.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -313,43 +296,30 @@
  (local $this (ref null $jsbridgeaccidentaloverride.Main))
  (local.set $this (ref.cast_static $jsbridgeaccidentaloverride.Main (local.get $this.untyped)))
  (block
-  ;; MyJsType a = jsbridgeaccidentaloverride.MyJsType.$create();
   ;;@ jsbridgeaccidentaloverride/Main.java:20:4
   (local.set $a (call $$create__@jsbridgeaccidentaloverride.MyJsType ))
-  ;; SubJsType b = jsbridgeaccidentaloverride.SubJsType.$create();
   ;;@ jsbridgeaccidentaloverride/Main.java:21:4
   (local.set $b (call $$create__@jsbridgeaccidentaloverride.SubJsType ))
-  ;; MyInterface c = jsbridgeaccidentaloverride.SubJsType.$create();
   ;;@ jsbridgeaccidentaloverride/Main.java:22:4
   (local.set $c (call $$create__@jsbridgeaccidentaloverride.SubJsType ))
-  ;; OtherInterface d = jsbridgeaccidentaloverride.SubJsType.$create();
   ;;@ jsbridgeaccidentaloverride/Main.java:23:4
   (local.set $d (call $$create__@jsbridgeaccidentaloverride.SubJsType ))
-  ;; a.foo(1);
   ;;@ jsbridgeaccidentaloverride/Main.java:24:4
   (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $a))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.MyJsType.vtable $m_foo__int__int (struct.get $jsbridgeaccidentaloverride.MyJsType $vtable(local.get $a)))))
-  ;; b.foo(1);
   ;;@ jsbridgeaccidentaloverride/Main.java:25:4
   (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $b))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.MyJsType.vtable $m_foo__int__int (struct.get $jsbridgeaccidentaloverride.MyJsType $vtable(local.get $b)))))
-  ;; c.foo(1);
   ;;@ jsbridgeaccidentaloverride/Main.java:26:4
   (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $c))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.MyInterface.vtable $m_foo__int__int (ref.cast_static $jsbridgeaccidentaloverride.MyInterface.vtable (struct.get $itable $slot1 (struct.get $java.lang.Object $itable (local.get $c)))))))
-  ;; a.bar(1);
   ;;@ jsbridgeaccidentaloverride/Main.java:27:4
   (drop (call_ref $function.m_bar__int__int (ref.as_non_null (local.get $a))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.MyJsType.vtable $m_bar__int__int (struct.get $jsbridgeaccidentaloverride.MyJsType $vtable(local.get $a)))))
-  ;; b.bar(1);
   ;;@ jsbridgeaccidentaloverride/Main.java:28:4
   (drop (call_ref $function.m_bar__int__int (ref.as_non_null (local.get $b))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.SubJsType.vtable $m_bar__int__int (struct.get $jsbridgeaccidentaloverride.SubJsType $vtable(local.get $b)))))
-  ;; c.bar(1);
   ;;@ jsbridgeaccidentaloverride/Main.java:29:4
   (drop (call_ref $function.m_bar__int__int (ref.as_non_null (local.get $c))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.MyInterface.vtable $m_bar__int__int (ref.cast_static $jsbridgeaccidentaloverride.MyInterface.vtable (struct.get $itable $slot1 (struct.get $java.lang.Object $itable (local.get $c)))))))
-  ;; a.fun(1);
   ;;@ jsbridgeaccidentaloverride/Main.java:30:4
   (drop (call_ref $function.m_fun__int__int (ref.as_non_null (local.get $a))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.MyJsType.vtable $m_fun__int__int (struct.get $jsbridgeaccidentaloverride.MyJsType $vtable(local.get $a)))))
-  ;; b.fun(1);
   ;;@ jsbridgeaccidentaloverride/Main.java:31:4
   (drop (call_ref $function.m_fun__int__int (ref.as_non_null (local.get $b))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.MyJsType.vtable $m_fun__int__int (struct.get $jsbridgeaccidentaloverride.MyJsType $vtable(local.get $b)))))
-  ;; d.fun(1);
   ;;@ jsbridgeaccidentaloverride/Main.java:32:4
   (drop (call_ref $function.m_fun__int__int (ref.as_non_null (local.get $d))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.OtherInterface.vtable $m_fun__int__int (ref.cast_static $jsbridgeaccidentaloverride.OtherInterface.vtable (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $d)))))))
  )
@@ -360,19 +330,15 @@
 (func $$clinit__void@jsbridgeaccidentaloverride.Main
  ;;@ jsbridgeaccidentaloverride/Main.java:18:13
  (block
-  ;; if (jsbridgeaccidentaloverride.Main.$initialized) return;
   ;;@ jsbridgeaccidentaloverride/Main.java:18:13
   (if (global.get $f_$initialized__jsbridgeaccidentaloverride_Main)
    (then
-    ;; return;
     ;;@ jsbridgeaccidentaloverride/Main.java:18:13
     (return )
    )
   )
-  ;; (jsbridgeaccidentaloverride.Main.$initialized = true);
   ;;@ jsbridgeaccidentaloverride/Main.java:18:13
   (global.set $f_$initialized__jsbridgeaccidentaloverride_Main (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ jsbridgeaccidentaloverride/Main.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -382,14 +348,11 @@
 (func $$getClassMetadata__java_lang_Class@jsbridgeaccidentaloverride.Main
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jsbridgeaccidentaloverride.Main.$class == null)) (jsbridgeaccidentaloverride.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsbridgeacci...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__jsbridgeaccidentaloverride_Main) (ref.null $java.lang.Class))
    (then
-    ;; (jsbridgeaccidentaloverride.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsbridgeacci...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__jsbridgeaccidentaloverride_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsbridgeacci...|__java_lang_String (ref.func $$getString_|jsbridgeacci...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return jsbridgeaccidentaloverride.Main.$class;
   (return (global.get $f_$class__jsbridgeaccidentaloverride_Main))
  )
 )
@@ -402,7 +365,6 @@
  (local $this (ref null $jsbridgeaccidentaloverride.Main))
  (local.set $this (ref.cast_static $jsbridgeaccidentaloverride.Main (local.get $this.untyped)))
  (block
-  ;; return jsbridgeaccidentaloverride.Main.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsbridgeaccidentaloverride.Main) ))
  )
 )
@@ -416,13 +378,10 @@
  ;;@ jsbridgeaccidentaloverride/MyJsType.java:26:2
  (local $$instance (ref null $jsbridgeaccidentaloverride.MyJsType))
  (block
-  ;; MyJsType $instance = new MyJsType.<init>(0);
   ;;@ jsbridgeaccidentaloverride/MyJsType.java:26:2
   (local.set $$instance (struct.new $jsbridgeaccidentaloverride.MyJsType (ref.as_non_null (global.get $jsbridgeaccidentaloverride.MyJsType.vtable)) (ref.as_non_null (global.get $jsbridgeaccidentaloverride.MyJsType.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ jsbridgeaccidentaloverride/MyJsType.java:26:2
   (call $$ctor__void_$p_jsbridgeaccidentaloverride_MyJsType@jsbridgeaccidentaloverride.MyJsType (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ jsbridgeaccidentaloverride/MyJsType.java:26:2
   (return (local.get $$instance))
  )
@@ -433,10 +392,8 @@
  (param $this (ref null $jsbridgeaccidentaloverride.MyJsType))
  ;;@ jsbridgeaccidentaloverride/MyJsType.java:26:2
  (block
-  ;; jsbridgeaccidentaloverride.MyJsType.$clinit();
   ;;@ jsbridgeaccidentaloverride/MyJsType.java:26:13
   (call $$clinit__void@jsbridgeaccidentaloverride.MyJsType )
-  ;; Object.this.$ctor();
   ;;@ jsbridgeaccidentaloverride/MyJsType.java:26:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -452,7 +409,6 @@
  (local $this (ref null $jsbridgeaccidentaloverride.MyJsType))
  (local.set $this (ref.cast_static $jsbridgeaccidentaloverride.MyJsType (local.get $this.untyped)))
  (block
-  ;; return a;
   ;;@ jsbridgeaccidentaloverride/MyJsType.java:32:4
   (return (local.get $a))
  )
@@ -469,7 +425,6 @@
  (local $this (ref null $jsbridgeaccidentaloverride.MyJsType))
  (local.set $this (ref.cast_static $jsbridgeaccidentaloverride.MyJsType (local.get $this.untyped)))
  (block
-  ;; return (a + 1);
   ;;@ jsbridgeaccidentaloverride/MyJsType.java:40:4
   (return (i32.add (local.get $a) (i32.const 1)))
  )
@@ -486,7 +441,6 @@
  (local $this (ref null $jsbridgeaccidentaloverride.MyJsType))
  (local.set $this (ref.cast_static $jsbridgeaccidentaloverride.MyJsType (local.get $this.untyped)))
  (block
-  ;; return (a - 1);
   ;;@ jsbridgeaccidentaloverride/MyJsType.java:49:4
   (return (i32.sub (local.get $a) (i32.const 1)))
  )
@@ -497,19 +451,15 @@
 (func $$clinit__void@jsbridgeaccidentaloverride.MyJsType
  ;;@ jsbridgeaccidentaloverride/MyJsType.java:25:13
  (block
-  ;; if (jsbridgeaccidentaloverride.MyJsType.$initialized) return;
   ;;@ jsbridgeaccidentaloverride/MyJsType.java:25:13
   (if (global.get $f_$initialized__jsbridgeaccidentaloverride_MyJsType)
    (then
-    ;; return;
     ;;@ jsbridgeaccidentaloverride/MyJsType.java:25:13
     (return )
    )
   )
-  ;; (jsbridgeaccidentaloverride.MyJsType.$initialized = true);
   ;;@ jsbridgeaccidentaloverride/MyJsType.java:25:13
   (global.set $f_$initialized__jsbridgeaccidentaloverride_MyJsType (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ jsbridgeaccidentaloverride/MyJsType.java:25:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -519,14 +469,11 @@
 (func $$getClassMetadata__java_lang_Class@jsbridgeaccidentaloverride.MyJsType
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jsbridgeaccidentaloverride.MyJsType.$class == null)) (jsbridgeaccidentaloverride.MyJsType.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsbridgeacci...|_2(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__jsbridgeaccidentaloverride_MyJsType) (ref.null $java.lang.Class))
    (then
-    ;; (jsbridgeaccidentaloverride.MyJsType.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsbridgeacci...|_2(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__jsbridgeaccidentaloverride_MyJsType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsbridgeacci...|_2__java_lang_String (ref.func $$getString_|jsbridgeacci...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return jsbridgeaccidentaloverride.MyJsType.$class;
   (return (global.get $f_$class__jsbridgeaccidentaloverride_MyJsType))
  )
 )
@@ -539,7 +486,6 @@
  (local $this (ref null $jsbridgeaccidentaloverride.MyJsType))
  (local.set $this (ref.cast_static $jsbridgeaccidentaloverride.MyJsType (local.get $this.untyped)))
  (block
-  ;; return jsbridgeaccidentaloverride.MyJsType.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsbridgeaccidentaloverride.MyJsType) ))
  )
 )
@@ -553,13 +499,10 @@
  ;;@ jsbridgeaccidentaloverride/MyJsType.java:59:6
  (local $$instance (ref null $jsbridgeaccidentaloverride.SubJsType))
  (block
-  ;; SubJsType $instance = new SubJsType.<init>(0);
   ;;@ jsbridgeaccidentaloverride/MyJsType.java:59:6
   (local.set $$instance (struct.new $jsbridgeaccidentaloverride.SubJsType (ref.as_non_null (global.get $jsbridgeaccidentaloverride.SubJsType.vtable)) (ref.as_non_null (global.get $jsbridgeaccidentaloverride.SubJsType.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ jsbridgeaccidentaloverride/MyJsType.java:59:6
   (call $$ctor__void_$p_jsbridgeaccidentaloverride_SubJsType@jsbridgeaccidentaloverride.SubJsType (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ jsbridgeaccidentaloverride/MyJsType.java:59:6
   (return (local.get $$instance))
  )
@@ -570,10 +513,8 @@
  (param $this (ref null $jsbridgeaccidentaloverride.SubJsType))
  ;;@ jsbridgeaccidentaloverride/MyJsType.java:59:6
  (block
-  ;; jsbridgeaccidentaloverride.SubJsType.$clinit();
   ;;@ jsbridgeaccidentaloverride/MyJsType.java:59:6
   (call $$clinit__void@jsbridgeaccidentaloverride.SubJsType )
-  ;; MyJsType.this.$ctor();
   ;;@ jsbridgeaccidentaloverride/MyJsType.java:59:6
   (call $$ctor__void_$p_jsbridgeaccidentaloverride_MyJsType@jsbridgeaccidentaloverride.MyJsType (ref.as_non_null (local.get $this)))
  )
@@ -589,7 +530,6 @@
  (local $this (ref null $jsbridgeaccidentaloverride.SubJsType))
  (local.set $this (ref.cast_static $jsbridgeaccidentaloverride.SubJsType (local.get $this.untyped)))
  (block
-  ;; return (a + 2);
   ;;@ jsbridgeaccidentaloverride/MyJsType.java:66:4
   (return (i32.add (local.get $a) (i32.const 2)))
  )
@@ -600,19 +540,15 @@
 (func $$clinit__void@jsbridgeaccidentaloverride.SubJsType
  ;;@ jsbridgeaccidentaloverride/MyJsType.java:59:6
  (block
-  ;; if (jsbridgeaccidentaloverride.SubJsType.$initialized) return;
   ;;@ jsbridgeaccidentaloverride/MyJsType.java:59:6
   (if (global.get $f_$initialized__jsbridgeaccidentaloverride_SubJsType)
    (then
-    ;; return;
     ;;@ jsbridgeaccidentaloverride/MyJsType.java:59:6
     (return )
    )
   )
-  ;; (jsbridgeaccidentaloverride.SubJsType.$initialized = true);
   ;;@ jsbridgeaccidentaloverride/MyJsType.java:59:6
   (global.set $f_$initialized__jsbridgeaccidentaloverride_SubJsType (i32.const 1))
-  ;; jsbridgeaccidentaloverride.MyJsType.$clinit();
   ;;@ jsbridgeaccidentaloverride/MyJsType.java:59:6
   (call $$clinit__void@jsbridgeaccidentaloverride.MyJsType )
  )
@@ -622,14 +558,11 @@
 (func $$getClassMetadata__java_lang_Class@jsbridgeaccidentaloverride.SubJsType
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jsbridgeaccidentaloverride.SubJsType.$class == null)) (jsbridgeaccidentaloverride.SubJsType.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsbridgeacci...|_4(),jsbridgeaccidentaloverride.MyJsType.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__jsbridgeaccidentaloverride_SubJsType) (ref.null $java.lang.Class))
    (then
-    ;; (jsbridgeaccidentaloverride.SubJsType.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsbridgeacci...|_4(),jsbridgeaccidentaloverride.MyJsType.$getClassMetadata()));
     (global.set $f_$class__jsbridgeaccidentaloverride_SubJsType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsbridgeacci...|_4__java_lang_String (ref.func $$getString_|jsbridgeacci...|_4__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsbridgeaccidentaloverride.MyJsType) )))
    )
   )
-  ;; return jsbridgeaccidentaloverride.SubJsType.$class;
   (return (global.get $f_$class__jsbridgeaccidentaloverride_SubJsType))
  )
 )
@@ -642,7 +575,6 @@
  (local $this (ref null $jsbridgeaccidentaloverride.SubJsType))
  (local.set $this (ref.cast_static $jsbridgeaccidentaloverride.SubJsType (local.get $this.untyped)))
  (block
-  ;; return jsbridgeaccidentaloverride.SubJsType.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsbridgeaccidentaloverride.SubJsType) ))
  )
 )

@@ -163,13 +163,10 @@
  ;;@ circularimportuse/Left.java:18:13
  (local $$instance (ref null $circularimportuse.Left))
  (block
-  ;; Left $instance = new Left.<init>(0);
   ;;@ circularimportuse/Left.java:18:13
   (local.set $$instance (struct.new $circularimportuse.Left (ref.as_non_null (global.get $circularimportuse.Left.vtable)) (ref.as_non_null (global.get $circularimportuse.Left.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ circularimportuse/Left.java:18:13
   (call $$ctor__void_$p_circularimportuse_Left@circularimportuse.Left (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ circularimportuse/Left.java:18:13
   (return (local.get $$instance))
  )
@@ -180,10 +177,8 @@
  (param $this (ref null $circularimportuse.Left))
  ;;@ circularimportuse/Left.java:18:13
  (block
-  ;; circularimportuse.Left.$clinit();
   ;;@ circularimportuse/Left.java:18:13
   (call $$clinit__void@circularimportuse.Left )
-  ;; Object.this.$ctor();
   ;;@ circularimportuse/Left.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -198,7 +193,6 @@
  (local $this (ref null $circularimportuse.Left))
  (local.set $this (ref.cast_static $circularimportuse.Left (local.get $this.untyped)))
  (block
-  ;; return circularimportuse.Right.$create();
   ;;@ circularimportuse/Left.java:20:4
   (return (call $$create__@circularimportuse.Right ))
  )
@@ -209,19 +203,15 @@
 (func $$clinit__void@circularimportuse.Left
  ;;@ circularimportuse/Left.java:18:13
  (block
-  ;; if (circularimportuse.Left.$initialized) return;
   ;;@ circularimportuse/Left.java:18:13
   (if (global.get $f_$initialized__circularimportuse_Left)
    (then
-    ;; return;
     ;;@ circularimportuse/Left.java:18:13
     (return )
    )
   )
-  ;; (circularimportuse.Left.$initialized = true);
   ;;@ circularimportuse/Left.java:18:13
   (global.set $f_$initialized__circularimportuse_Left (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ circularimportuse/Left.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -231,14 +221,11 @@
 (func $$getClassMetadata__java_lang_Class@circularimportuse.Left
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((circularimportuse.Left.$class == null)) (circularimportuse.Left.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|circularimpo...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__circularimportuse_Left) (ref.null $java.lang.Class))
    (then
-    ;; (circularimportuse.Left.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|circularimpo...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__circularimportuse_Left (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|circularimpo...|__java_lang_String (ref.func $$getString_|circularimpo...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return circularimportuse.Left.$class;
   (return (global.get $f_$class__circularimportuse_Left))
  )
 )
@@ -251,7 +238,6 @@
  (local $this (ref null $circularimportuse.Left))
  (local.set $this (ref.cast_static $circularimportuse.Left (local.get $this.untyped)))
  (block
-  ;; return circularimportuse.Left.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@circularimportuse.Left) ))
  )
 )
@@ -265,13 +251,10 @@
  ;;@ circularimportuse/Main.java:18:13
  (local $$instance (ref null $circularimportuse.Main))
  (block
-  ;; Main $instance = new Main.<init>(0);
   ;;@ circularimportuse/Main.java:18:13
   (local.set $$instance (struct.new $circularimportuse.Main (ref.as_non_null (global.get $circularimportuse.Main.vtable)) (ref.as_non_null (global.get $circularimportuse.Main.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ circularimportuse/Main.java:18:13
   (call $$ctor__void_$p_circularimportuse_Main@circularimportuse.Main (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ circularimportuse/Main.java:18:13
   (return (local.get $$instance))
  )
@@ -282,10 +265,8 @@
  (param $this (ref null $circularimportuse.Main))
  ;;@ circularimportuse/Main.java:18:13
  (block
-  ;; circularimportuse.Main.$clinit();
   ;;@ circularimportuse/Main.java:18:13
   (call $$clinit__void@circularimportuse.Main )
-  ;; Object.this.$ctor();
   ;;@ circularimportuse/Main.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -298,13 +279,10 @@
  (local $left (ref null $circularimportuse.Left))
  (local $right (ref null $circularimportuse.Right))
  (block
-  ;; circularimportuse.Main.$clinit();
   ;;@ circularimportuse/Main.java:20:42
   (call $$clinit__void@circularimportuse.Main )
-  ;; Left left = circularimportuse.Left.$create();
   ;;@ circularimportuse/Main.java:21:4
   (local.set $left (call $$create__@circularimportuse.Left ))
-  ;; Right right = circularimportuse.Right.$create();
   ;;@ circularimportuse/Main.java:22:4
   (local.set $right (call $$create__@circularimportuse.Right ))
  )
@@ -314,19 +292,15 @@
 (func $$clinit__void@circularimportuse.Main
  ;;@ circularimportuse/Main.java:18:13
  (block
-  ;; if (circularimportuse.Main.$initialized) return;
   ;;@ circularimportuse/Main.java:18:13
   (if (global.get $f_$initialized__circularimportuse_Main)
    (then
-    ;; return;
     ;;@ circularimportuse/Main.java:18:13
     (return )
    )
   )
-  ;; (circularimportuse.Main.$initialized = true);
   ;;@ circularimportuse/Main.java:18:13
   (global.set $f_$initialized__circularimportuse_Main (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ circularimportuse/Main.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -336,14 +310,11 @@
 (func $$getClassMetadata__java_lang_Class@circularimportuse.Main
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((circularimportuse.Main.$class == null)) (circularimportuse.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|circularimpo...|_1(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__circularimportuse_Main) (ref.null $java.lang.Class))
    (then
-    ;; (circularimportuse.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|circularimpo...|_1(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__circularimportuse_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|circularimpo...|_1__java_lang_String (ref.func $$getString_|circularimpo...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return circularimportuse.Main.$class;
   (return (global.get $f_$class__circularimportuse_Main))
  )
 )
@@ -356,7 +327,6 @@
  (local $this (ref null $circularimportuse.Main))
  (local.set $this (ref.cast_static $circularimportuse.Main (local.get $this.untyped)))
  (block
-  ;; return circularimportuse.Main.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@circularimportuse.Main) ))
  )
 )
@@ -370,13 +340,10 @@
  ;;@ circularimportuse/Right.java:18:13
  (local $$instance (ref null $circularimportuse.Right))
  (block
-  ;; Right $instance = new Right.<init>(0);
   ;;@ circularimportuse/Right.java:18:13
   (local.set $$instance (struct.new $circularimportuse.Right (ref.as_non_null (global.get $circularimportuse.Right.vtable)) (ref.as_non_null (global.get $circularimportuse.Right.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ circularimportuse/Right.java:18:13
   (call $$ctor__void_$p_circularimportuse_Right@circularimportuse.Right (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ circularimportuse/Right.java:18:13
   (return (local.get $$instance))
  )
@@ -387,10 +354,8 @@
  (param $this (ref null $circularimportuse.Right))
  ;;@ circularimportuse/Right.java:18:13
  (block
-  ;; circularimportuse.Right.$clinit();
   ;;@ circularimportuse/Right.java:18:13
   (call $$clinit__void@circularimportuse.Right )
-  ;; Object.this.$ctor();
   ;;@ circularimportuse/Right.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -405,7 +370,6 @@
  (local $this (ref null $circularimportuse.Right))
  (local.set $this (ref.cast_static $circularimportuse.Right (local.get $this.untyped)))
  (block
-  ;; return circularimportuse.Left.$create();
   ;;@ circularimportuse/Right.java:20:4
   (return (call $$create__@circularimportuse.Left ))
  )
@@ -416,19 +380,15 @@
 (func $$clinit__void@circularimportuse.Right
  ;;@ circularimportuse/Right.java:18:13
  (block
-  ;; if (circularimportuse.Right.$initialized) return;
   ;;@ circularimportuse/Right.java:18:13
   (if (global.get $f_$initialized__circularimportuse_Right)
    (then
-    ;; return;
     ;;@ circularimportuse/Right.java:18:13
     (return )
    )
   )
-  ;; (circularimportuse.Right.$initialized = true);
   ;;@ circularimportuse/Right.java:18:13
   (global.set $f_$initialized__circularimportuse_Right (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ circularimportuse/Right.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -438,14 +398,11 @@
 (func $$getClassMetadata__java_lang_Class@circularimportuse.Right
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((circularimportuse.Right.$class == null)) (circularimportuse.Right.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|circularimpo...|_2(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__circularimportuse_Right) (ref.null $java.lang.Class))
    (then
-    ;; (circularimportuse.Right.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|circularimpo...|_2(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__circularimportuse_Right (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|circularimpo...|_2__java_lang_String (ref.func $$getString_|circularimpo...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return circularimportuse.Right.$class;
   (return (global.get $f_$class__circularimportuse_Right))
  )
 )
@@ -458,7 +415,6 @@
  (local $this (ref null $circularimportuse.Right))
  (local.set $this (ref.cast_static $circularimportuse.Right (local.get $this.untyped)))
  (block
-  ;; return circularimportuse.Right.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@circularimportuse.Right) ))
  )
 )

@@ -57,13 +57,10 @@
  ;;@ objcnametype/ObjCNameType.java:18:13
  (local $$instance (ref null $objcnametype.ObjCNameType))
  (block
-  ;; ObjCNameType $instance = new ObjCNameType.<init>(0);
   ;;@ objcnametype/ObjCNameType.java:18:13
   (local.set $$instance (struct.new $objcnametype.ObjCNameType (ref.as_non_null (global.get $objcnametype.ObjCNameType.vtable)) (ref.as_non_null (global.get $objcnametype.ObjCNameType.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ objcnametype/ObjCNameType.java:18:13
   (call $$ctor__void_$p_objcnametype_ObjCNameType@objcnametype.ObjCNameType (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ objcnametype/ObjCNameType.java:18:13
   (return (local.get $$instance))
  )
@@ -74,10 +71,8 @@
  (param $this (ref null $objcnametype.ObjCNameType))
  ;;@ objcnametype/ObjCNameType.java:18:13
  (block
-  ;; objcnametype.ObjCNameType.$clinit();
   ;;@ objcnametype/ObjCNameType.java:18:13
   (call $$clinit__void@objcnametype.ObjCNameType )
-  ;; Object.this.$ctor();
   ;;@ objcnametype/ObjCNameType.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -87,19 +82,15 @@
 (func $$clinit__void@objcnametype.ObjCNameType
  ;;@ objcnametype/ObjCNameType.java:18:13
  (block
-  ;; if (objcnametype.ObjCNameType.$initialized) return;
   ;;@ objcnametype/ObjCNameType.java:18:13
   (if (global.get $f_$initialized__objcnametype_ObjCNameType)
    (then
-    ;; return;
     ;;@ objcnametype/ObjCNameType.java:18:13
     (return )
    )
   )
-  ;; (objcnametype.ObjCNameType.$initialized = true);
   ;;@ objcnametype/ObjCNameType.java:18:13
   (global.set $f_$initialized__objcnametype_ObjCNameType (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ objcnametype/ObjCNameType.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -109,14 +100,11 @@
 (func $$getClassMetadata__java_lang_Class@objcnametype.ObjCNameType
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((objcnametype.ObjCNameType.$class == null)) (objcnametype.ObjCNameType.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|objcnametype...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__objcnametype_ObjCNameType) (ref.null $java.lang.Class))
    (then
-    ;; (objcnametype.ObjCNameType.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|objcnametype...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__objcnametype_ObjCNameType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|objcnametype...|__java_lang_String (ref.func $$getString_|objcnametype...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return objcnametype.ObjCNameType.$class;
   (return (global.get $f_$class__objcnametype_ObjCNameType))
  )
 )
@@ -129,7 +117,6 @@
  (local $this (ref null $objcnametype.ObjCNameType))
  (local.set $this (ref.cast_static $objcnametype.ObjCNameType (local.get $this.untyped)))
  (block
-  ;; return objcnametype.ObjCNameType.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@objcnametype.ObjCNameType) ))
  )
 )

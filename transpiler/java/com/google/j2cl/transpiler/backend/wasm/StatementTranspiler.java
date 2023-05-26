@@ -575,7 +575,6 @@ final class StatementTranspiler {
     }
 
     if (!(statement instanceof Block)) {
-      renderFirstLineAsComment(statement, builder);
       renderSourceMappingComment(statement.getSourcePosition(), builder);
     }
     statement.accept(new SourceTransformer());
@@ -590,18 +589,10 @@ final class StatementTranspiler {
               ";;@ %s:%d:%d",
               sourcePosition.getPackageRelativePath(),
               // Lines and column are zero based, but DevTools expects lines to be 1-based and
-              // columns to be zeor based.
+              // columns to be zero based.
               sourcePosition.getStartFilePosition().getLine() + 1,
               sourcePosition.getStartFilePosition().getColumn()));
     }
-  }
-
-  /** Render first line of the source code for {@code statement} as a Wasm comment. * */
-  private static void renderFirstLineAsComment(Statement s, SourceBuilder builder) {
-    String[] parts = s.toString().split("\n", 2);
-    builder.newLine();
-    builder.append(";; ");
-    builder.append(parts[0]);
   }
 
   private static int getSwitchCaseAsIntValue(SwitchCase switchCase) {

@@ -58,13 +58,10 @@
  ;;@ initmethoddispatch/InitMethodDispatch.java:21:2
  (local $$instance (ref null $initmethoddispatch.InitMethodDispatch))
  (block
-  ;; InitMethodDispatch<T> $instance = new InitMethodDispatch.<init>(0,1);
   ;;@ initmethoddispatch/InitMethodDispatch.java:21:2
   (local.set $$instance (struct.new $initmethoddispatch.InitMethodDispatch (ref.as_non_null (global.get $initmethoddispatch.InitMethodDispatch.vtable)) (ref.as_non_null (global.get $initmethoddispatch.InitMethodDispatch.itable)) (i32.const 0) (i32.const 1)))
-  ;; $instance.$ctor();
   ;;@ initmethoddispatch/InitMethodDispatch.java:21:2
   (call $$ctor__void_$p_initmethoddispatch_InitMethodDispatch@initmethoddispatch.InitMethodDispatch (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ initmethoddispatch/InitMethodDispatch.java:21:2
   (return (local.get $$instance))
  )
@@ -75,10 +72,8 @@
  (param $this (ref null $initmethoddispatch.InitMethodDispatch))
  ;;@ initmethoddispatch/InitMethodDispatch.java:21:2
  (block
-  ;; initmethoddispatch.InitMethodDispatch.$clinit();
   ;;@ initmethoddispatch/InitMethodDispatch.java:21:23
   (call $$clinit__void@initmethoddispatch.InitMethodDispatch )
-  ;; InitMethodDispatch.this.$ctor(1);
   ;;@ initmethoddispatch/InitMethodDispatch.java:22:4
   (call $$ctor__int__void_$p_initmethoddispatch_InitMethodDispatch@initmethoddispatch.InitMethodDispatch (ref.as_non_null (local.get $this))(i32.const 1))
  )
@@ -91,13 +86,10 @@
  ;;@ initmethoddispatch/InitMethodDispatch.java:27:2
  (local $$instance (ref null $initmethoddispatch.InitMethodDispatch))
  (block
-  ;; InitMethodDispatch<T> $instance = new InitMethodDispatch.<init>(0,i);
   ;;@ initmethoddispatch/InitMethodDispatch.java:27:2
   (local.set $$instance (struct.new $initmethoddispatch.InitMethodDispatch (ref.as_non_null (global.get $initmethoddispatch.InitMethodDispatch.vtable)) (ref.as_non_null (global.get $initmethoddispatch.InitMethodDispatch.itable)) (i32.const 0) (local.get $i)))
-  ;; $instance.$ctor(i);
   ;;@ initmethoddispatch/InitMethodDispatch.java:27:2
   (call $$ctor__int__void_$p_initmethoddispatch_InitMethodDispatch@initmethoddispatch.InitMethodDispatch (ref.as_non_null (local.get $$instance))(local.get $i))
-  ;; return $instance;
   ;;@ initmethoddispatch/InitMethodDispatch.java:27:2
   (return (local.get $$instance))
  )
@@ -109,10 +101,8 @@
  (param $i i32)
  ;;@ initmethoddispatch/InitMethodDispatch.java:27:2
  (block
-  ;; initmethoddispatch.InitMethodDispatch.$clinit();
   ;;@ initmethoddispatch/InitMethodDispatch.java:27:28
   (call $$clinit__void@initmethoddispatch.InitMethodDispatch )
-  ;; Object.this.$ctor();
   ;;@ initmethoddispatch/InitMethodDispatch.java:27:28
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -122,19 +112,15 @@
 (func $$clinit__void@initmethoddispatch.InitMethodDispatch
  ;;@ initmethoddispatch/InitMethodDispatch.java:18:6
  (block
-  ;; if (initmethoddispatch.InitMethodDispatch.$initialized) return;
   ;;@ initmethoddispatch/InitMethodDispatch.java:18:6
   (if (global.get $f_$initialized__initmethoddispatch_InitMethodDispatch)
    (then
-    ;; return;
     ;;@ initmethoddispatch/InitMethodDispatch.java:18:6
     (return )
    )
   )
-  ;; (initmethoddispatch.InitMethodDispatch.$initialized = true);
   ;;@ initmethoddispatch/InitMethodDispatch.java:18:6
   (global.set $f_$initialized__initmethoddispatch_InitMethodDispatch (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ initmethoddispatch/InitMethodDispatch.java:18:6
   (call $$clinit__void@java.lang.Object )
  )
@@ -144,14 +130,11 @@
 (func $$getClassMetadata__java_lang_Class@initmethoddispatch.InitMethodDispatch
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((initmethoddispatch.InitMethodDispatch.$class == null)) (initmethoddispatch.InitMethodDispatch.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|initmethoddi...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__initmethoddispatch_InitMethodDispatch) (ref.null $java.lang.Class))
    (then
-    ;; (initmethoddispatch.InitMethodDispatch.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|initmethoddi...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__initmethoddispatch_InitMethodDispatch (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|initmethoddi...|__java_lang_String (ref.func $$getString_|initmethoddi...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return initmethoddispatch.InitMethodDispatch.$class;
   (return (global.get $f_$class__initmethoddispatch_InitMethodDispatch))
  )
 )
@@ -164,7 +147,6 @@
  (local $this (ref null $initmethoddispatch.InitMethodDispatch))
  (local.set $this (ref.cast_static $initmethoddispatch.InitMethodDispatch (local.get $this.untyped)))
  (block
-  ;; return initmethoddispatch.InitMethodDispatch.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@initmethoddispatch.InitMethodDispatch) ))
  )
 )

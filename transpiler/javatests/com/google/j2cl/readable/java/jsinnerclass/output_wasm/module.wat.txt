@@ -166,13 +166,10 @@
  ;;@ jsinnerclass/Main.java:20:13
  (local $$instance (ref null $jsinnerclass.Main))
  (block
-  ;; Main $instance = new Main.<init>(0);
   ;;@ jsinnerclass/Main.java:20:13
   (local.set $$instance (struct.new $jsinnerclass.Main (ref.as_non_null (global.get $jsinnerclass.Main.vtable)) (ref.as_non_null (global.get $jsinnerclass.Main.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ jsinnerclass/Main.java:20:13
   (call $$ctor__void_$p_jsinnerclass_Main@jsinnerclass.Main (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ jsinnerclass/Main.java:20:13
   (return (local.get $$instance))
  )
@@ -183,10 +180,8 @@
  (param $this (ref null $jsinnerclass.Main))
  ;;@ jsinnerclass/Main.java:20:13
  (block
-  ;; jsinnerclass.Main.$clinit();
   ;;@ jsinnerclass/Main.java:20:13
   (call $$clinit__void@jsinnerclass.Main )
-  ;; Object.this.$ctor();
   ;;@ jsinnerclass/Main.java:20:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -197,7 +192,6 @@
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ jsinnerclass/Main.java:42:21
  (block
-  ;; jsinnerclass.Main.$clinit();
   ;;@ jsinnerclass/Main.java:42:42
   (call $$clinit__void@jsinnerclass.Main )
  )
@@ -207,19 +201,15 @@
 (func $$clinit__void@jsinnerclass.Main
  ;;@ jsinnerclass/Main.java:20:13
  (block
-  ;; if (jsinnerclass.Main.$initialized) return;
   ;;@ jsinnerclass/Main.java:20:13
   (if (global.get $f_$initialized__jsinnerclass_Main)
    (then
-    ;; return;
     ;;@ jsinnerclass/Main.java:20:13
     (return )
    )
   )
-  ;; (jsinnerclass.Main.$initialized = true);
   ;;@ jsinnerclass/Main.java:20:13
   (global.set $f_$initialized__jsinnerclass_Main (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ jsinnerclass/Main.java:20:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -229,14 +219,11 @@
 (func $$getClassMetadata__java_lang_Class@jsinnerclass.Main
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jsinnerclass.Main.$class == null)) (jsinnerclass.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsinnerclass...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__jsinnerclass_Main) (ref.null $java.lang.Class))
    (then
-    ;; (jsinnerclass.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsinnerclass...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__jsinnerclass_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsinnerclass...|__java_lang_String (ref.func $$getString_|jsinnerclass...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return jsinnerclass.Main.$class;
   (return (global.get $f_$class__jsinnerclass_Main))
  )
 )
@@ -249,7 +236,6 @@
  (local $this (ref null $jsinnerclass.Main))
  (local.set $this (ref.cast_static $jsinnerclass.Main (local.get $this.untyped)))
  (block
-  ;; return jsinnerclass.Main.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsinnerclass.Main) ))
  )
 )
@@ -264,13 +250,10 @@
  ;;@ jsinnerclass/Main.java:28:13
  (local $$instance (ref null $jsinnerclass.Main.Outer.Inner))
  (block
-  ;; Inner $instance = new Inner.<init>(0,$outer_this,0);
   ;;@ jsinnerclass/Main.java:28:13
   (local.set $$instance (struct.new $jsinnerclass.Main.Outer.Inner (ref.as_non_null (global.get $jsinnerclass.Main.Outer.Inner.vtable)) (ref.as_non_null (global.get $jsinnerclass.Main.Outer.Inner.itable)) (i32.const 0) (local.get $$outer_this) (i32.const 0)))
-  ;; $instance.$ctor($outer_this);
   ;;@ jsinnerclass/Main.java:28:13
   (call $$ctor__jsinnerclass_Main_Outer__void_$p_jsinnerclass_Main_Outer_Inner@jsinnerclass.Main.Outer.Inner (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;; return $instance;
   ;;@ jsinnerclass/Main.java:28:13
   (return (local.get $$instance))
  )
@@ -282,13 +265,10 @@
  (param $$outer_this (ref null $jsinnerclass.Main.Outer))
  ;;@ jsinnerclass/Main.java:28:13
  (block
-  ;; jsinnerclass.Main.Outer.Inner.$clinit();
   ;;@ jsinnerclass/Main.java:28:21
   (call $$clinit__void@jsinnerclass.Main.Outer.Inner )
-  ;; Object.this.$ctor();
   ;;@ jsinnerclass/Main.java:28:21
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;; (Inner.this.b = ($outer_this.a + 1));
   ;;@ jsinnerclass/Main.java:29:8
   (struct.set $jsinnerclass.Main.Outer.Inner $f_b__jsinnerclass_Main_Outer_Inner_(local.get $this) (i32.add (struct.get $jsinnerclass.Main.Outer $f_a__jsinnerclass_Main_Outer(local.get $$outer_this)) (i32.const 1)))
  )
@@ -303,7 +283,6 @@
  (local $this (ref null $jsinnerclass.Main.Outer.Inner))
  (local.set $this (ref.cast_static $jsinnerclass.Main.Outer.Inner (local.get $this.untyped)))
  (block
-  ;; return Inner.this.b;
   ;;@ jsinnerclass/Main.java:33:8
   (return (struct.get $jsinnerclass.Main.Outer.Inner $f_b__jsinnerclass_Main_Outer_Inner_(local.get $this)))
  )
@@ -314,19 +293,15 @@
 (func $$clinit__void@jsinnerclass.Main.Outer.Inner
  ;;@ jsinnerclass/Main.java:25:17
  (block
-  ;; if (jsinnerclass.Main.Outer.Inner.$initialized) return;
   ;;@ jsinnerclass/Main.java:25:17
   (if (global.get $f_$initialized__jsinnerclass_Main_Outer_Inner)
    (then
-    ;; return;
     ;;@ jsinnerclass/Main.java:25:17
     (return )
    )
   )
-  ;; (jsinnerclass.Main.Outer.Inner.$initialized = true);
   ;;@ jsinnerclass/Main.java:25:17
   (global.set $f_$initialized__jsinnerclass_Main_Outer_Inner (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ jsinnerclass/Main.java:25:17
   (call $$clinit__void@java.lang.Object )
  )
@@ -336,14 +311,11 @@
 (func $$getClassMetadata__java_lang_Class@jsinnerclass.Main.Outer.Inner
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jsinnerclass.Main.Outer.Inner.$class == null)) (jsinnerclass.Main.Outer.Inner.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsinnerclass...|_1(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__jsinnerclass_Main_Outer_Inner) (ref.null $java.lang.Class))
    (then
-    ;; (jsinnerclass.Main.Outer.Inner.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsinnerclass...|_1(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__jsinnerclass_Main_Outer_Inner (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsinnerclass...|_1__java_lang_String (ref.func $$getString_|jsinnerclass...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return jsinnerclass.Main.Outer.Inner.$class;
   (return (global.get $f_$class__jsinnerclass_Main_Outer_Inner))
  )
 )
@@ -356,7 +328,6 @@
  (local $this (ref null $jsinnerclass.Main.Outer.Inner))
  (local.set $this (ref.cast_static $jsinnerclass.Main.Outer.Inner (local.get $this.untyped)))
  (block
-  ;; return jsinnerclass.Main.Outer.Inner.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsinnerclass.Main.Outer.Inner) ))
  )
 )
@@ -370,13 +341,10 @@
  ;;@ jsinnerclass/Main.java:21:15
  (local $$instance (ref null $jsinnerclass.Main.Outer))
  (block
-  ;; Outer $instance = new Outer.<init>(0,2);
   ;;@ jsinnerclass/Main.java:21:15
   (local.set $$instance (struct.new $jsinnerclass.Main.Outer (ref.as_non_null (global.get $jsinnerclass.Main.Outer.vtable)) (ref.as_non_null (global.get $jsinnerclass.Main.Outer.itable)) (i32.const 0) (i32.const 2)))
-  ;; $instance.$ctor();
   ;;@ jsinnerclass/Main.java:21:15
   (call $$ctor__void_$p_jsinnerclass_Main_Outer@jsinnerclass.Main.Outer (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ jsinnerclass/Main.java:21:15
   (return (local.get $$instance))
  )
@@ -387,13 +355,10 @@
  (param $this (ref null $jsinnerclass.Main.Outer))
  ;;@ jsinnerclass/Main.java:21:15
  (block
-  ;; jsinnerclass.Main.Outer.$clinit();
   ;;@ jsinnerclass/Main.java:21:15
   (call $$clinit__void@jsinnerclass.Main.Outer )
-  ;; Object.this.$ctor();
   ;;@ jsinnerclass/Main.java:21:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;; Outer.this.$init();
   ;;@ jsinnerclass/Main.java:21:15
   (call $$init__void_$p_jsinnerclass_Main_Outer@jsinnerclass.Main.Outer (ref.as_non_null (local.get $this)))
  )
@@ -409,7 +374,6 @@
  (local $this (ref null $jsinnerclass.Main.Outer))
  (local.set $this (ref.cast_static $jsinnerclass.Main.Outer (local.get $this.untyped)))
  (block
-  ;; return ((Inner $qualifier = jsinnerclass.Main.Outer.Inner.$create(Outer.this),$qualifier.getB()) + Outer.this.a);
   ;;@ jsinnerclass/Main.java:38:6
   (return (i32.add (block (result i32)
    (local.set $$qualifier (call $$create__jsinnerclass_Main_Outer@jsinnerclass.Main.Outer.Inner (local.get $this)))
@@ -431,19 +395,15 @@
 (func $$clinit__void@jsinnerclass.Main.Outer
  ;;@ jsinnerclass/Main.java:21:15
  (block
-  ;; if (jsinnerclass.Main.Outer.$initialized) return;
   ;;@ jsinnerclass/Main.java:21:15
   (if (global.get $f_$initialized__jsinnerclass_Main_Outer)
    (then
-    ;; return;
     ;;@ jsinnerclass/Main.java:21:15
     (return )
    )
   )
-  ;; (jsinnerclass.Main.Outer.$initialized = true);
   ;;@ jsinnerclass/Main.java:21:15
   (global.set $f_$initialized__jsinnerclass_Main_Outer (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ jsinnerclass/Main.java:21:15
   (call $$clinit__void@java.lang.Object )
  )
@@ -453,14 +413,11 @@
 (func $$getClassMetadata__java_lang_Class@jsinnerclass.Main.Outer
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jsinnerclass.Main.Outer.$class == null)) (jsinnerclass.Main.Outer.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsinnerclass...|_2(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__jsinnerclass_Main_Outer) (ref.null $java.lang.Class))
    (then
-    ;; (jsinnerclass.Main.Outer.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsinnerclass...|_2(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__jsinnerclass_Main_Outer (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsinnerclass...|_2__java_lang_String (ref.func $$getString_|jsinnerclass...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return jsinnerclass.Main.Outer.$class;
   (return (global.get $f_$class__jsinnerclass_Main_Outer))
  )
 )
@@ -473,7 +430,6 @@
  (local $this (ref null $jsinnerclass.Main.Outer))
  (local.set $this (ref.cast_static $jsinnerclass.Main.Outer (local.get $this.untyped)))
  (block
-  ;; return jsinnerclass.Main.Outer.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsinnerclass.Main.Outer) ))
  )
 )

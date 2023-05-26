@@ -57,13 +57,10 @@
  ;;@ wasmentrypoints/WasmEntryPoints.java:18:13
  (local $$instance (ref null $wasmentrypoints.WasmEntryPoints))
  (block
-  ;; WasmEntryPoints $instance = new WasmEntryPoints.<init>(0);
   ;;@ wasmentrypoints/WasmEntryPoints.java:18:13
   (local.set $$instance (struct.new $wasmentrypoints.WasmEntryPoints (ref.as_non_null (global.get $wasmentrypoints.WasmEntryPoints.vtable)) (ref.as_non_null (global.get $wasmentrypoints.WasmEntryPoints.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ wasmentrypoints/WasmEntryPoints.java:18:13
   (call $$ctor__void_$p_wasmentrypoints_WasmEntryPoints@wasmentrypoints.WasmEntryPoints (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ wasmentrypoints/WasmEntryPoints.java:18:13
   (return (local.get $$instance))
  )
@@ -74,10 +71,8 @@
  (param $this (ref null $wasmentrypoints.WasmEntryPoints))
  ;;@ wasmentrypoints/WasmEntryPoints.java:18:13
  (block
-  ;; wasmentrypoints.WasmEntryPoints.$clinit();
   ;;@ wasmentrypoints/WasmEntryPoints.java:18:13
   (call $$clinit__void@wasmentrypoints.WasmEntryPoints )
-  ;; Object.this.$ctor();
   ;;@ wasmentrypoints/WasmEntryPoints.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -87,7 +82,6 @@
 (func $m_singleMatchedEntryPoint__void@wasmentrypoints.WasmEntryPoints (export "singleMatchedEntryPoint")
  ;;@ wasmentrypoints/WasmEntryPoints.java:20:21
  (block
-  ;; wasmentrypoints.WasmEntryPoints.$clinit();
   ;;@ wasmentrypoints/WasmEntryPoints.java:20:47
   (call $$clinit__void@wasmentrypoints.WasmEntryPoints )
  )
@@ -98,7 +92,6 @@
  (param $x i32)
  ;;@ wasmentrypoints/WasmEntryPoints.java:22:21
  (block
-  ;; wasmentrypoints.WasmEntryPoints.$clinit();
   ;;@ wasmentrypoints/WasmEntryPoints.java:22:54
   (call $$clinit__void@wasmentrypoints.WasmEntryPoints )
  )
@@ -109,7 +102,6 @@
  (param $y f32)
  ;;@ wasmentrypoints/WasmEntryPoints.java:24:21
  (block
-  ;; wasmentrypoints.WasmEntryPoints.$clinit();
   ;;@ wasmentrypoints/WasmEntryPoints.java:24:56
   (call $$clinit__void@wasmentrypoints.WasmEntryPoints )
  )
@@ -119,19 +111,15 @@
 (func $$clinit__void@wasmentrypoints.WasmEntryPoints
  ;;@ wasmentrypoints/WasmEntryPoints.java:18:13
  (block
-  ;; if (wasmentrypoints.WasmEntryPoints.$initialized) return;
   ;;@ wasmentrypoints/WasmEntryPoints.java:18:13
   (if (global.get $f_$initialized__wasmentrypoints_WasmEntryPoints)
    (then
-    ;; return;
     ;;@ wasmentrypoints/WasmEntryPoints.java:18:13
     (return )
    )
   )
-  ;; (wasmentrypoints.WasmEntryPoints.$initialized = true);
   ;;@ wasmentrypoints/WasmEntryPoints.java:18:13
   (global.set $f_$initialized__wasmentrypoints_WasmEntryPoints (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ wasmentrypoints/WasmEntryPoints.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -141,14 +129,11 @@
 (func $$getClassMetadata__java_lang_Class@wasmentrypoints.WasmEntryPoints
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((wasmentrypoints.WasmEntryPoints.$class == null)) (wasmentrypoints.WasmEntryPoints.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|wasmentrypoi...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__wasmentrypoints_WasmEntryPoints) (ref.null $java.lang.Class))
    (then
-    ;; (wasmentrypoints.WasmEntryPoints.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|wasmentrypoi...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__wasmentrypoints_WasmEntryPoints (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|wasmentrypoi...|__java_lang_String (ref.func $$getString_|wasmentrypoi...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return wasmentrypoints.WasmEntryPoints.$class;
   (return (global.get $f_$class__wasmentrypoints_WasmEntryPoints))
  )
 )
@@ -161,7 +146,6 @@
  (local $this (ref null $wasmentrypoints.WasmEntryPoints))
  (local.set $this (ref.cast_static $wasmentrypoints.WasmEntryPoints (local.get $this.untyped)))
  (block
-  ;; return wasmentrypoints.WasmEntryPoints.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@wasmentrypoints.WasmEntryPoints) ))
  )
 )

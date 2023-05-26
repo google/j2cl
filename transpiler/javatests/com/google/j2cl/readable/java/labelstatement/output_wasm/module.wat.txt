@@ -67,13 +67,10 @@
  ;;@ labelstatement/LabeledStatement.java:18:13
  (local $$instance (ref null $labelstatement.LabeledStatement))
  (block
-  ;; LabeledStatement $instance = new LabeledStatement.<init>(0);
   ;;@ labelstatement/LabeledStatement.java:18:13
   (local.set $$instance (struct.new $labelstatement.LabeledStatement (ref.as_non_null (global.get $labelstatement.LabeledStatement.vtable)) (ref.as_non_null (global.get $labelstatement.LabeledStatement.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ labelstatement/LabeledStatement.java:18:13
   (call $$ctor__void_$p_labelstatement_LabeledStatement@labelstatement.LabeledStatement (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ labelstatement/LabeledStatement.java:18:13
   (return (local.get $$instance))
  )
@@ -84,10 +81,8 @@
  (param $this (ref null $labelstatement.LabeledStatement))
  ;;@ labelstatement/LabeledStatement.java:18:13
  (block
-  ;; labelstatement.LabeledStatement.$clinit();
   ;;@ labelstatement/LabeledStatement.java:18:13
   (call $$clinit__void@labelstatement.LabeledStatement )
-  ;; Object.this.$ctor();
   ;;@ labelstatement/LabeledStatement.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -101,13 +96,11 @@
  (local $this (ref null $labelstatement.LabeledStatement))
  (local.set $this (ref.cast_static $labelstatement.LabeledStatement (local.get $this.untyped)))
  (block
-  ;; LABEL: for (;true;) {
   ;;@ labelstatement/LabeledStatement.java:20:4
   (block $LABEL.BREAK
    (loop
     (block $LABEL.CONTINUE
      (block
-      ;; break LABEL;
       ;;@ labelstatement/LabeledStatement.java:22:6
       (br $LABEL.BREAK)
      )
@@ -128,23 +121,18 @@
  (local $this (ref null $labelstatement.LabeledStatement))
  (local.set $this (ref.cast_static $labelstatement.LabeledStatement (local.get $this.untyped)))
  (block
-  ;; LABEL: LabeledStatement.this.foo();
   ;;@ labelstatement/LabeledStatement.java:27:4
   (block $LABEL.BREAK
-   ;; LabeledStatement.this.foo();
    ;;@ labelstatement/LabeledStatement.java:28:4
    (call $m_foo__void_$p_labelstatement_LabeledStatement@labelstatement.LabeledStatement (ref.as_non_null (local.get $this)))
   )
-  ;; LOOP: do {
   ;;@ labelstatement/LabeledStatement.java:33:4
   (block $LOOP.BREAK
    (loop
     (block $LOOP.CONTINUE
      (block
-      ;; LABEL: continue LOOP;
       ;;@ labelstatement/LabeledStatement.java:34:6
       (block $LABEL_1.BREAK
-       ;; continue LOOP;
        ;;@ labelstatement/LabeledStatement.java:35:6
        (br $LOOP.CONTINUE)
       )
@@ -153,10 +141,8 @@
     
    )
   )
-  ;; LABEL: return;
   ;;@ labelstatement/LabeledStatement.java:38:4
   (block $LABEL_2.BREAK
-   ;; return;
    ;;@ labelstatement/LabeledStatement.java:39:4
    (return )
   )
@@ -172,11 +158,9 @@
  (local $this (ref null $labelstatement.LabeledStatement))
  (local.set $this (ref.cast_static $labelstatement.LabeledStatement (local.get $this.untyped)))
  (block
-  ;; LABEL: {
   ;;@ labelstatement/LabeledStatement.java:43:4
   (block $LABEL.BREAK
    (block
-    ;; break LABEL;
     ;;@ labelstatement/LabeledStatement.java:45:6
     (br $LABEL.BREAK)
    )
@@ -193,15 +177,12 @@
  (local $this (ref null $labelstatement.LabeledStatement))
  (local.set $this (ref.cast_static $labelstatement.LabeledStatement (local.get $this.untyped)))
  (block
-  ;; LABEL: if (true) {
   ;;@ labelstatement/LabeledStatement.java:50:4
   (block $LABEL.BREAK
-   ;; if (true) {
    ;;@ labelstatement/LabeledStatement.java:51:4
    (if (i32.const 1)
     (then
      (block
-      ;; break LABEL;
       ;;@ labelstatement/LabeledStatement.java:52:6
       (br $LABEL.BREAK)
      )
@@ -220,22 +201,18 @@
  (local $this (ref null $labelstatement.LabeledStatement))
  (local.set $this (ref.cast_static $labelstatement.LabeledStatement (local.get $this.untyped)))
  (block
-  ;; LABEL: switch (0) {
   ;;@ labelstatement/LabeledStatement.java:57:4
   (block $LABEL.BREAK
-   ;; switch (0) {
    ;;@ labelstatement/LabeledStatement.java:58:4
    (block
     (block ;; evaluate expression and jump
      (br_table 0 1 (i32.const 0))
     )
     ;; case 0:
-    ;; if (true) {
     ;;@ labelstatement/LabeledStatement.java:60:8
     (if (i32.const 1)
      (then
       (block
-       ;; break LABEL;
        ;;@ labelstatement/LabeledStatement.java:61:10
        (br $LABEL.BREAK)
       )
@@ -259,19 +236,15 @@
 (func $$clinit__void@labelstatement.LabeledStatement
  ;;@ labelstatement/LabeledStatement.java:18:13
  (block
-  ;; if (labelstatement.LabeledStatement.$initialized) return;
   ;;@ labelstatement/LabeledStatement.java:18:13
   (if (global.get $f_$initialized__labelstatement_LabeledStatement)
    (then
-    ;; return;
     ;;@ labelstatement/LabeledStatement.java:18:13
     (return )
    )
   )
-  ;; (labelstatement.LabeledStatement.$initialized = true);
   ;;@ labelstatement/LabeledStatement.java:18:13
   (global.set $f_$initialized__labelstatement_LabeledStatement (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ labelstatement/LabeledStatement.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -281,14 +254,11 @@
 (func $$getClassMetadata__java_lang_Class@labelstatement.LabeledStatement
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((labelstatement.LabeledStatement.$class == null)) (labelstatement.LabeledStatement.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|labelstateme...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__labelstatement_LabeledStatement) (ref.null $java.lang.Class))
    (then
-    ;; (labelstatement.LabeledStatement.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|labelstateme...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__labelstatement_LabeledStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|labelstateme...|__java_lang_String (ref.func $$getString_|labelstateme...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return labelstatement.LabeledStatement.$class;
   (return (global.get $f_$class__labelstatement_LabeledStatement))
  )
 )
@@ -301,7 +271,6 @@
  (local $this (ref null $labelstatement.LabeledStatement))
  (local.set $this (ref.cast_static $labelstatement.LabeledStatement (local.get $this.untyped)))
  (block
-  ;; return labelstatement.LabeledStatement.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@labelstatement.LabeledStatement) ))
  )
 )

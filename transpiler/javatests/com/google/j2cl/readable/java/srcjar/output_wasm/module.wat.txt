@@ -108,13 +108,10 @@
  ;;@ srcjar/Foo.java:21:13
  (local $$instance (ref null $srcjar.Foo))
  (block
-  ;; Foo $instance = new Foo.<init>(0);
   ;;@ srcjar/Foo.java:21:13
   (local.set $$instance (struct.new $srcjar.Foo (ref.as_non_null (global.get $srcjar.Foo.vtable)) (ref.as_non_null (global.get $srcjar.Foo.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ srcjar/Foo.java:21:13
   (call $$ctor__void_$p_srcjar_Foo@srcjar.Foo (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ srcjar/Foo.java:21:13
   (return (local.get $$instance))
  )
@@ -125,10 +122,8 @@
  (param $this (ref null $srcjar.Foo))
  ;;@ srcjar/Foo.java:21:13
  (block
-  ;; srcjar.Foo.$clinit();
   ;;@ srcjar/Foo.java:21:13
   (call $$clinit__void@srcjar.Foo )
-  ;; Object.this.$ctor();
   ;;@ srcjar/Foo.java:21:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -138,19 +133,15 @@
 (func $$clinit__void@srcjar.Foo
  ;;@ srcjar/Foo.java:21:13
  (block
-  ;; if (srcjar.Foo.$initialized) return;
   ;;@ srcjar/Foo.java:21:13
   (if (global.get $f_$initialized__srcjar_Foo)
    (then
-    ;; return;
     ;;@ srcjar/Foo.java:21:13
     (return )
    )
   )
-  ;; (srcjar.Foo.$initialized = true);
   ;;@ srcjar/Foo.java:21:13
   (global.set $f_$initialized__srcjar_Foo (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ srcjar/Foo.java:21:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -160,14 +151,11 @@
 (func $$getClassMetadata__java_lang_Class@srcjar.Foo
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((srcjar.Foo.$class == null)) (srcjar.Foo.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|srcjar.Foo|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__srcjar_Foo) (ref.null $java.lang.Class))
    (then
-    ;; (srcjar.Foo.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|srcjar.Foo|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__srcjar_Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|srcjar.Foo|__java_lang_String (ref.func $$getString_|srcjar.Foo|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return srcjar.Foo.$class;
   (return (global.get $f_$class__srcjar_Foo))
  )
 )
@@ -180,7 +168,6 @@
  (local $this (ref null $srcjar.Foo))
  (local.set $this (ref.cast_static $srcjar.Foo (local.get $this.untyped)))
  (block
-  ;; return srcjar.Foo.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@srcjar.Foo) ))
  )
 )
@@ -194,13 +181,10 @@
  ;;@ srcjar/Srcjar.java:18:13
  (local $$instance (ref null $srcjar.Srcjar))
  (block
-  ;; Srcjar $instance = new Srcjar.<init>(0);
   ;;@ srcjar/Srcjar.java:18:13
   (local.set $$instance (struct.new $srcjar.Srcjar (ref.as_non_null (global.get $srcjar.Srcjar.vtable)) (ref.as_non_null (global.get $srcjar.Srcjar.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ srcjar/Srcjar.java:18:13
   (call $$ctor__void_$p_srcjar_Srcjar@srcjar.Srcjar (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ srcjar/Srcjar.java:18:13
   (return (local.get $$instance))
  )
@@ -211,10 +195,8 @@
  (param $this (ref null $srcjar.Srcjar))
  ;;@ srcjar/Srcjar.java:18:13
  (block
-  ;; srcjar.Srcjar.$clinit();
   ;;@ srcjar/Srcjar.java:18:13
   (call $$clinit__void@srcjar.Srcjar )
-  ;; Object.this.$ctor();
   ;;@ srcjar/Srcjar.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -225,10 +207,8 @@
  ;;@ srcjar/Srcjar.java:20:21
  (local $foo (ref null $srcjar.Foo))
  (block
-  ;; srcjar.Srcjar.$clinit();
   ;;@ srcjar/Srcjar.java:20:28
   (call $$clinit__void@srcjar.Srcjar )
-  ;; Foo foo = srcjar.Foo.$create();
   ;;@ srcjar/Srcjar.java:21:4
   (local.set $foo (call $$create__@srcjar.Foo ))
  )
@@ -238,19 +218,15 @@
 (func $$clinit__void@srcjar.Srcjar
  ;;@ srcjar/Srcjar.java:18:13
  (block
-  ;; if (srcjar.Srcjar.$initialized) return;
   ;;@ srcjar/Srcjar.java:18:13
   (if (global.get $f_$initialized__srcjar_Srcjar)
    (then
-    ;; return;
     ;;@ srcjar/Srcjar.java:18:13
     (return )
    )
   )
-  ;; (srcjar.Srcjar.$initialized = true);
   ;;@ srcjar/Srcjar.java:18:13
   (global.set $f_$initialized__srcjar_Srcjar (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ srcjar/Srcjar.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -260,14 +236,11 @@
 (func $$getClassMetadata__java_lang_Class@srcjar.Srcjar
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((srcjar.Srcjar.$class == null)) (srcjar.Srcjar.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|srcjar.Srcjar|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__srcjar_Srcjar) (ref.null $java.lang.Class))
    (then
-    ;; (srcjar.Srcjar.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|srcjar.Srcjar|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__srcjar_Srcjar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|srcjar.Srcjar|__java_lang_String (ref.func $$getString_|srcjar.Srcjar|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return srcjar.Srcjar.$class;
   (return (global.get $f_$class__srcjar_Srcjar))
  )
 )
@@ -280,7 +253,6 @@
  (local $this (ref null $srcjar.Srcjar))
  (local.set $this (ref.cast_static $srcjar.Srcjar (local.get $this.untyped)))
  (block
-  ;; return srcjar.Srcjar.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@srcjar.Srcjar) ))
  )
 )

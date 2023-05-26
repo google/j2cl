@@ -57,13 +57,10 @@
  ;;@ publicconstructor/PublicConstructor.java:19:9
  (local $$instance (ref null $publicconstructor.PublicConstructor))
  (block
-  ;; PublicConstructor $instance = new PublicConstructor.<init>(0);
   ;;@ publicconstructor/PublicConstructor.java:19:9
   (local.set $$instance (struct.new $publicconstructor.PublicConstructor (ref.as_non_null (global.get $publicconstructor.PublicConstructor.vtable)) (ref.as_non_null (global.get $publicconstructor.PublicConstructor.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ publicconstructor/PublicConstructor.java:19:9
   (call $$ctor__void_$p_publicconstructor_PublicConstructor@publicconstructor.PublicConstructor (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ publicconstructor/PublicConstructor.java:19:9
   (return (local.get $$instance))
  )
@@ -74,10 +71,8 @@
  (param $this (ref null $publicconstructor.PublicConstructor))
  ;;@ publicconstructor/PublicConstructor.java:19:9
  (block
-  ;; publicconstructor.PublicConstructor.$clinit();
   ;;@ publicconstructor/PublicConstructor.java:19:29
   (call $$clinit__void@publicconstructor.PublicConstructor )
-  ;; Object.this.$ctor();
   ;;@ publicconstructor/PublicConstructor.java:19:29
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -87,19 +82,15 @@
 (func $$clinit__void@publicconstructor.PublicConstructor
  ;;@ publicconstructor/PublicConstructor.java:18:13
  (block
-  ;; if (publicconstructor.PublicConstructor.$initialized) return;
   ;;@ publicconstructor/PublicConstructor.java:18:13
   (if (global.get $f_$initialized__publicconstructor_PublicConstructor)
    (then
-    ;; return;
     ;;@ publicconstructor/PublicConstructor.java:18:13
     (return )
    )
   )
-  ;; (publicconstructor.PublicConstructor.$initialized = true);
   ;;@ publicconstructor/PublicConstructor.java:18:13
   (global.set $f_$initialized__publicconstructor_PublicConstructor (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ publicconstructor/PublicConstructor.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -109,14 +100,11 @@
 (func $$getClassMetadata__java_lang_Class@publicconstructor.PublicConstructor
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((publicconstructor.PublicConstructor.$class == null)) (publicconstructor.PublicConstructor.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|publicconstr...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__publicconstructor_PublicConstructor) (ref.null $java.lang.Class))
    (then
-    ;; (publicconstructor.PublicConstructor.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|publicconstr...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__publicconstructor_PublicConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|publicconstr...|__java_lang_String (ref.func $$getString_|publicconstr...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return publicconstructor.PublicConstructor.$class;
   (return (global.get $f_$class__publicconstructor_PublicConstructor))
  )
 )
@@ -129,7 +117,6 @@
  (local $this (ref null $publicconstructor.PublicConstructor))
  (local.set $this (ref.cast_static $publicconstructor.PublicConstructor (local.get $this.untyped)))
  (block
-  ;; return publicconstructor.PublicConstructor.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@publicconstructor.PublicConstructor) ))
  )
 )

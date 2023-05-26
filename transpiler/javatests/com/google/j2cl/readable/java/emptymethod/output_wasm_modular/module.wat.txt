@@ -56,14 +56,11 @@
 (func $$getString_|emptymethod....|__java_lang_String@javaemul.internal.StringPool
  (result (ref null $java.lang.String))
  (block
-  ;; if ((javaemul.internal.StringPool.$string_|emptymethod....| == null)) (javaemul.internal.StringPool.$string_|emptymethod....| = java.lang.String.fromJsString('emptymethod.EmptyMethod'));
   (if (ref.eq (global.get $f_$string_|emptymethod....|__javaemul_internal_StringPool) (ref.null $java.lang.String))
    (then
-    ;; (javaemul.internal.StringPool.$string_|emptymethod....| = java.lang.String.fromJsString('emptymethod.EmptyMethod'));
     (global.set $f_$string_|emptymethod....|__javaemul_internal_StringPool (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "emptymethod.EmptyMethod")))
    )
   )
-  ;; return javaemul.internal.StringPool.$string_|emptymethod....|;
   (return (global.get $f_$string_|emptymethod....|__javaemul_internal_StringPool))
  )
 )
@@ -76,10 +73,8 @@
  (result (ref null $emptymethod.EmptyMethod))
  ;;@ emptymethod/EmptyMethod.java:18:13
  (block
-  ;; emptymethod.EmptyMethod.$clinit();
   ;;@ emptymethod/EmptyMethod.java:18:13
   (call $$clinit__void@emptymethod.EmptyMethod )
-  ;; Object.<init>();
   ;;@ emptymethod/EmptyMethod.java:18:13
   (drop (call $m_<init>__@java.lang.Object ))
  )
@@ -90,7 +85,6 @@
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ emptymethod/EmptyMethod.java:19:21
  (block
-  ;; emptymethod.EmptyMethod.$clinit();
   ;;@ emptymethod/EmptyMethod.java:19:41
   (call $$clinit__void@emptymethod.EmptyMethod )
  )
@@ -100,19 +94,15 @@
 (func $$clinit__void@emptymethod.EmptyMethod
  ;;@ emptymethod/EmptyMethod.java:18:13
  (block
-  ;; if (emptymethod.EmptyMethod.$initialized) return;
   ;;@ emptymethod/EmptyMethod.java:18:13
   (if (global.get $f_$initialized__emptymethod_EmptyMethod)
    (then
-    ;; return;
     ;;@ emptymethod/EmptyMethod.java:18:13
     (return )
    )
   )
-  ;; (emptymethod.EmptyMethod.$initialized = true);
   ;;@ emptymethod/EmptyMethod.java:18:13
   (global.set $f_$initialized__emptymethod_EmptyMethod (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ emptymethod/EmptyMethod.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -122,14 +112,11 @@
 (func $$getClassMetadata__java_lang_Class@emptymethod.EmptyMethod
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((emptymethod.EmptyMethod.$class == null)) (emptymethod.EmptyMethod.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|emptymethod....|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__emptymethod_EmptyMethod) (ref.null $java.lang.Class))
    (then
-    ;; (emptymethod.EmptyMethod.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|emptymethod....|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__emptymethod_EmptyMethod (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|emptymethod....|__java_lang_String (ref.func $$getString_|emptymethod....|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return emptymethod.EmptyMethod.$class;
   (return (global.get $f_$class__emptymethod_EmptyMethod))
  )
 )
@@ -142,7 +129,6 @@
  (local $this (ref null $emptymethod.EmptyMethod))
  (local.set $this (ref.cast_static $emptymethod.EmptyMethod (local.get $this.untyped)))
  (block
-  ;; return emptymethod.EmptyMethod.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@emptymethod.EmptyMethod) ))
  )
 )

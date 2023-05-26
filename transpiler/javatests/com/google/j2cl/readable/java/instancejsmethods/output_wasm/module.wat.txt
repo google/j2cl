@@ -240,16 +240,13 @@
 (func $$clinit__void@instancejsmethods.MyInterface
  ;;@ instancejsmethods/Main.java:20:10
  (block
-  ;; if (instancejsmethods.MyInterface.$initialized) return;
   ;;@ instancejsmethods/Main.java:20:10
   (if (global.get $f_$initialized__instancejsmethods_MyInterface)
    (then
-    ;; return;
     ;;@ instancejsmethods/Main.java:20:10
     (return )
    )
   )
-  ;; (instancejsmethods.MyInterface.$initialized = true);
   ;;@ instancejsmethods/Main.java:20:10
   (global.set $f_$initialized__instancejsmethods_MyInterface (i32.const 1))
  )
@@ -259,14 +256,11 @@
 (func $$getClassMetadata__java_lang_Class@instancejsmethods.MyInterface
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((instancejsmethods.MyInterface.$class == null)) (instancejsmethods.MyInterface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|instancejsme...|()));
   (if (ref.eq (global.get $f_$class__instancejsmethods_MyInterface) (ref.null $java.lang.Class))
    (then
-    ;; (instancejsmethods.MyInterface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|instancejsme...|()));
     (global.set $f_$class__instancejsmethods_MyInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instancejsme...|__java_lang_String (ref.func $$getString_|instancejsme...|__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return instancejsmethods.MyInterface.$class;
   (return (global.get $f_$class__instancejsmethods_MyInterface))
  )
 )
@@ -279,13 +273,10 @@
  ;;@ instancejsmethods/Main.java:24:6
  (local $$instance (ref null $instancejsmethods.SuperParent))
  (block
-  ;; SuperParent $instance = new SuperParent.<init>(0);
   ;;@ instancejsmethods/Main.java:24:6
   (local.set $$instance (struct.new $instancejsmethods.SuperParent (ref.as_non_null (global.get $instancejsmethods.SuperParent.vtable)) (ref.as_non_null (global.get $instancejsmethods.SuperParent.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ instancejsmethods/Main.java:24:6
   (call $$ctor__void_$p_instancejsmethods_SuperParent@instancejsmethods.SuperParent (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ instancejsmethods/Main.java:24:6
   (return (local.get $$instance))
  )
@@ -296,10 +287,8 @@
  (param $this (ref null $instancejsmethods.SuperParent))
  ;;@ instancejsmethods/Main.java:24:6
  (block
-  ;; instancejsmethods.SuperParent.$clinit();
   ;;@ instancejsmethods/Main.java:24:6
   (call $$clinit__void@instancejsmethods.SuperParent )
-  ;; Object.this.$ctor();
   ;;@ instancejsmethods/Main.java:24:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -316,7 +305,6 @@
  (local $this (ref null $instancejsmethods.SuperParent))
  (local.set $this (ref.cast_static $instancejsmethods.SuperParent (local.get $this.untyped)))
  (block
-  ;; return ((a + b) + 111);
   ;;@ instancejsmethods/Main.java:26:4
   (return (i32.add (i32.add (local.get $a) (local.get $b)) (i32.const 111)))
  )
@@ -334,7 +322,6 @@
  (local $this (ref null $instancejsmethods.SuperParent))
  (local.set $this (ref.cast_static $instancejsmethods.SuperParent (local.get $this.untyped)))
  (block
-  ;; return ((a * b) + 222);
   ;;@ instancejsmethods/Main.java:30:4
   (return (i32.add (i32.mul (local.get $a) (local.get $b)) (i32.const 222)))
  )
@@ -345,19 +332,15 @@
 (func $$clinit__void@instancejsmethods.SuperParent
  ;;@ instancejsmethods/Main.java:24:6
  (block
-  ;; if (instancejsmethods.SuperParent.$initialized) return;
   ;;@ instancejsmethods/Main.java:24:6
   (if (global.get $f_$initialized__instancejsmethods_SuperParent)
    (then
-    ;; return;
     ;;@ instancejsmethods/Main.java:24:6
     (return )
    )
   )
-  ;; (instancejsmethods.SuperParent.$initialized = true);
   ;;@ instancejsmethods/Main.java:24:6
   (global.set $f_$initialized__instancejsmethods_SuperParent (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ instancejsmethods/Main.java:24:6
   (call $$clinit__void@java.lang.Object )
  )
@@ -367,14 +350,11 @@
 (func $$getClassMetadata__java_lang_Class@instancejsmethods.SuperParent
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((instancejsmethods.SuperParent.$class == null)) (instancejsmethods.SuperParent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|instancejsme...|_1(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__instancejsmethods_SuperParent) (ref.null $java.lang.Class))
    (then
-    ;; (instancejsmethods.SuperParent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|instancejsme...|_1(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__instancejsmethods_SuperParent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instancejsme...|_1__java_lang_String (ref.func $$getString_|instancejsme...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return instancejsmethods.SuperParent.$class;
   (return (global.get $f_$class__instancejsmethods_SuperParent))
  )
 )
@@ -387,7 +367,6 @@
  (local $this (ref null $instancejsmethods.SuperParent))
  (local.set $this (ref.cast_static $instancejsmethods.SuperParent (local.get $this.untyped)))
  (block
-  ;; return instancejsmethods.SuperParent.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@instancejsmethods.SuperParent) ))
  )
 )
@@ -401,13 +380,10 @@
  ;;@ instancejsmethods/Main.java:114:13
  (local $$instance (ref null $instancejsmethods.Main))
  (block
-  ;; Main $instance = new Main.<init>(0);
   ;;@ instancejsmethods/Main.java:114:13
   (local.set $$instance (struct.new $instancejsmethods.Main (ref.as_non_null (global.get $instancejsmethods.Main.vtable)) (ref.as_non_null (global.get $instancejsmethods.Main.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ instancejsmethods/Main.java:114:13
   (call $$ctor__void_$p_instancejsmethods_Main@instancejsmethods.Main (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ instancejsmethods/Main.java:114:13
   (return (local.get $$instance))
  )
@@ -418,10 +394,8 @@
  (param $this (ref null $instancejsmethods.Main))
  ;;@ instancejsmethods/Main.java:114:13
  (block
-  ;; instancejsmethods.Main.$clinit();
   ;;@ instancejsmethods/Main.java:114:13
   (call $$clinit__void@instancejsmethods.Main )
-  ;; Object.this.$ctor();
   ;;@ instancejsmethods/Main.java:114:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -441,49 +415,34 @@
  (local $this (ref null $instancejsmethods.Main))
  (local.set $this (ref.cast_static $instancejsmethods.Main (local.get $this.untyped)))
  (block
-  ;; SuperParent sp = instancejsmethods.SuperParent.$create();
   ;;@ instancejsmethods/Main.java:116:4
   (local.set $sp (call $$create__@instancejsmethods.SuperParent ))
-  ;; SuperParent p = instancejsmethods.Parent.$create();
   ;;@ instancejsmethods/Main.java:117:4
   (local.set $p (call $$create__@instancejsmethods.Parent ))
-  ;; SuperParent c = instancejsmethods.Child.$create();
   ;;@ instancejsmethods/Main.java:118:4
   (local.set $c (call $$create__@instancejsmethods.Child ))
-  ;; Parent pp = instancejsmethods.Parent.$create();
   ;;@ instancejsmethods/Main.java:119:4
   (local.set $pp (call $$create__@instancejsmethods.Parent ))
-  ;; Parent cc = instancejsmethods.Child.$create();
   ;;@ instancejsmethods/Main.java:120:4
   (local.set $cc (call $$create__@instancejsmethods.Child ))
-  ;; MyInterface intf = instancejsmethods.Child.$create();
   ;;@ instancejsmethods/Main.java:121:4
   (local.set $intf (call $$create__@instancejsmethods.Child ))
-  ;; sp.fun(12,35);
   ;;@ instancejsmethods/Main.java:123:4
   (drop (call_ref $function.m_fun__int__int__int (ref.as_non_null (local.get $sp))(i32.const 12)(i32.const 35)(struct.get $instancejsmethods.SuperParent.vtable $m_fun__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $sp)))))
-  ;; sp.bar(6,7);
   ;;@ instancejsmethods/Main.java:124:4
   (drop (call_ref $function.m_bar__int__int__int (ref.as_non_null (local.get $sp))(i32.const 6)(i32.const 7)(struct.get $instancejsmethods.SuperParent.vtable $m_bar__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $sp)))))
-  ;; p.fun(12,35);
   ;;@ instancejsmethods/Main.java:125:4
   (drop (call_ref $function.m_fun__int__int__int (ref.as_non_null (local.get $p))(i32.const 12)(i32.const 35)(struct.get $instancejsmethods.SuperParent.vtable $m_fun__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $p)))))
-  ;; p.bar(6,7);
   ;;@ instancejsmethods/Main.java:126:4
   (drop (call_ref $function.m_bar__int__int__int (ref.as_non_null (local.get $p))(i32.const 6)(i32.const 7)(struct.get $instancejsmethods.SuperParent.vtable $m_bar__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $p)))))
-  ;; c.fun(12,35);
   ;;@ instancejsmethods/Main.java:127:4
   (drop (call_ref $function.m_fun__int__int__int (ref.as_non_null (local.get $c))(i32.const 12)(i32.const 35)(struct.get $instancejsmethods.SuperParent.vtable $m_fun__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $c)))))
-  ;; c.bar(6,7);
   ;;@ instancejsmethods/Main.java:128:4
   (drop (call_ref $function.m_bar__int__int__int (ref.as_non_null (local.get $c))(i32.const 6)(i32.const 7)(struct.get $instancejsmethods.SuperParent.vtable $m_bar__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $c)))))
-  ;; pp.foo(1);
   ;;@ instancejsmethods/Main.java:129:4
   (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $pp))(i32.const 1)(struct.get $instancejsmethods.Parent.vtable $m_foo__int__int (struct.get $instancejsmethods.Parent $vtable(local.get $pp)))))
-  ;; cc.foo(1);
   ;;@ instancejsmethods/Main.java:130:4
   (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $cc))(i32.const 1)(struct.get $instancejsmethods.Parent.vtable $m_foo__int__int (struct.get $instancejsmethods.Parent $vtable(local.get $cc)))))
-  ;; intf.intfFoo();
   ;;@ instancejsmethods/Main.java:131:4
   (drop (call_ref $function.m_intfFoo__int (ref.as_non_null (local.get $intf))(struct.get $instancejsmethods.MyInterface.vtable $m_intfFoo__int (ref.cast_static $instancejsmethods.MyInterface.vtable (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $intf)))))))
  )
@@ -497,43 +456,30 @@
  (local $p (ref null $instancejsmethods.Parent))
  (local $c (ref null $instancejsmethods.Child))
  (block
-  ;; instancejsmethods.Main.$clinit();
   ;;@ instancejsmethods/Main.java:134:46
   (call $$clinit__void@instancejsmethods.Main )
-  ;; SuperParent sp = instancejsmethods.SuperParent.$create();
   ;;@ instancejsmethods/Main.java:135:4
   (local.set $sp (call $$create__@instancejsmethods.SuperParent ))
-  ;; Parent p = instancejsmethods.Parent.$create();
   ;;@ instancejsmethods/Main.java:136:4
   (local.set $p (call $$create__@instancejsmethods.Parent ))
-  ;; Child c = instancejsmethods.Child.$create();
   ;;@ instancejsmethods/Main.java:137:4
   (local.set $c (call $$create__@instancejsmethods.Child ))
-  ;; sp.fun(12,35);
   ;;@ instancejsmethods/Main.java:139:4
   (drop (call_ref $function.m_fun__int__int__int (ref.as_non_null (local.get $sp))(i32.const 12)(i32.const 35)(struct.get $instancejsmethods.SuperParent.vtable $m_fun__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $sp)))))
-  ;; sp.bar(6,7);
   ;;@ instancejsmethods/Main.java:140:4
   (drop (call_ref $function.m_bar__int__int__int (ref.as_non_null (local.get $sp))(i32.const 6)(i32.const 7)(struct.get $instancejsmethods.SuperParent.vtable $m_bar__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $sp)))))
-  ;; p.fun(12,35);
   ;;@ instancejsmethods/Main.java:141:4
   (drop (call_ref $function.m_fun__int__int__int (ref.as_non_null (local.get $p))(i32.const 12)(i32.const 35)(struct.get $instancejsmethods.Parent.vtable $m_fun__int__int__int (struct.get $instancejsmethods.Parent $vtable(local.get $p)))))
-  ;; p.bar(6,7);
   ;;@ instancejsmethods/Main.java:142:4
   (drop (call_ref $function.m_bar__int__int__int (ref.as_non_null (local.get $p))(i32.const 6)(i32.const 7)(struct.get $instancejsmethods.Parent.vtable $m_bar__int__int__int (struct.get $instancejsmethods.Parent $vtable(local.get $p)))))
-  ;; p.foo(1);
   ;;@ instancejsmethods/Main.java:143:4
   (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $p))(i32.const 1)(struct.get $instancejsmethods.Parent.vtable $m_foo__int__int (struct.get $instancejsmethods.Parent $vtable(local.get $p)))))
-  ;; c.fun(12,35);
   ;;@ instancejsmethods/Main.java:144:4
   (drop (call_ref $function.m_fun__int__int__int (ref.as_non_null (local.get $c))(i32.const 12)(i32.const 35)(struct.get $instancejsmethods.Child.vtable $m_fun__int__int__int (struct.get $instancejsmethods.Child $vtable(local.get $c)))))
-  ;; c.bar(6,7);
   ;;@ instancejsmethods/Main.java:145:4
   (drop (call_ref $function.m_bar__int__int__int (ref.as_non_null (local.get $c))(i32.const 6)(i32.const 7)(struct.get $instancejsmethods.Child.vtable $m_bar__int__int__int (struct.get $instancejsmethods.Child $vtable(local.get $c)))))
-  ;; c.foo(1);
   ;;@ instancejsmethods/Main.java:146:4
   (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $c))(i32.const 1)(struct.get $instancejsmethods.Child.vtable $m_foo__int__int (struct.get $instancejsmethods.Child $vtable(local.get $c)))))
-  ;; c.intfFoo();
   ;;@ instancejsmethods/Main.java:147:4
   (drop (call_ref $function.m_intfFoo__int (ref.as_non_null (local.get $c))(struct.get $instancejsmethods.Child.vtable $m_intfFoo__int (struct.get $instancejsmethods.Child $vtable(local.get $c)))))
  )
@@ -543,19 +489,15 @@
 (func $$clinit__void@instancejsmethods.Main
  ;;@ instancejsmethods/Main.java:114:13
  (block
-  ;; if (instancejsmethods.Main.$initialized) return;
   ;;@ instancejsmethods/Main.java:114:13
   (if (global.get $f_$initialized__instancejsmethods_Main)
    (then
-    ;; return;
     ;;@ instancejsmethods/Main.java:114:13
     (return )
    )
   )
-  ;; (instancejsmethods.Main.$initialized = true);
   ;;@ instancejsmethods/Main.java:114:13
   (global.set $f_$initialized__instancejsmethods_Main (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ instancejsmethods/Main.java:114:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -565,14 +507,11 @@
 (func $$getClassMetadata__java_lang_Class@instancejsmethods.Main
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((instancejsmethods.Main.$class == null)) (instancejsmethods.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|instancejsme...|_4(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__instancejsmethods_Main) (ref.null $java.lang.Class))
    (then
-    ;; (instancejsmethods.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|instancejsme...|_4(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__instancejsmethods_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instancejsme...|_4__java_lang_String (ref.func $$getString_|instancejsme...|_4__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return instancejsmethods.Main.$class;
   (return (global.get $f_$class__instancejsmethods_Main))
  )
 )
@@ -585,7 +524,6 @@
  (local $this (ref null $instancejsmethods.Main))
  (local.set $this (ref.cast_static $instancejsmethods.Main (local.get $this.untyped)))
  (block
-  ;; return instancejsmethods.Main.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@instancejsmethods.Main) ))
  )
 )
@@ -599,13 +537,10 @@
  ;;@ instancejsmethods/Main.java:34:6
  (local $$instance (ref null $instancejsmethods.Parent))
  (block
-  ;; Parent $instance = new Parent.<init>(0);
   ;;@ instancejsmethods/Main.java:34:6
   (local.set $$instance (struct.new $instancejsmethods.Parent (ref.as_non_null (global.get $instancejsmethods.Parent.vtable)) (ref.as_non_null (global.get $instancejsmethods.Parent.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ instancejsmethods/Main.java:34:6
   (call $$ctor__void_$p_instancejsmethods_Parent@instancejsmethods.Parent (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ instancejsmethods/Main.java:34:6
   (return (local.get $$instance))
  )
@@ -616,10 +551,8 @@
  (param $this (ref null $instancejsmethods.Parent))
  ;;@ instancejsmethods/Main.java:34:6
  (block
-  ;; instancejsmethods.Parent.$clinit();
   ;;@ instancejsmethods/Main.java:34:6
   (call $$clinit__void@instancejsmethods.Parent )
-  ;; SuperParent.this.$ctor();
   ;;@ instancejsmethods/Main.java:34:6
   (call $$ctor__void_$p_instancejsmethods_SuperParent@instancejsmethods.SuperParent (ref.as_non_null (local.get $this)))
  )
@@ -636,7 +569,6 @@
  (local $this (ref null $instancejsmethods.Parent))
  (local.set $this (ref.cast_static $instancejsmethods.Parent (local.get $this.untyped)))
  (block
-  ;; return (a + b);
   ;;@ instancejsmethods/Main.java:43:4
   (return (i32.add (local.get $a) (local.get $b)))
  )
@@ -654,7 +586,6 @@
  (local $this (ref null $instancejsmethods.Parent))
  (local.set $this (ref.cast_static $instancejsmethods.Parent (local.get $this.untyped)))
  (block
-  ;; return (a * b);
   ;;@ instancejsmethods/Main.java:54:4
   (return (i32.mul (local.get $a) (local.get $b)))
  )
@@ -671,7 +602,6 @@
  (local $this (ref null $instancejsmethods.Parent))
  (local.set $this (ref.cast_static $instancejsmethods.Parent (local.get $this.untyped)))
  (block
-  ;; return a;
   ;;@ instancejsmethods/Main.java:64:4
   (return (local.get $a))
  )
@@ -682,19 +612,15 @@
 (func $$clinit__void@instancejsmethods.Parent
  ;;@ instancejsmethods/Main.java:34:6
  (block
-  ;; if (instancejsmethods.Parent.$initialized) return;
   ;;@ instancejsmethods/Main.java:34:6
   (if (global.get $f_$initialized__instancejsmethods_Parent)
    (then
-    ;; return;
     ;;@ instancejsmethods/Main.java:34:6
     (return )
    )
   )
-  ;; (instancejsmethods.Parent.$initialized = true);
   ;;@ instancejsmethods/Main.java:34:6
   (global.set $f_$initialized__instancejsmethods_Parent (i32.const 1))
-  ;; instancejsmethods.SuperParent.$clinit();
   ;;@ instancejsmethods/Main.java:34:6
   (call $$clinit__void@instancejsmethods.SuperParent )
  )
@@ -704,14 +630,11 @@
 (func $$getClassMetadata__java_lang_Class@instancejsmethods.Parent
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((instancejsmethods.Parent.$class == null)) (instancejsmethods.Parent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|instancejsme...|_2(),instancejsmethods.SuperParent.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__instancejsmethods_Parent) (ref.null $java.lang.Class))
    (then
-    ;; (instancejsmethods.Parent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|instancejsme...|_2(),instancejsmethods.SuperParent.$getClassMetadata()));
     (global.set $f_$class__instancejsmethods_Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instancejsme...|_2__java_lang_String (ref.func $$getString_|instancejsme...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@instancejsmethods.SuperParent) )))
    )
   )
-  ;; return instancejsmethods.Parent.$class;
   (return (global.get $f_$class__instancejsmethods_Parent))
  )
 )
@@ -724,7 +647,6 @@
  (local $this (ref null $instancejsmethods.Parent))
  (local.set $this (ref.cast_static $instancejsmethods.Parent (local.get $this.untyped)))
  (block
-  ;; return instancejsmethods.Parent.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@instancejsmethods.Parent) ))
  )
 )
@@ -738,13 +660,10 @@
  ;;@ instancejsmethods/Main.java:68:6
  (local $$instance (ref null $instancejsmethods.Child))
  (block
-  ;; Child $instance = new Child.<init>(0);
   ;;@ instancejsmethods/Main.java:68:6
   (local.set $$instance (struct.new $instancejsmethods.Child (ref.as_non_null (global.get $instancejsmethods.Child.vtable)) (ref.as_non_null (global.get $instancejsmethods.Child.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ instancejsmethods/Main.java:68:6
   (call $$ctor__void_$p_instancejsmethods_Child@instancejsmethods.Child (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ instancejsmethods/Main.java:68:6
   (return (local.get $$instance))
  )
@@ -755,10 +674,8 @@
  (param $this (ref null $instancejsmethods.Child))
  ;;@ instancejsmethods/Main.java:68:6
  (block
-  ;; instancejsmethods.Child.$clinit();
   ;;@ instancejsmethods/Main.java:68:6
   (call $$clinit__void@instancejsmethods.Child )
-  ;; Parent.this.$ctor();
   ;;@ instancejsmethods/Main.java:68:6
   (call $$ctor__void_$p_instancejsmethods_Parent@instancejsmethods.Parent (ref.as_non_null (local.get $this)))
  )
@@ -775,7 +692,6 @@
  (local $this (ref null $instancejsmethods.Child))
  (local.set $this (ref.cast_static $instancejsmethods.Child (local.get $this.untyped)))
  (block
-  ;; return ((a + b) + 1);
   ;;@ instancejsmethods/Main.java:77:4
   (return (i32.add (i32.add (local.get $a) (local.get $b)) (i32.const 1)))
  )
@@ -793,7 +709,6 @@
  (local $this (ref null $instancejsmethods.Child))
  (local.set $this (ref.cast_static $instancejsmethods.Child (local.get $this.untyped)))
  (block
-  ;; return ((a * b) + 1);
   ;;@ instancejsmethods/Main.java:88:4
   (return (i32.add (i32.mul (local.get $a) (local.get $b)) (i32.const 1)))
  )
@@ -810,7 +725,6 @@
  (local $this (ref null $instancejsmethods.Child))
  (local.set $this (ref.cast_static $instancejsmethods.Child (local.get $this.untyped)))
  (block
-  ;; return a;
   ;;@ instancejsmethods/Main.java:99:4
   (return (local.get $a))
  )
@@ -826,7 +740,6 @@
  (local $this (ref null $instancejsmethods.Child))
  (local.set $this (ref.cast_static $instancejsmethods.Child (local.get $this.untyped)))
  (block
-  ;; return 1;
   ;;@ instancejsmethods/Main.java:110:4
   (return (i32.const 1))
  )
@@ -837,19 +750,15 @@
 (func $$clinit__void@instancejsmethods.Child
  ;;@ instancejsmethods/Main.java:68:6
  (block
-  ;; if (instancejsmethods.Child.$initialized) return;
   ;;@ instancejsmethods/Main.java:68:6
   (if (global.get $f_$initialized__instancejsmethods_Child)
    (then
-    ;; return;
     ;;@ instancejsmethods/Main.java:68:6
     (return )
    )
   )
-  ;; (instancejsmethods.Child.$initialized = true);
   ;;@ instancejsmethods/Main.java:68:6
   (global.set $f_$initialized__instancejsmethods_Child (i32.const 1))
-  ;; instancejsmethods.Parent.$clinit();
   ;;@ instancejsmethods/Main.java:68:6
   (call $$clinit__void@instancejsmethods.Parent )
  )
@@ -859,14 +768,11 @@
 (func $$getClassMetadata__java_lang_Class@instancejsmethods.Child
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((instancejsmethods.Child.$class == null)) (instancejsmethods.Child.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|instancejsme...|_3(),instancejsmethods.Parent.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__instancejsmethods_Child) (ref.null $java.lang.Class))
    (then
-    ;; (instancejsmethods.Child.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|instancejsme...|_3(),instancejsmethods.Parent.$getClassMetadata()));
     (global.set $f_$class__instancejsmethods_Child (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instancejsme...|_3__java_lang_String (ref.func $$getString_|instancejsme...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@instancejsmethods.Parent) )))
    )
   )
-  ;; return instancejsmethods.Child.$class;
   (return (global.get $f_$class__instancejsmethods_Child))
  )
 )
@@ -879,7 +785,6 @@
  (local $this (ref null $instancejsmethods.Child))
  (local.set $this (ref.cast_static $instancejsmethods.Child (local.get $this.untyped)))
  (block
-  ;; return instancejsmethods.Child.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@instancejsmethods.Child) ))
  )
 )

@@ -61,13 +61,10 @@
  ;;@ instancefieldaccesslevels/InstanceFieldAccessLevels.java:18:13
  (local $$instance (ref null $instancefieldaccesslevels.InstanceFieldAccessLevels))
  (block
-  ;; InstanceFieldAccessLevels $instance = new InstanceFieldAccessLevels.<init>(0,0,false,null,0);
   ;;@ instancefieldaccesslevels/InstanceFieldAccessLevels.java:18:13
   (local.set $$instance (struct.new $instancefieldaccesslevels.InstanceFieldAccessLevels (ref.as_non_null (global.get $instancefieldaccesslevels.InstanceFieldAccessLevels.vtable)) (ref.as_non_null (global.get $instancefieldaccesslevels.InstanceFieldAccessLevels.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ instancefieldaccesslevels/InstanceFieldAccessLevels.java:18:13
   (call $$ctor__void_$p_instancefieldaccesslevels_InstanceFieldAccessLevels@instancefieldaccesslevels.InstanceFieldAccessLevels (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ instancefieldaccesslevels/InstanceFieldAccessLevels.java:18:13
   (return (local.get $$instance))
  )
@@ -78,10 +75,8 @@
  (param $this (ref null $instancefieldaccesslevels.InstanceFieldAccessLevels))
  ;;@ instancefieldaccesslevels/InstanceFieldAccessLevels.java:18:13
  (block
-  ;; instancefieldaccesslevels.InstanceFieldAccessLevels.$clinit();
   ;;@ instancefieldaccesslevels/InstanceFieldAccessLevels.java:18:13
   (call $$clinit__void@instancefieldaccesslevels.InstanceFieldAccessLevels )
-  ;; Object.this.$ctor();
   ;;@ instancefieldaccesslevels/InstanceFieldAccessLevels.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -91,19 +86,15 @@
 (func $$clinit__void@instancefieldaccesslevels.InstanceFieldAccessLevels
  ;;@ instancefieldaccesslevels/InstanceFieldAccessLevels.java:18:13
  (block
-  ;; if (instancefieldaccesslevels.InstanceFieldAccessLevels.$initialized) return;
   ;;@ instancefieldaccesslevels/InstanceFieldAccessLevels.java:18:13
   (if (global.get $f_$initialized__instancefieldaccesslevels_InstanceFieldAccessLevels)
    (then
-    ;; return;
     ;;@ instancefieldaccesslevels/InstanceFieldAccessLevels.java:18:13
     (return )
    )
   )
-  ;; (instancefieldaccesslevels.InstanceFieldAccessLevels.$initialized = true);
   ;;@ instancefieldaccesslevels/InstanceFieldAccessLevels.java:18:13
   (global.set $f_$initialized__instancefieldaccesslevels_InstanceFieldAccessLevels (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ instancefieldaccesslevels/InstanceFieldAccessLevels.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -113,14 +104,11 @@
 (func $$getClassMetadata__java_lang_Class@instancefieldaccesslevels.InstanceFieldAccessLevels
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((instancefieldaccesslevels.InstanceFieldAccessLevels.$class == null)) (instancefieldaccesslevels.InstanceFieldAccessLevels.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|instancefiel...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__instancefieldaccesslevels_InstanceFieldAccessLevels) (ref.null $java.lang.Class))
    (then
-    ;; (instancefieldaccesslevels.InstanceFieldAccessLevels.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|instancefiel...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__instancefieldaccesslevels_InstanceFieldAccessLevels (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instancefiel...|__java_lang_String (ref.func $$getString_|instancefiel...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return instancefieldaccesslevels.InstanceFieldAccessLevels.$class;
   (return (global.get $f_$class__instancefieldaccesslevels_InstanceFieldAccessLevels))
  )
 )
@@ -133,7 +121,6 @@
  (local $this (ref null $instancefieldaccesslevels.InstanceFieldAccessLevels))
  (local.set $this (ref.cast_static $instancefieldaccesslevels.InstanceFieldAccessLevels (local.get $this.untyped)))
  (block
-  ;; return instancefieldaccesslevels.InstanceFieldAccessLevels.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@instancefieldaccesslevels.InstanceFieldAccessLevels) ))
  )
 )

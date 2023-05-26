@@ -161,13 +161,10 @@
  ;;@ packageinfo/Outer.java:21:13
  (local $$instance (ref null $packageinfo.Outer))
  (block
-  ;; Outer $instance = new Outer.<init>(0);
   ;;@ packageinfo/Outer.java:21:13
   (local.set $$instance (struct.new $packageinfo.Outer (ref.as_non_null (global.get $packageinfo.Outer.vtable)) (ref.as_non_null (global.get $packageinfo.Outer.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ packageinfo/Outer.java:21:13
   (call $$ctor__void_$p_packageinfo_Outer@packageinfo.Outer (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ packageinfo/Outer.java:21:13
   (return (local.get $$instance))
  )
@@ -178,10 +175,8 @@
  (param $this (ref null $packageinfo.Outer))
  ;;@ packageinfo/Outer.java:21:13
  (block
-  ;; packageinfo.Outer.$clinit();
   ;;@ packageinfo/Outer.java:21:13
   (call $$clinit__void@packageinfo.Outer )
-  ;; Object.this.$ctor();
   ;;@ packageinfo/Outer.java:21:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -191,19 +186,15 @@
 (func $$clinit__void@packageinfo.Outer
  ;;@ packageinfo/Outer.java:21:13
  (block
-  ;; if (packageinfo.Outer.$initialized) return;
   ;;@ packageinfo/Outer.java:21:13
   (if (global.get $f_$initialized__packageinfo_Outer)
    (then
-    ;; return;
     ;;@ packageinfo/Outer.java:21:13
     (return )
    )
   )
-  ;; (packageinfo.Outer.$initialized = true);
   ;;@ packageinfo/Outer.java:21:13
   (global.set $f_$initialized__packageinfo_Outer (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ packageinfo/Outer.java:21:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -213,14 +204,11 @@
 (func $$getClassMetadata__java_lang_Class@packageinfo.Outer
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((packageinfo.Outer.$class == null)) (packageinfo.Outer.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|packageinfo....|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__packageinfo_Outer) (ref.null $java.lang.Class))
    (then
-    ;; (packageinfo.Outer.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|packageinfo....|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__packageinfo_Outer (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|packageinfo....|__java_lang_String (ref.func $$getString_|packageinfo....|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return packageinfo.Outer.$class;
   (return (global.get $f_$class__packageinfo_Outer))
  )
 )
@@ -233,7 +221,6 @@
  (local $this (ref null $packageinfo.Outer))
  (local.set $this (ref.cast_static $packageinfo.Outer (local.get $this.untyped)))
  (block
-  ;; return packageinfo.Outer.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@packageinfo.Outer) ))
  )
 )
@@ -248,13 +235,10 @@
  ;;@ packageinfo/Outer.java:24:15
  (local $$instance (ref null $packageinfo.Outer.Inner))
  (block
-  ;; Inner $instance = new Inner.<init>(0,$outer_this);
   ;;@ packageinfo/Outer.java:24:15
   (local.set $$instance (struct.new $packageinfo.Outer.Inner (ref.as_non_null (global.get $packageinfo.Outer.Inner.vtable)) (ref.as_non_null (global.get $packageinfo.Outer.Inner.itable)) (i32.const 0) (local.get $$outer_this)))
-  ;; $instance.$ctor($outer_this);
   ;;@ packageinfo/Outer.java:24:15
   (call $$ctor__packageinfo_Outer__void_$p_packageinfo_Outer_Inner@packageinfo.Outer.Inner (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;; return $instance;
   ;;@ packageinfo/Outer.java:24:15
   (return (local.get $$instance))
  )
@@ -266,10 +250,8 @@
  (param $$outer_this (ref null $packageinfo.Outer))
  ;;@ packageinfo/Outer.java:24:15
  (block
-  ;; packageinfo.Outer.Inner.$clinit();
   ;;@ packageinfo/Outer.java:24:15
   (call $$clinit__void@packageinfo.Outer.Inner )
-  ;; Object.this.$ctor();
   ;;@ packageinfo/Outer.java:24:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -279,19 +261,15 @@
 (func $$clinit__void@packageinfo.Outer.Inner
  ;;@ packageinfo/Outer.java:24:15
  (block
-  ;; if (packageinfo.Outer.Inner.$initialized) return;
   ;;@ packageinfo/Outer.java:24:15
   (if (global.get $f_$initialized__packageinfo_Outer_Inner)
    (then
-    ;; return;
     ;;@ packageinfo/Outer.java:24:15
     (return )
    )
   )
-  ;; (packageinfo.Outer.Inner.$initialized = true);
   ;;@ packageinfo/Outer.java:24:15
   (global.set $f_$initialized__packageinfo_Outer_Inner (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ packageinfo/Outer.java:24:15
   (call $$clinit__void@java.lang.Object )
  )
@@ -301,14 +279,11 @@
 (func $$getClassMetadata__java_lang_Class@packageinfo.Outer.Inner
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((packageinfo.Outer.Inner.$class == null)) (packageinfo.Outer.Inner.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|packageinfo....|_1(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__packageinfo_Outer_Inner) (ref.null $java.lang.Class))
    (then
-    ;; (packageinfo.Outer.Inner.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|packageinfo....|_1(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__packageinfo_Outer_Inner (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|packageinfo....|_1__java_lang_String (ref.func $$getString_|packageinfo....|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return packageinfo.Outer.Inner.$class;
   (return (global.get $f_$class__packageinfo_Outer_Inner))
  )
 )
@@ -321,7 +296,6 @@
  (local $this (ref null $packageinfo.Outer.Inner))
  (local.set $this (ref.cast_static $packageinfo.Outer.Inner (local.get $this.untyped)))
  (block
-  ;; return packageinfo.Outer.Inner.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@packageinfo.Outer.Inner) ))
  )
 )
@@ -335,13 +309,10 @@
  ;;@ packageinfo/subpackage/Foo.java:20:13
  (local $$instance (ref null $packageinfo.subpackage.Foo))
  (block
-  ;; Foo $instance = new Foo.<init>(0,null);
   ;;@ packageinfo/subpackage/Foo.java:20:13
   (local.set $$instance (struct.new $packageinfo.subpackage.Foo (ref.as_non_null (global.get $packageinfo.subpackage.Foo.vtable)) (ref.as_non_null (global.get $packageinfo.subpackage.Foo.itable)) (i32.const 0) (ref.null $packageinfo.Outer)))
-  ;; $instance.$ctor();
   ;;@ packageinfo/subpackage/Foo.java:20:13
   (call $$ctor__void_$p_packageinfo_subpackage_Foo@packageinfo.subpackage.Foo (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ packageinfo/subpackage/Foo.java:20:13
   (return (local.get $$instance))
  )
@@ -352,13 +323,10 @@
  (param $this (ref null $packageinfo.subpackage.Foo))
  ;;@ packageinfo/subpackage/Foo.java:20:13
  (block
-  ;; packageinfo.subpackage.Foo.$clinit();
   ;;@ packageinfo/subpackage/Foo.java:20:13
   (call $$clinit__void@packageinfo.subpackage.Foo )
-  ;; Object.this.$ctor();
   ;;@ packageinfo/subpackage/Foo.java:20:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;; Foo.this.$init();
   ;;@ packageinfo/subpackage/Foo.java:20:13
   (call $$init__void_$p_packageinfo_subpackage_Foo@packageinfo.subpackage.Foo (ref.as_non_null (local.get $this)))
  )
@@ -369,7 +337,6 @@
  (param $this (ref null $packageinfo.subpackage.Foo))
  ;;@ packageinfo/subpackage/Foo.java:20:13
  (block
-  ;; (Foo.this.outer = packageinfo.Outer.$create());
   ;;@ packageinfo/subpackage/Foo.java:22:2
   (struct.set $packageinfo.subpackage.Foo $f_outer__packageinfo_subpackage_Foo(local.get $this) (call $$create__@packageinfo.Outer ))
  )
@@ -379,19 +346,15 @@
 (func $$clinit__void@packageinfo.subpackage.Foo
  ;;@ packageinfo/subpackage/Foo.java:20:13
  (block
-  ;; if (packageinfo.subpackage.Foo.$initialized) return;
   ;;@ packageinfo/subpackage/Foo.java:20:13
   (if (global.get $f_$initialized__packageinfo_subpackage_Foo)
    (then
-    ;; return;
     ;;@ packageinfo/subpackage/Foo.java:20:13
     (return )
    )
   )
-  ;; (packageinfo.subpackage.Foo.$initialized = true);
   ;;@ packageinfo/subpackage/Foo.java:20:13
   (global.set $f_$initialized__packageinfo_subpackage_Foo (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ packageinfo/subpackage/Foo.java:20:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -401,14 +364,11 @@
 (func $$getClassMetadata__java_lang_Class@packageinfo.subpackage.Foo
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((packageinfo.subpackage.Foo.$class == null)) (packageinfo.subpackage.Foo.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|packageinfo....|_2(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__packageinfo_subpackage_Foo) (ref.null $java.lang.Class))
    (then
-    ;; (packageinfo.subpackage.Foo.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|packageinfo....|_2(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__packageinfo_subpackage_Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|packageinfo....|_2__java_lang_String (ref.func $$getString_|packageinfo....|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return packageinfo.subpackage.Foo.$class;
   (return (global.get $f_$class__packageinfo_subpackage_Foo))
  )
 )
@@ -421,7 +381,6 @@
  (local $this (ref null $packageinfo.subpackage.Foo))
  (local.set $this (ref.cast_static $packageinfo.subpackage.Foo (local.get $this.untyped)))
  (block
-  ;; return packageinfo.subpackage.Foo.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@packageinfo.subpackage.Foo) ))
  )
 )

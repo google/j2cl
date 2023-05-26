@@ -57,13 +57,10 @@
  ;;@ emptyclass/EmptyClass.java:18:13
  (local $$instance (ref null $emptyclass.EmptyClass))
  (block
-  ;; EmptyClass $instance = new EmptyClass.<init>(0);
   ;;@ emptyclass/EmptyClass.java:18:13
   (local.set $$instance (struct.new $emptyclass.EmptyClass (ref.as_non_null (global.get $emptyclass.EmptyClass.vtable)) (ref.as_non_null (global.get $emptyclass.EmptyClass.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ emptyclass/EmptyClass.java:18:13
   (call $$ctor__void_$p_emptyclass_EmptyClass@emptyclass.EmptyClass (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ emptyclass/EmptyClass.java:18:13
   (return (local.get $$instance))
  )
@@ -74,10 +71,8 @@
  (param $this (ref null $emptyclass.EmptyClass))
  ;;@ emptyclass/EmptyClass.java:18:13
  (block
-  ;; emptyclass.EmptyClass.$clinit();
   ;;@ emptyclass/EmptyClass.java:18:13
   (call $$clinit__void@emptyclass.EmptyClass )
-  ;; Object.this.$ctor();
   ;;@ emptyclass/EmptyClass.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -87,19 +82,15 @@
 (func $$clinit__void@emptyclass.EmptyClass
  ;;@ emptyclass/EmptyClass.java:18:13
  (block
-  ;; if (emptyclass.EmptyClass.$initialized) return;
   ;;@ emptyclass/EmptyClass.java:18:13
   (if (global.get $f_$initialized__emptyclass_EmptyClass)
    (then
-    ;; return;
     ;;@ emptyclass/EmptyClass.java:18:13
     (return )
    )
   )
-  ;; (emptyclass.EmptyClass.$initialized = true);
   ;;@ emptyclass/EmptyClass.java:18:13
   (global.set $f_$initialized__emptyclass_EmptyClass (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ emptyclass/EmptyClass.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -109,14 +100,11 @@
 (func $$getClassMetadata__java_lang_Class@emptyclass.EmptyClass
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((emptyclass.EmptyClass.$class == null)) (emptyclass.EmptyClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|emptyclass.E...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__emptyclass_EmptyClass) (ref.null $java.lang.Class))
    (then
-    ;; (emptyclass.EmptyClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|emptyclass.E...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__emptyclass_EmptyClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|emptyclass.E...|__java_lang_String (ref.func $$getString_|emptyclass.E...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return emptyclass.EmptyClass.$class;
   (return (global.get $f_$class__emptyclass_EmptyClass))
  )
 )
@@ -129,7 +117,6 @@
  (local $this (ref null $emptyclass.EmptyClass))
  (local.set $this (ref.cast_static $emptyclass.EmptyClass (local.get $this.untyped)))
  (block
-  ;; return emptyclass.EmptyClass.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@emptyclass.EmptyClass) ))
  )
 )

@@ -175,7 +175,6 @@
  (param $t (ref null $java.lang.Object))
  ;;@ interfaces/Main.java:26:17
  (block
-  ;; Interface.this.privateMethod(t);
   ;;@ interfaces/Main.java:27:6
   (call $m_privateMethod__java_lang_Object__void_$p_interfaces_Main_Interface@interfaces.Main.Interface (ref.as_non_null (local.get $this))(local.get $t))
  )
@@ -195,7 +194,6 @@
 (func $m_staticInterfaceMethod__void@interfaces.Main.Interface
  ;;@ interfaces/Main.java:32:16
  (block
-  ;; interfaces.Main.Interface.$clinit();
   ;;@ interfaces/Main.java:32:40
   (call $$clinit__void@interfaces.Main.Interface )
  )
@@ -205,16 +203,13 @@
 (func $$clinit__void@interfaces.Main.Interface
  ;;@ interfaces/Main.java:20:12
  (block
-  ;; if (interfaces.Main.Interface.$initialized) return;
   ;;@ interfaces/Main.java:20:12
   (if (global.get $f_$initialized__interfaces_Main_Interface)
    (then
-    ;; return;
     ;;@ interfaces/Main.java:20:12
     (return )
    )
   )
-  ;; (interfaces.Main.Interface.$initialized = true);
   ;;@ interfaces/Main.java:20:12
   (global.set $f_$initialized__interfaces_Main_Interface (i32.const 1))
  )
@@ -224,14 +219,11 @@
 (func $$getClassMetadata__java_lang_Class@interfaces.Main.Interface
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((interfaces.Main.Interface.$class == null)) (interfaces.Main.Interface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|interfaces.M...|()));
   (if (ref.eq (global.get $f_$class__interfaces_Main_Interface) (ref.null $java.lang.Class))
    (then
-    ;; (interfaces.Main.Interface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|interfaces.M...|()));
     (global.set $f_$class__interfaces_Main_Interface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.M...|__java_lang_String (ref.func $$getString_|interfaces.M...|__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return interfaces.Main.Interface.$class;
   (return (global.get $f_$class__interfaces_Main_Interface))
  )
 )
@@ -244,7 +236,6 @@
  (param $s (ref null $java.lang.String))
  ;;@ interfaces/Main.java:36:17
  (block
-  ;; SubInterface.this.defaultMethod(s);
   ;;@ interfaces/Main.java:37:6
   (call $m_defaultMethod__java_lang_Object__void@interfaces.Main.Interface (ref.as_non_null (local.get $this))(local.get $s))
  )
@@ -255,19 +246,15 @@
 (func $$clinit__void@interfaces.Main.SubInterface
  ;;@ interfaces/Main.java:35:12
  (block
-  ;; if (interfaces.Main.SubInterface.$initialized) return;
   ;;@ interfaces/Main.java:35:12
   (if (global.get $f_$initialized__interfaces_Main_SubInterface)
    (then
-    ;; return;
     ;;@ interfaces/Main.java:35:12
     (return )
    )
   )
-  ;; (interfaces.Main.SubInterface.$initialized = true);
   ;;@ interfaces/Main.java:35:12
   (global.set $f_$initialized__interfaces_Main_SubInterface (i32.const 1))
-  ;; interfaces.Main.Interface.$clinit();
   ;;@ interfaces/Main.java:35:12
   (call $$clinit__void@interfaces.Main.Interface )
  )
@@ -277,14 +264,11 @@
 (func $$getClassMetadata__java_lang_Class@interfaces.Main.SubInterface
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((interfaces.Main.SubInterface.$class == null)) (interfaces.Main.SubInterface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|interfaces.M...|_1()));
   (if (ref.eq (global.get $f_$class__interfaces_Main_SubInterface) (ref.null $java.lang.Class))
    (then
-    ;; (interfaces.Main.SubInterface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|interfaces.M...|_1()));
     (global.set $f_$class__interfaces_Main_SubInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.M...|_1__java_lang_String (ref.func $$getString_|interfaces.M...|_1__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return interfaces.Main.SubInterface.$class;
   (return (global.get $f_$class__interfaces_Main_SubInterface))
  )
 )
@@ -297,13 +281,10 @@
  ;;@ interfaces/Main.java:18:13
  (local $$instance (ref null $interfaces.Main))
  (block
-  ;; Main $instance = new Main.<init>(0);
   ;;@ interfaces/Main.java:18:13
   (local.set $$instance (struct.new $interfaces.Main (ref.as_non_null (global.get $interfaces.Main.vtable)) (ref.as_non_null (global.get $interfaces.Main.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ interfaces/Main.java:18:13
   (call $$ctor__void_$p_interfaces_Main@interfaces.Main (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ interfaces/Main.java:18:13
   (return (local.get $$instance))
  )
@@ -314,10 +295,8 @@
  (param $this (ref null $interfaces.Main))
  ;;@ interfaces/Main.java:18:13
  (block
-  ;; interfaces.Main.$clinit();
   ;;@ interfaces/Main.java:18:13
   (call $$clinit__void@interfaces.Main )
-  ;; Object.this.$ctor();
   ;;@ interfaces/Main.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -333,19 +312,14 @@
  (local $this (ref null $interfaces.Main))
  (local.set $this (ref.cast_static $interfaces.Main (local.get $this.untyped)))
  (block
-  ;; Interface<String> i = interfaces.Main.Implementor.$create(Main.this);
   ;;@ interfaces/Main.java:50:4
   (local.set $i (call $$create__interfaces_Main@interfaces.Main.Implementor (local.get $this)))
-  ;; i.interfaceMethod();
   ;;@ interfaces/Main.java:51:4
   (call_ref $function.m_interfaceMethod__void (ref.as_non_null (local.get $i))(struct.get $interfaces.Main.Interface.vtable $m_interfaceMethod__void (ref.cast_static $interfaces.Main.Interface.vtable (struct.get $itable $slot1 (struct.get $java.lang.Object $itable (local.get $i))))))
-  ;; i.defaultMethod(null);
   ;;@ interfaces/Main.java:52:4
   (call_ref $function.m_defaultMethod__java_lang_Object__void (ref.as_non_null (local.get $i))(ref.null $java.lang.String)(struct.get $interfaces.Main.Interface.vtable $m_defaultMethod__java_lang_Object__void (ref.cast_static $interfaces.Main.Interface.vtable (struct.get $itable $slot1 (struct.get $java.lang.Object $itable (local.get $i))))))
-  ;; interfaces.Main.Interface.staticInterfaceMethod();
   ;;@ interfaces/Main.java:53:4
   (call $m_staticInterfaceMethod__void@interfaces.Main.Interface )
-  ;; int x = ((interfaces.Main.Implementor.$create(Main.this),1) + 2);
   ;;@ interfaces/Main.java:54:4
   (local.set $x (i32.add (block (result i32)
    (drop (call $$create__interfaces_Main@interfaces.Main.Implementor (local.get $this)))
@@ -359,19 +333,15 @@
 (func $$clinit__void@interfaces.Main
  ;;@ interfaces/Main.java:18:13
  (block
-  ;; if (interfaces.Main.$initialized) return;
   ;;@ interfaces/Main.java:18:13
   (if (global.get $f_$initialized__interfaces_Main)
    (then
-    ;; return;
     ;;@ interfaces/Main.java:18:13
     (return )
    )
   )
-  ;; (interfaces.Main.$initialized = true);
   ;;@ interfaces/Main.java:18:13
   (global.set $f_$initialized__interfaces_Main (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ interfaces/Main.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -381,14 +351,11 @@
 (func $$getClassMetadata__java_lang_Class@interfaces.Main
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((interfaces.Main.$class == null)) (interfaces.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|interfaces.Main|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__interfaces_Main) (ref.null $java.lang.Class))
    (then
-    ;; (interfaces.Main.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|interfaces.Main|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__interfaces_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.Main|__java_lang_String (ref.func $$getString_|interfaces.Main|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return interfaces.Main.$class;
   (return (global.get $f_$class__interfaces_Main))
  )
 )
@@ -401,7 +368,6 @@
  (local $this (ref null $interfaces.Main))
  (local.set $this (ref.cast_static $interfaces.Main (local.get $this.untyped)))
  (block
-  ;; return interfaces.Main.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@interfaces.Main) ))
  )
 )
@@ -416,13 +382,10 @@
  ;;@ interfaces/Main.java:41:8
  (local $$instance (ref null $interfaces.Main.Implementor))
  (block
-  ;; Implementor $instance = new Implementor.<init>(0,$outer_this);
   ;;@ interfaces/Main.java:41:8
   (local.set $$instance (struct.new $interfaces.Main.Implementor (ref.as_non_null (global.get $interfaces.Main.Implementor.vtable)) (ref.as_non_null (global.get $interfaces.Main.Implementor.itable)) (i32.const 0) (local.get $$outer_this)))
-  ;; $instance.$ctor($outer_this);
   ;;@ interfaces/Main.java:41:8
   (call $$ctor__interfaces_Main__void_$p_interfaces_Main_Implementor@interfaces.Main.Implementor (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;; return $instance;
   ;;@ interfaces/Main.java:41:8
   (return (local.get $$instance))
  )
@@ -434,10 +397,8 @@
  (param $$outer_this (ref null $interfaces.Main))
  ;;@ interfaces/Main.java:41:8
  (block
-  ;; interfaces.Main.Implementor.$clinit();
   ;;@ interfaces/Main.java:41:8
   (call $$clinit__void@interfaces.Main.Implementor )
-  ;; Object.this.$ctor();
   ;;@ interfaces/Main.java:41:8
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -464,7 +425,6 @@
  (local $this (ref null $interfaces.Main.Implementor))
  (local.set $this (ref.cast_static $interfaces.Main.Implementor (local.get $this.untyped)))
  (block
-  ;; Implementor.this.defaultMethod(((String) arg0));
   ;;@ interfaces/Main.java:41:8
   (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0)))
  )
@@ -480,7 +440,6 @@
  (local $this (ref null $interfaces.Main.Implementor))
  (local.set $this (ref.cast_static $interfaces.Main.Implementor (local.get $this.untyped)))
  (block
-  ;; Implementor.this.defaultMethod(arg0);
   ;;@ interfaces/Main.java:41:8
   (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(local.get $arg0))
  )
@@ -491,25 +450,19 @@
 (func $$clinit__void@interfaces.Main.Implementor
  ;;@ interfaces/Main.java:41:8
  (block
-  ;; if (interfaces.Main.Implementor.$initialized) return;
   ;;@ interfaces/Main.java:41:8
   (if (global.get $f_$initialized__interfaces_Main_Implementor)
    (then
-    ;; return;
     ;;@ interfaces/Main.java:41:8
     (return )
    )
   )
-  ;; (interfaces.Main.Implementor.$initialized = true);
   ;;@ interfaces/Main.java:41:8
   (global.set $f_$initialized__interfaces_Main_Implementor (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ interfaces/Main.java:41:8
   (call $$clinit__void@java.lang.Object )
-  ;; interfaces.Main.SubInterface.$clinit();
   ;;@ interfaces/Main.java:41:8
   (call $$clinit__void@interfaces.Main.SubInterface )
-  ;; interfaces.Main.Interface.$clinit();
   ;;@ interfaces/Main.java:41:8
   (call $$clinit__void@interfaces.Main.Interface )
  )
@@ -519,14 +472,11 @@
 (func $$getClassMetadata__java_lang_Class@interfaces.Main.Implementor
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((interfaces.Main.Implementor.$class == null)) (interfaces.Main.Implementor.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|interfaces.M...|_2(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__interfaces_Main_Implementor) (ref.null $java.lang.Class))
    (then
-    ;; (interfaces.Main.Implementor.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|interfaces.M...|_2(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__interfaces_Main_Implementor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.M...|_2__java_lang_String (ref.func $$getString_|interfaces.M...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return interfaces.Main.Implementor.$class;
   (return (global.get $f_$class__interfaces_Main_Implementor))
  )
 )
@@ -539,7 +489,6 @@
  (local $this (ref null $interfaces.Main.Implementor))
  (local.set $this (ref.cast_static $interfaces.Main.Implementor (local.get $this.untyped)))
  (block
-  ;; return interfaces.Main.Implementor.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@interfaces.Main.Implementor) ))
  )
 )
@@ -553,10 +502,8 @@
  (param $$outer_this (ref null $interfaces.Main))
  ;;@ interfaces/Main.java:47:17
  (block
-  ;; interfaces.Main.AbstractImplementor.$clinit();
   ;;@ interfaces/Main.java:47:17
   (call $$clinit__void@interfaces.Main.AbstractImplementor )
-  ;; Object.this.$ctor();
   ;;@ interfaces/Main.java:47:17
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -571,7 +518,6 @@
  (local $this (ref null $interfaces.Main.AbstractImplementor))
  (local.set $this (ref.cast_static $interfaces.Main.AbstractImplementor (local.get $this.untyped)))
  (block
-  ;; AbstractImplementor.this.defaultMethod(((String) arg0));
   ;;@ interfaces/Main.java:47:17
   (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0)))
  )
@@ -587,7 +533,6 @@
  (local $this (ref null $interfaces.Main.AbstractImplementor))
  (local.set $this (ref.cast_static $interfaces.Main.AbstractImplementor (local.get $this.untyped)))
  (block
-  ;; AbstractImplementor.this.defaultMethod(arg0);
   ;;@ interfaces/Main.java:47:17
   (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(local.get $arg0))
  )
@@ -598,22 +543,17 @@
 (func $$clinit__void@interfaces.Main.AbstractImplementor
  ;;@ interfaces/Main.java:47:17
  (block
-  ;; if (interfaces.Main.AbstractImplementor.$initialized) return;
   ;;@ interfaces/Main.java:47:17
   (if (global.get $f_$initialized__interfaces_Main_AbstractImplementor)
    (then
-    ;; return;
     ;;@ interfaces/Main.java:47:17
     (return )
    )
   )
-  ;; (interfaces.Main.AbstractImplementor.$initialized = true);
   ;;@ interfaces/Main.java:47:17
   (global.set $f_$initialized__interfaces_Main_AbstractImplementor (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ interfaces/Main.java:47:17
   (call $$clinit__void@java.lang.Object )
-  ;; interfaces.Main.SubInterface.$clinit();
   ;;@ interfaces/Main.java:47:17
   (call $$clinit__void@interfaces.Main.SubInterface )
  )
@@ -623,14 +563,11 @@
 (func $$getClassMetadata__java_lang_Class@interfaces.Main.AbstractImplementor
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((interfaces.Main.AbstractImplementor.$class == null)) (interfaces.Main.AbstractImplementor.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|interfaces.M...|_3(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__interfaces_Main_AbstractImplementor) (ref.null $java.lang.Class))
    (then
-    ;; (interfaces.Main.AbstractImplementor.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|interfaces.M...|_3(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__interfaces_Main_AbstractImplementor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.M...|_3__java_lang_String (ref.func $$getString_|interfaces.M...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return interfaces.Main.AbstractImplementor.$class;
   (return (global.get $f_$class__interfaces_Main_AbstractImplementor))
  )
 )

@@ -2210,16 +2210,13 @@
 (func $$clinit__void@lambdas.Lambdas.FunctionalInterface
  ;;@ lambdas/Lambdas.java:28:12
  (block
-  ;; if (lambdas.Lambdas.FunctionalInterface.$initialized) return;
   ;;@ lambdas/Lambdas.java:28:12
   (if (global.get $f_$initialized__lambdas_Lambdas_FunctionalInterface)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:28:12
     (return )
    )
   )
-  ;; (lambdas.Lambdas.FunctionalInterface.$initialized = true);
   ;;@ lambdas/Lambdas.java:28:12
   (global.set $f_$initialized__lambdas_Lambdas_FunctionalInterface (i32.const 1))
  )
@@ -2229,14 +2226,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.FunctionalInterface
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.FunctionalInterface.$class == null)) (lambdas.Lambdas.FunctionalInterface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_29()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_FunctionalInterface) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.FunctionalInterface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_29()));
     (global.set $f_$class__lambdas_Lambdas_FunctionalInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_29__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_29__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return lambdas.Lambdas.FunctionalInterface.$class;
   (return (global.get $f_$class__lambdas_Lambdas_FunctionalInterface))
  )
 )
@@ -2247,16 +2241,13 @@
 (func $$clinit__void@lambdas.Lambdas.Functional
  ;;@ lambdas/Lambdas.java:99:12
  (block
-  ;; if (lambdas.Lambdas.Functional.$initialized) return;
   ;;@ lambdas/Lambdas.java:99:12
   (if (global.get $f_$initialized__lambdas_Lambdas_Functional)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:99:12
     (return )
    )
   )
-  ;; (lambdas.Lambdas.Functional.$initialized = true);
   ;;@ lambdas/Lambdas.java:99:12
   (global.set $f_$initialized__lambdas_Lambdas_Functional (i32.const 1))
  )
@@ -2266,14 +2257,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.Functional
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.Functional.$class == null)) (lambdas.Lambdas.Functional.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_30()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_Functional) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.Functional.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_30()));
     (global.set $f_$class__lambdas_Lambdas_Functional (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_30__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_30__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return lambdas.Lambdas.Functional.$class;
   (return (global.get $f_$class__lambdas_Lambdas_Functional))
  )
 )
@@ -2284,16 +2272,13 @@
 (func $$clinit__void@lambdas.Lambdas.GenericFunctionalInterface
  ;;@ lambdas/Lambdas.java:127:12
  (block
-  ;; if (lambdas.Lambdas.GenericFunctionalInterface.$initialized) return;
   ;;@ lambdas/Lambdas.java:127:12
   (if (global.get $f_$initialized__lambdas_Lambdas_GenericFunctionalInterface)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:127:12
     (return )
    )
   )
-  ;; (lambdas.Lambdas.GenericFunctionalInterface.$initialized = true);
   ;;@ lambdas/Lambdas.java:127:12
   (global.set $f_$initialized__lambdas_Lambdas_GenericFunctionalInterface (i32.const 1))
  )
@@ -2303,14 +2288,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.GenericFunctionalInterface
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.GenericFunctionalInterface.$class == null)) (lambdas.Lambdas.GenericFunctionalInterface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_31()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_GenericFunctionalInterface) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.GenericFunctionalInterface.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_31()));
     (global.set $f_$class__lambdas_Lambdas_GenericFunctionalInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_31__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_31__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return lambdas.Lambdas.GenericFunctionalInterface.$class;
   (return (global.get $f_$class__lambdas_Lambdas_GenericFunctionalInterface))
  )
 )
@@ -2324,7 +2306,6 @@
  (result (ref null $java.lang.Object))
  ;;@ lambdas/Lambdas.java:152:36
  (block
-  ;; return lambdas.Lambdas.BiFunction.$LambdaImplementor$27.$create(BiFunction.this,after);
   ;;@ lambdas/Lambdas.java:153:6
   (return (call $$create__lambdas_Lambdas_BiFunction__lambdas_Lambdas_Function@lambdas.Lambdas.BiFunction.$LambdaImplementor$27 (local.get $this)(local.get $after)))
  )
@@ -2335,16 +2316,13 @@
 (func $$clinit__void@lambdas.Lambdas.BiFunction
  ;;@ lambdas/Lambdas.java:149:12
  (block
-  ;; if (lambdas.Lambdas.BiFunction.$initialized) return;
   ;;@ lambdas/Lambdas.java:149:12
   (if (global.get $f_$initialized__lambdas_Lambdas_BiFunction)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:149:12
     (return )
    )
   )
-  ;; (lambdas.Lambdas.BiFunction.$initialized = true);
   ;;@ lambdas/Lambdas.java:149:12
   (global.set $f_$initialized__lambdas_Lambdas_BiFunction (i32.const 1))
  )
@@ -2354,14 +2332,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.BiFunction
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.BiFunction.$class == null)) (lambdas.Lambdas.BiFunction.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_33()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_BiFunction) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.BiFunction.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_33()));
     (global.set $f_$class__lambdas_Lambdas_BiFunction (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_33__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_33__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return lambdas.Lambdas.BiFunction.$class;
   (return (global.get $f_$class__lambdas_Lambdas_BiFunction))
  )
 )
@@ -2373,10 +2348,8 @@
  (result (ref null $java.lang.Object))
  ;;@ lambdas/Lambdas.java:158:30
  (block
-  ;; lambdas.Lambdas.Function.$clinit();
   ;;@ lambdas/Lambdas.java:158:41
   (call $$clinit__void@lambdas.Lambdas.Function )
-  ;; return lambdas.Lambdas.Function.$LambdaImplementor$28.$create();
   ;;@ lambdas/Lambdas.java:159:6
   (return (call $$create__@lambdas.Lambdas.Function.$LambdaImplementor$28 ))
  )
@@ -2386,16 +2359,13 @@
 (func $$clinit__void@lambdas.Lambdas.Function
  ;;@ lambdas/Lambdas.java:157:12
  (block
-  ;; if (lambdas.Lambdas.Function.$initialized) return;
   ;;@ lambdas/Lambdas.java:157:12
   (if (global.get $f_$initialized__lambdas_Lambdas_Function)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:157:12
     (return )
    )
   )
-  ;; (lambdas.Lambdas.Function.$initialized = true);
   ;;@ lambdas/Lambdas.java:157:12
   (global.set $f_$initialized__lambdas_Lambdas_Function (i32.const 1))
  )
@@ -2405,14 +2375,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.Function
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.Function.$class == null)) (lambdas.Lambdas.Function.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_35()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_Function) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.Function.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_35()));
     (global.set $f_$class__lambdas_Lambdas_Function (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_35__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_35__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return lambdas.Lambdas.Function.$class;
   (return (global.get $f_$class__lambdas_Lambdas_Function))
  )
 )
@@ -2423,16 +2390,13 @@
 (func $$clinit__void@lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid
  ;;@ lambdas/Lambdas.java:185:12
  (block
-  ;; if (lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid.$initialized) return;
   ;;@ lambdas/Lambdas.java:185:12
   (if (global.get $f_$initialized__lambdas_Lambdas_FunctionalInterfaceWithMethodReturningVoid)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:185:12
     (return )
    )
   )
-  ;; (lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid.$initialized = true);
   ;;@ lambdas/Lambdas.java:185:12
   (global.set $f_$initialized__lambdas_Lambdas_FunctionalInterfaceWithMethodReturningVoid (i32.const 1))
  )
@@ -2442,14 +2406,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid.$class == null)) (lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_36()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_FunctionalInterfaceWithMethodReturningVoid) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_36()));
     (global.set $f_$class__lambdas_Lambdas_FunctionalInterfaceWithMethodReturningVoid (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_36__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_36__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid.$class;
   (return (global.get $f_$class__lambdas_Lambdas_FunctionalInterfaceWithMethodReturningVoid))
  )
 )
@@ -2460,16 +2421,13 @@
 (func $$clinit__void@lambdas.Lambdas.GenericJsFunction
  ;;@ lambdas/Lambdas.java:222:19
  (block
-  ;; if (lambdas.Lambdas.GenericJsFunction.$initialized) return;
   ;;@ lambdas/Lambdas.java:222:19
   (if (global.get $f_$initialized__lambdas_Lambdas_GenericJsFunction)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:222:19
     (return )
    )
   )
-  ;; (lambdas.Lambdas.GenericJsFunction.$initialized = true);
   ;;@ lambdas/Lambdas.java:222:19
   (global.set $f_$initialized__lambdas_Lambdas_GenericJsFunction (i32.const 1))
  )
@@ -2479,14 +2437,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.GenericJsFunction
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.GenericJsFunction.$class == null)) (lambdas.Lambdas.GenericJsFunction.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_40()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_GenericJsFunction) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.GenericJsFunction.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_40()));
     (global.set $f_$class__lambdas_Lambdas_GenericJsFunction (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_40__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_40__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return lambdas.Lambdas.GenericJsFunction.$class;
   (return (global.get $f_$class__lambdas_Lambdas_GenericJsFunction))
  )
 )
@@ -2503,7 +2458,6 @@
  (result (ref null $java.lang.Object))
  ;;@ lambdas/Lambdas.java:262:14
  (block
-  ;; return null;
   ;;@ lambdas/Lambdas.java:263:6
   (return (ref.null $java.lang.Object))
  )
@@ -2514,16 +2468,13 @@
 (func $$clinit__void@lambdas.Lambdas.Equals
  ;;@ lambdas/Lambdas.java:259:12
  (block
-  ;; if (lambdas.Lambdas.Equals.$initialized) return;
   ;;@ lambdas/Lambdas.java:259:12
   (if (global.get $f_$initialized__lambdas_Lambdas_Equals)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:259:12
     (return )
    )
   )
-  ;; (lambdas.Lambdas.Equals.$initialized = true);
   ;;@ lambdas/Lambdas.java:259:12
   (global.set $f_$initialized__lambdas_Lambdas_Equals (i32.const 1))
  )
@@ -2533,14 +2484,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.Equals
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.Equals.$class == null)) (lambdas.Lambdas.Equals.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_42()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_Equals) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.Equals.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_42()));
     (global.set $f_$class__lambdas_Lambdas_Equals (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_42__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_42__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return lambdas.Lambdas.Equals.$class;
   (return (global.get $f_$class__lambdas_Lambdas_Equals))
  )
 )
@@ -2551,19 +2499,15 @@
 (func $$clinit__void@lambdas.Lambdas.JsSupplier
  ;;@ lambdas/Lambdas.java:267:12
  (block
-  ;; if (lambdas.Lambdas.JsSupplier.$initialized) return;
   ;;@ lambdas/Lambdas.java:267:12
   (if (global.get $f_$initialized__lambdas_Lambdas_JsSupplier)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:267:12
     (return )
    )
   )
-  ;; (lambdas.Lambdas.JsSupplier.$initialized = true);
   ;;@ lambdas/Lambdas.java:267:12
   (global.set $f_$initialized__lambdas_Lambdas_JsSupplier (i32.const 1))
-  ;; lambdas.Lambdas.Equals.$clinit();
   ;;@ lambdas/Lambdas.java:267:12
   (call $$clinit__void@lambdas.Lambdas.Equals )
  )
@@ -2573,14 +2517,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.JsSupplier
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.JsSupplier.$class == null)) (lambdas.Lambdas.JsSupplier.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_43()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_JsSupplier) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.JsSupplier.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_43()));
     (global.set $f_$class__lambdas_Lambdas_JsSupplier (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_43__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_43__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return lambdas.Lambdas.JsSupplier.$class;
   (return (global.get $f_$class__lambdas_Lambdas_JsSupplier))
  )
 )
@@ -2601,16 +2542,13 @@
 (func $$clinit__void@lambdas.Lambdas.JustADefaultT
  ;;@ lambdas/Lambdas.java:283:12
  (block
-  ;; if (lambdas.Lambdas.JustADefaultT.$initialized) return;
   ;;@ lambdas/Lambdas.java:283:12
   (if (global.get $f_$initialized__lambdas_Lambdas_JustADefaultT)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:283:12
     (return )
    )
   )
-  ;; (lambdas.Lambdas.JustADefaultT.$initialized = true);
   ;;@ lambdas/Lambdas.java:283:12
   (global.set $f_$initialized__lambdas_Lambdas_JustADefaultT (i32.const 1))
  )
@@ -2620,14 +2558,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.JustADefaultT
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.JustADefaultT.$class == null)) (lambdas.Lambdas.JustADefaultT.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_44()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_JustADefaultT) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.JustADefaultT.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_44()));
     (global.set $f_$class__lambdas_Lambdas_JustADefaultT (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_44__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_44__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return lambdas.Lambdas.JustADefaultT.$class;
   (return (global.get $f_$class__lambdas_Lambdas_JustADefaultT))
  )
 )
@@ -2648,16 +2583,13 @@
 (func $$clinit__void@lambdas.Lambdas.JustADefaultS
  ;;@ lambdas/Lambdas.java:287:12
  (block
-  ;; if (lambdas.Lambdas.JustADefaultS.$initialized) return;
   ;;@ lambdas/Lambdas.java:287:12
   (if (global.get $f_$initialized__lambdas_Lambdas_JustADefaultS)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:287:12
     (return )
    )
   )
-  ;; (lambdas.Lambdas.JustADefaultS.$initialized = true);
   ;;@ lambdas/Lambdas.java:287:12
   (global.set $f_$initialized__lambdas_Lambdas_JustADefaultS (i32.const 1))
  )
@@ -2667,14 +2599,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.JustADefaultS
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.JustADefaultS.$class == null)) (lambdas.Lambdas.JustADefaultS.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_45()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_JustADefaultS) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.JustADefaultS.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_45()));
     (global.set $f_$class__lambdas_Lambdas_JustADefaultS (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_45__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_45__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return lambdas.Lambdas.JustADefaultS.$class;
   (return (global.get $f_$class__lambdas_Lambdas_JustADefaultS))
  )
 )
@@ -2694,16 +2623,13 @@
 (func $$clinit__void@lambdas.Lambdas.MarkerWithDefaultMethod
  ;;@ lambdas/Lambdas.java:305:12
  (block
-  ;; if (lambdas.Lambdas.MarkerWithDefaultMethod.$initialized) return;
   ;;@ lambdas/Lambdas.java:305:12
   (if (global.get $f_$initialized__lambdas_Lambdas_MarkerWithDefaultMethod)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:305:12
     (return )
    )
   )
-  ;; (lambdas.Lambdas.MarkerWithDefaultMethod.$initialized = true);
   ;;@ lambdas/Lambdas.java:305:12
   (global.set $f_$initialized__lambdas_Lambdas_MarkerWithDefaultMethod (i32.const 1))
  )
@@ -2713,14 +2639,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.MarkerWithDefaultMethod
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.MarkerWithDefaultMethod.$class == null)) (lambdas.Lambdas.MarkerWithDefaultMethod.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_46()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_MarkerWithDefaultMethod) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.MarkerWithDefaultMethod.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_46()));
     (global.set $f_$class__lambdas_Lambdas_MarkerWithDefaultMethod (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_46__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_46__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return lambdas.Lambdas.MarkerWithDefaultMethod.$class;
   (return (global.get $f_$class__lambdas_Lambdas_MarkerWithDefaultMethod))
  )
 )
@@ -2731,16 +2654,13 @@
 (func $$clinit__void@lambdas.Lambdas.Thenable.$Overlay
  ;;@ lambdas/Lambdas.java:227:19
  (block
-  ;; if (lambdas.Lambdas.Thenable.$Overlay.$initialized) return;
   ;;@ lambdas/Lambdas.java:227:19
   (if (global.get $f_$initialized__lambdas_Lambdas_Thenable_$Overlay)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:227:19
     (return )
    )
   )
-  ;; (lambdas.Lambdas.Thenable.$Overlay.$initialized = true);
   ;;@ lambdas/Lambdas.java:227:19
   (global.set $f_$initialized__lambdas_Lambdas_Thenable_$Overlay (i32.const 1))
  )
@@ -2750,14 +2670,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.Thenable.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.Thenable.$Overlay.$class == null)) (lambdas.Lambdas.Thenable.$Overlay.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_47()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_Thenable_$Overlay) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.Thenable.$Overlay.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_47()));
     (global.set $f_$class__lambdas_Lambdas_Thenable_$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_47__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_47__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return lambdas.Lambdas.Thenable.$Overlay.$class;
   (return (global.get $f_$class__lambdas_Lambdas_Thenable_$Overlay))
  )
 )
@@ -2768,16 +2685,13 @@
 (func $$clinit__void@lambdas.Lambdas.AnotherThenable.$Overlay
  ;;@ lambdas/Lambdas.java:234:19
  (block
-  ;; if (lambdas.Lambdas.AnotherThenable.$Overlay.$initialized) return;
   ;;@ lambdas/Lambdas.java:234:19
   (if (global.get $f_$initialized__lambdas_Lambdas_AnotherThenable_$Overlay)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:234:19
     (return )
    )
   )
-  ;; (lambdas.Lambdas.AnotherThenable.$Overlay.$initialized = true);
   ;;@ lambdas/Lambdas.java:234:19
   (global.set $f_$initialized__lambdas_Lambdas_AnotherThenable_$Overlay (i32.const 1))
  )
@@ -2787,14 +2701,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.AnotherThenable.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.AnotherThenable.$Overlay.$class == null)) (lambdas.Lambdas.AnotherThenable.$Overlay.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_48()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_AnotherThenable_$Overlay) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.AnotherThenable.$Overlay.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_48()));
     (global.set $f_$class__lambdas_Lambdas_AnotherThenable_$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_48__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_48__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return lambdas.Lambdas.AnotherThenable.$Overlay.$class;
   (return (global.get $f_$class__lambdas_Lambdas_AnotherThenable_$Overlay))
  )
 )
@@ -2807,13 +2718,10 @@
  ;;@ lambdas/Lambdas.java:25:13
  (local $$instance (ref null $lambdas.Lambdas))
  (block
-  ;; Lambdas $instance = new Lambdas.<init>(0,100);
   ;;@ lambdas/Lambdas.java:25:13
   (local.set $$instance (struct.new $lambdas.Lambdas (ref.as_non_null (global.get $lambdas.Lambdas.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.itable)) (i32.const 0) (i32.const 100)))
-  ;; $instance.$ctor();
   ;;@ lambdas/Lambdas.java:25:13
   (call $$ctor__void_$p_lambdas_Lambdas@lambdas.Lambdas (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:25:13
   (return (local.get $$instance))
  )
@@ -2824,13 +2732,10 @@
  (param $this (ref null $lambdas.Lambdas))
  ;;@ lambdas/Lambdas.java:25:13
  (block
-  ;; lambdas.Lambdas.$clinit();
   ;;@ lambdas/Lambdas.java:25:13
   (call $$clinit__void@lambdas.Lambdas )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:25:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;; Lambdas.this.$init();
   ;;@ lambdas/Lambdas.java:25:13
   (call $$init__void_$p_lambdas_Lambdas@lambdas.Lambdas (ref.as_non_null (local.get $this)))
  )
@@ -2847,7 +2752,6 @@
  (local $this (ref null $lambdas.Lambdas))
  (local.set $this (ref.cast_static $lambdas.Lambdas (local.get $this.untyped)))
  (block
-  ;; return (Lambdas.this.field + intf.m(n));
   ;;@ lambdas/Lambdas.java:33:4
   (return (i32.add (struct.get $lambdas.Lambdas $f_field__lambdas_Lambdas(local.get $this)) (call_ref $function.m_m__int__int (ref.as_non_null (local.get $intf))(local.get $n)(struct.get $lambdas.Lambdas.FunctionalInterface.vtable $m_m__int__int (ref.cast_static $lambdas.Lambdas.FunctionalInterface.vtable (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $intf))))))))
  )
@@ -2862,7 +2766,6 @@
  (local $this (ref null $lambdas.Lambdas))
  (local.set $this (ref.cast_static $lambdas.Lambdas (local.get $this.untyped)))
  (block
-  ;; Lambdas.this.call(lambdas.Lambdas.$LambdaImplementor$1.$create(),10);
   ;;@ lambdas/Lambdas.java:37:4
   (drop (call_ref $function.m_call__lambdas_Lambdas_FunctionalInterface__int__int (ref.as_non_null (local.get $this))(call $$create__@lambdas.Lambdas.$LambdaImplementor$1 )(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
  )
@@ -2877,7 +2780,6 @@
  (local $this (ref null $lambdas.Lambdas))
  (local.set $this (ref.cast_static $lambdas.Lambdas (local.get $this.untyped)))
  (block
-  ;; Lambdas.this.call(lambdas.Lambdas.$LambdaImplementor$2.$create(),10);
   ;;@ lambdas/Lambdas.java:41:4
   (drop (call_ref $function.m_call__lambdas_Lambdas_FunctionalInterface__int__int (ref.as_non_null (local.get $this))(call $$create__@lambdas.Lambdas.$LambdaImplementor$2 )(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
  )
@@ -2892,7 +2794,6 @@
  (local $this (ref null $lambdas.Lambdas))
  (local.set $this (ref.cast_static $lambdas.Lambdas (local.get $this.untyped)))
  (block
-  ;; Lambdas.this.call(lambdas.Lambdas.$LambdaImplementor$3.$create(Lambdas.this),10);
   ;;@ lambdas/Lambdas.java:49:4
   (drop (call_ref $function.m_call__lambdas_Lambdas_FunctionalInterface__int__int (ref.as_non_null (local.get $this))(call $$create__lambdas_Lambdas@lambdas.Lambdas.$LambdaImplementor$3 (local.get $this))(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
  )
@@ -2908,10 +2809,8 @@
  (local $this (ref null $lambdas.Lambdas))
  (local.set $this (ref.cast_static $lambdas.Lambdas (local.get $this.untyped)))
  (block
-  ;; int x = 1;
   ;;@ lambdas/Lambdas.java:53:4
   (local.set $x (i32.const 1))
-  ;; Lambdas.this.call(lambdas.Lambdas.$LambdaImplementor$4.$create(x),10);
   ;;@ lambdas/Lambdas.java:54:4
   (drop (call_ref $function.m_call__lambdas_Lambdas_FunctionalInterface__int__int (ref.as_non_null (local.get $this))(call $$create__int@lambdas.Lambdas.$LambdaImplementor$4 (local.get $x))(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
  )
@@ -2927,10 +2826,8 @@
  (local $this (ref null $lambdas.Lambdas))
  (local.set $this (ref.cast_static $lambdas.Lambdas (local.get $this.untyped)))
  (block
-  ;; int x = 1;
   ;;@ lambdas/Lambdas.java:58:4
   (local.set $x (i32.const 1))
-  ;; Lambdas.this.call(lambdas.Lambdas.$LambdaImplementor$5.$create(Lambdas.this,x),10);
   ;;@ lambdas/Lambdas.java:59:4
   (drop (call_ref $function.m_call__lambdas_Lambdas_FunctionalInterface__int__int (ref.as_non_null (local.get $this))(call $$create__lambdas_Lambdas__int@lambdas.Lambdas.$LambdaImplementor$5 (local.get $this)(local.get $x))(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
  )
@@ -2957,7 +2854,6 @@
  (local $this (ref null $lambdas.Lambdas))
  (local.set $this (ref.cast_static $lambdas.Lambdas (local.get $this.untyped)))
  (block
-  ;; Lambdas.this.call(lambdas.Lambdas.$LambdaImplementor$6.$create(Lambdas.this),10);
   ;;@ lambdas/Lambdas.java:70:4
   (drop (call_ref $function.m_call__lambdas_Lambdas_FunctionalInterface__int__int (ref.as_non_null (local.get $this))(call $$create__lambdas_Lambdas@lambdas.Lambdas.$LambdaImplementor$6 (local.get $this))(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
  )
@@ -2969,10 +2865,8 @@
  ;;@ lambdas/Lambdas.java:80:21
  (local $f (ref null $java.lang.Object))
  (block
-  ;; lambdas.Lambdas.$clinit();
   ;;@ lambdas/Lambdas.java:80:49
   (call $$clinit__void@lambdas.Lambdas )
-  ;; FunctionalInterface f = lambdas.Lambdas.$LambdaImplementor$7.$create();
   ;;@ lambdas/Lambdas.java:81:4
   (local.set $f (call $$create__@lambdas.Lambdas.$LambdaImplementor$7 ))
  )
@@ -2986,7 +2880,6 @@
  (local $this (ref null $lambdas.Lambdas))
  (local.set $this (ref.cast_static $lambdas.Lambdas (local.get $this.untyped)))
  (block
-  ;; Lambdas.this.call(lambdas.Lambdas.$LambdaImplementor$9.$create(Lambdas.this),10);
   ;;@ lambdas/Lambdas.java:85:4
   (drop (call_ref $function.m_call__lambdas_Lambdas_FunctionalInterface__int__int (ref.as_non_null (local.get $this))(call $$create__lambdas_Lambdas@lambdas.Lambdas.$LambdaImplementor$9 (local.get $this))(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
  )
@@ -3001,7 +2894,6 @@
  (local $this (ref null $lambdas.Lambdas))
  (local.set $this (ref.cast_static $lambdas.Lambdas (local.get $this.untyped)))
  (block
-  ;; Lambdas.this.call(lambdas.Lambdas.$LambdaImplementor$10.$create(),10);
   ;;@ lambdas/Lambdas.java:89:4
   (drop (call_ref $function.m_call__lambdas_Lambdas_FunctionalInterface__int__int (ref.as_non_null (local.get $this))(call $$create__@lambdas.Lambdas.$LambdaImplementor$10 )(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
  )
@@ -3017,7 +2909,6 @@
  (local $this (ref null $lambdas.Lambdas))
  (local.set $this (ref.cast_static $lambdas.Lambdas (local.get $this.untyped)))
  (block
-  ;; Functional<T> wrapped = lambdas.Lambdas.$LambdaImplementor$11.$create(Lambdas.this);
   ;;@ lambdas/Lambdas.java:105:4
   (local.set $wrapped (call $$create__lambdas_Lambdas@lambdas.Lambdas.$LambdaImplementor$11 (local.get $this)))
  )
@@ -3029,10 +2920,8 @@
  ;;@ lambdas/Lambdas.java:116:25
  (local $wrapped (ref null $java.lang.Object))
  (block
-  ;; lambdas.Lambdas.$clinit();
   ;;@ lambdas/Lambdas.java:116:69
   (call $$clinit__void@lambdas.Lambdas )
-  ;; Functional<T> wrapped = lambdas.Lambdas.$LambdaImplementor$12.$create();
   ;;@ lambdas/Lambdas.java:117:4
   (local.set $wrapped (call $$create__@lambdas.Lambdas.$LambdaImplementor$12 ))
  )
@@ -3049,7 +2938,6 @@
  (local $this (ref null $lambdas.Lambdas))
  (local.set $this (ref.cast_static $lambdas.Lambdas (local.get $this.untyped)))
  (block
-  ;; return intf.m(e);
   ;;@ lambdas/Lambdas.java:132:4
   (return (call_ref $function.m_m__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $intf))(local.get $e)(struct.get $lambdas.Lambdas.GenericFunctionalInterface.vtable $m_m__java_lang_Object__java_lang_Object (ref.cast_static $lambdas.Lambdas.GenericFunctionalInterface.vtable (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $intf)))))))
  )
@@ -3067,7 +2955,6 @@
  (local $this (ref null $lambdas.Lambdas))
  (local.set $this (ref.cast_static $lambdas.Lambdas (local.get $this.untyped)))
  (block
-  ;; return ((Error) intf.m(e));
   ;;@ lambdas/Lambdas.java:136:4
   (return (ref.cast_static $java.lang.Error (call_ref $function.m_m__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $intf))(local.get $e)(struct.get $lambdas.Lambdas.GenericFunctionalInterface.vtable $m_m__java_lang_Object__java_lang_Object (ref.cast_static $lambdas.Lambdas.GenericFunctionalInterface.vtable (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $intf))))))))
  )
@@ -3081,10 +2968,8 @@
  (result (ref null $java.lang.Enum))
  ;;@ lambdas/Lambdas.java:139:44
  (block
-  ;; lambdas.Lambdas.$clinit();
   ;;@ lambdas/Lambdas.java:140:59
   (call $$clinit__void@lambdas.Lambdas )
-  ;; return ((Enum<T>) intf.m(e));
   ;;@ lambdas/Lambdas.java:141:4
   (return (ref.cast_static $java.lang.Enum (call_ref $function.m_m__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $intf))(local.get $e)(struct.get $lambdas.Lambdas.GenericFunctionalInterface.vtable $m_m__java_lang_Object__java_lang_Object (ref.cast_static $lambdas.Lambdas.GenericFunctionalInterface.vtable (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $intf))))))))
  )
@@ -3100,7 +2985,6 @@
  (local $this (ref null $lambdas.Lambdas))
  (local.set $this (ref.cast_static $lambdas.Lambdas (local.get $this.untyped)))
  (block
-  ;; return null;
   ;;@ lambdas/Lambdas.java:145:4
   (return (ref.null $java.lang.Object))
  )
@@ -3116,22 +3000,16 @@
  (local $this (ref null $lambdas.Lambdas))
  (local.set $this (ref.cast_static $lambdas.Lambdas (local.get $this.untyped)))
  (block
-  ;; Lambdas.this.callWithTypeVariable(lambdas.Lambdas.$LambdaImplementor$13.$create(),java.lang.Error.$create());
   ;;@ lambdas/Lambdas.java:166:4
   (drop (call_ref $function.m_callWithTypeVariable__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $this))(call $$create__@lambdas.Lambdas.$LambdaImplementor$13 )(call $$create__@java.lang.Error )(struct.get $lambdas.Lambdas.vtable $m_callWithTypeVariable__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Object__java_lang_Object (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
-  ;; Lambdas.this.callParameterized(lambdas.Lambdas.$LambdaImplementor$14.$create(),java.lang.Error.$create());
   ;;@ lambdas/Lambdas.java:167:4
   (drop (call_ref $function.m_callParameterized__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error__java_lang_Error (ref.as_non_null (local.get $this))(call $$create__@lambdas.Lambdas.$LambdaImplementor$14 )(call $$create__@java.lang.Error )(struct.get $lambdas.Lambdas.vtable $m_callParameterized__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error__java_lang_Error (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
-  ;; lambdas.Lambdas.callTypeVariableWithBounds(lambdas.Lambdas.$LambdaImplementor$15.$create(),((Enum<T>) null));
   ;;@ lambdas/Lambdas.java:168:4
   (drop (call $m_callTypeVariableWithBounds__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum__java_lang_Enum@lambdas.Lambdas (call $$create__@lambdas.Lambdas.$LambdaImplementor$15 )(ref.cast_static $java.lang.Enum (ref.null $java.lang.Object))))
-  ;; Lambdas.this.callWithBiFunction(lambdas.Lambdas.$LambdaImplementor$16.$create());
   ;;@ lambdas/Lambdas.java:169:4
   (drop (call_ref $function.m_callWithBiFunction__lambdas_Lambdas_BiFunction__lambdas_Lambdas_GenericFunctionalInterface_$pp_lambdas (ref.as_non_null (local.get $this))(call $$create__@lambdas.Lambdas.$LambdaImplementor$16 )(struct.get $lambdas.Lambdas.vtable $m_callWithBiFunction__lambdas_Lambdas_BiFunction__lambdas_Lambdas_GenericFunctionalInterface_$pp_lambdas (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
-  ;; Lambdas.this.callWithBiFunction(lambdas.Lambdas.$LambdaImplementor$17.$create());
   ;;@ lambdas/Lambdas.java:173:4
   (drop (call_ref $function.m_callWithBiFunction__lambdas_Lambdas_BiFunction__lambdas_Lambdas_GenericFunctionalInterface_$pp_lambdas (ref.as_non_null (local.get $this))(call $$create__@lambdas.Lambdas.$LambdaImplementor$17 )(struct.get $lambdas.Lambdas.vtable $m_callWithBiFunction__lambdas_Lambdas_BiFunction__lambdas_Lambdas_GenericFunctionalInterface_$pp_lambdas (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
-  ;; Function<? super T, ?> f = lambdas.Lambdas.$LambdaImplementor$18.$create();
   ;;@ lambdas/Lambdas.java:174:4
   (local.set $f (call $$create__@lambdas.Lambdas.$LambdaImplementor$18 ))
  )
@@ -3143,10 +3021,8 @@
  (result (ref null $java.lang.Object))
  ;;@ lambdas/Lambdas.java:177:23
  (block
-  ;; lambdas.Lambdas.$clinit();
   ;;@ lambdas/Lambdas.java:177:27
   (call $$clinit__void@lambdas.Lambdas )
-  ;; return null;
   ;;@ lambdas/Lambdas.java:178:4
   (return (ref.null $java.lang.Object))
  )
@@ -3157,10 +3033,8 @@
  ;;@ lambdas/Lambdas.java:181:21
  (local $f (ref null $java.lang.Object))
  (block
-  ;; lambdas.Lambdas.$clinit();
   ;;@ lambdas/Lambdas.java:181:53
   (call $$clinit__void@lambdas.Lambdas )
-  ;; Function<Object, ?> f = lambdas.Lambdas.$LambdaImplementor$19.$create();
   ;;@ lambdas/Lambdas.java:182:4
   (local.set $f (call $$create__@lambdas.Lambdas.$LambdaImplementor$19 ))
  )
@@ -3175,7 +3049,6 @@
  (local $this (ref null $lambdas.Lambdas))
  (local.set $this (ref.cast_static $lambdas.Lambdas (local.get $this.untyped)))
  (block
-  ;; FunctionalInterfaceWithMethodReturningVoid runner = lambdas.Lambdas.$LambdaImplementor$20.$create();
   ;;@ lambdas/Lambdas.java:190:4
   (local.set $runner (call $$create__@lambdas.Lambdas.$LambdaImplementor$20 ))
  )
@@ -3191,7 +3064,6 @@
  (local $this (ref null $lambdas.Lambdas))
  (local.set $this (ref.cast_static $lambdas.Lambdas (local.get $this.untyped)))
  (block
-  ;; FunctionalInterfaceWithMethodReturningVoid runner = lambdas.Lambdas.$LambdaImplementor$21.$create(Lambdas.this);
   ;;@ lambdas/Lambdas.java:194:4
   (local.set $runner (call $$create__lambdas_Lambdas@lambdas.Lambdas.$LambdaImplementor$21 (local.get $this)))
  )
@@ -3203,21 +3075,17 @@
  (result (ref null $java.lang.Object))
  ;;@ lambdas/Lambdas.java:244:44
  (block
-  ;; lambdas.Lambdas.$clinit();
   ;;@ lambdas/Lambdas.java:244:55
   (call $$clinit__void@lambdas.Lambdas )
-  ;; if (javaemul.internal.Platform.isNull(lambdas.Lambdas.identityFunction)) {
   ;;@ lambdas/Lambdas.java:245:4
   (if (ref.is_null (global.get $f_identityFunction__lambdas_Lambdas_))
    (then
     (block
-     ;; (lambdas.Lambdas.identityFunction = lambdas.Lambdas.IdentityFunction.$create());
      ;;@ lambdas/Lambdas.java:247:6
      (global.set $f_identityFunction__lambdas_Lambdas_ (call $$create__@lambdas.Lambdas.IdentityFunction ))
     )
    )
   )
-  ;; return ((GenericJsFunction<E, E>) lambdas.Lambdas.identityFunction);
   ;;@ lambdas/Lambdas.java:249:4
   (return (global.get $f_identityFunction__lambdas_Lambdas_))
  )
@@ -3228,16 +3096,12 @@
  ;;@ lambdas/Lambdas.java:292:28
  (local $o (ref null $java.lang.Object))
  (block
-  ;; lambdas.Lambdas.$clinit();
   ;;@ lambdas/Lambdas.java:292:53
   (call $$clinit__void@lambdas.Lambdas )
-  ;; Object o = (((GenericFunctionalInterface<String>&JustADefaultT<Number>)) lambdas.Lambdas.$LambdaImplementor$22.$create());
   ;;@ lambdas/Lambdas.java:295:4
   (local.set $o (call $$create__@lambdas.Lambdas.$LambdaImplementor$22 ))
-  ;; (o = (((GenericFunctionalInterface<String>&JustADefaultS<Number>)) lambdas.Lambdas.$LambdaImplementor$23.$create()));
   ;;@ lambdas/Lambdas.java:298:4
   (local.set $o (call $$create__@lambdas.Lambdas.$LambdaImplementor$23 ))
-  ;; (o = (((GenericFunctionalInterface<U>&JustADefaultS<V>)) lambdas.Lambdas.$LambdaImplementor$24.$create()));
   ;;@ lambdas/Lambdas.java:302:4
   (local.set $o (call $$create__@lambdas.Lambdas.$LambdaImplementor$24 ))
  )
@@ -3252,7 +3116,6 @@
  (local $this (ref null $lambdas.Lambdas))
  (local.set $this (ref.cast_static $lambdas.Lambdas (local.get $this.untyped)))
  (block
-  ;; Object o = (((BiFunction<String, String, String>&MarkerWithDefaultMethod)) lambdas.Lambdas.$LambdaImplementor$25.$create());
   ;;@ lambdas/Lambdas.java:311:4
   (local.set $o (call $$create__@lambdas.Lambdas.$LambdaImplementor$25 ))
  )
@@ -3265,10 +3128,8 @@
  ;;@ lambdas/Lambdas.java:316:25
  (local $lambda (ref null $java.lang.Object))
  (block
-  ;; lambdas.Lambdas.$clinit();
   ;;@ lambdas/Lambdas.java:316:60
   (call $$clinit__void@lambdas.Lambdas )
-  ;; Iterable<T> lambda = lambdas.Lambdas.$LambdaImplementor$26.$create(iterable);
   ;;@ lambdas/Lambdas.java:317:4
   (local.set $lambda (call $$create__java_lang_Iterable@lambdas.Lambdas.$LambdaImplementor$26 (local.get $iterable)))
  )
@@ -3286,22 +3147,17 @@
 (func $$clinit__void@lambdas.Lambdas
  ;;@ lambdas/Lambdas.java:25:13
  (block
-  ;; if (lambdas.Lambdas.$initialized) return;
   ;;@ lambdas/Lambdas.java:25:13
   (if (global.get $f_$initialized__lambdas_Lambdas)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:25:13
     (return )
    )
   )
-  ;; (lambdas.Lambdas.$initialized = true);
   ;;@ lambdas/Lambdas.java:25:13
   (global.set $f_$initialized__lambdas_Lambdas (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:25:13
   (call $$clinit__void@java.lang.Object )
-  ;; (lambdas.Lambdas.identityFunction = null);
   ;;@ lambdas/Lambdas.java:240:2
   (global.set $f_identityFunction__lambdas_Lambdas_ (ref.null $lambdas.Lambdas.IdentityFunction))
  )
@@ -3311,14 +3167,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.$class == null)) (lambdas.Lambdas.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lambdas|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lambdas|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lambdas|__java_lang_String (ref.func $$getString_|lambdas.Lambdas|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.$class;
   (return (global.get $f_$class__lambdas_Lambdas))
  )
 )
@@ -3331,7 +3184,6 @@
  (local $this (ref null $lambdas.Lambdas))
  (local.set $this (ref.cast_static $lambdas.Lambdas (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas) ))
  )
 )
@@ -3345,13 +3197,10 @@
  ;;@ lambdas/Lambdas.java:37:9
  (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$1))
  (block
-  ;; <anonymous> implements FunctionalInterface $instance = new $LambdaImplementor$1.<init>(0);
   ;;@ lambdas/Lambdas.java:37:9
   (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$1 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$1.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ lambdas/Lambdas.java:37:9
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$1@lambdas.Lambdas.$LambdaImplementor$1 (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:37:9
   (return (local.get $$instance))
  )
@@ -3362,10 +3211,8 @@
  (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$1))
  ;;@ lambdas/Lambdas.java:37:9
  (block
-  ;; lambdas.Lambdas.$LambdaImplementor$1.$clinit();
   ;;@ lambdas/Lambdas.java:37:9
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$1 )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:37:9
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -3381,7 +3228,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$1))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$1 (local.get $this.untyped)))
  (block
-  ;; return (i + 1);
   ;;@ lambdas/Lambdas.java:37:14
   (return (i32.add (local.get $i) (i32.const 1)))
  )
@@ -3392,19 +3238,15 @@
 (func $$clinit__void@lambdas.Lambdas.$LambdaImplementor$1
  ;;@ lambdas/Lambdas.java:37:9
  (block
-  ;; if (lambdas.Lambdas.$LambdaImplementor$1.$initialized) return;
   ;;@ lambdas/Lambdas.java:37:9
   (if (global.get $f_$initialized__lambdas_Lambdas_$LambdaImplementor$1)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:37:9
     (return )
    )
   )
-  ;; (lambdas.Lambdas.$LambdaImplementor$1.$initialized = true);
   ;;@ lambdas/Lambdas.java:37:9
   (global.set $f_$initialized__lambdas_Lambdas_$LambdaImplementor$1 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:37:9
   (call $$clinit__void@java.lang.Object )
  )
@@ -3414,14 +3256,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$1
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.$LambdaImplementor$1.$class == null)) (lambdas.Lambdas.$LambdaImplementor$1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$1) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.$LambdaImplementor$1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.$LambdaImplementor$1.$class;
   (return (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$1))
  )
 )
@@ -3434,7 +3273,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$1))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$1 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.$LambdaImplementor$1.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$1) ))
  )
 )
@@ -3448,13 +3286,10 @@
  ;;@ lambdas/Lambdas.java:42:8
  (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$2))
  (block
-  ;; <anonymous> implements FunctionalInterface $instance = new $LambdaImplementor$2.<init>(0);
   ;;@ lambdas/Lambdas.java:42:8
   (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$2 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$2.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$2.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ lambdas/Lambdas.java:42:8
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$2@lambdas.Lambdas.$LambdaImplementor$2 (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:42:8
   (return (local.get $$instance))
  )
@@ -3465,10 +3300,8 @@
  (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$2))
  ;;@ lambdas/Lambdas.java:42:8
  (block
-  ;; lambdas.Lambdas.$LambdaImplementor$2.$clinit();
   ;;@ lambdas/Lambdas.java:42:8
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$2 )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:42:8
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -3484,7 +3317,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$2))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$2 (local.get $this.untyped)))
  (block
-  ;; return (i + 2);
   ;;@ lambdas/Lambdas.java:43:10
   (return (i32.add (local.get $i) (i32.const 2)))
  )
@@ -3495,19 +3327,15 @@
 (func $$clinit__void@lambdas.Lambdas.$LambdaImplementor$2
  ;;@ lambdas/Lambdas.java:42:8
  (block
-  ;; if (lambdas.Lambdas.$LambdaImplementor$2.$initialized) return;
   ;;@ lambdas/Lambdas.java:42:8
   (if (global.get $f_$initialized__lambdas_Lambdas_$LambdaImplementor$2)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:42:8
     (return )
    )
   )
-  ;; (lambdas.Lambdas.$LambdaImplementor$2.$initialized = true);
   ;;@ lambdas/Lambdas.java:42:8
   (global.set $f_$initialized__lambdas_Lambdas_$LambdaImplementor$2 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:42:8
   (call $$clinit__void@java.lang.Object )
  )
@@ -3517,14 +3345,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$2
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.$LambdaImplementor$2.$class == null)) (lambdas.Lambdas.$LambdaImplementor$2.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_1(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$2) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.$LambdaImplementor$2.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_1(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_$LambdaImplementor$2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_1__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.$LambdaImplementor$2.$class;
   (return (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$2))
  )
 )
@@ -3537,7 +3362,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$2))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$2 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.$LambdaImplementor$2.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$2) ))
  )
 )
@@ -3552,13 +3376,10 @@
  ;;@ lambdas/Lambdas.java:49:9
  (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$3))
  (block
-  ;; <anonymous> implements FunctionalInterface $instance = new $LambdaImplementor$3.<init>(0,$outer_this);
   ;;@ lambdas/Lambdas.java:49:9
   (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$3 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$3.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$3.itable)) (i32.const 0) (local.get $$outer_this)))
-  ;; $instance.$ctor($outer_this);
   ;;@ lambdas/Lambdas.java:49:9
   (call $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_$LambdaImplementor$3@lambdas.Lambdas.$LambdaImplementor$3 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:49:9
   (return (local.get $$instance))
  )
@@ -3570,10 +3391,8 @@
  (param $$outer_this (ref null $lambdas.Lambdas))
  ;;@ lambdas/Lambdas.java:49:9
  (block
-  ;; lambdas.Lambdas.$LambdaImplementor$3.$clinit();
   ;;@ lambdas/Lambdas.java:49:9
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$3 )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:49:9
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -3589,7 +3408,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$3))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$3 (local.get $this.untyped)))
  (block
-  ;; return (($LambdaImplementor$3.this.this.field + i) + 1);
   ;;@ lambdas/Lambdas.java:49:14
   (return (i32.add (i32.add (struct.get $lambdas.Lambdas $f_field__lambdas_Lambdas(struct.get $lambdas.Lambdas.$LambdaImplementor$3 $$outer_this__lambdas_Lambdas_$LambdaImplementor$3(local.get $this))) (local.get $i)) (i32.const 1)))
  )
@@ -3600,19 +3418,15 @@
 (func $$clinit__void@lambdas.Lambdas.$LambdaImplementor$3
  ;;@ lambdas/Lambdas.java:49:9
  (block
-  ;; if (lambdas.Lambdas.$LambdaImplementor$3.$initialized) return;
   ;;@ lambdas/Lambdas.java:49:9
   (if (global.get $f_$initialized__lambdas_Lambdas_$LambdaImplementor$3)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:49:9
     (return )
    )
   )
-  ;; (lambdas.Lambdas.$LambdaImplementor$3.$initialized = true);
   ;;@ lambdas/Lambdas.java:49:9
   (global.set $f_$initialized__lambdas_Lambdas_$LambdaImplementor$3 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:49:9
   (call $$clinit__void@java.lang.Object )
  )
@@ -3622,14 +3436,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$3
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.$LambdaImplementor$3.$class == null)) (lambdas.Lambdas.$LambdaImplementor$3.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_2(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$3) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.$LambdaImplementor$3.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_2(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_$LambdaImplementor$3 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_2__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.$LambdaImplementor$3.$class;
   (return (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$3))
  )
 )
@@ -3642,7 +3453,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$3))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$3 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.$LambdaImplementor$3.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$3) ))
  )
 )
@@ -3657,13 +3467,10 @@
  ;;@ lambdas/Lambdas.java:54:9
  (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$4))
  (block
-  ;; <anonymous> implements FunctionalInterface $instance = new $LambdaImplementor$4.<init>(0,$captured_x);
   ;;@ lambdas/Lambdas.java:54:9
   (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$4 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$4.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$4.itable)) (i32.const 0) (local.get $$captured_x)))
-  ;; $instance.$ctor($captured_x);
   ;;@ lambdas/Lambdas.java:54:9
   (call $$ctor__int__void_$p_lambdas_Lambdas_$LambdaImplementor$4@lambdas.Lambdas.$LambdaImplementor$4 (ref.as_non_null (local.get $$instance))(local.get $$captured_x))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:54:9
   (return (local.get $$instance))
  )
@@ -3675,10 +3482,8 @@
  (param $$captured_x i32)
  ;;@ lambdas/Lambdas.java:54:9
  (block
-  ;; lambdas.Lambdas.$LambdaImplementor$4.$clinit();
   ;;@ lambdas/Lambdas.java:54:9
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$4 )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:54:9
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -3694,7 +3499,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$4))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$4 (local.get $this.untyped)))
  (block
-  ;; return (($LambdaImplementor$4.this.x + i) + 1);
   ;;@ lambdas/Lambdas.java:54:14
   (return (i32.add (i32.add (struct.get $lambdas.Lambdas.$LambdaImplementor$4 $$captured_x__lambdas_Lambdas_$LambdaImplementor$4(local.get $this)) (local.get $i)) (i32.const 1)))
  )
@@ -3705,19 +3509,15 @@
 (func $$clinit__void@lambdas.Lambdas.$LambdaImplementor$4
  ;;@ lambdas/Lambdas.java:54:9
  (block
-  ;; if (lambdas.Lambdas.$LambdaImplementor$4.$initialized) return;
   ;;@ lambdas/Lambdas.java:54:9
   (if (global.get $f_$initialized__lambdas_Lambdas_$LambdaImplementor$4)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:54:9
     (return )
    )
   )
-  ;; (lambdas.Lambdas.$LambdaImplementor$4.$initialized = true);
   ;;@ lambdas/Lambdas.java:54:9
   (global.set $f_$initialized__lambdas_Lambdas_$LambdaImplementor$4 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:54:9
   (call $$clinit__void@java.lang.Object )
  )
@@ -3727,14 +3527,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$4
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.$LambdaImplementor$4.$class == null)) (lambdas.Lambdas.$LambdaImplementor$4.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_3(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$4) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.$LambdaImplementor$4.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_3(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_$LambdaImplementor$4 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_3__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.$LambdaImplementor$4.$class;
   (return (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$4))
  )
 )
@@ -3747,7 +3544,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$4))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$4 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.$LambdaImplementor$4.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$4) ))
  )
 )
@@ -3763,13 +3559,10 @@
  ;;@ lambdas/Lambdas.java:60:8
  (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$5))
  (block
-  ;; <anonymous> implements FunctionalInterface $instance = new $LambdaImplementor$5.<init>(0,$outer_this,$captured_x);
   ;;@ lambdas/Lambdas.java:60:8
   (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$5 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$5.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$5.itable)) (i32.const 0) (local.get $$outer_this) (local.get $$captured_x)))
-  ;; $instance.$ctor($outer_this,$captured_x);
   ;;@ lambdas/Lambdas.java:60:8
   (call $$ctor__lambdas_Lambdas__int__void_$p_lambdas_Lambdas_$LambdaImplementor$5@lambdas.Lambdas.$LambdaImplementor$5 (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$captured_x))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:60:8
   (return (local.get $$instance))
  )
@@ -3782,10 +3575,8 @@
  (param $$captured_x i32)
  ;;@ lambdas/Lambdas.java:60:8
  (block
-  ;; lambdas.Lambdas.$LambdaImplementor$5.$clinit();
   ;;@ lambdas/Lambdas.java:60:8
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$5 )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:60:8
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -3802,10 +3593,8 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$5))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$5 (local.get $this.untyped)))
  (block
-  ;; int y = 1;
   ;;@ lambdas/Lambdas.java:61:10
   (local.set $y (i32.const 1))
-  ;; return (((($LambdaImplementor$5.this.x + y) + $LambdaImplementor$5.this.this.field) + i) + 1);
   ;;@ lambdas/Lambdas.java:62:10
   (return (i32.add (i32.add (i32.add (i32.add (struct.get $lambdas.Lambdas.$LambdaImplementor$5 $$captured_x__lambdas_Lambdas_$LambdaImplementor$5(local.get $this)) (local.get $y)) (struct.get $lambdas.Lambdas $f_field__lambdas_Lambdas(struct.get $lambdas.Lambdas.$LambdaImplementor$5 $$outer_this__lambdas_Lambdas_$LambdaImplementor$5(local.get $this)))) (local.get $i)) (i32.const 1)))
  )
@@ -3816,19 +3605,15 @@
 (func $$clinit__void@lambdas.Lambdas.$LambdaImplementor$5
  ;;@ lambdas/Lambdas.java:60:8
  (block
-  ;; if (lambdas.Lambdas.$LambdaImplementor$5.$initialized) return;
   ;;@ lambdas/Lambdas.java:60:8
   (if (global.get $f_$initialized__lambdas_Lambdas_$LambdaImplementor$5)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:60:8
     (return )
    )
   )
-  ;; (lambdas.Lambdas.$LambdaImplementor$5.$initialized = true);
   ;;@ lambdas/Lambdas.java:60:8
   (global.set $f_$initialized__lambdas_Lambdas_$LambdaImplementor$5 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:60:8
   (call $$clinit__void@java.lang.Object )
  )
@@ -3838,14 +3623,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$5
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.$LambdaImplementor$5.$class == null)) (lambdas.Lambdas.$LambdaImplementor$5.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_4(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$5) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.$LambdaImplementor$5.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_4(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_$LambdaImplementor$5 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_4__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_4__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.$LambdaImplementor$5.$class;
   (return (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$5))
  )
 )
@@ -3858,7 +3640,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$5))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$5 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.$LambdaImplementor$5.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$5) ))
  )
 )
@@ -3873,13 +3654,10 @@
  ;;@ lambdas/Lambdas.java:71:8
  (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$6))
  (block
-  ;; <anonymous> implements FunctionalInterface $instance = new $LambdaImplementor$6.<init>(0,$outer_this);
   ;;@ lambdas/Lambdas.java:71:8
   (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$6 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$6.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$6.itable)) (i32.const 0) (local.get $$outer_this)))
-  ;; $instance.$ctor($outer_this);
   ;;@ lambdas/Lambdas.java:71:8
   (call $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_$LambdaImplementor$6@lambdas.Lambdas.$LambdaImplementor$6 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:71:8
   (return (local.get $$instance))
  )
@@ -3891,10 +3669,8 @@
  (param $$outer_this (ref null $lambdas.Lambdas))
  ;;@ lambdas/Lambdas.java:71:8
  (block
-  ;; lambdas.Lambdas.$LambdaImplementor$6.$clinit();
   ;;@ lambdas/Lambdas.java:71:8
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$6 )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:71:8
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -3910,16 +3686,12 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$6))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$6 (local.get $this.untyped)))
  (block
-  ;; $LambdaImplementor$6.this.this.funOuter();
   ;;@ lambdas/Lambdas.java:72:10
   (call_ref $function.m_funOuter__void (ref.as_non_null (struct.get $lambdas.Lambdas.$LambdaImplementor$6 $$outer_this__lambdas_Lambdas_$LambdaImplementor$6(local.get $this)))(struct.get $lambdas.Lambdas.vtable $m_funOuter__void (struct.get $lambdas.Lambdas $vtable(struct.get $lambdas.Lambdas.$LambdaImplementor$6 $$outer_this__lambdas_Lambdas_$LambdaImplementor$6(local.get $this)))))
-  ;; $LambdaImplementor$6.this.this.funOuter();
   ;;@ lambdas/Lambdas.java:73:10
   (call_ref $function.m_funOuter__void (ref.as_non_null (struct.get $lambdas.Lambdas.$LambdaImplementor$6 $$outer_this__lambdas_Lambdas_$LambdaImplementor$6(local.get $this)))(struct.get $lambdas.Lambdas.vtable $m_funOuter__void (struct.get $lambdas.Lambdas $vtable(struct.get $lambdas.Lambdas.$LambdaImplementor$6 $$outer_this__lambdas_Lambdas_$LambdaImplementor$6(local.get $this)))))
-  ;; $LambdaImplementor$6.this.this.funOuter();
   ;;@ lambdas/Lambdas.java:74:10
   (call_ref $function.m_funOuter__void (ref.as_non_null (struct.get $lambdas.Lambdas.$LambdaImplementor$6 $$outer_this__lambdas_Lambdas_$LambdaImplementor$6(local.get $this)))(struct.get $lambdas.Lambdas.vtable $m_funOuter__void (struct.get $lambdas.Lambdas $vtable(struct.get $lambdas.Lambdas.$LambdaImplementor$6 $$outer_this__lambdas_Lambdas_$LambdaImplementor$6(local.get $this)))))
-  ;; return (i + 2);
   ;;@ lambdas/Lambdas.java:75:10
   (return (i32.add (local.get $i) (i32.const 2)))
  )
@@ -3930,19 +3702,15 @@
 (func $$clinit__void@lambdas.Lambdas.$LambdaImplementor$6
  ;;@ lambdas/Lambdas.java:71:8
  (block
-  ;; if (lambdas.Lambdas.$LambdaImplementor$6.$initialized) return;
   ;;@ lambdas/Lambdas.java:71:8
   (if (global.get $f_$initialized__lambdas_Lambdas_$LambdaImplementor$6)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:71:8
     (return )
    )
   )
-  ;; (lambdas.Lambdas.$LambdaImplementor$6.$initialized = true);
   ;;@ lambdas/Lambdas.java:71:8
   (global.set $f_$initialized__lambdas_Lambdas_$LambdaImplementor$6 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:71:8
   (call $$clinit__void@java.lang.Object )
  )
@@ -3952,14 +3720,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$6
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.$LambdaImplementor$6.$class == null)) (lambdas.Lambdas.$LambdaImplementor$6.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_5(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$6) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.$LambdaImplementor$6.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_5(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_$LambdaImplementor$6 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_5__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_5__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.$LambdaImplementor$6.$class;
   (return (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$6))
  )
 )
@@ -3972,7 +3737,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$6))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$6 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.$LambdaImplementor$6.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$6) ))
  )
 )
@@ -3986,13 +3750,10 @@
  ;;@ lambdas/Lambdas.java:81:28
  (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$7))
  (block
-  ;; <anonymous> implements FunctionalInterface $instance = new $LambdaImplementor$7.<init>(0);
   ;;@ lambdas/Lambdas.java:81:28
   (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$7 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$7.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$7.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ lambdas/Lambdas.java:81:28
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$7@lambdas.Lambdas.$LambdaImplementor$7 (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:81:28
   (return (local.get $$instance))
  )
@@ -4003,10 +3764,8 @@
  (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$7))
  ;;@ lambdas/Lambdas.java:81:28
  (block
-  ;; lambdas.Lambdas.$LambdaImplementor$7.$clinit();
   ;;@ lambdas/Lambdas.java:81:28
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$7 )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:81:28
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -4022,7 +3781,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$7))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$7 (local.get $this.untyped)))
  (block
-  ;; return i;
   ;;@ lambdas/Lambdas.java:81:35
   (return (local.get $i))
  )
@@ -4033,19 +3791,15 @@
 (func $$clinit__void@lambdas.Lambdas.$LambdaImplementor$7
  ;;@ lambdas/Lambdas.java:81:28
  (block
-  ;; if (lambdas.Lambdas.$LambdaImplementor$7.$initialized) return;
   ;;@ lambdas/Lambdas.java:81:28
   (if (global.get $f_$initialized__lambdas_Lambdas_$LambdaImplementor$7)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:81:28
     (return )
    )
   )
-  ;; (lambdas.Lambdas.$LambdaImplementor$7.$initialized = true);
   ;;@ lambdas/Lambdas.java:81:28
   (global.set $f_$initialized__lambdas_Lambdas_$LambdaImplementor$7 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:81:28
   (call $$clinit__void@java.lang.Object )
  )
@@ -4055,14 +3809,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$7
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.$LambdaImplementor$7.$class == null)) (lambdas.Lambdas.$LambdaImplementor$7.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_6(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$7) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.$LambdaImplementor$7.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_6(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_$LambdaImplementor$7 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_6__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_6__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.$LambdaImplementor$7.$class;
   (return (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$7))
  )
 )
@@ -4075,7 +3826,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$7))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$7 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.$LambdaImplementor$7.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$7) ))
  )
 )
@@ -4089,13 +3839,10 @@
  ;;@ lambdas/Lambdas.java:85:19
  (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$8))
  (block
-  ;; <anonymous> implements FunctionalInterface $instance = new $LambdaImplementor$8.<init>(0);
   ;;@ lambdas/Lambdas.java:85:19
   (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$8 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$8.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$8.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ lambdas/Lambdas.java:85:19
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$8@lambdas.Lambdas.$LambdaImplementor$8 (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:85:19
   (return (local.get $$instance))
  )
@@ -4106,10 +3853,8 @@
  (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$8))
  ;;@ lambdas/Lambdas.java:85:19
  (block
-  ;; lambdas.Lambdas.$LambdaImplementor$8.$clinit();
   ;;@ lambdas/Lambdas.java:85:19
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$8 )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:85:19
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -4125,7 +3870,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$8))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$8 (local.get $this.untyped)))
  (block
-  ;; return j;
   ;;@ lambdas/Lambdas.java:85:24
   (return (local.get $j))
  )
@@ -4136,19 +3880,15 @@
 (func $$clinit__void@lambdas.Lambdas.$LambdaImplementor$8
  ;;@ lambdas/Lambdas.java:85:19
  (block
-  ;; if (lambdas.Lambdas.$LambdaImplementor$8.$initialized) return;
   ;;@ lambdas/Lambdas.java:85:19
   (if (global.get $f_$initialized__lambdas_Lambdas_$LambdaImplementor$8)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:85:19
     (return )
    )
   )
-  ;; (lambdas.Lambdas.$LambdaImplementor$8.$initialized = true);
   ;;@ lambdas/Lambdas.java:85:19
   (global.set $f_$initialized__lambdas_Lambdas_$LambdaImplementor$8 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:85:19
   (call $$clinit__void@java.lang.Object )
  )
@@ -4158,14 +3898,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$8
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.$LambdaImplementor$8.$class == null)) (lambdas.Lambdas.$LambdaImplementor$8.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_7(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$8) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.$LambdaImplementor$8.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_7(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_$LambdaImplementor$8 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_7__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_7__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.$LambdaImplementor$8.$class;
   (return (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$8))
  )
 )
@@ -4178,7 +3915,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$8))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$8 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.$LambdaImplementor$8.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$8) ))
  )
 )
@@ -4193,13 +3929,10 @@
  ;;@ lambdas/Lambdas.java:85:9
  (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$9))
  (block
-  ;; <anonymous> implements FunctionalInterface $instance = new $LambdaImplementor$9.<init>(0,$outer_this);
   ;;@ lambdas/Lambdas.java:85:9
   (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$9 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$9.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$9.itable)) (i32.const 0) (local.get $$outer_this)))
-  ;; $instance.$ctor($outer_this);
   ;;@ lambdas/Lambdas.java:85:9
   (call $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_$LambdaImplementor$9@lambdas.Lambdas.$LambdaImplementor$9 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:85:9
   (return (local.get $$instance))
  )
@@ -4211,10 +3944,8 @@
  (param $$outer_this (ref null $lambdas.Lambdas))
  ;;@ lambdas/Lambdas.java:85:9
  (block
-  ;; lambdas.Lambdas.$LambdaImplementor$9.$clinit();
   ;;@ lambdas/Lambdas.java:85:9
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$9 )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:85:9
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -4230,7 +3961,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$9))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$9 (local.get $this.untyped)))
  (block
-  ;; return $LambdaImplementor$9.this.this.call(lambdas.Lambdas.$LambdaImplementor$8.$create(),20);
   ;;@ lambdas/Lambdas.java:85:14
   (return (call_ref $function.m_call__lambdas_Lambdas_FunctionalInterface__int__int (ref.as_non_null (struct.get $lambdas.Lambdas.$LambdaImplementor$9 $$outer_this__lambdas_Lambdas_$LambdaImplementor$9(local.get $this)))(call $$create__@lambdas.Lambdas.$LambdaImplementor$8 )(i32.const 20)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(struct.get $lambdas.Lambdas.$LambdaImplementor$9 $$outer_this__lambdas_Lambdas_$LambdaImplementor$9(local.get $this))))))
  )
@@ -4241,19 +3971,15 @@
 (func $$clinit__void@lambdas.Lambdas.$LambdaImplementor$9
  ;;@ lambdas/Lambdas.java:85:9
  (block
-  ;; if (lambdas.Lambdas.$LambdaImplementor$9.$initialized) return;
   ;;@ lambdas/Lambdas.java:85:9
   (if (global.get $f_$initialized__lambdas_Lambdas_$LambdaImplementor$9)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:85:9
     (return )
    )
   )
-  ;; (lambdas.Lambdas.$LambdaImplementor$9.$initialized = true);
   ;;@ lambdas/Lambdas.java:85:9
   (global.set $f_$initialized__lambdas_Lambdas_$LambdaImplementor$9 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:85:9
   (call $$clinit__void@java.lang.Object )
  )
@@ -4263,14 +3989,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$9
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.$LambdaImplementor$9.$class == null)) (lambdas.Lambdas.$LambdaImplementor$9.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_8(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$9) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.$LambdaImplementor$9.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_8(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_$LambdaImplementor$9 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_8__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_8__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.$LambdaImplementor$9.$class;
   (return (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$9))
  )
 )
@@ -4283,7 +4006,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$9))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$9 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.$LambdaImplementor$9.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$9) ))
  )
 )
@@ -4297,13 +4019,10 @@
  ;;@ lambdas/Lambdas.java:90:8
  (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$10))
  (block
-  ;; <anonymous> implements FunctionalInterface $instance = new $LambdaImplementor$10.<init>(0);
   ;;@ lambdas/Lambdas.java:90:8
   (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$10 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$10.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$10.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ lambdas/Lambdas.java:90:8
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$10@lambdas.Lambdas.$LambdaImplementor$10 (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:90:8
   (return (local.get $$instance))
  )
@@ -4314,10 +4033,8 @@
  (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$10))
  ;;@ lambdas/Lambdas.java:90:8
  (block
-  ;; lambdas.Lambdas.$LambdaImplementor$10.$clinit();
   ;;@ lambdas/Lambdas.java:90:8
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$10 )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:90:8
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -4333,11 +4050,9 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$10))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$10 (local.get $this.untyped)))
  (block
-  ;; FunctionalInterface: {
   ;;@ lambdas/Lambdas.java:91:10
   (block $FunctionalInterface.BREAK
    (block
-    ;; return i;
     ;;@ lambdas/Lambdas.java:93:12
     (return (local.get $i))
    )
@@ -4350,19 +4065,15 @@
 (func $$clinit__void@lambdas.Lambdas.$LambdaImplementor$10
  ;;@ lambdas/Lambdas.java:90:8
  (block
-  ;; if (lambdas.Lambdas.$LambdaImplementor$10.$initialized) return;
   ;;@ lambdas/Lambdas.java:90:8
   (if (global.get $f_$initialized__lambdas_Lambdas_$LambdaImplementor$10)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:90:8
     (return )
    )
   )
-  ;; (lambdas.Lambdas.$LambdaImplementor$10.$initialized = true);
   ;;@ lambdas/Lambdas.java:90:8
   (global.set $f_$initialized__lambdas_Lambdas_$LambdaImplementor$10 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:90:8
   (call $$clinit__void@java.lang.Object )
  )
@@ -4372,14 +4083,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$10
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.$LambdaImplementor$10.$class == null)) (lambdas.Lambdas.$LambdaImplementor$10.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_9(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$10) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.$LambdaImplementor$10.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_9(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_$LambdaImplementor$10 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_9__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_9__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.$LambdaImplementor$10.$class;
   (return (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$10))
  )
 )
@@ -4392,7 +4100,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$10))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$10 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.$LambdaImplementor$10.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$10) ))
  )
 )
@@ -4407,13 +4114,10 @@
  ;;@ lambdas/Lambdas.java:107:32
  (local $$instance (ref null $lambdas.Lambdas.1))
  (block
-  ;; <anonymous> implements Functional<T><T> $instance = new $1.<init>(0,$outer_this);
   ;;@ lambdas/Lambdas.java:107:32
   (local.set $$instance (struct.new $lambdas.Lambdas.1 (ref.as_non_null (global.get $lambdas.Lambdas.1.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.1.itable)) (i32.const 0) (local.get $$outer_this)))
-  ;; $instance.$ctor($outer_this);
   ;;@ lambdas/Lambdas.java:107:32
   (call $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_1@lambdas.Lambdas.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:107:32
   (return (local.get $$instance))
  )
@@ -4425,10 +4129,8 @@
  (param $$outer_this (ref null $lambdas.Lambdas))
  ;;@ lambdas/Lambdas.java:107:32
  (block
-  ;; lambdas.Lambdas.1.$clinit();
   ;;@ lambdas/Lambdas.java:107:32
   (call $$clinit__void@lambdas.Lambdas.1 )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:107:32
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -4444,7 +4146,6 @@
  (local $this (ref null $lambdas.Lambdas.1))
  (local.set $this (ref.cast_static $lambdas.Lambdas.1 (local.get $this.untyped)))
  (block
-  ;; return null;
   ;;@ lambdas/Lambdas.java:110:16
   (return (ref.null $java.lang.Object))
  )
@@ -4455,19 +4156,15 @@
 (func $$clinit__void@lambdas.Lambdas.1
  ;;@ lambdas/Lambdas.java:107:32
  (block
-  ;; if (lambdas.Lambdas.1.$initialized) return;
   ;;@ lambdas/Lambdas.java:107:32
   (if (global.get $f_$initialized__lambdas_Lambdas_1)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:107:32
     (return )
    )
   )
-  ;; (lambdas.Lambdas.1.$initialized = true);
   ;;@ lambdas/Lambdas.java:107:32
   (global.set $f_$initialized__lambdas_Lambdas_1 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:107:32
   (call $$clinit__void@java.lang.Object )
  )
@@ -4477,14 +4174,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.1
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.1.$class == null)) (lambdas.Lambdas.1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_10(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_1) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_10(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_10__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_10__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.1.$class;
   (return (global.get $f_$class__lambdas_Lambdas_1))
  )
 )
@@ -4497,7 +4191,6 @@
  (local $this (ref null $lambdas.Lambdas.1))
  (local.set $this (ref.cast_static $lambdas.Lambdas.1 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.1.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.1) ))
  )
 )
@@ -4512,13 +4205,10 @@
  ;;@ lambdas/Lambdas.java:106:8
  (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$11))
  (block
-  ;; <anonymous> implements Functional<T><T> $instance = new $LambdaImplementor$11.<init>(0,$outer_this);
   ;;@ lambdas/Lambdas.java:106:8
   (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$11 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$11.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$11.itable)) (i32.const 0) (local.get $$outer_this)))
-  ;; $instance.$ctor($outer_this);
   ;;@ lambdas/Lambdas.java:106:8
   (call $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_$LambdaImplementor$11@lambdas.Lambdas.$LambdaImplementor$11 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:106:8
   (return (local.get $$instance))
  )
@@ -4530,10 +4220,8 @@
  (param $$outer_this (ref null $lambdas.Lambdas))
  ;;@ lambdas/Lambdas.java:106:8
  (block
-  ;; lambdas.Lambdas.$LambdaImplementor$11.$clinit();
   ;;@ lambdas/Lambdas.java:106:8
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$11 )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:106:8
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -4549,7 +4237,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$11))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$11 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.1.$create($LambdaImplementor$11.this.this);
   ;;@ lambdas/Lambdas.java:107:12
   (return (call $$create__lambdas_Lambdas@lambdas.Lambdas.1 (struct.get $lambdas.Lambdas.$LambdaImplementor$11 $$outer_this__lambdas_Lambdas_$LambdaImplementor$11(local.get $this))))
  )
@@ -4560,19 +4247,15 @@
 (func $$clinit__void@lambdas.Lambdas.$LambdaImplementor$11
  ;;@ lambdas/Lambdas.java:106:8
  (block
-  ;; if (lambdas.Lambdas.$LambdaImplementor$11.$initialized) return;
   ;;@ lambdas/Lambdas.java:106:8
   (if (global.get $f_$initialized__lambdas_Lambdas_$LambdaImplementor$11)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:106:8
     (return )
    )
   )
-  ;; (lambdas.Lambdas.$LambdaImplementor$11.$initialized = true);
   ;;@ lambdas/Lambdas.java:106:8
   (global.set $f_$initialized__lambdas_Lambdas_$LambdaImplementor$11 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:106:8
   (call $$clinit__void@java.lang.Object )
  )
@@ -4582,14 +4265,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$11
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.$LambdaImplementor$11.$class == null)) (lambdas.Lambdas.$LambdaImplementor$11.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_11(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$11) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.$LambdaImplementor$11.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_11(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_$LambdaImplementor$11 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_11__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_11__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.$LambdaImplementor$11.$class;
   (return (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$11))
  )
 )
@@ -4602,7 +4282,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$11))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$11 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.$LambdaImplementor$11.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$11) ))
  )
 )
@@ -4616,13 +4295,10 @@
  ;;@ lambdas/Lambdas.java:119:32
  (local $$instance (ref null $lambdas.Lambdas.2))
  (block
-  ;; <anonymous> implements Functional<T><T> $instance = new $2.<init>(0);
   ;;@ lambdas/Lambdas.java:119:32
   (local.set $$instance (struct.new $lambdas.Lambdas.2 (ref.as_non_null (global.get $lambdas.Lambdas.2.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.2.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ lambdas/Lambdas.java:119:32
   (call $$ctor__void_$p_lambdas_Lambdas_2@lambdas.Lambdas.2 (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:119:32
   (return (local.get $$instance))
  )
@@ -4633,10 +4309,8 @@
  (param $this (ref null $lambdas.Lambdas.2))
  ;;@ lambdas/Lambdas.java:119:32
  (block
-  ;; lambdas.Lambdas.2.$clinit();
   ;;@ lambdas/Lambdas.java:119:32
   (call $$clinit__void@lambdas.Lambdas.2 )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:119:32
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -4652,7 +4326,6 @@
  (local $this (ref null $lambdas.Lambdas.2))
  (local.set $this (ref.cast_static $lambdas.Lambdas.2 (local.get $this.untyped)))
  (block
-  ;; return null;
   ;;@ lambdas/Lambdas.java:122:16
   (return (ref.null $java.lang.Object))
  )
@@ -4663,19 +4336,15 @@
 (func $$clinit__void@lambdas.Lambdas.2
  ;;@ lambdas/Lambdas.java:119:32
  (block
-  ;; if (lambdas.Lambdas.2.$initialized) return;
   ;;@ lambdas/Lambdas.java:119:32
   (if (global.get $f_$initialized__lambdas_Lambdas_2)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:119:32
     (return )
    )
   )
-  ;; (lambdas.Lambdas.2.$initialized = true);
   ;;@ lambdas/Lambdas.java:119:32
   (global.set $f_$initialized__lambdas_Lambdas_2 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:119:32
   (call $$clinit__void@java.lang.Object )
  )
@@ -4685,14 +4354,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.2
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.2.$class == null)) (lambdas.Lambdas.2.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_12(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_2) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.2.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_12(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_12__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_12__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.2.$class;
   (return (global.get $f_$class__lambdas_Lambdas_2))
  )
 )
@@ -4705,7 +4371,6 @@
  (local $this (ref null $lambdas.Lambdas.2))
  (local.set $this (ref.cast_static $lambdas.Lambdas.2 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.2.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.2) ))
  )
 )
@@ -4719,13 +4384,10 @@
  ;;@ lambdas/Lambdas.java:118:8
  (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$12))
  (block
-  ;; <anonymous> implements Functional<T><T> $instance = new $LambdaImplementor$12.<init>(0);
   ;;@ lambdas/Lambdas.java:118:8
   (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$12 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$12.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$12.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ lambdas/Lambdas.java:118:8
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$12@lambdas.Lambdas.$LambdaImplementor$12 (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:118:8
   (return (local.get $$instance))
  )
@@ -4736,10 +4398,8 @@
  (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$12))
  ;;@ lambdas/Lambdas.java:118:8
  (block
-  ;; lambdas.Lambdas.$LambdaImplementor$12.$clinit();
   ;;@ lambdas/Lambdas.java:118:8
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$12 )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:118:8
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -4755,7 +4415,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$12))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$12 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.2.$create();
   ;;@ lambdas/Lambdas.java:119:12
   (return (call $$create__@lambdas.Lambdas.2 ))
  )
@@ -4766,19 +4425,15 @@
 (func $$clinit__void@lambdas.Lambdas.$LambdaImplementor$12
  ;;@ lambdas/Lambdas.java:118:8
  (block
-  ;; if (lambdas.Lambdas.$LambdaImplementor$12.$initialized) return;
   ;;@ lambdas/Lambdas.java:118:8
   (if (global.get $f_$initialized__lambdas_Lambdas_$LambdaImplementor$12)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:118:8
     (return )
    )
   )
-  ;; (lambdas.Lambdas.$LambdaImplementor$12.$initialized = true);
   ;;@ lambdas/Lambdas.java:118:8
   (global.set $f_$initialized__lambdas_Lambdas_$LambdaImplementor$12 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:118:8
   (call $$clinit__void@java.lang.Object )
  )
@@ -4788,14 +4443,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$12
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.$LambdaImplementor$12.$class == null)) (lambdas.Lambdas.$LambdaImplementor$12.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_13(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$12) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.$LambdaImplementor$12.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_13(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_$LambdaImplementor$12 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_13__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_13__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.$LambdaImplementor$12.$class;
   (return (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$12))
  )
 )
@@ -4808,7 +4460,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$12))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$12 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.$LambdaImplementor$12.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$12) ))
  )
 )
@@ -4822,13 +4473,10 @@
  ;;@ lambdas/Lambdas.java:166:25
  (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$13))
  (block
-  ;; <anonymous> implements GenericFunctionalInterface<T><T> $instance = new $LambdaImplementor$13.<init>(0);
   ;;@ lambdas/Lambdas.java:166:25
   (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$13 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$13.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$13.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ lambdas/Lambdas.java:166:25
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$13@lambdas.Lambdas.$LambdaImplementor$13 (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:166:25
   (return (local.get $$instance))
  )
@@ -4839,10 +4487,8 @@
  (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$13))
  ;;@ lambdas/Lambdas.java:166:25
  (block
-  ;; lambdas.Lambdas.$LambdaImplementor$13.$clinit();
   ;;@ lambdas/Lambdas.java:166:25
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$13 )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:166:25
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -4859,10 +4505,8 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$13))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$13 (local.get $this.untyped)))
  (block
-  ;; Error i = ((Error) ((T) i));
   ;;@ lambdas/Lambdas.java:166:25
   (local.set $i_1 (ref.cast_static $java.lang.Error (local.get $i)))
-  ;; return i;
   ;;@ lambdas/Lambdas.java:166:30
   (return (local.get $i_1))
  )
@@ -4873,19 +4517,15 @@
 (func $$clinit__void@lambdas.Lambdas.$LambdaImplementor$13
  ;;@ lambdas/Lambdas.java:166:25
  (block
-  ;; if (lambdas.Lambdas.$LambdaImplementor$13.$initialized) return;
   ;;@ lambdas/Lambdas.java:166:25
   (if (global.get $f_$initialized__lambdas_Lambdas_$LambdaImplementor$13)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:166:25
     (return )
    )
   )
-  ;; (lambdas.Lambdas.$LambdaImplementor$13.$initialized = true);
   ;;@ lambdas/Lambdas.java:166:25
   (global.set $f_$initialized__lambdas_Lambdas_$LambdaImplementor$13 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:166:25
   (call $$clinit__void@java.lang.Object )
  )
@@ -4895,14 +4535,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$13
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.$LambdaImplementor$13.$class == null)) (lambdas.Lambdas.$LambdaImplementor$13.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_14(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$13) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.$LambdaImplementor$13.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_14(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_$LambdaImplementor$13 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_14__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_14__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.$LambdaImplementor$13.$class;
   (return (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$13))
  )
 )
@@ -4915,7 +4552,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$13))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$13 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.$LambdaImplementor$13.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$13) ))
  )
 )
@@ -4929,13 +4565,10 @@
  ;;@ lambdas/Lambdas.java:167:22
  (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$14))
  (block
-  ;; <anonymous> implements GenericFunctionalInterface<T><T> $instance = new $LambdaImplementor$14.<init>(0);
   ;;@ lambdas/Lambdas.java:167:22
   (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$14 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$14.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$14.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ lambdas/Lambdas.java:167:22
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$14@lambdas.Lambdas.$LambdaImplementor$14 (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:167:22
   (return (local.get $$instance))
  )
@@ -4946,10 +4579,8 @@
  (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$14))
  ;;@ lambdas/Lambdas.java:167:22
  (block
-  ;; lambdas.Lambdas.$LambdaImplementor$14.$clinit();
   ;;@ lambdas/Lambdas.java:167:22
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$14 )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:167:22
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -4966,10 +4597,8 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$14))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$14 (local.get $this.untyped)))
  (block
-  ;; Error i = ((Error) ((T) i));
   ;;@ lambdas/Lambdas.java:167:22
   (local.set $i_1 (ref.cast_static $java.lang.Error (local.get $i)))
-  ;; return i;
   ;;@ lambdas/Lambdas.java:167:27
   (return (local.get $i_1))
  )
@@ -4980,19 +4609,15 @@
 (func $$clinit__void@lambdas.Lambdas.$LambdaImplementor$14
  ;;@ lambdas/Lambdas.java:167:22
  (block
-  ;; if (lambdas.Lambdas.$LambdaImplementor$14.$initialized) return;
   ;;@ lambdas/Lambdas.java:167:22
   (if (global.get $f_$initialized__lambdas_Lambdas_$LambdaImplementor$14)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:167:22
     (return )
    )
   )
-  ;; (lambdas.Lambdas.$LambdaImplementor$14.$initialized = true);
   ;;@ lambdas/Lambdas.java:167:22
   (global.set $f_$initialized__lambdas_Lambdas_$LambdaImplementor$14 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:167:22
   (call $$clinit__void@java.lang.Object )
  )
@@ -5002,14 +4627,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$14
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.$LambdaImplementor$14.$class == null)) (lambdas.Lambdas.$LambdaImplementor$14.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_15(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$14) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.$LambdaImplementor$14.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_15(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_$LambdaImplementor$14 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_15__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_15__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.$LambdaImplementor$14.$class;
   (return (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$14))
  )
 )
@@ -5022,7 +4644,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$14))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$14 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.$LambdaImplementor$14.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$14) ))
  )
 )
@@ -5036,13 +4657,10 @@
  ;;@ lambdas/Lambdas.java:168:31
  (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$15))
  (block
-  ;; <anonymous> implements GenericFunctionalInterface<T><T> $instance = new $LambdaImplementor$15.<init>(0);
   ;;@ lambdas/Lambdas.java:168:31
   (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$15 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$15.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$15.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ lambdas/Lambdas.java:168:31
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$15@lambdas.Lambdas.$LambdaImplementor$15 (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:168:31
   (return (local.get $$instance))
  )
@@ -5053,10 +4671,8 @@
  (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$15))
  ;;@ lambdas/Lambdas.java:168:31
  (block
-  ;; lambdas.Lambdas.$LambdaImplementor$15.$clinit();
   ;;@ lambdas/Lambdas.java:168:31
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$15 )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:168:31
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -5073,10 +4689,8 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$15))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$15 (local.get $this.untyped)))
  (block
-  ;; Enum<T> i = ((Enum<T>) ((T) i));
   ;;@ lambdas/Lambdas.java:168:31
   (local.set $i_1 (ref.cast_static $java.lang.Enum (local.get $i)))
-  ;; return i;
   ;;@ lambdas/Lambdas.java:168:36
   (return (local.get $i_1))
  )
@@ -5087,19 +4701,15 @@
 (func $$clinit__void@lambdas.Lambdas.$LambdaImplementor$15
  ;;@ lambdas/Lambdas.java:168:31
  (block
-  ;; if (lambdas.Lambdas.$LambdaImplementor$15.$initialized) return;
   ;;@ lambdas/Lambdas.java:168:31
   (if (global.get $f_$initialized__lambdas_Lambdas_$LambdaImplementor$15)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:168:31
     (return )
    )
   )
-  ;; (lambdas.Lambdas.$LambdaImplementor$15.$initialized = true);
   ;;@ lambdas/Lambdas.java:168:31
   (global.set $f_$initialized__lambdas_Lambdas_$LambdaImplementor$15 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:168:31
   (call $$clinit__void@java.lang.Object )
  )
@@ -5109,14 +4719,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$15
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.$LambdaImplementor$15.$class == null)) (lambdas.Lambdas.$LambdaImplementor$15.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_16(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$15) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.$LambdaImplementor$15.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_16(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_$LambdaImplementor$15 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_16__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_16__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.$LambdaImplementor$15.$class;
   (return (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$15))
  )
 )
@@ -5129,7 +4736,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$15))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$15 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.$LambdaImplementor$15.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$15) ))
  )
 )
@@ -5143,13 +4749,10 @@
  ;;@ lambdas/Lambdas.java:170:8
  (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$16))
  (block
-  ;; <anonymous> implements BiFunction<T, U, R><T, U, R> $instance = new $LambdaImplementor$16.<init>(0);
   ;;@ lambdas/Lambdas.java:170:8
   (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$16 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$16.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$16.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ lambdas/Lambdas.java:170:8
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$16@lambdas.Lambdas.$LambdaImplementor$16 (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:170:8
   (return (local.get $$instance))
  )
@@ -5160,10 +4763,8 @@
  (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$16))
  ;;@ lambdas/Lambdas.java:170:8
  (block
-  ;; lambdas.Lambdas.$LambdaImplementor$16.$clinit();
   ;;@ lambdas/Lambdas.java:170:8
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$16 )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:170:8
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -5182,13 +4783,10 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$16))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$16 (local.get $this.untyped)))
  (block
-  ;; Object x = ((T) x);
   ;;@ lambdas/Lambdas.java:170:8
   (local.set $x_1 (local.get $x))
-  ;; String y = ((String) ((U) y));
   ;;@ lambdas/Lambdas.java:170:8
   (local.set $y_1 (ref.cast_static $java.lang.String (local.get $y)))
-  ;; throw javaemul.internal.Exceptions.throwJsError(java.lang.RuntimeException.$create());
   ;;@ lambdas/Lambdas.java:171:10
   (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (call $$create__@java.lang.RuntimeException ))
   (unreachable)
@@ -5206,7 +4804,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$16))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$16 (local.get $this.untyped)))
  (block
-  ;; return $LambdaImplementor$16.this.andThen(arg0);
   ;;@ lambdas/Lambdas.java:170:8
   (return (call $m_andThen__lambdas_Lambdas_Function__lambdas_Lambdas_BiFunction@lambdas.Lambdas.BiFunction (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
@@ -5217,22 +4814,17 @@
 (func $$clinit__void@lambdas.Lambdas.$LambdaImplementor$16
  ;;@ lambdas/Lambdas.java:170:8
  (block
-  ;; if (lambdas.Lambdas.$LambdaImplementor$16.$initialized) return;
   ;;@ lambdas/Lambdas.java:170:8
   (if (global.get $f_$initialized__lambdas_Lambdas_$LambdaImplementor$16)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:170:8
     (return )
    )
   )
-  ;; (lambdas.Lambdas.$LambdaImplementor$16.$initialized = true);
   ;;@ lambdas/Lambdas.java:170:8
   (global.set $f_$initialized__lambdas_Lambdas_$LambdaImplementor$16 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:170:8
   (call $$clinit__void@java.lang.Object )
-  ;; lambdas.Lambdas.BiFunction.$clinit();
   ;;@ lambdas/Lambdas.java:170:8
   (call $$clinit__void@lambdas.Lambdas.BiFunction )
  )
@@ -5242,14 +4834,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$16
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.$LambdaImplementor$16.$class == null)) (lambdas.Lambdas.$LambdaImplementor$16.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_17(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$16) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.$LambdaImplementor$16.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_17(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_$LambdaImplementor$16 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_17__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_17__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.$LambdaImplementor$16.$class;
   (return (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$16))
  )
 )
@@ -5262,7 +4851,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$16))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$16 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.$LambdaImplementor$16.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$16) ))
  )
 )
@@ -5276,13 +4864,10 @@
  ;;@ lambdas/Lambdas.java:173:23
  (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$17))
  (block
-  ;; <anonymous> implements BiFunction<T, U, R><T, U, R> $instance = new $LambdaImplementor$17.<init>(0);
   ;;@ lambdas/Lambdas.java:173:23
   (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$17 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$17.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$17.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ lambdas/Lambdas.java:173:23
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$17@lambdas.Lambdas.$LambdaImplementor$17 (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:173:23
   (return (local.get $$instance))
  )
@@ -5293,10 +4878,8 @@
  (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$17))
  ;;@ lambdas/Lambdas.java:173:23
  (block
-  ;; lambdas.Lambdas.$LambdaImplementor$17.$clinit();
   ;;@ lambdas/Lambdas.java:173:23
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$17 )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:173:23
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -5315,13 +4898,10 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$17))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$17 (local.get $this.untyped)))
  (block
-  ;; Object x = ((T) x);
   ;;@ lambdas/Lambdas.java:173:23
   (local.set $x_1 (local.get $x))
-  ;; String y = ((String) ((U) y));
   ;;@ lambdas/Lambdas.java:173:23
   (local.set $y_1 (ref.cast_static $java.lang.String (local.get $y)))
-  ;; return ((R) java.lang.Double.valueOf(3.0));
   ;;@ lambdas/Lambdas.java:173:33
   (return (call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 3.0)))
  )
@@ -5338,7 +4918,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$17))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$17 (local.get $this.untyped)))
  (block
-  ;; return $LambdaImplementor$17.this.andThen(arg0);
   ;;@ lambdas/Lambdas.java:173:23
   (return (call $m_andThen__lambdas_Lambdas_Function__lambdas_Lambdas_BiFunction@lambdas.Lambdas.BiFunction (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
@@ -5349,22 +4928,17 @@
 (func $$clinit__void@lambdas.Lambdas.$LambdaImplementor$17
  ;;@ lambdas/Lambdas.java:173:23
  (block
-  ;; if (lambdas.Lambdas.$LambdaImplementor$17.$initialized) return;
   ;;@ lambdas/Lambdas.java:173:23
   (if (global.get $f_$initialized__lambdas_Lambdas_$LambdaImplementor$17)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:173:23
     (return )
    )
   )
-  ;; (lambdas.Lambdas.$LambdaImplementor$17.$initialized = true);
   ;;@ lambdas/Lambdas.java:173:23
   (global.set $f_$initialized__lambdas_Lambdas_$LambdaImplementor$17 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:173:23
   (call $$clinit__void@java.lang.Object )
-  ;; lambdas.Lambdas.BiFunction.$clinit();
   ;;@ lambdas/Lambdas.java:173:23
   (call $$clinit__void@lambdas.Lambdas.BiFunction )
  )
@@ -5374,14 +4948,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$17
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.$LambdaImplementor$17.$class == null)) (lambdas.Lambdas.$LambdaImplementor$17.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_18(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$17) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.$LambdaImplementor$17.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_18(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_$LambdaImplementor$17 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_18__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_18__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.$LambdaImplementor$17.$class;
   (return (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$17))
  )
 )
@@ -5394,7 +4965,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$17))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$17 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.$LambdaImplementor$17.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$17) ))
  )
 )
@@ -5408,13 +4978,10 @@
  ;;@ lambdas/Lambdas.java:174:31
  (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$18))
  (block
-  ;; <anonymous> implements Function<T, R><T, R> $instance = new $LambdaImplementor$18.<init>(0);
   ;;@ lambdas/Lambdas.java:174:31
   (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$18 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$18.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$18.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ lambdas/Lambdas.java:174:31
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$18@lambdas.Lambdas.$LambdaImplementor$18 (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:174:31
   (return (local.get $$instance))
  )
@@ -5425,10 +4992,8 @@
  (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$18))
  ;;@ lambdas/Lambdas.java:174:31
  (block
-  ;; lambdas.Lambdas.$LambdaImplementor$18.$clinit();
   ;;@ lambdas/Lambdas.java:174:31
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$18 )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:174:31
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -5445,10 +5010,8 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$18))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$18 (local.get $this.untyped)))
  (block
-  ;; T item = ((T) ((T) item));
   ;;@ lambdas/Lambdas.java:174:31
   (local.set $item_1 (ref.cast_static $java.lang.Enum (local.get $item)))
-  ;; return ((R) java.lang.Long.valueOf(1));
   ;;@ lambdas/Lambdas.java:174:39
   (return (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.const 1)))
  )
@@ -5459,19 +5022,15 @@
 (func $$clinit__void@lambdas.Lambdas.$LambdaImplementor$18
  ;;@ lambdas/Lambdas.java:174:31
  (block
-  ;; if (lambdas.Lambdas.$LambdaImplementor$18.$initialized) return;
   ;;@ lambdas/Lambdas.java:174:31
   (if (global.get $f_$initialized__lambdas_Lambdas_$LambdaImplementor$18)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:174:31
     (return )
    )
   )
-  ;; (lambdas.Lambdas.$LambdaImplementor$18.$initialized = true);
   ;;@ lambdas/Lambdas.java:174:31
   (global.set $f_$initialized__lambdas_Lambdas_$LambdaImplementor$18 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:174:31
   (call $$clinit__void@java.lang.Object )
  )
@@ -5481,14 +5040,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$18
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.$LambdaImplementor$18.$class == null)) (lambdas.Lambdas.$LambdaImplementor$18.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_19(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$18) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.$LambdaImplementor$18.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_19(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_$LambdaImplementor$18 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_19__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_19__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.$LambdaImplementor$18.$class;
   (return (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$18))
  )
 )
@@ -5501,7 +5057,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$18))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$18 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.$LambdaImplementor$18.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$18) ))
  )
 )
@@ -5515,13 +5070,10 @@
  ;;@ lambdas/Lambdas.java:182:28
  (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$19))
  (block
-  ;; <anonymous> implements Function<T, R><T, R> $instance = new $LambdaImplementor$19.<init>(0);
   ;;@ lambdas/Lambdas.java:182:28
   (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$19 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$19.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$19.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ lambdas/Lambdas.java:182:28
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$19@lambdas.Lambdas.$LambdaImplementor$19 (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:182:28
   (return (local.get $$instance))
  )
@@ -5532,10 +5084,8 @@
  (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$19))
  ;;@ lambdas/Lambdas.java:182:28
  (block
-  ;; lambdas.Lambdas.$LambdaImplementor$19.$clinit();
   ;;@ lambdas/Lambdas.java:182:28
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$19 )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:182:28
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -5552,10 +5102,8 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$19))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$19 (local.get $this.untyped)))
  (block
-  ;; Object l = ((T) l);
   ;;@ lambdas/Lambdas.java:182:28
   (local.set $l_1 (local.get $l))
-  ;; return lambdas.Lambdas.m();
   ;;@ lambdas/Lambdas.java:182:33
   (return (call $m_m__java_lang_Object@lambdas.Lambdas ))
  )
@@ -5566,19 +5114,15 @@
 (func $$clinit__void@lambdas.Lambdas.$LambdaImplementor$19
  ;;@ lambdas/Lambdas.java:182:28
  (block
-  ;; if (lambdas.Lambdas.$LambdaImplementor$19.$initialized) return;
   ;;@ lambdas/Lambdas.java:182:28
   (if (global.get $f_$initialized__lambdas_Lambdas_$LambdaImplementor$19)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:182:28
     (return )
    )
   )
-  ;; (lambdas.Lambdas.$LambdaImplementor$19.$initialized = true);
   ;;@ lambdas/Lambdas.java:182:28
   (global.set $f_$initialized__lambdas_Lambdas_$LambdaImplementor$19 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:182:28
   (call $$clinit__void@java.lang.Object )
  )
@@ -5588,14 +5132,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$19
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.$LambdaImplementor$19.$class == null)) (lambdas.Lambdas.$LambdaImplementor$19.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_20(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$19) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.$LambdaImplementor$19.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_20(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_$LambdaImplementor$19 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_20__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_20__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.$LambdaImplementor$19.$class;
   (return (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$19))
  )
 )
@@ -5608,7 +5149,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$19))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$19 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.$LambdaImplementor$19.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$19) ))
  )
 )
@@ -5622,13 +5162,10 @@
  ;;@ lambdas/Lambdas.java:190:56
  (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$20))
  (block
-  ;; <anonymous> implements FunctionalInterfaceWithMethodReturningVoid $instance = new $LambdaImplementor$20.<init>(0);
   ;;@ lambdas/Lambdas.java:190:56
   (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$20 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$20.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$20.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ lambdas/Lambdas.java:190:56
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$20@lambdas.Lambdas.$LambdaImplementor$20 (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:190:56
   (return (local.get $$instance))
  )
@@ -5639,10 +5176,8 @@
  (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$20))
  ;;@ lambdas/Lambdas.java:190:56
  (block
-  ;; lambdas.Lambdas.$LambdaImplementor$20.$clinit();
   ;;@ lambdas/Lambdas.java:190:56
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$20 )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:190:56
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -5656,7 +5191,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$20))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$20 (local.get $this.untyped)))
  (block
-  ;; java.lang.Object.$create();
   ;;@ lambdas/Lambdas.java:190:62
   (drop (call $$create__@java.lang.Object ))
  )
@@ -5667,19 +5201,15 @@
 (func $$clinit__void@lambdas.Lambdas.$LambdaImplementor$20
  ;;@ lambdas/Lambdas.java:190:56
  (block
-  ;; if (lambdas.Lambdas.$LambdaImplementor$20.$initialized) return;
   ;;@ lambdas/Lambdas.java:190:56
   (if (global.get $f_$initialized__lambdas_Lambdas_$LambdaImplementor$20)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:190:56
     (return )
    )
   )
-  ;; (lambdas.Lambdas.$LambdaImplementor$20.$initialized = true);
   ;;@ lambdas/Lambdas.java:190:56
   (global.set $f_$initialized__lambdas_Lambdas_$LambdaImplementor$20 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:190:56
   (call $$clinit__void@java.lang.Object )
  )
@@ -5689,14 +5219,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$20
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.$LambdaImplementor$20.$class == null)) (lambdas.Lambdas.$LambdaImplementor$20.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_21(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$20) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.$LambdaImplementor$20.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_21(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_$LambdaImplementor$20 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_21__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_21__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.$LambdaImplementor$20.$class;
   (return (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$20))
  )
 )
@@ -5709,7 +5236,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$20))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$20 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.$LambdaImplementor$20.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$20) ))
  )
 )
@@ -5724,13 +5250,10 @@
  ;;@ lambdas/Lambdas.java:194:75
  (local $$instance (ref null $lambdas.Lambdas.3))
  (block
-  ;; <anonymous> extends Object $instance = new $3.<init>(0,$outer_this);
   ;;@ lambdas/Lambdas.java:194:75
   (local.set $$instance (struct.new $lambdas.Lambdas.3 (ref.as_non_null (global.get $lambdas.Lambdas.3.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.3.itable)) (i32.const 0) (local.get $$outer_this)))
-  ;; $instance.$ctor($outer_this);
   ;;@ lambdas/Lambdas.java:194:75
   (call $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_3@lambdas.Lambdas.3 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:194:75
   (return (local.get $$instance))
  )
@@ -5742,10 +5265,8 @@
  (param $$outer_this (ref null $lambdas.Lambdas))
  ;;@ lambdas/Lambdas.java:194:75
  (block
-  ;; lambdas.Lambdas.3.$clinit();
   ;;@ lambdas/Lambdas.java:194:75
   (call $$clinit__void@lambdas.Lambdas.3 )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:194:75
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -5755,19 +5276,15 @@
 (func $$clinit__void@lambdas.Lambdas.3
  ;;@ lambdas/Lambdas.java:194:75
  (block
-  ;; if (lambdas.Lambdas.3.$initialized) return;
   ;;@ lambdas/Lambdas.java:194:75
   (if (global.get $f_$initialized__lambdas_Lambdas_3)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:194:75
     (return )
    )
   )
-  ;; (lambdas.Lambdas.3.$initialized = true);
   ;;@ lambdas/Lambdas.java:194:75
   (global.set $f_$initialized__lambdas_Lambdas_3 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:194:75
   (call $$clinit__void@java.lang.Object )
  )
@@ -5777,14 +5294,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.3
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.3.$class == null)) (lambdas.Lambdas.3.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_22(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_3) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.3.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_22(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_3 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_22__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_22__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.3.$class;
   (return (global.get $f_$class__lambdas_Lambdas_3))
  )
 )
@@ -5797,7 +5311,6 @@
  (local $this (ref null $lambdas.Lambdas.3))
  (local.set $this (ref.cast_static $lambdas.Lambdas.3 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.3.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.3) ))
  )
 )
@@ -5812,13 +5325,10 @@
  ;;@ lambdas/Lambdas.java:194:56
  (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$21))
  (block
-  ;; <anonymous> implements FunctionalInterfaceWithMethodReturningVoid $instance = new $LambdaImplementor$21.<init>(0,$outer_this);
   ;;@ lambdas/Lambdas.java:194:56
   (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$21 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$21.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$21.itable)) (i32.const 0) (local.get $$outer_this)))
-  ;; $instance.$ctor($outer_this);
   ;;@ lambdas/Lambdas.java:194:56
   (call $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_$LambdaImplementor$21@lambdas.Lambdas.$LambdaImplementor$21 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:194:56
   (return (local.get $$instance))
  )
@@ -5830,10 +5340,8 @@
  (param $$outer_this (ref null $lambdas.Lambdas))
  ;;@ lambdas/Lambdas.java:194:56
  (block
-  ;; lambdas.Lambdas.$LambdaImplementor$21.$clinit();
   ;;@ lambdas/Lambdas.java:194:56
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$21 )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:194:56
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -5847,7 +5355,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$21))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$21 (local.get $this.untyped)))
  (block
-  ;; lambdas.Lambdas.3.$create($LambdaImplementor$21.this.this);
   ;;@ lambdas/Lambdas.java:194:62
   (drop (call $$create__lambdas_Lambdas@lambdas.Lambdas.3 (struct.get $lambdas.Lambdas.$LambdaImplementor$21 $$outer_this__lambdas_Lambdas_$LambdaImplementor$21(local.get $this))))
  )
@@ -5858,19 +5365,15 @@
 (func $$clinit__void@lambdas.Lambdas.$LambdaImplementor$21
  ;;@ lambdas/Lambdas.java:194:56
  (block
-  ;; if (lambdas.Lambdas.$LambdaImplementor$21.$initialized) return;
   ;;@ lambdas/Lambdas.java:194:56
   (if (global.get $f_$initialized__lambdas_Lambdas_$LambdaImplementor$21)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:194:56
     (return )
    )
   )
-  ;; (lambdas.Lambdas.$LambdaImplementor$21.$initialized = true);
   ;;@ lambdas/Lambdas.java:194:56
   (global.set $f_$initialized__lambdas_Lambdas_$LambdaImplementor$21 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:194:56
   (call $$clinit__void@java.lang.Object )
  )
@@ -5880,14 +5383,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$21
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.$LambdaImplementor$21.$class == null)) (lambdas.Lambdas.$LambdaImplementor$21.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_23(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$21) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.$LambdaImplementor$21.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_23(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_$LambdaImplementor$21 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_23__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_23__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.$LambdaImplementor$21.$class;
   (return (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$21))
  )
 )
@@ -5900,7 +5400,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$21))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$21 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.$LambdaImplementor$21.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$21) ))
  )
 )
@@ -5914,13 +5413,10 @@
  ;;@ lambdas/Lambdas.java:295:76
  (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$22))
  (block
-  ;; <anonymous> implements GenericFunctionalInterface<T><T, T> $instance = new $LambdaImplementor$22.<init>(0);
   ;;@ lambdas/Lambdas.java:295:76
   (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$22 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$22.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$22.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ lambdas/Lambdas.java:295:76
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$22@lambdas.Lambdas.$LambdaImplementor$22 (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:295:76
   (return (local.get $$instance))
  )
@@ -5931,10 +5427,8 @@
  (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$22))
  ;;@ lambdas/Lambdas.java:295:76
  (block
-  ;; lambdas.Lambdas.$LambdaImplementor$22.$clinit();
   ;;@ lambdas/Lambdas.java:295:76
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$22 )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:295:76
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -5951,10 +5445,8 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$22))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$22 (local.get $this.untyped)))
  (block
-  ;; String x = ((String) ((T) x));
   ;;@ lambdas/Lambdas.java:295:76
   (local.set $x_1 (ref.cast_static $java.lang.String (local.get $x)))
-  ;; return x;
   ;;@ lambdas/Lambdas.java:295:81
   (return (local.get $x_1))
  )
@@ -5970,7 +5462,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$22))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$22 (local.get $this.untyped)))
  (block
-  ;; $LambdaImplementor$22.this.method(arg0);
   ;;@ lambdas/Lambdas.java:295:76
   (call $m_method__java_lang_Object__void@lambdas.Lambdas.JustADefaultT (ref.as_non_null (local.get $this))(local.get $arg0))
  )
@@ -5981,22 +5472,17 @@
 (func $$clinit__void@lambdas.Lambdas.$LambdaImplementor$22
  ;;@ lambdas/Lambdas.java:295:76
  (block
-  ;; if (lambdas.Lambdas.$LambdaImplementor$22.$initialized) return;
   ;;@ lambdas/Lambdas.java:295:76
   (if (global.get $f_$initialized__lambdas_Lambdas_$LambdaImplementor$22)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:295:76
     (return )
    )
   )
-  ;; (lambdas.Lambdas.$LambdaImplementor$22.$initialized = true);
   ;;@ lambdas/Lambdas.java:295:76
   (global.set $f_$initialized__lambdas_Lambdas_$LambdaImplementor$22 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:295:76
   (call $$clinit__void@java.lang.Object )
-  ;; lambdas.Lambdas.JustADefaultT.$clinit();
   ;;@ lambdas/Lambdas.java:295:76
   (call $$clinit__void@lambdas.Lambdas.JustADefaultT )
  )
@@ -6006,14 +5492,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$22
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.$LambdaImplementor$22.$class == null)) (lambdas.Lambdas.$LambdaImplementor$22.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_24(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$22) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.$LambdaImplementor$22.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_24(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_$LambdaImplementor$22 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_24__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_24__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.$LambdaImplementor$22.$class;
   (return (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$22))
  )
 )
@@ -6026,7 +5509,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$22))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$22 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.$LambdaImplementor$22.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$22) ))
  )
 )
@@ -6040,13 +5522,10 @@
  ;;@ lambdas/Lambdas.java:298:69
  (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$23))
  (block
-  ;; <anonymous> implements GenericFunctionalInterface<T><T, S> $instance = new $LambdaImplementor$23.<init>(0);
   ;;@ lambdas/Lambdas.java:298:69
   (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$23 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$23.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$23.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ lambdas/Lambdas.java:298:69
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$23@lambdas.Lambdas.$LambdaImplementor$23 (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:298:69
   (return (local.get $$instance))
  )
@@ -6057,10 +5536,8 @@
  (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$23))
  ;;@ lambdas/Lambdas.java:298:69
  (block
-  ;; lambdas.Lambdas.$LambdaImplementor$23.$clinit();
   ;;@ lambdas/Lambdas.java:298:69
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$23 )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:298:69
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -6077,10 +5554,8 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$23))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$23 (local.get $this.untyped)))
  (block
-  ;; String x = ((String) ((T) x));
   ;;@ lambdas/Lambdas.java:298:69
   (local.set $x_1 (ref.cast_static $java.lang.String (local.get $x)))
-  ;; return x;
   ;;@ lambdas/Lambdas.java:298:74
   (return (local.get $x_1))
  )
@@ -6096,7 +5571,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$23))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$23 (local.get $this.untyped)))
  (block
-  ;; $LambdaImplementor$23.this.method(arg0);
   ;;@ lambdas/Lambdas.java:298:69
   (call $m_method__java_lang_Object__void@lambdas.Lambdas.JustADefaultS (ref.as_non_null (local.get $this))(local.get $arg0))
  )
@@ -6107,22 +5581,17 @@
 (func $$clinit__void@lambdas.Lambdas.$LambdaImplementor$23
  ;;@ lambdas/Lambdas.java:298:69
  (block
-  ;; if (lambdas.Lambdas.$LambdaImplementor$23.$initialized) return;
   ;;@ lambdas/Lambdas.java:298:69
   (if (global.get $f_$initialized__lambdas_Lambdas_$LambdaImplementor$23)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:298:69
     (return )
    )
   )
-  ;; (lambdas.Lambdas.$LambdaImplementor$23.$initialized = true);
   ;;@ lambdas/Lambdas.java:298:69
   (global.set $f_$initialized__lambdas_Lambdas_$LambdaImplementor$23 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:298:69
   (call $$clinit__void@java.lang.Object )
-  ;; lambdas.Lambdas.JustADefaultS.$clinit();
   ;;@ lambdas/Lambdas.java:298:69
   (call $$clinit__void@lambdas.Lambdas.JustADefaultS )
  )
@@ -6132,14 +5601,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$23
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.$LambdaImplementor$23.$class == null)) (lambdas.Lambdas.$LambdaImplementor$23.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_25(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$23) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.$LambdaImplementor$23.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_25(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_$LambdaImplementor$23 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_25__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_25__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.$LambdaImplementor$23.$class;
   (return (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$23))
  )
 )
@@ -6152,7 +5618,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$23))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$23 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.$LambdaImplementor$23.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$23) ))
  )
 )
@@ -6166,13 +5631,10 @@
  ;;@ lambdas/Lambdas.java:302:59
  (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$24))
  (block
-  ;; <anonymous> implements GenericFunctionalInterface<T><T, S> $instance = new $LambdaImplementor$24.<init>(0);
   ;;@ lambdas/Lambdas.java:302:59
   (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$24 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$24.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$24.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ lambdas/Lambdas.java:302:59
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$24@lambdas.Lambdas.$LambdaImplementor$24 (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:302:59
   (return (local.get $$instance))
  )
@@ -6183,10 +5645,8 @@
  (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$24))
  ;;@ lambdas/Lambdas.java:302:59
  (block
-  ;; lambdas.Lambdas.$LambdaImplementor$24.$clinit();
   ;;@ lambdas/Lambdas.java:302:59
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$24 )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:302:59
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -6203,10 +5663,8 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$24))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$24 (local.get $this.untyped)))
  (block
-  ;; U x = ((T) x);
   ;;@ lambdas/Lambdas.java:302:59
   (local.set $x_1 (local.get $x))
-  ;; return x;
   ;;@ lambdas/Lambdas.java:302:64
   (return (local.get $x_1))
  )
@@ -6222,7 +5680,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$24))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$24 (local.get $this.untyped)))
  (block
-  ;; $LambdaImplementor$24.this.method(arg0);
   ;;@ lambdas/Lambdas.java:302:59
   (call $m_method__java_lang_Object__void@lambdas.Lambdas.JustADefaultS (ref.as_non_null (local.get $this))(local.get $arg0))
  )
@@ -6233,22 +5690,17 @@
 (func $$clinit__void@lambdas.Lambdas.$LambdaImplementor$24
  ;;@ lambdas/Lambdas.java:302:59
  (block
-  ;; if (lambdas.Lambdas.$LambdaImplementor$24.$initialized) return;
   ;;@ lambdas/Lambdas.java:302:59
   (if (global.get $f_$initialized__lambdas_Lambdas_$LambdaImplementor$24)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:302:59
     (return )
    )
   )
-  ;; (lambdas.Lambdas.$LambdaImplementor$24.$initialized = true);
   ;;@ lambdas/Lambdas.java:302:59
   (global.set $f_$initialized__lambdas_Lambdas_$LambdaImplementor$24 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:302:59
   (call $$clinit__void@java.lang.Object )
-  ;; lambdas.Lambdas.JustADefaultS.$clinit();
   ;;@ lambdas/Lambdas.java:302:59
   (call $$clinit__void@lambdas.Lambdas.JustADefaultS )
  )
@@ -6258,14 +5710,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$24
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.$LambdaImplementor$24.$class == null)) (lambdas.Lambdas.$LambdaImplementor$24.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_26(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$24) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.$LambdaImplementor$24.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_26(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_$LambdaImplementor$24 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_26__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_26__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.$LambdaImplementor$24.$class;
   (return (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$24))
  )
 )
@@ -6278,7 +5727,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$24))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$24 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.$LambdaImplementor$24.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$24) ))
  )
 )
@@ -6292,13 +5740,10 @@
  ;;@ lambdas/Lambdas.java:311:78
  (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$25))
  (block
-  ;; <anonymous> implements BiFunction<T, U, R><T, U, R> $instance = new $LambdaImplementor$25.<init>(0);
   ;;@ lambdas/Lambdas.java:311:78
   (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$25 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$25.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$25.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ lambdas/Lambdas.java:311:78
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$25@lambdas.Lambdas.$LambdaImplementor$25 (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:311:78
   (return (local.get $$instance))
  )
@@ -6309,10 +5754,8 @@
  (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$25))
  ;;@ lambdas/Lambdas.java:311:78
  (block
-  ;; lambdas.Lambdas.$LambdaImplementor$25.$clinit();
   ;;@ lambdas/Lambdas.java:311:78
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$25 )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:311:78
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -6331,13 +5774,10 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$25))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$25 (local.get $this.untyped)))
  (block
-  ;; String t = ((String) ((T) t));
   ;;@ lambdas/Lambdas.java:311:78
   (local.set $t_1 (ref.cast_static $java.lang.String (local.get $t)))
-  ;; String u = ((String) ((U) u));
   ;;@ lambdas/Lambdas.java:311:78
   (local.set $u_1 (ref.cast_static $java.lang.String (local.get $u)))
-  ;; return null;
   ;;@ lambdas/Lambdas.java:311:88
   (return (ref.null $java.lang.Object))
  )
@@ -6354,7 +5794,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$25))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$25 (local.get $this.untyped)))
  (block
-  ;; return $LambdaImplementor$25.this.andThen(arg0);
   ;;@ lambdas/Lambdas.java:311:78
   (return (call $m_andThen__lambdas_Lambdas_Function__lambdas_Lambdas_BiFunction@lambdas.Lambdas.BiFunction (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
@@ -6369,7 +5808,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$25))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$25 (local.get $this.untyped)))
  (block
-  ;; $LambdaImplementor$25.this.defaultMethod();
   ;;@ lambdas/Lambdas.java:311:78
   (call $m_defaultMethod__void@lambdas.Lambdas.MarkerWithDefaultMethod (ref.as_non_null (local.get $this)))
  )
@@ -6380,25 +5818,19 @@
 (func $$clinit__void@lambdas.Lambdas.$LambdaImplementor$25
  ;;@ lambdas/Lambdas.java:311:78
  (block
-  ;; if (lambdas.Lambdas.$LambdaImplementor$25.$initialized) return;
   ;;@ lambdas/Lambdas.java:311:78
   (if (global.get $f_$initialized__lambdas_Lambdas_$LambdaImplementor$25)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:311:78
     (return )
    )
   )
-  ;; (lambdas.Lambdas.$LambdaImplementor$25.$initialized = true);
   ;;@ lambdas/Lambdas.java:311:78
   (global.set $f_$initialized__lambdas_Lambdas_$LambdaImplementor$25 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:311:78
   (call $$clinit__void@java.lang.Object )
-  ;; lambdas.Lambdas.BiFunction.$clinit();
   ;;@ lambdas/Lambdas.java:311:78
   (call $$clinit__void@lambdas.Lambdas.BiFunction )
-  ;; lambdas.Lambdas.MarkerWithDefaultMethod.$clinit();
   ;;@ lambdas/Lambdas.java:311:78
   (call $$clinit__void@lambdas.Lambdas.MarkerWithDefaultMethod )
  )
@@ -6408,14 +5840,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$25
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.$LambdaImplementor$25.$class == null)) (lambdas.Lambdas.$LambdaImplementor$25.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_27(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$25) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.$LambdaImplementor$25.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_27(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_$LambdaImplementor$25 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_27__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_27__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.$LambdaImplementor$25.$class;
   (return (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$25))
  )
 )
@@ -6428,7 +5857,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$25))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$25 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.$LambdaImplementor$25.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$25) ))
  )
 )
@@ -6443,13 +5871,10 @@
  ;;@ lambdas/Lambdas.java:317:25
  (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$26))
  (block
-  ;; <anonymous> implements Iterable<T><T> $instance = new $LambdaImplementor$26.<init>(0,$captured_iterable);
   ;;@ lambdas/Lambdas.java:317:25
   (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$26 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$26.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$26.itable)) (i32.const 0) (local.get $$captured_iterable)))
-  ;; $instance.$ctor($captured_iterable);
   ;;@ lambdas/Lambdas.java:317:25
   (call $$ctor__java_lang_Iterable__void_$p_lambdas_Lambdas_$LambdaImplementor$26@lambdas.Lambdas.$LambdaImplementor$26 (ref.as_non_null (local.get $$instance))(local.get $$captured_iterable))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:317:25
   (return (local.get $$instance))
  )
@@ -6461,10 +5886,8 @@
  (param $$captured_iterable (ref null $java.lang.Object))
  ;;@ lambdas/Lambdas.java:317:25
  (block
-  ;; lambdas.Lambdas.$LambdaImplementor$26.$clinit();
   ;;@ lambdas/Lambdas.java:317:25
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$26 )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:317:25
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -6479,7 +5902,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$26))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$26 (local.get $this.untyped)))
  (block
-  ;; return $LambdaImplementor$26.this.iterable.iterator();
   ;;@ lambdas/Lambdas.java:317:31
   (return (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (struct.get $lambdas.Lambdas.$LambdaImplementor$26 $$captured_iterable__lambdas_Lambdas_$LambdaImplementor$26(local.get $this)))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast_static $java.lang.Iterable.vtable (struct.get $itable $slot1 (struct.get $java.lang.Object $itable (struct.get $lambdas.Lambdas.$LambdaImplementor$26 $$captured_iterable__lambdas_Lambdas_$LambdaImplementor$26(local.get $this))))))))
  )
@@ -6495,7 +5917,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$26))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$26 (local.get $this.untyped)))
  (block
-  ;; $LambdaImplementor$26.this.forEach(arg0);
   ;;@ lambdas/Lambdas.java:317:25
   (call $m_forEach__java_util_function_Consumer__void@java.lang.Iterable (ref.as_non_null (local.get $this))(local.get $arg0))
  )
@@ -6511,7 +5932,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$26))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$26 (local.get $this.untyped)))
  (block
-  ;; return $LambdaImplementor$26.this.spliterator();
   ;;@ lambdas/Lambdas.java:317:25
   (return (call $m_spliterator__java_util_Spliterator@java.lang.Iterable (ref.as_non_null (local.get $this))))
  )
@@ -6522,22 +5942,17 @@
 (func $$clinit__void@lambdas.Lambdas.$LambdaImplementor$26
  ;;@ lambdas/Lambdas.java:317:25
  (block
-  ;; if (lambdas.Lambdas.$LambdaImplementor$26.$initialized) return;
   ;;@ lambdas/Lambdas.java:317:25
   (if (global.get $f_$initialized__lambdas_Lambdas_$LambdaImplementor$26)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:317:25
     (return )
    )
   )
-  ;; (lambdas.Lambdas.$LambdaImplementor$26.$initialized = true);
   ;;@ lambdas/Lambdas.java:317:25
   (global.set $f_$initialized__lambdas_Lambdas_$LambdaImplementor$26 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:317:25
   (call $$clinit__void@java.lang.Object )
-  ;; java.lang.Iterable.$clinit();
   ;;@ lambdas/Lambdas.java:317:25
   (call $$clinit__void@java.lang.Iterable )
  )
@@ -6547,14 +5962,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$26
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.$LambdaImplementor$26.$class == null)) (lambdas.Lambdas.$LambdaImplementor$26.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_28(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$26) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.$LambdaImplementor$26.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_28(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_$LambdaImplementor$26 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_28__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_28__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.$LambdaImplementor$26.$class;
   (return (global.get $f_$class__lambdas_Lambdas_$LambdaImplementor$26))
  )
 )
@@ -6567,7 +5979,6 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$26))
  (local.set $this (ref.cast_static $lambdas.Lambdas.$LambdaImplementor$26 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.$LambdaImplementor$26.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$26) ))
  )
 )
@@ -6583,13 +5994,10 @@
  ;;@ lambdas/Lambdas.java:153:13
  (local $$instance (ref null $lambdas.Lambdas.BiFunction.$LambdaImplementor$27))
  (block
-  ;; <anonymous> implements BiFunction<T, U, R><T, U, R> $instance = new $LambdaImplementor$27.<init>(0,$outer_this,$captured_after);
   ;;@ lambdas/Lambdas.java:153:13
   (local.set $$instance (struct.new $lambdas.Lambdas.BiFunction.$LambdaImplementor$27 (ref.as_non_null (global.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$27.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$27.itable)) (i32.const 0) (local.get $$outer_this) (local.get $$captured_after)))
-  ;; $instance.$ctor($outer_this,$captured_after);
   ;;@ lambdas/Lambdas.java:153:13
   (call $$ctor__lambdas_Lambdas_BiFunction__lambdas_Lambdas_Function__void_$p_lambdas_Lambdas_BiFunction_$LambdaImplementor$27@lambdas.Lambdas.BiFunction.$LambdaImplementor$27 (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$captured_after))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:153:13
   (return (local.get $$instance))
  )
@@ -6602,10 +6010,8 @@
  (param $$captured_after (ref null $java.lang.Object))
  ;;@ lambdas/Lambdas.java:153:13
  (block
-  ;; lambdas.Lambdas.BiFunction.$LambdaImplementor$27.$clinit();
   ;;@ lambdas/Lambdas.java:153:13
   (call $$clinit__void@lambdas.Lambdas.BiFunction.$LambdaImplementor$27 )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:153:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -6622,7 +6028,6 @@
  (local $this (ref null $lambdas.Lambdas.BiFunction.$LambdaImplementor$27))
  (local.set $this (ref.cast_static $lambdas.Lambdas.BiFunction.$LambdaImplementor$27 (local.get $this.untyped)))
  (block
-  ;; return $LambdaImplementor$27.this.after.apply($LambdaImplementor$27.this.this.apply(t,u));
   ;;@ lambdas/Lambdas.java:153:23
   (return (call_ref $function.m_apply__java_lang_Object__java_lang_Object (ref.as_non_null (struct.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$27 $$captured_after__lambdas_Lambdas_BiFunction_$LambdaImplementor$27(local.get $this)))(call_ref $function.m_apply__java_lang_Object__java_lang_Object__java_lang_Object (ref.as_non_null (struct.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$27 $$outer_this__lambdas_Lambdas_BiFunction_$LambdaImplementor$27(local.get $this)))(local.get $t)(local.get $u)(struct.get $lambdas.Lambdas.BiFunction.vtable $m_apply__java_lang_Object__java_lang_Object__java_lang_Object (ref.cast_static $lambdas.Lambdas.BiFunction.vtable (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (struct.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$27 $$outer_this__lambdas_Lambdas_BiFunction_$LambdaImplementor$27(local.get $this)))))))(struct.get $lambdas.Lambdas.Function.vtable $m_apply__java_lang_Object__java_lang_Object (ref.cast_static $lambdas.Lambdas.Function.vtable (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (struct.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$27 $$captured_after__lambdas_Lambdas_BiFunction_$LambdaImplementor$27(local.get $this))))))))
  )
@@ -6639,7 +6044,6 @@
  (local $this (ref null $lambdas.Lambdas.BiFunction.$LambdaImplementor$27))
  (local.set $this (ref.cast_static $lambdas.Lambdas.BiFunction.$LambdaImplementor$27 (local.get $this.untyped)))
  (block
-  ;; return $LambdaImplementor$27.this.andThen(arg0);
   ;;@ lambdas/Lambdas.java:153:13
   (return (call $m_andThen__lambdas_Lambdas_Function__lambdas_Lambdas_BiFunction@lambdas.Lambdas.BiFunction (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
@@ -6650,22 +6054,17 @@
 (func $$clinit__void@lambdas.Lambdas.BiFunction.$LambdaImplementor$27
  ;;@ lambdas/Lambdas.java:153:13
  (block
-  ;; if (lambdas.Lambdas.BiFunction.$LambdaImplementor$27.$initialized) return;
   ;;@ lambdas/Lambdas.java:153:13
   (if (global.get $f_$initialized__lambdas_Lambdas_BiFunction_$LambdaImplementor$27)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:153:13
     (return )
    )
   )
-  ;; (lambdas.Lambdas.BiFunction.$LambdaImplementor$27.$initialized = true);
   ;;@ lambdas/Lambdas.java:153:13
   (global.set $f_$initialized__lambdas_Lambdas_BiFunction_$LambdaImplementor$27 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:153:13
   (call $$clinit__void@java.lang.Object )
-  ;; lambdas.Lambdas.BiFunction.$clinit();
   ;;@ lambdas/Lambdas.java:153:13
   (call $$clinit__void@lambdas.Lambdas.BiFunction )
  )
@@ -6675,14 +6074,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.BiFunction.$LambdaImplementor$27
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.BiFunction.$LambdaImplementor$27.$class == null)) (lambdas.Lambdas.BiFunction.$LambdaImplementor$27.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_32(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_BiFunction_$LambdaImplementor$27) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.BiFunction.$LambdaImplementor$27.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_32(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_BiFunction_$LambdaImplementor$27 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_32__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_32__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.BiFunction.$LambdaImplementor$27.$class;
   (return (global.get $f_$class__lambdas_Lambdas_BiFunction_$LambdaImplementor$27))
  )
 )
@@ -6695,7 +6091,6 @@
  (local $this (ref null $lambdas.Lambdas.BiFunction.$LambdaImplementor$27))
  (local.set $this (ref.cast_static $lambdas.Lambdas.BiFunction.$LambdaImplementor$27 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.BiFunction.$LambdaImplementor$27.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.BiFunction.$LambdaImplementor$27) ))
  )
 )
@@ -6709,13 +6104,10 @@
  ;;@ lambdas/Lambdas.java:159:13
  (local $$instance (ref null $lambdas.Lambdas.Function.$LambdaImplementor$28))
  (block
-  ;; <anonymous> implements Function<T, R><T, R> $instance = new $LambdaImplementor$28.<init>(0);
   ;;@ lambdas/Lambdas.java:159:13
   (local.set $$instance (struct.new $lambdas.Lambdas.Function.$LambdaImplementor$28 (ref.as_non_null (global.get $lambdas.Lambdas.Function.$LambdaImplementor$28.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.Function.$LambdaImplementor$28.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ lambdas/Lambdas.java:159:13
   (call $$ctor__void_$p_lambdas_Lambdas_Function_$LambdaImplementor$28@lambdas.Lambdas.Function.$LambdaImplementor$28 (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:159:13
   (return (local.get $$instance))
  )
@@ -6726,10 +6118,8 @@
  (param $this (ref null $lambdas.Lambdas.Function.$LambdaImplementor$28))
  ;;@ lambdas/Lambdas.java:159:13
  (block
-  ;; lambdas.Lambdas.Function.$LambdaImplementor$28.$clinit();
   ;;@ lambdas/Lambdas.java:159:13
   (call $$clinit__void@lambdas.Lambdas.Function.$LambdaImplementor$28 )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:159:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -6746,10 +6136,8 @@
  (local $this (ref null $lambdas.Lambdas.Function.$LambdaImplementor$28))
  (local.set $this (ref.cast_static $lambdas.Lambdas.Function.$LambdaImplementor$28 (local.get $this.untyped)))
  (block
-  ;; T t = ((T) t);
   ;;@ lambdas/Lambdas.java:159:13
   (local.set $t_1 (local.get $t))
-  ;; return t;
   ;;@ lambdas/Lambdas.java:159:18
   (return (local.get $t_1))
  )
@@ -6760,19 +6148,15 @@
 (func $$clinit__void@lambdas.Lambdas.Function.$LambdaImplementor$28
  ;;@ lambdas/Lambdas.java:159:13
  (block
-  ;; if (lambdas.Lambdas.Function.$LambdaImplementor$28.$initialized) return;
   ;;@ lambdas/Lambdas.java:159:13
   (if (global.get $f_$initialized__lambdas_Lambdas_Function_$LambdaImplementor$28)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:159:13
     (return )
    )
   )
-  ;; (lambdas.Lambdas.Function.$LambdaImplementor$28.$initialized = true);
   ;;@ lambdas/Lambdas.java:159:13
   (global.set $f_$initialized__lambdas_Lambdas_Function_$LambdaImplementor$28 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:159:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -6782,14 +6166,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.Function.$LambdaImplementor$28
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.Function.$LambdaImplementor$28.$class == null)) (lambdas.Lambdas.Function.$LambdaImplementor$28.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_34(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_Function_$LambdaImplementor$28) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.Function.$LambdaImplementor$28.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_34(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_Function_$LambdaImplementor$28 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_34__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_34__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.Function.$LambdaImplementor$28.$class;
   (return (global.get $f_$class__lambdas_Lambdas_Function_$LambdaImplementor$28))
  )
 )
@@ -6802,7 +6183,6 @@
  (local $this (ref null $lambdas.Lambdas.Function.$LambdaImplementor$28))
  (local.set $this (ref.cast_static $lambdas.Lambdas.Function.$LambdaImplementor$28 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.Function.$LambdaImplementor$28.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.Function.$LambdaImplementor$28) ))
  )
 )
@@ -6816,13 +6196,10 @@
  ;;@ lambdas/Lambdas.java:197:23
  (local $$instance (ref null $lambdas.Lambdas.Parent))
  (block
-  ;; Parent $instance = new Parent.<init>(0,0);
   ;;@ lambdas/Lambdas.java:197:23
   (local.set $$instance (struct.new $lambdas.Lambdas.Parent (ref.as_non_null (global.get $lambdas.Lambdas.Parent.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.Parent.itable)) (i32.const 0) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ lambdas/Lambdas.java:197:23
   (call $$ctor__void_$p_lambdas_Lambdas_Parent@lambdas.Lambdas.Parent (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:197:23
   (return (local.get $$instance))
  )
@@ -6833,10 +6210,8 @@
  (param $this (ref null $lambdas.Lambdas.Parent))
  ;;@ lambdas/Lambdas.java:197:23
  (block
-  ;; lambdas.Lambdas.Parent.$clinit();
   ;;@ lambdas/Lambdas.java:197:23
   (call $$clinit__void@lambdas.Lambdas.Parent )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:197:23
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -6858,19 +6233,15 @@
 (func $$clinit__void@lambdas.Lambdas.Parent
  ;;@ lambdas/Lambdas.java:197:23
  (block
-  ;; if (lambdas.Lambdas.Parent.$initialized) return;
   ;;@ lambdas/Lambdas.java:197:23
   (if (global.get $f_$initialized__lambdas_Lambdas_Parent)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:197:23
     (return )
    )
   )
-  ;; (lambdas.Lambdas.Parent.$initialized = true);
   ;;@ lambdas/Lambdas.java:197:23
   (global.set $f_$initialized__lambdas_Lambdas_Parent (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:197:23
   (call $$clinit__void@java.lang.Object )
  )
@@ -6880,14 +6251,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.Parent
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.Parent.$class == null)) (lambdas.Lambdas.Parent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_37(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_Parent) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.Parent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_37(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_37__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_37__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.Parent.$class;
   (return (global.get $f_$class__lambdas_Lambdas_Parent))
  )
 )
@@ -6900,7 +6268,6 @@
  (local $this (ref null $lambdas.Lambdas.Parent))
  (local.set $this (ref.cast_static $lambdas.Lambdas.Parent (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.Parent.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.Parent) ))
  )
 )
@@ -6915,13 +6282,10 @@
  ;;@ lambdas/Lambdas.java:206:11
  (local $$instance (ref null $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29))
  (block
-  ;; <anonymous> implements FunctionalInterface $instance = new $LambdaImplementor$29.<init>(0,$outer_this);
   ;;@ lambdas/Lambdas.java:206:11
   (local.set $$instance (struct.new $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29 (ref.as_non_null (global.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29.itable)) (i32.const 0) (local.get $$outer_this)))
-  ;; $instance.$ctor($outer_this);
   ;;@ lambdas/Lambdas.java:206:11
   (call $$ctor__lambdas_Lambdas_LambdaInSubClass__void_$p_lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$29@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:206:11
   (return (local.get $$instance))
  )
@@ -6933,10 +6297,8 @@
  (param $$outer_this (ref null $lambdas.Lambdas.LambdaInSubClass))
  ;;@ lambdas/Lambdas.java:206:11
  (block
-  ;; lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29.$clinit();
   ;;@ lambdas/Lambdas.java:206:11
   (call $$clinit__void@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29 )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:206:11
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -6953,25 +6315,18 @@
  (local $this (ref null $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29))
  (local.set $this (ref.cast_static $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29 (local.get $this.untyped)))
  (block
-  ;; $LambdaImplementor$29.this.this.funInParent();
   ;;@ lambdas/Lambdas.java:208:12
   (call_ref $function.m_funInParent__void (ref.as_non_null (struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29 $$outer_this__lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$29(local.get $this)))(struct.get $lambdas.Lambdas.Parent.vtable $m_funInParent__void (struct.get $lambdas.Lambdas.Parent $vtable(struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29 $$outer_this__lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$29(local.get $this)))))
-  ;; $LambdaImplementor$29.this.this.funInParent();
   ;;@ lambdas/Lambdas.java:209:12
   (call_ref $function.m_funInParent__void (ref.as_non_null (struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29 $$outer_this__lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$29(local.get $this)))(struct.get $lambdas.Lambdas.Parent.vtable $m_funInParent__void (struct.get $lambdas.Lambdas.Parent $vtable(struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29 $$outer_this__lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$29(local.get $this)))))
-  ;; $LambdaImplementor$29.this.this.funInParent();
   ;;@ lambdas/Lambdas.java:210:12
   (call_ref $function.m_funInParent__void (ref.as_non_null (struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29 $$outer_this__lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$29(local.get $this)))(struct.get $lambdas.Lambdas.Parent.vtable $m_funInParent__void (struct.get $lambdas.Lambdas.Parent $vtable(struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29 $$outer_this__lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$29(local.get $this)))))
-  ;; int a = $LambdaImplementor$29.this.this.fieldInParent;
   ;;@ lambdas/Lambdas.java:213:12
   (local.set $a (struct.get $lambdas.Lambdas.Parent $f_fieldInParent__lambdas_Lambdas_Parent(struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29 $$outer_this__lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$29(local.get $this))))
-  ;; (a = $LambdaImplementor$29.this.this.fieldInParent);
   ;;@ lambdas/Lambdas.java:214:12
   (local.set $a (struct.get $lambdas.Lambdas.Parent $f_fieldInParent__lambdas_Lambdas_Parent(struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29 $$outer_this__lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$29(local.get $this))))
-  ;; (a = $LambdaImplementor$29.this.this.fieldInParent);
   ;;@ lambdas/Lambdas.java:215:12
   (local.set $a (struct.get $lambdas.Lambdas.Parent $f_fieldInParent__lambdas_Lambdas_Parent(struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29 $$outer_this__lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$29(local.get $this))))
-  ;; return a;
   ;;@ lambdas/Lambdas.java:216:12
   (return (local.get $a))
  )
@@ -6982,19 +6337,15 @@
 (func $$clinit__void@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29
  ;;@ lambdas/Lambdas.java:206:11
  (block
-  ;; if (lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29.$initialized) return;
   ;;@ lambdas/Lambdas.java:206:11
   (if (global.get $f_$initialized__lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$29)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:206:11
     (return )
    )
   )
-  ;; (lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29.$initialized = true);
   ;;@ lambdas/Lambdas.java:206:11
   (global.set $f_$initialized__lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$29 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:206:11
   (call $$clinit__void@java.lang.Object )
  )
@@ -7004,14 +6355,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29.$class == null)) (lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_38(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$29) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_38(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$29 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_38__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_38__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29.$class;
   (return (global.get $f_$class__lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$29))
  )
 )
@@ -7024,7 +6372,6 @@
  (local $this (ref null $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29))
  (local.set $this (ref.cast_static $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29 (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29) ))
  )
 )
@@ -7038,13 +6385,10 @@
  ;;@ lambdas/Lambdas.java:252:29
  (local $$instance (ref null $lambdas.Lambdas.IdentityFunction))
  (block
-  ;; IdentityFunction $instance = new IdentityFunction.<init>(0);
   ;;@ lambdas/Lambdas.java:252:29
   (local.set $$instance (struct.new $lambdas.Lambdas.IdentityFunction (ref.as_non_null (global.get $lambdas.Lambdas.IdentityFunction.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.IdentityFunction.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ lambdas/Lambdas.java:252:29
   (call $$ctor__void_$p_lambdas_Lambdas_IdentityFunction@lambdas.Lambdas.IdentityFunction (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:252:29
   (return (local.get $$instance))
  )
@@ -7055,10 +6399,8 @@
  (param $this (ref null $lambdas.Lambdas.IdentityFunction))
  ;;@ lambdas/Lambdas.java:252:29
  (block
-  ;; lambdas.Lambdas.IdentityFunction.$clinit();
   ;;@ lambdas/Lambdas.java:252:29
   (call $$clinit__void@lambdas.Lambdas.IdentityFunction )
-  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:252:29
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -7074,7 +6416,6 @@
  (local $this (ref null $lambdas.Lambdas.IdentityFunction))
  (local.set $this (ref.cast_static $lambdas.Lambdas.IdentityFunction (local.get $this.untyped)))
  (block
-  ;; return o;
   ;;@ lambdas/Lambdas.java:255:6
   (return (local.get $o))
  )
@@ -7085,19 +6426,15 @@
 (func $$clinit__void@lambdas.Lambdas.IdentityFunction
  ;;@ lambdas/Lambdas.java:252:29
  (block
-  ;; if (lambdas.Lambdas.IdentityFunction.$initialized) return;
   ;;@ lambdas/Lambdas.java:252:29
   (if (global.get $f_$initialized__lambdas_Lambdas_IdentityFunction)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:252:29
     (return )
    )
   )
-  ;; (lambdas.Lambdas.IdentityFunction.$initialized = true);
   ;;@ lambdas/Lambdas.java:252:29
   (global.set $f_$initialized__lambdas_Lambdas_IdentityFunction (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ lambdas/Lambdas.java:252:29
   (call $$clinit__void@java.lang.Object )
  )
@@ -7107,14 +6444,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.IdentityFunction
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.IdentityFunction.$class == null)) (lambdas.Lambdas.IdentityFunction.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_41(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_IdentityFunction) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.IdentityFunction.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_41(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_IdentityFunction (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_41__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_41__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return lambdas.Lambdas.IdentityFunction.$class;
   (return (global.get $f_$class__lambdas_Lambdas_IdentityFunction))
  )
 )
@@ -7127,7 +6461,6 @@
  (local $this (ref null $lambdas.Lambdas.IdentityFunction))
  (local.set $this (ref.cast_static $lambdas.Lambdas.IdentityFunction (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.IdentityFunction.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.IdentityFunction) ))
  )
 )
@@ -7141,13 +6474,10 @@
  ;;@ lambdas/Lambdas.java:203:23
  (local $$instance (ref null $lambdas.Lambdas.LambdaInSubClass))
  (block
-  ;; LambdaInSubClass $instance = new LambdaInSubClass.<init>(0,0);
   ;;@ lambdas/Lambdas.java:203:23
   (local.set $$instance (struct.new $lambdas.Lambdas.LambdaInSubClass (ref.as_non_null (global.get $lambdas.Lambdas.LambdaInSubClass.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.LambdaInSubClass.itable)) (i32.const 0) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ lambdas/Lambdas.java:203:23
   (call $$ctor__void_$p_lambdas_Lambdas_LambdaInSubClass@lambdas.Lambdas.LambdaInSubClass (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ lambdas/Lambdas.java:203:23
   (return (local.get $$instance))
  )
@@ -7158,7 +6488,6 @@
  (param $this (ref null $lambdas.Lambdas.LambdaInSubClass))
  ;;@ lambdas/Lambdas.java:203:23
  (block
-  ;; Parent.this.$ctor();
   ;;@ lambdas/Lambdas.java:203:23
   (call $$ctor__void_$p_lambdas_Lambdas_Parent@lambdas.Lambdas.Parent (ref.as_non_null (local.get $this)))
  )
@@ -7173,7 +6502,6 @@
  (local $this (ref null $lambdas.Lambdas.LambdaInSubClass))
  (local.set $this (ref.cast_static $lambdas.Lambdas.LambdaInSubClass (local.get $this.untyped)))
  (block
-  ;; FunctionalInterface l = lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29.$create(LambdaInSubClass.this);
   ;;@ lambdas/Lambdas.java:205:6
   (local.set $l (call $$create__lambdas_Lambdas_LambdaInSubClass@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29 (local.get $this)))
  )
@@ -7184,19 +6512,15 @@
 (func $$clinit__void@lambdas.Lambdas.LambdaInSubClass
  ;;@ lambdas/Lambdas.java:203:23
  (block
-  ;; if (lambdas.Lambdas.LambdaInSubClass.$initialized) return;
   ;;@ lambdas/Lambdas.java:203:23
   (if (global.get $f_$initialized__lambdas_Lambdas_LambdaInSubClass)
    (then
-    ;; return;
     ;;@ lambdas/Lambdas.java:203:23
     (return )
    )
   )
-  ;; (lambdas.Lambdas.LambdaInSubClass.$initialized = true);
   ;;@ lambdas/Lambdas.java:203:23
   (global.set $f_$initialized__lambdas_Lambdas_LambdaInSubClass (i32.const 1))
-  ;; lambdas.Lambdas.Parent.$clinit();
   ;;@ lambdas/Lambdas.java:203:23
   (call $$clinit__void@lambdas.Lambdas.Parent )
  )
@@ -7206,14 +6530,11 @@
 (func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.LambdaInSubClass
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((lambdas.Lambdas.LambdaInSubClass.$class == null)) (lambdas.Lambdas.LambdaInSubClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_39(),lambdas.Lambdas.Parent.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__lambdas_Lambdas_LambdaInSubClass) (ref.null $java.lang.Class))
    (then
-    ;; (lambdas.Lambdas.LambdaInSubClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|lambdas.Lamb...|_39(),lambdas.Lambdas.Parent.$getClassMetadata()));
     (global.set $f_$class__lambdas_Lambdas_LambdaInSubClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|_39__java_lang_String (ref.func $$getString_|lambdas.Lamb...|_39__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.Parent) )))
    )
   )
-  ;; return lambdas.Lambdas.LambdaInSubClass.$class;
   (return (global.get $f_$class__lambdas_Lambdas_LambdaInSubClass))
  )
 )
@@ -7226,7 +6547,6 @@
  (local $this (ref null $lambdas.Lambdas.LambdaInSubClass))
  (local.set $this (ref.cast_static $lambdas.Lambdas.LambdaInSubClass (local.get $this.untyped)))
  (block
-  ;; return lambdas.Lambdas.LambdaInSubClass.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.LambdaInSubClass) ))
  )
 )

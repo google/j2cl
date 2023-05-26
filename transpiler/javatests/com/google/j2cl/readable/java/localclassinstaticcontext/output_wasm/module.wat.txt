@@ -423,13 +423,10 @@
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:18:13
  (local $$instance (ref null $localclassinstaticcontext.LocalClassInStaticContext))
  (block
-  ;; LocalClassInStaticContext $instance = new LocalClassInStaticContext.<init>(0);
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:18:13
   (local.set $$instance (struct.new $localclassinstaticcontext.LocalClassInStaticContext (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.vtable)) (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:18:13
   (call $$ctor__void_$p_localclassinstaticcontext_LocalClassInStaticContext@localclassinstaticcontext.LocalClassInStaticContext (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:18:13
   (return (local.get $$instance))
  )
@@ -440,10 +437,8 @@
  (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext))
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:18:13
  (block
-  ;; localclassinstaticcontext.LocalClassInStaticContext.$clinit();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:18:13
   (call $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext )
-  ;; Object.this.$ctor();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -454,13 +449,10 @@
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:21:21
  (local $a (ref null $java.lang.Object))
  (block
-  ;; localclassinstaticcontext.LocalClassInStaticContext.$clinit();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:21:28
   (call $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext )
-  ;; localclassinstaticcontext.LocalClassInStaticContext.1A.$create();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:24:4
   (drop (call $$create__@localclassinstaticcontext.LocalClassInStaticContext.1A ))
-  ;; Object a = localclassinstaticcontext.LocalClassInStaticContext.3.$create();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:25:4
   (local.set $a (call $$create__@localclassinstaticcontext.LocalClassInStaticContext.3 ))
  )
@@ -471,28 +463,21 @@
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:18:13
  (local $b (ref null $java.lang.Object))
  (block
-  ;; if (localclassinstaticcontext.LocalClassInStaticContext.$initialized) return;
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:18:13
   (if (global.get $f_$initialized__localclassinstaticcontext_LocalClassInStaticContext)
    (then
-    ;; return;
     ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:18:13
     (return )
    )
   )
-  ;; (localclassinstaticcontext.LocalClassInStaticContext.$initialized = true);
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:18:13
   (global.set $f_$initialized__localclassinstaticcontext_LocalClassInStaticContext (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:18:13
   (call $$clinit__void@java.lang.Object )
-  ;; (localclassinstaticcontext.LocalClassInStaticContext.f = localclassinstaticcontext.LocalClassInStaticContext.1.$create());
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:19:2
   (global.set $f_f__localclassinstaticcontext_LocalClassInStaticContext (call $$create__@localclassinstaticcontext.LocalClassInStaticContext.1 ))
-  ;; localclassinstaticcontext.LocalClassInStaticContext.1B.$create();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:38:4
   (drop (call $$create__@localclassinstaticcontext.LocalClassInStaticContext.1B ))
-  ;; Object b = localclassinstaticcontext.LocalClassInStaticContext.2.$create();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:39:4
   (local.set $b (call $$create__@localclassinstaticcontext.LocalClassInStaticContext.2 ))
  )
@@ -502,14 +487,11 @@
 (func $$getClassMetadata__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((localclassinstaticcontext.LocalClassInStaticContext.$class == null)) (localclassinstaticcontext.LocalClassInStaticContext.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__localclassinstaticcontext_LocalClassInStaticContext) (ref.null $java.lang.Class))
    (then
-    ;; (localclassinstaticcontext.LocalClassInStaticContext.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__localclassinstaticcontext_LocalClassInStaticContext (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclassin...|__java_lang_String (ref.func $$getString_|localclassin...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return localclassinstaticcontext.LocalClassInStaticContext.$class;
   (return (global.get $f_$class__localclassinstaticcontext_LocalClassInStaticContext))
  )
 )
@@ -522,7 +504,6 @@
  (local $this (ref null $localclassinstaticcontext.LocalClassInStaticContext))
  (local.set $this (ref.cast_static $localclassinstaticcontext.LocalClassInStaticContext (local.get $this.untyped)))
  (block
-  ;; return localclassinstaticcontext.LocalClassInStaticContext.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext) ))
  )
 )
@@ -536,13 +517,10 @@
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:19:40
  (local $$instance (ref null $localclassinstaticcontext.LocalClassInStaticContext.1))
  (block
-  ;; <anonymous> extends Object $instance = new $1.<init>(0);
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:19:40
   (local.set $$instance (struct.new $localclassinstaticcontext.LocalClassInStaticContext.1 (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.1.vtable)) (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.1.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:19:40
   (call $$ctor__void_$p_localclassinstaticcontext_LocalClassInStaticContext_1@localclassinstaticcontext.LocalClassInStaticContext.1 (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:19:40
   (return (local.get $$instance))
  )
@@ -553,10 +531,8 @@
  (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.1))
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:19:40
  (block
-  ;; localclassinstaticcontext.LocalClassInStaticContext.1.$clinit();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:19:40
   (call $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext.1 )
-  ;; Object.this.$ctor();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:19:40
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -566,19 +542,15 @@
 (func $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext.1
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:19:40
  (block
-  ;; if (localclassinstaticcontext.LocalClassInStaticContext.1.$initialized) return;
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:19:40
   (if (global.get $f_$initialized__localclassinstaticcontext_LocalClassInStaticContext_1)
    (then
-    ;; return;
     ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:19:40
     (return )
    )
   )
-  ;; (localclassinstaticcontext.LocalClassInStaticContext.1.$initialized = true);
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:19:40
   (global.set $f_$initialized__localclassinstaticcontext_LocalClassInStaticContext_1 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:19:40
   (call $$clinit__void@java.lang.Object )
  )
@@ -588,14 +560,11 @@
 (func $$getClassMetadata__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.1
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((localclassinstaticcontext.LocalClassInStaticContext.1.$class == null)) (localclassinstaticcontext.LocalClassInStaticContext.1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|_1(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__localclassinstaticcontext_LocalClassInStaticContext_1) (ref.null $java.lang.Class))
    (then
-    ;; (localclassinstaticcontext.LocalClassInStaticContext.1.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|_1(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__localclassinstaticcontext_LocalClassInStaticContext_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclassin...|_1__java_lang_String (ref.func $$getString_|localclassin...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return localclassinstaticcontext.LocalClassInStaticContext.1.$class;
   (return (global.get $f_$class__localclassinstaticcontext_LocalClassInStaticContext_1))
  )
 )
@@ -608,7 +577,6 @@
  (local $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.1))
  (local.set $this (ref.cast_static $localclassinstaticcontext.LocalClassInStaticContext.1 (local.get $this.untyped)))
  (block
-  ;; return localclassinstaticcontext.LocalClassInStaticContext.1.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.1) ))
  )
 )
@@ -622,13 +590,10 @@
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:26:21
  (local $$instance (ref null $localclassinstaticcontext.LocalClassInStaticContext.3))
  (block
-  ;; <anonymous> extends Object $instance = new $3.<init>(0);
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:26:21
   (local.set $$instance (struct.new $localclassinstaticcontext.LocalClassInStaticContext.3 (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.3.vtable)) (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.3.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:26:21
   (call $$ctor__void_$p_localclassinstaticcontext_LocalClassInStaticContext_3@localclassinstaticcontext.LocalClassInStaticContext.3 (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:26:21
   (return (local.get $$instance))
  )
@@ -639,10 +604,8 @@
  (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.3))
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:26:21
  (block
-  ;; localclassinstaticcontext.LocalClassInStaticContext.3.$clinit();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:26:21
   (call $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext.3 )
-  ;; Object.this.$ctor();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:26:21
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -656,7 +619,6 @@
  (local $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.3))
  (local.set $this (ref.cast_static $localclassinstaticcontext.LocalClassInStaticContext.3 (local.get $this.untyped)))
  (block
-  ;; localclassinstaticcontext.LocalClassInStaticContext.1A.$create();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:30:12
   (drop (call $$create__@localclassinstaticcontext.LocalClassInStaticContext.1A ))
  )
@@ -667,19 +629,15 @@
 (func $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext.3
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:26:21
  (block
-  ;; if (localclassinstaticcontext.LocalClassInStaticContext.3.$initialized) return;
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:26:21
   (if (global.get $f_$initialized__localclassinstaticcontext_LocalClassInStaticContext_3)
    (then
-    ;; return;
     ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:26:21
     (return )
    )
   )
-  ;; (localclassinstaticcontext.LocalClassInStaticContext.3.$initialized = true);
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:26:21
   (global.set $f_$initialized__localclassinstaticcontext_LocalClassInStaticContext_3 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:26:21
   (call $$clinit__void@java.lang.Object )
  )
@@ -689,14 +647,11 @@
 (func $$getClassMetadata__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.3
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((localclassinstaticcontext.LocalClassInStaticContext.3.$class == null)) (localclassinstaticcontext.LocalClassInStaticContext.3.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|_2(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__localclassinstaticcontext_LocalClassInStaticContext_3) (ref.null $java.lang.Class))
    (then
-    ;; (localclassinstaticcontext.LocalClassInStaticContext.3.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|_2(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__localclassinstaticcontext_LocalClassInStaticContext_3 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclassin...|_2__java_lang_String (ref.func $$getString_|localclassin...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return localclassinstaticcontext.LocalClassInStaticContext.3.$class;
   (return (global.get $f_$class__localclassinstaticcontext_LocalClassInStaticContext_3))
  )
 )
@@ -709,7 +664,6 @@
  (local $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.3))
  (local.set $this (ref.cast_static $localclassinstaticcontext.LocalClassInStaticContext.3 (local.get $this.untyped)))
  (block
-  ;; return localclassinstaticcontext.LocalClassInStaticContext.3.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.3) ))
  )
 )
@@ -723,13 +677,10 @@
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:39:28
  (local $$instance (ref null $localclassinstaticcontext.LocalClassInStaticContext.2))
  (block
-  ;; <anonymous> extends Object $instance = new $2.<init>(0);
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:39:28
   (local.set $$instance (struct.new $localclassinstaticcontext.LocalClassInStaticContext.2 (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.2.vtable)) (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.2.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:39:28
   (call $$ctor__void_$p_localclassinstaticcontext_LocalClassInStaticContext_2@localclassinstaticcontext.LocalClassInStaticContext.2 (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:39:28
   (return (local.get $$instance))
  )
@@ -740,10 +691,8 @@
  (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.2))
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:39:28
  (block
-  ;; localclassinstaticcontext.LocalClassInStaticContext.2.$clinit();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:39:28
   (call $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext.2 )
-  ;; Object.this.$ctor();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:39:28
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -753,19 +702,15 @@
 (func $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext.2
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:39:28
  (block
-  ;; if (localclassinstaticcontext.LocalClassInStaticContext.2.$initialized) return;
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:39:28
   (if (global.get $f_$initialized__localclassinstaticcontext_LocalClassInStaticContext_2)
    (then
-    ;; return;
     ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:39:28
     (return )
    )
   )
-  ;; (localclassinstaticcontext.LocalClassInStaticContext.2.$initialized = true);
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:39:28
   (global.set $f_$initialized__localclassinstaticcontext_LocalClassInStaticContext_2 (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:39:28
   (call $$clinit__void@java.lang.Object )
  )
@@ -775,14 +720,11 @@
 (func $$getClassMetadata__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.2
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((localclassinstaticcontext.LocalClassInStaticContext.2.$class == null)) (localclassinstaticcontext.LocalClassInStaticContext.2.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|_3(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__localclassinstaticcontext_LocalClassInStaticContext_2) (ref.null $java.lang.Class))
    (then
-    ;; (localclassinstaticcontext.LocalClassInStaticContext.2.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|_3(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__localclassinstaticcontext_LocalClassInStaticContext_2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclassin...|_3__java_lang_String (ref.func $$getString_|localclassin...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return localclassinstaticcontext.LocalClassInStaticContext.2.$class;
   (return (global.get $f_$class__localclassinstaticcontext_LocalClassInStaticContext_2))
  )
 )
@@ -795,7 +737,6 @@
  (local $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.2))
  (local.set $this (ref.cast_static $localclassinstaticcontext.LocalClassInStaticContext.2 (local.get $this.untyped)))
  (block
-  ;; return localclassinstaticcontext.LocalClassInStaticContext.2.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.2) ))
  )
 )
@@ -810,13 +751,10 @@
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:47:12
  (local $$instance (ref null $localclassinstaticcontext.LocalClassInStaticContext.C.1D))
  (block
-  ;; D $instance = new $1D.<init>(0,$outer_this);
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:47:12
   (local.set $$instance (struct.new $localclassinstaticcontext.LocalClassInStaticContext.C.1D (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D.vtable)) (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D.itable)) (i32.const 0) (local.get $$outer_this)))
-  ;; $instance.$ctor($outer_this);
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:47:12
   (call $$ctor__localclassinstaticcontext_LocalClassInStaticContext_C__void_$p_localclassinstaticcontext_LocalClassInStaticContext_C_1D@localclassinstaticcontext.LocalClassInStaticContext.C.1D (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;; return $instance;
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:47:12
   (return (local.get $$instance))
  )
@@ -828,10 +766,8 @@
  (param $$outer_this (ref null $localclassinstaticcontext.LocalClassInStaticContext.C))
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:47:12
  (block
-  ;; localclassinstaticcontext.LocalClassInStaticContext.C.1D.$clinit();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:47:12
   (call $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext.C.1D )
-  ;; Object.this.$ctor();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:47:12
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -846,7 +782,6 @@
  (local $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.C.1D))
  (local.set $this (ref.cast_static $localclassinstaticcontext.LocalClassInStaticContext.C.1D (local.get $this.untyped)))
  (block
-  ;; return $1D.this.this.f;
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:49:10
   (return (struct.get $localclassinstaticcontext.LocalClassInStaticContext.C $f_f__localclassinstaticcontext_LocalClassInStaticContext_C(struct.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D $$outer_this__localclassinstaticcontext_LocalClassInStaticContext_C_1D(local.get $this))))
  )
@@ -857,19 +792,15 @@
 (func $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext.C.1D
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:47:12
  (block
-  ;; if (localclassinstaticcontext.LocalClassInStaticContext.C.1D.$initialized) return;
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:47:12
   (if (global.get $f_$initialized__localclassinstaticcontext_LocalClassInStaticContext_C_1D)
    (then
-    ;; return;
     ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:47:12
     (return )
    )
   )
-  ;; (localclassinstaticcontext.LocalClassInStaticContext.C.1D.$initialized = true);
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:47:12
   (global.set $f_$initialized__localclassinstaticcontext_LocalClassInStaticContext_C_1D (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:47:12
   (call $$clinit__void@java.lang.Object )
  )
@@ -879,14 +810,11 @@
 (func $$getClassMetadata__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.C.1D
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((localclassinstaticcontext.LocalClassInStaticContext.C.1D.$class == null)) (localclassinstaticcontext.LocalClassInStaticContext.C.1D.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|_4(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__localclassinstaticcontext_LocalClassInStaticContext_C_1D) (ref.null $java.lang.Class))
    (then
-    ;; (localclassinstaticcontext.LocalClassInStaticContext.C.1D.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|_4(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__localclassinstaticcontext_LocalClassInStaticContext_C_1D (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclassin...|_4__java_lang_String (ref.func $$getString_|localclassin...|_4__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return localclassinstaticcontext.LocalClassInStaticContext.C.1D.$class;
   (return (global.get $f_$class__localclassinstaticcontext_LocalClassInStaticContext_C_1D))
  )
 )
@@ -899,7 +827,6 @@
  (local $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.C.1D))
  (local.set $this (ref.cast_static $localclassinstaticcontext.LocalClassInStaticContext.C.1D (local.get $this.untyped)))
  (block
-  ;; return localclassinstaticcontext.LocalClassInStaticContext.C.1D.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.C.1D) ))
  )
 )
@@ -913,13 +840,10 @@
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:42:22
  (local $$instance (ref null $localclassinstaticcontext.LocalClassInStaticContext.C))
  (block
-  ;; C $instance = new C.<init>(0,1);
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:42:22
   (local.set $$instance (struct.new $localclassinstaticcontext.LocalClassInStaticContext.C (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.C.vtable)) (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.C.itable)) (i32.const 0) (i32.const 1)))
-  ;; $instance.$ctor();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:42:22
   (call $$ctor__void_$p_localclassinstaticcontext_LocalClassInStaticContext_C@localclassinstaticcontext.LocalClassInStaticContext.C (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:42:22
   (return (local.get $$instance))
  )
@@ -930,13 +854,10 @@
  (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.C))
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:42:22
  (block
-  ;; localclassinstaticcontext.LocalClassInStaticContext.C.$clinit();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:42:22
   (call $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext.C )
-  ;; Object.this.$ctor();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:42:22
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;; C.this.$init();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:42:22
   (call $$init__void_$p_localclassinstaticcontext_LocalClassInStaticContext_C@localclassinstaticcontext.LocalClassInStaticContext.C (ref.as_non_null (local.get $this)))
  )
@@ -952,10 +873,8 @@
  (local.set $this (ref.cast_static $localclassinstaticcontext.LocalClassInStaticContext.C (local.get $this.untyped)))
  (block
   (block
-   ;; D $qualifier = localclassinstaticcontext.LocalClassInStaticContext.C.1D.$create(C.this);
    ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:52:6
    (local.set $$qualifier (call $$create__localclassinstaticcontext_LocalClassInStaticContext_C@localclassinstaticcontext.LocalClassInStaticContext.C.1D (local.get $this)))
-   ;; $qualifier.fun();
    ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:52:6
    (drop (call_ref $function.m_fun__int (ref.as_non_null (local.get $$qualifier))(struct.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D.vtable $m_fun__int (struct.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D $vtable(local.get $$qualifier)))))
   )
@@ -975,19 +894,15 @@
 (func $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext.C
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:42:22
  (block
-  ;; if (localclassinstaticcontext.LocalClassInStaticContext.C.$initialized) return;
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:42:22
   (if (global.get $f_$initialized__localclassinstaticcontext_LocalClassInStaticContext_C)
    (then
-    ;; return;
     ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:42:22
     (return )
    )
   )
-  ;; (localclassinstaticcontext.LocalClassInStaticContext.C.$initialized = true);
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:42:22
   (global.set $f_$initialized__localclassinstaticcontext_LocalClassInStaticContext_C (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:42:22
   (call $$clinit__void@java.lang.Object )
  )
@@ -997,14 +912,11 @@
 (func $$getClassMetadata__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.C
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((localclassinstaticcontext.LocalClassInStaticContext.C.$class == null)) (localclassinstaticcontext.LocalClassInStaticContext.C.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|_5(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__localclassinstaticcontext_LocalClassInStaticContext_C) (ref.null $java.lang.Class))
    (then
-    ;; (localclassinstaticcontext.LocalClassInStaticContext.C.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|_5(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__localclassinstaticcontext_LocalClassInStaticContext_C (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclassin...|_5__java_lang_String (ref.func $$getString_|localclassin...|_5__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return localclassinstaticcontext.LocalClassInStaticContext.C.$class;
   (return (global.get $f_$class__localclassinstaticcontext_LocalClassInStaticContext_C))
  )
 )
@@ -1017,7 +929,6 @@
  (local $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.C))
  (local.set $this (ref.cast_static $localclassinstaticcontext.LocalClassInStaticContext.C (local.get $this.untyped)))
  (block
-  ;; return localclassinstaticcontext.LocalClassInStaticContext.C.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.C) ))
  )
 )
@@ -1031,13 +942,10 @@
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:23:10
  (local $$instance (ref null $localclassinstaticcontext.LocalClassInStaticContext.1A))
  (block
-  ;; A $instance = new $1A.<init>(0);
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:23:10
   (local.set $$instance (struct.new $localclassinstaticcontext.LocalClassInStaticContext.1A (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.vtable)) (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:23:10
   (call $$ctor__void_$p_localclassinstaticcontext_LocalClassInStaticContext_1A@localclassinstaticcontext.LocalClassInStaticContext.1A (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:23:10
   (return (local.get $$instance))
  )
@@ -1048,10 +956,8 @@
  (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.1A))
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:23:10
  (block
-  ;; localclassinstaticcontext.LocalClassInStaticContext.1A.$clinit();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:23:10
   (call $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext.1A )
-  ;; Object.this.$ctor();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:23:10
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -1061,19 +967,15 @@
 (func $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext.1A
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:23:10
  (block
-  ;; if (localclassinstaticcontext.LocalClassInStaticContext.1A.$initialized) return;
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:23:10
   (if (global.get $f_$initialized__localclassinstaticcontext_LocalClassInStaticContext_1A)
    (then
-    ;; return;
     ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:23:10
     (return )
    )
   )
-  ;; (localclassinstaticcontext.LocalClassInStaticContext.1A.$initialized = true);
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:23:10
   (global.set $f_$initialized__localclassinstaticcontext_LocalClassInStaticContext_1A (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:23:10
   (call $$clinit__void@java.lang.Object )
  )
@@ -1083,14 +985,11 @@
 (func $$getClassMetadata__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.1A
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((localclassinstaticcontext.LocalClassInStaticContext.1A.$class == null)) (localclassinstaticcontext.LocalClassInStaticContext.1A.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|_6(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__localclassinstaticcontext_LocalClassInStaticContext_1A) (ref.null $java.lang.Class))
    (then
-    ;; (localclassinstaticcontext.LocalClassInStaticContext.1A.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|_6(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__localclassinstaticcontext_LocalClassInStaticContext_1A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclassin...|_6__java_lang_String (ref.func $$getString_|localclassin...|_6__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return localclassinstaticcontext.LocalClassInStaticContext.1A.$class;
   (return (global.get $f_$class__localclassinstaticcontext_LocalClassInStaticContext_1A))
  )
 )
@@ -1103,7 +1002,6 @@
  (local $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.1A))
  (local.set $this (ref.cast_static $localclassinstaticcontext.LocalClassInStaticContext.1A (local.get $this.untyped)))
  (block
-  ;; return localclassinstaticcontext.LocalClassInStaticContext.1A.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.1A) ))
  )
 )
@@ -1117,13 +1015,10 @@
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:37:10
  (local $$instance (ref null $localclassinstaticcontext.LocalClassInStaticContext.1B))
  (block
-  ;; B $instance = new $1B.<init>(0);
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:37:10
   (local.set $$instance (struct.new $localclassinstaticcontext.LocalClassInStaticContext.1B (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.1B.vtable)) (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.1B.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:37:10
   (call $$ctor__void_$p_localclassinstaticcontext_LocalClassInStaticContext_1B@localclassinstaticcontext.LocalClassInStaticContext.1B (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:37:10
   (return (local.get $$instance))
  )
@@ -1134,10 +1029,8 @@
  (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.1B))
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:37:10
  (block
-  ;; localclassinstaticcontext.LocalClassInStaticContext.1B.$clinit();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:37:10
   (call $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext.1B )
-  ;; Object.this.$ctor();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:37:10
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -1147,19 +1040,15 @@
 (func $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext.1B
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:37:10
  (block
-  ;; if (localclassinstaticcontext.LocalClassInStaticContext.1B.$initialized) return;
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:37:10
   (if (global.get $f_$initialized__localclassinstaticcontext_LocalClassInStaticContext_1B)
    (then
-    ;; return;
     ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:37:10
     (return )
    )
   )
-  ;; (localclassinstaticcontext.LocalClassInStaticContext.1B.$initialized = true);
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:37:10
   (global.set $f_$initialized__localclassinstaticcontext_LocalClassInStaticContext_1B (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:37:10
   (call $$clinit__void@java.lang.Object )
  )
@@ -1169,14 +1058,11 @@
 (func $$getClassMetadata__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.1B
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((localclassinstaticcontext.LocalClassInStaticContext.1B.$class == null)) (localclassinstaticcontext.LocalClassInStaticContext.1B.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|_7(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__localclassinstaticcontext_LocalClassInStaticContext_1B) (ref.null $java.lang.Class))
    (then
-    ;; (localclassinstaticcontext.LocalClassInStaticContext.1B.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|localclassin...|_7(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__localclassinstaticcontext_LocalClassInStaticContext_1B (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclassin...|_7__java_lang_String (ref.func $$getString_|localclassin...|_7__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return localclassinstaticcontext.LocalClassInStaticContext.1B.$class;
   (return (global.get $f_$class__localclassinstaticcontext_LocalClassInStaticContext_1B))
  )
 )
@@ -1189,7 +1075,6 @@
  (local $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.1B))
  (local.set $this (ref.cast_static $localclassinstaticcontext.LocalClassInStaticContext.1B (local.get $this.untyped)))
  (block
-  ;; return localclassinstaticcontext.LocalClassInStaticContext.1B.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.1B) ))
  )
 )

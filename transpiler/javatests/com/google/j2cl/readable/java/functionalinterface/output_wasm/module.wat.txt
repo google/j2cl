@@ -129,16 +129,13 @@
 (func $$clinit__void@functionalinterface.FunctionalInterfaces.NonParametrized
  ;;@ functionalinterface/FunctionalInterfaces.java:21:19
  (block
-  ;; if (functionalinterface.FunctionalInterfaces.NonParametrized.$initialized) return;
   ;;@ functionalinterface/FunctionalInterfaces.java:21:19
   (if (global.get $f_$initialized__functionalinterface_FunctionalInterfaces_NonParametrized)
    (then
-    ;; return;
     ;;@ functionalinterface/FunctionalInterfaces.java:21:19
     (return )
    )
   )
-  ;; (functionalinterface.FunctionalInterfaces.NonParametrized.$initialized = true);
   ;;@ functionalinterface/FunctionalInterfaces.java:21:19
   (global.set $f_$initialized__functionalinterface_FunctionalInterfaces_NonParametrized (i32.const 1))
  )
@@ -148,14 +145,11 @@
 (func $$getClassMetadata__java_lang_Class@functionalinterface.FunctionalInterfaces.NonParametrized
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((functionalinterface.FunctionalInterfaces.NonParametrized.$class == null)) (functionalinterface.FunctionalInterfaces.NonParametrized.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|functionalin...|_1()));
   (if (ref.eq (global.get $f_$class__functionalinterface_FunctionalInterfaces_NonParametrized) (ref.null $java.lang.Class))
    (then
-    ;; (functionalinterface.FunctionalInterfaces.NonParametrized.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|functionalin...|_1()));
     (global.set $f_$class__functionalinterface_FunctionalInterfaces_NonParametrized (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functionalin...|_1__java_lang_String (ref.func $$getString_|functionalin...|_1__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return functionalinterface.FunctionalInterfaces.NonParametrized.$class;
   (return (global.get $f_$class__functionalinterface_FunctionalInterfaces_NonParametrized))
  )
 )
@@ -166,16 +160,13 @@
 (func $$clinit__void@functionalinterface.FunctionalInterfaces.Parametrized
  ;;@ functionalinterface/FunctionalInterfaces.java:25:19
  (block
-  ;; if (functionalinterface.FunctionalInterfaces.Parametrized.$initialized) return;
   ;;@ functionalinterface/FunctionalInterfaces.java:25:19
   (if (global.get $f_$initialized__functionalinterface_FunctionalInterfaces_Parametrized)
    (then
-    ;; return;
     ;;@ functionalinterface/FunctionalInterfaces.java:25:19
     (return )
    )
   )
-  ;; (functionalinterface.FunctionalInterfaces.Parametrized.$initialized = true);
   ;;@ functionalinterface/FunctionalInterfaces.java:25:19
   (global.set $f_$initialized__functionalinterface_FunctionalInterfaces_Parametrized (i32.const 1))
  )
@@ -185,14 +176,11 @@
 (func $$getClassMetadata__java_lang_Class@functionalinterface.FunctionalInterfaces.Parametrized
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((functionalinterface.FunctionalInterfaces.Parametrized.$class == null)) (functionalinterface.FunctionalInterfaces.Parametrized.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|functionalin...|_2()));
   (if (ref.eq (global.get $f_$class__functionalinterface_FunctionalInterfaces_Parametrized) (ref.null $java.lang.Class))
    (then
-    ;; (functionalinterface.FunctionalInterfaces.Parametrized.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|functionalin...|_2()));
     (global.set $f_$class__functionalinterface_FunctionalInterfaces_Parametrized (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functionalin...|_2__java_lang_String (ref.func $$getString_|functionalin...|_2__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return functionalinterface.FunctionalInterfaces.Parametrized.$class;
   (return (global.get $f_$class__functionalinterface_FunctionalInterfaces_Parametrized))
  )
 )
@@ -203,16 +191,13 @@
 (func $$clinit__void@functionalinterface.FunctionalInterfaces.Specialized
  ;;@ functionalinterface/FunctionalInterfaces.java:29:19
  (block
-  ;; if (functionalinterface.FunctionalInterfaces.Specialized.$initialized) return;
   ;;@ functionalinterface/FunctionalInterfaces.java:29:19
   (if (global.get $f_$initialized__functionalinterface_FunctionalInterfaces_Specialized)
    (then
-    ;; return;
     ;;@ functionalinterface/FunctionalInterfaces.java:29:19
     (return )
    )
   )
-  ;; (functionalinterface.FunctionalInterfaces.Specialized.$initialized = true);
   ;;@ functionalinterface/FunctionalInterfaces.java:29:19
   (global.set $f_$initialized__functionalinterface_FunctionalInterfaces_Specialized (i32.const 1))
  )
@@ -222,14 +207,11 @@
 (func $$getClassMetadata__java_lang_Class@functionalinterface.FunctionalInterfaces.Specialized
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((functionalinterface.FunctionalInterfaces.Specialized.$class == null)) (functionalinterface.FunctionalInterfaces.Specialized.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|functionalin...|_3()));
   (if (ref.eq (global.get $f_$class__functionalinterface_FunctionalInterfaces_Specialized) (ref.null $java.lang.Class))
    (then
-    ;; (functionalinterface.FunctionalInterfaces.Specialized.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|functionalin...|_3()));
     (global.set $f_$class__functionalinterface_FunctionalInterfaces_Specialized (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functionalin...|_3__java_lang_String (ref.func $$getString_|functionalin...|_3__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return functionalinterface.FunctionalInterfaces.Specialized.$class;
   (return (global.get $f_$class__functionalinterface_FunctionalInterfaces_Specialized))
  )
 )
@@ -243,7 +225,6 @@
  (result (ref null $java.lang.String))
  ;;@ functionalinterface/FunctionalInterfaces.java:37:19
  (block
-  ;; return WithDefaultMethod.this.apply(string);
   ;;@ functionalinterface/FunctionalInterfaces.java:38:6
   (return (call_ref $function.m_apply__java_lang_String__java_lang_String (ref.as_non_null (local.get $this))(local.get $string)(struct.get $functionalinterface.FunctionalInterfaces.WithDefaultMethod.vtable $m_apply__java_lang_String__java_lang_String (ref.null $functionalinterface.FunctionalInterfaces.WithDefaultMethod.vtable))))
  )
@@ -254,16 +235,13 @@
 (func $$clinit__void@functionalinterface.FunctionalInterfaces.WithDefaultMethod
  ;;@ functionalinterface/FunctionalInterfaces.java:34:19
  (block
-  ;; if (functionalinterface.FunctionalInterfaces.WithDefaultMethod.$initialized) return;
   ;;@ functionalinterface/FunctionalInterfaces.java:34:19
   (if (global.get $f_$initialized__functionalinterface_FunctionalInterfaces_WithDefaultMethod)
    (then
-    ;; return;
     ;;@ functionalinterface/FunctionalInterfaces.java:34:19
     (return )
    )
   )
-  ;; (functionalinterface.FunctionalInterfaces.WithDefaultMethod.$initialized = true);
   ;;@ functionalinterface/FunctionalInterfaces.java:34:19
   (global.set $f_$initialized__functionalinterface_FunctionalInterfaces_WithDefaultMethod (i32.const 1))
  )
@@ -273,14 +251,11 @@
 (func $$getClassMetadata__java_lang_Class@functionalinterface.FunctionalInterfaces.WithDefaultMethod
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((functionalinterface.FunctionalInterfaces.WithDefaultMethod.$class == null)) (functionalinterface.FunctionalInterfaces.WithDefaultMethod.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|functionalin...|_4()));
   (if (ref.eq (global.get $f_$class__functionalinterface_FunctionalInterfaces_WithDefaultMethod) (ref.null $java.lang.Class))
    (then
-    ;; (functionalinterface.FunctionalInterfaces.WithDefaultMethod.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|functionalin...|_4()));
     (global.set $f_$class__functionalinterface_FunctionalInterfaces_WithDefaultMethod (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functionalin...|_4__java_lang_String (ref.func $$getString_|functionalin...|_4__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return functionalinterface.FunctionalInterfaces.WithDefaultMethod.$class;
   (return (global.get $f_$class__functionalinterface_FunctionalInterfaces_WithDefaultMethod))
  )
 )
@@ -291,16 +266,13 @@
 (func $$clinit__void@functionalinterface.FunctionalInterfaces.WithObjectMethods
  ;;@ functionalinterface/FunctionalInterfaces.java:42:19
  (block
-  ;; if (functionalinterface.FunctionalInterfaces.WithObjectMethods.$initialized) return;
   ;;@ functionalinterface/FunctionalInterfaces.java:42:19
   (if (global.get $f_$initialized__functionalinterface_FunctionalInterfaces_WithObjectMethods)
    (then
-    ;; return;
     ;;@ functionalinterface/FunctionalInterfaces.java:42:19
     (return )
    )
   )
-  ;; (functionalinterface.FunctionalInterfaces.WithObjectMethods.$initialized = true);
   ;;@ functionalinterface/FunctionalInterfaces.java:42:19
   (global.set $f_$initialized__functionalinterface_FunctionalInterfaces_WithObjectMethods (i32.const 1))
  )
@@ -310,14 +282,11 @@
 (func $$getClassMetadata__java_lang_Class@functionalinterface.FunctionalInterfaces.WithObjectMethods
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((functionalinterface.FunctionalInterfaces.WithObjectMethods.$class == null)) (functionalinterface.FunctionalInterfaces.WithObjectMethods.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|functionalin...|_5()));
   (if (ref.eq (global.get $f_$class__functionalinterface_FunctionalInterfaces_WithObjectMethods) (ref.null $java.lang.Class))
    (then
-    ;; (functionalinterface.FunctionalInterfaces.WithObjectMethods.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|functionalin...|_5()));
     (global.set $f_$class__functionalinterface_FunctionalInterfaces_WithObjectMethods (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functionalin...|_5__java_lang_String (ref.func $$getString_|functionalin...|_5__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return functionalinterface.FunctionalInterfaces.WithObjectMethods.$class;
   (return (global.get $f_$class__functionalinterface_FunctionalInterfaces_WithObjectMethods))
  )
 )
@@ -328,16 +297,13 @@
 (func $$clinit__void@functionalinterface.FunctionalInterfaces.WithParametrizedMethod
  ;;@ functionalinterface/FunctionalInterfaces.java:55:19
  (block
-  ;; if (functionalinterface.FunctionalInterfaces.WithParametrizedMethod.$initialized) return;
   ;;@ functionalinterface/FunctionalInterfaces.java:55:19
   (if (global.get $f_$initialized__functionalinterface_FunctionalInterfaces_WithParametrizedMethod)
    (then
-    ;; return;
     ;;@ functionalinterface/FunctionalInterfaces.java:55:19
     (return )
    )
   )
-  ;; (functionalinterface.FunctionalInterfaces.WithParametrizedMethod.$initialized = true);
   ;;@ functionalinterface/FunctionalInterfaces.java:55:19
   (global.set $f_$initialized__functionalinterface_FunctionalInterfaces_WithParametrizedMethod (i32.const 1))
  )
@@ -347,14 +313,11 @@
 (func $$getClassMetadata__java_lang_Class@functionalinterface.FunctionalInterfaces.WithParametrizedMethod
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((functionalinterface.FunctionalInterfaces.WithParametrizedMethod.$class == null)) (functionalinterface.FunctionalInterfaces.WithParametrizedMethod.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|functionalin...|_6()));
   (if (ref.eq (global.get $f_$class__functionalinterface_FunctionalInterfaces_WithParametrizedMethod) (ref.null $java.lang.Class))
    (then
-    ;; (functionalinterface.FunctionalInterfaces.WithParametrizedMethod.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|functionalin...|_6()));
     (global.set $f_$class__functionalinterface_FunctionalInterfaces_WithParametrizedMethod (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functionalin...|_6__java_lang_String (ref.func $$getString_|functionalin...|_6__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return functionalinterface.FunctionalInterfaces.WithParametrizedMethod.$class;
   (return (global.get $f_$class__functionalinterface_FunctionalInterfaces_WithParametrizedMethod))
  )
 )
@@ -365,16 +328,13 @@
 (func $$clinit__void@functionalinterface.FunctionalInterfaces.WithKtProperty
  ;;@ functionalinterface/FunctionalInterfaces.java:59:19
  (block
-  ;; if (functionalinterface.FunctionalInterfaces.WithKtProperty.$initialized) return;
   ;;@ functionalinterface/FunctionalInterfaces.java:59:19
   (if (global.get $f_$initialized__functionalinterface_FunctionalInterfaces_WithKtProperty)
    (then
-    ;; return;
     ;;@ functionalinterface/FunctionalInterfaces.java:59:19
     (return )
    )
   )
-  ;; (functionalinterface.FunctionalInterfaces.WithKtProperty.$initialized = true);
   ;;@ functionalinterface/FunctionalInterfaces.java:59:19
   (global.set $f_$initialized__functionalinterface_FunctionalInterfaces_WithKtProperty (i32.const 1))
  )
@@ -384,14 +344,11 @@
 (func $$getClassMetadata__java_lang_Class@functionalinterface.FunctionalInterfaces.WithKtProperty
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((functionalinterface.FunctionalInterfaces.WithKtProperty.$class == null)) (functionalinterface.FunctionalInterfaces.WithKtProperty.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|functionalin...|_7()));
   (if (ref.eq (global.get $f_$class__functionalinterface_FunctionalInterfaces_WithKtProperty) (ref.null $java.lang.Class))
    (then
-    ;; (functionalinterface.FunctionalInterfaces.WithKtProperty.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|functionalin...|_7()));
     (global.set $f_$class__functionalinterface_FunctionalInterfaces_WithKtProperty (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functionalin...|_7__java_lang_String (ref.func $$getString_|functionalin...|_7__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return functionalinterface.FunctionalInterfaces.WithKtProperty.$class;
   (return (global.get $f_$class__functionalinterface_FunctionalInterfaces_WithKtProperty))
  )
 )
@@ -404,13 +361,10 @@
  ;;@ functionalinterface/FunctionalInterfaces.java:20:13
  (local $$instance (ref null $functionalinterface.FunctionalInterfaces))
  (block
-  ;; FunctionalInterfaces $instance = new FunctionalInterfaces.<init>(0);
   ;;@ functionalinterface/FunctionalInterfaces.java:20:13
   (local.set $$instance (struct.new $functionalinterface.FunctionalInterfaces (ref.as_non_null (global.get $functionalinterface.FunctionalInterfaces.vtable)) (ref.as_non_null (global.get $functionalinterface.FunctionalInterfaces.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ functionalinterface/FunctionalInterfaces.java:20:13
   (call $$ctor__void_$p_functionalinterface_FunctionalInterfaces@functionalinterface.FunctionalInterfaces (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ functionalinterface/FunctionalInterfaces.java:20:13
   (return (local.get $$instance))
  )
@@ -421,10 +375,8 @@
  (param $this (ref null $functionalinterface.FunctionalInterfaces))
  ;;@ functionalinterface/FunctionalInterfaces.java:20:13
  (block
-  ;; functionalinterface.FunctionalInterfaces.$clinit();
   ;;@ functionalinterface/FunctionalInterfaces.java:20:13
   (call $$clinit__void@functionalinterface.FunctionalInterfaces )
-  ;; Object.this.$ctor();
   ;;@ functionalinterface/FunctionalInterfaces.java:20:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -434,19 +386,15 @@
 (func $$clinit__void@functionalinterface.FunctionalInterfaces
  ;;@ functionalinterface/FunctionalInterfaces.java:20:13
  (block
-  ;; if (functionalinterface.FunctionalInterfaces.$initialized) return;
   ;;@ functionalinterface/FunctionalInterfaces.java:20:13
   (if (global.get $f_$initialized__functionalinterface_FunctionalInterfaces)
    (then
-    ;; return;
     ;;@ functionalinterface/FunctionalInterfaces.java:20:13
     (return )
    )
   )
-  ;; (functionalinterface.FunctionalInterfaces.$initialized = true);
   ;;@ functionalinterface/FunctionalInterfaces.java:20:13
   (global.set $f_$initialized__functionalinterface_FunctionalInterfaces (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ functionalinterface/FunctionalInterfaces.java:20:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -456,14 +404,11 @@
 (func $$getClassMetadata__java_lang_Class@functionalinterface.FunctionalInterfaces
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((functionalinterface.FunctionalInterfaces.$class == null)) (functionalinterface.FunctionalInterfaces.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|functionalin...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__functionalinterface_FunctionalInterfaces) (ref.null $java.lang.Class))
    (then
-    ;; (functionalinterface.FunctionalInterfaces.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|functionalin...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__functionalinterface_FunctionalInterfaces (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functionalin...|__java_lang_String (ref.func $$getString_|functionalin...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return functionalinterface.FunctionalInterfaces.$class;
   (return (global.get $f_$class__functionalinterface_FunctionalInterfaces))
  )
 )
@@ -476,7 +421,6 @@
  (local $this (ref null $functionalinterface.FunctionalInterfaces))
  (local.set $this (ref.cast_static $functionalinterface.FunctionalInterfaces (local.get $this.untyped)))
  (block
-  ;; return functionalinterface.FunctionalInterfaces.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@functionalinterface.FunctionalInterfaces) ))
  )
 )

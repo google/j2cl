@@ -338,16 +338,13 @@
 (func $$clinit__void@simplebridgemethods.Callable
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:34:10
  (block
-  ;; if (simplebridgemethods.Callable.$initialized) return;
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:34:10
   (if (global.get $f_$initialized__simplebridgemethods_Callable)
    (then
-    ;; return;
     ;;@ simplebridgemethods/SimpleBridgeMethods.java:34:10
     (return )
    )
   )
-  ;; (simplebridgemethods.Callable.$initialized = true);
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:34:10
   (global.set $f_$initialized__simplebridgemethods_Callable (i32.const 1))
  )
@@ -357,14 +354,11 @@
 (func $$getClassMetadata__java_lang_Class@simplebridgemethods.Callable
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((simplebridgemethods.Callable.$class == null)) (simplebridgemethods.Callable.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|simplebridge...|_3()));
   (if (ref.eq (global.get $f_$class__simplebridgemethods_Callable) (ref.null $java.lang.Class))
    (then
-    ;; (simplebridgemethods.Callable.$class = java.lang.Class.createForInterface(javaemul.internal.StringPool.$getString_|simplebridge...|_3()));
     (global.set $f_$class__simplebridgemethods_Callable (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplebridge...|_3__java_lang_String (ref.func $$getString_|simplebridge...|_3__java_lang_String@javaemul.internal.StringPool) )))
    )
   )
-  ;; return simplebridgemethods.Callable.$class;
   (return (global.get $f_$class__simplebridgemethods_Callable))
  )
 )
@@ -377,13 +371,10 @@
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:18:6
  (local $$instance (ref null $simplebridgemethods.Superclass))
  (block
-  ;; Superclass<T> $instance = new Superclass.<init>(0);
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:18:6
   (local.set $$instance (struct.new $simplebridgemethods.Superclass (ref.as_non_null (global.get $simplebridgemethods.Superclass.vtable)) (ref.as_non_null (global.get $simplebridgemethods.Superclass.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:18:6
   (call $$ctor__void_$p_simplebridgemethods_Superclass@simplebridgemethods.Superclass (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:18:6
   (return (local.get $$instance))
  )
@@ -394,10 +385,8 @@
  (param $this (ref null $simplebridgemethods.Superclass))
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:18:6
  (block
-  ;; simplebridgemethods.Superclass.$clinit();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:18:6
   (call $$clinit__void@simplebridgemethods.Superclass )
-  ;; Object.this.$ctor();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:18:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -420,19 +409,15 @@
 (func $$clinit__void@simplebridgemethods.Superclass
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:18:6
  (block
-  ;; if (simplebridgemethods.Superclass.$initialized) return;
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:18:6
   (if (global.get $f_$initialized__simplebridgemethods_Superclass)
    (then
-    ;; return;
     ;;@ simplebridgemethods/SimpleBridgeMethods.java:18:6
     (return )
    )
   )
-  ;; (simplebridgemethods.Superclass.$initialized = true);
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:18:6
   (global.set $f_$initialized__simplebridgemethods_Superclass (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:18:6
   (call $$clinit__void@java.lang.Object )
  )
@@ -442,14 +427,11 @@
 (func $$getClassMetadata__java_lang_Class@simplebridgemethods.Superclass
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((simplebridgemethods.Superclass.$class == null)) (simplebridgemethods.Superclass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|simplebridge...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__simplebridgemethods_Superclass) (ref.null $java.lang.Class))
    (then
-    ;; (simplebridgemethods.Superclass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|simplebridge...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__simplebridgemethods_Superclass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplebridge...|__java_lang_String (ref.func $$getString_|simplebridge...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return simplebridgemethods.Superclass.$class;
   (return (global.get $f_$class__simplebridgemethods_Superclass))
  )
 )
@@ -462,7 +444,6 @@
  (local $this (ref null $simplebridgemethods.Superclass))
  (local.set $this (ref.cast_static $simplebridgemethods.Superclass (local.get $this.untyped)))
  (block
-  ;; return simplebridgemethods.Superclass.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simplebridgemethods.Superclass) ))
  )
 )
@@ -476,13 +457,10 @@
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:39:6
  (local $$instance (ref null $simplebridgemethods.Task))
  (block
-  ;; Task<T> $instance = new Task.<init>(0);
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:39:6
   (local.set $$instance (struct.new $simplebridgemethods.Task (ref.as_non_null (global.get $simplebridgemethods.Task.vtable)) (ref.as_non_null (global.get $simplebridgemethods.Task.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:39:6
   (call $$ctor__void_$p_simplebridgemethods_Task@simplebridgemethods.Task (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:39:6
   (return (local.get $$instance))
  )
@@ -493,10 +471,8 @@
  (param $this (ref null $simplebridgemethods.Task))
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:39:6
  (block
-  ;; simplebridgemethods.Task.$clinit();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:39:6
   (call $$clinit__void@simplebridgemethods.Task )
-  ;; Object.this.$ctor();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:39:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -519,19 +495,15 @@
 (func $$clinit__void@simplebridgemethods.Task
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:39:6
  (block
-  ;; if (simplebridgemethods.Task.$initialized) return;
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:39:6
   (if (global.get $f_$initialized__simplebridgemethods_Task)
    (then
-    ;; return;
     ;;@ simplebridgemethods/SimpleBridgeMethods.java:39:6
     (return )
    )
   )
-  ;; (simplebridgemethods.Task.$initialized = true);
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:39:6
   (global.set $f_$initialized__simplebridgemethods_Task (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:39:6
   (call $$clinit__void@java.lang.Object )
  )
@@ -541,14 +513,11 @@
 (func $$getClassMetadata__java_lang_Class@simplebridgemethods.Task
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((simplebridgemethods.Task.$class == null)) (simplebridgemethods.Task.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|simplebridge...|_4(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__simplebridgemethods_Task) (ref.null $java.lang.Class))
    (then
-    ;; (simplebridgemethods.Task.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|simplebridge...|_4(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__simplebridgemethods_Task (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplebridge...|_4__java_lang_String (ref.func $$getString_|simplebridge...|_4__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return simplebridgemethods.Task.$class;
   (return (global.get $f_$class__simplebridgemethods_Task))
  )
 )
@@ -561,7 +530,6 @@
  (local $this (ref null $simplebridgemethods.Task))
  (local.set $this (ref.cast_static $simplebridgemethods.Task (local.get $this.untyped)))
  (block
-  ;; return simplebridgemethods.Task.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simplebridgemethods.Task) ))
  )
 )
@@ -575,13 +543,10 @@
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
  (local $$instance (ref null $simplebridgemethods.AnotherTask))
  (block
-  ;; AnotherTask<T> $instance = new AnotherTask.<init>(0);
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
   (local.set $$instance (struct.new $simplebridgemethods.AnotherTask (ref.as_non_null (global.get $simplebridgemethods.AnotherTask.vtable)) (ref.as_non_null (global.get $simplebridgemethods.AnotherTask.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
   (call $$ctor__void_$p_simplebridgemethods_AnotherTask@simplebridgemethods.AnotherTask (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
   (return (local.get $$instance))
  )
@@ -592,10 +557,8 @@
  (param $this (ref null $simplebridgemethods.AnotherTask))
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
  (block
-  ;; simplebridgemethods.AnotherTask.$clinit();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
   (call $$clinit__void@simplebridgemethods.AnotherTask )
-  ;; Object.this.$ctor();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -623,7 +586,6 @@
  (local $this (ref null $simplebridgemethods.AnotherTask))
  (local.set $this (ref.cast_static $simplebridgemethods.AnotherTask (local.get $this.untyped)))
  (block
-  ;; AnotherTask.this.call(((Superclass<T>) arg0));
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
   (call_ref $function.m_call__simplebridgemethods_Superclass__void (ref.as_non_null (local.get $this))(ref.cast_static $simplebridgemethods.Superclass (local.get $arg0))(struct.get $simplebridgemethods.AnotherTask.vtable $m_call__simplebridgemethods_Superclass__void (struct.get $simplebridgemethods.AnotherTask $vtable(local.get $this))))
  )
@@ -634,19 +596,15 @@
 (func $$clinit__void@simplebridgemethods.AnotherTask
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
  (block
-  ;; if (simplebridgemethods.AnotherTask.$initialized) return;
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
   (if (global.get $f_$initialized__simplebridgemethods_AnotherTask)
    (then
-    ;; return;
     ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
     (return )
    )
   )
-  ;; (simplebridgemethods.AnotherTask.$initialized = true);
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
   (global.set $f_$initialized__simplebridgemethods_AnotherTask (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
   (call $$clinit__void@java.lang.Object )
  )
@@ -656,14 +614,11 @@
 (func $$getClassMetadata__java_lang_Class@simplebridgemethods.AnotherTask
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((simplebridgemethods.AnotherTask.$class == null)) (simplebridgemethods.AnotherTask.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|simplebridge...|_5(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__simplebridgemethods_AnotherTask) (ref.null $java.lang.Class))
    (then
-    ;; (simplebridgemethods.AnotherTask.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|simplebridge...|_5(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__simplebridgemethods_AnotherTask (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplebridge...|_5__java_lang_String (ref.func $$getString_|simplebridge...|_5__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return simplebridgemethods.AnotherTask.$class;
   (return (global.get $f_$class__simplebridgemethods_AnotherTask))
  )
 )
@@ -676,7 +631,6 @@
  (local $this (ref null $simplebridgemethods.AnotherTask))
  (local.set $this (ref.cast_static $simplebridgemethods.AnotherTask (local.get $this.untyped)))
  (block
-  ;; return simplebridgemethods.AnotherTask.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simplebridgemethods.AnotherTask) ))
  )
 )
@@ -690,13 +644,10 @@
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:53:13
  (local $$instance (ref null $simplebridgemethods.SimpleBridgeMethods))
  (block
-  ;; SimpleBridgeMethods $instance = new SimpleBridgeMethods.<init>(0);
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:53:13
   (local.set $$instance (struct.new $simplebridgemethods.SimpleBridgeMethods (ref.as_non_null (global.get $simplebridgemethods.SimpleBridgeMethods.vtable)) (ref.as_non_null (global.get $simplebridgemethods.SimpleBridgeMethods.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:53:13
   (call $$ctor__void_$p_simplebridgemethods_SimpleBridgeMethods@simplebridgemethods.SimpleBridgeMethods (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:53:13
   (return (local.get $$instance))
  )
@@ -707,10 +658,8 @@
  (param $this (ref null $simplebridgemethods.SimpleBridgeMethods))
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:53:13
  (block
-  ;; simplebridgemethods.SimpleBridgeMethods.$clinit();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:53:13
   (call $$clinit__void@simplebridgemethods.SimpleBridgeMethods )
-  ;; Object.this.$ctor();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:53:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -720,19 +669,15 @@
 (func $$clinit__void@simplebridgemethods.SimpleBridgeMethods
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:53:13
  (block
-  ;; if (simplebridgemethods.SimpleBridgeMethods.$initialized) return;
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:53:13
   (if (global.get $f_$initialized__simplebridgemethods_SimpleBridgeMethods)
    (then
-    ;; return;
     ;;@ simplebridgemethods/SimpleBridgeMethods.java:53:13
     (return )
    )
   )
-  ;; (simplebridgemethods.SimpleBridgeMethods.$initialized = true);
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:53:13
   (global.set $f_$initialized__simplebridgemethods_SimpleBridgeMethods (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:53:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -742,14 +687,11 @@
 (func $$getClassMetadata__java_lang_Class@simplebridgemethods.SimpleBridgeMethods
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((simplebridgemethods.SimpleBridgeMethods.$class == null)) (simplebridgemethods.SimpleBridgeMethods.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|simplebridge...|_6(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__simplebridgemethods_SimpleBridgeMethods) (ref.null $java.lang.Class))
    (then
-    ;; (simplebridgemethods.SimpleBridgeMethods.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|simplebridge...|_6(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__simplebridgemethods_SimpleBridgeMethods (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplebridge...|_6__java_lang_String (ref.func $$getString_|simplebridge...|_6__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return simplebridgemethods.SimpleBridgeMethods.$class;
   (return (global.get $f_$class__simplebridgemethods_SimpleBridgeMethods))
  )
 )
@@ -762,7 +704,6 @@
  (local $this (ref null $simplebridgemethods.SimpleBridgeMethods))
  (local.set $this (ref.cast_static $simplebridgemethods.SimpleBridgeMethods (local.get $this.untyped)))
  (block
-  ;; return simplebridgemethods.SimpleBridgeMethods.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simplebridgemethods.SimpleBridgeMethods) ))
  )
 )
@@ -776,13 +717,10 @@
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
  (local $$instance (ref null $simplebridgemethods.Subclass))
  (block
-  ;; Subclass $instance = new Subclass.<init>(0);
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
   (local.set $$instance (struct.new $simplebridgemethods.Subclass (ref.as_non_null (global.get $simplebridgemethods.Subclass.vtable)) (ref.as_non_null (global.get $simplebridgemethods.Subclass.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
   (call $$ctor__void_$p_simplebridgemethods_Subclass@simplebridgemethods.Subclass (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
   (return (local.get $$instance))
  )
@@ -793,10 +731,8 @@
  (param $this (ref null $simplebridgemethods.Subclass))
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
  (block
-  ;; simplebridgemethods.Subclass.$clinit();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
   (call $$clinit__void@simplebridgemethods.Subclass )
-  ;; Superclass.this.$ctor();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
   (call $$ctor__void_$p_simplebridgemethods_Superclass@simplebridgemethods.Superclass (ref.as_non_null (local.get $this)))
  )
@@ -824,7 +760,6 @@
  (local $this (ref null $simplebridgemethods.Subclass))
  (local.set $this (ref.cast_static $simplebridgemethods.Subclass (local.get $this.untyped)))
  (block
-  ;; Subclass.this.m1(((AssertionError) arg0));
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
   (call_ref $function.m_m1__java_lang_AssertionError__void (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.AssertionError (local.get $arg0))(struct.get $simplebridgemethods.Subclass.vtable $m_m1__java_lang_AssertionError__void (struct.get $simplebridgemethods.Subclass $vtable(local.get $this))))
  )
@@ -835,19 +770,15 @@
 (func $$clinit__void@simplebridgemethods.Subclass
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
  (block
-  ;; if (simplebridgemethods.Subclass.$initialized) return;
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
   (if (global.get $f_$initialized__simplebridgemethods_Subclass)
    (then
-    ;; return;
     ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
     (return )
    )
   )
-  ;; (simplebridgemethods.Subclass.$initialized = true);
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
   (global.set $f_$initialized__simplebridgemethods_Subclass (i32.const 1))
-  ;; simplebridgemethods.Superclass.$clinit();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
   (call $$clinit__void@simplebridgemethods.Superclass )
  )
@@ -857,14 +788,11 @@
 (func $$getClassMetadata__java_lang_Class@simplebridgemethods.Subclass
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((simplebridgemethods.Subclass.$class == null)) (simplebridgemethods.Subclass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|simplebridge...|_1(),simplebridgemethods.Superclass.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__simplebridgemethods_Subclass) (ref.null $java.lang.Class))
    (then
-    ;; (simplebridgemethods.Subclass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|simplebridge...|_1(),simplebridgemethods.Superclass.$getClassMetadata()));
     (global.set $f_$class__simplebridgemethods_Subclass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplebridge...|_1__java_lang_String (ref.func $$getString_|simplebridge...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simplebridgemethods.Superclass) )))
    )
   )
-  ;; return simplebridgemethods.Subclass.$class;
   (return (global.get $f_$class__simplebridgemethods_Subclass))
  )
 )
@@ -877,7 +805,6 @@
  (local $this (ref null $simplebridgemethods.Subclass))
  (local.set $this (ref.cast_static $simplebridgemethods.Subclass (local.get $this.untyped)))
  (block
-  ;; return simplebridgemethods.Subclass.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simplebridgemethods.Subclass) ))
  )
 )
@@ -891,13 +818,10 @@
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:30:6
  (local $$instance (ref null $simplebridgemethods.AnotherSubclass))
  (block
-  ;; AnotherSubclass $instance = new AnotherSubclass.<init>(0);
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:30:6
   (local.set $$instance (struct.new $simplebridgemethods.AnotherSubclass (ref.as_non_null (global.get $simplebridgemethods.AnotherSubclass.vtable)) (ref.as_non_null (global.get $simplebridgemethods.AnotherSubclass.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:30:6
   (call $$ctor__void_$p_simplebridgemethods_AnotherSubclass@simplebridgemethods.AnotherSubclass (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:30:6
   (return (local.get $$instance))
  )
@@ -908,10 +832,8 @@
  (param $this (ref null $simplebridgemethods.AnotherSubclass))
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:30:6
  (block
-  ;; simplebridgemethods.AnotherSubclass.$clinit();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:30:6
   (call $$clinit__void@simplebridgemethods.AnotherSubclass )
-  ;; Superclass.this.$ctor();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:30:6
   (call $$ctor__void_$p_simplebridgemethods_Superclass@simplebridgemethods.Superclass (ref.as_non_null (local.get $this)))
  )
@@ -921,19 +843,15 @@
 (func $$clinit__void@simplebridgemethods.AnotherSubclass
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:30:6
  (block
-  ;; if (simplebridgemethods.AnotherSubclass.$initialized) return;
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:30:6
   (if (global.get $f_$initialized__simplebridgemethods_AnotherSubclass)
    (then
-    ;; return;
     ;;@ simplebridgemethods/SimpleBridgeMethods.java:30:6
     (return )
    )
   )
-  ;; (simplebridgemethods.AnotherSubclass.$initialized = true);
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:30:6
   (global.set $f_$initialized__simplebridgemethods_AnotherSubclass (i32.const 1))
-  ;; simplebridgemethods.Superclass.$clinit();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:30:6
   (call $$clinit__void@simplebridgemethods.Superclass )
  )
@@ -943,14 +861,11 @@
 (func $$getClassMetadata__java_lang_Class@simplebridgemethods.AnotherSubclass
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((simplebridgemethods.AnotherSubclass.$class == null)) (simplebridgemethods.AnotherSubclass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|simplebridge...|_2(),simplebridgemethods.Superclass.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__simplebridgemethods_AnotherSubclass) (ref.null $java.lang.Class))
    (then
-    ;; (simplebridgemethods.AnotherSubclass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|simplebridge...|_2(),simplebridgemethods.Superclass.$getClassMetadata()));
     (global.set $f_$class__simplebridgemethods_AnotherSubclass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplebridge...|_2__java_lang_String (ref.func $$getString_|simplebridge...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simplebridgemethods.Superclass) )))
    )
   )
-  ;; return simplebridgemethods.AnotherSubclass.$class;
   (return (global.get $f_$class__simplebridgemethods_AnotherSubclass))
  )
 )
@@ -963,7 +878,6 @@
  (local $this (ref null $simplebridgemethods.AnotherSubclass))
  (local.set $this (ref.cast_static $simplebridgemethods.AnotherSubclass (local.get $this.untyped)))
  (block
-  ;; return simplebridgemethods.AnotherSubclass.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simplebridgemethods.AnotherSubclass) ))
  )
 )

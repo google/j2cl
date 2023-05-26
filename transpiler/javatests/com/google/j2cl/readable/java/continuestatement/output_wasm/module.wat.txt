@@ -59,13 +59,10 @@
  ;;@ continuestatement/ContinueStatement.java:18:13
  (local $$instance (ref null $continuestatement.ContinueStatement))
  (block
-  ;; ContinueStatement $instance = new ContinueStatement.<init>(0);
   ;;@ continuestatement/ContinueStatement.java:18:13
   (local.set $$instance (struct.new $continuestatement.ContinueStatement (ref.as_non_null (global.get $continuestatement.ContinueStatement.vtable)) (ref.as_non_null (global.get $continuestatement.ContinueStatement.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ continuestatement/ContinueStatement.java:18:13
   (call $$ctor__void_$p_continuestatement_ContinueStatement@continuestatement.ContinueStatement (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ continuestatement/ContinueStatement.java:18:13
   (return (local.get $$instance))
  )
@@ -76,10 +73,8 @@
  (param $this (ref null $continuestatement.ContinueStatement))
  ;;@ continuestatement/ContinueStatement.java:18:13
  (block
-  ;; continuestatement.ContinueStatement.$clinit();
   ;;@ continuestatement/ContinueStatement.java:18:13
   (call $$clinit__void@continuestatement.ContinueStatement )
-  ;; Object.this.$ctor();
   ;;@ continuestatement/ContinueStatement.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -93,13 +88,11 @@
  (local $this (ref null $continuestatement.ContinueStatement))
  (local.set $this (ref.cast_static $continuestatement.ContinueStatement (local.get $this.untyped)))
  (block
-  ;; LOOP: for (;true;) {
   ;;@ continuestatement/ContinueStatement.java:20:4
   (block $LOOP.BREAK
    (loop
     (block $LOOP.CONTINUE
      (block
-      ;; continue LOOP;
       ;;@ continuestatement/ContinueStatement.java:21:6
       (br $LOOP.CONTINUE)
      )
@@ -116,19 +109,15 @@
 (func $$clinit__void@continuestatement.ContinueStatement
  ;;@ continuestatement/ContinueStatement.java:18:13
  (block
-  ;; if (continuestatement.ContinueStatement.$initialized) return;
   ;;@ continuestatement/ContinueStatement.java:18:13
   (if (global.get $f_$initialized__continuestatement_ContinueStatement)
    (then
-    ;; return;
     ;;@ continuestatement/ContinueStatement.java:18:13
     (return )
    )
   )
-  ;; (continuestatement.ContinueStatement.$initialized = true);
   ;;@ continuestatement/ContinueStatement.java:18:13
   (global.set $f_$initialized__continuestatement_ContinueStatement (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ continuestatement/ContinueStatement.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -138,14 +127,11 @@
 (func $$getClassMetadata__java_lang_Class@continuestatement.ContinueStatement
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((continuestatement.ContinueStatement.$class == null)) (continuestatement.ContinueStatement.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|continuestat...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__continuestatement_ContinueStatement) (ref.null $java.lang.Class))
    (then
-    ;; (continuestatement.ContinueStatement.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|continuestat...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__continuestatement_ContinueStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|continuestat...|__java_lang_String (ref.func $$getString_|continuestat...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return continuestatement.ContinueStatement.$class;
   (return (global.get $f_$class__continuestatement_ContinueStatement))
  )
 )
@@ -158,7 +144,6 @@
  (local $this (ref null $continuestatement.ContinueStatement))
  (local.set $this (ref.cast_static $continuestatement.ContinueStatement (local.get $this.untyped)))
  (block
-  ;; return continuestatement.ContinueStatement.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@continuestatement.ContinueStatement) ))
  )
 )

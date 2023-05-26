@@ -108,13 +108,10 @@
  ;;@ staticnestedclass/StaticNestedClassParent.java:18:13
  (local $$instance (ref null $staticnestedclass.StaticNestedClassParent))
  (block
-  ;; StaticNestedClassParent $instance = new StaticNestedClassParent.<init>(0);
   ;;@ staticnestedclass/StaticNestedClassParent.java:18:13
   (local.set $$instance (struct.new $staticnestedclass.StaticNestedClassParent (ref.as_non_null (global.get $staticnestedclass.StaticNestedClassParent.vtable)) (ref.as_non_null (global.get $staticnestedclass.StaticNestedClassParent.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ staticnestedclass/StaticNestedClassParent.java:18:13
   (call $$ctor__void_$p_staticnestedclass_StaticNestedClassParent@staticnestedclass.StaticNestedClassParent (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ staticnestedclass/StaticNestedClassParent.java:18:13
   (return (local.get $$instance))
  )
@@ -125,10 +122,8 @@
  (param $this (ref null $staticnestedclass.StaticNestedClassParent))
  ;;@ staticnestedclass/StaticNestedClassParent.java:18:13
  (block
-  ;; staticnestedclass.StaticNestedClassParent.$clinit();
   ;;@ staticnestedclass/StaticNestedClassParent.java:18:13
   (call $$clinit__void@staticnestedclass.StaticNestedClassParent )
-  ;; Object.this.$ctor();
   ;;@ staticnestedclass/StaticNestedClassParent.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -138,19 +133,15 @@
 (func $$clinit__void@staticnestedclass.StaticNestedClassParent
  ;;@ staticnestedclass/StaticNestedClassParent.java:18:13
  (block
-  ;; if (staticnestedclass.StaticNestedClassParent.$initialized) return;
   ;;@ staticnestedclass/StaticNestedClassParent.java:18:13
   (if (global.get $f_$initialized__staticnestedclass_StaticNestedClassParent)
    (then
-    ;; return;
     ;;@ staticnestedclass/StaticNestedClassParent.java:18:13
     (return )
    )
   )
-  ;; (staticnestedclass.StaticNestedClassParent.$initialized = true);
   ;;@ staticnestedclass/StaticNestedClassParent.java:18:13
   (global.set $f_$initialized__staticnestedclass_StaticNestedClassParent (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ staticnestedclass/StaticNestedClassParent.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -160,14 +151,11 @@
 (func $$getClassMetadata__java_lang_Class@staticnestedclass.StaticNestedClassParent
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((staticnestedclass.StaticNestedClassParent.$class == null)) (staticnestedclass.StaticNestedClassParent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|staticnested...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__staticnestedclass_StaticNestedClassParent) (ref.null $java.lang.Class))
    (then
-    ;; (staticnestedclass.StaticNestedClassParent.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|staticnested...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__staticnestedclass_StaticNestedClassParent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|staticnested...|__java_lang_String (ref.func $$getString_|staticnested...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return staticnestedclass.StaticNestedClassParent.$class;
   (return (global.get $f_$class__staticnestedclass_StaticNestedClassParent))
  )
 )
@@ -180,7 +168,6 @@
  (local $this (ref null $staticnestedclass.StaticNestedClassParent))
  (local.set $this (ref.cast_static $staticnestedclass.StaticNestedClassParent (local.get $this.untyped)))
  (block
-  ;; return staticnestedclass.StaticNestedClassParent.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@staticnestedclass.StaticNestedClassParent) ))
  )
 )
@@ -194,13 +181,10 @@
  ;;@ staticnestedclass/StaticNestedClassParent.java:19:22
  (local $$instance (ref null $staticnestedclass.StaticNestedClassParent.StaticNestedClass))
  (block
-  ;; StaticNestedClass $instance = new StaticNestedClass.<init>(0);
   ;;@ staticnestedclass/StaticNestedClassParent.java:19:22
   (local.set $$instance (struct.new $staticnestedclass.StaticNestedClassParent.StaticNestedClass (ref.as_non_null (global.get $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable)) (ref.as_non_null (global.get $staticnestedclass.StaticNestedClassParent.StaticNestedClass.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ staticnestedclass/StaticNestedClassParent.java:19:22
   (call $$ctor__void_$p_staticnestedclass_StaticNestedClassParent_StaticNestedClass@staticnestedclass.StaticNestedClassParent.StaticNestedClass (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ staticnestedclass/StaticNestedClassParent.java:19:22
   (return (local.get $$instance))
  )
@@ -211,10 +195,8 @@
  (param $this (ref null $staticnestedclass.StaticNestedClassParent.StaticNestedClass))
  ;;@ staticnestedclass/StaticNestedClassParent.java:19:22
  (block
-  ;; staticnestedclass.StaticNestedClassParent.StaticNestedClass.$clinit();
   ;;@ staticnestedclass/StaticNestedClassParent.java:19:22
   (call $$clinit__void@staticnestedclass.StaticNestedClassParent.StaticNestedClass )
-  ;; Object.this.$ctor();
   ;;@ staticnestedclass/StaticNestedClassParent.java:19:22
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -224,19 +206,15 @@
 (func $$clinit__void@staticnestedclass.StaticNestedClassParent.StaticNestedClass
  ;;@ staticnestedclass/StaticNestedClassParent.java:19:22
  (block
-  ;; if (staticnestedclass.StaticNestedClassParent.StaticNestedClass.$initialized) return;
   ;;@ staticnestedclass/StaticNestedClassParent.java:19:22
   (if (global.get $f_$initialized__staticnestedclass_StaticNestedClassParent_StaticNestedClass)
    (then
-    ;; return;
     ;;@ staticnestedclass/StaticNestedClassParent.java:19:22
     (return )
    )
   )
-  ;; (staticnestedclass.StaticNestedClassParent.StaticNestedClass.$initialized = true);
   ;;@ staticnestedclass/StaticNestedClassParent.java:19:22
   (global.set $f_$initialized__staticnestedclass_StaticNestedClassParent_StaticNestedClass (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ staticnestedclass/StaticNestedClassParent.java:19:22
   (call $$clinit__void@java.lang.Object )
  )
@@ -246,14 +224,11 @@
 (func $$getClassMetadata__java_lang_Class@staticnestedclass.StaticNestedClassParent.StaticNestedClass
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((staticnestedclass.StaticNestedClassParent.StaticNestedClass.$class == null)) (staticnestedclass.StaticNestedClassParent.StaticNestedClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|staticnested...|_1(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__staticnestedclass_StaticNestedClassParent_StaticNestedClass) (ref.null $java.lang.Class))
    (then
-    ;; (staticnestedclass.StaticNestedClassParent.StaticNestedClass.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|staticnested...|_1(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__staticnestedclass_StaticNestedClassParent_StaticNestedClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|staticnested...|_1__java_lang_String (ref.func $$getString_|staticnested...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return staticnestedclass.StaticNestedClassParent.StaticNestedClass.$class;
   (return (global.get $f_$class__staticnestedclass_StaticNestedClassParent_StaticNestedClass))
  )
 )
@@ -266,7 +241,6 @@
  (local $this (ref null $staticnestedclass.StaticNestedClassParent.StaticNestedClass))
  (local.set $this (ref.cast_static $staticnestedclass.StaticNestedClassParent.StaticNestedClass (local.get $this.untyped)))
  (block
-  ;; return staticnestedclass.StaticNestedClassParent.StaticNestedClass.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@staticnestedclass.StaticNestedClassParent.StaticNestedClass) ))
  )
 )

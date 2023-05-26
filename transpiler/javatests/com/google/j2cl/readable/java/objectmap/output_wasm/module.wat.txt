@@ -51,10 +51,8 @@
  (result (ref null extern))
  ;;@ objectmap/ObjectMap.java:25:26
  (block
-  ;; objectmap.ObjectMap.$Overlay.$clinit();
   ;;@ objectmap/ObjectMap.java:25:35
   (call $$clinit__void@objectmap.ObjectMap.$Overlay )
-  ;; return null;
   ;;@ objectmap/ObjectMap.java:26:4
   (return (ref.null extern))
  )
@@ -65,10 +63,8 @@
  (result (ref null extern))
  ;;@ objectmap/ObjectMap.java:30:27
  (block
-  ;; objectmap.ObjectMap.$Overlay.$clinit();
   ;;@ objectmap/ObjectMap.java:30:45
   (call $$clinit__void@objectmap.ObjectMap.$Overlay )
-  ;; return null;
   ;;@ objectmap/ObjectMap.java:31:4
   (return (ref.null extern))
  )
@@ -78,16 +74,13 @@
 (func $$clinit__void@objectmap.ObjectMap.$Overlay
  ;;@ objectmap/ObjectMap.java:23:13
  (block
-  ;; if (objectmap.ObjectMap.$Overlay.$initialized) return;
   ;;@ objectmap/ObjectMap.java:23:13
   (if (global.get $f_$initialized__objectmap_ObjectMap_$Overlay)
    (then
-    ;; return;
     ;;@ objectmap/ObjectMap.java:23:13
     (return )
    )
   )
-  ;; (objectmap.ObjectMap.$Overlay.$initialized = true);
   ;;@ objectmap/ObjectMap.java:23:13
   (global.set $f_$initialized__objectmap_ObjectMap_$Overlay (i32.const 1))
  )
@@ -97,14 +90,11 @@
 (func $$getClassMetadata__java_lang_Class@objectmap.ObjectMap.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((objectmap.ObjectMap.$Overlay.$class == null)) (objectmap.ObjectMap.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|objectmap.Ob...|(),null));
   (if (ref.eq (global.get $f_$class__objectmap_ObjectMap_$Overlay) (ref.null $java.lang.Class))
    (then
-    ;; (objectmap.ObjectMap.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|objectmap.Ob...|(),null));
     (global.set $f_$class__objectmap_ObjectMap_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|objectmap.Ob...|__java_lang_String (ref.func $$getString_|objectmap.Ob...|__java_lang_String@javaemul.internal.StringPool) )(ref.null $java.lang.Class)))
    )
   )
-  ;; return objectmap.ObjectMap.$Overlay.$class;
   (return (global.get $f_$class__objectmap_ObjectMap_$Overlay))
  )
 )
@@ -117,7 +107,6 @@
  (local $this (ref null $objectmap.ObjectMap.$Overlay))
  (local.set $this (ref.cast_static $objectmap.ObjectMap.$Overlay (local.get $this.untyped)))
  (block
-  ;; return objectmap.ObjectMap.$Overlay.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@objectmap.ObjectMap.$Overlay) ))
  )
 )

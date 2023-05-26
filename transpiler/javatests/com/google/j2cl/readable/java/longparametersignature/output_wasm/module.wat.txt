@@ -59,13 +59,10 @@
  ;;@ longparametersignature/LongParameterSignature.java:18:13
  (local $$instance (ref null $longparametersignature.LongParameterSignature))
  (block
-  ;; LongParameterSignature $instance = new LongParameterSignature.<init>(0);
   ;;@ longparametersignature/LongParameterSignature.java:18:13
   (local.set $$instance (struct.new $longparametersignature.LongParameterSignature (ref.as_non_null (global.get $longparametersignature.LongParameterSignature.vtable)) (ref.as_non_null (global.get $longparametersignature.LongParameterSignature.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ longparametersignature/LongParameterSignature.java:18:13
   (call $$ctor__void_$p_longparametersignature_LongParameterSignature@longparametersignature.LongParameterSignature (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ longparametersignature/LongParameterSignature.java:18:13
   (return (local.get $$instance))
  )
@@ -76,10 +73,8 @@
  (param $this (ref null $longparametersignature.LongParameterSignature))
  ;;@ longparametersignature/LongParameterSignature.java:18:13
  (block
-  ;; longparametersignature.LongParameterSignature.$clinit();
   ;;@ longparametersignature/LongParameterSignature.java:18:13
   (call $$clinit__void@longparametersignature.LongParameterSignature )
-  ;; Object.this.$ctor();
   ;;@ longparametersignature/LongParameterSignature.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -102,19 +97,15 @@
 (func $$clinit__void@longparametersignature.LongParameterSignature
  ;;@ longparametersignature/LongParameterSignature.java:18:13
  (block
-  ;; if (longparametersignature.LongParameterSignature.$initialized) return;
   ;;@ longparametersignature/LongParameterSignature.java:18:13
   (if (global.get $f_$initialized__longparametersignature_LongParameterSignature)
    (then
-    ;; return;
     ;;@ longparametersignature/LongParameterSignature.java:18:13
     (return )
    )
   )
-  ;; (longparametersignature.LongParameterSignature.$initialized = true);
   ;;@ longparametersignature/LongParameterSignature.java:18:13
   (global.set $f_$initialized__longparametersignature_LongParameterSignature (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ longparametersignature/LongParameterSignature.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -124,14 +115,11 @@
 (func $$getClassMetadata__java_lang_Class@longparametersignature.LongParameterSignature
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((longparametersignature.LongParameterSignature.$class == null)) (longparametersignature.LongParameterSignature.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|longparamete...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__longparametersignature_LongParameterSignature) (ref.null $java.lang.Class))
    (then
-    ;; (longparametersignature.LongParameterSignature.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|longparamete...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__longparametersignature_LongParameterSignature (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|longparamete...|__java_lang_String (ref.func $$getString_|longparamete...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return longparametersignature.LongParameterSignature.$class;
   (return (global.get $f_$class__longparametersignature_LongParameterSignature))
  )
 )
@@ -144,7 +132,6 @@
  (local $this (ref null $longparametersignature.LongParameterSignature))
  (local.set $this (ref.cast_static $longparametersignature.LongParameterSignature (local.get $this.untyped)))
  (block
-  ;; return longparametersignature.LongParameterSignature.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@longparametersignature.LongParameterSignature) ))
  )
 )

@@ -59,13 +59,10 @@
  ;;@ javascriptkeywords/JSKeyWords.java:18:13
  (local $$instance (ref null $javascriptkeywords.JSKeyWords))
  (block
-  ;; JSKeyWords $instance = new JSKeyWords.<init>(0);
   ;;@ javascriptkeywords/JSKeyWords.java:18:13
   (local.set $$instance (struct.new $javascriptkeywords.JSKeyWords (ref.as_non_null (global.get $javascriptkeywords.JSKeyWords.vtable)) (ref.as_non_null (global.get $javascriptkeywords.JSKeyWords.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ javascriptkeywords/JSKeyWords.java:18:13
   (call $$ctor__void_$p_javascriptkeywords_JSKeyWords@javascriptkeywords.JSKeyWords (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ javascriptkeywords/JSKeyWords.java:18:13
   (return (local.get $$instance))
  )
@@ -76,10 +73,8 @@
  (param $this (ref null $javascriptkeywords.JSKeyWords))
  ;;@ javascriptkeywords/JSKeyWords.java:18:13
  (block
-  ;; javascriptkeywords.JSKeyWords.$clinit();
   ;;@ javascriptkeywords/JSKeyWords.java:18:13
   (call $$clinit__void@javascriptkeywords.JSKeyWords )
-  ;; Object.this.$ctor();
   ;;@ javascriptkeywords/JSKeyWords.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -96,10 +91,8 @@
  (local $this (ref null $javascriptkeywords.JSKeyWords))
  (local.set $this (ref.cast_static $javascriptkeywords.JSKeyWords (local.get $this.untyped)))
  (block
-  ;; int let = 0;
   ;;@ javascriptkeywords/JSKeyWords.java:20:4
   (local.set $let (i32.const 0))
-  ;; return (let + in);
   ;;@ javascriptkeywords/JSKeyWords.java:21:4
   (return (i32.add (local.get $let) (local.get $in)))
  )
@@ -110,19 +103,15 @@
 (func $$clinit__void@javascriptkeywords.JSKeyWords
  ;;@ javascriptkeywords/JSKeyWords.java:18:13
  (block
-  ;; if (javascriptkeywords.JSKeyWords.$initialized) return;
   ;;@ javascriptkeywords/JSKeyWords.java:18:13
   (if (global.get $f_$initialized__javascriptkeywords_JSKeyWords)
    (then
-    ;; return;
     ;;@ javascriptkeywords/JSKeyWords.java:18:13
     (return )
    )
   )
-  ;; (javascriptkeywords.JSKeyWords.$initialized = true);
   ;;@ javascriptkeywords/JSKeyWords.java:18:13
   (global.set $f_$initialized__javascriptkeywords_JSKeyWords (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ javascriptkeywords/JSKeyWords.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -132,14 +121,11 @@
 (func $$getClassMetadata__java_lang_Class@javascriptkeywords.JSKeyWords
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((javascriptkeywords.JSKeyWords.$class == null)) (javascriptkeywords.JSKeyWords.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|javascriptke...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__javascriptkeywords_JSKeyWords) (ref.null $java.lang.Class))
    (then
-    ;; (javascriptkeywords.JSKeyWords.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|javascriptke...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__javascriptkeywords_JSKeyWords (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|javascriptke...|__java_lang_String (ref.func $$getString_|javascriptke...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return javascriptkeywords.JSKeyWords.$class;
   (return (global.get $f_$class__javascriptkeywords_JSKeyWords))
  )
 )
@@ -152,7 +138,6 @@
  (local $this (ref null $javascriptkeywords.JSKeyWords))
  (local.set $this (ref.cast_static $javascriptkeywords.JSKeyWords (local.get $this.untyped)))
  (block
-  ;; return javascriptkeywords.JSKeyWords.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@javascriptkeywords.JSKeyWords) ))
  )
 )

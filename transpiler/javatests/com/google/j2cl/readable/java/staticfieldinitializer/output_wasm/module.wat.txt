@@ -59,13 +59,10 @@
  ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
  (local $$instance (ref null $staticfieldinitializer.StaticFieldInitializer))
  (block
-  ;; StaticFieldInitializer $instance = new StaticFieldInitializer.<init>(0);
   ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
   (local.set $$instance (struct.new $staticfieldinitializer.StaticFieldInitializer (ref.as_non_null (global.get $staticfieldinitializer.StaticFieldInitializer.vtable)) (ref.as_non_null (global.get $staticfieldinitializer.StaticFieldInitializer.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
   ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
   (call $$ctor__void_$p_staticfieldinitializer_StaticFieldInitializer@staticfieldinitializer.StaticFieldInitializer (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
   ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
   (return (local.get $$instance))
  )
@@ -76,10 +73,8 @@
  (param $this (ref null $staticfieldinitializer.StaticFieldInitializer))
  ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
  (block
-  ;; staticfieldinitializer.StaticFieldInitializer.$clinit();
   ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
   (call $$clinit__void@staticfieldinitializer.StaticFieldInitializer )
-  ;; Object.this.$ctor();
   ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -89,25 +84,19 @@
 (func $$clinit__void@staticfieldinitializer.StaticFieldInitializer
  ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
  (block
-  ;; if (staticfieldinitializer.StaticFieldInitializer.$initialized) return;
   ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
   (if (global.get $f_$initialized__staticfieldinitializer_StaticFieldInitializer)
    (then
-    ;; return;
     ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
     (return )
    )
   )
-  ;; (staticfieldinitializer.StaticFieldInitializer.$initialized = true);
   ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
   (global.set $f_$initialized__staticfieldinitializer_StaticFieldInitializer (i32.const 1))
-  ;; java.lang.Object.$clinit();
   ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
   (call $$clinit__void@java.lang.Object )
-  ;; (staticfieldinitializer.StaticFieldInitializer.a = 2);
   ;;@ staticfieldinitializer/StaticFieldInitializer.java:19:2
   (global.set $f_a__staticfieldinitializer_StaticFieldInitializer (i32.const 2))
-  ;; (staticfieldinitializer.StaticFieldInitializer.b = (staticfieldinitializer.StaticFieldInitializer.a * 4));
   ;;@ staticfieldinitializer/StaticFieldInitializer.java:20:2
   (global.set $f_b__staticfieldinitializer_StaticFieldInitializer (i32.mul (global.get $f_a__staticfieldinitializer_StaticFieldInitializer) (i32.const 4)))
  )
@@ -117,14 +106,11 @@
 (func $$getClassMetadata__java_lang_Class@staticfieldinitializer.StaticFieldInitializer
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((staticfieldinitializer.StaticFieldInitializer.$class == null)) (staticfieldinitializer.StaticFieldInitializer.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|staticfieldi...|(),java.lang.Object.$getClassMetadata()));
   (if (ref.eq (global.get $f_$class__staticfieldinitializer_StaticFieldInitializer) (ref.null $java.lang.Class))
    (then
-    ;; (staticfieldinitializer.StaticFieldInitializer.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|staticfieldi...|(),java.lang.Object.$getClassMetadata()));
     (global.set $f_$class__staticfieldinitializer_StaticFieldInitializer (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|staticfieldi...|__java_lang_String (ref.func $$getString_|staticfieldi...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  ;; return staticfieldinitializer.StaticFieldInitializer.$class;
   (return (global.get $f_$class__staticfieldinitializer_StaticFieldInitializer))
  )
 )
@@ -137,7 +123,6 @@
  (local $this (ref null $staticfieldinitializer.StaticFieldInitializer))
  (local.set $this (ref.cast_static $staticfieldinitializer.StaticFieldInitializer (local.get $this.untyped)))
  (block
-  ;; return staticfieldinitializer.StaticFieldInitializer.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@staticfieldinitializer.StaticFieldInitializer) ))
  )
 )

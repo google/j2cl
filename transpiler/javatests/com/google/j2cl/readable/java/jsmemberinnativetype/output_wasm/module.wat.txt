@@ -53,31 +53,22 @@
  (local $jsProperties i32)
  (local $jsPropertyMethods i32)
  (block
-  ;; jsmemberinnativetype.MyNativeType.$Overlay.$clinit();
   ;;@ jsmemberinnativetype/MyNativeType.java:52:20
   (call $$clinit__void@jsmemberinnativetype.MyNativeType.$Overlay )
-  ;; int jsProperties = (((($thisArg.publicField() + $thisArg.privateField()) + $thisArg.packageField()) + $thisArg.protectedField()) + jsmemberinnativetype.MyNativeType.staticField());
   ;;@ jsmemberinnativetype/MyNativeType.java:53:4
   (local.set $jsProperties (i32.add (i32.add (i32.add (i32.add (call $f_publicField__int@jsmemberinnativetype.MyNativeType (ref.as_non_null (local.get $$thisArg))) (call $f_privateField__int_$p_jsmemberinnativetype_MyNativeType@jsmemberinnativetype.MyNativeType (ref.as_non_null (local.get $$thisArg)))) (call $f_packageField__int_$pp_jsmemberinnativetype@jsmemberinnativetype.MyNativeType (ref.as_non_null (local.get $$thisArg)))) (call $f_protectedField__int@jsmemberinnativetype.MyNativeType (ref.as_non_null (local.get $$thisArg)))) (call $f_staticField__int@jsmemberinnativetype.MyNativeType )))
-  ;; int jsPropertyMethods = ($thisArg.getPublicField() + jsmemberinnativetype.MyNativeType.getStaticField());
   ;;@ jsmemberinnativetype/MyNativeType.java:55:4
   (local.set $jsPropertyMethods (i32.add (call $m_getPublicField__int@jsmemberinnativetype.MyNativeType (ref.as_non_null (local.get $$thisArg))) (call $m_getStaticField__int@jsmemberinnativetype.MyNativeType )))
-  ;; $thisArg.setPublicField(1);
   ;;@ jsmemberinnativetype/MyNativeType.java:56:4
   (call $m_setPublicField__int__void@jsmemberinnativetype.MyNativeType (ref.as_non_null (local.get $$thisArg))(i32.const 1))
-  ;; jsmemberinnativetype.MyNativeType.setStaticField(2);
   ;;@ jsmemberinnativetype/MyNativeType.java:57:4
   (call $m_setStaticField__int__void@jsmemberinnativetype.MyNativeType (i32.const 2))
-  ;; $thisArg.publicMethod();
   ;;@ jsmemberinnativetype/MyNativeType.java:59:4
   (call $m_publicMethod__void@jsmemberinnativetype.MyNativeType (ref.as_non_null (local.get $$thisArg)))
-  ;; $thisArg.privateMethod();
   ;;@ jsmemberinnativetype/MyNativeType.java:60:4
   (call $m_privateMethod__void_$p_jsmemberinnativetype_MyNativeType@jsmemberinnativetype.MyNativeType (ref.as_non_null (local.get $$thisArg)))
-  ;; $thisArg.packageMethod();
   ;;@ jsmemberinnativetype/MyNativeType.java:61:4
   (call $m_packageMethod__void_$pp_jsmemberinnativetype@jsmemberinnativetype.MyNativeType (ref.as_non_null (local.get $$thisArg)))
-  ;; $thisArg.protectedMethod();
   ;;@ jsmemberinnativetype/MyNativeType.java:62:4
   (call $m_protectedMethod__void@jsmemberinnativetype.MyNativeType (ref.as_non_null (local.get $$thisArg)))
  )
@@ -87,16 +78,13 @@
 (func $$clinit__void@jsmemberinnativetype.MyNativeType.$Overlay
  ;;@ jsmemberinnativetype/MyNativeType.java:23:13
  (block
-  ;; if (jsmemberinnativetype.MyNativeType.$Overlay.$initialized) return;
   ;;@ jsmemberinnativetype/MyNativeType.java:23:13
   (if (global.get $f_$initialized__jsmemberinnativetype_MyNativeType_$Overlay)
    (then
-    ;; return;
     ;;@ jsmemberinnativetype/MyNativeType.java:23:13
     (return )
    )
   )
-  ;; (jsmemberinnativetype.MyNativeType.$Overlay.$initialized = true);
   ;;@ jsmemberinnativetype/MyNativeType.java:23:13
   (global.set $f_$initialized__jsmemberinnativetype_MyNativeType_$Overlay (i32.const 1))
  )
@@ -106,14 +94,11 @@
 (func $$getClassMetadata__java_lang_Class@jsmemberinnativetype.MyNativeType.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  ;; if ((jsmemberinnativetype.MyNativeType.$Overlay.$class == null)) (jsmemberinnativetype.MyNativeType.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsmemberinna...|(),null));
   (if (ref.eq (global.get $f_$class__jsmemberinnativetype_MyNativeType_$Overlay) (ref.null $java.lang.Class))
    (then
-    ;; (jsmemberinnativetype.MyNativeType.$Overlay.$class = java.lang.Class.createForClass(javaemul.internal.StringPool.$getString_|jsmemberinna...|(),null));
     (global.set $f_$class__jsmemberinnativetype_MyNativeType_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsmemberinna...|__java_lang_String (ref.func $$getString_|jsmemberinna...|__java_lang_String@javaemul.internal.StringPool) )(ref.null $java.lang.Class)))
    )
   )
-  ;; return jsmemberinnativetype.MyNativeType.$Overlay.$class;
   (return (global.get $f_$class__jsmemberinnativetype_MyNativeType_$Overlay))
  )
 )
@@ -126,7 +111,6 @@
  (local $this (ref null $jsmemberinnativetype.MyNativeType.$Overlay))
  (local.set $this (ref.cast_static $jsmemberinnativetype.MyNativeType.$Overlay (local.get $this.untyped)))
  (block
-  ;; return jsmemberinnativetype.MyNativeType.$Overlay.$getClassMetadata();
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsmemberinnativetype.MyNativeType.$Overlay) ))
  )
 )
