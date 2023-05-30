@@ -52,7 +52,7 @@ public class TypeDescriptors {
   public DeclaredTypeDescriptor javaLangComparable;
   public DeclaredTypeDescriptor javaLangEnum;
   public DeclaredTypeDescriptor javaLangIterable;
-  public DeclaredTypeDescriptor javaLangNulPointerException;
+  public DeclaredTypeDescriptor javaLangNullPointerException;
   public DeclaredTypeDescriptor javaLangNumber;
   public DeclaredTypeDescriptor javaLangObject;
   public DeclaredTypeDescriptor javaLangRunnable;
@@ -586,7 +586,7 @@ public class TypeDescriptors {
           typeDescriptors.javaLangThrowable = referenceType;
           break;
         case "java.lang.NullPointerException":
-          typeDescriptors.javaLangNulPointerException = referenceType;
+          typeDescriptors.javaLangNullPointerException = referenceType;
           break;
         case "java.lang.Number":
           typeDescriptors.javaLangNumber = referenceType;

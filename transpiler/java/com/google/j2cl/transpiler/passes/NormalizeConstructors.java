@@ -484,7 +484,7 @@ public class NormalizeConstructors extends NormalizationPass {
       statements.add(
           createThrowableInit(
                   newInstance.createReference(),
-                  enclosingType.isAssignableTo(TypeDescriptors.get().javaLangNulPointerException)
+                  enclosingType.isAssignableTo(TypeDescriptors.get().javaLangNullPointerException)
                       ? TypeDescriptors.get().nativeTypeError
                       : TypeDescriptors.get().nativeError)
               .makeStatement(constructorSourcePosition));
