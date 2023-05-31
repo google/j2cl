@@ -130,7 +130,7 @@ def _diff(original, modified, filter_noise):
   else:
     print("  Formatting.")
     shutil.copyfile(original.get_output_file(), original.get_formatted_file())
-    shutil.copyfile(original.get_output_file(), modified.get_formatted_file())
+    shutil.copyfile(modified.get_output_file(), modified.get_formatted_file())
     repo_util.run_cmd([
         "clang-format",
         "-i",
