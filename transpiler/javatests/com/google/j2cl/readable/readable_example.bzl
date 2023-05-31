@@ -78,7 +78,7 @@ def readable_example(
         deps = deps,
         plugins = plugins,
         generate_build_test = False,
-        tags = j2cl_library_tags,
+        tags = j2cl_library_tags + ["manual"],
         readable_source_maps = readable_source_maps,
         readable_library_info = generate_library_info,
         generate_j2kt_jvm_library = generate_kt_readables,
