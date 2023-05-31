@@ -1,17 +1,17 @@
  ;;; Code for jstypewithdefault.Interface [type definition]
- (type $jstypewithdefault.Interface.vtable (struct 
+ (type $jstypewithdefault.Interface.vtable (struct
   (field $m_defaultMethod__void (ref $function.m_defaultMethod__void))
   )
  )
 
  ;;; Code for jstypewithdefault.SomeJsType [type definition]
- (type $jstypewithdefault.SomeJsType (struct_subtype 
-  (field $vtable (ref $jstypewithdefault.SomeJsType.vtable)) 
+ (type $jstypewithdefault.SomeJsType (struct_subtype
+  (field $vtable (ref $jstypewithdefault.SomeJsType.vtable))
   (field $itable (ref $jstypewithdefault.SomeJsType.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $java.lang.Object)
  )
- (type $jstypewithdefault.SomeJsType.vtable (struct_subtype 
+ (type $jstypewithdefault.SomeJsType.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -20,7 +20,7 @@
   (field $m_defaultMethod__void (ref $function.m_defaultMethod__void))
    $java.lang.Object.vtable)
  )
- (type $jstypewithdefault.SomeJsType.itable (struct_subtype 
+ (type $jstypewithdefault.SomeJsType.itable (struct_subtype
  (field $slot0 (ref $jstypewithdefault.Interface.vtable))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -31,7 +31,7 @@
   $java.lang.Object.itable))
 
 ;;; Code for jstypewithdefault.SomeJsType [vtable.init]
-(global $jstypewithdefault.SomeJsType.vtable (ref $jstypewithdefault.SomeJsType.vtable) 
+(global $jstypewithdefault.SomeJsType.vtable (ref $jstypewithdefault.SomeJsType.vtable)
  (struct.new $jstypewithdefault.SomeJsType.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -43,7 +43,7 @@
 )
 
 ;;; Code for jstypewithdefault.SomeJsType [itable.init]
-(global $jstypewithdefault.SomeJsType.itable (ref $jstypewithdefault.SomeJsType.itable) (struct.new $jstypewithdefault.SomeJsType.itable 
+(global $jstypewithdefault.SomeJsType.itable (ref $jstypewithdefault.SomeJsType.itable) (struct.new $jstypewithdefault.SomeJsType.itable
  (struct.new $jstypewithdefault.Interface.vtable
   (ref.func $m_defaultMethod__void@jstypewithdefault.SomeJsType)
  )

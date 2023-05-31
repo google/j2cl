@@ -3,18 +3,18 @@
  ;;; Code for jstype.SomeJsType.Wildcard [type definition]
 
  ;;; Code for jstype.SomeJsType.Star.$Overlay [type definition]
- (type $jstype.SomeJsType.Star.$Overlay.vtable (struct 
+ (type $jstype.SomeJsType.Star.$Overlay.vtable (struct
   )
  )
 
  ;;; Code for jstype.SomeJsType.Wildcard.$Overlay [type definition]
- (type $jstype.SomeJsType.Wildcard.$Overlay.vtable (struct 
+ (type $jstype.SomeJsType.Wildcard.$Overlay.vtable (struct
   )
  )
 
  ;;; Code for jstype.SomeJsType [type definition]
- (type $jstype.SomeJsType (struct_subtype 
-  (field $vtable (ref $jstype.SomeJsType.vtable)) 
+ (type $jstype.SomeJsType (struct_subtype
+  (field $vtable (ref $jstype.SomeJsType.vtable))
   (field $itable (ref $jstype.SomeJsType.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_publicField__jstype_SomeJsType (mut i32))
@@ -23,7 +23,7 @@
   (field $f_protectedField__jstype_SomeJsType (mut i32))
    $java.lang.Object)
  )
- (type $jstype.SomeJsType.vtable (struct_subtype 
+ (type $jstype.SomeJsType.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -35,7 +35,7 @@
   (field $m_useFieldsAndMethods__void (ref $function.m_useFieldsAndMethods__void))
    $java.lang.Object.vtable)
  )
- (type $jstype.SomeJsType.itable (struct_subtype 
+ (type $jstype.SomeJsType.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -46,7 +46,7 @@
   $java.lang.Object.itable))
 
 ;;; Code for jstype.SomeJsType [vtable.init]
-(global $jstype.SomeJsType.vtable (ref $jstype.SomeJsType.vtable) 
+(global $jstype.SomeJsType.vtable (ref $jstype.SomeJsType.vtable)
  (struct.new $jstype.SomeJsType.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -61,7 +61,7 @@
 )
 
 ;;; Code for jstype.SomeJsType [itable.init]
-(global $jstype.SomeJsType.itable (ref $jstype.SomeJsType.itable) (struct.new $jstype.SomeJsType.itable 
+(global $jstype.SomeJsType.itable (ref $jstype.SomeJsType.itable) (struct.new $jstype.SomeJsType.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

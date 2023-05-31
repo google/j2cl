@@ -1,11 +1,11 @@
  ;;; Code for multipletopclasses.AnotherClass [type definition]
- (type $multipletopclasses.AnotherClass (struct_subtype 
-  (field $vtable (ref $multipletopclasses.AnotherClass.vtable)) 
+ (type $multipletopclasses.AnotherClass (struct_subtype
+  (field $vtable (ref $multipletopclasses.AnotherClass.vtable))
   (field $itable (ref $multipletopclasses.AnotherClass.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $java.lang.Object)
  )
- (type $multipletopclasses.AnotherClass.vtable (struct_subtype 
+ (type $multipletopclasses.AnotherClass.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -13,7 +13,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
- (type $multipletopclasses.AnotherClass.itable (struct_subtype 
+ (type $multipletopclasses.AnotherClass.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -24,13 +24,13 @@
   $java.lang.Object.itable))
 
  ;;; Code for multipletopclasses.MultipleTopClasses [type definition]
- (type $multipletopclasses.MultipleTopClasses (struct_subtype 
-  (field $vtable (ref $multipletopclasses.MultipleTopClasses.vtable)) 
+ (type $multipletopclasses.MultipleTopClasses (struct_subtype
+  (field $vtable (ref $multipletopclasses.MultipleTopClasses.vtable))
   (field $itable (ref $multipletopclasses.MultipleTopClasses.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $multipletopclasses.AnotherClass)
  )
- (type $multipletopclasses.MultipleTopClasses.vtable (struct_subtype 
+ (type $multipletopclasses.MultipleTopClasses.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -38,7 +38,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $multipletopclasses.AnotherClass.vtable)
  )
- (type $multipletopclasses.MultipleTopClasses.itable (struct_subtype 
+ (type $multipletopclasses.MultipleTopClasses.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -49,7 +49,7 @@
   $multipletopclasses.AnotherClass.itable))
 
 ;;; Code for multipletopclasses.AnotherClass [vtable.init]
-(global $multipletopclasses.AnotherClass.vtable (ref $multipletopclasses.AnotherClass.vtable) 
+(global $multipletopclasses.AnotherClass.vtable (ref $multipletopclasses.AnotherClass.vtable)
  (struct.new $multipletopclasses.AnotherClass.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -60,7 +60,7 @@
 )
 
 ;;; Code for multipletopclasses.AnotherClass [itable.init]
-(global $multipletopclasses.AnotherClass.itable (ref $multipletopclasses.AnotherClass.itable) (struct.new $multipletopclasses.AnotherClass.itable 
+(global $multipletopclasses.AnotherClass.itable (ref $multipletopclasses.AnotherClass.itable) (struct.new $multipletopclasses.AnotherClass.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -71,7 +71,7 @@
  ))
 
 ;;; Code for multipletopclasses.MultipleTopClasses [vtable.init]
-(global $multipletopclasses.MultipleTopClasses.vtable (ref $multipletopclasses.MultipleTopClasses.vtable) 
+(global $multipletopclasses.MultipleTopClasses.vtable (ref $multipletopclasses.MultipleTopClasses.vtable)
  (struct.new $multipletopclasses.MultipleTopClasses.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -82,7 +82,7 @@
 )
 
 ;;; Code for multipletopclasses.MultipleTopClasses [itable.init]
-(global $multipletopclasses.MultipleTopClasses.itable (ref $multipletopclasses.MultipleTopClasses.itable) (struct.new $multipletopclasses.MultipleTopClasses.itable 
+(global $multipletopclasses.MultipleTopClasses.itable (ref $multipletopclasses.MultipleTopClasses.itable) (struct.new $multipletopclasses.MultipleTopClasses.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

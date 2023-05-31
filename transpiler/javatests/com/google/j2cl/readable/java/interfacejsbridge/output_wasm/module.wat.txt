@@ -1,29 +1,29 @@
  ;;; Code for interfacejsbridge.MyJsInterface [type definition]
- (type $interfacejsbridge.MyJsInterface.vtable (struct 
+ (type $interfacejsbridge.MyJsInterface.vtable (struct
   (field $m_foo__int__int (ref $function.m_foo__int__int))
   )
  )
 
  ;;; Code for interfacejsbridge.MyInterface [type definition]
- (type $interfacejsbridge.MyInterface.vtable (struct 
+ (type $interfacejsbridge.MyInterface.vtable (struct
   (field $m_foo__int__int (ref $function.m_foo__int__int))
   )
  )
 
  ;;; Code for interfacejsbridge.SubInterface [type definition]
- (type $interfacejsbridge.SubInterface.vtable (struct 
+ (type $interfacejsbridge.SubInterface.vtable (struct
   (field $m_foo__int__int (ref $function.m_foo__int__int))
   )
  )
 
  ;;; Code for interfacejsbridge.InterfaceImpl [type definition]
- (type $interfacejsbridge.InterfaceImpl (struct_subtype 
-  (field $vtable (ref $interfacejsbridge.InterfaceImpl.vtable)) 
+ (type $interfacejsbridge.InterfaceImpl (struct_subtype
+  (field $vtable (ref $interfacejsbridge.InterfaceImpl.vtable))
   (field $itable (ref $interfacejsbridge.InterfaceImpl.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $java.lang.Object)
  )
- (type $interfacejsbridge.InterfaceImpl.vtable (struct_subtype 
+ (type $interfacejsbridge.InterfaceImpl.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -32,7 +32,7 @@
   (field $m_foo__int__int (ref $function.m_foo__int__int))
    $java.lang.Object.vtable)
  )
- (type $interfacejsbridge.InterfaceImpl.itable (struct_subtype 
+ (type $interfacejsbridge.InterfaceImpl.itable (struct_subtype
  (field $slot0 (ref $interfacejsbridge.SubInterface.vtable))
  (field $slot1 (ref $interfacejsbridge.MyJsInterface.vtable))
  (field $slot2 (ref $interfacejsbridge.MyInterface.vtable))
@@ -43,13 +43,13 @@
   $java.lang.Object.itable))
 
  ;;; Code for interfacejsbridge.Main [type definition]
- (type $interfacejsbridge.Main (struct_subtype 
-  (field $vtable (ref $interfacejsbridge.Main.vtable)) 
+ (type $interfacejsbridge.Main (struct_subtype
+  (field $vtable (ref $interfacejsbridge.Main.vtable))
   (field $itable (ref $interfacejsbridge.Main.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $java.lang.Object)
  )
- (type $interfacejsbridge.Main.vtable (struct_subtype 
+ (type $interfacejsbridge.Main.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -58,7 +58,7 @@
   (field $m_test__void (ref $function.m_test__void))
    $java.lang.Object.vtable)
  )
- (type $interfacejsbridge.Main.itable (struct_subtype 
+ (type $interfacejsbridge.Main.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -69,7 +69,7 @@
   $java.lang.Object.itable))
 
 ;;; Code for interfacejsbridge.InterfaceImpl [vtable.init]
-(global $interfacejsbridge.InterfaceImpl.vtable (ref $interfacejsbridge.InterfaceImpl.vtable) 
+(global $interfacejsbridge.InterfaceImpl.vtable (ref $interfacejsbridge.InterfaceImpl.vtable)
  (struct.new $interfacejsbridge.InterfaceImpl.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -81,7 +81,7 @@
 )
 
 ;;; Code for interfacejsbridge.InterfaceImpl [itable.init]
-(global $interfacejsbridge.InterfaceImpl.itable (ref $interfacejsbridge.InterfaceImpl.itable) (struct.new $interfacejsbridge.InterfaceImpl.itable 
+(global $interfacejsbridge.InterfaceImpl.itable (ref $interfacejsbridge.InterfaceImpl.itable) (struct.new $interfacejsbridge.InterfaceImpl.itable
  (struct.new $interfacejsbridge.SubInterface.vtable
   (ref.func $m_foo__int__int@interfacejsbridge.InterfaceImpl)
  )
@@ -98,7 +98,7 @@
  ))
 
 ;;; Code for interfacejsbridge.Main [vtable.init]
-(global $interfacejsbridge.Main.vtable (ref $interfacejsbridge.Main.vtable) 
+(global $interfacejsbridge.Main.vtable (ref $interfacejsbridge.Main.vtable)
  (struct.new $interfacejsbridge.Main.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -110,7 +110,7 @@
 )
 
 ;;; Code for interfacejsbridge.Main [itable.init]
-(global $interfacejsbridge.Main.itable (ref $interfacejsbridge.Main.itable) (struct.new $interfacejsbridge.Main.itable 
+(global $interfacejsbridge.Main.itable (ref $interfacejsbridge.Main.itable) (struct.new $interfacejsbridge.Main.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

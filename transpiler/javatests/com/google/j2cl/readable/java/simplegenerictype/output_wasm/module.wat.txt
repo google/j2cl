@@ -1,13 +1,13 @@
  ;;; Code for simplegenerictype.SimpleGenericType [type definition]
- (type $simplegenerictype.SimpleGenericType (struct_subtype 
-  (field $vtable (ref $simplegenerictype.SimpleGenericType.vtable)) 
+ (type $simplegenerictype.SimpleGenericType (struct_subtype
+  (field $vtable (ref $simplegenerictype.SimpleGenericType.vtable))
   (field $itable (ref $simplegenerictype.SimpleGenericType.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_first__simplegenerictype_SimpleGenericType (ref null $java.lang.Object))
   (field $f_second__simplegenerictype_SimpleGenericType (ref null $java.lang.Object))
    $java.lang.Object)
  )
- (type $simplegenerictype.SimpleGenericType.vtable (struct_subtype 
+ (type $simplegenerictype.SimpleGenericType.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -16,7 +16,7 @@
   (field $m_test__void (ref $function.m_test__void))
    $java.lang.Object.vtable)
  )
- (type $simplegenerictype.SimpleGenericType.itable (struct_subtype 
+ (type $simplegenerictype.SimpleGenericType.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -27,7 +27,7 @@
   $java.lang.Object.itable))
 
 ;;; Code for simplegenerictype.SimpleGenericType [vtable.init]
-(global $simplegenerictype.SimpleGenericType.vtable (ref $simplegenerictype.SimpleGenericType.vtable) 
+(global $simplegenerictype.SimpleGenericType.vtable (ref $simplegenerictype.SimpleGenericType.vtable)
  (struct.new $simplegenerictype.SimpleGenericType.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -39,7 +39,7 @@
 )
 
 ;;; Code for simplegenerictype.SimpleGenericType [itable.init]
-(global $simplegenerictype.SimpleGenericType.itable (ref $simplegenerictype.SimpleGenericType.itable) (struct.new $simplegenerictype.SimpleGenericType.itable 
+(global $simplegenerictype.SimpleGenericType.itable (ref $simplegenerictype.SimpleGenericType.itable) (struct.new $simplegenerictype.SimpleGenericType.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

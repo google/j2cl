@@ -1,6 +1,6 @@
  ;;; Code for exception.MyException [type definition]
- (type $exception.MyException (struct_subtype 
-  (field $vtable (ref $exception.MyException.vtable)) 
+ (type $exception.MyException (struct_subtype
+  (field $vtable (ref $exception.MyException.vtable))
   (field $itable (ref $exception.MyException.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_detailMessage__java_lang_Throwable_ (mut (ref null $java.lang.String)))
@@ -12,7 +12,7 @@
   (field $f_backingJsObject__java_lang_Throwable_ (mut (ref null $java.lang.Object)))
    $java.lang.Exception)
  )
- (type $exception.MyException.vtable (struct_subtype 
+ (type $exception.MyException.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -33,7 +33,7 @@
   (field $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void (ref $function.m_setStackTrace__arrayOf_java_lang_StackTraceElement__void))
    $java.lang.Exception.vtable)
  )
- (type $exception.MyException.itable (struct_subtype 
+ (type $exception.MyException.itable (struct_subtype
  (field $slot0 (ref $java.io.Serializable.vtable))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -44,8 +44,8 @@
   $java.lang.Exception.itable))
 
  ;;; Code for exception.MyJsException [type definition]
- (type $exception.MyJsException (struct_subtype 
-  (field $vtable (ref $exception.MyJsException.vtable)) 
+ (type $exception.MyJsException (struct_subtype
+  (field $vtable (ref $exception.MyJsException.vtable))
   (field $itable (ref $exception.MyJsException.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_detailMessage__java_lang_Throwable_ (mut (ref null $java.lang.String)))
@@ -57,7 +57,7 @@
   (field $f_backingJsObject__java_lang_Throwable_ (mut (ref null $java.lang.Object)))
    $java.lang.Exception)
  )
- (type $exception.MyJsException.vtable (struct_subtype 
+ (type $exception.MyJsException.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -78,7 +78,7 @@
   (field $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void (ref $function.m_setStackTrace__arrayOf_java_lang_StackTraceElement__void))
    $java.lang.Exception.vtable)
  )
- (type $exception.MyJsException.itable (struct_subtype 
+ (type $exception.MyJsException.itable (struct_subtype
  (field $slot0 (ref $java.io.Serializable.vtable))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -89,7 +89,7 @@
   $java.lang.Exception.itable))
 
 ;;; Code for exception.MyException [vtable.init]
-(global $exception.MyException.vtable (ref $exception.MyException.vtable) 
+(global $exception.MyException.vtable (ref $exception.MyException.vtable)
  (struct.new $exception.MyException.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -113,7 +113,7 @@
 )
 
 ;;; Code for exception.MyException [itable.init]
-(global $exception.MyException.itable (ref $exception.MyException.itable) (struct.new $exception.MyException.itable 
+(global $exception.MyException.itable (ref $exception.MyException.itable) (struct.new $exception.MyException.itable
  (struct.new $java.io.Serializable.vtable
  )
   (ref.null struct)
@@ -125,7 +125,7 @@
  ))
 
 ;;; Code for exception.MyJsException [vtable.init]
-(global $exception.MyJsException.vtable (ref $exception.MyJsException.vtable) 
+(global $exception.MyJsException.vtable (ref $exception.MyJsException.vtable)
  (struct.new $exception.MyJsException.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -149,7 +149,7 @@
 )
 
 ;;; Code for exception.MyJsException [itable.init]
-(global $exception.MyJsException.itable (ref $exception.MyJsException.itable) (struct.new $exception.MyJsException.itable 
+(global $exception.MyJsException.itable (ref $exception.MyJsException.itable) (struct.new $exception.MyJsException.itable
  (struct.new $java.io.Serializable.vtable
  )
   (ref.null struct)

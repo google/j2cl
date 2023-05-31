@@ -1,11 +1,11 @@
  ;;; Code for privateconstructor.PrivateConstructor [type definition]
- (type $privateconstructor.PrivateConstructor (struct_subtype 
-  (field $vtable (ref $privateconstructor.PrivateConstructor.vtable)) 
+ (type $privateconstructor.PrivateConstructor (struct_subtype
+  (field $vtable (ref $privateconstructor.PrivateConstructor.vtable))
   (field $itable (ref $privateconstructor.PrivateConstructor.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $java.lang.Object)
  )
- (type $privateconstructor.PrivateConstructor.vtable (struct_subtype 
+ (type $privateconstructor.PrivateConstructor.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -13,7 +13,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
- (type $privateconstructor.PrivateConstructor.itable (struct_subtype 
+ (type $privateconstructor.PrivateConstructor.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -24,7 +24,7 @@
   $java.lang.Object.itable))
 
 ;;; Code for privateconstructor.PrivateConstructor [vtable.init]
-(global $privateconstructor.PrivateConstructor.vtable (ref $privateconstructor.PrivateConstructor.vtable) 
+(global $privateconstructor.PrivateConstructor.vtable (ref $privateconstructor.PrivateConstructor.vtable)
  (struct.new $privateconstructor.PrivateConstructor.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -35,7 +35,7 @@
 )
 
 ;;; Code for privateconstructor.PrivateConstructor [itable.init]
-(global $privateconstructor.PrivateConstructor.itable (ref $privateconstructor.PrivateConstructor.itable) (struct.new $privateconstructor.PrivateConstructor.itable 
+(global $privateconstructor.PrivateConstructor.itable (ref $privateconstructor.PrivateConstructor.itable) (struct.new $privateconstructor.PrivateConstructor.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

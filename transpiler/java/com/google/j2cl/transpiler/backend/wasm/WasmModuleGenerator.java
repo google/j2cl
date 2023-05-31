@@ -560,7 +560,7 @@ public class WasmModuleGenerator {
     builder.newLine();
     builder.append(
         String.format(
-            "(field $vtable (ref %s)) ",
+            "(field $vtable (ref %s))",
             environment.getWasmVtableTypeName(type.getTypeDescriptor())));
     // The second field is always the itable for interface method dispatch.
     builder.newLine();
@@ -614,7 +614,7 @@ public class WasmModuleGenerator {
     // in a global variable to be able to use it to initialize instance of this class.
     builder.append(
         String.format(
-            "(global %s (ref %s) ",
+            "(global %s (ref %s)",
             environment.getWasmVtableGlobalName(typeDeclaration),
             environment.getWasmVtableTypeName(typeDeclaration)));
     builder.indent();
@@ -634,7 +634,7 @@ public class WasmModuleGenerator {
     builder.newLine();
     builder.append(
         String.format(
-            "(global %s (ref %s) (struct.new %s ",
+            "(global %s (ref %s) (struct.new %s",
             environment.getWasmItableGlobalName(typeDeclaration),
             environment.getWasmItableTypeName(typeDeclaration),
             environment.getWasmItableTypeName(typeDeclaration)));
@@ -671,7 +671,7 @@ public class WasmModuleGenerator {
     // implemented by them.
     builder.newLine();
     builder.append(
-        format("(type %s (struct_subtype ", environment.getWasmItableTypeName(typeDeclaration)));
+        format("(type %s (struct_subtype", environment.getWasmItableTypeName(typeDeclaration)));
     for (int slot = 0; slot < environment.getNumberOfInterfaceSlots(); slot++) {
       builder.newLine();
       builder.append(String.format("(field $slot%d ", slot));
@@ -739,7 +739,7 @@ public class WasmModuleGenerator {
     builder.newLine();
     builder.append(
         String.format(
-            "(type %s (struct%s ",
+            "(type %s (struct%s",
             structNamer.apply(type.getTypeDescriptor()), hasSuperType ? "_subtype" : ""));
     builder.indent();
     fieldsRenderer.run();
@@ -803,7 +803,7 @@ public class WasmModuleGenerator {
     builder.newLine();
     builder.append(
         format(
-            "(global %s (ref %s) (array.new_default %s (i32.const 0))) ",
+            "(global %s (ref %s) (array.new_default %s (i32.const 0)))",
             environment.getWasmEmptyArrayGlobalName(arrayTypeDescriptor),
             wasmArrayTypeName,
             wasmArrayTypeName));

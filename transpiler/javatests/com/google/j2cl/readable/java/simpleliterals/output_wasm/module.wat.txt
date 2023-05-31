@@ -1,11 +1,11 @@
  ;;; Code for simpleliterals.SimpleLiterals [type definition]
- (type $simpleliterals.SimpleLiterals (struct_subtype 
-  (field $vtable (ref $simpleliterals.SimpleLiterals.vtable)) 
+ (type $simpleliterals.SimpleLiterals (struct_subtype
+  (field $vtable (ref $simpleliterals.SimpleLiterals.vtable))
   (field $itable (ref $simpleliterals.SimpleLiterals.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $java.lang.Object)
  )
- (type $simpleliterals.SimpleLiterals.vtable (struct_subtype 
+ (type $simpleliterals.SimpleLiterals.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -14,7 +14,7 @@
   (field $m_main__void (ref $function.m_main__void))
    $java.lang.Object.vtable)
  )
- (type $simpleliterals.SimpleLiterals.itable (struct_subtype 
+ (type $simpleliterals.SimpleLiterals.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -25,7 +25,7 @@
   $java.lang.Object.itable))
 
 ;;; Code for simpleliterals.SimpleLiterals [vtable.init]
-(global $simpleliterals.SimpleLiterals.vtable (ref $simpleliterals.SimpleLiterals.vtable) 
+(global $simpleliterals.SimpleLiterals.vtable (ref $simpleliterals.SimpleLiterals.vtable)
  (struct.new $simpleliterals.SimpleLiterals.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -37,7 +37,7 @@
 )
 
 ;;; Code for simpleliterals.SimpleLiterals [itable.init]
-(global $simpleliterals.SimpleLiterals.itable (ref $simpleliterals.SimpleLiterals.itable) (struct.new $simpleliterals.SimpleLiterals.itable 
+(global $simpleliterals.SimpleLiterals.itable (ref $simpleliterals.SimpleLiterals.itable) (struct.new $simpleliterals.SimpleLiterals.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

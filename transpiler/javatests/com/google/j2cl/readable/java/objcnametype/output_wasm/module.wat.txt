@@ -1,11 +1,11 @@
  ;;; Code for objcnametype.ObjCNameType [type definition]
- (type $objcnametype.ObjCNameType (struct_subtype 
-  (field $vtable (ref $objcnametype.ObjCNameType.vtable)) 
+ (type $objcnametype.ObjCNameType (struct_subtype
+  (field $vtable (ref $objcnametype.ObjCNameType.vtable))
   (field $itable (ref $objcnametype.ObjCNameType.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $java.lang.Object)
  )
- (type $objcnametype.ObjCNameType.vtable (struct_subtype 
+ (type $objcnametype.ObjCNameType.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -13,7 +13,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
- (type $objcnametype.ObjCNameType.itable (struct_subtype 
+ (type $objcnametype.ObjCNameType.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -24,7 +24,7 @@
   $java.lang.Object.itable))
 
 ;;; Code for objcnametype.ObjCNameType [vtable.init]
-(global $objcnametype.ObjCNameType.vtable (ref $objcnametype.ObjCNameType.vtable) 
+(global $objcnametype.ObjCNameType.vtable (ref $objcnametype.ObjCNameType.vtable)
  (struct.new $objcnametype.ObjCNameType.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -35,7 +35,7 @@
 )
 
 ;;; Code for objcnametype.ObjCNameType [itable.init]
-(global $objcnametype.ObjCNameType.itable (ref $objcnametype.ObjCNameType.itable) (struct.new $objcnametype.ObjCNameType.itable 
+(global $objcnametype.ObjCNameType.itable (ref $objcnametype.ObjCNameType.itable) (struct.new $objcnametype.ObjCNameType.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

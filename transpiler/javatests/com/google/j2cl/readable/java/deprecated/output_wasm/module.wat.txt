@@ -1,24 +1,24 @@
  ;;; Code for deprecated.DeprecatedExample.DeprecatedInterface [type definition]
- (type $deprecated.DeprecatedExample.DeprecatedInterface.vtable (struct 
+ (type $deprecated.DeprecatedExample.DeprecatedInterface.vtable (struct
   (field $m_doAThing__int__void (ref $function.m_doAThing__int__void))
   )
  )
 
  ;;; Code for deprecated.DeprecatedExample.DeprecatedJsFunction [type definition]
- (type $deprecated.DeprecatedExample.DeprecatedJsFunction.vtable (struct 
+ (type $deprecated.DeprecatedExample.DeprecatedJsFunction.vtable (struct
   (field $m_doAThing__java_lang_Object__void (ref $function.m_doAThing__java_lang_Object__void))
   )
  )
 
  ;;; Code for deprecated.DeprecatedExample [type definition]
- (type $deprecated.DeprecatedExample (struct_subtype 
-  (field $vtable (ref $deprecated.DeprecatedExample.vtable)) 
+ (type $deprecated.DeprecatedExample (struct_subtype
+  (field $vtable (ref $deprecated.DeprecatedExample.vtable))
   (field $itable (ref $deprecated.DeprecatedExample.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_deprecatedInstanceField__deprecated_DeprecatedExample (ref null $java.lang.String))
    $java.lang.Object)
  )
- (type $deprecated.DeprecatedExample.vtable (struct_subtype 
+ (type $deprecated.DeprecatedExample.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -27,7 +27,7 @@
   (field $m_deprecatedInstanceMethod__java_lang_String__void (ref $function.m_deprecatedInstanceMethod__java_lang_String__void))
    $java.lang.Object.vtable)
  )
- (type $deprecated.DeprecatedExample.itable (struct_subtype 
+ (type $deprecated.DeprecatedExample.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -38,15 +38,15 @@
   $java.lang.Object.itable))
 
  ;;; Code for deprecated.DeprecatedExample.DeprecatedEnum [type definition]
- (type $deprecated.DeprecatedExample.DeprecatedEnum (struct_subtype 
-  (field $vtable (ref $deprecated.DeprecatedExample.DeprecatedEnum.vtable)) 
+ (type $deprecated.DeprecatedExample.DeprecatedEnum (struct_subtype
+  (field $vtable (ref $deprecated.DeprecatedExample.DeprecatedEnum.vtable))
   (field $itable (ref $deprecated.DeprecatedExample.DeprecatedEnum.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
   (field $f_ordinal__java_lang_Enum_ (mut i32))
    $java.lang.Enum)
  )
- (type $deprecated.DeprecatedExample.DeprecatedEnum.vtable (struct_subtype 
+ (type $deprecated.DeprecatedExample.DeprecatedEnum.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -59,7 +59,7 @@
   (field $m_compareTo__java_lang_Object__int (ref $function.m_compareTo__java_lang_Object__int))
    $java.lang.Enum.vtable)
  )
- (type $deprecated.DeprecatedExample.DeprecatedEnum.itable (struct_subtype 
+ (type $deprecated.DeprecatedExample.DeprecatedEnum.itable (struct_subtype
  (field $slot0 (ref $java.io.Serializable.vtable))
  (field $slot1 (ref $java.lang.Comparable.vtable))
  (field $slot2 (ref null struct))
@@ -70,15 +70,15 @@
   $java.lang.Enum.itable))
 
  ;;; Code for deprecated.DeprecatedExample.DeprecatedJsEnum [type definition]
- (type $deprecated.DeprecatedExample.DeprecatedJsEnum (struct_subtype 
-  (field $vtable (ref $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable)) 
+ (type $deprecated.DeprecatedExample.DeprecatedJsEnum (struct_subtype
+  (field $vtable (ref $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable))
   (field $itable (ref $deprecated.DeprecatedExample.DeprecatedJsEnum.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
   (field $f_ordinal__java_lang_Enum_ (mut i32))
    $java.lang.Enum)
  )
- (type $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable (struct_subtype 
+ (type $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -91,7 +91,7 @@
   (field $m_compareTo__java_lang_Object__int (ref $function.m_compareTo__java_lang_Object__int))
    $java.lang.Enum.vtable)
  )
- (type $deprecated.DeprecatedExample.DeprecatedJsEnum.itable (struct_subtype 
+ (type $deprecated.DeprecatedExample.DeprecatedJsEnum.itable (struct_subtype
  (field $slot0 (ref $java.io.Serializable.vtable))
  (field $slot1 (ref $java.lang.Comparable.vtable))
  (field $slot2 (ref null struct))
@@ -102,7 +102,7 @@
   $java.lang.Enum.itable))
 
 ;;; Code for deprecated.DeprecatedExample [vtable.init]
-(global $deprecated.DeprecatedExample.vtable (ref $deprecated.DeprecatedExample.vtable) 
+(global $deprecated.DeprecatedExample.vtable (ref $deprecated.DeprecatedExample.vtable)
  (struct.new $deprecated.DeprecatedExample.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -114,7 +114,7 @@
 )
 
 ;;; Code for deprecated.DeprecatedExample [itable.init]
-(global $deprecated.DeprecatedExample.itable (ref $deprecated.DeprecatedExample.itable) (struct.new $deprecated.DeprecatedExample.itable 
+(global $deprecated.DeprecatedExample.itable (ref $deprecated.DeprecatedExample.itable) (struct.new $deprecated.DeprecatedExample.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -125,7 +125,7 @@
  ))
 
 ;;; Code for deprecated.DeprecatedExample.DeprecatedEnum [vtable.init]
-(global $deprecated.DeprecatedExample.DeprecatedEnum.vtable (ref $deprecated.DeprecatedExample.DeprecatedEnum.vtable) 
+(global $deprecated.DeprecatedExample.DeprecatedEnum.vtable (ref $deprecated.DeprecatedExample.DeprecatedEnum.vtable)
  (struct.new $deprecated.DeprecatedExample.DeprecatedEnum.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -141,7 +141,7 @@
 )
 
 ;;; Code for deprecated.DeprecatedExample.DeprecatedEnum [itable.init]
-(global $deprecated.DeprecatedExample.DeprecatedEnum.itable (ref $deprecated.DeprecatedExample.DeprecatedEnum.itable) (struct.new $deprecated.DeprecatedExample.DeprecatedEnum.itable 
+(global $deprecated.DeprecatedExample.DeprecatedEnum.itable (ref $deprecated.DeprecatedExample.DeprecatedEnum.itable) (struct.new $deprecated.DeprecatedExample.DeprecatedEnum.itable
  (struct.new $java.io.Serializable.vtable
  )
  (struct.new $java.lang.Comparable.vtable
@@ -155,7 +155,7 @@
  ))
 
 ;;; Code for deprecated.DeprecatedExample.DeprecatedJsEnum [vtable.init]
-(global $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable (ref $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable) 
+(global $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable (ref $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable)
  (struct.new $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -171,7 +171,7 @@
 )
 
 ;;; Code for deprecated.DeprecatedExample.DeprecatedJsEnum [itable.init]
-(global $deprecated.DeprecatedExample.DeprecatedJsEnum.itable (ref $deprecated.DeprecatedExample.DeprecatedJsEnum.itable) (struct.new $deprecated.DeprecatedExample.DeprecatedJsEnum.itable 
+(global $deprecated.DeprecatedExample.DeprecatedJsEnum.itable (ref $deprecated.DeprecatedExample.DeprecatedJsEnum.itable) (struct.new $deprecated.DeprecatedExample.DeprecatedJsEnum.itable
  (struct.new $java.io.Serializable.vtable
  )
  (struct.new $java.lang.Comparable.vtable

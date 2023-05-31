@@ -404,9 +404,8 @@ final class StatementTranspiler {
         builder.newLine();
         CatchClause catchClause = Iterables.getOnlyElement(tryStatement.getCatchClauses(), null);
         if (catchClause != null) {
-          builder.append("(try (do ");
+          builder.append("(try (do");
           builder.indent();
-          builder.newLine();
           render(tryStatement.getBody());
           builder.unindent();
           builder.newLine();
@@ -541,7 +540,6 @@ final class StatementTranspiler {
         builder.newLine();
         builder.openParens("loop");
         bodyEmitter.run();
-        builder.newLine();
         builder.closeParens();
         builder.closeParens();
       }

@@ -1,13 +1,13 @@
  ;;; Code for genericequals.GenericEquals [type definition]
- (type $genericequals.GenericEquals (struct_subtype 
-  (field $vtable (ref $genericequals.GenericEquals.vtable)) 
+ (type $genericequals.GenericEquals (struct_subtype
+  (field $vtable (ref $genericequals.GenericEquals.vtable))
   (field $itable (ref $genericequals.GenericEquals.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_value__genericequals_GenericEquals_ (ref null $java.lang.Object))
   (field $f_value2__genericequals_GenericEquals_ (ref null $genericequals.GenericEquals))
    $java.lang.Object)
  )
- (type $genericequals.GenericEquals.vtable (struct_subtype 
+ (type $genericequals.GenericEquals.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -16,7 +16,7 @@
   (field $m_foo__genericequals_GenericEquals__java_lang_Object (ref $function.m_foo__genericequals_GenericEquals__java_lang_Object))
    $java.lang.Object.vtable)
  )
- (type $genericequals.GenericEquals.itable (struct_subtype 
+ (type $genericequals.GenericEquals.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -27,7 +27,7 @@
   $java.lang.Object.itable))
 
 ;;; Code for genericequals.GenericEquals [vtable.init]
-(global $genericequals.GenericEquals.vtable (ref $genericequals.GenericEquals.vtable) 
+(global $genericequals.GenericEquals.vtable (ref $genericequals.GenericEquals.vtable)
  (struct.new $genericequals.GenericEquals.vtable
   (ref.func $m_equals__java_lang_Object__boolean@genericequals.GenericEquals)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -39,7 +39,7 @@
 )
 
 ;;; Code for genericequals.GenericEquals [itable.init]
-(global $genericequals.GenericEquals.itable (ref $genericequals.GenericEquals.itable) (struct.new $genericequals.GenericEquals.itable 
+(global $genericequals.GenericEquals.itable (ref $genericequals.GenericEquals.itable) (struct.new $genericequals.GenericEquals.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

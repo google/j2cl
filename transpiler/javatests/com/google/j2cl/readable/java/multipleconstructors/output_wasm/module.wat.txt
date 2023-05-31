@@ -1,13 +1,13 @@
  ;;; Code for multipleconstructors.MultipleConstructors [type definition]
- (type $multipleconstructors.MultipleConstructors (struct_subtype 
-  (field $vtable (ref $multipleconstructors.MultipleConstructors.vtable)) 
+ (type $multipleconstructors.MultipleConstructors (struct_subtype
+  (field $vtable (ref $multipleconstructors.MultipleConstructors.vtable))
   (field $itable (ref $multipleconstructors.MultipleConstructors.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_id__multipleconstructors_MultipleConstructors_ i32)
   (field $f_flag__multipleconstructors_MultipleConstructors_ (mut i8))
    $java.lang.Object)
  )
- (type $multipleconstructors.MultipleConstructors.vtable (struct_subtype 
+ (type $multipleconstructors.MultipleConstructors.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -15,7 +15,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
- (type $multipleconstructors.MultipleConstructors.itable (struct_subtype 
+ (type $multipleconstructors.MultipleConstructors.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -26,7 +26,7 @@
   $java.lang.Object.itable))
 
 ;;; Code for multipleconstructors.MultipleConstructors [vtable.init]
-(global $multipleconstructors.MultipleConstructors.vtable (ref $multipleconstructors.MultipleConstructors.vtable) 
+(global $multipleconstructors.MultipleConstructors.vtable (ref $multipleconstructors.MultipleConstructors.vtable)
  (struct.new $multipleconstructors.MultipleConstructors.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -37,7 +37,7 @@
 )
 
 ;;; Code for multipleconstructors.MultipleConstructors [itable.init]
-(global $multipleconstructors.MultipleConstructors.itable (ref $multipleconstructors.MultipleConstructors.itable) (struct.new $multipleconstructors.MultipleConstructors.itable 
+(global $multipleconstructors.MultipleConstructors.itable (ref $multipleconstructors.MultipleConstructors.itable) (struct.new $multipleconstructors.MultipleConstructors.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

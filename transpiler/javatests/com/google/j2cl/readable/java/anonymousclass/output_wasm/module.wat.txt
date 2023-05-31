@@ -1,16 +1,16 @@
  ;;; Code for anonymousclass.SomeInterface [type definition]
- (type $anonymousclass.SomeInterface.vtable (struct 
+ (type $anonymousclass.SomeInterface.vtable (struct
   )
  )
 
  ;;; Code for anonymousclass.SomeClass [type definition]
- (type $anonymousclass.SomeClass (struct_subtype 
-  (field $vtable (ref $anonymousclass.SomeClass.vtable)) 
+ (type $anonymousclass.SomeClass (struct_subtype
+  (field $vtable (ref $anonymousclass.SomeClass.vtable))
   (field $itable (ref $anonymousclass.SomeClass.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $java.lang.Object)
  )
- (type $anonymousclass.SomeClass.vtable (struct_subtype 
+ (type $anonymousclass.SomeClass.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -19,7 +19,7 @@
   (field $m_foo__java_lang_String (ref $function.m_foo__java_lang_String))
    $java.lang.Object.vtable)
  )
- (type $anonymousclass.SomeClass.itable (struct_subtype 
+ (type $anonymousclass.SomeClass.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -30,13 +30,13 @@
   $java.lang.Object.itable))
 
  ;;; Code for anonymousclass.SomeClassWithStaticMembers [type definition]
- (type $anonymousclass.SomeClassWithStaticMembers (struct_subtype 
-  (field $vtable (ref $anonymousclass.SomeClassWithStaticMembers.vtable)) 
+ (type $anonymousclass.SomeClassWithStaticMembers (struct_subtype
+  (field $vtable (ref $anonymousclass.SomeClassWithStaticMembers.vtable))
   (field $itable (ref $anonymousclass.SomeClassWithStaticMembers.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $java.lang.Object)
  )
- (type $anonymousclass.SomeClassWithStaticMembers.vtable (struct_subtype 
+ (type $anonymousclass.SomeClassWithStaticMembers.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -45,7 +45,7 @@
   (field $m_foo__java_lang_String (ref $function.m_foo__java_lang_String))
    $java.lang.Object.vtable)
  )
- (type $anonymousclass.SomeClassWithStaticMembers.itable (struct_subtype 
+ (type $anonymousclass.SomeClassWithStaticMembers.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -56,14 +56,14 @@
   $java.lang.Object.itable))
 
  ;;; Code for anonymousclass.AnonymousClass [type definition]
- (type $anonymousclass.AnonymousClass (struct_subtype 
-  (field $vtable (ref $anonymousclass.AnonymousClass.vtable)) 
+ (type $anonymousclass.AnonymousClass (struct_subtype
+  (field $vtable (ref $anonymousclass.AnonymousClass.vtable))
   (field $itable (ref $anonymousclass.AnonymousClass.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_i__anonymousclass_AnonymousClass (mut i32))
    $java.lang.Object)
  )
- (type $anonymousclass.AnonymousClass.vtable (struct_subtype 
+ (type $anonymousclass.AnonymousClass.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -72,7 +72,7 @@
   (field $m_main__void (ref $function.m_main__void))
    $java.lang.Object.vtable)
  )
- (type $anonymousclass.AnonymousClass.itable (struct_subtype 
+ (type $anonymousclass.AnonymousClass.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -83,8 +83,8 @@
   $java.lang.Object.itable))
 
  ;;; Code for anonymousclass.AnonymousClass.1 [type definition]
- (type $anonymousclass.AnonymousClass.1 (struct_subtype 
-  (field $vtable (ref $anonymousclass.AnonymousClass.1.vtable)) 
+ (type $anonymousclass.AnonymousClass.1 (struct_subtype
+  (field $vtable (ref $anonymousclass.AnonymousClass.1.vtable))
   (field $itable (ref $anonymousclass.AnonymousClass.1.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__anonymousclass_AnonymousClass_1 (mut (ref null $anonymousclass.AnonymousClass)))
@@ -92,7 +92,7 @@
   (field $f_outer__anonymousclass_AnonymousClass_1 (mut (ref null $java.lang.Object)))
    $anonymousclass.SomeClass)
  )
- (type $anonymousclass.AnonymousClass.1.vtable (struct_subtype 
+ (type $anonymousclass.AnonymousClass.1.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -101,7 +101,7 @@
   (field $m_foo__java_lang_String (ref $function.m_foo__java_lang_String))
    $anonymousclass.SomeClass.vtable)
  )
- (type $anonymousclass.AnonymousClass.1.itable (struct_subtype 
+ (type $anonymousclass.AnonymousClass.1.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -112,8 +112,8 @@
   $anonymousclass.SomeClass.itable))
 
  ;;; Code for anonymousclass.AnonymousClass.2 [type definition]
- (type $anonymousclass.AnonymousClass.2 (struct_subtype 
-  (field $vtable (ref $anonymousclass.AnonymousClass.2.vtable)) 
+ (type $anonymousclass.AnonymousClass.2 (struct_subtype
+  (field $vtable (ref $anonymousclass.AnonymousClass.2.vtable))
   (field $itable (ref $anonymousclass.AnonymousClass.2.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__anonymousclass_AnonymousClass_2 (mut (ref null $anonymousclass.AnonymousClass)))
@@ -121,7 +121,7 @@
   (field $f_outer__anonymousclass_AnonymousClass_2 (mut (ref null $java.lang.Object)))
    $anonymousclass.SomeClassWithStaticMembers)
  )
- (type $anonymousclass.AnonymousClass.2.vtable (struct_subtype 
+ (type $anonymousclass.AnonymousClass.2.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -130,7 +130,7 @@
   (field $m_foo__java_lang_String (ref $function.m_foo__java_lang_String))
    $anonymousclass.SomeClassWithStaticMembers.vtable)
  )
- (type $anonymousclass.AnonymousClass.2.itable (struct_subtype 
+ (type $anonymousclass.AnonymousClass.2.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -141,13 +141,13 @@
   $anonymousclass.SomeClassWithStaticMembers.itable))
 
  ;;; Code for anonymousclass.SomeInterface.1 [type definition]
- (type $anonymousclass.SomeInterface.1 (struct_subtype 
-  (field $vtable (ref $anonymousclass.SomeInterface.1.vtable)) 
+ (type $anonymousclass.SomeInterface.1 (struct_subtype
+  (field $vtable (ref $anonymousclass.SomeInterface.1.vtable))
   (field $itable (ref $anonymousclass.SomeInterface.1.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $anonymousclass.SomeClass)
  )
- (type $anonymousclass.SomeInterface.1.vtable (struct_subtype 
+ (type $anonymousclass.SomeInterface.1.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -156,7 +156,7 @@
   (field $m_foo__java_lang_String (ref $function.m_foo__java_lang_String))
    $anonymousclass.SomeClass.vtable)
  )
- (type $anonymousclass.SomeInterface.1.itable (struct_subtype 
+ (type $anonymousclass.SomeInterface.1.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -167,7 +167,7 @@
   $anonymousclass.SomeClass.itable))
 
 ;;; Code for anonymousclass.AnonymousClass [vtable.init]
-(global $anonymousclass.AnonymousClass.vtable (ref $anonymousclass.AnonymousClass.vtable) 
+(global $anonymousclass.AnonymousClass.vtable (ref $anonymousclass.AnonymousClass.vtable)
  (struct.new $anonymousclass.AnonymousClass.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -179,7 +179,7 @@
 )
 
 ;;; Code for anonymousclass.AnonymousClass [itable.init]
-(global $anonymousclass.AnonymousClass.itable (ref $anonymousclass.AnonymousClass.itable) (struct.new $anonymousclass.AnonymousClass.itable 
+(global $anonymousclass.AnonymousClass.itable (ref $anonymousclass.AnonymousClass.itable) (struct.new $anonymousclass.AnonymousClass.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -190,7 +190,7 @@
  ))
 
 ;;; Code for anonymousclass.AnonymousClass.1 [vtable.init]
-(global $anonymousclass.AnonymousClass.1.vtable (ref $anonymousclass.AnonymousClass.1.vtable) 
+(global $anonymousclass.AnonymousClass.1.vtable (ref $anonymousclass.AnonymousClass.1.vtable)
  (struct.new $anonymousclass.AnonymousClass.1.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -202,7 +202,7 @@
 )
 
 ;;; Code for anonymousclass.AnonymousClass.1 [itable.init]
-(global $anonymousclass.AnonymousClass.1.itable (ref $anonymousclass.AnonymousClass.1.itable) (struct.new $anonymousclass.AnonymousClass.1.itable 
+(global $anonymousclass.AnonymousClass.1.itable (ref $anonymousclass.AnonymousClass.1.itable) (struct.new $anonymousclass.AnonymousClass.1.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -213,7 +213,7 @@
  ))
 
 ;;; Code for anonymousclass.AnonymousClass.2 [vtable.init]
-(global $anonymousclass.AnonymousClass.2.vtable (ref $anonymousclass.AnonymousClass.2.vtable) 
+(global $anonymousclass.AnonymousClass.2.vtable (ref $anonymousclass.AnonymousClass.2.vtable)
  (struct.new $anonymousclass.AnonymousClass.2.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -225,7 +225,7 @@
 )
 
 ;;; Code for anonymousclass.AnonymousClass.2 [itable.init]
-(global $anonymousclass.AnonymousClass.2.itable (ref $anonymousclass.AnonymousClass.2.itable) (struct.new $anonymousclass.AnonymousClass.2.itable 
+(global $anonymousclass.AnonymousClass.2.itable (ref $anonymousclass.AnonymousClass.2.itable) (struct.new $anonymousclass.AnonymousClass.2.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -236,7 +236,7 @@
  ))
 
 ;;; Code for anonymousclass.SomeInterface.1 [vtable.init]
-(global $anonymousclass.SomeInterface.1.vtable (ref $anonymousclass.SomeInterface.1.vtable) 
+(global $anonymousclass.SomeInterface.1.vtable (ref $anonymousclass.SomeInterface.1.vtable)
  (struct.new $anonymousclass.SomeInterface.1.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -248,7 +248,7 @@
 )
 
 ;;; Code for anonymousclass.SomeInterface.1 [itable.init]
-(global $anonymousclass.SomeInterface.1.itable (ref $anonymousclass.SomeInterface.1.itable) (struct.new $anonymousclass.SomeInterface.1.itable 
+(global $anonymousclass.SomeInterface.1.itable (ref $anonymousclass.SomeInterface.1.itable) (struct.new $anonymousclass.SomeInterface.1.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

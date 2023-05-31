@@ -1,22 +1,22 @@
  ;;; Code for annotation.Main.Foo [type definition]
- (type $annotation.Main.Foo.vtable (struct 
+ (type $annotation.Main.Foo.vtable (struct
   (field $m_bar__int (ref $function.m_bar__int))
   )
  )
 
  ;;; Code for annotation.Main.Zoo [type definition]
- (type $annotation.Main.Zoo.vtable (struct 
+ (type $annotation.Main.Zoo.vtable (struct
   )
  )
 
  ;;; Code for annotation.Main [type definition]
- (type $annotation.Main (struct_subtype 
-  (field $vtable (ref $annotation.Main.vtable)) 
+ (type $annotation.Main (struct_subtype
+  (field $vtable (ref $annotation.Main.vtable))
   (field $itable (ref $annotation.Main.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $java.lang.Object)
  )
- (type $annotation.Main.vtable (struct_subtype 
+ (type $annotation.Main.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -24,7 +24,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
- (type $annotation.Main.itable (struct_subtype 
+ (type $annotation.Main.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -35,14 +35,14 @@
   $java.lang.Object.itable))
 
  ;;; Code for annotation.Main.Bar [type definition]
- (type $annotation.Main.Bar (struct_subtype 
-  (field $vtable (ref $annotation.Main.Bar.vtable)) 
+ (type $annotation.Main.Bar (struct_subtype
+  (field $vtable (ref $annotation.Main.Bar.vtable))
   (field $itable (ref $annotation.Main.Bar.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__annotation_Main_Bar (ref null $annotation.Main))
    $java.lang.Object)
  )
- (type $annotation.Main.Bar.vtable (struct_subtype 
+ (type $annotation.Main.Bar.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -51,7 +51,7 @@
   (field $m_baz__int_$pp_annotation (ref $function.m_baz__int_$pp_annotation))
    $java.lang.Object.vtable)
  )
- (type $annotation.Main.Bar.itable (struct_subtype 
+ (type $annotation.Main.Bar.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -62,7 +62,7 @@
   $java.lang.Object.itable))
 
 ;;; Code for annotation.Main [vtable.init]
-(global $annotation.Main.vtable (ref $annotation.Main.vtable) 
+(global $annotation.Main.vtable (ref $annotation.Main.vtable)
  (struct.new $annotation.Main.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -73,7 +73,7 @@
 )
 
 ;;; Code for annotation.Main [itable.init]
-(global $annotation.Main.itable (ref $annotation.Main.itable) (struct.new $annotation.Main.itable 
+(global $annotation.Main.itable (ref $annotation.Main.itable) (struct.new $annotation.Main.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -84,7 +84,7 @@
  ))
 
 ;;; Code for annotation.Main.Bar [vtable.init]
-(global $annotation.Main.Bar.vtable (ref $annotation.Main.Bar.vtable) 
+(global $annotation.Main.Bar.vtable (ref $annotation.Main.Bar.vtable)
  (struct.new $annotation.Main.Bar.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -96,7 +96,7 @@
 )
 
 ;;; Code for annotation.Main.Bar [itable.init]
-(global $annotation.Main.Bar.itable (ref $annotation.Main.Bar.itable) (struct.new $annotation.Main.Bar.itable 
+(global $annotation.Main.Bar.itable (ref $annotation.Main.Bar.itable) (struct.new $annotation.Main.Bar.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

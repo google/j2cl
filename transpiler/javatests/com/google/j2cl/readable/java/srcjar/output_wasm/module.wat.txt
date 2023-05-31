@@ -1,11 +1,11 @@
  ;;; Code for srcjar.Foo [type definition]
- (type $srcjar.Foo (struct_subtype 
-  (field $vtable (ref $srcjar.Foo.vtable)) 
+ (type $srcjar.Foo (struct_subtype
+  (field $vtable (ref $srcjar.Foo.vtable))
   (field $itable (ref $srcjar.Foo.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $java.lang.Object)
  )
- (type $srcjar.Foo.vtable (struct_subtype 
+ (type $srcjar.Foo.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -13,7 +13,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
- (type $srcjar.Foo.itable (struct_subtype 
+ (type $srcjar.Foo.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -24,13 +24,13 @@
   $java.lang.Object.itable))
 
  ;;; Code for srcjar.Srcjar [type definition]
- (type $srcjar.Srcjar (struct_subtype 
-  (field $vtable (ref $srcjar.Srcjar.vtable)) 
+ (type $srcjar.Srcjar (struct_subtype
+  (field $vtable (ref $srcjar.Srcjar.vtable))
   (field $itable (ref $srcjar.Srcjar.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $java.lang.Object)
  )
- (type $srcjar.Srcjar.vtable (struct_subtype 
+ (type $srcjar.Srcjar.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -38,7 +38,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
- (type $srcjar.Srcjar.itable (struct_subtype 
+ (type $srcjar.Srcjar.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -49,7 +49,7 @@
   $java.lang.Object.itable))
 
 ;;; Code for srcjar.Foo [vtable.init]
-(global $srcjar.Foo.vtable (ref $srcjar.Foo.vtable) 
+(global $srcjar.Foo.vtable (ref $srcjar.Foo.vtable)
  (struct.new $srcjar.Foo.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -60,7 +60,7 @@
 )
 
 ;;; Code for srcjar.Foo [itable.init]
-(global $srcjar.Foo.itable (ref $srcjar.Foo.itable) (struct.new $srcjar.Foo.itable 
+(global $srcjar.Foo.itable (ref $srcjar.Foo.itable) (struct.new $srcjar.Foo.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -71,7 +71,7 @@
  ))
 
 ;;; Code for srcjar.Srcjar [vtable.init]
-(global $srcjar.Srcjar.vtable (ref $srcjar.Srcjar.vtable) 
+(global $srcjar.Srcjar.vtable (ref $srcjar.Srcjar.vtable)
  (struct.new $srcjar.Srcjar.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -82,7 +82,7 @@
 )
 
 ;;; Code for srcjar.Srcjar [itable.init]
-(global $srcjar.Srcjar.itable (ref $srcjar.Srcjar.itable) (struct.new $srcjar.Srcjar.itable 
+(global $srcjar.Srcjar.itable (ref $srcjar.Srcjar.itable) (struct.new $srcjar.Srcjar.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

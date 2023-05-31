@@ -1,11 +1,11 @@
  ;;; Code for assertsimple.AssertSimple [type definition]
- (type $assertsimple.AssertSimple (struct_subtype 
-  (field $vtable (ref $assertsimple.AssertSimple.vtable)) 
+ (type $assertsimple.AssertSimple (struct_subtype
+  (field $vtable (ref $assertsimple.AssertSimple.vtable))
   (field $itable (ref $assertsimple.AssertSimple.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $java.lang.Object)
  )
- (type $assertsimple.AssertSimple.vtable (struct_subtype 
+ (type $assertsimple.AssertSimple.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -13,7 +13,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
- (type $assertsimple.AssertSimple.itable (struct_subtype 
+ (type $assertsimple.AssertSimple.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -24,7 +24,7 @@
   $java.lang.Object.itable))
 
 ;;; Code for assertsimple.AssertSimple [vtable.init]
-(global $assertsimple.AssertSimple.vtable (ref $assertsimple.AssertSimple.vtable) 
+(global $assertsimple.AssertSimple.vtable (ref $assertsimple.AssertSimple.vtable)
  (struct.new $assertsimple.AssertSimple.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -35,7 +35,7 @@
 )
 
 ;;; Code for assertsimple.AssertSimple [itable.init]
-(global $assertsimple.AssertSimple.itable (ref $assertsimple.AssertSimple.itable) (struct.new $assertsimple.AssertSimple.itable 
+(global $assertsimple.AssertSimple.itable (ref $assertsimple.AssertSimple.itable) (struct.new $assertsimple.AssertSimple.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

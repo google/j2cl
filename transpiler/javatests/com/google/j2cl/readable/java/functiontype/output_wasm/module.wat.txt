@@ -1,16 +1,16 @@
  ;;; Code for functiontype.Function [type definition]
- (type $functiontype.Function.vtable (struct 
+ (type $functiontype.Function.vtable (struct
   )
  )
 
  ;;; Code for functiontype.FunctionImpl [type definition]
- (type $functiontype.FunctionImpl (struct_subtype 
-  (field $vtable (ref $functiontype.FunctionImpl.vtable)) 
+ (type $functiontype.FunctionImpl (struct_subtype
+  (field $vtable (ref $functiontype.FunctionImpl.vtable))
   (field $itable (ref $functiontype.FunctionImpl.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $java.lang.Object)
  )
- (type $functiontype.FunctionImpl.vtable (struct_subtype 
+ (type $functiontype.FunctionImpl.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -19,7 +19,7 @@
   (field $m_test__functiontype_Function__void (ref $function.m_test__functiontype_Function__void))
    $java.lang.Object.vtable)
  )
- (type $functiontype.FunctionImpl.itable (struct_subtype 
+ (type $functiontype.FunctionImpl.itable (struct_subtype
  (field $slot0 (ref $functiontype.Function.vtable))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -30,7 +30,7 @@
   $java.lang.Object.itable))
 
 ;;; Code for functiontype.FunctionImpl [vtable.init]
-(global $functiontype.FunctionImpl.vtable (ref $functiontype.FunctionImpl.vtable) 
+(global $functiontype.FunctionImpl.vtable (ref $functiontype.FunctionImpl.vtable)
  (struct.new $functiontype.FunctionImpl.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -42,7 +42,7 @@
 )
 
 ;;; Code for functiontype.FunctionImpl [itable.init]
-(global $functiontype.FunctionImpl.itable (ref $functiontype.FunctionImpl.itable) (struct.new $functiontype.FunctionImpl.itable 
+(global $functiontype.FunctionImpl.itable (ref $functiontype.FunctionImpl.itable) (struct.new $functiontype.FunctionImpl.itable
  (struct.new $functiontype.Function.vtable
  )
   (ref.null struct)

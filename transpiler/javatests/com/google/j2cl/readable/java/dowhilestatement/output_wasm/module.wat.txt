@@ -1,11 +1,11 @@
  ;;; Code for dowhilestatement.DoWhileStatement [type definition]
- (type $dowhilestatement.DoWhileStatement (struct_subtype 
-  (field $vtable (ref $dowhilestatement.DoWhileStatement.vtable)) 
+ (type $dowhilestatement.DoWhileStatement (struct_subtype
+  (field $vtable (ref $dowhilestatement.DoWhileStatement.vtable))
   (field $itable (ref $dowhilestatement.DoWhileStatement.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $java.lang.Object)
  )
- (type $dowhilestatement.DoWhileStatement.vtable (struct_subtype 
+ (type $dowhilestatement.DoWhileStatement.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -14,7 +14,7 @@
   (field $m_test__void (ref $function.m_test__void))
    $java.lang.Object.vtable)
  )
- (type $dowhilestatement.DoWhileStatement.itable (struct_subtype 
+ (type $dowhilestatement.DoWhileStatement.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -25,7 +25,7 @@
   $java.lang.Object.itable))
 
 ;;; Code for dowhilestatement.DoWhileStatement [vtable.init]
-(global $dowhilestatement.DoWhileStatement.vtable (ref $dowhilestatement.DoWhileStatement.vtable) 
+(global $dowhilestatement.DoWhileStatement.vtable (ref $dowhilestatement.DoWhileStatement.vtable)
  (struct.new $dowhilestatement.DoWhileStatement.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -37,7 +37,7 @@
 )
 
 ;;; Code for dowhilestatement.DoWhileStatement [itable.init]
-(global $dowhilestatement.DoWhileStatement.itable (ref $dowhilestatement.DoWhileStatement.itable) (struct.new $dowhilestatement.DoWhileStatement.itable 
+(global $dowhilestatement.DoWhileStatement.itable (ref $dowhilestatement.DoWhileStatement.itable) (struct.new $dowhilestatement.DoWhileStatement.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -101,7 +101,6 @@
      )
     )
     (br_if 0 (i32.lt_s (local.get $count) (i32.const 5)))
-    
    )
   )
  )

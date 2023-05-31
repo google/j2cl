@@ -1,11 +1,11 @@
  ;;; Code for staticinitializers.StaticInitializers [type definition]
- (type $staticinitializers.StaticInitializers (struct_subtype 
-  (field $vtable (ref $staticinitializers.StaticInitializers.vtable)) 
+ (type $staticinitializers.StaticInitializers (struct_subtype
+  (field $vtable (ref $staticinitializers.StaticInitializers.vtable))
   (field $itable (ref $staticinitializers.StaticInitializers.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $java.lang.Object)
  )
- (type $staticinitializers.StaticInitializers.vtable (struct_subtype 
+ (type $staticinitializers.StaticInitializers.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -13,7 +13,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
- (type $staticinitializers.StaticInitializers.itable (struct_subtype 
+ (type $staticinitializers.StaticInitializers.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -24,7 +24,7 @@
   $java.lang.Object.itable))
 
 ;;; Code for staticinitializers.StaticInitializers [vtable.init]
-(global $staticinitializers.StaticInitializers.vtable (ref $staticinitializers.StaticInitializers.vtable) 
+(global $staticinitializers.StaticInitializers.vtable (ref $staticinitializers.StaticInitializers.vtable)
  (struct.new $staticinitializers.StaticInitializers.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -35,7 +35,7 @@
 )
 
 ;;; Code for staticinitializers.StaticInitializers [itable.init]
-(global $staticinitializers.StaticInitializers.itable (ref $staticinitializers.StaticInitializers.itable) (struct.new $staticinitializers.StaticInitializers.itable 
+(global $staticinitializers.StaticInitializers.itable (ref $staticinitializers.StaticInitializers.itable) (struct.new $staticinitializers.StaticInitializers.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

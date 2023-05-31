@@ -1,40 +1,40 @@
  ;;; Code for supermethodcall.GrandParentInterface [type definition]
- (type $supermethodcall.GrandParentInterface.vtable (struct 
+ (type $supermethodcall.GrandParentInterface.vtable (struct
   (field $m_defaultGrandParent__void (ref $function.m_defaultGrandParent__void))
   )
  )
 
  ;;; Code for supermethodcall.ParentInterface [type definition]
- (type $supermethodcall.ParentInterface.vtable (struct 
+ (type $supermethodcall.ParentInterface.vtable (struct
   (field $m_defaultParent__void (ref $function.m_defaultParent__void))
   )
  )
 
  ;;; Code for supermethodcall.I1 [type definition]
- (type $supermethodcall.I1.vtable (struct 
+ (type $supermethodcall.I1.vtable (struct
   (field $m_m__void (ref $function.m_m__void))
   )
  )
 
  ;;; Code for supermethodcall.I2 [type definition]
- (type $supermethodcall.I2.vtable (struct 
+ (type $supermethodcall.I2.vtable (struct
   (field $m_m__void (ref $function.m_m__void))
   )
  )
 
  ;;; Code for supermethodcall.I3 [type definition]
- (type $supermethodcall.I3.vtable (struct 
+ (type $supermethodcall.I3.vtable (struct
   )
  )
 
  ;;; Code for supermethodcall.GrandParent [type definition]
- (type $supermethodcall.GrandParent (struct_subtype 
-  (field $vtable (ref $supermethodcall.GrandParent.vtable)) 
+ (type $supermethodcall.GrandParent (struct_subtype
+  (field $vtable (ref $supermethodcall.GrandParent.vtable))
   (field $itable (ref $supermethodcall.GrandParent.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $java.lang.Object)
  )
- (type $supermethodcall.GrandParent.vtable (struct_subtype 
+ (type $supermethodcall.GrandParent.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -47,7 +47,7 @@
   (field $m_defaultGrandParent__void (ref $function.m_defaultGrandParent__void))
    $java.lang.Object.vtable)
  )
- (type $supermethodcall.GrandParent.itable (struct_subtype 
+ (type $supermethodcall.GrandParent.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -58,13 +58,13 @@
   $java.lang.Object.itable))
 
  ;;; Code for supermethodcall.Super [type definition]
- (type $supermethodcall.Super (struct_subtype 
-  (field $vtable (ref $supermethodcall.Super.vtable)) 
+ (type $supermethodcall.Super (struct_subtype
+  (field $vtable (ref $supermethodcall.Super.vtable))
   (field $itable (ref $supermethodcall.Super.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $java.lang.Object)
  )
- (type $supermethodcall.Super.vtable (struct_subtype 
+ (type $supermethodcall.Super.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -73,7 +73,7 @@
   (field $m_m__void (ref $function.m_m__void))
    $java.lang.Object.vtable)
  )
- (type $supermethodcall.Super.itable (struct_subtype 
+ (type $supermethodcall.Super.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -84,13 +84,13 @@
   $java.lang.Object.itable))
 
  ;;; Code for supermethodcall.SuperToStringTest [type definition]
- (type $supermethodcall.SuperToStringTest (struct_subtype 
-  (field $vtable (ref $supermethodcall.SuperToStringTest.vtable)) 
+ (type $supermethodcall.SuperToStringTest (struct_subtype
+  (field $vtable (ref $supermethodcall.SuperToStringTest.vtable))
   (field $itable (ref $supermethodcall.SuperToStringTest.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $java.lang.Object)
  )
- (type $supermethodcall.SuperToStringTest.vtable (struct_subtype 
+ (type $supermethodcall.SuperToStringTest.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -99,7 +99,7 @@
   (field $m_m__void (ref $function.m_m__void))
    $java.lang.Object.vtable)
  )
- (type $supermethodcall.SuperToStringTest.itable (struct_subtype 
+ (type $supermethodcall.SuperToStringTest.itable (struct_subtype
  (field $slot0 (ref $supermethodcall.I1.vtable))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -110,13 +110,13 @@
   $java.lang.Object.itable))
 
  ;;; Code for supermethodcall.Parent [type definition]
- (type $supermethodcall.Parent (struct_subtype 
-  (field $vtable (ref $supermethodcall.Parent.vtable)) 
+ (type $supermethodcall.Parent (struct_subtype
+  (field $vtable (ref $supermethodcall.Parent.vtable))
   (field $itable (ref $supermethodcall.Parent.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $supermethodcall.GrandParent)
  )
- (type $supermethodcall.Parent.vtable (struct_subtype 
+ (type $supermethodcall.Parent.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -132,7 +132,7 @@
   (field $m_parentWithChangingReturn__java_lang_Object (ref $function.m_parentWithChangingReturn__java_lang_Object))
    $supermethodcall.GrandParent.vtable)
  )
- (type $supermethodcall.Parent.itable (struct_subtype 
+ (type $supermethodcall.Parent.itable (struct_subtype
  (field $slot0 (ref $supermethodcall.ParentInterface.vtable))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -143,13 +143,13 @@
   $supermethodcall.GrandParent.itable))
 
  ;;; Code for supermethodcall.Sub [type definition]
- (type $supermethodcall.Sub (struct_subtype 
-  (field $vtable (ref $supermethodcall.Sub.vtable)) 
+ (type $supermethodcall.Sub (struct_subtype
+  (field $vtable (ref $supermethodcall.Sub.vtable))
   (field $itable (ref $supermethodcall.Sub.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $supermethodcall.Super)
  )
- (type $supermethodcall.Sub.vtable (struct_subtype 
+ (type $supermethodcall.Sub.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -158,7 +158,7 @@
   (field $m_m__void (ref $function.m_m__void))
    $supermethodcall.Super.vtable)
  )
- (type $supermethodcall.Sub.itable (struct_subtype 
+ (type $supermethodcall.Sub.itable (struct_subtype
  (field $slot0 (ref $supermethodcall.I1.vtable))
  (field $slot1 (ref $supermethodcall.I2.vtable))
  (field $slot2 (ref $supermethodcall.I3.vtable))
@@ -169,13 +169,13 @@
   $supermethodcall.Super.itable))
 
  ;;; Code for supermethodcall.Child [type definition]
- (type $supermethodcall.Child (struct_subtype 
-  (field $vtable (ref $supermethodcall.Child.vtable)) 
+ (type $supermethodcall.Child (struct_subtype
+  (field $vtable (ref $supermethodcall.Child.vtable))
   (field $itable (ref $supermethodcall.Child.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $supermethodcall.Parent)
  )
- (type $supermethodcall.Child.vtable (struct_subtype 
+ (type $supermethodcall.Child.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -193,7 +193,7 @@
   (field $m_grandParentWithChangingReturn__supermethodcall_Child (ref $function.m_grandParentWithChangingReturn__supermethodcall_Child))
    $supermethodcall.Parent.vtable)
  )
- (type $supermethodcall.Child.itable (struct_subtype 
+ (type $supermethodcall.Child.itable (struct_subtype
  (field $slot0 (ref $supermethodcall.ParentInterface.vtable))
  (field $slot1 (ref $supermethodcall.GrandParentInterface.vtable))
  (field $slot2 (ref null struct))
@@ -204,7 +204,7 @@
   $supermethodcall.Parent.itable))
 
 ;;; Code for supermethodcall.GrandParent [vtable.init]
-(global $supermethodcall.GrandParent.vtable (ref $supermethodcall.GrandParent.vtable) 
+(global $supermethodcall.GrandParent.vtable (ref $supermethodcall.GrandParent.vtable)
  (struct.new $supermethodcall.GrandParent.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -220,7 +220,7 @@
 )
 
 ;;; Code for supermethodcall.GrandParent [itable.init]
-(global $supermethodcall.GrandParent.itable (ref $supermethodcall.GrandParent.itable) (struct.new $supermethodcall.GrandParent.itable 
+(global $supermethodcall.GrandParent.itable (ref $supermethodcall.GrandParent.itable) (struct.new $supermethodcall.GrandParent.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -231,7 +231,7 @@
  ))
 
 ;;; Code for supermethodcall.Parent [vtable.init]
-(global $supermethodcall.Parent.vtable (ref $supermethodcall.Parent.vtable) 
+(global $supermethodcall.Parent.vtable (ref $supermethodcall.Parent.vtable)
  (struct.new $supermethodcall.Parent.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -250,7 +250,7 @@
 )
 
 ;;; Code for supermethodcall.Parent [itable.init]
-(global $supermethodcall.Parent.itable (ref $supermethodcall.Parent.itable) (struct.new $supermethodcall.Parent.itable 
+(global $supermethodcall.Parent.itable (ref $supermethodcall.Parent.itable) (struct.new $supermethodcall.Parent.itable
  (struct.new $supermethodcall.ParentInterface.vtable
   (ref.func $m_defaultParent__void@supermethodcall.Parent)
  )
@@ -263,7 +263,7 @@
  ))
 
 ;;; Code for supermethodcall.Child [vtable.init]
-(global $supermethodcall.Child.vtable (ref $supermethodcall.Child.vtable) 
+(global $supermethodcall.Child.vtable (ref $supermethodcall.Child.vtable)
  (struct.new $supermethodcall.Child.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -284,7 +284,7 @@
 )
 
 ;;; Code for supermethodcall.Child [itable.init]
-(global $supermethodcall.Child.itable (ref $supermethodcall.Child.itable) (struct.new $supermethodcall.Child.itable 
+(global $supermethodcall.Child.itable (ref $supermethodcall.Child.itable) (struct.new $supermethodcall.Child.itable
  (struct.new $supermethodcall.ParentInterface.vtable
   (ref.func $m_defaultParent__void@supermethodcall.Parent)
  )
@@ -299,7 +299,7 @@
  ))
 
 ;;; Code for supermethodcall.Super [vtable.init]
-(global $supermethodcall.Super.vtable (ref $supermethodcall.Super.vtable) 
+(global $supermethodcall.Super.vtable (ref $supermethodcall.Super.vtable)
  (struct.new $supermethodcall.Super.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -311,7 +311,7 @@
 )
 
 ;;; Code for supermethodcall.Super [itable.init]
-(global $supermethodcall.Super.itable (ref $supermethodcall.Super.itable) (struct.new $supermethodcall.Super.itable 
+(global $supermethodcall.Super.itable (ref $supermethodcall.Super.itable) (struct.new $supermethodcall.Super.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -322,7 +322,7 @@
  ))
 
 ;;; Code for supermethodcall.Sub [vtable.init]
-(global $supermethodcall.Sub.vtable (ref $supermethodcall.Sub.vtable) 
+(global $supermethodcall.Sub.vtable (ref $supermethodcall.Sub.vtable)
  (struct.new $supermethodcall.Sub.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -334,7 +334,7 @@
 )
 
 ;;; Code for supermethodcall.Sub [itable.init]
-(global $supermethodcall.Sub.itable (ref $supermethodcall.Sub.itable) (struct.new $supermethodcall.Sub.itable 
+(global $supermethodcall.Sub.itable (ref $supermethodcall.Sub.itable) (struct.new $supermethodcall.Sub.itable
  (struct.new $supermethodcall.I1.vtable
   (ref.func $m_m__void@supermethodcall.Sub)
  )

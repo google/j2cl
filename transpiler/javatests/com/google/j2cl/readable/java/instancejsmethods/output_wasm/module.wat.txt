@@ -1,17 +1,17 @@
  ;;; Code for instancejsmethods.MyInterface [type definition]
- (type $instancejsmethods.MyInterface.vtable (struct 
+ (type $instancejsmethods.MyInterface.vtable (struct
   (field $m_intfFoo__int (ref $function.m_intfFoo__int))
   )
  )
 
  ;;; Code for instancejsmethods.SuperParent [type definition]
- (type $instancejsmethods.SuperParent (struct_subtype 
-  (field $vtable (ref $instancejsmethods.SuperParent.vtable)) 
+ (type $instancejsmethods.SuperParent (struct_subtype
+  (field $vtable (ref $instancejsmethods.SuperParent.vtable))
   (field $itable (ref $instancejsmethods.SuperParent.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $java.lang.Object)
  )
- (type $instancejsmethods.SuperParent.vtable (struct_subtype 
+ (type $instancejsmethods.SuperParent.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -21,7 +21,7 @@
   (field $m_bar__int__int__int (ref $function.m_bar__int__int__int))
    $java.lang.Object.vtable)
  )
- (type $instancejsmethods.SuperParent.itable (struct_subtype 
+ (type $instancejsmethods.SuperParent.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -32,13 +32,13 @@
   $java.lang.Object.itable))
 
  ;;; Code for instancejsmethods.Main [type definition]
- (type $instancejsmethods.Main (struct_subtype 
-  (field $vtable (ref $instancejsmethods.Main.vtable)) 
+ (type $instancejsmethods.Main (struct_subtype
+  (field $vtable (ref $instancejsmethods.Main.vtable))
   (field $itable (ref $instancejsmethods.Main.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $java.lang.Object)
  )
- (type $instancejsmethods.Main.vtable (struct_subtype 
+ (type $instancejsmethods.Main.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -47,7 +47,7 @@
   (field $m_testCallBySuperParent__void (ref $function.m_testCallBySuperParent__void))
    $java.lang.Object.vtable)
  )
- (type $instancejsmethods.Main.itable (struct_subtype 
+ (type $instancejsmethods.Main.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -58,13 +58,13 @@
   $java.lang.Object.itable))
 
  ;;; Code for instancejsmethods.Parent [type definition]
- (type $instancejsmethods.Parent (struct_subtype 
-  (field $vtable (ref $instancejsmethods.Parent.vtable)) 
+ (type $instancejsmethods.Parent (struct_subtype
+  (field $vtable (ref $instancejsmethods.Parent.vtable))
   (field $itable (ref $instancejsmethods.Parent.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $instancejsmethods.SuperParent)
  )
- (type $instancejsmethods.Parent.vtable (struct_subtype 
+ (type $instancejsmethods.Parent.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -75,7 +75,7 @@
   (field $m_foo__int__int (ref $function.m_foo__int__int))
    $instancejsmethods.SuperParent.vtable)
  )
- (type $instancejsmethods.Parent.itable (struct_subtype 
+ (type $instancejsmethods.Parent.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -86,13 +86,13 @@
   $instancejsmethods.SuperParent.itable))
 
  ;;; Code for instancejsmethods.Child [type definition]
- (type $instancejsmethods.Child (struct_subtype 
-  (field $vtable (ref $instancejsmethods.Child.vtable)) 
+ (type $instancejsmethods.Child (struct_subtype
+  (field $vtable (ref $instancejsmethods.Child.vtable))
   (field $itable (ref $instancejsmethods.Child.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $instancejsmethods.Parent)
  )
- (type $instancejsmethods.Child.vtable (struct_subtype 
+ (type $instancejsmethods.Child.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -104,7 +104,7 @@
   (field $m_intfFoo__int (ref $function.m_intfFoo__int))
    $instancejsmethods.Parent.vtable)
  )
- (type $instancejsmethods.Child.itable (struct_subtype 
+ (type $instancejsmethods.Child.itable (struct_subtype
  (field $slot0 (ref $instancejsmethods.MyInterface.vtable))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -115,7 +115,7 @@
   $instancejsmethods.Parent.itable))
 
 ;;; Code for instancejsmethods.SuperParent [vtable.init]
-(global $instancejsmethods.SuperParent.vtable (ref $instancejsmethods.SuperParent.vtable) 
+(global $instancejsmethods.SuperParent.vtable (ref $instancejsmethods.SuperParent.vtable)
  (struct.new $instancejsmethods.SuperParent.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -128,7 +128,7 @@
 )
 
 ;;; Code for instancejsmethods.SuperParent [itable.init]
-(global $instancejsmethods.SuperParent.itable (ref $instancejsmethods.SuperParent.itable) (struct.new $instancejsmethods.SuperParent.itable 
+(global $instancejsmethods.SuperParent.itable (ref $instancejsmethods.SuperParent.itable) (struct.new $instancejsmethods.SuperParent.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -139,7 +139,7 @@
  ))
 
 ;;; Code for instancejsmethods.Parent [vtable.init]
-(global $instancejsmethods.Parent.vtable (ref $instancejsmethods.Parent.vtable) 
+(global $instancejsmethods.Parent.vtable (ref $instancejsmethods.Parent.vtable)
  (struct.new $instancejsmethods.Parent.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -153,7 +153,7 @@
 )
 
 ;;; Code for instancejsmethods.Parent [itable.init]
-(global $instancejsmethods.Parent.itable (ref $instancejsmethods.Parent.itable) (struct.new $instancejsmethods.Parent.itable 
+(global $instancejsmethods.Parent.itable (ref $instancejsmethods.Parent.itable) (struct.new $instancejsmethods.Parent.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -164,7 +164,7 @@
  ))
 
 ;;; Code for instancejsmethods.Child [vtable.init]
-(global $instancejsmethods.Child.vtable (ref $instancejsmethods.Child.vtable) 
+(global $instancejsmethods.Child.vtable (ref $instancejsmethods.Child.vtable)
  (struct.new $instancejsmethods.Child.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -179,7 +179,7 @@
 )
 
 ;;; Code for instancejsmethods.Child [itable.init]
-(global $instancejsmethods.Child.itable (ref $instancejsmethods.Child.itable) (struct.new $instancejsmethods.Child.itable 
+(global $instancejsmethods.Child.itable (ref $instancejsmethods.Child.itable) (struct.new $instancejsmethods.Child.itable
  (struct.new $instancejsmethods.MyInterface.vtable
   (ref.func $m_intfFoo__int@instancejsmethods.Child)
  )
@@ -192,7 +192,7 @@
  ))
 
 ;;; Code for instancejsmethods.Main [vtable.init]
-(global $instancejsmethods.Main.vtable (ref $instancejsmethods.Main.vtable) 
+(global $instancejsmethods.Main.vtable (ref $instancejsmethods.Main.vtable)
  (struct.new $instancejsmethods.Main.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -204,7 +204,7 @@
 )
 
 ;;; Code for instancejsmethods.Main [itable.init]
-(global $instancejsmethods.Main.itable (ref $instancejsmethods.Main.itable) (struct.new $instancejsmethods.Main.itable 
+(global $instancejsmethods.Main.itable (ref $instancejsmethods.Main.itable) (struct.new $instancejsmethods.Main.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

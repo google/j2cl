@@ -1,11 +1,11 @@
  ;;; Code for publicconstructor.PublicConstructor [type definition]
- (type $publicconstructor.PublicConstructor (struct_subtype 
-  (field $vtable (ref $publicconstructor.PublicConstructor.vtable)) 
+ (type $publicconstructor.PublicConstructor (struct_subtype
+  (field $vtable (ref $publicconstructor.PublicConstructor.vtable))
   (field $itable (ref $publicconstructor.PublicConstructor.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $java.lang.Object)
  )
- (type $publicconstructor.PublicConstructor.vtable (struct_subtype 
+ (type $publicconstructor.PublicConstructor.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -13,7 +13,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
- (type $publicconstructor.PublicConstructor.itable (struct_subtype 
+ (type $publicconstructor.PublicConstructor.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -24,7 +24,7 @@
   $java.lang.Object.itable))
 
 ;;; Code for publicconstructor.PublicConstructor [vtable.init]
-(global $publicconstructor.PublicConstructor.vtable (ref $publicconstructor.PublicConstructor.vtable) 
+(global $publicconstructor.PublicConstructor.vtable (ref $publicconstructor.PublicConstructor.vtable)
  (struct.new $publicconstructor.PublicConstructor.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -35,7 +35,7 @@
 )
 
 ;;; Code for publicconstructor.PublicConstructor [itable.init]
-(global $publicconstructor.PublicConstructor.itable (ref $publicconstructor.PublicConstructor.itable) (struct.new $publicconstructor.PublicConstructor.itable 
+(global $publicconstructor.PublicConstructor.itable (ref $publicconstructor.PublicConstructor.itable) (struct.new $publicconstructor.PublicConstructor.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

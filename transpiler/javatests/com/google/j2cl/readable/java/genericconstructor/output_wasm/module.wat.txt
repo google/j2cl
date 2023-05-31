@@ -1,11 +1,11 @@
  ;;; Code for genericconstructor.GenericConstructor [type definition]
- (type $genericconstructor.GenericConstructor (struct_subtype 
-  (field $vtable (ref $genericconstructor.GenericConstructor.vtable)) 
+ (type $genericconstructor.GenericConstructor (struct_subtype
+  (field $vtable (ref $genericconstructor.GenericConstructor.vtable))
   (field $itable (ref $genericconstructor.GenericConstructor.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $java.lang.Object)
  )
- (type $genericconstructor.GenericConstructor.vtable (struct_subtype 
+ (type $genericconstructor.GenericConstructor.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -14,7 +14,7 @@
   (field $m_test__void (ref $function.m_test__void))
    $java.lang.Object.vtable)
  )
- (type $genericconstructor.GenericConstructor.itable (struct_subtype 
+ (type $genericconstructor.GenericConstructor.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -25,7 +25,7 @@
   $java.lang.Object.itable))
 
 ;;; Code for genericconstructor.GenericConstructor [vtable.init]
-(global $genericconstructor.GenericConstructor.vtable (ref $genericconstructor.GenericConstructor.vtable) 
+(global $genericconstructor.GenericConstructor.vtable (ref $genericconstructor.GenericConstructor.vtable)
  (struct.new $genericconstructor.GenericConstructor.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -37,7 +37,7 @@
 )
 
 ;;; Code for genericconstructor.GenericConstructor [itable.init]
-(global $genericconstructor.GenericConstructor.itable (ref $genericconstructor.GenericConstructor.itable) (struct.new $genericconstructor.GenericConstructor.itable 
+(global $genericconstructor.GenericConstructor.itable (ref $genericconstructor.GenericConstructor.itable) (struct.new $genericconstructor.GenericConstructor.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

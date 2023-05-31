@@ -1,11 +1,11 @@
  ;;; Code for subclassgenericclass.GenericClass [type definition]
- (type $subclassgenericclass.GenericClass (struct_subtype 
-  (field $vtable (ref $subclassgenericclass.GenericClass.vtable)) 
+ (type $subclassgenericclass.GenericClass (struct_subtype
+  (field $vtable (ref $subclassgenericclass.GenericClass.vtable))
   (field $itable (ref $subclassgenericclass.GenericClass.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $java.lang.Object)
  )
- (type $subclassgenericclass.GenericClass.vtable (struct_subtype 
+ (type $subclassgenericclass.GenericClass.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -13,7 +13,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
- (type $subclassgenericclass.GenericClass.itable (struct_subtype 
+ (type $subclassgenericclass.GenericClass.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -24,13 +24,13 @@
   $java.lang.Object.itable))
 
  ;;; Code for subclassgenericclass.GenericSubclassGenericClass [type definition]
- (type $subclassgenericclass.GenericSubclassGenericClass (struct_subtype 
-  (field $vtable (ref $subclassgenericclass.GenericSubclassGenericClass.vtable)) 
+ (type $subclassgenericclass.GenericSubclassGenericClass (struct_subtype
+  (field $vtable (ref $subclassgenericclass.GenericSubclassGenericClass.vtable))
   (field $itable (ref $subclassgenericclass.GenericSubclassGenericClass.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $subclassgenericclass.GenericClass)
  )
- (type $subclassgenericclass.GenericSubclassGenericClass.vtable (struct_subtype 
+ (type $subclassgenericclass.GenericSubclassGenericClass.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -38,7 +38,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $subclassgenericclass.GenericClass.vtable)
  )
- (type $subclassgenericclass.GenericSubclassGenericClass.itable (struct_subtype 
+ (type $subclassgenericclass.GenericSubclassGenericClass.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -49,13 +49,13 @@
   $subclassgenericclass.GenericClass.itable))
 
  ;;; Code for subclassgenericclass.SubclassGenericClass [type definition]
- (type $subclassgenericclass.SubclassGenericClass (struct_subtype 
-  (field $vtable (ref $subclassgenericclass.SubclassGenericClass.vtable)) 
+ (type $subclassgenericclass.SubclassGenericClass (struct_subtype
+  (field $vtable (ref $subclassgenericclass.SubclassGenericClass.vtable))
   (field $itable (ref $subclassgenericclass.SubclassGenericClass.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $subclassgenericclass.GenericClass)
  )
- (type $subclassgenericclass.SubclassGenericClass.vtable (struct_subtype 
+ (type $subclassgenericclass.SubclassGenericClass.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -63,7 +63,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $subclassgenericclass.GenericClass.vtable)
  )
- (type $subclassgenericclass.SubclassGenericClass.itable (struct_subtype 
+ (type $subclassgenericclass.SubclassGenericClass.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -74,7 +74,7 @@
   $subclassgenericclass.GenericClass.itable))
 
 ;;; Code for subclassgenericclass.GenericClass [vtable.init]
-(global $subclassgenericclass.GenericClass.vtable (ref $subclassgenericclass.GenericClass.vtable) 
+(global $subclassgenericclass.GenericClass.vtable (ref $subclassgenericclass.GenericClass.vtable)
  (struct.new $subclassgenericclass.GenericClass.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -85,7 +85,7 @@
 )
 
 ;;; Code for subclassgenericclass.GenericClass [itable.init]
-(global $subclassgenericclass.GenericClass.itable (ref $subclassgenericclass.GenericClass.itable) (struct.new $subclassgenericclass.GenericClass.itable 
+(global $subclassgenericclass.GenericClass.itable (ref $subclassgenericclass.GenericClass.itable) (struct.new $subclassgenericclass.GenericClass.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -96,7 +96,7 @@
  ))
 
 ;;; Code for subclassgenericclass.GenericSubclassGenericClass [vtable.init]
-(global $subclassgenericclass.GenericSubclassGenericClass.vtable (ref $subclassgenericclass.GenericSubclassGenericClass.vtable) 
+(global $subclassgenericclass.GenericSubclassGenericClass.vtable (ref $subclassgenericclass.GenericSubclassGenericClass.vtable)
  (struct.new $subclassgenericclass.GenericSubclassGenericClass.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -107,7 +107,7 @@
 )
 
 ;;; Code for subclassgenericclass.GenericSubclassGenericClass [itable.init]
-(global $subclassgenericclass.GenericSubclassGenericClass.itable (ref $subclassgenericclass.GenericSubclassGenericClass.itable) (struct.new $subclassgenericclass.GenericSubclassGenericClass.itable 
+(global $subclassgenericclass.GenericSubclassGenericClass.itable (ref $subclassgenericclass.GenericSubclassGenericClass.itable) (struct.new $subclassgenericclass.GenericSubclassGenericClass.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -118,7 +118,7 @@
  ))
 
 ;;; Code for subclassgenericclass.SubclassGenericClass [vtable.init]
-(global $subclassgenericclass.SubclassGenericClass.vtable (ref $subclassgenericclass.SubclassGenericClass.vtable) 
+(global $subclassgenericclass.SubclassGenericClass.vtable (ref $subclassgenericclass.SubclassGenericClass.vtable)
  (struct.new $subclassgenericclass.SubclassGenericClass.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -129,7 +129,7 @@
 )
 
 ;;; Code for subclassgenericclass.SubclassGenericClass [itable.init]
-(global $subclassgenericclass.SubclassGenericClass.itable (ref $subclassgenericclass.SubclassGenericClass.itable) (struct.new $subclassgenericclass.SubclassGenericClass.itable 
+(global $subclassgenericclass.SubclassGenericClass.itable (ref $subclassgenericclass.SubclassGenericClass.itable) (struct.new $subclassgenericclass.SubclassGenericClass.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

@@ -1,17 +1,17 @@
  ;;; Code for genericinterfaceabstractimpl.MyInterface [type definition]
- (type $genericinterfaceabstractimpl.MyInterface.vtable (struct 
+ (type $genericinterfaceabstractimpl.MyInterface.vtable (struct
   (field $m_fun__java_lang_Object__java_lang_Object (ref $function.m_fun__java_lang_Object__java_lang_Object))
   )
  )
 
  ;;; Code for genericinterfaceabstractimpl.AbstractImpl [type definition]
- (type $genericinterfaceabstractimpl.AbstractImpl (struct_subtype 
-  (field $vtable (ref $genericinterfaceabstractimpl.AbstractImpl.vtable)) 
+ (type $genericinterfaceabstractimpl.AbstractImpl (struct_subtype
+  (field $vtable (ref $genericinterfaceabstractimpl.AbstractImpl.vtable))
   (field $itable (ref $genericinterfaceabstractimpl.AbstractImpl.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $java.lang.Object)
  )
- (type $genericinterfaceabstractimpl.AbstractImpl.vtable (struct_subtype 
+ (type $genericinterfaceabstractimpl.AbstractImpl.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -19,7 +19,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
- (type $genericinterfaceabstractimpl.AbstractImpl.itable (struct_subtype 
+ (type $genericinterfaceabstractimpl.AbstractImpl.itable (struct_subtype
  (field $slot0 (ref $genericinterfaceabstractimpl.MyInterface.vtable))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))

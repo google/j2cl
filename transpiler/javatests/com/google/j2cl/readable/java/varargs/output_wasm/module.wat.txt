@@ -1,18 +1,18 @@
  ;;; Code for varargs.Varargs.FunctionalInterface [type definition]
- (type $varargs.Varargs.FunctionalInterface.vtable (struct 
+ (type $varargs.Varargs.FunctionalInterface.vtable (struct
   (field $m_apply__arrayOf_java_lang_String__void (ref $function.m_apply__arrayOf_java_lang_String__void))
   )
  )
 
  ;;; Code for varargs.Varargs [type definition]
- (type $varargs.Varargs (struct_subtype 
-  (field $vtable (ref $varargs.Varargs.vtable)) 
+ (type $varargs.Varargs (struct_subtype
+  (field $vtable (ref $varargs.Varargs.vtable))
   (field $itable (ref $varargs.Varargs.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_args__varargs_Varargs_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
    $java.lang.Object)
  )
- (type $varargs.Varargs.vtable (struct_subtype 
+ (type $varargs.Varargs.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -26,7 +26,7 @@
   (field $m_main__void (ref $function.m_main__void))
    $java.lang.Object.vtable)
  )
- (type $varargs.Varargs.itable (struct_subtype 
+ (type $varargs.Varargs.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -37,14 +37,14 @@
   $java.lang.Object.itable))
 
  ;;; Code for varargs.Varargs.$LambdaImplementor$1 [type definition]
- (type $varargs.Varargs.$LambdaImplementor$1 (struct_subtype 
-  (field $vtable (ref $varargs.Varargs.$LambdaImplementor$1.vtable)) 
+ (type $varargs.Varargs.$LambdaImplementor$1 (struct_subtype
+  (field $vtable (ref $varargs.Varargs.$LambdaImplementor$1.vtable))
   (field $itable (ref $varargs.Varargs.$LambdaImplementor$1.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__varargs_Varargs_$LambdaImplementor$1 (ref null $varargs.Varargs))
    $java.lang.Object)
  )
- (type $varargs.Varargs.$LambdaImplementor$1.vtable (struct_subtype 
+ (type $varargs.Varargs.$LambdaImplementor$1.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -53,7 +53,7 @@
   (field $m_apply__arrayOf_java_lang_String__void (ref $function.m_apply__arrayOf_java_lang_String__void))
    $java.lang.Object.vtable)
  )
- (type $varargs.Varargs.$LambdaImplementor$1.itable (struct_subtype 
+ (type $varargs.Varargs.$LambdaImplementor$1.itable (struct_subtype
  (field $slot0 (ref $varargs.Varargs.FunctionalInterface.vtable))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -64,14 +64,14 @@
   $java.lang.Object.itable))
 
  ;;; Code for varargs.Child [type definition]
- (type $varargs.Child (struct_subtype 
-  (field $vtable (ref $varargs.Child.vtable)) 
+ (type $varargs.Child (struct_subtype
+  (field $vtable (ref $varargs.Child.vtable))
   (field $itable (ref $varargs.Child.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_args__varargs_Varargs_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
    $varargs.Varargs)
  )
- (type $varargs.Child.vtable (struct_subtype 
+ (type $varargs.Child.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -85,7 +85,7 @@
   (field $m_main__void (ref $function.m_main__void))
    $varargs.Varargs.vtable)
  )
- (type $varargs.Child.itable (struct_subtype 
+ (type $varargs.Child.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -96,7 +96,7 @@
   $varargs.Varargs.itable))
 
 ;;; Code for varargs.Varargs [vtable.init]
-(global $varargs.Varargs.vtable (ref $varargs.Varargs.vtable) 
+(global $varargs.Varargs.vtable (ref $varargs.Varargs.vtable)
  (struct.new $varargs.Varargs.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -113,7 +113,7 @@
 )
 
 ;;; Code for varargs.Varargs [itable.init]
-(global $varargs.Varargs.itable (ref $varargs.Varargs.itable) (struct.new $varargs.Varargs.itable 
+(global $varargs.Varargs.itable (ref $varargs.Varargs.itable) (struct.new $varargs.Varargs.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -124,7 +124,7 @@
  ))
 
 ;;; Code for varargs.Child [vtable.init]
-(global $varargs.Child.vtable (ref $varargs.Child.vtable) 
+(global $varargs.Child.vtable (ref $varargs.Child.vtable)
  (struct.new $varargs.Child.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -141,7 +141,7 @@
 )
 
 ;;; Code for varargs.Child [itable.init]
-(global $varargs.Child.itable (ref $varargs.Child.itable) (struct.new $varargs.Child.itable 
+(global $varargs.Child.itable (ref $varargs.Child.itable) (struct.new $varargs.Child.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -152,7 +152,7 @@
  ))
 
 ;;; Code for varargs.Varargs.$LambdaImplementor$1 [vtable.init]
-(global $varargs.Varargs.$LambdaImplementor$1.vtable (ref $varargs.Varargs.$LambdaImplementor$1.vtable) 
+(global $varargs.Varargs.$LambdaImplementor$1.vtable (ref $varargs.Varargs.$LambdaImplementor$1.vtable)
  (struct.new $varargs.Varargs.$LambdaImplementor$1.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -164,7 +164,7 @@
 )
 
 ;;; Code for varargs.Varargs.$LambdaImplementor$1 [itable.init]
-(global $varargs.Varargs.$LambdaImplementor$1.itable (ref $varargs.Varargs.$LambdaImplementor$1.itable) (struct.new $varargs.Varargs.$LambdaImplementor$1.itable 
+(global $varargs.Varargs.$LambdaImplementor$1.itable (ref $varargs.Varargs.$LambdaImplementor$1.itable) (struct.new $varargs.Varargs.$LambdaImplementor$1.itable
  (struct.new $varargs.Varargs.FunctionalInterface.vtable
   (ref.func $m_apply__arrayOf_java_lang_String__void@varargs.Varargs.$LambdaImplementor$1)
  )

@@ -1,13 +1,13 @@
  ;;; Code for synchronizedmethod.SynchronizedMethod [type definition]
- (type $synchronizedmethod.SynchronizedMethod (struct_subtype 
-  (field $vtable (ref $synchronizedmethod.SynchronizedMethod.vtable)) 
+ (type $synchronizedmethod.SynchronizedMethod (struct_subtype
+  (field $vtable (ref $synchronizedmethod.SynchronizedMethod.vtable))
   (field $itable (ref $synchronizedmethod.SynchronizedMethod.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_a__synchronizedmethod_SynchronizedMethod_ (mut i32))
   (field $f_b__synchronizedmethod_SynchronizedMethod_ (mut i32))
    $java.lang.Object)
  )
- (type $synchronizedmethod.SynchronizedMethod.vtable (struct_subtype 
+ (type $synchronizedmethod.SynchronizedMethod.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -16,7 +16,7 @@
   (field $m_method__void (ref $function.m_method__void))
    $java.lang.Object.vtable)
  )
- (type $synchronizedmethod.SynchronizedMethod.itable (struct_subtype 
+ (type $synchronizedmethod.SynchronizedMethod.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -27,7 +27,7 @@
   $java.lang.Object.itable))
 
 ;;; Code for synchronizedmethod.SynchronizedMethod [vtable.init]
-(global $synchronizedmethod.SynchronizedMethod.vtable (ref $synchronizedmethod.SynchronizedMethod.vtable) 
+(global $synchronizedmethod.SynchronizedMethod.vtable (ref $synchronizedmethod.SynchronizedMethod.vtable)
  (struct.new $synchronizedmethod.SynchronizedMethod.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -39,7 +39,7 @@
 )
 
 ;;; Code for synchronizedmethod.SynchronizedMethod [itable.init]
-(global $synchronizedmethod.SynchronizedMethod.itable (ref $synchronizedmethod.SynchronizedMethod.itable) (struct.new $synchronizedmethod.SynchronizedMethod.itable 
+(global $synchronizedmethod.SynchronizedMethod.itable (ref $synchronizedmethod.SynchronizedMethod.itable) (struct.new $synchronizedmethod.SynchronizedMethod.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

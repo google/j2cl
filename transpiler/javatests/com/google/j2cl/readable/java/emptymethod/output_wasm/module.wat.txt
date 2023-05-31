@@ -1,11 +1,11 @@
  ;;; Code for emptymethod.EmptyMethod [type definition]
- (type $emptymethod.EmptyMethod (struct_subtype 
-  (field $vtable (ref $emptymethod.EmptyMethod.vtable)) 
+ (type $emptymethod.EmptyMethod (struct_subtype
+  (field $vtable (ref $emptymethod.EmptyMethod.vtable))
   (field $itable (ref $emptymethod.EmptyMethod.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $java.lang.Object)
  )
- (type $emptymethod.EmptyMethod.vtable (struct_subtype 
+ (type $emptymethod.EmptyMethod.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -13,7 +13,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
- (type $emptymethod.EmptyMethod.itable (struct_subtype 
+ (type $emptymethod.EmptyMethod.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -24,7 +24,7 @@
   $java.lang.Object.itable))
 
 ;;; Code for emptymethod.EmptyMethod [vtable.init]
-(global $emptymethod.EmptyMethod.vtable (ref $emptymethod.EmptyMethod.vtable) 
+(global $emptymethod.EmptyMethod.vtable (ref $emptymethod.EmptyMethod.vtable)
  (struct.new $emptymethod.EmptyMethod.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -35,7 +35,7 @@
 )
 
 ;;; Code for emptymethod.EmptyMethod [itable.init]
-(global $emptymethod.EmptyMethod.itable (ref $emptymethod.EmptyMethod.itable) (struct.new $emptymethod.EmptyMethod.itable 
+(global $emptymethod.EmptyMethod.itable (ref $emptymethod.EmptyMethod.itable) (struct.new $emptymethod.EmptyMethod.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

@@ -1,11 +1,11 @@
  ;;; Code for whilestatement.WhileStatement [type definition]
- (type $whilestatement.WhileStatement (struct_subtype 
-  (field $vtable (ref $whilestatement.WhileStatement.vtable)) 
+ (type $whilestatement.WhileStatement (struct_subtype
+  (field $vtable (ref $whilestatement.WhileStatement.vtable))
   (field $itable (ref $whilestatement.WhileStatement.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $java.lang.Object)
  )
- (type $whilestatement.WhileStatement.vtable (struct_subtype 
+ (type $whilestatement.WhileStatement.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -14,7 +14,7 @@
   (field $m_test__void (ref $function.m_test__void))
    $java.lang.Object.vtable)
  )
- (type $whilestatement.WhileStatement.itable (struct_subtype 
+ (type $whilestatement.WhileStatement.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -25,7 +25,7 @@
   $java.lang.Object.itable))
 
 ;;; Code for whilestatement.WhileStatement [vtable.init]
-(global $whilestatement.WhileStatement.vtable (ref $whilestatement.WhileStatement.vtable) 
+(global $whilestatement.WhileStatement.vtable (ref $whilestatement.WhileStatement.vtable)
  (struct.new $whilestatement.WhileStatement.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -37,7 +37,7 @@
 )
 
 ;;; Code for whilestatement.WhileStatement [itable.init]
-(global $whilestatement.WhileStatement.itable (ref $whilestatement.WhileStatement.itable) (struct.new $whilestatement.WhileStatement.itable 
+(global $whilestatement.WhileStatement.itable (ref $whilestatement.WhileStatement.itable) (struct.new $whilestatement.WhileStatement.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -102,7 +102,6 @@
      )
     )
     (br 0)
-    
    )
   )
  )

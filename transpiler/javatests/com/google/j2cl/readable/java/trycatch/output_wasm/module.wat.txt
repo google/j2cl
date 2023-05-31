@@ -1,11 +1,11 @@
  ;;; Code for trycatch.TryCatch [type definition]
- (type $trycatch.TryCatch (struct_subtype 
-  (field $vtable (ref $trycatch.TryCatch.vtable)) 
+ (type $trycatch.TryCatch (struct_subtype
+  (field $vtable (ref $trycatch.TryCatch.vtable))
   (field $itable (ref $trycatch.TryCatch.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $java.lang.Object)
  )
- (type $trycatch.TryCatch.vtable (struct_subtype 
+ (type $trycatch.TryCatch.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -23,7 +23,7 @@
   (field $m_testThrowBoundGenerics__void (ref $function.m_testThrowBoundGenerics__void))
    $java.lang.Object.vtable)
  )
- (type $trycatch.TryCatch.itable (struct_subtype 
+ (type $trycatch.TryCatch.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -34,13 +34,13 @@
   $java.lang.Object.itable))
 
  ;;; Code for trycatch.TryCatch.ClosableThing [type definition]
- (type $trycatch.TryCatch.ClosableThing (struct_subtype 
-  (field $vtable (ref $trycatch.TryCatch.ClosableThing.vtable)) 
+ (type $trycatch.TryCatch.ClosableThing (struct_subtype
+  (field $vtable (ref $trycatch.TryCatch.ClosableThing.vtable))
   (field $itable (ref $trycatch.TryCatch.ClosableThing.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $java.lang.Object)
  )
- (type $trycatch.TryCatch.ClosableThing.vtable (struct_subtype 
+ (type $trycatch.TryCatch.ClosableThing.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -49,7 +49,7 @@
   (field $m_close__void (ref $function.m_close__void))
    $java.lang.Object.vtable)
  )
- (type $trycatch.TryCatch.ClosableThing.itable (struct_subtype 
+ (type $trycatch.TryCatch.ClosableThing.itable (struct_subtype
  (field $slot0 (ref $java.lang.AutoCloseable.vtable))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -60,7 +60,7 @@
   $java.lang.Object.itable))
 
 ;;; Code for trycatch.TryCatch [vtable.init]
-(global $trycatch.TryCatch.vtable (ref $trycatch.TryCatch.vtable) 
+(global $trycatch.TryCatch.vtable (ref $trycatch.TryCatch.vtable)
  (struct.new $trycatch.TryCatch.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -81,7 +81,7 @@
 )
 
 ;;; Code for trycatch.TryCatch [itable.init]
-(global $trycatch.TryCatch.itable (ref $trycatch.TryCatch.itable) (struct.new $trycatch.TryCatch.itable 
+(global $trycatch.TryCatch.itable (ref $trycatch.TryCatch.itable) (struct.new $trycatch.TryCatch.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -92,7 +92,7 @@
  ))
 
 ;;; Code for trycatch.TryCatch.ClosableThing [vtable.init]
-(global $trycatch.TryCatch.ClosableThing.vtable (ref $trycatch.TryCatch.ClosableThing.vtable) 
+(global $trycatch.TryCatch.ClosableThing.vtable (ref $trycatch.TryCatch.ClosableThing.vtable)
  (struct.new $trycatch.TryCatch.ClosableThing.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -104,7 +104,7 @@
 )
 
 ;;; Code for trycatch.TryCatch.ClosableThing [itable.init]
-(global $trycatch.TryCatch.ClosableThing.itable (ref $trycatch.TryCatch.ClosableThing.itable) (struct.new $trycatch.TryCatch.ClosableThing.itable 
+(global $trycatch.TryCatch.ClosableThing.itable (ref $trycatch.TryCatch.ClosableThing.itable) (struct.new $trycatch.TryCatch.ClosableThing.itable
  (struct.new $java.lang.AutoCloseable.vtable
   (ref.func $m_close__void@trycatch.TryCatch.ClosableThing)
  )
@@ -166,8 +166,7 @@
  (local.set $this (ref.cast_static $trycatch.TryCatch (local.get $this.untyped)))
  (block
   ;;@ trycatch/TryCatch.java:21:4
-  (try (do 
-   
+  (try (do
    (block
     ;;@ trycatch/TryCatch.java:22:6
     (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (call $$create__@java.lang.ClassCastException ))
@@ -223,8 +222,7 @@
  (local.set $this (ref.cast_static $trycatch.TryCatch (local.get $this.untyped)))
  (block
   ;;@ trycatch/TryCatch.java:31:4
-  (try (do 
-   
+  (try (do
    (block
     ;;@ trycatch/TryCatch.java:32:6
     (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (call $$create__@java.lang.ClassCastException ))
@@ -236,8 +234,7 @@
    )
   )))
   ;;@ trycatch/TryCatch.java:37:4
-  (try (do 
-   
+  (try (do
    (block
     ;;@ trycatch/TryCatch.java:38:6
     (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (call $$create__@java.lang.ClassCastException ))
@@ -273,8 +270,7 @@
  (local.set $this (ref.cast_static $trycatch.TryCatch (local.get $this.untyped)))
  (block
   ;;@ trycatch/TryCatch.java:47:4
-  (try (do 
-   
+  (try (do
    (block
     ;;@ trycatch/TryCatch.java:48:6
     (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (call $$create__@java.lang.ClassCastException ))
@@ -313,8 +309,7 @@
    ;;@ trycatch/TryCatch.java:55:4
    (block $FINALLY.0.BREAK
     ;;@ trycatch/TryCatch.java:55:4
-    (try (do 
-     
+    (try (do
      (block
       ;;@ trycatch/TryCatch.java:55:4
       
@@ -366,8 +361,7 @@
  (local.set $this (ref.cast_static $trycatch.TryCatch (local.get $this.untyped)))
  (block
   ;;@ trycatch/TryCatch.java:67:4
-  (try (do 
-   
+  (try (do
    (block
     ;;@ trycatch/TryCatch.java:67:4
     (local.set $$primaryExc (ref.null $java.lang.Throwable))
@@ -381,12 +375,10 @@
      ;;@ trycatch/TryCatch.java:67:4
      (block $FINALLY.0.BREAK
       ;;@ trycatch/TryCatch.java:67:4
-      (try (do 
-       
+      (try (do
        (block
         ;;@ trycatch/TryCatch.java:67:4
-        (try (do 
-         
+        (try (do
          (block
           ;;@ trycatch/TryCatch.java:67:4
           (local.set $thing (call $$create__@trycatch.TryCatch.ClosableThing ))
@@ -495,8 +487,7 @@
   ;;@ trycatch/TryCatch.java:77:4
   (local.set $thing2 (call $$create__@trycatch.TryCatch.ClosableThing ))
   ;;@ trycatch/TryCatch.java:78:4
-  (try (do 
-   
+  (try (do
    (block
     ;;@ trycatch/TryCatch.java:78:4
     (local.set $$primaryExc (ref.null $java.lang.Throwable))
@@ -510,12 +501,10 @@
      ;;@ trycatch/TryCatch.java:78:4
      (block $FINALLY.0.BREAK
       ;;@ trycatch/TryCatch.java:78:4
-      (try (do 
-       
+      (try (do
        (block
         ;;@ trycatch/TryCatch.java:78:4
-        (try (do 
-         
+        (try (do
          (block
           ;;@ trycatch/TryCatch.java:78:4
           (local.set $$resource (local.get $thing))
@@ -617,8 +606,7 @@
  (local.set $this (ref.cast_static $trycatch.TryCatch (local.get $this.untyped)))
  (block
   ;;@ trycatch/TryCatch.java:88:4
-  (try (do 
-   
+  (try (do
    (block
     ;;@ trycatch/TryCatch.java:88:4
     (local.set $$primaryExc (ref.null $java.lang.Throwable))
@@ -630,12 +618,10 @@
      ;;@ trycatch/TryCatch.java:88:4
      (block $FINALLY.0.BREAK
       ;;@ trycatch/TryCatch.java:88:4
-      (try (do 
-       
+      (try (do
        (block
         ;;@ trycatch/TryCatch.java:88:4
-        (try (do 
-         
+        (try (do
          (block
           ;;@ trycatch/TryCatch.java:88:4
           (local.set $$resource (global.get $f_closableThing__trycatch_TryCatch_))
@@ -728,8 +714,7 @@
  (local.set $this (ref.cast_static $trycatch.TryCatch (local.get $this.untyped)))
  (block
   ;;@ trycatch/TryCatch.java:96:4
-  (try (do 
-   
+  (try (do
    (block
     ;;@ trycatch/TryCatch.java:97:6
     (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (call $$create__@java.lang.Exception ))
@@ -745,8 +730,7 @@
        ;;@ trycatch/TryCatch.java:98:27
        (local.set $ae (ref.cast_static $java.lang.Exception (local.get $__$exc)))
        ;;@ trycatch/TryCatch.java:99:6
-       (try (do 
-        
+       (try (do
         (block
          ;;@ trycatch/TryCatch.java:100:8
          (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (call $$create__@java.lang.Exception ))

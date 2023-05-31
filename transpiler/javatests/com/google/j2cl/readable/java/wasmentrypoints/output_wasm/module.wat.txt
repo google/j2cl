@@ -1,11 +1,11 @@
  ;;; Code for wasmentrypoints.WasmEntryPoints [type definition]
- (type $wasmentrypoints.WasmEntryPoints (struct_subtype 
-  (field $vtable (ref $wasmentrypoints.WasmEntryPoints.vtable)) 
+ (type $wasmentrypoints.WasmEntryPoints (struct_subtype
+  (field $vtable (ref $wasmentrypoints.WasmEntryPoints.vtable))
   (field $itable (ref $wasmentrypoints.WasmEntryPoints.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $java.lang.Object)
  )
- (type $wasmentrypoints.WasmEntryPoints.vtable (struct_subtype 
+ (type $wasmentrypoints.WasmEntryPoints.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -13,7 +13,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
- (type $wasmentrypoints.WasmEntryPoints.itable (struct_subtype 
+ (type $wasmentrypoints.WasmEntryPoints.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -24,7 +24,7 @@
   $java.lang.Object.itable))
 
 ;;; Code for wasmentrypoints.WasmEntryPoints [vtable.init]
-(global $wasmentrypoints.WasmEntryPoints.vtable (ref $wasmentrypoints.WasmEntryPoints.vtable) 
+(global $wasmentrypoints.WasmEntryPoints.vtable (ref $wasmentrypoints.WasmEntryPoints.vtable)
  (struct.new $wasmentrypoints.WasmEntryPoints.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -35,7 +35,7 @@
 )
 
 ;;; Code for wasmentrypoints.WasmEntryPoints [itable.init]
-(global $wasmentrypoints.WasmEntryPoints.itable (ref $wasmentrypoints.WasmEntryPoints.itable) (struct.new $wasmentrypoints.WasmEntryPoints.itable 
+(global $wasmentrypoints.WasmEntryPoints.itable (ref $wasmentrypoints.WasmEntryPoints.itable) (struct.new $wasmentrypoints.WasmEntryPoints.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

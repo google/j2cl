@@ -1,6 +1,6 @@
  ;;; Code for strings.Strings [type definition]
- (type $strings.Strings (struct_subtype 
-  (field $vtable (ref $strings.Strings.vtable)) 
+ (type $strings.Strings (struct_subtype
+  (field $vtable (ref $strings.Strings.vtable))
   (field $itable (ref $strings.Strings.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_someString__strings_Strings_ (ref null $java.lang.String))
@@ -8,7 +8,7 @@
   (field $f_wideColon__strings_Strings_ (ref null $java.lang.String))
    $java.lang.Object)
  )
- (type $strings.Strings.vtable (struct_subtype 
+ (type $strings.Strings.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -17,7 +17,7 @@
   (field $m_test__void (ref $function.m_test__void))
    $java.lang.Object.vtable)
  )
- (type $strings.Strings.itable (struct_subtype 
+ (type $strings.Strings.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -28,14 +28,14 @@
   $java.lang.Object.itable))
 
  ;;; Code for strings.Strings.StringHolder [type definition]
- (type $strings.Strings.StringHolder (struct_subtype 
-  (field $vtable (ref $strings.Strings.StringHolder.vtable)) 
+ (type $strings.Strings.StringHolder (struct_subtype
+  (field $vtable (ref $strings.Strings.StringHolder.vtable))
   (field $itable (ref $strings.Strings.StringHolder.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_s__strings_Strings_StringHolder (mut (ref null $java.lang.String)))
    $java.lang.Object)
  )
- (type $strings.Strings.StringHolder.vtable (struct_subtype 
+ (type $strings.Strings.StringHolder.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -43,7 +43,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
- (type $strings.Strings.StringHolder.itable (struct_subtype 
+ (type $strings.Strings.StringHolder.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -54,7 +54,7 @@
   $java.lang.Object.itable))
 
 ;;; Code for strings.Strings [vtable.init]
-(global $strings.Strings.vtable (ref $strings.Strings.vtable) 
+(global $strings.Strings.vtable (ref $strings.Strings.vtable)
  (struct.new $strings.Strings.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -66,7 +66,7 @@
 )
 
 ;;; Code for strings.Strings [itable.init]
-(global $strings.Strings.itable (ref $strings.Strings.itable) (struct.new $strings.Strings.itable 
+(global $strings.Strings.itable (ref $strings.Strings.itable) (struct.new $strings.Strings.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -77,7 +77,7 @@
  ))
 
 ;;; Code for strings.Strings.StringHolder [vtable.init]
-(global $strings.Strings.StringHolder.vtable (ref $strings.Strings.StringHolder.vtable) 
+(global $strings.Strings.StringHolder.vtable (ref $strings.Strings.StringHolder.vtable)
  (struct.new $strings.Strings.StringHolder.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -88,7 +88,7 @@
 )
 
 ;;; Code for strings.Strings.StringHolder [itable.init]
-(global $strings.Strings.StringHolder.itable (ref $strings.Strings.StringHolder.itable) (struct.new $strings.Strings.StringHolder.itable 
+(global $strings.Strings.StringHolder.itable (ref $strings.Strings.StringHolder.itable) (struct.new $strings.Strings.StringHolder.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

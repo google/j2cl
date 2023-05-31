@@ -1,12 +1,12 @@
  ;;; Code for supercallnondefault.Parent [type definition]
- (type $supercallnondefault.Parent (struct_subtype 
-  (field $vtable (ref $supercallnondefault.Parent.vtable)) 
+ (type $supercallnondefault.Parent (struct_subtype
+  (field $vtable (ref $supercallnondefault.Parent.vtable))
   (field $itable (ref $supercallnondefault.Parent.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_field__supercallnondefault_Parent i32)
    $java.lang.Object)
  )
- (type $supercallnondefault.Parent.vtable (struct_subtype 
+ (type $supercallnondefault.Parent.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -14,7 +14,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $java.lang.Object.vtable)
  )
- (type $supercallnondefault.Parent.itable (struct_subtype 
+ (type $supercallnondefault.Parent.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -25,14 +25,14 @@
   $java.lang.Object.itable))
 
  ;;; Code for supercallnondefault.Child [type definition]
- (type $supercallnondefault.Child (struct_subtype 
-  (field $vtable (ref $supercallnondefault.Child.vtable)) 
+ (type $supercallnondefault.Child (struct_subtype
+  (field $vtable (ref $supercallnondefault.Child.vtable))
   (field $itable (ref $supercallnondefault.Child.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_field__supercallnondefault_Parent i32)
    $supercallnondefault.Parent)
  )
- (type $supercallnondefault.Child.vtable (struct_subtype 
+ (type $supercallnondefault.Child.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -40,7 +40,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
    $supercallnondefault.Parent.vtable)
  )
- (type $supercallnondefault.Child.itable (struct_subtype 
+ (type $supercallnondefault.Child.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -51,7 +51,7 @@
   $supercallnondefault.Parent.itable))
 
 ;;; Code for supercallnondefault.Parent [vtable.init]
-(global $supercallnondefault.Parent.vtable (ref $supercallnondefault.Parent.vtable) 
+(global $supercallnondefault.Parent.vtable (ref $supercallnondefault.Parent.vtable)
  (struct.new $supercallnondefault.Parent.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -62,7 +62,7 @@
 )
 
 ;;; Code for supercallnondefault.Parent [itable.init]
-(global $supercallnondefault.Parent.itable (ref $supercallnondefault.Parent.itable) (struct.new $supercallnondefault.Parent.itable 
+(global $supercallnondefault.Parent.itable (ref $supercallnondefault.Parent.itable) (struct.new $supercallnondefault.Parent.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -73,7 +73,7 @@
  ))
 
 ;;; Code for supercallnondefault.Child [vtable.init]
-(global $supercallnondefault.Child.vtable (ref $supercallnondefault.Child.vtable) 
+(global $supercallnondefault.Child.vtable (ref $supercallnondefault.Child.vtable)
  (struct.new $supercallnondefault.Child.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -84,7 +84,7 @@
 )
 
 ;;; Code for supercallnondefault.Child [itable.init]
-(global $supercallnondefault.Child.itable (ref $supercallnondefault.Child.itable) (struct.new $supercallnondefault.Child.itable 
+(global $supercallnondefault.Child.itable (ref $supercallnondefault.Child.itable) (struct.new $supercallnondefault.Child.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

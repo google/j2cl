@@ -1,11 +1,11 @@
  ;;; Code for qualifiedsupercall.Parent [type definition]
- (type $qualifiedsupercall.Parent (struct_subtype 
-  (field $vtable (ref $qualifiedsupercall.Parent.vtable)) 
+ (type $qualifiedsupercall.Parent (struct_subtype
+  (field $vtable (ref $qualifiedsupercall.Parent.vtable))
   (field $itable (ref $qualifiedsupercall.Parent.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $java.lang.Object)
  )
- (type $qualifiedsupercall.Parent.vtable (struct_subtype 
+ (type $qualifiedsupercall.Parent.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -14,7 +14,7 @@
   (field $m_fun__void (ref $function.m_fun__void))
    $java.lang.Object.vtable)
  )
- (type $qualifiedsupercall.Parent.itable (struct_subtype 
+ (type $qualifiedsupercall.Parent.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -25,14 +25,14 @@
   $java.lang.Object.itable))
 
  ;;; Code for qualifiedsupercall.QualifiedSuperCall.InnerClass [type definition]
- (type $qualifiedsupercall.QualifiedSuperCall.InnerClass (struct_subtype 
-  (field $vtable (ref $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable)) 
+ (type $qualifiedsupercall.QualifiedSuperCall.InnerClass (struct_subtype
+  (field $vtable (ref $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable))
   (field $itable (ref $qualifiedsupercall.QualifiedSuperCall.InnerClass.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__qualifiedsupercall_QualifiedSuperCall_InnerClass (ref null $qualifiedsupercall.QualifiedSuperCall))
    $java.lang.Object)
  )
- (type $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable (struct_subtype 
+ (type $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -41,7 +41,7 @@
   (field $m_test__void (ref $function.m_test__void))
    $java.lang.Object.vtable)
  )
- (type $qualifiedsupercall.QualifiedSuperCall.InnerClass.itable (struct_subtype 
+ (type $qualifiedsupercall.QualifiedSuperCall.InnerClass.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -52,13 +52,13 @@
   $java.lang.Object.itable))
 
  ;;; Code for qualifiedsupercall.QualifiedSuperCall [type definition]
- (type $qualifiedsupercall.QualifiedSuperCall (struct_subtype 
-  (field $vtable (ref $qualifiedsupercall.QualifiedSuperCall.vtable)) 
+ (type $qualifiedsupercall.QualifiedSuperCall (struct_subtype
+  (field $vtable (ref $qualifiedsupercall.QualifiedSuperCall.vtable))
   (field $itable (ref $qualifiedsupercall.QualifiedSuperCall.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
    $qualifiedsupercall.Parent)
  )
- (type $qualifiedsupercall.QualifiedSuperCall.vtable (struct_subtype 
+ (type $qualifiedsupercall.QualifiedSuperCall.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -67,7 +67,7 @@
   (field $m_fun__void (ref $function.m_fun__void))
    $qualifiedsupercall.Parent.vtable)
  )
- (type $qualifiedsupercall.QualifiedSuperCall.itable (struct_subtype 
+ (type $qualifiedsupercall.QualifiedSuperCall.itable (struct_subtype
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -78,7 +78,7 @@
   $qualifiedsupercall.Parent.itable))
 
 ;;; Code for qualifiedsupercall.Parent [vtable.init]
-(global $qualifiedsupercall.Parent.vtable (ref $qualifiedsupercall.Parent.vtable) 
+(global $qualifiedsupercall.Parent.vtable (ref $qualifiedsupercall.Parent.vtable)
  (struct.new $qualifiedsupercall.Parent.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -90,7 +90,7 @@
 )
 
 ;;; Code for qualifiedsupercall.Parent [itable.init]
-(global $qualifiedsupercall.Parent.itable (ref $qualifiedsupercall.Parent.itable) (struct.new $qualifiedsupercall.Parent.itable 
+(global $qualifiedsupercall.Parent.itable (ref $qualifiedsupercall.Parent.itable) (struct.new $qualifiedsupercall.Parent.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -101,7 +101,7 @@
  ))
 
 ;;; Code for qualifiedsupercall.QualifiedSuperCall [vtable.init]
-(global $qualifiedsupercall.QualifiedSuperCall.vtable (ref $qualifiedsupercall.QualifiedSuperCall.vtable) 
+(global $qualifiedsupercall.QualifiedSuperCall.vtable (ref $qualifiedsupercall.QualifiedSuperCall.vtable)
  (struct.new $qualifiedsupercall.QualifiedSuperCall.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -113,7 +113,7 @@
 )
 
 ;;; Code for qualifiedsupercall.QualifiedSuperCall [itable.init]
-(global $qualifiedsupercall.QualifiedSuperCall.itable (ref $qualifiedsupercall.QualifiedSuperCall.itable) (struct.new $qualifiedsupercall.QualifiedSuperCall.itable 
+(global $qualifiedsupercall.QualifiedSuperCall.itable (ref $qualifiedsupercall.QualifiedSuperCall.itable) (struct.new $qualifiedsupercall.QualifiedSuperCall.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -124,7 +124,7 @@
  ))
 
 ;;; Code for qualifiedsupercall.QualifiedSuperCall.InnerClass [vtable.init]
-(global $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable (ref $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable) 
+(global $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable (ref $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable)
  (struct.new $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -136,7 +136,7 @@
 )
 
 ;;; Code for qualifiedsupercall.QualifiedSuperCall.InnerClass [itable.init]
-(global $qualifiedsupercall.QualifiedSuperCall.InnerClass.itable (ref $qualifiedsupercall.QualifiedSuperCall.InnerClass.itable) (struct.new $qualifiedsupercall.QualifiedSuperCall.InnerClass.itable 
+(global $qualifiedsupercall.QualifiedSuperCall.InnerClass.itable (ref $qualifiedsupercall.QualifiedSuperCall.InnerClass.itable) (struct.new $qualifiedsupercall.QualifiedSuperCall.InnerClass.itable
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
