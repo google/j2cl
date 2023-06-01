@@ -13,19 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2ktobjcname;
+@ObjectiveCName("FromSrcsPrefix")
+package j2ktobjcname.srcspackage;
 
-import j2ktobjcname.depspackage.FooFromDeps;
-import j2ktobjcname.srcspackage.FooFromSrcs;
-
-public final class PackageInfoExample {
-  // Expects @ObjCName("withFromSrcsPrefixFooFromDeps") annotation for "foo" parameter
-  public FooFromDeps apply(FooFromDeps foo) {
-    return foo;
-  }
-
-  // Expects @ObjCName("withFromSrcsPrefixFooFromSrcs") annotation for "foo" parameter
-  public FooFromSrcs apply(FooFromSrcs foo) {
-    return foo;
-  }
-}
+import com.google.j2objc.annotations.ObjectiveCName;

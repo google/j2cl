@@ -7,7 +7,7 @@ package(
 )
 
 j2cl_library(
-    name = "foowithpackageinfo-j2cl",
+    name = "depspackage-j2cl",
     srcs = glob(["*.java"]),
     deps = [
         "//third_party:j2objc_annotations-j2cl",

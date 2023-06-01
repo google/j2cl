@@ -13,6 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2ktobjcname.foowithpackageinfo;
+package j2ktobjcname.srcspackage;
 
-public final class Foo {}
+public final class FooFromSrcs {}

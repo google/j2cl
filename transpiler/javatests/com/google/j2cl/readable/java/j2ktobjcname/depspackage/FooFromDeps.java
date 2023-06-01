@@ -13,7 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@ObjectiveCName("ShortNamePrefix")
-package j2ktobjcname.foowithpackageinfo;
+package j2ktobjcname.depspackage;
 
-import com.google.j2objc.annotations.ObjectiveCName;
+public final class FooFromDeps {
+  public FooFromDeps doNothing(FooFromDeps foo) {
+    return foo;
+  }
+}
