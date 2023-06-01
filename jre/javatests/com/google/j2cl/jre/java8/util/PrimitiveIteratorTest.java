@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.jre.java8.util;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.PrimitiveIterator;
@@ -23,16 +22,10 @@ import java.util.function.Consumer;
 import java.util.function.DoubleConsumer;
 import java.util.function.IntConsumer;
 import java.util.function.LongConsumer;
+import junit.framework.TestCase;
 
-/**
- * Tests for PrimitiveIterator JRE emulation.
- */
-public class PrimitiveIteratorTest extends GWTTestCase {
-
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuite";
-  }
+/** Tests for PrimitiveIterator JRE emulation. */
+public class PrimitiveIteratorTest extends TestCase {
 
   public void testForEachRemainingDoubleConsumer() {
     PrimitiveIterator.OfDouble it = createTestPrimitiveDoubleIterator();

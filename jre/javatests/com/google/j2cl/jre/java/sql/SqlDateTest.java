@@ -15,23 +15,15 @@
  */
 package com.google.j2cl.jre.java.sql;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import java.sql.Date;
+import junit.framework.TestCase;
 
 /**
  * Tests {@link java.sql.Date}. We assume that the underlying {@link java.util.Date} implementation
  * is correct and concentrate only on the differences between the two.
  */
 @SuppressWarnings({"deprecation", "DoNotCall"})
-public class SqlDateTest extends GWTTestCase {
-
-  /**
-   * Sets module name so that javascript compiler can operate.
-   */
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuite";
-  }
+public class SqlDateTest extends TestCase {
 
   public void testInternalPrecision() {
     long millis = 1283895273475L;

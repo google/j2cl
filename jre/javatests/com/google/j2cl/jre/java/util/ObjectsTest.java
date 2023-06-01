@@ -15,19 +15,12 @@
  */
 package com.google.j2cl.jre.java.util;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import java.util.Comparator;
 import java.util.Objects;
+import junit.framework.TestCase;
 
-/**
- * Tests {@link Objects}.
- */
-public class ObjectsTest extends GWTTestCase {
-
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuite";
-  }
+/** Tests {@link Objects}. */
+public class ObjectsTest extends TestCase {
 
   public void testCompare() {
     Comparator<Integer> intComparator =

@@ -15,17 +15,10 @@
  */
 package com.google.j2cl.jre.java.lang;
 
-import com.google.gwt.junit.client.GWTTestCase;
+import junit.framework.TestCase;
 
-/**
- * Tests for the JRE Short type.
- */
-public class ShortTest extends GWTTestCase {
-
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuite";
-  }
+/** Tests for the JRE Short type. */
+public class ShortTest extends TestCase {
 
   public void testCompare() {
     assertTrue("Short.compare failed for 1 < 2", Short.compare((short) 1, (short) 2) < 0);

@@ -16,13 +16,10 @@
 
 package com.google.j2cl.jre.java.lang;
 
-import com.google.gwt.junit.client.GWTTestCase;
+import junit.framework.TestCase;
 
-/**
- * Tests for JRE emulation of java.lang.Math.
- *
- */
-public class MathTest extends GWTTestCase {
+/** Tests for JRE emulation of java.lang.Math. */
+public class MathTest extends TestCase {
 
   private static void assertNegativeZero(double x) {
     assertTrue(isNegativeZero(x));
@@ -67,12 +64,7 @@ public class MathTest extends GWTTestCase {
   }
 
   @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuite";
-  }
-
-  @Override
-  protected void gwtSetUp() throws Exception {
+  protected void setUp() throws Exception {
     // Ensure -0.0 vs 0.0 behavior
     assertPositiveZero(0.0);
     assertNegativeZero(-0.0);

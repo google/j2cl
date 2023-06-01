@@ -15,14 +15,12 @@
  */
 package com.google.j2cl.jre.java.util;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import java.util.Arrays;
 import java.util.List;
+import junit.framework.TestCase;
 
-/**
- * A common base class for emulation tests.
- */
-public class EmulTestBase extends GWTTestCase {
+/** A common base class for emulation tests. */
+public class EmulTestBase extends TestCase {
 
   public static void assertEquals(Object[] x, Object[] y) {
     assertEquals(x.length, y.length);
@@ -56,8 +54,4 @@ public class EmulTestBase extends GWTTestCase {
         Arrays.equals(expected, actual));
   }
 
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuite";
-  }
 }

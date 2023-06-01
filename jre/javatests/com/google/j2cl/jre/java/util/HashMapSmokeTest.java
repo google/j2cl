@@ -15,21 +15,16 @@
  */
 package com.google.j2cl.jre.java.util;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import java.util.HashMap;
 import java.util.Map;
+import junit.framework.TestCase;
 
 /**
  * A smoke test that is isolated from the rest of tests by using different module. This provides
  * less type to exist in the compilation which can reveal some type related bugs in the
  * implementation (e.g. issues that might rise due to treating a javascript array as java array).
  */
-public class HashMapSmokeTest extends GWTTestCase {
-
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuiteIsolated";
-  }
+public class HashMapSmokeTest extends TestCase {
 
   public void testSmoke() {
     Map<Object, Object> map = new HashMap<Object, Object>();

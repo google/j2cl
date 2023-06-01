@@ -15,17 +15,15 @@
  */
 package com.google.j2cl.jre.java.io;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import junit.framework.TestCase;
 
-/**
- * Unit test for the {@link java.io.Writer} emulated class.
- */
-public class WriterTest extends GWTTestCase {
+/** Unit test for the {@link java.io.Writer} emulated class. */
+public class WriterTest extends TestCase {
 
   private TestWriter writer;
 
@@ -68,17 +66,9 @@ public class WriterTest extends GWTTestCase {
     }
   }
 
-  /**
-   * Sets module name so that javascript compiler can operate.
-   */
   @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuite";
-  }
-
-  @Override
-  protected void gwtSetUp() throws Exception {
-    super.gwtSetUp();
+  protected void setUp() throws Exception {
+    super.setUp();
     writer = new TestWriter();
   }
 

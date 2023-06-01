@@ -16,22 +16,15 @@
 
 package com.google.j2cl.jre.java8.lang;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import junit.framework.TestCase;
 
-/**
- * Tests for JRE emulation of java.lang.Math.
- */
-public class MathTest extends GWTTestCase {
+/** Tests for JRE emulation of java.lang.Math. */
+public class MathTest extends TestCase {
 
   private static final Integer[] ALL_INTEGER_CANDIDATES = getAllIntegerCandidates();
   private static final Long[] ALL_LONG_CANDIDATES = getAllLongCandidates();
-
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuite";
-  }
 
   public void testAddExact() {
     for (int a : ALL_INTEGER_CANDIDATES) {

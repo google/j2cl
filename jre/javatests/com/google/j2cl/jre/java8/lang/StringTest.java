@@ -15,18 +15,11 @@
  */
 package com.google.j2cl.jre.java8.lang;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import java.util.Arrays;
+import junit.framework.TestCase;
 
-/**
- * Java8 String tests.
- */
-public class StringTest extends GWTTestCase {
-
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuite";
-  }
+/** Java8 String tests. */
+public class StringTest extends TestCase {
 
   public void testJoin() {
     assertEquals("", String.join("", ""));

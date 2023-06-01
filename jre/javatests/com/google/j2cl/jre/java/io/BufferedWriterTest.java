@@ -15,15 +15,15 @@
  */
 package com.google.j2cl.jre.java.io;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
+import junit.framework.TestCase;
 
 /** Unit test for the {@link java.io.BufferedWriter} emulated class. */
-public class BufferedWriterTest extends GWTTestCase {
+public class BufferedWriterTest extends TestCase {
 
   /** Default buffer size for the {@link java.io.BufferedWriter} object being tested. */
   private static final int DEFAULT_BUFFER_SIZE = 2;
@@ -98,15 +98,9 @@ public class BufferedWriterTest extends GWTTestCase {
     }
   }
 
-  /** Sets module name so that javascript compiler can operate. */
   @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuite";
-  }
-
-  @Override
-  protected void gwtSetUp() throws Exception {
-    super.gwtSetUp();
+  protected void setUp() throws Exception {
+    super.setUp();
     sink = new SinkWriter();
     writer = new BufferedWriter(sink, DEFAULT_BUFFER_SIZE);
   }

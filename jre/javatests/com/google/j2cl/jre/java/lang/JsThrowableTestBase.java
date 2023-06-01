@@ -15,15 +15,15 @@
  */
 package com.google.j2cl.jre.java.lang;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import junit.framework.TestCase;
 
 /** Base class that provides utilities for testing subclasses of Throwable. */
-public abstract class JsThrowableTestBase extends GWTTestCase {
+public abstract class JsThrowableTestBase extends TestCase {
 
   @JsFunction
   interface Thrower {

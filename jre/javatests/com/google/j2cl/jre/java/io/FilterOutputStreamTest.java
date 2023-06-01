@@ -15,17 +15,15 @@
  */
 package com.google.j2cl.jre.java.io;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import java.io.FilterOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.LinkedList;
+import junit.framework.TestCase;
 
-/**
- * Unit test class for the {@link java.io.FilterOutputStream} emulated class.
- */
-public class FilterOutputStreamTest extends GWTTestCase {
+/** Unit test class for the {@link java.io.FilterOutputStream} emulated class. */
+public class FilterOutputStreamTest extends TestCase {
 
   private static final byte[] BYTES_TO_WRITE = {
       (byte) 0x10, (byte) 0x20, (byte) 0x30, (byte) 0x40, (byte) 0x50, (byte) 0x60
@@ -100,17 +98,9 @@ public class FilterOutputStreamTest extends GWTTestCase {
 
   private MockOutputStream mockOutputStream;
 
-  /**
-   * Sets module name so that javascript compiler can operate.
-   */
   @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuite";
-  }
-
-  @Override
-  public void gwtSetUp() throws Exception {
-    super.gwtSetUp();
+  public void setUp() throws Exception {
+    super.setUp();
     mockOutputStream = new MockOutputStream();
     filter = new FilterOutputStream(mockOutputStream);
   }

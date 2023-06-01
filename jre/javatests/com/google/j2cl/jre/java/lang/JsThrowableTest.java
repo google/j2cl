@@ -22,12 +22,6 @@ import jsinterop.annotations.JsType;
 /** Unit tests for the JS specific behavior of Throwable classes. */
 @SuppressWarnings("ShouldNotSubclass")
 public class JsThrowableTest extends JsThrowableTestBase {
-
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuite";
-  }
-
   public void testCatchJava() {
     Throwable e = new Throwable();
     assertSame(e, catchJava(createThrower(e)));

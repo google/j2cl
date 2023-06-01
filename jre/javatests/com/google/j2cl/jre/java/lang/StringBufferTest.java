@@ -15,13 +15,11 @@
  */
 package com.google.j2cl.jre.java.lang;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import java.util.Locale;
+import junit.framework.TestCase;
 
-/**
- * This class tests classes StringBuffer and StringBuilder.
- */
-public class StringBufferTest extends GWTTestCase {
+/** This class tests classes StringBuffer and StringBuilder. */
+public class StringBufferTest extends TestCase {
 
   private static void assertEqualsReverse(String expected, String input) {
     assertEquals(expected, new StringBuffer(input).reverse().toString());
@@ -29,18 +27,12 @@ public class StringBufferTest extends GWTTestCase {
 
   /**
    * This method gets the module name.
-   * 
+   *
    * @return the module name.
-   * @see com.google.gwt.junit.client.GWTTestCase#getModuleName()
+   * @see junit.framework.TestCase#getModuleName()
    */
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuite";
-  }
 
-  /**
-   * This method tests <code>append</code>.
-   */
+  /** This method tests <code>append</code>. */
   public void testAppend() {
     StringBuffer x = new StringBuffer();
     x.append(C.FLOAT_VALUE);

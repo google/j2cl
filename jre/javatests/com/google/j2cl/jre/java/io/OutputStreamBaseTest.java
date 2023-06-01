@@ -15,15 +15,13 @@
  */
 package com.google.j2cl.jre.java.io;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Arrays;
+import junit.framework.TestCase;
 
-/**
- * Class for reusing tests that are commong to {@link java.io.OutputStream} and its subclasses.
- */
-public abstract class OutputStreamBaseTest extends GWTTestCase {
+/** Class for reusing tests that are commong to {@link java.io.OutputStream} and its subclasses. */
+public abstract class OutputStreamBaseTest extends TestCase {
 
   protected static final byte[] TEST_ARRAY = new byte[] { 10, 20, 30, 40, 50 };
 
@@ -40,14 +38,6 @@ public abstract class OutputStreamBaseTest extends GWTTestCase {
    * @return bytes written by the stream.
    */
   protected abstract byte[] getBytesWritten();
-
-  /**
-   * Sets module name so that javascript compiler can operate.
-   */
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuite";
-  }
 
   public void testWriteArrayUsingNullArrayObject() throws IOException {
     final OutputStream outputStream = createDefaultOutputStream();

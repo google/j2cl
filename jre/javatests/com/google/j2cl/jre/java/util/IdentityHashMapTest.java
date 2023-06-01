@@ -120,11 +120,6 @@ public class IdentityHashMapTest extends TestMap {
     assertFalse(hashMap.entrySet().iterator().hasNext());
   }
 
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuite";
-  }
-
   public void testAddEqualKeys() {
     final IdentityHashMap expected = new IdentityHashMap();
     assertEquals(0, expected.size());

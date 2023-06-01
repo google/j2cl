@@ -29,8 +29,8 @@ abstract class AbstractJava8MapTest extends EmulTestBase {
   private Map<String, String> testSample;
 
   @Override
-  protected void gwtSetUp() throws Exception {
-    super.gwtSetUp();
+  protected void setUp() throws Exception {
+    super.setUp();
     testSample = createTestSample();
   }
 

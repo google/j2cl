@@ -15,14 +15,12 @@
  */
 package com.google.j2cl.jre.java8.util;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import junit.framework.TestCase;
 
-/**
- * Tests for Optional JRE emulation.
- */
-public class OptionalTest extends GWTTestCase {
+/** Tests for Optional JRE emulation. */
+public class OptionalTest extends TestCase {
 
   private static final Object REFERENCE = new Object();
   private static final Object OTHER_REFERENCE = new Object();
@@ -32,13 +30,8 @@ public class OptionalTest extends GWTTestCase {
   private Optional<Object> otherPresent;
 
   @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuite";
-  }
-
-  @Override
-  protected void gwtSetUp() throws Exception {
-    super.gwtSetUp();
+  protected void setUp() throws Exception {
+    super.setUp();
     mutableFlag = new boolean[1];
     empty = Optional.empty();
     present = Optional.of(REFERENCE);

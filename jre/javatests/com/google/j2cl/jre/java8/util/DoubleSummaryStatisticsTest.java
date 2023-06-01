@@ -35,7 +35,7 @@ public class DoubleSummaryStatisticsTest extends EmulTestBase {
   private DoubleSummaryStatistics stats;
 
   @Override
-  protected void gwtSetUp() throws Exception {
+  protected void setUp() throws Exception {
     stats = new DoubleSummaryStatistics();
   }
 

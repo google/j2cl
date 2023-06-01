@@ -17,12 +17,10 @@ package com.google.j2cl.jre.java.lang;
 
 import static com.google.j2cl.jre.testing.TestUtils.isWasm;
 
-import com.google.gwt.junit.client.GWTTestCase;
+import junit.framework.TestCase;
 
-/**
- * Tests for the JRE Boolean type.
- */
-public class BooleanTest extends GWTTestCase {
+/** Tests for the JRE Boolean type. */
+public class BooleanTest extends TestCase {
 
   static volatile boolean bfalse = false;
   static volatile boolean btrue = true;
@@ -34,11 +32,6 @@ public class BooleanTest extends GWTTestCase {
   static volatile String true1 = "true";
   static volatile String true2 = "TRUE";
   static volatile String true3 = "TrUe";
-
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuite";
-  }
 
   public void testCompare() {
     assertTrue("Boolean.compare failed for false < true", Boolean.compare(false, true) < 0);

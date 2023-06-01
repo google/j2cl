@@ -15,25 +15,16 @@
  */
 package com.google.j2cl.jre.java.sql;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import java.sql.Timestamp;
 import java.util.Date;
+import junit.framework.TestCase;
 
 /**
- * Tests {@link java.sql.Timestamp}. We assume that the underlying
- * {@link java.util.Date} implementation is correct and concentrate only on the
- * differences between the two.
+ * Tests {@link java.sql.Timestamp}. We assume that the underlying {@link java.util.Date}
+ * implementation is correct and concentrate only on the differences between the two.
  */
 @SuppressWarnings("deprecation")
-public class SqlTimestampTest extends GWTTestCase {
-
-  /**
-   * Sets module name so that javascript compiler can operate.
-   */
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuite";
-  }
+public class SqlTimestampTest extends TestCase {
 
   public void testCompareTo() {
     Timestamp now = Timestamp.valueOf("2011-01-05 12:45:18.000000000");

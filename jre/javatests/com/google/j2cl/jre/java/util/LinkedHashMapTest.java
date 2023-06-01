@@ -132,11 +132,6 @@ public class LinkedHashMapTest extends TestMap {
     assertFalse(hashMap.entrySet().iterator().hasNext());
   }
 
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuite";
-  }
-
   public void testAddEqualKeys() {
     final LinkedHashMap<Number, Object> expected = new LinkedHashMap<Number, Object>();
     assertEquals(0, expected.size());

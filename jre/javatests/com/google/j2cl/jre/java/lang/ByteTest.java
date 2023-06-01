@@ -15,17 +15,10 @@
  */
 package com.google.j2cl.jre.java.lang;
 
-import com.google.gwt.junit.client.GWTTestCase;
+import junit.framework.TestCase;
 
-/**
- * Tests for the JRE Byte type.
- */
-public class ByteTest extends GWTTestCase {
-
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuite";
-  }
+/** Tests for the JRE Byte type. */
+public class ByteTest extends TestCase {
 
   public void testConstants() {
     assertEquals(-128, Byte.MIN_VALUE);

@@ -133,7 +133,6 @@ j2cl_library(
     srcs = JS_ONLY_SRCS,
     generate_build_test = False,
     deps = [
-        ":gwt_test_case-j2cl",
         "//third_party:gwt-jsinterop-annotations-j2cl",
         "//third_party:junit-j2cl",
     ],
@@ -223,17 +222,4 @@ sh_test(
     args = ["$(location conformance_binary_opensource-stderr.txt)"],
     data = ["conformance_binary_opensource-stderr.txt"],
     tags = ["j2cl"],
-)
-
-# TODO(dankuka): Eventually we want to provide a library target for apps that
-# need to be compatible with both gwt tests and j2cl tests, but this will
-# require some more careful thought.
-j2cl_library(
-    name = "gwt_test_case-j2cl",
-    testonly = 1,
-    srcs = ["com/google/gwt/junit/client/GWTTestCase.java"],
-    visibility = [
-        "//javatests/com/google/protobuf/contrib/gwt:__subpackages__",
-    ],
-    deps = ["//third_party:junit-j2cl"],
 )

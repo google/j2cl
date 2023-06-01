@@ -18,20 +18,15 @@ package com.google.j2cl.jre.java.lang;
 import static com.google.j2cl.jre.testing.TestUtils.isJvm;
 import static com.google.j2cl.jre.testing.TestUtils.isWasm;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import com.google.j2cl.jre.testing.TestUtils;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Locale;
+import junit.framework.TestCase;
 
 /** Tests java.lang.String. */
-public class StringTest extends GWTTestCase {
-
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuite";
-  }
+public class StringTest extends TestCase {
 
   public void testCharAt() {
     assertEquals('b', hideFromCompiler("abc").charAt(1));

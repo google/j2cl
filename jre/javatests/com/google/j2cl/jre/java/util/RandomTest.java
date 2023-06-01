@@ -15,23 +15,15 @@
  */
 package com.google.j2cl.jre.java.util;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import java.util.Random;
+import junit.framework.TestCase;
 
 /**
- * Tests for GWT's emulation of the JRE Random class.  The JRE specifies the
- * exact algorithm used to generate the pseudorandom output.
+ * Tests for GWT's emulation of the JRE Random class. The JRE specifies the exact algorithm used to
+ * generate the pseudorandom output.
  */
-public class RandomTest extends GWTTestCase {
+public class RandomTest extends TestCase {
 
-  /**
-   * Sets module name so that javascript compiler can operate.
-   */
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuite";
-  }
-  
   public void testNextBytes() {
     Random r = new Random(1);
     byte[] b = new byte[5];

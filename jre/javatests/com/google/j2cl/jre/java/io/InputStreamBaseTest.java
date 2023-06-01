@@ -15,25 +15,16 @@
  */
 package com.google.j2cl.jre.java.io;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
+import junit.framework.TestCase;
 
-/**
- * Class for reusing tests that are common to {@link java.io.InputStream} and its subclasses.
- */
-public abstract class InputStreamBaseTest extends GWTTestCase {
+/** Class for reusing tests that are common to {@link java.io.InputStream} and its subclasses. */
+public abstract class InputStreamBaseTest extends TestCase {
 
   protected static final byte[] TEST_BYTES = new byte[] { 10, 20, 30, 40, 50 };
 
-  /**
-   * Sets module name so that javascript compiler can operate.
-   */
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuite";
-  }
 
   /**
    * Factory method for creating a stream object.

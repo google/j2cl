@@ -17,18 +17,16 @@ package com.google.j2cl.jre.java.io;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.Arrays;
+import junit.framework.TestCase;
 
-/**
- * Unit test for the {@link java.io.OutputStreamWriter} emulated class.
- */
-public class OutputStreamWriterTest extends GWTTestCase {
+/** Unit test for the {@link java.io.OutputStreamWriter} emulated class. */
+public class OutputStreamWriterTest extends TestCase {
 
   private final Charset encodingUTF8Charset = UTF_8;
 
@@ -44,17 +42,9 @@ public class OutputStreamWriterTest extends GWTTestCase {
   /** Underlying output stream used by the {@link OutputStreamWriter} object. */
   private ByteArrayOutputStream baos;
 
-  /**
-   * Sets module name so that javascript compiler can operate.
-   */
   @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuite";
-  }
-
-  @Override
-  protected void gwtSetUp() throws Exception {
-    super.gwtSetUp();
+  protected void setUp() throws Exception {
+    super.setUp();
     baos = new ByteArrayOutputStream();
     writer = new OutputStreamWriter(baos, encodingUTF8Charset);
   }

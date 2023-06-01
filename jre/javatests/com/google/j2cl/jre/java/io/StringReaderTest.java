@@ -15,18 +15,12 @@
  */
 package com.google.j2cl.jre.java.io;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import java.io.StringReader;
 import java.util.Arrays;
+import junit.framework.TestCase;
 
-/**
- * Unit test for the {@link java.io.StringReader} emulated class.
- */
-public class StringReaderTest extends GWTTestCase {
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuite";
-  }
+/** Unit test for the {@link java.io.StringReader} emulated class. */
+public class StringReaderTest extends TestCase {
 
   public void testEmptyString() throws Exception {
     StringReader reader = new StringReader("");

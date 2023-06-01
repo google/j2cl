@@ -17,15 +17,10 @@ package com.google.j2cl.jre.java.lang;
 
 import static com.google.j2cl.jre.testing.TestUtils.isWasm;
 
-import com.google.gwt.junit.client.GWTTestCase;
+import junit.framework.TestCase;
 
 /** Unit tests for the GWT emulation of java.lang.Throwable class. */
-public class ThrowableTest extends GWTTestCase {
-
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuite";
-  }
+public class ThrowableTest extends TestCase {
 
   public static void testStackTrace() {
     if (isWasm()) {

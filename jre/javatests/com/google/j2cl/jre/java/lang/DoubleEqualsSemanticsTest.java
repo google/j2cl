@@ -15,15 +15,10 @@
  */
 package com.google.j2cl.jre.java.lang;
 
-import com.google.gwt.junit.client.GWTTestCase;
+import junit.framework.TestCase;
 
 /** Tests equals semantics for Double. */
-public final class DoubleEqualsSemanticsTest extends GWTTestCase {
-
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuite";
-  }
+public final class DoubleEqualsSemanticsTest extends TestCase {
 
   public void testEquals() {
     assertTrue(Double.valueOf(Double.NaN).equals(Double.NaN));

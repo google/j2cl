@@ -15,15 +15,13 @@
  */
 package com.google.j2cl.jre.java.io;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import junit.framework.TestCase;
 
-/**
- * Unit test for the {@link java.io.FilterInputStream} emulated class.
- */
-public class FilterInputStreamTest extends GWTTestCase {
+/** Unit test for the {@link java.io.FilterInputStream} emulated class. */
+public class FilterInputStreamTest extends TestCase {
 
   /**
    * Mock for {@link InputStream}.
@@ -190,17 +188,9 @@ public class FilterInputStreamTest extends GWTTestCase {
 
   protected MockInputStream mockInputStream;
 
-  /**
-   * Sets module name so that javascript compiler can operate.
-   */
   @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuite";
-  }
-
-  @Override
-  protected void gwtSetUp() throws Exception {
-    super.gwtSetUp();
+  protected void setUp() throws Exception {
+    super.setUp();
     mockInputStream = new MockInputStream();
     filter = new InstantiableFilterInputStream(mockInputStream);
   }

@@ -19,12 +19,6 @@ import jsinterop.annotations.JsType;
 
 /** Unit tests for JsException behavior. */
 public class JsExceptionTest extends JsThrowableTestBase {
-
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuite";
-  }
-
   public void testCatchJava() {
     Object obj = new Object();
     Throwable e = createJsException(obj);
