@@ -17,14 +17,11 @@ package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.base.Predicates.not;
 import static com.google.common.collect.ImmutableList.toImmutableList;
-import static com.google.common.collect.ImmutableSet.toImmutableSet;
 import static java.lang.String.format;
 import static java.util.Arrays.stream;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Sets;
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.StringUtils;
@@ -55,7 +52,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /** Generates a Wasm module containing all the code for the application. */
@@ -63,17 +59,11 @@ public class WasmModuleGenerator {
 
   private final Problems problems;
   private final Output output;
-  private final ImmutableSet<Pattern> entryPointPatterns;
-  private final Set<Pattern> matchedEntryPointPatterns;
-  private final Set<String> exportedMethods;
   private final SourceBuilder builder = new SourceBuilder();
   private WasmGenerationEnvironment environment;
 
-  public WasmModuleGenerator(Output output, ImmutableSet<String> entryPoints, Problems problems) {
+  public WasmModuleGenerator(Output output, Problems problems) {
     this.output = output;
-    this.entryPointPatterns = entryPoints.stream().map(Pattern::compile).collect(toImmutableSet());
-    this.matchedEntryPointPatterns = new HashSet<>();
-    this.exportedMethods = new HashSet<>();
     this.problems = problems;
   }
 
@@ -131,10 +121,6 @@ public class WasmModuleGenerator {
     builder.newLine();
     builder.append(")");
     output.write("module.wat", builder.build());
-    Set<Pattern> unmatchedPatterns = Sets.difference(entryPointPatterns, matchedEntryPointPatterns);
-    if (!unmatchedPatterns.isEmpty()) {
-      problems.error("No entry points matched the following patterns \"%s\".", unmatchedPatterns);
-    }
   }
 
   private void emitDataSegments(Library library) {
@@ -421,13 +407,8 @@ public class WasmModuleGenerator {
               JsImportsGenerator.MODULE, JsImportsGenerator.getJsImportName(methodDescriptor)));
     }
 
-    if (method.isStatic() && isEntryPoint(method.getQualifiedBinaryName())) {
-      String methodName = methodDescriptor.getName();
-      if (exportedMethods.add(methodName)) {
-        builder.append(" (export \"" + methodName + "\")");
-      } else {
-        problems.error("More than one method are exported with the same name \"%s\".", methodName);
-      }
+    if (method.isWasmEntryPoint()) {
+      builder.append(" (export \"" + method.getWasmExportName() + "\")");
     }
 
     DeclaredTypeDescriptor enclosingTypeDescriptor = methodDescriptor.getEnclosingTypeDescriptor();
@@ -523,18 +504,6 @@ public class WasmModuleGenerator {
               "(elem declare func %s)",
               environment.getMethodImplementationName(method.getDescriptor())));
     }
-  }
-
-  private boolean isEntryPoint(String methodName) {
-    // Only the first pattern matching the method will be added, so there will be log error if
-    // patterns are duplicate
-    for (Pattern entryPointPattern : entryPointPatterns) {
-      if (entryPointPattern.matcher(methodName).matches()) {
-        matchedEntryPointPatterns.add(entryPointPattern);
-        return true;
-      }
-    }
-    return false;
   }
 
   private static List<Variable> collectLocals(Method method) {

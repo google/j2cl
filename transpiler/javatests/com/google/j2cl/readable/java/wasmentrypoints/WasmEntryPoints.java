@@ -22,4 +22,8 @@ public class WasmEntryPoints {
   public static void matchedEntryPointPattern1(int x) {}
 
   public static void matchedEntryPointPattern2(float y) {}
+
+  public static String stringConversionEntryPoint(String arg) {
+    return "";
+  }
 }

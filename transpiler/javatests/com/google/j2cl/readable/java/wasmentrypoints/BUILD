@@ -13,5 +13,6 @@ readable_example(
     wasm_entry_points = [
         r"wasmentrypoints\.WasmEntryPoints\.singleMatchedEntryPoint",
         r".*\.matchedEntryPointPattern[1-2]",
+        r"wasmentrypoints\.WasmEntryPoints\.stringConversionEntryPoint",
     ],
 )

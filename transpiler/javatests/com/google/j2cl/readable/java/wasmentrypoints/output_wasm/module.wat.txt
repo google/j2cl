@@ -79,7 +79,7 @@
 )
 
 ;;; void WasmEntryPoints.singleMatchedEntryPoint()
-(func $m_singleMatchedEntryPoint__void@wasmentrypoints.WasmEntryPoints (export "singleMatchedEntryPoint")
+(func $m_singleMatchedEntryPoint__void@wasmentrypoints.WasmEntryPoints
  ;;@ wasmentrypoints/WasmEntryPoints.java:20:21
  (block
   ;;@ wasmentrypoints/WasmEntryPoints.java:20:47
@@ -88,7 +88,7 @@
 )
 
 ;;; void WasmEntryPoints.matchedEntryPointPattern1(int x)
-(func $m_matchedEntryPointPattern1__int__void@wasmentrypoints.WasmEntryPoints (export "matchedEntryPointPattern1")
+(func $m_matchedEntryPointPattern1__int__void@wasmentrypoints.WasmEntryPoints
  (param $x i32)
  ;;@ wasmentrypoints/WasmEntryPoints.java:22:21
  (block
@@ -98,12 +98,25 @@
 )
 
 ;;; void WasmEntryPoints.matchedEntryPointPattern2(float y)
-(func $m_matchedEntryPointPattern2__float__void@wasmentrypoints.WasmEntryPoints (export "matchedEntryPointPattern2")
+(func $m_matchedEntryPointPattern2__float__void@wasmentrypoints.WasmEntryPoints
  (param $y f32)
  ;;@ wasmentrypoints/WasmEntryPoints.java:24:21
  (block
   ;;@ wasmentrypoints/WasmEntryPoints.java:24:56
   (call $$clinit__void@wasmentrypoints.WasmEntryPoints )
+ )
+)
+
+;;; String WasmEntryPoints.stringConversionEntryPoint(String arg)
+(func $m_stringConversionEntryPoint__java_lang_String__java_lang_String@wasmentrypoints.WasmEntryPoints
+ (param $arg (ref null $java.lang.String))
+ (result (ref null $java.lang.String))
+ ;;@ wasmentrypoints/WasmEntryPoints.java:26:23
+ (block
+  ;;@ wasmentrypoints/WasmEntryPoints.java:26:62
+  (call $$clinit__void@wasmentrypoints.WasmEntryPoints )
+  ;;@ wasmentrypoints/WasmEntryPoints.java:27:4
+  (return (call $function.no.side.effects.$getString_||__java_lang_String (ref.func $$getString_||__java_lang_String@javaemul.internal.StringPool) ))
  )
 )
 
@@ -150,3 +163,43 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@wasmentrypoints.WasmEntryPoints)
+
+;;; void WasmEntryPoints.singleMatchedEntryPoint__$export()
+(func $m_singleMatchedEntryPoint__$export__void@wasmentrypoints.WasmEntryPoints (export "singleMatchedEntryPoint")
+ ;;@ wasmentrypoints/WasmEntryPoints.java:20:21
+ (block
+  ;;@ wasmentrypoints/WasmEntryPoints.java:20:21
+  (call $m_singleMatchedEntryPoint__void@wasmentrypoints.WasmEntryPoints )
+ )
+)
+
+;;; void WasmEntryPoints.matchedEntryPointPattern1__$export(int arg0)
+(func $m_matchedEntryPointPattern1__$export__int__void@wasmentrypoints.WasmEntryPoints (export "matchedEntryPointPattern1")
+ (param $arg0 i32)
+ ;;@ wasmentrypoints/WasmEntryPoints.java:22:21
+ (block
+  ;;@ wasmentrypoints/WasmEntryPoints.java:22:21
+  (call $m_matchedEntryPointPattern1__int__void@wasmentrypoints.WasmEntryPoints (local.get $arg0))
+ )
+)
+
+;;; void WasmEntryPoints.matchedEntryPointPattern2__$export(float arg0)
+(func $m_matchedEntryPointPattern2__$export__float__void@wasmentrypoints.WasmEntryPoints (export "matchedEntryPointPattern2")
+ (param $arg0 f32)
+ ;;@ wasmentrypoints/WasmEntryPoints.java:24:21
+ (block
+  ;;@ wasmentrypoints/WasmEntryPoints.java:24:21
+  (call $m_matchedEntryPointPattern2__float__void@wasmentrypoints.WasmEntryPoints (local.get $arg0))
+ )
+)
+
+;;; NativeString WasmEntryPoints.stringConversionEntryPoint__$export(NativeString arg0)
+(func $m_stringConversionEntryPoint__$export__java_lang_String_NativeString__java_lang_String_NativeString@wasmentrypoints.WasmEntryPoints (export "stringConversionEntryPoint")
+ (param $arg0 (ref null string))
+ (result (ref null string))
+ ;;@ wasmentrypoints/WasmEntryPoints.java:26:23
+ (block
+  ;;@ wasmentrypoints/WasmEntryPoints.java:26:23
+  (return (call $m_toJsString__java_lang_String__java_lang_String_NativeString@java.lang.String (call $m_stringConversionEntryPoint__java_lang_String__java_lang_String@wasmentrypoints.WasmEntryPoints (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $arg0)))))
+ )
+)

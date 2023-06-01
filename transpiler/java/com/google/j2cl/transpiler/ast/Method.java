@@ -40,17 +40,20 @@ public class Method extends Member implements MethodLike {
   @Visitable List<Variable> parameters = new ArrayList<>();
   @Visitable Block body;
   private final String jsDocDescription;
+  private final String wasmExportName;
 
   private Method(
       SourcePosition sourcePosition,
       MethodDescriptor methodDescriptor,
       List<Variable> parameters,
       Block body,
-      String jsDocDescription) {
+      String jsDocDescription,
+      String wasmExportName) {
     super(sourcePosition);
     this.methodDescriptor = checkNotNull(methodDescriptor);
     this.parameters.addAll(checkNotNull(parameters));
     this.jsDocDescription = jsDocDescription;
+    this.wasmExportName = wasmExportName;
     this.body = checkNotNull(body);
   }
 
@@ -114,6 +117,16 @@ public class Method extends Member implements MethodLike {
 
   public String getWasmInfo() {
     return methodDescriptor.getWasmInfo();
+  }
+
+  public boolean isWasmEntryPoint() {
+    return wasmExportName != null;
+  }
+
+  /** The name of the export for the Wasm entry point. */
+  @Nullable
+  public String getWasmExportName() {
+    return wasmExportName;
   }
 
   public static Builder newBuilder() {
@@ -180,6 +193,7 @@ public class Method extends Member implements MethodLike {
     private List<Variable> parameters = new ArrayList<>();
     private List<Statement> statements = new ArrayList<>();
     private String jsDocDescription;
+    private String wasmExportName;
     private SourcePosition bodySourcePosition;
     private SourcePosition sourcePosition;
 
@@ -189,6 +203,7 @@ public class Method extends Member implements MethodLike {
       builder.parameters = Lists.newArrayList(method.getParameters());
       builder.statements = Lists.newArrayList(method.getBody().getStatements());
       builder.jsDocDescription = method.getJsDocDescription();
+      builder.wasmExportName = method.getWasmExportName();
       builder.bodySourcePosition = method.getBody().getSourcePosition();
       builder.sourcePosition = method.getSourcePosition();
       return builder;
@@ -267,6 +282,12 @@ public class Method extends Member implements MethodLike {
     }
 
     @CanIgnoreReturnValue
+    public Builder setWasmExportName(String wasmExportName) {
+      this.wasmExportName = wasmExportName;
+      return this;
+    }
+
+    @CanIgnoreReturnValue
     public Builder setSourcePosition(SourcePosition sourcePosition) {
       this.sourcePosition = sourcePosition;
       return this;
@@ -290,7 +311,8 @@ public class Method extends Member implements MethodLike {
       checkState(parameters.size() == methodDescriptor.getParameterDescriptors().size());
       checkState(methodDescriptor.isDeclaration());
 
-      return new Method(sourcePosition, methodDescriptor, parameters, body, jsDocDescription);
+      return new Method(
+          sourcePosition, methodDescriptor, parameters, body, jsDocDescription, wasmExportName);
     }
   }
 }

@@ -21,6 +21,7 @@ import javaemul.lang.*
 import kotlin.Float
 import kotlin.Int
 import kotlin.OptIn
+import kotlin.String
 import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
@@ -45,5 +46,13 @@ open class WasmEntryPoints {
   fun matchedEntryPointPattern2(
    @ObjCName("withFloat") y: Float
   ) {}
+
+  @JvmStatic
+  @ObjCName("stringConversionEntryPoint")
+  fun stringConversionEntryPoint(
+   @ObjCName("withNSString") arg: String?
+  ): String? {
+   return ""
+  }
  }
 }

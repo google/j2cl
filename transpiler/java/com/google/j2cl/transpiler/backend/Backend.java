@@ -82,6 +82,7 @@ import com.google.j2cl.transpiler.passes.InsertStringConversions;
 import com.google.j2cl.transpiler.passes.InsertStringConversionsKotlin;
 import com.google.j2cl.transpiler.passes.InsertTypeAnnotationOnGenericReturnTypes;
 import com.google.j2cl.transpiler.passes.InsertUnboxingConversions;
+import com.google.j2cl.transpiler.passes.InsertWasmEntryPointBridges;
 import com.google.j2cl.transpiler.passes.InsertWasmExternConversions;
 import com.google.j2cl.transpiler.passes.InsertWideningPrimitiveConversions;
 import com.google.j2cl.transpiler.passes.InsertWideningPrimitiveConversionsKotlin;
@@ -343,8 +344,7 @@ public enum Backend {
   WASM {
     @Override
     public void generateOutputs(BackendOptions options, Library library, Problems problems) {
-      new WasmModuleGenerator(options.getOutput(), options.getWasmEntryPoints(), problems)
-          .generateOutputs(library);
+      new WasmModuleGenerator(options.getOutput(), problems).generateOutputs(library);
     }
 
     @Override
@@ -448,6 +448,7 @@ public enum Backend {
           ExtractNonIdempotentExpressions::new,
           NormalizeMultiExpressions::new,
           InsertWasmExternConversions::new,
+          () -> new InsertWasmEntryPointBridges(options.getWasmEntryPoints()),
           ImplementFinallyViaControlFlow::new,
 
           // Needs to run at the end as the types in the ast will be invalid after the pass.
@@ -481,8 +482,7 @@ public enum Backend {
       if (options.getLibraryInfoOutput() != null) {
         OutputUtils.writeToFile(options.getLibraryInfoOutput(), new byte[0], problems);
       }
-      new WasmModuleGenerator(options.getOutput(), options.getWasmEntryPoints(), problems)
-          .generateOutputs(library);
+      new WasmModuleGenerator(options.getOutput(), problems).generateOutputs(library);
     }
 
     @Override
@@ -587,6 +587,7 @@ public enum Backend {
           ExtractNonIdempotentExpressions::new,
           NormalizeMultiExpressions::new,
           InsertWasmExternConversions::new,
+          () -> new InsertWasmEntryPointBridges(options.getWasmEntryPoints()),
           ImplementFinallyViaControlFlow::new,
 
           // Needs to run at the end as the types in the ast will be invalid after the pass.
