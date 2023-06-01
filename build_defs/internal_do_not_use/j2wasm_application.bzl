@@ -110,6 +110,7 @@ def _impl_j2wasm_application(ctx):
     )
 
     debug_dir_name = ctx.label.name + "_debug"
+    source_map_base_url = ctx.attr.source_map_base_url or debug_dir_name
 
     input = ctx.outputs.wat
     input_source_map = None
@@ -138,8 +139,8 @@ def _impl_j2wasm_application(ctx):
             output = ctx.outputs.wasm
             output_source_map = ctx.outputs.srcmap
 
-            # Add the extra flag that are only needed in for the final run.
-            args.add("--output-source-map-url", debug_dir_name + "/" + ctx.outputs.srcmap.basename)
+            # Add the extra flags that are only needed in for the final run.
+            args.add("--output-source-map-url", source_map_base_url + "/" + ctx.outputs.srcmap.basename)
 
             # SymbolMap flag must be after optimization passes to get the final symbol names.
             args.add("--symbolmap=" + ctx.outputs.symbolmap.path)
@@ -263,6 +264,7 @@ _J2WASM_APP_ATTRS = {
     "binaryen_args": attr.string_list(),
     "transpiler_args": attr.string_list(),
     "defines": attr.string_list(),
+    "source_map_base_url": attr.string(),
     "_jre": attr.label(default = Label("//build_defs/internal_do_not_use:j2wasm_jre")),
     "_j2wasm_js": attr.label(default = Label("//:j2wasm_js")),
     "_j2cl_transpiler": attr.label(
