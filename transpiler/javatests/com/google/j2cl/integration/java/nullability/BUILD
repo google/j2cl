@@ -12,7 +12,5 @@ integration_test(
     name = "nullability",
     srcs = glob(["*.java"]),
     enable_nullability = True,
-    deps = [
-        "//third_party/java/jspecify_annotations",
-    ],
+    deps = ["//third_party:jspecify_annotations"],
 )
