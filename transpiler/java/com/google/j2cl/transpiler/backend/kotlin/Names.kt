@@ -77,19 +77,7 @@ internal fun TypeDeclaration.ktQualifiedName(asSuperType: Boolean = false) =
 
 internal fun TypeDescriptor.ktQualifiedName(asSuperType: Boolean = false): String =
   when (this) {
-    is PrimitiveTypeDescriptor ->
-      when (this) {
-        PrimitiveTypes.VOID -> "kotlin.Unit"
-        PrimitiveTypes.BOOLEAN -> "kotlin.Boolean"
-        PrimitiveTypes.CHAR -> "kotlin.Char"
-        PrimitiveTypes.BYTE -> "kotlin.Byte"
-        PrimitiveTypes.SHORT -> "kotlin.Short"
-        PrimitiveTypes.INT -> "kotlin.Int"
-        PrimitiveTypes.LONG -> "kotlin.Long"
-        PrimitiveTypes.FLOAT -> "kotlin.Float"
-        PrimitiveTypes.DOUBLE -> "kotlin.Double"
-        else -> null
-      }
+    is PrimitiveTypeDescriptor -> toBoxedType().ktQualifiedName(asSuperType)
     is ArrayTypeDescriptor ->
       when (componentTypeDescriptor!!) {
         PrimitiveTypes.BOOLEAN -> "kotlin.BooleanArray"
