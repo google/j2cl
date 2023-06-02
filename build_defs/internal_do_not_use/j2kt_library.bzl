@@ -13,3 +13,6 @@ def j2kt_native_library(**kwargs):
 
 def j2kt_apple_framework(**kwargs):
     pass
+
+def j2kt_minimal_apple_framework(**kwargs):
+    pass
