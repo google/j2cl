@@ -111,8 +111,14 @@ function createImportObject(userImports) {
     'Math.sinh': Math.sinh,
     'Math.tan': Math.tan,
     'Math.tanh': Math.tanh,
-    'Number.prototype.toPrecision.call': (/** number */ n, /** number */ p) =>
-        Number.prototype.toPrecision.call(n, p),
+    'Number.prototype.toPrecision.call$2':
+        (/** number */ value, /** number */ precision) =>
+            Number.prototype.toPrecision.call(value, precision),
+    'Number.prototype.toString.call$1': (/** number */ d) =>
+        Number.prototype.toString.call(d),
+    'Number.prototype.toString.call$2':
+        (/** number */ i, /** number */ radix) =>
+            Number.prototype.toString.call(i, radix),
     'j2wasm.CharUtils.codePointToLowerCase': CharUtils.codePointToLowerCase,
     'j2wasm.CharUtils.codePointToUpperCase': CharUtils.codePointToUpperCase,
     'j2wasm.CharUtils.charToLowerCase': CharUtils.charToLowerCase,
@@ -125,11 +131,12 @@ function createImportObject(userImports) {
 
     // String
     'String.fromCharCode': String.fromCharCode,
-    'string.indexOf': (/** string */ s, /** string */ r, /** number */ i) =>
+    'string.indexOf$2': (/** string */ s, /** string */ r, /** number */ i) =>
         s.indexOf(r, i),
-    'string.lastIndexOf': (/** string */ s, /** string */ r, /** number */ i) =>
-        s.lastIndexOf(r, i),
-    'string.replace': (/** string */ s, /** !RegExp */ re, /** string */ r) =>
+    'string.lastIndexOf$2':
+        (/** string */ s, /** string */ r, /** number */ i) =>
+            s.lastIndexOf(r, i),
+    'string.replace$2': (/** string */ s, /** !RegExp */ re, /** string */ r) =>
         s.replace(re, r),
     'string.toLowerCase': (/** string */ s) => s.toLowerCase(),
     'string.toUpperCase': (/** string */ s) => s.toUpperCase(),
@@ -137,19 +144,19 @@ function createImportObject(userImports) {
     'string.toLocaleUpperCase': (/** string */ s) => s.toLocaleUpperCase(),
     'j2wasm.StringUtils.equalsIgnoreCase': StringUtils.equalsIgnoreCase,
     'j2wasm.StringUtils.compareToIgnoreCase': StringUtils.compareToIgnoreCase,
-    'Number.prototype.toString.call': (/** number */ n, /** number */ r) =>
-        Number.prototype.toString.call(n, r),
+
     // Regex
-    'RegExp.constructor': (/** string */ p, /** string */ f) =>
+    'RegExp.constructor$1': (/** string */ p) => new RegExp(p),
+    'RegExp.constructor$2': (/** string */ p, /** string */ f) =>
         new RegExp(p, f),
     'get RegExp.lastIndex': (/** !RegExp */ r) => r.lastIndex,
     'set RegExp.lastIndex': (/** !RegExp */ r, /** number */ i) => r.lastIndex =
         i,
-    'RegExp.exec': (/** !RegExp */ r, /** string */ s) => r.exec(s),
-    'RegExp.test': (/** !RegExp */ r, /** string */ s) => r.test(s),
+    'RegExp.exec$1': (/** !RegExp */ r, /** string */ s) => r.exec(s),
+    'RegExp.test$1': (/** !RegExp */ r, /** string */ s) => r.test(s),
     'get RegExpResult.index': (/** !RegExpResult */ r) => r.index,
     'get RegExpResult.length': (/** !RegExpResult */ r) => r.length,
-    'RegExpResult.at': (/** !RegExpResult */ r, /** number */ index) =>
+    'RegExpResult.at$1': (/** !RegExpResult */ r, /** number */ index) =>
         r.at(index),
 
     // TODO(b/193532287): These will be removed after Array interop support in
@@ -168,7 +175,11 @@ function createImportObject(userImports) {
     'Date.now': Date.now,
     'Date.UTC': Date.UTC,
     'Date.parse': Date.parse,
-    'Date.constructor': (...args) => new Date(...args),
+    'Date.constructor': () => new Date(),
+    'Date.constructor$1': (/** number */ ms) => new Date(ms),
+    'Date.constructor$7':
+        (/** number */ year, /** number */ month, /** number */ dayOfMonth, /** number */ hours, /** number */ minutes, /** number */ seconds, /** number */ millis) =>
+            new Date(year, month, dayOfMonth, hours, minutes, seconds, millis),
     'Date.getDate': (/** !Date */ date) => date.getDate(),
     'Date.getDay': (/** !Date */ date) => date.getDay(),
     'Date.getFullYear': (/** !Date */ date) => date.getFullYear(),
@@ -186,18 +197,26 @@ function createImportObject(userImports) {
     'Date.getUTCMonth': (/** !Date */ date) => date.getUTCMonth(),
     'Date.getUTCSeconds': (/** !Date */ date) => date.getUTCSeconds(),
     'Date.toLocaleString': (/** !Date */ date) => date.toLocaleString(),
-    'Date.setDate': (/** !Date */ date, /** number */ dayOfMonth) =>
-        void date.setDate(dayOfMonth),
-    'Date.setFullYear': dateSetFullYear,
-    'Date.setHours': dateSetHours,
-    'Date.setMinutes': (/** !Date */ date, /** number */ minutes) =>
-        void date.setMinutes(minutes),
-    'Date.setMonth': (/** !Date */ date, /** number */ month) =>
-        void date.setMonth(month),
-    'Date.setSeconds': (/** !Date */ date, /** number */ seconds) =>
-        void date.setSeconds(seconds),
-    'Date.setTime': (/** !Date */ date, /** number */ milliseconds) =>
-        void date.setTime(milliseconds),
+    'Date.setDate$1': (/** !Date */ date, /** number */ dayOfMonth) =>
+        date.setDate(dayOfMonth),
+    'Date.setFullYear$1': (/** !Date */ date, /** number */ year) =>
+        date.setFullYear(year),
+    'Date.setFullYear$3':
+        (/** !Date */ date, /** number */ year, /** number */ month, /** number */ day) =>
+            date.setFullYear(year, month, day),
+    'Date.setHours$1': (/** !Date */ date, /** number */ hours) =>
+        date.setHours(hours, ),
+    'Date.setHours$4':
+        (/** !Date */ date, /** number */ hours, /** number */ mins, /** number */ secs, /** number */ ms) =>
+            date.setHours(hours, mins, secs, ms),
+    'Date.setMinutes$1': (/** !Date */ date, /** number */ minutes) =>
+        date.setMinutes(minutes),
+    'Date.setMonth$1': (/** !Date */ date, /** number */ month) =>
+        date.setMonth(month),
+    'Date.setSeconds$1': (/** !Date */ date, /** number */ seconds) =>
+        date.setSeconds(seconds),
+    'Date.setTime$1': (/** !Date */ date, /** number */ milliseconds) =>
+        date.setTime(milliseconds),
   };
 
   return {
@@ -206,22 +225,6 @@ function createImportObject(userImports) {
     // the same key.
     'imports': Object.assign({}, jreImports, userImports)
   };
-}
-
-/**
- * @param {!Date} date
- * @param {...number} dateParts
- */
-function dateSetFullYear(date, ...dateParts) {
-  date.setFullYear(...dateParts);
-}
-
-/**
- * @param {!Date} date
- * @param {...number} timeParts
- */
-function dateSetHours(date, ...timeParts) {
-  date.setHours(...timeParts);
 }
 
 exports = {

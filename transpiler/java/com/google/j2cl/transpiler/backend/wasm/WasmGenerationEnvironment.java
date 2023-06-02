@@ -307,7 +307,17 @@ class WasmGenerationEnvironment {
     return numberOfInterfaceSlots;
   }
 
-  WasmGenerationEnvironment(Library library) {
+  private final JsImportsGenerator.Imports jsImports;
+
+  public JsImportsGenerator.Imports getJsImports() {
+    return jsImports;
+  }
+
+  public JsMethodImport getJsMethodImport(MethodDescriptor methodDescriptor) {
+    return jsImports.getMethodImports().get(methodDescriptor);
+  }
+
+  WasmGenerationEnvironment(Library library, JsImportsGenerator.Imports jsImports) {
     // Resolve variable names into unique wasm identifiers.
     library
         .streamTypes()
@@ -338,6 +348,8 @@ class WasmGenerationEnvironment {
             });
 
     assignInterfaceSlots(library);
+
+    this.jsImports = jsImports;
   }
 
   /**

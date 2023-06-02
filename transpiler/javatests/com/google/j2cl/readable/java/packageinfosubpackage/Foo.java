@@ -20,7 +20,10 @@ import jsinterop.annotations.JsType;
 public class Foo {
 
   @JsType(isNative = true, namespace = "packageinfosubpackage.subpackage", name = "Bar")
-  private static class NativeBar {}
+  private static class NativeBar {
+    // TODO(b/279187295) Remove this explicit constructor when it is handled correctly by J2wasm.
+    public NativeBar() {}
+  }
 
   private NativeBar nativeBar = new NativeBar();
 }
