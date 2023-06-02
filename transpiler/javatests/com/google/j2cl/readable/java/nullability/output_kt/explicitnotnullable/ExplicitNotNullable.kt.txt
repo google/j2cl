@@ -20,6 +20,7 @@ package nullability.explicitnotnullable
 import javaemul.lang.*
 import java.lang.NullPointerException
 import java.lang.RuntimeException
+import java.lang.Void
 import javaemul.lang.uninitializedArrayOf
 import kotlin.Any
 import kotlin.Array
@@ -30,7 +31,6 @@ import kotlin.Int
 import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
-import kotlin.Unit
 import kotlin.arrayOf
 import kotlin.arrayOfNulls
 import kotlin.collections.ArrayList
@@ -86,7 +86,7 @@ open class ExplicitNotNullable {
 
  @JvmField
  @HiddenFromObjC
- var f11_private_2: Unit? = null
+ var f11_private_2: Void? = null
 
  @JvmField
  @HiddenFromObjC

@@ -19,6 +19,7 @@ package lambdas
 
 import javaemul.lang.*
 import java.lang.RuntimeException
+import java.lang.Void
 import javaemul.lang.JavaIterable
 import kotlin.Any
 import kotlin.Double
@@ -31,7 +32,6 @@ import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
 import kotlin.Throwable
-import kotlin.Unit
 import kotlin.collections.MutableIterable
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.experimental.ExperimentalObjCRefinement
@@ -258,10 +258,10 @@ open class Lambdas {
   @JvmStatic
   @ObjCName("testJsInteropLambdas")
   fun testJsInteropLambdas() {
-   val thenable: Lambdas.Thenable<String?>? = Lambdas.Thenable<String?> { f1: Lambdas.GenericJsFunction<Unit?, String?>?, f2: Lambdas.GenericJsFunction<Unit?, Throwable?>? ->
+   val thenable: Lambdas.Thenable<String?>? = Lambdas.Thenable<String?> { f1: Lambdas.GenericJsFunction<Void?, String?>?, f2: Lambdas.GenericJsFunction<Void?, Throwable?>? ->
     f1!!.apply(null)
    }
-   val otherThenable: Lambdas.AnotherThenable<String?>? = Lambdas.AnotherThenable<String?> { f1_1: Lambdas.GenericJsFunction<Unit?, String?>?, f2_1: Lambdas.GenericJsFunction<Unit?, Throwable?>? ->
+   val otherThenable: Lambdas.AnotherThenable<String?>? = Lambdas.AnotherThenable<String?> { f1_1: Lambdas.GenericJsFunction<Void?, String?>?, f2_1: Lambdas.GenericJsFunction<Void?, Throwable?>? ->
     f1_1!!.apply(null)
    }
    val stringJsSupplier: Lambdas.JsSupplier<Int?>? = Lambdas.JsSupplier<Int?> {
@@ -393,8 +393,8 @@ open class Lambdas {
  fun interface Thenable<T> {
   @ObjCName("then")
   fun then(
-   @ObjCName("withLambdasLambdas_GenericJsFunction") f1: Lambdas.GenericJsFunction<Unit?, T>?,
-   @ObjCName("withLambdasLambdas_GenericJsFunction") f2: Lambdas.GenericJsFunction<Unit?, Throwable?>?
+   @ObjCName("withLambdasLambdas_GenericJsFunction") f1: Lambdas.GenericJsFunction<Void?, T>?,
+   @ObjCName("withLambdasLambdas_GenericJsFunction") f2: Lambdas.GenericJsFunction<Void?, Throwable?>?
   )
  }
 
@@ -402,8 +402,8 @@ open class Lambdas {
  fun interface AnotherThenable<T> {
   @ObjCName("then")
   fun then(
-   @ObjCName("withLambdasLambdas_GenericJsFunction") f1: Lambdas.GenericJsFunction<Unit?, T>?,
-   @ObjCName("withLambdasLambdas_GenericJsFunction") f2: Lambdas.GenericJsFunction<Unit?, Throwable?>?
+   @ObjCName("withLambdasLambdas_GenericJsFunction") f1: Lambdas.GenericJsFunction<Void?, T>?,
+   @ObjCName("withLambdasLambdas_GenericJsFunction") f2: Lambdas.GenericJsFunction<Void?, Throwable?>?
   )
  }
 

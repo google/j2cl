@@ -18,6 +18,7 @@
 package autoboxing
 
 import javaemul.lang.*
+import java.lang.Void
 import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
@@ -31,7 +32,6 @@ import kotlin.Long
 import kotlin.OptIn
 import kotlin.Short
 import kotlin.Suppress
-import kotlin.Unit
 import kotlin.assert
 import kotlin.collections.MutableIterable
 import kotlin.experimental.ExperimentalObjCName
@@ -164,8 +164,8 @@ open class AutoBoxing {
 
  @ObjCName("takesAndReturnsVoid")
  open fun takesAndReturnsVoid(
-  @ObjCName("withJavaLangVoid") v: Unit?
- ): Unit? {
+  @ObjCName("withJavaLangVoid") v: Void?
+ ): Void? {
   return null
  }
 
@@ -317,7 +317,7 @@ open class AutoBoxing {
   this.takesAndReturnsPrimitiveDouble(boxL!!.toLong().toDouble())
   this.takesAndReturnsPrimitiveDouble(boxS!!.toShort().toDouble())
   this.takesAndReturnsPrimitiveDouble(boxC!!.toChar().code.toDouble())
-  val v: Unit? = this.takesAndReturnsVoid(this.takesAndReturnsVoid(null))
+  val v: Void? = this.takesAndReturnsVoid(this.takesAndReturnsVoid(null))
   bool = boxBool!!.booleanValue() && boxBool!!.booleanValue()
   d = boxD!!.toDouble() + boxD!!.toDouble()
   f = boxF!!.toFloat() - boxF!!.toFloat()

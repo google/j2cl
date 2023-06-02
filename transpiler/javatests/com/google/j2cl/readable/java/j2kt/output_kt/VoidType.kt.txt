@@ -19,10 +19,10 @@ package j2kt
 
 import javaemul.lang.*
 import java.lang.Class
+import java.lang.Void
 import kotlin.Any
 import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.Unit
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmStatic
@@ -36,12 +36,12 @@ open class VoidType {
   @JvmStatic
   @HiddenFromObjC
   fun testVoid_pp_j2kt() {
-   val nonNullVoid: Unit? = null
-   val nullableVoid: Unit? = null
-   val nullableBoundsWithNonNullVoid: VoidType.NullableBounds<Unit?>? = null
-   val nullableBoundsWithNullableVoid: VoidType.NullableBounds<Unit?>? = null
-   val nonNullBoundsWithNonNullVoid: VoidType.NonNullBounds<Unit>? = null
-   val voidClass: Class<Unit>? = null
+   val nonNullVoid: Void? = null
+   val nullableVoid: Void? = null
+   val nullableBoundsWithNonNullVoid: VoidType.NullableBounds<Void?>? = null
+   val nullableBoundsWithNullableVoid: VoidType.NullableBounds<Void?>? = null
+   val nonNullBoundsWithNonNullVoid: VoidType.NonNullBounds<Void>? = null
+   val voidClass: Class<Void>? = null
   }
  }
 
