@@ -281,7 +281,8 @@ final class JsImportsGenerator {
     builder.append(
         String.format(
             "/** %s */ %s, ",
-            closureEnvironment.getClosureTypeString(parameter.getTypeDescriptor()),
+            // TODO(b/285407647): Make nullability consistent for parameterized types, etc.
+            closureEnvironment.getClosureTypeString(parameter.getTypeDescriptor().toNonNullable()),
             parameter.getName()));
   }
 
@@ -465,6 +466,8 @@ final class JsImportsGenerator {
     private static String computeSignature(
         MethodDescriptor methodDescriptor, ClosureGenerationEnvironment closureEnvironment) {
       return methodDescriptor.getParameterTypeDescriptors().stream()
+          // TODO(b/285407647): Make nullability consistent for parameterized types, etc.
+          .map(TypeDescriptor::toNonNullable)
           .map(closureEnvironment::getClosureTypeString)
           .collect(joining(","));
     }
