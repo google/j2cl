@@ -1,0 +1,45 @@
+// Generated from "j2kt/VoidType.java"
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "REPEATED_BOUND",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER")
+
+package j2kt
+
+import javaemul.lang.*
+import kotlin.OptIn
+import kotlin.Suppress
+import kotlin.Unit
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
+import kotlin.jvm.JvmStatic
+import kotlin.native.HiddenFromObjC
+import kotlin.native.ObjCName
+
+@ObjCName("J2ktVoidType", exact = true)
+open class VoidType {
+ @ObjCName("J2ktVoidTypeCompanion", exact = true)
+ companion object {
+  @JvmStatic
+  @HiddenFromObjC
+  fun testVoid_pp_j2kt() {
+   val nonNullVoid: Unit? = null
+   val nullableVoid: Unit? = null
+   val nullableBoundsWithNonNullVoid: VoidType.NullableBounds<Unit?>? = null
+   val nullableBoundsWithNullableVoid: VoidType.NullableBounds<Unit?>? = null
+  }
+ }
+
+ interface NullableBounds<T> {}
+}
