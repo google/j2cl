@@ -61,7 +61,7 @@ internal val MethodDescriptor.typeArguments: List<TypeArgument>
     )
 
 private fun typeArgument(declarationTypeParameter: TypeVariable, typeDescriptor: TypeDescriptor) =
-  TypeArgument(declarationTypeParameter, typeDescriptor)
+  TypeArgument(declarationTypeParameter, typeDescriptor.withImplicitNullability)
     .withFixedUnboundWildcard
     .withInferredNullability
     .updatedWithParameterVariance

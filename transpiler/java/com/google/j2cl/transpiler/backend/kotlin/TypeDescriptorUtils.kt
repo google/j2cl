@@ -23,8 +23,10 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors
+import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangVoid
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
+import com.google.j2cl.transpiler.backend.kotlin.common.runIf
 
 internal val TypeDescriptor.isImplicitUpperBound
   get() = this == nullableAnyTypeDescriptor
@@ -197,3 +199,6 @@ internal val TypeVariable.hasAmpersandAny: Boolean
 
 internal val TypeDescriptor.variableHasAmpersandAny: Boolean
   get() = this is TypeVariable && hasAmpersandAny
+
+internal val TypeDescriptor.withImplicitNullability
+  get() = runIf(isJavaLangVoid(this)) { toNullable() }

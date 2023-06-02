@@ -18,6 +18,8 @@
 package j2kt
 
 import javaemul.lang.*
+import java.lang.Class
+import kotlin.Any
 import kotlin.OptIn
 import kotlin.Suppress
 import kotlin.Unit
@@ -38,8 +40,12 @@ open class VoidType {
    val nullableVoid: Unit? = null
    val nullableBoundsWithNonNullVoid: VoidType.NullableBounds<Unit?>? = null
    val nullableBoundsWithNullableVoid: VoidType.NullableBounds<Unit?>? = null
+   val nonNullBoundsWithNonNullVoid: VoidType.NonNullBounds<Unit>? = null
+   val voidClass: Class<Unit>? = null
   }
  }
 
  interface NullableBounds<T> {}
+
+ interface NonNullBounds<T: Any> {}
 }

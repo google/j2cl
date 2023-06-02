@@ -21,7 +21,6 @@ import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptor
-import com.google.j2cl.transpiler.ast.TypeDescriptors
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
@@ -46,7 +45,7 @@ internal fun Renderer.typeDescriptorSource(
       asSuperType = asSuperType,
       projectRawToWildcards = projectRawToWildcards
     )
-    .source(typeDescriptor)
+    .source(typeDescriptor.withImplicitNullability)
 
 internal fun Renderer.typeArgumentsSource(typeArguments: List<TypeArgument>): Source =
   TypeDescriptorRenderer(this).argumentsSource(typeArguments)
@@ -158,9 +157,7 @@ private data class TypeDescriptorRenderer(
     ampersandSeparated(typeDescriptor.intersectionTypeDescriptors.map { source(it) })
 
   fun nullableSuffixSource(typeDescriptor: TypeDescriptor): Source =
-    sourceIf(typeDescriptor.isNullable || TypeDescriptors.isJavaLangVoid(typeDescriptor)) {
-      source("?")
-    }
+    sourceIf(typeDescriptor.isNullable) { source("?") }
 
   private fun withSeen(typeVariable: TypeVariable): TypeDescriptorRenderer =
     copy(seenTypeVariables = seenTypeVariables + typeVariable.toNonNullable())

@@ -22,10 +22,14 @@ import org.jspecify.nullness.Nullable;
 public class VoidType {
   interface NullableBounds<T extends @Nullable Object> {}
 
+  interface NonNullBounds<T> {}
+
   static void testVoid() {
     Void nonNullVoid;
     @Nullable Void nullableVoid;
     NullableBounds<Void> nullableBoundsWithNonNullVoid;
     NullableBounds<@Nullable Void> nullableBoundsWithNullableVoid;
+    NonNullBounds<Void> nonNullBoundsWithNonNullVoid;
+    Class<Void> voidClass;
   }
 }
