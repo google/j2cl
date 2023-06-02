@@ -21,11 +21,13 @@ import com.google.j2cl.transpiler.ast.AstUtils.getConstructorInvocation
 import com.google.j2cl.transpiler.ast.AstUtils.isConstructorInvocationStatement
 import com.google.j2cl.transpiler.ast.AstUtils.needsVisibilityBridge
 import com.google.j2cl.transpiler.ast.Field
+import com.google.j2cl.transpiler.ast.FunctionExpression
 import com.google.j2cl.transpiler.ast.InitializerBlock
 import com.google.j2cl.transpiler.ast.Member as JavaMember
 import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor
+import com.google.j2cl.transpiler.ast.MethodLike
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.ReturnStatement
 import com.google.j2cl.transpiler.ast.Statement
@@ -157,7 +159,7 @@ private fun Renderer.methodHeaderSource(method: Method): Source =
     val methodDescriptor = method.descriptor
     val methodObjCNames = method.toObjCNames()
     newLineSeparated(
-      sourceIf(method.isStatic) { jvmStaticAnnotationSource() },
+      sourceIf(methodDescriptor.isStatic) { jvmStaticAnnotationSource() },
       objCAnnotationSource(methodDescriptor, methodObjCNames),
       spaceSeparated(
         methodModifiersSource(methodDescriptor),
@@ -168,6 +170,23 @@ private fun Renderer.methodHeaderSource(method: Method): Source =
           ),
           if (methodDescriptor.isConstructor) constructorInvocationSource(method)
           else methodReturnTypeSource(methodDescriptor)
+        ),
+        whereClauseSource(methodDescriptor.typeParameterTypeDescriptors)
+      )
+    )
+  }
+
+internal fun Renderer.methodHeaderSource(functionExpression: FunctionExpression): Source =
+  functionExpression.descriptor.let { methodDescriptor ->
+    newLineSeparated(
+      spaceSeparated(
+        source("override"),
+        colonSeparated(
+          join(
+            methodKindAndNameSource(methodDescriptor),
+            methodParametersSource(functionExpression)
+          ),
+          methodReturnTypeSource(methodDescriptor)
         ),
         whereClauseSource(methodDescriptor.typeParameterTypeDescriptors)
       )
@@ -203,8 +222,8 @@ private val MethodDescriptor.inheritanceModifierSource
     }
 
 internal fun Renderer.methodParametersSource(
-  method: Method,
-  objCParameterNames: List<String>?
+  method: MethodLike,
+  objCParameterNames: List<String>? = null
 ): Source {
   val methodDescriptor = method.descriptor
   val parameterDescriptors = methodDescriptor.parameterDescriptors

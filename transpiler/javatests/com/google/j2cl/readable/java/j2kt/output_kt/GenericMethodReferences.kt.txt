@@ -1,4 +1,4 @@
-// Generated from "j2ktnotpassing/GenericMethodReferences.java"
+// Generated from "j2kt/GenericMethodReferences.java"
 @file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 @file:Suppress(
  "ALWAYS_NULL",
@@ -15,7 +15,7 @@
  "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
  "VARIABLE_WITH_REDUNDANT_INITIALIZER")
 
-package j2ktnotpassing
+package j2kt
 
 import javaemul.lang.*
 import kotlin.OptIn
@@ -26,25 +26,27 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktnotpassingGenericMethodReferences", exact = true)
+@ObjCName("J2ktGenericMethodReferences", exact = true)
 open class GenericMethodReferences {
- @ObjCName("J2ktnotpassingGenericMethodReferencesCompanion", exact = true)
+ @ObjCName("J2ktGenericMethodReferencesCompanion", exact = true)
  companion object {
   @JvmStatic
   @HiddenFromObjC
-  fun <T> genericMethod_pp_j2ktnotpassing(t: T): T {
+  fun <T> genericMethod_pp_j2kt(t: T): T {
    return t
   }
 
   @JvmStatic
   @HiddenFromObjC
-  fun accept_pp_j2ktnotpassing(fn: GenericMethodReferences.Fn?) {}
+  fun accept_pp_j2kt(fn: GenericMethodReferences.Fn?) {}
 
   @JvmStatic
   @HiddenFromObjC
-  fun test_pp_j2ktnotpassing() {
-   GenericMethodReferences.accept_pp_j2ktnotpassing(GenericMethodReferences.Fn { arg0: T ->
-    return@Fn GenericMethodReferences.genericMethod_pp_j2ktnotpassing<T>(arg0)
+  fun test_pp_j2kt() {
+   GenericMethodReferences.accept_pp_j2kt(object : GenericMethodReferences.Fn {
+    override fun <T> apply(arg0: T): T {
+     return GenericMethodReferences.genericMethod_pp_j2kt<T>(arg0)
+    }
    })
   }
  }

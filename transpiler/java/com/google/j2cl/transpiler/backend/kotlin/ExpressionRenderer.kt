@@ -284,19 +284,43 @@ private fun Renderer.expressionWithCommentSource(
 private fun Renderer.fieldAccessSource(fieldAccess: FieldAccess): Source =
   dotSeparated(qualifierSource(fieldAccess), identifierSource(fieldAccess.target.ktMangledName))
 
+private val FunctionExpression.renderAsLambda: Boolean
+  get() = typeDescriptor.functionalInterface!!.typeDeclaration.isKtFunctionalInterface
+
 private fun Renderer.functionExpressionSource(functionExpression: FunctionExpression): Source =
+  if (functionExpression.renderAsLambda) functionExpressionLambdaSource(functionExpression)
+  else functionExpressionObjectSource(functionExpression)
+
+private fun Renderer.functionExpressionLambdaSource(
+  functionExpression: FunctionExpression
+): Source =
   spaceSeparated(
     newInstanceTypeDescriptorSource(functionExpression.typeDescriptor.functionalInterface!!),
-    block(parametersSource(functionExpression), bodySource(functionExpression))
+    block(parametersSource(functionExpression), lambdaBodySource(functionExpression))
   )
 
-private fun Renderer.bodySource(functionExpression: FunctionExpression): Source =
+private fun Renderer.lambdaBodySource(functionExpression: FunctionExpression): Source =
   functionExpression.typeDescriptor.functionalInterface!!
     .typeDeclaration
     .returnLabelIdentifier
     .let {
       copy(currentReturnLabelIdentifier = it).statementsSource(functionExpression.body.statements)
     }
+
+private fun Renderer.functionExpressionObjectSource(
+  functionExpression: FunctionExpression
+): Source =
+  spaceSeparated(
+    source("object"),
+    source(":"),
+    newInstanceTypeDescriptorSource(functionExpression.typeDescriptor.functionalInterface!!),
+    block(
+      spaceSeparated(
+        methodHeaderSource(functionExpression),
+        block(statementsSource(functionExpression.body.statements))
+      )
+    )
+  )
 
 private fun Renderer.parametersSource(functionExpression: FunctionExpression): Source =
   commaSeparated(functionExpression.parameters.map(::variableSource)).ifNotEmpty {
