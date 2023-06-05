@@ -1,0 +1,47 @@
+goog.module('lambdas.Lambdas.Super$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Lambdas = goog.forwardDeclare('lambdas.Lambdas$impl');
+
+class Super extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {Lambdas} @nodts*/
+  this.$outer_this__lambdas_Lambdas_Super;
+ }
+ /** @nodts @return {!Super} */
+ static $create__lambdas_Lambdas(/** Lambdas */ $outer_this) {
+  Super.$clinit();
+  let $instance = new Super();
+  $instance.$ctor__lambdas_Lambdas_Super__lambdas_Lambdas__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__lambdas_Lambdas_Super__lambdas_Lambdas__void(/** Lambdas */ $outer_this) {
+  this.$outer_this__lambdas_Lambdas_Super = $outer_this;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ m_m__void_$pp_lambdas() {}
+ /** @nodts */
+ static $clinit() {
+  Super.$clinit = () =>{};
+  Super.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Super;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Super, 'lambdas.Lambdas$Super');
+
+exports = Super;
+
+//# sourceMappingURL=Lambdas$Super.js.map

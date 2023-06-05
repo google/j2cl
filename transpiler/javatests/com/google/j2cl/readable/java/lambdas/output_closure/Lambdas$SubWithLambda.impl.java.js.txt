@@ -1,0 +1,54 @@
+goog.module('lambdas.Lambdas.SubWithLambda$impl');
+
+const Super = goog.require('lambdas.Lambdas.Super$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Lambdas = goog.forwardDeclare('lambdas.Lambdas$impl');
+let Runnable = goog.forwardDeclare('lambdas.Lambdas.Runnable$impl');
+
+class SubWithLambda extends Super {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {Lambdas} @nodts*/
+  this.$outer_this__lambdas_Lambdas_SubWithLambda;
+ }
+ /** @nodts @return {!SubWithLambda} */
+ static $create__lambdas_Lambdas(/** Lambdas */ $outer_this) {
+  SubWithLambda.$clinit();
+  let $instance = new SubWithLambda();
+  $instance.$ctor__lambdas_Lambdas_SubWithLambda__lambdas_Lambdas__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__lambdas_Lambdas_SubWithLambda__lambdas_Lambdas__void(/** Lambdas */ $outer_this) {
+  this.$outer_this__lambdas_Lambdas_SubWithLambda = $outer_this;
+  this.$ctor__lambdas_Lambdas_Super__lambdas_Lambdas__void($outer_this);
+ }
+ /** @nodts */
+ m_n__void_$pp_lambdas() {
+  let r = Runnable.$adapt(() =>{
+   super.m_m__void_$pp_lambdas();
+  });
+ }
+ /** @nodts */
+ static $clinit() {
+  SubWithLambda.$clinit = () =>{};
+  SubWithLambda.$loadModules();
+  Super.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SubWithLambda;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Runnable = goog.module.get('lambdas.Lambdas.Runnable$impl');
+ }
+}
+$Util.$setClassMetadata(SubWithLambda, 'lambdas.Lambdas$SubWithLambda');
+
+exports = SubWithLambda;
+
+//# sourceMappingURL=Lambdas$SubWithLambda.js.map

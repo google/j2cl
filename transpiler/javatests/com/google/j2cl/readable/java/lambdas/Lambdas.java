@@ -15,6 +15,7 @@
  */
 package lambdas;
 
+
 import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
@@ -315,6 +316,39 @@ public class Lambdas {
   // used as a lambda.
   public static <T> void testIterable(Iterable<T> iterable) {
     Iterable<T> lambda = () -> iterable.iterator();
+  }
+
+  interface Runnable {
+    void run();
+  }
+
+  class Outer {
+    void m() {}
+
+    void n() {
+      Runnable r = () -> this.m();
+    }
+  }
+
+  class Super {
+    void m() {}
+  }
+
+  class Sub extends Super {
+    void n() {
+      Runnable r =
+          new Runnable() {
+            public void run() {
+              Sub.super.m();
+            }
+          };
+    }
+  }
+
+  class SubWithLambda extends Super {
+    void n() {
+      Runnable r = () -> super.m();
+    }
   }
 }
 

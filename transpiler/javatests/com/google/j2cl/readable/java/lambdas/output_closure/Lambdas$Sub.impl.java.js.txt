@@ -1,0 +1,52 @@
+goog.module('lambdas.Lambdas.Sub$impl');
+
+const Super = goog.require('lambdas.Lambdas.Super$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Lambdas = goog.forwardDeclare('lambdas.Lambdas$impl');
+let $1 = goog.forwardDeclare('lambdas.Lambdas.Sub.$1$impl');
+
+class Sub extends Super {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {Lambdas} @nodts*/
+  this.$outer_this__lambdas_Lambdas_Sub;
+ }
+ /** @nodts @return {!Sub} */
+ static $create__lambdas_Lambdas(/** Lambdas */ $outer_this) {
+  Sub.$clinit();
+  let $instance = new Sub();
+  $instance.$ctor__lambdas_Lambdas_Sub__lambdas_Lambdas__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__lambdas_Lambdas_Sub__lambdas_Lambdas__void(/** Lambdas */ $outer_this) {
+  this.$outer_this__lambdas_Lambdas_Sub = $outer_this;
+  this.$ctor__lambdas_Lambdas_Super__lambdas_Lambdas__void($outer_this);
+ }
+ /** @nodts */
+ m_n__void_$pp_lambdas() {
+  let r = $1.$create__lambdas_Lambdas_Sub(this);
+ }
+ /** @nodts */
+ static $clinit() {
+  Sub.$clinit = () =>{};
+  Sub.$loadModules();
+  Super.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Sub;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1 = goog.module.get('lambdas.Lambdas.Sub.$1$impl');
+ }
+}
+$Util.$setClassMetadata(Sub, 'lambdas.Lambdas$Sub');
+
+exports = Sub;
+
+//# sourceMappingURL=Lambdas$Sub.js.map

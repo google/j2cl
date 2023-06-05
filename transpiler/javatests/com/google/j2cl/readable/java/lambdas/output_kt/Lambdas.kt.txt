@@ -442,4 +442,46 @@ open class Lambdas {
   @ObjCName("defaultMethod")
   fun defaultMethod() {}
  }
+
+ fun interface Runnable {
+  @ObjCName("run")
+  fun run()
+ }
+
+ open inner class Outer {
+  @HiddenFromObjC
+  open fun m_pp_lambdas() {}
+
+  @HiddenFromObjC
+  open fun n_pp_lambdas() {
+   val r: Lambdas.Runnable? = Lambdas.Runnable {
+    this.m_pp_lambdas()
+   }
+  }
+ }
+
+ open inner class Super {
+  @HiddenFromObjC
+  open fun m_pp_lambdas() {}
+ }
+
+ open inner class Sub: Lambdas.Super() {
+  @HiddenFromObjC
+  open fun n_pp_lambdas() {
+   val r: Lambdas.Runnable? = object : Lambdas.Runnable {
+    override fun run() {
+     super<Lambdas.Super>@Sub.m_pp_lambdas()
+    }
+   }
+  }
+ }
+
+ open inner class SubWithLambda: Lambdas.Super() {
+  @HiddenFromObjC
+  open fun n_pp_lambdas() {
+   val r: Lambdas.Runnable? = Lambdas.Runnable {
+    super<Lambdas.Super>.m_pp_lambdas()
+   }
+  }
+ }
 }
