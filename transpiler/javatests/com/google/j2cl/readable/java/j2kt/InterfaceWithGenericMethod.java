@@ -15,15 +15,6 @@
  */
 package j2kt;
 
-public class GenericMethodReferences {
-
-  static <T> T genericMethod(T t) {
-    return t;
-  }
-
-  static void accept(InterfaceWithGenericMethod fn) {}
-
-  static void test() {
-    accept(GenericMethodReferences::genericMethod);
-  }
+interface InterfaceWithGenericMethod {
+  <T> T apply(T t);
 }

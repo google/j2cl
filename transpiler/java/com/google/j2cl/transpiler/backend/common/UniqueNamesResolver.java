@@ -23,9 +23,11 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
+import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.HasName;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
+import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.NameDeclaration;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeVariable;
@@ -71,22 +73,30 @@ public final class UniqueNamesResolver {
         new AbstractVisitor() {
           @Override
           public void exitMethod(Method method) {
-            for (TypeVariable typeVariable :
-                method.getDescriptor().getTypeParameterTypeDescriptors()) {
-              if (typeVariable.isWildcardOrCapture()) {
-                continue;
-              }
-              String name = registerUniqueName(method.getDescriptor(), typeVariable.toNullable());
-              // TODO(b/236987392): Redesign type variables to be able to reflect better nullability
-              // information, and remove the hack of registering the two vesions that currently
-              // exist.
-              uniqueNameByVariable.put(typeVariable.toNonNullable(), name);
-            }
+            registerUniqueNames(method.getDescriptor());
+          }
+
+          @Override
+          public void exitFunctionExpression(FunctionExpression functionExpression) {
+            registerUniqueNames(functionExpression.getDescriptor());
           }
 
           @Override
           public void exitNameDeclaration(NameDeclaration nameDeclaration) {
             registerUniqueName(getCurrentMember().getDescriptor(), nameDeclaration);
+          }
+
+          private void registerUniqueNames(MethodDescriptor methodDescriptor) {
+            for (TypeVariable typeVariable : methodDescriptor.getTypeParameterTypeDescriptors()) {
+              if (typeVariable.isWildcardOrCapture()) {
+                continue;
+              }
+              String name = registerUniqueName(methodDescriptor, typeVariable.toNullable());
+              // TODO(b/236987392): Redesign type variables to be able to reflect better nullability
+              // information, and remove the hack of registering the two vesions that currently
+              // exist.
+              uniqueNameByVariable.put(typeVariable.toNonNullable(), name);
+            }
           }
 
           @CanIgnoreReturnValue
