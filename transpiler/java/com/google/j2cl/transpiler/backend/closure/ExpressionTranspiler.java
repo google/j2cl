@@ -159,7 +159,7 @@ public final class ExpressionTranspiler {
 
       @Override
       public boolean enterFunctionExpression(FunctionExpression expression) {
-        if (expression.isJsAsync()) {
+        if (expression.getDescriptor().isJsAsync()) {
           sourceBuilder.append("async ");
         }
 

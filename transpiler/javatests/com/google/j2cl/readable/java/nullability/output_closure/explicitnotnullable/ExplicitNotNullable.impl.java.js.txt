@@ -9,6 +9,7 @@ let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let DefaultNullable = goog.forwardDeclare('nullability.explicitnotnullable.DefaultNullable$impl');
+let $1 = goog.forwardDeclare('nullability.explicitnotnullable.ExplicitNotNullable.$1$impl');
 let Consumer = goog.forwardDeclare('nullability.explicitnotnullable.ExplicitNotNullable.Consumer$impl');
 let DependentTypeParameters = goog.forwardDeclare('nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters$impl');
 let ExplicitNotNullable_Function = goog.forwardDeclare('nullability.explicitnotnullable.ExplicitNotNullable.Function$impl');
@@ -407,10 +408,7 @@ class ExplicitNotNullable extends j_l_Object {
   this.f_f28__nullability_explicitnotnullable_ExplicitNotNullable_ = /**@type {!Array<?string>}*/ ($Arrays.$create([1], j_l_String));
   this.f_f29__nullability_explicitnotnullable_ExplicitNotNullable_ = /**@type {!Array<string>}*/ ($Arrays.$create([1], j_l_String));
   this.f_f30__nullability_explicitnotnullable_ExplicitNotNullable_ = /**@type {!Array<?string>}*/ ($Arrays.$create([1], j_l_String));
-  this.f_i__nullability_explicitnotnullable_ExplicitNotNullable = ExplicitNotNullable_Function.$adapt((s) =>{
-   let s_1 = /**@type {?string}*/ ($Casts.$to(s, j_l_String));
-   return s_1;
-  });
+  this.f_i__nullability_explicitnotnullable_ExplicitNotNullable = $1.$create__nullability_explicitnotnullable_ExplicitNotNullable(this);
  }
  /** @nodts */
  static $clinit() {
@@ -430,8 +428,8 @@ class ExplicitNotNullable extends j_l_Object {
   ArrayList = goog.module.get('java.util.ArrayList$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   DefaultNullable = goog.module.get('nullability.explicitnotnullable.DefaultNullable$impl');
+  $1 = goog.module.get('nullability.explicitnotnullable.ExplicitNotNullable.$1$impl');
   Consumer = goog.module.get('nullability.explicitnotnullable.ExplicitNotNullable.Consumer$impl');
-  ExplicitNotNullable_Function = goog.module.get('nullability.explicitnotnullable.ExplicitNotNullable.Function$impl');
   IntFunction = goog.module.get('nullability.explicitnotnullable.ExplicitNotNullable.IntFunction$impl');
   Supplier = goog.module.get('nullability.explicitnotnullable.ExplicitNotNullable.Supplier$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');

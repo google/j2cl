@@ -1,0 +1,64 @@
+goog.module('nullability.explicitnotnullable.ExplicitNotNullable.$1$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const ExplicitNotNullable_Function = goog.require('nullability.explicitnotnullable.ExplicitNotNullable.Function$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let ExplicitNotNullable = goog.forwardDeclare('nullability.explicitnotnullable.ExplicitNotNullable$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @implements {ExplicitNotNullable_Function<string, string>}
+ */
+class $1 extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {ExplicitNotNullable} @nodts*/
+  this.$outer_this__nullability_explicitnotnullable_ExplicitNotNullable_1;
+ }
+ /** @nodts @return {!$1} */
+ static $create__nullability_explicitnotnullable_ExplicitNotNullable(/** ExplicitNotNullable */ $outer_this) {
+  $1.$clinit();
+  let $instance = new $1();
+  $instance.$ctor__nullability_explicitnotnullable_ExplicitNotNullable_1__nullability_explicitnotnullable_ExplicitNotNullable__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nullability_explicitnotnullable_ExplicitNotNullable_1__nullability_explicitnotnullable_ExplicitNotNullable__void(/** ExplicitNotNullable */ $outer_this) {
+  this.$outer_this__nullability_explicitnotnullable_ExplicitNotNullable_1 = $outer_this;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {string} */
+ m_apply__java_lang_String__java_lang_String(/** string */ s) {
+  return s;
+ }
+ //Bridge method.
+ /** @final @override @nodts @return {string} */
+ m_apply__java_lang_Object__java_lang_Object(/** string */ arg0) {
+  return this.m_apply__java_lang_String__java_lang_String(/**@type {string}*/ ($Casts.$to(arg0, j_l_String)));
+ }
+ /** @nodts */
+ static $clinit() {
+  $1.$clinit = () =>{};
+  $1.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+ExplicitNotNullable_Function.$markImplementor($1);
+$Util.$setClassMetadata($1, 'nullability.explicitnotnullable.ExplicitNotNullable$1');
+
+exports = $1;
+
+//# sourceMappingURL=ExplicitNotNullable$1.js.map

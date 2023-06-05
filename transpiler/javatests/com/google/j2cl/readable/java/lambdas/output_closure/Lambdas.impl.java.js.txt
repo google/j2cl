@@ -11,6 +11,8 @@ let Long = goog.forwardDeclare('java.lang.Long$impl');
 let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
+let $1 = goog.forwardDeclare('lambdas.Lambdas.$1$impl');
+let $2 = goog.forwardDeclare('lambdas.Lambdas.$2$impl');
 let $3 = goog.forwardDeclare('lambdas.Lambdas.$3$impl');
 let $LambdaAdaptor$1 = goog.forwardDeclare('lambdas.Lambdas.$LambdaAdaptor$1$impl');
 let $LambdaAdaptor$2 = goog.forwardDeclare('lambdas.Lambdas.$LambdaAdaptor$2$impl');
@@ -124,18 +126,14 @@ class Lambdas extends j_l_Object {
  /** @nodts @template T */
  m_testInstanceMethodTypeVariableThroughLambda__void() {
   let wrapped = Functional.$adapt((/** Functional<T> */ f) =>{
-   return Functional.$adapt((/** Functional<T> */ f_1) =>{
-    return null;
-   });
+   return /**@type {!$1<T>}*/ ($1.$create__lambdas_Lambdas(this));
   });
  }
  /** @nodts @template T */
  static m_testStaticMethodTypeVariableThroughLambda__void() {
   Lambdas.$clinit();
   let wrapped = Functional.$adapt((/** Functional<T> */ f) =>{
-   return Functional.$adapt((/** Functional<T> */ f_1) =>{
-    return null;
-   });
+   return /**@type {!$2<T>}*/ ($2.$create__());
   });
  }
  /** @nodts @template T @return {T} */
@@ -286,6 +284,8 @@ class Lambdas extends j_l_Object {
   Long = goog.module.get('java.lang.Long$impl');
   RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
+  $1 = goog.module.get('lambdas.Lambdas.$1$impl');
+  $2 = goog.module.get('lambdas.Lambdas.$2$impl');
   $3 = goog.module.get('lambdas.Lambdas.$3$impl');
   $LambdaAdaptor$1 = goog.module.get('lambdas.Lambdas.$LambdaAdaptor$1$impl');
   $LambdaAdaptor$2 = goog.module.get('lambdas.Lambdas.$LambdaAdaptor$2$impl');

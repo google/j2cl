@@ -16,11 +16,7 @@
 [return new HashFunction<T>() {
       @Override
 ...      }
-    };] => [return HashFunction.$adapt((/** T */ input) =>{
-   return '';
-  });] "overwrittentypevariables.HashFunctions.hashFunction"
-[input] => [input] "input"
-[return "";] => [return '';] "overwrittentypevariables.HashFunctions$1.apply"
+    };] => [return /**@type {!$1<T>}*/ ($1.$create__());] "overwrittentypevariables.HashFunctions.hashFunction"
 [enumHashFunction] => [m_enumHashFunction__overwrittentypevariables_HashFunction]
 [{
     return new HashFunction<T>() {
@@ -29,14 +25,7 @@
 [return new HashFunction<T>() {
       @Override
 ...      }
-    };] => [return HashFunction.$adapt((input) =>{
-   let input_1 = /**@type {Enum}*/ ($Casts.$to(input, Enum));
-   return '' + /**@type {!Enum<T>}*/ (input_1).ordinal();
-  });] "overwrittentypevariables.HashFunctions.enumHashFunction"
-[input] => [input] "input"
-[apply] => [let input_1 = /**@type {Enum}*/ ($Casts.$to(input, Enum));] "overwrittentypevariables.HashFunctions$2.apply"
-[input] => [input_1] "input"
-[return "" + input.ordinal();] => [return '' + /**@type {!Enum<T>}*/ (input_1).ordinal();] "overwrittentypevariables.HashFunctions$2.apply"
+    };] => [return /**@type {!$2<T>}*/ ($2.$create__());] "overwrittentypevariables.HashFunctions.enumHashFunction"
 [HashFunctions] => [$clinit]
 [HashFunctions] => [HashFunctions.$clinit = () =>{};] "overwrittentypevariables.HashFunctions.<clinit>"
 [HashFunctions] => [HashFunctions.$loadModules();] "overwrittentypevariables.HashFunctions.<clinit>"

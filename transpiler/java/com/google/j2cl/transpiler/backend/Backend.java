@@ -222,8 +222,8 @@ public enum Backend {
           VerifyReferenceScoping::new,
           // Passes that change the class hierarchy or nesting structure (and passes needed for
           // those).
-          OptimizeAnonymousInnerClassesToFunctionExpressions::new,
           ImplementLambdaExpressionsViaJsFunctionAdaptor::new,
+          OptimizeAnonymousInnerClassesToFunctionExpressions::new,
           NormalizeFunctionExpressions::new,
           // Compute bridge methods before optimizing autovalue, since inlining the autovalue
           // classes requires inlining the bridges as well.

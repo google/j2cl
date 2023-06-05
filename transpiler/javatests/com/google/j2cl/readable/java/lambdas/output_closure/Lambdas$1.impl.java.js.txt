@@ -1,0 +1,55 @@
+goog.module('lambdas.Lambdas.$1$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const Functional = goog.require('lambdas.Lambdas.Functional$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Lambdas = goog.forwardDeclare('lambdas.Lambdas$impl');
+
+/**
+ * @template T
+ * @implements {Functional<T>}
+ */
+class $1 extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {Lambdas} @nodts*/
+  this.$outer_this__lambdas_Lambdas_1;
+ }
+ /** @nodts @template T @return {!$1<T>} */
+ static $create__lambdas_Lambdas(/** Lambdas */ $outer_this) {
+  $1.$clinit();
+  let $instance = new $1();
+  $instance.$ctor__lambdas_Lambdas_1__lambdas_Lambdas__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__lambdas_Lambdas_1__lambdas_Lambdas__void(/** Lambdas */ $outer_this) {
+  this.$outer_this__lambdas_Lambdas_1 = $outer_this;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override @nodts @return {Functional<T>} */
+ m_wrap__lambdas_Lambdas_Functional__lambdas_Lambdas_Functional(/** Functional<T> */ f) {
+  return null;
+ }
+ /** @nodts */
+ static $clinit() {
+  $1.$clinit = () =>{};
+  $1.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Functional.$markImplementor($1);
+$Util.$setClassMetadata($1, 'lambdas.Lambdas$1');
+
+exports = $1;
+
+//# sourceMappingURL=Lambdas$1.js.map

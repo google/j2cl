@@ -837,7 +837,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
               environment.createTypeDescriptor(
                   expression.resolveTypeBinding(),
                   getCurrentType().getDeclaration().isNullMarked()))
-          .setJsAsync(functionalMethodDescriptor.isJsAsync())
           .setParameters(
               JdtEnvironment.<VariableDeclaration>asTypedList(expression.parameters()).stream()
                   .map(this::convert)

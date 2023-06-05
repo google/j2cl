@@ -5,7 +5,8 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Enum = goog.forwardDeclare('java.lang.Enum$impl');
 let HashFunction = goog.forwardDeclare('overwrittentypevariables.HashFunction$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $1 = goog.forwardDeclare('overwrittentypevariables.HashFunctions.$1$impl');
+let $2 = goog.forwardDeclare('overwrittentypevariables.HashFunctions.$2$impl');
 
 class HashFunctions extends j_l_Object {
  /** @protected @nodts */
@@ -26,17 +27,12 @@ class HashFunctions extends j_l_Object {
  /** @final @nodts @template T @return {HashFunction<T>} */
  static m_hashFunction__overwrittentypevariables_HashFunction() {
   HashFunctions.$clinit();
-  return HashFunction.$adapt((/** T */ input) =>{
-   return '';
-  });
+  return /**@type {!$1<T>}*/ ($1.$create__());
  }
  /** @final @nodts @template T @return {HashFunction<T>} */
  static m_enumHashFunction__overwrittentypevariables_HashFunction() {
   HashFunctions.$clinit();
-  return HashFunction.$adapt((input) =>{
-   let input_1 = /**@type {Enum}*/ ($Casts.$to(input, Enum));
-   return '' + /**@type {!Enum<T>}*/ (input_1).ordinal();
-  });
+  return /**@type {!$2<T>}*/ ($2.$create__());
  }
  /** @nodts */
  static $clinit() {
@@ -51,9 +47,8 @@ class HashFunctions extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
-  Enum = goog.module.get('java.lang.Enum$impl');
-  HashFunction = goog.module.get('overwrittentypevariables.HashFunction$impl');
-  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  $1 = goog.module.get('overwrittentypevariables.HashFunctions.$1$impl');
+  $2 = goog.module.get('overwrittentypevariables.HashFunctions.$2$impl');
  }
 }
 $Util.$setClassMetadata(HashFunctions, 'overwrittentypevariables.HashFunctions');
