@@ -75,7 +75,7 @@ def _impl_j2wasm_application(ctx):
         arguments = [args],
         env = dict(LANG = "en_US.UTF-8"),
         execution_requirements = {"supports-workers": "1"},
-        mnemonic = "J2wasm",
+        mnemonic = "J2wasmTranspile",
     )
 
     # Link the wat file for the named output
