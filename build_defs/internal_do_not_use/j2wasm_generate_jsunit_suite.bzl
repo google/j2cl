@@ -48,7 +48,7 @@ def j2wasm_generate_jsunit_suite(
 
     # This target triggers our Java annotation processor and generates the
     # plumbing between a jsunit_test and transpiled JUnit tests
-    # It's outputs are:
+    # Its outputs are:
     #  - test_summary.json that lists all jsunit test suites
     #  - A .testsuite file for every JUnit test containing a jsunit tests suite
     #  - A Java class that contains the bridge between the jsunit test
