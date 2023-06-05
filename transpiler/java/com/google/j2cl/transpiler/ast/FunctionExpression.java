@@ -36,16 +36,19 @@ public class FunctionExpression extends Expression implements MethodLike {
   @Visitable Block body;
   private final TypeDescriptor typeDescriptor;
   private final SourcePosition sourcePosition;
+  private final boolean isJsAsync;
 
   private FunctionExpression(
       SourcePosition sourcePosition,
       TypeDescriptor typeDescriptor,
       List<Variable> parameters,
-      Block body) {
+      Block body,
+      boolean isJsAsync) {
     this.parameters = checkNotNull(parameters);
     this.body = checkNotNull(body);
     this.typeDescriptor = typeDescriptor.toNonNullable();
     this.sourcePosition = checkNotNull(sourcePosition);
+    this.isJsAsync = isJsAsync;
     checkNotNull(typeDescriptor.getFunctionalInterface());
   }
 
@@ -119,6 +122,10 @@ public class FunctionExpression extends Expression implements MethodLike {
     return getDescriptor().isJsMethodVarargs();
   }
 
+  public boolean isJsAsync() {
+    return isJsAsync;
+  }
+
   @Override
   public Precedence getPrecedence() {
     return Precedence.FUNCTION;
@@ -138,6 +145,7 @@ public class FunctionExpression extends Expression implements MethodLike {
         .setTypeDescriptor(typeDescriptor)
         .setParameters(clonedParameters)
         .setStatements(clonedBody.getStatements())
+        .setJsAsync(isJsAsync)
         .setSourcePosition(sourcePosition)
         .build();
   }
@@ -156,6 +164,7 @@ public class FunctionExpression extends Expression implements MethodLike {
     private List<Variable> parameters = new ArrayList<>();
     private List<Statement> statements = new ArrayList<>();
     private TypeDescriptor typeDescriptor;
+    private boolean isJsAsync;
     private SourcePosition sourcePosition;
 
     public static Builder from(FunctionExpression expression) {
@@ -163,6 +172,7 @@ public class FunctionExpression extends Expression implements MethodLike {
           .setTypeDescriptor(expression.getTypeDescriptor())
           .setParameters(expression.getParameters())
           .setStatements(expression.getBody().getStatements())
+          .setJsAsync(expression.isJsAsync)
           .setSourcePosition(expression.getSourcePosition());
     }
 
@@ -190,6 +200,11 @@ public class FunctionExpression extends Expression implements MethodLike {
       return this;
     }
 
+    public Builder setJsAsync(boolean isJsAsync) {
+      this.isJsAsync = isJsAsync;
+      return this;
+    }
+
     public Builder setSourcePosition(SourcePosition sourcePosition) {
       this.sourcePosition = sourcePosition;
       return this;
@@ -200,7 +215,8 @@ public class FunctionExpression extends Expression implements MethodLike {
           sourcePosition,
           typeDescriptor,
           parameters,
-          Block.newBuilder().setSourcePosition(sourcePosition).setStatements(statements).build());
+          Block.newBuilder().setSourcePosition(sourcePosition).setStatements(statements).build(),
+          isJsAsync);
     }
   }
 }

@@ -13,7 +13,6 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
@@ -23,11 +22,13 @@ import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
+import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.ThisOrSuperReference;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import java.util.HashSet;
 import java.util.Set;
 import javax.annotation.Nullable;
@@ -39,7 +40,7 @@ import javax.annotation.Nullable;
 public class OptimizeAnonymousInnerClassesToFunctionExpressions extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    /** Keeps track of the classes that were optimized away to fix references. */
+    /* Keeps track of the classes that were optimized away to fix references. */
     Set<TypeDeclaration> optimizedClasses = new HashSet<>();
     // Replace each instantiation with the corresponding functional expression.
     compilationUnit.accept(
@@ -73,9 +74,13 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
         new AbstractRewriter() {
           @Override
           public Node rewriteMethodCall(MethodCall methodCall) {
-            DeclaredTypeDescriptor targetTypeDescriptor =
-                methodCall.getTarget().getEnclosingTypeDescriptor();
-            if (optimizedClasses.contains(targetTypeDescriptor.getTypeDeclaration())) {
+            MethodDescriptor target = methodCall.getTarget();
+            DeclaredTypeDescriptor targetTypeDescriptor = target.getEnclosingTypeDescriptor();
+            if (optimizedClasses.contains(targetTypeDescriptor.getTypeDeclaration())
+                && target.isOverride(
+                    targetTypeDescriptor
+                        .getFunctionalInterface()
+                        .getSingleAbstractMethodDescriptor())) {
               // The calls that are typed as directly to the anonymous inner class are redirected
               // to be calls though the interface type, e.g.
               //
@@ -84,7 +89,10 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
               //  gets transformed so that it is JsFunctionInterface.apply instead.
               //
               return MethodCall.Builder.from(methodCall)
-                  .setTarget(targetTypeDescriptor.getJsFunctionMethodDescriptor())
+                  .setTarget(
+                      targetTypeDescriptor
+                          .getFunctionalInterface()
+                          .getSingleAbstractMethodDescriptor())
                   .build();
             }
             return methodCall;
@@ -92,16 +100,21 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
         });
   }
 
-  /** Converts an anonymous inner class that implements a JsFunction into an FunctionExpression. */
+  /**
+   * Converts an anonymous inner class that implements a FunctionalInterface into an
+   * FunctionExpression.
+   */
   private static FunctionExpression optimizeToFunctionExpression(final Type type) {
     Method jsFunctionMethodImplementation = getSingleDeclaredMethod(type);
     DeclaredTypeDescriptor jsFunctionTypeDescriptor =
-        type.getSuperInterfaceTypeDescriptors().get(0);
-    checkState(jsFunctionTypeDescriptor.isJsFunctionInterface());
+        type.getTypeDescriptor().getFunctionalInterface();
     return FunctionExpression.newBuilder()
         .setTypeDescriptor(jsFunctionTypeDescriptor)
         .setParameters(jsFunctionMethodImplementation.getParameters())
         .setStatements(jsFunctionMethodImplementation.getBody().getStatements())
+        .setJsAsync(
+            jsFunctionMethodImplementation.getDescriptor().isJsAsync()
+                || jsFunctionTypeDescriptor.getSingleAbstractMethodDescriptor().isJsAsync())
         .setSourcePosition(
             SourcePosition.Builder.from(jsFunctionMethodImplementation.getSourcePosition())
                 .setName(jsFunctionMethodImplementation.getQualifiedBinaryName())
@@ -110,12 +123,21 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
   }
 
   /**
-   * Determines whether an inner class that implements a JsFunction interface can be optimized into
+   * Determines whether an inner class that implements a funcitonal interface can be optimized into
    * a function expression (lambda).
    */
   private static boolean canBeOptimized(Type type) {
     TypeDeclaration typeDeclaration = type.getDeclaration();
-    if (!typeDeclaration.isAnonymous() || !typeDeclaration.isJsFunctionImplementation()) {
+    if (!typeDeclaration.isAnonymous()) {
+      return false;
+    }
+
+    if (!TypeDescriptors.isJavaLangObject(typeDeclaration.getSuperTypeDescriptor())
+        || typeDeclaration.getInterfaceTypeDescriptors().size() != 1) {
+      return false;
+    }
+
+    if (!typeDeclaration.getInterfaceTypeDescriptors().get(0).isFunctionalInterface()) {
       return false;
     }
 

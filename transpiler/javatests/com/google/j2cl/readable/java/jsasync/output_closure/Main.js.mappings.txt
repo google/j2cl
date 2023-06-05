@@ -35,8 +35,11 @@
 [BaseInterface o =
         new BaseInterface() {
 ...          }
-        };] => [let o = $1.$create__jsasync_Main(this);] "jsasync.Main.testAsyncLambdas"
+        };] => [let o = BaseInterface.$adapt(async () =>{
+   return /**@type {Promise<Integer>}*/ (Promise.resolve(/**@type {Integer}*/ ($Casts.$to(await this.f_x__jsasync_Main_, Integer))));
+  });] "jsasync.Main.testAsyncLambdas"
 [o] => [o] "o"
+[return Promise.resolve(await(x));] => [return /**@type {Promise<Integer>}*/ (Promise.resolve(/**@type {Integer}*/ ($Casts.$to(await this.f_x__jsasync_Main_, Integer))));] "jsasync.Main$1.asyncCall"
 [AsyncJsFunctionInterface j = () -> Promise.resolve(await(Promise.resolve(5)));] => [let j = async () =>{
    return /**@type {Promise<Integer>}*/ (Promise.resolve(/**@type {Integer}*/ ($Casts.$to(await /**@type {Promise<Integer>}*/ (Promise.resolve(Integer.m_valueOf__int__java_lang_Integer(5))), Integer))));
   };] "jsasync.Main.testAsyncLambdas"
@@ -45,11 +48,11 @@
 [JsFunctionInterface optimizableJsFunction =
         new JsFunctionInterface() {
 ...          }
-        };] => [let optimizableJsFunction = () =>{
-   return /**@type {Promise<Integer>}*/ (Promise.resolve(Integer.m_valueOf__int__java_lang_Integer(5)));
+        };] => [let optimizableJsFunction = async () =>{
+   return /**@type {Promise<Integer>}*/ (Promise.resolve(/**@type {Integer}*/ ($Casts.$to(await this.f_x__jsasync_Main_, Integer))));
   };] "jsasync.Main.testAsyncLambdas"
 [optimizableJsFunction] => [optimizableJsFunction] "optimizableJsFunction"
-[return Promise.resolve(5);] => [return /**@type {Promise<Integer>}*/ (Promise.resolve(Integer.m_valueOf__int__java_lang_Integer(5)));] "jsasync.Main$2.doSomething"
+[return Promise.resolve(await(x));] => [return /**@type {Promise<Integer>}*/ (Promise.resolve(/**@type {Integer}*/ ($Casts.$to(await this.f_x__jsasync_Main_, Integer))));] "jsasync.Main$2.doSomething"
 [JsFunctionInterface unoptimizableJsFunction =
         new JsFunctionInterface() {
 ...          }

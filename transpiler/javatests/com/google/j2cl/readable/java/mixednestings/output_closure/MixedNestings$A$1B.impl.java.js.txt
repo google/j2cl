@@ -4,7 +4,7 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let A = goog.forwardDeclare('mixednestings.MixedNestings.A$impl');
-let $1 = goog.forwardDeclare('mixednestings.MixedNestings.A.$1B.$1$impl');
+let MyInterface = goog.forwardDeclare('mixednestings.MyInterface$impl');
 
 class $1B extends j_l_Object {
  /** @protected @nodts */
@@ -29,7 +29,23 @@ class $1B extends j_l_Object {
  m_bb__void() {}
  /** @nodts @return {number} */
  m_b__int() {
-  let i = $1.$create__mixednestings_MixedNestings_A_1B(this);
+  let i = MyInterface.$adapt((/** number */ a) =>{
+   let ii = MyInterface.$adapt((/** number */ n) =>{
+    this.$outer_this__mixednestings_MixedNestings_A_1B.$outer_this__mixednestings_MixedNestings_A.m_mm__void();
+    this.$outer_this__mixednestings_MixedNestings_A_1B.m_aa__void();
+    this.m_bb__void();
+    let iii = MyInterface.$adapt((/** number */ m) =>{
+     this.$outer_this__mixednestings_MixedNestings_A_1B.$outer_this__mixednestings_MixedNestings_A.m_mm__void();
+     this.$outer_this__mixednestings_MixedNestings_A_1B.m_aa__void();
+     this.m_bb__void();
+     return MyInterface.$adapt((/** number */ b) =>{
+      return b;
+     }).m_fun__int__int(100);
+    });
+    return iii.m_fun__int__int(200);
+   });
+   return ii.m_fun__int__int(300);
+  });
   return i.m_fun__int__int(400);
  }
  /** @nodts */
@@ -45,7 +61,7 @@ class $1B extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
-  $1 = goog.module.get('mixednestings.MixedNestings.A.$1B.$1$impl');
+  MyInterface = goog.module.get('mixednestings.MyInterface$impl');
  }
 }
 $Util.$setClassMetadata($1B, 'mixednestings.MixedNestings$A$1B');
