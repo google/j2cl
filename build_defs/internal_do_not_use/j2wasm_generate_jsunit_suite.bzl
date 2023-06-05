@@ -84,10 +84,8 @@ def j2wasm_generate_jsunit_suite(
     })
     test_defines.update(defines)
 
-    j2wasm_application_name = name + "_j2wasm_application"
-
     j2wasm_application(
-        name = j2wasm_application_name,
+        name = name + "_j2wasm_application",
         deps = [":" + name + "_lib"],
         defines = test_defines,
         entry_points = [
@@ -107,8 +105,8 @@ def j2wasm_generate_jsunit_suite(
     # files.)
 
     wasm_optimized_suffix = "" if optimize else "_dev"
-    wasm_path = "/google3/" + native.package_name() + "/" + j2wasm_application_name + wasm_optimized_suffix + ".wasm"
-    wasm_module_name = j2wasm_application_name.replace("-", "_") + ".j2wasm"
+    j2wasm_application_suffix = "_j2wasm_application"
+    wasm_path = "/google3/" + native.package_name() + "/" + name + j2wasm_application_suffix + wasm_optimized_suffix + ".wasm"
     processed_wasm_path = wasm_path.replace("/", "\\/")
 
     native.genrule(
@@ -118,9 +116,8 @@ def j2wasm_generate_jsunit_suite(
         cmd = "\n".join([
             "unzip -q $(location %s) *.testsuite *.json -d zip_out/" % out_jar,
             "cd zip_out/",
-            "for f in $$(find . -name *.testsuite); do" +
-            " sed -i -e 's/REPLACEMENT_MODULE_NAME_PLACEHOLDER/%s/' $$f ;" % wasm_module_name +
-            " sed -i -e 's/REPLACEMENT_BUILD_PATH_PLACEHOLDER/%s/' $$f ;" % processed_wasm_path +
+            "for f in $$(find . -name *.testsuite);" +
+            " do sed -i -e 's/REPLACEMENT_BUILD_PATH_PLACEHOLDER/%s/' $$f ;" % processed_wasm_path +
             " mv $$f $${f/.testsuite/.js}; done",
             "zip -q -r ../$@ .",
         ]),

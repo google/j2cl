@@ -257,7 +257,7 @@ def j2cl_test_common(
 
         deps = [
             Label("//build_defs/internal_do_not_use:closure_testsuite"),
-            ":%s_j2wasm_application" % generated_suite_name,
+            Label("//:j2wasm_js"),
         ]
     else:
         fail("Unknown platform: " + platform)

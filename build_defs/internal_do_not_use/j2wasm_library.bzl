@@ -11,7 +11,7 @@ load("//build_defs/internal_do_not_use:provider.bzl", "J2wasmInfo")
 J2WASM_LIB_ATTRS = {
     "srcs": attr.label_list(allow_files = [".java", ".srcjar", ".jar", ".js"]),
     "deps": attr.label_list(providers = [[J2wasmInfo], [JS_PROVIDER_NAME]]),
-    "exports": attr.label_list(providers = [[J2wasmInfo], [JS_PROVIDER_NAME]]),
+    "exports": attr.label_list(providers = [J2wasmInfo]),
     "plugins": attr.label_list(allow_rules = ["java_plugin", "java_library"], cfg = "exec"),
     "exported_plugins": attr.label_list(allow_rules = ["java_plugin", "java_library"], cfg = "exec"),
     "optimize_autovalue": attr.bool(default = True),

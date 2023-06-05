@@ -205,7 +205,7 @@ def _impl_j2wasm_application(ctx):
         inputs = [ctx.outputs.jsimports],
         outputs = [js_module],
         command = "echo '%s' " % _JS_IMPORTS_TEMPLATE +
-                  "| sed -e 's/%%MODULE_NAME%%/%s/g' " % ctx.label.name.replace("-", "_") +
+                  "| sed -e 's/%%MODULE_NAME%%/%s/g' " % ctx.label.name +
                   "| sed -e '/%%IMPORTS%%/r %s' -e '//d ' " % ctx.outputs.jsimports.path +
                   ">> %s" % js_module.path,
     )
