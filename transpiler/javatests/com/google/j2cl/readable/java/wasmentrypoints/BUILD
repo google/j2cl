@@ -11,8 +11,8 @@ package(
 readable_example(
     srcs = glob(["*.java"]),
     wasm_entry_points = [
-        r"wasmentrypoints\.WasmEntryPoints\.singleMatchedEntryPoint",
-        r".*\.matchedEntryPointPattern[1-2]",
-        r"wasmentrypoints\.WasmEntryPoints\.stringConversionEntryPoint",
+        "wasmentrypoints.WasmEntryPoints#singleMatchedEntryPoint",
+        ".*#matchedEntryPointPattern.*",
+        "wasmentrypoints.WasmEntryPoints#stringConversionEntryPoint",
     ],
 )

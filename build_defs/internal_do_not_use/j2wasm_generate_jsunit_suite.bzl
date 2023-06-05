@@ -89,9 +89,9 @@ def j2wasm_generate_jsunit_suite(
         deps = [":" + name + "_lib"],
         defines = test_defines,
         entry_points = [
-            ".*_Adapter.test.*",
-            ".*_Adapter.setUp.*",
-            ".*_Adapter.tearDown.*",
+            ".*_Adapter#test.*",
+            ".*_Adapter#setUp.*",
+            ".*_Adapter#tearDown.*",
         ],
         testonly = 1,
         exec_properties = exec_properties,

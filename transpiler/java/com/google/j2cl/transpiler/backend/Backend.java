@@ -448,7 +448,7 @@ public enum Backend {
           ExtractNonIdempotentExpressions::new,
           NormalizeMultiExpressions::new,
           InsertWasmExternConversions::new,
-          () -> new InsertWasmEntryPointBridges(options.getWasmEntryPoints()),
+          () -> new InsertWasmEntryPointBridges(options.getWasmEntryPointPatterns()),
           ImplementFinallyViaControlFlow::new,
 
           // Needs to run at the end as the types in the ast will be invalid after the pass.
@@ -587,7 +587,7 @@ public enum Backend {
           ExtractNonIdempotentExpressions::new,
           NormalizeMultiExpressions::new,
           InsertWasmExternConversions::new,
-          () -> new InsertWasmEntryPointBridges(options.getWasmEntryPoints()),
+          () -> new InsertWasmEntryPointBridges(options.getWasmEntryPointPatterns()),
           ImplementFinallyViaControlFlow::new,
 
           // Needs to run at the end as the types in the ast will be invalid after the pass.

@@ -30,7 +30,7 @@ public final class J2wasmTranspilerTest extends TestCase {
   public void testEntryPointFoundPasses() {
     assertTranspileSucceedsWithEntryPoints(
         "wasm.entrypoint.Main",
-        ImmutableList.of("wasm\\.entrypoint\\.Main\\.main"),
+        ImmutableList.of("wasm.entrypoint.Main#main"),
         "class Main {",
         "  public static void main() {}",
         "}");
@@ -39,7 +39,7 @@ public final class J2wasmTranspilerTest extends TestCase {
   public void testEntryPointRegexFoundPasses() {
     assertTranspileSucceedsWithEntryPoints(
         "wasm.entrypoint.Main",
-        ImmutableList.of("wasm\\.entrypoint\\.Main\\.m.*"),
+        ImmutableList.of("wasm.entrypoint.Main#m.*"),
         "class Main {",
         "  public static void main() {}",
         "}");
@@ -48,7 +48,7 @@ public final class J2wasmTranspilerTest extends TestCase {
   public void testMultipleEntryPointRegexFoundPasses() {
     assertTranspileSucceedsWithEntryPoints(
         "wasm.entrypoint.Main",
-        ImmutableList.of("wasm\\.entrypoint\\.Main\\.m.*"),
+        ImmutableList.of("wasm.entrypoint.Main#m.*"),
         "class Main {",
         "  public static void main() {}",
         "  public static void main2() {}",
@@ -58,49 +58,60 @@ public final class J2wasmTranspilerTest extends TestCase {
   public void testEntryPointNotFoundFails() {
     assertTranspileFailsWithEntryPoints(
             "wasm.entrypoint.Main",
-            ImmutableList.of("wasm\\.entrypoint\\.Main\\.notFound"),
+            ImmutableList.of("wasm.entrypoint.Main#notFound"),
             "class Main {",
             "  public static void main() {}",
             "}")
         .assertErrorsWithoutSourcePosition(
-            "No entry points matched the following patterns"
-                + " \"[wasm\\.entrypoint\\.Main\\.notFound]\".");
+            "No public static method matched the entry point string"
+                + " 'wasm.entrypoint.Main#notFound'.");
   }
 
   public void testEntryPointRegexNotFoundFails() {
     assertTranspileFailsWithEntryPoints(
             "wasm.entrypoint.Main",
-            ImmutableList.of("wasm\\.entrypoint\\.Main\\.not.*"),
+            ImmutableList.of("wasm.entrypoint.Main#not.*", "wasm.entrypoint.Main#alsoNot"),
             "class Main {",
             "  public static void main() {}",
             "}")
         .assertErrorsWithoutSourcePosition(
-            "No entry points matched the following patterns"
-                + " \"[wasm\\.entrypoint\\.Main\\.not.*]\".");
+            "No public static method matched the entry point string 'wasm.entrypoint.Main#not.*'.",
+            "No public static method matched the entry point string"
+                + " 'wasm.entrypoint.Main#alsoNot'.");
   }
 
   public void testMultipleEntryPointSameNameFails() {
     assertTranspileFailsWithEntryPoints(
             "wasm.entrypoint.Main",
-            ImmutableList.of("wasm\\.entrypoint\\.Main\\.main"),
+            ImmutableList.of("wasm.entrypoint.Main#main"),
             "class Main {",
             "  public static void main() {}",
             "  public static void main(int arg) {}",
             "}")
         .assertErrorsWithoutSourcePosition(
-            "More than one method are exported with the same name \"main\".");
+            "More than one method are exported with the same name 'main'.");
   }
 
   public void testMultipleEntryPointRegexSameNameFails() {
     assertTranspileFailsWithEntryPoints(
             "wasm.entrypoint.Main",
-            ImmutableList.of("wasm\\.entrypoint\\.Main\\.m.*"),
+            ImmutableList.of("wasm.entrypoint.Main#m.*"),
             "class Main {",
             "  public static void main() {}",
             "  public static void main(int arg) {}",
             "}")
         .assertErrorsWithoutSourcePosition(
-            "More than one method are exported with the same name \"main\".");
+            "More than one method are exported with the same name 'main'.");
+  }
+
+  public void testBadEntryPointSyntax() {
+    assertTranspileFailsWithEntryPoints(
+            "wasm.entrypoint.Main",
+            ImmutableList.of("wasm\\.entrypoint.Main#m.*"),
+            "class Main {",
+            "}")
+        .assertErrorsWithoutSourcePosition(
+            "Invalid entry point syntax in 'wasm\\.entrypoint.Main#m.*'.");
   }
 
   @CanIgnoreReturnValue

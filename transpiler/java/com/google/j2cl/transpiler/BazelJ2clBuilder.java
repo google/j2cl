@@ -18,7 +18,6 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems;
@@ -187,12 +186,12 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setOptimizeAutoValue(this.optimizeAutoValue)
         .setFrontend(allKotlinSources.isEmpty() ? javaFrontend : Frontend.KOTLIN)
         .setBackend(this.backend)
-        .setWasmEntryPoints(ImmutableSet.copyOf(wasmEntryPoints))
+        .setWasmEntryPoints(ImmutableList.copyOf(this.wasmEntryPoints))
         .setDefinesForWasm(ImmutableMap.copyOf(definesForWasm))
         .setWasmRemoveAssertStatement(wasmRemoveAssertStatement)
         .setNullMarkedSupported(this.enableJSpecifySupport)
         .setKotlincOptions(ImmutableList.copyOf(kotlincOptions))
-        .build();
+        .build(problems);
   }
 
   private static List<String> getPathEntries(String path) {

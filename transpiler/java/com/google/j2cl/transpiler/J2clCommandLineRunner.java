@@ -19,7 +19,6 @@ import static com.google.j2cl.common.SourceUtils.checkSourceFiles;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.common.CommandLineTool;
 import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.OutputUtils.Output;
@@ -142,9 +141,9 @@ public final class J2clCommandLineRunner extends CommandLineTool {
         .setFrontend(this.frontEnd)
         .setKotlincOptions(ImmutableList.copyOf(kotlincOptions))
         .setBackend(this.backend)
-        .setWasmEntryPoints(ImmutableSet.copyOf(wasmEntryPoints))
+        .setWasmEntryPoints(ImmutableList.copyOf(wasmEntryPoints))
         .setDefinesForWasm(ImmutableMap.copyOf(definesForWasm))
-        .build();
+        .build(problems);
   }
 
   private static List<String> getPathEntries(String path) {

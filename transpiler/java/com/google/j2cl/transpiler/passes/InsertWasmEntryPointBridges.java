@@ -16,11 +16,9 @@
 package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.collect.ImmutableList.toImmutableList;
-import static com.google.common.collect.ImmutableSet.toImmutableSet;
+import static java.lang.String.format;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Sets;
 import com.google.common.collect.Streams;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.Expression;
@@ -45,13 +43,13 @@ import java.util.regex.Pattern;
  */
 public class InsertWasmEntryPointBridges extends LibraryNormalizationPass {
 
-  private final ImmutableSet<Pattern> entryPointPatterns;
-  private final Set<Pattern> matchedEntryPointPatterns;
+  private final ImmutableList<Pattern> entryPointPatterns;
+  private final Set<Pattern> unmatchedEntryPointPatterns;
   private final Set<String> exportedMethodNames;
 
-  public InsertWasmEntryPointBridges(ImmutableSet<String> entryPoints) {
-    this.entryPointPatterns = entryPoints.stream().map(Pattern::compile).collect(toImmutableSet());
-    this.matchedEntryPointPatterns = new HashSet<>();
+  public InsertWasmEntryPointBridges(ImmutableList<Pattern> entryPointPatterns) {
+    this.entryPointPatterns = entryPointPatterns;
+    this.unmatchedEntryPointPatterns = new HashSet<>(entryPointPatterns);
     this.exportedMethodNames = new HashSet<>();
   }
 
@@ -62,28 +60,27 @@ public class InsertWasmEntryPointBridges extends LibraryNormalizationPass {
         .forEach(
             type -> {
               for (Method method : type.getMethods()) {
-                if (!method.isStatic()
-                    || method.getDescriptor().isSynthetic()
-                    || !isEntryPoint(method.getQualifiedBinaryName())) {
+                MethodDescriptor methodDescriptor = method.getDescriptor();
+                if (!isEntryPoint(methodDescriptor)) {
                   continue;
                 }
 
                 Method exportBridgeMethod = createExportBridgeMethod(method);
-                if (exportedMethodNames.add(exportBridgeMethod.getWasmExportName())) {
-                  type.addMember(exportBridgeMethod);
-                } else {
+                if (!exportedMethodNames.add(exportBridgeMethod.getWasmExportName())) {
                   getProblems()
                       .error(
-                          "More than one method are exported with the same name \"%s\".",
+                          "More than one method are exported with the same name '%s'.",
                           exportBridgeMethod.getWasmExportName());
                 }
+                type.addMember(exportBridgeMethod);
               }
             });
 
-    Set<Pattern> unmatchedPatterns = Sets.difference(entryPointPatterns, matchedEntryPointPatterns);
-    if (!unmatchedPatterns.isEmpty()) {
+    for (Pattern unmatchedEntryPointPattern : unmatchedEntryPointPatterns) {
       getProblems()
-          .error("No entry points matched the following patterns \"%s\".", unmatchedPatterns);
+          .error(
+              "No public static method matched the entry point string '%s'.",
+              unmatchedEntryPointPattern.toString().replace("\\", ""));
     }
   }
 
@@ -123,12 +120,23 @@ public class InsertWasmEntryPointBridges extends LibraryNormalizationPass {
         .build();
   }
 
-  private boolean isEntryPoint(String methodName) {
+  private boolean isEntryPoint(MethodDescriptor methodDescriptor) {
+    if (!methodDescriptor.isStatic()
+        || !methodDescriptor.getVisibility().isPublic()
+        || methodDescriptor.isSynthetic()) {
+      return false;
+    }
+
+    String nameString =
+        format(
+            "%s#%s",
+            methodDescriptor.getEnclosingTypeDescriptor().getQualifiedSourceName(),
+            methodDescriptor.getName());
     // Only the first pattern matching the method will be added, so there will be log error if
     // patterns are duplicate
     for (Pattern entryPointPattern : entryPointPatterns) {
-      if (entryPointPattern.matcher(methodName).matches()) {
-        matchedEntryPointPatterns.add(entryPointPattern);
+      if (entryPointPattern.matcher(nameString).matches()) {
+        unmatchedEntryPointPatterns.remove(entryPointPattern);
         return true;
       }
     }
