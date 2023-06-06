@@ -17,13 +17,19 @@ package j2kt;
 
 public class GenericMethodReferences {
 
-  static <T> T genericMethod(T t) {
+  static <T> T staticGenericMethod(T t) {
     return t;
   }
 
-  static void accept(InterfaceWithGenericMethod fn) {}
+  <T> T instanceGenericMethod(T t) {
+    return t;
+  }
 
-  static void test() {
-    accept(GenericMethodReferences::genericMethod);
+  void accept(InterfaceWithGenericMethod fn) {}
+
+  void test(GenericMethodReferences instance) {
+    accept(GenericMethodReferences::staticGenericMethod);
+    accept(this::instanceGenericMethod);
+    accept(instance::instanceGenericMethod);
   }
 }

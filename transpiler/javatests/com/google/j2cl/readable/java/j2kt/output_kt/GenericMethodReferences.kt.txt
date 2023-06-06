@@ -26,29 +26,46 @@ import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmStatic
 import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
+import kotlin.run
 
 @ObjCName("J2ktGenericMethodReferences", exact = true)
 open class GenericMethodReferences {
+ @HiddenFromObjC
+ open fun <T> instanceGenericMethod_pp_j2kt(t: T): T {
+  return t
+ }
+
+ @HiddenFromObjC
+ open fun accept_pp_j2kt(fn: InterfaceWithGenericMethod?) {}
+
+ @HiddenFromObjC
+ open fun test_pp_j2kt(instance: GenericMethodReferences?) {
+  this.accept_pp_j2kt(object : InterfaceWithGenericMethod {
+   override fun <T> apply(arg0: T): T {
+    return GenericMethodReferences.staticGenericMethod_pp_j2kt<T>(arg0)
+   }
+  })
+  this.accept_pp_j2kt(object : InterfaceWithGenericMethod {
+   override fun <T> apply(arg0_1: T): T {
+    return this@GenericMethodReferences.instanceGenericMethod_pp_j2kt<T>(arg0_1)
+   }
+  })
+  this.accept_pp_j2kt(run {
+   val ______q: GenericMethodReferences? = instance
+   object : InterfaceWithGenericMethod {
+    override fun <T> apply(arg0_2: T): T {
+     return ______q!!.instanceGenericMethod_pp_j2kt<T>(arg0_2)
+    }
+   }
+  })
+ }
+
  @ObjCName("J2ktGenericMethodReferencesCompanion", exact = true)
  companion object {
   @JvmStatic
   @HiddenFromObjC
-  fun <T> genericMethod_pp_j2kt(t: T): T {
+  fun <T> staticGenericMethod_pp_j2kt(t: T): T {
    return t
-  }
-
-  @JvmStatic
-  @HiddenFromObjC
-  fun accept_pp_j2kt(fn: InterfaceWithGenericMethod?) {}
-
-  @JvmStatic
-  @HiddenFromObjC
-  fun test_pp_j2kt() {
-   GenericMethodReferences.accept_pp_j2kt(object : InterfaceWithGenericMethod {
-    override fun <T> apply(arg0: T): T {
-     return GenericMethodReferences.genericMethod_pp_j2kt<T>(arg0)
-    }
-   })
   }
  }
 }

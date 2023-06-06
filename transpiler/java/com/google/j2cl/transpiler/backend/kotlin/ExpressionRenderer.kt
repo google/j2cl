@@ -300,12 +300,13 @@ private fun Renderer.functionExpressionLambdaSource(
   )
 
 private fun Renderer.lambdaBodySource(functionExpression: FunctionExpression): Source =
-  functionExpression.typeDescriptor.functionalInterface!!
-    .typeDeclaration
-    .returnLabelIdentifier
-    .let {
-      copy(currentReturnLabelIdentifier = it).statementsSource(functionExpression.body.statements)
-    }
+  copy(
+      currentReturnLabelIdentifier =
+        functionExpression.typeDescriptor.functionalInterface!!
+          .typeDeclaration
+          .returnLabelIdentifier
+    )
+    .statementsSource(functionExpression.body.statements)
 
 private fun Renderer.functionExpressionObjectSource(
   functionExpression: FunctionExpression
@@ -317,10 +318,13 @@ private fun Renderer.functionExpressionObjectSource(
     block(
       spaceSeparated(
         methodHeaderSource(functionExpression),
-        block(statementsSource(functionExpression.body.statements))
+        block(objectBodySource(functionExpression))
       )
     )
   )
+
+private fun Renderer.objectBodySource(functionExpression: FunctionExpression): Source =
+  copy(renderThisReferenceWithLabel = true).statementsSource(functionExpression.body.statements)
 
 private fun Renderer.parametersSource(functionExpression: FunctionExpression): Source =
   commaSeparated(functionExpression.parameters.map(::variableSource)).ifNotEmpty {
