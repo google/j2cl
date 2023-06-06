@@ -17,7 +17,9 @@ package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 import java.util.ArrayList;
@@ -31,22 +33,34 @@ import javax.annotation.Nullable;
 public class NewArray extends Expression {
   private final ArrayTypeDescriptor typeDescriptor;
   @Visitable List<Expression> dimensionExpressions = new ArrayList<>();
-  @Nullable @Visitable ArrayLiteral arrayLiteral;
+  /**
+   * An optional initializer for the array being constructed.
+   *
+   * <p>If present it should statisfy one of: 1. Be an {@link ArrayLiteral} that has the same type
+   * as the array being constructed. 2. Be a {@link FunctionExpression} or a {@link MethodReference}
+   * whose SAM type accepts a single int param (index) and returns the component type of the array
+   * being constructed.
+   */
+  @Nullable @Visitable Expression initializer;
 
   private NewArray(
       ArrayTypeDescriptor typeDescriptor,
       List<Expression> dimensionExpressions,
-      ArrayLiteral arrayLiteral) {
-    this.typeDescriptor = checkNotNull(typeDescriptor.toNonNullable());
-    this.dimensionExpressions.addAll(checkNotNull(dimensionExpressions));
-    this.arrayLiteral = arrayLiteral;
+      @Nullable Expression initializer) {
     checkArgument(typeDescriptor.getDimensions() == dimensionExpressions.size());
     checkArgument(
-        arrayLiteral == null || arrayLiteral.getTypeDescriptor().hasSameRawType(typeDescriptor));
+        initializer == null || isValidInitializer(initializer, typeDescriptor),
+        "Invalid initializer:\n%s",
+        initializer);
+
+    this.typeDescriptor = checkNotNull(typeDescriptor.toNonNullable());
+    this.dimensionExpressions.addAll(checkNotNull(dimensionExpressions));
+    this.initializer = initializer;
   }
 
-  public ArrayLiteral getArrayLiteral() {
-    return arrayLiteral;
+  @Nullable
+  public Expression getInitializer() {
+    return initializer;
   }
 
   public List<Expression> getDimensionExpressions() {
@@ -73,7 +87,7 @@ public class NewArray extends Expression {
     return NewArray.newBuilder()
         .setTypeDescriptor(typeDescriptor)
         .setDimensionExpressions(AstUtils.clone(dimensionExpressions))
-        .setArrayLiteral(AstUtils.clone(arrayLiteral))
+        .setInitializer(AstUtils.clone(initializer))
         .build();
   }
 
@@ -90,33 +104,59 @@ public class NewArray extends Expression {
   public static class Builder {
     public static Builder from(NewArray newArray) {
       return newBuilder()
-          .setArrayLiteral(newArray.getArrayLiteral())
+          .setInitializer(newArray.getInitializer())
           .setDimensionExpressions(newArray.getDimensionExpressions())
           .setTypeDescriptor(newArray.getTypeDescriptor());
     }
 
     private ArrayTypeDescriptor typeDescriptor;
-    private ArrayLiteral arrayLiteral;
+    private Expression initializer;
     private List<Expression> dimensionExpressions;
 
+    @CanIgnoreReturnValue
     public Builder setTypeDescriptor(ArrayTypeDescriptor typeDescriptor) {
       this.typeDescriptor = typeDescriptor;
       return this;
     }
 
-    public Builder setArrayLiteral(ArrayLiteral arrayLiteral) {
-      this.arrayLiteral = arrayLiteral;
+    @CanIgnoreReturnValue
+    public Builder setInitializer(Expression initializer) {
+      this.initializer = initializer;
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder setDimensionExpressions(List<Expression> dimensionExpressions) {
       this.dimensionExpressions = dimensionExpressions;
       return this;
     }
 
     public NewArray build() {
-      return new NewArray(typeDescriptor, dimensionExpressions, arrayLiteral);
+      return new NewArray(typeDescriptor, dimensionExpressions, initializer);
     }
   }
 
+  private static boolean isValidInitializer(
+      Expression initializer, ArrayTypeDescriptor typeDescriptor) {
+    if (initializer instanceof ArrayLiteral) {
+      return ((ArrayLiteral) initializer).getTypeDescriptor().hasSameRawType(typeDescriptor);
+    }
+
+    DeclaredTypeDescriptor functionalInterface =
+        checkNotNull(
+            initializer.getTypeDescriptor().getFunctionalInterface(),
+            "Array initializer type should be a functional interface");
+    checkState(functionalInterface.isJsFunctionInterface());
+    MethodDescriptor methodDescriptor =
+        checkNotNull(functionalInterface.getSingleAbstractMethodDescriptor());
+    // A valid initializer SAM type:
+    //  - should have a return type that matches the component type of the array
+    //  - should only accept a single int parameter (the index)
+    return methodDescriptor
+            .getReturnTypeDescriptor()
+            .hasSameRawType(typeDescriptor.getComponentTypeDescriptor())
+        && methodDescriptor.getParameterDescriptors().size() == 1
+        && TypeDescriptors.isPrimitiveInt(
+            methodDescriptor.getParameterDescriptors().get(0).getTypeDescriptor());
+  }
 }

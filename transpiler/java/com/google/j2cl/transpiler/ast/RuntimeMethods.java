@@ -473,6 +473,24 @@ public final class RuntimeMethods {
                                       .setParameters(TypeDescriptors.get().javaLangObjectArray)
                                       .build())
                               .put(
+                                  "$createWithInitializer",
+                                  MethodInfo.newBuilder()
+                                      .setReturnType(TypeDescriptors.get().javaLangObjectArray)
+                                      .setParameters(
+                                          PrimitiveTypes.INT,
+                                          TypeDescriptors.get().javaLangObject,
+                                          TypeDescriptors.get().nativeFunction,
+                                          PrimitiveTypes.INT)
+                                      .setRequiredParameters(3)
+                                      .build())
+                              .put(
+                                  "$createNativeWithInitializer",
+                                  MethodInfo.newBuilder()
+                                      .setReturnType(TypeDescriptors.get().javaLangObjectArray)
+                                      .setParameters(
+                                          PrimitiveTypes.INT, TypeDescriptors.get().nativeFunction)
+                                      .build())
+                              .put(
                                   "$init",
                                   MethodInfo.newBuilder()
                                       .setReturnType(TypeDescriptors.get().javaLangObjectArray)
@@ -638,6 +656,7 @@ public final class RuntimeMethods {
     int requiredParameters = methodInfo.getRequiredParameters();
     TypeDescriptor returnTypeDescriptor = methodInfo.getReturnType();
 
+    checkArgument(arguments.size() <= methodInfo.getParameterDescriptors().size());
     checkArgument(arguments.size() >= requiredParameters);
 
     MethodDescriptor methodDescriptor =

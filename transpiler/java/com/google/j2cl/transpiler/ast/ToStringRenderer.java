@@ -365,10 +365,10 @@ class ToStringRenderer {
           }
           print("]");
         }
-        if (newArray.getArrayLiteral() != null) {
-          print(" {");
-          printSeparated(",", newArray.getArrayLiteral().getValueExpressions());
-          print("}");
+        if (newArray.getInitializer() != null) {
+          print("(");
+          accept(newArray.getInitializer());
+          print(")");
         }
         return false;
       }

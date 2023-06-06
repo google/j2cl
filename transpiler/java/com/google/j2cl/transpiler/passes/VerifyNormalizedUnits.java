@@ -188,7 +188,7 @@ public class VerifyNormalizedUnits extends NormalizationPass {
             if (verifyForWasm) {
               checkState(
                   newArray.getDimensionExpressions().size() == 1
-                      && newArray.getArrayLiteral() == null);
+                      && newArray.getInitializer() == null);
             }
           }
 

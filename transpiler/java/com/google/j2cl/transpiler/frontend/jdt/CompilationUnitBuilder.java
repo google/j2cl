@@ -432,7 +432,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       return NewArray.newBuilder()
           .setTypeDescriptor(typeDescriptor)
           .setDimensionExpressions(dimensionExpressions)
-          .setArrayLiteral(arrayLiteral)
+          .setInitializer(arrayLiteral)
           .build();
     }
 

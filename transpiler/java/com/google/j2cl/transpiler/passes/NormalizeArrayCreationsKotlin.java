@@ -15,9 +15,12 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.common.base.Preconditions.checkState;
+
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.Node;
 
@@ -30,8 +33,9 @@ public class NormalizeArrayCreationsKotlin extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Node rewriteNewArray(NewArray newArray) {
-            ArrayLiteral arrayLiteral = newArray.getArrayLiteral();
-            return arrayLiteral != null ? arrayLiteral : newArray;
+            Expression initializer = newArray.getInitializer();
+            checkState(initializer == null || initializer instanceof ArrayLiteral);
+            return initializer != null ? initializer : newArray;
           }
         });
   }

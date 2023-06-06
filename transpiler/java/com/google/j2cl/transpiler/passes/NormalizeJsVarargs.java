@@ -137,10 +137,10 @@ public class NormalizeJsVarargs extends NormalizationPass {
       }
 
       if (lastArgument instanceof NewArray) {
-        ArrayLiteral arrayLiteral = ((NewArray) lastArgument).getArrayLiteral();
-        if (arrayLiteral != null) {
+        Expression initializer = ((NewArray) lastArgument).getInitializer();
+        if (initializer != null) {
           return MethodCall.Builder.from(invocation)
-              .replaceVarargsArgument(arrayLiteral.getValueExpressions())
+              .replaceVarargsArgument(((ArrayLiteral) initializer).getValueExpressions())
               .build();
         }
       }

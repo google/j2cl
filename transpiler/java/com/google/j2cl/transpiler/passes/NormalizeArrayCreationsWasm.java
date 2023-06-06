@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
@@ -63,11 +64,12 @@ public class NormalizeArrayCreationsWasm extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Expression rewriteNewArray(NewArray newArray) {
-            if (newArray.getArrayLiteral() == null) {
+            Expression initializer = newArray.getInitializer();
+            if (initializer == null) {
               return newArray;
             }
-
-            return newArray.getArrayLiteral();
+            checkState(initializer instanceof ArrayLiteral);
+            return initializer;
           }
         });
   }
@@ -99,7 +101,7 @@ public class NormalizeArrayCreationsWasm extends NormalizationPass {
             if (newArray.getDimensionExpressions().size() < 2) {
               return newArray;
             }
-            checkArgument(newArray.getArrayLiteral() == null);
+            checkArgument(newArray.getInitializer() == null);
 
             List<Expression> nonNullDimensions =
                 newArray.getDimensionExpressions().stream()

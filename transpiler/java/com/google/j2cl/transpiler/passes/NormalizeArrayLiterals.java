@@ -40,8 +40,8 @@ public class NormalizeArrayLiterals extends NormalizationPass {
         new AbstractVisitor() {
           @Override
           public void exitNewArray(NewArray newArray) {
-            if (newArray.getArrayLiteral() != null) {
-              longFormArrayLiterals.add(newArray.getArrayLiteral());
+            if (newArray.getInitializer() instanceof ArrayLiteral) {
+              longFormArrayLiterals.add((ArrayLiteral) newArray.getInitializer());
             }
           }
         });
@@ -60,7 +60,7 @@ public class NormalizeArrayLiterals extends NormalizationPass {
                 .setDimensionExpressions(
                     AstUtils.createListOfNullValues(
                         arrayLiteral.getTypeDescriptor().getDimensions()))
-                .setArrayLiteral(arrayLiteral)
+                .setInitializer(arrayLiteral)
                 .build();
           }
         });

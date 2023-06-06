@@ -120,6 +120,82 @@ class Arrays {
   }
 
   /**
+   * Creates, initializes, and returns an array with the given number of
+   * dimensions, lengths and of the given type.
+   *
+   * @param {number} currentDimensionLength
+   * @param {Object} leafType
+   * @param {function(number):*} initializer
+   * @param {number=} numberOfDimensions
+   * @return {Array<*>}
+   * @public
+   */
+  static $createWithInitializer(
+      currentDimensionLength, leafType, initializer, numberOfDimensions) {
+    return Arrays.$createWithInitializerInternal_(
+        numberOfDimensions,
+        currentDimensionLength,
+        /** @type {Constructor} */ (leafType),
+        leafType.$isInstance,
+        initializer,
+    );
+  }
+
+  /**
+   * Creates, initializes, and returns a native array with the given
+   * number of dimensions.
+   * Note that this is only used for multi dimension native array creation since
+   * single dimension array creation uses a faster code path.
+   *
+   * @param {number} currentDimensionLength
+   * @param {function(number):*} initializer
+   * @return {Array<*>}
+   * @public
+   */
+  static $createNativeWithInitializer(currentDimensionLength, initializer) {
+    // $createNativeWithInitializer is not forcefully inlined so we explicitly
+    // pass undefined rather than use trailing optional params. If this function
+    // is ever forcefully inlined this should be reworked to minimize call site
+    // code size costs.
+    return Arrays.$createWithInitializerInternal_(
+        /* numberOfDimensions= */ undefined,
+        currentDimensionLength,
+        /* leafType= */ undefined,
+        /* leafTypeIsInstance= */ undefined,
+        initializer,
+    );
+  }
+
+  /**
+   * @param {number|undefined} numberOfDimensions
+   * @param {number} currentDimensionLength
+   * @param {Constructor|undefined} leafType
+   * @param {Function|undefined} leafTypeIsInstance
+   * @param {function(number):*} initializer
+   * @return {Array<*>}
+   * @private
+   */
+  static $createWithInitializerInternal_(
+      numberOfDimensions,
+      currentDimensionLength,
+      leafType,
+      leafTypeIsInstance,
+      initializer,
+  ) {
+    // TODO(b/229137602): Use Array when it stops confusing JsCompiler.
+    const array = new globalThis.Array(currentDimensionLength);
+    if (leafType && leafTypeIsInstance) {
+      array.$$arrayMetadata = Arrays.$createMetadata_(
+          leafType, leafTypeIsInstance, numberOfDimensions || 1);
+    }
+
+    for (let i = 0; i < array.length; i++) {
+      array[i] = initializer(i);
+    }
+    return array;
+  }
+
+  /**
    * Returns the given array after marking it with known # of dimensions and
    * leafType.
    * <p>

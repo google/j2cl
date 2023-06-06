@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -42,17 +43,20 @@ public class NormalizeArrayCreations extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Expression rewriteNewArray(NewArray newArray) {
-            if (newArray.getArrayLiteral() != null) {
+            if (newArray.getInitializer() instanceof ArrayLiteral) {
               return rewriteArrayInit(newArray);
+            } else if (newArray.getInitializer() != null) {
+              return rewriteArrayWithInitializer(newArray);
+            } else {
+              return rewriteArrayCreate(newArray);
             }
-            return rewriteArrayCreate(newArray);
           }
         });
   }
 
   /** We transform new Object[100][100]; to Arrays.$create([100, 100], Object); */
   private static Expression rewriteArrayCreate(NewArray newArrayExpression) {
-    checkArgument(newArrayExpression.getArrayLiteral() == null);
+    checkArgument(!(newArrayExpression.getInitializer() instanceof ArrayLiteral));
 
     if (newArrayExpression.getTypeDescriptor().isUntypedArray()) {
       if (newArrayExpression.getDimensionExpressions().size() == 1) {
@@ -92,21 +96,59 @@ public class NormalizeArrayCreations extends NormalizationPass {
         newArrayExpression.getTypeDescriptor());
   }
 
+  private static Expression rewriteArrayWithInitializer(NewArray newArrayExpression) {
+    checkArgument(
+        newArrayExpression.getInitializer() != null
+            && !(newArrayExpression.getInitializer() instanceof ArrayLiteral));
+
+    Expression dimensionLengthExpression =
+        checkNotNull(newArrayExpression.getDimensionExpressions().get(0));
+
+    if (newArrayExpression.getTypeDescriptor().isUntypedArray()) {
+      return createNonNullableAnnotation(
+          RuntimeMethods.createArraysMethodCall(
+              "$createNativeWithInitializer",
+              Lists.newArrayList(
+                  dimensionLengthExpression, // currentDimensionLength
+                  newArrayExpression.getInitializer() // initializer
+                  )),
+          newArrayExpression.getTypeDescriptor());
+    }
+
+    List<Expression> arguments =
+        Lists.newArrayList(
+            dimensionLengthExpression, // currentDimensionLength
+            newArrayExpression
+                .getLeafTypeDescriptor()
+                .getMetadataConstructorReference(), // leaf type
+            newArrayExpression.getInitializer() // initializer
+            );
+
+    int numDimensions = newArrayExpression.getDimensionExpressions().size();
+    if (numDimensions > 1) {
+      arguments.add(NumberLiteral.fromInt(numDimensions));
+    }
+
+    return createNonNullableAnnotation(
+        RuntimeMethods.createArraysMethodCall("$createWithInitializer", arguments),
+        newArrayExpression.getTypeDescriptor());
+  }
+
   /**
    * We transform new Object[][] {{object, object}, {object, object}} to Arrays.$init([[object,
    * object], [object, object]], Object, 2);
    */
   private static Expression rewriteArrayInit(NewArray newArrayExpression) {
-    checkArgument(newArrayExpression.getArrayLiteral() != null);
+    checkArgument(newArrayExpression.getInitializer() instanceof ArrayLiteral);
 
     if (newArrayExpression.getTypeDescriptor().isUntypedArray()) {
-      return newArrayExpression.getArrayLiteral();
+      return newArrayExpression.getInitializer();
     }
 
     TypeDescriptor leafTypeDescriptor = newArrayExpression.getLeafTypeDescriptor();
     List<Expression> arguments =
         Lists.newArrayList(
-            newArrayExpression.getArrayLiteral(),
+            newArrayExpression.getInitializer(),
             leafTypeDescriptor.getMetadataConstructorReference());
 
     int dimensionCount = newArrayExpression.getDimensionExpressions().size();

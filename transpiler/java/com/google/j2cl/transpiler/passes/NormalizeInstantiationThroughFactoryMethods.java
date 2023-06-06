@@ -559,7 +559,7 @@ public class NormalizeInstantiationThroughFactoryMethods extends LibraryNormaliz
 
     if (rhs instanceof NewArray) {
       NewArray newArray = (NewArray) rhs;
-      checkState(newArray.getArrayLiteral() == null);
+      checkState(newArray.getInitializer() == null);
       return newArray.getDimensionExpressions().stream()
           .allMatch(NormalizeInstantiationThroughFactoryMethods::isValidImmutableFieldInitializer);
     }
