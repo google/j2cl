@@ -52,14 +52,14 @@ class Exceptions {
   }
 
   public static JsErrorWrapper createJsError(Throwable t) {
-    return new JsErrorWrapper(createError(externalize(t)));
+    return new JsErrorWrapper(createError(externalize(t), t.toString()));
   }
 
   @Wasm("extern.externalize")
-  public static native WasmExtern externalize(Throwable t);
+  private static native WasmExtern externalize(Throwable t);
 
   @JsMethod(name = "create", namespace = "j2wasm.ExceptionUtils")
-  private static native WasmExtern createError(WasmExtern error);
+  private static native WasmExtern createError(WasmExtern throwable, String message);
 
   public static void throwJsError(Throwable t) {
     throwError(((JsErrorWrapper) t.getBackingJsObject()).error);
