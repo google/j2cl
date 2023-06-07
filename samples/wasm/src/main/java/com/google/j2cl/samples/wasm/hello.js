@@ -16,7 +16,7 @@
 
 goog.module('entry');
 
-const j2wasm = goog.require('j2wasm');
+const j2wasm = goog.require('app.j2wasm');
 
 j2wasm.instantiateStreaming('app.wasm').then((instance) => {
   document.body.innerText = instance.exports.getHelloWorld();

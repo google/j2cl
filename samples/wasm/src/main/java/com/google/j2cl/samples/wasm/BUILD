@@ -50,7 +50,7 @@ closure_js_library(
     name = "hellojs",
     srcs = glob(["*.js"]),
     lenient = True,
-    deps = ["@com_google_j2cl//:j2wasm_js"],
+    deps = [":app"],
 )
 
 # This is the bazel target that serves your J2WASM app.
