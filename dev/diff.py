@@ -116,7 +116,7 @@ def _diff(original, modified, filter_noise):
   )
 
   if modified.blaze_target.endswith(".wasm"):
-    print("  Disassembling,")
+    print("  Disassembling.")
     repo_util.build(["//third_party/binaryen:wasm-dis"])
     wasm_dis_cmd = ["blaze-bin/third_party/binaryen/wasm-dis", "--enable-gc"]
     repo_util.run_cmd(
