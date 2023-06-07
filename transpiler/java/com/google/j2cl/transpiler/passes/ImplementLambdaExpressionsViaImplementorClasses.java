@@ -21,13 +21,16 @@ import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
+import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.LambdaImplementorTypeDescriptors;
 import com.google.j2cl.transpiler.ast.Method;
+import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.Statement;
+import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
@@ -55,10 +58,14 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
         new AbstractRewriter() {
           @Override
           public Node rewriteFunctionExpression(FunctionExpression functionExpression) {
-            TypeDescriptor typeDescriptor = functionExpression.getTypeDescriptor();
-
-            boolean capturesEnclosingInstance = functionExpression.isCapturingEnclosingInstance();
             DeclaredTypeDescriptor enclosingTypeDescriptor = getCurrentType().getTypeDescriptor();
+
+            // Normalize the super method calls inside the function expression to target the
+            // enclosing class as a lambda.
+            normalizeSuperMethodCalls(functionExpression, enclosingTypeDescriptor);
+
+            TypeDescriptor typeDescriptor = functionExpression.getTypeDescriptor();
+            boolean capturesEnclosingInstance = functionExpression.isCapturingEnclosingInstance();
             DeclaredTypeDescriptor implementorTypeDescriptor =
                 LambdaImplementorTypeDescriptors.createLambdaImplementorTypeDescriptor(
                     typeDescriptor,
@@ -71,13 +78,45 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
                 // Set the qualifier since it is expected that expressions after the early
                 // qualifier resolution be explicitly qualified.
                 .setQualifier(
-                    capturesEnclosingInstance
-                        ? new ThisReference(getCurrentType().getTypeDescriptor())
-                        : null)
+                    capturesEnclosingInstance ? new ThisReference(enclosingTypeDescriptor) : null)
                 .setAnonymousInnerClass(
                     createNewLambdaImplementorType(functionExpression, implementorTypeDescriptor))
                 .setTarget(AstUtils.createImplicitConstructorDescriptor(implementorTypeDescriptor))
                 .build();
+          }
+        });
+  }
+
+  /**
+   * Rewrites super method calls that were targeting the enclosing type to be explicitly static
+   * dispatch the (now) outer class of lambda implementor.
+   *
+   * <p>Note: When the lambda implementor class is introduced, unqualified super method calls (that
+   * target the super type of the class enclosing the lambda) need to be marked as static dispatch;
+   * because the transformation introduces a new enclosing class, these super method calls, if not
+   * fixed, would target a super method of the lambda implementor (due the inconsistent modeling, it
+   * ends up doing a static dispatch but with the adaptor instance receiver, which is obviously
+   * incorrect).
+   */
+  private void normalizeSuperMethodCalls(
+      FunctionExpression functionExpression, DeclaredTypeDescriptor typeDescriptor) {
+    functionExpression.accept(
+        new AbstractRewriter() {
+          @Override
+          public Node rewriteMethodCall(MethodCall methodCall) {
+            Expression qualifier = methodCall.getQualifier();
+            if (qualifier instanceof SuperReference
+                && qualifier.getTypeDescriptor().isSameBaseType(typeDescriptor)) {
+              // The modeling of super method calls is quite awkward. Super method calls that target
+              // super classes of outer classes are normalized to have static dispatch and the
+              // qualifier is changed to ThisReference. So here we reestablish the invariant that
+              // has been set in NormalizeSuperMemberReferences.
+              return MethodCall.Builder.from(methodCall)
+                  .setQualifier(new ThisReference(typeDescriptor, true))
+                  .setStaticDispatch(true)
+                  .build();
+            }
+            return super.rewriteMethodCall(methodCall);
           }
         });
   }

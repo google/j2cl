@@ -34,6 +34,9 @@ public class Main {
     testOuterCapture_nested();
     testOuterCapture_indirect();
     testOuterCapture_defaultMethodSuper();
+    testOuterCapture_inLambda();
+    testOuterCapture_viaSuper();
+    testOuterCapture_viaSuper_inLambda();
     testCaptures_constructor();
     testCaptures_parent();
     testCaptures_anonymous();
@@ -270,6 +273,75 @@ public class Main {
     Outer outer = new Outer();
     assertEquals(outer, outer.new ClassIndirectlyCapturingOuter().returnIndirectCapture());
     assertNotEquals(outer, outer.new ClassNotIndirectlyCapturingOuter().returnIndirectCapture());
+  }
+
+  interface Supplier {
+    String get();
+  }
+
+  private static void testOuterCapture_inLambda() {
+    class Outer {
+      String m() {
+        assertTrue(this instanceof Outer);
+        return "Outer";
+      }
+
+      String n() {
+        Supplier s = () -> this.m();
+        return s.get();
+      }
+    }
+    assertEquals("Outer", new Outer().n());
+  }
+
+  private static void testOuterCapture_viaSuper() {
+    class Super {
+      String m() {
+        assertTrue(this instanceof Super);
+        return "Super";
+      }
+    }
+
+    class Sub extends Super {
+      @Override
+      String m() {
+        return "Sub";
+      }
+
+      String n() {
+        Supplier s =
+            new Supplier() {
+              @Override
+              public String get() {
+                return Sub.super.m();
+              }
+            };
+        return s.get();
+      }
+    }
+    assertEquals("Super", new Sub().n());
+  }
+
+  private static void testOuterCapture_viaSuper_inLambda() {
+    class Super {
+      String m() {
+        assertTrue(this instanceof Super);
+        return "Super";
+      }
+    }
+
+    class Sub extends Super {
+      @Override
+      String m() {
+        return "Sub";
+      }
+
+      String n() {
+        Supplier s = () -> super.m();
+        return s.get();
+      }
+    }
+    assertEquals("Super", new Sub().n());
   }
 
   private static void testCaptures_parent() {
