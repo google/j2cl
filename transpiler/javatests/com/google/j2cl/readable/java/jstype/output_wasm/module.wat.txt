@@ -265,7 +265,7 @@
  (local.set $this (ref.cast_static $jstype.SomeJsType (local.get $this.untyped)))
  (block
   ;;@ jstype/SomeJsType.java:38:4
-  (local.set $value (i32.add (i32.add (i32.add (struct.get $jstype.SomeJsType $f_publicField__jstype_SomeJsType(local.get $this)) (struct.get $jstype.SomeJsType $f_privateField__jstype_SomeJsType_(local.get $this))) (struct.get $jstype.SomeJsType $f_packageField__jstype_SomeJsType(local.get $this))) (struct.get $jstype.SomeJsType $f_protectedField__jstype_SomeJsType(local.get $this))))
+  (local.set $value (i32.add (i32.add (i32.add (struct.get $jstype.SomeJsType $f_publicField__jstype_SomeJsType (local.get $this)) (struct.get $jstype.SomeJsType $f_privateField__jstype_SomeJsType_ (local.get $this))) (struct.get $jstype.SomeJsType $f_packageField__jstype_SomeJsType (local.get $this))) (struct.get $jstype.SomeJsType $f_protectedField__jstype_SomeJsType (local.get $this))))
   ;;@ jstype/SomeJsType.java:40:4
   (call_ref $function.m_publicMethod__void (ref.as_non_null (local.get $this))(struct.get $jstype.SomeJsType.vtable $m_publicMethod__void (struct.get $jstype.SomeJsType $vtable(local.get $this))))
   ;;@ jstype/SomeJsType.java:41:4

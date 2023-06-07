@@ -114,7 +114,7 @@
  (local.set $this (ref.cast_static $simplelongs.SimpleLongs (local.get $this.untyped)))
  (block
   ;;@ simplelongs/SimpleLongs.java:29:4
-  (struct.set $simplelongs.SimpleLongs $f_sideEffect__simplelongs_SimpleLongs_(local.get $this) (i32.add (struct.get $simplelongs.SimpleLongs $f_sideEffect__simplelongs_SimpleLongs_(local.get $this)) (i32.const 1)))
+  (struct.set $simplelongs.SimpleLongs $f_sideEffect__simplelongs_SimpleLongs_ (local.get $this) (i32.add (struct.get $simplelongs.SimpleLongs $f_sideEffect__simplelongs_SimpleLongs_ (local.get $this)) (i32.const 1)))
   ;;@ simplelongs/SimpleLongs.java:30:4
   (return (local.get $this))
  )
@@ -170,16 +170,16 @@
   ;;@ simplelongs/SimpleLongs.java:52:4
   (local.set $e (block (result i64)
    (local.set $$qualifier (local.get $this))
-   (local.set $$value (i64.add (struct.get $simplelongs.SimpleLongs $f_foo__simplelongs_SimpleLongs(local.get $this)) (i64.const 1)))
-   (struct.set $simplelongs.SimpleLongs $f_foo__simplelongs_SimpleLongs(local.get $$qualifier) (local.get $$value))
+   (local.set $$value (i64.add (struct.get $simplelongs.SimpleLongs $f_foo__simplelongs_SimpleLongs (local.get $this)) (i64.const 1)))
+   (struct.set $simplelongs.SimpleLongs $f_foo__simplelongs_SimpleLongs (local.get $$qualifier) (local.get $$value))
    (local.get $$value)
   ))
   ;;@ simplelongs/SimpleLongs.java:53:4
   (local.set $e (block (result i64)
    (local.set $$qualifier_1 (call_ref $function.m_getWithSideEffect__simplelongs_SimpleLongs (ref.as_non_null (local.get $this))(struct.get $simplelongs.SimpleLongs.vtable $m_getWithSideEffect__simplelongs_SimpleLongs (struct.get $simplelongs.SimpleLongs $vtable(local.get $this)))))
    (local.set $$qualifier_2 (local.get $$qualifier_1))
-   (local.set $$value_1 (i64.add (struct.get $simplelongs.SimpleLongs $f_foo__simplelongs_SimpleLongs(local.get $$qualifier_1)) (i64.const 1)))
-   (struct.set $simplelongs.SimpleLongs $f_foo__simplelongs_SimpleLongs(local.get $$qualifier_2) (local.get $$value_1))
+   (local.set $$value_1 (i64.add (struct.get $simplelongs.SimpleLongs $f_foo__simplelongs_SimpleLongs (local.get $$qualifier_1)) (i64.const 1)))
+   (struct.set $simplelongs.SimpleLongs $f_foo__simplelongs_SimpleLongs (local.get $$qualifier_2) (local.get $$value_1))
    (local.get $$value_1)
   ))
   ;;@ simplelongs/SimpleLongs.java:56:4
@@ -190,19 +190,19 @@
   ))
   ;;@ simplelongs/SimpleLongs.java:57:4
   (local.set $f (block (result i64)
-   (local.set $$value_3 (struct.get $simplelongs.SimpleLongs $f_foo__simplelongs_SimpleLongs(local.get $this)))
-   (struct.set $simplelongs.SimpleLongs $f_foo__simplelongs_SimpleLongs(local.get $this) (i64.add (struct.get $simplelongs.SimpleLongs $f_foo__simplelongs_SimpleLongs(local.get $this)) (i64.const 1)))
+   (local.set $$value_3 (struct.get $simplelongs.SimpleLongs $f_foo__simplelongs_SimpleLongs (local.get $this)))
+   (struct.set $simplelongs.SimpleLongs $f_foo__simplelongs_SimpleLongs (local.get $this) (i64.add (struct.get $simplelongs.SimpleLongs $f_foo__simplelongs_SimpleLongs (local.get $this)) (i64.const 1)))
    (local.get $$value_3)
   ))
   ;;@ simplelongs/SimpleLongs.java:58:4
   (local.set $f (block (result i64)
    (local.set $$qualifier_3 (call_ref $function.m_getWithSideEffect__simplelongs_SimpleLongs (ref.as_non_null (local.get $this))(struct.get $simplelongs.SimpleLongs.vtable $m_getWithSideEffect__simplelongs_SimpleLongs (struct.get $simplelongs.SimpleLongs $vtable(local.get $this)))))
-   (local.set $$value_4 (struct.get $simplelongs.SimpleLongs $f_foo__simplelongs_SimpleLongs(local.get $$qualifier_3)))
-   (struct.set $simplelongs.SimpleLongs $f_foo__simplelongs_SimpleLongs(local.get $$qualifier_3) (i64.add (struct.get $simplelongs.SimpleLongs $f_foo__simplelongs_SimpleLongs(local.get $$qualifier_3)) (i64.const 1)))
+   (local.set $$value_4 (struct.get $simplelongs.SimpleLongs $f_foo__simplelongs_SimpleLongs (local.get $$qualifier_3)))
+   (struct.set $simplelongs.SimpleLongs $f_foo__simplelongs_SimpleLongs (local.get $$qualifier_3) (i64.add (struct.get $simplelongs.SimpleLongs $f_foo__simplelongs_SimpleLongs (local.get $$qualifier_3)) (i64.const 1)))
    (local.get $$value_4)
   ))
   ;;@ simplelongs/SimpleLongs.java:61:4
-  (local.set $g (struct.get $simplelongs.SimpleLongs $f_foo__simplelongs_SimpleLongs(local.get $this)))
+  (local.set $g (struct.get $simplelongs.SimpleLongs $f_foo__simplelongs_SimpleLongs (local.get $this)))
   ;;@ simplelongs/SimpleLongs.java:62:4
   (local.set $g (call_ref $function.m_getBar__long (ref.as_non_null (local.get $this))(struct.get $simplelongs.SimpleLongs.vtable $m_getBar__long (struct.get $simplelongs.SimpleLongs $vtable(local.get $this)))))
  )
@@ -215,7 +215,7 @@
  ;;@ simplelongs/SimpleLongs.java:18:13
  (block
   ;;@ simplelongs/SimpleLongs.java:19:2
-  (struct.set $simplelongs.SimpleLongs $f_foo__simplelongs_SimpleLongs(local.get $this) (i64.const 0))
+  (struct.set $simplelongs.SimpleLongs $f_foo__simplelongs_SimpleLongs (local.get $this) (i64.const 0))
  )
 )
 

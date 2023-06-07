@@ -372,11 +372,11 @@
   (local.set $$index (i32.const 0))
   (block $LOOP_1.BREAK
    (loop
-    (br_if 1 (i32.eqz (i32.lt_s (local.get $$index) (struct.get $javaemul.internal.WasmArray $f_length__javaemul_internal_WasmArray(local.get $$array)))))
+    (br_if 1 (i32.eqz (i32.lt_s (local.get $$index) (struct.get $javaemul.internal.WasmArray $f_length__javaemul_internal_WasmArray (local.get $$array)))))
     (block $LOOP_1.CONTINUE
      (block
       ;;@ foreachstatement/ForEachStatement.java:27:4
-      (local.set $t_1 (ref.cast_static $java.lang.Throwable (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array)) (local.get $$index))))
+      (local.set $t_1 (ref.cast_static $java.lang.Throwable (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject (local.get $$array)) (local.get $$index))))
       (block
        ;;@ foreachstatement/ForEachStatement.java:28:6
        (drop (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $t_1))(struct.get $java.lang.Throwable.vtable $m_toString__java_lang_String (struct.get $java.lang.Throwable $vtable(local.get $t_1)))))

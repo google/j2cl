@@ -138,7 +138,7 @@ final class ExpressionTranspiler {
           } else {
             sourceBuilder.append(
                 format(
-                    "struct.%s %s %s",
+                    "struct.%s %s %s ",
                     setter ? "set" : getGetterInstruction(fieldDescriptor.getTypeDescriptor()),
                     environment.getWasmTypeName(fieldDescriptor.getEnclosingTypeDescriptor()),
                     environment.getFieldName(fieldDescriptor)));
