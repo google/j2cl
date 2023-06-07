@@ -163,10 +163,12 @@
 ;;; Code for exception.MyException [static fields]
 (global $f_$initialized__exception_MyException (mut i32) (i32.const 0))
 (global $f_$class__exception_MyException (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|exception.My...|__exception_MyException (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for exception.MyJsException [static fields]
 (global $f_$initialized__exception_MyJsException (mut i32) (i32.const 0))
 (global $f_$class__exception_MyJsException (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|exception.My...|__exception_MyJsException (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for exception.MyException [methods]
 
@@ -254,7 +256,7 @@
  (block
   (if (ref.eq (global.get $f_$class__exception_MyException) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__exception_MyException (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|exception.My...|__java_lang_String (ref.func $$getString_|exception.My...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Exception) )))
+    (global.set $f_$class__exception_MyException (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|exception.My...|__java_lang_String (ref.func $$getString_|exception.My...|__java_lang_String@exception.MyException) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Exception) )))
    )
   )
   (return (global.get $f_$class__exception_MyException))
@@ -273,6 +275,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@exception.MyException)
+
+;;; String MyException.$getString_|exception.My...|()
+(func $$getString_|exception.My...|__java_lang_String@exception.MyException
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|exception.My...|__exception_MyException) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|exception.My...|__exception_MyException (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "exception.MyException")))
+   )
+  )
+  (return (global.get $f_$string_|exception.My...|__exception_MyException))
+ )
+)
 
 ;;; Code for exception.MyJsException [methods]
 
@@ -360,7 +375,7 @@
  (block
   (if (ref.eq (global.get $f_$class__exception_MyJsException) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__exception_MyJsException (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|exception.My...|_1__java_lang_String (ref.func $$getString_|exception.My...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Exception) )))
+    (global.set $f_$class__exception_MyJsException (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|exception.My...|__java_lang_String (ref.func $$getString_|exception.My...|__java_lang_String@exception.MyJsException) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Exception) )))
    )
   )
   (return (global.get $f_$class__exception_MyJsException))
@@ -379,3 +394,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@exception.MyJsException)
+
+;;; String MyJsException.$getString_|exception.My...|()
+(func $$getString_|exception.My...|__java_lang_String@exception.MyJsException
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|exception.My...|__exception_MyJsException) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|exception.My...|__exception_MyJsException (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "exception.MyJsException")))
+   )
+  )
+  (return (global.get $f_$string_|exception.My...|__exception_MyJsException))
+ )
+)

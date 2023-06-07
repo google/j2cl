@@ -146,14 +146,17 @@
 ;;; Code for circularimportuse.Left [static fields]
 (global $f_$initialized__circularimportuse_Left (mut i32) (i32.const 0))
 (global $f_$class__circularimportuse_Left (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|circularimpo...|__circularimportuse_Left (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for circularimportuse.Main [static fields]
 (global $f_$initialized__circularimportuse_Main (mut i32) (i32.const 0))
 (global $f_$class__circularimportuse_Main (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|circularimpo...|__circularimportuse_Main (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for circularimportuse.Right [static fields]
 (global $f_$initialized__circularimportuse_Right (mut i32) (i32.const 0))
 (global $f_$class__circularimportuse_Right (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|circularimpo...|__circularimportuse_Right (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for circularimportuse.Left [methods]
 
@@ -223,7 +226,7 @@
  (block
   (if (ref.eq (global.get $f_$class__circularimportuse_Left) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__circularimportuse_Left (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|circularimpo...|__java_lang_String (ref.func $$getString_|circularimpo...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__circularimportuse_Left (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|circularimpo...|__java_lang_String (ref.func $$getString_|circularimpo...|__java_lang_String@circularimportuse.Left) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__circularimportuse_Left))
@@ -242,6 +245,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@circularimportuse.Left)
+
+;;; String Left.$getString_|circularimpo...|()
+(func $$getString_|circularimpo...|__java_lang_String@circularimportuse.Left
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|circularimpo...|__circularimportuse_Left) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|circularimpo...|__circularimportuse_Left (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "circularimportuse.Left")))
+   )
+  )
+  (return (global.get $f_$string_|circularimpo...|__circularimportuse_Left))
+ )
+)
 
 ;;; Code for circularimportuse.Main [methods]
 
@@ -312,7 +328,7 @@
  (block
   (if (ref.eq (global.get $f_$class__circularimportuse_Main) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__circularimportuse_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|circularimpo...|_1__java_lang_String (ref.func $$getString_|circularimpo...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__circularimportuse_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|circularimpo...|__java_lang_String (ref.func $$getString_|circularimpo...|__java_lang_String@circularimportuse.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__circularimportuse_Main))
@@ -331,6 +347,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@circularimportuse.Main)
+
+;;; String Main.$getString_|circularimpo...|()
+(func $$getString_|circularimpo...|__java_lang_String@circularimportuse.Main
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|circularimpo...|__circularimportuse_Main) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|circularimpo...|__circularimportuse_Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "circularimportuse.Main")))
+   )
+  )
+  (return (global.get $f_$string_|circularimpo...|__circularimportuse_Main))
+ )
+)
 
 ;;; Code for circularimportuse.Right [methods]
 
@@ -400,7 +429,7 @@
  (block
   (if (ref.eq (global.get $f_$class__circularimportuse_Right) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__circularimportuse_Right (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|circularimpo...|_2__java_lang_String (ref.func $$getString_|circularimpo...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__circularimportuse_Right (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|circularimpo...|__java_lang_String (ref.func $$getString_|circularimpo...|__java_lang_String@circularimportuse.Right) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__circularimportuse_Right))
@@ -419,3 +448,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@circularimportuse.Right)
+
+;;; String Right.$getString_|circularimpo...|()
+(func $$getString_|circularimpo...|__java_lang_String@circularimportuse.Right
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|circularimpo...|__circularimportuse_Right) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|circularimpo...|__circularimportuse_Right (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "circularimportuse.Right")))
+   )
+  )
+  (return (global.get $f_$string_|circularimpo...|__circularimportuse_Right))
+ )
+)

@@ -7,6 +7,7 @@
 ;;; Code for simplegenericinterface.SimpleGenericInterface [static fields]
 (global $f_$initialized__simplegenericinterface_SimpleGenericInterface (mut i32) (i32.const 0))
 (global $f_$class__simplegenericinterface_SimpleGenericInterface (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|simplegeneri...|__simplegenericinterface_SimpleGenericInterface (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for simplegenericinterface.SimpleGenericInterface [methods]
 
@@ -32,9 +33,22 @@
  (block
   (if (ref.eq (global.get $f_$class__simplegenericinterface_SimpleGenericInterface) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__simplegenericinterface_SimpleGenericInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplegeneri...|__java_lang_String (ref.func $$getString_|simplegeneri...|__java_lang_String@javaemul.internal.StringPool) )))
+    (global.set $f_$class__simplegenericinterface_SimpleGenericInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplegeneri...|__java_lang_String (ref.func $$getString_|simplegeneri...|__java_lang_String@simplegenericinterface.SimpleGenericInterface) )))
    )
   )
   (return (global.get $f_$class__simplegenericinterface_SimpleGenericInterface))
+ )
+)
+
+;;; String SimpleGenericInterface.$getString_|simplegeneri...|()
+(func $$getString_|simplegeneri...|__java_lang_String@simplegenericinterface.SimpleGenericInterface
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|simplegeneri...|__simplegenericinterface_SimpleGenericInterface) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|simplegeneri...|__simplegenericinterface_SimpleGenericInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "simplegenericinterface.SimpleGenericInterface")))
+   )
+  )
+  (return (global.get $f_$string_|simplegeneri...|__simplegenericinterface_SimpleGenericInterface))
  )
 )

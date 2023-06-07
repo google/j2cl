@@ -150,22 +150,27 @@
 ;;; Code for interfaces.Main [static fields]
 (global $f_$initialized__interfaces_Main (mut i32) (i32.const 0))
 (global $f_$class__interfaces_Main (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|interfaces.Main|__interfaces_Main (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for interfaces.Main.Interface [static fields]
 (global $f_$initialized__interfaces_Main_Interface (mut i32) (i32.const 0))
 (global $f_$class__interfaces_Main_Interface (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|interfaces.M...|__interfaces_Main_Interface (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for interfaces.Main.SubInterface [static fields]
 (global $f_$initialized__interfaces_Main_SubInterface (mut i32) (i32.const 0))
 (global $f_$class__interfaces_Main_SubInterface (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|interfaces.M...|__interfaces_Main_SubInterface (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for interfaces.Main.Implementor [static fields]
 (global $f_$initialized__interfaces_Main_Implementor (mut i32) (i32.const 0))
 (global $f_$class__interfaces_Main_Implementor (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|interfaces.M...|__interfaces_Main_Implementor (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for interfaces.Main.AbstractImplementor [static fields]
 (global $f_$initialized__interfaces_Main_AbstractImplementor (mut i32) (i32.const 0))
 (global $f_$class__interfaces_Main_AbstractImplementor (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|interfaces.M...|__interfaces_Main_AbstractImplementor (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for interfaces.Main.Interface [methods]
 
@@ -221,10 +226,23 @@
  (block
   (if (ref.eq (global.get $f_$class__interfaces_Main_Interface) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__interfaces_Main_Interface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.M...|__java_lang_String (ref.func $$getString_|interfaces.M...|__java_lang_String@javaemul.internal.StringPool) )))
+    (global.set $f_$class__interfaces_Main_Interface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.M...|__java_lang_String (ref.func $$getString_|interfaces.M...|__java_lang_String@interfaces.Main.Interface) )))
    )
   )
   (return (global.get $f_$class__interfaces_Main_Interface))
+ )
+)
+
+;;; String Interface.$getString_|interfaces.M...|()
+(func $$getString_|interfaces.M...|__java_lang_String@interfaces.Main.Interface
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|interfaces.M...|__interfaces_Main_Interface) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|interfaces.M...|__interfaces_Main_Interface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfaces.Main$Interface")))
+   )
+  )
+  (return (global.get $f_$string_|interfaces.M...|__interfaces_Main_Interface))
  )
 )
 
@@ -266,10 +284,23 @@
  (block
   (if (ref.eq (global.get $f_$class__interfaces_Main_SubInterface) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__interfaces_Main_SubInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.M...|_1__java_lang_String (ref.func $$getString_|interfaces.M...|_1__java_lang_String@javaemul.internal.StringPool) )))
+    (global.set $f_$class__interfaces_Main_SubInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.M...|__java_lang_String (ref.func $$getString_|interfaces.M...|__java_lang_String@interfaces.Main.SubInterface) )))
    )
   )
   (return (global.get $f_$class__interfaces_Main_SubInterface))
+ )
+)
+
+;;; String SubInterface.$getString_|interfaces.M...|()
+(func $$getString_|interfaces.M...|__java_lang_String@interfaces.Main.SubInterface
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|interfaces.M...|__interfaces_Main_SubInterface) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|interfaces.M...|__interfaces_Main_SubInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfaces.Main$SubInterface")))
+   )
+  )
+  (return (global.get $f_$string_|interfaces.M...|__interfaces_Main_SubInterface))
  )
 )
 
@@ -353,7 +384,7 @@
  (block
   (if (ref.eq (global.get $f_$class__interfaces_Main) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__interfaces_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.Main|__java_lang_String (ref.func $$getString_|interfaces.Main|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__interfaces_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.Main|__java_lang_String (ref.func $$getString_|interfaces.Main|__java_lang_String@interfaces.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__interfaces_Main))
@@ -372,6 +403,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@interfaces.Main)
+
+;;; String Main.$getString_|interfaces.Main|()
+(func $$getString_|interfaces.Main|__java_lang_String@interfaces.Main
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|interfaces.Main|__interfaces_Main) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|interfaces.Main|__interfaces_Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfaces.Main")))
+   )
+  )
+  (return (global.get $f_$string_|interfaces.Main|__interfaces_Main))
+ )
+)
 
 ;;; Code for interfaces.Main.Implementor [methods]
 
@@ -474,7 +518,7 @@
  (block
   (if (ref.eq (global.get $f_$class__interfaces_Main_Implementor) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__interfaces_Main_Implementor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.M...|_2__java_lang_String (ref.func $$getString_|interfaces.M...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__interfaces_Main_Implementor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.M...|__java_lang_String (ref.func $$getString_|interfaces.M...|__java_lang_String@interfaces.Main.Implementor) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__interfaces_Main_Implementor))
@@ -493,6 +537,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@interfaces.Main.Implementor)
+
+;;; String Implementor.$getString_|interfaces.M...|()
+(func $$getString_|interfaces.M...|__java_lang_String@interfaces.Main.Implementor
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|interfaces.M...|__interfaces_Main_Implementor) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|interfaces.M...|__interfaces_Main_Implementor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfaces.Main$Implementor")))
+   )
+  )
+  (return (global.get $f_$string_|interfaces.M...|__interfaces_Main_Implementor))
+ )
+)
 
 ;;; Code for interfaces.Main.AbstractImplementor [methods]
 
@@ -565,9 +622,22 @@
  (block
   (if (ref.eq (global.get $f_$class__interfaces_Main_AbstractImplementor) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__interfaces_Main_AbstractImplementor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.M...|_3__java_lang_String (ref.func $$getString_|interfaces.M...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__interfaces_Main_AbstractImplementor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.M...|__java_lang_String (ref.func $$getString_|interfaces.M...|__java_lang_String@interfaces.Main.AbstractImplementor) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__interfaces_Main_AbstractImplementor))
+ )
+)
+
+;;; String AbstractImplementor.$getString_|interfaces.M...|()
+(func $$getString_|interfaces.M...|__java_lang_String@interfaces.Main.AbstractImplementor
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|interfaces.M...|__interfaces_Main_AbstractImplementor) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|interfaces.M...|__interfaces_Main_AbstractImplementor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfaces.Main$AbstractImplementor")))
+   )
+  )
+  (return (global.get $f_$string_|interfaces.M...|__interfaces_Main_AbstractImplementor))
  )
 )

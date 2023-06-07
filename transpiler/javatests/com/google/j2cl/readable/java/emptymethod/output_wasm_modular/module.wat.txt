@@ -6,11 +6,6 @@
  ))
  ;;; Code for Native Array types
  ;;; End of code for Native Array types
- ;;; Code for javaemul.internal.StringPool [type definition]
- (type $javaemul.internal.StringPool.vtable (struct
-  )
- )
- ;;; End of code for javaemul.internal.StringPool [type definition]
  ;;; Code for emptymethod.EmptyMethod [type definition]
  (type $emptymethod.EmptyMethod (struct_subtype
   (field $vtable (ref $emptymethod.EmptyMethod.vtable))
@@ -41,30 +36,13 @@
 
 ;;; Code for Empty array singletons
 ;;; End of code for Empty array singletons
-;;; Code for javaemul.internal.StringPool [static fields]
-(global $f_$string_|emptymethod....|__javaemul_internal_StringPool (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
-;;; End of code for javaemul.internal.StringPool [static fields]
 ;;; Code for emptymethod.EmptyMethod [static fields]
 (global $f_$initialized__emptymethod_EmptyMethod (mut i32) (i32.const 0))
 (global $f_$class__emptymethod_EmptyMethod (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|emptymethod....|__emptymethod_EmptyMethod (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 ;;; End of code for emptymethod.EmptyMethod [static fields]
-(import "binaryen-intrinsics" "call.without.effects" (func $function.no.side.effects.$getString_|emptymethod....|__java_lang_String  (param funcref) (result (ref null $java.lang.String))))
 (import "binaryen-intrinsics" "call.without.effects" (func $function.no.side.effects.$getClassMetadata__java_lang_Class  (param funcref) (result (ref null $java.lang.Class))))
-;;; Code for javaemul.internal.StringPool [methods]
-
-;;; String javaemul.internal.StringPool.$getString_|emptymethod....|()
-(func $$getString_|emptymethod....|__java_lang_String@javaemul.internal.StringPool
- (result (ref null $java.lang.String))
- (block
-  (if (ref.eq (global.get $f_$string_|emptymethod....|__javaemul_internal_StringPool) (ref.null $java.lang.String))
-   (then
-    (global.set $f_$string_|emptymethod....|__javaemul_internal_StringPool (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "emptymethod.EmptyMethod")))
-   )
-  )
-  (return (global.get $f_$string_|emptymethod....|__javaemul_internal_StringPool))
- )
-)
-;;; End of code for javaemul.internal.StringPool [methods]
+(import "binaryen-intrinsics" "call.without.effects" (func $function.no.side.effects.$getString_|emptymethod....|__java_lang_String  (param funcref) (result (ref null $java.lang.String))))
 ;;; Code for emptymethod.EmptyMethod [methods]
 
 ;;; EmptyMethod()
@@ -114,7 +92,7 @@
  (block
   (if (ref.eq (global.get $f_$class__emptymethod_EmptyMethod) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__emptymethod_EmptyMethod (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|emptymethod....|__java_lang_String (ref.func $$getString_|emptymethod....|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__emptymethod_EmptyMethod (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|emptymethod....|__java_lang_String (ref.func $$getString_|emptymethod....|__java_lang_String@emptymethod.EmptyMethod) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__emptymethod_EmptyMethod))
@@ -133,5 +111,18 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@emptymethod.EmptyMethod)
+
+;;; String EmptyMethod.$getString_|emptymethod....|()
+(func $$getString_|emptymethod....|__java_lang_String@emptymethod.EmptyMethod
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|emptymethod....|__emptymethod_EmptyMethod) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|emptymethod....|__emptymethod_EmptyMethod (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "emptymethod.EmptyMethod")))
+   )
+  )
+  (return (global.get $f_$string_|emptymethod....|__emptymethod_EmptyMethod))
+ )
+)
 ;;; End of code for emptymethod.EmptyMethod [methods]
 )

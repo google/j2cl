@@ -252,22 +252,29 @@
 ;;; Code for devirtualizedcalls.ArrayCalls [static fields]
 (global $f_$initialized__devirtualizedcalls_ArrayCalls (mut i32) (i32.const 0))
 (global $f_$class__devirtualizedcalls_ArrayCalls (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|devirtualize...|__devirtualizedcalls_ArrayCalls (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for devirtualizedcalls.CharSequenceCalls [static fields]
 (global $f_$initialized__devirtualizedcalls_CharSequenceCalls (mut i32) (i32.const 0))
 (global $f_$class__devirtualizedcalls_CharSequenceCalls (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|s|__devirtualizedcalls_CharSequenceCalls (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$string_|devirtualize...|__devirtualizedcalls_CharSequenceCalls (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for devirtualizedcalls.NumberCalls [static fields]
 (global $f_$initialized__devirtualizedcalls_NumberCalls (mut i32) (i32.const 0))
 (global $f_$class__devirtualizedcalls_NumberCalls (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|devirtualize...|__devirtualizedcalls_NumberCalls (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for devirtualizedcalls.ObjectCalls [static fields]
 (global $f_$initialized__devirtualizedcalls_ObjectCalls (mut i32) (i32.const 0))
 (global $f_$class__devirtualizedcalls_ObjectCalls (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|devirtualize...|__devirtualizedcalls_ObjectCalls (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for devirtualizedcalls.StringCalls [static fields]
 (global $f_$initialized__devirtualizedcalls_StringCalls (mut i32) (i32.const 0))
 (global $f_$class__devirtualizedcalls_StringCalls (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|String|__devirtualizedcalls_StringCalls (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$string_|devirtualize...|__devirtualizedcalls_StringCalls (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for devirtualizedcalls.ArrayCalls [methods]
 
@@ -343,7 +350,7 @@
  (block
   (if (ref.eq (global.get $f_$class__devirtualizedcalls_ArrayCalls) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__devirtualizedcalls_ArrayCalls (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|devirtualize...|__java_lang_String (ref.func $$getString_|devirtualize...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__devirtualizedcalls_ArrayCalls (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|devirtualize...|__java_lang_String (ref.func $$getString_|devirtualize...|__java_lang_String@devirtualizedcalls.ArrayCalls) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__devirtualizedcalls_ArrayCalls))
@@ -362,6 +369,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@devirtualizedcalls.ArrayCalls)
+
+;;; String ArrayCalls.$getString_|devirtualize...|()
+(func $$getString_|devirtualize...|__java_lang_String@devirtualizedcalls.ArrayCalls
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|devirtualize...|__devirtualizedcalls_ArrayCalls) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|devirtualize...|__devirtualizedcalls_ArrayCalls (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "devirtualizedcalls.ArrayCalls")))
+   )
+  )
+  (return (global.get $f_$string_|devirtualize...|__devirtualizedcalls_ArrayCalls))
+ )
+)
 
 ;;; Code for devirtualizedcalls.CharSequenceCalls [methods]
 
@@ -417,7 +437,7 @@
  (local.set $this (ref.cast_static $devirtualizedcalls.CharSequenceCalls (local.get $this.untyped)))
  (block
   ;;@ devirtualizedcalls/CharSequenceCalls.java:24:4
-  (local.set $s (call $function.no.side.effects.$getString_|s|__java_lang_String (ref.func $$getString_|s|__java_lang_String@javaemul.internal.StringPool) ))
+  (local.set $s (call $function.no.side.effects.$getString_|s|__java_lang_String (ref.func $$getString_|s|__java_lang_String@devirtualizedcalls.CharSequenceCalls) ))
   ;;@ devirtualizedcalls/CharSequenceCalls.java:25:4
   (call_ref $function.m_test__java_lang_CharSequence__void (ref.as_non_null (local.get $this))(local.get $s)(struct.get $devirtualizedcalls.CharSequenceCalls.vtable $m_test__java_lang_CharSequence__void (struct.get $devirtualizedcalls.CharSequenceCalls $vtable(local.get $this))))
  )
@@ -448,7 +468,7 @@
  (block
   (if (ref.eq (global.get $f_$class__devirtualizedcalls_CharSequenceCalls) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__devirtualizedcalls_CharSequenceCalls (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|devirtualize...|_1__java_lang_String (ref.func $$getString_|devirtualize...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__devirtualizedcalls_CharSequenceCalls (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|devirtualize...|__java_lang_String (ref.func $$getString_|devirtualize...|__java_lang_String@devirtualizedcalls.CharSequenceCalls) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__devirtualizedcalls_CharSequenceCalls))
@@ -467,6 +487,32 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@devirtualizedcalls.CharSequenceCalls)
+
+;;; String CharSequenceCalls.$getString_|s|()
+(func $$getString_|s|__java_lang_String@devirtualizedcalls.CharSequenceCalls
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|s|__devirtualizedcalls_CharSequenceCalls) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|s|__devirtualizedcalls_CharSequenceCalls (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "s")))
+   )
+  )
+  (return (global.get $f_$string_|s|__devirtualizedcalls_CharSequenceCalls))
+ )
+)
+
+;;; String CharSequenceCalls.$getString_|devirtualize...|()
+(func $$getString_|devirtualize...|__java_lang_String@devirtualizedcalls.CharSequenceCalls
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|devirtualize...|__devirtualizedcalls_CharSequenceCalls) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|devirtualize...|__devirtualizedcalls_CharSequenceCalls (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "devirtualizedcalls.CharSequenceCalls")))
+   )
+  )
+  (return (global.get $f_$string_|devirtualize...|__devirtualizedcalls_CharSequenceCalls))
+ )
+)
 
 ;;; Code for devirtualizedcalls.NumberCalls [methods]
 
@@ -723,7 +769,7 @@
  (block
   (if (ref.eq (global.get $f_$class__devirtualizedcalls_NumberCalls) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__devirtualizedcalls_NumberCalls (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|devirtualize...|_2__java_lang_String (ref.func $$getString_|devirtualize...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__devirtualizedcalls_NumberCalls (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|devirtualize...|__java_lang_String (ref.func $$getString_|devirtualize...|__java_lang_String@devirtualizedcalls.NumberCalls) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__devirtualizedcalls_NumberCalls))
@@ -742,6 +788,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@devirtualizedcalls.NumberCalls)
+
+;;; String NumberCalls.$getString_|devirtualize...|()
+(func $$getString_|devirtualize...|__java_lang_String@devirtualizedcalls.NumberCalls
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|devirtualize...|__devirtualizedcalls_NumberCalls) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|devirtualize...|__devirtualizedcalls_NumberCalls (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "devirtualizedcalls.NumberCalls")))
+   )
+  )
+  (return (global.get $f_$string_|devirtualize...|__devirtualizedcalls_NumberCalls))
+ )
+)
 
 ;;; Code for devirtualizedcalls.ObjectCalls [methods]
 
@@ -873,7 +932,7 @@
  (block
   (if (ref.eq (global.get $f_$class__devirtualizedcalls_ObjectCalls) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__devirtualizedcalls_ObjectCalls (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|devirtualize...|_3__java_lang_String (ref.func $$getString_|devirtualize...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__devirtualizedcalls_ObjectCalls (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|devirtualize...|__java_lang_String (ref.func $$getString_|devirtualize...|__java_lang_String@devirtualizedcalls.ObjectCalls) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__devirtualizedcalls_ObjectCalls))
@@ -892,6 +951,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@devirtualizedcalls.ObjectCalls)
+
+;;; String ObjectCalls.$getString_|devirtualize...|()
+(func $$getString_|devirtualize...|__java_lang_String@devirtualizedcalls.ObjectCalls
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|devirtualize...|__devirtualizedcalls_ObjectCalls) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|devirtualize...|__devirtualizedcalls_ObjectCalls (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "devirtualizedcalls.ObjectCalls")))
+   )
+  )
+  (return (global.get $f_$string_|devirtualize...|__devirtualizedcalls_ObjectCalls))
+ )
+)
 
 ;;; Code for devirtualizedcalls.StringCalls [methods]
 
@@ -936,7 +1008,7 @@
  (local.set $this (ref.cast_static $devirtualizedcalls.StringCalls (local.get $this.untyped)))
  (block
   ;;@ devirtualizedcalls/StringCalls.java:23:4
-  (local.set $literal (call $function.no.side.effects.$getString_|String|__java_lang_String (ref.func $$getString_|String|__java_lang_String@javaemul.internal.StringPool) ))
+  (local.set $literal (call $function.no.side.effects.$getString_|String|__java_lang_String (ref.func $$getString_|String|__java_lang_String@devirtualizedcalls.StringCalls) ))
   ;;@ devirtualizedcalls/StringCalls.java:24:4
   (local.set $sub (call_ref $function.m_substring__int__java_lang_String (ref.as_non_null (local.get $literal))(i32.const 1)(struct.get $java.lang.String.vtable $m_substring__int__java_lang_String (struct.get $java.lang.String $vtable(local.get $literal)))))
   ;;@ devirtualizedcalls/StringCalls.java:25:4
@@ -973,7 +1045,7 @@
  (block
   (if (ref.eq (global.get $f_$class__devirtualizedcalls_StringCalls) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__devirtualizedcalls_StringCalls (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|devirtualize...|_4__java_lang_String (ref.func $$getString_|devirtualize...|_4__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__devirtualizedcalls_StringCalls (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|devirtualize...|__java_lang_String (ref.func $$getString_|devirtualize...|__java_lang_String@devirtualizedcalls.StringCalls) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__devirtualizedcalls_StringCalls))
@@ -992,3 +1064,29 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@devirtualizedcalls.StringCalls)
+
+;;; String StringCalls.$getString_|String|()
+(func $$getString_|String|__java_lang_String@devirtualizedcalls.StringCalls
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|String|__devirtualizedcalls_StringCalls) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|String|__devirtualizedcalls_StringCalls (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "String")))
+   )
+  )
+  (return (global.get $f_$string_|String|__devirtualizedcalls_StringCalls))
+ )
+)
+
+;;; String StringCalls.$getString_|devirtualize...|()
+(func $$getString_|devirtualize...|__java_lang_String@devirtualizedcalls.StringCalls
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|devirtualize...|__devirtualizedcalls_StringCalls) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|devirtualize...|__devirtualizedcalls_StringCalls (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "devirtualizedcalls.StringCalls")))
+   )
+  )
+  (return (global.get $f_$string_|devirtualize...|__devirtualizedcalls_StringCalls))
+ )
+)

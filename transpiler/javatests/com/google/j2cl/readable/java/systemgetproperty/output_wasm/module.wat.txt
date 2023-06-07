@@ -48,6 +48,9 @@
 ;;; Code for systemgetproperty.Main [static fields]
 (global $f_$initialized__systemgetproperty_Main (mut i32) (i32.const 0))
 (global $f_$class__systemgetproperty_Main (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|SIMPLE|__systemgetproperty_Main (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$string_|Foo|__systemgetproperty_Main (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$string_|systemgetpro...|__systemgetproperty_Main (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for systemgetproperty.Main [methods]
 
@@ -96,8 +99,8 @@
   (local.set $x (i32.const 1))
   ;;@ systemgetproperty/Main.java:28:4
   (local.set $x (block (result i32)
-   (local.set $$qualifier (call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) ))
-   (call_ref $function.m_equalsIgnoreCase__java_lang_String__boolean (ref.as_non_null (local.get $$qualifier))(call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.String.vtable $m_equalsIgnoreCase__java_lang_String__boolean (struct.get $java.lang.String $vtable(local.get $$qualifier))))
+   (local.set $$qualifier (call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@systemgetproperty.Main) ))
+   (call_ref $function.m_equalsIgnoreCase__java_lang_String__boolean (ref.as_non_null (local.get $$qualifier))(call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@systemgetproperty.Main) )(struct.get $java.lang.String.vtable $m_equalsIgnoreCase__java_lang_String__boolean (struct.get $java.lang.String $vtable(local.get $$qualifier))))
   ))
   ;;@ systemgetproperty/Main.java:29:4
   (local.set $x (i32.const 0))
@@ -109,9 +112,9 @@
   (local.set $x (block (result i32)
    (local.set $$qualifier_1 (block (result (ref null $java.lang.String))
     (drop (call $m_mightHaveSideEffects__java_lang_String@systemgetproperty.Main ))
-    (call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) )
+    (call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@systemgetproperty.Main) )
    ))
-   (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $$qualifier_1))(call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(local.get $$qualifier_1))))
+   (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $$qualifier_1))(call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@systemgetproperty.Main) )(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(local.get $$qualifier_1))))
   ))
  )
 )
@@ -122,7 +125,7 @@
  ;;@ systemgetproperty/Main.java:36:24
  (block
   ;;@ systemgetproperty/Main.java:37:4
-  (return (call $function.no.side.effects.$getString_|Foo|__java_lang_String (ref.func $$getString_|Foo|__java_lang_String@javaemul.internal.StringPool) ))
+  (return (call $function.no.side.effects.$getString_|Foo|__java_lang_String (ref.func $$getString_|Foo|__java_lang_String@systemgetproperty.Main) ))
  )
 )
 
@@ -150,7 +153,7 @@
  (block
   (if (ref.eq (global.get $f_$class__systemgetproperty_Main) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__systemgetproperty_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|systemgetpro...|__java_lang_String (ref.func $$getString_|systemgetpro...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__systemgetproperty_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|systemgetpro...|__java_lang_String (ref.func $$getString_|systemgetpro...|__java_lang_String@systemgetproperty.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__systemgetproperty_Main))
@@ -169,3 +172,42 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@systemgetproperty.Main)
+
+;;; String Main.$getString_|SIMPLE|()
+(func $$getString_|SIMPLE|__java_lang_String@systemgetproperty.Main
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|SIMPLE|__systemgetproperty_Main) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|SIMPLE|__systemgetproperty_Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "SIMPLE")))
+   )
+  )
+  (return (global.get $f_$string_|SIMPLE|__systemgetproperty_Main))
+ )
+)
+
+;;; String Main.$getString_|Foo|()
+(func $$getString_|Foo|__java_lang_String@systemgetproperty.Main
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|Foo|__systemgetproperty_Main) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|Foo|__systemgetproperty_Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "Foo")))
+   )
+  )
+  (return (global.get $f_$string_|Foo|__systemgetproperty_Main))
+ )
+)
+
+;;; String Main.$getString_|systemgetpro...|()
+(func $$getString_|systemgetpro...|__java_lang_String@systemgetproperty.Main
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|systemgetpro...|__systemgetproperty_Main) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|systemgetpro...|__systemgetproperty_Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "systemgetproperty.Main")))
+   )
+  )
+  (return (global.get $f_$string_|systemgetpro...|__systemgetproperty_Main))
+ )
+)

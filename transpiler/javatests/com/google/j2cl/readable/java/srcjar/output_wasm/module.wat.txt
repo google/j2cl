@@ -95,10 +95,12 @@
 ;;; Code for srcjar.Foo [static fields]
 (global $f_$initialized__srcjar_Foo (mut i32) (i32.const 0))
 (global $f_$class__srcjar_Foo (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|srcjar.Foo|__srcjar_Foo (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for srcjar.Srcjar [static fields]
 (global $f_$initialized__srcjar_Srcjar (mut i32) (i32.const 0))
 (global $f_$class__srcjar_Srcjar (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|srcjar.Srcjar|__srcjar_Srcjar (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for srcjar.Foo [methods]
 
@@ -153,7 +155,7 @@
  (block
   (if (ref.eq (global.get $f_$class__srcjar_Foo) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__srcjar_Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|srcjar.Foo|__java_lang_String (ref.func $$getString_|srcjar.Foo|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__srcjar_Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|srcjar.Foo|__java_lang_String (ref.func $$getString_|srcjar.Foo|__java_lang_String@srcjar.Foo) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__srcjar_Foo))
@@ -172,6 +174,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@srcjar.Foo)
+
+;;; String Foo.$getString_|srcjar.Foo|()
+(func $$getString_|srcjar.Foo|__java_lang_String@srcjar.Foo
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|srcjar.Foo|__srcjar_Foo) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|srcjar.Foo|__srcjar_Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "srcjar.Foo")))
+   )
+  )
+  (return (global.get $f_$string_|srcjar.Foo|__srcjar_Foo))
+ )
+)
 
 ;;; Code for srcjar.Srcjar [methods]
 
@@ -238,7 +253,7 @@
  (block
   (if (ref.eq (global.get $f_$class__srcjar_Srcjar) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__srcjar_Srcjar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|srcjar.Srcjar|__java_lang_String (ref.func $$getString_|srcjar.Srcjar|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__srcjar_Srcjar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|srcjar.Srcjar|__java_lang_String (ref.func $$getString_|srcjar.Srcjar|__java_lang_String@srcjar.Srcjar) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__srcjar_Srcjar))
@@ -257,3 +272,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@srcjar.Srcjar)
+
+;;; String Srcjar.$getString_|srcjar.Srcjar|()
+(func $$getString_|srcjar.Srcjar|__java_lang_String@srcjar.Srcjar
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|srcjar.Srcjar|__srcjar_Srcjar) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|srcjar.Srcjar|__srcjar_Srcjar (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "srcjar.Srcjar")))
+   )
+  )
+  (return (global.get $f_$string_|srcjar.Srcjar|__srcjar_Srcjar))
+ )
+)

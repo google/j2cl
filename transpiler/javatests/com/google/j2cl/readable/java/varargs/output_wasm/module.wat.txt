@@ -179,18 +179,22 @@
 ;;; Code for varargs.Varargs [static fields]
 (global $f_$initialized__varargs_Varargs (mut i32) (i32.const 0))
 (global $f_$class__varargs_Varargs (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|varargs.Varargs|__varargs_Varargs (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for varargs.Child [static fields]
 (global $f_$initialized__varargs_Child (mut i32) (i32.const 0))
 (global $f_$class__varargs_Child (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|varargs.Child|__varargs_Child (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for varargs.Varargs.$LambdaImplementor$1 [static fields]
 (global $f_$initialized__varargs_Varargs_$LambdaImplementor$1 (mut i32) (i32.const 0))
 (global $f_$class__varargs_Varargs_$LambdaImplementor$1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|varargs.Vara...|__varargs_Varargs_$LambdaImplementor$1 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for varargs.Varargs.FunctionalInterface [static fields]
 (global $f_$initialized__varargs_Varargs_FunctionalInterface (mut i32) (i32.const 0))
 (global $f_$class__varargs_Varargs_FunctionalInterface (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|varargs.Vara...|__varargs_Varargs_FunctionalInterface (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for varargs.Varargs.FunctionalInterface [methods]
 
@@ -216,10 +220,23 @@
  (block
   (if (ref.eq (global.get $f_$class__varargs_Varargs_FunctionalInterface) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__varargs_Varargs_FunctionalInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|varargs.Vara...|_1__java_lang_String (ref.func $$getString_|varargs.Vara...|_1__java_lang_String@javaemul.internal.StringPool) )))
+    (global.set $f_$class__varargs_Varargs_FunctionalInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|varargs.Vara...|__java_lang_String (ref.func $$getString_|varargs.Vara...|__java_lang_String@varargs.Varargs.FunctionalInterface) )))
    )
   )
   (return (global.get $f_$class__varargs_Varargs_FunctionalInterface))
+ )
+)
+
+;;; String FunctionalInterface.$getString_|varargs.Vara...|()
+(func $$getString_|varargs.Vara...|__java_lang_String@varargs.Varargs.FunctionalInterface
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|varargs.Vara...|__varargs_Varargs_FunctionalInterface) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|varargs.Vara...|__varargs_Varargs_FunctionalInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "varargs.Varargs$FunctionalInterface")))
+   )
+  )
+  (return (global.get $f_$string_|varargs.Vara...|__varargs_Varargs_FunctionalInterface))
  )
 )
 
@@ -427,7 +444,7 @@
  (block
   (if (ref.eq (global.get $f_$class__varargs_Varargs) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__varargs_Varargs (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|varargs.Varargs|__java_lang_String (ref.func $$getString_|varargs.Varargs|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__varargs_Varargs (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|varargs.Varargs|__java_lang_String (ref.func $$getString_|varargs.Varargs|__java_lang_String@varargs.Varargs) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__varargs_Varargs))
@@ -446,6 +463,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@varargs.Varargs)
+
+;;; String Varargs.$getString_|varargs.Varargs|()
+(func $$getString_|varargs.Varargs|__java_lang_String@varargs.Varargs
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|varargs.Varargs|__varargs_Varargs) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|varargs.Varargs|__varargs_Varargs (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "varargs.Varargs")))
+   )
+  )
+  (return (global.get $f_$string_|varargs.Varargs|__varargs_Varargs))
+ )
+)
 
 ;;; Code for varargs.Varargs.$LambdaImplementor$1 [methods]
 
@@ -517,7 +547,7 @@
  (block
   (if (ref.eq (global.get $f_$class__varargs_Varargs_$LambdaImplementor$1) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__varargs_Varargs_$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|varargs.Vara...|__java_lang_String (ref.func $$getString_|varargs.Vara...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__varargs_Varargs_$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|varargs.Vara...|__java_lang_String (ref.func $$getString_|varargs.Vara...|__java_lang_String@varargs.Varargs.$LambdaImplementor$1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__varargs_Varargs_$LambdaImplementor$1))
@@ -536,6 +566,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@varargs.Varargs.$LambdaImplementor$1)
+
+;;; String <anonymous> implements FunctionalInterface.$getString_|varargs.Vara...|()
+(func $$getString_|varargs.Vara...|__java_lang_String@varargs.Varargs.$LambdaImplementor$1
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|varargs.Vara...|__varargs_Varargs_$LambdaImplementor$1) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|varargs.Vara...|__varargs_Varargs_$LambdaImplementor$1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "varargs.Varargs$$LambdaImplementor$1")))
+   )
+  )
+  (return (global.get $f_$string_|varargs.Vara...|__varargs_Varargs_$LambdaImplementor$1))
+ )
+)
 
 ;;; Code for varargs.Child [methods]
 
@@ -590,7 +633,7 @@
  (block
   (if (ref.eq (global.get $f_$class__varargs_Child) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__varargs_Child (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|varargs.Child|__java_lang_String (ref.func $$getString_|varargs.Child|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@varargs.Varargs) )))
+    (global.set $f_$class__varargs_Child (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|varargs.Child|__java_lang_String (ref.func $$getString_|varargs.Child|__java_lang_String@varargs.Child) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@varargs.Varargs) )))
    )
   )
   (return (global.get $f_$class__varargs_Child))
@@ -609,3 +652,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@varargs.Child)
+
+;;; String Child.$getString_|varargs.Child|()
+(func $$getString_|varargs.Child|__java_lang_String@varargs.Child
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|varargs.Child|__varargs_Child) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|varargs.Child|__varargs_Child (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "varargs.Child")))
+   )
+  )
+  (return (global.get $f_$string_|varargs.Child|__varargs_Child))
+ )
+)

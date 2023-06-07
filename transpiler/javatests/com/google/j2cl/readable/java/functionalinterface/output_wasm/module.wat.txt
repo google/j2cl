@@ -94,34 +94,42 @@
 ;;; Code for functionalinterface.FunctionalInterfaces [static fields]
 (global $f_$initialized__functionalinterface_FunctionalInterfaces (mut i32) (i32.const 0))
 (global $f_$class__functionalinterface_FunctionalInterfaces (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|functionalin...|__functionalinterface_FunctionalInterfaces (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for functionalinterface.FunctionalInterfaces.NonParametrized [static fields]
 (global $f_$initialized__functionalinterface_FunctionalInterfaces_NonParametrized (mut i32) (i32.const 0))
 (global $f_$class__functionalinterface_FunctionalInterfaces_NonParametrized (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|functionalin...|__functionalinterface_FunctionalInterfaces_NonParametrized (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for functionalinterface.FunctionalInterfaces.Parametrized [static fields]
 (global $f_$initialized__functionalinterface_FunctionalInterfaces_Parametrized (mut i32) (i32.const 0))
 (global $f_$class__functionalinterface_FunctionalInterfaces_Parametrized (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|functionalin...|__functionalinterface_FunctionalInterfaces_Parametrized (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for functionalinterface.FunctionalInterfaces.Specialized [static fields]
 (global $f_$initialized__functionalinterface_FunctionalInterfaces_Specialized (mut i32) (i32.const 0))
 (global $f_$class__functionalinterface_FunctionalInterfaces_Specialized (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|functionalin...|__functionalinterface_FunctionalInterfaces_Specialized (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for functionalinterface.FunctionalInterfaces.WithDefaultMethod [static fields]
 (global $f_$initialized__functionalinterface_FunctionalInterfaces_WithDefaultMethod (mut i32) (i32.const 0))
 (global $f_$class__functionalinterface_FunctionalInterfaces_WithDefaultMethod (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|functionalin...|__functionalinterface_FunctionalInterfaces_WithDefaultMethod (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for functionalinterface.FunctionalInterfaces.WithObjectMethods [static fields]
 (global $f_$initialized__functionalinterface_FunctionalInterfaces_WithObjectMethods (mut i32) (i32.const 0))
 (global $f_$class__functionalinterface_FunctionalInterfaces_WithObjectMethods (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|functionalin...|__functionalinterface_FunctionalInterfaces_WithObjectMethods (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for functionalinterface.FunctionalInterfaces.WithParametrizedMethod [static fields]
 (global $f_$initialized__functionalinterface_FunctionalInterfaces_WithParametrizedMethod (mut i32) (i32.const 0))
 (global $f_$class__functionalinterface_FunctionalInterfaces_WithParametrizedMethod (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|functionalin...|__functionalinterface_FunctionalInterfaces_WithParametrizedMethod (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for functionalinterface.FunctionalInterfaces.WithKtProperty [static fields]
 (global $f_$initialized__functionalinterface_FunctionalInterfaces_WithKtProperty (mut i32) (i32.const 0))
 (global $f_$class__functionalinterface_FunctionalInterfaces_WithKtProperty (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|functionalin...|__functionalinterface_FunctionalInterfaces_WithKtProperty (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for functionalinterface.FunctionalInterfaces.NonParametrized [methods]
 
@@ -147,10 +155,23 @@
  (block
   (if (ref.eq (global.get $f_$class__functionalinterface_FunctionalInterfaces_NonParametrized) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__functionalinterface_FunctionalInterfaces_NonParametrized (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functionalin...|_1__java_lang_String (ref.func $$getString_|functionalin...|_1__java_lang_String@javaemul.internal.StringPool) )))
+    (global.set $f_$class__functionalinterface_FunctionalInterfaces_NonParametrized (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functionalin...|__java_lang_String (ref.func $$getString_|functionalin...|__java_lang_String@functionalinterface.FunctionalInterfaces.NonParametrized) )))
    )
   )
   (return (global.get $f_$class__functionalinterface_FunctionalInterfaces_NonParametrized))
+ )
+)
+
+;;; String NonParametrized.$getString_|functionalin...|()
+(func $$getString_|functionalin...|__java_lang_String@functionalinterface.FunctionalInterfaces.NonParametrized
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|functionalin...|__functionalinterface_FunctionalInterfaces_NonParametrized) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|functionalin...|__functionalinterface_FunctionalInterfaces_NonParametrized (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "functionalinterface.FunctionalInterfaces$NonParametrized")))
+   )
+  )
+  (return (global.get $f_$string_|functionalin...|__functionalinterface_FunctionalInterfaces_NonParametrized))
  )
 )
 
@@ -178,10 +199,23 @@
  (block
   (if (ref.eq (global.get $f_$class__functionalinterface_FunctionalInterfaces_Parametrized) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__functionalinterface_FunctionalInterfaces_Parametrized (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functionalin...|_2__java_lang_String (ref.func $$getString_|functionalin...|_2__java_lang_String@javaemul.internal.StringPool) )))
+    (global.set $f_$class__functionalinterface_FunctionalInterfaces_Parametrized (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functionalin...|__java_lang_String (ref.func $$getString_|functionalin...|__java_lang_String@functionalinterface.FunctionalInterfaces.Parametrized) )))
    )
   )
   (return (global.get $f_$class__functionalinterface_FunctionalInterfaces_Parametrized))
+ )
+)
+
+;;; String Parametrized.$getString_|functionalin...|()
+(func $$getString_|functionalin...|__java_lang_String@functionalinterface.FunctionalInterfaces.Parametrized
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|functionalin...|__functionalinterface_FunctionalInterfaces_Parametrized) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|functionalin...|__functionalinterface_FunctionalInterfaces_Parametrized (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "functionalinterface.FunctionalInterfaces$Parametrized")))
+   )
+  )
+  (return (global.get $f_$string_|functionalin...|__functionalinterface_FunctionalInterfaces_Parametrized))
  )
 )
 
@@ -209,10 +243,23 @@
  (block
   (if (ref.eq (global.get $f_$class__functionalinterface_FunctionalInterfaces_Specialized) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__functionalinterface_FunctionalInterfaces_Specialized (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functionalin...|_3__java_lang_String (ref.func $$getString_|functionalin...|_3__java_lang_String@javaemul.internal.StringPool) )))
+    (global.set $f_$class__functionalinterface_FunctionalInterfaces_Specialized (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functionalin...|__java_lang_String (ref.func $$getString_|functionalin...|__java_lang_String@functionalinterface.FunctionalInterfaces.Specialized) )))
    )
   )
   (return (global.get $f_$class__functionalinterface_FunctionalInterfaces_Specialized))
+ )
+)
+
+;;; String Specialized.$getString_|functionalin...|()
+(func $$getString_|functionalin...|__java_lang_String@functionalinterface.FunctionalInterfaces.Specialized
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|functionalin...|__functionalinterface_FunctionalInterfaces_Specialized) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|functionalin...|__functionalinterface_FunctionalInterfaces_Specialized (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "functionalinterface.FunctionalInterfaces$Specialized")))
+   )
+  )
+  (return (global.get $f_$string_|functionalin...|__functionalinterface_FunctionalInterfaces_Specialized))
  )
 )
 
@@ -253,10 +300,23 @@
  (block
   (if (ref.eq (global.get $f_$class__functionalinterface_FunctionalInterfaces_WithDefaultMethod) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__functionalinterface_FunctionalInterfaces_WithDefaultMethod (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functionalin...|_4__java_lang_String (ref.func $$getString_|functionalin...|_4__java_lang_String@javaemul.internal.StringPool) )))
+    (global.set $f_$class__functionalinterface_FunctionalInterfaces_WithDefaultMethod (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functionalin...|__java_lang_String (ref.func $$getString_|functionalin...|__java_lang_String@functionalinterface.FunctionalInterfaces.WithDefaultMethod) )))
    )
   )
   (return (global.get $f_$class__functionalinterface_FunctionalInterfaces_WithDefaultMethod))
+ )
+)
+
+;;; String WithDefaultMethod.$getString_|functionalin...|()
+(func $$getString_|functionalin...|__java_lang_String@functionalinterface.FunctionalInterfaces.WithDefaultMethod
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|functionalin...|__functionalinterface_FunctionalInterfaces_WithDefaultMethod) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|functionalin...|__functionalinterface_FunctionalInterfaces_WithDefaultMethod (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "functionalinterface.FunctionalInterfaces$WithDefaultMethod")))
+   )
+  )
+  (return (global.get $f_$string_|functionalin...|__functionalinterface_FunctionalInterfaces_WithDefaultMethod))
  )
 )
 
@@ -284,10 +344,23 @@
  (block
   (if (ref.eq (global.get $f_$class__functionalinterface_FunctionalInterfaces_WithObjectMethods) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__functionalinterface_FunctionalInterfaces_WithObjectMethods (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functionalin...|_5__java_lang_String (ref.func $$getString_|functionalin...|_5__java_lang_String@javaemul.internal.StringPool) )))
+    (global.set $f_$class__functionalinterface_FunctionalInterfaces_WithObjectMethods (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functionalin...|__java_lang_String (ref.func $$getString_|functionalin...|__java_lang_String@functionalinterface.FunctionalInterfaces.WithObjectMethods) )))
    )
   )
   (return (global.get $f_$class__functionalinterface_FunctionalInterfaces_WithObjectMethods))
+ )
+)
+
+;;; String WithObjectMethods.$getString_|functionalin...|()
+(func $$getString_|functionalin...|__java_lang_String@functionalinterface.FunctionalInterfaces.WithObjectMethods
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|functionalin...|__functionalinterface_FunctionalInterfaces_WithObjectMethods) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|functionalin...|__functionalinterface_FunctionalInterfaces_WithObjectMethods (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "functionalinterface.FunctionalInterfaces$WithObjectMethods")))
+   )
+  )
+  (return (global.get $f_$string_|functionalin...|__functionalinterface_FunctionalInterfaces_WithObjectMethods))
  )
 )
 
@@ -315,10 +388,23 @@
  (block
   (if (ref.eq (global.get $f_$class__functionalinterface_FunctionalInterfaces_WithParametrizedMethod) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__functionalinterface_FunctionalInterfaces_WithParametrizedMethod (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functionalin...|_6__java_lang_String (ref.func $$getString_|functionalin...|_6__java_lang_String@javaemul.internal.StringPool) )))
+    (global.set $f_$class__functionalinterface_FunctionalInterfaces_WithParametrizedMethod (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functionalin...|__java_lang_String (ref.func $$getString_|functionalin...|__java_lang_String@functionalinterface.FunctionalInterfaces.WithParametrizedMethod) )))
    )
   )
   (return (global.get $f_$class__functionalinterface_FunctionalInterfaces_WithParametrizedMethod))
+ )
+)
+
+;;; String WithParametrizedMethod.$getString_|functionalin...|()
+(func $$getString_|functionalin...|__java_lang_String@functionalinterface.FunctionalInterfaces.WithParametrizedMethod
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|functionalin...|__functionalinterface_FunctionalInterfaces_WithParametrizedMethod) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|functionalin...|__functionalinterface_FunctionalInterfaces_WithParametrizedMethod (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "functionalinterface.FunctionalInterfaces$WithParametrizedMethod")))
+   )
+  )
+  (return (global.get $f_$string_|functionalin...|__functionalinterface_FunctionalInterfaces_WithParametrizedMethod))
  )
 )
 
@@ -346,10 +432,23 @@
  (block
   (if (ref.eq (global.get $f_$class__functionalinterface_FunctionalInterfaces_WithKtProperty) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__functionalinterface_FunctionalInterfaces_WithKtProperty (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functionalin...|_7__java_lang_String (ref.func $$getString_|functionalin...|_7__java_lang_String@javaemul.internal.StringPool) )))
+    (global.set $f_$class__functionalinterface_FunctionalInterfaces_WithKtProperty (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functionalin...|__java_lang_String (ref.func $$getString_|functionalin...|__java_lang_String@functionalinterface.FunctionalInterfaces.WithKtProperty) )))
    )
   )
   (return (global.get $f_$class__functionalinterface_FunctionalInterfaces_WithKtProperty))
+ )
+)
+
+;;; String WithKtProperty.$getString_|functionalin...|()
+(func $$getString_|functionalin...|__java_lang_String@functionalinterface.FunctionalInterfaces.WithKtProperty
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|functionalin...|__functionalinterface_FunctionalInterfaces_WithKtProperty) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|functionalin...|__functionalinterface_FunctionalInterfaces_WithKtProperty (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "functionalinterface.FunctionalInterfaces$WithKtProperty")))
+   )
+  )
+  (return (global.get $f_$string_|functionalin...|__functionalinterface_FunctionalInterfaces_WithKtProperty))
  )
 )
 
@@ -406,7 +505,7 @@
  (block
   (if (ref.eq (global.get $f_$class__functionalinterface_FunctionalInterfaces) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__functionalinterface_FunctionalInterfaces (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functionalin...|__java_lang_String (ref.func $$getString_|functionalin...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__functionalinterface_FunctionalInterfaces (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functionalin...|__java_lang_String (ref.func $$getString_|functionalin...|__java_lang_String@functionalinterface.FunctionalInterfaces) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__functionalinterface_FunctionalInterfaces))
@@ -425,3 +524,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@functionalinterface.FunctionalInterfaces)
+
+;;; String FunctionalInterfaces.$getString_|functionalin...|()
+(func $$getString_|functionalin...|__java_lang_String@functionalinterface.FunctionalInterfaces
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|functionalin...|__functionalinterface_FunctionalInterfaces) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|functionalin...|__functionalinterface_FunctionalInterfaces (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "functionalinterface.FunctionalInterfaces")))
+   )
+  )
+  (return (global.get $f_$string_|functionalin...|__functionalinterface_FunctionalInterfaces))
+ )
+)

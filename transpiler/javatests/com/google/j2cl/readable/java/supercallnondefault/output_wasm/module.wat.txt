@@ -97,10 +97,12 @@
 ;;; Code for supercallnondefault.Parent [static fields]
 (global $f_$initialized__supercallnondefault_Parent (mut i32) (i32.const 0))
 (global $f_$class__supercallnondefault_Parent (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|supercallnon...|__supercallnondefault_Parent (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for supercallnondefault.Child [static fields]
 (global $f_$initialized__supercallnondefault_Child (mut i32) (i32.const 0))
 (global $f_$class__supercallnondefault_Child (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|supercallnon...|__supercallnondefault_Child (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for supercallnondefault.Parent [methods]
 
@@ -157,7 +159,7 @@
  (block
   (if (ref.eq (global.get $f_$class__supercallnondefault_Parent) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__supercallnondefault_Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|supercallnon...|__java_lang_String (ref.func $$getString_|supercallnon...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__supercallnondefault_Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|supercallnon...|__java_lang_String (ref.func $$getString_|supercallnon...|__java_lang_String@supercallnondefault.Parent) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__supercallnondefault_Parent))
@@ -176,6 +178,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@supercallnondefault.Parent)
+
+;;; String Parent.$getString_|supercallnon...|()
+(func $$getString_|supercallnon...|__java_lang_String@supercallnondefault.Parent
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|supercallnon...|__supercallnondefault_Parent) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|supercallnon...|__supercallnondefault_Parent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supercallnondefault.Parent")))
+   )
+  )
+  (return (global.get $f_$string_|supercallnon...|__supercallnondefault_Parent))
+ )
+)
 
 ;;; Code for supercallnondefault.Child [methods]
 
@@ -232,7 +247,7 @@
  (block
   (if (ref.eq (global.get $f_$class__supercallnondefault_Child) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__supercallnondefault_Child (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|supercallnon...|_1__java_lang_String (ref.func $$getString_|supercallnon...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@supercallnondefault.Parent) )))
+    (global.set $f_$class__supercallnondefault_Child (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|supercallnon...|__java_lang_String (ref.func $$getString_|supercallnon...|__java_lang_String@supercallnondefault.Child) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@supercallnondefault.Parent) )))
    )
   )
   (return (global.get $f_$class__supercallnondefault_Child))
@@ -251,3 +266,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@supercallnondefault.Child)
+
+;;; String Child.$getString_|supercallnon...|()
+(func $$getString_|supercallnon...|__java_lang_String@supercallnondefault.Child
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|supercallnon...|__supercallnondefault_Child) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|supercallnon...|__supercallnondefault_Child (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supercallnondefault.Child")))
+   )
+  )
+  (return (global.get $f_$string_|supercallnon...|__supercallnondefault_Child))
+ )
+)

@@ -17,15 +17,14 @@ package com.google.j2cl.transpiler.passes;
 
 import com.google.common.base.Ascii;
 import com.google.common.collect.HashMultiset;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Multiset;
-import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Library;
+import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
@@ -33,10 +32,7 @@ import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.Type;
-import com.google.j2cl.transpiler.ast.TypeDeclaration;
-import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
-import com.google.j2cl.transpiler.ast.Visibility;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,29 +51,22 @@ public class ImplementStringCompileTimeConstants extends LibraryNormalizationPas
    * call to the created getter.
    */
   private void rewriteStringLiterals(Library library) {
-    Type stringHolderType =
-        new Type(SourcePosition.NONE, Visibility.PRIVATE, getStringHolderDeclaration());
-
     library.accept(
         new AbstractRewriter() {
           @Override
+          public boolean shouldProcessMethod(Method method) {
+            // Avoid processing the string literals that are moved to the getter.
+            return method.getDescriptor().getOrigin()
+                != MethodOrigin.SYNTHETIC_STRING_LITERAL_GETTER;
+          }
+
+          @Override
           public Expression rewriteStringLiteral(StringLiteral stringLiteral) {
             return MethodCall.Builder.from(
-                    getOrCreateLiteralMethod(stringHolderType, stringLiteral))
+                    getOrCreateLiteralMethod(getCurrentType(), stringLiteral))
                 .build();
           }
         });
-    // Add the StringPool type at the beginning of the library so that it does not accidentally
-    // inherit an unrelated source position.
-    // In the wasm output, code with no source position will inherit the last seen source position.
-    library.getCompilationUnits().get(0).addType(/* position= */ 0, stringHolderType);
-  }
-
-  private static TypeDeclaration getStringHolderDeclaration() {
-    return TypeDeclaration.newBuilder()
-        .setClassComponents(ImmutableList.of("javaemul.internal.StringPool"))
-        .setKind(Kind.INTERFACE)
-        .build();
   }
 
   /**
@@ -90,9 +79,9 @@ public class ImplementStringCompileTimeConstants extends LibraryNormalizationPas
       return literalMethodByString.get(value);
     }
 
-    String snippet = createSnippet(value);
+    String snippet = createSnippet(type, value);
     MethodDescriptor getLiteralMethod =
-        getLazStringLiteralGettterMethodDescriptor(
+        getLazyStringLiteralGettterMethodDescriptor(
             type.getTypeDescriptor(), "$getString_" + snippet);
     type.synthesizeLazilyInitializedField(
         "$string_" + snippet, synthesizeStringCreation(stringLiteral), getLiteralMethod);
@@ -103,7 +92,7 @@ public class ImplementStringCompileTimeConstants extends LibraryNormalizationPas
   }
 
   /** Returns the descriptor for the getter of the string literal. */
-  private static MethodDescriptor getLazStringLiteralGettterMethodDescriptor(
+  private static MethodDescriptor getLazyStringLiteralGettterMethodDescriptor(
       DeclaredTypeDescriptor enclosingTypeDescriptor, String name) {
     return MethodDescriptor.newBuilder()
         .setName(name)
@@ -116,14 +105,15 @@ public class ImplementStringCompileTimeConstants extends LibraryNormalizationPas
         .build();
   }
 
-  private final Multiset<String> snippets = HashMultiset.create();
+  private final Map<Type, Multiset<String>> snippetsByType = new HashMap<>();
 
-  private String createSnippet(String value) {
+  private String createSnippet(Type type, String value) {
     // Take the first few characters of the string and remove invalid identifier characters.
     String prefix = Ascii.truncate(value, 15, "...").replaceAll("[^A-Za-z0-9.]", "_");
 
-    int occurrences = snippets.count(prefix);
-    snippets.add(prefix);
+    var typeSnippets = snippetsByType.computeIfAbsent(type, t -> HashMultiset.create());
+    int occurrences = typeSnippets.count(prefix);
+    typeSnippets.add(prefix);
     if (occurrences > 0) {
       return String.format("|%s|_%d", prefix, occurrences);
     } else {

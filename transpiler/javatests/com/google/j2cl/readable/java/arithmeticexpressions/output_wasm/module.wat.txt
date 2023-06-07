@@ -114,10 +114,12 @@
 (global $f_counter__arithmeticexpressions_ArithmeticExpressions_ (mut i64) (i64.const 0))
 (global $f_$initialized__arithmeticexpressions_ArithmeticExpressions (mut i32) (i32.const 0))
 (global $f_$class__arithmeticexpressions_ArithmeticExpressions (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|arithmeticex...|__arithmeticexpressions_ArithmeticExpressions (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for arithmeticexpressions.ArithmeticExpressions.1Ref [static fields]
 (global $f_$initialized__arithmeticexpressions_ArithmeticExpressions_1Ref (mut i32) (i32.const 0))
 (global $f_$class__arithmeticexpressions_ArithmeticExpressions_1Ref (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|arithmeticex...|__arithmeticexpressions_ArithmeticExpressions_1Ref (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for arithmeticexpressions.ArithmeticExpressions [methods]
 
@@ -743,7 +745,7 @@
  (block
   (if (ref.eq (global.get $f_$class__arithmeticexpressions_ArithmeticExpressions) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__arithmeticexpressions_ArithmeticExpressions (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|arithmeticex...|__java_lang_String (ref.func $$getString_|arithmeticex...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__arithmeticexpressions_ArithmeticExpressions (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|arithmeticex...|__java_lang_String (ref.func $$getString_|arithmeticex...|__java_lang_String@arithmeticexpressions.ArithmeticExpressions) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__arithmeticexpressions_ArithmeticExpressions))
@@ -762,6 +764,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@arithmeticexpressions.ArithmeticExpressions)
+
+;;; String ArithmeticExpressions.$getString_|arithmeticex...|()
+(func $$getString_|arithmeticex...|__java_lang_String@arithmeticexpressions.ArithmeticExpressions
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|arithmeticex...|__arithmeticexpressions_ArithmeticExpressions) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|arithmeticex...|__arithmeticexpressions_ArithmeticExpressions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "arithmeticexpressions.ArithmeticExpressions")))
+   )
+  )
+  (return (global.get $f_$string_|arithmeticex...|__arithmeticexpressions_ArithmeticExpressions))
+ )
+)
 
 ;;; Code for arithmeticexpressions.ArithmeticExpressions.1Ref [methods]
 
@@ -818,7 +833,7 @@
  (block
   (if (ref.eq (global.get $f_$class__arithmeticexpressions_ArithmeticExpressions_1Ref) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__arithmeticexpressions_ArithmeticExpressions_1Ref (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|arithmeticex...|_1__java_lang_String (ref.func $$getString_|arithmeticex...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__arithmeticexpressions_ArithmeticExpressions_1Ref (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|arithmeticex...|__java_lang_String (ref.func $$getString_|arithmeticex...|__java_lang_String@arithmeticexpressions.ArithmeticExpressions.1Ref) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__arithmeticexpressions_ArithmeticExpressions_1Ref))
@@ -837,3 +852,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@arithmeticexpressions.ArithmeticExpressions.1Ref)
+
+;;; String Ref.$getString_|arithmeticex...|()
+(func $$getString_|arithmeticex...|__java_lang_String@arithmeticexpressions.ArithmeticExpressions.1Ref
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|arithmeticex...|__arithmeticexpressions_ArithmeticExpressions_1Ref) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|arithmeticex...|__arithmeticexpressions_ArithmeticExpressions_1Ref (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "arithmeticexpressions.ArithmeticExpressions$1Ref")))
+   )
+  )
+  (return (global.get $f_$string_|arithmeticex...|__arithmeticexpressions_ArithmeticExpressions_1Ref))
+ )
+)

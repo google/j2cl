@@ -67,6 +67,10 @@
 (global $f_namesToValuesMap__jstypeenum_Color_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
 (global $f_$initialized__jstypeenum_Color (mut i32) (i32.const 0))
 (global $f_$class__jstypeenum_Color (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|RED|__jstypeenum_Color (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$string_|GREEN|__jstypeenum_Color (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$string_|BLUE|__jstypeenum_Color (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$string_|jstypeenum.C...|__jstypeenum_Color (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for jstypeenum.Color [methods]
 
@@ -153,11 +157,11 @@
   ;;@ jstypeenum/Color.java:21:12
   (call $$clinit__void@java.lang.Enum )
   ;;@ jstypeenum/Color.java:22:2
-  (global.set $f_RED__jstypeenum_Color (call $$create__java_lang_String__int@jstypeenum.Color (call $function.no.side.effects.$getString_|RED|__java_lang_String (ref.func $$getString_|RED|__java_lang_String@javaemul.internal.StringPool) )(i32.const 0)))
+  (global.set $f_RED__jstypeenum_Color (call $$create__java_lang_String__int@jstypeenum.Color (call $function.no.side.effects.$getString_|RED|__java_lang_String (ref.func $$getString_|RED|__java_lang_String@jstypeenum.Color) )(i32.const 0)))
   ;;@ jstypeenum/Color.java:23:2
-  (global.set $f_GREEN__jstypeenum_Color (call $$create__java_lang_String__int@jstypeenum.Color (call $function.no.side.effects.$getString_|GREEN|__java_lang_String (ref.func $$getString_|GREEN|__java_lang_String@javaemul.internal.StringPool) )(i32.const 1)))
+  (global.set $f_GREEN__jstypeenum_Color (call $$create__java_lang_String__int@jstypeenum.Color (call $function.no.side.effects.$getString_|GREEN|__java_lang_String (ref.func $$getString_|GREEN|__java_lang_String@jstypeenum.Color) )(i32.const 1)))
   ;;@ jstypeenum/Color.java:24:2
-  (global.set $f_BLUE__jstypeenum_Color (call $$create__java_lang_String__int@jstypeenum.Color (call $function.no.side.effects.$getString_|BLUE|__java_lang_String (ref.func $$getString_|BLUE|__java_lang_String@javaemul.internal.StringPool) )(i32.const 2)))
+  (global.set $f_BLUE__jstypeenum_Color (call $$create__java_lang_String__int@jstypeenum.Color (call $function.no.side.effects.$getString_|BLUE|__java_lang_String (ref.func $$getString_|BLUE|__java_lang_String@jstypeenum.Color) )(i32.const 2)))
  )
 )
 
@@ -167,7 +171,7 @@
  (block
   (if (ref.eq (global.get $f_$class__jstypeenum_Color) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__jstypeenum_Color (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jstypeenum.C...|__java_lang_String (ref.func $$getString_|jstypeenum.C...|__java_lang_String@javaemul.internal.StringPool) )))
+    (global.set $f_$class__jstypeenum_Color (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jstypeenum.C...|__java_lang_String (ref.func $$getString_|jstypeenum.C...|__java_lang_String@jstypeenum.Color) )))
    )
   )
   (return (global.get $f_$class__jstypeenum_Color))
@@ -186,3 +190,55 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jstypeenum.Color)
+
+;;; String Color.$getString_|RED|()
+(func $$getString_|RED|__java_lang_String@jstypeenum.Color
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|RED|__jstypeenum_Color) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|RED|__jstypeenum_Color (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "RED")))
+   )
+  )
+  (return (global.get $f_$string_|RED|__jstypeenum_Color))
+ )
+)
+
+;;; String Color.$getString_|GREEN|()
+(func $$getString_|GREEN|__java_lang_String@jstypeenum.Color
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|GREEN|__jstypeenum_Color) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|GREEN|__jstypeenum_Color (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "GREEN")))
+   )
+  )
+  (return (global.get $f_$string_|GREEN|__jstypeenum_Color))
+ )
+)
+
+;;; String Color.$getString_|BLUE|()
+(func $$getString_|BLUE|__java_lang_String@jstypeenum.Color
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|BLUE|__jstypeenum_Color) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|BLUE|__jstypeenum_Color (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "BLUE")))
+   )
+  )
+  (return (global.get $f_$string_|BLUE|__jstypeenum_Color))
+ )
+)
+
+;;; String Color.$getString_|jstypeenum.C...|()
+(func $$getString_|jstypeenum.C...|__java_lang_String@jstypeenum.Color
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|jstypeenum.C...|__jstypeenum_Color) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|jstypeenum.C...|__jstypeenum_Color (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jstypeenum.Color")))
+   )
+  )
+  (return (global.get $f_$string_|jstypeenum.C...|__jstypeenum_Color))
+ )
+)

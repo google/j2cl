@@ -107,10 +107,14 @@
 ;;; Code for instanceofexpression.InstanceofExpressions [static fields]
 (global $f_$initialized__instanceofexpression_InstanceofExpressions (mut i32) (i32.const 0))
 (global $f_$class__instanceofexpression_InstanceofExpressions (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|foo|__instanceofexpression_InstanceofExpressions (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$string_|bar|__instanceofexpression_InstanceofExpressions (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$string_|instanceofex...|__instanceofexpression_InstanceofExpressions (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for instanceofexpression.InstanceofExpressions.1 [static fields]
 (global $f_$initialized__instanceofexpression_InstanceofExpressions_1 (mut i32) (i32.const 0))
 (global $f_$class__instanceofexpression_InstanceofExpressions_1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|instanceofex...|__instanceofexpression_InstanceofExpressions_1 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for instanceofexpression.InstanceofExpressions [methods]
 
@@ -323,7 +327,7 @@
  (local.set $this (ref.cast_static $instanceofexpression.InstanceofExpressions (local.get $this.untyped)))
  (block
   ;;@ instanceofexpression/InstanceofExpressions.java:91:4
-  (local.set $b (ref.test_static $java.lang.String (if (result (ref null $java.lang.String)) (i32.const 0) (then (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )) (else (call $function.no.side.effects.$getString_|bar|__java_lang_String (ref.func $$getString_|bar|__java_lang_String@javaemul.internal.StringPool) )))))
+  (local.set $b (ref.test_static $java.lang.String (if (result (ref null $java.lang.String)) (i32.const 0) (then (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@instanceofexpression.InstanceofExpressions) )) (else (call $function.no.side.effects.$getString_|bar|__java_lang_String (ref.func $$getString_|bar|__java_lang_String@instanceofexpression.InstanceofExpressions) )))))
  )
 )
 (elem declare func $m_testPrecedence__void@instanceofexpression.InstanceofExpressions)
@@ -352,7 +356,7 @@
  (block
   (if (ref.eq (global.get $f_$class__instanceofexpression_InstanceofExpressions) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__instanceofexpression_InstanceofExpressions (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instanceofex...|__java_lang_String (ref.func $$getString_|instanceofex...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__instanceofexpression_InstanceofExpressions (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instanceofex...|__java_lang_String (ref.func $$getString_|instanceofex...|__java_lang_String@instanceofexpression.InstanceofExpressions) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__instanceofexpression_InstanceofExpressions))
@@ -371,6 +375,45 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@instanceofexpression.InstanceofExpressions)
+
+;;; String InstanceofExpressions.$getString_|foo|()
+(func $$getString_|foo|__java_lang_String@instanceofexpression.InstanceofExpressions
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|foo|__instanceofexpression_InstanceofExpressions) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|foo|__instanceofexpression_InstanceofExpressions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "foo")))
+   )
+  )
+  (return (global.get $f_$string_|foo|__instanceofexpression_InstanceofExpressions))
+ )
+)
+
+;;; String InstanceofExpressions.$getString_|bar|()
+(func $$getString_|bar|__java_lang_String@instanceofexpression.InstanceofExpressions
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|bar|__instanceofexpression_InstanceofExpressions) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|bar|__instanceofexpression_InstanceofExpressions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bar")))
+   )
+  )
+  (return (global.get $f_$string_|bar|__instanceofexpression_InstanceofExpressions))
+ )
+)
+
+;;; String InstanceofExpressions.$getString_|instanceofex...|()
+(func $$getString_|instanceofex...|__java_lang_String@instanceofexpression.InstanceofExpressions
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|instanceofex...|__instanceofexpression_InstanceofExpressions) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|instanceofex...|__instanceofexpression_InstanceofExpressions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instanceofexpression.InstanceofExpressions")))
+   )
+  )
+  (return (global.get $f_$string_|instanceofex...|__instanceofexpression_InstanceofExpressions))
+ )
+)
 
 ;;; Code for instanceofexpression.InstanceofExpressions.1 [methods]
 
@@ -427,7 +470,7 @@
  (block
   (if (ref.eq (global.get $f_$class__instanceofexpression_InstanceofExpressions_1) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__instanceofexpression_InstanceofExpressions_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instanceofex...|_1__java_lang_String (ref.func $$getString_|instanceofex...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__instanceofexpression_InstanceofExpressions_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instanceofex...|__java_lang_String (ref.func $$getString_|instanceofex...|__java_lang_String@instanceofexpression.InstanceofExpressions.1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__instanceofexpression_InstanceofExpressions_1))
@@ -446,3 +489,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@instanceofexpression.InstanceofExpressions.1)
+
+;;; String <anonymous> implements Serializable.$getString_|instanceofex...|()
+(func $$getString_|instanceofex...|__java_lang_String@instanceofexpression.InstanceofExpressions.1
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|instanceofex...|__instanceofexpression_InstanceofExpressions_1) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|instanceofex...|__instanceofexpression_InstanceofExpressions_1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instanceofexpression.InstanceofExpressions$1")))
+   )
+  )
+  (return (global.get $f_$string_|instanceofex...|__instanceofexpression_InstanceofExpressions_1))
+ )
+)

@@ -149,14 +149,17 @@
 ;;; Code for qualifiedsupercall.Parent [static fields]
 (global $f_$initialized__qualifiedsupercall_Parent (mut i32) (i32.const 0))
 (global $f_$class__qualifiedsupercall_Parent (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|qualifiedsup...|__qualifiedsupercall_Parent (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for qualifiedsupercall.QualifiedSuperCall [static fields]
 (global $f_$initialized__qualifiedsupercall_QualifiedSuperCall (mut i32) (i32.const 0))
 (global $f_$class__qualifiedsupercall_QualifiedSuperCall (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|qualifiedsup...|__qualifiedsupercall_QualifiedSuperCall (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for qualifiedsupercall.QualifiedSuperCall.InnerClass [static fields]
 (global $f_$initialized__qualifiedsupercall_QualifiedSuperCall_InnerClass (mut i32) (i32.const 0))
 (global $f_$class__qualifiedsupercall_QualifiedSuperCall_InnerClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|qualifiedsup...|__qualifiedsupercall_QualifiedSuperCall_InnerClass (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for qualifiedsupercall.Parent [methods]
 
@@ -223,7 +226,7 @@
  (block
   (if (ref.eq (global.get $f_$class__qualifiedsupercall_Parent) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__qualifiedsupercall_Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|qualifiedsup...|__java_lang_String (ref.func $$getString_|qualifiedsup...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__qualifiedsupercall_Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|qualifiedsup...|__java_lang_String (ref.func $$getString_|qualifiedsup...|__java_lang_String@qualifiedsupercall.Parent) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__qualifiedsupercall_Parent))
@@ -242,6 +245,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@qualifiedsupercall.Parent)
+
+;;; String Parent.$getString_|qualifiedsup...|()
+(func $$getString_|qualifiedsup...|__java_lang_String@qualifiedsupercall.Parent
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|qualifiedsup...|__qualifiedsupercall_Parent) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|qualifiedsup...|__qualifiedsupercall_Parent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "qualifiedsupercall.Parent")))
+   )
+  )
+  (return (global.get $f_$string_|qualifiedsup...|__qualifiedsupercall_Parent))
+ )
+)
 
 ;;; Code for qualifiedsupercall.QualifiedSuperCall.InnerClass [methods]
 
@@ -312,7 +328,7 @@
  (block
   (if (ref.eq (global.get $f_$class__qualifiedsupercall_QualifiedSuperCall_InnerClass) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__qualifiedsupercall_QualifiedSuperCall_InnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|qualifiedsup...|_2__java_lang_String (ref.func $$getString_|qualifiedsup...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__qualifiedsupercall_QualifiedSuperCall_InnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|qualifiedsup...|__java_lang_String (ref.func $$getString_|qualifiedsup...|__java_lang_String@qualifiedsupercall.QualifiedSuperCall.InnerClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__qualifiedsupercall_QualifiedSuperCall_InnerClass))
@@ -331,6 +347,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@qualifiedsupercall.QualifiedSuperCall.InnerClass)
+
+;;; String InnerClass.$getString_|qualifiedsup...|()
+(func $$getString_|qualifiedsup...|__java_lang_String@qualifiedsupercall.QualifiedSuperCall.InnerClass
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|qualifiedsup...|__qualifiedsupercall_QualifiedSuperCall_InnerClass) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|qualifiedsup...|__qualifiedsupercall_QualifiedSuperCall_InnerClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "qualifiedsupercall.QualifiedSuperCall$InnerClass")))
+   )
+  )
+  (return (global.get $f_$string_|qualifiedsup...|__qualifiedsupercall_QualifiedSuperCall_InnerClass))
+ )
+)
 
 ;;; Code for qualifiedsupercall.QualifiedSuperCall [methods]
 
@@ -385,7 +414,7 @@
  (block
   (if (ref.eq (global.get $f_$class__qualifiedsupercall_QualifiedSuperCall) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__qualifiedsupercall_QualifiedSuperCall (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|qualifiedsup...|_1__java_lang_String (ref.func $$getString_|qualifiedsup...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@qualifiedsupercall.Parent) )))
+    (global.set $f_$class__qualifiedsupercall_QualifiedSuperCall (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|qualifiedsup...|__java_lang_String (ref.func $$getString_|qualifiedsup...|__java_lang_String@qualifiedsupercall.QualifiedSuperCall) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@qualifiedsupercall.Parent) )))
    )
   )
   (return (global.get $f_$class__qualifiedsupercall_QualifiedSuperCall))
@@ -404,3 +433,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@qualifiedsupercall.QualifiedSuperCall)
+
+;;; String QualifiedSuperCall.$getString_|qualifiedsup...|()
+(func $$getString_|qualifiedsup...|__java_lang_String@qualifiedsupercall.QualifiedSuperCall
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|qualifiedsup...|__qualifiedsupercall_QualifiedSuperCall) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|qualifiedsup...|__qualifiedsupercall_QualifiedSuperCall (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "qualifiedsupercall.QualifiedSuperCall")))
+   )
+  )
+  (return (global.get $f_$string_|qualifiedsup...|__qualifiedsupercall_QualifiedSuperCall))
+ )
+)

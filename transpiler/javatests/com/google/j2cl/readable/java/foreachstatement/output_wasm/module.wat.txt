@@ -289,18 +289,22 @@
 ;;; Code for foreachstatement.ForEachStatement [static fields]
 (global $f_$initialized__foreachstatement_ForEachStatement (mut i32) (i32.const 0))
 (global $f_$class__foreachstatement_ForEachStatement (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|foreachstate...|__foreachstatement_ForEachStatement (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for foreachstatement.ForEachStatement.Exception1 [static fields]
 (global $f_$initialized__foreachstatement_ForEachStatement_Exception1 (mut i32) (i32.const 0))
 (global $f_$class__foreachstatement_ForEachStatement_Exception1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|foreachstate...|__foreachstatement_ForEachStatement_Exception1 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for foreachstatement.ForEachStatement.Exception2 [static fields]
 (global $f_$initialized__foreachstatement_ForEachStatement_Exception2 (mut i32) (i32.const 0))
 (global $f_$class__foreachstatement_ForEachStatement_Exception2 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|foreachstate...|__foreachstatement_ForEachStatement_Exception2 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for foreachstatement.ForEachStatement.IterableReturningTypeVariable [static fields]
 (global $f_$initialized__foreachstatement_ForEachStatement_IterableReturningTypeVariable (mut i32) (i32.const 0))
 (global $f_$class__foreachstatement_ForEachStatement_IterableReturningTypeVariable (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|foreachstate...|__foreachstatement_ForEachStatement_IterableReturningTypeVariable (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for foreachstatement.ForEachStatement [methods]
 
@@ -522,7 +526,7 @@
  (block
   (if (ref.eq (global.get $f_$class__foreachstatement_ForEachStatement) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__foreachstatement_ForEachStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|foreachstate...|__java_lang_String (ref.func $$getString_|foreachstate...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__foreachstatement_ForEachStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|foreachstate...|__java_lang_String (ref.func $$getString_|foreachstate...|__java_lang_String@foreachstatement.ForEachStatement) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__foreachstatement_ForEachStatement))
@@ -541,6 +545,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@foreachstatement.ForEachStatement)
+
+;;; String ForEachStatement.$getString_|foreachstate...|()
+(func $$getString_|foreachstate...|__java_lang_String@foreachstatement.ForEachStatement
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|foreachstate...|__foreachstatement_ForEachStatement) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|foreachstate...|__foreachstatement_ForEachStatement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "foreachstatement.ForEachStatement")))
+   )
+  )
+  (return (global.get $f_$string_|foreachstate...|__foreachstatement_ForEachStatement))
+ )
+)
 
 ;;; Code for foreachstatement.ForEachStatement.IterableReturningTypeVariable [methods]
 
@@ -642,7 +659,7 @@
  (block
   (if (ref.eq (global.get $f_$class__foreachstatement_ForEachStatement_IterableReturningTypeVariable) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__foreachstatement_ForEachStatement_IterableReturningTypeVariable (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|foreachstate...|_3__java_lang_String (ref.func $$getString_|foreachstate...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__foreachstatement_ForEachStatement_IterableReturningTypeVariable (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|foreachstate...|__java_lang_String (ref.func $$getString_|foreachstate...|__java_lang_String@foreachstatement.ForEachStatement.IterableReturningTypeVariable) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__foreachstatement_ForEachStatement_IterableReturningTypeVariable))
@@ -661,6 +678,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@foreachstatement.ForEachStatement.IterableReturningTypeVariable)
+
+;;; String IterableReturningTypeVariable.$getString_|foreachstate...|()
+(func $$getString_|foreachstate...|__java_lang_String@foreachstatement.ForEachStatement.IterableReturningTypeVariable
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|foreachstate...|__foreachstatement_ForEachStatement_IterableReturningTypeVariable) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|foreachstate...|__foreachstatement_ForEachStatement_IterableReturningTypeVariable (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "foreachstatement.ForEachStatement$IterableReturningTypeVariable")))
+   )
+  )
+  (return (global.get $f_$string_|foreachstate...|__foreachstatement_ForEachStatement_IterableReturningTypeVariable))
+ )
+)
 
 ;;; Code for foreachstatement.ForEachStatement.Exception1 [methods]
 
@@ -764,7 +794,7 @@
  (block
   (if (ref.eq (global.get $f_$class__foreachstatement_ForEachStatement_Exception1) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__foreachstatement_ForEachStatement_Exception1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|foreachstate...|_1__java_lang_String (ref.func $$getString_|foreachstate...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Exception) )))
+    (global.set $f_$class__foreachstatement_ForEachStatement_Exception1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|foreachstate...|__java_lang_String (ref.func $$getString_|foreachstate...|__java_lang_String@foreachstatement.ForEachStatement.Exception1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Exception) )))
    )
   )
   (return (global.get $f_$class__foreachstatement_ForEachStatement_Exception1))
@@ -783,6 +813,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@foreachstatement.ForEachStatement.Exception1)
+
+;;; String Exception1.$getString_|foreachstate...|()
+(func $$getString_|foreachstate...|__java_lang_String@foreachstatement.ForEachStatement.Exception1
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|foreachstate...|__foreachstatement_ForEachStatement_Exception1) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|foreachstate...|__foreachstatement_ForEachStatement_Exception1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "foreachstatement.ForEachStatement$Exception1")))
+   )
+  )
+  (return (global.get $f_$string_|foreachstate...|__foreachstatement_ForEachStatement_Exception1))
+ )
+)
 
 ;;; Code for foreachstatement.ForEachStatement.Exception2 [methods]
 
@@ -886,7 +929,7 @@
  (block
   (if (ref.eq (global.get $f_$class__foreachstatement_ForEachStatement_Exception2) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__foreachstatement_ForEachStatement_Exception2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|foreachstate...|_2__java_lang_String (ref.func $$getString_|foreachstate...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Exception) )))
+    (global.set $f_$class__foreachstatement_ForEachStatement_Exception2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|foreachstate...|__java_lang_String (ref.func $$getString_|foreachstate...|__java_lang_String@foreachstatement.ForEachStatement.Exception2) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Exception) )))
    )
   )
   (return (global.get $f_$class__foreachstatement_ForEachStatement_Exception2))
@@ -905,3 +948,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@foreachstatement.ForEachStatement.Exception2)
+
+;;; String Exception2.$getString_|foreachstate...|()
+(func $$getString_|foreachstate...|__java_lang_String@foreachstatement.ForEachStatement.Exception2
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|foreachstate...|__foreachstatement_ForEachStatement_Exception2) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|foreachstate...|__foreachstatement_ForEachStatement_Exception2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "foreachstatement.ForEachStatement$Exception2")))
+   )
+  )
+  (return (global.get $f_$string_|foreachstate...|__foreachstatement_ForEachStatement_Exception2))
+ )
+)

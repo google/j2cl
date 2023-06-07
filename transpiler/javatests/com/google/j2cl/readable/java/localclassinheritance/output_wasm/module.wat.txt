@@ -154,14 +154,17 @@
 ;;; Code for localclassinheritance.LocalClassInheritance [static fields]
 (global $f_$initialized__localclassinheritance_LocalClassInheritance (mut i32) (i32.const 0))
 (global $f_$class__localclassinheritance_LocalClassInheritance (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|localclassin...|__localclassinheritance_LocalClassInheritance (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for localclassinheritance.LocalClassInheritance.1Parent [static fields]
 (global $f_$initialized__localclassinheritance_LocalClassInheritance_1Parent (mut i32) (i32.const 0))
 (global $f_$class__localclassinheritance_LocalClassInheritance_1Parent (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|localclassin...|__localclassinheritance_LocalClassInheritance_1Parent (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for localclassinheritance.LocalClassInheritance.1Child [static fields]
 (global $f_$initialized__localclassinheritance_LocalClassInheritance_1Child (mut i32) (i32.const 0))
 (global $f_$class__localclassinheritance_LocalClassInheritance_1Child (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|localclassin...|__localclassinheritance_LocalClassInheritance_1Child (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for localclassinheritance.LocalClassInheritance [methods]
 
@@ -231,7 +234,7 @@
  (block
   (if (ref.eq (global.get $f_$class__localclassinheritance_LocalClassInheritance) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__localclassinheritance_LocalClassInheritance (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclassin...|__java_lang_String (ref.func $$getString_|localclassin...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__localclassinheritance_LocalClassInheritance (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclassin...|__java_lang_String (ref.func $$getString_|localclassin...|__java_lang_String@localclassinheritance.LocalClassInheritance) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__localclassinheritance_LocalClassInheritance))
@@ -250,6 +253,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localclassinheritance.LocalClassInheritance)
+
+;;; String LocalClassInheritance.$getString_|localclassin...|()
+(func $$getString_|localclassin...|__java_lang_String@localclassinheritance.LocalClassInheritance
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|localclassin...|__localclassinheritance_LocalClassInheritance) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|localclassin...|__localclassinheritance_LocalClassInheritance (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "localclassinheritance.LocalClassInheritance")))
+   )
+  )
+  (return (global.get $f_$string_|localclassin...|__localclassinheritance_LocalClassInheritance))
+ )
+)
 
 ;;; Code for localclassinheritance.LocalClassInheritance.1Parent [methods]
 
@@ -323,7 +339,7 @@
  (block
   (if (ref.eq (global.get $f_$class__localclassinheritance_LocalClassInheritance_1Parent) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__localclassinheritance_LocalClassInheritance_1Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclassin...|_1__java_lang_String (ref.func $$getString_|localclassin...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__localclassinheritance_LocalClassInheritance_1Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclassin...|__java_lang_String (ref.func $$getString_|localclassin...|__java_lang_String@localclassinheritance.LocalClassInheritance.1Parent) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__localclassinheritance_LocalClassInheritance_1Parent))
@@ -342,6 +358,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localclassinheritance.LocalClassInheritance.1Parent)
+
+;;; String Parent.$getString_|localclassin...|()
+(func $$getString_|localclassin...|__java_lang_String@localclassinheritance.LocalClassInheritance.1Parent
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|localclassin...|__localclassinheritance_LocalClassInheritance_1Parent) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|localclassin...|__localclassinheritance_LocalClassInheritance_1Parent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "localclassinheritance.LocalClassInheritance$1Parent")))
+   )
+  )
+  (return (global.get $f_$string_|localclassin...|__localclassinheritance_LocalClassInheritance_1Parent))
+ )
+)
 
 ;;; Code for localclassinheritance.LocalClassInheritance.1Child [methods]
 
@@ -415,7 +444,7 @@
  (block
   (if (ref.eq (global.get $f_$class__localclassinheritance_LocalClassInheritance_1Child) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__localclassinheritance_LocalClassInheritance_1Child (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclassin...|_2__java_lang_String (ref.func $$getString_|localclassin...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclassinheritance.LocalClassInheritance.1Parent) )))
+    (global.set $f_$class__localclassinheritance_LocalClassInheritance_1Child (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclassin...|__java_lang_String (ref.func $$getString_|localclassin...|__java_lang_String@localclassinheritance.LocalClassInheritance.1Child) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclassinheritance.LocalClassInheritance.1Parent) )))
    )
   )
   (return (global.get $f_$class__localclassinheritance_LocalClassInheritance_1Child))
@@ -434,3 +463,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localclassinheritance.LocalClassInheritance.1Child)
+
+;;; String Child.$getString_|localclassin...|()
+(func $$getString_|localclassin...|__java_lang_String@localclassinheritance.LocalClassInheritance.1Child
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|localclassin...|__localclassinheritance_LocalClassInheritance_1Child) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|localclassin...|__localclassinheritance_LocalClassInheritance_1Child (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "localclassinheritance.LocalClassInheritance$1Child")))
+   )
+  )
+  (return (global.get $f_$string_|localclassin...|__localclassinheritance_LocalClassInheritance_1Child))
+ )
+)

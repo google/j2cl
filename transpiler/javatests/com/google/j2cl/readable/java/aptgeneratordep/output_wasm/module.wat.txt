@@ -95,10 +95,12 @@
 ;;; Code for aptgeneratordep.Dummy [static fields]
 (global $f_$initialized__aptgeneratordep_Dummy (mut i32) (i32.const 0))
 (global $f_$class__aptgeneratordep_Dummy (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|aptgenerator...|__aptgeneratordep_Dummy (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for aptgeneratordep.Foo [static fields]
 (global $f_$initialized__aptgeneratordep_Foo (mut i32) (i32.const 0))
 (global $f_$class__aptgeneratordep_Foo (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|aptgenerator...|__aptgeneratordep_Foo (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for aptgeneratordep.Dummy [methods]
 
@@ -153,7 +155,7 @@
  (block
   (if (ref.eq (global.get $f_$class__aptgeneratordep_Dummy) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__aptgeneratordep_Dummy (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|aptgenerator...|__java_lang_String (ref.func $$getString_|aptgenerator...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__aptgeneratordep_Dummy (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|aptgenerator...|__java_lang_String (ref.func $$getString_|aptgenerator...|__java_lang_String@aptgeneratordep.Dummy) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__aptgeneratordep_Dummy))
@@ -172,6 +174,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@aptgeneratordep.Dummy)
+
+;;; String Dummy.$getString_|aptgenerator...|()
+(func $$getString_|aptgenerator...|__java_lang_String@aptgeneratordep.Dummy
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|aptgenerator...|__aptgeneratordep_Dummy) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|aptgenerator...|__aptgeneratordep_Dummy (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "aptgeneratordep.Dummy")))
+   )
+  )
+  (return (global.get $f_$string_|aptgenerator...|__aptgeneratordep_Dummy))
+ )
+)
 
 ;;; Code for aptgeneratordep.Foo [methods]
 
@@ -245,7 +260,7 @@
  (block
   (if (ref.eq (global.get $f_$class__aptgeneratordep_Foo) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__aptgeneratordep_Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|aptgenerator...|_1__java_lang_String (ref.func $$getString_|aptgenerator...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__aptgeneratordep_Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|aptgenerator...|__java_lang_String (ref.func $$getString_|aptgenerator...|__java_lang_String@aptgeneratordep.Foo) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__aptgeneratordep_Foo))
@@ -264,3 +279,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@aptgeneratordep.Foo)
+
+;;; String Foo.$getString_|aptgenerator...|()
+(func $$getString_|aptgenerator...|__java_lang_String@aptgeneratordep.Foo
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|aptgenerator...|__aptgeneratordep_Foo) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|aptgenerator...|__aptgeneratordep_Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "aptgeneratordep.Foo")))
+   )
+  )
+  (return (global.get $f_$string_|aptgenerator...|__aptgeneratordep_Foo))
+ )
+)

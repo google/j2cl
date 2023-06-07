@@ -105,10 +105,12 @@
 ;;; Code for instanceinnerclass.InstanceInnerClass [static fields]
 (global $f_$initialized__instanceinnerclass_InstanceInnerClass (mut i32) (i32.const 0))
 (global $f_$class__instanceinnerclass_InstanceInnerClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|instanceinne...|__instanceinnerclass_InstanceInnerClass (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for instanceinnerclass.InstanceInnerClass.InnerClass [static fields]
 (global $f_$initialized__instanceinnerclass_InstanceInnerClass_InnerClass (mut i32) (i32.const 0))
 (global $f_$class__instanceinnerclass_InstanceInnerClass_InnerClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|instanceinne...|__instanceinnerclass_InstanceInnerClass_InnerClass (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for instanceinnerclass.InstanceInnerClass [methods]
 
@@ -189,7 +191,7 @@
  (block
   (if (ref.eq (global.get $f_$class__instanceinnerclass_InstanceInnerClass) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__instanceinnerclass_InstanceInnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instanceinne...|__java_lang_String (ref.func $$getString_|instanceinne...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__instanceinnerclass_InstanceInnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instanceinne...|__java_lang_String (ref.func $$getString_|instanceinne...|__java_lang_String@instanceinnerclass.InstanceInnerClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__instanceinnerclass_InstanceInnerClass))
@@ -208,6 +210,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@instanceinnerclass.InstanceInnerClass)
+
+;;; String InstanceInnerClass.$getString_|instanceinne...|()
+(func $$getString_|instanceinne...|__java_lang_String@instanceinnerclass.InstanceInnerClass
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|instanceinne...|__instanceinnerclass_InstanceInnerClass) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|instanceinne...|__instanceinnerclass_InstanceInnerClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instanceinnerclass.InstanceInnerClass")))
+   )
+  )
+  (return (global.get $f_$string_|instanceinne...|__instanceinnerclass_InstanceInnerClass))
+ )
+)
 
 ;;; Code for instanceinnerclass.InstanceInnerClass.InnerClass [methods]
 
@@ -294,7 +309,7 @@
  (block
   (if (ref.eq (global.get $f_$class__instanceinnerclass_InstanceInnerClass_InnerClass) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__instanceinnerclass_InstanceInnerClass_InnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instanceinne...|_1__java_lang_String (ref.func $$getString_|instanceinne...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__instanceinnerclass_InstanceInnerClass_InnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instanceinne...|__java_lang_String (ref.func $$getString_|instanceinne...|__java_lang_String@instanceinnerclass.InstanceInnerClass.InnerClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__instanceinnerclass_InstanceInnerClass_InnerClass))
@@ -313,3 +328,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@instanceinnerclass.InstanceInnerClass.InnerClass)
+
+;;; String InnerClass.$getString_|instanceinne...|()
+(func $$getString_|instanceinne...|__java_lang_String@instanceinnerclass.InstanceInnerClass.InnerClass
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|instanceinne...|__instanceinnerclass_InstanceInnerClass_InnerClass) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|instanceinne...|__instanceinnerclass_InstanceInnerClass_InnerClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instanceinnerclass.InstanceInnerClass$InnerClass")))
+   )
+  )
+  (return (global.get $f_$string_|instanceinne...|__instanceinnerclass_InstanceInnerClass_InnerClass))
+ )
+)

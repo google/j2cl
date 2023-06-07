@@ -101,10 +101,21 @@
 ;;; Code for strings.Strings [static fields]
 (global $f_$initialized__strings_Strings (mut i32) (i32.const 0))
 (global $f_$class__strings_Strings (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|a|__strings_Strings (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$string_|o|__strings_Strings (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$string_|1|__strings_Strings (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$string_|s|__strings_Strings (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$string_|s12|__strings_Strings (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$string_|This_is_a_st...|__strings_Strings (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$string_|_|__strings_Strings (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$string_|_|_1__strings_Strings (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$string_|strings.Strings|__strings_Strings (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for strings.Strings.StringHolder [static fields]
 (global $f_$initialized__strings_Strings_StringHolder (mut i32) (i32.const 0))
 (global $f_$class__strings_Strings_StringHolder (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|A|__strings_Strings_StringHolder (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$string_|strings.Stri...|__strings_Strings_StringHolder (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for strings.Strings [methods]
 
@@ -115,7 +126,7 @@
  (local $$instance (ref null $strings.Strings))
  (block
   ;;@ strings/Strings.java:18:13
-  (local.set $$instance (struct.new $strings.Strings (ref.as_non_null (global.get $strings.Strings.vtable)) (ref.as_non_null (global.get $strings.Strings.itable)) (i32.const 0) (call $function.no.side.effects.$getString_|This_is_a_st...|__java_lang_String (ref.func $$getString_|This_is_a_st...|__java_lang_String@javaemul.internal.StringPool) ) (call $function.no.side.effects.$getString_|_|_20__java_lang_String (ref.func $$getString_|_|_20__java_lang_String@javaemul.internal.StringPool) ) (call $function.no.side.effects.$getString_|_|_21__java_lang_String (ref.func $$getString_|_|_21__java_lang_String@javaemul.internal.StringPool) )))
+  (local.set $$instance (struct.new $strings.Strings (ref.as_non_null (global.get $strings.Strings.vtable)) (ref.as_non_null (global.get $strings.Strings.itable)) (i32.const 0) (call $function.no.side.effects.$getString_|This_is_a_st...|__java_lang_String (ref.func $$getString_|This_is_a_st...|__java_lang_String@strings.Strings) ) (call $function.no.side.effects.$getString_|_|__java_lang_String (ref.func $$getString_|_|__java_lang_String@strings.Strings) ) (call $function.no.side.effects.$getString_|_|_1__java_lang_String (ref.func $$getString_|_|_1__java_lang_String@strings.Strings) )))
   ;;@ strings/Strings.java:18:13
   (call $$ctor__void_$p_strings_Strings@strings.Strings (ref.as_non_null (local.get $$instance)))
   ;;@ strings/Strings.java:18:13
@@ -193,7 +204,7 @@
   (local.set $s1 (block (result (ref null $java.lang.String))
    (local.set $$stringBuilder_2 (call $$create__@java.lang.StringBuilder ))
    (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_2))(local.get $s1)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_2)))))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_2))(call $function.no.side.effects.$getString_|a|__java_lang_String (ref.func $$getString_|a|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_2)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_2))(call $function.no.side.effects.$getString_|a|__java_lang_String (ref.func $$getString_|a|__java_lang_String@strings.Strings) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_2)))))
    (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder_2))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder_2))))
   ))
   ;;@ strings/Strings.java:37:4
@@ -203,13 +214,13 @@
    (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_3))(local.get $s1)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_3)))))
    (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_3))(local.get $s2)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_3)))))
    (drop (call_ref $function.m_append__java_lang_Object__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_3))(ref.null $java.lang.Object)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_Object__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_3)))))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_3))(call $function.no.side.effects.$getString_|a|__java_lang_String (ref.func $$getString_|a|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_3)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_3))(call $function.no.side.effects.$getString_|a|__java_lang_String (ref.func $$getString_|a|__java_lang_String@strings.Strings) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_3)))))
    (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder_3))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder_3))))
   ))
   ;;@ strings/Strings.java:39:4
   (local.set $s3 (block (result (ref null $java.lang.String))
    (local.set $$stringBuilder_4 (call $$create__@java.lang.StringBuilder ))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_4))(call $function.no.side.effects.$getString_|a|__java_lang_String (ref.func $$getString_|a|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_4)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_4))(call $function.no.side.effects.$getString_|a|__java_lang_String (ref.func $$getString_|a|__java_lang_String@strings.Strings) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_4)))))
    (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_4))(local.get $s1)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_4)))))
    (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_4))(local.get $s1)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_4)))))
    (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_4))(local.get $s2)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_4)))))
@@ -226,14 +237,14 @@
   (local.set $s4 (block (result (ref null $java.lang.String))
    (local.set $$stringBuilder_5 (call $$create__@java.lang.StringBuilder ))
    (drop (call_ref $function.m_append__int__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_5))(i32.add (local.get $c1) (local.get $c2))(struct.get $java.lang.StringBuilder.vtable $m_append__int__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_5)))))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_5))(call $function.no.side.effects.$getString_|o|__java_lang_String (ref.func $$getString_|o|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_5)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_5))(call $function.no.side.effects.$getString_|o|__java_lang_String (ref.func $$getString_|o|__java_lang_String@strings.Strings) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_5)))))
    (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder_5))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder_5))))
   ))
   ;;@ strings/Strings.java:46:4
   (local.set $s4 (block (result (ref null $java.lang.String))
    (local.set $$stringBuilder_6 (call $$create__@java.lang.StringBuilder ))
    (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_6))(local.get $s4)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_6)))))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_6))(call $function.no.side.effects.$getString_|1|__java_lang_String (ref.func $$getString_|1|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_6)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_6))(call $function.no.side.effects.$getString_|1|__java_lang_String (ref.func $$getString_|1|__java_lang_String@strings.Strings) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_6)))))
    (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder_6))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder_6))))
   ))
   ;;@ strings/Strings.java:49:4
@@ -307,7 +318,7 @@
    (struct.set $strings.Strings.StringHolder $f_s__strings_Strings_StringHolder(local.get $$qualifier_2) (block (result (ref null $java.lang.String))
     (local.set $$stringBuilder_15 (call $$create__@java.lang.StringBuilder ))
     (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_15))(struct.get $strings.Strings.StringHolder $f_s__strings_Strings_StringHolder(local.get $$qualifier_2))(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_15)))))
-    (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_15))(call $function.no.side.effects.$getString_|o|__java_lang_String (ref.func $$getString_|o|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_15)))))
+    (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_15))(call $function.no.side.effects.$getString_|o|__java_lang_String (ref.func $$getString_|o|__java_lang_String@strings.Strings) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_15)))))
     (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder_15))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder_15))))
    ))
   )
@@ -315,11 +326,11 @@
   (local.set $s1 (block (result (ref null $java.lang.String))
    (local.set $$stringBuilder_16 (call $$create__@java.lang.StringBuilder ))
    (drop (call_ref $function.m_append__int__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_16))(i32.add (i32.const 1) (i32.const 2))(struct.get $java.lang.StringBuilder.vtable $m_append__int__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_16)))))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_16))(call $function.no.side.effects.$getString_|s|__java_lang_String (ref.func $$getString_|s|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_16)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_16))(call $function.no.side.effects.$getString_|s|__java_lang_String (ref.func $$getString_|s|__java_lang_String@strings.Strings) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_16)))))
    (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder_16))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder_16))))
   ))
   ;;@ strings/Strings.java:61:4
-  (local.set $s1 (call $function.no.side.effects.$getString_|s12|__java_lang_String (ref.func $$getString_|s12|__java_lang_String@javaemul.internal.StringPool) ))
+  (local.set $s1 (call $function.no.side.effects.$getString_|s12|__java_lang_String (ref.func $$getString_|s12|__java_lang_String@strings.Strings) ))
  )
 )
 (elem declare func $m_test__void@strings.Strings)
@@ -356,7 +367,7 @@
  (block
   (if (ref.eq (global.get $f_$class__strings_Strings) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__strings_Strings (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|strings.Strings|__java_lang_String (ref.func $$getString_|strings.Strings|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__strings_Strings (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|strings.Strings|__java_lang_String (ref.func $$getString_|strings.Strings|__java_lang_String@strings.Strings) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__strings_Strings))
@@ -375,6 +386,123 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@strings.Strings)
+
+;;; String Strings.$getString_|a|()
+(func $$getString_|a|__java_lang_String@strings.Strings
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|a|__strings_Strings) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|a|__strings_Strings (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "a")))
+   )
+  )
+  (return (global.get $f_$string_|a|__strings_Strings))
+ )
+)
+
+;;; String Strings.$getString_|o|()
+(func $$getString_|o|__java_lang_String@strings.Strings
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|o|__strings_Strings) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|o|__strings_Strings (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "o")))
+   )
+  )
+  (return (global.get $f_$string_|o|__strings_Strings))
+ )
+)
+
+;;; String Strings.$getString_|1|()
+(func $$getString_|1|__java_lang_String@strings.Strings
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|1|__strings_Strings) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|1|__strings_Strings (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "1")))
+   )
+  )
+  (return (global.get $f_$string_|1|__strings_Strings))
+ )
+)
+
+;;; String Strings.$getString_|s|()
+(func $$getString_|s|__java_lang_String@strings.Strings
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|s|__strings_Strings) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|s|__strings_Strings (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "s")))
+   )
+  )
+  (return (global.get $f_$string_|s|__strings_Strings))
+ )
+)
+
+;;; String Strings.$getString_|s12|()
+(func $$getString_|s12|__java_lang_String@strings.Strings
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|s12|__strings_Strings) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|s12|__strings_Strings (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "s12")))
+   )
+  )
+  (return (global.get $f_$string_|s12|__strings_Strings))
+ )
+)
+
+;;; String Strings.$getString_|This_is_a_st...|()
+(func $$getString_|This_is_a_st...|__java_lang_String@strings.Strings
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|This_is_a_st...|__strings_Strings) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|This_is_a_st...|__strings_Strings (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "This is a string literal")))
+   )
+  )
+  (return (global.get $f_$string_|This_is_a_st...|__strings_Strings))
+ )
+)
+
+;;; String Strings.$getString_|_|()
+(func $$getString_|_|__java_lang_String@strings.Strings
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|_|__strings_Strings) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|_|__strings_Strings (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "\F0\90\8D\86")))
+   )
+  )
+  (return (global.get $f_$string_|_|__strings_Strings))
+ )
+)
+
+;;; String Strings.$getString_|_|_1()
+(func $$getString_|_|_1__java_lang_String@strings.Strings
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|_|_1__strings_Strings) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|_|_1__strings_Strings (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "\EF\BC\9A")))
+   )
+  )
+  (return (global.get $f_$string_|_|_1__strings_Strings))
+ )
+)
+
+;;; String Strings.$getString_|strings.Strings|()
+(func $$getString_|strings.Strings|__java_lang_String@strings.Strings
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|strings.Strings|__strings_Strings) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|strings.Strings|__strings_Strings (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "strings.Strings")))
+   )
+  )
+  (return (global.get $f_$string_|strings.Strings|__strings_Strings))
+ )
+)
 
 ;;; Code for strings.Strings.StringHolder [methods]
 
@@ -413,7 +541,7 @@
  ;;@ strings/Strings.java:25:23
  (block
   ;;@ strings/Strings.java:26:4
-  (struct.set $strings.Strings.StringHolder $f_s__strings_Strings_StringHolder(local.get $this) (call $function.no.side.effects.$getString_|A|__java_lang_String (ref.func $$getString_|A|__java_lang_String@javaemul.internal.StringPool) ))
+  (struct.set $strings.Strings.StringHolder $f_s__strings_Strings_StringHolder(local.get $this) (call $function.no.side.effects.$getString_|A|__java_lang_String (ref.func $$getString_|A|__java_lang_String@strings.Strings.StringHolder) ))
  )
 )
 
@@ -441,7 +569,7 @@
  (block
   (if (ref.eq (global.get $f_$class__strings_Strings_StringHolder) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__strings_Strings_StringHolder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|strings.Stri...|__java_lang_String (ref.func $$getString_|strings.Stri...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__strings_Strings_StringHolder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|strings.Stri...|__java_lang_String (ref.func $$getString_|strings.Stri...|__java_lang_String@strings.Strings.StringHolder) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__strings_Strings_StringHolder))
@@ -460,3 +588,29 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@strings.Strings.StringHolder)
+
+;;; String StringHolder.$getString_|A|()
+(func $$getString_|A|__java_lang_String@strings.Strings.StringHolder
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|A|__strings_Strings_StringHolder) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|A|__strings_Strings_StringHolder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "A")))
+   )
+  )
+  (return (global.get $f_$string_|A|__strings_Strings_StringHolder))
+ )
+)
+
+;;; String StringHolder.$getString_|strings.Stri...|()
+(func $$getString_|strings.Stri...|__java_lang_String@strings.Strings.StringHolder
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|strings.Stri...|__strings_Strings_StringHolder) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|strings.Stri...|__strings_Strings_StringHolder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "strings.Strings$StringHolder")))
+   )
+  )
+  (return (global.get $f_$string_|strings.Stri...|__strings_Strings_StringHolder))
+ )
+)

@@ -95,10 +95,12 @@
 ;;; Code for multipletopclasses.AnotherClass [static fields]
 (global $f_$initialized__multipletopclasses_AnotherClass (mut i32) (i32.const 0))
 (global $f_$class__multipletopclasses_AnotherClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|multipletopc...|__multipletopclasses_AnotherClass (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for multipletopclasses.MultipleTopClasses [static fields]
 (global $f_$initialized__multipletopclasses_MultipleTopClasses (mut i32) (i32.const 0))
 (global $f_$class__multipletopclasses_MultipleTopClasses (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|multipletopc...|__multipletopclasses_MultipleTopClasses (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for multipletopclasses.AnotherClass [methods]
 
@@ -153,7 +155,7 @@
  (block
   (if (ref.eq (global.get $f_$class__multipletopclasses_AnotherClass) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__multipletopclasses_AnotherClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|multipletopc...|__java_lang_String (ref.func $$getString_|multipletopc...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__multipletopclasses_AnotherClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|multipletopc...|__java_lang_String (ref.func $$getString_|multipletopc...|__java_lang_String@multipletopclasses.AnotherClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__multipletopclasses_AnotherClass))
@@ -172,6 +174,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@multipletopclasses.AnotherClass)
+
+;;; String AnotherClass.$getString_|multipletopc...|()
+(func $$getString_|multipletopc...|__java_lang_String@multipletopclasses.AnotherClass
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|multipletopc...|__multipletopclasses_AnotherClass) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|multipletopc...|__multipletopclasses_AnotherClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "multipletopclasses.AnotherClass")))
+   )
+  )
+  (return (global.get $f_$string_|multipletopc...|__multipletopclasses_AnotherClass))
+ )
+)
 
 ;;; Code for multipletopclasses.MultipleTopClasses [methods]
 
@@ -226,7 +241,7 @@
  (block
   (if (ref.eq (global.get $f_$class__multipletopclasses_MultipleTopClasses) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__multipletopclasses_MultipleTopClasses (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|multipletopc...|_1__java_lang_String (ref.func $$getString_|multipletopc...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@multipletopclasses.AnotherClass) )))
+    (global.set $f_$class__multipletopclasses_MultipleTopClasses (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|multipletopc...|__java_lang_String (ref.func $$getString_|multipletopc...|__java_lang_String@multipletopclasses.MultipleTopClasses) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@multipletopclasses.AnotherClass) )))
    )
   )
   (return (global.get $f_$class__multipletopclasses_MultipleTopClasses))
@@ -245,3 +260,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@multipletopclasses.MultipleTopClasses)
+
+;;; String MultipleTopClasses.$getString_|multipletopc...|()
+(func $$getString_|multipletopc...|__java_lang_String@multipletopclasses.MultipleTopClasses
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|multipletopc...|__multipletopclasses_MultipleTopClasses) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|multipletopc...|__multipletopclasses_MultipleTopClasses (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "multipletopclasses.MultipleTopClasses")))
+   )
+  )
+  (return (global.get $f_$string_|multipletopc...|__multipletopclasses_MultipleTopClasses))
+ )
+)

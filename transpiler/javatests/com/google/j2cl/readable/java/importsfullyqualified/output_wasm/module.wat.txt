@@ -49,6 +49,7 @@
 ;;; Code for importsfullyqualified.ImportsFullyQualified [static fields]
 (global $f_$initialized__importsfullyqualified_ImportsFullyQualified (mut i32) (i32.const 0))
 (global $f_$class__importsfullyqualified_ImportsFullyQualified (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|importsfully...|__importsfullyqualified_ImportsFullyQualified (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for importsfullyqualified.ImportsFullyQualified [methods]
 
@@ -103,7 +104,7 @@
  (block
   (if (ref.eq (global.get $f_$class__importsfullyqualified_ImportsFullyQualified) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__importsfullyqualified_ImportsFullyQualified (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|importsfully...|__java_lang_String (ref.func $$getString_|importsfully...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__importsfullyqualified_ImportsFullyQualified (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|importsfully...|__java_lang_String (ref.func $$getString_|importsfully...|__java_lang_String@importsfullyqualified.ImportsFullyQualified) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__importsfullyqualified_ImportsFullyQualified))
@@ -122,3 +123,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@importsfullyqualified.ImportsFullyQualified)
+
+;;; String ImportsFullyQualified.$getString_|importsfully...|()
+(func $$getString_|importsfully...|__java_lang_String@importsfullyqualified.ImportsFullyQualified
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|importsfully...|__importsfullyqualified_ImportsFullyQualified) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|importsfully...|__importsfullyqualified_ImportsFullyQualified (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "importsfullyqualified.ImportsFullyQualified")))
+   )
+  )
+  (return (global.get $f_$string_|importsfully...|__importsfullyqualified_ImportsFullyQualified))
+ )
+)

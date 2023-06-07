@@ -109,18 +109,22 @@
 ;;; Code for abstractinnerclass.InnerClasses [static fields]
 (global $f_$initialized__abstractinnerclass_InnerClasses (mut i32) (i32.const 0))
 (global $f_$class__abstractinnerclass_InnerClasses (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|abstractinne...|__abstractinnerclass_InnerClasses (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for abstractinnerclass.InnerClasses.A [static fields]
 (global $f_$initialized__abstractinnerclass_InnerClasses_A (mut i32) (i32.const 0))
 (global $f_$class__abstractinnerclass_InnerClasses_A (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|abstractinne...|__abstractinnerclass_InnerClasses_A (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for abstractinnerclass.InnerClasses.B [static fields]
 (global $f_$initialized__abstractinnerclass_InnerClasses_B (mut i32) (i32.const 0))
 (global $f_$class__abstractinnerclass_InnerClasses_B (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|abstractinne...|__abstractinnerclass_InnerClasses_B (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for abstractinnerclass.InnerClasses.C [static fields]
 (global $f_$initialized__abstractinnerclass_InnerClasses_C (mut i32) (i32.const 0))
 (global $f_$class__abstractinnerclass_InnerClasses_C (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|abstractinne...|__abstractinnerclass_InnerClasses_C (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for abstractinnerclass.InnerClasses.A [methods]
 
@@ -146,10 +150,23 @@
  (block
   (if (ref.eq (global.get $f_$class__abstractinnerclass_InnerClasses_A) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__abstractinnerclass_InnerClasses_A (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|abstractinne...|_1__java_lang_String (ref.func $$getString_|abstractinne...|_1__java_lang_String@javaemul.internal.StringPool) )))
+    (global.set $f_$class__abstractinnerclass_InnerClasses_A (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|abstractinne...|__java_lang_String (ref.func $$getString_|abstractinne...|__java_lang_String@abstractinnerclass.InnerClasses.A) )))
    )
   )
   (return (global.get $f_$class__abstractinnerclass_InnerClasses_A))
+ )
+)
+
+;;; String A.$getString_|abstractinne...|()
+(func $$getString_|abstractinne...|__java_lang_String@abstractinnerclass.InnerClasses.A
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|abstractinne...|__abstractinnerclass_InnerClasses_A) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|abstractinne...|__abstractinnerclass_InnerClasses_A (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "abstractinnerclass.InnerClasses$A")))
+   )
+  )
+  (return (global.get $f_$string_|abstractinne...|__abstractinnerclass_InnerClasses_A))
  )
 )
 
@@ -206,7 +223,7 @@
  (block
   (if (ref.eq (global.get $f_$class__abstractinnerclass_InnerClasses) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__abstractinnerclass_InnerClasses (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|abstractinne...|__java_lang_String (ref.func $$getString_|abstractinne...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__abstractinnerclass_InnerClasses (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|abstractinne...|__java_lang_String (ref.func $$getString_|abstractinne...|__java_lang_String@abstractinnerclass.InnerClasses) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__abstractinnerclass_InnerClasses))
@@ -225,6 +242,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@abstractinnerclass.InnerClasses)
+
+;;; String InnerClasses.$getString_|abstractinne...|()
+(func $$getString_|abstractinne...|__java_lang_String@abstractinnerclass.InnerClasses
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|abstractinne...|__abstractinnerclass_InnerClasses) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|abstractinne...|__abstractinnerclass_InnerClasses (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "abstractinnerclass.InnerClasses")))
+   )
+  )
+  (return (global.get $f_$string_|abstractinne...|__abstractinnerclass_InnerClasses))
+ )
+)
 
 ;;; Code for abstractinnerclass.InnerClasses.B [methods]
 
@@ -278,10 +308,23 @@
  (block
   (if (ref.eq (global.get $f_$class__abstractinnerclass_InnerClasses_B) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__abstractinnerclass_InnerClasses_B (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|abstractinne...|_2__java_lang_String (ref.func $$getString_|abstractinne...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__abstractinnerclass_InnerClasses_B (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|abstractinne...|__java_lang_String (ref.func $$getString_|abstractinne...|__java_lang_String@abstractinnerclass.InnerClasses.B) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__abstractinnerclass_InnerClasses_B))
+ )
+)
+
+;;; String B.$getString_|abstractinne...|()
+(func $$getString_|abstractinne...|__java_lang_String@abstractinnerclass.InnerClasses.B
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|abstractinne...|__abstractinnerclass_InnerClasses_B) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|abstractinne...|__abstractinnerclass_InnerClasses_B (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "abstractinnerclass.InnerClasses$B")))
+   )
+  )
+  (return (global.get $f_$string_|abstractinne...|__abstractinnerclass_InnerClasses_B))
  )
 )
 
@@ -338,9 +381,22 @@
  (block
   (if (ref.eq (global.get $f_$class__abstractinnerclass_InnerClasses_C) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__abstractinnerclass_InnerClasses_C (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|abstractinne...|_3__java_lang_String (ref.func $$getString_|abstractinne...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__abstractinnerclass_InnerClasses_C (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|abstractinne...|__java_lang_String (ref.func $$getString_|abstractinne...|__java_lang_String@abstractinnerclass.InnerClasses.C) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__abstractinnerclass_InnerClasses_C))
+ )
+)
+
+;;; String C.$getString_|abstractinne...|()
+(func $$getString_|abstractinne...|__java_lang_String@abstractinnerclass.InnerClasses.C
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|abstractinne...|__abstractinnerclass_InnerClasses_C) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|abstractinne...|__abstractinnerclass_InnerClasses_C (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "abstractinnerclass.InnerClasses$C")))
+   )
+  )
+  (return (global.get $f_$string_|abstractinne...|__abstractinnerclass_InnerClasses_C))
  )
 )

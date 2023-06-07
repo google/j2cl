@@ -217,22 +217,27 @@
 ;;; Code for instancejsmethods.MyInterface [static fields]
 (global $f_$initialized__instancejsmethods_MyInterface (mut i32) (i32.const 0))
 (global $f_$class__instancejsmethods_MyInterface (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|instancejsme...|__instancejsmethods_MyInterface (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for instancejsmethods.SuperParent [static fields]
 (global $f_$initialized__instancejsmethods_SuperParent (mut i32) (i32.const 0))
 (global $f_$class__instancejsmethods_SuperParent (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|instancejsme...|__instancejsmethods_SuperParent (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for instancejsmethods.Parent [static fields]
 (global $f_$initialized__instancejsmethods_Parent (mut i32) (i32.const 0))
 (global $f_$class__instancejsmethods_Parent (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|instancejsme...|__instancejsmethods_Parent (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for instancejsmethods.Child [static fields]
 (global $f_$initialized__instancejsmethods_Child (mut i32) (i32.const 0))
 (global $f_$class__instancejsmethods_Child (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|instancejsme...|__instancejsmethods_Child (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for instancejsmethods.Main [static fields]
 (global $f_$initialized__instancejsmethods_Main (mut i32) (i32.const 0))
 (global $f_$class__instancejsmethods_Main (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|instancejsme...|__instancejsmethods_Main (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for instancejsmethods.MyInterface [methods]
 
@@ -258,10 +263,23 @@
  (block
   (if (ref.eq (global.get $f_$class__instancejsmethods_MyInterface) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__instancejsmethods_MyInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instancejsme...|__java_lang_String (ref.func $$getString_|instancejsme...|__java_lang_String@javaemul.internal.StringPool) )))
+    (global.set $f_$class__instancejsmethods_MyInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instancejsme...|__java_lang_String (ref.func $$getString_|instancejsme...|__java_lang_String@instancejsmethods.MyInterface) )))
    )
   )
   (return (global.get $f_$class__instancejsmethods_MyInterface))
+ )
+)
+
+;;; String MyInterface.$getString_|instancejsme...|()
+(func $$getString_|instancejsme...|__java_lang_String@instancejsmethods.MyInterface
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|instancejsme...|__instancejsmethods_MyInterface) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|instancejsme...|__instancejsmethods_MyInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instancejsmethods.MyInterface")))
+   )
+  )
+  (return (global.get $f_$string_|instancejsme...|__instancejsmethods_MyInterface))
  )
 )
 
@@ -352,7 +370,7 @@
  (block
   (if (ref.eq (global.get $f_$class__instancejsmethods_SuperParent) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__instancejsmethods_SuperParent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instancejsme...|_1__java_lang_String (ref.func $$getString_|instancejsme...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__instancejsmethods_SuperParent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instancejsme...|__java_lang_String (ref.func $$getString_|instancejsme...|__java_lang_String@instancejsmethods.SuperParent) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__instancejsmethods_SuperParent))
@@ -371,6 +389,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@instancejsmethods.SuperParent)
+
+;;; String SuperParent.$getString_|instancejsme...|()
+(func $$getString_|instancejsme...|__java_lang_String@instancejsmethods.SuperParent
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|instancejsme...|__instancejsmethods_SuperParent) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|instancejsme...|__instancejsmethods_SuperParent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instancejsmethods.SuperParent")))
+   )
+  )
+  (return (global.get $f_$string_|instancejsme...|__instancejsmethods_SuperParent))
+ )
+)
 
 ;;; Code for instancejsmethods.Main [methods]
 
@@ -509,7 +540,7 @@
  (block
   (if (ref.eq (global.get $f_$class__instancejsmethods_Main) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__instancejsmethods_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instancejsme...|_4__java_lang_String (ref.func $$getString_|instancejsme...|_4__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__instancejsmethods_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instancejsme...|__java_lang_String (ref.func $$getString_|instancejsme...|__java_lang_String@instancejsmethods.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__instancejsmethods_Main))
@@ -528,6 +559,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@instancejsmethods.Main)
+
+;;; String Main.$getString_|instancejsme...|()
+(func $$getString_|instancejsme...|__java_lang_String@instancejsmethods.Main
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|instancejsme...|__instancejsmethods_Main) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|instancejsme...|__instancejsmethods_Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instancejsmethods.Main")))
+   )
+  )
+  (return (global.get $f_$string_|instancejsme...|__instancejsmethods_Main))
+ )
+)
 
 ;;; Code for instancejsmethods.Parent [methods]
 
@@ -632,7 +676,7 @@
  (block
   (if (ref.eq (global.get $f_$class__instancejsmethods_Parent) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__instancejsmethods_Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instancejsme...|_2__java_lang_String (ref.func $$getString_|instancejsme...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@instancejsmethods.SuperParent) )))
+    (global.set $f_$class__instancejsmethods_Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instancejsme...|__java_lang_String (ref.func $$getString_|instancejsme...|__java_lang_String@instancejsmethods.Parent) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@instancejsmethods.SuperParent) )))
    )
   )
   (return (global.get $f_$class__instancejsmethods_Parent))
@@ -651,6 +695,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@instancejsmethods.Parent)
+
+;;; String Parent.$getString_|instancejsme...|()
+(func $$getString_|instancejsme...|__java_lang_String@instancejsmethods.Parent
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|instancejsme...|__instancejsmethods_Parent) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|instancejsme...|__instancejsmethods_Parent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instancejsmethods.Parent")))
+   )
+  )
+  (return (global.get $f_$string_|instancejsme...|__instancejsmethods_Parent))
+ )
+)
 
 ;;; Code for instancejsmethods.Child [methods]
 
@@ -770,7 +827,7 @@
  (block
   (if (ref.eq (global.get $f_$class__instancejsmethods_Child) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__instancejsmethods_Child (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instancejsme...|_3__java_lang_String (ref.func $$getString_|instancejsme...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@instancejsmethods.Parent) )))
+    (global.set $f_$class__instancejsmethods_Child (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instancejsme...|__java_lang_String (ref.func $$getString_|instancejsme...|__java_lang_String@instancejsmethods.Child) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@instancejsmethods.Parent) )))
    )
   )
   (return (global.get $f_$class__instancejsmethods_Child))
@@ -789,3 +846,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@instancejsmethods.Child)
+
+;;; String Child.$getString_|instancejsme...|()
+(func $$getString_|instancejsme...|__java_lang_String@instancejsmethods.Child
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|instancejsme...|__instancejsmethods_Child) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|instancejsme...|__instancejsmethods_Child (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instancejsmethods.Child")))
+   )
+  )
+  (return (global.get $f_$string_|instancejsme...|__instancejsmethods_Child))
+ )
+)

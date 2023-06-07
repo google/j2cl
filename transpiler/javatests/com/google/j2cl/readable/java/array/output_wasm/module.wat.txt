@@ -206,20 +206,24 @@
 ;;; Code for array.Arrays [static fields]
 (global $f_$initialized__array_Arrays (mut i32) (i32.const 0))
 (global $f_$class__array_Arrays (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|array.Arrays|__array_Arrays (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for array.Arrays.SomeObject [static fields]
 (global $f_$initialized__array_Arrays_SomeObject (mut i32) (i32.const 0))
 (global $f_$class__array_Arrays_SomeObject (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|array.Arrays...|__array_Arrays_SomeObject (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for array.Arrays.NativeType [static fields]
 
 ;;; Code for array.Arrays.ArrayContainer [static fields]
 (global $f_$initialized__array_Arrays_ArrayContainer (mut i32) (i32.const 0))
 (global $f_$class__array_Arrays_ArrayContainer (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|array.Arrays...|__array_Arrays_ArrayContainer (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for array.Arrays.NativeType.$Overlay [static fields]
 (global $f_$initialized__array_Arrays_NativeType_$Overlay (mut i32) (i32.const 0))
 (global $f_$class__array_Arrays_NativeType_$Overlay (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|array.Arrays...|__array_Arrays_NativeType_$Overlay (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for array.Arrays.NativeType.$Overlay [methods]
 
@@ -245,7 +249,7 @@
  (block
   (if (ref.eq (global.get $f_$class__array_Arrays_NativeType_$Overlay) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__array_Arrays_NativeType_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|array.Arrays...|_2__java_lang_String (ref.func $$getString_|array.Arrays...|_2__java_lang_String@javaemul.internal.StringPool) )(ref.null $java.lang.Class)))
+    (global.set $f_$class__array_Arrays_NativeType_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|array.Arrays...|__java_lang_String (ref.func $$getString_|array.Arrays...|__java_lang_String@array.Arrays.NativeType.$Overlay) )(ref.null $java.lang.Class)))
    )
   )
   (return (global.get $f_$class__array_Arrays_NativeType_$Overlay))
@@ -264,6 +268,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@array.Arrays.NativeType.$Overlay)
+
+;;; String $Overlay.$getString_|array.Arrays...|()
+(func $$getString_|array.Arrays...|__java_lang_String@array.Arrays.NativeType.$Overlay
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|array.Arrays...|__array_Arrays_NativeType_$Overlay) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|array.Arrays...|__array_Arrays_NativeType_$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "array.Arrays$NativeType$$Overlay")))
+   )
+  )
+  (return (global.get $f_$string_|array.Arrays...|__array_Arrays_NativeType_$Overlay))
+ )
+)
 
 ;;; Code for array.Arrays [methods]
 
@@ -651,7 +668,7 @@
  (block
   (if (ref.eq (global.get $f_$class__array_Arrays) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__array_Arrays (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|array.Arrays|__java_lang_String (ref.func $$getString_|array.Arrays|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__array_Arrays (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|array.Arrays|__java_lang_String (ref.func $$getString_|array.Arrays|__java_lang_String@array.Arrays) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__array_Arrays))
@@ -670,6 +687,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@array.Arrays)
+
+;;; String Arrays.$getString_|array.Arrays|()
+(func $$getString_|array.Arrays|__java_lang_String@array.Arrays
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|array.Arrays|__array_Arrays) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|array.Arrays|__array_Arrays (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "array.Arrays")))
+   )
+  )
+  (return (global.get $f_$string_|array.Arrays|__array_Arrays))
+ )
+)
 
 ;;; Code for array.Arrays.SomeObject [methods]
 
@@ -724,7 +754,7 @@
  (block
   (if (ref.eq (global.get $f_$class__array_Arrays_SomeObject) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__array_Arrays_SomeObject (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|array.Arrays...|__java_lang_String (ref.func $$getString_|array.Arrays...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__array_Arrays_SomeObject (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|array.Arrays...|__java_lang_String (ref.func $$getString_|array.Arrays...|__java_lang_String@array.Arrays.SomeObject) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__array_Arrays_SomeObject))
@@ -743,6 +773,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@array.Arrays.SomeObject)
+
+;;; String SomeObject.$getString_|array.Arrays...|()
+(func $$getString_|array.Arrays...|__java_lang_String@array.Arrays.SomeObject
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|array.Arrays...|__array_Arrays_SomeObject) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|array.Arrays...|__array_Arrays_SomeObject (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "array.Arrays$SomeObject")))
+   )
+  )
+  (return (global.get $f_$string_|array.Arrays...|__array_Arrays_SomeObject))
+ )
+)
 
 ;;; Code for array.Arrays.NativeType [methods]
 
@@ -797,7 +840,7 @@
  (block
   (if (ref.eq (global.get $f_$class__array_Arrays_ArrayContainer) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__array_Arrays_ArrayContainer (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|array.Arrays...|_1__java_lang_String (ref.func $$getString_|array.Arrays...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__array_Arrays_ArrayContainer (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|array.Arrays...|__java_lang_String (ref.func $$getString_|array.Arrays...|__java_lang_String@array.Arrays.ArrayContainer) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__array_Arrays_ArrayContainer))
@@ -816,3 +859,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@array.Arrays.ArrayContainer)
+
+;;; String ArrayContainer.$getString_|array.Arrays...|()
+(func $$getString_|array.Arrays...|__java_lang_String@array.Arrays.ArrayContainer
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|array.Arrays...|__array_Arrays_ArrayContainer) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|array.Arrays...|__array_Arrays_ArrayContainer (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "array.Arrays$ArrayContainer")))
+   )
+  )
+  (return (global.get $f_$string_|array.Arrays...|__array_Arrays_ArrayContainer))
+ )
+)

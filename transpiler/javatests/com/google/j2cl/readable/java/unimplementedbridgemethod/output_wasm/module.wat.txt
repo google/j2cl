@@ -62,18 +62,22 @@
 ;;; Code for unimplementedbridgemethod.I [static fields]
 (global $f_$initialized__unimplementedbridgemethod_I (mut i32) (i32.const 0))
 (global $f_$class__unimplementedbridgemethod_I (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|unimplemente...|__unimplementedbridgemethod_I (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for unimplementedbridgemethod.J [static fields]
 (global $f_$initialized__unimplementedbridgemethod_J (mut i32) (i32.const 0))
 (global $f_$class__unimplementedbridgemethod_J (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|unimplemente...|__unimplementedbridgemethod_J (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for unimplementedbridgemethod.Bar [static fields]
 (global $f_$initialized__unimplementedbridgemethod_Bar (mut i32) (i32.const 0))
 (global $f_$class__unimplementedbridgemethod_Bar (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|unimplemente...|__unimplementedbridgemethod_Bar (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for unimplementedbridgemethod.Foo [static fields]
 (global $f_$initialized__unimplementedbridgemethod_Foo (mut i32) (i32.const 0))
 (global $f_$class__unimplementedbridgemethod_Foo (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|unimplemente...|__unimplementedbridgemethod_Foo (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for unimplementedbridgemethod.I [methods]
 
@@ -111,10 +115,23 @@
  (block
   (if (ref.eq (global.get $f_$class__unimplementedbridgemethod_I) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__unimplementedbridgemethod_I (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|unimplemente...|__java_lang_String (ref.func $$getString_|unimplemente...|__java_lang_String@javaemul.internal.StringPool) )))
+    (global.set $f_$class__unimplementedbridgemethod_I (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|unimplemente...|__java_lang_String (ref.func $$getString_|unimplemente...|__java_lang_String@unimplementedbridgemethod.I) )))
    )
   )
   (return (global.get $f_$class__unimplementedbridgemethod_I))
+ )
+)
+
+;;; String I.$getString_|unimplemente...|()
+(func $$getString_|unimplemente...|__java_lang_String@unimplementedbridgemethod.I
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|unimplemente...|__unimplementedbridgemethod_I) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|unimplemente...|__unimplementedbridgemethod_I (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "unimplementedbridgemethod.I")))
+   )
+  )
+  (return (global.get $f_$string_|unimplemente...|__unimplementedbridgemethod_I))
  )
 )
 
@@ -142,10 +159,23 @@
  (block
   (if (ref.eq (global.get $f_$class__unimplementedbridgemethod_J) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__unimplementedbridgemethod_J (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|unimplemente...|_1__java_lang_String (ref.func $$getString_|unimplemente...|_1__java_lang_String@javaemul.internal.StringPool) )))
+    (global.set $f_$class__unimplementedbridgemethod_J (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|unimplemente...|__java_lang_String (ref.func $$getString_|unimplemente...|__java_lang_String@unimplementedbridgemethod.J) )))
    )
   )
   (return (global.get $f_$class__unimplementedbridgemethod_J))
+ )
+)
+
+;;; String J.$getString_|unimplemente...|()
+(func $$getString_|unimplemente...|__java_lang_String@unimplementedbridgemethod.J
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|unimplemente...|__unimplementedbridgemethod_J) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|unimplemente...|__unimplementedbridgemethod_J (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "unimplementedbridgemethod.J")))
+   )
+  )
+  (return (global.get $f_$string_|unimplemente...|__unimplementedbridgemethod_J))
  )
 )
 
@@ -187,10 +217,23 @@
  (block
   (if (ref.eq (global.get $f_$class__unimplementedbridgemethod_Bar) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__unimplementedbridgemethod_Bar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|unimplemente...|_2__java_lang_String (ref.func $$getString_|unimplemente...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__unimplementedbridgemethod_Bar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|unimplemente...|__java_lang_String (ref.func $$getString_|unimplemente...|__java_lang_String@unimplementedbridgemethod.Bar) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__unimplementedbridgemethod_Bar))
+ )
+)
+
+;;; String Bar.$getString_|unimplemente...|()
+(func $$getString_|unimplemente...|__java_lang_String@unimplementedbridgemethod.Bar
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|unimplemente...|__unimplementedbridgemethod_Bar) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|unimplemente...|__unimplementedbridgemethod_Bar (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "unimplementedbridgemethod.Bar")))
+   )
+  )
+  (return (global.get $f_$string_|unimplemente...|__unimplementedbridgemethod_Bar))
  )
 )
 
@@ -232,9 +275,22 @@
  (block
   (if (ref.eq (global.get $f_$class__unimplementedbridgemethod_Foo) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__unimplementedbridgemethod_Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|unimplemente...|_3__java_lang_String (ref.func $$getString_|unimplemente...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__unimplementedbridgemethod_Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|unimplemente...|__java_lang_String (ref.func $$getString_|unimplemente...|__java_lang_String@unimplementedbridgemethod.Foo) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__unimplementedbridgemethod_Foo))
+ )
+)
+
+;;; String Foo.$getString_|unimplemente...|()
+(func $$getString_|unimplemente...|__java_lang_String@unimplementedbridgemethod.Foo
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|unimplemente...|__unimplementedbridgemethod_Foo) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|unimplemente...|__unimplementedbridgemethod_Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "unimplementedbridgemethod.Foo")))
+   )
+  )
+  (return (global.get $f_$string_|unimplemente...|__unimplementedbridgemethod_Foo))
  )
 )

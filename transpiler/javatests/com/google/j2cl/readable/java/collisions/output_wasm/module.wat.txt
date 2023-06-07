@@ -329,32 +329,39 @@
 ;;; Code for collisions.goog [static fields]
 (global $f_$initialized__collisions_goog (mut i32) (i32.const 0))
 (global $f_$class__collisions_goog (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|collisions.goog|__collisions_goog (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for collisions.Blah [static fields]
 
 ;;; Code for collisions.KtBlah [static fields]
 (global $f_$initialized__collisions_KtBlah (mut i32) (i32.const 0))
 (global $f_$class__collisions_KtBlah (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|collisions.K...|__collisions_KtBlah (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for collisions.foo [static fields]
 (global $f_$initialized__collisions_foo (mut i32) (i32.const 0))
 (global $f_$class__collisions_foo (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|collisions.foo|__collisions_foo (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for collisions.bar [static fields]
 (global $f_$initialized__collisions_bar (mut i32) (i32.const 0))
 (global $f_$class__collisions_bar (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|collisions.bar|__collisions_bar (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for collisions.Other [static fields]
 (global $f_$initialized__collisions_Other (mut i32) (i32.const 0))
 (global $f_$class__collisions_Other (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|collisions.O...|__collisions_Other (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for collisions.T [static fields]
 (global $f_$initialized__collisions_T (mut i32) (i32.const 0))
 (global $f_$class__collisions_T (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|collisions.T|__collisions_T (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for collisions.Blah.$Overlay [static fields]
 (global $f_$initialized__collisions_Blah_$Overlay (mut i32) (i32.const 0))
 (global $f_$class__collisions_Blah_$Overlay (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|collisions.B...|__collisions_Blah_$Overlay (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for collisions.Blah.$Overlay [methods]
 
@@ -380,7 +387,7 @@
  (block
   (if (ref.eq (global.get $f_$class__collisions_Blah_$Overlay) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__collisions_Blah_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.B...|__java_lang_String (ref.func $$getString_|collisions.B...|__java_lang_String@javaemul.internal.StringPool) )(ref.null $java.lang.Class)))
+    (global.set $f_$class__collisions_Blah_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.B...|__java_lang_String (ref.func $$getString_|collisions.B...|__java_lang_String@collisions.Blah.$Overlay) )(ref.null $java.lang.Class)))
    )
   )
   (return (global.get $f_$class__collisions_Blah_$Overlay))
@@ -399,6 +406,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@collisions.Blah.$Overlay)
+
+;;; String $Overlay.$getString_|collisions.B...|()
+(func $$getString_|collisions.B...|__java_lang_String@collisions.Blah.$Overlay
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|collisions.B...|__collisions_Blah_$Overlay) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|collisions.B...|__collisions_Blah_$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "collisions.Blah$$Overlay")))
+   )
+  )
+  (return (global.get $f_$string_|collisions.B...|__collisions_Blah_$Overlay))
+ )
+)
 
 ;;; Code for collisions.goog [methods]
 
@@ -453,7 +473,7 @@
  (block
   (if (ref.eq (global.get $f_$class__collisions_goog) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__collisions_goog (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.goog|__java_lang_String (ref.func $$getString_|collisions.goog|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__collisions_goog (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.goog|__java_lang_String (ref.func $$getString_|collisions.goog|__java_lang_String@collisions.goog) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__collisions_goog))
@@ -472,6 +492,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@collisions.goog)
+
+;;; String goog.$getString_|collisions.goog|()
+(func $$getString_|collisions.goog|__java_lang_String@collisions.goog
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|collisions.goog|__collisions_goog) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|collisions.goog|__collisions_goog (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "collisions.goog")))
+   )
+  )
+  (return (global.get $f_$string_|collisions.goog|__collisions_goog))
+ )
+)
 
 ;;; Code for collisions.Blah [methods]
 
@@ -563,7 +596,7 @@
  (block
   (if (ref.eq (global.get $f_$class__collisions_KtBlah) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__collisions_KtBlah (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.K...|__java_lang_String (ref.func $$getString_|collisions.K...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__collisions_KtBlah (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.K...|__java_lang_String (ref.func $$getString_|collisions.K...|__java_lang_String@collisions.KtBlah) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__collisions_KtBlah))
@@ -582,6 +615,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@collisions.KtBlah)
+
+;;; String KtBlah.$getString_|collisions.K...|()
+(func $$getString_|collisions.K...|__java_lang_String@collisions.KtBlah
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|collisions.K...|__collisions_KtBlah) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|collisions.K...|__collisions_KtBlah (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "collisions.KtBlah")))
+   )
+  )
+  (return (global.get $f_$string_|collisions.K...|__collisions_KtBlah))
+ )
+)
 
 ;;; Code for collisions.foo [methods]
 
@@ -636,7 +682,7 @@
  (block
   (if (ref.eq (global.get $f_$class__collisions_foo) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__collisions_foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.foo|__java_lang_String (ref.func $$getString_|collisions.foo|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__collisions_foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.foo|__java_lang_String (ref.func $$getString_|collisions.foo|__java_lang_String@collisions.foo) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__collisions_foo))
@@ -655,6 +701,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@collisions.foo)
+
+;;; String foo.$getString_|collisions.foo|()
+(func $$getString_|collisions.foo|__java_lang_String@collisions.foo
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|collisions.foo|__collisions_foo) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|collisions.foo|__collisions_foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "collisions.foo")))
+   )
+  )
+  (return (global.get $f_$string_|collisions.foo|__collisions_foo))
+ )
+)
 
 ;;; Code for collisions.bar [methods]
 
@@ -742,7 +801,7 @@
  (block
   (if (ref.eq (global.get $f_$class__collisions_bar) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__collisions_bar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.bar|__java_lang_String (ref.func $$getString_|collisions.bar|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__collisions_bar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.bar|__java_lang_String (ref.func $$getString_|collisions.bar|__java_lang_String@collisions.bar) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__collisions_bar))
@@ -761,6 +820,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@collisions.bar)
+
+;;; String bar.$getString_|collisions.bar|()
+(func $$getString_|collisions.bar|__java_lang_String@collisions.bar
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|collisions.bar|__collisions_bar) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|collisions.bar|__collisions_bar (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "collisions.bar")))
+   )
+  )
+  (return (global.get $f_$string_|collisions.bar|__collisions_bar))
+ )
+)
 
 ;;; Code for collisions.Other [methods]
 
@@ -852,7 +924,7 @@
  (block
   (if (ref.eq (global.get $f_$class__collisions_Other) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__collisions_Other (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.O...|__java_lang_String (ref.func $$getString_|collisions.O...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__collisions_Other (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.O...|__java_lang_String (ref.func $$getString_|collisions.O...|__java_lang_String@collisions.Other) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__collisions_Other))
@@ -871,6 +943,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@collisions.Other)
+
+;;; String Other.$getString_|collisions.O...|()
+(func $$getString_|collisions.O...|__java_lang_String@collisions.Other
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|collisions.O...|__collisions_Other) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|collisions.O...|__collisions_Other (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "collisions.Other")))
+   )
+  )
+  (return (global.get $f_$string_|collisions.O...|__collisions_Other))
+ )
+)
 
 ;;; Code for collisions.T [methods]
 
@@ -964,7 +1049,7 @@
  (block
   (if (ref.eq (global.get $f_$class__collisions_T) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__collisions_T (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.T|__java_lang_String (ref.func $$getString_|collisions.T|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__collisions_T (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.T|__java_lang_String (ref.func $$getString_|collisions.T|__java_lang_String@collisions.T) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__collisions_T))
@@ -983,3 +1068,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@collisions.T)
+
+;;; String T.$getString_|collisions.T|()
+(func $$getString_|collisions.T|__java_lang_String@collisions.T
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|collisions.T|__collisions_T) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|collisions.T|__collisions_T (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "collisions.T")))
+   )
+  )
+  (return (global.get $f_$string_|collisions.T|__collisions_T))
+ )
+)

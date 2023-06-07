@@ -167,22 +167,27 @@
 ;;; Code for overwrittentypevariables.MyFunction [static fields]
 (global $f_$initialized__overwrittentypevariables_MyFunction (mut i32) (i32.const 0))
 (global $f_$class__overwrittentypevariables_MyFunction (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|overwrittent...|__overwrittentypevariables_MyFunction (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for overwrittentypevariables.HashFunction [static fields]
 (global $f_$initialized__overwrittentypevariables_HashFunction (mut i32) (i32.const 0))
 (global $f_$class__overwrittentypevariables_HashFunction (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|overwrittent...|__overwrittentypevariables_HashFunction (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for overwrittentypevariables.HashFunctions [static fields]
 (global $f_$initialized__overwrittentypevariables_HashFunctions (mut i32) (i32.const 0))
 (global $f_$class__overwrittentypevariables_HashFunctions (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|overwrittent...|__overwrittentypevariables_HashFunctions (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for overwrittentypevariables.HashFunctions.1 [static fields]
 (global $f_$initialized__overwrittentypevariables_HashFunctions_1 (mut i32) (i32.const 0))
 (global $f_$class__overwrittentypevariables_HashFunctions_1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|overwrittent...|__overwrittentypevariables_HashFunctions_1 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for overwrittentypevariables.HashFunctions.2 [static fields]
 (global $f_$initialized__overwrittentypevariables_HashFunctions_2 (mut i32) (i32.const 0))
 (global $f_$class__overwrittentypevariables_HashFunctions_2 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|overwrittent...|__overwrittentypevariables_HashFunctions_2 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for overwrittentypevariables.MyFunction [methods]
 
@@ -208,10 +213,23 @@
  (block
   (if (ref.eq (global.get $f_$class__overwrittentypevariables_MyFunction) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__overwrittentypevariables_MyFunction (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|overwrittent...|__java_lang_String (ref.func $$getString_|overwrittent...|__java_lang_String@javaemul.internal.StringPool) )))
+    (global.set $f_$class__overwrittentypevariables_MyFunction (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|overwrittent...|__java_lang_String (ref.func $$getString_|overwrittent...|__java_lang_String@overwrittentypevariables.MyFunction) )))
    )
   )
   (return (global.get $f_$class__overwrittentypevariables_MyFunction))
+ )
+)
+
+;;; String MyFunction.$getString_|overwrittent...|()
+(func $$getString_|overwrittent...|__java_lang_String@overwrittentypevariables.MyFunction
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|overwrittent...|__overwrittentypevariables_MyFunction) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|overwrittent...|__overwrittentypevariables_MyFunction (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "overwrittentypevariables.MyFunction")))
+   )
+  )
+  (return (global.get $f_$string_|overwrittent...|__overwrittentypevariables_MyFunction))
  )
 )
 
@@ -239,10 +257,23 @@
  (block
   (if (ref.eq (global.get $f_$class__overwrittentypevariables_HashFunction) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__overwrittentypevariables_HashFunction (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|overwrittent...|_1__java_lang_String (ref.func $$getString_|overwrittent...|_1__java_lang_String@javaemul.internal.StringPool) )))
+    (global.set $f_$class__overwrittentypevariables_HashFunction (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|overwrittent...|__java_lang_String (ref.func $$getString_|overwrittent...|__java_lang_String@overwrittentypevariables.HashFunction) )))
    )
   )
   (return (global.get $f_$class__overwrittentypevariables_HashFunction))
+ )
+)
+
+;;; String HashFunction.$getString_|overwrittent...|()
+(func $$getString_|overwrittent...|__java_lang_String@overwrittentypevariables.HashFunction
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|overwrittent...|__overwrittentypevariables_HashFunction) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|overwrittent...|__overwrittentypevariables_HashFunction (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "overwrittentypevariables.HashFunction")))
+   )
+  )
+  (return (global.get $f_$string_|overwrittent...|__overwrittentypevariables_HashFunction))
  )
 )
 
@@ -323,7 +354,7 @@
  (block
   (if (ref.eq (global.get $f_$class__overwrittentypevariables_HashFunctions) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__overwrittentypevariables_HashFunctions (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|overwrittent...|_2__java_lang_String (ref.func $$getString_|overwrittent...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__overwrittentypevariables_HashFunctions (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|overwrittent...|__java_lang_String (ref.func $$getString_|overwrittent...|__java_lang_String@overwrittentypevariables.HashFunctions) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__overwrittentypevariables_HashFunctions))
@@ -342,6 +373,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@overwrittentypevariables.HashFunctions)
+
+;;; String HashFunctions.$getString_|overwrittent...|()
+(func $$getString_|overwrittent...|__java_lang_String@overwrittentypevariables.HashFunctions
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|overwrittent...|__overwrittentypevariables_HashFunctions) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|overwrittent...|__overwrittentypevariables_HashFunctions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "overwrittentypevariables.HashFunctions")))
+   )
+  )
+  (return (global.get $f_$string_|overwrittent...|__overwrittentypevariables_HashFunctions))
+ )
+)
 
 ;;; Code for overwrittentypevariables.HashFunctions.1 [methods]
 
@@ -383,7 +427,7 @@
  (local.set $this (ref.cast_static $overwrittentypevariables.HashFunctions.1 (local.get $this.untyped)))
  (block
   ;;@ overwrittentypevariables/HashFunctions.java:29:8
-  (return (call $function.no.side.effects.$getString_||__java_lang_String (ref.func $$getString_||__java_lang_String@javaemul.internal.StringPool) ))
+  (return (call $function.no.side.effects.$getString_||__java_lang_String (ref.func $$getString_||__java_lang_String@java.lang.StackTraceElement) ))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_String@overwrittentypevariables.HashFunctions.1)
@@ -428,7 +472,7 @@
  (block
   (if (ref.eq (global.get $f_$class__overwrittentypevariables_HashFunctions_1) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__overwrittentypevariables_HashFunctions_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|overwrittent...|_3__java_lang_String (ref.func $$getString_|overwrittent...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__overwrittentypevariables_HashFunctions_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|overwrittent...|__java_lang_String (ref.func $$getString_|overwrittent...|__java_lang_String@overwrittentypevariables.HashFunctions.1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__overwrittentypevariables_HashFunctions_1))
@@ -447,6 +491,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@overwrittentypevariables.HashFunctions.1)
+
+;;; String <anonymous> implements HashFunction<T>.$getString_|overwrittent...|()
+(func $$getString_|overwrittent...|__java_lang_String@overwrittentypevariables.HashFunctions.1
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|overwrittent...|__overwrittentypevariables_HashFunctions_1) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|overwrittent...|__overwrittentypevariables_HashFunctions_1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "overwrittentypevariables.HashFunctions$1")))
+   )
+  )
+  (return (global.get $f_$string_|overwrittent...|__overwrittentypevariables_HashFunctions_1))
+ )
+)
 
 ;;; Code for overwrittentypevariables.HashFunctions.2 [methods]
 
@@ -533,7 +590,7 @@
  (block
   (if (ref.eq (global.get $f_$class__overwrittentypevariables_HashFunctions_2) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__overwrittentypevariables_HashFunctions_2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|overwrittent...|_4__java_lang_String (ref.func $$getString_|overwrittent...|_4__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__overwrittentypevariables_HashFunctions_2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|overwrittent...|__java_lang_String (ref.func $$getString_|overwrittent...|__java_lang_String@overwrittentypevariables.HashFunctions.2) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__overwrittentypevariables_HashFunctions_2))
@@ -552,3 +609,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@overwrittentypevariables.HashFunctions.2)
+
+;;; String <anonymous> implements HashFunction<T>.$getString_|overwrittent...|()
+(func $$getString_|overwrittent...|__java_lang_String@overwrittentypevariables.HashFunctions.2
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|overwrittent...|__overwrittentypevariables_HashFunctions_2) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|overwrittent...|__overwrittentypevariables_HashFunctions_2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "overwrittentypevariables.HashFunctions$2")))
+   )
+  )
+  (return (global.get $f_$string_|overwrittent...|__overwrittentypevariables_HashFunctions_2))
+ )
+)

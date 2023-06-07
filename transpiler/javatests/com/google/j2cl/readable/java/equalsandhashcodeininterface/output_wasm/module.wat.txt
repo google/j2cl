@@ -20,16 +20,19 @@
 ;;; Code for equalsandhashcodeininterface.BothInInterface [static fields]
 (global $f_$initialized__equalsandhashcodeininterface_BothInInterface (mut i32) (i32.const 0))
 (global $f_$class__equalsandhashcodeininterface_BothInInterface (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|equalsandhas...|__equalsandhashcodeininterface_BothInInterface (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for equalsandhashcodeininterface.NeitherInInterface [static fields]
 (global $f_$initialized__equalsandhashcodeininterface_NeitherInInterface (mut i32) (i32.const 0))
 (global $f_$class__equalsandhashcodeininterface_NeitherInInterface (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|equalsandhas...|__equalsandhashcodeininterface_NeitherInInterface (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for equalsandhashcodeininterface.ViaJsMethodInInterface [static fields]
 
 ;;; Code for equalsandhashcodeininterface.ViaJsMethodInInterface.$Overlay [static fields]
 (global $f_$initialized__equalsandhashcodeininterface_ViaJsMethodInInterface_$Overlay (mut i32) (i32.const 0))
 (global $f_$class__equalsandhashcodeininterface_ViaJsMethodInInterface_$Overlay (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|equalsandhas...|__equalsandhashcodeininterface_ViaJsMethodInInterface_$Overlay (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for equalsandhashcodeininterface.BothInInterface [methods]
 
@@ -55,10 +58,23 @@
  (block
   (if (ref.eq (global.get $f_$class__equalsandhashcodeininterface_BothInInterface) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__equalsandhashcodeininterface_BothInInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|equalsandhas...|__java_lang_String (ref.func $$getString_|equalsandhas...|__java_lang_String@javaemul.internal.StringPool) )))
+    (global.set $f_$class__equalsandhashcodeininterface_BothInInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|equalsandhas...|__java_lang_String (ref.func $$getString_|equalsandhas...|__java_lang_String@equalsandhashcodeininterface.BothInInterface) )))
    )
   )
   (return (global.get $f_$class__equalsandhashcodeininterface_BothInInterface))
+ )
+)
+
+;;; String BothInInterface.$getString_|equalsandhas...|()
+(func $$getString_|equalsandhas...|__java_lang_String@equalsandhashcodeininterface.BothInInterface
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|equalsandhas...|__equalsandhashcodeininterface_BothInInterface) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|equalsandhas...|__equalsandhashcodeininterface_BothInInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "equalsandhashcodeininterface.BothInInterface")))
+   )
+  )
+  (return (global.get $f_$string_|equalsandhas...|__equalsandhashcodeininterface_BothInInterface))
  )
 )
 
@@ -86,10 +102,23 @@
  (block
   (if (ref.eq (global.get $f_$class__equalsandhashcodeininterface_NeitherInInterface) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__equalsandhashcodeininterface_NeitherInInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|equalsandhas...|_1__java_lang_String (ref.func $$getString_|equalsandhas...|_1__java_lang_String@javaemul.internal.StringPool) )))
+    (global.set $f_$class__equalsandhashcodeininterface_NeitherInInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|equalsandhas...|__java_lang_String (ref.func $$getString_|equalsandhas...|__java_lang_String@equalsandhashcodeininterface.NeitherInInterface) )))
    )
   )
   (return (global.get $f_$class__equalsandhashcodeininterface_NeitherInInterface))
+ )
+)
+
+;;; String NeitherInInterface.$getString_|equalsandhas...|()
+(func $$getString_|equalsandhas...|__java_lang_String@equalsandhashcodeininterface.NeitherInInterface
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|equalsandhas...|__equalsandhashcodeininterface_NeitherInInterface) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|equalsandhas...|__equalsandhashcodeininterface_NeitherInInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "equalsandhashcodeininterface.NeitherInInterface")))
+   )
+  )
+  (return (global.get $f_$string_|equalsandhas...|__equalsandhashcodeininterface_NeitherInInterface))
  )
 )
 
@@ -129,9 +158,22 @@
  (block
   (if (ref.eq (global.get $f_$class__equalsandhashcodeininterface_ViaJsMethodInInterface_$Overlay) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__equalsandhashcodeininterface_ViaJsMethodInInterface_$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|equalsandhas...|_2__java_lang_String (ref.func $$getString_|equalsandhas...|_2__java_lang_String@javaemul.internal.StringPool) )))
+    (global.set $f_$class__equalsandhashcodeininterface_ViaJsMethodInInterface_$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|equalsandhas...|__java_lang_String (ref.func $$getString_|equalsandhas...|__java_lang_String@equalsandhashcodeininterface.ViaJsMethodInInterface.$Overlay) )))
    )
   )
   (return (global.get $f_$class__equalsandhashcodeininterface_ViaJsMethodInInterface_$Overlay))
+ )
+)
+
+;;; String $Overlay.$getString_|equalsandhas...|()
+(func $$getString_|equalsandhas...|__java_lang_String@equalsandhashcodeininterface.ViaJsMethodInInterface.$Overlay
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|equalsandhas...|__equalsandhashcodeininterface_ViaJsMethodInInterface_$Overlay) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|equalsandhas...|__equalsandhashcodeininterface_ViaJsMethodInInterface_$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "equalsandhashcodeininterface.ViaJsMethodInInterface$$Overlay")))
+   )
+  )
+  (return (global.get $f_$string_|equalsandhas...|__equalsandhashcodeininterface_ViaJsMethodInInterface_$Overlay))
  )
 )

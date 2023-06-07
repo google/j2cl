@@ -101,10 +101,12 @@
 ;;; Code for localclasswithconstructor.LocalClassWithConstructor [static fields]
 (global $f_$initialized__localclasswithconstructor_LocalClassWithConstructor (mut i32) (i32.const 0))
 (global $f_$class__localclasswithconstructor_LocalClassWithConstructor (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|localclasswi...|__localclasswithconstructor_LocalClassWithConstructor (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for localclasswithconstructor.LocalClassWithConstructor.1LocalClass [static fields]
 (global $f_$initialized__localclasswithconstructor_LocalClassWithConstructor_1LocalClass (mut i32) (i32.const 0))
 (global $f_$class__localclasswithconstructor_LocalClassWithConstructor_1LocalClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|localclasswi...|__localclasswithconstructor_LocalClassWithConstructor_1LocalClass (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for localclasswithconstructor.LocalClassWithConstructor [methods]
 
@@ -177,7 +179,7 @@
  (block
   (if (ref.eq (global.get $f_$class__localclasswithconstructor_LocalClassWithConstructor) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__localclasswithconstructor_LocalClassWithConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclasswi...|__java_lang_String (ref.func $$getString_|localclasswi...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__localclasswithconstructor_LocalClassWithConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclasswi...|__java_lang_String (ref.func $$getString_|localclasswi...|__java_lang_String@localclasswithconstructor.LocalClassWithConstructor) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__localclasswithconstructor_LocalClassWithConstructor))
@@ -196,6 +198,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor)
+
+;;; String LocalClassWithConstructor.$getString_|localclasswi...|()
+(func $$getString_|localclasswi...|__java_lang_String@localclasswithconstructor.LocalClassWithConstructor
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|localclasswi...|__localclasswithconstructor_LocalClassWithConstructor) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|localclasswi...|__localclasswithconstructor_LocalClassWithConstructor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "localclasswithconstructor.LocalClassWithConstructor")))
+   )
+  )
+  (return (global.get $f_$string_|localclasswi...|__localclasswithconstructor_LocalClassWithConstructor))
+ )
+)
 
 ;;; Code for localclasswithconstructor.LocalClassWithConstructor.1LocalClass [methods]
 
@@ -299,7 +314,7 @@
  (block
   (if (ref.eq (global.get $f_$class__localclasswithconstructor_LocalClassWithConstructor_1LocalClass) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__localclasswithconstructor_LocalClassWithConstructor_1LocalClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclasswi...|_1__java_lang_String (ref.func $$getString_|localclasswi...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__localclasswithconstructor_LocalClassWithConstructor_1LocalClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclasswi...|__java_lang_String (ref.func $$getString_|localclasswi...|__java_lang_String@localclasswithconstructor.LocalClassWithConstructor.1LocalClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__localclasswithconstructor_LocalClassWithConstructor_1LocalClass))
@@ -318,3 +333,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor.1LocalClass)
+
+;;; String LocalClass.$getString_|localclasswi...|()
+(func $$getString_|localclasswi...|__java_lang_String@localclasswithconstructor.LocalClassWithConstructor.1LocalClass
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|localclasswi...|__localclasswithconstructor_LocalClassWithConstructor_1LocalClass) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|localclasswi...|__localclasswithconstructor_LocalClassWithConstructor_1LocalClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "localclasswithconstructor.LocalClassWithConstructor$1LocalClass")))
+   )
+  )
+  (return (global.get $f_$string_|localclasswi...|__localclasswithconstructor_LocalClassWithConstructor_1LocalClass))
+ )
+)

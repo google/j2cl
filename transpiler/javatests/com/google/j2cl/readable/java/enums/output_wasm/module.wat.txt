@@ -315,6 +315,9 @@
 (global $f_namesToValuesMap__enums_Enum1_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
 (global $f_$initialized__enums_Enum1 (mut i32) (i32.const 0))
 (global $f_$class__enums_Enum1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|V1|__enums_Enum1 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$string_|V2|__enums_Enum1 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$string_|enums.Enum1|__enums_Enum1 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for enums.Enum2 [static fields]
 (global $f_VALUE1__enums_Enum2 (mut (ref null $enums.Enum2)) (ref.null $enums.Enum2))
@@ -325,20 +328,28 @@
 (global $f_namesToValuesMap__enums_Enum2_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
 (global $f_$initialized__enums_Enum2 (mut i32) (i32.const 0))
 (global $f_$class__enums_Enum2 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|VALUE1|__enums_Enum2 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$string_|VALUE2|__enums_Enum2 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$string_|VALUE3|__enums_Enum2 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$string_|VALUE4|__enums_Enum2 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$string_|enums.Enum2|__enums_Enum2 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for enums.Enum3 [static fields]
 (global $f_VALUE1__enums_Enum3 (mut (ref null $enums.Enum3)) (ref.null $enums.Enum3))
 (global $f_namesToValuesMap__enums_Enum3_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
 (global $f_$initialized__enums_Enum3 (mut i32) (i32.const 0))
 (global $f_$class__enums_Enum3 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|enums.Enum3|__enums_Enum3 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for enums.Enum2.1 [static fields]
 (global $f_$initialized__enums_Enum2_1 (mut i32) (i32.const 0))
 (global $f_$class__enums_Enum2_1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|enums.Enum2_1|__enums_Enum2_1 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for enums.Enum3.$LambdaImplementor$1 [static fields]
 (global $f_$initialized__enums_Enum3_$LambdaImplementor$1 (mut i32) (i32.const 0))
 (global $f_$class__enums_Enum3_$LambdaImplementor$1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|enums.Enum3_...|__enums_Enum3_$LambdaImplementor$1 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for enums.Enum3.$LambdaImplementor$1 [methods]
 
@@ -446,7 +457,7 @@
  (block
   (if (ref.eq (global.get $f_$class__enums_Enum3_$LambdaImplementor$1) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__enums_Enum3_$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|enums.Enum3_...|__java_lang_String (ref.func $$getString_|enums.Enum3_...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__enums_Enum3_$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|enums.Enum3_...|__java_lang_String (ref.func $$getString_|enums.Enum3_...|__java_lang_String@enums.Enum3.$LambdaImplementor$1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__enums_Enum3_$LambdaImplementor$1))
@@ -465,6 +476,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@enums.Enum3.$LambdaImplementor$1)
+
+;;; String <anonymous> implements Function<T, R>.$getString_|enums.Enum3_...|()
+(func $$getString_|enums.Enum3_...|__java_lang_String@enums.Enum3.$LambdaImplementor$1
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|enums.Enum3_...|__enums_Enum3_$LambdaImplementor$1) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|enums.Enum3_...|__enums_Enum3_$LambdaImplementor$1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "enums.Enum3$$LambdaImplementor$1")))
+   )
+  )
+  (return (global.get $f_$string_|enums.Enum3_...|__enums_Enum3_$LambdaImplementor$1))
+ )
+)
 
 ;;; Code for enums.Enum1 [methods]
 
@@ -551,9 +575,9 @@
   ;;@ enums/Enum1.java:20:12
   (call $$clinit__void@java.lang.Enum )
   ;;@ enums/Enum1.java:21:2
-  (global.set $f_V1__enums_Enum1 (call $$create__java_lang_String__int@enums.Enum1 (call $function.no.side.effects.$getString_|V1|__java_lang_String (ref.func $$getString_|V1|__java_lang_String@javaemul.internal.StringPool) )(i32.const 0)))
+  (global.set $f_V1__enums_Enum1 (call $$create__java_lang_String__int@enums.Enum1 (call $function.no.side.effects.$getString_|V1|__java_lang_String (ref.func $$getString_|V1|__java_lang_String@enums.Enum1) )(i32.const 0)))
   ;;@ enums/Enum1.java:22:2
-  (global.set $f_V2__enums_Enum1 (call $$create__java_lang_String__int@enums.Enum1 (call $function.no.side.effects.$getString_|V2|__java_lang_String (ref.func $$getString_|V2|__java_lang_String@javaemul.internal.StringPool) )(i32.const 1)))
+  (global.set $f_V2__enums_Enum1 (call $$create__java_lang_String__int@enums.Enum1 (call $function.no.side.effects.$getString_|V2|__java_lang_String (ref.func $$getString_|V2|__java_lang_String@enums.Enum1) )(i32.const 1)))
  )
 )
 
@@ -563,7 +587,7 @@
  (block
   (if (ref.eq (global.get $f_$class__enums_Enum1) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__enums_Enum1 (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|enums.Enum1|__java_lang_String (ref.func $$getString_|enums.Enum1|__java_lang_String@javaemul.internal.StringPool) )))
+    (global.set $f_$class__enums_Enum1 (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|enums.Enum1|__java_lang_String (ref.func $$getString_|enums.Enum1|__java_lang_String@enums.Enum1) )))
    )
   )
   (return (global.get $f_$class__enums_Enum1))
@@ -582,6 +606,45 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@enums.Enum1)
+
+;;; String Enum1.$getString_|V1|()
+(func $$getString_|V1|__java_lang_String@enums.Enum1
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|V1|__enums_Enum1) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|V1|__enums_Enum1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "V1")))
+   )
+  )
+  (return (global.get $f_$string_|V1|__enums_Enum1))
+ )
+)
+
+;;; String Enum1.$getString_|V2|()
+(func $$getString_|V2|__java_lang_String@enums.Enum1
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|V2|__enums_Enum1) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|V2|__enums_Enum1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "V2")))
+   )
+  )
+  (return (global.get $f_$string_|V2|__enums_Enum1))
+ )
+)
+
+;;; String Enum1.$getString_|enums.Enum1|()
+(func $$getString_|enums.Enum1|__java_lang_String@enums.Enum1
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|enums.Enum1|__enums_Enum1) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|enums.Enum1|__enums_Enum1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "enums.Enum1")))
+   )
+  )
+  (return (global.get $f_$string_|enums.Enum1|__enums_Enum1))
+ )
+)
 
 ;;; Code for enums.Enum2 [methods]
 
@@ -729,7 +792,7 @@
   ))
   ;;@ enums/Enum1.java:53:4
   (local.set $o2 (block (result i32)
-   (local.set $$qualifier_1 (call $m_valueOf__java_lang_String__enums_Enum2@enums.Enum2 (call $function.no.side.effects.$getString_|VALUE1|__java_lang_String (ref.func $$getString_|VALUE1|__java_lang_String@javaemul.internal.StringPool) )))
+   (local.set $$qualifier_1 (call $m_valueOf__java_lang_String__enums_Enum2@enums.Enum2 (call $function.no.side.effects.$getString_|VALUE1|__java_lang_String (ref.func $$getString_|VALUE1|__java_lang_String@enums.Enum2) )))
    (call_ref $function.m_ordinal__int (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $$qualifier_1))))
   ))
   ;;@ enums/Enum1.java:54:4
@@ -805,16 +868,16 @@
   ;;@ enums/Enum1.java:25:5
   (call $$clinit__void@java.lang.Enum )
   ;;@ enums/Enum1.java:26:2
-  (global.set $f_VALUE1__enums_Enum2 (call $$create__java_lang_String__int__int@enums.Enum2 (call $function.no.side.effects.$getString_|VALUE1|__java_lang_String (ref.func $$getString_|VALUE1|__java_lang_String@javaemul.internal.StringPool) )(i32.const 0)(i32.const 2)))
+  (global.set $f_VALUE1__enums_Enum2 (call $$create__java_lang_String__int__int@enums.Enum2 (call $function.no.side.effects.$getString_|VALUE1|__java_lang_String (ref.func $$getString_|VALUE1|__java_lang_String@enums.Enum2) )(i32.const 0)(i32.const 2)))
   ;;@ enums/Enum1.java:27:2
-  (global.set $f_VALUE2__enums_Enum2 (call $$create__java_lang_String__int__java_lang_Enum@enums.Enum2 (call $function.no.side.effects.$getString_|VALUE2|__java_lang_String (ref.func $$getString_|VALUE2|__java_lang_String@javaemul.internal.StringPool) )(i32.const 1)(block (result (ref null $enums.Enum1))
+  (global.set $f_VALUE2__enums_Enum2 (call $$create__java_lang_String__int__java_lang_Enum@enums.Enum2 (call $function.no.side.effects.$getString_|VALUE2|__java_lang_String (ref.func $$getString_|VALUE2|__java_lang_String@enums.Enum2) )(i32.const 1)(block (result (ref null $enums.Enum1))
    (call $$clinit__void@enums.Enum1 )
    (global.get $f_V1__enums_Enum1)
   )))
   ;;@ enums/Enum1.java:28:2
-  (global.set $f_VALUE3__enums_Enum2 (call $$create__java_lang_String__int__arrayOf_java_lang_Object@enums.Enum2 (call $function.no.side.effects.$getString_|VALUE3|__java_lang_String (ref.func $$getString_|VALUE3|__java_lang_String@javaemul.internal.StringPool) )(i32.const 2)(call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array ))))
+  (global.set $f_VALUE3__enums_Enum2 (call $$create__java_lang_String__int__arrayOf_java_lang_Object@enums.Enum2 (call $function.no.side.effects.$getString_|VALUE3|__java_lang_String (ref.func $$getString_|VALUE3|__java_lang_String@enums.Enum2) )(i32.const 2)(call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array ))))
   ;;@ enums/Enum1.java:29:2
-  (global.set $f_VALUE4__enums_Enum2 (call $$create__java_lang_String__int__int@enums.Enum2.1 (call $function.no.side.effects.$getString_|VALUE4|__java_lang_String (ref.func $$getString_|VALUE4|__java_lang_String@javaemul.internal.StringPool) )(i32.const 3)(i32.const 5)))
+  (global.set $f_VALUE4__enums_Enum2 (call $$create__java_lang_String__int__int@enums.Enum2.1 (call $function.no.side.effects.$getString_|VALUE4|__java_lang_String (ref.func $$getString_|VALUE4|__java_lang_String@enums.Enum2) )(i32.const 3)(i32.const 5)))
   ;;@ enums/Enum1.java:49:2
   (global.set $f_C__enums_Enum2 (call $m_f__java_lang_Object__enums_Enum2@enums.Enum2 (call $$create__@java.lang.Object )))
  )
@@ -826,7 +889,7 @@
  (block
   (if (ref.eq (global.get $f_$class__enums_Enum2) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__enums_Enum2 (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|enums.Enum2|__java_lang_String (ref.func $$getString_|enums.Enum2|__java_lang_String@javaemul.internal.StringPool) )))
+    (global.set $f_$class__enums_Enum2 (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|enums.Enum2|__java_lang_String (ref.func $$getString_|enums.Enum2|__java_lang_String@enums.Enum2) )))
    )
   )
   (return (global.get $f_$class__enums_Enum2))
@@ -845,6 +908,71 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@enums.Enum2)
+
+;;; String Enum2.$getString_|VALUE1|()
+(func $$getString_|VALUE1|__java_lang_String@enums.Enum2
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|VALUE1|__enums_Enum2) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|VALUE1|__enums_Enum2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "VALUE1")))
+   )
+  )
+  (return (global.get $f_$string_|VALUE1|__enums_Enum2))
+ )
+)
+
+;;; String Enum2.$getString_|VALUE2|()
+(func $$getString_|VALUE2|__java_lang_String@enums.Enum2
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|VALUE2|__enums_Enum2) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|VALUE2|__enums_Enum2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "VALUE2")))
+   )
+  )
+  (return (global.get $f_$string_|VALUE2|__enums_Enum2))
+ )
+)
+
+;;; String Enum2.$getString_|VALUE3|()
+(func $$getString_|VALUE3|__java_lang_String@enums.Enum2
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|VALUE3|__enums_Enum2) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|VALUE3|__enums_Enum2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "VALUE3")))
+   )
+  )
+  (return (global.get $f_$string_|VALUE3|__enums_Enum2))
+ )
+)
+
+;;; String Enum2.$getString_|VALUE4|()
+(func $$getString_|VALUE4|__java_lang_String@enums.Enum2
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|VALUE4|__enums_Enum2) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|VALUE4|__enums_Enum2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "VALUE4")))
+   )
+  )
+  (return (global.get $f_$string_|VALUE4|__enums_Enum2))
+ )
+)
+
+;;; String Enum2.$getString_|enums.Enum2|()
+(func $$getString_|enums.Enum2|__java_lang_String@enums.Enum2
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|enums.Enum2|__enums_Enum2) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|enums.Enum2|__enums_Enum2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "enums.Enum2")))
+   )
+  )
+  (return (global.get $f_$string_|enums.Enum2|__enums_Enum2))
+ )
+)
 
 ;;; Code for enums.Enum3 [methods]
 
@@ -933,7 +1061,7 @@
   ;;@ enums/Enum1.java:58:5
   (call $$clinit__void@java.lang.Enum )
   ;;@ enums/Enum1.java:59:2
-  (global.set $f_VALUE1__enums_Enum3 (call $$create__java_lang_String__int__java_util_function_Function@enums.Enum3 (call $function.no.side.effects.$getString_|VALUE1|__java_lang_String (ref.func $$getString_|VALUE1|__java_lang_String@javaemul.internal.StringPool) )(i32.const 0)(call $$create__@enums.Enum3.$LambdaImplementor$1 )))
+  (global.set $f_VALUE1__enums_Enum3 (call $$create__java_lang_String__int__java_util_function_Function@enums.Enum3 (call $function.no.side.effects.$getString_|VALUE1|__java_lang_String (ref.func $$getString_|VALUE1|__java_lang_String@enums.Enum2) )(i32.const 0)(call $$create__@enums.Enum3.$LambdaImplementor$1 )))
  )
 )
 
@@ -943,7 +1071,7 @@
  (block
   (if (ref.eq (global.get $f_$class__enums_Enum3) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__enums_Enum3 (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|enums.Enum3|__java_lang_String (ref.func $$getString_|enums.Enum3|__java_lang_String@javaemul.internal.StringPool) )))
+    (global.set $f_$class__enums_Enum3 (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|enums.Enum3|__java_lang_String (ref.func $$getString_|enums.Enum3|__java_lang_String@enums.Enum3) )))
    )
   )
   (return (global.get $f_$class__enums_Enum3))
@@ -962,6 +1090,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@enums.Enum3)
+
+;;; String Enum3.$getString_|enums.Enum3|()
+(func $$getString_|enums.Enum3|__java_lang_String@enums.Enum3
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|enums.Enum3|__enums_Enum3) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|enums.Enum3|__enums_Enum3 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "enums.Enum3")))
+   )
+  )
+  (return (global.get $f_$string_|enums.Enum3|__enums_Enum3))
+ )
+)
 
 ;;; Code for enums.Enum2.1 [methods]
 
@@ -1022,7 +1163,7 @@
  (block
   (if (ref.eq (global.get $f_$class__enums_Enum2_1) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__enums_Enum2_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|enums.Enum2_1|__java_lang_String (ref.func $$getString_|enums.Enum2_1|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@enums.Enum2) )))
+    (global.set $f_$class__enums_Enum2_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|enums.Enum2_1|__java_lang_String (ref.func $$getString_|enums.Enum2_1|__java_lang_String@enums.Enum2.1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@enums.Enum2) )))
    )
   )
   (return (global.get $f_$class__enums_Enum2_1))
@@ -1041,3 +1182,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@enums.Enum2.1)
+
+;;; String <anonymous> extends Enum2.$getString_|enums.Enum2_1|()
+(func $$getString_|enums.Enum2_1|__java_lang_String@enums.Enum2.1
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|enums.Enum2_1|__enums_Enum2_1) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|enums.Enum2_1|__enums_Enum2_1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "enums.Enum2$1")))
+   )
+  )
+  (return (global.get $f_$string_|enums.Enum2_1|__enums_Enum2_1))
+ )
+)

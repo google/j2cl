@@ -90,10 +90,12 @@
 ;;; Code for genericnativetype.BoundedJsArray.$Overlay [static fields]
 (global $f_$initialized__genericnativetype_BoundedJsArray_$Overlay (mut i32) (i32.const 0))
 (global $f_$class__genericnativetype_BoundedJsArray_$Overlay (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|genericnativ...|__genericnativetype_BoundedJsArray_$Overlay (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for genericnativetype.BoundedJsArrays [static fields]
 (global $f_$initialized__genericnativetype_BoundedJsArrays (mut i32) (i32.const 0))
 (global $f_$class__genericnativetype_BoundedJsArrays (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|genericnativ...|__genericnativetype_BoundedJsArrays (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for genericnativetype.BoundedJsArray.$Overlay [methods]
 
@@ -150,7 +152,7 @@
  (block
   (if (ref.eq (global.get $f_$class__genericnativetype_BoundedJsArray_$Overlay) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__genericnativetype_BoundedJsArray_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericnativ...|__java_lang_String (ref.func $$getString_|genericnativ...|__java_lang_String@javaemul.internal.StringPool) )(ref.null $java.lang.Class)))
+    (global.set $f_$class__genericnativetype_BoundedJsArray_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericnativ...|__java_lang_String (ref.func $$getString_|genericnativ...|__java_lang_String@genericnativetype.BoundedJsArray.$Overlay) )(ref.null $java.lang.Class)))
    )
   )
   (return (global.get $f_$class__genericnativetype_BoundedJsArray_$Overlay))
@@ -169,6 +171,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@genericnativetype.BoundedJsArray.$Overlay)
+
+;;; String $Overlay.$getString_|genericnativ...|()
+(func $$getString_|genericnativ...|__java_lang_String@genericnativetype.BoundedJsArray.$Overlay
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|genericnativ...|__genericnativetype_BoundedJsArray_$Overlay) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|genericnativ...|__genericnativetype_BoundedJsArray_$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "genericnativetype.BoundedJsArray$$Overlay")))
+   )
+  )
+  (return (global.get $f_$string_|genericnativ...|__genericnativetype_BoundedJsArray_$Overlay))
+ )
+)
 
 ;;; Code for genericnativetype.BoundedJsArray [methods]
 
@@ -254,7 +269,7 @@
  (block
   (if (ref.eq (global.get $f_$class__genericnativetype_BoundedJsArrays) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__genericnativetype_BoundedJsArrays (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericnativ...|_1__java_lang_String (ref.func $$getString_|genericnativ...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__genericnativetype_BoundedJsArrays (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericnativ...|__java_lang_String (ref.func $$getString_|genericnativ...|__java_lang_String@genericnativetype.BoundedJsArrays) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__genericnativetype_BoundedJsArrays))
@@ -273,3 +288,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@genericnativetype.BoundedJsArrays)
+
+;;; String BoundedJsArrays.$getString_|genericnativ...|()
+(func $$getString_|genericnativ...|__java_lang_String@genericnativetype.BoundedJsArrays
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|genericnativ...|__genericnativetype_BoundedJsArrays) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|genericnativ...|__genericnativetype_BoundedJsArrays (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "genericnativetype.BoundedJsArrays")))
+   )
+  )
+  (return (global.get $f_$string_|genericnativ...|__genericnativetype_BoundedJsArrays))
+ )
+)

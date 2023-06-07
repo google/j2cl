@@ -246,22 +246,27 @@
 ;;; Code for cloneable.Cloneables [static fields]
 (global $f_$initialized__cloneable_Cloneables (mut i32) (i32.const 0))
 (global $f_$class__cloneable_Cloneables (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|cloneable.Cl...|__cloneable_Cloneables (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for cloneable.Cloneables.WithoutCloneable [static fields]
 (global $f_$initialized__cloneable_Cloneables_WithoutCloneable (mut i32) (i32.const 0))
 (global $f_$class__cloneable_Cloneables_WithoutCloneable (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|cloneable.Cl...|__cloneable_Cloneables_WithoutCloneable (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for cloneable.Cloneables.WithCloneable [static fields]
 (global $f_$initialized__cloneable_Cloneables_WithCloneable (mut i32) (i32.const 0))
 (global $f_$class__cloneable_Cloneables_WithCloneable (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|cloneable.Cl...|__cloneable_Cloneables_WithCloneable (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for cloneable.Cloneables.WithoutCloneableChild [static fields]
 (global $f_$initialized__cloneable_Cloneables_WithoutCloneableChild (mut i32) (i32.const 0))
 (global $f_$class__cloneable_Cloneables_WithoutCloneableChild (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|cloneable.Cl...|__cloneable_Cloneables_WithoutCloneableChild (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for cloneable.Cloneables.WithCloneableChild [static fields]
 (global $f_$initialized__cloneable_Cloneables_WithCloneableChild (mut i32) (i32.const 0))
 (global $f_$class__cloneable_Cloneables_WithCloneableChild (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|cloneable.Cl...|__cloneable_Cloneables_WithCloneableChild (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for cloneable.Cloneables [methods]
 
@@ -316,7 +321,7 @@
  (block
   (if (ref.eq (global.get $f_$class__cloneable_Cloneables) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__cloneable_Cloneables (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cloneable.Cl...|__java_lang_String (ref.func $$getString_|cloneable.Cl...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__cloneable_Cloneables (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cloneable.Cl...|__java_lang_String (ref.func $$getString_|cloneable.Cl...|__java_lang_String@cloneable.Cloneables) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__cloneable_Cloneables))
@@ -335,6 +340,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cloneable.Cloneables)
+
+;;; String Cloneables.$getString_|cloneable.Cl...|()
+(func $$getString_|cloneable.Cl...|__java_lang_String@cloneable.Cloneables
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|cloneable.Cl...|__cloneable_Cloneables) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|cloneable.Cl...|__cloneable_Cloneables (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cloneable.Cloneables")))
+   )
+  )
+  (return (global.get $f_$string_|cloneable.Cl...|__cloneable_Cloneables))
+ )
+)
 
 ;;; Code for cloneable.Cloneables.WithoutCloneable [methods]
 
@@ -404,7 +422,7 @@
  (block
   (if (ref.eq (global.get $f_$class__cloneable_Cloneables_WithoutCloneable) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__cloneable_Cloneables_WithoutCloneable (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cloneable.Cl...|_1__java_lang_String (ref.func $$getString_|cloneable.Cl...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__cloneable_Cloneables_WithoutCloneable (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cloneable.Cl...|__java_lang_String (ref.func $$getString_|cloneable.Cl...|__java_lang_String@cloneable.Cloneables.WithoutCloneable) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__cloneable_Cloneables_WithoutCloneable))
@@ -423,6 +441,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cloneable.Cloneables.WithoutCloneable)
+
+;;; String WithoutCloneable.$getString_|cloneable.Cl...|()
+(func $$getString_|cloneable.Cl...|__java_lang_String@cloneable.Cloneables.WithoutCloneable
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|cloneable.Cl...|__cloneable_Cloneables_WithoutCloneable) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|cloneable.Cl...|__cloneable_Cloneables_WithoutCloneable (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cloneable.Cloneables$WithoutCloneable")))
+   )
+  )
+  (return (global.get $f_$string_|cloneable.Cl...|__cloneable_Cloneables_WithoutCloneable))
+ )
+)
 
 ;;; Code for cloneable.Cloneables.WithCloneable [methods]
 
@@ -492,7 +523,7 @@
  (block
   (if (ref.eq (global.get $f_$class__cloneable_Cloneables_WithCloneable) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__cloneable_Cloneables_WithCloneable (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cloneable.Cl...|_2__java_lang_String (ref.func $$getString_|cloneable.Cl...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__cloneable_Cloneables_WithCloneable (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cloneable.Cl...|__java_lang_String (ref.func $$getString_|cloneable.Cl...|__java_lang_String@cloneable.Cloneables.WithCloneable) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__cloneable_Cloneables_WithCloneable))
@@ -511,6 +542,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cloneable.Cloneables.WithCloneable)
+
+;;; String WithCloneable.$getString_|cloneable.Cl...|()
+(func $$getString_|cloneable.Cl...|__java_lang_String@cloneable.Cloneables.WithCloneable
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|cloneable.Cl...|__cloneable_Cloneables_WithCloneable) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|cloneable.Cl...|__cloneable_Cloneables_WithCloneable (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cloneable.Cloneables$WithCloneable")))
+   )
+  )
+  (return (global.get $f_$string_|cloneable.Cl...|__cloneable_Cloneables_WithCloneable))
+ )
+)
 
 ;;; Code for cloneable.Cloneables.WithoutCloneableChild [methods]
 
@@ -580,7 +624,7 @@
  (block
   (if (ref.eq (global.get $f_$class__cloneable_Cloneables_WithoutCloneableChild) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__cloneable_Cloneables_WithoutCloneableChild (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cloneable.Cl...|_3__java_lang_String (ref.func $$getString_|cloneable.Cl...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cloneable.Cloneables.WithoutCloneable) )))
+    (global.set $f_$class__cloneable_Cloneables_WithoutCloneableChild (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cloneable.Cl...|__java_lang_String (ref.func $$getString_|cloneable.Cl...|__java_lang_String@cloneable.Cloneables.WithoutCloneableChild) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cloneable.Cloneables.WithoutCloneable) )))
    )
   )
   (return (global.get $f_$class__cloneable_Cloneables_WithoutCloneableChild))
@@ -599,6 +643,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cloneable.Cloneables.WithoutCloneableChild)
+
+;;; String WithoutCloneableChild.$getString_|cloneable.Cl...|()
+(func $$getString_|cloneable.Cl...|__java_lang_String@cloneable.Cloneables.WithoutCloneableChild
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|cloneable.Cl...|__cloneable_Cloneables_WithoutCloneableChild) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|cloneable.Cl...|__cloneable_Cloneables_WithoutCloneableChild (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cloneable.Cloneables$WithoutCloneableChild")))
+   )
+  )
+  (return (global.get $f_$string_|cloneable.Cl...|__cloneable_Cloneables_WithoutCloneableChild))
+ )
+)
 
 ;;; Code for cloneable.Cloneables.WithCloneableChild [methods]
 
@@ -668,7 +725,7 @@
  (block
   (if (ref.eq (global.get $f_$class__cloneable_Cloneables_WithCloneableChild) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__cloneable_Cloneables_WithCloneableChild (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cloneable.Cl...|_4__java_lang_String (ref.func $$getString_|cloneable.Cl...|_4__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cloneable.Cloneables.WithCloneable) )))
+    (global.set $f_$class__cloneable_Cloneables_WithCloneableChild (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cloneable.Cl...|__java_lang_String (ref.func $$getString_|cloneable.Cl...|__java_lang_String@cloneable.Cloneables.WithCloneableChild) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cloneable.Cloneables.WithCloneable) )))
    )
   )
   (return (global.get $f_$class__cloneable_Cloneables_WithCloneableChild))
@@ -687,3 +744,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cloneable.Cloneables.WithCloneableChild)
+
+;;; String WithCloneableChild.$getString_|cloneable.Cl...|()
+(func $$getString_|cloneable.Cl...|__java_lang_String@cloneable.Cloneables.WithCloneableChild
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|cloneable.Cl...|__cloneable_Cloneables_WithCloneableChild) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|cloneable.Cl...|__cloneable_Cloneables_WithCloneableChild (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cloneable.Cloneables$WithCloneableChild")))
+   )
+  )
+  (return (global.get $f_$string_|cloneable.Cl...|__cloneable_Cloneables_WithCloneableChild))
+ )
+)

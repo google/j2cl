@@ -307,30 +307,37 @@
 ;;; Code for simplebridgemethods.Superclass [static fields]
 (global $f_$initialized__simplebridgemethods_Superclass (mut i32) (i32.const 0))
 (global $f_$class__simplebridgemethods_Superclass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|simplebridge...|__simplebridgemethods_Superclass (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for simplebridgemethods.Subclass [static fields]
 (global $f_$initialized__simplebridgemethods_Subclass (mut i32) (i32.const 0))
 (global $f_$class__simplebridgemethods_Subclass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|simplebridge...|__simplebridgemethods_Subclass (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for simplebridgemethods.AnotherSubclass [static fields]
 (global $f_$initialized__simplebridgemethods_AnotherSubclass (mut i32) (i32.const 0))
 (global $f_$class__simplebridgemethods_AnotherSubclass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|simplebridge...|__simplebridgemethods_AnotherSubclass (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for simplebridgemethods.Callable [static fields]
 (global $f_$initialized__simplebridgemethods_Callable (mut i32) (i32.const 0))
 (global $f_$class__simplebridgemethods_Callable (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|simplebridge...|__simplebridgemethods_Callable (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for simplebridgemethods.Task [static fields]
 (global $f_$initialized__simplebridgemethods_Task (mut i32) (i32.const 0))
 (global $f_$class__simplebridgemethods_Task (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|simplebridge...|__simplebridgemethods_Task (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for simplebridgemethods.AnotherTask [static fields]
 (global $f_$initialized__simplebridgemethods_AnotherTask (mut i32) (i32.const 0))
 (global $f_$class__simplebridgemethods_AnotherTask (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|simplebridge...|__simplebridgemethods_AnotherTask (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for simplebridgemethods.SimpleBridgeMethods [static fields]
 (global $f_$initialized__simplebridgemethods_SimpleBridgeMethods (mut i32) (i32.const 0))
 (global $f_$class__simplebridgemethods_SimpleBridgeMethods (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|simplebridge...|__simplebridgemethods_SimpleBridgeMethods (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for simplebridgemethods.Callable [methods]
 
@@ -356,10 +363,23 @@
  (block
   (if (ref.eq (global.get $f_$class__simplebridgemethods_Callable) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__simplebridgemethods_Callable (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplebridge...|_3__java_lang_String (ref.func $$getString_|simplebridge...|_3__java_lang_String@javaemul.internal.StringPool) )))
+    (global.set $f_$class__simplebridgemethods_Callable (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplebridge...|__java_lang_String (ref.func $$getString_|simplebridge...|__java_lang_String@simplebridgemethods.Callable) )))
    )
   )
   (return (global.get $f_$class__simplebridgemethods_Callable))
+ )
+)
+
+;;; String Callable.$getString_|simplebridge...|()
+(func $$getString_|simplebridge...|__java_lang_String@simplebridgemethods.Callable
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|simplebridge...|__simplebridgemethods_Callable) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|simplebridge...|__simplebridgemethods_Callable (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "simplebridgemethods.Callable")))
+   )
+  )
+  (return (global.get $f_$string_|simplebridge...|__simplebridgemethods_Callable))
  )
 )
 
@@ -429,7 +449,7 @@
  (block
   (if (ref.eq (global.get $f_$class__simplebridgemethods_Superclass) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__simplebridgemethods_Superclass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplebridge...|__java_lang_String (ref.func $$getString_|simplebridge...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__simplebridgemethods_Superclass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplebridge...|__java_lang_String (ref.func $$getString_|simplebridge...|__java_lang_String@simplebridgemethods.Superclass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__simplebridgemethods_Superclass))
@@ -448,6 +468,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@simplebridgemethods.Superclass)
+
+;;; String Superclass.$getString_|simplebridge...|()
+(func $$getString_|simplebridge...|__java_lang_String@simplebridgemethods.Superclass
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|simplebridge...|__simplebridgemethods_Superclass) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|simplebridge...|__simplebridgemethods_Superclass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "simplebridgemethods.Superclass")))
+   )
+  )
+  (return (global.get $f_$string_|simplebridge...|__simplebridgemethods_Superclass))
+ )
+)
 
 ;;; Code for simplebridgemethods.Task [methods]
 
@@ -515,7 +548,7 @@
  (block
   (if (ref.eq (global.get $f_$class__simplebridgemethods_Task) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__simplebridgemethods_Task (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplebridge...|_4__java_lang_String (ref.func $$getString_|simplebridge...|_4__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__simplebridgemethods_Task (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplebridge...|__java_lang_String (ref.func $$getString_|simplebridge...|__java_lang_String@simplebridgemethods.Task) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__simplebridgemethods_Task))
@@ -534,6 +567,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@simplebridgemethods.Task)
+
+;;; String Task.$getString_|simplebridge...|()
+(func $$getString_|simplebridge...|__java_lang_String@simplebridgemethods.Task
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|simplebridge...|__simplebridgemethods_Task) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|simplebridge...|__simplebridgemethods_Task (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "simplebridgemethods.Task")))
+   )
+  )
+  (return (global.get $f_$string_|simplebridge...|__simplebridgemethods_Task))
+ )
+)
 
 ;;; Code for simplebridgemethods.AnotherTask [methods]
 
@@ -616,7 +662,7 @@
  (block
   (if (ref.eq (global.get $f_$class__simplebridgemethods_AnotherTask) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__simplebridgemethods_AnotherTask (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplebridge...|_5__java_lang_String (ref.func $$getString_|simplebridge...|_5__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__simplebridgemethods_AnotherTask (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplebridge...|__java_lang_String (ref.func $$getString_|simplebridge...|__java_lang_String@simplebridgemethods.AnotherTask) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__simplebridgemethods_AnotherTask))
@@ -635,6 +681,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@simplebridgemethods.AnotherTask)
+
+;;; String AnotherTask.$getString_|simplebridge...|()
+(func $$getString_|simplebridge...|__java_lang_String@simplebridgemethods.AnotherTask
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|simplebridge...|__simplebridgemethods_AnotherTask) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|simplebridge...|__simplebridgemethods_AnotherTask (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "simplebridgemethods.AnotherTask")))
+   )
+  )
+  (return (global.get $f_$string_|simplebridge...|__simplebridgemethods_AnotherTask))
+ )
+)
 
 ;;; Code for simplebridgemethods.SimpleBridgeMethods [methods]
 
@@ -689,7 +748,7 @@
  (block
   (if (ref.eq (global.get $f_$class__simplebridgemethods_SimpleBridgeMethods) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__simplebridgemethods_SimpleBridgeMethods (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplebridge...|_6__java_lang_String (ref.func $$getString_|simplebridge...|_6__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__simplebridgemethods_SimpleBridgeMethods (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplebridge...|__java_lang_String (ref.func $$getString_|simplebridge...|__java_lang_String@simplebridgemethods.SimpleBridgeMethods) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__simplebridgemethods_SimpleBridgeMethods))
@@ -708,6 +767,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@simplebridgemethods.SimpleBridgeMethods)
+
+;;; String SimpleBridgeMethods.$getString_|simplebridge...|()
+(func $$getString_|simplebridge...|__java_lang_String@simplebridgemethods.SimpleBridgeMethods
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|simplebridge...|__simplebridgemethods_SimpleBridgeMethods) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|simplebridge...|__simplebridgemethods_SimpleBridgeMethods (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "simplebridgemethods.SimpleBridgeMethods")))
+   )
+  )
+  (return (global.get $f_$string_|simplebridge...|__simplebridgemethods_SimpleBridgeMethods))
+ )
+)
 
 ;;; Code for simplebridgemethods.Subclass [methods]
 
@@ -790,7 +862,7 @@
  (block
   (if (ref.eq (global.get $f_$class__simplebridgemethods_Subclass) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__simplebridgemethods_Subclass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplebridge...|_1__java_lang_String (ref.func $$getString_|simplebridge...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simplebridgemethods.Superclass) )))
+    (global.set $f_$class__simplebridgemethods_Subclass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplebridge...|__java_lang_String (ref.func $$getString_|simplebridge...|__java_lang_String@simplebridgemethods.Subclass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simplebridgemethods.Superclass) )))
    )
   )
   (return (global.get $f_$class__simplebridgemethods_Subclass))
@@ -809,6 +881,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@simplebridgemethods.Subclass)
+
+;;; String Subclass.$getString_|simplebridge...|()
+(func $$getString_|simplebridge...|__java_lang_String@simplebridgemethods.Subclass
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|simplebridge...|__simplebridgemethods_Subclass) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|simplebridge...|__simplebridgemethods_Subclass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "simplebridgemethods.Subclass")))
+   )
+  )
+  (return (global.get $f_$string_|simplebridge...|__simplebridgemethods_Subclass))
+ )
+)
 
 ;;; Code for simplebridgemethods.AnotherSubclass [methods]
 
@@ -863,7 +948,7 @@
  (block
   (if (ref.eq (global.get $f_$class__simplebridgemethods_AnotherSubclass) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__simplebridgemethods_AnotherSubclass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplebridge...|_2__java_lang_String (ref.func $$getString_|simplebridge...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simplebridgemethods.Superclass) )))
+    (global.set $f_$class__simplebridgemethods_AnotherSubclass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplebridge...|__java_lang_String (ref.func $$getString_|simplebridge...|__java_lang_String@simplebridgemethods.AnotherSubclass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simplebridgemethods.Superclass) )))
    )
   )
   (return (global.get $f_$class__simplebridgemethods_AnotherSubclass))
@@ -882,3 +967,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@simplebridgemethods.AnotherSubclass)
+
+;;; String AnotherSubclass.$getString_|simplebridge...|()
+(func $$getString_|simplebridge...|__java_lang_String@simplebridgemethods.AnotherSubclass
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|simplebridge...|__simplebridgemethods_AnotherSubclass) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|simplebridge...|__simplebridgemethods_AnotherSubclass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "simplebridgemethods.AnotherSubclass")))
+   )
+  )
+  (return (global.get $f_$string_|simplebridge...|__simplebridgemethods_AnotherSubclass))
+ )
+)

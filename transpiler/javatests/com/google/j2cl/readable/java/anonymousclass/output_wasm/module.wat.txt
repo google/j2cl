@@ -261,31 +261,39 @@
 ;;; Code for anonymousclass.SomeClass [static fields]
 (global $f_$initialized__anonymousclass_SomeClass (mut i32) (i32.const 0))
 (global $f_$class__anonymousclass_SomeClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|anonymouscla...|__anonymousclass_SomeClass (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for anonymousclass.SomeClassWithStaticMembers [static fields]
 (global $f_$initialized__anonymousclass_SomeClassWithStaticMembers (mut i32) (i32.const 0))
 (global $f_$class__anonymousclass_SomeClassWithStaticMembers (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|anonymouscla...|__anonymousclass_SomeClassWithStaticMembers (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for anonymousclass.AnonymousClass [static fields]
 (global $f_$initialized__anonymousclass_AnonymousClass (mut i32) (i32.const 0))
 (global $f_$class__anonymousclass_AnonymousClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|anonymouscla...|__anonymousclass_AnonymousClass (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for anonymousclass.SomeInterface [static fields]
 (global $f_implicitlyStatic__anonymousclass_SomeInterface (mut (ref null $anonymousclass.SomeClass)) (ref.null $anonymousclass.SomeClass))
 (global $f_$initialized__anonymousclass_SomeInterface (mut i32) (i32.const 0))
 (global $f_$class__anonymousclass_SomeInterface (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|anonymouscla...|__anonymousclass_SomeInterface (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for anonymousclass.AnonymousClass.1 [static fields]
 (global $f_$initialized__anonymousclass_AnonymousClass_1 (mut i32) (i32.const 0))
 (global $f_$class__anonymousclass_AnonymousClass_1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|a|__anonymousclass_AnonymousClass_1 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$string_|anonymouscla...|__anonymousclass_AnonymousClass_1 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for anonymousclass.AnonymousClass.2 [static fields]
 (global $f_$initialized__anonymousclass_AnonymousClass_2 (mut i32) (i32.const 0))
 (global $f_$class__anonymousclass_AnonymousClass_2 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|anonymouscla...|__anonymousclass_AnonymousClass_2 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for anonymousclass.SomeInterface.1 [static fields]
 (global $f_$initialized__anonymousclass_SomeInterface_1 (mut i32) (i32.const 0))
 (global $f_$class__anonymousclass_SomeInterface_1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|anonymouscla...|__anonymousclass_SomeInterface_1 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for anonymousclass.SomeInterface [methods]
 
@@ -313,10 +321,23 @@
  (block
   (if (ref.eq (global.get $f_$class__anonymousclass_SomeInterface) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__anonymousclass_SomeInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|anonymouscla...|_3__java_lang_String (ref.func $$getString_|anonymouscla...|_3__java_lang_String@javaemul.internal.StringPool) )))
+    (global.set $f_$class__anonymousclass_SomeInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|anonymouscla...|__java_lang_String (ref.func $$getString_|anonymouscla...|__java_lang_String@anonymousclass.SomeInterface) )))
    )
   )
   (return (global.get $f_$class__anonymousclass_SomeInterface))
+ )
+)
+
+;;; String SomeInterface.$getString_|anonymouscla...|()
+(func $$getString_|anonymouscla...|__java_lang_String@anonymousclass.SomeInterface
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|anonymouscla...|__anonymousclass_SomeInterface) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|anonymouscla...|__anonymousclass_SomeInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "anonymousclass.SomeInterface")))
+   )
+  )
+  (return (global.get $f_$string_|anonymouscla...|__anonymousclass_SomeInterface))
  )
 )
 
@@ -359,10 +380,23 @@
  (block
   (if (ref.eq (global.get $f_$class__anonymousclass_SomeClass) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__anonymousclass_SomeClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|anonymouscla...|__java_lang_String (ref.func $$getString_|anonymouscla...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__anonymousclass_SomeClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|anonymouscla...|__java_lang_String (ref.func $$getString_|anonymouscla...|__java_lang_String@anonymousclass.SomeClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__anonymousclass_SomeClass))
+ )
+)
+
+;;; String SomeClass.$getString_|anonymouscla...|()
+(func $$getString_|anonymouscla...|__java_lang_String@anonymousclass.SomeClass
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|anonymouscla...|__anonymousclass_SomeClass) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|anonymouscla...|__anonymousclass_SomeClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "anonymousclass.SomeClass")))
+   )
+  )
+  (return (global.get $f_$string_|anonymouscla...|__anonymousclass_SomeClass))
  )
 )
 
@@ -414,10 +448,23 @@
  (block
   (if (ref.eq (global.get $f_$class__anonymousclass_SomeClassWithStaticMembers) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__anonymousclass_SomeClassWithStaticMembers (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|anonymouscla...|_1__java_lang_String (ref.func $$getString_|anonymouscla...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__anonymousclass_SomeClassWithStaticMembers (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|anonymouscla...|__java_lang_String (ref.func $$getString_|anonymouscla...|__java_lang_String@anonymousclass.SomeClassWithStaticMembers) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__anonymousclass_SomeClassWithStaticMembers))
+ )
+)
+
+;;; String SomeClassWithStaticMembers.$getString_|anonymouscla...|()
+(func $$getString_|anonymouscla...|__java_lang_String@anonymousclass.SomeClassWithStaticMembers
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|anonymouscla...|__anonymousclass_SomeClassWithStaticMembers) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|anonymouscla...|__anonymousclass_SomeClassWithStaticMembers (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "anonymousclass.SomeClassWithStaticMembers")))
+   )
+  )
+  (return (global.get $f_$string_|anonymouscla...|__anonymousclass_SomeClassWithStaticMembers))
  )
 )
 
@@ -492,7 +539,7 @@
  (block
   (if (ref.eq (global.get $f_$class__anonymousclass_AnonymousClass) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__anonymousclass_AnonymousClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|anonymouscla...|_2__java_lang_String (ref.func $$getString_|anonymouscla...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__anonymousclass_AnonymousClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|anonymouscla...|__java_lang_String (ref.func $$getString_|anonymouscla...|__java_lang_String@anonymousclass.AnonymousClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__anonymousclass_AnonymousClass))
@@ -511,6 +558,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@anonymousclass.AnonymousClass)
+
+;;; String AnonymousClass.$getString_|anonymouscla...|()
+(func $$getString_|anonymouscla...|__java_lang_String@anonymousclass.AnonymousClass
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|anonymouscla...|__anonymousclass_AnonymousClass) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|anonymouscla...|__anonymousclass_AnonymousClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "anonymousclass.AnonymousClass")))
+   )
+  )
+  (return (global.get $f_$string_|anonymouscla...|__anonymousclass_AnonymousClass))
+ )
+)
 
 ;;; Code for anonymousclass.AnonymousClass.1 [methods]
 
@@ -559,7 +619,7 @@
  (local.set $this (ref.cast_static $anonymousclass.AnonymousClass.1 (local.get $this.untyped)))
  (block
   ;;@ anonymousclass/AnonymousClass.java:42:12
-  (return (call $function.no.side.effects.$getString_|a|__java_lang_String (ref.func $$getString_|a|__java_lang_String@javaemul.internal.StringPool) ))
+  (return (call $function.no.side.effects.$getString_|a|__java_lang_String (ref.func $$getString_|a|__java_lang_String@anonymousclass.AnonymousClass.1) ))
  )
 )
 (elem declare func $m_foo__java_lang_String@anonymousclass.AnonymousClass.1)
@@ -600,7 +660,7 @@
  (block
   (if (ref.eq (global.get $f_$class__anonymousclass_AnonymousClass_1) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__anonymousclass_AnonymousClass_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|anonymouscla...|_4__java_lang_String (ref.func $$getString_|anonymouscla...|_4__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@anonymousclass.SomeClass) )))
+    (global.set $f_$class__anonymousclass_AnonymousClass_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|anonymouscla...|__java_lang_String (ref.func $$getString_|anonymouscla...|__java_lang_String@anonymousclass.AnonymousClass.1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@anonymousclass.SomeClass) )))
    )
   )
   (return (global.get $f_$class__anonymousclass_AnonymousClass_1))
@@ -619,6 +679,32 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@anonymousclass.AnonymousClass.1)
+
+;;; String <anonymous> extends SomeClass.$getString_|a|()
+(func $$getString_|a|__java_lang_String@anonymousclass.AnonymousClass.1
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|a|__anonymousclass_AnonymousClass_1) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|a|__anonymousclass_AnonymousClass_1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "a")))
+   )
+  )
+  (return (global.get $f_$string_|a|__anonymousclass_AnonymousClass_1))
+ )
+)
+
+;;; String <anonymous> extends SomeClass.$getString_|anonymouscla...|()
+(func $$getString_|anonymouscla...|__java_lang_String@anonymousclass.AnonymousClass.1
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|anonymouscla...|__anonymousclass_AnonymousClass_1) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|anonymouscla...|__anonymousclass_AnonymousClass_1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "anonymousclass.AnonymousClass$1")))
+   )
+  )
+  (return (global.get $f_$string_|anonymouscla...|__anonymousclass_AnonymousClass_1))
+ )
+)
 
 ;;; Code for anonymousclass.AnonymousClass.2 [methods]
 
@@ -667,7 +753,7 @@
  (local.set $this (ref.cast_static $anonymousclass.AnonymousClass.2 (local.get $this.untyped)))
  (block
   ;;@ anonymousclass/AnonymousClass.java:53:12
-  (return (call $function.no.side.effects.$getString_|a|__java_lang_String (ref.func $$getString_|a|__java_lang_String@javaemul.internal.StringPool) ))
+  (return (call $function.no.side.effects.$getString_|a|__java_lang_String (ref.func $$getString_|a|__java_lang_String@anonymousclass.AnonymousClass.1) ))
  )
 )
 (elem declare func $m_foo__java_lang_String@anonymousclass.AnonymousClass.2)
@@ -708,7 +794,7 @@
  (block
   (if (ref.eq (global.get $f_$class__anonymousclass_AnonymousClass_2) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__anonymousclass_AnonymousClass_2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|anonymouscla...|_5__java_lang_String (ref.func $$getString_|anonymouscla...|_5__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@anonymousclass.SomeClassWithStaticMembers) )))
+    (global.set $f_$class__anonymousclass_AnonymousClass_2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|anonymouscla...|__java_lang_String (ref.func $$getString_|anonymouscla...|__java_lang_String@anonymousclass.AnonymousClass.2) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@anonymousclass.SomeClassWithStaticMembers) )))
    )
   )
   (return (global.get $f_$class__anonymousclass_AnonymousClass_2))
@@ -727,6 +813,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@anonymousclass.AnonymousClass.2)
+
+;;; String <anonymous> extends SomeClassWithStaticMembers.$getString_|anonymouscla...|()
+(func $$getString_|anonymouscla...|__java_lang_String@anonymousclass.AnonymousClass.2
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|anonymouscla...|__anonymousclass_AnonymousClass_2) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|anonymouscla...|__anonymousclass_AnonymousClass_2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "anonymousclass.AnonymousClass$2")))
+   )
+  )
+  (return (global.get $f_$string_|anonymouscla...|__anonymousclass_AnonymousClass_2))
+ )
+)
 
 ;;; Code for anonymousclass.SomeInterface.1 [methods]
 
@@ -769,7 +868,7 @@
  (local.set $this (ref.cast_static $anonymousclass.SomeInterface.1 (local.get $this.untyped)))
  (block
   ;;@ anonymousclass/AnonymousClass.java:63:10
-  (return (call $function.no.side.effects.$getString_|a|__java_lang_String (ref.func $$getString_|a|__java_lang_String@javaemul.internal.StringPool) ))
+  (return (call $function.no.side.effects.$getString_|a|__java_lang_String (ref.func $$getString_|a|__java_lang_String@anonymousclass.AnonymousClass.1) ))
  )
 )
 (elem declare func $m_foo__java_lang_String@anonymousclass.SomeInterface.1)
@@ -798,7 +897,7 @@
  (block
   (if (ref.eq (global.get $f_$class__anonymousclass_SomeInterface_1) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__anonymousclass_SomeInterface_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|anonymouscla...|_6__java_lang_String (ref.func $$getString_|anonymouscla...|_6__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@anonymousclass.SomeClass) )))
+    (global.set $f_$class__anonymousclass_SomeInterface_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|anonymouscla...|__java_lang_String (ref.func $$getString_|anonymouscla...|__java_lang_String@anonymousclass.SomeInterface.1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@anonymousclass.SomeClass) )))
    )
   )
   (return (global.get $f_$class__anonymousclass_SomeInterface_1))
@@ -817,3 +916,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@anonymousclass.SomeInterface.1)
+
+;;; String <anonymous> extends SomeClass.$getString_|anonymouscla...|()
+(func $$getString_|anonymouscla...|__java_lang_String@anonymousclass.SomeInterface.1
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|anonymouscla...|__anonymousclass_SomeInterface_1) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|anonymouscla...|__anonymousclass_SomeInterface_1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "anonymousclass.SomeInterface$1")))
+   )
+  )
+  (return (global.get $f_$string_|anonymouscla...|__anonymousclass_SomeInterface_1))
+ )
+)

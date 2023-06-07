@@ -164,18 +164,22 @@
 ;;; Code for accidentaloverride.Parent [static fields]
 (global $f_$initialized__accidentaloverride_Parent (mut i32) (i32.const 0))
 (global $f_$class__accidentaloverride_Parent (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|accidentalov...|__accidentaloverride_Parent (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for accidentaloverride.SuperInterface [static fields]
 (global $f_$initialized__accidentaloverride_SuperInterface (mut i32) (i32.const 0))
 (global $f_$class__accidentaloverride_SuperInterface (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|accidentalov...|__accidentaloverride_SuperInterface (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for accidentaloverride.AnotherAccidentalOverride [static fields]
 (global $f_$initialized__accidentaloverride_AnotherAccidentalOverride (mut i32) (i32.const 0))
 (global $f_$class__accidentaloverride_AnotherAccidentalOverride (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|accidentalov...|__accidentaloverride_AnotherAccidentalOverride (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for accidentaloverride.AccidentalOverride [static fields]
 (global $f_$initialized__accidentaloverride_AccidentalOverride (mut i32) (i32.const 0))
 (global $f_$class__accidentaloverride_AccidentalOverride (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|accidentalov...|__accidentaloverride_AccidentalOverride (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for accidentaloverride.SuperInterface [methods]
 
@@ -201,10 +205,23 @@
  (block
   (if (ref.eq (global.get $f_$class__accidentaloverride_SuperInterface) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__accidentaloverride_SuperInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|accidentalov...|_1__java_lang_String (ref.func $$getString_|accidentalov...|_1__java_lang_String@javaemul.internal.StringPool) )))
+    (global.set $f_$class__accidentaloverride_SuperInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|accidentalov...|__java_lang_String (ref.func $$getString_|accidentalov...|__java_lang_String@accidentaloverride.SuperInterface) )))
    )
   )
   (return (global.get $f_$class__accidentaloverride_SuperInterface))
+ )
+)
+
+;;; String SuperInterface.$getString_|accidentalov...|()
+(func $$getString_|accidentalov...|__java_lang_String@accidentaloverride.SuperInterface
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|accidentalov...|__accidentaloverride_SuperInterface) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|accidentalov...|__accidentaloverride_SuperInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "accidentaloverride.SuperInterface")))
+   )
+  )
+  (return (global.get $f_$string_|accidentalov...|__accidentaloverride_SuperInterface))
  )
 )
 
@@ -274,7 +291,7 @@
  (block
   (if (ref.eq (global.get $f_$class__accidentaloverride_Parent) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__accidentaloverride_Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|accidentalov...|__java_lang_String (ref.func $$getString_|accidentalov...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__accidentaloverride_Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|accidentalov...|__java_lang_String (ref.func $$getString_|accidentalov...|__java_lang_String@accidentaloverride.Parent) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__accidentaloverride_Parent))
@@ -293,6 +310,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@accidentaloverride.Parent)
+
+;;; String Parent.$getString_|accidentalov...|()
+(func $$getString_|accidentalov...|__java_lang_String@accidentaloverride.Parent
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|accidentalov...|__accidentaloverride_Parent) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|accidentalov...|__accidentaloverride_Parent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "accidentaloverride.Parent")))
+   )
+  )
+  (return (global.get $f_$string_|accidentalov...|__accidentaloverride_Parent))
+ )
+)
 
 ;;; Code for accidentaloverride.AnotherAccidentalOverride [methods]
 
@@ -377,7 +407,7 @@
  (block
   (if (ref.eq (global.get $f_$class__accidentaloverride_AnotherAccidentalOverride) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__accidentaloverride_AnotherAccidentalOverride (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|accidentalov...|_2__java_lang_String (ref.func $$getString_|accidentalov...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@accidentaloverride.Parent) )))
+    (global.set $f_$class__accidentaloverride_AnotherAccidentalOverride (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|accidentalov...|__java_lang_String (ref.func $$getString_|accidentalov...|__java_lang_String@accidentaloverride.AnotherAccidentalOverride) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@accidentaloverride.Parent) )))
    )
   )
   (return (global.get $f_$class__accidentaloverride_AnotherAccidentalOverride))
@@ -396,6 +426,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@accidentaloverride.AnotherAccidentalOverride)
+
+;;; String AnotherAccidentalOverride.$getString_|accidentalov...|()
+(func $$getString_|accidentalov...|__java_lang_String@accidentaloverride.AnotherAccidentalOverride
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|accidentalov...|__accidentaloverride_AnotherAccidentalOverride) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|accidentalov...|__accidentaloverride_AnotherAccidentalOverride (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "accidentaloverride.AnotherAccidentalOverride")))
+   )
+  )
+  (return (global.get $f_$string_|accidentalov...|__accidentaloverride_AnotherAccidentalOverride))
+ )
+)
 
 ;;; Code for accidentaloverride.AccidentalOverride [methods]
 
@@ -465,7 +508,7 @@
  (block
   (if (ref.eq (global.get $f_$class__accidentaloverride_AccidentalOverride) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__accidentaloverride_AccidentalOverride (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|accidentalov...|_3__java_lang_String (ref.func $$getString_|accidentalov...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@accidentaloverride.Parent) )))
+    (global.set $f_$class__accidentaloverride_AccidentalOverride (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|accidentalov...|__java_lang_String (ref.func $$getString_|accidentalov...|__java_lang_String@accidentaloverride.AccidentalOverride) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@accidentaloverride.Parent) )))
    )
   )
   (return (global.get $f_$class__accidentaloverride_AccidentalOverride))
@@ -484,3 +527,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@accidentaloverride.AccidentalOverride)
+
+;;; String AccidentalOverride.$getString_|accidentalov...|()
+(func $$getString_|accidentalov...|__java_lang_String@accidentaloverride.AccidentalOverride
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|accidentalov...|__accidentaloverride_AccidentalOverride) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|accidentalov...|__accidentaloverride_AccidentalOverride (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "accidentaloverride.AccidentalOverride")))
+   )
+  )
+  (return (global.get $f_$string_|accidentalov...|__accidentaloverride_AccidentalOverride))
+ )
+)

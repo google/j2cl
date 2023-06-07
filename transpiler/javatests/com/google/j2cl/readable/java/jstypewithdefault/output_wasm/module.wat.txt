@@ -58,10 +58,12 @@
 ;;; Code for jstypewithdefault.SomeJsType [static fields]
 (global $f_$initialized__jstypewithdefault_SomeJsType (mut i32) (i32.const 0))
 (global $f_$class__jstypewithdefault_SomeJsType (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|jstypewithde...|__jstypewithdefault_SomeJsType (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for jstypewithdefault.Interface [static fields]
 (global $f_$initialized__jstypewithdefault_Interface (mut i32) (i32.const 0))
 (global $f_$class__jstypewithdefault_Interface (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|jstypewithde...|__jstypewithdefault_Interface (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for jstypewithdefault.Interface [methods]
 
@@ -96,10 +98,23 @@
  (block
   (if (ref.eq (global.get $f_$class__jstypewithdefault_Interface) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__jstypewithdefault_Interface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jstypewithde...|_1__java_lang_String (ref.func $$getString_|jstypewithde...|_1__java_lang_String@javaemul.internal.StringPool) )))
+    (global.set $f_$class__jstypewithdefault_Interface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jstypewithde...|__java_lang_String (ref.func $$getString_|jstypewithde...|__java_lang_String@jstypewithdefault.Interface) )))
    )
   )
   (return (global.get $f_$class__jstypewithdefault_Interface))
+ )
+)
+
+;;; String Interface.$getString_|jstypewithde...|()
+(func $$getString_|jstypewithde...|__java_lang_String@jstypewithdefault.Interface
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|jstypewithde...|__jstypewithdefault_Interface) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|jstypewithde...|__jstypewithdefault_Interface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jstypewithdefault.Interface")))
+   )
+  )
+  (return (global.get $f_$string_|jstypewithde...|__jstypewithdefault_Interface))
  )
 )
 
@@ -172,7 +187,7 @@
  (block
   (if (ref.eq (global.get $f_$class__jstypewithdefault_SomeJsType) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__jstypewithdefault_SomeJsType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jstypewithde...|__java_lang_String (ref.func $$getString_|jstypewithde...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__jstypewithdefault_SomeJsType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jstypewithde...|__java_lang_String (ref.func $$getString_|jstypewithde...|__java_lang_String@jstypewithdefault.SomeJsType) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__jstypewithdefault_SomeJsType))
@@ -191,3 +206,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jstypewithdefault.SomeJsType)
+
+;;; String SomeJsType.$getString_|jstypewithde...|()
+(func $$getString_|jstypewithde...|__java_lang_String@jstypewithdefault.SomeJsType
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|jstypewithde...|__jstypewithdefault_SomeJsType) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|jstypewithde...|__jstypewithdefault_SomeJsType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jstypewithdefault.SomeJsType")))
+   )
+  )
+  (return (global.get $f_$string_|jstypewithde...|__jstypewithdefault_SomeJsType))
+ )
+)

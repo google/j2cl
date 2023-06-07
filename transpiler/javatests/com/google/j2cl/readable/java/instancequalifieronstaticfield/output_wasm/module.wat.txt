@@ -50,6 +50,7 @@
 (global $f_sideEffectCount__instancequalifieronstaticfield_InstanceQualifiers (mut i32) (i32.const 0))
 (global $f_$initialized__instancequalifieronstaticfield_InstanceQualifiers (mut i32) (i32.const 0))
 (global $f_$class__instancequalifieronstaticfield_InstanceQualifiers (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|instancequal...|__instancequalifieronstaticfield_InstanceQualifiers (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for instancequalifieronstaticfield.InstanceQualifiers [methods]
 
@@ -197,7 +198,7 @@
  (block
   (if (ref.eq (global.get $f_$class__instancequalifieronstaticfield_InstanceQualifiers) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__instancequalifieronstaticfield_InstanceQualifiers (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instancequal...|__java_lang_String (ref.func $$getString_|instancequal...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__instancequalifieronstaticfield_InstanceQualifiers (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instancequal...|__java_lang_String (ref.func $$getString_|instancequal...|__java_lang_String@instancequalifieronstaticfield.InstanceQualifiers) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__instancequalifieronstaticfield_InstanceQualifiers))
@@ -216,3 +217,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@instancequalifieronstaticfield.InstanceQualifiers)
+
+;;; String InstanceQualifiers.$getString_|instancequal...|()
+(func $$getString_|instancequal...|__java_lang_String@instancequalifieronstaticfield.InstanceQualifiers
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|instancequal...|__instancequalifieronstaticfield_InstanceQualifiers) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|instancequal...|__instancequalifieronstaticfield_InstanceQualifiers (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instancequalifieronstaticfield.InstanceQualifiers")))
+   )
+  )
+  (return (global.get $f_$string_|instancequal...|__instancequalifieronstaticfield_InstanceQualifiers))
+ )
+)

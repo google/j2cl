@@ -478,38 +478,47 @@
 ;;; Code for innerclassinheritance.ParentOuter [static fields]
 (global $f_$initialized__innerclassinheritance_ParentOuter (mut i32) (i32.const 0))
 (global $f_$class__innerclassinheritance_ParentOuter (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|innerclassin...|__innerclassinheritance_ParentOuter (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for innerclassinheritance.ParentInner [static fields]
 (global $f_$initialized__innerclassinheritance_ParentInner (mut i32) (i32.const 0))
 (global $f_$class__innerclassinheritance_ParentInner (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|innerclassin...|__innerclassinheritance_ParentInner (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for innerclassinheritance.ChildClass [static fields]
 (global $f_$initialized__innerclassinheritance_ChildClass (mut i32) (i32.const 0))
 (global $f_$class__innerclassinheritance_ChildClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|innerclassin...|__innerclassinheritance_ChildClass (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for innerclassinheritance.ChildClass.InnerClass [static fields]
 (global $f_$initialized__innerclassinheritance_ChildClass_InnerClass (mut i32) (i32.const 0))
 (global $f_$class__innerclassinheritance_ChildClass_InnerClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|innerclassin...|__innerclassinheritance_ChildClass_InnerClass (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for innerclassinheritance.ChildClass.1LocalClass [static fields]
 (global $f_$initialized__innerclassinheritance_ChildClass_1LocalClass (mut i32) (i32.const 0))
 (global $f_$class__innerclassinheritance_ChildClass_1LocalClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|innerclassin...|__innerclassinheritance_ChildClass_1LocalClass (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for innerclassinheritance.MultipleNestings [static fields]
 (global $f_$initialized__innerclassinheritance_MultipleNestings (mut i32) (i32.const 0))
 (global $f_$class__innerclassinheritance_MultipleNestings (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|innerclassin...|__innerclassinheritance_MultipleNestings (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for innerclassinheritance.MultipleNestings.Parent [static fields]
 (global $f_$initialized__innerclassinheritance_MultipleNestings_Parent (mut i32) (i32.const 0))
 (global $f_$class__innerclassinheritance_MultipleNestings_Parent (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|innerclassin...|__innerclassinheritance_MultipleNestings_Parent (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 [static fields]
 (global $f_$initialized__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2 (mut i32) (i32.const 0))
 (global $f_$class__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|innerclassin...|__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for innerclassinheritance.MultipleNestings.InnerClass1 [static fields]
 (global $f_$initialized__innerclassinheritance_MultipleNestings_InnerClass1 (mut i32) (i32.const 0))
 (global $f_$class__innerclassinheritance_MultipleNestings_InnerClass1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|innerclassin...|__innerclassinheritance_MultipleNestings_InnerClass1 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for innerclassinheritance.ParentOuter [methods]
 
@@ -576,7 +585,7 @@
  (block
   (if (ref.eq (global.get $f_$class__innerclassinheritance_ParentOuter) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__innerclassinheritance_ParentOuter (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__innerclassinheritance_ParentOuter (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinheritance.ParentOuter) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__innerclassinheritance_ParentOuter))
@@ -595,6 +604,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@innerclassinheritance.ParentOuter)
+
+;;; String ParentOuter.$getString_|innerclassin...|()
+(func $$getString_|innerclassin...|__java_lang_String@innerclassinheritance.ParentOuter
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinheritance_ParentOuter) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|innerclassin...|__innerclassinheritance_ParentOuter (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinheritance.ParentOuter")))
+   )
+  )
+  (return (global.get $f_$string_|innerclassin...|__innerclassinheritance_ParentOuter))
+ )
+)
 
 ;;; Code for innerclassinheritance.ParentInner [methods]
 
@@ -661,7 +683,7 @@
  (block
   (if (ref.eq (global.get $f_$class__innerclassinheritance_ParentInner) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__innerclassinheritance_ParentInner (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|_1__java_lang_String (ref.func $$getString_|innerclassin...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__innerclassinheritance_ParentInner (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinheritance.ParentInner) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__innerclassinheritance_ParentInner))
@@ -680,6 +702,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@innerclassinheritance.ParentInner)
+
+;;; String ParentInner.$getString_|innerclassin...|()
+(func $$getString_|innerclassin...|__java_lang_String@innerclassinheritance.ParentInner
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinheritance_ParentInner) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|innerclassin...|__innerclassinheritance_ParentInner (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinheritance.ParentInner")))
+   )
+  )
+  (return (global.get $f_$string_|innerclassin...|__innerclassinheritance_ParentInner))
+ )
+)
 
 ;;; Code for innerclassinheritance.MultipleNestings [methods]
 
@@ -746,7 +781,7 @@
  (block
   (if (ref.eq (global.get $f_$class__innerclassinheritance_MultipleNestings) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__innerclassinheritance_MultipleNestings (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|_5__java_lang_String (ref.func $$getString_|innerclassin...|_5__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__innerclassinheritance_MultipleNestings (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinheritance.MultipleNestings) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__innerclassinheritance_MultipleNestings))
@@ -765,6 +800,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@innerclassinheritance.MultipleNestings)
+
+;;; String MultipleNestings.$getString_|innerclassin...|()
+(func $$getString_|innerclassin...|__java_lang_String@innerclassinheritance.MultipleNestings
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinheritance_MultipleNestings) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|innerclassin...|__innerclassinheritance_MultipleNestings (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinheritance.MultipleNestings")))
+   )
+  )
+  (return (global.get $f_$string_|innerclassin...|__innerclassinheritance_MultipleNestings))
+ )
+)
 
 ;;; Code for innerclassinheritance.MultipleNestings.Parent [methods]
 
@@ -835,7 +883,7 @@
  (block
   (if (ref.eq (global.get $f_$class__innerclassinheritance_MultipleNestings_Parent) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__innerclassinheritance_MultipleNestings_Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|_6__java_lang_String (ref.func $$getString_|innerclassin...|_6__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__innerclassinheritance_MultipleNestings_Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinheritance.MultipleNestings.Parent) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__innerclassinheritance_MultipleNestings_Parent))
@@ -854,6 +902,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@innerclassinheritance.MultipleNestings.Parent)
+
+;;; String Parent.$getString_|innerclassin...|()
+(func $$getString_|innerclassin...|__java_lang_String@innerclassinheritance.MultipleNestings.Parent
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinheritance_MultipleNestings_Parent) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|innerclassin...|__innerclassinheritance_MultipleNestings_Parent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinheritance.MultipleNestings$Parent")))
+   )
+  )
+  (return (global.get $f_$string_|innerclassin...|__innerclassinheritance_MultipleNestings_Parent))
+ )
+)
 
 ;;; Code for innerclassinheritance.ChildClass [methods]
 
@@ -939,7 +1000,7 @@
  (block
   (if (ref.eq (global.get $f_$class__innerclassinheritance_ChildClass) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__innerclassinheritance_ChildClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|_2__java_lang_String (ref.func $$getString_|innerclassin...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinheritance.ParentOuter) )))
+    (global.set $f_$class__innerclassinheritance_ChildClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinheritance.ChildClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinheritance.ParentOuter) )))
    )
   )
   (return (global.get $f_$class__innerclassinheritance_ChildClass))
@@ -958,6 +1019,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@innerclassinheritance.ChildClass)
+
+;;; String ChildClass.$getString_|innerclassin...|()
+(func $$getString_|innerclassin...|__java_lang_String@innerclassinheritance.ChildClass
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinheritance_ChildClass) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|innerclassin...|__innerclassinheritance_ChildClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinheritance.ChildClass")))
+   )
+  )
+  (return (global.get $f_$string_|innerclassin...|__innerclassinheritance_ChildClass))
+ )
+)
 
 ;;; Code for innerclassinheritance.ChildClass.InnerClass [methods]
 
@@ -1074,7 +1148,7 @@
  (block
   (if (ref.eq (global.get $f_$class__innerclassinheritance_ChildClass_InnerClass) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__innerclassinheritance_ChildClass_InnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|_3__java_lang_String (ref.func $$getString_|innerclassin...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinheritance.ParentInner) )))
+    (global.set $f_$class__innerclassinheritance_ChildClass_InnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinheritance.ChildClass.InnerClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinheritance.ParentInner) )))
    )
   )
   (return (global.get $f_$class__innerclassinheritance_ChildClass_InnerClass))
@@ -1093,6 +1167,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@innerclassinheritance.ChildClass.InnerClass)
+
+;;; String InnerClass.$getString_|innerclassin...|()
+(func $$getString_|innerclassin...|__java_lang_String@innerclassinheritance.ChildClass.InnerClass
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinheritance_ChildClass_InnerClass) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|innerclassin...|__innerclassinheritance_ChildClass_InnerClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinheritance.ChildClass$InnerClass")))
+   )
+  )
+  (return (global.get $f_$string_|innerclassin...|__innerclassinheritance_ChildClass_InnerClass))
+ )
+)
 
 ;;; Code for innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 [methods]
 
@@ -1189,7 +1276,7 @@
  (block
   (if (ref.eq (global.get $f_$class__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|_7__java_lang_String (ref.func $$getString_|innerclassin...|_7__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinheritance.MultipleNestings.Parent) )))
+    (global.set $f_$class__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinheritance.MultipleNestings.Parent) )))
    )
   )
   (return (global.get $f_$class__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2))
@@ -1208,6 +1295,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2)
+
+;;; String InnerClass2.$getString_|innerclassin...|()
+(func $$getString_|innerclassin...|__java_lang_String@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|innerclassin...|__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinheritance.MultipleNestings$InnerClass1$InnerClass2")))
+   )
+  )
+  (return (global.get $f_$string_|innerclassin...|__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2))
+ )
+)
 
 ;;; Code for innerclassinheritance.MultipleNestings.InnerClass1 [methods]
 
@@ -1276,7 +1376,7 @@
  (block
   (if (ref.eq (global.get $f_$class__innerclassinheritance_MultipleNestings_InnerClass1) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__innerclassinheritance_MultipleNestings_InnerClass1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|_8__java_lang_String (ref.func $$getString_|innerclassin...|_8__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinheritance.MultipleNestings.Parent) )))
+    (global.set $f_$class__innerclassinheritance_MultipleNestings_InnerClass1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinheritance.MultipleNestings.InnerClass1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinheritance.MultipleNestings.Parent) )))
    )
   )
   (return (global.get $f_$class__innerclassinheritance_MultipleNestings_InnerClass1))
@@ -1295,6 +1395,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@innerclassinheritance.MultipleNestings.InnerClass1)
+
+;;; String InnerClass1.$getString_|innerclassin...|()
+(func $$getString_|innerclassin...|__java_lang_String@innerclassinheritance.MultipleNestings.InnerClass1
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinheritance_MultipleNestings_InnerClass1) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|innerclassin...|__innerclassinheritance_MultipleNestings_InnerClass1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinheritance.MultipleNestings$InnerClass1")))
+   )
+  )
+  (return (global.get $f_$string_|innerclassin...|__innerclassinheritance_MultipleNestings_InnerClass1))
+ )
+)
 
 ;;; Code for innerclassinheritance.ChildClass.1LocalClass [methods]
 
@@ -1399,7 +1512,7 @@
  (block
   (if (ref.eq (global.get $f_$class__innerclassinheritance_ChildClass_1LocalClass) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__innerclassinheritance_ChildClass_1LocalClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|_4__java_lang_String (ref.func $$getString_|innerclassin...|_4__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinheritance.ChildClass) )))
+    (global.set $f_$class__innerclassinheritance_ChildClass_1LocalClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinheritance.ChildClass.1LocalClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinheritance.ChildClass) )))
    )
   )
   (return (global.get $f_$class__innerclassinheritance_ChildClass_1LocalClass))
@@ -1418,3 +1531,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@innerclassinheritance.ChildClass.1LocalClass)
+
+;;; String LocalClass.$getString_|innerclassin...|()
+(func $$getString_|innerclassin...|__java_lang_String@innerclassinheritance.ChildClass.1LocalClass
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinheritance_ChildClass_1LocalClass) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|innerclassin...|__innerclassinheritance_ChildClass_1LocalClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinheritance.ChildClass$1LocalClass")))
+   )
+  )
+  (return (global.get $f_$string_|innerclassin...|__innerclassinheritance_ChildClass_1LocalClass))
+ )
+)

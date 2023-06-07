@@ -120,10 +120,12 @@
 (global $f_closableThing__trycatch_TryCatch_ (mut (ref null $trycatch.TryCatch.ClosableThing)) (ref.null $trycatch.TryCatch.ClosableThing))
 (global $f_$initialized__trycatch_TryCatch (mut i32) (i32.const 0))
 (global $f_$class__trycatch_TryCatch (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|trycatch.Try...|__trycatch_TryCatch (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for trycatch.TryCatch.ClosableThing [static fields]
 (global $f_$initialized__trycatch_TryCatch_ClosableThing (mut i32) (i32.const 0))
 (global $f_$class__trycatch_TryCatch_ClosableThing (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|trycatch.Try...|__trycatch_TryCatch_ClosableThing (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for trycatch.TryCatch [methods]
 
@@ -848,7 +850,7 @@
  (block
   (if (ref.eq (global.get $f_$class__trycatch_TryCatch) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__trycatch_TryCatch (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|trycatch.Try...|__java_lang_String (ref.func $$getString_|trycatch.Try...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__trycatch_TryCatch (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|trycatch.Try...|__java_lang_String (ref.func $$getString_|trycatch.Try...|__java_lang_String@trycatch.TryCatch) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__trycatch_TryCatch))
@@ -867,6 +869,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@trycatch.TryCatch)
+
+;;; String TryCatch.$getString_|trycatch.Try...|()
+(func $$getString_|trycatch.Try...|__java_lang_String@trycatch.TryCatch
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|trycatch.Try...|__trycatch_TryCatch) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|trycatch.Try...|__trycatch_TryCatch (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "trycatch.TryCatch")))
+   )
+  )
+  (return (global.get $f_$string_|trycatch.Try...|__trycatch_TryCatch))
+ )
+)
 
 ;;; Code for trycatch.TryCatch.ClosableThing [methods]
 
@@ -933,7 +948,7 @@
  (block
   (if (ref.eq (global.get $f_$class__trycatch_TryCatch_ClosableThing) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__trycatch_TryCatch_ClosableThing (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|trycatch.Try...|_1__java_lang_String (ref.func $$getString_|trycatch.Try...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__trycatch_TryCatch_ClosableThing (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|trycatch.Try...|__java_lang_String (ref.func $$getString_|trycatch.Try...|__java_lang_String@trycatch.TryCatch.ClosableThing) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__trycatch_TryCatch_ClosableThing))
@@ -952,3 +967,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@trycatch.TryCatch.ClosableThing)
+
+;;; String ClosableThing.$getString_|trycatch.Try...|()
+(func $$getString_|trycatch.Try...|__java_lang_String@trycatch.TryCatch.ClosableThing
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|trycatch.Try...|__trycatch_TryCatch_ClosableThing) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|trycatch.Try...|__trycatch_TryCatch_ClosableThing (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "trycatch.TryCatch$ClosableThing")))
+   )
+  )
+  (return (global.get $f_$string_|trycatch.Try...|__trycatch_TryCatch_ClosableThing))
+ )
+)

@@ -194,18 +194,22 @@
 ;;; Code for unreachableclass.Main [static fields]
 (global $f_$initialized__unreachableclass_Main (mut i32) (i32.const 0))
 (global $f_$class__unreachableclass_Main (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|unreachablec...|__unreachableclass_Main (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for unreachableclass.Main.1 [static fields]
 (global $f_$initialized__unreachableclass_Main_1 (mut i32) (i32.const 0))
 (global $f_$class__unreachableclass_Main_1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|unreachablec...|__unreachableclass_Main_1 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for unreachableclass.Main.1A.1B [static fields]
 (global $f_$initialized__unreachableclass_Main_1A_1B (mut i32) (i32.const 0))
 (global $f_$class__unreachableclass_Main_1A_1B (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|unreachablec...|__unreachableclass_Main_1A_1B (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for unreachableclass.Main.1A [static fields]
 (global $f_$initialized__unreachableclass_Main_1A (mut i32) (i32.const 0))
 (global $f_$class__unreachableclass_Main_1A (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|unreachablec...|__unreachableclass_Main_1A (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for unreachableclass.Main [methods]
 
@@ -305,7 +309,7 @@
  (block
   (if (ref.eq (global.get $f_$class__unreachableclass_Main) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__unreachableclass_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|unreachablec...|__java_lang_String (ref.func $$getString_|unreachablec...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__unreachableclass_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|unreachablec...|__java_lang_String (ref.func $$getString_|unreachablec...|__java_lang_String@unreachableclass.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__unreachableclass_Main))
@@ -324,6 +328,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@unreachableclass.Main)
+
+;;; String Main.$getString_|unreachablec...|()
+(func $$getString_|unreachablec...|__java_lang_String@unreachableclass.Main
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|unreachablec...|__unreachableclass_Main) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|unreachablec...|__unreachableclass_Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "unreachableclass.Main")))
+   )
+  )
+  (return (global.get $f_$string_|unreachablec...|__unreachableclass_Main))
+ )
+)
 
 ;;; Code for unreachableclass.Main.1 [methods]
 
@@ -380,7 +397,7 @@
  (block
   (if (ref.eq (global.get $f_$class__unreachableclass_Main_1) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__unreachableclass_Main_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|unreachablec...|_1__java_lang_String (ref.func $$getString_|unreachablec...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__unreachableclass_Main_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|unreachablec...|__java_lang_String (ref.func $$getString_|unreachablec...|__java_lang_String@unreachableclass.Main.1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__unreachableclass_Main_1))
@@ -399,6 +416,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@unreachableclass.Main.1)
+
+;;; String <anonymous> extends Object.$getString_|unreachablec...|()
+(func $$getString_|unreachablec...|__java_lang_String@unreachableclass.Main.1
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|unreachablec...|__unreachableclass_Main_1) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|unreachablec...|__unreachableclass_Main_1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "unreachableclass.Main$1")))
+   )
+  )
+  (return (global.get $f_$string_|unreachablec...|__unreachableclass_Main_1))
+ )
+)
 
 ;;; Code for unreachableclass.Main.1A.1B [methods]
 
@@ -463,7 +493,7 @@
  (block
   (if (ref.eq (global.get $f_$class__unreachableclass_Main_1A_1B) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__unreachableclass_Main_1A_1B (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|unreachablec...|_2__java_lang_String (ref.func $$getString_|unreachablec...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__unreachableclass_Main_1A_1B (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|unreachablec...|__java_lang_String (ref.func $$getString_|unreachablec...|__java_lang_String@unreachableclass.Main.1A.1B) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__unreachableclass_Main_1A_1B))
@@ -482,6 +512,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@unreachableclass.Main.1A.1B)
+
+;;; String B.$getString_|unreachablec...|()
+(func $$getString_|unreachablec...|__java_lang_String@unreachableclass.Main.1A.1B
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|unreachablec...|__unreachableclass_Main_1A_1B) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|unreachablec...|__unreachableclass_Main_1A_1B (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "unreachableclass.Main$1A$1B")))
+   )
+  )
+  (return (global.get $f_$string_|unreachablec...|__unreachableclass_Main_1A_1B))
+ )
+)
 
 ;;; Code for unreachableclass.Main.1A [methods]
 
@@ -550,7 +593,7 @@
  (block
   (if (ref.eq (global.get $f_$class__unreachableclass_Main_1A) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__unreachableclass_Main_1A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|unreachablec...|_3__java_lang_String (ref.func $$getString_|unreachablec...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__unreachableclass_Main_1A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|unreachablec...|__java_lang_String (ref.func $$getString_|unreachablec...|__java_lang_String@unreachableclass.Main.1A) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__unreachableclass_Main_1A))
@@ -569,3 +612,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@unreachableclass.Main.1A)
+
+;;; String A.$getString_|unreachablec...|()
+(func $$getString_|unreachablec...|__java_lang_String@unreachableclass.Main.1A
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|unreachablec...|__unreachableclass_Main_1A) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|unreachablec...|__unreachableclass_Main_1A (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "unreachableclass.Main$1A")))
+   )
+  )
+  (return (global.get $f_$string_|unreachablec...|__unreachableclass_Main_1A))
+ )
+)

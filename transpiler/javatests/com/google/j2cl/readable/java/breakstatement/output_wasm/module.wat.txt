@@ -50,6 +50,7 @@
 ;;; Code for breakstatement.BreakStatement [static fields]
 (global $f_$initialized__breakstatement_BreakStatement (mut i32) (i32.const 0))
 (global $f_$class__breakstatement_BreakStatement (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|breakstateme...|__breakstatement_BreakStatement (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for breakstatement.BreakStatement [methods]
 
@@ -128,7 +129,7 @@
  (block
   (if (ref.eq (global.get $f_$class__breakstatement_BreakStatement) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__breakstatement_BreakStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|breakstateme...|__java_lang_String (ref.func $$getString_|breakstateme...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__breakstatement_BreakStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|breakstateme...|__java_lang_String (ref.func $$getString_|breakstateme...|__java_lang_String@breakstatement.BreakStatement) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__breakstatement_BreakStatement))
@@ -147,3 +148,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@breakstatement.BreakStatement)
+
+;;; String BreakStatement.$getString_|breakstateme...|()
+(func $$getString_|breakstateme...|__java_lang_String@breakstatement.BreakStatement
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|breakstateme...|__breakstatement_BreakStatement) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|breakstateme...|__breakstatement_BreakStatement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "breakstatement.BreakStatement")))
+   )
+  )
+  (return (global.get $f_$string_|breakstateme...|__breakstatement_BreakStatement))
+ )
+)

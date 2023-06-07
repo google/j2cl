@@ -43,6 +43,7 @@
 ;;; Code for objectmap.ObjectMap.$Overlay [static fields]
 (global $f_$initialized__objectmap_ObjectMap_$Overlay (mut i32) (i32.const 0))
 (global $f_$class__objectmap_ObjectMap_$Overlay (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|objectmap.Ob...|__objectmap_ObjectMap_$Overlay (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for objectmap.ObjectMap.$Overlay [methods]
 
@@ -92,7 +93,7 @@
  (block
   (if (ref.eq (global.get $f_$class__objectmap_ObjectMap_$Overlay) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__objectmap_ObjectMap_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|objectmap.Ob...|__java_lang_String (ref.func $$getString_|objectmap.Ob...|__java_lang_String@javaemul.internal.StringPool) )(ref.null $java.lang.Class)))
+    (global.set $f_$class__objectmap_ObjectMap_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|objectmap.Ob...|__java_lang_String (ref.func $$getString_|objectmap.Ob...|__java_lang_String@objectmap.ObjectMap.$Overlay) )(ref.null $java.lang.Class)))
    )
   )
   (return (global.get $f_$class__objectmap_ObjectMap_$Overlay))
@@ -111,6 +112,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@objectmap.ObjectMap.$Overlay)
+
+;;; String $Overlay.$getString_|objectmap.Ob...|()
+(func $$getString_|objectmap.Ob...|__java_lang_String@objectmap.ObjectMap.$Overlay
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|objectmap.Ob...|__objectmap_ObjectMap_$Overlay) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|objectmap.Ob...|__objectmap_ObjectMap_$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "objectmap.ObjectMap$$Overlay")))
+   )
+  )
+  (return (global.get $f_$string_|objectmap.Ob...|__objectmap_ObjectMap_$Overlay))
+ )
+)
 
 ;;; Code for objectmap.ObjectMap [methods]
 

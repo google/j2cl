@@ -313,30 +313,37 @@
 ;;; Code for nestedlocalclasses.NestedLocalClasses [static fields]
 (global $f_$initialized__nestedlocalclasses_NestedLocalClasses (mut i32) (i32.const 0))
 (global $f_$class__nestedlocalclasses_NestedLocalClasses (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|nestedlocalc...|__nestedlocalclasses_NestedLocalClasses (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 [static fields]
 (global $f_$initialized__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1 (mut i32) (i32.const 0))
 (global $f_$class__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|nestedlocalc...|__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super [static fields]
 (global $f_$initialized__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super (mut i32) (i32.const 0))
 (global $f_$class__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|nestedlocalc...|__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference [static fields]
 (global $f_$initialized__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference (mut i32) (i32.const 0))
 (global $f_$class__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|nestedlocalc...|__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass [static fields]
 (global $f_$initialized__nestedlocalclasses_NestedLocalClasses_1InnerClass_1InnerInnerClass (mut i32) (i32.const 0))
 (global $f_$class__nestedlocalclasses_NestedLocalClasses_1InnerClass_1InnerInnerClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|nestedlocalc...|__nestedlocalclasses_NestedLocalClasses_1InnerClass_1InnerInnerClass (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal [static fields]
 (global $f_$initialized__nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal (mut i32) (i32.const 0))
 (global $f_$class__nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|nestedlocalc...|__nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for nestedlocalclasses.NestedLocalClasses.1InnerClass [static fields]
 (global $f_$initialized__nestedlocalclasses_NestedLocalClasses_1InnerClass (mut i32) (i32.const 0))
 (global $f_$class__nestedlocalclasses_NestedLocalClasses_1InnerClass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|nestedlocalc...|__nestedlocalclasses_NestedLocalClasses_1InnerClass (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference [methods]
 
@@ -373,10 +380,23 @@
  (block
   (if (ref.eq (global.get $f_$class__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nestedlocalc...|_3__java_lang_String (ref.func $$getString_|nestedlocalc...|_3__java_lang_String@javaemul.internal.StringPool) )))
+    (global.set $f_$class__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nestedlocalc...|__java_lang_String (ref.func $$getString_|nestedlocalc...|__java_lang_String@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference) )))
    )
   )
   (return (global.get $f_$class__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference))
+ )
+)
+
+;;; String InterfaceWithThisReference.$getString_|nestedlocalc...|()
+(func $$getString_|nestedlocalc...|__java_lang_String@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|nestedlocalc...|__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|nestedlocalc...|__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nestedlocalclasses.NestedLocalClasses$InterfaceWithThisReference")))
+   )
+  )
+  (return (global.get $f_$string_|nestedlocalc...|__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference))
  )
 )
 
@@ -449,7 +469,7 @@
  (block
   (if (ref.eq (global.get $f_$class__nestedlocalclasses_NestedLocalClasses) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__nestedlocalclasses_NestedLocalClasses (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nestedlocalc...|__java_lang_String (ref.func $$getString_|nestedlocalc...|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__nestedlocalclasses_NestedLocalClasses (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nestedlocalc...|__java_lang_String (ref.func $$getString_|nestedlocalc...|__java_lang_String@nestedlocalclasses.NestedLocalClasses) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__nestedlocalclasses_NestedLocalClasses))
@@ -468,6 +488,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nestedlocalclasses.NestedLocalClasses)
+
+;;; String NestedLocalClasses.$getString_|nestedlocalc...|()
+(func $$getString_|nestedlocalc...|__java_lang_String@nestedlocalclasses.NestedLocalClasses
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|nestedlocalc...|__nestedlocalclasses_NestedLocalClasses) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|nestedlocalc...|__nestedlocalclasses_NestedLocalClasses (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nestedlocalclasses.NestedLocalClasses")))
+   )
+  )
+  (return (global.get $f_$string_|nestedlocalc...|__nestedlocalclasses_NestedLocalClasses))
+ )
+)
 
 ;;; Code for nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super [methods]
 
@@ -540,7 +573,7 @@
  (block
   (if (ref.eq (global.get $f_$class__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nestedlocalc...|_2__java_lang_String (ref.func $$getString_|nestedlocalc...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nestedlocalc...|__java_lang_String (ref.func $$getString_|nestedlocalc...|__java_lang_String@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super))
@@ -559,6 +592,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super)
+
+;;; String Super.$getString_|nestedlocalc...|()
+(func $$getString_|nestedlocalc...|__java_lang_String@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|nestedlocalc...|__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|nestedlocalc...|__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nestedlocalclasses.NestedLocalClasses$InterfaceWithThisReference$1Super")))
+   )
+  )
+  (return (global.get $f_$string_|nestedlocalc...|__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super))
+ )
+)
 
 ;;; Code for nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass [methods]
 
@@ -631,7 +677,7 @@
  (block
   (if (ref.eq (global.get $f_$class__nestedlocalclasses_NestedLocalClasses_1InnerClass_1InnerInnerClass) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__nestedlocalclasses_NestedLocalClasses_1InnerClass_1InnerInnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nestedlocalc...|_4__java_lang_String (ref.func $$getString_|nestedlocalc...|_4__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__nestedlocalclasses_NestedLocalClasses_1InnerClass_1InnerInnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nestedlocalc...|__java_lang_String (ref.func $$getString_|nestedlocalc...|__java_lang_String@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__nestedlocalclasses_NestedLocalClasses_1InnerClass_1InnerInnerClass))
@@ -650,6 +696,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass)
+
+;;; String InnerInnerClass.$getString_|nestedlocalc...|()
+(func $$getString_|nestedlocalc...|__java_lang_String@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|nestedlocalc...|__nestedlocalclasses_NestedLocalClasses_1InnerClass_1InnerInnerClass) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|nestedlocalc...|__nestedlocalclasses_NestedLocalClasses_1InnerClass_1InnerInnerClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nestedlocalclasses.NestedLocalClasses$1InnerClass$1InnerInnerClass")))
+   )
+  )
+  (return (global.get $f_$string_|nestedlocalc...|__nestedlocalclasses_NestedLocalClasses_1InnerClass_1InnerInnerClass))
+ )
+)
 
 ;;; Code for nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal [methods]
 
@@ -722,7 +781,7 @@
  (block
   (if (ref.eq (global.get $f_$class__nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nestedlocalc...|_5__java_lang_String (ref.func $$getString_|nestedlocalc...|_5__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nestedlocalc...|__java_lang_String (ref.func $$getString_|nestedlocalc...|__java_lang_String@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal))
@@ -741,6 +800,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal)
+
+;;; String ClassIndirectlyCapturingLocal.$getString_|nestedlocalc...|()
+(func $$getString_|nestedlocalc...|__java_lang_String@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|nestedlocalc...|__nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|nestedlocalc...|__nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nestedlocalclasses.NestedLocalClasses$1InnerClass$1ClassIndirectlyCapturingLocal")))
+   )
+  )
+  (return (global.get $f_$string_|nestedlocalc...|__nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal))
+ )
+)
 
 ;;; Code for nestedlocalclasses.NestedLocalClasses.1InnerClass [methods]
 
@@ -816,7 +888,7 @@
  (block
   (if (ref.eq (global.get $f_$class__nestedlocalclasses_NestedLocalClasses_1InnerClass) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__nestedlocalclasses_NestedLocalClasses_1InnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nestedlocalc...|_6__java_lang_String (ref.func $$getString_|nestedlocalc...|_6__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__nestedlocalclasses_NestedLocalClasses_1InnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nestedlocalc...|__java_lang_String (ref.func $$getString_|nestedlocalc...|__java_lang_String@nestedlocalclasses.NestedLocalClasses.1InnerClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__nestedlocalclasses_NestedLocalClasses_1InnerClass))
@@ -835,6 +907,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nestedlocalclasses.NestedLocalClasses.1InnerClass)
+
+;;; String InnerClass.$getString_|nestedlocalc...|()
+(func $$getString_|nestedlocalc...|__java_lang_String@nestedlocalclasses.NestedLocalClasses.1InnerClass
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|nestedlocalc...|__nestedlocalclasses_NestedLocalClasses_1InnerClass) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|nestedlocalc...|__nestedlocalclasses_NestedLocalClasses_1InnerClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nestedlocalclasses.NestedLocalClasses$1InnerClass")))
+   )
+  )
+  (return (global.get $f_$string_|nestedlocalc...|__nestedlocalclasses_NestedLocalClasses_1InnerClass))
+ )
+)
 
 ;;; Code for nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 [methods]
 
@@ -891,7 +976,7 @@
  (block
   (if (ref.eq (global.get $f_$class__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nestedlocalc...|_1__java_lang_String (ref.func $$getString_|nestedlocalc...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super) )))
+    (global.set $f_$class__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nestedlocalc...|__java_lang_String (ref.func $$getString_|nestedlocalc...|__java_lang_String@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super) )))
    )
   )
   (return (global.get $f_$class__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1))
@@ -910,3 +995,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1)
+
+;;; String <anonymous> extends Super.$getString_|nestedlocalc...|()
+(func $$getString_|nestedlocalc...|__java_lang_String@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|nestedlocalc...|__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|nestedlocalc...|__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nestedlocalclasses.NestedLocalClasses$InterfaceWithThisReference$1")))
+   )
+  )
+  (return (global.get $f_$string_|nestedlocalc...|__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1))
+ )
+)

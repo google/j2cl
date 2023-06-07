@@ -370,34 +370,42 @@
 ;;; Code for mixednestings.MyInterface [static fields]
 (global $f_$initialized__mixednestings_MyInterface (mut i32) (i32.const 0))
 (global $f_$class__mixednestings_MyInterface (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|mixednesting...|__mixednestings_MyInterface (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for mixednestings.MixedNestings [static fields]
 (global $f_$initialized__mixednestings_MixedNestings (mut i32) (i32.const 0))
 (global $f_$class__mixednestings_MixedNestings (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|mixednesting...|__mixednestings_MixedNestings (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for mixednestings.MixedNestings.A.1B.1.1 [static fields]
 (global $f_$initialized__mixednestings_MixedNestings_A_1B_1_1 (mut i32) (i32.const 0))
 (global $f_$class__mixednestings_MixedNestings_A_1B_1_1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|mixednesting...|__mixednestings_MixedNestings_A_1B_1_1 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 [static fields]
 (global $f_$initialized__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$1 (mut i32) (i32.const 0))
 (global $f_$class__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|mixednesting...|__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$1 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 [static fields]
 (global $f_$initialized__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$2 (mut i32) (i32.const 0))
 (global $f_$class__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$2 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|mixednesting...|__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$2 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for mixednestings.MixedNestings.A.1B.1 [static fields]
 (global $f_$initialized__mixednestings_MixedNestings_A_1B_1 (mut i32) (i32.const 0))
 (global $f_$class__mixednestings_MixedNestings_A_1B_1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|mixednesting...|__mixednestings_MixedNestings_A_1B_1 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for mixednestings.MixedNestings.A.1B [static fields]
 (global $f_$initialized__mixednestings_MixedNestings_A_1B (mut i32) (i32.const 0))
 (global $f_$class__mixednestings_MixedNestings_A_1B (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|mixednesting...|__mixednestings_MixedNestings_A_1B (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for mixednestings.MixedNestings.A [static fields]
 (global $f_$initialized__mixednestings_MixedNestings_A (mut i32) (i32.const 0))
 (global $f_$class__mixednestings_MixedNestings_A (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|mixednesting...|__mixednestings_MixedNestings_A (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Code for mixednestings.MyInterface [methods]
 
@@ -423,10 +431,23 @@
  (block
   (if (ref.eq (global.get $f_$class__mixednestings_MyInterface) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__mixednestings_MyInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|mixednesting...|__java_lang_String (ref.func $$getString_|mixednesting...|__java_lang_String@javaemul.internal.StringPool) )))
+    (global.set $f_$class__mixednestings_MyInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|mixednesting...|__java_lang_String (ref.func $$getString_|mixednesting...|__java_lang_String@mixednestings.MyInterface) )))
    )
   )
   (return (global.get $f_$class__mixednestings_MyInterface))
+ )
+)
+
+;;; String MyInterface.$getString_|mixednesting...|()
+(func $$getString_|mixednesting...|__java_lang_String@mixednestings.MyInterface
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|mixednesting...|__mixednestings_MyInterface) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|mixednesting...|__mixednestings_MyInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "mixednestings.MyInterface")))
+   )
+  )
+  (return (global.get $f_$string_|mixednesting...|__mixednestings_MyInterface))
  )
 )
 
@@ -514,7 +535,7 @@
  (block
   (if (ref.eq (global.get $f_$class__mixednestings_MixedNestings) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__mixednestings_MixedNestings (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|mixednesting...|_1__java_lang_String (ref.func $$getString_|mixednesting...|_1__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__mixednestings_MixedNestings (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|mixednesting...|__java_lang_String (ref.func $$getString_|mixednesting...|__java_lang_String@mixednestings.MixedNestings) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__mixednestings_MixedNestings))
@@ -533,6 +554,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@mixednestings.MixedNestings)
+
+;;; String MixedNestings.$getString_|mixednesting...|()
+(func $$getString_|mixednesting...|__java_lang_String@mixednestings.MixedNestings
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|mixednesting...|__mixednestings_MixedNestings) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|mixednesting...|__mixednestings_MixedNestings (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "mixednestings.MixedNestings")))
+   )
+  )
+  (return (global.get $f_$string_|mixednesting...|__mixednestings_MixedNestings))
+ )
+)
 
 ;;; Code for mixednestings.MixedNestings.A.1B.1.1 [methods]
 
@@ -605,7 +639,7 @@
  (block
   (if (ref.eq (global.get $f_$class__mixednestings_MixedNestings_A_1B_1_1) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__mixednestings_MixedNestings_A_1B_1_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|mixednesting...|_2__java_lang_String (ref.func $$getString_|mixednesting...|_2__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__mixednestings_MixedNestings_A_1B_1_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|mixednesting...|__java_lang_String (ref.func $$getString_|mixednesting...|__java_lang_String@mixednestings.MixedNestings.A.1B.1.1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__mixednestings_MixedNestings_A_1B_1_1))
@@ -624,6 +658,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@mixednestings.MixedNestings.A.1B.1.1)
+
+;;; String <anonymous> implements MyInterface.$getString_|mixednesting...|()
+(func $$getString_|mixednesting...|__java_lang_String@mixednestings.MixedNestings.A.1B.1.1
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|mixednesting...|__mixednestings_MixedNestings_A_1B_1_1) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|mixednesting...|__mixednestings_MixedNestings_A_1B_1_1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "mixednestings.MixedNestings$A$1B$1$1")))
+   )
+  )
+  (return (global.get $f_$string_|mixednesting...|__mixednestings_MixedNestings_A_1B_1_1))
+ )
+)
 
 ;;; Code for mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 [methods]
 
@@ -706,7 +753,7 @@
  (block
   (if (ref.eq (global.get $f_$class__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$1) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|mixednesting...|_3__java_lang_String (ref.func $$getString_|mixednesting...|_3__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|mixednesting...|__java_lang_String (ref.func $$getString_|mixednesting...|__java_lang_String@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$1))
@@ -725,6 +772,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1)
+
+;;; String <anonymous> implements MyInterface.$getString_|mixednesting...|()
+(func $$getString_|mixednesting...|__java_lang_String@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|mixednesting...|__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$1) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|mixednesting...|__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "mixednestings.MixedNestings$A$1B$1$$LambdaImplementor$1")))
+   )
+  )
+  (return (global.get $f_$string_|mixednesting...|__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$1))
+ )
+)
 
 ;;; Code for mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 [methods]
 
@@ -806,7 +866,7 @@
  (block
   (if (ref.eq (global.get $f_$class__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$2) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|mixednesting...|_4__java_lang_String (ref.func $$getString_|mixednesting...|_4__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|mixednesting...|__java_lang_String (ref.func $$getString_|mixednesting...|__java_lang_String@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$2))
@@ -825,6 +885,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2)
+
+;;; String <anonymous> implements MyInterface.$getString_|mixednesting...|()
+(func $$getString_|mixednesting...|__java_lang_String@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|mixednesting...|__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$2) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|mixednesting...|__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "mixednestings.MixedNestings$A$1B$1$$LambdaImplementor$2")))
+   )
+  )
+  (return (global.get $f_$string_|mixednesting...|__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$2))
+ )
+)
 
 ;;; Code for mixednestings.MixedNestings.A.1B.1 [methods]
 
@@ -900,7 +973,7 @@
  (block
   (if (ref.eq (global.get $f_$class__mixednestings_MixedNestings_A_1B_1) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__mixednestings_MixedNestings_A_1B_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|mixednesting...|_5__java_lang_String (ref.func $$getString_|mixednesting...|_5__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__mixednestings_MixedNestings_A_1B_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|mixednesting...|__java_lang_String (ref.func $$getString_|mixednesting...|__java_lang_String@mixednestings.MixedNestings.A.1B.1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__mixednestings_MixedNestings_A_1B_1))
@@ -919,6 +992,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@mixednestings.MixedNestings.A.1B.1)
+
+;;; String <anonymous> implements MyInterface.$getString_|mixednesting...|()
+(func $$getString_|mixednesting...|__java_lang_String@mixednestings.MixedNestings.A.1B.1
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|mixednesting...|__mixednestings_MixedNestings_A_1B_1) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|mixednesting...|__mixednestings_MixedNestings_A_1B_1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "mixednestings.MixedNestings$A$1B$1")))
+   )
+  )
+  (return (global.get $f_$string_|mixednesting...|__mixednestings_MixedNestings_A_1B_1))
+ )
+)
 
 ;;; Code for mixednestings.MixedNestings.A.1B [methods]
 
@@ -1005,7 +1091,7 @@
  (block
   (if (ref.eq (global.get $f_$class__mixednestings_MixedNestings_A_1B) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__mixednestings_MixedNestings_A_1B (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|mixednesting...|_6__java_lang_String (ref.func $$getString_|mixednesting...|_6__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__mixednestings_MixedNestings_A_1B (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|mixednesting...|__java_lang_String (ref.func $$getString_|mixednesting...|__java_lang_String@mixednestings.MixedNestings.A.1B) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__mixednestings_MixedNestings_A_1B))
@@ -1024,6 +1110,19 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@mixednestings.MixedNestings.A.1B)
+
+;;; String B.$getString_|mixednesting...|()
+(func $$getString_|mixednesting...|__java_lang_String@mixednestings.MixedNestings.A.1B
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|mixednesting...|__mixednestings_MixedNestings_A_1B) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|mixednesting...|__mixednestings_MixedNestings_A_1B (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "mixednestings.MixedNestings$A$1B")))
+   )
+  )
+  (return (global.get $f_$string_|mixednesting...|__mixednestings_MixedNestings_A_1B))
+ )
+)
 
 ;;; Code for mixednestings.MixedNestings.A [methods]
 
@@ -1111,7 +1210,7 @@
  (block
   (if (ref.eq (global.get $f_$class__mixednestings_MixedNestings_A) (ref.null $java.lang.Class))
    (then
-    (global.set $f_$class__mixednestings_MixedNestings_A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|mixednesting...|_7__java_lang_String (ref.func $$getString_|mixednesting...|_7__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $f_$class__mixednestings_MixedNestings_A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|mixednesting...|__java_lang_String (ref.func $$getString_|mixednesting...|__java_lang_String@mixednestings.MixedNestings.A) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
   (return (global.get $f_$class__mixednestings_MixedNestings_A))
@@ -1130,3 +1229,16 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@mixednestings.MixedNestings.A)
+
+;;; String A.$getString_|mixednesting...|()
+(func $$getString_|mixednesting...|__java_lang_String@mixednestings.MixedNestings.A
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|mixednesting...|__mixednestings_MixedNestings_A) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|mixednesting...|__mixednestings_MixedNestings_A (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "mixednestings.MixedNestings$A")))
+   )
+  )
+  (return (global.get $f_$string_|mixednesting...|__mixednestings_MixedNestings_A))
+ )
+)
