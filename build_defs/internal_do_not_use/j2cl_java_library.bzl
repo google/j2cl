@@ -32,17 +32,11 @@ def _impl_j2cl_library(ctx):
     )
 
     output_js = j2cl_provider._private_.output_js
-    output_js_array = [output_js] if output_js else []
+    output = [output_js, ctx.outputs.jar] if output_js else [ctx.outputs.jar]
 
     return j2cl_common.create_js_lib_struct(
         j2cl_info = j2cl_provider,
-        extra_providers = [
-            DefaultInfo(
-                files = depset(output_js_array + [ctx.outputs.jar]),
-                # TODO(goktug): Remove after b/35847804 is fixed.
-                runfiles = _collect_runfiles(ctx, output_js_array, ctx.attr.deps + ctx.attr.exports),
-            ),
-        ],
+        extra_providers = [DefaultInfo(files = depset(output))],
     )
 
 def _j2cl_or_js_providers_of(deps):
@@ -51,19 +45,9 @@ def _j2cl_or_js_providers_of(deps):
 def _j2cl_or_js_provider_of(dep):
     return dep[J2clInfo] if J2clInfo in dep else dep
 
-def _java_providers_of(deps):
-    return [d[JavaInfo] for d in deps]
-
 def _javaplugin_providers_of(deps):
     plugin_provider = getattr(java_common, "JavaPluginInfo") if hasattr(java_common, "JavaPluginInfo") else JavaInfo
     return [d[plugin_provider] for d in deps]
-
-def _collect_runfiles(ctx, files, deps):
-    transitive_runfiles = [d[DefaultInfo].default_runfiles.files for d in deps]
-    return ctx.runfiles(
-        files = files,
-        transitive_files = depset(transitive = transitive_runfiles),
-    )
 
 _J2CL_INTERNAL_LIB_ATTRS = {
     "readable_source_maps": attr.bool(default = False),
