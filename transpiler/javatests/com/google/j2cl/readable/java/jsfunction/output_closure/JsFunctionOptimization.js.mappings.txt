@@ -18,9 +18,8 @@
 [Consumer c =
         new Consumer() {
 ...          public <T> void accept(T t) {}
-        };] => [let c = (/** T */ t) =>{};] "jsfunction.JsFunctionOptimization.testParameterizedMethod"
+        };] => [let c = $2.$create__jsfunction_JsFunctionOptimization(this);] "jsfunction.JsFunctionOptimization.testParameterizedMethod"
 [c] => [c] "c"
-[t] => [t] "t"
 [JsFunctionOptimization] => [$clinit]
 [JsFunctionOptimization] => [JsFunctionOptimization.$clinit = () =>{};] "jsfunction.JsFunctionOptimization.<clinit>"
 [JsFunctionOptimization] => [JsFunctionOptimization.$loadModules();] "jsfunction.JsFunctionOptimization.<clinit>"

@@ -123,8 +123,15 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
     if (!type.getFields().isEmpty()) {
       return false;
     }
-    if (getSingleDeclaredMethod(type) == null) {
+    Method lambdaMethod = getSingleDeclaredMethod(type);
+    if (lambdaMethod == null) {
       // Can only override a single method.
+      return false;
+    }
+
+    if (!lambdaMethod.getDescriptor().getTypeParameterTypeDescriptors().isEmpty()) {
+      // Type parameters in the lambda method are not expressible in Closure, avoid
+      // optimizing this uncommon case.
       return false;
     }
 
