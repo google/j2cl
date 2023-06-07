@@ -4,7 +4,7 @@ const Super = goog.require('lambdas.Lambdas.Super$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Lambdas = goog.forwardDeclare('lambdas.Lambdas$impl');
-let $1 = goog.forwardDeclare('lambdas.Lambdas.Sub.$1$impl');
+let Runnable = goog.forwardDeclare('lambdas.Lambdas.Runnable$impl');
 
 class Sub extends Super {
  /** @protected @nodts */
@@ -27,7 +27,9 @@ class Sub extends Super {
  }
  /** @nodts */
  m_n__void_$pp_lambdas() {
-  let r = $1.$create__lambdas_Lambdas_Sub(this);
+  let r = Runnable.$adapt(() =>{
+   Super.prototype.m_m__void_$pp_lambdas.call(this);
+  });
  }
  /** @nodts */
  static $clinit() {
@@ -42,7 +44,7 @@ class Sub extends Super {
  
  /** @nodts */
  static $loadModules() {
-  $1 = goog.module.get('lambdas.Lambdas.Sub.$1$impl');
+  Runnable = goog.module.get('lambdas.Lambdas.Runnable$impl');
  }
 }
 $Util.$setClassMetadata(Sub, 'lambdas.Lambdas$Sub');

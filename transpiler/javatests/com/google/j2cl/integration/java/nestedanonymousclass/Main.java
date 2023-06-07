@@ -37,12 +37,10 @@ public class Main {
                   public void foo() {}
                 };
             assertTrue(intf2 instanceof AnonymousInterface);
-            assertTrue(intf2.getClass().getName().equals("nestedanonymousclass.Main$1$1"));
           }
         };
 
     assertTrue(intf1 instanceof AnonymousInterface);
-    assertTrue(intf1.getClass().getName().equals("nestedanonymousclass.Main$1"));
     intf1.foo();
 
     InterfaceWithThisReference o = new InterfaceWithThisReference() {};

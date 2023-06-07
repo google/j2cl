@@ -66,9 +66,7 @@ public class Main {
           @JsAsync
           @Override
           public IThenable<Integer> doSomething() {
-            // TODO(b/70149347): Fix OptimizeAnonymousInnerClassesToFunctionExpressions to propagate
-            // the async modifier to optimized anonymous inner classes.
-            return Promise.resolve(5);
+            return Promise.resolve(await(x));
           }
         };
 

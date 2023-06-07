@@ -247,6 +247,7 @@ public class ConvertMethodReferencesToLambdas extends NormalizationPass {
             functionalMethodDescriptor.getReturnTypeDescriptor());
     return FunctionExpression.newBuilder()
         .setTypeDescriptor(expressionTypeDescriptor)
+        .setJsAsync(targetMethodDescriptor.isJsAsync() || functionalMethodDescriptor.isJsAsync())
         .setParameters(parameters)
         .setStatements(forwardingStatement)
         .setSourcePosition(sourcePosition)

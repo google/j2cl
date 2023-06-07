@@ -15,8 +15,11 @@
 [Runnable r =
           new Runnable() {
 ...            }
-          };] => [let r = $1.$create__lambdas_Lambdas_Sub(this);] "lambdas.Lambdas$Sub.n"
+          };] => [let r = Runnable.$adapt(() =>{
+   Super.prototype.m_m__void_$pp_lambdas.call(this);
+  });] "lambdas.Lambdas$Sub.n"
 [r] => [r] "r"
+[Sub.super.m();] => [Super.prototype.m_m__void_$pp_lambdas.call(this);] "lambdas.Lambdas$Sub$1.run"
 [Sub] => [$clinit]
 [Sub] => [Sub.$clinit = () =>{};] "lambdas.Lambdas$Sub.<clinit>"
 [Sub] => [Sub.$loadModules();] "lambdas.Lambdas$Sub.<clinit>"
