@@ -31,6 +31,7 @@ def integration_test(
         srcs,
         deps = [],
         defs = [],
+        enable_nullability = False,
         main_class = None,
         closure_defines = dict(),
         suppress = [],
@@ -80,6 +81,7 @@ def integration_test(
         deps = deps,
         tags = tags,
         js_suppress = suppress,
+        enable_nullability = enable_nullability,
     )
 
     # blaze test :uncompiled_test
@@ -113,7 +115,7 @@ def integration_test(
         entry_points = ["gen.test.Harness"],
     )
 
-def integration_library(name, srcs = [], deps = [], exports = [], **kwargs):
+def integration_library(name, srcs = [], deps = [], exports = [], enable_nullability = False, **kwargs):
     default_deps = [
         "//jre/java:javaemul_internal_annotations",
         "//third_party:gwt-jsinterop-annotations",
@@ -131,6 +133,7 @@ def integration_library(name, srcs = [], deps = [], exports = [], **kwargs):
         exports = [to_parallel_target(e, _to_j2cl_name) for e in exports],
         javacopts = JAVAC_FLAGS,
         generate_build_test = False,
+        experimental_enable_jspecify_support_do_not_enable_without_jspecify_static_checking_or_you_might_cause_an_outage = enable_nullability,
         **kwargs
     )
 
