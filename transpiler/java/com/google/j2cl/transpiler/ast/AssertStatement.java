@@ -49,7 +49,7 @@ public class AssertStatement extends Statement {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_AssertStatement.visit(processor, this);
   }
 

@@ -42,7 +42,7 @@ public class LabelReference extends Node implements Cloneable<LabelReference>, R
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_LabelReference.visit(processor, this);
   }
 }

@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.ast;
 
+import static com.google.common.base.Preconditions.checkState;
+
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 
@@ -23,7 +25,17 @@ import com.google.j2cl.common.visitor.Visitable;
  */
 @Visitable
 public abstract class Node {
-  public Node accept(Processor processor) {
+
+  public final void accept(Processor processor) {
+    var processedNode = acceptInternal(processor);
+    checkState(processedNode == this);
+  }
+
+  public final Node rewrite(Processor processor) {
+    return acceptInternal(processor);
+  }
+
+  Node acceptInternal(Processor processor) {
     return Visitor_Node.visit(processor, this);
   }
 

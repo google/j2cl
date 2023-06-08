@@ -53,7 +53,7 @@ public class DoWhileStatement extends LoopStatement {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_DoWhileStatement.visit(processor, this);
   }
 

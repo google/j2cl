@@ -168,7 +168,7 @@ public class Method extends Member implements MethodLike {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_Method.visit(processor, this);
   }
 

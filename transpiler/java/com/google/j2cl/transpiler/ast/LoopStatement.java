@@ -32,7 +32,7 @@ public abstract class LoopStatement extends Statement {
   public abstract Statement getBody();
 
   @Override
-  public abstract Node accept(Processor processor);
+  abstract Node acceptInternal(Processor processor);
 
   abstract LoopStatement.Builder<?, ?> toBuilder();
 

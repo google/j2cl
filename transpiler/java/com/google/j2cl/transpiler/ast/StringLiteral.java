@@ -46,7 +46,7 @@ public class StringLiteral extends Literal {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_StringLiteral.visit(processor, this);
   }
 

@@ -63,7 +63,7 @@ public class PostfixExpression extends UnaryExpression {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_PostfixExpression.visit(processor, this);
   }
 

@@ -136,7 +136,7 @@ public class NormalizeForStatements extends NormalizationPass {
   private static Statement rewriteContinueStatementsToBreakStatements(
       Statement statement, Label continueLabel, Label breakLabel) {
     return (Statement)
-        statement.accept(
+        statement.rewrite(
             new AbstractRewriter() {
               @Override
               public Node rewriteContinueStatement(ContinueStatement continueStatement) {

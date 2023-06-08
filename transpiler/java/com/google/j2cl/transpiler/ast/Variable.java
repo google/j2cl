@@ -73,7 +73,7 @@ public class Variable extends NameDeclaration
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_Variable.visit(processor, this);
   }
 

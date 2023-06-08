@@ -70,7 +70,7 @@ public class InstanceOfExpression extends Expression implements HasSourcePositio
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_InstanceOfExpression.visit(processor, this);
   }
 

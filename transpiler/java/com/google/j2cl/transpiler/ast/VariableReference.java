@@ -72,7 +72,7 @@ public class VariableReference extends Expression implements Reference<Variable>
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_VariableReference.visit(processor, this);
   }
 }

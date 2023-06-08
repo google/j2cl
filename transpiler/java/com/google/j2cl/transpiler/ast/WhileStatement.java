@@ -51,7 +51,7 @@ public class WhileStatement extends LoopStatement {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_WhileStatement.visit(processor, this);
   }
 

@@ -557,7 +557,7 @@ public final class AstUtils {
     }
 
     return (T)
-        node.accept(
+        node.acceptInternal(
             new AbstractRewriter() {
               @Override
               public NameDeclaration rewriteNameDeclaration(NameDeclaration nameDeclaration) {

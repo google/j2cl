@@ -46,7 +46,7 @@ public class ReturnStatement extends Statement {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_ReturnStatement.visit(processor, this);
   }
 

@@ -92,7 +92,7 @@ public class NewArray extends Expression {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_NewArray.visit(processor, this);
   }
 

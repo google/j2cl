@@ -70,7 +70,7 @@ public class NewInstance extends Invocation {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_NewInstance.visit(processor, this);
   }
 

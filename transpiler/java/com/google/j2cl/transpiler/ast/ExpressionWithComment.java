@@ -62,7 +62,7 @@ public class ExpressionWithComment extends Expression {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_ExpressionWithComment.visit(processor, this);
   }
 

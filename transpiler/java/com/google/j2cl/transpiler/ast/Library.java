@@ -49,7 +49,7 @@ public class Library extends Node {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_Library.visit(processor, this);
   }
 

@@ -62,7 +62,7 @@ public class ArrayLength extends Expression {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_ArrayLength.visit(processor, this);
   }
 

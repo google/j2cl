@@ -28,7 +28,7 @@ public class Label extends NameDeclaration implements Cloneable<Label> {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_Label.visit(processor, this);
   }
 

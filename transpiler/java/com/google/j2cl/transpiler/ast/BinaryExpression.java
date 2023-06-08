@@ -135,7 +135,7 @@ public class BinaryExpression extends Expression {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_BinaryExpression.visit(processor, this);
   }
 

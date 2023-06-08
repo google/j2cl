@@ -85,7 +85,7 @@ public class MethodCall extends Invocation {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_MethodCall.visit(processor, this);
   }
 

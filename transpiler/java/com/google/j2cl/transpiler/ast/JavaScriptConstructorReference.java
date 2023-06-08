@@ -61,7 +61,7 @@ public class JavaScriptConstructorReference extends Expression {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_JavaScriptConstructorReference.visit(processor, this);
   }
 }

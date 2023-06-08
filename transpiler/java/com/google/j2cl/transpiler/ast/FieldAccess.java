@@ -88,7 +88,7 @@ public class FieldAccess extends MemberReference {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_FieldAccess.visit(processor, this);
   }
 

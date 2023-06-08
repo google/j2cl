@@ -56,7 +56,7 @@ public abstract class Statement extends Node implements HasSourcePosition, Clone
   public abstract Statement clone();
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_Statement.visit(processor, this);
   }
 

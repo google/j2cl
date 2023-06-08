@@ -117,7 +117,7 @@ public class Field extends Member {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_Field.visit(processor, this);
   }
 

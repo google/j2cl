@@ -54,7 +54,7 @@ public class LabeledStatement extends Statement {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_LabeledStatement.visit(processor, this);
   }
 

@@ -59,7 +59,7 @@ public class TypeLiteral extends Literal implements HasSourcePosition {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_TypeLiteral.visit(processor, this);
   }
 }

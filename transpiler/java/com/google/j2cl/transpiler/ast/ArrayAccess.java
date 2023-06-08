@@ -77,7 +77,7 @@ public class ArrayAccess extends Expression {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_ArrayAccess.visit(processor, this);
   }
 

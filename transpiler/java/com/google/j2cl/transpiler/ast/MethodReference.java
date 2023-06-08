@@ -85,8 +85,7 @@ public class MethodReference extends Expression {
   }
 
   @Override
-  @CanIgnoreReturnValue
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_MethodReference.visit(processor, this);
   }
 

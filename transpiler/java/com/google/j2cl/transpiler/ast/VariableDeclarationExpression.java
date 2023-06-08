@@ -61,7 +61,7 @@ public class VariableDeclarationExpression extends Expression {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_VariableDeclarationExpression.visit(processor, this);
   }
   public static Builder newBuilder() {

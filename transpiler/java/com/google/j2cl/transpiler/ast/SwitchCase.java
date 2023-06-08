@@ -59,7 +59,7 @@ public class SwitchCase extends Node implements Cloneable<SwitchCase> {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_SwitchCase.visit(processor, this);
   }
 

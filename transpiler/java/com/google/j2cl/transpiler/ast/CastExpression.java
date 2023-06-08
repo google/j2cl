@@ -55,7 +55,7 @@ public class CastExpression extends Expression {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_CastExpression.visit(processor, this);
   }
 

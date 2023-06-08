@@ -44,7 +44,7 @@ public class CatchClause extends Node implements Cloneable<CatchClause> {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_CatchClause.visit(processor, this);
   }
 

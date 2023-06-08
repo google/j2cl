@@ -18,7 +18,6 @@ package com.google.j2cl.transpiler.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.common.collect.Iterables;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
@@ -151,9 +150,8 @@ public class FunctionExpression extends Expression implements MethodLike {
         .build();
   }
 
-  @CanIgnoreReturnValue
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_FunctionExpression.visit(processor, this);
   }
 

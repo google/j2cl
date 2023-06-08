@@ -51,7 +51,7 @@ public class Block extends Statement {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_Block.visit(processor, this);
   }
 

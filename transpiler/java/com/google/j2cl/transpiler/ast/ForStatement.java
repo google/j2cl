@@ -78,7 +78,7 @@ public class ForStatement extends LoopStatement {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_ForStatement.visit(processor, this);
   }
 

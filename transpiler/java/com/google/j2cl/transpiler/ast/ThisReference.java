@@ -36,7 +36,7 @@ public class ThisReference extends ThisOrSuperReference {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_ThisReference.visit(processor, this);
   }
 }

@@ -41,7 +41,7 @@ public class BreakStatement extends Statement {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_BreakStatement.visit(processor, this);
   }
 

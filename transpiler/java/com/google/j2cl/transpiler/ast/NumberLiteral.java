@@ -91,7 +91,7 @@ public class NumberLiteral extends Literal {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_NumberLiteral.visit(processor, this);
   }
 }

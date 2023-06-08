@@ -64,7 +64,7 @@ public class SwitchStatement extends Statement {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_SwitchStatement.visit(processor, this);
   }
 

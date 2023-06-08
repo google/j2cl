@@ -48,7 +48,7 @@ public class ExpressionStatement extends Statement {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_ExpressionStatement.visit(processor, this);
   }
 }

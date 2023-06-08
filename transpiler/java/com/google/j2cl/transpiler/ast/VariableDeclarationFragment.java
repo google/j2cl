@@ -51,7 +51,7 @@ public class VariableDeclarationFragment extends Node
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_VariableDeclarationFragment.visit(processor, this);
   }
 

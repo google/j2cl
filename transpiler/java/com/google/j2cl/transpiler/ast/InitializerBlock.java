@@ -50,8 +50,9 @@ public class InitializerBlock extends Member {
   public MethodDescriptor getDescriptor() {
     return methodDescriptor;
   }
+
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_InitializerBlock.visit(processor, this);
   }
 

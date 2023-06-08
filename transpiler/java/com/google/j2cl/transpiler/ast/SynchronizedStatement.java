@@ -49,7 +49,7 @@ public class SynchronizedStatement extends Statement {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_SynchronizedStatement.visit(processor, this);
   }
 

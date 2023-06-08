@@ -278,7 +278,7 @@ public class NormalizeInstantiationThroughFactoryMethods extends LibraryNormaliz
       boolean[] invalidated = {false};
       Expression result =
           (Expression)
-              value.accept(
+              value.rewrite(
                   new AbstractRewriter() {
                     @Override
                     public Expression rewriteVariableReference(
@@ -766,7 +766,7 @@ public class NormalizeInstantiationThroughFactoryMethods extends LibraryNormaliz
 
   /** Rewrite NewInstance to be a MethodCall to the $create factory method. */
   private static Node doReplaceNewInstancesWithFactoryMethodCalls(Node node) {
-    return node.accept(
+    return node.rewrite(
         new AbstractRewriter() {
           @Override
           public Expression rewriteNewInstance(NewInstance constructorInvocation) {

@@ -66,12 +66,12 @@ public class Visitor_${className} {
 #if(${field.isList()})
       ListVisitor.visit(
           ${visitableClass.ParameterName}.${field.Name},
-          n -> (${field.ComponentTypeName}) n.accept(processorImpl));
+          n -> (${field.ComponentTypeName}) n.acceptInternal(processorImpl));
 #elseif (${field.isNullable()})
-      ${visitableClass.ParameterName}.${field.Name} = (${field.TypeName}) ${visitableClass.ParameterName}.${field.Name}.accept(processorImpl);
+      ${visitableClass.ParameterName}.${field.Name} = (${field.TypeName}) ${visitableClass.ParameterName}.${field.Name}.acceptInternal(processorImpl);
 #else
       ${visitableClass.ParameterName}.${field.Name} = (${field.TypeName}) Preconditions.checkNotNull(
-      ${visitableClass.ParameterName}.${field.Name}.accept(processorImpl),
+      ${visitableClass.ParameterName}.${field.Name}.acceptInternal(processorImpl),
           "Field \"${field.Name}\" in class \"${className}\" cannot be null");
 #end
 #if(${field.isNullable()})

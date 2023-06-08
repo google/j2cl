@@ -56,7 +56,7 @@ public class AwaitExpression extends Expression {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_AwaitExpression.visit(processor, this);
   }
 

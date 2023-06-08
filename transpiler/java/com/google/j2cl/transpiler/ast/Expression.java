@@ -326,7 +326,7 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
   public abstract Expression clone();
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_Expression.visit(processor, this);
   }
 }

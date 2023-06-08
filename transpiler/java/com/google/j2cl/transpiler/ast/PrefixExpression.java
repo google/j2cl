@@ -45,7 +45,7 @@ public class PrefixExpression extends UnaryExpression {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_PrefixExpression.visit(processor, this);
   }
 

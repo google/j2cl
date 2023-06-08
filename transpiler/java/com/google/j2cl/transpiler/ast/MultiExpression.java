@@ -85,7 +85,7 @@ public class MultiExpression extends Expression {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_MultiExpression.visit(processor, this);
   }
 

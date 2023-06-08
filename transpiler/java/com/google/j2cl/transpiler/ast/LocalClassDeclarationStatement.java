@@ -43,7 +43,7 @@ public class LocalClassDeclarationStatement extends Statement {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_LocalClassDeclarationStatement.visit(processor, this);
   }
 }

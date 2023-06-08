@@ -97,7 +97,7 @@ public abstract class Member extends Node
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_Member.visit(processor, this);
   }
 }

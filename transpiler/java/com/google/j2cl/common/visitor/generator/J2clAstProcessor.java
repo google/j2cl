@@ -316,7 +316,7 @@ public class J2clAstProcessor extends AbstractProcessor {
       abortWithError(
           typeElement.getQualifiedName()
               + " does not implement \""
-              + " accept(Processor processor)\"",
+              + " acceptInternal(Processor processor)\"",
           typeElement);
     }
     VisitableClass visitableClass = new VisitableClass();
@@ -364,7 +364,7 @@ public class J2clAstProcessor extends AbstractProcessor {
     return ElementFilter.methodsIn(typeElement.getEnclosedElements()).stream()
         .anyMatch(
             executableElement ->
-                executableElement.getSimpleName().contentEquals("accept")
+                executableElement.getSimpleName().contentEquals("acceptInternal")
                     && executableElement.getParameters().size() == 1
                     && processingEnv
                         .getTypeUtils()

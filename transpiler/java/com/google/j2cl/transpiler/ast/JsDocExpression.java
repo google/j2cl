@@ -49,7 +49,7 @@ public class JsDocExpression extends Expression {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_JsDocExpression.visit(processor, this);
   }
 

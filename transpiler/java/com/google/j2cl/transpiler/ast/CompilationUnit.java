@@ -132,7 +132,7 @@ public class CompilationUnit extends Node {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_CompilationUnit.visit(processor, this);
   }
 }

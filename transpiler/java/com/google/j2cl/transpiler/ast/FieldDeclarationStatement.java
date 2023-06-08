@@ -70,7 +70,7 @@ public class FieldDeclarationStatement extends Statement {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_FieldDeclarationStatement.visit(processor, this);
   }
 

@@ -72,8 +72,7 @@ public class ArrayCreationReference extends Expression {
   }
 
   @Override
-  @CanIgnoreReturnValue
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_ArrayCreationReference.visit(processor, this);
   }
 

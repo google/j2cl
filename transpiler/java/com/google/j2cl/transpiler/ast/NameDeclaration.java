@@ -37,7 +37,7 @@ public abstract class NameDeclaration extends Node implements HasName {
   public abstract Reference<? extends NameDeclaration> createReference();
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_NameDeclaration.visit(processor, this);
   }
 }

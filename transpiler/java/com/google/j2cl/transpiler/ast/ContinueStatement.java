@@ -41,7 +41,7 @@ public class ContinueStatement extends Statement {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_ContinueStatement.visit(processor, this);
   }
 

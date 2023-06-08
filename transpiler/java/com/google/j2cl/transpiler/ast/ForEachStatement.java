@@ -70,7 +70,7 @@ public class ForEachStatement extends Statement {
   }
 
   @Override
-  public Node accept(Processor processor) {
+  Node acceptInternal(Processor processor) {
     return Visitor_ForEachStatement.visit(processor, this);
   }
 
