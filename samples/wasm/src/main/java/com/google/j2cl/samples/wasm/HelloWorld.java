@@ -18,7 +18,7 @@ package com.google.j2cl.samples.wasm;
 
 /** A simple hello world example. */
 public class HelloWorld {
-  public static String.NativeString getHelloWorld() {
-    return "Hello from Java!".toJsString();
+  public static String getHelloWorld() {
+    return "Hello from Java!";
   }
 }
