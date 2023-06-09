@@ -186,10 +186,7 @@ private val String.objCMethodParameterNames: List<String>
 private const val objCTypeNamePrefix: String = "J2kt"
 
 internal val TypeDeclaration.objCName: String
-  get() = objCNameWithoutPrefix.letIf(needsPrefix) { objCTypeNamePrefix + it }
-
-internal val TypeDeclaration.needsPrefix: Boolean
-  get() = packageName?.run { startsWith("java.") || startsWith("javax.") } ?: false
+  get() = objCTypeNamePrefix + objCNameWithoutPrefix
 
 internal val TypeDeclaration.objCNameWithoutPrefix: String
   get() = mappedObjCName ?: nonMappedObjCName

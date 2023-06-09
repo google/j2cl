@@ -4,20 +4,25 @@
 
 #import "third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h"
 
-@class NativekttypesNativektKCompanionObjectCompanion;
+@class J2ktNativekttypesNativektKCompanionObject;
+@class J2ktNativekttypesNativektKCompanionObjectCompanion;
 
 NS_ASSUME_NONNULL_BEGIN
 
+@compatibility_alias NativekttypesNativektKCompanionObject J2ktNativekttypesNativektKCompanionObject;
+
+@compatibility_alias NativekttypesNativektKCompanionObjectCompanion J2ktNativekttypesNativektKCompanionObjectCompanion;
+
 NS_INLINE jint NativekttypesNativektKCompanionObject_get_staticField(void) {
- return NativekttypesNativektKCompanionObjectCompanion.shared.staticField_;
+ return J2ktNativekttypesNativektKCompanionObjectCompanion.shared.staticField_;
 }
 
 NS_INLINE void NativekttypesNativektKCompanionObject_set_staticField(jint value) {
- NativekttypesNativektKCompanionObjectCompanion.shared.staticField_ = value;
+ J2ktNativekttypesNativektKCompanionObjectCompanion.shared.staticField_ = value;
 }
 
 NS_INLINE void NativekttypesNativektKCompanionObject_staticMethod(void) {
- [NativekttypesNativektKCompanionObjectCompanion.shared staticMethod];
+ [J2ktNativekttypesNativektKCompanionObjectCompanion.shared staticMethod];
 }
 
 NS_ASSUME_NONNULL_END

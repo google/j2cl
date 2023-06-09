@@ -33,7 +33,7 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
-@ObjCName("InnerclassinitorderInnerClassInitOrder", exact = true)
+@ObjCName("J2ktInnerclassinitorderInnerClassInitOrder", exact = true)
 open class InnerClassInitOrder {
  @JvmField
  @ObjCName("number_")
@@ -174,7 +174,7 @@ open class InnerClassInitOrder {
   assert(2 == x!!.getValue())
  }
 
- @ObjCName("InnerclassinitorderInnerClassInitOrderCompanion", exact = true)
+ @ObjCName("J2ktInnerclassinitorderInnerClassInitOrderCompanion", exact = true)
  companion object {
   @JvmStatic
   @ObjCName("main")
@@ -329,7 +329,7 @@ open class InnerClassInitOrder {
   constructor(value: Int, outer: InnerClassInitOrder.ESWGOuter<String?>?): super(value)
  }
 
- @ObjCName("InnerclassinitorderInnerClassInitOrder_Outer", exact = true)
+ @ObjCName("J2ktInnerclassinitorderInnerClassInitOrder_Outer", exact = true)
  open class Outer {
   @JvmField
   @ObjCName("value_")
@@ -346,7 +346,7 @@ open class InnerClassInitOrder {
    return 1
   }
 
-  @ObjCName("InnerclassinitorderInnerClassInitOrder_Outer_OuterIsNotSuper", exact = true)
+  @ObjCName("J2ktInnerclassinitorderInnerClassInitOrder_Outer_OuterIsNotSuper", exact = true)
   open inner class OuterIsNotSuper {
    @ObjCName("getValue")
    open fun getValue(): Int {
@@ -354,7 +354,7 @@ open class InnerClassInitOrder {
    }
   }
 
-  @ObjCName("InnerclassinitorderInnerClassInitOrder_Outer_OuterIsSuper", exact = true)
+  @ObjCName("J2ktInnerclassinitorderInnerClassInitOrder_Outer_OuterIsSuper", exact = true)
   open inner class OuterIsSuper(
    @ObjCName("Int") i: Int
   ): InnerClassInitOrder.Outer(i) {
@@ -382,12 +382,12 @@ open class InnerClassInitOrder {
    }
   }
 
-  @ObjCName("InnerclassinitorderInnerClassInitOrder_Outer_TestQualifiedSuperCall", exact = true)
+  @ObjCName("J2ktInnerclassinitorderInnerClassInitOrder_Outer_TestQualifiedSuperCall", exact = true)
   open class TestQualifiedSuperCall: InnerClassInitOrder.Outer.OuterIsNotSuper {
    constructor(): super()
   }
 
-  @ObjCName("InnerclassinitorderInnerClassInitOrder_Outer_TestUnqualifiedSuperCall", exact = true)
+  @ObjCName("J2ktInnerclassinitorderInnerClassInitOrder_Outer_TestUnqualifiedSuperCall", exact = true)
   open inner class TestUnqualifiedSuperCall(): InnerClassInitOrder.Outer.OuterIsNotSuper() {}
  }
 }

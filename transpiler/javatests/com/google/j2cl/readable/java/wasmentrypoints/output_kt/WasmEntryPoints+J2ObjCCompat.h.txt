@@ -4,24 +4,29 @@
 
 #import "third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h"
 
-@class WasmentrypointsWasmEntryPointsCompanion;
+@class J2ktWasmentrypointsWasmEntryPoints;
+@class J2ktWasmentrypointsWasmEntryPointsCompanion;
 
 NS_ASSUME_NONNULL_BEGIN
 
+@compatibility_alias WasmentrypointsWasmEntryPoints J2ktWasmentrypointsWasmEntryPoints;
+
+@compatibility_alias WasmentrypointsWasmEntryPointsCompanion J2ktWasmentrypointsWasmEntryPointsCompanion;
+
 NS_INLINE void WasmentrypointsWasmEntryPoints_singleMatchedEntryPoint(void) {
- [WasmentrypointsWasmEntryPointsCompanion.shared singleMatchedEntryPoint];
+ [J2ktWasmentrypointsWasmEntryPointsCompanion.shared singleMatchedEntryPoint];
 }
 
 NS_INLINE void WasmentrypointsWasmEntryPoints_matchedEntryPointPattern1WithInt_(jint x) {
- [WasmentrypointsWasmEntryPointsCompanion.shared matchedEntryPointPattern1WithInt:x];
+ [J2ktWasmentrypointsWasmEntryPointsCompanion.shared matchedEntryPointPattern1WithInt:x];
 }
 
 NS_INLINE void WasmentrypointsWasmEntryPoints_matchedEntryPointPattern2WithFloat_(jfloat y) {
- [WasmentrypointsWasmEntryPointsCompanion.shared matchedEntryPointPattern2WithFloat:y];
+ [J2ktWasmentrypointsWasmEntryPointsCompanion.shared matchedEntryPointPattern2WithFloat:y];
 }
 
 NS_INLINE NSString* _Nullable WasmentrypointsWasmEntryPoints_stringConversionEntryPointWithNSString_(NSString* _Nullable arg) {
- return [WasmentrypointsWasmEntryPointsCompanion.shared stringConversionEntryPointWithNSString:arg];
+ return [J2ktWasmentrypointsWasmEntryPointsCompanion.shared stringConversionEntryPointWithNSString:arg];
 }
 
 NS_ASSUME_NONNULL_END

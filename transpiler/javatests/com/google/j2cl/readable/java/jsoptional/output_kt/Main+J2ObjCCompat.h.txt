@@ -2,12 +2,14 @@
 
 #import <Foundation/Foundation.h>
 
-@class JsoptionalMain;
+@class J2ktJsoptionalMain;
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_INLINE JsoptionalMain* create_JsoptionalMain_initWithNSString_(NSString* _Nullable a) {
- return [[JsoptionalMain alloc] initWithNSString:a];
+@compatibility_alias JsoptionalMain J2ktJsoptionalMain;
+
+NS_INLINE J2ktJsoptionalMain* create_JsoptionalMain_initWithNSString_(NSString* _Nullable a) {
+ return [[J2ktJsoptionalMain alloc] initWithNSString:a];
 }
 
 NS_ASSUME_NONNULL_END

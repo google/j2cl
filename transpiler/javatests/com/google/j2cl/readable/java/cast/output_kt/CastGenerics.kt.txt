@@ -34,7 +34,7 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
-@ObjCName("CastCastGenerics", exact = true)
+@ObjCName("J2ktCastCastGenerics", exact = true)
 open class CastGenerics<T, E: Number?> {
  @JvmField
  @HiddenFromObjC
@@ -83,7 +83,7 @@ open class CastGenerics<T, E: Number?> {
   return null as EE
  }
 
- @ObjCName("CastCastGenericsCompanion", exact = true)
+ @ObjCName("J2ktCastCastGenericsCompanion", exact = true)
  companion object {
   @JvmStatic
   @ObjCName("testErasureCast")
@@ -160,6 +160,6 @@ open class CastGenerics<T, E: Number?> {
 
  interface Empty2<TT> {}
 
- @ObjCName("CastCastGenerics_Foo", exact = true)
+ @ObjCName("J2ktCastCastGenerics_Foo", exact = true)
  open class Foo<V> {}
 }

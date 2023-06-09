@@ -2,12 +2,20 @@
 
 #import <Foundation/Foundation.h>
 
-@class BoundedtypesupercallMain_Foo;
+@class J2ktBoundedtypesupercallMain;
+@class J2ktBoundedtypesupercallMain_Bar;
+@class J2ktBoundedtypesupercallMain_Foo;
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_INLINE BoundedtypesupercallMain_Foo* create_BoundedtypesupercallMain_Foo_initWithId_(id foo) {
- return [[BoundedtypesupercallMain_Foo alloc] initWithId:foo];
+@compatibility_alias BoundedtypesupercallMain J2ktBoundedtypesupercallMain;
+
+@compatibility_alias BoundedtypesupercallMain_Foo J2ktBoundedtypesupercallMain_Foo;
+
+NS_INLINE J2ktBoundedtypesupercallMain_Foo* create_BoundedtypesupercallMain_Foo_initWithId_(id foo) {
+ return [[J2ktBoundedtypesupercallMain_Foo alloc] initWithId:foo];
 }
+
+@compatibility_alias BoundedtypesupercallMain_Bar J2ktBoundedtypesupercallMain_Bar;
 
 NS_ASSUME_NONNULL_END

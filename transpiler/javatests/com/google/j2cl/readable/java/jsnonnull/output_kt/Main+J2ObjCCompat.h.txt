@@ -2,12 +2,23 @@
 
 #import <Foundation/Foundation.h>
 
-@class JsnonnullMain;
+@class J2ktJsnonnullMain;
+@class J2ktJsnonnullMain_NonNullableStringSubNullableComparator;
+@class J2ktJsnonnullMain_NullableStringComparator;
+@class J2ktJsnonnullMain_StringComparator;
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_INLINE JsnonnullMain* create_JsnonnullMain_initWithNSString_(NSString* a) {
- return [[JsnonnullMain alloc] initWithNSString:a];
+@compatibility_alias JsnonnullMain J2ktJsnonnullMain;
+
+NS_INLINE J2ktJsnonnullMain* create_JsnonnullMain_initWithNSString_(NSString* a) {
+ return [[J2ktJsnonnullMain alloc] initWithNSString:a];
 }
+
+@compatibility_alias JsnonnullMain_StringComparator J2ktJsnonnullMain_StringComparator;
+
+@compatibility_alias JsnonnullMain_NullableStringComparator J2ktJsnonnullMain_NullableStringComparator;
+
+@compatibility_alias JsnonnullMain_NonNullableStringSubNullableComparator J2ktJsnonnullMain_NonNullableStringSubNullableComparator;
 
 NS_ASSUME_NONNULL_END

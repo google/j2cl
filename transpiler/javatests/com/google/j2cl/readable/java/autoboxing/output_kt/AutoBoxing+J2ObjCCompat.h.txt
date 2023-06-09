@@ -4,22 +4,27 @@
 
 #import "third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h"
 
-@class AutoboxingAutoBoxingCompanion;
+@class J2ktAutoboxingAutoBoxing;
+@class J2ktAutoboxingAutoBoxingCompanion;
 
 NS_ASSUME_NONNULL_BEGIN
+
+@compatibility_alias AutoboxingAutoBoxing J2ktAutoboxingAutoBoxing;
+
+@compatibility_alias AutoboxingAutoBoxingCompanion J2ktAutoboxingAutoBoxingCompanion;
 
 #define AutoboxingAutoBoxing_COMPILE_TIME_CONSTANT 1.1f
 
 NS_INLINE jfloat AutoboxingAutoBoxing_get_COMPILE_TIME_CONSTANT(void) {
- return AutoboxingAutoBoxingCompanion.shared.COMPILE_TIME_CONSTANT_;
+ return J2ktAutoboxingAutoBoxingCompanion.shared.COMPILE_TIME_CONSTANT_;
 }
 
 NS_INLINE void AutoboxingAutoBoxing_testUnboxingFromTypeVariable(void) {
- [AutoboxingAutoBoxingCompanion.shared testUnboxingFromTypeVariable];
+ [J2ktAutoboxingAutoBoxingCompanion.shared testUnboxingFromTypeVariable];
 }
 
 NS_INLINE void AutoboxingAutoBoxing_testUnboxingFromIntersectionType(void) {
- [AutoboxingAutoBoxingCompanion.shared testUnboxingFromIntersectionType];
+ [J2ktAutoboxingAutoBoxingCompanion.shared testUnboxingFromIntersectionType];
 }
 
 NS_ASSUME_NONNULL_END

@@ -2,12 +2,20 @@
 
 #import <Foundation/Foundation.h>
 
-@class CastonarrayinitCastOnArrayInitCompanion;
+@class J2ktCastonarrayinitCastOnArrayInit;
+@class J2ktCastonarrayinitCastOnArrayInitCompanion;
+@class J2ktCastonarrayinitCastOnArrayInit_Foo;
 
 NS_ASSUME_NONNULL_BEGIN
 
+@compatibility_alias CastonarrayinitCastOnArrayInit J2ktCastonarrayinitCastOnArrayInit;
+
+@compatibility_alias CastonarrayinitCastOnArrayInitCompanion J2ktCastonarrayinitCastOnArrayInitCompanion;
+
 NS_INLINE void CastonarrayinitCastOnArrayInit_test(void) {
- [CastonarrayinitCastOnArrayInitCompanion.shared test];
+ [J2ktCastonarrayinitCastOnArrayInitCompanion.shared test];
 }
+
+@compatibility_alias CastonarrayinitCastOnArrayInit_Foo J2ktCastonarrayinitCastOnArrayInit_Foo;
 
 NS_ASSUME_NONNULL_END

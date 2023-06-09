@@ -35,7 +35,7 @@ import kotlin.jvm.JvmField
 import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
-@ObjCName("JsnonnullMain", exact = true)
+@ObjCName("J2ktJsnonnullMain", exact = true)
 open class Main {
  @JvmField
  @HiddenFromObjC
@@ -119,21 +119,21 @@ open class Main {
   ): String
  }
 
- @ObjCName("JsnonnullMain_StringComparator", exact = true)
+ @ObjCName("J2ktJsnonnullMain_StringComparator", exact = true)
  open class StringComparator: Comparator<String> {
   open override fun compare(a: String, b: String): Int {
    return 0
   }
  }
 
- @ObjCName("JsnonnullMain_NullableStringComparator", exact = true)
+ @ObjCName("J2ktJsnonnullMain_NullableStringComparator", exact = true)
  open class NullableStringComparator: Comparator<String?> {
   open override fun compare(a: String?, b: String?): Int {
    return 0
   }
  }
 
- @ObjCName("JsnonnullMain_NonNullableStringSubNullableComparator", exact = true)
+ @ObjCName("J2ktJsnonnullMain_NonNullableStringSubNullableComparator", exact = true)
  open class NonNullableStringSubNullableComparator: Main.NullableStringComparator() {
   open override fun compare(a: String?, b: String?): Int {
    return 0

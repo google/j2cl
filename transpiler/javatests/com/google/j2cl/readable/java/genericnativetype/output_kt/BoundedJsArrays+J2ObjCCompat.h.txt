@@ -4,17 +4,22 @@
 
 #import "third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h"
 
-@class GenericnativetypeBoundedJsArray;
-@class GenericnativetypeBoundedJsArraysCompanion;
+@class J2ktGenericnativetypeBoundedJsArray;
+@class J2ktGenericnativetypeBoundedJsArrays;
+@class J2ktGenericnativetypeBoundedJsArraysCompanion;
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_INLINE GenericnativetypeBoundedJsArray* _Nullable GenericnativetypeBoundedJsArrays_create(void) {
- return [GenericnativetypeBoundedJsArraysCompanion.shared create];
+@compatibility_alias GenericnativetypeBoundedJsArrays J2ktGenericnativetypeBoundedJsArrays;
+
+@compatibility_alias GenericnativetypeBoundedJsArraysCompanion J2ktGenericnativetypeBoundedJsArraysCompanion;
+
+NS_INLINE J2ktGenericnativetypeBoundedJsArray* _Nullable GenericnativetypeBoundedJsArrays_create(void) {
+ return [J2ktGenericnativetypeBoundedJsArraysCompanion.shared create];
 }
 
-NS_INLINE GenericnativetypeBoundedJsArray* _Nullable GenericnativetypeBoundedJsArrays_createWithSizeWithInt_(jint size) {
- return [GenericnativetypeBoundedJsArraysCompanion.shared createWithSizeWithInt:size];
+NS_INLINE J2ktGenericnativetypeBoundedJsArray* _Nullable GenericnativetypeBoundedJsArrays_createWithSizeWithInt_(jint size) {
+ return [J2ktGenericnativetypeBoundedJsArraysCompanion.shared createWithSizeWithInt:size];
 }
 
 NS_ASSUME_NONNULL_END

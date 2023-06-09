@@ -25,9 +25,9 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("CloneableCloneables", exact = true)
+@ObjCName("J2ktCloneableCloneables", exact = true)
 open class Cloneables {
- @ObjCName("CloneableCloneables_WithoutCloneable", exact = true)
+ @ObjCName("J2ktCloneableCloneables_WithoutCloneable", exact = true)
  open class WithoutCloneable {
   @ObjCName("clone")
   open fun clone(): Any {
@@ -35,21 +35,21 @@ open class Cloneables {
   }
  }
 
- @ObjCName("CloneableCloneables_WithCloneable", exact = true)
+ @ObjCName("J2ktCloneableCloneables_WithCloneable", exact = true)
  open class WithCloneable: Cloneable {
   open override fun clone(): Any {
    return Cloneables.WithCloneable()
   }
  }
 
- @ObjCName("CloneableCloneables_WithoutCloneableChild", exact = true)
+ @ObjCName("J2ktCloneableCloneables_WithoutCloneableChild", exact = true)
  class WithoutCloneableChild: Cloneables.WithoutCloneable() {
   override fun clone(): Any {
    return Cloneables.WithoutCloneableChild()
   }
  }
 
- @ObjCName("CloneableCloneables_WithCloneableChild", exact = true)
+ @ObjCName("J2ktCloneableCloneables_WithCloneableChild", exact = true)
  class WithCloneableChild: Cloneables.WithCloneable() {
   override fun clone(): Any {
    return Cloneables.WithCloneableChild()

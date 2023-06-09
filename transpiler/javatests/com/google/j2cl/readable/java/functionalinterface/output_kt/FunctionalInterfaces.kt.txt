@@ -25,9 +25,9 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("FunctionalinterfaceFunctionalInterfaces", exact = true)
+@ObjCName("J2ktFunctionalinterfaceFunctionalInterfaces", exact = true)
 open class FunctionalInterfaces {
- @ObjCName("FunctionalinterfaceFunctionalInterfaces_NonParametrized", exact = true)
+ @ObjCName("J2ktFunctionalinterfaceFunctionalInterfaces_NonParametrized", exact = true)
  fun interface NonParametrized {
   @ObjCName("apply")
   fun apply(
@@ -35,7 +35,7 @@ open class FunctionalInterfaces {
   ): String?
  }
 
- @ObjCName("FunctionalinterfaceFunctionalInterfaces_Parametrized", exact = true)
+ @ObjCName("J2ktFunctionalinterfaceFunctionalInterfaces_Parametrized", exact = true)
  fun interface Parametrized<T> {
   @ObjCName("apply")
   fun apply(
@@ -43,12 +43,12 @@ open class FunctionalInterfaces {
   ): T
  }
 
- @ObjCName("FunctionalinterfaceFunctionalInterfaces_Specialized", exact = true)
+ @ObjCName("J2ktFunctionalinterfaceFunctionalInterfaces_Specialized", exact = true)
  fun interface Specialized: FunctionalInterfaces.Parametrized<String?> {
   override fun apply(string: String?): String?
  }
 
- @ObjCName("FunctionalinterfaceFunctionalInterfaces_WithDefaultMethod", exact = true)
+ @ObjCName("J2ktFunctionalinterfaceFunctionalInterfaces_WithDefaultMethod", exact = true)
  fun interface WithDefaultMethod {
   @ObjCName("apply")
   fun apply(
@@ -63,7 +63,7 @@ open class FunctionalInterfaces {
   }
  }
 
- @ObjCName("FunctionalinterfaceFunctionalInterfaces_WithObjectMethods", exact = true)
+ @ObjCName("J2ktFunctionalinterfaceFunctionalInterfaces_WithObjectMethods", exact = true)
  fun interface WithObjectMethods {
   @ObjCName("apply")
   fun apply(
@@ -71,7 +71,7 @@ open class FunctionalInterfaces {
   ): String?
  }
 
- @ObjCName("FunctionalinterfaceFunctionalInterfaces_WithParametrizedMethod", exact = true)
+ @ObjCName("J2ktFunctionalinterfaceFunctionalInterfaces_WithParametrizedMethod", exact = true)
  interface WithParametrizedMethod {
   @ObjCName("apply")
   fun <T> apply(
@@ -79,7 +79,7 @@ open class FunctionalInterfaces {
   ): T
  }
 
- @ObjCName("FunctionalinterfaceFunctionalInterfaces_WithKtProperty", exact = true)
+ @ObjCName("J2ktFunctionalinterfaceFunctionalInterfaces_WithKtProperty", exact = true)
  interface WithKtProperty {
   @ObjCName("size")
   val size: Int

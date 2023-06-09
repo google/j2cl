@@ -2,18 +2,24 @@
 
 #import <Foundation/Foundation.h>
 
-@class ProtobufMyMessage;
-@class ProtobufMyMessageCompanion;
-@class ProtobufMyMessage_Builder;
+@class J2ktProtobufMyMessage;
+@class J2ktProtobufMyMessageCompanion;
+@class J2ktProtobufMyMessage_Builder;
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_INLINE ProtobufMyMessage* ProtobufMyMessage_getDefaultInstance(void) {
- return [ProtobufMyMessageCompanion.shared getDefaultInstance];
+@compatibility_alias ProtobufMyMessage J2ktProtobufMyMessage;
+
+@compatibility_alias ProtobufMyMessageCompanion J2ktProtobufMyMessageCompanion;
+
+NS_INLINE J2ktProtobufMyMessage* ProtobufMyMessage_getDefaultInstance(void) {
+ return [J2ktProtobufMyMessageCompanion.shared getDefaultInstance];
 }
 
-NS_INLINE ProtobufMyMessage_Builder* ProtobufMyMessage_newBuilder(void) {
- return [ProtobufMyMessageCompanion.shared doNewBuilder];
+NS_INLINE J2ktProtobufMyMessage_Builder* ProtobufMyMessage_newBuilder(void) {
+ return [J2ktProtobufMyMessageCompanion.shared doNewBuilder];
 }
+
+@compatibility_alias ProtobufMyMessage_Builder J2ktProtobufMyMessage_Builder;
 
 NS_ASSUME_NONNULL_END

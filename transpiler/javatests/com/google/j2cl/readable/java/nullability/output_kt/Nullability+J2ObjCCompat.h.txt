@@ -2,12 +2,26 @@
 
 #import <Foundation/Foundation.h>
 
-@class NullabilityNullability;
+@class J2ktNullabilityNullability;
+@class J2ktNullabilityNullabilityCompanion;
+@class J2ktNullabilityNullability_NullableStringComparator;
+@class J2ktNullabilityNullability_NullableTemplatedReturnOverride;
+@class J2ktNullabilityNullability_StringComparator;
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_INLINE NullabilityNullability* create_NullabilityNullability_initWithNSString_(NSString* a) {
- return [[NullabilityNullability alloc] initWithNSString:a];
+@compatibility_alias NullabilityNullability J2ktNullabilityNullability;
+
+@compatibility_alias NullabilityNullabilityCompanion J2ktNullabilityNullabilityCompanion;
+
+NS_INLINE J2ktNullabilityNullability* create_NullabilityNullability_initWithNSString_(NSString* a) {
+ return [[J2ktNullabilityNullability alloc] initWithNSString:a];
 }
+
+@compatibility_alias NullabilityNullability_StringComparator J2ktNullabilityNullability_StringComparator;
+
+@compatibility_alias NullabilityNullability_NullableStringComparator J2ktNullabilityNullability_NullableStringComparator;
+
+@compatibility_alias NullabilityNullability_NullableTemplatedReturnOverride J2ktNullabilityNullability_NullableTemplatedReturnOverride;
 
 NS_ASSUME_NONNULL_END

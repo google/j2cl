@@ -30,7 +30,7 @@ import kotlin.jvm.JvmField
 import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
-@ObjCName("NestedgenericclassNestedGenericClass", exact = true)
+@ObjCName("J2ktNestedgenericclassNestedGenericClass", exact = true)
 open class NestedGenericClass<T> {
  @ObjCName("fun")
  open fun <S> `fun`(
@@ -65,19 +65,19 @@ open class NestedGenericClass<T> {
   n!!.C().D()
  }
 
- @ObjCName("NestedgenericclassNestedGenericClass_A", exact = true)
+ @ObjCName("J2ktNestedgenericclassNestedGenericClass_A", exact = true)
  open inner class A<T> {
-  @ObjCName("NestedgenericclassNestedGenericClass_A_B", exact = true)
+  @ObjCName("J2ktNestedgenericclassNestedGenericClass_A_B", exact = true)
   open inner class B<T>() {}
  }
 
- @ObjCName("NestedgenericclassNestedGenericClass_C", exact = true)
+ @ObjCName("J2ktNestedgenericclassNestedGenericClass_C", exact = true)
  open inner class C {
   @JvmField
   @ObjCName("c_")
   var c: T = null as T
 
-  @ObjCName("NestedgenericclassNestedGenericClass_C_D", exact = true)
+  @ObjCName("J2ktNestedgenericclassNestedGenericClass_C_D", exact = true)
   open inner class D {
    @JvmField
    @ObjCName("d_")

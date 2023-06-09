@@ -38,7 +38,7 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
-@ObjCName("NullabilityNullability", exact = true)
+@ObjCName("J2ktNullabilityNullability", exact = true)
 open class Nullability {
  @JvmField
  @HiddenFromObjC
@@ -129,7 +129,7 @@ open class Nullability {
   @ObjCName("withNullabilityNullability_MyFunction") f: Nullability.MyFunction
  ) {}
 
- @ObjCName("NullabilityNullabilityCompanion", exact = true)
+ @ObjCName("J2ktNullabilityNullabilityCompanion", exact = true)
  companion object {
   @JvmStatic
   @HiddenFromObjC
@@ -247,17 +247,17 @@ open class Nullability {
   ): String
  }
 
- @ObjCName("NullabilityNullability_StringList", exact = true)
+ @ObjCName("J2ktNullabilityNullability_StringList", exact = true)
  interface StringList: JavaList<String?> {}
 
- @ObjCName("NullabilityNullability_StringComparator", exact = true)
+ @ObjCName("J2ktNullabilityNullability_StringComparator", exact = true)
  open class StringComparator: Comparator<String> {
   open override fun compare(a: String, b: String): Int {
    return 0
   }
  }
 
- @ObjCName("NullabilityNullability_NullableStringComparator", exact = true)
+ @ObjCName("J2ktNullabilityNullability_NullableStringComparator", exact = true)
  open class NullableStringComparator: Comparator<String?> {
   open override fun compare(a: String?, b: String?): Int {
    return 0
@@ -269,7 +269,7 @@ open class Nullability {
   fun foo(): T?
  }
 
- @ObjCName("NullabilityNullability_NullableTemplatedReturnOverride", exact = true)
+ @ObjCName("J2ktNullabilityNullability_NullableTemplatedReturnOverride", exact = true)
  open class NullableTemplatedReturnOverride: Nullability.NullableTemplatedReturn<String?> {
   open override fun foo(): String? {
    return "foo"

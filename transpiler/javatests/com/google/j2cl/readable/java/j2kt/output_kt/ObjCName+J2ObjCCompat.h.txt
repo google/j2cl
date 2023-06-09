@@ -4,14 +4,20 @@
 
 #import "third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h"
 
+@class J2ktInnerClassNewName;
 @class J2ktJavaUtilStringJoiner;
-@class NewObjCName;
-@class NewObjCNameCompanion;
-@class NewObjCName_Foo;
-@class NewObjCName_FooCompanion;
-@class NewObjCName_NonCollectionCompanion;
+@class J2ktNewObjCName;
+@class J2ktNewObjCNameCompanion;
+@class J2ktNewObjCName_Foo;
+@class J2ktNewObjCName_FooCompanion;
+@class J2ktNewObjCName_NonCollection;
+@class J2ktNewObjCName_NonCollectionCompanion;
 
 NS_ASSUME_NONNULL_BEGIN
+
+@compatibility_alias NewObjCName J2ktNewObjCName;
+
+@compatibility_alias NewObjCNameCompanion J2ktNewObjCNameCompanion;
 
 #define NewObjCName_BOOLEAN_FALSE false
 
@@ -86,364 +92,370 @@ NS_ASSUME_NONNULL_BEGIN
 #define NewObjCName_DOUBLE_MAX_EXPONENT 1023.0
 
 NS_INLINE jint NewObjCName_get_publicStaticField(void) {
- return NewObjCNameCompanion.shared.publicStaticField_;
+ return J2ktNewObjCNameCompanion.shared.publicStaticField_;
 }
 
 NS_INLINE void NewObjCName_set_publicStaticField(jint value) {
- NewObjCNameCompanion.shared.publicStaticField_ = value;
+ J2ktNewObjCNameCompanion.shared.publicStaticField_ = value;
 }
 
 NS_INLINE id _Nullable NewObjCName_get_objectField(void) {
- return NewObjCNameCompanion.shared.objectField_;
+ return J2ktNewObjCNameCompanion.shared.objectField_;
 }
 
 NS_INLINE void NewObjCName_set_objectField(id _Nullable value) {
- NewObjCNameCompanion.shared.objectField_ = value;
+ J2ktNewObjCNameCompanion.shared.objectField_ = value;
 }
 
 NS_INLINE NSString* _Nullable NewObjCName_get_stringField(void) {
- return NewObjCNameCompanion.shared.stringField_;
+ return J2ktNewObjCNameCompanion.shared.stringField_;
 }
 
 NS_INLINE void NewObjCName_set_stringField(NSString* _Nullable value) {
- NewObjCNameCompanion.shared.stringField_ = value;
+ J2ktNewObjCNameCompanion.shared.stringField_ = value;
 }
 
-NS_INLINE NewObjCName* _Nullable NewObjCName_get_selfField(void) {
- return NewObjCNameCompanion.shared.selfField_;
+NS_INLINE J2ktNewObjCName* _Nullable NewObjCName_get_selfField(void) {
+ return J2ktNewObjCNameCompanion.shared.selfField_;
 }
 
-NS_INLINE void NewObjCName_set_selfField(NewObjCName* _Nullable value) {
- NewObjCNameCompanion.shared.selfField_ = value;
+NS_INLINE void NewObjCName_set_selfField(J2ktNewObjCName* _Nullable value) {
+ J2ktNewObjCNameCompanion.shared.selfField_ = value;
 }
 
 NS_INLINE jint NewObjCName_get_val(void) {
- return NewObjCNameCompanion.shared.val_;
+ return J2ktNewObjCNameCompanion.shared.val_;
 }
 
 NS_INLINE void NewObjCName_set_val(jint value) {
- NewObjCNameCompanion.shared.val_ = value;
+ J2ktNewObjCNameCompanion.shared.val_ = value;
 }
 
 NS_INLINE jint NewObjCName_get_var(void) {
- return NewObjCNameCompanion.shared.var_;
+ return J2ktNewObjCNameCompanion.shared.var_;
 }
 
 NS_INLINE void NewObjCName_set_var(jint value) {
- NewObjCNameCompanion.shared.var_ = value;
+ J2ktNewObjCNameCompanion.shared.var_ = value;
 }
 
 NS_INLINE jint NewObjCName_get_fun(void) {
- return NewObjCNameCompanion.shared.fun_;
+ return J2ktNewObjCNameCompanion.shared.fun_;
 }
 
 NS_INLINE void NewObjCName_set_fun(jint value) {
- NewObjCNameCompanion.shared.fun_ = value;
+ J2ktNewObjCNameCompanion.shared.fun_ = value;
 }
 
 NS_INLINE jint NewObjCName_get_alloc(void) {
- return NewObjCNameCompanion.shared.doAlloc___;
+ return J2ktNewObjCNameCompanion.shared.doAlloc___;
 }
 
 NS_INLINE void NewObjCName_set_alloc(jint value) {
- NewObjCNameCompanion.shared.alloc___ = value;
+ J2ktNewObjCNameCompanion.shared.alloc___ = value;
 }
 
 NS_INLINE jint NewObjCName_get_init(void) {
- return NewObjCNameCompanion.shared.doInit___;
+ return J2ktNewObjCNameCompanion.shared.doInit___;
 }
 
 NS_INLINE void NewObjCName_set_init(jint value) {
- NewObjCNameCompanion.shared.init___ = value;
+ J2ktNewObjCNameCompanion.shared.init___ = value;
 }
 
 NS_INLINE jint NewObjCName_get_extern(void) {
- return NewObjCNameCompanion.shared.extern___;
+ return J2ktNewObjCNameCompanion.shared.extern___;
 }
 
 NS_INLINE void NewObjCName_set_extern(jint value) {
- NewObjCNameCompanion.shared.extern___ = value;
+ J2ktNewObjCNameCompanion.shared.extern___ = value;
 }
 
 NS_INLINE jint NewObjCName_get_inline(void) {
- return NewObjCNameCompanion.shared.inline___;
+ return J2ktNewObjCNameCompanion.shared.inline___;
 }
 
 NS_INLINE void NewObjCName_set_inline(jint value) {
- NewObjCNameCompanion.shared.inline___ = value;
+ J2ktNewObjCNameCompanion.shared.inline___ = value;
 }
 
 NS_INLINE jint NewObjCName_get_NULL(void) {
- return NewObjCNameCompanion.shared.NULL___;
+ return J2ktNewObjCNameCompanion.shared.NULL___;
 }
 
 NS_INLINE void NewObjCName_set_NULL(jint value) {
- NewObjCNameCompanion.shared.NULL___ = value;
+ J2ktNewObjCNameCompanion.shared.NULL___ = value;
 }
 
 NS_INLINE jint NewObjCName_get_allocFoo(void) {
- return NewObjCNameCompanion.shared.doAllocFoo_;
+ return J2ktNewObjCNameCompanion.shared.doAllocFoo_;
 }
 
 NS_INLINE void NewObjCName_set_allocFoo(jint value) {
- NewObjCNameCompanion.shared.allocFoo_ = value;
+ J2ktNewObjCNameCompanion.shared.allocFoo_ = value;
 }
 
 NS_INLINE jint NewObjCName_get_initFoo(void) {
- return NewObjCNameCompanion.shared.doInitFoo_;
+ return J2ktNewObjCNameCompanion.shared.doInitFoo_;
 }
 
 NS_INLINE void NewObjCName_set_initFoo(jint value) {
- NewObjCNameCompanion.shared.initFoo_ = value;
+ J2ktNewObjCNameCompanion.shared.initFoo_ = value;
 }
 
 NS_INLINE jint NewObjCName_get_newFoo(void) {
- return NewObjCNameCompanion.shared.doNewFoo_;
+ return J2ktNewObjCNameCompanion.shared.doNewFoo_;
 }
 
 NS_INLINE void NewObjCName_set_newFoo(jint value) {
- NewObjCNameCompanion.shared.newFoo_ = value;
+ J2ktNewObjCNameCompanion.shared.newFoo_ = value;
 }
 
 NS_INLINE jboolean NewObjCName_get_BOOLEAN_FALSE(void) {
- return NewObjCNameCompanion.shared.BOOLEAN_FALSE_;
+ return J2ktNewObjCNameCompanion.shared.BOOLEAN_FALSE_;
 }
 
 NS_INLINE jboolean NewObjCName_get_BOOLEAN_TRUE(void) {
- return NewObjCNameCompanion.shared.BOOLEAN_TRUE_;
+ return J2ktNewObjCNameCompanion.shared.BOOLEAN_TRUE_;
 }
 
 NS_INLINE jchar NewObjCName_get_CHAR(void) {
- return NewObjCNameCompanion.shared.CHAR_;
+ return J2ktNewObjCNameCompanion.shared.CHAR_;
 }
 
 NS_INLINE jchar NewObjCName_get_CHAR_APOSTROPHE(void) {
- return NewObjCNameCompanion.shared.CHAR_APOSTROPHE_;
+ return J2ktNewObjCNameCompanion.shared.CHAR_APOSTROPHE_;
 }
 
 NS_INLINE jchar NewObjCName_get_CHAR_BACKSLASH(void) {
- return NewObjCNameCompanion.shared.CHAR_BACKSLASH_;
+ return J2ktNewObjCNameCompanion.shared.CHAR_BACKSLASH_;
 }
 
 NS_INLINE jchar NewObjCName_get_CHAR_UNICODE(void) {
- return NewObjCNameCompanion.shared.CHAR_UNICODE_;
+ return J2ktNewObjCNameCompanion.shared.CHAR_UNICODE_;
 }
 
 NS_INLINE jbyte NewObjCName_get_BYTE(void) {
- return NewObjCNameCompanion.shared.BYTE_;
+ return J2ktNewObjCNameCompanion.shared.BYTE_;
 }
 
 NS_INLINE jshort NewObjCName_get_SHORT(void) {
- return NewObjCNameCompanion.shared.SHORT_;
+ return J2ktNewObjCNameCompanion.shared.SHORT_;
 }
 
 NS_INLINE jint NewObjCName_get_INT(void) {
- return NewObjCNameCompanion.shared.INT_;
+ return J2ktNewObjCNameCompanion.shared.INT_;
 }
 
 NS_INLINE jint NewObjCName_get_INT_MIN_VALUE(void) {
- return NewObjCNameCompanion.shared.INT_MIN_VALUE_;
+ return J2ktNewObjCNameCompanion.shared.INT_MIN_VALUE_;
 }
 
 NS_INLINE jint NewObjCName_get_INT_MAX_VALUE(void) {
- return NewObjCNameCompanion.shared.INT_MAX_VALUE_;
+ return J2ktNewObjCNameCompanion.shared.INT_MAX_VALUE_;
 }
 
 NS_INLINE jlong NewObjCName_get_LONG(void) {
- return NewObjCNameCompanion.shared.LONG_;
+ return J2ktNewObjCNameCompanion.shared.LONG_;
 }
 
 NS_INLINE jlong NewObjCName_get_LONG_MIN_VALUE(void) {
- return NewObjCNameCompanion.shared.LONG_MIN_VALUE_;
+ return J2ktNewObjCNameCompanion.shared.LONG_MIN_VALUE_;
 }
 
 NS_INLINE jlong NewObjCName_get_LONG_MAX_VALUE(void) {
- return NewObjCNameCompanion.shared.LONG_MAX_VALUE_;
+ return J2ktNewObjCNameCompanion.shared.LONG_MAX_VALUE_;
 }
 
 NS_INLINE jfloat NewObjCName_get_FLOAT(void) {
- return NewObjCNameCompanion.shared.FLOAT_;
+ return J2ktNewObjCNameCompanion.shared.FLOAT_;
 }
 
 NS_INLINE jfloat NewObjCName_get_FLOAT_ZER0(void) {
- return NewObjCNameCompanion.shared.FLOAT_ZER0_;
+ return J2ktNewObjCNameCompanion.shared.FLOAT_ZER0_;
 }
 
 NS_INLINE jfloat NewObjCName_get_FLOAT_NEGATIVE_ZERO(void) {
- return NewObjCNameCompanion.shared.FLOAT_NEGATIVE_ZERO_;
+ return J2ktNewObjCNameCompanion.shared.FLOAT_NEGATIVE_ZERO_;
 }
 
 NS_INLINE jfloat NewObjCName_get_FLOAT_NAN(void) {
- return NewObjCNameCompanion.shared.FLOAT_NAN_;
+ return J2ktNewObjCNameCompanion.shared.FLOAT_NAN_;
 }
 
 NS_INLINE jfloat NewObjCName_get_FLOAT_NEGATIVE_INFINITY(void) {
- return NewObjCNameCompanion.shared.FLOAT_NEGATIVE_INFINITY_;
+ return J2ktNewObjCNameCompanion.shared.FLOAT_NEGATIVE_INFINITY_;
 }
 
 NS_INLINE jfloat NewObjCName_get_FLOAT_POSITIVE_INFINITY(void) {
- return NewObjCNameCompanion.shared.FLOAT_POSITIVE_INFINITY_;
+ return J2ktNewObjCNameCompanion.shared.FLOAT_POSITIVE_INFINITY_;
 }
 
 NS_INLINE jfloat NewObjCName_get_FLOAT_MIN_VALUE(void) {
- return NewObjCNameCompanion.shared.FLOAT_MIN_VALUE_;
+ return J2ktNewObjCNameCompanion.shared.FLOAT_MIN_VALUE_;
 }
 
 NS_INLINE jfloat NewObjCName_get_FLOAT_MIN_NORMAL(void) {
- return NewObjCNameCompanion.shared.FLOAT_MIN_NORMAL_;
+ return J2ktNewObjCNameCompanion.shared.FLOAT_MIN_NORMAL_;
 }
 
 NS_INLINE jfloat NewObjCName_get_FLOAT_MIN_EXPONENT(void) {
- return NewObjCNameCompanion.shared.FLOAT_MIN_EXPONENT_;
+ return J2ktNewObjCNameCompanion.shared.FLOAT_MIN_EXPONENT_;
 }
 
 NS_INLINE jfloat NewObjCName_get_FLOAT_MAX_VALUE(void) {
- return NewObjCNameCompanion.shared.FLOAT_MAX_VALUE_;
+ return J2ktNewObjCNameCompanion.shared.FLOAT_MAX_VALUE_;
 }
 
 NS_INLINE jfloat NewObjCName_get_FLOAT_MAX_EXPONENT(void) {
- return NewObjCNameCompanion.shared.FLOAT_MAX_EXPONENT_;
+ return J2ktNewObjCNameCompanion.shared.FLOAT_MAX_EXPONENT_;
 }
 
 NS_INLINE jdouble NewObjCName_get_DOUBLE(void) {
- return NewObjCNameCompanion.shared.DOUBLE_;
+ return J2ktNewObjCNameCompanion.shared.DOUBLE_;
 }
 
 NS_INLINE jdouble NewObjCName_get_DOUBLE_ZER0(void) {
- return NewObjCNameCompanion.shared.DOUBLE_ZER0_;
+ return J2ktNewObjCNameCompanion.shared.DOUBLE_ZER0_;
 }
 
 NS_INLINE jdouble NewObjCName_get_DOUBLE_NEGATIVE_ZERO(void) {
- return NewObjCNameCompanion.shared.DOUBLE_NEGATIVE_ZERO_;
+ return J2ktNewObjCNameCompanion.shared.DOUBLE_NEGATIVE_ZERO_;
 }
 
 NS_INLINE jdouble NewObjCName_get_DOUBLE_NAN(void) {
- return NewObjCNameCompanion.shared.DOUBLE_NAN_;
+ return J2ktNewObjCNameCompanion.shared.DOUBLE_NAN_;
 }
 
 NS_INLINE jdouble NewObjCName_get_DOUBLE_NEGATIVE_INFINITY(void) {
- return NewObjCNameCompanion.shared.DOUBLE_NEGATIVE_INFINITY_;
+ return J2ktNewObjCNameCompanion.shared.DOUBLE_NEGATIVE_INFINITY_;
 }
 
 NS_INLINE jdouble NewObjCName_get_DOUBLE_POSITIVE_INFINITY(void) {
- return NewObjCNameCompanion.shared.DOUBLE_POSITIVE_INFINITY_;
+ return J2ktNewObjCNameCompanion.shared.DOUBLE_POSITIVE_INFINITY_;
 }
 
 NS_INLINE jdouble NewObjCName_get_DOUBLE_MIN_VALUE(void) {
- return NewObjCNameCompanion.shared.DOUBLE_MIN_VALUE_;
+ return J2ktNewObjCNameCompanion.shared.DOUBLE_MIN_VALUE_;
 }
 
 NS_INLINE jdouble NewObjCName_get_DOUBLE_MIN_NORMAL(void) {
- return NewObjCNameCompanion.shared.DOUBLE_MIN_NORMAL_;
+ return J2ktNewObjCNameCompanion.shared.DOUBLE_MIN_NORMAL_;
 }
 
 NS_INLINE jdouble NewObjCName_get_DOUBLE_MIN_EXPONENT(void) {
- return NewObjCNameCompanion.shared.DOUBLE_MIN_EXPONENT_;
+ return J2ktNewObjCNameCompanion.shared.DOUBLE_MIN_EXPONENT_;
 }
 
 NS_INLINE jdouble NewObjCName_get_DOUBLE_MAX_VALUE(void) {
- return NewObjCNameCompanion.shared.DOUBLE_MAX_VALUE_;
+ return J2ktNewObjCNameCompanion.shared.DOUBLE_MAX_VALUE_;
 }
 
 NS_INLINE jdouble NewObjCName_get_DOUBLE_MAX_EXPONENT(void) {
- return NewObjCNameCompanion.shared.DOUBLE_MAX_EXPONENT_;
+ return J2ktNewObjCNameCompanion.shared.DOUBLE_MAX_EXPONENT_;
 }
 
 NS_INLINE NSString* NewObjCName_get_STRING(void) {
- return NewObjCNameCompanion.shared.STRING_;
+ return J2ktNewObjCNameCompanion.shared.STRING_;
 }
 
-NS_INLINE NewObjCName* create_NewObjCName_init(void) {
- return [[NewObjCName alloc] init];
+NS_INLINE J2ktNewObjCName* create_NewObjCName_init(void) {
+ return [[J2ktNewObjCName alloc] init];
 }
 
-NS_INLINE NewObjCName* create_NewObjCName_initWithInteger_(jint i) {
- return [[NewObjCName alloc] initWithInteger:i];
+NS_INLINE J2ktNewObjCName* create_NewObjCName_initWithInteger_(jint i) {
+ return [[J2ktNewObjCName alloc] initWithInteger:i];
 }
 
-NS_INLINE NewObjCName* create_NewObjCName_initWithInt_withNSString_(jint i, NSString* _Nullable s) {
- return [[NewObjCName alloc] initWithInt:i withNSString:s];
+NS_INLINE J2ktNewObjCName* create_NewObjCName_initWithInt_withNSString_(jint i, NSString* _Nullable s) {
+ return [[J2ktNewObjCName alloc] initWithInt:i withNSString:s];
 }
 
 NS_INLINE void NewObjCName_newFoo(void) {
- [NewObjCNameCompanion.shared doNewFoo];
+ [J2ktNewObjCNameCompanion.shared doNewFoo];
 }
 
 NS_INLINE void NewObjCName_newFooFromInt_(jint i) {
- [NewObjCNameCompanion.shared doNewFooFromInt:i];
+ [J2ktNewObjCNameCompanion.shared doNewFooFromInt:i];
 }
 
 NS_INLINE void NewObjCName_newFooFromInt_withInteger_(NSString* _Nullable s, jint i) {
- [NewObjCNameCompanion.shared doNewFooFromInt:s withInteger:i];
+ [J2ktNewObjCNameCompanion.shared doNewFooFromInt:s withInteger:i];
 }
 
 NS_INLINE void NewObjCName_fooWithNSString_withNSString_(NSString* _Nullable s, NSString* _Nullable i) {
- [NewObjCNameCompanion.shared fooWithNSString:s withNSString:i];
+ [J2ktNewObjCNameCompanion.shared fooWithNSString:s withNSString:i];
 }
 
 NS_INLINE void NewObjCName_val(void) {
- [NewObjCNameCompanion.shared val];
+ [J2ktNewObjCNameCompanion.shared val];
 }
 
 NS_INLINE void NewObjCName_var(void) {
- [NewObjCNameCompanion.shared var];
+ [J2ktNewObjCNameCompanion.shared var];
 }
 
 NS_INLINE void NewObjCName_fun(void) {
- [NewObjCNameCompanion.shared fun];
+ [J2ktNewObjCNameCompanion.shared fun];
 }
 
 NS_INLINE void NewObjCName_alloc__(void) {
- [NewObjCNameCompanion.shared doAlloc__];
+ [J2ktNewObjCNameCompanion.shared doAlloc__];
 }
 
 NS_INLINE void NewObjCName_allocBar(void) {
- [NewObjCNameCompanion.shared doAllocBar];
+ [J2ktNewObjCNameCompanion.shared doAllocBar];
 }
 
 NS_INLINE void NewObjCName_allocatedBar(void) {
- [NewObjCNameCompanion.shared allocatedBar];
+ [J2ktNewObjCNameCompanion.shared allocatedBar];
 }
 
 NS_INLINE void NewObjCName_init__(void) {
- [NewObjCNameCompanion.shared doInit__];
+ [J2ktNewObjCNameCompanion.shared doInit__];
 }
 
 NS_INLINE void NewObjCName_initialize__(void) {
- [NewObjCNameCompanion.shared initialize__];
+ [J2ktNewObjCNameCompanion.shared initialize__];
 }
 
 NS_INLINE void NewObjCName_initBar(void) {
- [NewObjCNameCompanion.shared doInitBar];
+ [J2ktNewObjCNameCompanion.shared doInitBar];
 }
 
 NS_INLINE void NewObjCName_newBar(void) {
- [NewObjCNameCompanion.shared doNewBar];
+ [J2ktNewObjCNameCompanion.shared doNewBar];
 }
 
 NS_INLINE void NewObjCName_copyBar(void) {
- [NewObjCNameCompanion.shared doCopyBar];
+ [J2ktNewObjCNameCompanion.shared doCopyBar];
 }
 
 NS_INLINE void NewObjCName_mutableCopyBar(void) {
- [NewObjCNameCompanion.shared doMutableCopyBar];
+ [J2ktNewObjCNameCompanion.shared doMutableCopyBar];
 }
 
 NS_INLINE void NewObjCName_reservedParamNamesWithInt_withInt_withInt_withInt_(jint extern_, jint struct_, jint register_, jint inline_) {
- [NewObjCNameCompanion.shared reservedParamNamesWithInt:extern_ withInt:struct_ withInt:register_ withInt:inline_];
+ [J2ktNewObjCNameCompanion.shared reservedParamNamesWithInt:extern_ withInt:struct_ withInt:register_ withInt:inline_];
 }
 
 NS_INLINE NSString* _Nullable NewObjCName_nativeTypesWithNSString_withId_withNSNumber_(NSString* _Nullable s, id _Nullable o, NSNumber* _Nullable n) {
- return [NewObjCNameCompanion.shared nativeTypesWithNSString:s withId:o withNSNumber:n];
+ return [J2ktNewObjCNameCompanion.shared nativeTypesWithNSString:s withId:o withNSNumber:n];
 }
 
 NS_INLINE void NewObjCName_numberTypeWithNSNumber_(NSNumber* _Nullable l) {
- [NewObjCNameCompanion.shared numberTypeWithNSNumber:l];
+ [J2ktNewObjCNameCompanion.shared numberTypeWithNSNumber:l];
 }
 
 NS_INLINE void NewObjCName_nonNativeJavaTypeWithJavaUtilStringJoiner_(J2ktJavaUtilStringJoiner* _Nullable l) {
- [NewObjCNameCompanion.shared nonNativeJavaTypeWithJavaUtilStringJoiner:l];
+ [J2ktNewObjCNameCompanion.shared nonNativeJavaTypeWithJavaUtilStringJoiner:l];
 }
+
+@compatibility_alias InnerClassNewName J2ktInnerClassNewName;
+
+@compatibility_alias NewObjCName_Foo J2ktNewObjCName_Foo;
+
+@compatibility_alias NewObjCName_FooCompanion J2ktNewObjCName_FooCompanion;
 
 typedef NS_ENUM(jint, NewObjCName_Foo_Enum) {
  NewObjCName_Foo_Enum_val = 0,
@@ -464,76 +476,80 @@ typedef NS_ENUM(jint, NewObjCName_Foo_Enum) {
  NewObjCName_Foo_Enum_NO = 15,
 };
 
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_val(void) {
- return NewObjCName_Foo.val;
+NS_INLINE J2ktNewObjCName_Foo* NewObjCName_Foo_get_val(void) {
+ return J2ktNewObjCName_Foo.val;
 }
 
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_var(void) {
- return NewObjCName_Foo.var;
+NS_INLINE J2ktNewObjCName_Foo* NewObjCName_Foo_get_var(void) {
+ return J2ktNewObjCName_Foo.var;
 }
 
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_fun(void) {
- return NewObjCName_Foo.fun;
+NS_INLINE J2ktNewObjCName_Foo* NewObjCName_Foo_get_fun(void) {
+ return J2ktNewObjCName_Foo.fun;
 }
 
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_alloc(void) {
- return NewObjCName_Foo.theAlloc__;
+NS_INLINE J2ktNewObjCName_Foo* NewObjCName_Foo_get_alloc(void) {
+ return J2ktNewObjCName_Foo.theAlloc__;
 }
 
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_init(void) {
- return NewObjCName_Foo.theInit__;
+NS_INLINE J2ktNewObjCName_Foo* NewObjCName_Foo_get_init(void) {
+ return J2ktNewObjCName_Foo.theInit__;
 }
 
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_initialize(void) {
- return NewObjCName_Foo.initialize__;
+NS_INLINE J2ktNewObjCName_Foo* NewObjCName_Foo_get_initialize(void) {
+ return J2ktNewObjCName_Foo.initialize__;
 }
 
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_allocFoo(void) {
- return NewObjCName_Foo.theAllocFoo;
+NS_INLINE J2ktNewObjCName_Foo* NewObjCName_Foo_get_allocFoo(void) {
+ return J2ktNewObjCName_Foo.theAllocFoo;
 }
 
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_initFoo(void) {
- return NewObjCName_Foo.theInitFoo;
+NS_INLINE J2ktNewObjCName_Foo* NewObjCName_Foo_get_initFoo(void) {
+ return J2ktNewObjCName_Foo.theInitFoo;
 }
 
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_newFoo(void) {
- return NewObjCName_Foo.theNewFoo;
+NS_INLINE J2ktNewObjCName_Foo* NewObjCName_Foo_get_newFoo(void) {
+ return J2ktNewObjCName_Foo.theNewFoo;
 }
 
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_copyFoo(void) {
- return NewObjCName_Foo.theCopyFoo;
+NS_INLINE J2ktNewObjCName_Foo* NewObjCName_Foo_get_copyFoo(void) {
+ return J2ktNewObjCName_Foo.theCopyFoo;
 }
 
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_mutableCopyFoo(void) {
- return NewObjCName_Foo.theMutableCopyFoo;
+NS_INLINE J2ktNewObjCName_Foo* NewObjCName_Foo_get_mutableCopyFoo(void) {
+ return J2ktNewObjCName_Foo.theMutableCopyFoo;
 }
 
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_register(void) {
- return NewObjCName_Foo.register__;
+NS_INLINE J2ktNewObjCName_Foo* NewObjCName_Foo_get_register(void) {
+ return J2ktNewObjCName_Foo.register__;
 }
 
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_struct(void) {
- return NewObjCName_Foo.struct__;
+NS_INLINE J2ktNewObjCName_Foo* NewObjCName_Foo_get_struct(void) {
+ return J2ktNewObjCName_Foo.struct__;
 }
 
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_NULL(void) {
- return NewObjCName_Foo.NULL__;
+NS_INLINE J2ktNewObjCName_Foo* NewObjCName_Foo_get_NULL(void) {
+ return J2ktNewObjCName_Foo.NULL__;
 }
 
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_YES(void) {
- return NewObjCName_Foo.YES__;
+NS_INLINE J2ktNewObjCName_Foo* NewObjCName_Foo_get_YES(void) {
+ return J2ktNewObjCName_Foo.YES__;
 }
 
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_NO(void) {
- return NewObjCName_Foo.NO__;
+NS_INLINE J2ktNewObjCName_Foo* NewObjCName_Foo_get_NO(void) {
+ return J2ktNewObjCName_Foo.NO__;
 }
 
-NS_INLINE NewObjCName_Foo* _Nullable NewObjCName_Foo_withOrdinalWithInt_(jint ordinal) {
- return [NewObjCName_FooCompanion.shared withOrdinalWithInt:ordinal];
+NS_INLINE J2ktNewObjCName_Foo* _Nullable NewObjCName_Foo_withOrdinalWithInt_(jint ordinal) {
+ return [J2ktNewObjCName_FooCompanion.shared withOrdinalWithInt:ordinal];
 }
+
+@compatibility_alias NewObjCName_NonCollection J2ktNewObjCName_NonCollection;
+
+@compatibility_alias NewObjCName_NonCollectionCompanion J2ktNewObjCName_NonCollectionCompanion;
 
 NS_INLINE void NewObjCName_NonCollection_staticMethod(void) {
- [NewObjCName_NonCollectionCompanion.shared staticMethod];
+ [J2ktNewObjCName_NonCollectionCompanion.shared staticMethod];
 }
 
 NS_ASSUME_NONNULL_END

@@ -38,7 +38,7 @@ open class AbstractMap<K, V>: Map<K, V> {
  }
 }
 
-@ObjCName("BridgemethodsEnumMap", exact = true)
+@ObjCName("J2ktBridgemethodsEnumMap", exact = true)
 open class EnumMap<K: Enum<K>, V>: AbstractMap<K, V>() {
  open override fun put(key: K, value: V): V {
   return value

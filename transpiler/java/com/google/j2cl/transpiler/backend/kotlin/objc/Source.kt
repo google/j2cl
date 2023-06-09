@@ -41,6 +41,11 @@ fun macroDeclaration(source: Source) = join(source("#"), source)
 
 fun macroDefine(source: Source) = macroDeclaration(spaceSeparated(source("define"), source))
 
+fun compatibilityAlias(alias: Source, target: Source) =
+  spaceSeparated(source("@compatibility_alias"), alias, target)
+
+fun defineAlias(alias: Source, target: Source) = macroDefine(spaceSeparated(alias, target))
+
 fun dependenciesSource(dependencies: Iterable<Dependency>): Source =
   emptyLineSeparated(
     importsSource(dependencies.imports),

@@ -4,24 +4,29 @@
 
 #import "third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h"
 
-@class StaticfieldinitializerStaticFieldInitializerCompanion;
+@class J2ktStaticfieldinitializerStaticFieldInitializer;
+@class J2ktStaticfieldinitializerStaticFieldInitializerCompanion;
 
 NS_ASSUME_NONNULL_BEGIN
 
+@compatibility_alias StaticfieldinitializerStaticFieldInitializer J2ktStaticfieldinitializerStaticFieldInitializer;
+
+@compatibility_alias StaticfieldinitializerStaticFieldInitializerCompanion J2ktStaticfieldinitializerStaticFieldInitializerCompanion;
+
 NS_INLINE jint StaticfieldinitializerStaticFieldInitializer_get_a(void) {
- return StaticfieldinitializerStaticFieldInitializerCompanion.shared.a_;
+ return J2ktStaticfieldinitializerStaticFieldInitializerCompanion.shared.a_;
 }
 
 NS_INLINE void StaticfieldinitializerStaticFieldInitializer_set_a(jint value) {
- StaticfieldinitializerStaticFieldInitializerCompanion.shared.a_ = value;
+ J2ktStaticfieldinitializerStaticFieldInitializerCompanion.shared.a_ = value;
 }
 
 NS_INLINE jint StaticfieldinitializerStaticFieldInitializer_get_b(void) {
- return StaticfieldinitializerStaticFieldInitializerCompanion.shared.b_;
+ return J2ktStaticfieldinitializerStaticFieldInitializerCompanion.shared.b_;
 }
 
 NS_INLINE void StaticfieldinitializerStaticFieldInitializer_set_b(jint value) {
- StaticfieldinitializerStaticFieldInitializerCompanion.shared.b_ = value;
+ J2ktStaticfieldinitializerStaticFieldInitializerCompanion.shared.b_ = value;
 }
 
 NS_ASSUME_NONNULL_END

@@ -2,21 +2,25 @@
 
 #import <Foundation/Foundation.h>
 
-@class DeprecatedDeprecatedExample;
-@class DeprecatedDeprecatedExampleCompanion;
+@class J2ktDeprecatedDeprecatedExample;
+@class J2ktDeprecatedDeprecatedExampleCompanion;
 
 NS_ASSUME_NONNULL_BEGIN
 
+@compatibility_alias DeprecatedDeprecatedExample J2ktDeprecatedDeprecatedExample;
+
+@compatibility_alias DeprecatedDeprecatedExampleCompanion J2ktDeprecatedDeprecatedExampleCompanion;
+
 NS_INLINE NSString* DeprecatedDeprecatedExample_get_DEPRECATED_STATIC_FIELD(void) {
- return DeprecatedDeprecatedExampleCompanion.shared.DEPRECATED_STATIC_FIELD_;
+ return J2ktDeprecatedDeprecatedExampleCompanion.shared.DEPRECATED_STATIC_FIELD_;
 }
 
 NS_INLINE void DeprecatedDeprecatedExample_deprecatedStaticMethodWithId_(id _Nullable someObject) {
- [DeprecatedDeprecatedExampleCompanion.shared deprecatedStaticMethodWithId:someObject];
+ [J2ktDeprecatedDeprecatedExampleCompanion.shared deprecatedStaticMethodWithId:someObject];
 }
 
-NS_INLINE DeprecatedDeprecatedExample* create_DeprecatedDeprecatedExample_init(void) {
- return [[DeprecatedDeprecatedExample alloc] init];
+NS_INLINE J2ktDeprecatedDeprecatedExample* create_DeprecatedDeprecatedExample_init(void) {
+ return [[J2ktDeprecatedDeprecatedExample alloc] init];
 }
 
 NS_ASSUME_NONNULL_END

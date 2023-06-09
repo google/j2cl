@@ -2,21 +2,28 @@
 
 #import <Foundation/Foundation.h>
 
-@class CastCastGenericsCompanion;
-@class CastCastGenerics_Foo;
+@class J2ktCastCastGenerics;
+@class J2ktCastCastGenericsCompanion;
+@class J2ktCastCastGenerics_Foo;
 
 NS_ASSUME_NONNULL_BEGIN
 
+@compatibility_alias CastCastGenerics J2ktCastCastGenerics;
+
+@compatibility_alias CastCastGenericsCompanion J2ktCastCastGenericsCompanion;
+
 NS_INLINE void CastCastGenerics_testErasureCast(void) {
- [CastCastGenericsCompanion.shared testErasureCast];
+ [J2ktCastCastGenericsCompanion.shared testErasureCast];
 }
 
 NS_INLINE void CastCastGenerics_testCastToParamterizedType(void) {
- [CastCastGenericsCompanion.shared testCastToParamterizedType];
+ [J2ktCastCastGenericsCompanion.shared testCastToParamterizedType];
 }
 
-NS_INLINE CastCastGenerics_Foo* _Nullable CastCastGenerics_doSomething(void) {
- return [CastCastGenericsCompanion.shared doSomething];
+NS_INLINE J2ktCastCastGenerics_Foo* _Nullable CastCastGenerics_doSomething(void) {
+ return [J2ktCastCastGenericsCompanion.shared doSomething];
 }
+
+@compatibility_alias CastCastGenerics_Foo J2ktCastCastGenerics_Foo;
 
 NS_ASSUME_NONNULL_END

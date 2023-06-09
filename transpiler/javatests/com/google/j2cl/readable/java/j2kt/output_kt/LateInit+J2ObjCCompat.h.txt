@@ -2,12 +2,14 @@
 
 #import <Foundation/Foundation.h>
 
-@class J2ktLateInit;
+@class J2ktJ2ktLateInit;
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_INLINE J2ktLateInit* create_J2ktLateInit_init(void) {
- return [[J2ktLateInit alloc] init];
+@compatibility_alias J2ktLateInit J2ktJ2ktLateInit;
+
+NS_INLINE J2ktJ2ktLateInit* create_J2ktLateInit_init(void) {
+ return [[J2ktJ2ktLateInit alloc] init];
 }
 
 NS_ASSUME_NONNULL_END

@@ -4,16 +4,21 @@
 
 #import "third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h"
 
-@class StaticfieldaccesslevelsStaticFieldAccessLevelsCompanion;
+@class J2ktStaticfieldaccesslevelsStaticFieldAccessLevels;
+@class J2ktStaticfieldaccesslevelsStaticFieldAccessLevelsCompanion;
 
 NS_ASSUME_NONNULL_BEGIN
 
+@compatibility_alias StaticfieldaccesslevelsStaticFieldAccessLevels J2ktStaticfieldaccesslevelsStaticFieldAccessLevels;
+
+@compatibility_alias StaticfieldaccesslevelsStaticFieldAccessLevelsCompanion J2ktStaticfieldaccesslevelsStaticFieldAccessLevelsCompanion;
+
 NS_INLINE jint StaticfieldaccesslevelsStaticFieldAccessLevels_get_a(void) {
- return StaticfieldaccesslevelsStaticFieldAccessLevelsCompanion.shared.a_;
+ return J2ktStaticfieldaccesslevelsStaticFieldAccessLevelsCompanion.shared.a_;
 }
 
 NS_INLINE void StaticfieldaccesslevelsStaticFieldAccessLevels_set_a(jint value) {
- StaticfieldaccesslevelsStaticFieldAccessLevelsCompanion.shared.a_ = value;
+ J2ktStaticfieldaccesslevelsStaticFieldAccessLevelsCompanion.shared.a_ = value;
 }
 
 NS_ASSUME_NONNULL_END

@@ -28,7 +28,7 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
-@ObjCName("NativekttypesKtPropertyNameConflict", exact = true)
+@ObjCName("J2ktNativekttypesKtPropertyNameConflict", exact = true)
 abstract class KtPropertyNameConflict {
  @JvmField
  @ObjCName("fieldWithConflictingGetter_")
@@ -62,7 +62,7 @@ abstract class KtPropertyNameConflict {
   return 0
  }
 
- @ObjCName("NativekttypesKtPropertyNameConflictCompanion", exact = true)
+ @ObjCName("J2ktNativekttypesKtPropertyNameConflictCompanion", exact = true)
  companion object {
   @JvmStatic
   @ObjCName("test")
@@ -98,13 +98,13 @@ abstract class KtPropertyNameConflict {
   }
  }
 
- @ObjCName("NativekttypesKtPropertyNameConflict_Interface", exact = true)
+ @ObjCName("J2ktNativekttypesKtPropertyNameConflict_Interface", exact = true)
  interface Interface {
   @ObjCName("fieldWithConflictingInterfaceMethod")
   val fieldWithConflictingInterfaceMethod: Int
  }
 
- @ObjCName("NativekttypesKtPropertyNameConflict_Subclass", exact = true)
+ @ObjCName("J2ktNativekttypesKtPropertyNameConflict_Subclass", exact = true)
  abstract inner class Subclass: KtPropertyNameConflict(), KtPropertyNameConflict.Interface {
   @JvmField
   @HiddenFromObjC

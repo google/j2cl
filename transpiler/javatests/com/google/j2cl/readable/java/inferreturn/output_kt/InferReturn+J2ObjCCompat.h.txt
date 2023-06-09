@@ -2,21 +2,25 @@
 
 #import <Foundation/Foundation.h>
 
-@class InferreturnInferReturn;
-@class InferreturnInferReturnCompanion;
+@class J2ktInferreturnInferReturn;
+@class J2ktInferreturnInferReturnCompanion;
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_INLINE InferreturnInferReturn* _Nullable InferreturnInferReturn_inferGenericWithId_(id foo) {
- return [InferreturnInferReturnCompanion.shared inferGenericWithId:foo];
+@compatibility_alias InferreturnInferReturn J2ktInferreturnInferReturn;
+
+@compatibility_alias InferreturnInferReturnCompanion J2ktInferreturnInferReturnCompanion;
+
+NS_INLINE J2ktInferreturnInferReturn* _Nullable InferreturnInferReturn_inferGenericWithId_(id foo) {
+ return [J2ktInferreturnInferReturnCompanion.shared inferGenericWithId:foo];
 }
 
-NS_INLINE InferreturnInferReturn* _Nullable InferreturnInferReturn_tightenTypeWithInferreturnInferReturn_(InferreturnInferReturn* _Nullable foo) {
- return [InferreturnInferReturnCompanion.shared tightenTypeWithInferreturnInferReturn:foo];
+NS_INLINE J2ktInferreturnInferReturn* _Nullable InferreturnInferReturn_tightenTypeWithInferreturnInferReturn_(J2ktInferreturnInferReturn* _Nullable foo) {
+ return [J2ktInferreturnInferReturnCompanion.shared tightenTypeWithInferreturnInferReturn:foo];
 }
 
 NS_INLINE void InferreturnInferReturn_main(void) {
- [InferreturnInferReturnCompanion.shared main];
+ [J2ktInferreturnInferReturnCompanion.shared main];
 }
 
 NS_ASSUME_NONNULL_END

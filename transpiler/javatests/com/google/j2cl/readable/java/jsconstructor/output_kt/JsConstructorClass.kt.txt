@@ -29,9 +29,9 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
-@ObjCName("JsconstructorJsConstructorClass", exact = true)
+@ObjCName("J2ktJsconstructorJsConstructorClass", exact = true)
 open class JsConstructorClass {
- @ObjCName("JsconstructorJsConstructorClass_A", exact = true)
+ @ObjCName("J2ktJsconstructorJsConstructorClass_A", exact = true)
  open class A {
   @JvmField
   @ObjCName("fA_")
@@ -46,7 +46,7 @@ open class JsConstructorClass {
   constructor()
  }
 
- @ObjCName("JsconstructorJsConstructorClass_B", exact = true)
+ @ObjCName("J2ktJsconstructorJsConstructorClass_B", exact = true)
  open class B: JsConstructorClass.A {
   @JvmField
   @ObjCName("fB_")
@@ -70,7 +70,7 @@ open class JsConstructorClass {
   }
  }
 
- @ObjCName("JsconstructorJsConstructorClass_C", exact = true)
+ @ObjCName("J2ktJsconstructorJsConstructorClass_C", exact = true)
  open class C: JsConstructorClass.B {
   @JvmField
   @ObjCName("fC_")
@@ -90,7 +90,7 @@ open class JsConstructorClass {
   }
  }
 
- @ObjCName("JsconstructorJsConstructorClass_D", exact = true)
+ @ObjCName("J2ktJsconstructorJsConstructorClass_D", exact = true)
  open class D: JsConstructorClass.B {
   @JvmField
   @ObjCName("fD_")
@@ -107,7 +107,7 @@ open class JsConstructorClass {
   }
  }
 
- @ObjCName("JsconstructorJsConstructorClass_E", exact = true)
+ @ObjCName("J2ktJsconstructorJsConstructorClass_E", exact = true)
  open class E: JsConstructorClass.C {
   @JvmField
   @ObjCName("fE_")
@@ -118,7 +118,7 @@ open class JsConstructorClass {
   }
  }
 
- @ObjCName("JsconstructorJsConstructorClass_F", exact = true)
+ @ObjCName("J2ktJsconstructorJsConstructorClass_F", exact = true)
  open class F: JsConstructorClass.C {
   @JvmField
   @ObjCName("fF_")
@@ -131,22 +131,22 @@ open class JsConstructorClass {
   }
  }
 
- @ObjCName("JsconstructorJsConstructorClass_G", exact = true)
+ @ObjCName("J2ktJsconstructorJsConstructorClass_G", exact = true)
  open class G {}
 
- @ObjCName("JsconstructorJsConstructorClass_H", exact = true)
+ @ObjCName("J2ktJsconstructorJsConstructorClass_H", exact = true)
  open class H: JsConstructorClass.G {
   constructor()
  }
 
- @ObjCName("JsconstructorJsConstructorClass_Varargs", exact = true)
+ @ObjCName("J2ktJsconstructorJsConstructorClass_Varargs", exact = true)
  open class Varargs: JsConstructorClass.A {
   constructor(
    vararg @ObjCName("IntArray") args: Int
   ): super(args!![1])
  }
 
- @ObjCName("JsconstructorJsConstructorClass_SubVarargs", exact = true)
+ @ObjCName("J2ktJsconstructorJsConstructorClass_SubVarargs", exact = true)
  open class SubVarargs: JsConstructorClass.Varargs {
   constructor(
    @ObjCName("Id") i: Any?,
@@ -157,7 +157,7 @@ open class JsConstructorClass {
    @ObjCName("Int") j: Int
   ): this(Any(), j)
 
-  @ObjCName("JsconstructorJsConstructorClass_SubVarargsCompanion", exact = true)
+  @ObjCName("J2ktJsconstructorJsConstructorClass_SubVarargsCompanion", exact = true)
   companion object {
    @JvmStatic
    @HiddenFromObjC
@@ -168,19 +168,19 @@ open class JsConstructorClass {
   }
  }
 
- @ObjCName("JsconstructorJsConstructorClass_InstanceVarargs", exact = true)
+ @ObjCName("J2ktJsconstructorJsConstructorClass_InstanceVarargs", exact = true)
  open inner class InstanceVarargs(
   vararg @ObjCName("IntArray") args: Int
  ): JsConstructorClass.A(args!![1]) {}
 
- @ObjCName("JsconstructorJsConstructorClass_RegularType", exact = true)
+ @ObjCName("J2ktJsconstructorJsConstructorClass_RegularType", exact = true)
  open class RegularType {
   constructor(
    @ObjCName("Id") b: Any?
   )
  }
 
- @ObjCName("JsconstructorJsConstructorClass_JsConstructorSubtypeOfRegularType", exact = true)
+ @ObjCName("J2ktJsconstructorJsConstructorClass_JsConstructorSubtypeOfRegularType", exact = true)
  open class JsConstructorSubtypeOfRegularType: JsConstructorClass.RegularType {
   constructor(
    @ObjCName("Id") `object`: Any?

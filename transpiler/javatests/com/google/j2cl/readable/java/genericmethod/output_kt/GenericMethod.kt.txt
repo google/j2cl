@@ -35,7 +35,7 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
-@ObjCName("GenericmethodGenericMethod", exact = true)
+@ObjCName("J2ktGenericmethodGenericMethod", exact = true)
 open class GenericMethod<T> {
  @ObjCName("foo")
  open fun <T_1, S> foo(
@@ -107,7 +107,7 @@ open class GenericMethod<T> {
   this.unchecked<GenericMethod.Content?>()!!.getProp_pp_genericmethod()
  }
 
- @ObjCName("GenericmethodGenericMethodCompanion", exact = true)
+ @ObjCName("J2ktGenericmethodGenericMethodCompanion", exact = true)
  companion object {
   @JvmStatic
   @ObjCName("acceptsContent")

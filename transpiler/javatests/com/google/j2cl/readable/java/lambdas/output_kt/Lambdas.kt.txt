@@ -41,7 +41,7 @@ import kotlin.let
 import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
-@ObjCName("LambdasLambdas", exact = true)
+@ObjCName("J2ktLambdasLambdas", exact = true)
 open class Lambdas {
  @JvmField
  @ObjCName("field_")
@@ -197,7 +197,7 @@ open class Lambdas {
   }).let { it as Lambdas.BiFunction<String?, String?, String?>?; it as Lambdas.MarkerWithDefaultMethod?; it }
  }
 
- @ObjCName("LambdasLambdasCompanion", exact = true)
+ @ObjCName("J2ktLambdasLambdasCompanion", exact = true)
  companion object {
   @JvmStatic
   @ObjCName("testLambdaInStaticContext")
@@ -381,7 +381,7 @@ open class Lambdas {
   }
  }
 
- @ObjCName("LambdasLambdas_GenericJsFunction", exact = true)
+ @ObjCName("J2ktLambdasLambdas_GenericJsFunction", exact = true)
  fun interface GenericJsFunction<R, T> {
   @ObjCName("apply")
   fun apply(
@@ -389,7 +389,7 @@ open class Lambdas {
   ): R
  }
 
- @ObjCName("LambdasLambdas_Thenable", exact = true)
+ @ObjCName("J2ktLambdasLambdas_Thenable", exact = true)
  fun interface Thenable<T> {
   @ObjCName("then")
   fun then(
@@ -398,7 +398,7 @@ open class Lambdas {
   )
  }
 
- @ObjCName("LambdasLambdas_AnotherThenable", exact = true)
+ @ObjCName("J2ktLambdasLambdas_AnotherThenable", exact = true)
  fun interface AnotherThenable<T> {
   @ObjCName("then")
   fun then(

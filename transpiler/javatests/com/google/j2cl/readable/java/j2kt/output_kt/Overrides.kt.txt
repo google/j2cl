@@ -24,9 +24,9 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktOverrides", exact = true)
+@ObjCName("J2ktJ2ktOverrides", exact = true)
 open class Overrides {
- @ObjCName("J2ktOverrides_Parent", exact = true)
+ @ObjCName("J2ktJ2ktOverrides_Parent", exact = true)
  interface Parent<T> {
   @ObjCName("foo")
   fun <E: T> foo(
@@ -34,7 +34,7 @@ open class Overrides {
   )
  }
 
- @ObjCName("J2ktOverrides_Child", exact = true)
+ @ObjCName("J2ktJ2ktOverrides_Child", exact = true)
  interface Child: Overrides.Parent<String?> {
   override fun <E: String?> foo(e: E)
  }

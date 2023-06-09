@@ -4,9 +4,11 @@
 
 #import "third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h"
 
-@class JstypeenumColor;
+@class J2ktJstypeenumColor;
 
 NS_ASSUME_NONNULL_BEGIN
+
+@compatibility_alias JstypeenumColor J2ktJstypeenumColor;
 
 typedef NS_ENUM(jint, JstypeenumColor_Enum) {
  JstypeenumColor_Enum_RED = 0,
@@ -14,16 +16,16 @@ typedef NS_ENUM(jint, JstypeenumColor_Enum) {
  JstypeenumColor_Enum_BLUE = 2,
 };
 
-NS_INLINE JstypeenumColor* JstypeenumColor_get_RED(void) {
- return JstypeenumColor.RED;
+NS_INLINE J2ktJstypeenumColor* JstypeenumColor_get_RED(void) {
+ return J2ktJstypeenumColor.RED;
 }
 
-NS_INLINE JstypeenumColor* JstypeenumColor_get_GREEN(void) {
- return JstypeenumColor.GREEN;
+NS_INLINE J2ktJstypeenumColor* JstypeenumColor_get_GREEN(void) {
+ return J2ktJstypeenumColor.GREEN;
 }
 
-NS_INLINE JstypeenumColor* JstypeenumColor_get_BLUE(void) {
- return JstypeenumColor.BLUE;
+NS_INLINE J2ktJstypeenumColor* JstypeenumColor_get_BLUE(void) {
+ return J2ktJstypeenumColor.BLUE;
 }
 
 NS_ASSUME_NONNULL_END

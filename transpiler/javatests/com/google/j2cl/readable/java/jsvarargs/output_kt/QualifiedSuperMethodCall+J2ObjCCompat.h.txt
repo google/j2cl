@@ -2,12 +2,17 @@
 
 #import <Foundation/Foundation.h>
 
-@class JsvarargsQualifiedSuperMethodCall;
+@class J2ktJsvarargsQualifiedSuperMethodCall;
+@class J2ktJsvarargsQualifiedSuperMethodCall_InnerClass;
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_INLINE JsvarargsQualifiedSuperMethodCall* create_JsvarargsQualifiedSuperMethodCall_init(void) {
- return [[JsvarargsQualifiedSuperMethodCall alloc] init];
+@compatibility_alias JsvarargsQualifiedSuperMethodCall J2ktJsvarargsQualifiedSuperMethodCall;
+
+NS_INLINE J2ktJsvarargsQualifiedSuperMethodCall* create_JsvarargsQualifiedSuperMethodCall_init(void) {
+ return [[J2ktJsvarargsQualifiedSuperMethodCall alloc] init];
 }
+
+@compatibility_alias JsvarargsQualifiedSuperMethodCall_InnerClass J2ktJsvarargsQualifiedSuperMethodCall_InnerClass;
 
 NS_ASSUME_NONNULL_END

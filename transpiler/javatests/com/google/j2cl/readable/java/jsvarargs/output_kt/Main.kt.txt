@@ -34,7 +34,7 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
-@ObjCName("JsvarargsMain", exact = true)
+@ObjCName("J2ktJsvarargsMain", exact = true)
 open class Main {
  @JvmField
  @HiddenFromObjC
@@ -157,7 +157,7 @@ open class Main {
   }
  }
 
- @ObjCName("JsvarargsMainCompanion", exact = true)
+ @ObjCName("J2ktJsvarargsMainCompanion", exact = true)
  companion object {
   @JvmStatic
   @ObjCName("f1")
@@ -229,7 +229,7 @@ open class Main {
   ): Any?
  }
 
- @ObjCName("JsvarargsMain_AbstractMethodWithVarargs", exact = true)
+ @ObjCName("J2ktJsvarargsMain_AbstractMethodWithVarargs", exact = true)
  abstract class AbstractMethodWithVarargs {
   @ObjCName("abstractMethod")
   abstract fun abstractMethod(
@@ -237,9 +237,9 @@ open class Main {
   )
  }
 
- @ObjCName("JsvarargsMain_StaticInterfaceMethodWithVarargs", exact = true)
+ @ObjCName("J2ktJsvarargsMain_StaticInterfaceMethodWithVarargs", exact = true)
  interface StaticInterfaceMethodWithVarargs {
-  @ObjCName("JsvarargsMain_StaticInterfaceMethodWithVarargsCompanion", exact = true)
+  @ObjCName("J2ktJsvarargsMain_StaticInterfaceMethodWithVarargsCompanion", exact = true)
   companion object {
    @JvmStatic
    @ObjCName("staticMethod")

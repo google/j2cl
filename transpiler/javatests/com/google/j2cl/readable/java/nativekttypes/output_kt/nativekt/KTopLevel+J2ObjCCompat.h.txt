@@ -2,43 +2,54 @@
 
 #import <Foundation/Foundation.h>
 
-@class NativekttypesNativektKTopLevel;
-@class NativekttypesNativektKTopLevelCompanion;
-@class NativekttypesNativektKTopLevel_KNested;
-@class NativekttypesNativektKTopLevel_KNestedCompanion;
+@class J2ktNativekttypesNativektKTopLevel;
+@class J2ktNativekttypesNativektKTopLevelCompanion;
+@class J2ktNativekttypesNativektKTopLevel_KInner;
+@class J2ktNativekttypesNativektKTopLevel_KNested;
+@class J2ktNativekttypesNativektKTopLevel_KNestedCompanion;
 
 NS_ASSUME_NONNULL_BEGIN
 
+@compatibility_alias NativekttypesNativektKTopLevel J2ktNativekttypesNativektKTopLevel;
+
+@compatibility_alias NativekttypesNativektKTopLevelCompanion J2ktNativekttypesNativektKTopLevelCompanion;
+
 NS_INLINE id _Nullable NativekttypesNativektKTopLevel_get_staticField(void) {
- return NativekttypesNativektKTopLevelCompanion.shared.staticField_;
+ return J2ktNativekttypesNativektKTopLevelCompanion.shared.staticField_;
 }
 
 NS_INLINE void NativekttypesNativektKTopLevel_set_staticField(id _Nullable value) {
- NativekttypesNativektKTopLevelCompanion.shared.staticField_ = value;
+ J2ktNativekttypesNativektKTopLevelCompanion.shared.staticField_ = value;
 }
 
-NS_INLINE NativekttypesNativektKTopLevel* create_NativekttypesNativektKTopLevel_initWithId_(id o) {
- return [[NativekttypesNativektKTopLevel alloc] initWithId:o];
+NS_INLINE J2ktNativekttypesNativektKTopLevel* create_NativekttypesNativektKTopLevel_initWithId_(id o) {
+ return [[J2ktNativekttypesNativektKTopLevel alloc] initWithId:o];
 }
 
 NS_INLINE id NativekttypesNativektKTopLevel_staticMethodWithId_(id s) {
- return [NativekttypesNativektKTopLevelCompanion.shared staticMethodWithId:s];
+ return [J2ktNativekttypesNativektKTopLevelCompanion.shared staticMethodWithId:s];
 }
 
+@compatibility_alias NativekttypesNativektKTopLevel_KNested J2ktNativekttypesNativektKTopLevel_KNested;
+
+@compatibility_alias NativekttypesNativektKTopLevel_KNestedCompanion J2ktNativekttypesNativektKTopLevel_KNestedCompanion;
+
 NS_INLINE id _Nullable NativekttypesNativektKTopLevel_KNested_get_staticField(void) {
- return NativekttypesNativektKTopLevel_KNestedCompanion.shared.staticField_;
+ return J2ktNativekttypesNativektKTopLevel_KNestedCompanion.shared.staticField_;
 }
 
 NS_INLINE void NativekttypesNativektKTopLevel_KNested_set_staticField(id _Nullable value) {
- NativekttypesNativektKTopLevel_KNestedCompanion.shared.staticField_ = value;
+ J2ktNativekttypesNativektKTopLevel_KNestedCompanion.shared.staticField_ = value;
 }
 
-NS_INLINE NativekttypesNativektKTopLevel_KNested* create_NativekttypesNativektKTopLevel_KNested_initWithId_(id n) {
- return [[NativekttypesNativektKTopLevel_KNested alloc] initWithId:n];
+NS_INLINE J2ktNativekttypesNativektKTopLevel_KNested* create_NativekttypesNativektKTopLevel_KNested_initWithId_(id n) {
+ return [[J2ktNativekttypesNativektKTopLevel_KNested alloc] initWithId:n];
 }
 
 NS_INLINE id NativekttypesNativektKTopLevel_KNested_staticMethodWithId_(id s) {
- return [NativekttypesNativektKTopLevel_KNestedCompanion.shared staticMethodWithId:s];
+ return [J2ktNativekttypesNativektKTopLevel_KNestedCompanion.shared staticMethodWithId:s];
 }
+
+@compatibility_alias NativekttypesNativektKTopLevel_KInner J2ktNativekttypesNativektKTopLevel_KInner;
 
 NS_ASSUME_NONNULL_END

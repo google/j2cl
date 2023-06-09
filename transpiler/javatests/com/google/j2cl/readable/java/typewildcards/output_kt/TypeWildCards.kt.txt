@@ -62,7 +62,7 @@ open class RecursiveSubtype: RecursiveType<RecursiveSubtype?> {
  ): super(wildcardParameter)
 }
 
-@ObjCName("TypewildcardsTypeWildCards", exact = true)
+@ObjCName("J2ktTypewildcardsTypeWildCards", exact = true)
 open class TypeWildCards {
  @ObjCName("unbounded")
  open fun unbounded(
@@ -127,7 +127,7 @@ open class TypeWildCards {
   TypeWildCards.takesRecursiveGeneric_private_2(Foo())
  }
 
- @ObjCName("TypewildcardsTypeWildCardsCompanion", exact = true)
+ @ObjCName("J2ktTypewildcardsTypeWildCardsCompanion", exact = true)
  companion object {
   @JvmStatic
   @ObjCName("testBoundedTypeMemberAccess")
@@ -205,25 +205,25 @@ open class TypeWildCards {
   open override fun m() {}
  }
 
- @ObjCName("TypewildcardsTypeWildCards_IntegerSupplier", exact = true)
+ @ObjCName("J2ktTypewildcardsTypeWildCards_IntegerSupplier", exact = true)
  fun interface IntegerSupplier {
   @ObjCName("get")
   fun get(): Int?
  }
 
- @ObjCName("TypewildcardsTypeWildCards_HasKey", exact = true)
+ @ObjCName("J2ktTypewildcardsTypeWildCards_HasKey", exact = true)
  fun interface HasKey {
   @ObjCName("getKey")
   fun getKey(): String?
  }
 
- @ObjCName("TypewildcardsTypeWildCards_Element", exact = true)
+ @ObjCName("J2ktTypewildcardsTypeWildCards_Element", exact = true)
  abstract inner class Element: TypeWildCards.HasKey, TypeWildCards.IntegerSupplier {}
 
- @ObjCName("TypewildcardsTypeWildCards_OtherElement", exact = true)
+ @ObjCName("J2ktTypewildcardsTypeWildCards_OtherElement", exact = true)
  abstract inner class OtherElement: TypeWildCards.IntegerSupplier, TypeWildCards.HasKey {}
 
- @ObjCName("TypewildcardsTypeWildCards_SubOtherElement", exact = true)
+ @ObjCName("J2ktTypewildcardsTypeWildCards_SubOtherElement", exact = true)
  abstract inner class SubOtherElement: TypeWildCards.OtherElement(), TypeWildCards.HasKey {}
 
  open inner class Foo: GenericType<TypeWildCards.Foo?>() {}

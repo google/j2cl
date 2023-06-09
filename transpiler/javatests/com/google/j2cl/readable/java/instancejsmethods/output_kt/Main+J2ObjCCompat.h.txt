@@ -2,12 +2,17 @@
 
 #import <Foundation/Foundation.h>
 
-@class InstancejsmethodsMainCompanion;
+@class J2ktInstancejsmethodsMain;
+@class J2ktInstancejsmethodsMainCompanion;
 
 NS_ASSUME_NONNULL_BEGIN
 
+@compatibility_alias InstancejsmethodsMain J2ktInstancejsmethodsMain;
+
+@compatibility_alias InstancejsmethodsMainCompanion J2ktInstancejsmethodsMainCompanion;
+
 NS_INLINE void InstancejsmethodsMain_testCallByConcreteType(void) {
- [InstancejsmethodsMainCompanion.shared testCallByConcreteType];
+ [J2ktInstancejsmethodsMainCompanion.shared testCallByConcreteType];
 }
 
 NS_ASSUME_NONNULL_END

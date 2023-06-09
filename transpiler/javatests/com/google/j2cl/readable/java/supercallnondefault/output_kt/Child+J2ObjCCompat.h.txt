@@ -4,12 +4,14 @@
 
 #import "third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h"
 
-@class SupercallnondefaultChild;
+@class J2ktSupercallnondefaultChild;
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_INLINE SupercallnondefaultChild* create_SupercallnondefaultChild_initWithInt_(jint a) {
- return [[SupercallnondefaultChild alloc] initWithInt:a];
+@compatibility_alias SupercallnondefaultChild J2ktSupercallnondefaultChild;
+
+NS_INLINE J2ktSupercallnondefaultChild* create_SupercallnondefaultChild_initWithInt_(jint a) {
+ return [[J2ktSupercallnondefaultChild alloc] initWithInt:a];
 }
 
 NS_ASSUME_NONNULL_END

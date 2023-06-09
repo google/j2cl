@@ -23,23 +23,23 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("InnerclassinheritanceMultipleNestings", exact = true)
+@ObjCName("J2ktInnerclassinheritanceMultipleNestings", exact = true)
 open class MultipleNestings {
  @ObjCName("funInM")
  open fun funInM() {}
 
- @ObjCName("InnerclassinheritanceMultipleNestings_Parent", exact = true)
+ @ObjCName("J2ktInnerclassinheritanceMultipleNestings_Parent", exact = true)
  open inner class Parent {
   @ObjCName("fun")
   open fun `fun`() {}
  }
 
- @ObjCName("InnerclassinheritanceMultipleNestings_InnerClass1", exact = true)
+ @ObjCName("J2ktInnerclassinheritanceMultipleNestings_InnerClass1", exact = true)
  open inner class InnerClass1: MultipleNestings.Parent() {
   @ObjCName("funInI1")
   open fun funInI1() {}
 
-  @ObjCName("InnerclassinheritanceMultipleNestings_InnerClass1_InnerClass2", exact = true)
+  @ObjCName("J2ktInnerclassinheritanceMultipleNestings_InnerClass1_InnerClass2", exact = true)
   open inner class InnerClass2: MultipleNestings.Parent() {
    @ObjCName("funInI2")
    open fun funInI2() {}

@@ -4,28 +4,33 @@
 
 #import "third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h"
 
-@class StaticinitializersStaticInitializersCompanion;
+@class J2ktStaticinitializersStaticInitializers;
+@class J2ktStaticinitializersStaticInitializersCompanion;
 
 NS_ASSUME_NONNULL_BEGIN
 
+@compatibility_alias StaticinitializersStaticInitializers J2ktStaticinitializersStaticInitializers;
+
+@compatibility_alias StaticinitializersStaticInitializersCompanion J2ktStaticinitializersStaticInitializersCompanion;
+
 NS_INLINE jint StaticinitializersStaticInitializers_get_a(void) {
- return StaticinitializersStaticInitializersCompanion.shared.a_;
+ return J2ktStaticinitializersStaticInitializersCompanion.shared.a_;
 }
 
 NS_INLINE void StaticinitializersStaticInitializers_set_a(jint value) {
- StaticinitializersStaticInitializersCompanion.shared.a_ = value;
+ J2ktStaticinitializersStaticInitializersCompanion.shared.a_ = value;
 }
 
 NS_INLINE jint StaticinitializersStaticInitializers_get_b(void) {
- return StaticinitializersStaticInitializersCompanion.shared.b_;
+ return J2ktStaticinitializersStaticInitializersCompanion.shared.b_;
 }
 
 NS_INLINE void StaticinitializersStaticInitializers_set_b(jint value) {
- StaticinitializersStaticInitializersCompanion.shared.b_ = value;
+ J2ktStaticinitializersStaticInitializersCompanion.shared.b_ = value;
 }
 
 NS_INLINE jint StaticinitializersStaticInitializers_get_c(void) {
- return StaticinitializersStaticInitializersCompanion.shared.c_;
+ return J2ktStaticinitializersStaticInitializersCompanion.shared.c_;
 }
 
 NS_ASSUME_NONNULL_END

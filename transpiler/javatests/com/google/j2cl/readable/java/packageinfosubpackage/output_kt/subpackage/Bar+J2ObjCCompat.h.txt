@@ -4,14 +4,19 @@
 
 #import "third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h"
 
-@class PackageinfosubpackageSubpackageBarCompanion;
+@class J2ktPackageinfosubpackageSubpackageBar;
+@class J2ktPackageinfosubpackageSubpackageBarCompanion;
 
 NS_ASSUME_NONNULL_BEGIN
+
+@compatibility_alias PackageinfosubpackageSubpackageBar J2ktPackageinfosubpackageSubpackageBar;
+
+@compatibility_alias PackageinfosubpackageSubpackageBarCompanion J2ktPackageinfosubpackageSubpackageBarCompanion;
 
 #define PackageinfosubpackageSubpackageBar_WOO 1001
 
 NS_INLINE jint PackageinfosubpackageSubpackageBar_get_WOO(void) {
- return PackageinfosubpackageSubpackageBarCompanion.shared.WOO_;
+ return J2ktPackageinfosubpackageSubpackageBarCompanion.shared.WOO_;
 }
 
 NS_ASSUME_NONNULL_END

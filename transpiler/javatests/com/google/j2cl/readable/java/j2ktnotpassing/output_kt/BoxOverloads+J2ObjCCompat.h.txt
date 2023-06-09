@@ -4,22 +4,29 @@
 
 #import "third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h"
 
-@class J2ktnotpassingBoxOverloadsCompanion;
+@class J2ktJ2ktnotpassingBoxOverloads;
+@class J2ktJ2ktnotpassingBoxOverloadsCompanion;
 
-@protocol J2ktnotpassingBoxOverloads_Generic;
+@protocol J2ktJ2ktnotpassingBoxOverloads_Generic;
 
 NS_ASSUME_NONNULL_BEGIN
 
+@compatibility_alias J2ktnotpassingBoxOverloads J2ktJ2ktnotpassingBoxOverloads;
+
+@compatibility_alias J2ktnotpassingBoxOverloadsCompanion J2ktJ2ktnotpassingBoxOverloadsCompanion;
+
 NS_INLINE void J2ktnotpassingBoxOverloads_boxedOverloadWithDouble_(jdouble d) {
- [J2ktnotpassingBoxOverloadsCompanion.shared boxedOverloadWithDouble:d];
+ [J2ktJ2ktnotpassingBoxOverloadsCompanion.shared boxedOverloadWithDouble:d];
 }
 
 NS_INLINE void J2ktnotpassingBoxOverloads_testBoxedOverload(void) {
- [J2ktnotpassingBoxOverloadsCompanion.shared testBoxedOverload];
+ [J2ktJ2ktnotpassingBoxOverloadsCompanion.shared testBoxedOverload];
 }
 
-NS_INLINE void J2ktnotpassingBoxOverloads_testGenericBoxedOverloadWithJ2ktnotpassingBoxOverloads_Generic_(id<J2ktnotpassingBoxOverloads_Generic> generic) {
- [J2ktnotpassingBoxOverloadsCompanion.shared testGenericBoxedOverloadWithJ2ktnotpassingBoxOverloads_Generic:generic];
+NS_INLINE void J2ktnotpassingBoxOverloads_testGenericBoxedOverloadWithJ2ktnotpassingBoxOverloads_Generic_(id<J2ktJ2ktnotpassingBoxOverloads_Generic> generic) {
+ [J2ktJ2ktnotpassingBoxOverloadsCompanion.shared testGenericBoxedOverloadWithJ2ktnotpassingBoxOverloads_Generic:generic];
 }
+
+#define J2ktnotpassingBoxOverloads_Generic J2ktJ2ktnotpassingBoxOverloads_Generic
 
 NS_ASSUME_NONNULL_END

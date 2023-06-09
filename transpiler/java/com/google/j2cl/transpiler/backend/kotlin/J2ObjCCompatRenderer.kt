@@ -36,6 +36,8 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid
 import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.ast.companionDeclaration
+import com.google.j2cl.transpiler.backend.kotlin.ast.companionObjectOrNull
+import com.google.j2cl.transpiler.backend.kotlin.ast.declaration
 import com.google.j2cl.transpiler.backend.kotlin.common.buildList
 import com.google.j2cl.transpiler.backend.kotlin.common.code
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
@@ -46,6 +48,8 @@ import com.google.j2cl.transpiler.backend.kotlin.objc.Import
 import com.google.j2cl.transpiler.backend.kotlin.objc.Renderer
 import com.google.j2cl.transpiler.backend.kotlin.objc.className
 import com.google.j2cl.transpiler.backend.kotlin.objc.comment
+import com.google.j2cl.transpiler.backend.kotlin.objc.compatibilityAlias
+import com.google.j2cl.transpiler.backend.kotlin.objc.defineAlias
 import com.google.j2cl.transpiler.backend.kotlin.objc.dependency
 import com.google.j2cl.transpiler.backend.kotlin.objc.emptyRenderer
 import com.google.j2cl.transpiler.backend.kotlin.objc.expressionStatement
@@ -118,6 +122,10 @@ private val Type.shouldRender: Boolean
 private val Type.declarationsRenderers: List<Renderer<Source>>
   get() =
     buildList<Renderer<Source>> {
+      add(declaration.aliasDeclarationRenderer)
+
+      companionObjectOrNull?.let { add(it.declaration.aliasDeclarationRenderer) }
+
       if (isEnum) {
         add(nsEnumTypedefRenderer)
       }
@@ -126,6 +134,28 @@ private val Type.declarationsRenderers: List<Renderer<Source>>
 
       addAll(members.flatMap { it.functionRenderers })
     }
+
+private val TypeDeclaration.aliasDeclarationRenderer: Renderer<Source>
+  get() =
+    objCNameRenderer.map { objCName ->
+      when (kind!!) {
+        TypeDeclaration.Kind.CLASS,
+        TypeDeclaration.Kind.ENUM -> semicolonEnded(compatibilityAlias(source(objCAlias), objCName))
+        TypeDeclaration.Kind.INTERFACE -> defineAlias(source(objCAlias), objCName)
+      }
+    }
+
+private val CompanionDeclaration.aliasDeclarationRenderer: Renderer<Source>
+  get() =
+    objCNameRenderer.map { objCName ->
+      semicolonEnded(compatibilityAlias(source(objCAlias), objCName))
+    }
+
+private val TypeDeclaration.objCAlias: String
+  get() = objCNameWithoutPrefix
+
+private val CompanionDeclaration.objCAlias: String
+  get() = objCNameWithoutPrefix
 
 private val Type.nsEnumTypedefRenderer: Renderer<Source>
   get() =

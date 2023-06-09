@@ -4,12 +4,14 @@
 
 #import "third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h"
 
-@class CascadingconstructorCascadingConstructor;
+@class J2ktCascadingconstructorCascadingConstructor;
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_INLINE CascadingconstructorCascadingConstructor* create_CascadingconstructorCascadingConstructor_initWithInt_(jint a) {
- return [[CascadingconstructorCascadingConstructor alloc] initWithInt:a];
+@compatibility_alias CascadingconstructorCascadingConstructor J2ktCascadingconstructorCascadingConstructor;
+
+NS_INLINE J2ktCascadingconstructorCascadingConstructor* create_CascadingconstructorCascadingConstructor_initWithInt_(jint a) {
+ return [[J2ktCascadingconstructorCascadingConstructor alloc] initWithInt:a];
 }
 
 NS_ASSUME_NONNULL_END
