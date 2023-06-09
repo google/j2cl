@@ -17,5 +17,4 @@ integration_test(
     # Contains JsInterop features which are only applicable for JS output.
     enable_jvm_test = False,
     enable_kt = False,
-    enable_wasm = False,
 )

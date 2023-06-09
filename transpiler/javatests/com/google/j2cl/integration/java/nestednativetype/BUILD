@@ -11,5 +11,4 @@ package(
 integration_test(
     name = "nestednativetype",
     srcs = glob(["*.java"]),
-    enable_wasm = False,  # TODO(b/264466634) Enable when imports are generated.
 )
