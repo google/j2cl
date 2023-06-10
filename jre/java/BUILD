@@ -164,13 +164,6 @@ closure_js_library(
     visibility = ["//visibility:private"],
 )
 
-closure_js_library(
-    name = "j2wasm_js",
-    srcs = ["super-wasm/j2wasm.js"],
-    visibility = ["//:__pkg__"],
-    deps = [":j2wasm_jsutils"],
-)
-
 j2cl_library(
     name = "jre",
     srcs = [

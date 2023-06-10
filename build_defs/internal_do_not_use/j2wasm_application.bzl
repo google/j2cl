@@ -12,8 +12,6 @@ load(":j2cl_js_common.bzl", "J2CL_JS_TOOLCHAIN_ATTRS", "j2cl_js_provider")
 _JS_IMPORTS_TEMPLATE = """// GENERATED CODE.
 goog.module("%MODULE_NAME%.j2wasm");
 
-const j2wasm = goog.require("j2wasm");
-
 %IMPORTS%
 
 /**
@@ -23,7 +21,10 @@ const j2wasm = goog.require("j2wasm");
  * @return {!Promise<!WebAssembly.Instance>}
  */
 async function instantiateStreaming(urlOrResponse) {
-    return j2wasm.instantiateStreamingOverridingImports(urlOrResponse, getImports());
+    const response =
+        typeof urlOrResponse == "string" ? fetch(urlOrResponse) : urlOrResponse;
+    const {instance} = await WebAssembly.instantiateStreaming(response, getImports());
+    return instance;
 }
 
 /**
@@ -39,7 +40,7 @@ async function instantiateStreaming(urlOrResponse) {
  * @return {!WebAssembly.Instance}
  */
 function instantiateBlocking(moduleObject) {
-    return j2wasm.instantiateBlockingOverridingImports(moduleObject, getImports());
+    return new WebAssembly.Instance(new WebAssembly.Module(moduleObject), getImports());
 }
 
 exports = {instantiateStreaming, instantiateBlocking};
@@ -214,7 +215,7 @@ def _impl_j2wasm_application(ctx):
     js_info = j2cl_js_provider(
         ctx,
         srcs = [js_module],
-        deps = [d[J2wasmInfo]._private_.js_info for d in deps] + [ctx.attr._j2wasm_js],
+        deps = [d[J2wasmInfo]._private_.js_info for d in deps],
     )
 
     return [
@@ -266,7 +267,6 @@ _J2WASM_APP_ATTRS = {
     "defines": attr.string_list(),
     "source_map_base_url": attr.string(),
     "_jre": attr.label(default = Label("//build_defs/internal_do_not_use:j2wasm_jre")),
-    "_j2wasm_js": attr.label(default = Label("//:j2wasm_js")),
     "_j2cl_transpiler": attr.label(
         cfg = "exec",
         executable = True,
