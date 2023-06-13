@@ -16,8 +16,12 @@
 package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static java.lang.String.format;
+import static java.util.Arrays.stream;
+import static java.util.stream.Collectors.joining;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.BiMap;
@@ -25,16 +29,27 @@ import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
+import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
+import javax.annotation.Nullable;
 
 /** Utility class holding type descriptors that need to be referenced directly. */
 public class TypeDescriptors {
-
   // Boxed types.
   public DeclaredTypeDescriptor javaLangBoolean;
   public DeclaredTypeDescriptor javaLangByte;
@@ -46,18 +61,26 @@ public class TypeDescriptors {
   public DeclaredTypeDescriptor javaLangShort;
   public DeclaredTypeDescriptor javaLangVoid;
 
+  @QualifiedBinaryName("java.lang.CharSequence")
   public DeclaredTypeDescriptor javaLangCharSequence;
+
   public DeclaredTypeDescriptor javaLangClass;
   public DeclaredTypeDescriptor javaLangCloneable;
   public DeclaredTypeDescriptor javaLangComparable;
   public DeclaredTypeDescriptor javaLangEnum;
   public DeclaredTypeDescriptor javaLangIterable;
+
+  @QualifiedBinaryName("java.lang.NullPointerException")
   public DeclaredTypeDescriptor javaLangNullPointerException;
+
   public DeclaredTypeDescriptor javaLangNumber;
   public DeclaredTypeDescriptor javaLangObject;
   public DeclaredTypeDescriptor javaLangRunnable;
   public DeclaredTypeDescriptor javaLangString;
+
+  @QualifiedBinaryName("java.lang.StringBuilder")
   public DeclaredTypeDescriptor javaLangStringBuilder;
+
   public DeclaredTypeDescriptor javaLangThrowable;
 
   public DeclaredTypeDescriptor javaUtilArrays;
@@ -68,26 +91,69 @@ public class TypeDescriptors {
 
   public DeclaredTypeDescriptor javaIoSerializable;
 
+  @Nullable
+  @QualifiedBinaryName("javaemul.internal.WasmArray")
   public DeclaredTypeDescriptor javaemulInternalWasmArray;
+
+  @Nullable
+  @QualifiedBinaryName("javaemul.internal.WasmArray$OfByte")
   public DeclaredTypeDescriptor javaemulInternalWasmArrayOfByte;
+
+  @Nullable
+  @QualifiedBinaryName("javaemul.internal.WasmArray$OfShort")
   public DeclaredTypeDescriptor javaemulInternalWasmArrayOfShort;
+
+  @Nullable
+  @QualifiedBinaryName("javaemul.internal.WasmArray$OfChar")
   public DeclaredTypeDescriptor javaemulInternalWasmArrayOfChar;
+
+  @Nullable
+  @QualifiedBinaryName("javaemul.internal.WasmArray$OfInt")
   public DeclaredTypeDescriptor javaemulInternalWasmArrayOfInt;
+
+  @Nullable
+  @QualifiedBinaryName("javaemul.internal.WasmArray$OfLong")
   public DeclaredTypeDescriptor javaemulInternalWasmArrayOfLong;
+
+  @Nullable
+  @QualifiedBinaryName("javaemul.internal.WasmArray$OfFloat")
   public DeclaredTypeDescriptor javaemulInternalWasmArrayOfFloat;
+
+  @Nullable
+  @QualifiedBinaryName("javaemul.internal.WasmArray$OfDouble")
   public DeclaredTypeDescriptor javaemulInternalWasmArrayOfDouble;
+
+  @Nullable
+  @QualifiedBinaryName("javaemul.internal.WasmArray$OfBoolean")
   public DeclaredTypeDescriptor javaemulInternalWasmArrayOfBoolean;
+
+  @Nullable
+  @QualifiedBinaryName("javaemul.internal.WasmArray$OfObject")
   public DeclaredTypeDescriptor javaemulInternalWasmArrayOfObject;
 
-  public DeclaredTypeDescriptor javaemulInternalAsserts;
+  @Nullable public DeclaredTypeDescriptor javaemulInternalAsserts;
+
+  @Nullable
+  @QualifiedBinaryName("javaemul.internal.ValueType")
   public DeclaredTypeDescriptor javaemulInternalValueType;
+
+  @Nullable
+  @QualifiedBinaryName("javaemul.internal.InternalPreconditions")
   public DeclaredTypeDescriptor javaemulInternalPreconditions;
-  public DeclaredTypeDescriptor javaemulInternalPrimitives;
-  public DeclaredTypeDescriptor javaemulInternalEnums;
+
+  @Nullable public DeclaredTypeDescriptor javaemulInternalPrimitives;
+  @Nullable public DeclaredTypeDescriptor javaemulInternalEnums;
+
+  @Nullable
+  @QualifiedBinaryName("javaemul.internal.Enums$BoxedLightEnum")
   public DeclaredTypeDescriptor javaemulInternalBoxedLightEnum;
+
+  @Nullable
+  @QualifiedBinaryName("javaemul.internal.Enums$BoxedComparableLightEnum")
   public DeclaredTypeDescriptor javaemulInternalBoxedComparableLightEnum;
-  public DeclaredTypeDescriptor javaemulInternalConstructor;
-  public DeclaredTypeDescriptor javaemulInternalPlatform;
+
+  @Nullable public DeclaredTypeDescriptor javaemulInternalConstructor;
+  @Nullable public DeclaredTypeDescriptor javaemulInternalPlatform;
   public DeclaredTypeDescriptor javaemulInternalExceptions;
 
   public ArrayTypeDescriptor javaLangObjectArray;
@@ -101,10 +167,22 @@ public class TypeDescriptors {
       createGlobalNativeTypeDescriptor("TypeError");
 
   // Kotlin-specific types
+  @Nullable
+  @QualifiedBinaryName("kotlin.jvm.internal.NothingStub")
   public DeclaredTypeDescriptor kotlinNothing;
-  public DeclaredTypeDescriptor kotlinJvmInternalIntrinsics;
+
+  @Nullable public DeclaredTypeDescriptor kotlinJvmInternalIntrinsics;
+
+  @Nullable
+  @QualifiedBinaryName("kotlin.jvm.internal.MutableKProperty0Impl")
   public DeclaredTypeDescriptor kotlinJvmInternalMutableKProperty0Impl;
+
+  @Nullable
+  @QualifiedBinaryName("kotlin.jvm.internal.MutableKProperty1Impl")
   public DeclaredTypeDescriptor kotlinJvmInternalMutableKProperty1Impl;
+
+  @Nullable
+  @QualifiedBinaryName("kotlin.jvm.internal.ReflectionFactory")
   public DeclaredTypeDescriptor kotlinJvmInternalReflectionFactory;
 
   /**
@@ -510,6 +588,7 @@ public class TypeDescriptors {
 
     private final TypeDescriptors typeDescriptors = new TypeDescriptors();
     private Map<String, DeclaredTypeDescriptor> knownTypesByQualifiedName = new HashMap<>();
+    private final Set<String> requiredTypes = new HashSet<>(requiredWellKnownTypes);
 
     public void buildSingleton() {
       // All the wellknown reference types are loaded, add the primitive <-> boxed types mapping.
@@ -519,6 +598,9 @@ public class TypeDescriptors {
             knownTypesByQualifiedName.get(primitiveTypeDescriptor.getBoxedClassName()));
       }
 
+      if (!requiredTypes.isEmpty()) {
+        throw new InternalCompilerError(format("Missing well known types %s.", requiredTypes));
+      }
       set(typeDescriptors);
       typeDescriptors.javaLangObjectArray =
           ArrayTypeDescriptor.newBuilder()
@@ -531,170 +613,15 @@ public class TypeDescriptors {
           !referenceType.isPrimitive(),
           "%s is not a reference type",
           referenceType.getQualifiedSourceName());
-      String name = referenceType.getQualifiedSourceName();
+      String name = referenceType.getQualifiedBinaryName();
       knownTypesByQualifiedName.put(name, referenceType);
-      switch (name) {
-        case "java.io.Serializable":
-          typeDescriptors.javaIoSerializable = referenceType;
-          break;
-        case "java.lang.Boolean":
-          typeDescriptors.javaLangBoolean = referenceType;
-          break;
-        case "java.lang.Byte":
-          typeDescriptors.javaLangByte = referenceType;
-          break;
-        case "java.lang.Character":
-          typeDescriptors.javaLangCharacter = referenceType;
-          break;
-        case "java.lang.Double":
-          typeDescriptors.javaLangDouble = referenceType;
-          break;
-        case "java.lang.Float":
-          typeDescriptors.javaLangFloat = referenceType;
-          break;
-        case "java.lang.Integer":
-          typeDescriptors.javaLangInteger = referenceType;
-          break;
-        case "java.lang.Long":
-          typeDescriptors.javaLangLong = referenceType;
-          break;
-        case "java.lang.Short":
-          typeDescriptors.javaLangShort = referenceType;
-          break;
-        case "java.lang.String":
-          typeDescriptors.javaLangString = referenceType;
-          break;
-        case "java.lang.StringBuilder":
-          typeDescriptors.javaLangStringBuilder = referenceType;
-          break;
-        case "java.lang.Void":
-          typeDescriptors.javaLangVoid = referenceType;
-          break;
-        case "java.lang.Class":
-          typeDescriptors.javaLangClass = referenceType;
-          break;
-        case "java.lang.Object":
-          typeDescriptors.javaLangObject = referenceType;
-          break;
-        case "java.util.Arrays":
-          typeDescriptors.javaUtilArrays = referenceType;
-          break;
-        case "java.util.Objects":
-          typeDescriptors.javaUtilObjects = referenceType;
-          break;
-        case "java.lang.Throwable":
-          typeDescriptors.javaLangThrowable = referenceType;
-          break;
-        case "java.lang.NullPointerException":
-          typeDescriptors.javaLangNullPointerException = referenceType;
-          break;
-        case "java.lang.Number":
-          typeDescriptors.javaLangNumber = referenceType;
-          break;
-        case "java.lang.Comparable":
-          typeDescriptors.javaLangComparable = referenceType;
-          break;
-        case "java.lang.CharSequence":
-          typeDescriptors.javaLangCharSequence = referenceType;
-          break;
-        case "java.lang.Cloneable":
-          typeDescriptors.javaLangCloneable = referenceType;
-          break;
-        case "java.lang.Enum":
-          typeDescriptors.javaLangEnum = referenceType;
-          break;
-        case "java.lang.Runnable":
-          typeDescriptors.javaLangRunnable = referenceType;
-          break;
-        case "java.lang.Iterable":
-          typeDescriptors.javaLangIterable = referenceType;
-          break;
-        case "java.util.Collection":
-          typeDescriptors.javaUtilCollection = referenceType;
-          break;
-        case "java.util.Iterator":
-          typeDescriptors.javaUtilIterator = referenceType;
-          break;
-        case "java.util.Map":
-          typeDescriptors.javaUtilMap = referenceType;
-          break;
-        case "javaemul.internal.ValueType":
-          typeDescriptors.javaemulInternalValueType = referenceType;
-          break;
-        case "javaemul.internal.InternalPreconditions":
-          typeDescriptors.javaemulInternalPreconditions = referenceType;
-          break;
-        case "javaemul.internal.Primitives":
-          typeDescriptors.javaemulInternalPrimitives = referenceType;
-          break;
-        case "javaemul.internal.Enums":
-          typeDescriptors.javaemulInternalEnums = referenceType;
-          break;
-        case "javaemul.internal.Enums.BoxedLightEnum":
-          typeDescriptors.javaemulInternalBoxedLightEnum = referenceType;
-          break;
-        case "javaemul.internal.Enums.BoxedComparableLightEnum":
-          typeDescriptors.javaemulInternalBoxedComparableLightEnum = referenceType;
-          break;
-        case "javaemul.internal.Constructor":
-          typeDescriptors.javaemulInternalConstructor = referenceType;
-          break;
-        case "javaemul.internal.Platform":
-          typeDescriptors.javaemulInternalPlatform = referenceType;
-          break;
-        case "javaemul.internal.Exceptions":
-          typeDescriptors.javaemulInternalExceptions = referenceType;
-          break;
-        case "javaemul.internal.WasmArray":
-          typeDescriptors.javaemulInternalWasmArray = referenceType;
-          break;
-        case "javaemul.internal.WasmArray.OfByte":
-          typeDescriptors.javaemulInternalWasmArrayOfByte = referenceType;
-          break;
-        case "javaemul.internal.WasmArray.OfShort":
-          typeDescriptors.javaemulInternalWasmArrayOfShort = referenceType;
-          break;
-        case "javaemul.internal.WasmArray.OfChar":
-          typeDescriptors.javaemulInternalWasmArrayOfChar = referenceType;
-          break;
-        case "javaemul.internal.WasmArray.OfInt":
-          typeDescriptors.javaemulInternalWasmArrayOfInt = referenceType;
-          break;
-        case "javaemul.internal.WasmArray.OfLong":
-          typeDescriptors.javaemulInternalWasmArrayOfLong = referenceType;
-          break;
-        case "javaemul.internal.WasmArray.OfFloat":
-          typeDescriptors.javaemulInternalWasmArrayOfFloat = referenceType;
-          break;
-        case "javaemul.internal.WasmArray.OfDouble":
-          typeDescriptors.javaemulInternalWasmArrayOfDouble = referenceType;
-          break;
-        case "javaemul.internal.WasmArray.OfBoolean":
-          typeDescriptors.javaemulInternalWasmArrayOfBoolean = referenceType;
-          break;
-        case "javaemul.internal.WasmArray.OfObject":
-          typeDescriptors.javaemulInternalWasmArrayOfObject = referenceType;
-          break;
-        case "javaemul.internal.Asserts":
-          typeDescriptors.javaemulInternalAsserts = referenceType;
-          break;
-        case "kotlin.jvm.internal.NothingStub":
-          typeDescriptors.kotlinNothing = referenceType;
-          break;
-        case "kotlin.jvm.internal.Intrinsics":
-          typeDescriptors.kotlinJvmInternalIntrinsics = referenceType;
-          break;
-        case "kotlin.jvm.internal.MutableKProperty0Impl":
-          typeDescriptors.kotlinJvmInternalMutableKProperty0Impl = referenceType;
-          break;
-        case "kotlin.jvm.internal.MutableKProperty1Impl":
-          typeDescriptors.kotlinJvmInternalMutableKProperty1Impl = referenceType;
-          break;
-        case "kotlin.jvm.internal.ReflectionFactory":
-          typeDescriptors.kotlinJvmInternalReflectionFactory = referenceType;
-          break;
-        default:
-          throw new IllegalStateException("Unexpected reference type in well known set: " + name);
+      Field field = checkNotNull(wellKnownTypeFieldsByQualifiedName.get(name));
+      try {
+        field.set(typeDescriptors, referenceType);
+        requiredTypes.remove(name);
+      } catch (IllegalAccessException e) {
+        throw new InternalCompilerError(
+            e, format("Could not set field for well known type '%s'.", name));
       }
       return this;
     }
@@ -704,4 +631,54 @@ public class TypeDescriptors {
       return typeDescriptors.boxedTypeByPrimitiveType.put(primitiveType, boxedType);
     }
   }
+
+  static final Map<String, Field> wellKnownTypeFieldsByQualifiedName = new LinkedHashMap<>();
+  static final Set<String> requiredWellKnownTypes = new HashSet<>();
+
+  public static Set<String> getWellKnownTypeNames() {
+    return wellKnownTypeFieldsByQualifiedName.keySet();
+  }
+
+  static {
+    // Iterate over the public non final fields.
+    stream(TypeDescriptors.class.getDeclaredFields())
+        .sorted(Comparator.comparing(Field::getName))
+        .filter(f -> (f.getModifiers() & Modifier.FINAL) == 0)
+        .filter(f -> f.getType().equals(DeclaredTypeDescriptor.class))
+        .forEach(
+            f -> {
+              String name = getClassBinaryName(f);
+              checkState(wellKnownTypeFieldsByQualifiedName.put(name, f) == null);
+              if (f.getDeclaredAnnotation(Nullable.class) == null) {
+                requiredWellKnownTypes.add(name);
+              }
+            });
+  }
+
+  /**
+   * Constructs the class name from the field name, assumes that capital letter split components and
+   * that all but the last component is part of the package.
+   *
+   * <p>This works for most fields, except multiword class names and nested classes.
+   */
+  private static String getClassBinaryName(Field field) {
+    QualifiedBinaryName qualifiedNameAnnotation =
+        field.getDeclaredAnnotation(QualifiedBinaryName.class);
+    if (qualifiedNameAnnotation != null) {
+      return qualifiedNameAnnotation.value();
+    }
+    List<String> components = Arrays.asList(field.getName().split("(?=\\p{Upper})"));
+    return components.subList(0, components.size() - 1).stream()
+            .map(String::toLowerCase)
+            .collect(joining(".", "", "."))
+        + Iterables.getLast(components);
+  }
+
+  /** Annotation to declare the actual binary name for the well known type field. */
+  @Retention(RetentionPolicy.RUNTIME)
+  @Target(ElementType.FIELD)
+  @interface QualifiedBinaryName {
+    String value();
+  }
 }
+

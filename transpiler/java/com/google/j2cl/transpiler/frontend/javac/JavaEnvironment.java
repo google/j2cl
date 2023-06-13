@@ -69,6 +69,7 @@ import com.sun.tools.javac.model.JavacElements;
 import com.sun.tools.javac.model.JavacTypes;
 import com.sun.tools.javac.util.Context;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -101,7 +102,7 @@ class JavaEnvironment {
   Types internalTypes;
   JavacElements elements;
 
-  JavaEnvironment(Context context, List<String> wellKnownQualifiedBinaryNames) {
+  JavaEnvironment(Context context, Collection<String> wellKnownQualifiedBinaryNames) {
     this.javacTypes = JavacTypes.instance(context);
     this.internalTypes = Types.instance(context);
     this.elements = JavacElements.instance(context);
@@ -109,7 +110,7 @@ class JavaEnvironment {
     initWellKnownTypes(wellKnownQualifiedBinaryNames);
   }
 
-  private void initWellKnownTypes(List<String> wellKnownQualifiedBinaryNames) {
+  private void initWellKnownTypes(Collection<String> wellKnownQualifiedBinaryNames) {
     if (TypeDescriptors.isInitialized()) {
       return;
     }

@@ -15,12 +15,7 @@
  */
 package com.google.j2cl.transpiler.frontend.common;
 
-import static com.google.common.collect.ImmutableList.toImmutableList;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Streams;
-import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
-import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 
 /** Constants common to all frontends. */
 public final class FrontendConstants {
@@ -51,55 +46,6 @@ public final class FrontendConstants {
   public static final String DO_NOT_AUTOBOX_ANNOTATION_NAME =
       "javaemul.internal.annotations.DoNotAutobox";
 
-  /** Classes that that might be needed by the different transpilation paths. */
-  private static final ImmutableList<String> KNOWN_QUALIFIED_BINARY_NAMES =
-      ImmutableList.of(
-          "java.io.Serializable",
-          "java.lang.CharSequence",
-          "java.lang.Class",
-          "java.lang.Cloneable",
-          "java.lang.Comparable",
-          "java.lang.Enum",
-          "java.lang.Iterable",
-          "java.lang.NullPointerException",
-          "java.lang.Number",
-          "java.lang.Object",
-          "java.lang.Runnable",
-          "java.lang.String",
-          "java.lang.StringBuilder",
-          "java.lang.Throwable",
-          "java.util.Arrays",
-          "java.util.Collection",
-          "java.util.Iterator",
-          "java.util.Map",
-          "java.util.Objects",
-          "javaemul.internal.Asserts",
-          "javaemul.internal.ValueType",
-          "javaemul.internal.InternalPreconditions",
-          "javaemul.internal.Primitives",
-          "javaemul.internal.Enums",
-          "javaemul.internal.Enums$BoxedLightEnum",
-          "javaemul.internal.Enums$BoxedComparableLightEnum",
-          "javaemul.internal.Exceptions",
-          "javaemul.internal.Constructor",
-          "javaemul.internal.Platform",
-          "javaemul.internal.WasmArray",
-          "javaemul.internal.WasmArray$OfObject",
-          "javaemul.internal.WasmArray$OfByte",
-          "javaemul.internal.WasmArray$OfShort",
-          "javaemul.internal.WasmArray$OfChar",
-          "javaemul.internal.WasmArray$OfInt",
-          "javaemul.internal.WasmArray$OfLong",
-          "javaemul.internal.WasmArray$OfFloat",
-          "javaemul.internal.WasmArray$OfDouble",
-          "javaemul.internal.WasmArray$OfBoolean");
-
-  public static ImmutableList<String> getKnownQualifiedBinaryNames() {
-    return Streams.concat(
-            FrontendConstants.KNOWN_QUALIFIED_BINARY_NAMES.stream(),
-            PrimitiveTypes.TYPES.stream().map(PrimitiveTypeDescriptor::getBoxedClassName))
-        .collect(toImmutableList());
-  }
 
   private FrontendConstants() {}
 }

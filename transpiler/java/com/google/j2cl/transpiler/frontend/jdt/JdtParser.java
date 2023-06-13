@@ -20,7 +20,7 @@ import com.google.common.collect.Iterables;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourceUtils.FileInfo;
-import com.google.j2cl.transpiler.frontend.common.FrontendConstants;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -105,7 +105,7 @@ public class JdtParser {
             .filter(f -> !f.endsWith("module-info.java"))
             .toArray(String[]::new),
         getEncodings(filePaths.size()),
-        FrontendConstants.getKnownQualifiedBinaryNames().stream()
+        TypeDescriptors.getWellKnownTypeNames().stream()
             .map(BindingKey::createTypeBindingKey)
             .toArray(String[]::new),
         astRequestor,

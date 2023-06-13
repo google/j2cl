@@ -23,7 +23,7 @@ import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
-import com.google.j2cl.transpiler.frontend.common.FrontendConstants;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.sun.source.tree.CompilationUnitTree;
 import com.sun.tools.javac.api.JavacTaskImpl;
 import com.sun.tools.javac.file.JavacFileManager;
@@ -106,9 +106,9 @@ public class JavacParser {
       }
 
       JavaEnvironment javaEnvironment =
-          new JavaEnvironment(task.getContext(), FrontendConstants.getKnownQualifiedBinaryNames());
-      return CompilationUnitBuilder.build(javacCompilationUnits, javaEnvironment);
+          new JavaEnvironment(task.getContext(), TypeDescriptors.getWellKnownTypeNames());
 
+      return CompilationUnitBuilder.build(javacCompilationUnits, javaEnvironment);
     } catch (IOException e) {
       problems.fatal(FatalError.valueOf(e.getMessage()));
       return null;
