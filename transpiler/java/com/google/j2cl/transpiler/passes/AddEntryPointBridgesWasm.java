@@ -41,13 +41,13 @@ import java.util.regex.Pattern;
  * (instead of the original entry points). The forwarding methods perform necessary conversions
  * between {@code java.lang.String} and Wasm strings.
  */
-public class InsertWasmEntryPointBridges extends LibraryNormalizationPass {
+public class AddEntryPointBridgesWasm extends LibraryNormalizationPass {
 
   private final ImmutableList<Pattern> entryPointPatterns;
   private final Set<Pattern> unmatchedEntryPointPatterns;
   private final Set<String> exportedMethodNames;
 
-  public InsertWasmEntryPointBridges(ImmutableList<Pattern> entryPointPatterns) {
+  public AddEntryPointBridgesWasm(ImmutableList<Pattern> entryPointPatterns) {
     this.entryPointPatterns = entryPointPatterns;
     this.unmatchedEntryPointPatterns = new HashSet<>(entryPointPatterns);
     this.exportedMethodNames = new HashSet<>();
@@ -96,7 +96,7 @@ public class InsertWasmEntryPointBridges extends LibraryNormalizationPass {
         Streams.zip(
                 parameters.stream(),
                 targetMethodDescriptor.getParameterTypeDescriptors().stream(),
-                InsertWasmEntryPointBridges::convertArgumentIfNeeded)
+                AddEntryPointBridgesWasm::convertArgumentIfNeeded)
             .collect(toImmutableList());
 
     TypeDescriptor returnType = targetMethodDescriptor.getReturnTypeDescriptor();

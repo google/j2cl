@@ -28,7 +28,7 @@ import com.google.j2cl.transpiler.ast.TypeVariable;
 import java.util.Map;
 
 /** Propagates nullability in overrides in non-null-marked types. */
-public class PropagateNullabilityKotlin extends NormalizationPass {
+public class PropagateNullabilityJ2kt extends NormalizationPass {
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {

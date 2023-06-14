@@ -29,7 +29,7 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 
 /** Rewrites certain Java operators to Kotlin method calls. */
-public final class ImplementKotlinBitLevelOperators extends NormalizationPass {
+public final class ImplementBitLevelOperatorsJ2kt extends NormalizationPass {
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {

@@ -26,7 +26,7 @@ import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 
 /** Inserts string conversion for Kotlin. */
-public class InsertStringConversionsKotlin extends NormalizationPass {
+public class InsertStringConversionsJ2kt extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(

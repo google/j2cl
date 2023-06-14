@@ -27,7 +27,7 @@ import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.Node;
 
 /** Normalize varargs invocations for Kotlin. */
-public class NormalizeVarargInvocationsKotlin extends NormalizationPass {
+public class NormalizeVarargInvocationsJ2kt extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(

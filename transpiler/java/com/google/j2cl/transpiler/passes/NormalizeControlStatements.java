@@ -23,7 +23,7 @@ import com.google.j2cl.transpiler.ast.LoopStatement;
 import com.google.j2cl.transpiler.ast.Statement;
 
 /** Makes sure that body of conditional are always blocks (except in the else if case). */
-public class ControlStatementFormatter extends NormalizationPass {
+public class NormalizeControlStatements extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(

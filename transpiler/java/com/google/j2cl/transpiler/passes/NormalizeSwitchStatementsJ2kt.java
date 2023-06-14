@@ -82,7 +82,7 @@ import java.util.List;
  * }
  * }</pre>
  */
-public class NormalizeSwitchStatementsKotlin extends NormalizationPass {
+public class NormalizeSwitchStatementsJ2kt extends NormalizationPass {
   /** Case/label pair. */
   @AutoValue
   abstract static class SwitchCaseWithLabel {
@@ -134,7 +134,7 @@ public class NormalizeSwitchStatementsKotlin extends NormalizationPass {
     return switchCases.stream()
         .map(
             switchCase ->
-                new AutoValue_NormalizeSwitchStatementsKotlin_SwitchCaseWithLabel(
+                new AutoValue_NormalizeSwitchStatementsJ2kt_SwitchCaseWithLabel(
                     switchCase, Label.newBuilder().setName("CASE").build()))
         .collect(toImmutableList());
   }

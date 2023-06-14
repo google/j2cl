@@ -31,7 +31,7 @@ import com.google.j2cl.transpiler.ast.VariableReference;
  * Normalize for-each statement in Kotlin by extracting loop variable declaration outside the
  * statement, allowing insertion of casts and non-null assertions when necessary.
  */
-public class NormalizeForEachStatementKotlin extends NormalizationPass {
+public class NormalizeForEachStatementJ2kt extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(

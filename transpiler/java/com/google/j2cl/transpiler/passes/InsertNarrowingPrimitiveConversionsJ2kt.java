@@ -30,7 +30,7 @@ import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewrite
  * <p>In Kotlin, the conversion between char and integral types must be explicit. This pass will
  * insert explicit casts between char and integral primitive types.
  */
-public class InsertNarrowingPrimitiveConversionsKotlin extends NormalizationPass {
+public class InsertNarrowingPrimitiveConversionsJ2kt extends NormalizationPass {
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {

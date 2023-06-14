@@ -23,22 +23,22 @@ import com.google.j2cl.transpiler.backend.closure.OutputGeneratorStage;
 import com.google.j2cl.transpiler.backend.kotlin.KotlinGeneratorStage;
 import com.google.j2cl.transpiler.backend.wasm.WasmModuleGenerator;
 import com.google.j2cl.transpiler.passes.AddAbstractMethodStubs;
+import com.google.j2cl.transpiler.passes.AddBridgeMethods;
 import com.google.j2cl.transpiler.passes.AddDisambiguatingSuperMethodForwardingStubs;
+import com.google.j2cl.transpiler.passes.AddEntryPointBridgesWasm;
+import com.google.j2cl.transpiler.passes.AddEnumImplicitMethods;
 import com.google.j2cl.transpiler.passes.AddNothingReturnStatements;
-import com.google.j2cl.transpiler.passes.AddVisibilityMethodBridgesKotlin;
-import com.google.j2cl.transpiler.passes.ArrayAccessNormalizer;
-import com.google.j2cl.transpiler.passes.BridgeMethodsCreator;
-import com.google.j2cl.transpiler.passes.ControlStatementFormatter;
+import com.google.j2cl.transpiler.passes.AddVisibilityMethodBridgesJ2kt;
 import com.google.j2cl.transpiler.passes.ConvertMethodReferencesToLambdas;
 import com.google.j2cl.transpiler.passes.CreateImplicitConstructors;
 import com.google.j2cl.transpiler.passes.DevirtualizeBoxedTypesAndJsFunctionImplementations;
 import com.google.j2cl.transpiler.passes.DevirtualizeMethodCalls;
-import com.google.j2cl.transpiler.passes.EnumMethodsCreator;
 import com.google.j2cl.transpiler.passes.ExpandCompoundAssignments;
 import com.google.j2cl.transpiler.passes.ExtractNonIdempotentExpressions;
 import com.google.j2cl.transpiler.passes.FilloutMissingSourceMapInformation;
 import com.google.j2cl.transpiler.passes.ImplementArraysAsClasses;
 import com.google.j2cl.transpiler.passes.ImplementAssertStatements;
+import com.google.j2cl.transpiler.passes.ImplementBitLevelOperatorsJ2kt;
 import com.google.j2cl.transpiler.passes.ImplementClassMetadataViaConstructors;
 import com.google.j2cl.transpiler.passes.ImplementClassMetadataViaGetters;
 import com.google.j2cl.transpiler.passes.ImplementDivisionOperations;
@@ -47,7 +47,6 @@ import com.google.j2cl.transpiler.passes.ImplementFloatingPointRemainderOperatio
 import com.google.j2cl.transpiler.passes.ImplementInstanceInitialization;
 import com.google.j2cl.transpiler.passes.ImplementInstanceOfs;
 import com.google.j2cl.transpiler.passes.ImplementJsFunctionCopyMethod;
-import com.google.j2cl.transpiler.passes.ImplementKotlinBitLevelOperators;
 import com.google.j2cl.transpiler.passes.ImplementLambdaExpressionsViaImplementorClasses;
 import com.google.j2cl.transpiler.passes.ImplementLambdaExpressionsViaJsFunctionAdaptor;
 import com.google.j2cl.transpiler.passes.ImplementStaticInitializationViaClinitFunctionRedirection;
@@ -68,24 +67,23 @@ import com.google.j2cl.transpiler.passes.InsertExceptionConversions;
 import com.google.j2cl.transpiler.passes.InsertExceptionConversionsWasm;
 import com.google.j2cl.transpiler.passes.InsertExplicitArrayCoercionCasts;
 import com.google.j2cl.transpiler.passes.InsertExplicitSuperCalls;
+import com.google.j2cl.transpiler.passes.InsertExternConversionsWasm;
 import com.google.j2cl.transpiler.passes.InsertIntegerCoercions;
 import com.google.j2cl.transpiler.passes.InsertJsDocCastsToTypeBounds;
 import com.google.j2cl.transpiler.passes.InsertJsEnumBoxingAndUnboxingConversions;
 import com.google.j2cl.transpiler.passes.InsertJsFunctionImplementationConversionCasts;
 import com.google.j2cl.transpiler.passes.InsertNarrowingPrimitiveConversions;
-import com.google.j2cl.transpiler.passes.InsertNarrowingPrimitiveConversionsKotlin;
+import com.google.j2cl.transpiler.passes.InsertNarrowingPrimitiveConversionsJ2kt;
 import com.google.j2cl.transpiler.passes.InsertNarrowingReferenceConversions;
 import com.google.j2cl.transpiler.passes.InsertNotNullAssertions;
 import com.google.j2cl.transpiler.passes.InsertQualifierProjectionCasts;
 import com.google.j2cl.transpiler.passes.InsertRawTypeCasts;
 import com.google.j2cl.transpiler.passes.InsertStringConversions;
-import com.google.j2cl.transpiler.passes.InsertStringConversionsKotlin;
+import com.google.j2cl.transpiler.passes.InsertStringConversionsJ2kt;
 import com.google.j2cl.transpiler.passes.InsertTypeAnnotationOnGenericReturnTypes;
 import com.google.j2cl.transpiler.passes.InsertUnboxingConversions;
-import com.google.j2cl.transpiler.passes.InsertWasmEntryPointBridges;
-import com.google.j2cl.transpiler.passes.InsertWasmExternConversions;
 import com.google.j2cl.transpiler.passes.InsertWideningPrimitiveConversions;
-import com.google.j2cl.transpiler.passes.InsertWideningPrimitiveConversionsKotlin;
+import com.google.j2cl.transpiler.passes.InsertWideningPrimitiveConversionsJ2kt;
 import com.google.j2cl.transpiler.passes.J2ktRestrictionsChecker;
 import com.google.j2cl.transpiler.passes.JsInteropRestrictionsChecker;
 import com.google.j2cl.transpiler.passes.MakeFieldsFinal;
@@ -93,20 +91,22 @@ import com.google.j2cl.transpiler.passes.MakeVariablesFinal;
 import com.google.j2cl.transpiler.passes.MoveNestedClassesToTop;
 import com.google.j2cl.transpiler.passes.MoveVariableDeclarationsToEnclosingBlock;
 import com.google.j2cl.transpiler.passes.NormalizationPass;
+import com.google.j2cl.transpiler.passes.NormalizeArrayAccesses;
 import com.google.j2cl.transpiler.passes.NormalizeArrayCreations;
-import com.google.j2cl.transpiler.passes.NormalizeArrayCreationsKotlin;
+import com.google.j2cl.transpiler.passes.NormalizeArrayCreationsJ2kt;
 import com.google.j2cl.transpiler.passes.NormalizeArrayCreationsWasm;
 import com.google.j2cl.transpiler.passes.NormalizeArrayLiterals;
-import com.google.j2cl.transpiler.passes.NormalizeBasicCastsKotlin;
+import com.google.j2cl.transpiler.passes.NormalizeBasicCastsJ2kt;
 import com.google.j2cl.transpiler.passes.NormalizeCasts;
 import com.google.j2cl.transpiler.passes.NormalizeCatchClauses;
 import com.google.j2cl.transpiler.passes.NormalizeConstructors;
+import com.google.j2cl.transpiler.passes.NormalizeControlStatements;
 import com.google.j2cl.transpiler.passes.NormalizeEnumClasses;
 import com.google.j2cl.transpiler.passes.NormalizeEquality;
 import com.google.j2cl.transpiler.passes.NormalizeFieldInitialization;
-import com.google.j2cl.transpiler.passes.NormalizeFieldInitializationKotlin;
+import com.google.j2cl.transpiler.passes.NormalizeFieldInitializationJ2kt;
 import com.google.j2cl.transpiler.passes.NormalizeForEachStatement;
-import com.google.j2cl.transpiler.passes.NormalizeForEachStatementKotlin;
+import com.google.j2cl.transpiler.passes.NormalizeForEachStatementJ2kt;
 import com.google.j2cl.transpiler.passes.NormalizeForStatements;
 import com.google.j2cl.transpiler.passes.NormalizeFunctionExpressions;
 import com.google.j2cl.transpiler.passes.NormalizeInstanceCompileTimeConstants;
@@ -123,7 +123,7 @@ import com.google.j2cl.transpiler.passes.NormalizeLabeledStatements;
 import com.google.j2cl.transpiler.passes.NormalizeLabels;
 import com.google.j2cl.transpiler.passes.NormalizeLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeLongs;
-import com.google.j2cl.transpiler.passes.NormalizeMethodParametersKotlin;
+import com.google.j2cl.transpiler.passes.NormalizeMethodParametersJ2kt;
 import com.google.j2cl.transpiler.passes.NormalizeMultiExpressions;
 import com.google.j2cl.transpiler.passes.NormalizeNativePropertyAccesses;
 import com.google.j2cl.transpiler.passes.NormalizeNullLiterals;
@@ -133,17 +133,17 @@ import com.google.j2cl.transpiler.passes.NormalizeStaticMemberQualifiers;
 import com.google.j2cl.transpiler.passes.NormalizeStaticNativeMemberReferences;
 import com.google.j2cl.transpiler.passes.NormalizeSuperMemberReferences;
 import com.google.j2cl.transpiler.passes.NormalizeSwitchStatements;
-import com.google.j2cl.transpiler.passes.NormalizeSwitchStatementsKotlin;
+import com.google.j2cl.transpiler.passes.NormalizeSwitchStatementsJ2kt;
 import com.google.j2cl.transpiler.passes.NormalizeSynchronizedMethods;
 import com.google.j2cl.transpiler.passes.NormalizeTryWithResources;
-import com.google.j2cl.transpiler.passes.NormalizeVarargInvocationsKotlin;
-import com.google.j2cl.transpiler.passes.NormalizeVarargParametersKotlin;
+import com.google.j2cl.transpiler.passes.NormalizeVarargInvocationsJ2kt;
+import com.google.j2cl.transpiler.passes.NormalizeVarargParametersJ2kt;
 import com.google.j2cl.transpiler.passes.NormalizeVariableInitialization;
 import com.google.j2cl.transpiler.passes.OptimizeAnonymousInnerClassesToFunctionExpressions;
 import com.google.j2cl.transpiler.passes.OptimizeAutoValue;
 import com.google.j2cl.transpiler.passes.OptimizeEnums;
 import com.google.j2cl.transpiler.passes.PropagateConstants;
-import com.google.j2cl.transpiler.passes.PropagateNullabilityKotlin;
+import com.google.j2cl.transpiler.passes.PropagateNullabilityJ2kt;
 import com.google.j2cl.transpiler.passes.RecoverShortcutBooleanOperator;
 import com.google.j2cl.transpiler.passes.RemoveAssertStatements;
 import com.google.j2cl.transpiler.passes.RemoveIsInstanceMethods;
@@ -227,7 +227,7 @@ public enum Backend {
           NormalizeFunctionExpressions::new,
           // Compute bridge methods before optimizing autovalue, since inlining the autovalue
           // classes requires inlining the bridges as well.
-          BridgeMethodsCreator::new,
+          AddBridgeMethods::new,
           () -> new OptimizeAutoValue(options.getOptimizeAutoValue()),
 
           // Default constructors and explicit super calls should be synthesized first.
@@ -238,7 +238,7 @@ public enum Backend {
           // ... and flatten the class hierarchy.
           MoveNestedClassesToTop::new,
           OptimizeEnums::new,
-          EnumMethodsCreator::new,
+          AddEnumImplicitMethods::new,
           DevirtualizeBoxedTypesAndJsFunctionImplementations::new,
           NormalizeTryWithResources::new,
           NormalizeCatchClauses::new,
@@ -258,7 +258,7 @@ public enum Backend {
           NormalizeStaticMemberQualifiers::new,
           // Runs after NormalizeStaticMemberQualifiersPass.
           DevirtualizeMethodCalls::new,
-          ControlStatementFormatter::new,
+          NormalizeControlStatements::new,
           NormalizeMultiExpressions::new,
           // Runs after NormalizeMultiExpressions to make sure it only sees valid l-values.
           ExpandCompoundAssignments::new,
@@ -279,7 +279,7 @@ public enum Backend {
           InsertJsEnumBoxingAndUnboxingConversions::new,
           RemoveUnneededCasts::new,
           NormalizeSwitchStatements::new,
-          ArrayAccessNormalizer::new,
+          NormalizeArrayAccesses::new,
           ImplementAssertStatements::new,
           ImplementSynchronizedStatements::new,
           NormalizeFieldInitialization::new,
@@ -389,8 +389,8 @@ public enum Backend {
           ResolveCaptures::new,
           // ... and flatten the class hierarchy.
           MoveNestedClassesToTop::new,
-          BridgeMethodsCreator::new,
-          EnumMethodsCreator::new,
+          AddBridgeMethods::new,
+          AddEnumImplicitMethods::new,
           () -> new ImplementSystemGetProperty(options.getDefinesForWasm()),
           NormalizeTryWithResources::new,
           NormalizeCatchClauses::new,
@@ -447,8 +447,8 @@ public enum Backend {
           // extracted. After extracting qualifiers, we must again normalize multi-expressions.
           ExtractNonIdempotentExpressions::new,
           NormalizeMultiExpressions::new,
-          InsertWasmExternConversions::new,
-          () -> new InsertWasmEntryPointBridges(options.getWasmEntryPointPatterns()),
+          InsertExternConversionsWasm::new,
+          () -> new AddEntryPointBridgesWasm(options.getWasmEntryPointPatterns()),
           ImplementFinallyViaControlFlow::new,
 
           // Needs to run at the end as the types in the ast will be invalid after the pass.
@@ -527,8 +527,8 @@ public enum Backend {
           ResolveCaptures::new,
           // ... and flatten the class hierarchy.
           MoveNestedClassesToTop::new,
-          BridgeMethodsCreator::new,
-          EnumMethodsCreator::new,
+          AddBridgeMethods::new,
+          AddEnumImplicitMethods::new,
           // TODO(b/283156060): Implement the modular version of System.getProperty.
           // () -> new ImplementSystemGetProperty(options.getDefinesForWasm()),
           NormalizeTryWithResources::new,
@@ -586,8 +586,8 @@ public enum Backend {
           // extracted. After extracting qualifiers, we must again normalize multi-expressions.
           ExtractNonIdempotentExpressions::new,
           NormalizeMultiExpressions::new,
-          InsertWasmExternConversions::new,
-          () -> new InsertWasmEntryPointBridges(options.getWasmEntryPointPatterns()),
+          InsertExternConversionsWasm::new,
+          () -> new AddEntryPointBridgesWasm(options.getWasmEntryPointPatterns()),
           ImplementFinallyViaControlFlow::new,
 
           // Needs to run at the end as the types in the ast will be invalid after the pass.
@@ -642,13 +642,13 @@ public enum Backend {
 
           // Normalizations
           AddDisambiguatingSuperMethodForwardingStubs::new,
-          AddVisibilityMethodBridgesKotlin::new,
+          AddVisibilityMethodBridgesJ2kt::new,
           NormalizeSynchronizedMethods::new,
-          PropagateNullabilityKotlin::new,
+          PropagateNullabilityJ2kt::new,
           NormalizeInterfaces::new,
           NormalizeTryWithResources::new,
-          NormalizeForEachStatementKotlin::new,
-          NormalizeArrayCreationsKotlin::new,
+          NormalizeForEachStatementJ2kt::new,
+          NormalizeArrayCreationsJ2kt::new,
           NormalizeStaticMemberQualifiers::new,
           () -> new MoveVariableDeclarationsToEnclosingBlock(/* fromSwitchStatementsOnly= */ true),
           NormalizeMultiExpressions::new,
@@ -656,17 +656,17 @@ public enum Backend {
           RewriteAssignmentExpressions::new,
           () -> new InsertUnboxingConversions(/* areBooleanAndDoubleBoxed= */ true),
           () -> new InsertBoxingConversions(/* areBooleanAndDoubleBoxed= */ true),
-          NormalizeVarargParametersKotlin::new,
-          NormalizeFieldInitializationKotlin::new,
+          NormalizeVarargParametersJ2kt::new,
+          NormalizeFieldInitializationJ2kt::new,
           NormalizeLabels::new,
           NormalizeForStatements::new,
-          NormalizeSwitchStatementsKotlin::new,
+          NormalizeSwitchStatementsJ2kt::new,
           NormalizeLabeledStatements::new,
           () -> new NormalizeShifts(/* narrowAllToInt= */ true),
-          InsertWideningPrimitiveConversionsKotlin::new,
-          InsertNarrowingPrimitiveConversionsKotlin::new,
-          NormalizeBasicCastsKotlin::new,
-          ImplementKotlinBitLevelOperators::new,
+          InsertWideningPrimitiveConversionsJ2kt::new,
+          InsertNarrowingPrimitiveConversionsJ2kt::new,
+          NormalizeBasicCastsJ2kt::new,
+          ImplementBitLevelOperatorsJ2kt::new,
           InsertQualifierProjectionCasts::new,
           InsertNotNullAssertions::new,
           InsertCastsOnNullabilityMismatch::new,
@@ -675,14 +675,14 @@ public enum Backend {
           InsertCastsForBoxedTypes::new,
 
           // Needs to run after non-null assertions are inserted.
-          InsertStringConversionsKotlin::new,
+          InsertStringConversionsJ2kt::new,
           NormalizeVariableInitialization::new,
           MakeVariablesFinal::new,
 
-          // Needs to run after NormalizeVarargParametersKotlin.
-          NormalizeMethodParametersKotlin::new,
+          // Needs to run after NormalizeVarargParametersJ2kt.
+          NormalizeMethodParametersJ2kt::new,
 
-          // Needs to run after NormalizeNonFinalVariablesKotlin.
+          // Needs to run after NormalizeNonFinalVariablesJ2kt.
           InsertExplicitArrayCoercionCasts::new,
           RemoveUnusedLabeledStatements::new,
           NormalizeMultiExpressions::new,
@@ -690,7 +690,7 @@ public enum Backend {
           RemoveNoopStatements::new,
 
           // Passes that breaks the invariants for running ConversionContextVisitor related passes.
-          NormalizeVarargInvocationsKotlin::new,
+          NormalizeVarargInvocationsJ2kt::new,
 
           // Verification
           VerifySingleAstReference::new,

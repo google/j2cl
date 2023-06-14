@@ -29,7 +29,7 @@ import com.google.j2cl.transpiler.ast.Visibility;
 import java.util.List;
 
 /** Add bridge for public or protected methods which override package-private ones. */
-public class AddVisibilityMethodBridgesKotlin extends NormalizationPass {
+public class AddVisibilityMethodBridgesJ2kt extends NormalizationPass {
 
   @Override
   public void applyTo(Type type) {

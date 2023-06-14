@@ -35,7 +35,7 @@ import java.util.List;
 /**
  * Checks circumstances where a bridge method should be generated and creates the bridge methods.
  */
-public class BridgeMethodsCreator extends NormalizationPass {
+public class AddBridgeMethods extends NormalizationPass {
 
   @Override
   public void applyTo(Type type) {
@@ -61,7 +61,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
         Streams.zip(
                 parameters.stream(),
                 targetMethod.getParameterTypeDescriptors().stream(),
-                BridgeMethodsCreator::performRuntimeChecksOnParameter)
+                AddBridgeMethods::performRuntimeChecksOnParameter)
             .collect(toImmutableList());
 
     DeclaredTypeDescriptor targetEnclosingTypeDescriptor =

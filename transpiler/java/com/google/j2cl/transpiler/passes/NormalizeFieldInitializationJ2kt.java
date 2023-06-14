@@ -24,7 +24,7 @@ import com.google.j2cl.transpiler.ast.Member;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 
 /** Initializes non-final, nullable fields with explicit default value. */
-public class NormalizeFieldInitializationKotlin extends NormalizationPass {
+public class NormalizeFieldInitializationJ2kt extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(

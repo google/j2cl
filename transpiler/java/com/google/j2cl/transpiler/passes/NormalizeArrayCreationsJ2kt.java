@@ -25,7 +25,7 @@ import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.Node;
 
 /** Normalizes array creation for Kotlin, by extracting array literal from new array expression. */
-public class NormalizeArrayCreationsKotlin extends NormalizationPass {
+public class NormalizeArrayCreationsJ2kt extends NormalizationPass {
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {

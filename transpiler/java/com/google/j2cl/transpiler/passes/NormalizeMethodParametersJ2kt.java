@@ -50,7 +50,7 @@ import javax.annotation.Nullable;
  * <p>Vararg parameters with non-primitive component type are re-declared from {@code Array<out T>}
  * to {@code Array<T>}.
  */
-public class NormalizeMethodParametersKotlin extends NormalizationPass {
+public class NormalizeMethodParametersJ2kt extends NormalizationPass {
 
   private static class RewriteItem {
     RewriteItem(Variable variable, TypeDescriptor rewrittenTypeDescriptor) {

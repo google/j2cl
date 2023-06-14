@@ -49,7 +49,7 @@ import com.google.j2cl.transpiler.ast.Visibility;
  * Enum types. Additionally, we add a private static field "namesToValuesMap" which is created the
  * first time valueOf() is called and allows for quick lookup of Enum values by (String) name.
  */
-public class EnumMethodsCreator extends NormalizationPass {
+public class AddEnumImplicitMethods extends NormalizationPass {
   private static final String VALUES_METHOD_NAME = "values";
   private static final String NAMES_TO_VALUES_MAP_FIELD_NAME = "namesToValuesMap";
   private static final String CREATE_MAP_METHOD_NAME = "createMapFromValues";

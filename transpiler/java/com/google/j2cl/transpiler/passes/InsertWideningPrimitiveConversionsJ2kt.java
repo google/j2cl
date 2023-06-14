@@ -29,7 +29,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors;
  * type slot in assignment, binary numeric promotion, cast and method invocation conversion
  * contexts.
  */
-public class InsertWideningPrimitiveConversionsKotlin extends NormalizationPass {
+public class InsertWideningPrimitiveConversionsJ2kt extends NormalizationPass {
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {

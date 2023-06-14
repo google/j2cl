@@ -42,7 +42,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor;
 /**
  * Replaces cast expression on primitive and boxed types with corresponding Kotlin cast method call.
  */
-public class NormalizeBasicCastsKotlin extends NormalizationPass {
+public class NormalizeBasicCastsJ2kt extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(

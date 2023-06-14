@@ -32,7 +32,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors;
  * Inserts conversions from {@code java.lang.String} arguments to Wasm strings when calling native
  * JS methods, and conversions from Wasm strings when getting returned values.
  */
-public class InsertWasmExternConversions extends NormalizationPass {
+public class InsertExternConversionsWasm extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(

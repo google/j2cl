@@ -26,7 +26,7 @@ import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.Variable;
 
 /** Normalize vararg parameters for Kotlin from {@code Array<T>} to {@code Array<out T>}. */
-public class NormalizeVarargParametersKotlin extends NormalizationPass {
+public class NormalizeVarargParametersJ2kt extends NormalizationPass {
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
