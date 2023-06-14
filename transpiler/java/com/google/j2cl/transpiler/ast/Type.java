@@ -36,8 +36,6 @@ import javax.annotation.Nullable;
 @Visitable
 @Context
 public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasReadableDescription {
-  private final Visibility visibility;
-  private boolean isStatic;
   private final TypeDeclaration typeDeclaration;
   @Visitable List<Member> members = new ArrayList<>();
   @Visitable List<Type> types = new ArrayList<>();
@@ -47,12 +45,10 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   private DeclaredTypeDescriptor superTypeDescriptor;
   private boolean isOptimizedEnum;
 
-  public Type(
-      SourcePosition sourcePosition, Visibility visibility, TypeDeclaration typeDeclaration) {
+  public Type(SourcePosition sourcePosition, TypeDeclaration typeDeclaration) {
     this.sourcePosition = checkNotNull(sourcePosition);
     checkArgument(
         typeDeclaration.isInterface() || typeDeclaration.isClass() || typeDeclaration.isEnum());
-    this.visibility = visibility;
     this.typeDeclaration = typeDeclaration;
     this.isAbstract = typeDeclaration.isAbstract();
     this.superTypeDescriptor = typeDeclaration.getSuperTypeDescriptor();
@@ -64,14 +60,6 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
    */
   public DeclaredTypeDescriptor getTypeDescriptor() {
     return getDeclaration().toUnparameterizedTypeDescriptor();
-  }
-
-  public void setStatic(boolean isStatic) {
-    this.isStatic = isStatic;
-  }
-
-  public boolean isStatic() {
-    return isStatic;
   }
 
   public boolean containsMethod(String mangledName) {
@@ -179,10 +167,6 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
         .filter(Member::isMethod)
         .map(Method.class::cast)
         .collect(toImmutableList());
-  }
-
-  public Visibility getVisibility() {
-    return visibility;
   }
 
   public boolean hasInstanceInitializerBlocks() {

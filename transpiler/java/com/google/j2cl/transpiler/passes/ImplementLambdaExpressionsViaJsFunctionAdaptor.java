@@ -38,7 +38,6 @@ import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.Variable;
-import com.google.j2cl.transpiler.ast.Visibility;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -277,8 +276,7 @@ public class ImplementLambdaExpressionsViaJsFunctionAdaptor extends Normalizatio
     DeclaredTypeDescriptor jsFunctionTypeDescriptor =
         LambdaAdaptorTypeDescriptors.createJsFunctionTypeDescriptor(
             typeDescriptor.toUnparameterizedTypeDescriptor());
-    Type adaptorType =
-        new Type(sourcePosition, Visibility.PUBLIC, adaptorTypeDescriptor.getTypeDeclaration());
+    Type adaptorType = new Type(sourcePosition, adaptorTypeDescriptor.getTypeDeclaration());
 
     // Create the field to contain the lambda function as a JsFunction.
     FieldDescriptor jsFunctionFieldDescriptor =

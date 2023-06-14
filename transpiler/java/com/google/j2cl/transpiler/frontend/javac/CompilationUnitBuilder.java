@@ -85,7 +85,6 @@ import com.google.j2cl.transpiler.ast.UnaryExpression;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
-import com.google.j2cl.transpiler.ast.Visibility;
 import com.google.j2cl.transpiler.ast.WhileStatement;
 import com.google.j2cl.transpiler.frontend.common.AbstractCompilationUnitBuilder;
 import com.google.j2cl.transpiler.frontend.common.Nullability;
@@ -172,18 +171,13 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     if (typeElement == null) {
       return null;
     }
-    Visibility visibility = JavaEnvironment.getVisibility(typeElement);
     TypeDeclaration typeDeclaration = environment.createDeclarationForType(typeElement);
 
-    Type type =
-        new Type(
-            typeDeclaration.isAnonymous()
-                ? getSourcePosition(sourcePositionNode)
-                : getNamePosition(sourcePositionNode),
-            visibility,
-            typeDeclaration);
-    type.setStatic(JavaEnvironment.isStatic(typeElement));
-    return type;
+    return new Type(
+        typeDeclaration.isAnonymous()
+            ? getSourcePosition(sourcePositionNode)
+            : getNamePosition(sourcePositionNode),
+        typeDeclaration);
   }
 
   /**

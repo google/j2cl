@@ -93,7 +93,6 @@ import com.google.j2cl.transpiler.ast.UnionTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
-import com.google.j2cl.transpiler.ast.Visibility;
 import com.google.j2cl.transpiler.ast.WhileStatement;
 import com.google.j2cl.transpiler.frontend.common.AbstractCompilationUnitBuilder;
 import java.util.ArrayList;
@@ -1450,12 +1449,9 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       if (typeBinding == null) {
         return null;
       }
-      Visibility visibility = JdtEnvironment.getVisibility(typeBinding);
       TypeDeclaration typeDeclaration = environment.createDeclarationForType(typeBinding);
 
-      Type type = new Type(getSourcePosition(sourcePositionNode), visibility, typeDeclaration);
-      type.setStatic(JdtEnvironment.isStatic(typeBinding));
-      return type;
+      return new Type(getSourcePosition(sourcePositionNode), typeDeclaration);
     }
   }
 

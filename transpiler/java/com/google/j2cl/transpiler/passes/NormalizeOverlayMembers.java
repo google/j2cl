@@ -59,9 +59,11 @@ public class NormalizeOverlayMembers extends NormalizationPass {
   }
 
   private static Type createOverlayImplementationType(Type type) {
-    TypeDeclaration overlayImpl = type.getDeclaration().getOverlayImplementationTypeDeclaration();
-    DeclaredTypeDescriptor overlayImplDescriptor = overlayImpl.toUnparameterizedTypeDescriptor();
-    Type overlayClass = new Type(type.getSourcePosition(), type.getVisibility(), overlayImpl);
+    TypeDeclaration overlayTypeDeclaration =
+        type.getDeclaration().getOverlayImplementationTypeDeclaration();
+    DeclaredTypeDescriptor overlayTypeDescriptor =
+        overlayTypeDeclaration.toUnparameterizedTypeDescriptor();
+    Type overlayClass = new Type(type.getSourcePosition(), overlayTypeDeclaration);
 
     for (Member member : type.getMembers()) {
       if (!isOverlay(member.getDescriptor())) {
@@ -69,14 +71,14 @@ public class NormalizeOverlayMembers extends NormalizationPass {
       }
       if (member.isMethod()) {
         Method method = (Method) member;
-        overlayClass.addMember(createOverlayMethod(method, overlayImplDescriptor));
+        overlayClass.addMember(createOverlayMethod(method, overlayTypeDescriptor));
       } else if (member.isField()) {
         Field field = (Field) member;
         checkState(field.getDescriptor().isStatic());
         overlayClass.addMember(
             Field.Builder.from(field)
                 .setInitializer(AstUtils.clone(field.getInitializer()))
-                .setEnclosingClass(overlayImplDescriptor)
+                .setEnclosingClass(overlayTypeDescriptor)
                 .build());
       } else {
         InitializerBlock initializerBlock = (InitializerBlock) member;

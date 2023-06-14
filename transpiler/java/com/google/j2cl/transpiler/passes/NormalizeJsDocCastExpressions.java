@@ -28,6 +28,7 @@ import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.Member;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.Type;
+import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeVariable;
 import java.util.ArrayDeque;
@@ -57,9 +58,10 @@ public class NormalizeJsDocCastExpressions extends NormalizationPass {
 
           @Override
           public boolean enterType(Type type) {
+            TypeDeclaration typeDeclaration = type.getDeclaration();
             Set<TypeVariable> typeVariables =
-                new HashSet<>(type.getDeclaration().getTypeParameterDescriptors());
-            if (!type.isStatic()) {
+                new HashSet<>(typeDeclaration.getTypeParameterDescriptors());
+            if (typeDeclaration.isCapturingEnclosingInstance()) {
               typeVariables.addAll(typeVariablesInContext.peek());
             }
             typeVariablesInContext.push(typeVariables);

@@ -36,7 +36,6 @@ import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
-import com.google.j2cl.transpiler.ast.Visibility;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -153,7 +152,7 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
     implementorTypeDescriptor = implementorTypeDescriptor.toUnparameterizedTypeDescriptor();
 
     Type lambdaImplementorType =
-        new Type(sourcePosition, Visibility.PUBLIC, implementorTypeDescriptor.getTypeDeclaration());
+        new Type(sourcePosition, implementorTypeDescriptor.getTypeDeclaration());
 
     // public t method(t1 p1, t2 p2, .....) {
     //   ... code from function expression....;
