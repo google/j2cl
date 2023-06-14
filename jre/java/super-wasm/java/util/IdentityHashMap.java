@@ -35,7 +35,7 @@ public class IdentityHashMap<K, V> extends AbstractMap<K, V>
    * The internal data structure to hold key value pairs This array holds keys
    * and values in an alternating fashion.
    */
-  private transient Object[] elementData;
+  private Object[] elementData;
 
   /* Actual number of key-value pairs. */
   private int size;
@@ -44,7 +44,7 @@ public class IdentityHashMap<K, V> extends AbstractMap<K, V>
    * maximum number of elements that can be put in this map before having to
    * rehash.
    */
-  private transient int threshold;
+  private int threshold;
 
   /*
    * default threshold value that an IdentityHashMap created using the default
@@ -59,7 +59,7 @@ public class IdentityHashMap<K, V> extends AbstractMap<K, V>
    * modification count, to keep track of structural modifications between the
    * IdentityHashMap and the iterator
    */
-  private transient int modCount = 0;
+  private int modCount = 0;
 
   /*
    * Object used to represent null keys and values. This is used to

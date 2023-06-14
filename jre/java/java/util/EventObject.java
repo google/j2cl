@@ -20,7 +20,7 @@ package java.util;
  */
 public class EventObject {
 
-  protected transient Object source;
+  protected Object source;
 
   public EventObject(Object source) {
     this.source = source;

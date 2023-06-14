@@ -252,7 +252,7 @@ public final class Integer extends Number implements Comparable<Integer> {
     return Integer.valueOf(Integer.parseInt(s, radix));
   }
 
-  private final transient int value;
+  private final int value;
 
   public Integer(int value) {
     this.value = value;

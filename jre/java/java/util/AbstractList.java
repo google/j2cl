@@ -173,7 +173,7 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements
     }
   }
 
-  protected transient int modCount;
+  protected int modCount;
 
   protected AbstractList() {
   }

@@ -206,7 +206,7 @@ public class Collections {
       implements Serializable {
 
     private final Map<E, Boolean> backingMap;
-    private transient Set<E> keySet;
+    private Set<E> keySet;
 
     SetFromMap(Map<E, Boolean> map) {
       backingMap = map;
@@ -631,10 +631,10 @@ public class Collections {
       }
     }
 
-    private transient UnmodifiableSet<Map.Entry<K, V>> entrySet;
-    private transient UnmodifiableSet<K> keySet;
+    private UnmodifiableSet<Map.Entry<K, V>> entrySet;
+    private UnmodifiableSet<K> keySet;
     private final Map<? extends K, ? extends V> map;
-    private transient UnmodifiableCollection<V> values;
+    private UnmodifiableCollection<V> values;
 
     public UnmodifiableMap(Map<? extends K, ? extends V> map) {
       this.map = map;

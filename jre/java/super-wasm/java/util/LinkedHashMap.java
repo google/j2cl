@@ -36,7 +36,7 @@ public class LinkedHashMap<K, V> extends HashMap<K, V> {
    * header.nxt, and the last is header.prv. If the map is empty, header.nxt == header && header.prv
    * == header.
    */
-  private transient LinkedEntry<K, V> header = new LinkedEntry<K, V>();
+  private LinkedEntry<K, V> header = new LinkedEntry<K, V>();
 
   /** True if access ordered, false if insertion ordered. */
   private final boolean accessOrder;

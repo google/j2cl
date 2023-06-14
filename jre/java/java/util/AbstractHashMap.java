@@ -120,15 +120,11 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
     }
   }
 
-  /**
-   * A map of integral hashCodes onto entries.
-   */
-  private transient InternalHashCodeMap<K, V> hashCodeMap;
+  /** A map of integral hashCodes onto entries. */
+  private InternalHashCodeMap<K, V> hashCodeMap;
 
-  /**
-   * A map of Strings onto values.
-   */
-  private transient InternalStringMap<K, V> stringMap;
+  /** A map of Strings onto values. */
+  private InternalStringMap<K, V> stringMap;
 
   int modCount;
 

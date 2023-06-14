@@ -519,12 +519,10 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
     return new BigDecimal(0, Integer.MIN_VALUE);
   }
 
-  private transient int bitLength;
+  private int bitLength;
 
-  /**
-   * Cache for the hash code.
-   */
-  private transient int hashCode;
+  /** Cache for the hash code. */
+  private int hashCode;
 
   /**
    * The arbitrary precision integer (unscaled value) in the internal
@@ -533,28 +531,25 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
   private BigInteger intVal;
 
   /**
-   * Represent the number of decimal digits in the unscaled value. This
-   * precision is calculated the first time, and used in the following calls of
-   * method <code>precision()</code>. Note that some call to the private method
-   * <code>inplaceRound()</code> could update this field.
+   * Represent the number of decimal digits in the unscaled value. This precision is calculated the
+   * first time, and used in the following calls of method <code>precision()</code>. Note that some
+   * call to the private method <code>inplaceRound()</code> could update this field.
    *
    * @see #precision()
    * @see #inplaceRound(MathContext)
    */
-  private transient int precision;
+  private int precision;
 
   private double scale;
 
   /**
-   * The unscaled integer value (stored in a double) if the number of bits is
-   * less than {@link #SMALL_VALUE_BITS}.
+   * The unscaled integer value (stored in a double) if the number of bits is less than {@link
+   * #SMALL_VALUE_BITS}.
    */
-  private transient double smallValue;
+  private double smallValue;
 
-  /**
-   * The <code>String</code> representation is cached.
-   */
-  private transient String toStringImage;
+  /** The <code>String</code> representation is cached. */
+  private String toStringImage;
 
   /**
    * Constructs a new {@code BigDecimal} instance from the given big integer

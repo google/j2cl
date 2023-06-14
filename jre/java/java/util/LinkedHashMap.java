@@ -43,8 +43,8 @@ public class LinkedHashMap<K, V> extends HashMap<K, V> implements Map<K, V> {
    * LinkedHashMap and minimizing code size seemed like a better tradeoff
    */
   private class ChainEntry extends SimpleEntry<K, V> {
-    private transient ChainEntry next;
-    private transient ChainEntry prev;
+    private ChainEntry next;
+    private ChainEntry prev;
 
     public ChainEntry() {
       this(null, null);
@@ -161,7 +161,7 @@ public class LinkedHashMap<K, V> extends HashMap<K, V> implements Map<K, V> {
 
   // True if we should use the access order (ie, for LRU caches) instead of
   // insertion order.
-  private transient boolean accessOrder;
+  private boolean accessOrder;
 
   /*
    * The head of the LRU/insert order chain, which is a doubly-linked circular
@@ -170,14 +170,14 @@ public class LinkedHashMap<K, V> extends HashMap<K, V> implements Map<K, V> {
    * The most recently inserted/accessed node is at the end of the chain, ie.
    * chain.prev.
    */
-  private final transient ChainEntry head = new ChainEntry();
+  private final ChainEntry head = new ChainEntry();
 
   /*
    * The hashmap that keeps track of our entries and the chain. Note that we
    * duplicate the key here to eliminate changes to HashMap and minimize the
    * code here, at the expense of additional space.
    */
-  private final transient HashMap<K, ChainEntry> map = new HashMap<K, ChainEntry>();
+  private final HashMap<K, ChainEntry> map = new HashMap<K, ChainEntry>();
 
   public LinkedHashMap() {
     resetChainEntries();

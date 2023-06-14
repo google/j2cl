@@ -27,7 +27,7 @@ import java.io.Serializable;
 public class HashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable,
     Serializable {
 
-  private transient HashMap<E, Object> map;
+  private HashMap<E, Object> map;
 
   /**
    * Ensures that RPC will consider type parameter E to be exposed. It will be

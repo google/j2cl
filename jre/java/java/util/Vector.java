@@ -21,7 +21,6 @@ import java.io.Serializable;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
-
 import jsinterop.annotations.JsNonNull;
 
 /**
@@ -35,7 +34,7 @@ import jsinterop.annotations.JsNonNull;
 public class Vector<E> extends AbstractList<E> implements List<E>,
     RandomAccess, Cloneable, Serializable {
 
-  private transient ArrayList<E> arrayList;
+  private ArrayList<E> arrayList;
 
   /**
    * Ensures that RPC will consider type parameter E to be exposed. It will be

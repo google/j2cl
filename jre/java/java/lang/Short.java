@@ -90,7 +90,7 @@ public final class Short extends Number implements Comparable<Short> {
     return Short.valueOf(Short.parseShort(s, radix));
   }
 
-  private final transient short value;
+  private final short value;
 
   public Short(short value) {
     this.value = value;

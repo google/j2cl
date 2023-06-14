@@ -57,30 +57,30 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Seria
    * The hash table. If this hash map contains a mapping for null, it is not represented this hash
    * table.
    */
-  transient HashMapEntry<K, V>[] table;
+  HashMapEntry<K, V>[] table;
 
   /** The entry representing the null key, or null if there's no such mapping. */
-  transient HashMapEntry<K, V> entryForNullKey;
+  HashMapEntry<K, V> entryForNullKey;
 
   /** The number of mappings in this hash map. */
-  transient int size;
+  int size;
 
   /**
    * Incremented by "structural modifications" to allow (best effort) detection of concurrent
    * modification.
    */
-  transient int modCount;
+  int modCount;
 
   /**
    * The table is rehashed when its size exceeds this threshold. The value of this field is
    * generally .75 * capacity, except when the capacity is zero, as described in the EMPTY_TABLE
    * declaration above.
    */
-  private transient int threshold;
+  private int threshold;
   // Views - lazily initialized
-  private transient Set<K> keySet;
-  private transient Set<Entry<K, V>> entrySet;
-  private transient Collection<V> values;
+  private Set<K> keySet;
+  private Set<Entry<K, V>> entrySet;
+  private Collection<V> values;
 
   @SuppressWarnings("unchecked")
   public HashMap() {

@@ -109,7 +109,7 @@ public final class Float extends Number implements Comparable<Float> {
     return new Float(s);
   }
 
-  private final transient float value;
+  private final float value;
 
   public Float(double value) {
     this.value = (float) value;

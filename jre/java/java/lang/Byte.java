@@ -83,7 +83,7 @@ public final class Byte extends Number implements Comparable<Byte> {
     return Byte.valueOf(Byte.parseByte(s, radix));
   }
 
-  private final transient byte value;
+  private final byte value;
 
   public Byte(byte value) {
     this.value = value;

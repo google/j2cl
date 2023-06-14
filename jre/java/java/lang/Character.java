@@ -522,7 +522,7 @@ public final class Character implements Comparable<Character>, Serializable {
     return (char) (MIN_LOW_SURROGATE + ((codePoint - MIN_SUPPLEMENTARY_CODE_POINT) & 1023));
   }
 
-  private final transient char value;
+  private final char value;
 
   public Character(char value) {
     this.value = value;

@@ -218,35 +218,26 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
   }
 
   /**
-   * The magnitude of this big integer. This array is in little endian order and
-   * each "digit" is a 32-bit unsigned integer. For example: {@code 13} is
-   * represented as [ 13 ] {@code -13} is represented as [ 13 ] {@code 2^32 +
-   * 13} is represented as [ 13, 1 ] {@code 2^64 + 13} is represented as [ 13,
-   * 0, 1 ] {@code 2^31} is represented as [ Integer.MIN_VALUE ] The magnitude
-   * array may be longer than strictly necessary, which results in additional
-   * trailing zeros.
+   * The magnitude of this big integer. This array is in little endian order and each "digit" is a
+   * 32-bit unsigned integer. For example: {@code 13} is represented as [ 13 ] {@code -13} is
+   * represented as [ 13 ] {@code 2^32 + 13} is represented as [ 13, 1 ] {@code 2^64 + 13} is
+   * represented as [ 13, 0, 1 ] {@code 2^31} is represented as [ Integer.MIN_VALUE ] The magnitude
+   * array may be longer than strictly necessary, which results in additional trailing zeros.
    *
-   * <p>TODO(jat): consider changing to 24-bit integers for better performance
-   * in browsers.
+   * <p>TODO(jat): consider changing to 24-bit integers for better performance in browsers.
    */
-  transient int digits[];
+  int digits[];
 
-  /**
-   * The length of this in measured in ints. Can be less than digits.length().
-   */
-  transient int numberLength;
+  /** The length of this in measured in ints. Can be less than digits.length(). */
+  int numberLength;
 
-  /**
-   * The sign of this.
-   */
-  transient int sign;
+  /** The sign of this. */
+  int sign;
 
-  private transient int firstNonzeroDigit = -2;
+  private int firstNonzeroDigit = -2;
 
-  /**
-   * Cache for the hash code.
-   */
-  private transient int hashCode = 0;
+  /** Cache for the hash code. */
+  private int hashCode = 0;
 
   /**
    * Constructs a new {@code BigInteger} from the given two's complement
