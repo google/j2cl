@@ -16,6 +16,7 @@ j2cl_library(
 java_plugin(
     name = "junit_processor_plugin",
     testonly = 1,
+    generates_api = True,
     processor_class = "com.google.j2cl.junit.apt.J2clTestingProcessor",
     deps = [":junit_processor"],
 )
