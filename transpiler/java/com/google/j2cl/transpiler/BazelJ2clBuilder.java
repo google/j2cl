@@ -159,7 +159,7 @@ final class BazelJ2clBuilder extends BazelWorker {
         allSources.stream().filter(p -> p.sourcePath().endsWith(".kt")).collect(toImmutableList());
 
     // TODO(dramaix): add support for transpiling java and kotlin simultaneously.
-    if (!allJavaSources.isEmpty() && (!allKotlinSources.isEmpty())) {
+    if (!allJavaSources.isEmpty() && !allKotlinSources.isEmpty()) {
       throw new AssertionError(
           "Transpilation of Java and Kotlin files together is not supported yet.");
     }

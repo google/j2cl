@@ -305,7 +305,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     private Field convert(EnumConstantDeclaration enumConstantDeclaration) {
       IMethodBinding enumConstructorBinding = enumConstantDeclaration.resolveConstructorBinding();
-      Type annonymousInnerClass =
+      Type anonymousInnerClass =
           enumConstantDeclaration.getAnonymousClassDeclaration() != null
               ? convertAnonymousClassDeclaration(
                   enumConstantDeclaration.getAnonymousClassDeclaration(),
@@ -330,7 +330,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
                       enumConstructorBinding,
                       JdtEnvironment.asTypedList(enumConstantDeclaration.arguments()),
                       foldConstantArguments))
-              .setAnonymousInnerClass(annonymousInnerClass)
+              .setAnonymousInnerClass(anonymousInnerClass)
               .build();
 
       checkArgument(fieldDescriptor.isEnumConstant());
