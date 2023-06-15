@@ -465,11 +465,11 @@ public final class String implements Comparable<String>, CharSequence, Serializa
   }
 
   public int indexOf(int codePoint) {
-    return indexOf(fromCodePoint(codePoint));
+    return value.indexOf(nativeFromCodePoint(codePoint));
   }
 
   public int indexOf(int codePoint, int startIndex) {
-    return indexOf(fromCodePoint(codePoint), startIndex);
+    return value.indexOf(nativeFromCodePoint(codePoint), startIndex);
   }
 
   public int indexOf(String str) {
@@ -485,11 +485,11 @@ public final class String implements Comparable<String>, CharSequence, Serializa
   }
 
   public int lastIndexOf(int codePoint) {
-    return lastIndexOf(fromCodePoint(codePoint));
+    return value.lastIndexOf(nativeFromCodePoint(codePoint));
   }
 
   public int lastIndexOf(int codePoint, int startIndex) {
-    return lastIndexOf(fromCodePoint(codePoint), startIndex);
+    return value.lastIndexOf(nativeFromCodePoint(codePoint), startIndex);
   }
 
   public int lastIndexOf(String str) {
