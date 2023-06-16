@@ -16,10 +16,12 @@
 package com.google.j2cl.transpiler;
 
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.j2cl.common.EntryPointPattern;
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourceUtils.FileInfo;
@@ -29,7 +31,6 @@ import com.google.j2cl.transpiler.frontend.Frontend;
 import com.google.j2cl.transpiler.frontend.FrontendOptions;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 
 /** Configuration for the transpiler. */
@@ -47,27 +48,9 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
         .setNullMarkedSupported(false);
   }
 
-  @Nullable
-  abstract ImmutableList<String> getWasmEntryPoints();
-
   @Override
-  public ImmutableList<Pattern> getWasmEntryPointPatterns() {
-    ImmutableList<String> wasmEntryPoints = getWasmEntryPoints();
-    if (wasmEntryPoints == null) {
-      return ImmutableList.of();
-    }
-    return wasmEntryPoints.stream()
-        .map(J2clTranspilerOptions::getEntryPointAsPattern)
-        .collect(ImmutableList.toImmutableList());
-  }
-
-  private static Pattern getEntryPointAsPattern(String wasmEntryPoint) {
-    // Convert the entry point expression semantics into a Java regex. Entry point expression
-    // semantics only allows the regex '.*', so we first escape all '.', and then unescape the
-    // accidentally escaped '.' that were part of a '.*'.
-    String simpleRegEx = wasmEntryPoint.replace(".", "\\.").replace("\\.*", ".*");
-    return Pattern.compile(simpleRegEx);
-  }
+  @Nullable
+  public abstract ImmutableList<EntryPointPattern> getWasmEntryPointPatterns();
 
   @Override
   public ImmutableList<String> getForbiddenAnnotations() {
@@ -101,7 +84,12 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
 
     public abstract Builder setBackend(Backend backend);
 
-    public abstract Builder setWasmEntryPoints(ImmutableList<String> wasmEntryPoints);
+    public Builder setWasmEntryPointStrings(ImmutableList<String> wasmEntryPoints) {
+      return setWasmEntryPointPatterns(
+          wasmEntryPoints.stream().map(EntryPointPattern::from).collect(toImmutableList()));
+    }
+
+    abstract Builder setWasmEntryPointPatterns(ImmutableList<EntryPointPattern> entryPointSpecs);
 
     public abstract Builder setDefinesForWasm(ImmutableMap<String, String> definesForWasm);
 
@@ -117,9 +105,11 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
       J2clTranspilerOptions options = autoBuild();
 
       // Validate the entry point syntax.
-      for (String wasmEntryPoint : options.getWasmEntryPoints()) {
-        if (!isValidEntryPoint(wasmEntryPoint)) {
-          problems.error("Invalid entry point syntax in '%s'.", wasmEntryPoint);
+      for (EntryPointPattern entryPointPattern : options.getWasmEntryPointPatterns()) {
+        if (!entryPointPattern.isValid()) {
+          problems.error(
+              "Invalid entry point syntax in '%s'.",
+              entryPointPattern.getEntryPointPatternString());
         }
       }
       problems.abortIfHasErrors();
@@ -128,22 +118,6 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
           !options.getEmitReadableSourceMap() || !options.getGenerateKytheIndexingMetadata());
       checkState(!options.getEmitReadableLibraryInfo() || options.getLibraryInfoOutput() != null);
       return options;
-    }
-
-    /**
-     * Regular expression that only allow valid identifier characters, the package separator '.' and
-     * the regular expression '.*'.
-     */
-    private static final String QUALIFIED_NAME_VALIDATION_REGEX = "([\\w$_.]|(\\.\\*))+";
-    /**
-     * Regular expression that only allow valid identifier characters and the regular expression
-     * '.*'.
-     */
-    private static final String METHOD_NAME_VALIDATION_REGEX = "([\\w$_]|(\\.\\*))+";
-
-    private static boolean isValidEntryPoint(String wasmEntryPoint) {
-      return wasmEntryPoint.matches(
-          QUALIFIED_NAME_VALIDATION_REGEX + "#" + METHOD_NAME_VALIDATION_REGEX);
     }
   }
 }

@@ -587,7 +587,6 @@ public enum Backend {
           ExtractNonIdempotentExpressions::new,
           NormalizeMultiExpressions::new,
           InsertExternConversionsWasm::new,
-          () -> new AddEntryPointBridgesWasm(options.getWasmEntryPointPatterns()),
           ImplementFinallyViaControlFlow::new,
 
           // Needs to run at the end as the types in the ast will be invalid after the pass.

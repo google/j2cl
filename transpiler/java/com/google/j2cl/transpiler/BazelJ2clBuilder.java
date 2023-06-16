@@ -186,7 +186,7 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setOptimizeAutoValue(this.optimizeAutoValue)
         .setFrontend(allKotlinSources.isEmpty() ? javaFrontend : Frontend.KOTLIN)
         .setBackend(this.backend)
-        .setWasmEntryPoints(ImmutableList.copyOf(this.wasmEntryPoints))
+        .setWasmEntryPointStrings(ImmutableList.copyOf(this.wasmEntryPoints))
         .setDefinesForWasm(ImmutableMap.copyOf(definesForWasm))
         .setWasmRemoveAssertStatement(wasmRemoveAssertStatement)
         .setNullMarkedSupported(this.enableJSpecifySupport)

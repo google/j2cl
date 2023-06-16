@@ -17,10 +17,10 @@ package com.google.j2cl.transpiler.backend;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.j2cl.common.EntryPointPattern;
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.SourceUtils.FileInfo;
 import java.nio.file.Path;
-import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 
 /** Configuration for backend. */
@@ -36,7 +36,7 @@ public interface BackendOptions {
   @Nullable
   ImmutableMap<String, String> getDefinesForWasm();
 
-  ImmutableList<Pattern> getWasmEntryPointPatterns();
+  ImmutableList<EntryPointPattern> getWasmEntryPointPatterns();
 
   boolean getWasmRemoveAssertStatement();
 

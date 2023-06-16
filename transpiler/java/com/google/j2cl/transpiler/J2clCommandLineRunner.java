@@ -156,7 +156,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
         .setFrontend(this.frontEnd)
         .setKotlincOptions(ImmutableList.copyOf(kotlincOptions))
         .setBackend(this.backend)
-        .setWasmEntryPoints(ImmutableList.copyOf(wasmEntryPoints))
+        .setWasmEntryPointStrings(ImmutableList.copyOf(wasmEntryPoints))
         .setDefinesForWasm(ImmutableMap.copyOf(definesForWasm))
         .build(problems);
   }

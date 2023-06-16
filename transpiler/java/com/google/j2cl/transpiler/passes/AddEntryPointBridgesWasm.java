@@ -16,10 +16,10 @@
 package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.collect.ImmutableList.toImmutableList;
-import static java.lang.String.format;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Streams;
+import com.google.j2cl.common.EntryPointPattern;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Library;
@@ -34,7 +34,6 @@ import com.google.j2cl.transpiler.ast.Variable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.regex.Pattern;
 
 /**
  * Generates forwarding methods for Wasm entry points. The forwarding methods are then exported
@@ -43,11 +42,11 @@ import java.util.regex.Pattern;
  */
 public class AddEntryPointBridgesWasm extends LibraryNormalizationPass {
 
-  private final ImmutableList<Pattern> entryPointPatterns;
-  private final Set<Pattern> unmatchedEntryPointPatterns;
+  private final ImmutableList<EntryPointPattern> entryPointPatterns;
+  private final Set<EntryPointPattern> unmatchedEntryPointPatterns;
   private final Set<String> exportedMethodNames;
 
-  public AddEntryPointBridgesWasm(ImmutableList<Pattern> entryPointPatterns) {
+  public AddEntryPointBridgesWasm(ImmutableList<EntryPointPattern> entryPointPatterns) {
     this.entryPointPatterns = entryPointPatterns;
     this.unmatchedEntryPointPatterns = new HashSet<>(entryPointPatterns);
     this.exportedMethodNames = new HashSet<>();
@@ -76,11 +75,11 @@ public class AddEntryPointBridgesWasm extends LibraryNormalizationPass {
               }
             });
 
-    for (Pattern unmatchedEntryPointPattern : unmatchedEntryPointPatterns) {
+    for (EntryPointPattern unmatchedEntryPointPattern : unmatchedEntryPointPatterns) {
       getProblems()
           .error(
               "No public static method matched the entry point string '%s'.",
-              unmatchedEntryPointPattern.toString().replace("\\", ""));
+              unmatchedEntryPointPattern.getEntryPointPatternString());
     }
   }
 
@@ -127,15 +126,12 @@ public class AddEntryPointBridgesWasm extends LibraryNormalizationPass {
       return false;
     }
 
-    String nameString =
-        format(
-            "%s#%s",
-            methodDescriptor.getEnclosingTypeDescriptor().getQualifiedSourceName(),
-            methodDescriptor.getName());
     // Only the first pattern matching the method will be added, so there will be log error if
     // patterns are duplicate
-    for (Pattern entryPointPattern : entryPointPatterns) {
-      if (entryPointPattern.matcher(nameString).matches()) {
+    for (EntryPointPattern entryPointPattern : entryPointPatterns) {
+      if (entryPointPattern.matchesMethod(
+          methodDescriptor.getEnclosingTypeDescriptor().getQualifiedSourceName(),
+          methodDescriptor.getName())) {
         unmatchedEntryPointPatterns.remove(entryPointPattern);
         return true;
       }
