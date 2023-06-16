@@ -15,9 +15,12 @@
  */
 package cast;
 
+import org.jspecify.nullness.Nullable;
+
 public class CastGenerics<T, E extends Number> {
 
-  T field;
+  @Nullable T field;
+
   T method() {
     return null;
   }

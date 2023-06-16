@@ -15,6 +15,8 @@
  */
 package nestedgenericclass;
 
+import org.jspecify.nullness.Nullable;
+
 public class NestedGenericClass<T> {
   // nested generic classes with shadowing type parameters.
   public class A<T> {
@@ -25,10 +27,10 @@ public class NestedGenericClass<T> {
 
   // nested non-generic classes that refers to the type parameters declared in outer class.
   public class C {
-    public T c;
+    public @Nullable T c;
 
     public class D {
-      public T d;
+      public @Nullable T d;
     }
   }
 
@@ -36,7 +38,7 @@ public class NestedGenericClass<T> {
   public <S> void fun(S t) {
     class E<S> {} // generic class
     class F { // non-generic class
-      public S f;
+      public @Nullable S f;
     }
     new E<Number>();
     new F();

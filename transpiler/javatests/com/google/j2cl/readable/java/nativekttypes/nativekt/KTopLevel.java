@@ -17,10 +17,11 @@ package nativekttypes.nativekt;
 
 import javaemul.internal.annotations.KtName;
 import javaemul.internal.annotations.KtProperty;
+import org.jspecify.nullness.Nullable;
 
 public class KTopLevel<O> {
   public static class KNested<N> {
-    public N instanceField;
+    public @Nullable N instanceField;
     public static Object staticField;
 
     public KNested(N n) {}
@@ -42,7 +43,7 @@ public class KTopLevel<O> {
     public KInner(I i) {}
   }
 
-  public O instanceField;
+  public @Nullable O instanceField;
   public static Object staticField;
   public int renamedField;
 

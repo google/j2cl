@@ -19,7 +19,7 @@ import org.jspecify.nullness.NullMarked;
 import org.jspecify.nullness.Nullable;
 
 @NullMarked
-public class LateInit {
+public class LateInit<T> {
   @SuppressWarnings("nullness:initialization.field.uninitialized")
   public String publicField;
 
@@ -38,13 +38,17 @@ public class LateInit {
   @SuppressWarnings("nullness:initialization.field.uninitialized")
   private int primitiveField;
 
-  public LateInit() {
-    init();
+  @SuppressWarnings("nullness:initialization.field.uninitialized")
+  private T genericField;
+
+  public LateInit(T genericValue) {
+    init(genericValue);
   }
 
-  private void init() {
+  private void init(T genericValue) {
     publicField = "public";
     privateField = "private";
+    genericField = genericValue;
   }
 
   public int test() {
@@ -53,6 +57,7 @@ public class LateInit {
         + initializedField.length()
         + nullableField.length()
         + finalField.length()
-        + primitiveField;
+        + primitiveField
+        + genericField.hashCode();
   }
 }

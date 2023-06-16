@@ -18,6 +18,7 @@
 package j2kt
 
 import javaemul.lang.*
+import kotlin.Any
 import kotlin.Int
 import kotlin.OptIn
 import kotlin.String
@@ -29,7 +30,7 @@ import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktJ2ktLateInit", exact = true)
-open class LateInit {
+open class LateInit<T: Any> {
  @ObjCName("publicField_")
  lateinit var publicField: String
 
@@ -52,18 +53,24 @@ open class LateInit {
  @HiddenFromObjC
  var primitiveField_private_2: Int = 0
 
- constructor() {
-  this.init_private_2()
+ @HiddenFromObjC
+ lateinit var genericField_private_2: T
+
+ constructor(
+  @ObjCName("Id") genericValue: T
+ ) {
+  this.init_private_2(genericValue)
  }
 
  @HiddenFromObjC
- fun init_private_2() {
+ fun init_private_2(genericValue: T) {
   this.publicField = "public"
   this.privateField_private_2 = "private"
+  this.genericField_private_2 = genericValue
  }
 
  @ObjCName("test")
  open fun test(): Int {
-  return this.publicField!!.length + this.privateField_private_2!!.length + this.initializedField_private_2!!.length + this.nullableField_private_2!!.length + this.finalField_private_2!!.length + this.primitiveField_private_2
+  return this.publicField!!.length + this.privateField_private_2!!.length + this.initializedField_private_2!!.length + this.nullableField_private_2!!.length + this.finalField_private_2!!.length + this.primitiveField_private_2 + this.genericField_private_2!!.hashCode()
  }
 }

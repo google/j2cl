@@ -32,7 +32,7 @@ import kotlin.native.ObjCName
 open class KTopLevel<O> {
  @JvmField
  @ObjCName("instanceField_")
- var instanceField: O = null as O
+ var instanceField: O? = null
 
  @JvmField
  @ObjCName("renamedField_")
@@ -107,7 +107,7 @@ open class KTopLevel<O> {
  open class KNested<N> {
   @JvmField
   @ObjCName("instanceField_")
-  var instanceField: N = null as N
+  var instanceField: N? = null
 
   constructor(
    @ObjCName("Id") n: N

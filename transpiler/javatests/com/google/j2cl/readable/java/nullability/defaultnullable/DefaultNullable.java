@@ -83,8 +83,9 @@ public class DefaultNullable {
     @JsNonNull N nonNullable;
     N defaultNullability;
 
-    ParameterizedDefaultNullability(@JsNonNull N n) {
-      this.nonNullable = n;
+    ParameterizedDefaultNullability(@JsNonNull N nonNullable, N defaultNullability) {
+      this.nonNullable = nonNullable;
+      this.defaultNullability = defaultNullability;
     }
 
     @Nullable N getNullable() {
@@ -112,8 +113,9 @@ public class DefaultNullable {
     @JsNonNull N nonNullable;
     N defaultNullability;
 
-    ParameterizedNullable(@JsNonNull N n) {
-      this.nonNullable = n;
+    ParameterizedNullable(@JsNonNull N nonNullable, N defaultNullability) {
+      this.nonNullable = nonNullable;
+      this.defaultNullability = defaultNullability;
     }
 
     @Nullable N getNullable() {

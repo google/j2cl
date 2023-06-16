@@ -40,11 +40,11 @@ public class NormalizeFieldInitializationJ2kt extends NormalizationPass {
 
             TypeDescriptor typeDescriptor = fieldDescriptor.getTypeDescriptor();
 
-            // In Java, non-final primitive fields or reference fields which can have null value
+            // In Java, non-final primitive fields or reference fields which are nullable
             // do not need to be initialized on all constructor paths, as they are implicitly
             // initialized with fallback value.
             // This is not the case in Kotlin, so we make it explicit.
-            if (typeDescriptor.isPrimitive() || typeDescriptor.canBeNull()) {
+            if (typeDescriptor.isPrimitive() || typeDescriptor.isNullable()) {
               return fieldWithDefaultInitializer(field);
             }
 

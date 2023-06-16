@@ -15,6 +15,8 @@
  */
 package arithmeticexpressions;
 
+import org.jspecify.nullness.Nullable;
+
 public class ArithmeticExpressions {
   private static final float FLOAT_CONSTANT = 1.1f;
   private static final double DOUBLE_CONSTANT = FLOAT_CONSTANT;
@@ -154,7 +156,7 @@ public class ArithmeticExpressions {
     (f--).intValue();
 
     class Ref<T> {
-      T field;
+      @Nullable T field;
     }
 
     Ref<Byte> ref = null;
