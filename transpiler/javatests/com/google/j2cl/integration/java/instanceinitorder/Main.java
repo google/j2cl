@@ -15,6 +15,9 @@
  */
 package instanceinitorder;
 
+import static com.google.j2cl.integration.testing.Asserts.assertFalse;
+import static com.google.j2cl.integration.testing.Asserts.assertNotNull;
+import static com.google.j2cl.integration.testing.Asserts.assertNull;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 /**
@@ -25,33 +28,80 @@ public class Main {
 
   public static void main(String... args) {
     initStep = 1;
-    Object unused = new Main();
-    assertTrue(Main.initStep == 6);
+    Child c = new Child();
+    assertTrue(Main.initStep == 7);
+
+    // The values in these fields are written to by the super constructor, but they are overwritten
+    // by the constructor due to having an initializer.
+    assertTrue(c.field1 == 0);
+    assertTrue(c.field6 == 0);
+    assertNotNull(c.field2);
+    assertTrue(c.field3 == 0);
+    assertFalse(c.field4);
+    assertNull(c.field5);
+
+    // Fields with no initializer will see the values written by the super constructor.
+    assertTrue(c.uninitializedField1 == 1);
+    assertTrue(c.uninitializedField2);
+    assertNotNull(c.uninitializedField3);
   }
 
-  public int field1 = this.initializeField1();
+  static class Child extends Parent {
+    public int uninitializedField1;
+    public boolean uninitializedField2;
+    public Object uninitializedField3;
 
-  {
-    assertTrue(initStep++ == 2); // #2
+    public int field1 = this.initializeField1();
+    public Object field2 = new Object();
+    public int field3 = 0;
+    public boolean field4 = false;
+    public Object field5 = null;
+
+    {
+      assertTrue(initStep++ == 3); // #3
+    }
+
+    public int field6 = initializeField6();
+
+    {
+      assertTrue(initStep++ == 5); // #5
+    }
+
+    public Child() {
+      assertTrue(initStep++ == 6); // #6
+    }
+
+    public int initializeField1() {
+      assertTrue(initStep++ == 2); // #2
+      return 0;
+    }
+
+    public int initializeField6() {
+      assertTrue(initStep++ == 4); // #4
+      return 0;
+    }
+
+    @Override
+    void initFromParent() {
+      assertTrue(initStep++ == 1); // #1
+      uninitializedField1 = 1;
+      uninitializedField2 = true;
+      uninitializedField3 = new Object();
+
+      field1 = 10;
+      field2 = null;
+      field3 = 1;
+      field4 = true;
+      field5 = new Object();
+      field6 = 10;
+    }
   }
 
-  public int field2 = initializeField2();
+  static class Parent {
+    Parent() {
+      initFromParent();
+    }
 
-  {
-    assertTrue(initStep++ == 4); // #4
-  }
-
-  public Main() {
-    assertTrue(initStep++ == 5); // #5
-  }
-
-  public int initializeField1() {
-    assertTrue(initStep++ == 1); // #1
-    return 0;
-  }
-
-  public int initializeField2() {
-    assertTrue(initStep++ == 3); // #3
-    return 0;
+    void initFromParent() {}
   }
 }
