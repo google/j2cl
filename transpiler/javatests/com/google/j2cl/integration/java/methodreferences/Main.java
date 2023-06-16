@@ -27,6 +27,7 @@ public class Main {
     testConstructorReferences();
     testInstanceMethodReferences();
     testStaticMethodReferences();
+    testVarargs();
     testQualifierEvaluation();
     testQualifierEvaluation_array();
     testQualifierEvaluation_observeUninitializedField();
@@ -282,5 +283,41 @@ public class Main {
     }
 
     assertThrowsNullPointerException(() -> new Sub().stringProducer.produce());
+  }
+
+  private static int stringCount(String... strings) {
+    return strings.length;
+  }
+
+  private static int numberCount(Number... numbers) {
+    return numbers.length;
+  }
+
+  private static int intCount(Integer... integers) {
+    return integers.length;
+  }
+
+  private interface StringStringToIntFunction {
+    int toInt(String s1, String s2);
+  }
+
+  private interface StringArrayToIntFunction {
+    int toInt(String[] strings);
+  }
+
+  private interface ToIntFunction<T> {
+    int toInt(T strings);
+  }
+
+  private static void testVarargs() {
+    StringStringToIntFunction fun = Main::stringCount;
+    assertTrue(fun.toInt("foo", "bar") == 2);
+    StringArrayToIntFunction fun2 = Main::stringCount;
+    assertTrue(fun2.toInt(new String[] {"foo", "bar"}) == 2);
+
+    ToIntFunction<? super Integer[]> fun3 = Main::numberCount;
+    assertTrue(fun3.toInt(new Integer[] {1, 2}) == 2);
+    fun3 = Main::intCount;
+    assertTrue(fun3.toInt(new Integer[] {1, 2}) == 2);
   }
 }
