@@ -102,6 +102,10 @@ public class TranspilerTester {
       return filePath.toString().endsWith(".java");
     }
 
+    private boolean isKotlinSourceFile() {
+      return filePath.toString().endsWith(".kt");
+    }
+
     private boolean isSrcJar() {
       return filePath.toString().endsWith(".srcjar");
     }
@@ -181,6 +185,19 @@ public class TranspilerTester {
 
     return addFileUsingQualifiedName(
         qualifiedCompilationUnitName, ".java", content.toArray(new String[0]));
+  }
+
+  public TranspilerTester addKotlinCompilationUnit(
+      String qualifiedCompilationUnitName, String... code) {
+    List<String> content = Lists.newArrayList(code);
+
+    String packageName = getPackageName(qualifiedCompilationUnitName);
+    if (!packageName.isEmpty()) {
+      content.add(0, "package " + packageName + "");
+    }
+
+    return addFileUsingQualifiedName(
+        qualifiedCompilationUnitName, ".kt", content.toArray(new String[0]));
   }
 
   public TranspilerTester addNativeJsForCompilationUnit(
@@ -467,7 +484,8 @@ public class TranspilerTester {
         // 3. Add Java source files and srcjar to command line.
         commandLineArgsBuilder.addAll(
             filesByPath.values().stream()
-                .filter(Predicates.or(File::isSrcJar, File::isJavaSourceFile))
+                .filter(
+                    Predicates.or(File::isSrcJar, File::isJavaSourceFile, File::isKotlinSourceFile))
                 .map(file -> inputPath.resolve(file.getFilePath()))
                 .map(Path::toString)
                 .collect(toImmutableList()));

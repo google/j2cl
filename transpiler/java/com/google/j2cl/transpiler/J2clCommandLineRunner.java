@@ -24,6 +24,7 @@ import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourceUtils;
+import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.transpiler.backend.Backend;
 import com.google.j2cl.transpiler.frontend.Frontend;
 import java.io.File;
@@ -115,7 +116,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
   }
 
   private J2clTranspilerOptions createOptions(Output output, Problems problems) {
-    checkSourceFiles(problems, files, ".java", ".srcjar", ".jar");
+    checkSourceFiles(problems, files, ".java", ".srcjar", ".jar", ".kt");
 
     if (this.readableSourceMaps && this.generateKytheIndexingMetadata) {
       problems.warning(
@@ -123,11 +124,25 @@ public final class J2clCommandLineRunner extends CommandLineTool {
       this.readableSourceMaps = false;
     }
 
+    ImmutableList<FileInfo> allSources =
+        SourceUtils.getAllSources(this.files, problems).collect(toImmutableList());
+
+    ImmutableList<FileInfo> allJavaSources =
+        allSources.stream()
+            .filter(p -> p.sourcePath().endsWith(".java"))
+            .collect(toImmutableList());
+
+    ImmutableList<FileInfo> allKotlinSources =
+        allSources.stream().filter(p -> p.sourcePath().endsWith(".kt")).collect(toImmutableList());
+
+    // TODO(b/226952880): add support for transpiling java and kotlin simultaneously.
+    if (!allJavaSources.isEmpty() && !allKotlinSources.isEmpty()) {
+      throw new AssertionError(
+          "Transpilation of Java and Kotlin files together is not supported yet.");
+    }
+
     return J2clTranspilerOptions.newBuilder()
-        .setSources(
-            SourceUtils.getAllSources(this.files, problems)
-                .filter(p -> p.sourcePath().endsWith(".java"))
-                .collect(toImmutableList()))
+        .setSources(allKotlinSources.isEmpty() ? allJavaSources : allKotlinSources)
         .setNativeSources(
             SourceUtils.getAllSources(getPathEntries(this.nativeSourcePath), problems)
                 .filter(p -> p.sourcePath().endsWith(".native.js"))
