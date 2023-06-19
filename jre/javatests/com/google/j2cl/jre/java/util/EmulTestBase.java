@@ -53,5 +53,22 @@ public class EmulTestBase extends TestCase {
     assertTrue("expected: " + Arrays.toString(expected) + ", actual: " + Arrays.toString(actual),
         Arrays.equals(expected, actual));
   }
+  public static void assertNPE(String methodName, Runnable runnable) {
+    try {
+      runnable.run();
+      fail("Expected NPE from calling " + methodName);
+    } catch (NullPointerException ignored) {
+      // expected
+    }
+  }
+
+  public static void assertIAE(String methodName, Runnable runnable) {
+    try {
+      runnable.run();
+      fail("Expected IAE from calling " + methodName);
+    } catch (IllegalArgumentException ignored) {
+      // expected
+    }
+  }
 
 }

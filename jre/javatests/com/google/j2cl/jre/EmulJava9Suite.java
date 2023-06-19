@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Google Inc.
+ * Copyright 2024 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,22 +13,22 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 package com.google.j2cl.jre;
 
+import com.google.j2cl.jre.java9.util.ListTest;
+import com.google.j2cl.jre.java9.util.MapTest;
+import com.google.j2cl.jre.java9.util.SetTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-/** TestSuite for all of GWT's emul suites. */
+/** Test JRE emulations. */
 @RunWith(Suite.class)
 @SuiteClasses({
-  BigDecimalSuite.class,
-  BigIntegerSuite.class,
-  CollectionsSuite.class,
-  ConcurrentSuite.class,
-  EmulSuite.class,
-  EmulJava8Suite.class,
-  EmulJava9Suite.class,
-  LangSuite.class,
+        ListTest.class,
+        SetTest.class,
+        MapTest.class
 })
-public class AllTests {}
+public class EmulJava9Suite {
+}

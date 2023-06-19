@@ -17,6 +17,7 @@ package java.util;
 
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
+import javaemul.internal.ArrayHelper;
 import java.util.function.UnaryOperator;
 import jsinterop.annotations.JsIgnore;
 import jsinterop.annotations.JsMethod;
@@ -32,6 +33,83 @@ import jsinterop.annotations.JsType;
  */
 @JsType
 public interface List<E> extends Collection<E> {
+
+  @JsIgnore
+  static <E> List<E> of() {
+    return Collections.unmodifiableList(Collections.emptyList());
+  }
+
+  @JsIgnore
+  static <E> List<E> of(E e1) {
+    return __ofInternal((E[]) new Object[] {e1});
+  }
+
+  @JsIgnore
+  static <E> List<E> of(E e1, E e2) {
+    return __ofInternal((E[]) new Object[] {e1, e2});
+  }
+
+  @JsIgnore
+  static <E> List<E> of(E e1, E e2, E e3) {
+    return __ofInternal((E[]) new Object[] {e1, e2, e3});
+  }
+
+  @JsIgnore
+  static <E> List<E> of(E e1, E e2, E e3, E e4) {
+    return __ofInternal((E[]) new Object[] {e1, e2, e3, e4});
+  }
+
+  @JsIgnore
+  static <E> List<E> of(E e1, E e2, E e3, E e4, E e5) {
+    return __ofInternal((E[]) new Object[] {e1, e2, e3, e4, e5});
+  }
+
+  @JsIgnore
+  static <E> List<E> of(E e1, E e2, E e3, E e4, E e5, E e6) {
+    return __ofInternal((E[]) new Object[] {e1, e2, e3, e4, e5, e6});
+  }
+
+  @JsIgnore
+  static <E> List<E> of(E e1, E e2, E e3, E e4, E e5, E e6, E e7) {
+    return __ofInternal((E[]) new Object[] {e1, e2, e3, e4, e5, e6, e7});
+  }
+
+  @JsIgnore
+  static <E> List<E> of(E e1, E e2, E e3, E e4, E e5, E e6, E e7, E e8) {
+    return __ofInternal((E[]) new Object[] {e1, e2, e3, e4, e5, e6, e7, e8});
+  }
+
+  @JsIgnore
+  static <E> List<E> of(E e1, E e2, E e3, E e4, E e5, E e6, E e7, E e8, E e9) {
+    return __ofInternal((E[]) new Object[] {e1, e2, e3, e4, e5, e6, e7, e8, e9});
+  }
+
+  @JsIgnore
+  static <E> List<E> of(E e1, E e2, E e3, E e4, E e5, E e6, E e7, E e8, E e9, E e10) {
+    return __ofInternal((E[]) new Object[] {e1, e2, e3, e4, e5, e6, e7, e8, e9, e10});
+  }
+
+  /**
+   * Internal-only helper to avoid copying the incoming array, and instead just wrap it with an
+   * immutable List after checking there are no nulls.
+   */
+  @JsIgnore
+  static <E> List<E> __ofInternal(E[] elements) {
+    for (int i = 0; i < elements.length; i++) {
+      checkNotNull(elements[i]);
+    }
+    return Collections.unmodifiableList(Arrays.asList(elements));
+  }
+
+  @JsIgnore
+  static <E> List<E> of(E... elements) {
+    for (int i = 0; i < elements.length; i++) {
+      checkNotNull(elements[i]);
+    }
+    return Collections.unmodifiableList(
+            Arrays.asList((E[]) ArrayHelper.unsafeClone(elements, 0, elements.length))
+    );
+  }
 
   @JsMethod(name = "addAtIndex")
   void add(int index, E element);
