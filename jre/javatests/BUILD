@@ -125,6 +125,13 @@ j2cl_multi_test(
 )
 
 j2cl_multi_test(
+    name = "EmulJava9",
+    shard_count = 8,
+    test_class = "com.google.j2cl.jre.EmulJava9Suite",
+    deps = [":emul_tests_lib"],
+)
+
+j2cl_multi_test(
     name = "Lang",
     shard_count = 8,
     test_class = "com.google.j2cl.jre.LangSuite",
