@@ -64,7 +64,11 @@ public enum JsMemberType {
     }
   },
   /** An accessor with incorrect naming convention. */
-  UNDEFINED_ACCESSOR;
+  UNDEFINED_ACCESSOR,
+  /** Kotlin fields are not part of the ABI, thus it's invalid for them to have @JsProperty. */
+  INVALID_KOTLIN_FIELD_JS_PROPERTY,
+  /** Kotlin fields are not part of the ABI, thus it's invalid for them to have @JsIgnore. */
+  INVALID_KOTLIN_FIELD_JS_IGNORE;
 
   public boolean isPropertyAccessor() {
     return this == SETTER || this == GETTER;
