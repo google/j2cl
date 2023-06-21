@@ -16,12 +16,11 @@
 package com.google.j2cl.transpiler.backend;
 
 import com.google.common.collect.ImmutableList;
-import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.backend.closure.OutputGeneratorStage;
 import com.google.j2cl.transpiler.backend.kotlin.KotlinGeneratorStage;
-import com.google.j2cl.transpiler.backend.wasm.WasmModuleGenerator;
+import com.google.j2cl.transpiler.backend.wasm.WasmOutputsGenerator;
 import com.google.j2cl.transpiler.passes.AddAbstractMethodStubs;
 import com.google.j2cl.transpiler.passes.AddBridgeMethods;
 import com.google.j2cl.transpiler.passes.AddDisambiguatingSuperMethodForwardingStubs;
@@ -344,7 +343,8 @@ public enum Backend {
   WASM {
     @Override
     public void generateOutputs(BackendOptions options, Library library, Problems problems) {
-      new WasmModuleGenerator(options.getOutput(), problems).generateOutputs(library);
+      new WasmOutputsGenerator(options.getOutput(), options.getLibraryInfoOutput(), problems)
+          .generateMonolithicOutput(library);
     }
 
     @Override
@@ -478,11 +478,8 @@ public enum Backend {
   WASM_MODULAR {
     @Override
     public void generateOutputs(BackendOptions options, Library library, Problems problems) {
-      // TODO(b/283154838): Add the modular summaries and the library info output.
-      if (options.getLibraryInfoOutput() != null) {
-        OutputUtils.writeToFile(options.getLibraryInfoOutput(), new byte[0], problems);
-      }
-      new WasmModuleGenerator(options.getOutput(), problems).generateOutputs(library);
+      new WasmOutputsGenerator(options.getOutput(), options.getLibraryInfoOutput(), problems)
+          .generateModularOutput(library);
     }
 
     @Override

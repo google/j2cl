@@ -28,6 +28,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.stream.Stream;
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.Option;
 
@@ -40,7 +41,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
   private static final FileCache<String> moduleContents =
       new FileCache<>(BazelJ2wasmBundler::readModule, CACHE_SIZE);
 
-  @Argument(required = true, usage = "The list of modular oputput directories", multiValued = true)
+  @Argument(required = true, usage = "The list of modular output directories", multiValued = true)
   List<String> inputs = null;
 
   @Option(
@@ -52,13 +53,30 @@ final class BazelJ2wasmBundler extends BazelWorker {
 
   @Override
   protected void run(Problems problems) {
+    createBundle(problems);
+  }
+
+  private void createBundle(Problems problems) {
     ImmutableList<String> moduleContents =
-        inputs.stream()
-            .map(d -> d + "/module.wat")
-            .map(BazelJ2wasmBundler.moduleContents::get)
+        Stream.of(
+                Stream.of("(rec"),
+                getModuleParts("types"),
+                Stream.of(")"),
+                getModuleParts("data"),
+                getModuleParts("globals"),
+                getModuleParts("functions"))
+            .reduce(Stream::concat)
+            .orElseGet(Stream::empty)
             .collect(toImmutableList());
 
     writeToFile(output.toString(), moduleContents, problems);
+  }
+
+  private Stream<String> getModuleParts(String name) {
+    return inputs.stream()
+        .map(d -> String.format("%s/%s.wat", d, name))
+        .filter(n -> new File(n).exists())
+        .map(BazelJ2wasmBundler.moduleContents::get);
   }
 
   private static String readModule(Path modulePath) throws IOException {
