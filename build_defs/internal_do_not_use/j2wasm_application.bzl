@@ -191,12 +191,12 @@ def _impl_j2wasm_application(ctx):
     debug_dir = ctx.actions.declare_directory(debug_dir_name)
     runfiles.append(debug_dir)
     ctx.actions.run_shell(
-        inputs = [transpile_out, ctx.outputs.srcmap],
+        inputs = [transpile_out, ctx.outputs.srcmap, ctx.outputs.symbolmap],
         outputs = [debug_dir],
         # TODO(b/176105504): Link instead copy when native tree support lands.
         command = (
             "cp -rL %s/* %s;" % (transpile_out.path, debug_dir.path) +
-            "cp %s %s" % (ctx.outputs.srcmap.path, debug_dir.path)
+            "cp %s %s %s" % (ctx.outputs.srcmap.path, ctx.outputs.symbolmap.path, debug_dir.path)
         ),
     )
 
