@@ -73,7 +73,7 @@ open class AssignmentsInDeclaration {
 
  @JvmField
  @HiddenFromObjC
- var withCast_pp_wasmimmutablefields: Array<String?>? = (arrayOfNulls<Any>(0) as Any?) as Array<String?>?
+ var withCast_pp_wasmimmutablefields: Array<String?>? = (arrayOfNulls<Any>(0) as Any) as Array<String?>
 }
 
 open class AssignmentsInInitializer {
@@ -119,7 +119,7 @@ open class AssignmentsInInitializer {
   this.arrayLiteral_pp_wasmimmutablefields = intArrayOf(1, 2, 3, 4)
   this.arrayLiteralMultidimensional_pp_wasmimmutablefields = arrayOf<IntArray?>(intArrayOf(1, 2), intArrayOf(3, 4))
   this.classLiteral_pp_wasmimmutablefields = WasmImmutableFields::class.javaObjectType
-  this.withCast_pp_wasmimmutablefields = (arrayOfNulls<Any>(0) as Any?) as Array<String?>?
+  this.withCast_pp_wasmimmutablefields = (arrayOfNulls<Any>(0) as Any) as Array<String?>
  }
 }
 
@@ -174,7 +174,7 @@ open class AssignmentsInConstructor {
   this.arrayLiteral_pp_wasmimmutablefields = intArrayOf(1, 2, intParameter, 4)
   this.arrayLiteralMultidimensional_pp_wasmimmutablefields = arrayOf<IntArray?>(intArrayOf(1, intParameter), intArrayOf(3, 4))
   this.classLiteral_pp_wasmimmutablefields = WasmImmutableFields::class.javaObjectType
-  this.withCast_pp_wasmimmutablefields = (arrayOfNulls<Any>(0) as Any?) as Array<String?>?
+  this.withCast_pp_wasmimmutablefields = (arrayOfNulls<Any>(0) as Any) as Array<String?>
   this.fromParameter_pp_wasmimmutablefields = parameter
   this.finalFieldReference_pp_wasmimmutablefields = par!!.stringLiteral_pp_wasmimmutablefields
  }

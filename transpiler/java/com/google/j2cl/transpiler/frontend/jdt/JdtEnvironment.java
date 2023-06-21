@@ -207,6 +207,8 @@ class JdtEnvironment {
         createTypeDescriptorWithNullability(
             variableBinding.getType(), variableBinding.getAnnotations(), inNullMarkedScope);
     if (!variableBinding.isParameter()) {
+      // In JSpecify, variables do not inherit the nullability from the scope, instead they are
+      // conceptually nullable but their nullability is eventually inferred from the assignments.
       typeDescriptor = typeDescriptor.toNullable();
     }
     boolean isFinal = isFinal(variableBinding);

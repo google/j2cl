@@ -449,13 +449,21 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
 
     private CastExpression convert(org.eclipse.jdt.core.dom.CastExpression expression) {
+      // Resolve the cast type descriptor in the proper @NullMarked scope so that type arguments
+      // are inferred with the correct nullability. The nullability of cast type itself will be
+      // inferred from the expression.
       TypeDescriptor castTypeDescriptor =
           environment.createTypeDescriptor(
               expression.getType().resolveBinding(),
               getCurrentType().getDeclaration().isNullMarked());
+
+      Expression castExpression = convert(expression.getExpression());
       return CastExpression.newBuilder()
-          .setExpression(convert(expression.getExpression()))
-          .setCastTypeDescriptor(castTypeDescriptor.toNullable())
+          .setExpression(castExpression)
+          .setCastTypeDescriptor(
+              // TODO(b/236987392): review the inference when the modeling of type variables
+              // includes the third state.
+              castTypeDescriptor.toNullable(castExpression.getTypeDescriptor().isNullable()))
           .build();
     }
 
