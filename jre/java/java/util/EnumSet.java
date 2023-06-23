@@ -21,8 +21,8 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 import static javaemul.internal.InternalPreconditions.checkState;
 
 /**
- * J2CL compatible implementation of EnumSet. Notably, some methods are unsupported since
- * Enum#getDeclaringClass is unsupported for code size reasons.
+ * J2CL compatible implementation of EnumSet. Notably, some methods are not included since
+ * Enum#getDeclaringClass is not supported for code size reasons.
  */
 public class EnumSet<E extends Enum<E>> extends AbstractSet<E> implements Cloneable {
   private HashSet<E> set = new HashSet<>();
@@ -115,18 +115,5 @@ public class EnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clonea
 
   public EnumSet<E> clone() {
     return EnumSet.copyOf(this);
-  }
-
-  // TODO(b/138399086): Remove these from the API if possible to make it a compile time error.
-  public static <E extends Enum<E>> EnumSet<E> complementOf(EnumSet<E> other) {
-    throw new UnsupportedOperationException();
-  }
-
-  public static <E extends Enum<E>> EnumSet<E> range(E from, E to) {
-    throw new UnsupportedOperationException();
-  }
-
-  public static <E extends Enum<E>> EnumSet<E> allOf(Class<E> elementType) {
-    throw new UnsupportedOperationException();
   }
 }

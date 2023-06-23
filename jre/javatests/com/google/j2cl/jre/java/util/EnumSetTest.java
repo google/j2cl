@@ -77,7 +77,8 @@ public class EnumSetTest extends TestSet {
     Two,
     Three;
 
-    public static final Set<ClinitRace> set = EnumSet.allOf(ClinitRace.class);
+    // TODO(b/30745420): Not compatible yet because of EnumSet#allOf.
+    // public static final Set<ClinitRace> set = EnumSet.allOf(ClinitRace.class);
   }
 
   // ***********************************************************************************************
