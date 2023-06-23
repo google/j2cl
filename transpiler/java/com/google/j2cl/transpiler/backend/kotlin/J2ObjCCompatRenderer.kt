@@ -19,9 +19,9 @@ import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.BooleanLiteral
 import com.google.j2cl.transpiler.ast.CompilationUnit
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
-import com.google.j2cl.transpiler.ast.Expression
 import com.google.j2cl.transpiler.ast.Field
 import com.google.j2cl.transpiler.ast.FieldDescriptor
+import com.google.j2cl.transpiler.ast.Literal
 import com.google.j2cl.transpiler.ast.Member
 import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.MethodDescriptor
@@ -226,15 +226,12 @@ private val setFunctionParameterName: String
   get() = "value"
 
 private val Field.fieldConstantDefineRenderer: Renderer<Source>
-  get() =
-    if (descriptor.shouldRender && descriptor.isCompileTimeConstant)
-      constantDefineRenderer ?: emptyRenderer
-    else emptyRenderer
+  get() = descriptor.takeIf { it.shouldRender }?.constantDefineRenderer ?: emptyRenderer
 
-private val Field.constantDefineRenderer: Renderer<Source>?
+private val FieldDescriptor.constantDefineRenderer: Renderer<Source>?
   get() =
-    initializer?.let(::literalRenderer)?.map { literalSource ->
-      macroDefine(spaceSeparated(source(descriptor.defineConstantName), literalSource))
+    constantValue?.let(::constantValueRenderer)?.map { literalSource ->
+      macroDefine(spaceSeparated(source(defineConstantName), literalSource))
     }
 
 private val FieldDescriptor.defineConstantName: String
@@ -458,11 +455,10 @@ private val TypeDeclaration.objCEnumName: String
 private val FieldDescriptor.objCEnumName: String
   get() = "${enclosingTypeDescriptor.typeDeclaration.objCEnumName}_$name"
 
-private fun literalRenderer(expression: Expression): Renderer<Source>? =
-  when (expression) {
-    is BooleanLiteral -> booleanLiteralRenderer(expression)
-    is NumberLiteral -> numberLiteralRenderer(expression)
-    // TODO(b/263471576): Render expressions which evaluate to compile-time constants.
+private fun constantValueRenderer(literal: Literal): Renderer<Source>? =
+  when (literal) {
+    is BooleanLiteral -> booleanLiteralRenderer(literal)
+    is NumberLiteral -> numberLiteralRenderer(literal)
     else -> null
   }
 
