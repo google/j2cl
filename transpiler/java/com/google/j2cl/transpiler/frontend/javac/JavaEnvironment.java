@@ -33,6 +33,7 @@ import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.transpiler.ast.JsEnumInfo;
 import com.google.j2cl.transpiler.ast.JsInfo;
 import com.google.j2cl.transpiler.ast.JsMemberType;
+import com.google.j2cl.transpiler.ast.Literal;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.PostfixOperator;
@@ -544,7 +545,8 @@ class JavaEnvironment {
     }
 
     JsInfo jsInfo = JsInteropUtils.getJsInfo(variableElement);
-    boolean isCompileTimeConstant = variableElement.getConstantValue() != null;
+    Object constantValue = variableElement.getConstantValue();
+    boolean isCompileTimeConstant = constantValue != null;
     if (isCompileTimeConstant) {
       thisTypeDescriptor = thisTypeDescriptor.toNonNullable();
     }
@@ -558,6 +560,8 @@ class JavaEnvironment {
         .setOriginalJsInfo(jsInfo)
         .setFinal(isFinal)
         .setCompileTimeConstant(isCompileTimeConstant)
+        .setConstantValue(
+            constantValue != null ? Literal.fromValue(constantValue, thisTypeDescriptor) : null)
         .setDeclarationDescriptor(declarationFieldDescriptor)
         .setEnumConstant(isEnumConstant)
         .setUnusableByJsSuppressed(

@@ -53,4 +53,20 @@ public abstract class Literal extends Expression {
   Node acceptInternal(Processor processor) {
     return Visitor_Literal.visit(processor, this);
   }
+
+  public static Literal fromValue(Object value, TypeDescriptor typeDescriptor) {
+    if (value instanceof Boolean) {
+      return (boolean) value ? BooleanLiteral.get(true) : BooleanLiteral.get(false);
+    }
+    if (value instanceof Number) {
+      return new NumberLiteral(typeDescriptor.toUnboxedType(), (Number) value);
+    }
+    if (value instanceof Character) {
+      return NumberLiteral.fromChar((Character) value);
+    }
+    if (value instanceof String) {
+      return new StringLiteral((String) value);
+    }
+    throw new IllegalArgumentException("Unexpected type " + typeDescriptor);
+  }
 }

@@ -35,6 +35,9 @@ public abstract class FieldDescriptor extends MemberDescriptor {
   @Override
   public abstract boolean isCompileTimeConstant();
 
+  @Nullable
+  public abstract Literal getConstantValue();
+
   @Override
   public abstract boolean isEnumConstant();
 
@@ -221,6 +224,8 @@ public abstract class FieldDescriptor extends MemberDescriptor {
   public abstract static class Builder {
     public abstract Builder setCompileTimeConstant(boolean compileTimeConstant);
 
+    public abstract Builder setConstantValue(@Nullable Literal constantValue);
+
     public abstract Builder setStatic(boolean isStatic);
 
     public abstract Builder setFinal(boolean isFinal);
@@ -260,10 +265,16 @@ public abstract class FieldDescriptor extends MemberDescriptor {
 
     abstract Optional<String> getName();
 
+    @Nullable
+    abstract Literal getConstantValue();
+
+    abstract boolean isCompileTimeConstant();
+
     abstract FieldDescriptor autoBuild();
 
     public FieldDescriptor build() {
       checkState(getName().isPresent());
+      checkState(getConstantValue() == null || isCompileTimeConstant());
       FieldDescriptor fieldDescriptor = autoBuild();
 
       return interner.intern(fieldDescriptor);

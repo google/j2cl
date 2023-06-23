@@ -36,6 +36,7 @@ import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.transpiler.ast.JsInfo;
 import com.google.j2cl.transpiler.ast.JsMemberType;
 import com.google.j2cl.transpiler.ast.KtInfo;
+import com.google.j2cl.transpiler.ast.Literal;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.PostfixOperator;
@@ -753,7 +754,8 @@ class JdtEnvironment {
       declarationFieldDescriptor = createFieldDescriptor(variableBinding.getVariableDeclaration());
     }
 
-    boolean isCompileTimeConstant = variableBinding.getConstantValue() != null;
+    Object constantValue = variableBinding.getConstantValue();
+    boolean isCompileTimeConstant = constantValue != null;
     if (isCompileTimeConstant) {
       thisTypeDescriptor = thisTypeDescriptor.toNonNullable();
     }
@@ -769,6 +771,8 @@ class JdtEnvironment {
             .setOriginalKtInfo(KtInteropUtils.getKtInfo(variableBinding))
             .setFinal(isFinal)
             .setCompileTimeConstant(isCompileTimeConstant)
+            .setConstantValue(
+                constantValue != null ? Literal.fromValue(constantValue, thisTypeDescriptor) : null)
             .setDeclarationDescriptor(declarationFieldDescriptor)
             .setEnumConstant(variableBinding.isEnumConstant())
             .setUnusableByJsSuppressed(

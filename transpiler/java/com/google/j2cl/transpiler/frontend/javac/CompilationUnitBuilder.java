@@ -55,6 +55,7 @@ import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
 import com.google.j2cl.transpiler.ast.Label;
 import com.google.j2cl.transpiler.ast.LabelReference;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
+import com.google.j2cl.transpiler.ast.Literal;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
@@ -255,7 +256,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   private Field convertFieldDeclaration(JCVariableDecl fieldDeclaration) {
     Expression initializer;
     VariableElement variableElement = fieldDeclaration.sym;
-    if (variableElement.getConstantValue() == null) {
+    Object constantValue = variableElement.getConstantValue();
+    if (constantValue == null) {
       initializer = convertExpressionOrNull(fieldDeclaration.getInitializer());
     } else {
       initializer = convertConstantToLiteral(variableElement);
@@ -317,25 +319,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     return Method.newBuilder().setMethodDescriptor(methodDescriptor);
   }
 
-  private Expression convertConstantToLiteral(VariableElement variableElement) {
-    Object constantValue = variableElement.getConstantValue();
-    if (constantValue instanceof Boolean) {
-      return (boolean) constantValue ? BooleanLiteral.get(true) : BooleanLiteral.get(false);
-    }
-    if (constantValue instanceof Number) {
-      return new NumberLiteral(
-          environment.createTypeDescriptor(variableElement.asType()).toUnboxedType(),
-          (Number) constantValue);
-    }
-    if (constantValue instanceof Character) {
-      return NumberLiteral.fromChar((Character) constantValue);
-    }
-    if (constantValue instanceof String) {
-      return new StringLiteral((String) constantValue);
-    }
-    throw internalCompilerError(
-        "Unimplemented translation for compile time constants of type: %s.",
-        constantValue.getClass().getSimpleName());
+  private Literal convertConstantToLiteral(VariableElement variableElement) {
+    return Literal.fromValue(
+        variableElement.getConstantValue(),
+        environment.createTypeDescriptor(variableElement.asType()));
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////

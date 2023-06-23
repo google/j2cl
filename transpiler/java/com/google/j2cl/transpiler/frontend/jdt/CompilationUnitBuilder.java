@@ -62,6 +62,7 @@ import com.google.j2cl.transpiler.ast.InstanceOfExpression;
 import com.google.j2cl.transpiler.ast.Label;
 import com.google.j2cl.transpiler.ast.LabelReference;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
+import com.google.j2cl.transpiler.ast.Literal;
 import com.google.j2cl.transpiler.ast.LocalClassDeclarationStatement;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
@@ -352,7 +353,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           initializer = convertOrNull(fragment.getInitializer());
         } else {
           initializer =
-              convertConstantToLiteral(
+              Literal.fromValue(
                   variableBinding.getConstantValue(),
                   environment.createTypeDescriptor(variableBinding.getType()));
         }
@@ -1447,7 +1448,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     private Expression convertAndFoldExpression(org.eclipse.jdt.core.dom.Expression expression) {
       Object constantValue = expression.resolveConstantExpressionValue();
       return constantValue != null
-          ? convertConstantToLiteral(
+          ? Literal.fromValue(
               constantValue, environment.createTypeDescriptor(expression.resolveTypeBinding()))
           : convert(expression);
     }

@@ -19,13 +19,9 @@ package com.google.j2cl.transpiler.frontend.common;
 import com.google.common.collect.Iterables;
 import com.google.errorprone.annotations.FormatMethod;
 import com.google.j2cl.common.InternalCompilerError;
-import com.google.j2cl.transpiler.ast.BooleanLiteral;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.NumberLiteral;
-import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.Type;
-import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import java.util.ArrayList;
@@ -108,24 +104,6 @@ public abstract class AbstractCompilationUnitBuilder {
                 .build(),
             expression)
         .build();
-  }
-
-  protected Expression convertConstantToLiteral(
-      Object constantValue, TypeDescriptor typeDescriptor) {
-    if (constantValue instanceof Boolean) {
-      return (boolean) constantValue ? BooleanLiteral.get(true) : BooleanLiteral.get(false);
-    }
-    if (constantValue instanceof Number) {
-      return new NumberLiteral(typeDescriptor.toUnboxedType(), (Number) constantValue);
-    }
-    if (constantValue instanceof Character) {
-      return NumberLiteral.fromChar((Character) constantValue);
-    }
-    if (constantValue instanceof String) {
-      return new StringLiteral((String) constantValue);
-    }
-    throw internalCompilerError(
-        "Unexpected type for compile time constant: %s", constantValue.getClass().getSimpleName());
   }
 
   @FormatMethod
