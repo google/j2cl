@@ -35,6 +35,12 @@ public class CompileTimeConstant<T> {
   public static final char H = 'A';
   public static final boolean I = G > 100;
 
+  public static final byte MIN_BYTE = -128;
+  public static final short MIN_SHORT = -32768;
+
+  public static final byte MIN_BYTE_WITH_CAST = (byte) -128;
+  public static final short MIN_SHORT_WITH_CAST = (short) -32768;
+
   // Note that currently this only compile time constant for Wasm purposes, not per JLS.
   public static final Class<?> classLiteral = CompileTimeConstant.class;
 

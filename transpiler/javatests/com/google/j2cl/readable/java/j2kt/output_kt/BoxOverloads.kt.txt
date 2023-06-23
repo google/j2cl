@@ -49,8 +49,8 @@ open class BoxOverloads {
   @ObjCName("testNullableBoxedOverload")
   fun testNullableBoxedOverload() {
    BoxOverloads.nullableBoxedOverload(1.25)
-   BoxOverloads.nullableBoxedOverload(Double.valueOf(1.25) as Double?)
-   BoxOverloads.nullableBoxedOverload(Double(1.25) as Double?)
+   BoxOverloads.nullableBoxedOverload(Double.valueOf(1.25))
+   BoxOverloads.nullableBoxedOverload(Double(1.25))
    BoxOverloads.nullableBoxedOverload(1.0)
   }
 

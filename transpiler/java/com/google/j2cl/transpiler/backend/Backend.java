@@ -126,6 +126,7 @@ import com.google.j2cl.transpiler.passes.NormalizeMethodParametersJ2kt;
 import com.google.j2cl.transpiler.passes.NormalizeMultiExpressions;
 import com.google.j2cl.transpiler.passes.NormalizeNativePropertyAccesses;
 import com.google.j2cl.transpiler.passes.NormalizeNullLiterals;
+import com.google.j2cl.transpiler.passes.NormalizeNumberLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeOverlayMembers;
 import com.google.j2cl.transpiler.passes.NormalizeShifts;
 import com.google.j2cl.transpiler.passes.NormalizeStaticMemberQualifiers;
@@ -661,7 +662,6 @@ public enum Backend {
           () -> new NormalizeShifts(/* narrowAllToInt= */ true),
           InsertWideningPrimitiveConversionsJ2kt::new,
           InsertNarrowingPrimitiveConversionsJ2kt::new,
-          NormalizeBasicCastsJ2kt::new,
           ImplementBitLevelOperatorsJ2kt::new,
           InsertQualifierProjectionCasts::new,
           InsertNotNullAssertions::new,
@@ -674,6 +674,10 @@ public enum Backend {
           InsertStringConversionsJ2kt::new,
           NormalizeVariableInitialization::new,
           MakeVariablesFinal::new,
+
+          // Needs to run after NormalizeVariableInitialization.
+          NormalizeNumberLiterals::new,
+          NormalizeBasicCastsJ2kt::new,
 
           // Needs to run after NormalizeVarargParametersJ2kt.
           NormalizeMethodParametersJ2kt::new,

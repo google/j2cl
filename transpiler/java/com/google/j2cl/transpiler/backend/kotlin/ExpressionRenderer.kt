@@ -380,8 +380,6 @@ private fun Renderer.typeLiteralSource(typeLiteral: TypeLiteral): Source =
 private fun numberLiteralSource(numberLiteral: NumberLiteral): Source =
   when (numberLiteral.typeDescriptor.toUnboxedType()) {
     PrimitiveTypes.CHAR -> literalSource(numberLiteral.value.toChar())
-    PrimitiveTypes.BYTE -> literalSource(numberLiteral.value.toByte())
-    PrimitiveTypes.SHORT -> literalSource(numberLiteral.value.toShort())
     PrimitiveTypes.INT -> literalSource(numberLiteral.value.toInt())
     PrimitiveTypes.LONG -> literalSource(numberLiteral.value.toLong())
     PrimitiveTypes.FLOAT -> literalSource(numberLiteral.value.toFloat())

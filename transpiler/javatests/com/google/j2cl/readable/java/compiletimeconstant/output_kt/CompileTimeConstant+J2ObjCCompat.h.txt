@@ -25,6 +25,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 #define CompiletimeconstantCompileTimeConstant_I true
 
+#define CompiletimeconstantCompileTimeConstant_MIN_BYTE -128
+
+#define CompiletimeconstantCompileTimeConstant_MIN_SHORT -32768
+
+#define CompiletimeconstantCompileTimeConstant_MIN_BYTE_WITH_CAST -128
+
+#define CompiletimeconstantCompileTimeConstant_MIN_SHORT_WITH_CAST -32768
+
 NS_INLINE id _Nullable CompiletimeconstantCompileTimeConstant_get_OBJ(void) {
  return J2ktCompiletimeconstantCompileTimeConstantCompanion.shared.OBJ_;
 }
@@ -83,6 +91,22 @@ NS_INLINE jchar CompiletimeconstantCompileTimeConstant_get_H(void) {
 
 NS_INLINE jboolean CompiletimeconstantCompileTimeConstant_get_I(void) {
  return J2ktCompiletimeconstantCompileTimeConstantCompanion.shared.I_;
+}
+
+NS_INLINE jbyte CompiletimeconstantCompileTimeConstant_get_MIN_BYTE(void) {
+ return J2ktCompiletimeconstantCompileTimeConstantCompanion.shared.MIN_BYTE_;
+}
+
+NS_INLINE jshort CompiletimeconstantCompileTimeConstant_get_MIN_SHORT(void) {
+ return J2ktCompiletimeconstantCompileTimeConstantCompanion.shared.MIN_SHORT_;
+}
+
+NS_INLINE jbyte CompiletimeconstantCompileTimeConstant_get_MIN_BYTE_WITH_CAST(void) {
+ return J2ktCompiletimeconstantCompileTimeConstantCompanion.shared.MIN_BYTE_WITH_CAST_;
+}
+
+NS_INLINE jshort CompiletimeconstantCompileTimeConstant_get_MIN_SHORT_WITH_CAST(void) {
+ return J2ktCompiletimeconstantCompileTimeConstantCompanion.shared.MIN_SHORT_WITH_CAST_;
 }
 
 NS_ASSUME_NONNULL_END

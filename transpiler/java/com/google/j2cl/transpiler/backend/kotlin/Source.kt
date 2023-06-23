@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
-import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.commaAndNewLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
@@ -32,12 +31,6 @@ fun literalSource(it: Boolean): Source = source("$it")
 fun literalSource(it: Char): Source = source(it.literalString)
 
 fun literalSource(it: String): Source = source(it.literalString)
-
-fun literalSource(it: Byte): Source =
-  literalSource(it.toInt()).letIf(it < 0, ::inRoundBrackets).functionCall("toByte")
-
-fun literalSource(it: Short): Source =
-  literalSource(it.toInt()).letIf(it < 0, ::inRoundBrackets).functionCall("toShort")
 
 fun literalSource(it: Int): Source = source("$it")
 

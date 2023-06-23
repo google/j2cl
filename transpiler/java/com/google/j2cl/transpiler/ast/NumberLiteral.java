@@ -75,6 +75,14 @@ public class NumberLiteral extends Literal {
   }
 
   @Override
+  public Precedence getPrecedence() {
+    // Positive number literals have the highest precedence and never need to be parenthesized, but
+    // negative number can be seen as a prefix - on a positive number literal, so their precedence
+    // needs to be PREFIX.
+    return value.doubleValue() < 0 ? Precedence.PREFIX : Precedence.HIGHEST;
+  }
+
+  @Override
   public PrimitiveTypeDescriptor getTypeDescriptor() {
     return typeDescriptor;
   }
