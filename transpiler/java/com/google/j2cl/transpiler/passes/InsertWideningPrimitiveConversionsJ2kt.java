@@ -19,7 +19,6 @@ import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
@@ -110,12 +109,6 @@ public class InsertWideningPrimitiveConversionsJ2kt extends NormalizationPass {
   }
 
   private Expression widenTo(TypeDescriptor toTypeDescriptor, Expression expression) {
-    // Widen literals at compile time.
-    if (expression instanceof NumberLiteral) {
-      PrimitiveTypeDescriptor literalTypeDescriptor = (PrimitiveTypeDescriptor) toTypeDescriptor;
-      return new NumberLiteral(literalTypeDescriptor, ((NumberLiteral) expression).getValue());
-    }
-    // Otherwise, insert an explicit cast.
     return CastExpression.newBuilder()
         .setExpression(expression)
         .setCastTypeDescriptor(toTypeDescriptor)

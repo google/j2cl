@@ -51,7 +51,7 @@ open class BoxOverloads {
    BoxOverloads.nullableBoxedOverload(1.25)
    BoxOverloads.nullableBoxedOverload(Double.valueOf(1.25))
    BoxOverloads.nullableBoxedOverload(Double(1.25))
-   BoxOverloads.nullableBoxedOverload(1.0)
+   BoxOverloads.nullableBoxedOverload(1.toDouble())
   }
 
   @JvmStatic
@@ -72,7 +72,7 @@ open class BoxOverloads {
    BoxOverloads.nullableNumberOverload(1.25)
    BoxOverloads.nullableNumberOverload(Double.valueOf(1.25) as Number?)
    BoxOverloads.nullableNumberOverload(Double(1.25) as Number?)
-   BoxOverloads.nullableNumberOverload(1.0)
+   BoxOverloads.nullableNumberOverload(1.toDouble())
    BoxOverloads.nullableNumberOverload(Int.valueOf(1) as Number?)
    BoxOverloads.nullableNumberOverload(Int(1) as Number?)
   }
@@ -95,7 +95,7 @@ open class BoxOverloads {
    BoxOverloads.numberOverload(1.25)
    BoxOverloads.numberOverload(Double.valueOf(1.25) as Number)
    BoxOverloads.numberOverload(Double(1.25) as Number)
-   BoxOverloads.numberOverload(1.0)
+   BoxOverloads.numberOverload(1.toDouble())
    BoxOverloads.numberOverload(Int.valueOf(1) as Number)
    BoxOverloads.numberOverload(Int(1) as Number)
   }
@@ -118,7 +118,7 @@ open class BoxOverloads {
    BoxOverloads.nullableObjectOverload(1.25)
    BoxOverloads.nullableObjectOverload(Double.valueOf(1.25) as Any?)
    BoxOverloads.nullableObjectOverload(Double(1.25) as Any?)
-   BoxOverloads.nullableObjectOverload(1.0)
+   BoxOverloads.nullableObjectOverload(1.toDouble())
    BoxOverloads.nullableObjectOverload(Int.valueOf(1) as Any?)
    BoxOverloads.nullableObjectOverload(Int(1) as Any?)
    BoxOverloads.nullableObjectOverload("foo")
@@ -142,7 +142,7 @@ open class BoxOverloads {
    BoxOverloads.objectOverload(1.25)
    BoxOverloads.objectOverload(Double.valueOf(1.25) as Any)
    BoxOverloads.objectOverload(Double(1.25) as Any)
-   BoxOverloads.objectOverload(1.0)
+   BoxOverloads.objectOverload(1.toDouble())
    BoxOverloads.objectOverload(Int.valueOf(1) as Any)
    BoxOverloads.objectOverload(Int(1) as Any)
    BoxOverloads.objectOverload("foo")

@@ -47,7 +47,7 @@ open class BoxOverloads {
    BoxOverloads.boxedOverload(1.25)
    BoxOverloads.boxedOverload(Double.valueOf(1.25))
    BoxOverloads.boxedOverload(Double(1.25))
-   BoxOverloads.boxedOverload(1.0)
+   BoxOverloads.boxedOverload(1.toDouble())
   }
 
   @JvmStatic
@@ -57,7 +57,7 @@ open class BoxOverloads {
   ) {
    generic!!.overload(1.25)
    generic!!.overload(Double.valueOf(1.25))
-   generic!!.overload(1.0)
+   generic!!.overload(1.toDouble())
   }
  }
 
