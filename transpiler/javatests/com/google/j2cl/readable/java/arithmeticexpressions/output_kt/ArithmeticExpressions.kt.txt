@@ -51,14 +51,14 @@ open class ArithmeticExpressions {
   var c: Char = 1L.toInt().toChar()
   var s: Short = 1L.toShort()
   var i: Int = 1L.toInt()
-  var f: Float = 1L.toFloat()
-  var d: Double = 1L.toDouble()
+  var f: Float = 1.0f
+  var d: Double = 1.0
   b = 9223372036854775807L.toByte()
   c = 9223372036854775807L.toInt().toChar()
   s = 9223372036854775807L.toShort()
   i = 9223372036854775807L.toInt()
-  f = 9223372036854775807L.toFloat()
-  d = 9223372036854775807L.toDouble()
+  f = 9.223372E18f
+  d = 9.223372036854776E18
   val o: Any? = Char.valueOf(c)
   s = (o as Char).code.toShort()
  }
@@ -107,7 +107,7 @@ open class ArithmeticExpressions {
   k = k.or(true)
   var s: Short = 10.toShort()
   k = run {
-   s = (s.toInt() + 1.toShort().toInt()).toShort()
+   s = (s.toInt() + 1).toShort()
    s
   }.toInt() == 10
   var q: Int = 3.shr(2)
@@ -173,7 +173,7 @@ open class ArithmeticExpressions {
   val ___value_4: Int = ___array_4!![___index_4] / 1
   ___array_5!![___index_5] = ___value_4
   val longs: LongArray? = null
-  longs!![0] = longs!![0] + 1.toLong()
+  longs!![0] = longs!![0] + 1L
   longs!![0] = longs!![0] - 1L
   longs!![0] = longs!![0] - 1L
   val ___array_6: LongArray? = ArithmeticExpressions.getLongArray_private_2()
@@ -190,7 +190,7 @@ open class ArithmeticExpressions {
   val b: Boolean = run {
    val ___array_8: ShortArray? = shorts
    val ___index_8: Int = 0
-   val ___value_6: Short = (shorts!![0].toInt() + 1.toShort().toInt()).toShort()
+   val ___value_6: Short = (shorts!![0].toInt() + 1).toShort()
    ___array_8!![___index_8] = ___value_6
    ___value_6
   }.toInt() == 10
@@ -226,9 +226,9 @@ open class ArithmeticExpressions {
    ___value_1
   }
   var b: Byte? = Byte.valueOf(0.toByte())
-  b = Byte.valueOf((b!!.toByte().toInt() + 1.toByte().toInt()).toByte())
+  b = Byte.valueOf((b!!.toByte().toInt() + 1).toByte())
   var ch: Char? = Char.valueOf('c')
-  ch = Char.valueOf((ch!!.toChar().code + '\u0001'.code).toChar())
+  ch = Char.valueOf((ch!!.toChar().code + 1).toChar())
   run {
    f = Int.valueOf(f!!.toInt() + 1)
    f
@@ -244,7 +244,7 @@ open class ArithmeticExpressions {
    var field_pp_arithmeticexpressions: T? = null
   }
   val ref: ___1Ref<Byte?>? = null
-  ref!!.field_pp_arithmeticexpressions = Byte.valueOf((ref!!.field_pp_arithmeticexpressions!!.toByte().toInt() + 1.toByte().toInt()).toByte())
+  ref!!.field_pp_arithmeticexpressions = Byte.valueOf((ref!!.field_pp_arithmeticexpressions!!.toByte().toInt() + 1).toByte())
   val n: Int = 1 + ref!!.field_pp_arithmeticexpressions!!.toByte().toInt()
  }
 
@@ -260,7 +260,7 @@ open class ArithmeticExpressions {
   var d: Double = 0.0
   l = (2 - boxedInteger!!.toInt()).toLong() - 2L
   l = 2.or(boxedInteger!!.toInt()).toLong().or(2L)
-  l = 1000000L * l * 60.toLong() * 60.toLong() * 24.toLong()
+  l = 1000000L * l * 60L * 60L * 24L
   l = (24 * 60 * 60).toLong() * l * 1000000L
   d = run {
    l = run {
@@ -276,8 +276,8 @@ open class ArithmeticExpressions {
    })
    boxedInteger
   }!!.toInt().toLong()
-  l = (i + boxedInteger!!.toInt()).toLong() + l + 20.toLong()
-  d = (20.toLong() + l).toDouble() + d
+  l = (i + boxedInteger!!.toInt()).toLong() + l + 20L
+  d = (20L + l).toDouble() + d
  }
 
  @ObjCName("testEffectivelyFinalVariableInAssignmentExpression")
@@ -288,7 +288,7 @@ open class ArithmeticExpressions {
   if (condition && run {
    effectivelyFinal = this.bar
    effectivelyFinal
-  } != 0.toLong()) {
+  } != 0L) {
    val unused: Long = effectivelyFinal
   }
  }
@@ -333,7 +333,7 @@ open class ArithmeticExpressions {
   fun testSideEffect_private_2() {
    val ___qualifier: ArithmeticExpressions? = ArithmeticExpressions.getWithSideEffect_private_2()
    val ___qualifier_1: ArithmeticExpressions? = ___qualifier
-   val ___value: Long = ___qualifier!!.intField_pp_arithmeticexpressions + 5.toLong()
+   val ___value: Long = ___qualifier!!.intField_pp_arithmeticexpressions + 5L
    ___qualifier_1!!.intField_pp_arithmeticexpressions = ___value
   }
 
