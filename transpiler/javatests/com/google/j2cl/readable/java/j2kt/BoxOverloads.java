@@ -20,6 +20,13 @@ import org.jspecify.nullness.Nullable;
 
 @NullMarked
 public class BoxOverloads {
+  public BoxOverloads(double d) {
+    // Dispatches BoxOverloads(@Nullable Double)
+    this(Double.valueOf(d));
+  }
+
+  public BoxOverloads(@Nullable Double d) {}
+
   public static void nullableBoxedOverload(double d) {}
 
   public static void nullableBoxedOverload(@Nullable Double d) {}

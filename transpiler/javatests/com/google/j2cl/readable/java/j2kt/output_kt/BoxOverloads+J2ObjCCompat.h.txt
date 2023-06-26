@@ -15,6 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @compatibility_alias J2ktBoxOverloadsCompanion J2ktJ2ktBoxOverloadsCompanion;
 
+NS_INLINE J2ktJ2ktBoxOverloads* create_J2ktBoxOverloads_initWithDouble_(jdouble d) {
+ return [[J2ktJ2ktBoxOverloads alloc] initWithDouble:d];
+}
+
 NS_INLINE void J2ktBoxOverloads_nullableBoxedOverloadWithDouble_(jdouble d) {
  [J2ktJ2ktBoxOverloadsCompanion.shared nullableBoxedOverloadWithDouble:d];
 }
