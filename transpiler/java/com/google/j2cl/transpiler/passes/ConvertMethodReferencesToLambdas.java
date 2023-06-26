@@ -224,7 +224,6 @@ public class ConvertMethodReferencesToLambdas extends NormalizationPass {
       // We pass the qualifier as the first argument of the referenced method:
       //
       // (a, b) -> { extensionMethod(q, a, b) }
-      // TODO(b/233775253): Handle references to methods with varargs/default args (Kotlin)
       checkArgument(
           parameters.size() + 1 == targetMethodDescriptor.getParameterTypeDescriptors().size());
       forwardedArguments =
