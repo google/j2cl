@@ -111,6 +111,52 @@ open class CastPrimitives {
   val d: Double = o as Double
  }
 
+ @ObjCName("testLiteralToPrimitive")
+ open fun testLiteralToPrimitive() {
+  var b: Byte = 0.toByte()
+  var c: Char = '\u0000'
+  var s: Short = 0.toShort()
+  var i: Int = 0
+  var l: Long = 0L
+  var f: Float = 0.0f
+  var d: Double = 0.0
+  b = 1.toByte()
+  c = 1.toChar()
+  s = 1.toShort()
+  i = 1
+  l = 1L
+  f = 1.0f
+  d = 1.0
+  b = 1L.toByte()
+  c = 1L.toInt().toChar()
+  s = 1L.toShort()
+  i = 1L.toInt()
+  l = 1L
+  f = 1.0f
+  d = 1.0
+  b = 1.2f.toInt().toByte()
+  c = 1.2f.toInt().toChar()
+  s = 1.2f.toInt().toShort()
+  i = 1.2f.toInt()
+  l = 1.2f.toLong()
+  f = 1.2f
+  d = 1.2000000476837158
+  b = 1.2.toInt().toByte()
+  c = 1.2.toInt().toChar()
+  s = 1.2.toInt().toShort()
+  i = 1.2.toInt()
+  l = 1.2.toLong()
+  f = 1.2.toFloat()
+  d = 1.2
+  b = 'a'.code.toByte()
+  c = 'a'
+  s = 'a'.code.toShort()
+  i = 97
+  l = 97L
+  f = 97.0f
+  d = 97.0
+ }
+
  @ObjCName("testUnboxAndWiden")
  open fun testUnboxAndWiden() {
   val boxedByte: Byte? = Byte.valueOf(0.toByte())

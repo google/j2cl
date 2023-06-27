@@ -94,6 +94,56 @@ public class CastPrimitives {
     double d = (double) o;
   }
 
+  public void testLiteralToPrimitive() {
+    byte b;
+    char c;
+    short s;
+    int i;
+    long l;
+    float f;
+    double d;
+
+    b = (byte) 1;
+    c = (char) 1;
+    s = (short) 1;
+    i = (int) 1;
+    l = (long) 1;
+    f = (float) 1;
+    d = (double) 1;
+
+    b = (byte) 1L;
+    c = (char) 1L;
+    s = (short) 1L;
+    i = (int) 1L;
+    l = (long) 1L;
+    f = (float) 1L;
+    d = (double) 1L;
+
+    b = (byte) 1.2f;
+    c = (char) 1.2f;
+    s = (short) 1.2f;
+    i = (int) 1.2f;
+    l = (long) 1.2f;
+    f = (float) 1.2f;
+    d = (double) 1.2f;
+
+    b = (byte) 1.2;
+    c = (char) 1.2;
+    s = (short) 1.2;
+    i = (int) 1.2;
+    l = (long) 1.2;
+    f = (float) 1.2;
+    d = (double) 1.2;
+
+    b = (byte) 'a';
+    c = (char) 'a';
+    s = (short) 'a';
+    i = (int) 'a';
+    l = (long) 'a';
+    f = (float) 'a';
+    d = (double) 'a';
+  }
+
   public void testUnboxAndWiden() {
     Byte boxedByte = Byte.valueOf((byte) 0);
 
