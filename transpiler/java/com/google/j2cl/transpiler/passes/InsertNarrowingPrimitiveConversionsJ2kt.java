@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import static com.google.j2cl.transpiler.ast.TypeDescriptors.isBoxedOrPrimitiveType;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveChar;
 
 import com.google.j2cl.transpiler.ast.CastExpression;
@@ -47,11 +46,11 @@ public class InsertNarrowingPrimitiveConversionsJ2kt extends NormalizationPass {
                   return expression;
                 }
 
-                if (!isBoxedOrPrimitiveType(actualTypeDescriptor)) {
+                if (!actualTypeDescriptor.isPrimitive()) {
                   return expression;
                 }
 
-                TypeDescriptor toTypeDescriptor = actualTypeDescriptor.toUnboxedType();
+                TypeDescriptor toTypeDescriptor = actualTypeDescriptor;
                 if (isPrimitiveChar(fromTypeDescriptor) == isPrimitiveChar(toTypeDescriptor)) {
                   return expression;
                 }

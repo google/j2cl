@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.j2cl.transpiler.ast.TypeDescriptors.isNumericPrimitive;
+
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
@@ -22,7 +24,6 @@ import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
-import com.google.j2cl.transpiler.ast.TypeDescriptors;
 
 /**
  * Inserts a widening operation when a smaller primitive type is being put into a large primitive
@@ -52,14 +53,14 @@ public class InsertWideningPrimitiveConversionsJ2kt extends NormalizationPass {
       @Override
       public Expression rewriteBinaryNumericPromotionContext(
           TypeDescriptor otherOperandTypeDescriptor, Expression operand) {
-        if (!isBasicNumericType(operand.getTypeDescriptor())
-            || !isBasicNumericType(otherOperandTypeDescriptor)) {
+        if (!isNumericPrimitive(operand.getTypeDescriptor())
+            || !isNumericPrimitive(otherOperandTypeDescriptor)) {
           return operand;
         }
         TypeDescriptor widenedTypeDescriptor =
             AstUtils.getNumericBinaryExpressionTypeDescriptor(
-                operand.getTypeDescriptor().toUnboxedType(),
-                otherOperandTypeDescriptor.toUnboxedType());
+                (PrimitiveTypeDescriptor) operand.getTypeDescriptor(),
+                (PrimitiveTypeDescriptor) otherOperandTypeDescriptor);
         return shouldWiden(widenedTypeDescriptor, operand)
             ? widenTo(widenedTypeDescriptor, operand)
             : operand;
@@ -67,7 +68,7 @@ public class InsertWideningPrimitiveConversionsJ2kt extends NormalizationPass {
 
       @Override
       public Expression rewriteUnaryNumericPromotionContext(Expression operand) {
-        if (!isBasicNumericType(operand.getTypeDescriptor())) {
+        if (!isNumericPrimitive(operand.getTypeDescriptor())) {
           return operand;
         }
         TypeDescriptor widenedTypeDescriptor =
@@ -93,15 +94,9 @@ public class InsertWideningPrimitiveConversionsJ2kt extends NormalizationPass {
     };
   }
 
-  private static boolean isBasicNumericType(TypeDescriptor type) {
-    return (type.isPrimitive() || TypeDescriptors.isBoxedType(type))
-        && TypeDescriptors.isNumericPrimitive(type.toUnboxedType());
-  }
-
   private static boolean shouldWiden(TypeDescriptor toTypeDescriptor, Expression expression) {
     TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
-    if (!TypeDescriptors.isNumericPrimitive(fromTypeDescriptor)
-        || !TypeDescriptors.isNumericPrimitive(toTypeDescriptor)) {
+    if (!isNumericPrimitive(fromTypeDescriptor) || !isNumericPrimitive(toTypeDescriptor)) {
       // Widening only applies between primitive types.
       return false;
     }

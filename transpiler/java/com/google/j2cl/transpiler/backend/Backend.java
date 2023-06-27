@@ -95,7 +95,6 @@ import com.google.j2cl.transpiler.passes.NormalizeArrayCreations;
 import com.google.j2cl.transpiler.passes.NormalizeArrayCreationsJ2kt;
 import com.google.j2cl.transpiler.passes.NormalizeArrayCreationsWasm;
 import com.google.j2cl.transpiler.passes.NormalizeArrayLiterals;
-import com.google.j2cl.transpiler.passes.NormalizeBasicCastsJ2kt;
 import com.google.j2cl.transpiler.passes.NormalizeCasts;
 import com.google.j2cl.transpiler.passes.NormalizeCatchClauses;
 import com.google.j2cl.transpiler.passes.NormalizeConstructors;
@@ -128,6 +127,7 @@ import com.google.j2cl.transpiler.passes.NormalizeNativePropertyAccesses;
 import com.google.j2cl.transpiler.passes.NormalizeNullLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeNumberLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeOverlayMembers;
+import com.google.j2cl.transpiler.passes.NormalizePrimitiveCastsJ2kt;
 import com.google.j2cl.transpiler.passes.NormalizeShifts;
 import com.google.j2cl.transpiler.passes.NormalizeStaticMemberQualifiers;
 import com.google.j2cl.transpiler.passes.NormalizeStaticNativeMemberReferences;
@@ -653,6 +653,8 @@ public enum Backend {
           RewriteAssignmentExpressions::new,
           () -> new InsertUnboxingConversions(/* areBooleanAndDoubleBoxed= */ true),
           () -> new InsertBoxingConversions(/* areBooleanAndDoubleBoxed= */ true),
+          InsertWideningPrimitiveConversionsJ2kt::new,
+          InsertNarrowingPrimitiveConversionsJ2kt::new,
           NormalizeVarargParametersJ2kt::new,
           NormalizeFieldInitializationJ2kt::new,
           NormalizeVariableInitialization::new,
@@ -661,10 +663,8 @@ public enum Backend {
           NormalizeSwitchStatementsJ2kt::new,
           NormalizeLabeledStatements::new,
           () -> new NormalizeShifts(/* narrowAllToInt= */ true),
-          InsertWideningPrimitiveConversionsJ2kt::new,
-          InsertNarrowingPrimitiveConversionsJ2kt::new,
           NormalizeNumberLiterals::new,
-          NormalizeBasicCastsJ2kt::new,
+          NormalizePrimitiveCastsJ2kt::new,
           ImplementBitLevelOperatorsJ2kt::new,
           InsertQualifierProjectionCasts::new,
           InsertNotNullAssertions::new,
