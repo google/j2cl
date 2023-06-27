@@ -109,12 +109,12 @@ public class NormalizeBasicCastsJ2kt extends NormalizationPass {
                   .build())
           .build();
 
-  private static final Expression convertCharCode(Expression expression) {
+  private static Expression convertCharCode(Expression expression) {
     FieldDescriptor castToFieldDescriptor =
         FieldDescriptor.newBuilder()
             .setEnclosingTypeDescriptor(KOTLIN_BASIC_TYPE)
             .setName("code")
-            .setTypeDescriptor(PrimitiveTypes.CHAR)
+            .setTypeDescriptor(PrimitiveTypes.INT)
             .build();
 
     return FieldAccess.Builder.from(castToFieldDescriptor).setQualifier(expression).build();
