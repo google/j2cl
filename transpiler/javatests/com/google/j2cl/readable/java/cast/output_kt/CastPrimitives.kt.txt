@@ -124,23 +124,23 @@ open class CastPrimitives {
   c = 1.toChar()
   s = 1.toShort()
   i = 1
-  l = 1L
-  f = 1.0f
-  d = 1.0
+  l = 1.toLong()
+  f = 1.toFloat()
+  d = 1.toDouble()
   b = 1L.toByte()
   c = 1L.toInt().toChar()
   s = 1L.toShort()
   i = 1L.toInt()
   l = 1L
-  f = 1.0f
-  d = 1.0
+  f = 1L.toFloat()
+  d = 1L.toDouble()
   b = 1.2f.toInt().toByte()
   c = 1.2f.toInt().toChar()
   s = 1.2f.toInt().toShort()
   i = 1.2f.toInt()
   l = 1.2f.toLong()
   f = 1.2f
-  d = 1.2000000476837158
+  d = 1.2f.toDouble()
   b = 1.2.toInt().toByte()
   c = 1.2.toInt().toChar()
   s = 1.2.toInt().toShort()
@@ -151,10 +151,10 @@ open class CastPrimitives {
   b = 'a'.code.toByte()
   c = 'a'
   s = 'a'.code.toShort()
-  i = 97
-  l = 97L
-  f = 97.0f
-  d = 97.0
+  i = 'a'.code
+  l = 'a'.code.toLong()
+  f = 'a'.code.toFloat()
+  d = 'a'.code.toDouble()
  }
 
  @ObjCName("testUnboxAndWiden")
@@ -206,7 +206,7 @@ open class CastPrimitives {
   result = array!![s.toInt()]
   result = array!![i]
   result = array!![1]
-  result = array!![97]
+  result = array!!['a'.code]
  }
 
  @ObjCName("testImplicitLongAssignmentCasts")
