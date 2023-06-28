@@ -359,7 +359,8 @@ public enum Backend {
           ConvertMethodReferencesToLambdas::new,
           ResolveImplicitInstanceQualifiers::new,
           () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ false),
-          NormalizeSuperMemberReferences::new);
+          NormalizeSuperMemberReferences::new,
+          RemoveWasmAnnotatedMethodBodies::new);
     }
 
     @Override
@@ -379,7 +380,6 @@ public enum Backend {
           VerifySingleAstReference::new,
           VerifyParamAndArgCounts::new,
           VerifyReferenceScoping::new,
-          RemoveWasmAnnotatedMethodBodies::new,
           ImplementLambdaExpressionsViaImplementorClasses::new,
 
           // Default constructors and explicit super calls should be synthesized first.
@@ -494,7 +494,8 @@ public enum Backend {
           ConvertMethodReferencesToLambdas::new,
           ResolveImplicitInstanceQualifiers::new,
           () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ false),
-          NormalizeSuperMemberReferences::new);
+          NormalizeSuperMemberReferences::new,
+          RemoveWasmAnnotatedMethodBodies::new);
     }
 
     @Override
@@ -514,7 +515,6 @@ public enum Backend {
           VerifySingleAstReference::new,
           VerifyParamAndArgCounts::new,
           VerifyReferenceScoping::new,
-          RemoveWasmAnnotatedMethodBodies::new,
           ImplementLambdaExpressionsViaImplementorClasses::new,
 
           // Default constructors and explicit super calls should be synthesized first.
