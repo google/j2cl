@@ -22,7 +22,6 @@ import javaemul.internal.annotations.DoNotAutobox;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /** Provides utilities to perform operations on Arrays. */
@@ -98,48 +97,50 @@ public final class ArrayHelper {
     asNativeArray(array).splice(index, 0, value);
   }
 
-  public static void insertTo(Object[] array, int index, Object[] values) {
-    copy(values, 0, array, index, values.length, false);
+  public static void insertTo(Object[] array, int insertIndex, Object[] values) {
+    int newLength = array.length + values.length;
+    setLength(array, newLength);
+
+    // Make room for the values that will be inserted by moving the existing elements to the
+    // end so that they are not overwritten.
+    int insertEndIndex = insertIndex + values.length;
+    copy(array, insertIndex, array, insertEndIndex, newLength - insertEndIndex);
+
+    // Copy new values into the insert location.
+    copy(values, 0, array, insertIndex, values.length);
   }
 
   public static void copy(Object array, int srcOfs, Object dest, int destOfs, int len) {
-    copy(array, srcOfs, dest, destOfs, len, true);
+    copy(
+        JsUtils.<Object[]>uncheckedCast(array),
+        srcOfs,
+        JsUtils.<Object[]>uncheckedCast(dest),
+        destOfs,
+        len);
   }
 
-  private static void copy(
-      Object src, int srcOfs, Object dest, int destOfs, int len, boolean overwrite) {
-
+  private static void copy(Object[] src, int srcOfs, Object[] dest, int destOfs, int len) {
     if (len == 0) {
       return;
     }
 
-    /*
-     * Array.prototype.splice is not used directly to overcome the limits imposed to the number of
-     * function parameters by browsers.
-     */
-
-    if (src == dest) {
-      // copying to the same array, make a copy first
-      src = unsafeClone(src, srcOfs, srcOfs + len);
-      srcOfs = 0;
-    }
-    NativeArray destArray = asNativeArray(dest);
-    for (int batchStart = srcOfs, end = srcOfs + len; batchStart < end;) {
-      // increment in block
-      int batchEnd = Math.min(batchStart + ARRAY_PROCESS_BATCH_SIZE, end);
-      len = batchEnd - batchStart;
-      Object[] spliceArgs = unsafeClone(src, batchStart, batchEnd);
-      asNativeArray(spliceArgs).splice(0, 0, (double) destOfs, (double) (overwrite ? len : 0));
-      getSpliceFunction().apply(destArray, spliceArgs);
-      batchStart = batchEnd;
-      destOfs += len;
+    if (src == dest && srcOfs < destOfs) {
+      // Reverse copy to handle overlap that would destroy values otherwise.
+      srcOfs += len;
+      for (int destEnd = destOfs + len; destEnd > destOfs; ) {
+        dest[--destEnd] = src[--srcOfs];
+      }
+    } else {
+      for (int destEnd = destOfs + len; destOfs < destEnd; ) {
+        dest[destOfs++] = src[srcOfs++];
+      }
     }
   }
 
   public static <T> T concat(T a, T b) {
     Object[] result = asNativeArray(a).slice();
     ArrayStamper.stampJavaTypeInfo(result, a);
-    copy(b, 0, result, getLength(a), getLength(b), /* overwrite= */ false);
+    copy(b, 0, result, getLength(a), getLength(b));
     return JsUtils.uncheckedCast(result);
   }
 
@@ -197,14 +198,6 @@ public final class ArrayHelper {
       final float[] sortedArray, int fromIndex, int toIndex, final float key) {
     return binarySearch(JsUtils.<double[]>uncheckedCast(sortedArray), fromIndex, toIndex, key);
   }
-
-  @JsType(isNative = true, name = "Function", namespace = JsPackage.GLOBAL)
-  private static class NativeFunction {
-    public native String apply(Object thisContext, Object[] argsArray);
-  }
-
-  @JsProperty(name = "Array.prototype.splice", namespace = JsPackage.GLOBAL)
-  private static native NativeFunction getSpliceFunction();
 
   public static void sortPrimitive(float[] array) {
     sortPrimitive(array, getDoubleComparator());
