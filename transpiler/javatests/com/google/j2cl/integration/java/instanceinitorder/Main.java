@@ -33,6 +33,8 @@ public class Main {
 
     // The values in these fields are written to by the super constructor, but they are overwritten
     // by the constructor due to having an initializer.
+    assertTrue(c.doubleNegativeZero == -0.0);
+    assertTrue(c.floatNegativeZero == -0.0f);
     assertTrue(c.field1 == 0);
     assertTrue(c.field6 == 0);
     assertNotNull(c.field2);
@@ -43,13 +45,28 @@ public class Main {
     // Fields with no initializer will see the values written by the super constructor.
     assertTrue(c.uninitializedField1 == 1);
     assertTrue(c.uninitializedField2);
-    assertNotNull(c.uninitializedField3);
+    assertTrue(c.uninitializedField3 == 'a');
+    assertTrue(c.uninitializedField4 == 1);
+    assertTrue(c.uninitializedField5 == 1);
+    assertTrue(c.uninitializedField6 == 1L);
+    assertTrue(c.uninitializedField7 == 1.0);
+    assertTrue(c.uninitializedField8 == 1.0f);
+    assertNotNull(c.uninitializedField9);
   }
 
   static class Child extends Parent {
     public int uninitializedField1;
     public boolean uninitializedField2;
-    public Object uninitializedField3;
+    public char uninitializedField3;
+    public byte uninitializedField4;
+    public short uninitializedField5;
+    public long uninitializedField6;
+    public double uninitializedField7;
+    public float uninitializedField8;
+    public Object uninitializedField9;
+
+    public double doubleNegativeZero = -0.0;
+    public float floatNegativeZero = -0.0f;
 
     public int field1 = this.initializeField1();
     public Object field2 = new Object();
@@ -82,11 +99,22 @@ public class Main {
     }
 
     @Override
-    void initFromParent() {
+    void assignFromParentConstructor() {
       assertTrue(initStep++ == 1); // #1
+      // Assign values to each field that are different from the default to test which assigment is
+      // done last.
       uninitializedField1 = 1;
       uninitializedField2 = true;
-      uninitializedField3 = new Object();
+      uninitializedField3 = 'a';
+      uninitializedField4 = 1;
+      uninitializedField5 = 1;
+      uninitializedField6 = 1L;
+      uninitializedField7 = 1.0;
+      uninitializedField8 = 1.0f;
+      uninitializedField9 = new Object();
+
+      doubleNegativeZero = -1.0;
+      floatNegativeZero = -1.0f;
 
       field1 = 10;
       field2 = null;
@@ -99,9 +127,9 @@ public class Main {
 
   static class Parent {
     Parent() {
-      initFromParent();
+      assignFromParentConstructor();
     }
 
-    void initFromParent() {}
+    void assignFromParentConstructor() {}
   }
 }
