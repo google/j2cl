@@ -18,6 +18,7 @@ package java.util;
 import java.util.function.DoubleConsumer;
 import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
+import java.util.stream.DoubleStream;
 
 import static javaemul.internal.InternalPreconditions.checkCriticalElement;
 
@@ -62,6 +63,22 @@ public final class OptionalDouble {
   public void ifPresent(DoubleConsumer consumer) {
     if (present) {
       consumer.accept(ref);
+    }
+  }
+
+  public void ifPresentOrElse(DoubleConsumer action, Runnable emptyAction) {
+    if (isPresent()) {
+      action.accept(ref);
+    } else {
+      emptyAction.run();
+    }
+  }
+
+  public DoubleStream stream() {
+    if (isPresent()) {
+      return DoubleStream.of(ref);
+    } else {
+      return DoubleStream.empty();
     }
   }
 

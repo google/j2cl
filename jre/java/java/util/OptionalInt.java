@@ -18,6 +18,7 @@ package java.util;
 import java.util.function.IntConsumer;
 import java.util.function.IntSupplier;
 import java.util.function.Supplier;
+import java.util.stream.IntStream;
 
 import static javaemul.internal.InternalPreconditions.checkCriticalElement;
 
@@ -62,6 +63,22 @@ public final class OptionalInt {
   public void ifPresent(IntConsumer consumer) {
     if (present) {
       consumer.accept(ref);
+    }
+  }
+
+  public void ifPresentOrElse(IntConsumer action, Runnable emptyAction) {
+    if (present) {
+      action.accept(ref);
+    } else {
+      emptyAction.run();
+    }
+  }
+
+  public IntStream stream() {
+    if (present) {
+      return IntStream.of(ref);
+    } else {
+      return IntStream.empty();
     }
   }
 
