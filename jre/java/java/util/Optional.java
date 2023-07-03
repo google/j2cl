@@ -23,6 +23,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 /**
  * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html">
@@ -128,6 +129,14 @@ public final class Optional<T> {
       return ref;
     }
     throw exceptionSupplier.get();
+  }
+
+  public Stream<T> stream() {
+    if (isPresent()) {
+      return Stream.of(ref);
+    } else {
+      return Stream.empty();
+    }
   }
 
   @Override
