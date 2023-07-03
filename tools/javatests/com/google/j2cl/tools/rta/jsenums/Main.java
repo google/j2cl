@@ -59,7 +59,7 @@ public class Main {
 
     AccessedJsEnum bar = AccessedJsEnum.BAR;
 
-    UsedJsEnum.BAZ.ordinal();
+    var unused = UsedJsEnum.BAZ.ordinal();
 
     JsEnumWithOverlay.Foo.getName();
   }
