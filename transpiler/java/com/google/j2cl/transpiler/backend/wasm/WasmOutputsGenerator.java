@@ -252,7 +252,7 @@ public class WasmOutputsGenerator {
     builder.append("(type $itable (struct_subtype ");
     for (int slot = 0; slot < environment.getNumberOfInterfaceSlots(); slot++) {
       builder.newLine();
-      builder.append(String.format("(field $slot%d (ref null struct))", slot));
+      builder.append(format("(field $slot%d (ref null struct))", slot));
     }
     builder.newLine();
     builder.append("data ))");
@@ -279,7 +279,7 @@ public class WasmOutputsGenerator {
       return;
     }
     builder.newLine();
-    builder.append(String.format("(type %s (func", typeName));
+    builder.append(format("(type %s (func", typeName));
     emitFunctionParameterTypes(m);
     emitFunctionResultType(m);
     builder.append("))");
@@ -316,7 +316,7 @@ public class WasmOutputsGenerator {
     }
     builder.newLine();
     builder.append(
-        String.format(
+        format(
             "(import \"binaryen-intrinsics\" \"call.without.effects\" " + "(func %s ", typeName));
     emitFunctionParameterTypes(m);
     builder.append(" (param funcref)");
@@ -328,19 +328,19 @@ public class WasmOutputsGenerator {
     if (!methodDescriptor.isStatic()) {
       // Add the implicit parameter
       builder.append(
-          String.format(
+          format(
               " (param (ref %s))",
               environment.getWasmTypeName(TypeDescriptors.get().javaLangObject)));
     }
     methodDescriptor
         .getDispatchParameterTypeDescriptors()
-        .forEach(t -> builder.append(String.format(" (param %s)", environment.getWasmType(t))));
+        .forEach(t -> builder.append(format(" (param %s)", environment.getWasmType(t))));
   }
 
   private void emitFunctionResultType(MethodDescriptor methodDescriptor) {
     TypeDescriptor returnTypeDescriptor = methodDescriptor.getDispatchReturnTypeDescriptor();
     if (!TypeDescriptors.isPrimitiveVoid(returnTypeDescriptor)) {
-      builder.append(String.format(" (result %s)", environment.getWasmType(returnTypeDescriptor)));
+      builder.append(format(" (result %s)", environment.getWasmType(returnTypeDescriptor)));
     }
   }
 
@@ -395,7 +395,7 @@ public class WasmOutputsGenerator {
         m -> {
           builder.newLine();
           builder.append(
-              String.format(
+              format(
                   "(field $%s (ref %s))", m.getMangledName(), environment.getFunctionTypeName(m)));
         });
   }
@@ -412,12 +412,11 @@ public class WasmOutputsGenerator {
 
       if (field.isCompileTimeConstant()) {
         builder.append(
-            String.format(
-                " %s ", environment.getWasmType(field.getDescriptor().getTypeDescriptor())));
+            format(" %s ", environment.getWasmType(field.getDescriptor().getTypeDescriptor())));
         ExpressionTranspiler.render(field.getInitializer(), builder, environment);
       } else {
         builder.append(
-            String.format(
+            format(
                 " (mut %s) ", environment.getWasmType(field.getDescriptor().getTypeDescriptor())));
         ExpressionTranspiler.render(
             field.getDescriptor().getTypeDescriptor().getDefaultValue(), builder, environment);
@@ -458,7 +457,7 @@ public class WasmOutputsGenerator {
     // because it doesn't differentiate between js property getters and setters.
     if (jsMethodImport != null) {
       builder.append(
-          String.format(
+          format(
               " (import \"%s\" \"%s\") ",
               JsImportsGenerator.MODULE, jsMethodImport.getImportKey()));
     }
@@ -480,18 +479,17 @@ public class WasmOutputsGenerator {
         && !methodDescriptor.isNative()
         && !methodDescriptor.isJsOverlay()) {
       builder.newLine();
-      builder.append(String.format("(type %s)", environment.getFunctionTypeName(methodDescriptor)));
+      builder.append(format("(type %s)", environment.getFunctionTypeName(methodDescriptor)));
       builder.newLine();
       builder.append(
-          String.format(
+          format(
               "(param $this.untyped (ref %s))",
               environment.getWasmTypeName(TypeDescriptors.get().javaLangObject)));
     } else if (!method.isStatic() && !isNativeConstructor) {
       // Private methods and constructors receive the instance with the actual type.
       // Native constructors do not receive the instance.
       builder.newLine();
-      builder.append(
-          String.format("(param $this %s)", environment.getWasmType(enclosingTypeDescriptor)));
+      builder.append(format("(param $this %s)", environment.getWasmType(enclosingTypeDescriptor)));
     }
 
     for (Variable parameter : method.getParameters()) {
@@ -538,11 +536,10 @@ public class WasmOutputsGenerator {
     // the right type.
     if (methodDescriptor.isClassDynamicDispatch() && !methodDescriptor.isJsOverlay()) {
       builder.newLine();
-      builder.append(
-          String.format("(local $this %s)", environment.getWasmType(enclosingTypeDescriptor)));
+      builder.append(format("(local $this %s)", environment.getWasmType(enclosingTypeDescriptor)));
       builder.newLine();
       builder.append(
-          String.format(
+          format(
               "(local.set $this (ref.cast_static %s (local.get $this.untyped)))",
               environment.getWasmTypeName(enclosingTypeDescriptor)));
     }
@@ -556,7 +553,7 @@ public class WasmOutputsGenerator {
     if (methodDescriptor.isPolymorphic()) {
       builder.newLine();
       builder.append(
-          String.format(
+          format(
               "(elem declare func %s)",
               environment.getMethodImplementationName(method.getDescriptor())));
     }
@@ -584,7 +581,7 @@ public class WasmOutputsGenerator {
     // The first field is always the vtable for class dynamic dispatch.
     builder.newLine();
     builder.append(
-        String.format(
+        format(
             "(field $vtable (ref %s))",
             environment.getWasmVtableTypeName(type.getTypeDescriptor())));
     // The second field is always the itable for interface method dispatch.
@@ -638,7 +635,7 @@ public class WasmOutputsGenerator {
     //  Create the class vtable for this type (which is either a class or an enum) and store it
     // in a global variable to be able to use it to initialize instance of this class.
     builder.append(
-        String.format(
+        format(
             "(global %s (ref %s)",
             environment.getWasmVtableGlobalName(typeDeclaration),
             environment.getWasmVtableTypeName(typeDeclaration)));
@@ -658,7 +655,7 @@ public class WasmOutputsGenerator {
     // to be able to use it when objects of this class are instantiated.
     builder.newLine();
     builder.append(
-        String.format(
+        format(
             "(global %s (ref %s) (struct.new %s",
             environment.getWasmItableGlobalName(typeDeclaration),
             environment.getWasmItableTypeName(typeDeclaration),
@@ -699,13 +696,12 @@ public class WasmOutputsGenerator {
         format("(type %s (struct_subtype", environment.getWasmItableTypeName(typeDeclaration)));
     for (int slot = 0; slot < environment.getNumberOfInterfaceSlots(); slot++) {
       builder.newLine();
-      builder.append(String.format("(field $slot%d ", slot));
+      builder.append(format("(field $slot%d ", slot));
       if (itableSlots[slot] == null) {
         // This type does not use the struct, so it is kept at the generic struct type.
         builder.append("(ref null struct))");
       } else {
-        builder.append(
-            String.format("(ref %s))", environment.getWasmVtableTypeName(itableSlots[slot])));
+        builder.append(format("(ref %s))", environment.getWasmVtableTypeName(itableSlots[slot])));
       }
     }
     builder.newLine();
@@ -742,15 +738,13 @@ public class WasmOutputsGenerator {
     builder.newLine();
     // Create an instance of the vtable for the type initializing it with the methods that are
     // passed in methodDescriptors.
-    builder.append(
-        String.format("(struct.new %s", environment.getWasmVtableTypeName(implementedType)));
+    builder.append(format("(struct.new %s", environment.getWasmVtableTypeName(implementedType)));
 
     builder.indent();
     methodDescriptors.forEach(
         m -> {
           builder.newLine();
-          builder.append(
-              String.format("(ref.func %s)", environment.getMethodImplementationName(m)));
+          builder.append(format("(ref.func %s)", environment.getMethodImplementationName(m)));
         });
     builder.unindent();
     builder.newLine();
@@ -762,8 +756,7 @@ public class WasmOutputsGenerator {
       Type type, Function<DeclaredTypeDescriptor, String> structNamer, Runnable fieldsRenderer) {
     boolean hasSuperType = type.getSuperTypeDescriptor() != null;
     builder.newLine();
-    builder.append(
-        String.format("(type %s (struct_subtype", structNamer.apply(type.getTypeDescriptor())));
+    builder.append(format("(type %s (struct_subtype", structNamer.apply(type.getTypeDescriptor())));
     builder.indent();
     fieldsRenderer.run();
 
@@ -854,8 +847,7 @@ public class WasmOutputsGenerator {
   }
 
   private void emitBeginCodeComment(TypeDeclaration typeDeclaration, String section) {
-    emitBeginCodeComment(
-        String.format("%s [%s]", typeDeclaration.getQualifiedSourceName(), section));
+    emitBeginCodeComment(format("%s [%s]", typeDeclaration.getQualifiedSourceName(), section));
   }
 
   private void emitBeginCodeComment(String commentId) {
@@ -868,7 +860,7 @@ public class WasmOutputsGenerator {
   }
 
   private void emitEndCodeComment(TypeDeclaration typeDeclaration, String section) {
-    emitEndCodeComment(String.format("%s [%s]", typeDeclaration.getQualifiedSourceName(), section));
+    emitEndCodeComment(format("%s [%s]", typeDeclaration.getQualifiedSourceName(), section));
   }
 
   private void emitEndCodeComment(String commentId) {
