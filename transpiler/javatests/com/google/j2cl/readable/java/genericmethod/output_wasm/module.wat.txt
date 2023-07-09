@@ -1,13 +1,13 @@
  ;;; Code for genericmethod.GenericMethod.Consumer [type definition]
- (type $genericmethod.GenericMethod.Consumer.vtable (struct
+ (type $genericmethod.GenericMethod.Consumer.vtable (struct_subtype
   (field $m_accept__java_lang_Object__void (ref $function.m_accept__java_lang_Object__void))
-  )
+  data)
  )
 
  ;;; Code for genericmethod.GenericMethod.Supplier [type definition]
- (type $genericmethod.GenericMethod.Supplier.vtable (struct
+ (type $genericmethod.GenericMethod.Supplier.vtable (struct_subtype
   (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
-  )
+  data)
  )
 
  ;;; Code for genericmethod.GenericMethod [type definition]
@@ -15,7 +15,7 @@
   (field $vtable (ref $genericmethod.GenericMethod.vtable))
   (field $itable (ref $genericmethod.GenericMethod.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $genericmethod.GenericMethod.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -32,7 +32,7 @@
   (field $m_checked__java_lang_Object (ref $function.m_checked__java_lang_Object))
   (field $m_unchecked__java_lang_Object (ref $function.m_unchecked__java_lang_Object))
   (field $m_test__void (ref $function.m_test__void))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $genericmethod.GenericMethod.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -49,7 +49,7 @@
   (field $vtable (ref $genericmethod.GenericMethod.SuperContainer.vtable))
   (field $itable (ref $genericmethod.GenericMethod.SuperContainer.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $genericmethod.GenericMethod.SuperContainer.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -58,7 +58,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_get__genericmethod_GenericMethod_Container_$pp_genericmethod (ref $function.m_get__genericmethod_GenericMethod_Container_$pp_genericmethod))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $genericmethod.GenericMethod.SuperContainer.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -75,7 +75,7 @@
   (field $vtable (ref $genericmethod.GenericMethod.Container.vtable))
   (field $itable (ref $genericmethod.GenericMethod.Container.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $genericmethod.GenericMethod.Container.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -84,7 +84,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_get__genericmethod_GenericMethod_Content_$pp_genericmethod (ref $function.m_get__genericmethod_GenericMethod_Content_$pp_genericmethod))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $genericmethod.GenericMethod.Container.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -101,7 +101,7 @@
   (field $vtable (ref $genericmethod.GenericMethod.Content.vtable))
   (field $itable (ref $genericmethod.GenericMethod.Content.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $genericmethod.GenericMethod.Content.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -110,7 +110,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_getProp__java_lang_String_$pp_genericmethod (ref $function.m_getProp__java_lang_String_$pp_genericmethod))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $genericmethod.GenericMethod.Content.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -128,7 +128,7 @@
   (field $itable (ref $genericmethod.GenericMethod.1.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__genericmethod_GenericMethod_1 (ref null $genericmethod.GenericMethod))
-   $genericmethod.GenericMethod)
+  $genericmethod.GenericMethod)
  )
  (type $genericmethod.GenericMethod.1.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -147,7 +147,7 @@
   (field $m_test__void (ref $function.m_test__void))
   (field $m_fun2__java_lang_Error__void (ref $function.m_fun2__java_lang_Error__void))
   (field $m_fun2__java_lang_Object__void (ref $function.m_fun2__java_lang_Object__void))
-   $genericmethod.GenericMethod.vtable)
+  $genericmethod.GenericMethod.vtable)
  )
  (type $genericmethod.GenericMethod.1.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -165,7 +165,7 @@
   (field $itable (ref $genericmethod.GenericMethod.1LocalClass.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__genericmethod_GenericMethod_1LocalClass (ref null $genericmethod.GenericMethod))
-   $genericmethod.GenericMethod)
+  $genericmethod.GenericMethod)
  )
  (type $genericmethod.GenericMethod.1LocalClass.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -184,7 +184,7 @@
   (field $m_test__void (ref $function.m_test__void))
   (field $m_fun2__java_lang_Object__void (ref $function.m_fun2__java_lang_Object__void))
   (field $m_fun2__java_lang_Number__void (ref $function.m_fun2__java_lang_Number__void))
-   $genericmethod.GenericMethod.vtable)
+  $genericmethod.GenericMethod.vtable)
  )
  (type $genericmethod.GenericMethod.1LocalClass.itable (struct_subtype
  (field $slot0 (ref null struct))

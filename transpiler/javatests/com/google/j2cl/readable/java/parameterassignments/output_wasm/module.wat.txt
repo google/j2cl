@@ -1,19 +1,19 @@
  ;;; Code for parameterassignments.Main.Fn [type definition]
- (type $parameterassignments.Main.Fn.vtable (struct
+ (type $parameterassignments.Main.Fn.vtable (struct_subtype
   (field $m_test__int__int__int (ref $function.m_test__int__int__int))
-  )
+  data)
  )
 
  ;;; Code for parameterassignments.Main.FnPrimitiveVarargs [type definition]
- (type $parameterassignments.Main.FnPrimitiveVarargs.vtable (struct
+ (type $parameterassignments.Main.FnPrimitiveVarargs.vtable (struct_subtype
   (field $m_test__int__arrayOf_int__void (ref $function.m_test__int__arrayOf_int__void))
-  )
+  data)
  )
 
  ;;; Code for parameterassignments.Main.FnObjectVarargs [type definition]
- (type $parameterassignments.Main.FnObjectVarargs.vtable (struct
+ (type $parameterassignments.Main.FnObjectVarargs.vtable (struct_subtype
   (field $m_test__java_lang_Object__arrayOf_java_lang_Object__void (ref $function.m_test__java_lang_Object__arrayOf_java_lang_Object__void))
-  )
+  data)
  )
 
  ;;; Code for parameterassignments.Main [type definition]
@@ -24,7 +24,7 @@
   (field $f_fn__parameterassignments_Main (mut (ref null $java.lang.Object)))
   (field $f_fnPrimitiveVarargs__parameterassignments_Main (mut (ref null $java.lang.Object)))
   (field $f_fnObjectVarargs__parameterassignments_Main (mut (ref null $java.lang.Object)))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $parameterassignments.Main.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -35,7 +35,7 @@
   (field $m_test__int__int__int__int_$pp_parameterassignments (ref $function.m_test__int__int__int__int_$pp_parameterassignments))
   (field $m_testObjectVarargs__java_lang_Object__arrayOf_java_lang_Object__void_$pp_parameterassignments (ref $function.m_testObjectVarargs__java_lang_Object__arrayOf_java_lang_Object__void_$pp_parameterassignments))
   (field $m_testPrimitiveVarargs__int__arrayOf_int__void_$pp_parameterassignments (ref $function.m_testPrimitiveVarargs__int__arrayOf_int__void_$pp_parameterassignments))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $parameterassignments.Main.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -52,7 +52,7 @@
   (field $vtable (ref $parameterassignments.Main.$LambdaImplementor$1.vtable))
   (field $itable (ref $parameterassignments.Main.$LambdaImplementor$1.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $parameterassignments.Main.$LambdaImplementor$1.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -61,7 +61,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_test__int__int__int (ref $function.m_test__int__int__int))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $parameterassignments.Main.$LambdaImplementor$1.itable (struct_subtype
  (field $slot0 (ref $parameterassignments.Main.Fn.vtable))
@@ -78,7 +78,7 @@
   (field $vtable (ref $parameterassignments.Main.$LambdaImplementor$2.vtable))
   (field $itable (ref $parameterassignments.Main.$LambdaImplementor$2.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $parameterassignments.Main.$LambdaImplementor$2.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -87,7 +87,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_test__int__arrayOf_int__void (ref $function.m_test__int__arrayOf_int__void))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $parameterassignments.Main.$LambdaImplementor$2.itable (struct_subtype
  (field $slot0 (ref $parameterassignments.Main.FnPrimitiveVarargs.vtable))
@@ -104,7 +104,7 @@
   (field $vtable (ref $parameterassignments.Main.$LambdaImplementor$3.vtable))
   (field $itable (ref $parameterassignments.Main.$LambdaImplementor$3.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $parameterassignments.Main.$LambdaImplementor$3.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -113,7 +113,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_test__java_lang_Object__arrayOf_java_lang_Object__void (ref $function.m_test__java_lang_Object__arrayOf_java_lang_Object__void))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $parameterassignments.Main.$LambdaImplementor$3.itable (struct_subtype
  (field $slot0 (ref $parameterassignments.Main.FnObjectVarargs.vtable))
@@ -133,7 +133,7 @@
   (field $f_fn__parameterassignments_Main (mut (ref null $java.lang.Object)))
   (field $f_fnPrimitiveVarargs__parameterassignments_Main (mut (ref null $java.lang.Object)))
   (field $f_fnObjectVarargs__parameterassignments_Main (mut (ref null $java.lang.Object)))
-   $parameterassignments.Main)
+  $parameterassignments.Main)
  )
  (type $parameterassignments.Main.SubMain.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -144,7 +144,7 @@
   (field $m_test__int__int__int__int_$pp_parameterassignments (ref $function.m_test__int__int__int__int_$pp_parameterassignments))
   (field $m_testObjectVarargs__java_lang_Object__arrayOf_java_lang_Object__void_$pp_parameterassignments (ref $function.m_testObjectVarargs__java_lang_Object__arrayOf_java_lang_Object__void_$pp_parameterassignments))
   (field $m_testPrimitiveVarargs__int__arrayOf_int__void_$pp_parameterassignments (ref $function.m_testPrimitiveVarargs__int__arrayOf_int__void_$pp_parameterassignments))
-   $parameterassignments.Main.vtable)
+  $parameterassignments.Main.vtable)
  )
  (type $parameterassignments.Main.SubMain.itable (struct_subtype
  (field $slot0 (ref null struct))

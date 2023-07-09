@@ -1,12 +1,12 @@
  ;;; Code for array.Arrays.NativeType.$Overlay [type definition]
- (type $array.Arrays.NativeType.$Overlay (struct
+ (type $array.Arrays.NativeType.$Overlay (struct_subtype
   (field $vtable (ref $array.Arrays.NativeType.$Overlay.vtable))
   (field $itable (ref $array.Arrays.NativeType.$Overlay.itable))
-  )
+  data)
  )
- (type $array.Arrays.NativeType.$Overlay.vtable (struct
+ (type $array.Arrays.NativeType.$Overlay.vtable (struct_subtype
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  )
+  data)
  )
  (type $array.Arrays.NativeType.$Overlay.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -23,7 +23,7 @@
   (field $vtable (ref $array.Arrays.vtable))
   (field $itable (ref $array.Arrays.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $array.Arrays.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -42,7 +42,7 @@
   (field $m_testArraysSupertypeClosureTypes__void (ref $function.m_testArraysSupertypeClosureTypes__void))
   (field $m_consumesCloneable__java_lang_Cloneable__void (ref $function.m_consumesCloneable__java_lang_Cloneable__void))
   (field $m_consumesSerializable__java_io_Serializable__void (ref $function.m_consumesSerializable__java_io_Serializable__void))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $array.Arrays.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -60,7 +60,7 @@
   (field $itable (ref $array.Arrays.SomeObject.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__array_Arrays_SomeObject (ref null $array.Arrays))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $array.Arrays.SomeObject.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -68,7 +68,7 @@
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $array.Arrays.SomeObject.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -88,7 +88,7 @@
   (field $itable (ref $array.Arrays.ArrayContainer.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_data__array_Arrays_ArrayContainer (mut (ref null $javaemul.internal.WasmArray.OfObject)))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $array.Arrays.ArrayContainer.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -96,7 +96,7 @@
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $array.Arrays.ArrayContainer.itable (struct_subtype
  (field $slot0 (ref null struct))

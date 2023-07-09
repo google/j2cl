@@ -1,12 +1,12 @@
  ;;; Code for importglobaljstypes.Date.NativeDate.$Overlay [type definition]
- (type $importglobaljstypes.Date.NativeDate.$Overlay (struct
+ (type $importglobaljstypes.Date.NativeDate.$Overlay (struct_subtype
   (field $vtable (ref $importglobaljstypes.Date.NativeDate.$Overlay.vtable))
   (field $itable (ref $importglobaljstypes.Date.NativeDate.$Overlay.itable))
-  )
+  data)
  )
- (type $importglobaljstypes.Date.NativeDate.$Overlay.vtable (struct
+ (type $importglobaljstypes.Date.NativeDate.$Overlay.vtable (struct_subtype
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  )
+  data)
  )
  (type $importglobaljstypes.Date.NativeDate.$Overlay.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -23,24 +23,24 @@
  ;;; Code for importglobaljstypes.Number.MyLiteralType [type definition]
 
  ;;; Code for importglobaljstypes.Number.NativeFunction.$Overlay [type definition]
- (type $importglobaljstypes.Number.NativeFunction.$Overlay.vtable (struct
-  )
+ (type $importglobaljstypes.Number.NativeFunction.$Overlay.vtable (struct_subtype
+  data)
  )
 
  ;;; Code for importglobaljstypes.Number.MyLiteralType.$Overlay [type definition]
- (type $importglobaljstypes.Number.MyLiteralType.$Overlay.vtable (struct
-  )
+ (type $importglobaljstypes.Number.MyLiteralType.$Overlay.vtable (struct_subtype
+  data)
  )
 
  ;;; Code for importglobaljstypes.RegExp.NativeRegExp.$Overlay [type definition]
- (type $importglobaljstypes.RegExp.NativeRegExp.$Overlay (struct
+ (type $importglobaljstypes.RegExp.NativeRegExp.$Overlay (struct_subtype
   (field $vtable (ref $importglobaljstypes.RegExp.NativeRegExp.$Overlay.vtable))
   (field $itable (ref $importglobaljstypes.RegExp.NativeRegExp.$Overlay.itable))
-  )
+  data)
  )
- (type $importglobaljstypes.RegExp.NativeRegExp.$Overlay.vtable (struct
+ (type $importglobaljstypes.RegExp.NativeRegExp.$Overlay.vtable (struct_subtype
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  )
+  data)
  )
  (type $importglobaljstypes.RegExp.NativeRegExp.$Overlay.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -57,7 +57,7 @@
   (field $vtable (ref $importglobaljstypes.Date.vtable))
   (field $itable (ref $importglobaljstypes.Date.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $importglobaljstypes.Date.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -66,7 +66,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_copy__importglobaljstypes_Date_NativeDate__importglobaljstypes_Date_NativeDate (ref $function.m_copy__importglobaljstypes_Date_NativeDate__importglobaljstypes_Date_NativeDate))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $importglobaljstypes.Date.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -85,7 +85,7 @@
   (field $vtable (ref $importglobaljstypes.Number.vtable))
   (field $itable (ref $importglobaljstypes.Number.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $importglobaljstypes.Number.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -94,7 +94,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_testJsDocForLiteralType__importglobaljstypes_Number_MyLiteralType__importglobaljstypes_Number_MyLiteralType (ref $function.m_testJsDocForLiteralType__importglobaljstypes_Number_MyLiteralType__importglobaljstypes_Number_MyLiteralType))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $importglobaljstypes.Number.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -111,7 +111,7 @@
   (field $vtable (ref $importglobaljstypes.RegExp.vtable))
   (field $itable (ref $importglobaljstypes.RegExp.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $importglobaljstypes.RegExp.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -119,7 +119,7 @@
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $importglobaljstypes.RegExp.itable (struct_subtype
  (field $slot0 (ref null struct))

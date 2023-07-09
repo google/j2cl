@@ -1,12 +1,12 @@
  ;;; Code for annotation.Main.Foo [type definition]
- (type $annotation.Main.Foo.vtable (struct
+ (type $annotation.Main.Foo.vtable (struct_subtype
   (field $m_bar__int (ref $function.m_bar__int))
-  )
+  data)
  )
 
  ;;; Code for annotation.Main.Zoo [type definition]
- (type $annotation.Main.Zoo.vtable (struct
-  )
+ (type $annotation.Main.Zoo.vtable (struct_subtype
+  data)
  )
 
  ;;; Code for annotation.Main [type definition]
@@ -14,7 +14,7 @@
   (field $vtable (ref $annotation.Main.vtable))
   (field $itable (ref $annotation.Main.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $annotation.Main.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -22,7 +22,7 @@
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $annotation.Main.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -40,7 +40,7 @@
   (field $itable (ref $annotation.Main.Bar.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__annotation_Main_Bar (ref null $annotation.Main))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $annotation.Main.Bar.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -49,7 +49,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_baz__int_$pp_annotation (ref $function.m_baz__int_$pp_annotation))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $annotation.Main.Bar.itable (struct_subtype
  (field $slot0 (ref null struct))

@@ -1,12 +1,12 @@
  ;;; Code for unimplementedbridgemethod.I [type definition]
- (type $unimplementedbridgemethod.I.vtable (struct
+ (type $unimplementedbridgemethod.I.vtable (struct_subtype
   (field $m_foo__java_lang_Object__int (ref $function.m_foo__java_lang_Object__int))
-  )
+  data)
  )
 
  ;;; Code for unimplementedbridgemethod.J [type definition]
- (type $unimplementedbridgemethod.J.vtable (struct
-  )
+ (type $unimplementedbridgemethod.J.vtable (struct_subtype
+  data)
  )
 
  ;;; Code for unimplementedbridgemethod.Bar [type definition]
@@ -14,7 +14,7 @@
   (field $vtable (ref $unimplementedbridgemethod.Bar.vtable))
   (field $itable (ref $unimplementedbridgemethod.Bar.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $unimplementedbridgemethod.Bar.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -22,7 +22,7 @@
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $unimplementedbridgemethod.Bar.itable (struct_subtype
  (field $slot0 (ref $unimplementedbridgemethod.I.vtable))
@@ -39,7 +39,7 @@
   (field $vtable (ref $unimplementedbridgemethod.Foo.vtable))
   (field $itable (ref $unimplementedbridgemethod.Foo.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $unimplementedbridgemethod.Foo.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -47,7 +47,7 @@
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $unimplementedbridgemethod.Foo.itable (struct_subtype
  (field $slot0 (ref $unimplementedbridgemethod.I.vtable))

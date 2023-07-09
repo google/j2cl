@@ -1,7 +1,7 @@
  ;;; Code for abstractinnerclass.InnerClasses.A [type definition]
- (type $abstractinnerclass.InnerClasses.A.vtable (struct
+ (type $abstractinnerclass.InnerClasses.A.vtable (struct_subtype
   (field $m_foo__void (ref $function.m_foo__void))
-  )
+  data)
  )
 
  ;;; Code for abstractinnerclass.InnerClasses [type definition]
@@ -9,7 +9,7 @@
   (field $vtable (ref $abstractinnerclass.InnerClasses.vtable))
   (field $itable (ref $abstractinnerclass.InnerClasses.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $abstractinnerclass.InnerClasses.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -17,7 +17,7 @@
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $abstractinnerclass.InnerClasses.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -34,7 +34,7 @@
   (field $vtable (ref $abstractinnerclass.InnerClasses.B.vtable))
   (field $itable (ref $abstractinnerclass.InnerClasses.B.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $abstractinnerclass.InnerClasses.B.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -44,7 +44,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_bar__void_$pp_abstractinnerclass (ref $function.m_bar__void_$pp_abstractinnerclass))
   (field $m_foo__void (ref $function.m_foo__void))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $abstractinnerclass.InnerClasses.B.itable (struct_subtype
  (field $slot0 (ref $abstractinnerclass.InnerClasses.A.vtable))
@@ -62,7 +62,7 @@
   (field $itable (ref $abstractinnerclass.InnerClasses.C.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__abstractinnerclass_InnerClasses_C (ref null $abstractinnerclass.InnerClasses))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $abstractinnerclass.InnerClasses.C.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -72,7 +72,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_bar__void_$pp_abstractinnerclass (ref $function.m_bar__void_$pp_abstractinnerclass))
   (field $m_foo__void (ref $function.m_foo__void))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $abstractinnerclass.InnerClasses.C.itable (struct_subtype
  (field $slot0 (ref $abstractinnerclass.InnerClasses.A.vtable))

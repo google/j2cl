@@ -1,7 +1,7 @@
  ;;; Code for instancejsmethods.MyInterface [type definition]
- (type $instancejsmethods.MyInterface.vtable (struct
+ (type $instancejsmethods.MyInterface.vtable (struct_subtype
   (field $m_intfFoo__int (ref $function.m_intfFoo__int))
-  )
+  data)
  )
 
  ;;; Code for instancejsmethods.SuperParent [type definition]
@@ -9,7 +9,7 @@
   (field $vtable (ref $instancejsmethods.SuperParent.vtable))
   (field $itable (ref $instancejsmethods.SuperParent.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $instancejsmethods.SuperParent.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -19,7 +19,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_fun__int__int__int (ref $function.m_fun__int__int__int))
   (field $m_bar__int__int__int (ref $function.m_bar__int__int__int))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $instancejsmethods.SuperParent.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -36,7 +36,7 @@
   (field $vtable (ref $instancejsmethods.Main.vtable))
   (field $itable (ref $instancejsmethods.Main.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $instancejsmethods.Main.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -45,7 +45,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_testCallBySuperParent__void (ref $function.m_testCallBySuperParent__void))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $instancejsmethods.Main.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -62,7 +62,7 @@
   (field $vtable (ref $instancejsmethods.Parent.vtable))
   (field $itable (ref $instancejsmethods.Parent.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $instancejsmethods.SuperParent)
+  $instancejsmethods.SuperParent)
  )
  (type $instancejsmethods.Parent.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -73,7 +73,7 @@
   (field $m_fun__int__int__int (ref $function.m_fun__int__int__int))
   (field $m_bar__int__int__int (ref $function.m_bar__int__int__int))
   (field $m_foo__int__int (ref $function.m_foo__int__int))
-   $instancejsmethods.SuperParent.vtable)
+  $instancejsmethods.SuperParent.vtable)
  )
  (type $instancejsmethods.Parent.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -90,7 +90,7 @@
   (field $vtable (ref $instancejsmethods.Child.vtable))
   (field $itable (ref $instancejsmethods.Child.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $instancejsmethods.Parent)
+  $instancejsmethods.Parent)
  )
  (type $instancejsmethods.Child.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -102,7 +102,7 @@
   (field $m_bar__int__int__int (ref $function.m_bar__int__int__int))
   (field $m_foo__int__int (ref $function.m_foo__int__int))
   (field $m_intfFoo__int (ref $function.m_intfFoo__int))
-   $instancejsmethods.Parent.vtable)
+  $instancejsmethods.Parent.vtable)
  )
  (type $instancejsmethods.Child.itable (struct_subtype
  (field $slot0 (ref $instancejsmethods.MyInterface.vtable))

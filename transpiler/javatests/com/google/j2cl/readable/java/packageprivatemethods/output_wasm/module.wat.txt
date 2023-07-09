@@ -1,7 +1,7 @@
  ;;; Code for packageprivatemethods.package1.Interface [type definition]
- (type $packageprivatemethods.package1.Interface.vtable (struct
+ (type $packageprivatemethods.package1.Interface.vtable (struct_subtype
   (field $m_exposedInChildWithInterface__int__int__int (ref $function.m_exposedInChildWithInterface__int__int__int))
-  )
+  data)
  )
 
  ;;; Code for packageprivatemethods.package1.SuperParent [type definition]
@@ -9,7 +9,7 @@
   (field $vtable (ref $packageprivatemethods.package1.SuperParent.vtable))
   (field $itable (ref $packageprivatemethods.package1.SuperParent.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $packageprivatemethods.package1.SuperParent.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -21,7 +21,7 @@
   (field $m_exposedInChild__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_exposedInChild__int__int__int_$pp_packageprivatemethods_package1))
   (field $m_exposedInChildWithInterface__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_exposedInChildWithInterface__int__int__int_$pp_packageprivatemethods_package1))
   (field $m_exposedAbstractInParent__int__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_exposedAbstractInParent__int__int__int__int_$pp_packageprivatemethods_package1))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $packageprivatemethods.package1.SuperParent.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -38,7 +38,7 @@
   (field $vtable (ref $packageprivatemethods.package1.Parent.vtable))
   (field $itable (ref $packageprivatemethods.package1.Parent.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $packageprivatemethods.package1.SuperParent)
+  $packageprivatemethods.package1.SuperParent)
  )
  (type $packageprivatemethods.package1.Parent.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -51,7 +51,7 @@
   (field $m_exposedInChildWithInterface__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_exposedInChildWithInterface__int__int__int_$pp_packageprivatemethods_package1))
   (field $m_exposedAbstractInParent__int__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_exposedAbstractInParent__int__int__int__int_$pp_packageprivatemethods_package1))
   (field $m_exposedAbstractInParent__int__int__int__int (ref $function.m_exposedAbstractInParent__int__int__int__int))
-   $packageprivatemethods.package1.SuperParent.vtable)
+  $packageprivatemethods.package1.SuperParent.vtable)
  )
  (type $packageprivatemethods.package1.Parent.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -68,7 +68,7 @@
   (field $vtable (ref $packageprivatemethods.package1.Child.vtable))
   (field $itable (ref $packageprivatemethods.package1.Child.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $packageprivatemethods.package1.Parent)
+  $packageprivatemethods.package1.Parent)
  )
  (type $packageprivatemethods.package1.Child.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -84,7 +84,7 @@
   (field $m_overrideInParentExposedInChild__int__int (ref $function.m_overrideInParentExposedInChild__int__int))
   (field $m_exposedInChild__int__int__int (ref $function.m_exposedInChild__int__int__int))
   (field $m_exposedInChildWithInterface__int__int__int (ref $function.m_exposedInChildWithInterface__int__int__int))
-   $packageprivatemethods.package1.Parent.vtable)
+  $packageprivatemethods.package1.Parent.vtable)
  )
  (type $packageprivatemethods.package1.Child.itable (struct_subtype
  (field $slot0 (ref $packageprivatemethods.package1.Interface.vtable))
@@ -101,7 +101,7 @@
   (field $vtable (ref $packageprivatemethods.package2.SubParent.vtable))
   (field $itable (ref $packageprivatemethods.package2.SubParent.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $packageprivatemethods.package1.Parent)
+  $packageprivatemethods.package1.Parent)
  )
  (type $packageprivatemethods.package2.SubParent.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -115,7 +115,7 @@
   (field $m_exposedAbstractInParent__int__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_exposedAbstractInParent__int__int__int__int_$pp_packageprivatemethods_package1))
   (field $m_exposedAbstractInParent__int__int__int__int (ref $function.m_exposedAbstractInParent__int__int__int__int))
   (field $m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package2 (ref $function.m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package2))
-   $packageprivatemethods.package1.Parent.vtable)
+  $packageprivatemethods.package1.Parent.vtable)
  )
  (type $packageprivatemethods.package2.SubParent.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -132,7 +132,7 @@
   (field $vtable (ref $packageprivatemethods.package2.SubChild.vtable))
   (field $itable (ref $packageprivatemethods.package2.SubChild.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $packageprivatemethods.package1.Child)
+  $packageprivatemethods.package1.Child)
  )
  (type $packageprivatemethods.package2.SubChild.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -148,7 +148,7 @@
   (field $m_overrideInParentExposedInChild__int__int (ref $function.m_overrideInParentExposedInChild__int__int))
   (field $m_exposedInChild__int__int__int (ref $function.m_exposedInChild__int__int__int))
   (field $m_exposedInChildWithInterface__int__int__int (ref $function.m_exposedInChildWithInterface__int__int__int))
-   $packageprivatemethods.package1.Child.vtable)
+  $packageprivatemethods.package1.Child.vtable)
  )
  (type $packageprivatemethods.package2.SubChild.itable (struct_subtype
  (field $slot0 (ref $packageprivatemethods.package1.Interface.vtable))

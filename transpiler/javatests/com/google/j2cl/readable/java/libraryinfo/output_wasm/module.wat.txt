@@ -1,26 +1,26 @@
  ;;; Code for libraryinfo.Main.JsTypeInterface [type definition]
- (type $libraryinfo.Main.JsTypeInterface.vtable (struct
+ (type $libraryinfo.Main.JsTypeInterface.vtable (struct_subtype
   (field $m_bar__void (ref $function.m_bar__void))
   (field $m_foo__void (ref $function.m_foo__void))
-  )
+  data)
  )
 
  ;;; Code for libraryinfo.Main.FunctionnalInterface [type definition]
- (type $libraryinfo.Main.FunctionnalInterface.vtable (struct
+ (type $libraryinfo.Main.FunctionnalInterface.vtable (struct_subtype
   (field $m_foo__void (ref $function.m_foo__void))
-  )
+  data)
  )
 
  ;;; Code for libraryinfo.Main.JsAccessibleFunctionnalInterface [type definition]
- (type $libraryinfo.Main.JsAccessibleFunctionnalInterface.vtable (struct
+ (type $libraryinfo.Main.JsAccessibleFunctionnalInterface.vtable (struct_subtype
   (field $m_accessibleFunctionalInterfaceMethod__void (ref $function.m_accessibleFunctionalInterfaceMethod__void))
-  )
+  data)
  )
 
  ;;; Code for libraryinfo.Main.Function [type definition]
- (type $libraryinfo.Main.Function.vtable (struct
+ (type $libraryinfo.Main.Function.vtable (struct_subtype
   (field $m_apply__java_lang_String__void (ref $function.m_apply__java_lang_String__void))
-  )
+  data)
  )
 
  ;;; Code for libraryinfo.Main [type definition]
@@ -28,7 +28,7 @@
   (field $vtable (ref $libraryinfo.Main.vtable))
   (field $itable (ref $libraryinfo.Main.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $libraryinfo.Main.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -36,7 +36,7 @@
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $libraryinfo.Main.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -53,7 +53,7 @@
   (field $vtable (ref $libraryinfo.Main.$LambdaImplementor$1.vtable))
   (field $itable (ref $libraryinfo.Main.$LambdaImplementor$1.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $libraryinfo.Main.$LambdaImplementor$1.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -62,7 +62,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_apply__java_lang_String__void (ref $function.m_apply__java_lang_String__void))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $libraryinfo.Main.$LambdaImplementor$1.itable (struct_subtype
  (field $slot0 (ref $libraryinfo.Main.Function.vtable))
@@ -79,7 +79,7 @@
   (field $vtable (ref $libraryinfo.Main.1.vtable))
   (field $itable (ref $libraryinfo.Main.1.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $libraryinfo.Main.1.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -88,7 +88,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_foo__void_$pp_libraryinfo (ref $function.m_foo__void_$pp_libraryinfo))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $libraryinfo.Main.1.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -105,7 +105,7 @@
   (field $vtable (ref $libraryinfo.Main.FunctionImpl.vtable))
   (field $itable (ref $libraryinfo.Main.FunctionImpl.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $libraryinfo.Main.FunctionImpl.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -114,7 +114,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_apply__java_lang_String__void (ref $function.m_apply__java_lang_String__void))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $libraryinfo.Main.FunctionImpl.itable (struct_subtype
  (field $slot0 (ref $libraryinfo.Main.Function.vtable))
@@ -132,7 +132,7 @@
   (field $itable (ref $libraryinfo.Main.MyJsType.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_someField__libraryinfo_Main_MyJsType (mut (ref null $java.lang.Object)))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $libraryinfo.Main.MyJsType.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -140,7 +140,7 @@
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $libraryinfo.Main.MyJsType.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -158,7 +158,7 @@
   (field $itable (ref $libraryinfo.Main.Foo.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__libraryinfo_Main_Foo (ref null $libraryinfo.Main))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $libraryinfo.Main.Foo.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -167,7 +167,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_instanceMethod__void_$pp_libraryinfo (ref $function.m_instanceMethod__void_$pp_libraryinfo))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $libraryinfo.Main.Foo.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -186,7 +186,7 @@
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
   (field $f_ordinal__java_lang_Enum_ (mut i32))
-   $java.lang.Enum)
+  $java.lang.Enum)
  )
  (type $libraryinfo.Main.MyJsEnum.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -199,7 +199,7 @@
   (field $m_ordinal__int (ref $function.m_ordinal__int))
   (field $m_compareTo__java_lang_Enum__int (ref $function.m_compareTo__java_lang_Enum__int))
   (field $m_compareTo__java_lang_Object__int (ref $function.m_compareTo__java_lang_Object__int))
-   $java.lang.Enum.vtable)
+  $java.lang.Enum.vtable)
  )
  (type $libraryinfo.Main.MyJsEnum.itable (struct_subtype
  (field $slot0 (ref $java.io.Serializable.vtable))
@@ -218,7 +218,7 @@
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
   (field $f_ordinal__java_lang_Enum_ (mut i32))
-   $java.lang.Enum)
+  $java.lang.Enum)
  )
  (type $libraryinfo.Main.MyEnum.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -231,7 +231,7 @@
   (field $m_ordinal__int (ref $function.m_ordinal__int))
   (field $m_compareTo__java_lang_Enum__int (ref $function.m_compareTo__java_lang_Enum__int))
   (field $m_compareTo__java_lang_Object__int (ref $function.m_compareTo__java_lang_Object__int))
-   $java.lang.Enum.vtable)
+  $java.lang.Enum.vtable)
  )
  (type $libraryinfo.Main.MyEnum.itable (struct_subtype
  (field $slot0 (ref $java.io.Serializable.vtable))

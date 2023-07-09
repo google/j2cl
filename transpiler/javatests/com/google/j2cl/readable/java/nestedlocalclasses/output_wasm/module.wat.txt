@@ -1,7 +1,7 @@
  ;;; Code for nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference [type definition]
- (type $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.vtable (struct
+ (type $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.vtable (struct_subtype
   (field $m_foo__void (ref $function.m_foo__void))
-  )
+  data)
  )
 
  ;;; Code for nestedlocalclasses.NestedLocalClasses [type definition]
@@ -9,7 +9,7 @@
   (field $vtable (ref $nestedlocalclasses.NestedLocalClasses.vtable))
   (field $itable (ref $nestedlocalclasses.NestedLocalClasses.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $nestedlocalclasses.NestedLocalClasses.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -18,7 +18,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_test__int__void (ref $function.m_test__int__void))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $nestedlocalclasses.NestedLocalClasses.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -36,7 +36,7 @@
   (field $itable (ref $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super (ref null $java.lang.Object))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -45,7 +45,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_foo__void (ref $function.m_foo__void))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super.itable (struct_subtype
  (field $slot0 (ref $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.vtable))
@@ -66,7 +66,7 @@
   (field $f_fieldInInnerInnerClass__nestedlocalclasses_NestedLocalClasses_1InnerClass_1InnerInnerClass (mut i32))
   (field $$captured_localVar__nestedlocalclasses_NestedLocalClasses_1InnerClass_1InnerInnerClass i32)
   (field $$captured_localVarInInnerClass__nestedlocalclasses_NestedLocalClasses_1InnerClass_1InnerInnerClass i32)
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -74,7 +74,7 @@
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -94,7 +94,7 @@
   (field $$outer_this__nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass))
   (field $$captured_localVar__nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal i32)
   (field $$captured_localVarInInnerClass__nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal i32)
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -102,7 +102,7 @@
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -121,7 +121,7 @@
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__nestedlocalclasses_NestedLocalClasses_1InnerClass (ref null $nestedlocalclasses.NestedLocalClasses))
   (field $$captured_localVar__nestedlocalclasses_NestedLocalClasses_1InnerClass i32)
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $nestedlocalclasses.NestedLocalClasses.1InnerClass.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -130,7 +130,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_fun__void (ref $function.m_fun__void))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $nestedlocalclasses.NestedLocalClasses.1InnerClass.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -149,7 +149,7 @@
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super (ref null $java.lang.Object))
   (field $$outer_this__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1 (ref null $java.lang.Object))
-   $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super)
+  $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super)
  )
  (type $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -158,7 +158,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_foo__void (ref $function.m_foo__void))
-   $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super.vtable)
+  $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super.vtable)
  )
  (type $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.itable (struct_subtype
  (field $slot0 (ref $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.vtable))

@@ -1,12 +1,12 @@
  ;;; Code for overwrittentypevariables.MyFunction [type definition]
- (type $overwrittentypevariables.MyFunction.vtable (struct
+ (type $overwrittentypevariables.MyFunction.vtable (struct_subtype
   (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
-  )
+  data)
  )
 
  ;;; Code for overwrittentypevariables.HashFunction [type definition]
- (type $overwrittentypevariables.HashFunction.vtable (struct
-  )
+ (type $overwrittentypevariables.HashFunction.vtable (struct_subtype
+  data)
  )
 
  ;;; Code for overwrittentypevariables.HashFunctions [type definition]
@@ -14,7 +14,7 @@
   (field $vtable (ref $overwrittentypevariables.HashFunctions.vtable))
   (field $itable (ref $overwrittentypevariables.HashFunctions.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $overwrittentypevariables.HashFunctions.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -22,7 +22,7 @@
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $overwrittentypevariables.HashFunctions.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -39,7 +39,7 @@
   (field $vtable (ref $overwrittentypevariables.HashFunctions.1.vtable))
   (field $itable (ref $overwrittentypevariables.HashFunctions.1.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $overwrittentypevariables.HashFunctions.1.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -49,7 +49,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_apply__java_lang_Object__java_lang_String (ref $function.m_apply__java_lang_Object__java_lang_String))
   (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $overwrittentypevariables.HashFunctions.1.itable (struct_subtype
  (field $slot0 (ref $overwrittentypevariables.HashFunction.vtable))
@@ -66,7 +66,7 @@
   (field $vtable (ref $overwrittentypevariables.HashFunctions.2.vtable))
   (field $itable (ref $overwrittentypevariables.HashFunctions.2.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $overwrittentypevariables.HashFunctions.2.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -76,7 +76,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_apply__java_lang_Enum__java_lang_String (ref $function.m_apply__java_lang_Enum__java_lang_String))
   (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $overwrittentypevariables.HashFunctions.2.itable (struct_subtype
  (field $slot0 (ref $overwrittentypevariables.HashFunction.vtable))

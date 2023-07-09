@@ -1,40 +1,40 @@
  ;;; Code for intersectiontype.Getable [type definition]
- (type $intersectiontype.Getable.vtable (struct
+ (type $intersectiontype.Getable.vtable (struct_subtype
   (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
-  )
+  data)
  )
 
  ;;; Code for intersectiontype.Setable [type definition]
- (type $intersectiontype.Setable.vtable (struct
+ (type $intersectiontype.Setable.vtable (struct_subtype
   (field $m_set__int__void (ref $function.m_set__int__void))
-  )
+  data)
  )
 
  ;;; Code for intersectiontype.Serial [type definition]
- (type $intersectiontype.Serial.vtable (struct
-  )
+ (type $intersectiontype.Serial.vtable (struct_subtype
+  data)
  )
 
  ;;; Code for intersectiontype.Cmp [type definition]
- (type $intersectiontype.Cmp.vtable (struct
+ (type $intersectiontype.Cmp.vtable (struct_subtype
   (field $m_cmp__int (ref $function.m_cmp__int))
-  )
+  data)
  )
 
  ;;; Code for intersectiontype.Cmp2 [type definition]
- (type $intersectiontype.Cmp2.vtable (struct
+ (type $intersectiontype.Cmp2.vtable (struct_subtype
   (field $m_cmp__int__int (ref $function.m_cmp__int__int))
-  )
+  data)
  )
 
  ;;; Code for intersectiontype.IntersectionTypeTest.EmptyA [type definition]
- (type $intersectiontype.IntersectionTypeTest.EmptyA.vtable (struct
-  )
+ (type $intersectiontype.IntersectionTypeTest.EmptyA.vtable (struct_subtype
+  data)
  )
 
  ;;; Code for intersectiontype.IntersectionTypeTest.EmptyB [type definition]
- (type $intersectiontype.IntersectionTypeTest.EmptyB.vtable (struct
-  )
+ (type $intersectiontype.IntersectionTypeTest.EmptyB.vtable (struct_subtype
+  data)
  )
 
  ;;; Code for intersectiontype.IntersectionTypeTest [type definition]
@@ -42,7 +42,7 @@
   (field $vtable (ref $intersectiontype.IntersectionTypeTest.vtable))
   (field $itable (ref $intersectiontype.IntersectionTypeTest.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $intersectiontype.IntersectionTypeTest.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -52,7 +52,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_cast3__java_lang_Object__java_lang_Object (ref $function.m_cast3__java_lang_Object__java_lang_Object))
   (field $m_testMethodCall__void (ref $function.m_testMethodCall__void))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $intersectiontype.IntersectionTypeTest.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -69,7 +69,7 @@
   (field $vtable (ref $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.vtable))
   (field $itable (ref $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -78,7 +78,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_cmp__int (ref $function.m_cmp__int))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.itable (struct_subtype
  (field $slot0 (ref $intersectiontype.Serial.vtable))
@@ -95,7 +95,7 @@
   (field $vtable (ref $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.vtable))
   (field $itable (ref $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -104,7 +104,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_cmp__int__int (ref $function.m_cmp__int__int))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.itable (struct_subtype
  (field $slot0 (ref $intersectiontype.Serial.vtable))
@@ -122,7 +122,7 @@
   (field $itable (ref $intersectiontype.IntersectionTypeTest.MapEntry.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__intersectiontype_IntersectionTypeTest_MapEntry (ref null $intersectiontype.IntersectionTypeTest))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $intersectiontype.IntersectionTypeTest.MapEntry.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -131,7 +131,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_method__java_lang_Object__intersectiontype_Getable (ref $function.m_method__java_lang_Object__intersectiontype_Getable))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $intersectiontype.IntersectionTypeTest.MapEntry.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -148,7 +148,7 @@
   (field $vtable (ref $intersectiontype.IntersectionTypeTest.A.vtable))
   (field $itable (ref $intersectiontype.IntersectionTypeTest.A.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $intersectiontype.IntersectionTypeTest.A.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -156,7 +156,7 @@
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $intersectiontype.IntersectionTypeTest.A.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -173,7 +173,7 @@
   (field $vtable (ref $intersectiontype.IntersectionTypeTest.SomeConcreteType.vtable))
   (field $itable (ref $intersectiontype.IntersectionTypeTest.SomeConcreteType.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $intersectiontype.IntersectionTypeTest.SomeConcreteType.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -181,7 +181,7 @@
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $intersectiontype.IntersectionTypeTest.SomeConcreteType.itable (struct_subtype
  (field $slot0 (ref null struct))

@@ -1,7 +1,7 @@
  ;;; Code for jstypewithdefault.Interface [type definition]
- (type $jstypewithdefault.Interface.vtable (struct
+ (type $jstypewithdefault.Interface.vtable (struct_subtype
   (field $m_defaultMethod__void (ref $function.m_defaultMethod__void))
-  )
+  data)
  )
 
  ;;; Code for jstypewithdefault.SomeJsType [type definition]
@@ -9,7 +9,7 @@
   (field $vtable (ref $jstypewithdefault.SomeJsType.vtable))
   (field $itable (ref $jstypewithdefault.SomeJsType.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $jstypewithdefault.SomeJsType.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -18,7 +18,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_defaultMethod__void (ref $function.m_defaultMethod__void))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $jstypewithdefault.SomeJsType.itable (struct_subtype
  (field $slot0 (ref $jstypewithdefault.Interface.vtable))

@@ -1,12 +1,12 @@
  ;;; Code for collisions.Blah.$Overlay [type definition]
- (type $collisions.Blah.$Overlay (struct
+ (type $collisions.Blah.$Overlay (struct_subtype
   (field $vtable (ref $collisions.Blah.$Overlay.vtable))
   (field $itable (ref $collisions.Blah.$Overlay.itable))
-  )
+  data)
  )
- (type $collisions.Blah.$Overlay.vtable (struct
+ (type $collisions.Blah.$Overlay.vtable (struct_subtype
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  )
+  data)
  )
  (type $collisions.Blah.$Overlay.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -23,7 +23,7 @@
   (field $vtable (ref $collisions.goog.vtable))
   (field $itable (ref $collisions.goog.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $collisions.goog.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -31,7 +31,7 @@
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $collisions.goog.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -50,7 +50,7 @@
   (field $vtable (ref $collisions.KtBlah.vtable))
   (field $itable (ref $collisions.KtBlah.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $collisions.KtBlah.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -58,7 +58,7 @@
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $collisions.KtBlah.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -75,7 +75,7 @@
   (field $vtable (ref $collisions.foo.vtable))
   (field $itable (ref $collisions.foo.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $collisions.foo.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -83,7 +83,7 @@
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $collisions.foo.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -100,7 +100,7 @@
   (field $vtable (ref $collisions.bar.vtable))
   (field $itable (ref $collisions.bar.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $collisions.bar.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -108,7 +108,7 @@
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $collisions.bar.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -125,7 +125,7 @@
   (field $vtable (ref $collisions.Other.vtable))
   (field $itable (ref $collisions.Other.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $collisions.Other.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -134,7 +134,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_m__java_lang_Object_$pp_collisions (ref $function.m_m__java_lang_Object_$pp_collisions))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $collisions.Other.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -151,7 +151,7 @@
   (field $vtable (ref $collisions.T.vtable))
   (field $itable (ref $collisions.T.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $collisions.T.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -161,7 +161,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_m__java_lang_Number_$pp_collisions (ref $function.m_m__java_lang_Number_$pp_collisions))
   (field $m_n__java_lang_Number_$pp_collisions (ref $function.m_n__java_lang_Number_$pp_collisions))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $collisions.T.itable (struct_subtype
  (field $slot0 (ref null struct))

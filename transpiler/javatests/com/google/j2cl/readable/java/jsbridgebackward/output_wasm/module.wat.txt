@@ -1,7 +1,7 @@
  ;;; Code for jsbridgebackward.MyJsInterface [type definition]
- (type $jsbridgebackward.MyJsInterface.vtable (struct
+ (type $jsbridgebackward.MyJsInterface.vtable (struct_subtype
   (field $m_foo__int__int (ref $function.m_foo__int__int))
-  )
+  data)
  )
 
  ;;; Code for jsbridgebackward.A [type definition]
@@ -9,7 +9,7 @@
   (field $vtable (ref $jsbridgebackward.A.vtable))
   (field $itable (ref $jsbridgebackward.A.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $jsbridgebackward.A.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -18,7 +18,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_foo__int__int (ref $function.m_foo__int__int))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $jsbridgebackward.A.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -35,7 +35,7 @@
   (field $vtable (ref $jsbridgebackward.InterfaceImpl.vtable))
   (field $itable (ref $jsbridgebackward.InterfaceImpl.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $jsbridgebackward.A)
+  $jsbridgebackward.A)
  )
  (type $jsbridgebackward.InterfaceImpl.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -44,7 +44,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_foo__int__int (ref $function.m_foo__int__int))
-   $jsbridgebackward.A.vtable)
+  $jsbridgebackward.A.vtable)
  )
  (type $jsbridgebackward.InterfaceImpl.itable (struct_subtype
  (field $slot0 (ref $jsbridgebackward.MyJsInterface.vtable))
@@ -61,7 +61,7 @@
   (field $vtable (ref $jsbridgebackward.SubInterfaceImpl.vtable))
   (field $itable (ref $jsbridgebackward.SubInterfaceImpl.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $jsbridgebackward.InterfaceImpl)
+  $jsbridgebackward.InterfaceImpl)
  )
  (type $jsbridgebackward.SubInterfaceImpl.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -70,7 +70,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_foo__int__int (ref $function.m_foo__int__int))
-   $jsbridgebackward.InterfaceImpl.vtable)
+  $jsbridgebackward.InterfaceImpl.vtable)
  )
  (type $jsbridgebackward.SubInterfaceImpl.itable (struct_subtype
  (field $slot0 (ref $jsbridgebackward.MyJsInterface.vtable))

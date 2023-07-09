@@ -249,13 +249,13 @@ public class WasmOutputsGenerator {
     builder.newLine();
     // The itable is a struct that contains only interface vtables. Interfaces are assigned a slot
     // on this struct based on the classes that implement them.
-    builder.append("(type $itable (struct ");
+    builder.append("(type $itable (struct_subtype ");
     for (int slot = 0; slot < environment.getNumberOfInterfaceSlots(); slot++) {
       builder.newLine();
       builder.append(String.format("(field $slot%d (ref null struct))", slot));
     }
     builder.newLine();
-    builder.append("))");
+    builder.append("data ))");
   }
 
   private void emitGlobals(Library library) {
@@ -763,16 +763,13 @@ public class WasmOutputsGenerator {
     boolean hasSuperType = type.getSuperTypeDescriptor() != null;
     builder.newLine();
     builder.append(
-        String.format(
-            "(type %s (struct%s",
-            structNamer.apply(type.getTypeDescriptor()), hasSuperType ? "_subtype" : ""));
+        String.format("(type %s (struct_subtype", structNamer.apply(type.getTypeDescriptor())));
     builder.indent();
     fieldsRenderer.run();
 
     builder.newLine();
-    if (hasSuperType) {
-      builder.append(String.format(" %s", structNamer.apply(type.getSuperTypeDescriptor())));
-    }
+    String superType = hasSuperType ? structNamer.apply(type.getSuperTypeDescriptor()) : "data";
+    builder.append(superType);
     builder.append(")");
     builder.unindent();
     builder.newLine();

@@ -1,12 +1,12 @@
  ;;; Code for packageinfosubpackage.Foo.NativeBar.$Overlay [type definition]
- (type $packageinfosubpackage.Foo.NativeBar.$Overlay (struct
+ (type $packageinfosubpackage.Foo.NativeBar.$Overlay (struct_subtype
   (field $vtable (ref $packageinfosubpackage.Foo.NativeBar.$Overlay.vtable))
   (field $itable (ref $packageinfosubpackage.Foo.NativeBar.$Overlay.itable))
-  )
+  data)
  )
- (type $packageinfosubpackage.Foo.NativeBar.$Overlay.vtable (struct
+ (type $packageinfosubpackage.Foo.NativeBar.$Overlay.vtable (struct_subtype
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  )
+  data)
  )
  (type $packageinfosubpackage.Foo.NativeBar.$Overlay.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -24,7 +24,7 @@
   (field $itable (ref $packageinfosubpackage.Foo.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_nativeBar__packageinfosubpackage_Foo_ (mut (ref null extern)))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $packageinfosubpackage.Foo.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -32,7 +32,7 @@
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $packageinfosubpackage.Foo.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -51,7 +51,7 @@
   (field $vtable (ref $packageinfosubpackage.subpackage.Bar.vtable))
   (field $itable (ref $packageinfosubpackage.subpackage.Bar.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $packageinfosubpackage.subpackage.Bar.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -59,7 +59,7 @@
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $packageinfosubpackage.subpackage.Bar.itable (struct_subtype
  (field $slot0 (ref null struct))

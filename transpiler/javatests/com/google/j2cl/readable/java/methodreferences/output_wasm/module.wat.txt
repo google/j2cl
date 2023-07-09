@@ -1,49 +1,49 @@
  ;;; Code for methodreferences.MethodReferences.Producer [type definition]
- (type $methodreferences.MethodReferences.Producer.vtable (struct
+ (type $methodreferences.MethodReferences.Producer.vtable (struct_subtype
   (field $m_produce__java_lang_Object (ref $function.m_produce__java_lang_Object))
-  )
+  data)
  )
 
  ;;; Code for methodreferences.MethodReferences.Predicate [type definition]
- (type $methodreferences.MethodReferences.Predicate.vtable (struct
+ (type $methodreferences.MethodReferences.Predicate.vtable (struct_subtype
   (field $m_apply__java_lang_Object__boolean (ref $function.m_apply__java_lang_Object__boolean))
-  )
+  data)
  )
 
  ;;; Code for methodreferences.MethodReferences.ArrayProducer [type definition]
- (type $methodreferences.MethodReferences.ArrayProducer.vtable (struct
+ (type $methodreferences.MethodReferences.ArrayProducer.vtable (struct_subtype
   (field $m_produce__int__arrayOf_java_lang_Object (ref $function.m_produce__int__arrayOf_java_lang_Object))
-  )
+  data)
  )
 
  ;;; Code for methodreferences.MethodReferences.Function [type definition]
- (type $methodreferences.MethodReferences.Function.vtable (struct
+ (type $methodreferences.MethodReferences.Function.vtable (struct_subtype
   (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
-  )
+  data)
  )
 
  ;;; Code for methodreferences.MethodReferences.BiFunction [type definition]
- (type $methodreferences.MethodReferences.BiFunction.vtable (struct
+ (type $methodreferences.MethodReferences.BiFunction.vtable (struct_subtype
   (field $m_apply__java_lang_Object__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object__java_lang_Object))
-  )
+  data)
  )
 
  ;;; Code for methodreferences.MethodReferences.JsProducer [type definition]
- (type $methodreferences.MethodReferences.JsProducer.vtable (struct
+ (type $methodreferences.MethodReferences.JsProducer.vtable (struct_subtype
   (field $m_produce__java_lang_Object (ref $function.m_produce__java_lang_Object))
-  )
+  data)
  )
 
  ;;; Code for methodreferences.MethodReferences.JsFunctionInterface [type definition]
- (type $methodreferences.MethodReferences.JsFunctionInterface.vtable (struct
+ (type $methodreferences.MethodReferences.JsFunctionInterface.vtable (struct_subtype
   (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
-  )
+  data)
  )
 
  ;;; Code for methodreferences.MethodReferences.JsBiFunction [type definition]
- (type $methodreferences.MethodReferences.JsBiFunction.vtable (struct
+ (type $methodreferences.MethodReferences.JsBiFunction.vtable (struct_subtype
   (field $m_apply__java_lang_Object__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object__java_lang_Object))
-  )
+  data)
  )
 
  ;;; Code for methodreferences.MethodReferences [type definition]
@@ -51,7 +51,7 @@
   (field $vtable (ref $methodreferences.MethodReferences.vtable))
   (field $itable (ref $methodreferences.MethodReferences.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $methodreferences.MethodReferences.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -63,7 +63,7 @@
   (field $m_self__java_lang_Object_$pp_methodreferences (ref $function.m_self__java_lang_Object_$pp_methodreferences))
   (field $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (ref $function.m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences))
   (field $m_main__void_$pp_methodreferences (ref $function.m_main__void_$pp_methodreferences))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $methodreferences.MethodReferences.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -81,7 +81,7 @@
   (field $itable (ref $methodreferences.MethodReferences.$LambdaImplementor$1.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$1 (ref null $java.lang.Object))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$1.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -90,7 +90,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_produce__java_lang_Object (ref $function.m_produce__java_lang_Object))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$1.itable (struct_subtype
  (field $slot0 (ref $methodreferences.MethodReferences.Producer.vtable))
@@ -107,7 +107,7 @@
   (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$2.vtable))
   (field $itable (ref $methodreferences.MethodReferences.$LambdaImplementor$2.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$2.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -116,7 +116,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_produce__java_lang_Object (ref $function.m_produce__java_lang_Object))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$2.itable (struct_subtype
  (field $slot0 (ref $methodreferences.MethodReferences.Producer.vtable))
@@ -133,7 +133,7 @@
   (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$3.vtable))
   (field $itable (ref $methodreferences.MethodReferences.$LambdaImplementor$3.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$3.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -142,7 +142,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_produce__java_lang_Object (ref $function.m_produce__java_lang_Object))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$3.itable (struct_subtype
  (field $slot0 (ref $methodreferences.MethodReferences.Producer.vtable))
@@ -160,7 +160,7 @@
   (field $itable (ref $methodreferences.MethodReferences.$LambdaImplementor$4.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$4 (ref null $methodreferences.MethodReferences))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$4.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -169,7 +169,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_produce__java_lang_Object (ref $function.m_produce__java_lang_Object))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$4.itable (struct_subtype
  (field $slot0 (ref $methodreferences.MethodReferences.Producer.vtable))
@@ -186,7 +186,7 @@
   (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$5.vtable))
   (field $itable (ref $methodreferences.MethodReferences.$LambdaImplementor$5.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$5.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -195,7 +195,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_apply__java_lang_Object__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object__java_lang_Object))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$5.itable (struct_subtype
  (field $slot0 (ref $methodreferences.MethodReferences.BiFunction.vtable))
@@ -213,7 +213,7 @@
   (field $itable (ref $methodreferences.MethodReferences.$LambdaImplementor$6.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__methodreferences_MethodReferences_$LambdaImplementor$6 (ref null $methodreferences.MethodReferences))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$6.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -222,7 +222,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$6.itable (struct_subtype
  (field $slot0 (ref $methodreferences.MethodReferences.Function.vtable))
@@ -239,7 +239,7 @@
   (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$7.vtable))
   (field $itable (ref $methodreferences.MethodReferences.$LambdaImplementor$7.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$7.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -248,7 +248,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_apply__java_lang_Object__boolean (ref $function.m_apply__java_lang_Object__boolean))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$7.itable (struct_subtype
  (field $slot0 (ref $methodreferences.MethodReferences.Predicate.vtable))
@@ -266,7 +266,7 @@
   (field $itable (ref $methodreferences.MethodReferences.$LambdaImplementor$8.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__methodreferences_MethodReferences_$LambdaImplementor$8 (ref null $methodreferences.MethodReferences))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$8.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -275,7 +275,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_produce__java_lang_Object (ref $function.m_produce__java_lang_Object))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$8.itable (struct_subtype
  (field $slot0 (ref $methodreferences.MethodReferences.Producer.vtable))
@@ -292,7 +292,7 @@
   (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$9.vtable))
   (field $itable (ref $methodreferences.MethodReferences.$LambdaImplementor$9.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$9.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -301,7 +301,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_produce__int__arrayOf_java_lang_Object (ref $function.m_produce__int__arrayOf_java_lang_Object))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$9.itable (struct_subtype
  (field $slot0 (ref $methodreferences.MethodReferences.ArrayProducer.vtable))
@@ -319,7 +319,7 @@
   (field $itable (ref $methodreferences.MethodReferences.$LambdaImplementor$10.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$10 (ref null $methodreferences.MethodReferences))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$10.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -328,7 +328,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_produce__java_lang_Object (ref $function.m_produce__java_lang_Object))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$10.itable (struct_subtype
  (field $slot0 (ref $methodreferences.MethodReferences.Producer.vtable))
@@ -345,7 +345,7 @@
   (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$11.vtable))
   (field $itable (ref $methodreferences.MethodReferences.$LambdaImplementor$11.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$11.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -354,7 +354,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$11.itable (struct_subtype
  (field $slot0 (ref $methodreferences.MethodReferences.Function.vtable))
@@ -371,7 +371,7 @@
   (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$12.vtable))
   (field $itable (ref $methodreferences.MethodReferences.$LambdaImplementor$12.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$12.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -380,7 +380,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$12.itable (struct_subtype
  (field $slot0 (ref $methodreferences.MethodReferences.Function.vtable))
@@ -398,7 +398,7 @@
   (field $itable (ref $methodreferences.MethodReferences.$LambdaImplementor$13.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__methodreferences_MethodReferences_$LambdaImplementor$13 (ref null $methodreferences.MethodReferences))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$13.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -407,7 +407,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_produce__java_lang_Object (ref $function.m_produce__java_lang_Object))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$13.itable (struct_subtype
  (field $slot0 (ref $methodreferences.MethodReferences.Producer.vtable))
@@ -424,7 +424,7 @@
   (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$14.vtable))
   (field $itable (ref $methodreferences.MethodReferences.$LambdaImplementor$14.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$14.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -433,7 +433,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_produce__java_lang_Object (ref $function.m_produce__java_lang_Object))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$14.itable (struct_subtype
  (field $slot0 (ref $methodreferences.MethodReferences.JsProducer.vtable))
@@ -450,7 +450,7 @@
   (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$15.vtable))
   (field $itable (ref $methodreferences.MethodReferences.$LambdaImplementor$15.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$15.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -459,7 +459,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_produce__java_lang_Object (ref $function.m_produce__java_lang_Object))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$15.itable (struct_subtype
  (field $slot0 (ref $methodreferences.MethodReferences.JsProducer.vtable))
@@ -477,7 +477,7 @@
   (field $itable (ref $methodreferences.MethodReferences.$LambdaImplementor$16.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$16 (ref null $methodreferences.MethodReferences))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$16.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -486,7 +486,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_produce__java_lang_Object (ref $function.m_produce__java_lang_Object))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$16.itable (struct_subtype
  (field $slot0 (ref $methodreferences.MethodReferences.JsProducer.vtable))
@@ -503,7 +503,7 @@
   (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$17.vtable))
   (field $itable (ref $methodreferences.MethodReferences.$LambdaImplementor$17.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$17.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -512,7 +512,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$17.itable (struct_subtype
  (field $slot0 (ref $methodreferences.MethodReferences.JsFunctionInterface.vtable))
@@ -529,7 +529,7 @@
   (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$18.vtable))
   (field $itable (ref $methodreferences.MethodReferences.$LambdaImplementor$18.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$18.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -538,7 +538,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$18.itable (struct_subtype
  (field $slot0 (ref $methodreferences.MethodReferences.JsFunctionInterface.vtable))
@@ -556,7 +556,7 @@
   (field $itable (ref $methodreferences.MethodReferences.$LambdaImplementor$19.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__methodreferences_MethodReferences_$LambdaImplementor$19 (ref null $methodreferences.MethodReferences))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$19.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -565,7 +565,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_produce__java_lang_Object (ref $function.m_produce__java_lang_Object))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$19.itable (struct_subtype
  (field $slot0 (ref $methodreferences.MethodReferences.JsProducer.vtable))
@@ -582,7 +582,7 @@
   (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$20.vtable))
   (field $itable (ref $methodreferences.MethodReferences.$LambdaImplementor$20.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$20.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -591,7 +591,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_apply__java_lang_Object__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object__java_lang_Object))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$20.itable (struct_subtype
  (field $slot0 (ref $methodreferences.MethodReferences.JsBiFunction.vtable))
@@ -609,7 +609,7 @@
   (field $itable (ref $methodreferences.MethodReferences.$LambdaImplementor$21.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__methodreferences_MethodReferences_$LambdaImplementor$21 (ref null $methodreferences.MethodReferences))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$21.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -618,7 +618,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $methodreferences.MethodReferences.$LambdaImplementor$21.itable (struct_subtype
  (field $slot0 (ref $methodreferences.MethodReferences.JsFunctionInterface.vtable))
@@ -636,7 +636,7 @@
   (field $itable (ref $methodreferences.MethodReferences.ObjectCapturingOuter.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__methodreferences_MethodReferences_ObjectCapturingOuter (ref null $methodreferences.MethodReferences))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $methodreferences.MethodReferences.ObjectCapturingOuter.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -645,7 +645,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_getMain__methodreferences_MethodReferences_$pp_methodreferences (ref $function.m_getMain__methodreferences_MethodReferences_$pp_methodreferences))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $methodreferences.MethodReferences.ObjectCapturingOuter.itable (struct_subtype
  (field $slot0 (ref null struct))

@@ -1,31 +1,31 @@
  ;;; Code for bridgejsmethod.Main.I [type definition]
- (type $bridgejsmethod.Main.I.vtable (struct
+ (type $bridgejsmethod.Main.I.vtable (struct_subtype
   (field $m_fun__java_lang_Number__java_lang_Number (ref $function.m_fun__java_lang_Number__java_lang_Number))
-  )
+  data)
  )
 
  ;;; Code for bridgejsmethod.Main.J [type definition]
- (type $bridgejsmethod.Main.J.vtable (struct
+ (type $bridgejsmethod.Main.J.vtable (struct_subtype
   (field $m_bar__java_lang_Object__void (ref $function.m_bar__java_lang_Object__void))
-  )
+  data)
  )
 
  ;;; Code for bridgejsmethod.Main.G [type definition]
- (type $bridgejsmethod.Main.G.vtable (struct
+ (type $bridgejsmethod.Main.G.vtable (struct_subtype
   (field $m_enclose__java_lang_Object__java_lang_Object (ref $function.m_enclose__java_lang_Object__java_lang_Object))
-  )
+  data)
  )
 
  ;;; Code for bridgejsmethod.Main.M [type definition]
- (type $bridgejsmethod.Main.M.vtable (struct
+ (type $bridgejsmethod.Main.M.vtable (struct_subtype
   (field $m_getB__bridgejsmethod_Main_B (ref $function.m_getB__bridgejsmethod_Main_B))
-  )
+  data)
  )
 
  ;;; Code for bridgejsmethod.Main.P [type definition]
- (type $bridgejsmethod.Main.P.vtable (struct
+ (type $bridgejsmethod.Main.P.vtable (struct_subtype
   (field $m_getKey__java_lang_String (ref $function.m_getKey__java_lang_String))
-  )
+  data)
  )
 
  ;;; Code for bridgejsmethod.Main [type definition]
@@ -33,7 +33,7 @@
   (field $vtable (ref $bridgejsmethod.Main.vtable))
   (field $itable (ref $bridgejsmethod.Main.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $bridgejsmethod.Main.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -41,7 +41,7 @@
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $bridgejsmethod.Main.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -58,7 +58,7 @@
   (field $vtable (ref $bridgejsmethod.Main.A.vtable))
   (field $itable (ref $bridgejsmethod.Main.A.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $bridgejsmethod.Main.A.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -68,7 +68,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_fun__java_lang_Object__java_lang_Object (ref $function.m_fun__java_lang_Object__java_lang_Object))
   (field $m_bar__java_lang_Object__void (ref $function.m_bar__java_lang_Object__void))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $bridgejsmethod.Main.A.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -85,7 +85,7 @@
   (field $vtable (ref $bridgejsmethod.Main.H.vtable))
   (field $itable (ref $bridgejsmethod.Main.H.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $bridgejsmethod.Main.H.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -94,7 +94,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_enclose__java_lang_Object__java_lang_Object (ref $function.m_enclose__java_lang_Object__java_lang_Object))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $bridgejsmethod.Main.H.itable (struct_subtype
  (field $slot0 (ref $bridgejsmethod.Main.G.vtable))
@@ -111,7 +111,7 @@
   (field $vtable (ref $bridgejsmethod.Main.K.vtable))
   (field $itable (ref $bridgejsmethod.Main.K.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $bridgejsmethod.Main.K.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -120,7 +120,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_fun__java_lang_Object__java_lang_Object__void_$pp_bridgejsmethod (ref $function.m_fun__java_lang_Object__java_lang_Object__void_$pp_bridgejsmethod))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $bridgejsmethod.Main.K.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -138,7 +138,7 @@
   (field $itable (ref $bridgejsmethod.Main.N.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__bridgejsmethod_Main_N (ref null $bridgejsmethod.Main))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $bridgejsmethod.Main.N.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -147,7 +147,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_getB__bridgejsmethod_Main_B (ref $function.m_getB__bridgejsmethod_Main_B))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $bridgejsmethod.Main.N.itable (struct_subtype
  (field $slot0 (ref $bridgejsmethod.Main.M.vtable))
@@ -165,7 +165,7 @@
   (field $itable (ref $bridgejsmethod.Main.Q.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__bridgejsmethod_Main_Q (ref null $bridgejsmethod.Main))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $bridgejsmethod.Main.Q.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -174,7 +174,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_getKey__java_lang_String (ref $function.m_getKey__java_lang_String))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $bridgejsmethod.Main.Q.itable (struct_subtype
  (field $slot0 (ref $bridgejsmethod.Main.P.vtable))
@@ -192,7 +192,7 @@
   (field $itable (ref $bridgejsmethod.Main.GrandParent.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__bridgejsmethod_Main_GrandParent (ref null $bridgejsmethod.Main))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $bridgejsmethod.Main.GrandParent.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -202,7 +202,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_jsMethod__java_lang_Object__void (ref $function.m_jsMethod__java_lang_Object__void))
   (field $m_method__java_lang_Object__void (ref $function.m_method__java_lang_Object__void))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $bridgejsmethod.Main.GrandParent.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -219,7 +219,7 @@
   (field $vtable (ref $bridgejsmethod.Main.B.vtable))
   (field $itable (ref $bridgejsmethod.Main.B.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $bridgejsmethod.Main.A)
+  $bridgejsmethod.Main.A)
  )
  (type $bridgejsmethod.Main.B.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -231,7 +231,7 @@
   (field $m_bar__java_lang_Object__void (ref $function.m_bar__java_lang_Object__void))
   (field $m_fun__java_lang_String__java_lang_String (ref $function.m_fun__java_lang_String__java_lang_String))
   (field $m_bar__java_lang_String__void (ref $function.m_bar__java_lang_String__void))
-   $bridgejsmethod.Main.A.vtable)
+  $bridgejsmethod.Main.A.vtable)
  )
  (type $bridgejsmethod.Main.B.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -248,7 +248,7 @@
   (field $vtable (ref $bridgejsmethod.Main.C.vtable))
   (field $itable (ref $bridgejsmethod.Main.C.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $bridgejsmethod.Main.A)
+  $bridgejsmethod.Main.A)
  )
  (type $bridgejsmethod.Main.C.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -259,7 +259,7 @@
   (field $m_fun__java_lang_Object__java_lang_Object (ref $function.m_fun__java_lang_Object__java_lang_Object))
   (field $m_bar__java_lang_Object__void (ref $function.m_bar__java_lang_Object__void))
   (field $m_fun__java_lang_Integer__java_lang_Integer (ref $function.m_fun__java_lang_Integer__java_lang_Integer))
-   $bridgejsmethod.Main.A.vtable)
+  $bridgejsmethod.Main.A.vtable)
  )
  (type $bridgejsmethod.Main.C.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -276,7 +276,7 @@
   (field $vtable (ref $bridgejsmethod.Main.D.vtable))
   (field $itable (ref $bridgejsmethod.Main.D.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $bridgejsmethod.Main.A)
+  $bridgejsmethod.Main.A)
  )
  (type $bridgejsmethod.Main.D.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -288,7 +288,7 @@
   (field $m_bar__java_lang_Object__void (ref $function.m_bar__java_lang_Object__void))
   (field $m_fun__java_lang_Integer__java_lang_Integer (ref $function.m_fun__java_lang_Integer__java_lang_Integer))
   (field $m_fun__java_lang_Number__java_lang_Number (ref $function.m_fun__java_lang_Number__java_lang_Number))
-   $bridgejsmethod.Main.A.vtable)
+  $bridgejsmethod.Main.A.vtable)
  )
  (type $bridgejsmethod.Main.D.itable (struct_subtype
  (field $slot0 (ref $bridgejsmethod.Main.I.vtable))
@@ -305,7 +305,7 @@
   (field $vtable (ref $bridgejsmethod.Main.F.vtable))
   (field $itable (ref $bridgejsmethod.Main.F.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $bridgejsmethod.Main.A)
+  $bridgejsmethod.Main.A)
  )
  (type $bridgejsmethod.Main.F.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -317,7 +317,7 @@
   (field $m_bar__java_lang_Object__void (ref $function.m_bar__java_lang_Object__void))
   (field $m_fun__java_lang_Number__java_lang_Number (ref $function.m_fun__java_lang_Number__java_lang_Number))
   (field $m_fun__java_lang_Integer__java_lang_Integer (ref $function.m_fun__java_lang_Integer__java_lang_Integer))
-   $bridgejsmethod.Main.A.vtable)
+  $bridgejsmethod.Main.A.vtable)
  )
  (type $bridgejsmethod.Main.F.itable (struct_subtype
  (field $slot0 (ref $bridgejsmethod.Main.I.vtable))
@@ -334,7 +334,7 @@
   (field $vtable (ref $bridgejsmethod.Main.L.vtable))
   (field $itable (ref $bridgejsmethod.Main.L.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $bridgejsmethod.Main.K)
+  $bridgejsmethod.Main.K)
  )
  (type $bridgejsmethod.Main.L.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -344,7 +344,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_fun__java_lang_Object__java_lang_Object__void_$pp_bridgejsmethod (ref $function.m_fun__java_lang_Object__java_lang_Object__void_$pp_bridgejsmethod))
   (field $m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod (ref $function.m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod))
-   $bridgejsmethod.Main.K.vtable)
+  $bridgejsmethod.Main.K.vtable)
  )
  (type $bridgejsmethod.Main.L.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -364,7 +364,7 @@
   (field $$outer_this__bridgejsmethod_Main_N (ref null $bridgejsmethod.Main))
   (field $$outer_this__bridgejsmethod_Main_O (ref null $bridgejsmethod.Main))
   (field $f_b__bridgejsmethod_Main_O_ (mut (ref null $bridgejsmethod.Main.B)))
-   $bridgejsmethod.Main.N)
+  $bridgejsmethod.Main.N)
  )
  (type $bridgejsmethod.Main.O.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -373,7 +373,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_getB__bridgejsmethod_Main_B (ref $function.m_getB__bridgejsmethod_Main_B))
-   $bridgejsmethod.Main.N.vtable)
+  $bridgejsmethod.Main.N.vtable)
  )
  (type $bridgejsmethod.Main.O.itable (struct_subtype
  (field $slot0 (ref $bridgejsmethod.Main.M.vtable))
@@ -392,7 +392,7 @@
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__bridgejsmethod_Main_Q (ref null $bridgejsmethod.Main))
   (field $$outer_this__bridgejsmethod_Main_R (ref null $bridgejsmethod.Main))
-   $bridgejsmethod.Main.Q)
+  $bridgejsmethod.Main.Q)
  )
  (type $bridgejsmethod.Main.R.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -401,7 +401,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_getKey__java_lang_String (ref $function.m_getKey__java_lang_String))
-   $bridgejsmethod.Main.Q.vtable)
+  $bridgejsmethod.Main.Q.vtable)
  )
  (type $bridgejsmethod.Main.R.itable (struct_subtype
  (field $slot0 (ref $bridgejsmethod.Main.P.vtable))
@@ -420,7 +420,7 @@
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__bridgejsmethod_Main_GrandParent (ref null $bridgejsmethod.Main))
   (field $$outer_this__bridgejsmethod_Main_Parent (ref null $bridgejsmethod.Main))
-   $bridgejsmethod.Main.GrandParent)
+  $bridgejsmethod.Main.GrandParent)
  )
  (type $bridgejsmethod.Main.Parent.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -432,7 +432,7 @@
   (field $m_method__java_lang_Object__void (ref $function.m_method__java_lang_Object__void))
   (field $m_jsMethod__bridgejsmethod_Main_Parent__void (ref $function.m_jsMethod__bridgejsmethod_Main_Parent__void))
   (field $m_method__bridgejsmethod_Main_Parent__void (ref $function.m_method__bridgejsmethod_Main_Parent__void))
-   $bridgejsmethod.Main.GrandParent.vtable)
+  $bridgejsmethod.Main.GrandParent.vtable)
  )
  (type $bridgejsmethod.Main.Parent.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -451,7 +451,7 @@
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__bridgejsmethod_Main_GrandParent (ref null $bridgejsmethod.Main))
   (field $$outer_this__bridgejsmethod_Main_ChildWithRenamedOverride (ref null $bridgejsmethod.Main))
-   $bridgejsmethod.Main.GrandParent)
+  $bridgejsmethod.Main.GrandParent)
  )
  (type $bridgejsmethod.Main.ChildWithRenamedOverride.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -462,7 +462,7 @@
   (field $m_jsMethod__java_lang_Object__void (ref $function.m_jsMethod__java_lang_Object__void))
   (field $m_method__java_lang_Object__void (ref $function.m_method__java_lang_Object__void))
   (field $m_jsMethod__bridgejsmethod_Main_ChildWithRenamedOverride__void (ref $function.m_jsMethod__bridgejsmethod_Main_ChildWithRenamedOverride__void))
-   $bridgejsmethod.Main.GrandParent.vtable)
+  $bridgejsmethod.Main.GrandParent.vtable)
  )
  (type $bridgejsmethod.Main.ChildWithRenamedOverride.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -479,7 +479,7 @@
   (field $vtable (ref $bridgejsmethod.Main.E.vtable))
   (field $itable (ref $bridgejsmethod.Main.E.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $bridgejsmethod.Main.B)
+  $bridgejsmethod.Main.B)
  )
  (type $bridgejsmethod.Main.E.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -491,7 +491,7 @@
   (field $m_bar__java_lang_Object__void (ref $function.m_bar__java_lang_Object__void))
   (field $m_fun__java_lang_String__java_lang_String (ref $function.m_fun__java_lang_String__java_lang_String))
   (field $m_bar__java_lang_String__void (ref $function.m_bar__java_lang_String__void))
-   $bridgejsmethod.Main.B.vtable)
+  $bridgejsmethod.Main.B.vtable)
  )
  (type $bridgejsmethod.Main.E.itable (struct_subtype
  (field $slot0 (ref $bridgejsmethod.Main.J.vtable))
@@ -511,7 +511,7 @@
   (field $$outer_this__bridgejsmethod_Main_Q (ref null $bridgejsmethod.Main))
   (field $$outer_this__bridgejsmethod_Main_R (ref null $bridgejsmethod.Main))
   (field $$outer_this__bridgejsmethod_Main_S (ref null $bridgejsmethod.Main))
-   $bridgejsmethod.Main.R)
+  $bridgejsmethod.Main.R)
  )
  (type $bridgejsmethod.Main.S.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -520,7 +520,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_getKey__java_lang_String (ref $function.m_getKey__java_lang_String))
-   $bridgejsmethod.Main.R.vtable)
+  $bridgejsmethod.Main.R.vtable)
  )
  (type $bridgejsmethod.Main.S.itable (struct_subtype
  (field $slot0 (ref $bridgejsmethod.Main.P.vtable))
@@ -540,7 +540,7 @@
   (field $$outer_this__bridgejsmethod_Main_GrandParent (ref null $bridgejsmethod.Main))
   (field $$outer_this__bridgejsmethod_Main_Parent (ref null $bridgejsmethod.Main))
   (field $$outer_this__bridgejsmethod_Main_ChildWithoutOverrides (ref null $bridgejsmethod.Main))
-   $bridgejsmethod.Main.Parent)
+  $bridgejsmethod.Main.Parent)
  )
  (type $bridgejsmethod.Main.ChildWithoutOverrides.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -552,7 +552,7 @@
   (field $m_method__java_lang_Object__void (ref $function.m_method__java_lang_Object__void))
   (field $m_jsMethod__bridgejsmethod_Main_Parent__void (ref $function.m_jsMethod__bridgejsmethod_Main_Parent__void))
   (field $m_method__bridgejsmethod_Main_Parent__void (ref $function.m_method__bridgejsmethod_Main_Parent__void))
-   $bridgejsmethod.Main.Parent.vtable)
+  $bridgejsmethod.Main.Parent.vtable)
  )
  (type $bridgejsmethod.Main.ChildWithoutOverrides.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -572,7 +572,7 @@
   (field $$outer_this__bridgejsmethod_Main_GrandParent (ref null $bridgejsmethod.Main))
   (field $$outer_this__bridgejsmethod_Main_Parent (ref null $bridgejsmethod.Main))
   (field $$outer_this__bridgejsmethod_Main_ChildWithOverrides (ref null $bridgejsmethod.Main))
-   $bridgejsmethod.Main.Parent)
+  $bridgejsmethod.Main.Parent)
  )
  (type $bridgejsmethod.Main.ChildWithOverrides.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -586,7 +586,7 @@
   (field $m_method__bridgejsmethod_Main_Parent__void (ref $function.m_method__bridgejsmethod_Main_Parent__void))
   (field $m_jsMethod__bridgejsmethod_Main_ChildWithOverrides__void (ref $function.m_jsMethod__bridgejsmethod_Main_ChildWithOverrides__void))
   (field $m_method__bridgejsmethod_Main_ChildWithOverrides__void (ref $function.m_method__bridgejsmethod_Main_ChildWithOverrides__void))
-   $bridgejsmethod.Main.Parent.vtable)
+  $bridgejsmethod.Main.Parent.vtable)
  )
  (type $bridgejsmethod.Main.ChildWithOverrides.itable (struct_subtype
  (field $slot0 (ref null struct))

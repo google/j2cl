@@ -1,7 +1,7 @@
  ;;; Code for varargs.Varargs.FunctionalInterface [type definition]
- (type $varargs.Varargs.FunctionalInterface.vtable (struct
+ (type $varargs.Varargs.FunctionalInterface.vtable (struct_subtype
   (field $m_apply__arrayOf_java_lang_String__void (ref $function.m_apply__arrayOf_java_lang_String__void))
-  )
+  data)
  )
 
  ;;; Code for varargs.Varargs [type definition]
@@ -10,7 +10,7 @@
   (field $itable (ref $varargs.Varargs.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_args__varargs_Varargs_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $varargs.Varargs.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -24,7 +24,7 @@
   (field $m_testAssignment__arrayOf_java_lang_Object__void (ref $function.m_testAssignment__arrayOf_java_lang_Object__void))
   (field $m_testLambda__varargs_Varargs_FunctionalInterface__void (ref $function.m_testLambda__varargs_Varargs_FunctionalInterface__void))
   (field $m_main__void (ref $function.m_main__void))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $varargs.Varargs.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -42,7 +42,7 @@
   (field $itable (ref $varargs.Varargs.$LambdaImplementor$1.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__varargs_Varargs_$LambdaImplementor$1 (ref null $varargs.Varargs))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $varargs.Varargs.$LambdaImplementor$1.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -51,7 +51,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_apply__arrayOf_java_lang_String__void (ref $function.m_apply__arrayOf_java_lang_String__void))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $varargs.Varargs.$LambdaImplementor$1.itable (struct_subtype
  (field $slot0 (ref $varargs.Varargs.FunctionalInterface.vtable))
@@ -69,7 +69,7 @@
   (field $itable (ref $varargs.Child.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_args__varargs_Varargs_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
-   $varargs.Varargs)
+  $varargs.Varargs)
  )
  (type $varargs.Child.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -83,7 +83,7 @@
   (field $m_testAssignment__arrayOf_java_lang_Object__void (ref $function.m_testAssignment__arrayOf_java_lang_Object__void))
   (field $m_testLambda__varargs_Varargs_FunctionalInterface__void (ref $function.m_testLambda__varargs_Varargs_FunctionalInterface__void))
   (field $m_main__void (ref $function.m_main__void))
-   $varargs.Varargs.vtable)
+  $varargs.Varargs.vtable)
  )
  (type $varargs.Child.itable (struct_subtype
  (field $slot0 (ref null struct))

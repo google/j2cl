@@ -1,7 +1,7 @@
  ;;; Code for mixednestings.MyInterface [type definition]
- (type $mixednestings.MyInterface.vtable (struct
+ (type $mixednestings.MyInterface.vtable (struct_subtype
   (field $m_fun__int__int (ref $function.m_fun__int__int))
-  )
+  data)
  )
 
  ;;; Code for mixednestings.MixedNestings [type definition]
@@ -9,7 +9,7 @@
   (field $vtable (ref $mixednestings.MixedNestings.vtable))
   (field $itable (ref $mixednestings.MixedNestings.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $mixednestings.MixedNestings.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -19,7 +19,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_mm__void (ref $function.m_mm__void))
   (field $m_test__void (ref $function.m_test__void))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $mixednestings.MixedNestings.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -37,7 +37,7 @@
   (field $itable (ref $mixednestings.MixedNestings.A.1B.1.1.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__mixednestings_MixedNestings_A_1B_1_1 (ref null $mixednestings.MixedNestings.A.1B.1))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $mixednestings.MixedNestings.A.1B.1.1.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -46,7 +46,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_fun__int__int (ref $function.m_fun__int__int))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $mixednestings.MixedNestings.A.1B.1.1.itable (struct_subtype
  (field $slot0 (ref $mixednestings.MyInterface.vtable))
@@ -64,7 +64,7 @@
   (field $itable (ref $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$1 (ref null $mixednestings.MixedNestings.A.1B.1))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -73,7 +73,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_fun__int__int (ref $function.m_fun__int__int))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1.itable (struct_subtype
  (field $slot0 (ref $mixednestings.MyInterface.vtable))
@@ -91,7 +91,7 @@
   (field $itable (ref $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$2 (ref null $mixednestings.MixedNestings.A.1B.1))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -100,7 +100,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_fun__int__int (ref $function.m_fun__int__int))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2.itable (struct_subtype
  (field $slot0 (ref $mixednestings.MyInterface.vtable))
@@ -118,7 +118,7 @@
   (field $itable (ref $mixednestings.MixedNestings.A.1B.1.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__mixednestings_MixedNestings_A_1B_1 (ref null $mixednestings.MixedNestings.A.1B))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $mixednestings.MixedNestings.A.1B.1.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -127,7 +127,7 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_fun__int__int (ref $function.m_fun__int__int))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $mixednestings.MixedNestings.A.1B.1.itable (struct_subtype
  (field $slot0 (ref $mixednestings.MyInterface.vtable))
@@ -145,7 +145,7 @@
   (field $itable (ref $mixednestings.MixedNestings.A.1B.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__mixednestings_MixedNestings_A_1B (ref null $mixednestings.MixedNestings.A))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $mixednestings.MixedNestings.A.1B.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -155,7 +155,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_bb__void (ref $function.m_bb__void))
   (field $m_b__int (ref $function.m_b__int))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $mixednestings.MixedNestings.A.1B.itable (struct_subtype
  (field $slot0 (ref null struct))
@@ -173,7 +173,7 @@
   (field $itable (ref $mixednestings.MixedNestings.A.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__mixednestings_MixedNestings_A (ref null $mixednestings.MixedNestings))
-   $java.lang.Object)
+  $java.lang.Object)
  )
  (type $mixednestings.MixedNestings.A.vtable (struct_subtype
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -183,7 +183,7 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_aa__void (ref $function.m_aa__void))
   (field $m_a__void (ref $function.m_a__void))
-   $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
  )
  (type $mixednestings.MixedNestings.A.itable (struct_subtype
  (field $slot0 (ref null struct))
