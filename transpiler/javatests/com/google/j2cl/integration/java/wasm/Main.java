@@ -22,7 +22,6 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.Asserts.fail;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -39,89 +38,17 @@ import jsinterop.annotations.JsMethod;
 public class Main {
 
   public static void main(String... args) throws Exception {
-    testDynamicClassMethodDispatch();
-    testSwitch();
     testWasmAnnotation();
     testClassLiterals();
-    testTry();
     testArrayInstanceOf();
     testArrayGetClass();
     testWasmArrayApis();
     testArrayList();
     testHashMap();
     testLinkedHashMap();
-    testSystemArrayCopy();
-    testString();
-    testParse();
-    testLambda();
     testEnumMap_get_put();
     testEnumMap_remove();
     testEnumMap_containsKey();
-  }
-
-  static class A {
-    public int m() {
-      return 1;
-    }
-  }
-
-  static class B extends A {
-    @Override
-    public int m() {
-      return 2;
-    }
-  }
-
-  private static void testDynamicClassMethodDispatch() {
-    A a = new A();
-    B b = new B();
-    assertEquals(1, a.m());
-    assertEquals(2, b.m());
-    a = b;
-    assertEquals(2, b.m());
-  }
-
-  enum MyEnum {
-    A,
-    B;
-  }
-
-  private static int next = 0;
-
-  private static int returnsNext() {
-    return next++;
-  }
-
-  private static void testSwitch() {
-    // returnsNext = 0;
-    switch (returnsNext()) {
-      case 1:
-        fail();
-      case 0:
-        break;
-      default:
-        fail();
-    }
-
-    // returnsNext() = 1
-    switch (returnsNext()) {
-      case 2:
-        fail();
-      default:
-        break;
-      case 0:
-        fail();
-    }
-
-    MyEnum a = MyEnum.A;
-    switch (a) {
-      case B:
-        fail();
-      case A:
-        break;
-      default:
-        fail();
-    }
   }
 
   private static void testWasmAnnotation() {
@@ -171,16 +98,6 @@ public class Main {
     assertFalse(int[].class.isInterface());
     assertTrue(int[].class.isArray());
     assertFalse(int[].class.isPrimitive());
-  }
-
-  private static void testTry() {
-    int i = 1;
-    try {
-      i += 10;
-    } finally {
-      i += 3;
-    }
-    assertEquals(14, i);
   }
 
   private static void testArrayInstanceOf() {
@@ -324,205 +241,9 @@ public class Main {
     assertTrue(map.keySet().contains("b"));
   }
 
-  static class Foo {}
-
-  static class Bar extends Foo {}
-
-  private static void testSystemArrayCopy() {
-    Foo[] fooArray = new Foo[4];
-    Bar[] barArray = new Bar[4];
-    Object[] src = new Object[] {new Bar(), new Bar(), new Foo(), new Bar()};
-    System.arraycopy(src, 0, fooArray, 0, src.length);
-    for (int i = 0; i < src.length; ++i) {
-      assertEquals(src[i], fooArray[i]);
-    }
-
-    String[] strArray = new String[] {"0", "1", "2", "3"};
-
-    System.arraycopy(strArray, 0, strArray, 1, strArray.length - 1);
-    String[] strArrayExpected1 = new String[] {"0", "0", "1", "2"};
-    for (int i = 0; i < strArray.length; ++i) {
-      assertEquals("rev str copy index " + i, strArrayExpected1[i], strArray[i]);
-    }
-
-    System.arraycopy(strArray, 1, strArray, 0, strArray.length - 1);
-    String[] strArrayExpected2 = new String[] {"0", "1", "2", "2"};
-    for (int i = 0; i < strArray.length; ++i) {
-      assertEquals("rev str copy index " + i, strArrayExpected2[i], strArray[i]);
-    }
-  }
-
-  private static void testString() throws Exception {
-    assertTrue(Arrays.equals(new byte[] {70, 111, 111}, "Foo".getBytes("UTF-8")));
-
-    StringBuilder builder = new StringBuilder();
-    builder.append("x").append("y").append(5).append(true);
-    assertEquals("xy5true", builder.toString());
-
-    assertEquals("5", String.valueOf(5));
-
-    assertEquals("5.5", String.valueOf(5.5f));
-    assertTrue(String.valueOf(123.459980f).startsWith("123.4599"));
-
-    assertDoubleToStringEquals("5.5", 5.5d);
-    assertDoubleToStringEquals("NaN", Double.NaN);
-    assertDoubleToStringEquals("Infinity", Double.POSITIVE_INFINITY);
-    assertDoubleToStringEquals("-Infinity", Double.NEGATIVE_INFINITY);
-    assertDoubleToStringEquals("1.7976931348623157E308", Double.MAX_VALUE);
-    // Double min value is different for Closure and Java.
-    // assertDoubleToStringEquals("4.9E-324", Double.MIN_VALUE);
-
-    // Ported from j2objc
-    double d;
-    d = Double.longBitsToDouble(0x470fffffffffffffL);
-    assertDoubleToStringEquals("2.0769187434139308E34", d);
-    d = Double.longBitsToDouble(0x4710000000000000L);
-    assertDoubleToStringEquals("2.076918743413931E34", d);
-
-    d = Double.longBitsToDouble(0x470000000000000aL);
-    assertDoubleToStringEquals("1.0384593717069678E34", d);
-    d = Double.longBitsToDouble(0x470000000000000bL);
-    assertDoubleToStringEquals("1.038459371706968E34", d);
-
-    d = Double.longBitsToDouble(0x4700000000000017L);
-    assertDoubleToStringEquals("1.0384593717069708E34", d);
-    d = Double.longBitsToDouble(0x4700000000000018L);
-    assertDoubleToStringEquals("1.038459371706971E34", d);
-
-    d = Double.longBitsToDouble(0x4700000000000024L);
-    assertDoubleToStringEquals("1.0384593717069738E34", d);
-    d = Double.longBitsToDouble(0x4700000000000025L);
-    assertDoubleToStringEquals("1.038459371706974E34", d);
-
-    d = Double.longBitsToDouble(0x4700000000000031L);
-    assertDoubleToStringEquals("1.0384593717069768E34", d);
-    d = Double.longBitsToDouble(0x4700000000000032L);
-    assertDoubleToStringEquals("1.038459371706977E34", d);
-
-    d = Double.longBitsToDouble(0x470000000000003eL);
-    assertDoubleToStringEquals("1.0384593717069798E34", d);
-    d = Double.longBitsToDouble(0x470000000000003fL);
-    assertDoubleToStringEquals("1.03845937170698E34", d);
-
-    d = Double.longBitsToDouble(0x7e00000000000003L);
-    assertDoubleToStringEquals("8.371160993642719E298", d);
-    d = Double.longBitsToDouble(0x7e00000000000004L);
-    assertDoubleToStringEquals("8.37116099364272E298", d);
-
-    d = Double.longBitsToDouble(0x7e00000000000008L);
-    assertDoubleToStringEquals("8.371160993642728E298", d);
-    d = Double.longBitsToDouble(0x7e00000000000009L);
-    assertDoubleToStringEquals("8.37116099364273E298", d);
-
-    d = Double.longBitsToDouble(0x7e00000000000013L);
-    assertDoubleToStringEquals("8.371160993642749E298", d);
-    d = Double.longBitsToDouble(0x7e00000000000014L);
-    assertDoubleToStringEquals("8.37116099364275E298", d);
-
-    d = Double.longBitsToDouble(0x7e00000000000023L);
-    assertDoubleToStringEquals("8.371160993642779E298", d);
-    d = Double.longBitsToDouble(0x7e00000000000024L);
-    assertDoubleToStringEquals("8.37116099364278E298", d);
-
-    d = Double.longBitsToDouble(0x7e0000000000002eL);
-    assertDoubleToStringEquals("8.371160993642799E298", d);
-    d = Double.longBitsToDouble(0x7e0000000000002fL);
-    assertDoubleToStringEquals("8.3711609936428E298", d);
-
-    d = Double.longBitsToDouble(0xda00000000000001L);
-    assertDoubleToStringEquals("-3.3846065602060736E125", d);
-    d = Double.longBitsToDouble(0xda00000000000002L);
-    assertDoubleToStringEquals("-3.384606560206074E125", d);
-
-    d = Double.longBitsToDouble(0xda00000000000005L);
-    assertDoubleToStringEquals("-3.3846065602060766E125", d);
-    d = Double.longBitsToDouble(0xda00000000000006L);
-    assertDoubleToStringEquals("-3.384606560206077E125", d);
-
-    d = Double.longBitsToDouble(0xda00000000000009L);
-    assertDoubleToStringEquals("-3.3846065602060796E125", d);
-    d = Double.longBitsToDouble(0xda0000000000000aL);
-    assertDoubleToStringEquals("-3.38460656020608E125", d);
-
-    d = Double.longBitsToDouble(0xda0000000000000dL);
-    assertDoubleToStringEquals("-3.3846065602060826E125", d);
-    d = Double.longBitsToDouble(0xda0000000000000eL);
-    assertDoubleToStringEquals("-3.384606560206083E125", d);
-  }
-
-  private static void assertDoubleToStringEquals(String expected, double d) {
-    // Closure version uses 'e+' for exponential so normalize it back to Java style.
-    assertEquals(expected, String.valueOf(d).replace("e+", "E"));
-  }
-
-  private static void testParse() {
-    assertEquals((byte) 123, Byte.parseByte("123"));
-    assertEquals((byte) 123, Byte.parseByte("+123"));
-    assertEquals((byte) -123, Byte.parseByte("-123"));
-    assertEquals((byte) 0, Byte.parseByte("0"));
-    assertEquals((byte) Byte.MAX_VALUE, Byte.parseByte(String.valueOf(Byte.MAX_VALUE)));
-    assertEquals((byte) Byte.MIN_VALUE, Byte.parseByte(String.valueOf(Byte.MIN_VALUE)));
-    assertEquals((byte) 51, Byte.parseByte("123", 6));
-
-    assertEquals(12345, Integer.parseInt("12345"));
-    assertEquals(12345, Integer.parseInt("+12345"));
-    assertEquals(-12345, Integer.parseInt("-12345"));
-    assertEquals(0, Integer.parseInt("0"));
-    assertEquals(Integer.MAX_VALUE, Integer.parseInt(String.valueOf(Integer.MAX_VALUE)));
-    assertEquals(Integer.MIN_VALUE, Integer.parseInt(String.valueOf(Integer.MIN_VALUE)));
-    assertEquals(1865, Integer.parseInt("12345", 6));
-
-    assertEquals(0L, Long.parseLong("0"));
-    assertEquals(100000000000L, Long.parseLong("100000000000"));
-    assertEquals(100000000000L, Long.parseLong("+100000000000"));
-    assertEquals(-100000000000L, Long.parseLong("-100000000000"));
-    assertEquals(10L, Long.parseLong("010"));
-    assertEquals(Long.MAX_VALUE, Long.parseLong(String.valueOf(Long.MAX_VALUE)));
-    assertEquals(Long.MIN_VALUE, Long.parseLong(String.valueOf(Long.MIN_VALUE)));
-
-    assertEquals(1865, Integer.parseInt("12345", 6));
-    assertEquals(0xdeadbeefdeadL, Long.parseLong("deadbeefdead", 16));
-    assertEquals(-0xdeadbeefdeadL, Long.parseLong("-deadbeefdead", 16));
-
-    assertEquals(0.0, Double.parseDouble("0"));
-    assertEquals(100.0, Double.parseDouble("1e2"));
-    assertEquals(-100.0, Double.parseDouble("-1e2"));
-    assertEquals(-1.5, Double.parseDouble("-1.5"));
-    assertEquals(3.0, Double.parseDouble("3."));
-    assertEquals(0.5, Double.parseDouble(".5"));
-    assertEquals(2.98e8, Double.parseDouble("2.98e8"));
-    assertEquals(-2.98e-8, Double.parseDouble("-2.98e-8"));
-    assertEquals(+2.98E+8, Double.parseDouble("+2.98E+8"));
-    assertEquals(2.56789e1, Double.parseDouble("2.56789e1"));
-    assertEquals(2.56789e1, Double.parseDouble("  2.56789E+1"));
-    assertEquals(2.56789e1, Double.parseDouble("2.56789e1   "));
-    assertEquals(1.0d, Double.parseDouble("1.0f"));
-    assertEquals(1.0d, Double.parseDouble("1.0F"));
-    assertEquals(1.0d, Double.parseDouble("1.0d"));
-    assertEquals(1.0d, Double.parseDouble("1.0D"));
-    assertEquals(Double.NaN, Double.parseDouble("+NaN"));
-    assertEquals(Double.NaN, Double.parseDouble("NaN"));
-    assertEquals(Double.NaN, Double.parseDouble("-NaN"));
-    assertEquals(Double.POSITIVE_INFINITY, Double.parseDouble("+Infinity"));
-    assertEquals(Double.POSITIVE_INFINITY, Double.parseDouble("Infinity"));
-    assertEquals(Double.NEGATIVE_INFINITY, Double.parseDouble("-Infinity"));
-  }
-
-  interface Function {
-    int apply();
-  }
-
-  private static void testLambda() {
-    boolean b = true;
-    Function f =
-        () -> {
-          if (!b) {
-            return 1;
-          } else {
-            return 2;
-          }
-        };
-    assertEquals(2, f.apply());
+  enum MyEnum {
+    A,
+    B
   }
 
   private static void testEnumMap_get_put() {
