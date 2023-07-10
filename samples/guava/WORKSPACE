@@ -43,8 +43,8 @@ j2cl_maven_import_external(
 j2cl_maven_import_external(
     name = "com_google_errorprone_error_prone_annotations-j2cl",
     annotation_only = True,
-    artifact = "com.google.errorprone:error_prone_annotations:2.4.0",
-    artifact_sha256= "5f2a0648230a662e8be049df308d583d7369f13af683e44ddf5829b6d741a228",
+    artifact = "com.google.errorprone:error_prone_annotations:2.9.0",
+    artifact_sha256= "f947bdc33ae27a6b4aa44799e6c21e1944797bd0010ba43eb82d11446e163694",
     server_urls = _MAVEN_CENTRAL_URLS,
 )
 
@@ -65,10 +65,11 @@ j2cl_maven_import_external(
 
 j2cl_maven_import_external(
     name = "com_google_guava-j2cl",
-    artifact = "com.google.guava:guava-gwt:29.0-jre",
-    artifact_sha256= "39e899acd9f9f09da2871eaaab0024cae2506da24457c9542955ed754f653292",
+    artifact = "com.google.guava:guava-gwt:32.1.1-jre",
+    artifact_sha256= "5c6891832727c728a09e4e84bad83517db8bd50b435cd362aafa08ef99932d6b",
     server_urls = _MAVEN_CENTRAL_URLS,
     deps = [
+        "@com_google_code_findbugs_jsr305-j2cl",
         "@com_google_elemental2//:elemental2-promise-j2cl",
         "@com_google_errorprone_error_prone_annotations-j2cl",
         "@com_google_j2cl//:jsinterop-annotations-j2cl",
