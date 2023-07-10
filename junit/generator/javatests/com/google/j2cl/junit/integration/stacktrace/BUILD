@@ -46,3 +46,14 @@ j2cl_test_integration_test(
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:ThrowsInNativeJs",
     ],
 )
+
+j2cl_test_integration_test(
+    name = "WasmStacktraceIntegrationTest",
+    extra_data = [
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:stacktrace-files",
+    ],
+    platforms = ["WASM"],
+    test_data = [
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:SimpleThrowingStacktraceTest",
+    ],
+)

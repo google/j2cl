@@ -179,7 +179,7 @@ class StacktraceAsserter {
     // (they are not part of a normal j2cl_test log)
     // Make sure we skip those here
     int logIndex = 0;
-    if (testMode.isJ2cl()) {
+    if (testMode.isWeb()) {
       for (; logIndex < logLines.size(); logIndex++) {
         if (logLines
             .get(logIndex)

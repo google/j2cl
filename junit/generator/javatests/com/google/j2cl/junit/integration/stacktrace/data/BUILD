@@ -67,6 +67,10 @@ j2cl_test_integration_test_data(
 j2cl_test_integration_test_data(
     name = "SimpleThrowingStacktraceTest",
     extra_defs = ["--inline_functions=false"],
+    platforms = [
+        "CLOSURE",
+        "WASM",
+    ],
     deps = [":base"],
 )
 
@@ -178,5 +182,7 @@ filegroup(
         "*.stacktrace.txt",
         "*.stacktrace_j2cl.txt",
         "*.stacktrace_j2cl_compiled.txt",
+        "*.stacktrace_j2wasm.txt",
+        "*.stacktrace_j2wasm_optimized.txt",
     ]),
 )

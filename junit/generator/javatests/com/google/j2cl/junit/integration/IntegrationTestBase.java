@@ -94,7 +94,7 @@ public abstract class IntegrationTestBase {
   }
 
   protected void runStacktraceTest(String testName) throws Exception {
-    if (testMode.isJ2wasm() || testMode.isJ2kt()) {
+    if (testMode.isJ2kt()) {
       return;
     }
 
@@ -139,14 +139,26 @@ public abstract class IntegrationTestBase {
     switch (testMode) {
       case J2CL_COMPILED:
         File compiledFile = getTestDataFile(testName + ".stacktrace_j2cl_compiled.txt");
-        if (compiledFile.exists()) {
+        if (testMode.isJ2cl() && compiledFile.exists()) {
           return compiledFile;
         }
         // fall through
       case J2CL_UNCOMPILED:
         File uncompiledFile = getTestDataFile(testName + ".stacktrace_j2cl.txt");
-        if (uncompiledFile.exists()) {
+        if (testMode.isJ2cl() && uncompiledFile.exists()) {
           return uncompiledFile;
+        }
+        // fall through
+      case J2WASM_OPTIMIZED:
+        File optimizedFile = getTestDataFile(testName + ".stacktrace_j2wasm_optimized.txt");
+        if (testMode.isJ2wasm() && optimizedFile.exists()) {
+          return optimizedFile;
+        }
+        // fall through
+      case J2WASM_UNOPTIMIZED:
+        File unoptimizedFile = getTestDataFile(testName + ".stacktrace_j2wasm.txt");
+        if (testMode.isJ2wasm() && unoptimizedFile.exists()) {
+          return unoptimizedFile;
         }
         // fall through
       default:
