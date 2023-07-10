@@ -150,11 +150,6 @@ public class Main {
   public Object acceptFn_raw(Fn f, Object i) {
     return f.apply(i);
   }
-
-  // This method is included in "backend/kotlin/Todo.kt".
-  public void todoMethod(String string) {
-    System.out.println("Hello: " + string);
-  }
 }
 
 class Subclass<V> extends NativeTopLevel<V> implements NativeInterface<V> {
