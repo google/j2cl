@@ -60,6 +60,7 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.MethodLike;
 import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.NewInstance;
+import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.SuperReference;
@@ -82,6 +83,8 @@ import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Queue;
 import java.util.Set;
+import java.util.function.BiFunction;
+import java.util.function.Predicate;
 import javax.annotation.Nullable;
 
 /** Checks and throws errors for invalid JsInterop constructs. */
@@ -90,26 +93,27 @@ public class JsInteropRestrictionsChecker {
   public static void check(
       Library library,
       Problems problems,
-      boolean enableWasm,
+      boolean checkWasmRestrictions,
       boolean isNullMarkedSupported,
       boolean optimizeAutoValue) {
-    new JsInteropRestrictionsChecker(problems, enableWasm, isNullMarkedSupported, optimizeAutoValue)
+    new JsInteropRestrictionsChecker(
+            problems, checkWasmRestrictions, isNullMarkedSupported, optimizeAutoValue)
         .checkLibrary(library);
   }
 
   private final Problems problems;
-  private final boolean enableWasm;
+  private final boolean checkWasmRestrictions;
   private final boolean isNullMarkedSupported;
   private final boolean optimizeAutoValue;
   private boolean wasUnusableByJsWarningReported = false;
 
   private JsInteropRestrictionsChecker(
       Problems problems,
-      boolean enableWasm,
+      boolean checkWasmRestrictions,
       boolean isNullMarkedSupported,
       boolean optimizeAutoValue) {
     this.problems = problems;
-    this.enableWasm = enableWasm;
+    this.checkWasmRestrictions = checkWasmRestrictions;
     this.isNullMarkedSupported = isNullMarkedSupported;
     this.optimizeAutoValue = optimizeAutoValue;
   }
@@ -127,13 +131,13 @@ public class JsInteropRestrictionsChecker {
   private void checkType(Type type) {
     TypeDeclaration typeDeclaration = type.getDeclaration();
 
-    if (!enableWasm && !isNullMarkedSupported) {
+    if (!checkWasmRestrictions && !isNullMarkedSupported) {
       if (!checkJSpecifyUsage(typeDeclaration)) {
         return;
       }
     }
 
-    if (!enableWasm && optimizeAutoValue) {
+    if (!checkWasmRestrictions && optimizeAutoValue) {
       if (!checkAutoValue(typeDeclaration)) {
         return;
       }
@@ -174,6 +178,8 @@ public class JsInteropRestrictionsChecker {
     checkJsEnumUsages(type);
     checkJsFunctionLambdas(type);
     checkSystemProperties(type);
+
+    checkNativeTypesAssignabilityInWasm(type);
   }
 
   private boolean checkJSpecifyUsage(TypeDeclaration typeDeclaration) {
@@ -231,6 +237,85 @@ public class JsInteropRestrictionsChecker {
             }
           }
         });
+  }
+
+  private void checkNativeTypesAssignabilityInWasm(Type type) {
+    type.getMembers().forEach(this::checkNativeTypesAssignabilityInWasm);
+  }
+
+  private void checkNativeTypesAssignabilityInWasm(Member member) {
+    if (!checkWasmRestrictions) {
+      return;
+    }
+
+    // In Wasm, native types and Java types are incompatible and cannot be assigned or cast to each
+    // other.
+    member.accept(
+        new ConversionContextVisitor(
+            new ContextRewriter() {
+              @Override
+              public Expression rewriteTypeConversionContext(
+                  TypeDescriptor inferredTypeDescriptor,
+                  TypeDescriptor declaredTypeDescriptor,
+                  Expression expression) {
+                checkNativeJsTypeAssignment(
+                    inferredTypeDescriptor,
+                    expression,
+                    (expressionType, toType) ->
+                        String.format(
+                            "Native JsType '%s' cannot be assigned to '%s'. (b/262009761)",
+                            expressionType, toType));
+                return expression;
+              }
+
+              @Override
+              public Expression rewriteMemberQualifierContext(
+                  TypeDescriptor inferredTypeDescriptor,
+                  TypeDescriptor declaredTypeDescriptor,
+                  Expression qualifierExpression) {
+                checkNativeJsTypeAssignment(
+                    inferredTypeDescriptor,
+                    qualifierExpression,
+                    (expressionType, toType) ->
+                        String.format(
+                            "Cannot access member of '%s' with native JsType '%s'. (b/288128177)",
+                            toType, expressionType));
+                return qualifierExpression;
+              }
+
+              @Override
+              public Expression rewriteCastContext(CastExpression castExpression) {
+                checkNativeJsTypeAssignment(
+                    castExpression.getCastTypeDescriptor(),
+                    castExpression.getExpression(),
+                    (expressionType, toType) ->
+                        String.format(
+                            "Native JsType '%s' cannot be cast to '%s'. (b/262009761)",
+                            expressionType, toType));
+                return castExpression;
+              }
+
+              private void checkNativeJsTypeAssignment(
+                  TypeDescriptor toTypeDescriptor,
+                  Expression expression,
+                  BiFunction<String, String, String> errorFormatter) {
+                TypeDescriptor expressionTypeDescriptor = expression.getTypeDescriptor();
+                if (toTypeDescriptor.isNative() == expressionTypeDescriptor.isNative()) {
+                  return;
+                }
+                if (toTypeDescriptor.isNative() && expression instanceof NullLiteral) {
+                  return;
+                }
+
+                // TODO(b/65465035): When source position is tracked at the expression level,
+                // the error reporting here should include source position.
+                String errorMessage =
+                    errorFormatter.apply(
+                        expressionTypeDescriptor.getReadableDescription(),
+                        toTypeDescriptor.getReadableDescription());
+                problems.error(member.getSourcePosition(), "%s", errorMessage);
+              }
+            }));
   }
 
   private void checkJsFunctionLambdas(Type type) {
@@ -715,12 +800,18 @@ public class JsInteropRestrictionsChecker {
 
           @Override
           public void exitMethod(Method method) {
-            checkParametersAndReturnType(method);
+            checkMethodSignature(
+                method,
+                Predicates.not(JsInteropRestrictionsChecker::hasNonNativeJsEnumArray),
+                " (b/118299062)");
           }
 
           @Override
           public void exitFunctionExpression(FunctionExpression functionExpression) {
-            checkParametersAndReturnType(functionExpression);
+            checkMethodSignature(
+                functionExpression,
+                Predicates.not(JsInteropRestrictionsChecker::hasNonNativeJsEnumArray),
+                " (b/118299062)");
           }
 
           @Override
@@ -776,31 +867,6 @@ public class JsInteropRestrictionsChecker {
                 newArrayTypeDescriptor, getCurrentMember().getSourcePosition(), messagePrefix);
           }
         });
-  }
-
-  private void checkParametersAndReturnType(MethodLike methodLike) {
-    for (Variable parameter : methodLike.getParameters()) {
-      TypeDescriptor parameterTypeDescriptor = parameter.getTypeDescriptor();
-      String messagePrefix =
-          String.format(
-              "Parameter '%s' in '%s'", parameter.getName(), methodLike.getReadableDescription());
-      SourcePosition sourcePosition = parameter.getSourcePosition();
-      errorIfNonNativeJsEnumArray(
-          parameterTypeDescriptor,
-          sourcePosition == SourcePosition.NONE ? methodLike.getSourcePosition() : sourcePosition,
-          messagePrefix);
-    }
-
-    if (methodLike.getDescriptor() == null) {
-      // TODO(b/115566064): Emit the correct error for lambdas that are not JsFunctions and
-      // return JsEnum arrays.
-      return;
-    }
-    TypeDescriptor returnTypeDescriptor = methodLike.getDescriptor().getReturnTypeDescriptor();
-    String messagePrefix =
-        String.format("Return type of '%s'", methodLike.getReadableDescription());
-    errorIfNonNativeJsEnumArray(
-        returnTypeDescriptor, methodLike.getSourcePosition(), messagePrefix);
   }
 
   private void checkJsEnumValueFieldAssignment(Type type) {
@@ -974,13 +1040,7 @@ public class JsInteropRestrictionsChecker {
       Method method = (Method) member;
       checkIllegalOverrides(method);
       checkMethodParameters(method);
-
-      if (method.getWasmInfo() != null && !(method.isNative() && method.isStatic())) {
-        problems.warning(
-            member.getSourcePosition(),
-            "Wasm method '%s' needs to be static native",
-            memberDescriptor.getReadableDescription());
-      }
+      checkMethodWasmInfo(method);
 
       if (memberDescriptor.isNative()) {
         checkNativeMethod(method);
@@ -1050,7 +1110,9 @@ public class JsInteropRestrictionsChecker {
   private void checkNativeMethod(Method method) {
     MethodDescriptor methodDescriptor = method.getDescriptor();
 
-    if (enableWasm) {
+    if (checkWasmRestrictions) {
+      // Members of native types are checked elsewhere.
+      checkWasmNativeMethodSignature(method);
       return;
     }
 
@@ -1253,15 +1315,14 @@ public class JsInteropRestrictionsChecker {
     TypeDeclaration typeDeclaration = type.getDeclaration();
     String readableDescription = typeDeclaration.getReadableDescription();
 
-    if (enableWasm) {
-      return false;
-    }
-
     if (type.isEnumOrSubclass()) {
       problems.error(
           type.getSourcePosition(),
-          "Enum '%s' cannot be a native JsType. Use '@JsEnum(isNative = true)' instead.",
-          readableDescription);
+          "Enum '%s' cannot be a native JsType.%s",
+          readableDescription,
+          // TODO(b/288145698): After supporting native JsEnum for Wasm, add the JsEnum text to
+          // error messages.
+          checkWasmRestrictions ? "" : " Use '@JsEnum(isNative = true)' instead.");
       return false;
     }
     if (typeDeclaration.isCapturingEnclosingInstance()) {
@@ -1309,6 +1370,7 @@ public class JsInteropRestrictionsChecker {
               member.getSourcePosition(),
               "Native JsType constructor '%s' cannot have non-empty method body.",
               readableDescription);
+          return;
         }
         break;
       case METHOD:
@@ -1319,6 +1381,7 @@ public class JsInteropRestrictionsChecker {
               member.getSourcePosition(),
               "Native JsType method '%s' should be native, abstract or JsOverlay.",
               readableDescription);
+          return;
         }
         break;
       case PROPERTY:
@@ -1328,11 +1391,13 @@ public class JsInteropRestrictionsChecker {
               field.getSourcePosition(),
               "Native JsType field '%s' cannot be final.",
               member.getReadableDescription());
+          return;
         } else if (field.hasInitializer()) {
           problems.error(
               field.getSourcePosition(),
               "Native JsType field '%s' cannot have initializer.",
               readableDescription);
+          return;
         }
         break;
       case NONE:
@@ -1340,14 +1405,36 @@ public class JsInteropRestrictionsChecker {
             member.getSourcePosition(),
             "Native JsType member '%s' cannot have @JsIgnore.",
             readableDescription);
-        break;
+        return;
       case UNDEFINED_ACCESSOR:
         // Nothing to check here. An error will be emitted for UNDEFINED_ACCESSOR elsewhere.
-        break;
+        return;
       case INVALID_KOTLIN_FIELD_JS_PROPERTY:
       case INVALID_KOTLIN_FIELD_JS_IGNORE:
         // These are checked for elsewhere.
-        break;
+        return;
+    }
+
+    if (!checkWasmRestrictions) {
+      return;
+    }
+
+    // At this point all JsMember methods reach here and those are all implemented by the native
+    // type.
+    checkState(memberDescriptor.isJsMember());
+
+    // Check Wasm restrictions on native JsMember methods and fields.
+    if (member.isMethod()) {
+      checkWasmNativeMethodSignature((Method) member);
+    } else {
+      Field field = (Field) member;
+      if (!canCrossWasmJavaScriptBoundary(field.getDescriptor().getTypeDescriptor())) {
+        problems.error(
+            field.getSourcePosition(),
+            "Native JsType field '%s' cannot be of type '%s'.",
+            readableDescription,
+            field.getDescriptor().getTypeDescriptor().getReadableDescription());
+      }
     }
   }
 
@@ -1401,6 +1488,66 @@ public class JsInteropRestrictionsChecker {
     }
 
     checkMustBeJsOverlay(member, messagePrefix);
+  }
+
+  private void checkMethodWasmInfo(Method method) {
+    MethodDescriptor methodDescriptor = method.getDescriptor();
+    if (method.getWasmInfo() != null && !(method.isNative() && method.isStatic())) {
+      problems.warning(
+          method.getSourcePosition(),
+          "Wasm method '%s' needs to be static native",
+          methodDescriptor.getReadableDescription());
+    }
+  }
+
+  private void checkWasmNativeMethodSignature(Method method) {
+    if (method.getWasmInfo() != null) {
+      return;
+    }
+
+    checkMethodSignature(method, JsInteropRestrictionsChecker::canCrossWasmJavaScriptBoundary, "");
+  }
+
+  /**
+   * Checks whether the specified type can be imported from JavaScript or exported to JavaScript
+   * from Wasm.
+   */
+  private static boolean canCrossWasmJavaScriptBoundary(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.isPrimitive()
+        || TypeDescriptors.isJavaLangString(typeDescriptor)
+        || typeDescriptor.isNative();
+  }
+
+  private void checkMethodSignature(
+      MethodLike methodLike, Predicate<TypeDescriptor> checkType, String errorMessageSuffix) {
+    for (Variable parameter : methodLike.getParameters()) {
+      TypeDescriptor parameterTypeDescriptor = parameter.getTypeDescriptor();
+      SourcePosition sourcePosition = parameter.getSourcePosition();
+      if (!checkType.test(parameterTypeDescriptor)) {
+        problems.error(
+            sourcePosition == SourcePosition.NONE ? methodLike.getSourcePosition() : sourcePosition,
+            "Parameter '%s' in '%s' cannot be of type '%s'.%s",
+            parameter.getName(),
+            methodLike.getReadableDescription(),
+            parameterTypeDescriptor.getReadableDescription(),
+            errorMessageSuffix);
+      }
+    }
+
+    if (methodLike.getDescriptor() == null) {
+      // TODO(b/115566064): Emit the correct error for lambdas that are not JsFunctions and
+      // return JsEnum arrays.
+      return;
+    }
+    TypeDescriptor returnTypeDescriptor = methodLike.getDescriptor().getReturnTypeDescriptor();
+    if (!checkType.test(returnTypeDescriptor)) {
+      problems.error(
+          methodLike.getSourcePosition(),
+          "Return type of '%s' cannot be of type '%s'.%s",
+          methodLike.getReadableDescription(),
+          returnTypeDescriptor.getReadableDescription(),
+          errorMessageSuffix);
+    }
   }
 
   private void checkJsFunctionMethodSignature(Type type, Method method) {

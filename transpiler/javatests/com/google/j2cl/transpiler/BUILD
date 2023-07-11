@@ -86,6 +86,19 @@ java_test(
 )
 
 java_test(
+    name = "J2wasmJsInteropRestrictionsCheckerTest",
+    srcs = ["J2wasmJsInteropRestrictionsCheckerTest.java"],
+    data = [
+        ":jre_bundle-j2wasm_deploy.jar",
+        ":jre_bundle-j2wasm_deploy-src.jar",
+    ],
+    deps = [
+        ":TranspilerTester",
+        "//third_party:junit",
+    ],
+)
+
+java_test(
     name = "J2ktRestrictionsCheckerTest",
     srcs = ["J2ktRestrictionsCheckerTest.java"],
     data = [":jre_bundle_deploy.jar"],
