@@ -467,103 +467,84 @@ public class Arrays {
   }
 
   public static boolean[] copyOf(boolean[] original, int newLength) {
-    checkArraySize(newLength);
-    return copyPrimitiveArray(original, new boolean[newLength], 0, newLength);
+    return copyOfImpl(original, newLength);
   }
 
   public static byte[] copyOf(byte[] original, int newLength) {
-    checkArraySize(newLength);
-    return copyPrimitiveArray(original, new byte[newLength], 0, newLength);
+    return copyOfImpl(original, newLength);
   }
 
   public static char[] copyOf(char[] original, int newLength) {
-    checkArraySize(newLength);
-    return copyPrimitiveArray(original, new char[newLength], 0, newLength);
+    return copyOfImpl(original, newLength);
   }
 
   public static double[] copyOf(double[] original, int newLength) {
-    checkArraySize(newLength);
-    return copyPrimitiveArray(original, new double[newLength], 0, newLength);
+    return copyOfImpl(original, newLength);
   }
 
   public static float[] copyOf(float[] original, int newLength) {
-    checkArraySize(newLength);
-    return copyPrimitiveArray(original, new float[newLength], 0, newLength);
+    return copyOfImpl(original, newLength);
   }
 
   public static int[] copyOf(int[] original, int newLength) {
-    checkArraySize(newLength);
-    return copyPrimitiveArray(original, new int[newLength], 0, newLength);
+    return copyOfImpl(original, newLength);
   }
 
   public static long[] copyOf(long[] original, int newLength) {
-    checkArraySize(newLength);
-    return copyPrimitiveArray(original, new long[newLength], 0, newLength);
+    return copyOfImpl(original, newLength);
   }
 
   public static short[] copyOf(short[] original, int newLength) {
-    checkArraySize(newLength);
-    return copyPrimitiveArray(original, new short[newLength], 0, newLength);
+    return copyOfImpl(original, newLength);
   }
 
   public static <T> T[] copyOf(T[] original, int newLength) {
-    checkArraySize(newLength);
-    return copyObjectArray(original, 0, newLength);
+    return copyOfImpl(original, newLength);
   }
 
   public static boolean[] copyOfRange(boolean[] original, int from, int to) {
-    checkCopyOfRange(original, from, to);
-    return copyPrimitiveArray(original, new boolean[to - from], from, to);
+    return copyOfRangeImpl(original, from, to);
   }
 
   public static byte[] copyOfRange(byte[] original, int from, int to) {
-    checkCopyOfRange(original, from, to);
-    return copyPrimitiveArray(original, new byte[to - from], from, to);
+    return copyOfRangeImpl(original, from, to);
   }
 
   public static char[] copyOfRange(char[] original, int from, int to) {
-    checkCopyOfRange(original, from, to);
-    return copyPrimitiveArray(original, new char[to - from], from, to);
+    return copyOfRangeImpl(original, from, to);
   }
 
   public static double[] copyOfRange(double[] original, int from, int to) {
-    checkCopyOfRange(original, from, to);
-    return copyPrimitiveArray(original, new double[to - from], from, to);
+    return copyOfRangeImpl(original, from, to);
   }
 
   public static float[] copyOfRange(float[] original, int from, int to) {
-    checkCopyOfRange(original, from, to);
-    return copyPrimitiveArray(original, new float[to - from], from, to);
+    return copyOfRangeImpl(original, from, to);
   }
 
   public static int[] copyOfRange(int[] original, int from, int to) {
-    checkCopyOfRange(original, from, to);
-    return copyPrimitiveArray(original, new int[to - from], from, to);
+    return copyOfRangeImpl(original, from, to);
   }
 
   public static long[] copyOfRange(long[] original, int from, int to) {
-    checkCopyOfRange(original, from, to);
-    return copyPrimitiveArray(original, new long[to - from], from, to);
+    return copyOfRangeImpl(original, from, to);
   }
 
   public static short[] copyOfRange(short[] original, int from, int to) {
-    checkCopyOfRange(original, from, to);
-    return copyPrimitiveArray(original, new short[to - from], from, to);
+    return copyOfRangeImpl(original, from, to);
   }
 
   public static <T> T[] copyOfRange(T[] original, int from, int to) {
+    return copyOfRangeImpl(original, from, to);
+  }
+
+  private static <T> T copyOfImpl(T original, int newLength) {
+    checkArraySize(newLength);
+    return ArrayHelper.clone(original, 0, newLength);
+  }
+
+  private static <T> T copyOfRangeImpl(T original, int from, int to) {
     checkCopyOfRange(original, from, to);
-    return copyObjectArray(original, from, to);
-  }
-
-  private static <T> T copyPrimitiveArray(T original, T copy, int from, int to) {
-    int len = ArrayHelper.getLength(original);
-    int copyLen = Math.min(to, len) - from;
-    ArrayHelper.copy(original, from, copy, 0, copyLen);
-    return copy;
-  }
-
-  private static <T> T[] copyObjectArray(T[] original, int from, int to) {
     return ArrayHelper.clone(original, from, to);
   }
 

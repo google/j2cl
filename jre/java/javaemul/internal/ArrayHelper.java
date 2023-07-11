@@ -35,9 +35,20 @@ public final class ArrayHelper {
   }
 
   public static <T> T clone(T array, int fromIndex, int toIndex) {
-    Object result = unsafeClone(array, fromIndex, toIndex);
+    Object[] result = unsafeClone(array, fromIndex, toIndex);
     // array.slice doesn't expand if toIndex > array.length
-    setLength(result, toIndex - fromIndex);
+    int length = result.length;
+    int requestedLength = toIndex - fromIndex;
+    if (requestedLength > length) {
+      Object initialValue = getElementInitialValue(array);
+      if (initialValue == null) {
+        setLength(result, requestedLength);
+      } else {
+        for (int i = length; i < requestedLength; ++i) {
+          result[i] = initialValue;
+        }
+      }
+    }
     return ArrayStamper.stampJavaTypeInfo(JsUtils.uncheckedCast(result), array);
   }
 
@@ -284,6 +295,9 @@ public final class ArrayHelper {
     return JsUtils.uncheckedCast(array);
   }
 
+  @JsMethod(namespace = "vmbootstrap.Arrays", name = "$getElementInitialValue")
+  private static native Object getElementInitialValue(Object array);
+
   @JsType(isNative = true, name = "Array", namespace = JsPackage.GLOBAL)
   private static class NativeArray {
     int length;
@@ -307,4 +321,3 @@ public final class ArrayHelper {
 
   private ArrayHelper() {}
 }
-

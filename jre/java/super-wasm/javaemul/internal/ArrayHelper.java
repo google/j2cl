@@ -22,12 +22,12 @@ import java.util.Comparator;
 /** Provides utilities to perform operations on Arrays. */
 public final class ArrayHelper {
 
-  public static <T> T[] clone(T[] array) {
-    return (T[]) cloneImpl(array, 0, array.length);
+  public static <T> T clone(T array) {
+    return (T) cloneImpl(array, 0, getLength(array));
   }
 
-  public static <T> T[] clone(T[] array, int fromIndex, int toIndex) {
-    return (T[]) cloneImpl(array, fromIndex, toIndex);
+  public static <T> T clone(T array, int fromIndex, int toIndex) {
+    return (T) cloneImpl(array, fromIndex, toIndex);
   }
 
   public static <T> T unsafeClone(Object array, int fromIndex, int toIndex) {

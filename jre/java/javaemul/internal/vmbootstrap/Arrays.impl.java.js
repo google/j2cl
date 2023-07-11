@@ -290,6 +290,14 @@ class Arrays {
     return !!array.$$arrayMetadata;
   }
 
+  static $getElementInitialValue(array) {
+    const metadata = Arrays.$getMetadata_(array);
+    if (!metadata || metadata.dimensionCount > 1) {
+      return undefined;
+    }
+    return /** @type {?} */ (metadata.leafType).$initialArrayValue;
+  }
+
   /**
    * Sets the given value into the given index in the given array.
    *
