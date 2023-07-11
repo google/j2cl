@@ -1,7 +1,7 @@
  ;;; Code for boundedtypevariable.BoundedTypeVariable [type definition]
  (type $boundedtypevariable.BoundedTypeVariable (struct_subtype
   (field $vtable (ref $boundedtypevariable.BoundedTypeVariable.vtable))
-  (field $itable (ref $boundedtypevariable.BoundedTypeVariable.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -13,15 +13,6 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $boundedtypevariable.BoundedTypeVariable.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for boundedtypevariable.BoundedTypeVariable [vtable.init]
 (global $boundedtypevariable.BoundedTypeVariable.vtable (ref $boundedtypevariable.BoundedTypeVariable.vtable)
@@ -33,17 +24,6 @@
   (ref.func $$getClassImpl__java_lang_Class@boundedtypevariable.BoundedTypeVariable)
  )
 )
-
-;;; Code for boundedtypevariable.BoundedTypeVariable [itable.init]
-(global $boundedtypevariable.BoundedTypeVariable.itable (ref $boundedtypevariable.BoundedTypeVariable.itable) (struct.new $boundedtypevariable.BoundedTypeVariable.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for boundedtypevariable.BoundedTypeVariable [static fields]
 (global $f_$initialized__boundedtypevariable_BoundedTypeVariable (mut i32) (i32.const 0))
@@ -59,7 +39,7 @@
  (local $$instance (ref null $boundedtypevariable.BoundedTypeVariable))
  (block
   ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
-  (local.set $$instance (struct.new $boundedtypevariable.BoundedTypeVariable (ref.as_non_null (global.get $boundedtypevariable.BoundedTypeVariable.vtable)) (ref.as_non_null (global.get $boundedtypevariable.BoundedTypeVariable.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $boundedtypevariable.BoundedTypeVariable (ref.as_non_null (global.get $boundedtypevariable.BoundedTypeVariable.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
   (call $$ctor__void_$p_boundedtypevariable_BoundedTypeVariable@boundedtypevariable.BoundedTypeVariable (ref.as_non_null (local.get $$instance)))
   ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13

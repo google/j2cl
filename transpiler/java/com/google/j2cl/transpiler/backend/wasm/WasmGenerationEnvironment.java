@@ -175,6 +175,9 @@ class WasmGenerationEnvironment {
   }
   /** Returns the name of the global that stores the itable for a Java type. */
   public String getWasmItableGlobalName(DeclaredTypeDescriptor typeDescriptor) {
+    if (!typeDescriptor.getTypeDeclaration().implementsInterfaces()) {
+      return "$itable.empty";
+    }
     return "$" + getTypeSignature(typeDescriptor) + ".itable";
   }
 
@@ -195,9 +198,10 @@ class WasmGenerationEnvironment {
 
   /** Returns the name of the wasm type of the itable for a Java type. */
   public String getWasmItableTypeName(TypeDeclaration typeDeclaration) {
-    if (typeDeclaration == null) {
+    if (typeDeclaration == null || !typeDeclaration.implementsInterfaces()) {
       return "$itable";
     }
+
     return "$" + getTypeSignature(typeDeclaration.toUnparameterizedTypeDescriptor()) + ".itable";
   }
 

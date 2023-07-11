@@ -12,7 +12,7 @@
  ;;; Code for overwrittentypevariables.HashFunctions [type definition]
  (type $overwrittentypevariables.HashFunctions (struct_subtype
   (field $vtable (ref $overwrittentypevariables.HashFunctions.vtable))
-  (field $itable (ref $overwrittentypevariables.HashFunctions.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -24,15 +24,6 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $overwrittentypevariables.HashFunctions.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for overwrittentypevariables.HashFunctions.1 [type definition]
  (type $overwrittentypevariables.HashFunctions.1 (struct_subtype
@@ -59,7 +50,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for overwrittentypevariables.HashFunctions.2 [type definition]
  (type $overwrittentypevariables.HashFunctions.2 (struct_subtype
@@ -86,7 +77,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
 ;;; Code for overwrittentypevariables.HashFunctions [vtable.init]
 (global $overwrittentypevariables.HashFunctions.vtable (ref $overwrittentypevariables.HashFunctions.vtable)
@@ -98,17 +89,6 @@
   (ref.func $$getClassImpl__java_lang_Class@overwrittentypevariables.HashFunctions)
  )
 )
-
-;;; Code for overwrittentypevariables.HashFunctions [itable.init]
-(global $overwrittentypevariables.HashFunctions.itable (ref $overwrittentypevariables.HashFunctions.itable) (struct.new $overwrittentypevariables.HashFunctions.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for overwrittentypevariables.HashFunctions.1 [vtable.init]
 (global $overwrittentypevariables.HashFunctions.1.vtable (ref $overwrittentypevariables.HashFunctions.1.vtable)
@@ -286,7 +266,7 @@
  (local $$instance (ref null $overwrittentypevariables.HashFunctions))
  (block
   ;;@ overwrittentypevariables/HashFunctions.java:24:13
-  (local.set $$instance (struct.new $overwrittentypevariables.HashFunctions (ref.as_non_null (global.get $overwrittentypevariables.HashFunctions.vtable)) (ref.as_non_null (global.get $overwrittentypevariables.HashFunctions.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $overwrittentypevariables.HashFunctions (ref.as_non_null (global.get $overwrittentypevariables.HashFunctions.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ overwrittentypevariables/HashFunctions.java:24:13
   (call $$ctor__void_$p_overwrittentypevariables_HashFunctions@overwrittentypevariables.HashFunctions (ref.as_non_null (local.get $$instance)))
   ;;@ overwrittentypevariables/HashFunctions.java:24:13

@@ -1,7 +1,7 @@
  ;;; Code for cascadingconstructor.CascadingConstructor [type definition]
  (type $cascadingconstructor.CascadingConstructor (struct_subtype
   (field $vtable (ref $cascadingconstructor.CascadingConstructor.vtable))
-  (field $itable (ref $cascadingconstructor.CascadingConstructor.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_a__cascadingconstructor_CascadingConstructor_ i32)
   (field $f_b__cascadingconstructor_CascadingConstructor_ (mut i32))
@@ -15,15 +15,6 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $cascadingconstructor.CascadingConstructor.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for cascadingconstructor.CascadingConstructor [vtable.init]
 (global $cascadingconstructor.CascadingConstructor.vtable (ref $cascadingconstructor.CascadingConstructor.vtable)
@@ -35,17 +26,6 @@
   (ref.func $$getClassImpl__java_lang_Class@cascadingconstructor.CascadingConstructor)
  )
 )
-
-;;; Code for cascadingconstructor.CascadingConstructor [itable.init]
-(global $cascadingconstructor.CascadingConstructor.itable (ref $cascadingconstructor.CascadingConstructor.itable) (struct.new $cascadingconstructor.CascadingConstructor.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for cascadingconstructor.CascadingConstructor [static fields]
 (global $f_$initialized__cascadingconstructor_CascadingConstructor (mut i32) (i32.const 0))
@@ -63,7 +43,7 @@
  (local $$instance (ref null $cascadingconstructor.CascadingConstructor))
  (block
   ;;@ cascadingconstructor/CascadingConstructor.java:22:10
-  (local.set $$instance (struct.new $cascadingconstructor.CascadingConstructor (ref.as_non_null (global.get $cascadingconstructor.CascadingConstructor.vtable)) (ref.as_non_null (global.get $cascadingconstructor.CascadingConstructor.itable)) (i32.const 0) (local.get $a) (i32.const 0)))
+  (local.set $$instance (struct.new $cascadingconstructor.CascadingConstructor (ref.as_non_null (global.get $cascadingconstructor.CascadingConstructor.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (local.get $a) (i32.const 0)))
   ;;@ cascadingconstructor/CascadingConstructor.java:22:10
   (call $$ctor__int__int__void_$p_cascadingconstructor_CascadingConstructor@cascadingconstructor.CascadingConstructor (ref.as_non_null (local.get $$instance))(local.get $a)(local.get $b))
   ;;@ cascadingconstructor/CascadingConstructor.java:22:10
@@ -93,7 +73,7 @@
  (local $$instance (ref null $cascadingconstructor.CascadingConstructor))
  (block
   ;;@ cascadingconstructor/CascadingConstructor.java:27:9
-  (local.set $$instance (struct.new $cascadingconstructor.CascadingConstructor (ref.as_non_null (global.get $cascadingconstructor.CascadingConstructor.vtable)) (ref.as_non_null (global.get $cascadingconstructor.CascadingConstructor.itable)) (i32.const 0) (local.get $a) (i32.const 0)))
+  (local.set $$instance (struct.new $cascadingconstructor.CascadingConstructor (ref.as_non_null (global.get $cascadingconstructor.CascadingConstructor.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (local.get $a) (i32.const 0)))
   ;;@ cascadingconstructor/CascadingConstructor.java:27:9
   (call $$ctor__int__void_$p_cascadingconstructor_CascadingConstructor@cascadingconstructor.CascadingConstructor (ref.as_non_null (local.get $$instance))(local.get $a))
   ;;@ cascadingconstructor/CascadingConstructor.java:27:9

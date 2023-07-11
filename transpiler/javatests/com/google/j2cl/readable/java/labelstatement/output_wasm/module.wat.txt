@@ -1,7 +1,7 @@
  ;;; Code for labelstatement.LabeledStatement [type definition]
  (type $labelstatement.LabeledStatement (struct_subtype
   (field $vtable (ref $labelstatement.LabeledStatement.vtable))
-  (field $itable (ref $labelstatement.LabeledStatement.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -18,15 +18,6 @@
   (field $m_switchStatement__void (ref $function.m_switchStatement__void))
   $java.lang.Object.vtable)
  )
- (type $labelstatement.LabeledStatement.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for labelstatement.LabeledStatement [vtable.init]
 (global $labelstatement.LabeledStatement.vtable (ref $labelstatement.LabeledStatement.vtable)
@@ -44,17 +35,6 @@
  )
 )
 
-;;; Code for labelstatement.LabeledStatement [itable.init]
-(global $labelstatement.LabeledStatement.itable (ref $labelstatement.LabeledStatement.itable) (struct.new $labelstatement.LabeledStatement.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for labelstatement.LabeledStatement [static fields]
 (global $f_$initialized__labelstatement_LabeledStatement (mut i32) (i32.const 0))
 (global $f_$class__labelstatement_LabeledStatement (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
@@ -69,7 +49,7 @@
  (local $$instance (ref null $labelstatement.LabeledStatement))
  (block
   ;;@ labelstatement/LabeledStatement.java:18:13
-  (local.set $$instance (struct.new $labelstatement.LabeledStatement (ref.as_non_null (global.get $labelstatement.LabeledStatement.vtable)) (ref.as_non_null (global.get $labelstatement.LabeledStatement.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $labelstatement.LabeledStatement (ref.as_non_null (global.get $labelstatement.LabeledStatement.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ labelstatement/LabeledStatement.java:18:13
   (call $$ctor__void_$p_labelstatement_LabeledStatement@labelstatement.LabeledStatement (ref.as_non_null (local.get $$instance)))
   ;;@ labelstatement/LabeledStatement.java:18:13

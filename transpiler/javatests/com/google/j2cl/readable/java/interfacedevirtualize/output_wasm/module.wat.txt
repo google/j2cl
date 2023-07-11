@@ -1,7 +1,7 @@
  ;;; Code for interfacedevirtualize.InterfaceDevirtualize [type definition]
  (type $interfacedevirtualize.InterfaceDevirtualize (struct_subtype
   (field $vtable (ref $interfacedevirtualize.InterfaceDevirtualize.vtable))
-  (field $itable (ref $interfacedevirtualize.InterfaceDevirtualize.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -21,15 +21,6 @@
   (field $m_compare3__java_lang_Integer__java_lang_Integer__int (ref $function.m_compare3__java_lang_Integer__java_lang_Integer__int))
   $java.lang.Object.vtable)
  )
- (type $interfacedevirtualize.InterfaceDevirtualize.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for interfacedevirtualize.InterfaceDevirtualize [vtable.init]
 (global $interfacedevirtualize.InterfaceDevirtualize.vtable (ref $interfacedevirtualize.InterfaceDevirtualize.vtable)
@@ -50,17 +41,6 @@
  )
 )
 
-;;; Code for interfacedevirtualize.InterfaceDevirtualize [itable.init]
-(global $interfacedevirtualize.InterfaceDevirtualize.itable (ref $interfacedevirtualize.InterfaceDevirtualize.itable) (struct.new $interfacedevirtualize.InterfaceDevirtualize.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for interfacedevirtualize.InterfaceDevirtualize [static fields]
 (global $f_$initialized__interfacedevirtualize_InterfaceDevirtualize (mut i32) (i32.const 0))
 (global $f_$class__interfacedevirtualize_InterfaceDevirtualize (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
@@ -75,7 +55,7 @@
  (local $$instance (ref null $interfacedevirtualize.InterfaceDevirtualize))
  (block
   ;;@ interfacedevirtualize/InterfaceDevirtualize.java:18:13
-  (local.set $$instance (struct.new $interfacedevirtualize.InterfaceDevirtualize (ref.as_non_null (global.get $interfacedevirtualize.InterfaceDevirtualize.vtable)) (ref.as_non_null (global.get $interfacedevirtualize.InterfaceDevirtualize.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $interfacedevirtualize.InterfaceDevirtualize (ref.as_non_null (global.get $interfacedevirtualize.InterfaceDevirtualize.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ interfacedevirtualize/InterfaceDevirtualize.java:18:13
   (call $$ctor__void_$p_interfacedevirtualize_InterfaceDevirtualize@interfacedevirtualize.InterfaceDevirtualize (ref.as_non_null (local.get $$instance)))
   ;;@ interfacedevirtualize/InterfaceDevirtualize.java:18:13

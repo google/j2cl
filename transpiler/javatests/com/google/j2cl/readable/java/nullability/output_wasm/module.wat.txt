@@ -174,7 +174,7 @@
  ;;; Code for nullability.Nullability [type definition]
  (type $nullability.Nullability (struct_subtype
   (field $vtable (ref $nullability.Nullability.vtable))
-  (field $itable (ref $nullability.Nullability.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_f1__nullability_Nullability_ (ref null $java.lang.String))
   (field $f_f2__nullability_Nullability_ (ref null $java.lang.String))
@@ -203,20 +203,11 @@
   (field $m_m4__nullability_Nullability_MyFunction__void (ref $function.m_m4__nullability_Nullability_MyFunction__void))
   $java.lang.Object.vtable)
  )
- (type $nullability.Nullability.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for nullability.Nullability.Foo [type definition]
  (type $nullability.Nullability.Foo (struct_subtype
   (field $vtable (ref $nullability.Nullability.Foo.vtable))
-  (field $itable (ref $nullability.Nullability.Foo.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -230,15 +221,6 @@
   (field $m_baz__java_lang_Object_$pp_nullability (ref $function.m_baz__java_lang_Object_$pp_nullability))
   $java.lang.Object.vtable)
  )
- (type $nullability.Nullability.Foo.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for nullability.Nullability.StringComparator [type definition]
  (type $nullability.Nullability.StringComparator (struct_subtype
@@ -272,7 +254,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for nullability.Nullability.NullableStringComparator [type definition]
  (type $nullability.Nullability.NullableStringComparator (struct_subtype
@@ -306,7 +288,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for nullability.Nullability.NullableTemplatedReturnOverride [type definition]
  (type $nullability.Nullability.NullableTemplatedReturnOverride (struct_subtype
@@ -333,12 +315,12 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for nullability.Nullability.ParameterizedDefaultNullability [type definition]
  (type $nullability.Nullability.ParameterizedDefaultNullability (struct_subtype
   (field $vtable (ref $nullability.Nullability.ParameterizedDefaultNullability.vtable))
-  (field $itable (ref $nullability.Nullability.ParameterizedDefaultNullability.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -353,20 +335,11 @@
   (field $m_getDefaultNullability__java_lang_Object_$pp_nullability (ref $function.m_getDefaultNullability__java_lang_Object_$pp_nullability))
   $java.lang.Object.vtable)
  )
- (type $nullability.Nullability.ParameterizedDefaultNullability.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for nullability.Nullability.ParameterizedNullable [type definition]
  (type $nullability.Nullability.ParameterizedNullable (struct_subtype
   (field $vtable (ref $nullability.Nullability.ParameterizedNullable.vtable))
-  (field $itable (ref $nullability.Nullability.ParameterizedNullable.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -381,20 +354,11 @@
   (field $m_getDefaultNullability__java_lang_Object_$pp_nullability (ref $function.m_getDefaultNullability__java_lang_Object_$pp_nullability))
   $java.lang.Object.vtable)
  )
- (type $nullability.Nullability.ParameterizedNullable.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for nullability.Nullability.ParameterizedNonNullable [type definition]
  (type $nullability.Nullability.ParameterizedNonNullable (struct_subtype
   (field $vtable (ref $nullability.Nullability.ParameterizedNonNullable.vtable))
-  (field $itable (ref $nullability.Nullability.ParameterizedNonNullable.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -409,20 +373,11 @@
   (field $m_getDefaultNullability__java_lang_Object_$pp_nullability (ref $function.m_getDefaultNullability__java_lang_Object_$pp_nullability))
   $java.lang.Object.vtable)
  )
- (type $nullability.Nullability.ParameterizedNonNullable.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for nullability.Nullability.NonNullableInsideNullable [type definition]
  (type $nullability.Nullability.NonNullableInsideNullable (struct_subtype
   (field $vtable (ref $nullability.Nullability.NonNullableInsideNullable.vtable))
-  (field $itable (ref $nullability.Nullability.NonNullableInsideNullable.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -435,20 +390,11 @@
   (field $m_nonNullableTest__nullability_Nullability_ParameterizedNonNullable__void_$pp_nullability (ref $function.m_nonNullableTest__nullability_Nullability_ParameterizedNonNullable__void_$pp_nullability))
   $java.lang.Object.vtable)
  )
- (type $nullability.Nullability.NonNullableInsideNullable.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for nullability.Nullability.Recursive [type definition]
  (type $nullability.Nullability.Recursive (struct_subtype
   (field $vtable (ref $nullability.Nullability.Recursive.vtable))
-  (field $itable (ref $nullability.Nullability.Recursive.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -460,20 +406,11 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $nullability.Nullability.Recursive.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for nullability.Nullability.RecursiveNullable [type definition]
  (type $nullability.Nullability.RecursiveNullable (struct_subtype
   (field $vtable (ref $nullability.Nullability.RecursiveNullable.vtable))
-  (field $itable (ref $nullability.Nullability.RecursiveNullable.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -485,20 +422,11 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $nullability.Nullability.RecursiveNullable.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for nullability.Nullability.RecursiveParam [type definition]
  (type $nullability.Nullability.RecursiveParam (struct_subtype
   (field $vtable (ref $nullability.Nullability.RecursiveParam.vtable))
-  (field $itable (ref $nullability.Nullability.RecursiveParam.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -510,20 +438,11 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $nullability.Nullability.RecursiveParam.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for nullability.Nullability.RecursiveNullableParam [type definition]
  (type $nullability.Nullability.RecursiveNullableParam (struct_subtype
   (field $vtable (ref $nullability.Nullability.RecursiveNullableParam.vtable))
-  (field $itable (ref $nullability.Nullability.RecursiveNullableParam.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -535,20 +454,11 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $nullability.Nullability.RecursiveNullableParam.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for nullability.defaultnotnullable.DefaultNotNullable [type definition]
  (type $nullability.defaultnotnullable.DefaultNotNullable (struct_subtype
   (field $vtable (ref $nullability.defaultnotnullable.DefaultNotNullable.vtable))
-  (field $itable (ref $nullability.defaultnotnullable.DefaultNotNullable.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_f1__nullability_defaultnotnullable_DefaultNotNullable_ (ref null $java.lang.String))
   (field $f_f2__nullability_defaultnotnullable_DefaultNotNullable_ (ref null $java.lang.String))
@@ -580,15 +490,6 @@
   (field $m_casts__void (ref $function.m_casts__void))
   $java.lang.Object.vtable)
  )
- (type $nullability.defaultnotnullable.DefaultNotNullable.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface [type definition]
  (type $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface (struct_subtype
@@ -618,12 +519,12 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability [type definition]
  (type $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability (struct_subtype
   (field $vtable (ref $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability.vtable))
-  (field $itable (ref $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_nullable__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
   (field $f_nonNullable__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
@@ -644,20 +545,11 @@
   (field $m_setDefaultNullability__java_lang_Object__void_$pp_nullability_defaultnotnullable (ref $function.m_setDefaultNullability__java_lang_Object__void_$pp_nullability_defaultnotnullable))
   $java.lang.Object.vtable)
  )
- (type $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable [type definition]
  (type $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable (struct_subtype
   (field $vtable (ref $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable.vtable))
-  (field $itable (ref $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_nullable__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNullable (mut (ref null $java.lang.Object)))
   (field $f_nonNullable__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNullable (mut (ref null $java.lang.Object)))
@@ -678,20 +570,11 @@
   (field $m_setDefaultNullability__java_lang_Object__void_$pp_nullability_defaultnotnullable (ref $function.m_setDefaultNullability__java_lang_Object__void_$pp_nullability_defaultnotnullable))
   $java.lang.Object.vtable)
  )
- (type $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable [type definition]
  (type $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable (struct_subtype
   (field $vtable (ref $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable.vtable))
-  (field $itable (ref $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_nullable__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNonNullable (mut (ref null $java.lang.Object)))
   (field $f_nonNullable__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNonNullable (mut (ref null $java.lang.Object)))
@@ -712,20 +595,11 @@
   (field $m_setDefaultNullability__java_lang_Object__void_$pp_nullability_defaultnotnullable (ref $function.m_setDefaultNullability__java_lang_Object__void_$pp_nullability_defaultnotnullable))
   $java.lang.Object.vtable)
  )
- (type $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for nullability.defaultnotnullable.TypeArgumentsInference [type definition]
  (type $nullability.defaultnotnullable.TypeArgumentsInference (struct_subtype
   (field $vtable (ref $nullability.defaultnotnullable.TypeArgumentsInference.vtable))
-  (field $itable (ref $nullability.defaultnotnullable.TypeArgumentsInference.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -737,20 +611,11 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $nullability.defaultnotnullable.TypeArgumentsInference.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for nullability.defaultnotnullable.TypeArgumentsInference.Pair [type definition]
  (type $nullability.defaultnotnullable.TypeArgumentsInference.Pair (struct_subtype
   (field $vtable (ref $nullability.defaultnotnullable.TypeArgumentsInference.Pair.vtable))
-  (field $itable (ref $nullability.defaultnotnullable.TypeArgumentsInference.Pair.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -762,20 +627,11 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $nullability.defaultnotnullable.TypeArgumentsInference.Pair.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for nullability.defaultnullable.DefaultNullable [type definition]
  (type $nullability.defaultnullable.DefaultNullable (struct_subtype
   (field $vtable (ref $nullability.defaultnullable.DefaultNullable.vtable))
-  (field $itable (ref $nullability.defaultnullable.DefaultNullable.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_f1__nullability_defaultnullable_DefaultNullable_ (ref null $java.lang.String))
   (field $f_f2__nullability_defaultnullable_DefaultNullable_ (ref null $java.lang.String))
@@ -807,15 +663,6 @@
   (field $m_casts__void (ref $function.m_casts__void))
   $java.lang.Object.vtable)
  )
- (type $nullability.defaultnullable.DefaultNullable.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for nullability.defaultnullable.DefaultNullable.$LambdaImplementor$1 [type definition]
  (type $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$1 (struct_subtype
@@ -841,7 +688,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for nullability.defaultnullable.DefaultNullable.$LambdaImplementor$2 [type definition]
  (type $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$2 (struct_subtype
@@ -867,7 +714,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for nullability.defaultnullable.DefaultNullable.$LambdaImplementor$3 [type definition]
  (type $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$3 (struct_subtype
@@ -893,12 +740,12 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability [type definition]
  (type $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability (struct_subtype
   (field $vtable (ref $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability.vtable))
-  (field $itable (ref $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_nullable__nullability_defaultnullable_DefaultNullable_ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
   (field $f_nonNullable__nullability_defaultnullable_DefaultNullable_ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
@@ -919,20 +766,11 @@
   (field $m_setDefaultNullability__java_lang_Object__void_$pp_nullability_defaultnullable (ref $function.m_setDefaultNullability__java_lang_Object__void_$pp_nullability_defaultnullable))
   $java.lang.Object.vtable)
  )
- (type $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for nullability.defaultnullable.DefaultNullable.ParameterizedNullable [type definition]
  (type $nullability.defaultnullable.DefaultNullable.ParameterizedNullable (struct_subtype
   (field $vtable (ref $nullability.defaultnullable.DefaultNullable.ParameterizedNullable.vtable))
-  (field $itable (ref $nullability.defaultnullable.DefaultNullable.ParameterizedNullable.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_nullable__nullability_defaultnullable_DefaultNullable_ParameterizedNullable (mut (ref null $java.lang.Object)))
   (field $f_nonNullable__nullability_defaultnullable_DefaultNullable_ParameterizedNullable (mut (ref null $java.lang.Object)))
@@ -953,20 +791,11 @@
   (field $m_setDefaultNullability__java_lang_Object__void_$pp_nullability_defaultnullable (ref $function.m_setDefaultNullability__java_lang_Object__void_$pp_nullability_defaultnullable))
   $java.lang.Object.vtable)
  )
- (type $nullability.defaultnullable.DefaultNullable.ParameterizedNullable.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable [type definition]
  (type $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable (struct_subtype
   (field $vtable (ref $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.vtable))
-  (field $itable (ref $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_nullable__nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable (mut (ref null $java.lang.Object)))
   (field $f_nonNullable__nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable (mut (ref null $java.lang.Object)))
@@ -987,20 +816,11 @@
   (field $m_setDefaultNullability__java_lang_Object__void_$pp_nullability_defaultnullable (ref $function.m_setDefaultNullability__java_lang_Object__void_$pp_nullability_defaultnullable))
   $java.lang.Object.vtable)
  )
- (type $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable [type definition]
  (type $nullability.explicitnotnullable.ExplicitNotNullable (struct_subtype
   (field $vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.vtable))
-  (field $itable (ref $nullability.explicitnotnullable.ExplicitNotNullable.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_f1__nullability_explicitnotnullable_ExplicitNotNullable_ (mut (ref null $java.lang.String)))
   (field $f_f2__nullability_explicitnotnullable_ExplicitNotNullable_ (mut (ref null $java.lang.String)))
@@ -1053,20 +873,11 @@
   (field $m_testDependentWildcards__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters_$pp_nullability_explicitnotnullable (ref $function.m_testDependentWildcards__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters_$pp_nullability_explicitnotnullable))
   $java.lang.Object.vtable)
  )
- (type $nullability.explicitnotnullable.ExplicitNotNullable.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for nullability.explicitnotnullable.DefaultNullable [type definition]
  (type $nullability.explicitnotnullable.DefaultNullable (struct_subtype
   (field $vtable (ref $nullability.explicitnotnullable.DefaultNullable.vtable))
-  (field $itable (ref $nullability.explicitnotnullable.DefaultNullable.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -1078,20 +889,11 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $nullability.explicitnotnullable.DefaultNullable.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for nullability.explicitnotnullable.OuterClass [type definition]
  (type $nullability.explicitnotnullable.OuterClass (struct_subtype
   (field $vtable (ref $nullability.explicitnotnullable.OuterClass.vtable))
-  (field $itable (ref $nullability.explicitnotnullable.OuterClass.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -1103,15 +905,6 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $nullability.explicitnotnullable.OuterClass.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$1 [type definition]
  (type $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$1 (struct_subtype
@@ -1137,7 +930,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$2 [type definition]
  (type $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$2 (struct_subtype
@@ -1163,7 +956,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$3 [type definition]
  (type $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$3 (struct_subtype
@@ -1189,7 +982,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$4 [type definition]
  (type $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$4 (struct_subtype
@@ -1215,7 +1008,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$5 [type definition]
  (type $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$5 (struct_subtype
@@ -1241,7 +1034,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.1 [type definition]
  (type $nullability.explicitnotnullable.ExplicitNotNullable.1 (struct_subtype
@@ -1269,12 +1062,12 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability [type definition]
  (type $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability (struct_subtype
   (field $vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability.vtable))
-  (field $itable (ref $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_nullable__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
   (field $f_nonNullable__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
@@ -1295,20 +1088,11 @@
   (field $m_setDefaultNullability__java_lang_Object__void_$pp_nullability_explicitnotnullable (ref $function.m_setDefaultNullability__java_lang_Object__void_$pp_nullability_explicitnotnullable))
   $java.lang.Object.vtable)
  )
- (type $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable [type definition]
  (type $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable (struct_subtype
   (field $vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable.vtable))
-  (field $itable (ref $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_nullable__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNullable (mut (ref null $java.lang.Object)))
   (field $f_nonNullable__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNullable (mut (ref null $java.lang.Object)))
@@ -1329,20 +1113,11 @@
   (field $m_setDefaultNullability__java_lang_Object__void_$pp_nullability_explicitnotnullable (ref $function.m_setDefaultNullability__java_lang_Object__void_$pp_nullability_explicitnotnullable))
   $java.lang.Object.vtable)
  )
- (type $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable [type definition]
  (type $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable (struct_subtype
   (field $vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable.vtable))
-  (field $itable (ref $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_nullable__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNonNullable (mut (ref null $java.lang.Object)))
   (field $f_nonNullable__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNonNullable (mut (ref null $java.lang.Object)))
@@ -1363,20 +1138,11 @@
   (field $m_setDefaultNullability__java_lang_Object__void_$pp_nullability_explicitnotnullable (ref $function.m_setDefaultNullability__java_lang_Object__void_$pp_nullability_explicitnotnullable))
   $java.lang.Object.vtable)
  )
- (type $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters [type definition]
  (type $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters (struct_subtype
   (field $vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters.vtable))
-  (field $itable (ref $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -1389,20 +1155,11 @@
   (field $m_getThis__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters_$pp_nullability_explicitnotnullable (ref $function.m_getThis__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters_$pp_nullability_explicitnotnullable))
   $java.lang.Object.vtable)
  )
- (type $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for nullability.explicitnotnullable.OuterClass.InnerClass [type definition]
  (type $nullability.explicitnotnullable.OuterClass.InnerClass (struct_subtype
   (field $vtable (ref $nullability.explicitnotnullable.OuterClass.InnerClass.vtable))
-  (field $itable (ref $nullability.explicitnotnullable.OuterClass.InnerClass.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__nullability_explicitnotnullable_OuterClass_InnerClass (ref null $nullability.explicitnotnullable.OuterClass))
   $java.lang.Object)
@@ -1415,15 +1172,6 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $nullability.explicitnotnullable.OuterClass.InnerClass.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for nullability.Nullability.RecursiveChild [type definition]
  (type $nullability.Nullability.RecursiveChild (struct_subtype
@@ -1448,7 +1196,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $nullability.Nullability.Recursive.itable))
+  $itable))
 
  ;;; Code for nullability.Nullability.RecursiveNullableChild [type definition]
  (type $nullability.Nullability.RecursiveNullableChild (struct_subtype
@@ -1473,12 +1221,12 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $nullability.Nullability.RecursiveNullable.itable))
+  $itable))
 
  ;;; Code for nullability.explicitnotnullable.OuterClass.1 [type definition]
  (type $nullability.explicitnotnullable.OuterClass.1 (struct_subtype
   (field $vtable (ref $nullability.explicitnotnullable.OuterClass.1.vtable))
-  (field $itable (ref $nullability.explicitnotnullable.OuterClass.1.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__nullability_explicitnotnullable_OuterClass_InnerClass (ref null $nullability.explicitnotnullable.OuterClass))
   (field $$outer_this__nullability_explicitnotnullable_OuterClass_1 (ref null $nullability.explicitnotnullable.OuterClass))
@@ -1492,20 +1240,11 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $nullability.explicitnotnullable.OuterClass.InnerClass.vtable)
  )
- (type $nullability.explicitnotnullable.OuterClass.1.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $nullability.explicitnotnullable.OuterClass.InnerClass.itable))
 
  ;;; Code for nullability.explicitnotnullable.OuterClass.2 [type definition]
  (type $nullability.explicitnotnullable.OuterClass.2 (struct_subtype
   (field $vtable (ref $nullability.explicitnotnullable.OuterClass.2.vtable))
-  (field $itable (ref $nullability.explicitnotnullable.OuterClass.2.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__nullability_explicitnotnullable_OuterClass_InnerClass (ref null $nullability.explicitnotnullable.OuterClass))
   (field $$outer_this__nullability_explicitnotnullable_OuterClass_2 (ref null $nullability.explicitnotnullable.OuterClass))
@@ -1519,15 +1258,6 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $nullability.explicitnotnullable.OuterClass.InnerClass.vtable)
  )
- (type $nullability.explicitnotnullable.OuterClass.2.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $nullability.explicitnotnullable.OuterClass.InnerClass.itable))
 
 ;;; Code for nullability.Nullability [vtable.init]
 (global $nullability.Nullability.vtable (ref $nullability.Nullability.vtable)
@@ -1544,17 +1274,6 @@
  )
 )
 
-;;; Code for nullability.Nullability [itable.init]
-(global $nullability.Nullability.itable (ref $nullability.Nullability.itable) (struct.new $nullability.Nullability.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for nullability.Nullability.Foo [vtable.init]
 (global $nullability.Nullability.Foo.vtable (ref $nullability.Nullability.Foo.vtable)
  (struct.new $nullability.Nullability.Foo.vtable
@@ -1567,17 +1286,6 @@
   (ref.func $m_baz__java_lang_Object_$pp_nullability@nullability.Nullability.Foo)
  )
 )
-
-;;; Code for nullability.Nullability.Foo [itable.init]
-(global $nullability.Nullability.Foo.itable (ref $nullability.Nullability.Foo.itable) (struct.new $nullability.Nullability.Foo.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for nullability.Nullability.StringComparator [vtable.init]
 (global $nullability.Nullability.StringComparator.vtable (ref $nullability.Nullability.StringComparator.vtable)
@@ -1701,17 +1409,6 @@
  )
 )
 
-;;; Code for nullability.Nullability.ParameterizedDefaultNullability [itable.init]
-(global $nullability.Nullability.ParameterizedDefaultNullability.itable (ref $nullability.Nullability.ParameterizedDefaultNullability.itable) (struct.new $nullability.Nullability.ParameterizedDefaultNullability.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for nullability.Nullability.ParameterizedNullable [vtable.init]
 (global $nullability.Nullability.ParameterizedNullable.vtable (ref $nullability.Nullability.ParameterizedNullable.vtable)
  (struct.new $nullability.Nullability.ParameterizedNullable.vtable
@@ -1725,17 +1422,6 @@
   (ref.func $m_getDefaultNullability__java_lang_Object_$pp_nullability@nullability.Nullability.ParameterizedNullable)
  )
 )
-
-;;; Code for nullability.Nullability.ParameterizedNullable [itable.init]
-(global $nullability.Nullability.ParameterizedNullable.itable (ref $nullability.Nullability.ParameterizedNullable.itable) (struct.new $nullability.Nullability.ParameterizedNullable.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for nullability.Nullability.ParameterizedNonNullable [vtable.init]
 (global $nullability.Nullability.ParameterizedNonNullable.vtable (ref $nullability.Nullability.ParameterizedNonNullable.vtable)
@@ -1751,17 +1437,6 @@
  )
 )
 
-;;; Code for nullability.Nullability.ParameterizedNonNullable [itable.init]
-(global $nullability.Nullability.ParameterizedNonNullable.itable (ref $nullability.Nullability.ParameterizedNonNullable.itable) (struct.new $nullability.Nullability.ParameterizedNonNullable.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for nullability.Nullability.NonNullableInsideNullable [vtable.init]
 (global $nullability.Nullability.NonNullableInsideNullable.vtable (ref $nullability.Nullability.NonNullableInsideNullable.vtable)
  (struct.new $nullability.Nullability.NonNullableInsideNullable.vtable
@@ -1774,17 +1449,6 @@
  )
 )
 
-;;; Code for nullability.Nullability.NonNullableInsideNullable [itable.init]
-(global $nullability.Nullability.NonNullableInsideNullable.itable (ref $nullability.Nullability.NonNullableInsideNullable.itable) (struct.new $nullability.Nullability.NonNullableInsideNullable.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for nullability.Nullability.Recursive [vtable.init]
 (global $nullability.Nullability.Recursive.vtable (ref $nullability.Nullability.Recursive.vtable)
  (struct.new $nullability.Nullability.Recursive.vtable
@@ -1796,17 +1460,6 @@
  )
 )
 
-;;; Code for nullability.Nullability.Recursive [itable.init]
-(global $nullability.Nullability.Recursive.itable (ref $nullability.Nullability.Recursive.itable) (struct.new $nullability.Nullability.Recursive.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for nullability.Nullability.RecursiveNullable [vtable.init]
 (global $nullability.Nullability.RecursiveNullable.vtable (ref $nullability.Nullability.RecursiveNullable.vtable)
  (struct.new $nullability.Nullability.RecursiveNullable.vtable
@@ -1817,17 +1470,6 @@
   (ref.func $$getClassImpl__java_lang_Class@nullability.Nullability.RecursiveNullable)
  )
 )
-
-;;; Code for nullability.Nullability.RecursiveNullable [itable.init]
-(global $nullability.Nullability.RecursiveNullable.itable (ref $nullability.Nullability.RecursiveNullable.itable) (struct.new $nullability.Nullability.RecursiveNullable.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for nullability.Nullability.RecursiveChild [vtable.init]
 (global $nullability.Nullability.RecursiveChild.vtable (ref $nullability.Nullability.RecursiveChild.vtable)
@@ -1886,17 +1528,6 @@
  )
 )
 
-;;; Code for nullability.Nullability.RecursiveParam [itable.init]
-(global $nullability.Nullability.RecursiveParam.itable (ref $nullability.Nullability.RecursiveParam.itable) (struct.new $nullability.Nullability.RecursiveParam.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for nullability.Nullability.RecursiveNullableParam [vtable.init]
 (global $nullability.Nullability.RecursiveNullableParam.vtable (ref $nullability.Nullability.RecursiveNullableParam.vtable)
  (struct.new $nullability.Nullability.RecursiveNullableParam.vtable
@@ -1907,17 +1538,6 @@
   (ref.func $$getClassImpl__java_lang_Class@nullability.Nullability.RecursiveNullableParam)
  )
 )
-
-;;; Code for nullability.Nullability.RecursiveNullableParam [itable.init]
-(global $nullability.Nullability.RecursiveNullableParam.itable (ref $nullability.Nullability.RecursiveNullableParam.itable) (struct.new $nullability.Nullability.RecursiveNullableParam.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable [vtable.init]
 (global $nullability.defaultnotnullable.DefaultNotNullable.vtable (ref $nullability.defaultnotnullable.DefaultNotNullable.vtable)
@@ -1935,17 +1555,6 @@
   (ref.func $m_casts__void@nullability.defaultnotnullable.DefaultNotNullable)
  )
 )
-
-;;; Code for nullability.defaultnotnullable.DefaultNotNullable [itable.init]
-(global $nullability.defaultnotnullable.DefaultNotNullable.itable (ref $nullability.defaultnotnullable.DefaultNotNullable.itable) (struct.new $nullability.defaultnotnullable.DefaultNotNullable.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface [vtable.init]
 (global $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.vtable (ref $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.vtable)
@@ -1993,17 +1602,6 @@
  )
 )
 
-;;; Code for nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability [itable.init]
-(global $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability.itable (ref $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability.itable) (struct.new $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable [vtable.init]
 (global $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable.vtable (ref $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable.vtable)
  (struct.new $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable.vtable
@@ -2020,17 +1618,6 @@
   (ref.func $m_setDefaultNullability__java_lang_Object__void_$pp_nullability_defaultnotnullable@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable)
  )
 )
-
-;;; Code for nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable [itable.init]
-(global $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable.itable (ref $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable.itable) (struct.new $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable [vtable.init]
 (global $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable.vtable (ref $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable.vtable)
@@ -2049,17 +1636,6 @@
  )
 )
 
-;;; Code for nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable [itable.init]
-(global $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable.itable (ref $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable.itable) (struct.new $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for nullability.defaultnotnullable.TypeArgumentsInference [vtable.init]
 (global $nullability.defaultnotnullable.TypeArgumentsInference.vtable (ref $nullability.defaultnotnullable.TypeArgumentsInference.vtable)
  (struct.new $nullability.defaultnotnullable.TypeArgumentsInference.vtable
@@ -2071,17 +1647,6 @@
  )
 )
 
-;;; Code for nullability.defaultnotnullable.TypeArgumentsInference [itable.init]
-(global $nullability.defaultnotnullable.TypeArgumentsInference.itable (ref $nullability.defaultnotnullable.TypeArgumentsInference.itable) (struct.new $nullability.defaultnotnullable.TypeArgumentsInference.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for nullability.defaultnotnullable.TypeArgumentsInference.Pair [vtable.init]
 (global $nullability.defaultnotnullable.TypeArgumentsInference.Pair.vtable (ref $nullability.defaultnotnullable.TypeArgumentsInference.Pair.vtable)
  (struct.new $nullability.defaultnotnullable.TypeArgumentsInference.Pair.vtable
@@ -2092,17 +1657,6 @@
   (ref.func $$getClassImpl__java_lang_Class@nullability.defaultnotnullable.TypeArgumentsInference.Pair)
  )
 )
-
-;;; Code for nullability.defaultnotnullable.TypeArgumentsInference.Pair [itable.init]
-(global $nullability.defaultnotnullable.TypeArgumentsInference.Pair.itable (ref $nullability.defaultnotnullable.TypeArgumentsInference.Pair.itable) (struct.new $nullability.defaultnotnullable.TypeArgumentsInference.Pair.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for nullability.defaultnullable.DefaultNullable [vtable.init]
 (global $nullability.defaultnullable.DefaultNullable.vtable (ref $nullability.defaultnullable.DefaultNullable.vtable)
@@ -2120,17 +1674,6 @@
   (ref.func $m_casts__void@nullability.defaultnullable.DefaultNullable)
  )
 )
-
-;;; Code for nullability.defaultnullable.DefaultNullable [itable.init]
-(global $nullability.defaultnullable.DefaultNullable.itable (ref $nullability.defaultnullable.DefaultNullable.itable) (struct.new $nullability.defaultnullable.DefaultNullable.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for nullability.defaultnullable.DefaultNullable.$LambdaImplementor$1 [vtable.init]
 (global $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$1.vtable (ref $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$1.vtable)
@@ -2224,17 +1767,6 @@
  )
 )
 
-;;; Code for nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability [itable.init]
-(global $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability.itable (ref $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability.itable) (struct.new $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for nullability.defaultnullable.DefaultNullable.ParameterizedNullable [vtable.init]
 (global $nullability.defaultnullable.DefaultNullable.ParameterizedNullable.vtable (ref $nullability.defaultnullable.DefaultNullable.ParameterizedNullable.vtable)
  (struct.new $nullability.defaultnullable.DefaultNullable.ParameterizedNullable.vtable
@@ -2252,17 +1784,6 @@
  )
 )
 
-;;; Code for nullability.defaultnullable.DefaultNullable.ParameterizedNullable [itable.init]
-(global $nullability.defaultnullable.DefaultNullable.ParameterizedNullable.itable (ref $nullability.defaultnullable.DefaultNullable.ParameterizedNullable.itable) (struct.new $nullability.defaultnullable.DefaultNullable.ParameterizedNullable.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable [vtable.init]
 (global $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.vtable (ref $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.vtable)
  (struct.new $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.vtable
@@ -2279,17 +1800,6 @@
   (ref.func $m_setDefaultNullability__java_lang_Object__void_$pp_nullability_defaultnullable@nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable)
  )
 )
-
-;;; Code for nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable [itable.init]
-(global $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.itable (ref $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.itable) (struct.new $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable [vtable.init]
 (global $nullability.explicitnotnullable.ExplicitNotNullable.vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.vtable)
@@ -2310,17 +1820,6 @@
  )
 )
 
-;;; Code for nullability.explicitnotnullable.ExplicitNotNullable [itable.init]
-(global $nullability.explicitnotnullable.ExplicitNotNullable.itable (ref $nullability.explicitnotnullable.ExplicitNotNullable.itable) (struct.new $nullability.explicitnotnullable.ExplicitNotNullable.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for nullability.explicitnotnullable.DefaultNullable [vtable.init]
 (global $nullability.explicitnotnullable.DefaultNullable.vtable (ref $nullability.explicitnotnullable.DefaultNullable.vtable)
  (struct.new $nullability.explicitnotnullable.DefaultNullable.vtable
@@ -2332,17 +1831,6 @@
  )
 )
 
-;;; Code for nullability.explicitnotnullable.DefaultNullable [itable.init]
-(global $nullability.explicitnotnullable.DefaultNullable.itable (ref $nullability.explicitnotnullable.DefaultNullable.itable) (struct.new $nullability.explicitnotnullable.DefaultNullable.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for nullability.explicitnotnullable.OuterClass [vtable.init]
 (global $nullability.explicitnotnullable.OuterClass.vtable (ref $nullability.explicitnotnullable.OuterClass.vtable)
  (struct.new $nullability.explicitnotnullable.OuterClass.vtable
@@ -2353,17 +1841,6 @@
   (ref.func $$getClassImpl__java_lang_Class@nullability.explicitnotnullable.OuterClass)
  )
 )
-
-;;; Code for nullability.explicitnotnullable.OuterClass [itable.init]
-(global $nullability.explicitnotnullable.OuterClass.itable (ref $nullability.explicitnotnullable.OuterClass.itable) (struct.new $nullability.explicitnotnullable.OuterClass.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$1 [vtable.init]
 (global $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$1.vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$1.vtable)
@@ -2533,17 +2010,6 @@
  )
 )
 
-;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability [itable.init]
-(global $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability.itable (ref $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability.itable) (struct.new $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable [vtable.init]
 (global $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable.vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable.vtable)
  (struct.new $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable.vtable
@@ -2560,17 +2026,6 @@
   (ref.func $m_setDefaultNullability__java_lang_Object__void_$pp_nullability_explicitnotnullable@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable)
  )
 )
-
-;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable [itable.init]
-(global $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable.itable (ref $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable.itable) (struct.new $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable [vtable.init]
 (global $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable.vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable.vtable)
@@ -2589,17 +2044,6 @@
  )
 )
 
-;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable [itable.init]
-(global $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable.itable (ref $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable.itable) (struct.new $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters [vtable.init]
 (global $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters.vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters.vtable)
  (struct.new $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters.vtable
@@ -2612,17 +2056,6 @@
  )
 )
 
-;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters [itable.init]
-(global $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters.itable (ref $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters.itable) (struct.new $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for nullability.explicitnotnullable.OuterClass.1 [vtable.init]
 (global $nullability.explicitnotnullable.OuterClass.1.vtable (ref $nullability.explicitnotnullable.OuterClass.1.vtable)
  (struct.new $nullability.explicitnotnullable.OuterClass.1.vtable
@@ -2633,17 +2066,6 @@
   (ref.func $$getClassImpl__java_lang_Class@nullability.explicitnotnullable.OuterClass.1)
  )
 )
-
-;;; Code for nullability.explicitnotnullable.OuterClass.1 [itable.init]
-(global $nullability.explicitnotnullable.OuterClass.1.itable (ref $nullability.explicitnotnullable.OuterClass.1.itable) (struct.new $nullability.explicitnotnullable.OuterClass.1.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for nullability.explicitnotnullable.OuterClass.2 [vtable.init]
 (global $nullability.explicitnotnullable.OuterClass.2.vtable (ref $nullability.explicitnotnullable.OuterClass.2.vtable)
@@ -2656,17 +2078,6 @@
  )
 )
 
-;;; Code for nullability.explicitnotnullable.OuterClass.2 [itable.init]
-(global $nullability.explicitnotnullable.OuterClass.2.itable (ref $nullability.explicitnotnullable.OuterClass.2.itable) (struct.new $nullability.explicitnotnullable.OuterClass.2.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for nullability.explicitnotnullable.OuterClass.InnerClass [vtable.init]
 (global $nullability.explicitnotnullable.OuterClass.InnerClass.vtable (ref $nullability.explicitnotnullable.OuterClass.InnerClass.vtable)
  (struct.new $nullability.explicitnotnullable.OuterClass.InnerClass.vtable
@@ -2677,17 +2088,6 @@
   (ref.func $$getClassImpl__java_lang_Class@nullability.explicitnotnullable.OuterClass.InnerClass)
  )
 )
-
-;;; Code for nullability.explicitnotnullable.OuterClass.InnerClass [itable.init]
-(global $nullability.explicitnotnullable.OuterClass.InnerClass.itable (ref $nullability.explicitnotnullable.OuterClass.InnerClass.itable) (struct.new $nullability.explicitnotnullable.OuterClass.InnerClass.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for nullability.Nullability [static fields]
 (global $f_$initialized__nullability_Nullability (mut i32) (i32.const 0))
@@ -4500,7 +3900,7 @@
  (local $$instance (ref null $nullability.Nullability))
  (block
   ;;@ nullability/Nullability.java:47:9
-  (local.set $$instance (struct.new $nullability.Nullability (ref.as_non_null (global.get $nullability.Nullability.vtable)) (ref.as_non_null (global.get $nullability.Nullability.itable)) (i32.const 0) (call $function.no.side.effects.$getString_|Hello|__java_lang_String (ref.func $$getString_|Hello|__java_lang_String@nullability.Nullability) ) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $nullability.Nullability (ref.as_non_null (global.get $nullability.Nullability.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (call $function.no.side.effects.$getString_|Hello|__java_lang_String (ref.func $$getString_|Hello|__java_lang_String@nullability.Nullability) ) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ nullability/Nullability.java:47:9
   (call $$ctor__java_lang_String__void_$p_nullability_Nullability@nullability.Nullability (ref.as_non_null (local.get $$instance))(local.get $a))
   ;;@ nullability/Nullability.java:47:9
@@ -5025,7 +4425,7 @@
  (local $$instance (ref null $nullability.Nullability.Foo))
  (block
   ;;@ nullability/Nullability.java:67:15
-  (local.set $$instance (struct.new $nullability.Nullability.Foo (ref.as_non_null (global.get $nullability.Nullability.Foo.vtable)) (ref.as_non_null (global.get $nullability.Nullability.Foo.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $nullability.Nullability.Foo (ref.as_non_null (global.get $nullability.Nullability.Foo.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ nullability/Nullability.java:67:15
   (call $$ctor__void_$p_nullability_Nullability_Foo@nullability.Nullability.Foo (ref.as_non_null (local.get $$instance)))
   ;;@ nullability/Nullability.java:67:15
@@ -5764,7 +5164,7 @@
  (local $$instance (ref null $nullability.Nullability.ParameterizedDefaultNullability))
  (block
   ;;@ nullability/Nullability.java:118:15
-  (local.set $$instance (struct.new $nullability.Nullability.ParameterizedDefaultNullability (ref.as_non_null (global.get $nullability.Nullability.ParameterizedDefaultNullability.vtable)) (ref.as_non_null (global.get $nullability.Nullability.ParameterizedDefaultNullability.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $nullability.Nullability.ParameterizedDefaultNullability (ref.as_non_null (global.get $nullability.Nullability.ParameterizedDefaultNullability.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ nullability/Nullability.java:118:15
   (call $$ctor__void_$p_nullability_Nullability_ParameterizedDefaultNullability@nullability.Nullability.ParameterizedDefaultNullability (ref.as_non_null (local.get $$instance)))
   ;;@ nullability/Nullability.java:118:15
@@ -5896,7 +5296,7 @@
  (local $$instance (ref null $nullability.Nullability.ParameterizedNullable))
  (block
   ;;@ nullability/Nullability.java:133:15
-  (local.set $$instance (struct.new $nullability.Nullability.ParameterizedNullable (ref.as_non_null (global.get $nullability.Nullability.ParameterizedNullable.vtable)) (ref.as_non_null (global.get $nullability.Nullability.ParameterizedNullable.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $nullability.Nullability.ParameterizedNullable (ref.as_non_null (global.get $nullability.Nullability.ParameterizedNullable.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ nullability/Nullability.java:133:15
   (call $$ctor__void_$p_nullability_Nullability_ParameterizedNullable@nullability.Nullability.ParameterizedNullable (ref.as_non_null (local.get $$instance)))
   ;;@ nullability/Nullability.java:133:15
@@ -6028,7 +5428,7 @@
  (local $$instance (ref null $nullability.Nullability.ParameterizedNonNullable))
  (block
   ;;@ nullability/Nullability.java:148:15
-  (local.set $$instance (struct.new $nullability.Nullability.ParameterizedNonNullable (ref.as_non_null (global.get $nullability.Nullability.ParameterizedNonNullable.vtable)) (ref.as_non_null (global.get $nullability.Nullability.ParameterizedNonNullable.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $nullability.Nullability.ParameterizedNonNullable (ref.as_non_null (global.get $nullability.Nullability.ParameterizedNonNullable.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ nullability/Nullability.java:148:15
   (call $$ctor__void_$p_nullability_Nullability_ParameterizedNonNullable@nullability.Nullability.ParameterizedNonNullable (ref.as_non_null (local.get $$instance)))
   ;;@ nullability/Nullability.java:148:15
@@ -6160,7 +5560,7 @@
  (local $$instance (ref null $nullability.Nullability.NonNullableInsideNullable))
  (block
   ;;@ nullability/Nullability.java:163:15
-  (local.set $$instance (struct.new $nullability.Nullability.NonNullableInsideNullable (ref.as_non_null (global.get $nullability.Nullability.NonNullableInsideNullable.vtable)) (ref.as_non_null (global.get $nullability.Nullability.NonNullableInsideNullable.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $nullability.Nullability.NonNullableInsideNullable (ref.as_non_null (global.get $nullability.Nullability.NonNullableInsideNullable.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ nullability/Nullability.java:163:15
   (call $$ctor__void_$p_nullability_Nullability_NonNullableInsideNullable@nullability.Nullability.NonNullableInsideNullable (ref.as_non_null (local.get $$instance)))
   ;;@ nullability/Nullability.java:163:15
@@ -6259,7 +5659,7 @@
  (local $$instance (ref null $nullability.Nullability.Recursive))
  (block
   ;;@ nullability/Nullability.java:234:15
-  (local.set $$instance (struct.new $nullability.Nullability.Recursive (ref.as_non_null (global.get $nullability.Nullability.Recursive.vtable)) (ref.as_non_null (global.get $nullability.Nullability.Recursive.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $nullability.Nullability.Recursive (ref.as_non_null (global.get $nullability.Nullability.Recursive.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ nullability/Nullability.java:234:15
   (call $$ctor__void_$p_nullability_Nullability_Recursive@nullability.Nullability.Recursive (ref.as_non_null (local.get $$instance)))
   ;;@ nullability/Nullability.java:234:15
@@ -6345,7 +5745,7 @@
  (local $$instance (ref null $nullability.Nullability.RecursiveNullable))
  (block
   ;;@ nullability/Nullability.java:236:15
-  (local.set $$instance (struct.new $nullability.Nullability.RecursiveNullable (ref.as_non_null (global.get $nullability.Nullability.RecursiveNullable.vtable)) (ref.as_non_null (global.get $nullability.Nullability.RecursiveNullable.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $nullability.Nullability.RecursiveNullable (ref.as_non_null (global.get $nullability.Nullability.RecursiveNullable.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ nullability/Nullability.java:236:15
   (call $$ctor__void_$p_nullability_Nullability_RecursiveNullable@nullability.Nullability.RecursiveNullable (ref.as_non_null (local.get $$instance)))
   ;;@ nullability/Nullability.java:236:15
@@ -6431,7 +5831,7 @@
  (local $$instance (ref null $nullability.Nullability.RecursiveParam))
  (block
   ;;@ nullability/Nullability.java:243:15
-  (local.set $$instance (struct.new $nullability.Nullability.RecursiveParam (ref.as_non_null (global.get $nullability.Nullability.RecursiveParam.vtable)) (ref.as_non_null (global.get $nullability.Nullability.RecursiveParam.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $nullability.Nullability.RecursiveParam (ref.as_non_null (global.get $nullability.Nullability.RecursiveParam.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ nullability/Nullability.java:243:15
   (call $$ctor__void_$p_nullability_Nullability_RecursiveParam@nullability.Nullability.RecursiveParam (ref.as_non_null (local.get $$instance)))
   ;;@ nullability/Nullability.java:243:15
@@ -6517,7 +5917,7 @@
  (local $$instance (ref null $nullability.Nullability.RecursiveNullableParam))
  (block
   ;;@ nullability/Nullability.java:245:15
-  (local.set $$instance (struct.new $nullability.Nullability.RecursiveNullableParam (ref.as_non_null (global.get $nullability.Nullability.RecursiveNullableParam.vtable)) (ref.as_non_null (global.get $nullability.Nullability.RecursiveNullableParam.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $nullability.Nullability.RecursiveNullableParam (ref.as_non_null (global.get $nullability.Nullability.RecursiveNullableParam.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ nullability/Nullability.java:245:15
   (call $$ctor__void_$p_nullability_Nullability_RecursiveNullableParam@nullability.Nullability.RecursiveNullableParam (ref.as_non_null (local.get $$instance)))
   ;;@ nullability/Nullability.java:245:15
@@ -6603,7 +6003,7 @@
  (local $$instance (ref null $nullability.defaultnotnullable.DefaultNotNullable))
  (block
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:43:9
-  (local.set $$instance (struct.new $nullability.defaultnotnullable.DefaultNotNullable (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.vtable)) (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.itable)) (i32.const 0) (call $function.no.side.effects.$getString_|Hello|__java_lang_String (ref.func $$getString_|Hello|__java_lang_String@nullability.Nullability) ) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (ref.null $java.lang.Void) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $nullability.defaultnotnullable.DefaultNotNullable (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (call $function.no.side.effects.$getString_|Hello|__java_lang_String (ref.func $$getString_|Hello|__java_lang_String@nullability.Nullability) ) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (ref.null $java.lang.Void) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:43:9
   (call $$ctor__void_$p_nullability_defaultnotnullable_DefaultNotNullable@nullability.defaultnotnullable.DefaultNotNullable (ref.as_non_null (local.get $$instance)))
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:43:9
@@ -7660,7 +7060,7 @@
  (local $$instance (ref null $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability))
  (block
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:104:4
-  (local.set $$instance (struct.new $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability.vtable)) (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:104:4
   (call $$ctor__java_lang_Object__void_$p_nullability_defaultnotnullable_DefaultNotNullable_ParameterizedDefaultNullability@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability (ref.as_non_null (local.get $$instance))(local.get $n))
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:104:4
@@ -7837,7 +7237,7 @@
  (local $$instance (ref null $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable))
  (block
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:134:4
-  (local.set $$instance (struct.new $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable.vtable)) (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:134:4
   (call $$ctor__java_lang_Object__void_$p_nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNullable@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable (ref.as_non_null (local.get $$instance))(local.get $n))
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:134:4
@@ -8014,7 +7414,7 @@
  (local $$instance (ref null $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable))
  (block
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:164:4
-  (local.set $$instance (struct.new $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable.vtable)) (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:164:4
   (call $$ctor__java_lang_Object__void_$p_nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNonNullable@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable (ref.as_non_null (local.get $$instance))(local.get $n))
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:164:4
@@ -8190,7 +7590,7 @@
  (local $$instance (ref null $nullability.defaultnotnullable.TypeArgumentsInference))
  (block
   ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:22:13
-  (local.set $$instance (struct.new $nullability.defaultnotnullable.TypeArgumentsInference (ref.as_non_null (global.get $nullability.defaultnotnullable.TypeArgumentsInference.vtable)) (ref.as_non_null (global.get $nullability.defaultnotnullable.TypeArgumentsInference.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $nullability.defaultnotnullable.TypeArgumentsInference (ref.as_non_null (global.get $nullability.defaultnotnullable.TypeArgumentsInference.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:22:13
   (call $$ctor__void_$p_nullability_defaultnotnullable_TypeArgumentsInference@nullability.defaultnotnullable.TypeArgumentsInference (ref.as_non_null (local.get $$instance)))
   ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:22:13
@@ -8313,7 +7713,7 @@
  (local $$instance (ref null $nullability.defaultnotnullable.TypeArgumentsInference.Pair))
  (block
   ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:23:28
-  (local.set $$instance (struct.new $nullability.defaultnotnullable.TypeArgumentsInference.Pair (ref.as_non_null (global.get $nullability.defaultnotnullable.TypeArgumentsInference.Pair.vtable)) (ref.as_non_null (global.get $nullability.defaultnotnullable.TypeArgumentsInference.Pair.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $nullability.defaultnotnullable.TypeArgumentsInference.Pair (ref.as_non_null (global.get $nullability.defaultnotnullable.TypeArgumentsInference.Pair.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:23:28
   (call $$ctor__void_$p_nullability_defaultnotnullable_TypeArgumentsInference_Pair@nullability.defaultnotnullable.TypeArgumentsInference.Pair (ref.as_non_null (local.get $$instance)))
   ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:23:28
@@ -8416,7 +7816,7 @@
  (local $$instance (ref null $nullability.defaultnullable.DefaultNullable))
  (block
   ;;@ nullability/defaultnullable/DefaultNullable.java:48:9
-  (local.set $$instance (struct.new $nullability.defaultnullable.DefaultNullable (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.vtable)) (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.itable)) (i32.const 0) (call $function.no.side.effects.$getString_|Hello|__java_lang_String (ref.func $$getString_|Hello|__java_lang_String@nullability.Nullability) ) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (ref.null $java.lang.Void) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $nullability.defaultnullable.DefaultNullable (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (call $function.no.side.effects.$getString_|Hello|__java_lang_String (ref.func $$getString_|Hello|__java_lang_String@nullability.Nullability) ) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (ref.null $java.lang.Void) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ nullability/defaultnullable/DefaultNullable.java:48:9
   (call $$ctor__void_$p_nullability_defaultnullable_DefaultNullable@nullability.defaultnullable.DefaultNullable (ref.as_non_null (local.get $$instance)))
   ;;@ nullability/defaultnullable/DefaultNullable.java:48:9
@@ -9480,7 +8880,7 @@
  (local $$instance (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability))
  (block
   ;;@ nullability/defaultnullable/DefaultNullable.java:86:4
-  (local.set $$instance (struct.new $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability.vtable)) (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ nullability/defaultnullable/DefaultNullable.java:86:4
   (call $$ctor__java_lang_Object__java_lang_Object__void_$p_nullability_defaultnullable_DefaultNullable_ParameterizedDefaultNullability@nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability (ref.as_non_null (local.get $$instance))(local.get $nonNullable)(local.get $defaultNullability))
   ;;@ nullability/defaultnullable/DefaultNullable.java:86:4
@@ -9659,7 +9059,7 @@
  (local $$instance (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedNullable))
  (block
   ;;@ nullability/defaultnullable/DefaultNullable.java:116:4
-  (local.set $$instance (struct.new $nullability.defaultnullable.DefaultNullable.ParameterizedNullable (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable.vtable)) (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $nullability.defaultnullable.DefaultNullable.ParameterizedNullable (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ nullability/defaultnullable/DefaultNullable.java:116:4
   (call $$ctor__java_lang_Object__java_lang_Object__void_$p_nullability_defaultnullable_DefaultNullable_ParameterizedNullable@nullability.defaultnullable.DefaultNullable.ParameterizedNullable (ref.as_non_null (local.get $$instance))(local.get $nonNullable)(local.get $defaultNullability))
   ;;@ nullability/defaultnullable/DefaultNullable.java:116:4
@@ -9837,7 +9237,7 @@
  (local $$instance (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable))
  (block
   ;;@ nullability/defaultnullable/DefaultNullable.java:146:4
-  (local.set $$instance (struct.new $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.vtable)) (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ nullability/defaultnullable/DefaultNullable.java:146:4
   (call $$ctor__java_lang_Object__void_$p_nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable@nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable (ref.as_non_null (local.get $$instance))(local.get $n))
   ;;@ nullability/defaultnullable/DefaultNullable.java:146:4
@@ -10013,7 +9413,7 @@
  (local $$instance (ref null $nullability.explicitnotnullable.ExplicitNotNullable))
  (block
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:64:9
-  (local.set $$instance (struct.new $nullability.explicitnotnullable.ExplicitNotNullable (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.vtable)) (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Void) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $nullability.explicitnotnullable.ExplicitNotNullable (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Void) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:64:9
   (call $$ctor__void_$p_nullability_explicitnotnullable_ExplicitNotNullable@nullability.explicitnotnullable.ExplicitNotNullable (ref.as_non_null (local.get $$instance)))
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:64:9
@@ -10983,7 +10383,7 @@
  (local $$instance (ref null $nullability.explicitnotnullable.DefaultNullable))
  (block
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:453:6
-  (local.set $$instance (struct.new $nullability.explicitnotnullable.DefaultNullable (ref.as_non_null (global.get $nullability.explicitnotnullable.DefaultNullable.vtable)) (ref.as_non_null (global.get $nullability.explicitnotnullable.DefaultNullable.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $nullability.explicitnotnullable.DefaultNullable (ref.as_non_null (global.get $nullability.explicitnotnullable.DefaultNullable.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:453:6
   (call $$ctor__void_$p_nullability_explicitnotnullable_DefaultNullable@nullability.explicitnotnullable.DefaultNullable (ref.as_non_null (local.get $$instance)))
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:453:6
@@ -11079,7 +10479,7 @@
  (local $$instance (ref null $nullability.explicitnotnullable.OuterClass))
  (block
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:459:6
-  (local.set $$instance (struct.new $nullability.explicitnotnullable.OuterClass (ref.as_non_null (global.get $nullability.explicitnotnullable.OuterClass.vtable)) (ref.as_non_null (global.get $nullability.explicitnotnullable.OuterClass.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $nullability.explicitnotnullable.OuterClass (ref.as_non_null (global.get $nullability.explicitnotnullable.OuterClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:459:6
   (call $$ctor__void_$p_nullability_explicitnotnullable_OuterClass@nullability.explicitnotnullable.OuterClass (ref.as_non_null (local.get $$instance)))
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:459:6
@@ -11813,7 +11213,7 @@
  (local $$instance (ref null $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability))
  (block
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:106:4
-  (local.set $$instance (struct.new $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability.vtable)) (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:106:4
   (call $$ctor__java_lang_Object__void_$p_nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedDefaultNullability@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability (ref.as_non_null (local.get $$instance))(local.get $n))
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:106:4
@@ -11990,7 +11390,7 @@
  (local $$instance (ref null $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable))
  (block
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:136:4
-  (local.set $$instance (struct.new $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable.vtable)) (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:136:4
   (call $$ctor__java_lang_Object__void_$p_nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNullable@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable (ref.as_non_null (local.get $$instance))(local.get $n))
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:136:4
@@ -12167,7 +11567,7 @@
  (local $$instance (ref null $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable))
  (block
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:166:4
-  (local.set $$instance (struct.new $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable.vtable)) (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:166:4
   (call $$ctor__java_lang_Object__void_$p_nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNonNullable@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable (ref.as_non_null (local.get $$instance))(local.get $n))
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:166:4
@@ -12343,7 +11743,7 @@
  (local $$instance (ref null $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters))
  (block
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:401:15
-  (local.set $$instance (struct.new $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters.vtable)) (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:401:15
   (call $$ctor__void_$p_nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters@nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters (ref.as_non_null (local.get $$instance)))
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:401:15
@@ -12445,7 +11845,7 @@
  (local $$instance (ref null $nullability.explicitnotnullable.OuterClass.InnerClass))
  (block
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:460:8
-  (local.set $$instance (struct.new $nullability.explicitnotnullable.OuterClass.InnerClass (ref.as_non_null (global.get $nullability.explicitnotnullable.OuterClass.InnerClass.vtable)) (ref.as_non_null (global.get $nullability.explicitnotnullable.OuterClass.InnerClass.itable)) (i32.const 0) (local.get $$outer_this)))
+  (local.set $$instance (struct.new $nullability.explicitnotnullable.OuterClass.InnerClass (ref.as_non_null (global.get $nullability.explicitnotnullable.OuterClass.InnerClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (local.get $$outer_this)))
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:460:8
   (call $$ctor__nullability_explicitnotnullable_OuterClass__void_$p_nullability_explicitnotnullable_OuterClass_InnerClass@nullability.explicitnotnullable.OuterClass.InnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:460:8
@@ -12705,7 +12105,7 @@
  (local $$instance (ref null $nullability.explicitnotnullable.OuterClass.1))
  (block
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:463:24
-  (local.set $$instance (struct.new $nullability.explicitnotnullable.OuterClass.1 (ref.as_non_null (global.get $nullability.explicitnotnullable.OuterClass.1.vtable)) (ref.as_non_null (global.get $nullability.explicitnotnullable.OuterClass.1.itable)) (i32.const 0) (local.get $$outer_this) (local.get $$outer_this)))
+  (local.set $$instance (struct.new $nullability.explicitnotnullable.OuterClass.1 (ref.as_non_null (global.get $nullability.explicitnotnullable.OuterClass.1.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (local.get $$outer_this) (local.get $$outer_this)))
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:463:24
   (call $$ctor__nullability_explicitnotnullable_OuterClass__void_$p_nullability_explicitnotnullable_OuterClass_1@nullability.explicitnotnullable.OuterClass.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:463:24
@@ -12793,7 +12193,7 @@
  (local $$instance (ref null $nullability.explicitnotnullable.OuterClass.2))
  (block
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:464:29
-  (local.set $$instance (struct.new $nullability.explicitnotnullable.OuterClass.2 (ref.as_non_null (global.get $nullability.explicitnotnullable.OuterClass.2.vtable)) (ref.as_non_null (global.get $nullability.explicitnotnullable.OuterClass.2.itable)) (i32.const 0) (local.get $$outer_this) (local.get $$outer_this)))
+  (local.set $$instance (struct.new $nullability.explicitnotnullable.OuterClass.2 (ref.as_non_null (global.get $nullability.explicitnotnullable.OuterClass.2.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (local.get $$outer_this) (local.get $$outer_this)))
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:464:29
   (call $$ctor__nullability_explicitnotnullable_OuterClass__void_$p_nullability_explicitnotnullable_OuterClass_2@nullability.explicitnotnullable.OuterClass.2 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:464:29

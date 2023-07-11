@@ -1,7 +1,7 @@
  ;;; Code for cloneable.Cloneables [type definition]
  (type $cloneable.Cloneables (struct_subtype
   (field $vtable (ref $cloneable.Cloneables.vtable))
-  (field $itable (ref $cloneable.Cloneables.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -13,20 +13,11 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $cloneable.Cloneables.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for cloneable.Cloneables.WithoutCloneable [type definition]
  (type $cloneable.Cloneables.WithoutCloneable (struct_subtype
   (field $vtable (ref $cloneable.Cloneables.WithoutCloneable.vtable))
-  (field $itable (ref $cloneable.Cloneables.WithoutCloneable.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -39,15 +30,6 @@
   (field $m_clone__java_lang_Object (ref $function.m_clone__java_lang_Object))
   $java.lang.Object.vtable)
  )
- (type $cloneable.Cloneables.WithoutCloneable.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for cloneable.Cloneables.WithCloneable [type definition]
  (type $cloneable.Cloneables.WithCloneable (struct_subtype
@@ -73,12 +55,12 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for cloneable.Cloneables.WithoutCloneableChild [type definition]
  (type $cloneable.Cloneables.WithoutCloneableChild (struct_subtype
   (field $vtable (ref $cloneable.Cloneables.WithoutCloneableChild.vtable))
-  (field $itable (ref $cloneable.Cloneables.WithoutCloneableChild.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $cloneable.Cloneables.WithoutCloneable)
  )
@@ -91,15 +73,6 @@
   (field $m_clone__java_lang_Object (ref $function.m_clone__java_lang_Object))
   $cloneable.Cloneables.WithoutCloneable.vtable)
  )
- (type $cloneable.Cloneables.WithoutCloneableChild.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $cloneable.Cloneables.WithoutCloneable.itable))
 
  ;;; Code for cloneable.Cloneables.WithCloneableChild [type definition]
  (type $cloneable.Cloneables.WithCloneableChild (struct_subtype
@@ -138,17 +111,6 @@
  )
 )
 
-;;; Code for cloneable.Cloneables [itable.init]
-(global $cloneable.Cloneables.itable (ref $cloneable.Cloneables.itable) (struct.new $cloneable.Cloneables.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for cloneable.Cloneables.WithoutCloneable [vtable.init]
 (global $cloneable.Cloneables.WithoutCloneable.vtable (ref $cloneable.Cloneables.WithoutCloneable.vtable)
  (struct.new $cloneable.Cloneables.WithoutCloneable.vtable
@@ -160,17 +122,6 @@
   (ref.func $m_clone__java_lang_Object@cloneable.Cloneables.WithoutCloneable)
  )
 )
-
-;;; Code for cloneable.Cloneables.WithoutCloneable [itable.init]
-(global $cloneable.Cloneables.WithoutCloneable.itable (ref $cloneable.Cloneables.WithoutCloneable.itable) (struct.new $cloneable.Cloneables.WithoutCloneable.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for cloneable.Cloneables.WithCloneable [vtable.init]
 (global $cloneable.Cloneables.WithCloneable.vtable (ref $cloneable.Cloneables.WithCloneable.vtable)
@@ -207,17 +158,6 @@
   (ref.func $m_clone__java_lang_Object@cloneable.Cloneables.WithoutCloneableChild)
  )
 )
-
-;;; Code for cloneable.Cloneables.WithoutCloneableChild [itable.init]
-(global $cloneable.Cloneables.WithoutCloneableChild.itable (ref $cloneable.Cloneables.WithoutCloneableChild.itable) (struct.new $cloneable.Cloneables.WithoutCloneableChild.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for cloneable.Cloneables.WithCloneableChild [vtable.init]
 (global $cloneable.Cloneables.WithCloneableChild.vtable (ref $cloneable.Cloneables.WithCloneableChild.vtable)
@@ -277,7 +217,7 @@
  (local $$instance (ref null $cloneable.Cloneables))
  (block
   ;;@ cloneable/Cloneables.java:18:13
-  (local.set $$instance (struct.new $cloneable.Cloneables (ref.as_non_null (global.get $cloneable.Cloneables.vtable)) (ref.as_non_null (global.get $cloneable.Cloneables.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $cloneable.Cloneables (ref.as_non_null (global.get $cloneable.Cloneables.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ cloneable/Cloneables.java:18:13
   (call $$ctor__void_$p_cloneable_Cloneables@cloneable.Cloneables (ref.as_non_null (local.get $$instance)))
   ;;@ cloneable/Cloneables.java:18:13
@@ -363,7 +303,7 @@
  (local $$instance (ref null $cloneable.Cloneables.WithoutCloneable))
  (block
   ;;@ cloneable/Cloneables.java:19:22
-  (local.set $$instance (struct.new $cloneable.Cloneables.WithoutCloneable (ref.as_non_null (global.get $cloneable.Cloneables.WithoutCloneable.vtable)) (ref.as_non_null (global.get $cloneable.Cloneables.WithoutCloneable.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $cloneable.Cloneables.WithoutCloneable (ref.as_non_null (global.get $cloneable.Cloneables.WithoutCloneable.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ cloneable/Cloneables.java:19:22
   (call $$ctor__void_$p_cloneable_Cloneables_WithoutCloneable@cloneable.Cloneables.WithoutCloneable (ref.as_non_null (local.get $$instance)))
   ;;@ cloneable/Cloneables.java:19:22
@@ -565,7 +505,7 @@
  (local $$instance (ref null $cloneable.Cloneables.WithoutCloneableChild))
  (block
   ;;@ cloneable/Cloneables.java:35:28
-  (local.set $$instance (struct.new $cloneable.Cloneables.WithoutCloneableChild (ref.as_non_null (global.get $cloneable.Cloneables.WithoutCloneableChild.vtable)) (ref.as_non_null (global.get $cloneable.Cloneables.WithoutCloneableChild.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $cloneable.Cloneables.WithoutCloneableChild (ref.as_non_null (global.get $cloneable.Cloneables.WithoutCloneableChild.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ cloneable/Cloneables.java:35:28
   (call $$ctor__void_$p_cloneable_Cloneables_WithoutCloneableChild@cloneable.Cloneables.WithoutCloneableChild (ref.as_non_null (local.get $$instance)))
   ;;@ cloneable/Cloneables.java:35:28

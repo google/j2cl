@@ -1,7 +1,7 @@
  ;;; Code for breakstatement.BreakStatement [type definition]
  (type $breakstatement.BreakStatement (struct_subtype
   (field $vtable (ref $breakstatement.BreakStatement.vtable))
-  (field $itable (ref $breakstatement.BreakStatement.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -14,15 +14,6 @@
   (field $m_test__void (ref $function.m_test__void))
   $java.lang.Object.vtable)
  )
- (type $breakstatement.BreakStatement.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for breakstatement.BreakStatement [vtable.init]
 (global $breakstatement.BreakStatement.vtable (ref $breakstatement.BreakStatement.vtable)
@@ -35,17 +26,6 @@
   (ref.func $m_test__void@breakstatement.BreakStatement)
  )
 )
-
-;;; Code for breakstatement.BreakStatement [itable.init]
-(global $breakstatement.BreakStatement.itable (ref $breakstatement.BreakStatement.itable) (struct.new $breakstatement.BreakStatement.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for breakstatement.BreakStatement [static fields]
 (global $f_$initialized__breakstatement_BreakStatement (mut i32) (i32.const 0))
@@ -61,7 +41,7 @@
  (local $$instance (ref null $breakstatement.BreakStatement))
  (block
   ;;@ breakstatement/BreakStatement.java:18:13
-  (local.set $$instance (struct.new $breakstatement.BreakStatement (ref.as_non_null (global.get $breakstatement.BreakStatement.vtable)) (ref.as_non_null (global.get $breakstatement.BreakStatement.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $breakstatement.BreakStatement (ref.as_non_null (global.get $breakstatement.BreakStatement.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ breakstatement/BreakStatement.java:18:13
   (call $$ctor__void_$p_breakstatement_BreakStatement@breakstatement.BreakStatement (ref.as_non_null (local.get $$instance)))
   ;;@ breakstatement/BreakStatement.java:18:13

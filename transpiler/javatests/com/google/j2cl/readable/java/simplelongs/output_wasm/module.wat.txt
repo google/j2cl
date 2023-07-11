@@ -1,7 +1,7 @@
  ;;; Code for simplelongs.SimpleLongs [type definition]
  (type $simplelongs.SimpleLongs (struct_subtype
   (field $vtable (ref $simplelongs.SimpleLongs.vtable))
-  (field $itable (ref $simplelongs.SimpleLongs.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_foo__simplelongs_SimpleLongs (mut i64))
   (field $f_sideEffect__simplelongs_SimpleLongs_ (mut i32))
@@ -18,15 +18,6 @@
   (field $m_main__void (ref $function.m_main__void))
   $java.lang.Object.vtable)
  )
- (type $simplelongs.SimpleLongs.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for simplelongs.SimpleLongs [vtable.init]
 (global $simplelongs.SimpleLongs.vtable (ref $simplelongs.SimpleLongs.vtable)
@@ -42,17 +33,6 @@
  )
 )
 
-;;; Code for simplelongs.SimpleLongs [itable.init]
-(global $simplelongs.SimpleLongs.itable (ref $simplelongs.SimpleLongs.itable) (struct.new $simplelongs.SimpleLongs.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for simplelongs.SimpleLongs [static fields]
 (global $f_$initialized__simplelongs_SimpleLongs (mut i32) (i32.const 0))
 (global $f_$class__simplelongs_SimpleLongs (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
@@ -67,7 +47,7 @@
  (local $$instance (ref null $simplelongs.SimpleLongs))
  (block
   ;;@ simplelongs/SimpleLongs.java:18:13
-  (local.set $$instance (struct.new $simplelongs.SimpleLongs (ref.as_non_null (global.get $simplelongs.SimpleLongs.vtable)) (ref.as_non_null (global.get $simplelongs.SimpleLongs.itable)) (i32.const 0) (i64.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $simplelongs.SimpleLongs (ref.as_non_null (global.get $simplelongs.SimpleLongs.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i64.const 0) (i32.const 0)))
   ;;@ simplelongs/SimpleLongs.java:18:13
   (call $$ctor__void_$p_simplelongs_SimpleLongs@simplelongs.SimpleLongs (ref.as_non_null (local.get $$instance)))
   ;;@ simplelongs/SimpleLongs.java:18:13

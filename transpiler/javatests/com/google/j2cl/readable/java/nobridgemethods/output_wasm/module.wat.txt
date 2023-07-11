@@ -6,7 +6,7 @@
  ;;; Code for nobridgemethods.Map [type definition]
  (type $nobridgemethods.Map (struct_subtype
   (field $vtable (ref $nobridgemethods.Map.vtable))
-  (field $itable (ref $nobridgemethods.Map.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -19,20 +19,11 @@
   (field $m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry (ref $function.m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry))
   $java.lang.Object.vtable)
  )
- (type $nobridgemethods.Map.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for nobridgemethods.CharSet [type definition]
  (type $nobridgemethods.CharSet (struct_subtype
   (field $vtable (ref $nobridgemethods.CharSet.vtable))
-  (field $itable (ref $nobridgemethods.CharSet.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -44,15 +35,6 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $nobridgemethods.CharSet.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for nobridgemethods.TreeMap.InnerEntry [type definition]
  (type $nobridgemethods.TreeMap.InnerEntry (struct_subtype
@@ -77,12 +59,12 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for nobridgemethods.TreeMap [type definition]
  (type $nobridgemethods.TreeMap (struct_subtype
   (field $vtable (ref $nobridgemethods.TreeMap.vtable))
-  (field $itable (ref $nobridgemethods.TreeMap.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $nobridgemethods.Map)
  )
@@ -96,20 +78,11 @@
   (field $m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry (ref $function.m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry))
   $nobridgemethods.Map.vtable)
  )
- (type $nobridgemethods.TreeMap.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $nobridgemethods.Map.itable))
 
  ;;; Code for nobridgemethods.CharSet.1 [type definition]
  (type $nobridgemethods.CharSet.1 (struct_subtype
   (field $vtable (ref $nobridgemethods.CharSet.1.vtable))
-  (field $itable (ref $nobridgemethods.CharSet.1.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $nobridgemethods.TreeMap)
  )
@@ -123,15 +96,6 @@
   (field $m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry (ref $function.m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry))
   $nobridgemethods.TreeMap.vtable)
  )
- (type $nobridgemethods.CharSet.1.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $nobridgemethods.TreeMap.itable))
 
 ;;; Code for nobridgemethods.TreeMap [vtable.init]
 (global $nobridgemethods.TreeMap.vtable (ref $nobridgemethods.TreeMap.vtable)
@@ -146,17 +110,6 @@
  )
 )
 
-;;; Code for nobridgemethods.TreeMap [itable.init]
-(global $nobridgemethods.TreeMap.itable (ref $nobridgemethods.TreeMap.itable) (struct.new $nobridgemethods.TreeMap.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for nobridgemethods.CharSet [vtable.init]
 (global $nobridgemethods.CharSet.vtable (ref $nobridgemethods.CharSet.vtable)
  (struct.new $nobridgemethods.CharSet.vtable
@@ -167,17 +120,6 @@
   (ref.func $$getClassImpl__java_lang_Class@nobridgemethods.CharSet)
  )
 )
-
-;;; Code for nobridgemethods.CharSet [itable.init]
-(global $nobridgemethods.CharSet.itable (ref $nobridgemethods.CharSet.itable) (struct.new $nobridgemethods.CharSet.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for nobridgemethods.TreeMap.InnerEntry [vtable.init]
 (global $nobridgemethods.TreeMap.InnerEntry.vtable (ref $nobridgemethods.TreeMap.InnerEntry.vtable)
@@ -214,17 +156,6 @@
   (ref.func $m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry@nobridgemethods.TreeMap)
  )
 )
-
-;;; Code for nobridgemethods.CharSet.1 [itable.init]
-(global $nobridgemethods.CharSet.1.itable (ref $nobridgemethods.CharSet.1.itable) (struct.new $nobridgemethods.CharSet.1.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for nobridgemethods.Entry [static fields]
 (global $f_$initialized__nobridgemethods_Entry (mut i32) (i32.const 0))
@@ -367,7 +298,7 @@
  (local $$instance (ref null $nobridgemethods.CharSet))
  (block
   ;;@ nobridgemethods/CharSet.java:33:13
-  (local.set $$instance (struct.new $nobridgemethods.CharSet (ref.as_non_null (global.get $nobridgemethods.CharSet.vtable)) (ref.as_non_null (global.get $nobridgemethods.CharSet.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $nobridgemethods.CharSet (ref.as_non_null (global.get $nobridgemethods.CharSet.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ nobridgemethods/CharSet.java:33:13
   (call $$ctor__void_$p_nobridgemethods_CharSet@nobridgemethods.CharSet (ref.as_non_null (local.get $$instance)))
   ;;@ nobridgemethods/CharSet.java:33:13
@@ -552,7 +483,7 @@
  (local $$instance (ref null $nobridgemethods.TreeMap))
  (block
   ;;@ nobridgemethods/CharSet.java:24:6
-  (local.set $$instance (struct.new $nobridgemethods.TreeMap (ref.as_non_null (global.get $nobridgemethods.TreeMap.vtable)) (ref.as_non_null (global.get $nobridgemethods.TreeMap.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $nobridgemethods.TreeMap (ref.as_non_null (global.get $nobridgemethods.TreeMap.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ nobridgemethods/CharSet.java:24:6
   (call $$ctor__void_$p_nobridgemethods_TreeMap@nobridgemethods.TreeMap (ref.as_non_null (local.get $$instance)))
   ;;@ nobridgemethods/CharSet.java:24:6
@@ -670,7 +601,7 @@
  (local $$instance (ref null $nobridgemethods.CharSet.1))
  (block
   ;;@ nobridgemethods/CharSet.java:36:52
-  (local.set $$instance (struct.new $nobridgemethods.CharSet.1 (ref.as_non_null (global.get $nobridgemethods.CharSet.1.vtable)) (ref.as_non_null (global.get $nobridgemethods.CharSet.1.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $nobridgemethods.CharSet.1 (ref.as_non_null (global.get $nobridgemethods.CharSet.1.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ nobridgemethods/CharSet.java:36:52
   (call $$ctor__void_$p_nobridgemethods_CharSet_1@nobridgemethods.CharSet.1 (ref.as_non_null (local.get $$instance)))
   ;;@ nobridgemethods/CharSet.java:36:52

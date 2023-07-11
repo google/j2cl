@@ -1,7 +1,7 @@
  ;;; Code for instanceinnerclass.InstanceInnerClass [type definition]
  (type $instanceinnerclass.InstanceInnerClass (struct_subtype
   (field $vtable (ref $instanceinnerclass.InstanceInnerClass.vtable))
-  (field $itable (ref $instanceinnerclass.InstanceInnerClass.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_instanceField__instanceinnerclass_InstanceInnerClass (mut i32))
   $java.lang.Object)
@@ -16,20 +16,11 @@
   (field $m_test__void (ref $function.m_test__void))
   $java.lang.Object.vtable)
  )
- (type $instanceinnerclass.InstanceInnerClass.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for instanceinnerclass.InstanceInnerClass.InnerClass [type definition]
  (type $instanceinnerclass.InstanceInnerClass.InnerClass (struct_subtype
   (field $vtable (ref $instanceinnerclass.InstanceInnerClass.InnerClass.vtable))
-  (field $itable (ref $instanceinnerclass.InstanceInnerClass.InnerClass.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass (ref null $instanceinnerclass.InstanceInnerClass))
   (field $f_field__instanceinnerclass_InstanceInnerClass_InnerClass (mut i32))
@@ -45,15 +36,6 @@
   (field $m_funInner__void (ref $function.m_funInner__void))
   $java.lang.Object.vtable)
  )
- (type $instanceinnerclass.InstanceInnerClass.InnerClass.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for instanceinnerclass.InstanceInnerClass [vtable.init]
 (global $instanceinnerclass.InstanceInnerClass.vtable (ref $instanceinnerclass.InstanceInnerClass.vtable)
@@ -68,17 +50,6 @@
  )
 )
 
-;;; Code for instanceinnerclass.InstanceInnerClass [itable.init]
-(global $instanceinnerclass.InstanceInnerClass.itable (ref $instanceinnerclass.InstanceInnerClass.itable) (struct.new $instanceinnerclass.InstanceInnerClass.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for instanceinnerclass.InstanceInnerClass.InnerClass [vtable.init]
 (global $instanceinnerclass.InstanceInnerClass.InnerClass.vtable (ref $instanceinnerclass.InstanceInnerClass.InnerClass.vtable)
  (struct.new $instanceinnerclass.InstanceInnerClass.InnerClass.vtable
@@ -90,17 +61,6 @@
   (ref.func $m_funInner__void@instanceinnerclass.InstanceInnerClass.InnerClass)
  )
 )
-
-;;; Code for instanceinnerclass.InstanceInnerClass.InnerClass [itable.init]
-(global $instanceinnerclass.InstanceInnerClass.InnerClass.itable (ref $instanceinnerclass.InstanceInnerClass.InnerClass.itable) (struct.new $instanceinnerclass.InstanceInnerClass.InnerClass.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for instanceinnerclass.InstanceInnerClass [static fields]
 (global $f_$initialized__instanceinnerclass_InstanceInnerClass (mut i32) (i32.const 0))
@@ -121,7 +81,7 @@
  (local $$instance (ref null $instanceinnerclass.InstanceInnerClass))
  (block
   ;;@ instanceinnerclass/InstanceInnerClass.java:18:13
-  (local.set $$instance (struct.new $instanceinnerclass.InstanceInnerClass (ref.as_non_null (global.get $instanceinnerclass.InstanceInnerClass.vtable)) (ref.as_non_null (global.get $instanceinnerclass.InstanceInnerClass.itable)) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $instanceinnerclass.InstanceInnerClass (ref.as_non_null (global.get $instanceinnerclass.InstanceInnerClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
   ;;@ instanceinnerclass/InstanceInnerClass.java:18:13
   (call $$ctor__void_$p_instanceinnerclass_InstanceInnerClass@instanceinnerclass.InstanceInnerClass (ref.as_non_null (local.get $$instance)))
   ;;@ instanceinnerclass/InstanceInnerClass.java:18:13
@@ -234,7 +194,7 @@
  (local $$instance (ref null $instanceinnerclass.InstanceInnerClass.InnerClass))
  (block
   ;;@ instanceinnerclass/InstanceInnerClass.java:23:15
-  (local.set $$instance (struct.new $instanceinnerclass.InstanceInnerClass.InnerClass (ref.as_non_null (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.vtable)) (ref.as_non_null (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.itable)) (i32.const 0) (local.get $$outer_this) (i32.const 0) (ref.null $instanceinnerclass.InstanceInnerClass)))
+  (local.set $$instance (struct.new $instanceinnerclass.InstanceInnerClass.InnerClass (ref.as_non_null (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (local.get $$outer_this) (i32.const 0) (ref.null $instanceinnerclass.InstanceInnerClass)))
   ;;@ instanceinnerclass/InstanceInnerClass.java:23:15
   (call $$ctor__instanceinnerclass_InstanceInnerClass__void_$p_instanceinnerclass_InstanceInnerClass_InnerClass@instanceinnerclass.InstanceInnerClass.InnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ instanceinnerclass/InstanceInnerClass.java:23:15

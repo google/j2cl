@@ -1,7 +1,7 @@
  ;;; Code for forstatement.ForStatement [type definition]
  (type $forstatement.ForStatement (struct_subtype
   (field $vtable (ref $forstatement.ForStatement.vtable))
-  (field $itable (ref $forstatement.ForStatement.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -17,15 +17,6 @@
   (field $m_testForStatementInsideDeadCode__void (ref $function.m_testForStatementInsideDeadCode__void))
   $java.lang.Object.vtable)
  )
- (type $forstatement.ForStatement.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for forstatement.ForStatement [vtable.init]
 (global $forstatement.ForStatement.vtable (ref $forstatement.ForStatement.vtable)
@@ -42,17 +33,6 @@
  )
 )
 
-;;; Code for forstatement.ForStatement [itable.init]
-(global $forstatement.ForStatement.itable (ref $forstatement.ForStatement.itable) (struct.new $forstatement.ForStatement.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for forstatement.ForStatement [static fields]
 (global $f_$initialized__forstatement_ForStatement (mut i32) (i32.const 0))
 (global $f_$class__forstatement_ForStatement (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
@@ -67,7 +47,7 @@
  (local $$instance (ref null $forstatement.ForStatement))
  (block
   ;;@ forstatement/ForStatement.java:18:13
-  (local.set $$instance (struct.new $forstatement.ForStatement (ref.as_non_null (global.get $forstatement.ForStatement.vtable)) (ref.as_non_null (global.get $forstatement.ForStatement.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $forstatement.ForStatement (ref.as_non_null (global.get $forstatement.ForStatement.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ forstatement/ForStatement.java:18:13
   (call $$ctor__void_$p_forstatement_ForStatement@forstatement.ForStatement (ref.as_non_null (local.get $$instance)))
   ;;@ forstatement/ForStatement.java:18:13

@@ -13,7 +13,7 @@
  ;;; Code for deprecated.DeprecatedExample [type definition]
  (type $deprecated.DeprecatedExample (struct_subtype
   (field $vtable (ref $deprecated.DeprecatedExample.vtable))
-  (field $itable (ref $deprecated.DeprecatedExample.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_deprecatedInstanceField__deprecated_DeprecatedExample (ref null $java.lang.String))
   $java.lang.Object)
@@ -27,15 +27,6 @@
   (field $m_deprecatedInstanceMethod__java_lang_String__void (ref $function.m_deprecatedInstanceMethod__java_lang_String__void))
   $java.lang.Object.vtable)
  )
- (type $deprecated.DeprecatedExample.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for deprecated.DeprecatedExample.DeprecatedEnum [type definition]
  (type $deprecated.DeprecatedExample.DeprecatedEnum (struct_subtype
@@ -112,17 +103,6 @@
   (ref.func $m_deprecatedInstanceMethod__java_lang_String__void@deprecated.DeprecatedExample)
  )
 )
-
-;;; Code for deprecated.DeprecatedExample [itable.init]
-(global $deprecated.DeprecatedExample.itable (ref $deprecated.DeprecatedExample.itable) (struct.new $deprecated.DeprecatedExample.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for deprecated.DeprecatedExample.DeprecatedEnum [vtable.init]
 (global $deprecated.DeprecatedExample.DeprecatedEnum.vtable (ref $deprecated.DeprecatedExample.DeprecatedEnum.vtable)
@@ -335,7 +315,7 @@
  (local $$instance (ref null $deprecated.DeprecatedExample))
  (block
   ;;@ deprecated/DeprecatedExample.java:37:9
-  (local.set $$instance (struct.new $deprecated.DeprecatedExample (ref.as_non_null (global.get $deprecated.DeprecatedExample.vtable)) (ref.as_non_null (global.get $deprecated.DeprecatedExample.itable)) (i32.const 0) (call $function.no.side.effects.$getString_|deprecated_f...|__java_lang_String (ref.func $$getString_|deprecated_f...|__java_lang_String@deprecated.DeprecatedExample) )))
+  (local.set $$instance (struct.new $deprecated.DeprecatedExample (ref.as_non_null (global.get $deprecated.DeprecatedExample.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (call $function.no.side.effects.$getString_|deprecated_f...|__java_lang_String (ref.func $$getString_|deprecated_f...|__java_lang_String@deprecated.DeprecatedExample) )))
   ;;@ deprecated/DeprecatedExample.java:37:9
   (call $$ctor__void_$p_deprecated_DeprecatedExample@deprecated.DeprecatedExample (ref.as_non_null (local.get $$instance)))
   ;;@ deprecated/DeprecatedExample.java:37:9

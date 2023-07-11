@@ -1,7 +1,7 @@
  ;;; Code for publicconstructor.PublicConstructor [type definition]
  (type $publicconstructor.PublicConstructor (struct_subtype
   (field $vtable (ref $publicconstructor.PublicConstructor.vtable))
-  (field $itable (ref $publicconstructor.PublicConstructor.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -13,15 +13,6 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $publicconstructor.PublicConstructor.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for publicconstructor.PublicConstructor [vtable.init]
 (global $publicconstructor.PublicConstructor.vtable (ref $publicconstructor.PublicConstructor.vtable)
@@ -33,17 +24,6 @@
   (ref.func $$getClassImpl__java_lang_Class@publicconstructor.PublicConstructor)
  )
 )
-
-;;; Code for publicconstructor.PublicConstructor [itable.init]
-(global $publicconstructor.PublicConstructor.itable (ref $publicconstructor.PublicConstructor.itable) (struct.new $publicconstructor.PublicConstructor.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for publicconstructor.PublicConstructor [static fields]
 (global $f_$initialized__publicconstructor_PublicConstructor (mut i32) (i32.const 0))
@@ -59,7 +39,7 @@
  (local $$instance (ref null $publicconstructor.PublicConstructor))
  (block
   ;;@ publicconstructor/PublicConstructor.java:19:9
-  (local.set $$instance (struct.new $publicconstructor.PublicConstructor (ref.as_non_null (global.get $publicconstructor.PublicConstructor.vtable)) (ref.as_non_null (global.get $publicconstructor.PublicConstructor.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $publicconstructor.PublicConstructor (ref.as_non_null (global.get $publicconstructor.PublicConstructor.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ publicconstructor/PublicConstructor.java:19:9
   (call $$ctor__void_$p_publicconstructor_PublicConstructor@publicconstructor.PublicConstructor (ref.as_non_null (local.get $$instance)))
   ;;@ publicconstructor/PublicConstructor.java:19:9

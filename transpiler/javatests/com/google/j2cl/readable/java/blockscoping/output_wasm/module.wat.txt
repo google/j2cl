@@ -1,7 +1,7 @@
  ;;; Code for blockscoping.BlockScoping [type definition]
  (type $blockscoping.BlockScoping (struct_subtype
   (field $vtable (ref $blockscoping.BlockScoping.vtable))
-  (field $itable (ref $blockscoping.BlockScoping.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -15,15 +15,6 @@
   (field $m_nestedScopes__void (ref $function.m_nestedScopes__void))
   $java.lang.Object.vtable)
  )
- (type $blockscoping.BlockScoping.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for blockscoping.BlockScoping [vtable.init]
 (global $blockscoping.BlockScoping.vtable (ref $blockscoping.BlockScoping.vtable)
@@ -37,17 +28,6 @@
   (ref.func $m_nestedScopes__void@blockscoping.BlockScoping)
  )
 )
-
-;;; Code for blockscoping.BlockScoping [itable.init]
-(global $blockscoping.BlockScoping.itable (ref $blockscoping.BlockScoping.itable) (struct.new $blockscoping.BlockScoping.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for blockscoping.BlockScoping [static fields]
 (global $f_$initialized__blockscoping_BlockScoping (mut i32) (i32.const 0))
@@ -63,7 +43,7 @@
  (local $$instance (ref null $blockscoping.BlockScoping))
  (block
   ;;@ blockscoping/BlockScoping.java:18:13
-  (local.set $$instance (struct.new $blockscoping.BlockScoping (ref.as_non_null (global.get $blockscoping.BlockScoping.vtable)) (ref.as_non_null (global.get $blockscoping.BlockScoping.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $blockscoping.BlockScoping (ref.as_non_null (global.get $blockscoping.BlockScoping.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ blockscoping/BlockScoping.java:18:13
   (call $$ctor__void_$p_blockscoping_BlockScoping@blockscoping.BlockScoping (ref.as_non_null (local.get $$instance)))
   ;;@ blockscoping/BlockScoping.java:18:13

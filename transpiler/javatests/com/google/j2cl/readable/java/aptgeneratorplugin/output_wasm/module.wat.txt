@@ -1,7 +1,7 @@
  ;;; Code for aptgeneratorplugin.Dummy [type definition]
  (type $aptgeneratorplugin.Dummy (struct_subtype
   (field $vtable (ref $aptgeneratorplugin.Dummy.vtable))
-  (field $itable (ref $aptgeneratorplugin.Dummy.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -13,20 +13,11 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $aptgeneratorplugin.Dummy.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for aptgeneratorplugin.Foo [type definition]
  (type $aptgeneratorplugin.Foo (struct_subtype
   (field $vtable (ref $aptgeneratorplugin.Foo.vtable))
-  (field $itable (ref $aptgeneratorplugin.Foo.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -38,15 +29,6 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $aptgeneratorplugin.Foo.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for aptgeneratorplugin.Dummy [vtable.init]
 (global $aptgeneratorplugin.Dummy.vtable (ref $aptgeneratorplugin.Dummy.vtable)
@@ -59,17 +41,6 @@
  )
 )
 
-;;; Code for aptgeneratorplugin.Dummy [itable.init]
-(global $aptgeneratorplugin.Dummy.itable (ref $aptgeneratorplugin.Dummy.itable) (struct.new $aptgeneratorplugin.Dummy.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for aptgeneratorplugin.Foo [vtable.init]
 (global $aptgeneratorplugin.Foo.vtable (ref $aptgeneratorplugin.Foo.vtable)
  (struct.new $aptgeneratorplugin.Foo.vtable
@@ -80,17 +51,6 @@
   (ref.func $$getClassImpl__java_lang_Class@aptgeneratorplugin.Foo)
  )
 )
-
-;;; Code for aptgeneratorplugin.Foo [itable.init]
-(global $aptgeneratorplugin.Foo.itable (ref $aptgeneratorplugin.Foo.itable) (struct.new $aptgeneratorplugin.Foo.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for aptgeneratorplugin.Dummy [static fields]
 (global $f_$initialized__aptgeneratorplugin_Dummy (mut i32) (i32.const 0))
@@ -111,7 +71,7 @@
  (local $$instance (ref null $aptgeneratorplugin.Dummy))
  (block
   ;;@ aptgeneratorplugin/Dummy.java:3:13
-  (local.set $$instance (struct.new $aptgeneratorplugin.Dummy (ref.as_non_null (global.get $aptgeneratorplugin.Dummy.vtable)) (ref.as_non_null (global.get $aptgeneratorplugin.Dummy.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $aptgeneratorplugin.Dummy (ref.as_non_null (global.get $aptgeneratorplugin.Dummy.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ aptgeneratorplugin/Dummy.java:3:13
   (call $$ctor__void_$p_aptgeneratorplugin_Dummy@aptgeneratorplugin.Dummy (ref.as_non_null (local.get $$instance)))
   ;;@ aptgeneratorplugin/Dummy.java:3:13
@@ -197,7 +157,7 @@
  (local $$instance (ref null $aptgeneratorplugin.Foo))
  (block
   ;;@ aptgeneratorplugin/Foo.java:18:13
-  (local.set $$instance (struct.new $aptgeneratorplugin.Foo (ref.as_non_null (global.get $aptgeneratorplugin.Foo.vtable)) (ref.as_non_null (global.get $aptgeneratorplugin.Foo.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $aptgeneratorplugin.Foo (ref.as_non_null (global.get $aptgeneratorplugin.Foo.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ aptgeneratorplugin/Foo.java:18:13
   (call $$ctor__void_$p_aptgeneratorplugin_Foo@aptgeneratorplugin.Foo (ref.as_non_null (local.get $$instance)))
   ;;@ aptgeneratorplugin/Foo.java:18:13

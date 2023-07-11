@@ -1,7 +1,7 @@
  ;;; Code for inferreturn.InferReturn [type definition]
  (type $inferreturn.InferReturn (struct_subtype
   (field $vtable (ref $inferreturn.InferReturn.vtable))
-  (field $itable (ref $inferreturn.InferReturn.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -13,15 +13,6 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $inferreturn.InferReturn.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for inferreturn.InferReturn [vtable.init]
 (global $inferreturn.InferReturn.vtable (ref $inferreturn.InferReturn.vtable)
@@ -33,17 +24,6 @@
   (ref.func $$getClassImpl__java_lang_Class@inferreturn.InferReturn)
  )
 )
-
-;;; Code for inferreturn.InferReturn [itable.init]
-(global $inferreturn.InferReturn.itable (ref $inferreturn.InferReturn.itable) (struct.new $inferreturn.InferReturn.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for inferreturn.InferReturn [static fields]
 (global $f_$initialized__inferreturn_InferReturn (mut i32) (i32.const 0))
@@ -60,7 +40,7 @@
  (local $$instance (ref null $inferreturn.InferReturn))
  (block
   ;;@ inferreturn/InferReturn.java:21:13
-  (local.set $$instance (struct.new $inferreturn.InferReturn (ref.as_non_null (global.get $inferreturn.InferReturn.vtable)) (ref.as_non_null (global.get $inferreturn.InferReturn.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $inferreturn.InferReturn (ref.as_non_null (global.get $inferreturn.InferReturn.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ inferreturn/InferReturn.java:21:13
   (call $$ctor__void_$p_inferreturn_InferReturn@inferreturn.InferReturn (ref.as_non_null (local.get $$instance)))
   ;;@ inferreturn/InferReturn.java:21:13

@@ -7,7 +7,7 @@
  ;;; Code for overridingmethods.Parent [type definition]
  (type $overridingmethods.Parent (struct_subtype
   (field $vtable (ref $overridingmethods.Parent.vtable))
-  (field $itable (ref $overridingmethods.Parent.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -20,15 +20,6 @@
   (field $m_fun__void (ref $function.m_fun__void))
   $java.lang.Object.vtable)
  )
- (type $overridingmethods.Parent.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for overridingmethods.Child [type definition]
  (type $overridingmethods.Child (struct_subtype
@@ -55,7 +46,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $overridingmethods.Parent.itable))
+  $itable))
 
 ;;; Code for overridingmethods.Parent [vtable.init]
 (global $overridingmethods.Parent.vtable (ref $overridingmethods.Parent.vtable)
@@ -68,17 +59,6 @@
   (ref.func $m_fun__void@overridingmethods.Parent)
  )
 )
-
-;;; Code for overridingmethods.Parent [itable.init]
-(global $overridingmethods.Parent.itable (ref $overridingmethods.Parent.itable) (struct.new $overridingmethods.Parent.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for overridingmethods.Child [vtable.init]
 (global $overridingmethods.Child.vtable (ref $overridingmethods.Child.vtable)
@@ -174,7 +154,7 @@
  (local $$instance (ref null $overridingmethods.Parent))
  (block
   ;;@ overridingmethods/Child.java:22:6
-  (local.set $$instance (struct.new $overridingmethods.Parent (ref.as_non_null (global.get $overridingmethods.Parent.vtable)) (ref.as_non_null (global.get $overridingmethods.Parent.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $overridingmethods.Parent (ref.as_non_null (global.get $overridingmethods.Parent.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ overridingmethods/Child.java:22:6
   (call $$ctor__void_$p_overridingmethods_Parent@overridingmethods.Parent (ref.as_non_null (local.get $$instance)))
   ;;@ overridingmethods/Child.java:22:6

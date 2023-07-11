@@ -1,7 +1,7 @@
  ;;; Code for ifstatement.IfStatement [type definition]
  (type $ifstatement.IfStatement (struct_subtype
   (field $vtable (ref $ifstatement.IfStatement.vtable))
-  (field $itable (ref $ifstatement.IfStatement.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -14,15 +14,6 @@
   (field $m_test__void (ref $function.m_test__void))
   $java.lang.Object.vtable)
  )
- (type $ifstatement.IfStatement.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for ifstatement.IfStatement [vtable.init]
 (global $ifstatement.IfStatement.vtable (ref $ifstatement.IfStatement.vtable)
@@ -35,17 +26,6 @@
   (ref.func $m_test__void@ifstatement.IfStatement)
  )
 )
-
-;;; Code for ifstatement.IfStatement [itable.init]
-(global $ifstatement.IfStatement.itable (ref $ifstatement.IfStatement.itable) (struct.new $ifstatement.IfStatement.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for ifstatement.IfStatement [static fields]
 (global $f_$initialized__ifstatement_IfStatement (mut i32) (i32.const 0))
@@ -61,7 +41,7 @@
  (local $$instance (ref null $ifstatement.IfStatement))
  (block
   ;;@ ifstatement/IfStatement.java:18:13
-  (local.set $$instance (struct.new $ifstatement.IfStatement (ref.as_non_null (global.get $ifstatement.IfStatement.vtable)) (ref.as_non_null (global.get $ifstatement.IfStatement.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $ifstatement.IfStatement (ref.as_non_null (global.get $ifstatement.IfStatement.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ ifstatement/IfStatement.java:18:13
   (call $$ctor__void_$p_ifstatement_IfStatement@ifstatement.IfStatement (ref.as_non_null (local.get $$instance)))
   ;;@ ifstatement/IfStatement.java:18:13

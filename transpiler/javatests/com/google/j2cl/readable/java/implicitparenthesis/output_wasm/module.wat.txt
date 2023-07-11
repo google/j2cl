@@ -1,7 +1,7 @@
  ;;; Code for implicitparenthesis.ImplicitParenthesis [type definition]
  (type $implicitparenthesis.ImplicitParenthesis (struct_subtype
   (field $vtable (ref $implicitparenthesis.ImplicitParenthesis.vtable))
-  (field $itable (ref $implicitparenthesis.ImplicitParenthesis.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -14,15 +14,6 @@
   (field $m_test__void (ref $function.m_test__void))
   $java.lang.Object.vtable)
  )
- (type $implicitparenthesis.ImplicitParenthesis.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for implicitparenthesis.ImplicitParenthesis [vtable.init]
 (global $implicitparenthesis.ImplicitParenthesis.vtable (ref $implicitparenthesis.ImplicitParenthesis.vtable)
@@ -35,17 +26,6 @@
   (ref.func $m_test__void@implicitparenthesis.ImplicitParenthesis)
  )
 )
-
-;;; Code for implicitparenthesis.ImplicitParenthesis [itable.init]
-(global $implicitparenthesis.ImplicitParenthesis.itable (ref $implicitparenthesis.ImplicitParenthesis.itable) (struct.new $implicitparenthesis.ImplicitParenthesis.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for implicitparenthesis.ImplicitParenthesis [static fields]
 (global $f_$initialized__implicitparenthesis_ImplicitParenthesis (mut i32) (i32.const 0))
@@ -61,7 +41,7 @@
  (local $$instance (ref null $implicitparenthesis.ImplicitParenthesis))
  (block
   ;;@ implicitparenthesis/ImplicitParenthesis.java:21:13
-  (local.set $$instance (struct.new $implicitparenthesis.ImplicitParenthesis (ref.as_non_null (global.get $implicitparenthesis.ImplicitParenthesis.vtable)) (ref.as_non_null (global.get $implicitparenthesis.ImplicitParenthesis.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $implicitparenthesis.ImplicitParenthesis (ref.as_non_null (global.get $implicitparenthesis.ImplicitParenthesis.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ implicitparenthesis/ImplicitParenthesis.java:21:13
   (call $$ctor__void_$p_implicitparenthesis_ImplicitParenthesis@implicitparenthesis.ImplicitParenthesis (ref.as_non_null (local.get $$instance)))
   ;;@ implicitparenthesis/ImplicitParenthesis.java:21:13

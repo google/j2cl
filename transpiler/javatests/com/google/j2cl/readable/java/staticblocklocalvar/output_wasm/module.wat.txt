@@ -1,7 +1,7 @@
  ;;; Code for staticblocklocalvar.StaticBlockLocalVar [type definition]
  (type $staticblocklocalvar.StaticBlockLocalVar (struct_subtype
   (field $vtable (ref $staticblocklocalvar.StaticBlockLocalVar.vtable))
-  (field $itable (ref $staticblocklocalvar.StaticBlockLocalVar.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -13,15 +13,6 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $staticblocklocalvar.StaticBlockLocalVar.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for staticblocklocalvar.StaticBlockLocalVar [vtable.init]
 (global $staticblocklocalvar.StaticBlockLocalVar.vtable (ref $staticblocklocalvar.StaticBlockLocalVar.vtable)
@@ -33,17 +24,6 @@
   (ref.func $$getClassImpl__java_lang_Class@staticblocklocalvar.StaticBlockLocalVar)
  )
 )
-
-;;; Code for staticblocklocalvar.StaticBlockLocalVar [itable.init]
-(global $staticblocklocalvar.StaticBlockLocalVar.itable (ref $staticblocklocalvar.StaticBlockLocalVar.itable) (struct.new $staticblocklocalvar.StaticBlockLocalVar.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for staticblocklocalvar.StaticBlockLocalVar [static fields]
 (global $f_$initialized__staticblocklocalvar_StaticBlockLocalVar (mut i32) (i32.const 0))
@@ -59,7 +39,7 @@
  (local $$instance (ref null $staticblocklocalvar.StaticBlockLocalVar))
  (block
   ;;@ staticblocklocalvar/StaticBlockLocalVar.java:19:13
-  (local.set $$instance (struct.new $staticblocklocalvar.StaticBlockLocalVar (ref.as_non_null (global.get $staticblocklocalvar.StaticBlockLocalVar.vtable)) (ref.as_non_null (global.get $staticblocklocalvar.StaticBlockLocalVar.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $staticblocklocalvar.StaticBlockLocalVar (ref.as_non_null (global.get $staticblocklocalvar.StaticBlockLocalVar.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ staticblocklocalvar/StaticBlockLocalVar.java:19:13
   (call $$ctor__void_$p_staticblocklocalvar_StaticBlockLocalVar@staticblocklocalvar.StaticBlockLocalVar (ref.as_non_null (local.get $$instance)))
   ;;@ staticblocklocalvar/StaticBlockLocalVar.java:19:13

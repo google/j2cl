@@ -7,7 +7,7 @@
  ;;; Code for jsbridgebackward.A [type definition]
  (type $jsbridgebackward.A (struct_subtype
   (field $vtable (ref $jsbridgebackward.A.vtable))
-  (field $itable (ref $jsbridgebackward.A.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -20,15 +20,6 @@
   (field $m_foo__int__int (ref $function.m_foo__int__int))
   $java.lang.Object.vtable)
  )
- (type $jsbridgebackward.A.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for jsbridgebackward.InterfaceImpl [type definition]
  (type $jsbridgebackward.InterfaceImpl (struct_subtype
@@ -54,7 +45,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $jsbridgebackward.A.itable))
+  $itable))
 
  ;;; Code for jsbridgebackward.SubInterfaceImpl [type definition]
  (type $jsbridgebackward.SubInterfaceImpl (struct_subtype
@@ -93,17 +84,6 @@
   (ref.func $m_foo__int__int@jsbridgebackward.A)
  )
 )
-
-;;; Code for jsbridgebackward.A [itable.init]
-(global $jsbridgebackward.A.itable (ref $jsbridgebackward.A.itable) (struct.new $jsbridgebackward.A.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for jsbridgebackward.InterfaceImpl [vtable.init]
 (global $jsbridgebackward.InterfaceImpl.vtable (ref $jsbridgebackward.InterfaceImpl.vtable)
@@ -228,7 +208,7 @@
  (local $$instance (ref null $jsbridgebackward.A))
  (block
   ;;@ jsbridgebackward/InterfaceImpl.java:25:6
-  (local.set $$instance (struct.new $jsbridgebackward.A (ref.as_non_null (global.get $jsbridgebackward.A.vtable)) (ref.as_non_null (global.get $jsbridgebackward.A.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $jsbridgebackward.A (ref.as_non_null (global.get $jsbridgebackward.A.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ jsbridgebackward/InterfaceImpl.java:25:6
   (call $$ctor__void_$p_jsbridgebackward_A@jsbridgebackward.A (ref.as_non_null (local.get $$instance)))
   ;;@ jsbridgebackward/InterfaceImpl.java:25:6

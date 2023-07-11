@@ -7,7 +7,7 @@
  ;;; Code for mixednestings.MixedNestings [type definition]
  (type $mixednestings.MixedNestings (struct_subtype
   (field $vtable (ref $mixednestings.MixedNestings.vtable))
-  (field $itable (ref $mixednestings.MixedNestings.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -21,15 +21,6 @@
   (field $m_test__void (ref $function.m_test__void))
   $java.lang.Object.vtable)
  )
- (type $mixednestings.MixedNestings.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for mixednestings.MixedNestings.A.1B.1.1 [type definition]
  (type $mixednestings.MixedNestings.A.1B.1.1 (struct_subtype
@@ -56,7 +47,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 [type definition]
  (type $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 (struct_subtype
@@ -83,7 +74,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 [type definition]
  (type $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 (struct_subtype
@@ -110,7 +101,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for mixednestings.MixedNestings.A.1B.1 [type definition]
  (type $mixednestings.MixedNestings.A.1B.1 (struct_subtype
@@ -137,12 +128,12 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for mixednestings.MixedNestings.A.1B [type definition]
  (type $mixednestings.MixedNestings.A.1B (struct_subtype
   (field $vtable (ref $mixednestings.MixedNestings.A.1B.vtable))
-  (field $itable (ref $mixednestings.MixedNestings.A.1B.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__mixednestings_MixedNestings_A_1B (ref null $mixednestings.MixedNestings.A))
   $java.lang.Object)
@@ -157,20 +148,11 @@
   (field $m_b__int (ref $function.m_b__int))
   $java.lang.Object.vtable)
  )
- (type $mixednestings.MixedNestings.A.1B.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for mixednestings.MixedNestings.A [type definition]
  (type $mixednestings.MixedNestings.A (struct_subtype
   (field $vtable (ref $mixednestings.MixedNestings.A.vtable))
-  (field $itable (ref $mixednestings.MixedNestings.A.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__mixednestings_MixedNestings_A (ref null $mixednestings.MixedNestings))
   $java.lang.Object)
@@ -185,15 +167,6 @@
   (field $m_a__void (ref $function.m_a__void))
   $java.lang.Object.vtable)
  )
- (type $mixednestings.MixedNestings.A.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for mixednestings.MixedNestings [vtable.init]
 (global $mixednestings.MixedNestings.vtable (ref $mixednestings.MixedNestings.vtable)
@@ -207,17 +180,6 @@
   (ref.func $m_test__void@mixednestings.MixedNestings)
  )
 )
-
-;;; Code for mixednestings.MixedNestings [itable.init]
-(global $mixednestings.MixedNestings.itable (ref $mixednestings.MixedNestings.itable) (struct.new $mixednestings.MixedNestings.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for mixednestings.MixedNestings.A.1B.1.1 [vtable.init]
 (global $mixednestings.MixedNestings.A.1B.1.1.vtable (ref $mixednestings.MixedNestings.A.1B.1.1.vtable)
@@ -332,17 +294,6 @@
  )
 )
 
-;;; Code for mixednestings.MixedNestings.A.1B [itable.init]
-(global $mixednestings.MixedNestings.A.1B.itable (ref $mixednestings.MixedNestings.A.1B.itable) (struct.new $mixednestings.MixedNestings.A.1B.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for mixednestings.MixedNestings.A [vtable.init]
 (global $mixednestings.MixedNestings.A.vtable (ref $mixednestings.MixedNestings.A.vtable)
  (struct.new $mixednestings.MixedNestings.A.vtable
@@ -355,17 +306,6 @@
   (ref.func $m_a__void@mixednestings.MixedNestings.A)
  )
 )
-
-;;; Code for mixednestings.MixedNestings.A [itable.init]
-(global $mixednestings.MixedNestings.A.itable (ref $mixednestings.MixedNestings.A.itable) (struct.new $mixednestings.MixedNestings.A.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for mixednestings.MyInterface [static fields]
 (global $f_$initialized__mixednestings_MyInterface (mut i32) (i32.const 0))
@@ -460,7 +400,7 @@
  (local $$instance (ref null $mixednestings.MixedNestings))
  (block
   ;;@ mixednestings/MixedNestings.java:26:13
-  (local.set $$instance (struct.new $mixednestings.MixedNestings (ref.as_non_null (global.get $mixednestings.MixedNestings.vtable)) (ref.as_non_null (global.get $mixednestings.MixedNestings.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $mixednestings.MixedNestings (ref.as_non_null (global.get $mixednestings.MixedNestings.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ mixednestings/MixedNestings.java:26:13
   (call $$ctor__void_$p_mixednestings_MixedNestings@mixednestings.MixedNestings (ref.as_non_null (local.get $$instance)))
   ;;@ mixednestings/MixedNestings.java:26:13
@@ -1016,7 +956,7 @@
  (local $$instance (ref null $mixednestings.MixedNestings.A.1B))
  (block
   ;;@ mixednestings/MixedNestings.java:33:12
-  (local.set $$instance (struct.new $mixednestings.MixedNestings.A.1B (ref.as_non_null (global.get $mixednestings.MixedNestings.A.1B.vtable)) (ref.as_non_null (global.get $mixednestings.MixedNestings.A.1B.itable)) (i32.const 0) (local.get $$outer_this)))
+  (local.set $$instance (struct.new $mixednestings.MixedNestings.A.1B (ref.as_non_null (global.get $mixednestings.MixedNestings.A.1B.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (local.get $$outer_this)))
   ;;@ mixednestings/MixedNestings.java:33:12
   (call $$ctor__mixednestings_MixedNestings_A__void_$p_mixednestings_MixedNestings_A_1B@mixednestings.MixedNestings.A.1B (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ mixednestings/MixedNestings.java:33:12
@@ -1134,7 +1074,7 @@
  (local $$instance (ref null $mixednestings.MixedNestings.A))
  (block
   ;;@ mixednestings/MixedNestings.java:29:8
-  (local.set $$instance (struct.new $mixednestings.MixedNestings.A (ref.as_non_null (global.get $mixednestings.MixedNestings.A.vtable)) (ref.as_non_null (global.get $mixednestings.MixedNestings.A.itable)) (i32.const 0) (local.get $$outer_this)))
+  (local.set $$instance (struct.new $mixednestings.MixedNestings.A (ref.as_non_null (global.get $mixednestings.MixedNestings.A.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (local.get $$outer_this)))
   ;;@ mixednestings/MixedNestings.java:29:8
   (call $$ctor__mixednestings_MixedNestings__void_$p_mixednestings_MixedNestings_A@mixednestings.MixedNestings.A (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ mixednestings/MixedNestings.java:29:8

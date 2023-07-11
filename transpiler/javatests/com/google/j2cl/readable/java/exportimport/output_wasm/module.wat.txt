@@ -1,7 +1,7 @@
  ;;; Code for exportimport.Main [type definition]
  (type $exportimport.Main (struct_subtype
   (field $vtable (ref $exportimport.Main.vtable))
-  (field $itable (ref $exportimport.Main.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -13,15 +13,6 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $exportimport.Main.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for exportimport.Main [vtable.init]
 (global $exportimport.Main.vtable (ref $exportimport.Main.vtable)
@@ -33,17 +24,6 @@
   (ref.func $$getClassImpl__java_lang_Class@exportimport.Main)
  )
 )
-
-;;; Code for exportimport.Main [itable.init]
-(global $exportimport.Main.itable (ref $exportimport.Main.itable) (struct.new $exportimport.Main.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for exportimport.Main [static fields]
 (global $f_$initialized__exportimport_Main (mut i32) (i32.const 0))
@@ -59,7 +39,7 @@
  (local $$instance (ref null $exportimport.Main))
  (block
   ;;@ exportimport/Main.java:19:13
-  (local.set $$instance (struct.new $exportimport.Main (ref.as_non_null (global.get $exportimport.Main.vtable)) (ref.as_non_null (global.get $exportimport.Main.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $exportimport.Main (ref.as_non_null (global.get $exportimport.Main.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ exportimport/Main.java:19:13
   (call $$ctor__void_$p_exportimport_Main@exportimport.Main (ref.as_non_null (local.get $$instance)))
   ;;@ exportimport/Main.java:19:13

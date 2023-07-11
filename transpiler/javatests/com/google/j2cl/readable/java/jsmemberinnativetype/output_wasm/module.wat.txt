@@ -1,22 +1,13 @@
  ;;; Code for jsmemberinnativetype.MyNativeType.$Overlay [type definition]
  (type $jsmemberinnativetype.MyNativeType.$Overlay (struct_subtype
   (field $vtable (ref $jsmemberinnativetype.MyNativeType.$Overlay.vtable))
-  (field $itable (ref $jsmemberinnativetype.MyNativeType.$Overlay.itable))
+  (field $itable (ref $itable))
   data)
  )
  (type $jsmemberinnativetype.MyNativeType.$Overlay.vtable (struct_subtype
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   data)
  )
- (type $jsmemberinnativetype.MyNativeType.$Overlay.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $itable))
 
  ;;; Code for jsmemberinnativetype.MyNativeType [type definition]
 
@@ -26,17 +17,6 @@
   (ref.func $$getClassImpl__java_lang_Class@jsmemberinnativetype.MyNativeType.$Overlay)
  )
 )
-
-;;; Code for jsmemberinnativetype.MyNativeType.$Overlay [itable.init]
-(global $jsmemberinnativetype.MyNativeType.$Overlay.itable (ref $jsmemberinnativetype.MyNativeType.$Overlay.itable) (struct.new $jsmemberinnativetype.MyNativeType.$Overlay.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for jsmemberinnativetype.MyNativeType [static fields]
 

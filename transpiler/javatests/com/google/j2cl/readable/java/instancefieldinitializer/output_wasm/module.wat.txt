@@ -1,7 +1,7 @@
  ;;; Code for instancefieldinitializer.InstanceFieldInitializer [type definition]
  (type $instancefieldinitializer.InstanceFieldInitializer (struct_subtype
   (field $vtable (ref $instancefieldinitializer.InstanceFieldInitializer.vtable))
-  (field $itable (ref $instancefieldinitializer.InstanceFieldInitializer.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_a__instancefieldinitializer_InstanceFieldInitializer i32)
   (field $f_b__instancefieldinitializer_InstanceFieldInitializer (mut i32))
@@ -15,15 +15,6 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $instancefieldinitializer.InstanceFieldInitializer.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for instancefieldinitializer.InstanceFieldInitializer [vtable.init]
 (global $instancefieldinitializer.InstanceFieldInitializer.vtable (ref $instancefieldinitializer.InstanceFieldInitializer.vtable)
@@ -35,17 +26,6 @@
   (ref.func $$getClassImpl__java_lang_Class@instancefieldinitializer.InstanceFieldInitializer)
  )
 )
-
-;;; Code for instancefieldinitializer.InstanceFieldInitializer [itable.init]
-(global $instancefieldinitializer.InstanceFieldInitializer.itable (ref $instancefieldinitializer.InstanceFieldInitializer.itable) (struct.new $instancefieldinitializer.InstanceFieldInitializer.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for instancefieldinitializer.InstanceFieldInitializer [static fields]
 (global $f_$initialized__instancefieldinitializer_InstanceFieldInitializer (mut i32) (i32.const 0))
@@ -61,7 +41,7 @@
  (local $$instance (ref null $instancefieldinitializer.InstanceFieldInitializer))
  (block
   ;;@ instancefieldinitializer/InstanceFieldInitializer.java:18:13
-  (local.set $$instance (struct.new $instancefieldinitializer.InstanceFieldInitializer (ref.as_non_null (global.get $instancefieldinitializer.InstanceFieldInitializer.vtable)) (ref.as_non_null (global.get $instancefieldinitializer.InstanceFieldInitializer.itable)) (i32.const 0) (i32.const 1) (i32.const 0)))
+  (local.set $$instance (struct.new $instancefieldinitializer.InstanceFieldInitializer (ref.as_non_null (global.get $instancefieldinitializer.InstanceFieldInitializer.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 1) (i32.const 0)))
   ;;@ instancefieldinitializer/InstanceFieldInitializer.java:18:13
   (call $$ctor__void_$p_instancefieldinitializer_InstanceFieldInitializer@instancefieldinitializer.InstanceFieldInitializer (ref.as_non_null (local.get $$instance)))
   ;;@ instancefieldinitializer/InstanceFieldInitializer.java:18:13

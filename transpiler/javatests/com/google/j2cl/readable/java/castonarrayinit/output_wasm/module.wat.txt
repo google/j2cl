@@ -1,7 +1,7 @@
  ;;; Code for castonarrayinit.CastOnArrayInit [type definition]
  (type $castonarrayinit.CastOnArrayInit (struct_subtype
   (field $vtable (ref $castonarrayinit.CastOnArrayInit.vtable))
-  (field $itable (ref $castonarrayinit.CastOnArrayInit.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -13,20 +13,11 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $castonarrayinit.CastOnArrayInit.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for castonarrayinit.CastOnArrayInit.Foo [type definition]
  (type $castonarrayinit.CastOnArrayInit.Foo (struct_subtype
   (field $vtable (ref $castonarrayinit.CastOnArrayInit.Foo.vtable))
-  (field $itable (ref $castonarrayinit.CastOnArrayInit.Foo.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -38,15 +29,6 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $castonarrayinit.CastOnArrayInit.Foo.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for castonarrayinit.CastOnArrayInit [vtable.init]
 (global $castonarrayinit.CastOnArrayInit.vtable (ref $castonarrayinit.CastOnArrayInit.vtable)
@@ -59,17 +41,6 @@
  )
 )
 
-;;; Code for castonarrayinit.CastOnArrayInit [itable.init]
-(global $castonarrayinit.CastOnArrayInit.itable (ref $castonarrayinit.CastOnArrayInit.itable) (struct.new $castonarrayinit.CastOnArrayInit.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for castonarrayinit.CastOnArrayInit.Foo [vtable.init]
 (global $castonarrayinit.CastOnArrayInit.Foo.vtable (ref $castonarrayinit.CastOnArrayInit.Foo.vtable)
  (struct.new $castonarrayinit.CastOnArrayInit.Foo.vtable
@@ -80,17 +51,6 @@
   (ref.func $$getClassImpl__java_lang_Class@castonarrayinit.CastOnArrayInit.Foo)
  )
 )
-
-;;; Code for castonarrayinit.CastOnArrayInit.Foo [itable.init]
-(global $castonarrayinit.CastOnArrayInit.Foo.itable (ref $castonarrayinit.CastOnArrayInit.Foo.itable) (struct.new $castonarrayinit.CastOnArrayInit.Foo.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for castonarrayinit.CastOnArrayInit [static fields]
 (global $f_$initialized__castonarrayinit_CastOnArrayInit (mut i32) (i32.const 0))
@@ -111,7 +71,7 @@
  (local $$instance (ref null $castonarrayinit.CastOnArrayInit))
  (block
   ;;@ castonarrayinit/CastOnArrayInit.java:18:13
-  (local.set $$instance (struct.new $castonarrayinit.CastOnArrayInit (ref.as_non_null (global.get $castonarrayinit.CastOnArrayInit.vtable)) (ref.as_non_null (global.get $castonarrayinit.CastOnArrayInit.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $castonarrayinit.CastOnArrayInit (ref.as_non_null (global.get $castonarrayinit.CastOnArrayInit.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ castonarrayinit/CastOnArrayInit.java:18:13
   (call $$ctor__void_$p_castonarrayinit_CastOnArrayInit@castonarrayinit.CastOnArrayInit (ref.as_non_null (local.get $$instance)))
   ;;@ castonarrayinit/CastOnArrayInit.java:18:13
@@ -224,7 +184,7 @@
  (local $$instance (ref null $castonarrayinit.CastOnArrayInit.Foo))
  (block
   ;;@ castonarrayinit/CastOnArrayInit.java:19:22
-  (local.set $$instance (struct.new $castonarrayinit.CastOnArrayInit.Foo (ref.as_non_null (global.get $castonarrayinit.CastOnArrayInit.Foo.vtable)) (ref.as_non_null (global.get $castonarrayinit.CastOnArrayInit.Foo.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $castonarrayinit.CastOnArrayInit.Foo (ref.as_non_null (global.get $castonarrayinit.CastOnArrayInit.Foo.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ castonarrayinit/CastOnArrayInit.java:19:22
   (call $$ctor__void_$p_castonarrayinit_CastOnArrayInit_Foo@castonarrayinit.CastOnArrayInit.Foo (ref.as_non_null (local.get $$instance)))
   ;;@ castonarrayinit/CastOnArrayInit.java:19:22

@@ -1,7 +1,7 @@
  ;;; Code for trycatch.TryCatch [type definition]
  (type $trycatch.TryCatch (struct_subtype
   (field $vtable (ref $trycatch.TryCatch.vtable))
-  (field $itable (ref $trycatch.TryCatch.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -23,15 +23,6 @@
   (field $m_testThrowBoundGenerics__void (ref $function.m_testThrowBoundGenerics__void))
   $java.lang.Object.vtable)
  )
- (type $trycatch.TryCatch.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for trycatch.TryCatch.ClosableThing [type definition]
  (type $trycatch.TryCatch.ClosableThing (struct_subtype
@@ -57,7 +48,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
 ;;; Code for trycatch.TryCatch [vtable.init]
 (global $trycatch.TryCatch.vtable (ref $trycatch.TryCatch.vtable)
@@ -79,17 +70,6 @@
   (ref.func $m_testThrowBoundGenerics__void@trycatch.TryCatch)
  )
 )
-
-;;; Code for trycatch.TryCatch [itable.init]
-(global $trycatch.TryCatch.itable (ref $trycatch.TryCatch.itable) (struct.new $trycatch.TryCatch.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for trycatch.TryCatch.ClosableThing [vtable.init]
 (global $trycatch.TryCatch.ClosableThing.vtable (ref $trycatch.TryCatch.ClosableThing.vtable)
@@ -136,7 +116,7 @@
  (local $$instance (ref null $trycatch.TryCatch))
  (block
   ;;@ trycatch/TryCatch.java:18:13
-  (local.set $$instance (struct.new $trycatch.TryCatch (ref.as_non_null (global.get $trycatch.TryCatch.vtable)) (ref.as_non_null (global.get $trycatch.TryCatch.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $trycatch.TryCatch (ref.as_non_null (global.get $trycatch.TryCatch.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ trycatch/TryCatch.java:18:13
   (call $$ctor__void_$p_trycatch_TryCatch@trycatch.TryCatch (ref.as_non_null (local.get $$instance)))
   ;;@ trycatch/TryCatch.java:18:13

@@ -14,7 +14,7 @@
  ;;; Code for jsbridgeaccidentaloverride.Main [type definition]
  (type $jsbridgeaccidentaloverride.Main (struct_subtype
   (field $vtable (ref $jsbridgeaccidentaloverride.Main.vtable))
-  (field $itable (ref $jsbridgeaccidentaloverride.Main.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -27,15 +27,6 @@
   (field $m_test__void (ref $function.m_test__void))
   $java.lang.Object.vtable)
  )
- (type $jsbridgeaccidentaloverride.Main.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for jsbridgeaccidentaloverride.MyJsType [type definition]
  (type $jsbridgeaccidentaloverride.MyJsType (struct_subtype
@@ -63,7 +54,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for jsbridgeaccidentaloverride.SubJsType [type definition]
  (type $jsbridgeaccidentaloverride.SubJsType (struct_subtype
@@ -104,17 +95,6 @@
   (ref.func $m_test__void@jsbridgeaccidentaloverride.Main)
  )
 )
-
-;;; Code for jsbridgeaccidentaloverride.Main [itable.init]
-(global $jsbridgeaccidentaloverride.Main.itable (ref $jsbridgeaccidentaloverride.Main.itable) (struct.new $jsbridgeaccidentaloverride.Main.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for jsbridgeaccidentaloverride.MyJsType [vtable.init]
 (global $jsbridgeaccidentaloverride.MyJsType.vtable (ref $jsbridgeaccidentaloverride.MyJsType.vtable)
@@ -295,7 +275,7 @@
  (local $$instance (ref null $jsbridgeaccidentaloverride.Main))
  (block
   ;;@ jsbridgeaccidentaloverride/Main.java:18:13
-  (local.set $$instance (struct.new $jsbridgeaccidentaloverride.Main (ref.as_non_null (global.get $jsbridgeaccidentaloverride.Main.vtable)) (ref.as_non_null (global.get $jsbridgeaccidentaloverride.Main.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $jsbridgeaccidentaloverride.Main (ref.as_non_null (global.get $jsbridgeaccidentaloverride.Main.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ jsbridgeaccidentaloverride/Main.java:18:13
   (call $$ctor__void_$p_jsbridgeaccidentaloverride_Main@jsbridgeaccidentaloverride.Main (ref.as_non_null (local.get $$instance)))
   ;;@ jsbridgeaccidentaloverride/Main.java:18:13

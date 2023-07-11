@@ -1,22 +1,13 @@
  ;;; Code for objectmap.ObjectMap.$Overlay [type definition]
  (type $objectmap.ObjectMap.$Overlay (struct_subtype
   (field $vtable (ref $objectmap.ObjectMap.$Overlay.vtable))
-  (field $itable (ref $objectmap.ObjectMap.$Overlay.itable))
+  (field $itable (ref $itable))
   data)
  )
  (type $objectmap.ObjectMap.$Overlay.vtable (struct_subtype
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   data)
  )
- (type $objectmap.ObjectMap.$Overlay.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $itable))
 
  ;;; Code for objectmap.ObjectMap [type definition]
 
@@ -26,17 +17,6 @@
   (ref.func $$getClassImpl__java_lang_Class@objectmap.ObjectMap.$Overlay)
  )
 )
-
-;;; Code for objectmap.ObjectMap.$Overlay [itable.init]
-(global $objectmap.ObjectMap.$Overlay.itable (ref $objectmap.ObjectMap.$Overlay.itable) (struct.new $objectmap.ObjectMap.$Overlay.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for objectmap.ObjectMap [static fields]
 

@@ -14,7 +14,7 @@
  ;;; Code for interfaces.Main [type definition]
  (type $interfaces.Main (struct_subtype
   (field $vtable (ref $interfaces.Main.vtable))
-  (field $itable (ref $interfaces.Main.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -27,15 +27,6 @@
   (field $m_testInterfaceMembers__void_$pp_interfaces (ref $function.m_testInterfaceMembers__void_$pp_interfaces))
   $java.lang.Object.vtable)
  )
- (type $interfaces.Main.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for interfaces.Main.Implementor [type definition]
  (type $interfaces.Main.Implementor (struct_subtype
@@ -64,7 +55,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for interfaces.Main.AbstractImplementor [type definition]
  (type $interfaces.Main.AbstractImplementor (struct_subtype
@@ -92,7 +83,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
 ;;; Code for interfaces.Main [vtable.init]
 (global $interfaces.Main.vtable (ref $interfaces.Main.vtable)
@@ -105,17 +96,6 @@
   (ref.func $m_testInterfaceMembers__void_$pp_interfaces@interfaces.Main)
  )
 )
-
-;;; Code for interfaces.Main [itable.init]
-(global $interfaces.Main.itable (ref $interfaces.Main.itable) (struct.new $interfaces.Main.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for interfaces.Main.Implementor [vtable.init]
 (global $interfaces.Main.Implementor.vtable (ref $interfaces.Main.Implementor.vtable)
@@ -313,7 +293,7 @@
  (local $$instance (ref null $interfaces.Main))
  (block
   ;;@ interfaces/Main.java:18:13
-  (local.set $$instance (struct.new $interfaces.Main (ref.as_non_null (global.get $interfaces.Main.vtable)) (ref.as_non_null (global.get $interfaces.Main.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $interfaces.Main (ref.as_non_null (global.get $interfaces.Main.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ interfaces/Main.java:18:13
   (call $$ctor__void_$p_interfaces_Main@interfaces.Main (ref.as_non_null (local.get $$instance)))
   ;;@ interfaces/Main.java:18:13

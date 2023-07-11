@@ -40,12 +40,12 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for interfacejsbridge.Main [type definition]
  (type $interfacejsbridge.Main (struct_subtype
   (field $vtable (ref $interfacejsbridge.Main.vtable))
-  (field $itable (ref $interfacejsbridge.Main.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -58,15 +58,6 @@
   (field $m_test__void (ref $function.m_test__void))
   $java.lang.Object.vtable)
  )
- (type $interfacejsbridge.Main.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for interfacejsbridge.InterfaceImpl [vtable.init]
 (global $interfacejsbridge.InterfaceImpl.vtable (ref $interfacejsbridge.InterfaceImpl.vtable)
@@ -108,17 +99,6 @@
   (ref.func $m_test__void@interfacejsbridge.Main)
  )
 )
-
-;;; Code for interfacejsbridge.Main [itable.init]
-(global $interfacejsbridge.Main.itable (ref $interfacejsbridge.Main.itable) (struct.new $interfacejsbridge.Main.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for interfacejsbridge.MyJsInterface [static fields]
 (global $f_$initialized__interfacejsbridge_MyJsInterface (mut i32) (i32.const 0))
@@ -388,7 +368,7 @@
  (local $$instance (ref null $interfacejsbridge.Main))
  (block
   ;;@ interfacejsbridge/Main.java:18:13
-  (local.set $$instance (struct.new $interfacejsbridge.Main (ref.as_non_null (global.get $interfacejsbridge.Main.vtable)) (ref.as_non_null (global.get $interfacejsbridge.Main.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $interfacejsbridge.Main (ref.as_non_null (global.get $interfacejsbridge.Main.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ interfacejsbridge/Main.java:18:13
   (call $$ctor__void_$p_interfacejsbridge_Main@interfacejsbridge.Main (ref.as_non_null (local.get $$instance)))
   ;;@ interfacejsbridge/Main.java:18:13

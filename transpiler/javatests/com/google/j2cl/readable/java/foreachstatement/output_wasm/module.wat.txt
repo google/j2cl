@@ -1,7 +1,7 @@
  ;;; Code for foreachstatement.ForEachStatement [type definition]
  (type $foreachstatement.ForEachStatement (struct_subtype
   (field $vtable (ref $foreachstatement.ForEachStatement.vtable))
-  (field $itable (ref $foreachstatement.ForEachStatement.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -14,15 +14,6 @@
   (field $m_test__java_lang_Iterable__void (ref $function.m_test__java_lang_Iterable__void))
   $java.lang.Object.vtable)
  )
- (type $foreachstatement.ForEachStatement.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for foreachstatement.ForEachStatement.IterableReturningTypeVariable [type definition]
  (type $foreachstatement.ForEachStatement.IterableReturningTypeVariable (struct_subtype
@@ -50,7 +41,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for foreachstatement.ForEachStatement.Exception1 [type definition]
  (type $foreachstatement.ForEachStatement.Exception1 (struct_subtype
@@ -159,17 +150,6 @@
   (ref.func $m_test__java_lang_Iterable__void@foreachstatement.ForEachStatement)
  )
 )
-
-;;; Code for foreachstatement.ForEachStatement [itable.init]
-(global $foreachstatement.ForEachStatement.itable (ref $foreachstatement.ForEachStatement.itable) (struct.new $foreachstatement.ForEachStatement.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for foreachstatement.ForEachStatement.Exception1 [vtable.init]
 (global $foreachstatement.ForEachStatement.Exception1.vtable (ref $foreachstatement.ForEachStatement.Exception1.vtable)
@@ -315,7 +295,7 @@
  (local $$instance (ref null $foreachstatement.ForEachStatement))
  (block
   ;;@ foreachstatement/ForEachStatement.java:21:13
-  (local.set $$instance (struct.new $foreachstatement.ForEachStatement (ref.as_non_null (global.get $foreachstatement.ForEachStatement.vtable)) (ref.as_non_null (global.get $foreachstatement.ForEachStatement.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $foreachstatement.ForEachStatement (ref.as_non_null (global.get $foreachstatement.ForEachStatement.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ foreachstatement/ForEachStatement.java:21:13
   (call $$ctor__void_$p_foreachstatement_ForEachStatement@foreachstatement.ForEachStatement (ref.as_non_null (local.get $$instance)))
   ;;@ foreachstatement/ForEachStatement.java:21:13

@@ -26,7 +26,7 @@
  ;;; Code for libraryinfo.Main [type definition]
  (type $libraryinfo.Main (struct_subtype
   (field $vtable (ref $libraryinfo.Main.vtable))
-  (field $itable (ref $libraryinfo.Main.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -38,15 +38,6 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $libraryinfo.Main.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for libraryinfo.Main.$LambdaImplementor$1 [type definition]
  (type $libraryinfo.Main.$LambdaImplementor$1 (struct_subtype
@@ -72,12 +63,12 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for libraryinfo.Main.1 [type definition]
  (type $libraryinfo.Main.1 (struct_subtype
   (field $vtable (ref $libraryinfo.Main.1.vtable))
-  (field $itable (ref $libraryinfo.Main.1.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -90,15 +81,6 @@
   (field $m_foo__void_$pp_libraryinfo (ref $function.m_foo__void_$pp_libraryinfo))
   $java.lang.Object.vtable)
  )
- (type $libraryinfo.Main.1.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for libraryinfo.Main.FunctionImpl [type definition]
  (type $libraryinfo.Main.FunctionImpl (struct_subtype
@@ -124,12 +106,12 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for libraryinfo.Main.MyJsType [type definition]
  (type $libraryinfo.Main.MyJsType (struct_subtype
   (field $vtable (ref $libraryinfo.Main.MyJsType.vtable))
-  (field $itable (ref $libraryinfo.Main.MyJsType.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_someField__libraryinfo_Main_MyJsType (mut (ref null $java.lang.Object)))
   $java.lang.Object)
@@ -142,20 +124,11 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $libraryinfo.Main.MyJsType.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for libraryinfo.Main.Foo [type definition]
  (type $libraryinfo.Main.Foo (struct_subtype
   (field $vtable (ref $libraryinfo.Main.Foo.vtable))
-  (field $itable (ref $libraryinfo.Main.Foo.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__libraryinfo_Main_Foo (ref null $libraryinfo.Main))
   $java.lang.Object)
@@ -169,15 +142,6 @@
   (field $m_instanceMethod__void_$pp_libraryinfo (ref $function.m_instanceMethod__void_$pp_libraryinfo))
   $java.lang.Object.vtable)
  )
- (type $libraryinfo.Main.Foo.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for libraryinfo.Main.MyJsEnum [type definition]
  (type $libraryinfo.Main.MyJsEnum (struct_subtype
@@ -254,17 +218,6 @@
  )
 )
 
-;;; Code for libraryinfo.Main [itable.init]
-(global $libraryinfo.Main.itable (ref $libraryinfo.Main.itable) (struct.new $libraryinfo.Main.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for libraryinfo.Main.$LambdaImplementor$1 [vtable.init]
 (global $libraryinfo.Main.$LambdaImplementor$1.vtable (ref $libraryinfo.Main.$LambdaImplementor$1.vtable)
  (struct.new $libraryinfo.Main.$LambdaImplementor$1.vtable
@@ -301,17 +254,6 @@
   (ref.func $m_foo__void_$pp_libraryinfo@libraryinfo.Main.1)
  )
 )
-
-;;; Code for libraryinfo.Main.1 [itable.init]
-(global $libraryinfo.Main.1.itable (ref $libraryinfo.Main.1.itable) (struct.new $libraryinfo.Main.1.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for libraryinfo.Main.FunctionImpl [vtable.init]
 (global $libraryinfo.Main.FunctionImpl.vtable (ref $libraryinfo.Main.FunctionImpl.vtable)
@@ -409,17 +351,6 @@
  )
 )
 
-;;; Code for libraryinfo.Main.MyJsType [itable.init]
-(global $libraryinfo.Main.MyJsType.itable (ref $libraryinfo.Main.MyJsType.itable) (struct.new $libraryinfo.Main.MyJsType.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for libraryinfo.Main.Foo [vtable.init]
 (global $libraryinfo.Main.Foo.vtable (ref $libraryinfo.Main.Foo.vtable)
  (struct.new $libraryinfo.Main.Foo.vtable
@@ -431,17 +362,6 @@
   (ref.func $m_instanceMethod__void_$pp_libraryinfo@libraryinfo.Main.Foo)
  )
 )
-
-;;; Code for libraryinfo.Main.Foo [itable.init]
-(global $libraryinfo.Main.Foo.itable (ref $libraryinfo.Main.Foo.itable) (struct.new $libraryinfo.Main.Foo.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for libraryinfo.Main [static fields]
 (global $f_STATIC_FIELD__libraryinfo_Main (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
@@ -701,7 +621,7 @@
  (local $$instance (ref null $libraryinfo.Main))
  (block
   ;;@ libraryinfo/Main.java:25:13
-  (local.set $$instance (struct.new $libraryinfo.Main (ref.as_non_null (global.get $libraryinfo.Main.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $libraryinfo.Main (ref.as_non_null (global.get $libraryinfo.Main.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ libraryinfo/Main.java:25:13
   (call $$ctor__void_$p_libraryinfo_Main@libraryinfo.Main (ref.as_non_null (local.get $$instance)))
   ;;@ libraryinfo/Main.java:25:13
@@ -985,7 +905,7 @@
  (local $$instance (ref null $libraryinfo.Main.1))
  (block
   ;;@ libraryinfo/Main.java:89:17
-  (local.set $$instance (struct.new $libraryinfo.Main.1 (ref.as_non_null (global.get $libraryinfo.Main.1.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.1.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $libraryinfo.Main.1 (ref.as_non_null (global.get $libraryinfo.Main.1.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ libraryinfo/Main.java:89:17
   (call $$ctor__void_$p_libraryinfo_Main_1@libraryinfo.Main.1 (ref.as_non_null (local.get $$instance)))
   ;;@ libraryinfo/Main.java:89:17
@@ -1182,7 +1102,7 @@
  (local $$instance (ref null $libraryinfo.Main.MyJsType))
  (block
   ;;@ libraryinfo/Main.java:74:11
-  (local.set $$instance (struct.new $libraryinfo.Main.MyJsType (ref.as_non_null (global.get $libraryinfo.Main.MyJsType.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.MyJsType.itable)) (i32.const 0) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $libraryinfo.Main.MyJsType (ref.as_non_null (global.get $libraryinfo.Main.MyJsType.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.Object)))
   ;;@ libraryinfo/Main.java:74:11
   (call $$ctor__void_$p_libraryinfo_Main_MyJsType@libraryinfo.Main.MyJsType (ref.as_non_null (local.get $$instance)))
   ;;@ libraryinfo/Main.java:74:11
@@ -1271,7 +1191,7 @@
  (local $$instance (ref null $libraryinfo.Main.Foo))
  (block
   ;;@ libraryinfo/Main.java:107:15
-  (local.set $$instance (struct.new $libraryinfo.Main.Foo (ref.as_non_null (global.get $libraryinfo.Main.Foo.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.Foo.itable)) (i32.const 0) (local.get $$outer_this)))
+  (local.set $$instance (struct.new $libraryinfo.Main.Foo (ref.as_non_null (global.get $libraryinfo.Main.Foo.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (local.get $$outer_this)))
   ;;@ libraryinfo/Main.java:107:15
   (call $$ctor__libraryinfo_Main__void_$p_libraryinfo_Main_Foo@libraryinfo.Main.Foo (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ libraryinfo/Main.java:107:15

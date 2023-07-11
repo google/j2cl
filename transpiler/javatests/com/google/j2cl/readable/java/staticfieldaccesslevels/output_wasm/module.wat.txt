@@ -1,7 +1,7 @@
  ;;; Code for staticfieldaccesslevels.StaticFieldAccessLevels [type definition]
  (type $staticfieldaccesslevels.StaticFieldAccessLevels (struct_subtype
   (field $vtable (ref $staticfieldaccesslevels.StaticFieldAccessLevels.vtable))
-  (field $itable (ref $staticfieldaccesslevels.StaticFieldAccessLevels.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -14,15 +14,6 @@
   (field $m_test__int (ref $function.m_test__int))
   $java.lang.Object.vtable)
  )
- (type $staticfieldaccesslevels.StaticFieldAccessLevels.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for staticfieldaccesslevels.StaticFieldAccessLevels [vtable.init]
 (global $staticfieldaccesslevels.StaticFieldAccessLevels.vtable (ref $staticfieldaccesslevels.StaticFieldAccessLevels.vtable)
@@ -35,17 +26,6 @@
   (ref.func $m_test__int@staticfieldaccesslevels.StaticFieldAccessLevels)
  )
 )
-
-;;; Code for staticfieldaccesslevels.StaticFieldAccessLevels [itable.init]
-(global $staticfieldaccesslevels.StaticFieldAccessLevels.itable (ref $staticfieldaccesslevels.StaticFieldAccessLevels.itable) (struct.new $staticfieldaccesslevels.StaticFieldAccessLevels.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for staticfieldaccesslevels.StaticFieldAccessLevels [static fields]
 (global $f_a__staticfieldaccesslevels_StaticFieldAccessLevels (mut i32) (i32.const 0))
@@ -65,7 +45,7 @@
  (local $$instance (ref null $staticfieldaccesslevels.StaticFieldAccessLevels))
  (block
   ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:18:13
-  (local.set $$instance (struct.new $staticfieldaccesslevels.StaticFieldAccessLevels (ref.as_non_null (global.get $staticfieldaccesslevels.StaticFieldAccessLevels.vtable)) (ref.as_non_null (global.get $staticfieldaccesslevels.StaticFieldAccessLevels.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $staticfieldaccesslevels.StaticFieldAccessLevels (ref.as_non_null (global.get $staticfieldaccesslevels.StaticFieldAccessLevels.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:18:13
   (call $$ctor__void_$p_staticfieldaccesslevels_StaticFieldAccessLevels@staticfieldaccesslevels.StaticFieldAccessLevels (ref.as_non_null (local.get $$instance)))
   ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:18:13

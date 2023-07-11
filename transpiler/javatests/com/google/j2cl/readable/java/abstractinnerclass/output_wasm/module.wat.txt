@@ -7,7 +7,7 @@
  ;;; Code for abstractinnerclass.InnerClasses [type definition]
  (type $abstractinnerclass.InnerClasses (struct_subtype
   (field $vtable (ref $abstractinnerclass.InnerClasses.vtable))
-  (field $itable (ref $abstractinnerclass.InnerClasses.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -19,15 +19,6 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $abstractinnerclass.InnerClasses.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for abstractinnerclass.InnerClasses.B [type definition]
  (type $abstractinnerclass.InnerClasses.B (struct_subtype
@@ -54,7 +45,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for abstractinnerclass.InnerClasses.C [type definition]
  (type $abstractinnerclass.InnerClasses.C (struct_subtype
@@ -82,7 +73,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
 ;;; Code for abstractinnerclass.InnerClasses [vtable.init]
 (global $abstractinnerclass.InnerClasses.vtable (ref $abstractinnerclass.InnerClasses.vtable)
@@ -94,17 +85,6 @@
   (ref.func $$getClassImpl__java_lang_Class@abstractinnerclass.InnerClasses)
  )
 )
-
-;;; Code for abstractinnerclass.InnerClasses [itable.init]
-(global $abstractinnerclass.InnerClasses.itable (ref $abstractinnerclass.InnerClasses.itable) (struct.new $abstractinnerclass.InnerClasses.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for abstractinnerclass.InnerClasses [static fields]
 (global $f_$initialized__abstractinnerclass_InnerClasses (mut i32) (i32.const 0))
@@ -179,7 +159,7 @@
  (local $$instance (ref null $abstractinnerclass.InnerClasses))
  (block
   ;;@ abstractinnerclass/InnerClasses.java:18:13
-  (local.set $$instance (struct.new $abstractinnerclass.InnerClasses (ref.as_non_null (global.get $abstractinnerclass.InnerClasses.vtable)) (ref.as_non_null (global.get $abstractinnerclass.InnerClasses.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $abstractinnerclass.InnerClasses (ref.as_non_null (global.get $abstractinnerclass.InnerClasses.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ abstractinnerclass/InnerClasses.java:18:13
   (call $$ctor__void_$p_abstractinnerclass_InnerClasses@abstractinnerclass.InnerClasses (ref.as_non_null (local.get $$instance)))
   ;;@ abstractinnerclass/InnerClasses.java:18:13

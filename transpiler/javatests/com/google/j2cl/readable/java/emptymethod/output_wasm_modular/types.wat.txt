@@ -7,13 +7,11 @@ data ))
 ;;; Code for emptymethod.EmptyMethod [type definition]
 (type $emptymethod.EmptyMethod (struct_subtype
  (field $vtable (ref $emptymethod.EmptyMethod.vtable))
- (field $itable (ref $emptymethod.EmptyMethod.itable))
+ (field $itable (ref $itable))
  $java.lang.Object)
 )
 (type $emptymethod.EmptyMethod.vtable (struct_subtype
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  $java.lang.Object.vtable)
 )
-(type $emptymethod.EmptyMethod.itable (struct_subtype
- $java.lang.Object.itable))
 ;;; End of code for emptymethod.EmptyMethod [type definition]

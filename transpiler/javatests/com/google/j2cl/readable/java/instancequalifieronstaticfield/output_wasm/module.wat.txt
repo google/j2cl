@@ -1,7 +1,7 @@
  ;;; Code for instancequalifieronstaticfield.InstanceQualifiers [type definition]
  (type $instancequalifieronstaticfield.InstanceQualifiers (struct_subtype
   (field $vtable (ref $instancequalifieronstaticfield.InstanceQualifiers.vtable))
-  (field $itable (ref $instancequalifieronstaticfield.InstanceQualifiers.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -13,15 +13,6 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $instancequalifieronstaticfield.InstanceQualifiers.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for instancequalifieronstaticfield.InstanceQualifiers [vtable.init]
 (global $instancequalifieronstaticfield.InstanceQualifiers.vtable (ref $instancequalifieronstaticfield.InstanceQualifiers.vtable)
@@ -33,17 +24,6 @@
   (ref.func $$getClassImpl__java_lang_Class@instancequalifieronstaticfield.InstanceQualifiers)
  )
 )
-
-;;; Code for instancequalifieronstaticfield.InstanceQualifiers [itable.init]
-(global $instancequalifieronstaticfield.InstanceQualifiers.itable (ref $instancequalifieronstaticfield.InstanceQualifiers.itable) (struct.new $instancequalifieronstaticfield.InstanceQualifiers.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for instancequalifieronstaticfield.InstanceQualifiers [static fields]
 (global $f_staticField__instancequalifieronstaticfield_InstanceQualifiers (mut i32) (i32.const 0))
@@ -61,7 +41,7 @@
  (local $$instance (ref null $instancequalifieronstaticfield.InstanceQualifiers))
  (block
   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:18:13
-  (local.set $$instance (struct.new $instancequalifieronstaticfield.InstanceQualifiers (ref.as_non_null (global.get $instancequalifieronstaticfield.InstanceQualifiers.vtable)) (ref.as_non_null (global.get $instancequalifieronstaticfield.InstanceQualifiers.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $instancequalifieronstaticfield.InstanceQualifiers (ref.as_non_null (global.get $instancequalifieronstaticfield.InstanceQualifiers.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:18:13
   (call $$ctor__void_$p_instancequalifieronstaticfield_InstanceQualifiers@instancequalifieronstaticfield.InstanceQualifiers (ref.as_non_null (local.get $$instance)))
   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:18:13

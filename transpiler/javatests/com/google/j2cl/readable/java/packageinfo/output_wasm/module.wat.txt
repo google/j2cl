@@ -1,7 +1,7 @@
  ;;; Code for packageinfo.Outer [type definition]
  (type $packageinfo.Outer (struct_subtype
   (field $vtable (ref $packageinfo.Outer.vtable))
-  (field $itable (ref $packageinfo.Outer.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -13,20 +13,11 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $packageinfo.Outer.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for packageinfo.Outer.Inner [type definition]
  (type $packageinfo.Outer.Inner (struct_subtype
   (field $vtable (ref $packageinfo.Outer.Inner.vtable))
-  (field $itable (ref $packageinfo.Outer.Inner.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__packageinfo_Outer_Inner (ref null $packageinfo.Outer))
   $java.lang.Object)
@@ -39,20 +30,11 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $packageinfo.Outer.Inner.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for packageinfo.subpackage.Foo [type definition]
  (type $packageinfo.subpackage.Foo (struct_subtype
   (field $vtable (ref $packageinfo.subpackage.Foo.vtable))
-  (field $itable (ref $packageinfo.subpackage.Foo.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_outer__packageinfo_subpackage_Foo (mut (ref null $packageinfo.Outer)))
   $java.lang.Object)
@@ -65,15 +47,6 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $packageinfo.subpackage.Foo.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for packageinfo.Outer [vtable.init]
 (global $packageinfo.Outer.vtable (ref $packageinfo.Outer.vtable)
@@ -86,17 +59,6 @@
  )
 )
 
-;;; Code for packageinfo.Outer [itable.init]
-(global $packageinfo.Outer.itable (ref $packageinfo.Outer.itable) (struct.new $packageinfo.Outer.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for packageinfo.Outer.Inner [vtable.init]
 (global $packageinfo.Outer.Inner.vtable (ref $packageinfo.Outer.Inner.vtable)
  (struct.new $packageinfo.Outer.Inner.vtable
@@ -108,17 +70,6 @@
  )
 )
 
-;;; Code for packageinfo.Outer.Inner [itable.init]
-(global $packageinfo.Outer.Inner.itable (ref $packageinfo.Outer.Inner.itable) (struct.new $packageinfo.Outer.Inner.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for packageinfo.subpackage.Foo [vtable.init]
 (global $packageinfo.subpackage.Foo.vtable (ref $packageinfo.subpackage.Foo.vtable)
  (struct.new $packageinfo.subpackage.Foo.vtable
@@ -129,17 +80,6 @@
   (ref.func $$getClassImpl__java_lang_Class@packageinfo.subpackage.Foo)
  )
 )
-
-;;; Code for packageinfo.subpackage.Foo [itable.init]
-(global $packageinfo.subpackage.Foo.itable (ref $packageinfo.subpackage.Foo.itable) (struct.new $packageinfo.subpackage.Foo.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for packageinfo.Outer [static fields]
 (global $f_$initialized__packageinfo_Outer (mut i32) (i32.const 0))
@@ -165,7 +105,7 @@
  (local $$instance (ref null $packageinfo.Outer))
  (block
   ;;@ packageinfo/Outer.java:21:13
-  (local.set $$instance (struct.new $packageinfo.Outer (ref.as_non_null (global.get $packageinfo.Outer.vtable)) (ref.as_non_null (global.get $packageinfo.Outer.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $packageinfo.Outer (ref.as_non_null (global.get $packageinfo.Outer.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ packageinfo/Outer.java:21:13
   (call $$ctor__void_$p_packageinfo_Outer@packageinfo.Outer (ref.as_non_null (local.get $$instance)))
   ;;@ packageinfo/Outer.java:21:13
@@ -252,7 +192,7 @@
  (local $$instance (ref null $packageinfo.Outer.Inner))
  (block
   ;;@ packageinfo/Outer.java:24:15
-  (local.set $$instance (struct.new $packageinfo.Outer.Inner (ref.as_non_null (global.get $packageinfo.Outer.Inner.vtable)) (ref.as_non_null (global.get $packageinfo.Outer.Inner.itable)) (i32.const 0) (local.get $$outer_this)))
+  (local.set $$instance (struct.new $packageinfo.Outer.Inner (ref.as_non_null (global.get $packageinfo.Outer.Inner.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (local.get $$outer_this)))
   ;;@ packageinfo/Outer.java:24:15
   (call $$ctor__packageinfo_Outer__void_$p_packageinfo_Outer_Inner@packageinfo.Outer.Inner (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ packageinfo/Outer.java:24:15
@@ -339,7 +279,7 @@
  (local $$instance (ref null $packageinfo.subpackage.Foo))
  (block
   ;;@ packageinfo/subpackage/Foo.java:20:13
-  (local.set $$instance (struct.new $packageinfo.subpackage.Foo (ref.as_non_null (global.get $packageinfo.subpackage.Foo.vtable)) (ref.as_non_null (global.get $packageinfo.subpackage.Foo.itable)) (i32.const 0) (ref.null $packageinfo.Outer)))
+  (local.set $$instance (struct.new $packageinfo.subpackage.Foo (ref.as_non_null (global.get $packageinfo.subpackage.Foo.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $packageinfo.Outer)))
   ;;@ packageinfo/subpackage/Foo.java:20:13
   (call $$ctor__void_$p_packageinfo_subpackage_Foo@packageinfo.subpackage.Foo (ref.as_non_null (local.get $$instance)))
   ;;@ packageinfo/subpackage/Foo.java:20:13

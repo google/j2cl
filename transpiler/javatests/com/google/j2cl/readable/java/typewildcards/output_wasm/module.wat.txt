@@ -47,7 +47,7 @@
  ;;; Code for typewildcards.GenericType [type definition]
  (type $typewildcards.GenericType (struct_subtype
   (field $vtable (ref $typewildcards.GenericType.vtable))
-  (field $itable (ref $typewildcards.GenericType.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -60,20 +60,11 @@
   (field $m_get__java_lang_Object_$pp_typewildcards (ref $function.m_get__java_lang_Object_$pp_typewildcards))
   $java.lang.Object.vtable)
  )
- (type $typewildcards.GenericType.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for typewildcards.Bar [type definition]
  (type $typewildcards.Bar (struct_subtype
   (field $vtable (ref $typewildcards.Bar.vtable))
-  (field $itable (ref $typewildcards.Bar.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -85,20 +76,11 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $typewildcards.Bar.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for typewildcards.RecursiveType [type definition]
  (type $typewildcards.RecursiveType (struct_subtype
   (field $vtable (ref $typewildcards.RecursiveType.vtable))
-  (field $itable (ref $typewildcards.RecursiveType.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -110,20 +92,11 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $typewildcards.RecursiveType.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for typewildcards.TypeWildCards [type definition]
  (type $typewildcards.TypeWildCards (struct_subtype
   (field $vtable (ref $typewildcards.TypeWildCards.vtable))
-  (field $itable (ref $typewildcards.TypeWildCards.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -145,15 +118,6 @@
   (field $m_testRecursiveGeneric__void (ref $function.m_testRecursiveGeneric__void))
   $java.lang.Object.vtable)
  )
- (type $typewildcards.TypeWildCards.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for typewildcards.TypeWildCards.$LambdaImplementor$1 [type definition]
  (type $typewildcards.TypeWildCards.$LambdaImplementor$1 (struct_subtype
@@ -179,7 +143,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for typewildcards.TypeWildCards.A [type definition]
  (type $typewildcards.TypeWildCards.A (struct_subtype
@@ -206,7 +170,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for typewildcards.TypeWildCards.Element [type definition]
  (type $typewildcards.TypeWildCards.Element (struct_subtype
@@ -232,7 +196,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for typewildcards.TypeWildCards.OtherElement [type definition]
  (type $typewildcards.TypeWildCards.OtherElement (struct_subtype
@@ -258,12 +222,12 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for typewildcards.TypeWildCards.MultipleGenerics [type definition]
  (type $typewildcards.TypeWildCards.MultipleGenerics (struct_subtype
   (field $vtable (ref $typewildcards.TypeWildCards.MultipleGenerics.vtable))
-  (field $itable (ref $typewildcards.TypeWildCards.MultipleGenerics.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -275,20 +239,11 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $typewildcards.TypeWildCards.MultipleGenerics.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for typewildcards.RecursiveSubtype [type definition]
  (type $typewildcards.RecursiveSubtype (struct_subtype
   (field $vtable (ref $typewildcards.RecursiveSubtype.vtable))
-  (field $itable (ref $typewildcards.RecursiveSubtype.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $typewildcards.RecursiveType)
  )
@@ -300,15 +255,6 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $typewildcards.RecursiveType.vtable)
  )
- (type $typewildcards.RecursiveSubtype.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $typewildcards.RecursiveType.itable))
 
  ;;; Code for typewildcards.TypeWildCards.SubOtherElement [type definition]
  (type $typewildcards.TypeWildCards.SubOtherElement (struct_subtype
@@ -340,7 +286,7 @@
  ;;; Code for typewildcards.TypeWildCards.Foo [type definition]
  (type $typewildcards.TypeWildCards.Foo (struct_subtype
   (field $vtable (ref $typewildcards.TypeWildCards.Foo.vtable))
-  (field $itable (ref $typewildcards.TypeWildCards.Foo.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__typewildcards_TypeWildCards_Foo (ref null $typewildcards.TypeWildCards))
   $typewildcards.GenericType)
@@ -354,15 +300,6 @@
   (field $m_get__java_lang_Object_$pp_typewildcards (ref $function.m_get__java_lang_Object_$pp_typewildcards))
   $typewildcards.GenericType.vtable)
  )
- (type $typewildcards.TypeWildCards.Foo.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $typewildcards.GenericType.itable))
 
 ;;; Code for typewildcards.GenericType [vtable.init]
 (global $typewildcards.GenericType.vtable (ref $typewildcards.GenericType.vtable)
@@ -376,17 +313,6 @@
  )
 )
 
-;;; Code for typewildcards.GenericType [itable.init]
-(global $typewildcards.GenericType.itable (ref $typewildcards.GenericType.itable) (struct.new $typewildcards.GenericType.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for typewildcards.Bar [vtable.init]
 (global $typewildcards.Bar.vtable (ref $typewildcards.Bar.vtable)
  (struct.new $typewildcards.Bar.vtable
@@ -397,17 +323,6 @@
   (ref.func $$getClassImpl__java_lang_Class@typewildcards.Bar)
  )
 )
-
-;;; Code for typewildcards.Bar [itable.init]
-(global $typewildcards.Bar.itable (ref $typewildcards.Bar.itable) (struct.new $typewildcards.Bar.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for typewildcards.RecursiveType [vtable.init]
 (global $typewildcards.RecursiveType.vtable (ref $typewildcards.RecursiveType.vtable)
@@ -420,17 +335,6 @@
  )
 )
 
-;;; Code for typewildcards.RecursiveType [itable.init]
-(global $typewildcards.RecursiveType.itable (ref $typewildcards.RecursiveType.itable) (struct.new $typewildcards.RecursiveType.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for typewildcards.RecursiveSubtype [vtable.init]
 (global $typewildcards.RecursiveSubtype.vtable (ref $typewildcards.RecursiveSubtype.vtable)
  (struct.new $typewildcards.RecursiveSubtype.vtable
@@ -441,17 +345,6 @@
   (ref.func $$getClassImpl__java_lang_Class@typewildcards.RecursiveSubtype)
  )
 )
-
-;;; Code for typewildcards.RecursiveSubtype [itable.init]
-(global $typewildcards.RecursiveSubtype.itable (ref $typewildcards.RecursiveSubtype.itable) (struct.new $typewildcards.RecursiveSubtype.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for typewildcards.TypeWildCards [vtable.init]
 (global $typewildcards.TypeWildCards.vtable (ref $typewildcards.TypeWildCards.vtable)
@@ -473,17 +366,6 @@
   (ref.func $m_testRecursiveGeneric__void@typewildcards.TypeWildCards)
  )
 )
-
-;;; Code for typewildcards.TypeWildCards [itable.init]
-(global $typewildcards.TypeWildCards.itable (ref $typewildcards.TypeWildCards.itable) (struct.new $typewildcards.TypeWildCards.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for typewildcards.TypeWildCards.$LambdaImplementor$1 [vtable.init]
 (global $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable (ref $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable)
@@ -547,17 +429,6 @@
  )
 )
 
-;;; Code for typewildcards.TypeWildCards.Foo [itable.init]
-(global $typewildcards.TypeWildCards.Foo.itable (ref $typewildcards.TypeWildCards.Foo.itable) (struct.new $typewildcards.TypeWildCards.Foo.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for typewildcards.TypeWildCards.MultipleGenerics [vtable.init]
 (global $typewildcards.TypeWildCards.MultipleGenerics.vtable (ref $typewildcards.TypeWildCards.MultipleGenerics.vtable)
  (struct.new $typewildcards.TypeWildCards.MultipleGenerics.vtable
@@ -568,17 +439,6 @@
   (ref.func $$getClassImpl__java_lang_Class@typewildcards.TypeWildCards.MultipleGenerics)
  )
 )
-
-;;; Code for typewildcards.TypeWildCards.MultipleGenerics [itable.init]
-(global $typewildcards.TypeWildCards.MultipleGenerics.itable (ref $typewildcards.TypeWildCards.MultipleGenerics.itable) (struct.new $typewildcards.TypeWildCards.MultipleGenerics.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for typewildcards.Function [static fields]
 (global $f_$initialized__typewildcards_Function (mut i32) (i32.const 0))
@@ -1043,7 +903,7 @@
  (local $$instance (ref null $typewildcards.GenericType))
  (block
   ;;@ typewildcards/TypeWildCards.java:24:6
-  (local.set $$instance (struct.new $typewildcards.GenericType (ref.as_non_null (global.get $typewildcards.GenericType.vtable)) (ref.as_non_null (global.get $typewildcards.GenericType.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $typewildcards.GenericType (ref.as_non_null (global.get $typewildcards.GenericType.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ typewildcards/TypeWildCards.java:24:6
   (call $$ctor__void_$p_typewildcards_GenericType@typewildcards.GenericType (ref.as_non_null (local.get $$instance)))
   ;;@ typewildcards/TypeWildCards.java:24:6
@@ -1144,7 +1004,7 @@
  (local $$instance (ref null $typewildcards.Bar))
  (block
   ;;@ typewildcards/TypeWildCards.java:30:6
-  (local.set $$instance (struct.new $typewildcards.Bar (ref.as_non_null (global.get $typewildcards.Bar.vtable)) (ref.as_non_null (global.get $typewildcards.Bar.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $typewildcards.Bar (ref.as_non_null (global.get $typewildcards.Bar.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ typewildcards/TypeWildCards.java:30:6
   (call $$ctor__void_$p_typewildcards_Bar@typewildcards.Bar (ref.as_non_null (local.get $$instance)))
   ;;@ typewildcards/TypeWildCards.java:30:6
@@ -1231,7 +1091,7 @@
  (local $$instance (ref null $typewildcards.RecursiveType))
  (block
   ;;@ typewildcards/TypeWildCards.java:33:9
-  (local.set $$instance (struct.new $typewildcards.RecursiveType (ref.as_non_null (global.get $typewildcards.RecursiveType.vtable)) (ref.as_non_null (global.get $typewildcards.RecursiveType.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $typewildcards.RecursiveType (ref.as_non_null (global.get $typewildcards.RecursiveType.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ typewildcards/TypeWildCards.java:33:9
   (call $$ctor__typewildcards_RecursiveType__void_$p_typewildcards_RecursiveType@typewildcards.RecursiveType (ref.as_non_null (local.get $$instance))(local.get $wildcardParameter))
   ;;@ typewildcards/TypeWildCards.java:33:9
@@ -1318,7 +1178,7 @@
  (local $$instance (ref null $typewildcards.TypeWildCards))
  (block
   ;;@ typewildcards/TypeWildCards.java:44:13
-  (local.set $$instance (struct.new $typewildcards.TypeWildCards (ref.as_non_null (global.get $typewildcards.TypeWildCards.vtable)) (ref.as_non_null (global.get $typewildcards.TypeWildCards.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $typewildcards.TypeWildCards (ref.as_non_null (global.get $typewildcards.TypeWildCards.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ typewildcards/TypeWildCards.java:44:13
   (call $$ctor__void_$p_typewildcards_TypeWildCards@typewildcards.TypeWildCards (ref.as_non_null (local.get $$instance)))
   ;;@ typewildcards/TypeWildCards.java:44:13
@@ -1986,7 +1846,7 @@
  (local $$instance (ref null $typewildcards.TypeWildCards.MultipleGenerics))
  (block
   ;;@ typewildcards/TypeWildCards.java:154:15
-  (local.set $$instance (struct.new $typewildcards.TypeWildCards.MultipleGenerics (ref.as_non_null (global.get $typewildcards.TypeWildCards.MultipleGenerics.vtable)) (ref.as_non_null (global.get $typewildcards.TypeWildCards.MultipleGenerics.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $typewildcards.TypeWildCards.MultipleGenerics (ref.as_non_null (global.get $typewildcards.TypeWildCards.MultipleGenerics.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ typewildcards/TypeWildCards.java:154:15
   (call $$ctor__void_$p_typewildcards_TypeWildCards_MultipleGenerics@typewildcards.TypeWildCards.MultipleGenerics (ref.as_non_null (local.get $$instance)))
   ;;@ typewildcards/TypeWildCards.java:154:15
@@ -2073,7 +1933,7 @@
  (local $$instance (ref null $typewildcards.RecursiveSubtype))
  (block
   ;;@ typewildcards/TypeWildCards.java:39:9
-  (local.set $$instance (struct.new $typewildcards.RecursiveSubtype (ref.as_non_null (global.get $typewildcards.RecursiveSubtype.vtable)) (ref.as_non_null (global.get $typewildcards.RecursiveSubtype.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $typewildcards.RecursiveSubtype (ref.as_non_null (global.get $typewildcards.RecursiveSubtype.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ typewildcards/TypeWildCards.java:39:9
   (call $$ctor__typewildcards_RecursiveType__void_$p_typewildcards_RecursiveSubtype@typewildcards.RecursiveSubtype (ref.as_non_null (local.get $$instance))(local.get $wildcardParameter))
   ;;@ typewildcards/TypeWildCards.java:39:9
@@ -2220,7 +2080,7 @@
  (local $$instance (ref null $typewildcards.TypeWildCards.Foo))
  (block
   ;;@ typewildcards/TypeWildCards.java:133:8
-  (local.set $$instance (struct.new $typewildcards.TypeWildCards.Foo (ref.as_non_null (global.get $typewildcards.TypeWildCards.Foo.vtable)) (ref.as_non_null (global.get $typewildcards.TypeWildCards.Foo.itable)) (i32.const 0) (local.get $$outer_this)))
+  (local.set $$instance (struct.new $typewildcards.TypeWildCards.Foo (ref.as_non_null (global.get $typewildcards.TypeWildCards.Foo.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (local.get $$outer_this)))
   ;;@ typewildcards/TypeWildCards.java:133:8
   (call $$ctor__typewildcards_TypeWildCards__void_$p_typewildcards_TypeWildCards_Foo@typewildcards.TypeWildCards.Foo (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ typewildcards/TypeWildCards.java:133:8

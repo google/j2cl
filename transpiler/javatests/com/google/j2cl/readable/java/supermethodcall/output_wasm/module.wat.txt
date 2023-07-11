@@ -30,7 +30,7 @@
  ;;; Code for supermethodcall.GrandParent [type definition]
  (type $supermethodcall.GrandParent (struct_subtype
   (field $vtable (ref $supermethodcall.GrandParent.vtable))
-  (field $itable (ref $supermethodcall.GrandParent.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -47,20 +47,11 @@
   (field $m_defaultGrandParent__void (ref $function.m_defaultGrandParent__void))
   $java.lang.Object.vtable)
  )
- (type $supermethodcall.GrandParent.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for supermethodcall.Super [type definition]
  (type $supermethodcall.Super (struct_subtype
   (field $vtable (ref $supermethodcall.Super.vtable))
-  (field $itable (ref $supermethodcall.Super.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -73,15 +64,6 @@
   (field $m_m__void (ref $function.m_m__void))
   $java.lang.Object.vtable)
  )
- (type $supermethodcall.Super.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for supermethodcall.SuperToStringTest [type definition]
  (type $supermethodcall.SuperToStringTest (struct_subtype
@@ -107,7 +89,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for supermethodcall.Parent [type definition]
  (type $supermethodcall.Parent (struct_subtype
@@ -140,7 +122,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $supermethodcall.GrandParent.itable))
+  $itable))
 
  ;;; Code for supermethodcall.Sub [type definition]
  (type $supermethodcall.Sub (struct_subtype
@@ -166,7 +148,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $supermethodcall.Super.itable))
+  $itable))
 
  ;;; Code for supermethodcall.Child [type definition]
  (type $supermethodcall.Child (struct_subtype
@@ -218,17 +200,6 @@
   (ref.func $m_defaultGrandParent__void@supermethodcall.GrandParent)
  )
 )
-
-;;; Code for supermethodcall.GrandParent [itable.init]
-(global $supermethodcall.GrandParent.itable (ref $supermethodcall.GrandParent.itable) (struct.new $supermethodcall.GrandParent.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for supermethodcall.Parent [vtable.init]
 (global $supermethodcall.Parent.vtable (ref $supermethodcall.Parent.vtable)
@@ -309,17 +280,6 @@
   (ref.func $m_m__void@supermethodcall.Super)
  )
 )
-
-;;; Code for supermethodcall.Super [itable.init]
-(global $supermethodcall.Super.itable (ref $supermethodcall.Super.itable) (struct.new $supermethodcall.Super.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for supermethodcall.Sub [vtable.init]
 (global $supermethodcall.Sub.vtable (ref $supermethodcall.Sub.vtable)
@@ -662,7 +622,7 @@
  (local $$instance (ref null $supermethodcall.GrandParent))
  (block
   ;;@ supermethodcall/Child.java:26:6
-  (local.set $$instance (struct.new $supermethodcall.GrandParent (ref.as_non_null (global.get $supermethodcall.GrandParent.vtable)) (ref.as_non_null (global.get $supermethodcall.GrandParent.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $supermethodcall.GrandParent (ref.as_non_null (global.get $supermethodcall.GrandParent.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ supermethodcall/Child.java:26:6
   (call $$ctor__void_$p_supermethodcall_GrandParent@supermethodcall.GrandParent (ref.as_non_null (local.get $$instance)))
   ;;@ supermethodcall/Child.java:26:6
@@ -812,7 +772,7 @@
  (local $$instance (ref null $supermethodcall.Super))
  (block
   ;;@ supermethodcall/Child.java:108:6
-  (local.set $$instance (struct.new $supermethodcall.Super (ref.as_non_null (global.get $supermethodcall.Super.vtable)) (ref.as_non_null (global.get $supermethodcall.Super.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $supermethodcall.Super (ref.as_non_null (global.get $supermethodcall.Super.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ supermethodcall/Child.java:108:6
   (call $$ctor__void_$p_supermethodcall_Super@supermethodcall.Super (ref.as_non_null (local.get $$instance)))
   ;;@ supermethodcall/Child.java:108:6

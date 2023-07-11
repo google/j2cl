@@ -1,27 +1,18 @@
  ;;; Code for packageinfosubpackage.Foo.NativeBar.$Overlay [type definition]
  (type $packageinfosubpackage.Foo.NativeBar.$Overlay (struct_subtype
   (field $vtable (ref $packageinfosubpackage.Foo.NativeBar.$Overlay.vtable))
-  (field $itable (ref $packageinfosubpackage.Foo.NativeBar.$Overlay.itable))
+  (field $itable (ref $itable))
   data)
  )
  (type $packageinfosubpackage.Foo.NativeBar.$Overlay.vtable (struct_subtype
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   data)
  )
- (type $packageinfosubpackage.Foo.NativeBar.$Overlay.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $itable))
 
  ;;; Code for packageinfosubpackage.Foo [type definition]
  (type $packageinfosubpackage.Foo (struct_subtype
   (field $vtable (ref $packageinfosubpackage.Foo.vtable))
-  (field $itable (ref $packageinfosubpackage.Foo.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_nativeBar__packageinfosubpackage_Foo_ (mut (ref null extern)))
   $java.lang.Object)
@@ -34,22 +25,13 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $packageinfosubpackage.Foo.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for packageinfosubpackage.Foo.NativeBar [type definition]
 
  ;;; Code for packageinfosubpackage.subpackage.Bar [type definition]
  (type $packageinfosubpackage.subpackage.Bar (struct_subtype
   (field $vtable (ref $packageinfosubpackage.subpackage.Bar.vtable))
-  (field $itable (ref $packageinfosubpackage.subpackage.Bar.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -61,15 +43,6 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $packageinfosubpackage.subpackage.Bar.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for packageinfosubpackage.Foo [vtable.init]
 (global $packageinfosubpackage.Foo.vtable (ref $packageinfosubpackage.Foo.vtable)
@@ -82,34 +55,12 @@
  )
 )
 
-;;; Code for packageinfosubpackage.Foo [itable.init]
-(global $packageinfosubpackage.Foo.itable (ref $packageinfosubpackage.Foo.itable) (struct.new $packageinfosubpackage.Foo.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for packageinfosubpackage.Foo.NativeBar.$Overlay [vtable.init]
 (global $packageinfosubpackage.Foo.NativeBar.$Overlay.vtable (ref $packageinfosubpackage.Foo.NativeBar.$Overlay.vtable)
  (struct.new $packageinfosubpackage.Foo.NativeBar.$Overlay.vtable
   (ref.func $$getClassImpl__java_lang_Class@packageinfosubpackage.Foo.NativeBar.$Overlay)
  )
 )
-
-;;; Code for packageinfosubpackage.Foo.NativeBar.$Overlay [itable.init]
-(global $packageinfosubpackage.Foo.NativeBar.$Overlay.itable (ref $packageinfosubpackage.Foo.NativeBar.$Overlay.itable) (struct.new $packageinfosubpackage.Foo.NativeBar.$Overlay.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for packageinfosubpackage.subpackage.Bar [vtable.init]
 (global $packageinfosubpackage.subpackage.Bar.vtable (ref $packageinfosubpackage.subpackage.Bar.vtable)
@@ -121,17 +72,6 @@
   (ref.func $$getClassImpl__java_lang_Class@packageinfosubpackage.subpackage.Bar)
  )
 )
-
-;;; Code for packageinfosubpackage.subpackage.Bar [itable.init]
-(global $packageinfosubpackage.subpackage.Bar.itable (ref $packageinfosubpackage.subpackage.Bar.itable) (struct.new $packageinfosubpackage.subpackage.Bar.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for packageinfosubpackage.Foo [static fields]
 (global $f_$initialized__packageinfosubpackage_Foo (mut i32) (i32.const 0))
@@ -216,7 +156,7 @@
  (local $$instance (ref null $packageinfosubpackage.Foo))
  (block
   ;;@ packageinfosubpackage/Foo.java:20:13
-  (local.set $$instance (struct.new $packageinfosubpackage.Foo (ref.as_non_null (global.get $packageinfosubpackage.Foo.vtable)) (ref.as_non_null (global.get $packageinfosubpackage.Foo.itable)) (i32.const 0) (ref.null extern)))
+  (local.set $$instance (struct.new $packageinfosubpackage.Foo (ref.as_non_null (global.get $packageinfosubpackage.Foo.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null extern)))
   ;;@ packageinfosubpackage/Foo.java:20:13
   (call $$ctor__void_$p_packageinfosubpackage_Foo@packageinfosubpackage.Foo (ref.as_non_null (local.get $$instance)))
   ;;@ packageinfosubpackage/Foo.java:20:13
@@ -321,7 +261,7 @@
  (local $$instance (ref null $packageinfosubpackage.subpackage.Bar))
  (block
   ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
-  (local.set $$instance (struct.new $packageinfosubpackage.subpackage.Bar (ref.as_non_null (global.get $packageinfosubpackage.subpackage.Bar.vtable)) (ref.as_non_null (global.get $packageinfosubpackage.subpackage.Bar.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $packageinfosubpackage.subpackage.Bar (ref.as_non_null (global.get $packageinfosubpackage.subpackage.Bar.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
   (call $$ctor__void_$p_packageinfosubpackage_subpackage_Bar@packageinfosubpackage.subpackage.Bar (ref.as_non_null (local.get $$instance)))
   ;;@ packageinfosubpackage/subpackage/Bar.java:21:13

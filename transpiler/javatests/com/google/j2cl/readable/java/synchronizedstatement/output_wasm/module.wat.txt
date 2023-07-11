@@ -1,7 +1,7 @@
  ;;; Code for synchronizedstatement.SynchronizedStatement [type definition]
  (type $synchronizedstatement.SynchronizedStatement (struct_subtype
   (field $vtable (ref $synchronizedstatement.SynchronizedStatement.vtable))
-  (field $itable (ref $synchronizedstatement.SynchronizedStatement.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_a__synchronizedstatement_SynchronizedStatement_ (mut i32))
   (field $f_b__synchronizedstatement_SynchronizedStatement_ (mut i32))
@@ -16,15 +16,6 @@
   (field $m_main__void (ref $function.m_main__void))
   $java.lang.Object.vtable)
  )
- (type $synchronizedstatement.SynchronizedStatement.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for synchronizedstatement.SynchronizedStatement [vtable.init]
 (global $synchronizedstatement.SynchronizedStatement.vtable (ref $synchronizedstatement.SynchronizedStatement.vtable)
@@ -37,17 +28,6 @@
   (ref.func $m_main__void@synchronizedstatement.SynchronizedStatement)
  )
 )
-
-;;; Code for synchronizedstatement.SynchronizedStatement [itable.init]
-(global $synchronizedstatement.SynchronizedStatement.itable (ref $synchronizedstatement.SynchronizedStatement.itable) (struct.new $synchronizedstatement.SynchronizedStatement.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for synchronizedstatement.SynchronizedStatement [static fields]
 (global $f_$initialized__synchronizedstatement_SynchronizedStatement (mut i32) (i32.const 0))
@@ -63,7 +43,7 @@
  (local $$instance (ref null $synchronizedstatement.SynchronizedStatement))
  (block
   ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
-  (local.set $$instance (struct.new $synchronizedstatement.SynchronizedStatement (ref.as_non_null (global.get $synchronizedstatement.SynchronizedStatement.vtable)) (ref.as_non_null (global.get $synchronizedstatement.SynchronizedStatement.itable)) (i32.const 0) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $synchronizedstatement.SynchronizedStatement (ref.as_non_null (global.get $synchronizedstatement.SynchronizedStatement.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (i32.const 0)))
   ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
   (call $$ctor__void_$p_synchronizedstatement_SynchronizedStatement@synchronizedstatement.SynchronizedStatement (ref.as_non_null (local.get $$instance)))
   ;;@ synchronizedstatement/SynchronizedStatement.java:18:13

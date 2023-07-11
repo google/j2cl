@@ -7,7 +7,7 @@
  ;;; Code for packageprivatemethods.package1.SuperParent [type definition]
  (type $packageprivatemethods.package1.SuperParent (struct_subtype
   (field $vtable (ref $packageprivatemethods.package1.SuperParent.vtable))
-  (field $itable (ref $packageprivatemethods.package1.SuperParent.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -23,20 +23,11 @@
   (field $m_exposedAbstractInParent__int__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_exposedAbstractInParent__int__int__int__int_$pp_packageprivatemethods_package1))
   $java.lang.Object.vtable)
  )
- (type $packageprivatemethods.package1.SuperParent.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for packageprivatemethods.package1.Parent [type definition]
  (type $packageprivatemethods.package1.Parent (struct_subtype
   (field $vtable (ref $packageprivatemethods.package1.Parent.vtable))
-  (field $itable (ref $packageprivatemethods.package1.Parent.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $packageprivatemethods.package1.SuperParent)
  )
@@ -53,15 +44,6 @@
   (field $m_exposedAbstractInParent__int__int__int__int (ref $function.m_exposedAbstractInParent__int__int__int__int))
   $packageprivatemethods.package1.SuperParent.vtable)
  )
- (type $packageprivatemethods.package1.Parent.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $packageprivatemethods.package1.SuperParent.itable))
 
  ;;; Code for packageprivatemethods.package1.Child [type definition]
  (type $packageprivatemethods.package1.Child (struct_subtype
@@ -94,12 +76,12 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $packageprivatemethods.package1.Parent.itable))
+  $itable))
 
  ;;; Code for packageprivatemethods.package2.SubParent [type definition]
  (type $packageprivatemethods.package2.SubParent (struct_subtype
   (field $vtable (ref $packageprivatemethods.package2.SubParent.vtable))
-  (field $itable (ref $packageprivatemethods.package2.SubParent.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $packageprivatemethods.package1.Parent)
  )
@@ -117,15 +99,6 @@
   (field $m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package2 (ref $function.m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package2))
   $packageprivatemethods.package1.Parent.vtable)
  )
- (type $packageprivatemethods.package2.SubParent.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $packageprivatemethods.package1.Parent.itable))
 
  ;;; Code for packageprivatemethods.package2.SubChild [type definition]
  (type $packageprivatemethods.package2.SubChild (struct_subtype
@@ -206,17 +179,6 @@
   (ref.func $m_exposedAbstractInParent__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent)
  )
 )
-
-;;; Code for packageprivatemethods.package1.SuperParent [itable.init]
-(global $packageprivatemethods.package1.SuperParent.itable (ref $packageprivatemethods.package1.SuperParent.itable) (struct.new $packageprivatemethods.package1.SuperParent.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for packageprivatemethods.package2.SubChild [vtable.init]
 (global $packageprivatemethods.package2.SubChild.vtable (ref $packageprivatemethods.package2.SubChild.vtable)
@@ -333,7 +295,7 @@
  (local $$instance (ref null $packageprivatemethods.package1.SuperParent))
  (block
   ;;@ packageprivatemethods/package1/SuperParent.java:18:13
-  (local.set $$instance (struct.new $packageprivatemethods.package1.SuperParent (ref.as_non_null (global.get $packageprivatemethods.package1.SuperParent.vtable)) (ref.as_non_null (global.get $packageprivatemethods.package1.SuperParent.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $packageprivatemethods.package1.SuperParent (ref.as_non_null (global.get $packageprivatemethods.package1.SuperParent.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ packageprivatemethods/package1/SuperParent.java:18:13
   (call $$ctor__void_$p_packageprivatemethods_package1_SuperParent@packageprivatemethods.package1.SuperParent (ref.as_non_null (local.get $$instance)))
   ;;@ packageprivatemethods/package1/SuperParent.java:18:13

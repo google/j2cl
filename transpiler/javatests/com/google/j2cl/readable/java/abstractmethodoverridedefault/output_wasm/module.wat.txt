@@ -15,7 +15,7 @@
  ;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault [type definition]
  (type $abstractmethodoverridedefault.AbstractMethodOverrideDefault (struct_subtype
   (field $vtable (ref $abstractmethodoverridedefault.AbstractMethodOverrideDefault.vtable))
-  (field $itable (ref $abstractmethodoverridedefault.AbstractMethodOverrideDefault.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -27,15 +27,6 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $abstractmethodoverridedefault.AbstractMethodOverrideDefault.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault.A [type definition]
  (type $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A (struct_subtype
@@ -62,7 +53,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault.B [type definition]
  (type $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B (struct_subtype
@@ -128,17 +119,6 @@
   (ref.func $$getClassImpl__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault)
  )
 )
-
-;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault [itable.init]
-(global $abstractmethodoverridedefault.AbstractMethodOverrideDefault.itable (ref $abstractmethodoverridedefault.AbstractMethodOverrideDefault.itable) (struct.new $abstractmethodoverridedefault.AbstractMethodOverrideDefault.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault.C [vtable.init]
 (global $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.vtable (ref $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.vtable)
@@ -312,7 +292,7 @@
  (local $$instance (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault))
  (block
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13
-  (local.set $$instance (struct.new $abstractmethodoverridedefault.AbstractMethodOverrideDefault (ref.as_non_null (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.vtable)) (ref.as_non_null (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $abstractmethodoverridedefault.AbstractMethodOverrideDefault (ref.as_non_null (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13
   (call $$ctor__void_$p_abstractmethodoverridedefault_AbstractMethodOverrideDefault@abstractmethodoverridedefault.AbstractMethodOverrideDefault (ref.as_non_null (local.get $$instance)))
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13

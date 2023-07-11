@@ -1,7 +1,7 @@
  ;;; Code for staticfieldinitializer.StaticFieldInitializer [type definition]
  (type $staticfieldinitializer.StaticFieldInitializer (struct_subtype
   (field $vtable (ref $staticfieldinitializer.StaticFieldInitializer.vtable))
-  (field $itable (ref $staticfieldinitializer.StaticFieldInitializer.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -13,15 +13,6 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $staticfieldinitializer.StaticFieldInitializer.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for staticfieldinitializer.StaticFieldInitializer [vtable.init]
 (global $staticfieldinitializer.StaticFieldInitializer.vtable (ref $staticfieldinitializer.StaticFieldInitializer.vtable)
@@ -33,17 +24,6 @@
   (ref.func $$getClassImpl__java_lang_Class@staticfieldinitializer.StaticFieldInitializer)
  )
 )
-
-;;; Code for staticfieldinitializer.StaticFieldInitializer [itable.init]
-(global $staticfieldinitializer.StaticFieldInitializer.itable (ref $staticfieldinitializer.StaticFieldInitializer.itable) (struct.new $staticfieldinitializer.StaticFieldInitializer.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for staticfieldinitializer.StaticFieldInitializer [static fields]
 (global $f_a__staticfieldinitializer_StaticFieldInitializer (mut i32) (i32.const 0))
@@ -61,7 +41,7 @@
  (local $$instance (ref null $staticfieldinitializer.StaticFieldInitializer))
  (block
   ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
-  (local.set $$instance (struct.new $staticfieldinitializer.StaticFieldInitializer (ref.as_non_null (global.get $staticfieldinitializer.StaticFieldInitializer.vtable)) (ref.as_non_null (global.get $staticfieldinitializer.StaticFieldInitializer.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $staticfieldinitializer.StaticFieldInitializer (ref.as_non_null (global.get $staticfieldinitializer.StaticFieldInitializer.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
   (call $$ctor__void_$p_staticfieldinitializer_StaticFieldInitializer@staticfieldinitializer.StaticFieldInitializer (ref.as_non_null (local.get $$instance)))
   ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13

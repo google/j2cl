@@ -16,7 +16,7 @@
  ;;; Code for gwtincompatible.Interface.ClassWithAbstractMethod [type definition]
  (type $gwtincompatible.Interface.ClassWithAbstractMethod (struct_subtype
   (field $vtable (ref $gwtincompatible.Interface.ClassWithAbstractMethod.vtable))
-  (field $itable (ref $gwtincompatible.Interface.ClassWithAbstractMethod.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -28,15 +28,6 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $gwtincompatible.Interface.ClassWithAbstractMethod.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for gwtincompatible.Implementor [type definition]
  (type $gwtincompatible.Implementor (struct_subtype
@@ -62,7 +53,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $gwtincompatible.Interface.ClassWithAbstractMethod.itable))
+  $itable))
 
  ;;; Code for gwtincompatible.Implementor.SomeEnum [type definition]
  (type $gwtincompatible.Implementor.SomeEnum (struct_subtype

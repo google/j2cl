@@ -1,7 +1,7 @@
  ;;; Code for valueofnullable.ValueOfNullable [type definition]
  (type $valueofnullable.ValueOfNullable (struct_subtype
   (field $vtable (ref $valueofnullable.ValueOfNullable.vtable))
-  (field $itable (ref $valueofnullable.ValueOfNullable.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_nullableString__valueofnullable_ValueOfNullable (ref null $java.lang.String))
   (field $f_someChar__valueofnullable_ValueOfNullable i16)
@@ -16,15 +16,6 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $valueofnullable.ValueOfNullable.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for valueofnullable.ValueOfNullable [vtable.init]
 (global $valueofnullable.ValueOfNullable.vtable (ref $valueofnullable.ValueOfNullable.vtable)
@@ -36,17 +27,6 @@
   (ref.func $$getClassImpl__java_lang_Class@valueofnullable.ValueOfNullable)
  )
 )
-
-;;; Code for valueofnullable.ValueOfNullable [itable.init]
-(global $valueofnullable.ValueOfNullable.itable (ref $valueofnullable.ValueOfNullable.itable) (struct.new $valueofnullable.ValueOfNullable.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for valueofnullable.ValueOfNullable [static fields]
 (global $f_$initialized__valueofnullable_ValueOfNullable (mut i32) (i32.const 0))
@@ -63,7 +43,7 @@
  (local $$instance (ref null $valueofnullable.ValueOfNullable))
  (block
   ;;@ valueofnullable/ValueOfNullable.java:18:13
-  (local.set $$instance (struct.new $valueofnullable.ValueOfNullable (ref.as_non_null (global.get $valueofnullable.ValueOfNullable.vtable)) (ref.as_non_null (global.get $valueofnullable.ValueOfNullable.itable)) (i32.const 0) (call $function.no.side.effects.$getString_|b|__java_lang_String (ref.func $$getString_|b|__java_lang_String@valueofnullable.ValueOfNullable) ) (i32.const 97) (ref.null $java.lang.String)))
+  (local.set $$instance (struct.new $valueofnullable.ValueOfNullable (ref.as_non_null (global.get $valueofnullable.ValueOfNullable.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (call $function.no.side.effects.$getString_|b|__java_lang_String (ref.func $$getString_|b|__java_lang_String@valueofnullable.ValueOfNullable) ) (i32.const 97) (ref.null $java.lang.String)))
   ;;@ valueofnullable/ValueOfNullable.java:18:13
   (call $$ctor__void_$p_valueofnullable_ValueOfNullable@valueofnullable.ValueOfNullable (ref.as_non_null (local.get $$instance)))
   ;;@ valueofnullable/ValueOfNullable.java:18:13

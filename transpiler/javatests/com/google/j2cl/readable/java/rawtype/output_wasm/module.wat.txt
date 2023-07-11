@@ -7,7 +7,7 @@
  ;;; Code for rawtype.RawType [type definition]
  (type $rawtype.RawType (struct_subtype
   (field $vtable (ref $rawtype.RawType.vtable))
-  (field $itable (ref $rawtype.RawType.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_rawUnbound__rawtype_RawType (mut (ref null $rawtype.RawType.Unbound)))
   (field $f_rawBound__rawtype_RawType (mut (ref null $rawtype.RawType.Bound)))
@@ -24,20 +24,11 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $rawtype.RawType.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for rawtype.RawType.Unbound [type definition]
  (type $rawtype.RawType.Unbound (struct_subtype
   (field $vtable (ref $rawtype.RawType.Unbound.vtable))
-  (field $itable (ref $rawtype.RawType.Unbound.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -50,20 +41,11 @@
   (field $m_method__java_lang_Object__java_lang_Object_$pp_rawtype (ref $function.m_method__java_lang_Object__java_lang_Object_$pp_rawtype))
   $java.lang.Object.vtable)
  )
- (type $rawtype.RawType.Unbound.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for rawtype.RawType.Bound [type definition]
  (type $rawtype.RawType.Bound (struct_subtype
   (field $vtable (ref $rawtype.RawType.Bound.vtable))
-  (field $itable (ref $rawtype.RawType.Bound.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -75,20 +57,11 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $rawtype.RawType.Bound.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for rawtype.RawType.BoundRecursively [type definition]
  (type $rawtype.RawType.BoundRecursively (struct_subtype
   (field $vtable (ref $rawtype.RawType.BoundRecursively.vtable))
-  (field $itable (ref $rawtype.RawType.BoundRecursively.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -100,20 +73,11 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $rawtype.RawType.BoundRecursively.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for rawtype.RawType.BoundDependentDirect [type definition]
  (type $rawtype.RawType.BoundDependentDirect (struct_subtype
   (field $vtable (ref $rawtype.RawType.BoundDependentDirect.vtable))
-  (field $itable (ref $rawtype.RawType.BoundDependentDirect.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -125,20 +89,11 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $rawtype.RawType.BoundDependentDirect.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for rawtype.RawType.BoundDependentIndirect [type definition]
  (type $rawtype.RawType.BoundDependentIndirect (struct_subtype
   (field $vtable (ref $rawtype.RawType.BoundDependentIndirect.vtable))
-  (field $itable (ref $rawtype.RawType.BoundDependentIndirect.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -150,15 +105,6 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $rawtype.RawType.BoundDependentIndirect.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for rawtype.RawType.RawSubclass [type definition]
  (type $rawtype.RawType.RawSubclass (struct_subtype
@@ -184,12 +130,12 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
+  $itable))
 
  ;;; Code for rawtype.RawType.RawUnboundChild [type definition]
  (type $rawtype.RawType.RawUnboundChild (struct_subtype
   (field $vtable (ref $rawtype.RawType.RawUnboundChild.vtable))
-  (field $itable (ref $rawtype.RawType.RawUnboundChild.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $rawtype.RawType.Unbound)
  )
@@ -202,15 +148,6 @@
   (field $m_method__java_lang_Object__java_lang_Object_$pp_rawtype (ref $function.m_method__java_lang_Object__java_lang_Object_$pp_rawtype))
   $rawtype.RawType.Unbound.vtable)
  )
- (type $rawtype.RawType.RawUnboundChild.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $rawtype.RawType.Unbound.itable))
 
 ;;; Code for rawtype.RawType [vtable.init]
 (global $rawtype.RawType.vtable (ref $rawtype.RawType.vtable)
@@ -222,17 +159,6 @@
   (ref.func $$getClassImpl__java_lang_Class@rawtype.RawType)
  )
 )
-
-;;; Code for rawtype.RawType [itable.init]
-(global $rawtype.RawType.itable (ref $rawtype.RawType.itable) (struct.new $rawtype.RawType.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for rawtype.RawType.Unbound [vtable.init]
 (global $rawtype.RawType.Unbound.vtable (ref $rawtype.RawType.Unbound.vtable)
@@ -246,17 +172,6 @@
  )
 )
 
-;;; Code for rawtype.RawType.Unbound [itable.init]
-(global $rawtype.RawType.Unbound.itable (ref $rawtype.RawType.Unbound.itable) (struct.new $rawtype.RawType.Unbound.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for rawtype.RawType.Bound [vtable.init]
 (global $rawtype.RawType.Bound.vtable (ref $rawtype.RawType.Bound.vtable)
  (struct.new $rawtype.RawType.Bound.vtable
@@ -267,17 +182,6 @@
   (ref.func $$getClassImpl__java_lang_Class@rawtype.RawType.Bound)
  )
 )
-
-;;; Code for rawtype.RawType.Bound [itable.init]
-(global $rawtype.RawType.Bound.itable (ref $rawtype.RawType.Bound.itable) (struct.new $rawtype.RawType.Bound.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for rawtype.RawType.BoundRecursively [vtable.init]
 (global $rawtype.RawType.BoundRecursively.vtable (ref $rawtype.RawType.BoundRecursively.vtable)
@@ -290,17 +194,6 @@
  )
 )
 
-;;; Code for rawtype.RawType.BoundRecursively [itable.init]
-(global $rawtype.RawType.BoundRecursively.itable (ref $rawtype.RawType.BoundRecursively.itable) (struct.new $rawtype.RawType.BoundRecursively.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for rawtype.RawType.BoundDependentDirect [vtable.init]
 (global $rawtype.RawType.BoundDependentDirect.vtable (ref $rawtype.RawType.BoundDependentDirect.vtable)
  (struct.new $rawtype.RawType.BoundDependentDirect.vtable
@@ -311,17 +204,6 @@
   (ref.func $$getClassImpl__java_lang_Class@rawtype.RawType.BoundDependentDirect)
  )
 )
-
-;;; Code for rawtype.RawType.BoundDependentDirect [itable.init]
-(global $rawtype.RawType.BoundDependentDirect.itable (ref $rawtype.RawType.BoundDependentDirect.itable) (struct.new $rawtype.RawType.BoundDependentDirect.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for rawtype.RawType.BoundDependentIndirect [vtable.init]
 (global $rawtype.RawType.BoundDependentIndirect.vtable (ref $rawtype.RawType.BoundDependentIndirect.vtable)
@@ -334,17 +216,6 @@
  )
 )
 
-;;; Code for rawtype.RawType.BoundDependentIndirect [itable.init]
-(global $rawtype.RawType.BoundDependentIndirect.itable (ref $rawtype.RawType.BoundDependentIndirect.itable) (struct.new $rawtype.RawType.BoundDependentIndirect.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for rawtype.RawType.RawUnboundChild [vtable.init]
 (global $rawtype.RawType.RawUnboundChild.vtable (ref $rawtype.RawType.RawUnboundChild.vtable)
  (struct.new $rawtype.RawType.RawUnboundChild.vtable
@@ -356,17 +227,6 @@
   (ref.func $m_method__java_lang_Object__java_lang_Object_$pp_rawtype@rawtype.RawType.RawUnboundChild)
  )
 )
-
-;;; Code for rawtype.RawType.RawUnboundChild [itable.init]
-(global $rawtype.RawType.RawUnboundChild.itable (ref $rawtype.RawType.RawUnboundChild.itable) (struct.new $rawtype.RawType.RawUnboundChild.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for rawtype.RawType.RawSubclass [vtable.init]
 (global $rawtype.RawType.RawSubclass.vtable (ref $rawtype.RawType.RawSubclass.vtable)
@@ -501,7 +361,7 @@
  (local $$instance (ref null $rawtype.RawType))
  (block
   ;;@ rawtype/RawType.java:19:6
-  (local.set $$instance (struct.new $rawtype.RawType (ref.as_non_null (global.get $rawtype.RawType.vtable)) (ref.as_non_null (global.get $rawtype.RawType.itable)) (i32.const 0) (ref.null $rawtype.RawType.Unbound) (ref.null $rawtype.RawType.Bound) (ref.null $rawtype.RawType.BoundRecursively) (ref.null $rawtype.RawType.BoundDependentDirect) (ref.null $rawtype.RawType.BoundDependentIndirect)))
+  (local.set $$instance (struct.new $rawtype.RawType (ref.as_non_null (global.get $rawtype.RawType.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $rawtype.RawType.Unbound) (ref.null $rawtype.RawType.Bound) (ref.null $rawtype.RawType.BoundRecursively) (ref.null $rawtype.RawType.BoundDependentDirect) (ref.null $rawtype.RawType.BoundDependentIndirect)))
   ;;@ rawtype/RawType.java:19:6
   (call $$ctor__void_$p_rawtype_RawType@rawtype.RawType (ref.as_non_null (local.get $$instance)))
   ;;@ rawtype/RawType.java:19:6
@@ -607,7 +467,7 @@
  (local $$instance (ref null $rawtype.RawType.Unbound))
  (block
   ;;@ rawtype/RawType.java:26:15
-  (local.set $$instance (struct.new $rawtype.RawType.Unbound (ref.as_non_null (global.get $rawtype.RawType.Unbound.vtable)) (ref.as_non_null (global.get $rawtype.RawType.Unbound.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $rawtype.RawType.Unbound (ref.as_non_null (global.get $rawtype.RawType.Unbound.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ rawtype/RawType.java:26:15
   (call $$ctor__void_$p_rawtype_RawType_Unbound@rawtype.RawType.Unbound (ref.as_non_null (local.get $$instance)))
   ;;@ rawtype/RawType.java:26:15
@@ -709,7 +569,7 @@
  (local $$instance (ref null $rawtype.RawType.Bound))
  (block
   ;;@ rawtype/RawType.java:32:15
-  (local.set $$instance (struct.new $rawtype.RawType.Bound (ref.as_non_null (global.get $rawtype.RawType.Bound.vtable)) (ref.as_non_null (global.get $rawtype.RawType.Bound.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $rawtype.RawType.Bound (ref.as_non_null (global.get $rawtype.RawType.Bound.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ rawtype/RawType.java:32:15
   (call $$ctor__void_$p_rawtype_RawType_Bound@rawtype.RawType.Bound (ref.as_non_null (local.get $$instance)))
   ;;@ rawtype/RawType.java:32:15
@@ -795,7 +655,7 @@
  (local $$instance (ref null $rawtype.RawType.BoundRecursively))
  (block
   ;;@ rawtype/RawType.java:34:15
-  (local.set $$instance (struct.new $rawtype.RawType.BoundRecursively (ref.as_non_null (global.get $rawtype.RawType.BoundRecursively.vtable)) (ref.as_non_null (global.get $rawtype.RawType.BoundRecursively.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $rawtype.RawType.BoundRecursively (ref.as_non_null (global.get $rawtype.RawType.BoundRecursively.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ rawtype/RawType.java:34:15
   (call $$ctor__void_$p_rawtype_RawType_BoundRecursively@rawtype.RawType.BoundRecursively (ref.as_non_null (local.get $$instance)))
   ;;@ rawtype/RawType.java:34:15
@@ -881,7 +741,7 @@
  (local $$instance (ref null $rawtype.RawType.BoundDependentDirect))
  (block
   ;;@ rawtype/RawType.java:36:15
-  (local.set $$instance (struct.new $rawtype.RawType.BoundDependentDirect (ref.as_non_null (global.get $rawtype.RawType.BoundDependentDirect.vtable)) (ref.as_non_null (global.get $rawtype.RawType.BoundDependentDirect.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $rawtype.RawType.BoundDependentDirect (ref.as_non_null (global.get $rawtype.RawType.BoundDependentDirect.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ rawtype/RawType.java:36:15
   (call $$ctor__void_$p_rawtype_RawType_BoundDependentDirect@rawtype.RawType.BoundDependentDirect (ref.as_non_null (local.get $$instance)))
   ;;@ rawtype/RawType.java:36:15
@@ -967,7 +827,7 @@
  (local $$instance (ref null $rawtype.RawType.BoundDependentIndirect))
  (block
   ;;@ rawtype/RawType.java:38:15
-  (local.set $$instance (struct.new $rawtype.RawType.BoundDependentIndirect (ref.as_non_null (global.get $rawtype.RawType.BoundDependentIndirect.vtable)) (ref.as_non_null (global.get $rawtype.RawType.BoundDependentIndirect.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $rawtype.RawType.BoundDependentIndirect (ref.as_non_null (global.get $rawtype.RawType.BoundDependentIndirect.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ rawtype/RawType.java:38:15
   (call $$ctor__void_$p_rawtype_RawType_BoundDependentIndirect@rawtype.RawType.BoundDependentIndirect (ref.as_non_null (local.get $$instance)))
   ;;@ rawtype/RawType.java:38:15
@@ -1154,7 +1014,7 @@
  (local $$instance (ref null $rawtype.RawType.RawUnboundChild))
  (block
   ;;@ rawtype/RawType.java:40:15
-  (local.set $$instance (struct.new $rawtype.RawType.RawUnboundChild (ref.as_non_null (global.get $rawtype.RawType.RawUnboundChild.vtable)) (ref.as_non_null (global.get $rawtype.RawType.RawUnboundChild.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $rawtype.RawType.RawUnboundChild (ref.as_non_null (global.get $rawtype.RawType.RawUnboundChild.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ rawtype/RawType.java:40:15
   (call $$ctor__void_$p_rawtype_RawType_RawUnboundChild@rawtype.RawType.RawUnboundChild (ref.as_non_null (local.get $$instance)))
   ;;@ rawtype/RawType.java:40:15

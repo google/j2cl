@@ -1,7 +1,7 @@
  ;;; Code for genericequals.GenericEquals [type definition]
  (type $genericequals.GenericEquals (struct_subtype
   (field $vtable (ref $genericequals.GenericEquals.vtable))
-  (field $itable (ref $genericequals.GenericEquals.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_value__genericequals_GenericEquals_ (ref null $java.lang.Object))
   (field $f_value2__genericequals_GenericEquals_ (ref null $genericequals.GenericEquals))
@@ -16,15 +16,6 @@
   (field $m_foo__genericequals_GenericEquals__java_lang_Object (ref $function.m_foo__genericequals_GenericEquals__java_lang_Object))
   $java.lang.Object.vtable)
  )
- (type $genericequals.GenericEquals.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for genericequals.GenericEquals [vtable.init]
 (global $genericequals.GenericEquals.vtable (ref $genericequals.GenericEquals.vtable)
@@ -37,17 +28,6 @@
   (ref.func $m_foo__genericequals_GenericEquals__java_lang_Object@genericequals.GenericEquals)
  )
 )
-
-;;; Code for genericequals.GenericEquals [itable.init]
-(global $genericequals.GenericEquals.itable (ref $genericequals.GenericEquals.itable) (struct.new $genericequals.GenericEquals.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for genericequals.GenericEquals [static fields]
 (global $f_$initialized__genericequals_GenericEquals (mut i32) (i32.const 0))
@@ -64,7 +44,7 @@
  (local $$instance (ref null $genericequals.GenericEquals))
  (block
   ;;@ genericequals/GenericEquals.java:23:9
-  (local.set $$instance (struct.new $genericequals.GenericEquals (ref.as_non_null (global.get $genericequals.GenericEquals.vtable)) (ref.as_non_null (global.get $genericequals.GenericEquals.itable)) (i32.const 0) (local.get $value) (ref.null $genericequals.GenericEquals)))
+  (local.set $$instance (struct.new $genericequals.GenericEquals (ref.as_non_null (global.get $genericequals.GenericEquals.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (local.get $value) (ref.null $genericequals.GenericEquals)))
   ;;@ genericequals/GenericEquals.java:23:9
   (call $$ctor__java_lang_Object__void_$p_genericequals_GenericEquals@genericequals.GenericEquals (ref.as_non_null (local.get $$instance))(local.get $value))
   ;;@ genericequals/GenericEquals.java:23:9

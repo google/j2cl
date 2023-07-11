@@ -1,7 +1,7 @@
  ;;; Code for nestedinstanceinnerclass.OuterClass [type definition]
  (type $nestedinstanceinnerclass.OuterClass (struct_subtype
   (field $vtable (ref $nestedinstanceinnerclass.OuterClass.vtable))
-  (field $itable (ref $nestedinstanceinnerclass.OuterClass.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -14,20 +14,11 @@
   (field $m_test__void (ref $function.m_test__void))
   $java.lang.Object.vtable)
  )
- (type $nestedinstanceinnerclass.OuterClass.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass [type definition]
  (type $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (struct_subtype
   (field $vtable (ref $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable))
-  (field $itable (ref $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass (ref null $nestedinstanceinnerclass.OuterClass.InnerClass))
   (field $f_x__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass (mut (ref null $nestedinstanceinnerclass.OuterClass.InnerClass)))
@@ -42,20 +33,11 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for nestedinstanceinnerclass.OuterClass.InnerClass [type definition]
  (type $nestedinstanceinnerclass.OuterClass.InnerClass (struct_subtype
   (field $vtable (ref $nestedinstanceinnerclass.OuterClass.InnerClass.vtable))
-  (field $itable (ref $nestedinstanceinnerclass.OuterClass.InnerClass.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass (ref null $nestedinstanceinnerclass.OuterClass))
   $java.lang.Object)
@@ -68,15 +50,6 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $nestedinstanceinnerclass.OuterClass.InnerClass.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for nestedinstanceinnerclass.OuterClass [vtable.init]
 (global $nestedinstanceinnerclass.OuterClass.vtable (ref $nestedinstanceinnerclass.OuterClass.vtable)
@@ -90,17 +63,6 @@
  )
 )
 
-;;; Code for nestedinstanceinnerclass.OuterClass [itable.init]
-(global $nestedinstanceinnerclass.OuterClass.itable (ref $nestedinstanceinnerclass.OuterClass.itable) (struct.new $nestedinstanceinnerclass.OuterClass.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass [vtable.init]
 (global $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable (ref $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable)
  (struct.new $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable
@@ -112,17 +74,6 @@
  )
 )
 
-;;; Code for nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass [itable.init]
-(global $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.itable (ref $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.itable) (struct.new $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for nestedinstanceinnerclass.OuterClass.InnerClass [vtable.init]
 (global $nestedinstanceinnerclass.OuterClass.InnerClass.vtable (ref $nestedinstanceinnerclass.OuterClass.InnerClass.vtable)
  (struct.new $nestedinstanceinnerclass.OuterClass.InnerClass.vtable
@@ -133,17 +84,6 @@
   (ref.func $$getClassImpl__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass)
  )
 )
-
-;;; Code for nestedinstanceinnerclass.OuterClass.InnerClass [itable.init]
-(global $nestedinstanceinnerclass.OuterClass.InnerClass.itable (ref $nestedinstanceinnerclass.OuterClass.InnerClass.itable) (struct.new $nestedinstanceinnerclass.OuterClass.InnerClass.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for nestedinstanceinnerclass.OuterClass [static fields]
 (global $f_$initialized__nestedinstanceinnerclass_OuterClass (mut i32) (i32.const 0))
@@ -169,7 +109,7 @@
  (local $$instance (ref null $nestedinstanceinnerclass.OuterClass))
  (block
   ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
-  (local.set $$instance (struct.new $nestedinstanceinnerclass.OuterClass (ref.as_non_null (global.get $nestedinstanceinnerclass.OuterClass.vtable)) (ref.as_non_null (global.get $nestedinstanceinnerclass.OuterClass.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $nestedinstanceinnerclass.OuterClass (ref.as_non_null (global.get $nestedinstanceinnerclass.OuterClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
   (call $$ctor__void_$p_nestedinstanceinnerclass_OuterClass@nestedinstanceinnerclass.OuterClass (ref.as_non_null (local.get $$instance)))
   ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
@@ -270,7 +210,7 @@
  (local $$instance (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass))
  (block
   ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
-  (local.set $$instance (struct.new $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (ref.as_non_null (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable)) (ref.as_non_null (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.itable)) (i32.const 0) (local.get $$outer_this) (ref.null $nestedinstanceinnerclass.OuterClass.InnerClass) (ref.null $nestedinstanceinnerclass.OuterClass)))
+  (local.set $$instance (struct.new $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (ref.as_non_null (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (local.get $$outer_this) (ref.null $nestedinstanceinnerclass.OuterClass.InnerClass) (ref.null $nestedinstanceinnerclass.OuterClass)))
   ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
   (call $$ctor__nestedinstanceinnerclass_OuterClass_InnerClass__void_$p_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
@@ -372,7 +312,7 @@
  (local $$instance (ref null $nestedinstanceinnerclass.OuterClass.InnerClass))
  (block
   ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
-  (local.set $$instance (struct.new $nestedinstanceinnerclass.OuterClass.InnerClass (ref.as_non_null (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.vtable)) (ref.as_non_null (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.itable)) (i32.const 0) (local.get $$outer_this)))
+  (local.set $$instance (struct.new $nestedinstanceinnerclass.OuterClass.InnerClass (ref.as_non_null (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (local.get $$outer_this)))
   ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
   (call $$ctor__nestedinstanceinnerclass_OuterClass__void_$p_nestedinstanceinnerclass_OuterClass_InnerClass@nestedinstanceinnerclass.OuterClass.InnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ nestedinstanceinnerclass/OuterClass.java:19:15

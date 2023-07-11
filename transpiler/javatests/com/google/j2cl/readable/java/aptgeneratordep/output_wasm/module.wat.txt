@@ -1,7 +1,7 @@
  ;;; Code for aptgeneratordep.Dummy [type definition]
  (type $aptgeneratordep.Dummy (struct_subtype
   (field $vtable (ref $aptgeneratordep.Dummy.vtable))
-  (field $itable (ref $aptgeneratordep.Dummy.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -13,20 +13,11 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $aptgeneratordep.Dummy.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for aptgeneratordep.Foo [type definition]
  (type $aptgeneratordep.Foo (struct_subtype
   (field $vtable (ref $aptgeneratordep.Foo.vtable))
-  (field $itable (ref $aptgeneratordep.Foo.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -38,15 +29,6 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $aptgeneratordep.Foo.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for aptgeneratordep.Dummy [vtable.init]
 (global $aptgeneratordep.Dummy.vtable (ref $aptgeneratordep.Dummy.vtable)
@@ -59,17 +41,6 @@
  )
 )
 
-;;; Code for aptgeneratordep.Dummy [itable.init]
-(global $aptgeneratordep.Dummy.itable (ref $aptgeneratordep.Dummy.itable) (struct.new $aptgeneratordep.Dummy.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for aptgeneratordep.Foo [vtable.init]
 (global $aptgeneratordep.Foo.vtable (ref $aptgeneratordep.Foo.vtable)
  (struct.new $aptgeneratordep.Foo.vtable
@@ -80,17 +51,6 @@
   (ref.func $$getClassImpl__java_lang_Class@aptgeneratordep.Foo)
  )
 )
-
-;;; Code for aptgeneratordep.Foo [itable.init]
-(global $aptgeneratordep.Foo.itable (ref $aptgeneratordep.Foo.itable) (struct.new $aptgeneratordep.Foo.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for aptgeneratordep.Dummy [static fields]
 (global $f_$initialized__aptgeneratordep_Dummy (mut i32) (i32.const 0))
@@ -111,7 +71,7 @@
  (local $$instance (ref null $aptgeneratordep.Dummy))
  (block
   ;;@ aptgeneratordep/Dummy.java:3:13
-  (local.set $$instance (struct.new $aptgeneratordep.Dummy (ref.as_non_null (global.get $aptgeneratordep.Dummy.vtable)) (ref.as_non_null (global.get $aptgeneratordep.Dummy.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $aptgeneratordep.Dummy (ref.as_non_null (global.get $aptgeneratordep.Dummy.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ aptgeneratordep/Dummy.java:3:13
   (call $$ctor__void_$p_aptgeneratordep_Dummy@aptgeneratordep.Dummy (ref.as_non_null (local.get $$instance)))
   ;;@ aptgeneratordep/Dummy.java:3:13
@@ -197,7 +157,7 @@
  (local $$instance (ref null $aptgeneratordep.Foo))
  (block
   ;;@ aptgeneratordep/Foo.java:18:13
-  (local.set $$instance (struct.new $aptgeneratordep.Foo (ref.as_non_null (global.get $aptgeneratordep.Foo.vtable)) (ref.as_non_null (global.get $aptgeneratordep.Foo.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $aptgeneratordep.Foo (ref.as_non_null (global.get $aptgeneratordep.Foo.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ aptgeneratordep/Foo.java:18:13
   (call $$ctor__void_$p_aptgeneratordep_Foo@aptgeneratordep.Foo (ref.as_non_null (local.get $$instance)))
   ;;@ aptgeneratordep/Foo.java:18:13

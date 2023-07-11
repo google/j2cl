@@ -1,7 +1,7 @@
  ;;; Code for continuestatement.ContinueStatement [type definition]
  (type $continuestatement.ContinueStatement (struct_subtype
   (field $vtable (ref $continuestatement.ContinueStatement.vtable))
-  (field $itable (ref $continuestatement.ContinueStatement.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -14,15 +14,6 @@
   (field $m_test__void (ref $function.m_test__void))
   $java.lang.Object.vtable)
  )
- (type $continuestatement.ContinueStatement.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for continuestatement.ContinueStatement [vtable.init]
 (global $continuestatement.ContinueStatement.vtable (ref $continuestatement.ContinueStatement.vtable)
@@ -35,17 +26,6 @@
   (ref.func $m_test__void@continuestatement.ContinueStatement)
  )
 )
-
-;;; Code for continuestatement.ContinueStatement [itable.init]
-(global $continuestatement.ContinueStatement.itable (ref $continuestatement.ContinueStatement.itable) (struct.new $continuestatement.ContinueStatement.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for continuestatement.ContinueStatement [static fields]
 (global $f_$initialized__continuestatement_ContinueStatement (mut i32) (i32.const 0))
@@ -61,7 +41,7 @@
  (local $$instance (ref null $continuestatement.ContinueStatement))
  (block
   ;;@ continuestatement/ContinueStatement.java:18:13
-  (local.set $$instance (struct.new $continuestatement.ContinueStatement (ref.as_non_null (global.get $continuestatement.ContinueStatement.vtable)) (ref.as_non_null (global.get $continuestatement.ContinueStatement.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $continuestatement.ContinueStatement (ref.as_non_null (global.get $continuestatement.ContinueStatement.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ continuestatement/ContinueStatement.java:18:13
   (call $$ctor__void_$p_continuestatement_ContinueStatement@continuestatement.ContinueStatement (ref.as_non_null (local.get $$instance)))
   ;;@ continuestatement/ContinueStatement.java:18:13

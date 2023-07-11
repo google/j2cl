@@ -1,29 +1,20 @@
  ;;; Code for genericnativetype.BoundedJsArray.$Overlay [type definition]
  (type $genericnativetype.BoundedJsArray.$Overlay (struct_subtype
   (field $vtable (ref $genericnativetype.BoundedJsArray.$Overlay.vtable))
-  (field $itable (ref $genericnativetype.BoundedJsArray.$Overlay.itable))
+  (field $itable (ref $itable))
   data)
  )
  (type $genericnativetype.BoundedJsArray.$Overlay.vtable (struct_subtype
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   data)
  )
- (type $genericnativetype.BoundedJsArray.$Overlay.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $itable))
 
  ;;; Code for genericnativetype.BoundedJsArray [type definition]
 
  ;;; Code for genericnativetype.BoundedJsArrays [type definition]
  (type $genericnativetype.BoundedJsArrays (struct_subtype
   (field $vtable (ref $genericnativetype.BoundedJsArrays.vtable))
-  (field $itable (ref $genericnativetype.BoundedJsArrays.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -35,15 +26,6 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $genericnativetype.BoundedJsArrays.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for genericnativetype.BoundedJsArray.$Overlay [vtable.init]
 (global $genericnativetype.BoundedJsArray.$Overlay.vtable (ref $genericnativetype.BoundedJsArray.$Overlay.vtable)
@@ -51,17 +33,6 @@
   (ref.func $$getClassImpl__java_lang_Class@genericnativetype.BoundedJsArray.$Overlay)
  )
 )
-
-;;; Code for genericnativetype.BoundedJsArray.$Overlay [itable.init]
-(global $genericnativetype.BoundedJsArray.$Overlay.itable (ref $genericnativetype.BoundedJsArray.$Overlay.itable) (struct.new $genericnativetype.BoundedJsArray.$Overlay.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for genericnativetype.BoundedJsArrays [vtable.init]
 (global $genericnativetype.BoundedJsArrays.vtable (ref $genericnativetype.BoundedJsArrays.vtable)
@@ -73,17 +44,6 @@
   (ref.func $$getClassImpl__java_lang_Class@genericnativetype.BoundedJsArrays)
  )
 )
-
-;;; Code for genericnativetype.BoundedJsArrays [itable.init]
-(global $genericnativetype.BoundedJsArrays.itable (ref $genericnativetype.BoundedJsArrays.itable) (struct.new $genericnativetype.BoundedJsArrays.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for genericnativetype.BoundedJsArray [static fields]
 
@@ -202,7 +162,7 @@
  (local $$instance (ref null $genericnativetype.BoundedJsArrays))
  (block
   ;;@ genericnativetype/BoundedJsArrays.java:19:10
-  (local.set $$instance (struct.new $genericnativetype.BoundedJsArrays (ref.as_non_null (global.get $genericnativetype.BoundedJsArrays.vtable)) (ref.as_non_null (global.get $genericnativetype.BoundedJsArrays.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $genericnativetype.BoundedJsArrays (ref.as_non_null (global.get $genericnativetype.BoundedJsArrays.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ genericnativetype/BoundedJsArrays.java:19:10
   (call $$ctor__void_$p_genericnativetype_BoundedJsArrays@genericnativetype.BoundedJsArrays (ref.as_non_null (local.get $$instance)))
   ;;@ genericnativetype/BoundedJsArrays.java:19:10

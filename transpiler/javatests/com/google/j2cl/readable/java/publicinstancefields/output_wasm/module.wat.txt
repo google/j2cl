@@ -1,7 +1,7 @@
  ;;; Code for publicinstancefields.PublicInstanceFields [type definition]
  (type $publicinstancefields.PublicInstanceFields (struct_subtype
   (field $vtable (ref $publicinstancefields.PublicInstanceFields.vtable))
-  (field $itable (ref $publicinstancefields.PublicInstanceFields.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_a__publicinstancefields_PublicInstanceFields i32)
   (field $f_b__publicinstancefields_PublicInstanceFields (mut i32))
@@ -15,15 +15,6 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $publicinstancefields.PublicInstanceFields.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for publicinstancefields.PublicInstanceFields [vtable.init]
 (global $publicinstancefields.PublicInstanceFields.vtable (ref $publicinstancefields.PublicInstanceFields.vtable)
@@ -35,17 +26,6 @@
   (ref.func $$getClassImpl__java_lang_Class@publicinstancefields.PublicInstanceFields)
  )
 )
-
-;;; Code for publicinstancefields.PublicInstanceFields [itable.init]
-(global $publicinstancefields.PublicInstanceFields.itable (ref $publicinstancefields.PublicInstanceFields.itable) (struct.new $publicinstancefields.PublicInstanceFields.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for publicinstancefields.PublicInstanceFields [static fields]
 (global $f_$initialized__publicinstancefields_PublicInstanceFields (mut i32) (i32.const 0))
@@ -61,7 +41,7 @@
  (local $$instance (ref null $publicinstancefields.PublicInstanceFields))
  (block
   ;;@ publicinstancefields/PublicInstanceFields.java:18:13
-  (local.set $$instance (struct.new $publicinstancefields.PublicInstanceFields (ref.as_non_null (global.get $publicinstancefields.PublicInstanceFields.vtable)) (ref.as_non_null (global.get $publicinstancefields.PublicInstanceFields.itable)) (i32.const 0) (i32.const 1) (i32.const 0)))
+  (local.set $$instance (struct.new $publicinstancefields.PublicInstanceFields (ref.as_non_null (global.get $publicinstancefields.PublicInstanceFields.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 1) (i32.const 0)))
   ;;@ publicinstancefields/PublicInstanceFields.java:18:13
   (call $$ctor__void_$p_publicinstancefields_PublicInstanceFields@publicinstancefields.PublicInstanceFields (ref.as_non_null (local.get $$instance)))
   ;;@ publicinstancefields/PublicInstanceFields.java:18:13

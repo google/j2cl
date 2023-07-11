@@ -1,7 +1,7 @@
  ;;; Code for devirtualizedsupermethodcall.FooCallsSuperObjectMethod [type definition]
  (type $devirtualizedsupermethodcall.FooCallsSuperObjectMethod (struct_subtype
   (field $vtable (ref $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable))
-  (field $itable (ref $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -13,20 +13,11 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for devirtualizedsupermethodcall.Main [type definition]
  (type $devirtualizedsupermethodcall.Main (struct_subtype
   (field $vtable (ref $devirtualizedsupermethodcall.Main.vtable))
-  (field $itable (ref $devirtualizedsupermethodcall.Main.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -39,15 +30,6 @@
   (field $m_main__void (ref $function.m_main__void))
   $java.lang.Object.vtable)
  )
- (type $devirtualizedsupermethodcall.Main.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for devirtualizedsupermethodcall.SubNumber [type definition]
  (type $devirtualizedsupermethodcall.SubNumber (struct_subtype
@@ -120,17 +102,6 @@
  )
 )
 
-;;; Code for devirtualizedsupermethodcall.FooCallsSuperObjectMethod [itable.init]
-(global $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.itable (ref $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.itable) (struct.new $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for devirtualizedsupermethodcall.Main [vtable.init]
 (global $devirtualizedsupermethodcall.Main.vtable (ref $devirtualizedsupermethodcall.Main.vtable)
  (struct.new $devirtualizedsupermethodcall.Main.vtable
@@ -142,17 +113,6 @@
   (ref.func $m_main__void@devirtualizedsupermethodcall.Main)
  )
 )
-
-;;; Code for devirtualizedsupermethodcall.Main [itable.init]
-(global $devirtualizedsupermethodcall.Main.itable (ref $devirtualizedsupermethodcall.Main.itable) (struct.new $devirtualizedsupermethodcall.Main.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for devirtualizedsupermethodcall.SubNumber [static fields]
 (global $f_$initialized__devirtualizedsupermethodcall_SubNumber (mut i32) (i32.const 0))
@@ -178,7 +138,7 @@
  (local $$instance (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
  (block
   ;;@ devirtualizedsupermethodcall/Main.java:40:6
-  (local.set $$instance (struct.new $devirtualizedsupermethodcall.FooCallsSuperObjectMethod (ref.as_non_null (global.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable)) (ref.as_non_null (global.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $devirtualizedsupermethodcall.FooCallsSuperObjectMethod (ref.as_non_null (global.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ devirtualizedsupermethodcall/Main.java:40:6
   (call $$ctor__void_$p_devirtualizedsupermethodcall_FooCallsSuperObjectMethod@devirtualizedsupermethodcall.FooCallsSuperObjectMethod (ref.as_non_null (local.get $$instance)))
   ;;@ devirtualizedsupermethodcall/Main.java:40:6
@@ -279,7 +239,7 @@
  (local $$instance (ref null $devirtualizedsupermethodcall.Main))
  (block
   ;;@ devirtualizedsupermethodcall/Main.java:47:13
-  (local.set $$instance (struct.new $devirtualizedsupermethodcall.Main (ref.as_non_null (global.get $devirtualizedsupermethodcall.Main.vtable)) (ref.as_non_null (global.get $devirtualizedsupermethodcall.Main.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $devirtualizedsupermethodcall.Main (ref.as_non_null (global.get $devirtualizedsupermethodcall.Main.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ devirtualizedsupermethodcall/Main.java:47:13
   (call $$ctor__void_$p_devirtualizedsupermethodcall_Main@devirtualizedsupermethodcall.Main (ref.as_non_null (local.get $$instance)))
   ;;@ devirtualizedsupermethodcall/Main.java:47:13

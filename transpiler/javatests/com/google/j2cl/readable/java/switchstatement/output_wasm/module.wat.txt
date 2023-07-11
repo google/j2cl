@@ -1,7 +1,7 @@
  ;;; Code for switchstatement.SwitchStatement [type definition]
  (type $switchstatement.SwitchStatement (struct_subtype
   (field $vtable (ref $switchstatement.SwitchStatement.vtable))
-  (field $itable (ref $switchstatement.SwitchStatement.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -14,15 +14,6 @@
   (field $m_main__void (ref $function.m_main__void))
   $java.lang.Object.vtable)
  )
- (type $switchstatement.SwitchStatement.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for switchstatement.Numbers [type definition]
  (type $switchstatement.Numbers (struct_subtype
@@ -98,17 +89,6 @@
  )
 )
 
-;;; Code for switchstatement.SwitchStatement [itable.init]
-(global $switchstatement.SwitchStatement.itable (ref $switchstatement.SwitchStatement.itable) (struct.new $switchstatement.SwitchStatement.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for switchstatement.Numbers [static fields]
 (global $f_ONE__switchstatement_Numbers (mut (ref null $switchstatement.Numbers)) (ref.null $switchstatement.Numbers))
 (global $f_TWO__switchstatement_Numbers (mut (ref null $switchstatement.Numbers)) (ref.null $switchstatement.Numbers))
@@ -137,7 +117,7 @@
  (local $$instance (ref null $switchstatement.SwitchStatement))
  (block
   ;;@ switchstatement/SwitchStatement.java:24:13
-  (local.set $$instance (struct.new $switchstatement.SwitchStatement (ref.as_non_null (global.get $switchstatement.SwitchStatement.vtable)) (ref.as_non_null (global.get $switchstatement.SwitchStatement.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $switchstatement.SwitchStatement (ref.as_non_null (global.get $switchstatement.SwitchStatement.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ switchstatement/SwitchStatement.java:24:13
   (call $$ctor__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $$instance)))
   ;;@ switchstatement/SwitchStatement.java:24:13

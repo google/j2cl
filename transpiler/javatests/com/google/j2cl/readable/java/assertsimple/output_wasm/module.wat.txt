@@ -1,7 +1,7 @@
  ;;; Code for assertsimple.AssertSimple [type definition]
  (type $assertsimple.AssertSimple (struct_subtype
   (field $vtable (ref $assertsimple.AssertSimple.vtable))
-  (field $itable (ref $assertsimple.AssertSimple.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -13,15 +13,6 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $assertsimple.AssertSimple.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for assertsimple.AssertSimple [vtable.init]
 (global $assertsimple.AssertSimple.vtable (ref $assertsimple.AssertSimple.vtable)
@@ -33,17 +24,6 @@
   (ref.func $$getClassImpl__java_lang_Class@assertsimple.AssertSimple)
  )
 )
-
-;;; Code for assertsimple.AssertSimple [itable.init]
-(global $assertsimple.AssertSimple.itable (ref $assertsimple.AssertSimple.itable) (struct.new $assertsimple.AssertSimple.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for assertsimple.AssertSimple [static fields]
 (global $f_$initialized__assertsimple_AssertSimple (mut i32) (i32.const 0))
@@ -60,7 +40,7 @@
  (local $$instance (ref null $assertsimple.AssertSimple))
  (block
   ;;@ assertsimple/AssertSimple.java:18:13
-  (local.set $$instance (struct.new $assertsimple.AssertSimple (ref.as_non_null (global.get $assertsimple.AssertSimple.vtable)) (ref.as_non_null (global.get $assertsimple.AssertSimple.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $assertsimple.AssertSimple (ref.as_non_null (global.get $assertsimple.AssertSimple.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ assertsimple/AssertSimple.java:18:13
   (call $$ctor__void_$p_assertsimple_AssertSimple@assertsimple.AssertSimple (ref.as_non_null (local.get $$instance)))
   ;;@ assertsimple/AssertSimple.java:18:13

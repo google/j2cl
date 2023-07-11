@@ -1,7 +1,7 @@
  ;;; Code for devirtualizedcalls.ArrayCalls [type definition]
  (type $devirtualizedcalls.ArrayCalls (struct_subtype
   (field $vtable (ref $devirtualizedcalls.ArrayCalls.vtable))
-  (field $itable (ref $devirtualizedcalls.ArrayCalls.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -14,20 +14,11 @@
   (field $m_main__void (ref $function.m_main__void))
   $java.lang.Object.vtable)
  )
- (type $devirtualizedcalls.ArrayCalls.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for devirtualizedcalls.CharSequenceCalls [type definition]
  (type $devirtualizedcalls.CharSequenceCalls (struct_subtype
   (field $vtable (ref $devirtualizedcalls.CharSequenceCalls.vtable))
-  (field $itable (ref $devirtualizedcalls.CharSequenceCalls.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -41,20 +32,11 @@
   (field $m_main__void (ref $function.m_main__void))
   $java.lang.Object.vtable)
  )
- (type $devirtualizedcalls.CharSequenceCalls.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for devirtualizedcalls.NumberCalls [type definition]
  (type $devirtualizedcalls.NumberCalls (struct_subtype
   (field $vtable (ref $devirtualizedcalls.NumberCalls.vtable))
-  (field $itable (ref $devirtualizedcalls.NumberCalls.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -67,20 +49,11 @@
   (field $m_main__void (ref $function.m_main__void))
   $java.lang.Object.vtable)
  )
- (type $devirtualizedcalls.NumberCalls.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for devirtualizedcalls.ObjectCalls [type definition]
  (type $devirtualizedcalls.ObjectCalls (struct_subtype
   (field $vtable (ref $devirtualizedcalls.ObjectCalls.vtable))
-  (field $itable (ref $devirtualizedcalls.ObjectCalls.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -95,20 +68,11 @@
   (field $m_testNotEquals__boolean (ref $function.m_testNotEquals__boolean))
   $java.lang.Object.vtable)
  )
- (type $devirtualizedcalls.ObjectCalls.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for devirtualizedcalls.StringCalls [type definition]
  (type $devirtualizedcalls.StringCalls (struct_subtype
   (field $vtable (ref $devirtualizedcalls.StringCalls.vtable))
-  (field $itable (ref $devirtualizedcalls.StringCalls.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -121,15 +85,6 @@
   (field $m_main__void (ref $function.m_main__void))
   $java.lang.Object.vtable)
  )
- (type $devirtualizedcalls.StringCalls.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for devirtualizedcalls.ArrayCalls [vtable.init]
 (global $devirtualizedcalls.ArrayCalls.vtable (ref $devirtualizedcalls.ArrayCalls.vtable)
@@ -142,17 +97,6 @@
   (ref.func $m_main__void@devirtualizedcalls.ArrayCalls)
  )
 )
-
-;;; Code for devirtualizedcalls.ArrayCalls [itable.init]
-(global $devirtualizedcalls.ArrayCalls.itable (ref $devirtualizedcalls.ArrayCalls.itable) (struct.new $devirtualizedcalls.ArrayCalls.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for devirtualizedcalls.CharSequenceCalls [vtable.init]
 (global $devirtualizedcalls.CharSequenceCalls.vtable (ref $devirtualizedcalls.CharSequenceCalls.vtable)
@@ -167,17 +111,6 @@
  )
 )
 
-;;; Code for devirtualizedcalls.CharSequenceCalls [itable.init]
-(global $devirtualizedcalls.CharSequenceCalls.itable (ref $devirtualizedcalls.CharSequenceCalls.itable) (struct.new $devirtualizedcalls.CharSequenceCalls.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for devirtualizedcalls.NumberCalls [vtable.init]
 (global $devirtualizedcalls.NumberCalls.vtable (ref $devirtualizedcalls.NumberCalls.vtable)
  (struct.new $devirtualizedcalls.NumberCalls.vtable
@@ -189,17 +122,6 @@
   (ref.func $m_main__void@devirtualizedcalls.NumberCalls)
  )
 )
-
-;;; Code for devirtualizedcalls.NumberCalls [itable.init]
-(global $devirtualizedcalls.NumberCalls.itable (ref $devirtualizedcalls.NumberCalls.itable) (struct.new $devirtualizedcalls.NumberCalls.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for devirtualizedcalls.ObjectCalls [vtable.init]
 (global $devirtualizedcalls.ObjectCalls.vtable (ref $devirtualizedcalls.ObjectCalls.vtable)
@@ -215,17 +137,6 @@
  )
 )
 
-;;; Code for devirtualizedcalls.ObjectCalls [itable.init]
-(global $devirtualizedcalls.ObjectCalls.itable (ref $devirtualizedcalls.ObjectCalls.itable) (struct.new $devirtualizedcalls.ObjectCalls.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for devirtualizedcalls.StringCalls [vtable.init]
 (global $devirtualizedcalls.StringCalls.vtable (ref $devirtualizedcalls.StringCalls.vtable)
  (struct.new $devirtualizedcalls.StringCalls.vtable
@@ -237,17 +148,6 @@
   (ref.func $m_main__void@devirtualizedcalls.StringCalls)
  )
 )
-
-;;; Code for devirtualizedcalls.StringCalls [itable.init]
-(global $devirtualizedcalls.StringCalls.itable (ref $devirtualizedcalls.StringCalls.itable) (struct.new $devirtualizedcalls.StringCalls.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for devirtualizedcalls.ArrayCalls [static fields]
 (global $f_$initialized__devirtualizedcalls_ArrayCalls (mut i32) (i32.const 0))
@@ -285,7 +185,7 @@
  (local $$instance (ref null $devirtualizedcalls.ArrayCalls))
  (block
   ;;@ devirtualizedcalls/ArrayCalls.java:18:13
-  (local.set $$instance (struct.new $devirtualizedcalls.ArrayCalls (ref.as_non_null (global.get $devirtualizedcalls.ArrayCalls.vtable)) (ref.as_non_null (global.get $devirtualizedcalls.ArrayCalls.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $devirtualizedcalls.ArrayCalls (ref.as_non_null (global.get $devirtualizedcalls.ArrayCalls.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ devirtualizedcalls/ArrayCalls.java:18:13
   (call $$ctor__void_$p_devirtualizedcalls_ArrayCalls@devirtualizedcalls.ArrayCalls (ref.as_non_null (local.get $$instance)))
   ;;@ devirtualizedcalls/ArrayCalls.java:18:13
@@ -392,7 +292,7 @@
  (local $$instance (ref null $devirtualizedcalls.CharSequenceCalls))
  (block
   ;;@ devirtualizedcalls/CharSequenceCalls.java:18:13
-  (local.set $$instance (struct.new $devirtualizedcalls.CharSequenceCalls (ref.as_non_null (global.get $devirtualizedcalls.CharSequenceCalls.vtable)) (ref.as_non_null (global.get $devirtualizedcalls.CharSequenceCalls.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $devirtualizedcalls.CharSequenceCalls (ref.as_non_null (global.get $devirtualizedcalls.CharSequenceCalls.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ devirtualizedcalls/CharSequenceCalls.java:18:13
   (call $$ctor__void_$p_devirtualizedcalls_CharSequenceCalls@devirtualizedcalls.CharSequenceCalls (ref.as_non_null (local.get $$instance)))
   ;;@ devirtualizedcalls/CharSequenceCalls.java:18:13
@@ -523,7 +423,7 @@
  (local $$instance (ref null $devirtualizedcalls.NumberCalls))
  (block
   ;;@ devirtualizedcalls/NumberCalls.java:18:13
-  (local.set $$instance (struct.new $devirtualizedcalls.NumberCalls (ref.as_non_null (global.get $devirtualizedcalls.NumberCalls.vtable)) (ref.as_non_null (global.get $devirtualizedcalls.NumberCalls.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $devirtualizedcalls.NumberCalls (ref.as_non_null (global.get $devirtualizedcalls.NumberCalls.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ devirtualizedcalls/NumberCalls.java:18:13
   (call $$ctor__void_$p_devirtualizedcalls_NumberCalls@devirtualizedcalls.NumberCalls (ref.as_non_null (local.get $$instance)))
   ;;@ devirtualizedcalls/NumberCalls.java:18:13
@@ -811,7 +711,7 @@
  (local $$instance (ref null $devirtualizedcalls.ObjectCalls))
  (block
   ;;@ devirtualizedcalls/ObjectCalls.java:18:13
-  (local.set $$instance (struct.new $devirtualizedcalls.ObjectCalls (ref.as_non_null (global.get $devirtualizedcalls.ObjectCalls.vtable)) (ref.as_non_null (global.get $devirtualizedcalls.ObjectCalls.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $devirtualizedcalls.ObjectCalls (ref.as_non_null (global.get $devirtualizedcalls.ObjectCalls.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ devirtualizedcalls/ObjectCalls.java:18:13
   (call $$ctor__void_$p_devirtualizedcalls_ObjectCalls@devirtualizedcalls.ObjectCalls (ref.as_non_null (local.get $$instance)))
   ;;@ devirtualizedcalls/ObjectCalls.java:18:13
@@ -974,7 +874,7 @@
  (local $$instance (ref null $devirtualizedcalls.StringCalls))
  (block
   ;;@ devirtualizedcalls/StringCalls.java:21:13
-  (local.set $$instance (struct.new $devirtualizedcalls.StringCalls (ref.as_non_null (global.get $devirtualizedcalls.StringCalls.vtable)) (ref.as_non_null (global.get $devirtualizedcalls.StringCalls.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $devirtualizedcalls.StringCalls (ref.as_non_null (global.get $devirtualizedcalls.StringCalls.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ devirtualizedcalls/StringCalls.java:21:13
   (call $$ctor__void_$p_devirtualizedcalls_StringCalls@devirtualizedcalls.StringCalls (ref.as_non_null (local.get $$instance)))
   ;;@ devirtualizedcalls/StringCalls.java:21:13

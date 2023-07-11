@@ -360,6 +360,9 @@ public class WasmOutputsGenerator {
 
   private void renderClassItableStruct(Type type) {
     TypeDeclaration typeDeclaration = type.getDeclaration();
+    if (!typeDeclaration.implementsInterfaces()) {
+      return;
+    }
     emitItableType(typeDeclaration, getItableSlots(typeDeclaration));
   }
 
@@ -609,6 +612,11 @@ public class WasmOutputsGenerator {
     builder.newLine();
     // TODO(b/183994530): Initialize dynamic dispatch tables lazily.
     builder.append(";;; Initialize dynamic dispatch tables.");
+
+    // Emit an empty itable that will be used for types that don't implement any interface.
+    builder.newLine();
+    builder.append("(global $itable.empty (ref $itable) (struct.new_default $itable))");
+
     // Populate all vtables.
     library
         .streamTypes()
@@ -649,6 +657,9 @@ public class WasmOutputsGenerator {
 
   /** Emits the code to initialize the Itable array for {@code typeDeclaration}. */
   private void emitItableInitialization(TypeDeclaration typeDeclaration) {
+    if (!typeDeclaration.implementsInterfaces()) {
+      return;
+    }
     emitBeginCodeComment(typeDeclaration, "itable.init");
 
     // Create the struct of interface vtables of the required size and store it in a global variable

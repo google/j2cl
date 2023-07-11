@@ -1,7 +1,7 @@
  ;;; Code for simplegenerictype.SimpleGenericType [type definition]
  (type $simplegenerictype.SimpleGenericType (struct_subtype
   (field $vtable (ref $simplegenerictype.SimpleGenericType.vtable))
-  (field $itable (ref $simplegenerictype.SimpleGenericType.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_first__simplegenerictype_SimpleGenericType (ref null $java.lang.Object))
   (field $f_second__simplegenerictype_SimpleGenericType (ref null $java.lang.Object))
@@ -16,15 +16,6 @@
   (field $m_test__void (ref $function.m_test__void))
   $java.lang.Object.vtable)
  )
- (type $simplegenerictype.SimpleGenericType.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for simplegenerictype.SimpleGenericType [vtable.init]
 (global $simplegenerictype.SimpleGenericType.vtable (ref $simplegenerictype.SimpleGenericType.vtable)
@@ -37,17 +28,6 @@
   (ref.func $m_test__void@simplegenerictype.SimpleGenericType)
  )
 )
-
-;;; Code for simplegenerictype.SimpleGenericType [itable.init]
-(global $simplegenerictype.SimpleGenericType.itable (ref $simplegenerictype.SimpleGenericType.itable) (struct.new $simplegenerictype.SimpleGenericType.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for simplegenerictype.SimpleGenericType [static fields]
 (global $f_$initialized__simplegenerictype_SimpleGenericType (mut i32) (i32.const 0))
@@ -65,7 +45,7 @@
  (local $$instance (ref null $simplegenerictype.SimpleGenericType))
  (block
   ;;@ simplegenerictype/SimpleGenericType.java:22:9
-  (local.set $$instance (struct.new $simplegenerictype.SimpleGenericType (ref.as_non_null (global.get $simplegenerictype.SimpleGenericType.vtable)) (ref.as_non_null (global.get $simplegenerictype.SimpleGenericType.itable)) (i32.const 0) (local.get $t) (local.get $s)))
+  (local.set $$instance (struct.new $simplegenerictype.SimpleGenericType (ref.as_non_null (global.get $simplegenerictype.SimpleGenericType.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (local.get $t) (local.get $s)))
   ;;@ simplegenerictype/SimpleGenericType.java:22:9
   (call $$ctor__java_lang_Object__java_lang_Object__void_$p_simplegenerictype_SimpleGenericType@simplegenerictype.SimpleGenericType (ref.as_non_null (local.get $$instance))(local.get $t)(local.get $s))
   ;;@ simplegenerictype/SimpleGenericType.java:22:9

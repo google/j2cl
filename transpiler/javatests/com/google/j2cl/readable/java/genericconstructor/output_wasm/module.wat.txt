@@ -1,7 +1,7 @@
  ;;; Code for genericconstructor.GenericConstructor [type definition]
  (type $genericconstructor.GenericConstructor (struct_subtype
   (field $vtable (ref $genericconstructor.GenericConstructor.vtable))
-  (field $itable (ref $genericconstructor.GenericConstructor.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -14,15 +14,6 @@
   (field $m_test__void (ref $function.m_test__void))
   $java.lang.Object.vtable)
  )
- (type $genericconstructor.GenericConstructor.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for genericconstructor.GenericConstructor [vtable.init]
 (global $genericconstructor.GenericConstructor.vtable (ref $genericconstructor.GenericConstructor.vtable)
@@ -35,17 +26,6 @@
   (ref.func $m_test__void@genericconstructor.GenericConstructor)
  )
 )
-
-;;; Code for genericconstructor.GenericConstructor [itable.init]
-(global $genericconstructor.GenericConstructor.itable (ref $genericconstructor.GenericConstructor.itable) (struct.new $genericconstructor.GenericConstructor.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for genericconstructor.GenericConstructor [static fields]
 (global $f_$initialized__genericconstructor_GenericConstructor (mut i32) (i32.const 0))
@@ -63,7 +43,7 @@
  (local $$instance (ref null $genericconstructor.GenericConstructor))
  (block
   ;;@ genericconstructor/GenericConstructor.java:20:13
-  (local.set $$instance (struct.new $genericconstructor.GenericConstructor (ref.as_non_null (global.get $genericconstructor.GenericConstructor.vtable)) (ref.as_non_null (global.get $genericconstructor.GenericConstructor.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $genericconstructor.GenericConstructor (ref.as_non_null (global.get $genericconstructor.GenericConstructor.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ genericconstructor/GenericConstructor.java:20:13
   (call $$ctor__java_lang_Object__java_lang_Object__void_$p_genericconstructor_GenericConstructor@genericconstructor.GenericConstructor (ref.as_non_null (local.get $$instance))(local.get $s)(local.get $t))
   ;;@ genericconstructor/GenericConstructor.java:20:13
@@ -93,7 +73,7 @@
  (local $$instance (ref null $genericconstructor.GenericConstructor))
  (block
   ;;@ genericconstructor/GenericConstructor.java:23:13
-  (local.set $$instance (struct.new $genericconstructor.GenericConstructor (ref.as_non_null (global.get $genericconstructor.GenericConstructor.vtable)) (ref.as_non_null (global.get $genericconstructor.GenericConstructor.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $genericconstructor.GenericConstructor (ref.as_non_null (global.get $genericconstructor.GenericConstructor.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ genericconstructor/GenericConstructor.java:23:13
   (call $$ctor__java_lang_Object__void_$p_genericconstructor_GenericConstructor@genericconstructor.GenericConstructor (ref.as_non_null (local.get $$instance))(local.get $t))
   ;;@ genericconstructor/GenericConstructor.java:23:13

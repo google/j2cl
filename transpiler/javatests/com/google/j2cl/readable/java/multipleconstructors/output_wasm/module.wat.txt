@@ -1,7 +1,7 @@
  ;;; Code for multipleconstructors.MultipleConstructors [type definition]
  (type $multipleconstructors.MultipleConstructors (struct_subtype
   (field $vtable (ref $multipleconstructors.MultipleConstructors.vtable))
-  (field $itable (ref $multipleconstructors.MultipleConstructors.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_id__multipleconstructors_MultipleConstructors_ i32)
   (field $f_flag__multipleconstructors_MultipleConstructors_ (mut i8))
@@ -15,15 +15,6 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $multipleconstructors.MultipleConstructors.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for multipleconstructors.MultipleConstructors [vtable.init]
 (global $multipleconstructors.MultipleConstructors.vtable (ref $multipleconstructors.MultipleConstructors.vtable)
@@ -35,17 +26,6 @@
   (ref.func $$getClassImpl__java_lang_Class@multipleconstructors.MultipleConstructors)
  )
 )
-
-;;; Code for multipleconstructors.MultipleConstructors [itable.init]
-(global $multipleconstructors.MultipleConstructors.itable (ref $multipleconstructors.MultipleConstructors.itable) (struct.new $multipleconstructors.MultipleConstructors.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for multipleconstructors.MultipleConstructors [static fields]
 (global $f_$initialized__multipleconstructors_MultipleConstructors (mut i32) (i32.const 0))
@@ -62,7 +42,7 @@
  (local $$instance (ref null $multipleconstructors.MultipleConstructors))
  (block
   ;;@ multipleconstructors/MultipleConstructors.java:22:9
-  (local.set $$instance (struct.new $multipleconstructors.MultipleConstructors (ref.as_non_null (global.get $multipleconstructors.MultipleConstructors.vtable)) (ref.as_non_null (global.get $multipleconstructors.MultipleConstructors.itable)) (i32.const 0) (local.get $id) (i32.const 0)))
+  (local.set $$instance (struct.new $multipleconstructors.MultipleConstructors (ref.as_non_null (global.get $multipleconstructors.MultipleConstructors.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (local.get $id) (i32.const 0)))
   ;;@ multipleconstructors/MultipleConstructors.java:22:9
   (call $$ctor__int__void_$p_multipleconstructors_MultipleConstructors@multipleconstructors.MultipleConstructors (ref.as_non_null (local.get $$instance))(local.get $id))
   ;;@ multipleconstructors/MultipleConstructors.java:22:9
@@ -93,7 +73,7 @@
  (local $$instance (ref null $multipleconstructors.MultipleConstructors))
  (block
   ;;@ multipleconstructors/MultipleConstructors.java:27:9
-  (local.set $$instance (struct.new $multipleconstructors.MultipleConstructors (ref.as_non_null (global.get $multipleconstructors.MultipleConstructors.vtable)) (ref.as_non_null (global.get $multipleconstructors.MultipleConstructors.itable)) (i32.const 0) (i32.sub (i32.const 0) (i32.const 1)) (i32.const 0)))
+  (local.set $$instance (struct.new $multipleconstructors.MultipleConstructors (ref.as_non_null (global.get $multipleconstructors.MultipleConstructors.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.sub (i32.const 0) (i32.const 1)) (i32.const 0)))
   ;;@ multipleconstructors/MultipleConstructors.java:27:9
   (call $$ctor__boolean__void_$p_multipleconstructors_MultipleConstructors@multipleconstructors.MultipleConstructors (ref.as_non_null (local.get $$instance))(local.get $flag))
   ;;@ multipleconstructors/MultipleConstructors.java:27:9
@@ -125,7 +105,7 @@
  (local $$instance (ref null $multipleconstructors.MultipleConstructors))
  (block
   ;;@ multipleconstructors/MultipleConstructors.java:32:9
-  (local.set $$instance (struct.new $multipleconstructors.MultipleConstructors (ref.as_non_null (global.get $multipleconstructors.MultipleConstructors.vtable)) (ref.as_non_null (global.get $multipleconstructors.MultipleConstructors.itable)) (i32.const 0) (local.get $id) (i32.const 0)))
+  (local.set $$instance (struct.new $multipleconstructors.MultipleConstructors (ref.as_non_null (global.get $multipleconstructors.MultipleConstructors.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (local.get $id) (i32.const 0)))
   ;;@ multipleconstructors/MultipleConstructors.java:32:9
   (call $$ctor__int__boolean__void_$p_multipleconstructors_MultipleConstructors@multipleconstructors.MultipleConstructors (ref.as_non_null (local.get $$instance))(local.get $id)(local.get $flag))
   ;;@ multipleconstructors/MultipleConstructors.java:32:9

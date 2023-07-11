@@ -1,7 +1,7 @@
  ;;; Code for innerclassinheritance.ParentOuter [type definition]
  (type $innerclassinheritance.ParentOuter (struct_subtype
   (field $vtable (ref $innerclassinheritance.ParentOuter.vtable))
-  (field $itable (ref $innerclassinheritance.ParentOuter.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_fieldInParentOuter__innerclassinheritance_ParentOuter (mut i32))
   $java.lang.Object)
@@ -15,20 +15,11 @@
   (field $m_funInParentOuter__void (ref $function.m_funInParentOuter__void))
   $java.lang.Object.vtable)
  )
- (type $innerclassinheritance.ParentOuter.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for innerclassinheritance.ParentInner [type definition]
  (type $innerclassinheritance.ParentInner (struct_subtype
   (field $vtable (ref $innerclassinheritance.ParentInner.vtable))
-  (field $itable (ref $innerclassinheritance.ParentInner.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_fieldInParentInner__innerclassinheritance_ParentInner (mut i32))
   $java.lang.Object)
@@ -42,20 +33,11 @@
   (field $m_funInParentInner__void (ref $function.m_funInParentInner__void))
   $java.lang.Object.vtable)
  )
- (type $innerclassinheritance.ParentInner.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for innerclassinheritance.MultipleNestings [type definition]
  (type $innerclassinheritance.MultipleNestings (struct_subtype
   (field $vtable (ref $innerclassinheritance.MultipleNestings.vtable))
-  (field $itable (ref $innerclassinheritance.MultipleNestings.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
  )
@@ -68,20 +50,11 @@
   (field $m_funInM__void (ref $function.m_funInM__void))
   $java.lang.Object.vtable)
  )
- (type $innerclassinheritance.MultipleNestings.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for innerclassinheritance.MultipleNestings.Parent [type definition]
  (type $innerclassinheritance.MultipleNestings.Parent (struct_subtype
   (field $vtable (ref $innerclassinheritance.MultipleNestings.Parent.vtable))
-  (field $itable (ref $innerclassinheritance.MultipleNestings.Parent.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__innerclassinheritance_MultipleNestings_Parent (mut (ref null $innerclassinheritance.MultipleNestings)))
   $java.lang.Object)
@@ -95,20 +68,11 @@
   (field $m_fun__void (ref $function.m_fun__void))
   $java.lang.Object.vtable)
  )
- (type $innerclassinheritance.MultipleNestings.Parent.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
  ;;; Code for innerclassinheritance.ChildClass [type definition]
  (type $innerclassinheritance.ChildClass (struct_subtype
   (field $vtable (ref $innerclassinheritance.ChildClass.vtable))
-  (field $itable (ref $innerclassinheritance.ChildClass.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_fieldInParentOuter__innerclassinheritance_ParentOuter (mut i32))
   (field $f_fieldInOuter__innerclassinheritance_ChildClass (mut i32))
@@ -125,20 +89,11 @@
   (field $m_testLocalClass__void (ref $function.m_testLocalClass__void))
   $innerclassinheritance.ParentOuter.vtable)
  )
- (type $innerclassinheritance.ChildClass.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $innerclassinheritance.ParentOuter.itable))
 
  ;;; Code for innerclassinheritance.ChildClass.InnerClass [type definition]
  (type $innerclassinheritance.ChildClass.InnerClass (struct_subtype
   (field $vtable (ref $innerclassinheritance.ChildClass.InnerClass.vtable))
-  (field $itable (ref $innerclassinheritance.ChildClass.InnerClass.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_fieldInParentInner__innerclassinheritance_ParentInner (mut i32))
   (field $$outer_this__innerclassinheritance_ChildClass_InnerClass (ref null $innerclassinheritance.ChildClass))
@@ -156,20 +111,11 @@
   (field $m_testInnerClass__int (ref $function.m_testInnerClass__int))
   $innerclassinheritance.ParentInner.vtable)
  )
- (type $innerclassinheritance.ChildClass.InnerClass.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $innerclassinheritance.ParentInner.itable))
 
  ;;; Code for innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 [type definition]
  (type $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (struct_subtype
   (field $vtable (ref $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable))
-  (field $itable (ref $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__innerclassinheritance_MultipleNestings_Parent (mut (ref null $innerclassinheritance.MultipleNestings)))
   (field $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2 (ref null $innerclassinheritance.MultipleNestings.InnerClass1))
@@ -186,20 +132,11 @@
   (field $m_test__void (ref $function.m_test__void))
   $innerclassinheritance.MultipleNestings.Parent.vtable)
  )
- (type $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $innerclassinheritance.MultipleNestings.Parent.itable))
 
  ;;; Code for innerclassinheritance.MultipleNestings.InnerClass1 [type definition]
  (type $innerclassinheritance.MultipleNestings.InnerClass1 (struct_subtype
   (field $vtable (ref $innerclassinheritance.MultipleNestings.InnerClass1.vtable))
-  (field $itable (ref $innerclassinheritance.MultipleNestings.InnerClass1.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__innerclassinheritance_MultipleNestings_Parent (mut (ref null $innerclassinheritance.MultipleNestings)))
   (field $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1 (ref null $innerclassinheritance.MultipleNestings))
@@ -215,20 +152,11 @@
   (field $m_funInI1__void (ref $function.m_funInI1__void))
   $innerclassinheritance.MultipleNestings.Parent.vtable)
  )
- (type $innerclassinheritance.MultipleNestings.InnerClass1.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $innerclassinheritance.MultipleNestings.Parent.itable))
 
  ;;; Code for innerclassinheritance.ChildClass.1LocalClass [type definition]
  (type $innerclassinheritance.ChildClass.1LocalClass (struct_subtype
   (field $vtable (ref $innerclassinheritance.ChildClass.1LocalClass.vtable))
-  (field $itable (ref $innerclassinheritance.ChildClass.1LocalClass.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_fieldInParentOuter__innerclassinheritance_ParentOuter (mut i32))
   (field $f_fieldInOuter__innerclassinheritance_ChildClass (mut i32))
@@ -248,15 +176,6 @@
   (field $m_test__void (ref $function.m_test__void))
   $innerclassinheritance.ChildClass.vtable)
  )
- (type $innerclassinheritance.ChildClass.1LocalClass.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $innerclassinheritance.ChildClass.itable))
 
 ;;; Code for innerclassinheritance.ParentOuter [vtable.init]
 (global $innerclassinheritance.ParentOuter.vtable (ref $innerclassinheritance.ParentOuter.vtable)
@@ -270,17 +189,6 @@
  )
 )
 
-;;; Code for innerclassinheritance.ParentOuter [itable.init]
-(global $innerclassinheritance.ParentOuter.itable (ref $innerclassinheritance.ParentOuter.itable) (struct.new $innerclassinheritance.ParentOuter.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for innerclassinheritance.ParentInner [vtable.init]
 (global $innerclassinheritance.ParentInner.vtable (ref $innerclassinheritance.ParentInner.vtable)
  (struct.new $innerclassinheritance.ParentInner.vtable
@@ -292,17 +200,6 @@
   (ref.func $m_funInParentInner__void@innerclassinheritance.ParentInner)
  )
 )
-
-;;; Code for innerclassinheritance.ParentInner [itable.init]
-(global $innerclassinheritance.ParentInner.itable (ref $innerclassinheritance.ParentInner.itable) (struct.new $innerclassinheritance.ParentInner.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for innerclassinheritance.ChildClass [vtable.init]
 (global $innerclassinheritance.ChildClass.vtable (ref $innerclassinheritance.ChildClass.vtable)
@@ -318,17 +215,6 @@
  )
 )
 
-;;; Code for innerclassinheritance.ChildClass [itable.init]
-(global $innerclassinheritance.ChildClass.itable (ref $innerclassinheritance.ChildClass.itable) (struct.new $innerclassinheritance.ChildClass.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for innerclassinheritance.ChildClass.InnerClass [vtable.init]
 (global $innerclassinheritance.ChildClass.InnerClass.vtable (ref $innerclassinheritance.ChildClass.InnerClass.vtable)
  (struct.new $innerclassinheritance.ChildClass.InnerClass.vtable
@@ -342,17 +228,6 @@
   (ref.func $m_testInnerClass__int@innerclassinheritance.ChildClass.InnerClass)
  )
 )
-
-;;; Code for innerclassinheritance.ChildClass.InnerClass [itable.init]
-(global $innerclassinheritance.ChildClass.InnerClass.itable (ref $innerclassinheritance.ChildClass.InnerClass.itable) (struct.new $innerclassinheritance.ChildClass.InnerClass.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for innerclassinheritance.ChildClass.1LocalClass [vtable.init]
 (global $innerclassinheritance.ChildClass.1LocalClass.vtable (ref $innerclassinheritance.ChildClass.1LocalClass.vtable)
@@ -369,17 +244,6 @@
  )
 )
 
-;;; Code for innerclassinheritance.ChildClass.1LocalClass [itable.init]
-(global $innerclassinheritance.ChildClass.1LocalClass.itable (ref $innerclassinheritance.ChildClass.1LocalClass.itable) (struct.new $innerclassinheritance.ChildClass.1LocalClass.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for innerclassinheritance.MultipleNestings [vtable.init]
 (global $innerclassinheritance.MultipleNestings.vtable (ref $innerclassinheritance.MultipleNestings.vtable)
  (struct.new $innerclassinheritance.MultipleNestings.vtable
@@ -392,17 +256,6 @@
  )
 )
 
-;;; Code for innerclassinheritance.MultipleNestings [itable.init]
-(global $innerclassinheritance.MultipleNestings.itable (ref $innerclassinheritance.MultipleNestings.itable) (struct.new $innerclassinheritance.MultipleNestings.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for innerclassinheritance.MultipleNestings.Parent [vtable.init]
 (global $innerclassinheritance.MultipleNestings.Parent.vtable (ref $innerclassinheritance.MultipleNestings.Parent.vtable)
  (struct.new $innerclassinheritance.MultipleNestings.Parent.vtable
@@ -414,17 +267,6 @@
   (ref.func $m_fun__void@innerclassinheritance.MultipleNestings.Parent)
  )
 )
-
-;;; Code for innerclassinheritance.MultipleNestings.Parent [itable.init]
-(global $innerclassinheritance.MultipleNestings.Parent.itable (ref $innerclassinheritance.MultipleNestings.Parent.itable) (struct.new $innerclassinheritance.MultipleNestings.Parent.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 [vtable.init]
 (global $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable (ref $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable)
@@ -440,17 +282,6 @@
  )
 )
 
-;;; Code for innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 [itable.init]
-(global $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.itable (ref $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.itable) (struct.new $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
 ;;; Code for innerclassinheritance.MultipleNestings.InnerClass1 [vtable.init]
 (global $innerclassinheritance.MultipleNestings.InnerClass1.vtable (ref $innerclassinheritance.MultipleNestings.InnerClass1.vtable)
  (struct.new $innerclassinheritance.MultipleNestings.InnerClass1.vtable
@@ -463,17 +294,6 @@
   (ref.func $m_funInI1__void@innerclassinheritance.MultipleNestings.InnerClass1)
  )
 )
-
-;;; Code for innerclassinheritance.MultipleNestings.InnerClass1 [itable.init]
-(global $innerclassinheritance.MultipleNestings.InnerClass1.itable (ref $innerclassinheritance.MultipleNestings.InnerClass1.itable) (struct.new $innerclassinheritance.MultipleNestings.InnerClass1.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for innerclassinheritance.ParentOuter [static fields]
 (global $f_$initialized__innerclassinheritance_ParentOuter (mut i32) (i32.const 0))
@@ -529,7 +349,7 @@
  (local $$instance (ref null $innerclassinheritance.ParentOuter))
  (block
   ;;@ innerclassinheritance/ChildClass.java:18:6
-  (local.set $$instance (struct.new $innerclassinheritance.ParentOuter (ref.as_non_null (global.get $innerclassinheritance.ParentOuter.vtable)) (ref.as_non_null (global.get $innerclassinheritance.ParentOuter.itable)) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $innerclassinheritance.ParentOuter (ref.as_non_null (global.get $innerclassinheritance.ParentOuter.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
   ;;@ innerclassinheritance/ChildClass.java:18:6
   (call $$ctor__void_$p_innerclassinheritance_ParentOuter@innerclassinheritance.ParentOuter (ref.as_non_null (local.get $$instance)))
   ;;@ innerclassinheritance/ChildClass.java:18:6
@@ -627,7 +447,7 @@
  (local $$instance (ref null $innerclassinheritance.ParentInner))
  (block
   ;;@ innerclassinheritance/ChildClass.java:24:6
-  (local.set $$instance (struct.new $innerclassinheritance.ParentInner (ref.as_non_null (global.get $innerclassinheritance.ParentInner.vtable)) (ref.as_non_null (global.get $innerclassinheritance.ParentInner.itable)) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $innerclassinheritance.ParentInner (ref.as_non_null (global.get $innerclassinheritance.ParentInner.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
   ;;@ innerclassinheritance/ChildClass.java:24:6
   (call $$ctor__void_$p_innerclassinheritance_ParentInner@innerclassinheritance.ParentInner (ref.as_non_null (local.get $$instance)))
   ;;@ innerclassinheritance/ChildClass.java:24:6
@@ -725,7 +545,7 @@
  (local $$instance (ref null $innerclassinheritance.MultipleNestings))
  (block
   ;;@ innerclassinheritance/MultipleNestings.java:18:13
-  (local.set $$instance (struct.new $innerclassinheritance.MultipleNestings (ref.as_non_null (global.get $innerclassinheritance.MultipleNestings.vtable)) (ref.as_non_null (global.get $innerclassinheritance.MultipleNestings.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $innerclassinheritance.MultipleNestings (ref.as_non_null (global.get $innerclassinheritance.MultipleNestings.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ innerclassinheritance/MultipleNestings.java:18:13
   (call $$ctor__void_$p_innerclassinheritance_MultipleNestings@innerclassinheritance.MultipleNestings (ref.as_non_null (local.get $$instance)))
   ;;@ innerclassinheritance/MultipleNestings.java:18:13
@@ -824,7 +644,7 @@
  (local $$instance (ref null $innerclassinheritance.MultipleNestings.Parent))
  (block
   ;;@ innerclassinheritance/MultipleNestings.java:19:15
-  (local.set $$instance (struct.new $innerclassinheritance.MultipleNestings.Parent (ref.as_non_null (global.get $innerclassinheritance.MultipleNestings.Parent.vtable)) (ref.as_non_null (global.get $innerclassinheritance.MultipleNestings.Parent.itable)) (i32.const 0) (ref.null $innerclassinheritance.MultipleNestings)))
+  (local.set $$instance (struct.new $innerclassinheritance.MultipleNestings.Parent (ref.as_non_null (global.get $innerclassinheritance.MultipleNestings.Parent.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $innerclassinheritance.MultipleNestings)))
   ;;@ innerclassinheritance/MultipleNestings.java:19:15
   (call $$ctor__innerclassinheritance_MultipleNestings__void_$p_innerclassinheritance_MultipleNestings_Parent@innerclassinheritance.MultipleNestings.Parent (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ innerclassinheritance/MultipleNestings.java:19:15
@@ -925,7 +745,7 @@
  (local $$instance (ref null $innerclassinheritance.ChildClass))
  (block
   ;;@ innerclassinheritance/ChildClass.java:30:13
-  (local.set $$instance (struct.new $innerclassinheritance.ChildClass (ref.as_non_null (global.get $innerclassinheritance.ChildClass.vtable)) (ref.as_non_null (global.get $innerclassinheritance.ChildClass.itable)) (i32.const 0) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $innerclassinheritance.ChildClass (ref.as_non_null (global.get $innerclassinheritance.ChildClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (i32.const 0)))
   ;;@ innerclassinheritance/ChildClass.java:30:13
   (call $$ctor__void_$p_innerclassinheritance_ChildClass@innerclassinheritance.ChildClass (ref.as_non_null (local.get $$instance)))
   ;;@ innerclassinheritance/ChildClass.java:30:13
@@ -1043,7 +863,7 @@
  (local $$instance (ref null $innerclassinheritance.ChildClass.InnerClass))
  (block
   ;;@ innerclassinheritance/ChildClass.java:35:8
-  (local.set $$instance (struct.new $innerclassinheritance.ChildClass.InnerClass (ref.as_non_null (global.get $innerclassinheritance.ChildClass.InnerClass.vtable)) (ref.as_non_null (global.get $innerclassinheritance.ChildClass.InnerClass.itable)) (i32.const 0) (i32.const 0) (local.get $$outer_this) (i32.const 0)))
+  (local.set $$instance (struct.new $innerclassinheritance.ChildClass.InnerClass (ref.as_non_null (global.get $innerclassinheritance.ChildClass.InnerClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (local.get $$outer_this) (i32.const 0)))
   ;;@ innerclassinheritance/ChildClass.java:35:8
   (call $$ctor__innerclassinheritance_ChildClass__void_$p_innerclassinheritance_ChildClass_InnerClass@innerclassinheritance.ChildClass.InnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ innerclassinheritance/ChildClass.java:35:8
@@ -1191,7 +1011,7 @@
  (local $$instance (ref null $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2))
  (block
   ;;@ innerclassinheritance/MultipleNestings.java:31:17
-  (local.set $$instance (struct.new $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (ref.as_non_null (global.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable)) (ref.as_non_null (global.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.itable)) (i32.const 0) (ref.null $innerclassinheritance.MultipleNestings) (local.get $$outer_this)))
+  (local.set $$instance (struct.new $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (ref.as_non_null (global.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $innerclassinheritance.MultipleNestings) (local.get $$outer_this)))
   ;;@ innerclassinheritance/MultipleNestings.java:31:17
   (call $$ctor__innerclassinheritance_MultipleNestings_InnerClass1__void_$p_innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ innerclassinheritance/MultipleNestings.java:31:17
@@ -1319,7 +1139,7 @@
  (local $$instance (ref null $innerclassinheritance.MultipleNestings.InnerClass1))
  (block
   ;;@ innerclassinheritance/MultipleNestings.java:25:15
-  (local.set $$instance (struct.new $innerclassinheritance.MultipleNestings.InnerClass1 (ref.as_non_null (global.get $innerclassinheritance.MultipleNestings.InnerClass1.vtable)) (ref.as_non_null (global.get $innerclassinheritance.MultipleNestings.InnerClass1.itable)) (i32.const 0) (ref.null $innerclassinheritance.MultipleNestings) (local.get $$outer_this)))
+  (local.set $$instance (struct.new $innerclassinheritance.MultipleNestings.InnerClass1 (ref.as_non_null (global.get $innerclassinheritance.MultipleNestings.InnerClass1.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $innerclassinheritance.MultipleNestings) (local.get $$outer_this)))
   ;;@ innerclassinheritance/MultipleNestings.java:25:15
   (call $$ctor__innerclassinheritance_MultipleNestings__void_$p_innerclassinheritance_MultipleNestings_InnerClass1@innerclassinheritance.MultipleNestings.InnerClass1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ innerclassinheritance/MultipleNestings.java:25:15
@@ -1419,7 +1239,7 @@
  (local $$instance (ref null $innerclassinheritance.ChildClass.1LocalClass))
  (block
   ;;@ innerclassinheritance/ChildClass.java:73:10
-  (local.set $$instance (struct.new $innerclassinheritance.ChildClass.1LocalClass (ref.as_non_null (global.get $innerclassinheritance.ChildClass.1LocalClass.vtable)) (ref.as_non_null (global.get $innerclassinheritance.ChildClass.1LocalClass.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (ref.null $innerclassinheritance.ChildClass) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $innerclassinheritance.ChildClass.1LocalClass (ref.as_non_null (global.get $innerclassinheritance.ChildClass.1LocalClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (i32.const 0) (ref.null $innerclassinheritance.ChildClass) (ref.null $java.lang.Object)))
   ;;@ innerclassinheritance/ChildClass.java:73:10
   (call $$ctor__innerclassinheritance_ChildClass__void_$p_innerclassinheritance_ChildClass_1LocalClass@innerclassinheritance.ChildClass.1LocalClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ innerclassinheritance/ChildClass.java:73:10

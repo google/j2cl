@@ -335,6 +335,11 @@ public abstract class TypeDeclaration
   }
 
   @Memoized
+  public boolean implementsInterfaces() {
+    return getAllSuperTypesIncludingSelf().stream().anyMatch(TypeDeclaration::isInterface);
+  }
+
+  @Memoized
   public boolean extendsNativeClass() {
     TypeDeclaration superType = getSuperTypeDeclaration();
     if (superType == null) {

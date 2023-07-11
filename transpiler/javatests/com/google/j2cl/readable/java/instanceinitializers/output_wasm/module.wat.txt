@@ -1,7 +1,7 @@
  ;;; Code for instanceinitializers.InstanceInitializers [type definition]
  (type $instanceinitializers.InstanceInitializers (struct_subtype
   (field $vtable (ref $instanceinitializers.InstanceInitializers.vtable))
-  (field $itable (ref $instanceinitializers.InstanceInitializers.itable))
+  (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_field__instanceinitializers_InstanceInitializers (mut i32))
   $java.lang.Object)
@@ -14,15 +14,6 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   $java.lang.Object.vtable)
  )
- (type $instanceinitializers.InstanceInitializers.itable (struct_subtype
- (field $slot0 (ref null struct))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
-  $java.lang.Object.itable))
 
 ;;; Code for instanceinitializers.InstanceInitializers [vtable.init]
 (global $instanceinitializers.InstanceInitializers.vtable (ref $instanceinitializers.InstanceInitializers.vtable)
@@ -34,17 +25,6 @@
   (ref.func $$getClassImpl__java_lang_Class@instanceinitializers.InstanceInitializers)
  )
 )
-
-;;; Code for instanceinitializers.InstanceInitializers [itable.init]
-(global $instanceinitializers.InstanceInitializers.itable (ref $instanceinitializers.InstanceInitializers.itable) (struct.new $instanceinitializers.InstanceInitializers.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
 
 ;;; Code for instanceinitializers.InstanceInitializers [static fields]
 (global $f_$initialized__instanceinitializers_InstanceInitializers (mut i32) (i32.const 0))
@@ -60,7 +40,7 @@
  (local $$instance (ref null $instanceinitializers.InstanceInitializers))
  (block
   ;;@ instanceinitializers/InstanceInitializers.java:18:13
-  (local.set $$instance (struct.new $instanceinitializers.InstanceInitializers (ref.as_non_null (global.get $instanceinitializers.InstanceInitializers.vtable)) (ref.as_non_null (global.get $instanceinitializers.InstanceInitializers.itable)) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $instanceinitializers.InstanceInitializers (ref.as_non_null (global.get $instanceinitializers.InstanceInitializers.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
   ;;@ instanceinitializers/InstanceInitializers.java:18:13
   (call $$ctor__void_$p_instanceinitializers_InstanceInitializers@instanceinitializers.InstanceInitializers (ref.as_non_null (local.get $$instance)))
   ;;@ instanceinitializers/InstanceInitializers.java:18:13
