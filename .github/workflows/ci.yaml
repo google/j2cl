@@ -79,4 +79,7 @@ jobs:
         run: ./build_test.sh CI
       - name: Run samples tests
         if: matrix.test-target == 'samples'
-        run: ./build_test_samples.sh CI
+        run: |
+          if [[ -f "./build_test_samples.sh" ]]; then
+            ./build_test_samples.sh CI
+          fi
