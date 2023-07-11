@@ -31,20 +31,19 @@ const Util = goog.require('nativebootstrap.Util$impl');
  * @public
  */
 class Arrays {
-
   /**
    * Creates, initializes, and returns an array with the given number of
    * dimensions, lengths and of the given type.
    *
-   * @param {Array<number>} dimensionLengths
-   * @param {Object} leafType
-   * @return {Array<*>}
+   * @param {!Array<number>} dimensionLengths
+   * @param {!Object} leafType
+   * @return {!Array<*>}
    * @public
    */
   static $create(dimensionLengths, leafType) {
     return Arrays.$createInternal_(
-        dimensionLengths, /** @type {Constructor} */ (leafType),
-        leafType.$isInstance, leafType.$initialArrayValue);
+        dimensionLengths, /** @type {!Constructor} */ (leafType),
+        leafType.$isInstance);
   }
 
   /**
@@ -53,38 +52,35 @@ class Arrays {
    * Note that this is only used for multi dimension native array creation since
    * single dimension array creation uses a faster code path.
    *
-   * @param {Array<number>} dimensionLengths
-   * @return {Array<*>}
+   * @param {!Array<number>} dimensionLengths
+   * @return {!Array<*>}
    * @public
    */
   static $createNative(dimensionLengths) {
-    return Arrays.$createRecursiveInternal_(dimensionLengths, null, undefined);
+    return Arrays.$createRecursiveInternal_(dimensionLengths);
   }
 
   /**
-   * @param {Array<number>} dimensionLengths
-   * @param {Constructor} leafType
-   * @param {Function} leafTypeIsInstance
-   * @param {*} leafTypeInitialValue
-   * @return {Array<*>}
+   * @param {!Array<number>} dimensionLengths
+   * @param {!Constructor} leafType
+   * @param {!Function} leafTypeIsInstance
+   * @return {!Array<*>}
    * @private
    */
-  static $createInternal_(
-      dimensionLengths, leafType, leafTypeIsInstance, leafTypeInitialValue) {
+  static $createInternal_(dimensionLengths, leafType, leafTypeIsInstance) {
     return Arrays.$createRecursiveInternal_(
-        dimensionLengths, leafTypeInitialValue,
+        dimensionLengths,
         Arrays.$createMetadata_(
             leafType, leafTypeIsInstance, dimensionLengths.length));
   }
 
   /**
-   * @param {Array<number>} dimensionLengths
-   * @param {*} leafTypeInitialValue
-   * @param {Arrays.Metadata_} metadata
-   * @return {Array<*>}
+   * @param {!Array<number>} dimensionLengths
+   * @param {!Arrays.Metadata_=} metadata
+   * @return {!Array<*>}
    * @private
    */
-  static $createRecursiveInternal_(dimensionLengths, leafTypeInitialValue, metadata) {
+  static $createRecursiveInternal_(dimensionLengths, metadata) {
     let length = dimensionLengths[0];
     if (length == null) {
       return null;
@@ -102,16 +98,21 @@ class Arrays {
           metadata && Arrays.$createSubComponentMetadata_(metadata);
       for (let i = 0; i < length; i++) {
         array[i] = Arrays.$createRecursiveInternal_(
-            subDimensionLengths, leafTypeInitialValue, subComponentMetadata);
+            subDimensionLengths, subComponentMetadata);
       }
     } else {
       // Contains leaf type values.
-      // We only initialize if initial value is different than JS default value.
-      if (leafTypeInitialValue !== undefined) {
-        // Avoid using array.fill(leafTypeInitialValue) here as this will impact
-        // side-effect computation and cause unused arrays to be retained.
-        for (let index = 0; index < length; index++) {
-          array[index] = leafTypeInitialValue;
+      if (metadata) {
+        let leafTypeInitialValue = metadata.leafType.$initialArrayValue;
+        // We only initialize if initial value is different than JS default
+        // value.
+        if (leafTypeInitialValue !== undefined) {
+          // Avoid using array.fill(leafTypeInitialValue) here as this will
+          // impact side-effect computation and cause unused arrays to be
+          // retained.
+          for (let index = 0; index < length; index++) {
+            array[index] = leafTypeInitialValue;
+          }
         }
       }
     }
@@ -124,10 +125,10 @@ class Arrays {
    * dimensions, lengths and of the given type.
    *
    * @param {number} currentDimensionLength
-   * @param {Object} leafType
+   * @param {!Object} leafType
    * @param {function(number):*} initializer
    * @param {number=} numberOfDimensions
-   * @return {Array<*>}
+   * @return {!Array<*>}
    * @public
    */
   static $createWithInitializer(
@@ -135,7 +136,7 @@ class Arrays {
     return Arrays.$createWithInitializerInternal_(
         numberOfDimensions,
         currentDimensionLength,
-        /** @type {Constructor} */ (leafType),
+        /** @type {!Constructor} */ (leafType),
         leafType.$isInstance,
         initializer,
     );
@@ -149,7 +150,7 @@ class Arrays {
    *
    * @param {number} currentDimensionLength
    * @param {function(number):*} initializer
-   * @return {Array<*>}
+   * @return {!Array<*>}
    * @public
    */
   static $createNativeWithInitializer(currentDimensionLength, initializer) {
@@ -169,10 +170,10 @@ class Arrays {
   /**
    * @param {number|undefined} numberOfDimensions
    * @param {number} currentDimensionLength
-   * @param {Constructor|undefined} leafType
-   * @param {Function|undefined} leafTypeIsInstance
+   * @param {!Constructor|undefined} leafType
+   * @param {!Function|undefined} leafTypeIsInstance
    * @param {function(number):*} initializer
-   * @return {Array<*>}
+   * @return {!Array<*>}
    * @private
    */
   static $createWithInitializerInternal_(
@@ -204,24 +205,24 @@ class Arrays {
    * Unlike array creation, the actual lengths of each dimension do not need to
    * be specified because the passed array already contains values.
    *
-   * @param {Array<*>} array
-   * @param {Object} leafType
+   * @param {!Array<*>} array
+   * @param {!Object} leafType
    * @param {number=} opt_dimensionCount
-   * @return {Array<*>}
+   * @return {!Array<*>}
    * @public
    */
   static $init(array, leafType, opt_dimensionCount) {
     return Arrays.$initInternal_(
-        array, /** @type {Constructor} */ (leafType), leafType.$isInstance,
+        array, /** @type {!Constructor} */ (leafType), leafType.$isInstance,
         opt_dimensionCount || 1);
   }
 
   /**
-   * @param {Array<*>} array
-   * @param {Constructor} leafType
-   * @param {Function} leafTypeIsInstance
+   * @param {!Array<*>} array
+   * @param {!Constructor} leafType
+   * @param {!Function} leafTypeIsInstance
    * @param {number} dimensionCount
-   * @return {Array<*>}
+   * @return {!Array<*>}
    * @private
    */
   static $initInternal_(array, leafType, leafTypeIsInstance, dimensionCount) {
@@ -233,9 +234,9 @@ class Arrays {
   }
 
   /**
-   * @param {Array<*>} array
-   * @param {Arrays.Metadata_} metadata
-   * @return {Array<*>}
+   * @param {!Array<*>} array
+   * @param {!Arrays.Metadata_} metadata
+   * @return {!Array<*>}
    * @private
    */
   static $initRecursiveInternal_(array, metadata) {
@@ -244,7 +245,7 @@ class Arrays {
     if (metadata.dimensionCount > 1) {
       let subComponentMetadata = Arrays.$createSubComponentMetadata_(metadata);
       for (let i = 0; i < array.length; i++) {
-        let nestedArray = /** @type {Array<*>} */ (array[i]);
+        let nestedArray = /** @type {?Array<*>} */ (array[i]);
         if (nestedArray) {
           Arrays.$initRecursiveInternal_(nestedArray, subComponentMetadata);
         }
@@ -255,24 +256,24 @@ class Arrays {
   }
 
   /**
-   * @param {Array<*>} array
-   * @param {Object} leafType
+   * @param {!Array<*>} array
+   * @param {!Object} leafType
    * @param {number} dimensionCount
-   * @return {Array<*>}
+   * @return {!Array<*>}
    * @public
    */
   static $stampType(array, leafType, dimensionCount) {
     return Arrays.$stampTypeInternal_(
         array,
         Arrays.$createMetadata_(
-            /** @type {Constructor} */ (leafType), leafType.$isInstance,
+            /** @type {!Constructor} */ (leafType), leafType.$isInstance,
             dimensionCount));
   }
 
   /**
-   * @param {Array<*>} array
-   * @param {Arrays.Metadata_} metadata
-   * @return {Array<*>}
+   * @param {!Array<*>} array
+   * @param {!Arrays.Metadata_} metadata
+   * @return {!Array<*>}
    * @private
    */
   static $stampTypeInternal_(array, metadata) {
@@ -293,7 +294,7 @@ class Arrays {
    * Sets the given value into the given index in the given array.
    *
    * @template T
-   * @param {Array<*>} array
+   * @param {!Array<*>} array
    * @param {number} index
    * @param {T} value
    * @return {T}
@@ -314,7 +315,7 @@ class Arrays {
 
   /**
    * @template T
-   * @param {Array<*>} array
+   * @param {!Array<*>} array
    * @param {number} index
    * @param {T} value
    * @return {boolean}
@@ -322,7 +323,7 @@ class Arrays {
    */
   static $canSet_(array, index, value) {
     // Only check when the array has metadata.
-    var metadata = Arrays.$getMetadata_(array);
+    const metadata = Arrays.$getMetadata_(array);
     if (metadata) {
       if (metadata.dimensionCount > 1) {
         if (!Arrays.$instanceIsOfTypeInternal_(
@@ -345,8 +346,8 @@ class Arrays {
   /**
    * Changes the given array's to the given leafType.
    *
-   * @param {Array<*>} array
-   * @param {Array<*>} otherArray
+   * @param {!Array<*>} array
+   * @param {!Array<*>} otherArray
    * @public
    */
   static $copyType(array, otherArray) {
@@ -359,21 +360,21 @@ class Arrays {
    * leaf type.
    *
    * @param {*} instance
-   * @param {Object} requiredLeafType
+   * @param {!Object} requiredLeafType
    * @param {number} requiredDimensionCount
    * @return {boolean}
    * @public
    */
   static $instanceIsOfType(instance, requiredLeafType, requiredDimensionCount) {
     return Arrays.$instanceIsOfTypeInternal_(
-        instance, /** @type {Constructor} */ (requiredLeafType),
+        instance, /** @type {!Constructor} */ (requiredLeafType),
         requiredLeafType.$isInstance, requiredDimensionCount);
   }
 
   /**
    * @param {*} instance
-   * @param {Constructor} requiredLeafType
-   * @param {Function} requiredLeafTypeIsInstance
+   * @param {!Constructor} requiredLeafType
+   * @param {!Function} requiredLeafTypeIsInstance
    * @param {number} requiredDimensionCount
    * @return {boolean}
    * @private
@@ -388,7 +389,7 @@ class Arrays {
     }
 
     const metadata = Arrays.$getMetadata_(instance) ||
-        /** @type {Arrays.Metadata_} */ ({
+        /** @type {!Arrays.Metadata_} */ ({
                        leafType: JavaLangObject,
                        dimensionCount: 1
                      });
@@ -437,21 +438,21 @@ class Arrays {
    * provided instance is returned.
    *
    * @param {*} instance
-   * @param {Object} requiredLeafType
+   * @param {!Object} requiredLeafType
    * @param {number} requiredDimensionCount
    * @return {*}
    * @public
    */
   static $castTo(instance, requiredLeafType, requiredDimensionCount) {
     return Arrays.$castToInternal_(
-        instance, /** @type {Constructor} */ (requiredLeafType),
+        instance, /** @type {!Constructor} */ (requiredLeafType),
         requiredLeafType.$isInstance, requiredDimensionCount);
   }
 
   /**
    * @param {*} instance
-   * @param {Constructor} requiredLeafType
-   * @param {Function} requiredLeafTypeIsInstance
+   * @param {!Constructor} requiredLeafType
+   * @param {!Function} requiredLeafTypeIsInstance
    * @param {number} requiredDimensionCount
    * @return {*}
    * @private
@@ -500,13 +501,13 @@ class Arrays {
   }
 
   /**
-   * @param {Array<*>} obj
-   * @return {Class}
+   * @param {!Array<*>} obj
+   * @return {!Class}
    * @public
    */
   static $getClass(obj) {
     Arrays.$clinit();
-    var metadata = Arrays.$getMetadata_(obj);
+    const metadata = Arrays.$getMetadata_(obj);
     if (metadata) {
       return Class.$get(metadata.leafType, metadata.dimensionCount);
     }
@@ -515,23 +516,21 @@ class Arrays {
   }
 
   /**
-   * @param {Arrays.Metadata_} metadata
-   * @return {Arrays.Metadata_}
+   * @param {!Arrays.Metadata_} metadata
+   * @return {!Arrays.Metadata_}
    * @private
    */
   static $createSubComponentMetadata_(metadata) {
     return Arrays.$createMetadata_(
-        metadata.leafType,
-        metadata.leafTypeIsInstance,
-        metadata.dimensionCount - 1
-    );
+        metadata.leafType, metadata.leafTypeIsInstance,
+        metadata.dimensionCount - 1);
   }
 
   /**
-   * @param {Constructor} leafType
-   * @param {Function} leafTypeIsInstance
+   * @param {!Constructor} leafType
+   * @param {!Function} leafTypeIsInstance
    * @param {number} dimensionCount
-   * @return {Arrays.Metadata_}
+   * @return {!Arrays.Metadata_}
    * @private
    */
   static $createMetadata_(leafType, leafTypeIsInstance, dimensionCount) {
@@ -542,13 +541,13 @@ class Arrays {
     };
   }
 
-   /**
-    * @param {Array<*>} array
-    * @return {Arrays.Metadata_}
-    * @private
-    */
+  /**
+   * @param {!Array<*>} array
+   * @return {?Arrays.Metadata_}
+   * @private
+   */
   static $getMetadata_(array) {
-    var enhancedArray = /** @type {Arrays.EnhancedArray_} */ (array);
+    const enhancedArray = /** @type {!Arrays.EnhancedArray_} */ (array);
     return enhancedArray.$$arrayMetadata;
   }
 
@@ -572,8 +571,8 @@ class Arrays {
  * this class. These properties allow for  emulation of Java array semantics.
  *
  * @typedef {{
- *   leafType: Function,
- *   leafTypeIsInstance: Function,
+ *   leafType: !Function,
+ *   leafTypeIsInstance: !Function,
  *   dimensionCount: number,
  * }}
  * @private
@@ -584,7 +583,7 @@ Arrays.Metadata_;
  * Arrays.Metadata_ enhanced Array.
  *
  * @typedef {{
- *   $$arrayMetadata: Arrays.Metadata_,
+ *   $$arrayMetadata: ?Arrays.Metadata_,
  *   length: number
  * }}
  * @private
