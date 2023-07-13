@@ -879,6 +879,12 @@ class JdtEnvironment {
               .build());
     }
 
+    ImmutableList<TypeDescriptor> exceptionTypeDescriptors =
+        FluentIterable.from(methodBinding.getExceptionTypes()).stream()
+            .map(this::createTypeDescriptor)
+            .map(TypeDescriptor::toNonNullable)
+            .collect(toImmutableList());
+
     if (enclosingTypeDescriptor.getTypeDeclaration().isAnonymous()
         && isConstructor
         && enclosingTypeDescriptor.getSuperTypeDescriptor().hasJsConstructor()) {
@@ -893,6 +899,7 @@ class JdtEnvironment {
             .setParameterDescriptors(parameterDescriptorBuilder.build())
             .setDeclarationDescriptor(declarationMethodDescriptor)
             .setReturnTypeDescriptor(returnTypeDescriptor)
+            .setExceptionTypeDescriptors(exceptionTypeDescriptors)
             .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
             .setTypeArgumentTypeDescriptors(typeArgumentTypeDescriptors)
             .setOriginalJsInfo(jsInfo)
