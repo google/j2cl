@@ -21,7 +21,7 @@ import static javaemul.internal.InternalPreconditions.checkState;
 
 import java.io.PrintStream;
 import java.io.Serializable;
-import javaemul.internal.ArrayHelper;
+import java.util.ArrayList;
 import javaemul.internal.ThrowableUtils;
 import javaemul.internal.ThrowableUtils.NativeError;
 import javaemul.internal.ThrowableUtils.NativeTypeError;
@@ -38,7 +38,7 @@ public class Throwable implements Serializable {
 
   private String detailMessage;
   private Throwable cause;
-  private Throwable[] suppressedExceptions = new Throwable[0];
+  private ArrayList<Throwable> suppressedExceptions;
   private StackTraceElement[] stackTrace = new StackTraceElement[0];
   private boolean disableSuppression;
   private boolean disableStackTrace;
@@ -111,7 +111,10 @@ public class Throwable implements Serializable {
       return;
     }
 
-    ArrayHelper.push(suppressedExceptions, exception);
+    if (suppressedExceptions == null) {
+      suppressedExceptions = new ArrayList<>();
+    }
+    suppressedExceptions.add(exception);
   }
 
   /**
@@ -177,7 +180,9 @@ public class Throwable implements Serializable {
   /** Returns the array of Exception that this one suppressedExceptions. */
   @JsMethod
   public final Throwable[] getSuppressed() {
-    return suppressedExceptions;
+    return suppressedExceptions == null
+        ? new Throwable[0]
+        : suppressedExceptions.toArray(new Throwable[0]);
   }
 
   public Throwable initCause(Throwable cause) {
