@@ -45,9 +45,9 @@ def setup_j2cl_workspace(**kwargs):
     # We cannot replace com_google_jsinterop_annotations so choose a different name
     http_archive(
         name = "com_google_jsinterop_annotations-j2cl",
-        urls = ["https://github.com/google/jsinterop-annotations/archive/02ae698e12ae8dccb96d55ac771e87caf404104d.zip"],
-        strip_prefix = "jsinterop-annotations-02ae698e12ae8dccb96d55ac771e87caf404104d",
-        sha256 = "0bfb1eca6b47d779b40e0fdb6e6e1bdad5a2abfcef1d325448b2dee3a5ab6e47",
+        urls = ["https://github.com/google/jsinterop-annotations/archive/refs/tags/2.1.0.zip"],
+        strip_prefix = "jsinterop-annotations-2.1.0",
+        sha256 = "fcd6caebce44629759cb52efc2a59875709246805db8a440a19fef52a9a73718",
     )
 
     http_archive(
