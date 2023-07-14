@@ -29,24 +29,36 @@ import com.google.j2cl.transpiler.backend.kotlin.source.plusComma
 import com.google.j2cl.transpiler.backend.kotlin.source.source
 import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
 
-private fun foundation(string: String): Renderer<Source> =
-  source(string) rendererWith dependency(systemImport("Foundation/Foundation.h"))
+val nsObjCRuntimeDependency = dependency(systemImport("Foundation/NSObjCRuntime.h"))
 
-val nsEnum: Renderer<Source> = foundation("NS_ENUM")
-val nsInline: Renderer<Source> = foundation("NS_INLINE")
-val nsAssumeNonnullBegin: Renderer<Source> = foundation("NS_ASSUME_NONNULL_BEGIN")
-val nsAssumeNonnullEnd: Renderer<Source> = foundation("NS_ASSUME_NONNULL_END")
-val nullable: Renderer<Source> = foundation("_Nullable") // Does it come from foundation?
+val nsEnum: Renderer<Source> = source("NS_ENUM") rendererWith nsObjCRuntimeDependency
 
-val id: Renderer<Source> = foundation("id")
-val nsCopying: Renderer<Source> = foundation("NSCopying")
-val nsObject: Renderer<Source> = foundation("NSObject")
-val nsNumber: Renderer<Source> = foundation("NSNumber")
-val nsString: Renderer<Source> = foundation("NSString")
+val nsInline: Renderer<Source> = source("NS_INLINE") rendererWith nsObjCRuntimeDependency
 
-val nsMutableArray: Renderer<Source> = foundation("NSMutableArray")
-val nsMutableSet: Renderer<Source> = foundation("NSMutableSet")
-val nsMutableDictionary: Renderer<Source> = foundation("NSMutableDictionary")
+val nsAssumeNonnullBegin: Renderer<Source> =
+  source("NS_ASSUME_NONNULL_BEGIN") rendererWith nsObjCRuntimeDependency
+
+val nsAssumeNonnullEnd: Renderer<Source> =
+  source("NS_ASSUME_NONNULL_END") rendererWith nsObjCRuntimeDependency
+
+val nullable: Renderer<Source> = rendererOf(source("_Nullable")) // clang/gcc attribute
+
+val id: Renderer<Source> = source("id") rendererWith nsObjCRuntimeDependency
+
+val nsCopying: Renderer<Source> = protocolForwardDeclaration("NSCopying").nameRenderer
+
+val nsObject: Renderer<Source> = classForwardDeclaration("NSObject").nameRenderer
+
+val nsNumber: Renderer<Source> = classForwardDeclaration("NSNumber").nameRenderer
+
+val nsString: Renderer<Source> = classForwardDeclaration("NSString").nameRenderer
+
+val nsMutableArray: Renderer<Source> = classForwardDeclaration("NSMutableArray").nameRenderer
+
+val nsMutableSet: Renderer<Source> = classForwardDeclaration("NSMutableSet").nameRenderer
+
+val nsMutableDictionary: Renderer<Source> =
+  classForwardDeclaration("NSMutableDictionary").nameRenderer
 
 private val ForwardDeclaration.nameRenderer: Renderer<Source>
   get() = source(name) rendererWith dependency(this)
