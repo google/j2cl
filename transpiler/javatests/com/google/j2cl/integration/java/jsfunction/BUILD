@@ -11,7 +11,8 @@ package(
 integration_test(
     name = "jsfunction",
     srcs = glob(["*.java"]),
-    enable_kt = False,
+    # Throws ArrayOutOfBoundsException instead of ClassCastException
+    enable_kt_native = False,
     # JsFunction not supported in Wasm.
     enable_wasm = False,
 )
