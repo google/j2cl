@@ -56,7 +56,7 @@ def integration_test(
     java_test_runner = """
       @jsinterop.annotations.JsType(namespace = jsinterop.annotations.JsPackage.GLOBAL)
       public class TestRunner {
-        public static void testMain() throws Exception {
+        public static void testMain() throws Throwable {
           %s.main((String []) null);
         }
       }
