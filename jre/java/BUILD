@@ -80,7 +80,6 @@ WASM_EXCLUDED_SRCS = [
     "javaemul/internal/ArrayStamper.java",  # Unused in Wasm
     "javaemul/internal/Comparables.java",  # Unused in Wasm
     "javaemul/internal/Objects.java",  # Unused in Wasm
-    "javaemul/internal/WasmArray.java",  # Generated in Wasm.
 ]
 
 package_sources(
