@@ -21,6 +21,7 @@
   (field $m_testNestedTryCatch__void (ref $function.m_testNestedTryCatch__void))
   (field $m_testThrowGenerics__void (ref $function.m_testThrowGenerics__void))
   (field $m_testThrowBoundGenerics__void (ref $function.m_testThrowBoundGenerics__void))
+  (field $m_testThrowsParameterized__java_lang_Throwable__void (ref $function.m_testThrowsParameterized__java_lang_Throwable__void))
   $java.lang.Object.vtable)
  )
 
@@ -68,6 +69,7 @@
   (ref.func $m_testNestedTryCatch__void@trycatch.TryCatch)
   (ref.func $m_testThrowGenerics__void@trycatch.TryCatch)
   (ref.func $m_testThrowBoundGenerics__void@trycatch.TryCatch)
+  (ref.func $m_testThrowsParameterized__java_lang_Throwable__void@trycatch.TryCatch)
  )
 )
 
@@ -803,6 +805,22 @@
   (return (ref.null $java.lang.Throwable))
  )
 )
+
+;;; void TryCatch.testThrowsParameterized(T throwable)
+(func $m_testThrowsParameterized__java_lang_Throwable__void@trycatch.TryCatch
+ (type $function.m_testThrowsParameterized__java_lang_Throwable__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $throwable (ref null $java.lang.Throwable))
+ ;;@ trycatch/TryCatch.java:123:36
+ (local $this (ref null $trycatch.TryCatch))
+ (local.set $this (ref.cast_static $trycatch.TryCatch (local.get $this.untyped)))
+ (block
+  ;;@ trycatch/TryCatch.java:124:4
+  (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $throwable))
+  (unreachable)
+ )
+)
+(elem declare func $m_testThrowsParameterized__java_lang_Throwable__void@trycatch.TryCatch)
 
 ;;; void TryCatch.$clinit()
 (func $$clinit__void@trycatch.TryCatch

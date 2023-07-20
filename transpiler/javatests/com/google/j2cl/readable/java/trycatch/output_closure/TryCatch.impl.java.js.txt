@@ -206,6 +206,10 @@ class TryCatch extends j_l_Object {
  m_getThrowable__java_lang_Throwable_$p_trycatch_TryCatch() {
   return null;
  }
+ /** @nodts @template T */
+ m_testThrowsParameterized__java_lang_Throwable__void(/** T */ throwable) {
+  throw $Exceptions.toJs(/**@type {!Throwable}*/ (throwable));
+ }
  /** @nodts */
  static $clinit() {
   TryCatch.$clinit = () =>{};

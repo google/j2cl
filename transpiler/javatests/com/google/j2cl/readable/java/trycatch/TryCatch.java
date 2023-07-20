@@ -119,5 +119,9 @@ public class TryCatch {
   private <T extends Throwable> T getThrowable() {
     return null;
   }
+
+  public <T extends Throwable> void testThrowsParameterized(T throwable) throws T {
+    throw throwable;
+  }
 }
 

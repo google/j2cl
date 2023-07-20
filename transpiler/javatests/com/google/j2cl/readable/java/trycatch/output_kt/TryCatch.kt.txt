@@ -169,6 +169,13 @@ open class TryCatch {
   return null as T
  }
 
+ @ObjCName("testThrowsParameterized")
+ open fun <T: Throwable?> testThrowsParameterized(
+  @ObjCName("withJavaLangThrowable") throwable: T
+ ) {
+  throw throwable!!
+ }
+
  @ObjCName("J2ktTrycatchTryCatchCompanion", exact = true)
  companion object {
   @JvmField
