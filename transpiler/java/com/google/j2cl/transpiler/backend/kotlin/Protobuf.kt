@@ -48,7 +48,8 @@ internal fun TypeDescriptor.isProtobufBuilder(): Boolean {
   val superTypeDescriptor: DeclaredTypeDescriptor = getSuperTypeDescriptor() ?: return false
   val name = superTypeDescriptor.qualifiedSourceName
   return name == "com.google.protobuf.GeneratedMessage.Builder" ||
-    name == "com.google.protobuf.GeneratedMessageLite.Builder"
+    name == "com.google.protobuf.GeneratedMessageLite.Builder" ||
+    name == "com.google.protobuf.GeneratedMessageLite.ExtendableBuilder"
 }
 
 internal fun computeProtobufPropertyName(methodName: String) =
@@ -59,7 +60,8 @@ private fun DeclaredTypeDescriptor.isProtobufMessage(): Boolean {
   val superTypeDescriptor: DeclaredTypeDescriptor = getSuperTypeDescriptor() ?: return false
   val name = superTypeDescriptor.qualifiedSourceName
   return name == "com.google.protobuf.GeneratedMessage" ||
-    name == "com.google.protobuf.GeneratedMessageLite"
+    name == "com.google.protobuf.GeneratedMessageLite" ||
+    name == "com.google.protobuf.GeneratedMessageLite.ExtendableMessage"
 }
 
 private fun DeclaredTypeDescriptor.isProtobufMessageOrBuilder() =
