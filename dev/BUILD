@@ -1,3 +1,5 @@
+load("//third_party/bazel_rules/rules_python/python:py_library.bzl", "py_library")
+
 package(
     default_applicable_licenses = ["//:j2cl_license"],
     licenses = ["notice"],
