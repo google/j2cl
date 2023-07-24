@@ -196,7 +196,7 @@ java_library(
     visibility = ["//transpiler/javatests/com/google/j2cl/transpiler:__pkg__"],
     deps = [
         ":javaemul_internal_annotations",
-        "//third_party:gwt-jsinterop-annotations",
+        "//third_party:gwt-jsinterop-annotations-j2cl_jar",
     ],
 )
 
@@ -207,7 +207,7 @@ java_library(
     visibility = ["//transpiler/javatests/com/google/j2cl/transpiler:__pkg__"],
     deps = [
         ":javaemul_internal_annotations",
-        "//third_party:gwt-jsinterop-annotations",
+        "//third_party:gwt-jsinterop-annotations-j2cl_jar",
     ],
 )
 

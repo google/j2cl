@@ -188,6 +188,12 @@ j2cl_alias(
     actual = "@com_google_jsinterop_annotations-j2cl//:jsinterop-annotations-j2cl",
 )
 
+alias(
+    name = "gwt-jsinterop-annotations-j2cl_jar",
+    actual = "@com_google_jsinterop_annotations-j2cl//java/jsinterop/annotations:annotations-j2cl_jar",
+    visibility = ["//jre/java:__pkg__"],
+)
+
 # Reimport the jar file without "neverlink=1" so we can use it as a runtime dependency
 java_import(
     name = "kotlin_compiler",
