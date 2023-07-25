@@ -41,7 +41,7 @@ import java.util.function.LongToIntFunction;
 import java.util.function.LongUnaryOperator;
 import java.util.function.ObjLongConsumer;
 import java.util.function.Supplier;
-import javaemul.internal.ArrayHelper;
+import javaemul.internal.PrimitiveLists;
 
 /**
  * Main implementation of LongStream, wrapping a single spliterator, and an optional parent stream.
@@ -507,9 +507,9 @@ final class LongStreamImpl extends TerminatableStream<LongStreamImpl> implements
   @Override
   public long[] toArray() {
     terminate();
-    long[] entries = new long[0];
-    spliterator.forEachRemaining((long value) -> ArrayHelper.push(entries, value));
-    return entries;
+    PrimitiveLists.Long entries = PrimitiveLists.createForLong();
+    spliterator.forEachRemaining((long value) -> entries.push(value));
+    return entries.toArray();
   }
 
   @Override
@@ -738,10 +738,11 @@ final class LongStreamImpl extends TerminatableStream<LongStreamImpl> implements
           @Override
           public boolean tryAdvance(LongConsumer action) {
             if (ordered == null) {
-              long[] list = new long[0];
-              spliterator.forEachRemaining((long value) -> ArrayHelper.push(list, value));
-              Arrays.sort(list);
-              ordered = Spliterators.spliterator(list, characteristics());
+              PrimitiveLists.Long list = PrimitiveLists.createForLong();
+              spliterator.forEachRemaining((long value) -> list.push(value));
+              Arrays.sort(list.internalArray(), 0, list.size());
+              ordered =
+                  Spliterators.spliterator(list.internalArray(), 0, list.size(), characteristics());
             }
             return ordered.tryAdvance(action);
           }

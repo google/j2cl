@@ -58,6 +58,11 @@ public final class ArrayHelper {
     asWasmArray(array).setLength(length);
   }
 
+  public static <T> T resize(T array, int length) {
+    setLength(array, length);
+    return array;
+  }
+
   public static void push(Object[] array, Object o) {
     ((WasmArray.OfObject) asWasmArray(array)).push(o);
   }

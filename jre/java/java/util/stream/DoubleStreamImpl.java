@@ -39,7 +39,7 @@ import java.util.function.IntConsumer;
 import java.util.function.LongConsumer;
 import java.util.function.ObjDoubleConsumer;
 import java.util.function.Supplier;
-import javaemul.internal.ArrayHelper;
+import javaemul.internal.PrimitiveLists;
 
 /**
  * Main implementation of DoubleStream, wrapping a single spliterator, and an optional parent
@@ -503,9 +503,9 @@ final class DoubleStreamImpl extends TerminatableStream<DoubleStreamImpl> implem
   @Override
   public double[] toArray() {
     terminate();
-    double[] entries = new double[0];
-    spliterator.forEachRemaining((double value) -> ArrayHelper.push(entries, value));
-    return entries;
+    PrimitiveLists.Double entries = PrimitiveLists.createForDouble();
+    spliterator.forEachRemaining((double value) -> entries.push(value));
+    return entries.toArray();
   }
 
   @Override
@@ -736,10 +736,11 @@ final class DoubleStreamImpl extends TerminatableStream<DoubleStreamImpl> implem
           @Override
           public boolean tryAdvance(DoubleConsumer action) {
             if (ordered == null) {
-              double[] list = new double[0];
-              spliterator.forEachRemaining((double value) -> ArrayHelper.push(list, value));
-              Arrays.sort(list);
-              ordered = Spliterators.spliterator(list, characteristics());
+              PrimitiveLists.Double list = PrimitiveLists.createForDouble();
+              spliterator.forEachRemaining((double value) -> list.push(value));
+              Arrays.sort(list.internalArray(), 0, list.size());
+              ordered =
+                  Spliterators.spliterator(list.internalArray(), 0, list.size(), characteristics());
             }
             return ordered.tryAdvance(action);
           }

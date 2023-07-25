@@ -37,7 +37,7 @@ import java.util.function.LongToIntFunction;
 import java.util.function.LongUnaryOperator;
 import java.util.function.ObjLongConsumer;
 import java.util.function.Supplier;
-import javaemul.internal.ArrayHelper;
+import javaemul.internal.PrimitiveLists;
 
 /**
  * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/LongStream.html">
@@ -64,18 +64,18 @@ public interface LongStream extends BaseStream<Long, LongStream> {
 
   static Builder builder() {
     return new Builder() {
-      private long[] items = new long[0];
+      private PrimitiveLists.Long items = new PrimitiveLists.Long();
 
       @Override
       public void accept(long t) {
         checkState(items != null, "Builder already built");
-        ArrayHelper.push(items, t);
+        items.push(t);
       }
 
       @Override
       public LongStream build() {
         checkState(items != null, "Builder already built");
-        LongStream stream = Arrays.stream(items);
+        LongStream stream = Arrays.stream(items.internalArray(), 0, items.size());
         items = null;
         return stream;
       }

@@ -34,7 +34,7 @@ import java.util.function.DoubleToLongFunction;
 import java.util.function.DoubleUnaryOperator;
 import java.util.function.ObjDoubleConsumer;
 import java.util.function.Supplier;
-import javaemul.internal.ArrayHelper;
+import javaemul.internal.PrimitiveLists;
 
 /**
  * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/DoubleStream.html">
@@ -61,18 +61,18 @@ public interface DoubleStream extends BaseStream<Double, DoubleStream> {
 
   static Builder builder() {
     return new Builder() {
-      private double[] items = new double[0];
+      private PrimitiveLists.Double items = PrimitiveLists.createForDouble();
 
       @Override
       public void accept(double t) {
         checkState(items != null, "Builder already built");
-        ArrayHelper.push(items, t);
+        items.push(t);
       }
 
       @Override
       public DoubleStream build() {
         checkState(items != null, "Builder already built");
-        DoubleStream stream = Arrays.stream(items);
+        DoubleStream stream = Arrays.stream(items.internalArray(), 0, items.size());
         items = null;
         return stream;
       }

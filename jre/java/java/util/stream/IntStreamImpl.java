@@ -41,7 +41,7 @@ import java.util.function.IntUnaryOperator;
 import java.util.function.LongConsumer;
 import java.util.function.ObjIntConsumer;
 import java.util.function.Supplier;
-import javaemul.internal.ArrayHelper;
+import javaemul.internal.PrimitiveLists;
 
 /**
  * Main implementation of IntStream, wrapping a single spliterator, and an optional parent stream.
@@ -626,9 +626,9 @@ final class IntStreamImpl extends TerminatableStream<IntStreamImpl> implements I
   @Override
   public int[] toArray() {
     terminate();
-    int[] entries = new int[0];
-    spliterator.forEachRemaining((int value) -> ArrayHelper.push(entries, value));
-    return entries;
+    PrimitiveLists.Int entries = PrimitiveLists.createForInt();
+    spliterator.forEachRemaining((int value) -> entries.push(value));
+    return entries.toArray();
   }
 
   @Override
@@ -746,10 +746,11 @@ final class IntStreamImpl extends TerminatableStream<IntStreamImpl> implements I
           @Override
           public boolean tryAdvance(IntConsumer action) {
             if (ordered == null) {
-              int[] list = new int[0];
-              spliterator.forEachRemaining((int value) -> ArrayHelper.push(list, value));
-              Arrays.sort(list);
-              ordered = Spliterators.spliterator(list, characteristics());
+              PrimitiveLists.Int list = PrimitiveLists.createForInt();
+              spliterator.forEachRemaining((int value) -> list.push(value));
+              Arrays.sort(list.internalArray(), 0, list.size());
+              ordered =
+                  Spliterators.spliterator(list.internalArray(), 0, list.size(), characteristics());
             }
             return ordered.tryAdvance(action);
           }

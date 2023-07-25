@@ -37,7 +37,7 @@ import java.util.function.IntToLongFunction;
 import java.util.function.IntUnaryOperator;
 import java.util.function.ObjIntConsumer;
 import java.util.function.Supplier;
-import javaemul.internal.ArrayHelper;
+import javaemul.internal.PrimitiveLists;
 
 /**
  * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/IntStream.html">
@@ -64,18 +64,18 @@ public interface IntStream extends BaseStream<Integer, IntStream> {
 
   static Builder builder() {
     return new Builder() {
-      private int[] items = new int[0];
+      private PrimitiveLists.Int items = PrimitiveLists.createForInt();
 
       @Override
       public void accept(int t) {
         checkState(items != null, "Builder already built");
-        ArrayHelper.push(items, t);
+        items.push(t);
       }
 
       @Override
       public IntStream build() {
         checkState(items != null, "Builder already built");
-        IntStream stream = Arrays.stream(items);
+        IntStream stream = Arrays.stream(items.internalArray(), 0, items.size());
         items = null;
         return stream;
       }
