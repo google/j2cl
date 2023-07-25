@@ -108,7 +108,6 @@ j2cl_multi_test(
 
 j2cl_multi_test(
     name = "EmulJava8",
-    enable_wasm = False,  # b/229006894
     shard_count = 8,
     test_class = "com.google.j2cl.jre.EmulJava8Suite",
     deps = [":emul_tests_lib"],

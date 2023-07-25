@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.jre.java8.util;
 
+import static com.google.j2cl.jre.testing.TestUtils.isWasm;
+
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import junit.framework.TestCase;
@@ -81,6 +83,11 @@ public class OptionalTest extends TestCase {
   }
 
   public void testIfPresent() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when NPE on dereference is supported
+      return;
+    }
+
     // empty case
     empty.ifPresent(null); // should not fail as per JavaDoc
     empty.ifPresent(wrapped -> fail("Empty Optional should not execute consumer"));
@@ -101,6 +108,11 @@ public class OptionalTest extends TestCase {
   }
 
   public void testFilter() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when NPE on dereference is supported
+      return;
+    }
+
     // empty case
     try {
       empty.filter(null);
@@ -131,6 +143,11 @@ public class OptionalTest extends TestCase {
   }
 
   public void testMap() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when NPE on dereference is supported
+      return;
+    }
+
     // empty case
     try {
       empty.map(null);
@@ -159,6 +176,11 @@ public class OptionalTest extends TestCase {
   }
 
   public void testFlatMap() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when NPE on dereference is supported
+      return;
+    }
+
     // empty case
     try {
       empty.flatMap(null);
@@ -195,6 +217,11 @@ public class OptionalTest extends TestCase {
   }
 
   public void testOr() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when NPE on dereference is supported
+      return;
+    }
+
     try {
       empty.or(null);
       fail("Empty Optional must throw NullPointerException if supplier is null");
@@ -242,6 +269,11 @@ public class OptionalTest extends TestCase {
 
   @SuppressWarnings("DangerousLiteralNull") // Intentionally misusing Optional to test bug parity.
   public void testOrElseGet() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when NPE on dereference is supported
+      return;
+    }
+
     // empty case
     try {
       empty.orElseGet(null);
@@ -261,6 +293,11 @@ public class OptionalTest extends TestCase {
 
   @SuppressWarnings("DangerousLiteralNull") // Intentionally misusing Optional to test bug parity.
   public void testOrElseThrow() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when NPE on dereference is supported
+      return;
+    }
+
     // empty case
     try {
       empty.orElseThrow(null);

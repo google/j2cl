@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.jre.java8.util;
 
+import static com.google.j2cl.jre.testing.TestUtils.isWasm;
+
 import java.util.NoSuchElementException;
 import java.util.OptionalLong;
 import junit.framework.TestCase;
@@ -58,6 +60,11 @@ public class OptionalLongTest extends TestCase {
   }
 
   public void testIfPresent() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when NPE on dereference is supported
+      return;
+    }
+
     // empty case
     empty.ifPresent(null); // should not fail as per JavaDoc
     empty.ifPresent(wrapped -> fail("Empty Optional should not execute consumer"));
@@ -86,6 +93,11 @@ public class OptionalLongTest extends TestCase {
   }
 
   public void testOrElseGet() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when NPE on dereference is supported
+      return;
+    }
+
     // empty case
     try {
       empty.orElseGet(null);
@@ -104,6 +116,11 @@ public class OptionalLongTest extends TestCase {
   }
 
   public void testOrElseThrow() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when NPE on dereference is supported
+      return;
+    }
+
     // empty case
     try {
       empty.orElseThrow(null);

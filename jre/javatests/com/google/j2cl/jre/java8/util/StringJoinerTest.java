@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.jre.java8.util;
 
+import static com.google.j2cl.jre.testing.TestUtils.isWasm;
+
 import java.util.StringJoiner;
 import junit.framework.TestCase;
 
@@ -29,7 +31,12 @@ public class StringJoinerTest extends TestCase {
     joiner = new StringJoiner("|", "[", "]");
   }
 
-  public void testConstructor() {
+  public void testConstructor_null() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when NPE on dereference is supported
+      return;
+    }
+
     try {
       new StringJoiner(null, null, null);
       fail("NullPointerException must be thrown if any constructor parameter is null");
@@ -61,6 +68,13 @@ public class StringJoinerTest extends TestCase {
 
     joiner.merge(joiner);
     assertEquals("[0|1|2,3|4|5|0|1|2,3|4|5]", joiner.toString());
+  }
+
+  public void testMerge_null() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when NPE on dereference is supported
+      return;
+    }
 
     try {
       joiner.merge(null);
@@ -73,6 +87,13 @@ public class StringJoinerTest extends TestCase {
   public void testSetEmptyValue() throws Exception {
     joiner.setEmptyValue("empty");
     assertEquals("empty", joiner.toString());
+  }
+
+  public void testSetEmptyValue_null() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when NPE on dereference is supported
+      return;
+    }
 
     try {
       joiner.setEmptyValue(null);

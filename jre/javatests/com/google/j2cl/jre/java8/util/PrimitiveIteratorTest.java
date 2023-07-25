@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.jre.java8.util;
 
+import static com.google.j2cl.jre.testing.TestUtils.isWasm;
+
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.PrimitiveIterator;
@@ -39,18 +41,23 @@ public class PrimitiveIteratorTest extends TestCase {
       public void accept(double value) {
       }
     });
+  }
+
+  public void testForEachRemainingDoubleConsumer_null() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when NPE on dereference is supported
+      return;
+    }
 
     try {
-      it = createTestPrimitiveDoubleIterator();
-      it.forEachRemaining((Consumer<Double>) null);
+      createTestPrimitiveDoubleIterator().forEachRemaining((Consumer<Double>) null);
       fail();
     } catch (NullPointerException e) {
       // expected
     }
 
     try {
-      it = createTestPrimitiveDoubleIterator();
-      it.forEachRemaining((DoubleConsumer) null);
+      createTestPrimitiveDoubleIterator().forEachRemaining((DoubleConsumer) null);
       fail();
     } catch (NullPointerException e) {
       // expected
@@ -69,18 +76,23 @@ public class PrimitiveIteratorTest extends TestCase {
       public void accept(int value) {
       }
     });
+  }
+
+  public void testForEachRemainingIntConsumer_null() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when NPE on dereference is supported
+      return;
+    }
 
     try {
-      it = createTestPrimitiveIntIterator();
-      it.forEachRemaining((Consumer<Integer>) null);
+      createTestPrimitiveIntIterator().forEachRemaining((Consumer<Integer>) null);
       fail();
     } catch (NullPointerException e) {
       // expected
     }
 
     try {
-      it = createTestPrimitiveIntIterator();
-      it.forEachRemaining((IntConsumer) null);
+      createTestPrimitiveIntIterator().forEachRemaining((IntConsumer) null);
       fail();
     } catch (NullPointerException e) {
       // expected
@@ -99,18 +111,23 @@ public class PrimitiveIteratorTest extends TestCase {
       public void accept(long value) {
       }
     });
+  }
+
+  public void testForEachRemainingLongConsumer_null() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when NPE on dereference is supported
+      return;
+    }
 
     try {
-      it = createTestPrimitiveLongIterator();
-      it.forEachRemaining((Consumer<Long>) null);
+      createTestPrimitiveLongIterator().forEachRemaining((Consumer<Long>) null);
       fail();
     } catch (NullPointerException e) {
       // expected
     }
 
     try {
-      it = createTestPrimitiveLongIterator();
-      it.forEachRemaining((LongConsumer) null);
+      createTestPrimitiveLongIterator().forEachRemaining((LongConsumer) null);
       fail();
     } catch (NullPointerException e) {
       // expected
