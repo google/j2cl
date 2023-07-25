@@ -62,6 +62,6 @@ if [ ! -f "WORKSPACE" ]; then
   exit 1
 fi
 
-git tag -a v${lib_version} -m "${lib_version} release"
-git push origin v${lib_version}
+git tag -a ${lib_version} -m "${lib_version} release"
+git push origin ${lib_version}
 
