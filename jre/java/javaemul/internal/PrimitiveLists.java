@@ -23,6 +23,29 @@ import jsinterop.annotations.JsType;
 /** Helpers for dealing with growing containers for primitives. */
 public final class PrimitiveLists {
 
+  public static Byte createForByte() {
+    return JsUtils.uncheckedCast(new byte[0]);
+  }
+
+  /** Primtive byte list. */
+  @JsType(isNative = true, name = "Array", namespace = JsPackage.GLOBAL)
+  public static class Byte {
+    public native void push(byte element);
+
+    @JsProperty(name = "length")
+    public native int size();
+
+    @JsOverlay
+    public final byte[] internalArray() {
+      return JsUtils.uncheckedCast(this);
+    }
+
+    @JsOverlay
+    public final byte[] toArray() {
+      return JsUtils.uncheckedCast(this);
+    }
+  }
+
   public static Int createForInt() {
     return JsUtils.uncheckedCast(new int[0]);
   }

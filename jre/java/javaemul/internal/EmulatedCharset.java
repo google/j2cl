@@ -38,7 +38,7 @@ public abstract class EmulatedCharset extends Charset {
       int n = offset + count;
       byte[] bytes = new byte[0];
       // Pre-allocate to avoid re-sizing. Not using "new byte[n]" to avoid unnecessary init w/ `0`.
-      ArrayHelper.setLength(bytes, count);
+      bytes = ArrayHelper.setLength(bytes, count);
       for (int i = offset; i < n; ++i) {
         bytes[i] = (byte) (buffer[i] & 255);
       }
@@ -50,7 +50,7 @@ public abstract class EmulatedCharset extends Charset {
       int n = str.length();
       byte[] bytes = new byte[0];
       // Pre-allocate to avoid re-sizing. Not using "new byte[n]" to avoid unnecessary init w/ `0`.
-      ArrayHelper.setLength(bytes, n);
+      bytes = ArrayHelper.setLength(bytes, n);
       for (int i = 0; i < n; ++i) {
         bytes[i] = (byte) (str.charAt(i) & 255);
       }
@@ -61,7 +61,7 @@ public abstract class EmulatedCharset extends Charset {
     public char[] decodeString(byte[] bytes, int ofs, int len, boolean throwOnInvalid) {
       char[] chars = new char[0];
       // Pre-allocate to avoid re-sizing. Not using "new char[n]" to avoid unnecessary init w/ `0`.
-      ArrayHelper.setLength(chars, len);
+      chars = ArrayHelper.setLength(chars, len);
       for (int i = 0; i < len; ++i) {
         chars[i] = (char) (bytes[ofs + i] & 255);
       }
@@ -84,7 +84,7 @@ public abstract class EmulatedCharset extends Charset {
       // Pre-allocate to avoid re-sizing. Not using "new char[n]" to avoid unnecessary init w/ `0`.
       // Note that we allocate double the length of the string to account for a worst-case string
       // containing only surrogate pairs. We'll resize the array down after decoding.
-      ArrayHelper.setLength(chars, len * 2);
+      chars = ArrayHelper.setLength(chars, len * 2);
       int outIdx = 0;
       int count = 0;
       for (int i = 0; i < len; ) {
@@ -154,7 +154,7 @@ public abstract class EmulatedCharset extends Charset {
         }
       }
       // We might have over allocated initially; resize back.
-      ArrayHelper.setLength(chars, outIdx);
+      chars = ArrayHelper.setLength(chars, outIdx);
       return chars;
     }
 
@@ -167,13 +167,13 @@ public abstract class EmulatedCharset extends Charset {
     @Override
     public byte[] getBytes(char[] buffer, int offset, int count, boolean throwOnInvalid) {
       int n = offset + count;
-      byte[] bytes = new byte[0];
+      PrimitiveLists.Byte bytes = PrimitiveLists.createForByte();
       for (int i = offset; i < n; ) {
         int ch = getCodePointAt(buffer, i, throwOnInvalid);
         i += Character.charCount(ch);
         encodeUtf8(bytes, ch, throwOnInvalid);
       }
-      return bytes;
+      return bytes.toArray();
     }
 
     private static int getCodePointAt(char[] buffer, int pos, boolean throwOnInvalid) {
@@ -198,13 +198,13 @@ public abstract class EmulatedCharset extends Charset {
     public byte[] getBytes(String str, boolean throwOnInvalid) {
       // TODO(jat): consider using unescape(encodeURIComponent(bytes)) instead
       int n = str.length();
-      byte[] bytes = new byte[0];
+      PrimitiveLists.Byte bytes = PrimitiveLists.createForByte();
       for (int i = 0; i < n;) {
         int ch = getCodePointAt(str, i, n, throwOnInvalid);
         i += Character.charCount(ch);
         encodeUtf8(bytes, ch, throwOnInvalid);
       }
-      return bytes;
+      return bytes.toArray();
     }
 
     private static int getCodePointAt(String str, int pos, int length, boolean throwOnInvalid) {
@@ -232,7 +232,7 @@ public abstract class EmulatedCharset extends Charset {
      * @param codePoint character to encode
      * @throws IllegalArgumentException if codepoint >= 2^26
      */
-    private void encodeUtf8(byte[] bytes, int codePoint, boolean throwOnInvalid) {
+    private void encodeUtf8(PrimitiveLists.Byte bytes, int codePoint, boolean throwOnInvalid) {
       if (codePoint >= (1 << 26)) {
         if (throwOnInvalid) {
           throw new IllegalArgumentException("Character out of range: " + codePoint);
@@ -241,29 +241,29 @@ public abstract class EmulatedCharset extends Charset {
         }
       }
       if (codePoint < (1 << 7)) {
-        ArrayHelper.push(bytes, (byte) (codePoint & 127));
+        bytes.push((byte) (codePoint & 127));
       } else if (codePoint < (1 << 11)) {
         // 110xxxxx 10xxxxxx
-        ArrayHelper.push(bytes, (byte) (((codePoint >> 6) & 31) | 0xC0));
-        ArrayHelper.push(bytes, (byte) ((codePoint & 63) | 0x80));
+        bytes.push((byte) (((codePoint >> 6) & 31) | 0xC0));
+        bytes.push((byte) ((codePoint & 63) | 0x80));
       } else if (codePoint < (1 << 16)) {
         // 1110xxxx 10xxxxxx 10xxxxxx
-        ArrayHelper.push(bytes, (byte) (((codePoint >> 12) & 15) | 0xE0));
-        ArrayHelper.push(bytes, (byte) (((codePoint >> 6) & 63) | 0x80));
-        ArrayHelper.push(bytes, (byte) ((codePoint & 63) | 0x80));
+        bytes.push((byte) (((codePoint >> 12) & 15) | 0xE0));
+        bytes.push((byte) (((codePoint >> 6) & 63) | 0x80));
+        bytes.push((byte) ((codePoint & 63) | 0x80));
       } else if (codePoint < (1 << 21)) {
         // 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
-        ArrayHelper.push(bytes, (byte) (((codePoint >> 18) & 7) | 0xF0));
-        ArrayHelper.push(bytes, (byte) (((codePoint >> 12) & 63) | 0x80));
-        ArrayHelper.push(bytes, (byte) (((codePoint >> 6) & 63) | 0x80));
-        ArrayHelper.push(bytes, (byte) ((codePoint & 63) | 0x80));
+        bytes.push((byte) (((codePoint >> 18) & 7) | 0xF0));
+        bytes.push((byte) (((codePoint >> 12) & 63) | 0x80));
+        bytes.push((byte) (((codePoint >> 6) & 63) | 0x80));
+        bytes.push((byte) ((codePoint & 63) | 0x80));
       } else { // codePoint < (1 << 26)
         // 111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx
-        ArrayHelper.push(bytes, (byte) (((codePoint >> 24) & 3) | 0xF8));
-        ArrayHelper.push(bytes, (byte) (((codePoint >> 18) & 63) | 0x80));
-        ArrayHelper.push(bytes, (byte) (((codePoint >> 12) & 63) | 0x80));
-        ArrayHelper.push(bytes, (byte) (((codePoint >> 6) & 63) | 0x80));
-        ArrayHelper.push(bytes, (byte) ((codePoint & 63) | 0x80));
+        bytes.push((byte) (((codePoint >> 24) & 3) | 0xF8));
+        bytes.push((byte) (((codePoint >> 18) & 63) | 0x80));
+        bytes.push((byte) (((codePoint >> 12) & 63) | 0x80));
+        bytes.push((byte) (((codePoint >> 6) & 63) | 0x80));
+        bytes.push((byte) ((codePoint & 63) | 0x80));
       }
     }
   }

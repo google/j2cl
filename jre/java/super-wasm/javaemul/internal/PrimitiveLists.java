@@ -18,6 +18,40 @@ package javaemul.internal;
 /** Helpers for dealing with growing containers for primitives. */
 public final class PrimitiveLists {
 
+  public static Byte createForByte() {
+    return new PrimitiveLists.Byte();
+  }
+
+  /** Primitive byte list. */
+  public static final class Byte {
+
+    private static final int START_SIZE = 10;
+
+    private byte[] array = new byte[START_SIZE];
+    private int size;
+
+    public void push(byte element) {
+      byte[] array = this.array;
+      if (size == array.length) {
+        array = ArrayHelper.resize(array, size + 1);
+        this.array = array;
+      }
+      array[size++] = element;
+    }
+
+    public int size() {
+      return size;
+    }
+
+    public byte[] internalArray() {
+      return this.array;
+    }
+
+    public byte[] toArray() {
+      return ArrayHelper.clone(this.array, 0, size);
+    }
+  }
+
   public static Int createForInt() {
     return new PrimitiveLists.Int();
   }

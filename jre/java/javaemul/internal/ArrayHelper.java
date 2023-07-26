@@ -71,8 +71,9 @@ public final class ArrayHelper {
     return asNativeArray(array).length;
   }
 
-  public static void setLength(Object array, int length) {
+  public static <T> T setLength(T array, int length) {
     asNativeArray(array).length = length;
+    return array;
   }
 
   public static void push(Object array, @DoNotAutobox Object o) {

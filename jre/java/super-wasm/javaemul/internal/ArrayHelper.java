@@ -54,13 +54,13 @@ public final class ArrayHelper {
     return asWasmArray(array).getLength();
   }
 
-  public static void setLength(Object array, int length) {
+  public static <T> T setLength(T array, int length) {
     asWasmArray(array).setLength(length);
+    return array;
   }
 
   public static <T> T resize(T array, int length) {
-    setLength(array, length);
-    return array;
+    return setLength(array, length);
   }
 
   public static void push(Object[] array, Object o) {
