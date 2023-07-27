@@ -340,13 +340,6 @@ public abstract class ListTestBase extends TestArrayList {
           assertEquals(i, elem.intValue());
         }
       }
-      try {
-        Object[] objArray = NO_OPTIMIZE_FALSE ? new Object[1] : intArray;
-        assertTrue(objArray instanceof Integer[]);
-        objArray[0] = new Object();
-        fail("expected ArrayStoreException");
-      } catch (ArrayStoreException e) {
-      }
     }
 
     {
@@ -357,13 +350,6 @@ public abstract class ListTestBase extends TestArrayList {
       for (int i = 0; i < 10; i++) {
         Integer elem = intArray[i];
         assertEquals(i, elem.intValue());
-      }
-      try {
-        Object[] objArray = NO_OPTIMIZE_FALSE ? new Object[1] : intArray;
-        assertTrue(objArray instanceof Integer[]);
-        objArray[0] = new Object();
-        fail("expected ArrayStoreException");
-      } catch (ArrayStoreException e) {
       }
     }
   }

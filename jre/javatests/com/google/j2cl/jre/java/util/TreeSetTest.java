@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.jre.java.util;
 
+import static com.google.j2cl.jre.testing.TestUtils.isWasm;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -178,6 +180,10 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    */
   @SuppressWarnings("unchecked")
   public void testAdd_throwsClassCastException_key() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when CCE is supported
+      return;
+    }
     // The _throwsUnsupportedOperationException version of this test will
     // verify that the method is not supported.
     if (isAddSupported) {
@@ -199,6 +205,10 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    */
   @SuppressWarnings("unchecked")
   public void testAdd_throwsClassCastException_value() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when CCE is supported
+      return;
+    }
     // The _throwsUnsupportedOperationException version of this test will
     // verify that the method is not supported.
     if (isAddSupported) {
@@ -339,6 +349,10 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    */
   @SuppressWarnings("unchecked")
   public void testAddAll_throwsClassCastException() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when CCE is supported
+      return;
+    }
     // The _throwsUnsupportedOperationException version of this test will
     // verify that the method is not supported.
     if (isPutAllSupported) {
@@ -582,6 +596,10 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * @see java.util.Set#contains(Object)
    */
   public void testContains_throwsClassCastException() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when CCE is supported
+      return;
+    }
     Set<E> set = createSet();
     set.add(getKeys()[0]);
     try {
@@ -764,6 +782,10 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    */
   @SuppressWarnings("unchecked")
   public void testHeadMap_throwsClassCastException() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when CCE is supported
+      return;
+    }
     SortedSet sortedSet = createNavigableSet();
     sortedSet.add(getKeys()[0]);
     if (isNaturalOrder()) {
@@ -1010,6 +1032,10 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * @see java.util.Set#remove(Object)
    */
   public void testRemove_throwsClassCastException() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when CCE is supported
+      return;
+    }
     // The _throwsUnsupportedOperationException version of this test will
     // verify that the method is not supported.
     if (isRemoveSupported) {
@@ -1082,6 +1108,10 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    */
   @SuppressWarnings("unchecked")
   public void testSubMap_throwsClassCastException() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when CCE is supported
+      return;
+    }
     SortedSet sortedSet = createNavigableSet();
     sortedSet.add(getKeys()[0]);
     try {
@@ -1302,6 +1332,10 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    */
   @SuppressWarnings("unchecked")
   public void testTailSet_throwsClassCastException() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when CCE is supported
+      return;
+    }
     SortedSet sortedSet = createNavigableSet();
     sortedSet.add(getKeys()[0]);
     if (isNaturalOrder()) {

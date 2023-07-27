@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.jre.java.util;
 
+import static com.google.j2cl.jre.testing.TestUtils.isWasm;
 import static java.util.Arrays.asList;
 
 import com.google.j2cl.jre.testing.TestUtils;
@@ -107,6 +108,17 @@ public class ArrayDequeTest extends TestCollection {
 
   public void testConstructorFromCollection() {
     assertEquals(0, new ArrayDeque<>(new ArrayList<>()).size());
+
+    Collection<Object> collection = new ArrayList<>(asList(getFullNonNullElements()));
+    checkDequeSizeAndContent(new ArrayDeque<>(collection), getFullNonNullElements());
+  }
+
+  public void testConstructorFromCollection_null() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when NPE on dereference is supported
+      return;
+    }
+
     try {
       new ArrayDeque<>(null);
       fail();
@@ -119,9 +131,6 @@ public class ArrayDequeTest extends TestCollection {
       fail();
     } catch (NullPointerException expected) {
     }
-
-    Collection<Object> collection = new ArrayList<>(asList(getFullNonNullElements()));
-    checkDequeSizeAndContent(new ArrayDeque<>(collection), getFullNonNullElements());
   }
 
   public void testContains() {

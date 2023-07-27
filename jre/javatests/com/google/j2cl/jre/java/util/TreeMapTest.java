@@ -17,6 +17,7 @@ package com.google.j2cl.jre.java.util;
 
 import static com.google.j2cl.jre.testing.TestUtils.getJdkVersion;
 import static com.google.j2cl.jre.testing.TestUtils.isJvm;
+import static com.google.j2cl.jre.testing.TestUtils.isWasm;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
@@ -444,6 +445,11 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    * @see java.util.TreeMap#TreeMap(SortedMap)
    */
   public void testConstructor_SortedMap_throwsNullPointerException() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when NPE on dereference is supported
+      return;
+    }
+
     try {
       new TreeMap<K, V>((SortedMap<K, V>) null);
       fail("expected exception");
@@ -486,6 +492,10 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    * @see java.util.Map#containsKey(Object)
    */
   public void testContainsKey_throwsClassCastException() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when CCE is supported
+      return;
+    }
     K[] keys = getKeys();
     V[] values = getValues();
     Map<K, V> map = createMap();
@@ -547,6 +557,10 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    * @see java.util.Map#containsValue(Object)
    */
   public void testContainsValue_throwsClassCastException() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when CCE is supported
+      return;
+    }
     K[] keys = getKeys();
     V[] values = getValues();
     Map<K, V> map = createMap();
@@ -1143,6 +1157,10 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    * @see java.util.Map#get(Object)
    */
   public void testGet_throwsClassCastException() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when CCE is supported
+      return;
+    }
     K[] keys = getKeys();
     V[] values = getValues();
     Map<K, V> map = createMap();
@@ -1492,6 +1510,10 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    */
   @SuppressWarnings("unchecked")
   public void testHeadMap_throwsClassCastException() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when CCE is supported
+      return;
+    }
     K[] keys = getSortedKeys();
     V[] values = getSortedValues();
     SortedMap sortedMap = createNavigableMap();
@@ -2291,6 +2313,10 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
   }
 
   public void testPut_ComparableKey() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when CCE is supported
+      return;
+    }
     final boolean java6CompatibleSources = !isJvm() || getJdkVersion() < 7;
     TreeMap map = new TreeMap();
     ConflictingKey conflictingKey = new ConflictingKey("conflictingKey");
@@ -2316,6 +2342,10 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    */
   @SuppressWarnings("unchecked")
   public void testPut_throwsClassCastException_key() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when CCE is supported
+      return;
+    }
     // The _throwsUnsupportedOperationException version of this test will
     // verify that the method is not supported.
     if (isPutSupported) {
@@ -2551,6 +2581,10 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    */
   @SuppressWarnings("unchecked")
   public void testPutAll_throwsClassCastException() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when CCE is supported
+      return;
+    }
     // The _throwsUnsupportedOperationException version of this test will
     // verify that the method is not supported.
     if (isPutAllSupported) {
@@ -2672,6 +2706,10 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    * @see java.util.Map#remove(Object)
    */
   public void testRemove_throwsClassCastException() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when CCE is supported
+      return;
+    }
     // The _throwsUnsupportedOperationException version of this test will
     // verify that the method is not supported.
     if (isRemoveSupported) {
@@ -3010,6 +3048,10 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    */
   @SuppressWarnings("unchecked")
   public void testSubMap_throwsClassCastException() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when CCE is supported
+      return;
+    }
     K[] keys = getKeys();
     V[] values = getValues();
     SortedMap sortedMap = createNavigableMap();
@@ -3215,6 +3257,10 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    */
   @SuppressWarnings("unchecked")
   public void testTailMap_throwsClassCastException() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when CCE is supported
+      return;
+    }
     K[] keys = getKeys();
     V[] values = getValues();
     NavigableMap map = createNavigableMap();

@@ -348,7 +348,7 @@ public class IdentityHashMap<K, V> extends AbstractMap<K, V>
 
   private V putImpl(K k, V v, boolean onlyIfAbsent) {
     Object key = k == null ? NULL_OBJECT : k;
-    Object value = k == null ? NULL_OBJECT : v;
+    Object value = v == null ? NULL_OBJECT : v;
     int index = findIndex(key, elementData);
     // if the key doesn't exist in the table
     if (elementData[index] != key) {

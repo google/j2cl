@@ -86,7 +86,6 @@ j2cl_multi_test(
 
 j2cl_multi_test(
     name = "Collections",
-    enable_wasm = False,  # b/229006894
     shard_count = 16,
     test_class = "com.google.j2cl.jre.CollectionsSuite",
     deps = [":emul_tests_lib"],

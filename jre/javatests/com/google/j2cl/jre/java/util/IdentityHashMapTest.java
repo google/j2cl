@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.jre.java.util;
 
+import static com.google.j2cl.jre.testing.TestUtils.isWasm;
+
 import com.google.j2cl.jre.testing.TestUtils;
 import java.util.Collection;
 import java.util.HashMap;
@@ -705,6 +707,11 @@ public class IdentityHashMapTest extends TestMap {
   }
 
   public void testUnboxedValues() {
+    if (isWasm()) {
+      // TODO(b/234506178): Re-enable after boxing for booleans are fixed.
+      return;
+    }
+
     IdentityHashMap map = new IdentityHashMap();
     map.put(true, null);
     map.put(false, null);

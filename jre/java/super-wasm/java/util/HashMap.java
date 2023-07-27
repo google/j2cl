@@ -693,7 +693,7 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Seria
     int index = hash & (tab.length - 1);
     for (HashMapEntry<K, V> e = tab[index]; e != null; e = e.next) {
       if (e.hash == hash && (key == e.key || key.equals(e.key))) {
-        return value.equals(e.value);
+        return Objects.equals(value, e.value);
       }
     }
     return false; // No entry for key
@@ -706,7 +706,7 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Seria
   private boolean removeMapping(Object key, Object value) {
     if (key == null) {
       HashMapEntry<K, V> e = entryForNullKey;
-      if (e == null || !value.equals(e.value)) {
+      if (e == null || !Objects.equals(value, e.value)) {
         return false;
       }
       entryForNullKey = null;
@@ -720,7 +720,7 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Seria
     int index = hash & (tab.length - 1);
     for (HashMapEntry<K, V> e = tab[index], prev = null; e != null; prev = e, e = e.next) {
       if (e.hash == hash && (key == e.key || key.equals(e.key))) {
-        if (value != e.value && !value.equals(e.value)) {
+        if (value != e.value && !Objects.equals(value, e.value)) {
           return false; // Map has wrong value for key
         }
         if (prev == null) {
