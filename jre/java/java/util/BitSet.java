@@ -223,11 +223,6 @@ public class BitSet implements Cloneable {
     return array[index] | 0; // ensure int even if we go out of bounds.
   }
 
-  // GWT emulates integer with double and doesn't overflow. Enfore it by a integer mask.
-  private static int enforceOverflow(int value) {
-    return value & 0xffffffff;
-  }
-
   public void and(BitSet set) {
     // a & a is just a.
     if (this == set) {
@@ -520,11 +515,11 @@ public class BitSet implements Cloneable {
 
     for (int i = 0; i <= lastIndex; i++) {
       int value = wordAt(array, i);
-      // Hash one byte at a time using FNV1 and make sure we don't overflow 32 bit int.
-      hash = enforceOverflow(hash * fnvPrime) ^ (value & 0xff);
-      hash = enforceOverflow(hash * fnvPrime) ^ ((value >>> 8) & 0xff);
-      hash = enforceOverflow(hash * fnvPrime) ^ ((value >>> 16) & 0xff);
-      hash = enforceOverflow(hash * fnvPrime) ^ (value >>> 24);
+      // Hash one byte at a time using FNV1.
+      hash = (hash * fnvPrime) ^ (value & 0xff);
+      hash = (hash * fnvPrime) ^ ((value >>> 8) & 0xff);
+      hash = (hash * fnvPrime) ^ ((value >>> 16) & 0xff);
+      hash = (hash * fnvPrime) ^ (value >>> 24);
     }
 
     return hash;
