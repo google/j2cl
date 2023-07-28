@@ -269,7 +269,11 @@ final class JsImportsGenerator {
                             existingImport.getImportKey());
                       }
 
-                      if (!newImport.getSignature().equals(existingImport.getSignature())) {
+                      if (!newImport.getSignature().equals(existingImport.getSignature())
+                          // Signature doesn't matter if the method import is emitted as a method
+                          // reference. Exclude these in this check.
+                          && !(newImport.emitAsMethodReference()
+                              && existingImport.emitAsMethodReference())) {
                         problems.error(
                             newImport.getMethod().getSourcePosition(),
                             "Native methods '%s' and '%s', importing JavaScript method '%s', have"

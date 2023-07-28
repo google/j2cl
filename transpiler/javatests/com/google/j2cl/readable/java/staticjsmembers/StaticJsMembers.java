@@ -65,6 +65,15 @@ public class StaticJsMembers {
   @JsMethod(namespace = "foo.Baz", name = "baz")
   public static native boolean f6();
 
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.max")
+  public static native int max(int a, int b);
+
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.max")
+  public static native int max(int a, int b, int c);
+
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.max")
+  public static native double max(double a, double b);
+
   public void test() {
     StaticJsMembers.f1(1);
     f1(1);
@@ -76,6 +85,12 @@ public class StaticJsMembers {
     f4(1.1);
     StaticJsMembers.f5();
     f5();
+    StaticJsMembers.max(1, 2);
+    max(1, 2);
+    StaticJsMembers.max(1, 2, 3);
+    max(1, 2, 3);
+    StaticJsMembers.max(1.0, 2.0);
+    max(1.0, 2.0);
 
     int n = field1;
     n = field2;

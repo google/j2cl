@@ -18,6 +18,7 @@ package staticjsmethods;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static jsinterop.annotations.JsPackage.GLOBAL;
 
+import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
 
 public class Main {
@@ -36,6 +37,7 @@ public class Main {
     assertTrue(f2(1) == 23);
   }
 
+  @Wasm("nop") // .native.js not supported in Wasm.
   public static void testJsMethodsCalledByJS() {
     assertTrue(callF1(1) == 12);
     assertTrue(callF2(1) == 23);
@@ -50,6 +52,9 @@ public class Main {
     assertTrue(floor(1.5) == 1);
     assertTrue(f3(-1) == 1);
     assertTrue(isFinite(1.0));
+    assertTrue(max(2, 3) == 3);
+    assertTrue(max(2, 3, 4) == 4);
+    assertTrue(max(2.0, 3.0) == 3.0);
   }
 
   public static void testDeepNamespaceNativeJsMethod() {
@@ -65,9 +70,11 @@ public class Main {
   }
 
   @JsMethod
+  @Wasm("nop")
   public static native int callF1(int a);
 
   @JsMethod
+  @Wasm("nop")
   public static native int callF2(int a);
 
   @JsMethod(namespace = GLOBAL, name = "Math.floor")
@@ -75,6 +82,15 @@ public class Main {
 
   @JsMethod(namespace = GLOBAL, name = "Math.abs")
   public static native int f3(int d);
+
+  @JsMethod(namespace = GLOBAL, name = "Math.max")
+  public static native int max(int a, int b);
+
+  @JsMethod(namespace = GLOBAL, name = "Math.max")
+  public static native int max(int a, int b, int c);
+
+  @JsMethod(namespace = GLOBAL, name = "Math.max")
+  public static native double max(double a, double b);
 
   @JsMethod(namespace = GLOBAL, name = "isFinite")
   public static native boolean isFinite(double d);
