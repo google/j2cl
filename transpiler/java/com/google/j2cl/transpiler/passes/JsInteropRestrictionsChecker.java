@@ -1021,8 +1021,6 @@ public class JsInteropRestrictionsChecker {
       return;
     }
 
-    checkInvalidMemberTypes(member);
-
     DeclaredTypeDescriptor enclosingTypeDescriptor = memberDescriptor.getEnclosingTypeDescriptor();
     if (enclosingTypeDescriptor.isNative() && enclosingTypeDescriptor.isJsType()) {
       checkMemberOfNativeJsType(member);
@@ -1062,26 +1060,6 @@ public class JsInteropRestrictionsChecker {
     }
 
     checkOverrideConsistency(member);
-  }
-
-  private void checkInvalidMemberTypes(Member member) {
-    switch (member.getDescriptor().getJsInfo().getJsMemberType()) {
-      case INVALID_KOTLIN_FIELD_JS_PROPERTY:
-        problems.error(
-            member.getSourcePosition(),
-            "Backing field of property '%s' cannot have @JsProperty. Did you mean to use"
-                + " '@get:JsProperty'/'@set:JsProperty'? (b/281581452)",
-            member.getReadableDescription());
-        break;
-      case INVALID_KOTLIN_FIELD_JS_IGNORE:
-        problems.error(
-            member.getSourcePosition(),
-            "Backing field of property '%s' cannot have @JsIgnore. Did you mean to use"
-                + " '@get:JsIgnore'/'@set:JsIgnore'? (b/281581452)",
-            member.getReadableDescription());
-        break;
-      default: // fall-through
-    }
   }
 
   private void checkMemberOfSubclassOfNativeClass(Member member) {
@@ -1408,10 +1386,6 @@ public class JsInteropRestrictionsChecker {
         return;
       case UNDEFINED_ACCESSOR:
         // Nothing to check here. An error will be emitted for UNDEFINED_ACCESSOR elsewhere.
-        return;
-      case INVALID_KOTLIN_FIELD_JS_PROPERTY:
-      case INVALID_KOTLIN_FIELD_JS_IGNORE:
-        // These are checked for elsewhere.
         return;
     }
 
