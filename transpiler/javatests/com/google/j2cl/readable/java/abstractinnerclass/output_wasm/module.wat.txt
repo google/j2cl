@@ -1,33 +1,33 @@
  ;;; Code for abstractinnerclass.InnerClasses.A [type definition]
- (type $abstractinnerclass.InnerClasses.A.vtable (struct_subtype
+ (type $abstractinnerclass.InnerClasses.A.vtable (sub (struct
   (field $m_foo__void (ref $function.m_foo__void))
-  data)
+  ))
  )
 
  ;;; Code for abstractinnerclass.InnerClasses [type definition]
- (type $abstractinnerclass.InnerClasses (struct_subtype
+ (type $abstractinnerclass.InnerClasses (sub $java.lang.Object (struct
   (field $vtable (ref $abstractinnerclass.InnerClasses.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
+  ))
  )
- (type $abstractinnerclass.InnerClasses.vtable (struct_subtype
+ (type $abstractinnerclass.InnerClasses.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  $java.lang.Object.vtable)
+  ))
  )
 
  ;;; Code for abstractinnerclass.InnerClasses.B [type definition]
- (type $abstractinnerclass.InnerClasses.B (struct_subtype
+ (type $abstractinnerclass.InnerClasses.B (sub $java.lang.Object (struct
   (field $vtable (ref $abstractinnerclass.InnerClasses.B.vtable))
   (field $itable (ref $abstractinnerclass.InnerClasses.B.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
+  ))
  )
- (type $abstractinnerclass.InnerClasses.B.vtable (struct_subtype
+ (type $abstractinnerclass.InnerClasses.B.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -35,9 +35,9 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_bar__void_$pp_abstractinnerclass (ref $function.m_bar__void_$pp_abstractinnerclass))
   (field $m_foo__void (ref $function.m_foo__void))
-  $java.lang.Object.vtable)
+  ))
  )
- (type $abstractinnerclass.InnerClasses.B.itable (struct_subtype
+ (type $abstractinnerclass.InnerClasses.B.itable (sub $itable (struct
  (field $slot0 (ref $abstractinnerclass.InnerClasses.A.vtable))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -45,17 +45,17 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $itable))
+ )))
 
  ;;; Code for abstractinnerclass.InnerClasses.C [type definition]
- (type $abstractinnerclass.InnerClasses.C (struct_subtype
+ (type $abstractinnerclass.InnerClasses.C (sub $java.lang.Object (struct
   (field $vtable (ref $abstractinnerclass.InnerClasses.C.vtable))
   (field $itable (ref $abstractinnerclass.InnerClasses.C.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__abstractinnerclass_InnerClasses_C (ref null $abstractinnerclass.InnerClasses))
-  $java.lang.Object)
+  ))
  )
- (type $abstractinnerclass.InnerClasses.C.vtable (struct_subtype
+ (type $abstractinnerclass.InnerClasses.C.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -63,9 +63,9 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_bar__void_$pp_abstractinnerclass (ref $function.m_bar__void_$pp_abstractinnerclass))
   (field $m_foo__void (ref $function.m_foo__void))
-  $java.lang.Object.vtable)
+  ))
  )
- (type $abstractinnerclass.InnerClasses.C.itable (struct_subtype
+ (type $abstractinnerclass.InnerClasses.C.itable (sub $itable (struct
  (field $slot0 (ref $abstractinnerclass.InnerClasses.A.vtable))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -73,7 +73,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $itable))
+ )))
 
 ;;; Code for abstractinnerclass.InnerClasses [vtable.init]
 (global $abstractinnerclass.InnerClasses.vtable (ref $abstractinnerclass.InnerClasses.vtable)

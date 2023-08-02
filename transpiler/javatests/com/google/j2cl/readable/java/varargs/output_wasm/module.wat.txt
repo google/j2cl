@@ -1,18 +1,18 @@
  ;;; Code for varargs.Varargs.FunctionalInterface [type definition]
- (type $varargs.Varargs.FunctionalInterface.vtable (struct_subtype
+ (type $varargs.Varargs.FunctionalInterface.vtable (sub (struct
   (field $m_apply__arrayOf_java_lang_String__void (ref $function.m_apply__arrayOf_java_lang_String__void))
-  data)
+  ))
  )
 
  ;;; Code for varargs.Varargs [type definition]
- (type $varargs.Varargs (struct_subtype
+ (type $varargs.Varargs (sub $java.lang.Object (struct
   (field $vtable (ref $varargs.Varargs.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_args__varargs_Varargs_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
-  $java.lang.Object)
+  ))
  )
- (type $varargs.Varargs.vtable (struct_subtype
+ (type $varargs.Varargs.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -24,27 +24,27 @@
   (field $m_testAssignment__arrayOf_java_lang_Object__void (ref $function.m_testAssignment__arrayOf_java_lang_Object__void))
   (field $m_testLambda__varargs_Varargs_FunctionalInterface__void (ref $function.m_testLambda__varargs_Varargs_FunctionalInterface__void))
   (field $m_main__void (ref $function.m_main__void))
-  $java.lang.Object.vtable)
+  ))
  )
 
  ;;; Code for varargs.Varargs.$LambdaImplementor$1 [type definition]
- (type $varargs.Varargs.$LambdaImplementor$1 (struct_subtype
+ (type $varargs.Varargs.$LambdaImplementor$1 (sub $java.lang.Object (struct
   (field $vtable (ref $varargs.Varargs.$LambdaImplementor$1.vtable))
   (field $itable (ref $varargs.Varargs.$LambdaImplementor$1.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__varargs_Varargs_$LambdaImplementor$1 (ref null $varargs.Varargs))
-  $java.lang.Object)
+  ))
  )
- (type $varargs.Varargs.$LambdaImplementor$1.vtable (struct_subtype
+ (type $varargs.Varargs.$LambdaImplementor$1.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_apply__arrayOf_java_lang_String__void (ref $function.m_apply__arrayOf_java_lang_String__void))
-  $java.lang.Object.vtable)
+  ))
  )
- (type $varargs.Varargs.$LambdaImplementor$1.itable (struct_subtype
+ (type $varargs.Varargs.$LambdaImplementor$1.itable (sub $itable (struct
  (field $slot0 (ref $varargs.Varargs.FunctionalInterface.vtable))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -52,17 +52,17 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $itable))
+ )))
 
  ;;; Code for varargs.Child [type definition]
- (type $varargs.Child (struct_subtype
+ (type $varargs.Child (sub $varargs.Varargs (struct
   (field $vtable (ref $varargs.Child.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_args__varargs_Varargs_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
-  $varargs.Varargs)
+  ))
  )
- (type $varargs.Child.vtable (struct_subtype
+ (type $varargs.Child.vtable (sub $varargs.Varargs.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -74,7 +74,7 @@
   (field $m_testAssignment__arrayOf_java_lang_Object__void (ref $function.m_testAssignment__arrayOf_java_lang_Object__void))
   (field $m_testLambda__varargs_Varargs_FunctionalInterface__void (ref $function.m_testLambda__varargs_Varargs_FunctionalInterface__void))
   (field $m_main__void (ref $function.m_main__void))
-  $varargs.Varargs.vtable)
+  ))
  )
 
 ;;; Code for varargs.Varargs [vtable.init]

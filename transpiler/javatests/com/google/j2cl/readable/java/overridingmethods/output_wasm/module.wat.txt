@@ -1,34 +1,34 @@
  ;;; Code for overridingmethods.SomeInterface [type definition]
- (type $overridingmethods.SomeInterface.vtable (struct_subtype
+ (type $overridingmethods.SomeInterface.vtable (sub (struct
   (field $m_bar__void (ref $function.m_bar__void))
-  data)
+  ))
  )
 
  ;;; Code for overridingmethods.Parent [type definition]
- (type $overridingmethods.Parent (struct_subtype
+ (type $overridingmethods.Parent (sub $java.lang.Object (struct
   (field $vtable (ref $overridingmethods.Parent.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
+  ))
  )
- (type $overridingmethods.Parent.vtable (struct_subtype
+ (type $overridingmethods.Parent.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_fun__void (ref $function.m_fun__void))
-  $java.lang.Object.vtable)
+  ))
  )
 
  ;;; Code for overridingmethods.Child [type definition]
- (type $overridingmethods.Child (struct_subtype
+ (type $overridingmethods.Child (sub $overridingmethods.Parent (struct
   (field $vtable (ref $overridingmethods.Child.vtable))
   (field $itable (ref $overridingmethods.Child.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $overridingmethods.Parent)
+  ))
  )
- (type $overridingmethods.Child.vtable (struct_subtype
+ (type $overridingmethods.Child.vtable (sub $overridingmethods.Parent.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -36,9 +36,9 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_fun__void (ref $function.m_fun__void))
   (field $m_bar__void (ref $function.m_bar__void))
-  $overridingmethods.Parent.vtable)
+  ))
  )
- (type $overridingmethods.Child.itable (struct_subtype
+ (type $overridingmethods.Child.itable (sub $itable (struct
  (field $slot0 (ref $overridingmethods.SomeInterface.vtable))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -46,7 +46,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $itable))
+ )))
 
 ;;; Code for overridingmethods.Parent [vtable.init]
 (global $overridingmethods.Parent.vtable (ref $overridingmethods.Parent.vtable)

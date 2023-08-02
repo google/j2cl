@@ -1,5 +1,5 @@
  ;;; Code for exception.MyException [type definition]
- (type $exception.MyException (struct_subtype
+ (type $exception.MyException (sub $java.lang.Exception (struct
   (field $vtable (ref $exception.MyException.vtable))
   (field $itable (ref $exception.MyException.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -10,9 +10,9 @@
   (field $f_disableSuppression__java_lang_Throwable_ (mut i8))
   (field $f_disableStackTrace__java_lang_Throwable_ (mut i8))
   (field $f_backingJsObject__java_lang_Throwable_ (mut (ref null $java.lang.Object)))
-  $java.lang.Exception)
+  ))
  )
- (type $exception.MyException.vtable (struct_subtype
+ (type $exception.MyException.vtable (sub $java.lang.Exception.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -31,9 +31,9 @@
   (field $m_printStackTrace__void (ref $function.m_printStackTrace__void))
   (field $m_printStackTrace__java_io_PrintStream__void (ref $function.m_printStackTrace__java_io_PrintStream__void))
   (field $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void (ref $function.m_setStackTrace__arrayOf_java_lang_StackTraceElement__void))
-  $java.lang.Exception.vtable)
+  ))
  )
- (type $exception.MyException.itable (struct_subtype
+ (type $exception.MyException.itable (sub $java.lang.Exception.itable (struct
  (field $slot0 (ref $java.io.Serializable.vtable))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -41,10 +41,10 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Exception.itable))
+ )))
 
  ;;; Code for exception.MyJsException [type definition]
- (type $exception.MyJsException (struct_subtype
+ (type $exception.MyJsException (sub $java.lang.Exception (struct
   (field $vtable (ref $exception.MyJsException.vtable))
   (field $itable (ref $exception.MyJsException.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -55,9 +55,9 @@
   (field $f_disableSuppression__java_lang_Throwable_ (mut i8))
   (field $f_disableStackTrace__java_lang_Throwable_ (mut i8))
   (field $f_backingJsObject__java_lang_Throwable_ (mut (ref null $java.lang.Object)))
-  $java.lang.Exception)
+  ))
  )
- (type $exception.MyJsException.vtable (struct_subtype
+ (type $exception.MyJsException.vtable (sub $java.lang.Exception.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -76,9 +76,9 @@
   (field $m_printStackTrace__void (ref $function.m_printStackTrace__void))
   (field $m_printStackTrace__java_io_PrintStream__void (ref $function.m_printStackTrace__java_io_PrintStream__void))
   (field $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void (ref $function.m_setStackTrace__arrayOf_java_lang_StackTraceElement__void))
-  $java.lang.Exception.vtable)
+  ))
  )
- (type $exception.MyJsException.itable (struct_subtype
+ (type $exception.MyJsException.itable (sub $java.lang.Exception.itable (struct
  (field $slot0 (ref $java.io.Serializable.vtable))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -86,7 +86,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $java.lang.Exception.itable))
+ )))
 
 ;;; Code for exception.MyException [vtable.init]
 (global $exception.MyException.vtable (ref $exception.MyException.vtable)

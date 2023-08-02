@@ -1,31 +1,31 @@
  ;;; Code for nestednativetype.NativeArray.$Overlay [type definition]
- (type $nestednativetype.NativeArray.$Overlay (struct_subtype
+ (type $nestednativetype.NativeArray.$Overlay (sub (struct
   (field $vtable (ref $nestednativetype.NativeArray.$Overlay.vtable))
   (field $itable (ref $itable))
-  data)
+  ))
  )
- (type $nestednativetype.NativeArray.$Overlay.vtable (struct_subtype
+ (type $nestednativetype.NativeArray.$Overlay.vtable (sub (struct
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  data)
+  ))
  )
 
  ;;; Code for nestednativetype.NativeArray [type definition]
 
  ;;; Code for nestednativetype.NativeArray.1 [type definition]
- (type $nestednativetype.NativeArray.1 (struct_subtype
+ (type $nestednativetype.NativeArray.1 (sub $java.lang.Object (struct
   (field $vtable (ref $nestednativetype.NativeArray.1.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__nestednativetype_NativeArray_1 (ref null extern))
-  $java.lang.Object)
+  ))
  )
- (type $nestednativetype.NativeArray.1.vtable (struct_subtype
+ (type $nestednativetype.NativeArray.1.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  $java.lang.Object.vtable)
+  ))
  )
 
 ;;; Code for nestednativetype.NativeArray.1 [vtable.init]

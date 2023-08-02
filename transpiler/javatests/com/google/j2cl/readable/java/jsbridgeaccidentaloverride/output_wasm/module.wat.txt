@@ -1,41 +1,41 @@
  ;;; Code for jsbridgeaccidentaloverride.OtherInterface [type definition]
- (type $jsbridgeaccidentaloverride.OtherInterface.vtable (struct_subtype
+ (type $jsbridgeaccidentaloverride.OtherInterface.vtable (sub (struct
   (field $m_fun__int__int (ref $function.m_fun__int__int))
-  data)
+  ))
  )
 
  ;;; Code for jsbridgeaccidentaloverride.MyInterface [type definition]
- (type $jsbridgeaccidentaloverride.MyInterface.vtable (struct_subtype
+ (type $jsbridgeaccidentaloverride.MyInterface.vtable (sub (struct
   (field $m_bar__int__int (ref $function.m_bar__int__int))
   (field $m_foo__int__int (ref $function.m_foo__int__int))
-  data)
+  ))
  )
 
  ;;; Code for jsbridgeaccidentaloverride.Main [type definition]
- (type $jsbridgeaccidentaloverride.Main (struct_subtype
+ (type $jsbridgeaccidentaloverride.Main (sub $java.lang.Object (struct
   (field $vtable (ref $jsbridgeaccidentaloverride.Main.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
+  ))
  )
- (type $jsbridgeaccidentaloverride.Main.vtable (struct_subtype
+ (type $jsbridgeaccidentaloverride.Main.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_test__void (ref $function.m_test__void))
-  $java.lang.Object.vtable)
+  ))
  )
 
  ;;; Code for jsbridgeaccidentaloverride.MyJsType [type definition]
- (type $jsbridgeaccidentaloverride.MyJsType (struct_subtype
+ (type $jsbridgeaccidentaloverride.MyJsType (sub $java.lang.Object (struct
   (field $vtable (ref $jsbridgeaccidentaloverride.MyJsType.vtable))
   (field $itable (ref $jsbridgeaccidentaloverride.MyJsType.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
+  ))
  )
- (type $jsbridgeaccidentaloverride.MyJsType.vtable (struct_subtype
+ (type $jsbridgeaccidentaloverride.MyJsType.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -44,9 +44,9 @@
   (field $m_foo__int__int (ref $function.m_foo__int__int))
   (field $m_bar__int__int (ref $function.m_bar__int__int))
   (field $m_fun__int__int (ref $function.m_fun__int__int))
-  $java.lang.Object.vtable)
+  ))
  )
- (type $jsbridgeaccidentaloverride.MyJsType.itable (struct_subtype
+ (type $jsbridgeaccidentaloverride.MyJsType.itable (sub $itable (struct
  (field $slot0 (ref $jsbridgeaccidentaloverride.OtherInterface.vtable))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -54,16 +54,16 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $itable))
+ )))
 
  ;;; Code for jsbridgeaccidentaloverride.SubJsType [type definition]
- (type $jsbridgeaccidentaloverride.SubJsType (struct_subtype
+ (type $jsbridgeaccidentaloverride.SubJsType (sub $jsbridgeaccidentaloverride.MyJsType (struct
   (field $vtable (ref $jsbridgeaccidentaloverride.SubJsType.vtable))
   (field $itable (ref $jsbridgeaccidentaloverride.SubJsType.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $jsbridgeaccidentaloverride.MyJsType)
+  ))
  )
- (type $jsbridgeaccidentaloverride.SubJsType.vtable (struct_subtype
+ (type $jsbridgeaccidentaloverride.SubJsType.vtable (sub $jsbridgeaccidentaloverride.MyJsType.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -72,9 +72,9 @@
   (field $m_foo__int__int (ref $function.m_foo__int__int))
   (field $m_bar__int__int (ref $function.m_bar__int__int))
   (field $m_fun__int__int (ref $function.m_fun__int__int))
-  $jsbridgeaccidentaloverride.MyJsType.vtable)
+  ))
  )
- (type $jsbridgeaccidentaloverride.SubJsType.itable (struct_subtype
+ (type $jsbridgeaccidentaloverride.SubJsType.itable (sub $jsbridgeaccidentaloverride.MyJsType.itable (struct
  (field $slot0 (ref $jsbridgeaccidentaloverride.OtherInterface.vtable))
  (field $slot1 (ref $jsbridgeaccidentaloverride.MyInterface.vtable))
  (field $slot2 (ref null struct))
@@ -82,7 +82,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $jsbridgeaccidentaloverride.MyJsType.itable))
+ )))
 
 ;;; Code for jsbridgeaccidentaloverride.Main [vtable.init]
 (global $jsbridgeaccidentaloverride.Main.vtable (ref $jsbridgeaccidentaloverride.Main.vtable)

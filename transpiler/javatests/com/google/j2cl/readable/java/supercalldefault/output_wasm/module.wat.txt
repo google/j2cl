@@ -1,17 +1,17 @@
  ;;; Code for supercalldefault.SuperCallDefault [type definition]
- (type $supercalldefault.SuperCallDefault (struct_subtype
+ (type $supercalldefault.SuperCallDefault (sub $java.lang.Object (struct
   (field $vtable (ref $supercalldefault.SuperCallDefault.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
+  ))
  )
- (type $supercalldefault.SuperCallDefault.vtable (struct_subtype
+ (type $supercalldefault.SuperCallDefault.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  $java.lang.Object.vtable)
+  ))
  )
 
 ;;; Code for supercalldefault.SuperCallDefault [vtable.init]

@@ -1,42 +1,42 @@
  ;;; Code for interfaces.Main.Interface [type definition]
- (type $interfaces.Main.Interface.vtable (struct_subtype
+ (type $interfaces.Main.Interface.vtable (sub (struct
   (field $m_defaultMethod__java_lang_Object__void (ref $function.m_defaultMethod__java_lang_Object__void))
   (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
-  data)
+  ))
  )
 
  ;;; Code for interfaces.Main.SubInterface [type definition]
- (type $interfaces.Main.SubInterface.vtable (struct_subtype
+ (type $interfaces.Main.SubInterface.vtable (sub (struct
   (field $m_defaultMethod__java_lang_String__void (ref $function.m_defaultMethod__java_lang_String__void))
-  data)
+  ))
  )
 
  ;;; Code for interfaces.Main [type definition]
- (type $interfaces.Main (struct_subtype
+ (type $interfaces.Main (sub $java.lang.Object (struct
   (field $vtable (ref $interfaces.Main.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
+  ))
  )
- (type $interfaces.Main.vtable (struct_subtype
+ (type $interfaces.Main.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_testInterfaceMembers__void_$pp_interfaces (ref $function.m_testInterfaceMembers__void_$pp_interfaces))
-  $java.lang.Object.vtable)
+  ))
  )
 
  ;;; Code for interfaces.Main.Implementor [type definition]
- (type $interfaces.Main.Implementor (struct_subtype
+ (type $interfaces.Main.Implementor (sub $java.lang.Object (struct
   (field $vtable (ref $interfaces.Main.Implementor.vtable))
   (field $itable (ref $interfaces.Main.Implementor.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__interfaces_Main_Implementor (ref null $interfaces.Main))
-  $java.lang.Object)
+  ))
  )
- (type $interfaces.Main.Implementor.vtable (struct_subtype
+ (type $interfaces.Main.Implementor.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -45,9 +45,9 @@
   (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
   (field $m_defaultMethod__java_lang_Object__void (ref $function.m_defaultMethod__java_lang_Object__void))
   (field $m_defaultMethod__java_lang_String__void (ref $function.m_defaultMethod__java_lang_String__void))
-  $java.lang.Object.vtable)
+  ))
  )
- (type $interfaces.Main.Implementor.itable (struct_subtype
+ (type $interfaces.Main.Implementor.itable (sub $itable (struct
  (field $slot0 (ref $interfaces.Main.SubInterface.vtable))
  (field $slot1 (ref $interfaces.Main.Interface.vtable))
  (field $slot2 (ref null struct))
@@ -55,17 +55,17 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $itable))
+ )))
 
  ;;; Code for interfaces.Main.AbstractImplementor [type definition]
- (type $interfaces.Main.AbstractImplementor (struct_subtype
+ (type $interfaces.Main.AbstractImplementor (sub $java.lang.Object (struct
   (field $vtable (ref $interfaces.Main.AbstractImplementor.vtable))
   (field $itable (ref $interfaces.Main.AbstractImplementor.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__interfaces_Main_AbstractImplementor (ref null $interfaces.Main))
-  $java.lang.Object)
+  ))
  )
- (type $interfaces.Main.AbstractImplementor.vtable (struct_subtype
+ (type $interfaces.Main.AbstractImplementor.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -73,9 +73,9 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_defaultMethod__java_lang_Object__void (ref $function.m_defaultMethod__java_lang_Object__void))
   (field $m_defaultMethod__java_lang_String__void (ref $function.m_defaultMethod__java_lang_String__void))
-  $java.lang.Object.vtable)
+  ))
  )
- (type $interfaces.Main.AbstractImplementor.itable (struct_subtype
+ (type $interfaces.Main.AbstractImplementor.itable (sub $itable (struct
  (field $slot0 (ref $interfaces.Main.SubInterface.vtable))
  (field $slot1 (ref $interfaces.Main.Interface.vtable))
  (field $slot2 (ref null struct))
@@ -83,7 +83,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $itable))
+ )))
 
 ;;; Code for interfaces.Main [vtable.init]
 (global $interfaces.Main.vtable (ref $interfaces.Main.vtable)

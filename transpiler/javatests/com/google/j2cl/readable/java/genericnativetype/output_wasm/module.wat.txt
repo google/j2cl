@@ -1,30 +1,30 @@
  ;;; Code for genericnativetype.BoundedJsArray.$Overlay [type definition]
- (type $genericnativetype.BoundedJsArray.$Overlay (struct_subtype
+ (type $genericnativetype.BoundedJsArray.$Overlay (sub (struct
   (field $vtable (ref $genericnativetype.BoundedJsArray.$Overlay.vtable))
   (field $itable (ref $itable))
-  data)
+  ))
  )
- (type $genericnativetype.BoundedJsArray.$Overlay.vtable (struct_subtype
+ (type $genericnativetype.BoundedJsArray.$Overlay.vtable (sub (struct
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  data)
+  ))
  )
 
  ;;; Code for genericnativetype.BoundedJsArray [type definition]
 
  ;;; Code for genericnativetype.BoundedJsArrays [type definition]
- (type $genericnativetype.BoundedJsArrays (struct_subtype
+ (type $genericnativetype.BoundedJsArrays (sub $java.lang.Object (struct
   (field $vtable (ref $genericnativetype.BoundedJsArrays.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
+  ))
  )
- (type $genericnativetype.BoundedJsArrays.vtable (struct_subtype
+ (type $genericnativetype.BoundedJsArrays.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  $java.lang.Object.vtable)
+  ))
  )
 
 ;;; Code for genericnativetype.BoundedJsArray.$Overlay [vtable.init]

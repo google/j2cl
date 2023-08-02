@@ -1,46 +1,46 @@
  ;;; Code for annotation.Main.Foo [type definition]
- (type $annotation.Main.Foo.vtable (struct_subtype
+ (type $annotation.Main.Foo.vtable (sub (struct
   (field $m_bar__int (ref $function.m_bar__int))
-  data)
+  ))
  )
 
  ;;; Code for annotation.Main.Zoo [type definition]
- (type $annotation.Main.Zoo.vtable (struct_subtype
-  data)
+ (type $annotation.Main.Zoo.vtable (sub (struct
+  ))
  )
 
  ;;; Code for annotation.Main [type definition]
- (type $annotation.Main (struct_subtype
+ (type $annotation.Main (sub $java.lang.Object (struct
   (field $vtable (ref $annotation.Main.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
+  ))
  )
- (type $annotation.Main.vtable (struct_subtype
+ (type $annotation.Main.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  $java.lang.Object.vtable)
+  ))
  )
 
  ;;; Code for annotation.Main.Bar [type definition]
- (type $annotation.Main.Bar (struct_subtype
+ (type $annotation.Main.Bar (sub $java.lang.Object (struct
   (field $vtable (ref $annotation.Main.Bar.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__annotation_Main_Bar (ref null $annotation.Main))
-  $java.lang.Object)
+  ))
  )
- (type $annotation.Main.Bar.vtable (struct_subtype
+ (type $annotation.Main.Bar.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_baz__int_$pp_annotation (ref $function.m_baz__int_$pp_annotation))
-  $java.lang.Object.vtable)
+  ))
  )
 
 ;;; Code for annotation.Main [vtable.init]

@@ -1,35 +1,35 @@
  ;;; Code for jsoverlay.Main.NativeJsTypeInterfaceWithOverlay [type definition]
 
  ;;; Code for jsoverlay.Main.Intf [type definition]
- (type $jsoverlay.Main.Intf.vtable (struct_subtype
+ (type $jsoverlay.Main.Intf.vtable (sub (struct
   (field $m_run__void (ref $function.m_run__void))
-  data)
+  ))
  )
 
  ;;; Code for jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay [type definition]
- (type $jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay.vtable (struct_subtype
-  data)
+ (type $jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay.vtable (sub (struct
+  ))
  )
 
  ;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay [type definition]
- (type $jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay (struct_subtype
+ (type $jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay (sub (struct
   (field $vtable (ref $jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay.vtable))
   (field $itable (ref $itable))
-  data)
+  ))
  )
- (type $jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay.vtable (struct_subtype
+ (type $jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay.vtable (sub (struct
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  data)
+  ))
  )
 
  ;;; Code for jsoverlay.Main [type definition]
- (type $jsoverlay.Main (struct_subtype
+ (type $jsoverlay.Main (sub $java.lang.Object (struct
   (field $vtable (ref $jsoverlay.Main.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
+  ))
  )
- (type $jsoverlay.Main.vtable (struct_subtype
+ (type $jsoverlay.Main.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -37,27 +37,27 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_test__void (ref $function.m_test__void))
   (field $m_testOverlayInterface__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay__void (ref $function.m_testOverlayInterface__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay__void))
-  $java.lang.Object.vtable)
+  ))
  )
 
  ;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay.1 [type definition]
- (type $jsoverlay.Main.NativeJsTypeWithOverlay.1 (struct_subtype
+ (type $jsoverlay.Main.NativeJsTypeWithOverlay.1 (sub $java.lang.Object (struct
   (field $vtable (ref $jsoverlay.Main.NativeJsTypeWithOverlay.1.vtable))
   (field $itable (ref $jsoverlay.Main.NativeJsTypeWithOverlay.1.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__jsoverlay_Main_NativeJsTypeWithOverlay_1 (ref null extern))
-  $java.lang.Object)
+  ))
  )
- (type $jsoverlay.Main.NativeJsTypeWithOverlay.1.vtable (struct_subtype
+ (type $jsoverlay.Main.NativeJsTypeWithOverlay.1.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_run__void (ref $function.m_run__void))
-  $java.lang.Object.vtable)
+  ))
  )
- (type $jsoverlay.Main.NativeJsTypeWithOverlay.1.itable (struct_subtype
+ (type $jsoverlay.Main.NativeJsTypeWithOverlay.1.itable (sub $itable (struct
  (field $slot0 (ref $jsoverlay.Main.Intf.vtable))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -65,7 +65,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $itable))
+ )))
 
  ;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay [type definition]
 

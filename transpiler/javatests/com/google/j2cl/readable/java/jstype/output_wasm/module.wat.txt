@@ -3,17 +3,17 @@
  ;;; Code for jstype.SomeJsType.Wildcard [type definition]
 
  ;;; Code for jstype.SomeJsType.Star.$Overlay [type definition]
- (type $jstype.SomeJsType.Star.$Overlay.vtable (struct_subtype
-  data)
+ (type $jstype.SomeJsType.Star.$Overlay.vtable (sub (struct
+  ))
  )
 
  ;;; Code for jstype.SomeJsType.Wildcard.$Overlay [type definition]
- (type $jstype.SomeJsType.Wildcard.$Overlay.vtable (struct_subtype
-  data)
+ (type $jstype.SomeJsType.Wildcard.$Overlay.vtable (sub (struct
+  ))
  )
 
  ;;; Code for jstype.SomeJsType [type definition]
- (type $jstype.SomeJsType (struct_subtype
+ (type $jstype.SomeJsType (sub $java.lang.Object (struct
   (field $vtable (ref $jstype.SomeJsType.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -21,9 +21,9 @@
   (field $f_privateField__jstype_SomeJsType_ (mut i32))
   (field $f_packageField__jstype_SomeJsType (mut i32))
   (field $f_protectedField__jstype_SomeJsType (mut i32))
-  $java.lang.Object)
+  ))
  )
- (type $jstype.SomeJsType.vtable (struct_subtype
+ (type $jstype.SomeJsType.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -33,7 +33,7 @@
   (field $m_packageMethod__void_$pp_jstype (ref $function.m_packageMethod__void_$pp_jstype))
   (field $m_protectedMethod__void (ref $function.m_protectedMethod__void))
   (field $m_useFieldsAndMethods__void (ref $function.m_useFieldsAndMethods__void))
-  $java.lang.Object.vtable)
+  ))
  )
 
 ;;; Code for jstype.SomeJsType [vtable.init]

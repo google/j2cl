@@ -1,41 +1,41 @@
  ;;; Code for localclassinheritance.LocalClassInheritance [type definition]
- (type $localclassinheritance.LocalClassInheritance (struct_subtype
+ (type $localclassinheritance.LocalClassInheritance (sub $java.lang.Object (struct
   (field $vtable (ref $localclassinheritance.LocalClassInheritance.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
+  ))
  )
- (type $localclassinheritance.LocalClassInheritance.vtable (struct_subtype
+ (type $localclassinheritance.LocalClassInheritance.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_test__void (ref $function.m_test__void))
-  $java.lang.Object.vtable)
+  ))
  )
 
  ;;; Code for localclassinheritance.LocalClassInheritance.1Parent [type definition]
- (type $localclassinheritance.LocalClassInheritance.1Parent (struct_subtype
+ (type $localclassinheritance.LocalClassInheritance.1Parent (sub $java.lang.Object (struct
   (field $vtable (ref $localclassinheritance.LocalClassInheritance.1Parent.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__localclassinheritance_LocalClassInheritance_1Parent (ref null $localclassinheritance.LocalClassInheritance))
   (field $$captured_f__localclassinheritance_LocalClassInheritance_1Parent i32)
-  $java.lang.Object)
+  ))
  )
- (type $localclassinheritance.LocalClassInheritance.1Parent.vtable (struct_subtype
+ (type $localclassinheritance.LocalClassInheritance.1Parent.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_n__void (ref $function.m_n__void))
-  $java.lang.Object.vtable)
+  ))
  )
 
  ;;; Code for localclassinheritance.LocalClassInheritance.1Child [type definition]
- (type $localclassinheritance.LocalClassInheritance.1Child (struct_subtype
+ (type $localclassinheritance.LocalClassInheritance.1Child (sub $localclassinheritance.LocalClassInheritance.1Parent (struct
   (field $vtable (ref $localclassinheritance.LocalClassInheritance.1Child.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -43,16 +43,16 @@
   (field $$captured_f__localclassinheritance_LocalClassInheritance_1Parent i32)
   (field $$outer_this__localclassinheritance_LocalClassInheritance_1Child (ref null $localclassinheritance.LocalClassInheritance))
   (field $$captured_f__localclassinheritance_LocalClassInheritance_1Child i32)
-  $localclassinheritance.LocalClassInheritance.1Parent)
+  ))
  )
- (type $localclassinheritance.LocalClassInheritance.1Child.vtable (struct_subtype
+ (type $localclassinheritance.LocalClassInheritance.1Child.vtable (sub $localclassinheritance.LocalClassInheritance.1Parent.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_n__void (ref $function.m_n__void))
-  $localclassinheritance.LocalClassInheritance.1Parent.vtable)
+  ))
  )
 
 ;;; Code for localclassinheritance.LocalClassInheritance [vtable.init]

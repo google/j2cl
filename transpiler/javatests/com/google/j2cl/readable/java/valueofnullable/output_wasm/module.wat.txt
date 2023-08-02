@@ -1,20 +1,20 @@
  ;;; Code for valueofnullable.ValueOfNullable [type definition]
- (type $valueofnullable.ValueOfNullable (struct_subtype
+ (type $valueofnullable.ValueOfNullable (sub $java.lang.Object (struct
   (field $vtable (ref $valueofnullable.ValueOfNullable.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_nullableString__valueofnullable_ValueOfNullable (ref null $java.lang.String))
   (field $f_someChar__valueofnullable_ValueOfNullable i16)
   (field $f_result__valueofnullable_ValueOfNullable (mut (ref null $java.lang.String)))
-  $java.lang.Object)
+  ))
  )
- (type $valueofnullable.ValueOfNullable.vtable (struct_subtype
+ (type $valueofnullable.ValueOfNullable.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  $java.lang.Object.vtable)
+  ))
  )
 
 ;;; Code for valueofnullable.ValueOfNullable [vtable.init]

@@ -704,7 +704,10 @@ public class WasmOutputsGenerator {
     // implemented by them.
     builder.newLine();
     builder.append(
-        format("(type %s (struct_subtype", environment.getWasmItableTypeName(typeDeclaration)));
+        format(
+            "(type %s (sub %s (struct",
+            environment.getWasmItableTypeName(typeDeclaration),
+            environment.getWasmItableTypeName(typeDeclaration.getSuperTypeDeclaration())));
     for (int slot = 0; slot < environment.getNumberOfInterfaceSlots(); slot++) {
       builder.newLine();
       builder.append(format("(field $slot%d ", slot));
@@ -716,9 +719,7 @@ public class WasmOutputsGenerator {
       }
     }
     builder.newLine();
-    builder.append(
-        format(
-            " %s))", environment.getWasmItableTypeName(typeDeclaration.getSuperTypeDeclaration())));
+    builder.append(")))");
   }
 
   private void initializeInterfaceVtable(
@@ -767,13 +768,16 @@ public class WasmOutputsGenerator {
       Type type, Function<DeclaredTypeDescriptor, String> structNamer, Runnable fieldsRenderer) {
     boolean hasSuperType = type.getSuperTypeDescriptor() != null;
     builder.newLine();
-    builder.append(format("(type %s (struct_subtype", structNamer.apply(type.getTypeDescriptor())));
+    builder.append(String.format("(type %s (sub ", structNamer.apply(type.getTypeDescriptor())));
+    if (hasSuperType) {
+      builder.append(format("%s ", structNamer.apply(type.getSuperTypeDescriptor())));
+    }
+    builder.append("(struct");
     builder.indent();
     fieldsRenderer.run();
 
     builder.newLine();
-    String superType = hasSuperType ? structNamer.apply(type.getSuperTypeDescriptor()) : "data";
-    builder.append(superType);
+    builder.append(")");
     builder.append(")");
     builder.unindent();
     builder.newLine();

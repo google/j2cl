@@ -1,12 +1,12 @@
  ;;; Code for objectmap.ObjectMap.$Overlay [type definition]
- (type $objectmap.ObjectMap.$Overlay (struct_subtype
+ (type $objectmap.ObjectMap.$Overlay (sub (struct
   (field $vtable (ref $objectmap.ObjectMap.$Overlay.vtable))
   (field $itable (ref $itable))
-  data)
+  ))
  )
- (type $objectmap.ObjectMap.$Overlay.vtable (struct_subtype
+ (type $objectmap.ObjectMap.$Overlay.vtable (sub (struct
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  data)
+  ))
  )
 
  ;;; Code for objectmap.ObjectMap [type definition]

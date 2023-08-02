@@ -1,34 +1,34 @@
  ;;; Code for cast.CastGenerics.A [type definition]
- (type $cast.CastGenerics.A.vtable (struct_subtype
+ (type $cast.CastGenerics.A.vtable (sub (struct
   (field $m_mA__void (ref $function.m_mA__void))
-  data)
+  ))
  )
 
  ;;; Code for cast.CastGenerics.B [type definition]
- (type $cast.CastGenerics.B.vtable (struct_subtype
+ (type $cast.CastGenerics.B.vtable (sub (struct
   (field $m_mB__void (ref $function.m_mB__void))
-  data)
+  ))
  )
 
  ;;; Code for cast.CastGenerics.Empty1 [type definition]
- (type $cast.CastGenerics.Empty1.vtable (struct_subtype
-  data)
+ (type $cast.CastGenerics.Empty1.vtable (sub (struct
+  ))
  )
 
  ;;; Code for cast.CastGenerics.Empty2 [type definition]
- (type $cast.CastGenerics.Empty2.vtable (struct_subtype
-  data)
+ (type $cast.CastGenerics.Empty2.vtable (sub (struct
+  ))
  )
 
  ;;; Code for cast.CastGenerics [type definition]
- (type $cast.CastGenerics (struct_subtype
+ (type $cast.CastGenerics (sub $java.lang.Object (struct
   (field $vtable (ref $cast.CastGenerics.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_field__cast_CastGenerics (mut (ref null $java.lang.Object)))
-  $java.lang.Object)
+  ))
  )
- (type $cast.CastGenerics.vtable (struct_subtype
+ (type $cast.CastGenerics.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -39,17 +39,17 @@
   (field $m_testCastToMethodTypeVariable__void (ref $function.m_testCastToMethodTypeVariable__void))
   (field $m_outerGenericMethod__void (ref $function.m_outerGenericMethod__void))
   (field $m_method__java_lang_Object__cast_CastGenerics_Empty1 (ref $function.m_method__java_lang_Object__cast_CastGenerics_Empty1))
-  $java.lang.Object.vtable)
+  ))
  )
 
  ;;; Code for cast.CastGenerics.BaseImplementor [type definition]
- (type $cast.CastGenerics.BaseImplementor (struct_subtype
+ (type $cast.CastGenerics.BaseImplementor (sub $java.lang.Object (struct
   (field $vtable (ref $cast.CastGenerics.BaseImplementor.vtable))
   (field $itable (ref $cast.CastGenerics.BaseImplementor.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
+  ))
  )
- (type $cast.CastGenerics.BaseImplementor.vtable (struct_subtype
+ (type $cast.CastGenerics.BaseImplementor.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -57,9 +57,9 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_mA__void (ref $function.m_mA__void))
   (field $m_mB__void (ref $function.m_mB__void))
-  $java.lang.Object.vtable)
+  ))
  )
- (type $cast.CastGenerics.BaseImplementor.itable (struct_subtype
+ (type $cast.CastGenerics.BaseImplementor.itable (sub $itable (struct
  (field $slot0 (ref $cast.CastGenerics.A.vtable))
  (field $slot1 (ref $cast.CastGenerics.B.vtable))
  (field $slot2 (ref null struct))
@@ -67,66 +67,66 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $itable))
+ )))
 
  ;;; Code for cast.CastGenerics.Container [type definition]
- (type $cast.CastGenerics.Container (struct_subtype
+ (type $cast.CastGenerics.Container (sub $java.lang.Object (struct
   (field $vtable (ref $cast.CastGenerics.Container.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
+  ))
  )
- (type $cast.CastGenerics.Container.vtable (struct_subtype
+ (type $cast.CastGenerics.Container.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_get__java_lang_Object_$pp_cast (ref $function.m_get__java_lang_Object_$pp_cast))
-  $java.lang.Object.vtable)
+  ))
  )
 
  ;;; Code for cast.CastGenerics.Foo [type definition]
- (type $cast.CastGenerics.Foo (struct_subtype
+ (type $cast.CastGenerics.Foo (sub $java.lang.Object (struct
   (field $vtable (ref $cast.CastGenerics.Foo.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
+  ))
  )
- (type $cast.CastGenerics.Foo.vtable (struct_subtype
+ (type $cast.CastGenerics.Foo.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  $java.lang.Object.vtable)
+  ))
  )
 
  ;;; Code for cast.CastGenerics.1Nested [type definition]
- (type $cast.CastGenerics.1Nested (struct_subtype
+ (type $cast.CastGenerics.1Nested (sub $java.lang.Object (struct
   (field $vtable (ref $cast.CastGenerics.1Nested.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__cast_CastGenerics_1Nested (ref null $cast.CastGenerics))
-  $java.lang.Object)
+  ))
  )
- (type $cast.CastGenerics.1Nested.vtable (struct_subtype
+ (type $cast.CastGenerics.1Nested.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  $java.lang.Object.vtable)
+  ))
  )
 
  ;;; Code for cast.CastPrimitives [type definition]
- (type $cast.CastPrimitives (struct_subtype
+ (type $cast.CastPrimitives (sub $java.lang.Object (struct
   (field $vtable (ref $cast.CastPrimitives.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
+  ))
  )
- (type $cast.CastPrimitives.vtable (struct_subtype
+ (type $cast.CastPrimitives.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -139,49 +139,49 @@
   (field $m_testImplicitArgumentCasts__void (ref $function.m_testImplicitArgumentCasts__void))
   (field $m_testImplicitArrayIndexCasts__arrayOf_byte__void (ref $function.m_testImplicitArrayIndexCasts__arrayOf_byte__void))
   (field $m_testImplicitLongAssignmentCasts__void (ref $function.m_testImplicitLongAssignmentCasts__void))
-  $java.lang.Object.vtable)
+  ))
  )
 
  ;;; Code for cast.CastPrimitives.IntValueHolder [type definition]
- (type $cast.CastPrimitives.IntValueHolder (struct_subtype
+ (type $cast.CastPrimitives.IntValueHolder (sub $java.lang.Object (struct
   (field $vtable (ref $cast.CastPrimitives.IntValueHolder.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
+  ))
  )
- (type $cast.CastPrimitives.IntValueHolder.vtable (struct_subtype
+ (type $cast.CastPrimitives.IntValueHolder.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  $java.lang.Object.vtable)
+  ))
  )
 
  ;;; Code for cast.CastPrimitives.LongValueHolder [type definition]
- (type $cast.CastPrimitives.LongValueHolder (struct_subtype
+ (type $cast.CastPrimitives.LongValueHolder (sub $java.lang.Object (struct
   (field $vtable (ref $cast.CastPrimitives.LongValueHolder.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
+  ))
  )
- (type $cast.CastPrimitives.LongValueHolder.vtable (struct_subtype
+ (type $cast.CastPrimitives.LongValueHolder.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  $java.lang.Object.vtable)
+  ))
  )
 
  ;;; Code for cast.Casts [type definition]
- (type $cast.Casts (struct_subtype
+ (type $cast.Casts (sub $java.lang.Object (struct
   (field $vtable (ref $cast.Casts.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
+  ))
  )
- (type $cast.Casts.vtable (struct_subtype
+ (type $cast.Casts.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -195,52 +195,52 @@
   (field $m_testCastFieldAfterInstanceOf__void (ref $function.m_testCastFieldAfterInstanceOf__void))
   (field $m_testCaseMethodAfterInstanceOf__void (ref $function.m_testCaseMethodAfterInstanceOf__void))
   (field $m_testPrecedence__void (ref $function.m_testPrecedence__void))
-  $java.lang.Object.vtable)
+  ))
  )
 
  ;;; Code for cast.Casts.Foo [type definition]
- (type $cast.Casts.Foo (struct_subtype
+ (type $cast.Casts.Foo (sub $java.lang.Object (struct
   (field $vtable (ref $cast.Casts.Foo.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__cast_Casts_Foo (ref null $cast.Casts))
   (field $f_field__cast_Casts_Foo (mut (ref null $java.lang.Object)))
-  $java.lang.Object)
+  ))
  )
- (type $cast.Casts.Foo.vtable (struct_subtype
+ (type $cast.Casts.Foo.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_method__java_lang_Object (ref $function.m_method__java_lang_Object))
-  $java.lang.Object.vtable)
+  ))
  )
 
  ;;; Code for cast.CastGenerics.1 [type definition]
- (type $cast.CastGenerics.1 (struct_subtype
+ (type $cast.CastGenerics.1 (sub $cast.CastGenerics.Foo (struct
   (field $vtable (ref $cast.CastGenerics.1.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $cast.CastGenerics.Foo)
+  ))
  )
- (type $cast.CastGenerics.1.vtable (struct_subtype
+ (type $cast.CastGenerics.1.vtable (sub $cast.CastGenerics.Foo.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  $cast.CastGenerics.Foo.vtable)
+  ))
  )
 
  ;;; Code for cast.CastGenerics.Implementor [type definition]
- (type $cast.CastGenerics.Implementor (struct_subtype
+ (type $cast.CastGenerics.Implementor (sub $cast.CastGenerics.BaseImplementor (struct
   (field $vtable (ref $cast.CastGenerics.Implementor.vtable))
   (field $itable (ref $cast.CastGenerics.Implementor.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $cast.CastGenerics.BaseImplementor)
+  ))
  )
- (type $cast.CastGenerics.Implementor.vtable (struct_subtype
+ (type $cast.CastGenerics.Implementor.vtable (sub $cast.CastGenerics.BaseImplementor.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -248,9 +248,9 @@
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_mA__void (ref $function.m_mA__void))
   (field $m_mB__void (ref $function.m_mB__void))
-  $cast.CastGenerics.BaseImplementor.vtable)
+  ))
  )
- (type $cast.CastGenerics.Implementor.itable (struct_subtype
+ (type $cast.CastGenerics.Implementor.itable (sub $cast.CastGenerics.BaseImplementor.itable (struct
  (field $slot0 (ref $cast.CastGenerics.A.vtable))
  (field $slot1 (ref $cast.CastGenerics.B.vtable))
  (field $slot2 (ref null struct))
@@ -258,7 +258,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $cast.CastGenerics.BaseImplementor.itable))
+ )))
 
 ;;; Code for cast.CastGenerics [vtable.init]
 (global $cast.CastGenerics.vtable (ref $cast.CastGenerics.vtable)

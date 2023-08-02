@@ -1,115 +1,115 @@
  ;;; Code for anonymousclass.SomeInterface [type definition]
- (type $anonymousclass.SomeInterface.vtable (struct_subtype
-  data)
+ (type $anonymousclass.SomeInterface.vtable (sub (struct
+  ))
  )
 
  ;;; Code for anonymousclass.SomeClass [type definition]
- (type $anonymousclass.SomeClass (struct_subtype
+ (type $anonymousclass.SomeClass (sub $java.lang.Object (struct
   (field $vtable (ref $anonymousclass.SomeClass.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
+  ))
  )
- (type $anonymousclass.SomeClass.vtable (struct_subtype
+ (type $anonymousclass.SomeClass.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_foo__java_lang_String (ref $function.m_foo__java_lang_String))
-  $java.lang.Object.vtable)
+  ))
  )
 
  ;;; Code for anonymousclass.SomeClassWithStaticMembers [type definition]
- (type $anonymousclass.SomeClassWithStaticMembers (struct_subtype
+ (type $anonymousclass.SomeClassWithStaticMembers (sub $java.lang.Object (struct
   (field $vtable (ref $anonymousclass.SomeClassWithStaticMembers.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
+  ))
  )
- (type $anonymousclass.SomeClassWithStaticMembers.vtable (struct_subtype
+ (type $anonymousclass.SomeClassWithStaticMembers.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_foo__java_lang_String (ref $function.m_foo__java_lang_String))
-  $java.lang.Object.vtable)
+  ))
  )
 
  ;;; Code for anonymousclass.AnonymousClass [type definition]
- (type $anonymousclass.AnonymousClass (struct_subtype
+ (type $anonymousclass.AnonymousClass (sub $java.lang.Object (struct
   (field $vtable (ref $anonymousclass.AnonymousClass.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_i__anonymousclass_AnonymousClass (mut i32))
-  $java.lang.Object)
+  ))
  )
- (type $anonymousclass.AnonymousClass.vtable (struct_subtype
+ (type $anonymousclass.AnonymousClass.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_main__void (ref $function.m_main__void))
-  $java.lang.Object.vtable)
+  ))
  )
 
  ;;; Code for anonymousclass.AnonymousClass.1 [type definition]
- (type $anonymousclass.AnonymousClass.1 (struct_subtype
+ (type $anonymousclass.AnonymousClass.1 (sub $anonymousclass.SomeClass (struct
   (field $vtable (ref $anonymousclass.AnonymousClass.1.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__anonymousclass_AnonymousClass_1 (mut (ref null $anonymousclass.AnonymousClass)))
   (field $f_object__anonymousclass_AnonymousClass_1 (mut (ref null $java.lang.Object)))
   (field $f_outer__anonymousclass_AnonymousClass_1 (mut (ref null $java.lang.Object)))
-  $anonymousclass.SomeClass)
+  ))
  )
- (type $anonymousclass.AnonymousClass.1.vtable (struct_subtype
+ (type $anonymousclass.AnonymousClass.1.vtable (sub $anonymousclass.SomeClass.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_foo__java_lang_String (ref $function.m_foo__java_lang_String))
-  $anonymousclass.SomeClass.vtable)
+  ))
  )
 
  ;;; Code for anonymousclass.AnonymousClass.2 [type definition]
- (type $anonymousclass.AnonymousClass.2 (struct_subtype
+ (type $anonymousclass.AnonymousClass.2 (sub $anonymousclass.SomeClassWithStaticMembers (struct
   (field $vtable (ref $anonymousclass.AnonymousClass.2.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__anonymousclass_AnonymousClass_2 (mut (ref null $anonymousclass.AnonymousClass)))
   (field $f_object__anonymousclass_AnonymousClass_2 (mut (ref null $java.lang.Object)))
   (field $f_outer__anonymousclass_AnonymousClass_2 (mut (ref null $java.lang.Object)))
-  $anonymousclass.SomeClassWithStaticMembers)
+  ))
  )
- (type $anonymousclass.AnonymousClass.2.vtable (struct_subtype
+ (type $anonymousclass.AnonymousClass.2.vtable (sub $anonymousclass.SomeClassWithStaticMembers.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_foo__java_lang_String (ref $function.m_foo__java_lang_String))
-  $anonymousclass.SomeClassWithStaticMembers.vtable)
+  ))
  )
 
  ;;; Code for anonymousclass.SomeInterface.1 [type definition]
- (type $anonymousclass.SomeInterface.1 (struct_subtype
+ (type $anonymousclass.SomeInterface.1 (sub $anonymousclass.SomeClass (struct
   (field $vtable (ref $anonymousclass.SomeInterface.1.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $anonymousclass.SomeClass)
+  ))
  )
- (type $anonymousclass.SomeInterface.1.vtable (struct_subtype
+ (type $anonymousclass.SomeInterface.1.vtable (sub $anonymousclass.SomeClass.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_foo__java_lang_String (ref $function.m_foo__java_lang_String))
-  $anonymousclass.SomeClass.vtable)
+  ))
  )
 
 ;;; Code for anonymousclass.AnonymousClass [vtable.init]

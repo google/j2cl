@@ -1,30 +1,30 @@
  ;;; Code for unimplementedbridgemethod.I [type definition]
- (type $unimplementedbridgemethod.I.vtable (struct_subtype
+ (type $unimplementedbridgemethod.I.vtable (sub (struct
   (field $m_foo__java_lang_Object__int (ref $function.m_foo__java_lang_Object__int))
-  data)
+  ))
  )
 
  ;;; Code for unimplementedbridgemethod.J [type definition]
- (type $unimplementedbridgemethod.J.vtable (struct_subtype
-  data)
+ (type $unimplementedbridgemethod.J.vtable (sub (struct
+  ))
  )
 
  ;;; Code for unimplementedbridgemethod.Bar [type definition]
- (type $unimplementedbridgemethod.Bar (struct_subtype
+ (type $unimplementedbridgemethod.Bar (sub $java.lang.Object (struct
   (field $vtable (ref $unimplementedbridgemethod.Bar.vtable))
   (field $itable (ref $unimplementedbridgemethod.Bar.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
+  ))
  )
- (type $unimplementedbridgemethod.Bar.vtable (struct_subtype
+ (type $unimplementedbridgemethod.Bar.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  $java.lang.Object.vtable)
+  ))
  )
- (type $unimplementedbridgemethod.Bar.itable (struct_subtype
+ (type $unimplementedbridgemethod.Bar.itable (sub $itable (struct
  (field $slot0 (ref $unimplementedbridgemethod.I.vtable))
  (field $slot1 (ref $unimplementedbridgemethod.J.vtable))
  (field $slot2 (ref null struct))
@@ -32,24 +32,24 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $itable))
+ )))
 
  ;;; Code for unimplementedbridgemethod.Foo [type definition]
- (type $unimplementedbridgemethod.Foo (struct_subtype
+ (type $unimplementedbridgemethod.Foo (sub $java.lang.Object (struct
   (field $vtable (ref $unimplementedbridgemethod.Foo.vtable))
   (field $itable (ref $unimplementedbridgemethod.Foo.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
+  ))
  )
- (type $unimplementedbridgemethod.Foo.vtable (struct_subtype
+ (type $unimplementedbridgemethod.Foo.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  $java.lang.Object.vtable)
+  ))
  )
- (type $unimplementedbridgemethod.Foo.itable (struct_subtype
+ (type $unimplementedbridgemethod.Foo.itable (sub $itable (struct
  (field $slot0 (ref $unimplementedbridgemethod.I.vtable))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -57,7 +57,7 @@
  (field $slot4 (ref null struct))
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
-  $itable))
+ )))
 
 ;;; Code for unimplementedbridgemethod.I [static fields]
 (global $f_$initialized__unimplementedbridgemethod_I (mut i32) (i32.const 0))

@@ -5,13 +5,13 @@ data ))
 ;;; Code for Native Array types
 ;;; End of code for Native Array types
 ;;; Code for emptymethod.EmptyMethod [type definition]
-(type $emptymethod.EmptyMethod (struct_subtype
+(type $emptymethod.EmptyMethod (sub $java.lang.Object (struct
  (field $vtable (ref $emptymethod.EmptyMethod.vtable))
  (field $itable (ref $itable))
- $java.lang.Object)
+ ))
 )
-(type $emptymethod.EmptyMethod.vtable (struct_subtype
+(type $emptymethod.EmptyMethod.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- $java.lang.Object.vtable)
+ ))
 )
 ;;; End of code for emptymethod.EmptyMethod [type definition]

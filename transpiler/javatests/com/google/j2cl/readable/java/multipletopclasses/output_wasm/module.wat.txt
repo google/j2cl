@@ -1,33 +1,33 @@
  ;;; Code for multipletopclasses.AnotherClass [type definition]
- (type $multipletopclasses.AnotherClass (struct_subtype
+ (type $multipletopclasses.AnotherClass (sub $java.lang.Object (struct
   (field $vtable (ref $multipletopclasses.AnotherClass.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
+  ))
  )
- (type $multipletopclasses.AnotherClass.vtable (struct_subtype
+ (type $multipletopclasses.AnotherClass.vtable (sub $java.lang.Object.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  $java.lang.Object.vtable)
+  ))
  )
 
  ;;; Code for multipletopclasses.MultipleTopClasses [type definition]
- (type $multipletopclasses.MultipleTopClasses (struct_subtype
+ (type $multipletopclasses.MultipleTopClasses (sub $multipletopclasses.AnotherClass (struct
   (field $vtable (ref $multipletopclasses.MultipleTopClasses.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $multipletopclasses.AnotherClass)
+  ))
  )
- (type $multipletopclasses.MultipleTopClasses.vtable (struct_subtype
+ (type $multipletopclasses.MultipleTopClasses.vtable (sub $multipletopclasses.AnotherClass.vtable (struct
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  $multipletopclasses.AnotherClass.vtable)
+  ))
  )
 
 ;;; Code for multipletopclasses.AnotherClass [vtable.init]
