@@ -20,6 +20,7 @@ package nullability.defaultnullable
 import javaemul.lang.*
 import java.lang.RuntimeException
 import java.lang.Void
+import jsinterop.annotations.JsMethod
 import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
@@ -118,6 +119,7 @@ open class DefaultNullable {
  }
 
  @ObjCName("m3")
+ @JsMethod
  open fun m3(
   vararg @ObjCName("withNSStringArray") args: String?
  ) {

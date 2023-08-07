@@ -167,7 +167,7 @@ public abstract class TypeDeclaration
     return moduleRelativeJsName.substring(dotIndex + 1);
   }
 
-  private boolean hasCustomizedJsNamespace() {
+  public boolean hasCustomizedJsNamespace() {
     return getCustomizedJsNamespace() != null;
   }
 

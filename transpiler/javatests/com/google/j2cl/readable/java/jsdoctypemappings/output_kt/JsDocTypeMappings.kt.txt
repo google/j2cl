@@ -18,6 +18,9 @@
 package jsdoctypemappings
 
 import javaemul.lang.*
+import jsinterop.annotations.JsFunction
+import jsinterop.annotations.JsPackage
+import jsinterop.annotations.JsType
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Byte
@@ -202,28 +205,39 @@ open class JsDocTypeMappings {
   return null
  }
 
+ @JsFunction
  fun interface NativeFunction {
   @ObjCName("f")
   fun f()
  }
 
+ @JsType(name = "Array", namespace = JsPackage.GLOBAL, isNative = true)
  open class NativeType {}
 
+ @JsType(name = "ExportedTypeNewName")
  open inner class ExportedType {}
 
+ @JsType(name = "number", namespace = JsPackage.GLOBAL, isNative = true)
  interface NativeNumber {}
 
+ @JsType(name = "boolean", namespace = JsPackage.GLOBAL, isNative = true)
  interface NativeBoolean {}
 
+ @JsType(name = "string", namespace = JsPackage.GLOBAL, isNative = true)
  interface NativeString {}
 
+ @JsType(name = "null", namespace = JsPackage.GLOBAL, isNative = true)
  interface NativeNull {}
 
+ @JsType(name = "undefined", namespace = JsPackage.GLOBAL, isNative = true)
  interface NativeUndefined {}
 
+ @JsType(name = "void", namespace = JsPackage.GLOBAL, isNative = true)
  interface NativeVoid {}
 
+ @JsType(name = "*", namespace = JsPackage.GLOBAL, isNative = true)
  interface NativeStar {}
 
+ @JsType(name = "?", namespace = JsPackage.GLOBAL, isNative = true)
  interface NativeWildcard {}
 }

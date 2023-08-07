@@ -18,6 +18,8 @@
 package jstype
 
 import javaemul.lang.*
+import jsinterop.annotations.JsPackage
+import jsinterop.annotations.JsType
 import kotlin.Any
 import kotlin.Double
 import kotlin.Int
@@ -30,6 +32,7 @@ import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktJstypeSomeJsType", exact = true)
+@JsType
 open class SomeJsType<T> {
  @JvmField
  @ObjCName("publicField_")
@@ -75,7 +78,9 @@ open class SomeJsType<T> {
   return star as SomeJsType.Wildcard?
  }
 
+ @JsType(name = "*", namespace = JsPackage.GLOBAL, isNative = true)
  interface Star {}
 
+ @JsType(name = "?", namespace = JsPackage.GLOBAL, isNative = true)
  interface Wildcard {}
 }

@@ -18,13 +18,16 @@
 package packageinfo
 
 import javaemul.lang.*
+import jsinterop.annotations.JsType
 import kotlin.OptIn
 import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktPackageinfoOuter", exact = true)
+@JsType(namespace = "readable.packageinfo")
 open class Outer {
  @ObjCName("J2ktPackageinfoOuter_Inner", exact = true)
+ @JsType
  open inner class Inner {}
 }

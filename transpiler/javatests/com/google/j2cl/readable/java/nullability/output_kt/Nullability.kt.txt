@@ -21,6 +21,9 @@ import javaemul.lang.*
 import java.lang.RuntimeException
 import java.util.Comparator
 import javaemul.lang.JavaList
+import jsinterop.annotations.JsConstructor
+import jsinterop.annotations.JsFunction
+import jsinterop.annotations.JsMethod
 import kotlin.Any
 import kotlin.Array
 import kotlin.Double
@@ -92,6 +95,7 @@ open class Nullability {
  @HiddenFromObjC
  var f14_private_2: Any? = null
 
+ @JsConstructor
  constructor(
   @ObjCName("NSString") a: String
  ) {
@@ -116,6 +120,7 @@ open class Nullability {
  }
 
  @ObjCName("m3")
+ @JsMethod
  open fun m3(
   @ObjCName("withNSString") a: String,
   vararg @ObjCName("withNSStringArray") args: String
@@ -240,6 +245,7 @@ open class Nullability {
   }
  }
 
+ @JsFunction
  fun interface MyFunction {
   @ObjCName("x")
   fun x(

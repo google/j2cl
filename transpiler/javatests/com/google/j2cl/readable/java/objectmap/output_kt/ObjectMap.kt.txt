@@ -18,6 +18,9 @@
 package objectmap
 
 import javaemul.lang.*
+import jsinterop.annotations.JsOverlay
+import jsinterop.annotations.JsPackage
+import jsinterop.annotations.JsType
 import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
@@ -28,17 +31,20 @@ import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktObjectmapObjectMap", exact = true)
+@JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
 open class ObjectMap<T> {
  @ObjCName("J2ktObjectmapObjectMapCompanion", exact = true)
  companion object {
   @JvmStatic
   @HiddenFromObjC
+  @JsOverlay
   fun <T_1> create_pp_objectmap(): ObjectMap<T_1>? {
    return null
   }
 
   @JvmStatic
   @HiddenFromObjC
+  @JsOverlay
   fun createForString_pp_objectmap(): ObjectMap<String?>? {
    return null
   }

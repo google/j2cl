@@ -19,6 +19,8 @@ package array
 
 import javaemul.lang.*
 import java.io.Serializable
+import jsinterop.annotations.JsPackage
+import jsinterop.annotations.JsType
 import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
@@ -199,6 +201,7 @@ open class Arrays {
 
  open inner class SomeObject {}
 
+ @JsType(name = "String", namespace = JsPackage.GLOBAL, isNative = true)
  open class NativeType {}
 
  open class ArrayContainer<T> {

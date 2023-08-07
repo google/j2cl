@@ -19,6 +19,9 @@ package jsnonnull
 
 import javaemul.lang.*
 import java.util.Comparator
+import jsinterop.annotations.JsConstructor
+import jsinterop.annotations.JsFunction
+import jsinterop.annotations.JsMethod
 import kotlin.Any
 import kotlin.Array
 import kotlin.Double
@@ -77,6 +80,7 @@ open class Main {
  @HiddenFromObjC
  var f12_private_2: MutableList<String?>? = ArrayList<String>() as MutableList<String?>?
 
+ @JsConstructor
  constructor(
   @ObjCName("NSString") a: String
  )
@@ -99,6 +103,7 @@ open class Main {
  }
 
  @ObjCName("m3")
+ @JsMethod
  open fun m3(
   @ObjCName("withNSString") a: String,
   vararg @ObjCName("withNSStringArray") args: String
@@ -112,6 +117,7 @@ open class Main {
   @ObjCName("withJsnonnullMain_MyFunction") f: Main.MyFunction
  ) {}
 
+ @JsFunction
  fun interface MyFunction {
   @ObjCName("x")
   fun x(

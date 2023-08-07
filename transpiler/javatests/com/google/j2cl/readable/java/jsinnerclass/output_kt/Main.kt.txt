@@ -18,6 +18,7 @@
 package jsinnerclass
 
 import javaemul.lang.*
+import jsinterop.annotations.JsType
 import kotlin.Array
 import kotlin.Int
 import kotlin.OptIn
@@ -56,6 +57,7 @@ open class Main {
   }
 
   @ObjCName("J2ktJsinnerclassMain_Outer_Inner", exact = true)
+  @JsType(namespace = "com.google.test")
   open inner class Inner() {
    @JvmField
    @HiddenFromObjC

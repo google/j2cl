@@ -21,6 +21,10 @@ import javaemul.lang.*
 import java.lang.RuntimeException
 import java.lang.Void
 import javaemul.lang.JavaIterable
+import jsinterop.annotations.JsFunction
+import jsinterop.annotations.JsMethod
+import jsinterop.annotations.JsPackage
+import jsinterop.annotations.JsType
 import kotlin.Any
 import kotlin.Double
 import kotlin.Enum
@@ -382,6 +386,7 @@ open class Lambdas {
  }
 
  @ObjCName("J2ktLambdasLambdas_GenericJsFunction", exact = true)
+ @JsFunction
  fun interface GenericJsFunction<R, T> {
   @ObjCName("apply")
   fun apply(
@@ -390,6 +395,7 @@ open class Lambdas {
  }
 
  @ObjCName("J2ktLambdasLambdas_Thenable", exact = true)
+ @JsType(name = "?", namespace = JsPackage.GLOBAL, isNative = true)
  fun interface Thenable<T> {
   @ObjCName("then")
   fun then(
@@ -399,6 +405,7 @@ open class Lambdas {
  }
 
  @ObjCName("J2ktLambdasLambdas_AnotherThenable", exact = true)
+ @JsType(name = "?", namespace = JsPackage.GLOBAL, isNative = true)
  fun interface AnotherThenable<T> {
   @ObjCName("then")
   fun then(
@@ -421,6 +428,7 @@ open class Lambdas {
  }
 
  fun interface JsSupplier<T: Number?>: Lambdas.Equals<T> {
+  @JsMethod
   override fun get(): T
  }
 

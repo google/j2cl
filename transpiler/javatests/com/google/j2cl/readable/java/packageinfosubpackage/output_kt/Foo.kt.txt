@@ -18,6 +18,7 @@
 package packageinfosubpackage
 
 import javaemul.lang.*
+import jsinterop.annotations.JsType
 import kotlin.OptIn
 import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
@@ -32,6 +33,7 @@ open class Foo {
  @HiddenFromObjC
  var nativeBar_private_2: Foo.NativeBar? = Foo.NativeBar()
 
+ @JsType(name = "Bar", namespace = "packageinfosubpackage.subpackage", isNative = true)
  open class NativeBar {
   constructor()
  }

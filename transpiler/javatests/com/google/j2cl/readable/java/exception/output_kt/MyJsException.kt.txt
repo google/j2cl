@@ -19,15 +19,19 @@ package exception
 
 import javaemul.lang.*
 import java.lang.Exception
+import jsinterop.annotations.JsIgnore
+import jsinterop.annotations.JsType
 import kotlin.OptIn
 import kotlin.Suppress
 import kotlin.Throwable
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
+@JsType
 class MyJsException: Exception {
  constructor()
 
+ @JsIgnore
  constructor(
   @ObjCName("JavaLangThrowable") cause: Throwable?
  ): this()

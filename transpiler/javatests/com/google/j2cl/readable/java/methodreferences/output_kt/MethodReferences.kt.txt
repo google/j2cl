@@ -18,6 +18,7 @@
 package methodreferences
 
 import javaemul.lang.*
+import jsinterop.annotations.JsFunction
 import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
@@ -185,11 +186,13 @@ open class MethodReferences<T> {
   ): V
  }
 
+ @JsFunction
  fun interface JsProducer<T> {
   @ObjCName("produce")
   fun produce(): T
  }
 
+ @JsFunction
  fun interface JsFunctionInterface<T, U> {
   @ObjCName("apply")
   fun apply(
@@ -197,6 +200,7 @@ open class MethodReferences<T> {
   ): U
  }
 
+ @JsFunction
  fun interface JsBiFunction<T, U, V> {
   @ObjCName("apply")
   fun apply(

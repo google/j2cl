@@ -18,6 +18,7 @@
 package instancejsmethods
 
 import javaemul.lang.*
+import jsinterop.annotations.JsMethod
 import kotlin.Int
 import kotlin.OptIn
 import kotlin.Suppress
@@ -49,15 +50,18 @@ open class SuperParent {
 }
 
 open class Parent: SuperParent() {
+ @JsMethod(name = "sum")
  open override fun `fun`(a: Int, b: Int): Int {
   return a + b
  }
 
+ @JsMethod
  open override fun bar(a: Int, b: Int): Int {
   return a * b
  }
 
  @ObjCName("foo")
+ @JsMethod(name = "myFoo")
  open fun foo(
   @ObjCName("withInt") a: Int
  ): Int {
@@ -74,10 +78,12 @@ open class Child: Parent(), MyInterface {
   return a * b + 1
  }
 
+ @JsMethod(name = "myFoo")
  open override fun foo(a: Int): Int {
   return a
  }
 
+ @JsMethod
  open override fun intfFoo(): Int {
   return 1
  }

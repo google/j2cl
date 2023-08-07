@@ -19,6 +19,7 @@ package autoboxing
 
 import javaemul.lang.*
 import java.lang.Void
+import jsinterop.annotations.JsMethod
 import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
@@ -197,6 +198,7 @@ open class AutoBoxing {
  }
 
  @ObjCName("sumWithoutBoxingJsVarargs")
+ @JsMethod
  open fun sumWithoutBoxingJsVarargs(
   vararg @ObjCName("withNSObjectArray") numbers: Any?
  ): Double {

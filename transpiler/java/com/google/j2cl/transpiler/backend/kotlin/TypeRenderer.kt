@@ -50,6 +50,7 @@ fun Renderer.typeSource(type: Type): Source =
     else
       newLineSeparated(
         objCAnnotationSource(typeDeclaration),
+        jsInteropAnnotationsSource(typeDeclaration),
         spaceSeparated(
           inheritanceModifierSource(typeDeclaration),
           classModifiersSource(type),
@@ -158,6 +159,7 @@ private fun Renderer.enumValueSource(field: Field): Source =
     .let { newInstance ->
       newLineSeparated(
         objCAnnotationSource(field.descriptor),
+        jsInteropAnnotationsSource(field.descriptor),
         spaceSeparated(
           join(
             field.descriptor.enumValueDeclarationNameSource,

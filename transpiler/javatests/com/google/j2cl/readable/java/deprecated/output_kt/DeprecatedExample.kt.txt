@@ -18,6 +18,9 @@
 package deprecated
 
 import javaemul.lang.*
+import jsinterop.annotations.JsEnum
+import jsinterop.annotations.JsFunction
+import jsinterop.annotations.JsType
 import kotlin.Any
 import kotlin.Int
 import kotlin.OptIn
@@ -29,6 +32,7 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktDeprecatedDeprecatedExample", exact = true)
+@JsType
 open class DeprecatedExample {
  @JvmField
  @ObjCName("deprecatedInstanceField_")
@@ -53,6 +57,7 @@ open class DeprecatedExample {
   ) {}
  }
 
+ @JsType
  fun interface DeprecatedInterface {
   @ObjCName("doAThing")
   fun doAThing(
@@ -60,6 +65,7 @@ open class DeprecatedExample {
   )
  }
 
+ @JsFunction
  fun interface DeprecatedJsFunction {
   @ObjCName("doAThing")
   fun doAThing(
@@ -67,10 +73,12 @@ open class DeprecatedExample {
   )
  }
 
+ @JsType
  enum class DeprecatedEnum {
   A_VALUE;
  }
 
+ @JsEnum
  enum class DeprecatedJsEnum {
   A_VALUE;
  }

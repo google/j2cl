@@ -18,6 +18,7 @@
 package jsbridgeaccidentaloverride
 
 import javaemul.lang.*
+import jsinterop.annotations.JsType
 import kotlin.Int
 import kotlin.OptIn
 import kotlin.Suppress
@@ -32,6 +33,7 @@ fun interface OtherInterface {
 }
 
 @ObjCName("J2ktJsbridgeaccidentaloverrideMyJsType", exact = true)
+@JsType
 open class MyJsType: OtherInterface {
  constructor()
 

@@ -18,6 +18,8 @@
 package jsignore
 
 import javaemul.lang.*
+import jsinterop.annotations.JsIgnore
+import jsinterop.annotations.JsType
 import kotlin.Any
 import kotlin.Int
 import kotlin.OptIn
@@ -28,6 +30,7 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktJsignoreJsIgnoreExample", exact = true)
+@JsType
 open class JsIgnoreExample {
  @ObjCName("J2ktJsignoreJsIgnoreExampleCompanion", exact = true)
  companion object {
@@ -37,6 +40,7 @@ open class JsIgnoreExample {
 
   @JvmStatic
   @ObjCName("notExportedFunction")
+  @JsIgnore
   fun notExportedFunction() {}
 
   @JvmField
@@ -45,6 +49,7 @@ open class JsIgnoreExample {
 
   @JvmField
   @ObjCName("notExportedField_")
+  @JsIgnore
   var notExportedField: Int = 20
 
   @JvmField

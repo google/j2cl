@@ -21,6 +21,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.dotSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.inNewLine
 import com.google.j2cl.transpiler.backend.kotlin.source.inRoundBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.inRoundBracketsIfNotEmpty
 import com.google.j2cl.transpiler.backend.kotlin.source.indented
 import com.google.j2cl.transpiler.backend.kotlin.source.infix
 import com.google.j2cl.transpiler.backend.kotlin.source.join
@@ -85,7 +86,7 @@ fun todo(source: Source) = join(source("TODO"), inRoundBrackets(source))
 fun annotation(name: Source) = join(at(name))
 
 fun annotation(name: Source, parameter: Source, vararg parameters: Source) =
-  join(at(name), inRoundBrackets(commaSeparated(parameter, *parameters)))
+  join(at(name), inRoundBracketsIfNotEmpty(commaSeparated(parameter, *parameters)))
 
 fun annotation(name: Source, parameters: List<Source>) =
   join(

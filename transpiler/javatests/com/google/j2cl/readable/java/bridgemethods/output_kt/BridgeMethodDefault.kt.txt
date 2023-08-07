@@ -18,6 +18,7 @@
 package bridgemethods
 
 import javaemul.lang.*
+import jsinterop.annotations.JsMethod
 import kotlin.Any
 import kotlin.OptIn
 import kotlin.String
@@ -47,6 +48,7 @@ open class BridgeMethodDefault {
  open class A: BridgeMethodDefault.II {}
 
  interface JJ: BridgeMethodDefault.I<Any?> {
+  @JsMethod
   override fun m(o: Any?) {}
  }
 

@@ -18,6 +18,10 @@
 package jsoptional
 
 import javaemul.lang.*
+import jsinterop.annotations.JsConstructor
+import jsinterop.annotations.JsFunction
+import jsinterop.annotations.JsMethod
+import jsinterop.annotations.JsType
 import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
@@ -35,6 +39,7 @@ import kotlin.native.ObjCName
 @ObjCName("J2ktJsoptionalMain", exact = true)
 open class Main {
  @ObjCName("method1")
+ @JsMethod
  open fun method1(
   @ObjCName("withInt") i1: Int,
   @ObjCName("withJavaLangDouble") d: Double?,
@@ -42,6 +47,7 @@ open class Main {
  ) {}
 
  @ObjCName("method2")
+ @JsMethod
  open fun method2(
   @ObjCName("withNSString") s1: String?,
   @ObjCName("withJavaLangDouble") d: Double?,
@@ -57,6 +63,7 @@ open class Main {
   return@Function s
  }
 
+ @JsConstructor
  constructor(
   @ObjCName("NSString") a: String?
  )
@@ -67,10 +74,12 @@ open class Main {
  ) {}
 
  @ObjCName("testOptionalFunction")
+ @JsMethod
  open fun testOptionalFunction(
   @ObjCName("withJsoptionalMain_Function") f: Main.Function?
  ) {}
 
+ @JsFunction
  fun interface Function {
   @ObjCName("f1")
   fun f1(
@@ -86,6 +95,7 @@ open class Main {
   }
  }
 
+ @JsType
  fun interface I<T> {
   @ObjCName("m")
   fun m(
@@ -94,10 +104,12 @@ open class Main {
   )
  }
 
+ @JsType
  open class TemplatedSubtype<T: String?>: Main.I<T> {
   open override fun m(t: T, o: Any?) {}
  }
 
+ @JsType
  open inner class SpecializedSubtype(
   @ObjCName("Id") a: Any?
  ): Main.I<String?> {

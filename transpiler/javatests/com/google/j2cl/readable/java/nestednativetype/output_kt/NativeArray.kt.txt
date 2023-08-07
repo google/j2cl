@@ -18,6 +18,9 @@
 package nestednativetype
 
 import javaemul.lang.*
+import jsinterop.annotations.JsOverlay
+import jsinterop.annotations.JsPackage
+import jsinterop.annotations.JsType
 import kotlin.Any
 import kotlin.OptIn
 import kotlin.Suppress
@@ -25,8 +28,10 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktNestednativetypeNativeArray", exact = true)
+@JsType(name = "Array", namespace = JsPackage.GLOBAL, isNative = true)
 class NativeArray {
  @ObjCName("a")
+ @JsOverlay
  fun a(): Any? {
   return object : Any() {}
  }

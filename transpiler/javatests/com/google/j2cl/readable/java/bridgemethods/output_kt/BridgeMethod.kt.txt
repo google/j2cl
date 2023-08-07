@@ -18,6 +18,7 @@
 package bridgemethods
 
 import javaemul.lang.*
+import jsinterop.annotations.JsType
 import kotlin.AssertionError
 import kotlin.Comparable
 import kotlin.Double
@@ -134,6 +135,7 @@ open class AccidentalOverrideBridge: ClassWithParameterizedGet<String?>(), Gette
 }
 
 open class TestCase10036 {
+ @JsType
  interface BI3 {
   @ObjCName("get")
   fun get(
@@ -163,6 +165,7 @@ open class TestCase10036 {
 }
 
 open class TestCase102 {
+ @JsType
  fun interface BI2 {
   @ObjCName("set")
   fun set(

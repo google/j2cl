@@ -18,6 +18,11 @@
 package jsvarargs
 
 import javaemul.lang.*
+import jsinterop.annotations.JsConstructor
+import jsinterop.annotations.JsFunction
+import jsinterop.annotations.JsMethod
+import jsinterop.annotations.JsPackage
+import jsinterop.annotations.JsType
 import kotlin.Any
 import kotlin.Array
 import kotlin.Int
@@ -47,6 +52,7 @@ open class Main {
  }
 
  @ObjCName("f3")
+ @JsMethod
  open fun f3(
   @ObjCName("withInt") m: Int,
   vararg @ObjCName("withIntArray") numbers: Int
@@ -55,6 +61,7 @@ open class Main {
  }
 
  @ObjCName("f4")
+ @JsMethod
  open fun f4(
   vararg @ObjCName("withIntArray") numbers: Int
  ): Int {
@@ -161,6 +168,7 @@ open class Main {
  companion object {
   @JvmStatic
   @ObjCName("f1")
+  @JsMethod
   fun f1(
    @ObjCName("withInt") multiplier: Int,
    vararg @ObjCName("withIntArray") numbers: Int
@@ -170,6 +178,7 @@ open class Main {
 
   @JvmStatic
   @ObjCName("f2")
+  @JsMethod
   fun f2(
    vararg @ObjCName("withIntArray") numbers: Int
   ): Int {
@@ -178,6 +187,7 @@ open class Main {
 
   @JvmStatic
   @ObjCName("generics")
+  @JsMethod
   fun <T> generics(
    vararg @ObjCName("withNSObjectArray") elements: T
   ): T {
@@ -187,6 +197,7 @@ open class Main {
 
   @JvmStatic
   @ObjCName("parameterizedType")
+  @JsMethod
   fun parameterizedType(
    vararg @ObjCName("withJavaUtilListArray") elements: MutableList<Main?>?
   ): Main? {
@@ -196,6 +207,7 @@ open class Main {
 
   @JvmStatic
   @ObjCName("parameterizedByT")
+  @JsMethod
   fun <T> parameterizedByT(
    vararg @ObjCName("withJavaUtilListArray") elements: MutableList<T>?
   ): T {
@@ -204,6 +216,7 @@ open class Main {
   }
  }
 
+ @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
  open class NativeObject {
   constructor(
    vararg @ObjCName("NSObjectArray") pars: Any?
@@ -213,6 +226,7 @@ open class Main {
  }
 
  open class SubVarargsConstructorClass: Main.NativeObject {
+  @JsConstructor
   constructor(
    @ObjCName("Int") i: Int,
    vararg @ObjCName("withNSObjectArray") args: Any?
@@ -221,6 +235,7 @@ open class Main {
   }
  }
 
+ @JsFunction
  fun interface Function {
   @ObjCName("f1")
   fun f1(
@@ -230,6 +245,7 @@ open class Main {
  }
 
  @ObjCName("J2ktJsvarargsMain_AbstractMethodWithVarargs", exact = true)
+ @JsType
  abstract class AbstractMethodWithVarargs {
   @ObjCName("abstractMethod")
   abstract fun abstractMethod(
@@ -238,6 +254,7 @@ open class Main {
  }
 
  @ObjCName("J2ktJsvarargsMain_StaticInterfaceMethodWithVarargs", exact = true)
+ @JsType
  interface StaticInterfaceMethodWithVarargs {
   @ObjCName("J2ktJsvarargsMain_StaticInterfaceMethodWithVarargsCompanion", exact = true)
   companion object {
@@ -270,6 +287,7 @@ open class Main {
   }
  }
 
+ @JsFunction
  fun interface GenericFunction<T> {
   @ObjCName("m")
   fun m(

@@ -124,6 +124,7 @@ private fun Renderer.fieldSource(field: Field): Source {
   return newLineSeparated(
     sourceIf(isJvmField) { jvmFieldAnnotationSource() },
     objCAnnotationSource(fieldDescriptor),
+    jsInteropAnnotationsSource(fieldDescriptor),
     spaceSeparated(
       sourceIf(isConst) { source("const") },
       sourceIf(field.isKtLateInit) { source("lateinit") },
@@ -156,6 +157,7 @@ private fun Renderer.methodHeaderSource(method: Method): Source =
     newLineSeparated(
       sourceIf(methodDescriptor.isStatic) { jvmStaticAnnotationSource() },
       objCAnnotationSource(methodDescriptor, methodObjCNames),
+      jsInteropAnnotationsSource(methodDescriptor),
       spaceSeparated(
         methodModifiersSource(methodDescriptor),
         colonSeparated(
