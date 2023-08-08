@@ -1,0 +1,69 @@
+goog.module('some.other.pkg.SomeOtherName.InnerClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class InnerClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!InnerClass} */
+ static $create__() {
+  InnerClass.$clinit();
+  let $instance = new InnerClass();
+  $instance.$ctor__nativeinjection_QualifiedNativeMatch_InnerClass__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nativeinjection_QualifiedNativeMatch_InnerClass__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ // /** @return {number} */
+ // native static getOtherValue() 
+ /** @nodts */
+ static $clinit() {
+  InnerClass.$clinit = () =>{};
+  InnerClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InnerClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(InnerClass, 'nativeinjection.QualifiedNativeMatch$InnerClass');
+
+/* NATIVE.JS EPILOG */
+
+const nativeinjection_QualifiedNativeMatch_InnerClass = InnerClass;
+
+// Copyright 2023 Google Inc.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+/** @return {number} */
+InnerClass.getOtherValue = function() {
+  return 1;
+};
+
+
+exports = InnerClass;
+
+//# sourceMappingURL=QualifiedNativeMatch$InnerClass.js.map

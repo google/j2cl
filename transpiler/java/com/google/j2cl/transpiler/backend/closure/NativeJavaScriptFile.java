@@ -15,17 +15,7 @@
  */
 package com.google.j2cl.transpiler.backend.closure;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-
-import com.google.common.io.MoreFiles;
-import com.google.j2cl.common.Problems;
-import com.google.j2cl.common.Problems.FatalError;
-import com.google.j2cl.common.SourceUtils.FileInfo;
-import java.io.IOException;
-import java.nio.file.Paths;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.nio.file.Path;
 
 /**
  * NativeJavaScriptFile contains information about native javascript files that is used to output
@@ -34,7 +24,6 @@ import java.util.Map;
 public class NativeJavaScriptFile {
   private final String relativePath;
   private final String content;
-  private boolean used = false;
 
   public static final String NATIVE_EXTENSION = ".native.js";
 
@@ -54,6 +43,11 @@ public class NativeJavaScriptFile {
     return relativePath.substring(0, relativePath.lastIndexOf(NATIVE_EXTENSION));
   }
 
+  /** Returns the FQN if the filename appears to be of the form "<package>.<class>.native.js". */
+  public String getFullyQualifiedName() {
+    return Path.of(getRelativePathWithoutExtension()).getFileName().toString();
+  }
+
   public String getContent() {
     return content;
   }
@@ -61,36 +55,5 @@ public class NativeJavaScriptFile {
   @Override
   public String toString() {
     return relativePath;
-  }
-
-  /** Can only set to used. */
-  public void setUsed() {
-    used = true;
-  }
-
-  public boolean wasUsed() {
-    return used;
-  }
-
-  /**
-   * Given a list of native files, return a map of file paths to NativeJavaScriptFile objects of the
-   * form:
-   *
-   * <p>/com/google/example/nativejsfile1 => NativeJavaScriptFile
-   *
-   * <p>/com/google/example/nativejsfile2 => NativeJavaScriptFile
-   */
-  public static Map<String, NativeJavaScriptFile> getMap(List<FileInfo> files, Problems problems) {
-    Map<String, NativeJavaScriptFile> loadedFilesByPath = new LinkedHashMap<>();
-    for (FileInfo file : files) {
-      try {
-        String content = MoreFiles.asCharSource(Paths.get(file.sourcePath()), UTF_8).read();
-        NativeJavaScriptFile nativeFile = new NativeJavaScriptFile(file.targetPath(), content);
-        loadedFilesByPath.put(nativeFile.getRelativePathWithoutExtension(), nativeFile);
-      } catch (IOException e) {
-        problems.fatal(FatalError.CANNOT_OPEN_FILE, e.toString());
-      }
-    }
-    return loadedFilesByPath;
   }
 }

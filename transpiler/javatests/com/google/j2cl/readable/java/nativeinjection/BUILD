@@ -12,6 +12,7 @@ readable_example(
     srcs = glob([
         "*.java",
         "*.native.js",
+        "native_srcs/*.native.js",
     ]),
     # TODO(b/202515129): Allow dependencies on native code (like js & iOS) in J2KT.
     generate_kt_readables = False,

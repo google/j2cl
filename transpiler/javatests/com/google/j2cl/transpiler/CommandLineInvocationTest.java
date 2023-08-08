@@ -167,6 +167,27 @@ public class CommandLineInvocationTest extends TestCase {
         .assertTranspileSucceeds();
   }
 
+  public void testNativeJsIsFullyQualified() {
+    newTesterWithDefaults()
+        .addCompilationUnit(
+            "nativeclasstest.NativeClass",
+            "import jsinterop.annotations.*;",
+            "@JsType(name = \"SomethingElse\")",
+            "public class NativeClass {",
+            "  @JsMethod public native void nativeInstanceMethod();",
+            "  public static class InnerClass {",
+            "    @JsMethod public native void nativeInstanceMethod();",
+            "  }",
+            "}")
+        .addFile(
+            "this/can/be/anywhere/nativeclasstest.NativeClass.native.js",
+            "NativeClass.prototype.nativeInstanceMethod = function () {}")
+        .addFile(
+            "somewhere/else/nativeclasstest.NativeClass$InnerClass.native.js",
+            "InnerClass.prototype.nativeInstanceMethod = function () {}")
+        .assertTranspileSucceeds();
+  }
+
   public void testNoMatchingSource() {
     newTesterWithDefaults()
         .addCompilationUnit(
@@ -251,6 +272,27 @@ public class CommandLineInvocationTest extends TestCase {
         .assertTranspileFails()
         .assertErrorsWithoutSourcePosition(
             "Unused native file 'nativeclasstest/ExtraClass.native.js'.");
+  }
+
+  public void testMultipleNativeSourceMatches() {
+    newTesterWithDefaults()
+        .addCompilationUnit(
+            "nativeclasstest.NativeClass",
+            "import jsinterop.annotations.*;",
+            "public class NativeClass {",
+            "  @JsMethod public native void nativeInstanceMethod();",
+            "}")
+        .addFileToZipFile(
+            "native.zip",
+            "nativeclasstest/NativeClass.native.js",
+            "NativeClass.prototype.nativeInstanceMethod = function () {}")
+        .addFileToZipFile(
+            "native.zip",
+            "nativeclasstest/nativeclasstest.NativeClass.native.js",
+            "NativeClass.prototype.nativeInstanceMethod = function () {}")
+        .assertTranspileFails()
+        .assertErrorsWithoutSourcePosition(
+            "Unused native file 'nativeclasstest/NativeClass.native.js'.");
   }
 
   public void testOutputsToDirectory() throws IOException {

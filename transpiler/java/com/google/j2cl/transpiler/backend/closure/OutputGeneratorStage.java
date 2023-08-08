@@ -22,7 +22,6 @@ import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourcePosition;
-import com.google.j2cl.common.SourceUtils;
 import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Library;
@@ -72,8 +71,8 @@ public class OutputGeneratorStage {
     // our output would be unstable. Actually this one can't actually destabilize output but since
     // it's being safely iterated over now it's best to guard against it being unsafely iterated
     // over in the future.
-    Map<String, NativeJavaScriptFile> nativeFilesByPath =
-        NativeJavaScriptFile.getMap(nativeJavaScriptFiles, problems);
+    NativeJavaScriptFileResolver nativeJavaScriptFileResolver =
+        NativeJavaScriptFileResolver.create(nativeJavaScriptFiles, problems);
     LibraryInfoBuilder libraryInfoBuilder = new LibraryInfoBuilder();
 
     for (CompilationUnit compilationUnit : library.getCompilationUnits()) {
@@ -87,11 +86,10 @@ public class OutputGeneratorStage {
         NativeJavaScriptFile matchingNativeFile =
             compilationUnit.isSynthetic()
                 ? null
-                : getMatchingNativeFile(nativeFilesByPath, compilationUnit, type);
+                : nativeJavaScriptFileResolver.getMatchingNativeFile(compilationUnit, type);
 
         if (matchingNativeFile != null) {
           jsImplGenerator.setNativeSource(matchingNativeFile);
-          matchingNativeFile.setUsed();
 
           // Native JsTypes are mere references to external JavaScript types, adding native code
           // through native.js files does not make sense. Non-native JsEnums on the other hand are
@@ -174,11 +172,7 @@ public class OutputGeneratorStage {
     }
 
     // Error if any of the native implementation files were not used.
-    for (NativeJavaScriptFile file : nativeFilesByPath.values()) {
-      if (!file.wasUsed()) {
-        problems.error("Unused native file '%s'.", file);
-      }
-    }
+    nativeJavaScriptFileResolver.checkAllFilesUsed();
   }
 
   private static final String SOURCE_MAP_SUFFIX = ".js.map";
@@ -246,34 +240,5 @@ public class OutputGeneratorStage {
   private static String getPackageRelativePath(TypeDeclaration typeDeclaration) {
     return OutputUtils.getPackageRelativePath(
         typeDeclaration.getPackageName(), typeDeclaration.getSimpleBinaryName());
-  }
-
-  private static NativeJavaScriptFile getMatchingNativeFile(
-      Map<String, NativeJavaScriptFile> nativeFilesByPath,
-      CompilationUnit j2clCompilationUnit,
-      Type type) {
-    checkArgument(
-        !j2clCompilationUnit.isSynthetic(),
-        "Synthetic CompilationUnit cannot have a corresponding .native.js file.");
-
-    // Locate the files that have a package path relative to the root according to Java convention.
-    // This is useful when the files are in different directories on disk.
-    TypeDeclaration typeDeclaration = type.getUnderlyingTypeDeclaration();
-    String typeRelativePath = getPackageRelativePath(typeDeclaration);
-
-    NativeJavaScriptFile matchingNativeFile = nativeFilesByPath.get(typeRelativePath);
-    if (matchingNativeFile != null) {
-      return matchingNativeFile;
-    }
-
-    String typeJavaRootRelativePath =
-        SourceUtils.getJavaPath(getAbsolutePath(j2clCompilationUnit, typeDeclaration));
-    return nativeFilesByPath.get(typeJavaRootRelativePath);
-  }
-
-  /** Returns the absolute binary path for a given type. */
-  private static String getAbsolutePath(
-      CompilationUnit compilationUnit, TypeDeclaration typeDeclaration) {
-    return compilationUnit.getDirectoryPath() + '/' + typeDeclaration.getSimpleBinaryName();
   }
 }
