@@ -180,6 +180,7 @@ def readable_example(
 
         if build_kt_native_readables:
             j2kt_apple_framework(
+                testonly = 1,
                 name = "readable_j2kt_test_framework",
                 deps = [":readable-j2kt-native"],
                 tags = ["j2kt", "ios", "manual"],
@@ -212,6 +213,7 @@ def readable_example(
 
 def _readable_diff_test(name, target, dir_out, tags):
     _golden_output(
+        testonly = 1,
         name = name,
         target = target,
     )

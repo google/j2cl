@@ -1219,6 +1219,7 @@ class JdtEnvironment {
             .setAnnotatedWithFunctionalInterface(isAnnotatedWithFunctionalInterface(typeBinding))
             .setAnnotatedWithAutoValue(isAnnotatedWithAutoValue(typeBinding))
             .setAnnotatedWithAutoValueBuilder(isAnnotatedWithAutoValueBuilder(typeBinding))
+            .setAnnotatedWithJUnitRunWith(isAnnotatedWithJUnitRunWith(typeBinding))
             .setJsType(JsInteropUtils.isJsType(typeBinding))
             .setJsEnumInfo(JsInteropUtils.getJsEnumInfo(typeBinding))
             .setWasmInfo(getWasmInfo(typeBinding))
@@ -1293,6 +1294,10 @@ class JdtEnvironment {
 
   private static boolean isAnnotatedWithAutoValueBuilder(ITypeBinding typeBinding) {
     return JdtAnnotationUtils.hasAnnotation(typeBinding, "com.google.auto.value.AutoValue.Builder");
+  }
+
+  private static boolean isAnnotatedWithJUnitRunWith(ITypeBinding typeBinding) {
+    return JdtAnnotationUtils.hasAnnotation(typeBinding, "org.junit.runner.RunWith");
   }
 
   private static boolean isAnnotatedWithHasNoSideEffects(IMethodBinding methodBinding) {

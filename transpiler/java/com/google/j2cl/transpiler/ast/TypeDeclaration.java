@@ -259,6 +259,9 @@ public abstract class TypeDeclaration
   /** Returns whether the described type has the @AutoValue.Builder annotation. */
   public abstract boolean isAnnotatedWithAutoValueBuilder();
 
+  /** Returns whether the described type has the JUnit @RunWith annotation. */
+  public abstract boolean isAnnotatedWithJUnitRunWith();
+
   @Memoized
   public boolean isJsFunctionImplementation() {
     return isClass()
@@ -790,6 +793,7 @@ public abstract class TypeDeclaration
         .setAnnotatedWithFunctionalInterface(false)
         .setAnnotatedWithAutoValue(false)
         .setAnnotatedWithAutoValueBuilder(false)
+        .setAnnotatedWithJUnitRunWith(false)
         .setJsFunctionInterface(false)
         .setJsType(false)
         .setLocal(false)
@@ -849,6 +853,8 @@ public abstract class TypeDeclaration
     public abstract Builder setAnnotatedWithAutoValue(boolean annotatedWithAutoValue);
 
     public abstract Builder setAnnotatedWithAutoValueBuilder(boolean annotatedWithAutoValueBuilder);
+
+    public abstract Builder setAnnotatedWithJUnitRunWith(boolean annotatedWithJUnitRunWith);
 
     public abstract Builder setJsFunctionInterface(boolean isJsFunctionInterface);
 
