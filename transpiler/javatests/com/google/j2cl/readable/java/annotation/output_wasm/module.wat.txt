@@ -240,7 +240,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $annotation.Main))
- (local.set $this (ref.cast_static $annotation.Main (local.get $this.untyped)))
+ (local.set $this (ref.cast $annotation.Main (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@annotation.Main) ))
  )
@@ -299,7 +299,7 @@
  ;;@ annotation/Main.java:32:8
  (local $foo (ref null $java.lang.Object))
  (local $this (ref null $annotation.Main.Bar))
- (local.set $this (ref.cast_static $annotation.Main.Bar (local.get $this.untyped)))
+ (local.set $this (ref.cast $annotation.Main.Bar (local.get $this.untyped)))
  (block
   ;;@ annotation/Main.java:33:6
   (local.set $foo (ref.null $java.lang.Object))
@@ -348,7 +348,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $annotation.Main.Bar))
- (local.set $this (ref.cast_static $annotation.Main.Bar (local.get $this.untyped)))
+ (local.set $this (ref.cast $annotation.Main.Bar (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@annotation.Main.Bar) ))
  )

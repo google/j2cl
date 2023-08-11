@@ -323,7 +323,7 @@
  (result i32)
  ;;@ packageprivatemethods/package1/SuperParent.java:20:6
  (local $this (ref null $packageprivatemethods.package1.SuperParent))
- (local.set $this (ref.cast_static $packageprivatemethods.package1.SuperParent (local.get $this.untyped)))
+ (local.set $this (ref.cast $packageprivatemethods.package1.SuperParent (local.get $this.untyped)))
  (block
   ;;@ packageprivatemethods/package1/SuperParent.java:21:4
   (return (i32.sub (local.get $a) (i32.const 1)))
@@ -340,7 +340,7 @@
  (result i32)
  ;;@ packageprivatemethods/package1/SuperParent.java:25:6
  (local $this (ref null $packageprivatemethods.package1.SuperParent))
- (local.set $this (ref.cast_static $packageprivatemethods.package1.SuperParent (local.get $this.untyped)))
+ (local.set $this (ref.cast $packageprivatemethods.package1.SuperParent (local.get $this.untyped)))
  (block
   ;;@ packageprivatemethods/package1/SuperParent.java:26:4
   (return (i32.add (local.get $a) (local.get $b)))
@@ -357,7 +357,7 @@
  (result i32)
  ;;@ packageprivatemethods/package1/SuperParent.java:29:6
  (local $this (ref null $packageprivatemethods.package1.SuperParent))
- (local.set $this (ref.cast_static $packageprivatemethods.package1.SuperParent (local.get $this.untyped)))
+ (local.set $this (ref.cast $packageprivatemethods.package1.SuperParent (local.get $this.untyped)))
  (block
   ;;@ packageprivatemethods/package1/SuperParent.java:30:4
   (return (i32.add (local.get $a) (local.get $b)))
@@ -375,7 +375,7 @@
  (result i32)
  ;;@ packageprivatemethods/package1/SuperParent.java:34:6
  (local $this (ref null $packageprivatemethods.package1.SuperParent))
- (local.set $this (ref.cast_static $packageprivatemethods.package1.SuperParent (local.get $this.untyped)))
+ (local.set $this (ref.cast $packageprivatemethods.package1.SuperParent (local.get $this.untyped)))
  (block
   ;;@ packageprivatemethods/package1/SuperParent.java:35:4
   (return (i32.add (i32.add (local.get $a) (local.get $b)) (local.get $c)))
@@ -420,7 +420,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageprivatemethods.package1.SuperParent))
- (local.set $this (ref.cast_static $packageprivatemethods.package1.SuperParent (local.get $this.untyped)))
+ (local.set $this (ref.cast $packageprivatemethods.package1.SuperParent (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@packageprivatemethods.package1.SuperParent) ))
  )
@@ -462,7 +462,7 @@
  (result i32)
  ;;@ packageprivatemethods/package1/Parent.java:21:6
  (local $this (ref null $packageprivatemethods.package1.Parent))
- (local.set $this (ref.cast_static $packageprivatemethods.package1.Parent (local.get $this.untyped)))
+ (local.set $this (ref.cast $packageprivatemethods.package1.Parent (local.get $this.untyped)))
  (block
   ;;@ packageprivatemethods/package1/Parent.java:22:4
   (return (local.get $a))
@@ -480,7 +480,7 @@
  (result i32)
  ;;@ packageprivatemethods/package1/Parent.java:18:22
  (local $this (ref null $packageprivatemethods.package1.Parent))
- (local.set $this (ref.cast_static $packageprivatemethods.package1.Parent (local.get $this.untyped)))
+ (local.set $this (ref.cast $packageprivatemethods.package1.Parent (local.get $this.untyped)))
  (block
   ;;@ packageprivatemethods/package1/Parent.java:18:22
   (return (call_ref $function.m_exposedAbstractInParent__int__int__int__int (ref.as_non_null (local.get $this))(local.get $arg0)(local.get $arg1)(local.get $arg2)(struct.get $packageprivatemethods.package1.Parent.vtable $m_exposedAbstractInParent__int__int__int__int (struct.get $packageprivatemethods.package1.Parent $vtable(local.get $this)))))
@@ -569,7 +569,7 @@
  (result i32)
  ;;@ packageprivatemethods/package1/Child.java:22:13
  (local $this (ref null $packageprivatemethods.package1.Child))
- (local.set $this (ref.cast_static $packageprivatemethods.package1.Child (local.get $this.untyped)))
+ (local.set $this (ref.cast $packageprivatemethods.package1.Child (local.get $this.untyped)))
  (block
   ;;@ packageprivatemethods/package1/Child.java:23:4
   (return (i32.add (local.get $a) (i32.const 1)))
@@ -586,7 +586,7 @@
  (result i32)
  ;;@ packageprivatemethods/package1/Child.java:28:13
  (local $this (ref null $packageprivatemethods.package1.Child))
- (local.set $this (ref.cast_static $packageprivatemethods.package1.Child (local.get $this.untyped)))
+ (local.set $this (ref.cast $packageprivatemethods.package1.Child (local.get $this.untyped)))
  (block
   ;;@ packageprivatemethods/package1/Child.java:29:4
   (return (i32.add (i32.add (local.get $a) (local.get $b)) (i32.const 1)))
@@ -603,7 +603,7 @@
  (result i32)
  ;;@ packageprivatemethods/package1/Child.java:35:13
  (local $this (ref null $packageprivatemethods.package1.Child))
- (local.set $this (ref.cast_static $packageprivatemethods.package1.Child (local.get $this.untyped)))
+ (local.set $this (ref.cast $packageprivatemethods.package1.Child (local.get $this.untyped)))
  (block
   ;;@ packageprivatemethods/package1/Child.java:36:4
   (return (i32.add (i32.add (local.get $a) (local.get $b)) (i32.const 1)))
@@ -621,7 +621,7 @@
  (result i32)
  ;;@ packageprivatemethods/package1/Child.java:41:13
  (local $this (ref null $packageprivatemethods.package1.Child))
- (local.set $this (ref.cast_static $packageprivatemethods.package1.Child (local.get $this.untyped)))
+ (local.set $this (ref.cast $packageprivatemethods.package1.Child (local.get $this.untyped)))
  (block
   ;;@ packageprivatemethods/package1/Child.java:42:4
   (return (i32.add (i32.add (i32.add (local.get $a) (local.get $b)) (local.get $c)) (i32.const 2)))
@@ -638,7 +638,7 @@
  (result i32)
  ;;@ packageprivatemethods/package1/Child.java:18:13
  (local $this (ref null $packageprivatemethods.package1.Child))
- (local.set $this (ref.cast_static $packageprivatemethods.package1.Child (local.get $this.untyped)))
+ (local.set $this (ref.cast $packageprivatemethods.package1.Child (local.get $this.untyped)))
  (block
   ;;@ packageprivatemethods/package1/Child.java:18:13
   (return (call_ref $function.m_exposedInChild__int__int__int (ref.as_non_null (local.get $this))(local.get $arg0)(local.get $arg1)(struct.get $packageprivatemethods.package1.Child.vtable $m_exposedInChild__int__int__int (struct.get $packageprivatemethods.package1.Child $vtable(local.get $this)))))
@@ -655,7 +655,7 @@
  (result i32)
  ;;@ packageprivatemethods/package1/Child.java:18:13
  (local $this (ref null $packageprivatemethods.package1.Child))
- (local.set $this (ref.cast_static $packageprivatemethods.package1.Child (local.get $this.untyped)))
+ (local.set $this (ref.cast $packageprivatemethods.package1.Child (local.get $this.untyped)))
  (block
   ;;@ packageprivatemethods/package1/Child.java:18:13
   (return (call_ref $function.m_exposedInChildWithInterface__int__int__int (ref.as_non_null (local.get $this))(local.get $arg0)(local.get $arg1)(struct.get $packageprivatemethods.package1.Child.vtable $m_exposedInChildWithInterface__int__int__int (struct.get $packageprivatemethods.package1.Child $vtable(local.get $this)))))
@@ -671,7 +671,7 @@
  (result i32)
  ;;@ packageprivatemethods/package1/Child.java:18:13
  (local $this (ref null $packageprivatemethods.package1.Child))
- (local.set $this (ref.cast_static $packageprivatemethods.package1.Child (local.get $this.untyped)))
+ (local.set $this (ref.cast $packageprivatemethods.package1.Child (local.get $this.untyped)))
  (block
   ;;@ packageprivatemethods/package1/Child.java:18:13
   (return (call_ref $function.m_overrideInParentExposedInChild__int__int (ref.as_non_null (local.get $this))(local.get $arg0)(struct.get $packageprivatemethods.package1.Child.vtable $m_overrideInParentExposedInChild__int__int (struct.get $packageprivatemethods.package1.Child $vtable(local.get $this)))))
@@ -716,7 +716,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageprivatemethods.package1.Child))
- (local.set $this (ref.cast_static $packageprivatemethods.package1.Child (local.get $this.untyped)))
+ (local.set $this (ref.cast $packageprivatemethods.package1.Child (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@packageprivatemethods.package1.Child) ))
  )
@@ -758,7 +758,7 @@
  (result i32)
  ;;@ packageprivatemethods/package2/SubParent.java:21:6
  (local $this (ref null $packageprivatemethods.package2.SubParent))
- (local.set $this (ref.cast_static $packageprivatemethods.package2.SubParent (local.get $this.untyped)))
+ (local.set $this (ref.cast $packageprivatemethods.package2.SubParent (local.get $this.untyped)))
  (block
   ;;@ packageprivatemethods/package2/SubParent.java:22:4
   (return (local.get $a))
@@ -847,7 +847,7 @@
  (result i32)
  ;;@ packageprivatemethods/package2/SubChild.java:22:13
  (local $this (ref null $packageprivatemethods.package2.SubChild))
- (local.set $this (ref.cast_static $packageprivatemethods.package2.SubChild (local.get $this.untyped)))
+ (local.set $this (ref.cast $packageprivatemethods.package2.SubChild (local.get $this.untyped)))
  (block
   ;;@ packageprivatemethods/package2/SubChild.java:23:4
   (return (i32.add (local.get $a) (i32.const 3)))
@@ -892,7 +892,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageprivatemethods.package2.SubChild))
- (local.set $this (ref.cast_static $packageprivatemethods.package2.SubChild (local.get $this.untyped)))
+ (local.set $this (ref.cast $packageprivatemethods.package2.SubChild (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@packageprivatemethods.package2.SubChild) ))
  )

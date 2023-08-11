@@ -105,7 +105,7 @@
  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:19:14
  (local $localVar i32)
  (local $this (ref null $localclasswithconstructor.LocalClassWithConstructor))
- (local.set $this (ref.cast_static $localclasswithconstructor.LocalClassWithConstructor (local.get $this.untyped)))
+ (local.set $this (ref.cast $localclasswithconstructor.LocalClassWithConstructor (local.get $this.untyped)))
  (block
   ;;@ localclasswithconstructor/LocalClassWithConstructor.java:20:4
   (local.set $localVar (i32.const 1))
@@ -152,7 +152,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localclasswithconstructor.LocalClassWithConstructor))
- (local.set $this (ref.cast_static $localclasswithconstructor.LocalClassWithConstructor (local.get $this.untyped)))
+ (local.set $this (ref.cast $localclasswithconstructor.LocalClassWithConstructor (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor) ))
  )
@@ -287,7 +287,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass))
- (local.set $this (ref.cast_static $localclasswithconstructor.LocalClassWithConstructor.1LocalClass (local.get $this.untyped)))
+ (local.set $this (ref.cast $localclasswithconstructor.LocalClassWithConstructor.1LocalClass (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor.1LocalClass) ))
  )

@@ -217,7 +217,7 @@
  ;;@ genericanddefaultmethods/ConcreteClass.java:25:14
  (local $$qualifier (ref null $java.io.PrintStream))
  (local $this (ref null $genericanddefaultmethods.GenericClass))
- (local.set $this (ref.cast_static $genericanddefaultmethods.GenericClass (local.get $this.untyped)))
+ (local.set $this (ref.cast $genericanddefaultmethods.GenericClass (local.get $this.untyped)))
  (block
   (block
    ;;@ genericanddefaultmethods/ConcreteClass.java:26:4
@@ -269,7 +269,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $genericanddefaultmethods.GenericClass))
- (local.set $this (ref.cast_static $genericanddefaultmethods.GenericClass (local.get $this.untyped)))
+ (local.set $this (ref.cast $genericanddefaultmethods.GenericClass (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@genericanddefaultmethods.GenericClass) ))
  )
@@ -338,7 +338,7 @@
  (param $arg0 (ref null $java.lang.String))
  ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
  (local $this (ref null $genericanddefaultmethods.ConcreteClass))
- (local.set $this (ref.cast_static $genericanddefaultmethods.ConcreteClass (local.get $this.untyped)))
+ (local.set $this (ref.cast $genericanddefaultmethods.ConcreteClass (local.get $this.untyped)))
  (block
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
   (call $m_foo__java_lang_Object__void@genericanddefaultmethods.GenericClass (ref.as_non_null (local.get $this))(local.get $arg0))
@@ -385,7 +385,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $genericanddefaultmethods.ConcreteClass))
- (local.set $this (ref.cast_static $genericanddefaultmethods.ConcreteClass (local.get $this.untyped)))
+ (local.set $this (ref.cast $genericanddefaultmethods.ConcreteClass (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@genericanddefaultmethods.ConcreteClass) ))
  )

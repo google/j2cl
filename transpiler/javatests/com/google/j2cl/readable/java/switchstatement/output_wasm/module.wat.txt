@@ -146,7 +146,7 @@
  (local $$expression_1 i32)
  (local $$qualifier (ref null $switchstatement.Numbers))
  (local $this (ref null $switchstatement.SwitchStatement))
- (local.set $this (ref.cast_static $switchstatement.SwitchStatement (local.get $this.untyped)))
+ (local.set $this (ref.cast $switchstatement.SwitchStatement (local.get $this.untyped)))
  (block
   ;;@ switchstatement/SwitchStatement.java:27:4
   (block $SWITCH.BREAK
@@ -1280,7 +1280,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $switchstatement.SwitchStatement))
- (local.set $this (ref.cast_static $switchstatement.SwitchStatement (local.get $this.untyped)))
+ (local.set $this (ref.cast $switchstatement.SwitchStatement (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@switchstatement.SwitchStatement) ))
  )
@@ -1379,7 +1379,7 @@
    )
   )
   ;;@ switchstatement/SwitchStatement.java:18:5
-  (return (ref.cast_static $switchstatement.Numbers (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__switchstatement_Numbers_))))
+  (return (ref.cast null $switchstatement.Numbers (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__switchstatement_Numbers_))))
  )
 )
 
@@ -1438,7 +1438,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $switchstatement.Numbers))
- (local.set $this (ref.cast_static $switchstatement.Numbers (local.get $this.untyped)))
+ (local.set $this (ref.cast $switchstatement.Numbers (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@switchstatement.Numbers) ))
  )

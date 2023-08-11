@@ -214,12 +214,12 @@
  (local $length1 i32)
  (local $length2 i32)
  (local $this (ref null $devirtualizedcalls.ArrayCalls))
- (local.set $this (ref.cast_static $devirtualizedcalls.ArrayCalls (local.get $this.untyped)))
+ (local.set $this (ref.cast $devirtualizedcalls.ArrayCalls (local.get $this.untyped)))
  (block
   ;;@ devirtualizedcalls/ArrayCalls.java:20:4
   (local.set $array2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@devirtualizedcalls.ArrayCalls-1 (i32.const 0) (i32.const 2)))(i32.const -1)))
   ;;@ devirtualizedcalls/ArrayCalls.java:22:4
-  (local.set $length1 (struct.get $javaemul.internal.WasmArray $f_length__javaemul_internal_WasmArray (ref.cast_static $javaemul.internal.WasmArray.OfObject (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject (local.get $array2d)) (i32.const 0)))))
+  (local.set $length1 (struct.get $javaemul.internal.WasmArray $f_length__javaemul_internal_WasmArray (ref.cast null $javaemul.internal.WasmArray.OfObject (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject (local.get $array2d)) (i32.const 0)))))
   ;;@ devirtualizedcalls/ArrayCalls.java:23:4
   (local.set $length2 (struct.get $javaemul.internal.WasmArray $f_length__javaemul_internal_WasmArray (local.get $array2d)))
  )
@@ -263,7 +263,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $devirtualizedcalls.ArrayCalls))
- (local.set $this (ref.cast_static $devirtualizedcalls.ArrayCalls (local.get $this.untyped)))
+ (local.set $this (ref.cast $devirtualizedcalls.ArrayCalls (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@devirtualizedcalls.ArrayCalls) ))
  )
@@ -319,10 +319,10 @@
  (param $cs (ref null $java.lang.Object))
  ;;@ devirtualizedcalls/CharSequenceCalls.java:19:14
  (local $this (ref null $devirtualizedcalls.CharSequenceCalls))
- (local.set $this (ref.cast_static $devirtualizedcalls.CharSequenceCalls (local.get $this.untyped)))
+ (local.set $this (ref.cast $devirtualizedcalls.CharSequenceCalls (local.get $this.untyped)))
  (block
   ;;@ devirtualizedcalls/CharSequenceCalls.java:20:4
-  (drop (call_ref $function.m_charAt__int__char (ref.as_non_null (local.get $cs))(i32.const 0)(struct.get $java.lang.CharSequence.vtable $m_charAt__int__char (ref.cast_static $java.lang.CharSequence.vtable (struct.get $itable $slot2 (struct.get $java.lang.Object $itable (local.get $cs)))))))
+  (drop (call_ref $function.m_charAt__int__char (ref.as_non_null (local.get $cs))(i32.const 0)(struct.get $java.lang.CharSequence.vtable $m_charAt__int__char (ref.cast $java.lang.CharSequence.vtable (struct.get $itable $slot2 (struct.get $java.lang.Object $itable (local.get $cs)))))))
  )
 )
 (elem declare func $m_test__java_lang_CharSequence__void@devirtualizedcalls.CharSequenceCalls)
@@ -334,7 +334,7 @@
  ;;@ devirtualizedcalls/CharSequenceCalls.java:23:14
  (local $s (ref null $java.lang.String))
  (local $this (ref null $devirtualizedcalls.CharSequenceCalls))
- (local.set $this (ref.cast_static $devirtualizedcalls.CharSequenceCalls (local.get $this.untyped)))
+ (local.set $this (ref.cast $devirtualizedcalls.CharSequenceCalls (local.get $this.untyped)))
  (block
   ;;@ devirtualizedcalls/CharSequenceCalls.java:24:4
   (local.set $s (call $function.no.side.effects.$getString_|s|__java_lang_String (ref.func $$getString_|s|__java_lang_String@devirtualizedcalls.CharSequenceCalls) ))
@@ -381,7 +381,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $devirtualizedcalls.CharSequenceCalls))
- (local.set $this (ref.cast_static $devirtualizedcalls.CharSequenceCalls (local.get $this.untyped)))
+ (local.set $this (ref.cast $devirtualizedcalls.CharSequenceCalls (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@devirtualizedcalls.CharSequenceCalls) ))
  )
@@ -463,7 +463,7 @@
  (local $c (ref null $java.lang.Character))
  (local $bool (ref null $java.lang.Boolean))
  (local $this (ref null $devirtualizedcalls.NumberCalls))
- (local.set $this (ref.cast_static $devirtualizedcalls.NumberCalls (local.get $this.untyped)))
+ (local.set $this (ref.cast $devirtualizedcalls.NumberCalls (local.get $this.untyped)))
  (block
   ;;@ devirtualizedcalls/NumberCalls.java:20:4
   (local.set $i (call $$create__int@java.lang.Integer (i32.const 1)))
@@ -682,7 +682,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $devirtualizedcalls.NumberCalls))
- (local.set $this (ref.cast_static $devirtualizedcalls.NumberCalls (local.get $this.untyped)))
+ (local.set $this (ref.cast $devirtualizedcalls.NumberCalls (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@devirtualizedcalls.NumberCalls) ))
  )
@@ -739,7 +739,7 @@
  (local $object (ref null $java.lang.Object))
  (local $objectCalls (ref null $javaemul.internal.WasmArray.OfObject))
  (local $this (ref null $devirtualizedcalls.ObjectCalls))
- (local.set $this (ref.cast_static $devirtualizedcalls.ObjectCalls (local.get $this.untyped)))
+ (local.set $this (ref.cast $devirtualizedcalls.ObjectCalls (local.get $this.untyped)))
  (block
   ;;@ devirtualizedcalls/ObjectCalls.java:21:4
   (local.set $object (call $$create__@java.lang.Object ))
@@ -771,7 +771,7 @@
  (param $this.untyped (ref $java.lang.Object))
  ;;@ devirtualizedcalls/ObjectCalls.java:36:14
  (local $this (ref null $devirtualizedcalls.ObjectCalls))
- (local.set $this (ref.cast_static $devirtualizedcalls.ObjectCalls (local.get $this.untyped)))
+ (local.set $this (ref.cast $devirtualizedcalls.ObjectCalls (local.get $this.untyped)))
  (block
   ;;@ devirtualizedcalls/ObjectCalls.java:37:4
   (drop (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $this))(call $$create__@java.lang.Object )(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(local.get $this)))))
@@ -800,7 +800,7 @@
  (result i32)
  ;;@ devirtualizedcalls/ObjectCalls.java:48:17
  (local $this (ref null $devirtualizedcalls.ObjectCalls))
- (local.set $this (ref.cast_static $devirtualizedcalls.ObjectCalls (local.get $this.untyped)))
+ (local.set $this (ref.cast $devirtualizedcalls.ObjectCalls (local.get $this.untyped)))
  (block
   ;;@ devirtualizedcalls/ObjectCalls.java:49:4
   (return (i32.eqz (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $this))(call $$create__@java.lang.Object )(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(local.get $this))))))
@@ -845,7 +845,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $devirtualizedcalls.ObjectCalls))
- (local.set $this (ref.cast_static $devirtualizedcalls.ObjectCalls (local.get $this.untyped)))
+ (local.set $this (ref.cast $devirtualizedcalls.ObjectCalls (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@devirtualizedcalls.ObjectCalls) ))
  )
@@ -905,7 +905,7 @@
  (local $trimmed (ref null $java.lang.String))
  (local $newString (ref null $java.lang.String))
  (local $this (ref null $devirtualizedcalls.StringCalls))
- (local.set $this (ref.cast_static $devirtualizedcalls.StringCalls (local.get $this.untyped)))
+ (local.set $this (ref.cast $devirtualizedcalls.StringCalls (local.get $this.untyped)))
  (block
   ;;@ devirtualizedcalls/StringCalls.java:23:4
   (local.set $literal (call $function.no.side.effects.$getString_|String|__java_lang_String (ref.func $$getString_|String|__java_lang_String@devirtualizedcalls.StringCalls) ))
@@ -958,7 +958,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $devirtualizedcalls.StringCalls))
- (local.set $this (ref.cast_static $devirtualizedcalls.StringCalls (local.get $this.untyped)))
+ (local.set $this (ref.cast $devirtualizedcalls.StringCalls (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@devirtualizedcalls.StringCalls) ))
  )

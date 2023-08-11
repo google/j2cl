@@ -216,7 +216,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $abstractinnerclass.InnerClasses))
- (local.set $this (ref.cast_static $abstractinnerclass.InnerClasses (local.get $this.untyped)))
+ (local.set $this (ref.cast $abstractinnerclass.InnerClasses (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@abstractinnerclass.InnerClasses) ))
  )
@@ -256,7 +256,7 @@
  (param $this.untyped (ref $java.lang.Object))
  ;;@ abstractinnerclass/InnerClasses.java:24:9
  (local $this (ref null $abstractinnerclass.InnerClasses.B))
- (local.set $this (ref.cast_static $abstractinnerclass.InnerClasses.B (local.get $this.untyped)))
+ (local.set $this (ref.cast $abstractinnerclass.InnerClasses.B (local.get $this.untyped)))
  (block
   ;;@ abstractinnerclass/InnerClasses.java:25:6
   (call_ref $function.m_foo__void (ref.as_non_null (local.get $this))(struct.get $abstractinnerclass.InnerClasses.B.vtable $m_foo__void (struct.get $abstractinnerclass.InnerClasses.B $vtable(local.get $this))))
@@ -329,7 +329,7 @@
  (param $this.untyped (ref $java.lang.Object))
  ;;@ abstractinnerclass/InnerClasses.java:30:9
  (local $this (ref null $abstractinnerclass.InnerClasses.C))
- (local.set $this (ref.cast_static $abstractinnerclass.InnerClasses.C (local.get $this.untyped)))
+ (local.set $this (ref.cast $abstractinnerclass.InnerClasses.C (local.get $this.untyped)))
  (block
   ;;@ abstractinnerclass/InnerClasses.java:31:6
   (call_ref $function.m_foo__void (ref.as_non_null (local.get $this))(struct.get $abstractinnerclass.InnerClasses.C.vtable $m_foo__void (struct.get $abstractinnerclass.InnerClasses.C $vtable(local.get $this))))

@@ -138,7 +138,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $wasmentrypoints.WasmEntryPoints))
- (local.set $this (ref.cast_static $wasmentrypoints.WasmEntryPoints (local.get $this.untyped)))
+ (local.set $this (ref.cast $wasmentrypoints.WasmEntryPoints (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@wasmentrypoints.WasmEntryPoints) ))
  )

@@ -133,18 +133,18 @@
  (local $object (ref null $java.lang.Object))
  (local $b i32)
  (local $this (ref null $instanceofexpression.InstanceofExpressions))
- (local.set $this (ref.cast_static $instanceofexpression.InstanceofExpressions (local.get $this.untyped)))
+ (local.set $this (ref.cast $instanceofexpression.InstanceofExpressions (local.get $this.untyped)))
  (block
   ;;@ instanceofexpression/InstanceofExpressions.java:23:4
   (local.set $object (call $$create__@instanceofexpression.InstanceofExpressions ))
   ;;@ instanceofexpression/InstanceofExpressions.java:24:4
   
   ;;@ instanceofexpression/InstanceofExpressions.java:25:4
-  (local.set $b (ref.test_static $java.lang.Object (local.get $object)))
+  (local.set $b (ref.test $java.lang.Object (local.get $object)))
   ;;@ instanceofexpression/InstanceofExpressions.java:26:4
-  (local.set $b (ref.test_static $instanceofexpression.InstanceofExpressions (local.get $object)))
+  (local.set $b (ref.test $instanceofexpression.InstanceofExpressions (local.get $object)))
   ;;@ instanceofexpression/InstanceofExpressions.java:27:4
-  (local.set $b (ref.test_static $java.lang.String (local.get $object)))
+  (local.set $b (ref.test $java.lang.String (local.get $object)))
  )
 )
 (elem declare func $m_testInstanceofClass__void@instanceofexpression.InstanceofExpressions)
@@ -158,7 +158,7 @@
  (local $b i32)
  (local $$expression (ref null $instanceofexpression.InstanceofExpressions.1))
  (local $this (ref null $instanceofexpression.InstanceofExpressions))
- (local.set $this (ref.cast_static $instanceofexpression.InstanceofExpressions (local.get $this.untyped)))
+ (local.set $this (ref.cast $instanceofexpression.InstanceofExpressions (local.get $this.untyped)))
  (block
   ;;@ instanceofexpression/InstanceofExpressions.java:31:4
   (local.set $o (call $$create__@java.lang.Object ))
@@ -168,7 +168,7 @@
   (local.set $b (if (result i32) (ref.is_null (local.get $o))
    (then (i32.const 0))
    (else 
-    (ref.test_static $java.io.Serializable.vtable (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $o) )))
+    (ref.test $java.io.Serializable.vtable (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $o) )))
    )
   ))
   ;;@ instanceofexpression/InstanceofExpressions.java:34:4
@@ -177,7 +177,7 @@
    (if (result i32) (ref.is_null (local.get $$expression))
     (then (i32.const 0))
     (else 
-     (ref.test_static $java.io.Serializable.vtable (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $$expression) )))
+     (ref.test $java.io.Serializable.vtable (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $$expression) )))
     )
    )
   ))
@@ -194,36 +194,36 @@
  (local $a i32)
  (local $d (ref null $java.lang.Double))
  (local $this (ref null $instanceofexpression.InstanceofExpressions))
- (local.set $this (ref.cast_static $instanceofexpression.InstanceofExpressions (local.get $this.untyped)))
+ (local.set $this (ref.cast $instanceofexpression.InstanceofExpressions (local.get $this.untyped)))
  (block
   ;;@ instanceofexpression/InstanceofExpressions.java:38:4
   (local.set $b (call $$create__int@java.lang.Integer (i32.const 1)))
   ;;@ instanceofexpression/InstanceofExpressions.java:40:4
-  (local.set $a (ref.test_static $java.lang.Byte (local.get $b)))
+  (local.set $a (ref.test $java.lang.Byte (local.get $b)))
   ;;@ instanceofexpression/InstanceofExpressions.java:41:4
-  (local.set $a (ref.test_static $java.lang.Double (local.get $b)))
+  (local.set $a (ref.test $java.lang.Double (local.get $b)))
   ;;@ instanceofexpression/InstanceofExpressions.java:42:4
-  (local.set $a (ref.test_static $java.lang.Float (local.get $b)))
+  (local.set $a (ref.test $java.lang.Float (local.get $b)))
   ;;@ instanceofexpression/InstanceofExpressions.java:43:4
-  (local.set $a (ref.test_static $java.lang.Integer (local.get $b)))
+  (local.set $a (ref.test $java.lang.Integer (local.get $b)))
   ;;@ instanceofexpression/InstanceofExpressions.java:44:4
-  (local.set $a (ref.test_static $java.lang.Long (local.get $b)))
+  (local.set $a (ref.test $java.lang.Long (local.get $b)))
   ;;@ instanceofexpression/InstanceofExpressions.java:45:4
-  (local.set $a (ref.test_static $java.lang.Short (local.get $b)))
+  (local.set $a (ref.test $java.lang.Short (local.get $b)))
   ;;@ instanceofexpression/InstanceofExpressions.java:46:4
-  (local.set $a (ref.test_static $java.lang.Number (local.get $b)))
+  (local.set $a (ref.test $java.lang.Number (local.get $b)))
   ;;@ instanceofexpression/InstanceofExpressions.java:47:4
-  (local.set $a (ref.test_static $java.lang.Character (local.get $b)))
+  (local.set $a (ref.test $java.lang.Character (local.get $b)))
   ;;@ instanceofexpression/InstanceofExpressions.java:48:4
-  (local.set $a (ref.test_static $java.lang.Boolean (local.get $b)))
+  (local.set $a (ref.test $java.lang.Boolean (local.get $b)))
   ;;@ instanceofexpression/InstanceofExpressions.java:50:4
   (local.set $d (ref.null $java.lang.Double))
   ;;@ instanceofexpression/InstanceofExpressions.java:51:4
-  (local.set $a (ref.test_static $java.lang.Object (local.get $d)))
+  (local.set $a (ref.test $java.lang.Object (local.get $d)))
   ;;@ instanceofexpression/InstanceofExpressions.java:52:4
-  (local.set $a (ref.test_static $java.lang.Number (local.get $d)))
+  (local.set $a (ref.test $java.lang.Number (local.get $d)))
   ;;@ instanceofexpression/InstanceofExpressions.java:53:4
-  (local.set $a (ref.test_static $java.lang.Double (local.get $d)))
+  (local.set $a (ref.test $java.lang.Double (local.get $d)))
  )
 )
 (elem declare func $m_testInstanceofBoxedType__void@instanceofexpression.InstanceofExpressions)
@@ -239,7 +239,7 @@
  (local $stringArray (ref null $javaemul.internal.WasmArray.OfObject))
  (local $a i32)
  (local $this (ref null $instanceofexpression.InstanceofExpressions))
- (local.set $this (ref.cast_static $instanceofexpression.InstanceofExpressions (local.get $this.untyped)))
+ (local.set $this (ref.cast $instanceofexpression.InstanceofExpressions (local.get $this.untyped)))
  (block
   ;;@ instanceofexpression/InstanceofExpressions.java:57:4
   (local.set $object (call $$create__@java.lang.Object ))
@@ -252,47 +252,47 @@
   ;;@ instanceofexpression/InstanceofExpressions.java:62:4
   
   ;;@ instanceofexpression/InstanceofExpressions.java:63:4
-  (local.set $a (ref.test_static $javaemul.internal.WasmArray.OfObject (local.get $object)))
+  (local.set $a (ref.test $javaemul.internal.WasmArray.OfObject (local.get $object)))
   ;;@ instanceofexpression/InstanceofExpressions.java:64:4
-  (local.set $a (ref.test_static $javaemul.internal.WasmArray.OfObject (local.get $object)))
+  (local.set $a (ref.test $javaemul.internal.WasmArray.OfObject (local.get $object)))
   ;;@ instanceofexpression/InstanceofExpressions.java:65:4
-  (local.set $a (ref.test_static $javaemul.internal.WasmArray.OfObject (local.get $object)))
+  (local.set $a (ref.test $javaemul.internal.WasmArray.OfObject (local.get $object)))
   ;;@ instanceofexpression/InstanceofExpressions.java:66:4
-  (local.set $a (ref.test_static $javaemul.internal.WasmArray.OfObject (local.get $object)))
+  (local.set $a (ref.test $javaemul.internal.WasmArray.OfObject (local.get $object)))
   ;;@ instanceofexpression/InstanceofExpressions.java:68:4
-  (local.set $a (ref.test_static $javaemul.internal.WasmArray.OfObject (local.get $objectArray)))
+  (local.set $a (ref.test $javaemul.internal.WasmArray.OfObject (local.get $objectArray)))
   ;;@ instanceofexpression/InstanceofExpressions.java:69:4
-  (local.set $a (ref.test_static $javaemul.internal.WasmArray.OfObject (local.get $objectArray)))
+  (local.set $a (ref.test $javaemul.internal.WasmArray.OfObject (local.get $objectArray)))
   ;;@ instanceofexpression/InstanceofExpressions.java:70:4
-  (local.set $a (ref.test_static $javaemul.internal.WasmArray.OfObject (local.get $objectArray)))
+  (local.set $a (ref.test $javaemul.internal.WasmArray.OfObject (local.get $objectArray)))
   ;;@ instanceofexpression/InstanceofExpressions.java:71:4
-  (local.set $a (ref.test_static $javaemul.internal.WasmArray.OfObject (local.get $objectArray)))
+  (local.set $a (ref.test $javaemul.internal.WasmArray.OfObject (local.get $objectArray)))
   ;;@ instanceofexpression/InstanceofExpressions.java:73:4
-  (local.set $a (ref.test_static $javaemul.internal.WasmArray.OfObject (local.get $objectDoubleArray)))
+  (local.set $a (ref.test $javaemul.internal.WasmArray.OfObject (local.get $objectDoubleArray)))
   ;;@ instanceofexpression/InstanceofExpressions.java:74:4
-  (local.set $a (ref.test_static $javaemul.internal.WasmArray.OfObject (local.get $objectDoubleArray)))
+  (local.set $a (ref.test $javaemul.internal.WasmArray.OfObject (local.get $objectDoubleArray)))
   ;;@ instanceofexpression/InstanceofExpressions.java:75:4
-  (local.set $a (ref.test_static $javaemul.internal.WasmArray.OfObject (local.get $objectDoubleArray)))
+  (local.set $a (ref.test $javaemul.internal.WasmArray.OfObject (local.get $objectDoubleArray)))
   ;;@ instanceofexpression/InstanceofExpressions.java:77:4
-  (local.set $a (ref.test_static $javaemul.internal.WasmArray.OfObject (local.get $stringArray)))
+  (local.set $a (ref.test $javaemul.internal.WasmArray.OfObject (local.get $stringArray)))
   ;;@ instanceofexpression/InstanceofExpressions.java:78:4
-  (local.set $a (ref.test_static $javaemul.internal.WasmArray.OfObject (local.get $stringArray)))
+  (local.set $a (ref.test $javaemul.internal.WasmArray.OfObject (local.get $stringArray)))
   ;;@ instanceofexpression/InstanceofExpressions.java:80:4
-  (local.set $a (ref.test_static $javaemul.internal.WasmArray.OfByte (local.get $object)))
+  (local.set $a (ref.test $javaemul.internal.WasmArray.OfByte (local.get $object)))
   ;;@ instanceofexpression/InstanceofExpressions.java:81:4
-  (local.set $a (ref.test_static $javaemul.internal.WasmArray.OfShort (local.get $object)))
+  (local.set $a (ref.test $javaemul.internal.WasmArray.OfShort (local.get $object)))
   ;;@ instanceofexpression/InstanceofExpressions.java:82:4
-  (local.set $a (ref.test_static $javaemul.internal.WasmArray.OfInt (local.get $object)))
+  (local.set $a (ref.test $javaemul.internal.WasmArray.OfInt (local.get $object)))
   ;;@ instanceofexpression/InstanceofExpressions.java:83:4
-  (local.set $a (ref.test_static $javaemul.internal.WasmArray.OfLong (local.get $object)))
+  (local.set $a (ref.test $javaemul.internal.WasmArray.OfLong (local.get $object)))
   ;;@ instanceofexpression/InstanceofExpressions.java:84:4
-  (local.set $a (ref.test_static $javaemul.internal.WasmArray.OfFloat (local.get $object)))
+  (local.set $a (ref.test $javaemul.internal.WasmArray.OfFloat (local.get $object)))
   ;;@ instanceofexpression/InstanceofExpressions.java:85:4
-  (local.set $a (ref.test_static $javaemul.internal.WasmArray.OfDouble (local.get $object)))
+  (local.set $a (ref.test $javaemul.internal.WasmArray.OfDouble (local.get $object)))
   ;;@ instanceofexpression/InstanceofExpressions.java:86:4
-  (local.set $a (ref.test_static $javaemul.internal.WasmArray.OfChar (local.get $object)))
+  (local.set $a (ref.test $javaemul.internal.WasmArray.OfChar (local.get $object)))
   ;;@ instanceofexpression/InstanceofExpressions.java:87:4
-  (local.set $a (ref.test_static $javaemul.internal.WasmArray.OfBoolean (local.get $object)))
+  (local.set $a (ref.test $javaemul.internal.WasmArray.OfBoolean (local.get $object)))
  )
 )
 (elem declare func $m_testInstanceOfArray__void@instanceofexpression.InstanceofExpressions)
@@ -304,10 +304,10 @@
  ;;@ instanceofexpression/InstanceofExpressions.java:90:14
  (local $b i32)
  (local $this (ref null $instanceofexpression.InstanceofExpressions))
- (local.set $this (ref.cast_static $instanceofexpression.InstanceofExpressions (local.get $this.untyped)))
+ (local.set $this (ref.cast $instanceofexpression.InstanceofExpressions (local.get $this.untyped)))
  (block
   ;;@ instanceofexpression/InstanceofExpressions.java:91:4
-  (local.set $b (ref.test_static $java.lang.String (if (result (ref null $java.lang.String)) (i32.const 0) (then (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@instanceofexpression.InstanceofExpressions) )) (else (call $function.no.side.effects.$getString_|bar|__java_lang_String (ref.func $$getString_|bar|__java_lang_String@instanceofexpression.InstanceofExpressions) )))))
+  (local.set $b (ref.test $java.lang.String (if (result (ref null $java.lang.String)) (i32.const 0) (then (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@instanceofexpression.InstanceofExpressions) )) (else (call $function.no.side.effects.$getString_|bar|__java_lang_String (ref.func $$getString_|bar|__java_lang_String@instanceofexpression.InstanceofExpressions) )))))
  )
 )
 (elem declare func $m_testPrecedence__void@instanceofexpression.InstanceofExpressions)
@@ -349,7 +349,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $instanceofexpression.InstanceofExpressions))
- (local.set $this (ref.cast_static $instanceofexpression.InstanceofExpressions (local.get $this.untyped)))
+ (local.set $this (ref.cast $instanceofexpression.InstanceofExpressions (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@instanceofexpression.InstanceofExpressions) ))
  )
@@ -463,7 +463,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $instanceofexpression.InstanceofExpressions.1))
- (local.set $this (ref.cast_static $instanceofexpression.InstanceofExpressions.1 (local.get $this.untyped)))
+ (local.set $this (ref.cast $instanceofexpression.InstanceofExpressions.1 (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@instanceofexpression.InstanceofExpressions.1) ))
  )

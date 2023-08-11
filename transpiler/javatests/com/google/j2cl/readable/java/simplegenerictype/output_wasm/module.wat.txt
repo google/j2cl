@@ -74,7 +74,7 @@
  ;;@ simplegenerictype/SimpleGenericType.java:27:14
  (local $g (ref null $simplegenerictype.SimpleGenericType))
  (local $this (ref null $simplegenerictype.SimpleGenericType))
- (local.set $this (ref.cast_static $simplegenerictype.SimpleGenericType (local.get $this.untyped)))
+ (local.set $this (ref.cast $simplegenerictype.SimpleGenericType (local.get $this.untyped)))
  (block
   ;;@ simplegenerictype/SimpleGenericType.java:28:4
   (local.set $g (call $$create__java_lang_Object__java_lang_Object@simplegenerictype.SimpleGenericType (call $$create__@java.lang.Object )(call $$create__@java.lang.Error )))
@@ -119,7 +119,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplegenerictype.SimpleGenericType))
- (local.set $this (ref.cast_static $simplegenerictype.SimpleGenericType (local.get $this.untyped)))
+ (local.set $this (ref.cast $simplegenerictype.SimpleGenericType (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simplegenerictype.SimpleGenericType) ))
  )

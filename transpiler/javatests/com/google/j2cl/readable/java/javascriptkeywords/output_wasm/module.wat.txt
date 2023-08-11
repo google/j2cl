@@ -70,7 +70,7 @@
  ;;@ javascriptkeywords/JSKeyWords.java:19:13
  (local $let i32)
  (local $this (ref null $javascriptkeywords.JSKeyWords))
- (local.set $this (ref.cast_static $javascriptkeywords.JSKeyWords (local.get $this.untyped)))
+ (local.set $this (ref.cast $javascriptkeywords.JSKeyWords (local.get $this.untyped)))
  (block
   ;;@ javascriptkeywords/JSKeyWords.java:20:4
   (local.set $let (i32.const 0))
@@ -117,7 +117,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $javascriptkeywords.JSKeyWords))
- (local.set $this (ref.cast_static $javascriptkeywords.JSKeyWords (local.get $this.untyped)))
+ (local.set $this (ref.cast $javascriptkeywords.JSKeyWords (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@javascriptkeywords.JSKeyWords) ))
  )

@@ -76,7 +76,7 @@
  (result i64)
  ;;@ simplelongs/SimpleLongs.java:21:14
  (local $this (ref null $simplelongs.SimpleLongs))
- (local.set $this (ref.cast_static $simplelongs.SimpleLongs (local.get $this.untyped)))
+ (local.set $this (ref.cast $simplelongs.SimpleLongs (local.get $this.untyped)))
  (block
   ;;@ simplelongs/SimpleLongs.java:22:4
   (return (i64.const 0))
@@ -91,7 +91,7 @@
  (result (ref null $simplelongs.SimpleLongs))
  ;;@ simplelongs/SimpleLongs.java:28:21
  (local $this (ref null $simplelongs.SimpleLongs))
- (local.set $this (ref.cast_static $simplelongs.SimpleLongs (local.get $this.untyped)))
+ (local.set $this (ref.cast $simplelongs.SimpleLongs (local.get $this.untyped)))
  (block
   ;;@ simplelongs/SimpleLongs.java:29:4
   (struct.set $simplelongs.SimpleLongs $f_sideEffect__simplelongs_SimpleLongs_ (local.get $this) (i32.add (struct.get $simplelongs.SimpleLongs $f_sideEffect__simplelongs_SimpleLongs_ (local.get $this)) (i32.const 1)))
@@ -122,7 +122,7 @@
  (local $$value_4 i64)
  (local $g i64)
  (local $this (ref null $simplelongs.SimpleLongs))
- (local.set $this (ref.cast_static $simplelongs.SimpleLongs (local.get $this.untyped)))
+ (local.set $this (ref.cast $simplelongs.SimpleLongs (local.get $this.untyped)))
  (block
   ;;@ simplelongs/SimpleLongs.java:36:4
   (local.set $a (i64.const 0))
@@ -236,7 +236,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplelongs.SimpleLongs))
- (local.set $this (ref.cast_static $simplelongs.SimpleLongs (local.get $this.untyped)))
+ (local.set $this (ref.cast $simplelongs.SimpleLongs (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simplelongs.SimpleLongs) ))
  )

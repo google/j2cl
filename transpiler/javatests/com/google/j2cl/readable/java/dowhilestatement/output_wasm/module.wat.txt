@@ -68,7 +68,7 @@
  ;;@ dowhilestatement/DoWhileStatement.java:19:14
  (local $count i32)
  (local $this (ref null $dowhilestatement.DoWhileStatement))
- (local.set $this (ref.cast_static $dowhilestatement.DoWhileStatement (local.get $this.untyped)))
+ (local.set $this (ref.cast $dowhilestatement.DoWhileStatement (local.get $this.untyped)))
  (block
   ;;@ dowhilestatement/DoWhileStatement.java:20:4
   (local.set $count (i32.const 0))
@@ -125,7 +125,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $dowhilestatement.DoWhileStatement))
- (local.set $this (ref.cast_static $dowhilestatement.DoWhileStatement (local.get $this.untyped)))
+ (local.set $this (ref.cast $dowhilestatement.DoWhileStatement (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@dowhilestatement.DoWhileStatement) ))
  )

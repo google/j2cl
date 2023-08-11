@@ -73,7 +73,7 @@
  (result (ref null $java.lang.Object))
  ;;@ genericequals/GenericEquals.java:28:16
  (local $this (ref null $genericequals.GenericEquals))
- (local.set $this (ref.cast_static $genericequals.GenericEquals (local.get $this.untyped)))
+ (local.set $this (ref.cast $genericequals.GenericEquals (local.get $this.untyped)))
  (block
   ;;@ genericequals/GenericEquals.java:29:4
   (return (struct.get $genericequals.GenericEquals $f_value__genericequals_GenericEquals_ (struct.get $genericequals.GenericEquals $f_value2__genericequals_GenericEquals_ (local.get $other))))
@@ -90,7 +90,7 @@
  ;;@ genericequals/GenericEquals.java:33:17
  (local $other (ref null $genericequals.GenericEquals))
  (local $this (ref null $genericequals.GenericEquals))
- (local.set $this (ref.cast_static $genericequals.GenericEquals (local.get $this.untyped)))
+ (local.set $this (ref.cast $genericequals.GenericEquals (local.get $this.untyped)))
  (block
   ;;@ genericequals/GenericEquals.java:34:4
   (if (ref.eq (local.get $obj) (local.get $this))
@@ -102,7 +102,7 @@
    )
   )
   ;;@ genericequals/GenericEquals.java:37:4
-  (if (i32.eqz (ref.test_static $genericequals.GenericEquals (local.get $obj)))
+  (if (i32.eqz (ref.test $genericequals.GenericEquals (local.get $obj)))
    (then
     (block
      ;;@ genericequals/GenericEquals.java:38:6
@@ -111,7 +111,7 @@
    )
   )
   ;;@ genericequals/GenericEquals.java:40:4
-  (local.set $other (ref.cast_static $genericequals.GenericEquals (local.get $obj)))
+  (local.set $other (ref.cast null $genericequals.GenericEquals (local.get $obj)))
   ;;@ genericequals/GenericEquals.java:41:4
   (return (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (struct.get $genericequals.GenericEquals $f_value__genericequals_GenericEquals_ (local.get $this)))(struct.get $genericequals.GenericEquals $f_value__genericequals_GenericEquals_ (local.get $other))(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(struct.get $genericequals.GenericEquals $f_value__genericequals_GenericEquals_ (local.get $this))))))
  )
@@ -155,7 +155,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $genericequals.GenericEquals))
- (local.set $this (ref.cast_static $genericequals.GenericEquals (local.get $this.untyped)))
+ (local.set $this (ref.cast $genericequals.GenericEquals (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@genericequals.GenericEquals) ))
  )

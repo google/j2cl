@@ -272,7 +272,7 @@
  (result i32)
  ;;@ localnamecollision/Asserts.java:19:6
  (local $this (ref null $localnamecollision.Asserts))
- (local.set $this (ref.cast_static $localnamecollision.Asserts (local.get $this.untyped)))
+ (local.set $this (ref.cast $localnamecollision.Asserts (local.get $this.untyped)))
  (block
   ;;@ localnamecollision/Asserts.java:21:4
   (return (i32.const 5))
@@ -317,7 +317,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localnamecollision.Asserts))
- (local.set $this (ref.cast_static $localnamecollision.Asserts (local.get $this.untyped)))
+ (local.set $this (ref.cast $localnamecollision.Asserts (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localnamecollision.Asserts) ))
  )
@@ -373,7 +373,7 @@
  ;;@ localnamecollision/Class.java:19:14
  (local $$qualifier (ref null $localnamecollision.Class))
  (local $this (ref null $localnamecollision.Class))
- (local.set $this (ref.cast_static $localnamecollision.Class (local.get $this.untyped)))
+ (local.set $this (ref.cast $localnamecollision.Class (local.get $this.untyped)))
  (block
   (block
    ;;@ localnamecollision/Class.java:20:4
@@ -422,7 +422,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localnamecollision.Class))
- (local.set $this (ref.cast_static $localnamecollision.Class (local.get $this.untyped)))
+ (local.set $this (ref.cast $localnamecollision.Class (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localnamecollision.Class) ))
  )
@@ -459,7 +459,7 @@
  (local $com_google_j2cl_readable_localnamecollision_package2_A i32)
  (local $A i32)
  (local $this (ref null $localnamecollision.LocalNameCollision))
- (local.set $this (ref.cast_static $localnamecollision.LocalNameCollision (local.get $this.untyped)))
+ (local.set $this (ref.cast $localnamecollision.LocalNameCollision (local.get $this.untyped)))
  (block
   ;;@ localnamecollision/LocalNameCollision.java:21:4
   (local.set $LocalNameCollision (i32.const 0))
@@ -480,7 +480,7 @@
   ;;@ localnamecollision/LocalNameCollision.java:29:4
   (local.set $A (i32.const 1))
   ;;@ localnamecollision/LocalNameCollision.java:30:4
-  (local.set $LocalNameCollision (if (result i32) (if (result i32) (if (result i32) (if (result i32) (ref.test_static $localnamecollision.LocalNameCollision (local.get $RuntimeException)) (then (i32.const 1)) (else (ref.test_static $java.lang.RuntimeException (local.get $RuntimeException)))) (then (i32.const 1)) (else (ref.test_static $localnamecollision.package1.A (local.get $RuntimeException)))) (then (i32.const 1)) (else (ref.test_static $localnamecollision.package2.A (local.get $RuntimeException)))) (then (i32.const 1)) (else (ref.test_static $localnamecollision.Class (local.get $RuntimeException)))))
+  (local.set $LocalNameCollision (if (result i32) (if (result i32) (if (result i32) (if (result i32) (ref.test $localnamecollision.LocalNameCollision (local.get $RuntimeException)) (then (i32.const 1)) (else (ref.test $java.lang.RuntimeException (local.get $RuntimeException)))) (then (i32.const 1)) (else (ref.test $localnamecollision.package1.A (local.get $RuntimeException)))) (then (i32.const 1)) (else (ref.test $localnamecollision.package2.A (local.get $RuntimeException)))) (then (i32.const 1)) (else (ref.test $localnamecollision.Class (local.get $RuntimeException)))))
  )
 )
 (elem declare func $m_testClassLocalVarCollision__void@localnamecollision.LocalNameCollision)
@@ -497,10 +497,10 @@
  (result i32)
  ;;@ localnamecollision/LocalNameCollision.java:39:17
  (local $this (ref null $localnamecollision.LocalNameCollision))
- (local.set $this (ref.cast_static $localnamecollision.LocalNameCollision (local.get $this.untyped)))
+ (local.set $this (ref.cast $localnamecollision.LocalNameCollision (local.get $this.untyped)))
  (block
   ;;@ localnamecollision/LocalNameCollision.java:41:4
-  (return (if (result i32) (if (result i32) (if (result i32) (local.get $LocalNameCollision) (then (ref.test_static $localnamecollision.LocalNameCollision (local.get $Asserts))) (else (i32.const 0))) (then (ref.test_static $localnamecollision.Asserts (local.get $$Asserts))) (else (i32.const 0))) (then (i32.eq (local.get $l_Asserts) (local.get $A))) (else (i32.const 0))))
+  (return (if (result i32) (if (result i32) (if (result i32) (local.get $LocalNameCollision) (then (ref.test $localnamecollision.LocalNameCollision (local.get $Asserts))) (else (i32.const 0))) (then (ref.test $localnamecollision.Asserts (local.get $$Asserts))) (else (i32.const 0))) (then (i32.eq (local.get $l_Asserts) (local.get $A))) (else (i32.const 0))))
  )
 )
 (elem declare func $m_testClassParameterCollision__boolean__java_lang_Object__java_lang_Object__int__int__boolean@localnamecollision.LocalNameCollision)
@@ -541,7 +541,7 @@
   ;;@ localnamecollision/LocalNameCollision.java:50:89
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;;@ localnamecollision/LocalNameCollision.java:51:4
-  (local.set $result (if (result i32) (if (result i32) (if (result i32) (local.get $LocalNameCollision) (then (ref.test_static $localnamecollision.LocalNameCollision (local.get $Asserts))) (else (i32.const 0))) (then (ref.test_static $localnamecollision.Asserts (local.get $$Asserts))) (else (i32.const 0))) (then (i32.eq (local.get $l_Asserts) (local.get $A))) (else (i32.const 0))))
+  (local.set $result (if (result i32) (if (result i32) (if (result i32) (local.get $LocalNameCollision) (then (ref.test $localnamecollision.LocalNameCollision (local.get $Asserts))) (else (i32.const 0))) (then (ref.test $localnamecollision.Asserts (local.get $$Asserts))) (else (i32.const 0))) (then (i32.eq (local.get $l_Asserts) (local.get $A))) (else (i32.const 0))))
  )
 )
 
@@ -582,7 +582,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localnamecollision.LocalNameCollision))
- (local.set $this (ref.cast_static $localnamecollision.LocalNameCollision (local.get $this.untyped)))
+ (local.set $this (ref.cast $localnamecollision.LocalNameCollision (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localnamecollision.LocalNameCollision) ))
  )
@@ -685,7 +685,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localnamecollision.A))
- (local.set $this (ref.cast_static $localnamecollision.A (local.get $this.untyped)))
+ (local.set $this (ref.cast $localnamecollision.A (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localnamecollision.A) ))
  )
@@ -771,7 +771,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localnamecollision.A.B))
- (local.set $this (ref.cast_static $localnamecollision.A.B (local.get $this.untyped)))
+ (local.set $this (ref.cast $localnamecollision.A.B (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localnamecollision.A.B) ))
  )
@@ -827,7 +827,7 @@
  (result i32)
  ;;@ localnamecollision/package1/A.java:19:13
  (local $this (ref null $localnamecollision.package1.A))
- (local.set $this (ref.cast_static $localnamecollision.package1.A (local.get $this.untyped)))
+ (local.set $this (ref.cast $localnamecollision.package1.A (local.get $this.untyped)))
  (block
   ;;@ localnamecollision/package1/A.java:20:4
   (return (i32.const 1))
@@ -872,7 +872,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localnamecollision.package1.A))
- (local.set $this (ref.cast_static $localnamecollision.package1.A (local.get $this.untyped)))
+ (local.set $this (ref.cast $localnamecollision.package1.A (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localnamecollision.package1.A) ))
  )
@@ -928,7 +928,7 @@
  (result i32)
  ;;@ localnamecollision/package2/A.java:19:13
  (local $this (ref null $localnamecollision.package2.A))
- (local.set $this (ref.cast_static $localnamecollision.package2.A (local.get $this.untyped)))
+ (local.set $this (ref.cast $localnamecollision.package2.A (local.get $this.untyped)))
  (block
   ;;@ localnamecollision/package2/A.java:20:4
   (return (i32.const 2))
@@ -973,7 +973,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localnamecollision.package2.A))
- (local.set $this (ref.cast_static $localnamecollision.package2.A (local.get $this.untyped)))
+ (local.set $this (ref.cast $localnamecollision.package2.A (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localnamecollision.package2.A) ))
  )

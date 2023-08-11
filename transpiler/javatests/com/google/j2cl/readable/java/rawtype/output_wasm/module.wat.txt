@@ -438,7 +438,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $rawtype.RawType))
- (local.set $this (ref.cast_static $rawtype.RawType (local.get $this.untyped)))
+ (local.set $this (ref.cast $rawtype.RawType (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@rawtype.RawType) ))
  )
@@ -495,7 +495,7 @@
  (result (ref null $java.lang.Object))
  ;;@ rawtype/RawType.java:27:6
  (local $this (ref null $rawtype.RawType.Unbound))
- (local.set $this (ref.cast_static $rawtype.RawType.Unbound (local.get $this.untyped)))
+ (local.set $this (ref.cast $rawtype.RawType.Unbound (local.get $this.untyped)))
  (block
   ;;@ rawtype/RawType.java:28:6
   (return (local.get $t))
@@ -540,7 +540,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $rawtype.RawType.Unbound))
- (local.set $this (ref.cast_static $rawtype.RawType.Unbound (local.get $this.untyped)))
+ (local.set $this (ref.cast $rawtype.RawType.Unbound (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@rawtype.RawType.Unbound) ))
  )
@@ -626,7 +626,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $rawtype.RawType.Bound))
- (local.set $this (ref.cast_static $rawtype.RawType.Bound (local.get $this.untyped)))
+ (local.set $this (ref.cast $rawtype.RawType.Bound (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@rawtype.RawType.Bound) ))
  )
@@ -712,7 +712,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $rawtype.RawType.BoundRecursively))
- (local.set $this (ref.cast_static $rawtype.RawType.BoundRecursively (local.get $this.untyped)))
+ (local.set $this (ref.cast $rawtype.RawType.BoundRecursively (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@rawtype.RawType.BoundRecursively) ))
  )
@@ -798,7 +798,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $rawtype.RawType.BoundDependentDirect))
- (local.set $this (ref.cast_static $rawtype.RawType.BoundDependentDirect (local.get $this.untyped)))
+ (local.set $this (ref.cast $rawtype.RawType.BoundDependentDirect (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@rawtype.RawType.BoundDependentDirect) ))
  )
@@ -884,7 +884,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $rawtype.RawType.BoundDependentIndirect))
- (local.set $this (ref.cast_static $rawtype.RawType.BoundDependentIndirect (local.get $this.untyped)))
+ (local.set $this (ref.cast $rawtype.RawType.BoundDependentIndirect (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@rawtype.RawType.BoundDependentIndirect) ))
  )
@@ -940,7 +940,7 @@
  (param $t (ref null $rawtype.RawType))
  ;;@ rawtype/RawType.java:53:16
  (local $this (ref null $rawtype.RawType.RawSubclass))
- (local.set $this (ref.cast_static $rawtype.RawType.RawSubclass (local.get $this.untyped)))
+ (local.set $this (ref.cast $rawtype.RawType.RawSubclass (local.get $this.untyped)))
  (block
  )
 )
@@ -985,7 +985,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $rawtype.RawType.RawSubclass))
- (local.set $this (ref.cast_static $rawtype.RawType.RawSubclass (local.get $this.untyped)))
+ (local.set $this (ref.cast $rawtype.RawType.RawSubclass (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@rawtype.RawType.RawSubclass) ))
  )
@@ -1042,7 +1042,7 @@
  (result (ref null $java.lang.Object))
  ;;@ rawtype/RawType.java:42:11
  (local $this (ref null $rawtype.RawType.RawUnboundChild))
- (local.set $this (ref.cast_static $rawtype.RawType.RawUnboundChild (local.get $this.untyped)))
+ (local.set $this (ref.cast $rawtype.RawType.RawUnboundChild (local.get $this.untyped)))
  (block
   ;;@ rawtype/RawType.java:43:6
   (return (call $m_method__java_lang_Object__java_lang_Object_$pp_rawtype@rawtype.RawType.Unbound (ref.as_non_null (local.get $this))(local.get $o)))
@@ -1087,7 +1087,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $rawtype.RawType.RawUnboundChild))
- (local.set $this (ref.cast_static $rawtype.RawType.RawUnboundChild (local.get $this.untyped)))
+ (local.set $this (ref.cast $rawtype.RawType.RawUnboundChild (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@rawtype.RawType.RawUnboundChild) ))
  )

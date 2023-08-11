@@ -441,7 +441,7 @@
  ;;@ gwtincompatible/Implementor.java:32:14
  (local $a i32)
  (local $this (ref null $gwtincompatible.Implementor))
- (local.set $this (ref.cast_static $gwtincompatible.Implementor (local.get $this.untyped)))
+ (local.set $this (ref.cast $gwtincompatible.Implementor (local.get $this.untyped)))
  (block
   ;;@ gwtincompatible/Implementor.java:33:4
   (local.set $a (i32.const 4))
@@ -486,7 +486,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $gwtincompatible.Implementor))
- (local.set $this (ref.cast_static $gwtincompatible.Implementor (local.get $this.untyped)))
+ (local.set $this (ref.cast $gwtincompatible.Implementor (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@gwtincompatible.Implementor) ))
  )
@@ -544,7 +544,7 @@
    )
   )
   ;;@ gwtincompatible/Implementor.java:36:7
-  (return (ref.cast_static $gwtincompatible.Implementor.SomeEnum (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__gwtincompatible_Implementor_SomeEnum_))))
+  (return (ref.cast null $gwtincompatible.Implementor.SomeEnum (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__gwtincompatible_Implementor_SomeEnum_))))
  )
 )
 
@@ -658,7 +658,7 @@
  (param $this.untyped (ref $java.lang.Object))
  ;;@ gwtincompatible/Implementor.java:39:11
  (local $this (ref null $gwtincompatible.Implementor.SomeEnum.1))
- (local.set $this (ref.cast_static $gwtincompatible.Implementor.SomeEnum.1 (local.get $this.untyped)))
+ (local.set $this (ref.cast $gwtincompatible.Implementor.SomeEnum.1 (local.get $this.untyped)))
  (block
  )
 )
@@ -701,7 +701,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $gwtincompatible.Implementor.SomeEnum.1))
- (local.set $this (ref.cast_static $gwtincompatible.Implementor.SomeEnum.1 (local.get $this.untyped)))
+ (local.set $this (ref.cast $gwtincompatible.Implementor.SomeEnum.1 (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@gwtincompatible.Implementor.SomeEnum.1) ))
  )

@@ -733,7 +733,7 @@
  (result (ref null $java.lang.Object))
  ;;@ intersectiontype/IntersectionTypeTest.java:66:16
  (local $this (ref null $intersectiontype.IntersectionTypeTest))
- (local.set $this (ref.cast_static $intersectiontype.IntersectionTypeTest (local.get $this.untyped)))
+ (local.set $this (ref.cast $intersectiontype.IntersectionTypeTest (local.get $this.untyped)))
  (block
   ;;@ intersectiontype/IntersectionTypeTest.java:67:4
   (return (local.get $s))
@@ -776,11 +776,11 @@
   ;;@ intersectiontype/IntersectionTypeTest.java:85:53
   (call $$clinit__void@intersectiontype.IntersectionTypeTest )
   ;;@ intersectiontype/IntersectionTypeTest.java:86:4
-  (local.set $e (ref.cast_static $intersectiontype.IntersectionTypeTest.A (local.get $o)))
+  (local.set $e (ref.cast null $intersectiontype.IntersectionTypeTest.A (local.get $o)))
   ;;@ intersectiontype/IntersectionTypeTest.java:87:4
-  (local.set $g (ref.cast_static $intersectiontype.IntersectionTypeTest.A (local.get $o)))
+  (local.set $g (ref.cast null $intersectiontype.IntersectionTypeTest.A (local.get $o)))
   ;;@ intersectiontype/IntersectionTypeTest.java:88:4
-  (local.set $s (ref.cast_static $intersectiontype.IntersectionTypeTest.A (local.get $o)))
+  (local.set $s (ref.cast null $intersectiontype.IntersectionTypeTest.A (local.get $o)))
  )
 )
 
@@ -801,7 +801,7 @@
  ;;@ intersectiontype/IntersectionTypeTest.java:95:42
  (block
   ;;@ intersectiontype/IntersectionTypeTest.java:96:4
-  (return (ref.cast_static $intersectiontype.IntersectionTypeTest.A (call $m_get__java_lang_Object__java_lang_Object@intersectiontype.IntersectionTypeTest (call $$create__@java.lang.Object ))))
+  (return (ref.cast null $intersectiontype.IntersectionTypeTest.A (call $m_get__java_lang_Object__java_lang_Object@intersectiontype.IntersectionTypeTest (call $$create__@java.lang.Object ))))
  )
 )
 
@@ -831,12 +831,12 @@
  (local $o (ref null $java.lang.Object))
  (local $g (ref null $java.lang.Object))
  (local $this (ref null $intersectiontype.IntersectionTypeTest))
- (local.set $this (ref.cast_static $intersectiontype.IntersectionTypeTest (local.get $this.untyped)))
+ (local.set $this (ref.cast $intersectiontype.IntersectionTypeTest (local.get $this.untyped)))
  (block
   ;;@ intersectiontype/IntersectionTypeTest.java:106:4
   (local.set $o (call $m_m__intersectiontype_IntersectionTypeTest_A@intersectiontype.IntersectionTypeTest ))
   ;;@ intersectiontype/IntersectionTypeTest.java:107:4
-  (call $m_set__intersectiontype_IntersectionTypeTest_A__void@intersectiontype.IntersectionTypeTest (ref.cast_static $intersectiontype.IntersectionTypeTest.A (local.get $o)))
+  (call $m_set__intersectiontype_IntersectionTypeTest_A__void@intersectiontype.IntersectionTypeTest (ref.cast null $intersectiontype.IntersectionTypeTest.A (local.get $o)))
   ;;@ intersectiontype/IntersectionTypeTest.java:108:4
   (call $m_set__intersectiontype_IntersectionTypeTest_A__void@intersectiontype.IntersectionTypeTest (call $m_m__intersectiontype_IntersectionTypeTest_A@intersectiontype.IntersectionTypeTest ))
   ;;@ intersectiontype/IntersectionTypeTest.java:109:4
@@ -856,13 +856,13 @@
    ;;@ intersectiontype/IntersectionTypeTest.java:115:4
    (local.set $$qualifier (local.get $t))
    ;;@ intersectiontype/IntersectionTypeTest.java:115:4
-   (drop (call_ref $function.m_cmp__int (ref.as_non_null (local.get $$qualifier))(struct.get $intersectiontype.Cmp.vtable $m_cmp__int (ref.cast_static $intersectiontype.Cmp.vtable (struct.get $itable $slot1 (struct.get $java.lang.Object $itable (local.get $$qualifier)))))))
+   (drop (call_ref $function.m_cmp__int (ref.as_non_null (local.get $$qualifier))(struct.get $intersectiontype.Cmp.vtable $m_cmp__int (ref.cast $intersectiontype.Cmp.vtable (struct.get $itable $slot1 (struct.get $java.lang.Object $itable (local.get $$qualifier)))))))
   )
   (block
    ;;@ intersectiontype/IntersectionTypeTest.java:116:4
-   (local.set $$qualifier_1 (ref.cast_static $intersectiontype.IntersectionTypeTest.SomeConcreteType (ref.null $java.lang.Object)))
+   (local.set $$qualifier_1 (ref.cast null $intersectiontype.IntersectionTypeTest.SomeConcreteType (ref.null $java.lang.Object)))
    ;;@ intersectiontype/IntersectionTypeTest.java:116:4
-   (drop (call_ref $function.m_cmp__int (ref.as_non_null (local.get $$qualifier_1))(struct.get $intersectiontype.Cmp.vtable $m_cmp__int (ref.cast_static $intersectiontype.Cmp.vtable (struct.get $itable $slot1 (struct.get $java.lang.Object $itable (local.get $$qualifier_1)))))))
+   (drop (call_ref $function.m_cmp__int (ref.as_non_null (local.get $$qualifier_1))(struct.get $intersectiontype.Cmp.vtable $m_cmp__int (ref.cast $intersectiontype.Cmp.vtable (struct.get $itable $slot1 (struct.get $java.lang.Object $itable (local.get $$qualifier_1)))))))
   )
  )
 )
@@ -904,7 +904,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $intersectiontype.IntersectionTypeTest))
- (local.set $this (ref.cast_static $intersectiontype.IntersectionTypeTest (local.get $this.untyped)))
+ (local.set $this (ref.cast $intersectiontype.IntersectionTypeTest (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest) ))
  )
@@ -960,7 +960,7 @@
  (result i32)
  ;;@ intersectiontype/IntersectionTypeTest.java:71:26
  (local $this (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1))
- (local.set $this (ref.cast_static $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 (local.get $this.untyped)))
+ (local.set $this (ref.cast $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 (local.get $this.untyped)))
  (block
   ;;@ intersectiontype/IntersectionTypeTest.java:71:32
   (return (i32.const 1))
@@ -1005,7 +1005,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1))
- (local.set $this (ref.cast_static $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 (local.get $this.untyped)))
+ (local.set $this (ref.cast $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1) ))
  )
@@ -1062,7 +1062,7 @@
  (result i32)
  ;;@ intersectiontype/IntersectionTypeTest.java:76:27
  (local $this (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2))
- (local.set $this (ref.cast_static $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 (local.get $this.untyped)))
+ (local.set $this (ref.cast $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 (local.get $this.untyped)))
  (block
   ;;@ intersectiontype/IntersectionTypeTest.java:76:34
   (return (i32.const 1))
@@ -1107,7 +1107,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2))
- (local.set $this (ref.cast_static $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 (local.get $this.untyped)))
+ (local.set $this (ref.cast $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2) ))
  )
@@ -1166,7 +1166,7 @@
  (result (ref null $java.lang.Object))
  ;;@ intersectiontype/IntersectionTypeTest.java:44:26
  (local $this (ref null $intersectiontype.IntersectionTypeTest.MapEntry))
- (local.set $this (ref.cast_static $intersectiontype.IntersectionTypeTest.MapEntry (local.get $this.untyped)))
+ (local.set $this (ref.cast $intersectiontype.IntersectionTypeTest.MapEntry (local.get $this.untyped)))
  (block
   ;;@ intersectiontype/IntersectionTypeTest.java:45:6
   (return (local.get $o))
@@ -1211,7 +1211,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $intersectiontype.IntersectionTypeTest.MapEntry))
- (local.set $this (ref.cast_static $intersectiontype.IntersectionTypeTest.MapEntry (local.get $this.untyped)))
+ (local.set $this (ref.cast $intersectiontype.IntersectionTypeTest.MapEntry (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest.MapEntry) ))
  )
@@ -1295,7 +1295,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $intersectiontype.IntersectionTypeTest.A))
- (local.set $this (ref.cast_static $intersectiontype.IntersectionTypeTest.A (local.get $this.untyped)))
+ (local.set $this (ref.cast $intersectiontype.IntersectionTypeTest.A (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest.A) ))
  )
@@ -1379,7 +1379,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $intersectiontype.IntersectionTypeTest.SomeConcreteType))
- (local.set $this (ref.cast_static $intersectiontype.IntersectionTypeTest.SomeConcreteType (local.get $this.untyped)))
+ (local.set $this (ref.cast $intersectiontype.IntersectionTypeTest.SomeConcreteType (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest.SomeConcreteType) ))
  )

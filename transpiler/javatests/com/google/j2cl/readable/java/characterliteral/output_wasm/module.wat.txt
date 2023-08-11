@@ -68,7 +68,7 @@
  ;;@ characterliteral/CharacterLiteral.java:20:14
  (local $a i32)
  (local $this (ref null $characterliteral.CharacterLiteral))
- (local.set $this (ref.cast_static $characterliteral.CharacterLiteral (local.get $this.untyped)))
+ (local.set $this (ref.cast $characterliteral.CharacterLiteral (local.get $this.untyped)))
  (block
   ;;@ characterliteral/CharacterLiteral.java:21:4
   (local.set $a (i32.const 32))
@@ -355,7 +355,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $characterliteral.CharacterLiteral))
- (local.set $this (ref.cast_static $characterliteral.CharacterLiteral (local.get $this.untyped)))
+ (local.set $this (ref.cast $characterliteral.CharacterLiteral (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@characterliteral.CharacterLiteral) ))
  )

@@ -128,7 +128,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $aptgeneratordep.Dummy))
- (local.set $this (ref.cast_static $aptgeneratordep.Dummy (local.get $this.untyped)))
+ (local.set $this (ref.cast $aptgeneratordep.Dummy (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@aptgeneratordep.Dummy) ))
  )
@@ -185,7 +185,7 @@
  ;;@ aptgeneratordep/Foo.java:21:13
  (local $$qualifier (ref null $java.lang.Class))
  (local $this (ref null $aptgeneratordep.Foo))
- (local.set $this (ref.cast_static $aptgeneratordep.Foo (local.get $this.untyped)))
+ (local.set $this (ref.cast $aptgeneratordep.Foo (local.get $this.untyped)))
  (block
   ;;@ aptgeneratordep/Foo.java:23:4
   (return (block (result i32)
@@ -233,7 +233,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $aptgeneratordep.Foo))
- (local.set $this (ref.cast_static $aptgeneratordep.Foo (local.get $this.untyped)))
+ (local.set $this (ref.cast $aptgeneratordep.Foo (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@aptgeneratordep.Foo) ))
  )

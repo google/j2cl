@@ -86,7 +86,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $objectmap.ObjectMap.$Overlay))
- (local.set $this (ref.cast_static $objectmap.ObjectMap.$Overlay (local.get $this.untyped)))
+ (local.set $this (ref.cast $objectmap.ObjectMap.$Overlay (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@objectmap.ObjectMap.$Overlay) ))
  )

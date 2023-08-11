@@ -94,7 +94,7 @@
  (local $minusZeroD f64)
  (local $minusMinusZeroD f64)
  (local $this (ref null $simpleliterals.SimpleLiterals))
- (local.set $this (ref.cast_static $simpleliterals.SimpleLiterals (local.get $this.untyped)))
+ (local.set $this (ref.cast $simpleliterals.SimpleLiterals (local.get $this.untyped)))
  (block
   ;;@ simpleliterals/SimpleLiterals.java:21:4
   (local.set $bool (i32.const 0))
@@ -189,7 +189,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simpleliterals.SimpleLiterals))
- (local.set $this (ref.cast_static $simpleliterals.SimpleLiterals (local.get $this.untyped)))
+ (local.set $this (ref.cast $simpleliterals.SimpleLiterals (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simpleliterals.SimpleLiterals) ))
  )

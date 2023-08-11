@@ -72,7 +72,7 @@
  (result i32)
  ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:24:13
  (local $this (ref null $staticfieldaccesslevels.StaticFieldAccessLevels))
- (local.set $this (ref.cast_static $staticfieldaccesslevels.StaticFieldAccessLevels (local.get $this.untyped)))
+ (local.set $this (ref.cast $staticfieldaccesslevels.StaticFieldAccessLevels (local.get $this.untyped)))
  (block
   ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:25:4
   (return (if (result i32) (global.get $f_b__staticfieldaccesslevels_StaticFieldAccessLevels_) (then (global.get $f_a__staticfieldaccesslevels_StaticFieldAccessLevels)) (else (global.get $f_d__staticfieldaccesslevels_StaticFieldAccessLevels))))
@@ -117,7 +117,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $staticfieldaccesslevels.StaticFieldAccessLevels))
- (local.set $this (ref.cast_static $staticfieldaccesslevels.StaticFieldAccessLevels (local.get $this.untyped)))
+ (local.set $this (ref.cast $staticfieldaccesslevels.StaticFieldAccessLevels (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@staticfieldaccesslevels.StaticFieldAccessLevels) ))
  )

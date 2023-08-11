@@ -182,7 +182,7 @@ final class ExpressionTranspiler {
             castExpression.getCastTypeDescriptor().toRawTypeDescriptor();
 
         if (TypeDescriptors.isJavaLangObject(castTypeDescriptor)) {
-          // Avoid unncessary casts to j.l.Object. This also helps avoiding a Wasm cast whem going
+          // Avoid unnecessary casts to j.l.Object. This also helps avoiding a Wasm cast whem going
           // from native arrays to WasmOpaque objects (and vice versa) which would otherwise fail.
           render(castExpression.getExpression());
           return false;
@@ -199,7 +199,7 @@ final class ExpressionTranspiler {
         // TODO(b/184675805): implement array cast expressions beyond this nominal
         // implementation.
         sourceBuilder.append(
-            format("(ref.cast_static %s ", environment.getWasmTypeName(castTypeDescriptor)));
+            format("(ref.cast null %s ", environment.getWasmTypeName(castTypeDescriptor)));
         render(castExpression.getExpression());
         sourceBuilder.append(")");
         return false;
@@ -251,7 +251,7 @@ final class ExpressionTranspiler {
         // implementation.
         if (!testTypeDescriptor.isInterface()) {
           sourceBuilder.append(
-              format("(ref.test_static %s ", environment.getWasmTypeName(testTypeDescriptor)));
+              format("(ref.test %s ", environment.getWasmTypeName(testTypeDescriptor)));
           render(instanceOfExpression.getExpression());
           sourceBuilder.append(")");
         } else {
@@ -278,7 +278,7 @@ final class ExpressionTranspiler {
           // interface vtable, since the slots are reused.
           sourceBuilder.append(
               format(
-                  "(ref.test_static %s (struct.get $itable $slot%d (struct.get $java.lang.Object"
+                  "(ref.test %s (struct.get $itable $slot%d (struct.get $java.lang.Object"
                       + " $itable ",
                   environment.getWasmVtableTypeName(targetTypeDescriptor), interfaceSlot));
           render(instanceOfExpression.getExpression());
@@ -459,12 +459,15 @@ final class ExpressionTranspiler {
                 String.format(
                     "(ref.null %s)", environment.getWasmVtableTypeName(enclosingTypeDescriptor)));
           } else {
-
             // Retrieve the interface vtable from the corresponding slot field in the $itable
             // and cast it to the appropriate type.
+            // Use `ref.cast` rather than `ref.cast null` to retrieve the interface vtable. If the
+            // receiver was `null` then the NPE will be thrown when retrieving the `$itable` field.
+            // Otherwise if the receiver is not null, then at this point we expect that the
+            // correct interface vtable in the `itable` slot.
             sourceBuilder.append(
                 String.format(
-                    "(ref.cast_static %s (struct.get $itable $slot%d (struct.get %s $itable ",
+                    "(ref.cast %s (struct.get $itable $slot%d (struct.get %s $itable ",
                     environment.getWasmVtableTypeName(enclosingTypeDescriptor),
                     itableSlot,
                     environment.getWasmTypeName(enclosingTypeDescriptor)));
