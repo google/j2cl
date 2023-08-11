@@ -33,7 +33,10 @@ public class BitSet implements Cloneable {
   private static final int WORD_MASK = 0x7fffffff;
   private static final int BITS_PER_WORD = 31;
 
-  private final int[] array;
+  private int[] array;
+
+  /** The length based on the last set word. */
+  private int wordLength;
 
   public BitSet() {
     array = new int[0];
@@ -42,12 +45,19 @@ public class BitSet implements Cloneable {
   public BitSet(int nbits) {
     checkArraySize(nbits);
     int length = wordIndex(nbits - 1) + 1;
-    array = new int[0];
-    ArrayHelper.setLength(array, length);
+    array = ArrayHelper.setLength(new int[0], length);
   }
 
   private BitSet(int[] array) {
     this.array = array;
+    this.wordLength = array.length;
+    updateWordLength();
+  }
+
+  private void updateWordLength() {
+    int i = wordLength - 1;
+    for (; i >= 0 && wordAt(array, i) == 0; --i) {}
+    wordLength = i + 1;
   }
 
   private static void checkIndex(int bitIndex) {
@@ -100,11 +110,11 @@ public class BitSet implements Cloneable {
    * @param fromIndex The lower bit index.
    * @param toIndex The upper bit index.
    */
-  private static void setInternal(int[] array, int fromIndex, int toIndex) {
+  private void setInternal(int fromIndex, int toIndex) {
     int first = wordIndex(fromIndex);
     int last = wordIndex(toIndex);
 
-    maybeGrowArrayToIndex(array, last);
+    maybeGrowArrayToIndex(last);
 
     int startBit = bitOffset(fromIndex);
     int endBit = bitOffset(toIndex);
@@ -124,28 +134,19 @@ public class BitSet implements Cloneable {
         array[i] = WORD_MASK;
       }
     }
+    if (last >= wordLength) {
+      wordLength = last + 1;
+    }
   }
 
-  private static void maybeGrowArrayToIndex(int[] array, int newMaxIndex) {
+  private void maybeGrowArrayToIndex(int newMaxIndex) {
     // TODO: This code has a potential problem:
     // If we grow the array more than 1024 places the array will degenerate into a map,
     // we can work around this by adding 0 to the arrays.
     int newLength = newMaxIndex + 1;
     if (newLength > array.length) {
-      ArrayHelper.setLength(array, newLength);
+      array = ArrayHelper.resize(array, newLength);
     }
-  }
-
-  /**
-   * Returns the index of the last word containing a true bit in an array, or -1 if none.
-   *
-   * @param array The array.
-   * @return The index of the last word containing a true bit, or -1 if none.
-   */
-  private static int lastSetWordIndex(int[] array) {
-    int i = array.length - 1;
-    for (; i >= 0 && wordAt(array, i) == 0; --i) { }
-    return i;
   }
 
   /**
@@ -220,7 +221,7 @@ public class BitSet implements Cloneable {
   }
 
   private static int wordAt(int[] array, int index) {
-    return array[index] | 0; // ensure int even if we go out of bounds.
+    return array[index] | 0; // ensure int even if we touch uninitialized JS array index.
   }
 
   public void and(BitSet set) {
@@ -238,7 +239,7 @@ public class BitSet implements Cloneable {
     // 4    | true  | true  | true  | a is already true
     //
     // We only need to change something in case 3, so iterate over set a.
-    int limit = Math.min(array.length, set.array.length);
+    int limit = Math.min(wordLength, set.wordLength);
     int index = 0;
     for (; index < limit; index++) {
       int word = wordAt(array, index);
@@ -246,7 +247,8 @@ public class BitSet implements Cloneable {
         array[index] = word & wordAt(set.array, index);
       }
     }
-    Arrays.fill(array, index, array.length, 0);
+    Arrays.fill(array, limit, wordLength, 0);
+    updateWordLength();
   }
 
   public void andNot(BitSet set) {
@@ -266,7 +268,7 @@ public class BitSet implements Cloneable {
     //
     // We only need to change something in case 4. Whenever b is true, a should be false, so
     // iterate over set b.
-    int limit = Math.min(array.length, set.array.length);
+    int limit = Math.min(wordLength, set.wordLength);
     for (int index = 0; index < limit; index++) {
       int otherWord = wordAt(set.array, index);
       if (otherWord != 0) {
@@ -276,25 +278,27 @@ public class BitSet implements Cloneable {
         }
       }
     }
+    updateWordLength();
   }
 
   public int cardinality() {
     int count = 0;
-    for (int i = 0; i < array.length; i++) {
+    for (int i = 0; i < wordLength; i++) {
       count += Integer.bitCount(wordAt(array, i));
     }
     return count;
   }
 
   public void clear() {
-    ArrayHelper.setLength(array, 0);
+    array = ArrayHelper.resize(array, 0);
+    wordLength = 0;
   }
 
   public void clear(int bitIndex) {
     checkIndex(bitIndex);
 
     int index = wordIndex(bitIndex);
-    if (index >= array.length) {
+    if (index >= wordLength) {
       return;
     }
 
@@ -302,6 +306,7 @@ public class BitSet implements Cloneable {
     if (word != 0) {
       array[index] = word & ~(1 << bitOffset(bitIndex)) & WORD_MASK;
     }
+    updateWordLength();
   }
 
   public void clear(int fromIndex, int toIndex) {
@@ -312,14 +317,15 @@ public class BitSet implements Cloneable {
     }
 
     int first = wordIndex(fromIndex);
-    if (first >= array.length) {
+    if (first >= wordLength) {
       return;
     }
 
     int last = wordIndex(toIndex);
-    if (last >= array.length) {
+    if (last >= wordLength) {
       toIndex = length();
       last = wordIndex(toIndex);
+      wordLength = first + 1;
     }
 
     int startBit = bitOffset(fromIndex);
@@ -337,10 +343,11 @@ public class BitSet implements Cloneable {
 
       Arrays.fill(array, first + 1, last, 0);
     }
+    updateWordLength();
   }
 
   public Object clone() {
-    return new BitSet(Arrays.copyOf(array, array.length));
+    return new BitSet(Arrays.copyOf(array, wordLength));
   }
 
   @Override
@@ -355,12 +362,11 @@ public class BitSet implements Cloneable {
 
     BitSet other = (BitSet) obj;
 
-    int lastIndex = lastSetWordIndex(array);
-    if (lastIndex != lastSetWordIndex(other.array)) {
+    if (wordLength != other.wordLength) {
       return false;
     }
 
-    for (int index = 0; index <= lastIndex; index++) {
+    for (int index = 0; index < wordLength; index++) {
       if (wordAt(array, index) != wordAt(other.array, index)) {
         return false;
       }
@@ -374,7 +380,7 @@ public class BitSet implements Cloneable {
     int index = wordIndex(bitIndex);
     int offset = bitOffset(bitIndex);
 
-    maybeGrowArrayToIndex(array, index);
+    maybeGrowArrayToIndex(index);
 
     int word = wordAt(array, index);
     if (((word >>> offset) & 1) == 1) {
@@ -383,6 +389,11 @@ public class BitSet implements Cloneable {
       word = (word | (1 << offset));
     }
     array[index] = word & WORD_MASK;
+    if (index >= wordLength) {
+      wordLength = index + 1;
+    } else {
+      updateWordLength();
+    }
   }
 
   public void flip(int fromIndex, int toIndex) {
@@ -395,12 +406,12 @@ public class BitSet implements Cloneable {
     // If we are flipping bits beyond our length, we are setting them to true.
     int length = length();
     if (fromIndex >= length) {
-      setInternal(array, fromIndex, toIndex);
+      setInternal(fromIndex, toIndex);
       return;
     }
 
     if (toIndex >= length) {
-      setInternal(array, length, toIndex);
+      setInternal(length, toIndex);
       toIndex = length;
     }
 
@@ -425,6 +436,8 @@ public class BitSet implements Cloneable {
         array[i] = ~wordAt(array, i) & WORD_MASK;
       }
     }
+
+    updateWordLength();
   }
 
   public boolean get(int bitIndex) {
@@ -432,7 +445,7 @@ public class BitSet implements Cloneable {
 
     int index = wordIndex(bitIndex);
     // Shift and mask the bit out
-    return index < array.length && ((wordAt(array, index) >>> bitOffset(bitIndex)) & 1) == 1;
+    return index < wordLength && ((wordAt(array, index) >>> bitOffset(bitIndex)) & 1) == 1;
   }
 
   public BitSet get(int fromIndex, int toIndex) {
@@ -510,7 +523,7 @@ public class BitSet implements Cloneable {
     final int fnvOffset = 0x811c9dc5;
     final int fnvPrime = 0x1000193;
 
-    final int lastIndex = lastSetWordIndex(array);
+    final int lastIndex = wordLength - 1;
     int hash = fnvOffset ^ lastIndex;
 
     for (int i = 0; i <= lastIndex; i++) {
@@ -531,7 +544,7 @@ public class BitSet implements Cloneable {
       return length() > 0;
     }
 
-    int limit = Math.min(array.length, set.array.length);
+    int limit = Math.min(wordLength, set.wordLength);
     for (int index = 0; index < limit; index++) {
       int word = wordAt(array, index);
       if (word != 0 && (word & wordAt(set.array, index)) != 0) {
@@ -546,7 +559,7 @@ public class BitSet implements Cloneable {
   }
 
   public int length() {
-    int lastIndex = lastSetWordIndex(array);
+    int lastIndex = wordLength - 1;
     if (lastIndex == -1) {
       return 0;
     }
@@ -560,7 +573,7 @@ public class BitSet implements Cloneable {
     checkIndex(fromIndex);
 
     int index = wordIndex(fromIndex);
-    int length = array.length;
+    int length = wordLength;
     if (index >= length) {
       return fromIndex;
     }
@@ -581,7 +594,7 @@ public class BitSet implements Cloneable {
     checkIndex(fromIndex);
 
     int index = wordIndex(fromIndex);
-    int length = array.length;
+    int length = wordLength;
     if (index >= length) {
       return -1;
     }
@@ -604,7 +617,7 @@ public class BitSet implements Cloneable {
     checkIndex(fromIndex);
 
     int index = wordIndex(fromIndex);
-    if (index >= array.length) {
+    if (index >= wordLength) {
       return fromIndex;
     }
 
@@ -627,7 +640,7 @@ public class BitSet implements Cloneable {
     checkIndex(fromIndex);
 
     int index = wordIndex(fromIndex);
-    if (index >= array.length) {
+    if (index >= wordLength) {
       return length() - 1;
     }
 
@@ -648,7 +661,7 @@ public class BitSet implements Cloneable {
       return;
     }
 
-    maybeGrowArrayToIndex(array, set.array.length - 1);
+    maybeGrowArrayToIndex(set.wordLength - 1);
 
     // Truth table
     //
@@ -660,19 +673,24 @@ public class BitSet implements Cloneable {
     //
     // We only need to change something in case 2. Case 2 only happens when b is true, so iterate
     // over set b
-    for (int index = 0; index < set.array.length; index++) {
+    for (int index = 0; index < set.wordLength; index++) {
       int word = wordAt(set.array, index);
       if (word != 0) {
         array[index] = wordAt(array, index) | word;
       }
     }
+
+    wordLength = Math.max(wordLength, set.wordLength);
   }
 
   public void set(int bitIndex) {
     checkIndex(bitIndex);
     int index = wordIndex(bitIndex);
-    maybeGrowArrayToIndex(array, index);
+    maybeGrowArrayToIndex(index);
     array[index] = wordAt(array, index) | (1 << bitOffset(bitIndex));
+    if (index >= wordLength) {
+      wordLength = index + 1;
+    }
   }
 
   public void set(int bitIndex, boolean value) {
@@ -686,7 +704,7 @@ public class BitSet implements Cloneable {
   public void set(int fromIndex, int toIndex) {
     checkRange(fromIndex, toIndex);
     if (fromIndex != toIndex) {
-      setInternal(array, fromIndex, toIndex);
+      setInternal(fromIndex, toIndex);
     }
   }
 
@@ -728,7 +746,7 @@ public class BitSet implements Cloneable {
       return;
     }
 
-    maybeGrowArrayToIndex(array, set.array.length - 1);
+    maybeGrowArrayToIndex(set.wordLength - 1);
 
     // Truth table
     //
@@ -740,11 +758,15 @@ public class BitSet implements Cloneable {
     //
     // We need to change something in cases 2 and 4. Cases 2 and 4 only happen when b is true,
     // so iterate over set b.
-    for (int index = 0; index < set.array.length; index++) {
+    for (int index = 0; index < set.wordLength; index++) {
       int word = wordAt(set.array, index);
       if (word != 0) {
         array[index] = wordAt(array, index) ^ word;
       }
+    }
+    if (wordLength <= set.wordLength) {
+      wordLength = set.wordLength;
+      updateWordLength();
     }
   }
 

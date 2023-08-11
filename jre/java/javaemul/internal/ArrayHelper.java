@@ -71,9 +71,18 @@ public final class ArrayHelper {
     return asNativeArray(array).length;
   }
 
+  /** Sets the length of an array to particular size. */
   public static <T> T setLength(T array, int length) {
     asNativeArray(array).length = length;
     return array;
+  }
+
+  /**
+   * Resize the array to accomodate requested length. For JavaScript this is same as setting the
+   * length.
+   */
+  public static <T> T resize(T array, int length) {
+    return setLength(array, length);
   }
 
   public static void push(Object array, @DoNotAutobox Object o) {
