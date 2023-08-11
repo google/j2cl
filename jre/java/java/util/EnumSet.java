@@ -16,73 +16,45 @@
 package java.util;
 
 import static javaemul.internal.InternalPreconditions.checkArgument;
-import static javaemul.internal.InternalPreconditions.checkElement;
-import static javaemul.internal.InternalPreconditions.checkNotNull;
-import static javaemul.internal.InternalPreconditions.checkState;
 
 /**
  * J2CL compatible implementation of EnumSet. Notably, some methods are not included since
  * Enum#getDeclaringClass is not supported for code size reasons.
  */
 public class EnumSet<E extends Enum<E>> extends AbstractSet<E> implements Cloneable {
-  private HashSet<E> set = new HashSet<>();
+  private TreeMap<E, Object> map = new TreeMap<E, Object>();
 
   EnumSet() {}
 
   @Override
   public boolean add(E e) {
-    checkNotNull(e);
-    return set.add(e);
+    Object old = map.put(e, this);
+    return (old == null);
   }
 
   @Override
   public boolean remove(Object o) {
-    return set.remove(o);
+    return map.remove(o) != null;
   }
 
   @Override
   public boolean contains(Object o) {
-    return set.contains(o);
+    return map.containsKey(o);
   }
 
   @Override
   public int size() {
-    return set.size();
+    return map.size();
   }
 
   @Override
   public void clear() {
-    set.clear();
+    map.clear();
   }
 
   @Override
   public Iterator<E> iterator() {
-    List<E> sortedEnums = new ArrayList<>(this.set);
-    Collections.sort(sortedEnums);
-    return new Iterator<E>() {
-      int i = 0, last = -1;
-
-      @Override
-      public boolean hasNext() {
-        return i < sortedEnums.size();
-      }
-
-      @Override
-      public E next() {
-        checkElement(hasNext());
-
-        last = i++;
-        return sortedEnums.get(last);
-      }
-
-      @Override
-      public void remove() {
-        checkState(last != -1);
-
-        EnumSet.this.remove(sortedEnums.get(last));
-        last = -1;
-      }
-    };
+    return map.keySet().iterator();
   }
 
   public static <E extends Enum<E>> EnumSet<E> of(E first) {

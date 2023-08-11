@@ -15,9 +15,6 @@
  */
 package java.util;
 
-import static javaemul.internal.InternalPreconditions.checkState;
-
-import javaemul.internal.ArrayHelper;
 
 /**
  * A {@link java.util.Map} of {@link Enum}s. <a
@@ -28,93 +25,9 @@ import javaemul.internal.ArrayHelper;
  */
 public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> implements Cloneable {
 
-  private final class EntrySet extends AbstractSet<Entry<K, V>> {
+  private TreeMap<K, V> map = new TreeMap<K, V>();
 
-    @Override
-    public void clear() {
-      EnumMap.this.clear();
-    }
-
-    @Override
-    public boolean contains(Object o) {
-      if (o instanceof Map.Entry) {
-        return containsEntry((Map.Entry<?, ?>) o);
-      }
-      return false;
-    }
-
-    @Override
-    public Iterator<Entry<K, V>> iterator() {
-      return new EntrySetIterator();
-    }
-
-    @Override
-    public boolean remove(Object entry) {
-      if (contains(entry)) {
-        Object key = ((Map.Entry<?, ?>) entry).getKey();
-        EnumMap.this.remove(key);
-        return true;
-      }
-      return false;
-    }
-
-    @Override
-    public int size() {
-      return EnumMap.this.size();
-    }
-  }
-
-  private final class EntrySetIterator implements Iterator<Entry<K, V>> {
-    private Iterator<K> it = keySet.iterator();
-    private K key;
-
-    @Override
-    public boolean hasNext() {
-      return it.hasNext();
-    }
-
-    @Override
-    public Entry<K, V> next() {
-      key = it.next();
-      return new MapEntry(key);
-    }
-
-    @Override
-    public void remove() {
-      checkState(key != null);
-
-      EnumMap.this.remove(key);
-      key = null;
-    }
-  }
-
-  private class MapEntry extends AbstractMapEntry<K, V> {
-
-    private final K key;
-
-    public MapEntry(K key) {
-      this.key = key;
-    }
-
-    @Override
-    public K getKey() {
-      return key;
-    }
-
-    @Override
-    public V getValue() {
-      return values[key.ordinal()];
-    }
-
-    @Override
-    public V setValue(V value) {
-      return ArrayHelper.setAt(values, key.ordinal(), value);
-    }
-  }
-
-  private EnumSet<K> keySet = new EnumSet<K>();
-
-  private V[] values = (V[]) new Object[0];
+  EnumMap() {}
 
   public EnumMap(Class<K> type) {}
 
@@ -122,11 +35,9 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> implements 
     putAll(m);
   }
 
-  @SuppressWarnings("unchecked")
   @Override
   public void clear() {
-    keySet.clear();
-    values = (V[]) new Object[values.length];
+    map.clear();
   }
 
   public EnumMap<K, V> clone() {
@@ -135,56 +46,41 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> implements 
 
   @Override
   public boolean containsKey(Object key) {
-    return keySet.contains(key);
+    return map.containsKey(key);
   }
 
   @Override
   public boolean containsValue(Object value) {
-    for (K key : keySet) {
-      if (Objects.equals(value, values[key.ordinal()])) {
-        return true;
-      }
-    }
-    return false;
+    return map.containsValue(value);
+  }
+
+  @Override
+  public Set<K> keySet() {
+    return map.keySet();
   }
 
   @Override
   public Set<Map.Entry<K, V>> entrySet() {
-    return new EntrySet();
+    return map.entrySet();
   }
 
   @Override
   public V get(Object k) {
-    return keySet.contains(k) ? values[asOrdinal(k)] : null;
+    return map.get(k);
   }
 
   @Override
   public V put(K key, V value) {
-    keySet.add(key);
-    return ArrayHelper.setAt(values, key.ordinal(), value);
+    return map.put(key, value);
   }
 
   @Override
   public V remove(Object key) {
-    return keySet.remove(key) ? ArrayHelper.setAt(values, asOrdinal(key), null) : null;
+    return map.remove(key);
   }
 
   @Override
   public int size() {
-    return keySet.size();
-  }
-
-  /**
-   * Returns <code>key</code> as <code>K</code>. Only runtime checks that
-   * key is an Enum, not that it's the particular Enum K. Should only be called
-   * when you are sure <code>key</code> is of type <code>K</code>.
-   */
-  @SuppressWarnings("unchecked")
-  private K asKey(Object key) {
-    return (K) key;
-  }
-
-  private int asOrdinal(Object key) {
-    return asKey(key).ordinal();
+    return map.size();
   }
 }
