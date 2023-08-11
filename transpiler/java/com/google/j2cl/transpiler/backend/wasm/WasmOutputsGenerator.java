@@ -249,13 +249,13 @@ public class WasmOutputsGenerator {
     builder.newLine();
     // The itable is a struct that contains only interface vtables. Interfaces are assigned a slot
     // on this struct based on the classes that implement them.
-    builder.append("(type $itable (struct_subtype ");
+    builder.append("(type $itable (sub (struct ");
     for (int slot = 0; slot < environment.getNumberOfInterfaceSlots(); slot++) {
       builder.newLine();
       builder.append(format("(field $slot%d (ref null struct))", slot));
     }
     builder.newLine();
-    builder.append("data ))");
+    builder.append(")))");
   }
 
   private void emitGlobals(Library library) {
