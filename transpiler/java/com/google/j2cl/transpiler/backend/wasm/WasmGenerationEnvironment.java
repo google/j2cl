@@ -152,16 +152,16 @@ class WasmGenerationEnvironment {
       return getWasmTypeName(TypeDescriptors.get().javaLangObject);
     }
 
-    return "$" + getTypeSignature(typeDescriptor);
+    return getTypeSignature(typeDescriptor);
   }
 
   private static String getTypeSignature(TypeDescriptor typeDescriptor) {
     if (typeDescriptor.isPrimitive()) {
-      return typeDescriptor.getReadableDescription();
+      return "$" + typeDescriptor.getReadableDescription();
     }
     typeDescriptor = typeDescriptor.toRawTypeDescriptor();
     if (typeDescriptor instanceof DeclaredTypeDescriptor) {
-      return ((DeclaredTypeDescriptor) typeDescriptor).getQualifiedSourceName();
+      return "$" + ((DeclaredTypeDescriptor) typeDescriptor).getQualifiedSourceName();
     }
 
     throw new AssertionError("Unexpected type: " + typeDescriptor.getReadableDescription());
@@ -178,7 +178,7 @@ class WasmGenerationEnvironment {
     if (!typeDescriptor.getTypeDeclaration().implementsInterfaces()) {
       return "$itable.empty";
     }
-    return "$" + getTypeSignature(typeDescriptor) + ".itable";
+    return getTypeSignature(typeDescriptor) + ".itable";
   }
 
   /** Returns the name of the global that stores the itable for a Java type. */
@@ -188,7 +188,7 @@ class WasmGenerationEnvironment {
 
   /** Returns the name of the wasm type of the vtable for a Java type. */
   public String getWasmVtableTypeName(DeclaredTypeDescriptor typeDescriptor) {
-    return "$" + getTypeSignature(typeDescriptor) + ".vtable";
+    return getTypeSignature(typeDescriptor) + ".vtable";
   }
 
   /** Returns the name of the wasm type of the vtable for a Java type. */
@@ -202,7 +202,7 @@ class WasmGenerationEnvironment {
       return "$itable";
     }
 
-    return "$" + getTypeSignature(typeDeclaration.toUnparameterizedTypeDescriptor()) + ".itable";
+    return getTypeSignature(typeDeclaration.toUnparameterizedTypeDescriptor()) + ".itable";
   }
 
   /** Returns the name of the global that stores the vtable for a Java type. */
