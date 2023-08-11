@@ -6,22 +6,22 @@
   ))
  )
  (type $objcnametype.ObjCNameType.vtable (sub $java.lang.Object.vtable (struct
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
   ))
  )
 
 ;;; Code for objcnametype.ObjCNameType [vtable.init]
 (global $objcnametype.ObjCNameType.vtable (ref $objcnametype.ObjCNameType.vtable)
  (struct.new $objcnametype.ObjCNameType.vtable
+  (ref.func $$getClassImpl__java_lang_Class@objcnametype.ObjCNameType)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
-  (ref.func $$getClassImpl__java_lang_Class@objcnametype.ObjCNameType)
  )
 )
 

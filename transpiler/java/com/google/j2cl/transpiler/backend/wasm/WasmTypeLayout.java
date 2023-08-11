@@ -18,10 +18,11 @@ package com.google.j2cl.transpiler.backend.wasm;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
+import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Field;
-import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Type;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -77,12 +78,26 @@ abstract class WasmTypeLayout {
       instanceMethodsByMangledName.putAll(
           getWasmSupertypeLayout().getAllPolymorphicMethodsByMangledName());
     }
-    for (Method method : getJavaType().getMethods()) {
-      MethodDescriptor methodDescriptor = method.getDescriptor();
-      if (methodDescriptor.isPolymorphic()) {
-        instanceMethodsByMangledName.put(methodDescriptor.getMangledName(), methodDescriptor);
-      }
+    DeclaredTypeDescriptor typeDescriptor = getJavaType().getTypeDescriptor();
+    for (MethodDescriptor methodDescriptor : typeDescriptor.getPolymorphicMethods()) {
+      instanceMethodsByMangledName.put(methodDescriptor.getMangledName(), methodDescriptor);
+    }
+    // Patch entry for $getClassImpl, since it is explicitly overridden in every class but does not
+    // appear as overridden at the right target when calling getPolymorphicMethods().
+    if (!getJavaType().isInterface()) {
+      MethodDescriptor getClassMethodDescriptor = getGetClassMethodDescriptor(typeDescriptor);
+      instanceMethodsByMangledName.put(
+          getClassMethodDescriptor.getMangledName(), getClassMethodDescriptor);
     }
     return instanceMethodsByMangledName;
+  }
+
+  private static MethodDescriptor getGetClassMethodDescriptor(
+      DeclaredTypeDescriptor typeDescriptor) {
+    return MethodDescriptor.Builder.from(
+            TypeDescriptors.get().javaLangObject.getMethodDescriptor("$getClassImpl"))
+        .setEnclosingTypeDescriptor(typeDescriptor)
+        .setSynthetic(true)
+        .build();
   }
 }
