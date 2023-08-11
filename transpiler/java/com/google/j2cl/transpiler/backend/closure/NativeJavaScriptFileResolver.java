@@ -50,7 +50,15 @@ final class NativeJavaScriptFileResolver {
         String content = MoreFiles.asCharSource(Paths.get(file.sourcePath()), UTF_8).read();
         NativeJavaScriptFile nativeFile = new NativeJavaScriptFile(file.targetPath(), content);
         byRelativePath.put(nativeFile.getRelativePathWithoutExtension(), nativeFile);
-        byFullyQualifiedName.put(nativeFile.getFullyQualifiedName(), nativeFile);
+
+        // Only resolve files by qualified name if it has at least one package segment. Otherwise
+        // we are not able to differentiate resolving a fully qualified name vs resolving a relative
+        // path (ex. imagine if we had foo/bar/Platform.native.js and baz/qux/Platform.native.js in
+        // same compilation unit).
+        String qualifiedName = nativeFile.getFullyQualifiedName();
+        if (qualifiedName.indexOf('.') > 0) {
+          byFullyQualifiedName.put(nativeFile.getFullyQualifiedName(), nativeFile);
+        }
       } catch (IOException e) {
         problems.fatal(FatalError.CANNOT_OPEN_FILE, e.toString());
       }

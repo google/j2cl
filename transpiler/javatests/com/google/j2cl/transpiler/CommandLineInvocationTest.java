@@ -295,6 +295,31 @@ public class CommandLineInvocationTest extends TestCase {
             "Unused native file 'nativeclasstest/NativeClass.native.js'.");
   }
 
+  public void testMultipleNativeSourcesWithSameName() {
+    newTesterWithDefaults()
+        .addCompilationUnit(
+            "nativeclasstest.NativeClass",
+            "import jsinterop.annotations.*;",
+            "public class NativeClass {",
+            "  @JsMethod public native void nativeInstanceMethod();",
+            "}")
+        .addFileToZipFile(
+            "native.zip",
+            "nativeclasstest/NativeClass.native.js",
+            "NativeClass.prototype.nativeInstanceMethod = function () {}")
+        .addCompilationUnit(
+            "nativeclasstest.subpackage.NativeClass",
+            "import jsinterop.annotations.*;",
+            "public class NativeClass {",
+            "  @JsMethod public native void otherNativeInstanceMethod();",
+            "}")
+        .addFileToZipFile(
+            "native.zip",
+            "nativeclasstest/subpackage/NativeClass.native.js",
+            "NativeClass.prototype.otherNativeInstanceMethod = function () {}")
+        .assertTranspileSucceeds();
+  }
+
   public void testOutputsToDirectory() throws IOException {
     newTesterWithDefaults()
         .setOutputPath(Files.createTempDirectory("outputdir"))
