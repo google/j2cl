@@ -66,7 +66,7 @@ public class JdtParser {
       List<FileInfo> filePaths, boolean useTargetPath, ImmutableList<String> forbiddenAnnotations) {
 
     // Parse and create a compilation unit for every file.
-    ASTParser parser = newASTParser(true);
+    ASTParser parser = newASTParser();
 
     // The map must be ordered because it will be iterated over later and if it was not ordered then
     // our output would be unstable
@@ -113,11 +113,11 @@ public class JdtParser {
     return new CompilationUnitsAndTypeBindings(compilationUnitsByFilePath, wellKnownTypeBindings);
   }
 
-  private ASTParser newASTParser(boolean resolveBinding) {
+  private ASTParser newASTParser() {
     ASTParser parser = ASTParser.newParser(AST_JLS_VERSION);
 
     parser.setCompilerOptions(compilerOptions);
-    parser.setResolveBindings(resolveBinding);
+    parser.setResolveBindings(true);
     parser.setBindingsRecovery(true);
     parser.setEnvironment(
         Iterables.toArray(classpathEntries, String.class), new String[0], new String[0], false);
