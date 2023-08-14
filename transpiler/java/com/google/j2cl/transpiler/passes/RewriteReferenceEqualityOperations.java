@@ -22,10 +22,9 @@ import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NullLiteral;
-import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.ast.RuntimeMethods;
 
 /**
  * Rewrites equality operations on references.
@@ -60,18 +59,11 @@ public class RewriteReferenceEqualityOperations extends NormalizationPass {
     checkArgument(expression.getOperator() == BinaryOperator.EQUALS);
 
     if (expression.getRightOperand() instanceof NullLiteral) {
-      return createIsNullCall(expression.getLeftOperand());
+      return RuntimeMethods.createPlatformIsNullCall(expression.getLeftOperand());
     } else if (expression.getLeftOperand() instanceof NullLiteral) {
-      return createIsNullCall(expression.getRightOperand());
+      return RuntimeMethods.createPlatformIsNullCall(expression.getRightOperand());
     } else {
       return expression;
     }
-  }
-
-  private static Expression createIsNullCall(Expression reference) {
-    return MethodCall.Builder.from(
-            TypeDescriptors.get().javaemulInternalPlatform.getMethodDescriptorByName("isNull"))
-        .setArguments(reference)
-        .build();
   }
 }

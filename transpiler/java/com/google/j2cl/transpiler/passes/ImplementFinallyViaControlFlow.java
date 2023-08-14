@@ -15,9 +15,11 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.Block;
@@ -25,6 +27,7 @@ import com.google.j2cl.transpiler.ast.BreakStatement;
 import com.google.j2cl.transpiler.ast.CatchClause;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.ContinueStatement;
+import com.google.j2cl.transpiler.ast.IfStatement;
 import com.google.j2cl.transpiler.ast.Label;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.Method;
@@ -33,6 +36,7 @@ import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
+import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SwitchCase;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
@@ -255,7 +259,7 @@ public class ImplementFinallyViaControlFlow extends NormalizationPass {
               originalTryStatement.getFinallyBlock(),
               // And finally using the exit selector and the saved values do the appropriate
               // dispatch.
-              createExitSwitch())
+              createExitStatement())
           .build();
     }
 
@@ -385,7 +389,21 @@ public class ImplementFinallyViaControlFlow extends NormalizationPass {
     }
 
     /** Creates the code to perform the exit of the try finally block. */
-    private Statement createExitSwitch() {
+    private Statement createExitStatement() {
+      // There is always at least the handling of exceptions.
+      checkState(!exitStatements.isEmpty());
+      if (exitStatements.size() == 1) {
+        // So if there is only one exit statement, it should be a throw. The selector does not need
+        // to be tracked.
+        ThrowStatement exitStatement = (ThrowStatement) Iterables.getOnlyElement(exitStatements);
+        return IfStatement.newBuilder()
+            .setSourcePosition(originalTryStatement.getSourcePosition())
+            .setConditionExpression(
+                RuntimeMethods.createPlatformIsNullCall(savedThrownVariable.createReference())
+                    .prefixNot())
+            .setThenStatement(exitStatement)
+            .build();
+      }
       SwitchStatement.Builder dispatchStatementBuilder =
           SwitchStatement.newBuilder()
               .setSwitchExpression(exitSelectorVariable.createReference())

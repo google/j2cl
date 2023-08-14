@@ -413,6 +413,13 @@ public final class RuntimeMethods {
     return createPrimitivesMethodCall(methodName, expression);
   }
 
+  public static Expression createPlatformIsNullCall(Expression reference) {
+    return MethodCall.Builder.from(
+            TypeDescriptors.get().javaemulInternalPlatform.getMethodDescriptorByName("isNull"))
+        .setArguments(reference)
+        .build();
+  }
+
   /** Creates a method call to BoxedType.xxxValue(). */
   public static MethodCall createUnboxingMethodCall(
       Expression expression, DeclaredTypeDescriptor boxedType) {

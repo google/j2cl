@@ -313,14 +313,12 @@
     )))
    )
    ;;@ trycatch/TryCatch.java:55:4
-   (block
-    (block ;; evaluate expression and jump
-     (br_table 0 1 (i32.sub (local.get $exitSelector.0) (i32.const 1)))
+   (if (i32.eqz (ref.is_null (local.get $savedThrown.0)))
+    (then
+     ;;@ trycatch/TryCatch.java:55:4
+     (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $savedThrown.0))
+     (unreachable)
     )
-    ;; case 1:
-    ;;@ trycatch/TryCatch.java:55:4
-    (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $savedThrown.0))
-    (unreachable)
    )
   )
  )
@@ -414,14 +412,12 @@
       )
      )
      ;;@ trycatch/TryCatch.java:67:4
-     (block
-      (block ;; evaluate expression and jump
-       (br_table 0 1 (i32.sub (local.get $exitSelector.0) (i32.const 1)))
+     (if (i32.eqz (ref.is_null (local.get $savedThrown.0)))
+      (then
+       ;;@ trycatch/TryCatch.java:67:4
+       (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $savedThrown.0))
+       (unreachable)
       )
-      ;; case 1:
-      ;;@ trycatch/TryCatch.java:67:4
-      (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $savedThrown.0))
-      (unreachable)
      )
     )
    )
@@ -540,14 +536,12 @@
       )
      )
      ;;@ trycatch/TryCatch.java:78:4
-     (block
-      (block ;; evaluate expression and jump
-       (br_table 0 1 (i32.sub (local.get $exitSelector.0) (i32.const 1)))
+     (if (i32.eqz (ref.is_null (local.get $savedThrown.0)))
+      (then
+       ;;@ trycatch/TryCatch.java:78:4
+       (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $savedThrown.0))
+       (unreachable)
       )
-      ;; case 1:
-      ;;@ trycatch/TryCatch.java:78:4
-      (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $savedThrown.0))
-      (unreachable)
      )
     )
    )
@@ -653,14 +647,12 @@
       )
      )
      ;;@ trycatch/TryCatch.java:88:4
-     (block
-      (block ;; evaluate expression and jump
-       (br_table 0 1 (i32.sub (local.get $exitSelector.0) (i32.const 1)))
+     (if (i32.eqz (ref.is_null (local.get $savedThrown.0)))
+      (then
+       ;;@ trycatch/TryCatch.java:88:4
+       (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $savedThrown.0))
+       (unreachable)
       )
-      ;; case 1:
-      ;;@ trycatch/TryCatch.java:88:4
-      (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $savedThrown.0))
-      (unreachable)
      )
     )
    )
