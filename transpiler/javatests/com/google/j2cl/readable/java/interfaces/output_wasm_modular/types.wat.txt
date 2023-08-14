@@ -1,0 +1,87 @@
+
+(type $function.m_testInterfaceMembers__void_$pp_interfaces (func (param (ref $java.lang.Object))))
+(type $function.$getClassImpl__java_lang_Class (func (param (ref $java.lang.Object)) (result (ref null $java.lang.Class))))
+(type $function.m_interfaceMethod__void (func (param (ref $java.lang.Object))))
+(type $function.m_defaultMethod__java_lang_Object__void (func (param (ref $java.lang.Object)) (param (ref null $java.lang.Object))))
+(type $function.m_defaultMethod__java_lang_String__void (func (param (ref $java.lang.Object)) (param (ref null $java.lang.String))))
+(type $itable (sub (struct 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+)))
+;;; Code for Native Array types
+;;; End of code for Native Array types
+;;; Code for interfaces.Main.Interface [type definition]
+(type $interfaces.Main.Interface.vtable (sub (struct
+ (field $m_defaultMethod__java_lang_Object__void (ref $function.m_defaultMethod__java_lang_Object__void))
+ (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
+ ))
+)
+;;; End of code for interfaces.Main.Interface [type definition]
+;;; Code for interfaces.Main.SubInterface [type definition]
+(type $interfaces.Main.SubInterface.vtable (sub (struct
+ (field $m_defaultMethod__java_lang_String__void (ref $function.m_defaultMethod__java_lang_String__void))
+ ))
+)
+;;; End of code for interfaces.Main.SubInterface [type definition]
+;;; Code for interfaces.Main [type definition]
+(type $interfaces.Main (sub $java.lang.Object (struct
+ (field $vtable (ref $interfaces.Main.vtable))
+ (field $itable (ref $itable))
+ ))
+)
+(type $interfaces.Main.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_testInterfaceMembers__void_$pp_interfaces (ref $function.m_testInterfaceMembers__void_$pp_interfaces))
+ ))
+)
+;;; End of code for interfaces.Main [type definition]
+;;; Code for interfaces.Main.Implementor [type definition]
+(type $interfaces.Main.Implementor (sub $java.lang.Object (struct
+ (field $vtable (ref $interfaces.Main.Implementor.vtable))
+ (field $itable (ref $interfaces.Main.Implementor.itable))
+ (field $$outer_this__interfaces_Main_Implementor (mut (ref null $interfaces.Main)))
+ ))
+)
+(type $interfaces.Main.Implementor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_defaultMethod__java_lang_Object__void (ref $function.m_defaultMethod__java_lang_Object__void))
+ (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
+ (field $m_defaultMethod__java_lang_String__void (ref $function.m_defaultMethod__java_lang_String__void))
+ ))
+)
+(type $interfaces.Main.Implementor.itable (sub $itable (struct
+(field $slot0 (ref $interfaces.Main.SubInterface.vtable))
+(field $slot1 (ref $interfaces.Main.Interface.vtable))
+)))
+;;; End of code for interfaces.Main.Implementor [type definition]
+;;; Code for interfaces.Main.AbstractImplementor [type definition]
+(type $interfaces.Main.AbstractImplementor (sub $java.lang.Object (struct
+ (field $vtable (ref $interfaces.Main.AbstractImplementor.vtable))
+ (field $itable (ref $interfaces.Main.AbstractImplementor.itable))
+ (field $$outer_this__interfaces_Main_AbstractImplementor (mut (ref null $interfaces.Main)))
+ ))
+)
+(type $interfaces.Main.AbstractImplementor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_defaultMethod__java_lang_Object__void (ref $function.m_defaultMethod__java_lang_Object__void))
+ (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
+ (field $m_defaultMethod__java_lang_String__void (ref $function.m_defaultMethod__java_lang_String__void))
+ ))
+)
+(type $interfaces.Main.AbstractImplementor.itable (sub $itable (struct
+(field $slot0 (ref $interfaces.Main.SubInterface.vtable))
+(field $slot1 (ref $interfaces.Main.Interface.vtable))
+)))
+;;; End of code for interfaces.Main.AbstractImplementor [type definition]

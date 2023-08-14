@@ -252,7 +252,8 @@ public class WasmOutputsGenerator {
     builder.append("(type $itable (sub (struct ");
     for (int slot = 0; slot < environment.getNumberOfInterfaceSlots(); slot++) {
       builder.newLine();
-      builder.append(format("(field $slot%d (ref null struct))", slot));
+      builder.append(
+          format("(field %s (ref null struct))", environment.getInterfaceSlotFieldName(slot)));
     }
     builder.newLine();
     builder.append(")))");
@@ -712,7 +713,7 @@ public class WasmOutputsGenerator {
             environment.getWasmItableTypeName(typeDeclaration.getSuperTypeDeclaration())));
     for (int slot = 0; slot < environment.getNumberOfInterfaceSlots(); slot++) {
       builder.newLine();
-      builder.append(format("(field $slot%d ", slot));
+      builder.append(format("(field %s ", environment.getInterfaceSlotFieldName(slot)));
       if (itableSlots[slot] == null) {
         // This type does not use the struct, so it is kept at the generic struct type.
         builder.append("(ref null struct))");

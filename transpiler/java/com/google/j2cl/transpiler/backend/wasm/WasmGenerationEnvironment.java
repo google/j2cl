@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static java.lang.String.format;
 import static java.util.Comparator.comparingInt;
 
 import com.google.common.base.Predicates;
@@ -42,6 +43,7 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.backend.common.UniqueNamesResolver;
+import com.google.j2cl.transpiler.backend.wasm.JsImportsGenerator.Imports;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -270,9 +272,22 @@ class WasmGenerationEnvironment {
 
   private final Map<TypeDeclaration, Integer> slotByInterfaceTypeDeclaration = new HashMap<>();
 
-  int getInterfaceSlot(TypeDeclaration typeDeclaration) {
-    // Interfaces with no implementors will not have a slot assigned. Use -1 to signal that fact.
-    return slotByInterfaceTypeDeclaration.getOrDefault(typeDeclaration, -1);
+  public String getInterfaceSlotFieldName(TypeDeclaration typeDeclaration) {
+    Integer slot = getInterfaceSlot(typeDeclaration);
+    if (slot == null) {
+      // Interfaces with no implementors will not have a slot assigned.
+      return null;
+    }
+
+    return getInterfaceSlotFieldName(slot);
+  }
+
+  public String getInterfaceSlotFieldName(int slot) {
+    return format("$slot%d", slot);
+  }
+
+  Integer getInterfaceSlot(TypeDeclaration typeDeclaration) {
+    return slotByInterfaceTypeDeclaration.get(typeDeclaration);
   }
 
   /** The data index for the array literals that can be emitted as data. */
@@ -321,7 +336,8 @@ class WasmGenerationEnvironment {
     return jsImports.getMethodImports().get(methodDescriptor);
   }
 
-  WasmGenerationEnvironment(Library library, JsImportsGenerator.Imports jsImports) {
+  WasmGenerationEnvironment(Library library, Imports jsImports) {
+
     // Resolve variable names into unique wasm identifiers.
     library
         .streamTypes()

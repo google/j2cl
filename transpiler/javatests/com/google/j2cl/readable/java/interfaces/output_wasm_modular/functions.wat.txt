@@ -1,0 +1,447 @@
+
+;;; Code for interfaces.Main.Interface [methods]
+
+;;; void Interface.defaultMethod(T t)
+(func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Interface
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
+ ;;@ interfaces/Main.java:26:17
+ (block
+  ;;@ interfaces/Main.java:27:6
+  (call $m_privateMethod__java_lang_Object__void_$p_interfaces_Main_Interface@interfaces.Main.Interface (ref.as_non_null (local.get $this))(local.get $t))
+ )
+)
+(elem declare func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Interface)
+
+;;; void Interface.privateMethod(T t)
+(func $m_privateMethod__java_lang_Object__void_$p_interfaces_Main_Interface@interfaces.Main.Interface
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
+ ;;@ interfaces/Main.java:30:17
+ (block
+ )
+)
+
+;;; void Interface.staticInterfaceMethod()
+(func $m_staticInterfaceMethod__void@interfaces.Main.Interface
+ ;;@ interfaces/Main.java:32:16
+ (block
+  ;;@ interfaces/Main.java:32:40
+  (call $$clinit__void@interfaces.Main.Interface )
+ )
+)
+
+;;; void Interface.$clinit()
+(func $$clinit__void@interfaces.Main.Interface
+ ;;@ interfaces/Main.java:20:12
+ (block
+  ;;@ interfaces/Main.java:20:12
+  (if (global.get $f_$initialized__interfaces_Main_Interface)
+   (then
+    ;;@ interfaces/Main.java:20:12
+    (return )
+   )
+  )
+  ;;@ interfaces/Main.java:20:12
+  (global.set $f_$initialized__interfaces_Main_Interface (i32.const 1))
+ )
+)
+
+;;; Class<T> Interface.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@interfaces.Main.Interface
+ (result (ref null $java.lang.Class))
+ (block
+  (if (ref.eq (global.get $f_$class__interfaces_Main_Interface) (ref.null $java.lang.Class))
+   (then
+    (global.set $f_$class__interfaces_Main_Interface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.M...|__java_lang_String (ref.func $$getString_|interfaces.M...|__java_lang_String@interfaces.Main.Interface) )))
+   )
+  )
+  (return (global.get $f_$class__interfaces_Main_Interface))
+ )
+)
+
+;;; String Interface.$getString_|interfaces.M...|()
+(func $$getString_|interfaces.M...|__java_lang_String@interfaces.Main.Interface
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|interfaces.M...|__interfaces_Main_Interface) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|interfaces.M...|__interfaces_Main_Interface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfaces.Main$Interface")))
+   )
+  )
+  (return (global.get $f_$string_|interfaces.M...|__interfaces_Main_Interface))
+ )
+)
+;;; End of code for interfaces.Main.Interface [methods]
+;;; Code for interfaces.Main.SubInterface [methods]
+
+;;; void SubInterface.defaultMethod(String s)
+(func $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface
+ (param $this (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.String))
+ ;;@ interfaces/Main.java:36:17
+ (block
+  ;;@ interfaces/Main.java:37:6
+  (call $m_defaultMethod__java_lang_Object__void@interfaces.Main.Interface (ref.as_non_null (local.get $this))(local.get $s))
+ )
+)
+(elem declare func $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface)
+
+;;; void SubInterface.$clinit()
+(func $$clinit__void@interfaces.Main.SubInterface
+ ;;@ interfaces/Main.java:35:12
+ (block
+  ;;@ interfaces/Main.java:35:12
+  (if (global.get $f_$initialized__interfaces_Main_SubInterface)
+   (then
+    ;;@ interfaces/Main.java:35:12
+    (return )
+   )
+  )
+  ;;@ interfaces/Main.java:35:12
+  (global.set $f_$initialized__interfaces_Main_SubInterface (i32.const 1))
+  ;;@ interfaces/Main.java:35:12
+  (call $$clinit__void@interfaces.Main.Interface )
+ )
+)
+
+;;; Class<T> SubInterface.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@interfaces.Main.SubInterface
+ (result (ref null $java.lang.Class))
+ (block
+  (if (ref.eq (global.get $f_$class__interfaces_Main_SubInterface) (ref.null $java.lang.Class))
+   (then
+    (global.set $f_$class__interfaces_Main_SubInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.M...|__java_lang_String (ref.func $$getString_|interfaces.M...|__java_lang_String@interfaces.Main.SubInterface) )))
+   )
+  )
+  (return (global.get $f_$class__interfaces_Main_SubInterface))
+ )
+)
+
+;;; String SubInterface.$getString_|interfaces.M...|()
+(func $$getString_|interfaces.M...|__java_lang_String@interfaces.Main.SubInterface
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|interfaces.M...|__interfaces_Main_SubInterface) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|interfaces.M...|__interfaces_Main_SubInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfaces.Main$SubInterface")))
+   )
+  )
+  (return (global.get $f_$string_|interfaces.M...|__interfaces_Main_SubInterface))
+ )
+)
+;;; End of code for interfaces.Main.SubInterface [methods]
+;;; Code for interfaces.Main [methods]
+
+;;; Main()
+(func $m_<init>__@interfaces.Main
+ (param $this (ref null $interfaces.Main))
+ (result (ref null $interfaces.Main))
+ ;;@ interfaces/Main.java:18:13
+ (block
+  ;;@ interfaces/Main.java:18:13
+  (call $$clinit__void@interfaces.Main )
+  ;;@ interfaces/Main.java:18:13
+  (drop (call $m_<init>__@java.lang.Object ))
+ )
+)
+
+;;; void Main.testInterfaceMembers()
+(func $m_testInterfaceMembers__void_$pp_interfaces@interfaces.Main
+ (type $function.m_testInterfaceMembers__void_$pp_interfaces)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ interfaces/Main.java:49:7
+ (local $i (ref null $java.lang.Object))
+ (local $x i32)
+ (local $this (ref null $interfaces.Main))
+ (local.set $this (ref.cast $interfaces.Main (local.get $this.untyped)))
+ (block
+  ;;@ interfaces/Main.java:50:4
+  (local.set $i (struct.new $interfaces.Main.Implementor (ref.as_non_null (global.get $interfaces.Main.Implementor.vtable)) (ref.as_non_null (global.get $interfaces.Main.Implementor.itable)) (local.get $this)))
+  ;;@ interfaces/Main.java:51:4
+  (call_ref $function.m_interfaceMethod__void (ref.as_non_null (local.get $i))(struct.get $interfaces.Main.Interface.vtable $m_interfaceMethod__void (ref.cast $interfaces.Main.Interface.vtable (struct.get $itable $slot1 (struct.get $java.lang.Object $itable (local.get $i))))))
+  ;;@ interfaces/Main.java:52:4
+  (call_ref $function.m_defaultMethod__java_lang_Object__void (ref.as_non_null (local.get $i))(ref.null $java.lang.String)(struct.get $interfaces.Main.Interface.vtable $m_defaultMethod__java_lang_Object__void (ref.cast $interfaces.Main.Interface.vtable (struct.get $itable $slot1 (struct.get $java.lang.Object $itable (local.get $i))))))
+  ;;@ interfaces/Main.java:53:4
+  (call $m_staticInterfaceMethod__void@interfaces.Main.Interface )
+  ;;@ interfaces/Main.java:54:4
+  (local.set $x (i32.add (block (result i32)
+   (drop (struct.new $interfaces.Main.Implementor (ref.as_non_null (global.get $interfaces.Main.Implementor.vtable)) (ref.as_non_null (global.get $interfaces.Main.Implementor.itable)) (local.get $this)))
+   (i32.const 1)
+  ) (i32.const 2)))
+ )
+)
+(elem declare func $m_testInterfaceMembers__void_$pp_interfaces@interfaces.Main)
+
+;;; void Main.$clinit()
+(func $$clinit__void@interfaces.Main
+ ;;@ interfaces/Main.java:18:13
+ (block
+  ;;@ interfaces/Main.java:18:13
+  (if (global.get $f_$initialized__interfaces_Main)
+   (then
+    ;;@ interfaces/Main.java:18:13
+    (return )
+   )
+  )
+  ;;@ interfaces/Main.java:18:13
+  (global.set $f_$initialized__interfaces_Main (i32.const 1))
+  ;;@ interfaces/Main.java:18:13
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<T> Main.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@interfaces.Main
+ (result (ref null $java.lang.Class))
+ (block
+  (if (ref.eq (global.get $f_$class__interfaces_Main) (ref.null $java.lang.Class))
+   (then
+    (global.set $f_$class__interfaces_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.Main|__java_lang_String (ref.func $$getString_|interfaces.Main|__java_lang_String@interfaces.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  (return (global.get $f_$class__interfaces_Main))
+ )
+)
+
+;;; Class<?> Main.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@interfaces.Main
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $interfaces.Main))
+ (local.set $this (ref.cast $interfaces.Main (local.get $this.untyped)))
+ (block
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@interfaces.Main) ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@interfaces.Main)
+
+;;; String Main.$getString_|interfaces.Main|()
+(func $$getString_|interfaces.Main|__java_lang_String@interfaces.Main
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|interfaces.Main|__interfaces_Main) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|interfaces.Main|__interfaces_Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfaces.Main")))
+   )
+  )
+  (return (global.get $f_$string_|interfaces.Main|__interfaces_Main))
+ )
+)
+;;; End of code for interfaces.Main [methods]
+;;; Code for interfaces.Main.Implementor [methods]
+
+;;; Implementor(Main $outer_this)
+(func $m_<init>__interfaces_Main@interfaces.Main.Implementor
+ (param $this (ref null $interfaces.Main.Implementor))
+ (param $$outer_this (ref null $interfaces.Main))
+ (result (ref null $interfaces.Main.Implementor))
+ ;;@ interfaces/Main.java:41:8
+ (block
+  ;;@ interfaces/Main.java:41:8
+  (call $$clinit__void@interfaces.Main.Implementor )
+  ;;@ interfaces/Main.java:41:8
+  (struct.set $interfaces.Main.Implementor $$outer_this__interfaces_Main_Implementor (local.get $this) (local.get $$outer_this))
+  ;;@ interfaces/Main.java:41:8
+  (drop (call $m_<init>__@java.lang.Object ))
+ )
+)
+
+;;; void Implementor.interfaceMethod()
+(func $m_interfaceMethod__void@interfaces.Main.Implementor
+ (type $function.m_interfaceMethod__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ interfaces/Main.java:43:16
+ (local $this (ref null $interfaces.Main.Implementor))
+ (local.set $this (ref.cast $interfaces.Main.Implementor (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_interfaceMethod__void@interfaces.Main.Implementor)
+
+;;; void Implementor.defaultMethod(T arg0)
+(func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Implementor
+ (type $function.m_defaultMethod__java_lang_Object__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ ;;@ interfaces/Main.java:41:8
+ (local $this (ref null $interfaces.Main.Implementor))
+ (local.set $this (ref.cast $interfaces.Main.Implementor (local.get $this.untyped)))
+ (block
+  ;;@ interfaces/Main.java:41:8
+  (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(ref.cast null $java.lang.String (local.get $arg0)))
+ )
+)
+(elem declare func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Implementor)
+
+;;; void Implementor.defaultMethod(String arg0)
+(func $m_defaultMethod__java_lang_String__void@interfaces.Main.Implementor
+ (type $function.m_defaultMethod__java_lang_String__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.String))
+ ;;@ interfaces/Main.java:41:8
+ (local $this (ref null $interfaces.Main.Implementor))
+ (local.set $this (ref.cast $interfaces.Main.Implementor (local.get $this.untyped)))
+ (block
+  ;;@ interfaces/Main.java:41:8
+  (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(local.get $arg0))
+ )
+)
+(elem declare func $m_defaultMethod__java_lang_String__void@interfaces.Main.Implementor)
+
+;;; void Implementor.$clinit()
+(func $$clinit__void@interfaces.Main.Implementor
+ ;;@ interfaces/Main.java:41:8
+ (block
+  ;;@ interfaces/Main.java:41:8
+  (if (global.get $f_$initialized__interfaces_Main_Implementor)
+   (then
+    ;;@ interfaces/Main.java:41:8
+    (return )
+   )
+  )
+  ;;@ interfaces/Main.java:41:8
+  (global.set $f_$initialized__interfaces_Main_Implementor (i32.const 1))
+  ;;@ interfaces/Main.java:41:8
+  (call $$clinit__void@java.lang.Object )
+  ;;@ interfaces/Main.java:41:8
+  (call $$clinit__void@interfaces.Main.SubInterface )
+  ;;@ interfaces/Main.java:41:8
+  (call $$clinit__void@interfaces.Main.Interface )
+ )
+)
+
+;;; Class<T> Implementor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@interfaces.Main.Implementor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (ref.eq (global.get $f_$class__interfaces_Main_Implementor) (ref.null $java.lang.Class))
+   (then
+    (global.set $f_$class__interfaces_Main_Implementor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.M...|__java_lang_String (ref.func $$getString_|interfaces.M...|__java_lang_String@interfaces.Main.Implementor) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  (return (global.get $f_$class__interfaces_Main_Implementor))
+ )
+)
+
+;;; Class<?> Implementor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@interfaces.Main.Implementor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $interfaces.Main.Implementor))
+ (local.set $this (ref.cast $interfaces.Main.Implementor (local.get $this.untyped)))
+ (block
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@interfaces.Main.Implementor) ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@interfaces.Main.Implementor)
+
+;;; String Implementor.$getString_|interfaces.M...|()
+(func $$getString_|interfaces.M...|__java_lang_String@interfaces.Main.Implementor
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|interfaces.M...|__interfaces_Main_Implementor) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|interfaces.M...|__interfaces_Main_Implementor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfaces.Main$Implementor")))
+   )
+  )
+  (return (global.get $f_$string_|interfaces.M...|__interfaces_Main_Implementor))
+ )
+)
+;;; End of code for interfaces.Main.Implementor [methods]
+;;; Code for interfaces.Main.AbstractImplementor [methods]
+
+;;; AbstractImplementor(Main $outer_this)
+(func $m_<init>__interfaces_Main@interfaces.Main.AbstractImplementor
+ (param $this (ref null $interfaces.Main.AbstractImplementor))
+ (param $$outer_this (ref null $interfaces.Main))
+ (result (ref null $interfaces.Main.AbstractImplementor))
+ ;;@ interfaces/Main.java:47:17
+ (block
+  ;;@ interfaces/Main.java:47:17
+  (call $$clinit__void@interfaces.Main.AbstractImplementor )
+  ;;@ interfaces/Main.java:47:17
+  (struct.set $interfaces.Main.AbstractImplementor $$outer_this__interfaces_Main_AbstractImplementor (local.get $this) (local.get $$outer_this))
+  ;;@ interfaces/Main.java:47:17
+  (drop (call $m_<init>__@java.lang.Object ))
+ )
+)
+
+;;; void AbstractImplementor.defaultMethod(T arg0)
+(func $m_defaultMethod__java_lang_Object__void@interfaces.Main.AbstractImplementor
+ (type $function.m_defaultMethod__java_lang_Object__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ ;;@ interfaces/Main.java:47:17
+ (local $this (ref null $interfaces.Main.AbstractImplementor))
+ (local.set $this (ref.cast $interfaces.Main.AbstractImplementor (local.get $this.untyped)))
+ (block
+  ;;@ interfaces/Main.java:47:17
+  (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(ref.cast null $java.lang.String (local.get $arg0)))
+ )
+)
+(elem declare func $m_defaultMethod__java_lang_Object__void@interfaces.Main.AbstractImplementor)
+
+;;; void AbstractImplementor.defaultMethod(String arg0)
+(func $m_defaultMethod__java_lang_String__void@interfaces.Main.AbstractImplementor
+ (type $function.m_defaultMethod__java_lang_String__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.String))
+ ;;@ interfaces/Main.java:47:17
+ (local $this (ref null $interfaces.Main.AbstractImplementor))
+ (local.set $this (ref.cast $interfaces.Main.AbstractImplementor (local.get $this.untyped)))
+ (block
+  ;;@ interfaces/Main.java:47:17
+  (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(local.get $arg0))
+ )
+)
+(elem declare func $m_defaultMethod__java_lang_String__void@interfaces.Main.AbstractImplementor)
+
+;;; void AbstractImplementor.$clinit()
+(func $$clinit__void@interfaces.Main.AbstractImplementor
+ ;;@ interfaces/Main.java:47:17
+ (block
+  ;;@ interfaces/Main.java:47:17
+  (if (global.get $f_$initialized__interfaces_Main_AbstractImplementor)
+   (then
+    ;;@ interfaces/Main.java:47:17
+    (return )
+   )
+  )
+  ;;@ interfaces/Main.java:47:17
+  (global.set $f_$initialized__interfaces_Main_AbstractImplementor (i32.const 1))
+  ;;@ interfaces/Main.java:47:17
+  (call $$clinit__void@java.lang.Object )
+  ;;@ interfaces/Main.java:47:17
+  (call $$clinit__void@interfaces.Main.SubInterface )
+ )
+)
+
+;;; Class<T> AbstractImplementor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@interfaces.Main.AbstractImplementor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (ref.eq (global.get $f_$class__interfaces_Main_AbstractImplementor) (ref.null $java.lang.Class))
+   (then
+    (global.set $f_$class__interfaces_Main_AbstractImplementor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.M...|__java_lang_String (ref.func $$getString_|interfaces.M...|__java_lang_String@interfaces.Main.AbstractImplementor) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  (return (global.get $f_$class__interfaces_Main_AbstractImplementor))
+ )
+)
+
+;;; String AbstractImplementor.$getString_|interfaces.M...|()
+(func $$getString_|interfaces.M...|__java_lang_String@interfaces.Main.AbstractImplementor
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|interfaces.M...|__interfaces_Main_AbstractImplementor) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|interfaces.M...|__interfaces_Main_AbstractImplementor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfaces.Main$AbstractImplementor")))
+   )
+  )
+  (return (global.get $f_$string_|interfaces.M...|__interfaces_Main_AbstractImplementor))
+ )
+)
+;;; End of code for interfaces.Main.AbstractImplementor [methods]

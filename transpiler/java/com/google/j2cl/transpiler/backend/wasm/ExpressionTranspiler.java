@@ -256,9 +256,9 @@ final class ExpressionTranspiler {
           sourceBuilder.append(")");
         } else {
           DeclaredTypeDescriptor targetTypeDescriptor = (DeclaredTypeDescriptor) testTypeDescriptor;
-          int interfaceSlot =
-              environment.getInterfaceSlot(targetTypeDescriptor.getTypeDeclaration());
-          if (interfaceSlot == -1) {
+          String interfaceSlotFieldName =
+              environment.getInterfaceSlotFieldName(targetTypeDescriptor.getTypeDeclaration());
+          if (interfaceSlotFieldName == null) {
             // The interface does not have implementors, hence instanceof is false.
             sourceBuilder.append("(i32.const 0)");
             return false;
@@ -278,9 +278,8 @@ final class ExpressionTranspiler {
           // interface vtable, since the slots are reused.
           sourceBuilder.append(
               format(
-                  "(ref.test %s (struct.get $itable $slot%d (struct.get $java.lang.Object"
-                      + " $itable ",
-                  environment.getWasmVtableTypeName(targetTypeDescriptor), interfaceSlot));
+                  "(ref.test %s (struct.get $itable %s (struct.get $java.lang.Object $itable ",
+                  environment.getWasmVtableTypeName(targetTypeDescriptor), interfaceSlotFieldName));
           render(instanceOfExpression.getExpression());
           sourceBuilder.append(" )))");
           sourceBuilder.unindent();
@@ -450,9 +449,9 @@ final class ExpressionTranspiler {
           // For an interface dynamic dispatch the vtable resides in a field of the $itable struct
           // object passed as the qualifier.
 
-          int itableSlot =
-              environment.getInterfaceSlot(enclosingTypeDescriptor.getTypeDeclaration());
-          if (itableSlot == -1) {
+          String itableSlotFieldName =
+              environment.getInterfaceSlotFieldName(enclosingTypeDescriptor.getTypeDeclaration());
+          if (itableSlotFieldName == null) {
             // The interface is not implemented by any class, skip the itable lookup and emit
             // null instead.
             sourceBuilder.append(
@@ -467,9 +466,9 @@ final class ExpressionTranspiler {
             // correct interface vtable in the `itable` slot.
             sourceBuilder.append(
                 String.format(
-                    "(ref.cast %s (struct.get $itable $slot%d (struct.get %s $itable ",
+                    "(ref.cast %s (struct.get $itable %s (struct.get %s $itable ",
                     environment.getWasmVtableTypeName(enclosingTypeDescriptor),
-                    itableSlot,
+                    itableSlotFieldName,
                     environment.getWasmTypeName(enclosingTypeDescriptor)));
             render(methodCall.getQualifier());
             sourceBuilder.append(")))");
