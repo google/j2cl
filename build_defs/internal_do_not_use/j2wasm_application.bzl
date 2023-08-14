@@ -95,13 +95,32 @@ def _impl_j2wasm_application(ctx):
         command = "cp %s/imports.txt %s" % (transpile_out.path, ctx.outputs.jsimports.path),
     )
 
+    # Create a module for exports.
+    exports_module_output = ctx.actions.declare_directory(ctx.label.name + ".exports")
+    exporter_args = ctx.actions.args()
+    exporter_args.add_joined("-classpath", _get_all_classjars(deps).to_list(), join_with = ctx.configuration.host_path_separator)
+    exporter_args.add("-output", exports_module_output.path)
+    exporter_args.add_all(ctx.attr.entry_points, before_each = "-entryPointPattern")
+    ctx.actions.run(
+        progress_message = "Generating Wasm Exports %s" % ctx.label,
+        inputs = _get_all_classjars(deps),
+        outputs = [exports_module_output],
+        executable = ctx.executable._export_generator,
+        arguments = [exporter_args],
+        env = dict(LANG = "en_US.UTF-8"),
+        execution_requirements = {"supports-workers": "1"},
+        mnemonic = "J2wasm",
+    )
+
+    all_modules = module_outputs.to_list() + [exports_module_output]
+
     # Bundle the module outputs.
     bundler_args = ctx.actions.args()
-    bundler_args.add_all(module_outputs.to_list(), expand_directories = False)
+    bundler_args.add_all(all_modules, expand_directories = False)
     bundler_args.add("-output", ctx.outputs.bundle)
     ctx.actions.run(
         progress_message = "Bundling modules for Wasm %s" % ctx.label,
-        inputs = module_outputs,
+        inputs = all_modules,
         outputs = [ctx.outputs.bundle],
         executable = ctx.executable._bundler,
         arguments = [bundler_args],
@@ -242,6 +261,9 @@ def _get_transitive_classpath(deps):
 def _get_transitive_modules(deps):
     return depset(transitive = [d[J2wasmInfo]._private_.wasm_modular_info.transitive_modules for d in deps])
 
+def _get_all_classjars(deps):
+    return depset(transitive = [d[J2wasmInfo]._private_.java_info.transitive_compile_time_jars for d in deps])
+
 _STAGE_SEPARATOR = "--NEW_STAGE--"
 
 def _extract_stages(args):
@@ -286,6 +308,13 @@ _J2WASM_APP_ATTRS = {
         executable = True,
         default = Label(
             "//build_defs/internal_do_not_use:J2wasmBundler",
+        ),
+    ),
+    "_export_generator": attr.label(
+        cfg = "exec",
+        executable = True,
+        default = Label(
+            "//build_defs/internal_do_not_use:J2wasmExportGenerator",
         ),
     ),
 }

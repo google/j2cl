@@ -75,7 +75,7 @@ import org.eclipse.jdt.core.dom.PostfixExpression;
 import org.eclipse.jdt.core.dom.PrefixExpression;
 
 /** Environment used to manipulate JDT internal representations. */
-class JdtEnvironment {
+public class JdtEnvironment {
   private final Map<ITypeBinding, DeclaredTypeDescriptor>
       cachedDeclaredTypeDescriptorByTypeBindingInNullMarkedScope = new HashMap<>();
 
@@ -987,16 +987,22 @@ class JdtEnvironment {
     return createTypeDescriptors(Arrays.asList(typeBindings), inNullMarkedScope, clazz);
   }
 
-  public void initWellKnownTypes(Iterable<ITypeBinding> typeBindings) {
+  public void initWellKnownTypes(Iterable<ITypeBinding> typesToResolve) {
     if (TypeDescriptors.isInitialized()) {
       return;
     }
     TypeDescriptors.SingletonBuilder builder = new TypeDescriptors.SingletonBuilder();
-    // Add well-known reference types.
-    for (ITypeBinding typeBinding : typeBindings) {
-      builder.addReferenceType(createDeclaredTypeDescriptor(typeBinding));
-    }
+    // Add well-known reference types.`
+    resolveBindings(typesToResolve).forEach(builder::addReferenceType);
     builder.buildSingleton();
+  }
+
+  public List<DeclaredTypeDescriptor> resolveBindings(Iterable<ITypeBinding> typeBindings) {
+    var builder = ImmutableList.<DeclaredTypeDescriptor>builder();
+    for (ITypeBinding typeBinding : typeBindings) {
+      builder.add(createDeclaredTypeDescriptor(typeBinding));
+    }
+    return builder.build();
   }
 
   private TypeDescriptor createIntersectionType(

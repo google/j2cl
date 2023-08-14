@@ -16,6 +16,7 @@
 
 package com.google.j2cl.transpiler.frontend.jdt;
 
+import java.util.List;
 import java.util.Map;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.ITypeBinding;
@@ -24,10 +25,10 @@ import org.eclipse.jdt.core.dom.ITypeBinding;
 public class CompilationUnitsAndTypeBindings {
 
   private final Map<String, CompilationUnit> compilationUnitByFilePath;
-  private final Iterable<ITypeBinding> typeBindings;
+  private final List<ITypeBinding> typeBindings;
 
   public CompilationUnitsAndTypeBindings(
-      Map<String, CompilationUnit> compilationUnitByFilePath, Iterable<ITypeBinding> typeBindings) {
+      Map<String, CompilationUnit> compilationUnitByFilePath, List<ITypeBinding> typeBindings) {
     this.compilationUnitByFilePath = compilationUnitByFilePath;
     this.typeBindings = typeBindings;
   }
@@ -36,7 +37,7 @@ public class CompilationUnitsAndTypeBindings {
     return compilationUnitByFilePath;
   }
 
-  public Iterable<ITypeBinding> getTypeBindings() {
+  public List<ITypeBinding> getTypeBindings() {
     return typeBindings;
   }
 }

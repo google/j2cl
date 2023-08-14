@@ -61,6 +61,24 @@ java_library(
     ],
 )
 
+java_library(
+    name = "bazelwasmexportgenerator_lib",
+    srcs = ["BazelJ2wasmExportsGenerator.java"],
+    deps = [
+        "//third_party:args4j",
+        "//third_party:auto_value",
+        "//third_party:guava",
+        # TODO(b/294284380): Make this independent of the frontend.
+        "//third_party:jdt-core",
+        "//transpiler/java/com/google/j2cl/common",
+        "//transpiler/java/com/google/j2cl/common/bazel",
+        "//transpiler/java/com/google/j2cl/transpiler/ast",
+        "//transpiler/java/com/google/j2cl/transpiler/backend/wasm",
+        "//transpiler/java/com/google/j2cl/transpiler/frontend/common",
+        "//transpiler/java/com/google/j2cl/transpiler/frontend/jdt",
+    ],
+)
+
 JVM_FLAGS = [
     "-XX:+TieredCompilation",
     "-Xss2M",
@@ -75,6 +93,14 @@ java_binary(
     main_class = "com.google.j2cl.transpiler.BazelJ2clBuilder",
     visibility = ["//build_defs/internal_do_not_use:__pkg__"],
     runtime_deps = [":bazelbuilder_lib"],
+)
+
+java_binary(
+    name = "BazelJ2wasmExportGenerator",
+    jvm_flags = JVM_FLAGS,
+    main_class = "com.google.j2cl.transpiler.BazelJ2wasmExportsGenerator",
+    visibility = ["//build_defs/internal_do_not_use:__pkg__"],
+    runtime_deps = [":bazelwasmexportgenerator_lib"],
 )
 
 # J2CL binary with Kotlin compiler dependency.

@@ -24,6 +24,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems;
+import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.StringUtils;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
@@ -48,8 +49,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -436,6 +439,33 @@ public class WasmOutputsGenerator {
         .filter(method -> !method.isAbstract() || method.isNative())
         .filter(m -> m.getDescriptor().getWasmInfo() == null)
         .forEach(this::renderMethod);
+  }
+
+  public void generateMethods(List<Method> methods) {
+    if (methods.isEmpty()) {
+      return;
+    }
+    // Create the type objects and add all the exported methods to the corresponding type to
+    // initialize the WasmGenerationEnvironment.
+    CompilationUnit cu = CompilationUnit.createSynthetic("wasm.exports");
+    Map<TypeDeclaration, Type> typesByDeclaration = new LinkedHashMap<>();
+    methods.forEach(
+        m -> {
+          TypeDeclaration typeDeclaration =
+              m.getDescriptor().getEnclosingTypeDescriptor().getTypeDeclaration();
+          Type type =
+              typesByDeclaration.computeIfAbsent(
+                  typeDeclaration, t -> new Type(SourcePosition.NONE, t));
+          type.addMember(m);
+        });
+    typesByDeclaration.values().forEach(cu::addType);
+    Library library = Library.newBuilder().setCompilationUnits(ImmutableList.of(cu)).build();
+    environment =
+        new WasmGenerationEnvironment(
+            library, JsImportsGenerator.collectImports(library, problems));
+
+    methods.stream().forEach(this::renderMethod);
+    output.write("functions.wat", builder.build());
   }
 
   private void renderMethod(Method method) {

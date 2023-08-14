@@ -116,6 +116,11 @@ alias(
 )
 
 alias(
+    name = "J2wasmExportGenerator",
+    actual = "//transpiler/java/com/google/j2cl/transpiler:BazelJ2wasmExportGenerator",
+)
+
+alias(
     name = "binaryen",
     actual = "//third_party:binaryen",
 )

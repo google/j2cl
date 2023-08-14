@@ -24,6 +24,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -52,7 +53,7 @@ public class JdtParser {
   private final ImmutableList<String> classpathEntries;
 
   /** Create and initialize a JdtParser based on passed parameters. */
-  public JdtParser(List<String> classpathEntries, Problems problems) {
+  public JdtParser(Iterable<String> classpathEntries, Problems problems) {
     compilerOptions.put(JavaCore.COMPILER_SOURCE, JAVA_VERSION);
     compilerOptions.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, JAVA_VERSION);
     compilerOptions.put(JavaCore.COMPILER_COMPLIANCE, JAVA_VERSION);
@@ -63,7 +64,17 @@ public class JdtParser {
 
   /** Returns a map from file paths to compilation units after JDT parsing. */
   public CompilationUnitsAndTypeBindings parseFiles(
-      List<FileInfo> filePaths, boolean useTargetPath, ImmutableList<String> forbiddenAnnotations) {
+      List<FileInfo> filePaths, boolean useTargetPath, List<String> forbiddenAnnotations) {
+    return parseFiles(
+        filePaths, useTargetPath, forbiddenAnnotations, TypeDescriptors.getWellKnownTypeNames());
+  }
+
+  /** Returns a map from file paths to compilation units after JDT parsing. */
+  public CompilationUnitsAndTypeBindings parseFiles(
+      List<FileInfo> filePaths,
+      boolean useTargetPath,
+      List<String> forbiddenAnnotations,
+      Collection<String> binaryNamesToResolve) {
 
     // Parse and create a compilation unit for every file.
     ASTParser parser = newASTParser();
@@ -105,12 +116,20 @@ public class JdtParser {
             .filter(f -> !f.endsWith("module-info.java"))
             .toArray(String[]::new),
         getEncodings(filePaths.size()),
-        TypeDescriptors.getWellKnownTypeNames().stream()
-            .map(BindingKey::createTypeBindingKey)
-            .toArray(String[]::new),
+        binaryNamesToResolve.stream().map(BindingKey::createTypeBindingKey).toArray(String[]::new),
         astRequestor,
         null);
     return new CompilationUnitsAndTypeBindings(compilationUnitsByFilePath, wellKnownTypeBindings);
+  }
+
+  /** Resolves binary names to type bindings. */
+  public List<ITypeBinding> resolveBindings(Collection<String> binaryNames) {
+    return parseFiles(
+            /* filePaths= */ new ArrayList<>(),
+            /* useTargetPath= */ false,
+            /* forbiddenAnnotations= */ new ArrayList<>(),
+            binaryNames)
+        .getTypeBindings();
   }
 
   private ASTParser newASTParser() {
@@ -131,7 +150,7 @@ public class JdtParser {
   }
 
   private boolean compilationHasErrors(
-      String filename, CompilationUnit unit, ImmutableList<String> forbiddenAnnotations) {
+      String filename, CompilationUnit unit, List<String> forbiddenAnnotations) {
     boolean hasErrors = false;
     // Here we check for instances of @GwtIncompatible in the ast. If that is the case, we throw an
     // error since these should have been stripped by the build system already.

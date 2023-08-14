@@ -1475,8 +1475,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     Map<String, org.eclipse.jdt.core.dom.CompilationUnit> jdtUnitsByFilePath =
         compilationUnitsAndTypeBindings.getCompilationUnitsByFilePath();
-    Iterable<ITypeBinding> wellKnownTypeBindings =
-        compilationUnitsAndTypeBindings.getTypeBindings();
+    List<ITypeBinding> wellKnownTypeBindings = compilationUnitsAndTypeBindings.getTypeBindings();
     CompilationUnitBuilder compilationUnitBuilder =
         new CompilationUnitBuilder(wellKnownTypeBindings);
 
@@ -1508,7 +1507,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             }));
   }
 
-  private CompilationUnitBuilder(Iterable<ITypeBinding> wellKnownTypeBindings) {
+  private CompilationUnitBuilder(List<ITypeBinding> wellKnownTypeBindings) {
     environment.initWellKnownTypes(wellKnownTypeBindings);
   }
 }
