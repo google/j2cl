@@ -604,8 +604,10 @@ public final class String implements Comparable<String>, CharSequence, Serializa
     NativeRegExp compiled = new NativeRegExp(regex, "g");
     // the Javascipt array to hold the matches prior to conversion
     String[] out = new String[0];
-    // how many matches performed so far
+    // count of split strings.
     int count = 0;
+    // how many matches performed so far
+    int matchCount = 0;
     // The current string that is being matched; trimmed as each piece matches
     String trail = this;
     // used to detect repeated zero length matches
@@ -617,37 +619,34 @@ public final class String implements Comparable<String>, CharSequence, Serializa
       // None of the information in the match returned are useful as we have no
       // subgroup handling
       NativeRegExp.Match matchObj = compiled.exec(trail);
-      if (matchObj == null || trail.isEmpty() || (count == (maxMatch - 1) && maxMatch > 0)) {
-        ArrayHelper.push(out, trail);
+      out = ArrayHelper.resize(out, count + 1);
+      if (matchObj == null || trail.isEmpty() || (matchCount == (maxMatch - 1) && maxMatch > 0)) {
+        out[count++] = trail;
         break;
       } else {
         int matchIndex = matchObj.getIndex();
-        ArrayHelper.push(out, trail.substring(0, matchIndex));
+        out[count++] = trail.substring(0, matchIndex);
         trail = trail.substring(matchIndex + matchObj.getAt(0).length());
         // Force the compiled pattern to reset internal state
         compiled.setLastIndex(0);
         // Only one zero length match per character to ensure termination
         if (trail.equals(lastTrail)) {
-          out[count] = trail.substring(0, 1);
+          out[matchCount] = trail.substring(0, 1);
           trail = trail.substring(1);
         }
         lastTrail = trail;
-        count++;
+        matchCount++;
       }
     }
     // all blank delimiters at the end are supposed to disappear if maxMatch == 0;
     // however, if the input string is empty, the output should consist of a
     // single empty string
     if (maxMatch == 0 && this.length() > 0) {
-      int lastNonEmpty = out.length;
-      while (lastNonEmpty > 0 && out[lastNonEmpty - 1].isEmpty()) {
-        --lastNonEmpty;
-      }
-      if (lastNonEmpty < out.length) {
-        ArrayHelper.setLength(out, lastNonEmpty);
+      while (count > 0 && out[count - 1].isEmpty()) {
+        count--;
       }
     }
-    return out;
+    return ArrayHelper.setLength(out, count);
   }
 
   public boolean startsWith(String prefix) {
