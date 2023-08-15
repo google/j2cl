@@ -137,6 +137,8 @@ public class JdtParser {
 
     parser.setCompilerOptions(compilerOptions);
     parser.setResolveBindings(true);
+    // setBindingsRecovery(true) is needed to be able to read annotation parameters even if the
+    // annotation is not fully resolved due to missing dependencies.
     parser.setBindingsRecovery(true);
     parser.setEnvironment(
         Iterables.toArray(classpathEntries, String.class), new String[0], new String[0], false);
