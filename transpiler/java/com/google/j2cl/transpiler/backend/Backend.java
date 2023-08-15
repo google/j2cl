@@ -207,7 +207,7 @@ public enum Backend {
       JsInteropRestrictionsChecker.check(
           library,
           problems,
-          /* enableWasm= */ false,
+          /* checkWasmRestrictions= */ false,
           /* isNullMarkedSupported= */ options.isNullMarkedSupported(),
           /* optimizeAutoValue= */ options.getOptimizeAutoValue());
     }
@@ -368,7 +368,7 @@ public enum Backend {
       JsInteropRestrictionsChecker.check(
           library,
           problems,
-          /* enableWasm= */ true,
+          /* checkWasmRestrictions= */ true,
           /* isNullMarkedSupported= */ options.isNullMarkedSupported(),
           /* optimizeAutoValue= */ options.getOptimizeAutoValue());
     }
@@ -503,7 +503,7 @@ public enum Backend {
       JsInteropRestrictionsChecker.check(
           library,
           problems,
-          /* enableWasm= */ true,
+          /* checkWasmRestrictions= */ true,
           /* isNullMarkedSupported= */ options.isNullMarkedSupported(),
           /* optimizeAutoValue= */ options.getOptimizeAutoValue());
     }
