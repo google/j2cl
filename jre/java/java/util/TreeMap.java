@@ -148,13 +148,12 @@ public class TreeMap<K, V> extends AbstractMap<K, V>
   }
 
   private V putInternalIfAbsent(K key, V value) {
-    int prevSize = size;
     Node<K, V> node = find(key, Relation.CREATE);
-    if (prevSize == size) {
-      // The node already exists, not a new entry.
-      return node.getValue();
+    V oldValue = node.getValue();
+    if (oldValue == null) {
+      node.setValue(value);
     }
-    return node.setValue(value);
+    return oldValue;
   }
 
   /** Returns the node at or adjacent to the given key, creating it if requested. */

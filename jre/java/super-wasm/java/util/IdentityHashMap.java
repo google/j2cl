@@ -365,7 +365,7 @@ public class IdentityHashMap<K, V> extends AbstractMap<K, V>
 
     // insert value to where it needs to go, return the old value
     Object result = elementData[index + 1];
-    if (!onlyIfAbsent) {
+    if (!onlyIfAbsent || result == NULL_OBJECT) {
       elementData[index + 1] = value;
     }
     return massageValue(result);

@@ -288,7 +288,7 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Seria
     for (HashMapEntry<K, V> e = tab[index]; e != null; e = e.next) {
       if (e.hash == hash && (key == e.key || key.equals(e.key))) {
         V oldValue = e.value;
-        if (onlyIfAbsent) {
+        if (onlyIfAbsent && oldValue != null) {
           return oldValue;
         }
         preModify(e);
@@ -315,7 +315,7 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Seria
       return null;
     } else {
       V oldValue = entry.value;
-      if (onlyIfAbsent) {
+      if (onlyIfAbsent && oldValue != null) {
         return oldValue;
       }
       preModify(entry);

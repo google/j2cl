@@ -27,6 +27,8 @@ JRE_JAVAC_VERSION_OPTS = [
     "-XDstringConcat=inline",
     # Remove warnings that are not relevant to JRE since it is actually a JRE implementaiton.
     "-Xep:ShouldNotSubclass:OFF",
+    # Remove crv since we don't want to dep on ErrorProne annotations from JRE.
+    "-Xep:CheckReturnValue:OFF",
     # Enable Java 11 for the JRE sources
     "-source",
     "11",
