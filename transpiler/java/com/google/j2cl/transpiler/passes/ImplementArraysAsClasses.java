@@ -217,7 +217,7 @@ public class ImplementArraysAsClasses extends NormalizationPass {
                     methodCall.getArguments().stream()
                         .map(
                             arg ->
-                                isNativeArrayArgument(methodCall, arg)
+                                needsNativeArray(methodCall, arg)
                                     ? getInnerNativeArrayExpression(arg)
                                     : arg)
                         .collect(toImmutableList()))
@@ -229,11 +229,11 @@ public class ImplementArraysAsClasses extends NormalizationPass {
                 && !((ArrayTypeDescriptor) descriptor).isNativeWasmArray();
           }
 
-          private boolean isNativeArrayArgument(MethodCall call, Expression expression) {
-            return call.getTarget()
-                .getParameterTypeDescriptors()
-                .get(call.getArguments().indexOf(expression))
-                .isPrimitiveArray();
+          private boolean needsNativeArray(MethodCall call, Expression expression) {
+            return isNonNativeArray(
+                call.getTarget()
+                    .getParameterTypeDescriptors()
+                    .get(call.getArguments().indexOf(expression)));
           }
         });
   }
