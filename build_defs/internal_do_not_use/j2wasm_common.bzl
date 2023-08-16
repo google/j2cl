@@ -30,6 +30,14 @@ def _compile(
         javac_opts = javac_opts,
     )
 
+    # TODO(b/284654149): Use the j2cl_provider._private_.js_info instead of creating
+    # another provider once the modular pipeline graduates from being a
+    # prototype.
+    # The reason to have two providers is to avoid running the modular
+    # transpilation action when building the monolithic j2wasm_application. Note
+    # that here we pass "artifact_suffix" so that artifacts that this provider
+    # creates do not conflict with the artifacts created by the js_provider in
+    # j2cl_common.
     js_provider = j2cl_js_provider(
         ctx = ctx,
         srcs = js_srcs,
