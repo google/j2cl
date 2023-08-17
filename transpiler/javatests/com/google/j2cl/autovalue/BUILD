@@ -8,7 +8,6 @@ package(
 j2cl_test(
     name = "AutoValueTest",
     srcs = ["AutoValueTest.java"],
-    optimize_autovalue = True,
     deps = [
         "//third_party:auto_value-j2cl",
         "//third_party:guava-j2cl",
