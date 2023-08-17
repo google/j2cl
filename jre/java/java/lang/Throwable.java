@@ -163,18 +163,19 @@ public class Throwable implements Serializable {
   }
 
   private StackTraceElement[] constructJavaStackTrace() {
-    StackTraceElement[] stackTraceElements = new StackTraceElement[0]; // Will auto-grow...
     Object e = this.backingJsObject;
     if (e instanceof NativeError) {
       NativeError error = ((NativeError) e);
       if (error.stack != null) {
         String[] splitStack = error.stack.split("\n");
+        StackTraceElement[] stackTraceElements = new StackTraceElement[splitStack.length];
         for (int i = 0; i < splitStack.length; i++) {
           stackTraceElements[i] = new StackTraceElement("", splitStack[i], null, -1);
         }
+        return stackTraceElements;
       }
     }
-    return stackTraceElements;
+    return new StackTraceElement[0];
   }
 
   /** Returns the array of Exception that this one suppressedExceptions. */
