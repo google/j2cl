@@ -186,7 +186,7 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements
 
   @Override
   public void add(int index, E element) {
-    throw new UnsupportedOperationException("Add not supported on this list");
+    throw new UnsupportedOperationException();
   }
 
   @Override
@@ -274,12 +274,12 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements
 
   @Override
   public E remove(int index) {
-    throw new UnsupportedOperationException("Remove not supported on this list");
+    throw new UnsupportedOperationException();
   }
 
   @Override
   public E set(int index, E o) {
-    throw new UnsupportedOperationException("Set not supported on this list");
+    throw new UnsupportedOperationException();
   }
 
   @Override

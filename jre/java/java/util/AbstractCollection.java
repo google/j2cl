@@ -32,7 +32,7 @@ public abstract class AbstractCollection<E> implements Collection<E> {
 
   @Override
   public boolean add(E o) {
-    throw new UnsupportedOperationException("Add not supported on this collection");
+    throw new UnsupportedOperationException();
   }
 
   @Override

@@ -246,7 +246,7 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
 
   @Override
   public V put(K key, V value) {
-    throw new UnsupportedOperationException("Put not supported on this map");
+    throw new UnsupportedOperationException();
   }
 
   @Override
