@@ -100,7 +100,7 @@ j2wasm_common = struct(
 J2WASM_TOOLCHAIN_ATTRS = {}
 J2WASM_TOOLCHAIN_ATTRS.update(J2CL_TOOLCHAIN_ATTRS)
 J2WASM_TOOLCHAIN_ATTRS.update({
-    "_java_toolchain": attr.label(
+    "_j2cl_java_toolchain": attr.label(
         default = Label("//build_defs/internal_do_not_use:j2wasm_java_toolchain"),
     ),
 })

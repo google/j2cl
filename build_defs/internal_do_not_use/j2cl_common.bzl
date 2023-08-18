@@ -24,7 +24,7 @@ def _compile(
         internal_transpiler_flags = {},
         artifact_suffix = ""):
     name = ctx.label.name + artifact_suffix
-
+    java_toolchain = _get_java_toolchain(ctx)
     jvm_srcs, js_srcs = split_srcs(srcs)
 
     has_srcs_to_transpile = (jvm_srcs or kt_common_srcs)
@@ -50,6 +50,7 @@ def _compile(
         jvm_provider = _java_compile(
             ctx,
             name,
+            java_toolchain,
             jvm_srcs,
             jvm_deps,
             jvm_exports,
@@ -62,6 +63,7 @@ def _compile(
         jvm_provider = _kt_compile(
             ctx,
             name,
+            java_toolchain,
             jvm_srcs,
             kt_common_srcs,
             jvm_deps,
@@ -143,6 +145,7 @@ def split_deps(deps):
 def _java_compile(
         ctx,
         name,
+        java_toolchain,
         srcs = [],
         deps = [],
         exports = [],
@@ -169,7 +172,7 @@ def _java_compile(
             plugins = plugins,
             exported_plugins = exported_plugins,
             output = indexed_output_jar,
-            java_toolchain = _get_java_toolchain(ctx),
+            java_toolchain = java_toolchain,
             javac_opts = javac_opts,
         )
 
@@ -181,13 +184,14 @@ def _java_compile(
         plugins = plugins,
         exported_plugins = exported_plugins,
         output = output_jar,
-        java_toolchain = _get_java_toolchain(ctx),
+        java_toolchain = java_toolchain,
         javac_opts = javac_opts,
     )
 
 def _kt_compile(
         ctx,
         name,
+        java_toolchain,
         srcs = [],
         common_srcs = [],
         deps = [],
@@ -201,7 +205,7 @@ def _kt_compile(
     fail("Kotlin frontend is disabled")
 
 def _get_java_toolchain(ctx):
-    return ctx.attr._java_toolchain[java_common.JavaToolchainInfo]
+    return ctx.attr._j2cl_java_toolchain[java_common.JavaToolchainInfo]
 
 def _strip_incompatible_annotation(ctx, name, java_srcs, mnemonic, strip_annotation):
     # Paths are matched by Kythe to identify generated J2CL sources.
@@ -327,7 +331,7 @@ DEFAULT_J2CL_KOTLINCOPTS = [
 ]
 
 J2CL_JAVA_TOOLCHAIN_ATTRS = {
-    "_java_toolchain": attr.label(
+    "_j2cl_java_toolchain": attr.label(
         default = Label("//build_defs/internal_do_not_use:j2cl_java_toolchain"),
     ),
     "_j2cl_stripper": attr.label(
