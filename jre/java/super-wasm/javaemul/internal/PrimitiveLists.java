@@ -33,7 +33,7 @@ public final class PrimitiveLists {
     public void push(byte element) {
       byte[] array = this.array;
       if (size == array.length) {
-        array = ArrayHelper.resize(array, size + 1);
+        array = ArrayHelper.ensureSize(array, size + 1);
         this.array = array;
       }
       array[size++] = element;
@@ -47,8 +47,12 @@ public final class PrimitiveLists {
       return this.array;
     }
 
+    /**
+     * Returns the internal array or copy of it (based on the platform and the gap between size and
+     * actual internal array length).
+     */
     public byte[] toArray() {
-      return ArrayHelper.clone(this.array, 0, size);
+      return ArrayHelper.setLength(this.array, size);
     }
   }
 
@@ -67,7 +71,7 @@ public final class PrimitiveLists {
     public void push(int element) {
       int[] array = this.array;
       if (size == array.length) {
-        array = ArrayHelper.resize(array, size + 1);
+        array = ArrayHelper.ensureSize(array, size + 1);
         this.array = array;
       }
       array[size++] = element;
@@ -81,8 +85,12 @@ public final class PrimitiveLists {
       return this.array;
     }
 
+    /**
+     * Returns the internal array or copy of it (based on the platform and the gap between size and
+     * actual internal array length).
+     */
     public int[] toArray() {
-      return ArrayHelper.clone(this.array, 0, size);
+      return ArrayHelper.setLength(this.array, size);
     }
   }
 
@@ -101,7 +109,7 @@ public final class PrimitiveLists {
     public void push(long element) {
       long[] array = this.array;
       if (size == array.length) {
-        array = ArrayHelper.resize(array, size + 1);
+        array = ArrayHelper.ensureSize(array, size + 1);
         this.array = array;
       }
       array[size++] = element;
@@ -115,8 +123,12 @@ public final class PrimitiveLists {
       return this.array;
     }
 
+    /**
+     * Returns the internal array or copy of it (based on the platform and the gap between size and
+     * actual internal array length).
+     */
     public long[] toArray() {
-      return ArrayHelper.clone(this.array, 0, size);
+      return ArrayHelper.setLength(this.array, size);
     }
   }
 
@@ -135,7 +147,7 @@ public final class PrimitiveLists {
     public void push(double element) {
       double[] array = this.array;
       if (size == array.length) {
-        array = ArrayHelper.resize(array, size + 1);
+        array = ArrayHelper.ensureSize(array, size + 1);
         this.array = array;
       }
       array[size++] = element;
@@ -149,8 +161,12 @@ public final class PrimitiveLists {
       return this.array;
     }
 
+    /**
+     * Returns the internal array or copy of it (based on the platform and the gap between size and
+     * actual internal array length).
+     */
     public double[] toArray() {
-      return ArrayHelper.clone(this.array, 0, size);
+      return ArrayHelper.setLength(this.array, size);
     }
   }
 

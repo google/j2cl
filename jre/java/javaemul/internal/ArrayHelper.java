@@ -78,10 +78,10 @@ public final class ArrayHelper {
   }
 
   /**
-   * Resize the array to accomodate requested length. For JavaScript this is same as setting the
+   * Resize the array to accommodate requested length. For JavaScript this is same as setting the
    * length.
    */
-  public static <T> T resize(T array, int length) {
+  public static <T> T ensureSize(T array, int length) {
     return setLength(array, length);
   }
 

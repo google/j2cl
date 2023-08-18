@@ -60,7 +60,7 @@ public final class ArrayHelper {
     return array;
   }
 
-  public static <T> T resize(T array, int length) {
+  public static <T> T ensureSize(T array, int length) {
     return setLength(array, length);
   }
 

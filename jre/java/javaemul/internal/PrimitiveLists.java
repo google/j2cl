@@ -40,6 +40,10 @@ public final class PrimitiveLists {
       return JsUtils.uncheckedCast(this);
     }
 
+    /**
+     * Returns the internal array or copy of it (based on the platform and the gap between size and
+     * actual internal array length).
+     */
     @JsOverlay
     public final byte[] toArray() {
       return JsUtils.uncheckedCast(this);
@@ -63,6 +67,10 @@ public final class PrimitiveLists {
       return JsUtils.uncheckedCast(this);
     }
 
+    /**
+     * Returns the internal array or copy of it (based on the platform and the gap between size and
+     * actual internal array length).
+     */
     @JsOverlay
     public final int[] toArray() {
       return JsUtils.uncheckedCast(this);
@@ -86,6 +94,10 @@ public final class PrimitiveLists {
       return JsUtils.uncheckedCast(this);
     }
 
+    /**
+     * Returns the internal array or copy of it (based on the platform and the gap between size and
+     * actual internal array length).
+     */
     @JsOverlay
     public final long[] toArray() {
       return JsUtils.uncheckedCast(this);
@@ -109,6 +121,10 @@ public final class PrimitiveLists {
       return JsUtils.uncheckedCast(this);
     }
 
+    /**
+     * Returns the internal array or copy of it (based on the platform and the gap between size and
+     * actual internal array length).
+     */
     @JsOverlay
     public final double[] toArray() {
       return JsUtils.uncheckedCast(this);

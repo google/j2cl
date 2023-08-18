@@ -619,7 +619,9 @@ public final class String implements Comparable<String>, CharSequence, Serializa
       // None of the information in the match returned are useful as we have no
       // subgroup handling
       NativeRegExp.Match matchObj = compiled.exec(trail);
-      out = ArrayHelper.resize(out, count + 1);
+      if (count == out.length) {
+        out = ArrayHelper.ensureSize(out, count + 1);
+      }
       if (matchObj == null || trail.isEmpty() || (matchCount == (maxMatch - 1) && maxMatch > 0)) {
         out[count++] = trail;
         break;
