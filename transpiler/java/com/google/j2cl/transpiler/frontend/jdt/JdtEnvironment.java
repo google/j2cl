@@ -1217,6 +1217,7 @@ public class JdtEnvironment {
                 () -> createDeclaredTypeDescriptor(typeBinding, isNullMarked))
             .setHasAbstractModifier(isAbstract)
             .setKind(getKindFromTypeBinding(typeBinding))
+            .setAnnotation(typeBinding.isAnnotation())
             .setCapturingEnclosingInstance(capturesEnclosingInstance(typeBinding))
             .setFinal(isFinal)
             .setFunctionalInterface(

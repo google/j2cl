@@ -1263,6 +1263,7 @@ class JavaEnvironment {
             () -> createDeclaredTypeDescriptor(typeElement.asType()))
         .setHasAbstractModifier(isAbstract)
         .setKind(getKindFromTypeBinding(typeElement))
+        .setAnnotation(isAnnotation(typeElement))
         .setCapturingEnclosingInstance(capturesEnclosingInstance((ClassSymbol) typeElement))
         .setFinal(isFinal)
         .setFunctionalInterface(isFunctionalInterface(typeElement.asType()))
@@ -1423,6 +1424,10 @@ class JavaEnvironment {
 
   private static boolean isEnum(TypeElement typeElement) {
     return typeElement.getKind() == ElementKind.ENUM;
+  }
+
+  private static boolean isAnnotation(TypeElement typeElement) {
+    return typeElement.getKind() == ElementKind.ANNOTATION_TYPE;
   }
 
   private static boolean isAnonymous(TypeElement typeElement) {

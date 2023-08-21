@@ -224,6 +224,8 @@ public abstract class TypeDeclaration
 
   public abstract Kind getKind();
 
+  public abstract boolean isAnnotation();
+
   public abstract SourceLanguage getSourceLanguage();
 
   /** Returns whether the described type is a class. */
@@ -787,6 +789,7 @@ public abstract class TypeDeclaration
         .setHasAbstractModifier(false)
         .setAnonymous(false)
         .setNative(false)
+        .setAnnotation(false)
         .setCapturingEnclosingInstance(false)
         .setFinal(false)
         .setFunctionalInterface(false)
@@ -839,6 +842,8 @@ public abstract class TypeDeclaration
     public abstract Builder setHasAbstractModifier(boolean hasAbstractModifier);
 
     public abstract Builder setKind(Kind kind);
+
+    public abstract Builder setAnnotation(boolean isAnnotation);
 
     public abstract Builder setSourceLanguage(SourceLanguage sourceLanguage);
 
@@ -948,6 +953,8 @@ public abstract class TypeDeclaration
 
     abstract Kind getKind();
 
+    abstract boolean isAnnotation();
+
     private static final ThreadLocalInterner<TypeDeclaration> interner =
         new ThreadLocalInterner<>();
 
@@ -977,6 +984,8 @@ public abstract class TypeDeclaration
       if (!getSimpleJsName().isPresent()) {
         setSimpleJsName(AstUtils.getSimpleSourceName(getClassComponents()));
       }
+
+      checkState(!isAnnotation() || getKind() == Kind.INTERFACE);
 
       TypeDeclaration typeDeclaration = autoBuild();
 
