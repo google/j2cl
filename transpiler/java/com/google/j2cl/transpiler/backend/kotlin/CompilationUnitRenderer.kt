@@ -18,9 +18,9 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.transpiler.ast.CompilationUnit
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.emptyLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.ifNotNullSource
 import com.google.j2cl.transpiler.backend.kotlin.source.newLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.source
-import com.google.j2cl.transpiler.backend.kotlin.source.sourceIf
 import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
 
 internal fun Renderer.fileHeaderSource(compilationUnit: CompilationUnit): Source =
@@ -58,8 +58,8 @@ internal fun Renderer.packageAndImportsSource(compilationUnit: CompilationUnit):
   emptyLineSeparated(packageSource(compilationUnit), importsSource())
 
 private fun packageSource(compilationUnit: CompilationUnit): Source =
-  sourceIf(compilationUnit.packageName.isNotEmpty()) {
-    spaceSeparated(source("package"), qualifiedIdentifierSource(compilationUnit.packageName))
+  compilationUnit.packageName.takeIf(String::isNotEmpty).ifNotNullSource {
+    spaceSeparated(source("package"), qualifiedIdentifierSource(it))
   }
 
 internal fun Renderer.typesSource(compilationUnit: CompilationUnit): Source =
