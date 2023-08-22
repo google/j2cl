@@ -166,8 +166,8 @@ def _impl_j2wasm_application(ctx):
             args.add("--symbolmap=" + ctx.outputs.symbolmap.path)
             outputs.append(ctx.outputs.symbolmap)
 
-            # Always maintain debug information if explicitly asked by user.
-            if ctx.var.get("J2CL_APP_STYLE", "") == "PRETTY":
+            # Always keep the embedded debug information if explicitly asked by user.
+            if ctx.attr.enable_debug_info or ctx.var.get("J2CL_APP_STYLE", "") == "PRETTY":
                 args.add("--debuginfo")
         else:
             output = ctx.actions.declare_file(ctx.label.name + "_intermediate_%s.wasm" % current_stage)
@@ -291,6 +291,8 @@ _J2WASM_APP_ATTRS = {
     "transpiler_args": attr.string_list(),
     "defines": attr.string_list(),
     "source_map_base_url": attr.string(),
+    # TODO(b/296477606): Remove when symbol map file can be linked from the binary for debugging.
+    "enable_debug_info": attr.bool(default = False),
     "_jre": attr.label(default = Label("//build_defs/internal_do_not_use:j2wasm_jre")),
     "_j2cl_transpiler": attr.label(
         cfg = "exec",
