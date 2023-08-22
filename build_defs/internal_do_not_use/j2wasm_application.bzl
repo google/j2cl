@@ -344,7 +344,7 @@ def j2wasm_application(name, defines = dict(), **kwargs):
         "J2WASM_DEBUG": "TRUE",
         "jre.strictFpToString": "DISABLED",
         "jre.checkedMode": "ENABLED",
-        "jre.checks.checkLevel": "MINIMAL",
+        "jre.checks.checkLevel": "NORMAL",
         "jre.checks.bounds": "AUTO",
         "jre.checks.api": "AUTO",
         "jre.checks.numeric": "AUTO",
@@ -361,6 +361,7 @@ def j2wasm_application(name, defines = dict(), **kwargs):
     optimized_defines.update({
         "J2WASM_DEBUG": "FALSE",
         "jre.checkedMode": "DISABLED",
+        "jre.checks.checkLevel": "MINIMAL",
         "jre.logging.logLevel": "SEVERE",
         "jre.logging.simpleConsoleHandler": "DISABLED",
     })
