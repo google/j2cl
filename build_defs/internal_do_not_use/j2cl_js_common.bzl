@@ -16,6 +16,13 @@ def create_js_lib_struct(j2cl_info, extra_providers = []):
         exports = j2cl_info._private_.js_info.exports,
     )
 
+def create_wasm_js_lib_struct(js_info, extra_providers = []):
+    return struct(
+        providers = extra_providers,
+        closure_js_library = js_info.closure_js_library,
+        exports = js_info.exports,
+    )
+
 def j2cl_js_provider(ctx, srcs = [], deps = [], exports = [], artifact_suffix = ""):
     """ Creates a js provider from provided sources, deps and exports. """
 
