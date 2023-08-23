@@ -1,10 +1,34 @@
 """J2CL library rules."""
 
-load(":provider.bzl", "J2clInfo")
-load(":j2cl_common.bzl", "J2CL_TOOLCHAIN_ATTRS", "j2cl_common")
+load(":provider.bzl", "J2clInfo", "J2ktInfo")
+load(":j2cl_common.bzl", "J2CL_TOOLCHAIN_ATTRS", "j2cl_common", "split_srcs")
+load(":j2kt_common.bzl", "j2kt_common")
 load(":j2cl_js_common.bzl", "J2CL_JS_ATTRS", "JS_PROVIDER_NAME", "j2cl_js_provider")
 
 def _impl_j2cl_library(ctx):
+    if ctx.attr.j2kt_web_experiment_enabled:
+        jvm_srcs, js_srcs = split_srcs(ctx.files.srcs)
+
+        # Invoke j2kt transpiler first to transpile Java files to Kotlin.
+        j2kt_provider = j2kt_common.compile(
+            ctx,
+            srcs = jvm_srcs,
+            java_deps = [d[J2clInfo]._private_.java_info for d in ctx.attr.deps if J2clInfo in d],
+            j2kt_exports = [d[J2ktInfo] for d in ctx.attr.exports if J2ktInfo in d],
+            plugins = _javaplugin_providers_of(ctx.attr.plugins),
+            exported_plugins = _javaplugin_providers_of(ctx.attr.exported_plugins),
+            output_jar = ctx.actions.declare_file(ctx.label.name + "_j2kt_web_jvm.jar"),
+            javac_opts = ctx.attr.javacopts,
+        )
+
+        srcs = js_srcs
+        kt_common_srcs = j2kt_provider._private_.transpile_kt_out
+
+    else:
+        j2kt_provider = []
+        srcs = ctx.files.srcs
+        kt_common_srcs = ctx.files.kt_common_srcs
+
     extra_javacopts = ["-Adagger.fastInit=enabled"]
     if ctx.attr.optimize_autovalue:
         extra_javacopts.append("-Acom.google.auto.value.OmitIdentifiers")
@@ -16,8 +40,8 @@ def _impl_j2cl_library(ctx):
 
     j2cl_provider = j2cl_common.compile(
         ctx,
-        srcs = ctx.files.srcs,
-        kt_common_srcs = ctx.files.kt_common_srcs,
+        srcs = srcs,
+        kt_common_srcs = kt_common_srcs,
         deps = _j2cl_or_js_providers_of(ctx.attr.deps),
         exports = _j2cl_or_js_providers_of(ctx.attr.exports),
         plugins = _javaplugin_providers_of(ctx.attr.plugins),
@@ -33,10 +57,13 @@ def _impl_j2cl_library(ctx):
 
     output_js = j2cl_provider._private_.output_js
     output = [output_js, ctx.outputs.jar] if output_js else [ctx.outputs.jar]
+    extra_providers = [DefaultInfo(files = depset(output))]
+    if j2kt_provider:
+        extra_providers.append(j2kt_provider)
 
     return j2cl_common.create_js_lib_struct(
         j2cl_info = j2cl_provider,
-        extra_providers = [DefaultInfo(files = depset(output))],
+        extra_providers = extra_providers,
     )
 
 def _j2cl_or_js_providers_of(deps):
@@ -48,6 +75,10 @@ def _j2cl_or_js_provider_of(dep):
 def _javaplugin_providers_of(deps):
     plugin_provider = getattr(java_common, "JavaPluginInfo") if hasattr(java_common, "JavaPluginInfo") else JavaInfo
     return [d[plugin_provider] for d in deps]
+
+_J2KT_WEB_EXPERIMENT_ATTRS = {
+    "j2kt_web_experiment_enabled": attr.bool(default = False),
+}
 
 _J2CL_INTERNAL_LIB_ATTRS = {
     "readable_source_maps": attr.bool(default = False),
@@ -69,6 +100,8 @@ _J2CL_LIB_ATTRS = {
     #  TODO(b/217287994): Remove the ability to do transpiler override.
     "j2cl_transpiler_override": attr.label(default = None, cfg = "exec", executable = True),
 }
+
+_J2CL_LIB_ATTRS.update(_J2KT_WEB_EXPERIMENT_ATTRS)
 _J2CL_LIB_ATTRS.update(_J2CL_INTERNAL_LIB_ATTRS)
 _J2CL_LIB_ATTRS.update(J2CL_TOOLCHAIN_ATTRS)
 _J2CL_LIB_ATTRS.update(J2CL_JS_ATTRS)

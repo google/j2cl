@@ -30,6 +30,13 @@ package(
 # Transpiler related
 # ***************************************************
 
+config_setting(
+    name = "j2kt_web_enabled",
+    flag_values = {
+        "//:experimental_enable_j2kt_web": "True",
+    },
+)
+
 # Main J2CL transpiler binary.
 alias(
     name = "BazelJ2clBuilder",

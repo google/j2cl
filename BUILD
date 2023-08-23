@@ -4,7 +4,7 @@
 load("//build_defs:rules.bzl", "j2cl_alias")
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
 load("@rules_license//rules:license.bzl", "license")
-load("@bazel_skylib//rules:common_settings.bzl", "string_flag")
+load("@bazel_skylib//rules:common_settings.bzl", "bool_flag", "string_flag")
 
 package(
     default_applicable_licenses = [":j2cl_license"],
@@ -71,4 +71,10 @@ string_flag(
         "jdt",
         "javac",
     ],
+)
+
+# Flag to enable j2kt-web experiment. Please talk to j2cl-team@ before using it.
+bool_flag(
+    name = "experimental_enable_j2kt_web",
+    build_setting_default = False,
 )
