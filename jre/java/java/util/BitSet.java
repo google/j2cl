@@ -126,13 +126,12 @@ public class BitSet implements Cloneable {
       // Set the bits from fromIndex to the next 31 bit boundary.
       maskInWord(array, first, startBit, BITS_PER_WORD);
 
+      // Set everything in between.
+      Arrays.fill(array, first + 1, last, WORD_MASK);
+
       // Set the bits from the last 31 bit boundary to toIndex.
       maskInWord(array, last, 0, endBit);
 
-      // Set everything in between.
-      for (int i = first + 1; i < last; i++) {
-        array[i] = WORD_MASK;
-      }
     }
     if (last >= wordLength) {
       wordLength = last + 1;
@@ -338,10 +337,12 @@ public class BitSet implements Cloneable {
       // Clear the bits from fromIndex to the next 31 bit boundary.
       maskOutWord(array, first, startBit, BITS_PER_WORD);
 
+      // Set everything in between.
+      Arrays.fill(array, first + 1, last, 0);
+
       // Clear the bits from the last 31 bit boundary to the toIndex.
       maskOutWord(array, last, 0, endBit);
 
-      Arrays.fill(array, first + 1, last, 0);
     }
     updateWordLength();
   }
@@ -428,13 +429,13 @@ public class BitSet implements Cloneable {
       // Flip the bits from fromIndex to the next 31 bit boundary.
       flipMaskedWord(array, first, startBit, BITS_PER_WORD);
 
-      // Flip the bits from the last 31 bit boundary to the toIndex.
-      flipMaskedWord(array, last, 0, endBit);
-
       // Flip everything in between.
       for (int i = first + 1; i < last; i++) {
         array[i] = ~wordAt(array, i) & WORD_MASK;
       }
+
+      // Flip the bits from the last 31 bit boundary to the toIndex.
+      flipMaskedWord(array, last, 0, endBit);
     }
 
     updateWordLength();
