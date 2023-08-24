@@ -26,13 +26,6 @@ def create_wasm_js_lib_struct(js_info, extra_providers = []):
 def j2cl_js_provider(ctx, srcs = [], deps = [], exports = [], artifact_suffix = ""):
     """ Creates a js provider from provided sources, deps and exports. """
 
-    if artifact_suffix == "j2wasm":
-        # TODO(b/295337027): The modular pipeline introduced a second javascript
-        # provider in the same context and the artifact suffix is needed to
-        # avoid conflicting artifacts. create_closure_js_library does not
-        # accept artifact suffixes and will need to be fixed.
-        return struct()
-
     default_j2cl_suppresses = [
         "analyzerChecks",
         "underscore",
@@ -48,6 +41,7 @@ def j2cl_js_provider(ctx, srcs = [], deps = [], exports = [], artifact_suffix = 
         exports,
         suppresses,
         convention = "GOOGLE",
+        artifact_suffix = artifact_suffix,
     )
 
     return struct(

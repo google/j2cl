@@ -1,7 +1,6 @@
 """Common utilities for creating J2WASM targets and providers."""
 
-load(":j2cl_common.bzl", "J2CL_TOOLCHAIN_ATTRS", "j2cl_common", "split_deps", "split_srcs")
-load(":j2cl_js_common.bzl", "j2cl_js_provider")
+load(":j2cl_common.bzl", "J2CL_TOOLCHAIN_ATTRS", "j2cl_common")
 load(":provider.bzl", "J2wasmInfo")
 
 def _compile(
@@ -13,11 +12,8 @@ def _compile(
         plugins = [],
         exported_plugins = [],
         output_jar = None,
-        javac_opts = []):
-    _, js_srcs = split_srcs(srcs)
-    _, js_deps = split_deps(deps)
-    _, js_exports = split_deps(exports)
-
+        javac_opts = [],
+        artifact_suffix = ""):
     j2cl_provider = j2cl_common.compile(
         ctx = ctx,
         srcs = srcs,
@@ -28,32 +24,15 @@ def _compile(
         backend = "WASM_MODULAR",
         output_jar = output_jar,
         javac_opts = javac_opts,
-    )
-
-    # TODO(b/284654149): Use the j2cl_provider._private_.js_info instead of creating
-    # another provider once the modular pipeline graduates from being a
-    # prototype.
-    # The reason to have two providers is to avoid running the modular
-    # transpilation action when building the monolithic j2wasm_application. Note
-    # that here we pass "artifact_suffix" so that artifacts that this provider
-    # creates do not conflict with the artifacts created by the js_provider in
-    # j2cl_common.
-    js_provider = j2cl_js_provider(
-        ctx = ctx,
-        srcs = js_srcs,
-        # These are exports, because they will need to be referenced by the j2wasm_application
-        # eventually downstream. They may not be direct dependencies.
-        exports = js_deps + js_exports,
-        artifact_suffix = "j2wasm",
+        artifact_suffix = artifact_suffix,
     )
 
     return _create_j2wasm_provider(
         j2cl_provider,
-        js_provider,
         deps + exports,
     )
 
-def _create_j2wasm_provider(j2cl_provider, js_provider, deps):
+def _create_j2wasm_provider(j2cl_provider, deps):
     j2wasm_deps = [d for d in deps if hasattr(d, "_is_j2cl_provider")]
 
     # The output_js could be "None" if there are no sources.
@@ -68,7 +47,7 @@ def _create_j2wasm_provider(j2cl_provider, js_provider, deps):
                 transitive = [d._private_.transitive_classpath for d in j2wasm_deps],
             ),
             java_info = j2cl_provider._private_.java_info,
-            js_info = js_provider,
+            js_info = j2cl_provider._private_.js_info,
             wasm_modular_info = struct(
                 transitive_modules = depset(
                     modular_output,
