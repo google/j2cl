@@ -1388,7 +1388,7 @@
  (result i32)
  ;;@ autovalue/AutoValueWithExtensions.java:29:6
  (local $this (ref null $autovalue.AutoValueWithExtensions))
- (local.set $this (ref.cast $autovalue.AutoValueWithExtensions (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValueWithExtensions) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValueWithExtensions.java:30:4
   (return (i32.mul (call_ref $function.m_getIntField__int (ref.as_non_null (local.get $this))(struct.get $autovalue.AutoValueWithExtensions.vtable $m_getIntField__int (struct.get $autovalue.AutoValueWithExtensions $vtable(local.get $this)))) (i32.const 2)))
@@ -1531,7 +1531,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $autovalue.Parent))
- (local.set $this (ref.cast $autovalue.Parent (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.Parent) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.Parent) ))
  )
@@ -2102,7 +2102,7 @@
   ;;@ autovalue/SimpleAutoValue.java:49:65
   (call $$clinit__void@autovalue.SimpleAutoValue )
   ;;@ autovalue/SimpleAutoValue.java:50:4
-  (return (if (result (ref null $javaemul.internal.WasmArray.OfObject)) (ref.test $javaemul.internal.WasmArray.OfObject (local.get $o)) (then (ref.cast null $javaemul.internal.WasmArray.OfObject (local.get $o))) (else (ref.null $javaemul.internal.WasmArray.OfObject))))
+  (return (if (result (ref null $javaemul.internal.WasmArray.OfObject)) (ref.test (ref $javaemul.internal.WasmArray.OfObject) (local.get $o)) (then (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (local.get $o))) (else (ref.null $javaemul.internal.WasmArray.OfObject))))
  )
 )
 
@@ -2175,7 +2175,7 @@
  (result i32)
  ;;@ autovalue/$$AutoValue_AutoValueWithExtensions.java:23:13
  (local $this (ref null $autovalue.$$AutoValue_AutoValueWithExtensions))
- (local.set $this (ref.cast $autovalue.$$AutoValue_AutoValueWithExtensions (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.$$AutoValue_AutoValueWithExtensions) (local.get $this.untyped)))
  (block
   ;;@ autovalue/$$AutoValue_AutoValueWithExtensions.java:24:4
   (return (struct.get $autovalue.$$AutoValue_AutoValueWithExtensions $f_intField__autovalue_$$AutoValue_AutoValueWithExtensions_ (local.get $this)))
@@ -2190,7 +2190,7 @@
  (result (ref null $java.lang.String))
  ;;@ autovalue/$$AutoValue_AutoValueWithExtensions.java:28:16
  (local $this (ref null $autovalue.$$AutoValue_AutoValueWithExtensions))
- (local.set $this (ref.cast $autovalue.$$AutoValue_AutoValueWithExtensions (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.$$AutoValue_AutoValueWithExtensions) (local.get $this.untyped)))
  (block
   ;;@ autovalue/$$AutoValue_AutoValueWithExtensions.java:29:4
   (return (struct.get $autovalue.$$AutoValue_AutoValueWithExtensions $f_stringField__autovalue_$$AutoValue_AutoValueWithExtensions_ (local.get $this)))
@@ -2206,7 +2206,7 @@
  ;;@ autovalue/$$AutoValue_AutoValueWithExtensions.java:33:16
  (local $$stringBuilder (ref null $java.lang.StringBuilder))
  (local $this (ref null $autovalue.$$AutoValue_AutoValueWithExtensions))
- (local.set $this (ref.cast $autovalue.$$AutoValue_AutoValueWithExtensions (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.$$AutoValue_AutoValueWithExtensions) (local.get $this.untyped)))
  (block
   ;;@ autovalue/$$AutoValue_AutoValueWithExtensions.java:34:4
   (return (block (result (ref null $java.lang.String))
@@ -2231,7 +2231,7 @@
  ;;@ autovalue/$$AutoValue_AutoValueWithExtensions.java:41:17
  (local $that (ref null $autovalue.AutoValueWithExtensions))
  (local $this (ref null $autovalue.$$AutoValue_AutoValueWithExtensions))
- (local.set $this (ref.cast $autovalue.$$AutoValue_AutoValueWithExtensions (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.$$AutoValue_AutoValueWithExtensions) (local.get $this.untyped)))
  (block
   ;;@ autovalue/$$AutoValue_AutoValueWithExtensions.java:42:4
   (if (ref.eq (local.get $o) (local.get $this))
@@ -2243,11 +2243,11 @@
    )
   )
   ;;@ autovalue/$$AutoValue_AutoValueWithExtensions.java:45:4
-  (if (ref.test $autovalue.AutoValueWithExtensions (local.get $o))
+  (if (ref.test (ref $autovalue.AutoValueWithExtensions) (local.get $o))
    (then
     (block
      ;;@ autovalue/$$AutoValue_AutoValueWithExtensions.java:46:6
-     (local.set $that (ref.cast null $autovalue.AutoValueWithExtensions (local.get $o)))
+     (local.set $that (ref.cast (ref null $autovalue.AutoValueWithExtensions) (local.get $o)))
      ;;@ autovalue/$$AutoValue_AutoValueWithExtensions.java:47:6
      (return (if (result i32) (i32.eq (struct.get $autovalue.$$AutoValue_AutoValueWithExtensions $f_intField__autovalue_$$AutoValue_AutoValueWithExtensions_ (local.get $this)) (call_ref $function.m_getIntField__int (ref.as_non_null (local.get $that))(struct.get $autovalue.AutoValueWithExtensions.vtable $m_getIntField__int (struct.get $autovalue.AutoValueWithExtensions $vtable(local.get $that))))) (then (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (struct.get $autovalue.$$AutoValue_AutoValueWithExtensions $f_stringField__autovalue_$$AutoValue_AutoValueWithExtensions_ (local.get $this)))(call_ref $function.m_getStringField__java_lang_String (ref.as_non_null (local.get $that))(struct.get $autovalue.AutoValueWithExtensions.vtable $m_getStringField__java_lang_String (struct.get $autovalue.AutoValueWithExtensions $vtable(local.get $that))))(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(struct.get $autovalue.$$AutoValue_AutoValueWithExtensions $f_stringField__autovalue_$$AutoValue_AutoValueWithExtensions_ (local.get $this)))))) (else (i32.const 0))))
     )
@@ -2267,7 +2267,7 @@
  ;;@ autovalue/$$AutoValue_AutoValueWithExtensions.java:54:13
  (local $h$ i32)
  (local $this (ref null $autovalue.$$AutoValue_AutoValueWithExtensions))
- (local.set $this (ref.cast $autovalue.$$AutoValue_AutoValueWithExtensions (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.$$AutoValue_AutoValueWithExtensions) (local.get $this.untyped)))
  (block
   ;;@ autovalue/$$AutoValue_AutoValueWithExtensions.java:55:4
   (local.set $h$ (i32.const 1))
@@ -2408,7 +2408,7 @@
  (result i32)
  ;;@ autovalue/AutoValue_AutoValueJsType.java:22:13
  (local $this (ref null $autovalue.AutoValue_AutoValueJsType))
- (local.set $this (ref.cast $autovalue.AutoValue_AutoValueJsType (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueJsType) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_AutoValueJsType.java:23:4
   (return (struct.get $autovalue.AutoValue_AutoValueJsType $f_field__autovalue_AutoValue_AutoValueJsType_ (local.get $this)))
@@ -2423,7 +2423,7 @@
  (result i32)
  ;;@ autovalue/AutoValue_AutoValueJsType.java:28:6
  (local $this (ref null $autovalue.AutoValue_AutoValueJsType))
- (local.set $this (ref.cast $autovalue.AutoValue_AutoValueJsType (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueJsType) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_AutoValueJsType.java:29:4
   (return (struct.get $autovalue.AutoValue_AutoValueJsType $f_withJsMethod__autovalue_AutoValue_AutoValueJsType_ (local.get $this)))
@@ -2439,7 +2439,7 @@
  ;;@ autovalue/AutoValue_AutoValueJsType.java:33:16
  (local $$stringBuilder (ref null $java.lang.StringBuilder))
  (local $this (ref null $autovalue.AutoValue_AutoValueJsType))
- (local.set $this (ref.cast $autovalue.AutoValue_AutoValueJsType (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueJsType) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_AutoValueJsType.java:34:4
   (return (block (result (ref null $java.lang.String))
@@ -2464,7 +2464,7 @@
  ;;@ autovalue/AutoValue_AutoValueJsType.java:41:17
  (local $that (ref null $autovalue.AutoValueJsType))
  (local $this (ref null $autovalue.AutoValue_AutoValueJsType))
- (local.set $this (ref.cast $autovalue.AutoValue_AutoValueJsType (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueJsType) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_AutoValueJsType.java:42:4
   (if (ref.eq (local.get $o) (local.get $this))
@@ -2476,11 +2476,11 @@
    )
   )
   ;;@ autovalue/AutoValue_AutoValueJsType.java:45:4
-  (if (ref.test $autovalue.AutoValueJsType (local.get $o))
+  (if (ref.test (ref $autovalue.AutoValueJsType) (local.get $o))
    (then
     (block
      ;;@ autovalue/AutoValue_AutoValueJsType.java:46:6
-     (local.set $that (ref.cast null $autovalue.AutoValueJsType (local.get $o)))
+     (local.set $that (ref.cast (ref null $autovalue.AutoValueJsType) (local.get $o)))
      ;;@ autovalue/AutoValue_AutoValueJsType.java:47:6
      (return (if (result i32) (i32.eq (struct.get $autovalue.AutoValue_AutoValueJsType $f_field__autovalue_AutoValue_AutoValueJsType_ (local.get $this)) (call_ref $function.m_getField__int (ref.as_non_null (local.get $that))(struct.get $autovalue.AutoValueJsType.vtable $m_getField__int (struct.get $autovalue.AutoValueJsType $vtable(local.get $that))))) (then (i32.eq (struct.get $autovalue.AutoValue_AutoValueJsType $f_withJsMethod__autovalue_AutoValue_AutoValueJsType_ (local.get $this)) (call_ref $function.m_getWithJsMethod__int_$pp_autovalue (ref.as_non_null (local.get $that))(struct.get $autovalue.AutoValueJsType.vtable $m_getWithJsMethod__int_$pp_autovalue (struct.get $autovalue.AutoValueJsType $vtable(local.get $that)))))) (else (i32.const 0))))
     )
@@ -2500,7 +2500,7 @@
  ;;@ autovalue/AutoValue_AutoValueJsType.java:54:13
  (local $h$ i32)
  (local $this (ref null $autovalue.AutoValue_AutoValueJsType))
- (local.set $this (ref.cast $autovalue.AutoValue_AutoValueJsType (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueJsType) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_AutoValueJsType.java:55:4
   (local.set $h$ (i32.const 1))
@@ -2555,7 +2555,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $autovalue.AutoValue_AutoValueJsType))
- (local.set $this (ref.cast $autovalue.AutoValue_AutoValueJsType (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueJsType) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_AutoValueJsType) ))
  )
@@ -2615,7 +2615,7 @@
  (result i32)
  ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:21:17
  (local $this (ref null $autovalue.AutoValue_AutoValueWithBuilder))
- (local.set $this (ref.cast $autovalue.AutoValue_AutoValueWithBuilder (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueWithBuilder) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:22:4
   (return (struct.get_s $autovalue.AutoValue_AutoValueWithBuilder $f_booleanField__autovalue_AutoValue_AutoValueWithBuilder_ (local.get $this)))
@@ -2630,7 +2630,7 @@
  (result (ref null $java.lang.Double))
  ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:27:16
  (local $this (ref null $autovalue.AutoValue_AutoValueWithBuilder))
- (local.set $this (ref.cast $autovalue.AutoValue_AutoValueWithBuilder (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueWithBuilder) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:28:4
   (return (struct.get $autovalue.AutoValue_AutoValueWithBuilder $f_nullableField__autovalue_AutoValue_AutoValueWithBuilder_ (local.get $this)))
@@ -2646,7 +2646,7 @@
  ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:32:16
  (local $$stringBuilder (ref null $java.lang.StringBuilder))
  (local $this (ref null $autovalue.AutoValue_AutoValueWithBuilder))
- (local.set $this (ref.cast $autovalue.AutoValue_AutoValueWithBuilder (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueWithBuilder) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:33:4
   (return (block (result (ref null $java.lang.String))
@@ -2671,7 +2671,7 @@
  ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:40:17
  (local $that (ref null $autovalue.AutoValueWithBuilder))
  (local $this (ref null $autovalue.AutoValue_AutoValueWithBuilder))
- (local.set $this (ref.cast $autovalue.AutoValue_AutoValueWithBuilder (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueWithBuilder) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:41:4
   (if (ref.eq (local.get $o) (local.get $this))
@@ -2683,11 +2683,11 @@
    )
   )
   ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:44:4
-  (if (ref.test $autovalue.AutoValueWithBuilder (local.get $o))
+  (if (ref.test (ref $autovalue.AutoValueWithBuilder) (local.get $o))
    (then
     (block
      ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:45:6
-     (local.set $that (ref.cast null $autovalue.AutoValueWithBuilder (local.get $o)))
+     (local.set $that (ref.cast (ref null $autovalue.AutoValueWithBuilder) (local.get $o)))
      ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:46:6
      (return (if (result i32) (i32.eq (struct.get_s $autovalue.AutoValue_AutoValueWithBuilder $f_booleanField__autovalue_AutoValue_AutoValueWithBuilder_ (local.get $this)) (call_ref $function.m_getBooleanField__boolean (ref.as_non_null (local.get $that))(struct.get $autovalue.AutoValueWithBuilder.vtable $m_getBooleanField__boolean (struct.get $autovalue.AutoValueWithBuilder $vtable(local.get $that))))) (then (if (result i32) (ref.is_null (struct.get $autovalue.AutoValue_AutoValueWithBuilder $f_nullableField__autovalue_AutoValue_AutoValueWithBuilder_ (local.get $this))) (then (ref.is_null (call_ref $function.m_getNullableField__java_lang_Double (ref.as_non_null (local.get $that))(struct.get $autovalue.AutoValueWithBuilder.vtable $m_getNullableField__java_lang_Double (struct.get $autovalue.AutoValueWithBuilder $vtable(local.get $that)))))) (else (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (struct.get $autovalue.AutoValue_AutoValueWithBuilder $f_nullableField__autovalue_AutoValue_AutoValueWithBuilder_ (local.get $this)))(call_ref $function.m_getNullableField__java_lang_Double (ref.as_non_null (local.get $that))(struct.get $autovalue.AutoValueWithBuilder.vtable $m_getNullableField__java_lang_Double (struct.get $autovalue.AutoValueWithBuilder $vtable(local.get $that))))(struct.get $java.lang.Double.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Double $vtable(struct.get $autovalue.AutoValue_AutoValueWithBuilder $f_nullableField__autovalue_AutoValue_AutoValueWithBuilder_ (local.get $this)))))))) (else (i32.const 0))))
     )
@@ -2707,7 +2707,7 @@
  ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:53:13
  (local $h$ i32)
  (local $this (ref null $autovalue.AutoValue_AutoValueWithBuilder))
- (local.set $this (ref.cast $autovalue.AutoValue_AutoValueWithBuilder (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueWithBuilder) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:54:4
   (local.set $h$ (i32.const 1))
@@ -2732,7 +2732,7 @@
  (result (ref null $autovalue.AutoValueWithBuilder.Builder))
  ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:63:38
  (local $this (ref null $autovalue.AutoValue_AutoValueWithBuilder))
- (local.set $this (ref.cast $autovalue.AutoValue_AutoValueWithBuilder (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueWithBuilder) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:64:4
   (return (call $$create__autovalue_AutoValueWithBuilder@autovalue.AutoValue_AutoValueWithBuilder.Builder (local.get $this)))
@@ -2777,7 +2777,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $autovalue.AutoValue_AutoValueWithBuilder))
- (local.set $this (ref.cast $autovalue.AutoValue_AutoValueWithBuilder (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueWithBuilder) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_AutoValueWithBuilder) ))
  )
@@ -2869,7 +2869,7 @@
  (result (ref null $autovalue.AutoValueWithBuilder.Builder))
  ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:79:40
  (local $this (ref null $autovalue.AutoValue_AutoValueWithBuilder.Builder))
- (local.set $this (ref.cast $autovalue.AutoValue_AutoValueWithBuilder.Builder (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueWithBuilder.Builder) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:80:6
   (struct.set $autovalue.AutoValue_AutoValueWithBuilder.Builder $f_booleanField__autovalue_AutoValue_AutoValueWithBuilder_Builder_ (local.get $this) (local.get $booleanField))
@@ -2889,7 +2889,7 @@
  (result (ref null $autovalue.AutoValueWithBuilder.Builder))
  ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:85:40
  (local $this (ref null $autovalue.AutoValue_AutoValueWithBuilder.Builder))
- (local.set $this (ref.cast $autovalue.AutoValue_AutoValueWithBuilder.Builder (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueWithBuilder.Builder) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:86:6
   (struct.set $autovalue.AutoValue_AutoValueWithBuilder.Builder $f_nullableField__autovalue_AutoValue_AutoValueWithBuilder_Builder_ (local.get $this) (local.get $nullableField))
@@ -2906,7 +2906,7 @@
  (result (ref null $autovalue.AutoValueWithBuilder))
  ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:90:32
  (local $this (ref null $autovalue.AutoValue_AutoValueWithBuilder.Builder))
- (local.set $this (ref.cast $autovalue.AutoValue_AutoValueWithBuilder.Builder (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueWithBuilder.Builder) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:91:6
   (if (i32.ne (struct.get_s $autovalue.AutoValue_AutoValueWithBuilder.Builder $f_set$0__autovalue_AutoValue_AutoValueWithBuilder_Builder_ (local.get $this)) (i32.const 1))
@@ -2961,7 +2961,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $autovalue.AutoValue_AutoValueWithBuilder.Builder))
- (local.set $this (ref.cast $autovalue.AutoValue_AutoValueWithBuilder.Builder (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueWithBuilder.Builder) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_AutoValueWithBuilder.Builder) ))
  )
@@ -3019,7 +3019,7 @@
  (result i32)
  ;;@ autovalue/AutoValue_AutoValueWithGenerics.java:17:17
  (local $this (ref null $autovalue.AutoValue_AutoValueWithGenerics))
- (local.set $this (ref.cast $autovalue.AutoValue_AutoValueWithGenerics (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueWithGenerics) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_AutoValueWithGenerics.java:18:4
   (return (struct.get_s $autovalue.AutoValue_AutoValueWithGenerics $f_booleanField__autovalue_AutoValue_AutoValueWithGenerics_ (local.get $this)))
@@ -3035,7 +3035,7 @@
  ;;@ autovalue/AutoValue_AutoValueWithGenerics.java:22:16
  (local $$stringBuilder (ref null $java.lang.StringBuilder))
  (local $this (ref null $autovalue.AutoValue_AutoValueWithGenerics))
- (local.set $this (ref.cast $autovalue.AutoValue_AutoValueWithGenerics (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueWithGenerics) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_AutoValueWithGenerics.java:23:4
   (return (block (result (ref null $java.lang.String))
@@ -3058,7 +3058,7 @@
  ;;@ autovalue/AutoValue_AutoValueWithGenerics.java:29:17
  (local $that (ref null $autovalue.AutoValueWithGenerics))
  (local $this (ref null $autovalue.AutoValue_AutoValueWithGenerics))
- (local.set $this (ref.cast $autovalue.AutoValue_AutoValueWithGenerics (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueWithGenerics) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_AutoValueWithGenerics.java:30:4
   (if (ref.eq (local.get $o) (local.get $this))
@@ -3070,11 +3070,11 @@
    )
   )
   ;;@ autovalue/AutoValue_AutoValueWithGenerics.java:33:4
-  (if (ref.test $autovalue.AutoValueWithGenerics (local.get $o))
+  (if (ref.test (ref $autovalue.AutoValueWithGenerics) (local.get $o))
    (then
     (block
      ;;@ autovalue/AutoValue_AutoValueWithGenerics.java:34:6
-     (local.set $that (ref.cast null $autovalue.AutoValueWithGenerics (local.get $o)))
+     (local.set $that (ref.cast (ref null $autovalue.AutoValueWithGenerics) (local.get $o)))
      ;;@ autovalue/AutoValue_AutoValueWithGenerics.java:35:6
      (return (i32.eq (struct.get_s $autovalue.AutoValue_AutoValueWithGenerics $f_booleanField__autovalue_AutoValue_AutoValueWithGenerics_ (local.get $this)) (call_ref $function.m_getBooleanField__boolean (ref.as_non_null (local.get $that))(struct.get $autovalue.AutoValueWithGenerics.vtable $m_getBooleanField__boolean (struct.get $autovalue.AutoValueWithGenerics $vtable(local.get $that))))))
     )
@@ -3094,7 +3094,7 @@
  ;;@ autovalue/AutoValue_AutoValueWithGenerics.java:41:13
  (local $h$ i32)
  (local $this (ref null $autovalue.AutoValue_AutoValueWithGenerics))
- (local.set $this (ref.cast $autovalue.AutoValue_AutoValueWithGenerics (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueWithGenerics) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_AutoValueWithGenerics.java:42:4
   (local.set $h$ (i32.const 1))
@@ -3145,7 +3145,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $autovalue.AutoValue_AutoValueWithGenerics))
- (local.set $this (ref.cast $autovalue.AutoValue_AutoValueWithGenerics (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueWithGenerics) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_AutoValueWithGenerics) ))
  )
@@ -3203,7 +3203,7 @@
  (result i32)
  ;;@ autovalue/AutoValue_DefaultConstructorAutoValue.java:17:17
  (local $this (ref null $autovalue.AutoValue_DefaultConstructorAutoValue))
- (local.set $this (ref.cast $autovalue.AutoValue_DefaultConstructorAutoValue (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_DefaultConstructorAutoValue) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_DefaultConstructorAutoValue.java:18:4
   (return (struct.get_s $autovalue.AutoValue_DefaultConstructorAutoValue $f_booleanField__autovalue_AutoValue_DefaultConstructorAutoValue_ (local.get $this)))
@@ -3219,7 +3219,7 @@
  ;;@ autovalue/AutoValue_DefaultConstructorAutoValue.java:22:16
  (local $$stringBuilder (ref null $java.lang.StringBuilder))
  (local $this (ref null $autovalue.AutoValue_DefaultConstructorAutoValue))
- (local.set $this (ref.cast $autovalue.AutoValue_DefaultConstructorAutoValue (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_DefaultConstructorAutoValue) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_DefaultConstructorAutoValue.java:23:4
   (return (block (result (ref null $java.lang.String))
@@ -3242,7 +3242,7 @@
  ;;@ autovalue/AutoValue_DefaultConstructorAutoValue.java:29:17
  (local $that (ref null $autovalue.DefaultConstructorAutoValue))
  (local $this (ref null $autovalue.AutoValue_DefaultConstructorAutoValue))
- (local.set $this (ref.cast $autovalue.AutoValue_DefaultConstructorAutoValue (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_DefaultConstructorAutoValue) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_DefaultConstructorAutoValue.java:30:4
   (if (ref.eq (local.get $o) (local.get $this))
@@ -3254,11 +3254,11 @@
    )
   )
   ;;@ autovalue/AutoValue_DefaultConstructorAutoValue.java:33:4
-  (if (ref.test $autovalue.DefaultConstructorAutoValue (local.get $o))
+  (if (ref.test (ref $autovalue.DefaultConstructorAutoValue) (local.get $o))
    (then
     (block
      ;;@ autovalue/AutoValue_DefaultConstructorAutoValue.java:34:6
-     (local.set $that (ref.cast null $autovalue.DefaultConstructorAutoValue (local.get $o)))
+     (local.set $that (ref.cast (ref null $autovalue.DefaultConstructorAutoValue) (local.get $o)))
      ;;@ autovalue/AutoValue_DefaultConstructorAutoValue.java:35:6
      (return (i32.eq (struct.get_s $autovalue.AutoValue_DefaultConstructorAutoValue $f_booleanField__autovalue_AutoValue_DefaultConstructorAutoValue_ (local.get $this)) (call_ref $function.m_getBooleanField__boolean (ref.as_non_null (local.get $that))(struct.get $autovalue.DefaultConstructorAutoValue.vtable $m_getBooleanField__boolean (struct.get $autovalue.DefaultConstructorAutoValue $vtable(local.get $that))))))
     )
@@ -3278,7 +3278,7 @@
  ;;@ autovalue/AutoValue_DefaultConstructorAutoValue.java:41:13
  (local $h$ i32)
  (local $this (ref null $autovalue.AutoValue_DefaultConstructorAutoValue))
- (local.set $this (ref.cast $autovalue.AutoValue_DefaultConstructorAutoValue (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_DefaultConstructorAutoValue) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_DefaultConstructorAutoValue.java:42:4
   (local.set $h$ (i32.const 1))
@@ -3329,7 +3329,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $autovalue.AutoValue_DefaultConstructorAutoValue))
- (local.set $this (ref.cast $autovalue.AutoValue_DefaultConstructorAutoValue (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_DefaultConstructorAutoValue) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_DefaultConstructorAutoValue) ))
  )
@@ -3386,7 +3386,7 @@
  (result (ref null $autovalue.DefaultConstructorAutoValue.Builder))
  ;;@ autovalue/AutoValue_DefaultConstructorAutoValue.java:54:40
  (local $this (ref null $autovalue.AutoValue_DefaultConstructorAutoValue.Builder))
- (local.set $this (ref.cast $autovalue.AutoValue_DefaultConstructorAutoValue.Builder (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_DefaultConstructorAutoValue.Builder) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_DefaultConstructorAutoValue.java:55:6
   (struct.set $autovalue.AutoValue_DefaultConstructorAutoValue.Builder $f_booleanField__autovalue_AutoValue_DefaultConstructorAutoValue_Builder_ (local.get $this) (local.get $booleanField))
@@ -3405,7 +3405,7 @@
  (result (ref null $autovalue.DefaultConstructorAutoValue))
  ;;@ autovalue/AutoValue_DefaultConstructorAutoValue.java:60:39
  (local $this (ref null $autovalue.AutoValue_DefaultConstructorAutoValue.Builder))
- (local.set $this (ref.cast $autovalue.AutoValue_DefaultConstructorAutoValue.Builder (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_DefaultConstructorAutoValue.Builder) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_DefaultConstructorAutoValue.java:61:6
   (if (i32.ne (struct.get_s $autovalue.AutoValue_DefaultConstructorAutoValue.Builder $f_set$0__autovalue_AutoValue_DefaultConstructorAutoValue_Builder_ (local.get $this)) (i32.const 1))
@@ -3460,7 +3460,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $autovalue.AutoValue_DefaultConstructorAutoValue.Builder))
- (local.set $this (ref.cast $autovalue.AutoValue_DefaultConstructorAutoValue.Builder (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_DefaultConstructorAutoValue.Builder) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_DefaultConstructorAutoValue.Builder) ))
  )
@@ -3518,7 +3518,7 @@
  (result i32)
  ;;@ autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:17:17
  (local $this (ref null $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue))
- (local.set $this (ref.cast $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:18:4
   (return (struct.get_s $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue $f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_ (local.get $this)))
@@ -3534,7 +3534,7 @@
  ;;@ autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:22:16
  (local $$stringBuilder (ref null $java.lang.StringBuilder))
  (local $this (ref null $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue))
- (local.set $this (ref.cast $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:23:4
   (return (block (result (ref null $java.lang.String))
@@ -3557,7 +3557,7 @@
  ;;@ autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:29:17
  (local $that (ref null $autovalue.DefaultNonEmptyConstructorAutoValue))
  (local $this (ref null $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue))
- (local.set $this (ref.cast $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:30:4
   (if (ref.eq (local.get $o) (local.get $this))
@@ -3569,11 +3569,11 @@
    )
   )
   ;;@ autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:33:4
-  (if (ref.test $autovalue.DefaultNonEmptyConstructorAutoValue (local.get $o))
+  (if (ref.test (ref $autovalue.DefaultNonEmptyConstructorAutoValue) (local.get $o))
    (then
     (block
      ;;@ autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:34:6
-     (local.set $that (ref.cast null $autovalue.DefaultNonEmptyConstructorAutoValue (local.get $o)))
+     (local.set $that (ref.cast (ref null $autovalue.DefaultNonEmptyConstructorAutoValue) (local.get $o)))
      ;;@ autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:35:6
      (return (i32.eq (struct.get_s $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue $f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_ (local.get $this)) (call_ref $function.m_getBooleanField__boolean (ref.as_non_null (local.get $that))(struct.get $autovalue.DefaultNonEmptyConstructorAutoValue.vtable $m_getBooleanField__boolean (struct.get $autovalue.DefaultNonEmptyConstructorAutoValue $vtable(local.get $that))))))
     )
@@ -3593,7 +3593,7 @@
  ;;@ autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:41:13
  (local $h$ i32)
  (local $this (ref null $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue))
- (local.set $this (ref.cast $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:42:4
   (local.set $h$ (i32.const 1))
@@ -3644,7 +3644,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue))
- (local.set $this (ref.cast $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue) ))
  )
@@ -3701,7 +3701,7 @@
  (result (ref null $autovalue.DefaultNonEmptyConstructorAutoValue.Builder))
  ;;@ autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:54:55
  (local $this (ref null $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder))
- (local.set $this (ref.cast $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:55:6
   (struct.set $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder $f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_ (local.get $this) (local.get $booleanField))
@@ -3720,7 +3720,7 @@
  (result (ref null $autovalue.DefaultNonEmptyConstructorAutoValue))
  ;;@ autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:60:47
  (local $this (ref null $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder))
- (local.set $this (ref.cast $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:61:6
   (if (i32.ne (struct.get_s $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder $f_set$0__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_ (local.get $this)) (i32.const 1))
@@ -3775,7 +3775,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder))
- (local.set $this (ref.cast $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder) ))
  )
@@ -3831,7 +3831,7 @@
  (result (ref null $java.lang.String))
  ;;@ autovalue/AutoValue_EmptyAutoValue.java:13:16
  (local $this (ref null $autovalue.AutoValue_EmptyAutoValue))
- (local.set $this (ref.cast $autovalue.AutoValue_EmptyAutoValue (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_EmptyAutoValue) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_EmptyAutoValue.java:14:4
   (return (call $function.no.side.effects.$getString_|__|__java_lang_String (ref.func $$getString_|__|__java_lang_String@autovalue.AutoValue_EmptyAutoValue) ))
@@ -3847,7 +3847,7 @@
  (result i32)
  ;;@ autovalue/AutoValue_EmptyAutoValue.java:19:17
  (local $this (ref null $autovalue.AutoValue_EmptyAutoValue))
- (local.set $this (ref.cast $autovalue.AutoValue_EmptyAutoValue (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_EmptyAutoValue) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_EmptyAutoValue.java:20:4
   (if (ref.eq (local.get $o) (local.get $this))
@@ -3859,7 +3859,7 @@
    )
   )
   ;;@ autovalue/AutoValue_EmptyAutoValue.java:23:4
-  (if (ref.test $autovalue.EmptyAutoValue (local.get $o))
+  (if (ref.test (ref $autovalue.EmptyAutoValue) (local.get $o))
    (then
     (block
      ;;@ autovalue/AutoValue_EmptyAutoValue.java:24:6
@@ -3881,7 +3881,7 @@
  ;;@ autovalue/AutoValue_EmptyAutoValue.java:30:13
  (local $h$ i32)
  (local $this (ref null $autovalue.AutoValue_EmptyAutoValue))
- (local.set $this (ref.cast $autovalue.AutoValue_EmptyAutoValue (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_EmptyAutoValue) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_EmptyAutoValue.java:31:4
   (local.set $h$ (i32.const 1))
@@ -3928,7 +3928,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $autovalue.AutoValue_EmptyAutoValue))
- (local.set $this (ref.cast $autovalue.AutoValue_EmptyAutoValue (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_EmptyAutoValue) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_EmptyAutoValue) ))
  )
@@ -3997,7 +3997,7 @@
  (result (ref null $autovalue.EmptyAutoValue))
  ;;@ autovalue/AutoValue_EmptyAutoValue.java:39:26
  (local $this (ref null $autovalue.AutoValue_EmptyAutoValue.Builder))
- (local.set $this (ref.cast $autovalue.AutoValue_EmptyAutoValue.Builder (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_EmptyAutoValue.Builder) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_EmptyAutoValue.java:40:6
   (return (call $$create__@autovalue.AutoValue_EmptyAutoValue ))
@@ -4042,7 +4042,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $autovalue.AutoValue_EmptyAutoValue.Builder))
- (local.set $this (ref.cast $autovalue.AutoValue_EmptyAutoValue.Builder (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_EmptyAutoValue.Builder) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_EmptyAutoValue.Builder) ))
  )
@@ -4116,7 +4116,7 @@
  (result i32)
  ;;@ autovalue/AutoValue_SimpleAutoValue.java:42:13
  (local $this (ref null $autovalue.AutoValue_SimpleAutoValue))
- (local.set $this (ref.cast $autovalue.AutoValue_SimpleAutoValue (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_SimpleAutoValue) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_SimpleAutoValue.java:43:4
   (return (struct.get $autovalue.AutoValue_SimpleAutoValue $f_intField__autovalue_AutoValue_SimpleAutoValue_ (local.get $this)))
@@ -4131,7 +4131,7 @@
  (result i32)
  ;;@ autovalue/AutoValue_SimpleAutoValue.java:47:17
  (local $this (ref null $autovalue.AutoValue_SimpleAutoValue))
- (local.set $this (ref.cast $autovalue.AutoValue_SimpleAutoValue (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_SimpleAutoValue) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_SimpleAutoValue.java:48:4
   (return (struct.get_s $autovalue.AutoValue_SimpleAutoValue $f_booleanField__autovalue_AutoValue_SimpleAutoValue_ (local.get $this)))
@@ -4146,7 +4146,7 @@
  (result (ref null $java.lang.String))
  ;;@ autovalue/AutoValue_SimpleAutoValue.java:52:16
  (local $this (ref null $autovalue.AutoValue_SimpleAutoValue))
- (local.set $this (ref.cast $autovalue.AutoValue_SimpleAutoValue (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_SimpleAutoValue) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_SimpleAutoValue.java:53:4
   (return (struct.get $autovalue.AutoValue_SimpleAutoValue $f_stringField__autovalue_AutoValue_SimpleAutoValue_ (local.get $this)))
@@ -4161,7 +4161,7 @@
  (result (ref null $java.lang.Double))
  ;;@ autovalue/AutoValue_SimpleAutoValue.java:57:16
  (local $this (ref null $autovalue.AutoValue_SimpleAutoValue))
- (local.set $this (ref.cast $autovalue.AutoValue_SimpleAutoValue (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_SimpleAutoValue) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_SimpleAutoValue.java:58:4
   (return (struct.get $autovalue.AutoValue_SimpleAutoValue $f_doubleField__autovalue_AutoValue_SimpleAutoValue_ (local.get $this)))
@@ -4176,7 +4176,7 @@
  (result (ref null $java.lang.Double))
  ;;@ autovalue/AutoValue_SimpleAutoValue.java:63:16
  (local $this (ref null $autovalue.AutoValue_SimpleAutoValue))
- (local.set $this (ref.cast $autovalue.AutoValue_SimpleAutoValue (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_SimpleAutoValue) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_SimpleAutoValue.java:64:4
   (return (struct.get $autovalue.AutoValue_SimpleAutoValue $f_nullableField__autovalue_AutoValue_SimpleAutoValue_ (local.get $this)))
@@ -4191,7 +4191,7 @@
  (result (ref null $javaemul.internal.WasmArray.OfInt))
  ;;@ autovalue/AutoValue_SimpleAutoValue.java:68:15
  (local $this (ref null $autovalue.AutoValue_SimpleAutoValue))
- (local.set $this (ref.cast $autovalue.AutoValue_SimpleAutoValue (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_SimpleAutoValue) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_SimpleAutoValue.java:69:4
   (return (struct.get $autovalue.AutoValue_SimpleAutoValue $f_arrayField__autovalue_AutoValue_SimpleAutoValue_ (local.get $this)))
@@ -4207,7 +4207,7 @@
  ;;@ autovalue/AutoValue_SimpleAutoValue.java:73:16
  (local $$stringBuilder (ref null $java.lang.StringBuilder))
  (local $this (ref null $autovalue.AutoValue_SimpleAutoValue))
- (local.set $this (ref.cast $autovalue.AutoValue_SimpleAutoValue (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_SimpleAutoValue) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_SimpleAutoValue.java:74:4
   (return (block (result (ref null $java.lang.String))
@@ -4240,7 +4240,7 @@
  ;;@ autovalue/AutoValue_SimpleAutoValue.java:85:17
  (local $that (ref null $autovalue.SimpleAutoValue))
  (local $this (ref null $autovalue.AutoValue_SimpleAutoValue))
- (local.set $this (ref.cast $autovalue.AutoValue_SimpleAutoValue (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_SimpleAutoValue) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_SimpleAutoValue.java:86:4
   (if (ref.eq (local.get $o) (local.get $this))
@@ -4252,13 +4252,13 @@
    )
   )
   ;;@ autovalue/AutoValue_SimpleAutoValue.java:89:4
-  (if (ref.test $autovalue.SimpleAutoValue (local.get $o))
+  (if (ref.test (ref $autovalue.SimpleAutoValue) (local.get $o))
    (then
     (block
      ;;@ autovalue/AutoValue_SimpleAutoValue.java:90:6
-     (local.set $that (ref.cast null $autovalue.SimpleAutoValue (local.get $o)))
+     (local.set $that (ref.cast (ref null $autovalue.SimpleAutoValue) (local.get $o)))
      ;;@ autovalue/AutoValue_SimpleAutoValue.java:91:6
-     (return (if (result i32) (if (result i32) (if (result i32) (if (result i32) (if (result i32) (i32.eq (struct.get $autovalue.AutoValue_SimpleAutoValue $f_intField__autovalue_AutoValue_SimpleAutoValue_ (local.get $this)) (call_ref $function.m_getIntField__int (ref.as_non_null (local.get $that))(struct.get $autovalue.SimpleAutoValue.vtable $m_getIntField__int (struct.get $autovalue.SimpleAutoValue $vtable(local.get $that))))) (then (i32.eq (struct.get_s $autovalue.AutoValue_SimpleAutoValue $f_booleanField__autovalue_AutoValue_SimpleAutoValue_ (local.get $this)) (call_ref $function.m_getBooleanField__boolean (ref.as_non_null (local.get $that))(struct.get $autovalue.SimpleAutoValue.vtable $m_getBooleanField__boolean (struct.get $autovalue.SimpleAutoValue $vtable(local.get $that)))))) (else (i32.const 0))) (then (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (struct.get $autovalue.AutoValue_SimpleAutoValue $f_stringField__autovalue_AutoValue_SimpleAutoValue_ (local.get $this)))(call_ref $function.m_getStringField__java_lang_String (ref.as_non_null (local.get $that))(struct.get $autovalue.SimpleAutoValue.vtable $m_getStringField__java_lang_String (struct.get $autovalue.SimpleAutoValue $vtable(local.get $that))))(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(struct.get $autovalue.AutoValue_SimpleAutoValue $f_stringField__autovalue_AutoValue_SimpleAutoValue_ (local.get $this)))))) (else (i32.const 0))) (then (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (struct.get $autovalue.AutoValue_SimpleAutoValue $f_doubleField__autovalue_AutoValue_SimpleAutoValue_ (local.get $this)))(call_ref $function.m_getDoubleField__java_lang_Double (ref.as_non_null (local.get $that))(struct.get $autovalue.SimpleAutoValue.vtable $m_getDoubleField__java_lang_Double (struct.get $autovalue.SimpleAutoValue $vtable(local.get $that))))(struct.get $java.lang.Double.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Double $vtable(struct.get $autovalue.AutoValue_SimpleAutoValue $f_doubleField__autovalue_AutoValue_SimpleAutoValue_ (local.get $this)))))) (else (i32.const 0))) (then (if (result i32) (ref.is_null (struct.get $autovalue.AutoValue_SimpleAutoValue $f_nullableField__autovalue_AutoValue_SimpleAutoValue_ (local.get $this))) (then (ref.is_null (call_ref $function.m_getNullableField__java_lang_Double (ref.as_non_null (local.get $that))(struct.get $autovalue.SimpleAutoValue.vtable $m_getNullableField__java_lang_Double (struct.get $autovalue.SimpleAutoValue $vtable(local.get $that)))))) (else (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (struct.get $autovalue.AutoValue_SimpleAutoValue $f_nullableField__autovalue_AutoValue_SimpleAutoValue_ (local.get $this)))(call_ref $function.m_getNullableField__java_lang_Double (ref.as_non_null (local.get $that))(struct.get $autovalue.SimpleAutoValue.vtable $m_getNullableField__java_lang_Double (struct.get $autovalue.SimpleAutoValue $vtable(local.get $that))))(struct.get $java.lang.Double.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Double $vtable(struct.get $autovalue.AutoValue_SimpleAutoValue $f_nullableField__autovalue_AutoValue_SimpleAutoValue_ (local.get $this)))))))) (else (i32.const 0))) (then (call $m_equals__arrayOf_int__arrayOf_int__boolean@java.util.Arrays (struct.get $autovalue.AutoValue_SimpleAutoValue $f_arrayField__autovalue_AutoValue_SimpleAutoValue_ (local.get $this))(if (result (ref null $javaemul.internal.WasmArray.OfInt)) (ref.test $autovalue.AutoValue_SimpleAutoValue (local.get $that)) (then (struct.get $autovalue.AutoValue_SimpleAutoValue $f_arrayField__autovalue_AutoValue_SimpleAutoValue_ (ref.cast null $autovalue.AutoValue_SimpleAutoValue (local.get $that)))) (else (call_ref $function.m_getArrayField__arrayOf_int (ref.as_non_null (local.get $that))(struct.get $autovalue.SimpleAutoValue.vtable $m_getArrayField__arrayOf_int (struct.get $autovalue.SimpleAutoValue $vtable(local.get $that)))))))) (else (i32.const 0))))
+     (return (if (result i32) (if (result i32) (if (result i32) (if (result i32) (if (result i32) (i32.eq (struct.get $autovalue.AutoValue_SimpleAutoValue $f_intField__autovalue_AutoValue_SimpleAutoValue_ (local.get $this)) (call_ref $function.m_getIntField__int (ref.as_non_null (local.get $that))(struct.get $autovalue.SimpleAutoValue.vtable $m_getIntField__int (struct.get $autovalue.SimpleAutoValue $vtable(local.get $that))))) (then (i32.eq (struct.get_s $autovalue.AutoValue_SimpleAutoValue $f_booleanField__autovalue_AutoValue_SimpleAutoValue_ (local.get $this)) (call_ref $function.m_getBooleanField__boolean (ref.as_non_null (local.get $that))(struct.get $autovalue.SimpleAutoValue.vtable $m_getBooleanField__boolean (struct.get $autovalue.SimpleAutoValue $vtable(local.get $that)))))) (else (i32.const 0))) (then (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (struct.get $autovalue.AutoValue_SimpleAutoValue $f_stringField__autovalue_AutoValue_SimpleAutoValue_ (local.get $this)))(call_ref $function.m_getStringField__java_lang_String (ref.as_non_null (local.get $that))(struct.get $autovalue.SimpleAutoValue.vtable $m_getStringField__java_lang_String (struct.get $autovalue.SimpleAutoValue $vtable(local.get $that))))(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(struct.get $autovalue.AutoValue_SimpleAutoValue $f_stringField__autovalue_AutoValue_SimpleAutoValue_ (local.get $this)))))) (else (i32.const 0))) (then (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (struct.get $autovalue.AutoValue_SimpleAutoValue $f_doubleField__autovalue_AutoValue_SimpleAutoValue_ (local.get $this)))(call_ref $function.m_getDoubleField__java_lang_Double (ref.as_non_null (local.get $that))(struct.get $autovalue.SimpleAutoValue.vtable $m_getDoubleField__java_lang_Double (struct.get $autovalue.SimpleAutoValue $vtable(local.get $that))))(struct.get $java.lang.Double.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Double $vtable(struct.get $autovalue.AutoValue_SimpleAutoValue $f_doubleField__autovalue_AutoValue_SimpleAutoValue_ (local.get $this)))))) (else (i32.const 0))) (then (if (result i32) (ref.is_null (struct.get $autovalue.AutoValue_SimpleAutoValue $f_nullableField__autovalue_AutoValue_SimpleAutoValue_ (local.get $this))) (then (ref.is_null (call_ref $function.m_getNullableField__java_lang_Double (ref.as_non_null (local.get $that))(struct.get $autovalue.SimpleAutoValue.vtable $m_getNullableField__java_lang_Double (struct.get $autovalue.SimpleAutoValue $vtable(local.get $that)))))) (else (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (struct.get $autovalue.AutoValue_SimpleAutoValue $f_nullableField__autovalue_AutoValue_SimpleAutoValue_ (local.get $this)))(call_ref $function.m_getNullableField__java_lang_Double (ref.as_non_null (local.get $that))(struct.get $autovalue.SimpleAutoValue.vtable $m_getNullableField__java_lang_Double (struct.get $autovalue.SimpleAutoValue $vtable(local.get $that))))(struct.get $java.lang.Double.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Double $vtable(struct.get $autovalue.AutoValue_SimpleAutoValue $f_nullableField__autovalue_AutoValue_SimpleAutoValue_ (local.get $this)))))))) (else (i32.const 0))) (then (call $m_equals__arrayOf_int__arrayOf_int__boolean@java.util.Arrays (struct.get $autovalue.AutoValue_SimpleAutoValue $f_arrayField__autovalue_AutoValue_SimpleAutoValue_ (local.get $this))(if (result (ref null $javaemul.internal.WasmArray.OfInt)) (ref.test (ref $autovalue.AutoValue_SimpleAutoValue) (local.get $that)) (then (struct.get $autovalue.AutoValue_SimpleAutoValue $f_arrayField__autovalue_AutoValue_SimpleAutoValue_ (ref.cast (ref null $autovalue.AutoValue_SimpleAutoValue) (local.get $that)))) (else (call_ref $function.m_getArrayField__arrayOf_int (ref.as_non_null (local.get $that))(struct.get $autovalue.SimpleAutoValue.vtable $m_getArrayField__arrayOf_int (struct.get $autovalue.SimpleAutoValue $vtable(local.get $that)))))))) (else (i32.const 0))))
     )
    )
   )
@@ -4276,7 +4276,7 @@
  ;;@ autovalue/AutoValue_SimpleAutoValue.java:102:13
  (local $h$ i32)
  (local $this (ref null $autovalue.AutoValue_SimpleAutoValue))
- (local.set $this (ref.cast $autovalue.AutoValue_SimpleAutoValue (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_SimpleAutoValue) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_SimpleAutoValue.java:103:4
   (local.set $h$ (i32.const 1))
@@ -4347,7 +4347,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $autovalue.AutoValue_SimpleAutoValue))
- (local.set $this (ref.cast $autovalue.AutoValue_SimpleAutoValue (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_SimpleAutoValue) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_SimpleAutoValue) ))
  )
@@ -4388,7 +4388,7 @@
  (result i32)
  ;;@ autovalue/AutoValueWithFields.java:35:6
  (local $this (ref null $autovalue.AutoValueWithFields))
- (local.set $this (ref.cast $autovalue.AutoValueWithFields (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValueWithFields) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValueWithFields.java:36:4
   (return (i32.mul (call_ref $function.m_getIntField__int (ref.as_non_null (local.get $this))(struct.get $autovalue.AutoValueWithFields.vtable $m_getIntField__int (struct.get $autovalue.AutoValueWithFields $vtable(local.get $this)))) (i32.const 2)))
@@ -4462,7 +4462,7 @@
  (result i32)
  ;;@ autovalue/AutoValueWithOverrides.java:25:17
  (local $this (ref null $autovalue.AutoValueWithOverrides))
- (local.set $this (ref.cast $autovalue.AutoValueWithOverrides (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValueWithOverrides) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValueWithOverrides.java:26:4
   (return (i32.const 0))
@@ -4477,7 +4477,7 @@
  (result i32)
  ;;@ autovalue/AutoValueWithOverrides.java:30:13
  (local $this (ref null $autovalue.AutoValueWithOverrides))
- (local.set $this (ref.cast $autovalue.AutoValueWithOverrides (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValueWithOverrides) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValueWithOverrides.java:31:4
   (return (i32.const 1))
@@ -4492,7 +4492,7 @@
  (result (ref null $java.lang.String))
  ;;@ autovalue/AutoValueWithOverrides.java:35:16
  (local $this (ref null $autovalue.AutoValueWithOverrides))
- (local.set $this (ref.cast $autovalue.AutoValueWithOverrides (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValueWithOverrides) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValueWithOverrides.java:36:4
   (return (call $function.no.side.effects.$getString_|x|__java_lang_String (ref.func $$getString_|x|__java_lang_String@autovalue.AutoValueWithOverrides) ))
@@ -4640,7 +4640,7 @@
  (local $$qualifier (ref null $autovalue.AutoValue_SimpleAutoValue))
  (local $o (ref null $autovalue.AutoValue_SimpleAutoValue))
  (local $this (ref null $autovalue.SimpleAutoValue.GenericType))
- (local.set $this (ref.cast $autovalue.SimpleAutoValue.GenericType (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.SimpleAutoValue.GenericType) (local.get $this.untyped)))
  (block
   (block
    ;;@ autovalue/SimpleAutoValue.java:57:6
@@ -4649,7 +4649,7 @@
    (drop (call_ref $function.m_getArrayField__arrayOf_int (ref.as_non_null (local.get $$qualifier))(struct.get $autovalue.AutoValue_SimpleAutoValue.vtable $m_getArrayField__arrayOf_int (struct.get $autovalue.AutoValue_SimpleAutoValue $vtable(local.get $$qualifier)))))
   )
   ;;@ autovalue/SimpleAutoValue.java:58:6
-  (local.set $o (ref.cast null $autovalue.AutoValue_SimpleAutoValue (call_ref $function.m_get__int__java_lang_Object (ref.as_non_null (local.get $o1))(i32.const 0)(struct.get $java.util.List.vtable $m_get__int__java_lang_Object (ref.cast $java.util.List.vtable (struct.get $itable $slot4 (struct.get $java.lang.Object $itable (local.get $o1))))))))
+  (local.set $o (ref.cast (ref null $autovalue.AutoValue_SimpleAutoValue) (call_ref $function.m_get__int__java_lang_Object (ref.as_non_null (local.get $o1))(i32.const 0)(struct.get $java.util.List.vtable $m_get__int__java_lang_Object (ref.cast (ref $java.util.List.vtable) (struct.get $itable $slot4 (struct.get $java.lang.Object $itable (local.get $o1))))))))
   ;;@ autovalue/SimpleAutoValue.java:59:6
   (return (ref.null $autovalue.AutoValue_SimpleAutoValue))
  )
@@ -4724,7 +4724,7 @@
  ;;@ autovalue/$AutoValue_AutoValueWithExtensions.java:12:15
  (local $$stringBuilder (ref null $java.lang.StringBuilder))
  (local $this (ref null $autovalue.$AutoValue_AutoValueWithExtensions))
- (local.set $this (ref.cast $autovalue.$AutoValue_AutoValueWithExtensions (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.$AutoValue_AutoValueWithExtensions) (local.get $this.untyped)))
  (block
   ;;@ autovalue/$AutoValue_AutoValueWithExtensions.java:13:4
   (return (block (result (ref null $java.lang.String))
@@ -4949,7 +4949,7 @@
  (result i32)
  ;;@ autovalue/$AutoValue_AutoValueWithFields.java:17:13
  (local $this (ref null $autovalue.$AutoValue_AutoValueWithFields))
- (local.set $this (ref.cast $autovalue.$AutoValue_AutoValueWithFields (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.$AutoValue_AutoValueWithFields) (local.get $this.untyped)))
  (block
   ;;@ autovalue/$AutoValue_AutoValueWithFields.java:18:4
   (return (struct.get $autovalue.$AutoValue_AutoValueWithFields $f_intField__autovalue_$AutoValue_AutoValueWithFields_ (local.get $this)))
@@ -4965,7 +4965,7 @@
  ;;@ autovalue/$AutoValue_AutoValueWithFields.java:22:16
  (local $$stringBuilder (ref null $java.lang.StringBuilder))
  (local $this (ref null $autovalue.$AutoValue_AutoValueWithFields))
- (local.set $this (ref.cast $autovalue.$AutoValue_AutoValueWithFields (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.$AutoValue_AutoValueWithFields) (local.get $this.untyped)))
  (block
   ;;@ autovalue/$AutoValue_AutoValueWithFields.java:23:4
   (return (block (result (ref null $java.lang.String))
@@ -4988,7 +4988,7 @@
  ;;@ autovalue/$AutoValue_AutoValueWithFields.java:29:17
  (local $that (ref null $autovalue.AutoValueWithFields))
  (local $this (ref null $autovalue.$AutoValue_AutoValueWithFields))
- (local.set $this (ref.cast $autovalue.$AutoValue_AutoValueWithFields (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.$AutoValue_AutoValueWithFields) (local.get $this.untyped)))
  (block
   ;;@ autovalue/$AutoValue_AutoValueWithFields.java:30:4
   (if (ref.eq (local.get $o) (local.get $this))
@@ -5000,11 +5000,11 @@
    )
   )
   ;;@ autovalue/$AutoValue_AutoValueWithFields.java:33:4
-  (if (ref.test $autovalue.AutoValueWithFields (local.get $o))
+  (if (ref.test (ref $autovalue.AutoValueWithFields) (local.get $o))
    (then
     (block
      ;;@ autovalue/$AutoValue_AutoValueWithFields.java:34:6
-     (local.set $that (ref.cast null $autovalue.AutoValueWithFields (local.get $o)))
+     (local.set $that (ref.cast (ref null $autovalue.AutoValueWithFields) (local.get $o)))
      ;;@ autovalue/$AutoValue_AutoValueWithFields.java:35:6
      (return (i32.eq (struct.get $autovalue.$AutoValue_AutoValueWithFields $f_intField__autovalue_$AutoValue_AutoValueWithFields_ (local.get $this)) (call_ref $function.m_getIntField__int (ref.as_non_null (local.get $that))(struct.get $autovalue.AutoValueWithFields.vtable $m_getIntField__int (struct.get $autovalue.AutoValueWithFields $vtable(local.get $that))))))
     )
@@ -5024,7 +5024,7 @@
  ;;@ autovalue/$AutoValue_AutoValueWithFields.java:41:13
  (local $h$ i32)
  (local $this (ref null $autovalue.$AutoValue_AutoValueWithFields))
- (local.set $this (ref.cast $autovalue.$AutoValue_AutoValueWithFields (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.$AutoValue_AutoValueWithFields) (local.get $this.untyped)))
  (block
   ;;@ autovalue/$AutoValue_AutoValueWithFields.java:42:4
   (local.set $h$ (i32.const 1))
@@ -5122,7 +5122,7 @@
  (result i32)
  ;;@ autovalue/AutoValue_AutoValueWithOverrides.java:20:13
  (local $this (ref null $autovalue.AutoValue_AutoValueWithOverrides))
- (local.set $this (ref.cast $autovalue.AutoValue_AutoValueWithOverrides (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueWithOverrides) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_AutoValueWithOverrides.java:21:4
   (return (struct.get $autovalue.AutoValue_AutoValueWithOverrides $f_baseField__autovalue_AutoValue_AutoValueWithOverrides_ (local.get $this)))
@@ -5137,7 +5137,7 @@
  (result i32)
  ;;@ autovalue/AutoValue_AutoValueWithOverrides.java:25:17
  (local $this (ref null $autovalue.AutoValue_AutoValueWithOverrides))
- (local.set $this (ref.cast $autovalue.AutoValue_AutoValueWithOverrides (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueWithOverrides) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_AutoValueWithOverrides.java:26:4
   (return (struct.get_s $autovalue.AutoValue_AutoValueWithOverrides $f_booleanField__autovalue_AutoValue_AutoValueWithOverrides_ (local.get $this)))
@@ -5182,7 +5182,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $autovalue.AutoValue_AutoValueWithOverrides))
- (local.set $this (ref.cast $autovalue.AutoValue_AutoValueWithOverrides (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueWithOverrides) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_AutoValueWithOverrides) ))
  )
@@ -5246,7 +5246,7 @@
  (result i32)
  ;;@ autovalue/AutoValue_ExtendingAutoValue.java:27:13
  (local $this (ref null $autovalue.AutoValue_ExtendingAutoValue))
- (local.set $this (ref.cast $autovalue.AutoValue_ExtendingAutoValue (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_ExtendingAutoValue) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_ExtendingAutoValue.java:28:4
   (return (struct.get $autovalue.AutoValue_ExtendingAutoValue $f_baseField__autovalue_AutoValue_ExtendingAutoValue_ (local.get $this)))
@@ -5261,7 +5261,7 @@
  (result i32)
  ;;@ autovalue/AutoValue_ExtendingAutoValue.java:32:17
  (local $this (ref null $autovalue.AutoValue_ExtendingAutoValue))
- (local.set $this (ref.cast $autovalue.AutoValue_ExtendingAutoValue (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_ExtendingAutoValue) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_ExtendingAutoValue.java:33:4
   (return (struct.get_s $autovalue.AutoValue_ExtendingAutoValue $f_booleanField__autovalue_AutoValue_ExtendingAutoValue_ (local.get $this)))
@@ -5276,7 +5276,7 @@
  (result (ref null $java.lang.String))
  ;;@ autovalue/AutoValue_ExtendingAutoValue.java:37:16
  (local $this (ref null $autovalue.AutoValue_ExtendingAutoValue))
- (local.set $this (ref.cast $autovalue.AutoValue_ExtendingAutoValue (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_ExtendingAutoValue) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_ExtendingAutoValue.java:38:4
   (return (struct.get $autovalue.AutoValue_ExtendingAutoValue $f_stringField__autovalue_AutoValue_ExtendingAutoValue_ (local.get $this)))
@@ -5292,7 +5292,7 @@
  ;;@ autovalue/AutoValue_ExtendingAutoValue.java:42:16
  (local $$stringBuilder (ref null $java.lang.StringBuilder))
  (local $this (ref null $autovalue.AutoValue_ExtendingAutoValue))
- (local.set $this (ref.cast $autovalue.AutoValue_ExtendingAutoValue (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_ExtendingAutoValue) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_ExtendingAutoValue.java:43:4
   (return (block (result (ref null $java.lang.String))
@@ -5319,7 +5319,7 @@
  ;;@ autovalue/AutoValue_ExtendingAutoValue.java:51:17
  (local $that (ref null $autovalue.ExtendingAutoValue))
  (local $this (ref null $autovalue.AutoValue_ExtendingAutoValue))
- (local.set $this (ref.cast $autovalue.AutoValue_ExtendingAutoValue (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_ExtendingAutoValue) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_ExtendingAutoValue.java:52:4
   (if (ref.eq (local.get $o) (local.get $this))
@@ -5331,11 +5331,11 @@
    )
   )
   ;;@ autovalue/AutoValue_ExtendingAutoValue.java:55:4
-  (if (ref.test $autovalue.ExtendingAutoValue (local.get $o))
+  (if (ref.test (ref $autovalue.ExtendingAutoValue) (local.get $o))
    (then
     (block
      ;;@ autovalue/AutoValue_ExtendingAutoValue.java:56:6
-     (local.set $that (ref.cast null $autovalue.ExtendingAutoValue (local.get $o)))
+     (local.set $that (ref.cast (ref null $autovalue.ExtendingAutoValue) (local.get $o)))
      ;;@ autovalue/AutoValue_ExtendingAutoValue.java:57:6
      (return (if (result i32) (if (result i32) (i32.eq (struct.get $autovalue.AutoValue_ExtendingAutoValue $f_baseField__autovalue_AutoValue_ExtendingAutoValue_ (local.get $this)) (call_ref $function.m_getBaseField__int (ref.as_non_null (local.get $that))(struct.get $autovalue.BaseClass.vtable $m_getBaseField__int (struct.get $autovalue.BaseClass $vtable(local.get $that))))) (then (i32.eq (struct.get_s $autovalue.AutoValue_ExtendingAutoValue $f_booleanField__autovalue_AutoValue_ExtendingAutoValue_ (local.get $this)) (call_ref $function.m_getBooleanField__boolean (ref.as_non_null (local.get $that))(struct.get $autovalue.ExtendingAutoValue.vtable $m_getBooleanField__boolean (struct.get $autovalue.ExtendingAutoValue $vtable(local.get $that)))))) (else (i32.const 0))) (then (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (struct.get $autovalue.AutoValue_ExtendingAutoValue $f_stringField__autovalue_AutoValue_ExtendingAutoValue_ (local.get $this)))(call_ref $function.m_getStringField__java_lang_String (ref.as_non_null (local.get $that))(struct.get $autovalue.ExtendingAutoValue.vtable $m_getStringField__java_lang_String (struct.get $autovalue.ExtendingAutoValue $vtable(local.get $that))))(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(struct.get $autovalue.AutoValue_ExtendingAutoValue $f_stringField__autovalue_AutoValue_ExtendingAutoValue_ (local.get $this)))))) (else (i32.const 0))))
     )
@@ -5355,7 +5355,7 @@
  ;;@ autovalue/AutoValue_ExtendingAutoValue.java:65:13
  (local $h$ i32)
  (local $this (ref null $autovalue.AutoValue_ExtendingAutoValue))
- (local.set $this (ref.cast $autovalue.AutoValue_ExtendingAutoValue (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_ExtendingAutoValue) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_ExtendingAutoValue.java:66:4
   (local.set $h$ (i32.const 1))
@@ -5414,7 +5414,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $autovalue.AutoValue_ExtendingAutoValue))
- (local.set $this (ref.cast $autovalue.AutoValue_ExtendingAutoValue (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_ExtendingAutoValue) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_ExtendingAutoValue) ))
  )
@@ -5474,7 +5474,7 @@
  (result i32)
  ;;@ autovalue/AutoValue_AutoValueWithExtensions.java:24:6
  (local $this (ref null $autovalue.AutoValue_AutoValueWithExtensions))
- (local.set $this (ref.cast $autovalue.AutoValue_AutoValueWithExtensions (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueWithExtensions) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_AutoValueWithExtensions.java:25:4
   (if (i32.eqz (struct.get_s $autovalue.AutoValue_AutoValueWithExtensions $f_getMemoizedNative$Memoized__autovalue_AutoValue_AutoValueWithExtensions_ (local.get $this)))
@@ -5542,7 +5542,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $autovalue.AutoValue_AutoValueWithExtensions))
- (local.set $this (ref.cast $autovalue.AutoValue_AutoValueWithExtensions (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueWithExtensions) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_AutoValueWithExtensions) ))
  )
@@ -5600,7 +5600,7 @@
  (result i32)
  ;;@ autovalue/AutoValue_AutoValueWithFields.java:23:6
  (local $this (ref null $autovalue.AutoValue_AutoValueWithFields))
- (local.set $this (ref.cast $autovalue.AutoValue_AutoValueWithFields (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueWithFields) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_AutoValueWithFields.java:24:4
   (if (i32.eqz (struct.get_s $autovalue.AutoValue_AutoValueWithFields $f_getMemoizedNative$Memoized__autovalue_AutoValue_AutoValueWithFields_ (local.get $this)))
@@ -5668,7 +5668,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $autovalue.AutoValue_AutoValueWithFields))
- (local.set $this (ref.cast $autovalue.AutoValue_AutoValueWithFields (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueWithFields) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_AutoValueWithFields) ))
  )

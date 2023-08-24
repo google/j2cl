@@ -135,7 +135,7 @@
  (param $this.untyped (ref $java.lang.Object))
  ;;@ nestedinstanceinnerclass/OuterClass.java:26:14
  (local $this (ref null $nestedinstanceinnerclass.OuterClass))
- (local.set $this (ref.cast $nestedinstanceinnerclass.OuterClass (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $nestedinstanceinnerclass.OuterClass) (local.get $this.untyped)))
  (block
   ;;@ nestedinstanceinnerclass/OuterClass.java:27:4
   (drop (call $$create__nestedinstanceinnerclass_OuterClass_InnerClass@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (call $$create__nestedinstanceinnerclass_OuterClass@nestedinstanceinnerclass.OuterClass.InnerClass (call $$create__@nestedinstanceinnerclass.OuterClass ))))
@@ -180,7 +180,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedinstanceinnerclass.OuterClass))
- (local.set $this (ref.cast $nestedinstanceinnerclass.OuterClass (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $nestedinstanceinnerclass.OuterClass) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nestedinstanceinnerclass.OuterClass) ))
  )
@@ -282,7 +282,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass))
- (local.set $this (ref.cast $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass) ))
  )
@@ -370,7 +370,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedinstanceinnerclass.OuterClass.InnerClass))
- (local.set $this (ref.cast $nestedinstanceinnerclass.OuterClass.InnerClass (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $nestedinstanceinnerclass.OuterClass.InnerClass) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass) ))
  )

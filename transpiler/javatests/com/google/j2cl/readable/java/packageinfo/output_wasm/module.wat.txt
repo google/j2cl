@@ -162,7 +162,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageinfo.Outer))
- (local.set $this (ref.cast $packageinfo.Outer (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $packageinfo.Outer) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@packageinfo.Outer) ))
  )
@@ -250,7 +250,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageinfo.Outer.Inner))
- (local.set $this (ref.cast $packageinfo.Outer.Inner (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $packageinfo.Outer.Inner) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@packageinfo.Outer.Inner) ))
  )
@@ -348,7 +348,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageinfo.subpackage.Foo))
- (local.set $this (ref.cast $packageinfo.subpackage.Foo (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $packageinfo.subpackage.Foo) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@packageinfo.subpackage.Foo) ))
  )

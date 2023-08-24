@@ -69,7 +69,7 @@
  (param $this.untyped (ref $java.lang.Object))
  ;;@ synchronizedstatement/SynchronizedStatement.java:22:14
  (local $this (ref null $synchronizedstatement.SynchronizedStatement))
- (local.set $this (ref.cast $synchronizedstatement.SynchronizedStatement (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $synchronizedstatement.SynchronizedStatement) (local.get $this.untyped)))
  (block
   ;;@ synchronizedstatement/SynchronizedStatement.java:23:4
   ;;@ synchronizedstatement/SynchronizedStatement.java:23:4
@@ -121,7 +121,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $synchronizedstatement.SynchronizedStatement))
- (local.set $this (ref.cast $synchronizedstatement.SynchronizedStatement (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $synchronizedstatement.SynchronizedStatement) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@synchronizedstatement.SynchronizedStatement) ))
  )

@@ -330,7 +330,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $wasmimmutablefields.WasmImmutableFields))
- (local.set $this (ref.cast $wasmimmutablefields.WasmImmutableFields (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $wasmimmutablefields.WasmImmutableFields) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@wasmimmutablefields.WasmImmutableFields) ))
  )
@@ -359,7 +359,7 @@
  (local $$instance (ref null $wasmimmutablefields.AssignmentsInDeclaration))
  (block
   ;;@ wasmimmutablefields/WasmImmutableFields.java:20:6
-  (local.set $$instance (struct.new $wasmimmutablefields.AssignmentsInDeclaration (ref.as_non_null (global.get $wasmimmutablefields.AssignmentsInDeclaration.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 12) (call $function.no.side.effects.$getString_|Hello_World|__java_lang_String (ref.func $$getString_|Hello_World|__java_lang_String@wasmimmutablefields.AssignmentsInDeclaration) ) (call $$create__int@javaemul.internal.WasmArray.OfObject (i32.const 4)) (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@wasmimmutablefields.AssignmentsInDeclaration-1 (i32.const 0) (i32.const 3)))(i32.const -1)) (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@wasmimmutablefields.AssignmentsInDeclaration-2 (i32.const 0) (i32.const 4))) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@wasmimmutablefields.AssignmentsInDeclaration-3 (i32.const 0) (i32.const 2)))(call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@wasmimmutablefields.AssignmentsInDeclaration-4 (i32.const 0) (i32.const 2))))) (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@wasmimmutablefields.WasmImmutableFields) ) (ref.cast null $javaemul.internal.WasmArray.OfObject (call $$create__int@javaemul.internal.WasmArray.OfObject (i32.const 0)))))
+  (local.set $$instance (struct.new $wasmimmutablefields.AssignmentsInDeclaration (ref.as_non_null (global.get $wasmimmutablefields.AssignmentsInDeclaration.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 12) (call $function.no.side.effects.$getString_|Hello_World|__java_lang_String (ref.func $$getString_|Hello_World|__java_lang_String@wasmimmutablefields.AssignmentsInDeclaration) ) (call $$create__int@javaemul.internal.WasmArray.OfObject (i32.const 4)) (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@wasmimmutablefields.AssignmentsInDeclaration-1 (i32.const 0) (i32.const 3)))(i32.const -1)) (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@wasmimmutablefields.AssignmentsInDeclaration-2 (i32.const 0) (i32.const 4))) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@wasmimmutablefields.AssignmentsInDeclaration-3 (i32.const 0) (i32.const 2)))(call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@wasmimmutablefields.AssignmentsInDeclaration-4 (i32.const 0) (i32.const 2))))) (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@wasmimmutablefields.WasmImmutableFields) ) (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (call $$create__int@javaemul.internal.WasmArray.OfObject (i32.const 0)))))
   ;;@ wasmimmutablefields/WasmImmutableFields.java:20:6
   (call $$ctor__void_$p_wasmimmutablefields_AssignmentsInDeclaration@wasmimmutablefields.AssignmentsInDeclaration (ref.as_non_null (local.get $$instance)))
   ;;@ wasmimmutablefields/WasmImmutableFields.java:20:6
@@ -426,7 +426,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $wasmimmutablefields.AssignmentsInDeclaration))
- (local.set $this (ref.cast $wasmimmutablefields.AssignmentsInDeclaration (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $wasmimmutablefields.AssignmentsInDeclaration) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@wasmimmutablefields.AssignmentsInDeclaration) ))
  )
@@ -468,7 +468,7 @@
  (local $$instance (ref null $wasmimmutablefields.AssignmentsInInitializer))
  (block
   ;;@ wasmimmutablefields/WasmImmutableFields.java:31:6
-  (local.set $$instance (struct.new $wasmimmutablefields.AssignmentsInInitializer (ref.as_non_null (global.get $wasmimmutablefields.AssignmentsInInitializer.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 12) (call $function.no.side.effects.$getString_|Hello_World|__java_lang_String (ref.func $$getString_|Hello_World|__java_lang_String@wasmimmutablefields.AssignmentsInDeclaration) ) (call $$create__int@javaemul.internal.WasmArray.OfObject (i32.const 4)) (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@wasmimmutablefields.AssignmentsInInitializer-1 (i32.const 0) (i32.const 3)))(i32.const -1)) (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@wasmimmutablefields.AssignmentsInInitializer-2 (i32.const 0) (i32.const 4))) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@wasmimmutablefields.AssignmentsInInitializer-3 (i32.const 0) (i32.const 2)))(call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@wasmimmutablefields.AssignmentsInInitializer-4 (i32.const 0) (i32.const 2))))) (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@wasmimmutablefields.WasmImmutableFields) ) (ref.cast null $javaemul.internal.WasmArray.OfObject (call $$create__int@javaemul.internal.WasmArray.OfObject (i32.const 0)))))
+  (local.set $$instance (struct.new $wasmimmutablefields.AssignmentsInInitializer (ref.as_non_null (global.get $wasmimmutablefields.AssignmentsInInitializer.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 12) (call $function.no.side.effects.$getString_|Hello_World|__java_lang_String (ref.func $$getString_|Hello_World|__java_lang_String@wasmimmutablefields.AssignmentsInDeclaration) ) (call $$create__int@javaemul.internal.WasmArray.OfObject (i32.const 4)) (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@wasmimmutablefields.AssignmentsInInitializer-1 (i32.const 0) (i32.const 3)))(i32.const -1)) (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@wasmimmutablefields.AssignmentsInInitializer-2 (i32.const 0) (i32.const 4))) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@wasmimmutablefields.AssignmentsInInitializer-3 (i32.const 0) (i32.const 2)))(call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@wasmimmutablefields.AssignmentsInInitializer-4 (i32.const 0) (i32.const 2))))) (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@wasmimmutablefields.WasmImmutableFields) ) (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (call $$create__int@javaemul.internal.WasmArray.OfObject (i32.const 0)))))
   ;;@ wasmimmutablefields/WasmImmutableFields.java:31:6
   (call $$ctor__void_$p_wasmimmutablefields_AssignmentsInInitializer@wasmimmutablefields.AssignmentsInInitializer (ref.as_non_null (local.get $$instance)))
   ;;@ wasmimmutablefields/WasmImmutableFields.java:31:6
@@ -535,7 +535,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $wasmimmutablefields.AssignmentsInInitializer))
- (local.set $this (ref.cast $wasmimmutablefields.AssignmentsInInitializer (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $wasmimmutablefields.AssignmentsInInitializer) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@wasmimmutablefields.AssignmentsInInitializer) ))
  )
@@ -567,7 +567,7 @@
  (local $$instance (ref null $wasmimmutablefields.AssignmentsInConstructor))
  (block
   ;;@ wasmimmutablefields/WasmImmutableFields.java:65:2
-  (local.set $$instance (struct.new $wasmimmutablefields.AssignmentsInConstructor (ref.as_non_null (global.get $wasmimmutablefields.AssignmentsInConstructor.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 12) (call $function.no.side.effects.$getString_|Hello_World|__java_lang_String (ref.func $$getString_|Hello_World|__java_lang_String@wasmimmutablefields.AssignmentsInDeclaration) ) (call $$create__int@javaemul.internal.WasmArray.OfObject (local.get $intParameter)) (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (local.get $intParameter)(i32.const 4)(i32.const -1)))(i32.const -1)) (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 1)(i32.const 2)(local.get $intParameter)(i32.const 4))) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 1)(local.get $intParameter)))(call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@wasmimmutablefields.AssignmentsInConstructor-1 (i32.const 0) (i32.const 2))))) (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@wasmimmutablefields.WasmImmutableFields) ) (ref.cast null $javaemul.internal.WasmArray.OfObject (call $$create__int@javaemul.internal.WasmArray.OfObject (i32.const 0))) (local.get $parameter) (struct.get $wasmimmutablefields.AssignmentsInConstructor $f_stringLiteral__wasmimmutablefields_AssignmentsInConstructor (local.get $par))))
+  (local.set $$instance (struct.new $wasmimmutablefields.AssignmentsInConstructor (ref.as_non_null (global.get $wasmimmutablefields.AssignmentsInConstructor.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 12) (call $function.no.side.effects.$getString_|Hello_World|__java_lang_String (ref.func $$getString_|Hello_World|__java_lang_String@wasmimmutablefields.AssignmentsInDeclaration) ) (call $$create__int@javaemul.internal.WasmArray.OfObject (local.get $intParameter)) (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (local.get $intParameter)(i32.const 4)(i32.const -1)))(i32.const -1)) (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 1)(i32.const 2)(local.get $intParameter)(i32.const 4))) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 1)(local.get $intParameter)))(call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@wasmimmutablefields.AssignmentsInConstructor-1 (i32.const 0) (i32.const 2))))) (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@wasmimmutablefields.WasmImmutableFields) ) (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (call $$create__int@javaemul.internal.WasmArray.OfObject (i32.const 0))) (local.get $parameter) (struct.get $wasmimmutablefields.AssignmentsInConstructor $f_stringLiteral__wasmimmutablefields_AssignmentsInConstructor (local.get $par))))
   ;;@ wasmimmutablefields/WasmImmutableFields.java:65:2
   (call $$ctor__java_lang_Object__int__wasmimmutablefields_AssignmentsInConstructor__void_$p_wasmimmutablefields_AssignmentsInConstructor@wasmimmutablefields.AssignmentsInConstructor (ref.as_non_null (local.get $$instance))(local.get $parameter)(local.get $intParameter)(local.get $par))
   ;;@ wasmimmutablefields/WasmImmutableFields.java:65:2
@@ -627,7 +627,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $wasmimmutablefields.AssignmentsInConstructor))
- (local.set $this (ref.cast $wasmimmutablefields.AssignmentsInConstructor (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $wasmimmutablefields.AssignmentsInConstructor) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@wasmimmutablefields.AssignmentsInConstructor) ))
  )
@@ -771,7 +771,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $wasmimmutablefields.OptimizesWithThisConstructorDelegation))
- (local.set $this (ref.cast $wasmimmutablefields.OptimizesWithThisConstructorDelegation (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $wasmimmutablefields.OptimizesWithThisConstructorDelegation) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@wasmimmutablefields.OptimizesWithThisConstructorDelegation) ))
  )
@@ -895,7 +895,7 @@
  (local $o (ref null $wasmimmutablefields.FinalizerTest))
  (local $i i32)
  (local $this (ref null $wasmimmutablefields.FinalizerTest))
- (local.set $this (ref.cast $wasmimmutablefields.FinalizerTest (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $wasmimmutablefields.FinalizerTest) (local.get $this.untyped)))
  (block
   ;;@ wasmimmutablefields/WasmImmutableFields.java:153:4
   (local.set $o (ref.null $wasmimmutablefields.FinalizerTest))
@@ -962,7 +962,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $wasmimmutablefields.FinalizerTest))
- (local.set $this (ref.cast $wasmimmutablefields.FinalizerTest (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $wasmimmutablefields.FinalizerTest) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@wasmimmutablefields.FinalizerTest) ))
  )
@@ -1106,7 +1106,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $wasmimmutablefields.OptimizesWithSuperConstructorDelegation))
- (local.set $this (ref.cast $wasmimmutablefields.OptimizesWithSuperConstructorDelegation (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $wasmimmutablefields.OptimizesWithSuperConstructorDelegation) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@wasmimmutablefields.OptimizesWithSuperConstructorDelegation) ))
  )

@@ -67,7 +67,7 @@
  (param $this.untyped (ref $java.lang.Object))
  ;;@ continuestatement/ContinueStatement.java:19:14
  (local $this (ref null $continuestatement.ContinueStatement))
- (local.set $this (ref.cast $continuestatement.ContinueStatement (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $continuestatement.ContinueStatement) (local.get $this.untyped)))
  (block
   ;;@ continuestatement/ContinueStatement.java:20:4
   (block $LOOP.BREAK
@@ -122,7 +122,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $continuestatement.ContinueStatement))
- (local.set $this (ref.cast $continuestatement.ContinueStatement (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $continuestatement.ContinueStatement) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@continuestatement.ContinueStatement) ))
  )

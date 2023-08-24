@@ -389,10 +389,10 @@
  ;;@ enums/Enum1.java:59:9
  (local $v_1 (ref null $java.lang.Integer))
  (local $this (ref null $enums.Enum3.$LambdaImplementor$1))
- (local.set $this (ref.cast $enums.Enum3.$LambdaImplementor$1 (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $enums.Enum3.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
   ;;@ enums/Enum1.java:59:9
-  (local.set $v_1 (ref.cast null $java.lang.Integer (local.get $v)))
+  (local.set $v_1 (ref.cast (ref null $java.lang.Integer) (local.get $v)))
   ;;@ enums/Enum1.java:59:14
   (return (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (i32.const 1) (call_ref $function.m_intValue__int (ref.as_non_null (local.get $v_1))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $v_1)))))))
  )
@@ -407,7 +407,7 @@
  (result (ref null $java.lang.Object))
  ;;@ enums/Enum1.java:59:9
  (local $this (ref null $enums.Enum3.$LambdaImplementor$1))
- (local.set $this (ref.cast $enums.Enum3.$LambdaImplementor$1 (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $enums.Enum3.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
   ;;@ enums/Enum1.java:59:9
   (return (call $m_andThen__java_util_function_Function__java_util_function_Function@java.util.function.Function (ref.as_non_null (local.get $this))(local.get $arg0)))
@@ -423,7 +423,7 @@
  (result (ref null $java.lang.Object))
  ;;@ enums/Enum1.java:59:9
  (local $this (ref null $enums.Enum3.$LambdaImplementor$1))
- (local.set $this (ref.cast $enums.Enum3.$LambdaImplementor$1 (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $enums.Enum3.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
   ;;@ enums/Enum1.java:59:9
   (return (call $m_compose__java_util_function_Function__java_util_function_Function@java.util.function.Function (ref.as_non_null (local.get $this))(local.get $arg0)))
@@ -470,7 +470,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $enums.Enum3.$LambdaImplementor$1))
- (local.set $this (ref.cast $enums.Enum3.$LambdaImplementor$1 (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $enums.Enum3.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@enums.Enum3.$LambdaImplementor$1) ))
  )
@@ -543,7 +543,7 @@
    )
   )
   ;;@ enums/Enum1.java:20:12
-  (return (ref.cast null $enums.Enum1 (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__enums_Enum1_))))
+  (return (ref.cast (ref null $enums.Enum1) (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__enums_Enum1_))))
  )
 )
 
@@ -600,7 +600,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $enums.Enum1))
- (local.set $this (ref.cast $enums.Enum1 (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $enums.Enum1) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@enums.Enum1) ))
  )
@@ -783,7 +783,7 @@
  (local $$qualifier_1 (ref null $enums.Enum2))
  (local $l i32)
  (local $this (ref null $enums.Enum2))
- (local.set $this (ref.cast $enums.Enum2 (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $enums.Enum2) (local.get $this.untyped)))
  (block
   ;;@ enums/Enum1.java:52:4
   (local.set $o1 (block (result i32)
@@ -819,7 +819,7 @@
    )
   )
   ;;@ enums/Enum1.java:25:5
-  (return (ref.cast null $enums.Enum2 (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__enums_Enum2_))))
+  (return (ref.cast (ref null $enums.Enum2) (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__enums_Enum2_))))
  )
 )
 
@@ -902,7 +902,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $enums.Enum2))
- (local.set $this (ref.cast $enums.Enum2 (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $enums.Enum2) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@enums.Enum2) ))
  )
@@ -1029,7 +1029,7 @@
    )
   )
   ;;@ enums/Enum1.java:58:5
-  (return (ref.cast null $enums.Enum3 (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__enums_Enum3_))))
+  (return (ref.cast (ref null $enums.Enum3) (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__enums_Enum3_))))
  )
 )
 
@@ -1084,7 +1084,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $enums.Enum3))
- (local.set $this (ref.cast $enums.Enum3 (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $enums.Enum3) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@enums.Enum3) ))
  )
@@ -1176,7 +1176,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $enums.Enum2.1))
- (local.set $this (ref.cast $enums.Enum2.1 (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $enums.Enum2.1) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@enums.Enum2.1) ))
  )

@@ -72,7 +72,7 @@
  (local $value i32)
  (local $$qualifier (ref null $java.lang.Integer))
  (local $this (ref null $ternaryexpression.TernaryExpression))
- (local.set $this (ref.cast $ternaryexpression.TernaryExpression (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $ternaryexpression.TernaryExpression) (local.get $this.untyped)))
  (block
   ;;@ ternaryexpression/TernaryExpression.java:21:4
   (local.set $a (i32.const 1))
@@ -126,7 +126,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $ternaryexpression.TernaryExpression))
- (local.set $this (ref.cast $ternaryexpression.TernaryExpression (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $ternaryexpression.TernaryExpression) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@ternaryexpression.TernaryExpression) ))
  )

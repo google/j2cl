@@ -339,7 +339,7 @@
  (param $t (ref null $java.lang.Error))
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:19:14
  (local $this (ref null $simplebridgemethods.Superclass))
- (local.set $this (ref.cast $simplebridgemethods.Superclass (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $simplebridgemethods.Superclass) (local.get $this.untyped)))
  (block
  )
 )
@@ -382,7 +382,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplebridgemethods.Superclass))
- (local.set $this (ref.cast $simplebridgemethods.Superclass (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $simplebridgemethods.Superclass) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simplebridgemethods.Superclass) ))
  )
@@ -438,7 +438,7 @@
  (param $t (ref null $java.lang.Object))
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:42:14
  (local $this (ref null $simplebridgemethods.Task))
- (local.set $this (ref.cast $simplebridgemethods.Task (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $simplebridgemethods.Task) (local.get $this.untyped)))
  (block
  )
 )
@@ -481,7 +481,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplebridgemethods.Task))
- (local.set $this (ref.cast $simplebridgemethods.Task (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $simplebridgemethods.Task) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simplebridgemethods.Task) ))
  )
@@ -537,7 +537,7 @@
  (param $t (ref null $simplebridgemethods.Superclass))
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:50:14
  (local $this (ref null $simplebridgemethods.AnotherTask))
- (local.set $this (ref.cast $simplebridgemethods.AnotherTask (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $simplebridgemethods.AnotherTask) (local.get $this.untyped)))
  (block
  )
 )
@@ -550,10 +550,10 @@
  (param $arg0 (ref null $java.lang.Object))
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
  (local $this (ref null $simplebridgemethods.AnotherTask))
- (local.set $this (ref.cast $simplebridgemethods.AnotherTask (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $simplebridgemethods.AnotherTask) (local.get $this.untyped)))
  (block
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
-  (call_ref $function.m_call__simplebridgemethods_Superclass__void (ref.as_non_null (local.get $this))(ref.cast null $simplebridgemethods.Superclass (local.get $arg0))(struct.get $simplebridgemethods.AnotherTask.vtable $m_call__simplebridgemethods_Superclass__void (struct.get $simplebridgemethods.AnotherTask $vtable(local.get $this))))
+  (call_ref $function.m_call__simplebridgemethods_Superclass__void (ref.as_non_null (local.get $this))(ref.cast (ref null $simplebridgemethods.Superclass) (local.get $arg0))(struct.get $simplebridgemethods.AnotherTask.vtable $m_call__simplebridgemethods_Superclass__void (struct.get $simplebridgemethods.AnotherTask $vtable(local.get $this))))
  )
 )
 (elem declare func $m_call__java_lang_Object__void@simplebridgemethods.AnotherTask)
@@ -595,7 +595,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplebridgemethods.AnotherTask))
- (local.set $this (ref.cast $simplebridgemethods.AnotherTask (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $simplebridgemethods.AnotherTask) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simplebridgemethods.AnotherTask) ))
  )
@@ -681,7 +681,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplebridgemethods.SimpleBridgeMethods))
- (local.set $this (ref.cast $simplebridgemethods.SimpleBridgeMethods (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $simplebridgemethods.SimpleBridgeMethods) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simplebridgemethods.SimpleBridgeMethods) ))
  )
@@ -737,7 +737,7 @@
  (param $a (ref null $java.lang.AssertionError))
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:26:14
  (local $this (ref null $simplebridgemethods.Subclass))
- (local.set $this (ref.cast $simplebridgemethods.Subclass (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $simplebridgemethods.Subclass) (local.get $this.untyped)))
  (block
  )
 )
@@ -750,10 +750,10 @@
  (param $arg0 (ref null $java.lang.Error))
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
  (local $this (ref null $simplebridgemethods.Subclass))
- (local.set $this (ref.cast $simplebridgemethods.Subclass (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $simplebridgemethods.Subclass) (local.get $this.untyped)))
  (block
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
-  (call_ref $function.m_m1__java_lang_AssertionError__void (ref.as_non_null (local.get $this))(ref.cast null $java.lang.AssertionError (local.get $arg0))(struct.get $simplebridgemethods.Subclass.vtable $m_m1__java_lang_AssertionError__void (struct.get $simplebridgemethods.Subclass $vtable(local.get $this))))
+  (call_ref $function.m_m1__java_lang_AssertionError__void (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.AssertionError) (local.get $arg0))(struct.get $simplebridgemethods.Subclass.vtable $m_m1__java_lang_AssertionError__void (struct.get $simplebridgemethods.Subclass $vtable(local.get $this))))
  )
 )
 (elem declare func $m_m1__java_lang_Error__void@simplebridgemethods.Subclass)
@@ -795,7 +795,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplebridgemethods.Subclass))
- (local.set $this (ref.cast $simplebridgemethods.Subclass (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $simplebridgemethods.Subclass) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simplebridgemethods.Subclass) ))
  )
@@ -881,7 +881,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplebridgemethods.AnotherSubclass))
- (local.set $this (ref.cast $simplebridgemethods.AnotherSubclass (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $simplebridgemethods.AnotherSubclass) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simplebridgemethods.AnotherSubclass) ))
  )

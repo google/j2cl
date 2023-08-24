@@ -71,7 +71,7 @@
  (param $this.untyped (ref $java.lang.Object))
  ;;@ synchronizedmethod/SynchronizedMethod.java:25:27
  (local $this (ref null $synchronizedmethod.SynchronizedMethod))
- (local.set $this (ref.cast $synchronizedmethod.SynchronizedMethod (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $synchronizedmethod.SynchronizedMethod) (local.get $this.untyped)))
  (block
   ;;@ synchronizedmethod/SynchronizedMethod.java:26:4
   (struct.set $synchronizedmethod.SynchronizedMethod $f_a__synchronizedmethod_SynchronizedMethod_ (local.get $this) (i32.add (struct.get $synchronizedmethod.SynchronizedMethod $f_a__synchronizedmethod_SynchronizedMethod_ (local.get $this)) (i32.const 1)))
@@ -131,7 +131,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $synchronizedmethod.SynchronizedMethod))
- (local.set $this (ref.cast $synchronizedmethod.SynchronizedMethod (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $synchronizedmethod.SynchronizedMethod) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@synchronizedmethod.SynchronizedMethod) ))
  )

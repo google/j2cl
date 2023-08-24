@@ -143,7 +143,7 @@
  (param $f (ref null $java.lang.Object))
  ;;@ functiontype/FunctionImpl.java:21:14
  (local $this (ref null $functiontype.FunctionImpl))
- (local.set $this (ref.cast $functiontype.FunctionImpl (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $functiontype.FunctionImpl) (local.get $this.untyped)))
  (block
  )
 )
@@ -186,7 +186,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $functiontype.FunctionImpl))
- (local.set $this (ref.cast $functiontype.FunctionImpl (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $functiontype.FunctionImpl) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@functiontype.FunctionImpl) ))
  )

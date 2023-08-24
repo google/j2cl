@@ -140,7 +140,7 @@
  (local $$stringBuilder_15 (ref null $java.lang.StringBuilder))
  (local $$stringBuilder_16 (ref null $java.lang.StringBuilder))
  (local $this (ref null $strings.Strings))
- (local.set $this (ref.cast $strings.Strings (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $strings.Strings) (local.get $this.untyped)))
  (block
   ;;@ strings/Strings.java:31:4
   (local.set $s1 (ref.null $java.lang.String))
@@ -340,7 +340,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $strings.Strings))
- (local.set $this (ref.cast $strings.Strings (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $strings.Strings) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@strings.Strings) ))
  )
@@ -542,7 +542,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $strings.Strings.StringHolder))
- (local.set $this (ref.cast $strings.Strings.StringHolder (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $strings.Strings.StringHolder) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@strings.Strings.StringHolder) ))
  )

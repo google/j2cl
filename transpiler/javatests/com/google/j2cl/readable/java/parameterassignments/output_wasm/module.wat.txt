@@ -499,7 +499,7 @@
  (result i32)
  ;;@ parameterassignments/Main.java:28:6
  (local $this (ref null $parameterassignments.Main))
- (local.set $this (ref.cast $parameterassignments.Main (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $parameterassignments.Main) (local.get $this.untyped)))
  (block
   ;;@ parameterassignments/Main.java:29:4
   (local.set $nonFinal (i32.add (i32.add (local.get $nonFinal) (local.get $explicitFinal)) (local.get $implicitFinal)))
@@ -517,7 +517,7 @@
  (param $oa (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ parameterassignments/Main.java:33:7
  (local $this (ref null $parameterassignments.Main))
- (local.set $this (ref.cast $parameterassignments.Main (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $parameterassignments.Main) (local.get $this.untyped)))
  (block
   ;;@ parameterassignments/Main.java:34:4
   (local.set $oa (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (local.get $o)(array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject (local.get $oa)) (i32.const 0)))))
@@ -533,7 +533,7 @@
  (param $ia (ref null $javaemul.internal.WasmArray.OfInt))
  ;;@ parameterassignments/Main.java:37:7
  (local $this (ref null $parameterassignments.Main))
- (local.set $this (ref.cast $parameterassignments.Main (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $parameterassignments.Main) (local.get $this.untyped)))
  (block
   ;;@ parameterassignments/Main.java:38:4
   (local.set $ia (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (local.get $i)(array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt (local.get $ia)) (i32.const 0)))))
@@ -592,7 +592,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $parameterassignments.Main))
- (local.set $this (ref.cast $parameterassignments.Main (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $parameterassignments.Main) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@parameterassignments.Main) ))
  )
@@ -650,7 +650,7 @@
  (result i32)
  ;;@ parameterassignments/Main.java:46:6
  (local $this (ref null $parameterassignments.Main.$LambdaImplementor$1))
- (local.set $this (ref.cast $parameterassignments.Main.$LambdaImplementor$1 (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $parameterassignments.Main.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
   ;;@ parameterassignments/Main.java:47:8
   (local.set $nonFinal (i32.add (local.get $nonFinal) (local.get $implicitFinal)))
@@ -697,7 +697,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $parameterassignments.Main.$LambdaImplementor$1))
- (local.set $this (ref.cast $parameterassignments.Main.$LambdaImplementor$1 (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $parameterassignments.Main.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@parameterassignments.Main.$LambdaImplementor$1) ))
  )
@@ -754,7 +754,7 @@
  (param $is (ref null $javaemul.internal.WasmArray.OfInt))
  ;;@ parameterassignments/Main.java:56:6
  (local $this (ref null $parameterassignments.Main.$LambdaImplementor$2))
- (local.set $this (ref.cast $parameterassignments.Main.$LambdaImplementor$2 (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $parameterassignments.Main.$LambdaImplementor$2) (local.get $this.untyped)))
  (block
   ;;@ parameterassignments/Main.java:57:8
   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt (local.get $is)) (i32.const 0) (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt (local.get $is)) (i32.const 1)))
@@ -799,7 +799,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $parameterassignments.Main.$LambdaImplementor$2))
- (local.set $this (ref.cast $parameterassignments.Main.$LambdaImplementor$2 (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $parameterassignments.Main.$LambdaImplementor$2) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@parameterassignments.Main.$LambdaImplementor$2) ))
  )
@@ -856,7 +856,7 @@
  (param $os (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ parameterassignments/Main.java:65:6
  (local $this (ref null $parameterassignments.Main.$LambdaImplementor$3))
- (local.set $this (ref.cast $parameterassignments.Main.$LambdaImplementor$3 (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $parameterassignments.Main.$LambdaImplementor$3) (local.get $this.untyped)))
  (block
   ;;@ parameterassignments/Main.java:66:8
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject (local.get $os)) (i32.const 0) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject (local.get $os)) (i32.const 1)))
@@ -901,7 +901,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $parameterassignments.Main.$LambdaImplementor$3))
- (local.set $this (ref.cast $parameterassignments.Main.$LambdaImplementor$3 (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $parameterassignments.Main.$LambdaImplementor$3) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@parameterassignments.Main.$LambdaImplementor$3) ))
  )
@@ -968,7 +968,7 @@
  (result i32)
  ;;@ parameterassignments/Main.java:75:8
  (local $this (ref null $parameterassignments.Main.SubMain))
- (local.set $this (ref.cast $parameterassignments.Main.SubMain (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $parameterassignments.Main.SubMain) (local.get $this.untyped)))
  (block
   ;;@ parameterassignments/Main.java:76:6
   (local.set $nonFinal (i32.add (i32.add (local.get $nonFinal) (local.get $explicitFinal)) (local.get $implicitFinal)))
@@ -1015,7 +1015,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $parameterassignments.Main.SubMain))
- (local.set $this (ref.cast $parameterassignments.Main.SubMain (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $parameterassignments.Main.SubMain) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@parameterassignments.Main.SubMain) ))
  )

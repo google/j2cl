@@ -260,7 +260,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $collisions.Blah.$Overlay))
- (local.set $this (ref.cast $collisions.Blah.$Overlay (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $collisions.Blah.$Overlay) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@collisions.Blah.$Overlay) ))
  )
@@ -346,7 +346,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $collisions.goog))
- (local.set $this (ref.cast $collisions.goog (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $collisions.goog) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@collisions.goog) ))
  )
@@ -469,7 +469,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $collisions.KtBlah))
- (local.set $this (ref.cast $collisions.KtBlah (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $collisions.KtBlah) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@collisions.KtBlah) ))
  )
@@ -555,7 +555,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $collisions.foo))
- (local.set $this (ref.cast $collisions.foo (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $collisions.foo) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@collisions.foo) ))
  )
@@ -674,7 +674,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $collisions.bar))
- (local.set $this (ref.cast $collisions.bar (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $collisions.bar) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@collisions.bar) ))
  )
@@ -734,12 +734,12 @@
  (local $T_1 i32)
  (local $o (ref null $collisions.Other))
  (local $this (ref null $collisions.Other))
- (local.set $this (ref.cast $collisions.Other (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $collisions.Other) (local.get $this.untyped)))
  (block
   ;;@ collisions/goog.java:68:4
   (local.set $T_1 (i32.const 5))
   ;;@ collisions/goog.java:69:4
-  (local.set $o (ref.cast null $collisions.Other (ref.null $java.lang.Object)))
+  (local.set $o (ref.cast (ref null $collisions.Other) (ref.null $java.lang.Object)))
   ;;@ collisions/goog.java:70:4
   (return (ref.null $java.lang.Object))
  )
@@ -756,7 +756,7 @@
   ;;@ collisions/goog.java:63:4
   (local.set $T_1 (i32.const 3))
   ;;@ collisions/goog.java:64:4
-  (local.set $o (ref.cast null $collisions.Other (ref.null $java.lang.Object)))
+  (local.set $o (ref.cast (ref null $collisions.Other) (ref.null $java.lang.Object)))
  )
 )
 
@@ -797,7 +797,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $collisions.Other))
- (local.set $this (ref.cast $collisions.Other (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $collisions.Other) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@collisions.Other) ))
  )
@@ -853,7 +853,7 @@
  (result (ref null $java.lang.Number))
  ;;@ collisions/goog.java:75:4
  (local $this (ref null $collisions.T))
- (local.set $this (ref.cast $collisions.T (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $collisions.T) (local.get $this.untyped)))
  (block
   ;;@ collisions/goog.java:76:4
   (return (ref.null $java.lang.Number))
@@ -870,7 +870,7 @@
  (local $t (ref null $java.lang.Number))
  (local $$qualifier (ref null $collisions.T))
  (local $this (ref null $collisions.T))
- (local.set $this (ref.cast $collisions.T (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $collisions.T) (local.get $this.untyped)))
  (block
   ;;@ collisions/goog.java:80:4
   (local.set $t (block (result (ref null $java.lang.Number))
@@ -922,7 +922,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $collisions.T))
- (local.set $this (ref.cast $collisions.T (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $collisions.T) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@collisions.T) ))
  )

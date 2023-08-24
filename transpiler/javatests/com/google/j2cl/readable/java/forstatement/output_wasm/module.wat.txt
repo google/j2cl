@@ -79,7 +79,7 @@
  (local $a i32)
  (local $b i32)
  (local $this (ref null $forstatement.ForStatement))
- (local.set $this (ref.cast $forstatement.ForStatement (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $forstatement.ForStatement) (local.get $this.untyped)))
  (block
   ;;@ forstatement/ForStatement.java:20:4
   (local.set $i (i32.const 0))
@@ -172,7 +172,7 @@
  (local $k i32)
  (local $l i32)
  (local $this (ref null $forstatement.ForStatement))
- (local.set $this (ref.cast $forstatement.ForStatement (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $forstatement.ForStatement) (local.get $this.untyped)))
  (block
   ;;@ forstatement/ForStatement.java:38:4
   (local.set $i (i32.const 0))
@@ -235,7 +235,7 @@
  (local $x i32)
  (local $y i32)
  (local $this (ref null $forstatement.ForStatement))
- (local.set $this (ref.cast $forstatement.ForStatement (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $forstatement.ForStatement) (local.get $this.untyped)))
  (block
   ;;@ forstatement/ForStatement.java:52:4
   (local.set $i (i32.const 0))
@@ -268,7 +268,7 @@
  ;;@ forstatement/ForStatement.java:58:14
  (local $i i32)
  (local $this (ref null $forstatement.ForStatement))
- (local.set $this (ref.cast $forstatement.ForStatement (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $forstatement.ForStatement) (local.get $this.untyped)))
  (block
   ;;@ forstatement/ForStatement.java:59:4
   (if (i32.const 0)
@@ -341,7 +341,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $forstatement.ForStatement))
- (local.set $this (ref.cast $forstatement.ForStatement (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $forstatement.ForStatement) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@forstatement.ForStatement) ))
  )

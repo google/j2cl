@@ -125,7 +125,7 @@
    )
   )
   ;;@ jstypeenum/Color.java:21:12
-  (return (ref.cast null $jstypeenum.Color (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__jstypeenum_Color_))))
+  (return (ref.cast (ref null $jstypeenum.Color) (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__jstypeenum_Color_))))
  )
 )
 
@@ -184,7 +184,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jstypeenum.Color))
- (local.set $this (ref.cast $jstypeenum.Color (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $jstypeenum.Color) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jstypeenum.Color) ))
  )

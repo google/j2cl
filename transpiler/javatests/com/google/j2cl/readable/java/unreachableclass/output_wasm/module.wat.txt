@@ -175,14 +175,14 @@
    (block
    )
   ) (catch $exception.event (block
-   (local.set $__$exc (ref.cast $java.lang.Throwable (extern.internalize (pop externref))))
+   (local.set $__$exc (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
    (block
     ;;@ unreachableclass/Main.java:21:33
-    (if (ref.test $java.lang.RuntimeException (local.get $__$exc))
+    (if (ref.test (ref $java.lang.RuntimeException) (local.get $__$exc))
      (then
       (block
        ;;@ unreachableclass/Main.java:21:33
-       (local.set $e (ref.cast null $java.lang.RuntimeException (local.get $__$exc)))
+       (local.set $e (ref.cast (ref null $java.lang.RuntimeException) (local.get $__$exc)))
        (block
         ;;@ unreachableclass/Main.java:29:6
         (local.set $$qualifier (call $$create__unreachableclass_Main@unreachableclass.Main.1A (local.get $this)))
@@ -242,7 +242,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $unreachableclass.Main))
- (local.set $this (ref.cast $unreachableclass.Main (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $unreachableclass.Main) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@unreachableclass.Main) ))
  )
@@ -330,7 +330,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $unreachableclass.Main.1))
- (local.set $this (ref.cast $unreachableclass.Main.1 (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $unreachableclass.Main.1) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@unreachableclass.Main.1) ))
  )
@@ -426,7 +426,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $unreachableclass.Main.1A.1B))
- (local.set $this (ref.cast $unreachableclass.Main.1A.1B (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $unreachableclass.Main.1A.1B) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@unreachableclass.Main.1A.1B) ))
  )
@@ -483,7 +483,7 @@
  (param $this.untyped (ref $java.lang.Object))
  ;;@ unreachableclass/Main.java:23:13
  (local $this (ref null $unreachableclass.Main.1A))
- (local.set $this (ref.cast $unreachableclass.Main.1A (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $unreachableclass.Main.1A) (local.get $this.untyped)))
  (block
  )
 )
@@ -526,7 +526,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $unreachableclass.Main.1A))
- (local.set $this (ref.cast $unreachableclass.Main.1A (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $unreachableclass.Main.1A) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@unreachableclass.Main.1A) ))
  )

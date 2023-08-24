@@ -100,7 +100,7 @@
  (param $this.untyped (ref $java.lang.Object))
  ;;@ genericconstructor/GenericConstructor.java:25:14
  (local $this (ref null $genericconstructor.GenericConstructor))
- (local.set $this (ref.cast $genericconstructor.GenericConstructor (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $genericconstructor.GenericConstructor) (local.get $this.untyped)))
  (block
   ;;@ genericconstructor/GenericConstructor.java:26:4
   (drop (call $$create__java_lang_Object__java_lang_Object@genericconstructor.GenericConstructor (call $$create__@java.lang.Exception )(call $$create__@java.lang.Error )))
@@ -147,7 +147,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $genericconstructor.GenericConstructor))
- (local.set $this (ref.cast $genericconstructor.GenericConstructor (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $genericconstructor.GenericConstructor) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@genericconstructor.GenericConstructor) ))
  )

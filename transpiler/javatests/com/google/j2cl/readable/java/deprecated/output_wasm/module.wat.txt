@@ -302,7 +302,7 @@
  (param $someArg (ref null $java.lang.String))
  ;;@ deprecated/DeprecatedExample.java:34:14
  (local $this (ref null $deprecated.DeprecatedExample))
- (local.set $this (ref.cast $deprecated.DeprecatedExample (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $deprecated.DeprecatedExample) (local.get $this.untyped)))
  (block
  )
 )
@@ -382,7 +382,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $deprecated.DeprecatedExample))
- (local.set $this (ref.cast $deprecated.DeprecatedExample (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $deprecated.DeprecatedExample) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@deprecated.DeprecatedExample) ))
  )
@@ -468,7 +468,7 @@
    )
   )
   ;;@ deprecated/DeprecatedExample.java:55:7
-  (return (ref.cast null $deprecated.DeprecatedExample.DeprecatedEnum (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__deprecated_DeprecatedExample_DeprecatedEnum_))))
+  (return (ref.cast (ref null $deprecated.DeprecatedExample.DeprecatedEnum) (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__deprecated_DeprecatedExample_DeprecatedEnum_))))
  )
 )
 
@@ -523,7 +523,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $deprecated.DeprecatedExample.DeprecatedEnum))
- (local.set $this (ref.cast $deprecated.DeprecatedExample.DeprecatedEnum (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $deprecated.DeprecatedExample.DeprecatedEnum) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@deprecated.DeprecatedExample.DeprecatedEnum) ))
  )
@@ -609,7 +609,7 @@
    )
   )
   ;;@ deprecated/DeprecatedExample.java:62:7
-  (return (ref.cast null $deprecated.DeprecatedExample.DeprecatedJsEnum (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__deprecated_DeprecatedExample_DeprecatedJsEnum_))))
+  (return (ref.cast (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum) (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__deprecated_DeprecatedExample_DeprecatedJsEnum_))))
  )
 )
 
@@ -664,7 +664,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum))
- (local.set $this (ref.cast $deprecated.DeprecatedExample.DeprecatedJsEnum (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $deprecated.DeprecatedExample.DeprecatedJsEnum) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@deprecated.DeprecatedExample.DeprecatedJsEnum) ))
  )

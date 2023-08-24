@@ -177,7 +177,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsinnerclass.Main))
- (local.set $this (ref.cast $jsinnerclass.Main (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $jsinnerclass.Main) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsinnerclass.Main) ))
  )
@@ -237,7 +237,7 @@
  (result i32)
  ;;@ jsinnerclass/Main.java:32:17
  (local $this (ref null $jsinnerclass.Main.Outer.Inner))
- (local.set $this (ref.cast $jsinnerclass.Main.Outer.Inner (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $jsinnerclass.Main.Outer.Inner) (local.get $this.untyped)))
  (block
   ;;@ jsinnerclass/Main.java:33:8
   (return (struct.get $jsinnerclass.Main.Outer.Inner $f_b__jsinnerclass_Main_Outer_Inner_ (local.get $this)))
@@ -282,7 +282,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsinnerclass.Main.Outer.Inner))
- (local.set $this (ref.cast $jsinnerclass.Main.Outer.Inner (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $jsinnerclass.Main.Outer.Inner) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsinnerclass.Main.Outer.Inner) ))
  )
@@ -341,7 +341,7 @@
  ;;@ jsinnerclass/Main.java:37:15
  (local $$qualifier (ref null $jsinnerclass.Main.Outer.Inner))
  (local $this (ref null $jsinnerclass.Main.Outer))
- (local.set $this (ref.cast $jsinnerclass.Main.Outer (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $jsinnerclass.Main.Outer) (local.get $this.untyped)))
  (block
   ;;@ jsinnerclass/Main.java:38:6
   (return (i32.add (block (result i32)
@@ -397,7 +397,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsinnerclass.Main.Outer))
- (local.set $this (ref.cast $jsinnerclass.Main.Outer (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $jsinnerclass.Main.Outer) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsinnerclass.Main.Outer) ))
  )

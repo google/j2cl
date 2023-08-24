@@ -147,7 +147,7 @@
  (local $e (ref null $java.lang.RuntimeException))
  (local $r (ref null $java.lang.RuntimeException))
  (local $this (ref null $trycatch.TryCatch))
- (local.set $this (ref.cast $trycatch.TryCatch (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $trycatch.TryCatch) (local.get $this.untyped)))
  (block
   ;;@ trycatch/TryCatch.java:21:4
   (try (do
@@ -157,25 +157,25 @@
     (unreachable)
    )
   ) (catch $exception.event (block
-   (local.set $__$exc (ref.cast $java.lang.Throwable (extern.internalize (pop externref))))
+   (local.set $__$exc (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
    (block
     ;;@ trycatch/TryCatch.java:23:58
-    (if (if (result i32) (ref.test $java.lang.NullPointerException (local.get $__$exc)) (then (i32.const 1)) (else (ref.test $java.lang.ClassCastException (local.get $__$exc))))
+    (if (if (result i32) (ref.test (ref $java.lang.NullPointerException) (local.get $__$exc)) (then (i32.const 1)) (else (ref.test (ref $java.lang.ClassCastException) (local.get $__$exc))))
      (then
       (block
        ;;@ trycatch/TryCatch.java:23:58
-       (local.set $e (ref.cast null $java.lang.RuntimeException (local.get $__$exc)))
+       (local.set $e (ref.cast (ref null $java.lang.RuntimeException) (local.get $__$exc)))
        ;;@ trycatch/TryCatch.java:24:6
        (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $e))
        (unreachable)
       )
      )(else
       ;;@ trycatch/TryCatch.java:25:33
-      (if (ref.test $java.lang.RuntimeException (local.get $__$exc))
+      (if (ref.test (ref $java.lang.RuntimeException) (local.get $__$exc))
        (then
         (block
          ;;@ trycatch/TryCatch.java:25:33
-         (local.set $r (ref.cast null $java.lang.RuntimeException (local.get $__$exc)))
+         (local.set $r (ref.cast (ref null $java.lang.RuntimeException) (local.get $__$exc)))
          ;;@ trycatch/TryCatch.java:26:6
          (local.set $r (ref.null $java.lang.RuntimeException))
         )
@@ -203,7 +203,7 @@
  (local $__$exc (ref null $java.lang.Throwable))
  (local $__$exc_1 (ref null $java.lang.Throwable))
  (local $this (ref null $trycatch.TryCatch))
- (local.set $this (ref.cast $trycatch.TryCatch (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $trycatch.TryCatch) (local.get $this.untyped)))
  (block
   ;;@ trycatch/TryCatch.java:31:4
   (try (do
@@ -213,7 +213,7 @@
     (unreachable)
    )
   ) (catch $exception.event (block
-   (local.set $__$exc (ref.cast $java.lang.Throwable (extern.internalize (pop externref))))
+   (local.set $__$exc (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
    (block
    )
   )))
@@ -225,10 +225,10 @@
     (unreachable)
    )
   ) (catch $exception.event (block
-   (local.set $__$exc_1 (ref.cast $java.lang.Throwable (extern.internalize (pop externref))))
+   (local.set $__$exc_1 (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
    (block
     ;;@ trycatch/TryCatch.java:39:26
-    (if (ref.test $java.lang.Exception (local.get $__$exc_1))
+    (if (ref.test (ref $java.lang.Exception) (local.get $__$exc_1))
      (then
       (block
       )
@@ -251,7 +251,7 @@
  (local $__$exc (ref null $java.lang.Throwable))
  (local $e (ref null $java.lang.Throwable))
  (local $this (ref null $trycatch.TryCatch))
- (local.set $this (ref.cast $trycatch.TryCatch (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $trycatch.TryCatch) (local.get $this.untyped)))
  (block
   ;;@ trycatch/TryCatch.java:47:4
   (try (do
@@ -261,11 +261,11 @@
     (unreachable)
    )
   ) (catch $exception.event (block
-   (local.set $__$exc (ref.cast $java.lang.Throwable (extern.internalize (pop externref))))
+   (local.set $__$exc (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
    (block
     (block
      ;;@ trycatch/TryCatch.java:49:26
-     (local.set $e (ref.cast null $java.lang.Throwable (local.get $__$exc)))
+     (local.set $e (ref.cast (ref null $java.lang.Throwable) (local.get $__$exc)))
      ;;@ trycatch/TryCatch.java:50:6
      (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $e))
      (unreachable)
@@ -285,7 +285,7 @@
  (local $savedThrown.0 (ref null $java.lang.Throwable))
  (local $t (ref null $java.lang.Throwable))
  (local $this (ref null $trycatch.TryCatch))
- (local.set $this (ref.cast $trycatch.TryCatch (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $trycatch.TryCatch) (local.get $this.untyped)))
  (block
   (block
    ;;@ trycatch/TryCatch.java:55:4
@@ -301,7 +301,7 @@
       )
      )
     ) (catch $exception.event (block
-     (local.set $t (ref.cast $java.lang.Throwable (extern.internalize (pop externref))))
+     (local.set $t (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
      (block
       ;;@ trycatch/TryCatch.java:55:4
       (local.set $savedThrown.0 (local.get $t))
@@ -340,7 +340,7 @@
  (local $t (ref null $java.lang.Throwable))
  (local $__$exc_1 (ref null $java.lang.Throwable))
  (local $this (ref null $trycatch.TryCatch))
- (local.set $this (ref.cast $trycatch.TryCatch (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $trycatch.TryCatch) (local.get $this.untyped)))
  (block
   ;;@ trycatch/TryCatch.java:67:4
   (try (do
@@ -371,11 +371,11 @@
           (unreachable)
          )
         ) (catch $exception.event (block
-         (local.set $__$exc (ref.cast $java.lang.Throwable (extern.internalize (pop externref))))
+         (local.set $__$exc (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
          (block
           (block
            ;;@ trycatch/TryCatch.java:67:4
-           (local.set $$exceptionFromTry (ref.cast null $java.lang.Throwable (local.get $__$exc)))
+           (local.set $$exceptionFromTry (ref.cast (ref null $java.lang.Throwable) (local.get $__$exc)))
            ;;@ trycatch/TryCatch.java:67:4
            (local.set $$primaryExc (local.get $$exceptionFromTry))
            ;;@ trycatch/TryCatch.java:67:4
@@ -386,7 +386,7 @@
         )))
        )
       ) (catch $exception.event (block
-       (local.set $t (ref.cast $java.lang.Throwable (extern.internalize (pop externref))))
+       (local.set $t (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
        (block
         ;;@ trycatch/TryCatch.java:67:4
         (local.set $savedThrown.0 (local.get $t))
@@ -422,10 +422,10 @@
     )
    )
   ) (catch $exception.event (block
-   (local.set $__$exc_1 (ref.cast $java.lang.Throwable (extern.internalize (pop externref))))
+   (local.set $__$exc_1 (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
    (block
     ;;@ trycatch/TryCatch.java:70:26
-    (if (ref.test $java.lang.Exception (local.get $__$exc_1))
+    (if (ref.test (ref $java.lang.Exception) (local.get $__$exc_1))
      (then
       (block
       )
@@ -460,7 +460,7 @@
  (local $t (ref null $java.lang.Throwable))
  (local $__$exc_1 (ref null $java.lang.Throwable))
  (local $this (ref null $trycatch.TryCatch))
- (local.set $this (ref.cast $trycatch.TryCatch (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $trycatch.TryCatch) (local.get $this.untyped)))
  (block
   ;;@ trycatch/TryCatch.java:76:4
   (local.set $thing (call $$create__@trycatch.TryCatch.ClosableThing ))
@@ -495,11 +495,11 @@
           (unreachable)
          )
         ) (catch $exception.event (block
-         (local.set $__$exc (ref.cast $java.lang.Throwable (extern.internalize (pop externref))))
+         (local.set $__$exc (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
          (block
           (block
            ;;@ trycatch/TryCatch.java:78:4
-           (local.set $$exceptionFromTry (ref.cast null $java.lang.Throwable (local.get $__$exc)))
+           (local.set $$exceptionFromTry (ref.cast (ref null $java.lang.Throwable) (local.get $__$exc)))
            ;;@ trycatch/TryCatch.java:78:4
            (local.set $$primaryExc (local.get $$exceptionFromTry))
            ;;@ trycatch/TryCatch.java:78:4
@@ -510,7 +510,7 @@
         )))
        )
       ) (catch $exception.event (block
-       (local.set $t (ref.cast $java.lang.Throwable (extern.internalize (pop externref))))
+       (local.set $t (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
        (block
         ;;@ trycatch/TryCatch.java:78:4
         (local.set $savedThrown.0 (local.get $t))
@@ -546,10 +546,10 @@
     )
    )
   ) (catch $exception.event (block
-   (local.set $__$exc_1 (ref.cast $java.lang.Throwable (extern.internalize (pop externref))))
+   (local.set $__$exc_1 (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
    (block
     ;;@ trycatch/TryCatch.java:80:26
-    (if (ref.test $java.lang.Exception (local.get $__$exc_1))
+    (if (ref.test (ref $java.lang.Exception) (local.get $__$exc_1))
      (then
       (block
       )
@@ -581,7 +581,7 @@
  (local $t (ref null $java.lang.Throwable))
  (local $__$exc_1 (ref null $java.lang.Throwable))
  (local $this (ref null $trycatch.TryCatch))
- (local.set $this (ref.cast $trycatch.TryCatch (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $trycatch.TryCatch) (local.get $this.untyped)))
  (block
   ;;@ trycatch/TryCatch.java:88:4
   (try (do
@@ -608,11 +608,11 @@
           (unreachable)
          )
         ) (catch $exception.event (block
-         (local.set $__$exc (ref.cast $java.lang.Throwable (extern.internalize (pop externref))))
+         (local.set $__$exc (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
          (block
           (block
            ;;@ trycatch/TryCatch.java:88:4
-           (local.set $$exceptionFromTry (ref.cast null $java.lang.Throwable (local.get $__$exc)))
+           (local.set $$exceptionFromTry (ref.cast (ref null $java.lang.Throwable) (local.get $__$exc)))
            ;;@ trycatch/TryCatch.java:88:4
            (local.set $$primaryExc (local.get $$exceptionFromTry))
            ;;@ trycatch/TryCatch.java:88:4
@@ -623,7 +623,7 @@
         )))
        )
       ) (catch $exception.event (block
-       (local.set $t (ref.cast $java.lang.Throwable (extern.internalize (pop externref))))
+       (local.set $t (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
        (block
         ;;@ trycatch/TryCatch.java:88:4
         (local.set $savedThrown.0 (local.get $t))
@@ -657,10 +657,10 @@
     )
    )
   ) (catch $exception.event (block
-   (local.set $__$exc_1 (ref.cast $java.lang.Throwable (extern.internalize (pop externref))))
+   (local.set $__$exc_1 (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
    (block
     ;;@ trycatch/TryCatch.java:90:26
-    (if (ref.test $java.lang.Exception (local.get $__$exc_1))
+    (if (ref.test (ref $java.lang.Exception) (local.get $__$exc_1))
      (then
       (block
       )
@@ -687,7 +687,7 @@
  (local $ae (ref null $java.lang.Exception))
  (local $__$exc_1 (ref null $java.lang.Throwable))
  (local $this (ref null $trycatch.TryCatch))
- (local.set $this (ref.cast $trycatch.TryCatch (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $trycatch.TryCatch) (local.get $this.untyped)))
  (block
   ;;@ trycatch/TryCatch.java:96:4
   (try (do
@@ -697,14 +697,14 @@
     (unreachable)
    )
   ) (catch $exception.event (block
-   (local.set $__$exc (ref.cast $java.lang.Throwable (extern.internalize (pop externref))))
+   (local.set $__$exc (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
    (block
     ;;@ trycatch/TryCatch.java:98:27
-    (if (ref.test $java.lang.Exception (local.get $__$exc))
+    (if (ref.test (ref $java.lang.Exception) (local.get $__$exc))
      (then
       (block
        ;;@ trycatch/TryCatch.java:98:27
-       (local.set $ae (ref.cast null $java.lang.Exception (local.get $__$exc)))
+       (local.set $ae (ref.cast (ref null $java.lang.Exception) (local.get $__$exc)))
        ;;@ trycatch/TryCatch.java:99:6
        (try (do
         (block
@@ -713,10 +713,10 @@
          (unreachable)
         )
        ) (catch $exception.event (block
-        (local.set $__$exc_1 (ref.cast $java.lang.Throwable (extern.internalize (pop externref))))
+        (local.set $__$exc_1 (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
         (block
          ;;@ trycatch/TryCatch.java:101:29
-         (if (ref.test $java.lang.Exception (local.get $__$exc_1))
+         (if (ref.test (ref $java.lang.Exception) (local.get $__$exc_1))
           (then
            (block
            )
@@ -751,10 +751,10 @@
  (param $this.untyped (ref $java.lang.Object))
  ;;@ trycatch/TryCatch.java:107:14
  (local $this (ref null $trycatch.TryCatch))
- (local.set $this (ref.cast $trycatch.TryCatch (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $trycatch.TryCatch) (local.get $this.untyped)))
  (block
   ;;@ trycatch/TryCatch.java:108:4
-  (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (ref.cast null $java.lang.Exception (call $m_getT__java_lang_Object__java_lang_Object_$p_trycatch_TryCatch@trycatch.TryCatch (ref.as_non_null (local.get $this))(call $$create__@java.lang.Exception ))))
+  (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (ref.cast (ref null $java.lang.Exception) (call $m_getT__java_lang_Object__java_lang_Object_$p_trycatch_TryCatch@trycatch.TryCatch (ref.as_non_null (local.get $this))(call $$create__@java.lang.Exception ))))
   (unreachable)
  )
 )
@@ -778,7 +778,7 @@
  (param $this.untyped (ref $java.lang.Object))
  ;;@ trycatch/TryCatch.java:115:14
  (local $this (ref null $trycatch.TryCatch))
- (local.set $this (ref.cast $trycatch.TryCatch (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $trycatch.TryCatch) (local.get $this.untyped)))
  (block
   ;;@ trycatch/TryCatch.java:116:4
   (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (call $m_getThrowable__java_lang_Throwable_$p_trycatch_TryCatch@trycatch.TryCatch (ref.as_non_null (local.get $this))))
@@ -805,7 +805,7 @@
  (param $throwable (ref null $java.lang.Throwable))
  ;;@ trycatch/TryCatch.java:123:36
  (local $this (ref null $trycatch.TryCatch))
- (local.set $this (ref.cast $trycatch.TryCatch (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $trycatch.TryCatch) (local.get $this.untyped)))
  (block
   ;;@ trycatch/TryCatch.java:124:4
   (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $throwable))
@@ -853,7 +853,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $trycatch.TryCatch))
- (local.set $this (ref.cast $trycatch.TryCatch (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $trycatch.TryCatch) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@trycatch.TryCatch) ))
  )
@@ -908,7 +908,7 @@
  (param $this.untyped (ref $java.lang.Object))
  ;;@ trycatch/TryCatch.java:63:16
  (local $this (ref null $trycatch.TryCatch.ClosableThing))
- (local.set $this (ref.cast $trycatch.TryCatch.ClosableThing (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $trycatch.TryCatch.ClosableThing) (local.get $this.untyped)))
  (block
  )
 )
@@ -951,7 +951,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $trycatch.TryCatch.ClosableThing))
- (local.set $this (ref.cast $trycatch.TryCatch.ClosableThing (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $trycatch.TryCatch.ClosableThing) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@trycatch.TryCatch.ClosableThing) ))
  )

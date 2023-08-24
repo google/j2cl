@@ -142,7 +142,7 @@
  ;;@ localclassinheritance/LocalClassInheritance.java:19:14
  (local $f i32)
  (local $this (ref null $localclassinheritance.LocalClassInheritance))
- (local.set $this (ref.cast $localclassinheritance.LocalClassInheritance (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $localclassinheritance.LocalClassInheritance) (local.get $this.untyped)))
  (block
   ;;@ localclassinheritance/LocalClassInheritance.java:20:4
   (local.set $f (i32.const 1))
@@ -187,7 +187,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localclassinheritance.LocalClassInheritance))
- (local.set $this (ref.cast $localclassinheritance.LocalClassInheritance (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $localclassinheritance.LocalClassInheritance) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclassinheritance.LocalClassInheritance) ))
  )
@@ -247,7 +247,7 @@
  ;;@ localclassinheritance/LocalClassInheritance.java:22:18
  (local $i i32)
  (local $this (ref null $localclassinheritance.LocalClassInheritance.1Parent))
- (local.set $this (ref.cast $localclassinheritance.LocalClassInheritance.1Parent (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $localclassinheritance.LocalClassInheritance.1Parent) (local.get $this.untyped)))
  (block
   ;;@ localclassinheritance/LocalClassInheritance.java:23:8
   (local.set $i (struct.get $localclassinheritance.LocalClassInheritance.1Parent $$captured_f__localclassinheritance_LocalClassInheritance_1Parent (local.get $this)))
@@ -292,7 +292,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localclassinheritance.LocalClassInheritance.1Parent))
- (local.set $this (ref.cast $localclassinheritance.LocalClassInheritance.1Parent (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $localclassinheritance.LocalClassInheritance.1Parent) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclassinheritance.LocalClassInheritance.1Parent) ))
  )
@@ -352,7 +352,7 @@
  ;;@ localclassinheritance/LocalClassInheritance.java:27:18
  (local $i i32)
  (local $this (ref null $localclassinheritance.LocalClassInheritance.1Child))
- (local.set $this (ref.cast $localclassinheritance.LocalClassInheritance.1Child (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $localclassinheritance.LocalClassInheritance.1Child) (local.get $this.untyped)))
  (block
   ;;@ localclassinheritance/LocalClassInheritance.java:28:8
   (local.set $i (struct.get $localclassinheritance.LocalClassInheritance.1Child $$captured_f__localclassinheritance_LocalClassInheritance_1Child (local.get $this)))
@@ -397,7 +397,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localclassinheritance.LocalClassInheritance.1Child))
- (local.set $this (ref.cast $localclassinheritance.LocalClassInheritance.1Child (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $localclassinheritance.LocalClassInheritance.1Child) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclassinheritance.LocalClassInheritance.1Child) ))
  )

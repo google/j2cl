@@ -68,7 +68,7 @@
  ;;@ whilestatement/WhileStatement.java:19:14
  (local $count i32)
  (local $this (ref null $whilestatement.WhileStatement))
- (local.set $this (ref.cast $whilestatement.WhileStatement (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $whilestatement.WhileStatement) (local.get $this.untyped)))
  (block
   ;;@ whilestatement/WhileStatement.java:20:4
   (local.set $count (i32.const 0))
@@ -126,7 +126,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $whilestatement.WhileStatement))
- (local.set $this (ref.cast $whilestatement.WhileStatement (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $whilestatement.WhileStatement) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@whilestatement.WhileStatement) ))
  )

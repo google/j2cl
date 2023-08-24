@@ -936,7 +936,7 @@
  (result (ref null $java.lang.Object))
  ;;@ typewildcards/TypeWildCards.java:25:4
  (local $this (ref null $typewildcards.GenericType))
- (local.set $this (ref.cast $typewildcards.GenericType (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $typewildcards.GenericType) (local.get $this.untyped)))
  (block
   ;;@ typewildcards/TypeWildCards.java:26:4
   (return (ref.null $java.lang.Object))
@@ -981,7 +981,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $typewildcards.GenericType))
- (local.set $this (ref.cast $typewildcards.GenericType (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $typewildcards.GenericType) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typewildcards.GenericType) ))
  )
@@ -1067,7 +1067,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $typewildcards.Bar))
- (local.set $this (ref.cast $typewildcards.Bar (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $typewildcards.Bar) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typewildcards.Bar) ))
  )
@@ -1155,7 +1155,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $typewildcards.RecursiveType))
- (local.set $this (ref.cast $typewildcards.RecursiveType (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $typewildcards.RecursiveType) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typewildcards.RecursiveType) ))
  )
@@ -1212,7 +1212,7 @@
  (result (ref null $java.lang.Object))
  ;;@ typewildcards/TypeWildCards.java:45:16
  (local $this (ref null $typewildcards.TypeWildCards))
- (local.set $this (ref.cast $typewildcards.TypeWildCards (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $typewildcards.TypeWildCards) (local.get $this.untyped)))
  (block
   ;;@ typewildcards/TypeWildCards.java:46:4
   (return (call_ref $function.m_get__java_lang_Object_$pp_typewildcards (ref.as_non_null (local.get $g))(struct.get $typewildcards.GenericType.vtable $m_get__java_lang_Object_$pp_typewildcards (struct.get $typewildcards.GenericType $vtable(local.get $g)))))
@@ -1228,10 +1228,10 @@
  (result (ref null $typewildcards.Bar))
  ;;@ typewildcards/TypeWildCards.java:49:13
  (local $this (ref null $typewildcards.TypeWildCards))
- (local.set $this (ref.cast $typewildcards.TypeWildCards (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $typewildcards.TypeWildCards) (local.get $this.untyped)))
  (block
   ;;@ typewildcards/TypeWildCards.java:50:4
-  (return (ref.cast null $typewildcards.Bar (call_ref $function.m_get__java_lang_Object_$pp_typewildcards (ref.as_non_null (local.get $g))(struct.get $typewildcards.GenericType.vtable $m_get__java_lang_Object_$pp_typewildcards (struct.get $typewildcards.GenericType $vtable(local.get $g))))))
+  (return (ref.cast (ref null $typewildcards.Bar) (call_ref $function.m_get__java_lang_Object_$pp_typewildcards (ref.as_non_null (local.get $g))(struct.get $typewildcards.GenericType.vtable $m_get__java_lang_Object_$pp_typewildcards (struct.get $typewildcards.GenericType $vtable(local.get $g))))))
  )
 )
 (elem declare func $m_upperBound__typewildcards_GenericType__typewildcards_Bar@typewildcards.TypeWildCards)
@@ -1244,7 +1244,7 @@
  (result (ref null $java.lang.Object))
  ;;@ typewildcards/TypeWildCards.java:53:16
  (local $this (ref null $typewildcards.TypeWildCards))
- (local.set $this (ref.cast $typewildcards.TypeWildCards (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $typewildcards.TypeWildCards) (local.get $this.untyped)))
  (block
   ;;@ typewildcards/TypeWildCards.java:54:4
   (return (call_ref $function.m_get__java_lang_Object_$pp_typewildcards (ref.as_non_null (local.get $g))(struct.get $typewildcards.GenericType.vtable $m_get__java_lang_Object_$pp_typewildcards (struct.get $typewildcards.GenericType $vtable(local.get $g)))))
@@ -1259,7 +1259,7 @@
  (param $g (ref null $typewildcards.RecursiveType))
  ;;@ typewildcards/TypeWildCards.java:57:14
  (local $this (ref null $typewildcards.TypeWildCards))
- (local.set $this (ref.cast $typewildcards.TypeWildCards (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $typewildcards.TypeWildCards) (local.get $this.untyped)))
  (block
  )
 )
@@ -1272,7 +1272,7 @@
  (param $g (ref null $typewildcards.GenericType))
  ;;@ typewildcards/TypeWildCards.java:59:14
  (local $this (ref null $typewildcards.TypeWildCards))
- (local.set $this (ref.cast $typewildcards.TypeWildCards (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $typewildcards.TypeWildCards) (local.get $this.untyped)))
  (block
  )
 )
@@ -1285,7 +1285,7 @@
  (param $g (ref null $typewildcards.GenericType))
  ;;@ typewildcards/TypeWildCards.java:61:14
  (local $this (ref null $typewildcards.TypeWildCards))
- (local.set $this (ref.cast $typewildcards.TypeWildCards (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $typewildcards.TypeWildCards) (local.get $this.untyped)))
  (block
  )
 )
@@ -1298,7 +1298,7 @@
  (param $t (ref null $java.lang.Object))
  ;;@ typewildcards/TypeWildCards.java:63:14
  (local $this (ref null $typewildcards.TypeWildCards))
- (local.set $this (ref.cast $typewildcards.TypeWildCards (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $typewildcards.TypeWildCards) (local.get $this.untyped)))
  (block
  )
 )
@@ -1310,7 +1310,7 @@
  (param $this.untyped (ref $java.lang.Object))
  ;;@ typewildcards/TypeWildCards.java:65:14
  (local $this (ref null $typewildcards.TypeWildCards))
- (local.set $this (ref.cast $typewildcards.TypeWildCards (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $typewildcards.TypeWildCards) (local.get $this.untyped)))
  (block
   ;;@ typewildcards/TypeWildCards.java:66:4
   (drop (call_ref $function.m_unbounded__typewildcards_GenericType__java_lang_Object (ref.as_non_null (local.get $this))(call $$create__@typewildcards.GenericType )(struct.get $typewildcards.TypeWildCards.vtable $m_unbounded__typewildcards_GenericType__java_lang_Object (struct.get $typewildcards.TypeWildCards $vtable(local.get $this)))))
@@ -1392,7 +1392,7 @@
  (local $otherElements (ref null $java.lang.Object))
  (local $integers (ref null $java.lang.Object))
  (local $this (ref null $typewildcards.TypeWildCards))
- (local.set $this (ref.cast $typewildcards.TypeWildCards (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $typewildcards.TypeWildCards) (local.get $this.untyped)))
  (block
   ;;@ typewildcards/TypeWildCards.java:120:4
   (local.set $elements (ref.null $java.lang.Object))
@@ -1418,7 +1418,7 @@
  (param $this.untyped (ref $java.lang.Object))
  ;;@ typewildcards/TypeWildCards.java:137:14
  (local $this (ref null $typewildcards.TypeWildCards))
- (local.set $this (ref.cast $typewildcards.TypeWildCards (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $typewildcards.TypeWildCards) (local.get $this.untyped)))
  (block
   ;;@ typewildcards/TypeWildCards.java:138:4
   (call $m_takesRecursiveGeneric__typewildcards_GenericType__void@typewildcards.TypeWildCards (call $$create__typewildcards_TypeWildCards@typewildcards.TypeWildCards.Foo (local.get $this)))
@@ -1493,7 +1493,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $typewildcards.TypeWildCards))
- (local.set $this (ref.cast $typewildcards.TypeWildCards (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $typewildcards.TypeWildCards) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards) ))
  )
@@ -1553,7 +1553,7 @@
  (local $$qualifier (ref null $java.lang.Object))
  (local $$qualifier_1 (ref null $java.lang.Object))
  (local $this (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
- (local.set $this (ref.cast $typewildcards.TypeWildCards.$LambdaImplementor$1 (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $typewildcards.TypeWildCards.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
   ;;@ typewildcards/TypeWildCards.java:127:12
   (local.set $a_1 (local.get $a))
@@ -1561,12 +1561,12 @@
    ;;@ typewildcards/TypeWildCards.java:128:14
    (local.set $$qualifier (local.get $a_1))
    ;;@ typewildcards/TypeWildCards.java:128:14
-   (drop (call_ref $function.m_getKey__java_lang_String (ref.as_non_null (local.get $$qualifier))(struct.get $typewildcards.TypeWildCards.HasKey.vtable $m_getKey__java_lang_String (ref.cast $typewildcards.TypeWildCards.HasKey.vtable (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $$qualifier)))))))
+   (drop (call_ref $function.m_getKey__java_lang_String (ref.as_non_null (local.get $$qualifier))(struct.get $typewildcards.TypeWildCards.HasKey.vtable $m_getKey__java_lang_String (ref.cast (ref $typewildcards.TypeWildCards.HasKey.vtable) (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $$qualifier)))))))
   )
   ;;@ typewildcards/TypeWildCards.java:129:14
   (return (block (result (ref null $java.lang.Integer))
    (local.set $$qualifier_1 (local.get $a_1))
-   (call_ref $function.m_get__java_lang_Integer (ref.as_non_null (local.get $$qualifier_1))(struct.get $typewildcards.TypeWildCards.IntegerSupplier.vtable $m_get__java_lang_Integer (ref.cast $typewildcards.TypeWildCards.IntegerSupplier.vtable (struct.get $itable $slot1 (struct.get $java.lang.Object $itable (local.get $$qualifier_1))))))
+   (call_ref $function.m_get__java_lang_Integer (ref.as_non_null (local.get $$qualifier_1))(struct.get $typewildcards.TypeWildCards.IntegerSupplier.vtable $m_get__java_lang_Integer (ref.cast (ref $typewildcards.TypeWildCards.IntegerSupplier.vtable) (struct.get $itable $slot1 (struct.get $java.lang.Object $itable (local.get $$qualifier_1))))))
   ))
  )
 )
@@ -1609,7 +1609,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
- (local.set $this (ref.cast $typewildcards.TypeWildCards.$LambdaImplementor$1 (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $typewildcards.TypeWildCards.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.$LambdaImplementor$1) ))
  )
@@ -1662,7 +1662,7 @@
  (param $this.untyped (ref $java.lang.Object))
  ;;@ typewildcards/TypeWildCards.java:83:16
  (local $this (ref null $typewildcards.TypeWildCards.A))
- (local.set $this (ref.cast $typewildcards.TypeWildCards.A (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $typewildcards.TypeWildCards.A) (local.get $this.untyped)))
  (block
  )
 )
@@ -1705,7 +1705,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $typewildcards.TypeWildCards.A))
- (local.set $this (ref.cast $typewildcards.TypeWildCards.A (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $typewildcards.TypeWildCards.A) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.A) ))
  )
@@ -1909,7 +1909,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $typewildcards.TypeWildCards.MultipleGenerics))
- (local.set $this (ref.cast $typewildcards.TypeWildCards.MultipleGenerics (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $typewildcards.TypeWildCards.MultipleGenerics) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.MultipleGenerics) ))
  )
@@ -1997,7 +1997,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $typewildcards.RecursiveSubtype))
- (local.set $this (ref.cast $typewildcards.RecursiveSubtype (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $typewildcards.RecursiveSubtype) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typewildcards.RecursiveSubtype) ))
  )
@@ -2144,7 +2144,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $typewildcards.TypeWildCards.Foo))
- (local.set $this (ref.cast $typewildcards.TypeWildCards.Foo (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $typewildcards.TypeWildCards.Foo) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.Foo) ))
  )

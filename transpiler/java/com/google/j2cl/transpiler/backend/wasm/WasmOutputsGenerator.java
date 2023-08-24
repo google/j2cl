@@ -572,11 +572,11 @@ public class WasmOutputsGenerator {
       builder.newLine();
       builder.append(format("(local $this %s)", environment.getWasmType(enclosingTypeDescriptor)));
       builder.newLine();
-      // Use `ref.cast` instead of `ref.cast null` since the receiver of an instance method should
+      // Use non-nullable `ref.cast` since the receiver of an instance method should
       // not be null, and it is ok to fail for devirtualized methods if it is.
       builder.append(
           format(
-              "(local.set $this (ref.cast %s (local.get $this.untyped)))",
+              "(local.set $this (ref.cast (ref %s) (local.get $this.untyped)))",
               environment.getWasmTypeName(enclosingTypeDescriptor)));
     }
 

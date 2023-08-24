@@ -189,7 +189,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $boundedtypesupercall.Main))
- (local.set $this (ref.cast $boundedtypesupercall.Main (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $boundedtypesupercall.Main) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@boundedtypesupercall.Main) ))
  )
@@ -304,7 +304,7 @@
  (result (ref null $java.lang.Object))
  ;;@ boundedtypesupercall/Main.java:27:13
  (local $this (ref null $boundedtypesupercall.Main.Bar))
- (local.set $this (ref.cast $boundedtypesupercall.Main.Bar (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $boundedtypesupercall.Main.Bar) (local.get $this.untyped)))
  (block
   ;;@ boundedtypesupercall/Main.java:28:6
   (return (ref.null $java.lang.Object))
@@ -319,7 +319,7 @@
  (result (ref null $boundedtypesupercall.Main.Foo))
  ;;@ boundedtypesupercall/Main.java:31:18
  (local $this (ref null $boundedtypesupercall.Main.Bar))
- (local.set $this (ref.cast $boundedtypesupercall.Main.Bar (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $boundedtypesupercall.Main.Bar) (local.get $this.untyped)))
  (block
   ;;@ boundedtypesupercall/Main.java:32:6
   (return (call $$create__boundedtypesupercall_Main_Bar__java_lang_Comparable@boundedtypesupercall.Main.Bar.1 (local.get $this)(call_ref $function.m_getSomething__java_lang_Comparable (ref.as_non_null (local.get $this))(struct.get $boundedtypesupercall.Main.Bar.vtable $m_getSomething__java_lang_Comparable (struct.get $boundedtypesupercall.Main.Bar $vtable(local.get $this))))))
@@ -364,7 +364,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $boundedtypesupercall.Main.Bar))
- (local.set $this (ref.cast $boundedtypesupercall.Main.Bar (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $boundedtypesupercall.Main.Bar) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@boundedtypesupercall.Main.Bar) ))
  )
@@ -423,7 +423,7 @@
  (param $this.untyped (ref $java.lang.Object))
  ;;@ boundedtypesupercall/Main.java:34:20
  (local $this (ref null $boundedtypesupercall.Main.Bar.1))
- (local.set $this (ref.cast $boundedtypesupercall.Main.Bar.1 (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $boundedtypesupercall.Main.Bar.1) (local.get $this.untyped)))
  (block
  )
 )
@@ -466,7 +466,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $boundedtypesupercall.Main.Bar.1))
- (local.set $this (ref.cast $boundedtypesupercall.Main.Bar.1 (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $boundedtypesupercall.Main.Bar.1) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@boundedtypesupercall.Main.Bar.1) ))
  )

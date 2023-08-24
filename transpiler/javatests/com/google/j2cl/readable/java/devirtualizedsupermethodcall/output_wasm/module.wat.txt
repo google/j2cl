@@ -165,7 +165,7 @@
  (result i32)
  ;;@ devirtualizedsupermethodcall/Main.java:42:13
  (local $this (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
- (local.set $this (ref.cast $devirtualizedsupermethodcall.FooCallsSuperObjectMethod (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $devirtualizedsupermethodcall.FooCallsSuperObjectMethod) (local.get $this.untyped)))
  (block
   ;;@ devirtualizedsupermethodcall/Main.java:43:4
   (return (call $m_hashCode__int@java.lang.Object (ref.as_non_null (local.get $this))))
@@ -210,7 +210,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
- (local.set $this (ref.cast $devirtualizedsupermethodcall.FooCallsSuperObjectMethod (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $devirtualizedsupermethodcall.FooCallsSuperObjectMethod) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@devirtualizedsupermethodcall.FooCallsSuperObjectMethod) ))
  )
@@ -267,7 +267,7 @@
  (local $fooCallsSuperObjectMethods (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
  (local $sn (ref null $devirtualizedsupermethodcall.SubNumber))
  (local $this (ref null $devirtualizedsupermethodcall.Main))
- (local.set $this (ref.cast $devirtualizedsupermethodcall.Main (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $devirtualizedsupermethodcall.Main) (local.get $this.untyped)))
  (block
   ;;@ devirtualizedsupermethodcall/Main.java:49:4
   (local.set $fooCallsSuperObjectMethods (call $$create__@devirtualizedsupermethodcall.FooCallsSuperObjectMethod ))
@@ -326,7 +326,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $devirtualizedsupermethodcall.Main))
- (local.set $this (ref.cast $devirtualizedsupermethodcall.Main (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $devirtualizedsupermethodcall.Main) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@devirtualizedsupermethodcall.Main) ))
  )
@@ -382,7 +382,7 @@
  (result i32)
  ;;@ devirtualizedsupermethodcall/Main.java:20:13
  (local $this (ref null $devirtualizedsupermethodcall.SubNumber))
- (local.set $this (ref.cast $devirtualizedsupermethodcall.SubNumber (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $devirtualizedsupermethodcall.SubNumber) (local.get $this.untyped)))
  (block
   ;;@ devirtualizedsupermethodcall/Main.java:21:4
   (return (i32.const 0))
@@ -397,7 +397,7 @@
  (result i64)
  ;;@ devirtualizedsupermethodcall/Main.java:25:14
  (local $this (ref null $devirtualizedsupermethodcall.SubNumber))
- (local.set $this (ref.cast $devirtualizedsupermethodcall.SubNumber (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $devirtualizedsupermethodcall.SubNumber) (local.get $this.untyped)))
  (block
   ;;@ devirtualizedsupermethodcall/Main.java:26:4
   (return (i64.const 0))
@@ -412,7 +412,7 @@
  (result f32)
  ;;@ devirtualizedsupermethodcall/Main.java:30:15
  (local $this (ref null $devirtualizedsupermethodcall.SubNumber))
- (local.set $this (ref.cast $devirtualizedsupermethodcall.SubNumber (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $devirtualizedsupermethodcall.SubNumber) (local.get $this.untyped)))
  (block
   ;;@ devirtualizedsupermethodcall/Main.java:31:4
   (return (f32.const 0.0))
@@ -427,7 +427,7 @@
  (result f64)
  ;;@ devirtualizedsupermethodcall/Main.java:35:16
  (local $this (ref null $devirtualizedsupermethodcall.SubNumber))
- (local.set $this (ref.cast $devirtualizedsupermethodcall.SubNumber (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $devirtualizedsupermethodcall.SubNumber) (local.get $this.untyped)))
  (block
   ;;@ devirtualizedsupermethodcall/Main.java:36:4
   (return (f64.const 0.0))
@@ -472,7 +472,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $devirtualizedsupermethodcall.SubNumber))
- (local.set $this (ref.cast $devirtualizedsupermethodcall.SubNumber (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $devirtualizedsupermethodcall.SubNumber) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@devirtualizedsupermethodcall.SubNumber) ))
  )

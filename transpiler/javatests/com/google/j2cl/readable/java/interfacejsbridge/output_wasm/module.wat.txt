@@ -294,7 +294,7 @@
  (result i32)
  ;;@ interfacejsbridge/InterfaceImpl.java:36:13
  (local $this (ref null $interfacejsbridge.InterfaceImpl))
- (local.set $this (ref.cast $interfacejsbridge.InterfaceImpl (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $interfacejsbridge.InterfaceImpl) (local.get $this.untyped)))
  (block
   ;;@ interfacejsbridge/InterfaceImpl.java:37:4
   (return (i32.const 0))
@@ -339,7 +339,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $interfacejsbridge.InterfaceImpl))
- (local.set $this (ref.cast $interfacejsbridge.InterfaceImpl (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $interfacejsbridge.InterfaceImpl) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@interfacejsbridge.InterfaceImpl) ))
  )
@@ -398,7 +398,7 @@
  (local $c (ref null $java.lang.Object))
  (local $d (ref null $interfacejsbridge.InterfaceImpl))
  (local $this (ref null $interfacejsbridge.Main))
- (local.set $this (ref.cast $interfacejsbridge.Main (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $interfacejsbridge.Main) (local.get $this.untyped)))
  (block
   ;;@ interfacejsbridge/Main.java:20:4
   (local.set $a (call $$create__@interfacejsbridge.InterfaceImpl ))
@@ -409,11 +409,11 @@
   ;;@ interfacejsbridge/Main.java:23:4
   (local.set $d (call $$create__@interfacejsbridge.InterfaceImpl ))
   ;;@ interfacejsbridge/Main.java:24:4
-  (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $a))(i32.const 1)(struct.get $interfacejsbridge.MyJsInterface.vtable $m_foo__int__int (ref.cast $interfacejsbridge.MyJsInterface.vtable (struct.get $itable $slot1 (struct.get $java.lang.Object $itable (local.get $a)))))))
+  (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $a))(i32.const 1)(struct.get $interfacejsbridge.MyJsInterface.vtable $m_foo__int__int (ref.cast (ref $interfacejsbridge.MyJsInterface.vtable) (struct.get $itable $slot1 (struct.get $java.lang.Object $itable (local.get $a)))))))
   ;;@ interfacejsbridge/Main.java:25:4
-  (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $b))(i32.const 1)(struct.get $interfacejsbridge.MyInterface.vtable $m_foo__int__int (ref.cast $interfacejsbridge.MyInterface.vtable (struct.get $itable $slot2 (struct.get $java.lang.Object $itable (local.get $b)))))))
+  (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $b))(i32.const 1)(struct.get $interfacejsbridge.MyInterface.vtable $m_foo__int__int (ref.cast (ref $interfacejsbridge.MyInterface.vtable) (struct.get $itable $slot2 (struct.get $java.lang.Object $itable (local.get $b)))))))
   ;;@ interfacejsbridge/Main.java:26:4
-  (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $c))(i32.const 1)(struct.get $interfacejsbridge.SubInterface.vtable $m_foo__int__int (ref.cast $interfacejsbridge.SubInterface.vtable (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $c)))))))
+  (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $c))(i32.const 1)(struct.get $interfacejsbridge.SubInterface.vtable $m_foo__int__int (ref.cast (ref $interfacejsbridge.SubInterface.vtable) (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $c)))))))
   ;;@ interfacejsbridge/Main.java:27:4
   (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $d))(i32.const 1)(struct.get $interfacejsbridge.InterfaceImpl.vtable $m_foo__int__int (struct.get $interfacejsbridge.InterfaceImpl $vtable(local.get $d)))))
  )
@@ -457,7 +457,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $interfacejsbridge.Main))
- (local.set $this (ref.cast $interfacejsbridge.Main (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $interfacejsbridge.Main) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@interfacejsbridge.Main) ))
  )

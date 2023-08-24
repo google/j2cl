@@ -236,7 +236,7 @@
  (result i32)
  ;;@ jsbridgebackward/InterfaceImpl.java:26:13
  (local $this (ref null $jsbridgebackward.A))
- (local.set $this (ref.cast $jsbridgebackward.A (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $jsbridgebackward.A) (local.get $this.untyped)))
  (block
   ;;@ jsbridgebackward/InterfaceImpl.java:27:4
   (return (local.get $a))
@@ -281,7 +281,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsbridgebackward.A))
- (local.set $this (ref.cast $jsbridgebackward.A (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $jsbridgebackward.A) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsbridgebackward.A) ))
  )
@@ -367,7 +367,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsbridgebackward.InterfaceImpl))
- (local.set $this (ref.cast $jsbridgebackward.InterfaceImpl (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $jsbridgebackward.InterfaceImpl) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsbridgebackward.InterfaceImpl) ))
  )
@@ -424,7 +424,7 @@
  (result i32)
  ;;@ jsbridgebackward/InterfaceImpl.java:39:13
  (local $this (ref null $jsbridgebackward.SubInterfaceImpl))
- (local.set $this (ref.cast $jsbridgebackward.SubInterfaceImpl (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $jsbridgebackward.SubInterfaceImpl) (local.get $this.untyped)))
  (block
   ;;@ jsbridgebackward/InterfaceImpl.java:40:4
   (return (i32.const 0))
@@ -469,7 +469,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsbridgebackward.SubInterfaceImpl))
- (local.set $this (ref.cast $jsbridgebackward.SubInterfaceImpl (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $jsbridgebackward.SubInterfaceImpl) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsbridgebackward.SubInterfaceImpl) ))
  )

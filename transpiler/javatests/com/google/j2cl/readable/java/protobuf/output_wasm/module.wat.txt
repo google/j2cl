@@ -144,7 +144,7 @@
  (local $message (ref null $protobuf.MyMessage))
  (local $defaultMessage (ref null $protobuf.MyMessage))
  (local $this (ref null $protobuf.Protobuf))
- (local.set $this (ref.cast $protobuf.Protobuf (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $protobuf.Protobuf) (local.get $this.untyped)))
  (block
   ;;@ protobuf/Protobuf.java:20:4
   (local.set $builder (call $m_newBuilder__protobuf_MyMessage_Builder@protobuf.MyMessage ))
@@ -201,7 +201,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $protobuf.Protobuf))
- (local.set $this (ref.cast $protobuf.Protobuf (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $protobuf.Protobuf) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@protobuf.Protobuf) ))
  )
@@ -230,7 +230,7 @@
  (result i32)
  ;;@ protobuf/MyMessage.java:26:13
  (local $this (ref null $protobuf.MyMessage))
- (local.set $this (ref.cast $protobuf.MyMessage (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $protobuf.MyMessage) (local.get $this.untyped)))
  (block
   ;;@ protobuf/MyMessage.java:27:4
   (return (struct.get $protobuf.MyMessage $f_testField__protobuf_MyMessage (local.get $this)))
@@ -328,7 +328,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $protobuf.MyMessage))
- (local.set $this (ref.cast $protobuf.MyMessage (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $protobuf.MyMessage) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@protobuf.MyMessage) ))
  )
@@ -357,7 +357,7 @@
  (result i32)
  ;;@ protobuf/MyMessage.java:46:15
  (local $this (ref null $protobuf.MyMessage.Builder))
- (local.set $this (ref.cast $protobuf.MyMessage.Builder (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $protobuf.MyMessage.Builder) (local.get $this.untyped)))
  (block
   ;;@ protobuf/MyMessage.java:47:6
   (return (struct.get $protobuf.MyMessage.Builder $f_testField__protobuf_MyMessage_Builder (local.get $this)))
@@ -373,7 +373,7 @@
  (result (ref null $protobuf.MyMessage.Builder))
  ;;@ protobuf/MyMessage.java:50:19
  (local $this (ref null $protobuf.MyMessage.Builder))
- (local.set $this (ref.cast $protobuf.MyMessage.Builder (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $protobuf.MyMessage.Builder) (local.get $this.untyped)))
  (block
   ;;@ protobuf/MyMessage.java:51:6
   (struct.set $protobuf.MyMessage.Builder $f_testField__protobuf_MyMessage_Builder (local.get $this) (local.get $testField))
@@ -390,7 +390,7 @@
  (result (ref null $protobuf.MyMessage))
  ;;@ protobuf/MyMessage.java:55:21
  (local $this (ref null $protobuf.MyMessage.Builder))
- (local.set $this (ref.cast $protobuf.MyMessage.Builder (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $protobuf.MyMessage.Builder) (local.get $this.untyped)))
  (block
   ;;@ protobuf/MyMessage.java:56:6
   (return (call $$create__int@protobuf.MyMessage (struct.get $protobuf.MyMessage.Builder $f_testField__protobuf_MyMessage_Builder (local.get $this))))
@@ -462,7 +462,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $protobuf.MyMessage.Builder))
- (local.set $this (ref.cast $protobuf.MyMessage.Builder (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $protobuf.MyMessage.Builder) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@protobuf.MyMessage.Builder) ))
  )

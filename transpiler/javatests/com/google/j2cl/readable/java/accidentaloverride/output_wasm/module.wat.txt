@@ -241,7 +241,7 @@
  (param $e (ref null $java.lang.Error))
  ;;@ accidentaloverride/AccidentalOverride.java:20:14
  (local $this (ref null $accidentaloverride.Parent))
- (local.set $this (ref.cast $accidentaloverride.Parent (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $accidentaloverride.Parent) (local.get $this.untyped)))
  (block
  )
 )
@@ -284,7 +284,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $accidentaloverride.Parent))
- (local.set $this (ref.cast $accidentaloverride.Parent (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $accidentaloverride.Parent) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@accidentaloverride.Parent) ))
  )
@@ -340,10 +340,10 @@
  (param $arg0 (ref null $java.lang.Object))
  ;;@ accidentaloverride/AccidentalOverride.java:31:6
  (local $this (ref null $accidentaloverride.AnotherAccidentalOverride))
- (local.set $this (ref.cast $accidentaloverride.AnotherAccidentalOverride (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $accidentaloverride.AnotherAccidentalOverride) (local.get $this.untyped)))
  (block
   ;;@ accidentaloverride/AccidentalOverride.java:31:6
-  (call_ref $function.m_foo__java_lang_Error__void (ref.as_non_null (local.get $this))(ref.cast null $java.lang.AssertionError (local.get $arg0))(struct.get $accidentaloverride.Parent.vtable $m_foo__java_lang_Error__void (struct.get $accidentaloverride.Parent $vtable(local.get $this))))
+  (call_ref $function.m_foo__java_lang_Error__void (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.AssertionError) (local.get $arg0))(struct.get $accidentaloverride.Parent.vtable $m_foo__java_lang_Error__void (struct.get $accidentaloverride.Parent $vtable(local.get $this))))
  )
 )
 (elem declare func $m_foo__java_lang_Object__void@accidentaloverride.AnotherAccidentalOverride)
@@ -355,7 +355,7 @@
  (param $arg0 (ref null $java.lang.AssertionError))
  ;;@ accidentaloverride/AccidentalOverride.java:31:6
  (local $this (ref null $accidentaloverride.AnotherAccidentalOverride))
- (local.set $this (ref.cast $accidentaloverride.AnotherAccidentalOverride (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $accidentaloverride.AnotherAccidentalOverride) (local.get $this.untyped)))
  (block
   ;;@ accidentaloverride/AccidentalOverride.java:31:6
   (call $m_foo__java_lang_Error__void@accidentaloverride.Parent (ref.as_non_null (local.get $this))(local.get $arg0))
@@ -400,7 +400,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $accidentaloverride.AnotherAccidentalOverride))
- (local.set $this (ref.cast $accidentaloverride.AnotherAccidentalOverride (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $accidentaloverride.AnotherAccidentalOverride) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@accidentaloverride.AnotherAccidentalOverride) ))
  )
@@ -456,10 +456,10 @@
  (param $arg0 (ref null $java.lang.Object))
  ;;@ accidentaloverride/AccidentalOverride.java:41:13
  (local $this (ref null $accidentaloverride.AccidentalOverride))
- (local.set $this (ref.cast $accidentaloverride.AccidentalOverride (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $accidentaloverride.AccidentalOverride) (local.get $this.untyped)))
  (block
   ;;@ accidentaloverride/AccidentalOverride.java:41:13
-  (call_ref $function.m_foo__java_lang_Error__void (ref.as_non_null (local.get $this))(ref.cast null $java.lang.Error (local.get $arg0))(struct.get $accidentaloverride.Parent.vtable $m_foo__java_lang_Error__void (struct.get $accidentaloverride.Parent $vtable(local.get $this))))
+  (call_ref $function.m_foo__java_lang_Error__void (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Error) (local.get $arg0))(struct.get $accidentaloverride.Parent.vtable $m_foo__java_lang_Error__void (struct.get $accidentaloverride.Parent $vtable(local.get $this))))
  )
 )
 (elem declare func $m_foo__java_lang_Object__void@accidentaloverride.AccidentalOverride)
@@ -501,7 +501,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $accidentaloverride.AccidentalOverride))
- (local.set $this (ref.cast $accidentaloverride.AccidentalOverride (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $accidentaloverride.AccidentalOverride) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@accidentaloverride.AccidentalOverride) ))
  )

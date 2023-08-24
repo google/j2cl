@@ -407,7 +407,7 @@
  (local $instance (ref null $anonymousclass.SomeClass))
  (local $instanceWithStaticMembers (ref null $anonymousclass.SomeClassWithStaticMembers))
  (local $this (ref null $anonymousclass.AnonymousClass))
- (local.set $this (ref.cast $anonymousclass.AnonymousClass (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $anonymousclass.AnonymousClass) (local.get $this.untyped)))
  (block
   ;;@ anonymousclass/AnonymousClass.java:36:4
   (local.set $instance (call $$create__anonymousclass_AnonymousClass__int@anonymousclass.AnonymousClass.1 (local.get $this)(struct.get $anonymousclass.AnonymousClass $f_i__anonymousclass_AnonymousClass (local.get $this))))
@@ -454,7 +454,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $anonymousclass.AnonymousClass))
- (local.set $this (ref.cast $anonymousclass.AnonymousClass (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $anonymousclass.AnonymousClass) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@anonymousclass.AnonymousClass) ))
  )
@@ -518,7 +518,7 @@
  (result (ref null $java.lang.String))
  ;;@ anonymousclass/AnonymousClass.java:41:24
  (local $this (ref null $anonymousclass.AnonymousClass.1))
- (local.set $this (ref.cast $anonymousclass.AnonymousClass.1 (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $anonymousclass.AnonymousClass.1) (local.get $this.untyped)))
  (block
   ;;@ anonymousclass/AnonymousClass.java:42:12
   (return (call $function.no.side.effects.$getString_|a|__java_lang_String (ref.func $$getString_|a|__java_lang_String@anonymousclass.AnonymousClass.1) ))
@@ -575,7 +575,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $anonymousclass.AnonymousClass.1))
- (local.set $this (ref.cast $anonymousclass.AnonymousClass.1 (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $anonymousclass.AnonymousClass.1) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@anonymousclass.AnonymousClass.1) ))
  )
@@ -652,7 +652,7 @@
  (result (ref null $java.lang.String))
  ;;@ anonymousclass/AnonymousClass.java:52:24
  (local $this (ref null $anonymousclass.AnonymousClass.2))
- (local.set $this (ref.cast $anonymousclass.AnonymousClass.2 (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $anonymousclass.AnonymousClass.2) (local.get $this.untyped)))
  (block
   ;;@ anonymousclass/AnonymousClass.java:53:12
   (return (call $function.no.side.effects.$getString_|a|__java_lang_String (ref.func $$getString_|a|__java_lang_String@anonymousclass.AnonymousClass.1) ))
@@ -709,7 +709,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $anonymousclass.AnonymousClass.2))
- (local.set $this (ref.cast $anonymousclass.AnonymousClass.2 (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $anonymousclass.AnonymousClass.2) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@anonymousclass.AnonymousClass.2) ))
  )
@@ -767,7 +767,7 @@
  (result (ref null $java.lang.String))
  ;;@ anonymousclass/AnonymousClass.java:62:22
  (local $this (ref null $anonymousclass.SomeInterface.1))
- (local.set $this (ref.cast $anonymousclass.SomeInterface.1 (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $anonymousclass.SomeInterface.1) (local.get $this.untyped)))
  (block
   ;;@ anonymousclass/AnonymousClass.java:63:10
   (return (call $function.no.side.effects.$getString_|a|__java_lang_String (ref.func $$getString_|a|__java_lang_String@anonymousclass.AnonymousClass.1) ))
@@ -812,7 +812,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $anonymousclass.SomeInterface.1))
- (local.set $this (ref.cast $anonymousclass.SomeInterface.1 (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $anonymousclass.SomeInterface.1) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@anonymousclass.SomeInterface.1) ))
  )

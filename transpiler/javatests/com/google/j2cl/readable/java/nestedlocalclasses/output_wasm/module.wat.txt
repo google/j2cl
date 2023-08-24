@@ -357,7 +357,7 @@
  ;;@ nestedlocalclasses/NestedLocalClasses.java:19:14
  (local $localVar i32)
  (local $this (ref null $nestedlocalclasses.NestedLocalClasses))
- (local.set $this (ref.cast $nestedlocalclasses.NestedLocalClasses (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $nestedlocalclasses.NestedLocalClasses) (local.get $this.untyped)))
  (block
   ;;@ nestedlocalclasses/NestedLocalClasses.java:20:4
   (local.set $localVar (i32.const 1))
@@ -402,7 +402,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedlocalclasses.NestedLocalClasses))
- (local.set $this (ref.cast $nestedlocalclasses.NestedLocalClasses (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $nestedlocalclasses.NestedLocalClasses) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nestedlocalclasses.NestedLocalClasses) ))
  )
@@ -459,7 +459,7 @@
  (param $this.untyped (ref $java.lang.Object))
  ;;@ nestedlocalclasses/NestedLocalClasses.java:41:12
  (local $this (ref null $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super))
- (local.set $this (ref.cast $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super) (local.get $this.untyped)))
  (block
   ;;@ nestedlocalclasses/NestedLocalClasses.java:41:12
   (call $m_foo__void@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference (ref.as_non_null (local.get $this)))
@@ -506,7 +506,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super))
- (local.set $this (ref.cast $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super) ))
  )
@@ -610,7 +610,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass))
- (local.set $this (ref.cast $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass) ))
  )
@@ -714,7 +714,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal))
- (local.set $this (ref.cast $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal) ))
  )
@@ -774,7 +774,7 @@
  ;;@ nestedlocalclasses/NestedLocalClasses.java:22:18
  (local $localVarInInnerClass i32)
  (local $this (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass))
- (local.set $this (ref.cast $nestedlocalclasses.NestedLocalClasses.1InnerClass (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $nestedlocalclasses.NestedLocalClasses.1InnerClass) (local.get $this.untyped)))
  (block
   ;;@ nestedlocalclasses/NestedLocalClasses.java:23:8
   (local.set $localVarInInnerClass (i32.const 1))
@@ -821,7 +821,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass))
- (local.set $this (ref.cast $nestedlocalclasses.NestedLocalClasses.1InnerClass (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $nestedlocalclasses.NestedLocalClasses.1InnerClass) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nestedlocalclasses.NestedLocalClasses.1InnerClass) ))
  )
@@ -909,7 +909,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1))
- (local.set $this (ref.cast $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 (local.get $this.untyped)))
+ (local.set $this (ref.cast (ref $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1) (local.get $this.untyped)))
  (block
   (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1) ))
  )
