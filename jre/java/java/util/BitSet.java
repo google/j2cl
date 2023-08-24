@@ -289,7 +289,7 @@ public class BitSet implements Cloneable {
   }
 
   public void clear() {
-    array = ArrayHelper.ensureSize(array, 0);
+    Arrays.fill(array, 0, wordLength, 0);
     wordLength = 0;
   }
 
