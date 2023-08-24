@@ -227,9 +227,8 @@ public class ResolveCaptures extends NormalizationPass {
                       0,
                       invocation.getQualifier(),
                       // Consider the outer instance type to be nullable to be make the type
-                      // consistent
-                      // accross all places where it is used (backing field and constructor
-                      // parameters).
+                      // consistent across all places where it is used (backing field and
+                      // constructor parameters).
                       targetTypeDescriptor.getEnclosingTypeDescriptor().toNullable())
                   .setQualifier(null);
             }
@@ -441,7 +440,7 @@ public class ResolveCaptures extends NormalizationPass {
                 .getEnclosingTypeDeclaration()
                 .toUnparameterizedTypeDescriptor()
                 // Consider the outer instance type to be nullable to be make the type consistent
-                // accross all places where it is used (backing field and constructor parameters).
+                // across all places where it is used (backing field and constructor parameters).
                 .toNullable())
         .setSynthetic(true)
         .setFinal(true)
