@@ -144,7 +144,7 @@ public class BitSet implements Cloneable {
     // we can work around this by adding 0 to the arrays.
     int newLength = newMaxIndex + 1;
     if (newLength > array.length) {
-      array = ArrayHelper.ensureSize(array, newLength);
+      array = ArrayHelper.grow(array, newLength);
     }
   }
 

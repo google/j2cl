@@ -620,7 +620,7 @@ public final class String implements Comparable<String>, CharSequence, Serializa
       // subgroup handling
       NativeRegExp.Match matchObj = compiled.exec(trail);
       if (count == out.length) {
-        out = ArrayHelper.ensureSize(out, count + 1);
+        out = ArrayHelper.grow(out, count + 1);
       }
       if (matchObj == null || trail.isEmpty() || (matchCount == (maxMatch - 1) && maxMatch > 0)) {
         out[count++] = trail;

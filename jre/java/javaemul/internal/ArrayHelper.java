@@ -81,11 +81,11 @@ public final class ArrayHelper {
    * Resize the array to accommodate requested length. For JavaScript this is same as setting the
    * length.
    */
-  public static <T> T ensureSize(T array, int length) {
+  public static <T> T grow(T array, int length) {
     return setLength(array, length);
   }
 
-  public static void push(Object array, @DoNotAutobox Object o) {
+  public static void push(Object[] array, Object o) {
     asNativeArray(array).push(o);
   }
 
@@ -96,18 +96,6 @@ public final class ArrayHelper {
 
   public static void fill(Object array, @DoNotAutobox Object value) {
     asNativeArray(array).fill(value);
-  }
-
-  /**
-   * Sets an element of an array.
-   *
-   * <p>In GWT, the naive approach of checking or setting an element which may be out of bounds is
-   * optimal. This method always returns the original value, or null for out of bounds.
-   */
-  public static <T> T setAt(T[] array, int index, T value) {
-    T originalValue = array[index];
-    array[index] = value;
-    return originalValue;
   }
 
   public static void removeFrom(Object[] array, int index, int deleteCount) {
@@ -314,7 +302,7 @@ public final class ArrayHelper {
 
     NativeArray(int length) {}
 
-    native void push(@DoNotAutobox Object item);
+    native void push(Object item);
 
     native Object[] slice();
 

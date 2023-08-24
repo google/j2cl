@@ -60,7 +60,7 @@ public final class ArrayHelper {
     return array;
   }
 
-  public static <T> T ensureSize(T array, int length) {
+  public static <T> T grow(T array, int length) {
     return setLength(array, length);
   }
 
@@ -182,19 +182,6 @@ public final class ArrayHelper {
 
   @Wasm("array.fill $java.lang.Object.array")
   private static native void nativeFill(Object[] array, int offset, Object value, int size);
-
-  public static <T> T setAt(T[] array, int index, T value) {
-    WasmArray wasmArray = asWasmArray(array);
-    T originalValue;
-    if (wasmArray.getLength() < index + 1) {
-      wasmArray.setLength(index + 1);
-      originalValue = null;
-    } else {
-      originalValue = array[index];
-    }
-    array[index] = value;
-    return originalValue;
-  }
 
   public static void removeFrom(Object[] array, int index, int deleteCount) {
     // Copy the items after deletion end, overwriting deleted items.

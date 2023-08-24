@@ -33,7 +33,7 @@ public final class PrimitiveLists {
     public void push(byte element) {
       byte[] array = this.array;
       if (size == array.length) {
-        array = ArrayHelper.ensureSize(array, size + 1);
+        array = ArrayHelper.grow(array, size + 1);
         this.array = array;
       }
       array[size++] = element;
@@ -71,7 +71,7 @@ public final class PrimitiveLists {
     public void push(int element) {
       int[] array = this.array;
       if (size == array.length) {
-        array = ArrayHelper.ensureSize(array, size + 1);
+        array = ArrayHelper.grow(array, size + 1);
         this.array = array;
       }
       array[size++] = element;
@@ -109,7 +109,7 @@ public final class PrimitiveLists {
     public void push(long element) {
       long[] array = this.array;
       if (size == array.length) {
-        array = ArrayHelper.ensureSize(array, size + 1);
+        array = ArrayHelper.grow(array, size + 1);
         this.array = array;
       }
       array[size++] = element;
@@ -147,7 +147,7 @@ public final class PrimitiveLists {
     public void push(double element) {
       double[] array = this.array;
       if (size == array.length) {
-        array = ArrayHelper.ensureSize(array, size + 1);
+        array = ArrayHelper.grow(array, size + 1);
         this.array = array;
       }
       array[size++] = element;
