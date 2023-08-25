@@ -192,12 +192,8 @@ public final class ArrayHelper {
   }
 
   public static void insertTo(Object[] array, int index, Object value) {
-    insertTo(array, index, new Object[] {value});
-  }
-
-  public static void insertTo(Object[] array, int index, Object[] values) {
     ((WasmArray.OfObject) asWasmArray(array))
-        .insertFrom(index, (WasmArray.OfObject) asWasmArray(values));
+        .insertFrom(index, (WasmArray.OfObject) asWasmArray(new Object[] {value}));
   }
 
   public static void copy(Object array, int srcOfs, Object dest, int destOfs, int len) {

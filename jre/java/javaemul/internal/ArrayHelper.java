@@ -106,19 +106,6 @@ public final class ArrayHelper {
     asNativeArray(array).splice(index, 0, value);
   }
 
-  public static void insertTo(Object[] array, int insertIndex, Object[] values) {
-    int newLength = array.length + values.length;
-    setLength(array, newLength);
-
-    // Make room for the values that will be inserted by moving the existing elements to the
-    // end so that they are not overwritten.
-    int insertEndIndex = insertIndex + values.length;
-    copy(array, insertIndex, array, insertEndIndex, newLength - insertEndIndex);
-
-    // Copy new values into the insert location.
-    copy(values, 0, array, insertIndex, values.length);
-  }
-
   public static void copy(Object array, int srcOfs, Object dest, int destOfs, int len) {
     copy(
         JsUtils.<Object[]>uncheckedCast(array),
