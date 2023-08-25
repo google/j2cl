@@ -121,11 +121,23 @@ def _diff(original, modified, filter_noise):
     wasm_dis_cmd = ["blaze-bin/third_party/binaryen/wasm-dis", "--enable-gc"]
     repo_util.run_cmd(
         wasm_dis_cmd
-        + [original.get_output_file(), "-o", original.get_formatted_file()]
+        + [
+            original.get_output_file(),
+            "--source-map",
+            original.get_output_file() + ".map",
+            "-o",
+            original.get_formatted_file(),
+        ]
     )
     repo_util.run_cmd(
         wasm_dis_cmd
-        + [modified.get_output_file(), "-o", modified.get_formatted_file()]
+        + [
+            modified.get_output_file(),
+            "--source-map",
+            modified.get_output_file() + ".map",
+            "-o",
+            modified.get_formatted_file(),
+        ]
     )
   else:
     print("  Formatting.")
