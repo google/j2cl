@@ -1130,7 +1130,7 @@
  (local.set $this (ref.cast (ref $innerclassinitorder.InnerClassInitOrder) (local.get $this.untyped)))
  (block
   ;;@ innerclassinitorder/InnerClassInitOrder.java:230:4
-  (local.set $results (call $$create__int@javaemul.internal.WasmArray.OfObject (i32.const 10)))
+  (local.set $results (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 10)))
   ;;@ innerclassinitorder/InnerClassInitOrder.java:231:4
   (local.set $i (i32.const 0))
   (block $LOOP.BREAK
@@ -1153,7 +1153,7 @@
   (local.set $$index (i32.const 0))
   (block $LOOP_1.BREAK
    (loop
-    (br_if 1 (i32.eqz (i32.lt_s (local.get $$index) (struct.get $javaemul.internal.WasmArray $f_length__javaemul_internal_WasmArray (local.get $$array)))))
+    (br_if 1 (i32.eqz (i32.lt_s (local.get $$index) (array.len (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject (local.get $$array))))))
     (block $LOOP_1.CONTINUE
      (block
       ;;@ innerclassinitorder/InnerClassInitOrder.java:240:4

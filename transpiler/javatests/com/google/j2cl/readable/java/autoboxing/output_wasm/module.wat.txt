@@ -563,7 +563,7 @@
   (local.set $$index (i32.const 0))
   (block $LOOP.BREAK
    (loop
-    (br_if 1 (i32.eqz (i32.lt_s (local.get $$index) (struct.get $javaemul.internal.WasmArray $f_length__javaemul_internal_WasmArray (local.get $$array)))))
+    (br_if 1 (i32.eqz (i32.lt_s (local.get $$index) (array.len (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject (local.get $$array))))))
     (block $LOOP.CONTINUE
      (block
       ;;@ autoboxing/AutoBoxing.java:108:4
@@ -609,7 +609,7 @@
   (local.set $$index (i32.const 0))
   (block $LOOP.BREAK
    (loop
-    (br_if 1 (i32.eqz (i32.lt_s (local.get $$index) (struct.get $javaemul.internal.WasmArray $f_length__javaemul_internal_WasmArray (local.get $$array)))))
+    (br_if 1 (i32.eqz (i32.lt_s (local.get $$index) (array.len (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject (local.get $$array))))))
     (block $LOOP.CONTINUE
      (block
       ;;@ autoboxing/AutoBoxing.java:117:4

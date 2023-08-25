@@ -1005,6 +1005,12 @@ public class NormalizeInstantiationThroughFactoryMethods extends LibraryNormaliz
         superTypeDeclaration == null
             ? ImmutableList.of()
             : getAllInstanceFields(superTypeDeclaration);
+    if (TypeDescriptors.isWasmArraySubtype(typeDeclaration.toUnparameterizedTypeDescriptor())) {
+      // Drop WasmArray.elements so that it does not get initialized since it will be merged later.
+      Field lastField = Iterables.getLast(superTypeFields);
+      checkState(lastField.getDescriptor().getName().equals("elements"));
+      superTypeFields = superTypeFields.subList(0, superTypeFields.size() - 1);
+    }
     ImmutableList<Field> instanceFields =
         ImmutableList.<Field>builder()
             .addAll(superTypeFields)

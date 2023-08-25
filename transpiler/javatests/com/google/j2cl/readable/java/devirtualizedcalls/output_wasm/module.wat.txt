@@ -219,9 +219,9 @@
   ;;@ devirtualizedcalls/ArrayCalls.java:20:4
   (local.set $array2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@devirtualizedcalls.ArrayCalls-1 (i32.const 0) (i32.const 2)))(i32.const -1)))
   ;;@ devirtualizedcalls/ArrayCalls.java:22:4
-  (local.set $length1 (struct.get $javaemul.internal.WasmArray $f_length__javaemul_internal_WasmArray (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject (local.get $array2d)) (i32.const 0)))))
+  (local.set $length1 (array.len (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject (local.get $array2d)) (i32.const 0))))))
   ;;@ devirtualizedcalls/ArrayCalls.java:23:4
-  (local.set $length2 (struct.get $javaemul.internal.WasmArray $f_length__javaemul_internal_WasmArray (local.get $array2d)))
+  (local.set $length2 (array.len (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject (local.get $array2d))))
  )
 )
 (elem declare func $m_main__void@devirtualizedcalls.ArrayCalls)
@@ -752,7 +752,7 @@
   ;;@ devirtualizedcalls/ObjectCalls.java:26:4
   (drop (call_ref $function.m_getClass__java_lang_Class (ref.as_non_null (local.get $object))(struct.get $java.lang.Object.vtable $m_getClass__java_lang_Class (struct.get $java.lang.Object $vtable(local.get $object)))))
   ;;@ devirtualizedcalls/ObjectCalls.java:28:4
-  (local.set $objectCalls (call $$create__int@javaemul.internal.WasmArray.OfObject (i32.const 1)))
+  (local.set $objectCalls (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 1)))
   ;;@ devirtualizedcalls/ObjectCalls.java:29:4
   (drop (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $objectCalls))(local.get $objectCalls)(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(local.get $objectCalls)))))
   ;;@ devirtualizedcalls/ObjectCalls.java:30:4

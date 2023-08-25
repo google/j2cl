@@ -443,7 +443,7 @@ public class ArrayDeque<E> extends AbstractCollection<E> implements Deque<E>, Cl
       array = newArray;
       head = 0;
     } else {
-      ArrayHelper.setLength(array, newLength);
+      array = ArrayHelper.setLength(array, newLength);
     }
     tail = numElements;
   }

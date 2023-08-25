@@ -13,21 +13,21 @@ import jsinterop.annotations.JsMethod;
  */
 abstract class WasmArray implements Serializable, Cloneable {
 
-  int length;
+  @Wasm("array")
+  private static interface ArrayRef { }
 
-  protected WasmArray(int length) {
-    this.length = length;
-  }
+  // Special treated by compiler and merged with subtype's element field.
+  final ArrayRef elements = null;
 
   public final int getLength() {
-    return length;
+    return arrayLen(elements);
   }
+
+  @Wasm("array.len")
+  private static final native int arrayLen(ArrayRef elements);
 
   /** Create a new array of same type with given length. */
   abstract Object newArray(int length);
-
-  /** Change the length of the array. May resize storage if necessary. */
-  abstract void setLength(int length);
 
   abstract void copyFrom(int offset, WasmArray values, int valueOffset, int len);
 
@@ -86,10 +86,4 @@ abstract class WasmArray implements Serializable, Cloneable {
   }
 
   %SUBTYPES%
-
-  private static int getNewCapacity(int originalCapacity, int requestedCapacity) {
-    // Grow roughly with 1.5x rate at minimum.
-    int minCapacity = originalCapacity + (originalCapacity >> 1) + 1;
-    return Math.max(minCapacity, requestedCapacity);
-  }
 }

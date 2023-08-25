@@ -23,10 +23,6 @@ import javaemul.internal.annotations.Wasm;
 /** Provides utilities to perform operations on Arrays. */
 public final class ArrayHelper {
 
-  public static <T> T clone(T array) {
-    return (T) cloneImpl(array, 0, getLength(array));
-  }
-
   public static <T> T clone(T array, int fromIndex, int toIndex) {
     return (T) cloneImpl(array, fromIndex, toIndex);
   }
@@ -37,8 +33,9 @@ public final class ArrayHelper {
 
   private static Object cloneImpl(Object array, int fromIndex, int toIndex) {
     int newLength = toIndex - fromIndex;
-    Object targetArray = asWasmArray(array).newArray(newLength);
-    int endIndex = Math.min(getLength(array), toIndex);
+    WasmArray wasmArray = asWasmArray(array);
+    Object targetArray = wasmArray.newArray(newLength);
+    int endIndex = Math.min(wasmArray.getLength(), toIndex);
     copy(array, fromIndex, targetArray, 0, endIndex - fromIndex);
     return targetArray;
   }
@@ -55,33 +52,22 @@ public final class ArrayHelper {
     return asWasmArray(array).getLength();
   }
 
-  public static <T> T setLength(T array, int length) {
-    asWasmArray(array).setLength(length);
-    return array;
+  public static <T> T setLength(T array, int newLength) {
+    return getLength(array) == newLength ? array : clone(array, 0, newLength);
   }
 
+  /**
+   * Resize the array to accommodate requested length. For Wasm, the size is increased in larger
+   * chunks to amortize cost of growing similar to JavaScript.
+   */
   public static <T> T grow(T array, int length) {
-    return setLength(array, length);
+    return clone(array, 0, getNewCapacity(getLength(array), length));
   }
 
-  public static void push(Object[] array, Object o) {
-    ((WasmArray.OfObject) asWasmArray(array)).push(o);
-  }
-
-  public static void push(byte[] array, byte o) {
-    ((WasmArray.OfByte) asWasmArray(array)).push(o);
-  }
-
-  public static void push(int[] array, int o) {
-    ((WasmArray.OfInt) asWasmArray(array)).push(o);
-  }
-
-  public static void push(long[] array, long o) {
-    ((WasmArray.OfLong) asWasmArray(array)).push(o);
-  }
-
-  public static void push(double[] array, double o) {
-    ((WasmArray.OfDouble) asWasmArray(array)).push(o);
+  public static int getNewCapacity(int originalCapacity, int requestedCapacity) {
+    // Grow roughly with 1.5x rate at minimum.
+    int minCapacity = originalCapacity + (originalCapacity >> 1) + 1;
+    return Math.max(minCapacity, requestedCapacity);
   }
 
   public static void fill(int[] array, int value) {
@@ -182,19 +168,6 @@ public final class ArrayHelper {
 
   @Wasm("array.fill $java.lang.Object.array")
   private static native void nativeFill(Object[] array, int offset, Object value, int size);
-
-  public static void removeFrom(Object[] array, int index, int deleteCount) {
-    // Copy the items after deletion end, overwriting deleted items.
-    int copyFrom = index + deleteCount;
-    copy(array, copyFrom, array, index, array.length - copyFrom);
-    // Trim the end array.
-    setLength(array, array.length - deleteCount);
-  }
-
-  public static void insertTo(Object[] array, int index, Object value) {
-    ((WasmArray.OfObject) asWasmArray(array))
-        .insertFrom(index, (WasmArray.OfObject) asWasmArray(new Object[] {value}));
-  }
 
   public static void copy(Object array, int srcOfs, Object dest, int destOfs, int len) {
     asWasmArray(dest).copyFrom(destOfs, asWasmArray(array), srcOfs, len);

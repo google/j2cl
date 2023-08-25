@@ -19,7 +19,6 @@ import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
-import javaemul.internal.ArrayHelper;
 import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
 
@@ -36,7 +35,6 @@ public class Main {
     testClassLiterals();
     testArrayInstanceOf();
     testArrayGetClass();
-    testWasmArrayApis();
   }
 
   private static void testWasmAnnotation() {
@@ -142,29 +140,5 @@ public class Main {
     Object objectArray = new Object[0];
     assertEquals(Object[].class, objectArray.getClass());
     assertEquals(Object.class, objectArray.getClass().getComponentType());
-  }
-
-  private static void testWasmArrayApis() {
-    Object[] array = new Object[0];
-    ArrayHelper.push(array, "c");
-    ArrayHelper.push(array, "d");
-    assertEquals(array, new Object[] {"c", "d"});
-
-    ArrayHelper.insertTo(array, 0, "a");
-    assertEquals(array, new Object[] {"a", "c", "d"});
-    ArrayHelper.insertTo(array, 1, "b");
-    assertEquals(array, new Object[] {"a", "b", "c", "d"});
-
-    ArrayHelper.removeFrom(array, 3, 1);
-    ArrayHelper.removeFrom(array, 0, 1);
-    assertEquals(array, new Object[] {"b", "c"});
-
-    ArrayHelper.setLength(array, 5);
-    assertEquals(array, new Object[] {"b", "c", null, null, null});
-    ArrayHelper.setLength(array, 1);
-    assertEquals(array, new Object[] {"b"});
-
-    Object[] clone = ArrayHelper.clone(new Object[] {"a", "b"}, 0, 4);
-    assertEquals(clone, new Object[] {"a", "b", null, null});
   }
 }

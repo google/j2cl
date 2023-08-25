@@ -184,9 +184,8 @@ public class ImplementArraysAsClasses extends NormalizationPass {
               return arrayLength;
             }
 
-            return FieldAccess.Builder.from(
-                    TypeDescriptors.get().javaemulInternalWasmArray.getFieldDescriptor("length"))
-                .setQualifier(arrayLength.getArrayExpression())
+            return ArrayLength.Builder.from(arrayLength)
+                .setArrayExpression(getInnerNativeArrayExpression(arrayLength.getArrayExpression()))
                 .build();
           }
 
@@ -258,10 +257,9 @@ public class ImplementArraysAsClasses extends NormalizationPass {
 
             checkState(newArray.getDimensionExpressions().size() == 1);
 
-            return NewInstance.Builder.from(
+            return MethodCall.Builder.from(
                     TypeDescriptors.getWasmArrayType(newArray.getTypeDescriptor())
-                        .getMethodDescriptor(
-                            MethodDescriptor.CONSTRUCTOR_METHOD_NAME, PrimitiveTypes.INT))
+                        .getMethodDescriptor("newWithLength", PrimitiveTypes.INT))
                 .setArguments(newArray.getDimensionExpressions().get(0))
                 .build();
           }

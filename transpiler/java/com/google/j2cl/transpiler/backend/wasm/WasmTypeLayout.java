@@ -13,45 +13,58 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
 package com.google.j2cl.transpiler.backend.wasm;
+
+import static com.google.common.base.Preconditions.checkState;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
+import com.google.common.collect.ImmutableList;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import javax.annotation.Nullable;
 
 /** Runtime representation of a Java class in Wasm. */
 @AutoValue
 abstract class WasmTypeLayout {
-
   static WasmTypeLayout create(Type javaType, WasmTypeLayout wasmSupertypeLayout) {
     return new AutoValue_WasmTypeLayout(javaType, wasmSupertypeLayout);
   }
 
   /** The Java class represented by this Wasm type. */
   abstract Type getJavaType();
+
   /** The wasm representation of the superclass for this Java class. */
   @Nullable
   abstract WasmTypeLayout getWasmSupertypeLayout();
 
   /** Returns all the fields that will be in the layout for struct for the Java class. */
   @Memoized
-  Collection<Field> getAllInstanceFields() {
-    Set<Field> instanceFields = new LinkedHashSet<>();
+  List<Field> getAllInstanceFields() {
+    List<Field> instanceFields = new ArrayList<>();
     if (getWasmSupertypeLayout() != null) {
       instanceFields.addAll(getWasmSupertypeLayout().getAllInstanceFields());
     }
-    instanceFields.addAll(getJavaType().getInstanceFields());
+    ImmutableList<Field> declaredInstanceFields = getJavaType().getInstanceFields();
+    if (TypeDescriptors.isWasmArraySubtype(getJavaType().getTypeDescriptor())) {
+      // TODO(b/296475021): Remove the hack to treat the field as overriden by subclass' field.
+      // Override the type of the elements field in Wasm arrays by replacing the WasmArray elements
+      // field with that of their subtype.
+      // Relies on the elements field being the last declared filed in WasmArray and also being
+      // the first in the WasmArray subclass.
+      checkState(declaredInstanceFields.get(0).getDescriptor().getName().equals("elements"));
+      Field removedField = instanceFields.remove(instanceFields.size() - 1);
+      checkState(removedField.getDescriptor().getName().equals("elements"));
+    }
+    instanceFields.addAll(declaredInstanceFields);
     return instanceFields;
   }
 
