@@ -406,9 +406,8 @@ final class ExpressionTranspiler {
             .getWasmTypeLayout(newInstance.getTypeDescriptor().getTypeDeclaration())
             .getAllInstanceFields()
             .forEach(
-                f -> {
+                fieldDescriptor -> {
                   sourceBuilder.append(" ");
-                  FieldDescriptor fieldDescriptor = f.getDescriptor();
                   Expression initialValue = fieldDescriptor.getTypeDescriptor().getDefaultValue();
                   // TODO(b/296475021): Cleanup the handling of the elements field.
                   if (environment.isWasmArrayElementsField(fieldDescriptor)) {

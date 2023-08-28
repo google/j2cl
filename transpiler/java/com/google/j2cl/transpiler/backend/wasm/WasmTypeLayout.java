@@ -16,12 +16,14 @@
 package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Field;
+import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
@@ -48,22 +50,27 @@ abstract class WasmTypeLayout {
 
   /** Returns all the fields that will be in the layout for struct for the Java class. */
   @Memoized
-  List<Field> getAllInstanceFields() {
-    List<Field> instanceFields = new ArrayList<>();
+  Collection<FieldDescriptor> getAllInstanceFields() {
+    List<FieldDescriptor> instanceFields = new ArrayList<>();
+
     if (getWasmSupertypeLayout() != null) {
       instanceFields.addAll(getWasmSupertypeLayout().getAllInstanceFields());
     }
-    ImmutableList<Field> declaredInstanceFields = getJavaType().getInstanceFields();
+    ImmutableList<FieldDescriptor> declaredInstanceFields =
+        getJavaType().getInstanceFields().stream()
+            .map(Field::getDescriptor)
+            .collect(toImmutableList());
     if (TypeDescriptors.isWasmArraySubtype(getJavaType().getTypeDescriptor())) {
       // TODO(b/296475021): Remove the hack to treat the field as overriden by subclass' field.
       // Override the type of the elements field in Wasm arrays by replacing the WasmArray elements
       // field with that of their subtype.
       // Relies on the elements field being the last declared filed in WasmArray and also being
       // the first in the WasmArray subclass.
-      checkState(declaredInstanceFields.get(0).getDescriptor().getName().equals("elements"));
-      Field removedField = instanceFields.remove(instanceFields.size() - 1);
-      checkState(removedField.getDescriptor().getName().equals("elements"));
+      checkState(declaredInstanceFields.get(0).getName().equals("elements"));
+      FieldDescriptor removedField = instanceFields.remove(instanceFields.size() - 1);
+      checkState(removedField.getName().equals("elements"));
     }
+
     instanceFields.addAll(declaredInstanceFields);
     return instanceFields;
   }

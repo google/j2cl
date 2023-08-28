@@ -33,6 +33,7 @@ import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Field;
+import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
@@ -627,15 +628,15 @@ public class WasmOutputsGenerator {
             "(field $itable (ref %s))", environment.getWasmItableTypeName(type.getDeclaration())));
 
     WasmTypeLayout wasmType = environment.getWasmTypeLayout(type.getDeclaration());
-    for (Field field : wasmType.getAllInstanceFields()) {
+    for (FieldDescriptor fieldDescriptor : wasmType.getAllInstanceFields()) {
       builder.newLine();
-      String fieldType = environment.getWasmFieldType(field.getDescriptor().getTypeDescriptor());
+      String fieldType = environment.getWasmFieldType(fieldDescriptor.getTypeDescriptor());
 
       // TODO(b/296475021): Cleanup the handling of the arrays elements field.
-      if (!environment.isWasmArrayElementsField(field.getDescriptor())) {
+      if (!environment.isWasmArrayElementsField(fieldDescriptor)) {
         fieldType = format("(mut %s)", fieldType);
       }
-      builder.append(format("(field %s %s)", environment.getFieldName(field), fieldType));
+      builder.append(format("(field %s %s)", environment.getFieldName(fieldDescriptor), fieldType));
     }
   }
 
