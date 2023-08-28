@@ -630,7 +630,9 @@ public class WasmOutputsGenerator {
     for (Field field : wasmType.getAllInstanceFields()) {
       builder.newLine();
       String fieldType = environment.getWasmFieldType(field.getDescriptor().getTypeDescriptor());
-      if (!field.isImmutable()) {
+
+      // TODO(b/296475021): Cleanup the handling of the arrays elements field.
+      if (!environment.isWasmArrayElementsField(field.getDescriptor())) {
         fieldType = format("(mut %s)", fieldType);
       }
       builder.append(format("(field %s %s)", environment.getFieldName(field), fieldType));

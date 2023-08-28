@@ -107,7 +107,7 @@
   (field $vtable (ref $cast.CastGenerics.1Nested.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $$outer_this__cast_CastGenerics_1Nested (ref null $cast.CastGenerics))
+  (field $$outer_this__cast_CastGenerics_1Nested (mut (ref null $cast.CastGenerics)))
   ))
  )
  (type $cast.CastGenerics.1Nested.vtable (sub $java.lang.Object.vtable (struct
@@ -203,7 +203,7 @@
   (field $vtable (ref $cast.Casts.Foo.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $$outer_this__cast_Casts_Foo (ref null $cast.Casts))
+  (field $$outer_this__cast_Casts_Foo (mut (ref null $cast.Casts)))
   (field $f_field__cast_Casts_Foo (mut (ref null $java.lang.Object)))
   ))
  )
@@ -1286,7 +1286,7 @@
  (local $$instance (ref null $cast.CastGenerics.1Nested))
  (block
   ;;@ cast/CastGenerics.java:114:10
-  (local.set $$instance (struct.new $cast.CastGenerics.1Nested (ref.as_non_null (global.get $cast.CastGenerics.1Nested.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (local.get $$outer_this)))
+  (local.set $$instance (struct.new $cast.CastGenerics.1Nested (ref.as_non_null (global.get $cast.CastGenerics.1Nested.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $cast.CastGenerics)))
   ;;@ cast/CastGenerics.java:114:10
   (call $$ctor__cast_CastGenerics__void_$p_cast_CastGenerics_1Nested@cast.CastGenerics.1Nested (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ cast/CastGenerics.java:114:10
@@ -1302,6 +1302,8 @@
  (block
   ;;@ cast/CastGenerics.java:114:10
   (call $$clinit__void@cast.CastGenerics.1Nested )
+  ;;@ cast/CastGenerics.java:114:10
+  (struct.set $cast.CastGenerics.1Nested $$outer_this__cast_CastGenerics_1Nested (local.get $this) (local.get $$outer_this))
   ;;@ cast/CastGenerics.java:114:10
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -2636,7 +2638,7 @@
  (local $$instance (ref null $cast.Casts.Foo))
  (block
   ;;@ cast/Casts.java:80:16
-  (local.set $$instance (struct.new $cast.Casts.Foo (ref.as_non_null (global.get $cast.Casts.Foo.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (local.get $$outer_this) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $cast.Casts.Foo (ref.as_non_null (global.get $cast.Casts.Foo.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $cast.Casts) (ref.null $java.lang.Object)))
   ;;@ cast/Casts.java:80:16
   (call $$ctor__cast_Casts__void_$p_cast_Casts_Foo@cast.Casts.Foo (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ cast/Casts.java:80:16
@@ -2652,6 +2654,8 @@
  (block
   ;;@ cast/Casts.java:80:16
   (call $$clinit__void@cast.Casts.Foo )
+  ;;@ cast/Casts.java:80:16
+  (struct.set $cast.Casts.Foo $$outer_this__cast_Casts_Foo (local.get $this) (local.get $$outer_this))
   ;;@ cast/Casts.java:80:16
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;;@ cast/Casts.java:80:16

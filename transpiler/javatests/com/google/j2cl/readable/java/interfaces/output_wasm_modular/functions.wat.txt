@@ -157,7 +157,7 @@
  (local.set $this (ref.cast (ref $interfaces.Main) (local.get $this.untyped)))
  (block
   ;;@ interfaces/Main.java:50:4
-  (local.set $i (struct.new $interfaces.Main.Implementor (ref.as_non_null (global.get $interfaces.Main.Implementor.vtable)) (ref.as_non_null (global.get $interfaces.Main.Implementor.itable)) (local.get $this)))
+  (local.set $i (struct.new $interfaces.Main.Implementor (ref.as_non_null (global.get $interfaces.Main.Implementor.vtable)) (ref.as_non_null (global.get $interfaces.Main.Implementor.itable)) (ref.null $interfaces.Main)))
   ;;@ interfaces/Main.java:51:4
   (call_ref $function.m_interfaceMethod__void (ref.as_non_null (local.get $i))(struct.get $interfaces.Main.Interface.vtable $m_interfaceMethod__void (ref.cast (ref $interfaces.Main.Interface.vtable) (struct.get $itable $slot1 (struct.get $java.lang.Object $itable (local.get $i))))))
   ;;@ interfaces/Main.java:52:4
@@ -166,7 +166,7 @@
   (call $m_staticInterfaceMethod__void@interfaces.Main.Interface )
   ;;@ interfaces/Main.java:54:4
   (local.set $x (i32.add (block (result i32)
-   (drop (struct.new $interfaces.Main.Implementor (ref.as_non_null (global.get $interfaces.Main.Implementor.vtable)) (ref.as_non_null (global.get $interfaces.Main.Implementor.itable)) (local.get $this)))
+   (drop (struct.new $interfaces.Main.Implementor (ref.as_non_null (global.get $interfaces.Main.Implementor.vtable)) (ref.as_non_null (global.get $interfaces.Main.Implementor.itable)) (ref.null $interfaces.Main)))
    (i32.const 1)
   ) (i32.const 2)))
  )

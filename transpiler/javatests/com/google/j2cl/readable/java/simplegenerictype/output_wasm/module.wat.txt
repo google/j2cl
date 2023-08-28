@@ -3,8 +3,8 @@
   (field $vtable (ref $simplegenerictype.SimpleGenericType.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $f_first__simplegenerictype_SimpleGenericType (ref null $java.lang.Object))
-  (field $f_second__simplegenerictype_SimpleGenericType (ref null $java.lang.Object))
+  (field $f_first__simplegenerictype_SimpleGenericType (mut (ref null $java.lang.Object)))
+  (field $f_second__simplegenerictype_SimpleGenericType (mut (ref null $java.lang.Object)))
   ))
  )
  (type $simplegenerictype.SimpleGenericType.vtable (sub $java.lang.Object.vtable (struct
@@ -45,7 +45,7 @@
  (local $$instance (ref null $simplegenerictype.SimpleGenericType))
  (block
   ;;@ simplegenerictype/SimpleGenericType.java:22:9
-  (local.set $$instance (struct.new $simplegenerictype.SimpleGenericType (ref.as_non_null (global.get $simplegenerictype.SimpleGenericType.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (local.get $t) (local.get $s)))
+  (local.set $$instance (struct.new $simplegenerictype.SimpleGenericType (ref.as_non_null (global.get $simplegenerictype.SimpleGenericType.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ simplegenerictype/SimpleGenericType.java:22:9
   (call $$ctor__java_lang_Object__java_lang_Object__void_$p_simplegenerictype_SimpleGenericType@simplegenerictype.SimpleGenericType (ref.as_non_null (local.get $$instance))(local.get $t)(local.get $s))
   ;;@ simplegenerictype/SimpleGenericType.java:22:9
@@ -64,6 +64,10 @@
   (call $$clinit__void@simplegenerictype.SimpleGenericType )
   ;;@ simplegenerictype/SimpleGenericType.java:22:37
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+  ;;@ simplegenerictype/SimpleGenericType.java:23:4
+  (struct.set $simplegenerictype.SimpleGenericType $f_first__simplegenerictype_SimpleGenericType (local.get $this) (local.get $t))
+  ;;@ simplegenerictype/SimpleGenericType.java:24:4
+  (struct.set $simplegenerictype.SimpleGenericType $f_second__simplegenerictype_SimpleGenericType (local.get $this) (local.get $s))
  )
 )
 

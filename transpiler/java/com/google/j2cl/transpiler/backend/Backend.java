@@ -85,7 +85,6 @@ import com.google.j2cl.transpiler.passes.InsertWideningPrimitiveConversions;
 import com.google.j2cl.transpiler.passes.InsertWideningPrimitiveConversionsJ2kt;
 import com.google.j2cl.transpiler.passes.J2ktRestrictionsChecker;
 import com.google.j2cl.transpiler.passes.JsInteropRestrictionsChecker;
-import com.google.j2cl.transpiler.passes.MakeFieldsFinal;
 import com.google.j2cl.transpiler.passes.MakeVariablesFinal;
 import com.google.j2cl.transpiler.passes.MoveNestedClassesToTop;
 import com.google.j2cl.transpiler.passes.MoveVariableDeclarationsToEnclosingBlock;
@@ -456,8 +455,6 @@ public enum Backend {
           ImplementArraysAsClasses::new,
           InsertExceptionConversionsWasm::new,
 
-          // Passes required for immutable fields.
-          MakeFieldsFinal::new,
           NormalizeInstantiationThroughFactoryMethods::new,
           NormalizeNullLiterals::new,
           RemoveIsInstanceMethods::new,

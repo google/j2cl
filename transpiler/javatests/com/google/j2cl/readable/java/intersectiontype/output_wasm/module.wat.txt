@@ -112,7 +112,7 @@
   (field $vtable (ref $intersectiontype.IntersectionTypeTest.MapEntry.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $$outer_this__intersectiontype_IntersectionTypeTest_MapEntry (ref null $intersectiontype.IntersectionTypeTest))
+  (field $$outer_this__intersectiontype_IntersectionTypeTest_MapEntry (mut (ref null $intersectiontype.IntersectionTypeTest)))
   ))
  )
  (type $intersectiontype.IntersectionTypeTest.MapEntry.vtable (sub $java.lang.Object.vtable (struct
@@ -1137,7 +1137,7 @@
  (local $$instance (ref null $intersectiontype.IntersectionTypeTest.MapEntry))
  (block
   ;;@ intersectiontype/IntersectionTypeTest.java:43:8
-  (local.set $$instance (struct.new $intersectiontype.IntersectionTypeTest.MapEntry (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.MapEntry.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (local.get $$outer_this)))
+  (local.set $$instance (struct.new $intersectiontype.IntersectionTypeTest.MapEntry (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.MapEntry.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $intersectiontype.IntersectionTypeTest)))
   ;;@ intersectiontype/IntersectionTypeTest.java:43:8
   (call $$ctor__intersectiontype_IntersectionTypeTest__void_$p_intersectiontype_IntersectionTypeTest_MapEntry@intersectiontype.IntersectionTypeTest.MapEntry (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ intersectiontype/IntersectionTypeTest.java:43:8
@@ -1153,6 +1153,8 @@
  (block
   ;;@ intersectiontype/IntersectionTypeTest.java:43:8
   (call $$clinit__void@intersectiontype.IntersectionTypeTest.MapEntry )
+  ;;@ intersectiontype/IntersectionTypeTest.java:43:8
+  (struct.set $intersectiontype.IntersectionTypeTest.MapEntry $$outer_this__intersectiontype_IntersectionTypeTest_MapEntry (local.get $this) (local.get $$outer_this))
   ;;@ intersectiontype/IntersectionTypeTest.java:43:8
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )

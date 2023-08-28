@@ -19,7 +19,7 @@
   (field $vtable (ref $unreachableclass.Main.1.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $$outer_this__unreachableclass_Main_1 (ref null $unreachableclass.Main))
+  (field $$outer_this__unreachableclass_Main_1 (mut (ref null $unreachableclass.Main)))
   ))
  )
  (type $unreachableclass.Main.1.vtable (sub $java.lang.Object.vtable (struct
@@ -36,7 +36,7 @@
   (field $vtable (ref $unreachableclass.Main.1A.1B.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $$outer_this__unreachableclass_Main_1A_1B (ref null $unreachableclass.Main.1A))
+  (field $$outer_this__unreachableclass_Main_1A_1B (mut (ref null $unreachableclass.Main.1A)))
   ))
  )
  (type $unreachableclass.Main.1A.1B.vtable (sub $java.lang.Object.vtable (struct
@@ -53,7 +53,7 @@
   (field $vtable (ref $unreachableclass.Main.1A.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $$outer_this__unreachableclass_Main_1A (ref null $unreachableclass.Main))
+  (field $$outer_this__unreachableclass_Main_1A (mut (ref null $unreachableclass.Main)))
   ))
  )
  (type $unreachableclass.Main.1A.vtable (sub $java.lang.Object.vtable (struct
@@ -272,7 +272,7 @@
  (local $$instance (ref null $unreachableclass.Main.1))
  (block
   ;;@ unreachableclass/Main.java:30:19
-  (local.set $$instance (struct.new $unreachableclass.Main.1 (ref.as_non_null (global.get $unreachableclass.Main.1.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (local.get $$outer_this)))
+  (local.set $$instance (struct.new $unreachableclass.Main.1 (ref.as_non_null (global.get $unreachableclass.Main.1.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $unreachableclass.Main)))
   ;;@ unreachableclass/Main.java:30:19
   (call $$ctor__unreachableclass_Main__void_$p_unreachableclass_Main_1@unreachableclass.Main.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ unreachableclass/Main.java:30:19
@@ -288,6 +288,8 @@
  (block
   ;;@ unreachableclass/Main.java:30:19
   (call $$clinit__void@unreachableclass.Main.1 )
+  ;;@ unreachableclass/Main.java:30:19
+  (struct.set $unreachableclass.Main.1 $$outer_this__unreachableclass_Main_1 (local.get $this) (local.get $$outer_this))
   ;;@ unreachableclass/Main.java:30:19
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -360,7 +362,7 @@
  (local $$instance (ref null $unreachableclass.Main.1A.1B))
  (block
   ;;@ unreachableclass/Main.java:24:16
-  (local.set $$instance (struct.new $unreachableclass.Main.1A.1B (ref.as_non_null (global.get $unreachableclass.Main.1A.1B.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (local.get $$outer_this)))
+  (local.set $$instance (struct.new $unreachableclass.Main.1A.1B (ref.as_non_null (global.get $unreachableclass.Main.1A.1B.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $unreachableclass.Main.1A)))
   ;;@ unreachableclass/Main.java:24:16
   (call $$ctor__unreachableclass_Main_1A__void_$p_unreachableclass_Main_1A_1B@unreachableclass.Main.1A.1B (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ unreachableclass/Main.java:24:16
@@ -376,6 +378,8 @@
  (block
   ;;@ unreachableclass/Main.java:24:16
   (call $$clinit__void@unreachableclass.Main.1A.1B )
+  ;;@ unreachableclass/Main.java:24:16
+  (struct.set $unreachableclass.Main.1A.1B $$outer_this__unreachableclass_Main_1A_1B (local.get $this) (local.get $$outer_this))
   ;;@ unreachableclass/Main.java:24:16
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -456,7 +460,7 @@
  (local $$instance (ref null $unreachableclass.Main.1A))
  (block
   ;;@ unreachableclass/Main.java:22:12
-  (local.set $$instance (struct.new $unreachableclass.Main.1A (ref.as_non_null (global.get $unreachableclass.Main.1A.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (local.get $$outer_this)))
+  (local.set $$instance (struct.new $unreachableclass.Main.1A (ref.as_non_null (global.get $unreachableclass.Main.1A.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $unreachableclass.Main)))
   ;;@ unreachableclass/Main.java:22:12
   (call $$ctor__unreachableclass_Main__void_$p_unreachableclass_Main_1A@unreachableclass.Main.1A (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ unreachableclass/Main.java:22:12
@@ -472,6 +476,8 @@
  (block
   ;;@ unreachableclass/Main.java:22:12
   (call $$clinit__void@unreachableclass.Main.1A )
+  ;;@ unreachableclass/Main.java:22:12
+  (struct.set $unreachableclass.Main.1A $$outer_this__unreachableclass_Main_1A (local.get $this) (local.get $$outer_this))
   ;;@ unreachableclass/Main.java:22:12
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )

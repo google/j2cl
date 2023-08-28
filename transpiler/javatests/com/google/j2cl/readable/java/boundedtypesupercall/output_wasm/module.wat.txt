@@ -54,7 +54,7 @@
   (field $vtable (ref $boundedtypesupercall.Main.Bar.1.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $$outer_this__boundedtypesupercall_Main_Bar_1 (ref null $boundedtypesupercall.Main.Bar))
+  (field $$outer_this__boundedtypesupercall_Main_Bar_1 (mut (ref null $boundedtypesupercall.Main.Bar)))
   ))
  )
  (type $boundedtypesupercall.Main.Bar.1.vtable (sub $boundedtypesupercall.Main.Foo.vtable (struct
@@ -395,7 +395,7 @@
  (local $$instance (ref null $boundedtypesupercall.Main.Bar.1))
  (block
   ;;@ boundedtypesupercall/Main.java:32:40
-  (local.set $$instance (struct.new $boundedtypesupercall.Main.Bar.1 (ref.as_non_null (global.get $boundedtypesupercall.Main.Bar.1.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (local.get $$outer_this)))
+  (local.set $$instance (struct.new $boundedtypesupercall.Main.Bar.1 (ref.as_non_null (global.get $boundedtypesupercall.Main.Bar.1.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $boundedtypesupercall.Main.Bar)))
   ;;@ boundedtypesupercall/Main.java:32:40
   (call $$ctor__boundedtypesupercall_Main_Bar__java_lang_Comparable__void_$p_boundedtypesupercall_Main_Bar_1@boundedtypesupercall.Main.Bar.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$_0))
   ;;@ boundedtypesupercall/Main.java:32:40
@@ -412,6 +412,8 @@
  (block
   ;;@ boundedtypesupercall/Main.java:32:40
   (call $$clinit__void@boundedtypesupercall.Main.Bar.1 )
+  ;;@ boundedtypesupercall/Main.java:32:40
+  (struct.set $boundedtypesupercall.Main.Bar.1 $$outer_this__boundedtypesupercall_Main_Bar_1 (local.get $this) (local.get $$outer_this))
   ;;@ boundedtypesupercall/Main.java:32:40
   (call $$ctor__java_lang_Object__void_$p_boundedtypesupercall_Main_Foo@boundedtypesupercall.Main.Foo (ref.as_non_null (local.get $this))(local.get $$_0))
  )

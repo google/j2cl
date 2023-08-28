@@ -16,8 +16,10 @@ abstract class WasmArray implements Serializable, Cloneable {
   @Wasm("array")
   private static interface ArrayRef { }
 
-  // Special treated by compiler and merged with subtype's element field.
-  final ArrayRef elements = null;
+  // TODO(b/296475021): Cleanup the handling of the elements field.
+  // Special treated by compiler and merged with subtype's element field; needs to be the
+  // only field in this class.
+  ArrayRef elements;
 
   public final int getLength() {
     return arrayLen(elements);

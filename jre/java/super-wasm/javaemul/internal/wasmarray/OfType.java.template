@@ -6,11 +6,15 @@
       return new %ARRAY_TYPE_NAME%((length == 0) ? new %TYPE_NAME%[0] : new %TYPE_NAME%[length]);
     }
 
-    final %TYPE_NAME%[] elements;
+    // TODO(b/296475021): Cleanup the handling of the elements field.
+    // Special treated by compiler and merged with supertype's element field; needs to be the
+    // only field in this class.
+    %TYPE_NAME%[] elements;
 
-    %ARRAY_TYPE_NAME%(%TYPE_NAME%[] initialValues) {
-      this.elements = initialValues;
-    }
+    // The constructor is special treated, needs exactly one parameter which is the initializer of
+    // the elements field and should have no body; the backend will special treat this constructor
+    // and assign the elements field.
+    %ARRAY_TYPE_NAME%(%TYPE_NAME%[] initialValues) { }
 
     @Override
     Object newArray(int length) {

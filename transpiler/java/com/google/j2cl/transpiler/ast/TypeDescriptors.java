@@ -394,6 +394,16 @@ public class TypeDescriptors {
             TypeDescriptors.get().javaemulInternalBoxedComparableLightEnum);
   }
 
+  public static boolean isWasmArrayOrSubtype(TypeDescriptor typeDescriptor) {
+    if (typeDescriptor instanceof DeclaredTypeDescriptor) {
+      if (get().javaemulInternalWasmArray.isSameBaseType(typeDescriptor)) {
+        return true;
+      }
+      return isWasmArraySubtype(typeDescriptor);
+    }
+    return false;
+  }
+
   public static boolean isWasmArraySubtype(TypeDescriptor typeDescriptor) {
     if (typeDescriptor instanceof DeclaredTypeDescriptor) {
       DeclaredTypeDescriptor superTypeDescriptor =

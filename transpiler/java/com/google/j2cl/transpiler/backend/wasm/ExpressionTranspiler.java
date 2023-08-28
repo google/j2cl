@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 import static com.google.j2cl.common.StringUtils.escapeAsUtf8;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid;
 import static com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment.getGetterInstruction;
@@ -394,20 +395,35 @@ final class ExpressionTranspiler {
                 environment.getWasmVtableGlobalName(newInstance.getTypeDescriptor()),
                 environment.getWasmItableGlobalName(newInstance.getTypeDescriptor())));
 
-        // TODO(b/178728155): Go back to using struct.new_default_with_rtt once it supports
-        // assigning immutable fields at construction. See b/178738025 for an alternative design
+        // TODO(b/178728155): Go back to using struct.new_default once it supports assigning
+        //  immutable fields at construction. See b/178738025 for an alternative design
         // that might have better runtime tradeoffs.
 
-        // Initialize instance fields to their default values, whose initial values are represented
-        // as arguments.
-        // Note that struct.new_default_with_rtt cannot be used here since the vtable needs to an
-        // immutable field to enable sub-typing hence will need to be initialized at construction.
-        newInstance
-            .getArguments()
+        // Initialize instance fields to their default values. Note that struct.new_default
+        // cannot be used here since the vtable needs an immutable field to enable sub-typing
+        // hence will need to be initialized at construction.
+        environment
+            .getWasmTypeLayout(newInstance.getTypeDescriptor().getTypeDeclaration())
+            .getAllInstanceFields()
             .forEach(
-                e -> {
+                f -> {
                   sourceBuilder.append(" ");
-                  render(e);
+                  FieldDescriptor fieldDescriptor = f.getDescriptor();
+                  Expression initialValue = fieldDescriptor.getTypeDescriptor().getDefaultValue();
+                  // TODO(b/296475021): Cleanup the handling of the elements field.
+                  if (environment.isWasmArrayElementsField(fieldDescriptor)) {
+                    // The initialization of the elements field in a wasm array is synthesized from
+                    // the parameter in the constructor. This is done  because the field needs to be
+                    // declared immutable to be able to override the field in the superclass.
+                    Expression argument = Iterables.getOnlyElement(newInstance.getArguments());
+                    checkState(
+                        argument
+                            .getTypeDescriptor()
+                            .isSameBaseType(fieldDescriptor.getTypeDescriptor()));
+
+                    initialValue = argument;
+                  }
+                  render(initialValue);
                 });
 
         sourceBuilder.append(")");

@@ -20,7 +20,7 @@
   (field $vtable (ref $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $$outer_this__qualifiedsupercall_QualifiedSuperCall_InnerClass (ref null $qualifiedsupercall.QualifiedSuperCall))
+  (field $$outer_this__qualifiedsupercall_QualifiedSuperCall_InnerClass (mut (ref null $qualifiedsupercall.QualifiedSuperCall)))
   ))
  )
  (type $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable (sub $java.lang.Object.vtable (struct
@@ -209,7 +209,7 @@
  (local $$instance (ref null $qualifiedsupercall.QualifiedSuperCall.InnerClass))
  (block
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
-  (local.set $$instance (struct.new $qualifiedsupercall.QualifiedSuperCall.InnerClass (ref.as_non_null (global.get $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (local.get $$outer_this)))
+  (local.set $$instance (struct.new $qualifiedsupercall.QualifiedSuperCall.InnerClass (ref.as_non_null (global.get $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $qualifiedsupercall.QualifiedSuperCall)))
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
   (call $$ctor__qualifiedsupercall_QualifiedSuperCall__void_$p_qualifiedsupercall_QualifiedSuperCall_InnerClass@qualifiedsupercall.QualifiedSuperCall.InnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
@@ -225,6 +225,8 @@
  (block
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
   (call $$clinit__void@qualifiedsupercall.QualifiedSuperCall.InnerClass )
+  ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
+  (struct.set $qualifiedsupercall.QualifiedSuperCall.InnerClass $$outer_this__qualifiedsupercall_QualifiedSuperCall_InnerClass (local.get $this) (local.get $$outer_this))
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )

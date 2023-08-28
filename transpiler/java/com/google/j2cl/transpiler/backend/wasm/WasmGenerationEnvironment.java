@@ -102,6 +102,7 @@ class WasmGenerationEnvironment {
   /** Maps Java type declarations to the corresponding wasm type layout objects. */
   private final Map<TypeDeclaration, WasmTypeLayout> wasmTypeLayoutByTypeDeclaration;
 
+
   /** Returns the wasm type layout for a Java declared type. */
   WasmTypeLayout getWasmTypeLayout(TypeDeclaration typeDeclaration) {
     return wasmTypeLayoutByTypeDeclaration.get(typeDeclaration);
@@ -244,6 +245,12 @@ class WasmGenerationEnvironment {
 
   String getFieldName(FieldDescriptor fieldDescriptor) {
     return "$" + fieldDescriptor.getMangledName();
+  }
+
+  /** Returns true if the field is the WasmArray.OfNNN.elements. */
+  boolean isWasmArrayElementsField(FieldDescriptor descriptor) {
+    return TypeDescriptors.isWasmArrayOrSubtype(descriptor.getEnclosingTypeDescriptor())
+        && descriptor.getName().equals("elements");
   }
 
   private final Map<HasName, String> nameByDeclaration = new HashMap<>();

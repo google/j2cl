@@ -639,7 +639,7 @@
   (field $vtable (ref $bridgemethods.TestCase102.C.vtable))
   (field $itable (ref $bridgemethods.TestCase102.C.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $$outer_this__bridgemethods_TestCase102_C (ref null $bridgemethods.TestCase102))
+  (field $$outer_this__bridgemethods_TestCase102_C (mut (ref null $bridgemethods.TestCase102)))
   ))
  )
  (type $bridgemethods.TestCase102.C.vtable (sub $bridgemethods.TestCase102.B.vtable (struct
@@ -4875,7 +4875,7 @@
  (local $$instance (ref null $bridgemethods.TestCase102.C))
  (block
   ;;@ bridgemethods/BridgeMethod.java:144:8
-  (local.set $$instance (struct.new $bridgemethods.TestCase102.C (ref.as_non_null (global.get $bridgemethods.TestCase102.C.vtable)) (ref.as_non_null (global.get $bridgemethods.TestCase102.C.itable)) (i32.const 0) (local.get $$outer_this)))
+  (local.set $$instance (struct.new $bridgemethods.TestCase102.C (ref.as_non_null (global.get $bridgemethods.TestCase102.C.vtable)) (ref.as_non_null (global.get $bridgemethods.TestCase102.C.itable)) (i32.const 0) (ref.null $bridgemethods.TestCase102)))
   ;;@ bridgemethods/BridgeMethod.java:144:8
   (call $$ctor__bridgemethods_TestCase102__void_$p_bridgemethods_TestCase102_C@bridgemethods.TestCase102.C (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ bridgemethods/BridgeMethod.java:144:8
@@ -4891,6 +4891,8 @@
  (block
   ;;@ bridgemethods/BridgeMethod.java:144:8
   (call $$clinit__void@bridgemethods.TestCase102.C )
+  ;;@ bridgemethods/BridgeMethod.java:144:8
+  (struct.set $bridgemethods.TestCase102.C $$outer_this__bridgemethods_TestCase102_C (local.get $this) (local.get $$outer_this))
   ;;@ bridgemethods/BridgeMethod.java:144:8
   (call $$ctor__void_$p_bridgemethods_TestCase102_B@bridgemethods.TestCase102.B (ref.as_non_null (local.get $this)))
  )

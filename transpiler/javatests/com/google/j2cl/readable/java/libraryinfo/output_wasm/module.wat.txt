@@ -130,7 +130,7 @@
   (field $vtable (ref $libraryinfo.Main.Foo.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $$outer_this__libraryinfo_Main_Foo (ref null $libraryinfo.Main))
+  (field $$outer_this__libraryinfo_Main_Foo (mut (ref null $libraryinfo.Main)))
   ))
  )
  (type $libraryinfo.Main.Foo.vtable (sub $java.lang.Object.vtable (struct
@@ -1191,7 +1191,7 @@
  (local $$instance (ref null $libraryinfo.Main.Foo))
  (block
   ;;@ libraryinfo/Main.java:107:15
-  (local.set $$instance (struct.new $libraryinfo.Main.Foo (ref.as_non_null (global.get $libraryinfo.Main.Foo.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (local.get $$outer_this)))
+  (local.set $$instance (struct.new $libraryinfo.Main.Foo (ref.as_non_null (global.get $libraryinfo.Main.Foo.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $libraryinfo.Main)))
   ;;@ libraryinfo/Main.java:107:15
   (call $$ctor__libraryinfo_Main__void_$p_libraryinfo_Main_Foo@libraryinfo.Main.Foo (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ libraryinfo/Main.java:107:15
@@ -1207,6 +1207,8 @@
  (block
   ;;@ libraryinfo/Main.java:107:15
   (call $$clinit__void@libraryinfo.Main.Foo )
+  ;;@ libraryinfo/Main.java:107:15
+  (struct.set $libraryinfo.Main.Foo $$outer_this__libraryinfo_Main_Foo (local.get $this) (local.get $$outer_this))
   ;;@ libraryinfo/Main.java:107:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )

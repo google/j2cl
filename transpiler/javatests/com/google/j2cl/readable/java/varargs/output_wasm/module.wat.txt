@@ -32,7 +32,7 @@
   (field $vtable (ref $varargs.Varargs.$LambdaImplementor$1.vtable))
   (field $itable (ref $varargs.Varargs.$LambdaImplementor$1.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $$outer_this__varargs_Varargs_$LambdaImplementor$1 (ref null $varargs.Varargs))
+  (field $$outer_this__varargs_Varargs_$LambdaImplementor$1 (mut (ref null $varargs.Varargs)))
   ))
  )
  (type $varargs.Varargs.$LambdaImplementor$1.vtable (sub $java.lang.Object.vtable (struct
@@ -447,7 +447,7 @@
  (local $$instance (ref null $varargs.Varargs.$LambdaImplementor$1))
  (block
   ;;@ varargs/Varargs.java:60:17
-  (local.set $$instance (struct.new $varargs.Varargs.$LambdaImplementor$1 (ref.as_non_null (global.get $varargs.Varargs.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $varargs.Varargs.$LambdaImplementor$1.itable)) (i32.const 0) (local.get $$outer_this)))
+  (local.set $$instance (struct.new $varargs.Varargs.$LambdaImplementor$1 (ref.as_non_null (global.get $varargs.Varargs.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $varargs.Varargs.$LambdaImplementor$1.itable)) (i32.const 0) (ref.null $varargs.Varargs)))
   ;;@ varargs/Varargs.java:60:17
   (call $$ctor__varargs_Varargs__void_$p_varargs_Varargs_$LambdaImplementor$1@varargs.Varargs.$LambdaImplementor$1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ varargs/Varargs.java:60:17
@@ -463,6 +463,8 @@
  (block
   ;;@ varargs/Varargs.java:60:17
   (call $$clinit__void@varargs.Varargs.$LambdaImplementor$1 )
+  ;;@ varargs/Varargs.java:60:17
+  (struct.set $varargs.Varargs.$LambdaImplementor$1 $$outer_this__varargs_Varargs_$LambdaImplementor$1 (local.get $this) (local.get $$outer_this))
   ;;@ varargs/Varargs.java:60:17
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )

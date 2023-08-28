@@ -3,9 +3,9 @@
   (field $vtable (ref $strings.Strings.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $f_someString__strings_Strings_ (ref null $java.lang.String))
-  (field $f_nonBmpChar__strings_Strings_ (ref null $java.lang.String))
-  (field $f_wideColon__strings_Strings_ (ref null $java.lang.String))
+  (field $f_someString__strings_Strings_ (mut (ref null $java.lang.String)))
+  (field $f_nonBmpChar__strings_Strings_ (mut (ref null $java.lang.String)))
+  (field $f_wideColon__strings_Strings_ (mut (ref null $java.lang.String)))
   ))
  )
  (type $strings.Strings.vtable (sub $java.lang.Object.vtable (struct
@@ -86,7 +86,7 @@
  (local $$instance (ref null $strings.Strings))
  (block
   ;;@ strings/Strings.java:18:13
-  (local.set $$instance (struct.new $strings.Strings (ref.as_non_null (global.get $strings.Strings.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (call $function.no.side.effects.$getString_|This_is_a_st...|__java_lang_String (ref.func $$getString_|This_is_a_st...|__java_lang_String@strings.Strings) ) (call $function.no.side.effects.$getString_|_|__java_lang_String (ref.func $$getString_|_|__java_lang_String@strings.Strings) ) (call $function.no.side.effects.$getString_|_|_1__java_lang_String (ref.func $$getString_|_|_1__java_lang_String@strings.Strings) )))
+  (local.set $$instance (struct.new $strings.Strings (ref.as_non_null (global.get $strings.Strings.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.String)))
   ;;@ strings/Strings.java:18:13
   (call $$ctor__void_$p_strings_Strings@strings.Strings (ref.as_non_null (local.get $$instance)))
   ;;@ strings/Strings.java:18:13
@@ -300,6 +300,12 @@
  (param $this (ref null $strings.Strings))
  ;;@ strings/Strings.java:18:13
  (block
+  ;;@ strings/Strings.java:19:2
+  (struct.set $strings.Strings $f_someString__strings_Strings_ (local.get $this) (call $function.no.side.effects.$getString_|This_is_a_st...|__java_lang_String (ref.func $$getString_|This_is_a_st...|__java_lang_String@strings.Strings) ))
+  ;;@ strings/Strings.java:21:2
+  (struct.set $strings.Strings $f_nonBmpChar__strings_Strings_ (local.get $this) (call $function.no.side.effects.$getString_|_|__java_lang_String (ref.func $$getString_|_|__java_lang_String@strings.Strings) ))
+  ;;@ strings/Strings.java:22:2
+  (struct.set $strings.Strings $f_wideColon__strings_Strings_ (local.get $this) (call $function.no.side.effects.$getString_|_|_1__java_lang_String (ref.func $$getString_|_|_1__java_lang_String@strings.Strings) ))
  )
 )
 

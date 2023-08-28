@@ -82,7 +82,7 @@
   (field $vtable (ref $autoboxing.AutoBoxing.1Supplier.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $$outer_this__autoboxing_AutoBoxing_1Supplier (ref null $autoboxing.AutoBoxing))
+  (field $$outer_this__autoboxing_AutoBoxing_1Supplier (mut (ref null $autoboxing.AutoBoxing)))
   ))
  )
  (type $autoboxing.AutoBoxing.1Supplier.vtable (sub $java.lang.Object.vtable (struct
@@ -1545,7 +1545,7 @@
  (local $$instance (ref null $autoboxing.AutoBoxing.1Supplier))
  (block
   ;;@ autoboxing/AutoBoxing.java:426:10
-  (local.set $$instance (struct.new $autoboxing.AutoBoxing.1Supplier (ref.as_non_null (global.get $autoboxing.AutoBoxing.1Supplier.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (local.get $$outer_this)))
+  (local.set $$instance (struct.new $autoboxing.AutoBoxing.1Supplier (ref.as_non_null (global.get $autoboxing.AutoBoxing.1Supplier.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $autoboxing.AutoBoxing)))
   ;;@ autoboxing/AutoBoxing.java:426:10
   (call $$ctor__autoboxing_AutoBoxing__void_$p_autoboxing_AutoBoxing_1Supplier@autoboxing.AutoBoxing.1Supplier (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ autoboxing/AutoBoxing.java:426:10
@@ -1561,6 +1561,8 @@
  (block
   ;;@ autoboxing/AutoBoxing.java:426:10
   (call $$clinit__void@autoboxing.AutoBoxing.1Supplier )
+  ;;@ autoboxing/AutoBoxing.java:426:10
+  (struct.set $autoboxing.AutoBoxing.1Supplier $$outer_this__autoboxing_AutoBoxing_1Supplier (local.get $this) (local.get $$outer_this))
   ;;@ autoboxing/AutoBoxing.java:426:10
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )

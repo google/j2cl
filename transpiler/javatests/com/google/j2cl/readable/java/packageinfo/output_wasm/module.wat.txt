@@ -19,7 +19,7 @@
   (field $vtable (ref $packageinfo.Outer.Inner.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $$outer_this__packageinfo_Outer_Inner (ref null $packageinfo.Outer))
+  (field $$outer_this__packageinfo_Outer_Inner (mut (ref null $packageinfo.Outer)))
   ))
  )
  (type $packageinfo.Outer.Inner.vtable (sub $java.lang.Object.vtable (struct
@@ -192,7 +192,7 @@
  (local $$instance (ref null $packageinfo.Outer.Inner))
  (block
   ;;@ packageinfo/Outer.java:24:15
-  (local.set $$instance (struct.new $packageinfo.Outer.Inner (ref.as_non_null (global.get $packageinfo.Outer.Inner.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (local.get $$outer_this)))
+  (local.set $$instance (struct.new $packageinfo.Outer.Inner (ref.as_non_null (global.get $packageinfo.Outer.Inner.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $packageinfo.Outer)))
   ;;@ packageinfo/Outer.java:24:15
   (call $$ctor__packageinfo_Outer__void_$p_packageinfo_Outer_Inner@packageinfo.Outer.Inner (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ packageinfo/Outer.java:24:15
@@ -208,6 +208,8 @@
  (block
   ;;@ packageinfo/Outer.java:24:15
   (call $$clinit__void@packageinfo.Outer.Inner )
+  ;;@ packageinfo/Outer.java:24:15
+  (struct.set $packageinfo.Outer.Inner $$outer_this__packageinfo_Outer_Inner (local.get $this) (local.get $$outer_this))
   ;;@ packageinfo/Outer.java:24:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )

@@ -120,7 +120,7 @@
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_fA__jsconstructor_JsConstructorClass_A (mut i32))
-  (field $$outer_this__jsconstructor_JsConstructorClass_InstanceVarargs (ref null $jsconstructor.JsConstructorClass))
+  (field $$outer_this__jsconstructor_JsConstructorClass_InstanceVarargs (mut (ref null $jsconstructor.JsConstructorClass)))
   ))
  )
  (type $jsconstructor.JsConstructorClass.InstanceVarargs.vtable (sub $jsconstructor.JsConstructorClass.A.vtable (struct
@@ -1207,7 +1207,7 @@
  (local $$instance (ref null $jsconstructor.JsConstructorClass.InstanceVarargs))
  (block
   ;;@ jsconstructor/JsConstructorClass.java:178:11
-  (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.InstanceVarargs (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.InstanceVarargs.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (local.get $$outer_this)))
+  (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.InstanceVarargs (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.InstanceVarargs.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (ref.null $jsconstructor.JsConstructorClass)))
   ;;@ jsconstructor/JsConstructorClass.java:178:11
   (call $$ctor__jsconstructor_JsConstructorClass__arrayOf_int__void_$p_jsconstructor_JsConstructorClass_InstanceVarargs@jsconstructor.JsConstructorClass.InstanceVarargs (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $args))
   ;;@ jsconstructor/JsConstructorClass.java:178:11
@@ -1224,6 +1224,8 @@
  (block
   ;;@ jsconstructor/JsConstructorClass.java:178:40
   (call $$clinit__void@jsconstructor.JsConstructorClass.InstanceVarargs )
+  ;;@ jsconstructor/JsConstructorClass.java:176:15
+  (struct.set $jsconstructor.JsConstructorClass.InstanceVarargs $$outer_this__jsconstructor_JsConstructorClass_InstanceVarargs (local.get $this) (local.get $$outer_this))
   ;;@ jsconstructor/JsConstructorClass.java:179:6
   (call $$ctor__int__void_$p_jsconstructor_JsConstructorClass_A@jsconstructor.JsConstructorClass.A (ref.as_non_null (local.get $this))(array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt (local.get $args)) (i32.const 1)))
  )

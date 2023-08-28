@@ -20,7 +20,7 @@
   (field $vtable (ref $protobuf.MyMessage.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $f_testField__protobuf_MyMessage i32)
+  (field $f_testField__protobuf_MyMessage (mut i32))
   ))
  )
  (type $protobuf.MyMessage.vtable (sub $com.google.protobuf.GeneratedMessage.vtable (struct
@@ -270,7 +270,7 @@
  (local $$instance (ref null $protobuf.MyMessage))
  (block
   ;;@ protobuf/MyMessage.java:38:10
-  (local.set $$instance (struct.new $protobuf.MyMessage (ref.as_non_null (global.get $protobuf.MyMessage.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (local.get $testField)))
+  (local.set $$instance (struct.new $protobuf.MyMessage (ref.as_non_null (global.get $protobuf.MyMessage.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
   ;;@ protobuf/MyMessage.java:38:10
   (call $$ctor__int__void_$p_protobuf_MyMessage@protobuf.MyMessage (ref.as_non_null (local.get $$instance))(local.get $testField))
   ;;@ protobuf/MyMessage.java:38:10
@@ -288,6 +288,8 @@
   (call $$clinit__void@protobuf.MyMessage )
   ;;@ protobuf/MyMessage.java:38:35
   (call $$ctor__void_$p_com_google_protobuf_GeneratedMessage@com.google.protobuf.GeneratedMessage (ref.as_non_null (local.get $this)))
+  ;;@ protobuf/MyMessage.java:39:4
+  (struct.set $protobuf.MyMessage $f_testField__protobuf_MyMessage (local.get $this) (local.get $testField))
  )
 )
 
