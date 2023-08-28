@@ -17,25 +17,25 @@ testSuite({
     const absolutePath = "REPLACEMENT_BUILD_PATH_PLACEHOLDER";
 
     instance = await j2wasm.instantiateStreaming(absolutePath);
-    instance.exports.setUpPageIn${testClass.simpleName()}();
+    instance.exports["setUpPageIn${testClass.simpleName()}"]();
   },
 
   tearDownPage() {
     // Note that exports might be null due to a failed instantiation.
-    instance?.exports?.tearDownPageIn${testClass.simpleName()}();
+    instance?.exports["tearDownPageIn${testClass.simpleName()}"]();
   },
 
   setUp() {
-    instance.exports.setUpIn${testClass.simpleName()}();
+    instance.exports["setUpIn${testClass.simpleName()}"]();
   },
 
   tearDown() {
-    instance.exports.tearDownIn${testClass.simpleName()}();
+    instance.exports["tearDownIn${testClass.simpleName()}"]();
   },
 
 #foreach($testMethod in ${testClass.testMethods()})
   ${testMethod.jsTestMethodName()}() {
-    instance.exports.${testMethod.jsTestMethodName()}In${testClass.simpleName()}();
+    instance.exports["${testMethod.jsTestMethodName()}In${testClass.simpleName()}"]();
   },
 
 #end
