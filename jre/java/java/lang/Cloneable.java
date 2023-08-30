@@ -23,7 +23,6 @@ import jsinterop.annotations.JsMethod;
  */
 public interface Cloneable {
 
-  // CHECKSTYLE_OFF: Utility methods.
   @JsMethod
   static boolean $isInstance(HasCloneableTypeMarker instance) {
     if (instance == null) {
@@ -34,5 +33,4 @@ public interface Cloneable {
         // Arrays are implicitly instances of Cloneable (JLS 10.7).
         || ArrayHelper.isArray(instance);
   }
-  // CHECKSTYLE_ON: end utility methods
 }

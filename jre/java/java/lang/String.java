@@ -694,10 +694,8 @@ public final class String implements Comparable<String>, CharSequence,
     public native String toUpperCase();
   }
 
-  // CHECKSTYLE_OFF: Utility Methods for unboxed String.
   @JsMethod
-  protected static boolean $isInstance(Object instance) {
+  static boolean $isInstance(Object instance) {
     return "string".equals(JsUtils.typeOf(instance));
   }
-  // CHECKSTYLE_ON: end utility methods
 }

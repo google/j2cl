@@ -184,6 +184,11 @@ public abstract class MemberDescriptor
             && getJsNamespace().equals(getEnclosingTypeDescriptor().getQualifiedJsName()));
   }
 
+  /** Returns true if this is a user written $isInstance method. */
+  public boolean isCustomIsInstanceMethod() {
+    return false;
+  }
+
   /** Whether this member overrides a java.lang.Object method. */
   public boolean isOrOverridesJavaLangObjectMethod() {
     return false;

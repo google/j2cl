@@ -617,6 +617,13 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
   public abstract boolean isEnumSyntheticMethod();
 
+  @Override
+  public boolean isCustomIsInstanceMethod() {
+    return getOrigin() == MethodOrigin.SOURCE
+        && getParameterDescriptors().size() == 1
+        && getName().equals(IS_INSTANCE_METHOD_NAME);
+  }
+
   @Nullable
   public String getObjectiveCName() {
     KtObjcInfo ktObjcInfo = getKtObjcInfo();

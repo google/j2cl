@@ -29,6 +29,7 @@ import com.google.j2cl.common.visitor.Visitable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
 
@@ -63,7 +64,11 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   }
 
   public boolean containsMethod(String mangledName) {
-    return getMethods().stream().anyMatch(method -> method.getMangledName().equals(mangledName));
+    return containsMethod(method -> method.getMangledName().equals(mangledName));
+  }
+
+  public boolean containsMethod(Predicate<MethodDescriptor> methodPredicate) {
+    return getMethods().stream().map(Method::getDescriptor).anyMatch(methodPredicate);
   }
 
   public void setAbstract(boolean isAbstract) {

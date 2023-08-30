@@ -106,10 +106,8 @@ public final class Boolean implements Comparable<Boolean>, Serializable {
     return toString(booleanValue());
   }
 
-  // CHECKSTYLE_OFF: Utility Methods for unboxed Boolean.
   @JsMethod
-  protected static boolean $isInstance(Object instance) {
+  static boolean $isInstance(Object instance) {
     return "boolean".equals(JsUtils.typeOf(instance));
   }
-  //CHECKSTYLE_ON: End utility methods
 }

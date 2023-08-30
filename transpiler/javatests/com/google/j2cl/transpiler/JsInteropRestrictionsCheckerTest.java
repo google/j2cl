@@ -3342,6 +3342,69 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 + " returns 'double'.");
   }
 
+  public void testCustomIsInstanceSucceeds() {
+    assertTranspileSucceeds(
+            "test.Buggy",
+            "import jsinterop.annotations.*;",
+            "interface InterfaceWithCustomIsInstance {",
+            "  public static boolean $isInstance(Object o) { return true; }",
+            "}",
+            "class ClassWithCustomIsInstance {",
+            "  static boolean $isInstance(Object o) { return true; }",
+            "}",
+            "@JsType(isNative = true)",
+            "interface NativeInterfaceWithCustomIsInstance {",
+            "  @JsOverlay",
+            "  static boolean $isInstance(Object o) { return true; }",
+            "}",
+            "@JsType(isNative = true)",
+            "class NativeClassWithCustomIsInstance {",
+            "  @JsOverlay",
+            "  protected static boolean $isInstance(Object o) { return true; }",
+            "}",
+            "@JsType(isNative = true)",
+            "class ClassWithNativeIsInstance {",
+            "  static native boolean $isInstance(Object o);",
+            "}",
+            "class Buggy {",
+            "  static void main() {",
+            "    Object o = null;",
+            "    boolean b = o instanceof InterfaceWithCustomIsInstance;",
+            "    b = o instanceof ClassWithCustomIsInstance;",
+            "    b = o instanceof NativeClassWithCustomIsInstance;",
+            "  }",
+            "}")
+        .assertNoWarnings();
+  }
+
+  public void testCustomIsInstanceFails() {
+    assertTranspileFails(
+            "test.Buggy",
+            "import jsinterop.annotations.*;",
+            "interface BadIsInstanceVisibility {",
+            "  private static boolean $isInstance(Object o) { return true; }",
+            "}",
+            "class BadIsInstanceReturnType {",
+            "  static void $isInstance(Object o) { }",
+            "}",
+            "class BadIsInstanceMembership {",
+            "  boolean $isInstance(Object o) { return true; }",
+            "}",
+            "@JsType(isNative = true)",
+            "class BadIsInstanceOnNativeType {",
+            "  static boolean $isInstance(Object o) { return true; }",
+            "}")
+        .assertErrorsWithoutSourcePosition(
+            "Custom '$isInstance' method 'boolean BadIsInstanceVisibility.$isInstance(Object o)'"
+                + " has to be static and non private.",
+            "Custom '$isInstance' method 'void BadIsInstanceReturnType.$isInstance(Object o)' has"
+                + " to return 'boolean'.",
+            "Custom '$isInstance' method 'boolean BadIsInstanceMembership.$isInstance(Object o)'"
+                + " has to be static and non private.",
+            "Native JsType method 'boolean BadIsInstanceOnNativeType.$isInstance(Object o)' should"
+                + " be native, abstract or JsOverlay.");
+  }
+
   public void testUnusableByJsSuppressionSucceeds() {
     assertTranspileSucceeds(
             "test.Buggy",

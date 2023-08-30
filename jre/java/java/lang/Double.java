@@ -182,10 +182,8 @@ public final class Double extends Number implements Comparable<Double> {
     return toString(doubleValue());
   }
 
-  // CHECKSTYLE_OFF: Utility Methods for unboxed Double.
   @JsMethod
-  protected static boolean $isInstance(Object instance) {
+  static boolean $isInstance(Object instance) {
     return "number".equals(JsUtils.typeOf(instance));
   }
-  //CHECKSTYLE_ON: End utility methods
 }

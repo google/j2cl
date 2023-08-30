@@ -145,7 +145,7 @@ import com.google.j2cl.transpiler.passes.PropagateConstants;
 import com.google.j2cl.transpiler.passes.PropagateNullabilityJ2kt;
 import com.google.j2cl.transpiler.passes.RecoverShortcutBooleanOperator;
 import com.google.j2cl.transpiler.passes.RemoveAssertStatements;
-import com.google.j2cl.transpiler.passes.RemoveIsInstanceMethods;
+import com.google.j2cl.transpiler.passes.RemoveCustomIsInstanceMethods;
 import com.google.j2cl.transpiler.passes.RemoveNativeTypes;
 import com.google.j2cl.transpiler.passes.RemoveNestedBlocks;
 import com.google.j2cl.transpiler.passes.RemoveNoopStatements;
@@ -454,10 +454,9 @@ public enum Backend {
           // Needs to run at the end as the types in the ast will be invalid after the pass.
           ImplementArraysAsClasses::new,
           InsertExceptionConversionsWasm::new,
-
           NormalizeInstantiationThroughFactoryMethods::new,
           NormalizeNullLiterals::new,
-          RemoveIsInstanceMethods::new,
+          RemoveCustomIsInstanceMethods::new,
           RemoveNoopStatements::new,
           UpgradeInterfaceDispatch::new,
 
@@ -591,7 +590,7 @@ public enum Backend {
           // TODO(b/283154656): Fork the instantiation code for the modular pipeline.
           // NormalizeInstantiationThroughFactoryMethods::new,
           NormalizeNullLiterals::new,
-          RemoveIsInstanceMethods::new,
+          RemoveCustomIsInstanceMethods::new,
           RemoveNoopStatements::new,
 
           // Post-verifications

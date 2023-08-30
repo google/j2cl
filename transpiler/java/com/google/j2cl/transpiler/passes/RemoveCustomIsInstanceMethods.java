@@ -15,24 +15,16 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import com.google.j2cl.transpiler.ast.Member;
-import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Type;
 
 /**
- * Removes {@code $isInstance} support methods. {@code $isInstance} is unused in Wasm, and the
+ * Removes user written {@code $isInstance} methods. {@code $isInstance} is unused in Wasm, and the
  * explicit implementations in our JRE in {@code Comparable}, etc use a native type in a way that is
  * unsupported in Wasm.
  */
-public class RemoveIsInstanceMethods extends NormalizationPass {
-
+public class RemoveCustomIsInstanceMethods extends NormalizationPass {
   @Override
   public void applyTo(Type type) {
-    type.getMembers().removeIf(RemoveIsInstanceMethods::isIsInstanceMethod);
-  }
-
-  private static boolean isIsInstanceMethod(Member member) {
-    return member.isMethod()
-        && member.getDescriptor().getName().equals(MethodDescriptor.IS_INSTANCE_METHOD_NAME);
+    type.getMembers().removeIf(m -> m.getDescriptor().isCustomIsInstanceMethod());
   }
 }

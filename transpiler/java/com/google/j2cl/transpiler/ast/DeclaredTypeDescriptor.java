@@ -243,6 +243,12 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return getTypeDeclaration().hasOverlayImplementationType();
   }
 
+  @Memoized
+  public boolean hasCustomIsInstanceMethod() {
+    return getDeclaredMethodDescriptors().stream()
+        .anyMatch(MethodDescriptor::isCustomIsInstanceMethod);
+  }
+
   @Override
   public DeclaredTypeDescriptor toRawTypeDescriptor() {
     return getTypeDeclaration().toRawTypeDescriptor();

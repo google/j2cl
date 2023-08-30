@@ -68,8 +68,8 @@ public class AddAbstractMethodStubs extends NormalizationPass {
         .filter(m -> m.getEnclosingTypeDescriptor().isInterface())
         .forEach(
             m -> {
-              if (type.containsMethod(m.getDeclarationDescriptor().getMangledName())) {
-                // The method is alread defined in the type; nothing to do.
+              if (type.containsMethod(m.getMangledName())) {
+                // The method is already defined in the type; nothing to do.
                 return;
               }
               type.addMember(

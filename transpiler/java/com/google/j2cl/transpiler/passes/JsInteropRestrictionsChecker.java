@@ -1049,6 +1049,9 @@ public class JsInteropRestrictionsChecker {
       if (!checkJsPropertyAccessor(method)) {
         return;
       }
+      if (method.getDescriptor().isCustomIsInstanceMethod()) {
+        checkCustomIsInstanceMethod(method);
+      }
     }
 
     if (memberDescriptor.canBeReferencedExternally()) {
@@ -1120,6 +1123,22 @@ public class JsInteropRestrictionsChecker {
         "JsAsync method '%s' should return either 'IThenable' or 'Promise' but returns '%s'.",
         method.getReadableDescription(),
         returnType.getReadableDescription());
+  }
+
+  private void checkCustomIsInstanceMethod(Method method) {
+    MethodDescriptor methodDescriptor = method.getDescriptor();
+    if (methodDescriptor.isInstanceMember() || methodDescriptor.getVisibility().isPrivate()) {
+      problems.error(
+          method.getSourcePosition(),
+          "Custom '$isInstance' method '%s' has to be static and non private.",
+          method.getReadableDescription());
+    }
+    if (!TypeDescriptors.isPrimitiveBoolean(methodDescriptor.getReturnTypeDescriptor())) {
+      problems.error(
+          method.getSourcePosition(),
+          "Custom '$isInstance' method '%s' has to return 'boolean'.",
+          method.getReadableDescription());
+    }
   }
 
   private void checkOverrideConsistency(Member member) {
