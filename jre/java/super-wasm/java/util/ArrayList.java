@@ -130,25 +130,6 @@ public class ArrayList<E> extends ArrayListBase<E> {
     return ArrayHelper.clone(array, 0, size);
   }
   
-  /*
-   * Faster than the iterator-based implementation in AbstractCollection.
-   */
-  @SuppressWarnings("unchecked")
-  @Override
-  public <T> T[] toArray(T[] out) {
-    int size = this.size;
-    if (out.length < size) {
-      out = ArrayHelper.createFrom(out, size);
-    }
-    for (int i = 0; i < size; ++i) {
-      out[i] = (T) array[i];
-    }
-    if (out.length > size) {
-      out[size] = null;
-    }
-    return out;
-  }
-
   public void trimToSize() {
     if (size == array.length) {
       return;

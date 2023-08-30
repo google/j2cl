@@ -24,6 +24,7 @@ import java.io.Serializable;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
+import javaemul.internal.ArrayHelper;
 
 /**
  * Base implementation for ArrayList to share with different implementations for Wasm and JS.
@@ -163,6 +164,25 @@ abstract class ArrayListBase<E> extends AbstractList<E>
 
   // Avoid polymorphic size method for the internal usages.
   abstract int sizeImpl();
+
+  /*
+   * Faster than the iterator-based implementation in AbstractCollection.
+   */
+  @SuppressWarnings("unchecked")
+  @Override
+  public <T> T[] toArray(T[] out) {
+    int size = sizeImpl();
+    if (out.length < size) {
+      out = ArrayHelper.createFrom(out, size);
+    }
+    for (int i = 0; i < size; ++i) {
+      out[i] = (T) array[i];
+    }
+    if (out.length > size) {
+      out[size] = null;
+    }
+    return out;
+  }
 
   @Override
   public void sort(Comparator<? super E> c) {
