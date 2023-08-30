@@ -121,7 +121,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     SYNTHETIC_LAMBDA_ADAPTOR_CONSTRUCTOR("<synthetic: lambda_adaptor_ctor>"),
     SYNTHETIC_CLASS_LITERAL_GETTER,
     SYNTHETIC_STRING_LITERAL_GETTER,
-    INSTANCE_OF_SUPPORT_METHOD,
+    SYNTHETIC_INSTANCE_OF_SUPPORT_METHOD,
     GENERALIZING_BRIDGE, // Bridges a more general signature to a more specific one.
     SPECIALIZING_BRIDGE, // Bridges a more specific signature to a more general one.
     DEFAULT_METHOD_BRIDGE, // Bridges to a default method interface.
@@ -169,8 +169,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     }
 
     @Override
-    public boolean isInstanceOfSupportMember() {
-      return this == INSTANCE_OF_SUPPORT_METHOD;
+    public boolean isSyntheticInstanceOfSupportMember() {
+      return this == SYNTHETIC_INSTANCE_OF_SUPPORT_METHOD;
     }
   }
 
@@ -676,7 +676,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         return getSimpleJsName();
       }
 
-      if (getOrigin().isInstanceOfSupportMember()) {
+      if (getOrigin().isSyntheticInstanceOfSupportMember()) {
         // Class support methods, like $isInstance and $markImplementor, should not be mangled.
         return getName();
       }

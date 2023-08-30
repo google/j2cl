@@ -34,7 +34,7 @@ public abstract class MemberDescriptor
     String getPrefix();
 
     /** Returns whether this member is supporting the implementation of the instanceof operation. */
-    boolean isInstanceOfSupportMember();
+    boolean isSyntheticInstanceOfSupportMember();
   }
 
   /** Return JsInfo from the member's annotation. */

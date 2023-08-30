@@ -399,7 +399,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         .setEnclosingTypeDescriptor(getMetadataTypeDeclaration().toUnparameterizedTypeDescriptor())
         .setParameterTypeDescriptors(TypeDescriptors.getUnknownType())
         .setReturnTypeDescriptor(PrimitiveTypes.BOOLEAN)
-        .setOrigin(MethodOrigin.INSTANCE_OF_SUPPORT_METHOD)
+        .setOrigin(MethodOrigin.SYNTHETIC_INSTANCE_OF_SUPPORT_METHOD)
         .setStatic(true)
         .build();
   }
@@ -412,7 +412,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         .setEnclosingTypeDescriptor(getMetadataTypeDeclaration().toUnparameterizedTypeDescriptor())
         .setParameterTypeDescriptors(TypeDescriptors.get().nativeFunction)
         .setReturnTypeDescriptor(PrimitiveTypes.VOID)
-        .setOrigin(MethodOrigin.INSTANCE_OF_SUPPORT_METHOD)
+        .setOrigin(MethodOrigin.SYNTHETIC_INSTANCE_OF_SUPPORT_METHOD)
         .setStatic(true)
         .build();
   }
@@ -424,7 +424,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         .setName(isJsFunctionImplementation() ? "$is" : "$implements")
         .setEnclosingTypeDescriptor(this)
         .setTypeDescriptor(PrimitiveTypes.BOOLEAN)
-        .setOrigin(FieldOrigin.INSTANCE_OF_SUPPORT_FIELD)
+        .setOrigin(FieldOrigin.SYNTHETIC_INSTANCE_OF_SUPPORT_FIELD)
         .build();
   }
 
@@ -440,7 +440,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         .setParameterTypeDescriptors(
             TypeDescriptors.getUnknownType(), TypeDescriptors.getUnknownType())
         .setReturnTypeDescriptor(PrimitiveTypes.VOID)
-        .setOrigin(MethodOrigin.INSTANCE_OF_SUPPORT_METHOD)
+        .setOrigin(MethodOrigin.SYNTHETIC_INSTANCE_OF_SUPPORT_METHOD)
         .setStatic(true)
         .build();
   }

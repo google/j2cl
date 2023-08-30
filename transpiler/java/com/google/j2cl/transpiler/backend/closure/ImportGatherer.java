@@ -373,8 +373,8 @@ class ImportGatherer extends AbstractVisitor {
       return ImportCategory.LOADTIME;
     }
 
-    if (getCurrentMember().getDescriptor().getOrigin().isInstanceOfSupportMember()) {
-      // InstanceOf support members, e.g. $isInstance, might not call $clinit hence all the
+    if (getCurrentMember().getDescriptor().getOrigin().isSyntheticInstanceOfSupportMember()) {
+      // Synthetic instanceOf support members, do not call $clinit hence all the
       // types used in their implementation need to be imported as LOADTIME.
       return ImportCategory.LOADTIME;
     }

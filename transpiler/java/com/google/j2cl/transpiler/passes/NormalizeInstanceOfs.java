@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkState;
-import static com.google.j2cl.transpiler.ast.MethodDescriptor.IS_INSTANCE_METHOD_NAME;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
@@ -24,16 +23,12 @@ import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
-import com.google.j2cl.transpiler.ast.JsInfo;
 import com.google.j2cl.transpiler.ast.MethodCall;
-import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
-import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
-import com.google.j2cl.transpiler.ast.TypeDescriptors;
 
 /** Replaces instanceof expression with corresponding $isInstance method call. */
 public class NormalizeInstanceOfs extends NormalizationPass {
@@ -60,21 +55,11 @@ public class NormalizeInstanceOfs extends NormalizationPass {
 
   private static Node rewriteRegularInstanceOfExpression(
       InstanceOfExpression instanceOfExpression) {
-    TypeDescriptor checkTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
-
-    MethodDescriptor isInstanceMethodDescriptor =
-        MethodDescriptor.newBuilder()
-            .setOriginalJsInfo(JsInfo.RAW)
-            .setStatic(true)
-            .setEnclosingTypeDescriptor(
-                checkTypeDescriptor.getMetadataTypeDeclaration().toUnparameterizedTypeDescriptor())
-            .setName(IS_INSTANCE_METHOD_NAME)
-            .setParameterTypeDescriptors(TypeDescriptors.get().javaLangObject)
-            .setReturnTypeDescriptor(PrimitiveTypes.BOOLEAN)
-            .build();
+    DeclaredTypeDescriptor checkTypeDescriptor =
+        (DeclaredTypeDescriptor) instanceOfExpression.getTestTypeDescriptor();
 
     // TypeName.$isInstance(expr);
-    return MethodCall.Builder.from(isInstanceMethodDescriptor)
+    return MethodCall.Builder.from(checkTypeDescriptor.getIsInstanceMethodDescriptor())
         .setArguments(instanceOfExpression.getExpression())
         .build();
   }
