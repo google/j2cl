@@ -26,6 +26,11 @@ import jsinterop.annotations.JsType;
  */
 @JsType
 public interface Set<E> extends Collection<E> {
+
+  @JsIgnore
+  @Override
+  Iterator<E> iterator();
+
   @JsIgnore
   @Override
   default Spliterator<E> spliterator() {

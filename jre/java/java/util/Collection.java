@@ -44,6 +44,10 @@ public interface Collection<E> extends Iterable<E> {
 
   boolean containsAll(Collection<?> c);
 
+  @JsIgnore
+  @Override
+  Iterator<E> iterator();
+
   boolean isEmpty();
 
   @JsIgnore

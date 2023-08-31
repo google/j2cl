@@ -18,7 +18,6 @@ package java.util;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import java.util.function.UnaryOperator;
-
 import jsinterop.annotations.JsIgnore;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsNonNull;
@@ -42,6 +41,10 @@ public interface List<E> extends Collection<E> {
 
   @JsMethod(name = "getAtIndex")
   E get(int index);
+
+  @JsIgnore
+  @Override
+  Iterator<E> iterator();
 
   int indexOf(Object o);
 

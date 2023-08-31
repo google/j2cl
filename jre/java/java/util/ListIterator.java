@@ -29,6 +29,12 @@ public interface ListIterator<E> extends Iterator<E> {
 
   void add(E o);
 
+  @Override
+  boolean hasNext();
+
+  @Override
+  E next();
+
   boolean hasPrevious();
 
   int nextIndex();

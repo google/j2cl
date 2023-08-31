@@ -75,10 +75,16 @@ class TypeGraphBuilder {
         }
 
         for (MethodInvocation methodInvocation : memberInfo.getInvokedMethodsList()) {
-          Type enclosingType =
-              typesByName.get(libraryInfo.getTypeMap(methodInvocation.getEnclosingType()));
-          Member referencedMember = enclosingType.getMemberByName(methodInvocation.getMethod());
-          member.addReferencedMember(checkNotNull(referencedMember));
+          String enclosingTypeName = libraryInfo.getTypeMap(methodInvocation.getEnclosingType());
+          String methodName = methodInvocation.getMethod();
+
+          Type enclosingType = typesByName.get(enclosingTypeName);
+          member.addReferencedMember(
+              checkNotNull(
+                  enclosingType.getMemberByName(methodName),
+                  "Missing %s.%s",
+                  enclosingTypeName,
+                  methodName));
         }
       }
     }
