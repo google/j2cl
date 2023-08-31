@@ -18,7 +18,7 @@ goog.module('j2wasm.ExceptionUtils');
 const tag = new WebAssembly.Tag({parameters: ['externref']});
 
 /**
- * @param {?} param
+ * @param {*} param
  * @param {string} message
  * @return {!WebAssembly.Exception}.
  */
