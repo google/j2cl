@@ -38,7 +38,13 @@ public abstract class NormalizationPass {
     try {
       applyTo(compilationUnit);
     } catch (RuntimeException | Error e) {
-      throw new ProcessorError(compilationUnit.getFilePath(), compilationUnit.getFilePath(), e);
+      String filePath;
+      if (compilationUnit.isSynthetic()) {
+        filePath = "[Synthetic CompilationUnit]";
+      } else {
+        filePath = compilationUnit.getFilePath();
+      }
+      throw new ProcessorError(filePath, filePath, e);
     }
     currentCompilationUnit = null;
   }
