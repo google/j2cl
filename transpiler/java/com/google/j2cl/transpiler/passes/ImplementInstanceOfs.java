@@ -108,7 +108,7 @@ public class ImplementInstanceOfs extends NormalizationPass {
 
   /** Synthesizes the $isInstance method on the type. */
   private static void synthesizeIsInstanceMethod(Type type) {
-    if (type.containsMethod(MethodDescriptor.IS_INSTANCE_METHOD_NAME)) {
+    if (type.containsMethod(MethodDescriptor::isCustomIsInstanceMethod)) {
       // User provided an $isInstance method, skip generation.
       return;
     }

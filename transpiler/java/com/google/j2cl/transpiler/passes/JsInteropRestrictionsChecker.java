@@ -909,7 +909,9 @@ public class JsInteropRestrictionsChecker {
           @Override
           public void exitInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
             TypeDescriptor testTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
-            if (testTypeDescriptor.isNative() && testTypeDescriptor.isInterface()) {
+            if (testTypeDescriptor.isNative()
+                && testTypeDescriptor.isInterface()
+                && !((DeclaredTypeDescriptor) testTypeDescriptor).hasCustomIsInstanceMethod()) {
               problems.error(
                   instanceOfExpression.getSourcePosition(),
                   "Cannot do instanceof against native JsType interface '%s'.",

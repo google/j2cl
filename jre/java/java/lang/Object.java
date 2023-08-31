@@ -43,7 +43,6 @@ public class Object {
     return Class.$get(Constructor.of(this));
   }
 
-  @JsMethod
   static boolean $isInstance(Object instance) {
     return instance != null;
   }

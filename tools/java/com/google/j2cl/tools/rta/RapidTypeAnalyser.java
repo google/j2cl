@@ -114,6 +114,13 @@ final class RapidTypeAnalyser {
     // When a type is marked as live, we need to explicitly mark the super interfaces as live since
     // we need markImplementor call (which are not tracked in AST).
     type.getSuperInterfaces().forEach(RapidTypeAnalyser::markTypeLive);
+
+    // Types are made live by `instanceof` and casts, so if the type has a custom $isInstance
+    // it should be also considered as if it was called.
+    Member isInstanceMember = type.getMemberByName("$isInstance");
+    if (isInstanceMember != null) {
+      onMemberReference(isInstanceMember);
+    }
   }
 
   private RapidTypeAnalyser() {}

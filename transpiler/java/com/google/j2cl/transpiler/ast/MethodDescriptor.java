@@ -175,15 +175,15 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   }
 
   public static final String CONSTRUCTOR_METHOD_NAME = "<init>";
-  public static final String INIT_METHOD_NAME = "$init";
+  static final String INIT_METHOD_NAME = "$init";
   public static final String CTOR_METHOD_PREFIX = "$ctor";
   public static final String CLINIT_METHOD_NAME = "$clinit";
   public static final String VALUE_OF_METHOD_NAME = "valueOf"; // Boxed type valueOf() method.
-  public static final String IS_INSTANCE_METHOD_NAME = "$isInstance";
+  static final String IS_INSTANCE_METHOD_NAME = "$isInstance";
   public static final String MARK_IMPLEMENTOR_METHOD_NAME = "$markImplementor";
   public static final String CREATE_METHOD_NAME = "$create";
-  public static final String LOAD_MODULES_METHOD_NAME = "$loadModules";
-  public static final String COPY_METHOD_NAME = "$copy";
+  static final String LOAD_MODULES_METHOD_NAME = "$loadModules";
+  static final String COPY_METHOD_NAME = "$copy";
 
   public static String buildMethodSignature(
       String name, TypeDescriptor... parameterTypeDescriptors) {
@@ -683,7 +683,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         return getSimpleJsName();
       }
 
-      if (getOrigin().isSyntheticInstanceOfSupportMember()) {
+      if (getOrigin().isSyntheticInstanceOfSupportMember() || isCustomIsInstanceMethod()) {
         // Class support methods, like $isInstance and $markImplementor, should not be mangled.
         return getName();
       }

@@ -18,7 +18,6 @@ package java.lang;
 
 import javaemul.internal.JsUtils;
 import javaemul.internal.Platform;
-import jsinterop.annotations.JsMethod;
 
 /**
  * Wraps a primitive <code>double</code> as an object.
@@ -182,7 +181,6 @@ public final class Double extends Number implements Comparable<Double> {
     return toString(doubleValue());
   }
 
-  @JsMethod
   static boolean $isInstance(Object instance) {
     return "number".equals(JsUtils.typeOf(instance));
   }

@@ -16,7 +16,6 @@
 package java.lang;
 
 import javaemul.internal.JsUtils;
-import jsinterop.annotations.JsMethod;
 
 /**
  * An interface used a basis for implementing custom ordering. <a
@@ -28,7 +27,6 @@ import jsinterop.annotations.JsMethod;
 public interface Comparable<T> {
   int compareTo(T other);
 
-  @JsMethod
   static boolean $isInstance(HasComparableTypeMarker instance) {
     String type = JsUtils.typeOf(instance);
     if (type.equals("boolean") || type.equals("number") || type.equals("string")) {

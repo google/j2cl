@@ -23,7 +23,6 @@ import java.util.Spliterators;
 import java.util.stream.IntStream;
 import java.util.stream.StreamSupport;
 import javaemul.internal.JsUtils;
-import jsinterop.annotations.JsMethod;
 
 /**
  * Abstracts the notion of a sequence of characters.
@@ -58,7 +57,6 @@ public interface CharSequence {
     }, Spliterator.SIZED | Spliterator.SUBSIZED | Spliterator.ORDERED, false);
   }
 
-  @JsMethod
   static boolean $isInstance(HasCharSequenceTypeMarker instance) {
     if (JsUtils.typeOf(instance).equals("string")) {
       return true;

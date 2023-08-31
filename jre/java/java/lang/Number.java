@@ -128,7 +128,6 @@ public abstract class Number implements Serializable {
   @JsType(isNative = true, name = "Number$impl", namespace = "java.lang")
   private static class JavaLangNumber { }
 
-  @JsMethod
   static boolean $isInstance(Object instance) {
     return "number".equals(JsUtils.typeOf(instance)) || instance instanceof JavaLangNumber;
   }

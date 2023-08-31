@@ -34,7 +34,6 @@ import javaemul.internal.EmulatedCharset;
 import javaemul.internal.JsUtils;
 import javaemul.internal.NativeRegExp;
 import javaemul.internal.StringUtil;
-import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsNonNull;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -694,7 +693,6 @@ public final class String implements Comparable<String>, CharSequence,
     public native String toUpperCase();
   }
 
-  @JsMethod
   static boolean $isInstance(Object instance) {
     return "string".equals(JsUtils.typeOf(instance));
   }

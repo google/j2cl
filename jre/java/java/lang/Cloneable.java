@@ -16,14 +16,11 @@
 package java.lang;
 
 import javaemul.internal.ArrayHelper;
-import jsinterop.annotations.JsMethod;
 
 /**
  * Indicates that a class implements <code>clone()</code>.
  */
 public interface Cloneable {
-
-  @JsMethod
   static boolean $isInstance(HasCloneableTypeMarker instance) {
     if (instance == null) {
       return false;

@@ -26,6 +26,7 @@ import java.util.Iterator;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -47,6 +48,8 @@ public class JsTypeTest {
     testInstanceOf_jsoWithNativeButtonProto();
     testInstanceOf_jsoWithoutProto();
     testInstanceOf_jsoWithProto();
+    testInstanceOf_classWithCustomIsInstance();
+    testInstanceOf_interfaceWithCustomIsInstance();
     testInstanceOf_withNameSpace();
     testJsMethodWithDifferentVisiblities();
     testJsTypeField();
@@ -72,6 +75,38 @@ public class JsTypeTest {
   static class MyNativeJsTypeSubclass extends MyNativeJsType {
     @JsConstructor
     public MyNativeJsTypeSubclass() {}
+  }
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Array")
+  static class MyNativeClassWithCustomIsInstance {
+    @JsOverlay
+    static boolean $isInstance(Object o) {
+      return isCustomIsInstanceClassSingleton(o);
+    }
+  }
+
+  private static final String CUSTOM_IS_INSTANCE_CLASS_SINGLETON = "CustomIsInstanceClass";
+
+  // This method was extracted from $isInstance and ONLY called from there to ensure that
+  // rta traverses custom isInstance methods.
+  private static boolean isCustomIsInstanceClassSingleton(Object o) {
+    return o == CUSTOM_IS_INSTANCE_CLASS_SINGLETON;
+  }
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Array")
+  interface MyNativeInterfaceWithCustomIsInstance {
+    @JsOverlay
+    static boolean $isInstance(Object o) {
+      return isCustomIsInstanceInterfaceSingleton(o);
+    }
+  }
+
+  private static final String CUSTOM_IS_INSTANCE_INTERFACE_SINGLETON = "CustomIsInstanceInterface";
+
+  // This method was extracted from $isInstance and ONLY called from there to ensure that
+  // rta traverses custom isInstance methods.
+  private static boolean isCustomIsInstanceInterfaceSingleton(Object o) {
+    return o == CUSTOM_IS_INSTANCE_INTERFACE_SINGLETON;
   }
 
   static class MyNativeJsTypeSubclassWithIterator extends MyNativeJsType implements Iterable {
@@ -262,6 +297,8 @@ public class JsTypeTest {
     assertFalse(object instanceof Iterator);
     assertTrue(object instanceof MyNativeJsType);
     assertFalse(object instanceof MyNativeJsTypeInterfaceImpl);
+    assertFalse(object instanceof MyNativeClassWithCustomIsInstance);
+    assertFalse(object instanceof MyNativeInterfaceWithCustomIsInstance);
     assertFalse(object instanceof ElementLikeNativeInterfaceImpl);
     assertFalse(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
     assertTrue(object instanceof AliasToMyNativeJsTypeWithOnlyInstanceofReference);
@@ -280,6 +317,8 @@ public class JsTypeTest {
     assertFalse(object instanceof Iterator);
     assertFalse(object instanceof MyNativeJsType);
     assertFalse(object instanceof MyNativeJsTypeInterfaceImpl);
+    assertFalse(object instanceof MyNativeClassWithCustomIsInstance);
+    assertFalse(object instanceof MyNativeInterfaceWithCustomIsInstance);
     assertFalse(object instanceof ElementLikeNativeInterfaceImpl);
     assertFalse(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
     assertFalse(object instanceof AliasToMyNativeJsTypeWithOnlyInstanceofReference);
@@ -298,6 +337,8 @@ public class JsTypeTest {
     assertFalse(object instanceof Iterator);
     assertFalse(object instanceof MyNativeJsType);
     assertFalse(object instanceof MyNativeJsTypeInterfaceImpl);
+    assertFalse(object instanceof MyNativeClassWithCustomIsInstance);
+    assertFalse(object instanceof MyNativeInterfaceWithCustomIsInstance);
     assertFalse(object instanceof ElementLikeNativeInterfaceImpl);
     assertFalse(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
     assertFalse(object instanceof AliasToMyNativeJsTypeWithOnlyInstanceofReference);
@@ -317,6 +358,8 @@ public class JsTypeTest {
     assertFalse(object instanceof Iterator);
     assertFalse(object instanceof MyNativeJsType);
     assertFalse(object instanceof MyNativeJsTypeInterfaceImpl);
+    assertFalse(object instanceof MyNativeClassWithCustomIsInstance);
+    assertFalse(object instanceof MyNativeInterfaceWithCustomIsInstance);
     assertTrue(object instanceof ElementLikeNativeInterfaceImpl);
     assertFalse(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
     assertFalse(object instanceof AliasToMyNativeJsTypeWithOnlyInstanceofReference);
@@ -336,6 +379,8 @@ public class JsTypeTest {
     assertFalse(object instanceof Iterator);
     assertFalse(object instanceof MyNativeJsType);
     assertTrue(object instanceof MyNativeJsTypeInterfaceImpl);
+    assertFalse(object instanceof MyNativeClassWithCustomIsInstance);
+    assertFalse(object instanceof MyNativeInterfaceWithCustomIsInstance);
     assertFalse(object instanceof ElementLikeNativeInterfaceImpl);
     assertFalse(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
     assertFalse(object instanceof AliasToMyNativeJsTypeWithOnlyInstanceofReference);
@@ -355,6 +400,8 @@ public class JsTypeTest {
     assertFalse(object instanceof Iterator);
     assertFalse(object instanceof MyNativeJsType);
     assertFalse(object instanceof MyNativeJsTypeInterfaceImpl);
+    assertFalse(object instanceof MyNativeClassWithCustomIsInstance);
+    assertFalse(object instanceof MyNativeInterfaceWithCustomIsInstance);
     assertFalse(object instanceof ElementLikeNativeInterfaceImpl);
     assertFalse(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
     assertFalse(object instanceof AliasToMyNativeJsTypeWithOnlyInstanceofReference);
@@ -376,9 +423,53 @@ public class JsTypeTest {
     assertFalse(object instanceof HTMLButtonElementConcreteNativeJsType);
     assertTrue(object instanceof Iterable);
     assertFalse(object instanceof MyNativeJsTypeInterfaceImpl);
+    assertFalse(object instanceof MyNativeClassWithCustomIsInstance);
+    assertFalse(object instanceof MyNativeInterfaceWithCustomIsInstance);
     assertFalse(object instanceof ElementLikeNativeInterfaceImpl);
     assertFalse(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
     assertTrue(object instanceof AliasToMyNativeJsTypeWithOnlyInstanceofReference);
+    assertFalse(object instanceof ConcreteJsType);
+    assertFalse(object instanceof MyNativeJsTypeInterface[]);
+    assertFalse(object instanceof MyNativeJsTypeInterfaceImpl[][]);
+  }
+
+  private static void testInstanceOf_classWithCustomIsInstance() {
+    Object object = CUSTOM_IS_INSTANCE_CLASS_SINGLETON;
+
+    assertTrue(object instanceof Object);
+    assertTrue(object instanceof String);
+    assertFalse(object instanceof HTMLElementConcreteNativeJsType);
+    assertFalse(object instanceof HTMLElementAnotherConcreteNativeJsType);
+    assertFalse(object instanceof HTMLButtonElementConcreteNativeJsType);
+    assertFalse(object instanceof Iterator);
+    assertFalse(object instanceof MyNativeJsType);
+    assertFalse(object instanceof MyNativeJsTypeInterfaceImpl);
+    assertTrue(object instanceof MyNativeClassWithCustomIsInstance);
+    assertFalse(object instanceof MyNativeInterfaceWithCustomIsInstance);
+    assertFalse(object instanceof ElementLikeNativeInterfaceImpl);
+    assertFalse(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
+    assertFalse(object instanceof AliasToMyNativeJsTypeWithOnlyInstanceofReference);
+    assertFalse(object instanceof ConcreteJsType);
+    assertFalse(object instanceof MyNativeJsTypeInterface[]);
+    assertFalse(object instanceof MyNativeJsTypeInterfaceImpl[][]);
+  }
+
+  private static void testInstanceOf_interfaceWithCustomIsInstance() {
+    Object object = CUSTOM_IS_INSTANCE_INTERFACE_SINGLETON;
+
+    assertTrue(object instanceof Object);
+    assertTrue(object instanceof String);
+    assertFalse(object instanceof HTMLElementConcreteNativeJsType);
+    assertFalse(object instanceof HTMLElementAnotherConcreteNativeJsType);
+    assertFalse(object instanceof HTMLButtonElementConcreteNativeJsType);
+    assertFalse(object instanceof Iterator);
+    assertFalse(object instanceof MyNativeJsType);
+    assertFalse(object instanceof MyNativeJsTypeInterfaceImpl);
+    assertFalse(object instanceof MyNativeClassWithCustomIsInstance);
+    assertTrue(object instanceof MyNativeInterfaceWithCustomIsInstance);
+    assertFalse(object instanceof ElementLikeNativeInterfaceImpl);
+    assertFalse(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
+    assertFalse(object instanceof AliasToMyNativeJsTypeWithOnlyInstanceofReference);
     assertFalse(object instanceof ConcreteJsType);
     assertFalse(object instanceof MyNativeJsTypeInterface[]);
     assertFalse(object instanceof MyNativeJsTypeInterfaceImpl[][]);

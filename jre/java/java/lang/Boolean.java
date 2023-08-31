@@ -19,7 +19,6 @@ package java.lang;
 import java.io.Serializable;
 import javaemul.internal.JsUtils;
 import javaemul.internal.Platform;
-import jsinterop.annotations.JsMethod;
 
 /**
  * Wraps native <code>boolean</code> as an object.
@@ -106,7 +105,6 @@ public final class Boolean implements Comparable<Boolean>, Serializable {
     return toString(booleanValue());
   }
 
-  @JsMethod
   static boolean $isInstance(Object instance) {
     return "boolean".equals(JsUtils.typeOf(instance));
   }

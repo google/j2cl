@@ -3371,6 +3371,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "    Object o = null;",
             "    boolean b = o instanceof InterfaceWithCustomIsInstance;",
             "    b = o instanceof ClassWithCustomIsInstance;",
+            "    b = o instanceof NativeInterfaceWithCustomIsInstance;",
             "    b = o instanceof NativeClassWithCustomIsInstance;",
             "  }",
             "}")
