@@ -38,7 +38,7 @@ final class BazelGwtIncompatibleStripper extends BazelWorker {
   @Option(
       name = "-annotation",
       metaVar = "<annotation>",
-      usage = "The name of hte annoation to strip; defaults to 'GwtIncompatible'")
+      usage = "The name of hte annotation to strip; defaults to 'GwtIncompatible'")
   String annotation = "GwtIncompatible";
 
   @Override
