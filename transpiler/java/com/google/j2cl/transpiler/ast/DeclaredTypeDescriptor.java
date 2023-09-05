@@ -374,7 +374,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
   public abstract TypeDeclaration getTypeDeclaration();
 
-  /** Returns the class initializer method descriptor for a particular type */
+  /** Returns the class initializer method descriptor for a particular type. */
   @Memoized
   public MethodDescriptor getClinitMethodDescriptor() {
     return MethodDescriptor.newBuilder()
@@ -386,7 +386,19 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         .build();
   }
 
-  /** Returns the instance initializer method descriptor for a particular type */
+  /** Returns the class initializer property as a field for a particular type. */
+  @Memoized
+  public FieldDescriptor getClinitFieldDescriptor() {
+    return FieldDescriptor.newBuilder()
+        .setEnclosingTypeDescriptor(this)
+        .setTypeDescriptor(TypeDescriptors.get().nativeFunction)
+        .setName(MethodDescriptor.CLINIT_METHOD_NAME)
+        .setOriginalJsInfo(isNative() ? JsInfo.RAW_OVERLAY : JsInfo.RAW)
+        .setStatic(true)
+        .build();
+  }
+
+  /** Returns the instance initializer method descriptor for a particular type. */
   @Memoized
   public MethodDescriptor getInitMethodDescriptor() {
     return MethodDescriptor.newBuilder()

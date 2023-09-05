@@ -175,13 +175,14 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   }
 
   public static final String CONSTRUCTOR_METHOD_NAME = "<init>";
-  static final String INIT_METHOD_NAME = "$init";
   public static final String CTOR_METHOD_PREFIX = "$ctor";
-  public static final String CLINIT_METHOD_NAME = "$clinit";
-  public static final String VALUE_OF_METHOD_NAME = "valueOf"; // Boxed type valueOf() method.
-  static final String IS_INSTANCE_METHOD_NAME = "$isInstance";
-  public static final String MARK_IMPLEMENTOR_METHOD_NAME = "$markImplementor";
   public static final String CREATE_METHOD_NAME = "$create";
+  public static final String VALUE_OF_METHOD_NAME = "valueOf"; // Boxed type valueOf() method.
+
+  static final String INIT_METHOD_NAME = "$init";
+  static final String CLINIT_METHOD_NAME = "$clinit";
+  static final String IS_INSTANCE_METHOD_NAME = "$isInstance";
+  static final String MARK_IMPLEMENTOR_METHOD_NAME = "$markImplementor";
   static final String LOAD_MODULES_METHOD_NAME = "$loadModules";
   static final String COPY_METHOD_NAME = "$copy";
 

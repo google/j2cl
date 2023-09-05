@@ -378,7 +378,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
     if (!methodDescriptor.canBeReferencedExternally()
         // TODO(b/193252533): Remove special casing of markImplementor.
-        && !methodDescriptor.getName().equals(MethodDescriptor.MARK_IMPLEMENTOR_METHOD_NAME)) {
+        && !methodDescriptor.equals(
+            methodDescriptor.getEnclosingTypeDescriptor().getMarkImplementorMethodDescriptor())) {
       jsDocBuilder.append(" @nodts");
     }
 

@@ -34,7 +34,6 @@ import com.google.j2cl.transpiler.ast.LambdaAdaptorTypeDescriptors;
 import com.google.j2cl.transpiler.ast.Member;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
-import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.Type;
@@ -181,7 +180,7 @@ public class ImplementStaticInitializationViaClinitFunctionRedirection
             .build());
   }
 
-  /** Returns the field descriptor for a the field backing the static setter/getters. */
+  /** Returns the field descriptor for the field backing the static setter/getters. */
   private static FieldDescriptor getBackingFieldDescriptor(FieldDescriptor fieldDescriptor) {
     checkArgument(
         fieldDescriptor.isStatic()
@@ -198,7 +197,7 @@ public class ImplementStaticInitializationViaClinitFunctionRedirection
     SourcePosition sourcePosition = type.getSourcePosition();
 
     FieldDescriptor clinitMethodFieldDescriptor =
-        getClinitFieldDescriptor(type.getTypeDescriptor());
+        type.getTypeDescriptor().getClinitFieldDescriptor();
 
     // Use the underlying JsFunction for the runnable Lambda to get a functional type with
     // no parameters and void return.
@@ -239,16 +238,5 @@ public class ImplementStaticInitializationViaClinitFunctionRedirection
             .build());
 
     type.getMembers().removeIf(member -> member.isInitializerBlock() && member.isStatic());
-  }
-
-  /** Returns the class initializer property as a field for a particular type */
-  private static FieldDescriptor getClinitFieldDescriptor(DeclaredTypeDescriptor typeDescriptor) {
-    return FieldDescriptor.newBuilder()
-        .setStatic(true)
-        .setEnclosingTypeDescriptor(typeDescriptor)
-        .setTypeDescriptor(TypeDescriptors.get().nativeFunction)
-        .setName(MethodDescriptor.CLINIT_METHOD_NAME)
-        .setOriginalJsInfo(typeDescriptor.isNative() ? JsInfo.RAW_OVERLAY : JsInfo.RAW)
-        .build();
   }
 }
