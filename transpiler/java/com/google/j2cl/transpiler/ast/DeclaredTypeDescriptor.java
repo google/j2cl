@@ -451,6 +451,23 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         .build();
   }
 
+  /** Returns the FieldDescriptor corresponding to the enclosing class instance. */
+  public FieldDescriptor getFieldDescriptorForEnclosingInstance() {
+    return FieldDescriptor.newBuilder()
+        .setEnclosingTypeDescriptor(toUnparameterizedTypeDescriptor())
+        .setName("this")
+        .setTypeDescriptor(
+            getEnclosingTypeDescriptor()
+                // Consider the outer instance type to be nullable to be make the type consistent
+                // across all places where it is used (backing field and constructor parameters).
+                .toNullable())
+        .setSynthetic(true)
+        .setFinal(true)
+        .setSynthetic(true)
+        .setOrigin(FieldOrigin.SYNTHETIC_OUTER_FIELD)
+        .build();
+  }
+
   @Memoized
   @Override
   public String getUniqueId() {

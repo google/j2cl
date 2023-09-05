@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 import static java.lang.String.format;
 import static java.util.Comparator.comparingInt;
 
@@ -364,19 +365,37 @@ class WasmGenerationEnvironment {
         .sorted(comparingInt(t -> t.getDeclaration().getClassHierarchyDepth()))
         .forEach(
             t -> {
-              WasmTypeLayout superTypeLayout = null;
-              if (t.getSuperTypeDescriptor() != null) {
-                superTypeLayout =
-                    wasmTypeLayoutByTypeDeclaration.get(
-                        t.getSuperTypeDescriptor().getTypeDeclaration());
-              }
-              wasmTypeLayoutByTypeDeclaration.put(
-                  t.getDeclaration(), WasmTypeLayout.create(t, superTypeLayout));
+              TypeDeclaration typeDeclaration = t.getDeclaration();
+              WasmTypeLayout superWasmLayout =
+                  getWasmLayout(typeDeclaration.getSuperTypeDeclaration());
+              var previous =
+                  wasmTypeLayoutByTypeDeclaration.put(
+                      typeDeclaration, WasmTypeLayout.createFromType(t, superWasmLayout));
+              // Since the layout is for a type in the AST, it is expected that the
+              // layout was not already created from the descriptor.
+              checkState(previous == null);
             });
 
     assignInterfaceSlots(library);
 
     this.jsImports = jsImports;
+  }
+
+  private WasmTypeLayout getWasmLayout(TypeDeclaration typeDeclaration) {
+    if (typeDeclaration == null) {
+      return null;
+    }
+    if (!wasmTypeLayoutByTypeDeclaration.containsKey(typeDeclaration)) {
+      WasmTypeLayout wasmTypeLayout =
+          WasmTypeLayout.createFromTypeDeclaration(
+              typeDeclaration, getWasmTypeLayout(typeDeclaration.getSuperTypeDeclaration()));
+      // If the supertype layout was not created by the type it is requested here,
+      // it means that the type is from a different library and is ok to
+      // create its layout from the type model.
+      wasmTypeLayoutByTypeDeclaration.put(typeDeclaration, wasmTypeLayout);
+      return wasmTypeLayout;
+    }
+    return wasmTypeLayoutByTypeDeclaration.get(typeDeclaration);
   }
 
   /**

@@ -26,23 +26,41 @@ import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Type;
+import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 import javax.annotation.Nullable;
 
 /** Runtime representation of a Java class in Wasm. */
 @AutoValue
 abstract class WasmTypeLayout {
-  static WasmTypeLayout create(Type javaType, WasmTypeLayout wasmSupertypeLayout) {
-    return new AutoValue_WasmTypeLayout(javaType, wasmSupertypeLayout);
+  /** Create a layout for a type that is declared the library being compiled. */
+  static WasmTypeLayout createFromType(Type javaType, WasmTypeLayout wasmSupertypeLayout) {
+    return new AutoValue_WasmTypeLayout(
+        javaType, javaType.getTypeDescriptor(), wasmSupertypeLayout);
   }
 
-  /** The Java class represented by this Wasm type. */
+  /** Create a layout for a type that is declared in a different library. */
+  static WasmTypeLayout createFromTypeDeclaration(
+      TypeDeclaration typeDeclaration, WasmTypeLayout wasmSupertypeLayout) {
+    return new AutoValue_WasmTypeLayout(
+        null, typeDeclaration.toUnparameterizedTypeDescriptor(), wasmSupertypeLayout);
+  }
+
+  /**
+   * The Java class represented by this Wasm type if the type is in the current library, {@code
+   * null} if the type is from a different library.
+   */
+  @Nullable
   abstract Type getJavaType();
+
+  abstract DeclaredTypeDescriptor getTypeDescriptor();
 
   /** The wasm representation of the superclass for this Java class. */
   @Nullable
@@ -51,16 +69,16 @@ abstract class WasmTypeLayout {
   /** Returns all the fields that will be in the layout for struct for the Java class. */
   @Memoized
   Collection<FieldDescriptor> getAllInstanceFields() {
-    List<FieldDescriptor> instanceFields = new ArrayList<>();
 
-    if (getWasmSupertypeLayout() != null) {
-      instanceFields.addAll(getWasmSupertypeLayout().getAllInstanceFields());
+    WasmTypeLayout wasmSupertypeLayout = getWasmSupertypeLayout();
+    List<FieldDescriptor> instanceFields = new ArrayList<>();
+    if (wasmSupertypeLayout != null) {
+      instanceFields.addAll(wasmSupertypeLayout.getAllInstanceFields());
     }
-    ImmutableList<FieldDescriptor> declaredInstanceFields =
-        getJavaType().getInstanceFields().stream()
-            .map(Field::getDescriptor)
-            .collect(toImmutableList());
-    if (TypeDescriptors.isWasmArraySubtype(getJavaType().getTypeDescriptor())) {
+
+    ImmutableList<FieldDescriptor> declaredInstanceFields = getDeclaredInstanceFields();
+
+    if (TypeDescriptors.isWasmArraySubtype(getTypeDescriptor())) {
       // TODO(b/296475021): Remove the hack to treat the field as overriden by subclass' field.
       // Override the type of the elements field in Wasm arrays by replacing the WasmArray elements
       // field with that of their subtype.
@@ -72,7 +90,46 @@ abstract class WasmTypeLayout {
     }
 
     instanceFields.addAll(declaredInstanceFields);
+
     return instanceFields;
+  }
+
+  private ImmutableList<FieldDescriptor> getDeclaredInstanceFields() {
+    Type type = getJavaType();
+    Stream<FieldDescriptor> declaredFieldDescriptors;
+    if (type != null) {
+      // If the type is in the library, just look at the field instances in the AST of the Type.
+      // In this scenario we will see exactly the instance fields even the ones that are synthesized
+      // for captures.
+      declaredFieldDescriptors = type.getInstanceFields().stream().map(Field::getDescriptor);
+    } else {
+      // If the type is not in the library, look at the declared fields for the type in the type
+      // model; in this case we will only see the instance fields that were declared on the type,
+      // but not the synthetic ones.
+      declaredFieldDescriptors =
+          getTypeDescriptor().getDeclaredFieldDescriptors().stream()
+              .filter(FieldDescriptor::isInstanceMember);
+
+      // The only synthetic field we care for types that are not in the current library is the field
+      // to store the enclosing instance which we can add it explicitly here if needed. In Wasm
+      // declaring structures and initializing instances requires knowing the full structure of the
+      // type, which includes all the fields inherited from supertypes including private fields.
+      // Luckily in Java, types that have other captures can not be subclasses outside the library,
+      // and due to the fact that initialization is behind a factory method, the structures of these
+      // types are never leaked outside the compilation unit the type is defined in.
+      if (getTypeDescriptor().getTypeDeclaration().isCapturingEnclosingInstance()) {
+        declaredFieldDescriptors =
+            Stream.concat(
+                declaredFieldDescriptors,
+                Stream.of(getTypeDescriptor().getFieldDescriptorForEnclosingInstance()));
+      }
+    }
+
+    return declaredFieldDescriptors
+        // Declared fields are sorted by mangled name because they might not appear in the same
+        // order in the AST.
+        .sorted(Comparator.comparing(FieldDescriptor::getMangledName))
+        .collect(toImmutableList());
   }
 
   /** Returns all the methods that will be part of the vtable for the Java class. */
@@ -98,13 +155,13 @@ abstract class WasmTypeLayout {
       instanceMethodsByMangledName.putAll(
           getWasmSupertypeLayout().getAllPolymorphicMethodsByMangledName());
     }
-    DeclaredTypeDescriptor typeDescriptor = getJavaType().getTypeDescriptor();
+    DeclaredTypeDescriptor typeDescriptor = getTypeDescriptor();
     for (MethodDescriptor methodDescriptor : typeDescriptor.getPolymorphicMethods()) {
       instanceMethodsByMangledName.put(methodDescriptor.getMangledName(), methodDescriptor);
     }
     // Patch entry for $getClassImpl, since it is explicitly overridden in every class but does not
     // appear as overridden at the right target when calling getPolymorphicMethods().
-    if (!getJavaType().isInterface()) {
+    if (!typeDescriptor.isInterface()) {
       MethodDescriptor getClassMethodDescriptor = getGetClassMethodDescriptor(typeDescriptor);
       instanceMethodsByMangledName.put(
           getClassMethodDescriptor.getMangledName(), getClassMethodDescriptor);

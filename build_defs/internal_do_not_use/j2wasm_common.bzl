@@ -23,7 +23,15 @@ def _compile(
         exported_plugins = exported_plugins,
         backend = "WASM_MODULAR",
         output_jar = output_jar,
-        javac_opts = javac_opts,
+        javac_opts = javac_opts + [
+            # Preserve the private fields in turbine compilation. In order to create wasm structs for
+            # Java classes, all the fields from the super classes need to be seen even if compiling
+            # in a different library.
+            "-XDturbine.emitPrivateFields",
+            # Disable analysis for thread safety since it does not expect to see
+            # private fields from dependencies.
+            "-Xep:ThreadSafe:OFF",
+        ],
         artifact_suffix = artifact_suffix,
     )
 

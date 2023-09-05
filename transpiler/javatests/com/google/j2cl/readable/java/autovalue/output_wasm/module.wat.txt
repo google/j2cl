@@ -235,9 +235,9 @@
   (field $vtable (ref $autovalue.SimpleAutoValue.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $f_intField__autovalue_SimpleAutoValue_ (mut i32))
   (field $f_field1__autovalue_SimpleAutoValue_ (mut (ref null $autovalue.AutoValue_SimpleAutoValue)))
   (field $f_field2__autovalue_SimpleAutoValue_ (mut (ref null $autovalue.AutoValue_SimpleAutoValue)))
+  (field $f_intField__autovalue_SimpleAutoValue_ (mut i32))
   ))
  )
  (type $autovalue.SimpleAutoValue.vtable (sub $java.lang.Object.vtable (struct
@@ -474,15 +474,15 @@
   (field $vtable (ref $autovalue.AutoValue_SimpleAutoValue.vtable))
   (field $itable (ref $itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $f_intField__autovalue_SimpleAutoValue_ (mut i32))
   (field $f_field1__autovalue_SimpleAutoValue_ (mut (ref null $autovalue.AutoValue_SimpleAutoValue)))
   (field $f_field2__autovalue_SimpleAutoValue_ (mut (ref null $autovalue.AutoValue_SimpleAutoValue)))
-  (field $f_intField__autovalue_AutoValue_SimpleAutoValue_ (mut i32))
-  (field $f_booleanField__autovalue_AutoValue_SimpleAutoValue_ (mut i8))
-  (field $f_stringField__autovalue_AutoValue_SimpleAutoValue_ (mut (ref null $java.lang.String)))
-  (field $f_doubleField__autovalue_AutoValue_SimpleAutoValue_ (mut (ref null $java.lang.Double)))
-  (field $f_nullableField__autovalue_AutoValue_SimpleAutoValue_ (mut (ref null $java.lang.Double)))
+  (field $f_intField__autovalue_SimpleAutoValue_ (mut i32))
   (field $f_arrayField__autovalue_AutoValue_SimpleAutoValue_ (mut (ref null $javaemul.internal.WasmArray.OfInt)))
+  (field $f_booleanField__autovalue_AutoValue_SimpleAutoValue_ (mut i8))
+  (field $f_doubleField__autovalue_AutoValue_SimpleAutoValue_ (mut (ref null $java.lang.Double)))
+  (field $f_intField__autovalue_AutoValue_SimpleAutoValue_ (mut i32))
+  (field $f_nullableField__autovalue_AutoValue_SimpleAutoValue_ (mut (ref null $java.lang.Double)))
+  (field $f_stringField__autovalue_AutoValue_SimpleAutoValue_ (mut (ref null $java.lang.String)))
   ))
  )
  (type $autovalue.AutoValue_SimpleAutoValue.vtable (sub $autovalue.SimpleAutoValue.vtable (struct
@@ -711,8 +711,8 @@
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $f_intField__autovalue_$$AutoValue_AutoValueWithExtensions_ (mut i32))
   (field $f_stringField__autovalue_$$AutoValue_AutoValueWithExtensions_ (mut (ref null $java.lang.String)))
-  (field $f_getMemoizedNative__autovalue_AutoValue_AutoValueWithExtensions_ (mut i32))
   (field $f_getMemoizedNative$Memoized__autovalue_AutoValue_AutoValueWithExtensions_ (mut i8))
+  (field $f_getMemoizedNative__autovalue_AutoValue_AutoValueWithExtensions_ (mut i32))
   ))
  )
  (type $autovalue.AutoValue_AutoValueWithExtensions.vtable (sub $autovalue.$AutoValue_AutoValueWithExtensions.vtable (struct
@@ -736,8 +736,8 @@
   (field $f_userField1__autovalue_Parent (mut i32))
   (field $f_userField2__autovalue_AutoValueWithFields (mut i32))
   (field $f_intField__autovalue_$AutoValue_AutoValueWithFields_ (mut i32))
-  (field $f_getMemoizedNative__autovalue_AutoValue_AutoValueWithFields_ (mut i32))
   (field $f_getMemoizedNative$Memoized__autovalue_AutoValue_AutoValueWithFields_ (mut i8))
+  (field $f_getMemoizedNative__autovalue_AutoValue_AutoValueWithFields_ (mut i32))
   ))
  )
  (type $autovalue.AutoValue_AutoValueWithFields.vtable (sub $autovalue.$AutoValue_AutoValueWithFields.vtable (struct
@@ -4099,7 +4099,7 @@
  (local $$instance (ref null $autovalue.AutoValue_SimpleAutoValue))
  (block
   ;;@ autovalue/AutoValue_SimpleAutoValue.java:23:2
-  (local.set $$instance (struct.new $autovalue.AutoValue_SimpleAutoValue (ref.as_non_null (global.get $autovalue.AutoValue_SimpleAutoValue.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (ref.null $autovalue.AutoValue_SimpleAutoValue) (ref.null $autovalue.AutoValue_SimpleAutoValue) (i32.const 0) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Double) (ref.null $java.lang.Double) (ref.null $javaemul.internal.WasmArray.OfInt)))
+  (local.set $$instance (struct.new $autovalue.AutoValue_SimpleAutoValue (ref.as_non_null (global.get $autovalue.AutoValue_SimpleAutoValue.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $autovalue.AutoValue_SimpleAutoValue) (ref.null $autovalue.AutoValue_SimpleAutoValue) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfInt) (i32.const 0) (ref.null $java.lang.Double) (i32.const 0) (ref.null $java.lang.Double) (ref.null $java.lang.String)))
   ;;@ autovalue/AutoValue_SimpleAutoValue.java:23:2
   (call $$ctor__int__boolean__java_lang_String__java_lang_Double__java_lang_Double__arrayOf_int__void_$p_autovalue_AutoValue_SimpleAutoValue@autovalue.AutoValue_SimpleAutoValue (ref.as_non_null (local.get $$instance))(local.get $intField)(local.get $booleanField)(local.get $stringField)(local.get $doubleField)(local.get $nullableField)(local.get $arrayField))
   ;;@ autovalue/AutoValue_SimpleAutoValue.java:23:2

@@ -182,7 +182,8 @@ public class ResolveCaptures extends NormalizationPass {
             if (type.getDeclaration().isCapturingEnclosingInstance()) {
               type.addMember(
                   0,
-                  Field.Builder.from(getFieldDescriptorForEnclosingInstance(type.getDeclaration()))
+                  Field.Builder.from(
+                          type.getTypeDescriptor().getFieldDescriptorForEnclosingInstance())
                       .setSourcePosition(type.getSourcePosition())
                       .build());
             }
@@ -276,7 +277,9 @@ public class ResolveCaptures extends NormalizationPass {
                     ? addParameterAndInitializeBackingField(
                         methodBuilder,
                         0,
-                        getFieldDescriptorForEnclosingInstance(typeDeclaration),
+                        getCurrentType()
+                            .getTypeDescriptor()
+                            .getFieldDescriptorForEnclosingInstance(),
                         isDelegatingConstructor,
                         getCurrentType().getSourcePosition())
                     : null;
@@ -397,9 +400,7 @@ public class ResolveCaptures extends NormalizationPass {
             do {
               outerFieldAccess =
                   FieldAccess.newBuilder()
-                      .setTarget(
-                          getFieldDescriptorForEnclosingInstance(
-                              currentTypeDescriptor.getTypeDeclaration()))
+                      .setTarget(currentTypeDescriptor.getFieldDescriptorForEnclosingInstance())
                       .setQualifier(outerFieldAccess)
                       .build();
               currentTypeDescriptor = currentTypeDescriptor.getEnclosingTypeDescriptor();
@@ -426,26 +427,6 @@ public class ResolveCaptures extends NormalizationPass {
         .setFinal(true)
         .setSynthetic(true)
         .setOrigin(FieldOrigin.SYNTHETIC_CAPTURE_FIELD)
-        .build();
-  }
-
-  /** Returns the FieldDescriptor corresponding to the enclosing class instance. */
-  private FieldDescriptor getFieldDescriptorForEnclosingInstance(
-      TypeDeclaration innerTypeDescriptor) {
-    return FieldDescriptor.newBuilder()
-        .setEnclosingTypeDescriptor(innerTypeDescriptor.toUnparameterizedTypeDescriptor())
-        .setName("this")
-        .setTypeDescriptor(
-            innerTypeDescriptor
-                .getEnclosingTypeDeclaration()
-                .toUnparameterizedTypeDescriptor()
-                // Consider the outer instance type to be nullable to be make the type consistent
-                // across all places where it is used (backing field and constructor parameters).
-                .toNullable())
-        .setSynthetic(true)
-        .setFinal(true)
-        .setSynthetic(true)
-        .setOrigin(FieldOrigin.SYNTHETIC_OUTER_FIELD)
         .build();
   }
 
