@@ -102,7 +102,7 @@ public class WasmOutputsGenerator {
     emitDataSegments(library);
     outputIfNotEmpty("data.wat");
 
-    generateJsImportsFile(library);
+    generateJsImportsFile();
   }
 
   private void outputIfNotEmpty(String path) {
@@ -118,7 +118,7 @@ public class WasmOutputsGenerator {
   public void generateMonolithicOutput(Library library) {
     copyJavaSources(library);
     generateWasmModule(library);
-    generateJsImportsFile(library);
+    generateJsImportsFile();
   }
 
   private void copyJavaSources(Library library) {
@@ -919,7 +919,7 @@ public class WasmOutputsGenerator {
     builder.append(";;; End of code for " + commentId);
   }
 
-  private void generateJsImportsFile(Library library) {
-    new JsImportsGenerator(output, environment, problems).generateOutputs(library);
+  private void generateJsImportsFile() {
+    JsImportsGenerator.generateOutputs(output, environment.getJsImports());
   }
 }
