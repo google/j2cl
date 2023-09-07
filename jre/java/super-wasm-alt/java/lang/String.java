@@ -964,19 +964,17 @@ public final class String implements Serializable, Comparable<String>, CharSeque
 
   // Helper methods to pass and receive strings to and from JavaScript.
 
-  // TODO(b/268386628): Hide this helper once external references are cleaned up.
   /** Returns a JavaScript string that can be used to pass to JavaScript imported methods. */
-  public NativeString toJsString() {
+  NativeString toJsString() {
     return nativeFromCharCodeArray(value, offset, offset + count);
   }
 
-  // TODO(b/268386628): Hide this helper once external references are cleaned up.
-  public static NativeString toJsString(String string) {
+  static NativeString toJsString(String string) {
     return string == null ? null : string.toJsString();
   }
 
   /** Returns a String using the char values provided as a JavaScript array. */
-  public static String fromJsString(NativeString jsString) {
+  static String fromJsString(NativeString jsString) {
     if (jsString == null) {
       return null;
     }
@@ -999,10 +997,9 @@ public final class String implements Serializable, Comparable<String>, CharSeque
   private static native NativeString nativeFromCharCode(char x);
 
   /** Native JS compatible representation of a string. */
-  // TODO(b/268386628): Hide NativeString once external references are cleaned up.
   @Wasm("string")
   @JsType(isNative = true, name = "string", namespace = JsPackage.GLOBAL)
-  public interface NativeString {
+  interface NativeString {
     NativeString replace(NativeRegExp regex, NativeString replace);
 
     NativeString toLowerCase();

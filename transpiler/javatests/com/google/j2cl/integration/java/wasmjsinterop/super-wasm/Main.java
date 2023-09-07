@@ -17,6 +17,7 @@ package wasmjsinterop;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -30,13 +31,14 @@ public final class Main {
   }
 
   public static void testJsString() {
-    assertEquals(null, String.fromJsString(null));
+    assertEquals(null, appendInJs(null, null));
 
     String empty = "";
-    assertEquals(empty, String.fromJsString(empty.toJsString()));
+    assertEquals(empty, appendInJs(empty, empty));
 
-    String foo = "String with special chars like $'%$\"^";
-    assertEquals(foo, String.fromJsString(foo.toJsString()));
+    String foo = "String with special ";
+    String bar = "chars like $'%$\"^";
+    assertEquals(foo + bar, appendInJs(foo, bar));
   }
 
   private static void testGlobalJsType() {
@@ -84,4 +86,7 @@ public final class Main {
 
     public static native int mult(int a, int b);
   }
+
+  @JsMethod(namespace = "test")
+  private static native String appendInJs(String a, String b);
 }
