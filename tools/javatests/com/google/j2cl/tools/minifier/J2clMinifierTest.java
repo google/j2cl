@@ -201,24 +201,6 @@ public class J2clMinifierTest extends TestCase {
     assertNoChange("\"goog.require('java.lang.Foo');\"");
   }
 
-  public void testFieldDeclaration() {
-    assertChange("this.bar;", "");
-    assertChange("Foo.bar;", "");
-    assertChange("Foo.prototype.bar;", "");
-    assertChange("/** {bar} */Foo.bar;", "");
-    assertChange("  /** {bar} */\nFoo.bar;", "\n");
-    assertChange(" Foo.bar;", "");
-    assertChange("Agoog.bar;", ""); // Note that this includes "goog."
-    assertChange("\nthis.bar;", "\n");
-    assertChange("\n  this.a;\n  this.b;\n", "\n\n\n");
-    assertChange("this.bar;\nthis.foo;\nthis.zoo;", "\n\n");
-    assertChange("{this.bar;}{this.foo;}this.zoo;", "{}{}");
-
-    assertNoChange("var a = Foo.bar;");
-    assertNoChange("var a =\n Foo.bar;");
-    assertNoChange("f =>\n foo.bar;");
-    assertNoChange("while(Foo.bar)");
-  }
 
   public void testNoChanges() {
     assertNoChange("foo");
@@ -233,6 +215,8 @@ public class J2clMinifierTest extends TestCase {
     assertNoChange("meConstants__");
     assertNoChange("fsCloseBox__soy3");
     assertNoChange("menuCss__soy3");
+    assertNoChange("this.bar;");
+    assertNoChange("for(;this.bar;)");
   }
 
   public void testStrings() {
@@ -279,7 +263,7 @@ public class J2clMinifierTest extends TestCase {
             "  $LambdaAdaptor.$clinit();",
             "  super();",
             "",
-            "",
+            "  this.boo_$1;",
             "  this.ctor_$1(fn);",
             "}"));
   }

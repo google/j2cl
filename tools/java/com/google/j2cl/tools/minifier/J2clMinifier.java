@@ -67,9 +67,12 @@ public class J2clMinifier {
     private int identifierStartIndex = -1;
     private int whitespaceStartIndex = 0;
     // We essentially want the ability to see if the last meaningful character we saw is something
-    // that is clearly a statement start semi-colon so we know that is not inside an expression.
-    // We could easily achive that by tracing back the characters but that is inefficient vs. our
+    // that is clearly a statement start semicolon so we know that is not inside an expression.
+    // We could easily achieve that by tracing back the characters but that is inefficient vs. our
     // tracking here via append.
+    // Also note the the statement tracking code is meant for removal of "goog.require" and
+    // "goog.forwardDeclare", which only appear at the top level, but is not correct for general use
+    // due to constructs like "for(;;)" where the condition might be mistaken for a statement.
     private int statementStartIndex = 0;
     private boolean nextIsStatementStart = true;
 
@@ -317,7 +320,6 @@ public class J2clMinifier {
     }
   }
 
-  private static final Pattern FIELD_STATEMENT = Pattern.compile(" *[\\w_$]+(\\.[\\w_$]+)+;");
   private static final String MODULE_NAME = "['\"][\\w\\.$]+['\"]";
   private static final Pattern GOOG_FORWARD_DECLARE =
       Pattern.compile("((?:let|var) [\\w$]+) = goog.forwardDeclare\\(" + MODULE_NAME + "\\);");
@@ -325,13 +327,6 @@ public class J2clMinifier {
       Pattern.compile("goog.require\\(" + MODULE_NAME + "\\);");
 
   private static void maybeReplaceStatement(Buffer buffer) {
-    // Unassigned field access is only useful for compiler.
-    Matcher m = buffer.matchLastStatement(FIELD_STATEMENT);
-    if (m.matches()) {
-      buffer.replaceStatement("");
-      return;
-    }
-
     int index = buffer.lastStatementIndexOf("goog.");
     if (index == -1) {
       return;
@@ -339,13 +334,13 @@ public class J2clMinifier {
 
     if (index == 0) {
       // Unassigned goog.require is only useful for compiler and bundling.
-      m = buffer.matchLastStatement(GOOG_REQUIRE);
+      Matcher m = buffer.matchLastStatement(GOOG_REQUIRE);
       if (m.matches()) {
         buffer.replaceStatement("");
       }
     } else {
       // goog.forwardDeclare is only useful for compiler except the variable declaration.
-      m = buffer.matchLastStatement(GOOG_FORWARD_DECLARE);
+      Matcher m = buffer.matchLastStatement(GOOG_FORWARD_DECLARE);
       if (m.matches()) {
         buffer.replaceStatement(m.group(1) + ";");
       }
