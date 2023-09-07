@@ -113,9 +113,15 @@ class Enums {
     }
   }
 
-  public static Object unbox(Object object) {
+  public static Object unbox(Object object, Constructor ctor) {
     if (object == null) {
       return null;
+    }
+    if (InternalPreconditions.isTypeChecked()) {
+      if (!isInstanceOf(object, ctor)) {
+        throw new ClassCastException(
+            object.getClass().getName() + " cannot be cast to " + ctor.getClassName());
+      }
     }
     BoxedLightEnum<?> boxedEnum = (BoxedLightEnum<?>) object;
     return boxedEnum.value;

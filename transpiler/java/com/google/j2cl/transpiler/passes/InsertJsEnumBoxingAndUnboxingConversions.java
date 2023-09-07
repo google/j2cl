@@ -89,8 +89,8 @@ public class InsertJsEnumBoxingAndUnboxingConversions extends NormalizationPass 
                 }
 
                 if (AstUtils.isNonNativeJsEnum(toTypeDescriptor)) {
-                  // (MyJsEnum) o => unbox((MyJsEnum) o);
-                  return unbox(toTypeDescriptor, castExpression);
+                  // (MyJsEnum) o => unbox(o, <MyJsEnum.class>);
+                  return unbox(toTypeDescriptor, innerExpression);
                 }
 
                 if (AstUtils.isNonNativeJsEnum(fromTypeDescriptor)) {
@@ -113,7 +113,7 @@ public class InsertJsEnumBoxingAndUnboxingConversions extends NormalizationPass 
 
   private static Expression unbox(TypeDescriptor toTypeDescriptor, Expression expression) {
     return JsDocCastExpression.newBuilder()
-        .setExpression(RuntimeMethods.createEnumsUnboxMethodCall(expression))
+        .setExpression(RuntimeMethods.createEnumsUnboxMethodCall(expression, toTypeDescriptor))
         .setCastType(toTypeDescriptor)
         .build();
   }

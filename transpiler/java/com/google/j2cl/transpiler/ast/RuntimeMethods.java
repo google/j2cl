@@ -234,8 +234,10 @@ public final class RuntimeMethods {
   }
 
   /** Create a call to Enums.unbox. */
-  public static Expression createEnumsUnboxMethodCall(Expression expression) {
-    return createEnumsMethodCall("unbox", expression);
+  public static Expression createEnumsUnboxMethodCall(
+      Expression expression, TypeDescriptor toTypeDescriptor) {
+    return createEnumsMethodCall(
+        "unbox", expression, toTypeDescriptor.getMetadataConstructorReference());
   }
 
   public static Expression createEnumsMethodCall(String unbox, Expression... arguments) {
