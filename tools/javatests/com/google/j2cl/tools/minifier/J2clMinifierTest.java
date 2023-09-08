@@ -201,7 +201,6 @@ public class J2clMinifierTest extends TestCase {
     assertNoChange("\"goog.require('java.lang.Foo');\"");
   }
 
-
   public void testNoChanges() {
     assertNoChange("foo");
     assertNoChange("m_foo");
