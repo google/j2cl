@@ -49,7 +49,6 @@ public class Main {
     testStringNativeJsEnum();
     testCastOnNative();
     testComparableJsEnum();
-    testBooleanJsEnum();
     testStringJsEnum();
     testJsEnumClassInitialization();
     testNativeEnumClassInitialization();
@@ -241,7 +240,7 @@ public class Main {
     ONE,
     TWO;
 
-    short value;
+    int value;
   }
 
   public static void testCastOnNative() {
@@ -388,7 +387,6 @@ public class Main {
     assertFalse((Object) v instanceof Double);
     assertTrue(v instanceof Comparable);
     assertTrue(v instanceof Serializable);
-    assertFalse((Object) v instanceof BooleanJsEnum);
 
     assertFalse(new Object() instanceof PlainJsEnum);
     assertFalse((Object) ONE_DOUBLE instanceof PlainJsEnum);
@@ -426,105 +424,6 @@ public class Main {
 
   @JsMethod(name = "passThrough")
   private static native Object asSeenFromJs(PlainJsEnum d);
-
-  @JsEnum(hasCustomValue = true)
-  enum BooleanJsEnum {
-    TRUE(true),
-    FALSE(false);
-
-    boolean value;
-
-    BooleanJsEnum(boolean value) {
-      this.value = value;
-    }
-  }
-
-  private static void testBooleanJsEnum() {
-    BooleanJsEnum v = BooleanJsEnum.FALSE;
-    switch (v) {
-      case TRUE:
-        fail();
-        break;
-      case FALSE:
-        break;
-      default:
-        fail();
-        break;
-    }
-
-    assertThrows(
-        NullPointerException.class,
-        () -> {
-          BooleanJsEnum nullJsEnum = null;
-          switch (nullJsEnum) {
-          }
-        });
-
-    assertTrue(v == BooleanJsEnum.FALSE);
-    assertTrue(v != BooleanJsEnum.TRUE);
-    assertTrue((Object) v != FALSE_BOOLEAN);
-    // Boxing preserves equality.
-    Object o = BooleanJsEnum.FALSE;
-    assertTrue(o == BooleanJsEnum.FALSE);
-
-    // Object methods calls on a variable of JsEnum type.
-    assertTrue(v.hashCode() == BooleanJsEnum.FALSE.hashCode());
-    assertTrue(v.hashCode() != BooleanJsEnum.TRUE.hashCode());
-    assertTrue(v.toString().equals(String.valueOf(FALSE_BOOLEAN)));
-    assertTrue(v.equals(BooleanJsEnum.FALSE));
-    assertFalse(v.equals(FALSE_BOOLEAN));
-
-    // Object methods calls on a variable of Object type.
-    assertTrue(o.hashCode() == BooleanJsEnum.FALSE.hashCode());
-    assertTrue(o.hashCode() != BooleanJsEnum.TRUE.hashCode());
-    assertTrue(o.toString().equals(String.valueOf(FALSE_BOOLEAN)));
-    assertTrue(o.equals(BooleanJsEnum.FALSE));
-    assertFalse(o.equals(FALSE_BOOLEAN));
-
-    assertTrue((Object) v.value == FALSE_BOOLEAN);
-    // Test that boxing of special field 'value' call is not broken by normalization.
-    Boolean b = v.value;
-    assertTrue(b == FALSE_BOOLEAN);
-
-    assertFalse(v instanceof Enum);
-    assertTrue(v instanceof BooleanJsEnum);
-    assertFalse((Object) v instanceof Boolean);
-    assertFalse(v instanceof Comparable);
-    assertTrue(v instanceof Serializable);
-    assertFalse((Object) v instanceof PlainJsEnum);
-
-    assertFalse(new Object() instanceof BooleanJsEnum);
-    assertFalse((Object) FALSE_BOOLEAN instanceof BooleanJsEnum);
-
-    BooleanJsEnum be = (BooleanJsEnum) o;
-    Serializable s = (Serializable) o;
-
-    assertThrowsClassCastException(
-        () -> {
-          Object unused = (Enum) o;
-        },
-        Enum.class);
-    assertThrowsClassCastException(
-        () -> {
-          Object unused = (Comparable) o;
-        },
-        Comparable.class);
-    assertThrowsClassCastException(
-        () -> {
-          Object unused = (Boolean) o;
-        },
-        Boolean.class);
-    assertThrowsClassCastException(
-        () -> {
-          Object unused = (BooleanJsEnum & Comparable<BooleanJsEnum>) o;
-        },
-        Comparable.class);
-
-    assertTrue(asSeenFromJs(BooleanJsEnum.FALSE) == FALSE_BOOLEAN);
-  }
-
-  @JsMethod(name = "passThrough")
-  private static native Object asSeenFromJs(BooleanJsEnum b);
 
   @JsEnum(hasCustomValue = true)
   enum StringJsEnum {

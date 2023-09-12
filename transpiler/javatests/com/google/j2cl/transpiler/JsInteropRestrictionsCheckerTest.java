@@ -1976,6 +1976,12 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  InvalidCustomValueType(long value) { this.value = value; }",
             "}",
             "@JsEnum(hasCustomValue = true)",
+            "enum InvalidCustomValueType2 {",
+            "  A(false);",
+            "  boolean value;",
+            "  InvalidCustomValueType2(boolean value) { this.value = value; }",
+            "}",
+            "@JsEnum(hasCustomValue = true)",
             "enum InvalidCustomValueInitializer {",
             "  A(\"  \".length());",
             "  int value = 5;",
@@ -2007,8 +2013,12 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 + "to the value field.",
             "Custom-valued JsEnum value field 'CustomValued.value' cannot be static nor "
                 + "JsOverlay nor JsMethod nor JsProperty.",
-            "Custom-valued JsEnum value field 'InvalidCustomValueType.value' cannot have the "
-                + "type 'long'.",
+            "Custom-valued JsEnum value field 'InvalidCustomValueType.value' cannot have the type"
+                + " 'long'. The only valid value types are 'int' and 'java.lang.String'."
+                + " (b/295240966)",
+            "Custom-valued JsEnum value field 'InvalidCustomValueType2.value' cannot have the type"
+                + " 'boolean'. The only valid value types are 'int' and 'java.lang.String'."
+                + " (b/295240966)",
             "Custom-valued JsEnum value field 'InvalidCustomValueInitializer.value' cannot "
                 + "have initializer.",
             "Custom-valued JsEnum 'CustomValueMissingConstructor' should have a constructor.",
@@ -2035,12 +2045,12 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "import jsinterop.annotations.*;",
             "@JsEnum(hasCustomValue = true)",
             "public enum CustomValued {",
-            "  A(true),",
-            "  B(!true),",
-            "  C(false),",
-            "  D(true);",
-            "  final boolean value;",
-            "  CustomValued(boolean value) { this.value = value;}",
+            "  A(1),",
+            "  B(-1),",
+            "  C(0),",
+            "  D(1 + 1);",
+            "  final int value;",
+            "  CustomValued(int value) { this.value = value;}",
             "}")
         .assertNoWarnings();
   }
@@ -2074,7 +2084,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "enum NativeJsEnumNotDeclaringCustomValueButWithValueField {",
             "  A,",
             "  B;",
-            "  boolean value = true;",
+            "  int value = 1;",
             "}")
         .assertErrorsWithoutSourcePosition(
             "JsEnum 'Native' does not support 'String Enum.name()'.",

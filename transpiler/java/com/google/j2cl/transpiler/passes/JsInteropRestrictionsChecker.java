@@ -525,11 +525,17 @@ public class JsInteropRestrictionsChecker {
     }
 
     if (!checkJsEnumCustomValueType(valueTypeDescriptor)) {
+      String bugMessage = "";
+      if (valueTypeDescriptor.isPrimitive()) {
+        bugMessage = " (b/295240966)";
+      }
       problems.error(
           field.getSourcePosition(),
-          "%s cannot have the type '%s'.",
+          "%s cannot have the type '%s'. The only valid value types are 'int' and"
+              + " 'java.lang.String'.%s",
           messagePrefix,
-          valueTypeDescriptor.getReadableDescription());
+          valueTypeDescriptor.getReadableDescription(),
+          bugMessage);
     }
 
     if (field.getInitializer() != null) {
@@ -538,8 +544,7 @@ public class JsInteropRestrictionsChecker {
   }
 
   private static boolean checkJsEnumCustomValueType(TypeDescriptor valueTypeDescriptor) {
-    return (valueTypeDescriptor.isPrimitive()
-            && !TypeDescriptors.isPrimitiveLong(valueTypeDescriptor))
+    return TypeDescriptors.isPrimitiveInt(valueTypeDescriptor)
         || TypeDescriptors.isJavaLangString(valueTypeDescriptor);
   }
 
