@@ -56,9 +56,9 @@ fun afterSpace(source: Source) = join(source(" "), source)
 
 fun inNewLine(source: Source) = source("\n") + source
 
-fun inRoundBracketsIfNotEmpty(source: Source) = source.ifNotEmpty { inRoundBrackets(it) }
+fun inParenthesesIfNotEmpty(source: Source) = source.ifNotEmpty { inParentheses(it) }
 
-fun inRoundBrackets(source: Source) = join(source("("), source, source(")"))
+fun inParentheses(source: Source) = join(source("("), source, source(")"))
 
 fun inAngleBrackets(source: Source) = join(source("<"), source, source(">"))
 

@@ -20,8 +20,8 @@ import com.google.j2cl.transpiler.backend.kotlin.source.commaAndNewLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.dotSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.inNewLine
-import com.google.j2cl.transpiler.backend.kotlin.source.inRoundBrackets
-import com.google.j2cl.transpiler.backend.kotlin.source.inRoundBracketsIfNotEmpty
+import com.google.j2cl.transpiler.backend.kotlin.source.inParentheses
+import com.google.j2cl.transpiler.backend.kotlin.source.inParenthesesIfNotEmpty
 import com.google.j2cl.transpiler.backend.kotlin.source.indented
 import com.google.j2cl.transpiler.backend.kotlin.source.infix
 import com.google.j2cl.transpiler.backend.kotlin.source.join
@@ -38,27 +38,25 @@ fun literalSource(it: Int): Source = source("$it")
 fun literalSource(it: Long): Source =
   when (it) {
     // Long.MIN_VALUE can not be represented as a literal in Kotlin.
-    Long.MIN_VALUE -> inRoundBrackets(infix(literalSource(Long.MAX_VALUE), "+", literalSource(1L)))
+    Long.MIN_VALUE -> inParentheses(infix(literalSource(Long.MAX_VALUE), "+", literalSource(1L)))
     else -> source("${it}L")
   }
 
 fun literalSource(it: Float): Source =
-  if (it.isNaN()) inRoundBrackets(infix(literalSource(0f), "/", literalSource(0f)))
+  if (it.isNaN()) inParentheses(infix(literalSource(0f), "/", literalSource(0f)))
   else
     when (it) {
-      Float.NEGATIVE_INFINITY -> inRoundBrackets(infix(literalSource(-1f), "/", literalSource(0f)))
-      Float.POSITIVE_INFINITY -> inRoundBrackets(infix(literalSource(1f), "/", literalSource(0f)))
+      Float.NEGATIVE_INFINITY -> inParentheses(infix(literalSource(-1f), "/", literalSource(0f)))
+      Float.POSITIVE_INFINITY -> inParentheses(infix(literalSource(1f), "/", literalSource(0f)))
       else -> source("${it}f")
     }
 
 fun literalSource(it: Double): Source =
-  if (it.isNaN()) inRoundBrackets(infix(literalSource(0.0), "/", literalSource(0.0)))
+  if (it.isNaN()) inParentheses(infix(literalSource(0.0), "/", literalSource(0.0)))
   else
     when (it) {
-      Double.NEGATIVE_INFINITY ->
-        inRoundBrackets(infix(literalSource(-1.0), "/", literalSource(0.0)))
-      Double.POSITIVE_INFINITY ->
-        inRoundBrackets(infix(literalSource(1.0), "/", literalSource(0.0)))
+      Double.NEGATIVE_INFINITY -> inParentheses(infix(literalSource(-1.0), "/", literalSource(0.0)))
+      Double.POSITIVE_INFINITY -> inParentheses(infix(literalSource(1.0), "/", literalSource(0.0)))
       else -> source("$it")
     }
 
@@ -69,7 +67,7 @@ fun at(source: Source) = join(source("@"), source)
 fun labelReference(name: String) = at(identifierSource(name))
 
 fun Source.functionCall(name: String, vararg args: Source) =
-  dotSeparated(this, join(source(name), inRoundBrackets(commaSeparated(args.toList()))))
+  dotSeparated(this, join(source(name), inParentheses(commaSeparated(args.toList()))))
 
 fun classLiteral(type: Source) = join(type, source("::class"))
 
@@ -81,17 +79,17 @@ fun isExpression(lhs: Source, rhs: Source) = infix(lhs, "is", rhs)
 
 fun itSource() = source("it")
 
-fun todo(source: Source) = join(source("TODO"), inRoundBrackets(source))
+fun todo(source: Source) = join(source("TODO"), inParentheses(source))
 
 fun annotation(name: Source) = join(at(name))
 
 fun annotation(name: Source, parameter: Source, vararg parameters: Source) =
-  join(at(name), inRoundBracketsIfNotEmpty(commaSeparated(parameter, *parameters)))
+  join(at(name), inParenthesesIfNotEmpty(commaSeparated(parameter, *parameters)))
 
 fun annotation(name: Source, parameters: List<Source>) =
   join(
     at(name),
-    inRoundBrackets(
+    inParentheses(
       if (parameters.size <= 2) commaSeparated(parameters)
       else indented(inNewLine(commaAndNewLineSeparated(parameters)))
     )

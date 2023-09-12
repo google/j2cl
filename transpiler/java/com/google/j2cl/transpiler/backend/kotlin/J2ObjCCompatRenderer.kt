@@ -85,7 +85,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.dotSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.emptyLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.ifNotEmpty
 import com.google.j2cl.transpiler.backend.kotlin.source.inAngleBrackets
-import com.google.j2cl.transpiler.backend.kotlin.source.inRoundBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.inParentheses
 import com.google.j2cl.transpiler.backend.kotlin.source.inSquareBrackets
 import com.google.j2cl.transpiler.backend.kotlin.source.join
 import com.google.j2cl.transpiler.backend.kotlin.source.plusNewLine
@@ -502,7 +502,7 @@ private fun literalRenderer(int: Int): Renderer<Source> =
   when (int) {
     Int.MIN_VALUE ->
       jintTypeRenderer.map {
-        inRoundBrackets(spaceSeparated(inRoundBrackets(it), source("0x80000000")))
+        inParentheses(spaceSeparated(inParentheses(it), source("0x80000000")))
       }
     else -> rendererOf(source("$int"))
   }
@@ -511,7 +511,7 @@ private fun literalRenderer(long: Long): Renderer<Source> =
   when (long) {
     Long.MIN_VALUE ->
       jlongTypeRenderer.map {
-        inRoundBrackets(spaceSeparated(inRoundBrackets(it), source("0x8000000000000000LL")))
+        inParentheses(spaceSeparated(inParentheses(it), source("0x8000000000000000LL")))
       }
     else -> rendererOf(source("${long}LL"))
   }

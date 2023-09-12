@@ -73,7 +73,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.ifNotEmpty
 import com.google.j2cl.transpiler.backend.kotlin.source.ifNotNullSource
 import com.google.j2cl.transpiler.backend.kotlin.source.inAngleBrackets
 import com.google.j2cl.transpiler.backend.kotlin.source.inInlineCurlyBrackets
-import com.google.j2cl.transpiler.backend.kotlin.source.inRoundBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.inParentheses
 import com.google.j2cl.transpiler.backend.kotlin.source.inSquareBrackets
 import com.google.j2cl.transpiler.backend.kotlin.source.infix
 import com.google.j2cl.transpiler.backend.kotlin.source.join
@@ -147,7 +147,7 @@ private fun Renderer.arrayLiteralSource(arrayLiteral: ArrayLiteral): Source =
             typeArgumentsSource(listOf(typeArgument))
           )
       },
-      inRoundBrackets(commaSeparated(arrayLiteral.valueExpressions.map(::expressionSource)))
+      inParentheses(commaSeparated(arrayLiteral.valueExpressions.map(::expressionSource)))
     )
   }
 
@@ -187,7 +187,7 @@ private fun Renderer.castExpressionSource(castExpression: CastExpression): Sourc
     // Render cast to intersection type descriptor: (A & B & C) x
     // using smart casts: (x).let { it as A; it as B; it as C; it }
     dotSeparated(
-        inRoundBrackets(expressionSource(castExpression.expression)),
+        inParentheses(expressionSource(castExpression.expression)),
         spaceSeparated(
           extensionMemberQualifiedNameSource("kotlin.let"),
           inInlineCurlyBrackets(
@@ -208,7 +208,7 @@ private fun Renderer.castExpressionSource(castExpression: CastExpression): Sourc
 
 private fun Renderer.castTypeDescriptorSource(typeDescriptor: TypeDescriptor): Source =
   typeDescriptorSource(typeDescriptor).letIf(typeDescriptor.variableHasAmpersandAny) {
-    inRoundBrackets(it)
+    inParentheses(it)
   }
 
 private fun BinaryOperator.ktSymbol(useEquality: Boolean): String =
@@ -271,7 +271,7 @@ private fun Renderer.conditionalExpressionSource(
 ): Source =
   spaceSeparated(
     source("if"),
-    inRoundBrackets(expressionSource(conditionalExpression.conditionExpression)),
+    inParentheses(expressionSource(conditionalExpression.conditionExpression)),
     expressionSource(conditionalExpression.trueExpression),
     source("else"),
     expressionSource(conditionalExpression.falseExpression)
@@ -424,7 +424,7 @@ private fun Renderer.invocationTypeArgumentsSource(typeArguments: List<TypeArgum
   }
 
 internal fun Renderer.invocationSource(invocation: Invocation) =
-  inRoundBrackets(commaSeparated(invocation.arguments.map(::expressionSource)))
+  inParentheses(commaSeparated(invocation.arguments.map(::expressionSource)))
 
 private fun Renderer.multiExpressionSource(multiExpression: MultiExpression): Source =
   spaceSeparated(
@@ -458,7 +458,7 @@ private fun Renderer.newArraySource(
               join(
                 topLevelQualifiedNameSource("kotlin.Array"),
                 typeArgumentsSource(listOf(typeArgument)),
-                inRoundBrackets(expressionSource(firstDimension))
+                inParentheses(expressionSource(firstDimension))
               ),
               block(
                 newArraySource(
@@ -490,7 +490,7 @@ private fun Renderer.primitiveArrayOfSource(
         else -> throw InternalCompilerError("renderPrimitiveArrayOf($componentTypeDescriptor)")
       }
     ),
-    inRoundBrackets(expressionSource(dimension))
+    inParentheses(expressionSource(dimension))
   )
 
 private fun Renderer.arrayOfNullsSource(typeArgument: TypeArgument, dimension: Expression): Source =
@@ -505,7 +505,7 @@ private fun Renderer.arrayOfNullsSource(typeArgument: TypeArgument, dimension: E
         extensionMemberQualifiedNameSource("javaemul.lang.uninitializedArrayOf"),
         typeArgumentsSource(listOf(typeArgument))
       ),
-    inRoundBrackets(expressionSource(dimension))
+    inParentheses(expressionSource(dimension))
   )
 
 private fun Renderer.newInstanceSource(expression: NewInstance): Source =
@@ -675,7 +675,7 @@ private fun Renderer.rightSubExpressionSource(precedence: Precedence, operand: E
   expressionInParensSource(operand, precedence.requiresParensOnRight(operand.precedence))
 
 private fun Renderer.expressionInParensSource(expression: Expression, needsParentheses: Boolean) =
-  expressionSource(expression).letIf(needsParentheses, ::inRoundBrackets)
+  expressionSource(expression).letIf(needsParentheses, ::inParentheses)
 
 private val Expression.isNonQualifiedThisReference: Boolean
   get() = this is ThisReference && (!isQualified || this.typeDescriptor.typeDeclaration.isAnonymous)

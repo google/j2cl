@@ -21,7 +21,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.dotSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.emptyLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.ifEmpty
-import com.google.j2cl.transpiler.backend.kotlin.source.inRoundBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.inParentheses
 import com.google.j2cl.transpiler.backend.kotlin.source.inSquareBrackets
 import com.google.j2cl.transpiler.backend.kotlin.source.join
 import com.google.j2cl.transpiler.backend.kotlin.source.newLineSeparated
@@ -72,7 +72,7 @@ fun nsEnumTypedef(name: String, type: Renderer<Source>, values: List<String>): R
     semicolonEnded(
       spaceSeparated(
         source("typedef"),
-        join(nsEnumSource, inRoundBrackets(commaSeparated(typeSource, source(name)))),
+        join(nsEnumSource, inParentheses(commaSeparated(typeSource, source(name)))),
         block(
           newLineSeparated(
             values.mapIndexed { index, name ->
@@ -101,7 +101,7 @@ fun functionDeclaration(
       returnTypeSource,
       join(
         source(name),
-        inRoundBrackets(commaSeparated(parameterSources).ifEmpty { source("void") })
+        inParentheses(commaSeparated(parameterSources).ifEmpty { source("void") })
       ),
       block(newLineSeparated(statementSources))
     )

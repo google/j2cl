@@ -47,7 +47,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.colonSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.emptySource
 import com.google.j2cl.transpiler.backend.kotlin.source.ifNotNullSource
-import com.google.j2cl.transpiler.backend.kotlin.source.inRoundBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.inParentheses
 import com.google.j2cl.transpiler.backend.kotlin.source.infix
 import com.google.j2cl.transpiler.backend.kotlin.source.join
 import com.google.j2cl.transpiler.backend.kotlin.source.newLineSeparated
@@ -83,7 +83,7 @@ private fun Renderer.assertStatementSource(assertStatement: AssertStatement): So
   spaceSeparated(
     join(
       extensionMemberQualifiedNameSource("kotlin.assert"),
-      inRoundBrackets(expressionSource(assertStatement.expression))
+      inParentheses(expressionSource(assertStatement.expression))
     ),
     assertStatement.message.ifNotNullSource { block(expressionSource(it)) }
   )
@@ -104,7 +104,7 @@ private fun Renderer.doWhileStatementSource(doWhileStatement: DoWhileStatement):
     source("do"),
     statementSource(doWhileStatement.body),
     source("while"),
-    inRoundBrackets(expressionSource(doWhileStatement.conditionExpression))
+    inParentheses(expressionSource(doWhileStatement.conditionExpression))
   )
 
 private fun Renderer.expressionStatementSource(expressionStatement: ExpressionStatement): Source =
@@ -113,7 +113,7 @@ private fun Renderer.expressionStatementSource(expressionStatement: ExpressionSt
 private fun Renderer.forEachStatementSource(forEachStatement: ForEachStatement): Source =
   spaceSeparated(
     source("for"),
-    inRoundBrackets(
+    inParentheses(
       infix(
         nameSource(forEachStatement.loopVariable),
         "in",
@@ -126,7 +126,7 @@ private fun Renderer.forEachStatementSource(forEachStatement: ForEachStatement):
 private fun Renderer.ifStatementSource(ifStatement: IfStatement): Source =
   spaceSeparated(
     source("if"),
-    inRoundBrackets(expressionSource(ifStatement.conditionExpression)),
+    inParentheses(expressionSource(ifStatement.conditionExpression)),
     statementSource(ifStatement.thenStatement),
     ifStatement.elseStatement.ifNotNullSource {
       spaceSeparated(source("else"), statementSource(it))
@@ -168,7 +168,7 @@ private fun Renderer.returnStatementSource(returnStatement: ReturnStatement): So
 private fun Renderer.switchStatementSource(switchStatement: SwitchStatement): Source =
   spaceSeparated(
     source("when"),
-    inRoundBrackets(expressionSource(switchStatement.switchExpression)),
+    inParentheses(expressionSource(switchStatement.switchExpression)),
     block(
       newLineSeparated(
         // TODO(b/263161219): Represent WhenStatement as a data class, convert from SwitchStatement
@@ -209,7 +209,7 @@ private fun Renderer.synchronizedStatementSource(
   spaceSeparated(
     join(
       extensionMemberQualifiedNameSource("kotlin.synchronized"),
-      inRoundBrackets(expressionSource(synchronizedStatement.expression))
+      inParentheses(expressionSource(synchronizedStatement.expression))
     ),
     statementSource(synchronizedStatement.body)
   )
@@ -217,7 +217,7 @@ private fun Renderer.synchronizedStatementSource(
 private fun Renderer.whileStatementSource(whileStatement: WhileStatement): Source =
   spaceSeparated(
     source("while"),
-    inRoundBrackets(expressionSource(whileStatement.conditionExpression)),
+    inParentheses(expressionSource(whileStatement.conditionExpression)),
     statementSource(whileStatement.body)
   )
 
@@ -252,8 +252,6 @@ private fun Renderer.catchClauseSource(
 ): Source =
   spaceSeparated(
     source("catch"),
-    inRoundBrackets(
-      colonSeparated(nameSource(variable), typeDescriptorSource(type.toNonNullable()))
-    ),
+    inParentheses(colonSeparated(nameSource(variable), typeDescriptorSource(type.toNonNullable()))),
     blockSource(body)
   )

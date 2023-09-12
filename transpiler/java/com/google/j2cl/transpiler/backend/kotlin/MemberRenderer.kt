@@ -42,7 +42,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.emptyLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.emptySource
 import com.google.j2cl.transpiler.backend.kotlin.source.ifNotNullSource
-import com.google.j2cl.transpiler.backend.kotlin.source.inRoundBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.inParentheses
 import com.google.j2cl.transpiler.backend.kotlin.source.indentedIf
 import com.google.j2cl.transpiler.backend.kotlin.source.join
 import com.google.j2cl.transpiler.backend.kotlin.source.newLineSeparated
@@ -228,7 +228,7 @@ internal fun Renderer.methodParametersSource(
   val renderWithNewLines = objCParameterNames != null && parameters.isNotEmpty()
   val optionalNewLineSource = sourceIf(renderWithNewLines) { source("\n") }
   return sourceIf(!methodDescriptor.isKtProperty) {
-    inRoundBrackets(
+    inParentheses(
       join(
         indentedIf(
           renderWithNewLines,

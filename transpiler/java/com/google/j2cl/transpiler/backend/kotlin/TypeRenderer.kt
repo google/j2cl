@@ -36,7 +36,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.emptyLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.emptySource
 import com.google.j2cl.transpiler.backend.kotlin.source.ifNotNullSource
-import com.google.j2cl.transpiler.backend.kotlin.source.inRoundBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.inParentheses
 import com.google.j2cl.transpiler.backend.kotlin.source.join
 import com.google.j2cl.transpiler.backend.kotlin.source.newLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.plusSemicolon
@@ -122,12 +122,12 @@ private fun Renderer.superTypeInvocationSource(
   superTypeDescriptor: TypeDescriptor
 ): Source =
   sourceIf(superTypeDescriptor.isClass) {
-    if (!type.hasConstructors) inRoundBrackets(emptySource)
+    if (!type.hasConstructors) inParentheses(emptySource)
     else
       type.ktPrimaryConstructor.let { ktPrimaryConstructor ->
         sourceIf(ktPrimaryConstructor != null) {
           getConstructorInvocation(ktPrimaryConstructor).let {
-            if (it == null) inRoundBrackets(emptySource) else invocationSource(it)
+            if (it == null) inParentheses(emptySource) else invocationSource(it)
           }
         }
       }
