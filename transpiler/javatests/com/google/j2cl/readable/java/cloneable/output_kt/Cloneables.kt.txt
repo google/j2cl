@@ -18,11 +18,13 @@
 package cloneable
 
 import javaemul.lang.*
+import java.lang.CloneNotSupportedException
 import kotlin.Any
 import kotlin.Cloneable
 import kotlin.OptIn
 import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.jvm.Throws
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktCloneableCloneables", exact = true)
@@ -30,6 +32,7 @@ open class Cloneables {
  @ObjCName("J2ktCloneableCloneables_WithoutCloneable", exact = true)
  open class WithoutCloneable {
   @ObjCName("clone")
+  @Throws(CloneNotSupportedException::class)
   open fun clone(): Any {
    return Cloneables.WithoutCloneable()
   }
@@ -37,6 +40,7 @@ open class Cloneables {
 
  @ObjCName("J2ktCloneableCloneables_WithCloneable", exact = true)
  open class WithCloneable: Cloneable {
+  @Throws(CloneNotSupportedException::class)
   open override fun clone(): Any {
    return Cloneables.WithCloneable()
   }
@@ -44,6 +48,7 @@ open class Cloneables {
 
  @ObjCName("J2ktCloneableCloneables_WithoutCloneableChild", exact = true)
  class WithoutCloneableChild: Cloneables.WithoutCloneable() {
+  @Throws(CloneNotSupportedException::class)
   override fun clone(): Any {
    return Cloneables.WithoutCloneableChild()
   }
@@ -51,6 +56,7 @@ open class Cloneables {
 
  @ObjCName("J2ktCloneableCloneables_WithCloneableChild", exact = true)
  class WithCloneableChild: Cloneables.WithCloneable() {
+  @Throws(CloneNotSupportedException::class)
   override fun clone(): Any {
    return Cloneables.WithCloneableChild()
   }

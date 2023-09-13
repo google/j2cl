@@ -31,6 +31,7 @@ import com.google.j2cl.transpiler.ast.MethodLike
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.ReturnStatement
 import com.google.j2cl.transpiler.ast.Statement
+import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors
 import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionObject
@@ -41,6 +42,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.colonSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.emptyLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.emptySource
+import com.google.j2cl.transpiler.backend.kotlin.source.ifNotEmpty
 import com.google.j2cl.transpiler.backend.kotlin.source.ifNotNullSource
 import com.google.j2cl.transpiler.backend.kotlin.source.inParentheses
 import com.google.j2cl.transpiler.backend.kotlin.source.indentedIf
@@ -144,6 +146,12 @@ private fun Renderer.jvmFieldAnnotationSource(): Source =
 private fun Renderer.jvmStaticAnnotationSource(): Source =
   annotation(topLevelQualifiedNameSource("kotlin.jvm.JvmStatic"))
 
+private fun Renderer.jvmThrowsAnnotationSource(typeDescriptors: List<TypeDescriptor>): Source =
+  typeDescriptors
+    .map { classLiteral(typeDescriptorSource(it.toRawTypeDescriptor().toNonNullable())) }
+    .let(::commaSeparated)
+    .ifNotEmpty { annotation(topLevelQualifiedNameSource("kotlin.jvm.Throws"), it) }
+
 private fun Renderer.initializerBlockSource(initializerBlock: InitializerBlock): Source =
   spaceSeparated(source("init"), statementSource(initializerBlock.block))
 
@@ -156,6 +164,7 @@ private fun Renderer.methodHeaderSource(method: Method): Source =
       sourceIf(methodDescriptor.isStatic) { jvmStaticAnnotationSource() },
       objCAnnotationSource(methodDescriptor, methodObjCNames),
       jsInteropAnnotationsSource(methodDescriptor),
+      jvmThrowsAnnotationSource(methodDescriptor.exceptionTypeDescriptors),
       spaceSeparated(
         methodModifiersSource(methodDescriptor),
         colonSeparated(

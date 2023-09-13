@@ -18,9 +18,9 @@
 package foreachstatement
 
 import javaemul.lang.*
-import java.lang.Exception
 import javaemul.lang.JavaIterable
 import kotlin.Any
+import kotlin.Exception
 import kotlin.Int
 import kotlin.OptIn
 import kotlin.String
@@ -31,6 +31,7 @@ import kotlin.collections.MutableIterable
 import kotlin.collections.MutableIterator
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.experimental.ExperimentalObjCRefinement
+import kotlin.jvm.Throws
 import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
@@ -51,9 +52,10 @@ open class ForEachStatement {
  }
 
  @HiddenFromObjC
+ @Throws(Exception::class)
  fun testMulticatch_private_2() {
   try {
-   throw Exception()
+   throw java.lang.Exception()
   } catch (e: ForEachStatement.Exception1) {
    for (o in e!!) {
     val o_1: Any? = o
@@ -77,13 +79,13 @@ open class ForEachStatement {
   }
  }
 
- open class Exception1: Exception(), JavaIterable<String?> {
+ open class Exception1: java.lang.Exception(), JavaIterable<String?> {
   open override fun iterator(): MutableIterator<String?> {
    return null!!
   }
  }
 
- open class Exception2: Exception(), JavaIterable<Any?> {
+ open class Exception2: java.lang.Exception(), JavaIterable<Any?> {
   open override fun iterator(): MutableIterator<Any?> {
    return null!!
   }

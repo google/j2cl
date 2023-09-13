@@ -31,6 +31,7 @@ import kotlin.assert
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
+import kotlin.jvm.Throws
 import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
@@ -51,6 +52,7 @@ open class TryCatch {
  }
 
  @ObjCName("testEmptyThrowableCatch")
+ @Throws(Throwable::class)
  open fun testEmptyThrowableCatch() {
   try {
    throw ClassCastException()
@@ -61,6 +63,7 @@ open class TryCatch {
  }
 
  @ObjCName("testEmptyThrowableRethrow")
+ @Throws(Throwable::class)
  open fun testEmptyThrowableRethrow() {
   try {
    throw ClassCastException()
@@ -150,6 +153,7 @@ open class TryCatch {
  }
 
  @ObjCName("testThrowGenerics")
+ @Throws(Throwable::class)
  open fun testThrowGenerics() {
   throw this.getT_private_2<Exception?>(java.lang.Exception())!!
  }
@@ -160,6 +164,7 @@ open class TryCatch {
  }
 
  @ObjCName("testThrowBoundGenerics")
+ @Throws(Throwable::class)
  open fun testThrowBoundGenerics() {
   throw this.getThrowable_private_2<Throwable?>()!!
  }
@@ -170,6 +175,7 @@ open class TryCatch {
  }
 
  @ObjCName("testThrowsParameterized")
+ @Throws(Throwable::class)
  open fun <T: Throwable?> testThrowsParameterized(
   @ObjCName("withJavaLangThrowable") throwable: T
  ) {
