@@ -82,6 +82,10 @@ public final class OptionalDouble {
     return present ? ref : other.getAsDouble();
   }
 
+  public double orElseThrow() {
+    return getAsDouble();
+  }
+
   public <X extends Throwable> double orElseThrow(Supplier<X> exceptionSupplier) throws X {
     if (present) {
       return ref;

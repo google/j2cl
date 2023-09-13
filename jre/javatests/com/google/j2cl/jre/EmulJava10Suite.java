@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Google Inc.
+ * Copyright 2023 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -15,21 +15,21 @@
  */
 package com.google.j2cl.jre;
 
+import com.google.j2cl.jre.java10.util.OptionalDoubleTest;
+import com.google.j2cl.jre.java10.util.OptionalIntTest;
+import com.google.j2cl.jre.java10.util.OptionalLongTest;
+import com.google.j2cl.jre.java10.util.OptionalTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-/** TestSuite for all of GWT's emul suites. */
+/** Test JRE emulations. */
 @RunWith(Suite.class)
 @SuiteClasses({
-  BigDecimalSuite.class,
-  BigIntegerSuite.class,
-  CollectionsSuite.class,
-  ConcurrentSuite.class,
-  EmulSuite.class,
-  EmulJava8Suite.class,
-  EmulJava9Suite.class,
-  EmulJava10Suite.class,
-  LangSuite.class,
+        OptionalDoubleTest.class,
+        OptionalIntTest.class,
+        OptionalLongTest.class,
+        OptionalTest.class,
 })
-public class AllTests {}
+public class EmulJava10Suite {
+}
