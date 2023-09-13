@@ -612,9 +612,9 @@ private fun Renderer.variableReferenceSource(variableReference: VariableReferenc
 private fun Renderer.variableDeclarationFragmentSource(
   fragment: VariableDeclarationFragment
 ): Source =
-  assignment(
+  spaceSeparated(
     variableSource(fragment.variable),
-    fragment.initializer.ifNotNullSource(::expressionSource)
+    initializer(fragment.initializer.ifNotNullSource(::expressionSource))
   )
 
 fun Renderer.variableSource(variable: Variable): Source =

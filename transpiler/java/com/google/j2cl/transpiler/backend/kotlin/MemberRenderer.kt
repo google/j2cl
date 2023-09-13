@@ -129,13 +129,11 @@ private fun Renderer.fieldSource(field: Field): Source {
       sourceIf(isConst) { source("const") },
       sourceIf(field.isKtLateInit) { source("lateinit") },
       if (isFinal) source("val") else source("var"),
-      assignment(
-        colonSeparated(
-          identifierSource(fieldDescriptor.ktMangledName),
-          typeDescriptorSource(typeDescriptor)
-        ),
-        field.initializer.ifNotNullSource(::expressionSource)
-      )
+      colonSeparated(
+        identifierSource(fieldDescriptor.ktMangledName),
+        typeDescriptorSource(typeDescriptor)
+      ),
+      initializer(field.initializer.ifNotNullSource(::expressionSource))
     )
   )
 }

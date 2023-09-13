@@ -135,6 +135,7 @@ class SourceTest {
   @Test
   fun infixSource() {
     infix(sourceA, "op", sourceB) gives "a op b"
+    infix(emptySource, "op", emptySource) gives "op"
   }
 
   @Test

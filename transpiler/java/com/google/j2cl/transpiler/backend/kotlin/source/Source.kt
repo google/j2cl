@@ -142,4 +142,4 @@ fun newLineSeparated(source: Source, vararg sources: Source) =
 fun emptyLineSeparated(source: Source, vararg sources: Source) =
   emptyLineSeparated(listOf(source, *sources))
 
-fun infix(lhs: Source, operator: String, rhs: Source) = " $operator " separated listOf(lhs, rhs)
+fun infix(lhs: Source, operator: String, rhs: Source) = spaceSeparated(lhs, source(operator), rhs)

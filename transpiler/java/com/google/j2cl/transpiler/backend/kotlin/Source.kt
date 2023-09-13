@@ -19,6 +19,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.commaAndNewLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.dotSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.ifNotEmpty
 import com.google.j2cl.transpiler.backend.kotlin.source.inNewLine
 import com.google.j2cl.transpiler.backend.kotlin.source.inParentheses
 import com.google.j2cl.transpiler.backend.kotlin.source.inParenthesesIfNotEmpty
@@ -26,6 +27,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.indented
 import com.google.j2cl.transpiler.backend.kotlin.source.infix
 import com.google.j2cl.transpiler.backend.kotlin.source.join
 import com.google.j2cl.transpiler.backend.kotlin.source.source
+import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
 
 fun literalSource(it: Boolean): Source = source("$it")
 
@@ -61,6 +63,8 @@ fun literalSource(it: Double): Source =
     }
 
 fun assignment(lhs: Source, rhs: Source): Source = infix(lhs, "=", rhs)
+
+fun initializer(expr: Source): Source = expr.ifNotEmpty { spaceSeparated(source("="), expr) }
 
 fun at(source: Source) = join(source("@"), source)
 
