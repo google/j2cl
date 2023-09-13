@@ -22,6 +22,7 @@ import static com.google.j2cl.common.StringUtils.capitalize;
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors.BootstrapType;
 import java.util.Arrays;
@@ -227,9 +228,23 @@ public final class RuntimeMethods {
     // boxing operations are parameterized by the JsEnum type, so specialize the method to the
     // right type.
     TypeVariable type = boxingMethod.getTypeParameterTypeDescriptors().get(0);
+
+    // TODO(b/278167922): Probably the best thing to pass here in WASM is a method reference to
+    // class object getter, to avoid the eager creation of the class object upon boxing. The class
+    // object is only needed for cast and instanceof. But method references involve the
+    // instantiation of a lambda object which is even more costly. Fix once plain wasm function
+    // references can be modeled.
+
+    // Decide how to pass the information about the actual enum class to the generic boxed
+    // representation by looking at the second parameter of the boxing function. In JS, the JS
+    // constructor is used as a proxy for the class object.
+    Expression typeLiteral =
+        TypeDescriptors.isJavaLangClass(boxingMethod.getParameterTypeDescriptors().get(1))
+            ? new TypeLiteral(SourcePosition.NONE, valueTypeDescriptor)
+            : valueTypeDescriptor.getMetadataConstructorReference();
     return MethodCall.Builder.from(
             boxingMethod.specializeTypeVariables(ImmutableMap.of(type, valueTypeDescriptor)))
-        .setArguments(value, valueTypeDescriptor.getMetadataConstructorReference())
+        .setArguments(value, typeLiteral)
         .build();
   }
 

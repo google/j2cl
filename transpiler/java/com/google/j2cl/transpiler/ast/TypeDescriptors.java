@@ -340,6 +340,10 @@ public class TypeDescriptors {
     return typeDescriptor.isSameBaseType(get().javaLangNumber);
   }
 
+  public static boolean isJavaLangClass(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.isSameBaseType(get().javaLangClass);
+  }
+
   public static boolean isJavaIoSerializable(TypeDescriptor typeDescriptor) {
     return typeDescriptor.isSameBaseType(get().javaIoSerializable);
   }
