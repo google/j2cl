@@ -25,9 +25,9 @@ jsunit_test(
 
 """
 
-load(":j2wasm_library.bzl", "j2wasm_library")
-load(":j2wasm_application.bzl", "j2wasm_application")
 load(":generate_test_input.bzl", "generate_test_input")
+load(":j2wasm_application.bzl", "j2wasm_application")
+load(":j2wasm_library.bzl", "j2wasm_library")
 
 # buildifier: disable=function-docstring-args
 def j2wasm_generate_jsunit_suite(
@@ -65,6 +65,7 @@ def j2wasm_generate_jsunit_suite(
         name = name + "_lib",
         srcs = [test_input],
         deps = deps + [
+            "//build_defs/internal_do_not_use:internal_junit_annotations-j2wasm",
             "//build_defs/internal_do_not_use:internal_junit_runtime-j2wasm",
         ],
         javacopts = ["-AtestPlatform=WASM"],

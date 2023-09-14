@@ -80,10 +80,17 @@ alias(
 # ***************************************************
 
 j2cl_library(
-    name = "internal_junit_runtime",
+    name = "internal_junit_annotations",
     testonly = 1,
     exports = [
         "//junit/generator/java/com/google/j2cl/junit/apt:internal_junit_annotations",
+    ],
+)
+
+j2cl_library(
+    name = "internal_junit_runtime",
+    testonly = 1,
+    exports = [
         "//junit/generator/java/com/google/j2cl/junit/runtime:testcase_violator-j2cl",
     ],
 )

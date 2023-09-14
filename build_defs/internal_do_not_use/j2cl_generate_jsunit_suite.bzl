@@ -25,8 +25,8 @@ jsunit_test(
 
 """
 
-load(":j2cl_library.bzl", "j2cl_library")
 load(":generate_test_input.bzl", "generate_test_input")
+load(":j2cl_library.bzl", "j2cl_library")
 
 # buildifier: disable=function-docstring-args
 def j2cl_generate_jsunit_suite(name, test_class, deps, tags = []):
@@ -54,6 +54,7 @@ def j2cl_generate_jsunit_suite(name, test_class, deps, tags = []):
         srcs = [test_input],
         deps = deps + [
             Label("//:jsinterop-annotations-j2cl"),
+            Label("//build_defs/internal_do_not_use:internal_junit_annotations"),
             Label("//build_defs/internal_do_not_use:internal_junit_runtime"),
             Label("//build_defs/internal_do_not_use:closure_testcase"),
         ],

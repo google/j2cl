@@ -18,10 +18,10 @@ j2kt_jvm_generate_unit_test(
 
 """
 
-load(":j2kt_library.bzl", "j2kt_jvm_library", "j2kt_native_library")
-load(":generate_test_input.bzl", "generate_test_input")
-load("@bazel_tools//tools/build_defs/kotlin/native:rules.bzl", "kt_apple_test_library")
 load("@io_bazel_rules_kotlin//kotlin:kotlin.bzl", "kt_jvm_library")
+load("@bazel_tools//tools/build_defs/kotlin/native:rules.bzl", "kt_apple_test_library")
+load(":generate_test_input.bzl", "generate_test_input")
+load(":j2kt_library.bzl", "j2kt_jvm_library", "j2kt_native_library")
 
 # buildifier: disable=function-docstring-args
 def j2kt_generate_unit_test(name, test_class, deps, platform = "J2KT-JVM", tags = []):
@@ -35,7 +35,7 @@ def j2kt_generate_unit_test(name, test_class, deps, platform = "J2KT-JVM", tags 
             name = name + "_lib",
             srcs = [test_input],
             deps = deps + [
-                "//build_defs/internal_do_not_use:internal_junit_runtime-j2kt-jvm",
+                "//build_defs/internal_do_not_use:internal_junit_annotations-j2kt-jvm",
             ],
             exports = deps,
             javacopts = ["-AtestPlatform=J2KT-JVM"],
@@ -48,7 +48,7 @@ def j2kt_generate_unit_test(name, test_class, deps, platform = "J2KT-JVM", tags 
             name = name + "_lib",
             srcs = [test_input],
             deps = deps + [
-                "//build_defs/internal_do_not_use:internal_junit_runtime-j2kt-native",
+                "//build_defs/internal_do_not_use:internal_junit_annotations-j2kt-native",
             ],
             exports = deps,
             javacopts = ["-AtestPlatform=J2KT-NATIVE"],
