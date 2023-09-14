@@ -187,7 +187,7 @@ def _impl_j2wasm_application(ctx):
         args.add(input)
         inputs.append(input)
 
-        binaryen = "_binaryen_legacy" if ctx.attr.enable_legacy_wasm_spec else "_binaryen"
+        binaryen = "_binaryen_legacy" if ctx.attr.use_legacy_wasm_spec else "_binaryen"
         ctx.actions.run(
             executable = getattr(ctx.executable, binaryen),
             arguments = [args],
@@ -294,7 +294,7 @@ _J2WASM_APP_ATTRS = {
     "source_map_base_url": attr.string(),
     # TODO(b/296477606): Remove when symbol map file can be linked from the binary for debugging.
     "enable_debug_info": attr.bool(default = False),
-    "enable_legacy_wasm_spec": attr.bool(default = True),
+    "use_legacy_wasm_spec": attr.bool(default = True),
     "_jre": attr.label(default = Label("//build_defs/internal_do_not_use:j2wasm_jre")),
     "_j2cl_transpiler": attr.label(
         cfg = "exec",
