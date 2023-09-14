@@ -54,3 +54,12 @@ def j2cl_multi_test(name, test_class, deps, enable_wasm = True, **kwargs):
             wasm_defs = j2wasm_defines,
             **kwargs
         )
+        j2wasm_test(
+            name = name + "-j2wasm_optimized_chromedev",
+            test_class = test_class,
+            runtime_deps = j2wasm_deps,
+            optimize = 1,
+            wasm_defs = j2wasm_defines,
+            browsers = ["//:chrome-wasm-dev-linux"],
+            **kwargs
+        )
