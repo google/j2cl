@@ -25,8 +25,7 @@ import com.google.j2cl.transpiler.ast.Library
 import com.google.j2cl.transpiler.backend.common.UniqueNamesResolver.computeUniqueNames
 import com.google.j2cl.transpiler.backend.kotlin.common.buildMap
 import com.google.j2cl.transpiler.backend.kotlin.common.buildSet
-import com.google.j2cl.transpiler.backend.kotlin.source.emptyLineSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.plusNewLine
+import com.google.j2cl.transpiler.backend.kotlin.source.Source
 
 /**
  * The OutputGeneratorStage contains all necessary information for generating the Kotlin output for
@@ -50,9 +49,9 @@ class KotlinGeneratorStage(private val output: OutputUtils.Output, private val p
 
   private fun generateObjCOutputs(compilationUnit: CompilationUnit) {
     val source = compilationUnit.j2ObjCCompatHeaderSource
-    if (!source.isEmpty) {
+    if (!source.isEmpty()) {
       val path = compilationUnit.packageRelativePath.replace(".java", "+J2ObjCCompat.h")
-      output.write(path, source.toString())
+      output.write(path, source.buildString())
     }
   }
 
@@ -81,9 +80,10 @@ class KotlinGeneratorStage(private val output: OutputUtils.Output, private val p
     // Render package and collected imports
     val packageAndImportsSource = renderer.packageAndImportsSource(compilationUnit)
 
-    val completeSource = emptyLineSeparated(fileHeaderSource, packageAndImportsSource, typesSource)
+    val completeSource =
+      Source.emptyLineSeparated(fileHeaderSource, packageAndImportsSource, typesSource)
 
-    return completeSource.plusNewLine.toString().trimTrailingWhitespaces()
+    return completeSource.plus(Source.NEW_LINE).buildString().trimTrailingWhitespaces()
   }
 }
 

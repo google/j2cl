@@ -37,20 +37,17 @@ import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionObject
 import com.google.j2cl.transpiler.backend.kotlin.ast.Member
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
-import com.google.j2cl.transpiler.backend.kotlin.source.block
-import com.google.j2cl.transpiler.backend.kotlin.source.colonSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.emptyLineSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.emptySource
-import com.google.j2cl.transpiler.backend.kotlin.source.ifNotEmpty
-import com.google.j2cl.transpiler.backend.kotlin.source.ifNotNullSource
-import com.google.j2cl.transpiler.backend.kotlin.source.inParentheses
-import com.google.j2cl.transpiler.backend.kotlin.source.indentedIf
-import com.google.j2cl.transpiler.backend.kotlin.source.join
-import com.google.j2cl.transpiler.backend.kotlin.source.newLineSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.source
-import com.google.j2cl.transpiler.backend.kotlin.source.sourceIf
-import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.colonSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.emptyLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParentheses
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.indentedIf
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.join
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
 internal fun Renderer.source(member: Member): Source =
   when (member) {
@@ -80,14 +77,14 @@ private fun Renderer.memberSource(member: JavaMember): Source =
 private fun Renderer.methodSource(method: Method): Source =
   method.renderedStatements.let { statements ->
     // Don't render primary constructor if it's empty.
-    sourceIf(!isKtPrimaryConstructor(method) || !statements.isEmpty()) {
+    Source.emptyUnless(!isKtPrimaryConstructor(method) || !statements.isEmpty()) {
       spaceSeparated(
         methodHeaderSource(method),
-        sourceIf(!method.isAbstract && !method.isNative) {
+        Source.emptyUnless(!method.isAbstract && !method.isNative) {
           // Constructors with no statements can be rendered without curly braces.
-          sourceIf(!method.isConstructor || statements.isNotEmpty()) {
+          Source.emptyUnless(!method.isConstructor || statements.isNotEmpty()) {
             spaceSeparated(
-              sourceIf(method.descriptor.isKtProperty) { source("get()") },
+              Source.emptyUnless(method.descriptor.isKtProperty) { source("get()") },
               copy(currentReturnLabelIdentifier = null).run { block(statementsSource(statements)) }
             )
           }
@@ -124,18 +121,18 @@ private fun Renderer.fieldSource(field: Field): Source {
   val isConst = field.isCompileTimeConstant && field.isStatic
   val isJvmField = !isConst && !field.isKtLateInit
   return newLineSeparated(
-    sourceIf(isJvmField) { jvmFieldAnnotationSource() },
+    Source.emptyUnless(isJvmField) { jvmFieldAnnotationSource() },
     objCAnnotationSource(fieldDescriptor),
     jsInteropAnnotationsSource(fieldDescriptor),
     spaceSeparated(
-      sourceIf(isConst) { source("const") },
-      sourceIf(field.isKtLateInit) { source("lateinit") },
+      Source.emptyUnless(isConst) { source("const") },
+      Source.emptyUnless(field.isKtLateInit) { source("lateinit") },
       if (isFinal) source("val") else source("var"),
       colonSeparated(
         identifierSource(fieldDescriptor.ktMangledName),
         typeDescriptorSource(typeDescriptor)
       ),
-      initializer(field.initializer.ifNotNullSource(::expressionSource))
+      initializer(field.initializer?.let(::expressionSource).orEmpty())
     )
   )
 }
@@ -161,7 +158,7 @@ private fun Renderer.methodHeaderSource(method: Method): Source =
     val methodDescriptor = method.descriptor
     val methodObjCNames = method.toObjCNames()
     newLineSeparated(
-      sourceIf(methodDescriptor.isStatic) { jvmStaticAnnotationSource() },
+      Source.emptyUnless(methodDescriptor.isStatic) { jvmStaticAnnotationSource() },
       objCAnnotationSource(methodDescriptor, methodObjCNames),
       jsInteropAnnotationsSource(methodDescriptor),
       jvmThrowsAnnotationSource(methodDescriptor.exceptionTypeDescriptors),
@@ -208,13 +205,13 @@ private fun Renderer.methodKindAndNameSource(methodDescriptor: MethodDescriptor)
 
 private fun methodModifiersSource(methodDescriptor: MethodDescriptor): Source =
   spaceSeparated(
-    sourceIf(!methodDescriptor.enclosingTypeDescriptor.typeDeclaration.isInterface) {
+    Source.emptyUnless(!methodDescriptor.enclosingTypeDescriptor.typeDeclaration.isInterface) {
       spaceSeparated(
-        sourceIf(methodDescriptor.isNative) { source("external") },
+        Source.emptyUnless(methodDescriptor.isNative) { source("external") },
         methodDescriptor.inheritanceModifierSource
       )
     },
-    sourceIf(methodDescriptor.isKtOverride) { source("override") }
+    Source.emptyUnless(methodDescriptor.isKtOverride) { source("override") }
   )
 
 private val MethodDescriptor.inheritanceModifierSource
@@ -222,7 +219,7 @@ private val MethodDescriptor.inheritanceModifierSource
     when {
       isAbstract -> source("abstract")
       isOpen -> source("open")
-      else -> emptySource
+      else -> Source.EMPTY
     }
 
 internal fun Renderer.methodParametersSource(
@@ -233,8 +230,8 @@ internal fun Renderer.methodParametersSource(
   val parameterDescriptors = methodDescriptor.parameterDescriptors
   val parameters = method.parameters
   val renderWithNewLines = objCParameterNames != null && parameters.isNotEmpty()
-  val optionalNewLineSource = sourceIf(renderWithNewLines) { source("\n") }
-  return sourceIf(!methodDescriptor.isKtProperty) {
+  val optionalNewLineSource = Source.emptyUnless(renderWithNewLines) { Source.NEW_LINE }
+  return Source.emptyUnless(!methodDescriptor.isKtProperty) {
     inParentheses(
       join(
         indentedIf(
@@ -268,8 +265,8 @@ private fun Renderer.parameterSource(
     if (!parameterDescriptor.isVarargs) parameterTypeDescriptor
     else (parameterTypeDescriptor as ArrayTypeDescriptor).componentTypeDescriptor!!
   return spaceSeparated(
-    sourceIf(parameterDescriptor.isVarargs) { source("vararg") },
-    objCParameterName.ifNotNullSource { objCNameAnnotationSource(it) },
+    Source.emptyUnless(parameterDescriptor.isVarargs) { source("vararg") },
+    objCParameterName?.let { objCNameAnnotationSource(it) }.orEmpty(),
     colonSeparated(nameSource(parameter), typeDescriptorSource(renderedTypeDescriptor))
   )
 }
@@ -277,16 +274,19 @@ private fun Renderer.parameterSource(
 internal fun Renderer.methodReturnTypeSource(methodDescriptor: MethodDescriptor): Source =
   methodDescriptor.returnTypeDescriptor
     .takeIf { it != PrimitiveTypes.VOID }
-    .ifNotNullSource { typeDescriptorSource(it) }
+    ?.let { typeDescriptorSource(it) }
+    .orEmpty()
 
 private fun Renderer.constructorInvocationSource(method: Method) =
-  getConstructorInvocation(method).ifNotNullSource { constructorInvocation ->
-    join(
-      if (constructorInvocation.target.inSameTypeAs(method.descriptor)) source("this")
-      else source("super"),
-      invocationSource(constructorInvocation)
-    )
-  }
+  getConstructorInvocation(method)
+    ?.let { constructorInvocation ->
+      join(
+        if (constructorInvocation.target.inSameTypeAs(method.descriptor)) source("this")
+        else source("super"),
+        invocationSource(constructorInvocation)
+      )
+    }
+    .orEmpty()
 
 internal val MethodDescriptor.isKtOverride
   get() =

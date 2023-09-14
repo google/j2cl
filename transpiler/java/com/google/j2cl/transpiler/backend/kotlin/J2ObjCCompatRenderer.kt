@@ -81,21 +81,19 @@ import com.google.j2cl.transpiler.backend.kotlin.objc.semicolonEnded
 import com.google.j2cl.transpiler.backend.kotlin.objc.sourceWithDependencies
 import com.google.j2cl.transpiler.backend.kotlin.objc.toNullable
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
-import com.google.j2cl.transpiler.backend.kotlin.source.dotSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.emptyLineSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.ifNotEmpty
-import com.google.j2cl.transpiler.backend.kotlin.source.inAngleBrackets
-import com.google.j2cl.transpiler.backend.kotlin.source.inParentheses
-import com.google.j2cl.transpiler.backend.kotlin.source.inSquareBrackets
-import com.google.j2cl.transpiler.backend.kotlin.source.join
-import com.google.j2cl.transpiler.backend.kotlin.source.plusNewLine
-import com.google.j2cl.transpiler.backend.kotlin.source.source
-import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.dotSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.emptyLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inAngleBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParentheses
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inSquareBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.join
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
 
 internal val CompilationUnit.j2ObjCCompatHeaderSource: Source
   get() =
     dependenciesAndDeclarationsSource.ifNotEmpty {
-      emptyLineSeparated(fileCommentSource, it).plusNewLine
+      emptyLineSeparated(fileCommentSource, it) + Source.NEW_LINE
     }
 
 private val CompilationUnit.fileCommentSource: Source
@@ -105,7 +103,7 @@ private val CompilationUnit.dependenciesAndDeclarationsSource: Source
   get() = declarationsRenderer.sourceWithDependencies
 
 private val CompilationUnit.declarationsRenderer: Renderer<Source>
-  get() = nsAssumeNonnull(declarationsRenderers.flatten.map(::emptyLineSeparated))
+  get() = nsAssumeNonnull(declarationsRenderers.flatten.map { emptyLineSeparated(it) })
 
 private val CompilationUnit.declarationsRenderers: List<Renderer<Source>>
   get() = includedTypes.flatMap(Type::declarationsRenderers)

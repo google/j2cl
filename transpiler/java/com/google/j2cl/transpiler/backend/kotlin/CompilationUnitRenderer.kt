@@ -17,11 +17,11 @@ package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.CompilationUnit
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
-import com.google.j2cl.transpiler.backend.kotlin.source.emptyLineSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.ifNotNullSource
-import com.google.j2cl.transpiler.backend.kotlin.source.newLineSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.source
-import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.emptyLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
 internal fun Renderer.fileHeaderSource(compilationUnit: CompilationUnit): Source =
   newLineSeparated(fileCommentSource(compilationUnit), fileAnnotationsSource())
@@ -58,9 +58,10 @@ internal fun Renderer.packageAndImportsSource(compilationUnit: CompilationUnit):
   emptyLineSeparated(packageSource(compilationUnit), importsSource())
 
 private fun packageSource(compilationUnit: CompilationUnit): Source =
-  compilationUnit.packageName.takeIf(String::isNotEmpty).ifNotNullSource {
-    spaceSeparated(source("package"), qualifiedIdentifierSource(it))
-  }
+  compilationUnit.packageName
+    .takeIf { it.isNotEmpty() }
+    ?.let { spaceSeparated(source("package"), qualifiedIdentifierSource(it)) }
+    .orEmpty()
 
 internal fun Renderer.typesSource(compilationUnit: CompilationUnit): Source =
   emptyLineSeparated(compilationUnit.types.map(::typeSource))

@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler.backend.kotlin.objc
 
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
-import com.google.j2cl.transpiler.backend.kotlin.source.emptySource
 
 /** Renders an object of type {@code T} collecting its dependencies in a mutable set. */
 class Renderer<out V>(val renderAddingDependencies: (MutableSet<Dependency>) -> V)
@@ -75,8 +74,8 @@ val <V> Iterable<Renderer<V>>.flatten: Renderer<List<V>>
   get() = Renderer { dependencies -> map { it.renderAddingDependencies(dependencies) } }
 
 val emptyRenderer: Renderer<Source>
-  get() = rendererOf(emptySource)
+  get() = rendererOf(Source.EMPTY)
 
 fun Renderer<Source>.ifNotEmpty(fn: (Source) -> Renderer<Source>): Renderer<Source> = bind {
-  if (it.isEmpty) emptyRenderer else fn(it)
+  if (it.isEmpty()) emptyRenderer else fn(it)
 }

@@ -64,24 +64,21 @@ import com.google.j2cl.transpiler.ast.VariableDeclarationFragment
 import com.google.j2cl.transpiler.ast.VariableReference
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
-import com.google.j2cl.transpiler.backend.kotlin.source.block
-import com.google.j2cl.transpiler.backend.kotlin.source.colonSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.dotSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.emptySource
-import com.google.j2cl.transpiler.backend.kotlin.source.ifNotEmpty
-import com.google.j2cl.transpiler.backend.kotlin.source.ifNotNullSource
-import com.google.j2cl.transpiler.backend.kotlin.source.inAngleBrackets
-import com.google.j2cl.transpiler.backend.kotlin.source.inInlineCurlyBrackets
-import com.google.j2cl.transpiler.backend.kotlin.source.inParentheses
-import com.google.j2cl.transpiler.backend.kotlin.source.inSquareBrackets
-import com.google.j2cl.transpiler.backend.kotlin.source.infix
-import com.google.j2cl.transpiler.backend.kotlin.source.join
-import com.google.j2cl.transpiler.backend.kotlin.source.newLineSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.semicolonSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.source
-import com.google.j2cl.transpiler.backend.kotlin.source.sourceIf
-import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.colonSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.dotSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inAngleBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inInlineCurlyBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParentheses
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inSquareBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.infix
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.join
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.semicolonSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
 fun Renderer.expressionSource(expression: Expression): Source =
   when (expression) {
@@ -313,7 +310,7 @@ private fun Renderer.functionExpressionObjectSource(
 ): Source =
   spaceSeparated(
     source("object"),
-    source(":"),
+    Source.COLON,
     newInstanceTypeDescriptorSource(functionExpression.typeDescriptor.functionalInterface!!),
     block(
       spaceSeparated(
@@ -408,20 +405,24 @@ private fun Renderer.methodInvocationSource(expression: MethodCall): Source =
       else ->
         join(
           identifierSource(expression.target.ktMangledName),
-          sourceIf(!expression.target.isKtProperty) {
-            join(
-              invocationTypeArgumentsSource(methodDescriptor.typeArguments),
-              invocationSource(expression)
-            )
-          }
+          expression
+            .takeIf { !it.target.isKtProperty }
+            ?.let {
+              join(
+                invocationTypeArgumentsSource(methodDescriptor.typeArguments),
+                invocationSource(expression)
+              )
+            }
+            .orEmpty()
         )
     }
   }
 
 private fun Renderer.invocationTypeArgumentsSource(typeArguments: List<TypeArgument>): Source =
-  sourceIf(typeArguments.isNotEmpty() && typeArguments.all { it.isDenotable }) {
-    typeArgumentsSource(typeArguments)
-  }
+  typeArguments
+    .takeIf { it.isNotEmpty() && it.all(TypeArgument::isDenotable) }
+    ?.let { typeArgumentsSource(it) }
+    .orEmpty()
 
 internal fun Renderer.invocationSource(invocation: Invocation) =
   inParentheses(commaSeparated(invocation.arguments.map(::expressionSource)))
@@ -513,19 +514,19 @@ private fun Renderer.newInstanceSource(expression: NewInstance): Source =
     dotSeparated(
       qualifierSource(expression),
       spaceSeparated(
-        sourceIf(expression.anonymousInnerClass != null) {
-          spaceSeparated(source("object"), source(":"))
+        Source.emptyUnless(expression.anonymousInnerClass != null) {
+          spaceSeparated(source("object"), Source.COLON)
         },
         join(
           newInstanceTypeDescriptorSource(typeDescriptor),
           // Render invocation arguments for classes only - interfaces don't need it.
-          sourceIf(typeDescriptor.isClass) {
+          Source.emptyUnless(typeDescriptor.isClass) {
             // Explicit label is necessary to workaround
             // https://youtrack.jetbrains.com/issue/KT-54349
             copy(renderThisReferenceWithLabel = true).invocationSource(expression)
           }
         ),
-        expression.anonymousInnerClass.ifNotNullSource { typeBodySource(it) }
+        expression.anonymousInnerClass?.let { typeBodySource(it) }.orEmpty()
       )
     )
   }
@@ -576,16 +577,19 @@ private fun Renderer.superReferenceSource(
 ): Source =
   join(
     source("super"),
-    superTypeDescriptor.ifNotNullSource {
-      inAngleBrackets(qualifiedNameSource(it, asSuperType = true))
-    },
-    qualifierTypeDescriptor.ifNotNullSource { labelReferenceSource(it) }
+    superTypeDescriptor
+      ?.let { inAngleBrackets(qualifiedNameSource(it, asSuperType = true)) }
+      .orEmpty(),
+    qualifierTypeDescriptor?.let { labelReferenceSource(it) }.orEmpty()
   )
 
 private fun Renderer.thisReferenceSource(thisReference: ThisReference): Source =
   join(
     source("this"),
-    sourceIf(needsQualifier(thisReference)) { labelReferenceSource(thisReference.typeDescriptor) }
+    thisReference
+      .takeIf { needsQualifier(it) }
+      ?.let { labelReferenceSource(it.typeDescriptor) }
+      .orEmpty()
   )
 
 private fun Renderer.needsQualifier(thisReference: ThisReference): Boolean =
@@ -614,15 +618,16 @@ private fun Renderer.variableDeclarationFragmentSource(
 ): Source =
   spaceSeparated(
     variableSource(fragment.variable),
-    initializer(fragment.initializer.ifNotNullSource(::expressionSource))
+    initializer(fragment.initializer?.let(::expressionSource).orEmpty())
   )
 
 fun Renderer.variableSource(variable: Variable): Source =
   colonSeparated(
     nameSource(variable),
-    variable.typeDescriptor.let {
-      sourceIf(it.isKtDenotableNonWildcard) { typeDescriptorSource(it) }
-    }
+    variable.typeDescriptor
+      .takeIf { it.isKtDenotableNonWildcard }
+      ?.let { typeDescriptorSource(it) }
+      .orEmpty()
   )
 
 private fun Renderer.qualifierSource(memberReference: MemberReference): Source =
@@ -636,7 +641,7 @@ private fun Renderer.qualifierSource(memberReference: MemberReference): Source =
         if (ktCompanionQualifiedName != null) topLevelQualifiedNameSource(ktCompanionQualifiedName)
         else qualifiedNameSource(enclosingTypeDescriptor)
       } else {
-        emptySource
+        Source.EMPTY
       }
     } else {
       if (memberReference is MethodCall && qualifier is SuperReference) {
@@ -655,15 +660,15 @@ private fun Renderer.qualifierSource(memberReference: MemberReference): Source =
         // Don't render qualifier for local classes.
         // TODO(b/219950593): Implement a pass which will remove unnecessary qualifiers, and then
         // remove this `if` branch.
-        emptySource
+        Source.EMPTY
       } else if (qualifier.isAnonymousThisReference) {
-        emptySource
+        Source.EMPTY
       } else if (
         memberReference.target.isInstanceMember || !qualifier.isNonQualifiedThisReference
       ) {
         leftSubExpressionSource(memberReference.precedence, qualifier)
       } else {
-        emptySource
+        Source.EMPTY
       }
     }
   }
@@ -675,7 +680,7 @@ private fun Renderer.rightSubExpressionSource(precedence: Precedence, operand: E
   expressionInParensSource(operand, precedence.requiresParensOnRight(operand.precedence))
 
 private fun Renderer.expressionInParensSource(expression: Expression, needsParentheses: Boolean) =
-  expressionSource(expression).letIf(needsParentheses, ::inParentheses)
+  expressionSource(expression).letIf(needsParentheses) { inParentheses(it) }
 
 private val Expression.isNonQualifiedThisReference: Boolean
   get() = this is ThisReference && (!isQualified || this.typeDescriptor.typeDeclaration.isAnonymous)

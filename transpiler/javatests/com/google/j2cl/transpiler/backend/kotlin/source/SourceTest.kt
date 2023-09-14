@@ -16,12 +16,35 @@
 package com.google.j2cl.transpiler.backend.kotlin.source
 
 import com.google.common.truth.Truth.assertThat
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.ampersandSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.colonSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaAndNewLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.dotSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.emptyLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inAngleBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inCurlyBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inDoubleQuotes
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inInlineCurlyBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParentheses
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParenthesesIfNotEmpty
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inSquareBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.infix
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.join
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.semicolonSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
 class SourceTest {
+  private val nullSource: Source?
+    get() = null
+
   private val sourceA: Source
     get() = source("a")
 
@@ -44,15 +67,15 @@ class SourceTest {
     get() = listOf(sourceA, sourceB, sourceC)
 
   private val sourcesABCAndEmpty: Iterable<Source>
-    get() = listOf(sourceA, emptySource, sourceB, emptySource, sourceC)
+    get() = listOf(sourceA, Source.EMPTY, sourceB, Source.EMPTY, sourceC)
 
   private infix fun Source.gives(string: String) {
-    assertThat(toString()).isEqualTo(string)
+    assertThat(buildString()).isEqualTo(string)
   }
 
   @Test
-  fun emptySource() {
-    emptySource gives ""
+  fun emptySourceIsEmpty() {
+    Source.EMPTY gives ""
   }
 
   @Test
@@ -66,29 +89,30 @@ class SourceTest {
   }
 
   @Test
-  fun joinSources() {
+  fun sourceJoin() {
+    join() gives ""
     join(sourceA) gives "a"
     join(sourceA, sourceB) gives "ab"
-    join(sourceA, emptySource, sourceB) gives "ab"
+    join(sourceA, Source.EMPTY, sourceB) gives "ab"
   }
 
   @Test
-  fun stringSeparatedSources() {
-    ", " separated emptySources gives ""
-    ", " separated sourcesA gives "a"
-    ", " separated sourcesAB gives "a, b"
-    ", " separated sourcesABC gives "a, b, c"
-    ", " separated sourcesABCAndEmpty gives "a, b, c"
+  fun sourceJoin_withSeparator() {
+    join(emptySources, separator = ", ") gives ""
+    join(sourcesA, separator = ", ") gives "a"
+    join(sourcesAB, separator = ", ") gives "a, b"
+    join(sourcesABC, separator = ", ") gives "a, b, c"
+    join(sourcesABCAndEmpty, separator = ", ") gives "a, b, c"
   }
 
   @Test
   fun separatedSources_vararg() {
-    spaceSeparated(sourceA, emptySource, sourceB, emptySource, sourceC) gives "a b c"
-    commaSeparated(sourceA, emptySource, sourceB, emptySource, sourceC) gives "a, b, c"
-    dotSeparated(sourceA, emptySource, sourceB, emptySource, sourceC) gives "a.b.c"
-    colonSeparated(sourceA, emptySource, sourceB, emptySource, sourceC) gives "a: b: c"
-    newLineSeparated(sourceA, emptySource, sourceB, emptySource, sourceC) gives "a\nb\nc"
-    emptyLineSeparated(sourceA, emptySource, sourceB, emptySource, sourceC) gives "a\n\nb\n\nc"
+    spaceSeparated(sourceA, Source.EMPTY, sourceB, Source.EMPTY, sourceC) gives "a b c"
+    commaSeparated(sourceA, Source.EMPTY, sourceB, Source.EMPTY, sourceC) gives "a, b, c"
+    dotSeparated(sourceA, Source.EMPTY, sourceB, Source.EMPTY, sourceC) gives "a.b.c"
+    colonSeparated(sourceA, Source.EMPTY, sourceB, Source.EMPTY, sourceC) gives "a: b: c"
+    newLineSeparated(sourceA, Source.EMPTY, sourceB, Source.EMPTY, sourceC) gives "a\nb\nc"
+    emptyLineSeparated(sourceA, Source.EMPTY, sourceB, Source.EMPTY, sourceC) gives "a\n\nb\n\nc"
   }
 
   @Test
@@ -114,20 +138,20 @@ class SourceTest {
   }
 
   @Test
-  fun bracketedSources() {
+  fun sourceInBrackets() {
     inParentheses(sourceA) gives "(a)"
     inAngleBrackets(sourceA) gives "<a>"
     inSquareBrackets(sourceA) gives "[a]"
     inDoubleQuotes(sourceA) gives "\"a\""
     inInlineCurlyBrackets(sourceA) gives "{ a }"
 
-    inParenthesesIfNotEmpty(emptySource) gives ""
+    inParenthesesIfNotEmpty(Source.EMPTY) gives ""
     inParenthesesIfNotEmpty(sourceA) gives "(a)"
   }
 
   @Test
   fun blockSource() {
-    block(emptySource) gives "{}"
+    block(Source.EMPTY) gives "{}"
     block(sourceA) gives "{\n a\n}"
     block(newLineSeparated(sourceA, sourceB)) gives "{\n a\n b\n}"
   }
@@ -135,30 +159,30 @@ class SourceTest {
   @Test
   fun infixSource() {
     infix(sourceA, "op", sourceB) gives "a op b"
-    infix(emptySource, "op", emptySource) gives "op"
+    infix(Source.EMPTY, "op", Source.EMPTY) gives "op"
   }
 
   @Test
   fun sourceIf() {
-    sourceIf(true) { sourceA } gives "a"
-    sourceIf(false) { sourceA } gives ""
+    Source.emptyUnless(true) { sourceA } gives "a"
+    Source.emptyUnless(false) { sourceA } gives ""
   }
 
   @Test
   fun sourceIfEmpty() {
     sourceA.ifEmpty { sourceB } gives "a"
-    emptySource.ifEmpty { sourceB } gives "b"
+    Source.EMPTY.ifEmpty { sourceB } gives "b"
   }
 
   @Test
   fun sourceIfNotEmpty() {
-    sourceA.ifNotEmpty(::inParentheses) gives "(a)"
-    emptySource.ifNotEmpty(::inParentheses) gives ""
+    sourceA.ifNotEmpty { inParentheses(it) } gives "(a)"
+    Source.EMPTY.ifNotEmpty { inParentheses(it) } gives ""
   }
 
   @Test
-  fun ifNotNullSource() {
-    128.ifNotNullSource { source(it.inc().toString()) } gives "129"
-    (null as Int?).ifNotNullSource { source(it.inc().toString()) } gives ""
+  fun sourceOrEmpty() {
+    sourceA.orEmpty() gives "a"
+    nullSource.orEmpty() gives ""
   }
 }

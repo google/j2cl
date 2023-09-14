@@ -29,20 +29,17 @@ import com.google.j2cl.transpiler.backend.kotlin.ast.isForbiddenInEnumValueDecla
 import com.google.j2cl.transpiler.backend.kotlin.ast.kotlinMembers
 import com.google.j2cl.transpiler.backend.kotlin.objc.comment
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
-import com.google.j2cl.transpiler.backend.kotlin.source.block
-import com.google.j2cl.transpiler.backend.kotlin.source.colonSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.commaAndNewLineSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.emptyLineSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.emptySource
-import com.google.j2cl.transpiler.backend.kotlin.source.ifNotNullSource
-import com.google.j2cl.transpiler.backend.kotlin.source.inParentheses
-import com.google.j2cl.transpiler.backend.kotlin.source.join
-import com.google.j2cl.transpiler.backend.kotlin.source.newLineSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.plusSemicolon
-import com.google.j2cl.transpiler.backend.kotlin.source.source
-import com.google.j2cl.transpiler.backend.kotlin.source.sourceIf
-import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.colonSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaAndNewLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.emptyLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParentheses
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.join
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
 fun Renderer.typeSource(type: Type): Source =
   type.declaration.let { typeDeclaration ->
@@ -69,22 +66,22 @@ fun Renderer.typeSource(type: Type): Source =
   }
 
 fun Renderer.ktPrimaryConstructorParametersSource(type: Type): Source =
-  type.ktPrimaryConstructor.ifNotNullSource { method ->
-    methodParametersSource(method, method.toObjCNames()?.parameterNames)
-  }
+  type.ktPrimaryConstructor
+    ?.let { method -> methodParametersSource(method, method.toObjCNames()?.parameterNames) }
+    .orEmpty()
 
 fun nativeTypeSource(type: TypeDeclaration): Source =
   comment(spaceSeparated(source("native"), source("class"), identifierSource(type.ktSimpleName)))
 
 fun classModifiersSource(type: Type): Source =
-  sourceIf(type.declaration.isKtInner) { source("inner") }
+  Source.emptyUnless(type.declaration.isKtInner) { source("inner") }
 
 fun inheritanceModifierSource(typeDeclaration: TypeDeclaration): Source =
-  sourceIf(typeDeclaration.isClass && !typeDeclaration.isFinal) {
+  Source.emptyUnless(typeDeclaration.isClass && !typeDeclaration.isFinal) {
     when {
       typeDeclaration.isAbstract -> source("abstract")
       typeDeclaration.isOpen -> source("open")
-      else -> emptySource
+      else -> Source.EMPTY
     }
   }
 
@@ -96,7 +93,7 @@ fun kindModifiersSource(typeDeclaration: TypeDeclaration): Source =
   }
 
 fun funModifierSource(typeDeclaration: TypeDeclaration): Source =
-  sourceIf(typeDeclaration.isKtFunctionalInterface) { source("fun") }
+  Source.emptyUnless(typeDeclaration.isKtFunctionalInterface) { source("fun") }
 
 fun Renderer.typeDeclarationSource(declaration: TypeDeclaration): Source =
   join(
@@ -121,13 +118,13 @@ private fun Renderer.superTypeInvocationSource(
   type: Type,
   superTypeDescriptor: TypeDescriptor
 ): Source =
-  sourceIf(superTypeDescriptor.isClass) {
-    if (!type.hasConstructors) inParentheses(emptySource)
+  Source.emptyUnless(superTypeDescriptor.isClass) {
+    if (!type.hasConstructors) inParentheses(Source.EMPTY)
     else
       type.ktPrimaryConstructor.let { ktPrimaryConstructor ->
-        sourceIf(ktPrimaryConstructor != null) {
+        Source.emptyUnless(ktPrimaryConstructor != null) {
           getConstructorInvocation(ktPrimaryConstructor).let {
-            if (it == null) inParentheses(emptySource) else invocationSource(it)
+            if (it == null) inParentheses(Source.EMPTY) else invocationSource(it)
           }
         }
       }
@@ -137,7 +134,7 @@ internal fun Renderer.typeBodySource(type: Type): Source =
   forTypeBody(type).run {
     block(
       emptyLineSeparated(
-        sourceIf(type.isEnum) { enumValuesSource(type) },
+        Source.emptyUnless(type.isEnum) { enumValuesSource(type) },
         emptyLineSeparated(type.kotlinMembers.map { source(it) })
       )
     )
@@ -151,7 +148,7 @@ internal fun Renderer.forTypeBody(type: Type): Renderer =
   )
 
 private fun Renderer.enumValuesSource(type: Type): Source =
-  commaAndNewLineSeparated(type.enumFields.map(::enumValueSource)).plusSemicolon
+  commaAndNewLineSeparated(type.enumFields.map(::enumValueSource)).plus(Source.SEMICOLON)
 
 private fun Renderer.enumValueSource(field: Field): Source =
   field.initializer
@@ -165,9 +162,10 @@ private fun Renderer.enumValueSource(field: Field): Source =
             field.descriptor.enumValueDeclarationNameSource,
             newInstance.arguments
               .takeIf { it.isNotEmpty() }
-              .ifNotNullSource { invocationSource(newInstance) }
+              ?.let { invocationSource(newInstance) }
+              .orEmpty()
           ),
-          newInstance.anonymousInnerClass.ifNotNullSource(::typeBodySource)
+          newInstance.anonymousInnerClass?.let(::typeBodySource).orEmpty()
         )
       )
     }

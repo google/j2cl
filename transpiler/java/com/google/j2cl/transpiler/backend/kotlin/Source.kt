@@ -16,18 +16,16 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
-import com.google.j2cl.transpiler.backend.kotlin.source.commaAndNewLineSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.dotSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.ifNotEmpty
-import com.google.j2cl.transpiler.backend.kotlin.source.inNewLine
-import com.google.j2cl.transpiler.backend.kotlin.source.inParentheses
-import com.google.j2cl.transpiler.backend.kotlin.source.inParenthesesIfNotEmpty
-import com.google.j2cl.transpiler.backend.kotlin.source.indented
-import com.google.j2cl.transpiler.backend.kotlin.source.infix
-import com.google.j2cl.transpiler.backend.kotlin.source.join
-import com.google.j2cl.transpiler.backend.kotlin.source.source
-import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaAndNewLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inNewLine
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParentheses
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParenthesesIfNotEmpty
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.indented
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.infix
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.join
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
 
 fun literalSource(it: Boolean): Source = source("$it")
 
@@ -69,9 +67,6 @@ fun initializer(expr: Source): Source = expr.ifNotEmpty { spaceSeparated(source(
 fun at(source: Source) = join(source("@"), source)
 
 fun labelReference(name: String) = at(identifierSource(name))
-
-fun Source.functionCall(name: String, vararg args: Source) =
-  dotSeparated(this, join(source(name), inParentheses(commaSeparated(args.toList()))))
 
 fun classLiteral(type: Source) = join(type, source("::class"))
 

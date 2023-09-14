@@ -42,17 +42,16 @@ import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.ast.WhileStatement
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
-import com.google.j2cl.transpiler.backend.kotlin.source.block
-import com.google.j2cl.transpiler.backend.kotlin.source.colonSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.emptySource
-import com.google.j2cl.transpiler.backend.kotlin.source.ifNotNullSource
-import com.google.j2cl.transpiler.backend.kotlin.source.inParentheses
-import com.google.j2cl.transpiler.backend.kotlin.source.infix
-import com.google.j2cl.transpiler.backend.kotlin.source.join
-import com.google.j2cl.transpiler.backend.kotlin.source.newLineSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.source
-import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.colonSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParentheses
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.infix
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.join
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
 internal fun Renderer.statementsSource(statements: List<Statement>): Source =
   newLineSeparated(statements.map(::statementSource))
@@ -85,16 +84,16 @@ private fun Renderer.assertStatementSource(assertStatement: AssertStatement): So
       extensionMemberQualifiedNameSource("kotlin.assert"),
       inParentheses(expressionSource(assertStatement.expression))
     ),
-    assertStatement.message.ifNotNullSource { block(expressionSource(it)) }
+    assertStatement.message?.let { block(expressionSource(it)) }.orEmpty()
   )
 
 private fun Renderer.blockSource(block: Block): Source = block(statementsSource(block.statements))
 
 private fun Renderer.breakStatementSource(breakStatement: BreakStatement): Source =
-  join(source("break"), breakStatement.labelReference.ifNotNullSource(::labelReferenceSource))
+  join(source("break"), breakStatement.labelReference?.let(::labelReferenceSource).orEmpty())
 
 private fun Renderer.continueStatementSource(continueStatement: ContinueStatement): Source =
-  join(source("continue"), continueStatement.labelReference.ifNotNullSource(::labelReferenceSource))
+  join(source("continue"), continueStatement.labelReference?.let(::labelReferenceSource).orEmpty())
 
 private fun Renderer.labelReferenceSource(labelReference: LabelReference): Source =
   at(nameSource(labelReference.target))
@@ -128,9 +127,7 @@ private fun Renderer.ifStatementSource(ifStatement: IfStatement): Source =
     source("if"),
     inParentheses(expressionSource(ifStatement.conditionExpression)),
     statementSource(ifStatement.thenStatement),
-    ifStatement.elseStatement.ifNotNullSource {
-      spaceSeparated(source("else"), statementSource(it))
-    }
+    ifStatement.elseStatement?.let { spaceSeparated(source("else"), statementSource(it)) }.orEmpty()
   )
 
 private fun Renderer.fieldDeclarationStatementSource(
@@ -152,7 +149,7 @@ private fun Renderer.fieldDeclarationStatementSource(
 private fun Renderer.labeledStatementSource(labelStatement: LabeledStatement): Source =
   spaceSeparated(
     join(nameSource(labelStatement.label), source("@")),
-    labelStatement.statement.let { statementSource(it).letIf(it is LabeledStatement, ::block) }
+    labelStatement.statement.let { statementSource(it).letIf(it is LabeledStatement) { block(it) } }
   )
 
 private fun Renderer.localClassDeclarationStatementSource(
@@ -161,8 +158,8 @@ private fun Renderer.localClassDeclarationStatementSource(
 
 private fun Renderer.returnStatementSource(returnStatement: ReturnStatement): Source =
   spaceSeparated(
-    join(source("return"), currentReturnLabelIdentifier.ifNotNullSource(::labelReference)),
-    returnStatement.expression.ifNotNullSource(::expressionSource)
+    join(source("return"), currentReturnLabelIdentifier?.let(::labelReference).orEmpty()),
+    returnStatement.expression?.let(::expressionSource).orEmpty()
   )
 
 private fun Renderer.switchStatementSource(switchStatement: SwitchStatement): Source =
@@ -194,7 +191,7 @@ private fun Renderer.switchStatementSource(switchStatement: SwitchStatement): So
                   )
                   .also { caseExpressions.clear() }
               } else {
-                emptySource
+                Source.EMPTY
               }
             }
           }
@@ -229,9 +226,9 @@ private fun Renderer.tryStatementSource(tryStatement: TryStatement): Source =
     source("try"),
     statementSource(tryStatement.body),
     spaceSeparated(tryStatement.catchClauses.map(::catchClauseSource)),
-    tryStatement.finallyBlock.ifNotNullSource {
-      spaceSeparated(source("finally"), statementSource(it))
-    }
+    tryStatement.finallyBlock
+      ?.let { spaceSeparated(source("finally"), statementSource(it)) }
+      .orEmpty()
   )
 
 private val TypeDescriptor.catchTypeDescriptors

@@ -37,9 +37,8 @@ import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.common.mapFirst
 import com.google.j2cl.transpiler.backend.kotlin.common.titleCase
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
-import com.google.j2cl.transpiler.backend.kotlin.source.ifNotNullSource
-import com.google.j2cl.transpiler.backend.kotlin.source.source
-import com.google.j2cl.transpiler.backend.kotlin.source.sourceIf
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
+import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
 private fun Renderer.fileOptInAnnotationSource(features: List<Source>): Source =
   fileAnnotation(topLevelQualifiedNameSource("kotlin.OptIn"), features)
@@ -49,7 +48,8 @@ internal val Renderer.fileOptInAnnotationSource: Source
     environment.importedOptInQualifiedNames
       .takeIf { it.isNotEmpty() }
       ?.map { classLiteral(topLevelQualifiedNameSource(it)) }
-      .ifNotNullSource { fileOptInAnnotationSource(it) }
+      ?.let { fileOptInAnnotationSource(it) }
+      .orEmpty()
 
 internal val Renderer.hiddenFromObjCAnnotationSource: Source
   get() =
@@ -67,16 +67,16 @@ internal fun Renderer.objCNameAnnotationSource(name: String, exact: Boolean? = n
       optInQualifiedName = "kotlin.experimental.ExperimentalObjCName"
     ),
     literalSource(name),
-    exact.ifNotNullSource { parameterSource("exact", literalSource(it)) }
+    exact?.let { parameterSource("exact", literalSource(it)) }.orEmpty()
   )
 
 internal fun Renderer.objCAnnotationSource(typeDeclaration: TypeDeclaration): Source =
-  sourceIf(typeDeclaration.needsObjCNameAnnotation) {
+  Source.emptyUnless(typeDeclaration.needsObjCNameAnnotation) {
     objCNameAnnotationSource(typeDeclaration.objCName, exact = true)
   }
 
 internal fun Renderer.objCAnnotationSource(companionObject: CompanionObject): Source =
-  sourceIf(companionObject.needsObjCNameAnnotation) {
+  Source.emptyUnless(companionObject.needsObjCNameAnnotation) {
     objCNameAnnotationSource(companionObject.declaration.objCName, exact = true)
   }
 
@@ -84,15 +84,15 @@ internal fun Renderer.objCAnnotationSource(
   methodDescriptor: MethodDescriptor,
   methodObjCNames: MethodObjCNames?
 ): Source =
-  sourceIf(!methodDescriptor.isConstructor) {
+  Source.emptyUnless(!methodDescriptor.isConstructor) {
     if (methodDescriptor.isHiddenFromObjC) hiddenFromObjCAnnotationSource
-    else methodObjCNames?.methodName.ifNotNullSource { objCNameAnnotationSource(it) }
+    else methodObjCNames?.methodName?.let { objCNameAnnotationSource(it) }.orEmpty()
   }
 
 internal fun Renderer.objCAnnotationSource(fieldDescriptor: FieldDescriptor): Source =
   if (fieldDescriptor.isHiddenFromObjC) hiddenFromObjCAnnotationSource
   else
-    sourceIf(fieldDescriptor.needsObjCNameAnnotations) {
+    Source.emptyUnless(fieldDescriptor.needsObjCNameAnnotations) {
       objCNameAnnotationSource(fieldDescriptor.objCName)
     }
 

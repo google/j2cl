@@ -24,16 +24,15 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
-import com.google.j2cl.transpiler.backend.kotlin.source.ampersandSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.dotSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.ifNotNullSource
-import com.google.j2cl.transpiler.backend.kotlin.source.inAngleBrackets
-import com.google.j2cl.transpiler.backend.kotlin.source.infix
-import com.google.j2cl.transpiler.backend.kotlin.source.join
-import com.google.j2cl.transpiler.backend.kotlin.source.source
-import com.google.j2cl.transpiler.backend.kotlin.source.sourceIf
-import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.ampersandSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.dotSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inAngleBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.infix
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.join
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
 internal fun Renderer.typeDescriptorSource(
   typeDescriptor: TypeDescriptor,
@@ -102,7 +101,7 @@ private data class TypeDescriptorRenderer(
     join(
       renderer.qualifiedNameSource(arrayTypeDescriptor),
       arrayTypeDescriptor.componentTypeDescriptor.let {
-        sourceIf(!it.isPrimitive) { inAngleBrackets(child.source(it)) }
+        Source.emptyUnless(!it.isPrimitive) { inAngleBrackets(child.source(it)) }
       },
       nullableSuffixSource(arrayTypeDescriptor)
     )
@@ -128,7 +127,8 @@ private data class TypeDescriptorRenderer(
     declaredTypeDescriptor
       .typeArguments(projectRawToWildcards = projectRawToWildcards)
       .takeIf { it.isNotEmpty() }
-      .ifNotNullSource(::argumentsSource)
+      ?.let(::argumentsSource)
+      .orEmpty()
 
   fun argumentsSource(arguments: List<TypeArgument>): Source =
     inAngleBrackets(commaSeparated(arguments.map { source(it) }))
@@ -157,7 +157,7 @@ private data class TypeDescriptorRenderer(
     ampersandSeparated(typeDescriptor.intersectionTypeDescriptors.map { source(it) })
 
   fun nullableSuffixSource(typeDescriptor: TypeDescriptor): Source =
-    sourceIf(typeDescriptor.isNullable) { source("?") }
+    Source.emptyUnless(typeDescriptor.isNullable) { source("?") }
 
   private fun withSeen(typeVariable: TypeVariable): TypeDescriptorRenderer =
     copy(seenTypeVariables = seenTypeVariables + typeVariable.toNonNullable())

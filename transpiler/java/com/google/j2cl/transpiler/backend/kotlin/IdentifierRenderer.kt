@@ -19,8 +19,8 @@ import com.google.j2cl.transpiler.ast.HasName
 import com.google.j2cl.transpiler.backend.kotlin.ast.isHardKeyword
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
-import com.google.j2cl.transpiler.backend.kotlin.source.dotSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.source
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.dotSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 
 internal fun Renderer.nameSource(hasName: HasName) =
   identifierSource(environment.identifier(hasName))

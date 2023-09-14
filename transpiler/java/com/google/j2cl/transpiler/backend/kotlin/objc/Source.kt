@@ -16,24 +16,22 @@
 package com.google.j2cl.transpiler.backend.kotlin.objc
 
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
-import com.google.j2cl.transpiler.backend.kotlin.source.emptyLineSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.inAngleBrackets
-import com.google.j2cl.transpiler.backend.kotlin.source.inDoubleQuotes
-import com.google.j2cl.transpiler.backend.kotlin.source.infix
-import com.google.j2cl.transpiler.backend.kotlin.source.join
-import com.google.j2cl.transpiler.backend.kotlin.source.newLineSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.plus
-import com.google.j2cl.transpiler.backend.kotlin.source.plusSemicolon
-import com.google.j2cl.transpiler.backend.kotlin.source.source
-import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.emptyLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inAngleBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inDoubleQuotes
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.infix
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.join
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
 
 fun comment(source: Source): Source = spaceSeparated(source("//"), source)
 
-fun semicolonEnded(source: Source): Source = source.plusSemicolon
+fun semicolonEnded(source: Source): Source = source + Source.SEMICOLON
 
 fun assignment(lhs: Source, rhs: Source): Source = infix(lhs, "=", rhs)
 
-fun parameter(name: Source, value: Source): Source = join(name, source(":"), value)
+fun parameter(name: Source, value: Source): Source = join(name, Source.COLON, value)
 
 fun pointer(source: Source) = source + source("*")
 

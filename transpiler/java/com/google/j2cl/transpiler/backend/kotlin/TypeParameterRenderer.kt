@@ -21,16 +21,15 @@ import com.google.j2cl.transpiler.ast.KtVariance
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
-import com.google.j2cl.transpiler.backend.kotlin.source.colonSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.ifNotEmpty
-import com.google.j2cl.transpiler.backend.kotlin.source.ifNotNullSource
-import com.google.j2cl.transpiler.backend.kotlin.source.inAngleBrackets
-import com.google.j2cl.transpiler.backend.kotlin.source.source
-import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.colonSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inAngleBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
 internal fun Renderer.typeParametersSource(typeVariables: List<TypeVariable>): Source =
-  commaSeparated(typeVariables.map(::typeParameterSource)).ifNotEmpty(::inAngleBrackets)
+  commaSeparated(typeVariables.map(::typeParameterSource)).ifNotEmpty { inAngleBrackets(it) }
 
 internal fun Renderer.whereClauseSource(typeVariables: List<TypeVariable>): Source =
   whereClauseSource(
@@ -54,12 +53,13 @@ private fun Renderer.typeParameterSource(typeVariable: TypeVariable): Source =
   )
 
 private fun Renderer.typeParameterBoundSource(typeVariable: TypeVariable): Source =
-  typeVariable.upperBoundTypeDescriptors.singleOrNull().ifNotNullSource {
-    typeDescriptorSource(it, projectRawToWildcards = true)
-  }
+  typeVariable.upperBoundTypeDescriptors
+    .singleOrNull()
+    ?.let { typeDescriptorSource(it, projectRawToWildcards = true) }
+    .orEmpty()
 
 private fun typeParameterVarianceSource(typeVariable: TypeVariable): Source =
-  typeVariable.ktVariance?.identifier.ifNotNullSource { source(it) }
+  typeVariable.ktVariance?.identifier?.let { source(it) }.orEmpty()
 
 private val KtVariance.identifier: String
   get() =
