@@ -4,8 +4,8 @@ Takes Java source, translates it into Wasm.
 This is an experimental tool and should not be used.
 """
 
-load(":provider.bzl", "J2wasmInfo")
 load(":j2cl_js_common.bzl", "J2CL_JS_TOOLCHAIN_ATTRS", "create_wasm_js_lib_struct", "j2cl_js_provider")
+load(":provider.bzl", "J2wasmInfo")
 
 # Template for the generated JS imports file.
 # The `getImports` function referenced by `instantiateStreaming` is defined by the Wasm backend.
@@ -187,8 +187,9 @@ def _impl_j2wasm_application(ctx):
         args.add(input)
         inputs.append(input)
 
+        binaryen = "_binaryen_legacy" if ctx.attr.enable_legacy_wasm_spec else "_binaryen"
         ctx.actions.run(
-            executable = ctx.executable._binaryen,
+            executable = getattr(ctx.executable, binaryen),
             arguments = [args],
             inputs = inputs,
             outputs = outputs,
@@ -293,6 +294,7 @@ _J2WASM_APP_ATTRS = {
     "source_map_base_url": attr.string(),
     # TODO(b/296477606): Remove when symbol map file can be linked from the binary for debugging.
     "enable_debug_info": attr.bool(default = False),
+    "enable_legacy_wasm_spec": attr.bool(default = True),
     "_jre": attr.label(default = Label("//build_defs/internal_do_not_use:j2wasm_jre")),
     "_j2cl_transpiler": attr.label(
         cfg = "exec",
@@ -306,6 +308,13 @@ _J2WASM_APP_ATTRS = {
         executable = True,
         default = Label(
             "//build_defs/internal_do_not_use:binaryen",
+        ),
+    ),
+    "_binaryen_legacy": attr.label(
+        cfg = "exec",
+        executable = True,
+        default = Label(
+            "//build_defs/internal_do_not_use:binaryen-legacy",
         ),
     ),
     "_bundler": attr.label(

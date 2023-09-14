@@ -132,4 +132,9 @@ alias(
     actual = "//third_party:binaryen",
 )
 
+alias(
+    name = "binaryen-legacy",
+    actual = "//third_party:binaryen-legacy",
+)
+
 # bzl_librarys
