@@ -301,6 +301,8 @@ public final class RuntimeMethods {
    */
   public static MethodCall createCheckNotNullCall(
       Expression argument, boolean specializeTypeParameter) {
+    checkArgument(!argument.getTypeDescriptor().isPrimitive());
+
     // TODO(b/68726480): checkNotNull should return a non-nullable T.
     MethodDescriptor checkNotNull =
         TypeDescriptors.get()
