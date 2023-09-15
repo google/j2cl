@@ -61,5 +61,7 @@ def j2cl_multi_test(name, test_class, deps, enable_wasm = True, **kwargs):
             optimize = 1,
             wasm_defs = j2wasm_defines,
             browsers = ["//:chrome-wasm-dev-linux"],
+            # TODO(goktug): Uncomment when Chrome Dev Channel updated with new spec.
+            # use_legacy_wasm_spec = False,
             **kwargs
         )

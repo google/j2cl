@@ -61,14 +61,14 @@ rather than on jsunit runner with browsers. For j2kt_jvm_test j2cl_library/j2cl_
 will be replaced with j2kt_jvm_library/j2kt_jvm_test counterparts.
 """
 
-load(":j2cl_library.bzl", "j2cl_library")
-load(":j2cl_js_common.bzl", "J2CL_TEST_DEFS", "j2cl_web_test")
 load(":j2cl_generate_jsunit_suite.bzl", "j2cl_generate_jsunit_suite")
+load(":j2cl_js_common.bzl", "J2CL_TEST_DEFS", "j2cl_web_test")
+load(":j2cl_library.bzl", "j2cl_library")
 load(":j2cl_rta.bzl", "j2cl_rta")
 load(":j2cl_util.bzl", "get_java_package")
 load(":j2kt_library.bzl", "j2kt_jvm_library", "j2kt_native_library")
-load(":j2wasm_library.bzl", "j2wasm_library")
 load(":j2wasm_generate_jsunit_suite.bzl", "j2wasm_generate_jsunit_suite")
+load(":j2wasm_library.bzl", "j2wasm_library")
 
 _JS_UNIT_TEST_PARAMETERS = [
     "args",
@@ -168,6 +168,7 @@ def j2cl_test_common(
         compile = 0,
         platform = "CLOSURE",
         optimize_wasm = False,
+        use_legacy_wasm_spec = True,
         wasm_defs = {},
         browsers = None,
         default_browser = "//testing/web/browsers:chrome-linux",
@@ -253,6 +254,7 @@ def j2cl_test_common(
             optimize = optimize_wasm,
             defines = wasm_defs,
             exec_properties = exec_properties,
+            use_legacy_wasm_spec = use_legacy_wasm_spec,
         )
 
         deps = [
