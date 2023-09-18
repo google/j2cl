@@ -27,6 +27,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangVoid
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
 import com.google.j2cl.transpiler.backend.kotlin.common.runIf
+import kotlin.streams.asSequence
 
 internal val TypeDescriptor.isImplicitUpperBound
   get() = this == nullableAnyTypeDescriptor
@@ -52,9 +53,10 @@ internal fun DeclaredTypeDescriptor.directSuperTypeForMethodCall(
   methodDescriptor: MethodDescriptor
 ): DeclaredTypeDescriptor? =
   superTypesStream
+    .asSequence()
     // Skip java.lang.Object as a supertype of interfaces.
     .filter { superType -> superType.isInterface || !isInterface }
-    .map { superType ->
+    .mapNotNull { superType ->
       // See if the method is in this supertype (in which case we are done) or if it is
       // overridden here (in which case this supertype is not the target).
       val declaredSuperMethodDescriptor =
@@ -72,9 +74,7 @@ internal fun DeclaredTypeDescriptor.directSuperTypeForMethodCall(
         else -> null
       }
     }
-    .filter { it != null }
-    .findFirst()
-    .orElse(null)
+    .firstOrNull()
 
 internal fun TypeDescriptor.contains(
   typeVariable: TypeVariable,
