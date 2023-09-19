@@ -31,7 +31,7 @@ def j2cl_multi_test(name, test_class, deps, enable_wasm = True, **kwargs):
         browsers = [
             "//testing/web/browsers:chrome-linux",
             "//jre/javatests:firefox-linux",
-            "//testing/web/browsers:safari-osx",
+            "//testing/web/browsers:safari-macos",
         ],
         **kwargs
     )
