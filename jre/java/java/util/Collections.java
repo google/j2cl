@@ -1189,11 +1189,11 @@ public class Collections {
   }
 
   public static <T> List<T> nCopies(int n, T o) {
-    ArrayList<T> list = new ArrayList<T>();
-    for (int i = 0; i < n; ++i) {
-      list.add(o);
+    T[] array = (T[]) new Object[n];
+    if (o != null) {
+      Arrays.fill(array, o);
     }
-    return unmodifiableList(list);
+    return unmodifiableList(Arrays.asList(array));
   }
 
   public static <T> boolean replaceAll(List<T> list, T oldVal, T newVal) {
