@@ -1,0 +1,40 @@
+// Generated from "nativekttypes/UsesThrowsAnnotations.java"
+@file:OptIn(ExperimentalObjCName::class)
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "REPEATED_BOUND",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER")
+
+package nativekttypes
+
+import javaemul.lang.*
+import javaemul.lang.NativeThrows
+import kotlin.OptIn
+import kotlin.RuntimeException
+import kotlin.Suppress
+import kotlin.Throwable
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.jvm.Throws
+import kotlin.native.ObjCName
+
+@ObjCName("J2ktNativekttypesUsesThrowsAnnotations", exact = true)
+open class UsesThrowsAnnotations {
+ @ObjCName("j2ktThrows")
+ @NativeThrows(Throwable::class)
+ open fun j2ktThrows() {}
+
+ @ObjCName("j2ktThrowsAndJavaThrows")
+ @Throws(RuntimeException::class)
+ @NativeThrows(Throwable::class)
+ open fun j2ktThrowsAndJavaThrows() {}
+}

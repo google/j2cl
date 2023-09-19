@@ -24,6 +24,7 @@ import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.g
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtObjectiveCNameAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtOutAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtPropertyAnnotation;
+import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtThrowsAnnotation;
 
 import com.google.j2cl.transpiler.ast.KtInfo;
 import com.google.j2cl.transpiler.ast.KtObjcInfo;
@@ -93,6 +94,7 @@ public class KtInteropUtils {
         .setName(getKtName(annotationBindings))
         .setDisabled(isKtDisabled(annotationBindings))
         .setUninitializedWarningSuppressed(isUninitializedWarningSuppressed(annotationBindings))
+        .setThrows(isThrows(annotationBindings))
         .build();
   }
 
@@ -108,6 +110,10 @@ public class KtInteropUtils {
 
   public static boolean isKtDisabled(IAnnotationBinding[] annotationBindings) {
     return getKtDisabledAnnotation(annotationBindings) != null;
+  }
+
+  private static boolean isThrows(IAnnotationBinding[] annotationBindings) {
+    return getKtThrowsAnnotation(annotationBindings) != null;
   }
 
   public static boolean isUninitializedWarningSuppressed(IAnnotationBinding[] annotationBindings) {

@@ -31,7 +31,6 @@ import com.google.j2cl.transpiler.ast.MethodLike
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.ReturnStatement
 import com.google.j2cl.transpiler.ast.Statement
-import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors
 import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionObject
@@ -143,11 +142,29 @@ private fun Renderer.jvmFieldAnnotationSource(): Source =
 private fun Renderer.jvmStaticAnnotationSource(): Source =
   annotation(topLevelQualifiedNameSource("kotlin.jvm.JvmStatic"))
 
-private fun Renderer.jvmThrowsAnnotationSource(typeDescriptors: List<TypeDescriptor>): Source =
-  typeDescriptors
-    .map { classLiteral(typeDescriptorSource(it.toRawTypeDescriptor().toNonNullable())) }
-    .let(::commaSeparated)
-    .ifNotEmpty { annotation(topLevelQualifiedNameSource("kotlin.jvm.Throws"), it) }
+private fun Renderer.jvmThrowsAnnotationSource(methodDescriptor: MethodDescriptor): Source =
+  methodDescriptor.exceptionTypeDescriptors
+    .takeIf { it.isNotEmpty() }
+    ?.let { exceptionTypeDescriptors ->
+      annotation(
+        topLevelQualifiedNameSource("kotlin.jvm.Throws"),
+        exceptionTypeDescriptors.map {
+          classLiteral(typeDescriptorSource(it.toRawTypeDescriptor().toNonNullable()))
+        }
+      )
+    }
+    .orEmpty()
+
+private fun Renderer.nativeThrowsAnnotationSource(methodDescriptor: MethodDescriptor): Source =
+  methodDescriptor.ktInfo
+    .takeIf { it.isThrows }
+    ?.let {
+      annotation(
+        topLevelQualifiedNameSource("javaemul.lang.NativeThrows"),
+        classLiteral(typeDescriptorSource(TypeDescriptors.get().javaLangThrowable.toNonNullable()))
+      )
+    }
+    .orEmpty()
 
 private fun Renderer.initializerBlockSource(initializerBlock: InitializerBlock): Source =
   spaceSeparated(source("init"), statementSource(initializerBlock.block))
@@ -161,7 +178,8 @@ private fun Renderer.methodHeaderSource(method: Method): Source =
       Source.emptyUnless(methodDescriptor.isStatic) { jvmStaticAnnotationSource() },
       objCAnnotationSource(methodDescriptor, methodObjCNames),
       jsInteropAnnotationsSource(methodDescriptor),
-      jvmThrowsAnnotationSource(methodDescriptor.exceptionTypeDescriptors),
+      jvmThrowsAnnotationSource(methodDescriptor),
+      nativeThrowsAnnotationSource(methodDescriptor),
       spaceSeparated(
         methodModifiersSource(methodDescriptor),
         colonSeparated(

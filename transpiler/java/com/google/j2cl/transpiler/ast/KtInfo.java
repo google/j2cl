@@ -30,6 +30,8 @@ public abstract class KtInfo {
 
   public abstract boolean isUninitializedWarningSuppressed();
 
+  public abstract boolean isThrows();
+
   @Nullable
   public abstract String getName();
 
@@ -39,6 +41,7 @@ public abstract class KtInfo {
     return new AutoValue_KtInfo.Builder()
         .setProperty(false)
         .setDisabled(false)
+        .setThrows(false)
         .setUninitializedWarningSuppressed(false);
   }
 
@@ -52,6 +55,8 @@ public abstract class KtInfo {
     public abstract Builder setUninitializedWarningSuppressed(boolean isLateInit);
 
     public abstract Builder setName(String name);
+
+    public abstract Builder setThrows(boolean isThrows);
 
     public abstract KtInfo build();
   }
