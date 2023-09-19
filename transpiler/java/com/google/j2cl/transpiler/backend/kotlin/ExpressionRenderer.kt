@@ -391,10 +391,24 @@ private fun Renderer.methodInvocationSource(expression: MethodCall): Source =
   expression.target.let { methodDescriptor ->
     when {
       methodDescriptor.isProtoExtensionGetter() ->
-        join(
-          extensionMemberQualifiedNameSource("com.google.protobuf.kotlin.get"),
-          invocationSource(expression)
-        )
+        when (methodDescriptor.parameterDescriptors.size) {
+          // getExtension(extension) call.
+          1 ->
+            join(
+              extensionMemberQualifiedNameSource("com.google.protobuf.kotlin.get"),
+              invocationSource(expression)
+            )
+          // getExtension(extension, index) call.
+          2 ->
+            dotSeparated(
+              join(
+                extensionMemberQualifiedNameSource("com.google.protobuf.kotlin.get"),
+                inParentheses(expressionSource(expression.arguments[0]))
+              ),
+              join(source("get"), inParentheses(expressionSource(expression.arguments[1])))
+            )
+          else -> error("illegal proto extension getter")
+        }
       methodDescriptor.isProtobufGetter() ->
         identifierSource(computeProtobufPropertyName(expression.target.name!!))
       methodDescriptor.isProtoExtensionChecker() ->
