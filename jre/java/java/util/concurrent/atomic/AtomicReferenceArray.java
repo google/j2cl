@@ -18,10 +18,7 @@
 
 package java.util.concurrent.atomic;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * GWT emulated version of {@link AtomicReferenceArray}.
@@ -30,42 +27,44 @@ import java.util.List;
  */
 public class AtomicReferenceArray<V> {
 
-  private final List<V> values;
+  private final V[] values;
 
   public AtomicReferenceArray(V[] array) {
-    values = new ArrayList<V>(Arrays.asList(array));
+    values = Arrays.copyOf(array, array.length);
   }
 
   public AtomicReferenceArray(int length) {
-    values = new ArrayList<V>(Collections.<V>nCopies(length, null));
+    values = (V[]) new Object[length];
   }
 
   public boolean compareAndSet(int i, V expect, V update) {
-    if (values.get(i) == expect) {
-      values.set(i, update);
+    if (values[i] == expect) {
+      values[i] = update;
       return true;
     }
     return false;
   }
 
   public V get(int i) {
-    return values.get(i);
+    return values[i];
   }
 
   public V getAndSet(int i, V x) {
-    return values.set(i, x);
+    V previous = values[i];
+    values[i] = x;
+    return previous;
   }
 
   public void lazySet(int i, V x) {
-    values.set(i, x);
+    values[i] = x;
   }
 
   public int length() {
-    return values.size();
+    return values.length;
   }
 
   public void set(int i, V x) {
-    values.set(i, x);
+    values[i] = x;
   }
 
   public boolean weakCompareAndSet(int i, V expect, V update) {
@@ -74,6 +73,6 @@ public class AtomicReferenceArray<V> {
 
   @Override
   public String toString() {
-    return values.toString();
+    return Arrays.toString(values);
   }
 }
