@@ -106,16 +106,24 @@ def main(argv):
 def _diff(original, modified, filter_noise):
   print("Constructing a diff of changes in '%s'" % modified.blaze_target)
 
+  is_wasm = modified.blaze_target.endswith(".wasm")
+
+  original_targets = [original.blaze_target]
+  modified_targets = [modified.blaze_target]
+  if is_wasm:
+    original_targets += [original.blaze_target + ".map"]
+    modified_targets += [modified.blaze_target + ".map"]
+
   print("  Building targets.")
   repo_util.build_targets_with_workspace(
-      [original.blaze_target],
-      [modified.blaze_target],
+      original_targets,
+      modified_targets,
       original.workspace_path,
       modified.workspace_path,
       ["--define=J2CL_APP_STYLE=PRETTY"],
   )
 
-  if modified.blaze_target.endswith(".wasm"):
+  if is_wasm:
     print("  Disassembling.")
     repo_util.build(["//third_party/binaryen:wasm-dis"])
     wasm_dis_cmd = ["blaze-bin/third_party/binaryen/wasm-dis", "--enable-gc"]
