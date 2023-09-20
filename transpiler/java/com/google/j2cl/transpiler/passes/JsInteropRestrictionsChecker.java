@@ -1287,7 +1287,7 @@ public class JsInteropRestrictionsChecker {
     if (memberDescriptor.isJsMember()) {
       problems.error(
           member.getSourcePosition(),
-          "JsOverlay method '%s' cannot be nor override a JsProperty or a JsMethod.",
+          "JsOverlay '%s' cannot be nor override a JsProperty or a JsMethod.",
           readableDescription);
       return;
     }

@@ -2750,16 +2750,18 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative=true) public class Buggy {",
+            "  @JsProperty @JsOverlay public int a;",
+            "  @JsProperty @JsOverlay public static int b;",
             "  @JsMethod @JsOverlay public final void m() { }",
             "  @JsMethod @JsOverlay public static void n() { }",
             "  @JsProperty @JsOverlay public static void setA(String value) { }",
             "}")
         .assertErrorsWithoutSourcePosition(
-            "JsOverlay method 'void Buggy.m()' cannot be nor override "
-                + "a JsProperty or a JsMethod.",
-            "JsOverlay method 'void Buggy.n()' cannot be nor override "
-                + "a JsProperty or a JsMethod.",
-            "JsOverlay method 'void Buggy.setA(String)' cannot be nor override "
+            "JsOverlay 'Buggy.a' cannot be nor override a JsProperty or a JsMethod.",
+            "JsOverlay 'Buggy.b' cannot be nor override a JsProperty or a JsMethod.",
+            "JsOverlay 'void Buggy.m()' cannot be nor override a JsProperty or a JsMethod.",
+            "JsOverlay 'void Buggy.n()' cannot be nor override a JsProperty or a JsMethod.",
+            "JsOverlay 'void Buggy.setA(String)' cannot be nor override "
                 + "a JsProperty or a JsMethod.");
   }
 
