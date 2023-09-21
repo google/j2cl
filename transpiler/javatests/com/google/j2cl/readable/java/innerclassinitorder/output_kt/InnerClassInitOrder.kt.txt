@@ -120,11 +120,11 @@ open class InnerClassInitOrder {
 
  @JvmField
  @HiddenFromObjC
- val outer_private_2: InnerClassInitOrder.Outer? = InnerClassInitOrder.Outer(1)
+ internal val outer_private_2: InnerClassInitOrder.Outer? = InnerClassInitOrder.Outer(1)
 
  @JvmField
  @HiddenFromObjC
- val outerIsSuper_private_2: InnerClassInitOrder.Outer.OuterIsSuper? = this.outer_private_2!!.OuterIsSuper(2)
+ internal val outerIsSuper_private_2: InnerClassInitOrder.Outer.OuterIsSuper? = this.outer_private_2!!.OuterIsSuper(2)
 
  @ObjCName("testOuterIsNotSuper")
  open fun testOuterIsNotSuper() {

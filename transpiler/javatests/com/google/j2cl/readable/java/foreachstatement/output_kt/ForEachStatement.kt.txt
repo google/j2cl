@@ -53,7 +53,7 @@ open class ForEachStatement {
 
  @HiddenFromObjC
  @Throws(Exception::class)
- fun testMulticatch_private_2() {
+ internal fun testMulticatch_private_2() {
   try {
    throw java.lang.Exception()
   } catch (e: ForEachStatement.Exception1) {
@@ -68,7 +68,7 @@ open class ForEachStatement {
  }
 
  @HiddenFromObjC
- fun <T: MutableIterable<String?>?, U: T> testTypeVariable_private_2() {
+ internal fun <T: MutableIterable<String?>?, U: T> testTypeVariable_private_2() {
   val iterable: U? = null
   for (s in iterable!!) {
    val s_1: String? = s

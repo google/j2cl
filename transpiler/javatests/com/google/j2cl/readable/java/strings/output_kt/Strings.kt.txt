@@ -32,15 +32,15 @@ import kotlin.native.ObjCName
 open class Strings {
  @JvmField
  @HiddenFromObjC
- var someString_private_2: String? = "This is a string literal"
+ internal var someString_private_2: String? = "This is a string literal"
 
  @JvmField
  @HiddenFromObjC
- var nonBmpChar_private_2: String? = "\uD800\uDF46"
+ internal var nonBmpChar_private_2: String? = "\uD800\uDF46"
 
  @JvmField
  @HiddenFromObjC
- var wideColon_private_2: String? = "\uFF1A"
+ internal var wideColon_private_2: String? = "\uFF1A"
 
  @ObjCName("test")
  open fun test() {
@@ -81,10 +81,10 @@ open class Strings {
  @ObjCName("J2ktStringsStringsCompanion", exact = true)
  companion object {
   @HiddenFromObjC
-  const val ESCAPE_CODES_private_2: String = "\b\u000C\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A"
+  internal const val ESCAPE_CODES_private_2: String = "\b\u000C\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A"
 
   @HiddenFromObjC
-  const val ESCAPE_CODES_COPY_private_2: String = "\b\u000C\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A"
+  internal const val ESCAPE_CODES_COPY_private_2: String = "\b\u000C\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A"
  }
 
  open class StringHolder {

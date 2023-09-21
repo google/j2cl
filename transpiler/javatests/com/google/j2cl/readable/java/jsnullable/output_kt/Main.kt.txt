@@ -36,32 +36,32 @@ import kotlin.native.ObjCName
 open class Main {
  @JvmField
  @HiddenFromObjC
- var f1_private_2: String = "Hello"
+ internal var f1_private_2: String = "Hello"
 
  @JvmField
  @HiddenFromObjC
- var f2_private_2: String? = null
+ internal var f2_private_2: String? = null
 
  @JvmField
  @HiddenFromObjC
- var f4_private_2: MutableList<String> = ArrayList<String>()
+ internal var f4_private_2: MutableList<String> = ArrayList<String>()
 
  @JvmField
  @HiddenFromObjC
- var f5_private_2: MutableList<String>? = ArrayList<String>()
+ internal var f5_private_2: MutableList<String>? = ArrayList<String>()
 
  @JvmField
  @HiddenFromObjC
- var f6_private_2: MutableList<String?> = ArrayList<String?>()
+ internal var f6_private_2: MutableList<String?> = ArrayList<String?>()
 
  @JvmField
  @HiddenFromObjC
- var f9_private_2: Array<String?> = arrayOf<String?>()
+ internal var f9_private_2: Array<String?> = arrayOf<String?>()
 
  @JvmField
  @HiddenFromObjC
- var f10_private_2: Array<String>? = arrayOf<String>()
+ internal var f10_private_2: Array<String>? = arrayOf<String>()
 
  @HiddenFromObjC
- fun <T: Any> m_private_2(t: T, nullableT: T?) {}
+ internal fun <T: Any> m_private_2(t: T, nullableT: T?) {}
 }

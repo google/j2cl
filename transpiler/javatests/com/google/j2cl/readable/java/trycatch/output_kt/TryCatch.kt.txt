@@ -159,7 +159,7 @@ open class TryCatch {
  }
 
  @HiddenFromObjC
- fun <T> getT_private_2(t: T): T {
+ internal fun <T> getT_private_2(t: T): T {
   return t
  }
 
@@ -170,7 +170,7 @@ open class TryCatch {
  }
 
  @HiddenFromObjC
- fun <T: Throwable?> getThrowable_private_2(): T {
+ internal fun <T: Throwable?> getThrowable_private_2(): T {
   return null as T
  }
 
@@ -186,7 +186,7 @@ open class TryCatch {
  companion object {
   @JvmField
   @HiddenFromObjC
-  val closableThing_private_2: TryCatch.ClosableThing? = TryCatch.ClosableThing()
+  internal val closableThing_private_2: TryCatch.ClosableThing? = TryCatch.ClosableThing()
  }
 
  open class ClosableThing: AutoCloseable {

@@ -37,11 +37,11 @@ open class Main {
  companion object {
   @JvmField
   @HiddenFromObjC
-  val property_private_2: String? = System.getProperty("jre.classMetadata")
+  internal val property_private_2: String? = System.getProperty("jre.classMetadata")
 
   @JvmField
   @HiddenFromObjC
-  val propertyWithDefault_private_2: String? = System.getProperty("jre.classMetadata", "default")
+  internal val propertyWithDefault_private_2: String? = System.getProperty("jre.classMetadata", "default")
 
   @JvmStatic
   @ObjCName("main")
@@ -60,7 +60,7 @@ open class Main {
 
   @JvmStatic
   @HiddenFromObjC
-  fun mightHaveSideEffects_private_2(): String? {
+  internal fun mightHaveSideEffects_private_2(): String? {
    return "Foo"
   }
  }

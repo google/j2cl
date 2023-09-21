@@ -32,11 +32,11 @@ import kotlin.native.ObjCName
 open class GenericEquals<T> {
  @JvmField
  @HiddenFromObjC
- val value_private_2: T
+ internal val value_private_2: T
 
  @JvmField
  @HiddenFromObjC
- val value2_private_2: GenericEquals<T>?
+ internal val value2_private_2: GenericEquals<T>?
 
  constructor(
   @ObjCName("Id") value: T

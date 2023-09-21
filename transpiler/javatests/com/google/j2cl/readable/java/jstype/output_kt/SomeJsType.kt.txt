@@ -40,7 +40,7 @@ open class SomeJsType<T> {
 
  @JvmField
  @HiddenFromObjC
- var privateField_private_2: Int = 0
+ internal var privateField_private_2: Int = 0
 
  @JvmField
  @HiddenFromObjC
@@ -54,7 +54,7 @@ open class SomeJsType<T> {
  open fun publicMethod() {}
 
  @HiddenFromObjC
- fun privateMethod_private_2() {}
+ internal fun privateMethod_private_2() {}
 
  @HiddenFromObjC
  open fun packageMethod_pp_jstype() {}
@@ -72,7 +72,7 @@ open class SomeJsType<T> {
  }
 
  @HiddenFromObjC
- fun testStarAndWildCard_private_2(s: SomeJsType.Star?, w: SomeJsType.Wildcard?): SomeJsType.Wildcard? {
+ internal fun testStarAndWildCard_private_2(s: SomeJsType.Star?, w: SomeJsType.Wildcard?): SomeJsType.Wildcard? {
   val `object`: Any? = Any()
   val star: SomeJsType.Star? = Double.valueOf(3.0) as SomeJsType.Star
   return star as SomeJsType.Wildcard?

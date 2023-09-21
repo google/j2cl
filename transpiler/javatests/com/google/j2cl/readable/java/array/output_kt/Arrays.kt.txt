@@ -158,7 +158,7 @@ open class Arrays {
  }
 
  @HiddenFromObjC
- fun testNativeArray_private_2() {
+ internal fun testNativeArray_private_2() {
   var nativeObjects: Array<Arrays.NativeType?>? = arrayOfNulls<Arrays.NativeType>(100)
   nativeObjects = arrayOfNulls<Arrays.NativeType>(0)
   nativeObjects = arrayOf<Arrays.NativeType?>(null, null)

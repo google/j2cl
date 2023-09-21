@@ -31,7 +31,7 @@ import kotlin.native.ObjCName
 open class Foo {
  @JvmField
  @HiddenFromObjC
- var nativeBar_private_2: Foo.NativeBar? = Foo.NativeBar()
+ internal var nativeBar_private_2: Foo.NativeBar? = Foo.NativeBar()
 
  @JsType(name = "Bar", namespace = "packageinfosubpackage.subpackage", isNative = true)
  open class NativeBar {

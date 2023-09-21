@@ -31,7 +31,7 @@ import kotlin.native.ObjCName
 @ObjCName("J2ktGenericnativetypeBoundedJsArray", exact = true)
 @JsType(name = "Array", namespace = JsPackage.GLOBAL, isNative = true)
 open class BoundedJsArray<V> {
- constructor(size: Int)
+ internal constructor(size: Int)
 
  @ObjCName("J2ktGenericnativetypeBoundedJsArrayCompanion", exact = true)
  companion object {

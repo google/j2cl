@@ -38,7 +38,7 @@ open class MyMessage: GeneratedMessage {
   return this.testField
  }
 
- constructor(testField: Int) {
+ internal constructor(testField: Int) {
   this.testField = testField
  }
 
@@ -81,6 +81,6 @@ open class MyMessage: GeneratedMessage {
    return MyMessage(this@Builder.testField)
   }
 
-  constructor()
+  internal constructor()
  }
 }

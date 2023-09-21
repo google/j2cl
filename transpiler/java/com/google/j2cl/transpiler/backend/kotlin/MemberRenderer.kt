@@ -24,6 +24,7 @@ import com.google.j2cl.transpiler.ast.Field
 import com.google.j2cl.transpiler.ast.FunctionExpression
 import com.google.j2cl.transpiler.ast.InitializerBlock
 import com.google.j2cl.transpiler.ast.Member as JavaMember
+import com.google.j2cl.transpiler.ast.MemberDescriptor
 import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor
@@ -55,6 +56,7 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.classLiteral
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.initializer
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionObject
 import com.google.j2cl.transpiler.backend.kotlin.ast.Member
+import com.google.j2cl.transpiler.backend.kotlin.ast.Visibility as KtVisibility
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.colonSeparated
@@ -64,7 +66,6 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParen
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.indentedIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.join
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLineSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
@@ -140,12 +141,14 @@ private fun Renderer.fieldSource(field: Field): Source {
   val isFinal = fieldDescriptor.isFinal
   val typeDescriptor = fieldDescriptor.typeDescriptor
   val isConst = field.isCompileTimeConstant && field.isStatic
-  val isJvmField = !isConst && !field.isKtLateInit
+  val isJvmField =
+    !isConst && !field.isKtLateInit && fieldDescriptor.ktVisibility != KtVisibility.PRIVATE
   return newLineSeparated(
     Source.emptyUnless(isJvmField) { jvmFieldAnnotationSource() },
     objCAnnotationSource(fieldDescriptor),
     jsInteropAnnotationsSource(fieldDescriptor),
     spaceSeparated(
+      visibilityModifierSource(field.descriptor),
       Source.emptyUnless(isConst) { CONST_KEYWORD },
       Source.emptyUnless(field.isKtLateInit) { LATEINIT_KEYWORD },
       if (isFinal) VAL_KEYWORD else VAR_KEYWORD,
@@ -251,6 +254,7 @@ private fun Renderer.methodKindAndNameSource(methodDescriptor: MethodDescriptor)
 
 private fun methodModifiersSource(methodDescriptor: MethodDescriptor): Source =
   spaceSeparated(
+    visibilityModifierSource(methodDescriptor),
     Source.emptyUnless(!methodDescriptor.enclosingTypeDescriptor.typeDeclaration.isInterface) {
       spaceSeparated(
         Source.emptyUnless(methodDescriptor.isNative) { EXTERNAL_KEYWORD },
@@ -260,7 +264,13 @@ private fun methodModifiersSource(methodDescriptor: MethodDescriptor): Source =
     Source.emptyUnless(methodDescriptor.isKtOverride) { OVERRIDE_KEYWORD }
   )
 
-private val MethodDescriptor.inheritanceModifierSource: Source
+private fun visibilityModifierSource(memberDescriptor: MemberDescriptor): Source =
+  memberDescriptor.ktVisibility
+    .takeUnless { it == memberDescriptor.inferredKtVisibility }
+    ?.source
+    .orEmpty()
+
+private val MethodDescriptor.inheritanceModifierSource
   get() =
     when {
       isAbstract -> ABSTRACT_KEYWORD

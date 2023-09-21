@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
+import com.google.j2cl.transpiler.backend.kotlin.ast.Visibility
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.COLON
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaAndNewLineSeparated
@@ -81,6 +82,7 @@ internal object KotlinSource {
   val INIT_KEYWORD = source("init")
   val INNER_KEYWORD = source("inner")
   val INTERFACE_KEYWORD = source("interface")
+  val INTERNAL_KEYWORD = source("internal")
   val IS_KEYWORD = source("is")
   val IT_KEYWORD = source("it")
   val LATEINIT_KEYWORD = source("lateinit")
@@ -91,6 +93,9 @@ internal object KotlinSource {
   val OUT_KEYWORD = source("out")
   val OVERRIDE_KEYWORD = source("override")
   val PACKAGE_KEYWORD = source("package")
+  val PRIVATE_KEYWORD = source("private")
+  val PROTECTED_KEYWORD = source("protected")
+  val PUBLIC_KEYWORD = source("public")
   val RETURN_KEYWORD = source("return")
   val SUPER_KEYWORD = source("super")
   val THIS_KEYWORD = source("this")
@@ -176,3 +181,12 @@ internal object KotlinSource {
   fun fileAnnotation(name: Source, parameters: List<Source>): Source =
     annotation(join(FILE_KEYWORD, COLON, name), parameters)
 }
+
+internal val Visibility.source: Source
+  get() =
+    when (this) {
+      Visibility.PUBLIC -> KotlinSource.PUBLIC_KEYWORD
+      Visibility.PROTECTED -> KotlinSource.PROTECTED_KEYWORD
+      Visibility.INTERNAL -> KotlinSource.INTERNAL_KEYWORD
+      Visibility.PRIVATE -> KotlinSource.PRIVATE_KEYWORD
+    }

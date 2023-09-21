@@ -42,7 +42,7 @@ open class ImplicitParenthesis {
  companion object {
   @JvmStatic
   @HiddenFromObjC
-  fun examples_private_2() {
+  internal fun examples_private_2() {
    var primitiveInt: Int = 0
    var boxedInt: Int? = null
    primitiveInt = 5
@@ -82,7 +82,7 @@ open class ImplicitParenthesis {
 
   @JvmStatic
   @HiddenFromObjC
-  fun nonExamples_private_2() {
+  internal fun nonExamples_private_2() {
    var primitiveInt: Int = 0
    var boxedInt: Int? = null
    var boxedBoolean: Boolean? = null
@@ -99,7 +99,7 @@ open class ImplicitParenthesis {
 
   @JvmStatic
   @HiddenFromObjC
-  fun parenthesisRemoval_private_2() {
+  internal fun parenthesisRemoval_private_2() {
    Int(1 + 2)
   }
  }

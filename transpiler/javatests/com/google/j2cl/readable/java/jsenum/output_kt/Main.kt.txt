@@ -103,15 +103,15 @@ open class Main {
 
   @JvmStatic
   @HiddenFromObjC
-  fun acceptsJsFunctionSupplier_private_2(supplier: Main.JsFunctionSuppiler<Main.ComparableJsEnum?>?) {}
+  internal fun acceptsJsFunctionSupplier_private_2(supplier: Main.JsFunctionSuppiler<Main.ComparableJsEnum?>?) {}
 
   @JvmStatic
   @HiddenFromObjC
-  fun acceptsSupplierOfSupplier_private_2(supplier: Main.Supplier<Main.Supplier<Main.ComparableJsEnum?>?>?) {}
+  internal fun acceptsSupplierOfSupplier_private_2(supplier: Main.Supplier<Main.Supplier<Main.ComparableJsEnum?>?>?) {}
 
   @JvmStatic
   @HiddenFromObjC
-  fun testBoxUnboxWithTypeInference_private_2() {
+  internal fun testBoxUnboxWithTypeInference_private_2() {
    val templatedField: Main.TemplatedField<Main.ComparableJsEnum?>? = Main.TemplatedField<Main.ComparableJsEnum?>(Main.ComparableJsEnum.ONE)
    var unboxed: Main.ComparableJsEnum? = templatedField!!.getValue_pp_jsenum()
    unboxed = templatedField!!.value_pp_jsenum
@@ -123,7 +123,7 @@ open class Main {
 
   @JvmStatic
   @HiddenFromObjC
-  fun <T> boxingPassthrough_private_2(t: T): T {
+  internal fun <T> boxingPassthrough_private_2(t: T): T {
    return t
   }
 
@@ -166,7 +166,7 @@ open class Main {
 
   @JvmField
   @HiddenFromObjC
-  var value_private_2: Int = 0
+  internal var value_private_2: Int = 0
 
   @ObjCName("getValue")
   fun getValue(): Int {
@@ -185,7 +185,7 @@ open class Main {
 
   @JvmField
   @HiddenFromObjC
-  var value_private_2: String? = null
+  internal var value_private_2: String? = null
 
   @ObjCName("getValue")
   fun getValue(): String? {
@@ -204,7 +204,7 @@ open class Main {
 
   @JvmField
   @HiddenFromObjC
-  var value_private_2: String
+  internal var value_private_2: String
 
   @ObjCName("getValue")
   fun getValue(): String? {

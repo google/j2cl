@@ -150,19 +150,19 @@ open class TypeWildCards {
 
   @JvmStatic
   @HiddenFromObjC
-  fun <F, V> transform_private_2(from: List<F>?, function: Function<in F, out V>?): List<V>? {
+  internal fun <F, V> transform_private_2(from: List<F>?, function: Function<in F, out V>?): List<V>? {
    return null
   }
 
   @JvmStatic
   @HiddenFromObjC
-  fun <E> concat_private_2(a: List<out E>?, b: List<out E>?): List<E>? {
+  internal fun <E> concat_private_2(a: List<out E>?, b: List<out E>?): List<E>? {
    return null
   }
 
   @JvmStatic
   @HiddenFromObjC
-  fun takesRecursiveGeneric_private_2(foo: GenericType<TypeWildCards.Foo?>?) {}
+  internal fun takesRecursiveGeneric_private_2(foo: GenericType<TypeWildCards.Foo?>?) {}
 
   @JvmStatic
   @ObjCName("testInferredIntersectionWithTypeVariable")

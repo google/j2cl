@@ -296,13 +296,13 @@ open class ArithmeticExpressions {
  @ObjCName("J2ktArithmeticexpressionsArithmeticExpressionsCompanion", exact = true)
  companion object {
   @HiddenFromObjC
-  const val FLOAT_CONSTANT_private_2: Float = 1.1f
+  internal const val FLOAT_CONSTANT_private_2: Float = 1.1f
 
   @HiddenFromObjC
-  const val DOUBLE_CONSTANT_private_2: Double = 1.100000023841858
+  internal const val DOUBLE_CONSTANT_private_2: Double = 1.100000023841858
 
   @HiddenFromObjC
-  const val DOUBLE_CONSTANT_WITH_ARITHMETIC_private_2: Double = 2.200000047683716
+  internal const val DOUBLE_CONSTANT_WITH_ARITHMETIC_private_2: Double = 2.200000047683716
 
   @JvmField
   @ObjCName("one_")
@@ -318,19 +318,19 @@ open class ArithmeticExpressions {
 
   @JvmStatic
   @HiddenFromObjC
-  fun getLongArray_private_2(): LongArray? {
+  internal fun getLongArray_private_2(): LongArray? {
    return null
   }
 
   @JvmStatic
   @HiddenFromObjC
-  fun getInteger_private_2(): Int? {
+  internal fun getInteger_private_2(): Int? {
    return null
   }
 
   @JvmStatic
   @HiddenFromObjC
-  fun testSideEffect_private_2() {
+  internal fun testSideEffect_private_2() {
    val ___qualifier: ArithmeticExpressions? = ArithmeticExpressions.getWithSideEffect_private_2()
    val ___qualifier_1: ArithmeticExpressions? = ___qualifier
    val ___value: Long = ___qualifier!!.intField_pp_arithmeticexpressions + 5.toLong()
@@ -339,17 +339,17 @@ open class ArithmeticExpressions {
 
   @JvmStatic
   @HiddenFromObjC
-  fun getWithSideEffect_private_2(): ArithmeticExpressions? {
+  internal fun getWithSideEffect_private_2(): ArithmeticExpressions? {
    return null
   }
 
   @JvmField
   @HiddenFromObjC
-  var counter_private_2: Long = 0L
+  internal var counter_private_2: Long = 0L
 
   @JvmStatic
   @HiddenFromObjC
-  fun incrementCounter_private_2(): Long {
+  internal fun incrementCounter_private_2(): Long {
    return run {
     val ___value: Long = ArithmeticExpressions.counter_private_2 + 1L
     ArithmeticExpressions.counter_private_2 = ___value

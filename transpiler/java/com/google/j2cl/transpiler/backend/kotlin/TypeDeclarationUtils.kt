@@ -15,9 +15,14 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
+import com.google.j2cl.transpiler.ast.FieldDescriptor
+import com.google.j2cl.transpiler.ast.MemberDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeVariable
+import com.google.j2cl.transpiler.ast.Visibility
+import com.google.j2cl.transpiler.backend.kotlin.ast.Visibility as KtVisibility
+import com.google.j2cl.transpiler.backend.kotlin.ast.withWidestScopeOrNull
 
 // TODO(b/216796920): Remove when the bug is fixed.
 internal val TypeDeclaration.directlyDeclaredTypeParameterDescriptors: List<TypeVariable>
@@ -30,8 +35,7 @@ internal val TypeDeclaration.directlyDeclaredTypeParameterCount: Int
       enclosingTypeDeclaration
         ?.takeIf { isCapturingEnclosingInstance }
         ?.typeParameterDescriptors
-        ?.size
-        ?: 0
+        ?.size ?: 0
 
     val enclosingMethodTypeParameterCount =
       enclosingMethodDescriptor?.typeParameterTypeDescriptors?.size ?: 0
@@ -70,3 +74,51 @@ internal val MethodDescriptor.isOpen: Boolean
       !isConstructor &&
       !isStatic &&
       !visibility.isPrivate
+
+internal val MemberDescriptor.ktVisibility: KtVisibility
+  get() =
+    when {
+      // Enum constructors are implicitly private in Kotlin
+      isEnumConstructor -> KtVisibility.PRIVATE
+      // All interface methods are public in Kotlin, and Java allows non-public static members, so
+      // we map them to public.
+      isInterfaceMethod -> KtVisibility.PUBLIC
+      else ->
+        when (visibility!!) {
+          Visibility.PUBLIC -> KtVisibility.PUBLIC
+          // Map protected to public, to allow access within the same package across different
+          // types.
+          Visibility.PROTECTED -> KtVisibility.PUBLIC
+          // Map package-private to public, to allow access within the same package across
+          // different modules.
+          Visibility.PACKAGE_PRIVATE -> KtVisibility.PUBLIC
+          // Map private to internal, to allow access to members in the same file across different
+          // types.
+          Visibility.PRIVATE -> KtVisibility.INTERNAL
+        }
+    }
+
+/** Inferred visibility, which does not require explicit visibility modifier in the source code. */
+internal val MemberDescriptor.inferredKtVisibility: KtVisibility
+  get() =
+    when (this) {
+      is MethodDescriptor -> inferredKtVisibility
+      is FieldDescriptor -> KtVisibility.PUBLIC
+      else -> error("$this.inferredKtVisibility")
+    }
+
+/** Inferred visibility, which does not require explicit visibility modifier in the source code. */
+private val MethodDescriptor.inferredKtVisibility: KtVisibility
+  get() =
+    when {
+      isEnumConstructor -> KtVisibility.PRIVATE
+      else ->
+        javaOverriddenMethodDescriptors.map { it.ktVisibility }.let { it.withWidestScopeOrNull() }
+          ?: KtVisibility.PUBLIC
+    }
+
+private val MemberDescriptor.isEnumConstructor: Boolean
+  get() = enclosingTypeDescriptor.isEnum && isConstructor
+
+private val MemberDescriptor.isInterfaceMethod: Boolean
+  get() = enclosingTypeDescriptor.isInterface

@@ -140,29 +140,29 @@ open class IntersectionTypeTest<U> {
 
   @JvmStatic
   @HiddenFromObjC
-  fun <T> get_private_2(t: T): T {
+  internal fun <T> get_private_2(t: T): T {
    return t
   }
 
   @JvmStatic
   @HiddenFromObjC
-  fun <T> m_private_2(): T where T: IntersectionTypeTest.A?, T: IntersectionTypeTest.EmptyA? {
+  internal fun <T> m_private_2(): T where T: IntersectionTypeTest.A?, T: IntersectionTypeTest.EmptyA? {
    return (IntersectionTypeTest.get_private_2<Any?>(Any()) as T?) as T
   }
 
   @JvmStatic
   @HiddenFromObjC
-  fun <T> n_private_2(): Getable<T>? where T: IntersectionTypeTest.A?, T: IntersectionTypeTest.EmptyA? {
+  internal fun <T> n_private_2(): Getable<T>? where T: IntersectionTypeTest.A?, T: IntersectionTypeTest.EmptyA? {
    return null
   }
 
   @JvmStatic
   @HiddenFromObjC
-  fun <T> set_private_2(t: T) where T: IntersectionTypeTest.A?, T: IntersectionTypeTest.EmptyA? {}
+  internal fun <T> set_private_2(t: T) where T: IntersectionTypeTest.A?, T: IntersectionTypeTest.EmptyA? {}
 
   @JvmStatic
   @HiddenFromObjC
-  fun <T> callOnIntersetionTypes_private_2(t: T) where T: IntersectionTypeTest.SomeConcreteType?, T: Cmp? {
+  internal fun <T> callOnIntersetionTypes_private_2(t: T) where T: IntersectionTypeTest.SomeConcreteType?, T: Cmp? {
    t!!.cmp()
    ((null).let { it as IntersectionTypeTest.SomeConcreteType?; it as Cmp?; it })!!.cmp()
   }

@@ -35,26 +35,26 @@ open class LateInit<T: Any> {
  lateinit var publicField: String
 
  @HiddenFromObjC
- lateinit var privateField_private_2: String
+ internal lateinit var privateField_private_2: String
 
  @JvmField
  @HiddenFromObjC
- var initializedField_private_2: String = "initialized"
+ internal var initializedField_private_2: String = "initialized"
 
  @JvmField
  @HiddenFromObjC
- var nullableField_private_2: String? = null
+ internal var nullableField_private_2: String? = null
 
  @JvmField
  @HiddenFromObjC
- val finalField_private_2: String = "final"
+ internal val finalField_private_2: String = "final"
 
  @JvmField
  @HiddenFromObjC
- var primitiveField_private_2: Int = 0
+ internal var primitiveField_private_2: Int = 0
 
  @HiddenFromObjC
- lateinit var genericField_private_2: T
+ internal lateinit var genericField_private_2: T
 
  constructor(
   @ObjCName("Id") genericValue: T
@@ -63,7 +63,7 @@ open class LateInit<T: Any> {
  }
 
  @HiddenFromObjC
- fun init_private_2(genericValue: T) {
+ internal fun init_private_2(genericValue: T) {
   this.publicField = "public"
   this.privateField_private_2 = "private"
   this.genericField_private_2 = genericValue

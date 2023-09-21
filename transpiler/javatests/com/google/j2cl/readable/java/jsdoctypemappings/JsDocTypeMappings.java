@@ -23,12 +23,12 @@ import jsinterop.annotations.JsType;
 public class JsDocTypeMappings {
 
   @JsFunction
-  private static interface NativeFunction {
+  static interface NativeFunction {
     void f();
   }
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Array")
-  private static class NativeType {}
+  static class NativeType {}
 
   @JsType(name = "ExportedTypeNewName")
   class ExportedType {}
