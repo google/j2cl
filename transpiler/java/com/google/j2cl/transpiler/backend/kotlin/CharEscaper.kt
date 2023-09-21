@@ -49,17 +49,17 @@ private val Char.unicodeEscapedStringOrNull: String?
   get() = takeIf { it.needsUnicodeEscaping }?.let { String.format("\\u%04X", it.toInt()) }
 
 /** Returns escaped string. */
-val Char.escapedString: String
+private val Char.escapedString: String
   get() = identifierEscapedStringOrNull ?: unicodeEscapedStringOrNull ?: toString()
 
 /** Returns escaped string. */
-val String.escapedString: String
+private val String.escapedString: String
   get() =
     // Surrogate pairs must be escaped separately in Kotlin, so escaping each Char separately is OK.
     StringBuilder().also { builder -> forEach { builder.append(it.escapedString) } }.toString()
 
-val Char.literalString: String
+internal val Char.literalString: String
   get() = "'$escapedString'"
 
-val String.literalString: String
+internal val String.literalString: String
   get() = "\"$escapedString\""

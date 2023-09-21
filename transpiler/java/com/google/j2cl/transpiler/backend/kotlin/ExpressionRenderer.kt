@@ -119,7 +119,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
-fun Renderer.expressionSource(expression: Expression): Source =
+internal fun Renderer.expressionSource(expression: Expression): Source =
   when (expression) {
     is ArrayAccess -> arrayAccessSource(expression)
     is ArrayLength -> arrayLengthSource(expression)
@@ -695,7 +695,7 @@ private fun Renderer.variableDeclarationFragmentSource(
     initializer(fragment.initializer?.let(::expressionSource).orEmpty())
   )
 
-fun Renderer.variableSource(variable: Variable): Source =
+private fun Renderer.variableSource(variable: Variable): Source =
   colonSeparated(
     nameSource(variable),
     variable.typeDescriptor

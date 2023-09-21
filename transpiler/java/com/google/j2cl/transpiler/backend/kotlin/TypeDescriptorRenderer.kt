@@ -179,9 +179,9 @@ private data class TypeDescriptorRenderer(
   fun nullableSuffixSource(typeDescriptor: TypeDescriptor): Source =
     Source.emptyUnless(typeDescriptor.isNullable) { NULLABLE_OPERATOR }
 
-  private fun withSeen(typeVariable: TypeVariable): TypeDescriptorRenderer =
+  fun withSeen(typeVariable: TypeVariable): TypeDescriptorRenderer =
     copy(seenTypeVariables = seenTypeVariables + typeVariable.toNonNullable())
 
-  private fun didSee(typeVariable: TypeVariable): Boolean =
+  fun didSee(typeVariable: TypeVariable): Boolean =
     seenTypeVariables.contains(typeVariable.toNonNullable())
 }

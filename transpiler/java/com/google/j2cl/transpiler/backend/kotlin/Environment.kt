@@ -18,7 +18,7 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.transpiler.ast.HasName
 
 /** Code generation environment. */
-data class Environment(
+internal data class Environment(
   /** Name to identifier mapping. */
   private val nameToIdentifierMap: Map<HasName, String> = emptyMap(),
 

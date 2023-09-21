@@ -19,7 +19,7 @@ import com.google.j2cl.common.Problems
 import com.google.j2cl.transpiler.ast.Type
 
 /** Renderer of the Kotlin source code. */
-data class Renderer(
+internal data class Renderer(
   /** Rendering environment. */
   val environment: Environment,
 

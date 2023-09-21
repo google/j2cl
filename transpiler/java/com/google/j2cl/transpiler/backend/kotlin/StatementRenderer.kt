@@ -75,7 +75,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 internal fun Renderer.statementsSource(statements: List<Statement>): Source =
   newLineSeparated(statements.map(::statementSource))
 
-fun Renderer.statementSource(statement: Statement): Source =
+internal fun Renderer.statementSource(statement: Statement): Source =
   when (statement) {
     is AssertStatement -> assertStatementSource(statement)
     is Block -> blockSource(statement)

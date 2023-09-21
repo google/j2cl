@@ -50,7 +50,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
-fun Renderer.typeSource(type: Type): Source =
+internal fun Renderer.typeSource(type: Type): Source =
   type.declaration.let { typeDeclaration ->
     if (typeDeclaration.isKtNative) {
       nativeTypeSource(typeDeclaration)
@@ -76,18 +76,18 @@ fun Renderer.typeSource(type: Type): Source =
     }
   }
 
-fun Renderer.ktPrimaryConstructorParametersSource(type: Type): Source =
+internal fun Renderer.ktPrimaryConstructorParametersSource(type: Type): Source =
   type.ktPrimaryConstructor
     ?.let { method -> methodParametersSource(method, method.toObjCNames()?.parameterNames) }
     .orEmpty()
 
-fun nativeTypeSource(type: TypeDeclaration): Source =
+private fun nativeTypeSource(type: TypeDeclaration): Source =
   comment(spaceSeparated(NATIVE_KEYWORD, CLASS_KEYWORD, identifierSource(type.ktSimpleName)))
 
-fun classModifiersSource(type: Type): Source =
+private fun classModifiersSource(type: Type): Source =
   Source.emptyUnless(type.declaration.isKtInner) { INNER_KEYWORD }
 
-fun inheritanceModifierSource(typeDeclaration: TypeDeclaration): Source =
+private fun inheritanceModifierSource(typeDeclaration: TypeDeclaration): Source =
   Source.emptyUnless(typeDeclaration.isClass && !typeDeclaration.isFinal) {
     when {
       typeDeclaration.isAbstract -> ABSTRACT_KEYWORD
@@ -96,17 +96,17 @@ fun inheritanceModifierSource(typeDeclaration: TypeDeclaration): Source =
     }
   }
 
-fun kindModifiersSource(typeDeclaration: TypeDeclaration): Source =
+private fun kindModifiersSource(typeDeclaration: TypeDeclaration): Source =
   when (typeDeclaration.kind!!) {
     Kind.CLASS -> CLASS_KEYWORD
     Kind.INTERFACE -> spaceSeparated(funModifierSource(typeDeclaration), INTERFACE_KEYWORD)
     Kind.ENUM -> spaceSeparated(ENUM_KEYWORD, CLASS_KEYWORD)
   }
 
-fun funModifierSource(typeDeclaration: TypeDeclaration): Source =
+private fun funModifierSource(typeDeclaration: TypeDeclaration): Source =
   Source.emptyUnless(typeDeclaration.isKtFunctionalInterface) { FUN_KEYWORD }
 
-fun Renderer.typeDeclarationSource(declaration: TypeDeclaration): Source =
+private fun Renderer.typeDeclarationSource(declaration: TypeDeclaration): Source =
   join(
     identifierSource(declaration.ktSimpleName),
     typeParametersSource(declaration.directlyDeclaredTypeParameterDescriptors)
