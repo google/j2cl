@@ -34,6 +34,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid
 import com.google.j2cl.transpiler.ast.Variable
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.assignment
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.ast.companionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.ast.companionObjectOrNull
@@ -166,11 +167,20 @@ private val Type.nsEnumTypedefRenderer: Renderer<Source>
 private val FieldDescriptor.propertyQualifierRenderer: Renderer<Source>
   get() =
     enclosingTypeDescriptor.typeDeclaration.run {
-      if (isStatic && !isEnumConstant) companionDeclaration.sharedRenderer else objCNameRenderer
+      if (isStatic && !isEnumConstant) {
+        companionDeclaration.sharedRenderer
+      } else {
+        objCNameRenderer
+      }
     }
 
 private val FieldDescriptor.getPropertyObjCName: String
-  get() = if (isEnumConstant) objCName.escapeObjCEnumProperty else objCName.escapeObjCProperty
+  get() =
+    if (isEnumConstant) {
+      objCName.escapeObjCEnumProperty
+    } else {
+      objCName.escapeObjCProperty
+    }
 
 private val Field.fieldGetFunctionRenderer: Renderer<Source>
   get() = descriptor.takeIf { it.shouldRender }?.getFunctionRenderer ?: emptyRenderer
@@ -308,9 +318,12 @@ private fun MethodDescriptor.functionName(objCNames: MethodObjCNames): String =
     }
 
 private fun Method.statementRenderers(objCNames: MethodObjCNames): List<Renderer<Source>> =
-  if (isPrimitiveVoid(descriptor.returnTypeDescriptor))
+  if (isPrimitiveVoid(descriptor.returnTypeDescriptor)) {
+
     listOf(expressionStatement(methodCallRenderer(objCNames)))
-  else listOf(returnStatement(methodCallRenderer(objCNames)))
+  } else {
+    listOf(returnStatement(methodCallRenderer(objCNames)))
+  }
 
 private fun Method.methodCallRenderer(objCNames: MethodObjCNames): Renderer<Source> =
   methodCall(
@@ -321,8 +334,11 @@ private fun Method.methodCallRenderer(objCNames: MethodObjCNames): Renderer<Sour
 
 private val Method.methodCallTargetRenderer: Renderer<Source>
   get() =
-    if (isConstructor) descriptor.enclosingTypeDescriptor.typeDeclaration.allocRenderer
-    else descriptor.enclosingTypeDescriptor.typeDeclaration.companionDeclaration.sharedRenderer
+    if (isConstructor) {
+      descriptor.enclosingTypeDescriptor.typeDeclaration.allocRenderer
+    } else {
+      descriptor.enclosingTypeDescriptor.typeDeclaration.companionDeclaration.sharedRenderer
+    }
 
 private val MethodObjCNames.objCSelector: String
   get() =
@@ -483,13 +499,16 @@ private fun literalRenderer(boolean: Boolean): Renderer<Source> =
 
 private fun literalRenderer(char: Char): Renderer<Source> =
   char.code.let { code ->
-    if (code in 0x20..0x7E)
+    if (code in 0x20..0x7E) {
+
       when (char) {
         '\'' -> rendererOf(source("'\\''"))
         '\\' -> rendererOf(source("'\\\\'"))
         else -> rendererOf(source("'$char'"))
       }
-    else rendererOf(source(String.format("0x%04x", code)))
+    } else {
+      rendererOf(source(String.format("0x%04x", code)))
+    }
   }
 
 private fun literalRenderer(byte: Byte): Renderer<Source> = rendererOf(source("$byte"))

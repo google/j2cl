@@ -15,6 +15,9 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.AS_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.IMPORT_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.STAR_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.ast.Import
 import com.google.j2cl.transpiler.backend.kotlin.ast.defaultImports
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
@@ -32,8 +35,11 @@ private val Renderer.imports: List<Import>
           ->
           Import(
             qualifiedName.qualifiedNameComponents(),
-            if (qualifiedName.qualifiedNameToSimpleName() == simpleName) null
-            else Import.Suffix.Alias(simpleName)
+            if (qualifiedName.qualifiedNameToSimpleName() == simpleName) {
+              null
+            } else {
+              Import.Suffix.Alias(simpleName)
+            }
           )
         }
       )
@@ -43,13 +49,13 @@ internal fun Renderer.importsSource(): Source = newLineSeparated(imports.map { s
 
 private fun source(import: Import): Source =
   spaceSeparated(
-    source("import"),
+    IMPORT_KEYWORD,
     dotSeparated(import.components.map(::identifierSource)).plus(import.suffixOrNull)
   )
 
 private fun Source.plus(suffix: Import.Suffix?): Source =
   when (suffix) {
-    is Import.Suffix.Alias -> infix(this, "as", identifierSource(suffix.alias))
-    is Import.Suffix.Star -> dotSeparated(this, source("*"))
+    is Import.Suffix.Alias -> infix(this, AS_KEYWORD, identifierSource(suffix.alias))
+    is Import.Suffix.Star -> dotSeparated(this, STAR_OPERATOR)
     null -> this
   }

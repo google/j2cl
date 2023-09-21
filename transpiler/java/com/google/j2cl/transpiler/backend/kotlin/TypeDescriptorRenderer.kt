@@ -22,6 +22,11 @@ import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeVariable
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.INTERSECTION_OPERATOR
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.IN_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.NULLABLE_OPERATOR
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.OUT_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.STAR_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.ampersandSeparated
@@ -53,20 +58,24 @@ internal fun Renderer.qualifiedNameSource(
   typeDescriptor: TypeDescriptor,
   asSuperType: Boolean = false
 ): Source =
-  if (typeDescriptor is DeclaredTypeDescriptor)
-    if (typeDescriptor.typeDeclaration.isLocal)
+  if (typeDescriptor is DeclaredTypeDescriptor) {
+    if (typeDescriptor.typeDeclaration.isLocal) {
       identifierSource(typeDescriptor.typeDeclaration.ktSimpleName(asSuperType))
-    else
+    } else {
       typeDescriptor.enclosingTypeDescriptor.let { enclosingTypeDescriptor ->
-        if (enclosingTypeDescriptor == null)
+        if (enclosingTypeDescriptor == null) {
           topLevelQualifiedNameSource(typeDescriptor.ktQualifiedName(asSuperType))
-        else
+        } else {
           dotSeparated(
             qualifiedNameSource(enclosingTypeDescriptor),
             identifierSource(typeDescriptor.typeDeclaration.ktSimpleName(asSuperType))
           )
+        }
       }
-  else topLevelQualifiedNameSource(typeDescriptor.ktQualifiedName(asSuperType))
+    }
+  } else {
+    topLevelQualifiedNameSource(typeDescriptor.ktQualifiedName(asSuperType))
+  }
 
 /** Type descriptor renderer. */
 private data class TypeDescriptorRenderer(
@@ -111,13 +120,14 @@ private data class TypeDescriptorRenderer(
     val enclosingTypeDescriptor = declaredTypeDescriptor.enclosingTypeDescriptor
     val isStatic = !typeDeclaration.isCapturingEnclosingInstance
     return join(
-      if (typeDeclaration.isLocal || enclosingTypeDescriptor == null || isStatic)
+      if (typeDeclaration.isLocal || enclosingTypeDescriptor == null || isStatic) {
         renderer.qualifiedNameSource(declaredTypeDescriptor, asSuperType)
-      else
+      } else {
         dotSeparated(
           child.declaredSource(enclosingTypeDescriptor.toNonNullable()),
           identifierSource(typeDeclaration.ktSimpleName(asSuperType))
-        ),
+        )
+      },
       argumentsSource(declaredTypeDescriptor),
       nullableSuffixSource(declaredTypeDescriptor)
     )
@@ -136,28 +146,38 @@ private data class TypeDescriptorRenderer(
   fun source(typeArgument: TypeArgument): Source = child.source(typeArgument.typeDescriptor)
 
   fun variableSource(typeVariable: TypeVariable): Source =
-    if (didSee(typeVariable)) source("*")
-    else
+    if (didSee(typeVariable)) {
+      STAR_OPERATOR
+    } else {
       withSeen(typeVariable).run {
-        if (typeVariable.isWildcardOrCapture)
+        if (typeVariable.isWildcardOrCapture) {
           typeVariable.lowerBoundTypeDescriptor.let { lowerBound ->
-            if (lowerBound != null) spaceSeparated(source("in"), child.source(lowerBound))
-            else
+            if (lowerBound != null) {
+              spaceSeparated(IN_KEYWORD, child.source(lowerBound))
+            } else {
               typeVariable.upperBoundTypeDescriptor.let { upperBound ->
-                if (upperBound.isImplicitUpperBound) source("*")
-                else spaceSeparated(source("out"), child.source(upperBound))
+                if (upperBound.isImplicitUpperBound) {
+                  source("*")
+                } else {
+                  spaceSeparated(OUT_KEYWORD, child.source(upperBound))
+                }
               }
+            }
           }
-        else
+        } else {
           join(renderer.nameSource(typeVariable.toNullable()), nullableSuffixSource(typeVariable))
-            .letIf(typeVariable.hasAmpersandAny) { infix(it, "&", source("Any")) }
+            .letIf(typeVariable.hasAmpersandAny) {
+              infix(it, INTERSECTION_OPERATOR, renderer.topLevelQualifiedNameSource("kotlin.Any"))
+            }
+        }
       }
+    }
 
   fun intersectionSource(typeDescriptor: IntersectionTypeDescriptor): Source =
     ampersandSeparated(typeDescriptor.intersectionTypeDescriptors.map { source(it) })
 
   fun nullableSuffixSource(typeDescriptor: TypeDescriptor): Source =
-    Source.emptyUnless(typeDescriptor.isNullable) { source("?") }
+    Source.emptyUnless(typeDescriptor.isNullable) { NULLABLE_OPERATOR }
 
   private fun withSeen(typeVariable: TypeVariable): TypeDescriptorRenderer =
     copy(seenTypeVariables = seenTypeVariables + typeVariable.toNonNullable())

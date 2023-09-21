@@ -40,6 +40,25 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
 import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.ast.WhileStatement
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.ARROW_OPERATOR
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.AT_OPERATOR
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.BREAK_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.CATCH_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.CONTINUE_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.DO_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.ELSE_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.FINALLY_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.FOR_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.IF_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.IN_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.RETURN_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.THROW_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.TRY_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.WHEN_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.WHILE_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.assignment
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.at
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.labelReference
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
@@ -90,19 +109,19 @@ private fun Renderer.assertStatementSource(assertStatement: AssertStatement): So
 private fun Renderer.blockSource(block: Block): Source = block(statementsSource(block.statements))
 
 private fun Renderer.breakStatementSource(breakStatement: BreakStatement): Source =
-  join(source("break"), breakStatement.labelReference?.let(::labelReferenceSource).orEmpty())
+  join(BREAK_KEYWORD, breakStatement.labelReference?.let(::labelReferenceSource).orEmpty())
 
 private fun Renderer.continueStatementSource(continueStatement: ContinueStatement): Source =
-  join(source("continue"), continueStatement.labelReference?.let(::labelReferenceSource).orEmpty())
+  join(CONTINUE_KEYWORD, continueStatement.labelReference?.let(::labelReferenceSource).orEmpty())
 
 private fun Renderer.labelReferenceSource(labelReference: LabelReference): Source =
   at(nameSource(labelReference.target))
 
 private fun Renderer.doWhileStatementSource(doWhileStatement: DoWhileStatement): Source =
   spaceSeparated(
-    source("do"),
+    DO_KEYWORD,
     statementSource(doWhileStatement.body),
-    source("while"),
+    WHILE_KEYWORD,
     inParentheses(expressionSource(doWhileStatement.conditionExpression))
   )
 
@@ -111,11 +130,11 @@ private fun Renderer.expressionStatementSource(expressionStatement: ExpressionSt
 
 private fun Renderer.forEachStatementSource(forEachStatement: ForEachStatement): Source =
   spaceSeparated(
-    source("for"),
+    FOR_KEYWORD,
     inParentheses(
       infix(
         nameSource(forEachStatement.loopVariable),
-        "in",
+        IN_KEYWORD,
         expressionSource(forEachStatement.iterableExpression)
       )
     ),
@@ -124,10 +143,10 @@ private fun Renderer.forEachStatementSource(forEachStatement: ForEachStatement):
 
 private fun Renderer.ifStatementSource(ifStatement: IfStatement): Source =
   spaceSeparated(
-    source("if"),
+    IF_KEYWORD,
     inParentheses(expressionSource(ifStatement.conditionExpression)),
     statementSource(ifStatement.thenStatement),
-    ifStatement.elseStatement?.let { spaceSeparated(source("else"), statementSource(it)) }.orEmpty()
+    ifStatement.elseStatement?.let { spaceSeparated(ELSE_KEYWORD, statementSource(it)) }.orEmpty()
   )
 
 private fun Renderer.fieldDeclarationStatementSource(
@@ -148,7 +167,7 @@ private fun Renderer.fieldDeclarationStatementSource(
 
 private fun Renderer.labeledStatementSource(labelStatement: LabeledStatement): Source =
   spaceSeparated(
-    join(nameSource(labelStatement.label), source("@")),
+    join(nameSource(labelStatement.label), AT_OPERATOR),
     labelStatement.statement.let { statementSource(it).letIf(it is LabeledStatement) { block(it) } }
   )
 
@@ -158,13 +177,13 @@ private fun Renderer.localClassDeclarationStatementSource(
 
 private fun Renderer.returnStatementSource(returnStatement: ReturnStatement): Source =
   spaceSeparated(
-    join(source("return"), currentReturnLabelIdentifier?.let(::labelReference).orEmpty()),
+    join(RETURN_KEYWORD, currentReturnLabelIdentifier?.let { labelReference(it) }.orEmpty()),
     returnStatement.expression?.let(::expressionSource).orEmpty()
   )
 
 private fun Renderer.switchStatementSource(switchStatement: SwitchStatement): Source =
   spaceSeparated(
-    source("when"),
+    WHEN_KEYWORD,
     inParentheses(expressionSource(switchStatement.switchExpression)),
     block(
       newLineSeparated(
@@ -179,14 +198,14 @@ private fun Renderer.switchStatementSource(switchStatement: SwitchStatement): So
               // since
               // these are case clauses from Java, their evaluation does never have side effects.
               caseExpressions.clear()
-              infix(source("else"), "->", block(statementsSource(case.statements)))
+              infix(ELSE_KEYWORD, ARROW_OPERATOR, block(statementsSource(case.statements)))
             } else {
               caseExpressions.add(caseExpression)
               val caseStatements = case.statements
               if (caseStatements.isNotEmpty()) {
                 infix(
                     commaSeparated(caseExpressions.map(::expressionSource)),
-                    "->",
+                    ARROW_OPERATOR,
                     block(statementsSource(caseStatements))
                   )
                   .also { caseExpressions.clear() }
@@ -213,26 +232,31 @@ private fun Renderer.synchronizedStatementSource(
 
 private fun Renderer.whileStatementSource(whileStatement: WhileStatement): Source =
   spaceSeparated(
-    source("while"),
+    WHILE_KEYWORD,
     inParentheses(expressionSource(whileStatement.conditionExpression)),
     statementSource(whileStatement.body)
   )
 
 private fun Renderer.throwStatementSource(throwStatement: ThrowStatement): Source =
-  spaceSeparated(source("throw"), expressionSource(throwStatement.expression))
+  spaceSeparated(THROW_KEYWORD, expressionSource(throwStatement.expression))
 
 private fun Renderer.tryStatementSource(tryStatement: TryStatement): Source =
   spaceSeparated(
-    source("try"),
+    TRY_KEYWORD,
     statementSource(tryStatement.body),
     spaceSeparated(tryStatement.catchClauses.map(::catchClauseSource)),
     tryStatement.finallyBlock
-      ?.let { spaceSeparated(source("finally"), statementSource(it)) }
+      ?.let { spaceSeparated(FINALLY_KEYWORD, statementSource(it)) }
       .orEmpty()
   )
 
 private val TypeDescriptor.catchTypeDescriptors
-  get() = if (this is UnionTypeDescriptor) unionTypeDescriptors else listOf(this)
+  get() =
+    if (this is UnionTypeDescriptor) {
+      unionTypeDescriptors
+    } else {
+      listOf(this)
+    }
 
 private fun Renderer.catchClauseSource(catchClause: CatchClause): Source =
   spaceSeparated(
@@ -248,7 +272,7 @@ private fun Renderer.catchClauseSource(
   body: Block
 ): Source =
   spaceSeparated(
-    source("catch"),
+    CATCH_KEYWORD,
     inParentheses(colonSeparated(nameSource(variable), typeDescriptorSource(type.toNonNullable()))),
     blockSource(body)
   )

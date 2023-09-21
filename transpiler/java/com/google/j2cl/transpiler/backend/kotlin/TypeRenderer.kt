@@ -25,6 +25,14 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangEnum
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.ABSTRACT_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.CLASS_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.ENUM_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.FUN_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.INNER_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.INTERFACE_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.NATIVE_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.OPEN_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.ast.isForbiddenInEnumValueDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.ast.kotlinMembers
 import com.google.j2cl.transpiler.backend.kotlin.objc.comment
@@ -43,8 +51,9 @@ import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
 fun Renderer.typeSource(type: Type): Source =
   type.declaration.let { typeDeclaration ->
-    if (typeDeclaration.isKtNative) nativeTypeSource(typeDeclaration)
-    else
+    if (typeDeclaration.isKtNative) {
+      nativeTypeSource(typeDeclaration)
+    } else {
       newLineSeparated(
         objCAnnotationSource(typeDeclaration),
         jsInteropAnnotationsSource(typeDeclaration),
@@ -63,6 +72,7 @@ fun Renderer.typeSource(type: Type): Source =
           typeBodySource(type)
         )
       )
+    }
   }
 
 fun Renderer.ktPrimaryConstructorParametersSource(type: Type): Source =
@@ -71,29 +81,29 @@ fun Renderer.ktPrimaryConstructorParametersSource(type: Type): Source =
     .orEmpty()
 
 fun nativeTypeSource(type: TypeDeclaration): Source =
-  comment(spaceSeparated(source("native"), source("class"), identifierSource(type.ktSimpleName)))
+  comment(spaceSeparated(NATIVE_KEYWORD, CLASS_KEYWORD, identifierSource(type.ktSimpleName)))
 
 fun classModifiersSource(type: Type): Source =
-  Source.emptyUnless(type.declaration.isKtInner) { source("inner") }
+  Source.emptyUnless(type.declaration.isKtInner) { INNER_KEYWORD }
 
 fun inheritanceModifierSource(typeDeclaration: TypeDeclaration): Source =
   Source.emptyUnless(typeDeclaration.isClass && !typeDeclaration.isFinal) {
     when {
-      typeDeclaration.isAbstract -> source("abstract")
-      typeDeclaration.isOpen -> source("open")
+      typeDeclaration.isAbstract -> ABSTRACT_KEYWORD
+      typeDeclaration.isOpen -> OPEN_KEYWORD
       else -> Source.EMPTY
     }
   }
 
 fun kindModifiersSource(typeDeclaration: TypeDeclaration): Source =
   when (typeDeclaration.kind!!) {
-    Kind.CLASS -> source("class")
-    Kind.INTERFACE -> spaceSeparated(funModifierSource(typeDeclaration), source("interface"))
-    Kind.ENUM -> spaceSeparated(source("enum"), source("class"))
+    Kind.CLASS -> CLASS_KEYWORD
+    Kind.INTERFACE -> spaceSeparated(funModifierSource(typeDeclaration), INTERFACE_KEYWORD)
+    Kind.ENUM -> spaceSeparated(ENUM_KEYWORD, CLASS_KEYWORD)
   }
 
 fun funModifierSource(typeDeclaration: TypeDeclaration): Source =
-  Source.emptyUnless(typeDeclaration.isKtFunctionalInterface) { source("fun") }
+  Source.emptyUnless(typeDeclaration.isKtFunctionalInterface) { FUN_KEYWORD }
 
 fun Renderer.typeDeclarationSource(declaration: TypeDeclaration): Source =
   join(
@@ -119,8 +129,9 @@ private fun Renderer.superTypeInvocationSource(
   superTypeDescriptor: TypeDescriptor
 ): Source =
   Source.emptyUnless(superTypeDescriptor.isClass) {
-    if (!type.hasConstructors) inParentheses(Source.EMPTY)
-    else
+    if (!type.hasConstructors) {
+      inParentheses(Source.EMPTY)
+    } else {
       type.ktPrimaryConstructor.let { ktPrimaryConstructor ->
         Source.emptyUnless(ktPrimaryConstructor != null) {
           getConstructorInvocation(ktPrimaryConstructor).let {
@@ -128,6 +139,7 @@ private fun Renderer.superTypeInvocationSource(
           }
         }
       }
+    }
   }
 
 internal fun Renderer.typeBodySource(type: Type): Source =
@@ -173,5 +185,9 @@ private fun Renderer.enumValueSource(field: Field): Source =
 private val FieldDescriptor.enumValueDeclarationNameSource: Source
   get() =
     name!!.let {
-      if (isForbiddenInEnumValueDeclaration(it)) source(it.inBackTicks) else identifierSource(it)
+      if (isForbiddenInEnumValueDeclaration(it)) {
+        source(it.inBackTicks)
+      } else {
+        identifierSource(it)
+      }
     }

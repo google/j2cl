@@ -16,6 +16,9 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.CompilationUnit
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.PACKAGE_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.fileAnnotation
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.literal
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.emptyLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLineSeparated
@@ -51,7 +54,7 @@ private val Renderer.suppressFileAnnotationsSource: Source
           "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
           "VARIABLE_WITH_REDUNDANT_INITIALIZER"
         )
-        .map(::literalSource)
+        .map { literal(it) }
     )
 
 internal fun Renderer.packageAndImportsSource(compilationUnit: CompilationUnit): Source =
@@ -60,7 +63,7 @@ internal fun Renderer.packageAndImportsSource(compilationUnit: CompilationUnit):
 private fun packageSource(compilationUnit: CompilationUnit): Source =
   compilationUnit.packageName
     .takeIf { it.isNotEmpty() }
-    ?.let { spaceSeparated(source("package"), qualifiedIdentifierSource(it)) }
+    ?.let { spaceSeparated(PACKAGE_KEYWORD, qualifiedIdentifierSource(it)) }
     .orEmpty()
 
 internal fun Renderer.typesSource(compilationUnit: CompilationUnit): Source =

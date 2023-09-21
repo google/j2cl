@@ -21,6 +21,9 @@ import com.google.j2cl.transpiler.ast.JsUtils
 import com.google.j2cl.transpiler.ast.MemberDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.TypeDeclaration
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotation
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.assignment
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.literal
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.dotSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
@@ -145,7 +148,7 @@ private fun nameParameterSource(typeDeclaration: TypeDeclaration): Source =
     .orEmpty()
 
 private fun nameParameterSource(value: String?): Source =
-  value?.let { assignment(source("name"), literalSource(it)) }.orEmpty()
+  value?.let { assignment(source("name"), literal(it)) }.orEmpty()
 
 private fun Renderer.namespaceParameterSource(typeDeclaration: TypeDeclaration): Source =
   typeDeclaration
@@ -153,25 +156,23 @@ private fun Renderer.namespaceParameterSource(typeDeclaration: TypeDeclaration):
     ?.let { namespaceParameterSource(it.jsNamespace) }
     .orEmpty()
 
-private fun Renderer.namespaceParameterSource(value: String?): Source =
-  value
-    ?.let { namespace ->
-      val namespaceSource =
-        if (JsUtils.isGlobal(namespace))
-          dotSeparated(
-            topLevelQualifiedNameSource("jsinterop.annotations.JsPackage"),
-            identifierSource("GLOBAL")
-          )
-        else literalSource(namespace)
-      assignment(source("namespace"), namespaceSource)
-    }
-    .orEmpty()
+private fun Renderer.namespaceParameterSource(namespace: String?): Source =
+  namespace?.let { assignment(source("namespace"), namespaceSource(it)) }.orEmpty()
+
+private fun Renderer.namespaceSource(namespace: String): Source =
+  if (JsUtils.isGlobal(namespace)) globalNamespaceSource() else literal(namespace)
+
+private fun Renderer.globalNamespaceSource(): Source =
+  dotSeparated(
+    topLevelQualifiedNameSource("jsinterop.annotations.JsPackage"),
+    identifierSource("GLOBAL")
+  )
 
 private fun isNativeParameterSource(value: Boolean): Source =
   booleanParameterSource("isNative", value, false)
 
 private fun booleanParameterSource(name: String, value: Boolean, defaultValue: Boolean): Source =
-  value.takeIf { it != defaultValue }?.let { assignment(source(name), literalSource(it)) }.orEmpty()
+  value.takeIf { it != defaultValue }?.let { assignment(source(name), literal(it)) }.orEmpty()
 
 private val MethodDescriptor.hasJsPropertyAnnotation
   get() =

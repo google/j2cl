@@ -30,6 +30,11 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.ast.Visibility
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotation
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.assignment
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.classLiteral
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.fileAnnotation
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.literal
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionObject
 import com.google.j2cl.transpiler.backend.kotlin.ast.declaration
@@ -66,8 +71,8 @@ internal fun Renderer.objCNameAnnotationSource(name: String, exact: Boolean? = n
       "kotlin.native.ObjCName",
       optInQualifiedName = "kotlin.experimental.ExperimentalObjCName"
     ),
-    literalSource(name),
-    exact?.let { parameterSource("exact", literalSource(it)) }.orEmpty()
+    literal(name),
+    exact?.let { parameterSource("exact", literal(it)) }.orEmpty()
   )
 
 internal fun Renderer.objCAnnotationSource(typeDeclaration: TypeDeclaration): Source =
@@ -85,18 +90,23 @@ internal fun Renderer.objCAnnotationSource(
   methodObjCNames: MethodObjCNames?
 ): Source =
   Source.emptyUnless(!methodDescriptor.isConstructor) {
-    if (methodDescriptor.isHiddenFromObjC) hiddenFromObjCAnnotationSource
-    else methodObjCNames?.methodName?.let { objCNameAnnotationSource(it) }.orEmpty()
+    if (methodDescriptor.isHiddenFromObjC) {
+      hiddenFromObjCAnnotationSource
+    } else {
+      methodObjCNames?.methodName?.let { objCNameAnnotationSource(it) }.orEmpty()
+    }
   }
 
 internal fun Renderer.objCAnnotationSource(fieldDescriptor: FieldDescriptor): Source =
-  if (fieldDescriptor.isHiddenFromObjC) hiddenFromObjCAnnotationSource
-  else
+  if (fieldDescriptor.isHiddenFromObjC) {
+    hiddenFromObjCAnnotationSource
+  } else {
     Source.emptyUnless(fieldDescriptor.needsObjCNameAnnotations) {
       objCNameAnnotationSource(fieldDescriptor.objCName)
     }
+  }
 
-private val MemberDescriptor.isHiddenFromObjC
+private val MemberDescriptor.isHiddenFromObjC: Boolean
   get() = !visibility.needsObjCNameAnnotation
 
 private fun parameterSource(name: String, valueSource: Source): Source =
@@ -106,10 +116,17 @@ private fun parameterSource(name: String, valueSource: Source): Source =
 internal data class MethodObjCNames(val methodName: String, val parameterNames: List<String>)
 
 internal fun Method.toObjCNames(): MethodObjCNames? =
-  if (!descriptor.needsObjCNameAnnotations) null
-  else if (descriptor.isConstructor) toConstructorObjCNames() else toNonConstructorObjCNames()
+  if (!descriptor.needsObjCNameAnnotations) {
+    null
+  } else {
+    if (descriptor.isConstructor) {
+      toConstructorObjCNames()
+    } else {
+      toNonConstructorObjCNames()
+    }
+  }
 
-private val MethodDescriptor.needsObjCNameAnnotations
+private val MethodDescriptor.needsObjCNameAnnotations: Boolean
   get() =
     enclosingTypeDescriptor.typeDeclaration.let { enclosingTypeDeclaration ->
       !enclosingTypeDeclaration.isLocal &&
@@ -118,7 +135,7 @@ private val MethodDescriptor.needsObjCNameAnnotations
         !isKtOverride
     }
 
-private val FieldDescriptor.needsObjCNameAnnotations
+private val FieldDescriptor.needsObjCNameAnnotations: Boolean
   get() =
     enclosingTypeDescriptor.typeDeclaration.let { enclosingTypeDeclaration ->
       enclosingTypeDeclaration.visibility.needsObjCNameAnnotation &&
@@ -127,7 +144,7 @@ private val FieldDescriptor.needsObjCNameAnnotations
         visibility.needsObjCNameAnnotation
     }
 
-private val TypeDeclaration.needsObjCNameAnnotation
+private val TypeDeclaration.needsObjCNameAnnotation: Boolean
   get() = visibility.needsObjCNameAnnotation && !isLocal && !isAnonymous
 
 private val CompanionObject.needsObjCNameAnnotation
@@ -143,7 +160,11 @@ private fun Method.toConstructorObjCNames(): MethodObjCNames =
       if (objectiveCName != null) {
         objectiveCName.objCMethodParameterNames.mapFirst {
           val prefix = "initWith"
-          if (it.startsWith(prefix)) it.substring(prefix.length) else parameters.first().objCName
+          if (it.startsWith(prefix)) {
+            it.substring(prefix.length)
+          } else {
+            parameters.first().objCName
+          }
         }
       } else {
         parameters.mapIndexed { index, parameter ->
@@ -265,18 +286,22 @@ private val PrimitiveTypeDescriptor.primitiveObjCName: String
     }
 
 private fun DeclaredTypeDescriptor.declaredObjCName(useId: Boolean): String =
-  if (useId && isJavaLangObject(this)) idObjCName else typeDeclaration.objCNameWithoutPrefix
+  if (useId && isJavaLangObject(this)) {
+    idObjCName
+  } else {
+    typeDeclaration.objCNameWithoutPrefix
+  }
 
 private val ArrayTypeDescriptor.arrayObjCName: String
   get() = leafTypeDescriptor.objCName(useId = false) + "Array" + dimensionsSuffix
 
-private val ArrayTypeDescriptor.dimensionsSuffix
+private val ArrayTypeDescriptor.dimensionsSuffix: String
   get() = if (dimensions > 1) "$dimensions" else ""
 
 private fun TypeVariable.variableObjCName(useId: Boolean): String =
   upperBoundTypeDescriptor.objCName(useId = useId)
 
-private val Variable.objCName
+private val Variable.objCName: String
   get() = typeDescriptor.objCName(useId = true).titleCase
 
 internal val FieldDescriptor.objCName: String

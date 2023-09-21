@@ -20,6 +20,9 @@ import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.KtVariance
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeVariable
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.IN_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.OUT_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.WHERE_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.colonSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaSeparated
@@ -37,7 +40,7 @@ internal fun Renderer.whereClauseSource(typeVariables: List<TypeVariable>): Sour
   )
 
 fun whereClauseSource(itemsSource: Source): Source =
-  itemsSource.ifNotEmpty { spaceSeparated(source("where"), it) }
+  itemsSource.ifNotEmpty { spaceSeparated(WHERE_KEYWORD, it) }
 
 internal val TypeVariable.upperBoundTypeDescriptors: List<TypeDescriptor>
   get() =
@@ -59,13 +62,13 @@ private fun Renderer.typeParameterBoundSource(typeVariable: TypeVariable): Sourc
     .orEmpty()
 
 private fun typeParameterVarianceSource(typeVariable: TypeVariable): Source =
-  typeVariable.ktVariance?.identifier?.let { source(it) }.orEmpty()
+  typeVariable.ktVariance?.source.orEmpty()
 
-private val KtVariance.identifier: String
+private val KtVariance.source: Source
   get() =
     when (this) {
-      KtVariance.IN -> "in"
-      KtVariance.OUT -> "out"
+      KtVariance.IN -> IN_KEYWORD
+      KtVariance.OUT -> OUT_KEYWORD
     }
 
 private data class WhereClauseItem(val hasName: HasName, val boundTypeDescriptor: TypeDescriptor)

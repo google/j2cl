@@ -33,6 +33,26 @@ import com.google.j2cl.transpiler.ast.ReturnStatement
 import com.google.j2cl.transpiler.ast.Statement
 import com.google.j2cl.transpiler.ast.TypeDescriptors
 import com.google.j2cl.transpiler.ast.Variable
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.ABSTRACT_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.COMPANION_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.CONSTRUCTOR_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.CONST_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.EXTERNAL_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.FUN_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.GET_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.INIT_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.LATEINIT_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.OBJECT_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.OPEN_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.OVERRIDE_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.SUPER_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.THIS_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.VAL_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.VARARG_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.VAR_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotation
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.classLiteral
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.initializer
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionObject
 import com.google.j2cl.transpiler.backend.kotlin.ast.Member
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
@@ -59,8 +79,8 @@ private fun Renderer.source(companionObject: CompanionObject): Source =
   newLineSeparated(
     objCAnnotationSource(companionObject),
     spaceSeparated(
-      source("companion"),
-      source("object"),
+      COMPANION_KEYWORD,
+      OBJECT_KEYWORD,
       block(emptyLineSeparated(companionObject.members.map { source(it) }))
     )
   )
@@ -83,7 +103,9 @@ private fun Renderer.methodSource(method: Method): Source =
           // Constructors with no statements can be rendered without curly braces.
           Source.emptyUnless(!method.isConstructor || statements.isNotEmpty()) {
             spaceSeparated(
-              Source.emptyUnless(method.descriptor.isKtProperty) { source("get()") },
+              Source.emptyUnless(method.descriptor.isKtProperty) {
+                join(GET_KEYWORD, inParentheses(Source.EMPTY))
+              },
               copy(currentReturnLabelIdentifier = null).run { block(statementsSource(statements)) }
             )
           }
@@ -124,9 +146,9 @@ private fun Renderer.fieldSource(field: Field): Source {
     objCAnnotationSource(fieldDescriptor),
     jsInteropAnnotationsSource(fieldDescriptor),
     spaceSeparated(
-      Source.emptyUnless(isConst) { source("const") },
-      Source.emptyUnless(field.isKtLateInit) { source("lateinit") },
-      if (isFinal) source("val") else source("var"),
+      Source.emptyUnless(isConst) { CONST_KEYWORD },
+      Source.emptyUnless(field.isKtLateInit) { LATEINIT_KEYWORD },
+      if (isFinal) VAL_KEYWORD else VAR_KEYWORD,
       colonSeparated(
         identifierSource(fieldDescriptor.ktMangledName),
         typeDescriptorSource(typeDescriptor)
@@ -167,11 +189,12 @@ private fun Renderer.nativeThrowsAnnotationSource(methodDescriptor: MethodDescri
     .orEmpty()
 
 private fun Renderer.initializerBlockSource(initializerBlock: InitializerBlock): Source =
-  spaceSeparated(source("init"), statementSource(initializerBlock.block))
+  spaceSeparated(INIT_KEYWORD, statementSource(initializerBlock.block))
 
 private fun Renderer.methodHeaderSource(method: Method): Source =
-  if (isKtPrimaryConstructor(method)) source("init")
-  else {
+  if (isKtPrimaryConstructor(method)) {
+    INIT_KEYWORD
+  } else {
     val methodDescriptor = method.descriptor
     val methodObjCNames = method.toObjCNames()
     newLineSeparated(
@@ -187,8 +210,11 @@ private fun Renderer.methodHeaderSource(method: Method): Source =
             methodKindAndNameSource(methodDescriptor),
             methodParametersSource(method, methodObjCNames?.parameterNames)
           ),
-          if (methodDescriptor.isConstructor) constructorInvocationSource(method)
-          else methodReturnTypeSource(methodDescriptor)
+          if (methodDescriptor.isConstructor) {
+            constructorInvocationSource(method)
+          } else {
+            methodReturnTypeSource(methodDescriptor)
+          }
         ),
         whereClauseSource(methodDescriptor.typeParameterTypeDescriptors)
       )
@@ -199,7 +225,7 @@ internal fun Renderer.methodHeaderSource(functionExpression: FunctionExpression)
   functionExpression.descriptor.let { methodDescriptor ->
     newLineSeparated(
       spaceSeparated(
-        source("override"),
+        OVERRIDE_KEYWORD,
         colonSeparated(
           join(
             methodKindAndNameSource(methodDescriptor),
@@ -213,30 +239,32 @@ internal fun Renderer.methodHeaderSource(functionExpression: FunctionExpression)
   }
 
 private fun Renderer.methodKindAndNameSource(methodDescriptor: MethodDescriptor): Source =
-  if (methodDescriptor.isConstructor) source("constructor")
-  else
+  if (methodDescriptor.isConstructor) {
+    CONSTRUCTOR_KEYWORD
+  } else {
     spaceSeparated(
-      if (methodDescriptor.isKtProperty) source("val") else source("fun"),
+      if (methodDescriptor.isKtProperty) VAL_KEYWORD else FUN_KEYWORD,
       typeParametersSource(methodDescriptor.typeParameterTypeDescriptors),
       identifierSource(methodDescriptor.ktMangledName)
     )
+  }
 
 private fun methodModifiersSource(methodDescriptor: MethodDescriptor): Source =
   spaceSeparated(
     Source.emptyUnless(!methodDescriptor.enclosingTypeDescriptor.typeDeclaration.isInterface) {
       spaceSeparated(
-        Source.emptyUnless(methodDescriptor.isNative) { source("external") },
+        Source.emptyUnless(methodDescriptor.isNative) { EXTERNAL_KEYWORD },
         methodDescriptor.inheritanceModifierSource
       )
     },
-    Source.emptyUnless(methodDescriptor.isKtOverride) { source("override") }
+    Source.emptyUnless(methodDescriptor.isKtOverride) { OVERRIDE_KEYWORD }
   )
 
-private val MethodDescriptor.inheritanceModifierSource
+private val MethodDescriptor.inheritanceModifierSource: Source
   get() =
     when {
-      isAbstract -> source("abstract")
-      isOpen -> source("open")
+      isAbstract -> ABSTRACT_KEYWORD
+      isOpen -> OPEN_KEYWORD
       else -> Source.EMPTY
     }
 
@@ -280,10 +308,13 @@ private fun Renderer.parameterSource(
 ): Source {
   val parameterTypeDescriptor = parameterDescriptor.typeDescriptor
   val renderedTypeDescriptor =
-    if (!parameterDescriptor.isVarargs) parameterTypeDescriptor
-    else (parameterTypeDescriptor as ArrayTypeDescriptor).componentTypeDescriptor!!
+    if (!parameterDescriptor.isVarargs) {
+      parameterTypeDescriptor
+    } else {
+      (parameterTypeDescriptor as ArrayTypeDescriptor).componentTypeDescriptor!!
+    }
   return spaceSeparated(
-    Source.emptyUnless(parameterDescriptor.isVarargs) { source("vararg") },
+    Source.emptyUnless(parameterDescriptor.isVarargs) { VARARG_KEYWORD },
     objCParameterName?.let { objCNameAnnotationSource(it) }.orEmpty(),
     colonSeparated(nameSource(parameter), typeDescriptorSource(renderedTypeDescriptor))
   )
@@ -295,18 +326,21 @@ internal fun Renderer.methodReturnTypeSource(methodDescriptor: MethodDescriptor)
     ?.let { typeDescriptorSource(it) }
     .orEmpty()
 
-private fun Renderer.constructorInvocationSource(method: Method) =
+private fun Renderer.constructorInvocationSource(method: Method): Source =
   getConstructorInvocation(method)
     ?.let { constructorInvocation ->
       join(
-        if (constructorInvocation.target.inSameTypeAs(method.descriptor)) source("this")
-        else source("super"),
+        if (constructorInvocation.target.inSameTypeAs(method.descriptor)) {
+          THIS_KEYWORD
+        } else {
+          SUPER_KEYWORD
+        },
         invocationSource(constructorInvocation)
       )
     }
     .orEmpty()
 
-internal val MethodDescriptor.isKtOverride
+internal val MethodDescriptor.isKtOverride: Boolean
   get() =
     isJavaOverride &&
       !directlyOverridesJavaObjectClone &&

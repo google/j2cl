@@ -62,8 +62,47 @@ import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment
 import com.google.j2cl.transpiler.ast.VariableReference
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.AND_OPERATOR
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.ARROW_OPERATOR
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.ASSIGN_OPERATOR
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.DECREMENT_OPERATOR
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.DIVIDE_OPERATOR
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.ELSE_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.EQUAL_OPERATOR
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.GREATER_EQUAL_OPERATOR
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.GREATER_OPERATOR
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.IF_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.INCREMENT_OPERATOR
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.IT_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.LESS_EQUAL_OPERATOR
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.LESS_OPERATOR
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.MINUS_OPERATOR
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.NEGATE_OPERATOR
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.NOT_EQUAL_OPERATOR
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.NOT_NULL_OPERATOR
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.NOT_SAME_OPERATOR
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.NULL_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.OBJECT_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.OR_OPERATOR
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.PLUS_OPERATOR
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.REMAINDER_OPERATOR
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.SAME_OPERATOR
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.SIZE_IDENTIFIER
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.SUPER_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.THIS_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.TIMES_OPERATOR
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.VAL_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.VAR_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.asExpression
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.at
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.classLiteral
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.initializer
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.isExpression
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.literal
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.nonNull
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.COLON
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.colonSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaSeparated
@@ -123,7 +162,7 @@ private fun Renderer.getOperatorSource(qualifier: Expression, argument: Expressi
 private fun Renderer.arrayLengthSource(arrayLength: ArrayLength): Source =
   dotSeparated(
     leftSubExpressionSource(arrayLength.precedence, arrayLength.arrayExpression),
-    source("size")
+    SIZE_IDENTIFIER
   )
 
 private fun Renderer.arrayLiteralSource(arrayLiteral: ArrayLiteral): Source =
@@ -151,7 +190,7 @@ private fun Renderer.arrayLiteralSource(arrayLiteral: ArrayLiteral): Source =
 private fun Renderer.binaryExpressionSource(expression: BinaryExpression): Source =
   infix(
     leftOperandSource(expression),
-    expression.operator.ktSymbol(expression.useEquality),
+    expression.operator.ktSource(expression.useEquality),
     rightOperandSource(expression)
   )
 
@@ -164,9 +203,11 @@ private fun Renderer.leftOperandSource(expression: BinaryExpression): Source =
         expression.isSimpleAssignment &&
         leftOperand.target.isStatic &&
         leftOperand.target.isFinal
-    )
+    ) {
       identifierSource(leftOperand.target.ktMangledName)
-    else leftSubExpressionSource(expression.precedence, leftOperand)
+    } else {
+      leftSubExpressionSource(expression.precedence, leftOperand)
+    }
   }
 
 private fun Renderer.rightOperandSource(expression: BinaryExpression): Source =
@@ -180,27 +221,28 @@ private val BinaryExpression.useEquality: Boolean
 
 private fun Renderer.castExpressionSource(castExpression: CastExpression): Source =
   castExpression.castTypeDescriptor.let { castTypeDescriptor ->
-    if (castTypeDescriptor is IntersectionTypeDescriptor)
-    // Render cast to intersection type descriptor: (A & B & C) x
-    // using smart casts: (x).let { it as A; it as B; it as C; it }
-    dotSeparated(
+    if (castTypeDescriptor is IntersectionTypeDescriptor) {
+      // Render cast to intersection type descriptor: (A & B & C) x
+      // using smart casts: (x).let { it as A; it as B; it as C; it }
+      dotSeparated(
         inParentheses(expressionSource(castExpression.expression)),
         spaceSeparated(
           extensionMemberQualifiedNameSource("kotlin.let"),
           inInlineCurlyBrackets(
             semicolonSeparated(
               castTypeDescriptor.intersectionTypeDescriptors
-                .map { asExpression(itSource(), castTypeDescriptorSource(it)) }
-                .plus(itSource())
+                .map { asExpression(IT_KEYWORD, castTypeDescriptorSource(it)) }
+                .plus(IT_KEYWORD)
             )
           )
         )
       )
-    else
+    } else {
       asExpression(
         leftSubExpressionSource(castExpression.precedence, castExpression.expression),
         castTypeDescriptorSource(castExpression.castTypeDescriptor)
       )
+    }
   }
 
 private fun Renderer.castTypeDescriptorSource(typeDescriptor: TypeDescriptor): Source =
@@ -208,22 +250,22 @@ private fun Renderer.castTypeDescriptorSource(typeDescriptor: TypeDescriptor): S
     inParentheses(it)
   }
 
-private fun BinaryOperator.ktSymbol(useEquality: Boolean): String =
+private fun BinaryOperator.ktSource(useEquality: Boolean): Source =
   when (this) {
-    BinaryOperator.TIMES -> "*"
-    BinaryOperator.DIVIDE -> "/"
-    BinaryOperator.REMAINDER -> "%"
-    BinaryOperator.PLUS -> "+"
-    BinaryOperator.MINUS -> "-"
-    BinaryOperator.LESS -> "<"
-    BinaryOperator.GREATER -> ">"
-    BinaryOperator.LESS_EQUALS -> "<="
-    BinaryOperator.GREATER_EQUALS -> ">="
-    BinaryOperator.EQUALS -> if (useEquality) "==" else "==="
-    BinaryOperator.NOT_EQUALS -> if (useEquality) "!=" else "!=="
-    BinaryOperator.CONDITIONAL_AND -> "&&"
-    BinaryOperator.CONDITIONAL_OR -> "||"
-    BinaryOperator.ASSIGN -> "="
+    BinaryOperator.TIMES -> TIMES_OPERATOR
+    BinaryOperator.DIVIDE -> DIVIDE_OPERATOR
+    BinaryOperator.REMAINDER -> REMAINDER_OPERATOR
+    BinaryOperator.PLUS -> PLUS_OPERATOR
+    BinaryOperator.MINUS -> MINUS_OPERATOR
+    BinaryOperator.LESS -> LESS_OPERATOR
+    BinaryOperator.GREATER -> GREATER_OPERATOR
+    BinaryOperator.LESS_EQUALS -> LESS_EQUAL_OPERATOR
+    BinaryOperator.GREATER_EQUALS -> GREATER_EQUAL_OPERATOR
+    BinaryOperator.EQUALS -> if (useEquality) EQUAL_OPERATOR else SAME_OPERATOR
+    BinaryOperator.NOT_EQUALS -> if (useEquality) NOT_EQUAL_OPERATOR else NOT_SAME_OPERATOR
+    BinaryOperator.CONDITIONAL_AND -> AND_OPERATOR
+    BinaryOperator.CONDITIONAL_OR -> OR_OPERATOR
+    BinaryOperator.ASSIGN -> ASSIGN_OPERATOR
     BinaryOperator.LEFT_SHIFT,
     BinaryOperator.RIGHT_SHIFT_SIGNED,
     BinaryOperator.RIGHT_SHIFT_UNSIGNED,
@@ -240,37 +282,37 @@ private fun BinaryOperator.ktSymbol(useEquality: Boolean): String =
     BinaryOperator.REMAINDER_ASSIGN,
     BinaryOperator.LEFT_SHIFT_ASSIGN,
     BinaryOperator.RIGHT_SHIFT_SIGNED_ASSIGN,
-    BinaryOperator.RIGHT_SHIFT_UNSIGNED_ASSIGN -> throw InternalCompilerError("$this.ktSymbol")
+    BinaryOperator.RIGHT_SHIFT_UNSIGNED_ASSIGN -> throw InternalCompilerError("$this.ktSource")
   }
 
-private val PrefixOperator.ktSymbol: String
+private val PrefixOperator.ktSource: Source
   get() =
     when (this) {
-      PrefixOperator.PLUS -> "+"
-      PrefixOperator.MINUS -> "-"
-      PrefixOperator.NOT -> "!"
-      PrefixOperator.SPREAD -> "*"
-      PrefixOperator.INCREMENT -> "++"
-      PrefixOperator.DECREMENT -> "--"
-      PrefixOperator.COMPLEMENT -> throw InternalCompilerError("$this.ktSymbol")
+      PrefixOperator.PLUS -> PLUS_OPERATOR
+      PrefixOperator.MINUS -> MINUS_OPERATOR
+      PrefixOperator.NOT -> NEGATE_OPERATOR
+      PrefixOperator.SPREAD -> TIMES_OPERATOR
+      PrefixOperator.INCREMENT -> INCREMENT_OPERATOR
+      PrefixOperator.DECREMENT -> DECREMENT_OPERATOR
+      PrefixOperator.COMPLEMENT -> throw InternalCompilerError("$this.ktSource")
     }
 
-private val PostfixOperator.ktSymbol: String
+private val PostfixOperator.ktSource: Source
   get() =
     when (this) {
-      PostfixOperator.DECREMENT -> "--"
-      PostfixOperator.INCREMENT -> "++"
-      PostfixOperator.NOT_NULL_ASSERTION -> "!!"
+      PostfixOperator.DECREMENT -> DECREMENT_OPERATOR
+      PostfixOperator.INCREMENT -> INCREMENT_OPERATOR
+      PostfixOperator.NOT_NULL_ASSERTION -> NOT_NULL_OPERATOR
     }
 
 private fun Renderer.conditionalExpressionSource(
   conditionalExpression: ConditionalExpression
 ): Source =
   spaceSeparated(
-    source("if"),
+    IF_KEYWORD,
     inParentheses(expressionSource(conditionalExpression.conditionExpression)),
     expressionSource(conditionalExpression.trueExpression),
-    source("else"),
+    ELSE_KEYWORD,
     expressionSource(conditionalExpression.falseExpression)
   )
 
@@ -285,8 +327,11 @@ private val FunctionExpression.renderAsLambda: Boolean
   get() = typeDescriptor.functionalInterface!!.typeDeclaration.isKtFunctionalInterface
 
 private fun Renderer.functionExpressionSource(functionExpression: FunctionExpression): Source =
-  if (functionExpression.renderAsLambda) functionExpressionLambdaSource(functionExpression)
-  else functionExpressionObjectSource(functionExpression)
+  if (functionExpression.renderAsLambda) {
+    functionExpressionLambdaSource(functionExpression)
+  } else {
+    functionExpressionObjectSource(functionExpression)
+  }
 
 private fun Renderer.functionExpressionLambdaSource(
   functionExpression: FunctionExpression
@@ -309,8 +354,8 @@ private fun Renderer.functionExpressionObjectSource(
   functionExpression: FunctionExpression
 ): Source =
   spaceSeparated(
-    source("object"),
-    Source.COLON,
+    OBJECT_KEYWORD,
+    COLON,
     newInstanceTypeDescriptorSource(functionExpression.typeDescriptor.functionalInterface!!),
     block(
       spaceSeparated(
@@ -325,7 +370,7 @@ private fun Renderer.objectBodySource(functionExpression: FunctionExpression): S
 
 private fun Renderer.parametersSource(functionExpression: FunctionExpression): Source =
   commaSeparated(functionExpression.parameters.map(::variableSource)).ifNotEmpty {
-    spaceSeparated(it, source("->"))
+    spaceSeparated(it, ARROW_OPERATOR)
   }
 
 private val TypeDeclaration.returnLabelIdentifier: String
@@ -346,13 +391,15 @@ private fun Renderer.jsDocCastExpressionSource(expression: JsDocCastExpression):
   expressionSource(expression.expression)
 
 private fun Renderer.instanceOfTestTypeDescriptorSource(typeDescriptor: TypeDescriptor): Source =
-  if (typeDescriptor is ArrayTypeDescriptor && !typeDescriptor.isPrimitiveArray)
+  if (typeDescriptor is ArrayTypeDescriptor && !typeDescriptor.isPrimitiveArray) {
     join(topLevelQualifiedNameSource("kotlin.Array"), inAngleBrackets(source("*")))
-  else typeDescriptorSource(typeDescriptor.toNonNullable(), projectRawToWildcards = true)
+  } else {
+    typeDescriptorSource(typeDescriptor.toNonNullable(), projectRawToWildcards = true)
+  }
 
 private fun Renderer.literalSource(literal: Literal): Source =
   when (literal) {
-    is NullLiteral -> source("null")
+    is NullLiteral -> NULL_KEYWORD
     is BooleanLiteral -> booleanLiteralSource(literal)
     is StringLiteral -> stringLiteralSource(literal)
     is TypeLiteral -> typeLiteralSource(literal)
@@ -361,26 +408,27 @@ private fun Renderer.literalSource(literal: Literal): Source =
   }
 
 private fun booleanLiteralSource(booleanLiteral: BooleanLiteral): Source =
-  literalSource(booleanLiteral.value)
+  literal(booleanLiteral.value)
 
-private fun stringLiteralSource(stringLiteral: StringLiteral): Source =
-  literalSource(stringLiteral.value)
+private fun stringLiteralSource(stringLiteral: StringLiteral): Source = literal(stringLiteral.value)
 
 private fun Renderer.typeLiteralSource(typeLiteral: TypeLiteral): Source =
   dotSeparated(
     classLiteral(qualifiedNameSource(typeLiteral.referencedTypeDescriptor)),
-    if (typeLiteral.referencedTypeDescriptor.isPrimitive)
+    if (typeLiteral.referencedTypeDescriptor.isPrimitive) {
       nonNull(extensionMemberQualifiedNameSource("kotlin.jvm.javaPrimitiveType"))
-    else extensionMemberQualifiedNameSource("kotlin.jvm.javaObjectType")
+    } else {
+      extensionMemberQualifiedNameSource("kotlin.jvm.javaObjectType")
+    }
   )
 
 private fun numberLiteralSource(numberLiteral: NumberLiteral): Source =
   when (numberLiteral.typeDescriptor.toUnboxedType()) {
-    PrimitiveTypes.CHAR -> literalSource(numberLiteral.value.toChar())
-    PrimitiveTypes.INT -> literalSource(numberLiteral.value.toInt())
-    PrimitiveTypes.LONG -> literalSource(numberLiteral.value.toLong())
-    PrimitiveTypes.FLOAT -> literalSource(numberLiteral.value.toFloat())
-    PrimitiveTypes.DOUBLE -> literalSource(numberLiteral.value.toDouble())
+    PrimitiveTypes.CHAR -> literal(numberLiteral.value.toInt().toChar())
+    PrimitiveTypes.INT -> literal(numberLiteral.value.toInt())
+    PrimitiveTypes.LONG -> literal(numberLiteral.value.toLong())
+    PrimitiveTypes.FLOAT -> literal(numberLiteral.value.toFloat())
+    PrimitiveTypes.DOUBLE -> literal(numberLiteral.value.toDouble())
     else -> throw InternalCompilerError("renderNumberLiteral($numberLiteral)")
   }
 
@@ -461,11 +509,13 @@ private fun Renderer.newArraySource(
 ): Source =
   arrayTypeDescriptor.typeArgument.let { typeArgument ->
     typeArgument.typeDescriptor.let { componentTypeDescriptor ->
-      if (remainingDimensions.isEmpty())
-        if (componentTypeDescriptor is PrimitiveTypeDescriptor)
+      if (remainingDimensions.isEmpty()) {
+        if (componentTypeDescriptor is PrimitiveTypeDescriptor) {
           primitiveArrayOfSource(componentTypeDescriptor, firstDimension)
-        else arrayOfNullsSource(typeArgument, firstDimension)
-      else
+        } else {
+          arrayOfNullsSource(typeArgument, firstDimension)
+        }
+      } else {
         remainingDimensions.first().let { nextDimension ->
           if (nextDimension is NullLiteral) arrayOfNullsSource(typeArgument, firstDimension)
           else
@@ -484,6 +534,7 @@ private fun Renderer.newArraySource(
               )
             )
         }
+      }
     }
   }
 
@@ -510,16 +561,17 @@ private fun Renderer.primitiveArrayOfSource(
 
 private fun Renderer.arrayOfNullsSource(typeArgument: TypeArgument, dimension: Expression): Source =
   join(
-    if (typeArgument.typeDescriptor.isNullable)
+    if (typeArgument.typeDescriptor.isNullable) {
       join(
         extensionMemberQualifiedNameSource("kotlin.arrayOfNulls"),
         typeArgumentsSource(listOf(typeArgument.toNonNullable()))
       )
-    else
+    } else {
       join(
         extensionMemberQualifiedNameSource("javaemul.lang.uninitializedArrayOf"),
         typeArgumentsSource(listOf(typeArgument))
-      ),
+      )
+    },
     inParentheses(expressionSource(dimension))
   )
 
@@ -529,7 +581,7 @@ private fun Renderer.newInstanceSource(expression: NewInstance): Source =
       qualifierSource(expression),
       spaceSeparated(
         Source.emptyUnless(expression.anonymousInnerClass != null) {
-          spaceSeparated(source("object"), Source.COLON)
+          spaceSeparated(source("object"), COLON)
         },
         join(
           newInstanceTypeDescriptorSource(typeDescriptor),
@@ -551,30 +603,38 @@ private fun Renderer.newInstanceTypeDescriptorSource(
   // Render qualified name if there's no qualifier, otherwise render simple name.
   typeDescriptor.typeDeclaration.let { typeDeclaration ->
     join(
-      if (typeDeclaration.isCapturingEnclosingInstance)
+      if (typeDeclaration.isCapturingEnclosingInstance) {
         identifierSource(typeDeclaration.ktSimpleName(asSuperType = true))
-      else qualifiedNameSource(typeDescriptor, asSuperType = true),
+      } else {
+        qualifiedNameSource(typeDescriptor, asSuperType = true)
+      },
       invocationTypeArgumentsSource(typeDescriptor.typeArguments())
     )
   }
 
 private val DeclaredTypeDescriptor.nonAnonymousTypeDescriptor: DeclaredTypeDescriptor
   get() =
-    if (typeDeclaration.isAnonymous) interfaceTypeDescriptors.firstOrNull() ?: superTypeDescriptor!!
-    else this
+    if (typeDeclaration.isAnonymous) {
+      interfaceTypeDescriptors.firstOrNull() ?: superTypeDescriptor!!
+    } else {
+      this
+    }
 
 private fun Renderer.postfixExpressionSource(expression: PostfixExpression): Source =
   join(
     leftSubExpressionSource(expression.precedence, expression.operand),
-    source(expression.operator.ktSymbol)
+    expression.operator.ktSource
   )
 
 private fun Renderer.prefixExpressionSource(expression: PrefixExpression): Source =
   expression.operator.let { operator ->
-    source(operator.ktSymbol).let { symbolSource ->
+    operator.ktSource.let { symbolSource ->
       rightSubExpressionSource(expression.precedence, expression.operand).let { operandSource ->
-        if (operator.needsSpace) spaceSeparated(symbolSource, operandSource)
-        else join(symbolSource, operandSource)
+        if (operator.needsSpace) {
+          spaceSeparated(symbolSource, operandSource)
+        } else {
+          join(symbolSource, operandSource)
+        }
       }
     }
   }
@@ -590,7 +650,7 @@ private fun Renderer.superReferenceSource(
   qualifierTypeDescriptor: DeclaredTypeDescriptor?
 ): Source =
   join(
-    source("super"),
+    SUPER_KEYWORD,
     superTypeDescriptor
       ?.let { inAngleBrackets(qualifiedNameSource(it, asSuperType = true)) }
       .orEmpty(),
@@ -599,7 +659,7 @@ private fun Renderer.superReferenceSource(
 
 private fun Renderer.thisReferenceSource(thisReference: ThisReference): Source =
   join(
-    source("this"),
+    THIS_KEYWORD,
     thisReference
       .takeIf { needsQualifier(it) }
       ?.let { labelReferenceSource(it.typeDescriptor) }
@@ -618,7 +678,7 @@ private fun Renderer.variableDeclarationExpressionSource(
   newLineSeparated(
     expression.fragments.map {
       spaceSeparated(
-        source(if (it.variable.isFinal) "val" else "var"),
+        if (it.variable.isFinal) VAL_KEYWORD else VAR_KEYWORD,
         variableDeclarationFragmentSource(it)
       )
     }
@@ -652,8 +712,11 @@ private fun Renderer.qualifierSource(memberReference: MemberReference): Source =
         val enclosingTypeDescriptor = memberReference.target.enclosingTypeDescriptor!!
         val ktCompanionQualifiedName =
           enclosingTypeDescriptor.typeDeclaration.ktCompanionQualifiedName
-        if (ktCompanionQualifiedName != null) topLevelQualifiedNameSource(ktCompanionQualifiedName)
-        else qualifiedNameSource(enclosingTypeDescriptor)
+        if (ktCompanionQualifiedName != null) {
+          topLevelQualifiedNameSource(ktCompanionQualifiedName)
+        } else {
+          qualifiedNameSource(enclosingTypeDescriptor)
+        }
       } else {
         Source.EMPTY
       }

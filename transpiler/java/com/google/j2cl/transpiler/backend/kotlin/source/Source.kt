@@ -174,8 +174,9 @@ private constructor(
     fun emptyLineSeparated(source: Source, vararg sources: Source) =
       emptyLineSeparated(listOf(source, *sources))
 
-    fun infix(lhs: Source, operator: String, rhs: Source) =
-      spaceSeparated(lhs, source(operator), rhs)
+    fun infix(lhs: Source, operator: String, rhs: Source) = infix(lhs, source(operator), rhs)
+
+    fun infix(lhs: Source, operator: Source, rhs: Source) = spaceSeparated(lhs, operator, rhs)
 
     fun block(body: Source) =
       if (body.isEmpty()) inCurlyBrackets(EMPTY) else inCurlyBrackets(inNewLine(body))
