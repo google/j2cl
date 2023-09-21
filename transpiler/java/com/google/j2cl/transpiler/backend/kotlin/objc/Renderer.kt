@@ -77,5 +77,9 @@ val emptyRenderer: Renderer<Source>
   get() = rendererOf(Source.EMPTY)
 
 fun Renderer<Source>.ifNotEmpty(fn: (Source) -> Renderer<Source>): Renderer<Source> = bind {
-  if (it.isEmpty()) emptyRenderer else fn(it)
+  if (it.isEmpty()) {
+    emptyRenderer
+  } else {
+    fn(it)
+  }
 }

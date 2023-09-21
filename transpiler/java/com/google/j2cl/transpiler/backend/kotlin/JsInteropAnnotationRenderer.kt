@@ -160,7 +160,11 @@ private fun Renderer.namespaceParameterSource(namespace: String?): Source =
   namespace?.let { assignment(source("namespace"), namespaceSource(it)) }.orEmpty()
 
 private fun Renderer.namespaceSource(namespace: String): Source =
-  if (JsUtils.isGlobal(namespace)) globalNamespaceSource() else literal(namespace)
+  if (JsUtils.isGlobal(namespace)) {
+    globalNamespaceSource()
+  } else {
+    literal(namespace)
+  }
 
 private fun Renderer.globalNamespaceSource(): Source =
   dotSeparated(

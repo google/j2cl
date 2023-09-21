@@ -22,9 +22,15 @@ private tailrec fun <T> Comparator<T>.compareLists(
   secondList: List<T>,
   startIndex: Int = 0
 ): Int =
-  if (startIndex >= firstList.size) if (startIndex >= secondList.size) 0 else -1
-  else if (startIndex >= secondList.size) 1
-  else {
-    val itemCompare = compare(firstList[startIndex], secondList[startIndex])
-    if (itemCompare != 0) itemCompare else compareLists(firstList, secondList, startIndex.inc())
+  when {
+    startIndex >= firstList.size -> if (startIndex >= secondList.size) 0 else -1
+    startIndex >= secondList.size -> 1
+    else -> {
+      val compared = compare(firstList[startIndex], secondList[startIndex])
+      if (compared == 0) {
+        compareLists(firstList, secondList, startIndex.inc())
+      } else {
+        compared
+      }
+    }
   }

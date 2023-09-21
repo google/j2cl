@@ -241,7 +241,11 @@ private val TypeDeclaration.defaultObjCName: String
 private val TypeDeclaration.objCNamePrefix: String
   get() =
     enclosingTypeDeclaration.run {
-      if (this != null) objCNameWithoutPrefix + "_" else simpleObjCNamePrefix
+      if (this != null) {
+        objCNameWithoutPrefix + "_"
+      } else {
+        simpleObjCNamePrefix
+      }
     }
 
 private val TypeDeclaration.simpleObjCNamePrefix: String

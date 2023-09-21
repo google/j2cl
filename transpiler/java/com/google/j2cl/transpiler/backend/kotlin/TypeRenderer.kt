@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.transpiler.ast.AstUtils.getConstructorInvocation
 import com.google.j2cl.transpiler.ast.Field
 import com.google.j2cl.transpiler.ast.FieldDescriptor
+import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.NewInstance
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDeclaration
@@ -132,15 +133,12 @@ private fun Renderer.superTypeInvocationSource(
     if (!type.hasConstructors) {
       inParentheses(Source.EMPTY)
     } else {
-      type.ktPrimaryConstructor.let { ktPrimaryConstructor ->
-        Source.emptyUnless(ktPrimaryConstructor != null) {
-          getConstructorInvocation(ktPrimaryConstructor).let {
-            if (it == null) inParentheses(Source.EMPTY) else invocationSource(it)
-          }
-        }
-      }
+      type.ktPrimaryConstructor?.let { constructorInvocationSource(it) }.orEmpty()
     }
   }
+
+private fun Renderer.constructorInvocationSource(method: Method): Source =
+  getConstructorInvocation(method)?.let { invocationSource(it) } ?: inParentheses(Source.EMPTY)
 
 internal fun Renderer.typeBodySource(type: Type): Source =
   forTypeBody(type).run {

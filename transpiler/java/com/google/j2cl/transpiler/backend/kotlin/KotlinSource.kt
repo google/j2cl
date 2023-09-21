@@ -173,8 +173,11 @@ internal object KotlinSource {
     join(
       at(name),
       inParentheses(
-        if (parameters.size <= 2) commaSeparated(parameters)
-        else indented(inNewLine(commaAndNewLineSeparated(parameters)))
+        if (parameters.size <= 2) {
+          commaSeparated(parameters)
+        } else {
+          indented(inNewLine(commaAndNewLineSeparated(parameters)))
+        }
       )
     )
 

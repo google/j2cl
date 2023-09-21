@@ -43,8 +43,11 @@ internal fun DeclaredTypeDescriptor.directlyDeclaredNonRawTypeArgumentDescriptor
   else
     projectToWildcards.or(typeDeclaration.hasRecursiveTypeBounds()).let { mapToWildcard ->
       typeDeclaration.directlyDeclaredTypeParameterDescriptors.map {
-        if (mapToWildcard) TypeVariable.createWildcard()
-        else it.upperBoundTypeDescriptor.toRawTypeDescriptor()
+        if (mapToWildcard) {
+          TypeVariable.createWildcard()
+        } else {
+          it.upperBoundTypeDescriptor.toRawTypeDescriptor()
+        }
       }
     }
 
@@ -85,8 +88,8 @@ internal fun TypeDescriptor.contains(
       typeArgumentDescriptors.any { it.contains(typeVariable, seenTypeVariables) }
     is IntersectionTypeDescriptor ->
       intersectionTypeDescriptors.any { it.contains(typeVariable, seenTypeVariables) }
-    is ArrayTypeDescriptor -> componentTypeDescriptor?.contains(typeVariable, seenTypeVariables)
-        ?: false
+    is ArrayTypeDescriptor ->
+      componentTypeDescriptor?.contains(typeVariable, seenTypeVariables) ?: false
     is TypeVariable ->
       if (seenTypeVariables.contains(this)) false
       else

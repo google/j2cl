@@ -20,6 +20,7 @@ import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeVariable
+import com.google.j2cl.transpiler.backend.kotlin.common.runIf
 
 /**
  * Represents the mapping between a type variable and the type it takes in a parameterized
@@ -67,7 +68,7 @@ private fun typeArgument(declarationTypeParameter: TypeVariable, typeDescriptor:
     .updatedWithParameterVariance
 
 private val TypeArgument.withInferredNullability: TypeArgument
-  get() = if (!declarationTypeVariable.hasNullableBounds) makeNonNull() else this
+  get() = runIf(!declarationTypeVariable.hasNullableBounds) { makeNonNull() }
 
 private val TypeArgument.updatedWithParameterVariance: TypeArgument
   get() = copy(typeDescriptor = typeDescriptor.applyVariance(declarationTypeVariable.ktVariance))
@@ -75,8 +76,7 @@ private val TypeArgument.updatedWithParameterVariance: TypeArgument
 // TODO(b/245807463): Remove this fix when these bugs are fixed in the AST.
 // TODO(b/255722110): Remove this fix when these bugs are fixed in the AST.
 private val TypeArgument.withFixedUnboundWildcard: TypeArgument
-  get() =
-    if (needsFixForUnboundWildcard) copy(typeDescriptor = TypeVariable.createWildcard()) else this
+  get() = runIf(needsFixForUnboundWildcard) { copy(typeDescriptor = TypeVariable.createWildcard()) }
 
 // TODO(b/245807463): Remove this fix when these bugs are fixed in the AST.
 // TODO(b/255722110): Remove this fix when these bugs are fixed in the AST.

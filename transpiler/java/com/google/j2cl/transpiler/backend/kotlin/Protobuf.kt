@@ -53,8 +53,11 @@ internal fun TypeDescriptor.isProtobufBuilder(): Boolean {
 }
 
 internal fun computeProtobufPropertyName(methodName: String) =
-  if (methodName.camelCaseStartsWith("get")) methodName[3].toLowerCase() + methodName.substring(4)
-  else methodName
+  if (methodName.camelCaseStartsWith("get")) {
+    methodName[3].toLowerCase() + methodName.substring(4)
+  } else {
+    methodName
+  }
 
 private fun DeclaredTypeDescriptor.isProtobufMessage(): Boolean {
   val superTypeDescriptor: DeclaredTypeDescriptor = superTypeDescriptor ?: return false

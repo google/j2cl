@@ -179,11 +179,18 @@ private constructor(
     fun infix(lhs: Source, operator: Source, rhs: Source) = spaceSeparated(lhs, operator, rhs)
 
     fun block(body: Source) =
-      if (body.isEmpty()) inCurlyBrackets(EMPTY) else inCurlyBrackets(inNewLine(body))
+      if (body.isEmpty()) {
+        inCurlyBrackets(EMPTY)
+      } else {
+        inCurlyBrackets(inNewLine(body))
+      }
 
     fun block(firstLine: Source, body: Source) =
-      if (firstLine.isEmpty()) block(body)
-      else inCurlyBrackets(newLineSeparated(join(SPACE, firstLine), body))
+      if (firstLine.isEmpty()) {
+        block(body)
+      } else {
+        inCurlyBrackets(newLineSeparated(join(SPACE, firstLine), body))
+      }
 
     /** Appends the content of the given source to this source builder. */
     private fun SourceBuilder.append(source: Source) {

@@ -44,8 +44,11 @@ internal fun Renderer.topLevelQualifiedNameSource(
 ): Source =
   qualifiedToNonAliasedSimpleName(qualifiedName)
     .let { simpleName ->
-      if (simpleName != null) identifierSource(simpleName)
-      else qualifiedIdentifierSource(qualifiedName)
+      if (simpleName != null) {
+        identifierSource(simpleName)
+      } else {
+        qualifiedIdentifierSource(qualifiedName)
+      }
     }
     .also { optInQualifiedName?.let { environment.importedOptInQualifiedNames.add(it) } }
 

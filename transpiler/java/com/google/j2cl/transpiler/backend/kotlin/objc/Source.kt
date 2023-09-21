@@ -82,7 +82,13 @@ val Import.source: Source
   get() =
     spaceSeparated(
       source("#import"),
-      source(path).let { if (isLocal) inDoubleQuotes(it) else inAngleBrackets(it) }
+      source(path).let {
+        if (isLocal) {
+          inDoubleQuotes(it)
+        } else {
+          inAngleBrackets(it)
+        }
+      }
     )
 
 val Renderer<Source>.sourceWithDependencies: Source

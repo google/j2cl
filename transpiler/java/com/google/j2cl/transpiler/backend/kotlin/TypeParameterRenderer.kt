@@ -23,6 +23,7 @@ import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.IN_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.OUT_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.WHERE_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.common.runIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.colonSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaSeparated
@@ -47,7 +48,7 @@ internal val TypeVariable.upperBoundTypeDescriptors: List<TypeDescriptor>
     upperBoundTypeDescriptor
       .let { if (it is IntersectionTypeDescriptor) it.intersectionTypeDescriptors else listOf(it) }
       .filter { !it.isImplicitUpperBound }
-      .map { if (!it.canBeNullableAsBound) it.toNonNullable() else it }
+      .map { it.runIf(!it.canBeNullableAsBound) { toNonNullable() } }
 
 private fun Renderer.typeParameterSource(typeVariable: TypeVariable): Source =
   spaceSeparated(
