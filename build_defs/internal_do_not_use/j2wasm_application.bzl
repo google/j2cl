@@ -410,6 +410,8 @@ def j2wasm_application(name, defines = dict(), **kwargs):
             # Get several rounds of -O3 after intrinsic lowering.
             "-O3",
             "-O3",
+            # Mark all types as 'final' that we can, to help VMs at runtime.
+            "--type-finalizing",
         ],
         transpiler_args = ["-experimentalWasmRemoveAssertStatement"],
         defines = ["%s=%s" % (k, v) for (k, v) in optimized_defines.items()],
