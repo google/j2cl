@@ -373,6 +373,7 @@ def j2wasm_application(name, defines = dict(), **kwargs):
         "jre.checks.checkLevel": "MINIMAL",
         "jre.logging.logLevel": "SEVERE",
         "jre.logging.simpleConsoleHandler": "DISABLED",
+        "jre.classMetadata": "STRIPPED",
     })
     optimized_defines.update(defines)
 

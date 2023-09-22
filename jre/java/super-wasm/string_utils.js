@@ -34,7 +34,17 @@ function compareToIgnoreCase(a, b) {
   return a == b ? 0 : (a < b) ? -1 : 1;
 }
 
+let $nextUniqId_ = 1000;
+
+/**
+ * @return {string}
+ */
+function generateClassName() {
+  return 'Class$obf_' + (++$nextUniqId_);
+}
+
 exports = {
   equalsIgnoreCase,
-  compareToIgnoreCase
+  compareToIgnoreCase,
+  generateClassName
 };

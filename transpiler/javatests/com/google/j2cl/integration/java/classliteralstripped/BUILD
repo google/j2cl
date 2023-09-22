@@ -16,6 +16,4 @@ integration_test(
     enable_jvm_test = False,
     # TODO(b/202428351): Generics support
     enable_kt = False,
-    #  TODO(b/187981979): Class literal stripping is not implemented in Wasm.
-    enable_wasm = False,
 )

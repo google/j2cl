@@ -19,6 +19,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertNotEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertSame;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.TestUtils.isWasm;
 
 import jsinterop.annotations.JsEnum;
 import jsinterop.annotations.JsFunction;
@@ -88,6 +89,10 @@ public class Main {
   }
 
   private static void testArray() {
+    // TODO(b/184675805): enable for Wasm when class metadata is implemented for array
+    if (isWasm()) {
+      return;
+    }
     assertSame(Foo[].class, Foo[].class);
     assertSame(Object.class, Foo[].class.getSuperclass());
 
@@ -111,7 +116,11 @@ public class Main {
     Object o = MyJsEnum.VALUE;
     assertSame(MyJsEnum.class, o.getClass());
     assertSame(MyJsEnum.class, MyJsEnum.VALUE.getClass());
-    assertSame(null, o.getClass().getSuperclass());
+    if (isWasm()) {
+      assertSame(Enum.class, o.getClass().getSuperclass());
+    } else {
+      assertSame(null, o.getClass().getSuperclass());
+    }
 
     assertNonArrayLiteralType("MyJsEnum.VALUE.class", o.getClass());
   }
@@ -128,6 +137,10 @@ public class Main {
   }
 
   private static void testNative() {
+    // TODO(b/301385322) getClass() on Native JavaScript objects is not supported in Wasm.
+    if (isWasm()) {
+      return;
+    }
     assertClass(NativeInterface.class);
     assertClass(NativeFunction.class);
     assertClass(NativeClass.class);
@@ -139,16 +152,17 @@ public class Main {
     assertEquals(name, canonicalName);
   }
 
-  private static String[] seenNames = new String[0];
+  private static String[] seenNames = new String[100];
+  private static int seenNameCount;
 
   private static void assertClass(Class clazz) {
     assertClassName(clazz.getName(), clazz.getCanonicalName(), clazz.getSimpleName());
 
     // Check if the names are unique.
-    for (String seenName : seenNames) {
-      assertNotEquals(seenName, clazz.getName());
+    for (int i = 0; i < seenNameCount; i++) {
+      assertNotEquals(seenNames[i], clazz.getName());
     }
-    seenNames[seenNames.length + 1] = clazz.getName();
+    seenNames[seenNameCount++] = clazz.getName();
 
     assertNonArrayLiteralType("<class>", clazz);
   }

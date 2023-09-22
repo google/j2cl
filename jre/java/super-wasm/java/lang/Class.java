@@ -16,6 +16,7 @@ package java.lang;
 import java.io.Serializable;
 import java.lang.reflect.Type;
 import javaemul.internal.annotations.HasNoSideEffects;
+import jsinterop.annotations.JsMethod;
 
 /**
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html">the official Java API
@@ -24,7 +25,10 @@ import javaemul.internal.annotations.HasNoSideEffects;
 public final class Class<T> implements Type, Serializable {
   // TODO(b/183548819): Unify this with the closure version so that it does not need supersourcing.
 
-  private final String name;
+  private static final boolean SIMPLE_METADATA =
+      "SIMPLE".equals(System.getProperty("jre.classMetadata"));
+
+  private String nameOrNull;
   private final String primitiveShortName;
   private final boolean isEnum;
   private final boolean isInterface;
@@ -52,7 +56,7 @@ public final class Class<T> implements Type, Serializable {
     this.isInterface = isInterface;
     this.isPrimitive = isPrimitive;
     this.dimensionCount = dimensionCount;
-    this.name = name;
+    this.nameOrNull = name;
     this.primitiveShortName = primitiveShortName;
     this.superClass = superClass;
     this.leafType = leafType;
@@ -60,16 +64,16 @@ public final class Class<T> implements Type, Serializable {
 
   public String getName() {
     if (isArray()) {
-      String className = isPrimitive ? primitiveShortName : "L" + name + ";";
+      String className = isPrimitive ? primitiveShortName : "L" + getClassName() + ";";
       return repeatString("[", dimensionCount) + className;
     }
-    return name;
+    return getClassName();
   }
 
   // J2CL doesn't follow JLS strictly here and provides an approximation that is good enough for
   // debugging and testing uses.
   public String getCanonicalName() {
-    return name + repeatString("[]", dimensionCount);
+    return getClassName() + repeatString("[]", dimensionCount);
   }
 
   // J2CL doesn't follow JLS strictly here and provides an approximation that is good enough for
@@ -107,7 +111,7 @@ public final class Class<T> implements Type, Serializable {
               isInterface,
               isPrimitive,
               dimensions,
-              name,
+              getClassName(),
               primitiveShortName,
               Object.class,
               this);
@@ -151,6 +155,17 @@ public final class Class<T> implements Type, Serializable {
     return (isInterface() ? "interface " : isPrimitive() ? "" : "class ") + getName();
   }
 
+  @HasNoSideEffects
+  private String getClassName() {
+    if (nameOrNull == null) {
+      nameOrNull = generateClassName();
+    }
+    return nameOrNull;
+  }
+
+  @JsMethod(namespace = "j2wasm.StringUtils")
+  private static native String generateClassName();
+
   private static String repeatString(String str, int count) {
     String rv = "";
     for (int i = 0; i < count; i++) {
@@ -160,18 +175,34 @@ public final class Class<T> implements Type, Serializable {
   }
 
   static Class<?> createForPrimitive(String name, String primitiveName) {
+    if (!SIMPLE_METADATA) {
+      return createForStrippedMetadata(null);
+    }
     return new Class(false, false, true, 0, name, primitiveName, null, null);
   }
 
   static Class<?> createForClass(String name, Class<?> superClassLiteral) {
+    if (!SIMPLE_METADATA) {
+      return createForStrippedMetadata(superClassLiteral);
+    }
     return new Class(false, false, false, 0, name, null, superClassLiteral, null);
   }
 
   static Class<?> createForEnum(String name) {
+    if (!SIMPLE_METADATA) {
+      return createForStrippedMetadata(Enum.class);
+    }
     return new Class(true, false, false, 0, name, null, Enum.class, null);
   }
 
   static Class<?> createForInterface(String name) {
+    if (!SIMPLE_METADATA) {
+      return createForStrippedMetadata(null);
+    }
     return new Class(false, true, false, 0, name, null, null, null);
+  }
+
+  private static Class<?> createForStrippedMetadata(Class<?> superClassLiteral) {
+    return new Class(false, false, false, 0, null, null, superClassLiteral, null);
   }
 }

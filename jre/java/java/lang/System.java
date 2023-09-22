@@ -63,9 +63,16 @@ public final class System {
     checkArrayType(srcType.isArray(), "srcType is not an array");
     checkArrayType(destType.isArray(), "destType is not an array");
 
-    Class<?> srcComp = srcType.getComponentType();
-    Class<?> destComp = destType.getComponentType();
-    checkArrayType(arrayTypeMatch(srcComp, destComp), "Array types don't match");
+    boolean isObjectArray = src instanceof Object[];
+    boolean arrayTypeMatch;
+    if (isObjectArray) {
+      // Destination also should be Object[]
+      arrayTypeMatch = dest instanceof Object[];
+    } else {
+      // Source is primitive; ensure that components are exactly match;
+      arrayTypeMatch = srcType.getComponentType() == destType.getComponentType();
+    }
+    checkArrayType(arrayTypeMatch, "Array types don't match");
 
     checkArrayCopyIndicies(src, srcOfs, dest, destOfs, len);
 
@@ -74,7 +81,7 @@ public final class System {
      * can copy them in native code for speed. Otherwise, we have to copy them
      * in Java so we get appropriate errors.
      */
-    if (!srcComp.isPrimitive() && !srcType.equals(destType)) {
+    if (isObjectArray && !srcType.equals(destType)) {
       // copy in Java to make sure we get ArrayStoreExceptions if the values
       // aren't compatible
       Object[] srcArray = (Object[]) src;
@@ -151,13 +158,5 @@ public final class System {
 
   public static void setOut(PrintStream out) {
     System.out = out;
-  }
-
-  private static boolean arrayTypeMatch(Class<?> srcComp, Class<?> destComp) {
-    if (srcComp.isPrimitive()) {
-      return srcComp.equals(destComp);
-    } else {
-      return !destComp.isPrimitive();
-    }
   }
 }

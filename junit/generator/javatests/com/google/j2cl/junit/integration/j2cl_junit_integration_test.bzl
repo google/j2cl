@@ -144,6 +144,7 @@ def j2cl_test_integration_test_data(
             runtime_deps = [":%s-lib-j2wasm" % name],
             extra_defs = extra_defs,
             optimize = True,
+            wasm_defs = {"jre.classMetadata": "SIMPLE"},
             javacopts = [
                 "-XepOpt:CheckReturnValue:CheckAllConstructors=false",  # b/226969262
             ],

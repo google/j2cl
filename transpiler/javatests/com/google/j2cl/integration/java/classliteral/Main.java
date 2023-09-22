@@ -205,8 +205,8 @@ public class Main {
   private interface NativeInterface {}
 
   private static void testNative() {
-    // getClass() and friends on Native JavaScript objects is not supported in Wasm; native types
-    // don't apply in the context of the JVM.
+    // TODO(b/301385322) getClass() on Native JavaScript objects is not supported in Wasm.
+    // Native types don't apply in the context of the JVM.
     if (!isJavaScript()) {
       return;
     }
