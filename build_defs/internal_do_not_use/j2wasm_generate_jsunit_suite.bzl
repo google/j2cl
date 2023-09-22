@@ -92,6 +92,7 @@ def j2wasm_generate_jsunit_suite(
         name = j2wasm_application_name,
         deps = [":" + name + "_lib"],
         defines = test_defines,
+        enable_debug_info = True,
         entry_points = [
             ".*_Adapter#test.*",
             ".*_Adapter#setUp.*",
