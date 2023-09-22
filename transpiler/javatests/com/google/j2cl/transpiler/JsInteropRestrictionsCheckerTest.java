@@ -3302,7 +3302,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         .assertNoWarnings();
   }
 
-  public void testJsAsyncSucceeeds() {
+  public void testJsAsyncSucceeds() {
     assertTranspileSucceeds(
             "test.Buggy",
             "import jsinterop.annotations.*;",

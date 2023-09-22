@@ -166,7 +166,7 @@ public final class LambdaAdaptorTypeDescriptors {
 
     MethodDescriptor functionalInterfaceMethodDescriptor =
         functionalInterfaceTypeDescriptor.getSingleAbstractMethodDescriptor();
-    // TODO(rluble): Migrate to MethodDescriptor.tranform.
+    // TODO(rluble): Migrate to MethodDescriptor.transform.
     return MethodDescriptor.Builder.from(functionalInterfaceMethodDescriptor)
         .setNative(false)
         // This is the declaration.
