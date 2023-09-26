@@ -75,17 +75,4 @@ public class JsFunctionOptimization {
       }
     };
   }
-
-  @JsFunction
-  interface Consumer {
-    <T> void accept(T t);
-  }
-
-  public void testParameterizedMethod() {
-    Consumer c =
-        new Consumer() {
-          @Override
-          public <T> void accept(T t) {}
-        };
-  }
 }

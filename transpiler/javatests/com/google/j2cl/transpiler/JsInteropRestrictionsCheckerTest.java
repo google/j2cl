@@ -1626,8 +1626,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "    T extends Comparable<T> & TypeVariableWithIntersectionBound<T>> {",
             "  void m(T f);",
             "}",
-            "@JsFunction interface JsFunctionWithRecursiveBoundInMethod {",
-            "  <T extends JsFunctionWithRecursiveBoundInMethod> void m(T f);",
+            "@JsFunction interface JsFunctionWithMethodDefinedTypeVariable {",
+            "  <T> void m();",
             "}",
             "class Main {",
             "  public static void main() {",
@@ -1695,8 +1695,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "JsFunction 'void IndirectReferenceThroughJsFunction.m("
                 + "JsFunctionNotInvolvedInCycle<IndirectReferenceThroughJsFunction> f)' cannot "
                 + "refer recursively to itself (b/153591461).",
-            "JsFunction 'void JsFunctionWithRecursiveBoundInMethod.m(T f)' cannot refer "
-                + "recursively to itself (b/153591461).");
+            "JsFunction 'void JsFunctionWithMethodDefinedTypeVariable.m()' cannot declare type"
+                + " parameters. Type parameters must be declared on the enclosing interface"
+                + " instead.");
   }
 
   public void testNativeJsTypeStaticInitializerSucceeds() {

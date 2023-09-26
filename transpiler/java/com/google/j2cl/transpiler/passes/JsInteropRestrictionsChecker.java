@@ -1554,7 +1554,17 @@ public class JsInteropRestrictionsChecker {
     Set<TypeDeclaration> foundJsFunctions = new LinkedHashSet<>();
 
     Queue<MethodDescriptor> unexploredJsFunctionMethods = new ArrayDeque<>();
-    unexploredJsFunctionMethods.offer(method.getDescriptor());
+    MethodDescriptor jsFunctionMethodDescriptor = method.getDescriptor();
+
+    if (!jsFunctionMethodDescriptor.getTypeParameterTypeDescriptors().isEmpty()) {
+      problems.error(
+          method.getSourcePosition(),
+          "JsFunction '%s' cannot declare type parameters. Type parameters must "
+              + "be declared on the enclosing interface instead.",
+          method.getReadableDescription());
+      return;
+    }
+    unexploredJsFunctionMethods.offer(jsFunctionMethodDescriptor);
 
     MethodDescriptor jsFunctionMethod;
     while ((jsFunctionMethod = unexploredJsFunctionMethods.poll()) != null) {
