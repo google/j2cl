@@ -13,17 +13,5 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package packageinfo;
-
-import jsinterop.annotations.JsType;
-import packageinfo.thirdpartylib.Bar;
-
-@JsType
-public class Outer {
-  public static void main(String... args) {
-    Bar.bar();
-  }
-
-  @JsType
-  public class Inner {}
-}
+@jsinterop.annotations.JsPackage(namespace = "readable.thirdpartylib")
+package packageinfo.thirdpartylib;

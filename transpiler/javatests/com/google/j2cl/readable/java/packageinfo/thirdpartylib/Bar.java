@@ -13,17 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package packageinfo;
+package packageinfo.thirdpartylib;
 
 import jsinterop.annotations.JsType;
-import packageinfo.thirdpartylib.Bar;
 
 @JsType
-public class Outer {
-  public static void main(String... args) {
-    Bar.bar();
-  }
-
-  @JsType
-  public class Inner {}
+public class Bar {
+  public static void bar() {}
 }

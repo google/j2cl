@@ -3,6 +3,10 @@ goog.module('readable.packageinfo.Outer$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Bar = goog.forwardDeclare('readable.thirdpartylib.Bar$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+
 class Outer extends j_l_Object {
  
  constructor() {
@@ -13,6 +17,12 @@ class Outer extends j_l_Object {
  /** @nodts */
  $ctor__packageinfo_Outer__void() {
   this.$ctor__java_lang_Object__void();
+ }
+ 
+ static main(.../** ...?string */ args) {
+  Outer.$clinit();
+  $Arrays.$stampType(args, j_l_String, 1);
+  Bar.bar();
  }
  /** @nodts */
  static $clinit() {
@@ -26,7 +36,11 @@ class Outer extends j_l_Object {
  }
  
  /** @nodts */
- static $loadModules() {}
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  Bar = goog.module.get('readable.thirdpartylib.Bar$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+ }
 }
 $Util.$setClassMetadata(Outer, 'packageinfo.Outer');
 

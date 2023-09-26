@@ -48,6 +48,22 @@
   ))
  )
 
+ ;;; Code for packageinfo.thirdpartylib.Bar [type definition]
+ (type $packageinfo.thirdpartylib.Bar (sub $java.lang.Object (struct
+  (field $vtable (ref $packageinfo.thirdpartylib.Bar.vtable))
+  (field $itable (ref $itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  ))
+ )
+ (type $packageinfo.thirdpartylib.Bar.vtable (sub $java.lang.Object.vtable (struct
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  ))
+ )
+
 ;;; Code for packageinfo.Outer [vtable.init]
 (global $packageinfo.Outer.vtable (ref $packageinfo.Outer.vtable)
  (struct.new $packageinfo.Outer.vtable
@@ -81,6 +97,17 @@
  )
 )
 
+;;; Code for packageinfo.thirdpartylib.Bar [vtable.init]
+(global $packageinfo.thirdpartylib.Bar.vtable (ref $packageinfo.thirdpartylib.Bar.vtable)
+ (struct.new $packageinfo.thirdpartylib.Bar.vtable
+  (ref.func $$getClassImpl__java_lang_Class@packageinfo.thirdpartylib.Bar)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+
 ;;; Code for packageinfo.Outer [static fields]
 (global $f_$initialized__packageinfo_Outer (mut i32) (i32.const 0))
 (global $f_$class__packageinfo_Outer (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
@@ -96,19 +123,24 @@
 (global $f_$class__packageinfo_subpackage_Foo (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
 (global $f_$string_|packageinfo....|__packageinfo_subpackage_Foo (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
+;;; Code for packageinfo.thirdpartylib.Bar [static fields]
+(global $f_$initialized__packageinfo_thirdpartylib_Bar (mut i32) (i32.const 0))
+(global $f_$class__packageinfo_thirdpartylib_Bar (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
+(global $f_$string_|packageinfo....|__packageinfo_thirdpartylib_Bar (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+
 ;;; Code for packageinfo.Outer [methods]
 
 ;;; Outer Outer.$create()
 (func $$create__@packageinfo.Outer
  (result (ref null $packageinfo.Outer))
- ;;@ packageinfo/Outer.java:21:13
+ ;;@ packageinfo/Outer.java:22:13
  (local $$instance (ref null $packageinfo.Outer))
  (block
-  ;;@ packageinfo/Outer.java:21:13
+  ;;@ packageinfo/Outer.java:22:13
   (local.set $$instance (struct.new $packageinfo.Outer (ref.as_non_null (global.get $packageinfo.Outer.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ packageinfo/Outer.java:21:13
+  ;;@ packageinfo/Outer.java:22:13
   (call $$ctor__void_$p_packageinfo_Outer@packageinfo.Outer (ref.as_non_null (local.get $$instance)))
-  ;;@ packageinfo/Outer.java:21:13
+  ;;@ packageinfo/Outer.java:22:13
   (return (local.get $$instance))
  )
 )
@@ -116,29 +148,41 @@
 ;;; void Outer.$ctor()
 (func $$ctor__void_$p_packageinfo_Outer@packageinfo.Outer
  (param $this (ref null $packageinfo.Outer))
- ;;@ packageinfo/Outer.java:21:13
+ ;;@ packageinfo/Outer.java:22:13
  (block
-  ;;@ packageinfo/Outer.java:21:13
+  ;;@ packageinfo/Outer.java:22:13
   (call $$clinit__void@packageinfo.Outer )
-  ;;@ packageinfo/Outer.java:21:13
+  ;;@ packageinfo/Outer.java:22:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Outer.main(String... args)
+(func $m_main__arrayOf_java_lang_String__void@packageinfo.Outer
+ (param $args (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ packageinfo/Outer.java:23:21
+ (block
+  ;;@ packageinfo/Outer.java:23:42
+  (call $$clinit__void@packageinfo.Outer )
+  ;;@ packageinfo/Outer.java:24:4
+  (call $m_bar__void@packageinfo.thirdpartylib.Bar )
  )
 )
 
 ;;; void Outer.$clinit()
 (func $$clinit__void@packageinfo.Outer
- ;;@ packageinfo/Outer.java:21:13
+ ;;@ packageinfo/Outer.java:22:13
  (block
-  ;;@ packageinfo/Outer.java:21:13
+  ;;@ packageinfo/Outer.java:22:13
   (if (global.get $f_$initialized__packageinfo_Outer)
    (then
-    ;;@ packageinfo/Outer.java:21:13
+    ;;@ packageinfo/Outer.java:22:13
     (return )
    )
   )
-  ;;@ packageinfo/Outer.java:21:13
+  ;;@ packageinfo/Outer.java:22:13
   (global.set $f_$initialized__packageinfo_Outer (i32.const 1))
-  ;;@ packageinfo/Outer.java:21:13
+  ;;@ packageinfo/Outer.java:22:13
   (call $$clinit__void@java.lang.Object )
  )
 )
@@ -188,14 +232,14 @@
 (func $$create__packageinfo_Outer@packageinfo.Outer.Inner
  (param $$outer_this (ref null $packageinfo.Outer))
  (result (ref null $packageinfo.Outer.Inner))
- ;;@ packageinfo/Outer.java:24:15
+ ;;@ packageinfo/Outer.java:28:15
  (local $$instance (ref null $packageinfo.Outer.Inner))
  (block
-  ;;@ packageinfo/Outer.java:24:15
+  ;;@ packageinfo/Outer.java:28:15
   (local.set $$instance (struct.new $packageinfo.Outer.Inner (ref.as_non_null (global.get $packageinfo.Outer.Inner.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $packageinfo.Outer)))
-  ;;@ packageinfo/Outer.java:24:15
+  ;;@ packageinfo/Outer.java:28:15
   (call $$ctor__packageinfo_Outer__void_$p_packageinfo_Outer_Inner@packageinfo.Outer.Inner (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;;@ packageinfo/Outer.java:24:15
+  ;;@ packageinfo/Outer.java:28:15
   (return (local.get $$instance))
  )
 )
@@ -204,31 +248,31 @@
 (func $$ctor__packageinfo_Outer__void_$p_packageinfo_Outer_Inner@packageinfo.Outer.Inner
  (param $this (ref null $packageinfo.Outer.Inner))
  (param $$outer_this (ref null $packageinfo.Outer))
- ;;@ packageinfo/Outer.java:24:15
+ ;;@ packageinfo/Outer.java:28:15
  (block
-  ;;@ packageinfo/Outer.java:24:15
+  ;;@ packageinfo/Outer.java:28:15
   (call $$clinit__void@packageinfo.Outer.Inner )
-  ;;@ packageinfo/Outer.java:24:15
+  ;;@ packageinfo/Outer.java:28:15
   (struct.set $packageinfo.Outer.Inner $$outer_this__packageinfo_Outer_Inner (local.get $this) (local.get $$outer_this))
-  ;;@ packageinfo/Outer.java:24:15
+  ;;@ packageinfo/Outer.java:28:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void Inner.$clinit()
 (func $$clinit__void@packageinfo.Outer.Inner
- ;;@ packageinfo/Outer.java:24:15
+ ;;@ packageinfo/Outer.java:28:15
  (block
-  ;;@ packageinfo/Outer.java:24:15
+  ;;@ packageinfo/Outer.java:28:15
   (if (global.get $f_$initialized__packageinfo_Outer_Inner)
    (then
-    ;;@ packageinfo/Outer.java:24:15
+    ;;@ packageinfo/Outer.java:28:15
     (return )
    )
   )
-  ;;@ packageinfo/Outer.java:24:15
+  ;;@ packageinfo/Outer.java:28:15
   (global.set $f_$initialized__packageinfo_Outer_Inner (i32.const 1))
-  ;;@ packageinfo/Outer.java:24:15
+  ;;@ packageinfo/Outer.java:28:15
   (call $$clinit__void@java.lang.Object )
  )
 )
@@ -367,5 +411,100 @@
    )
   )
   (return (global.get $f_$string_|packageinfo....|__packageinfo_subpackage_Foo))
+ )
+)
+
+;;; Code for packageinfo.thirdpartylib.Bar [methods]
+
+;;; Bar Bar.$create()
+(func $$create__@packageinfo.thirdpartylib.Bar
+ (result (ref null $packageinfo.thirdpartylib.Bar))
+ ;;@ packageinfo/thirdpartylib/Bar.java:21:13
+ (local $$instance (ref null $packageinfo.thirdpartylib.Bar))
+ (block
+  ;;@ packageinfo/thirdpartylib/Bar.java:21:13
+  (local.set $$instance (struct.new $packageinfo.thirdpartylib.Bar (ref.as_non_null (global.get $packageinfo.thirdpartylib.Bar.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  ;;@ packageinfo/thirdpartylib/Bar.java:21:13
+  (call $$ctor__void_$p_packageinfo_thirdpartylib_Bar@packageinfo.thirdpartylib.Bar (ref.as_non_null (local.get $$instance)))
+  ;;@ packageinfo/thirdpartylib/Bar.java:21:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Bar.$ctor()
+(func $$ctor__void_$p_packageinfo_thirdpartylib_Bar@packageinfo.thirdpartylib.Bar
+ (param $this (ref null $packageinfo.thirdpartylib.Bar))
+ ;;@ packageinfo/thirdpartylib/Bar.java:21:13
+ (block
+  ;;@ packageinfo/thirdpartylib/Bar.java:21:13
+  (call $$clinit__void@packageinfo.thirdpartylib.Bar )
+  ;;@ packageinfo/thirdpartylib/Bar.java:21:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Bar.bar()
+(func $m_bar__void@packageinfo.thirdpartylib.Bar
+ ;;@ packageinfo/thirdpartylib/Bar.java:22:21
+ (block
+  ;;@ packageinfo/thirdpartylib/Bar.java:22:27
+  (call $$clinit__void@packageinfo.thirdpartylib.Bar )
+ )
+)
+
+;;; void Bar.$clinit()
+(func $$clinit__void@packageinfo.thirdpartylib.Bar
+ ;;@ packageinfo/thirdpartylib/Bar.java:21:13
+ (block
+  ;;@ packageinfo/thirdpartylib/Bar.java:21:13
+  (if (global.get $f_$initialized__packageinfo_thirdpartylib_Bar)
+   (then
+    ;;@ packageinfo/thirdpartylib/Bar.java:21:13
+    (return )
+   )
+  )
+  ;;@ packageinfo/thirdpartylib/Bar.java:21:13
+  (global.set $f_$initialized__packageinfo_thirdpartylib_Bar (i32.const 1))
+  ;;@ packageinfo/thirdpartylib/Bar.java:21:13
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<T> Bar.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@packageinfo.thirdpartylib.Bar
+ (result (ref null $java.lang.Class))
+ (block
+  (if (ref.eq (global.get $f_$class__packageinfo_thirdpartylib_Bar) (ref.null $java.lang.Class))
+   (then
+    (global.set $f_$class__packageinfo_thirdpartylib_Bar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|packageinfo....|__java_lang_String (ref.func $$getString_|packageinfo....|__java_lang_String@packageinfo.thirdpartylib.Bar) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  (return (global.get $f_$class__packageinfo_thirdpartylib_Bar))
+ )
+)
+
+;;; Class<?> Bar.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@packageinfo.thirdpartylib.Bar
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $packageinfo.thirdpartylib.Bar))
+ (local.set $this (ref.cast (ref $packageinfo.thirdpartylib.Bar) (local.get $this.untyped)))
+ (block
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@packageinfo.thirdpartylib.Bar) ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@packageinfo.thirdpartylib.Bar)
+
+;;; String Bar.$getString_|packageinfo....|()
+(func $$getString_|packageinfo....|__java_lang_String@packageinfo.thirdpartylib.Bar
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.eq (global.get $f_$string_|packageinfo....|__packageinfo_thirdpartylib_Bar) (ref.null $java.lang.String))
+   (then
+    (global.set $f_$string_|packageinfo....|__packageinfo_thirdpartylib_Bar (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "packageinfo.thirdpartylib.Bar")))
+   )
+  )
+  (return (global.get $f_$string_|packageinfo....|__packageinfo_thirdpartylib_Bar))
  )
 )
