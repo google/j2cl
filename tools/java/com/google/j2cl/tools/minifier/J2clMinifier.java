@@ -92,7 +92,7 @@ public class J2clMinifier {
         // Trim the trailing whitespace since it doesn't break sourcemaps.
         nextIndex = trimTrailingWhitespace(nextIndex);
 
-        // Also move the statetementStartIndex to point new line if it was looking at the
+        // Also move the statementStartIndex to point new line if it was looking at the
         // whitespace. This also simplifies the statement matches.
         if (statementStartIndex == nextIndex) {
           statementStartIndex = nextIndex + 1;
