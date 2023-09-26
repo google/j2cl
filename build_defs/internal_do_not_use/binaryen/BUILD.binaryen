@@ -1,0 +1,161 @@
+load("@rules_license//rules:license.bzl", "license")
+load("@rules_python//python:defs.bzl", "py_binary")
+
+licenses(["notice"])
+
+package(
+    default_applicable_licenses = [":package_license"],
+    default_visibility = ["//visibility:public"],
+    features = ["-use_header_modules"],
+)
+
+license(
+    name = "package_license",
+    package_name = "binaryen",
+)
+
+exports_files(["LICENSE"])
+
+BINARYEN_COPTS = [
+    "-fexceptions",
+    "-std=c++17",
+]
+
+cc_library(
+    name = "binaryen_lib",
+    srcs = glob(
+        [
+            "src/*.cpp",
+            "src/**/*.cpp",
+        ],
+        exclude = [
+            "src/tools/**",
+            "src/support/suffix_tree.cpp",
+            "src/support/suffix_tree_node.cpp",
+        ],
+    ) + [
+        ":WasmIntrinsics.cpp",
+    ],
+    hdrs = glob(
+        [
+            "src/**/*.h",
+        ],
+        exclude = [
+            "src/tools/**",
+            "src/support/suffix_tree.h",
+            "src/support/suffix_tree_node.h",
+        ],
+    ) + [":src/config.h"],
+    copts = BINARYEN_COPTS,
+    defines = ["USE_STANDARD_GC_ENCODINGS"],
+    includes = ["src"],
+    textual_hdrs = glob([
+        "src/**/*.inc",
+        "src/**/*.def",
+    ]),
+)
+
+cc_library(
+    name = "binaryen_lib-legacy",
+    srcs = glob(
+        [
+            "src/*.cpp",
+            "src/**/*.cpp",
+        ],
+        exclude = [
+            "src/tools/**",
+            "src/support/suffix_tree.cpp",
+            "src/support/suffix_tree_node.cpp",
+        ],
+    ) + [
+        ":WasmIntrinsics.cpp",
+    ],
+    hdrs = glob(
+        [
+            "src/**/*.h",
+        ],
+        exclude = [
+            "src/tools/**",
+            "src/support/suffix_tree.h",
+            "src/support/suffix_tree_node.h",
+        ],
+    ) + [":src/config.h"],
+    copts = BINARYEN_COPTS,
+    defines = ["USE_LEGACY_GC_ENCODINGS"],
+    includes = ["src"],
+    textual_hdrs = glob([
+        "src/**/*.inc",
+        "src/**/*.def",
+    ]),
+)
+
+cc_binary(
+    name = "wasm-opt",
+    srcs = [
+        "src/tools/execution-results.h",
+        "src/tools/fuzzing.h",
+        "src/tools/fuzzing/fuzzing.cpp",
+        "src/tools/fuzzing/heap-types.cpp",
+        "src/tools/fuzzing/heap-types.h",
+        "src/tools/fuzzing/parameters.h",
+        "src/tools/fuzzing/random.cpp",
+        "src/tools/fuzzing/random.h",
+        "src/tools/js-wrapper.h",
+        "src/tools/optimization-options.h",
+        "src/tools/spec-wrapper.h",
+        "src/tools/tool-options.h",
+        "src/tools/wasm-opt.cpp",
+        "src/tools/wasm2c-wrapper.h",
+    ],
+    copts = BINARYEN_COPTS,
+    includes = ["src/tools"],
+    deps = [":binaryen_lib"],
+)
+
+cc_binary(
+    name = "wasm-opt-legacy",
+    srcs = [
+        "src/tools/execution-results.h",
+        "src/tools/fuzzing.h",
+        "src/tools/fuzzing/fuzzing.cpp",
+        "src/tools/fuzzing/heap-types.cpp",
+        "src/tools/fuzzing/heap-types.h",
+        "src/tools/fuzzing/parameters.h",
+        "src/tools/fuzzing/random.cpp",
+        "src/tools/fuzzing/random.h",
+        "src/tools/js-wrapper.h",
+        "src/tools/optimization-options.h",
+        "src/tools/spec-wrapper.h",
+        "src/tools/tool-options.h",
+        "src/tools/wasm-opt.cpp",
+        "src/tools/wasm2c-wrapper.h",
+    ],
+    copts = BINARYEN_COPTS,
+    includes = ["src/tools"],
+    deps = [":binaryen_lib-legacy"],
+)
+
+py_binary(
+    name = "generate_intrinsics",
+    srcs = ["generate_intrinsics.py"],
+    python_version = "PY3",
+    deps = ["@com_google_absl_py//absl:app"],
+)
+
+genrule(
+    name = "wasm-intrinsics",
+    srcs = [
+        "src/passes/wasm-intrinsics.wat",
+        "src/passes/WasmIntrinsics.cpp.in",
+    ],
+    outs = ["WasmIntrinsics.cpp"],
+    cmd = "$(location :generate_intrinsics) $(SRCS) $(location :WasmIntrinsics.cpp)",
+    tools = [":generate_intrinsics"],
+)
+
+# Constructs a dummy version string
+genrule(
+    name = "config",
+    outs = ["src/config.h"],
+    cmd = """echo '#define PROJECT_VERSION "HEAD"' >> $@""",
+)
