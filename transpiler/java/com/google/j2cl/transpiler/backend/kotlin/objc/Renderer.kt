@@ -15,71 +15,93 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin.objc
 
-import com.google.j2cl.transpiler.backend.kotlin.source.Source
-
-/** Renders an object of type {@code T} collecting its dependencies in a mutable set. */
-class Renderer<out V>(val renderAddingDependencies: (MutableSet<Dependency>) -> V)
-
-/** Renderer of the given value with no dependencies. */
-fun <V> rendererOf(value: V): Renderer<V> = Renderer { value }
-
-/** Renderer of this value with the given dependency. */
-infix fun <V> V.rendererWith(dependency: Dependency): Renderer<V> = Renderer { dependencies ->
-  also { dependencies.add(dependency) }
-}
-
 /**
- * Renderer which maps value of this renderer using given function and adds dependencies from both
- * this and the mapped renderer.
+ * Renderer of [V] and its dependencies.
+ *
+ * Renderers are designed to be combined using [map], [bind], [combine] and [flatten] functions.
+ * Dependencies can be added with [plus] operator.
+ *
+ * The final rendering can be executed using [renderWithDependencies] function, which will return
+ * the rendered [V] and a set containing all its dependencies.
  */
-fun <I, O> Renderer<I>.bind(fn: (I) -> Renderer<O>): Renderer<O> = Renderer { dependencies ->
-  fn(renderAddingDependencies(dependencies)).renderAddingDependencies(dependencies)
-}
-
-/** Renderer which maps value of this renderer keeping its dependencies. */
-fun <I, O> Renderer<I>.map(fn: (I) -> O): Renderer<O> = bind { rendererOf(fn(it)) }
-
-fun <I1, I2, O> map2(
-  renderer1: Renderer<I1>,
-  renderer2: Renderer<I2>,
-  fn: (I1, I2) -> O
-): Renderer<O> = renderer1.bind { source1 -> renderer2.map { source2 -> fn(source1, source2) } }
-
-fun <I1, I2, I3, O> map3(
-  renderer1: Renderer<I1>,
-  renderer2: Renderer<I2>,
-  renderer3: Renderer<I3>,
-  fn: (I1, I2, I3) -> O
-): Renderer<O> =
-  renderer1.bind { source1 ->
-    renderer2.bind { source2 -> renderer3.map { source3 -> fn(source1, source2, source3) } }
-  }
-
-fun <I1, I2, I3, I4, O> map4(
-  renderer1: Renderer<I1>,
-  renderer2: Renderer<I2>,
-  renderer3: Renderer<I3>,
-  renderer4: Renderer<I4>,
-  fn: (I1, I2, I3, I4) -> O
-): Renderer<O> =
-  renderer1.bind { source1 ->
-    renderer2.bind { source2 ->
-      renderer3.bind { source3 ->
-        renderer4.map { source4 -> fn(source1, source2, source3, source4) }
-      }
+class Renderer<out V>(
+  /** A function which renders [V] adding its dependencies to a mutable set. */
+  private val renderAddingDependenciesTo: (MutableSet<Dependency>) -> V
+) {
+  /** Returns a pair with rendered [V] and a set of its dependencies. */
+  fun renderWithDependencies(): Pair<V, Set<Dependency>> =
+    mutableSetOf<Dependency>().let { dependencies ->
+      renderAddingDependenciesTo(dependencies) to dependencies.toSet()
     }
+
+  /** Returns renderer of the same value including the given dependency. */
+  operator fun plus(dependency: Dependency): Renderer<V> = Renderer { dependencies ->
+    renderAddingDependenciesTo(dependencies).also { dependencies.add(dependency) }
   }
 
-val <V> Iterable<Renderer<V>>.flatten: Renderer<List<V>>
-  get() = Renderer { dependencies -> map { it.renderAddingDependencies(dependencies) } }
+  /**
+   * Rerturns renderer which maps value of this renderer using [fn], while keeping its dependencies.
+   */
+  infix fun <O> map(fn: (V) -> O): Renderer<O> = bind { rendererOf(fn(it)) }
 
-val emptyRenderer: Renderer<Source>
-  get() = rendererOf(Source.EMPTY)
+  /**
+   * Returns renderer which maps value of this renderer using [fn] and adds dependencies from both
+   * this and the mapped renderer.
+   */
+  infix fun <O> bind(fn: (V) -> Renderer<O>): Renderer<O> = Renderer { dependencies ->
+    fn(renderAddingDependenciesTo(dependencies)).renderAddingDependenciesTo(dependencies)
+  }
 
-fun Renderer<Source>.ifNotEmpty(fn: (Source) -> Renderer<Source>): Renderer<Source> = bind {
-  if (it.isEmpty()) {
-    emptyRenderer
-  } else {
-    fn(it)
+  companion object {
+    /** Returns renderer of [value] with no dependencies. */
+    fun <V> rendererOf(value: V): Renderer<V> = Renderer { value }
+
+    /**
+     * Returns renderer which combines values rendered by [renderer1] and [renderer2] using [fn]
+     * adding all of their dependencies.
+     */
+    fun <I1, I2, O> combine(
+      renderer1: Renderer<I1>,
+      renderer2: Renderer<I2>,
+      fn: (I1, I2) -> O
+    ): Renderer<O> = renderer1.bind { source1 -> renderer2.map { source2 -> fn(source1, source2) } }
+
+    /**
+     * Returns renderer which combines values rendered by [renderer1], [renderer2] and [renderer3]
+     * using [fn] adding all of their dependencies.
+     */
+    fun <I1, I2, I3, O> combine(
+      renderer1: Renderer<I1>,
+      renderer2: Renderer<I2>,
+      renderer3: Renderer<I3>,
+      fn: (I1, I2, I3) -> O
+    ): Renderer<O> =
+      renderer1.bind { source1 ->
+        renderer2.bind { source2 -> renderer3.map { source3 -> fn(source1, source2, source3) } }
+      }
+
+    /**
+     * Returns renderer which combines values rendered by [renderer1], [renderer2], [renderer3] and
+     * [renderer4] using [fn] adding all of their dependencies.
+     */
+    fun <I1, I2, I3, I4, O> combine(
+      renderer1: Renderer<I1>,
+      renderer2: Renderer<I2>,
+      renderer3: Renderer<I3>,
+      renderer4: Renderer<I4>,
+      fn: (I1, I2, I3, I4) -> O
+    ): Renderer<O> =
+      renderer1.bind { source1 ->
+        renderer2.bind { source2 ->
+          renderer3.bind { source3 ->
+            renderer4.map { source4 -> fn(source1, source2, source3, source4) }
+          }
+        }
+      }
+
+    /** Flattens renderers of [V] into a renderer of [V]'s. */
+    fun <V> Iterable<Renderer<V>>.flatten(): Renderer<List<V>> = Renderer { dependencies ->
+      map { it.renderAddingDependenciesTo(dependencies) }
+    }
   }
 }

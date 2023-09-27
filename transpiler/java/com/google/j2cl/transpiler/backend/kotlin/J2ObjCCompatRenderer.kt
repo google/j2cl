@@ -47,21 +47,20 @@ import com.google.j2cl.transpiler.backend.kotlin.common.titleCase
 import com.google.j2cl.transpiler.backend.kotlin.objc.Dependency
 import com.google.j2cl.transpiler.backend.kotlin.objc.Import
 import com.google.j2cl.transpiler.backend.kotlin.objc.Renderer
+import com.google.j2cl.transpiler.backend.kotlin.objc.Renderer.Companion.combine
+import com.google.j2cl.transpiler.backend.kotlin.objc.Renderer.Companion.flatten
+import com.google.j2cl.transpiler.backend.kotlin.objc.Renderer.Companion.rendererOf
 import com.google.j2cl.transpiler.backend.kotlin.objc.className
 import com.google.j2cl.transpiler.backend.kotlin.objc.comment
 import com.google.j2cl.transpiler.backend.kotlin.objc.compatibilityAlias
 import com.google.j2cl.transpiler.backend.kotlin.objc.defineAlias
 import com.google.j2cl.transpiler.backend.kotlin.objc.dependency
-import com.google.j2cl.transpiler.backend.kotlin.objc.emptyRenderer
 import com.google.j2cl.transpiler.backend.kotlin.objc.expressionStatement
-import com.google.j2cl.transpiler.backend.kotlin.objc.flatten
 import com.google.j2cl.transpiler.backend.kotlin.objc.functionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.objc.getProperty
 import com.google.j2cl.transpiler.backend.kotlin.objc.id
 import com.google.j2cl.transpiler.backend.kotlin.objc.localImport
 import com.google.j2cl.transpiler.backend.kotlin.objc.macroDefine
-import com.google.j2cl.transpiler.backend.kotlin.objc.map
-import com.google.j2cl.transpiler.backend.kotlin.objc.map2
 import com.google.j2cl.transpiler.backend.kotlin.objc.methodCall
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsAssumeNonnull
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsCopying
@@ -75,8 +74,6 @@ import com.google.j2cl.transpiler.backend.kotlin.objc.nsObject
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsString
 import com.google.j2cl.transpiler.backend.kotlin.objc.pointer
 import com.google.j2cl.transpiler.backend.kotlin.objc.protocolName
-import com.google.j2cl.transpiler.backend.kotlin.objc.rendererOf
-import com.google.j2cl.transpiler.backend.kotlin.objc.rendererWith
 import com.google.j2cl.transpiler.backend.kotlin.objc.returnStatement
 import com.google.j2cl.transpiler.backend.kotlin.objc.semicolonEnded
 import com.google.j2cl.transpiler.backend.kotlin.objc.sourceWithDependencies
@@ -104,7 +101,7 @@ private val CompilationUnit.dependenciesAndDeclarationsSource: Source
   get() = declarationsRenderer.sourceWithDependencies
 
 private val CompilationUnit.declarationsRenderer: Renderer<Source>
-  get() = nsAssumeNonnull(declarationsRenderers.flatten.map { emptyLineSeparated(it) })
+  get() = nsAssumeNonnull(declarationsRenderers.flatten().map { emptyLineSeparated(it) })
 
 private val CompilationUnit.declarationsRenderers: List<Renderer<Source>>
   get() = includedTypes.flatMap(Type::declarationsRenderers)
@@ -183,7 +180,7 @@ private val FieldDescriptor.getPropertyObjCName: String
     }
 
 private val Field.fieldGetFunctionRenderer: Renderer<Source>
-  get() = descriptor.takeIf { it.shouldRender }?.getFunctionRenderer ?: emptyRenderer
+  get() = descriptor.takeIf { it.shouldRender }?.getFunctionRenderer ?: rendererOf(Source.EMPTY)
 
 private val FieldDescriptor.getFunctionRenderer: Renderer<Source>
   get() =
@@ -204,7 +201,9 @@ private val FieldDescriptor.setPropertyObjCName: String
   get() = objCName.escapeObjCKeyword
 
 private val Field.fieldSetFunctionRenderer: Renderer<Source>
-  get() = descriptor.takeIf { !it.isFinal && it.shouldRender }?.setFunctionRenderer ?: emptyRenderer
+  get() =
+    descriptor.takeIf { !it.isFinal && it.shouldRender }?.setFunctionRenderer
+      ?: rendererOf(Source.EMPTY)
 
 private val FieldDescriptor.setFunctionRenderer: Renderer<Source>
   get() =
@@ -234,7 +233,7 @@ private val setFunctionParameterName: String
   get() = "value"
 
 private val Field.fieldConstantDefineRenderer: Renderer<Source>
-  get() = descriptor.takeIf { it.shouldRender }?.constantDefineRenderer ?: emptyRenderer
+  get() = descriptor.takeIf { it.shouldRender }?.constantDefineRenderer ?: rendererOf(Source.EMPTY)
 
 private val FieldDescriptor.constantDefineRenderer: Renderer<Source>?
   get() =
@@ -250,12 +249,13 @@ private val Member.functionRenderers: List<Renderer<Source>>
     when (this) {
       is Method -> listOf(methodFunctionRenderer)
       is Field -> listOf(fieldGetFunctionRenderer, fieldSetFunctionRenderer)
-      else -> listOf()
+      else -> emptyList()
     }
 
 private val Method.methodFunctionRenderer: Renderer<Source>
   get() =
-    takeIf { it.descriptor.shouldRender }?.toObjCNames()?.let(::functionRenderer) ?: emptyRenderer
+    takeIf { it.descriptor.shouldRender }?.toObjCNames()?.let(::functionRenderer)
+      ?: rendererOf(Source.EMPTY)
 
 private val MethodDescriptor.shouldRender: Boolean
   get() =
@@ -350,7 +350,7 @@ private val MethodObjCNames.objCSelector: String
 
 private val Variable.renderer: Renderer<Source>
   get() =
-    map2(typeDescriptor.objCRenderer, nameRenderer) { typeSource, nameSource ->
+    combine(typeDescriptor.objCRenderer, nameRenderer) { typeSource, nameSource ->
       spaceSeparated(typeSource, nameSource)
     }
 
@@ -426,7 +426,7 @@ private val DeclaredTypeDescriptor.declaredObjCRenderer: Renderer<Source>
 
 private val DeclaredTypeDescriptor.interfaceObjCRenderer: Renderer<Source>
   get() =
-    map2(id, typeDeclaration.objCNameRenderer) { idSource, typeSource ->
+    combine(id, typeDeclaration.objCNameRenderer) { idSource, typeSource ->
       join(idSource, inAngleBrackets(typeSource))
     }
 
@@ -437,7 +437,7 @@ private val j2ObjCTypesDependency: Dependency
   get() = dependency(j2ObjCTypesImport)
 
 private fun j2ObjCTypeRenderer(name: String): Renderer<Source> =
-  source(name) rendererWith j2ObjCTypesDependency
+  rendererOf(source(name)) + j2ObjCTypesDependency
 
 private val jbooleanTypeRenderer: Renderer<Source>
   get() = j2ObjCTypeRenderer("jboolean")

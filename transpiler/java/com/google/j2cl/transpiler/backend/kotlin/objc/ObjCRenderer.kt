@@ -15,6 +15,9 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin.objc
 
+import com.google.j2cl.transpiler.backend.kotlin.objc.Renderer.Companion.combine
+import com.google.j2cl.transpiler.backend.kotlin.objc.Renderer.Companion.flatten
+import com.google.j2cl.transpiler.backend.kotlin.objc.Renderer.Companion.rendererOf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaSeparated
@@ -29,19 +32,19 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSe
 
 val nsObjCRuntimeDependency = dependency(systemImport("Foundation/NSObjCRuntime.h"))
 
-val nsEnum: Renderer<Source> = source("NS_ENUM") rendererWith nsObjCRuntimeDependency
+val nsEnum: Renderer<Source> = rendererOf(source("NS_ENUM")) + nsObjCRuntimeDependency
 
-val nsInline: Renderer<Source> = source("NS_INLINE") rendererWith nsObjCRuntimeDependency
+val nsInline: Renderer<Source> = rendererOf(source("NS_INLINE")) + nsObjCRuntimeDependency
 
 val nsAssumeNonnullBegin: Renderer<Source> =
-  source("NS_ASSUME_NONNULL_BEGIN") rendererWith nsObjCRuntimeDependency
+  rendererOf(source("NS_ASSUME_NONNULL_BEGIN")) + nsObjCRuntimeDependency
 
 val nsAssumeNonnullEnd: Renderer<Source> =
-  source("NS_ASSUME_NONNULL_END") rendererWith nsObjCRuntimeDependency
+  rendererOf(source("NS_ASSUME_NONNULL_END")) + nsObjCRuntimeDependency
 
 val nullable: Renderer<Source> = rendererOf(source("_Nullable")) // clang/gcc attribute
 
-val id: Renderer<Source> = source("id") rendererWith nsObjCRuntimeDependency
+val id: Renderer<Source> = rendererOf(source("id")) + nsObjCRuntimeDependency
 
 val nsCopying: Renderer<Source> = protocolForwardDeclaration("NSCopying").nameRenderer
 
@@ -59,14 +62,14 @@ val nsMutableDictionary: Renderer<Source> =
   classForwardDeclaration("NSMutableDictionary").nameRenderer
 
 private val ForwardDeclaration.nameRenderer: Renderer<Source>
-  get() = source(name) rendererWith dependency(this)
+  get() = rendererOf(source(name)) + dependency(this)
 
 fun className(name: String): Renderer<Source> = classForwardDeclaration(name).nameRenderer
 
 fun protocolName(name: String): Renderer<Source> = protocolForwardDeclaration(name).nameRenderer
 
 fun nsEnumTypedef(name: String, type: Renderer<Source>, values: List<String>): Renderer<Source> =
-  map2(nsEnum, type) { nsEnumSource, typeSource ->
+  combine(nsEnum, type) { nsEnumSource, typeSource ->
     semicolonEnded(
       spaceSeparated(
         source("typedef"),
@@ -89,7 +92,7 @@ fun functionDeclaration(
   parameters: List<Renderer<Source>> = listOf(),
   statements: List<Renderer<Source>> = listOf()
 ): Renderer<Source> =
-  map4(modifiers.flatten, returnType, parameters.flatten, statements.flatten) {
+  combine(modifiers.flatten(), returnType, parameters.flatten(), statements.flatten()) {
     modifierSources,
     returnTypeSource,
     parameterSources,
@@ -110,7 +113,7 @@ fun methodCall(
   name: String,
   arguments: List<Renderer<Source>> = listOf()
 ): Renderer<Source> =
-  map2(target, arguments.flatten) { targetSource, argumentSources ->
+  combine(target, arguments.flatten()) { targetSource, argumentSources ->
     inSquareBrackets(
       spaceSeparated(
         targetSource,
@@ -129,7 +132,7 @@ fun getProperty(target: Renderer<Source>, name: String): Renderer<Source> =
   target.map { dotSeparated(it, source(name)) }
 
 fun block(statements: List<Renderer<Source>> = listOf()): Renderer<Source> =
-  statements.flatten.map { block(newLineSeparated(it)) }
+  statements.flatten().map { block(newLineSeparated(it)) }
 
 fun returnStatement(expression: Renderer<Source>): Renderer<Source> =
   expression.map { semicolonEnded(spaceSeparated(source("return"), it)) }
@@ -138,11 +141,17 @@ fun expressionStatement(expression: Renderer<Source>): Renderer<Source> =
   expression.map { semicolonEnded(it) }
 
 fun nsAssumeNonnull(body: Renderer<Source>): Renderer<Source> =
-  body.ifNotEmpty {
-    map2(nsAssumeNonnullBegin, nsAssumeNonnullEnd) { begin, end ->
-      emptyLineSeparated(begin, it, end)
+  body.bind {
+    if (it.isEmpty()) {
+      rendererOf(Source.EMPTY)
+    } else {
+      combine(nsAssumeNonnullBegin, nsAssumeNonnullEnd) { begin, end ->
+        emptyLineSeparated(begin, it, end)
+      }
     }
   }
 
 fun Renderer<Source>.toNullable(): Renderer<Source> =
-  map2(this, nullable) { thisSource, nullableSource -> spaceSeparated(thisSource, nullableSource) }
+  combine(this, nullable) { thisSource, nullableSource ->
+    spaceSeparated(thisSource, nullableSource)
+  }
