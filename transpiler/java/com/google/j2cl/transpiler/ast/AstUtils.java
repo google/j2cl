@@ -1061,7 +1061,7 @@ public final class AstUtils {
         && isNonNativeJsEnum(((ArrayTypeDescriptor) typeDescriptor).getLeafTypeDescriptor());
   }
 
-  /** Retuns a list of null values. */
+  /** Returns a list of null values. */
   public static List<Expression> createListOfNullValues(int size) {
     return Collections.nCopies(size, TypeDescriptors.get().javaLangObject.getNullValue());
   }
