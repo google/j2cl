@@ -1018,6 +1018,11 @@ public final class AstUtils {
   /** Returns the value field for a JsEnum. */
   public static TypeDescriptor getJsEnumValueFieldType(TypeDeclaration typeDeclaration) {
     FieldDescriptor valueFieldDescriptor = getJsEnumValueFieldDescriptor(typeDeclaration);
+    // This method should be used carefully. A properly declared JsEnum will always have
+    // a value field if it has a custom value (after validation); but due to header compilation
+    // removing private fields, the field might not be visible across compilation boundaries and
+    // and this method could give incorrect information in that case.
+    checkState(valueFieldDescriptor != null || !typeDeclaration.getJsEnumInfo().hasCustomValue());
     return valueFieldDescriptor == null
         ? PrimitiveTypes.INT
         : valueFieldDescriptor.getTypeDescriptor();
