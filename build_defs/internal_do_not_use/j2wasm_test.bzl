@@ -29,7 +29,7 @@ def j2wasm_test(
         platform = "WASM",
         optimize_wasm = optimize,
         use_legacy_wasm_spec = use_legacy_wasm_spec,
-        default_browser = "//:chrome-wasm-linux",
+        default_browser = "//build_defs/internal_do_not_use/browser:chrome-wasm-linux",
         tags = tags + ["j2wasm"],
         **kwargs
     )
