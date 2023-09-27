@@ -11,11 +11,13 @@ kt_jvm_library(
     testonly = 1,
     srcs = [
         "RendererTest.kt",
+        "SourceTest.kt",
     ],
     deps = [
         "//third_party/java/junit",
         "//third_party/java/truth",
         "//transpiler/java/com/google/j2cl/transpiler/backend/kotlin/objc",
+        "//transpiler/java/com/google/j2cl/transpiler/backend/kotlin/source",
     ],
 )
 
