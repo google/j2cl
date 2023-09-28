@@ -13,9 +13,9 @@ kt_jvm_library(
         "SourceTest.kt",
     ],
     deps = [
-        "//third_party/java/junit",
-        "//third_party/java/truth",
+        "//third_party:junit",
         "//transpiler/java/com/google/j2cl/transpiler/backend/kotlin/source",
+        "//transpiler/java/com/google/j2cl/transpiler/backend/kotlin/source/testing",
     ],
 )
 

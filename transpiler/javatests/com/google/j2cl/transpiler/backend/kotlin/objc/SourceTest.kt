@@ -15,10 +15,9 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin.objc
 
-import com.google.common.truth.Truth.assertThat
 import com.google.j2cl.transpiler.backend.kotlin.objc.Renderer.Companion.rendererOf
-import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
+import com.google.j2cl.transpiler.backend.kotlin.source.testing.assertBuilds
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -27,68 +26,68 @@ import org.junit.runners.JUnit4
 class SourceTest {
   @Test
   fun sourceComment() {
-    comment(source("A comment...")).assertGives("// A comment...")
+    comment(source("A comment...")).assertBuilds("// A comment...")
   }
 
   @Test
   fun sourceSemicolonEnded() {
-    semicolonEnded(source("foo")).assertGives("foo;")
+    semicolonEnded(source("foo")).assertBuilds("foo;")
   }
 
   @Test
   fun sourceAssignment() {
-    assignment(source("foo"), source("bar")).assertGives("foo = bar")
+    assignment(source("foo"), source("bar")).assertBuilds("foo = bar")
   }
 
   @Test
   fun sourceParameter() {
-    parameter(source("name"), source("value")).assertGives("name:value")
+    parameter(source("name"), source("value")).assertBuilds("name:value")
   }
 
   @Test
   fun sourcePointer() {
-    pointer(source("foo")).assertGives("foo*")
+    pointer(source("foo")).assertBuilds("foo*")
   }
 
   @Test
   fun sourceMacroDeclaration() {
-    macroDeclaration(source("foo")).assertGives("#foo")
+    macroDeclaration(source("foo")).assertBuilds("#foo")
   }
 
   @Test
   fun sourceMacroDefine() {
-    macroDefine(source("foo")).assertGives("#define foo")
+    macroDefine(source("foo")).assertBuilds("#define foo")
   }
 
   @Test
   fun sourceCompatibilityAlias() {
     compatibilityAlias(source("alias"), source("target"))
-      .assertGives("@compatibility_alias alias target")
+      .assertBuilds("@compatibility_alias alias target")
   }
 
   @Test
   fun sourceDefineAlias() {
-    defineAlias(source("alias"), source("target")).assertGives("#define alias target")
+    defineAlias(source("alias"), source("target")).assertBuilds("#define alias target")
   }
 
   @Test
   fun localImportSource() {
-    localImport("local.h").source.assertGives("""#import "local.h"""")
+    localImport("local.h").source.assertBuilds("""#import "local.h"""")
   }
 
   @Test
   fun systemImportSource() {
-    systemImport("system.h").source.assertGives("""#import <system.h>""")
+    systemImport("system.h").source.assertBuilds("""#import <system.h>""")
   }
 
   @Test
   fun classForwardDeclarationSource() {
-    classForwardDeclaration("Foo").source.assertGives("@class Foo;")
+    classForwardDeclaration("Foo").source.assertBuilds("@class Foo;")
   }
 
   @Test
   fun protocolForwardDeclarationSource() {
-    protocolForwardDeclaration("Foo").source.assertGives("@protocol Foo;")
+    protocolForwardDeclaration("Foo").source.assertBuilds("@protocol Foo;")
   }
 
   @Test
@@ -106,20 +105,21 @@ class SourceTest {
       )
 
     dependenciesSource(dependencies)
-      .assertGives(
+      .assertBuilds(
         """
-      #import <system_1.h>
-      #import <system_2.h>
+        #import <system_1.h>
+        #import <system_2.h>
 
-      #import "local_1.h"
-      #import "local_2.h"
+        #import "local_1.h"
+        #import "local_2.h"
 
-      @class Class1;
-      @class Class2;
+        @class Class1;
+        @class Class2;
 
-      @protocol Protocol1;
-      @protocol Protocol2;
-      """
+        @protocol Protocol1;
+        @protocol Protocol2;
+        """
+          .trimIndent()
       )
   }
 
@@ -128,13 +128,13 @@ class SourceTest {
     rendererOf(source("void main() {}"))
       .plus(dependency(systemImport("std.h")))
       .sourceWithDependencies
-      .assertGives("""
+      .assertBuilds(
+        """
       #import <std.h>
 
       void main() {}
-      """)
+      """
+          .trimIndent()
+      )
   }
 }
-
-private fun Source.assertGives(string: String) =
-  assertThat(buildString()).isEqualTo(string.trimIndent())
