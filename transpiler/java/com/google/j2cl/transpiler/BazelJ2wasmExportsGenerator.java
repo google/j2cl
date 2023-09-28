@@ -20,7 +20,7 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.reflect.ClassPath;
-import com.google.common.reflect.ClassPath.ResourceInfo;
+import com.google.common.reflect.ClassPath.ClassInfo;
 import com.google.j2cl.common.EntryPointPattern;
 import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.OutputUtils.Output;
@@ -139,14 +139,9 @@ final class BazelJ2wasmExportsGenerator extends BazelWorker {
 
     try {
       ClassPath classPath = ClassPath.from(resourcesClassLoader);
-      for (ResourceInfo resourceInfo : classPath.getResources()) {
-        String resourceName = resourceInfo.getResourceName();
-        if (resourceName.startsWith("META-INF")) {
-          continue;
-        }
+      for (ClassInfo classInfo : classPath.getAllClasses()) {
 
-        String qualifiedSourceName =
-            resourceName.replace('/', '.').replace(".class", "").replace('$', '.');
+        String qualifiedSourceName = classInfo.getName().replace('$', '.');
 
         if (wasmEntryPoints.stream().anyMatch(e -> e.matchesClass(qualifiedSourceName))) {
           binaryClassNames.add(qualifiedSourceName);
