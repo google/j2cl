@@ -1276,6 +1276,8 @@ class JavaEnvironment {
         .setSimpleJsName(getJsName(typeElement))
         .setCustomizedJsNamespace(getJsNamespace(typeElement, packageInfoCache))
         .setNullMarked(isNullMarked)
+        .setOriginalSimpleSourceName(
+            typeElement.getSimpleName() != null ? typeElement.getSimpleName().toString() : null)
         .setPackageName(packageName)
         .setSuperTypeDescriptorFactory(
             () ->
