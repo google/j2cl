@@ -47,7 +47,7 @@ open class MixedNestings {
 
   @ObjCName("a")
   open fun a() {
-   open class ___1B {
+   open class B {
     open fun bb() {}
 
     open fun b(): Int {
@@ -56,11 +56,11 @@ open class MixedNestings {
        val ii: MyInterface? = MyInterface { n: Int ->
         this@MixedNestings.mm()
         this@A.aa()
-        this@___1B.bb()
+        this@B.bb()
         val iii: MyInterface? = MyInterface { m: Int ->
          this@MixedNestings.mm()
          this@A.aa()
-         this@___1B.bb()
+         this@B.bb()
          return@MyInterface object : MyInterface {
           override fun `fun`(b: Int): Int {
            return b
@@ -75,7 +75,7 @@ open class MixedNestings {
      return i!!.`fun`(400)
     }
    }
-   ___1B().b()
+   B().b()
   }
  }
 }

@@ -1239,6 +1239,7 @@ public class JdtEnvironment {
             .setKtTypeInfo(KtInteropUtils.getKtTypeInfo(typeBinding))
             .setKtObjcInfo(KtInteropUtils.getKtObjcInfo(typeBinding))
             .setNullMarked(isNullMarked)
+            .setOriginalSimpleSourceName(typeBinding.getName())
             .setPackageName(packageName)
             .setTypeParameterDescriptors(
                 getTypeArgumentTypeDescriptors(

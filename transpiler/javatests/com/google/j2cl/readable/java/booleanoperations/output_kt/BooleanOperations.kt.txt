@@ -93,19 +93,19 @@ open class BooleanOperations {
   if (ls || rs) {
    r = true
   }
-  open class ___1Outer {
+  open class Outer {
    @JvmField
    internal var b_pp_booleanoperations: Boolean = false
 
    open inner class Inner {
     init {
-     this@___1Outer.b_pp_booleanoperations = this@___1Outer.b_pp_booleanoperations.or(true)
+     this@Outer.b_pp_booleanoperations = this@Outer.b_pp_booleanoperations.or(true)
     }
    }
   }
-  val finalOuter: ___1Outer? = ___1Outer()
+  val finalOuter: Outer? = Outer()
   finalOuter!!.b_pp_booleanoperations = finalOuter!!.b_pp_booleanoperations.or(true)
-  var outer: ___1Outer? = ___1Outer()
+  var outer: Outer? = Outer()
   outer!!.b_pp_booleanoperations = outer!!.b_pp_booleanoperations.or(run {
    outer = null
    outer

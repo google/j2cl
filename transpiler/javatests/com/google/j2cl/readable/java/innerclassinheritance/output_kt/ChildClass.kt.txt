@@ -53,7 +53,7 @@ open class ChildClass: ParentOuter() {
 
  @ObjCName("testLocalClass")
  open fun testLocalClass() {
-  open class ___1LocalClass: ChildClass() {
+  open class LocalClass: ChildClass() {
    @JvmField
    internal var object_pp_innerclassinheritance: Any? = this
 
@@ -67,7 +67,7 @@ open class ChildClass: ParentOuter() {
     this@ChildClass.funInParentOuter()
    }
   }
-  ___1LocalClass().test()
+  LocalClass().test()
  }
 
  open inner class InnerClass: ParentInner() {

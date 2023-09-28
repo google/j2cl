@@ -33,14 +33,14 @@ open class LocalClassWithOuterGenerics<A> {
   @JvmStatic
   @ObjCName("foo")
   fun <T> foo() {
-   open class ___1Bar {
-    internal open fun baz_pp_localclasswithoutergenerics(other: ___1Bar?) {}
+   open class Bar {
+    internal open fun baz_pp_localclasswithoutergenerics(other: Bar?) {}
    }
-   val bar: ___1Bar? = ___1Bar()
-   open class ___1Baz<S> {
-    internal open fun qux_pp_localclasswithoutergenerics(foo: ___1Baz<S>?, bar: ___1Baz<T>?, baz: ___1Baz<String?>?) {}
+   val bar: Bar? = Bar()
+   open class Baz<S> {
+    internal open fun qux_pp_localclasswithoutergenerics(foo: Baz<S>?, bar: Baz<T>?, baz: Baz<String?>?) {}
    }
-   val baz: ___1Baz<Any?>? = ___1Baz<Any?>()
+   val baz: Baz<Any?>? = Baz<Any?>()
   }
  }
 }

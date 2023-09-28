@@ -38,18 +38,18 @@ open class LocalClassInStaticContext {
   @JvmStatic
   @ObjCName("test")
   fun test() {
-   open class ___1A {}
-   ___1A()
+   open class A {}
+   A()
    val a: Any? = object : Any() {
     internal fun m_pp_localclassinstaticcontext() {
-     ___1A()
+     A()
     }
    }
   }
 
   init {
-   open class ___1B {}
-   ___1B()
+   open class B {}
+   B()
    val b: Any? = object : Any() {}
   }
  }
@@ -62,12 +62,12 @@ open class LocalClassInStaticContext {
 
   @ObjCName("test")
   open fun test() {
-   open class ___1D {
+   open class D {
     open fun `fun`(): Int {
      return this@C.f
     }
    }
-   ___1D().`fun`()
+   D().`fun`()
   }
  }
 }

@@ -34,24 +34,24 @@ open class NestedGenericClass<T> {
  open fun <S> `fun`(
   @ObjCName("withId") t: S
  ) {
-  open class ___1E<S> {}
-  open class ___1F {
+  open class E<S> {}
+  open class F {
    @JvmField
    var f: S? = null
   }
-  ___1E<Number?>()
-  ___1F()
+  E<Number?>()
+  F()
  }
 
  @ObjCName("bar")
  open fun <T_1> bar() {
-  open class ___1G<T> {
+  open class G<T> {
    open fun <T_1> bar() {
-    open class ___1H<T> {}
-    ___1H<Number?>()
+    open class H<T> {}
+    H<Number?>()
    }
   }
-  ___1G<Error?>().bar<Any?>()
+  G<Error?>().bar<Any?>()
  }
 
  @ObjCName("test")

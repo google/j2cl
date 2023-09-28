@@ -90,7 +90,21 @@ public abstract class TypeDeclaration
         && getDeclaredMethodDescriptors().stream().anyMatch(MethodDescriptor::isDefaultMethod);
   }
 
-  /** Returns the unqualified simple source name like "Inner". */
+  /**
+   * Returns the unqualified simple source name as written in the souce, {@code null} if the class
+   * does not have a name, i.e. it is an anonymous class or a synthetic class.
+   */
+  @Nullable
+  public abstract String getOriginalSimpleSourceName();
+
+  /**
+   * Returns the unqualified name like "Inner".
+   *
+   * <p>Note: this is the simple name of the class and might or might not be the original simple
+   * source name, e.g. for local classes it returns a synthetic name that make them unique as inner
+   * classes of their enclosing types; it also returns names for classes that don't have source
+   * names, e.g. anonymous and synthetic classes.
+   */
   @Memoized
   public String getSimpleSourceName() {
     return AstUtils.getSimpleSourceName(getClassComponents());
@@ -581,7 +595,7 @@ public abstract class TypeDeclaration
     String qualifiedName = ktTypeInfo != null ? ktTypeInfo.getQualifiedName() : null;
     return qualifiedName != null
         ? qualifiedName.substring(qualifiedName.lastIndexOf('.') + 1)
-        : getSimpleSourceName();
+        : getOriginalSimpleSourceName();
   }
 
   @Memoized
@@ -885,6 +899,8 @@ public abstract class TypeDeclaration
         Iterable<TypeVariable> typeParameterDescriptors);
 
     public abstract Builder setVisibility(Visibility visibility);
+
+    public abstract Builder setOriginalSimpleSourceName(String originalSimpleSourceName);
 
     public abstract Builder setPackageName(String packageName);
 

@@ -87,7 +87,7 @@ open class InnerClassInitOrder {
 
  @ObjCName("testInnerClassLoop")
  open fun testInnerClassLoop() {
-  abstract class ___1AddNumber {
+  abstract class AddNumber {
    @JvmField
    internal var num_pp_innerclassinitorder: Int = 0
 
@@ -97,10 +97,10 @@ open class InnerClassInitOrder {
 
    abstract fun act()
   }
-  val results: Array<___1AddNumber?>? = arrayOfNulls<___1AddNumber>(10)
+  val results: Array<AddNumber?>? = arrayOfNulls<AddNumber>(10)
   var i: Int = 0
   while (i < 10) {
-   val ap: ___1AddNumber? = object : ___1AddNumber(i) {
+   val ap: AddNumber? = object : AddNumber(i) {
     override fun act() {
      this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + num_pp_innerclassinitorder
     }
@@ -109,7 +109,7 @@ open class InnerClassInitOrder {
    i = i + 1
   }
   for (theAp in results!!) {
-   val theAp_1: ___1AddNumber? = theAp
+   val theAp_1: AddNumber? = theAp
    theAp_1!!.act()
   }
   assert(this.number == 1156)
@@ -229,7 +229,7 @@ open class InnerClassInitOrder {
 
   internal open fun callInner_pp_innerclassinitorder() {
    this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + 1
-   open class ___1ReallyInnerClass {
+   open class ReallyInnerClass {
     init {
      this.callReallyInner_pp_innerclassinitorder()
     }
@@ -238,7 +238,7 @@ open class InnerClassInitOrder {
      this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + 10
     }
    }
-   ___1ReallyInnerClass()
+   ReallyInnerClass()
   }
  }
 

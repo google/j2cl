@@ -32,20 +32,20 @@ open class SimpleLocalClass {
   @ObjCName("withInt") p: Int
  ) {
   val localVar: Int = 1
-  open class ___1InnerClass {
+  open class InnerClass {
    open fun `fun`(): Int {
     return localVar + p
    }
   }
-  ___1InnerClass().`fun`()
-  open class ___1InnerClassWithoutCaptures {}
-  ___1InnerClassWithoutCaptures()
+  InnerClass().`fun`()
+  open class InnerClassWithoutCaptures {}
+  InnerClassWithoutCaptures()
  }
 
  @ObjCName("fun")
  open fun `fun`() {
   val localVar: Int = 1
-  open class ___2InnerClass {
+  open class InnerClass {
    @JvmField
    internal var field_pp_simplelocalclass: Int = localVar
   }
@@ -53,7 +53,7 @@ open class SimpleLocalClass {
 
  @ObjCName("foo")
  open fun foo() {
-  open class ___1Abc___InnerClass {}
-  open class ___1Klm___InnerClass {}
+  open class Abc___InnerClass {}
+  open class Klm___InnerClass {}
  }
 }
