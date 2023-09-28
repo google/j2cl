@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.backend.closure;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static java.util.stream.Collectors.joining;
@@ -223,10 +224,8 @@ class ClosureTypesGenerator {
                           : t);
     }
 
-    // Remove type parameters from the JsFunction method since there we cant declare in closure
-    // a template on a function type.
-    MethodDescriptor functionalMethodDescriptor =
-        typeDescriptor.getJsFunctionMethodDescriptor().withoutTypeParameters();
+    MethodDescriptor functionalMethodDescriptor = typeDescriptor.getJsFunctionMethodDescriptor();
+    checkState(functionalMethodDescriptor.getTypeParameterTypeDescriptors().isEmpty());
     return withNullability(
         new ClosureFunctionType(
             toClosureTypeParameters(functionalMethodDescriptor),

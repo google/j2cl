@@ -47,17 +47,6 @@ import java.util.stream.Stream;
 /** Converts method references into lambdas. */
 public class ConvertMethodReferencesToLambdas extends NormalizationPass {
 
-  /** Whether to preserve or not the type parameters in the functional method. */
-  final boolean preserveTypeParameters;
-
-  public ConvertMethodReferencesToLambdas() {
-    this(false);
-  }
-
-  public ConvertMethodReferencesToLambdas(boolean preserveTypeParameters) {
-    this.preserveTypeParameters = preserveTypeParameters;
-  }
-
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(
@@ -72,15 +61,6 @@ public class ConvertMethodReferencesToLambdas extends NormalizationPass {
             TypeDescriptor typeDescriptor = methodReference.getTypeDescriptor();
             MethodDescriptor interfacedMethodDescriptor =
                 methodReference.getInterfacedMethodDescriptor();
-
-            if (!preserveTypeParameters) {
-              // Remove the type parameters from the functional interface. Functional interfaces
-              // with type parameters in the functional method cannot be instantiated with
-              // lambdas (only with method references or a class); however, in the j2kt backend
-              // the transformed lambda is used to emit the anonymous instantiation and needs
-              // all the information preserved.
-              interfacedMethodDescriptor = interfacedMethodDescriptor.withoutTypeParameters();
-            }
 
             if (referencedMethodDescriptor.isConstructor()) {
               return createInstantiationLambda(

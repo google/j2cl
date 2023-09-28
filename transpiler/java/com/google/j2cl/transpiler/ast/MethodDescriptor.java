@@ -395,10 +395,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   }
 
   /** Removes the type parameters declared in the method. */
-  // TODO(b/13096948): This is only needed to remove the type parameters from JsFunction
-  // methods. JsCompiler does not have a way to represent type parameterized function types; if
-  // typedefs were allowed templates, J2CL could represent JsFunctions using typedefs allowing
-  // the methods be parameterized.
   @Memoized
   public MethodDescriptor withoutTypeParameters() {
 

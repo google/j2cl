@@ -281,6 +281,8 @@ public final class LambdaAdaptorTypeDescriptors {
                 .build())
         .setNative(false)
         .build()
+        // Remove the type parameters in the functional method since they are not allowed in
+        // @JsFunction interfaces.
         .withoutTypeParameters();
   }
 
