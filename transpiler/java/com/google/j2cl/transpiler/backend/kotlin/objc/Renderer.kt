@@ -42,7 +42,9 @@ class Renderer<out V>(
   /**
    * Rerturns renderer which maps value of this renderer using [fn], while keeping its dependencies.
    */
-  infix fun <O> map(fn: (V) -> O): Renderer<O> = bind { rendererOf(fn(it)) }
+  infix fun <O> map(fn: (V) -> O): Renderer<O> = Renderer { dependencies ->
+    fn(renderAddingDependenciesTo(dependencies))
+  }
 
   /**
    * Returns renderer which maps value of this renderer using [fn] and adds dependencies from both
@@ -64,7 +66,12 @@ class Renderer<out V>(
       renderer1: Renderer<I1>,
       renderer2: Renderer<I2>,
       fn: (I1, I2) -> O
-    ): Renderer<O> = renderer1.bind { source1 -> renderer2.map { source2 -> fn(source1, source2) } }
+    ): Renderer<O> = Renderer { dependencies ->
+      fn(
+        renderer1.renderAddingDependenciesTo(dependencies),
+        renderer2.renderAddingDependenciesTo(dependencies)
+      )
+    }
 
     /**
      * Returns renderer which combines values rendered by [renderer1], [renderer2] and [renderer3]
@@ -75,10 +82,13 @@ class Renderer<out V>(
       renderer2: Renderer<I2>,
       renderer3: Renderer<I3>,
       fn: (I1, I2, I3) -> O
-    ): Renderer<O> =
-      renderer1.bind { source1 ->
-        renderer2.bind { source2 -> renderer3.map { source3 -> fn(source1, source2, source3) } }
-      }
+    ): Renderer<O> = Renderer { dependencies ->
+      fn(
+        renderer1.renderAddingDependenciesTo(dependencies),
+        renderer2.renderAddingDependenciesTo(dependencies),
+        renderer3.renderAddingDependenciesTo(dependencies)
+      )
+    }
 
     /**
      * Returns renderer which combines values rendered by [renderer1], [renderer2], [renderer3] and
@@ -90,14 +100,14 @@ class Renderer<out V>(
       renderer3: Renderer<I3>,
       renderer4: Renderer<I4>,
       fn: (I1, I2, I3, I4) -> O
-    ): Renderer<O> =
-      renderer1.bind { source1 ->
-        renderer2.bind { source2 ->
-          renderer3.bind { source3 ->
-            renderer4.map { source4 -> fn(source1, source2, source3, source4) }
-          }
-        }
-      }
+    ): Renderer<O> = Renderer { dependencies ->
+      fn(
+        renderer1.renderAddingDependenciesTo(dependencies),
+        renderer2.renderAddingDependenciesTo(dependencies),
+        renderer3.renderAddingDependenciesTo(dependencies),
+        renderer4.renderAddingDependenciesTo(dependencies)
+      )
+    }
 
     /** Flattens renderers of [V] into a renderer of [V]'s. */
     fun <V> Iterable<Renderer<V>>.flatten(): Renderer<List<V>> = Renderer { dependencies ->
