@@ -1,5 +1,5 @@
 // Generated from "methodreferences/MethodReferences.java"
-@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
+@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -30,10 +30,8 @@ import kotlin.String
 import kotlin.Suppress
 import kotlin.arrayOfNulls
 import kotlin.experimental.ExperimentalObjCName
-import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
-import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 import kotlin.run
 
@@ -44,18 +42,15 @@ open class MethodReferences<T> {
   return Boolean.valueOf(true)
  }
 
- @HiddenFromObjC
- open fun self_pp_methodreferences(): Any? {
+ internal open fun self_pp_methodreferences(): Any? {
   return this
  }
 
- @HiddenFromObjC
- open fun sameAs_pp_methodreferences(n: Number?): Boolean? {
+ internal open fun sameAs_pp_methodreferences(n: Number?): Boolean? {
   return Boolean.valueOf(false)
  }
 
- @HiddenFromObjC
- open fun main_pp_methodreferences() {
+ internal open fun main_pp_methodreferences() {
   var objectFactory: MethodReferences.Producer<Any?>? = MethodReferences.Producer<Any?> {
    return@Producer Any()
   }
@@ -130,14 +125,12 @@ open class MethodReferences<T> {
  @ObjCName("J2ktMethodreferencesMethodReferencesCompanion", exact = true)
  companion object {
   @JvmStatic
-  @HiddenFromObjC
-  fun m_pp_methodreferences(): Any? {
+  internal fun m_pp_methodreferences(): Any? {
    return Any()
   }
 
   @JvmField
-  @HiddenFromObjC
-  var staticStringProducer_pp_methodreferences: MethodReferences.Producer<String?>? = run {
+  internal var staticStringProducer_pp_methodreferences: MethodReferences.Producer<String?>? = run {
    val ______q: Any? = MethodReferences.m_pp_methodreferences()
    MethodReferences.Producer<String?> {
     return@Producer ______q!!.toString()
@@ -165,8 +158,7 @@ open class MethodReferences<T> {
  }
 
  open inner class ObjectCapturingOuter {
-  @HiddenFromObjC
-  open fun getMain_pp_methodreferences(): MethodReferences<T>? {
+  internal open fun getMain_pp_methodreferences(): MethodReferences<T>? {
    return this@MethodReferences as MethodReferences<T>?
   }
  }

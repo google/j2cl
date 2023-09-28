@@ -1,5 +1,5 @@
 // Generated from "lambdas/Lambdas.java"
-@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
+@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -38,11 +38,9 @@ import kotlin.Suppress
 import kotlin.Throwable
 import kotlin.collections.MutableIterable
 import kotlin.experimental.ExperimentalObjCName
-import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.let
-import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktLambdasLambdas", exact = true)
@@ -153,8 +151,7 @@ open class Lambdas {
   return intf!!.m(e)
  }
 
- @HiddenFromObjC
- open fun <T> callWithBiFunction_pp_lambdas(fn: Lambdas.BiFunction<T, String?, Double?>?): Lambdas.GenericFunctionalInterface<T>? {
+ internal open fun <T> callWithBiFunction_pp_lambdas(fn: Lambdas.BiFunction<T, String?, Double?>?): Lambdas.GenericFunctionalInterface<T>? {
   return null
  }
 
@@ -247,7 +244,6 @@ open class Lambdas {
   }
 
   @JvmField
-  @HiddenFromObjC
   internal var identityFunction_private_2: Lambdas.IdentityFunction? = null
 
   @JvmStatic
@@ -457,11 +453,9 @@ open class Lambdas {
  }
 
  open inner class Outer {
-  @HiddenFromObjC
-  open fun m_pp_lambdas() {}
+  internal open fun m_pp_lambdas() {}
 
-  @HiddenFromObjC
-  open fun n_pp_lambdas() {
+  internal open fun n_pp_lambdas() {
    val r: Lambdas.Runnable? = Lambdas.Runnable {
     this.m_pp_lambdas()
    }
@@ -469,13 +463,11 @@ open class Lambdas {
  }
 
  open inner class Super {
-  @HiddenFromObjC
-  open fun m_pp_lambdas() {}
+  internal open fun m_pp_lambdas() {}
  }
 
  open inner class Sub: Lambdas.Super() {
-  @HiddenFromObjC
-  open fun n_pp_lambdas() {
+  internal open fun n_pp_lambdas() {
    val r: Lambdas.Runnable? = object : Lambdas.Runnable {
     override fun run() {
      super<Lambdas.Super>@Sub.m_pp_lambdas()
@@ -485,8 +477,7 @@ open class Lambdas {
  }
 
  open inner class SubWithLambda: Lambdas.Super() {
-  @HiddenFromObjC
-  open fun n_pp_lambdas() {
+  internal open fun n_pp_lambdas() {
    val r: Lambdas.Runnable? = Lambdas.Runnable {
     super<Lambdas.Super>.m_pp_lambdas()
    }

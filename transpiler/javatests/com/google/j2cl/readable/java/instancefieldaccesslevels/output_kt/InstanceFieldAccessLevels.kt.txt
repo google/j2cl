@@ -1,5 +1,5 @@
 // Generated from "instancefieldaccesslevels/InstanceFieldAccessLevels.java"
-@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
+@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -24,9 +24,7 @@ import kotlin.Int
 import kotlin.OptIn
 import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
-import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
-import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktInstancefieldaccesslevelsInstanceFieldAccessLevels", exact = true)
@@ -36,7 +34,6 @@ open class InstanceFieldAccessLevels {
  var a: Int = 0
 
  @JvmField
- @HiddenFromObjC
  internal var b_private_2: Boolean = false
 
  @JvmField
@@ -44,6 +41,5 @@ open class InstanceFieldAccessLevels {
  var c: Any? = null
 
  @JvmField
- @HiddenFromObjC
- var d_pp_instancefieldaccesslevels: Int = 0
+ internal var d_pp_instancefieldaccesslevels: Int = 0
 }

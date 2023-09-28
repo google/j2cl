@@ -1,5 +1,5 @@
 // Generated from "j2ktnotpassing/DefinitelyNotNull.java"
-@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
+@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -24,51 +24,44 @@ import kotlin.OptIn
 import kotlin.Suppress
 import kotlin.collections.MutableIterable
 import kotlin.experimental.ExperimentalObjCName
-import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
-import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktJ2ktnotpassingDefinitelyNotNull", exact = true)
 open class DefinitelyNotNull {
  open class Ordering<T> {
-  @HiddenFromObjC
-  open fun <S: T> reverse_pp_j2ktnotpassing(): DefinitelyNotNull.Ordering<S> {
+  internal open fun <S: T> reverse_pp_j2ktnotpassing(): DefinitelyNotNull.Ordering<S> {
    throw RuntimeException()
   }
 
-  @HiddenFromObjC
-  open fun <S: T> nullsLast_pp_j2ktnotpassing(): DefinitelyNotNull.Ordering<S?> {
+  internal open fun <S: T> nullsLast_pp_j2ktnotpassing(): DefinitelyNotNull.Ordering<S?> {
    throw RuntimeException()
   }
  }
 
  inner class NullsFirstOrdering<T>(ordering: DefinitelyNotNull.Ordering<in T>): DefinitelyNotNull.Ordering<T?>() {
   @JvmField
-  @HiddenFromObjC
-  val ordering_pp_j2ktnotpassing: DefinitelyNotNull.Ordering<in T>
+  internal val ordering_pp_j2ktnotpassing: DefinitelyNotNull.Ordering<in T>
 
   init {
    this.ordering_pp_j2ktnotpassing = ordering
   }
 
   @ObjCName("reverse")
-  fun <S: T?> reverse(): DefinitelyNotNull.Ordering<S> {
+  public fun <S: T?> reverse(): DefinitelyNotNull.Ordering<S> {
    return this.ordering_pp_j2ktnotpassing!!.reverse_pp_j2ktnotpassing()!!.nullsLast_pp_j2ktnotpassing<S>() as DefinitelyNotNull.Ordering<S>
   }
 
   @ObjCName("nullsLast")
-  fun <S: T?> nullsLast(): DefinitelyNotNull.Ordering<S?> {
+  public fun <S: T?> nullsLast(): DefinitelyNotNull.Ordering<S?> {
    return this.ordering_pp_j2ktnotpassing!!.nullsLast_pp_j2ktnotpassing<S?>()
   }
 
-  @HiddenFromObjC
   override fun <S: T?> reverse_pp_j2ktnotpassing(): DefinitelyNotNull.Ordering<S> {
    return this.reverse()
   }
 
-  @HiddenFromObjC
   override fun <S: T?> nullsLast_pp_j2ktnotpassing(): DefinitelyNotNull.Ordering<S?> {
    return this.nullsLast()
   }

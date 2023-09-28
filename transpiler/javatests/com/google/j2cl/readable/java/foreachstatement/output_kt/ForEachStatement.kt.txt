@@ -1,5 +1,5 @@
 // Generated from "foreachstatement/ForEachStatement.java"
-@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
+@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -30,9 +30,7 @@ import kotlin.arrayOfNulls
 import kotlin.collections.MutableIterable
 import kotlin.collections.MutableIterator
 import kotlin.experimental.ExperimentalObjCName
-import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.Throws
-import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktForeachstatementForEachStatement", exact = true)
@@ -51,7 +49,6 @@ open class ForEachStatement {
   }
  }
 
- @HiddenFromObjC
  @Throws(Exception::class)
  internal fun testMulticatch_private_2() {
   try {
@@ -67,7 +64,6 @@ open class ForEachStatement {
   }
  }
 
- @HiddenFromObjC
  internal fun <T: MutableIterable<String?>?, U: T> testTypeVariable_private_2() {
   val iterable: U? = null
   for (s in iterable!!) {

@@ -19,7 +19,6 @@ import com.google.j2cl.common.InternalCompilerError
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.FieldDescriptor
-import com.google.j2cl.transpiler.ast.MemberDescriptor
 import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
@@ -56,15 +55,6 @@ internal val Renderer.fileOptInAnnotationSource: Source
       ?.let { fileOptInAnnotationSource(it) }
       .orEmpty()
 
-internal val Renderer.hiddenFromObjCAnnotationSource: Source
-  get() =
-    annotation(
-      topLevelQualifiedNameSource(
-        "kotlin.native.HiddenFromObjC",
-        optInQualifiedName = "kotlin.experimental.ExperimentalObjCRefinement"
-      )
-    )
-
 internal fun Renderer.objCNameAnnotationSource(name: String, exact: Boolean? = null): Source =
   annotation(
     topLevelQualifiedNameSource(
@@ -90,24 +80,13 @@ internal fun Renderer.objCAnnotationSource(
   methodObjCNames: MethodObjCNames?
 ): Source =
   Source.emptyUnless(!methodDescriptor.isConstructor) {
-    if (methodDescriptor.isHiddenFromObjC) {
-      hiddenFromObjCAnnotationSource
-    } else {
-      methodObjCNames?.methodName?.let { objCNameAnnotationSource(it) }.orEmpty()
-    }
+    methodObjCNames?.methodName?.let { objCNameAnnotationSource(it) }.orEmpty()
   }
 
 internal fun Renderer.objCAnnotationSource(fieldDescriptor: FieldDescriptor): Source =
-  if (fieldDescriptor.isHiddenFromObjC) {
-    hiddenFromObjCAnnotationSource
-  } else {
-    Source.emptyUnless(fieldDescriptor.needsObjCNameAnnotations) {
-      objCNameAnnotationSource(fieldDescriptor.objCName)
-    }
+  Source.emptyUnless(fieldDescriptor.needsObjCNameAnnotations) {
+    objCNameAnnotationSource(fieldDescriptor.objCName)
   }
-
-private val MemberDescriptor.isHiddenFromObjC: Boolean
-  get() = !visibility.needsObjCNameAnnotation
 
 private fun parameterSource(name: String, valueSource: Source): Source =
   assignment(source(name), valueSource)

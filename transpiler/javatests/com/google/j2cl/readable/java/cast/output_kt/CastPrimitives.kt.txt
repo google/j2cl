@@ -1,5 +1,5 @@
 // Generated from "cast/CastPrimitives.java"
-@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
+@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -31,9 +31,7 @@ import kotlin.OptIn
 import kotlin.Short
 import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
-import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmStatic
-import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktCastCastPrimitives", exact = true)
@@ -239,41 +237,36 @@ open class CastPrimitives {
  @ObjCName("J2ktCastCastPrimitivesCompanion", exact = true)
  companion object {
   @JvmStatic
-  @HiddenFromObjC
   internal fun getShort_private_2(value: Short): Short {
    return value
   }
 
   @JvmStatic
-  @HiddenFromObjC
   internal fun getInt_private_2(value: Int): Int {
    return value
   }
 
   @JvmStatic
-  @HiddenFromObjC
   internal fun getLong_private_2(value: Long): Long {
    return value
   }
 
   @JvmStatic
-  @HiddenFromObjC
   internal fun getFloat_private_2(value: Float): Float {
    return value
   }
 
   @JvmStatic
-  @HiddenFromObjC
   internal fun getDouble_private_2(value: Double): Double {
    return value
   }
  }
 
  open class IntValueHolder {
-  constructor(value: Int)
+  internal constructor(value: Int)
  }
 
  open class LongValueHolder {
-  constructor(value: Long)
+  internal constructor(value: Long)
  }
 }

@@ -1,5 +1,5 @@
 // Generated from "innerclassinitorder/InnerClassInitOrder.java"
-@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
+@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -27,10 +27,8 @@ import kotlin.Suppress
 import kotlin.arrayOfNulls
 import kotlin.assert
 import kotlin.experimental.ExperimentalObjCName
-import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
-import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktInnerclassinitorderInnerClassInitOrder", exact = true)
@@ -91,8 +89,7 @@ open class InnerClassInitOrder {
  open fun testInnerClassLoop() {
   abstract class ___1AddNumber {
    @JvmField
-   @HiddenFromObjC
-   var num_pp_innerclassinitorder: Int = 0
+   internal var num_pp_innerclassinitorder: Int = 0
 
    constructor(i: Int) {
     this.num_pp_innerclassinitorder = i
@@ -119,11 +116,9 @@ open class InnerClassInitOrder {
  }
 
  @JvmField
- @HiddenFromObjC
  internal val outer_private_2: InnerClassInitOrder.Outer? = InnerClassInitOrder.Outer(1)
 
  @JvmField
- @HiddenFromObjC
  internal val outerIsSuper_private_2: InnerClassInitOrder.Outer.OuterIsSuper? = this.outer_private_2!!.OuterIsSuper(2)
 
  @ObjCName("testOuterIsNotSuper")
@@ -202,7 +197,7 @@ open class InnerClassInitOrder {
  }
 
  open class OuterRefFromSuperCtorBase {
-  constructor(o: Any?) {
+  internal constructor(o: Any?) {
    o!!.hashCode()
   }
  }
@@ -232,16 +227,14 @@ open class InnerClassInitOrder {
    this.callInner_pp_innerclassinitorder()
   }
 
-  @HiddenFromObjC
-  open fun callInner_pp_innerclassinitorder() {
+  internal open fun callInner_pp_innerclassinitorder() {
    this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + 1
    open class ___1ReallyInnerClass {
     init {
      this.callReallyInner_pp_innerclassinitorder()
     }
 
-    @HiddenFromObjC
-    open fun callReallyInner_pp_innerclassinitorder() {
+    internal open fun callReallyInner_pp_innerclassinitorder() {
      this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + 10
     }
    }
@@ -251,24 +244,23 @@ open class InnerClassInitOrder {
 
  open class P1<T1> {
   @JvmField
-  @HiddenFromObjC
-  val value_pp_innerclassinitorder: Int
+  internal val value_pp_innerclassinitorder: Int
 
-  constructor(): this(1)
+  internal constructor(): this(1)
 
-  constructor(i: Int) {
+  internal constructor(i: Int) {
    this.value_pp_innerclassinitorder = i
   }
 
   open inner class P2<T2>: InnerClassInitOrder.P1<T1> {
-   constructor(): this(1)
+   internal constructor(): this(1)
 
-   constructor(i: Int): super(i)
+   internal constructor(i: Int): super(i)
 
    open inner class P3<T3>: InnerClassInitOrder.P1<T1>.P2<T2> {
-    constructor(): this(1)
+    internal constructor(): this(1)
 
-    constructor(i: Int): super(i)
+    internal constructor(i: Int): super(i)
    }
   }
  }
@@ -296,9 +288,9 @@ open class InnerClassInitOrder {
  }
 
  open class ESInnerSubclass: InnerClassInitOrder.ESOuter.ESInner {
-  constructor(outer: InnerClassInitOrder.ESOuter?): super()
+  internal constructor(outer: InnerClassInitOrder.ESOuter?): super()
 
-  constructor(value: Int, outer: InnerClassInitOrder.ESOuter?): super(value)
+  internal constructor(value: Int, outer: InnerClassInitOrder.ESOuter?): super(value)
  }
 
  open class ESWGOuter<T> {
@@ -324,9 +316,9 @@ open class InnerClassInitOrder {
  }
 
  open class ESWGInnerSubclass: InnerClassInitOrder.ESWGOuter<String?>.ESWGInner {
-  constructor(outer: InnerClassInitOrder.ESWGOuter<String?>?): super()
+  internal constructor(outer: InnerClassInitOrder.ESWGOuter<String?>?): super()
 
-  constructor(value: Int, outer: InnerClassInitOrder.ESWGOuter<String?>?): super(value)
+  internal constructor(value: Int, outer: InnerClassInitOrder.ESWGOuter<String?>?): super(value)
  }
 
  @ObjCName("J2ktInnerclassinitorderInnerClassInitOrder_Outer", exact = true)

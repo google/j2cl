@@ -1,5 +1,5 @@
 // Generated from "collisions/goog.java"
-@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
+@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -24,9 +24,7 @@ import kotlin.Number
 import kotlin.OptIn
 import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
-import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmStatic
-import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktCollisionsgoog", exact = true)
@@ -37,12 +35,10 @@ open class goog {}
 open class KtBlah {
  companion object {
   @JvmStatic
-  @HiddenFromObjC
-  fun m_pp_collisions() {}
+  internal fun m_pp_collisions() {}
 
   @JvmStatic
-  @HiddenFromObjC
-  fun getN_pp_collisions(): Double {
+  internal fun getN_pp_collisions(): Double {
    return 1.0
   }
  }
@@ -73,8 +69,7 @@ open class Other<T> {
   val o: Other<T>? = null as Other<T>?
  }
 
- @HiddenFromObjC
- open fun <T_2> m_pp_collisions(): T_2 {
+ internal open fun <T_2> m_pp_collisions(): T_2 {
   val T_1: Int = 5
   val o: Other<T_2>? = null as Other<T_2>?
   return null as T_2
@@ -82,13 +77,11 @@ open class Other<T> {
 }
 
 open class T<T: Number?> {
- @HiddenFromObjC
- open fun m_pp_collisions(): T {
+ internal open fun m_pp_collisions(): T {
   return null as T
  }
 
- @HiddenFromObjC
- open fun n_pp_collisions(): T {
+ internal open fun n_pp_collisions(): T {
   val t: T? = collisions.T<T>().m_pp_collisions()
   t!!.toByte()
   return t as T

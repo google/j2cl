@@ -1,5 +1,5 @@
 // Generated from "trycatch/TryCatch.java"
-@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
+@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -29,10 +29,8 @@ import kotlin.Suppress
 import kotlin.Throwable
 import kotlin.assert
 import kotlin.experimental.ExperimentalObjCName
-import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
 import kotlin.jvm.Throws
-import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktTrycatchTryCatch", exact = true)
@@ -158,7 +156,6 @@ open class TryCatch {
   throw this.getT_private_2<Exception?>(java.lang.Exception())!!
  }
 
- @HiddenFromObjC
  internal fun <T> getT_private_2(t: T): T {
   return t
  }
@@ -169,7 +166,6 @@ open class TryCatch {
   throw this.getThrowable_private_2<Throwable?>()!!
  }
 
- @HiddenFromObjC
  internal fun <T: Throwable?> getThrowable_private_2(): T {
   return null as T
  }
@@ -185,7 +181,6 @@ open class TryCatch {
  @ObjCName("J2ktTrycatchTryCatchCompanion", exact = true)
  companion object {
   @JvmField
-  @HiddenFromObjC
   internal val closableThing_private_2: TryCatch.ClosableThing? = TryCatch.ClosableThing()
  }
 

@@ -1,5 +1,5 @@
 // Generated from "arithmeticexpressions/ArithmeticExpressions.java"
-@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
+@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -36,10 +36,8 @@ import kotlin.ShortArray
 import kotlin.String
 import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
-import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
-import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 import kotlin.run
 
@@ -240,8 +238,7 @@ open class ArithmeticExpressions {
   }!!.toInt()
   open class ___1Ref<T> {
    @JvmField
-   @HiddenFromObjC
-   var field_pp_arithmeticexpressions: T? = null
+   internal var field_pp_arithmeticexpressions: T? = null
   }
   val ref: ___1Ref<Byte?>? = null
   ref!!.field_pp_arithmeticexpressions = Byte.valueOf((ref!!.field_pp_arithmeticexpressions!!.toByte().toInt() + 1.toByte().toInt()).toByte())
@@ -249,8 +246,7 @@ open class ArithmeticExpressions {
  }
 
  @JvmField
- @HiddenFromObjC
- var intField_pp_arithmeticexpressions: Long = 0L
+ internal var intField_pp_arithmeticexpressions: Long = 0L
 
  @ObjCName("testExtendedOperands")
  open fun testExtendedOperands() {
@@ -295,13 +291,10 @@ open class ArithmeticExpressions {
 
  @ObjCName("J2ktArithmeticexpressionsArithmeticExpressionsCompanion", exact = true)
  companion object {
-  @HiddenFromObjC
   internal const val FLOAT_CONSTANT_private_2: Float = 1.1f
 
-  @HiddenFromObjC
   internal const val DOUBLE_CONSTANT_private_2: Double = 1.100000023841858
 
-  @HiddenFromObjC
   internal const val DOUBLE_CONSTANT_WITH_ARITHMETIC_private_2: Double = 2.200000047683716
 
   @JvmField
@@ -317,19 +310,16 @@ open class ArithmeticExpressions {
   }
 
   @JvmStatic
-  @HiddenFromObjC
   internal fun getLongArray_private_2(): LongArray? {
    return null
   }
 
   @JvmStatic
-  @HiddenFromObjC
   internal fun getInteger_private_2(): Int? {
    return null
   }
 
   @JvmStatic
-  @HiddenFromObjC
   internal fun testSideEffect_private_2() {
    val ___qualifier: ArithmeticExpressions? = ArithmeticExpressions.getWithSideEffect_private_2()
    val ___qualifier_1: ArithmeticExpressions? = ___qualifier
@@ -338,17 +328,14 @@ open class ArithmeticExpressions {
   }
 
   @JvmStatic
-  @HiddenFromObjC
   internal fun getWithSideEffect_private_2(): ArithmeticExpressions? {
    return null
   }
 
   @JvmField
-  @HiddenFromObjC
   internal var counter_private_2: Long = 0L
 
   @JvmStatic
-  @HiddenFromObjC
   internal fun incrementCounter_private_2(): Long {
    return run {
     val ___value: Long = ArithmeticExpressions.counter_private_2 + 1L

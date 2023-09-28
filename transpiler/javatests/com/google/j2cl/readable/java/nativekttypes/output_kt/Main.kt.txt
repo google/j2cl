@@ -198,7 +198,7 @@ open class Main {
 }
 
 open class Subclass<V>: KTopLevel<V>, KInterface<V> {
- constructor(v: V): super(v)
+ internal constructor(v: V): super(v)
 
  open override fun renamedMethod(): Int {
   return super<KTopLevel>.renamedMethod()
@@ -246,7 +246,7 @@ open class Subclass<V>: KTopLevel<V>, KInterface<V> {
 }
 
 open class Subsubclass<V>: Subclass<V> {
- constructor(v: V): super(v)
+ internal constructor(v: V): super(v)
 
  open override fun renamedMethod(): Int {
   return super<Subclass>.renamedMethod()

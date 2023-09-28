@@ -1,5 +1,5 @@
 // Generated from "implicitparenthesis/ImplicitParenthesis.java"
-@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
+@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -24,9 +24,7 @@ import kotlin.OptIn
 import kotlin.Suppress
 import kotlin.assert
 import kotlin.experimental.ExperimentalObjCName
-import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmStatic
-import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 import kotlin.run
 
@@ -41,7 +39,6 @@ open class ImplicitParenthesis {
  @ObjCName("J2ktImplicitparenthesisImplicitParenthesisCompanion", exact = true)
  companion object {
   @JvmStatic
-  @HiddenFromObjC
   internal fun examples_private_2() {
    var primitiveInt: Int = 0
    var boxedInt: Int? = null
@@ -81,7 +78,6 @@ open class ImplicitParenthesis {
   }
 
   @JvmStatic
-  @HiddenFromObjC
   internal fun nonExamples_private_2() {
    var primitiveInt: Int = 0
    var boxedInt: Int? = null
@@ -98,7 +94,6 @@ open class ImplicitParenthesis {
   }
 
   @JvmStatic
-  @HiddenFromObjC
   internal fun parenthesisRemoval_private_2() {
    Int(1 + 2)
   }

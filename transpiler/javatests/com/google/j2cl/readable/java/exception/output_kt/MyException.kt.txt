@@ -22,7 +22,7 @@ import kotlin.Suppress
 import kotlin.Throwable
 
 class MyException: Exception {
- constructor()
+ internal constructor()
 
- constructor(cause: Throwable?): super(cause)
+ internal constructor(cause: Throwable?): super(cause)
 }
