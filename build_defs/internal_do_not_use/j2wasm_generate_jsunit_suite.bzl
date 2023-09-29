@@ -66,8 +66,8 @@ def j2wasm_generate_jsunit_suite(
         name = name + "_lib",
         srcs = [test_input],
         deps = deps + [
-            "//build_defs/internal_do_not_use:internal_junit_annotations-j2wasm",
-            "//build_defs/internal_do_not_use:internal_junit_runtime-j2wasm",
+            Label("//build_defs/internal_do_not_use:internal_junit_annotations-j2wasm"),
+            Label("//build_defs/internal_do_not_use:internal_junit_runtime-j2wasm"),
         ],
         javacopts = ["-AtestPlatform=WASM"],
         testonly = 1,
@@ -111,7 +111,8 @@ def j2wasm_generate_jsunit_suite(
     # files.)
 
     wasm_optimized_suffix = "" if optimize else "_dev"
-    wasm_path = "/google3/" + native.package_name() + "/" + j2wasm_application_name + wasm_optimized_suffix + ".wasm"
+    wasm_path = "/" + native.package_name() + "/" + j2wasm_application_name + wasm_optimized_suffix + ".wasm"
+
     wasm_module_name = j2wasm_application_name.replace("-", "_") + ".j2wasm"
     processed_wasm_path = wasm_path.replace("/", "\\/")
 

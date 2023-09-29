@@ -25,8 +25,8 @@ j2cl_library(
 
 """
 
-load(":j2cl_library_build_test.bzl", "build_test")
 load(":j2cl_java_library.bzl", j2cl_library_rule = "j2cl_library")
+load(":j2cl_library_build_test.bzl", "build_test")
 load(":j2cl_util.bzl", "to_parallel_targets")
 load(":j2kt_common.bzl", "j2kt_common")
 load(":j2kt_library.bzl", "J2KT_JVM_LIB_ATTRS", "J2KT_NATIVE_LIB_ATTRS", "j2kt_jvm_library", "j2kt_native_library")
@@ -101,6 +101,7 @@ _J2WASM_PACKAGES = [
     "third_party/java_src/animal_sniffer",
     "third_party/java_src/google_common/current",
     "third_party/java_src/j2cl",
+    "build_defs/internal_do_not_use",
     "junit",
     "samples",
     "third_party",

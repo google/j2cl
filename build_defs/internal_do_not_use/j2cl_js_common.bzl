@@ -103,8 +103,11 @@ J2CL_TEST_DEFS = []
 def j2cl_web_test(
         name,
         deps,
+        browsers,
+        data,
         test_class,
         tags,
+        default_browser = None,
         **args):  # @unused
     # TODO(b/259118921): support multiple testsuites.
     fail_multiple_testsuites = """
@@ -136,7 +139,7 @@ def j2cl_web_test(
             "  echo \"%s\"" % fail_multiple_testsuites,
             "  exit 1",
             "fi",
-            "testsuite=$$(find . -name %s.js)" % name,
+            "testsuite=$$(find . -name *.js)",
             "if [ -z \"$$testsuite\" ]; then",
             "  echo \"%s\"" % fail_suiteclass,
             "  exit 1",
@@ -146,11 +149,17 @@ def j2cl_web_test(
         testonly = 1,
     )
 
+    if default_browser and not browsers:
+        browsers = [default_browser]
+
     closure_js_test(
         name = name,
         srcs = [":%s" % testsuite_file_name],
         deps = deps,
+        browsers = browsers,
+        data = data,
         testonly = 1,
         entry_points = ["javatests." + test_class + "_AdapterSuite"],
         tags = tags,
+        lenient = True,
     )

@@ -73,6 +73,7 @@ load(":j2wasm_library.bzl", "j2wasm_library")
 _JS_UNIT_TEST_PARAMETERS = [
     "args",
     "compiler",
+    "default_browser",
     "deprecation",
     "deps_mgmt",
     "distribs",
@@ -94,6 +95,7 @@ _JS_UNIT_TEST_PARAMETERS = [
 _STRIP_JSUNIT_PARAMETERS = [
     "args",
     "compiler",
+    "default_browser",
     "deps_mgmt",
     "distribs",
     "externs_list",
@@ -171,7 +173,6 @@ def j2cl_test_common(
         use_legacy_wasm_spec = True,
         wasm_defs = {},
         browsers = None,
-        default_browser = "//testing/web/browsers:chrome-linux",
         extra_defs = [],
         jvm_flags = [],
         tags = [],
@@ -259,6 +260,7 @@ def j2cl_test_common(
 
         deps = [
             Label("//build_defs/internal_do_not_use:closure_testsuite"),
+            Label("//build_defs/internal_do_not_use:closure_testcase"),
             ":%s_j2wasm_application" % generated_suite_name,
         ]
     else:
@@ -291,7 +293,6 @@ def j2cl_test_common(
         name = name,
         deps = deps,
         browsers = browsers,
-        default_browser = default_browser,
         data = data,
         tags = tags,
         flaky = flaky,
