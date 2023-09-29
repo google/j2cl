@@ -313,7 +313,7 @@ public class JsInteropRestrictionsChecker {
                     errorFormatter.apply(
                         expressionTypeDescriptor.getReadableDescription(),
                         toTypeDescriptor.getReadableDescription());
-                problems.error(member.getSourcePosition(), "%s", errorMessage);
+                problems.error(getSourcePosition(), "%s", errorMessage);
               }
             }));
   }
@@ -774,7 +774,7 @@ public class JsInteropRestrictionsChecker {
                 // TODO(b/65465035): When source position is tracked at the expression level,
                 // the error reporting here should include source position.
                 problems.error(
-                    member.getSourcePosition(),
+                    getSourcePosition(),
                     "%s '%s' cannot be assigned to '%s'.",
                     messagePrefix,
                     expressionTypeDescriptor.getReadableDescription(),

@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.passes;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.ImmutableList;
+import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayAccess;
 import com.google.j2cl.transpiler.ast.ArrayCreationReference;
@@ -40,6 +41,7 @@ import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldDeclarationStatement;
 import com.google.j2cl.transpiler.ast.ForEachStatement;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
+import com.google.j2cl.transpiler.ast.HasSourcePosition;
 import com.google.j2cl.transpiler.ast.IfStatement;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
 import com.google.j2cl.transpiler.ast.Invocation;
@@ -88,6 +90,19 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   /** Base class for defining how to insert a conversion operation in a given conversion context. */
   protected abstract static class ContextRewriter {
 
+    /** Returns the closest meaningful source position from an enclosing node. */
+    public SourcePosition getSourcePosition() {
+      HasSourcePosition hasSourcePosition =
+          (HasSourcePosition)
+              visitor.getParent(
+                  p ->
+                      p instanceof HasSourcePosition
+                          && ((HasSourcePosition) p).getSourcePosition() != SourcePosition.NONE);
+      return hasSourcePosition != null
+          ? hasSourcePosition.getSourcePosition()
+          : SourcePosition.NONE;
+    }
+
     /**
      * An {@code expression} is being used as if it was of a particular type.
      *
@@ -110,7 +125,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
      * at runtime.
      */
     @SuppressWarnings("unused")
-    public Expression rewriteTypeConversionContext(
+    protected Expression rewriteTypeConversionContext(
         TypeDescriptor inferredTypeDescriptor,
         TypeDescriptor actualTypeDescriptor,
         Expression expression) {
@@ -119,7 +134,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
 
     /** An {@code expression} that has been assigned to a field or variable of a particular type. */
     @SuppressWarnings("unused")
-    public Expression rewriteAssignmentContext(
+    protected Expression rewriteAssignmentContext(
         TypeDescriptor inferredTypeDescriptor,
         TypeDescriptor actualTypeDescriptor,
         Expression expression) {
@@ -132,23 +147,23 @@ public final class ConversionContextVisitor extends AbstractRewriter {
      * of type {@code otherOperandTypeDescriptor}.
      */
     @SuppressWarnings("unused")
-    public Expression rewriteBinaryNumericPromotionContext(
+    protected Expression rewriteBinaryNumericPromotionContext(
         TypeDescriptor otherOperandTypeDescriptor, Expression operand) {
       return operand;
     }
 
     /** An {@code expression} that is of a JsEnum type and needs boxing. */
-    public Expression rewriteJsEnumBoxingConversionContext(Expression expression) {
+    protected Expression rewriteJsEnumBoxingConversionContext(Expression expression) {
       return expression;
     }
 
     /** A {@code castExpression} requesting an explicit type conversion. */
-    public Expression rewriteCastContext(CastExpression castExpression) {
+    protected Expression rewriteCastContext(CastExpression castExpression) {
       return castExpression;
     }
 
     /** An {@code expression} that is subject of a switch statement. */
-    public Expression rewriteSwitchExpressionContext(Expression expression) {
+    protected Expression rewriteSwitchExpressionContext(Expression expression) {
       TypeDescriptor typeDescriptor = expression.getTypeDescriptor();
       if (!TypeDescriptors.isBoxedOrPrimitiveType(typeDescriptor)) {
         return expression;
@@ -161,7 +176,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
 
     /** An {@code expression} that is used as a qualifier of a member of a particular type. */
     @SuppressWarnings("unused")
-    public Expression rewriteMemberQualifierContext(
+    protected Expression rewriteMemberQualifierContext(
         TypeDescriptor inferredTypeDescriptor,
         TypeDescriptor actualTypeDescriptor,
         Expression expression) {
@@ -170,7 +185,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     }
 
     /** An {@code argument} that is passed to a method as a parameter. */
-    public Expression rewriteMethodInvocationContext(
+    protected Expression rewriteMethodInvocationContext(
         ParameterDescriptor inferredParameterDescriptor,
         ParameterDescriptor actualParameterDescriptor,
         Expression argument) {
@@ -182,18 +197,24 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     }
 
     /** An {@code expression} that is used as a string. */
-    public Expression rewriteStringContext(Expression expression) {
+    protected Expression rewriteStringContext(Expression expression) {
       return expression;
     }
 
     /** An {@code operand} that is used in an unary numeric operation. */
-    public Expression rewriteUnaryNumericPromotionContext(Expression operand) {
+    protected Expression rewriteUnaryNumericPromotionContext(Expression operand) {
       return operand;
     }
 
     /** An {@code operand} that is used a boolean expression. */
-    public Expression rewriteBooleanConversionContext(Expression operand) {
+    protected Expression rewriteBooleanConversionContext(Expression operand) {
       return operand;
+    }
+
+    private ConversionContextVisitor visitor;
+
+    private void setVisitor(ConversionContextVisitor visitor) {
+      this.visitor = visitor;
     }
   }
 
@@ -201,6 +222,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
 
   public ConversionContextVisitor(ContextRewriter contextRewriter) {
     this.contextRewriter = contextRewriter;
+    contextRewriter.setVisitor(this);
   }
 
   @Override

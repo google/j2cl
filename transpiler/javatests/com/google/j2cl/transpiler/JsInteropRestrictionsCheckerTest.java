@@ -2192,14 +2192,15 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "    acceptsEnum(MyJsEnum.A);",
             "    acceptsEnum(JsEnumWithCustomValue.A);",
             "    acceptsComparable(JsEnumWithCustomValue.A);",
+            "    List<Enum> l1 = null; l1.add(MyJsEnum.A);",
             // TODO(b/114468916): The following should have failed. But for now they will be caught
             // by runtime checks when the erasure cast to Enum occurs.
-            "    List<Enum> l1 = null; l1.add(MyJsEnum.A);",
             "    List<? extends Enum> l2 = new ArrayList<MyJsEnum>();",
             "  }",
             "}")
         .assertErrorsWithoutSourcePosition(
             "JsEnum 'Native' cannot be assigned to 'Enum'.",
+            "JsEnum 'MyJsEnum' cannot be assigned to 'Enum'.",
             "JsEnum 'MyJsEnum' cannot be assigned to 'Enum'.",
             "JsEnum 'JsEnumWithCustomValue' cannot be assigned to 'Enum'.",
             "Custom-valued JsEnum 'JsEnumWithCustomValue' cannot be assigned to 'Comparable'.");
@@ -3681,9 +3682,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         .assertErrorsWithSourcePosition(
             "Error:Buggy.java:4: 'Promise' has invalid name 'invalid.Promise'.",
             "Error:Buggy.java:6: 'void Promise.method()' has invalid name 'invalid.method'.",
-            // TODO(b/65465035): Expressions do not have source position, so the method source
-            // position is used here.
-            "Error:Buggy.java:6: JsEnum 'MyJsEnum' cannot be assigned to 'Enum'.",
+            "Error:Buggy.java:7: JsEnum 'MyJsEnum' cannot be assigned to 'Enum'.",
             "Error:Buggy.java:9: 'Promise.field' has invalid name 'invalid.field'.");
   }
 
