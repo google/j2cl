@@ -17,33 +17,43 @@ package com.google.j2cl.transpiler.backend.kotlin.ast
 
 import com.google.j2cl.transpiler.backend.kotlin.common.ofList
 
-data class Import(val components: List<String>, val suffixOrNull: Suffix? = null) :
-  Comparable<Import> {
+/** J2KT representation of Kotlin import. */
+data class Import(
+  /** The list of path components. */
+  val pathComponents: List<String>,
+
+  /** The optional suffix. */
+  val suffixOrNull: Suffix? = null
+) : Comparable<Import> {
   override fun compareTo(other: Import) = comparator.compare(this, other)
 
   companion object {
+    /** Returns import with the given components on its path. */
+    fun import(vararg components: String) = Import(components.toList())
+
+    /** Returns star import with the given components on its path. */
+    fun starImport(vararg components: String) =
+      Import(components.toList(), suffixOrNull = Suffix.WithStar)
+
+    /** Default import comparator. */
     private val comparator =
-      compareBy<Import> { it.suffixOrNull == Suffix.Star }
+      compareBy<Import> { it.suffixOrNull == Suffix.WithStar }
         .reversed()
         .then(
           compareBy<Import, List<String>>(naturalOrder<String>().ofList()) {
-            it.components.run {
-              if (it.suffixOrNull is Suffix.Alias) plus(it.suffixOrNull.alias) else this
+            it.pathComponents.run {
+              if (it.suffixOrNull is Suffix.WithAlias) plus(it.suffixOrNull.alias) else this
             }
           }
         )
   }
 
+  /** Import suffix. */
   sealed class Suffix {
-    object Star : Suffix()
-    data class Alias(val alias: String) : Suffix()
+    /** Import suffix with a star. */
+    object WithStar : Suffix()
+
+    /** Import suffix with an alias. */
+    data class WithAlias(val alias: String) : Suffix()
   }
 }
-
-fun import(vararg components: String) = Import(components.toList())
-
-fun starImport(vararg components: String) =
-  Import(components.toList(), suffixOrNull = Import.Suffix.Star)
-
-val defaultImports: Set<Import>
-  get() = setOf(starImport("javaemul", "lang"))

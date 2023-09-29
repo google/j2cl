@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.HasName
+import com.google.j2cl.transpiler.backend.kotlin.ast.Import
 
 /** Code generation environment. */
 internal data class Environment(
@@ -38,3 +39,14 @@ internal data class Environment(
   /** Returns whether the given identifier is used. */
   fun containsIdentifier(identifier: String): Boolean = identifierSet.contains(identifier)
 }
+
+/** Returns a list of collected imports. */
+internal fun Environment.imports(): List<Import> =
+  importedSimpleNameToQualifiedNameMap.entries.map { (simpleName, qualifiedName) ->
+    Import(
+      qualifiedName.qualifiedNameComponents(),
+      simpleName
+        .takeUnless { it == qualifiedName.qualifiedNameToSimpleName() }
+        ?.let { Import.Suffix.WithAlias(it) }
+    )
+  }

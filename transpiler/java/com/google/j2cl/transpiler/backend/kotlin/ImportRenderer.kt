@@ -19,43 +19,29 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.AS_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.IMPORT_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.STAR_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.ast.Import
-import com.google.j2cl.transpiler.backend.kotlin.ast.defaultImports
+import com.google.j2cl.transpiler.backend.kotlin.ast.Import.Companion.starImport
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.dotSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.infix
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.join
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLineSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
-private val Renderer.imports: List<Import>
-  get() =
-    defaultImports
-      .plus(
-        environment.importedSimpleNameToQualifiedNameMap.entries.map { (simpleName, qualifiedName)
-          ->
-          Import(
-            qualifiedName.qualifiedNameComponents(),
-            if (qualifiedName.qualifiedNameToSimpleName() == simpleName) {
-              null
-            } else {
-              Import.Suffix.Alias(simpleName)
-            }
-          )
-        }
-      )
-      .sorted()
+internal fun Renderer.importsSource(): Source = newLineSeparated(imports().map { it.source() })
 
-internal fun Renderer.importsSource(): Source = newLineSeparated(imports.map { source(it) })
+private fun defaultImports() = setOf(starImport("javaemul", "lang"))
 
-private fun source(import: Import): Source =
+private fun Renderer.imports(): List<Import> = defaultImports().plus(environment.imports()).sorted()
+
+private fun Import.source(): Source =
   spaceSeparated(
     IMPORT_KEYWORD,
-    dotSeparated(import.components.map(::identifierSource)).plus(import.suffixOrNull)
+    join(dotSeparated(pathComponents.map(::identifierSource)), suffixOrNull?.source().orEmpty())
   )
 
-private fun Source.plus(suffix: Import.Suffix?): Source =
-  when (suffix) {
-    is Import.Suffix.Alias -> infix(this, AS_KEYWORD, identifierSource(suffix.alias))
-    is Import.Suffix.Star -> dotSeparated(this, STAR_OPERATOR)
-    null -> this
+private fun Import.Suffix.source(): Source =
+  when (this) {
+    is Import.Suffix.WithAlias ->
+      join(Source.SPACE, spaceSeparated(AS_KEYWORD, identifierSource(alias)))
+    is Import.Suffix.WithStar -> join(Source.DOT, STAR_OPERATOR)
   }
