@@ -23,6 +23,7 @@ import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.Type;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import javax.annotation.Nullable;
 
 /** Performs static evaluation of string concatenation on constants. */
@@ -51,10 +52,17 @@ public class StaticallyEvaluateStringConcatenation extends NormalizationPass {
   private static StringLiteral convertToStringLiteral(Expression expression) {
     if (expression instanceof StringLiteral) {
       return (StringLiteral) expression;
-    } else if (expression instanceof NumberLiteral) {
-      return new StringLiteral(String.valueOf(((NumberLiteral) expression).getValue()));
-    } else if (expression instanceof BooleanLiteral) {
-      return new StringLiteral(String.valueOf(((BooleanLiteral) expression).getValue()));
+    } else {
+      if (expression instanceof NumberLiteral) {
+        // Char literals are stored as NumberLiterals with an Integer object as its value. So we
+        // need to determine whether it is a char, and if so apply the right conversion to String.
+        boolean isChar = TypeDescriptors.isPrimitiveChar(expression.getTypeDescriptor());
+        Number value = ((NumberLiteral) expression).getValue();
+        return new StringLiteral(
+            isChar ? String.valueOf((char) value.intValue()) : String.valueOf(value));
+      } else if (expression instanceof BooleanLiteral) {
+        return new StringLiteral(String.valueOf(((BooleanLiteral) expression).getValue()));
+      }
     }
     return null;
   }

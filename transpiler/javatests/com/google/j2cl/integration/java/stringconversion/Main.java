@@ -88,18 +88,22 @@ public class Main {
   }
 
   private static class SimpleCharSequence implements CharSequence {
+    @Override
     public String toString() {
       return "some string";
     }
 
+    @Override
     public int length() {
       throw new UnsupportedOperationException();
     }
 
+    @Override
     public char charAt(int index) {
       throw new UnsupportedOperationException();
     }
 
+    @Override
     public CharSequence subSequence(int start, int end) {
       throw new UnsupportedOperationException();
     }
@@ -118,22 +122,31 @@ public class Main {
   }
 
   private static void testPrimitiveConcatenation() {
+    // Test both the statically evaluated string literals and the regular concat on different types.
     boolean bool = true;
     assertTrue((bool + " is true").equals("true is true"));
+    assertTrue((true + " is true").equals("true is true"));
     short s = 1;
     assertTrue((s + " is 1").equals("1 is 1"));
+    assertTrue((((short) 1) + " is 1").equals("1 is 1"));
     byte b = 1;
     assertTrue((b + " is 1").equals("1 is 1"));
+    assertTrue((((byte) 1) + " is 1").equals("1 is 1"));
     char c = 'F';
     assertTrue((c + "oo").equals("Foo"));
+    assertTrue(('F' + "oo").equals("Foo"));
     int i = 1;
     assertTrue((i + " is 1").equals("1 is 1"));
+    assertTrue((1 + " is 1").equals("1 is 1"));
     long l = 1L;
     assertTrue((l + " is 1").equals("1 is 1"));
+    assertTrue((1L + " is 1").equals("1 is 1"));
     double d = 1.1d;
     assertTrue((d + " is 1.1").equals("1.1 is 1.1"));
+    assertTrue((1.1d + " is 1.1").equals("1.1 is 1.1"));
     float f = 1.5f;
     assertTrue((f + " is 1.5").equals("1.5 is 1.5"));
+    assertTrue((1.5f + " is 1.5").equals("1.5 is 1.5"));
   }
 
   private static void testConcatenationWithUndefined() {
