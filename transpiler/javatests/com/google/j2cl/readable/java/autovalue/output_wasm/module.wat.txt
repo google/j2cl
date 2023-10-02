@@ -2846,14 +2846,14 @@
 (func $$create__autovalue_AutoValueWithBuilder@autovalue.AutoValue_AutoValueWithBuilder.Builder
  (param $source (ref null $autovalue.AutoValueWithBuilder))
  (result (ref null $autovalue.AutoValue_AutoValueWithBuilder.Builder))
- ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:73:12
+ ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:73:4
  (local $$instance (ref null $autovalue.AutoValue_AutoValueWithBuilder.Builder))
  (block
-  ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:73:12
+  ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:73:4
   (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueWithBuilder.Builder (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithBuilder.Builder.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Double) (i32.const 0)))
-  ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:73:12
+  ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:73:4
   (call $$ctor__autovalue_AutoValueWithBuilder__void_$p_autovalue_AutoValue_AutoValueWithBuilder_Builder@autovalue.AutoValue_AutoValueWithBuilder.Builder (ref.as_non_null (local.get $$instance))(local.get $source))
-  ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:73:12
+  ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:73:4
   (return (local.get $$instance))
  )
 )
@@ -2862,11 +2862,11 @@
 (func $$ctor__autovalue_AutoValueWithBuilder__void_$p_autovalue_AutoValue_AutoValueWithBuilder_Builder@autovalue.AutoValue_AutoValueWithBuilder.Builder
  (param $this (ref null $autovalue.AutoValue_AutoValueWithBuilder.Builder))
  (param $source (ref null $autovalue.AutoValueWithBuilder))
- ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:73:12
+ ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:73:4
  (block
-  ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:73:49
+  ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:73:41
   (call $$clinit__void@autovalue.AutoValue_AutoValueWithBuilder.Builder )
-  ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:73:49
+  ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:73:41
   (call $$ctor__void_$p_autovalue_AutoValueWithBuilder_Builder@autovalue.AutoValueWithBuilder.Builder (ref.as_non_null (local.get $this)))
   ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:74:6
   (struct.set $autovalue.AutoValue_AutoValueWithBuilder.Builder $f_booleanField__autovalue_AutoValue_AutoValueWithBuilder_Builder_ (local.get $this) (call_ref $function.m_getBooleanField__boolean (ref.as_non_null (local.get $source))(struct.get $autovalue.AutoValueWithBuilder.vtable $m_getBooleanField__boolean (struct.get $autovalue.AutoValueWithBuilder $vtable(local.get $source)))))
