@@ -1,7 +1,7 @@
 # Description:
 #  Custom browser definitions for Wasm.
 
-load("//testing/web/build_defs:web.bzl", "custom_browser")
+load("@io_bazel_rules_webtesting//web:web.bzl", "custom_browser")
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],

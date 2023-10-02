@@ -7,16 +7,17 @@
 # for community experimentation and it doesn't reflect final workings of the product
 # nor the Wasm spec.
 
-load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
 load(
     "@com_google_j2cl//build_defs:rules.bzl",
     "j2cl_application",
     "j2wasm_application",
     "j2wasm_library",
 )
+load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
 
 package(
     default_applicable_licenses = ["@com_google_j2cl//:j2cl_license"],
+    default_visibility = ["//visibility:public"],
     licenses = ["notice"],
 )
 

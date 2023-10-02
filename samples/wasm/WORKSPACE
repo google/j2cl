@@ -13,3 +13,8 @@ load_j2cl_repo_deps()
 
 load("@com_google_j2cl//build_defs:workspace.bzl", "setup_j2cl_workspace")
 setup_j2cl_workspace()
+
+load("@io_bazel_rules_closure//closure:defs.bzl", "setup_web_test_repositories")
+setup_web_test_repositories(
+    chromium = True,
+)
