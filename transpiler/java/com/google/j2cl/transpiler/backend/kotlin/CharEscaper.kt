@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
+import com.google.j2cl.transpiler.backend.kotlin.common.code
+
 /**
  * Returns escape identifier for this char if present
  * (https://kotlinlang.org/spec/syntax-and-grammar.html#grammar-rule-EscapedIdentifier).
@@ -39,14 +41,14 @@ private val Char.identifierEscapedStringOrNull: String?
 
 /** Returns true if this char should be escaped using Unicode escaping. */
 private val Char.needsUnicodeEscaping: Boolean
-  get() = toInt().let { it < 0x20 || it >= 0x7f }
+  get() = code !in 0x20..0x7e
 
 /**
  * Returns escaped string using Unicode escaping, or null if it does not need to be escaped
  * (https://kotlinlang.org/spec/syntax-and-grammar.html#grammar-rule-UniCharacterLiteral).
  */
 private val Char.unicodeEscapedStringOrNull: String?
-  get() = takeIf { it.needsUnicodeEscaping }?.let { String.format("\\u%04X", it.toInt()) }
+  get() = takeIf { it.needsUnicodeEscaping }?.let { String.format("\\u%04X", it.code) }
 
 /** Returns escaped string. */
 private val Char.escapedString: String
