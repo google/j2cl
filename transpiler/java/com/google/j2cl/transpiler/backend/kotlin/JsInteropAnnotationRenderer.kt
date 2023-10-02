@@ -30,20 +30,16 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
 internal fun Renderer.jsInteropAnnotationsSource(fieldDescriptor: FieldDescriptor): Source =
-  atMostOneSource(
-    jsPropertyAnnotationSource(fieldDescriptor),
-    jsIgnoreAnnotationSource(fieldDescriptor),
-    jsOverlayAnnotationSource(fieldDescriptor)
-  )
+  jsPropertyAnnotationSource(fieldDescriptor)
+    .ifEmpty { jsIgnoreAnnotationSource(fieldDescriptor) }
+    .ifEmpty { jsOverlayAnnotationSource(fieldDescriptor) }
 
 internal fun Renderer.jsInteropAnnotationsSource(methodDescriptor: MethodDescriptor): Source =
-  atMostOneSource(
-    jsPropertyAnnotationSource(methodDescriptor),
-    jsMethodAnnotationSource(methodDescriptor),
-    jsConstructorAnnotationSource(methodDescriptor),
-    jsIgnoreAnnotationSource(methodDescriptor),
-    jsOverlayAnnotationSource(methodDescriptor)
-  )
+  jsPropertyAnnotationSource(methodDescriptor)
+    .ifEmpty { jsMethodAnnotationSource(methodDescriptor) }
+    .ifEmpty { jsConstructorAnnotationSource(methodDescriptor) }
+    .ifEmpty { jsIgnoreAnnotationSource(methodDescriptor) }
+    .ifEmpty { jsOverlayAnnotationSource(methodDescriptor) }
 
 private fun Renderer.jsPropertyAnnotationSource(fieldDescriptor: FieldDescriptor): Source =
   fieldDescriptor
@@ -98,11 +94,9 @@ private fun Renderer.jsMethodAnnotationSource(methodDescriptor: MethodDescriptor
     .orEmpty()
 
 internal fun Renderer.jsInteropAnnotationsSource(typeDeclaration: TypeDeclaration): Source =
-  atMostOneSource(
-    jsFunctionAnnotationSource(typeDeclaration),
-    jsTypeAnnotationSource(typeDeclaration),
-    jsEnumAnnotationSource(typeDeclaration)
-  )
+  jsFunctionAnnotationSource(typeDeclaration)
+    .ifEmpty { jsTypeAnnotationSource(typeDeclaration) }
+    .ifEmpty { jsEnumAnnotationSource(typeDeclaration) }
 
 private fun Renderer.jsFunctionAnnotationSource(typeDeclaration: TypeDeclaration): Source =
   typeDeclaration
@@ -204,13 +198,3 @@ private val MemberDescriptor.hasJsIgnoreAnnotation
 
 private val FieldDescriptor.hasJsPropertyAnnotation
   get() = originalJsInfo.hasJsMemberAnnotation && isJsProperty
-
-private fun atMostOneSource(source: Source, vararg sources: Source): Source {
-  val nonEmptySources = listOf(source, *sources).filter { !it.isEmpty() }
-
-  return when (nonEmptySources.size) {
-    0 -> Source.EMPTY
-    1 -> nonEmptySources[0]
-    else -> throw IllegalArgumentException("There is more than one non-empty source.")
-  }
-}

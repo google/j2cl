@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler.backend.kotlin.source
 
 import com.google.j2cl.transpiler.backend.common.SourceBuilder
-import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 
 /** Composable piece of source code. */
 class Source
