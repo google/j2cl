@@ -24,6 +24,7 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotation
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.assignment
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.literal
+import com.google.j2cl.transpiler.backend.kotlin.ast.Visibility as KtVisibility
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.dotSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
@@ -189,12 +190,12 @@ private val MemberDescriptor.hasJsIgnoreAnnotation
   get() =
     // We need to reverse-engineering  here because JsInfo does not carry over the information about
     // JsIgnore annotation.
-    // TODO(b/266614719):  Rely on annotation presence instead when JsInterop annotations are part
+    // TODO(b/266614719): Rely on annotation presence instead when JsInterop annotations are part
     //  of the J2CL ast.
     enclosingTypeDescriptor.isJsType &&
-      visibility.isPublic &&
-      originalJsInfo.jsMemberType == JsMemberType.NONE &&
-      !isJsOverlay
+      !enclosingTypeDescriptor.isNative &&
+      ktVisibility == KtVisibility.PUBLIC &&
+      originalJsInfo.jsMemberType == JsMemberType.NONE
 
 private val FieldDescriptor.hasJsPropertyAnnotation
   get() = originalJsInfo.hasJsMemberAnnotation && isJsProperty
