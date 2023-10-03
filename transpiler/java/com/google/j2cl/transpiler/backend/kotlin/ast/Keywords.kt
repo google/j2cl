@@ -15,46 +15,50 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin.ast
 
-// https://kotlinlang.org/docs/keyword-reference.html#hard-keywords
-private val hardKeywordSet =
-  setOf(
-    "as",
-    "as?",
-    "break",
-    "class",
-    "continue",
-    "do",
-    "else",
-    "false",
-    "for",
-    "fun",
-    "if",
-    "in",
-    "interface",
-    "!in",
-    "is",
-    "!is",
-    "null",
-    "object",
-    "package",
-    "return",
-    "super",
-    "this",
-    "throw",
-    "true",
-    "try",
-    "typealias",
-    "typeof",
-    "val",
-    "var",
-    "when",
-    "while"
-  )
+/** Kotlin keyword utilities. */
+object Keywords {
+  /**
+   * Returns [true] if [string] is a hard keyword, as defined here:
+   * https://kotlinlang.org/docs/keyword-reference.html#hard-keywords
+   */
+  fun isHard(string: String) = HARD_KEYWORD_SET.contains(string)
 
-/**
- * Returns {@code true} if {@code string} is a hard keyword:
- * https://kotlinlang.org/docs/keyword-reference.html#hard-keywords
- */
-fun isHardKeyword(string: String) = hardKeywordSet.contains(string)
+  /** Returns [true] if [string] keyword is not valid in enum value declaration. */
+  fun isForbiddenInEnumValueDeclaration(string: String) = string == "init"
 
-fun isForbiddenInEnumValueDeclaration(string: String) = string == "init"
+  // https://kotlinlang.org/docs/keyword-reference.html#hard-keywords
+  private val HARD_KEYWORD_SET =
+    setOf(
+      "as",
+      "as?",
+      "break",
+      "class",
+      "continue",
+      "do",
+      "else",
+      "false",
+      "for",
+      "fun",
+      "if",
+      "in",
+      "interface",
+      "!in",
+      "is",
+      "!is",
+      "null",
+      "object",
+      "package",
+      "return",
+      "super",
+      "this",
+      "throw",
+      "true",
+      "try",
+      "typealias",
+      "typeof",
+      "val",
+      "var",
+      "when",
+      "while"
+    )
+}

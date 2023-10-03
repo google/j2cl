@@ -34,7 +34,7 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.INNER_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.INTERFACE_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.NATIVE_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.OPEN_KEYWORD
-import com.google.j2cl.transpiler.backend.kotlin.ast.isForbiddenInEnumValueDeclaration
+import com.google.j2cl.transpiler.backend.kotlin.ast.Keywords
 import com.google.j2cl.transpiler.backend.kotlin.ast.kotlinMembers
 import com.google.j2cl.transpiler.backend.kotlin.objc.comment
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
@@ -183,7 +183,7 @@ private fun Renderer.enumValueSource(field: Field): Source =
 private val FieldDescriptor.enumValueDeclarationNameSource: Source
   get() =
     name!!.let {
-      if (isForbiddenInEnumValueDeclaration(it)) {
+      if (Keywords.isForbiddenInEnumValueDeclaration(it)) {
         source(it.inBackTicks)
       } else {
         identifierSource(it)

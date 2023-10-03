@@ -16,7 +16,7 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.HasName
-import com.google.j2cl.transpiler.backend.kotlin.ast.isHardKeyword
+import com.google.j2cl.transpiler.backend.kotlin.ast.Keywords
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.dotSeparated
@@ -30,7 +30,7 @@ internal fun identifierSource(identifier: String): Source = source(identifier.id
 internal val String.identifierString
   get() =
     replace("$", "___").let { withoutDollars ->
-      withoutDollars.letIf(isHardKeyword(withoutDollars) || !withoutDollars.isValidIdentifier) {
+      withoutDollars.letIf(Keywords.isHard(withoutDollars) || !withoutDollars.isValidIdentifier) {
         withoutDollars.inBackTicks
       }
     }
