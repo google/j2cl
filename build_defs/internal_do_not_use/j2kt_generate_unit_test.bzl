@@ -63,6 +63,7 @@ def j2kt_generate_unit_test(name, test_class, deps, platform = "J2KT-JVM", tags 
     extract_kotlin_srcjar(
         name = name + "_transpile_gen",
         input_jar = out_jar,
+        tags = tags,
     )
 
     if platform == "J2KT-JVM":
@@ -74,6 +75,7 @@ def j2kt_generate_unit_test(name, test_class, deps, platform = "J2KT-JVM", tags 
                 "//third_party/kotlin/kotlin:kotlin_test_junit",
                 "//build_defs/internal_do_not_use:internal_junit_runtime-j2kt-jvm",
             ],
+            tags = tags,
             testonly = 1,
         )
 
@@ -86,6 +88,7 @@ def j2kt_generate_unit_test(name, test_class, deps, platform = "J2KT-JVM", tags 
                 ":" + name + "_lib",
                 "//build_defs/internal_do_not_use:internal_junit_runtime-j2kt-native",
             ],
+            tags = tags,
         )
 
 def _extract_kotlin_srcjar(ctx):

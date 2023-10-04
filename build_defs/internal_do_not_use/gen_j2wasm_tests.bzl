@@ -12,9 +12,9 @@ gen_j2wasm_tests(
 
 """
 
+load(":j2cl_util.bzl", "get_java_package")
 load(":j2wasm_library.bzl", "j2wasm_library")
 load(":j2wasm_test.bzl", "j2wasm_test")
-load(":j2cl_util.bzl", "get_java_package")
 
 def gen_j2wasm_tests(
         name,
@@ -59,6 +59,7 @@ def gen_j2wasm_tests(
             deps = deps + lib_deps,
             srcs = supporting_lib_files,
             plugins = lib_plugins + plugins,
+            tags = tags,
         )
 
     for test_file in test_files:

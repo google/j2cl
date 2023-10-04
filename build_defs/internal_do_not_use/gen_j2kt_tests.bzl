@@ -13,9 +13,9 @@ gen_j2cl_tests(
 
 """
 
-load(":j2kt_test.bzl", "j2kt_native_test")
-load(":j2kt_library.bzl", "j2kt_native_library")
 load(":j2cl_util.bzl", "get_java_package")
+load(":j2kt_library.bzl", "j2kt_native_library")
+load(":j2kt_test.bzl", "j2kt_native_test")
 
 def gen_j2kt_native_tests(
         name,
@@ -61,6 +61,7 @@ def gen_j2kt_native_tests(
             deps = deps + lib_deps,
             srcs = supporting_lib_files,
             plugins = lib_plugins + plugins,
+            tags = tags,
             testonly = 1,
         )
 

@@ -13,8 +13,8 @@ gen_j2cl_tests(
 
 """
 
-load(":j2cl_test.bzl", "j2cl_test")
 load(":j2cl_library.bzl", "j2cl_library")
+load(":j2cl_test.bzl", "j2cl_test")
 load(":j2cl_util.bzl", "get_java_package")
 
 def gen_j2cl_tests(
@@ -66,6 +66,7 @@ def gen_j2cl_tests(
             deps = deps + lib_deps,
             srcs = supporting_lib_files,
             plugins = lib_plugins + plugins,
+            tags = tags,
             testonly = 1,
             generate_build_test = generate_build_test,
             # Safe here as this is for tests only and there are no downstream users.
