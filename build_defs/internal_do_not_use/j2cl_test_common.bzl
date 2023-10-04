@@ -230,7 +230,7 @@ def j2cl_test_common(
             # j2cl_test for the compiled mode to pick it up (otherwise dropped
             # in jsunit_test if user provided only in bootstrap_files).
             ":%s_testlib" % name,
-            ":%s_generated_suite_lib" % name,
+            ":%s_lib" % generated_suite_name,
             Label("//build_defs/internal_do_not_use:closure_testsuite"),
             Label("//build_defs/internal_do_not_use:closure_testcase"),
             Label("//build_defs/internal_do_not_use:internal_parametrized_test_suite"),
@@ -246,7 +246,6 @@ def j2cl_test_common(
         )
 
         # Trigger our code generation
-        exec_properties = (kwargs.get("exec_properties") or {})
         j2wasm_generate_jsunit_suite(
             name = generated_suite_name,
             test_class = test_class,
@@ -254,15 +253,21 @@ def j2cl_test_common(
             tags = tags,
             optimize = optimize_wasm,
             defines = wasm_defs,
-            exec_properties = exec_properties,
+            exec_properties = kwargs.get("exec_properties") or {},
             use_legacy_wasm_spec = use_legacy_wasm_spec,
         )
 
         deps = [
+            ":%s_dep" % generated_suite_name,
             Label("//build_defs/internal_do_not_use:closure_testsuite"),
             Label("//build_defs/internal_do_not_use:closure_testcase"),
-            ":%s_j2wasm_application" % generated_suite_name,
         ]
+
+        # Open-source currently needs the explicit data dependency to wasm target.
+        data = data + [
+            ":%s_dep" % generated_suite_name,
+        ]
+
     else:
         fail("Unknown platform: " + platform)
 
