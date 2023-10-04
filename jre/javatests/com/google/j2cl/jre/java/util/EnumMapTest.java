@@ -208,4 +208,16 @@ public class EnumMapTest extends TestCase {
       lastOrdinal = newOrdinal;
     }
   }
+
+  public void testConstructorSucceedsGivenEmptyEnumMap() {
+    var unused = new EnumMap<>(new EnumMap<Numbers, Integer>(Numbers.class));
+  }
+
+  public void testConstructorThrowsGivenEmptyOtherMap() {
+    try {
+      new EnumMap<>(new HashMap<Numbers, Integer>());
+      fail();
+    } catch (IllegalArgumentException expected) {
+    }
+  }
 }

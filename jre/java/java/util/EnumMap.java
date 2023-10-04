@@ -15,6 +15,7 @@
  */
 package java.util;
 
+import static javaemul.internal.InternalPreconditions.checkArgument;
 
 /**
  * A {@link java.util.Map} of {@link Enum}s. <a
@@ -33,6 +34,7 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> implements 
 
   public EnumMap(Map<K, ? extends V> m) {
     putAll(m);
+    checkArgument(m instanceof EnumMap || !isEmpty());
   }
 
   @Override
