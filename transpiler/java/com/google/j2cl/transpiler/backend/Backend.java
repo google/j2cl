@@ -410,7 +410,6 @@ public enum Backend {
           // Propagate constants needs to run after NormalizeSwitchStatements since it introduces
           // field references to constant fields.
           PropagateConstants::new,
-          PropagateJsEnumConstants::new,
           StaticallyEvaluateStringConcatenation::new,
           StaticallyEvaluateStringComparison::new,
           ImplementStringConcatenation::new,
@@ -547,7 +546,6 @@ public enum Backend {
           // Propagate constants needs to run after NormalizeSwitchStatements since it introduces
           // field references to constant fields.
           PropagateConstants::new,
-          PropagateJsEnumConstants::new,
           StaticallyEvaluateStringConcatenation::new,
           StaticallyEvaluateStringComparison::new,
           ImplementStringConcatenation::new,
