@@ -1015,6 +1015,18 @@ public final class AstUtils {
         && memberDescriptor.getEnclosingTypeDescriptor().isJsEnum();
   }
 
+  public static FieldDescriptor createJsEnumConstantFieldDescriptor(
+      FieldDescriptor fieldDescriptor) {
+    TypeDescriptor enumValueType =
+        getJsEnumValueFieldType(fieldDescriptor.getEnclosingTypeDescriptor().getTypeDeclaration());
+    return FieldDescriptor.Builder.from(fieldDescriptor)
+        .setTypeDescriptor(enumValueType)
+        .setFinal(true)
+        .setCompileTimeConstant(true)
+        .setEnumConstant(true)
+        .build();
+  }
+
   /** Returns the value field for a JsEnum. */
   public static TypeDescriptor getJsEnumValueFieldType(TypeDeclaration typeDeclaration) {
     FieldDescriptor valueFieldDescriptor = getJsEnumValueFieldDescriptor(typeDeclaration);

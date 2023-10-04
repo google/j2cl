@@ -142,6 +142,7 @@ import com.google.j2cl.transpiler.passes.OptimizeAnonymousInnerClassesToFunction
 import com.google.j2cl.transpiler.passes.OptimizeAutoValue;
 import com.google.j2cl.transpiler.passes.OptimizeEnums;
 import com.google.j2cl.transpiler.passes.PropagateConstants;
+import com.google.j2cl.transpiler.passes.PropagateJsEnumConstants;
 import com.google.j2cl.transpiler.passes.PropagateNullabilityJ2kt;
 import com.google.j2cl.transpiler.passes.RecoverShortcutBooleanOperator;
 import com.google.j2cl.transpiler.passes.RemoveAssertStatements;
@@ -411,6 +412,7 @@ public enum Backend {
           // Propagate constants needs to run after NormalizeSwitchStatements since it introduces
           // field references to constant fields.
           PropagateConstants::new,
+          PropagateJsEnumConstants::new,
           StaticallyEvaluateStringConcatenation::new,
           StaticallyEvaluateStringComparison::new,
           ImplementStringConcatenation::new,
@@ -544,6 +546,7 @@ public enum Backend {
           // Propagate constants needs to run after NormalizeSwitchStatements since it introduces
           // field references to constant fields.
           PropagateConstants::new,
+          PropagateJsEnumConstants::new,
           StaticallyEvaluateStringConcatenation::new,
           StaticallyEvaluateStringComparison::new,
           ImplementStringConcatenation::new,

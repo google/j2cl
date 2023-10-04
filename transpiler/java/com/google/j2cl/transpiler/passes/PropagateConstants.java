@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.passes;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
@@ -71,7 +72,10 @@ public class PropagateConstants extends LibraryNormalizationPass {
         new AbstractRewriter() {
           @Override
           public Node rewriteFieldAccess(FieldAccess fieldAccess) {
-            FieldDescriptor target = fieldAccess.getTarget();
+            if (!shouldPropagateConstant(fieldAccess.getTarget())) {
+              return fieldAccess;
+            }
+            FieldDescriptor target = getConstantFieldDescriptor(fieldAccess);
             Expression literal = literalsByField.get(target.getDeclarationDescriptor());
             if (literal == null) {
               return fieldAccess;
@@ -84,7 +88,15 @@ public class PropagateConstants extends LibraryNormalizationPass {
         });
   }
 
-  private static boolean isCompileTimeConstant(Field field) {
+  /** Gets the relevant field descriptor for the specified {@link FieldAccess}. */
+  protected FieldDescriptor getConstantFieldDescriptor(FieldAccess fieldAccess) {
+    return fieldAccess.getTarget();
+  }
+
+  private boolean isCompileTimeConstant(Field field) {
+    if (!shouldPropagateConstant(field.getDescriptor())) {
+      return false;
+    }
     return field.isCompileTimeConstant()
         // Consider final static fields that are initialized to literals to be compile time
         // constants. These might be driven from TypeLiterals or System.getProperty calls and it
@@ -93,5 +105,11 @@ public class PropagateConstants extends LibraryNormalizationPass {
             && field.isStatic()
             && (field.getInitializer() instanceof TypeLiteral
                 || field.getInitializer() instanceof StringLiteral));
+  }
+
+  protected boolean shouldPropagateConstant(FieldDescriptor fieldDescriptor) {
+    // Skip JsEnum constants, which must be handled separately.
+    return !(fieldDescriptor.isEnumConstant()
+        && AstUtils.isNonNativeJsEnum(fieldDescriptor.getEnclosingTypeDescriptor()));
   }
 }

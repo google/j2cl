@@ -25,7 +25,6 @@ import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
-import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.FieldDescriptor.FieldOrigin;
 import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.MemberReference;
@@ -106,18 +105,8 @@ public class NormalizeJsEnums extends NormalizationPass {
    * invocation.
    */
   private static Field createJsEnumConstant(Field field) {
-    TypeDescriptor enumValueType =
-        AstUtils.getJsEnumValueFieldType(
-            field.getDescriptor().getEnclosingTypeDescriptor().getTypeDeclaration());
-    FieldDescriptor closureEnumConstantFieldDescriptor =
-        FieldDescriptor.Builder.from(field.getDescriptor())
-            .setTypeDescriptor(enumValueType)
-            .setFinal(true)
-            .setCompileTimeConstant(true)
-            .setEnumConstant(true)
-            .build();
     return Field.Builder.from(field)
-        .setDescriptor(closureEnumConstantFieldDescriptor)
+        .setDescriptor(AstUtils.createJsEnumConstantFieldDescriptor(field.getDescriptor()))
         .setInitializer(getJsEnumConstantValue(field))
         .build();
   }
