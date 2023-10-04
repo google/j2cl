@@ -60,7 +60,6 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
-import org.eclipse.jdt.core.dom.Annotation;
 import org.eclipse.jdt.core.dom.Assignment;
 import org.eclipse.jdt.core.dom.BodyDeclaration;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
@@ -70,7 +69,6 @@ import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.IVariableBinding;
 import org.eclipse.jdt.core.dom.InfixExpression;
 import org.eclipse.jdt.core.dom.Modifier;
-import org.eclipse.jdt.core.dom.PackageDeclaration;
 import org.eclipse.jdt.core.dom.PostfixExpression;
 import org.eclipse.jdt.core.dom.PrefixExpression;
 
@@ -1256,18 +1254,6 @@ public class JdtEnvironment {
             .build();
     cachedTypeDeclarationByTypeBinding.put(typeBinding, typeDeclaration);
     return typeDeclaration;
-  }
-
-  public static boolean isNullMarked(PackageDeclaration packageDeclaration) {
-    List<Annotation> packageAnnotations =
-        JdtEnvironment.asTypedList(packageDeclaration.annotations());
-
-    if (packageAnnotations == null) {
-      return false;
-    }
-
-    return hasNullMarkedAnnotation(
-        packageAnnotations.stream().map(Annotation::resolveAnnotationBinding));
   }
 
   private boolean isNullMarked(ITypeBinding typeBinding, PackageInfoCache packageInfoCache) {

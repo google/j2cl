@@ -19,12 +19,14 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.MoreCollectors.onlyElement;
+import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.isNullMarked;
+import static com.google.j2cl.transpiler.frontend.jdt.JsInteropAnnotationUtils.getJsNamespace;
+import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtObjectiveCName;
 import static java.util.Arrays.stream;
 import static java.util.Map.Entry.comparingByKey;
 import static java.util.stream.Collectors.toCollection;
 import static java.util.stream.Collectors.toList;
 
-import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.Iterables;
@@ -102,11 +104,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Optional;
 import javax.annotation.Nullable;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
-import org.eclipse.jdt.core.dom.Annotation;
 import org.eclipse.jdt.core.dom.AnnotationTypeMemberDeclaration;
 import org.eclipse.jdt.core.dom.AnonymousClassDeclaration;
 import org.eclipse.jdt.core.dom.ArrayType;
@@ -117,7 +117,6 @@ import org.eclipse.jdt.core.dom.EnumConstantDeclaration;
 import org.eclipse.jdt.core.dom.EnumDeclaration;
 import org.eclipse.jdt.core.dom.ExpressionMethodReference;
 import org.eclipse.jdt.core.dom.FieldDeclaration;
-import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
@@ -126,6 +125,7 @@ import org.eclipse.jdt.core.dom.Initializer;
 import org.eclipse.jdt.core.dom.LambdaExpression;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.Name;
+import org.eclipse.jdt.core.dom.PackageDeclaration;
 import org.eclipse.jdt.core.dom.SimpleName;
 import org.eclipse.jdt.core.dom.SingleVariableDeclaration;
 import org.eclipse.jdt.core.dom.SuperMethodInvocation;
@@ -148,19 +148,17 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       this.jdtCompilationUnit = jdtCompilationUnit;
 
       setCurrentSourceFile(sourceFilePath);
+      PackageDeclaration packageDeclaration = jdtCompilationUnit.getPackage();
       String packageName =
-          jdtCompilationUnit.getPackage() == null
-              ? ""
-              : jdtCompilationUnit.getPackage().getName().getFullyQualifiedName();
+          packageDeclaration == null ? "" : packageDeclaration.getName().getFullyQualifiedName();
       setCurrentCompilationUnit(CompilationUnit.createForFile(sourceFilePath, packageName));
       // Records information about package-info files supplied as source code.
-      if (getCurrentSourceFile().endsWith("package-info.java")
-          && jdtCompilationUnit.getPackage() != null) {
+      if (getCurrentSourceFile().endsWith("package-info.java") && packageDeclaration != null) {
         setPackagePropertiesFromSource(
             packageName,
-            getPackageJsNamespace(jdtCompilationUnit),
-            getObjectiveCName(jdtCompilationUnit),
-            isNullMarked(jdtCompilationUnit));
+            getJsNamespace(packageDeclaration),
+            getKtObjectiveCName(packageDeclaration),
+            isNullMarked(packageDeclaration));
       }
       for (Object object : jdtCompilationUnit.types()) {
         AbstractTypeDeclaration abstractTypeDeclaration = (AbstractTypeDeclaration) object;
@@ -169,49 +167,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
       return getCurrentCompilationUnit();
     }
-
-    @Nullable
-    private IAnnotationBinding getAnnotationBinding(
-        org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit,
-        Predicate<IAnnotationBinding> whichAnnotation) {
-      List<Annotation> packageAnnotations =
-          JdtEnvironment.asTypedList(jdtCompilationUnit.getPackage().annotations());
-      if (packageAnnotations == null) {
-        return null;
-      }
-
-      Optional<IAnnotationBinding> annotationBinding =
-          packageAnnotations.stream()
-              .map(Annotation::resolveAnnotationBinding)
-              .filter(whichAnnotation)
-              .findFirst();
-
-      return annotationBinding.orElse(null);
-    }
-
-    @Nullable
-    private String getObjectiveCName(org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
-      IAnnotationBinding annotationBinding =
-          getAnnotationBinding(jdtCompilationUnit, KtInteropAnnotationUtils::isKtObjectiveCName);
-      return annotationBinding != null
-          ? KtInteropAnnotationUtils.getKtObjectiveCName(annotationBinding)
-          : null;
-    }
-
-    @Nullable
-    private String getPackageJsNamespace(
-        org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
-      IAnnotationBinding annotationBinding =
-          getAnnotationBinding(jdtCompilationUnit, JsInteropAnnotationUtils::isJsPackageAnnotation);
-      return annotationBinding != null
-          ? JsInteropAnnotationUtils.getJsNamespace(annotationBinding)
-          : null;
-    }
-
-    private boolean isNullMarked(org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
-      return JdtEnvironment.isNullMarked(jdtCompilationUnit.getPackage());
-    }
-
     private Type convert(AbstractTypeDeclaration typeDeclaration) {
       switch (typeDeclaration.getNodeType()) {
         case ASTNode.ANNOTATION_TYPE_DECLARATION:

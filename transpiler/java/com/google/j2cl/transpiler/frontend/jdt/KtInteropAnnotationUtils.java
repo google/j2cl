@@ -25,9 +25,11 @@ import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_PR
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_THROWS_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.SUPPRESS_WARNINGS_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.findAnnotationBindingByName;
+import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.getAnnotationBinding;
 import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.getStringAttribute;
 
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
+import org.eclipse.jdt.core.dom.PackageDeclaration;
 
 /** Utility methods to get information about Kotlin Interop annotations. */
 public class KtInteropAnnotationUtils {
@@ -53,6 +55,11 @@ public class KtInteropAnnotationUtils {
 
   public static String getKtObjectiveCName(IAnnotationBinding annotationBinding) {
     return getStringAttribute(annotationBinding, "value");
+  }
+
+  public static String getKtObjectiveCName(PackageDeclaration packageDeclaration) {
+    return getKtObjectiveCName(
+        getAnnotationBinding(packageDeclaration, KtInteropAnnotationUtils::isKtObjectiveCName));
   }
 
   public static boolean isKtObjectiveCName(IAnnotationBinding annotationBinding) {

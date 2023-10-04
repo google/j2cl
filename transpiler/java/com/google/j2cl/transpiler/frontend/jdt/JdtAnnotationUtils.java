@@ -18,12 +18,18 @@ package com.google.j2cl.transpiler.frontend.jdt;
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getSuppressWarningsAnnotation;
 import static java.util.Arrays.stream;
 
+import com.google.common.base.Predicate;
 import com.google.common.base.VerifyException;
+import com.google.j2cl.transpiler.frontend.common.Nullability;
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 import javax.annotation.Nullable;
+import org.eclipse.jdt.core.dom.Annotation;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IBinding;
+import org.eclipse.jdt.core.dom.PackageDeclaration;
 import org.eclipse.jdt.internal.compiler.impl.BooleanConstant;
 import org.eclipse.jdt.internal.compiler.impl.IntConstant;
 import org.eclipse.jdt.internal.compiler.impl.StringConstant;
@@ -130,6 +136,23 @@ public final class JdtAnnotationUtils {
     }
   }
 
+  public static IAnnotationBinding getAnnotationBinding(
+      PackageDeclaration packageDeclaration, Predicate<IAnnotationBinding> whichAnnotation) {
+    List<Annotation> packageAnnotations =
+        JdtEnvironment.asTypedList(packageDeclaration.annotations());
+    if (packageAnnotations == null) {
+      return null;
+    }
+
+    Optional<IAnnotationBinding> annotationBinding =
+        packageAnnotations.stream()
+            .map(Annotation::resolveAnnotationBinding)
+            .filter(whichAnnotation)
+            .findFirst();
+
+    return annotationBinding.orElse(null);
+  }
+
   public static boolean isWarningSuppressed(
       IAnnotationBinding[] annotationBindings, String warning) {
     IAnnotationBinding annotationBinding = getSuppressWarningsAnnotation(annotationBindings);
@@ -139,6 +162,13 @@ public final class JdtAnnotationUtils {
 
     Object[] suppressions = JdtAnnotationUtils.getArrayAttribute(annotationBinding, "value");
     return stream(suppressions).anyMatch(warning::equals);
+  }
+
+  public static boolean isNullMarked(PackageDeclaration packageDeclaration) {
+    return getAnnotationBinding(
+            packageDeclaration,
+            (a) -> Nullability.isNullMarkedAnnotation(a.getAnnotationType().getQualifiedName()))
+        != null;
   }
 
   private JdtAnnotationUtils() {}

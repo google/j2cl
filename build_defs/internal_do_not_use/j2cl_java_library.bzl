@@ -1,9 +1,9 @@
 """J2CL library rules."""
 
-load(":provider.bzl", "J2clInfo", "J2ktInfo")
 load(":j2cl_common.bzl", "J2CL_TOOLCHAIN_ATTRS", "j2cl_common", "split_srcs")
-load(":j2kt_common.bzl", "j2kt_common")
 load(":j2cl_js_common.bzl", "J2CL_JS_ATTRS", "JS_PROVIDER_NAME", "j2cl_js_provider")
+load(":j2kt_common.bzl", "j2kt_common")
+load(":provider.bzl", "J2clInfo", "J2ktInfo")
 
 def _impl_j2cl_library(ctx):
     if ctx.attr.j2kt_web_experiment_enabled:
@@ -21,7 +21,11 @@ def _impl_j2cl_library(ctx):
             javac_opts = ctx.attr.javacopts,
         )
 
-        srcs = js_srcs
+        # Pass the package-info.java files as srcs so Kotlin frontend can correctly resolved
+        # JsPackage annotations.
+        # TODO(dramaix): extract package-info from src-jar of the jvm compilation to include
+        # generated package-info.java files.
+        srcs = js_srcs + [f for f in jvm_srcs if f.basename == "package-info.java"]
         kt_common_srcs = j2kt_provider._private_.transpile_kt_out
 
     else:

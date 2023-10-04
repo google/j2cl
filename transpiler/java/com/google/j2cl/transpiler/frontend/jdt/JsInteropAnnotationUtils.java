@@ -28,6 +28,7 @@ import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_PA
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_PROPERTY_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_TYPE_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.SUPPRESS_WARNINGS_ANNOTATION_NAME;
+import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.getAnnotationBinding;
 import static java.util.Arrays.stream;
 
 import java.util.Optional;
@@ -35,6 +36,7 @@ import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
+import org.eclipse.jdt.core.dom.PackageDeclaration;
 
 /** Utility methods to get information about Js Interop annotations. */
 public class JsInteropAnnotationUtils {
@@ -118,6 +120,12 @@ public class JsInteropAnnotationUtils {
     }
     Object[] suppressions = JdtAnnotationUtils.getArrayAttribute(suppressWarningsBinding, "value");
     return stream(suppressions).anyMatch("unusable-by-js"::equals);
+  }
+
+  public static String getJsNamespace(PackageDeclaration packageDeclaration) {
+    IAnnotationBinding annotationBinding =
+        getAnnotationBinding(packageDeclaration, JsInteropAnnotationUtils::isJsPackageAnnotation);
+    return JsInteropAnnotationUtils.getJsNamespace(annotationBinding);
   }
 
   /** The namespace specified on a package, type, method or field. */
