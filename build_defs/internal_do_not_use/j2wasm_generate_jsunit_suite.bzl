@@ -117,7 +117,7 @@ def j2wasm_generate_jsunit_suite(
     processed_wasm_path = wasm_path.replace("/", "\\/")
 
     native.genrule(
-        name = name + "_transpile_gen",
+        name = name,
         srcs = [out_jar],
         outs = [name + ".js.zip"],
         cmd = "\n".join([

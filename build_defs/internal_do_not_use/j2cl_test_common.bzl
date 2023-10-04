@@ -291,6 +291,7 @@ def j2cl_test_common(
 
     j2cl_web_test(
         name = name,
+        src = ":" + generated_suite_name,
         deps = deps,
         browsers = browsers,
         data = data,

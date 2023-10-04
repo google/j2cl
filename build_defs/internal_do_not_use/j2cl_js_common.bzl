@@ -102,6 +102,7 @@ J2CL_TEST_DEFS = []
 # buildifier: disable=function-docstring-args
 def j2cl_web_test(
         name,
+        src,
         deps,
         browsers,
         data,
@@ -124,15 +125,14 @@ def j2cl_web_test(
 
     # unzip generated_suite.js.zip and take 1 testsuite js file
     # fail if multiple testsuites or suiteclasses are provided
-    out_zip = ":%s_generated_suite.js.zip" % name
     native.genrule(
         name = "gen" + name + "_test.js",
-        srcs = [out_zip],
+        srcs = [src],
         outs = [
             testsuite_file_name,
         ],
         cmd = "\n".join([
-            "unzip -q -o $(locations %s) *.js -d zip_out/" % out_zip,
+            "unzip -q -o $(locations %s) *.js -d zip_out/" % src,
             "cd zip_out/",
             "mkdir -p ../$(RULEDIR)",
             "if [ $$(find . -name *.js | wc -l) -ne 1 ]; then",
