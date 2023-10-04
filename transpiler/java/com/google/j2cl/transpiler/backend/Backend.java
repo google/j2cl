@@ -395,9 +395,9 @@ public enum Backend {
           () -> new ImplementSystemGetProperty(options.getDefinesForWasm()),
           NormalizeTryWithResources::new,
           NormalizeCatchClauses::new,
+          () -> new NormalizeEnumClasses(/* useMakeEnumNameIndirection= */ false),
           NormalizeOverlayMembers::new,
           NormalizeInstanceCompileTimeConstants::new,
-          () -> new NormalizeEnumClasses(/* useMakeEnumNameIndirection= */ false),
           () -> new NormalizeShifts(/* narrowAllToInt= */ false),
           NormalizeStaticMemberQualifiers::new,
           NormalizeMultiExpressions::new,
@@ -405,8 +405,6 @@ public enum Backend {
           // Rewrite operations that do not have direct support in wasm into ones that have.
           () -> new ExpandCompoundAssignments(/* expandAll= */ true),
           InsertErasureTypeSafetyCasts::new,
-          // Rewrite 'a != b' to '!(a == b)'
-          RewriteReferenceEqualityOperations::new,
           RewriteUnaryExpressions::new,
           NormalizeSwitchStatements::new,
           // Propagate constants needs to run after NormalizeSwitchStatements since it introduces
@@ -416,6 +414,11 @@ public enum Backend {
           StaticallyEvaluateStringConcatenation::new,
           StaticallyEvaluateStringComparison::new,
           ImplementStringConcatenation::new,
+          // TODO(b/288145845): Add InsertJsEnumBoxingAndUnboxingConversions here.
+          // Rewrite 'a != b' to '!(a == b)'
+          // Must run after InsertJsEnumBoxingAndUnboxingConversions.
+          RewriteReferenceEqualityOperations::new,
+          PropagateJsEnumConstants::new,
           InsertNarrowingReferenceConversions::new,
           () -> new InsertUnboxingConversions(/* areBooleanAndDoubleBoxed= */ true),
           () -> new InsertBoxingConversions(/* areBooleanAndDoubleBoxed= */ true),
@@ -529,9 +532,9 @@ public enum Backend {
           // () -> new ImplementSystemGetProperty(options.getDefinesForWasm()),
           NormalizeTryWithResources::new,
           NormalizeCatchClauses::new,
+          () -> new NormalizeEnumClasses(/* useMakeEnumNameIndirection= */ false),
           NormalizeOverlayMembers::new,
           NormalizeInstanceCompileTimeConstants::new,
-          () -> new NormalizeEnumClasses(/* useMakeEnumNameIndirection= */ false),
           () -> new NormalizeShifts(/* narrowAllToInt= */ false),
           NormalizeStaticMemberQualifiers::new,
           NormalizeMultiExpressions::new,
@@ -539,8 +542,6 @@ public enum Backend {
           // Rewrite operations that do not have direct support in wasm into ones that have.
           () -> new ExpandCompoundAssignments(/* expandAll= */ true),
           InsertErasureTypeSafetyCasts::new,
-          // Rewrite 'a != b' to '!(a == b)'
-          RewriteReferenceEqualityOperations::new,
           RewriteUnaryExpressions::new,
           NormalizeSwitchStatements::new,
           // Propagate constants needs to run after NormalizeSwitchStatements since it introduces
@@ -550,6 +551,11 @@ public enum Backend {
           StaticallyEvaluateStringConcatenation::new,
           StaticallyEvaluateStringComparison::new,
           ImplementStringConcatenation::new,
+          // TODO(b/288145845): Add InsertJsEnumBoxingAndUnboxingConversions here.
+          // Rewrite 'a != b' to '!(a == b)'
+          // Must run after InsertJsEnumBoxingAndUnboxingConversions.
+          RewriteReferenceEqualityOperations::new,
+          PropagateJsEnumConstants::new,
           InsertNarrowingReferenceConversions::new,
           () -> new InsertUnboxingConversions(/* areBooleanAndDoubleBoxed= */ true),
           () -> new InsertBoxingConversions(/* areBooleanAndDoubleBoxed= */ true),
