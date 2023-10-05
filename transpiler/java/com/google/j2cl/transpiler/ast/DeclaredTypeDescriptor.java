@@ -381,7 +381,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         .setName(MethodDescriptor.CLINIT_METHOD_NAME)
         .setEnclosingTypeDescriptor(this)
         .setOrigin(MethodOrigin.SYNTHETIC_CLASS_INITIALIZER)
-        .setOriginalJsInfo(isNative() ? JsInfo.RAW_OVERLAY : JsInfo.RAW)
+        .setOriginalJsInfo(isNative() || isJsFunctionInterface() ? JsInfo.RAW_OVERLAY : JsInfo.RAW)
         .setStatic(true)
         .build();
   }
@@ -393,7 +393,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         .setEnclosingTypeDescriptor(this)
         .setTypeDescriptor(TypeDescriptors.get().nativeFunction)
         .setName(MethodDescriptor.CLINIT_METHOD_NAME)
-        .setOriginalJsInfo(isNative() ? JsInfo.RAW_OVERLAY : JsInfo.RAW)
+        .setOriginalJsInfo(isNative() || isJsFunctionInterface() ? JsInfo.RAW_OVERLAY : JsInfo.RAW)
         .setStatic(true)
         .build();
   }
