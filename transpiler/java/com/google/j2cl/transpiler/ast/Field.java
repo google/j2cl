@@ -71,7 +71,11 @@ public class Field extends Member {
     FieldDescriptor descriptor = getDescriptor();
     boolean isTestProperty =
         descriptor.getEnclosingTypeDescriptor().getTypeDeclaration().isAnnotatedWithJUnitRunWith();
-    return (descriptor.getKtInfo().isUninitializedWarningSuppressed() || isTestProperty)
+    return (descriptor.getKtInfo().isUninitializedWarningSuppressed()
+            || isTestProperty
+            // TODO(303529872): initialize native field with a dummy function known by the J2CL
+            //  transpiler.
+            || descriptor.isNative())
         && !descriptor.isFinal()
         && !descriptor.getTypeDescriptor().isNullable()
         && !hasInitializer();
