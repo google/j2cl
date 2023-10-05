@@ -548,15 +548,17 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   }
 
   /**
-   * Returns a method descriptor for a method declered in this type named {@code name}.
+   * Returns a method descriptor for a method declared in this type named {@code name}.
    *
-   * <p>Fails if not method with {@code name} is declared in the type or if there are multiple
-   * overloads declared in the type with the same {@code name}.
+   * <p>Returns {@code null} if no method with {@code name} is declared in the type. Fails if there
+   * are multiple overloads declared in the type with the same {@code name}.
    */
+  @Nullable
   public MethodDescriptor getMethodDescriptorByName(String name) {
     return getDeclaredMethodDescriptors().stream()
         .filter(m -> m.getName().equals(name))
-        .collect(onlyElement());
+        .collect(toOptional())
+        .orElse(null);
   }
 
   /** The list of all methods available on a given type. */
