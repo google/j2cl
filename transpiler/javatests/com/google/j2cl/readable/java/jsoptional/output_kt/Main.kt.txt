@@ -21,6 +21,7 @@ import javaemul.lang.*
 import jsinterop.annotations.JsConstructor
 import jsinterop.annotations.JsFunction
 import jsinterop.annotations.JsMethod
+import jsinterop.annotations.JsOptional
 import jsinterop.annotations.JsType
 import kotlin.Any
 import kotlin.Array
@@ -40,15 +41,15 @@ open class Main {
  @JsMethod
  open fun method1(
   @ObjCName("withInt") i1: Int,
-  @ObjCName("withJavaLangDouble") d: Double?,
-  @ObjCName("withJavaLangInteger") i: Int?
+  @ObjCName("withJavaLangDouble") @JsOptional d: Double?,
+  @ObjCName("withJavaLangInteger") @JsOptional i: Int?
  ) {}
 
  @ObjCName("method2")
  @JsMethod
  open fun method2(
   @ObjCName("withNSString") s1: String?,
-  @ObjCName("withJavaLangDouble") d: Double?,
+  @ObjCName("withJavaLangDouble") @JsOptional d: Double?,
   vararg @ObjCName("withJavaLangBooleanArray") i: Boolean?
  ) {
   val i_1: Array<Boolean?>? = i as Array<Boolean?>?
@@ -62,7 +63,7 @@ open class Main {
 
  @JsConstructor
  constructor(
-  @ObjCName("NSString") a: String?
+  @ObjCName("NSString") @JsOptional a: String?
  )
 
  @ObjCName("testFunction")
@@ -73,20 +74,20 @@ open class Main {
  @ObjCName("testOptionalFunction")
  @JsMethod
  open fun testOptionalFunction(
-  @ObjCName("withJsoptionalMain_Function") f: Main.Function?
+  @ObjCName("withJsoptionalMain_Function") @JsOptional f: Main.Function?
  ) {}
 
  @JsFunction
  fun interface Function {
   @ObjCName("f1")
   fun f1(
-   @ObjCName("withNSString") s: String?,
+   @ObjCName("withNSString") @JsOptional s: String?,
    vararg @ObjCName("withNSObjectArray") args: Any?
   ): Any?
  }
 
  class AFunction: Main.Function {
-  override fun f1(i: String?, vararg args: Any?): Any? {
+  override fun f1(@JsOptional i: String?, vararg args: Any?): Any? {
    val args_1: Array<Any?>? = args as Array<Any?>?
    return args_1!![0]
   }
@@ -97,23 +98,23 @@ open class Main {
   @ObjCName("m")
   fun m(
    @ObjCName("withId") t: T,
-   @ObjCName("withId") o: Any?
+   @ObjCName("withId") @JsOptional o: Any?
   )
  }
 
  @JsType
  open class TemplatedSubtype<T: String?>: Main.I<T> {
-  open override fun m(t: T, o: Any?) {}
+  open override fun m(t: T, @JsOptional o: Any?) {}
  }
 
  @JsType
  open inner class SpecializedSubtype(
-  @ObjCName("Id") a: Any?
+  @ObjCName("Id") @JsOptional a: Any?
  ): Main.I<String?> {
-  open override fun m(t: String?, o: Any?) {}
+  open override fun m(t: String?, @JsOptional o: Any?) {}
  }
 
  open class NonJsTypeSubtype: Main.I<String?> {
-  open override fun m(t: String?, o: Any?) {}
+  open override fun m(t: String?, @JsOptional o: Any?) {}
  }
 }

@@ -326,6 +326,7 @@ private fun Renderer.parameterSource(
   return spaceSeparated(
     Source.emptyUnless(parameterDescriptor.isVarargs) { VARARG_KEYWORD },
     objCParameterName?.let { objCNameAnnotationSource(it) }.orEmpty(),
+    jsInteropAnnotationsSource(parameterDescriptor),
     colonSeparated(nameSource(parameter), typeDescriptorSource(renderedTypeDescriptor))
   )
 }

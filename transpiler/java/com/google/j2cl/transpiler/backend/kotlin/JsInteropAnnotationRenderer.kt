@@ -20,6 +20,7 @@ import com.google.j2cl.transpiler.ast.JsMemberType
 import com.google.j2cl.transpiler.ast.JsUtils
 import com.google.j2cl.transpiler.ast.MemberDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor
+import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotation
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.assignment
@@ -29,6 +30,11 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.dotSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
+
+internal fun Renderer.jsInteropAnnotationsSource(typeDeclaration: TypeDeclaration): Source =
+  jsFunctionAnnotationSource(typeDeclaration)
+    .ifEmpty { jsTypeAnnotationSource(typeDeclaration) }
+    .ifEmpty { jsEnumAnnotationSource(typeDeclaration) }
 
 internal fun Renderer.jsInteropAnnotationsSource(fieldDescriptor: FieldDescriptor): Source =
   jsPropertyAnnotationSource(fieldDescriptor)
@@ -41,6 +47,12 @@ internal fun Renderer.jsInteropAnnotationsSource(methodDescriptor: MethodDescrip
     .ifEmpty { jsConstructorAnnotationSource(methodDescriptor) }
     .ifEmpty { jsIgnoreAnnotationSource(methodDescriptor) }
     .ifEmpty { jsOverlayAnnotationSource(methodDescriptor) }
+
+internal fun Renderer.jsInteropAnnotationsSource(parameterDescriptor: ParameterDescriptor): Source =
+  parameterDescriptor
+    .takeIf { it.isJsOptional }
+    ?.let { annotation(topLevelQualifiedNameSource("jsinterop.annotations.JsOptional")) }
+    .orEmpty()
 
 private fun Renderer.jsPropertyAnnotationSource(fieldDescriptor: FieldDescriptor): Source =
   fieldDescriptor
@@ -93,11 +105,6 @@ private fun Renderer.jsMethodAnnotationSource(methodDescriptor: MethodDescriptor
       )
     }
     .orEmpty()
-
-internal fun Renderer.jsInteropAnnotationsSource(typeDeclaration: TypeDeclaration): Source =
-  jsFunctionAnnotationSource(typeDeclaration)
-    .ifEmpty { jsTypeAnnotationSource(typeDeclaration) }
-    .ifEmpty { jsEnumAnnotationSource(typeDeclaration) }
 
 private fun Renderer.jsFunctionAnnotationSource(typeDeclaration: TypeDeclaration): Source =
   typeDeclaration
