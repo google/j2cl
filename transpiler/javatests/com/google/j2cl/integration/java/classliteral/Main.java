@@ -204,8 +204,9 @@ public class Main {
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
   private interface NativeInterface {}
 
+  @Wasm(
+      "nop") // TODO(b/301385322): remove when class literals on native JS objects are implemented.
   private static void testNative() {
-    // TODO(b/301385322) getClass() on Native JavaScript objects is not supported in Wasm.
     // Native types don't apply in the context of the JVM.
     if (!isJavaScript()) {
       return;

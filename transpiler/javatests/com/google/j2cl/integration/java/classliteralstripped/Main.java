@@ -21,6 +21,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertSame;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.TestUtils.isWasm;
 
+import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsEnum;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsPackage;
@@ -136,11 +137,9 @@ public class Main {
     void f();
   }
 
+  @Wasm(
+      "nop") // TODO(b/301385322): remove when class literals on native JS objects are implemented.
   private static void testNative() {
-    // TODO(b/301385322) getClass() on Native JavaScript objects is not supported in Wasm.
-    if (isWasm()) {
-      return;
-    }
     assertClass(NativeInterface.class);
     assertClass(NativeFunction.class);
     assertClass(NativeClass.class);

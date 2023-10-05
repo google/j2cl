@@ -137,6 +137,10 @@ public class ImplementClassMetadataViaGetters extends NormalizationPass {
           .setArguments(NumberLiteral.fromInt(arrayTypeDescriptor.getDimensions()))
           .build();
     }
+    if (typeDescriptor instanceof DeclaredTypeDescriptor) {
+      return getClassLiteralMethodCall(
+          typeDescriptor.getMetadataTypeDeclaration().toRawTypeDescriptor());
+    }
     return getClassLiteralMethodCall(typeDescriptor);
   }
 
