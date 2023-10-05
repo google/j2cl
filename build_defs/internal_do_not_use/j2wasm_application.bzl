@@ -134,6 +134,7 @@ def _impl_j2wasm_application(ctx):
 
     input = ctx.outputs.wat
     input_source_map = None
+    binaryen_symbolmap = ctx.actions.declare_file(ctx.label.name + ".binaryen.symbolmap")
     stages = _extract_stages(ctx.attr.binaryen_args)
     current_stage = 0
     for stage_args in stages:
@@ -163,8 +164,8 @@ def _impl_j2wasm_application(ctx):
             args.add("--output-source-map-url", source_map_base_url + "/" + ctx.outputs.srcmap.basename)
 
             # SymbolMap flag must be after optimization passes to get the final symbol names.
-            args.add("--symbolmap=" + ctx.outputs.symbolmap.path)
-            outputs.append(ctx.outputs.symbolmap)
+            args.add("--symbolmap=" + binaryen_symbolmap.path)
+            outputs.append(binaryen_symbolmap)
 
             # Always keep the embedded debug information if explicitly asked by user.
             if ctx.attr.enable_debug_info or ctx.var.get("J2CL_APP_STYLE", "") == "PRETTY":
@@ -202,6 +203,8 @@ def _impl_j2wasm_application(ctx):
         # Outputs of stage 'n' are now the inputs for stage 'n+1'
         input = output
         input_source_map = output_source_map
+
+    _remap_symbol_map(ctx, transpile_out, binaryen_symbolmap)
 
     runfiles.append(ctx.outputs.wasm)
 
@@ -284,6 +287,24 @@ def _extract_stages(args):
 # Trigger a parallel Javac build to provide better error messages than JDT.
 def _trigger_javac_build(deps):
     return depset(transitive = [d[J2wasmInfo]._private_.java_info.transitive_runtime_jars for d in deps])
+
+def _remap_symbol_map(ctx, transpile_out, binaryen_symbolmap):
+    ctx.actions.run_shell(
+        inputs = [transpile_out, binaryen_symbolmap],
+        outputs = [ctx.outputs.symbolmap],
+        command =
+            """awk 'BEGIN { FS = ":" } {
+                from = $1;
+                to = substr($0, length(from) + length(FS) + 1);
+                if (from ~ /^[0-9]+$/) {
+                    symbols[from] = to in mapping ? mapping[to] : to
+                } else {
+                    mapping[from] = to
+                }
+            } END {
+                for (i in symbols) print i":"symbols[i]
+            }' %s/namemap %s > %s""" % (transpile_out.path, binaryen_symbolmap.path, ctx.outputs.symbolmap.path),
+    )
 
 _J2WASM_APP_ATTRS = {
     "deps": attr.label_list(providers = [J2wasmInfo]),

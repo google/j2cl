@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.backend.wasm;
 
+import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.base.Predicates.not;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.lang.String.format;
@@ -171,6 +172,7 @@ public class WasmOutputsGenerator {
     builder.newLine();
     builder.append(")");
     output.write("module.wat", builder.build());
+    output.write("namemap", emitNameMapping(library));
   }
 
   private void emitDataSegments(Library library) {
@@ -921,5 +923,26 @@ public class WasmOutputsGenerator {
 
   private void generateJsImportsFile() {
     JsImportsGenerator.generateOutputs(output, environment.getJsImports());
+  }
+
+  private String emitNameMapping(Library library) {
+    SourceBuilder builder = new SourceBuilder();
+    library.accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitMethod(Method method) {
+            MethodDescriptor methodDescriptor = method.getDescriptor();
+            String methodImplementationName =
+                environment.getMethodImplementationName(methodDescriptor);
+            checkState(methodImplementationName.startsWith("$"));
+            builder.append(
+                String.format(
+                    "%s:%s",
+                    methodImplementationName.substring(1),
+                    methodDescriptor.getQualifiedBinaryName()));
+            builder.newLine();
+          }
+        });
+    return builder.build();
   }
 }
