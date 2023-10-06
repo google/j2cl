@@ -3,6 +3,7 @@
 load(":j2cl_common.bzl", "J2CL_TOOLCHAIN_ATTRS", "j2cl_common", "split_srcs")
 load(":j2cl_js_common.bzl", "J2CL_JS_ATTRS", "JS_PROVIDER_NAME", "j2cl_js_provider")
 load(":j2kt_common.bzl", "j2kt_common")
+load(":j2kt_import.bzl", "create_J2ktInfo_for_java_import")
 load(":provider.bzl", "J2clInfo", "J2ktInfo")
 
 def _impl_j2cl_library(ctx):
@@ -13,8 +14,8 @@ def _impl_j2cl_library(ctx):
         j2kt_provider = j2kt_common.compile(
             ctx,
             srcs = jvm_srcs,
-            java_deps = [d[J2clInfo]._private_.java_info for d in ctx.attr.deps if J2clInfo in d],
-            j2kt_exports = [d[J2ktInfo] for d in ctx.attr.exports if J2ktInfo in d],
+            java_deps = [p._private_.java_info for p in _j2kt_providers_of(ctx.attr.deps)],
+            j2kt_exports = [p for p in _j2kt_providers_of(ctx.attr.exports)],
             plugins = _javaplugin_providers_of(ctx.attr.plugins),
             exported_plugins = _javaplugin_providers_of(ctx.attr.exported_plugins),
             output_jar = ctx.actions.declare_file(ctx.label.name + "_j2kt_web_jvm.jar"),
@@ -69,6 +70,20 @@ def _impl_j2cl_library(ctx):
         j2cl_info = j2cl_provider,
         extra_providers = extra_providers,
     )
+
+def _j2kt_providers_of(deps):
+    return [p for p in [_j2kt_provider_or_none(d) for d in deps] if p != None]
+
+def _j2kt_provider_or_none(dep):
+    if J2ktInfo in dep:
+        return dep[J2ktInfo]
+    if J2clInfo in dep:
+        # This is a non-j2kt-web j2cl_library. Automatically import the java provider
+        # coming from j2cl transpilation into a new J2KT provider.
+        return create_J2ktInfo_for_java_import(dep[J2clInfo]._private_.java_info)
+
+    # This is a JS dep. This is not needed in the context of J2KT.
+    return None
 
 def _j2cl_or_js_providers_of(deps):
     return [_j2cl_or_js_provider_of(d) for d in deps]
