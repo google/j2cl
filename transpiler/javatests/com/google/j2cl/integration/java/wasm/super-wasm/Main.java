@@ -27,6 +27,7 @@ import javaemul.internal.annotations.Wasm;
  * <p>This test will be removed when all Wasm features are implemented and all integration tests are
  * enabled for Wasm.
  */
+@SuppressWarnings("unusable-by-js")
 public class Main {
 
   public static void main(String... args) throws Exception {
@@ -34,6 +35,7 @@ public class Main {
     testClassLiterals();
     testArrayInstanceOf();
     testArrayGetClass();
+    testNativeArrays();
   }
 
   private static void testWasmAnnotation() {
@@ -138,5 +140,28 @@ public class Main {
     Object objectArray = new Object[0];
     assertEquals(Object[].class, objectArray.getClass());
     assertEquals(Object.class, objectArray.getClass().getComponentType());
+  }
+
+  @Wasm("i31")
+  interface I31Ref {}
+
+  @Wasm("ref.i31")
+  private static native I31Ref toI31Ref(int value);
+
+  @Wasm("i31.get_s")
+  private static native int i31GetS(I31Ref value);
+
+  private static void testNativeArrays() {
+    I31Ref[] i31Refs = new I31Ref[10];
+
+    I31Ref two = toI31Ref(2);
+    i31Refs[1] = two;
+    assertTrue(i31GetS(i31Refs[1]) == 2);
+    for (int i = 0; i < i31Refs.length; i++) {
+      i31Refs[i] = toI31Ref(i);
+    }
+    for (int i = 0; i < i31Refs.length; i++) {
+      assertTrue(i31GetS(i31Refs[i]) == i);
+    }
   }
 }

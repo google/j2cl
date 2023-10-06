@@ -75,7 +75,22 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
    * Returns true for arrays where raw wasm array representation is enough. These arrays are located
    * in {@see javaemul.internal.WasmArrays}.
    */
-  public abstract boolean isNativeWasmArray();
+  public abstract boolean isMarkedAsNativeWasmArray();
+
+  @Override
+  public boolean isNativeWasmArray() {
+    if (isMarkedAsNativeWasmArray()) {
+      return true;
+    }
+
+    if (getComponentTypeDescriptor().toRawTypeDescriptor() instanceof DeclaredTypeDescriptor) {
+      DeclaredTypeDescriptor componentTypeDescriptor =
+          (DeclaredTypeDescriptor) getComponentTypeDescriptor().toRawTypeDescriptor();
+      return componentTypeDescriptor.getTypeDeclaration().getWasmInfo() != null;
+    }
+
+    return false;
+  }
 
   @Override
   public abstract boolean isNullable();
@@ -228,7 +243,7 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
     return new AutoValue_ArrayTypeDescriptor.Builder()
         // Default values.
         .setNullable(true)
-        .setNativeWasmArray(false);
+        .setMarkedAsNativeWasmArray(false);
   }
 
   /** Builder for an ArrayTypeDescriptor. */
@@ -242,7 +257,7 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
 
     public abstract Builder setNullable(boolean isNullable);
 
-    public abstract Builder setNativeWasmArray(boolean wasmNative);
+    public abstract Builder setMarkedAsNativeWasmArray(boolean wasmNative);
 
     abstract ArrayTypeDescriptor autoBuild();
 

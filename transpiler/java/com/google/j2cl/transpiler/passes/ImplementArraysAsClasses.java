@@ -302,7 +302,7 @@ public class ImplementArraysAsClasses extends NormalizationPass {
   }
 
   private static ArrayTypeDescriptor markArrayTypeDescriptorAsNative(ArrayTypeDescriptor original) {
-    return ArrayTypeDescriptor.Builder.from(original).setNativeWasmArray(true).build();
+    return ArrayTypeDescriptor.Builder.from(original).setMarkedAsNativeWasmArray(true).build();
   }
 
   private static TypeDescriptor maybeMarkTypeDescriptorAsNative(TypeDescriptor original) {

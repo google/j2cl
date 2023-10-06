@@ -824,11 +824,23 @@ public class WasmOutputsGenerator {
 
   private List<ArrayTypeDescriptor> collectUsedNativeArrayTypes(Library library) {
     Set<ArrayTypeDescriptor> usedArrayTypes = new LinkedHashSet<>();
+    // Collect native arrays from fields and variables; this covers all scenarios.
     library.accept(
+        // TODO(b/303659726): Generalize a type visitor that could be used here and other places
+        // like in ImportGatherer. Or consider emitting the one dimensional array type for all
+        // native types.
         new AbstractVisitor() {
           @Override
           public void exitField(Field field) {
-            TypeDescriptor typeDescriptor = field.getDescriptor().getTypeDescriptor();
+            collectIfArrayType(field.getDescriptor().getTypeDescriptor());
+          }
+
+          @Override
+          public void exitVariable(Variable variable) {
+            collectIfArrayType(variable.getTypeDescriptor());
+          }
+
+          private void collectIfArrayType(TypeDescriptor typeDescriptor) {
             if (!typeDescriptor.isArray()) {
               return;
             }

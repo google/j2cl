@@ -114,6 +114,11 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
     return false;
   }
 
+  /** Returns whether the described type is a wasm native array. */
+  public boolean isNativeWasmArray() {
+    return false;
+  }
+
   /**
    * Returns the mangled name of a type.
    *

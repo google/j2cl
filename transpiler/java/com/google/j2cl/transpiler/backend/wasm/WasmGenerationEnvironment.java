@@ -146,7 +146,10 @@ class WasmGenerationEnvironment {
     if (typeDescriptor.isArray()) {
       ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
       if (arrayTypeDescriptor.isNativeWasmArray()) {
-        return getWasmTypeName(arrayTypeDescriptor.getComponentTypeDescriptor()) + ".array";
+        String wasmTypeName = getWasmTypeName(arrayTypeDescriptor.getComponentTypeDescriptor());
+        // Make sure the resulting type name always has $ prefix.
+        String prefix = wasmTypeName.startsWith("$") ? "" : "$";
+        return format("%s%s.array", prefix, wasmTypeName);
       }
       return getWasmTypeName(TypeDescriptors.getWasmArrayType(arrayTypeDescriptor));
     }
@@ -172,9 +175,6 @@ class WasmGenerationEnvironment {
   }
 
   public String getWasmEmptyArrayGlobalName(ArrayTypeDescriptor arrayTypeDescriptor) {
-    checkArgument(
-        arrayTypeDescriptor.isPrimitiveArray()
-            || TypeDescriptors.isJavaLangObject(arrayTypeDescriptor.getComponentTypeDescriptor()));
     return "$__emptyArray_" + getWasmTypeName(arrayTypeDescriptor);
   }
   /** Returns the name of the global that stores the itable for a Java type. */
