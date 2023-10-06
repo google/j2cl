@@ -415,7 +415,6 @@ def j2wasm_application(name, defines = dict(), **kwargs):
             "--partial-inlining-ifs=4",
             "-fimfs=50",
             # Specific list of passes:
-            "--type-ssa",
             "--gufa",
             "-O3",
             "-O3",
@@ -432,8 +431,6 @@ def j2wasm_application(name, defines = dict(), **kwargs):
             "--gufa",
             # Get several rounds of -O3 after intrinsic lowering.
             "-O3",
-            "-O3",
-            "--type-merging",
             "-O3",
             # Mark all types as 'final' that we can, to help VMs at runtime.
             "--type-finalizing",
