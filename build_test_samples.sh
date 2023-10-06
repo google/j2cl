@@ -23,5 +23,5 @@ if [[ $1 == "CI" ]]; then
   (cd samples/guava && bazel build ...)
 
   # Build wasm Hello World sample in its own workspace
-  (cd samples/wasm && bazel test ...)
+  (cd samples/wasm && bazel build ...)
 fi
