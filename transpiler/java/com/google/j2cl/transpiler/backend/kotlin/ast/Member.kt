@@ -29,15 +29,3 @@ sealed class Member {
   /** Kotlin companion object member. */
   data class WithCompanionObject(val companionObject: CompanionObject) : Member()
 }
-
-/** Returns a list of Kotlin members inside this Java type. */
-val Type.kotlinMembers: List<Member>
-  get() =
-    members
-      .asSequence()
-      .filter { !it.isStatic && (!declaration.isAnonymous || !it.isConstructor) }
-      .map { Member.WithJavaMember(it) }
-      .plus(companionObjectOrNull?.let { Member.WithCompanionObject(it) })
-      .plus(types.map { Member.WithType(it) })
-      .filterNotNull()
-      .toList()

@@ -35,7 +35,6 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.INTERFACE_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.NATIVE_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.OPEN_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.ast.Keywords
-import com.google.j2cl.transpiler.backend.kotlin.ast.kotlinMembers
 import com.google.j2cl.transpiler.backend.kotlin.objc.comment
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
@@ -145,7 +144,7 @@ internal fun Renderer.typeBodySource(type: Type): Source =
     block(
       emptyLineSeparated(
         Source.emptyUnless(type.isEnum) { enumValuesSource(type) },
-        emptyLineSeparated(type.kotlinMembers.map { source(it) })
+        emptyLineSeparated(type.ktMembers.map { source(it) })
       )
     )
   }

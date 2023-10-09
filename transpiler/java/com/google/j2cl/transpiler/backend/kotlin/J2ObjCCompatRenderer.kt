@@ -37,8 +37,8 @@ import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.assignment
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.ast.companionDeclaration
-import com.google.j2cl.transpiler.backend.kotlin.ast.companionObjectOrNull
 import com.google.j2cl.transpiler.backend.kotlin.ast.declaration
+import com.google.j2cl.transpiler.backend.kotlin.ast.toCompanionObjectOrNull
 import com.google.j2cl.transpiler.backend.kotlin.common.buildList
 import com.google.j2cl.transpiler.backend.kotlin.common.code
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
@@ -120,7 +120,7 @@ private val Type.declarationsRenderers: List<Renderer<Source>>
     buildList<Renderer<Source>> {
       add(declaration.aliasDeclarationRenderer)
 
-      companionObjectOrNull?.let { add(it.declaration.aliasDeclarationRenderer) }
+      toCompanionObjectOrNull()?.let { add(it.declaration.aliasDeclarationRenderer) }
 
       if (isEnum) {
         add(nsEnumTypedefRenderer)

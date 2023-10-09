@@ -28,11 +28,10 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.Visibility
 import com.google.j2cl.transpiler.backend.kotlin.ast.Member
-import com.google.j2cl.transpiler.backend.kotlin.ast.kotlinMembers
 
 internal val Type.localNames: Set<String>
   get() =
-    kotlinMembers
+    ktMembers
       .mapNotNull { member ->
         when (member) {
           is Member.WithCompanionObject -> null
@@ -91,8 +90,7 @@ internal fun TypeDescriptor.ktQualifiedName(asSuperType: Boolean = false): Strin
       }
     is DeclaredTypeDescriptor -> typeDeclaration.ktQualifiedName(asSuperType)
     else -> null
-  }
-    ?: error("$this.ktQualifiedName(asSuperType = $asSuperType)")
+  } ?: error("$this.ktQualifiedName(asSuperType = $asSuperType)")
 
 internal fun String.qualifiedNameComponents(): List<String> = split(".")
 

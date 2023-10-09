@@ -18,18 +18,26 @@ package com.google.j2cl.transpiler.backend.kotlin.ast
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 
+/** J2KT representation of Kotlin companion object. */
 data class CompanionObject(
+  /** The enclosing Java type declaration. */
   val enclosingTypeDeclaration: TypeDeclaration,
+
+  /** The list of members inside this companion object. */
   val members: List<Member>
 )
 
+/** Returns the declaration of this companion object. */
 val CompanionObject.declaration: CompanionDeclaration
   get() = enclosingTypeDeclaration.companionDeclaration
 
-val Type.companionObjectOrNull: CompanionObject?
-  get() =
-    members
-      .filter { it.isStatic && !it.isEnumField }
-      .map { Member.WithJavaMember(it) }
-      .takeIf { it.isNotEmpty() }
-      ?.let { CompanionObject(declaration, it) }
+/**
+ * Returns companion object for this Java type, or null if the type does not need to have one, since
+ * it has no static members.
+ */
+fun Type.toCompanionObjectOrNull(): CompanionObject? =
+  members
+    .filter { it.isStatic && !it.isEnumField }
+    .map { Member.WithJavaMember(it) }
+    .takeIf { it.isNotEmpty() }
+    ?.let { CompanionObject(declaration, it) }

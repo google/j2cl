@@ -18,6 +18,8 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDescriptor
+import com.google.j2cl.transpiler.backend.kotlin.ast.Member
+import com.google.j2cl.transpiler.backend.kotlin.ast.toCompanionObjectOrNull
 
 internal val Type.declaredSuperTypeDescriptors: List<TypeDescriptor>
   get() = listOfNotNull(superTypeDescriptor).plus(superInterfaceTypeDescriptors)
@@ -33,3 +35,15 @@ internal val Type.ktPrimaryConstructor: Method?
       // Don't do it all classes, because Kotlin does not allow using `return` inside `init {}`.
       it.descriptor.enclosingTypeDescriptor.typeDeclaration.isKtInner
     }
+
+/** Returns a list of Kotlin members inside this Java type. */
+internal val Type.ktMembers: List<Member>
+  get() =
+    members
+      .asSequence()
+      .filter { !it.isStatic && (!declaration.isAnonymous || !it.isConstructor) }
+      .map { Member.WithJavaMember(it) }
+      .plus(toCompanionObjectOrNull()?.let { Member.WithCompanionObject(it) })
+      .plus(types.map { Member.WithType(it) })
+      .filterNotNull()
+      .toList()

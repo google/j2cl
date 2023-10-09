@@ -95,14 +95,10 @@ private fun parameterSource(name: String, valueSource: Source): Source =
 internal data class MethodObjCNames(val methodName: String, val parameterNames: List<String>)
 
 internal fun Method.toObjCNames(): MethodObjCNames? =
-  if (!descriptor.needsObjCNameAnnotations) {
-    null
-  } else {
-    if (descriptor.isConstructor) {
-      toConstructorObjCNames()
-    } else {
-      toNonConstructorObjCNames()
-    }
+  when {
+    !descriptor.needsObjCNameAnnotations -> null
+    descriptor.isConstructor -> toConstructorObjCNames()
+    else -> toNonConstructorObjCNames()
   }
 
 private val MethodDescriptor.needsObjCNameAnnotations: Boolean
@@ -195,10 +191,10 @@ private val String.objCCompanionTypeName: String
   get() = this + "Companion"
 
 internal val CompanionDeclaration.objCName
-  get() = typeDeclaration.objCName.objCCompanionTypeName
+  get() = enclosingTypeDeclaration.objCName.objCCompanionTypeName
 
 internal val CompanionDeclaration.objCNameWithoutPrefix
-  get() = typeDeclaration.objCNameWithoutPrefix.objCCompanionTypeName
+  get() = enclosingTypeDeclaration.objCNameWithoutPrefix.objCCompanionTypeName
 
 private val TypeDeclaration.nonMappedObjCName: String
   get() = objectiveCName ?: defaultObjCName

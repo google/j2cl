@@ -17,7 +17,12 @@ package com.google.j2cl.transpiler.backend.kotlin.ast
 
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 
-data class CompanionDeclaration(val typeDeclaration: TypeDeclaration)
+/** J2KT representation of Kotlin companion object declaration. */
+data class CompanionDeclaration(
+  /** The enclosing Java type declaration. */
+  val enclosingTypeDeclaration: TypeDeclaration
+)
 
+/** The companion object declaration inside this Java type. */
 val TypeDeclaration.companionDeclaration: CompanionDeclaration
   get() = CompanionDeclaration(this)
