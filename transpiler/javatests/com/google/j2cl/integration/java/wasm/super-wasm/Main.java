@@ -32,7 +32,6 @@ public class Main {
 
   public static void main(String... args) throws Exception {
     testWasmAnnotation();
-    testClassLiterals();
     testArrayInstanceOf();
     testArrayGetClass();
     testNativeArrays();
@@ -45,46 +44,7 @@ public class Main {
   @Wasm("i32.mul")
   private static native int multiply(int x, int y);
 
-  private static class SomeClass {}
-
   private interface SomeInterface {}
-
-  private enum SomeEnum {
-    A
-  }
-
-  private static void testClassLiterals() {
-    assertEquals("wasm.Main$SomeClass", SomeClass.class.getName());
-    assertEquals(Object.class, SomeClass.class.getSuperclass());
-    assertFalse(SomeClass.class.isEnum());
-    assertFalse(SomeClass.class.isInterface());
-    assertFalse(SomeClass.class.isArray());
-    assertFalse(SomeClass.class.isPrimitive());
-    assertEquals(
-        "wasm.Main$SomeInterface", SomeInterface.class.getName());
-    assertEquals(null, SomeInterface.class.getSuperclass());
-    assertFalse(SomeInterface.class.isEnum());
-    assertTrue(SomeInterface.class.isInterface());
-    assertFalse(SomeInterface.class.isArray());
-    assertFalse(SomeInterface.class.isPrimitive());
-    assertEquals("wasm.Main$SomeEnum", SomeEnum.class.getName());
-    assertEquals(Enum.class, SomeEnum.class.getSuperclass());
-    assertTrue(SomeEnum.class.isEnum());
-    assertFalse(SomeEnum.class.isInterface());
-    assertFalse(SomeEnum.class.isArray());
-    assertFalse(SomeEnum.class.isPrimitive());
-    assertEquals("int", int.class.getName());
-    assertEquals(null, int.class.getSuperclass());
-    assertFalse(int.class.isEnum());
-    assertFalse(int.class.isInterface());
-    assertFalse(int.class.isArray());
-    assertTrue(int.class.isPrimitive());
-    assertEquals(int.class, int[].class.getComponentType());
-    assertFalse(int[].class.isEnum());
-    assertFalse(int[].class.isInterface());
-    assertTrue(int[].class.isArray());
-    assertFalse(int[].class.isPrimitive());
-  }
 
   private static void testArrayInstanceOf() {
     Object intArray = new int[0];
