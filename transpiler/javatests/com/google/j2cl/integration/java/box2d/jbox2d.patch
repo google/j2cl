@@ -1,8 +1,0 @@
---- src/main/java/org/jbox2d/gwtemul/org/jbox2d/common/Timer.java	2019-10-07 21:10:04.581660762 -0700
-+++ src/main/java/org/jbox2d/gwtemul/org/jbox2d/common/Timer.java	2019-10-07 21:09:33.262038768 -0700
-@@ -39,4 +39,5 @@
-     return (float) (now() - resetMillis);
-   }
-
-+  @jsinterop.annotations.JsMethod(namespace = jsinterop.annotations.JsPackage.GLOBAL, name = "Date.now")
-   private static native double now() /*-{
