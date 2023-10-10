@@ -302,8 +302,4 @@ public final class Math {
   public static double toRadians(double x) {
     return x * PI_OVER_180;
   }
-
-  private static boolean isSafeIntegerRange(double value) {
-    return Integer.MIN_VALUE <= value && value <= Integer.MAX_VALUE;
-  }
 }
