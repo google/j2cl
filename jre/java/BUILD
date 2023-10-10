@@ -140,29 +140,16 @@ j2wasm_library(
     name = "jre-j2wasm",
     srcs = [
         ":jre_java_files-j2wasm",
-    ],
+    ] + glob(["super-wasm/*.js"]),
     javacopts = JRE_JAVAC_OPTS,
     visibility = [
         "//build_defs/internal_do_not_use:__pkg__",
         "//transpiler/javatests/com/google/j2cl/transpiler:__pkg__",
     ],
     deps = [
-        ":j2wasm_jsutils",
         ":javaemul_internal_annotations-j2wasm",
         "//third_party:gwt-jsinterop-annotations-j2wasm",
     ],
-)
-
-closure_js_library(
-    name = "j2wasm_jsutils",
-    srcs = [
-        "super-wasm/char_utils.js",
-        "super-wasm/console_utils.js",
-        "super-wasm/double_utils.js",
-        "super-wasm/exception_utils.js",
-        "super-wasm/string_utils.js",
-    ],
-    visibility = ["//visibility:private"],
 )
 
 j2cl_library(
