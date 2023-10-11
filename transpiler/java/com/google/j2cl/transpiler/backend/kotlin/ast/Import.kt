@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin.ast
 
-import com.google.j2cl.transpiler.backend.kotlin.common.lexical
+import com.google.common.collect.Comparators.lexicographical
 
 /** J2KT representation of Kotlin import. */
 data class Import(
@@ -40,7 +40,7 @@ data class Import(
       compareBy<Import> { it.suffixOrNull == Suffix.WithStar }
         .reversed()
         .then(
-          compareBy<Import, List<String>>(naturalOrder<String>().lexical()) {
+          compareBy<Import, List<String>>(lexicographical(naturalOrder<String>())) {
             it.pathComponents.run {
               if (it.suffixOrNull is Suffix.WithAlias) plus(it.suffixOrNull.alias) else this
             }

@@ -10,6 +10,7 @@ kt_jvm_library(
     name = "ast",
     srcs = glob(["*.kt"]),
     deps = [
+        "//third_party:guava",
         "//transpiler/java/com/google/j2cl/transpiler/ast",
         "//transpiler/java/com/google/j2cl/transpiler/backend/kotlin/common",
     ],
