@@ -24,8 +24,14 @@ data class Import(
 
   /** The optional suffix. */
   val suffixOrNull: Suffix? = null
-) : Comparable<Import> {
-  override fun compareTo(other: Import) = comparator.compare(this, other)
+) {
+  /** Returns true if this is a star import. */
+  private val isStar: Boolean
+    get() = suffixOrNull is Suffix.WithStar
+
+  /** Returns this import's alias, or null if absent. */
+  private val aliasOrNull: String?
+    get() = suffixOrNull?.let { it as? Suffix.WithAlias }?.alias
 
   companion object {
     /** Returns import with the given components on its path. */
@@ -35,17 +41,13 @@ data class Import(
     fun starImport(vararg components: String) =
       Import(components.toList(), suffixOrNull = Suffix.WithStar)
 
-    /** Default import comparator. */
-    private val comparator =
-      compareBy<Import> { it.suffixOrNull == Suffix.WithStar }
-        .reversed()
-        .then(
-          compareBy<Import, List<String>>(lexicographical(naturalOrder<String>())) {
-            it.pathComponents.run {
-              if (it.suffixOrNull is Suffix.WithAlias) plus(it.suffixOrNull.alias) else this
-            }
-          }
-        )
+    /** Returns lexicographical comparator: star imports first, then by path, then by alias. */
+    fun lexicographicalOrder(): Comparator<Import> = LEXICOGRAPHICAL_COMPARATOR
+
+    private val LEXICOGRAPHICAL_COMPARATOR =
+      compareBy<Import, Int>(naturalOrder()) { if (it.isStar) 0 else 1 }
+        .then(compareBy(lexicographical(naturalOrder<String>())) { it.pathComponents })
+        .then(compareBy(nullsFirst(naturalOrder<String>())) { it.aliasOrNull })
   }
 
   /** Import suffix. */

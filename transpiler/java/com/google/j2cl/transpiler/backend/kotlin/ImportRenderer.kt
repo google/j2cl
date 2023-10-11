@@ -19,6 +19,7 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.AS_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.IMPORT_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.STAR_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.ast.Import
+import com.google.j2cl.transpiler.backend.kotlin.ast.Import.Companion.lexicographicalOrder
 import com.google.j2cl.transpiler.backend.kotlin.ast.Import.Companion.starImport
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.dotSeparated
@@ -31,7 +32,8 @@ internal fun Renderer.importsSource(): Source = newLineSeparated(imports().map {
 
 private fun defaultImports() = setOf(starImport("javaemul", "lang"))
 
-private fun Renderer.imports(): List<Import> = defaultImports().plus(environment.imports()).sorted()
+private fun Renderer.imports(): List<Import> =
+  defaultImports().plus(environment.imports()).sortedWith(lexicographicalOrder())
 
 private fun Import.source(): Source =
   spaceSeparated(
