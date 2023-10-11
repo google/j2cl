@@ -15,11 +15,11 @@
  */
 package com.google.j2cl.transpiler;
 
-
 import com.google.j2cl.transpiler.TranspilerTester.TranspileResult;
 import junit.framework.TestCase;
 
 /** Tests for J2ktRestrictionsChecker. */
+@SuppressWarnings("CheckReturnValue")
 public class J2ktRestrictionsCheckerTest extends TestCase {
   public void testEmptyClass() {
     assertTranspileSucceeds("test.Empty", "class Empty {}");
@@ -29,6 +29,38 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
     assertTranspileFails("test.Main", "class Main {", "  <T> Main(T t) {}", "}")
         .assertErrorsWithSourcePosition(
             "Error:Main.java:3: Constructor 'Main(T t)' cannot declare type variables.");
+  }
+
+  public void testMemberVisibilityWarnings() {
+    assertTranspileSucceeds(
+            "test.Main",
+            "class Pkg {}",
+            "public class Main {",
+            "  public void pkgParam(Pkg pkg) {}",
+            "  public Pkg pkgReturnType() { return null; }",
+            "  public Pkg pkgField;",
+            "}")
+        .assertWarningsWithSourcePosition(
+            "Warning:Main.java:4: Member 'void Main.pkgParam(Pkg pkg)' (public) should not have"
+                + " wider visibility than 'Pkg' (default).",
+            "Warning:Main.java:5: Member 'Pkg Main.pkgReturnType()' (public) should not have wider"
+                + " visibility than 'Pkg' (default).",
+            "Warning:Main.java:6: Member 'Main.pkgField' (public) should not have wider visibility"
+                + " than 'Pkg' (default).");
+  }
+
+  public void testClassVisibilityWarnings() {
+    assertTranspileSucceeds("test.Main", "class Pkg {}", "public class Main extends Pkg {}")
+        .assertWarningsWithSourcePosition(
+            "Warning:Main.java:3: Type 'Main' (public) should not have wider visibility than its"
+                + " super type 'Pkg' (default).");
+  }
+
+  public void testInterfaceVisibilityWarnings() {
+    assertTranspileSucceeds("test.Main", "interface Pkg {}", "public interface Main extends Pkg {}")
+        .assertWarningsWithSourcePosition(
+            "Warning:Main.java:3: Type 'Main' (public) should not have wider visibility than its"
+                + " super type 'Pkg' (default).");
   }
 
   private TranspileResult assertTranspileSucceeds(String compilationUnitName, String... code) {

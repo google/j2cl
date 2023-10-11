@@ -336,6 +336,12 @@ public class TranspilerTester {
       return this;
     }
 
+    public TranspileResult assertWarningsWithSourcePosition(String... expectedWarnings) {
+      assertThat(getProblems().getWarnings())
+          .containsExactlyElementsIn(Arrays.asList(expectedWarnings));
+      return this;
+    }
+
     public TranspileResult assertNoErrors() {
       assertThat(getProblems().getErrors()).isEmpty();
       return this;
