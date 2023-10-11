@@ -364,7 +364,7 @@ public class JsInteropRestrictionsChecker {
    *       | has value field | has constructor | implements Comparable | can call ordinal() |
    *  (1)  |                 |                 |          x            |        x           |
    *  (2)  |       x         |        x        |                       |                    |
-   *  (3)  |       x         |                 |                       |                    |
+   *  (3)  |       x         |                 |          x            |                    |
    *
    * </pre>
    */
