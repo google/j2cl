@@ -25,6 +25,7 @@ public class Main {
     testEqualityIsStrict();
     testEqualityIsStrict_regression();
     testBoxedAndDevirtualizedTypes();
+    testStringLiteralIdentityAcrossCompilationBoundaries();
   }
 
   @SuppressWarnings({"EqualsIncompatibleType", "BoxedPrimitiveEquality"})
@@ -107,5 +108,9 @@ public class Main {
 
   private static CharSequence charSeq2() {
     return Math.random() > 0 ? new StringBuilder("data") : null;
+  }
+
+  private static void testStringLiteralIdentityAcrossCompilationBoundaries() {
+    assertTrue("ONE" == Constants.STRING_ONE);
   }
 }
