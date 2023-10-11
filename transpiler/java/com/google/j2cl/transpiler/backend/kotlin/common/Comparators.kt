@@ -15,22 +15,34 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin.common
 
-fun <T> Comparator<T>.ofList() = Comparator<List<T>> { a, b -> compareLists(a, b) }
+/**
+ * Returns comparator which compares iterables using lexical order, where elements are compared
+ * using this comparator.
+ */
+fun <T> Comparator<T>.lexical() =
+  Comparator<Iterable<T>> { firstIterable, secondIterable ->
+    compareLexical(firstIterable.iterator(), secondIterable.iterator())
+  }
 
-private tailrec fun <T> Comparator<T>.compareLists(
-  firstList: List<T>,
-  secondList: List<T>,
-  startIndex: Int = 0
+private tailrec fun <T> Comparator<T>.compareLexical(
+  firstIterator: Iterator<T>,
+  secondIterator: Iterator<T>
 ): Int =
-  when {
-    startIndex >= firstList.size -> if (startIndex >= secondList.size) 0 else -1
-    startIndex >= secondList.size -> 1
-    else -> {
-      val compared = compare(firstList[startIndex], secondList[startIndex])
-      if (compared == 0) {
-        compareLists(firstList, secondList, startIndex.inc())
+  if (firstIterator.hasNext()) {
+    if (secondIterator.hasNext()) {
+      val result = compare(firstIterator.next(), secondIterator.next())
+      if (result == 0) {
+        compareLexical(firstIterator, secondIterator)
       } else {
-        compared
+        result
       }
+    } else {
+      1
+    }
+  } else {
+    if (secondIterator.hasNext()) {
+      -1
+    } else {
+      0
     }
   }
