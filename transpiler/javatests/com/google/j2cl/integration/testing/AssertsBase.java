@@ -95,8 +95,6 @@ public class AssertsBase {
   }
 
   static String getFailureMessage(Object expected, Object actual, String msg) {
-    String expectedString = expected == null ? null : expected.toString();
-    String actualString = actual == null ? null : actual.toString();
-    return "<" + actualString + "> " + msg + " <" + expectedString + ">";
+    return "<" + actual + "> " + msg + " <" + expected + ">";
   }
 }

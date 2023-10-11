@@ -57,6 +57,6 @@ class AssertsBase {
   public static void assertThrowsNullPointerException(JsRunnable runnable) {}
 
   static String getFailureMessage(Object expected, Object actual, String msg) {
-    return msg;
+    return "<" + actual + "> " + msg + " <" + expected + ">";
   }
 }
