@@ -92,10 +92,10 @@ class RendererTest {
   }
 
   companion object {
-    private val DEPENDENCY_1 = dependency(localImport("dependency_1.h"))
-    private val DEPENDENCY_2 = dependency(localImport("dependency_2.h"))
-    private val DEPENDENCY_3 = dependency(localImport("dependency_3.h"))
-    private val DEPENDENCY_4 = dependency(localImport("dependency_4.h"))
+    private val DEPENDENCY_1 = Dependency.of(Import.local("dependency_1.h"))
+    private val DEPENDENCY_2 = Dependency.of(Import.local("dependency_2.h"))
+    private val DEPENDENCY_3 = Dependency.of(Import.local("dependency_3.h"))
+    private val DEPENDENCY_4 = Dependency.of(Import.local("dependency_4.h"))
 
     private fun <V> Renderer<V>.assertRenders(valueToDependency: Pair<V, Set<Dependency>>) =
       assertThat(renderWithDependencies()).isEqualTo(valueToDependency)

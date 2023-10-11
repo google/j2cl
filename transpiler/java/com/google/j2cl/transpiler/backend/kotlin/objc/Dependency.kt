@@ -17,36 +17,66 @@ package com.google.j2cl.transpiler.backend.kotlin.objc
 
 /** Renderer dependency: an import or a forward declaration. */
 sealed class Dependency {
+  /** Dependency with import. */
   data class WithImport(val import: Import) : Dependency()
+
+  /** Dependency with forward declaration. */
   data class WithForwardDeclaration(val forwardDeclaration: ForwardDeclaration) : Dependency()
+
+  companion object {
+    /** Returns dependency with the given import. */
+    fun of(import: Import): Dependency = WithImport(import)
+
+    /** Returns dependency with the given forward declaration. */
+    fun of(forwardDeclaration: ForwardDeclaration): Dependency =
+      WithForwardDeclaration(forwardDeclaration)
+  }
 }
 
-/** Forward declaration: @class or @protocol. */
+/**
+ * Forward declaration.
+ *
+ * @property kind the [Kind] of this forward declaration.
+ * @property name the name of the forward-declared entity.
+ */
 data class ForwardDeclaration(val kind: Kind, val name: String) {
+  /** The kind of forward declaration: a class or a protocol. */
   enum class Kind {
     CLASS,
     PROTOCOL
   }
+
+  companion object {
+    /** Returns class forward declaration with a given name. */
+    fun ofClass(name: String): ForwardDeclaration = ForwardDeclaration(Kind.CLASS, name)
+
+    /** Returns protocol forward declaration with a given name. */
+    fun ofProtocol(name: String): ForwardDeclaration = ForwardDeclaration(Kind.PROTOCOL, name)
+  }
 }
 
-data class Import(val path: String, val isLocal: Boolean)
+/**
+ * Import declaration.
+ *
+ * @property path the string containing import path.
+ * @property isLocal true for local import, or false for system import.
+ */
+data class Import(val path: String, val isLocal: Boolean) {
+  companion object {
+    /** Returns system import with a given path. */
+    fun system(path: String): Import = Import(path, isLocal = false)
 
-fun dependency(it: Import): Dependency = Dependency.WithImport(it)
+    /** Returns local import with a given path. */
+    fun local(path: String): Import = Import(path, isLocal = true)
+  }
+}
 
-fun dependency(it: ForwardDeclaration): Dependency = Dependency.WithForwardDeclaration(it)
+/** Returns a list of all imports from the given dependencies. */
+internal fun Iterable<Dependency>.imports(): List<Import> = mapNotNull {
+  (it as? Dependency.WithImport)?.import
+}
 
-val Iterable<Dependency>.imports: List<Import>
-  get() = filterIsInstance<Dependency.WithImport>().map { it.import }
-
-val Iterable<Dependency>.forwardDeclarations: List<ForwardDeclaration>
-  get() = filterIsInstance<Dependency.WithForwardDeclaration>().map { it.forwardDeclaration }
-
-fun systemImport(path: String): Import = Import(path, isLocal = false)
-
-fun localImport(path: String): Import = Import(path, isLocal = true)
-
-fun classForwardDeclaration(name: String): ForwardDeclaration =
-  ForwardDeclaration(ForwardDeclaration.Kind.CLASS, name)
-
-fun protocolForwardDeclaration(name: String): ForwardDeclaration =
-  ForwardDeclaration(ForwardDeclaration.Kind.PROTOCOL, name)
+/** Returns a list of all forward declarations from the given dependencies. */
+internal fun Iterable<Dependency>.forwardDeclarations(): List<ForwardDeclaration> = mapNotNull {
+  (it as? Dependency.WithForwardDeclaration)?.forwardDeclaration
+}

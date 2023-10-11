@@ -72,36 +72,36 @@ class SourceTest {
 
   @Test
   fun localImportSource() {
-    localImport("local.h").source.assertBuilds("""#import "local.h"""")
+    Import.local("local.h").source.assertBuilds("""#import "local.h"""")
   }
 
   @Test
   fun systemImportSource() {
-    systemImport("system.h").source.assertBuilds("""#import <system.h>""")
+    Import.system("system.h").source.assertBuilds("""#import <system.h>""")
   }
 
   @Test
   fun classForwardDeclarationSource() {
-    classForwardDeclaration("Foo").source.assertBuilds("@class Foo;")
+    ForwardDeclaration.ofClass("Foo").source.assertBuilds("@class Foo;")
   }
 
   @Test
   fun protocolForwardDeclarationSource() {
-    protocolForwardDeclaration("Foo").source.assertBuilds("@protocol Foo;")
+    ForwardDeclaration.ofProtocol("Foo").source.assertBuilds("@protocol Foo;")
   }
 
   @Test
   fun declarationsSource() {
     val dependencies =
       setOf(
-        dependency(localImport("local_2.h")),
-        dependency(systemImport("system_2.h")),
-        dependency(classForwardDeclaration("Class2")),
-        dependency(protocolForwardDeclaration("Protocol2")),
-        dependency(localImport("local_1.h")),
-        dependency(systemImport("system_1.h")),
-        dependency(classForwardDeclaration("Class1")),
-        dependency(protocolForwardDeclaration("Protocol1"))
+        Dependency.of(Import.local("local_2.h")),
+        Dependency.of(Import.system("system_2.h")),
+        Dependency.of(ForwardDeclaration.ofClass("Class2")),
+        Dependency.of(ForwardDeclaration.ofProtocol("Protocol2")),
+        Dependency.of(Import.local("local_1.h")),
+        Dependency.of(Import.system("system_1.h")),
+        Dependency.of(ForwardDeclaration.ofClass("Class1")),
+        Dependency.of(ForwardDeclaration.ofProtocol("Protocol1"))
       )
 
     dependenciesSource(dependencies)
@@ -126,7 +126,7 @@ class SourceTest {
   @Test
   fun rendererSourceWithDependencies() {
     rendererOf(source("void main() {}"))
-      .plus(dependency(systemImport("std.h")))
+      .plus(Dependency.of(Import.system("std.h")))
       .sourceWithDependencies
       .assertBuilds(
         """

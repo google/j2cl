@@ -30,7 +30,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLine
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
 
-val nsObjCRuntimeDependency = dependency(systemImport("Foundation/NSObjCRuntime.h"))
+val nsObjCRuntimeDependency = Dependency.of(Import.system("Foundation/NSObjCRuntime.h"))
 
 val nsEnum: Renderer<Source> = rendererOf(source("NS_ENUM")) + nsObjCRuntimeDependency
 
@@ -46,27 +46,27 @@ val nullable: Renderer<Source> = rendererOf(source("_Nullable")) // clang/gcc at
 
 val id: Renderer<Source> = rendererOf(source("id")) + nsObjCRuntimeDependency
 
-val nsCopying: Renderer<Source> = protocolForwardDeclaration("NSCopying").nameRenderer
+val nsCopying: Renderer<Source> = ForwardDeclaration.ofProtocol("NSCopying").nameRenderer
 
-val nsObject: Renderer<Source> = classForwardDeclaration("NSObject").nameRenderer
+val nsObject: Renderer<Source> = ForwardDeclaration.ofClass("NSObject").nameRenderer
 
-val nsNumber: Renderer<Source> = classForwardDeclaration("NSNumber").nameRenderer
+val nsNumber: Renderer<Source> = ForwardDeclaration.ofClass("NSNumber").nameRenderer
 
-val nsString: Renderer<Source> = classForwardDeclaration("NSString").nameRenderer
+val nsString: Renderer<Source> = ForwardDeclaration.ofClass("NSString").nameRenderer
 
-val nsMutableArray: Renderer<Source> = classForwardDeclaration("NSMutableArray").nameRenderer
+val nsMutableArray: Renderer<Source> = ForwardDeclaration.ofClass("NSMutableArray").nameRenderer
 
-val nsMutableSet: Renderer<Source> = classForwardDeclaration("NSMutableSet").nameRenderer
+val nsMutableSet: Renderer<Source> = ForwardDeclaration.ofClass("NSMutableSet").nameRenderer
 
 val nsMutableDictionary: Renderer<Source> =
-  classForwardDeclaration("NSMutableDictionary").nameRenderer
+  ForwardDeclaration.ofClass("NSMutableDictionary").nameRenderer
 
 private val ForwardDeclaration.nameRenderer: Renderer<Source>
-  get() = rendererOf(source(name)) + dependency(this)
+  get() = rendererOf(source(name)) + Dependency.of(this)
 
-fun className(name: String): Renderer<Source> = classForwardDeclaration(name).nameRenderer
+fun className(name: String): Renderer<Source> = ForwardDeclaration.ofClass(name).nameRenderer
 
-fun protocolName(name: String): Renderer<Source> = protocolForwardDeclaration(name).nameRenderer
+fun protocolName(name: String): Renderer<Source> = ForwardDeclaration.ofProtocol(name).nameRenderer
 
 fun nsEnumTypedef(name: String, type: Renderer<Source>, values: List<String>): Renderer<Source> =
   combine(nsEnum, type) { nsEnumSource, typeSource ->

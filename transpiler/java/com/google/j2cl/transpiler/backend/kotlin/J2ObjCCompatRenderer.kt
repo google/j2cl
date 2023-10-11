@@ -54,12 +54,10 @@ import com.google.j2cl.transpiler.backend.kotlin.objc.className
 import com.google.j2cl.transpiler.backend.kotlin.objc.comment
 import com.google.j2cl.transpiler.backend.kotlin.objc.compatibilityAlias
 import com.google.j2cl.transpiler.backend.kotlin.objc.defineAlias
-import com.google.j2cl.transpiler.backend.kotlin.objc.dependency
 import com.google.j2cl.transpiler.backend.kotlin.objc.expressionStatement
 import com.google.j2cl.transpiler.backend.kotlin.objc.functionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.objc.getProperty
 import com.google.j2cl.transpiler.backend.kotlin.objc.id
-import com.google.j2cl.transpiler.backend.kotlin.objc.localImport
 import com.google.j2cl.transpiler.backend.kotlin.objc.macroDefine
 import com.google.j2cl.transpiler.backend.kotlin.objc.methodCall
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsAssumeNonnull
@@ -431,10 +429,10 @@ private val DeclaredTypeDescriptor.interfaceObjCRenderer: Renderer<Source>
     }
 
 private val j2ObjCTypesImport: Import
-  get() = localImport("third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h")
+  get() = Import.local("third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h")
 
 private val j2ObjCTypesDependency: Dependency
-  get() = dependency(j2ObjCTypesImport)
+  get() = Dependency.of(j2ObjCTypesImport)
 
 private fun j2ObjCTypeRenderer(name: String): Renderer<Source> =
   rendererOf(source(name)) + j2ObjCTypesDependency

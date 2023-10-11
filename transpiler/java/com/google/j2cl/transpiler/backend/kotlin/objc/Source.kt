@@ -46,8 +46,8 @@ fun defineAlias(alias: Source, target: Source) = macroDefine(spaceSeparated(alia
 
 fun dependenciesSource(dependencies: Iterable<Dependency>): Source =
   emptyLineSeparated(
-    importsSource(dependencies.imports),
-    forwardDeclarationsSource(dependencies.forwardDeclarations)
+    importsSource(dependencies.imports()),
+    forwardDeclarationsSource(dependencies.forwardDeclarations())
   )
 
 fun importsSource(imports: List<Import>): Source =

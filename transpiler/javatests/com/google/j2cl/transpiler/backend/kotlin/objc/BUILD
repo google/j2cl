@@ -10,6 +10,7 @@ kt_jvm_library(
     name = "tests",
     testonly = 1,
     srcs = [
+        "DependencyTest.kt",
         "RendererTest.kt",
         "SourceTest.kt",
     ],
