@@ -48,6 +48,11 @@ public class OutputUtils {
       this.root = root;
     }
 
+    public void write(String path, byte[] content) {
+      Path outputPath = root.resolve(path);
+      fileService.execute(() -> OutputUtils.writeToFile(outputPath, content, problems));
+    }
+
     public void write(String path, String content) {
       Path outputPath = root.resolve(path);
       fileService.execute(() -> OutputUtils.writeToFile(outputPath, content, problems));

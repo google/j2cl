@@ -162,7 +162,7 @@ class WasmGenerationEnvironment {
     return getTypeSignature(typeDescriptor);
   }
 
-  private static String getTypeSignature(TypeDescriptor typeDescriptor) {
+  public String getTypeSignature(TypeDescriptor typeDescriptor) {
     if (typeDescriptor.isPrimitive()) {
       return "$" + typeDescriptor.getReadableDescription();
     }

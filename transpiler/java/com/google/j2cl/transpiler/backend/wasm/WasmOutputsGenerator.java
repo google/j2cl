@@ -76,13 +76,20 @@ public class WasmOutputsGenerator {
   }
 
   public void generateModularOutput(Library library) {
-    // TODO(b/283154838): Add the modular summaries and the library info output.
     if (libraryInfoOutputPath != null) {
       OutputUtils.writeToFile(libraryInfoOutputPath, new byte[0], problems);
     }
+
     environment =
         new WasmGenerationEnvironment(
             library, JsImportsGenerator.collectImports(library, problems));
+    SummaryBuilder summaryBuilder = new SummaryBuilder(library, environment, problems);
+
+    // TODO(rluble): Introduce/use flags to emit the readable version of the summary. For now emit
+    // summaries in both binary and text form for now.
+    output.write("summary.txtpb", summaryBuilder.toJson(problems));
+    output.write("summary.binpb", summaryBuilder.toByteArray());
+
     List<ArrayTypeDescriptor> usedNativeArrayTypes = collectUsedNativeArrayTypes(library);
 
     copyJavaSources(library);
