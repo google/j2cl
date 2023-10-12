@@ -32,7 +32,6 @@ import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.transpiler.ast.JsEnumInfo;
 import com.google.j2cl.transpiler.ast.JsInfo;
-import com.google.j2cl.transpiler.ast.JsMemberType;
 import com.google.j2cl.transpiler.ast.Literal;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
@@ -851,12 +850,6 @@ class JavaEnvironment {
               .setVarargs(i == parameters.size() - 1 && declarationMethodElement.isVarArgs())
               .setDoNotAutobox(JsInteropUtils.isDoNotAutobox(declarationMethodElement, i))
               .build());
-    }
-
-    if (enclosingTypeDescriptor.getTypeDeclaration().isAnonymous()
-        && isConstructor
-        && enclosingTypeDescriptor.getSuperTypeDescriptor().hasJsConstructor()) {
-      jsInfo = JsInfo.Builder.from(jsInfo).setJsMemberType(JsMemberType.CONSTRUCTOR).build();
     }
 
     boolean hasUncheckedCast = hasUncheckedCastAnnotation(declarationMethodElement);

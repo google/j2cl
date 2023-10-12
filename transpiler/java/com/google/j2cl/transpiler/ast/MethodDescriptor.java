@@ -511,6 +511,14 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     checkState(isDeclaration());
     JsInfo originalJsInfo = getOriginalJsInfo();
 
+    // Make the implicit constructor of an anonymous class extending a JsType with JsConstructor
+    // automatically a JsConstructor.
+    if (getEnclosingTypeDescriptor().getTypeDeclaration().isAnonymous()
+        && isConstructor()
+        && getEnclosingTypeDescriptor().getSuperTypeDescriptor().hasJsConstructor()) {
+      return JsInfo.Builder.from(originalJsInfo).setJsMemberType(JsMemberType.CONSTRUCTOR).build();
+    }
+
     if (originalJsInfo.isJsOverlay()
         || originalJsInfo.getJsName() != null
         || originalJsInfo.getJsNamespace() != null) {
