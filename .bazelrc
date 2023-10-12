@@ -12,6 +12,12 @@ build --strategy=JavaDeployJar=local
 build --strategy=JavaSourceJar=local
 build --strategy=Turbine=local
 
+# --experimental_inprocess_symlink_creation is used to workaround the missing
+# support for paths with spaces https://github.com/bazelbuild/bazel/issues/4327.
+# Remove the two flags after this issue is fixed in bazel new release.
+build --enable_platform_specific_config
+build:macos --experimental_inprocess_symlink_creation
+
 test --test_output=errors
 
 # Enable Java 11
