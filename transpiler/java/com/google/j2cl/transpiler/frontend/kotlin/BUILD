@@ -10,12 +10,7 @@ kt_jvm_library(
     name = "kotlin",
     srcs = glob(["*.kt"]),
     deps = [
-        "//third_party:guava",
-        "//third_party:jdt-core",
-        "//third_party:kotlin_compiler",
         "//transpiler/java/com/google/j2cl/common",
         "//transpiler/java/com/google/j2cl/transpiler/ast",
-        "//transpiler/java/com/google/j2cl/transpiler/frontend/common",
-        "//transpiler/java/com/google/j2cl/transpiler/frontend/jdt",
     ],
 )
