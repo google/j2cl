@@ -158,7 +158,7 @@ def _diff(original, modified, filter_noise):
         modified.get_formatted_file(),
     ])
 
-  if filter_noise:
+  if filter_noise and not is_wasm:
     print("  Reducing noise.")
     # Replace the numeric part of the variable id generation from JsCompiler to
     # reduce noise in the final diff.
