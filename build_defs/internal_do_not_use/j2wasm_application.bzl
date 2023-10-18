@@ -407,6 +407,7 @@ def j2wasm_application(name, defines = dict(), **kwargs):
             # stage1 invocation (due to go/forge-limits for time).
             "-O3",
             "--gufa",
+            "--unsubtyping",
             "-O3",
 
             # Stage 2
@@ -416,10 +417,12 @@ def j2wasm_application(name, defines = dict(), **kwargs):
             "-fimfs=50",
             # Specific list of passes:
             "--gufa",
+            "--unsubtyping",
             "-O3",
             "-O3",
             "-O3",
             "--gufa",
+            "--unsubtyping",
             "-O3",
 
             # Stage 3
@@ -429,6 +432,7 @@ def j2wasm_application(name, defines = dict(), **kwargs):
             "-fimfs=50",
             "--intrinsic-lowering",
             "--gufa",
+            "--unsubtyping",
             # Get several rounds of -O3 after intrinsic lowering.
             "-O3",
             "-O3",
