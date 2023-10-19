@@ -238,7 +238,7 @@ See
 // Main.java
 public class Main {
   @JsMethod
-  public void method1(@JsOptional Double i) {}
+  public void method1(@JsOptional @Nullable Double i) {}
 }
 ```
 
@@ -253,6 +253,7 @@ class Main {
   method1(i) {}
 }
 ```
+Note: It is generally a good practice to mark `@JsOptional` explicitly `@Nullable` to catch potential problems with Java nullabilty checkers.
 
 ### `@JsType` - Expose an entire class to JavaScript
 
@@ -315,10 +316,10 @@ const ExposedEnum = {
 // Main.java
 public class Main {
   @JsMethod
-  public void method(@JsOptional Object o) {
+  public void method(@JsOptional @Nullable Object o) {
     Console.log("Called method() with " + o);
   }
-  // Alias method(@JsOptional Object o). Calling method() (from Java code) is
+  // Alias method(@JsOptional @Nullable Object o). Calling method() (from Java code) is
   // equivalent to calling method(null).
   @JsMethod
   public native void method();
@@ -332,14 +333,14 @@ public class Main {
 // SubMain.java
 public class SubMain extends Main {
   @JsMethod
-  public void method(@JsOptional Object o1, @JsOptional Object o2) {
+  public void method(@JsOptional @Nullable Object o1, @JsOptional @Nullable Object o2) {
     Console.log("Called method(Object, Object) with " + o1 + " " +  o2);
   }
 
   // Override the original implementation with a native method to make sure
   // there is still single implementation of the method in the class.
   @JsMethod
-  public native void method(@JsOptional Object o);
+  public native void method(@JsOptional @Nullable Object o);
 
   private void main() {
     method("Hello", "GoodBye"); // logs to console "Called method() with Hello GoodBye"
