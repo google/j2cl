@@ -21,31 +21,38 @@ BINARYEN_COPTS = [
     "-std=c++17",
 ]
 
+BINARYEN_LIB_SRCS = glob(
+    [
+        "src/*.cpp",
+        "src/**/*.cpp",
+    ],
+    exclude = [
+        "src/tools/**",
+        "src/support/suffix_tree.cpp",
+        "src/support/suffix_tree_node.cpp",
+        "src/passes/hash-stringify-walker.cpp",
+    ],
+) + [
+    ":WasmIntrinsics.cpp",
+]
+
+BINARYEN_LIB_HDRS = glob(
+    [
+        "src/**/*.h",
+    ],
+    exclude = [
+        "src/tools/**",
+        "src/support/suffix_tree.h",
+        "src/support/suffix_tree_node.h",
+        "src/passes/stringify-walker.h",
+        "src/passes/stringify-walker-impl.h",
+    ],
+) + [":src/config.h"]
+
 cc_library(
     name = "binaryen_lib",
-    srcs = glob(
-        [
-            "src/*.cpp",
-            "src/**/*.cpp",
-        ],
-        exclude = [
-            "src/tools/**",
-            "src/support/suffix_tree.cpp",
-            "src/support/suffix_tree_node.cpp",
-        ],
-    ) + [
-        ":WasmIntrinsics.cpp",
-    ],
-    hdrs = glob(
-        [
-            "src/**/*.h",
-        ],
-        exclude = [
-            "src/tools/**",
-            "src/support/suffix_tree.h",
-            "src/support/suffix_tree_node.h",
-        ],
-    ) + [":src/config.h"],
+    srcs = BINARYEN_LIB_SRCS,
+    hdrs = BINARYEN_LIB_HDRS,
     copts = BINARYEN_COPTS,
     defines = ["USE_STANDARD_GC_ENCODINGS"],
     includes = ["src"],
@@ -57,29 +64,8 @@ cc_library(
 
 cc_library(
     name = "binaryen_lib-legacy",
-    srcs = glob(
-        [
-            "src/*.cpp",
-            "src/**/*.cpp",
-        ],
-        exclude = [
-            "src/tools/**",
-            "src/support/suffix_tree.cpp",
-            "src/support/suffix_tree_node.cpp",
-        ],
-    ) + [
-        ":WasmIntrinsics.cpp",
-    ],
-    hdrs = glob(
-        [
-            "src/**/*.h",
-        ],
-        exclude = [
-            "src/tools/**",
-            "src/support/suffix_tree.h",
-            "src/support/suffix_tree_node.h",
-        ],
-    ) + [":src/config.h"],
+    srcs = BINARYEN_LIB_SRCS,
+    hdrs = BINARYEN_LIB_HDRS,
     copts = BINARYEN_COPTS,
     defines = ["USE_LEGACY_GC_ENCODINGS"],
     includes = ["src"],
