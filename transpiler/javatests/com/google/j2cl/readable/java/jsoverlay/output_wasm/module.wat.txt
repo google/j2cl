@@ -95,10 +95,13 @@
 )
 
 ;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay.1 [itable.init]
-(global $jsoverlay.Main.NativeJsTypeWithOverlay.1.itable (ref $jsoverlay.Main.NativeJsTypeWithOverlay.1.itable) (struct.new $jsoverlay.Main.NativeJsTypeWithOverlay.1.itable
+(global $jsoverlay.Main.Intf.vtable@$jsoverlay.Main.NativeJsTypeWithOverlay.1 (ref $jsoverlay.Main.Intf.vtable) 
  (struct.new $jsoverlay.Main.Intf.vtable
   (ref.func $m_run__void@jsoverlay.Main.NativeJsTypeWithOverlay.1)
  )
+ )
+(global $jsoverlay.Main.NativeJsTypeWithOverlay.1.itable (ref $jsoverlay.Main.NativeJsTypeWithOverlay.1.itable) (struct.new $jsoverlay.Main.NativeJsTypeWithOverlay.1.itable
+  (global.get $jsoverlay.Main.Intf.vtable@$jsoverlay.Main.NativeJsTypeWithOverlay.1)
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

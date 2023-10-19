@@ -43,10 +43,13 @@
 )
 
 ;;; Code for jstypewithdefault.SomeJsType [itable.init]
-(global $jstypewithdefault.SomeJsType.itable (ref $jstypewithdefault.SomeJsType.itable) (struct.new $jstypewithdefault.SomeJsType.itable
+(global $jstypewithdefault.Interface.vtable@$jstypewithdefault.SomeJsType (ref $jstypewithdefault.Interface.vtable) 
  (struct.new $jstypewithdefault.Interface.vtable
   (ref.func $m_defaultMethod__void@jstypewithdefault.SomeJsType)
  )
+ )
+(global $jstypewithdefault.SomeJsType.itable (ref $jstypewithdefault.SomeJsType.itable) (struct.new $jstypewithdefault.SomeJsType.itable
+  (global.get $jstypewithdefault.Interface.vtable@$jstypewithdefault.SomeJsType)
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

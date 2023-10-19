@@ -42,9 +42,12 @@
 )
 
 ;;; Code for functiontype.FunctionImpl [itable.init]
-(global $functiontype.FunctionImpl.itable (ref $functiontype.FunctionImpl.itable) (struct.new $functiontype.FunctionImpl.itable
+(global $functiontype.Function.vtable@$functiontype.FunctionImpl (ref $functiontype.Function.vtable) 
  (struct.new $functiontype.Function.vtable
  )
+ )
+(global $functiontype.FunctionImpl.itable (ref $functiontype.FunctionImpl.itable) (struct.new $functiontype.FunctionImpl.itable
+  (global.get $functiontype.Function.vtable@$functiontype.FunctionImpl)
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

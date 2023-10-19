@@ -311,10 +311,13 @@
 )
 
 ;;; Code for multipleabstractparents.MultipleAbstractParents.ArrayList [itable.init]
-(global $multipleabstractparents.MultipleAbstractParents.ArrayList.itable (ref $multipleabstractparents.MultipleAbstractParents.ArrayList.itable) (struct.new $multipleabstractparents.MultipleAbstractParents.ArrayList.itable
+(global $multipleabstractparents.MultipleAbstractParents.List.vtable@$multipleabstractparents.MultipleAbstractParents.ArrayList (ref $multipleabstractparents.MultipleAbstractParents.List.vtable) 
  (struct.new $multipleabstractparents.MultipleAbstractParents.List.vtable
   (ref.func $m_getFoo__java_lang_Object__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractCollection)
  )
+ )
+(global $multipleabstractparents.MultipleAbstractParents.ArrayList.itable (ref $multipleabstractparents.MultipleAbstractParents.ArrayList.itable) (struct.new $multipleabstractparents.MultipleAbstractParents.ArrayList.itable
+  (global.get $multipleabstractparents.MultipleAbstractParents.List.vtable@$multipleabstractparents.MultipleAbstractParents.ArrayList)
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -337,13 +340,18 @@
 )
 
 ;;; Code for multipleabstractparents.MultipleAbstractParents.StringList [itable.init]
-(global $multipleabstractparents.MultipleAbstractParents.StringList.itable (ref $multipleabstractparents.MultipleAbstractParents.StringList.itable) (struct.new $multipleabstractparents.MultipleAbstractParents.StringList.itable
+(global $multipleabstractparents.MultipleAbstractParents.List.vtable@$multipleabstractparents.MultipleAbstractParents.StringList (ref $multipleabstractparents.MultipleAbstractParents.List.vtable) 
  (struct.new $multipleabstractparents.MultipleAbstractParents.List.vtable
   (ref.func $m_getFoo__java_lang_Object__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractCollection)
  )
+ )(global $multipleabstractparents.MultipleAbstractParents.IStringList.vtable@$multipleabstractparents.MultipleAbstractParents.StringList (ref $multipleabstractparents.MultipleAbstractParents.IStringList.vtable) 
  (struct.new $multipleabstractparents.MultipleAbstractParents.IStringList.vtable
   (ref.func $m_getFoo__java_lang_String__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractStringList)
  )
+ )
+(global $multipleabstractparents.MultipleAbstractParents.StringList.itable (ref $multipleabstractparents.MultipleAbstractParents.StringList.itable) (struct.new $multipleabstractparents.MultipleAbstractParents.StringList.itable
+  (global.get $multipleabstractparents.MultipleAbstractParents.List.vtable@$multipleabstractparents.MultipleAbstractParents.StringList)
+  (global.get $multipleabstractparents.MultipleAbstractParents.IStringList.vtable@$multipleabstractparents.MultipleAbstractParents.StringList)
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -365,13 +373,18 @@
 )
 
 ;;; Code for multipleabstractparents.MultipleAbstractParents.StringListChild [itable.init]
-(global $multipleabstractparents.MultipleAbstractParents.StringListChild.itable (ref $multipleabstractparents.MultipleAbstractParents.StringListChild.itable) (struct.new $multipleabstractparents.MultipleAbstractParents.StringListChild.itable
+(global $multipleabstractparents.MultipleAbstractParents.List.vtable@$multipleabstractparents.MultipleAbstractParents.StringListChild (ref $multipleabstractparents.MultipleAbstractParents.List.vtable) 
  (struct.new $multipleabstractparents.MultipleAbstractParents.List.vtable
   (ref.func $m_getFoo__java_lang_Object__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractCollection)
  )
+ )(global $multipleabstractparents.MultipleAbstractParents.IStringList.vtable@$multipleabstractparents.MultipleAbstractParents.StringListChild (ref $multipleabstractparents.MultipleAbstractParents.IStringList.vtable) 
  (struct.new $multipleabstractparents.MultipleAbstractParents.IStringList.vtable
   (ref.func $m_getFoo__java_lang_String__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractStringList)
  )
+ )
+(global $multipleabstractparents.MultipleAbstractParents.StringListChild.itable (ref $multipleabstractparents.MultipleAbstractParents.StringListChild.itable) (struct.new $multipleabstractparents.MultipleAbstractParents.StringListChild.itable
+  (global.get $multipleabstractparents.MultipleAbstractParents.List.vtable@$multipleabstractparents.MultipleAbstractParents.StringListChild)
+  (global.get $multipleabstractparents.MultipleAbstractParents.IStringList.vtable@$multipleabstractparents.MultipleAbstractParents.StringListChild)
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

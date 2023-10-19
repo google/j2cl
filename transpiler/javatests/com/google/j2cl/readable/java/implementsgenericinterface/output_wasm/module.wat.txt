@@ -70,9 +70,12 @@
 )
 
 ;;; Code for implementsgenericinterface.GenericInterfaceGenericImpl [itable.init]
-(global $implementsgenericinterface.GenericInterfaceGenericImpl.itable (ref $implementsgenericinterface.GenericInterfaceGenericImpl.itable) (struct.new $implementsgenericinterface.GenericInterfaceGenericImpl.itable
+(global $implementsgenericinterface.GenericInterface.vtable@$implementsgenericinterface.GenericInterfaceGenericImpl (ref $implementsgenericinterface.GenericInterface.vtable) 
  (struct.new $implementsgenericinterface.GenericInterface.vtable
  )
+ )
+(global $implementsgenericinterface.GenericInterfaceGenericImpl.itable (ref $implementsgenericinterface.GenericInterfaceGenericImpl.itable) (struct.new $implementsgenericinterface.GenericInterfaceGenericImpl.itable
+  (global.get $implementsgenericinterface.GenericInterface.vtable@$implementsgenericinterface.GenericInterfaceGenericImpl)
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -93,9 +96,12 @@
 )
 
 ;;; Code for implementsgenericinterface.GenericInterfaceImpl [itable.init]
-(global $implementsgenericinterface.GenericInterfaceImpl.itable (ref $implementsgenericinterface.GenericInterfaceImpl.itable) (struct.new $implementsgenericinterface.GenericInterfaceImpl.itable
+(global $implementsgenericinterface.GenericInterface.vtable@$implementsgenericinterface.GenericInterfaceImpl (ref $implementsgenericinterface.GenericInterface.vtable) 
  (struct.new $implementsgenericinterface.GenericInterface.vtable
  )
+ )
+(global $implementsgenericinterface.GenericInterfaceImpl.itable (ref $implementsgenericinterface.GenericInterfaceImpl.itable) (struct.new $implementsgenericinterface.GenericInterfaceImpl.itable
+  (global.get $implementsgenericinterface.GenericInterface.vtable@$implementsgenericinterface.GenericInterfaceImpl)
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

@@ -134,11 +134,14 @@
 )
 
 ;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault.C [itable.init]
-(global $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.itable (ref $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.itable) (struct.new $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.itable
+(global $abstractmethodoverridedefault.AbstractMethodOverrideDefault.I.vtable@$abstractmethodoverridedefault.AbstractMethodOverrideDefault.C (ref $abstractmethodoverridedefault.AbstractMethodOverrideDefault.I.vtable) 
  (struct.new $abstractmethodoverridedefault.AbstractMethodOverrideDefault.I.vtable
   (ref.func $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C)
   (ref.func $m_foo__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C)
  )
+ )
+(global $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.itable (ref $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.itable) (struct.new $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.itable
+  (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.I.vtable@$abstractmethodoverridedefault.AbstractMethodOverrideDefault.C)
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

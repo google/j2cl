@@ -113,14 +113,19 @@
 )
 
 ;;; Code for interfaces.Main.Implementor [itable.init]
-(global $interfaces.Main.Implementor.itable (ref $interfaces.Main.Implementor.itable) (struct.new $interfaces.Main.Implementor.itable
+(global $interfaces.Main.SubInterface.vtable@$interfaces.Main.Implementor (ref $interfaces.Main.SubInterface.vtable) 
  (struct.new $interfaces.Main.SubInterface.vtable
   (ref.func $m_defaultMethod__java_lang_String__void@interfaces.Main.Implementor)
  )
+ )(global $interfaces.Main.Interface.vtable@$interfaces.Main.Implementor (ref $interfaces.Main.Interface.vtable) 
  (struct.new $interfaces.Main.Interface.vtable
   (ref.func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Implementor)
   (ref.func $m_interfaceMethod__void@interfaces.Main.Implementor)
  )
+ )
+(global $interfaces.Main.Implementor.itable (ref $interfaces.Main.Implementor.itable) (struct.new $interfaces.Main.Implementor.itable
+  (global.get $interfaces.Main.SubInterface.vtable@$interfaces.Main.Implementor)
+  (global.get $interfaces.Main.Interface.vtable@$interfaces.Main.Implementor)
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

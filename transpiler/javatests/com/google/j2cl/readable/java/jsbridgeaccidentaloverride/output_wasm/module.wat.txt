@@ -111,10 +111,13 @@
 )
 
 ;;; Code for jsbridgeaccidentaloverride.MyJsType [itable.init]
-(global $jsbridgeaccidentaloverride.MyJsType.itable (ref $jsbridgeaccidentaloverride.MyJsType.itable) (struct.new $jsbridgeaccidentaloverride.MyJsType.itable
+(global $jsbridgeaccidentaloverride.OtherInterface.vtable@$jsbridgeaccidentaloverride.MyJsType (ref $jsbridgeaccidentaloverride.OtherInterface.vtable) 
  (struct.new $jsbridgeaccidentaloverride.OtherInterface.vtable
   (ref.func $m_fun__int__int@jsbridgeaccidentaloverride.MyJsType)
  )
+ )
+(global $jsbridgeaccidentaloverride.MyJsType.itable (ref $jsbridgeaccidentaloverride.MyJsType.itable) (struct.new $jsbridgeaccidentaloverride.MyJsType.itable
+  (global.get $jsbridgeaccidentaloverride.OtherInterface.vtable@$jsbridgeaccidentaloverride.MyJsType)
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -138,14 +141,19 @@
 )
 
 ;;; Code for jsbridgeaccidentaloverride.SubJsType [itable.init]
-(global $jsbridgeaccidentaloverride.SubJsType.itable (ref $jsbridgeaccidentaloverride.SubJsType.itable) (struct.new $jsbridgeaccidentaloverride.SubJsType.itable
+(global $jsbridgeaccidentaloverride.OtherInterface.vtable@$jsbridgeaccidentaloverride.SubJsType (ref $jsbridgeaccidentaloverride.OtherInterface.vtable) 
  (struct.new $jsbridgeaccidentaloverride.OtherInterface.vtable
   (ref.func $m_fun__int__int@jsbridgeaccidentaloverride.MyJsType)
  )
+ )(global $jsbridgeaccidentaloverride.MyInterface.vtable@$jsbridgeaccidentaloverride.SubJsType (ref $jsbridgeaccidentaloverride.MyInterface.vtable) 
  (struct.new $jsbridgeaccidentaloverride.MyInterface.vtable
   (ref.func $m_bar__int__int@jsbridgeaccidentaloverride.SubJsType)
   (ref.func $m_foo__int__int@jsbridgeaccidentaloverride.MyJsType)
  )
+ )
+(global $jsbridgeaccidentaloverride.SubJsType.itable (ref $jsbridgeaccidentaloverride.SubJsType.itable) (struct.new $jsbridgeaccidentaloverride.SubJsType.itable
+  (global.get $jsbridgeaccidentaloverride.OtherInterface.vtable@$jsbridgeaccidentaloverride.SubJsType)
+  (global.get $jsbridgeaccidentaloverride.MyInterface.vtable@$jsbridgeaccidentaloverride.SubJsType)
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

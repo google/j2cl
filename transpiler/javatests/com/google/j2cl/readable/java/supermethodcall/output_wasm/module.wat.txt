@@ -221,10 +221,13 @@
 )
 
 ;;; Code for supermethodcall.Parent [itable.init]
-(global $supermethodcall.Parent.itable (ref $supermethodcall.Parent.itable) (struct.new $supermethodcall.Parent.itable
+(global $supermethodcall.ParentInterface.vtable@$supermethodcall.Parent (ref $supermethodcall.ParentInterface.vtable) 
  (struct.new $supermethodcall.ParentInterface.vtable
   (ref.func $m_defaultParent__void@supermethodcall.Parent)
  )
+ )
+(global $supermethodcall.Parent.itable (ref $supermethodcall.Parent.itable) (struct.new $supermethodcall.Parent.itable
+  (global.get $supermethodcall.ParentInterface.vtable@$supermethodcall.Parent)
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -255,13 +258,18 @@
 )
 
 ;;; Code for supermethodcall.Child [itable.init]
-(global $supermethodcall.Child.itable (ref $supermethodcall.Child.itable) (struct.new $supermethodcall.Child.itable
+(global $supermethodcall.ParentInterface.vtable@$supermethodcall.Child (ref $supermethodcall.ParentInterface.vtable) 
  (struct.new $supermethodcall.ParentInterface.vtable
   (ref.func $m_defaultParent__void@supermethodcall.Parent)
  )
+ )(global $supermethodcall.GrandParentInterface.vtable@$supermethodcall.Child (ref $supermethodcall.GrandParentInterface.vtable) 
  (struct.new $supermethodcall.GrandParentInterface.vtable
   (ref.func $m_defaultGrandParent__void@supermethodcall.Child)
  )
+ )
+(global $supermethodcall.Child.itable (ref $supermethodcall.Child.itable) (struct.new $supermethodcall.Child.itable
+  (global.get $supermethodcall.ParentInterface.vtable@$supermethodcall.Child)
+  (global.get $supermethodcall.GrandParentInterface.vtable@$supermethodcall.Child)
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -294,15 +302,22 @@
 )
 
 ;;; Code for supermethodcall.Sub [itable.init]
-(global $supermethodcall.Sub.itable (ref $supermethodcall.Sub.itable) (struct.new $supermethodcall.Sub.itable
+(global $supermethodcall.I1.vtable@$supermethodcall.Sub (ref $supermethodcall.I1.vtable) 
  (struct.new $supermethodcall.I1.vtable
   (ref.func $m_m__void@supermethodcall.Sub)
  )
+ )(global $supermethodcall.I2.vtable@$supermethodcall.Sub (ref $supermethodcall.I2.vtable) 
  (struct.new $supermethodcall.I2.vtable
   (ref.func $m_m__void@supermethodcall.Sub)
  )
+ )(global $supermethodcall.I3.vtable@$supermethodcall.Sub (ref $supermethodcall.I3.vtable) 
  (struct.new $supermethodcall.I3.vtable
  )
+ )
+(global $supermethodcall.Sub.itable (ref $supermethodcall.Sub.itable) (struct.new $supermethodcall.Sub.itable
+  (global.get $supermethodcall.I1.vtable@$supermethodcall.Sub)
+  (global.get $supermethodcall.I2.vtable@$supermethodcall.Sub)
+  (global.get $supermethodcall.I3.vtable@$supermethodcall.Sub)
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

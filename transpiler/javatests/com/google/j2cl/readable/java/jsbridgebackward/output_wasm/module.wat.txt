@@ -98,10 +98,13 @@
 )
 
 ;;; Code for jsbridgebackward.InterfaceImpl [itable.init]
-(global $jsbridgebackward.InterfaceImpl.itable (ref $jsbridgebackward.InterfaceImpl.itable) (struct.new $jsbridgebackward.InterfaceImpl.itable
+(global $jsbridgebackward.MyJsInterface.vtable@$jsbridgebackward.InterfaceImpl (ref $jsbridgebackward.MyJsInterface.vtable) 
  (struct.new $jsbridgebackward.MyJsInterface.vtable
   (ref.func $m_foo__int__int@jsbridgebackward.A)
  )
+ )
+(global $jsbridgebackward.InterfaceImpl.itable (ref $jsbridgebackward.InterfaceImpl.itable) (struct.new $jsbridgebackward.InterfaceImpl.itable
+  (global.get $jsbridgebackward.MyJsInterface.vtable@$jsbridgebackward.InterfaceImpl)
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -123,10 +126,13 @@
 )
 
 ;;; Code for jsbridgebackward.SubInterfaceImpl [itable.init]
-(global $jsbridgebackward.SubInterfaceImpl.itable (ref $jsbridgebackward.SubInterfaceImpl.itable) (struct.new $jsbridgebackward.SubInterfaceImpl.itable
+(global $jsbridgebackward.MyJsInterface.vtable@$jsbridgebackward.SubInterfaceImpl (ref $jsbridgebackward.MyJsInterface.vtable) 
  (struct.new $jsbridgebackward.MyJsInterface.vtable
   (ref.func $m_foo__int__int@jsbridgebackward.SubInterfaceImpl)
  )
+ )
+(global $jsbridgebackward.SubInterfaceImpl.itable (ref $jsbridgebackward.SubInterfaceImpl.itable) (struct.new $jsbridgebackward.SubInterfaceImpl.itable
+  (global.get $jsbridgebackward.MyJsInterface.vtable@$jsbridgebackward.SubInterfaceImpl)
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

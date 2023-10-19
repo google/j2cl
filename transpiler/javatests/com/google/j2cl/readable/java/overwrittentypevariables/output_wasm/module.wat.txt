@@ -104,12 +104,17 @@
 )
 
 ;;; Code for overwrittentypevariables.HashFunctions.1 [itable.init]
-(global $overwrittentypevariables.HashFunctions.1.itable (ref $overwrittentypevariables.HashFunctions.1.itable) (struct.new $overwrittentypevariables.HashFunctions.1.itable
+(global $overwrittentypevariables.HashFunction.vtable@$overwrittentypevariables.HashFunctions.1 (ref $overwrittentypevariables.HashFunction.vtable) 
  (struct.new $overwrittentypevariables.HashFunction.vtable
  )
+ )(global $overwrittentypevariables.MyFunction.vtable@$overwrittentypevariables.HashFunctions.1 (ref $overwrittentypevariables.MyFunction.vtable) 
  (struct.new $overwrittentypevariables.MyFunction.vtable
   (ref.func $m_apply__java_lang_Object__java_lang_Object@overwrittentypevariables.HashFunctions.1)
  )
+ )
+(global $overwrittentypevariables.HashFunctions.1.itable (ref $overwrittentypevariables.HashFunctions.1.itable) (struct.new $overwrittentypevariables.HashFunctions.1.itable
+  (global.get $overwrittentypevariables.HashFunction.vtable@$overwrittentypevariables.HashFunctions.1)
+  (global.get $overwrittentypevariables.MyFunction.vtable@$overwrittentypevariables.HashFunctions.1)
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -131,12 +136,17 @@
 )
 
 ;;; Code for overwrittentypevariables.HashFunctions.2 [itable.init]
-(global $overwrittentypevariables.HashFunctions.2.itable (ref $overwrittentypevariables.HashFunctions.2.itable) (struct.new $overwrittentypevariables.HashFunctions.2.itable
+(global $overwrittentypevariables.HashFunction.vtable@$overwrittentypevariables.HashFunctions.2 (ref $overwrittentypevariables.HashFunction.vtable) 
  (struct.new $overwrittentypevariables.HashFunction.vtable
  )
+ )(global $overwrittentypevariables.MyFunction.vtable@$overwrittentypevariables.HashFunctions.2 (ref $overwrittentypevariables.MyFunction.vtable) 
  (struct.new $overwrittentypevariables.MyFunction.vtable
   (ref.func $m_apply__java_lang_Object__java_lang_Object@overwrittentypevariables.HashFunctions.2)
  )
+ )
+(global $overwrittentypevariables.HashFunctions.2.itable (ref $overwrittentypevariables.HashFunctions.2.itable) (struct.new $overwrittentypevariables.HashFunctions.2.itable
+  (global.get $overwrittentypevariables.HashFunction.vtable@$overwrittentypevariables.HashFunctions.2)
+  (global.get $overwrittentypevariables.MyFunction.vtable@$overwrittentypevariables.HashFunctions.2)
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

@@ -830,9 +830,12 @@
 )
 
 ;;; Code for autovalue.AutoValue_AutoValueWithFields [itable.init]
-(global $autovalue.AutoValue_AutoValueWithFields.itable (ref $autovalue.AutoValue_AutoValueWithFields.itable) (struct.new $autovalue.AutoValue_AutoValueWithFields.itable
+(global $java.io.Serializable.vtable@$autovalue.AutoValue_AutoValueWithFields (ref $java.io.Serializable.vtable) 
  (struct.new $java.io.Serializable.vtable
  )
+ )
+(global $autovalue.AutoValue_AutoValueWithFields.itable (ref $autovalue.AutoValue_AutoValueWithFields.itable) (struct.new $autovalue.AutoValue_AutoValueWithFields.itable
+  (global.get $java.io.Serializable.vtable@$autovalue.AutoValue_AutoValueWithFields)
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)

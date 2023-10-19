@@ -55,6 +55,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -710,6 +711,25 @@ public class WasmOutputsGenerator {
     // Create the struct of interface vtables of the required size and store it in a global variable
     // to be able to use it when objects of this class are instantiated.
     builder.newLine();
+    // Emit globals for each interface vtable
+    WasmTypeLayout wasmTypeLayout = environment.getWasmTypeLayout(typeDeclaration);
+    TypeDeclaration[] itableSlots = getItableSlots(typeDeclaration);
+    stream(itableSlots)
+        .filter(Objects::nonNull)
+        .forEach(
+            i -> {
+              builder.append(
+                  format(
+                      "(global %s (ref %s) ",
+                      environment.getWasmInterfaceVtableGlobalName(i, typeDeclaration),
+                      environment.getWasmVtableTypeName(i)));
+              builder.indent();
+              initializeInterfaceVtable(wasmTypeLayout, i);
+              builder.newLine();
+              builder.unindent();
+              builder.append(")");
+            });
+    builder.newLine();
     builder.append(
         format(
             "(global %s (ref %s) (struct.new %s",
@@ -717,9 +737,19 @@ public class WasmOutputsGenerator {
             environment.getWasmItableTypeName(typeDeclaration),
             environment.getWasmItableTypeName(typeDeclaration)));
     builder.indent();
-    WasmTypeLayout wasmTypeLayout = environment.getWasmTypeLayout(typeDeclaration);
-    stream(getItableSlots(typeDeclaration))
-        .forEach(i -> initializeInterfaceVtable(wasmTypeLayout, i));
+    stream(itableSlots)
+        .forEach(
+            i -> {
+              builder.newLine();
+              if (i == null) {
+                builder.append(" (ref.null struct)");
+                return;
+              }
+              builder.append(
+                  format(
+                      " (global.get %s)",
+                      environment.getWasmInterfaceVtableGlobalName(i, typeDeclaration)));
+            });
     builder.newLine();
     builder.append("))");
     builder.unindent();
@@ -769,11 +799,6 @@ public class WasmOutputsGenerator {
 
   private void initializeInterfaceVtable(
       WasmTypeLayout wasmTypeLayout, TypeDeclaration interfaceDeclaration) {
-    if (interfaceDeclaration == null) {
-      builder.newLine();
-      builder.append(" (ref.null struct)");
-      return;
-    }
     ImmutableList<MethodDescriptor> interfaceMethodImplementations =
         interfaceDeclaration.getDeclaredMethodDescriptors().stream()
             .filter(MethodDescriptor::isPolymorphic)

@@ -215,9 +215,14 @@ class WasmGenerationEnvironment {
   }
 
   /** Returns the name of the global that stores the vtable for a Java type. */
+  public String getWasmInterfaceVtableGlobalName(TypeDeclaration ifce, TypeDeclaration inClass) {
+    return format("%s@%s", getWasmVtableTypeName(ifce), getWasmTypeName(inClass));
+  }
+
+  /** Returns the name of the global that stores the vtable for a Java type. */
   public String getWasmVtableGlobalName(TypeDeclaration typeDeclaration) {
-    // We use the same name for the global that holds the vtable as well as for its type since
-    // the type namespace and global namespace are different naming scopes.
+    // For classes we use the same name for the global that holds the vtable as well as for its type
+    // since the type namespace and global namespace are different naming scopes.
     return getWasmVtableTypeName(typeDeclaration);
   }
 
