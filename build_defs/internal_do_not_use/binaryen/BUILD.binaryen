@@ -21,6 +21,10 @@ BINARYEN_COPTS = [
     "-std=c++17",
 ]
 
+BINARYEN_LINKOPTS = [
+  "-lpthread",
+]
+
 BINARYEN_LIB_SRCS = glob(
     [
         "src/*.cpp",
@@ -94,6 +98,7 @@ cc_binary(
         "src/tools/wasm2c-wrapper.h",
     ],
     copts = BINARYEN_COPTS,
+    linkopts = BINARYEN_LINKOPTS,
     includes = ["src/tools"],
     deps = [":binaryen_lib"],
 )
@@ -117,6 +122,7 @@ cc_binary(
         "src/tools/wasm2c-wrapper.h",
     ],
     copts = BINARYEN_COPTS,
+    linkopts = BINARYEN_LINKOPTS,
     includes = ["src/tools"],
     deps = [":binaryen_lib-legacy"],
 )
