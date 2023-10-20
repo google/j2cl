@@ -134,14 +134,6 @@ def _strip_jsunit_parameters(args):
             parameters[parameter] = args[parameter]
     return parameters
 
-def _ensure_jspecify_is_enabled(args):
-    parameters = {}
-    parameters.update(args)
-    parameters.update({
-        "experimental_enable_jspecify_support_do_not_enable_without_jspecify_static_checking_or_you_might_cause_an_outage": 1,
-    })
-    return parameters
-
 def _get_test_class(name, build_package, test_class):
     """Infers the name of the test class to be compiled."""
     if name.endswith("-j2cl"):
@@ -220,9 +212,10 @@ def j2cl_test_common(
             name = "%s_testlib" % name,
             exports = exports,
             testonly = 1,
-            tags = tags,
             # Safe here as this is for tests only and there are no downstream users.
-            **_ensure_jspecify_is_enabled(j2cl_parameters)
+            experimental_enable_jspecify_support_do_not_enable_without_jspecify_static_checking_or_you_might_cause_an_outage = 1,
+            tags = tags,
+            **j2cl_parameters
         )
 
         # Trigger our code generation
