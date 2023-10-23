@@ -92,7 +92,7 @@
 (func $$getClassMetadata__java_lang_Class@assertsimple.AssertSimple
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__assertsimple_AssertSimple) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__assertsimple_AssertSimple))
    (then
     (global.set $f_$class__assertsimple_AssertSimple (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|assertsimple...|__java_lang_String (ref.func $$getString_|assertsimple...|__java_lang_String@assertsimple.AssertSimple) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -118,7 +118,7 @@
 (func $$getString_|Error_|__java_lang_String@assertsimple.AssertSimple
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|Error_|__assertsimple_AssertSimple) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|Error_|__assertsimple_AssertSimple))
    (then
     (global.set $f_$string_|Error_|__assertsimple_AssertSimple (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "Error!")))
    )
@@ -131,7 +131,7 @@
 (func $$getString_|assertsimple...|__java_lang_String@assertsimple.AssertSimple
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|assertsimple...|__assertsimple_AssertSimple) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|assertsimple...|__assertsimple_AssertSimple))
    (then
     (global.set $f_$string_|assertsimple...|__assertsimple_AssertSimple (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "assertsimple.AssertSimple")))
    )

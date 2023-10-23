@@ -1296,7 +1296,7 @@
 (func $$getClassMetadata__java_lang_Class@autoboxing.AutoBoxing
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autoboxing_AutoBoxing) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autoboxing_AutoBoxing))
    (then
     (global.set $f_$class__autoboxing_AutoBoxing (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autoboxing.A...|__java_lang_String (ref.func $$getString_|autoboxing.A...|__java_lang_String@autoboxing.AutoBoxing) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -1322,7 +1322,7 @@
 (func $$getString_|autoboxing.A...|__java_lang_String@autoboxing.AutoBoxing
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autoboxing.A...|__autoboxing_AutoBoxing) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autoboxing.A...|__autoboxing_AutoBoxing))
    (then
     (global.set $f_$string_|autoboxing.A...|__autoboxing_AutoBoxing (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autoboxing.AutoBoxing")))
    )
@@ -1398,7 +1398,7 @@
 (func $$getClassMetadata__java_lang_Class@autoboxing.AutoBoxing.1Local
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autoboxing_AutoBoxing_1Local) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autoboxing_AutoBoxing_1Local))
    (then
     (global.set $f_$class__autoboxing_AutoBoxing_1Local (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autoboxing.A...|__java_lang_String (ref.func $$getString_|autoboxing.A...|__java_lang_String@autoboxing.AutoBoxing.1Local) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -1424,7 +1424,7 @@
 (func $$getString_|autoboxing.A...|__java_lang_String@autoboxing.AutoBoxing.1Local
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autoboxing.A...|__autoboxing_AutoBoxing_1Local) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autoboxing.A...|__autoboxing_AutoBoxing_1Local))
    (then
     (global.set $f_$string_|autoboxing.A...|__autoboxing_AutoBoxing_1Local (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autoboxing.AutoBoxing$1Local")))
    )
@@ -1500,7 +1500,7 @@
 (func $$getClassMetadata__java_lang_Class@autoboxing.AutoBoxing.2Local
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autoboxing_AutoBoxing_2Local) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autoboxing_AutoBoxing_2Local))
    (then
     (global.set $f_$class__autoboxing_AutoBoxing_2Local (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autoboxing.A...|__java_lang_String (ref.func $$getString_|autoboxing.A...|__java_lang_String@autoboxing.AutoBoxing.2Local) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -1526,7 +1526,7 @@
 (func $$getString_|autoboxing.A...|__java_lang_String@autoboxing.AutoBoxing.2Local
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autoboxing.A...|__autoboxing_AutoBoxing_2Local) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autoboxing.A...|__autoboxing_AutoBoxing_2Local))
    (then
     (global.set $f_$string_|autoboxing.A...|__autoboxing_AutoBoxing_2Local (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autoboxing.AutoBoxing$2Local")))
    )
@@ -1605,7 +1605,7 @@
 (func $$getClassMetadata__java_lang_Class@autoboxing.AutoBoxing.1Supplier
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autoboxing_AutoBoxing_1Supplier) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autoboxing_AutoBoxing_1Supplier))
    (then
     (global.set $f_$class__autoboxing_AutoBoxing_1Supplier (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autoboxing.A...|__java_lang_String (ref.func $$getString_|autoboxing.A...|__java_lang_String@autoboxing.AutoBoxing.1Supplier) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -1631,7 +1631,7 @@
 (func $$getString_|autoboxing.A...|__java_lang_String@autoboxing.AutoBoxing.1Supplier
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autoboxing.A...|__autoboxing_AutoBoxing_1Supplier) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autoboxing.A...|__autoboxing_AutoBoxing_1Supplier))
    (then
     (global.set $f_$string_|autoboxing.A...|__autoboxing_AutoBoxing_1Supplier (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autoboxing.AutoBoxing$1Supplier")))
    )

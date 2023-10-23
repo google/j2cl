@@ -1368,7 +1368,7 @@
 (func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__innerclassinitorder_InnerClassInitOrder) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__innerclassinitorder_InnerClassInitOrder))
    (then
     (global.set $f_$class__innerclassinitorder_InnerClassInitOrder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -1394,7 +1394,7 @@
 (func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder))
    (then
     (global.set $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinitorder.InnerClassInitOrder")))
    )
@@ -1458,7 +1458,7 @@
 (func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorBase) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorBase))
    (then
     (global.set $f_$class__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorBase (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -1484,7 +1484,7 @@
 (func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorBase) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorBase))
    (then
     (global.set $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorBase (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinitorder.InnerClassInitOrder$OuterRefFromSuperCtorBase")))
    )
@@ -1565,7 +1565,7 @@
 (func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall_1) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall_1))
    (then
     (global.set $f_$class__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -1591,7 +1591,7 @@
 (func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall_1) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall_1))
    (then
     (global.set $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall_1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinitorder.InnerClassInitOrder$OuterRefFromSuperCtorCall$1")))
    )
@@ -1672,7 +1672,7 @@
 (func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall_1) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall_1))
    (then
     (global.set $f_$class__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -1698,7 +1698,7 @@
 (func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall_1) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall_1))
    (then
     (global.set $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall_1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinitorder.InnerClassInitOrder$OuterRefFromThisCtorCall$1")))
    )
@@ -1788,7 +1788,7 @@
 (func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_InnerClass_1ReallyInnerClass) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_InnerClass_1ReallyInnerClass))
    (then
     (global.set $f_$class__innerclassinitorder_InnerClassInitOrder_InnerClass_1ReallyInnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -1814,7 +1814,7 @@
 (func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_InnerClass_1ReallyInnerClass) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_InnerClass_1ReallyInnerClass))
    (then
     (global.set $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_InnerClass_1ReallyInnerClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinitorder.InnerClassInitOrder$InnerClass$1ReallyInnerClass")))
    )
@@ -1906,7 +1906,7 @@
 (func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.InnerClass
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_InnerClass) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_InnerClass))
    (then
     (global.set $f_$class__innerclassinitorder_InnerClassInitOrder_InnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.InnerClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -1932,7 +1932,7 @@
 (func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.InnerClass
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_InnerClass) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_InnerClass))
    (then
     (global.set $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_InnerClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinitorder.InnerClassInitOrder$InnerClass")))
    )
@@ -2023,7 +2023,7 @@
 (func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.P1
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_P1) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_P1))
    (then
     (global.set $f_$class__innerclassinitorder_InnerClassInitOrder_P1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.P1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -2049,7 +2049,7 @@
 (func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.P1
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_P1) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_P1))
    (then
     (global.set $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_P1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinitorder.InnerClassInitOrder$P1")))
    )
@@ -2150,7 +2150,7 @@
 (func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner))
    (then
     (global.set $f_$class__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -2176,7 +2176,7 @@
 (func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner))
    (then
     (global.set $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinitorder.InnerClassInitOrder$ESOuter$ESInner")))
    )
@@ -2251,7 +2251,7 @@
 (func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.ESOuter
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_ESOuter) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_ESOuter))
    (then
     (global.set $f_$class__innerclassinitorder_InnerClassInitOrder_ESOuter (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.ESOuter) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -2277,7 +2277,7 @@
 (func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.ESOuter
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_ESOuter) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_ESOuter))
    (then
     (global.set $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_ESOuter (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinitorder.InnerClassInitOrder$ESOuter")))
    )
@@ -2378,7 +2378,7 @@
 (func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner))
    (then
     (global.set $f_$class__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -2404,7 +2404,7 @@
 (func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner))
    (then
     (global.set $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinitorder.InnerClassInitOrder$ESWGOuter$ESWGInner")))
    )
@@ -2479,7 +2479,7 @@
 (func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.ESWGOuter
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_ESWGOuter) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_ESWGOuter))
    (then
     (global.set $f_$class__innerclassinitorder_InnerClassInitOrder_ESWGOuter (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.ESWGOuter) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -2505,7 +2505,7 @@
 (func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.ESWGOuter
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_ESWGOuter) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_ESWGOuter))
    (then
     (global.set $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_ESWGOuter (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinitorder.InnerClassInitOrder$ESWGOuter")))
    )
@@ -2584,7 +2584,7 @@
 (func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper))
    (then
     (global.set $f_$class__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -2610,7 +2610,7 @@
 (func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper))
    (then
     (global.set $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinitorder.InnerClassInitOrder$Outer$OuterIsNotSuper")))
    )
@@ -2689,7 +2689,7 @@
 (func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.Outer
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_Outer) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_Outer))
    (then
     (global.set $f_$class__innerclassinitorder_InnerClassInitOrder_Outer (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.Outer) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -2715,7 +2715,7 @@
 (func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.Outer
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_Outer) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_Outer))
    (then
     (global.set $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_Outer (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinitorder.InnerClassInitOrder$Outer")))
    )
@@ -2766,7 +2766,7 @@
 (func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.1AddNumber
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_1AddNumber) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_1AddNumber))
    (then
     (global.set $f_$class__innerclassinitorder_InnerClassInitOrder_1AddNumber (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.1AddNumber) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -2779,7 +2779,7 @@
 (func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.1AddNumber
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_1AddNumber) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_1AddNumber))
    (then
     (global.set $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_1AddNumber (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinitorder.InnerClassInitOrder$1AddNumber")))
    )
@@ -2859,7 +2859,7 @@
 (func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.1
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_1) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_1))
    (then
     (global.set $f_$class__innerclassinitorder_InnerClassInitOrder_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.1AddNumber) )))
    )
@@ -2885,7 +2885,7 @@
 (func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.1
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_1) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_1))
    (then
     (global.set $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinitorder.InnerClassInitOrder$1")))
    )
@@ -2949,7 +2949,7 @@
 (func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.2
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_2) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_2))
    (then
     (global.set $f_$class__innerclassinitorder_InnerClassInitOrder_2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.2) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper) )))
    )
@@ -2975,7 +2975,7 @@
 (func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.2
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_2) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_2))
    (then
     (global.set $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinitorder.InnerClassInitOrder$2")))
    )
@@ -3039,7 +3039,7 @@
 (func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall))
    (then
     (global.set $f_$class__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase) )))
    )
@@ -3065,7 +3065,7 @@
 (func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall))
    (then
     (global.set $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinitorder.InnerClassInitOrder$OuterRefFromSuperCtorCall")))
    )
@@ -3160,7 +3160,7 @@
 (func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall))
    (then
     (global.set $f_$class__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase) )))
    )
@@ -3186,7 +3186,7 @@
 (func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall))
    (then
     (global.set $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinitorder.InnerClassInitOrder$OuterRefFromThisCtorCall")))
    )
@@ -3281,7 +3281,7 @@
 (func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.P1.P2
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_P1_P2) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_P1_P2))
    (then
     (global.set $f_$class__innerclassinitorder_InnerClassInitOrder_P1_P2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.P1.P2) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.P1) )))
    )
@@ -3307,7 +3307,7 @@
 (func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.P1.P2
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_P1_P2) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_P1_P2))
    (then
     (global.set $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_P1_P2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinitorder.InnerClassInitOrder$P1$P2")))
    )
@@ -3400,7 +3400,7 @@
 (func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.ESInnerSubclass
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_ESInnerSubclass) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_ESInnerSubclass))
    (then
     (global.set $f_$class__innerclassinitorder_InnerClassInitOrder_ESInnerSubclass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.ESInnerSubclass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner) )))
    )
@@ -3426,7 +3426,7 @@
 (func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.ESInnerSubclass
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_ESInnerSubclass) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_ESInnerSubclass))
    (then
     (global.set $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_ESInnerSubclass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinitorder.InnerClassInitOrder$ESInnerSubclass")))
    )
@@ -3519,7 +3519,7 @@
 (func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_ESWGInnerSubclass) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_ESWGInnerSubclass))
    (then
     (global.set $f_$class__innerclassinitorder_InnerClassInitOrder_ESWGInnerSubclass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner) )))
    )
@@ -3545,7 +3545,7 @@
 (func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_ESWGInnerSubclass) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_ESWGInnerSubclass))
    (then
     (global.set $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_ESWGInnerSubclass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinitorder.InnerClassInitOrder$ESWGInnerSubclass")))
    )
@@ -3626,7 +3626,7 @@
 (func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper_1) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper_1))
    (then
     (global.set $f_$class__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.Outer) )))
    )
@@ -3652,7 +3652,7 @@
 (func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper_1) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper_1))
    (then
     (global.set $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper_1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinitorder.InnerClassInitOrder$Outer$OuterIsSuper$1")))
    )
@@ -3782,7 +3782,7 @@
 (func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper))
    (then
     (global.set $f_$class__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.Outer) )))
    )
@@ -3808,7 +3808,7 @@
 (func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper))
    (then
     (global.set $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinitorder.InnerClassInitOrder$Outer$OuterIsSuper")))
    )
@@ -3868,7 +3868,7 @@
 (func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_Outer_TestQualifiedSuperCall) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_Outer_TestQualifiedSuperCall))
    (then
     (global.set $f_$class__innerclassinitorder_InnerClassInitOrder_Outer_TestQualifiedSuperCall (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper) )))
    )
@@ -3894,7 +3894,7 @@
 (func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_Outer_TestQualifiedSuperCall) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_Outer_TestQualifiedSuperCall))
    (then
     (global.set $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_Outer_TestQualifiedSuperCall (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinitorder.InnerClassInitOrder$Outer$TestQualifiedSuperCall")))
    )
@@ -3958,7 +3958,7 @@
 (func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_Outer_TestUnqualifiedSuperCall) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_Outer_TestUnqualifiedSuperCall))
    (then
     (global.set $f_$class__innerclassinitorder_InnerClassInitOrder_Outer_TestUnqualifiedSuperCall (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper) )))
    )
@@ -3984,7 +3984,7 @@
 (func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_Outer_TestUnqualifiedSuperCall) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_Outer_TestUnqualifiedSuperCall))
    (then
     (global.set $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_Outer_TestUnqualifiedSuperCall (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinitorder.InnerClassInitOrder$Outer$TestUnqualifiedSuperCall")))
    )
@@ -4048,7 +4048,7 @@
 (func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.3
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_3) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_3))
    (then
     (global.set $f_$class__innerclassinitorder_InnerClassInitOrder_3 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.3) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall) )))
    )
@@ -4074,7 +4074,7 @@
 (func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.3
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_3) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_3))
    (then
     (global.set $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_3 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinitorder.InnerClassInitOrder$3")))
    )
@@ -4138,7 +4138,7 @@
 (func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.4
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_4) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_4))
    (then
     (global.set $f_$class__innerclassinitorder_InnerClassInitOrder_4 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.4) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall) )))
    )
@@ -4164,7 +4164,7 @@
 (func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.4
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_4) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_4))
    (then
     (global.set $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_4 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinitorder.InnerClassInitOrder$4")))
    )
@@ -4259,7 +4259,7 @@
 (func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.P1.P2.P3
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_P1_P2_P3) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__innerclassinitorder_InnerClassInitOrder_P1_P2_P3))
    (then
     (global.set $f_$class__innerclassinitorder_InnerClassInitOrder_P1_P2_P3 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|innerclassin...|__java_lang_String (ref.func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.P1.P2.P3) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@innerclassinitorder.InnerClassInitOrder.P1.P2) )))
    )
@@ -4285,7 +4285,7 @@
 (func $$getString_|innerclassin...|__java_lang_String@innerclassinitorder.InnerClassInitOrder.P1.P2.P3
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_P1_P2_P3) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_P1_P2_P3))
    (then
     (global.set $f_$string_|innerclassin...|__innerclassinitorder_InnerClassInitOrder_P1_P2_P3 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "innerclassinitorder.InnerClassInitOrder$P1$P2$P3")))
    )

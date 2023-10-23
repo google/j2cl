@@ -123,7 +123,7 @@
 (func $$getClassMetadata__java_lang_Class@jsnullable.Main
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__jsnullable_Main) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__jsnullable_Main))
    (then
     (global.set $f_$class__jsnullable_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsnullable.Main|__java_lang_String (ref.func $$getString_|jsnullable.Main|__java_lang_String@jsnullable.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -149,7 +149,7 @@
 (func $$getString_|Hello|__java_lang_String@jsnullable.Main
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|Hello|__jsnullable_Main) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|Hello|__jsnullable_Main))
    (then
     (global.set $f_$string_|Hello|__jsnullable_Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "Hello")))
    )
@@ -162,7 +162,7 @@
 (func $$getString_|jsnullable.Main|__java_lang_String@jsnullable.Main
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|jsnullable.Main|__jsnullable_Main) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|jsnullable.Main|__jsnullable_Main))
    (then
     (global.set $f_$string_|jsnullable.Main|__jsnullable_Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsnullable.Main")))
    )

@@ -212,7 +212,7 @@
 (func $$getClassMetadata__java_lang_Class@nobridgemethods.Entry
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__nobridgemethods_Entry) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__nobridgemethods_Entry))
    (then
     (global.set $f_$class__nobridgemethods_Entry (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nobridgemeth...|__java_lang_String (ref.func $$getString_|nobridgemeth...|__java_lang_String@nobridgemethods.Entry) )))
    )
@@ -225,7 +225,7 @@
 (func $$getString_|nobridgemeth...|__java_lang_String@nobridgemethods.Entry
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|nobridgemeth...|__nobridgemethods_Entry) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|nobridgemeth...|__nobridgemethods_Entry))
    (then
     (global.set $f_$string_|nobridgemeth...|__nobridgemethods_Entry (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nobridgemethods.Entry")))
    )
@@ -270,7 +270,7 @@
 (func $$getClassMetadata__java_lang_Class@nobridgemethods.Map
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__nobridgemethods_Map) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__nobridgemethods_Map))
    (then
     (global.set $f_$class__nobridgemethods_Map (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nobridgemeth...|__java_lang_String (ref.func $$getString_|nobridgemeth...|__java_lang_String@nobridgemethods.Map) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -283,7 +283,7 @@
 (func $$getString_|nobridgemeth...|__java_lang_String@nobridgemethods.Map
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|nobridgemeth...|__nobridgemethods_Map) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|nobridgemeth...|__nobridgemethods_Map))
    (then
     (global.set $f_$string_|nobridgemeth...|__nobridgemethods_Map (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nobridgemethods.Map")))
    )
@@ -356,7 +356,7 @@
 (func $$getClassMetadata__java_lang_Class@nobridgemethods.CharSet
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__nobridgemethods_CharSet) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__nobridgemethods_CharSet))
    (then
     (global.set $f_$class__nobridgemethods_CharSet (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nobridgemeth...|__java_lang_String (ref.func $$getString_|nobridgemeth...|__java_lang_String@nobridgemethods.CharSet) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -382,7 +382,7 @@
 (func $$getString_|nobridgemeth...|__java_lang_String@nobridgemethods.CharSet
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|nobridgemeth...|__nobridgemethods_CharSet) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|nobridgemeth...|__nobridgemethods_CharSet))
    (then
     (global.set $f_$string_|nobridgemeth...|__nobridgemethods_CharSet (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nobridgemethods.CharSet")))
    )
@@ -442,7 +442,7 @@
 (func $$getClassMetadata__java_lang_Class@nobridgemethods.TreeMap.InnerEntry
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__nobridgemethods_TreeMap_InnerEntry) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__nobridgemethods_TreeMap_InnerEntry))
    (then
     (global.set $f_$class__nobridgemethods_TreeMap_InnerEntry (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nobridgemeth...|__java_lang_String (ref.func $$getString_|nobridgemeth...|__java_lang_String@nobridgemethods.TreeMap.InnerEntry) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -468,7 +468,7 @@
 (func $$getString_|nobridgemeth...|__java_lang_String@nobridgemethods.TreeMap.InnerEntry
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|nobridgemeth...|__nobridgemethods_TreeMap_InnerEntry) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|nobridgemeth...|__nobridgemethods_TreeMap_InnerEntry))
    (then
     (global.set $f_$string_|nobridgemeth...|__nobridgemethods_TreeMap_InnerEntry (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nobridgemethods.TreeMap$InnerEntry")))
    )
@@ -560,7 +560,7 @@
 (func $$getClassMetadata__java_lang_Class@nobridgemethods.TreeMap
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__nobridgemethods_TreeMap) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__nobridgemethods_TreeMap))
    (then
     (global.set $f_$class__nobridgemethods_TreeMap (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nobridgemeth...|__java_lang_String (ref.func $$getString_|nobridgemeth...|__java_lang_String@nobridgemethods.TreeMap) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nobridgemethods.Map) )))
    )
@@ -586,7 +586,7 @@
 (func $$getString_|nobridgemeth...|__java_lang_String@nobridgemethods.TreeMap
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|nobridgemeth...|__nobridgemethods_TreeMap) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|nobridgemeth...|__nobridgemethods_TreeMap))
    (then
     (global.set $f_$string_|nobridgemeth...|__nobridgemethods_TreeMap (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nobridgemethods.TreeMap")))
    )
@@ -646,7 +646,7 @@
 (func $$getClassMetadata__java_lang_Class@nobridgemethods.CharSet.1
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__nobridgemethods_CharSet_1) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__nobridgemethods_CharSet_1))
    (then
     (global.set $f_$class__nobridgemethods_CharSet_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nobridgemeth...|__java_lang_String (ref.func $$getString_|nobridgemeth...|__java_lang_String@nobridgemethods.CharSet.1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nobridgemethods.TreeMap) )))
    )
@@ -672,7 +672,7 @@
 (func $$getString_|nobridgemeth...|__java_lang_String@nobridgemethods.CharSet.1
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|nobridgemeth...|__nobridgemethods_CharSet_1) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|nobridgemeth...|__nobridgemethods_CharSet_1))
    (then
     (global.set $f_$string_|nobridgemeth...|__nobridgemethods_CharSet_1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nobridgemethods.CharSet$1")))
    )

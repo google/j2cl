@@ -118,7 +118,7 @@
 (func $$getClassMetadata__java_lang_Class@cascadingconstructor.CascadingConstructor
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__cascadingconstructor_CascadingConstructor) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__cascadingconstructor_CascadingConstructor))
    (then
     (global.set $f_$class__cascadingconstructor_CascadingConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cascadingcon...|__java_lang_String (ref.func $$getString_|cascadingcon...|__java_lang_String@cascadingconstructor.CascadingConstructor) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -144,7 +144,7 @@
 (func $$getString_|cascadingcon...|__java_lang_String@cascadingconstructor.CascadingConstructor
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|cascadingcon...|__cascadingconstructor_CascadingConstructor) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|cascadingcon...|__cascadingconstructor_CascadingConstructor))
    (then
     (global.set $f_$string_|cascadingcon...|__cascadingconstructor_CascadingConstructor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cascadingconstructor.CascadingConstructor")))
    )

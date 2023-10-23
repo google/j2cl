@@ -318,7 +318,7 @@
 (func $$getClassMetadata__java_lang_Class@typeannotations.ParametricType
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__typeannotations_ParametricType) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__typeannotations_ParametricType))
    (then
     (global.set $f_$class__typeannotations_ParametricType (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typeannotati...|__java_lang_String (ref.func $$getString_|typeannotati...|__java_lang_String@typeannotations.ParametricType) )))
    )
@@ -331,7 +331,7 @@
 (func $$getString_|typeannotati...|__java_lang_String@typeannotations.ParametricType
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|typeannotati...|__typeannotations_ParametricType) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|typeannotati...|__typeannotations_ParametricType))
    (then
     (global.set $f_$string_|typeannotati...|__typeannotations_ParametricType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typeannotations.ParametricType")))
    )
@@ -394,7 +394,7 @@
 (func $$getClassMetadata__java_lang_Class@typeannotations.AbstractType
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__typeannotations_AbstractType) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__typeannotations_AbstractType))
    (then
     (global.set $f_$class__typeannotations_AbstractType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typeannotati...|__java_lang_String (ref.func $$getString_|typeannotati...|__java_lang_String@typeannotations.AbstractType) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -407,7 +407,7 @@
 (func $$getString_|typeannotati...|__java_lang_String@typeannotations.AbstractType
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|typeannotati...|__typeannotations_AbstractType) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|typeannotati...|__typeannotations_AbstractType))
    (then
     (global.set $f_$string_|typeannotati...|__typeannotations_AbstractType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typeannotations.AbstractType")))
    )
@@ -470,7 +470,7 @@
 (func $$getClassMetadata__java_lang_Class@typeannotations.AbstractTypeNonNull
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__typeannotations_AbstractTypeNonNull) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__typeannotations_AbstractTypeNonNull))
    (then
     (global.set $f_$class__typeannotations_AbstractTypeNonNull (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typeannotati...|__java_lang_String (ref.func $$getString_|typeannotati...|__java_lang_String@typeannotations.AbstractTypeNonNull) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -483,7 +483,7 @@
 (func $$getString_|typeannotati...|__java_lang_String@typeannotations.AbstractTypeNonNull
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|typeannotati...|__typeannotations_AbstractTypeNonNull) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|typeannotati...|__typeannotations_AbstractTypeNonNull))
    (then
     (global.set $f_$string_|typeannotati...|__typeannotations_AbstractTypeNonNull (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typeannotations.AbstractTypeNonNull")))
    )
@@ -577,7 +577,7 @@
 (func $$getClassMetadata__java_lang_Class@typeannotations.Parent
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__typeannotations_Parent) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__typeannotations_Parent))
    (then
     (global.set $f_$class__typeannotations_Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typeannotati...|__java_lang_String (ref.func $$getString_|typeannotati...|__java_lang_String@typeannotations.Parent) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -603,7 +603,7 @@
 (func $$getString_|typeannotati...|__java_lang_String@typeannotations.Parent
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|typeannotati...|__typeannotations_Parent) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|typeannotati...|__typeannotations_Parent))
    (then
     (global.set $f_$string_|typeannotati...|__typeannotations_Parent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typeannotations.Parent")))
    )
@@ -675,7 +675,7 @@
 (func $$getClassMetadata__java_lang_Class@typeannotations.TypeAnnotations
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__typeannotations_TypeAnnotations) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__typeannotations_TypeAnnotations))
    (then
     (global.set $f_$class__typeannotations_TypeAnnotations (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typeannotati...|__java_lang_String (ref.func $$getString_|typeannotati...|__java_lang_String@typeannotations.TypeAnnotations) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -701,7 +701,7 @@
 (func $$getString_|typeannotati...|__java_lang_String@typeannotations.TypeAnnotations
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|typeannotati...|__typeannotations_TypeAnnotations) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|typeannotati...|__typeannotations_TypeAnnotations))
    (then
     (global.set $f_$string_|typeannotati...|__typeannotations_TypeAnnotations (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typeannotations.TypeAnnotations")))
    )
@@ -813,7 +813,7 @@
 (func $$getClassMetadata__java_lang_Class@typeannotations.ChildWithNullableParent
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__typeannotations_ChildWithNullableParent) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__typeannotations_ChildWithNullableParent))
    (then
     (global.set $f_$class__typeannotations_ChildWithNullableParent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typeannotati...|__java_lang_String (ref.func $$getString_|typeannotati...|__java_lang_String@typeannotations.ChildWithNullableParent) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typeannotations.Parent) )))
    )
@@ -839,7 +839,7 @@
 (func $$getString_|typeannotati...|__java_lang_String@typeannotations.ChildWithNullableParent
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|typeannotati...|__typeannotations_ChildWithNullableParent) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|typeannotati...|__typeannotations_ChildWithNullableParent))
    (then
     (global.set $f_$string_|typeannotati...|__typeannotations_ChildWithNullableParent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typeannotations.ChildWithNullableParent")))
    )
@@ -951,7 +951,7 @@
 (func $$getClassMetadata__java_lang_Class@typeannotations.ChildWithNonNullableParent
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__typeannotations_ChildWithNonNullableParent) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__typeannotations_ChildWithNonNullableParent))
    (then
     (global.set $f_$class__typeannotations_ChildWithNonNullableParent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typeannotati...|__java_lang_String (ref.func $$getString_|typeannotati...|__java_lang_String@typeannotations.ChildWithNonNullableParent) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typeannotations.Parent) )))
    )
@@ -977,7 +977,7 @@
 (func $$getString_|typeannotati...|__java_lang_String@typeannotations.ChildWithNonNullableParent
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|typeannotati...|__typeannotations_ChildWithNonNullableParent) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|typeannotati...|__typeannotations_ChildWithNonNullableParent))
    (then
     (global.set $f_$string_|typeannotati...|__typeannotations_ChildWithNonNullableParent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typeannotations.ChildWithNonNullableParent")))
    )

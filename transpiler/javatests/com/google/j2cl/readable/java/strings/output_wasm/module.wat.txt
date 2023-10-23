@@ -331,7 +331,7 @@
 (func $$getClassMetadata__java_lang_Class@strings.Strings
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__strings_Strings) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__strings_Strings))
    (then
     (global.set $f_$class__strings_Strings (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|strings.Strings|__java_lang_String (ref.func $$getString_|strings.Strings|__java_lang_String@strings.Strings) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -357,7 +357,7 @@
 (func $$getString_|a|__java_lang_String@strings.Strings
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|a|__strings_Strings) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|a|__strings_Strings))
    (then
     (global.set $f_$string_|a|__strings_Strings (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "a")))
    )
@@ -370,7 +370,7 @@
 (func $$getString_|o|__java_lang_String@strings.Strings
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|o|__strings_Strings) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|o|__strings_Strings))
    (then
     (global.set $f_$string_|o|__strings_Strings (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "o")))
    )
@@ -383,7 +383,7 @@
 (func $$getString_|1|__java_lang_String@strings.Strings
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|1|__strings_Strings) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|1|__strings_Strings))
    (then
     (global.set $f_$string_|1|__strings_Strings (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "1")))
    )
@@ -396,7 +396,7 @@
 (func $$getString_|s|__java_lang_String@strings.Strings
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|s|__strings_Strings) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|s|__strings_Strings))
    (then
     (global.set $f_$string_|s|__strings_Strings (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "s")))
    )
@@ -409,7 +409,7 @@
 (func $$getString_|s12|__java_lang_String@strings.Strings
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|s12|__strings_Strings) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|s12|__strings_Strings))
    (then
     (global.set $f_$string_|s12|__strings_Strings (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "s12")))
    )
@@ -422,7 +422,7 @@
 (func $$getString_|This_is_a_st...|__java_lang_String@strings.Strings
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|This_is_a_st...|__strings_Strings) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|This_is_a_st...|__strings_Strings))
    (then
     (global.set $f_$string_|This_is_a_st...|__strings_Strings (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "This is a string literal")))
    )
@@ -435,7 +435,7 @@
 (func $$getString_|_|__java_lang_String@strings.Strings
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|_|__strings_Strings) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|_|__strings_Strings))
    (then
     (global.set $f_$string_|_|__strings_Strings (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "\F0\90\8D\86")))
    )
@@ -448,7 +448,7 @@
 (func $$getString_|_|_1__java_lang_String@strings.Strings
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|_|_1__strings_Strings) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|_|_1__strings_Strings))
    (then
     (global.set $f_$string_|_|_1__strings_Strings (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "\EF\BC\9A")))
    )
@@ -461,7 +461,7 @@
 (func $$getString_|strings.Strings|__java_lang_String@strings.Strings
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|strings.Strings|__strings_Strings) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|strings.Strings|__strings_Strings))
    (then
     (global.set $f_$string_|strings.Strings|__strings_Strings (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "strings.Strings")))
    )
@@ -533,7 +533,7 @@
 (func $$getClassMetadata__java_lang_Class@strings.Strings.StringHolder
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__strings_Strings_StringHolder) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__strings_Strings_StringHolder))
    (then
     (global.set $f_$class__strings_Strings_StringHolder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|strings.Stri...|__java_lang_String (ref.func $$getString_|strings.Stri...|__java_lang_String@strings.Strings.StringHolder) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -559,7 +559,7 @@
 (func $$getString_|A|__java_lang_String@strings.Strings.StringHolder
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|A|__strings_Strings_StringHolder) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|A|__strings_Strings_StringHolder))
    (then
     (global.set $f_$string_|A|__strings_Strings_StringHolder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "A")))
    )
@@ -572,7 +572,7 @@
 (func $$getString_|strings.Stri...|__java_lang_String@strings.Strings.StringHolder
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|strings.Stri...|__strings_Strings_StringHolder) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|strings.Stri...|__strings_Strings_StringHolder))
    (then
     (global.set $f_$string_|strings.Stri...|__strings_Strings_StringHolder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "strings.Strings$StringHolder")))
    )

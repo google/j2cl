@@ -485,7 +485,7 @@
 (func $$getClassMetadata__java_lang_Class@multipleabstractparents.MultipleAbstractParents.List
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__multipleabstractparents_MultipleAbstractParents_List) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__multipleabstractparents_MultipleAbstractParents_List))
    (then
     (global.set $f_$class__multipleabstractparents_MultipleAbstractParents_List (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|multipleabst...|__java_lang_String (ref.func $$getString_|multipleabst...|__java_lang_String@multipleabstractparents.MultipleAbstractParents.List) )))
    )
@@ -498,7 +498,7 @@
 (func $$getString_|multipleabst...|__java_lang_String@multipleabstractparents.MultipleAbstractParents.List
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_List) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_List))
    (then
     (global.set $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_List (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "multipleabstractparents.MultipleAbstractParents$List")))
    )
@@ -529,7 +529,7 @@
 (func $$getClassMetadata__java_lang_Class@multipleabstractparents.MultipleAbstractParents.Collection
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__multipleabstractparents_MultipleAbstractParents_Collection) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__multipleabstractparents_MultipleAbstractParents_Collection))
    (then
     (global.set $f_$class__multipleabstractparents_MultipleAbstractParents_Collection (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|multipleabst...|__java_lang_String (ref.func $$getString_|multipleabst...|__java_lang_String@multipleabstractparents.MultipleAbstractParents.Collection) )))
    )
@@ -542,7 +542,7 @@
 (func $$getString_|multipleabst...|__java_lang_String@multipleabstractparents.MultipleAbstractParents.Collection
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_Collection) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_Collection))
    (then
     (global.set $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_Collection (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "multipleabstractparents.MultipleAbstractParents$Collection")))
    )
@@ -573,7 +573,7 @@
 (func $$getClassMetadata__java_lang_Class@multipleabstractparents.MultipleAbstractParents.IStringList
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__multipleabstractparents_MultipleAbstractParents_IStringList) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__multipleabstractparents_MultipleAbstractParents_IStringList))
    (then
     (global.set $f_$class__multipleabstractparents_MultipleAbstractParents_IStringList (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|multipleabst...|__java_lang_String (ref.func $$getString_|multipleabst...|__java_lang_String@multipleabstractparents.MultipleAbstractParents.IStringList) )))
    )
@@ -586,7 +586,7 @@
 (func $$getString_|multipleabst...|__java_lang_String@multipleabstractparents.MultipleAbstractParents.IStringList
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_IStringList) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_IStringList))
    (then
     (global.set $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_IStringList (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "multipleabstractparents.MultipleAbstractParents$IStringList")))
    )
@@ -656,7 +656,7 @@
 (func $$getClassMetadata__java_lang_Class@multipleabstractparents.MultipleAbstractParents
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__multipleabstractparents_MultipleAbstractParents) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__multipleabstractparents_MultipleAbstractParents))
    (then
     (global.set $f_$class__multipleabstractparents_MultipleAbstractParents (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|multipleabst...|__java_lang_String (ref.func $$getString_|multipleabst...|__java_lang_String@multipleabstractparents.MultipleAbstractParents) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -682,7 +682,7 @@
 (func $$getString_|AbstractColl...|__java_lang_String@multipleabstractparents.MultipleAbstractParents
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|AbstractColl...|__multipleabstractparents_MultipleAbstractParents) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|AbstractColl...|__multipleabstractparents_MultipleAbstractParents))
    (then
     (global.set $f_$string_|AbstractColl...|__multipleabstractparents_MultipleAbstractParents (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "AbstractCollection")))
    )
@@ -695,7 +695,7 @@
 (func $$getString_|multipleabst...|__java_lang_String@multipleabstractparents.MultipleAbstractParents
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents))
    (then
     (global.set $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "multipleabstractparents.MultipleAbstractParents")))
    )
@@ -740,7 +740,7 @@
 (func $$getClassMetadata__java_lang_Class@multipleabstractparents.MultipleAbstractParents.AbstractListCollection
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__multipleabstractparents_MultipleAbstractParents_AbstractListCollection) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__multipleabstractparents_MultipleAbstractParents_AbstractListCollection))
    (then
     (global.set $f_$class__multipleabstractparents_MultipleAbstractParents_AbstractListCollection (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|multipleabst...|__java_lang_String (ref.func $$getString_|multipleabst...|__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractListCollection) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -753,7 +753,7 @@
 (func $$getString_|multipleabst...|__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractListCollection
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_AbstractListCollection) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_AbstractListCollection))
    (then
     (global.set $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_AbstractListCollection (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "multipleabstractparents.MultipleAbstractParents$AbstractListCollection")))
    )
@@ -814,7 +814,7 @@
 (func $$getClassMetadata__java_lang_Class@multipleabstractparents.MultipleAbstractParents.AbstractCollection
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__multipleabstractparents_MultipleAbstractParents_AbstractCollection) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__multipleabstractparents_MultipleAbstractParents_AbstractCollection))
    (then
     (global.set $f_$class__multipleabstractparents_MultipleAbstractParents_AbstractCollection (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|multipleabst...|__java_lang_String (ref.func $$getString_|multipleabst...|__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractCollection) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -827,7 +827,7 @@
 (func $$getString_|multipleabst...|__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractCollection
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_AbstractCollection) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_AbstractCollection))
    (then
     (global.set $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_AbstractCollection (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "multipleabstractparents.MultipleAbstractParents$AbstractCollection")))
    )
@@ -872,7 +872,7 @@
 (func $$getClassMetadata__java_lang_Class@multipleabstractparents.MultipleAbstractParents.AbstractList2
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__multipleabstractparents_MultipleAbstractParents_AbstractList2) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__multipleabstractparents_MultipleAbstractParents_AbstractList2))
    (then
     (global.set $f_$class__multipleabstractparents_MultipleAbstractParents_AbstractList2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|multipleabst...|__java_lang_String (ref.func $$getString_|multipleabst...|__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractList2) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -885,7 +885,7 @@
 (func $$getString_|multipleabst...|__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractList2
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_AbstractList2) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_AbstractList2))
    (then
     (global.set $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_AbstractList2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "multipleabstractparents.MultipleAbstractParents$AbstractList2")))
    )
@@ -930,7 +930,7 @@
 (func $$getClassMetadata__java_lang_Class@multipleabstractparents.MultipleAbstractParents.AbstractList
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__multipleabstractparents_MultipleAbstractParents_AbstractList) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__multipleabstractparents_MultipleAbstractParents_AbstractList))
    (then
     (global.set $f_$class__multipleabstractparents_MultipleAbstractParents_AbstractList (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|multipleabst...|__java_lang_String (ref.func $$getString_|multipleabst...|__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractList) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@multipleabstractparents.MultipleAbstractParents.AbstractCollection) )))
    )
@@ -943,7 +943,7 @@
 (func $$getString_|multipleabst...|__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractList
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_AbstractList) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_AbstractList))
    (then
     (global.set $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_AbstractList (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "multipleabstractparents.MultipleAbstractParents$AbstractList")))
    )
@@ -1004,7 +1004,7 @@
 (func $$getClassMetadata__java_lang_Class@multipleabstractparents.MultipleAbstractParents.AbstractStringList2
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__multipleabstractparents_MultipleAbstractParents_AbstractStringList2) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__multipleabstractparents_MultipleAbstractParents_AbstractStringList2))
    (then
     (global.set $f_$class__multipleabstractparents_MultipleAbstractParents_AbstractStringList2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|multipleabst...|__java_lang_String (ref.func $$getString_|multipleabst...|__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractStringList2) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@multipleabstractparents.MultipleAbstractParents.AbstractList2) )))
    )
@@ -1017,7 +1017,7 @@
 (func $$getString_|multipleabst...|__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractStringList2
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_AbstractStringList2) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_AbstractStringList2))
    (then
     (global.set $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_AbstractStringList2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "multipleabstractparents.MultipleAbstractParents$AbstractStringList2")))
    )
@@ -1062,7 +1062,7 @@
 (func $$getClassMetadata__java_lang_Class@multipleabstractparents.MultipleAbstractParents.AbstractStringList3
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__multipleabstractparents_MultipleAbstractParents_AbstractStringList3) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__multipleabstractparents_MultipleAbstractParents_AbstractStringList3))
    (then
     (global.set $f_$class__multipleabstractparents_MultipleAbstractParents_AbstractStringList3 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|multipleabst...|__java_lang_String (ref.func $$getString_|multipleabst...|__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractStringList3) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@multipleabstractparents.MultipleAbstractParents.AbstractList2) )))
    )
@@ -1075,7 +1075,7 @@
 (func $$getString_|multipleabst...|__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractStringList3
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_AbstractStringList3) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_AbstractStringList3))
    (then
     (global.set $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_AbstractStringList3 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "multipleabstractparents.MultipleAbstractParents$AbstractStringList3")))
    )
@@ -1135,7 +1135,7 @@
 (func $$getClassMetadata__java_lang_Class@multipleabstractparents.MultipleAbstractParents.ArrayList
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__multipleabstractparents_MultipleAbstractParents_ArrayList) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__multipleabstractparents_MultipleAbstractParents_ArrayList))
    (then
     (global.set $f_$class__multipleabstractparents_MultipleAbstractParents_ArrayList (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|multipleabst...|__java_lang_String (ref.func $$getString_|multipleabst...|__java_lang_String@multipleabstractparents.MultipleAbstractParents.ArrayList) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@multipleabstractparents.MultipleAbstractParents.AbstractList) )))
    )
@@ -1161,7 +1161,7 @@
 (func $$getString_|multipleabst...|__java_lang_String@multipleabstractparents.MultipleAbstractParents.ArrayList
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_ArrayList) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_ArrayList))
    (then
     (global.set $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_ArrayList (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "multipleabstractparents.MultipleAbstractParents$ArrayList")))
    )
@@ -1222,7 +1222,7 @@
 (func $$getClassMetadata__java_lang_Class@multipleabstractparents.MultipleAbstractParents.AbstractStringList
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__multipleabstractparents_MultipleAbstractParents_AbstractStringList) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__multipleabstractparents_MultipleAbstractParents_AbstractStringList))
    (then
     (global.set $f_$class__multipleabstractparents_MultipleAbstractParents_AbstractStringList (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|multipleabst...|__java_lang_String (ref.func $$getString_|multipleabst...|__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractStringList) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@multipleabstractparents.MultipleAbstractParents.AbstractList) )))
    )
@@ -1235,7 +1235,7 @@
 (func $$getString_|multipleabst...|__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractStringList
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_AbstractStringList) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_AbstractStringList))
    (then
     (global.set $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_AbstractStringList (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "multipleabstractparents.MultipleAbstractParents$AbstractStringList")))
    )
@@ -1295,7 +1295,7 @@
 (func $$getClassMetadata__java_lang_Class@multipleabstractparents.MultipleAbstractParents.StringList
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__multipleabstractparents_MultipleAbstractParents_StringList) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__multipleabstractparents_MultipleAbstractParents_StringList))
    (then
     (global.set $f_$class__multipleabstractparents_MultipleAbstractParents_StringList (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|multipleabst...|__java_lang_String (ref.func $$getString_|multipleabst...|__java_lang_String@multipleabstractparents.MultipleAbstractParents.StringList) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@multipleabstractparents.MultipleAbstractParents.AbstractStringList) )))
    )
@@ -1321,7 +1321,7 @@
 (func $$getString_|multipleabst...|__java_lang_String@multipleabstractparents.MultipleAbstractParents.StringList
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_StringList) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_StringList))
    (then
     (global.set $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_StringList (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "multipleabstractparents.MultipleAbstractParents$StringList")))
    )
@@ -1381,7 +1381,7 @@
 (func $$getClassMetadata__java_lang_Class@multipleabstractparents.MultipleAbstractParents.StringListChild
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__multipleabstractparents_MultipleAbstractParents_StringListChild) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__multipleabstractparents_MultipleAbstractParents_StringListChild))
    (then
     (global.set $f_$class__multipleabstractparents_MultipleAbstractParents_StringListChild (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|multipleabst...|__java_lang_String (ref.func $$getString_|multipleabst...|__java_lang_String@multipleabstractparents.MultipleAbstractParents.StringListChild) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@multipleabstractparents.MultipleAbstractParents.StringList) )))
    )
@@ -1407,7 +1407,7 @@
 (func $$getString_|multipleabst...|__java_lang_String@multipleabstractparents.MultipleAbstractParents.StringListChild
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_StringListChild) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_StringListChild))
    (then
     (global.set $f_$string_|multipleabst...|__multipleabstractparents_MultipleAbstractParents_StringListChild (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "multipleabstractparents.MultipleAbstractParents$StringListChild")))
    )

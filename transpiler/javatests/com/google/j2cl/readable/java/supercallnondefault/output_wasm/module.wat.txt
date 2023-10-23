@@ -119,7 +119,7 @@
 (func $$getClassMetadata__java_lang_Class@supercallnondefault.Parent
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__supercallnondefault_Parent) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__supercallnondefault_Parent))
    (then
     (global.set $f_$class__supercallnondefault_Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|supercallnon...|__java_lang_String (ref.func $$getString_|supercallnon...|__java_lang_String@supercallnondefault.Parent) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -145,7 +145,7 @@
 (func $$getString_|supercallnon...|__java_lang_String@supercallnondefault.Parent
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|supercallnon...|__supercallnondefault_Parent) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|supercallnon...|__supercallnondefault_Parent))
    (then
     (global.set $f_$string_|supercallnon...|__supercallnondefault_Parent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supercallnondefault.Parent")))
    )
@@ -207,7 +207,7 @@
 (func $$getClassMetadata__java_lang_Class@supercallnondefault.Child
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__supercallnondefault_Child) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__supercallnondefault_Child))
    (then
     (global.set $f_$class__supercallnondefault_Child (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|supercallnon...|__java_lang_String (ref.func $$getString_|supercallnon...|__java_lang_String@supercallnondefault.Child) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@supercallnondefault.Parent) )))
    )
@@ -233,7 +233,7 @@
 (func $$getString_|supercallnon...|__java_lang_String@supercallnondefault.Child
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|supercallnon...|__supercallnondefault_Child) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|supercallnon...|__supercallnondefault_Child))
    (then
     (global.set $f_$string_|supercallnon...|__supercallnondefault_Child (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supercallnondefault.Child")))
    )

@@ -245,7 +245,7 @@
 (func $$getClassMetadata__java_lang_Class@collisions.Blah.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__collisions_Blah_$Overlay) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__collisions_Blah_$Overlay))
    (then
     (global.set $f_$class__collisions_Blah_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.B...|__java_lang_String (ref.func $$getString_|collisions.B...|__java_lang_String@collisions.Blah.$Overlay) )(ref.null $java.lang.Class)))
    )
@@ -271,7 +271,7 @@
 (func $$getString_|collisions.B...|__java_lang_String@collisions.Blah.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|collisions.B...|__collisions_Blah_$Overlay) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|collisions.B...|__collisions_Blah_$Overlay))
    (then
     (global.set $f_$string_|collisions.B...|__collisions_Blah_$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "collisions.Blah$$Overlay")))
    )
@@ -331,7 +331,7 @@
 (func $$getClassMetadata__java_lang_Class@collisions.goog
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__collisions_goog) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__collisions_goog))
    (then
     (global.set $f_$class__collisions_goog (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.goog|__java_lang_String (ref.func $$getString_|collisions.goog|__java_lang_String@collisions.goog) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -357,7 +357,7 @@
 (func $$getString_|collisions.goog|__java_lang_String@collisions.goog
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|collisions.goog|__collisions_goog) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|collisions.goog|__collisions_goog))
    (then
     (global.set $f_$string_|collisions.goog|__collisions_goog (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "collisions.goog")))
    )
@@ -454,7 +454,7 @@
 (func $$getClassMetadata__java_lang_Class@collisions.KtBlah
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__collisions_KtBlah) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__collisions_KtBlah))
    (then
     (global.set $f_$class__collisions_KtBlah (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.K...|__java_lang_String (ref.func $$getString_|collisions.K...|__java_lang_String@collisions.KtBlah) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -480,7 +480,7 @@
 (func $$getString_|collisions.K...|__java_lang_String@collisions.KtBlah
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|collisions.K...|__collisions_KtBlah) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|collisions.K...|__collisions_KtBlah))
    (then
     (global.set $f_$string_|collisions.K...|__collisions_KtBlah (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "collisions.KtBlah")))
    )
@@ -540,7 +540,7 @@
 (func $$getClassMetadata__java_lang_Class@collisions.foo
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__collisions_foo) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__collisions_foo))
    (then
     (global.set $f_$class__collisions_foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.foo|__java_lang_String (ref.func $$getString_|collisions.foo|__java_lang_String@collisions.foo) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -566,7 +566,7 @@
 (func $$getString_|collisions.foo|__java_lang_String@collisions.foo
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|collisions.foo|__collisions_foo) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|collisions.foo|__collisions_foo))
    (then
     (global.set $f_$string_|collisions.foo|__collisions_foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "collisions.foo")))
    )
@@ -659,7 +659,7 @@
 (func $$getClassMetadata__java_lang_Class@collisions.bar
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__collisions_bar) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__collisions_bar))
    (then
     (global.set $f_$class__collisions_bar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.bar|__java_lang_String (ref.func $$getString_|collisions.bar|__java_lang_String@collisions.bar) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -685,7 +685,7 @@
 (func $$getString_|collisions.bar|__java_lang_String@collisions.bar
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|collisions.bar|__collisions_bar) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|collisions.bar|__collisions_bar))
    (then
     (global.set $f_$string_|collisions.bar|__collisions_bar (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "collisions.bar")))
    )
@@ -782,7 +782,7 @@
 (func $$getClassMetadata__java_lang_Class@collisions.Other
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__collisions_Other) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__collisions_Other))
    (then
     (global.set $f_$class__collisions_Other (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.O...|__java_lang_String (ref.func $$getString_|collisions.O...|__java_lang_String@collisions.Other) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -808,7 +808,7 @@
 (func $$getString_|collisions.O...|__java_lang_String@collisions.Other
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|collisions.O...|__collisions_Other) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|collisions.O...|__collisions_Other))
    (then
     (global.set $f_$string_|collisions.O...|__collisions_Other (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "collisions.Other")))
    )
@@ -907,7 +907,7 @@
 (func $$getClassMetadata__java_lang_Class@collisions.T
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__collisions_T) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__collisions_T))
    (then
     (global.set $f_$class__collisions_T (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|collisions.T|__java_lang_String (ref.func $$getString_|collisions.T|__java_lang_String@collisions.T) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -933,7 +933,7 @@
 (func $$getString_|collisions.T|__java_lang_String@collisions.T
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|collisions.T|__collisions_T) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|collisions.T|__collisions_T))
    (then
     (global.set $f_$string_|collisions.T|__collisions_T (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "collisions.T")))
    )

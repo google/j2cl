@@ -1212,7 +1212,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.AutoValueJsType
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_AutoValueJsType) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_AutoValueJsType))
    (then
     (global.set $f_$class__autovalue_AutoValueJsType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValueJsType) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -1225,7 +1225,7 @@
 (func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValueJsType
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValueJsType) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValueJsType))
    (then
     (global.set $f_$string_|autovalue.Au...|__autovalue_AutoValueJsType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValueJsType")))
    )
@@ -1290,7 +1290,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.AutoValueWithBuilder
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_AutoValueWithBuilder) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_AutoValueWithBuilder))
    (then
     (global.set $f_$class__autovalue_AutoValueWithBuilder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValueWithBuilder) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -1303,7 +1303,7 @@
 (func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValueWithBuilder
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValueWithBuilder) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValueWithBuilder))
    (then
     (global.set $f_$string_|autovalue.Au...|__autovalue_AutoValueWithBuilder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValueWithBuilder")))
    )
@@ -1348,7 +1348,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.AutoValueWithBuilder.Builder
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_AutoValueWithBuilder_Builder) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_AutoValueWithBuilder_Builder))
    (then
     (global.set $f_$class__autovalue_AutoValueWithBuilder_Builder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValueWithBuilder.Builder) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -1361,7 +1361,7 @@
 (func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValueWithBuilder.Builder
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValueWithBuilder_Builder) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValueWithBuilder_Builder))
    (then
     (global.set $f_$string_|autovalue.Au...|__autovalue_AutoValueWithBuilder_Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValueWithBuilder$Builder")))
    )
@@ -1433,7 +1433,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.AutoValueWithExtensions
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_AutoValueWithExtensions) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_AutoValueWithExtensions))
    (then
     (global.set $f_$class__autovalue_AutoValueWithExtensions (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValueWithExtensions) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -1446,7 +1446,7 @@
 (func $$getString_|text|__java_lang_String@autovalue.AutoValueWithExtensions
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|text|__autovalue_AutoValueWithExtensions) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|text|__autovalue_AutoValueWithExtensions))
    (then
     (global.set $f_$string_|text|__autovalue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "text")))
    )
@@ -1459,7 +1459,7 @@
 (func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValueWithExtensions
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValueWithExtensions) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValueWithExtensions))
    (then
     (global.set $f_$string_|autovalue.Au...|__autovalue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValueWithExtensions")))
    )
@@ -1519,7 +1519,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.Parent
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_Parent) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_Parent))
    (then
     (global.set $f_$class__autovalue_Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Pa...|__java_lang_String (ref.func $$getString_|autovalue.Pa...|__java_lang_String@autovalue.Parent) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -1545,7 +1545,7 @@
 (func $$getString_|autovalue.Pa...|__java_lang_String@autovalue.Parent
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.Pa...|__autovalue_Parent) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.Pa...|__autovalue_Parent))
    (then
     (global.set $f_$string_|autovalue.Pa...|__autovalue_Parent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.Parent")))
    )
@@ -1602,7 +1602,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.AutoValueWithGenerics
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_AutoValueWithGenerics) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_AutoValueWithGenerics))
    (then
     (global.set $f_$class__autovalue_AutoValueWithGenerics (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValueWithGenerics) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -1615,7 +1615,7 @@
 (func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValueWithGenerics
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValueWithGenerics) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValueWithGenerics))
    (then
     (global.set $f_$string_|autovalue.Au...|__autovalue_AutoValueWithGenerics (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValueWithGenerics")))
    )
@@ -1660,7 +1660,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.BaseClass
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_BaseClass) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_BaseClass))
    (then
     (global.set $f_$class__autovalue_BaseClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Ba...|__java_lang_String (ref.func $$getString_|autovalue.Ba...|__java_lang_String@autovalue.BaseClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -1673,7 +1673,7 @@
 (func $$getString_|autovalue.Ba...|__java_lang_String@autovalue.BaseClass
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.Ba...|__autovalue_BaseClass) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.Ba...|__autovalue_BaseClass))
    (then
     (global.set $f_$string_|autovalue.Ba...|__autovalue_BaseClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.BaseClass")))
    )
@@ -1738,7 +1738,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.DefaultConstructorAutoValue
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_DefaultConstructorAutoValue) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_DefaultConstructorAutoValue))
    (then
     (global.set $f_$class__autovalue_DefaultConstructorAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.De...|__java_lang_String (ref.func $$getString_|autovalue.De...|__java_lang_String@autovalue.DefaultConstructorAutoValue) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -1751,7 +1751,7 @@
 (func $$getString_|autovalue.De...|__java_lang_String@autovalue.DefaultConstructorAutoValue
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.De...|__autovalue_DefaultConstructorAutoValue) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.De...|__autovalue_DefaultConstructorAutoValue))
    (then
     (global.set $f_$string_|autovalue.De...|__autovalue_DefaultConstructorAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.DefaultConstructorAutoValue")))
    )
@@ -1796,7 +1796,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.DefaultConstructorAutoValue.Builder
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_DefaultConstructorAutoValue_Builder) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_DefaultConstructorAutoValue_Builder))
    (then
     (global.set $f_$class__autovalue_DefaultConstructorAutoValue_Builder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.De...|__java_lang_String (ref.func $$getString_|autovalue.De...|__java_lang_String@autovalue.DefaultConstructorAutoValue.Builder) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -1809,7 +1809,7 @@
 (func $$getString_|autovalue.De...|__java_lang_String@autovalue.DefaultConstructorAutoValue.Builder
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.De...|__autovalue_DefaultConstructorAutoValue_Builder) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.De...|__autovalue_DefaultConstructorAutoValue_Builder))
    (then
     (global.set $f_$string_|autovalue.De...|__autovalue_DefaultConstructorAutoValue_Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.DefaultConstructorAutoValue$Builder")))
    )
@@ -1876,7 +1876,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.DefaultNonEmptyConstructorAutoValue
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_DefaultNonEmptyConstructorAutoValue) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_DefaultNonEmptyConstructorAutoValue))
    (then
     (global.set $f_$class__autovalue_DefaultNonEmptyConstructorAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.De...|__java_lang_String (ref.func $$getString_|autovalue.De...|__java_lang_String@autovalue.DefaultNonEmptyConstructorAutoValue) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -1889,7 +1889,7 @@
 (func $$getString_|autovalue.De...|__java_lang_String@autovalue.DefaultNonEmptyConstructorAutoValue
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.De...|__autovalue_DefaultNonEmptyConstructorAutoValue) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.De...|__autovalue_DefaultNonEmptyConstructorAutoValue))
    (then
     (global.set $f_$string_|autovalue.De...|__autovalue_DefaultNonEmptyConstructorAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.DefaultNonEmptyConstructorAutoValue")))
    )
@@ -1936,7 +1936,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.DefaultNonEmptyConstructorAutoValue.Builder
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_DefaultNonEmptyConstructorAutoValue_Builder) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_DefaultNonEmptyConstructorAutoValue_Builder))
    (then
     (global.set $f_$class__autovalue_DefaultNonEmptyConstructorAutoValue_Builder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.De...|__java_lang_String (ref.func $$getString_|autovalue.De...|__java_lang_String@autovalue.DefaultNonEmptyConstructorAutoValue.Builder) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -1949,7 +1949,7 @@
 (func $$getString_|autovalue.De...|__java_lang_String@autovalue.DefaultNonEmptyConstructorAutoValue.Builder
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.De...|__autovalue_DefaultNonEmptyConstructorAutoValue_Builder) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.De...|__autovalue_DefaultNonEmptyConstructorAutoValue_Builder))
    (then
     (global.set $f_$string_|autovalue.De...|__autovalue_DefaultNonEmptyConstructorAutoValue_Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.DefaultNonEmptyConstructorAutoValue$Builder")))
    )
@@ -1994,7 +1994,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.EmptyAutoValue
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_EmptyAutoValue) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_EmptyAutoValue))
    (then
     (global.set $f_$class__autovalue_EmptyAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Em...|__java_lang_String (ref.func $$getString_|autovalue.Em...|__java_lang_String@autovalue.EmptyAutoValue) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -2007,7 +2007,7 @@
 (func $$getString_|autovalue.Em...|__java_lang_String@autovalue.EmptyAutoValue
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.Em...|__autovalue_EmptyAutoValue) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.Em...|__autovalue_EmptyAutoValue))
    (then
     (global.set $f_$string_|autovalue.Em...|__autovalue_EmptyAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.EmptyAutoValue")))
    )
@@ -2052,7 +2052,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.EmptyAutoValue.Builder
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_EmptyAutoValue_Builder) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_EmptyAutoValue_Builder))
    (then
     (global.set $f_$class__autovalue_EmptyAutoValue_Builder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Em...|__java_lang_String (ref.func $$getString_|autovalue.Em...|__java_lang_String@autovalue.EmptyAutoValue.Builder) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -2065,7 +2065,7 @@
 (func $$getString_|autovalue.Em...|__java_lang_String@autovalue.EmptyAutoValue.Builder
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.Em...|__autovalue_EmptyAutoValue_Builder) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.Em...|__autovalue_EmptyAutoValue_Builder))
    (then
     (global.set $f_$string_|autovalue.Em...|__autovalue_EmptyAutoValue_Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.EmptyAutoValue$Builder")))
    )
@@ -2135,7 +2135,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.SimpleAutoValue
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_SimpleAutoValue) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_SimpleAutoValue))
    (then
     (global.set $f_$class__autovalue_SimpleAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Si...|__java_lang_String (ref.func $$getString_|autovalue.Si...|__java_lang_String@autovalue.SimpleAutoValue) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -2148,7 +2148,7 @@
 (func $$getString_|autovalue.Si...|__java_lang_String@autovalue.SimpleAutoValue
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.Si...|__autovalue_SimpleAutoValue) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.Si...|__autovalue_SimpleAutoValue))
    (then
     (global.set $f_$string_|autovalue.Si...|__autovalue_SimpleAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.SimpleAutoValue")))
    )
@@ -2318,7 +2318,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.$$AutoValue_AutoValueWithExtensions
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_$$AutoValue_AutoValueWithExtensions) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_$$AutoValue_AutoValueWithExtensions))
    (then
     (global.set $f_$class__autovalue_$$AutoValue_AutoValueWithExtensions (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.__...|__java_lang_String (ref.func $$getString_|autovalue.__...|__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValueWithExtensions) )))
    )
@@ -2331,7 +2331,7 @@
 (func $$getString_|_|__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|_|__autovalue_$$AutoValue_AutoValueWithExtensions) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|_|__autovalue_$$AutoValue_AutoValueWithExtensions))
    (then
     (global.set $f_$string_|_|__autovalue_$$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "{")))
    )
@@ -2344,7 +2344,7 @@
 (func $$getString_|__|__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|__|__autovalue_$$AutoValue_AutoValueWithExtensions) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|__|__autovalue_$$AutoValue_AutoValueWithExtensions))
    (then
     (global.set $f_$string_|__|__autovalue_$$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const ", ")))
    )
@@ -2357,7 +2357,7 @@
 (func $$getString_|_|_1__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|_|_1__autovalue_$$AutoValue_AutoValueWithExtensions) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|_|_1__autovalue_$$AutoValue_AutoValueWithExtensions))
    (then
     (global.set $f_$string_|_|_1__autovalue_$$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "}")))
    )
@@ -2370,7 +2370,7 @@
 (func $$getString_|autovalue.__...|__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.__...|__autovalue_$$AutoValue_AutoValueWithExtensions) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.__...|__autovalue_$$AutoValue_AutoValueWithExtensions))
    (then
     (global.set $f_$string_|autovalue.__...|__autovalue_$$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.$$AutoValue_AutoValueWithExtensions")))
    )
@@ -2555,7 +2555,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_AutoValueJsType
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_AutoValue_AutoValueJsType) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_AutoValue_AutoValueJsType))
    (then
     (global.set $f_$class__autovalue_AutoValue_AutoValueJsType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_AutoValueJsType) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValueJsType) )))
    )
@@ -2581,7 +2581,7 @@
 (func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_AutoValueJsType
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValue_AutoValueJsType) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValue_AutoValueJsType))
    (then
     (global.set $f_$string_|autovalue.Au...|__autovalue_AutoValue_AutoValueJsType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_AutoValueJsType")))
    )
@@ -2781,7 +2781,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_AutoValueWithBuilder
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_AutoValue_AutoValueWithBuilder) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_AutoValue_AutoValueWithBuilder))
    (then
     (global.set $f_$class__autovalue_AutoValue_AutoValueWithBuilder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_AutoValueWithBuilder) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValueWithBuilder) )))
    )
@@ -2807,7 +2807,7 @@
 (func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_AutoValueWithBuilder
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValue_AutoValueWithBuilder) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValue_AutoValueWithBuilder))
    (then
     (global.set $f_$string_|autovalue.Au...|__autovalue_AutoValue_AutoValueWithBuilder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_AutoValueWithBuilder")))
    )
@@ -2965,7 +2965,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_AutoValueWithBuilder.Builder
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_AutoValue_AutoValueWithBuilder_Builder) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_AutoValue_AutoValueWithBuilder_Builder))
    (then
     (global.set $f_$class__autovalue_AutoValue_AutoValueWithBuilder_Builder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_AutoValueWithBuilder.Builder) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValueWithBuilder.Builder) )))
    )
@@ -2991,7 +2991,7 @@
 (func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_AutoValueWithBuilder.Builder
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValue_AutoValueWithBuilder_Builder) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValue_AutoValueWithBuilder_Builder))
    (then
     (global.set $f_$string_|autovalue.Au...|__autovalue_AutoValue_AutoValueWithBuilder_Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_AutoValueWithBuilder$Builder")))
    )
@@ -3151,7 +3151,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_AutoValueWithGenerics
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_AutoValue_AutoValueWithGenerics) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_AutoValue_AutoValueWithGenerics))
    (then
     (global.set $f_$class__autovalue_AutoValue_AutoValueWithGenerics (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_AutoValueWithGenerics) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValueWithGenerics) )))
    )
@@ -3177,7 +3177,7 @@
 (func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_AutoValueWithGenerics
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValue_AutoValueWithGenerics) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValue_AutoValueWithGenerics))
    (then
     (global.set $f_$string_|autovalue.Au...|__autovalue_AutoValue_AutoValueWithGenerics (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_AutoValueWithGenerics")))
    )
@@ -3337,7 +3337,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_DefaultConstructorAutoValue
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_AutoValue_DefaultConstructorAutoValue) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_AutoValue_DefaultConstructorAutoValue))
    (then
     (global.set $f_$class__autovalue_AutoValue_DefaultConstructorAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_DefaultConstructorAutoValue) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.DefaultConstructorAutoValue) )))
    )
@@ -3363,7 +3363,7 @@
 (func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_DefaultConstructorAutoValue
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValue_DefaultConstructorAutoValue) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValue_DefaultConstructorAutoValue))
    (then
     (global.set $f_$string_|autovalue.Au...|__autovalue_AutoValue_DefaultConstructorAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_DefaultConstructorAutoValue")))
    )
@@ -3468,7 +3468,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_DefaultConstructorAutoValue.Builder
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_AutoValue_DefaultConstructorAutoValue_Builder) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_AutoValue_DefaultConstructorAutoValue_Builder))
    (then
     (global.set $f_$class__autovalue_AutoValue_DefaultConstructorAutoValue_Builder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_DefaultConstructorAutoValue.Builder) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.DefaultConstructorAutoValue.Builder) )))
    )
@@ -3494,7 +3494,7 @@
 (func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_DefaultConstructorAutoValue.Builder
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValue_DefaultConstructorAutoValue_Builder) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValue_DefaultConstructorAutoValue_Builder))
    (then
     (global.set $f_$string_|autovalue.Au...|__autovalue_AutoValue_DefaultConstructorAutoValue_Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_DefaultConstructorAutoValue$Builder")))
    )
@@ -3654,7 +3654,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue))
    (then
     (global.set $f_$class__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.DefaultNonEmptyConstructorAutoValue) )))
    )
@@ -3680,7 +3680,7 @@
 (func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue))
    (then
     (global.set $f_$string_|autovalue.Au...|__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue")))
    )
@@ -3785,7 +3785,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder))
    (then
     (global.set $f_$class__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.DefaultNonEmptyConstructorAutoValue.Builder) )))
    )
@@ -3811,7 +3811,7 @@
 (func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder))
    (then
     (global.set $f_$string_|autovalue.Au...|__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue$Builder")))
    )
@@ -3938,7 +3938,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_EmptyAutoValue
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_AutoValue_EmptyAutoValue) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_AutoValue_EmptyAutoValue))
    (then
     (global.set $f_$class__autovalue_AutoValue_EmptyAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_EmptyAutoValue) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.EmptyAutoValue) )))
    )
@@ -3964,7 +3964,7 @@
 (func $$getString_|__|__java_lang_String@autovalue.AutoValue_EmptyAutoValue
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|__|__autovalue_AutoValue_EmptyAutoValue) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|__|__autovalue_AutoValue_EmptyAutoValue))
    (then
     (global.set $f_$string_|__|__autovalue_AutoValue_EmptyAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "{}")))
    )
@@ -3977,7 +3977,7 @@
 (func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_EmptyAutoValue
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValue_EmptyAutoValue) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValue_EmptyAutoValue))
    (then
     (global.set $f_$string_|autovalue.Au...|__autovalue_AutoValue_EmptyAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_EmptyAutoValue")))
    )
@@ -4052,7 +4052,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_EmptyAutoValue.Builder
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_AutoValue_EmptyAutoValue_Builder) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_AutoValue_EmptyAutoValue_Builder))
    (then
     (global.set $f_$class__autovalue_AutoValue_EmptyAutoValue_Builder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_EmptyAutoValue.Builder) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.EmptyAutoValue.Builder) )))
    )
@@ -4078,7 +4078,7 @@
 (func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_EmptyAutoValue.Builder
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValue_EmptyAutoValue_Builder) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValue_EmptyAutoValue_Builder))
    (then
     (global.set $f_$string_|autovalue.Au...|__autovalue_AutoValue_EmptyAutoValue_Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_EmptyAutoValue$Builder")))
    )
@@ -4369,7 +4369,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_SimpleAutoValue
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_AutoValue_SimpleAutoValue) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_AutoValue_SimpleAutoValue))
    (then
     (global.set $f_$class__autovalue_AutoValue_SimpleAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_SimpleAutoValue) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.SimpleAutoValue) )))
    )
@@ -4395,7 +4395,7 @@
 (func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_SimpleAutoValue
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValue_SimpleAutoValue) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValue_SimpleAutoValue))
    (then
     (global.set $f_$string_|autovalue.Au...|__autovalue_AutoValue_SimpleAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_SimpleAutoValue")))
    )
@@ -4455,7 +4455,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.AutoValueWithFields
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_AutoValueWithFields) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_AutoValueWithFields))
    (then
     (global.set $f_$class__autovalue_AutoValueWithFields (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValueWithFields) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.Parent) )))
    )
@@ -4468,7 +4468,7 @@
 (func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValueWithFields
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValueWithFields) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValueWithFields))
    (then
     (global.set $f_$string_|autovalue.Au...|__autovalue_AutoValueWithFields (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValueWithFields")))
    )
@@ -4559,7 +4559,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.AutoValueWithOverrides
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_AutoValueWithOverrides) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_AutoValueWithOverrides))
    (then
     (global.set $f_$class__autovalue_AutoValueWithOverrides (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValueWithOverrides) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.BaseClass) )))
    )
@@ -4572,7 +4572,7 @@
 (func $$getString_|x|__java_lang_String@autovalue.AutoValueWithOverrides
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|x|__autovalue_AutoValueWithOverrides) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|x|__autovalue_AutoValueWithOverrides))
    (then
     (global.set $f_$string_|x|__autovalue_AutoValueWithOverrides (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "x")))
    )
@@ -4585,7 +4585,7 @@
 (func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValueWithOverrides
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValueWithOverrides) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValueWithOverrides))
    (then
     (global.set $f_$string_|autovalue.Au...|__autovalue_AutoValueWithOverrides (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValueWithOverrides")))
    )
@@ -4630,7 +4630,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.ExtendingAutoValue
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_ExtendingAutoValue) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_ExtendingAutoValue))
    (then
     (global.set $f_$class__autovalue_ExtendingAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Ex...|__java_lang_String (ref.func $$getString_|autovalue.Ex...|__java_lang_String@autovalue.ExtendingAutoValue) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.BaseClass) )))
    )
@@ -4643,7 +4643,7 @@
 (func $$getString_|autovalue.Ex...|__java_lang_String@autovalue.ExtendingAutoValue
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.Ex...|__autovalue_ExtendingAutoValue) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.Ex...|__autovalue_ExtendingAutoValue))
    (then
     (global.set $f_$string_|autovalue.Ex...|__autovalue_ExtendingAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.ExtendingAutoValue")))
    )
@@ -4715,7 +4715,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.SimpleAutoValue.GenericType
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_SimpleAutoValue_GenericType) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_SimpleAutoValue_GenericType))
    (then
     (global.set $f_$class__autovalue_SimpleAutoValue_GenericType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Si...|__java_lang_String (ref.func $$getString_|autovalue.Si...|__java_lang_String@autovalue.SimpleAutoValue.GenericType) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.util.AbstractCollection) )))
    )
@@ -4728,7 +4728,7 @@
 (func $$getString_|autovalue.Si...|__java_lang_String@autovalue.SimpleAutoValue.GenericType
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.Si...|__autovalue_SimpleAutoValue_GenericType) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.Si...|__autovalue_SimpleAutoValue_GenericType))
    (then
     (global.set $f_$string_|autovalue.Si...|__autovalue_SimpleAutoValue_GenericType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.SimpleAutoValue$GenericType")))
    )
@@ -4864,7 +4864,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.$AutoValue_AutoValueWithExtensions
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_$AutoValue_AutoValueWithExtensions) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_$AutoValue_AutoValueWithExtensions))
    (then
     (global.set $f_$class__autovalue_$AutoValue_AutoValueWithExtensions (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue._A...|__java_lang_String (ref.func $$getString_|autovalue._A...|__java_lang_String@autovalue.$AutoValue_AutoValueWithExtensions) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.$$AutoValue_AutoValueWithExtensions) )))
    )
@@ -4877,7 +4877,7 @@
 (func $$getString_|AutoValueWit...|__java_lang_String@autovalue.$AutoValue_AutoValueWithExtensions
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|AutoValueWit...|__autovalue_$AutoValue_AutoValueWithExtensions) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|AutoValueWit...|__autovalue_$AutoValue_AutoValueWithExtensions))
    (then
     (global.set $f_$string_|AutoValueWit...|__autovalue_$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "AutoValueWithExtensions {\n  intField = ")))
    )
@@ -4890,7 +4890,7 @@
 (func $$getString_|_|__java_lang_String@autovalue.$AutoValue_AutoValueWithExtensions
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|_|__autovalue_$AutoValue_AutoValueWithExtensions) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|_|__autovalue_$AutoValue_AutoValueWithExtensions))
    (then
     (global.set $f_$string_|_|__autovalue_$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const ",")))
    )
@@ -4903,7 +4903,7 @@
 (func $$getString_|_|_1__java_lang_String@autovalue.$AutoValue_AutoValueWithExtensions
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|_|_1__autovalue_$AutoValue_AutoValueWithExtensions) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|_|_1__autovalue_$AutoValue_AutoValueWithExtensions))
    (then
     (global.set $f_$string_|_|_1__autovalue_$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "\n")))
    )
@@ -4916,7 +4916,7 @@
 (func $$getString_|__stringFiel...|__java_lang_String@autovalue.$AutoValue_AutoValueWithExtensions
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|__stringFiel...|__autovalue_$AutoValue_AutoValueWithExtensions) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|__stringFiel...|__autovalue_$AutoValue_AutoValueWithExtensions))
    (then
     (global.set $f_$string_|__stringFiel...|__autovalue_$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "  stringField = ")))
    )
@@ -4929,7 +4929,7 @@
 (func $$getString_|null|__java_lang_String@autovalue.$AutoValue_AutoValueWithExtensions
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|null|__autovalue_$AutoValue_AutoValueWithExtensions) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|null|__autovalue_$AutoValue_AutoValueWithExtensions))
    (then
     (global.set $f_$string_|null|__autovalue_$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "null")))
    )
@@ -4942,7 +4942,7 @@
 (func $$getString_|__|__java_lang_String@autovalue.$AutoValue_AutoValueWithExtensions
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|__|__autovalue_$AutoValue_AutoValueWithExtensions) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|__|__autovalue_$AutoValue_AutoValueWithExtensions))
    (then
     (global.set $f_$string_|__|__autovalue_$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "  ")))
    )
@@ -4955,7 +4955,7 @@
 (func $$getString_|autovalue._A...|__java_lang_String@autovalue.$AutoValue_AutoValueWithExtensions
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue._A...|__autovalue_$AutoValue_AutoValueWithExtensions) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue._A...|__autovalue_$AutoValue_AutoValueWithExtensions))
    (then
     (global.set $f_$string_|autovalue._A...|__autovalue_$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.$AutoValue_AutoValueWithExtensions")))
    )
@@ -5099,7 +5099,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.$AutoValue_AutoValueWithFields
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_$AutoValue_AutoValueWithFields) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_$AutoValue_AutoValueWithFields))
    (then
     (global.set $f_$class__autovalue_$AutoValue_AutoValueWithFields (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue._A...|__java_lang_String (ref.func $$getString_|autovalue._A...|__java_lang_String@autovalue.$AutoValue_AutoValueWithFields) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValueWithFields) )))
    )
@@ -5112,7 +5112,7 @@
 (func $$getString_|autovalue._A...|__java_lang_String@autovalue.$AutoValue_AutoValueWithFields
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue._A...|__autovalue_$AutoValue_AutoValueWithFields) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue._A...|__autovalue_$AutoValue_AutoValueWithFields))
    (then
     (global.set $f_$string_|autovalue._A...|__autovalue_$AutoValue_AutoValueWithFields (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.$AutoValue_AutoValueWithFields")))
    )
@@ -5210,7 +5210,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_AutoValueWithOverrides
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_AutoValue_AutoValueWithOverrides) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_AutoValue_AutoValueWithOverrides))
    (then
     (global.set $f_$class__autovalue_AutoValue_AutoValueWithOverrides (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_AutoValueWithOverrides) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValueWithOverrides) )))
    )
@@ -5236,7 +5236,7 @@
 (func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_AutoValueWithOverrides
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValue_AutoValueWithOverrides) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValue_AutoValueWithOverrides))
    (then
     (global.set $f_$string_|autovalue.Au...|__autovalue_AutoValue_AutoValueWithOverrides (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_AutoValueWithOverrides")))
    )
@@ -5448,7 +5448,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_ExtendingAutoValue
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_AutoValue_ExtendingAutoValue) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_AutoValue_ExtendingAutoValue))
    (then
     (global.set $f_$class__autovalue_AutoValue_ExtendingAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_ExtendingAutoValue) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.ExtendingAutoValue) )))
    )
@@ -5474,7 +5474,7 @@
 (func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_ExtendingAutoValue
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValue_ExtendingAutoValue) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValue_ExtendingAutoValue))
    (then
     (global.set $f_$string_|autovalue.Au...|__autovalue_AutoValue_ExtendingAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_ExtendingAutoValue")))
    )
@@ -5576,7 +5576,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_AutoValueWithExtensions
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_AutoValue_AutoValueWithExtensions) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_AutoValue_AutoValueWithExtensions))
    (then
     (global.set $f_$class__autovalue_AutoValue_AutoValueWithExtensions (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_AutoValueWithExtensions) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.$AutoValue_AutoValueWithExtensions) )))
    )
@@ -5602,7 +5602,7 @@
 (func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_AutoValueWithExtensions
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValue_AutoValueWithExtensions) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValue_AutoValueWithExtensions))
    (then
     (global.set $f_$string_|autovalue.Au...|__autovalue_AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_AutoValueWithExtensions")))
    )
@@ -5702,7 +5702,7 @@
 (func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_AutoValueWithFields
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__autovalue_AutoValue_AutoValueWithFields) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__autovalue_AutoValue_AutoValueWithFields))
    (then
     (global.set $f_$class__autovalue_AutoValue_AutoValueWithFields (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_AutoValueWithFields) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.$AutoValue_AutoValueWithFields) )))
    )
@@ -5728,7 +5728,7 @@
 (func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_AutoValueWithFields
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValue_AutoValueWithFields) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|autovalue.Au...|__autovalue_AutoValue_AutoValueWithFields))
    (then
     (global.set $f_$string_|autovalue.Au...|__autovalue_AutoValue_AutoValueWithFields (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_AutoValueWithFields")))
    )

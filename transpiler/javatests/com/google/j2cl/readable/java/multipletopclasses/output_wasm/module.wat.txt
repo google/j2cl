@@ -113,7 +113,7 @@
 (func $$getClassMetadata__java_lang_Class@multipletopclasses.AnotherClass
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__multipletopclasses_AnotherClass) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__multipletopclasses_AnotherClass))
    (then
     (global.set $f_$class__multipletopclasses_AnotherClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|multipletopc...|__java_lang_String (ref.func $$getString_|multipletopc...|__java_lang_String@multipletopclasses.AnotherClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -139,7 +139,7 @@
 (func $$getString_|multipletopc...|__java_lang_String@multipletopclasses.AnotherClass
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|multipletopc...|__multipletopclasses_AnotherClass) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|multipletopc...|__multipletopclasses_AnotherClass))
    (then
     (global.set $f_$string_|multipletopc...|__multipletopclasses_AnotherClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "multipletopclasses.AnotherClass")))
    )
@@ -199,7 +199,7 @@
 (func $$getClassMetadata__java_lang_Class@multipletopclasses.MultipleTopClasses
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__multipletopclasses_MultipleTopClasses) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__multipletopclasses_MultipleTopClasses))
    (then
     (global.set $f_$class__multipletopclasses_MultipleTopClasses (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|multipletopc...|__java_lang_String (ref.func $$getString_|multipletopc...|__java_lang_String@multipletopclasses.MultipleTopClasses) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@multipletopclasses.AnotherClass) )))
    )
@@ -225,7 +225,7 @@
 (func $$getString_|multipletopc...|__java_lang_String@multipletopclasses.MultipleTopClasses
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|multipletopc...|__multipletopclasses_MultipleTopClasses) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|multipletopc...|__multipletopclasses_MultipleTopClasses))
    (then
     (global.set $f_$string_|multipletopc...|__multipletopclasses_MultipleTopClasses (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "multipletopclasses.MultipleTopClasses")))
    )

@@ -1651,7 +1651,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.I
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_I) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_I))
    (then
     (global.set $f_$class__bridgemethods_I (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethods.I|__java_lang_String (ref.func $$getString_|bridgemethods.I|__java_lang_String@bridgemethods.I) )))
    )
@@ -1664,7 +1664,7 @@
 (func $$getString_|bridgemethods.I|__java_lang_String@bridgemethods.I
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethods.I|__bridgemethods_I) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethods.I|__bridgemethods_I))
    (then
     (global.set $f_$string_|bridgemethods.I|__bridgemethods_I (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.I")))
    )
@@ -1695,7 +1695,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.SpecializedInterface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_SpecializedInterface) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_SpecializedInterface))
    (then
     (global.set $f_$class__bridgemethods_SpecializedInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.SpecializedInterface) )))
    )
@@ -1708,7 +1708,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.SpecializedInterface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_SpecializedInterface) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_SpecializedInterface))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_SpecializedInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.SpecializedInterface")))
    )
@@ -1739,7 +1739,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.SomeInterface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_SomeInterface) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_SomeInterface))
    (then
     (global.set $f_$class__bridgemethods_SomeInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.SomeInterface) )))
    )
@@ -1752,7 +1752,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.SomeInterface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_SomeInterface) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_SomeInterface))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_SomeInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.SomeInterface")))
    )
@@ -1783,7 +1783,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.SomeOtherFooInterface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_SomeOtherFooInterface) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_SomeOtherFooInterface))
    (then
     (global.set $f_$class__bridgemethods_SomeOtherFooInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.SomeOtherFooInterface) )))
    )
@@ -1796,7 +1796,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.SomeOtherFooInterface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_SomeOtherFooInterface) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_SomeOtherFooInterface))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_SomeOtherFooInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.SomeOtherFooInterface")))
    )
@@ -1827,7 +1827,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.Getter
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_Getter) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_Getter))
    (then
     (global.set $f_$class__bridgemethods_Getter (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.Getter) )))
    )
@@ -1840,7 +1840,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.Getter
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_Getter) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_Getter))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_Getter (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.Getter")))
    )
@@ -1871,7 +1871,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.StringConsumer
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_StringConsumer) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_StringConsumer))
    (then
     (global.set $f_$class__bridgemethods_StringConsumer (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.StringConsumer) )))
    )
@@ -1884,7 +1884,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.StringConsumer
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_StringConsumer) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_StringConsumer))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_StringConsumer (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.StringConsumer")))
    )
@@ -1928,7 +1928,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.TestCase10036.BI3
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_TestCase10036_BI3) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_TestCase10036_BI3))
    (then
     (global.set $f_$class__bridgemethods_TestCase10036_BI3 (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.TestCase10036.BI3) )))
    )
@@ -1941,7 +1941,7 @@
 (func $$getString_|BI3_get_String|__java_lang_String@bridgemethods.TestCase10036.BI3
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|BI3_get_String|__bridgemethods_TestCase10036_BI3) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|BI3_get_String|__bridgemethods_TestCase10036_BI3))
    (then
     (global.set $f_$string_|BI3_get_String|__bridgemethods_TestCase10036_BI3 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "BI3 get String")))
    )
@@ -1954,7 +1954,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.TestCase10036.BI3
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_TestCase10036_BI3) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_TestCase10036_BI3))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_TestCase10036_BI3 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.TestCase10036$BI3")))
    )
@@ -1985,7 +1985,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.TestCase10036.BI2
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_TestCase10036_BI2) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_TestCase10036_BI2))
    (then
     (global.set $f_$class__bridgemethods_TestCase10036_BI2 (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.TestCase10036.BI2) )))
    )
@@ -1998,7 +1998,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.TestCase10036.BI2
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_TestCase10036_BI2) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_TestCase10036_BI2))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_TestCase10036_BI2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.TestCase10036$BI2")))
    )
@@ -2031,7 +2031,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.TestCase10036.BI1
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_TestCase10036_BI1) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_TestCase10036_BI1))
    (then
     (global.set $f_$class__bridgemethods_TestCase10036_BI1 (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.TestCase10036.BI1) )))
    )
@@ -2044,7 +2044,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.TestCase10036.BI1
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_TestCase10036_BI1) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_TestCase10036_BI1))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_TestCase10036_BI1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.TestCase10036$BI1")))
    )
@@ -2075,7 +2075,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.TestCase102.BI2
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_TestCase102_BI2) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_TestCase102_BI2))
    (then
     (global.set $f_$class__bridgemethods_TestCase102_BI2 (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.TestCase102.BI2) )))
    )
@@ -2088,7 +2088,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.TestCase102.BI2
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_TestCase102_BI2) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_TestCase102_BI2))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_TestCase102_BI2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.TestCase102$BI2")))
    )
@@ -2119,7 +2119,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.TestCase102.BI1
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_TestCase102_BI1) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_TestCase102_BI1))
    (then
     (global.set $f_$class__bridgemethods_TestCase102_BI1 (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.TestCase102.BI1) )))
    )
@@ -2132,7 +2132,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.TestCase102.BI1
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_TestCase102_BI1) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_TestCase102_BI1))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_TestCase102_BI1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.TestCase102$BI1")))
    )
@@ -2163,7 +2163,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.BridgeMethodDefault.I
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_BridgeMethodDefault_I) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_BridgeMethodDefault_I))
    (then
     (global.set $f_$class__bridgemethods_BridgeMethodDefault_I (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.BridgeMethodDefault.I) )))
    )
@@ -2176,7 +2176,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.BridgeMethodDefault.I
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodDefault_I) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodDefault_I))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodDefault_I (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.BridgeMethodDefault$I")))
    )
@@ -2217,7 +2217,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.BridgeMethodDefault.II
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_BridgeMethodDefault_II) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_BridgeMethodDefault_II))
    (then
     (global.set $f_$class__bridgemethods_BridgeMethodDefault_II (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.BridgeMethodDefault.II) )))
    )
@@ -2230,7 +2230,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.BridgeMethodDefault.II
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodDefault_II) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodDefault_II))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodDefault_II (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.BridgeMethodDefault$II")))
    )
@@ -2271,7 +2271,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.BridgeMethodDefault.JJ
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_BridgeMethodDefault_JJ) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_BridgeMethodDefault_JJ))
    (then
     (global.set $f_$class__bridgemethods_BridgeMethodDefault_JJ (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.BridgeMethodDefault.JJ) )))
    )
@@ -2284,7 +2284,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.BridgeMethodDefault.JJ
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodDefault_JJ) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodDefault_JJ))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodDefault_JJ (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.BridgeMethodDefault$JJ")))
    )
@@ -2315,7 +2315,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.BridgeMethodShadowedSignature.I
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_BridgeMethodShadowedSignature_I) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_BridgeMethodShadowedSignature_I))
    (then
     (global.set $f_$class__bridgemethods_BridgeMethodShadowedSignature_I (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.I) )))
    )
@@ -2328,7 +2328,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.I
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodShadowedSignature_I) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodShadowedSignature_I))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodShadowedSignature_I (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.BridgeMethodShadowedSignature$I")))
    )
@@ -2359,7 +2359,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.Map
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_Map) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_Map))
    (then
     (global.set $f_$class__bridgemethods_Map (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.Map) )))
    )
@@ -2372,7 +2372,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.Map
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_Map) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_Map))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_Map (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.Map")))
    )
@@ -2463,7 +2463,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.A
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_A) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_A))
    (then
     (global.set $f_$class__bridgemethods_A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethods.A|__java_lang_String (ref.func $$getString_|bridgemethods.A|__java_lang_String@bridgemethods.A) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -2489,7 +2489,7 @@
 (func $$getString_|bridgemethods.A|__java_lang_String@bridgemethods.A
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethods.A|__bridgemethods_A) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethods.A|__bridgemethods_A))
    (then
     (global.set $f_$string_|bridgemethods.A|__bridgemethods_A (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.A")))
    )
@@ -2563,7 +2563,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.SuperParent
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_SuperParent) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_SuperParent))
    (then
     (global.set $f_$class__bridgemethods_SuperParent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.SuperParent) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -2589,7 +2589,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.SuperParent
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_SuperParent) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_SuperParent))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_SuperParent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.SuperParent")))
    )
@@ -2725,7 +2725,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.DualUnrelatedBridges
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_DualUnrelatedBridges) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_DualUnrelatedBridges))
    (then
     (global.set $f_$class__bridgemethods_DualUnrelatedBridges (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.DualUnrelatedBridges) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -2751,7 +2751,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.DualUnrelatedBridges
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_DualUnrelatedBridges) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_DualUnrelatedBridges))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_DualUnrelatedBridges (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.DualUnrelatedBridges")))
    )
@@ -2839,7 +2839,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.SuperDualUnrelatedAccidentalBridges
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_SuperDualUnrelatedAccidentalBridges) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_SuperDualUnrelatedAccidentalBridges))
    (then
     (global.set $f_$class__bridgemethods_SuperDualUnrelatedAccidentalBridges (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.SuperDualUnrelatedAccidentalBridges) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -2865,7 +2865,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.SuperDualUnrelatedAccidentalBridges
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_SuperDualUnrelatedAccidentalBridges) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_SuperDualUnrelatedAccidentalBridges))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_SuperDualUnrelatedAccidentalBridges (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.SuperDualUnrelatedAccidentalBridges")))
    )
@@ -2941,7 +2941,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.ClassWithParameterizedGet
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_ClassWithParameterizedGet) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_ClassWithParameterizedGet))
    (then
     (global.set $f_$class__bridgemethods_ClassWithParameterizedGet (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.ClassWithParameterizedGet) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -2967,7 +2967,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.ClassWithParameterizedGet
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_ClassWithParameterizedGet) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_ClassWithParameterizedGet))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_ClassWithParameterizedGet (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.ClassWithParameterizedGet")))
    )
@@ -3027,7 +3027,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.TestCase10036
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_TestCase10036) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_TestCase10036))
    (then
     (global.set $f_$class__bridgemethods_TestCase10036 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.TestCase10036) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -3053,7 +3053,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.TestCase10036
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_TestCase10036) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_TestCase10036))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_TestCase10036 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.TestCase10036")))
    )
@@ -3113,7 +3113,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.TestCase102
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_TestCase102) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_TestCase102))
    (then
     (global.set $f_$class__bridgemethods_TestCase102 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.TestCase102) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -3139,7 +3139,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.TestCase102
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_TestCase102) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_TestCase102))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_TestCase102 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.TestCase102")))
    )
@@ -3215,7 +3215,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.ParameterizedParent
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_ParameterizedParent) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_ParameterizedParent))
    (then
     (global.set $f_$class__bridgemethods_ParameterizedParent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.ParameterizedParent) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -3241,7 +3241,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.ParameterizedParent
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_ParameterizedParent) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_ParameterizedParent))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_ParameterizedParent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.ParameterizedParent")))
    )
@@ -3314,7 +3314,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.Consumer
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_Consumer) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_Consumer))
    (then
     (global.set $f_$class__bridgemethods_Consumer (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.Consumer) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -3340,7 +3340,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.Consumer
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_Consumer) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_Consumer))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_Consumer (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.Consumer")))
    )
@@ -3387,7 +3387,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.TestCase10036.B
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_TestCase10036_B) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_TestCase10036_B))
    (then
     (global.set $f_$class__bridgemethods_TestCase10036_B (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.TestCase10036.B) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -3400,7 +3400,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.TestCase10036.B
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_TestCase10036_B) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_TestCase10036_B))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_TestCase10036_B (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.TestCase10036$B")))
    )
@@ -3445,7 +3445,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.TestCase102.B
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_TestCase102_B) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_TestCase102_B))
    (then
     (global.set $f_$class__bridgemethods_TestCase102_B (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.TestCase102.B) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -3458,7 +3458,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.TestCase102.B
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_TestCase102_B) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_TestCase102_B))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_TestCase102_B (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.TestCase102$B")))
    )
@@ -3538,7 +3538,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.BridgeMethodDefault
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_BridgeMethodDefault) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_BridgeMethodDefault))
    (then
     (global.set $f_$class__bridgemethods_BridgeMethodDefault (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.BridgeMethodDefault) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -3564,7 +3564,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.BridgeMethodDefault
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodDefault) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodDefault))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodDefault (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.BridgeMethodDefault")))
    )
@@ -3656,7 +3656,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.BridgeMethodDefault.A
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_BridgeMethodDefault_A) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_BridgeMethodDefault_A))
    (then
     (global.set $f_$class__bridgemethods_BridgeMethodDefault_A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.BridgeMethodDefault.A) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -3682,7 +3682,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.BridgeMethodDefault.A
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodDefault_A) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodDefault_A))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodDefault_A (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.BridgeMethodDefault$A")))
    )
@@ -3759,7 +3759,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.BridgeMethodDefault.B
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_BridgeMethodDefault_B) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_BridgeMethodDefault_B))
    (then
     (global.set $f_$class__bridgemethods_BridgeMethodDefault_B (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.BridgeMethodDefault.B) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -3785,7 +3785,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.BridgeMethodDefault.B
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodDefault_B) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodDefault_B))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodDefault_B (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.BridgeMethodDefault$B")))
    )
@@ -3845,7 +3845,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.BridgeMethodShadowedSignature
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_BridgeMethodShadowedSignature) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_BridgeMethodShadowedSignature))
    (then
     (global.set $f_$class__bridgemethods_BridgeMethodShadowedSignature (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.BridgeMethodShadowedSignature) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -3871,7 +3871,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.BridgeMethodShadowedSignature
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodShadowedSignature) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodShadowedSignature))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodShadowedSignature (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.BridgeMethodShadowedSignature")))
    )
@@ -3932,7 +3932,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.BridgeMethodShadowedSignature.B
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_BridgeMethodShadowedSignature_B) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_BridgeMethodShadowedSignature_B))
    (then
     (global.set $f_$class__bridgemethods_BridgeMethodShadowedSignature_B (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.B) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -3945,7 +3945,7 @@
 (func $$getString_|B_get_B2|__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.B
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|B_get_B2|__bridgemethods_BridgeMethodShadowedSignature_B) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|B_get_B2|__bridgemethods_BridgeMethodShadowedSignature_B))
    (then
     (global.set $f_$string_|B_get_B2|__bridgemethods_BridgeMethodShadowedSignature_B (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "B get B2")))
    )
@@ -3958,7 +3958,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.B
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodShadowedSignature_B) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodShadowedSignature_B))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodShadowedSignature_B (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.BridgeMethodShadowedSignature$B")))
    )
@@ -4035,7 +4035,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.AbstractMap
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_AbstractMap) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_AbstractMap))
    (then
     (global.set $f_$class__bridgemethods_AbstractMap (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.AbstractMap) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -4061,7 +4061,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.AbstractMap
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_AbstractMap) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_AbstractMap))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_AbstractMap (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.AbstractMap")))
    )
@@ -4153,7 +4153,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.B
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_B) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_B))
    (then
     (global.set $f_$class__bridgemethods_B (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethods.B|__java_lang_String (ref.func $$getString_|bridgemethods.B|__java_lang_String@bridgemethods.B) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgemethods.A) )))
    )
@@ -4179,7 +4179,7 @@
 (func $$getString_|bridgemethods.B|__java_lang_String@bridgemethods.B
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethods.B|__bridgemethods_B) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethods.B|__bridgemethods_B))
    (then
     (global.set $f_$string_|bridgemethods.B|__bridgemethods_B (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.B")))
    )
@@ -4270,7 +4270,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.AccidentalOverride
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_AccidentalOverride) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_AccidentalOverride))
    (then
     (global.set $f_$class__bridgemethods_AccidentalOverride (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.AccidentalOverride) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgemethods.A) )))
    )
@@ -4296,7 +4296,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.AccidentalOverride
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_AccidentalOverride) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_AccidentalOverride))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_AccidentalOverride (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.AccidentalOverride")))
    )
@@ -4412,7 +4412,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.Parent
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_Parent) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_Parent))
    (then
     (global.set $f_$class__bridgemethods_Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.Parent) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgemethods.SuperParent) )))
    )
@@ -4438,7 +4438,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.Parent
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_Parent) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_Parent))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_Parent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.Parent")))
    )
@@ -4546,7 +4546,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.DualUnrelatedAccidentalBridges
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_DualUnrelatedAccidentalBridges) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_DualUnrelatedAccidentalBridges))
    (then
     (global.set $f_$class__bridgemethods_DualUnrelatedAccidentalBridges (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.DualUnrelatedAccidentalBridges) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgemethods.SuperDualUnrelatedAccidentalBridges) )))
    )
@@ -4572,7 +4572,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.DualUnrelatedAccidentalBridges
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_DualUnrelatedAccidentalBridges) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_DualUnrelatedAccidentalBridges))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_DualUnrelatedAccidentalBridges (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.DualUnrelatedAccidentalBridges")))
    )
@@ -4665,7 +4665,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.AccidentalOverrideBridge
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_AccidentalOverrideBridge) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_AccidentalOverrideBridge))
    (then
     (global.set $f_$class__bridgemethods_AccidentalOverrideBridge (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.AccidentalOverrideBridge) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgemethods.ClassWithParameterizedGet) )))
    )
@@ -4691,7 +4691,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.AccidentalOverrideBridge
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_AccidentalOverrideBridge) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_AccidentalOverrideBridge))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_AccidentalOverrideBridge (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.AccidentalOverrideBridge")))
    )
@@ -4783,7 +4783,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.ReparametrerizedChild
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_ReparametrerizedChild) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_ReparametrerizedChild))
    (then
     (global.set $f_$class__bridgemethods_ReparametrerizedChild (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.ReparametrerizedChild) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgemethods.ParameterizedParent) )))
    )
@@ -4809,7 +4809,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.ReparametrerizedChild
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_ReparametrerizedChild) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_ReparametrerizedChild))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_ReparametrerizedChild (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.ReparametrerizedChild")))
    )
@@ -4884,7 +4884,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.StringConsumerImpl
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_StringConsumerImpl) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_StringConsumerImpl))
    (then
     (global.set $f_$class__bridgemethods_StringConsumerImpl (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.StringConsumerImpl) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgemethods.Consumer) )))
    )
@@ -4910,7 +4910,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.StringConsumerImpl
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_StringConsumerImpl) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_StringConsumerImpl))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_StringConsumerImpl (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.StringConsumerImpl")))
    )
@@ -5000,7 +5000,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.TestCase102.C
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_TestCase102_C) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_TestCase102_C))
    (then
     (global.set $f_$class__bridgemethods_TestCase102_C (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.TestCase102.C) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgemethods.TestCase102.B) )))
    )
@@ -5026,7 +5026,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.TestCase102.C
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_TestCase102_C) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_TestCase102_C))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_TestCase102_C (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.TestCase102$C")))
    )
@@ -5099,7 +5099,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.BridgeMethodDefault.C
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_BridgeMethodDefault_C) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_BridgeMethodDefault_C))
    (then
     (global.set $f_$class__bridgemethods_BridgeMethodDefault_C (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.BridgeMethodDefault.C) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgemethods.BridgeMethodDefault.B) )))
    )
@@ -5125,7 +5125,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.BridgeMethodDefault.C
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodDefault_C) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodDefault_C))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodDefault_C (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.BridgeMethodDefault$C")))
    )
@@ -5201,7 +5201,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.BridgeMethodShadowedSignature.C
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_BridgeMethodShadowedSignature_C) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_BridgeMethodShadowedSignature_C))
    (then
     (global.set $f_$class__bridgemethods_BridgeMethodShadowedSignature_C (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.C) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgemethods.BridgeMethodShadowedSignature.B) )))
    )
@@ -5227,7 +5227,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.C
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodShadowedSignature_C) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodShadowedSignature_C))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_BridgeMethodShadowedSignature_C (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.BridgeMethodShadowedSignature$C")))
    )
@@ -5321,7 +5321,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.EnumMap
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_EnumMap) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_EnumMap))
    (then
     (global.set $f_$class__bridgemethods_EnumMap (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.EnumMap) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgemethods.AbstractMap) )))
    )
@@ -5347,7 +5347,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.EnumMap
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_EnumMap) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_EnumMap))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_EnumMap (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.EnumMap")))
    )
@@ -5479,7 +5479,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.BridgeMethod
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_BridgeMethod) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_BridgeMethod))
    (then
     (global.set $f_$class__bridgemethods_BridgeMethod (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.BridgeMethod) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgemethods.Parent) )))
    )
@@ -5505,7 +5505,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.BridgeMethod
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_BridgeMethod) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_BridgeMethod))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_BridgeMethod (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.BridgeMethod")))
    )
@@ -5565,7 +5565,7 @@
 (func $$getClassMetadata__java_lang_Class@bridgemethods.LeafChild
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__bridgemethods_LeafChild) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__bridgemethods_LeafChild))
    (then
     (global.set $f_$class__bridgemethods_LeafChild (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgemethod...|__java_lang_String (ref.func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.LeafChild) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgemethods.ReparametrerizedChild) )))
    )
@@ -5591,7 +5591,7 @@
 (func $$getString_|bridgemethod...|__java_lang_String@bridgemethods.LeafChild
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|bridgemethod...|__bridgemethods_LeafChild) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|bridgemethod...|__bridgemethods_LeafChild))
    (then
     (global.set $f_$string_|bridgemethod...|__bridgemethods_LeafChild (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgemethods.LeafChild")))
    )

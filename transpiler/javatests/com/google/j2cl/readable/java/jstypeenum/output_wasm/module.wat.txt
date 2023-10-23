@@ -174,7 +174,7 @@
 (func $$getClassMetadata__java_lang_Class@jstypeenum.Color
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__jstypeenum_Color) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__jstypeenum_Color))
    (then
     (global.set $f_$class__jstypeenum_Color (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jstypeenum.C...|__java_lang_String (ref.func $$getString_|jstypeenum.C...|__java_lang_String@jstypeenum.Color) )))
    )
@@ -200,7 +200,7 @@
 (func $$getString_|RED|__java_lang_String@jstypeenum.Color
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|RED|__jstypeenum_Color) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|RED|__jstypeenum_Color))
    (then
     (global.set $f_$string_|RED|__jstypeenum_Color (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "RED")))
    )
@@ -213,7 +213,7 @@
 (func $$getString_|GREEN|__java_lang_String@jstypeenum.Color
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|GREEN|__jstypeenum_Color) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|GREEN|__jstypeenum_Color))
    (then
     (global.set $f_$string_|GREEN|__jstypeenum_Color (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "GREEN")))
    )
@@ -226,7 +226,7 @@
 (func $$getString_|BLUE|__java_lang_String@jstypeenum.Color
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|BLUE|__jstypeenum_Color) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|BLUE|__jstypeenum_Color))
    (then
     (global.set $f_$string_|BLUE|__jstypeenum_Color (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "BLUE")))
    )
@@ -239,7 +239,7 @@
 (func $$getString_|jstypeenum.C...|__java_lang_String@jstypeenum.Color
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|jstypeenum.C...|__jstypeenum_Color) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|jstypeenum.C...|__jstypeenum_Color))
    (then
     (global.set $f_$string_|jstypeenum.C...|__jstypeenum_Color (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jstypeenum.Color")))
    )

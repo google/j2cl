@@ -186,7 +186,7 @@
 (func $$getClassMetadata__java_lang_Class@protobuf.Protobuf
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__protobuf_Protobuf) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__protobuf_Protobuf))
    (then
     (global.set $f_$class__protobuf_Protobuf (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|protobuf.Pro...|__java_lang_String (ref.func $$getString_|protobuf.Pro...|__java_lang_String@protobuf.Protobuf) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -212,7 +212,7 @@
 (func $$getString_|protobuf.Pro...|__java_lang_String@protobuf.Protobuf
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|protobuf.Pro...|__protobuf_Protobuf) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|protobuf.Pro...|__protobuf_Protobuf))
    (then
     (global.set $f_$string_|protobuf.Pro...|__protobuf_Protobuf (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "protobuf.Protobuf")))
    )
@@ -315,7 +315,7 @@
 (func $$getClassMetadata__java_lang_Class@protobuf.MyMessage
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__protobuf_MyMessage) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__protobuf_MyMessage))
    (then
     (global.set $f_$class__protobuf_MyMessage (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|protobuf.MyM...|__java_lang_String (ref.func $$getString_|protobuf.MyM...|__java_lang_String@protobuf.MyMessage) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@com.google.protobuf.GeneratedMessage) )))
    )
@@ -341,7 +341,7 @@
 (func $$getString_|protobuf.MyM...|__java_lang_String@protobuf.MyMessage
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|protobuf.MyM...|__protobuf_MyMessage) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|protobuf.MyM...|__protobuf_MyMessage))
    (then
     (global.set $f_$string_|protobuf.MyM...|__protobuf_MyMessage (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "protobuf.MyMessage")))
    )
@@ -449,7 +449,7 @@
 (func $$getClassMetadata__java_lang_Class@protobuf.MyMessage.Builder
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__protobuf_MyMessage_Builder) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__protobuf_MyMessage_Builder))
    (then
     (global.set $f_$class__protobuf_MyMessage_Builder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|protobuf.MyM...|__java_lang_String (ref.func $$getString_|protobuf.MyM...|__java_lang_String@protobuf.MyMessage.Builder) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@com.google.protobuf.GeneratedMessage.Builder) )))
    )
@@ -475,7 +475,7 @@
 (func $$getString_|protobuf.MyM...|__java_lang_String@protobuf.MyMessage.Builder
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|protobuf.MyM...|__protobuf_MyMessage_Builder) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|protobuf.MyM...|__protobuf_MyMessage_Builder))
    (then
     (global.set $f_$string_|protobuf.MyM...|__protobuf_MyMessage_Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "protobuf.MyMessage$Builder")))
    )

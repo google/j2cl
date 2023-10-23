@@ -111,7 +111,7 @@
 (func $$getClassMetadata__java_lang_Class@ternaryexpression.TernaryExpression
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__ternaryexpression_TernaryExpression) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__ternaryexpression_TernaryExpression))
    (then
     (global.set $f_$class__ternaryexpression_TernaryExpression (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|ternaryexpre...|__java_lang_String (ref.func $$getString_|ternaryexpre...|__java_lang_String@ternaryexpression.TernaryExpression) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -137,7 +137,7 @@
 (func $$getString_|ternaryexpre...|__java_lang_String@ternaryexpression.TernaryExpression
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|ternaryexpre...|__ternaryexpression_TernaryExpression) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|ternaryexpre...|__ternaryexpression_TernaryExpression))
    (then
     (global.set $f_$string_|ternaryexpre...|__ternaryexpression_TernaryExpression (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "ternaryexpression.TernaryExpression")))
    )

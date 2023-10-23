@@ -62,7 +62,7 @@
 (func $$getClassMetadata__java_lang_Class@genericinterfaceabstractimpl.MyInterface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__genericinterfaceabstractimpl_MyInterface) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__genericinterfaceabstractimpl_MyInterface))
    (then
     (global.set $f_$class__genericinterfaceabstractimpl_MyInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericinter...|__java_lang_String (ref.func $$getString_|genericinter...|__java_lang_String@genericinterfaceabstractimpl.MyInterface) )))
    )
@@ -75,7 +75,7 @@
 (func $$getString_|genericinter...|__java_lang_String@genericinterfaceabstractimpl.MyInterface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|genericinter...|__genericinterfaceabstractimpl_MyInterface) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|genericinter...|__genericinterfaceabstractimpl_MyInterface))
    (then
     (global.set $f_$string_|genericinter...|__genericinterfaceabstractimpl_MyInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "genericinterfaceabstractimpl.MyInterface")))
    )
@@ -120,7 +120,7 @@
 (func $$getClassMetadata__java_lang_Class@genericinterfaceabstractimpl.AbstractImpl
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__genericinterfaceabstractimpl_AbstractImpl) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__genericinterfaceabstractimpl_AbstractImpl))
    (then
     (global.set $f_$class__genericinterfaceabstractimpl_AbstractImpl (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericinter...|__java_lang_String (ref.func $$getString_|genericinter...|__java_lang_String@genericinterfaceabstractimpl.AbstractImpl) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -133,7 +133,7 @@
 (func $$getString_|genericinter...|__java_lang_String@genericinterfaceabstractimpl.AbstractImpl
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|genericinter...|__genericinterfaceabstractimpl_AbstractImpl) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|genericinter...|__genericinterfaceabstractimpl_AbstractImpl))
    (then
     (global.set $f_$string_|genericinter...|__genericinterfaceabstractimpl_AbstractImpl (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "genericinterfaceabstractimpl.AbstractImpl")))
    )

@@ -333,7 +333,7 @@
 (func $$getClassMetadata__java_lang_Class@rawtype.RawType.GenericSuperclass
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__rawtype_RawType_GenericSuperclass) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__rawtype_RawType_GenericSuperclass))
    (then
     (global.set $f_$class__rawtype_RawType_GenericSuperclass (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|rawtype.RawT...|__java_lang_String (ref.func $$getString_|rawtype.RawT...|__java_lang_String@rawtype.RawType.GenericSuperclass) )))
    )
@@ -346,7 +346,7 @@
 (func $$getString_|rawtype.RawT...|__java_lang_String@rawtype.RawType.GenericSuperclass
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|rawtype.RawT...|__rawtype_RawType_GenericSuperclass) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|rawtype.RawT...|__rawtype_RawType_GenericSuperclass))
    (then
     (global.set $f_$string_|rawtype.RawT...|__rawtype_RawType_GenericSuperclass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "rawtype.RawType$GenericSuperclass")))
    )
@@ -426,7 +426,7 @@
 (func $$getClassMetadata__java_lang_Class@rawtype.RawType
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__rawtype_RawType) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__rawtype_RawType))
    (then
     (global.set $f_$class__rawtype_RawType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|rawtype.RawType|__java_lang_String (ref.func $$getString_|rawtype.RawType|__java_lang_String@rawtype.RawType) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -452,7 +452,7 @@
 (func $$getString_|rawtype.RawType|__java_lang_String@rawtype.RawType
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|rawtype.RawType|__rawtype_RawType) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|rawtype.RawType|__rawtype_RawType))
    (then
     (global.set $f_$string_|rawtype.RawType|__rawtype_RawType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "rawtype.RawType")))
    )
@@ -528,7 +528,7 @@
 (func $$getClassMetadata__java_lang_Class@rawtype.RawType.Unbound
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__rawtype_RawType_Unbound) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__rawtype_RawType_Unbound))
    (then
     (global.set $f_$class__rawtype_RawType_Unbound (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|rawtype.RawT...|__java_lang_String (ref.func $$getString_|rawtype.RawT...|__java_lang_String@rawtype.RawType.Unbound) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -554,7 +554,7 @@
 (func $$getString_|rawtype.RawT...|__java_lang_String@rawtype.RawType.Unbound
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|rawtype.RawT...|__rawtype_RawType_Unbound) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|rawtype.RawT...|__rawtype_RawType_Unbound))
    (then
     (global.set $f_$string_|rawtype.RawT...|__rawtype_RawType_Unbound (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "rawtype.RawType$Unbound")))
    )
@@ -614,7 +614,7 @@
 (func $$getClassMetadata__java_lang_Class@rawtype.RawType.Bound
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__rawtype_RawType_Bound) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__rawtype_RawType_Bound))
    (then
     (global.set $f_$class__rawtype_RawType_Bound (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|rawtype.RawT...|__java_lang_String (ref.func $$getString_|rawtype.RawT...|__java_lang_String@rawtype.RawType.Bound) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -640,7 +640,7 @@
 (func $$getString_|rawtype.RawT...|__java_lang_String@rawtype.RawType.Bound
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|rawtype.RawT...|__rawtype_RawType_Bound) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|rawtype.RawT...|__rawtype_RawType_Bound))
    (then
     (global.set $f_$string_|rawtype.RawT...|__rawtype_RawType_Bound (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "rawtype.RawType$Bound")))
    )
@@ -700,7 +700,7 @@
 (func $$getClassMetadata__java_lang_Class@rawtype.RawType.BoundRecursively
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__rawtype_RawType_BoundRecursively) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__rawtype_RawType_BoundRecursively))
    (then
     (global.set $f_$class__rawtype_RawType_BoundRecursively (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|rawtype.RawT...|__java_lang_String (ref.func $$getString_|rawtype.RawT...|__java_lang_String@rawtype.RawType.BoundRecursively) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -726,7 +726,7 @@
 (func $$getString_|rawtype.RawT...|__java_lang_String@rawtype.RawType.BoundRecursively
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|rawtype.RawT...|__rawtype_RawType_BoundRecursively) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|rawtype.RawT...|__rawtype_RawType_BoundRecursively))
    (then
     (global.set $f_$string_|rawtype.RawT...|__rawtype_RawType_BoundRecursively (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "rawtype.RawType$BoundRecursively")))
    )
@@ -786,7 +786,7 @@
 (func $$getClassMetadata__java_lang_Class@rawtype.RawType.BoundDependentDirect
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__rawtype_RawType_BoundDependentDirect) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__rawtype_RawType_BoundDependentDirect))
    (then
     (global.set $f_$class__rawtype_RawType_BoundDependentDirect (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|rawtype.RawT...|__java_lang_String (ref.func $$getString_|rawtype.RawT...|__java_lang_String@rawtype.RawType.BoundDependentDirect) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -812,7 +812,7 @@
 (func $$getString_|rawtype.RawT...|__java_lang_String@rawtype.RawType.BoundDependentDirect
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|rawtype.RawT...|__rawtype_RawType_BoundDependentDirect) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|rawtype.RawT...|__rawtype_RawType_BoundDependentDirect))
    (then
     (global.set $f_$string_|rawtype.RawT...|__rawtype_RawType_BoundDependentDirect (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "rawtype.RawType$BoundDependentDirect")))
    )
@@ -872,7 +872,7 @@
 (func $$getClassMetadata__java_lang_Class@rawtype.RawType.BoundDependentIndirect
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__rawtype_RawType_BoundDependentIndirect) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__rawtype_RawType_BoundDependentIndirect))
    (then
     (global.set $f_$class__rawtype_RawType_BoundDependentIndirect (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|rawtype.RawT...|__java_lang_String (ref.func $$getString_|rawtype.RawT...|__java_lang_String@rawtype.RawType.BoundDependentIndirect) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -898,7 +898,7 @@
 (func $$getString_|rawtype.RawT...|__java_lang_String@rawtype.RawType.BoundDependentIndirect
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|rawtype.RawT...|__rawtype_RawType_BoundDependentIndirect) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|rawtype.RawT...|__rawtype_RawType_BoundDependentIndirect))
    (then
     (global.set $f_$string_|rawtype.RawT...|__rawtype_RawType_BoundDependentIndirect (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "rawtype.RawType$BoundDependentIndirect")))
    )
@@ -973,7 +973,7 @@
 (func $$getClassMetadata__java_lang_Class@rawtype.RawType.RawSubclass
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__rawtype_RawType_RawSubclass) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__rawtype_RawType_RawSubclass))
    (then
     (global.set $f_$class__rawtype_RawType_RawSubclass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|rawtype.RawT...|__java_lang_String (ref.func $$getString_|rawtype.RawT...|__java_lang_String@rawtype.RawType.RawSubclass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -999,7 +999,7 @@
 (func $$getString_|rawtype.RawT...|__java_lang_String@rawtype.RawType.RawSubclass
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|rawtype.RawT...|__rawtype_RawType_RawSubclass) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|rawtype.RawT...|__rawtype_RawType_RawSubclass))
    (then
     (global.set $f_$string_|rawtype.RawT...|__rawtype_RawType_RawSubclass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "rawtype.RawType$RawSubclass")))
    )
@@ -1075,7 +1075,7 @@
 (func $$getClassMetadata__java_lang_Class@rawtype.RawType.RawUnboundChild
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__rawtype_RawType_RawUnboundChild) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__rawtype_RawType_RawUnboundChild))
    (then
     (global.set $f_$class__rawtype_RawType_RawUnboundChild (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|rawtype.RawT...|__java_lang_String (ref.func $$getString_|rawtype.RawT...|__java_lang_String@rawtype.RawType.RawUnboundChild) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@rawtype.RawType.Unbound) )))
    )
@@ -1101,7 +1101,7 @@
 (func $$getString_|rawtype.RawT...|__java_lang_String@rawtype.RawType.RawUnboundChild
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|rawtype.RawT...|__rawtype_RawType_RawUnboundChild) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|rawtype.RawT...|__rawtype_RawType_RawUnboundChild))
    (then
     (global.set $f_$string_|rawtype.RawT...|__rawtype_RawType_RawUnboundChild (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "rawtype.RawType$RawUnboundChild")))
    )

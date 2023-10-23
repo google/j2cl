@@ -116,7 +116,7 @@
 (func $$getClassMetadata__java_lang_Class@synchronizedmethod.SynchronizedMethod
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__synchronizedmethod_SynchronizedMethod) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__synchronizedmethod_SynchronizedMethod))
    (then
     (global.set $f_$class__synchronizedmethod_SynchronizedMethod (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|synchronized...|__java_lang_String (ref.func $$getString_|synchronized...|__java_lang_String@synchronizedmethod.SynchronizedMethod) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -142,7 +142,7 @@
 (func $$getString_|synchronized...|__java_lang_String@synchronizedmethod.SynchronizedMethod
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|synchronized...|__synchronizedmethod_SynchronizedMethod) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|synchronized...|__synchronizedmethod_SynchronizedMethod))
    (then
     (global.set $f_$string_|synchronized...|__synchronizedmethod_SynchronizedMethod (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "synchronizedmethod.SynchronizedMethod")))
    )

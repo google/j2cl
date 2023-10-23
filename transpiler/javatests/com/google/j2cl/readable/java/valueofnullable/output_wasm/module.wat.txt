@@ -107,7 +107,7 @@
 (func $$getClassMetadata__java_lang_Class@valueofnullable.ValueOfNullable
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__valueofnullable_ValueOfNullable) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__valueofnullable_ValueOfNullable))
    (then
     (global.set $f_$class__valueofnullable_ValueOfNullable (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|valueofnulla...|__java_lang_String (ref.func $$getString_|valueofnulla...|__java_lang_String@valueofnullable.ValueOfNullable) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -133,7 +133,7 @@
 (func $$getString_|b|__java_lang_String@valueofnullable.ValueOfNullable
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|b|__valueofnullable_ValueOfNullable) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|b|__valueofnullable_ValueOfNullable))
    (then
     (global.set $f_$string_|b|__valueofnullable_ValueOfNullable (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "b")))
    )
@@ -146,7 +146,7 @@
 (func $$getString_|valueofnulla...|__java_lang_String@valueofnullable.ValueOfNullable
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|valueofnulla...|__valueofnullable_ValueOfNullable) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|valueofnulla...|__valueofnullable_ValueOfNullable))
    (then
     (global.set $f_$string_|valueofnulla...|__valueofnullable_ValueOfNullable (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "valueofnullable.ValueOfNullable")))
    )

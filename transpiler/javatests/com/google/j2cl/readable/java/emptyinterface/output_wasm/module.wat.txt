@@ -30,7 +30,7 @@
 (func $$getClassMetadata__java_lang_Class@emptyinterface.EmptyInterface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__emptyinterface_EmptyInterface) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__emptyinterface_EmptyInterface))
    (then
     (global.set $f_$class__emptyinterface_EmptyInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|emptyinterfa...|__java_lang_String (ref.func $$getString_|emptyinterfa...|__java_lang_String@emptyinterface.EmptyInterface) )))
    )
@@ -43,7 +43,7 @@
 (func $$getString_|emptyinterfa...|__java_lang_String@emptyinterface.EmptyInterface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|emptyinterfa...|__emptyinterface_EmptyInterface) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|emptyinterfa...|__emptyinterface_EmptyInterface))
    (then
     (global.set $f_$string_|emptyinterfa...|__emptyinterface_EmptyInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "emptyinterface.EmptyInterface")))
    )

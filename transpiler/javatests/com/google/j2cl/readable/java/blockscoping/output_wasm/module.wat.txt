@@ -137,7 +137,7 @@
 (func $$getClassMetadata__java_lang_Class@blockscoping.BlockScoping
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__blockscoping_BlockScoping) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__blockscoping_BlockScoping))
    (then
     (global.set $f_$class__blockscoping_BlockScoping (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|blockscoping...|__java_lang_String (ref.func $$getString_|blockscoping...|__java_lang_String@blockscoping.BlockScoping) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -163,7 +163,7 @@
 (func $$getString_|blockscoping...|__java_lang_String@blockscoping.BlockScoping
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|blockscoping...|__blockscoping_BlockScoping) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|blockscoping...|__blockscoping_BlockScoping))
    (then
     (global.set $f_$string_|blockscoping...|__blockscoping_BlockScoping (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "blockscoping.BlockScoping")))
    )

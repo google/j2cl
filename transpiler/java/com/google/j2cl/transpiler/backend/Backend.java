@@ -414,9 +414,7 @@ public enum Backend {
           StaticallyEvaluateStringComparison::new,
           ImplementStringConcatenation::new,
           // TODO(b/288145845): Add InsertJsEnumBoxingAndUnboxingConversions here.
-          // Rewrite 'a != b' to '!(a == b)'
           // Must run after InsertJsEnumBoxingAndUnboxingConversions.
-          RewriteReferenceEqualityOperations::new,
           PropagateJsEnumConstants::new,
           InsertNarrowingReferenceConversions::new,
           () -> new InsertUnboxingConversions(/* areBooleanAndDoubleBoxed= */ true),
@@ -459,10 +457,15 @@ public enum Backend {
           ImplementArraysAsClasses::new,
           InsertExceptionConversionsWasm::new,
           NormalizeInstantiationThroughFactoryMethods::new,
-          NormalizeNullLiterals::new,
           RemoveCustomIsInstanceMethods::new,
           RemoveNoopStatements::new,
           UpgradeInterfaceDispatch::new,
+
+          // Passes that transform the AST to match the requirements of the Wasm instruction set.
+          // Make null literals to have the type required by their use.
+          NormalizeNullLiterals::new,
+          // Rewrite 'a != b' to '!(a == b)'
+          RewriteReferenceEqualityOperations::new,
 
           // Post-verifications
           VerifySingleAstReference::new,
@@ -550,9 +553,7 @@ public enum Backend {
           StaticallyEvaluateStringComparison::new,
           ImplementStringConcatenation::new,
           // TODO(b/288145845): Add InsertJsEnumBoxingAndUnboxingConversions here.
-          // Rewrite 'a != b' to '!(a == b)'
           // Must run after InsertJsEnumBoxingAndUnboxingConversions.
-          RewriteReferenceEqualityOperations::new,
           PropagateJsEnumConstants::new,
           InsertNarrowingReferenceConversions::new,
           () -> new InsertUnboxingConversions(/* areBooleanAndDoubleBoxed= */ true),
@@ -596,9 +597,14 @@ public enum Backend {
 
           // TODO(b/283154656): Fork the instantiation code for the modular pipeline.
           // NormalizeInstantiationThroughFactoryMethods::new,
-          NormalizeNullLiterals::new,
           RemoveCustomIsInstanceMethods::new,
           RemoveNoopStatements::new,
+
+          // Passes that transform the AST to match the requirements of the Wasm instruction set.
+          // Make null literals to have the type required by their use.
+          NormalizeNullLiterals::new,
+          // Rewrite 'a != b' to '!(a == b)'
+          RewriteReferenceEqualityOperations::new,
 
           // Post-verifications
           VerifySingleAstReference::new,

@@ -183,7 +183,7 @@
 (func $$getClassMetadata__java_lang_Class@jsbridgebackward.MyJsInterface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__jsbridgebackward_MyJsInterface) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__jsbridgebackward_MyJsInterface))
    (then
     (global.set $f_$class__jsbridgebackward_MyJsInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsbridgeback...|__java_lang_String (ref.func $$getString_|jsbridgeback...|__java_lang_String@jsbridgebackward.MyJsInterface) )))
    )
@@ -196,7 +196,7 @@
 (func $$getString_|jsbridgeback...|__java_lang_String@jsbridgebackward.MyJsInterface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|jsbridgeback...|__jsbridgebackward_MyJsInterface) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|jsbridgeback...|__jsbridgebackward_MyJsInterface))
    (then
     (global.set $f_$string_|jsbridgeback...|__jsbridgebackward_MyJsInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsbridgebackward.MyJsInterface")))
    )
@@ -272,7 +272,7 @@
 (func $$getClassMetadata__java_lang_Class@jsbridgebackward.A
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__jsbridgebackward_A) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__jsbridgebackward_A))
    (then
     (global.set $f_$class__jsbridgebackward_A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsbridgeback...|__java_lang_String (ref.func $$getString_|jsbridgeback...|__java_lang_String@jsbridgebackward.A) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -298,7 +298,7 @@
 (func $$getString_|jsbridgeback...|__java_lang_String@jsbridgebackward.A
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|jsbridgeback...|__jsbridgebackward_A) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|jsbridgeback...|__jsbridgebackward_A))
    (then
     (global.set $f_$string_|jsbridgeback...|__jsbridgebackward_A (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsbridgebackward.A")))
    )
@@ -358,7 +358,7 @@
 (func $$getClassMetadata__java_lang_Class@jsbridgebackward.InterfaceImpl
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__jsbridgebackward_InterfaceImpl) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__jsbridgebackward_InterfaceImpl))
    (then
     (global.set $f_$class__jsbridgebackward_InterfaceImpl (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsbridgeback...|__java_lang_String (ref.func $$getString_|jsbridgeback...|__java_lang_String@jsbridgebackward.InterfaceImpl) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsbridgebackward.A) )))
    )
@@ -384,7 +384,7 @@
 (func $$getString_|jsbridgeback...|__java_lang_String@jsbridgebackward.InterfaceImpl
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|jsbridgeback...|__jsbridgebackward_InterfaceImpl) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|jsbridgeback...|__jsbridgebackward_InterfaceImpl))
    (then
     (global.set $f_$string_|jsbridgeback...|__jsbridgebackward_InterfaceImpl (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsbridgebackward.InterfaceImpl")))
    )
@@ -460,7 +460,7 @@
 (func $$getClassMetadata__java_lang_Class@jsbridgebackward.SubInterfaceImpl
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__jsbridgebackward_SubInterfaceImpl) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__jsbridgebackward_SubInterfaceImpl))
    (then
     (global.set $f_$class__jsbridgebackward_SubInterfaceImpl (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsbridgeback...|__java_lang_String (ref.func $$getString_|jsbridgeback...|__java_lang_String@jsbridgebackward.SubInterfaceImpl) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsbridgebackward.InterfaceImpl) )))
    )
@@ -486,7 +486,7 @@
 (func $$getString_|jsbridgeback...|__java_lang_String@jsbridgebackward.SubInterfaceImpl
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|jsbridgeback...|__jsbridgebackward_SubInterfaceImpl) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|jsbridgeback...|__jsbridgebackward_SubInterfaceImpl))
    (then
     (global.set $f_$string_|jsbridgeback...|__jsbridgebackward_SubInterfaceImpl (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsbridgebackward.SubInterfaceImpl")))
    )

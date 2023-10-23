@@ -95,7 +95,7 @@
 (func $$getClassMetadata__java_lang_Class@publicinstancefields.PublicInstanceFields
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.eq (global.get $f_$class__publicinstancefields_PublicInstanceFields) (ref.null $java.lang.Class))
+  (if (ref.is_null (global.get $f_$class__publicinstancefields_PublicInstanceFields))
    (then
     (global.set $f_$class__publicinstancefields_PublicInstanceFields (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|publicinstan...|__java_lang_String (ref.func $$getString_|publicinstan...|__java_lang_String@publicinstancefields.PublicInstanceFields) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
@@ -121,7 +121,7 @@
 (func $$getString_|publicinstan...|__java_lang_String@publicinstancefields.PublicInstanceFields
  (result (ref null $java.lang.String))
  (block
-  (if (ref.eq (global.get $f_$string_|publicinstan...|__publicinstancefields_PublicInstanceFields) (ref.null $java.lang.String))
+  (if (ref.is_null (global.get $f_$string_|publicinstan...|__publicinstancefields_PublicInstanceFields))
    (then
     (global.set $f_$string_|publicinstan...|__publicinstancefields_PublicInstanceFields (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "publicinstancefields.PublicInstanceFields")))
    )
