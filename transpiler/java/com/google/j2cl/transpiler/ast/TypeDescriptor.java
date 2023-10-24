@@ -79,6 +79,11 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
     return false;
   }
 
+  /** Returns whether the described type is an array of native js type. */
+  public boolean isNativeJsArray() {
+    return false;
+  }
+
   /** Returns whether the described type is a class. */
   public boolean isClass() {
     return false;

@@ -21,6 +21,7 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static com.google.common.collect.MoreCollectors.onlyElement;
 
+import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -84,7 +85,6 @@ import java.util.Optional;
 import java.util.Queue;
 import java.util.Set;
 import java.util.function.BiFunction;
-import java.util.function.Predicate;
 import javax.annotation.Nullable;
 
 /** Checks and throws errors for invalid JsInterop constructs. */
@@ -143,6 +143,12 @@ public class JsInteropRestrictionsChecker {
       }
     }
 
+    if (checkWasmRestrictions && !typeDeclaration.isNative()) {
+      if (!checkNativeTypeSubtype(type)) {
+        return;
+      }
+    }
+
     if (typeDeclaration.isJsType()) {
       if (!checkJsType(type)) {
         return;
@@ -174,11 +180,12 @@ public class JsInteropRestrictionsChecker {
     for (Member member : type.getMembers()) {
       checkMember(member);
     }
-    checkTypeReferences(type);
+    checkTypeLiteralsAndInstanceOfs(type);
     checkJsEnumUsages(type);
     checkJsFunctionLambdas(type);
     checkSystemProperties(type);
 
+    checkNativeTypeUsagesInWasm(type);
     checkNativeTypesAssignabilityInWasm(type);
   }
 
@@ -237,6 +244,55 @@ public class JsInteropRestrictionsChecker {
             }
           }
         });
+  }
+
+  private boolean checkNativeTypeSubtype(Type type) {
+    if (type.getDeclaration().isNative()) {
+      return true;
+    }
+
+    Optional<DeclaredTypeDescriptor> nativeSupertype =
+        type.getSuperTypesStream().filter(TypeDescriptor::isNative).findFirst();
+    if (nativeSupertype.isPresent()) {
+      problems.error(
+          type.getSourcePosition(),
+          "Non-native type '%s' cannot %s native JsType '%s'.",
+          type.getReadableDescription(),
+          type.isInterface() || nativeSupertype.get().isClass() ? "extend" : "implement",
+          nativeSupertype.get().getReadableDescription());
+      return false;
+    }
+
+    return true;
+  }
+
+  private void checkNativeTypeUsagesInWasm(Type type) {
+    if (!checkWasmRestrictions) {
+      return;
+    }
+
+    checkNativeTypeArguments(type);
+    checkNativeTypeArrays(type);
+  }
+
+  private void checkNativeTypeArguments(Type type) {
+    checkAllowedTypes(
+        type,
+        TypeDescriptor::isNative,
+        /* checkNewInstance= */ true,
+        /* onlyCheckTypeArguments= */ true,
+        /* disallowedTypeDescription= */ "type with Native type argument",
+        /* messageSuffix= */ " (b/290992813)");
+  }
+
+  private void checkNativeTypeArrays(Type type) {
+    checkAllowedTypes(
+        type,
+        TypeDescriptor::isNativeJsArray,
+        /* checkNewInstance= */ false,
+        /* onlyCheckTypeArguments= */ false,
+        /* disallowedTypeDescription= */ "Native type array",
+        /* messageSuffix= */ " (b/261079024)");
   }
 
   private void checkNativeTypesAssignabilityInWasm(Type type) {
@@ -784,94 +840,13 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkJsEnumArrays(Type type) {
-    type.accept(
-        new AbstractVisitor() {
-          @Override
-          public void exitVariable(Variable variable) {
-            if (variable.isParameter()) {
-              // Parameters are checked at the declaration site to give a better error message.
-              return;
-            }
-            TypeDescriptor variableTypeDescriptor = variable.getTypeDescriptor();
-            String messagePrefix = String.format("Variable '%s'", variable.getName());
-            SourcePosition sourcePosition = variable.getSourcePosition();
-            errorIfNonNativeJsEnumArray(
-                variableTypeDescriptor,
-                sourcePosition == SourcePosition.NONE
-                    ? getCurrentMember().getSourcePosition()
-                    : sourcePosition,
-                messagePrefix);
-          }
-
-          @Override
-          public void exitMethod(Method method) {
-            checkMethodSignature(
-                method,
-                Predicates.not(JsInteropRestrictionsChecker::hasNonNativeJsEnumArray),
-                " (b/118299062)");
-          }
-
-          @Override
-          public void exitFunctionExpression(FunctionExpression functionExpression) {
-            checkMethodSignature(
-                functionExpression,
-                Predicates.not(JsInteropRestrictionsChecker::hasNonNativeJsEnumArray),
-                " (b/118299062)");
-          }
-
-          @Override
-          public void exitField(Field field) {
-            FieldDescriptor fieldDescriptor = field.getDescriptor();
-            TypeDescriptor fieldTypeDescriptor = fieldDescriptor.getTypeDescriptor();
-            String messagePrefix = String.format("Field '%s'", field.getReadableDescription());
-            errorIfNonNativeJsEnumArray(
-                fieldTypeDescriptor, field.getSourcePosition(), messagePrefix);
-          }
-
-          @Override
-          public void exitFieldAccess(FieldAccess fieldAccess) {
-            TypeDescriptor inferredTypeDescriptor = fieldAccess.getTypeDescriptor();
-            TypeDescriptor declaredTypeDescriptor =
-                fieldAccess.getTarget().getDeclarationDescriptor().getTypeDescriptor();
-            if (inferredTypeDescriptor.equals(declaredTypeDescriptor)) {
-              // No inference, the error will be given at declaration if needed.
-              return;
-            }
-            String messagePrefix =
-                String.format(
-                    "Reference to field '%s'", fieldAccess.getTarget().getReadableDescription());
-            errorIfNonNativeJsEnumArray(
-                inferredTypeDescriptor, getCurrentMember().getSourcePosition(), messagePrefix);
-          }
-
-          @Override
-          public void exitMethodCall(MethodCall methodCall) {
-            TypeDescriptor inferredTypeDescriptor =
-                methodCall.getTarget().getReturnTypeDescriptor();
-            TypeDescriptor declaredTypeDescriptor =
-                methodCall.getTarget().getDeclarationDescriptor().getReturnTypeDescriptor();
-            if (inferredTypeDescriptor.equals(declaredTypeDescriptor)) {
-              // No inference, the error will be given at declaration if needed.
-              return;
-            }
-            String messagePrefix =
-                String.format(
-                    "Returned type in call to method '%s'",
-                    methodCall.getTarget().getReadableDescription());
-            errorIfNonNativeJsEnumArray(
-                inferredTypeDescriptor, getCurrentMember().getSourcePosition(), messagePrefix);
-          }
-
-          @Override
-          public void exitNewArray(NewArray newArray) {
-            ArrayTypeDescriptor newArrayTypeDescriptor = newArray.getTypeDescriptor();
-            // TODO(b/65465035): Emit the expression source position when it is tracked, and avoid
-            // toString() in an AST nodes.
-            String messagePrefix = String.format("Array creation '%s'", newArray);
-            errorIfNonNativeJsEnumArray(
-                newArrayTypeDescriptor, getCurrentMember().getSourcePosition(), messagePrefix);
-          }
-        });
+    checkAllowedTypes(
+        type,
+        AstUtils::isNonNativeJsEnumArray,
+        /* checkNewInstance= */ false,
+        /* onlyCheckTypeArguments= */ false,
+        /* disallowedTypeDescription= */ "JsEnum array",
+        /* messageSuffix= */ " (b/118299062)");
   }
 
   private void checkJsEnumValueFieldAssignment(Type type) {
@@ -908,7 +883,7 @@ public class JsInteropRestrictionsChecker {
   }
 
   /** Checks that type references in casts, instanceof and type literals are valid. */
-  private void checkTypeReferences(Type type) {
+  private void checkTypeLiteralsAndInstanceOfs(Type type) {
     type.accept(
         new AbstractVisitor() {
           @Override
@@ -921,6 +896,13 @@ public class JsInteropRestrictionsChecker {
                   instanceOfExpression.getSourcePosition(),
                   "Cannot do instanceof against native JsType interface '%s'.",
                   testTypeDescriptor.getReadableDescription());
+            } else if (checkWasmRestrictions && testTypeDescriptor.isNative()) {
+              // We currently do a "ref.test extern" in Wasm for instanceof for all native types,
+              // which is not useful.
+              problems.error(
+                  instanceOfExpression.getSourcePosition(),
+                  "Cannot do instanceof against native JsType '%s'.",
+                  testTypeDescriptor.getReadableDescription());
             } else if (testTypeDescriptor.isJsFunctionImplementation()) {
               problems.error(
                   instanceOfExpression.getSourcePosition(),
@@ -931,23 +913,6 @@ public class JsInteropRestrictionsChecker {
                   instanceOfExpression.getSourcePosition(),
                   "Cannot do instanceof against native JsEnum '%s'.",
                   testTypeDescriptor.getReadableDescription());
-            } else if (hasNonNativeJsEnumArray(testTypeDescriptor)) {
-              problems.error(
-                  instanceOfExpression.getSourcePosition(),
-                  "Cannot do instanceof against JsEnum array '%s'. (b/118299062)",
-                  testTypeDescriptor.getReadableDescription());
-            }
-          }
-
-          @Override
-          public void exitCastExpression(CastExpression castExpression) {
-            TypeDescriptor castTypeDescriptor = castExpression.getCastTypeDescriptor();
-            if (hasNonNativeJsEnumArray(castTypeDescriptor)) {
-              // TODO(b/65465035): Emit the expression source position when it is tracked.
-              problems.error(
-                  getCurrentMember().getSourcePosition(),
-                  "Cannot cast to JsEnum array '%s'. (b/118299062)",
-                  castTypeDescriptor.getReadableDescription());
             }
           }
 
@@ -962,29 +927,6 @@ public class JsInteropRestrictionsChecker {
             }
           }
         });
-  }
-
-  private void errorIfNonNativeJsEnumArray(
-      TypeDescriptor typeDescriptor, SourcePosition sourcePosition, String messagePrefix) {
-    if (hasNonNativeJsEnumArray(typeDescriptor)) {
-      problems.error(
-          sourcePosition,
-          "%s cannot be of type '%s'. (b/118299062)",
-          messagePrefix,
-          typeDescriptor.getReadableDescription());
-    }
-  }
-
-  private static boolean hasNonNativeJsEnumArray(TypeDescriptor typeDescriptor) {
-    if (AstUtils.isNonNativeJsEnumArray(typeDescriptor)) {
-      return true;
-    }
-    if (typeDescriptor instanceof DeclaredTypeDescriptor) {
-      DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
-      return declaredTypeDescriptor.getTypeArgumentDescriptors().stream()
-          .anyMatch(JsInteropRestrictionsChecker::hasNonNativeJsEnumArray);
-    }
-    return false;
   }
 
   private boolean checkJsType(Type type) {
@@ -2338,5 +2280,221 @@ public class JsInteropRestrictionsChecker {
         prefix,
         member.getReadableDescription());
     wasUnusableByJsWarningReported = true;
+  }
+
+  /**
+   * Checks the specified {@link Type} structure for any reference to invalid types as specified by
+   * `isTypeDisallowed`.
+   */
+  private void checkAllowedTypes(
+      Type type,
+      Predicate<TypeDescriptor> isTypeDisallowed,
+      boolean checkNewInstance,
+      boolean onlyCheckTypeArguments,
+      String disallowedTypeDescription,
+      String messageSuffix) {
+    type.accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitType(Type nestedType) {
+            TypeDescriptor superTypeDescriptor = type.getTypeDescriptor().getSuperTypeDescriptor();
+            if (superTypeDescriptor == null) {
+              return;
+            }
+            String messagePrefix =
+                String.format("Supertype of '%s'", nestedType.getReadableDescription());
+            errorIfDisallowedType(
+                superTypeDescriptor,
+                isTypeDisallowed,
+                onlyCheckTypeArguments,
+                nestedType.getSourcePosition(),
+                messagePrefix,
+                messageSuffix);
+          }
+
+          @Override
+          public void exitVariable(Variable variable) {
+            if (variable.isParameter()) {
+              // Parameters are checked at the declaration site to give a better error message.
+              return;
+            }
+            TypeDescriptor variableTypeDescriptor = variable.getTypeDescriptor();
+            String messagePrefix = String.format("Variable '%s'", variable.getName());
+            SourcePosition sourcePosition = variable.getSourcePosition();
+            errorIfDisallowedType(
+                variableTypeDescriptor,
+                isTypeDisallowed,
+                onlyCheckTypeArguments,
+                sourcePosition == SourcePosition.NONE
+                    ? getCurrentMember().getSourcePosition()
+                    : sourcePosition,
+                messagePrefix,
+                messageSuffix);
+          }
+
+          @Override
+          public void exitMethod(Method method) {
+            checkMethodSignature(
+                method,
+                Predicates.not(t -> hasDisallowedType(t, isTypeDisallowed, onlyCheckTypeArguments)),
+                messageSuffix);
+          }
+
+          @Override
+          public void exitFunctionExpression(FunctionExpression functionExpression) {
+            checkMethodSignature(
+                functionExpression,
+                Predicates.not(t -> hasDisallowedType(t, isTypeDisallowed, onlyCheckTypeArguments)),
+                messageSuffix);
+          }
+
+          @Override
+          public void exitField(Field field) {
+            FieldDescriptor fieldDescriptor = field.getDescriptor();
+            TypeDescriptor fieldTypeDescriptor = fieldDescriptor.getTypeDescriptor();
+            String messagePrefix = String.format("Field '%s'", field.getReadableDescription());
+            errorIfDisallowedType(
+                fieldTypeDescriptor,
+                isTypeDisallowed,
+                onlyCheckTypeArguments,
+                field.getSourcePosition(),
+                messagePrefix,
+                messageSuffix);
+          }
+
+          @Override
+          public void exitFieldAccess(FieldAccess fieldAccess) {
+            TypeDescriptor inferredTypeDescriptor = fieldAccess.getTypeDescriptor();
+            TypeDescriptor declaredTypeDescriptor =
+                fieldAccess.getTarget().getDeclarationDescriptor().getTypeDescriptor();
+            if (inferredTypeDescriptor.equals(declaredTypeDescriptor)) {
+              // No inference, the error will be given at declaration if needed.
+              return;
+            }
+            String messagePrefix =
+                String.format(
+                    "Reference to field '%s'", fieldAccess.getTarget().getReadableDescription());
+            errorIfDisallowedType(
+                inferredTypeDescriptor,
+                isTypeDisallowed,
+                onlyCheckTypeArguments,
+                getCurrentMember().getSourcePosition(),
+                messagePrefix,
+                messageSuffix);
+          }
+
+          @Override
+          public void exitMethodCall(MethodCall methodCall) {
+            TypeDescriptor inferredTypeDescriptor =
+                methodCall.getTarget().getReturnTypeDescriptor();
+            TypeDescriptor declaredTypeDescriptor =
+                methodCall.getTarget().getDeclarationDescriptor().getReturnTypeDescriptor();
+            if (inferredTypeDescriptor.equals(declaredTypeDescriptor)) {
+              // No inference, the error will be given at declaration if needed.
+              return;
+            }
+            String messagePrefix =
+                String.format(
+                    "Returned type in call to method '%s'",
+                    methodCall.getTarget().getReadableDescription());
+            errorIfDisallowedType(
+                inferredTypeDescriptor,
+                isTypeDisallowed,
+                onlyCheckTypeArguments,
+                getCurrentMember().getSourcePosition(),
+                messagePrefix,
+                messageSuffix);
+          }
+
+          @Override
+          public void exitNewArray(NewArray newArray) {
+            ArrayTypeDescriptor newArrayTypeDescriptor = newArray.getTypeDescriptor();
+            // TODO(b/65465035): Emit the expression source position when it is tracked, and avoid
+            // toString() in an AST nodes.
+            String messagePrefix = String.format("Array creation '%s'", newArray);
+            errorIfDisallowedType(
+                newArrayTypeDescriptor,
+                isTypeDisallowed,
+                onlyCheckTypeArguments,
+                getCurrentMember().getSourcePosition(),
+                messagePrefix,
+                messageSuffix);
+          }
+
+          @Override
+          public void exitNewInstance(NewInstance newInstance) {
+            if (!checkNewInstance) {
+              return;
+            }
+            TypeDescriptor instanceTypeDescriptor = newInstance.getTypeDescriptor();
+            String messagePrefix = String.format("Object creation '%s'", newInstance);
+            errorIfDisallowedType(
+                instanceTypeDescriptor,
+                isTypeDisallowed,
+                onlyCheckTypeArguments,
+                getCurrentMember().getSourcePosition(),
+                messagePrefix,
+                messageSuffix);
+          }
+
+          @Override
+          public void exitInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
+            TypeDescriptor testTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
+            if (hasDisallowedType(testTypeDescriptor, isTypeDisallowed, onlyCheckTypeArguments)) {
+              problems.error(
+                  instanceOfExpression.getSourcePosition(),
+                  "Cannot do instanceof against %s '%s'.%s",
+                  disallowedTypeDescription,
+                  testTypeDescriptor.getReadableDescription(),
+                  messageSuffix);
+            }
+          }
+
+          @Override
+          public void exitCastExpression(CastExpression castExpression) {
+            TypeDescriptor castTypeDescriptor = castExpression.getCastTypeDescriptor();
+            if (hasDisallowedType(castTypeDescriptor, isTypeDisallowed, onlyCheckTypeArguments)) {
+              // TODO(b/65465035): Emit the expression source position when it is tracked.
+              problems.error(
+                  getCurrentMember().getSourcePosition(),
+                  "Cannot cast to %s '%s'.%s",
+                  disallowedTypeDescription,
+                  castTypeDescriptor.getReadableDescription(),
+                  messageSuffix);
+            }
+          }
+        });
+  }
+
+  private void errorIfDisallowedType(
+      TypeDescriptor typeDescriptor,
+      Predicate<TypeDescriptor> isTypeDisallowed,
+      boolean onlyCheckTypeArguments,
+      SourcePosition sourcePosition,
+      String messagePrefix,
+      String messageSuffix) {
+    if (hasDisallowedType(typeDescriptor, isTypeDisallowed, onlyCheckTypeArguments)) {
+      problems.error(
+          sourcePosition,
+          "%s cannot be of type '%s'.%s",
+          messagePrefix,
+          typeDescriptor.getReadableDescription(),
+          messageSuffix);
+    }
+  }
+
+  private static boolean hasDisallowedType(
+      TypeDescriptor typeDescriptor,
+      Predicate<TypeDescriptor> isTypeDisallowed,
+      boolean onlyCheckTypeArguments) {
+    if (!onlyCheckTypeArguments && isTypeDisallowed.test(typeDescriptor)) {
+      return true;
+    }
+    if (typeDescriptor instanceof DeclaredTypeDescriptor) {
+      DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
+      return declaredTypeDescriptor.getTypeArgumentDescriptors().stream()
+          .anyMatch(t -> hasDisallowedType(t, isTypeDisallowed, false));
+    }
+    return false;
   }
 }

@@ -71,6 +71,12 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
         || (TypeDescriptors.isJavaLangObject(rawLeafTypeDescriptor) && getDimensions() == 1);
   }
 
+  /** Returns true if the leaf type is native. */
+  @Override
+  public boolean isNativeJsArray() {
+    return getLeafTypeDescriptor().toRawTypeDescriptor().isNative();
+  }
+
   /**
    * Returns true for arrays where raw wasm array representation is enough. These arrays are located
    * in {@see javaemul.internal.WasmArrays}.
