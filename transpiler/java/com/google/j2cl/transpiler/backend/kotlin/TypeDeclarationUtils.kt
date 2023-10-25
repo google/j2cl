@@ -83,18 +83,20 @@ internal val MemberDescriptor.ktVisibility: KtVisibility
       // All interface methods are public in Kotlin, and Java allows non-public static members, so
       // we map them to public.
       isInterfaceMethod -> KtVisibility.PUBLIC
-      else ->
-        when (visibility!!) {
-          Visibility.PUBLIC -> KtVisibility.PUBLIC
-          // Map protected to public, to allow access within the same package across different
-          // types.
-          Visibility.PROTECTED -> KtVisibility.PUBLIC
-          // Map package-private to internal.
-          Visibility.PACKAGE_PRIVATE -> KtVisibility.INTERNAL
-          // Map private to internal, to allow access to members in the same file across different
-          // types.
-          Visibility.PRIVATE -> KtVisibility.INTERNAL
-        }
+      else -> visibility!!.memberKtVisibility
+    }
+
+internal val Visibility.memberKtVisibility: KtVisibility
+  get() =
+    when (this) {
+      Visibility.PUBLIC -> KtVisibility.PUBLIC
+      // Map protected to public, to allow access within the same package across different types.
+      Visibility.PROTECTED -> KtVisibility.PUBLIC
+      // Map package-private to internal.
+      Visibility.PACKAGE_PRIVATE -> KtVisibility.INTERNAL
+      // Map private to internal, to allow access to members in the same file across different
+      // types.
+      Visibility.PRIVATE -> KtVisibility.INTERNAL
     }
 
 /** Inferred visibility, which does not require explicit visibility modifier in the source code. */

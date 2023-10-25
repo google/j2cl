@@ -31,7 +31,7 @@ fun interface MyInterface {
  fun intfFoo(): Int
 }
 
-open class SuperParent {
+open class SuperParent internal constructor() {
  @ObjCName("fun")
  open fun `fun`(
   @ObjCName("withInt") a: Int,
@@ -49,7 +49,7 @@ open class SuperParent {
  }
 }
 
-open class Parent: SuperParent() {
+open class Parent internal constructor(): SuperParent() {
  @JsMethod(name = "sum")
  open override fun `fun`(a: Int, b: Int): Int {
   return a + b
@@ -69,7 +69,7 @@ open class Parent: SuperParent() {
  }
 }
 
-open class Child: Parent(), MyInterface {
+open class Child internal constructor(): Parent(), MyInterface {
  open override fun `fun`(a: Int, b: Int): Int {
   return a + b + 1
  }

@@ -177,10 +177,10 @@ open class JsDocTypeMappings {
  }
 
  @JsType(name = "Array", namespace = JsPackage.GLOBAL, isNative = true)
- open class NativeType {}
+ open class NativeType internal constructor() {}
 
  @JsType(name = "ExportedTypeNewName")
- open inner class ExportedType {}
+ open inner class ExportedType internal constructor() {}
 
  @JsType(name = "number", namespace = JsPackage.GLOBAL, isNative = true)
  interface NativeNumber {}

@@ -30,7 +30,7 @@ import kotlin.native.ObjCName
 
 @ObjCName("J2ktJ2ktnotpassingDefinitelyNotNull", exact = true)
 open class DefinitelyNotNull {
- open class Ordering<T> {
+ open class Ordering<T> internal constructor() {
   internal open fun <S: T> reverse_pp_j2ktnotpassing(): DefinitelyNotNull.Ordering<S> {
    throw RuntimeException()
   }
@@ -40,7 +40,7 @@ open class DefinitelyNotNull {
   }
  }
 
- inner class NullsFirstOrdering<T>(ordering: DefinitelyNotNull.Ordering<in T>): DefinitelyNotNull.Ordering<T?>() {
+ inner class NullsFirstOrdering<T> constructor(ordering: DefinitelyNotNull.Ordering<in T>): DefinitelyNotNull.Ordering<T?>() {
   @JvmField
   internal val ordering_pp_j2ktnotpassing: DefinitelyNotNull.Ordering<in T>
 

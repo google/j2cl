@@ -32,15 +32,15 @@ open class NestedLocalClasses {
   @ObjCName("withInt") p: Int
  ) {
   val localVar: Int = 1
-  open class InnerClass {
+  open class InnerClass internal constructor() {
    open fun `fun`() {
     val localVarInInnerClass: Int = 1
-    open class InnerInnerClass {
+    open class InnerInnerClass internal constructor() {
      @JvmField
      var fieldInInnerInnerClass: Int = localVar + localVarInInnerClass
     }
     InnerInnerClass()
-    open class ClassIndirectlyCapturingLocal {
+    open class ClassIndirectlyCapturingLocal internal constructor() {
      init {
       InnerInnerClass()
      }
@@ -52,7 +52,7 @@ open class NestedLocalClasses {
  interface InterfaceWithThisReference {
   @ObjCName("foo")
   fun foo() {
-   open class Super: NestedLocalClasses.InterfaceWithThisReference {}
+   open class Super internal constructor(): NestedLocalClasses.InterfaceWithThisReference {}
    object : Super() {}
   }
  }

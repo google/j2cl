@@ -106,7 +106,7 @@ class NullabilityPropagation {
   ): String
  }
 
- open inner class Subtype: NullabilityPropagation.NullabilityToPropagate<String?, String>, NullabilityPropagation.Interface {
+ open inner class Subtype internal constructor(): NullabilityPropagation.NullabilityToPropagate<String?, String>, NullabilityPropagation.Interface {
   open override fun nullableString1(s: String?): String? {
    return s
   }
@@ -164,7 +164,7 @@ class NullabilityPropagation {
   }
  }
 
- open inner class SubSubType: NullabilityPropagation.Subtype() {
+ open inner class SubSubType internal constructor(): NullabilityPropagation.Subtype() {
   open override fun nonNullStringTransitive(s: String): String {
    return s
   }

@@ -34,7 +34,7 @@ open class BridgeMethodShadowedSignature {
   ): String?
  }
 
- abstract class B<B1, B2>: BridgeMethodShadowedSignature.I<B1> {
+ abstract class B<B1, B2> internal constructor(): BridgeMethodShadowedSignature.I<B1> {
   @ObjCName("get")
   open fun get(
    @ObjCName("withId") consumer: B2
@@ -43,5 +43,5 @@ open class BridgeMethodShadowedSignature {
   }
  }
 
- open class C<C1>: BridgeMethodShadowedSignature.B<C1, Consumer<in C1>?>(), BridgeMethodShadowedSignature.I<C1> {}
+ open class C<C1> internal constructor(): BridgeMethodShadowedSignature.B<C1, Consumer<in C1>?>(), BridgeMethodShadowedSignature.I<C1> {}
 }

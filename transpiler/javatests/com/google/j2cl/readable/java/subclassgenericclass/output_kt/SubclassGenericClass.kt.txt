@@ -23,9 +23,9 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-open class GenericClass<T> {}
+open class GenericClass<T> internal constructor() {}
 
-open class GenericSubclassGenericClass<T>: GenericClass<T>() {}
+open class GenericSubclassGenericClass<T> internal constructor(): GenericClass<T>() {}
 
 @ObjCName("J2ktSubclassgenericclassSubclassGenericClass", exact = true)
 open class SubclassGenericClass: GenericClass<SubclassGenericClass?>() {}

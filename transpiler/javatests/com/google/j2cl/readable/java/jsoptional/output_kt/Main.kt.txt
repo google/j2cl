@@ -86,7 +86,7 @@ open class Main {
   ): Any?
  }
 
- class AFunction: Main.Function {
+ class AFunction internal constructor(): Main.Function {
   override fun f1(@JsOptional i: String?, vararg args: Any?): Any? {
    val args_1: Array<Any?>? = args as Array<Any?>?
    return args_1!![0]
@@ -103,18 +103,18 @@ open class Main {
  }
 
  @JsType
- open class TemplatedSubtype<T: String?>: Main.I<T> {
+ open class TemplatedSubtype<T: String?> internal constructor(): Main.I<T> {
   open override fun m(t: T, @JsOptional o: Any?) {}
  }
 
  @JsType
- open inner class SpecializedSubtype(
+ open inner class SpecializedSubtype constructor(
   @ObjCName("Id") @JsOptional a: Any?
  ): Main.I<String?> {
   open override fun m(t: String?, @JsOptional o: Any?) {}
  }
 
- open class NonJsTypeSubtype: Main.I<String?> {
+ open class NonJsTypeSubtype internal constructor(): Main.I<String?> {
   open override fun m(t: String?, @JsOptional o: Any?) {}
  }
 }

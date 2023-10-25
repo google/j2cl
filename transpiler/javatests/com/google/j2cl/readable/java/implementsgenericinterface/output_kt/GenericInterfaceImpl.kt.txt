@@ -28,7 +28,7 @@ interface GenericInterface<T> {}
 
 interface GenericSubInterface<T>: GenericInterface<T> {}
 
-open class GenericInterfaceGenericImpl<T>: GenericInterface<T> {}
+open class GenericInterfaceGenericImpl<T> internal constructor(): GenericInterface<T> {}
 
 @ObjCName("J2ktImplementsgenericinterfaceGenericInterfaceImpl", exact = true)
 open class GenericInterfaceImpl: GenericInterface<Number?> {}

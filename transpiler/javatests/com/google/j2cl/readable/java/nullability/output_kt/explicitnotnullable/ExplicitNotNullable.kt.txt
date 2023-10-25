@@ -554,25 +554,25 @@ open class ExplicitNotNullable {
   ): O
  }
 
- open class DependentTypeParameters<E: Any, T: E?> {
+ open class DependentTypeParameters<E: Any, T: E?> internal constructor() {
   internal open fun getThis_pp_nullability_explicitnotnullable(): ExplicitNotNullable.DependentTypeParameters<E, T> {
    return this
   }
  }
 }
 
-open class DefaultNullable {
+open class DefaultNullable internal constructor() {
  companion object {
   @JvmStatic
   internal fun nullableAccept_pp_nullability_explicitnotnullable(s: String?) {}
  }
 }
 
-open class OuterClass<E: Any> {
+open class OuterClass<E: Any> internal constructor() {
  init {
   object : InnerClass<E>() {}
   object : InnerClass<String>() {}
  }
 
- open inner class InnerClass<E: Any> {}
+ open inner class InnerClass<E: Any> internal constructor() {}
 }

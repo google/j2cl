@@ -25,8 +25,8 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
-open class A {
- open inner class B {}
+open class A internal constructor() {
+ open inner class B internal constructor() {}
 }
 
 @ObjCName("J2ktAnonymousinnerclassAnonymousInnerClass", exact = true)
@@ -38,7 +38,7 @@ open class AnonymousInnerClass {
   val ic: AnonymousInnerClass.InnerClass? = object : InnerClass() {}
   val a: A? = A()
   val b: A.B? = object : B() {}
-  open class C {
+  open class C internal constructor() {
    @JvmField
    var fInC: Int = arg
   }

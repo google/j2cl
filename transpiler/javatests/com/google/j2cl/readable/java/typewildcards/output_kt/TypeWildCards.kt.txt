@@ -37,13 +37,13 @@ fun interface Function<I, O> {
 
 interface List<I> {}
 
-open class GenericType<T> {
+open class GenericType<T> internal constructor() {
  internal open fun get_pp_typewildcards(): T {
   return null as T
  }
 }
 
-open class Bar {}
+open class Bar internal constructor() {}
 
 open class RecursiveType<T: RecursiveType<T>?> {
  constructor(
@@ -188,7 +188,7 @@ open class TypeWildCards {
   fun n()
  }
 
- open class A: TypeWildCards.X {
+ open class A internal constructor(): TypeWildCards.X {
   @JvmField
   internal var f_pp_typewildcards: Int = 0
 
@@ -216,12 +216,12 @@ open class TypeWildCards {
  @ObjCName("J2ktTypewildcardsTypeWildCards_SubOtherElement", exact = true)
  abstract inner class SubOtherElement: TypeWildCards.OtherElement(), TypeWildCards.HasKey {}
 
- open inner class Foo: GenericType<TypeWildCards.Foo?>() {}
+ open inner class Foo internal constructor(): GenericType<TypeWildCards.Foo?>() {}
 
  fun interface RecursiveInterface<T: TypeWildCards.RecursiveInterface<T, C>?, C> {
   @ObjCName("m")
   fun m(): T
  }
 
- open class MultipleGenerics<A, B, C> {}
+ open class MultipleGenerics<A, B, C> internal constructor() {}
 }

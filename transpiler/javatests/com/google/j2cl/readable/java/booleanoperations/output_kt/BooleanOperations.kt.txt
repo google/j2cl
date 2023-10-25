@@ -93,11 +93,11 @@ open class BooleanOperations {
   if (ls || rs) {
    r = true
   }
-  open class Outer {
+  open class Outer internal constructor() {
    @JvmField
    internal var b_pp_booleanoperations: Boolean = false
 
-   open inner class Inner {
+   open inner class Inner internal constructor() {
     init {
      this@Outer.b_pp_booleanoperations = this@Outer.b_pp_booleanoperations.or(true)
     }

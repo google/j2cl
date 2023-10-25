@@ -204,7 +204,7 @@ open class Nullability {
   }
  }
 
- open class Foo<T> {
+ open class Foo<T> internal constructor() {
   internal open fun bar_pp_nullability(t: T) {}
 
   internal open fun baz_pp_nullability(): T? {
@@ -253,7 +253,7 @@ open class Nullability {
   }
  }
 
- open class ParameterizedDefaultNullability<N> {
+ open class ParameterizedDefaultNullability<N> internal constructor() {
   internal open fun getNullable_pp_nullability(): N? {
    return null
   }
@@ -267,7 +267,7 @@ open class Nullability {
   }
  }
 
- open class ParameterizedNullable<N> {
+ open class ParameterizedNullable<N> internal constructor() {
   internal open fun getNullable_pp_nullability(): N? {
    return null
   }
@@ -281,7 +281,7 @@ open class Nullability {
   }
  }
 
- open class ParameterizedNonNullable<N: Any> {
+ open class ParameterizedNonNullable<N: Any> internal constructor() {
   internal open fun getNullable_pp_nullability(): N? {
    return null
   }
@@ -295,21 +295,21 @@ open class Nullability {
   }
  }
 
- open class NonNullableInsideNullable<T> {
+ open class NonNullableInsideNullable<T> internal constructor() {
   internal open fun nonNullableTest_pp_nullability(nonNullable: Nullability.ParameterizedNonNullable<T & Any>?) {}
  }
 
- open class Recursive<T> where T: Nullability.Recursive<T>, T: Marker? {}
+ open class Recursive<T> internal constructor() where T: Nullability.Recursive<T>, T: Marker? {}
 
- open class RecursiveNullable<T> where T: Nullability.RecursiveNullable<T>?, T: Marker? {}
+ open class RecursiveNullable<T> internal constructor() where T: Nullability.RecursiveNullable<T>?, T: Marker? {}
 
- open class RecursiveChild: Nullability.Recursive<Nullability.RecursiveChild>(), Marker {}
+ open class RecursiveChild internal constructor(): Nullability.Recursive<Nullability.RecursiveChild>(), Marker {}
 
- open class RecursiveNullableChild: Nullability.RecursiveNullable<Nullability.RecursiveNullableChild?>(), Marker {}
+ open class RecursiveNullableChild internal constructor(): Nullability.RecursiveNullable<Nullability.RecursiveNullableChild?>(), Marker {}
 
- open class RecursiveParam<T> where T: Nullability.Recursive<T>, T: Marker? {}
+ open class RecursiveParam<T> internal constructor() where T: Nullability.Recursive<T>, T: Marker? {}
 
- open class RecursiveNullableParam<T> where T: Nullability.RecursiveNullable<T>?, T: Marker? {}
+ open class RecursiveNullableParam<T> internal constructor() where T: Nullability.RecursiveNullable<T>?, T: Marker? {}
 }
 
 interface Marker {}

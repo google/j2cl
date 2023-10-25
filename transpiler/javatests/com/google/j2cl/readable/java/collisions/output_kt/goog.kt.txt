@@ -32,7 +32,7 @@ open class goog {}
 
 // native class KtBlah
 
-open class KtBlah {
+open class KtBlah internal constructor() {
  companion object {
   @JvmStatic
   internal fun m_pp_collisions() {}
@@ -44,9 +44,9 @@ open class KtBlah {
  }
 }
 
-open class foo {}
+open class foo internal constructor() {}
 
-open class bar {
+open class bar internal constructor() {
  init {
   val foo: Int = 0
   val bar: Int = 0
@@ -63,7 +63,7 @@ open class bar {
  }
 }
 
-open class Other<T> {
+open class Other<T> internal constructor() {
  init {
   val T_1: Int = 3
   val o: Other<T>? = null as Other<T>?
@@ -76,7 +76,7 @@ open class Other<T> {
  }
 }
 
-open class T<T: Number?> {
+open class T<T: Number?> internal constructor() {
  internal open fun m_pp_collisions(): T {
   return null as T
  }

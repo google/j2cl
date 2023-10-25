@@ -460,7 +460,7 @@ open class AutoBoxing {
 
  @ObjCName("testUnbox_withCast")
  open fun testUnbox_withCast() {
-  open class Supplier<T> {
+  open class Supplier<T> internal constructor() {
    internal open fun get_pp_autoboxing(): T {
     return null as T
    }
@@ -491,7 +491,7 @@ open class AutoBoxing {
     n = Long.valueOf(n!!.toLong() + 1L) as T?
     n
    }
-   open class Local<T: Long?> {
+   open class Local<T: Long?> internal constructor() {
     internal open fun toLong_pp_autoboxing(l: T): Long {
      assert(l!!.equals(Long.valueOf(11L) as Any?))
      return l!!.toLong()
@@ -518,7 +518,7 @@ open class AutoBoxing {
     n = Long.valueOf(n!!.toLong() + 1L) as T?
     n
    }
-   open class Local<T> where T: Long?, T: Comparable<Long>?, T: Long?, T: Comparable<Long>? {
+   open class Local<T> internal constructor() where T: Long?, T: Comparable<Long>?, T: Long?, T: Comparable<Long>? {
     internal open fun toLong_pp_autoboxing(l: T): Long {
      assert(l!!.equals(Long.valueOf(11L) as Any?))
      return l!!.toLong()

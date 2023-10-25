@@ -44,7 +44,7 @@ interface SomeInterface<T, S> {
  )
 }
 
-open class SuperParent<T, S> {
+open class SuperParent<T, S> internal constructor() {
  @ObjCName("foo")
  open fun foo(
   @ObjCName("withId") t: T,
@@ -52,7 +52,7 @@ open class SuperParent<T, S> {
  ) {}
 }
 
-open class Parent<T: Error?>: SuperParent<T, Number?>() {
+open class Parent<T: Error?> internal constructor(): SuperParent<T, Number?>() {
  open override fun foo(t: T, s: Number?) {}
 
  @ObjCName("bar")
@@ -86,13 +86,13 @@ fun interface SomeOtherFooInterface<T> {
  )
 }
 
-open class DualUnrelatedBridges: SomeInterface<String?, Double?>, SomeOtherFooInterface<String?> {
+open class DualUnrelatedBridges internal constructor(): SomeInterface<String?, Double?>, SomeOtherFooInterface<String?> {
  open override fun foo(s: String?, n: Double?) {}
 
  open override fun foo(s: String?, n: Number?) {}
 }
 
-open class SuperDualUnrelatedAccidentalBridges {
+open class SuperDualUnrelatedAccidentalBridges internal constructor() {
  @ObjCName("foo")
  open fun foo(
   @ObjCName("withNSString") s: String?,
@@ -106,7 +106,7 @@ open class SuperDualUnrelatedAccidentalBridges {
  ) {}
 }
 
-open class DualUnrelatedAccidentalBridges: SuperDualUnrelatedAccidentalBridges(), SomeInterface<String?, Double?>, SomeOtherFooInterface<String?> {}
+open class DualUnrelatedAccidentalBridges internal constructor(): SuperDualUnrelatedAccidentalBridges(), SomeInterface<String?, Double?>, SomeOtherFooInterface<String?> {}
 
 fun interface Getter {
  @ObjCName("get")
@@ -115,7 +115,7 @@ fun interface Getter {
  ): String?
 }
 
-open class ClassWithParameterizedGet<T> {
+open class ClassWithParameterizedGet<T> internal constructor() {
  @ObjCName("get")
  open fun get(
   @ObjCName("withId") t: T
@@ -124,7 +124,7 @@ open class ClassWithParameterizedGet<T> {
  }
 }
 
-open class AccidentalOverrideBridge: ClassWithParameterizedGet<String?>(), Getter {
+open class AccidentalOverrideBridge internal constructor(): ClassWithParameterizedGet<String?>(), Getter {
  @ObjCName("test")
  open fun test() {
   val g: Getter? = AccidentalOverrideBridge()
@@ -132,7 +132,7 @@ open class AccidentalOverrideBridge: ClassWithParameterizedGet<String?>(), Gette
  }
 }
 
-open class TestCase10036 {
+open class TestCase10036 internal constructor() {
  @JsType
  interface BI3 {
   @ObjCName("get")
@@ -154,7 +154,7 @@ open class TestCase10036 {
   override fun get(value: String?): String?
  }
 
- abstract class B<B1: Comparable<*>?>: TestCase10036.BI1, TestCase10036.BI2 {
+ abstract class B<B1: Comparable<*>?> internal constructor(): TestCase10036.BI1, TestCase10036.BI2 {
   @ObjCName("get")
   abstract fun get(
    @ObjCName("withJavaLangComparable") value: B1
@@ -162,7 +162,7 @@ open class TestCase10036 {
  }
 }
 
-open class TestCase102 {
+open class TestCase102 internal constructor() {
  @JsType
  fun interface BI2 {
   @ObjCName("set")
@@ -178,33 +178,33 @@ open class TestCase102 {
   )
  }
 
- abstract class B<B1>: TestCase102.BI1, TestCase102.BI2 {
+ abstract class B<B1> internal constructor(): TestCase102.BI1, TestCase102.BI2 {
   @ObjCName("set")
   abstract fun set(
    @ObjCName("withId") value: B1
   )
  }
 
- open inner class C<B1>: TestCase102.B<B1>() {
+ open inner class C<B1> internal constructor(): TestCase102.B<B1>() {
   open override fun set(value: String?) {}
 
   open override fun set(value: B1) {}
  }
 }
 
-open class ParameterizedParent<T: ParameterizedParent<T>?> {
+open class ParameterizedParent<T: ParameterizedParent<T>?> internal constructor() {
  internal open fun <Q: T> m_pp_bridgemethods(t: Q): Q {
   return null as Q
  }
 }
 
-open class ReparametrerizedChild<E: ReparametrerizedChild<E>?>: ParameterizedParent<E>() {
+open class ReparametrerizedChild<E: ReparametrerizedChild<E>?> internal constructor(): ParameterizedParent<E>() {
  open override fun <S: E> m_pp_bridgemethods(t: S): S {
   return null as S
  }
 }
 
-open class LeafChild: ReparametrerizedChild<LeafChild?>() {}
+open class LeafChild internal constructor(): ReparametrerizedChild<LeafChild?>() {}
 
 fun interface StringConsumer {
  @ObjCName("accept")
@@ -213,11 +213,11 @@ fun interface StringConsumer {
  )
 }
 
-open class Consumer<T> {
+open class Consumer<T> internal constructor() {
  @ObjCName("accept")
  fun accept(
   @ObjCName("withId") t: T
  ) {}
 }
 
-open class StringConsumerImpl: Consumer<String?>(), StringConsumer {}
+open class StringConsumerImpl internal constructor(): Consumer<String?>(), StringConsumer {}

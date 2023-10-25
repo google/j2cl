@@ -33,7 +33,7 @@ fun interface MyJsInterface {
  ): Int
 }
 
-open class A {
+open class A internal constructor() {
  @ObjCName("foo")
  open fun foo(
   @ObjCName("withInt") a: Int
@@ -45,7 +45,7 @@ open class A {
 @ObjCName("J2ktJsbridgebackwardInterfaceImpl", exact = true)
 open class InterfaceImpl: A(), MyJsInterface {}
 
-open class SubInterfaceImpl: InterfaceImpl() {
+open class SubInterfaceImpl internal constructor(): InterfaceImpl() {
  open override fun foo(a: Int): Int {
   return 0
  }

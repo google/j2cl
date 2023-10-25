@@ -37,7 +37,7 @@ open class ExplicitNotNullable {
   ): O
  }
 
- open class DependentTypeParameters<E: Any, T: E?> {
+ open class DependentTypeParameters<E: Any, T: E?> internal constructor() {
   internal open fun getThis_pp_j2ktnotpassing(): ExplicitNotNullable.DependentTypeParameters<E, T> {
    return this
   }

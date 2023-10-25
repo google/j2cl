@@ -34,7 +34,7 @@ interface InterfaceWithDefault {
  }
 }
 
-open class GenericClass<T> {
+open class GenericClass<T> internal constructor() {
  @ObjCName("foo")
  open fun foo(
   @ObjCName("withId") value: T

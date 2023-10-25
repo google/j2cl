@@ -358,7 +358,7 @@ open class Lambdas {
   fun run()
  }
 
- open class Parent {
+ open class Parent internal constructor() {
   @JvmField
   var fieldInParent: Int = 0
 
@@ -366,7 +366,7 @@ open class Lambdas {
   open fun funInParent() {}
  }
 
- open class LambdaInSubClass: Lambdas.Parent() {
+ open class LambdaInSubClass internal constructor(): Lambdas.Parent() {
   @ObjCName("testLambdaInSubclass")
   open fun testLambdaInSubclass() {
    val l: Lambdas.FunctionalInterface? = Lambdas.FunctionalInterface { i: Int ->
@@ -410,7 +410,7 @@ open class Lambdas {
   )
  }
 
- class IdentityFunction: Lambdas.GenericJsFunction<Any?, Any?> {
+ class IdentityFunction internal constructor(): Lambdas.GenericJsFunction<Any?, Any?> {
   override fun apply(o: Any?): Any? {
    return o
   }
@@ -452,7 +452,7 @@ open class Lambdas {
   fun run()
  }
 
- open inner class Outer {
+ open inner class Outer internal constructor() {
   internal open fun m_pp_lambdas() {}
 
   internal open fun n_pp_lambdas() {
@@ -462,11 +462,11 @@ open class Lambdas {
   }
  }
 
- open inner class Super {
+ open inner class Super internal constructor() {
   internal open fun m_pp_lambdas() {}
  }
 
- open inner class Sub: Lambdas.Super() {
+ open inner class Sub internal constructor(): Lambdas.Super() {
   internal open fun n_pp_lambdas() {
    val r: Lambdas.Runnable? = object : Lambdas.Runnable {
     override fun run() {
@@ -476,7 +476,7 @@ open class Lambdas {
   }
  }
 
- open inner class SubWithLambda: Lambdas.Super() {
+ open inner class SubWithLambda internal constructor(): Lambdas.Super() {
   internal open fun n_pp_lambdas() {
    val r: Lambdas.Runnable? = Lambdas.Runnable {
     super<Lambdas.Super>.m_pp_lambdas()

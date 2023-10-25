@@ -25,7 +25,7 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
-open class RawType {
+open class RawType internal constructor() {
  @JvmField
  internal var rawUnbound_pp_rawtype: RawType.Unbound<Any?>? = RawType.Unbound<Any?>()
 
@@ -41,21 +41,21 @@ open class RawType {
  @JvmField
  internal var rawBoundDependentIndirect_pp_rawtype: RawType.BoundDependentIndirect<Any?, RawType.Unbound<Any?>?>? = RawType.BoundDependentIndirect<Any?, RawType.Unbound<Any?>?>()
 
- open class Unbound<T> {
+ open class Unbound<T> internal constructor() {
   internal open fun method_pp_rawtype(t: T): T {
    return t
   }
  }
 
- open class Bound<T: RawType?> {}
+ open class Bound<T: RawType?> internal constructor() {}
 
- open class BoundRecursively<T: RawType.BoundRecursively<T>?> {}
+ open class BoundRecursively<T: RawType.BoundRecursively<T>?> internal constructor() {}
 
- open class BoundDependentDirect<A, B: A> {}
+ open class BoundDependentDirect<A, B: A> internal constructor() {}
 
- open class BoundDependentIndirect<A, B: RawType.Unbound<A>?> {}
+ open class BoundDependentIndirect<A, B: RawType.Unbound<A>?> internal constructor() {}
 
- open class RawUnboundChild: RawType.Unbound<Any?>() {
+ open class RawUnboundChild internal constructor(): RawType.Unbound<Any?>() {
   open override fun method_pp_rawtype(o: Any?): Any? {
    return super<RawType.Unbound>.method_pp_rawtype(o)
   }
@@ -68,7 +68,7 @@ open class RawType {
   ) {}
  }
 
- open class RawSubclass: RawType.GenericSuperclass<RawType?> {
+ open class RawSubclass internal constructor(): RawType.GenericSuperclass<RawType?> {
   open override fun f(t: RawType?) {}
  }
 }

@@ -28,7 +28,7 @@ fun interface SomeInterface {
  fun bar()
 }
 
-open class Parent {
+open class Parent internal constructor() {
  @ObjCName("fun")
  open fun `fun`() {}
 }

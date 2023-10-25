@@ -139,7 +139,7 @@ open class Casts {
   val s: String? = (if (false) foo else bar) as String?
  }
 
- open inner class Foo {
+ open inner class Foo internal constructor() {
   @JvmField
   var field: Any? = Any()
 

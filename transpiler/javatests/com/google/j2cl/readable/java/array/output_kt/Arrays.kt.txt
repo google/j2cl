@@ -192,12 +192,12 @@ open class Arrays {
   @ObjCName("withJavaIoSerializable") serializable: Serializable?
  ) {}
 
- open inner class SomeObject {}
+ open inner class SomeObject internal constructor() {}
 
  @JsType(name = "String", namespace = JsPackage.GLOBAL, isNative = true)
- open class NativeType {}
+ open class NativeType internal constructor() {}
 
- open class ArrayContainer<T> {
+ open class ArrayContainer<T> internal constructor() {
   @JvmField
   internal var data_pp_array: Array<T>? = null
  }

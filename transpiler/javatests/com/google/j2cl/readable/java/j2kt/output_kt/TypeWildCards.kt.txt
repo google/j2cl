@@ -26,7 +26,7 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-open class TypeWildCards {
+open class TypeWildCards internal constructor() {
  companion object {
   @JvmStatic
   internal fun testSupplierWithUpperAndLowerBounds_pp_j2kt(supplier: TypeWildCards.SupplierWithUpperBound<in TypeWildCards.Child?>?) {
@@ -82,9 +82,9 @@ open class TypeWildCards {
   }
  }
 
- open class Parent {}
+ open class Parent internal constructor() {}
 
- open class Child: TypeWildCards.Parent() {}
+ open class Child internal constructor(): TypeWildCards.Parent() {}
 
  fun interface SupplierWithUpperBound<T: TypeWildCards.Parent?> {
   @ObjCName("get")
@@ -133,7 +133,7 @@ open class TypeWildCards {
   )
  }
 
- open class ObserverHolder<E> {
+ open class ObserverHolder<E> internal constructor() {
   @JvmField
   internal var observer_pp_j2kt: TypeWildCards.Observer<E>? = null
  }

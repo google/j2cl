@@ -25,18 +25,18 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-open class Superclass<T: Error?> {
+open class Superclass<T: Error?> internal constructor() {
  @ObjCName("m1")
  open fun m1(
   @ObjCName("withJavaLangError") t: T
  ) {}
 }
 
-open class Subclass: Superclass<AssertionError?>() {
+open class Subclass internal constructor(): Superclass<AssertionError?>() {
  open override fun m1(a: AssertionError?) {}
 }
 
-open class AnotherSubclass: Superclass<AssertionError?>() {}
+open class AnotherSubclass internal constructor(): Superclass<AssertionError?>() {}
 
 fun interface Callable<V> {
  @ObjCName("call")
@@ -45,11 +45,11 @@ fun interface Callable<V> {
  )
 }
 
-open class Task<T>: Callable<T> {
+open class Task<T> internal constructor(): Callable<T> {
  open override fun call(t: T) {}
 }
 
-open class AnotherTask<T: AssertionError?>: Callable<Superclass<T>?> {
+open class AnotherTask<T: AssertionError?> internal constructor(): Callable<Superclass<T>?> {
  open override fun call(t: Superclass<T>?) {}
 }
 

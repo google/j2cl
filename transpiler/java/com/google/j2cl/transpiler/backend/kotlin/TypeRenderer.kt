@@ -35,6 +35,7 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.INTERFACE_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.NATIVE_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.OPEN_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.ast.Keywords
+import com.google.j2cl.transpiler.backend.kotlin.ast.Visibility as KtVisibility
 import com.google.j2cl.transpiler.backend.kotlin.objc.comment
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
@@ -62,9 +63,9 @@ internal fun Renderer.typeSource(type: Type): Source =
           classModifiersSource(type),
           kindModifiersSource(typeDeclaration),
           colonSeparated(
-            join(
+            spaceSeparated(
               typeDeclarationSource(typeDeclaration),
-              ktPrimaryConstructorParametersSource(type)
+              ktPrimaryConstructorSource(type)
             ),
             superTypesSource(type)
           ),
@@ -75,10 +76,31 @@ internal fun Renderer.typeSource(type: Type): Source =
     }
   }
 
-internal fun Renderer.ktPrimaryConstructorParametersSource(type: Type): Source =
-  type.ktPrimaryConstructor
-    ?.let { method -> methodParametersSource(method, method.toObjCNames()?.parameterNames) }
-    .orEmpty()
+internal fun Renderer.ktPrimaryConstructorSource(type: Type): Source {
+  val ktPrimaryConstructor = type.ktPrimaryConstructor
+  return when {
+    ktPrimaryConstructor != null ->
+      join(
+        KotlinSource.CONSTRUCTOR_KEYWORD,
+        methodParametersSource(
+          ktPrimaryConstructor,
+          ktPrimaryConstructor.toObjCNames()?.parameterNames
+        )
+      )
+    type.needExplicitPrimaryConstructor ->
+      // Implicit constructors needs to follow the visiblity transpilation rules for members that
+      // are different than the visibility transpilation rules for the class.
+      spaceSeparated(
+        type.declaration.visibility.memberKtVisibility.source,
+        join(KotlinSource.CONSTRUCTOR_KEYWORD, inParentheses(Source.EMPTY))
+      )
+    else -> Source.EMPTY
+  }
+}
+
+private val Type.needExplicitPrimaryConstructor: Boolean
+  get() =
+    isClass && !hasConstructors && declaration.visibility.memberKtVisibility != KtVisibility.PUBLIC
 
 private fun nativeTypeSource(type: TypeDeclaration): Source =
   comment(spaceSeparated(NATIVE_KEYWORD, CLASS_KEYWORD, identifierSource(type.ktSimpleName)))

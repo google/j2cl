@@ -25,7 +25,7 @@ import kotlin.native.ObjCName
 
 @ObjCName("J2ktJ2ktAccidentalOverride", exact = true)
 open class AccidentalOverride {
- abstract inner class SuperClass {
+ abstract inner class SuperClass internal constructor() {
   @ObjCName("accidentalOverride")
   open fun accidentalOverride() {}
  }
@@ -38,24 +38,24 @@ open class AccidentalOverride {
   fun abstractAccidentalOverride() {}
  }
 
- open inner class TestImplicitOverride: AccidentalOverride.SuperClass(), AccidentalOverride.Interface {
+ open inner class TestImplicitOverride internal constructor(): AccidentalOverride.SuperClass(), AccidentalOverride.Interface {
   open override fun accidentalOverride() {
    super<AccidentalOverride.SuperClass>.accidentalOverride()
   }
  }
 
- open inner class TestExplicitOverride: AccidentalOverride.SuperClass(), AccidentalOverride.Interface {
+ open inner class TestExplicitOverride internal constructor(): AccidentalOverride.SuperClass(), AccidentalOverride.Interface {
   open override fun accidentalOverride() {
    super<AccidentalOverride.SuperClass>.accidentalOverride()
   }
  }
 
- abstract inner class SubClass: AccidentalOverride.SuperClass() {
+ abstract inner class SubClass internal constructor(): AccidentalOverride.SuperClass() {
   @ObjCName("abstractAccidentalOverride")
   abstract fun abstractAccidentalOverride()
  }
 
- abstract inner class TestImplicitOverrideInAbstractClass: AccidentalOverride.SubClass(), AccidentalOverride.Interface {
+ abstract inner class TestImplicitOverrideInAbstractClass internal constructor(): AccidentalOverride.SubClass(), AccidentalOverride.Interface {
   abstract override fun abstractAccidentalOverride()
 
   open override fun accidentalOverride() {
@@ -63,7 +63,7 @@ open class AccidentalOverride {
   }
  }
 
- abstract inner class TestExplicitOverrideInAbstractClass: AccidentalOverride.SubClass(), AccidentalOverride.Interface {
+ abstract inner class TestExplicitOverrideInAbstractClass internal constructor(): AccidentalOverride.SubClass(), AccidentalOverride.Interface {
   open override fun accidentalOverride() {
    super<AccidentalOverride.SubClass>.accidentalOverride()
   }

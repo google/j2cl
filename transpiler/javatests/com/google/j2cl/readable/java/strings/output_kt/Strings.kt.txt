@@ -80,7 +80,7 @@ open class Strings {
   internal const val ESCAPE_CODES_COPY_private_2: String = "\b\u000C\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A"
  }
 
- open class StringHolder {
+ open class StringHolder internal constructor() {
   @JvmField
   internal var s_pp_strings: String? = "A"
  }

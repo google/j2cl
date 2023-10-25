@@ -61,7 +61,7 @@ open class CastGenerics<T, E: Number?> {
 
  @ObjCName("outerGenericMethod")
  open fun <TT: Enum<*>> outerGenericMethod() {
-  open class Nested<SS> {
+  open class Nested<SS> internal constructor() {
    internal fun nestedGenericMethod_private_2(o: Any?) {
     val t: TT? = o as TT?
    }
@@ -136,15 +136,15 @@ open class CastGenerics<T, E: Number?> {
   fun mB()
  }
 
- abstract class BaseImplementor: CastGenerics.A, CastGenerics.B {}
+ abstract class BaseImplementor internal constructor(): CastGenerics.A, CastGenerics.B {}
 
- open class Implementor: CastGenerics.BaseImplementor() {
+ open class Implementor internal constructor(): CastGenerics.BaseImplementor() {
   open override fun mA() {}
 
   open override fun mB() {}
  }
 
- open class Container<T> {
+ open class Container<T> internal constructor() {
   internal open fun get_pp_cast(): T {
    return null as T
   }

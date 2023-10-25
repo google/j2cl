@@ -41,13 +41,13 @@ open class MixedNestings {
   A().a()
  }
 
- open inner class A {
+ open inner class A internal constructor() {
   @ObjCName("aa")
   open fun aa() {}
 
   @ObjCName("a")
   open fun a() {
-   open class B {
+   open class B internal constructor() {
     open fun bb() {}
 
     open fun b(): Int {

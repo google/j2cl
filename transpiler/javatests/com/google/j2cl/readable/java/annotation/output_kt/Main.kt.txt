@@ -38,7 +38,7 @@ open class Main {
 
  interface Zoo: Annotation {}
 
- open inner class Bar {
+ open inner class Bar internal constructor() {
   internal open fun baz_pp_annotation(): Int {
    val foo: Main.Foo? = null
    foo!!.bar()

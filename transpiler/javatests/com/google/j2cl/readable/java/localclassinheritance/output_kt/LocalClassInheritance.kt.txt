@@ -29,12 +29,12 @@ open class LocalClassInheritance {
  @ObjCName("test")
  open fun test() {
   val f: Int = 1
-  open class Parent {
+  open class Parent internal constructor() {
    open fun n() {
     val i: Int = f
    }
   }
-  open class Child: Parent() {
+  open class Child internal constructor(): Parent() {
    open override fun n() {
     val i: Int = f
    }

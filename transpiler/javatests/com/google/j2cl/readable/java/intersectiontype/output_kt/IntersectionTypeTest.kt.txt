@@ -161,7 +161,7 @@ open class IntersectionTypeTest<U> {
   }
  }
 
- open inner class MapEntry {
+ open inner class MapEntry internal constructor() {
   @ObjCName("method")
   open fun <T> method(
    @ObjCName("withId") o: Any?
@@ -170,11 +170,11 @@ open class IntersectionTypeTest<U> {
   }
  }
 
- open class A {}
+ open class A internal constructor() {}
 
  interface EmptyA {}
 
  interface EmptyB {}
 
- open class SomeConcreteType {}
+ open class SomeConcreteType internal constructor() {}
 }

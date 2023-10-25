@@ -36,7 +36,7 @@ interface ParentInterface {
  fun defaultParent() {}
 }
 
-open class GrandParent {
+open class GrandParent internal constructor() {
  @ObjCName("grandParentSimplest")
  open fun grandParentSimplest() {}
 
@@ -57,7 +57,7 @@ open class GrandParent {
  open fun defaultGrandParent() {}
 }
 
-open class Parent: GrandParent(), ParentInterface {
+open class Parent internal constructor(): GrandParent(), ParentInterface {
  @ObjCName("parentSimplest")
  open fun parentSimplest() {}
 
@@ -123,18 +123,18 @@ fun interface I2 {
 
 interface I3: I1 {}
 
-open class Super {
+open class Super internal constructor() {
  @ObjCName("m")
  open fun m() {}
 }
 
-open class Sub: Super(), I2, I3 {
+open class Sub internal constructor(): Super(), I2, I3 {
  open override fun m() {
   super<I3>.m()
  }
 }
 
-abstract class SuperToStringTest: I1 {
+abstract class SuperToStringTest internal constructor(): I1 {
  open override fun toString(): String {
   return super.toString()
  }

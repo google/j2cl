@@ -44,7 +44,7 @@ open class Main {
   }
  }
 
- open class Outer {
+ open class Outer internal constructor() {
   @JvmField
   internal var a_pp_jsinnerclass: Int = 2
 
@@ -55,7 +55,7 @@ open class Main {
 
   @ObjCName("J2ktJsinnerclassMain_Outer_Inner", exact = true)
   @JsType(namespace = "com.google.test")
-  open inner class Inner() {
+  open inner class Inner constructor() {
    @JvmField
    internal var b_private_2: Int = 0
 

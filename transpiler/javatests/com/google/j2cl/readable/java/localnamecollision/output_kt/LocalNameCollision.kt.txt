@@ -69,7 +69,7 @@ open class LocalNameCollision {
  }
 }
 
-open class A {
+open class A internal constructor() {
  companion object {
   @JvmField
   internal var A_pp_localnamecollision: localnamecollision.A? = null
@@ -86,5 +86,5 @@ open class A {
   }
  }
 
- open class B {}
+ open class B internal constructor() {}
 }

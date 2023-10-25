@@ -157,7 +157,7 @@ open class MethodReferences<T> {
   ): Array<T>?
  }
 
- open inner class ObjectCapturingOuter {
+ open inner class ObjectCapturingOuter internal constructor() {
   internal open fun getMain_pp_methodreferences(): MethodReferences<T>? {
    return this@MethodReferences as MethodReferences<T>?
   }

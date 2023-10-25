@@ -43,7 +43,7 @@ open class DefinitelyNotNull {
   }
  }
 
- open class Ordering<T> {
+ open class Ordering<T> internal constructor() {
   internal open fun <S: T> reverse_pp_j2kt(): DefinitelyNotNull.Ordering<S> {
    throw RuntimeException()
   }

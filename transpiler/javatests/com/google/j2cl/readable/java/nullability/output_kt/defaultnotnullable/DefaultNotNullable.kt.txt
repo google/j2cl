@@ -338,7 +338,7 @@ open class DefaultNotNullable {
   ): T?
  }
 
- open inner class ImplementsParameterizedInterface: DefaultNotNullable.ParameterizedInterface<String> {
+ open inner class ImplementsParameterizedInterface internal constructor(): DefaultNotNullable.ParameterizedInterface<String> {
   open override fun add(s: String): String {
    return "Hey"
   }

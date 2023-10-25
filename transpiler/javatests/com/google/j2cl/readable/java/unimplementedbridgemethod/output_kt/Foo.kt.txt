@@ -43,7 +43,7 @@ fun interface I<T> {
 
 fun interface J: I<String?> {}
 
-abstract class Bar: J {}
+abstract class Bar internal constructor(): J {}
 
 @ObjCName("J2ktUnimplementedbridgemethodFoo", exact = true)
 abstract class Foo: I<String?> {}

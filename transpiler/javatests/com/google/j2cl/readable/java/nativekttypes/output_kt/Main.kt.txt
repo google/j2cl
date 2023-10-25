@@ -293,7 +293,7 @@ open class Subsubclass<V>: Subclass<V> {
  }
 }
 
-open class BridgeSubclass: KBridge() {
+open class BridgeSubclass internal constructor(): KBridge() {
  open override fun method() {
   super<KBridge>.method()
  }

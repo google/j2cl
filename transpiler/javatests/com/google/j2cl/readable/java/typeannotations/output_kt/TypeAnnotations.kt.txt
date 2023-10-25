@@ -28,11 +28,11 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 import typeannotations.ParametricType
 
-abstract class AbstractType: ParametricType<AbstractType?> {}
+abstract class AbstractType internal constructor(): ParametricType<AbstractType?> {}
 
-abstract class AbstractTypeNonNull: ParametricType<AbstractType> {}
+abstract class AbstractTypeNonNull internal constructor(): ParametricType<AbstractType> {}
 
-open class Parent {
+open class Parent internal constructor() {
  @ObjCName("m")
  open fun m(
   @ObjCName("withNSString") s: String,
@@ -50,9 +50,9 @@ open class Parent {
  }
 }
 
-open class ChildWithNullableParent: Parent(), ParametricType<Parent?> {}
+open class ChildWithNullableParent internal constructor(): Parent(), ParametricType<Parent?> {}
 
-open class ChildWithNonNullableParent: Parent(), ParametricType<Parent> {}
+open class ChildWithNonNullableParent internal constructor(): Parent(), ParametricType<Parent> {}
 
 @ObjCName("J2ktTypeannotationsTypeAnnotations", exact = true)
 open class TypeAnnotations {

@@ -60,7 +60,7 @@ open class GenericMethod<T> {
 
    fun <T_1> fun2(t: T_1) {}
   }
-  open class LocalClass<T>: GenericMethod<T>() {
+  open class LocalClass<T> internal constructor(): GenericMethod<T>() {
    open fun fun2(t: T) {}
 
    open fun <T_1: Number?> fun2(t: T_1) {}
@@ -172,19 +172,19 @@ open class GenericMethod<T> {
   }
  }
 
- open class SuperContainer<C: GenericMethod.Container<*>?> {
+ open class SuperContainer<C: GenericMethod.Container<*>?> internal constructor() {
   internal open fun get_pp_genericmethod(): C {
    return null as C
   }
  }
 
- open class Container<CT: GenericMethod.Content?> {
+ open class Container<CT: GenericMethod.Content?> internal constructor() {
   internal open fun get_pp_genericmethod(): CT {
    return null as CT
   }
  }
 
- open class Content {
+ open class Content internal constructor() {
   internal open fun getProp_pp_genericmethod(): String? {
    return null
   }

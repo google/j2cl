@@ -30,13 +30,13 @@ open class InnerClasses {
   fun foo()
  }
 
- abstract class B: InnerClasses.A {
+ abstract class B internal constructor(): InnerClasses.A {
   internal open fun bar_pp_abstractinnerclass() {
    this.foo()
   }
  }
 
- abstract inner class C: InnerClasses.A {
+ abstract inner class C internal constructor(): InnerClasses.A {
   internal open fun bar_pp_abstractinnerclass() {
    this.foo()
   }

@@ -184,7 +184,7 @@ open class TryCatch {
   internal val closableThing_private_2: TryCatch.ClosableThing? = TryCatch.ClosableThing()
  }
 
- open class ClosableThing: AutoCloseable {
+ open class ClosableThing internal constructor(): AutoCloseable {
   open override fun close() {}
  }
 }

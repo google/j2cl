@@ -41,7 +41,7 @@ open class DefaultNullable {
  }
 }
 
-open class NotNullable {
+open class NotNullable internal constructor() {
  fun interface Consumer<T> {
   @ObjCName("accept")
   fun accept(
@@ -50,7 +50,7 @@ open class NotNullable {
  }
 }
 
-abstract class Ordering<T> {
+abstract class Ordering<T> internal constructor() {
  internal open fun <S: T> reverse_pp_j2ktnotpassing(): Ordering<S> {
   return null!!
  }

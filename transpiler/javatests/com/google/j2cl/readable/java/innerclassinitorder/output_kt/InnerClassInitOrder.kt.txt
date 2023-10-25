@@ -202,7 +202,7 @@ open class InnerClassInitOrder {
   }
  }
 
- open inner class OuterRefFromSuperCtorCall(): InnerClassInitOrder.OuterRefFromSuperCtorBase(object : Any() {
+ open inner class OuterRefFromSuperCtorCall constructor(): InnerClassInitOrder.OuterRefFromSuperCtorBase(object : Any() {
   override fun hashCode(): Int {
    this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + 100
    return 0
@@ -222,14 +222,14 @@ open class InnerClassInitOrder {
   })
  }
 
- open inner class InnerClass {
+ open inner class InnerClass internal constructor() {
   init {
    this.callInner_pp_innerclassinitorder()
   }
 
   internal open fun callInner_pp_innerclassinitorder() {
    this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + 1
-   open class ReallyInnerClass {
+   open class ReallyInnerClass internal constructor() {
     init {
      this.callReallyInner_pp_innerclassinitorder()
     }
@@ -265,7 +265,7 @@ open class InnerClassInitOrder {
   }
  }
 
- open class ESOuter {
+ open class ESOuter internal constructor() {
   @ObjCName("newESInner")
   open fun newESInner(): InnerClassInitOrder.ESOuter.ESInner? {
    return ESInner()
@@ -293,7 +293,7 @@ open class InnerClassInitOrder {
   internal constructor(value: Int, outer: InnerClassInitOrder.ESOuter?): super(value)
  }
 
- open class ESWGOuter<T> {
+ open class ESWGOuter<T> internal constructor() {
   @ObjCName("newESWGInner")
   open fun newESWGInner(): InnerClassInitOrder.ESWGOuter<T>.ESWGInner? {
    return ESWGInner()
@@ -347,7 +347,7 @@ open class InnerClassInitOrder {
   }
 
   @ObjCName("J2ktInnerclassinitorderInnerClassInitOrder_Outer_OuterIsSuper", exact = true)
-  open inner class OuterIsSuper(
+  open inner class OuterIsSuper constructor(
    @ObjCName("Int") i: Int
   ): InnerClassInitOrder.Outer(i) {
    open override fun checkDispatch(): Int {
@@ -380,6 +380,6 @@ open class InnerClassInitOrder {
   }
 
   @ObjCName("J2ktInnerclassinitorderInnerClassInitOrder_Outer_TestUnqualifiedSuperCall", exact = true)
-  open inner class TestUnqualifiedSuperCall(): InnerClassInitOrder.Outer.OuterIsNotSuper() {}
+  open inner class TestUnqualifiedSuperCall constructor(): InnerClassInitOrder.Outer.OuterIsNotSuper() {}
  }
 }
