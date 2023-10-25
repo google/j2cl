@@ -2495,16 +2495,19 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
   }
 
   public void testJsOptionalSucceeds() {
-    assertTranspileSucceeds(
+    newTesterWithDefaults()
+        .addCompilationUnit("org.jspecify.nullness.Nullable", "public @interface Nullable {}")
+        .addCompilationUnit(
             "test.Buggy",
             "import jsinterop.annotations.*;",
+            "import org.jspecify.nullness.*;",
             "public class Buggy<T> {",
             "  @JsConstructor public Buggy(@JsOptional Object a) {}",
             "  @JsMethod public void foo(int a, Object b, @JsOptional String c) {}",
             "  @JsMethod public void bar(int a, @JsOptional Object b, @JsOptional String c) {}",
             "  @JsMethod public void baz(@JsOptional String a, @JsOptional Object b) {}",
             "  @JsMethod public void qux(@JsOptional String c, Object... os) {}",
-            "  @JsMethod public void corge(int a, @JsOptional T b, Object... c) {}",
+            "  @JsMethod public void corge(int a, @JsOptional @Nullable T b, Object... c) {}",
             "}",
             "class SubBuggy extends Buggy<String> {",
             "  @JsConstructor",
@@ -2523,13 +2526,17 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "    o = (Function) (String s, @JsOptional String b) -> {};",
             "  }",
             "}")
+        .assertTranspileSucceeds()
         .assertNoWarnings();
   }
 
   public void testJsOptionalNotJsOptionalOverrideFails() {
-    assertTranspileFails(
+    newTesterWithDefaults()
+        .addCompilationUnit("org.jspecify.nullness.Nullable", "public @interface Nullable {}")
+        .addCompilationUnit(
             "test.Buggy",
             "import jsinterop.annotations.*;",
+            "import org.jspecify.nullness.*;",
             "interface Interface {",
             "  @JsMethod void foo(@JsOptional Object o);",
             "  @JsMethod Object bar(@JsOptional Object o);",
@@ -2541,7 +2548,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  @JsMethod public String bar(Object o) { return null; }",
             "}",
             "interface I<T> {",
-            "  @JsMethod void m(@JsOptional T t);",
+            "  @JsMethod void m(@JsOptional @Nullable T t);",
             "}",
             "class Implementor implements I<Integer> {",
             "  public void m(Integer i) {}",
@@ -2556,6 +2563,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "    o = (Function) (String s, String b) -> {};",
             "  }",
             "}")
+        .assertTranspileFails()
         .assertErrorsWithoutSourcePosition(
             "Method 'void Buggy.foo(Object o)' should declare parameter 'o' as JsOptional.",
             "Method 'String Buggy.bar(Object o)' should declare parameter 'o' as JsOptional.",
@@ -2598,6 +2606,42 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "JsOptional parameter 'a' in method '" + "Buggy(int a)' cannot be of a primitive type.",
             "JsOptional parameter 'c' in method "
                 + "'void Buggy.bar(int a, Object b, String... c)' cannot be a varargs parameter.");
+  }
+
+  public void testJsOptionalOnNonNullableParameterFails() {
+    newTesterWithDefaults()
+        .addCompilationUnit(
+            "test.Buggy",
+            "import jsinterop.annotations.*;",
+            "public class Buggy {",
+            "   @JsMethod public <T> void bar(@JsOptional @JsNonNull T a, @JsOptional @JsNonNull"
+                + " String b) {}",
+            "}")
+        .assertTranspileFails()
+        .assertErrorsWithoutSourcePosition(
+            "JsOptional parameter 'a' in method 'void Buggy.bar(T a, String b)' has to be"
+                + " nullable.",
+            "JsOptional parameter 'b' in method 'void Buggy.bar(T a, String b)' has to be"
+                + " nullable.");
+  }
+
+  public void testJsOptionalOnNullableTypeVariableParameterSucceeds() {
+    newTesterWithDefaults()
+        .addArgs(
+            "-experimentalenablejspecifysupportdonotenablewithoutjspecifystaticcheckingoryoumightcauseanoutage")
+        .addCompilationUnit("org.jspecify.nullness.NullMarked", "public @interface NullMarked {}")
+        .addCompilationUnit("org.jspecify.nullness.Nullable", "public @interface Nullable {}")
+        .addCompilationUnit(
+            "test.Buggy",
+            "import jsinterop.annotations.*;",
+            "import org.jspecify.nullness.*;",
+            "@NullMarked",
+            "public class Buggy {",
+            "   @JsMethod public <T extends @Nullable Object> void bar(@JsOptional @Nullable T a,"
+                + " @JsOptional @Nullable String b) {}",
+            "}")
+        .assertTranspileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testJsOptionalOnNonJsExposedMethodsFails() {
@@ -2721,7 +2765,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "}")
         .assertErrorsWithoutSourcePosition(
             "JsOverlay field 'Buggy.f2' can only be static.",
-            "JsOverlay method 'void Buggy.m()' cannot be non-final.");
+            "JsOverlay method 'void Buggy.m()' has to be final.");
   }
 
   public void testJsOverlayWithStaticInitializerSucceeds() {

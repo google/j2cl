@@ -26,6 +26,7 @@ import jsinterop.annotations.JsOptional;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.jspecify.nullness.Nullable;
 
 /** Tests JsMethod functionality. */
 public class JsMethodTest {
@@ -117,7 +118,7 @@ public class JsMethodTest {
 
   interface FunctionalInterfaceWithJsVarargsAndJsOptionalJsMethod<T extends Number> {
     @JsMethod
-    double sum(@JsOptional T first, T... rest);
+    double sum(@JsOptional @Nullable T first, T... rest);
   }
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")

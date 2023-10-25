@@ -1241,7 +1241,7 @@ public class JsInteropRestrictionsChecker {
           && !memberDescriptor.isDefaultMethod()) {
         problems.error(
             member.getSourcePosition(),
-            "JsOverlay method '%s' cannot be non-final.",
+            "JsOverlay method '%s' has to be final.",
             readableDescription);
         return;
       }
@@ -1773,14 +1773,26 @@ public class JsInteropRestrictionsChecker {
     for (int i = 0; i < numberOfParameters; i++) {
       Variable parameter = method.getParameters().get(i);
       ParameterDescriptor parameterDescriptor = methodDescriptor.getParameterDescriptors().get(i);
+      TypeDescriptor parameterTypeDescriptor = parameterDescriptor.getTypeDescriptor();
       if (parameterDescriptor.isJsOptional()) {
-        if (parameterDescriptor.getTypeDescriptor().isPrimitive()) {
+        if (parameterTypeDescriptor.isPrimitive()) {
           problems.error(
               method.getSourcePosition(),
               "JsOptional parameter '%s' in method '%s' cannot be of a primitive type.",
               parameter.getName(),
               method.getReadableDescription());
+          continue;
         }
+
+        if (!parameterTypeDescriptor.isNullable()) {
+          problems.error(
+              method.getSourcePosition(),
+              "JsOptional parameter '%s' in method '%s' has to be nullable.",
+              parameter.getName(),
+              method.getReadableDescription());
+          continue;
+        }
+
         if (parameter == varargsParameter) {
           problems.error(
               method.getSourcePosition(),

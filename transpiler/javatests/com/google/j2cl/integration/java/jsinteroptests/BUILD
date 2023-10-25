@@ -25,5 +25,6 @@ integration_test(
     enable_wasm = False,
     deps = [
         ":closure_reflect",
+        "//third_party:jspecify_annotations",
     ],
 )
