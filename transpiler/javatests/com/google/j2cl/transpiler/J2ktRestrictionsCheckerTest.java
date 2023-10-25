@@ -33,20 +33,25 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
 
   public void testMemberVisibilityWarnings() {
     assertTranspileSucceeds(
-            "test.Main",
+            "test.Public",
             "class Pkg {}",
-            "public class Main {",
+            "public class Public {",
             "  public void pkgParam(Pkg pkg) {}",
             "  public Pkg pkgReturnType() { return null; }",
             "  public Pkg pkgField;",
+            "  static class InnerPkg {",
+            "    public InnerPkg() {}",
+            "    public Pkg pkgReturnType() { return null; }",
+            "    public Pkg pkgField;",
+            "  }",
             "}")
         .assertWarningsWithSourcePosition(
-            "Warning:Main.java:4: Member 'void Main.pkgParam(Pkg pkg)' (public) should not have"
+            "Warning:Public.java:4: Member 'void Public.pkgParam(Pkg pkg)' (public) should not have"
                 + " wider visibility than 'Pkg' (default).",
-            "Warning:Main.java:5: Member 'Pkg Main.pkgReturnType()' (public) should not have wider"
-                + " visibility than 'Pkg' (default).",
-            "Warning:Main.java:6: Member 'Main.pkgField' (public) should not have wider visibility"
-                + " than 'Pkg' (default).");
+            "Warning:Public.java:5: Member 'Pkg Public.pkgReturnType()' (public) should not have"
+                + " wider visibility than 'Pkg' (default).",
+            "Warning:Public.java:6: Member 'Public.pkgField' (public) should not have wider"
+                + " visibility than 'Pkg' (default).");
   }
 
   public void testClassVisibilityWarnings() {

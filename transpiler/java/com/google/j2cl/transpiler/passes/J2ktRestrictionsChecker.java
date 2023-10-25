@@ -77,10 +77,10 @@ public final class J2ktRestrictionsChecker {
             }
 
             MemberDescriptor memberDescriptor = member.getDescriptor();
-            Visibility methodVisibility = memberDescriptor.getVisibility();
+            Visibility methodVisibility = getRequiredVisibility(memberDescriptor);
             for (TypeDescriptor referencedTypeDescriptor :
                 getReferencedTypeDescriptors(memberDescriptor)) {
-              Visibility referencedVisibility = getDeclaredVisibility(referencedTypeDescriptor);
+              Visibility referencedVisibility = getRequiredVisibility(referencedTypeDescriptor);
               if (isWiderThan(methodVisibility, referencedVisibility)) {
                 problems.warning(
                     member.getSourcePosition(),
@@ -162,16 +162,12 @@ public final class J2ktRestrictionsChecker {
     return ImmutableList.of();
   }
 
-  private static Visibility getDeclaredVisibility(TypeDescriptor typeDescriptor) {
-    if (typeDescriptor instanceof DeclaredTypeDescriptor) {
-      return ((DeclaredTypeDescriptor) typeDescriptor).getTypeDeclaration().getVisibility();
-    }
-
-    return Visibility.PUBLIC;
-  }
-
   private static boolean isWiderThan(Visibility visibility, Visibility otherVisibility) {
     return visibility.compareTo(otherVisibility) < 0;
+  }
+
+  private static Visibility getNarrowestOf(Visibility visibility, Visibility otherVisibility) {
+    return isWiderThan(visibility, otherVisibility) ? otherVisibility : visibility;
   }
 
   private static String getDescription(Visibility visibility) {
@@ -186,5 +182,33 @@ public final class J2ktRestrictionsChecker {
         return "private";
     }
     throw new AssertionError();
+  }
+
+  /**
+   * Returns required visibility of this member, which is the narrowest of the declared visibility
+   * and the inferred visibility of its enclosing type.
+   */
+  private static Visibility getRequiredVisibility(MemberDescriptor memberDescriptor) {
+    Visibility memberVisibility = memberDescriptor.getVisibility();
+    return getNarrowestOf(
+        memberVisibility, getRequiredVisibility(memberDescriptor.getEnclosingTypeDescriptor()));
+  }
+
+  /**
+   * Returns required visibility of this type, which is the narrowest of the declared visibility and
+   * the inferred visibility of its enclosing type (if present).
+   */
+  private static Visibility getRequiredVisibility(TypeDescriptor typeDescriptor) {
+    if (typeDescriptor instanceof DeclaredTypeDescriptor) {
+      DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
+      Visibility typeVisibility = declaredTypeDescriptor.getTypeDeclaration().getVisibility();
+      DeclaredTypeDescriptor enclosingTypeDescriptor =
+          declaredTypeDescriptor.getEnclosingTypeDescriptor();
+      return enclosingTypeDescriptor == null
+          ? typeVisibility
+          : getNarrowestOf(typeVisibility, getRequiredVisibility(enclosingTypeDescriptor));
+    }
+
+    return Visibility.PUBLIC;
   }
 }
