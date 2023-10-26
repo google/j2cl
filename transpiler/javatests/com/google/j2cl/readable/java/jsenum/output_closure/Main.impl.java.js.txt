@@ -45,7 +45,7 @@ class Main extends j_l_Object {
  static m_testJsEnumSwitch__void() {
   Main.$clinit();
   let comparableJsEnum = $Overlay.m_getValue__$devirt__jsenum_Main_ComparableJsEnum__int(ComparableJsEnum.ONE) == 1 ? ComparableJsEnum.TWO : /**@type {?ComparableJsEnum}*/ ($Enums.unbox(null, $Overlay));
-  switch (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(comparableJsEnum)) {
+  switch ((InternalPreconditions.m_checkNotNull__boolean__void(!$Equality.$same(comparableJsEnum, null)), comparableJsEnum)) {
    case ComparableJsEnum.TWO: 
     break;
    default: 
@@ -53,7 +53,7 @@ class Main extends j_l_Object {
   let comparable = /**@type {$Enums_BoxedComparableLightEnum<?ComparableJsEnum>}*/ ($Enums.boxComparable(comparableJsEnum, $Overlay));
   comparableJsEnum = /**@type {?ComparableJsEnum}*/ ($Enums.unbox(comparable, $Overlay));
   let intJsEnum = IntJsEnum_$Overlay.m_getValue__$devirt__jsenum_Main_IntJsEnum__int(IntJsEnum.ELEVEN) == 10 ? IntJsEnum.ELEVEN : /**@type {?IntJsEnum}*/ ($Enums.unbox(null, IntJsEnum_$Overlay));
-  switch (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(intJsEnum)) {
+  switch ((InternalPreconditions.m_checkNotNull__boolean__void(!$Equality.$same(intJsEnum, null)), intJsEnum)) {
    case IntJsEnum.TWENTY: 
     break;
    default: 
@@ -64,7 +64,7 @@ class Main extends j_l_Object {
   let isInstance = !$Equality.$same(intJsEnum, null);
   isInstance = Comparable.$isInstance(/**@type {$Enums_BoxedLightEnum<?IntJsEnum>}*/ ($Enums.box(intJsEnum, IntJsEnum_$Overlay)));
   let stringJsEnum = $Equality.$same(StringJsEnum_$Overlay.m_getValue__$devirt__jsenum_Main_StringJsEnum__java_lang_String(StringJsEnum.ONE), '10') ? StringJsEnum.THREE : /**@type {?StringJsEnum}*/ ($Enums.unbox(null, StringJsEnum_$Overlay));
-  switch (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(stringJsEnum)) {
+  switch ((InternalPreconditions.m_checkNotNull__boolean__void(!$Equality.$same(stringJsEnum, null)), stringJsEnum)) {
    case StringJsEnum.ONE: 
     break;
    default: 

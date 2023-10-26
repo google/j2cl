@@ -428,6 +428,28 @@ public final class InternalPreconditions {
   }
 
   /**
+   * Ensures the truth of an expression. Throws a {@link NullPointerException} if the expression is
+   * not true.
+   */
+  public static void checkNotNull(boolean expression) {
+    if (IS_API_CHECKED) {
+      checkCriticalNotNull(expression);
+    } else if (IS_ASSERTED) {
+      try {
+        checkCriticalNotNull(expression);
+      } catch (Exception e) {
+        throw new AssertionError(e);
+      }
+    }
+  }
+
+  public static void checkCriticalNotNull(boolean expression) {
+    if (!expression) {
+      throw new NullPointerException();
+    }
+  }
+
+  /**
    * Ensures that {@code size} specifies a valid array size (i.e. non-negative).
    */
   public static void checkArraySize(int size) {

@@ -291,7 +291,7 @@ public final class RuntimeMethods {
   }
 
   /** Create a call to InternalPreconditions.checkNotNull method. */
-  public static MethodCall createCheckNotNullCall(Expression argument) {
+  public static Expression createCheckNotNullCall(Expression argument) {
     return createCheckNotNullCall(argument, false);
   }
 
@@ -299,9 +299,16 @@ public final class RuntimeMethods {
    * Create a call to InternalPreconditions.checkNotNull method with specialization of the type
    * parameter.
    */
-  public static MethodCall createCheckNotNullCall(
+  public static Expression createCheckNotNullCall(
       Expression argument, boolean specializeTypeParameter) {
     checkArgument(!argument.getTypeDescriptor().isPrimitive());
+
+    if (argument.getTypeDescriptor().isJsEnum()) {
+      // Expose the null comparison explicitly in the AST so that other normalizations can operate
+      // on them. In particular unboxed enums in Wasm might be represented as primitives and null
+      // comparisons need to be rewritten.
+      return createCheckNotNullBooleanCall(argument);
+    }
 
     // TODO(b/68726480): checkNotNull should return a non-nullable T.
     MethodDescriptor checkNotNull =
@@ -314,6 +321,39 @@ public final class RuntimeMethods {
               (TypeVariable unused) -> argument.getTypeDescriptor());
     }
     return MethodCall.Builder.from(checkNotNull).setArguments(argument).build();
+  }
+
+  /** Create a call to InternalPreconditions.checkNotNull(boolean) method. */
+  private static Expression createCheckNotNullBooleanCall(Expression argument) {
+    MethodDescriptor checkNotNull =
+        TypeDescriptors.get()
+            .javaemulInternalPreconditions
+            .getMethodDescriptor("checkNotNull", PrimitiveTypes.BOOLEAN);
+    if (argument.isIdempotent()) {
+      return MultiExpression.newBuilder()
+          .addExpressions(
+              MethodCall.Builder.from(checkNotNull)
+                  .setArguments(argument.infixNotEqualsNull())
+                  .build(),
+              argument.clone())
+          .build();
+    }
+    Variable tempVariable =
+        Variable.newBuilder()
+            .setName("$arg")
+            .setFinal(true)
+            .setTypeDescriptor(argument.getTypeDescriptor())
+            .build();
+    return MultiExpression.newBuilder()
+        .addExpressions(
+            VariableDeclarationExpression.newBuilder()
+                .addVariableDeclaration(tempVariable, argument)
+                .build(),
+            MethodCall.Builder.from(checkNotNull)
+                .setArguments(tempVariable.createReference().infixNotEqualsNull())
+                .build(),
+            tempVariable.createReference())
+        .build();
   }
 
   /** Create a call to an LongUtils method. */
