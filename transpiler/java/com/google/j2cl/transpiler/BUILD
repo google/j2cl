@@ -87,9 +87,27 @@ JVM_FLAGS = [
     "-Dj2cl.deterministicTimestamps=true",
 ]
 
+# Like JVM_FLAGS, but using the C2 compiler.
+# When modular compilation for Wasm is enabled, this can be removed in favor
+# of using the same flags as non-wasm transpilation.
+JVM_FLAGS_FOR_LARGE_HEAP = [
+    "-Xss2M",
+    # Disable bytecode verification to save from class-loading time.
+    "-Xverify:none",
+    "-Dj2cl.deterministicTimestamps=true",
+]
+
 java_binary(
     name = "BazelJ2clBuilder",
     jvm_flags = JVM_FLAGS,
+    main_class = "com.google.j2cl.transpiler.BazelJ2clBuilder",
+    visibility = ["//build_defs/internal_do_not_use:__pkg__"],
+    runtime_deps = [":bazelbuilder_lib"],
+)
+
+java_binary(
+    name = "BazelJ2clBuilderForLargeHeap",
+    jvm_flags = JVM_FLAGS_FOR_LARGE_HEAP,
     main_class = "com.google.j2cl.transpiler.BazelJ2clBuilder",
     visibility = ["//build_defs/internal_do_not_use:__pkg__"],
     runtime_deps = [":bazelbuilder_lib"],
