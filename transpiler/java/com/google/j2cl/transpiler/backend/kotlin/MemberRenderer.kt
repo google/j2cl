@@ -143,6 +143,8 @@ private fun Renderer.fieldSource(field: Field): Source {
   val isConst = field.isCompileTimeConstant && field.isStatic
   val isJvmField =
     !isConst && !field.isKtLateInit && fieldDescriptor.ktVisibility != KtVisibility.PRIVATE
+  val initializer = field.initializer
+
   return newLineSeparated(
     Source.emptyUnless(isJvmField) { jvmFieldAnnotationSource() },
     objCAnnotationSource(fieldDescriptor),
@@ -156,7 +158,13 @@ private fun Renderer.fieldSource(field: Field): Source {
         identifierSource(fieldDescriptor.ktMangledName),
         typeDescriptorSource(typeDescriptor)
       ),
-      initializer(field.initializer?.let(::expressionSource).orEmpty())
+      initializer(
+        if (initializer == null && field.isNative) {
+          topLevelQualifiedNameSource("kotlin.js.definedExternally")
+        } else {
+          initializer?.let(::expressionSource).orEmpty()
+        }
+      )
     )
   )
 }
