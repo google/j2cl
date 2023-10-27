@@ -28,6 +28,12 @@ public class Main {
   @JsMethod
   public void method2(String s1, @JsOptional Double d, Boolean... i) {}
 
+  @JsMethod
+  public static void staticMethod1(int i1, @JsOptional Double d, @JsOptional Integer i) {}
+
+  @JsMethod
+  public static void staticMethod2(String s1, @JsOptional Double d, Boolean... i) {}
+
   @JsFunction
   interface Function {
     Object f1(@JsOptional String s, Object... args);

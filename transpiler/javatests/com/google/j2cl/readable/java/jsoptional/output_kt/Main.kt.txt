@@ -33,6 +33,7 @@ import kotlin.String
 import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktJsoptionalMain", exact = true)
@@ -76,6 +77,29 @@ open class Main {
  open fun testOptionalFunction(
   @ObjCName("withJsoptionalMain_Function") @JsOptional f: Main.Function?
  ) {}
+
+ @ObjCName("J2ktJsoptionalMainCompanion", exact = true)
+ companion object {
+  @JvmStatic
+  @ObjCName("staticMethod1")
+  @JsMethod
+  fun staticMethod1(
+   @ObjCName("withInt") i1: Int,
+   @ObjCName("withJavaLangDouble") @JsOptional d: Double?,
+   @ObjCName("withJavaLangInteger") @JsOptional i: Int?
+  ) {}
+
+  @JvmStatic
+  @ObjCName("staticMethod2")
+  @JsMethod
+  fun staticMethod2(
+   @ObjCName("withNSString") s1: String?,
+   @ObjCName("withJavaLangDouble") @JsOptional d: Double?,
+   vararg @ObjCName("withJavaLangBooleanArray") i: Boolean?
+  ) {
+   val i_1: Array<Boolean?>? = i as Array<Boolean?>?
+  }
+ }
 
  @JsFunction
  fun interface Function {
