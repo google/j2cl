@@ -25,6 +25,7 @@ import com.google.j2cl.transpiler.ast.Type;
 import com.google.protobuf.util.JsonFormat;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Nullable;
@@ -43,7 +44,10 @@ public final class SummaryBuilder {
   SummaryBuilder(Library library, WasmGenerationEnvironment environment, Problems problems) {
     this.environment = environment;
 
-    library.streamTypes().forEach(this::addType);
+    library
+        .streamTypes()
+        .sorted(Comparator.comparing(t -> t.getDeclaration().getClassHierarchyDepth()))
+        .forEach(this::addType);
   }
 
   private void addType(Type type) {

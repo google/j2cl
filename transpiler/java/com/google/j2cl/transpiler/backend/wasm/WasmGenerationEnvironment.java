@@ -286,6 +286,10 @@ class WasmGenerationEnvironment {
   private final Map<TypeDeclaration, Integer> slotByInterfaceTypeDeclaration = new HashMap<>();
 
   public String getInterfaceSlotFieldName(TypeDeclaration typeDeclaration) {
+    if (isModular) {
+      return getTypeSignature(typeDeclaration.toUnparameterizedTypeDescriptor());
+    }
+
     Integer slot = getInterfaceSlot(typeDeclaration);
     if (slot == null) {
       // Interfaces with no implementors will not have a slot assigned.
@@ -300,6 +304,9 @@ class WasmGenerationEnvironment {
   }
 
   Integer getInterfaceSlot(TypeDeclaration typeDeclaration) {
+    if (isModular) {
+      throw new UnsupportedOperationException();
+    }
     return slotByInterfaceTypeDeclaration.get(typeDeclaration);
   }
 
@@ -336,6 +343,9 @@ class WasmGenerationEnvironment {
   private int numberOfInterfaceSlots = -1;
 
   int getNumberOfInterfaceSlots() {
+    if (isModular) {
+      throw new UnsupportedOperationException();
+    }
     return numberOfInterfaceSlots;
   }
 
@@ -350,6 +360,13 @@ class WasmGenerationEnvironment {
   }
 
   WasmGenerationEnvironment(Library library, Imports jsImports) {
+    this(library, jsImports, /* isModular= */ false);
+  }
+
+  private boolean isModular;
+
+  WasmGenerationEnvironment(Library library, Imports jsImports, boolean isModular) {
+    this.isModular = isModular;
 
     // Resolve variable names into unique wasm identifiers.
     library
@@ -381,7 +398,9 @@ class WasmGenerationEnvironment {
               checkState(previous == null);
             });
 
-    assignInterfaceSlots(library);
+    if (!isModular) {
+      assignInterfaceSlots(library);
+    }
 
     this.jsImports = jsImports;
   }

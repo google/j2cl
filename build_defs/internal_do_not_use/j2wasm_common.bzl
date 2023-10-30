@@ -63,6 +63,7 @@ def _create_j2wasm_provider(j2cl_provider, deps):
                         d._private_.wasm_modular_info.transitive_modules
                         for d in j2wasm_deps
                     ],
+                    order = "topological",
                 ),
                 provider = j2cl_provider,
             ),

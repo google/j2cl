@@ -83,7 +83,7 @@ public class WasmOutputsGenerator {
 
     environment =
         new WasmGenerationEnvironment(
-            library, JsImportsGenerator.collectImports(library, problems));
+            library, JsImportsGenerator.collectImports(library, problems), /* isModular= */ true);
     SummaryBuilder summaryBuilder = new SummaryBuilder(library, environment, problems);
 
     // TODO(rluble): Introduce/use flags to emit the readable version of the summary. For now emit
@@ -96,7 +96,9 @@ public class WasmOutputsGenerator {
     copyJavaSources(library);
 
     builder = new SourceBuilder();
-    emitTypeDefinitions(library, usedNativeArrayTypes);
+    emitDynamicDispatchMethodTypes(library);
+    emitNativeArrayTypes(usedNativeArrayTypes);
+    emitForEachType(library, this::renderModularTypeStructs, "type definition");
     outputIfNotEmpty("types.wat");
 
     builder = new SourceBuilder();
@@ -244,19 +246,14 @@ public class WasmOutputsGenerator {
     builder.append("(rec");
     builder.indent();
 
-    emitTypeDefinitions(library, usedNativeArrayTypes);
+    emitDynamicDispatchMethodTypes(library);
+    emitItableSupportTypes();
+    emitNativeArrayTypes(usedNativeArrayTypes);
+    emitForEachType(library, this::renderMonolithicTypeStructs, "type definition");
 
     builder.unindent();
     builder.newLine();
     builder.append(")");
-  }
-
-  private void emitTypeDefinitions(
-      Library library, List<ArrayTypeDescriptor> usedNativeArrayTypes) {
-    emitDynamicDispatchMethodTypes(library);
-    emitItableSupportTypes();
-    emitNativeArrayTypes(usedNativeArrayTypes);
-    emitForEachType(library, this::renderTypeStructs, "type definition");
   }
 
   private void emitItableSupportTypes() {
@@ -359,7 +356,15 @@ public class WasmOutputsGenerator {
     }
   }
 
-  private void renderTypeStructs(Type type) {
+  private void renderMonolithicTypeStructs(Type type) {
+    renderTypeStructs(type, /* isModular= */ false);
+  }
+
+  private void renderModularTypeStructs(Type type) {
+    renderTypeStructs(type, /* isModular= */ true);
+  }
+
+  private void renderTypeStructs(Type type, boolean isModular) {
     if (type.isNative() || type.getDeclaration().getWasmInfo() != null) {
       return;
     }
@@ -369,7 +374,9 @@ public class WasmOutputsGenerator {
     } else {
       renderTypeStruct(type);
       renderClassVtableStruct(type);
-      renderClassItableStruct(type);
+      if (!isModular) {
+        renderClassItableStruct(type);
+      }
     }
   }
 

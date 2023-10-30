@@ -4,10 +4,6 @@
 (type $function.m_interfaceMethod__void (func (param (ref $java.lang.Object))))
 (type $function.m_defaultMethod__java_lang_Object__void (func (param (ref $java.lang.Object)) (param (ref null $java.lang.Object))))
 (type $function.m_defaultMethod__java_lang_String__void (func (param (ref $java.lang.Object)) (param (ref null $java.lang.String))))
-(type $itable (sub (struct 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-)))
 ;;; Code for Native Array types
 ;;; End of code for Native Array types
 ;;; Code for interfaces.Main.Interface [type definition]
@@ -59,10 +55,6 @@
  (field $m_defaultMethod__java_lang_String__void (ref $function.m_defaultMethod__java_lang_String__void))
  ))
 )
-(type $interfaces.Main.Implementor.itable (sub $itable (struct
-(field $slot0 (ref $interfaces.Main.SubInterface.vtable))
-(field $slot1 (ref $interfaces.Main.Interface.vtable))
-)))
 ;;; End of code for interfaces.Main.Implementor [type definition]
 ;;; Code for interfaces.Main.AbstractImplementor [type definition]
 (type $interfaces.Main.AbstractImplementor (sub $java.lang.Object (struct
@@ -83,8 +75,4 @@
  (field $m_defaultMethod__java_lang_String__void (ref $function.m_defaultMethod__java_lang_String__void))
  ))
 )
-(type $interfaces.Main.AbstractImplementor.itable (sub $itable (struct
-(field $slot0 (ref $interfaces.Main.SubInterface.vtable))
-(field $slot1 (ref $interfaces.Main.Interface.vtable))
-)))
 ;;; End of code for interfaces.Main.AbstractImplementor [type definition]

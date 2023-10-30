@@ -22,5 +22,6 @@ java_library(
         "//third_party:guava",
         "//transpiler/java/com/google/j2cl/common",
         "//transpiler/java/com/google/j2cl/common/bazel",
+        "//transpiler/java/com/google/j2cl/transpiler/backend/wasm:summary_java_proto",
     ],
 )
