@@ -85,6 +85,7 @@ def _impl_j2wasm_application(ctx):
         outputs = [ctx.outputs.wat],
         # TODO(b/176105504): Link instead copying when Blaze native tree support lands.
         command = "cp %s/module.wat %s" % (transpile_out.path, ctx.outputs.wat.path),
+        mnemonic = "J2wasm",
     )
 
     # Link the imports JS file for the named output.
@@ -93,6 +94,7 @@ def _impl_j2wasm_application(ctx):
         outputs = [ctx.outputs.jsimports],
         # TODO(b/176105504): Link instead copying when Blaze native tree support lands.
         command = "cp %s/imports.txt %s" % (transpile_out.path, ctx.outputs.jsimports.path),
+        mnemonic = "J2wasm",
     )
 
     # Create a module for exports.
@@ -221,6 +223,7 @@ def _impl_j2wasm_application(ctx):
             "cp -rL %s/* %s;" % (transpile_out.path, debug_dir.path) +
             "cp %s %s %s" % (ctx.outputs.srcmap.path, ctx.outputs.symbolmap.path, debug_dir.path)
         ),
+        mnemonic = "J2wasm",
     )
 
     # Make the actual JS imports mapping file using the template.
@@ -232,6 +235,7 @@ def _impl_j2wasm_application(ctx):
                   "| sed -e 's/%%MODULE_NAME%%/%s/g' " % ctx.label.name.replace("-", "_") +
                   "| sed -e '/%%IMPORTS%%/r %s' -e '//d ' " % ctx.outputs.jsimports.path +
                   ">> %s" % js_module.path,
+        mnemonic = "J2wasm",
     )
 
     # Build a JS provider exposing the JS imports mapping.
@@ -304,6 +308,7 @@ def _remap_symbol_map(ctx, transpile_out, binaryen_symbolmap):
             } END {
                 for (i in symbols) print i":"symbols[i]
             }' %s/namemap %s > %s""" % (transpile_out.path, binaryen_symbolmap.path, ctx.outputs.symbolmap.path),
+        mnemonic = "J2wasm",
     )
 
 _J2WASM_APP_ATTRS = {
