@@ -19,10 +19,12 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.base.CharMatcher;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,15 +42,22 @@ public class SourceBuilder {
   private static final char LINE_SEPARATOR_CHAR = '\n';
   private static final String LINE_SEPARATOR = String.valueOf(LINE_SEPARATOR_CHAR);
   private static final String INDENT = " ";
+  private static final int SINGLE_STRING_THRESHOLD = 1_000_000;
 
-  private final StringBuilder sb = new StringBuilder();
   private int currentLine = 0;
   private int currentColumn = 0;
+  private int currentLength = 0;
   private int currentIndentation = 0;
   private final SortedMap<SourcePosition, SourcePosition> javaSourceInfoByOutputSourceInfo =
       new TreeMap<>();
   private final Map<MemberDescriptor, SourcePosition> outputSourceInfoByMember = new HashMap<>();
   private boolean finished = false;
+
+  // |sb| is built up and then occasionally flushed to |outputs|.
+  //
+  // Prior to calling build, sb is always non-empty if outputs is non-empty.
+  private final StringBuilder sb = new StringBuilder();
+  private final ArrayList<String> outputs = new ArrayList<>();
 
   public void emitWithMapping(SourcePosition javaSourcePosition, Runnable codeEmitter) {
     checkNotNull(javaSourcePosition);
@@ -94,11 +103,13 @@ public class SourceBuilder {
   /**
    * Give the SourceMap file construction library enough information to be able to generate all of
    * the required empty group elements between the last mapping and the end of the file.
+   *
+   * <p>Also moves any remaining data from sb to outputs, so that sb is empty after this call.
    */
   private void emitEOF() {
     // TODO(stalcup): switch to generator.setFileLength() when that becomes possible.
     // Emit eof marker
-    if (sb.length() != 0) {
+    if (sb.length() != 0 || !outputs.isEmpty()) {
       emitWithMapping(
           SourcePosition.newBuilder()
               .setStartFilePosition(
@@ -107,6 +118,10 @@ public class SourceBuilder {
                   FilePosition.newBuilder().setLine(0).setColumn(0).setByteOffset(0).build())
               .build(),
           () -> {});
+    }
+    if (sb.length() > 0) {
+      outputs.add(sb.toString());
+      sb.setLength(0);
     }
     finished = true;
   }
@@ -129,16 +144,25 @@ public class SourceBuilder {
 
   public void append(String source) {
     checkState(!finished);
+    if (source.isEmpty()) {
+      return;
+    }
     String indentedSource =
         source.replace(LINE_SEPARATOR, LINE_SEPARATOR + INDENT.repeat(currentIndentation));
 
+    if (sb.length() > SINGLE_STRING_THRESHOLD) {
+      outputs.add(sb.toString());
+      sb.setLength(0);
+    }
+
     sb.append(indentedSource);
+    currentLength += indentedSource.length();
     currentLine += CharMatcher.is(LINE_SEPARATOR_CHAR).countIn(indentedSource);
-    int newLineSeperatorIndex = indentedSource.lastIndexOf(LINE_SEPARATOR);
+    int newLineSeparatorIndex = indentedSource.lastIndexOf(LINE_SEPARATOR);
     currentColumn =
-        newLineSeperatorIndex == -1
+        newLineSeparatorIndex == -1
             ? currentColumn + indentedSource.length()
-            : indentedSource.length() - newLineSeperatorIndex - 1;
+            : indentedSource.length() - newLineSeparatorIndex - 1;
   }
 
   public void appendLines(String... lines) {
@@ -170,8 +194,17 @@ public class SourceBuilder {
   }
 
   public String build() {
+    return String.join("", buildToList());
+  }
+
+  /**
+   * For generation of large outputs, this can be used instead of build() to get the intermediate
+   * strings for streaming to output.
+   */
+  public ImmutableList<String> buildToList() {
     emitEOF();
-    return sb.toString();
+    checkState(sb.length() == 0);
+    return ImmutableList.copyOf(outputs);
   }
 
   public void openBrace() {
@@ -181,6 +214,8 @@ public class SourceBuilder {
 
   public void closeBrace() {
     unindent();
+    // No need to look at this.outputs, because if this.outputs has an entry then sb is also
+    // non-empty.
     if (sb.charAt(sb.length() - 1) != '{') {
       newLine();
     }
@@ -194,6 +229,8 @@ public class SourceBuilder {
 
   public void closeParens() {
     unindent();
+    // No need to look at this.outputs, because if this.outputs has an entry then sb is also
+    // non-empty.
     if (sb.charAt(sb.length() - 1) != '(') {
       newLine();
     }
@@ -204,7 +241,7 @@ public class SourceBuilder {
     return FilePosition.newBuilder()
         .setLine(currentLine)
         .setColumn(currentColumn)
-        .setByteOffset(sb.length())
+        .setByteOffset(currentLength)
         .build();
   }
 }

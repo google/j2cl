@@ -18,8 +18,10 @@ package com.google.j2cl.common;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.common.Problems.FatalError;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.net.URI;
 import java.nio.file.FileSystem;
@@ -54,8 +56,12 @@ public class OutputUtils {
     }
 
     public void write(String path, String content) {
+      write(path, ImmutableList.of(content));
+    }
+
+    public void write(String path, ImmutableList<String> contentChunks) {
       Path outputPath = root.resolve(path);
-      fileService.execute(() -> OutputUtils.writeToFile(outputPath, content, problems));
+      fileService.execute(() -> OutputUtils.writeToFile(outputPath, contentChunks, problems));
     }
 
     public void copyFile(String fromAbsolute, String to) {
@@ -125,10 +131,15 @@ public class OutputUtils {
     }
   }
 
-  private static void writeToFile(Path outputPath, String content, Problems problems) {
+  private static void writeToFile(
+      Path outputPath, ImmutableList<String> chunks, Problems problems) {
     try {
       createDirectories(outputPath.getParent());
-      Files.writeString(outputPath, content, UTF_8);
+      try (BufferedWriter writer = Files.newBufferedWriter(outputPath, UTF_8)) {
+        for (String chunk : chunks) {
+          writer.append(chunk);
+        }
+      }
       // Wipe entries modification time so that input->output mapping is stable
       // regardless of the time of day.
       maybeResetAllTimeStamps(outputPath);

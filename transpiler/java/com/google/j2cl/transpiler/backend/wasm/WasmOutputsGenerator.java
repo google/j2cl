@@ -181,7 +181,7 @@ public class WasmOutputsGenerator {
 
     builder.newLine();
     builder.append(")");
-    output.write("module.wat", builder.build());
+    output.write("module.wat", builder.buildToList());
     output.write("namemap", emitNameMapping(library));
   }
 
