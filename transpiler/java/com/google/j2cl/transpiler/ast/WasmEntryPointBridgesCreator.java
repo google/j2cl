@@ -90,8 +90,6 @@ public class WasmEntryPointBridgesCreator {
 
   @Nullable
   private Method generateBridge(MethodDescriptor methodDescriptor, SourcePosition sourcePosition) {
-    MethodDescriptor bridgeMethodDescriptor = createExportBridgeDescriptor(methodDescriptor);
-
     if (!isEntryPoint(methodDescriptor)) {
       return null;
     }
@@ -102,6 +100,7 @@ public class WasmEntryPointBridgesCreator {
       return null;
     }
 
+    MethodDescriptor bridgeMethodDescriptor = createExportBridgeDescriptor(methodDescriptor);
     List<Variable> parameters =
         AstUtils.createParameterVariables(bridgeMethodDescriptor.getParameterTypeDescriptors());
 
