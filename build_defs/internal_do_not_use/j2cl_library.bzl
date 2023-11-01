@@ -215,7 +215,7 @@ def j2cl_library(
         testonly = args.get("testonly", 0),
     )
 
-    if args.get("srcs") and (generate_build_test == None or generate_build_test):
+    if has_srcs and (generate_build_test == None or generate_build_test):
         build_test(name, kwargs.get("tags", []))
 
     j2wasm_library_name = j2wasm_common.to_j2wasm_name(name)
