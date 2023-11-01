@@ -1,7 +1,7 @@
 
 [//]: # TOC
 
-# Getting Started for J2CL/Wasm
+# Getting Started for J2CL/Wasm (Experimental)
 
 ## Introduction
 
@@ -40,6 +40,7 @@ source:
 
 
 ```shell
+      $ cd j2cl/samples/wasm
       $ bazel build src/main/java/com/google/j2cl/samples/wasm:jsapp
 ```
 
