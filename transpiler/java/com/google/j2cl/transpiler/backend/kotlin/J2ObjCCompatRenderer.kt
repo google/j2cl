@@ -245,15 +245,13 @@ private val FieldDescriptor.defineConstantName: String
 private val Member.functionRenderers: List<Renderer<Source>>
   get() =
     when (this) {
-      is Method -> listOf(methodFunctionRenderer)
+      is Method -> methodFunctionRenderers
       is Field -> listOf(fieldGetFunctionRenderer, fieldSetFunctionRenderer)
       else -> emptyList()
     }
 
-private val Method.methodFunctionRenderer: Renderer<Source>
-  get() =
-    takeIf { it.descriptor.shouldRender }?.toObjCNames()?.let(::functionRenderer)
-      ?: rendererOf(Source.EMPTY)
+private val Method.methodFunctionRenderers: List<Renderer<Source>>
+  get() = takeIf { it.descriptor.shouldRender }?.toObjCNames()?.let(::functionRenderers) ?: listOf()
 
 private val MethodDescriptor.shouldRender: Boolean
   get() =
@@ -290,19 +288,32 @@ private val TypeDeclaration.shouldRender: Boolean
 private val TypeDeclaration.existsInObjC: Boolean
   get() = !isKtNative || mappedObjCNameRenderer != null
 
-private fun Method.functionRenderer(objCNames: MethodObjCNames): Renderer<Source> =
+private fun Method.functionRenderers(objCNames: MethodObjCNames): List<Renderer<Source>> =
+  if (isConstructor) {
+    listOf(
+      functionRenderer(objCNames, prefix = "create_"),
+      functionRenderer(objCNames, prefix = "new_")
+    )
+  } else {
+    listOf(functionRenderer(objCNames))
+  }
+
+private fun Method.functionRenderer(
+  objCNames: MethodObjCNames,
+  prefix: String = ""
+): Renderer<Source> =
   functionDeclaration(
     modifiers = listOf(nsInline),
     returnType = descriptor.returnTypeDescriptor.objCRenderer,
-    name = descriptor.functionName(objCNames),
+    name = descriptor.functionName(objCNames, prefix),
     parameters = parameters.map { it.renderer },
     statements = statementRenderers(objCNames.escapeObjCMethod(isConstructor))
   )
 
-private fun MethodDescriptor.functionName(objCNames: MethodObjCNames): String =
+private fun MethodDescriptor.functionName(objCNames: MethodObjCNames, prefix: String = ""): String =
   enclosingTypeDescriptor
     .objCName(useId = true)
-    .letIf(isConstructor) { "create_$it" }
+    .let { "$prefix$it" }
     .plus("_")
     .plus(objCNames.methodName)
     .letIf(objCNames.parameterNames.isNotEmpty()) { parameterName ->
