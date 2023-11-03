@@ -93,7 +93,7 @@ final class BazelJ2wasmExportsGenerator extends BazelWorker {
               // not be complete and cannot be fully resolved to descriptors.
               .filter(not(ITypeBinding::isAnnotation))
               .collect(ImmutableList.toImmutableList());
-      var environment = new JdtEnvironment();
+      var environment = new JdtEnvironment(parser);
 
       PackageInfoCache.init(classPathEntries, problems);
       environment.initWellKnownTypes(

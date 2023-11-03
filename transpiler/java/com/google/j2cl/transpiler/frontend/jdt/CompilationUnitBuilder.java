@@ -19,16 +19,11 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.MoreCollectors.onlyElement;
-import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.isNullMarked;
-import static com.google.j2cl.transpiler.frontend.jdt.JsInteropAnnotationUtils.getJsNamespace;
-import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtObjectiveCName;
 import static java.util.Arrays.stream;
-import static java.util.Map.Entry.comparingByKey;
 import static java.util.stream.Collectors.toCollection;
 import static java.util.stream.Collectors.toList;
 
 import com.google.common.base.Predicates;
-import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.SourcePosition;
@@ -99,7 +94,6 @@ import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.WhileStatement;
 import com.google.j2cl.transpiler.frontend.common.AbstractCompilationUnitBuilder;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -136,7 +130,7 @@ import org.eclipse.jdt.core.dom.VariableDeclaration;
 /** Creates a J2CL Java AST from the AST provided by JDT. */
 public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
-  private final JdtEnvironment environment = new JdtEnvironment();
+  private final JdtEnvironment environment;
 
   private class ASTConverter {
     private org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit;
@@ -152,14 +146,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       String packageName =
           packageDeclaration == null ? "" : packageDeclaration.getName().getFullyQualifiedName();
       setCurrentCompilationUnit(CompilationUnit.createForFile(sourceFilePath, packageName));
-      // Records information about package-info files supplied as source code.
-      if (getCurrentSourceFile().endsWith("package-info.java") && packageDeclaration != null) {
-        setPackagePropertiesFromSource(
-            packageName,
-            getJsNamespace(packageDeclaration),
-            getKtObjectiveCName(packageDeclaration),
-            isNullMarked(packageDeclaration));
-      }
+
       for (Object object : jdtCompilationUnit.types()) {
         AbstractTypeDeclaration abstractTypeDeclaration = (AbstractTypeDeclaration) object;
         getCurrentCompilationUnit().addType(convert(abstractTypeDeclaration));
@@ -1426,43 +1413,29 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   public static List<CompilationUnit> build(
-      CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings) {
+      CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings, JdtParser jdtParser) {
+    JdtEnvironment environment =
+        new JdtEnvironment(
+            PackageAnnotationsResolver.create(
+                compilationUnitsAndTypeBindings.getCompilationUnitsByFilePath().entrySet().stream()
+                    .filter(e -> e.getKey().endsWith("package-info.java"))
+                    .map(Entry::getValue),
+                jdtParser));
 
     Map<String, org.eclipse.jdt.core.dom.CompilationUnit> jdtUnitsByFilePath =
         compilationUnitsAndTypeBindings.getCompilationUnitsByFilePath();
     List<ITypeBinding> wellKnownTypeBindings = compilationUnitsAndTypeBindings.getTypeBindings();
     CompilationUnitBuilder compilationUnitBuilder =
-        new CompilationUnitBuilder(wellKnownTypeBindings);
+        new CompilationUnitBuilder(wellKnownTypeBindings, environment);
 
-    List<Entry<String, org.eclipse.jdt.core.dom.CompilationUnit>> entries =
-        new ArrayList<>(jdtUnitsByFilePath.entrySet());
-    // Ensure that all source package-info classes come before all other classes so that the
-    // freshness of the PackageInfoCache can be trusted.
-    sortPackageInfoFirst(entries);
-
-    return entries.stream()
+    return jdtUnitsByFilePath.entrySet().stream()
         .map(entry -> compilationUnitBuilder.buildCompilationUnit(entry.getKey(), entry.getValue()))
         .collect(toImmutableList());
   }
 
-  private static void sortPackageInfoFirst(
-      List<Entry<String, org.eclipse.jdt.core.dom.CompilationUnit>> entries) {
-    // Ensure that all source package-info classes come before all other classes so that the
-    // freshness of the PackageInfoCache can be trusted.
-    Collections.sort(
-        entries,
-        comparingByKey(
-            (thisFilePath, thatFilePath) -> {
-              boolean thisIsPackageInfo = thisFilePath.endsWith("package-info.java");
-              boolean thatIsPackageInfo = thatFilePath.endsWith("package-info.java");
-              return ComparisonChain.start()
-                  .compareTrueFirst(thisIsPackageInfo, thatIsPackageInfo)
-                  .compare(thisFilePath, thatFilePath)
-                  .result();
-            }));
-  }
-
-  private CompilationUnitBuilder(List<ITypeBinding> wellKnownTypeBindings) {
+  private CompilationUnitBuilder(
+      List<ITypeBinding> wellKnownTypeBindings, JdtEnvironment environment) {
+    this.environment = environment;
     environment.initWellKnownTypes(wellKnownTypeBindings);
   }
 }

@@ -49,13 +49,11 @@ import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.Visibility;
 import com.google.j2cl.transpiler.frontend.common.Nullability;
-import com.google.j2cl.transpiler.frontend.common.PackageInfoCache;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
@@ -87,6 +85,16 @@ public class JdtEnvironment {
 
   private final Map<IVariableBinding, FieldDescriptor> cachedFieldDescriptorByVariableBinding =
       new HashMap<>();
+
+  private final PackageAnnotationsResolver packageAnnotationsResolver;
+
+  public JdtEnvironment(JdtParser jdtParser) {
+    this.packageAnnotationsResolver = PackageAnnotationsResolver.create(Stream.of(), jdtParser);
+  }
+
+  public JdtEnvironment(PackageAnnotationsResolver packageAnnotationsResolver) {
+    this.packageAnnotationsResolver = packageAnnotationsResolver;
+  }
 
   @Nullable
   public static BinaryOperator getBinaryOperator(InfixExpression.Operator operator) {
@@ -491,16 +499,6 @@ public class JdtEnvironment {
     return NullabilityAnnotation.NO_ANNOTATION;
   }
 
-  /**
-   * In case the given type binding is nested, return the outermost possible enclosing type binding.
-   */
-  private static ITypeBinding toTopLevelTypeBinding(ITypeBinding typeBinding) {
-    ITypeBinding topLevelClass = typeBinding;
-    while (topLevelClass.getDeclaringClass() != null) {
-      topLevelClass = topLevelClass.getDeclaringClass();
-    }
-    return topLevelClass;
-  }
 
   private static boolean isIntersectionType(ITypeBinding binding) {
     return binding.isIntersectionType()
@@ -1114,27 +1112,25 @@ public class JdtEnvironment {
   }
 
   @Nullable
-  private String getObjectiveCNamePrefix(
-      ITypeBinding typeBinding, PackageInfoCache packageInfoCache) {
-    return getPropertyIfTopLevel(typeBinding, packageInfoCache::getObjectiveCName);
+  private String getObjectiveCNamePrefix(ITypeBinding typeBinding) {
+    checkArgument(!typeBinding.isPrimitive());
+    String objectiveCNamePrefix = KtInteropAnnotationUtils.getKtObjectiveCName(typeBinding);
+    boolean isTopLevelType = typeBinding.getDeclaringClass() == null;
+
+    return objectiveCNamePrefix != null || !isTopLevelType
+        ? objectiveCNamePrefix
+        : packageAnnotationsResolver.getObjectiveCNamePrefix(typeBinding.getPackage().getName());
   }
 
   @Nullable
-  private String getJsNamespace(ITypeBinding typeBinding, PackageInfoCache packageInfoCache) {
+  private String getJsNamespace(ITypeBinding typeBinding) {
     checkArgument(!typeBinding.isPrimitive());
     String jsNamespace = JsInteropAnnotationUtils.getJsNamespace(typeBinding);
-    return jsNamespace != null
-        ? jsNamespace
-        : getPropertyIfTopLevel(typeBinding, packageInfoCache::getJsNamespace);
-  }
-
-  @Nullable
-  private String getPropertyIfTopLevel(
-      ITypeBinding typeBinding, Function<String, String> propertyForBinaryName) {
     boolean isTopLevelType = typeBinding.getDeclaringClass() == null;
-    return isTopLevelType
-        ? propertyForBinaryName.apply(getBinaryNameFromTypeBinding(typeBinding))
-        : null;
+
+    return jsNamespace != null || !isTopLevelType
+        ? jsNamespace
+        : packageAnnotationsResolver.getJsNameSpace(typeBinding.getPackage().getName());
   }
 
   @Nullable
@@ -1155,17 +1151,6 @@ public class JdtEnvironment {
     checkArgument(!typeBinding.isWildcardType());
     checkArgument(!typeBinding.isCapture());
 
-    PackageInfoCache packageInfoCache = PackageInfoCache.get();
-
-    ITypeBinding topLevelTypeBinding = toTopLevelTypeBinding(typeBinding);
-    if (topLevelTypeBinding.isFromSource()) {
-      // Let the PackageInfoCache know that this class is Source, otherwise it would have to rummage
-      // around in the class path to figure it out and it might even come up with the wrong answer
-      // for example if this class has also been globbed into some other library that is a
-      // dependency of this one.
-      PackageInfoCache.get().markAsSource(getBinaryNameFromTypeBinding(topLevelTypeBinding));
-    }
-
     // Compute these first since they're reused in other calculations.
     String packageName =
         typeBinding.getPackage() == null ? null : typeBinding.getPackage().getName();
@@ -1185,7 +1170,7 @@ public class JdtEnvironment {
                 .map(this::createFieldDescriptor)
                 .collect(toImmutableList());
 
-    boolean isNullMarked = isNullMarked(typeBinding, packageInfoCache);
+    boolean isNullMarked = isNullMarked(typeBinding);
     IBinding declaringMemberBinding = getDeclaringMethodOrFieldBinding(typeBinding);
 
     typeDeclaration =
@@ -1225,8 +1210,8 @@ public class JdtEnvironment {
             .setAnonymous(typeBinding.isAnonymous())
             .setLocal(isLocal(typeBinding))
             .setSimpleJsName(getJsName(typeBinding))
-            .setCustomizedJsNamespace(getJsNamespace(typeBinding, packageInfoCache))
-            .setObjectiveCNamePrefix(getObjectiveCNamePrefix(typeBinding, packageInfoCache))
+            .setCustomizedJsNamespace(getJsNamespace(typeBinding))
+            .setObjectiveCNamePrefix(getObjectiveCNamePrefix(typeBinding))
             .setKtTypeInfo(KtInteropUtils.getKtTypeInfo(typeBinding))
             .setKtObjcInfo(KtInteropUtils.getKtObjcInfo(typeBinding))
             .setNullMarked(isNullMarked)
@@ -1249,10 +1234,9 @@ public class JdtEnvironment {
     return typeDeclaration;
   }
 
-  private boolean isNullMarked(ITypeBinding typeBinding, PackageInfoCache packageInfoCache) {
+  private boolean isNullMarked(ITypeBinding typeBinding) {
     return hasNullMarkedAnnotation(typeBinding)
-        || packageInfoCache.isNullMarked(
-            getBinaryNameFromTypeBinding(toTopLevelTypeBinding(typeBinding)));
+        || packageAnnotationsResolver.isNullMarked(typeBinding.getPackage().getName());
   }
 
   /**

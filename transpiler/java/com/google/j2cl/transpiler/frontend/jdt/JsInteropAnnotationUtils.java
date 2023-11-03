@@ -99,6 +99,11 @@ public class JsInteropAnnotationUtils {
         methodBinding.getAnnotations(), JS_OVERLAY_ANNOTATION_NAME);
   }
 
+  public static IAnnotationBinding getJsPackageAnnotation(ITypeBinding packageBinding) {
+    return JdtAnnotationUtils.findAnnotationBindingByName(
+        packageBinding.getAnnotations(), JS_PACKAGE_ANNOTATION_NAME);
+  }
+
   public static boolean isJsPackageAnnotation(IAnnotationBinding annotation) {
     return annotation.getAnnotationType().getQualifiedName().equals(JS_PACKAGE_ANNOTATION_NAME);
   }

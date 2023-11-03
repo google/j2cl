@@ -31,27 +31,11 @@ import java.util.function.Supplier;
 /** Base class for implementing that AST conversion from different front ends. */
 public abstract class AbstractCompilationUnitBuilder {
 
-  private final PackageInfoCache packageInfoCache = PackageInfoCache.get();
-
   /** Type stack to keep track of the lexically enclosing types as they are being created. */
   private final List<Type> typeStack = new ArrayList<>();
 
   private String currentSourceFile;
   private CompilationUnit currentCompilationUnit;
-
-  /**
-   * Sets the JS namespace and whether it defines a null marked scope for a package that is being
-   * compiled from source.
-   */
-  protected void setPackagePropertiesFromSource(
-      String packageName, String jsNamespace, String objectiveCName, boolean isNullMarked) {
-    packageInfoCache.setPackageProperties(
-        PackageInfoCache.SOURCE_CLASS_PATH_ENTRY,
-        packageName,
-        jsNamespace,
-        objectiveCName,
-        isNullMarked);
-  }
 
   protected String getCurrentSourceFile() {
     return currentSourceFile;

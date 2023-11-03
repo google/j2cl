@@ -41,7 +41,7 @@ public enum Frontend {
               /* useTargetPath= */ options.getGenerateKytheIndexingMetadata(),
               options.getForbiddenAnnotations());
       problems.abortIfHasErrors();
-      return CompilationUnitBuilder.build(compilationUnitsAndTypeBindings);
+      return CompilationUnitBuilder.build(compilationUnitsAndTypeBindings, parser);
     }
 
     @Override
