@@ -695,14 +695,14 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     private LabeledStatement convert(org.eclipse.jdt.core.dom.LabeledStatement statement) {
       Label label = Label.newBuilder().setName(statement.getLabel().getIdentifier()).build();
       checkState(labelsInScope.put(label.getName(), label) == null);
-      LabeledStatement labeledStatment =
+      LabeledStatement labeledStatement =
           LabeledStatement.newBuilder()
               .setSourcePosition(getSourcePosition(statement))
               .setLabel(label)
               .setStatement(convert(statement.getBody()))
               .build();
       labelsInScope.remove(label.getName());
-      return labeledStatment;
+      return labeledStatement;
     }
 
     private BreakStatement convert(org.eclipse.jdt.core.dom.BreakStatement statement) {
