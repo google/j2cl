@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-
+import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
@@ -119,7 +119,9 @@ public class InsertBoxingConversions extends NormalizationPass {
     return !TypeDescriptors.isNonVoidPrimitiveType(toTypeDescriptor)
         && TypeDescriptors.isNonVoidPrimitiveType(fromTypeDescriptor)
         && (areBooleanAndDoubleBoxed
-            || !TypeDescriptors.isPrimitiveBooleanOrDouble(fromTypeDescriptor));
+            || !TypeDescriptors.isPrimitiveBooleanOrDouble(fromTypeDescriptor))
+        // Boxing/unboxing for JsEnum is done in another pass.
+        && !AstUtils.isNonNativeJsEnum(toTypeDescriptor);
   }
 
   private static Expression maybeNarrowNumberLiteral(

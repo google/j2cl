@@ -30,6 +30,7 @@ import com.google.common.collect.Multiset;
 import com.google.common.collect.SetMultimap;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
+import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
@@ -110,10 +111,20 @@ class WasmGenerationEnvironment {
   }
 
   String getWasmType(TypeDescriptor typeDescriptor) {
+    if (typeDescriptor.isJsEnum()) {
+      return getWasmEnumType(typeDescriptor);
+    }
     if (typeDescriptor.isPrimitive()) {
       return getWasmTypeForPrimitive(typeDescriptor);
     }
     return "(ref null " + getWasmTypeName(typeDescriptor) + ")";
+  }
+
+  String getWasmEnumType(TypeDescriptor typeDescriptor) {
+    TypeDeclaration typeDeclaration =
+        ((DeclaredTypeDescriptor) typeDescriptor).getTypeDeclaration();
+    TypeDescriptor valueFieldType = AstUtils.getJsEnumValueFieldType(typeDeclaration);
+    return getWasmType(valueFieldType);
   }
 
   /**

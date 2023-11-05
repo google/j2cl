@@ -15,10 +15,12 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewriter;
 
 /**
@@ -38,6 +40,14 @@ public class NormalizeNullLiterals extends NormalizationPass {
                   TypeDescriptor actualTypeDescriptor,
                   Expression expression) {
                 if (expression instanceof NullLiteral) {
+                  if (AstUtils.isNonNativeJsEnum(inferredTypeDescriptor)) {
+                    // JsEnums types are removed, so this should be the boxed type. j.l.Object also
+                    // works because boxed js enum types are never explicitly referred to in method
+                    // signatures, and the only other types they can be passed as is Comparable and
+                    // Serializable which are interfaces and modeled in the backend as
+                    // java.lang.Object.
+                    return TypeDescriptors.get().javaLangObject.getDefaultValue();
+                  }
                   return inferredTypeDescriptor.getDefaultValue();
                 }
                 return expression;

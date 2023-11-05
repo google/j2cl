@@ -93,6 +93,22 @@ class Main extends j_l_Object {
  /** @nodts */
  static m_acceptsSupplierOfSupplier__jsenum_Main_Supplier__void(/** Supplier<Supplier<$Enums_BoxedComparableLightEnum<?ComparableJsEnum>>> */ supplier) {}
  /** @nodts */
+ static m_testReturnsAndParameters__void() {
+  let returnedValue = Main.m_returnsJsEnum__jsenum_Main_ComparableJsEnum();
+  let returnedNullValue = Main.m_returnsNullJsEnum__jsenum_Main_ComparableJsEnum();
+  Main.m_takesJsEnum__jsenum_Main_ComparableJsEnum__void(ComparableJsEnum.ONE);
+ }
+ /** @nodts @return {?ComparableJsEnum} */
+ static m_returnsJsEnum__jsenum_Main_ComparableJsEnum() {
+  return ComparableJsEnum.ONE;
+ }
+ /** @nodts @return {?ComparableJsEnum} */
+ static m_returnsNullJsEnum__jsenum_Main_ComparableJsEnum() {
+  return /**@type {?ComparableJsEnum}*/ ($Enums.unbox(null, $Overlay));
+ }
+ /** @nodts */
+ static m_takesJsEnum__jsenum_Main_ComparableJsEnum__void(/** ?ComparableJsEnum */ value) {}
+ /** @nodts */
  static m_testBoxUnboxWithTypeInference__void() {
   let templatedField = /**@type {!TemplatedField<$Enums_BoxedComparableLightEnum<?ComparableJsEnum>>}*/ (TemplatedField.$create__java_lang_Object(/**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay))));
   let unboxed = /**@type {?ComparableJsEnum}*/ ($Enums.unbox(templatedField.m_getValue__java_lang_Object_$pp_jsenum(), $Overlay));

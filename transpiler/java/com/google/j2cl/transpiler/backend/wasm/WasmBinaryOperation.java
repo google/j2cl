@@ -21,6 +21,7 @@ import static com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment.
 
 import com.google.common.base.Ascii;
 import com.google.common.collect.ImmutableMap;
+import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
@@ -58,6 +59,10 @@ public enum WasmBinaryOperation {
 
   public String getInstruction(BinaryExpression expression) {
     TypeDescriptor operandType = getOperandType(expression);
+    // For JsEnums, we emit the value type.
+    if (AstUtils.isPrimitiveNonNativeJsEnum(operandType)) {
+      operandType = AstUtils.getJsEnumValueFieldType(operandType);
+    }
     String prefix = operandType.isPrimitive() ? getWasmTypeForPrimitive(operandType) : "ref";
     String suffix = isPrimitiveFloatOrDouble(operandType) ? "" : integerSuffix;
     return prefix + "." + Ascii.toLowerCase(name()) + suffix;

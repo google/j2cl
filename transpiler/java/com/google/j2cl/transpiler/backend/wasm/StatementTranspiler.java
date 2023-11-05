@@ -23,6 +23,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.math.Stats;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
+import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.BooleanLiteral;
 import com.google.j2cl.transpiler.ast.BreakStatement;
@@ -45,6 +46,7 @@ import com.google.j2cl.transpiler.ast.SwitchStatement;
 import com.google.j2cl.transpiler.ast.SynchronizedStatement;
 import com.google.j2cl.transpiler.ast.ThrowStatement;
 import com.google.j2cl.transpiler.ast.TryStatement;
+import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.WhileStatement;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
@@ -207,7 +209,7 @@ final class StatementTranspiler {
       }
 
       private void renderSwitchDispatchTable(SwitchStatement switchStatement) {
-        if (switchStatement.getSwitchExpression().getTypeDescriptor().isPrimitive()) {
+        if (isPrimitiveOrJsEnum(switchStatement.getSwitchExpression().getTypeDescriptor())) {
           Stats stats =
               Stats.of(
                   switchStatement.getCases().stream()
@@ -219,6 +221,10 @@ final class StatementTranspiler {
           }
         }
         renderNonDenseSwitchDispatchTable(switchStatement);
+      }
+
+      private boolean isPrimitiveOrJsEnum(TypeDescriptor typeDescriptor) {
+        return typeDescriptor.isPrimitive() || AstUtils.isPrimitiveNonNativeJsEnum(typeDescriptor);
       }
 
       /**

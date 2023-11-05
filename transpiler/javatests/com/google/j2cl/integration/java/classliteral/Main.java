@@ -148,6 +148,10 @@ public class Main {
   }
 
   private static void testJsEnum() {
+    // TODO(b/295235576): enable for Wasm when class metadata is implemented for JsEnum.
+    if (isWasm()) {
+      return;
+    }
     Object o = MyJsEnum.VALUE;
     assertSame(MyJsEnum.class, o.getClass());
     assertSame(MyJsEnum.class, MyJsEnum.VALUE.getClass());
