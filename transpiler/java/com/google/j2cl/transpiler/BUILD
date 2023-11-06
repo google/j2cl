@@ -79,6 +79,19 @@ java_library(
     ],
 )
 
+java_library(
+    name = "bazelj2wasmbundler_lib",
+    srcs = ["BazelJ2wasmBundler.java"],
+    deps = [
+        "//third_party:args4j",
+        "//third_party:auto_value",
+        "//third_party:guava",
+        "//transpiler/java/com/google/j2cl/common",
+        "//transpiler/java/com/google/j2cl/common/bazel",
+        "//transpiler/java/com/google/j2cl/transpiler/backend/wasm:summary_java_proto",
+    ],
+)
+
 JVM_FLAGS = [
     "-XX:+TieredCompilation",
     "-Xss2M",
@@ -119,6 +132,14 @@ java_binary(
     main_class = "com.google.j2cl.transpiler.BazelJ2wasmExportsGenerator",
     visibility = ["//build_defs/internal_do_not_use:__pkg__"],
     runtime_deps = [":bazelwasmexportgenerator_lib"],
+)
+
+java_binary(
+    name = "BazelJ2wasmBundler",
+    jvm_flags = JVM_FLAGS,
+    main_class = "com.google.j2cl.transpiler.BazelJ2wasmBundler",
+    visibility = ["//build_defs/internal_do_not_use:__pkg__"],
+    runtime_deps = [":bazelj2wasmbundler_lib"],
 )
 
 # J2CL binary with Kotlin compiler dependency.

@@ -130,13 +130,13 @@ alias(
 )
 
 alias(
-    name = "J2wasmBundler",
-    actual = "//tools/java/com/google/j2cl/tools/bundler:J2wasmBundler_worker",
+    name = "J2wasmExportGenerator",
+    actual = "//transpiler/java/com/google/j2cl/transpiler:BazelJ2wasmExportGenerator",
 )
 
 alias(
-    name = "J2wasmExportGenerator",
-    actual = "//transpiler/java/com/google/j2cl/transpiler:BazelJ2wasmExportGenerator",
+    name = "J2wasmBundler",
+    actual = "//transpiler/java/com/google/j2cl/transpiler:BazelJ2wasmBundler",
 )
 
 alias(
