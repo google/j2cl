@@ -176,27 +176,28 @@ def j2cl_library(
         if target_name != "//ktstdlib:j2cl_kt_stdlib":
             args["deps"] = args.get("deps", []) + [_KOTLIN_STDLIB_TARGET]
 
-    elif has_srcs and is_j2kt_web_allowed:
+    elif is_j2kt_web_allowed:
         # Enable j2kt-web if the blaze flag is set to True
         args["j2kt_web_experiment_enabled"] = select({
             "//build_defs/internal_do_not_use:j2kt_web_enabled": True,
             "//conditions:default": False,
         })
 
-        # If j2kt-web is enabled, the java files are first transpiled to Kotlin before being send to
-        # the J2CL transpiler. In that case, we need to use the j2cl transpiler binary embedding the
-        # Kotlin frontend.
-        args["j2cl_transpiler_override"] = select({
-            "//build_defs/internal_do_not_use:j2kt_web_enabled": "//build_defs/internal_do_not_use:BazelJ2clBuilderWithKotlinSupport",
-            "//conditions:default": None,
-        })
+        if has_srcs:
+            # If j2kt-web is enabled, the java files are first transpiled to Kotlin before being
+            # send to the J2CL transpiler. In that case, we need to use the j2cl transpiler binary
+            # embedding the Kotlin frontend.
+            args["j2cl_transpiler_override"] = select({
+                "//build_defs/internal_do_not_use:j2kt_web_enabled": "//build_defs/internal_do_not_use:BazelJ2clBuilderWithKotlinSupport",
+                "//conditions:default": None,
+            })
 
-        # If j2kt-web is enabled, we need to add _JRE_J2KT_TARGET (to resolve calls added by j2kt)
-        # and _KOTLIN_STDLIB_TARGET as dependencies.
-        args["deps"] = args.get("deps", []) + select({
-            "//build_defs/internal_do_not_use:j2kt_web_enabled": [_JRE_J2KT_TARGET, _KOTLIN_STDLIB_TARGET],
-            "//conditions:default": [],
-        })
+            # If j2kt-web is enabled, we need to add _JRE_J2KT_TARGET (to resolve calls added by
+            # j2kt) and _KOTLIN_STDLIB_TARGET as dependencies.
+            args["deps"] = args.get("deps", []) + select({
+                "//build_defs/internal_do_not_use:j2kt_web_enabled": [_JRE_J2KT_TARGET, _KOTLIN_STDLIB_TARGET],
+                "//conditions:default": [],
+            })
 
     j2cl_library_rule(
         name = name,
