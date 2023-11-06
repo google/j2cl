@@ -12,9 +12,9 @@ j2cl_multi_test(
 
 """
 
-load("//build_defs:rules.bzl", "j2cl_test", "j2wasm_test")
+load("//build_defs:rules.bzl", "j2cl_test", "j2kt_jvm_test", "j2kt_native_test", "j2wasm_test")
 
-def j2cl_multi_test(name, test_class, deps, enable_wasm = True, **kwargs):
+def j2cl_multi_test(name, test_class, deps, enable_kt_jvm = False, enable_kt_native = False, enable_wasm = True, **kwargs):
     j2cl_test(
         name = name,
         test_class = test_class,
@@ -35,6 +35,24 @@ def j2cl_multi_test(name, test_class, deps, enable_wasm = True, **kwargs):
         ],
         **kwargs
     )
+
+    if enable_kt_jvm:
+        j2kt_jvm_deps = [dep + "-j2kt-jvm" for dep in deps]
+        j2kt_jvm_test(
+            name = name + "-j2kt-jvm",
+            test_class = test_class,
+            runtime_deps = j2kt_jvm_deps,
+            **kwargs
+        )
+
+    if enable_kt_native:
+        j2kt_native_deps = [dep + "-j2kt-native" for dep in deps]
+        j2kt_native_test(
+            name = name + "-j2kt-native",
+            test_class = test_class,
+            runtime_deps = j2kt_native_deps,
+            **kwargs
+        )
 
     if enable_wasm:
         j2wasm_deps = [dep + "-j2wasm" for dep in deps]

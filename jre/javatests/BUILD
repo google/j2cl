@@ -2,11 +2,11 @@
 #   j2cl/jre: JRE subset for transpilation.
 
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_binary")
-load(":j2cl_multi_test.bzl", "j2cl_multi_test")
 load("//javascript/tools/jscompiler/builddefs:flags.bzl", "VERBOSE_WARNING_FLAGS_STRICT", "WHITESPACE_ONLY_FLAGS")
 load("//third_party/bazel_rules/rules_closure/closure:defs.bzl", "closure_js_binary")
-load("//build_defs:rules.bzl", "j2cl_library", "j2cl_test")
+load("//build_defs:rules.bzl", "j2cl_library", "j2cl_test", "j2kt_native_library")
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
+load(":j2cl_multi_test.bzl", "j2cl_multi_test")
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],
@@ -46,6 +46,21 @@ j2cl_library(
     ],
 )
 
+j2kt_native_library(
+    name = "emul_tests_lib-j2kt-native",
+    testonly = 1,
+    srcs = [
+        "com/google/j2cl/jre/BigIntegerSuite.java",
+        "com/google/j2cl/jre/java/util/EmulTestBase.java",
+        "com/google/j2cl/jre/testing/J2ktIncompatible.java",
+        "com/google/j2cl/jre/testing/TestUtils.java",
+    ] + glob(["com/google/j2cl/jre/java/math/Big*.java"]),
+    deps = [
+        "//jre/java:javaemul_internal_annotations-j2kt-native",
+        "//third_party:junit-j2kt-native",
+    ],
+)
+
 # This runs all test for emul in JVM, this way we can make sure that our tests
 # assert the right behaviour for the JRE emulation.
 java_test(
@@ -79,6 +94,7 @@ j2cl_multi_test(
 
 j2cl_multi_test(
     name = "BigInteger",
+    enable_kt_native = True,
     shard_count = 8,
     test_class = "com.google.j2cl.jre.BigIntegerSuite",
     deps = [":emul_tests_lib"],
