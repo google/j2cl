@@ -22,7 +22,6 @@ import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastE
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.Asserts.assertUnderlyingTypeEquals;
 import static com.google.j2cl.integration.testing.Asserts.fail;
-import static jsenum.NativeEnums.nativeClinitCalled;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -32,13 +31,9 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import javaemul.internal.annotations.DoNotAutobox;
 import javaemul.internal.annotations.UncheckedCast;
-import javaemul.internal.annotations.Wasm;
-import jsenum.NativeEnums.NativeEnum;
-import jsenum.NativeEnums.NativeEnumWithClinit;
-import jsenum.NativeEnums.NumberNativeEnum;
-import jsenum.NativeEnums.StringNativeEnum;
 import jsinterop.annotations.JsEnum;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
@@ -54,26 +49,26 @@ public class Main {
     testStringNativeJsEnum();
     testCastOnNative();
     testComparableJsEnum();
-    testComparableJsEnumAsSeenFromJs();
-    testComparableJsEnumIntersectionCasts();
-    testJsEnumVariableInitialization();
     testStringJsEnum();
-    testStringJsEnumAsSeenFromJs();
     testJsEnumClassInitialization();
     testNativeEnumClassInitialization();
     testDoNotAutoboxJsEnum();
     testUnckeckedCastJsEnum();
-    testReturnsAndParameters();
     testAutoBoxing_relationalOperations();
     testAutoBoxing_typeInference();
     testAutoBoxing_specialMethods();
     testAutoBoxing_parameterizedLambda();
     testAutoBoxing_intersectionCasts();
     testSpecializedSuperType();
-    testSpecializedSuperTypeUnderlyingType();
   }
 
-  @Wasm("nop") // TODO(b/288145698): Support native JsEnum.
+  @JsEnum(isNative = true, namespace = "test")
+  enum NativeEnum {
+    @JsProperty(name = "OK")
+    ACCEPT,
+    CANCEL
+  }
+
   private static void testNativeJsEnum() {
     NativeEnum v = NativeEnum.ACCEPT;
     switch (v) {
@@ -149,10 +144,21 @@ public class Main {
   }
 
   @JsMethod(name = "passThrough")
-  @Wasm("nop") // TODO(b/288145698): Support native JsEnum.
   private static native Object asSeenFromJs(NativeEnum s);
 
-  @Wasm("nop") // TODO(b/288145698): Support native JsEnum.
+  @JsEnum(isNative = true, namespace = "test", name = "NativeEnum", hasCustomValue = true)
+  enum StringNativeEnum {
+    OK,
+    CANCEL;
+
+    private String value;
+
+    @JsOverlay
+    public String getValue() {
+      return value;
+    }
+  }
+
   private static void testStringNativeJsEnum() {
     StringNativeEnum v = StringNativeEnum.OK;
     switch (v) {
@@ -229,7 +235,14 @@ public class Main {
     assertTrue(asSeenFromJs(StringNativeEnum.OK) == OK_STRING);
   }
 
-  @Wasm("nop") // TODO(b/288145698): Support native JsEnum.
+  @JsEnum(isNative = true, namespace = "test", name = "NativeEnumOfNumber", hasCustomValue = true)
+  enum NumberNativeEnum {
+    ONE,
+    TWO;
+
+    int value;
+  }
+
   public static void testCastOnNative() {
     castToNativeEnum(NativeEnum.ACCEPT);
     castToNativeEnum(StringNativeEnum.OK);
@@ -269,7 +282,6 @@ public class Main {
   }
 
   @JsMethod(name = "passThrough")
-  @Wasm("nop") // Non-native JsMethod not supported in Wasm.
   private static native Object asSeenFromJs(StringNativeEnum s);
 
   @JsEnum
@@ -383,6 +395,12 @@ public class Main {
     Comparable c = (Comparable) o;
     Serializable s = (Serializable) o;
 
+    // Intersection casts box/or unbox depending on the destination type.
+    Comparable otherC = (PlainJsEnum & Comparable<PlainJsEnum>) o;
+    assertUnderlyingTypeEquals(PlainJsEnum.class, otherC);
+    PlainJsEnum otherPe = (PlainJsEnum & Comparable<PlainJsEnum>) o;
+    assertUnderlyingTypeEquals(Double.class, otherPe);
+
     assertThrowsClassCastException(
         () -> {
           Object unused = (Enum) o;
@@ -394,6 +412,8 @@ public class Main {
         },
         Double.class);
 
+    assertTrue(asSeenFromJs(PlainJsEnum.ONE) == ONE_DOUBLE);
+
     // Comparable test.
     SortedSet<Comparable> sortedSet = new TreeSet<>(Comparable::compareTo);
     sortedSet.add(PlainJsEnum.ONE);
@@ -402,36 +422,8 @@ public class Main {
     assertTrue(sortedSet.iterator().next() instanceof PlainJsEnum);
   }
 
-  @Wasm("nop") // Non-native JsMethod not supported in Wasm.
-  private static void testComparableJsEnumAsSeenFromJs() {
-    assertTrue(asSeenFromJs(PlainJsEnum.ONE) == ONE_DOUBLE);
-  }
-
-  @Wasm("nop") // TODO(b/182341814, b/295235576): DoNotAutobox not supported in Wasm. JsEnum class
-  // literals not yet supported in Wasm.
-  private static void testComparableJsEnumIntersectionCasts() {
-    Object o = PlainJsEnum.ONE;
-    // Intersection casts box/or unbox depending on the destination type.
-    Comparable otherC = (PlainJsEnum & Comparable<PlainJsEnum>) o;
-    assertUnderlyingTypeEquals(PlainJsEnum.class, otherC);
-    PlainJsEnum otherPe = (PlainJsEnum & Comparable<PlainJsEnum>) o;
-    assertUnderlyingTypeEquals(Double.class, otherPe);
-  }
-
   @JsMethod(name = "passThrough")
-  @Wasm("nop") // Non-native JsMethod not supported in Wasm.
   private static native Object asSeenFromJs(PlainJsEnum d);
-
-  public static PlainJsEnum defaultStaticJsEnum;
-  public static PlainJsEnum oneStaticJsEnum = PlainJsEnum.ONE;
-
-  private static void testJsEnumVariableInitialization() {
-    assertEquals(defaultStaticJsEnum, null);
-    assertEquals(oneStaticJsEnum, PlainJsEnum.ONE);
-
-    PlainJsEnum oneJsEnum = PlainJsEnum.ONE;
-    assertEquals(oneJsEnum, PlainJsEnum.ONE);
-  }
 
   @JsEnum(hasCustomValue = true)
   enum StringJsEnum {
@@ -521,15 +513,11 @@ public class Main {
           Object unused = (StringJsEnum & Comparable<StringJsEnum>) o;
         },
         Comparable.class);
-  }
 
-  @Wasm("nop") // Non-native JsMethod not supported in Wasm.
-  private static void testStringJsEnumAsSeenFromJs() {
     assertTrue(asSeenFromJs(StringJsEnum.HELLO) == HELLO_STRING);
   }
 
   @JsMethod(name = "passThrough")
-  @Wasm("nop") // Non-native JsMethod not supported in Wasm.
   private static native Object asSeenFromJs(StringJsEnum b);
 
   private static boolean nonNativeClinitCalled = false;
@@ -568,7 +556,24 @@ public class Main {
     assertTrue(nonNativeClinitCalled);
   }
 
-  @Wasm("nop") // TODO(b/288145698): Support native JsEnum.
+  private static boolean nativeClinitCalled = false;
+
+  @JsEnum(isNative = true, hasCustomValue = true, namespace = "test", name = "NativeEnum")
+  enum NativeEnumWithClinit {
+    OK;
+
+    static {
+      nativeClinitCalled = true;
+    }
+
+    String value;
+
+    @JsOverlay
+    String getValue() {
+      return value;
+    }
+  }
+
   private static void testNativeEnumClassInitialization() {
     assertFalse(nativeClinitCalled);
     // Access to an enum value does not trigger clinit.
@@ -588,7 +593,6 @@ public class Main {
     assertTrue(nativeClinitCalled);
   }
 
-  @Wasm("nop") // TODO(b/182341814): DoNotAutobox not supported in Wasm.
   private static void testDoNotAutoboxJsEnum() {
     assertTrue(returnsObject(StringJsEnum.HELLO) == HELLO_STRING);
     assertTrue(returnsObject(0, StringJsEnum.HELLO) == HELLO_STRING);
@@ -602,7 +606,6 @@ public class Main {
     return object[0];
   }
 
-  @Wasm("nop") // Unchecked cast not supported in Wasm.
   private static void testUnckeckedCastJsEnum() {
     StringJsEnum s = uncheckedCast(HELLO_STRING);
     assertTrue(s == StringJsEnum.HELLO);
@@ -611,31 +614,6 @@ public class Main {
   @UncheckedCast
   private static <T> T uncheckedCast(@DoNotAutobox Object object) {
     return (T) object;
-  }
-
-  private static void testReturnsAndParameters() {
-    assertTrue(PlainJsEnum.ONE == returnsJsEnum());
-    assertTrue(PlainJsEnum.ONE == returnsJsEnum(PlainJsEnum.ONE));
-    assertTrue(null == returnsNullJsEnum());
-    assertTrue(null == returnsJsEnum(null));
-
-    Main.<PlainJsEnum>testGenericAssertNull(null);
-  }
-
-  private static PlainJsEnum returnsJsEnum() {
-    return PlainJsEnum.ONE;
-  }
-
-  private static PlainJsEnum returnsJsEnum(PlainJsEnum value) {
-    return value;
-  }
-
-  private static PlainJsEnum returnsNullJsEnum() {
-    return null;
-  }
-
-  private static <T> void testGenericAssertNull(T obj) {
-    assertTrue(obj == null);
   }
 
   private static void testAutoBoxing_relationalOperations() {
@@ -673,8 +651,6 @@ public class Main {
     assertTrue(PlainJsEnum.TWO.compareTo(PlainJsEnum.TEN) < 0);
   }
 
-  @Wasm("nop") // TODO(b/182341814, b/295235576): DoNotAutobox not supported in Wasm. JsEnum class
-  // literals not yet supported in Wasm.
   private static void testAutoBoxing_intersectionCasts() {
     Comparable c = (PlainJsEnum & Comparable<PlainJsEnum>) PlainJsEnum.ONE;
     assertTrue(c.compareTo(PlainJsEnum.ZERO) > 0);
@@ -688,8 +664,6 @@ public class Main {
         PlainJsEnum.class, (PlainJsEnum & Comparable<PlainJsEnum>) PlainJsEnum.ONE);
   }
 
-  @Wasm("nop") // TODO(b/182341814, b/295235576): DoNotAutobox not supported in Wasm. JsEnum class
-  // literals not yet supported in Wasm.
   private static void testAutoBoxing_typeInference() {
     assertUnderlyingTypeEquals(Double.class, PlainJsEnum.ONE);
     assertUnderlyingTypeEquals(PlainJsEnum.class, boxingIdentity(PlainJsEnum.ONE));
@@ -834,8 +808,8 @@ public class Main {
     c.set(six);
     assertTrue(six == pc.get());
     assertTrue(six == ((Container<?>) c).get());
-    // assertUnderlyingTypeEquals(PlainJsEnum.class, ((Container<?>) c).get());
-    // assertUnderlyingTypeEquals(Double.class, pc.get());
+    assertUnderlyingTypeEquals(PlainJsEnum.class, ((Container<?>) c).get());
+    assertUnderlyingTypeEquals(Double.class, pc.get());
 
     JsTypePlainJsEnumContainer jpc = new JsTypePlainJsEnumContainer();
     JsTypeContainer<PlainJsEnum> jc = jpc;
@@ -845,29 +819,11 @@ public class Main {
     jc.set(six);
     assertTrue(six == jpc.get());
     assertTrue(six == ((JsTypeContainer<?>) jc).get());
-    // assertUnderlyingTypeEquals(PlainJsEnum.class, ((JsTypeContainer<?>) jc).get());
-    // assertUnderlyingTypeEquals(Double.class, jpc.get());
-  }
-
-  @Wasm("nop") // TODO(b/182341814, b/295235576): DoNotAutobox not supported in Wasm. JsEnum class
-  // literals not yet supported in Wasm.
-  private static void testSpecializedSuperTypeUnderlyingType() {
-    PlainJsEnum five = PlainJsEnum.FIVE;
-    PlainJsEnumContainer pc = new PlainJsEnumContainer();
-    Container<PlainJsEnum> c = pc;
-    pc.set(five);
-    assertUnderlyingTypeEquals(PlainJsEnum.class, ((Container<?>) c).get());
-    assertUnderlyingTypeEquals(Double.class, pc.get());
-
-    JsTypePlainJsEnumContainer jpc = new JsTypePlainJsEnumContainer();
-    JsTypeContainer<PlainJsEnum> jc = jpc;
-    jpc.set(five);
     assertUnderlyingTypeEquals(PlainJsEnum.class, ((JsTypeContainer<?>) jc).get());
     assertUnderlyingTypeEquals(Double.class, jpc.get());
   }
 
   @JsMethod
-  @Wasm("nop") // Non-native js methods not supported in Wasm.
   // Pass through an enum value as if it were coming from and going to JavaScript.
   private static Object passThrough(Object o) {
     // Supported closure enums can only have number, boolean or string as their underlying type.

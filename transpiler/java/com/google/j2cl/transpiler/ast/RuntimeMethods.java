@@ -225,57 +225,34 @@ public final class RuntimeMethods {
     MethodDescriptor boxingMethod =
         TypeDescriptors.get().javaemulInternalEnums.getMethodDescriptorByName(boxingMethodName);
 
-    if (boxingMethod == null) {
-      // If the method isn't found, use the type-specific "boxInteger", etc, calls.
-      boxingMethod =
-          TypeDescriptors.get()
-              .javaemulInternalEnums
-              .getMethodDescriptorByName(
-                  boxingMethodName + getBoxMethodSuffix(valueTypeDescriptor));
-    } else {
-      // Boxing operations are parameterized by the JsEnum type, so specialize the method to the
-      // right type.
-      TypeVariable type = boxingMethod.getTypeParameterTypeDescriptors().get(0);
-      boxingMethod =
-          boxingMethod.specializeTypeVariables(ImmutableMap.of(type, valueTypeDescriptor));
-    }
+    // boxing operations are parameterized by the JsEnum type, so specialize the method to the
+    // right type.
+    TypeVariable type = boxingMethod.getTypeParameterTypeDescriptors().get(0);
 
-    return createEnumsMethodCall(boxingMethod, value, valueTypeDescriptor);
+    // TODO(b/278167922): Probably the best thing to pass here in WASM is a method reference to
+    // class object getter, to avoid the eager creation of the class object upon boxing. The class
+    // object is only needed for cast and instanceof. But method references involve the
+    // instantiation of a lambda object which is even more costly. Fix once plain wasm function
+    // references can be modeled.
+
+    // Decide how to pass the information about the actual enum class to the generic boxed
+    // representation by looking at the second parameter of the boxing function. In JS, the JS
+    // constructor is used as a proxy for the class object.
+    Expression typeLiteral =
+        TypeDescriptors.isJavaLangClass(boxingMethod.getParameterTypeDescriptors().get(1))
+            ? new TypeLiteral(SourcePosition.NONE, valueTypeDescriptor)
+            : valueTypeDescriptor.getMetadataConstructorReference();
+    return MethodCall.Builder.from(
+            boxingMethod.specializeTypeVariables(ImmutableMap.of(type, valueTypeDescriptor)))
+        .setArguments(value, typeLiteral)
+        .build();
   }
 
   /** Create a call to Enums.unbox. */
   public static Expression createEnumsUnboxMethodCall(
       Expression expression, TypeDescriptor toTypeDescriptor) {
-    MethodDescriptor unboxingMethod =
-        TypeDescriptors.get().javaemulInternalEnums.getMethodDescriptorByName("unbox");
-
-    if (unboxingMethod == null) {
-      // If the method isn't found, use the type-specific "unboxInteger", etc, calls.
-      unboxingMethod =
-          TypeDescriptors.get()
-              .javaemulInternalEnums
-              .getMethodDescriptorByName("unbox" + getBoxMethodSuffix(toTypeDescriptor));
-    }
-
-    return createEnumsMethodCall(unboxingMethod, expression, toTypeDescriptor);
-  }
-
-  private static String getBoxMethodSuffix(TypeDescriptor toTypeDescriptor) {
-    TypeDescriptor valueTypeDescriptor = AstUtils.getJsEnumValueFieldType(toTypeDescriptor);
-    if (valueTypeDescriptor.isPrimitive()) {
-      return ((PrimitiveTypeDescriptor) valueTypeDescriptor).toBoxedType().getSimpleSourceName();
-    }
-    checkArgument(TypeDescriptors.isJavaLangString(valueTypeDescriptor));
-    return "String";
-  }
-
-  /** Create a call to Enums.isInstanceOf. */
-  public static Expression createEnumsInstanceOfMethodCall(
-      Expression expression, TypeDescriptor testTypeDescriptor) {
-    MethodDescriptor methodDescriptor =
-        TypeDescriptors.get().javaemulInternalEnums.getMethodDescriptorByName("isInstanceOf");
     return createEnumsMethodCall(
-        methodDescriptor, expression, testTypeDescriptor.toUnparameterizedTypeDescriptor());
+        "unbox", expression, toTypeDescriptor.getMetadataConstructorReference());
   }
 
   public static Expression createEnumsMethodCall(String unbox, Expression... arguments) {
@@ -283,27 +260,6 @@ public final class RuntimeMethods {
         TypeDescriptors.get().javaemulInternalEnums.getMethodDescriptorByName(unbox);
 
     return MethodCall.Builder.from(methodDescriptor).setArguments(arguments).build();
-  }
-
-  /**
-   * Creates a call to the specified method with the provided expression as the first argument and a
-   * type literal or constructor reference as the second argument.
-   */
-  private static Expression createEnumsMethodCall(
-      MethodDescriptor methodDescriptor, Expression value, TypeDescriptor valueTypeDescriptor) {
-    // TODO(b/278167922): Probably the best thing to pass here in WASM is a method reference to
-    // class object getter, to avoid the eager creation of the class object upon boxing. The class
-    // object is only needed for cast and instanceof. But method references involve the
-    // instantiation of a lambda object which is even more costly. Fix once plain wasm function
-    // references can be modeled.
-
-    // Decide how to pass the information about the actual enum class by looking at the second
-    // parameter of the function. In JS, the JS constructor is used as a proxy for the class object.
-    Expression typeLiteral =
-        TypeDescriptors.isJavaLangClass(methodDescriptor.getParameterTypeDescriptors().get(1))
-            ? new TypeLiteral(SourcePosition.NONE, valueTypeDescriptor)
-            : valueTypeDescriptor.getMetadataConstructorReference();
-    return MethodCall.Builder.from(methodDescriptor).setArguments(value, typeLiteral).build();
   }
 
   /** Create a call to an Equality method. */
@@ -514,17 +470,6 @@ public final class RuntimeMethods {
             capitalize(toTypeDescriptor.getSimpleSourceName()));
 
     return createPrimitivesMethodCall(methodName, expression);
-  }
-
-  public static Expression createEnumsIsNullCall(Expression reference) {
-    TypeDescriptor valueTypeDescriptor =
-        AstUtils.getJsEnumValueFieldType(reference.getTypeDescriptor());
-    return MethodCall.Builder.from(
-            TypeDescriptors.get()
-                .javaemulInternalEnums
-                .getMethodDescriptor("isNull", valueTypeDescriptor))
-        .setArguments(reference)
-        .build();
   }
 
   public static Expression createPlatformIsNullCall(Expression reference) {

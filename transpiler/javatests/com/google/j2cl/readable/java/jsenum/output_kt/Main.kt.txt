@@ -106,26 +106,6 @@ open class Main {
   internal fun acceptsSupplierOfSupplier_private_2(supplier: Main.Supplier<Main.Supplier<Main.ComparableJsEnum?>?>?) {}
 
   @JvmStatic
-  internal fun testReturnsAndParameters_private_2() {
-   val returnedValue: Main.ComparableJsEnum? = Main.returnsJsEnum_private_2()
-   val returnedNullValue: Main.ComparableJsEnum? = Main.returnsNullJsEnum_private_2()
-   Main.takesJsEnum_private_2(Main.ComparableJsEnum.ONE)
-  }
-
-  @JvmStatic
-  internal fun returnsJsEnum_private_2(): Main.ComparableJsEnum? {
-   return Main.ComparableJsEnum.ONE
-  }
-
-  @JvmStatic
-  internal fun returnsNullJsEnum_private_2(): Main.ComparableJsEnum? {
-   return null
-  }
-
-  @JvmStatic
-  internal fun takesJsEnum_private_2(value: Main.ComparableJsEnum?) {}
-
-  @JvmStatic
   internal fun testBoxUnboxWithTypeInference_private_2() {
    val templatedField: Main.TemplatedField<Main.ComparableJsEnum?>? = Main.TemplatedField<Main.ComparableJsEnum?>(Main.ComparableJsEnum.ONE)
    var unboxed: Main.ComparableJsEnum? = templatedField!!.getValue_pp_jsenum()

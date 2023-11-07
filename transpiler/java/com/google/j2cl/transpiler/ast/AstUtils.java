@@ -1015,12 +1015,6 @@ public final class AstUtils {
         && memberDescriptor.getEnclosingTypeDescriptor().isJsEnum();
   }
 
-  public static boolean isPrimitiveNonNativeJsEnum(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.isJsEnum()
-        && getJsEnumValueFieldType(((DeclaredTypeDescriptor) typeDescriptor).getTypeDeclaration())
-            .isPrimitive();
-  }
-
   public static FieldDescriptor createJsEnumConstantFieldDescriptor(
       FieldDescriptor fieldDescriptor) {
     TypeDescriptor enumValueType =
@@ -1031,11 +1025,6 @@ public final class AstUtils {
         .setCompileTimeConstant(true)
         .setEnumConstant(true)
         .build();
-  }
-
-  public static TypeDescriptor getJsEnumValueFieldType(TypeDescriptor typeDescriptor) {
-    checkState(typeDescriptor.isJsEnum());
-    return getJsEnumValueFieldType(((DeclaredTypeDescriptor) typeDescriptor).getTypeDeclaration());
   }
 
   /** Returns the value field for a JsEnum. */
@@ -1078,32 +1067,10 @@ public final class AstUtils {
     return typeDescriptor.isJsEnum() && !typeDescriptor.isNative();
   }
 
-  /**
-   * Returns true if {@code typeDescriptor} is a non native JsEnum, i.e. a JsEnum that requires
-   * boxing.
-   */
-  public static boolean isNonNativeJsEnum(TypeDeclaration typeDeclaration) {
-    return typeDeclaration.isJsEnum() && !typeDeclaration.isNative();
-  }
-
   /** Returns true if {@code typeDescriptor} is a non native JsEnum array. */
   public static boolean isNonNativeJsEnumArray(TypeDescriptor typeDescriptor) {
     return typeDescriptor.isArray()
         && isNonNativeJsEnum(((ArrayTypeDescriptor) typeDescriptor).getLeafTypeDescriptor());
-  }
-
-  /** Gets the initial value for a field or variable for the be assigned to a Wasm variable. */
-  public static Expression getInitialValue(TypeDescriptor typeDescriptor) {
-    // JsEnum default values are special case.
-    // TODO(b/299984505): Is there a better way to do this?
-    if (isNonNativeJsEnum(typeDescriptor)) {
-      TypeDescriptor valueTypeDescriptor = getJsEnumValueFieldType(typeDescriptor);
-      return valueTypeDescriptor.isPrimitive()
-          ? valueTypeDescriptor.toBoxedType().getFieldDescriptor("MIN_VALUE").getConstantValue()
-          : valueTypeDescriptor.getDefaultValue();
-    }
-
-    return typeDescriptor.getDefaultValue();
   }
 
   /** Returns a list of null values. */

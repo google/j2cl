@@ -30,7 +30,6 @@ import com.google.j2cl.common.StringUtils;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
-import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
@@ -366,9 +365,7 @@ public class WasmOutputsGenerator {
   }
 
   private void renderTypeStructs(Type type, boolean isModular) {
-    if (type.isNative()
-        || type.getDeclaration().getWasmInfo() != null
-        || AstUtils.isNonNativeJsEnum(type.getTypeDescriptor())) {
+    if (type.isNative() || type.getDeclaration().getWasmInfo() != null) {
       return;
     }
     if (type.isInterface()) {
@@ -433,9 +430,6 @@ public class WasmOutputsGenerator {
   }
 
   private void emitStaticFieldGlobals(Type type) {
-    if (AstUtils.isNonNativeJsEnum(type.getTypeDescriptor())) {
-      return;
-    }
     emitBeginCodeComment(type, "static fields");
     for (Field field : type.getStaticFields()) {
       builder.newLine();
@@ -450,9 +444,7 @@ public class WasmOutputsGenerator {
             format(
                 " (mut %s) ", environment.getWasmType(field.getDescriptor().getTypeDescriptor())));
         ExpressionTranspiler.render(
-            AstUtils.getInitialValue(field.getDescriptor().getTypeDescriptor()),
-            builder,
-            environment);
+            field.getDescriptor().getTypeDescriptor().getDefaultValue(), builder, environment);
       }
 
       builder.append(")");
@@ -461,9 +453,6 @@ public class WasmOutputsGenerator {
   }
 
   private void renderTypeMethods(Type type) {
-    if (AstUtils.isNonNativeJsEnum(type.getTypeDescriptor())) {
-      return;
-    }
     type.getMethods().stream()
         .filter(method -> !method.isAbstract() || method.isNative())
         .filter(m -> m.getDescriptor().getWasmInfo() == null)
@@ -689,7 +678,6 @@ public class WasmOutputsGenerator {
         .map(Type::getDeclaration)
         .filter(not(TypeDeclaration::isAbstract))
         .filter(type -> type.getWasmInfo() == null)
-        .filter(not(AstUtils::isNonNativeJsEnum))
         .forEach(this::emitDispatchTablesInitialization);
     builder.newLine();
   }

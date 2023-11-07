@@ -112,11 +112,7 @@ public class BinaryExpression extends Expression {
   public boolean isReferenceComparison() {
     return (getOperator() == BinaryOperator.EQUALS || getOperator() == BinaryOperator.NOT_EQUALS)
         && !getLeftOperand().getTypeDescriptor().isPrimitive()
-        && !getRightOperand().getTypeDescriptor().isPrimitive()
-        // We use the value type in the case of JsEnums with the declaration descriptor to ignore
-        // specialization of type variables in case any boxing occurs.
-        && !AstUtils.isPrimitiveNonNativeJsEnum(getLeftOperand().getDeclaredTypeDescriptor())
-        && !AstUtils.isPrimitiveNonNativeJsEnum(getRightOperand().getDeclaredTypeDescriptor());
+        && !getRightOperand().getTypeDescriptor().isPrimitive();
   }
 
   @Override

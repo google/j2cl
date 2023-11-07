@@ -20,7 +20,6 @@ import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 import javaemul.internal.annotations.Wasm;
-import jsinterop.annotations.JsEnum;
 
 /**
  * Incrementally tests wasm features as they are being added.
@@ -36,7 +35,6 @@ public class Main {
     testArrayInstanceOf();
     testArrayGetClass();
     testNativeArrays();
-    testJsEnumUnboxedReturn();
   }
 
   private static void testWasmAnnotation() {
@@ -125,21 +123,5 @@ public class Main {
     for (int i = 0; i < i31Refs.length; i++) {
       assertTrue(i31GetS(i31Refs[i]) == i);
     }
-  }
-
-  @JsEnum
-  private enum PlainJsEnum {
-    ONE,
-    TWO,
-    THREE
-  }
-
-  private static PlainJsEnum returnNullValue() {
-    return null;
-  }
-
-  private static void testJsEnumUnboxedReturn() {
-    // TODO(b/301342159): Remove this test and add a test to java/jsenum when this throws an NPE.
-    assertTrue(returnNullValue().ordinal() == Integer.MIN_VALUE);
   }
 }

@@ -154,22 +154,6 @@ public class Main {
 
   private static void acceptsSupplierOfSupplier(Supplier<Supplier<ComparableJsEnum>> supplier) {}
 
-  private static void testReturnsAndParameters() {
-    ComparableJsEnum returnedValue = returnsJsEnum();
-    ComparableJsEnum returnedNullValue = returnsNullJsEnum();
-    takesJsEnum(ComparableJsEnum.ONE);
-  }
-
-  private static ComparableJsEnum returnsJsEnum() {
-    return ComparableJsEnum.ONE;
-  }
-
-  private static ComparableJsEnum returnsNullJsEnum() {
-    return null;
-  }
-
-  private static void takesJsEnum(ComparableJsEnum value) {}
-
   private static void testBoxUnboxWithTypeInference() {
     // Make sure the enum is boxed even when assigned to a field that is inferred to be JsEnum.
     TemplatedField<ComparableJsEnum> templatedField =

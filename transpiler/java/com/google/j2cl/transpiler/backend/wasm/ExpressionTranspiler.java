@@ -29,7 +29,6 @@ import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.ArrayAccess;
 import com.google.j2cl.transpiler.ast.ArrayLength;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
-import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BooleanLiteral;
 import com.google.j2cl.transpiler.ast.CastExpression;
@@ -409,8 +408,7 @@ final class ExpressionTranspiler {
             .forEach(
                 fieldDescriptor -> {
                   sourceBuilder.append(" ");
-                  Expression initialValue =
-                      AstUtils.getInitialValue(fieldDescriptor.getTypeDescriptor());
+                  Expression initialValue = fieldDescriptor.getTypeDescriptor().getDefaultValue();
                   // TODO(b/296475021): Cleanup the handling of the elements field.
                   if (environment.isWasmArrayElementsField(fieldDescriptor)) {
                     // The initialization of the elements field in a wasm array is synthesized from

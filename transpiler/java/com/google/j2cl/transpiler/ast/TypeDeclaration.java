@@ -967,8 +967,6 @@ public abstract class TypeDeclaration
 
     abstract Optional<JsEnumInfo> getJsEnumInfo();
 
-    abstract boolean isNative();
-
     abstract Kind getKind();
 
     abstract boolean isAnnotation();
@@ -980,10 +978,8 @@ public abstract class TypeDeclaration
 
     public TypeDeclaration build() {
       if (getJsEnumInfo().isPresent()) {
-        // TODO(b/288145698): Support native JsEnum.
-        if (ignoreJsEnumAnnotations.get() && isNative()) {
+        if (ignoreJsEnumAnnotations.get()) {
           setJsEnumInfo(null);
-          setNative(false);
         } else {
           // The actual supertype for JsEnums is Object. JsEnum don't really extend Enum
           // and modeling that fact in the type model allows passes that query assignability (e.g.
