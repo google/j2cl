@@ -171,7 +171,10 @@ public class JdtParser {
       unit.accept(collector);
       if (!collector.getNodes().isEmpty()) {
         problems.fatal(
-            FatalError.INCOMPATIBLE_ANNOTATION_FOUND_IN_COMPILE, forbiddenAnnotation, filename);
+            unit.getLineNumber(collector.getNodes().get(0).getStartPosition()),
+            filename,
+            FatalError.INCOMPATIBLE_ANNOTATION_FOUND_IN_COMPILE,
+            forbiddenAnnotation);
       }
     }
     for (IProblem problem : unit.getProblems()) {

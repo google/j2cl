@@ -126,10 +126,12 @@ public class JavacParser {
       Set<String> filesWithGwtIncompatible =
           AnnotatedNodeCollector.filesWithAnnotation(javacCompilationUnits, forbiddenAnnotation);
       if (!filesWithGwtIncompatible.isEmpty()) {
+        // TODO(rluble): retrieve the line number where the annotation is found.
         problems.fatal(
+            -1,
+            filesWithGwtIncompatible.iterator().next(),
             FatalError.INCOMPATIBLE_ANNOTATION_FOUND_IN_COMPILE,
-            forbiddenAnnotation,
-            filesWithGwtIncompatible.iterator().next());
+            forbiddenAnnotation);
       }
     }
     for (Diagnostic<? extends JavaFileObject> diagnostic : diagnosticCollector.getDiagnostics()) {

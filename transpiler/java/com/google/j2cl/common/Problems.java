@@ -49,7 +49,7 @@ public class Problems {
     PACKAGE_INFO_PARSE("Resource '%s' was found but it failed to parse.", 1),
     CLASS_PATH_URL("Class path entry '%s' is not a valid url.", 1),
     INCOMPATIBLE_ANNOTATION_FOUND_IN_COMPILE(
-        "@$s annotations found in $s "
+        "Unexpected @%s annotation found. "
             + "Please run this library through the incompatible annotated code stripper tool.",
         1),
     LIBRARY_INFO_OUTPUT_ARG_MISSING("-libraryinfooutput option is mandatory", 0),
@@ -97,6 +97,12 @@ public class Problems {
   public void fatal(FatalError fatalError, Object... args) {
     checkArgument(fatalError.getNumberOfArguments() == args.length);
     problem(Severity.ERROR, "Error: " + String.format(fatalError.getMessage(), args));
+    abort();
+  }
+
+  public void fatal(int lineNumber, String filePath, FatalError fatalError, Object... args) {
+    checkArgument(fatalError.getNumberOfArguments() == args.length);
+    problem(Severity.ERROR, lineNumber, filePath, String.format(fatalError.getMessage(), args));
     abort();
   }
 
@@ -152,6 +158,10 @@ public class Problems {
       @FormatString String detailMessage,
       Object... args) {
     String message = args.length == 0 ? detailMessage : String.format(detailMessage, args);
+    problem(severity, lineNumber, filePath, message);
+  }
+
+  private void problem(Severity severity, int lineNumber, String filePath, String message) {
     problem(
         severity,
         String.format(
