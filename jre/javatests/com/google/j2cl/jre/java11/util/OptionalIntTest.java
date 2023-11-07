@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Google Inc.
+ * Copyright 2023 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,24 +13,18 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.jre;
+package com.google.j2cl.jre.java11.util;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import com.google.j2cl.jre.java.util.EmulTestBase;
 
-/** TestSuite for all of GWT's emul suites. */
-@RunWith(Suite.class)
-@SuiteClasses({
-  BigDecimalSuite.class,
-  BigIntegerSuite.class,
-  CollectionsSuite.class,
-  ConcurrentSuite.class,
-  EmulSuite.class,
-  EmulJava8Suite.class,
-  EmulJava9Suite.class,
-  EmulJava10Suite.class,
-  EmulJava11Suite.class,
-  LangSuite.class,
-})
-public class AllTests {}
+import java.util.OptionalInt;
+
+/**
+ * Tests for java.util.OptionalInt Java 11 API emulation.
+ */
+public class OptionalIntTest extends EmulTestBase {
+  public void testIsEmpty() {
+    assertTrue(OptionalInt.empty().isEmpty());
+    assertFalse(OptionalInt.of(456).isEmpty());
+  }
+}
