@@ -56,8 +56,7 @@ public class OptionalTest extends TestCase {
     assertTrue(present.isPresent());
   }
 
-  // Disabled until Java 11 is enabled in Open source
-/*  public void testIsEmpty() {
+  public void testIsEmpty() {
     // empty case
     assertTrue(empty.isEmpty());
 
@@ -69,7 +68,7 @@ public class OptionalTest extends TestCase {
 
     present = Optional.ofNullable(REFERENCE);
     assertFalse(present.isEmpty());
-  }*/
+  }
 
   public void testGet() {
     // empty case
