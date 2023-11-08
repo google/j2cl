@@ -113,6 +113,9 @@ public final class J2clCommandLineRunner extends CommandLineTool {
   @Option(name = "-generateWasmExport", hidden = true)
   List<String> wasmEntryPoints = new ArrayList<>();
 
+  @Option(name = "-forbiddenAnnotation", hidden = true)
+  List<String> forbiddenAnnotations = new ArrayList<>();
+
   @Option(name = "-defineForWasm", handler = MapOptionHandler.class, hidden = true)
   Map<String, String> definesForWasm = new HashMap<>();
 
@@ -171,6 +174,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
         .setBackend(this.backend)
         .setWasmEntryPointStrings(ImmutableList.copyOf(wasmEntryPoints))
         .setDefinesForWasm(ImmutableMap.copyOf(definesForWasm))
+        .setForbiddenAnnotations(ImmutableList.copyOf(forbiddenAnnotations))
         .build(problems);
   }
 

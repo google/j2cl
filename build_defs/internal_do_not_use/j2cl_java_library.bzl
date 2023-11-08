@@ -20,6 +20,7 @@ def _impl_j2cl_library(ctx):
             exported_plugins = _javaplugin_providers_of(ctx.attr.exported_plugins),
             output_jar = ctx.actions.declare_file(ctx.label.name + "_j2kt_web_jvm.jar"),
             javac_opts = ctx.attr.javacopts,
+            strip_annotation = "GwtIncompatible",
         )
 
         # Pass the package-info.java files as srcs so Kotlin frontend can correctly resolved

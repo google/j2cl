@@ -307,6 +307,7 @@ def _j2cl_transpile(
         args.add("-generatekytheindexingmetadata")
     args.add_all(kotlincopts, format_each = "-kotlincOptions=%s")
     args.add_joined(kt_friend_jars, format_joined = "-kotlincOptions=-Xfriend-paths=%s", join_with = ",")
+    args.add("-forbiddenAnnotation", "GwtIncompatible")
     args.add_all(srcs)
 
     #  TODO(b/217287994): Remove the ability to do transpiler override.

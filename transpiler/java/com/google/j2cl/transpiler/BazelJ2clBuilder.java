@@ -118,6 +118,9 @@ final class BazelJ2clBuilder extends BazelWorker {
   @Option(name = "-experimentalGenerateWasmExport", hidden = true)
   List<String> wasmEntryPoints = new ArrayList<>();
 
+  @Option(name = "-forbiddenAnnotation", hidden = true)
+  List<String> forbiddenAnnotations = new ArrayList();
+
   @Option(name = "-experimentalDefineForWasm", handler = MapOptionHandler.class, hidden = true)
   Map<String, String> definesForWasm = new HashMap<>();
 
@@ -196,6 +199,7 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setWasmRemoveAssertStatement(wasmRemoveAssertStatement)
         .setNullMarkedSupported(this.enableJSpecifySupport)
         .setKotlincOptions(ImmutableList.copyOf(kotlincOptions))
+        .setForbiddenAnnotations(ImmutableList.copyOf(forbiddenAnnotations))
         .build(problems);
   }
 

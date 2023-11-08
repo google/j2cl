@@ -360,6 +360,7 @@ public class CommandLineInvocationTest extends TestCase {
 
   public void testForbiddenAnnotations() {
     newTesterWithDefaults()
+        .addArgs("-forbiddenAnnotation", "GwtIncompatible")
         .addCompilationUnit(
             "annotation.GwtIncompatible",
             "import java.lang.annotation.*;",
@@ -376,5 +377,21 @@ public class CommandLineInvocationTest extends TestCase {
         .assertErrorsWithoutSourcePosition(
             "Unexpected @GwtIncompatible annotation found. Please run this library through the"
                 + " incompatible annotated code stripper tool.");
+
+    newTesterWithDefaults()
+        .addArgs("-forbiddenAnnotation", "Foo")
+        .addCompilationUnit(
+            "annotation.GwtIncompatible",
+            "import java.lang.annotation.*;",
+            "@Retention(RetentionPolicy.CLASS)",
+            "@Target({ElementType.METHOD})",
+            "@interface GwtIncompatible {}")
+        .addCompilationUnit(
+            "annotation.ClassWithForbiddenAnnotation",
+            "import jsinterop.annotations.*;",
+            "public class ClassWithForbiddenAnnotation {",
+            "  @GwtIncompatible public void nativeInstanceMethod() {}",
+            "}")
+        .assertTranspileSucceeds();
   }
 }
