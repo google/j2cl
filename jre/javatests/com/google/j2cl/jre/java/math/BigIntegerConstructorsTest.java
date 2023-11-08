@@ -36,7 +36,6 @@
 package com.google.j2cl.jre.java.math;
 
 import com.google.j2cl.jre.java.util.EmulTestBase;
-import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.math.BigInteger;
 import java.util.Random;
 
@@ -212,7 +211,6 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
   }
 
   /** Create a prime number of 2 bits length. */
-  @J2ktIncompatible // TODO(b/308933045): "Wrong bitlength"
   public void testConstructorPrime2() {
     int bitLen = 2;
     Random rnd = new Random();
