@@ -114,7 +114,8 @@ public class SourceUtils {
    *
    * <p>Java source root decision is similar to the algorithm in {@code
    * com.google.devtools.build.lib.rules.java.JavaUtil#getJavaPath} except the full path is returned
-   * if there is no known java source root in the path.
+   * if there is no known java source root in the path. Also common "super" source roots are
+   * considered Java source root.
    */
   public static String getJavaPath(String path) {
     // Choose the one that matches earlier.
@@ -123,6 +124,17 @@ public class SourceUtils {
     if (javaRelativePath.isEmpty()) {
       javaRelativePath = path.substring(indexAfterRoot(path, TEMP_ROOT));
     }
+
+    // Look if the file is part of the super source code. In that case return the relative path from
+    // the super source directory.
+    index =
+        Math.min(
+            indexAfterRoot(javaRelativePath, "super"),
+            indexAfterRoot(javaRelativePath, "super-j2cl"));
+    if (index < javaRelativePath.length()) {
+      javaRelativePath = javaRelativePath.substring(index);
+    }
+
     return javaRelativePath.isEmpty() ? path : javaRelativePath;
   }
 

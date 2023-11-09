@@ -14,9 +14,12 @@ j2cl_library(
     srcs = glob([
         "super/**/*.java",
         "super/**/*.native.js",
+        "super-j2cl/**/*.java",
+        "super-j2cl/**/*.native.js",
     ]),
     generate_j2kt_jvm_library = False,
     generate_j2kt_native_library = False,
+    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )
 
 integration_test(
