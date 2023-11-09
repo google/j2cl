@@ -1989,6 +1989,14 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  InvalidCustomValueInitializer(int value) { this.value = value; }",
             "}",
             "@JsEnum(hasCustomValue = true)",
+            "enum CustomValueWithIntegerMinValue {",
+            "  A(Integer.MIN_VALUE),",
+            "  B(-2147483648),",
+            "  C(Integer.MIN_VALUE + 1 - 1);",
+            "  int value;",
+            "  CustomValueWithIntegerMinValue(int value) { this.value = value; }",
+            "}",
+            "@JsEnum(hasCustomValue = true)",
             "enum InvalidCustomValueConstructor {",
             "  A(1);",
             "  int value;",
@@ -2027,6 +2035,12 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 + "static nor JsOverlay nor JsMethod nor JsProperty.",
             "Custom-valued JsEnum constant 'InvalidCustomValueInitializer.A' cannot have a "
                 + "non-literal value.",
+            "Custom-valued JsEnum constant 'CustomValueWithIntegerMinValue.A' cannot be equal to"
+                + " Integer.MIN_VALUE.",
+            "Custom-valued JsEnum constant 'CustomValueWithIntegerMinValue.B' cannot be equal to"
+                + " Integer.MIN_VALUE.",
+            "Custom-valued JsEnum constant 'CustomValueWithIntegerMinValue.C' cannot be equal to"
+                + " Integer.MIN_VALUE.",
             "JsEnum 'CustomValued' does not support 'String Enum.name()'.",
             "Custom-valued JsEnum 'CustomValued' does not support 'int Enum.ordinal()'.",
             "Custom-valued JsEnum 'CustomValued' does not support "

@@ -62,6 +62,7 @@ import com.google.j2cl.transpiler.ast.MethodLike;
 import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.NullLiteral;
+import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.SuperReference;
@@ -539,6 +540,16 @@ public class JsInteropRestrictionsChecker {
 
     Expression enumFieldValue = getEnumConstantValue(field);
     if (enumFieldValue == null || enumFieldValue.isCompileTimeConstant()) {
+      // Integer.MIN_VALUE is considered null in Wasm for int-valued JsEnums.
+      // We can check for NumberLiteral here because constant expressions are folded in the
+      // frontend.
+      if (enumFieldValue instanceof NumberLiteral
+          && ((NumberLiteral) enumFieldValue).getValue().intValue() == Integer.MIN_VALUE) {
+        problems.error(
+            field.getSourcePosition(),
+            "Custom-valued JsEnum constant '%s' cannot be equal to Integer.MIN_VALUE.",
+            field.getReadableDescription());
+      }
       return;
     }
     problems.error(
