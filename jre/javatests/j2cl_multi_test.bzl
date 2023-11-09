@@ -79,6 +79,5 @@ def j2cl_multi_test(name, test_class, deps, enable_kt_jvm = False, enable_kt_nat
             optimize = 1,
             wasm_defs = j2wasm_defines,
             browsers = ["//build_defs/internal_do_not_use/browser:chrome-wasm-dev-linux"],
-            use_legacy_wasm_spec = False,
             **kwargs
         )
