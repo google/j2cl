@@ -15,24 +15,12 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import static com.google.common.collect.ImmutableSet.toImmutableSet;
-
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.LinkedHashMultimap;
-import com.google.common.collect.SetMultimap;
-import com.google.common.collect.Sets;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
-import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Library;
-import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
-import com.google.j2cl.transpiler.ast.Type;
-import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
-import com.google.j2cl.transpiler.ast.TypeVariable;
-import java.util.Set;
 
 /**
  * Upgrades the dispatch if the instance is not an interface type. This may happen if the type at
@@ -42,8 +30,6 @@ public final class UpgradeInterfaceDispatch extends LibraryNormalizationPass {
 
   @Override
   public void applyTo(Library library) {
-
-    SetMultimap<TypeDeclaration, MethodDescriptor> newMethods = LinkedHashMultimap.create();
 
     library.accept(
         new AbstractRewriter() {
@@ -57,7 +43,7 @@ public final class UpgradeInterfaceDispatch extends LibraryNormalizationPass {
             TypeDescriptor typeDescriptor = methodCall.getQualifier().getTypeDescriptor();
 
             if (typeDescriptor.isTypeVariable()) {
-              typeDescriptor = ((TypeVariable) typeDescriptor).toRawTypeDescriptor();
+              typeDescriptor = typeDescriptor.toRawTypeDescriptor();
             }
 
             if (!typeDescriptor.isClass()) {
@@ -67,51 +53,21 @@ public final class UpgradeInterfaceDispatch extends LibraryNormalizationPass {
 
             DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
             MethodDescriptor newMethodDescriptor =
-                createStubMethodDescriptor(declaredTypeDescriptor, methodCall.getTarget());
-
-            newMethods.put(declaredTypeDescriptor.getTypeDeclaration(), newMethodDescriptor);
+                createNewTargetMethodDescriptor(declaredTypeDescriptor, methodCall.getTarget());
 
             return MethodCall.Builder.from(methodCall).setTarget(newMethodDescriptor).build();
           }
         });
-
-    library.streamTypes().forEach(t -> addStubMethods(t, newMethods.get(t.getDeclaration())));
   }
 
-  private static MethodDescriptor createStubMethodDescriptor(
+  /** Creates a MethodDescriptor to target a polymorphic method on a particular class. */
+  private static MethodDescriptor createNewTargetMethodDescriptor(
       DeclaredTypeDescriptor typeDescriptor, MethodDescriptor descriptor) {
     return MethodDescriptor.Builder.from(descriptor.getDeclarationDescriptor())
         .setDeclarationDescriptor(null)
         .setDefaultMethod(false)
-        .setAbstract(true)
+        .setAbstract(typeDescriptor.getTypeDeclaration().isAbstract())
         .setEnclosingTypeDescriptor(typeDescriptor.toNullable())
         .build();
-  }
-
-  private static void addStubMethods(Type type, Set<MethodDescriptor> newMethodDescriptors) {
-    if (newMethodDescriptors.isEmpty()) {
-      return;
-    }
-
-    // Some interface dispatches already have targets method due to bridges that are added later.
-    ImmutableSet<String> bridgeMethodsMangledNames =
-        type.getTypeDescriptor().getPolymorphicMethods().stream()
-            .filter(m -> m.isBridge())
-            .map(MethodDescriptor::getMangledName)
-            .collect(toImmutableSet());
-
-    Set<String> existingMangledNames = Sets.newHashSet(bridgeMethodsMangledNames);
-
-    newMethodDescriptors.stream()
-        .filter(m -> existingMangledNames.add(m.getMangledName()))
-        .forEach(
-            m ->
-                type.addMember(
-                    Method.newBuilder()
-                        .setMethodDescriptor(m)
-                        .setParameters(
-                            AstUtils.createParameterVariables(m.getParameterTypeDescriptors()))
-                        .setSourcePosition(type.getSourcePosition())
-                        .build()));
   }
 }
