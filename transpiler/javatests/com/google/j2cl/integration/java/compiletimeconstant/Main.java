@@ -52,7 +52,19 @@ public class Main {
     public static int nonConstant = 20;
   }
 
+  interface CompileTimeConstantInterface {
+    int CONSTANT = 1;
+    Object OBJ = null;
+    Object OBJ2 = ranClinit();
+  }
+
+  private static Object ranClinit() {
+    ranClinit = true;
+    return null;
+  }
+
   public static boolean ranClinit = false;
+
 
   public static void main(String... args) {
     testClinitOrder();
@@ -83,6 +95,13 @@ public class Main {
     assertTrue(total == 78);
 
     assertTrue(CompileTimeConstants.OBJ == null);
+
+    ranClinit = false;
+    total += CompileTimeConstantInterface.CONSTANT;
+    assertTrue(ranClinit == false);
+    assertTrue(total == 79);
+    assertTrue(CompileTimeConstantInterface.OBJ == null);
+    assertTrue(ranClinit);
   }
 
   private static void testExternConstant() {
@@ -94,4 +113,3 @@ public class Main {
     assertTrue(ExternConstant.CONSTANT == 4);
   }
 }
-

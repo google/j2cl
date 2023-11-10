@@ -15,10 +15,11 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
+import com.google.j2cl.transpiler.ast.Field
 import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDescriptor
-import com.google.j2cl.transpiler.backend.kotlin.ast.Member
+import com.google.j2cl.transpiler.backend.kotlin.ast.Member as KtMember
 import com.google.j2cl.transpiler.backend.kotlin.ast.toCompanionObjectOrNull
 
 internal val Type.declaredSuperTypeDescriptors: List<TypeDescriptor>
@@ -37,13 +38,22 @@ internal val Type.ktPrimaryConstructor: Method?
     }
 
 /** Returns a list of Kotlin members inside this Java type. */
-internal val Type.ktMembers: List<Member>
+internal val Type.ktMembers: List<KtMember>
   get() =
     members
       .asSequence()
       .filter { !it.isStatic && (!declaration.isAnonymous || !it.isConstructor) }
-      .map { Member.WithJavaMember(it) }
-      .plus(toCompanionObjectOrNull()?.let { Member.WithCompanionObject(it) })
-      .plus(types.map { Member.WithType(it) })
+      .map { KtMember.WithJavaMember(it) }
+      .plus(toCompanionObjectOrNull()?.let { KtMember.WithCompanionObject(it) })
+      .plus(types.map { KtMember.WithType(it) })
       .filterNotNull()
       .toList()
+
+// TODO(b/310160330): Remove this restriction once Kotlin allows for that:
+// https://github.com/Kotlin/KEEP/blob/master/proposals/jvm-field-annotation-in-interface-companion.md#open-questions
+internal val Type.jvmFieldsAreNotLegal
+  get() =
+    isInterface &&
+      members.filterIsInstance<Field>().let { fields ->
+        fields.any { it.isCompileTimeConstant } && fields.any { !it.isCompileTimeConstant }
+      }

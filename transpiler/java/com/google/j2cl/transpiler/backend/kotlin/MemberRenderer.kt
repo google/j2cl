@@ -142,7 +142,10 @@ private fun Renderer.fieldSource(field: Field): Source {
   val typeDescriptor = fieldDescriptor.typeDescriptor
   val isConst = field.isCompileTimeConstant && field.isStatic
   val isJvmField =
-    !isConst && !field.isKtLateInit && fieldDescriptor.ktVisibility != KtVisibility.PRIVATE
+    !currentType!!.jvmFieldsAreNotLegal &&
+      !isConst &&
+      !field.isKtLateInit &&
+      fieldDescriptor.ktVisibility != KtVisibility.PRIVATE
   val initializer = field.initializer
 
   return newLineSeparated(
