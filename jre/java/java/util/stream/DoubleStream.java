@@ -202,6 +202,39 @@ public interface DoubleStream extends BaseStream<Double, DoubleStream> {
 
   DoubleStream distinct();
 
+  default DoubleStream dropWhile(DoublePredicate predicate) {
+    Spliterator.OfDouble prev = spliterator();
+    Spliterator.OfDouble spliterator =
+        new Spliterators.AbstractDoubleSpliterator(prev.estimateSize(),
+                prev.characteristics() & ~(Spliterator.SIZED | Spliterator.SUBSIZED)) {
+          private boolean drop = true;
+          private boolean found;
+
+          @Override
+          public boolean tryAdvance(DoubleConsumer action) {
+            found = false;
+            if (drop) {
+              // drop items until we find one that matches
+              while (drop && prev.tryAdvance((double item) -> {
+                if (!predicate.test(item)) {
+                  drop = false;
+                  found = true;
+                  action.accept(item);
+                }
+              })) {
+                // do nothing, work is done in tryAdvance
+              }
+              // only return true if we accepted at least one item
+              return found;
+            } else {
+              // accept one item, return result
+              return prev.tryAdvance(action);
+            }
+          }
+        };
+    return StreamSupport.doubleStream(spliterator, false);
+  }
+
   DoubleStream filter(DoublePredicate predicate);
 
   OptionalDouble findAny();
@@ -255,6 +288,35 @@ public interface DoubleStream extends BaseStream<Double, DoubleStream> {
   double sum();
 
   DoubleSummaryStatistics summaryStatistics();
+
+  default DoubleStream takeWhile(DoublePredicate predicate) {
+    Spliterator.OfDouble original = spliterator();
+    Spliterator.OfDouble spliterator =
+        new Spliterators.AbstractDoubleSpliterator(original.estimateSize(),
+                original.characteristics() & ~(Spliterator.SIZED | Spliterator.SUBSIZED)) {
+          private boolean take = true;
+          private boolean found;
+
+          @Override
+          public boolean tryAdvance(DoubleConsumer action) {
+            found = false;
+            if (!take) {
+              // already failed the check
+              return false;
+            }
+            original.tryAdvance((double item) -> {
+              if (predicate.test(item)) {
+                found = true;
+                action.accept(item);
+              } else {
+                take = false;
+              }
+            });
+            return found;
+          }
+        };
+    return StreamSupport.doubleStream(spliterator, false);
+  }
 
   double[] toArray();
 }

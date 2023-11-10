@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.jre;
 
+import com.google.j2cl.jre.java9.util.stream.CollectorsTest;
 import com.google.j2cl.jre.java9.util.ListTest;
 import com.google.j2cl.jre.java9.util.MapTest;
 import com.google.j2cl.jre.java9.util.OptionalDoubleTest;
@@ -29,6 +30,7 @@ import org.junit.runners.Suite.SuiteClasses;
 /** Test JRE emulations. */
 @RunWith(Suite.class)
 @SuiteClasses({
+  CollectorsTest.class,
   ListTest.class,
   MapTest.class,
   OptionalDoubleTest.class,
