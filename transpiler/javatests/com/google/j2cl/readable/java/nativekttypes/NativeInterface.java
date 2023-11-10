@@ -19,10 +19,10 @@ import javaemul.internal.annotations.KtName;
 import javaemul.internal.annotations.KtNative;
 import javaemul.internal.annotations.KtProperty;
 
-@KtNative("nativekttypes.nativekt.KInterface")
+@KtNative(name = "nativekttypes.nativekt.KInterface")
 public interface NativeInterface<S> {
 
-  @KtNative("nativekttypes.nativekt.KInterface.KFunctionalInterface")
+  @KtNative(name = "nativekttypes.nativekt.KInterface.KFunctionalInterface")
   public interface NativeFunctionalInterface {
     void run();
   }

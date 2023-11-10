@@ -19,10 +19,10 @@ import javaemul.internal.annotations.KtName;
 import javaemul.internal.annotations.KtNative;
 import javaemul.internal.annotations.KtProperty;
 
-@KtNative("nativekttypes.nativekt.KTopLevel")
+@KtNative(name = "nativekttypes.nativekt.KTopLevel")
 public class NativeTopLevel<O> {
 
-  @KtNative("nativekttypes.nativekt.KTopLevel.KNested")
+  @KtNative(name = "nativekttypes.nativekt.KTopLevel.KNested")
   public static class Nested<N> {
     public N instanceField;
     public static Object staticField;
@@ -34,7 +34,7 @@ public class NativeTopLevel<O> {
     public static native <S> S staticMethod(S s);
   }
 
-  @KtNative("nativekttypes.nativekt.KTopLevel.KInner")
+  @KtNative(name = "nativekttypes.nativekt.KTopLevel.KInner")
   public class Inner<I> {
     public Inner(I i) {}
   }

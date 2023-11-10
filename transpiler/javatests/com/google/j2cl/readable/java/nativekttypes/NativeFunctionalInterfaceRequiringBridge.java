@@ -18,8 +18,8 @@ package nativekttypes;
 import javaemul.internal.annotations.KtNative;
 
 @KtNative(
-    value = "nativekttypes.nativekt.KFunctionalInterfaceRequiringBridge",
-    bridgeWith = "nativekttypes.nativekt.KFunctionalInterfaceBridge")
+    name = "nativekttypes.nativekt.KFunctionalInterfaceRequiringBridge",
+    bridgeName = "nativekttypes.nativekt.KFunctionalInterfaceBridge")
 public interface NativeFunctionalInterfaceRequiringBridge<V> {
   V foo(V t);
 }

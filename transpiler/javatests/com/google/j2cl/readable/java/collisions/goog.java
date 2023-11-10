@@ -24,7 +24,7 @@ import jsinterop.annotations.JsType;
 public class goog {}
 
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "String")
-@KtNative("collisions.KtBlah")
+@KtNative(name = "collisions.KtBlah")
 class Blah {
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.random")
   static native void m();

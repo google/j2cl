@@ -40,18 +40,18 @@ import java.lang.annotation.Target;
 @Documented
 public @interface KtNative {
   /**
-   * Sets the name of the Kotlin type to use whenever transpiled Java code
-   * references the annotated type.
+   * Sets the name of the Kotlin type to use whenever transpiled Java code references the annotated
+   * type.
    *
    * <p>The name must be fully-qualified, for top-level types but also for nested types.
    */
-  String value();
+  String name();
 
   /**
    * The qualified name of the bridge type, which will be inserted between the native Kotlin type
    * and its sub-types.
    */
-  String bridgeWith() default "<none>";
+  String bridgeName() default "<none>";
 
   /**
    * The qualified name of the type acting as a companion object for the native Kotlin type. * *
@@ -59,5 +59,5 @@ public @interface KtNative {
    * <p>It can be used to emulate static methods in Java API when the Kotlin native type is lacking
    * a companion object to add the extension functions to.
    */
-  String companionObject() default "<none>";
+  String companionName() default "<none>";
 }

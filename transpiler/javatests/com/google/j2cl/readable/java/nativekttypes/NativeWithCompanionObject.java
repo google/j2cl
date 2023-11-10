@@ -18,8 +18,8 @@ package nativekttypes;
 import javaemul.internal.annotations.KtNative;
 
 @KtNative(
-    value = "nativekttypes.nativekt.KWithCompanionObject",
-    companionObject = "nativekttypes.nativekt.KCompanionObject")
+    name = "nativekttypes.nativekt.KWithCompanionObject",
+    companionName = "nativekttypes.nativekt.KCompanionObject")
 public class NativeWithCompanionObject {
   public int instanceField;
 
