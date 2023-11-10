@@ -1,0 +1,69 @@
+// Generated from "nativekttypes/BoundsWithVariance.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "REPEATED_BOUND",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER")
+
+package nativekttypes
+
+import javaemul.lang.*
+import java.util.AbstractMap
+import kotlin.Any
+import kotlin.Comparable
+import kotlin.Suppress
+import kotlin.collections.AbstractMutableCollection
+import kotlin.collections.AbstractMutableList
+import kotlin.collections.AbstractMutableSet
+import kotlin.collections.MutableCollection
+import kotlin.collections.MutableIterable
+import kotlin.collections.MutableIterator
+import kotlin.collections.MutableList
+import kotlin.collections.MutableListIterator
+import kotlin.collections.MutableMap
+import kotlin.collections.MutableSet
+
+interface FnWithoutVariance<I, O> {}
+
+interface FnWithVariance<in I, out O> {}
+
+class BoundsWithVariance internal constructor() {
+ internal fun <I: Any, O: Any> accept_pp_nativekttypes(o: FnWithoutVariance<in I, out O>) {}
+
+ internal fun <I: Any, O: Any> accept_pp_nativekttypes(o: FnWithVariance<I, O>) {}
+
+ internal fun <E: Any> accept_pp_nativekttypes(o: Comparable<E>) {}
+
+ internal fun <E: Any> accept_pp_nativekttypes(o: MutableIterable<E>) {}
+
+ internal fun <E: Any> accept_pp_nativekttypes(o: MutableIterator<E>) {}
+
+ internal fun <E: Any> accept_pp_nativekttypes(o: MutableListIterator<out E>) {}
+
+ internal fun <E: Any> accept_pp_nativekttypes(o: MutableCollection<out E>) {}
+
+ internal fun <E: Any> accept_pp_nativekttypes(o: MutableList<out E>) {}
+
+ internal fun <E: Any> accept_pp_nativekttypes(o: MutableSet<out E>) {}
+
+ internal fun <E: Any> accept_pp_nativekttypes(o: AbstractMutableCollection<out E>) {}
+
+ internal fun <E: Any> accept_pp_nativekttypes(o: AbstractMutableList<out E>) {}
+
+ internal fun <E: Any> accept_pp_nativekttypes(o: AbstractMutableSet<out E>) {}
+
+ internal fun <K: Any, V: Any> accept_pp_nativekttypes(o: MutableMap<in K, out V>) {}
+
+ internal fun <K: Any, V: Any> accept_pp_nativekttypes(o: AbstractMap<in K, out V>) {}
+
+ internal fun <K: Any, V: Any> accept_pp_nativekttypes(o: MutableMap.MutableEntry<out K, out V>) {}
+}
