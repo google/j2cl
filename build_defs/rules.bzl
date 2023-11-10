@@ -12,7 +12,14 @@ load("//build_defs/internal_do_not_use:j2cl_rta.bzl", _j2cl_rta = "j2cl_rta")
 load("//build_defs/internal_do_not_use:j2cl_test.bzl", _j2cl_test = "j2cl_test")
 load("//build_defs/internal_do_not_use:j2wasm_test.bzl", _j2wasm_test = "j2wasm_test")
 load("//build_defs/internal_do_not_use:j2kt_test.bzl", _j2kt_jvm_test = "j2kt_jvm_test", _j2kt_native_test = "j2kt_native_test")
-load("//build_defs/internal_do_not_use:j2kt_library.bzl", _j2kt_apple_framework = "j2kt_apple_framework", _j2kt_jvm_library = "j2kt_jvm_library", _j2kt_minimal_apple_framework = "j2kt_minimal_apple_framework", _j2kt_native_library = "j2kt_native_library")
+load(
+    "//build_defs/internal_do_not_use:j2kt_library.bzl",
+    _j2kt_apple_framework = "j2kt_apple_framework",
+    _j2kt_jvm_library = "j2kt_jvm_library",
+    _j2kt_minimal_apple_framework = "j2kt_minimal_apple_framework",
+    _j2kt_native_library = "j2kt_native_library",
+    _j2kt_precompilied_apple_framework = "j2kt_precompilied_apple_framework",
+)
 load("//build_defs/internal_do_not_use:j2kt_import.bzl", _j2kt_jvm_import = "j2kt_jvm_import", _j2kt_native_import = "j2kt_native_import")
 load("//build_defs/internal_do_not_use:gen_j2cl_tests.bzl", _gen_j2cl_tests = "gen_j2cl_tests")
 load("//build_defs/internal_do_not_use:gen_j2kt_tests.bzl", _gen_j2kt_native_tests = "gen_j2kt_native_tests")
@@ -48,6 +55,8 @@ gen_j2wasm_tests = _gen_j2wasm_tests
 gen_j2kt_native_tests = _gen_j2kt_native_tests
 
 j2kt_apple_framework = _j2kt_apple_framework
+
+j2kt_precompiled_apple_framework = _j2kt_precompilied_apple_framework
 
 j2kt_minimal_apple_framework = _j2kt_minimal_apple_framework
 
