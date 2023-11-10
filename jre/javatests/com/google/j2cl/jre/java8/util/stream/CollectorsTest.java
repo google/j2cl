@@ -467,7 +467,7 @@ public class CollectorsTest extends EmulTestBase {
    * This method attempts to apply a collector to items as a stream might do, so that we can simply
    * verify the output. Taken from the Collector class's javadoc.
    */
-  private static <
+  public static <
           T extends @Nullable Object, A extends @Nullable Object, R extends @Nullable Object>
       void applyItems(
           R expected, Collector<T, A, R> collector, T t1, T t2, BiPredicate<R, R> equals) {
@@ -482,7 +482,7 @@ public class CollectorsTest extends EmulTestBase {
    * This method attempts to apply a collector to items as a stream might do, so that we can simply
    * verify the output. Taken from the Collector class's javadoc.
    */
-  private static <
+  public static <
           T extends @Nullable Object, A extends @Nullable Object, R extends @Nullable Object>
       void applyItems(R expected, Collector<T, A, R> collector, T t1, T t2) {
     applyItems(expected, collector, t1, t2, Object::equals);

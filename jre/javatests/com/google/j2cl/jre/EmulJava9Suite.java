@@ -16,13 +16,18 @@
 
 package com.google.j2cl.jre;
 
+import com.google.j2cl.jre.java9.util.stream.CollectorsTest;
+import com.google.j2cl.jre.java9.util.stream.DoubleStreamTest;
+import com.google.j2cl.jre.java9.util.stream.IntStreamTest;
+import com.google.j2cl.jre.java9.util.stream.LongStreamTest;
+import com.google.j2cl.jre.java9.util.stream.StreamTest;
 import com.google.j2cl.jre.java9.util.ListTest;
 import com.google.j2cl.jre.java9.util.MapTest;
-import com.google.j2cl.jre.java9.util.SetTest;
 import com.google.j2cl.jre.java9.util.OptionalDoubleTest;
 import com.google.j2cl.jre.java9.util.OptionalIntTest;
 import com.google.j2cl.jre.java9.util.OptionalLongTest;
 import com.google.j2cl.jre.java9.util.OptionalTest;
+import com.google.j2cl.jre.java9.util.SetTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -30,6 +35,11 @@ import org.junit.runners.Suite.SuiteClasses;
 /** Test JRE emulations. */
 @RunWith(Suite.class)
 @SuiteClasses({
+        CollectorsTest.class,
+        DoubleStreamTest.class,
+        IntStreamTest.class,
+        LongStreamTest.class,
+        StreamTest.class,
         ListTest.class,
         MapTest.class,
         OptionalDoubleTest.class,
