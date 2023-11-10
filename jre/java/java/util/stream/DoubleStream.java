@@ -147,19 +147,35 @@ public interface DoubleStream extends BaseStream<Double, DoubleStream> {
   }
 
   static DoubleStream iterate(double seed, DoubleUnaryOperator f) {
+    return iterate(seed, ignore -> true, f);
+  }
+
+  static DoubleStream iterate(double seed, DoublePredicate hasNext, DoubleUnaryOperator f) {
     Spliterator.OfDouble spliterator =
         new Spliterators.AbstractDoubleSpliterator(
             Long.MAX_VALUE, Spliterator.IMMUTABLE | Spliterator.ORDERED) {
+          private boolean first = true;
           private double next = seed;
+          private boolean terminated = false;
 
           @Override
           public boolean tryAdvance(DoubleConsumer action) {
+            if (terminated) {
+              return false;
+            }
+            if (!first) {
+              next = f.applyAsDouble(next);
+            }
+            first = false;
+
+            if (!hasNext.test(next)) {
+              terminated = true;
+              return false;
+            }
             action.accept(next);
-            next = f.applyAsDouble(next);
             return true;
           }
         };
-
     return StreamSupport.doubleStream(spliterator, false);
   }
 
