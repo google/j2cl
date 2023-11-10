@@ -36,7 +36,6 @@
 package com.google.j2cl.jre.java.math;
 
 import com.google.j2cl.jre.java.util.EmulTestBase;
-import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.math.BigInteger;
 
 /**
@@ -60,7 +59,6 @@ public class BigIntegerHashCodeTest extends EmulTestBase {
 
   /** Test hash codes for the same object. */
   @SuppressWarnings("ReturnValueIgnored")
-  @J2ktIncompatible // TODO(b/308933045): Seems to cause timeout. Infinite loop?
   public void testSameObject() {
     String value1 = "12378246728727834290276457386374882976782849";
     String value2 = "-5634562095872038262928728727834290276457386374882976782849";

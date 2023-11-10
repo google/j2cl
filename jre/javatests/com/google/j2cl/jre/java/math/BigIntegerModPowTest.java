@@ -36,7 +36,6 @@
 package com.google.j2cl.jre.java.math;
 
 import com.google.j2cl.jre.java.util.EmulTestBase;
-import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.math.BigInteger;
 
 /**
@@ -59,7 +58,6 @@ public class BigIntegerModPowTest extends EmulTestBase {
   }
 
   /** gcd: the first number is longer. */
-  @J2ktIncompatible // TODO(b/308933045): Seems to cause timeout. Infinite loop?
   public void testGcdFirstLonger() {
     byte aBytes[] = {
         -15, 24, 123, 56, -11, -112, -34, -98, 8, 10, 12, 14, 25, 125, -15, 28,
@@ -118,7 +116,6 @@ public class BigIntegerModPowTest extends EmulTestBase {
   }
 
   /** gcd: the second number is longer. */
-  @J2ktIncompatible // TODO(b/308933045): Seems to cause timeout. Infinite loop?
   public void testGcdSecondLonger() {
     byte aBytes[] = {-12, 1, 0, 0, 0, 23, 44, 55, 66};
     byte bBytes[] = {
