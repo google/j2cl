@@ -171,6 +171,8 @@
  (local $$instance (ref null $jstype.SomeJsType))
  (block
   ;;@ jstype/SomeJsType.java:23:13
+  (call $$clinit__void@jstype.SomeJsType )
+  ;;@ jstype/SomeJsType.java:23:13
   (local.set $$instance (struct.new $jstype.SomeJsType (ref.as_non_null (global.get $jstype.SomeJsType.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0)))
   ;;@ jstype/SomeJsType.java:23:13
   (call $$ctor__void_$p_jstype_SomeJsType@jstype.SomeJsType (ref.as_non_null (local.get $$instance)))
@@ -184,8 +186,6 @@
  (param $this (ref null $jstype.SomeJsType))
  ;;@ jstype/SomeJsType.java:23:13
  (block
-  ;;@ jstype/SomeJsType.java:23:13
-  (call $$clinit__void@jstype.SomeJsType )
   ;;@ jstype/SomeJsType.java:23:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )

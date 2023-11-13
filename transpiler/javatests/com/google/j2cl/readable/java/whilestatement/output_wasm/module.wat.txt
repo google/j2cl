@@ -41,6 +41,8 @@
  (local $$instance (ref null $whilestatement.WhileStatement))
  (block
   ;;@ whilestatement/WhileStatement.java:18:13
+  (call $$clinit__void@whilestatement.WhileStatement )
+  ;;@ whilestatement/WhileStatement.java:18:13
   (local.set $$instance (struct.new $whilestatement.WhileStatement (ref.as_non_null (global.get $whilestatement.WhileStatement.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ whilestatement/WhileStatement.java:18:13
   (call $$ctor__void_$p_whilestatement_WhileStatement@whilestatement.WhileStatement (ref.as_non_null (local.get $$instance)))
@@ -54,8 +56,6 @@
  (param $this (ref null $whilestatement.WhileStatement))
  ;;@ whilestatement/WhileStatement.java:18:13
  (block
-  ;;@ whilestatement/WhileStatement.java:18:13
-  (call $$clinit__void@whilestatement.WhileStatement )
   ;;@ whilestatement/WhileStatement.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )

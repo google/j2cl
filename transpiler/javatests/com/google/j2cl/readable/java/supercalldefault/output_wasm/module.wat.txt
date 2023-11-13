@@ -39,6 +39,8 @@
  (local $$instance (ref null $supercalldefault.SuperCallDefault))
  (block
   ;;@ supercalldefault/SuperCallDefault.java:19:9
+  (call $$clinit__void@supercalldefault.SuperCallDefault )
+  ;;@ supercalldefault/SuperCallDefault.java:19:9
   (local.set $$instance (struct.new $supercalldefault.SuperCallDefault (ref.as_non_null (global.get $supercalldefault.SuperCallDefault.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ supercalldefault/SuperCallDefault.java:19:9
   (call $$ctor__void_$p_supercalldefault_SuperCallDefault@supercalldefault.SuperCallDefault (ref.as_non_null (local.get $$instance)))
@@ -52,8 +54,6 @@
  (param $this (ref null $supercalldefault.SuperCallDefault))
  ;;@ supercalldefault/SuperCallDefault.java:19:9
  (block
-  ;;@ supercalldefault/SuperCallDefault.java:19:28
-  (call $$clinit__void@supercalldefault.SuperCallDefault )
   ;;@ supercalldefault/SuperCallDefault.java:20:4
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )

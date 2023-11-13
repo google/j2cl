@@ -42,13 +42,6 @@ public abstract class ImplementStaticInitializationBase extends NormalizationPas
 
   private final Set<String> privateMembersCalledFromOtherClasses = new HashSet<>();
 
-  // TODO(b/187218486): Remove after adding a pass to convert constructors to static methods.
-  private final boolean triggerClinitInConstructors;
-
-  public ImplementStaticInitializationBase(boolean triggerClinitInConstructors) {
-    this.triggerClinitInConstructors = triggerClinitInConstructors;
-  }
-
   @Override
   public final void applyTo(CompilationUnit compilationUnit) {
     collectPrivateMemberReferences(compilationUnit);
@@ -194,9 +187,6 @@ public abstract class ImplementStaticInitializationBase extends NormalizationPas
 
     return memberDescriptor.isStatic()
         || memberDescriptor.isJsConstructor()
-        || (triggerClinitInConstructors
-            && memberDescriptor.isConstructor()
-            && !enclosingType.isOptimizedEnum())
         // non-private instance methods (except the synthetic ctor) of an optimized enum will
         // trigger clinit, since the constructor will not.
         || (triggersClinitInInstanceMethods(enclosingType) && isInstanceMethod(memberDescriptor));

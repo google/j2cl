@@ -81,6 +81,8 @@
  (local $$instance (ref null $instanceinnerclass.InstanceInnerClass))
  (block
   ;;@ instanceinnerclass/InstanceInnerClass.java:18:13
+  (call $$clinit__void@instanceinnerclass.InstanceInnerClass )
+  ;;@ instanceinnerclass/InstanceInnerClass.java:18:13
   (local.set $$instance (struct.new $instanceinnerclass.InstanceInnerClass (ref.as_non_null (global.get $instanceinnerclass.InstanceInnerClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
   ;;@ instanceinnerclass/InstanceInnerClass.java:18:13
   (call $$ctor__void_$p_instanceinnerclass_InstanceInnerClass@instanceinnerclass.InstanceInnerClass (ref.as_non_null (local.get $$instance)))
@@ -94,8 +96,6 @@
  (param $this (ref null $instanceinnerclass.InstanceInnerClass))
  ;;@ instanceinnerclass/InstanceInnerClass.java:18:13
  (block
-  ;;@ instanceinnerclass/InstanceInnerClass.java:18:13
-  (call $$clinit__void@instanceinnerclass.InstanceInnerClass )
   ;;@ instanceinnerclass/InstanceInnerClass.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -194,6 +194,8 @@
  (local $$instance (ref null $instanceinnerclass.InstanceInnerClass.InnerClass))
  (block
   ;;@ instanceinnerclass/InstanceInnerClass.java:23:15
+  (call $$clinit__void@instanceinnerclass.InstanceInnerClass.InnerClass )
+  ;;@ instanceinnerclass/InstanceInnerClass.java:23:15
   (local.set $$instance (struct.new $instanceinnerclass.InstanceInnerClass.InnerClass (ref.as_non_null (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $instanceinnerclass.InstanceInnerClass) (ref.null $instanceinnerclass.InstanceInnerClass) (i32.const 0)))
   ;;@ instanceinnerclass/InstanceInnerClass.java:23:15
   (call $$ctor__instanceinnerclass_InstanceInnerClass__void_$p_instanceinnerclass_InstanceInnerClass_InnerClass@instanceinnerclass.InstanceInnerClass.InnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
@@ -208,8 +210,6 @@
  (param $$outer_this (ref null $instanceinnerclass.InstanceInnerClass))
  ;;@ instanceinnerclass/InstanceInnerClass.java:23:15
  (block
-  ;;@ instanceinnerclass/InstanceInnerClass.java:23:15
-  (call $$clinit__void@instanceinnerclass.InstanceInnerClass.InnerClass )
   ;;@ instanceinnerclass/InstanceInnerClass.java:23:15
   (struct.set $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass (local.get $this) (local.get $$outer_this))
   ;;@ instanceinnerclass/InstanceInnerClass.java:23:15

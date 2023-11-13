@@ -43,6 +43,8 @@
  (local $$instance (ref null $genericconstructor.GenericConstructor))
  (block
   ;;@ genericconstructor/GenericConstructor.java:20:13
+  (call $$clinit__void@genericconstructor.GenericConstructor )
+  ;;@ genericconstructor/GenericConstructor.java:20:13
   (local.set $$instance (struct.new $genericconstructor.GenericConstructor (ref.as_non_null (global.get $genericconstructor.GenericConstructor.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ genericconstructor/GenericConstructor.java:20:13
   (call $$ctor__java_lang_Object__java_lang_Object__void_$p_genericconstructor_GenericConstructor@genericconstructor.GenericConstructor (ref.as_non_null (local.get $$instance))(local.get $s)(local.get $t))
@@ -59,8 +61,6 @@
  ;;@ genericconstructor/GenericConstructor.java:20:13
  (block
   ;;@ genericconstructor/GenericConstructor.java:20:42
-  (call $$clinit__void@genericconstructor.GenericConstructor )
-  ;;@ genericconstructor/GenericConstructor.java:20:42
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -72,6 +72,8 @@
  ;;@ genericconstructor/GenericConstructor.java:23:13
  (local $$instance (ref null $genericconstructor.GenericConstructor))
  (block
+  ;;@ genericconstructor/GenericConstructor.java:23:13
+  (call $$clinit__void@genericconstructor.GenericConstructor )
   ;;@ genericconstructor/GenericConstructor.java:23:13
   (local.set $$instance (struct.new $genericconstructor.GenericConstructor (ref.as_non_null (global.get $genericconstructor.GenericConstructor.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ genericconstructor/GenericConstructor.java:23:13
@@ -87,8 +89,6 @@
  (param $t (ref null $java.lang.Object))
  ;;@ genericconstructor/GenericConstructor.java:23:13
  (block
-  ;;@ genericconstructor/GenericConstructor.java:23:37
-  (call $$clinit__void@genericconstructor.GenericConstructor )
   ;;@ genericconstructor/GenericConstructor.java:23:37
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )

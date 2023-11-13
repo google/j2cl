@@ -110,6 +110,8 @@
  (local $$instance (ref null $jsinnerclass.Main))
  (block
   ;;@ jsinnerclass/Main.java:20:13
+  (call $$clinit__void@jsinnerclass.Main )
+  ;;@ jsinnerclass/Main.java:20:13
   (local.set $$instance (struct.new $jsinnerclass.Main (ref.as_non_null (global.get $jsinnerclass.Main.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ jsinnerclass/Main.java:20:13
   (call $$ctor__void_$p_jsinnerclass_Main@jsinnerclass.Main (ref.as_non_null (local.get $$instance)))
@@ -123,8 +125,6 @@
  (param $this (ref null $jsinnerclass.Main))
  ;;@ jsinnerclass/Main.java:20:13
  (block
-  ;;@ jsinnerclass/Main.java:20:13
-  (call $$clinit__void@jsinnerclass.Main )
   ;;@ jsinnerclass/Main.java:20:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -207,6 +207,8 @@
  (local $$instance (ref null $jsinnerclass.Main.Outer.Inner))
  (block
   ;;@ jsinnerclass/Main.java:28:13
+  (call $$clinit__void@jsinnerclass.Main.Outer.Inner )
+  ;;@ jsinnerclass/Main.java:28:13
   (local.set $$instance (struct.new $jsinnerclass.Main.Outer.Inner (ref.as_non_null (global.get $jsinnerclass.Main.Outer.Inner.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $jsinnerclass.Main.Outer) (i32.const 0)))
   ;;@ jsinnerclass/Main.java:28:13
   (call $$ctor__jsinnerclass_Main_Outer__void_$p_jsinnerclass_Main_Outer_Inner@jsinnerclass.Main.Outer.Inner (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
@@ -221,8 +223,6 @@
  (param $$outer_this (ref null $jsinnerclass.Main.Outer))
  ;;@ jsinnerclass/Main.java:28:13
  (block
-  ;;@ jsinnerclass/Main.java:28:21
-  (call $$clinit__void@jsinnerclass.Main.Outer.Inner )
   ;;@ jsinnerclass/Main.java:25:17
   (struct.set $jsinnerclass.Main.Outer.Inner $$outer_this__jsinnerclass_Main_Outer_Inner (local.get $this) (local.get $$outer_this))
   ;;@ jsinnerclass/Main.java:28:21
@@ -313,6 +313,8 @@
  (local $$instance (ref null $jsinnerclass.Main.Outer))
  (block
   ;;@ jsinnerclass/Main.java:21:15
+  (call $$clinit__void@jsinnerclass.Main.Outer )
+  ;;@ jsinnerclass/Main.java:21:15
   (local.set $$instance (struct.new $jsinnerclass.Main.Outer (ref.as_non_null (global.get $jsinnerclass.Main.Outer.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
   ;;@ jsinnerclass/Main.java:21:15
   (call $$ctor__void_$p_jsinnerclass_Main_Outer@jsinnerclass.Main.Outer (ref.as_non_null (local.get $$instance)))
@@ -326,8 +328,6 @@
  (param $this (ref null $jsinnerclass.Main.Outer))
  ;;@ jsinnerclass/Main.java:21:15
  (block
-  ;;@ jsinnerclass/Main.java:21:15
-  (call $$clinit__void@jsinnerclass.Main.Outer )
   ;;@ jsinnerclass/Main.java:21:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;;@ jsinnerclass/Main.java:21:15

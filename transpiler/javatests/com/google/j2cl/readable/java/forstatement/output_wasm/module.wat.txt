@@ -47,6 +47,8 @@
  (local $$instance (ref null $forstatement.ForStatement))
  (block
   ;;@ forstatement/ForStatement.java:18:13
+  (call $$clinit__void@forstatement.ForStatement )
+  ;;@ forstatement/ForStatement.java:18:13
   (local.set $$instance (struct.new $forstatement.ForStatement (ref.as_non_null (global.get $forstatement.ForStatement.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ forstatement/ForStatement.java:18:13
   (call $$ctor__void_$p_forstatement_ForStatement@forstatement.ForStatement (ref.as_non_null (local.get $$instance)))
@@ -60,8 +62,6 @@
  (param $this (ref null $forstatement.ForStatement))
  ;;@ forstatement/ForStatement.java:18:13
  (block
-  ;;@ forstatement/ForStatement.java:18:13
-  (call $$clinit__void@forstatement.ForStatement )
   ;;@ forstatement/ForStatement.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )

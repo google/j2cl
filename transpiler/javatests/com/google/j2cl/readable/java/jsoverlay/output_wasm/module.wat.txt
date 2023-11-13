@@ -441,6 +441,8 @@
  (local $$instance (ref null $jsoverlay.Main))
  (block
   ;;@ jsoverlay/Main.java:22:13
+  (call $$clinit__void@jsoverlay.Main )
+  ;;@ jsoverlay/Main.java:22:13
   (local.set $$instance (struct.new $jsoverlay.Main (ref.as_non_null (global.get $jsoverlay.Main.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ jsoverlay/Main.java:22:13
   (call $$ctor__void_$p_jsoverlay_Main@jsoverlay.Main (ref.as_non_null (local.get $$instance)))
@@ -454,8 +456,6 @@
  (param $this (ref null $jsoverlay.Main))
  ;;@ jsoverlay/Main.java:22:13
  (block
-  ;;@ jsoverlay/Main.java:22:13
-  (call $$clinit__void@jsoverlay.Main )
   ;;@ jsoverlay/Main.java:22:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -494,7 +494,7 @@
    (global.set $f_staticField__jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay (ref.null $java.lang.Object))
   )
   ;;@ jsoverlay/Main.java:113:4
-  (drop (call $m_varargs__arrayOf_int__int@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@jsoverlay.Main-1 (i32.const 0) (i32.const 3)))))
+  (drop (call $m_varargs__arrayOf_int__int@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay (struct.new $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (array.new_data $int.array $arrayliteral@jsoverlay.Main-1 (i32.const 0) (i32.const 3)))))
   ;;@ jsoverlay/Main.java:114:4
   (drop (call $m_baz__$devirt__jsoverlay_Main_NativeJsTypeWithOverlay__int@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay (local.get $n)))
   ;;@ jsoverlay/Main.java:116:4
@@ -608,6 +608,8 @@
  (local $$instance (ref null $jsoverlay.Main.NativeJsTypeWithOverlay.1))
  (block
   ;;@ jsoverlay/Main.java:85:17
+  (call $$clinit__void@jsoverlay.Main.NativeJsTypeWithOverlay.1 )
+  ;;@ jsoverlay/Main.java:85:17
   (local.set $$instance (struct.new $jsoverlay.Main.NativeJsTypeWithOverlay.1 (ref.as_non_null (global.get $jsoverlay.Main.NativeJsTypeWithOverlay.1.vtable)) (ref.as_non_null (global.get $jsoverlay.Main.NativeJsTypeWithOverlay.1.itable)) (i32.const 0) (ref.null extern)))
   ;;@ jsoverlay/Main.java:85:17
   (call $$ctor__jsoverlay_Main_NativeJsTypeWithOverlay__void_$p_jsoverlay_Main_NativeJsTypeWithOverlay_1@jsoverlay.Main.NativeJsTypeWithOverlay.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
@@ -622,8 +624,6 @@
  (param $$outer_this (ref null extern))
  ;;@ jsoverlay/Main.java:85:17
  (block
-  ;;@ jsoverlay/Main.java:85:17
-  (call $$clinit__void@jsoverlay.Main.NativeJsTypeWithOverlay.1 )
   ;;@ jsoverlay/Main.java:85:17
   (struct.set $jsoverlay.Main.NativeJsTypeWithOverlay.1 $$outer_this__jsoverlay_Main_NativeJsTypeWithOverlay_1 (local.get $this) (local.get $$outer_this))
   ;;@ jsoverlay/Main.java:85:17

@@ -299,6 +299,8 @@
  (local $$instance (ref null $interfaces.Main))
  (block
   ;;@ interfaces/Main.java:18:13
+  (call $$clinit__void@interfaces.Main )
+  ;;@ interfaces/Main.java:18:13
   (local.set $$instance (struct.new $interfaces.Main (ref.as_non_null (global.get $interfaces.Main.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ interfaces/Main.java:18:13
   (call $$ctor__void_$p_interfaces_Main@interfaces.Main (ref.as_non_null (local.get $$instance)))
@@ -312,8 +314,6 @@
  (param $this (ref null $interfaces.Main))
  ;;@ interfaces/Main.java:18:13
  (block
-  ;;@ interfaces/Main.java:18:13
-  (call $$clinit__void@interfaces.Main )
   ;;@ interfaces/Main.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -413,6 +413,8 @@
  (local $$instance (ref null $interfaces.Main.Implementor))
  (block
   ;;@ interfaces/Main.java:41:8
+  (call $$clinit__void@interfaces.Main.Implementor )
+  ;;@ interfaces/Main.java:41:8
   (local.set $$instance (struct.new $interfaces.Main.Implementor (ref.as_non_null (global.get $interfaces.Main.Implementor.vtable)) (ref.as_non_null (global.get $interfaces.Main.Implementor.itable)) (i32.const 0) (ref.null $interfaces.Main)))
   ;;@ interfaces/Main.java:41:8
   (call $$ctor__interfaces_Main__void_$p_interfaces_Main_Implementor@interfaces.Main.Implementor (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
@@ -427,8 +429,6 @@
  (param $$outer_this (ref null $interfaces.Main))
  ;;@ interfaces/Main.java:41:8
  (block
-  ;;@ interfaces/Main.java:41:8
-  (call $$clinit__void@interfaces.Main.Implementor )
   ;;@ interfaces/Main.java:41:8
   (struct.set $interfaces.Main.Implementor $$outer_this__interfaces_Main_Implementor (local.get $this) (local.get $$outer_this))
   ;;@ interfaces/Main.java:41:8
@@ -547,8 +547,6 @@
  (param $$outer_this (ref null $interfaces.Main))
  ;;@ interfaces/Main.java:47:17
  (block
-  ;;@ interfaces/Main.java:47:17
-  (call $$clinit__void@interfaces.Main.AbstractImplementor )
   ;;@ interfaces/Main.java:47:17
   (struct.set $interfaces.Main.AbstractImplementor $$outer_this__interfaces_Main_AbstractImplementor (local.get $this) (local.get $$outer_this))
   ;;@ interfaces/Main.java:47:17

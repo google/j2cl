@@ -44,6 +44,8 @@
  (local $$instance (ref null $genericequals.GenericEquals))
  (block
   ;;@ genericequals/GenericEquals.java:23:9
+  (call $$clinit__void@genericequals.GenericEquals )
+  ;;@ genericequals/GenericEquals.java:23:9
   (local.set $$instance (struct.new $genericequals.GenericEquals (ref.as_non_null (global.get $genericequals.GenericEquals.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $genericequals.GenericEquals) (ref.null $java.lang.Object)))
   ;;@ genericequals/GenericEquals.java:23:9
   (call $$ctor__java_lang_Object__void_$p_genericequals_GenericEquals@genericequals.GenericEquals (ref.as_non_null (local.get $$instance))(local.get $value))
@@ -58,8 +60,6 @@
  (param $value (ref null $java.lang.Object))
  ;;@ genericequals/GenericEquals.java:23:9
  (block
-  ;;@ genericequals/GenericEquals.java:23:32
-  (call $$clinit__void@genericequals.GenericEquals )
   ;;@ genericequals/GenericEquals.java:23:32
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;;@ genericequals/GenericEquals.java:24:4

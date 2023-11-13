@@ -41,6 +41,8 @@
  (local $$instance (ref null $equality.Equality))
  (block
   ;;@ equality/Equality.java:18:13
+  (call $$clinit__void@equality.Equality )
+  ;;@ equality/Equality.java:18:13
   (local.set $$instance (struct.new $equality.Equality (ref.as_non_null (global.get $equality.Equality.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ equality/Equality.java:18:13
   (call $$ctor__void_$p_equality_Equality@equality.Equality (ref.as_non_null (local.get $$instance)))
@@ -54,8 +56,6 @@
  (param $this (ref null $equality.Equality))
  ;;@ equality/Equality.java:18:13
  (block
-  ;;@ equality/Equality.java:18:13
-  (call $$clinit__void@equality.Equality )
   ;;@ equality/Equality.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )

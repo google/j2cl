@@ -157,6 +157,8 @@
  (local $$instance (ref null $overridingmethods.Parent))
  (block
   ;;@ overridingmethods/Child.java:22:6
+  (call $$clinit__void@overridingmethods.Parent )
+  ;;@ overridingmethods/Child.java:22:6
   (local.set $$instance (struct.new $overridingmethods.Parent (ref.as_non_null (global.get $overridingmethods.Parent.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ overridingmethods/Child.java:22:6
   (call $$ctor__void_$p_overridingmethods_Parent@overridingmethods.Parent (ref.as_non_null (local.get $$instance)))
@@ -170,8 +172,6 @@
  (param $this (ref null $overridingmethods.Parent))
  ;;@ overridingmethods/Child.java:22:6
  (block
-  ;;@ overridingmethods/Child.java:22:6
-  (call $$clinit__void@overridingmethods.Parent )
   ;;@ overridingmethods/Child.java:22:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -255,6 +255,8 @@
  (local $$instance (ref null $overridingmethods.Child))
  (block
   ;;@ overridingmethods/Child.java:26:13
+  (call $$clinit__void@overridingmethods.Child )
+  ;;@ overridingmethods/Child.java:26:13
   (local.set $$instance (struct.new $overridingmethods.Child (ref.as_non_null (global.get $overridingmethods.Child.vtable)) (ref.as_non_null (global.get $overridingmethods.Child.itable)) (i32.const 0)))
   ;;@ overridingmethods/Child.java:26:13
   (call $$ctor__void_$p_overridingmethods_Child@overridingmethods.Child (ref.as_non_null (local.get $$instance)))
@@ -268,8 +270,6 @@
  (param $this (ref null $overridingmethods.Child))
  ;;@ overridingmethods/Child.java:26:13
  (block
-  ;;@ overridingmethods/Child.java:26:13
-  (call $$clinit__void@overridingmethods.Child )
   ;;@ overridingmethods/Child.java:26:13
   (call $$ctor__void_$p_overridingmethods_Parent@overridingmethods.Parent (ref.as_non_null (local.get $this)))
  )

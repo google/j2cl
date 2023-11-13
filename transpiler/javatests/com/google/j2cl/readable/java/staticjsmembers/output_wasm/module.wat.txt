@@ -211,6 +211,8 @@
  (local $$instance (ref null $staticjsmembers.StaticJsMembers))
  (block
   ;;@ staticjsmembers/StaticJsMembers.java:25:13
+  (call $$clinit__void@staticjsmembers.StaticJsMembers )
+  ;;@ staticjsmembers/StaticJsMembers.java:25:13
   (local.set $$instance (struct.new $staticjsmembers.StaticJsMembers (ref.as_non_null (global.get $staticjsmembers.StaticJsMembers.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ staticjsmembers/StaticJsMembers.java:25:13
   (call $$ctor__void_$p_staticjsmembers_StaticJsMembers@staticjsmembers.StaticJsMembers (ref.as_non_null (local.get $$instance)))
@@ -224,8 +226,6 @@
  (param $this (ref null $staticjsmembers.StaticJsMembers))
  ;;@ staticjsmembers/StaticJsMembers.java:25:13
  (block
-  ;;@ staticjsmembers/StaticJsMembers.java:25:13
-  (call $$clinit__void@staticjsmembers.StaticJsMembers )
   ;;@ staticjsmembers/StaticJsMembers.java:25:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )

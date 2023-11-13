@@ -42,6 +42,8 @@
  (local $$instance (ref null $staticinitializers.StaticInitializers))
  (block
   ;;@ staticinitializers/StaticInitializers.java:18:13
+  (call $$clinit__void@staticinitializers.StaticInitializers )
+  ;;@ staticinitializers/StaticInitializers.java:18:13
   (local.set $$instance (struct.new $staticinitializers.StaticInitializers (ref.as_non_null (global.get $staticinitializers.StaticInitializers.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ staticinitializers/StaticInitializers.java:18:13
   (call $$ctor__void_$p_staticinitializers_StaticInitializers@staticinitializers.StaticInitializers (ref.as_non_null (local.get $$instance)))
@@ -55,8 +57,6 @@
  (param $this (ref null $staticinitializers.StaticInitializers))
  ;;@ staticinitializers/StaticInitializers.java:18:13
  (block
-  ;;@ staticinitializers/StaticInitializers.java:18:13
-  (call $$clinit__void@staticinitializers.StaticInitializers )
   ;;@ staticinitializers/StaticInitializers.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )

@@ -108,6 +108,8 @@
  (local $$instance (ref null $instanceofexpression.InstanceofExpressions))
  (block
   ;;@ instanceofexpression/InstanceofExpressions.java:20:13
+  (call $$clinit__void@instanceofexpression.InstanceofExpressions )
+  ;;@ instanceofexpression/InstanceofExpressions.java:20:13
   (local.set $$instance (struct.new $instanceofexpression.InstanceofExpressions (ref.as_non_null (global.get $instanceofexpression.InstanceofExpressions.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ instanceofexpression/InstanceofExpressions.java:20:13
   (call $$ctor__void_$p_instanceofexpression_InstanceofExpressions@instanceofexpression.InstanceofExpressions (ref.as_non_null (local.get $$instance)))
@@ -121,8 +123,6 @@
  (param $this (ref null $instanceofexpression.InstanceofExpressions))
  ;;@ instanceofexpression/InstanceofExpressions.java:20:13
  (block
-  ;;@ instanceofexpression/InstanceofExpressions.java:20:13
-  (call $$clinit__void@instanceofexpression.InstanceofExpressions )
   ;;@ instanceofexpression/InstanceofExpressions.java:20:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -249,7 +249,7 @@
   ;;@ instanceofexpression/InstanceofExpressions.java:58:4
   (local.set $objectArray (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 0)))
   ;;@ instanceofexpression/InstanceofExpressions.java:59:4
-  (local.set $objectDoubleArray (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@instanceofexpression.InstanceofExpressions-1 (i32.const 0) (i32.const 2)))(i32.const -1)))
+  (local.set $objectDoubleArray (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (struct.new $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (array.new_data $int.array $arrayliteral@instanceofexpression.InstanceofExpressions-1 (i32.const 0) (i32.const 2)))(i32.const -1)))
   ;;@ instanceofexpression/InstanceofExpressions.java:60:4
   (local.set $stringArray (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 0)))
   ;;@ instanceofexpression/InstanceofExpressions.java:62:4
@@ -408,6 +408,8 @@
  (local $$instance (ref null $instanceofexpression.InstanceofExpressions.1))
  (block
   ;;@ instanceofexpression/InstanceofExpressions.java:34:27
+  (call $$clinit__void@instanceofexpression.InstanceofExpressions.1 )
+  ;;@ instanceofexpression/InstanceofExpressions.java:34:27
   (local.set $$instance (struct.new $instanceofexpression.InstanceofExpressions.1 (ref.as_non_null (global.get $instanceofexpression.InstanceofExpressions.1.vtable)) (ref.as_non_null (global.get $instanceofexpression.InstanceofExpressions.1.itable)) (i32.const 0) (ref.null $instanceofexpression.InstanceofExpressions)))
   ;;@ instanceofexpression/InstanceofExpressions.java:34:27
   (call $$ctor__instanceofexpression_InstanceofExpressions__void_$p_instanceofexpression_InstanceofExpressions_1@instanceofexpression.InstanceofExpressions.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
@@ -422,8 +424,6 @@
  (param $$outer_this (ref null $instanceofexpression.InstanceofExpressions))
  ;;@ instanceofexpression/InstanceofExpressions.java:34:27
  (block
-  ;;@ instanceofexpression/InstanceofExpressions.java:34:27
-  (call $$clinit__void@instanceofexpression.InstanceofExpressions.1 )
   ;;@ instanceofexpression/InstanceofExpressions.java:34:27
   (struct.set $instanceofexpression.InstanceofExpressions.1 $$outer_this__instanceofexpression_InstanceofExpressions_1 (local.get $this) (local.get $$outer_this))
   ;;@ instanceofexpression/InstanceofExpressions.java:34:27

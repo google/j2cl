@@ -156,6 +156,8 @@
  (local $$instance (ref null $packageinfosubpackage.Foo))
  (block
   ;;@ packageinfosubpackage/Foo.java:20:13
+  (call $$clinit__void@packageinfosubpackage.Foo )
+  ;;@ packageinfosubpackage/Foo.java:20:13
   (local.set $$instance (struct.new $packageinfosubpackage.Foo (ref.as_non_null (global.get $packageinfosubpackage.Foo.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null extern)))
   ;;@ packageinfosubpackage/Foo.java:20:13
   (call $$ctor__void_$p_packageinfosubpackage_Foo@packageinfosubpackage.Foo (ref.as_non_null (local.get $$instance)))
@@ -169,8 +171,6 @@
  (param $this (ref null $packageinfosubpackage.Foo))
  ;;@ packageinfosubpackage/Foo.java:20:13
  (block
-  ;;@ packageinfosubpackage/Foo.java:20:13
-  (call $$clinit__void@packageinfosubpackage.Foo )
   ;;@ packageinfosubpackage/Foo.java:20:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;;@ packageinfosubpackage/Foo.java:20:13
@@ -261,6 +261,8 @@
  (local $$instance (ref null $packageinfosubpackage.subpackage.Bar))
  (block
   ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
+  (call $$clinit__void@packageinfosubpackage.subpackage.Bar )
+  ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
   (local.set $$instance (struct.new $packageinfosubpackage.subpackage.Bar (ref.as_non_null (global.get $packageinfosubpackage.subpackage.Bar.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
   (call $$ctor__void_$p_packageinfosubpackage_subpackage_Bar@packageinfosubpackage.subpackage.Bar (ref.as_non_null (local.get $$instance)))
@@ -274,8 +276,6 @@
  (param $this (ref null $packageinfosubpackage.subpackage.Bar))
  ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
  (block
-  ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
-  (call $$clinit__void@packageinfosubpackage.subpackage.Bar )
   ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )

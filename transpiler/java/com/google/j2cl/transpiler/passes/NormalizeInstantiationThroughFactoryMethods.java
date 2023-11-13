@@ -238,7 +238,7 @@ public class NormalizeInstantiationThroughFactoryMethods extends NormalizationPa
                         .getTypeParameterDescriptors())
                 .setOrigin(MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR)
                 .setOriginalJsInfo(JsInfo.NONE)
-                .setVisibility(Visibility.PUBLIC));
+                .setVisibility(constructor.getVisibility()));
   }
 
   private static Expression createThrowableInit(Expression newInstanceRef) {

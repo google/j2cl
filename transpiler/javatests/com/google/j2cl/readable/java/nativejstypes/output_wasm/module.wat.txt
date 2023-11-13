@@ -882,6 +882,8 @@
  (local $$instance (ref null $nativejstypes.Main))
  (block
   ;;@ nativejstypes/Main.java:20:13
+  (call $$clinit__void@nativejstypes.Main )
+  ;;@ nativejstypes/Main.java:20:13
   (local.set $$instance (struct.new $nativejstypes.Main (ref.as_non_null (global.get $nativejstypes.Main.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ nativejstypes/Main.java:20:13
   (call $$ctor__void_$p_nativejstypes_Main@nativejstypes.Main (ref.as_non_null (local.get $$instance)))
@@ -895,8 +897,6 @@
  (param $this (ref null $nativejstypes.Main))
  ;;@ nativejstypes/Main.java:20:13
  (block
-  ;;@ nativejstypes/Main.java:20:13
-  (call $$clinit__void@nativejstypes.Main )
   ;;@ nativejstypes/Main.java:20:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )

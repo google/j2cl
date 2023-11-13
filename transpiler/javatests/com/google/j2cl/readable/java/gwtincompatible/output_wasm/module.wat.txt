@@ -365,8 +365,6 @@
  ;;@ gwtincompatible/Interface.java:27:17
  (block
   ;;@ gwtincompatible/Interface.java:27:17
-  (call $$clinit__void@gwtincompatible.Interface.ClassWithAbstractMethod )
-  ;;@ gwtincompatible/Interface.java:27:17
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -424,6 +422,8 @@
  (local $$instance (ref null $gwtincompatible.Implementor))
  (block
   ;;@ gwtincompatible/Implementor.java:18:13
+  (call $$clinit__void@gwtincompatible.Implementor )
+  ;;@ gwtincompatible/Implementor.java:18:13
   (local.set $$instance (struct.new $gwtincompatible.Implementor (ref.as_non_null (global.get $gwtincompatible.Implementor.vtable)) (ref.as_non_null (global.get $gwtincompatible.Implementor.itable)) (i32.const 0)))
   ;;@ gwtincompatible/Implementor.java:18:13
   (call $$ctor__void_$p_gwtincompatible_Implementor@gwtincompatible.Implementor (ref.as_non_null (local.get $$instance)))
@@ -437,8 +437,6 @@
  (param $this (ref null $gwtincompatible.Implementor))
  ;;@ gwtincompatible/Implementor.java:18:13
  (block
-  ;;@ gwtincompatible/Implementor.java:18:13
-  (call $$clinit__void@gwtincompatible.Implementor )
   ;;@ gwtincompatible/Implementor.java:18:13
   (call $$ctor__void_$p_gwtincompatible_Interface_ClassWithAbstractMethod@gwtincompatible.Interface.ClassWithAbstractMethod (ref.as_non_null (local.get $this)))
  )
@@ -526,8 +524,6 @@
  ;;@ gwtincompatible/Implementor.java:36:7
  (block
   ;;@ gwtincompatible/Implementor.java:36:7
-  (call $$clinit__void@gwtincompatible.Implementor.SomeEnum )
-  ;;@ gwtincompatible/Implementor.java:36:7
   (struct.set $java.lang.Enum $f_name__java_lang_Enum_ (local.get $this) (local.get $$name))
   ;;@ gwtincompatible/Implementor.java:36:7
   (struct.set $java.lang.Enum $f_ordinal__java_lang_Enum_ (local.get $this) (local.get $$ordinal))
@@ -566,7 +562,7 @@
   ;;@ gwtincompatible/Implementor.java:36:7
   (call $$clinit__void@gwtincompatible.Implementor.SomeEnum )
   ;;@ gwtincompatible/Implementor.java:36:7
-  (return (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array (global.get $f_COMPATIBLE__gwtincompatible_Implementor_SomeEnum))))
+  (return (struct.new $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (array.new_fixed $java.lang.Object.array (global.get $f_COMPATIBLE__gwtincompatible_Implementor_SomeEnum))))
  )
 )
 
@@ -640,6 +636,8 @@
  (local $$instance (ref null $gwtincompatible.Implementor.SomeEnum.1))
  (block
   ;;@ gwtincompatible/Implementor.java:37:15
+  (call $$clinit__void@gwtincompatible.Implementor.SomeEnum.1 )
+  ;;@ gwtincompatible/Implementor.java:37:15
   (local.set $$instance (struct.new $gwtincompatible.Implementor.SomeEnum.1 (ref.as_non_null (global.get $gwtincompatible.Implementor.SomeEnum.1.vtable)) (ref.as_non_null (global.get $gwtincompatible.Implementor.SomeEnum.1.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
   ;;@ gwtincompatible/Implementor.java:37:15
   (call $$ctor__java_lang_String__int__void_$p_gwtincompatible_Implementor_SomeEnum_1@gwtincompatible.Implementor.SomeEnum.1 (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
@@ -655,8 +653,6 @@
  (param $$ordinal i32)
  ;;@ gwtincompatible/Implementor.java:37:15
  (block
-  ;;@ gwtincompatible/Implementor.java:37:15
-  (call $$clinit__void@gwtincompatible.Implementor.SomeEnum.1 )
   ;;@ gwtincompatible/Implementor.java:37:15
   (call $$ctor__java_lang_String__int__void_$p_gwtincompatible_Implementor_SomeEnum@gwtincompatible.Implementor.SomeEnum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
  )

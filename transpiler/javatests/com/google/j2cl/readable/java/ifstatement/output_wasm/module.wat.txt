@@ -41,6 +41,8 @@
  (local $$instance (ref null $ifstatement.IfStatement))
  (block
   ;;@ ifstatement/IfStatement.java:18:13
+  (call $$clinit__void@ifstatement.IfStatement )
+  ;;@ ifstatement/IfStatement.java:18:13
   (local.set $$instance (struct.new $ifstatement.IfStatement (ref.as_non_null (global.get $ifstatement.IfStatement.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ ifstatement/IfStatement.java:18:13
   (call $$ctor__void_$p_ifstatement_IfStatement@ifstatement.IfStatement (ref.as_non_null (local.get $$instance)))
@@ -54,8 +56,6 @@
  (param $this (ref null $ifstatement.IfStatement))
  ;;@ ifstatement/IfStatement.java:18:13
  (block
-  ;;@ ifstatement/IfStatement.java:18:13
-  (call $$clinit__void@ifstatement.IfStatement )
   ;;@ ifstatement/IfStatement.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )

@@ -428,6 +428,7 @@ public enum Backend {
           NormalizeFieldInitialization::new,
           ImplementInstanceInitialization::new,
           NormalizeLabels::new,
+          NormalizeInstantiationThroughFactoryMethods::new,
           ImplementStaticInitializationViaConditionChecks::new,
           ImplementClassMetadataViaGetters::new,
           ImplementStringCompileTimeConstants::new,
@@ -456,7 +457,6 @@ public enum Backend {
           // Needs to run at the end as the types in the ast will be invalid after the pass.
           ImplementArraysAsClasses::new,
           InsertExceptionConversionsWasm::new,
-          NormalizeInstantiationThroughFactoryMethods::new,
           RemoveCustomIsInstanceMethods::new,
           RemoveNoopStatements::new,
           UpgradeInterfaceDispatch::new,

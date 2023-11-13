@@ -41,6 +41,8 @@
  (local $$instance (ref null $classliteral.ClassLiteral))
  (block
   ;;@ classliteral/ClassLiteral.java:18:13
+  (call $$clinit__void@classliteral.ClassLiteral )
+  ;;@ classliteral/ClassLiteral.java:18:13
   (local.set $$instance (struct.new $classliteral.ClassLiteral (ref.as_non_null (global.get $classliteral.ClassLiteral.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ classliteral/ClassLiteral.java:18:13
   (call $$ctor__void_$p_classliteral_ClassLiteral@classliteral.ClassLiteral (ref.as_non_null (local.get $$instance)))
@@ -54,8 +56,6 @@
  (param $this (ref null $classliteral.ClassLiteral))
  ;;@ classliteral/ClassLiteral.java:18:13
  (block
-  ;;@ classliteral/ClassLiteral.java:18:13
-  (call $$clinit__void@classliteral.ClassLiteral )
   ;;@ classliteral/ClassLiteral.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )

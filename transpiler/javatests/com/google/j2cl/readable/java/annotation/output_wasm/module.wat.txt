@@ -183,6 +183,8 @@
  (local $$instance (ref null $annotation.Main))
  (block
   ;;@ annotation/Main.java:18:13
+  (call $$clinit__void@annotation.Main )
+  ;;@ annotation/Main.java:18:13
   (local.set $$instance (struct.new $annotation.Main (ref.as_non_null (global.get $annotation.Main.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ annotation/Main.java:18:13
   (call $$ctor__void_$p_annotation_Main@annotation.Main (ref.as_non_null (local.get $$instance)))
@@ -196,8 +198,6 @@
  (param $this (ref null $annotation.Main))
  ;;@ annotation/Main.java:18:13
  (block
-  ;;@ annotation/Main.java:18:13
-  (call $$clinit__void@annotation.Main )
   ;;@ annotation/Main.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -270,6 +270,8 @@
  (local $$instance (ref null $annotation.Main.Bar))
  (block
   ;;@ annotation/Main.java:30:8
+  (call $$clinit__void@annotation.Main.Bar )
+  ;;@ annotation/Main.java:30:8
   (local.set $$instance (struct.new $annotation.Main.Bar (ref.as_non_null (global.get $annotation.Main.Bar.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $annotation.Main)))
   ;;@ annotation/Main.java:30:8
   (call $$ctor__annotation_Main__void_$p_annotation_Main_Bar@annotation.Main.Bar (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
@@ -284,8 +286,6 @@
  (param $$outer_this (ref null $annotation.Main))
  ;;@ annotation/Main.java:30:8
  (block
-  ;;@ annotation/Main.java:30:8
-  (call $$clinit__void@annotation.Main.Bar )
   ;;@ annotation/Main.java:30:8
   (struct.set $annotation.Main.Bar $$outer_this__annotation_Main_Bar (local.get $this) (local.get $$outer_this))
   ;;@ annotation/Main.java:30:8

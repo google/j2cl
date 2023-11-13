@@ -48,20 +48,16 @@ import java.util.List;
 public class ImplementStaticInitializationViaClinitFunctionRedirection
     extends ImplementStaticInitializationBase {
 
-  public ImplementStaticInitializationViaClinitFunctionRedirection() {
-    super(/* triggerClinitInConstructors = */ false);
-  }
-
   @Override
   public void applyTo(Type type) {
-      checkState(!type.isNative());
-      checkState(!type.isJsFunctionInterface());
-      if (type.isJsEnum()) {
+    checkState(!type.isNative());
+    checkState(!type.isJsFunctionInterface());
+    if (type.isJsEnum()) {
       return;
-      }
-      synthesizeSettersAndGetters(type);
-      synthesizeClinitMethod(type);
-      synthesizeStaticFieldDeclaration(type);
+    }
+    synthesizeSettersAndGetters(type);
+    synthesizeClinitMethod(type);
+    synthesizeStaticFieldDeclaration(type);
   }
 
   private static void synthesizeStaticFieldDeclaration(Type type) {

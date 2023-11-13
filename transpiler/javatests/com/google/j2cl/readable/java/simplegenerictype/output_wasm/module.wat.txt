@@ -45,6 +45,8 @@
  (local $$instance (ref null $simplegenerictype.SimpleGenericType))
  (block
   ;;@ simplegenerictype/SimpleGenericType.java:22:9
+  (call $$clinit__void@simplegenerictype.SimpleGenericType )
+  ;;@ simplegenerictype/SimpleGenericType.java:22:9
   (local.set $$instance (struct.new $simplegenerictype.SimpleGenericType (ref.as_non_null (global.get $simplegenerictype.SimpleGenericType.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ simplegenerictype/SimpleGenericType.java:22:9
   (call $$ctor__java_lang_Object__java_lang_Object__void_$p_simplegenerictype_SimpleGenericType@simplegenerictype.SimpleGenericType (ref.as_non_null (local.get $$instance))(local.get $t)(local.get $s))
@@ -60,8 +62,6 @@
  (param $s (ref null $java.lang.Object))
  ;;@ simplegenerictype/SimpleGenericType.java:22:9
  (block
-  ;;@ simplegenerictype/SimpleGenericType.java:22:37
-  (call $$clinit__void@simplegenerictype.SimpleGenericType )
   ;;@ simplegenerictype/SimpleGenericType.java:22:37
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;;@ simplegenerictype/SimpleGenericType.java:23:4

@@ -47,6 +47,8 @@
  (local $$instance (ref null $simplelongs.SimpleLongs))
  (block
   ;;@ simplelongs/SimpleLongs.java:18:13
+  (call $$clinit__void@simplelongs.SimpleLongs )
+  ;;@ simplelongs/SimpleLongs.java:18:13
   (local.set $$instance (struct.new $simplelongs.SimpleLongs (ref.as_non_null (global.get $simplelongs.SimpleLongs.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i64.const 0) (i32.const 0)))
   ;;@ simplelongs/SimpleLongs.java:18:13
   (call $$ctor__void_$p_simplelongs_SimpleLongs@simplelongs.SimpleLongs (ref.as_non_null (local.get $$instance)))
@@ -60,8 +62,6 @@
  (param $this (ref null $simplelongs.SimpleLongs))
  ;;@ simplelongs/SimpleLongs.java:18:13
  (block
-  ;;@ simplelongs/SimpleLongs.java:18:13
-  (call $$clinit__void@simplelongs.SimpleLongs )
   ;;@ simplelongs/SimpleLongs.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;;@ simplelongs/SimpleLongs.java:18:13

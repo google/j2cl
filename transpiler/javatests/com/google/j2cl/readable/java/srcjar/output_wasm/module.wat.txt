@@ -71,6 +71,8 @@
  (local $$instance (ref null $srcjar.Foo))
  (block
   ;;@ srcjar/Foo.java:21:13
+  (call $$clinit__void@srcjar.Foo )
+  ;;@ srcjar/Foo.java:21:13
   (local.set $$instance (struct.new $srcjar.Foo (ref.as_non_null (global.get $srcjar.Foo.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ srcjar/Foo.java:21:13
   (call $$ctor__void_$p_srcjar_Foo@srcjar.Foo (ref.as_non_null (local.get $$instance)))
@@ -84,8 +86,6 @@
  (param $this (ref null $srcjar.Foo))
  ;;@ srcjar/Foo.java:21:13
  (block
-  ;;@ srcjar/Foo.java:21:13
-  (call $$clinit__void@srcjar.Foo )
   ;;@ srcjar/Foo.java:21:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -157,6 +157,8 @@
  (local $$instance (ref null $srcjar.Srcjar))
  (block
   ;;@ srcjar/Srcjar.java:18:13
+  (call $$clinit__void@srcjar.Srcjar )
+  ;;@ srcjar/Srcjar.java:18:13
   (local.set $$instance (struct.new $srcjar.Srcjar (ref.as_non_null (global.get $srcjar.Srcjar.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ srcjar/Srcjar.java:18:13
   (call $$ctor__void_$p_srcjar_Srcjar@srcjar.Srcjar (ref.as_non_null (local.get $$instance)))
@@ -170,8 +172,6 @@
  (param $this (ref null $srcjar.Srcjar))
  ;;@ srcjar/Srcjar.java:18:13
  (block
-  ;;@ srcjar/Srcjar.java:18:13
-  (call $$clinit__void@srcjar.Srcjar )
   ;;@ srcjar/Srcjar.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )

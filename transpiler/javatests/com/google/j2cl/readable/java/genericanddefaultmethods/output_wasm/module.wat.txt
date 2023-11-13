@@ -192,6 +192,8 @@
  (local $$instance (ref null $genericanddefaultmethods.GenericClass))
  (block
   ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
+  (call $$clinit__void@genericanddefaultmethods.GenericClass )
+  ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
   (local.set $$instance (struct.new $genericanddefaultmethods.GenericClass (ref.as_non_null (global.get $genericanddefaultmethods.GenericClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
   (call $$ctor__void_$p_genericanddefaultmethods_GenericClass@genericanddefaultmethods.GenericClass (ref.as_non_null (local.get $$instance)))
@@ -205,8 +207,6 @@
  (param $this (ref null $genericanddefaultmethods.GenericClass))
  ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
  (block
-  ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
-  (call $$clinit__void@genericanddefaultmethods.GenericClass )
   ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -314,6 +314,8 @@
  (local $$instance (ref null $genericanddefaultmethods.ConcreteClass))
  (block
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
+  (call $$clinit__void@genericanddefaultmethods.ConcreteClass )
+  ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
   (local.set $$instance (struct.new $genericanddefaultmethods.ConcreteClass (ref.as_non_null (global.get $genericanddefaultmethods.ConcreteClass.vtable)) (ref.as_non_null (global.get $genericanddefaultmethods.ConcreteClass.itable)) (i32.const 0)))
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
   (call $$ctor__void_$p_genericanddefaultmethods_ConcreteClass@genericanddefaultmethods.ConcreteClass (ref.as_non_null (local.get $$instance)))
@@ -327,8 +329,6 @@
  (param $this (ref null $genericanddefaultmethods.ConcreteClass))
  ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
  (block
-  ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
-  (call $$clinit__void@genericanddefaultmethods.ConcreteClass )
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
   (call $$ctor__void_$p_genericanddefaultmethods_GenericClass@genericanddefaultmethods.GenericClass (ref.as_non_null (local.get $this)))
  )

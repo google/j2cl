@@ -42,6 +42,8 @@
  (local $$instance (ref null $simpleliterals.SimpleLiterals))
  (block
   ;;@ simpleliterals/SimpleLiterals.java:18:13
+  (call $$clinit__void@simpleliterals.SimpleLiterals )
+  ;;@ simpleliterals/SimpleLiterals.java:18:13
   (local.set $$instance (struct.new $simpleliterals.SimpleLiterals (ref.as_non_null (global.get $simpleliterals.SimpleLiterals.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ simpleliterals/SimpleLiterals.java:18:13
   (call $$ctor__void_$p_simpleliterals_SimpleLiterals@simpleliterals.SimpleLiterals (ref.as_non_null (local.get $$instance)))
@@ -55,8 +57,6 @@
  (param $this (ref null $simpleliterals.SimpleLiterals))
  ;;@ simpleliterals/SimpleLiterals.java:18:13
  (block
-  ;;@ simpleliterals/SimpleLiterals.java:18:13
-  (call $$clinit__void@simpleliterals.SimpleLiterals )
   ;;@ simpleliterals/SimpleLiterals.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )

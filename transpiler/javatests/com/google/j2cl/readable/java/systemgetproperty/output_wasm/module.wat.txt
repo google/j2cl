@@ -42,6 +42,8 @@
  (local $$instance (ref null $systemgetproperty.Main))
  (block
   ;;@ systemgetproperty/Main.java:18:13
+  (call $$clinit__void@systemgetproperty.Main )
+  ;;@ systemgetproperty/Main.java:18:13
   (local.set $$instance (struct.new $systemgetproperty.Main (ref.as_non_null (global.get $systemgetproperty.Main.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ systemgetproperty/Main.java:18:13
   (call $$ctor__void_$p_systemgetproperty_Main@systemgetproperty.Main (ref.as_non_null (local.get $$instance)))
@@ -55,8 +57,6 @@
  (param $this (ref null $systemgetproperty.Main))
  ;;@ systemgetproperty/Main.java:18:13
  (block
-  ;;@ systemgetproperty/Main.java:18:13
-  (call $$clinit__void@systemgetproperty.Main )
   ;;@ systemgetproperty/Main.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )

@@ -43,6 +43,8 @@
  (local $$instance (ref null $blockscoping.BlockScoping))
  (block
   ;;@ blockscoping/BlockScoping.java:18:13
+  (call $$clinit__void@blockscoping.BlockScoping )
+  ;;@ blockscoping/BlockScoping.java:18:13
   (local.set $$instance (struct.new $blockscoping.BlockScoping (ref.as_non_null (global.get $blockscoping.BlockScoping.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ blockscoping/BlockScoping.java:18:13
   (call $$ctor__void_$p_blockscoping_BlockScoping@blockscoping.BlockScoping (ref.as_non_null (local.get $$instance)))
@@ -56,8 +58,6 @@
  (param $this (ref null $blockscoping.BlockScoping))
  ;;@ blockscoping/BlockScoping.java:18:13
  (block
-  ;;@ blockscoping/BlockScoping.java:18:13
-  (call $$clinit__void@blockscoping.BlockScoping )
   ;;@ blockscoping/BlockScoping.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )

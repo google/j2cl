@@ -41,6 +41,8 @@
  (local $$instance (ref null $javascriptkeywords.JSKeyWords))
  (block
   ;;@ javascriptkeywords/JSKeyWords.java:18:13
+  (call $$clinit__void@javascriptkeywords.JSKeyWords )
+  ;;@ javascriptkeywords/JSKeyWords.java:18:13
   (local.set $$instance (struct.new $javascriptkeywords.JSKeyWords (ref.as_non_null (global.get $javascriptkeywords.JSKeyWords.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ javascriptkeywords/JSKeyWords.java:18:13
   (call $$ctor__void_$p_javascriptkeywords_JSKeyWords@javascriptkeywords.JSKeyWords (ref.as_non_null (local.get $$instance)))
@@ -54,8 +56,6 @@
  (param $this (ref null $javascriptkeywords.JSKeyWords))
  ;;@ javascriptkeywords/JSKeyWords.java:18:13
  (block
-  ;;@ javascriptkeywords/JSKeyWords.java:18:13
-  (call $$clinit__void@javascriptkeywords.JSKeyWords )
   ;;@ javascriptkeywords/JSKeyWords.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )

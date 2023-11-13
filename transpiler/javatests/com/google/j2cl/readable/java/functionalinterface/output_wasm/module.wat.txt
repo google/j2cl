@@ -441,6 +441,8 @@
  (local $$instance (ref null $functionalinterface.FunctionalInterfaces))
  (block
   ;;@ functionalinterface/FunctionalInterfaces.java:20:13
+  (call $$clinit__void@functionalinterface.FunctionalInterfaces )
+  ;;@ functionalinterface/FunctionalInterfaces.java:20:13
   (local.set $$instance (struct.new $functionalinterface.FunctionalInterfaces (ref.as_non_null (global.get $functionalinterface.FunctionalInterfaces.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ functionalinterface/FunctionalInterfaces.java:20:13
   (call $$ctor__void_$p_functionalinterface_FunctionalInterfaces@functionalinterface.FunctionalInterfaces (ref.as_non_null (local.get $$instance)))
@@ -454,8 +456,6 @@
  (param $this (ref null $functionalinterface.FunctionalInterfaces))
  ;;@ functionalinterface/FunctionalInterfaces.java:20:13
  (block
-  ;;@ functionalinterface/FunctionalInterfaces.java:20:13
-  (call $$clinit__void@functionalinterface.FunctionalInterfaces )
   ;;@ functionalinterface/FunctionalInterfaces.java:20:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )

@@ -39,6 +39,8 @@
  (local $$instance (ref null $publicconstructor.PublicConstructor))
  (block
   ;;@ publicconstructor/PublicConstructor.java:19:9
+  (call $$clinit__void@publicconstructor.PublicConstructor )
+  ;;@ publicconstructor/PublicConstructor.java:19:9
   (local.set $$instance (struct.new $publicconstructor.PublicConstructor (ref.as_non_null (global.get $publicconstructor.PublicConstructor.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ publicconstructor/PublicConstructor.java:19:9
   (call $$ctor__void_$p_publicconstructor_PublicConstructor@publicconstructor.PublicConstructor (ref.as_non_null (local.get $$instance)))
@@ -52,8 +54,6 @@
  (param $this (ref null $publicconstructor.PublicConstructor))
  ;;@ publicconstructor/PublicConstructor.java:19:9
  (block
-  ;;@ publicconstructor/PublicConstructor.java:19:29
-  (call $$clinit__void@publicconstructor.PublicConstructor )
   ;;@ publicconstructor/PublicConstructor.java:19:29
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )

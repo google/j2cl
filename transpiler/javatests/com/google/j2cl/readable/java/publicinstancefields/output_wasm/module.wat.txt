@@ -41,6 +41,8 @@
  (local $$instance (ref null $publicinstancefields.PublicInstanceFields))
  (block
   ;;@ publicinstancefields/PublicInstanceFields.java:18:13
+  (call $$clinit__void@publicinstancefields.PublicInstanceFields )
+  ;;@ publicinstancefields/PublicInstanceFields.java:18:13
   (local.set $$instance (struct.new $publicinstancefields.PublicInstanceFields (ref.as_non_null (global.get $publicinstancefields.PublicInstanceFields.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (i32.const 0)))
   ;;@ publicinstancefields/PublicInstanceFields.java:18:13
   (call $$ctor__void_$p_publicinstancefields_PublicInstanceFields@publicinstancefields.PublicInstanceFields (ref.as_non_null (local.get $$instance)))
@@ -54,8 +56,6 @@
  (param $this (ref null $publicinstancefields.PublicInstanceFields))
  ;;@ publicinstancefields/PublicInstanceFields.java:18:13
  (block
-  ;;@ publicinstancefields/PublicInstanceFields.java:18:13
-  (call $$clinit__void@publicinstancefields.PublicInstanceFields )
   ;;@ publicinstancefields/PublicInstanceFields.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;;@ publicinstancefields/PublicInstanceFields.java:18:13

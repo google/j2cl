@@ -47,6 +47,8 @@
  (local $$instance (ref null $jsnullable.Main))
  (block
   ;;@ jsnullable/Main.java:24:13
+  (call $$clinit__void@jsnullable.Main )
+  ;;@ jsnullable/Main.java:24:13
   (local.set $$instance (struct.new $jsnullable.Main (ref.as_non_null (global.get $jsnullable.Main.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $javaemul.internal.WasmArray.OfObject)))
   ;;@ jsnullable/Main.java:24:13
   (call $$ctor__void_$p_jsnullable_Main@jsnullable.Main (ref.as_non_null (local.get $$instance)))
@@ -60,8 +62,6 @@
  (param $this (ref null $jsnullable.Main))
  ;;@ jsnullable/Main.java:24:13
  (block
-  ;;@ jsnullable/Main.java:24:13
-  (call $$clinit__void@jsnullable.Main )
   ;;@ jsnullable/Main.java:24:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;;@ jsnullable/Main.java:24:13
@@ -95,9 +95,9 @@
   ;;@ jsnullable/Main.java:29:2
   (struct.set $jsnullable.Main $f_f6__jsnullable_Main_ (local.get $this) (call $$create__@java.util.ArrayList ))
   ;;@ jsnullable/Main.java:31:2
-  (struct.set $jsnullable.Main $f_f9__jsnullable_Main_ (local.get $this) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array )))
+  (struct.set $jsnullable.Main $f_f9__jsnullable_Main_ (local.get $this) (struct.new $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (array.new_fixed $java.lang.Object.array )))
   ;;@ jsnullable/Main.java:33:2
-  (struct.set $jsnullable.Main $f_f10__jsnullable_Main_ (local.get $this) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array )))
+  (struct.set $jsnullable.Main $f_f10__jsnullable_Main_ (local.get $this) (struct.new $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (array.new_fixed $java.lang.Object.array )))
  )
 )
 

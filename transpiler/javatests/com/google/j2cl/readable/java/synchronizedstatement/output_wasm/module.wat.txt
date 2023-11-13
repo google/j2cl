@@ -43,6 +43,8 @@
  (local $$instance (ref null $synchronizedstatement.SynchronizedStatement))
  (block
   ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
+  (call $$clinit__void@synchronizedstatement.SynchronizedStatement )
+  ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
   (local.set $$instance (struct.new $synchronizedstatement.SynchronizedStatement (ref.as_non_null (global.get $synchronizedstatement.SynchronizedStatement.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (i32.const 0)))
   ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
   (call $$ctor__void_$p_synchronizedstatement_SynchronizedStatement@synchronizedstatement.SynchronizedStatement (ref.as_non_null (local.get $$instance)))
@@ -56,8 +58,6 @@
  (param $this (ref null $synchronizedstatement.SynchronizedStatement))
  ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
  (block
-  ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
-  (call $$clinit__void@synchronizedstatement.SynchronizedStatement )
   ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )

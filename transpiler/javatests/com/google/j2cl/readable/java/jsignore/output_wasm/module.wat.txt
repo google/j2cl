@@ -42,6 +42,8 @@
  (local $$instance (ref null $jsignore.JsIgnoreExample))
  (block
   ;;@ jsignore/JsIgnoreExample.java:22:13
+  (call $$clinit__void@jsignore.JsIgnoreExample )
+  ;;@ jsignore/JsIgnoreExample.java:22:13
   (local.set $$instance (struct.new $jsignore.JsIgnoreExample (ref.as_non_null (global.get $jsignore.JsIgnoreExample.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ jsignore/JsIgnoreExample.java:22:13
   (call $$ctor__void_$p_jsignore_JsIgnoreExample@jsignore.JsIgnoreExample (ref.as_non_null (local.get $$instance)))
@@ -55,8 +57,6 @@
  (param $this (ref null $jsignore.JsIgnoreExample))
  ;;@ jsignore/JsIgnoreExample.java:22:13
  (block
-  ;;@ jsignore/JsIgnoreExample.java:22:13
-  (call $$clinit__void@jsignore.JsIgnoreExample )
   ;;@ jsignore/JsIgnoreExample.java:22:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )

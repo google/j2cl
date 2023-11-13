@@ -115,6 +115,8 @@
  (local $$instance (ref null $protobuf.Protobuf))
  (block
   ;;@ protobuf/Protobuf.java:18:13
+  (call $$clinit__void@protobuf.Protobuf )
+  ;;@ protobuf/Protobuf.java:18:13
   (local.set $$instance (struct.new $protobuf.Protobuf (ref.as_non_null (global.get $protobuf.Protobuf.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ protobuf/Protobuf.java:18:13
   (call $$ctor__void_$p_protobuf_Protobuf@protobuf.Protobuf (ref.as_non_null (local.get $$instance)))
@@ -128,8 +130,6 @@
  (param $this (ref null $protobuf.Protobuf))
  ;;@ protobuf/Protobuf.java:18:13
  (block
-  ;;@ protobuf/Protobuf.java:18:13
-  (call $$clinit__void@protobuf.Protobuf )
   ;;@ protobuf/Protobuf.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -270,6 +270,8 @@
  (local $$instance (ref null $protobuf.MyMessage))
  (block
   ;;@ protobuf/MyMessage.java:38:10
+  (call $$clinit__void@protobuf.MyMessage )
+  ;;@ protobuf/MyMessage.java:38:10
   (local.set $$instance (struct.new $protobuf.MyMessage (ref.as_non_null (global.get $protobuf.MyMessage.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
   ;;@ protobuf/MyMessage.java:38:10
   (call $$ctor__int__void_$p_protobuf_MyMessage@protobuf.MyMessage (ref.as_non_null (local.get $$instance))(local.get $testField))
@@ -284,8 +286,6 @@
  (param $testField i32)
  ;;@ protobuf/MyMessage.java:38:10
  (block
-  ;;@ protobuf/MyMessage.java:38:35
-  (call $$clinit__void@protobuf.MyMessage )
   ;;@ protobuf/MyMessage.java:38:35
   (call $$ctor__void_$p_com_google_protobuf_GeneratedMessage@com.google.protobuf.GeneratedMessage (ref.as_non_null (local.get $this)))
   ;;@ protobuf/MyMessage.java:39:4
@@ -407,6 +407,8 @@
  (local $$instance (ref null $protobuf.MyMessage.Builder))
  (block
   ;;@ protobuf/MyMessage.java:59:12
+  (call $$clinit__void@protobuf.MyMessage.Builder )
+  ;;@ protobuf/MyMessage.java:59:12
   (local.set $$instance (struct.new $protobuf.MyMessage.Builder (ref.as_non_null (global.get $protobuf.MyMessage.Builder.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
   ;;@ protobuf/MyMessage.java:59:12
   (call $$ctor__void_$p_protobuf_MyMessage_Builder@protobuf.MyMessage.Builder (ref.as_non_null (local.get $$instance)))
@@ -420,8 +422,6 @@
  (param $this (ref null $protobuf.MyMessage.Builder))
  ;;@ protobuf/MyMessage.java:59:12
  (block
-  ;;@ protobuf/MyMessage.java:59:22
-  (call $$clinit__void@protobuf.MyMessage.Builder )
   ;;@ protobuf/MyMessage.java:59:22
   (call $$ctor__void_$p_com_google_protobuf_GeneratedMessage_Builder@com.google.protobuf.GeneratedMessage.Builder (ref.as_non_null (local.get $this)))
  )

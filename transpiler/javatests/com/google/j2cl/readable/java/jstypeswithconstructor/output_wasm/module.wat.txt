@@ -39,6 +39,8 @@
  (local $$instance (ref null $jstypeswithconstructor.JsTypesWithConstructor))
  (block
   ;;@ jstypeswithconstructor/JsTypesWithConstructor.java:27:9
+  (call $$clinit__void@jstypeswithconstructor.JsTypesWithConstructor )
+  ;;@ jstypeswithconstructor/JsTypesWithConstructor.java:27:9
   (local.set $$instance (struct.new $jstypeswithconstructor.JsTypesWithConstructor (ref.as_non_null (global.get $jstypeswithconstructor.JsTypesWithConstructor.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ jstypeswithconstructor/JsTypesWithConstructor.java:27:9
   (call $$ctor__void_$p_jstypeswithconstructor_JsTypesWithConstructor@jstypeswithconstructor.JsTypesWithConstructor (ref.as_non_null (local.get $$instance)))
@@ -52,8 +54,6 @@
  (param $this (ref null $jstypeswithconstructor.JsTypesWithConstructor))
  ;;@ jstypeswithconstructor/JsTypesWithConstructor.java:27:9
  (block
-  ;;@ jstypeswithconstructor/JsTypesWithConstructor.java:27:34
-  (call $$clinit__void@jstypeswithconstructor.JsTypesWithConstructor )
   ;;@ jstypeswithconstructor/JsTypesWithConstructor.java:27:34
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )

@@ -119,6 +119,8 @@
  (local $$instance (ref null $functiontype.FunctionImpl))
  (block
   ;;@ functiontype/FunctionImpl.java:20:13
+  (call $$clinit__void@functiontype.FunctionImpl )
+  ;;@ functiontype/FunctionImpl.java:20:13
   (local.set $$instance (struct.new $functiontype.FunctionImpl (ref.as_non_null (global.get $functiontype.FunctionImpl.vtable)) (ref.as_non_null (global.get $functiontype.FunctionImpl.itable)) (i32.const 0)))
   ;;@ functiontype/FunctionImpl.java:20:13
   (call $$ctor__void_$p_functiontype_FunctionImpl@functiontype.FunctionImpl (ref.as_non_null (local.get $$instance)))
@@ -132,8 +134,6 @@
  (param $this (ref null $functiontype.FunctionImpl))
  ;;@ functiontype/FunctionImpl.java:20:13
  (block
-  ;;@ functiontype/FunctionImpl.java:20:13
-  (call $$clinit__void@functiontype.FunctionImpl )
   ;;@ functiontype/FunctionImpl.java:20:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )

@@ -86,6 +86,8 @@
  (local $$instance (ref null $strings.Strings))
  (block
   ;;@ strings/Strings.java:18:13
+  (call $$clinit__void@strings.Strings )
+  ;;@ strings/Strings.java:18:13
   (local.set $$instance (struct.new $strings.Strings (ref.as_non_null (global.get $strings.Strings.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.String)))
   ;;@ strings/Strings.java:18:13
   (call $$ctor__void_$p_strings_Strings@strings.Strings (ref.as_non_null (local.get $$instance)))
@@ -99,8 +101,6 @@
  (param $this (ref null $strings.Strings))
  ;;@ strings/Strings.java:18:13
  (block
-  ;;@ strings/Strings.java:18:13
-  (call $$clinit__void@strings.Strings )
   ;;@ strings/Strings.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;;@ strings/Strings.java:18:13
@@ -479,6 +479,8 @@
  (local $$instance (ref null $strings.Strings.StringHolder))
  (block
   ;;@ strings/Strings.java:25:23
+  (call $$clinit__void@strings.Strings.StringHolder )
+  ;;@ strings/Strings.java:25:23
   (local.set $$instance (struct.new $strings.Strings.StringHolder (ref.as_non_null (global.get $strings.Strings.StringHolder.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.String)))
   ;;@ strings/Strings.java:25:23
   (call $$ctor__void_$p_strings_Strings_StringHolder@strings.Strings.StringHolder (ref.as_non_null (local.get $$instance)))
@@ -492,8 +494,6 @@
  (param $this (ref null $strings.Strings.StringHolder))
  ;;@ strings/Strings.java:25:23
  (block
-  ;;@ strings/Strings.java:25:23
-  (call $$clinit__void@strings.Strings.StringHolder )
   ;;@ strings/Strings.java:25:23
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;;@ strings/Strings.java:25:23

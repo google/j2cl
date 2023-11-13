@@ -185,6 +185,8 @@
  (local $$instance (ref null $exception.MyException))
  (block
   ;;@ exception/MyException.java:19:2
+  (call $$clinit__void@exception.MyException )
+  ;;@ exception/MyException.java:19:2
   (local.set $$instance (struct.new $exception.MyException (ref.as_non_null (global.get $exception.MyException.vtable)) (ref.as_non_null (global.get $exception.MyException.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Throwable) (ref.null $java.lang.String) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.util.ArrayList)))
   ;;@ exception/MyException.java:19:2
   (call $$ctor__void_$p_exception_MyException@exception.MyException (ref.as_non_null (local.get $$instance)))
@@ -201,8 +203,6 @@
  ;;@ exception/MyException.java:19:2
  (block
   ;;@ exception/MyException.java:19:16
-  (call $$clinit__void@exception.MyException )
-  ;;@ exception/MyException.java:19:16
   (call $$ctor__void_$p_java_lang_Exception@java.lang.Exception (ref.as_non_null (local.get $this)))
  )
 )
@@ -214,6 +214,8 @@
  ;;@ exception/MyException.java:21:2
  (local $$instance (ref null $exception.MyException))
  (block
+  ;;@ exception/MyException.java:21:2
+  (call $$clinit__void@exception.MyException )
   ;;@ exception/MyException.java:21:2
   (local.set $$instance (struct.new $exception.MyException (ref.as_non_null (global.get $exception.MyException.vtable)) (ref.as_non_null (global.get $exception.MyException.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Throwable) (ref.null $java.lang.String) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.util.ArrayList)))
   ;;@ exception/MyException.java:21:2
@@ -231,8 +233,6 @@
  (param $cause (ref null $java.lang.Throwable))
  ;;@ exception/MyException.java:21:2
  (block
-  ;;@ exception/MyException.java:21:31
-  (call $$clinit__void@exception.MyException )
   ;;@ exception/MyException.java:22:4
   (call $$ctor__java_lang_Throwable__void_$p_java_lang_Exception@java.lang.Exception (ref.as_non_null (local.get $this))(local.get $cause))
  )
@@ -304,6 +304,8 @@
  (local $$instance (ref null $exception.MyJsException))
  (block
   ;;@ exception/MyJsException.java:23:9
+  (call $$clinit__void@exception.MyJsException )
+  ;;@ exception/MyJsException.java:23:9
   (local.set $$instance (struct.new $exception.MyJsException (ref.as_non_null (global.get $exception.MyJsException.vtable)) (ref.as_non_null (global.get $exception.MyJsException.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Throwable) (ref.null $java.lang.String) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.util.ArrayList)))
   ;;@ exception/MyJsException.java:23:9
   (call $$ctor__void_$p_exception_MyJsException@exception.MyJsException (ref.as_non_null (local.get $$instance)))
@@ -320,8 +322,6 @@
  ;;@ exception/MyJsException.java:23:9
  (block
   ;;@ exception/MyJsException.java:23:25
-  (call $$clinit__void@exception.MyJsException )
-  ;;@ exception/MyJsException.java:23:25
   (call $$ctor__void_$p_java_lang_Exception@java.lang.Exception (ref.as_non_null (local.get $this)))
  )
 )
@@ -333,6 +333,8 @@
  ;;@ exception/MyJsException.java:26:9
  (local $$instance (ref null $exception.MyJsException))
  (block
+  ;;@ exception/MyJsException.java:26:9
+  (call $$clinit__void@exception.MyJsException )
   ;;@ exception/MyJsException.java:26:9
   (local.set $$instance (struct.new $exception.MyJsException (ref.as_non_null (global.get $exception.MyJsException.vtable)) (ref.as_non_null (global.get $exception.MyJsException.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Throwable) (ref.null $java.lang.String) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.util.ArrayList)))
   ;;@ exception/MyJsException.java:26:9
@@ -350,8 +352,6 @@
  (param $cause (ref null $java.lang.Throwable))
  ;;@ exception/MyJsException.java:26:9
  (block
-  ;;@ exception/MyJsException.java:26:40
-  (call $$clinit__void@exception.MyJsException )
   ;;@ exception/MyJsException.java:27:4
   (call $$ctor__void_$p_exception_MyJsException@exception.MyJsException (ref.as_non_null (local.get $this)))
  )

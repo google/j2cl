@@ -122,6 +122,8 @@
  (local $$instance (ref null $switchstatement.SwitchStatement))
  (block
   ;;@ switchstatement/SwitchStatement.java:24:13
+  (call $$clinit__void@switchstatement.SwitchStatement )
+  ;;@ switchstatement/SwitchStatement.java:24:13
   (local.set $$instance (struct.new $switchstatement.SwitchStatement (ref.as_non_null (global.get $switchstatement.SwitchStatement.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ switchstatement/SwitchStatement.java:24:13
   (call $$ctor__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $$instance)))
@@ -135,8 +137,6 @@
  (param $this (ref null $switchstatement.SwitchStatement))
  ;;@ switchstatement/SwitchStatement.java:24:13
  (block
-  ;;@ switchstatement/SwitchStatement.java:24:13
-  (call $$clinit__void@switchstatement.SwitchStatement )
   ;;@ switchstatement/SwitchStatement.java:24:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -1396,7 +1396,7 @@
   ;;@ switchstatement/SwitchStatement.java:18:5
   (call $$clinit__void@switchstatement.Numbers )
   ;;@ switchstatement/SwitchStatement.java:18:5
-  (return (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array (global.get $f_ONE__switchstatement_Numbers)(global.get $f_TWO__switchstatement_Numbers)(global.get $f_THREE__switchstatement_Numbers))))
+  (return (struct.new $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (array.new_fixed $java.lang.Object.array (global.get $f_ONE__switchstatement_Numbers)(global.get $f_TWO__switchstatement_Numbers)(global.get $f_THREE__switchstatement_Numbers))))
  )
 )
 
