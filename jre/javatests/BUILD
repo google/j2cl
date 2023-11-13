@@ -50,6 +50,7 @@ j2kt_native_library(
     name = "emul_tests_lib-j2kt-native",
     testonly = 1,
     srcs = [
+        "com/google/j2cl/jre/BigDecimalSuite.java",
         "com/google/j2cl/jre/BigIntegerSuite.java",
         "com/google/j2cl/jre/java/util/EmulTestBase.java",
         "com/google/j2cl/jre/testing/J2ktIncompatible.java",
@@ -87,6 +88,7 @@ java_test(
 
 j2cl_multi_test(
     name = "BigDecimal",
+    enable_kt_native = True,
     shard_count = 5,
     test_class = "com.google.j2cl.jre.BigDecimalSuite",
     deps = [":emul_tests_lib"],
