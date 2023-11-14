@@ -1,0 +1,40 @@
+goog.module('emptyclass.EmptyClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class EmptyClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!EmptyClass} */
+ static $create__() {
+  EmptyClass.$clinit();
+  let $instance = new EmptyClass();
+  $instance.$ctor__emptyclass_EmptyClass__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__emptyclass_EmptyClass__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  EmptyClass.$clinit = () =>{};
+  EmptyClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof EmptyClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(EmptyClass, 'emptyclass.EmptyClass');
+
+exports = EmptyClass;
+
+//# sourceMappingURL=EmptyClass.js.map

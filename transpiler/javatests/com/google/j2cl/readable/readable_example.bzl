@@ -20,6 +20,8 @@ load(
     "j2kt_apple_framework",
     "j2wasm_application",
 )
+load("//build_defs/internal_do_not_use:j2cl_common.bzl", "j2cl_common")
+load("//build_defs/internal_do_not_use:provider.bzl", "J2clInfo")
 load("@bazel_tools//tools/build_defs/apple:ios.bzl", "ios_build_test")
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
 load("@io_bazel_rules_closure//closure:defs.bzl", "js_binary")
@@ -42,6 +44,7 @@ def readable_example(
         generate_wasm_modular = False,
         wasm_entry_points = [],
         generate_kt_readables = True,
+        generate_kt_web_readables = False,
         build_kt_readables = True,
         build_kt_native_readables = True,
         **kwargs):
@@ -70,6 +73,7 @@ def readable_example(
         generate_wasm_readables = False
 
     build_kt_native_readables = generate_kt_readables and build_kt_readables and build_kt_native_readables
+    generate_kt_web_readables = generate_kt_readables and generate_kt_web_readables
 
     # Transpile the Java files.
     j2cl_library(
@@ -95,38 +99,7 @@ def readable_example(
             actual = ":readable",
         )
 
-        _readable_diff_test(
-            name = "readable_golden",
-            target = ":readable.js",
-            dir_out = "output_closure",
-            tags = ["j2cl"],
-        )
-
-        # Verify compilability of generated JS.
-        js_binary(
-            name = "readable_binary",
-            defs = J2CL_OPTIMIZED_DEFS + [
-                "--conformance_config=transpiler/javatests/com/google/j2cl/readable/conformance_proto.txt",
-                "--jscomp_warning=conformanceViolations",
-                "--jscomp_warning=strictPrimitiveOperators",
-                "--jscomp_warning=checkRegExp",
-                "--jscomp_warning=checkTypes",
-                "--jscomp_warning=const",
-                "--jscomp_warning=missingProperties",
-                "--jscomp_warning=tooManyTypeParams",
-                "--jscomp_warning=visibility",
-                "--summary_detail_level=3",
-            ] + defs,
-            compiler = "//javascript/tools/jscompiler:head",
-            extra_inputs = ["//transpiler/javatests/com/google/j2cl/readable:conformance_proto"],
-            deps = [":readable"],
-        )
-
-        build_test(
-            name = "readable_build_test",
-            targets = ["readable_binary"],
-            tags = ["j2cl"],
-        )
+        _js_readable_targets("readable", "output_closure", defs)
 
     if generate_wasm_readables:
         j2wasm_application(
@@ -212,6 +185,54 @@ def readable_example(
                 tags = ["manual", "j2kt", "ios"],
             )
 
+    if generate_kt_web_readables:
+        _j2kt_web_enabled_j2cl_library(
+            name = "readable-j2kt-web",
+            j2cl_library = ":readable",
+        )
+
+        # Expose the generated js files under the expected name.
+        native.alias(
+            name = "readable-j2kt-web.js",
+            actual = ":readable-j2kt-web",
+        )
+
+        _js_readable_targets("readable-j2kt-web", "output_j2kt_web", defs)
+
+def _js_readable_targets(readable_target, dir_out, defs):
+    _readable_diff_test(
+        name = "%s_golden" % readable_target,
+        target = ":%s.js" % readable_target,
+        dir_out = dir_out,
+        tags = ["j2cl"],
+    )
+
+    # Verify compatibility of generated JS.
+    js_binary(
+        name = "%s_binary" % readable_target,
+        defs = J2CL_OPTIMIZED_DEFS + [
+            "--conformance_config=transpiler/javatests/com/google/j2cl/readable/conformance_proto.txt",
+            "--jscomp_warning=conformanceViolations",
+            "--jscomp_warning=strictPrimitiveOperators",
+            "--jscomp_warning=checkRegExp",
+            "--jscomp_warning=checkTypes",
+            "--jscomp_warning=const",
+            "--jscomp_warning=missingProperties",
+            "--jscomp_warning=tooManyTypeParams",
+            "--jscomp_warning=visibility",
+            "--summary_detail_level=3",
+        ] + defs,
+        compiler = "//javascript/tools/jscompiler:head",
+        extra_inputs = ["//transpiler/javatests/com/google/j2cl/readable:conformance_proto"],
+        deps = [":%s" % readable_target],
+    )
+
+    build_test(
+        name = "%s_build_test" % readable_target,
+        targets = ["%s_binary" % readable_target],
+        tags = ["j2cl"],
+    )
+
 def _readable_diff_test(name, target, dir_out, tags):
     _golden_output(
         testonly = 1,
@@ -244,7 +265,7 @@ def _golden_output_impl(ctx):
             excluded_extensions.append("kt")
 
         # TODO(b/217479735): Remove after fixing sourcemapping
-        if "/kotlin/" in input.path:
+        if "/kotlin/" in input.path or ctx.attr.target.label.name.endswith("j2kt-web"):
             excluded_extensions.append("mappings")
 
         exclusion_filter = " -o ".join(["-name *.%s" % ext for ext in excluded_extensions])
@@ -293,4 +314,30 @@ def _golden_output_impl(ctx):
 _golden_output = rule(
     implementation = _golden_output_impl,
     attrs = {"target": attr.label(allow_single_file = True)},
+)
+
+_j2kt_web_transition = transition(
+    implementation = lambda s, a: {"//:experimental_enable_j2kt_web": True},
+    inputs = [],
+    outputs = ["//:experimental_enable_j2kt_web"],
+)
+
+def _j2kt_web_enabled_j2cl_library_impl(ctx):
+    j2cl_library = ctx.attr.j2cl_library[0]
+    j2cl_provider = j2cl_library[J2clInfo]
+
+    return j2cl_common.create_js_lib_struct(
+        # Forward the J2CL and js providers.
+        j2cl_provider,
+        # Expose the generated Javascript file so `j2` script and other rules defined here
+        # can easily extract them.
+        [DefaultInfo(files = depset([j2cl_provider._private_.output_js]))],
+    )
+
+_j2kt_web_enabled_j2cl_library = rule(
+    implementation = _j2kt_web_enabled_j2cl_library_impl,
+    attrs = {
+        "j2cl_library": attr.label(providers = [J2clInfo], cfg = _j2kt_web_transition),
+        "_allowlist_function_transition": attr.label(default = "@bazel_tools//tools/allowlists/function_transition_allowlist"),
+    },
 )

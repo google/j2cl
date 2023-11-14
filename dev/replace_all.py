@@ -57,7 +57,8 @@ def blaze_build(
     wasm_readable_dirs,
     wasm_modular_readable_dirs,
     wasm_imports_readable_dirs,
-    kt_readable_dirs,
+    j2kt_readable_dirs,
+    j2kt_web_readable_dirs,
 ):
   """Blaze build everything in 1-go, for speed."""
 
@@ -68,7 +69,10 @@ def blaze_build(
   build_targets += [
       d + ":readable_wasm_modular_golden" for d in wasm_modular_readable_dirs
   ]
-  build_targets += [d + ":readable_j2kt_golden" for d in kt_readable_dirs]
+  build_targets += [d + ":readable_j2kt_golden" for d in j2kt_readable_dirs]
+  build_targets += [
+      d + ":readable-j2kt-web_golden" for d in j2kt_web_readable_dirs
+  ]
   if not args.nologs:
     build_targets += [d + ":readable_binary" for d in js_readable_dirs]
 
@@ -102,6 +106,13 @@ def replace_transpiled_wasm_imports(readable_dirs):
 def replace_transpiled_js(readable_dirs):
   """Copy and replace with Blaze built JS."""
   _replace_readable_outputs(readable_dirs, "readable_golden", "output_closure")
+
+
+def replace_transpiled_j2kt_web(readable_dirs):
+  """Copy and replace with Blaze built JS."""
+  _replace_readable_outputs(
+      readable_dirs, "readable-j2kt-web_golden", "output_j2kt_web"
+  )
 
 
 def is_spam(line):
@@ -197,10 +208,24 @@ def main(argv):
   wasm_imports_readable_dirs = (
       get_readable_dirs(readable_pattern, "_wasm_imports_golden")
       if "WASM" in args.platforms else [])
-  kt_readable_dirs = get_readable_dirs(
-      readable_pattern, "-j2kt-jvm") if "J2KT" in args.platforms else []
+  j2kt_readable_dirs = (
+      get_readable_dirs(readable_pattern, "-j2kt-jvm")
+      if "J2KT" in args.platforms
+      else []
+  )
 
-  if not js_readable_dirs and not wasm_readable_dirs and not kt_readable_dirs:
+  j2kt_web_readable_dirs = (
+      get_readable_dirs(readable_pattern, "-j2kt-web")
+      if "CLOSURE" in args.platforms
+      else []
+  )
+
+  if (
+      not js_readable_dirs
+      and not wasm_readable_dirs
+      and not j2kt_readable_dirs
+      and not j2kt_web_readable_dirs
+  ):
     print("No matching readables!")
     return -1
 
@@ -214,27 +239,40 @@ def main(argv):
   else:
     print("  Blaze building JS:")
     print("\n".join(["    " + d for d in js_readable_dirs or ["No matches"]]))
+    print("  Blaze building JS from J2KT:")
+    print(
+        "\n".join(
+            ["    " + d for d in j2kt_web_readable_dirs or ["No matches"]]
+        )
+    )
     print("  Blaze building Wasm:")
     print("\n".join(["    " + d for d in wasm_readable_dirs or ["No matches"]]))
     print("  Blaze building J2KT:")
-    print("\n".join(["    " + d for d in kt_readable_dirs or ["No matches"]]))
+    print("\n".join(["    " + d for d in j2kt_readable_dirs or ["No matches"]]))
 
   build_log = blaze_build(
       js_readable_dirs,
       wasm_readable_dirs,
       wasm_modular_readable_dirs,
       wasm_imports_readable_dirs,
-      kt_readable_dirs,
+      j2kt_readable_dirs,
+      j2kt_web_readable_dirs,
   )
 
-  if js_readable_dirs:
+  if js_readable_dirs or j2kt_web_readable_dirs:
     if args.nologs:
       print("  Skipping logs!!!")
     else:
       print("  Processing build logs")
       gather_closure_warnings(build_log)
+
+  if js_readable_dirs:
     print("  Copying and reformatting transpiled JS")
     replace_transpiled_js(js_readable_dirs)
+
+  if j2kt_web_readable_dirs:
+    print("  Copying and reformatting transpiled JS from J2KT")
+    replace_transpiled_j2kt_web(j2kt_web_readable_dirs)
 
   if wasm_readable_dirs:
     print("  Copying and reformatting transpiled Wasm")
@@ -248,9 +286,9 @@ def main(argv):
     print("  Copying and reformatting transpiled Wasm imports")
     replace_transpiled_wasm_imports(wasm_imports_readable_dirs)
 
-  if kt_readable_dirs:
+  if j2kt_readable_dirs:
     print("  Copying and reformatting transpiled KT")
-    replace_transpiled_j2kt(kt_readable_dirs)
+    replace_transpiled_j2kt(j2kt_readable_dirs)
 
   print("Check for changes in the readable examples")
 

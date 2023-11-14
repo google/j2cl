@@ -10,4 +10,5 @@ package(
 
 readable_example(
     srcs = glob(["*.java"]),
+    generate_kt_web_readables = True,
 )
