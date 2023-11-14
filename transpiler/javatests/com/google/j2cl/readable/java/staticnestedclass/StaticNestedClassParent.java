@@ -16,5 +16,7 @@
 package staticnestedclass;
 
 public class StaticNestedClassParent {
-  public static class StaticNestedClass {}
+  private static class StaticNestedClass {
+    public static void foo() {}
+  }
 }
