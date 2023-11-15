@@ -36,6 +36,14 @@ public final class SourceUtilsTest {
     {"third_party/java", "foo/org/foo/Foo"},
     {"third_party/java", "blah/java/org/foo/Foo"},
     {"third_party/java", "blah/java/org/foo/java/Foo"},
+    {"third_party/java/org/foo/super", "org/foo/Foo"},
+    {"third_party/java/org/foo/super-j2cl", "org/foo/Foo"},
+    {"third_party/java/org/foo/super", "org/foo/java/Foo"},
+    {"third_party/java/org/foo/super-j2cl", "org/foo/java/Foo"},
+    {"third_party/java/org/foo/super", "org/foo/super/Foo"},
+    {"third_party/java/org/foo/super-j2cl", "org/foo/super/Foo"},
+    {"external/org/foo/super", "org/foo/Foo"},
+    {"external/org/foo/super-j2cl", "org/foo/Foo"},
   };
 
   private static final String[] JAVA_PATHS_BAD = {

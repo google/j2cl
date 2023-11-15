@@ -118,24 +118,24 @@ public class SourceUtils {
    * considered Java source root.
    */
   public static String getJavaPath(String path) {
-    // Choose the one that matches earlier.
-    int index = Math.min(indexAfterRoot(path, "java"), indexAfterRoot(path, "javatests"));
-    String javaRelativePath = path.substring(index);
-    if (javaRelativePath.isEmpty()) {
-      javaRelativePath = path.substring(indexAfterRoot(path, TEMP_ROOT));
+    String javaRelativePath = getRelativePath(path, "java", "javatests");
+    if (javaRelativePath.equals(path)) {
+      // No regular root found. If the file was part of an archive and unzipped in a
+      // temp directory, consider the temp directory as source root.
+      javaRelativePath = getRelativePath(path, TEMP_ROOT);
     }
 
-    // Look if the file is part of the super source code. In that case return the relative path from
-    // the super source directory.
-    index =
-        Math.min(
-            indexAfterRoot(javaRelativePath, "super"),
-            indexAfterRoot(javaRelativePath, "super-j2cl"));
-    if (index < javaRelativePath.length()) {
-      javaRelativePath = javaRelativePath.substring(index);
-    }
+    // For super sources consider as the root for super sources.
+    return getRelativePath(javaRelativePath, "super", "super-j2cl");
+  }
 
-    return javaRelativePath.isEmpty() ? path : javaRelativePath;
+  private static String getRelativePath(String path, String... roots) {
+    int index = Integer.MAX_VALUE;
+    for (String root : roots) {
+      // Choose the one that matches earlier.
+      index = Math.min(index, indexAfterRoot(path, root));
+    }
+    return index < path.length() ? path.substring(index) : path;
   }
 
   /** Returns the index after root or the end index if not found. */
