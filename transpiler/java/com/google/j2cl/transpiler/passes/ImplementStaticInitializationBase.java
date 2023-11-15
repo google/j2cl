@@ -71,7 +71,7 @@ public abstract class ImplementStaticInitializationBase extends NormalizationPas
   /** Records access to member {@code targetMember} from type {@code callerEnclosingType}. */
   private void recordMemberReference(
       TypeDeclaration callerEnclosingType, MemberDescriptor targetMember) {
-    if (!isEffectivelyPrivate(targetMember)) {
+    if (!targetMember.getVisibility().isPrivate()) {
       return;
     }
 
@@ -177,7 +177,7 @@ public abstract class ImplementStaticInitializationBase extends NormalizationPas
       return false;
     }
 
-    if (isEffectivelyPrivate(memberDescriptor)
+    if (memberDescriptor.getVisibility().isPrivate()
         && !memberDescriptor.isJsMember()
         && !isCalledFromOtherClasses(memberDescriptor)) {
       // This is an effectively private member, which means that when this member is access clinit
@@ -190,15 +190,6 @@ public abstract class ImplementStaticInitializationBase extends NormalizationPas
         // non-private instance methods (except the synthetic ctor) of an optimized enum will
         // trigger clinit, since the constructor will not.
         || (triggersClinitInInstanceMethods(enclosingType) && isInstanceMethod(memberDescriptor));
-  }
-
-  private static boolean isEffectivelyPrivate(MemberDescriptor memberDescriptor) {
-    return memberDescriptor.getVisibility().isPrivate()
-        || memberDescriptor
-            .getEnclosingTypeDescriptor()
-            .getTypeDeclaration()
-            .getVisibility()
-            .isPrivate();
   }
 
   private static boolean triggersClinitInInstanceMethods(Type type) {
