@@ -50,8 +50,18 @@ public abstract class Enum<E extends Enum<E>> implements Comparable<E>, Serializ
   }
 
   @Override
-  public int compareTo(E other) {
+  public final int compareTo(E other) {
     return this.ordinal - ((Enum) other).ordinal;
+  }
+
+  @Override
+  public final boolean equals(Object other) {
+    return this == other;
+  }
+
+  @Override
+  public final int hashCode() {
+    return super.hashCode();
   }
 
   @JsIgnore
