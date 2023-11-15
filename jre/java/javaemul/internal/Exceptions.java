@@ -17,8 +17,9 @@ package javaemul.internal;
 
 import jsinterop.annotations.JsType;
 
+/** Provides helper methods to deal with Exceptions. */
 @JsType(namespace = "vmbootstrap")
-class Exceptions {
+public class Exceptions {
 
   /**
    * A try with resource block uses safeClose to close resources that have been opened. If an
