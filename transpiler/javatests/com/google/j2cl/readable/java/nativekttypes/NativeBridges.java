@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Google Inc.
+ * Copyright 2023 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,16 +15,8 @@
  */
 package nativekttypes;
 
-import javaemul.internal.annotations.KtNative;
+public class NativeBridges {
+  public void test(NativeRequiringBridge o) {}
 
-@KtNative(
-    name = "nativekttypes.nativekt.KRequiringBridge",
-    bridgeName = "nativekttypes.nativekt.KBridge")
-public class NativeRequiringBridge {
-  public void method() {}
-
-  @KtNative(
-      name = "nativekttypes.nativekt.KRequiringBridge.Inner",
-      bridgeName = "nativekttypes.nativekt.KBridge.Inner")
-  public static class Inner {}
+  public void test(NativeRequiringBridge.Inner o) {}
 }

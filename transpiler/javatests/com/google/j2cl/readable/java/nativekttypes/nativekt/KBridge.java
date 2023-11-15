@@ -17,4 +17,6 @@ package nativekttypes.nativekt;
 
 public class KBridge extends KRequiringBridge {
   public void method() {}
+
+  public static class Inner extends KRequiringBridge.Inner {}
 }

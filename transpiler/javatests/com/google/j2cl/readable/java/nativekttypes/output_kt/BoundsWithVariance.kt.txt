@@ -30,6 +30,7 @@ import kotlin.collections.MutableIterator
 import kotlin.collections.MutableList
 import kotlin.collections.MutableListIterator
 import kotlin.collections.MutableMap
+import kotlin.collections.MutableMap.MutableEntry
 import kotlin.collections.MutableSet
 
 interface FnWithoutVariance<I, O> {}
@@ -65,5 +66,5 @@ class BoundsWithVariance internal constructor() {
 
  internal fun <K: Any, V: Any> accept_pp_nativekttypes(o: AbstractMap<in K, out V>) {}
 
- internal fun <K: Any, V: Any> accept_pp_nativekttypes(o: MutableMap.MutableEntry<out K, out V>) {}
+ internal fun <K: Any, V: Any> accept_pp_nativekttypes(o: MutableEntry<out K, out V>) {}
 }

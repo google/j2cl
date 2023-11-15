@@ -589,31 +589,11 @@ public abstract class TypeDeclaration
         Streams.concat(Stream.of(getPackageName()), getClassComponents().stream()));
   }
 
-  @Memoized
-  public String getKtSimpleName() {
-    KtTypeInfo ktTypeInfo = getKtTypeInfo();
-    String qualifiedName = ktTypeInfo != null ? ktTypeInfo.getQualifiedName() : null;
-    return qualifiedName != null
-        ? qualifiedName.substring(qualifiedName.lastIndexOf('.') + 1)
-        : getOriginalSimpleSourceName();
-  }
-
-  @Memoized
-  public String getKtQualifiedName() {
-    KtTypeInfo ktTypeInfo = getKtTypeInfo();
-    return ktTypeInfo == null
-        ? isLocal() ? getKtSimpleName() : getQualifiedSourceName()
-        : ktTypeInfo.getQualifiedName();
-  }
-
   @Nullable
   @Memoized
-  public String getKtBridgeSimpleName() {
-    String ktBridgeQualifiedName = getKtBridgeQualifiedName();
-    if (ktBridgeQualifiedName == null) {
-      return null;
-    }
-    return ktBridgeQualifiedName.substring(ktBridgeQualifiedName.lastIndexOf('.') + 1);
+  public String getKtNativeQualifiedName() {
+    KtTypeInfo ktTypeInfo = getKtTypeInfo();
+    return ktTypeInfo != null ? ktTypeInfo.getQualifiedName() : null;
   }
 
   @Nullable

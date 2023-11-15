@@ -67,15 +67,27 @@ private val FieldDescriptor.hasConflictingKtProperty: Boolean
 private val TypeDeclaration.privateMemberSuffix: String
   get() = if (isInterface) mangledName else "$classHierarchyDepth"
 
-internal fun TypeDeclaration.ktSimpleName(asSuperType: Boolean = false) =
-  if (asSuperType) ktBridgeSimpleName ?: ktSimpleName else ktSimpleName
+private val TypeDeclaration.originalQualifiedName: String
+  get() = if (isLocal) originalSimpleSourceName!! else qualifiedSourceName
+
+internal val TypeDeclaration.ktQualifiedName: String
+  get() = ktNativeQualifiedName ?: originalQualifiedName
+
+internal val TypeDeclaration.ktQualifiedNameAsSuperType: String
+  get() = ktBridgeQualifiedName ?: ktQualifiedName
+
+internal val TypeDeclaration.ktSimpleName: String
+  get() = ktQualifiedName.qualifiedNameToSimpleName()
 
 internal fun TypeDeclaration.ktQualifiedName(asSuperType: Boolean = false) =
-  if (asSuperType) ktBridgeQualifiedName ?: ktQualifiedName else ktQualifiedName
+  if (asSuperType) ktQualifiedNameAsSuperType else ktQualifiedName
 
-internal fun TypeDescriptor.ktQualifiedName(asSuperType: Boolean = false): String =
+internal fun TypeDeclaration.ktSimpleName(asSuperType: Boolean = false) =
+  ktQualifiedName(asSuperType = asSuperType).qualifiedNameToSimpleName()
+
+internal fun TypeDescriptor.ktQualifiedName(): String =
   when (this) {
-    is PrimitiveTypeDescriptor -> toBoxedType().ktQualifiedName(asSuperType)
+    is PrimitiveTypeDescriptor -> toBoxedType().ktQualifiedName()
     is ArrayTypeDescriptor ->
       when (componentTypeDescriptor!!) {
         PrimitiveTypes.BOOLEAN -> "kotlin.BooleanArray"
@@ -88,9 +100,9 @@ internal fun TypeDescriptor.ktQualifiedName(asSuperType: Boolean = false): Strin
         PrimitiveTypes.DOUBLE -> "kotlin.DoubleArray"
         else -> "kotlin.Array"
       }
-    is DeclaredTypeDescriptor -> typeDeclaration.ktQualifiedName(asSuperType)
+    is DeclaredTypeDescriptor -> typeDeclaration.ktQualifiedName
     else -> null
-  } ?: error("$this.ktQualifiedName(asSuperType = $asSuperType)")
+  } ?: error("$this.ktQualifiedName()")
 
 internal fun String.qualifiedNameComponents(): List<String> = split(".")
 

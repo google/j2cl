@@ -15,4 +15,6 @@
  */
 package nativekttypes.nativekt;
 
-public class KRequiringBridge {}
+public class KRequiringBridge {
+  public static class Inner {}
+}

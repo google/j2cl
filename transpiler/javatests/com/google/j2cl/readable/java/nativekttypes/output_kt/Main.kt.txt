@@ -35,8 +35,11 @@ import nativekttypes.nativekt.KCompanionObject
 import nativekttypes.nativekt.KFunctionalInterfaceBridge
 import nativekttypes.nativekt.KFunctionalInterfaceRequiringBridge
 import nativekttypes.nativekt.KInterface
+import nativekttypes.nativekt.KInterface.KFunctionalInterface
 import nativekttypes.nativekt.KRequiringBridge
 import nativekttypes.nativekt.KTopLevel
+import nativekttypes.nativekt.KTopLevel.KInner
+import nativekttypes.nativekt.KTopLevel.KNested
 import nativekttypes.nativekt.KWithCompanionObject
 
 @ObjCName("J2ktNativekttypesMain", exact = true)
@@ -47,7 +50,7 @@ open class Main {
 
  @JvmField
  @ObjCName("nestedField_")
- var nestedField: KTopLevel.KNested<String?>? = null
+ var nestedField: KNested<String?>? = null
 
  @JvmField
  @ObjCName("innerField_")
@@ -56,7 +59,7 @@ open class Main {
  @ObjCName("methodArguments")
  open fun methodArguments(
   @ObjCName("withNativekttypesNativeTopLevel") foo: KTopLevel<String?>?,
-  @ObjCName("withNativekttypesNativeTopLevel_Nested") nested: KTopLevel.KNested<String?>?,
+  @ObjCName("withNativekttypesNativeTopLevel_Nested") nested: KNested<String?>?,
   @ObjCName("withNativekttypesNativeTopLevel_Inner") inner: KTopLevel<String?>.KInner<String?>?
  ) {}
 
@@ -77,23 +80,23 @@ open class Main {
   val i6: Boolean = topLevel!!.isRenamedField
   val i7: Boolean = topLevel!!.isMethodAsProperty
   val i8: Int = topLevel!!.getstartingmethodAsProperty
-  val nested: KTopLevel.KNested<String?>? = KTopLevel.KNested<String?>("foo")
+  val nested: KNested<String?>? = KNested<String?>("foo")
   val nestedInstanceMethod: String? = nested!!.instanceMethod("foo")
-  val nestedStaticMethod: String? = KTopLevel.KNested.staticMethod<String?>("foo")
+  val nestedStaticMethod: String? = KNested.staticMethod<String?>("foo")
   val nestedInstanceField: String? = nested!!.instanceField
   nested!!.instanceField = "foo"
-  val nestedStaticField: Any? = KTopLevel.KNested.staticField
-  KTopLevel.KNested.staticField = "foo"
-  val nestedAnonynous: KTopLevel.KNested<String?>? = object : KTopLevel.KNested<String?>("foo") {}
+  val nestedStaticField: Any? = KNested.staticField
+  KNested.staticField = "foo"
+  val nestedAnonynous: KNested<String?>? = object : KNested<String?>("foo") {}
   val inner: KTopLevel<String?>.KInner<String?>? = topLevel!!.KInner<String?>("foo")
   val subclass: Subclass<String?>? = Subclass<String?>("foo")
   val i9: Int = subclass!!.renamedMethod()
   val i10: Int = subclass!!.interfaceMethod("foo")
   val i11: Int = subclass!!.renamedInterfaceMethod("foo")
-  val interfaceAnonymousSubclass: KInterface.KFunctionalInterface? = object : KInterface.KFunctionalInterface {
+  val interfaceAnonymousSubclass: KFunctionalInterface? = object : KFunctionalInterface {
    override fun run() {}
   }
-  val interfaceExpression: KInterface.KFunctionalInterface? = KInterface.KFunctionalInterface {
+  val interfaceExpression: KFunctionalInterface? = KFunctionalInterface {
    return@KFunctionalInterface
   }
  }
@@ -119,7 +122,7 @@ open class Main {
  @ObjCName("casts")
  open fun casts() {
   val o1: KTopLevel<String?>? = null as KTopLevel<String?>?
-  val o2: KTopLevel.KNested<String?>? = null as KTopLevel.KNested<String?>?
+  val o2: KNested<String?>? = null as KNested<String?>?
   val o3: KTopLevel<String?>.KInner<String?>? = null as KTopLevel<String?>.KInner<String?>?
  }
 
@@ -136,8 +139,8 @@ open class Main {
  @ObjCName("typeLiterals")
  open fun typeLiterals() {
   val c1: Class<*>? = KTopLevel::class.javaObjectType
-  val c2: Class<*>? = KTopLevel.KNested::class.javaObjectType
-  val c3: Class<*>? = KTopLevel.KInner::class.javaObjectType
+  val c2: Class<*>? = KNested::class.javaObjectType
+  val c3: Class<*>? = KInner::class.javaObjectType
  }
 
  @ObjCName("disabledVoidMethod")

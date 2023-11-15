@@ -59,22 +59,31 @@ internal fun Renderer.qualifiedNameSource(
   asSuperType: Boolean = false
 ): Source =
   if (typeDescriptor is DeclaredTypeDescriptor) {
-    if (typeDescriptor.typeDeclaration.isLocal) {
-      identifierSource(typeDescriptor.typeDeclaration.ktSimpleName(asSuperType))
-    } else {
-      typeDescriptor.enclosingTypeDescriptor.let { enclosingTypeDescriptor ->
-        if (enclosingTypeDescriptor == null) {
-          topLevelQualifiedNameSource(typeDescriptor.ktQualifiedName(asSuperType))
-        } else {
-          dotSeparated(
-            qualifiedNameSource(enclosingTypeDescriptor),
-            identifierSource(typeDescriptor.typeDeclaration.ktSimpleName(asSuperType))
-          )
-        }
-      }
+    val typeDeclaration = typeDescriptor.typeDeclaration
+    val enclosingTypeDescriptor = typeDescriptor.enclosingTypeDescriptor
+    val nativeQualifiedName = typeDeclaration.ktNativeQualifiedName
+    val bridgeQualifiedName = typeDeclaration.ktBridgeQualifiedName
+    when {
+      asSuperType ->
+        // Use fully-qualified bridge name if present
+        bridgeQualifiedName?.let { topLevelQualifiedNameSource(it) }
+          ?: qualifiedNameSource(typeDescriptor)
+      typeDeclaration.isLocal ->
+        // Use simple name for local types
+        identifierSource(typeDescriptor.typeDeclaration.ktSimpleName())
+      nativeQualifiedName != null ->
+        // Use fully-qualified native name if present
+        topLevelQualifiedNameSource(nativeQualifiedName)
+      enclosingTypeDescriptor != null ->
+        // Use fully-qualified name for top-level type, and simple name for inner types
+        dotSeparated(
+          qualifiedNameSource(enclosingTypeDescriptor),
+          identifierSource(typeDeclaration.ktSimpleName())
+        )
+      else -> topLevelQualifiedNameSource(typeDescriptor.ktQualifiedName())
     }
   } else {
-    topLevelQualifiedNameSource(typeDescriptor.ktQualifiedName(asSuperType))
+    topLevelQualifiedNameSource(typeDescriptor.ktQualifiedName())
   }
 
 /** Type descriptor renderer. */

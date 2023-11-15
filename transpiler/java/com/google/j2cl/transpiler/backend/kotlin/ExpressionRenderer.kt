@@ -374,7 +374,7 @@ private fun Renderer.parametersSource(functionExpression: FunctionExpression): S
   }
 
 private val TypeDeclaration.returnLabelIdentifier: String
-  get() = ktBridgeSimpleName ?: ktSimpleName
+  get() = ktQualifiedNameAsSuperType.qualifiedNameToSimpleName()
 
 private fun Renderer.instanceOfExpressionSource(
   instanceOfExpression: InstanceOfExpression
