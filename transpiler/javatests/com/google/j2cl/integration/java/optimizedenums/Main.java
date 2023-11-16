@@ -27,6 +27,8 @@ public class Main {
     testEnumWithConstructors();
     testInstanceOf();
     testDefaultMethod();
+    testPublicEnumInitialized();
+    testPrivateEnumInitialized();
   }
 
   private static void testOrdinal() {
@@ -107,6 +109,20 @@ public class Main {
             .equals("defaultInstanceString"));
   }
 
+  private static void testPublicEnumInitialized() {
+    assertTrue(publicEnumClinitCalled == 0);
+    assertTrue(PubliEnumWithStaticInit.FOO.getString().equals("foo"));
+    assertTrue(publicEnumClinitCalled == 1);
+  }
+
+  private static void testPrivateEnumInitialized() {
+    assertTrue(privateEnumClinitCalled == 0);
+    // Hide the call through polymorphic dispatch
+    MyEnumInterface foo = PrivateEnumWithStaticInit.FOO;
+    assertTrue(foo.getString().equals("foo"));
+    assertTrue(privateEnumClinitCalled == 1);
+  }
+
   enum SimpleEnum {
     FOO,
     BAR,
@@ -180,6 +196,35 @@ public class Main {
 
     default MyEnumInterface getDefaultInstance() {
       return DEFAULT_INSTANCE;
+    }
+  }
+
+  private static int publicEnumClinitCalled = 0;
+
+  private enum PubliEnumWithStaticInit {
+    FOO;
+
+    static {
+      publicEnumClinitCalled++;
+    }
+
+    // Intentionally private to test clinit is still triggered due to external reference.
+    private String getString() {
+      return "foo";
+    }
+  }
+
+  private static int privateEnumClinitCalled = 0;
+
+  private enum PrivateEnumWithStaticInit implements MyEnumInterface {
+    FOO;
+
+    static {
+      privateEnumClinitCalled++;
+    }
+
+    public String getString() {
+      return "foo";
     }
   }
 }
