@@ -109,9 +109,7 @@ class Enums {
       if (constructor != o.constructor) {
         throw new ClassCastException();
       }
-      // Comparable enums are always @enum{number} in closure, and because the values at runtime
-      // are numbers it is safe to compare them as Doubles.
-      return ((Double) value).compareTo((Double) o.value);
+      return Enums.compareTo(value, o.value);
     }
   }
 
@@ -136,6 +134,12 @@ class Enums {
   public static boolean equals(@DoNotAutobox Object instance, @DoNotAutobox Object other) {
     checkNotNull(instance);
     return instance == other;
+  }
+
+  public static int compareTo(@DoNotAutobox Object instance, @DoNotAutobox Object other) {
+    // Comparable enums are always @enum{number} in closure, and because the values at runtime
+    // are numbers it is safe to compare them as Doubles.
+    return ((Double) instance).compareTo((Double) other);
   }
 
   @JsFunction

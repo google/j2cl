@@ -158,15 +158,28 @@ public class NormalizeJsEnums extends NormalizationPass {
               return methodCall;
             }
 
-            String targetSignature = methodDescriptor.getSignature();
+            String targetSignature = methodDescriptor.getDeclarationDescriptor().getSignature();
             if (targetSignature.equals("equals(java.lang.Object)")) {
               Expression argument = Iterables.getOnlyElement(methodCall.getArguments());
-              if (AstUtils.isNonNativeJsEnum(qualifierTypeDescriptor)
-                  && argument.getTypeDescriptor().hasSameRawType(qualifierTypeDescriptor)) {
-                // Use a non boxing version of equals when comparing two non-native JsEnums of the
-                // same type.
+              if (canAvoidBoxing(qualifierTypeDescriptor, argument.getTypeDescriptor())) {
                 return RuntimeMethods.createEnumsEqualsMethodCall(qualifier, argument);
               }
+            }
+
+            if (targetSignature.equals("compareTo(java.lang.Enum)")) {
+              Expression argument = Iterables.getOnlyElement(methodCall.getArguments());
+              if (canAvoidBoxing(qualifierTypeDescriptor, argument.getTypeDescriptor())) {
+                return RuntimeMethods.createEnumsCompareToMethodCall(qualifier, argument);
+              }
+
+              // Redirect the call to Comparable.compareTo(Object) since JsEnums don't actually
+              // extend Enum.
+              return MethodCall.Builder.from(methodCall)
+                  .setTarget(
+                      TypeDescriptors.get()
+                          .javaLangComparable
+                          .getMethodDescriptor("compareTo", TypeDescriptors.get().javaLangObject))
+                  .build();
             }
 
             if (targetSignature.equals("ordinal()")) {
@@ -189,16 +202,20 @@ public class NormalizeJsEnums extends NormalizationPass {
         });
   }
 
+  private static boolean canAvoidBoxing(
+      TypeDescriptor qualifierTypeDescriptor, TypeDescriptor argumentTypeDescriptor) {
+    // Use a non boxing version of equals, compareTo when comparing two non-native JsEnums of the
+    // same type.
+    // We don't do this for native JsEnums because they are generally not boxed here and this allows
+    // us to specialize the code for non-native JsEnums to avoid a trampoline.
+    return AstUtils.isNonNativeJsEnum(qualifierTypeDescriptor)
+        && argumentTypeDescriptor.hasSameRawType(qualifierTypeDescriptor);
+  }
+
   private static MethodDescriptor fixEnumMethodDescriptor(MethodDescriptor methodDescriptor) {
     MethodDescriptor declarationMethodDescriptor = methodDescriptor.getDeclarationDescriptor();
-    String declarationMethodSignature = declarationMethodDescriptor.getSignature();
 
     // Reroute overridden methods to the super method they override.
-    if (declarationMethodSignature.equals("compareTo(java.lang.Enum)")) {
-      return TypeDescriptors.get()
-          .javaLangComparable
-          .getMethodDescriptor("compareTo", TypeDescriptors.get().javaLangObject);
-    }
     if (declarationMethodDescriptor.isOrOverridesJavaLangObjectMethod()) {
       return MethodDescriptor.Builder.from(declarationMethodDescriptor)
           .setEnclosingTypeDescriptor(TypeDescriptors.get().javaLangObject)

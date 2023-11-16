@@ -157,6 +157,8 @@ public class Main {
     StringJsEnum.ONE.equals(o);
     o.equals(StringJsEnum.THREE);
 
+    ComparableJsEnum.ONE.compareTo(ComparableJsEnum.ZERO);
+    ComparableJsEnum.ONE.compareTo(null);
     ComparableJsEnum.ONE.equals(ComparableJsEnum.ZERO);
     ComparableJsEnum.ONE.equals(jsEnum);
     ComparableJsEnum.ONE.equals(nullJsEnum);

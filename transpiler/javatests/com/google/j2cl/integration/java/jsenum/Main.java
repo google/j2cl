@@ -366,6 +366,12 @@ public class Main {
     assertTrue(v.ordinal() == 1);
     assertTrue(PlainJsEnum.ONE.compareTo(v) == 0);
     assertTrue(PlainJsEnum.ZERO.compareTo(v) < 0);
+    assertThrows(
+        NullPointerException.class,
+        () -> {
+          PlainJsEnum nullJsEnum = null;
+          nullJsEnum.compareTo(PlainJsEnum.ZERO);
+        });
     assertThrowsClassCastException(
         () -> {
           Comparable comparable = PlainJsEnum.ONE;
