@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-
 import com.google.common.base.Joiner;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
@@ -71,7 +70,7 @@ public abstract class ImplementStaticInitializationBase extends NormalizationPas
   /** Records access to member {@code targetMember} from type {@code callerEnclosingType}. */
   private void recordMemberReference(
       TypeDeclaration callerEnclosingType, MemberDescriptor targetMember) {
-    if (!targetMember.getVisibility().isPrivate()) {
+    if (!isEffectivelyPrivate(targetMember)) {
       return;
     }
 
@@ -177,11 +176,11 @@ public abstract class ImplementStaticInitializationBase extends NormalizationPas
       return false;
     }
 
-    if (memberDescriptor.getVisibility().isPrivate()
+    if (isEffectivelyPrivate(memberDescriptor)
         && !memberDescriptor.isJsMember()
         && !isCalledFromOtherClasses(memberDescriptor)) {
-      // This is an effectively private member, which means that when this member is access clinit
-      // is already guaranteed to have been called.
+      // This is an effectively private member, which means that when this member is accessed,
+      //  clinit is already guaranteed to have been called.
       return false;
     }
 
@@ -190,6 +189,21 @@ public abstract class ImplementStaticInitializationBase extends NormalizationPas
         // non-private instance methods (except the synthetic ctor) of an optimized enum will
         // trigger clinit, since the constructor will not.
         || (triggersClinitInInstanceMethods(enclosingType) && isInstanceMethod(memberDescriptor));
+  }
+
+  private static boolean isEffectivelyPrivate(MemberDescriptor memberDescriptor) {
+    if (memberDescriptor.getVisibility().isPrivate()) {
+      return true;
+    }
+
+    // Note: Instance members can be polymorphic and accessed through the super types even the type
+    // itself is private so we need to be conservative while accounting type visibility.
+    return !memberDescriptor.isInstanceMember()
+        && memberDescriptor
+            .getEnclosingTypeDescriptor()
+            .getTypeDeclaration()
+            .getVisibility()
+            .isPrivate();
   }
 
   private static boolean triggersClinitInInstanceMethods(Type type) {
