@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.passes;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
+import com.google.common.collect.Iterables;
 import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AstUtils;
@@ -34,6 +35,7 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
+import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
@@ -149,13 +151,25 @@ public class NormalizeJsEnums extends NormalizationPass {
               // Not a java.lang.Enum method, nothing to do.
               return methodCall;
             }
-            TypeDescriptor qualifierTypeDescriptor = methodCall.getQualifier().getTypeDescriptor();
+            Expression qualifier = methodCall.getQualifier();
+            TypeDescriptor qualifierTypeDescriptor = qualifier.getTypeDescriptor();
             if (!qualifierTypeDescriptor.isJsEnum()) {
               // Not a JsEnum receiver, nothing to do.
               return methodCall;
             }
 
-            if (methodCall.getTarget().getSignature().equals("ordinal()")) {
+            String targetSignature = methodDescriptor.getSignature();
+            if (targetSignature.equals("equals(java.lang.Object)")) {
+              Expression argument = Iterables.getOnlyElement(methodCall.getArguments());
+              if (AstUtils.isNonNativeJsEnum(qualifierTypeDescriptor)
+                  && argument.getTypeDescriptor().hasSameRawType(qualifierTypeDescriptor)) {
+                // Use a non boxing version of equals when comparing two non-native JsEnums of the
+                // same type.
+                return RuntimeMethods.createEnumsEqualsMethodCall(qualifier, argument);
+              }
+            }
+
+            if (targetSignature.equals("ordinal()")) {
               return castJsEnumToValue(methodCall);
             }
 

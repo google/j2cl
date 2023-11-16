@@ -255,6 +255,22 @@ public final class RuntimeMethods {
         "unbox", expression, toTypeDescriptor.getMetadataConstructorReference());
   }
 
+  public static Expression createEnumsEqualsMethodCall(Expression instance, Expression other) {
+    checkArgument(
+        instance.getTypeDescriptor().isJsEnum()
+            && instance.getTypeDescriptor().hasSameRawType(other.getTypeDescriptor()));
+
+    return createEnumsMethodCall("equals", instance, other);
+  }
+
+  public static Expression createEnumsCompareToMethodCall(Expression instance, Expression other) {
+    checkArgument(
+        AstUtils.isNonNativeJsEnum(instance.getTypeDescriptor())
+            && instance.getTypeDescriptor().hasSameRawType(other.getTypeDescriptor()));
+
+    return createEnumsMethodCall("compareTo", instance, other);
+  }
+
   public static Expression createEnumsMethodCall(String unbox, Expression... arguments) {
     MethodDescriptor methodDescriptor =
         TypeDescriptors.get().javaemulInternalEnums.getMethodDescriptorByName(unbox);

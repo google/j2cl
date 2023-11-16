@@ -135,14 +135,36 @@ public class Main {
 
     NativeStringEnum.ONE.compareTo(NativeStringEnum.THREE);
     NativeStringEnum.ONE.equals(NativeStringEnum.THREE);
-    ComparableJsEnum.ONE.compareTo(ComparableJsEnum.ZERO);
-    ComparableJsEnum.ONE.equals(ComparableJsEnum.ZERO);
 
     Supplier<ComparableJsEnum> supplier = () -> ComparableJsEnum.ONE;
     Consumer<ComparableJsEnum> consummer = e -> e.ordinal();
 
     acceptsJsFunctionSupplier(() -> ComparableJsEnum.ONE);
     acceptsSupplierOfSupplier(() -> (() -> ComparableJsEnum.ONE));
+  }
+
+  private static void testJsEnumAutoboxingSpecialMethods() {
+    StringJsEnum stringJsEnum = StringJsEnum.ONE;
+    StringJsEnum nullStringJsEnum = null;
+    ComparableJsEnum jsEnum = ComparableJsEnum.ONE;
+    ComparableJsEnum nullJsEnum = null;
+    Object o = ComparableJsEnum.ONE;
+
+    StringJsEnum.ONE.equals(StringJsEnum.THREE);
+    StringJsEnum.ONE.equals(stringJsEnum);
+    StringJsEnum.ONE.equals(nullStringJsEnum);
+    StringJsEnum.ONE.equals(null);
+    StringJsEnum.ONE.equals(o);
+    o.equals(StringJsEnum.THREE);
+
+    ComparableJsEnum.ONE.equals(ComparableJsEnum.ZERO);
+    ComparableJsEnum.ONE.equals(jsEnum);
+    ComparableJsEnum.ONE.equals(nullJsEnum);
+    ComparableJsEnum.ONE.equals(null);
+    ComparableJsEnum.ONE.equals(o);
+    o.equals(ComparableJsEnum.ZERO);
+
+    StringJsEnum.ONE.equals(jsEnum);
   }
 
   @JsFunction

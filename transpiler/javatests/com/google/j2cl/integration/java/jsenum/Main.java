@@ -346,11 +346,20 @@ public class Main {
     assertFalse(v.equals(ONE_DOUBLE));
     assertFalse(PlainJsEnum.ZERO.equals(OtherPlainJsEnum.NONE));
 
+    assertThrows(
+        NullPointerException.class,
+        () -> {
+          PlainJsEnum nullJsEnum = null;
+          nullJsEnum.equals(PlainJsEnum.ZERO);
+        });
+
     // Object methods calls on a variable of Object type.
     assertTrue(o.hashCode() == PlainJsEnum.ONE.hashCode());
     assertTrue(o.hashCode() != PlainJsEnum.ZERO.hashCode());
     assertTrue(o.toString().equals(String.valueOf(ONE_DOUBLE)));
     assertTrue(o.equals(PlainJsEnum.ONE));
+    assertFalse(o.equals(PlainJsEnum.TWO));
+    assertTrue(o.equals(v));
     assertFalse(o.equals(ONE_DOUBLE));
 
     assertTrue(v.getValue() == 1);
@@ -472,11 +481,20 @@ public class Main {
     assertTrue(v.equals(StringJsEnum.HELLO));
     assertFalse(v.equals(HELLO_STRING));
 
+    assertThrows(
+        NullPointerException.class,
+        () -> {
+          StringJsEnum nullJsEnum = null;
+          nullJsEnum.equals(StringJsEnum.HELLO);
+        });
+
     // Object methods calls on a variable of Object type.
     assertTrue(o.hashCode() == StringJsEnum.HELLO.hashCode());
     assertTrue(o.hashCode() != StringJsEnum.GOODBYE.hashCode());
     assertTrue(o.toString().equals(HELLO_STRING));
     assertTrue(o.equals(StringJsEnum.HELLO));
+    assertFalse(o.equals(StringJsEnum.GOODBYE));
+    assertTrue(o.equals(v));
     assertFalse(o.equals(HELLO_STRING));
 
     assertTrue(v.value.equals(HELLO_STRING));
@@ -649,6 +667,26 @@ public class Main {
     assertTrue(PlainJsEnum.ONE.compareTo(PlainJsEnum.ONE) == 0);
     assertTrue(PlainJsEnum.ONE.compareTo(PlainJsEnum.ZERO) > 0);
     assertTrue(PlainJsEnum.TWO.compareTo(PlainJsEnum.TEN) < 0);
+
+    PlainJsEnum jsEnum = PlainJsEnum.ONE;
+    PlainJsEnum nullJsEnum = null;
+    Object objectJsEnum = PlainJsEnum.ONE;
+
+    StringJsEnum stringJsEnum = StringJsEnum.HELLO;
+    PlainJsEnum nullStringJsEnum = null;
+    Object objectStringJsEnum = StringJsEnum.HELLO;
+
+    assertFalse(jsEnum.equals(PlainJsEnum.TWO));
+    assertTrue(jsEnum.equals(objectJsEnum));
+    assertFalse(jsEnum.equals(nullJsEnum));
+    assertFalse(jsEnum.equals(null));
+
+    assertFalse(stringJsEnum.equals(StringJsEnum.GOODBYE));
+    assertTrue(stringJsEnum.equals(objectStringJsEnum));
+    assertFalse(stringJsEnum.equals(nullJsEnum));
+    assertFalse(stringJsEnum.equals(null));
+
+    assertFalse(jsEnum.equals(stringJsEnum));
   }
 
   private static void testAutoBoxing_intersectionCasts() {

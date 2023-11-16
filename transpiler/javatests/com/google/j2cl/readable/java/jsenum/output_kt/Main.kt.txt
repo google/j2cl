@@ -81,8 +81,6 @@ open class Main {
    } while (false)
    Main.NativeStringEnum.ONE.compareTo(Main.NativeStringEnum.THREE)
    Main.NativeStringEnum.ONE.equals(Main.NativeStringEnum.THREE)
-   Main.ComparableJsEnum.ONE.compareTo(Main.ComparableJsEnum.ZERO)
-   Main.ComparableJsEnum.ONE.equals(Main.ComparableJsEnum.ZERO)
    val supplier: Main.Supplier<Main.ComparableJsEnum?>? = Main.Supplier<Main.ComparableJsEnum?> {
     return@Supplier Main.ComparableJsEnum.ONE
    }
@@ -97,6 +95,28 @@ open class Main {
      return@Supplier Main.ComparableJsEnum.ONE
     }
    })
+  }
+
+  @JvmStatic
+  internal fun testJsEnumAutoboxingSpecialMethods_private_2() {
+   val stringJsEnum: Main.StringJsEnum? = Main.StringJsEnum.ONE
+   val nullStringJsEnum: Main.StringJsEnum? = null
+   val jsEnum: Main.ComparableJsEnum? = Main.ComparableJsEnum.ONE
+   val nullJsEnum: Main.ComparableJsEnum? = null
+   val o: Any? = Main.ComparableJsEnum.ONE
+   Main.StringJsEnum.ONE.equals(Main.StringJsEnum.THREE)
+   Main.StringJsEnum.ONE.equals(stringJsEnum)
+   Main.StringJsEnum.ONE.equals(nullStringJsEnum)
+   Main.StringJsEnum.ONE.equals(null)
+   Main.StringJsEnum.ONE.equals(o)
+   o!!.equals(Main.StringJsEnum.THREE)
+   Main.ComparableJsEnum.ONE.equals(Main.ComparableJsEnum.ZERO)
+   Main.ComparableJsEnum.ONE.equals(jsEnum)
+   Main.ComparableJsEnum.ONE.equals(nullJsEnum)
+   Main.ComparableJsEnum.ONE.equals(null)
+   Main.ComparableJsEnum.ONE.equals(o)
+   o!!.equals(Main.ComparableJsEnum.ZERO)
+   Main.StringJsEnum.ONE.equals(jsEnum)
   }
 
   @JvmStatic
