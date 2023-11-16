@@ -86,8 +86,8 @@ def readable_example(
         tags = j2cl_library_tags + ["manual"],
         readable_source_maps = readable_source_maps,
         readable_library_info = generate_library_info,
-        generate_j2kt_jvm_library = generate_kt_readables,
-        generate_j2kt_native_library = build_kt_native_readables,
+        generate_j2kt_jvm_library = None if generate_kt_readables else False,
+        generate_j2kt_native_library = None if build_kt_native_readables else False,
         generate_j2wasm_library = None if generate_wasm_readables else False,
         **kwargs
     )

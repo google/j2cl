@@ -1,0 +1,171 @@
+// Generated from "staticjsmembers/StaticJsMembers.java"
+@file:OptIn(ExperimentalObjCName::class)
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "REPEATED_BOUND",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER")
+
+package staticjsmembers
+
+import javaemul.lang.*
+import jsinterop.annotations.JsMethod
+import jsinterop.annotations.JsPackage
+import jsinterop.annotations.JsProperty
+import jsinterop.annotations.JsType
+import kotlin.Boolean
+import kotlin.Double
+import kotlin.Int
+import kotlin.OptIn
+import kotlin.Suppress
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
+
+@ObjCName("J2ktStaticjsmembersStaticJsMembers", exact = true)
+open class StaticJsMembers {
+ @ObjCName("test")
+ open fun test() {
+  StaticJsMembers.f1(1)
+  StaticJsMembers.f1(1)
+  StaticJsMembers.f2(1)
+  StaticJsMembers.f2(1)
+  StaticJsMembers.f3(1.1)
+  StaticJsMembers.f3(1.1)
+  StaticJsMembers.f4(1.1)
+  StaticJsMembers.f4(1.1)
+  StaticJsMembers.f5()
+  StaticJsMembers.f5()
+  StaticJsMembers.max(1, 2)
+  StaticJsMembers.max(1, 2)
+  StaticJsMembers.max(1, 2, 3)
+  StaticJsMembers.max(1, 2, 3)
+  StaticJsMembers.max(1.0, 2.0)
+  StaticJsMembers.max(1.0, 2.0)
+  var n: Int = StaticJsMembers.field1
+  n = StaticJsMembers.field2
+  n = StaticJsMembers.Native.field3
+  n = StaticJsMembers.Native.field4
+  n = StaticJsMembers.Native.field5
+  n = StaticJsMembers.Native.field6
+  StaticJsMembers.Native()
+  StaticJsMembers.Extern()
+ }
+
+ @ObjCName("J2ktStaticjsmembersStaticJsMembersCompanion", exact = true)
+ companion object {
+  @JvmField
+  @ObjCName("field1_")
+  @JsProperty(name = "field")
+  var field1: Int = 0
+
+  @JvmField
+  @ObjCName("field2_")
+  @JsProperty
+  var field2: Int = 0
+
+  @JvmStatic
+  @ObjCName("f1")
+  @JsMethod(name = "fun")
+  fun f1(
+   @ObjCName("withInt") a: Int
+  ) {}
+
+  @JvmStatic
+  @ObjCName("f2")
+  @JsMethod
+  fun f2(
+   @ObjCName("withInt") a: Int
+  ) {}
+
+  @JvmStatic
+  @ObjCName("f3")
+  @JsMethod(name = "Math.floor", namespace = JsPackage.GLOBAL)
+  external fun f3(
+   @ObjCName("withDouble") a: Double
+  )
+
+  @JvmStatic
+  @ObjCName("f4")
+  @JsMethod(name = "isFinite", namespace = JsPackage.GLOBAL)
+  external fun f4(
+   @ObjCName("withDouble") a: Double
+  ): Boolean
+
+  @JvmStatic
+  @ObjCName("f5")
+  @JsMethod(name = "baz", namespace = "foo.Bar")
+  external fun f5(): Boolean
+
+  @JvmStatic
+  @ObjCName("f6")
+  @JsMethod(name = "baz", namespace = "foo.Baz")
+  external fun f6(): Boolean
+
+  @JvmStatic
+  @ObjCName("max")
+  @JsMethod(name = "Math.max", namespace = JsPackage.GLOBAL)
+  external fun max(
+   @ObjCName("withInt") a: Int,
+   @ObjCName("withInt") b: Int
+  ): Int
+
+  @JvmStatic
+  @ObjCName("max")
+  @JsMethod(name = "Math.max", namespace = JsPackage.GLOBAL)
+  external fun max(
+   @ObjCName("withInt") a: Int,
+   @ObjCName("withInt") b: Int,
+   @ObjCName("withInt") c: Int
+  ): Int
+
+  @JvmStatic
+  @ObjCName("max")
+  @JsMethod(name = "Math.max", namespace = JsPackage.GLOBAL)
+  external fun max(
+   @ObjCName("withDouble") a: Double,
+   @ObjCName("withDouble") b: Double
+  ): Double
+ }
+
+ @ObjCName("J2ktStaticjsmembersStaticJsMembers_Native", exact = true)
+ @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
+ open class Native {
+  @ObjCName("J2ktStaticjsmembersStaticJsMembers_NativeCompanion", exact = true)
+  companion object {
+   @JvmField
+   @ObjCName("field3_")
+   @JsProperty(name = "Math.PI", namespace = JsPackage.GLOBAL)
+   var field3: Int = 0
+
+   @JvmField
+   @ObjCName("field4_")
+   @JsProperty(name = "top", namespace = JsPackage.GLOBAL)
+   var field4: Int = 0
+
+   @JvmField
+   @ObjCName("field5_")
+   @JsProperty(name = "field", namespace = "foo.Bar")
+   var field5: Int = 0
+
+   @JvmField
+   @ObjCName("field6_")
+   @JsProperty(name = "window.top", namespace = JsPackage.GLOBAL)
+   var field6: Int = 0
+  }
+ }
+
+ @ObjCName("J2ktStaticjsmembersStaticJsMembers_Extern", exact = true)
+ @JsType(name = "window.Object", namespace = JsPackage.GLOBAL, isNative = true)
+ open class Extern {}
+}

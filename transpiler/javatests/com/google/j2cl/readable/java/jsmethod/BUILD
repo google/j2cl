@@ -10,8 +10,8 @@ package(
 
 readable_example(
     srcs = glob(["*.java"]),
-    # JS method not supported in Kotlin
-    generate_kt_readables = False,
+    # Native JsMethod does not make sense for j2kt-native.
+    build_kt_native_readables = False,
     generate_wasm_readables = False,
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

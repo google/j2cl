@@ -10,8 +10,8 @@ package(
 
 readable_example(
     srcs = glob(["*.java"]),
-    # @JsType not supported in Kotlin.
-    generate_kt_readables = False,
+    # Native JsType does not make sense for j2kt-native.
+    build_kt_native_readables = False,
     generate_wasm_readables = False,  # Wasm doesn't allow extending native types.
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

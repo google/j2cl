@@ -1,0 +1,107 @@
+// Generated from "nativejstypes/Main.java"
+@file:OptIn(ExperimentalObjCName::class)
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "REPEATED_BOUND",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER")
+
+package nativejstypes
+
+import javaemul.lang.*
+import kotlin.Any
+import kotlin.Array
+import kotlin.Boolean
+import kotlin.Int
+import kotlin.OptIn
+import kotlin.String
+import kotlin.Suppress
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.jvm.JvmStatic
+import kotlin.jvm.javaObjectType
+import kotlin.native.ObjCName
+import nativejstypes.Bar
+import nativejstypes.BarInnerWithDotInName
+import nativejstypes.Foo
+import nativejstypes.Headers
+
+@ObjCName("J2ktNativejstypesMain", exact = true)
+open class Main {
+ @ObjCName("J2ktNativejstypesMainCompanion", exact = true)
+ companion object {
+  @JvmStatic
+  @ObjCName("testNativeJsTypeWithNamespace")
+  fun testNativeJsTypeWithNamespace(): Int {
+   val foo: Foo? = Foo()
+   return foo!!.sum()
+  }
+
+  @JvmStatic
+  @ObjCName("testNativeJsTypeWithNamespaceJsProperties")
+  fun testNativeJsTypeWithNamespaceJsProperties() {
+   val foo: Foo? = Foo()
+   foo!!.x = 50
+   foo!!.y = 5
+  }
+
+  @JvmStatic
+  @ObjCName("testNativeJsTypeWithoutNamespace")
+  fun testNativeJsTypeWithoutNamespace(): Int {
+   val bar: Bar? = Bar(6, 7)
+   val unused: Int = Bar.getStatic()
+   return bar!!.product()
+  }
+
+  @JvmStatic
+  @ObjCName("testNativeJsTypeWithoutNamespaceJsProperties")
+  fun testNativeJsTypeWithoutNamespaceJsProperties() {
+   val bar: Bar? = Bar(6, 7)
+   bar!!.x = 50
+   bar!!.y = 5
+   Bar.f = 10
+  }
+
+  @JvmStatic
+  @ObjCName("testInnerNativeJsType")
+  fun testInnerNativeJsType() {
+   val barInner: Bar.Inner? = Bar.Inner(1)
+   val barInnerWithDotInName: BarInnerWithDotInName? = BarInnerWithDotInName(2)
+   barInner!!.square()
+   barInnerWithDotInName!!.square()
+   Bar.Inner.getInnerStatic()
+   BarInnerWithDotInName.getInnerStatic()
+  }
+
+  @JvmStatic
+  @ObjCName("testGlobalNativeJsType")
+  fun testGlobalNativeJsType() {
+   val header: Headers? = Headers()
+   header!!.append("Content-Type", "text/xml")
+  }
+
+  @JvmStatic
+  @ObjCName("testNativeTypeClassLiteral")
+  fun testNativeTypeClassLiteral() {
+   var o1: Any? = Bar::class.javaObjectType
+   o1 = Array::class.javaObjectType
+  }
+
+  @JvmStatic
+  @ObjCName("testNativeTypeObjectMethods")
+  fun testNativeTypeObjectMethods() {
+   val bar: Bar? = Bar(6, 7)
+   val unusedStr: String? = bar!!.toString()
+   val unusedHash: Int = bar!!.hashCode()
+   val unusedEq: Boolean = bar!!.equals(Any())
+  }
+ }
+}

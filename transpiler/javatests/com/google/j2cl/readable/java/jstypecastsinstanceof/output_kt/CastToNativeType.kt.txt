@@ -1,0 +1,56 @@
+// Generated from "jstypecastsinstanceof/CastToNativeType.java"
+@file:OptIn(ExperimentalObjCName::class)
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "REPEATED_BOUND",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER")
+
+package jstypecastsinstanceof
+
+import javaemul.lang.*
+import jsinterop.annotations.JsPackage
+import jsinterop.annotations.JsType
+import kotlin.Any
+import kotlin.Array
+import kotlin.Boolean
+import kotlin.OptIn
+import kotlin.String
+import kotlin.Suppress
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
+
+@ObjCName("J2ktJstypecastsinstanceofCastToNativeType", exact = true)
+open class CastToNativeType {
+ @ObjCName("test")
+ open fun test() {
+  val a: Any? = CastToNativeType.NativeJsType()
+  val b: CastToNativeType.NativeJsType? = a as CastToNativeType.NativeJsType?
+  var c: Boolean = a is CastToNativeType.NativeJsType
+  val d: Array<CastToNativeType.NativeJsType?>? = a as Array<CastToNativeType.NativeJsType?>?
+  c = a is Array<*>
+  val e: CastToNativeType.NativeObject<Any?, Any?>? = a as CastToNativeType.NativeObject<Any?, Any?>?
+  val f: CastToNativeType.NativeObject<String?, Any?>? = a as CastToNativeType.NativeObject<String?, Any?>?
+  c = a is CastToNativeType.NativeObject<*, *>
+  val g: Array<CastToNativeType.NativeObject<Any?, Any?>?>? = a as Array<CastToNativeType.NativeObject<Any?, Any?>?>?
+  val h: Array<CastToNativeType.NativeObject<String?, Any?>?>? = a as Array<CastToNativeType.NativeObject<String?, Any?>?>?
+  c = a is Array<*>
+ }
+
+ @ObjCName("J2ktJstypecastsinstanceofCastToNativeType_NativeJsType", exact = true)
+ @JsType(namespace = "test.foo", isNative = true)
+ open class NativeJsType {}
+
+ @ObjCName("J2ktJstypecastsinstanceofCastToNativeType_NativeObject", exact = true)
+ @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
+ open class NativeObject<K, V> {}
+}

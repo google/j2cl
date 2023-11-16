@@ -1,0 +1,158 @@
+// Generated from "jsproperties/Main.java"
+@file:OptIn(ExperimentalObjCName::class)
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "REPEATED_BOUND",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER")
+
+package jsproperties
+
+import javaemul.lang.*
+import jsinterop.annotations.JsPackage
+import jsinterop.annotations.JsProperty
+import kotlin.Any
+import kotlin.Double
+import kotlin.Int
+import kotlin.OptIn
+import kotlin.Suppress
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
+
+open class Foo internal constructor() {
+ companion object {
+  @JvmField
+  internal var f_private_2: Int = 0
+
+  @JvmStatic
+  @ObjCName("getA")
+  @JsProperty
+  fun getA(): Int {
+   return Foo.f_private_2 + 1
+  }
+
+  @JvmStatic
+  @ObjCName("setA")
+  @JsProperty
+  fun setA(
+   @ObjCName("withInt") x: Int
+  ) {
+   Foo.f_private_2 = x + 2
+  }
+
+  @JvmStatic
+  @ObjCName("getB")
+  @JsProperty(name = "abc")
+  fun getB(): Int {
+   return Foo.f_private_2 + 3
+  }
+
+  @JvmStatic
+  @ObjCName("setB")
+  @JsProperty(name = "abc")
+  fun setB(
+   @ObjCName("withInt") x: Int
+  ) {
+   Foo.f_private_2 = x + 4
+  }
+ }
+}
+
+open class Bar internal constructor() {
+ @JvmField
+ internal var f_private_2: Int = 0
+
+ @ObjCName("getA")
+ @JsProperty
+ open fun getA(): Int {
+  return this.f_private_2 + 1
+ }
+
+ @ObjCName("setA")
+ @JsProperty
+ open fun setA(
+  @ObjCName("withInt") x: Int
+ ) {
+  this.f_private_2 = x + 2
+ }
+
+ @ObjCName("getB")
+ @JsProperty(name = "abc")
+ open fun getB(): Int {
+  return this.f_private_2 + 3
+ }
+
+ @ObjCName("setB")
+ @JsProperty(name = "abc")
+ open fun setB(
+  @ObjCName("withInt") x: Int
+ ) {
+  this.f_private_2 = x + 4
+ }
+}
+
+open class NativeFoo internal constructor() {
+ @ObjCName("getA")
+ @JsProperty(name = "hasOwnProperty")
+ external open fun getA(): Any?
+
+ companion object {
+  @JvmStatic
+  @ObjCName("getB")
+  @JsProperty(name = "Math.PI", namespace = JsPackage.GLOBAL)
+  external fun getB(): Double
+ }
+}
+
+interface InterfaceWithDefaultJsProperties {
+ @ObjCName("getM")
+ @JsProperty
+ fun getM(): Int {
+  return 3
+ }
+
+ @ObjCName("setM")
+ @JsProperty
+ fun setM(
+  @ObjCName("withInt") value: Int
+ ) {}
+}
+
+open class ImplementsInterfaceWithDefaultJsProperties internal constructor(): InterfaceWithDefaultJsProperties {}
+
+@ObjCName("J2ktJspropertiesMain", exact = true)
+open class Main {
+ @ObjCName("testNativeJsProperty")
+ open fun testNativeJsProperty() {
+  NativeFoo().getA()
+  NativeFoo.getB()
+ }
+
+ @ObjCName("testStaticJsProperty")
+ open fun testStaticJsProperty() {
+  Foo.getA()
+  Foo.setA(10)
+  Foo.getB()
+  Foo.setB(10)
+ }
+
+ @ObjCName("testInstanceJsProperty")
+ open fun testInstanceJsProperty() {
+  val bar: Bar? = Bar()
+  bar!!.getA()
+  bar!!.setA(10)
+  bar!!.getB()
+  bar!!.setB(10)
+ }
+}

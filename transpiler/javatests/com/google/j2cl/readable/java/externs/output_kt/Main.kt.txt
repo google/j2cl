@@ -1,0 +1,94 @@
+// Generated from "externs/Main.java"
+@file:OptIn(ExperimentalObjCName::class)
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "REPEATED_BOUND",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER")
+
+package externs
+
+import javaemul.lang.*
+import jsinterop.annotations.JsMethod
+import jsinterop.annotations.JsPackage
+import jsinterop.annotations.JsProperty
+import jsinterop.annotations.JsType
+import kotlin.Any
+import kotlin.Array
+import kotlin.Boolean
+import kotlin.OptIn
+import kotlin.String
+import kotlin.Suppress
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
+
+@ObjCName("J2ktExternsMain", exact = true)
+open class Main {
+ @JvmField
+ @ObjCName("aFoo_")
+ var aFoo: Main.FooOverlay? = null
+
+ @JvmField
+ internal var innerExtern_pp_externs: Main.TopLevelExtern.InnerExtern? = null
+
+ @JvmField
+ internal var inner_pp_externs: Main.TopLevelExtern.Inner? = null
+
+ @ObjCName("J2ktExternsMainCompanion", exact = true)
+ companion object {
+  @JvmStatic
+  internal fun testFooOverlay_private_2(fooOverlay: Main.FooOverlay?): Boolean {
+   return fooOverlay!!.getFoo()!!.equals("Hello")
+  }
+
+  @JvmStatic
+  @JsMethod
+  internal external fun useDirectlyAsFoo_private_2(fooOverlay: Any?)
+
+  @JvmStatic
+  @ObjCName("main")
+  fun main(
+   vararg @ObjCName("withNSStringArray") args: String?
+  ) {
+   val args_1: Array<String?>? = args as Array<String?>?
+   Main.testFooOverlay_private_2((Main.FooImpl() as Any) as Main.FooOverlay)
+   Main.useDirectlyAsFoo_private_2(Main.FooImpl())
+  }
+ }
+
+ open class FooImpl internal constructor() {
+  @JvmField
+  @JsProperty
+  internal var foo_pp_externs: String? = null
+ }
+
+ @JsType(name = "Foo", namespace = JsPackage.GLOBAL, isNative = true)
+ fun interface FooOverlay {
+  @ObjCName("getFoo")
+  @JsProperty
+  fun getFoo(): String?
+ }
+
+ @ObjCName("J2ktExternsMain_TopLevelExtern", exact = true)
+ @JsType(namespace = JsPackage.GLOBAL, isNative = true)
+ open class TopLevelExtern {
+  @ObjCName("J2ktExternsMain_TopLevelExtern_InnerExtern", exact = true)
+  @JsType(isNative = true)
+  open class InnerExtern {}
+
+  @ObjCName("J2ktExternsMain_TopLevelExtern_Inner", exact = true)
+  @JsType(name = "FooImpl", namespace = "externs.Main", isNative = true)
+  open class Inner {}
+ }
+}

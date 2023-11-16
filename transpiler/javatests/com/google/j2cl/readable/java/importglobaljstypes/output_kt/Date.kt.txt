@@ -1,17 +1,34 @@
 // Generated from "importglobaljstypes/Date.java"
 @file:OptIn(ExperimentalObjCName::class)
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "REPEATED_BOUND",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER")
 
 package importglobaljstypes
 
 import javaemul.lang.*
+import jsinterop.annotations.JsPackage
+import jsinterop.annotations.JsType
 import kotlin.Double
 import kotlin.Int
 import kotlin.OptIn
+import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("ImportglobaljstypesDate", exact = true)
+@ObjCName("J2ktImportglobaljstypesDate", exact = true)
 open class Date {
  @ObjCName("copy__")
  open fun copy(
@@ -20,6 +37,7 @@ open class Date {
   return d
  }
 
+ @ObjCName("J2ktImportglobaljstypesDateCompanion", exact = true)
  companion object {
   @JvmStatic
   @ObjCName("now")
@@ -30,11 +48,13 @@ open class Date {
   }
  }
 
- @ObjCName("ImportglobaljstypesDate_NativeDate", exact = true)
+ @ObjCName("J2ktImportglobaljstypesDate_NativeDate", exact = true)
+ @JsType(name = "Date", namespace = JsPackage.GLOBAL, isNative = true)
  open class NativeDate {
   @ObjCName("getSeconds")
   external open fun getSeconds(): Int
 
+  @ObjCName("J2ktImportglobaljstypesDate_NativeDateCompanion", exact = true)
   companion object {
    @JvmStatic
    @ObjCName("now")
