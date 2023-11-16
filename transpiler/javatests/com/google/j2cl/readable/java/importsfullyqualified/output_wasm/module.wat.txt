@@ -35,24 +35,33 @@
 )
 
 ;;; Code for importsfullyqualified.ImportsFullyQualified [itable.init]
-(global $java.io.Serializable.vtable@$importsfullyqualified.ImportsFullyQualified (ref $java.io.Serializable.vtable) 
+
+(global $java.io.Serializable.vtable@$importsfullyqualified.ImportsFullyQualified (ref $java.io.Serializable.vtable)
  (struct.new $java.io.Serializable.vtable
  )
+)
+(global $importsfullyqualified.ImportsFullyQualified.itable (ref $importsfullyqualified.ImportsFullyQualified.itable)
+ (struct.new $importsfullyqualified.ImportsFullyQualified.itable
+   (global.get $java.io.Serializable.vtable@$importsfullyqualified.ImportsFullyQualified)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
  )
-(global $importsfullyqualified.ImportsFullyQualified.itable (ref $importsfullyqualified.ImportsFullyQualified.itable) (struct.new $importsfullyqualified.ImportsFullyQualified.itable
-  (global.get $java.io.Serializable.vtable@$importsfullyqualified.ImportsFullyQualified)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
+)
 
 ;;; Code for importsfullyqualified.ImportsFullyQualified [static fields]
-(global $f_$initialized__importsfullyqualified_ImportsFullyQualified (mut i32) (i32.const 0))
-(global $f_$class__importsfullyqualified_ImportsFullyQualified (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|importsfully...|__importsfullyqualified_ImportsFullyQualified (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__importsfullyqualified_ImportsFullyQualified (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__importsfullyqualified_ImportsFullyQualified (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|importsfully...|__importsfullyqualified_ImportsFullyQualified (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for importsfullyqualified.ImportsFullyQualified [methods]
 

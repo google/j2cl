@@ -103,20 +103,23 @@
 )
 
 ;;; Code for accidentaloverride.AnotherAccidentalOverride [itable.init]
-(global $accidentaloverride.SuperInterface.vtable@$accidentaloverride.AnotherAccidentalOverride (ref $accidentaloverride.SuperInterface.vtable) 
+
+(global $accidentaloverride.SuperInterface.vtable@$accidentaloverride.AnotherAccidentalOverride (ref $accidentaloverride.SuperInterface.vtable)
  (struct.new $accidentaloverride.SuperInterface.vtable
   (ref.func $m_foo__java_lang_Object__void@accidentaloverride.AnotherAccidentalOverride)
  )
+)
+(global $accidentaloverride.AnotherAccidentalOverride.itable (ref $accidentaloverride.AnotherAccidentalOverride.itable)
+ (struct.new $accidentaloverride.AnotherAccidentalOverride.itable
+   (global.get $accidentaloverride.SuperInterface.vtable@$accidentaloverride.AnotherAccidentalOverride)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
  )
-(global $accidentaloverride.AnotherAccidentalOverride.itable (ref $accidentaloverride.AnotherAccidentalOverride.itable) (struct.new $accidentaloverride.AnotherAccidentalOverride.itable
-  (global.get $accidentaloverride.SuperInterface.vtable@$accidentaloverride.AnotherAccidentalOverride)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
+)
 
 ;;; Code for accidentaloverride.AccidentalOverride [vtable.init]
 (global $accidentaloverride.AccidentalOverride.vtable (ref $accidentaloverride.AccidentalOverride.vtable)
@@ -132,40 +135,67 @@
 )
 
 ;;; Code for accidentaloverride.AccidentalOverride [itable.init]
-(global $accidentaloverride.SuperInterface.vtable@$accidentaloverride.AccidentalOverride (ref $accidentaloverride.SuperInterface.vtable) 
+
+(global $accidentaloverride.SuperInterface.vtable@$accidentaloverride.AccidentalOverride (ref $accidentaloverride.SuperInterface.vtable)
  (struct.new $accidentaloverride.SuperInterface.vtable
   (ref.func $m_foo__java_lang_Object__void@accidentaloverride.AccidentalOverride)
  )
+)
+(global $accidentaloverride.AccidentalOverride.itable (ref $accidentaloverride.AccidentalOverride.itable)
+ (struct.new $accidentaloverride.AccidentalOverride.itable
+   (global.get $accidentaloverride.SuperInterface.vtable@$accidentaloverride.AccidentalOverride)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
  )
-(global $accidentaloverride.AccidentalOverride.itable (ref $accidentaloverride.AccidentalOverride.itable) (struct.new $accidentaloverride.AccidentalOverride.itable
-  (global.get $accidentaloverride.SuperInterface.vtable@$accidentaloverride.AccidentalOverride)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
+)
 
 ;;; Code for accidentaloverride.Parent [static fields]
-(global $f_$initialized__accidentaloverride_Parent (mut i32) (i32.const 0))
-(global $f_$class__accidentaloverride_Parent (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|accidentalov...|__accidentaloverride_Parent (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__accidentaloverride_Parent (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__accidentaloverride_Parent (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|accidentalov...|__accidentaloverride_Parent (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for accidentaloverride.SuperInterface [static fields]
-(global $f_$initialized__accidentaloverride_SuperInterface (mut i32) (i32.const 0))
-(global $f_$class__accidentaloverride_SuperInterface (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|accidentalov...|__accidentaloverride_SuperInterface (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__accidentaloverride_SuperInterface (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__accidentaloverride_SuperInterface (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|accidentalov...|__accidentaloverride_SuperInterface (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for accidentaloverride.AnotherAccidentalOverride [static fields]
-(global $f_$initialized__accidentaloverride_AnotherAccidentalOverride (mut i32) (i32.const 0))
-(global $f_$class__accidentaloverride_AnotherAccidentalOverride (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|accidentalov...|__accidentaloverride_AnotherAccidentalOverride (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__accidentaloverride_AnotherAccidentalOverride (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__accidentaloverride_AnotherAccidentalOverride (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|accidentalov...|__accidentaloverride_AnotherAccidentalOverride (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for accidentaloverride.AccidentalOverride [static fields]
-(global $f_$initialized__accidentaloverride_AccidentalOverride (mut i32) (i32.const 0))
-(global $f_$class__accidentaloverride_AccidentalOverride (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|accidentalov...|__accidentaloverride_AccidentalOverride (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__accidentaloverride_AccidentalOverride (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__accidentaloverride_AccidentalOverride (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|accidentalov...|__accidentaloverride_AccidentalOverride (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for accidentaloverride.SuperInterface [methods]
 

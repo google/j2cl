@@ -42,29 +42,44 @@
 )
 
 ;;; Code for functiontype.FunctionImpl [itable.init]
-(global $functiontype.Function.vtable@$functiontype.FunctionImpl (ref $functiontype.Function.vtable) 
+
+(global $functiontype.Function.vtable@$functiontype.FunctionImpl (ref $functiontype.Function.vtable)
  (struct.new $functiontype.Function.vtable
  )
+)
+(global $functiontype.FunctionImpl.itable (ref $functiontype.FunctionImpl.itable)
+ (struct.new $functiontype.FunctionImpl.itable
+   (global.get $functiontype.Function.vtable@$functiontype.FunctionImpl)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
  )
-(global $functiontype.FunctionImpl.itable (ref $functiontype.FunctionImpl.itable) (struct.new $functiontype.FunctionImpl.itable
-  (global.get $functiontype.Function.vtable@$functiontype.FunctionImpl)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
+)
 
 ;;; Code for functiontype.Function [static fields]
-(global $f_$initialized__functiontype_Function (mut i32) (i32.const 0))
-(global $f_$class__functiontype_Function (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|functiontype...|__functiontype_Function (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__functiontype_Function (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__functiontype_Function (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|functiontype...|__functiontype_Function (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for functiontype.FunctionImpl [static fields]
-(global $f_$initialized__functiontype_FunctionImpl (mut i32) (i32.const 0))
-(global $f_$class__functiontype_FunctionImpl (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|functiontype...|__functiontype_FunctionImpl (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__functiontype_FunctionImpl (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__functiontype_FunctionImpl (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|functiontype...|__functiontype_FunctionImpl (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for functiontype.Function [methods]
 

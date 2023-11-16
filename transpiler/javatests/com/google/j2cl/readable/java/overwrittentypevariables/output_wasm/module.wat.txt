@@ -104,23 +104,27 @@
 )
 
 ;;; Code for overwrittentypevariables.HashFunctions.1 [itable.init]
-(global $overwrittentypevariables.HashFunction.vtable@$overwrittentypevariables.HashFunctions.1 (ref $overwrittentypevariables.HashFunction.vtable) 
+
+(global $overwrittentypevariables.HashFunction.vtable@$overwrittentypevariables.HashFunctions.1 (ref $overwrittentypevariables.HashFunction.vtable)
  (struct.new $overwrittentypevariables.HashFunction.vtable
  )
- )(global $overwrittentypevariables.MyFunction.vtable@$overwrittentypevariables.HashFunctions.1 (ref $overwrittentypevariables.MyFunction.vtable) 
+)
+(global $overwrittentypevariables.MyFunction.vtable@$overwrittentypevariables.HashFunctions.1 (ref $overwrittentypevariables.MyFunction.vtable)
  (struct.new $overwrittentypevariables.MyFunction.vtable
   (ref.func $m_apply__java_lang_Object__java_lang_Object@overwrittentypevariables.HashFunctions.1)
  )
+)
+(global $overwrittentypevariables.HashFunctions.1.itable (ref $overwrittentypevariables.HashFunctions.1.itable)
+ (struct.new $overwrittentypevariables.HashFunctions.1.itable
+   (global.get $overwrittentypevariables.HashFunction.vtable@$overwrittentypevariables.HashFunctions.1)
+   (global.get $overwrittentypevariables.MyFunction.vtable@$overwrittentypevariables.HashFunctions.1)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
  )
-(global $overwrittentypevariables.HashFunctions.1.itable (ref $overwrittentypevariables.HashFunctions.1.itable) (struct.new $overwrittentypevariables.HashFunctions.1.itable
-  (global.get $overwrittentypevariables.HashFunction.vtable@$overwrittentypevariables.HashFunctions.1)
-  (global.get $overwrittentypevariables.MyFunction.vtable@$overwrittentypevariables.HashFunctions.1)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
+)
 
 ;;; Code for overwrittentypevariables.HashFunctions.2 [vtable.init]
 (global $overwrittentypevariables.HashFunctions.2.vtable (ref $overwrittentypevariables.HashFunctions.2.vtable)
@@ -136,48 +140,82 @@
 )
 
 ;;; Code for overwrittentypevariables.HashFunctions.2 [itable.init]
-(global $overwrittentypevariables.HashFunction.vtable@$overwrittentypevariables.HashFunctions.2 (ref $overwrittentypevariables.HashFunction.vtable) 
+
+(global $overwrittentypevariables.HashFunction.vtable@$overwrittentypevariables.HashFunctions.2 (ref $overwrittentypevariables.HashFunction.vtable)
  (struct.new $overwrittentypevariables.HashFunction.vtable
  )
- )(global $overwrittentypevariables.MyFunction.vtable@$overwrittentypevariables.HashFunctions.2 (ref $overwrittentypevariables.MyFunction.vtable) 
+)
+(global $overwrittentypevariables.MyFunction.vtable@$overwrittentypevariables.HashFunctions.2 (ref $overwrittentypevariables.MyFunction.vtable)
  (struct.new $overwrittentypevariables.MyFunction.vtable
   (ref.func $m_apply__java_lang_Object__java_lang_Object@overwrittentypevariables.HashFunctions.2)
  )
+)
+(global $overwrittentypevariables.HashFunctions.2.itable (ref $overwrittentypevariables.HashFunctions.2.itable)
+ (struct.new $overwrittentypevariables.HashFunctions.2.itable
+   (global.get $overwrittentypevariables.HashFunction.vtable@$overwrittentypevariables.HashFunctions.2)
+   (global.get $overwrittentypevariables.MyFunction.vtable@$overwrittentypevariables.HashFunctions.2)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
  )
-(global $overwrittentypevariables.HashFunctions.2.itable (ref $overwrittentypevariables.HashFunctions.2.itable) (struct.new $overwrittentypevariables.HashFunctions.2.itable
-  (global.get $overwrittentypevariables.HashFunction.vtable@$overwrittentypevariables.HashFunctions.2)
-  (global.get $overwrittentypevariables.MyFunction.vtable@$overwrittentypevariables.HashFunctions.2)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
+)
 
 ;;; Code for overwrittentypevariables.MyFunction [static fields]
-(global $f_$initialized__overwrittentypevariables_MyFunction (mut i32) (i32.const 0))
-(global $f_$class__overwrittentypevariables_MyFunction (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|overwrittent...|__overwrittentypevariables_MyFunction (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__overwrittentypevariables_MyFunction (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__overwrittentypevariables_MyFunction (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|overwrittent...|__overwrittentypevariables_MyFunction (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for overwrittentypevariables.HashFunction [static fields]
-(global $f_$initialized__overwrittentypevariables_HashFunction (mut i32) (i32.const 0))
-(global $f_$class__overwrittentypevariables_HashFunction (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|overwrittent...|__overwrittentypevariables_HashFunction (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__overwrittentypevariables_HashFunction (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__overwrittentypevariables_HashFunction (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|overwrittent...|__overwrittentypevariables_HashFunction (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for overwrittentypevariables.HashFunctions [static fields]
-(global $f_$initialized__overwrittentypevariables_HashFunctions (mut i32) (i32.const 0))
-(global $f_$class__overwrittentypevariables_HashFunctions (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|overwrittent...|__overwrittentypevariables_HashFunctions (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__overwrittentypevariables_HashFunctions (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__overwrittentypevariables_HashFunctions (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|overwrittent...|__overwrittentypevariables_HashFunctions (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for overwrittentypevariables.HashFunctions.1 [static fields]
-(global $f_$initialized__overwrittentypevariables_HashFunctions_1 (mut i32) (i32.const 0))
-(global $f_$class__overwrittentypevariables_HashFunctions_1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|overwrittent...|__overwrittentypevariables_HashFunctions_1 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__overwrittentypevariables_HashFunctions_1 (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__overwrittentypevariables_HashFunctions_1 (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|overwrittent...|__overwrittentypevariables_HashFunctions_1 (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for overwrittentypevariables.HashFunctions.2 [static fields]
-(global $f_$initialized__overwrittentypevariables_HashFunctions_2 (mut i32) (i32.const 0))
-(global $f_$class__overwrittentypevariables_HashFunctions_2 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|overwrittent...|__overwrittentypevariables_HashFunctions_2 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__overwrittentypevariables_HashFunctions_2 (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__overwrittentypevariables_HashFunctions_2 (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|overwrittent...|__overwrittentypevariables_HashFunctions_2 (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for overwrittentypevariables.MyFunction [methods]
 

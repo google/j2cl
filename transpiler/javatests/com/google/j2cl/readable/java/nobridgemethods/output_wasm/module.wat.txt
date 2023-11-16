@@ -133,19 +133,22 @@
 )
 
 ;;; Code for nobridgemethods.TreeMap.InnerEntry [itable.init]
-(global $nobridgemethods.Entry.vtable@$nobridgemethods.TreeMap.InnerEntry (ref $nobridgemethods.Entry.vtable) 
+
+(global $nobridgemethods.Entry.vtable@$nobridgemethods.TreeMap.InnerEntry (ref $nobridgemethods.Entry.vtable)
  (struct.new $nobridgemethods.Entry.vtable
  )
+)
+(global $nobridgemethods.TreeMap.InnerEntry.itable (ref $nobridgemethods.TreeMap.InnerEntry.itable)
+ (struct.new $nobridgemethods.TreeMap.InnerEntry.itable
+   (global.get $nobridgemethods.Entry.vtable@$nobridgemethods.TreeMap.InnerEntry)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
  )
-(global $nobridgemethods.TreeMap.InnerEntry.itable (ref $nobridgemethods.TreeMap.InnerEntry.itable) (struct.new $nobridgemethods.TreeMap.InnerEntry.itable
-  (global.get $nobridgemethods.Entry.vtable@$nobridgemethods.TreeMap.InnerEntry)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
+)
 
 ;;; Code for nobridgemethods.CharSet.1 [vtable.init]
 (global $nobridgemethods.CharSet.1.vtable (ref $nobridgemethods.CharSet.1.vtable)
@@ -161,34 +164,70 @@
 )
 
 ;;; Code for nobridgemethods.Entry [static fields]
-(global $f_$initialized__nobridgemethods_Entry (mut i32) (i32.const 0))
-(global $f_$class__nobridgemethods_Entry (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|nobridgemeth...|__nobridgemethods_Entry (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__nobridgemethods_Entry (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__nobridgemethods_Entry (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|nobridgemeth...|__nobridgemethods_Entry (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for nobridgemethods.Map [static fields]
-(global $f_$initialized__nobridgemethods_Map (mut i32) (i32.const 0))
-(global $f_$class__nobridgemethods_Map (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|nobridgemeth...|__nobridgemethods_Map (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__nobridgemethods_Map (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__nobridgemethods_Map (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|nobridgemeth...|__nobridgemethods_Map (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for nobridgemethods.TreeMap [static fields]
-(global $f_$initialized__nobridgemethods_TreeMap (mut i32) (i32.const 0))
-(global $f_$class__nobridgemethods_TreeMap (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|nobridgemeth...|__nobridgemethods_TreeMap (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__nobridgemethods_TreeMap (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__nobridgemethods_TreeMap (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|nobridgemeth...|__nobridgemethods_TreeMap (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for nobridgemethods.CharSet [static fields]
-(global $f_$initialized__nobridgemethods_CharSet (mut i32) (i32.const 0))
-(global $f_$class__nobridgemethods_CharSet (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|nobridgemeth...|__nobridgemethods_CharSet (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__nobridgemethods_CharSet (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__nobridgemethods_CharSet (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|nobridgemeth...|__nobridgemethods_CharSet (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for nobridgemethods.TreeMap.InnerEntry [static fields]
-(global $f_$initialized__nobridgemethods_TreeMap_InnerEntry (mut i32) (i32.const 0))
-(global $f_$class__nobridgemethods_TreeMap_InnerEntry (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|nobridgemeth...|__nobridgemethods_TreeMap_InnerEntry (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__nobridgemethods_TreeMap_InnerEntry (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__nobridgemethods_TreeMap_InnerEntry (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|nobridgemeth...|__nobridgemethods_TreeMap_InnerEntry (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for nobridgemethods.CharSet.1 [static fields]
-(global $f_$initialized__nobridgemethods_CharSet_1 (mut i32) (i32.const 0))
-(global $f_$class__nobridgemethods_CharSet_1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|nobridgemeth...|__nobridgemethods_CharSet_1 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__nobridgemethods_CharSet_1 (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__nobridgemethods_CharSet_1 (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|nobridgemeth...|__nobridgemethods_CharSet_1 (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for nobridgemethods.Entry [methods]
 

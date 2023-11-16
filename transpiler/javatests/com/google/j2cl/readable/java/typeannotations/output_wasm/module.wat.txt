@@ -186,22 +186,25 @@
 )
 
 ;;; Code for typeannotations.ChildWithNullableParent [itable.init]
-(global $typeannotations.ParametricType.vtable@$typeannotations.ChildWithNullableParent (ref $typeannotations.ParametricType.vtable) 
+
+(global $typeannotations.ParametricType.vtable@$typeannotations.ChildWithNullableParent (ref $typeannotations.ParametricType.vtable)
  (struct.new $typeannotations.ParametricType.vtable
   (ref.func $m_m__java_lang_String__java_lang_Object__java_lang_Object@typeannotations.ChildWithNullableParent)
   (ref.func $m_m__java_util_List__java_lang_Object__java_util_List@typeannotations.ChildWithNullableParent)
   (ref.func $m_m__java_util_List__java_util_List@typeannotations.ChildWithNullableParent)
  )
+)
+(global $typeannotations.ChildWithNullableParent.itable (ref $typeannotations.ChildWithNullableParent.itable)
+ (struct.new $typeannotations.ChildWithNullableParent.itable
+   (global.get $typeannotations.ParametricType.vtable@$typeannotations.ChildWithNullableParent)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
  )
-(global $typeannotations.ChildWithNullableParent.itable (ref $typeannotations.ChildWithNullableParent.itable) (struct.new $typeannotations.ChildWithNullableParent.itable
-  (global.get $typeannotations.ParametricType.vtable@$typeannotations.ChildWithNullableParent)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
+)
 
 ;;; Code for typeannotations.ChildWithNonNullableParent [vtable.init]
 (global $typeannotations.ChildWithNonNullableParent.vtable (ref $typeannotations.ChildWithNonNullableParent.vtable)
@@ -220,22 +223,25 @@
 )
 
 ;;; Code for typeannotations.ChildWithNonNullableParent [itable.init]
-(global $typeannotations.ParametricType.vtable@$typeannotations.ChildWithNonNullableParent (ref $typeannotations.ParametricType.vtable) 
+
+(global $typeannotations.ParametricType.vtable@$typeannotations.ChildWithNonNullableParent (ref $typeannotations.ParametricType.vtable)
  (struct.new $typeannotations.ParametricType.vtable
   (ref.func $m_m__java_lang_String__java_lang_Object__java_lang_Object@typeannotations.ChildWithNonNullableParent)
   (ref.func $m_m__java_util_List__java_lang_Object__java_util_List@typeannotations.ChildWithNonNullableParent)
   (ref.func $m_m__java_util_List__java_util_List@typeannotations.ChildWithNonNullableParent)
  )
+)
+(global $typeannotations.ChildWithNonNullableParent.itable (ref $typeannotations.ChildWithNonNullableParent.itable)
+ (struct.new $typeannotations.ChildWithNonNullableParent.itable
+   (global.get $typeannotations.ParametricType.vtable@$typeannotations.ChildWithNonNullableParent)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
  )
-(global $typeannotations.ChildWithNonNullableParent.itable (ref $typeannotations.ChildWithNonNullableParent.itable) (struct.new $typeannotations.ChildWithNonNullableParent.itable
-  (global.get $typeannotations.ParametricType.vtable@$typeannotations.ChildWithNonNullableParent)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
+)
 
 ;;; Code for typeannotations.TypeAnnotations [vtable.init]
 (global $typeannotations.TypeAnnotations.vtable (ref $typeannotations.TypeAnnotations.vtable)
@@ -249,39 +255,81 @@
 )
 
 ;;; Code for typeannotations.ParametricType [static fields]
-(global $f_$initialized__typeannotations_ParametricType (mut i32) (i32.const 0))
-(global $f_$class__typeannotations_ParametricType (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|typeannotati...|__typeannotations_ParametricType (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__typeannotations_ParametricType (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__typeannotations_ParametricType (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|typeannotati...|__typeannotations_ParametricType (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for typeannotations.AbstractType [static fields]
-(global $f_$initialized__typeannotations_AbstractType (mut i32) (i32.const 0))
-(global $f_$class__typeannotations_AbstractType (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|typeannotati...|__typeannotations_AbstractType (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__typeannotations_AbstractType (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__typeannotations_AbstractType (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|typeannotati...|__typeannotations_AbstractType (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for typeannotations.AbstractTypeNonNull [static fields]
-(global $f_$initialized__typeannotations_AbstractTypeNonNull (mut i32) (i32.const 0))
-(global $f_$class__typeannotations_AbstractTypeNonNull (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|typeannotati...|__typeannotations_AbstractTypeNonNull (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__typeannotations_AbstractTypeNonNull (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__typeannotations_AbstractTypeNonNull (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|typeannotati...|__typeannotations_AbstractTypeNonNull (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for typeannotations.Parent [static fields]
-(global $f_$initialized__typeannotations_Parent (mut i32) (i32.const 0))
-(global $f_$class__typeannotations_Parent (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|typeannotati...|__typeannotations_Parent (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__typeannotations_Parent (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__typeannotations_Parent (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|typeannotati...|__typeannotations_Parent (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for typeannotations.ChildWithNullableParent [static fields]
-(global $f_$initialized__typeannotations_ChildWithNullableParent (mut i32) (i32.const 0))
-(global $f_$class__typeannotations_ChildWithNullableParent (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|typeannotati...|__typeannotations_ChildWithNullableParent (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__typeannotations_ChildWithNullableParent (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__typeannotations_ChildWithNullableParent (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|typeannotati...|__typeannotations_ChildWithNullableParent (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for typeannotations.ChildWithNonNullableParent [static fields]
-(global $f_$initialized__typeannotations_ChildWithNonNullableParent (mut i32) (i32.const 0))
-(global $f_$class__typeannotations_ChildWithNonNullableParent (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|typeannotati...|__typeannotations_ChildWithNonNullableParent (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__typeannotations_ChildWithNonNullableParent (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__typeannotations_ChildWithNonNullableParent (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|typeannotati...|__typeannotations_ChildWithNonNullableParent (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for typeannotations.TypeAnnotations [static fields]
-(global $f_$initialized__typeannotations_TypeAnnotations (mut i32) (i32.const 0))
-(global $f_$class__typeannotations_TypeAnnotations (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|typeannotati...|__typeannotations_TypeAnnotations (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__typeannotations_TypeAnnotations (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__typeannotations_TypeAnnotations (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|typeannotati...|__typeannotations_TypeAnnotations (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for typeannotations.ParametricType [methods]
 

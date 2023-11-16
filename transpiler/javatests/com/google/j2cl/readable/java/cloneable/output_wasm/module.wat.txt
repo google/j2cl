@@ -136,19 +136,22 @@
 )
 
 ;;; Code for cloneable.Cloneables.WithCloneable [itable.init]
-(global $java.lang.Cloneable.vtable@$cloneable.Cloneables.WithCloneable (ref $java.lang.Cloneable.vtable) 
+
+(global $java.lang.Cloneable.vtable@$cloneable.Cloneables.WithCloneable (ref $java.lang.Cloneable.vtable)
  (struct.new $java.lang.Cloneable.vtable
  )
+)
+(global $cloneable.Cloneables.WithCloneable.itable (ref $cloneable.Cloneables.WithCloneable.itable)
+ (struct.new $cloneable.Cloneables.WithCloneable.itable
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (global.get $java.lang.Cloneable.vtable@$cloneable.Cloneables.WithCloneable)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
  )
-(global $cloneable.Cloneables.WithCloneable.itable (ref $cloneable.Cloneables.WithCloneable.itable) (struct.new $cloneable.Cloneables.WithCloneable.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (global.get $java.lang.Cloneable.vtable@$cloneable.Cloneables.WithCloneable)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
+)
 
 ;;; Code for cloneable.Cloneables.WithoutCloneableChild [vtable.init]
 (global $cloneable.Cloneables.WithoutCloneableChild.vtable (ref $cloneable.Cloneables.WithoutCloneableChild.vtable)
@@ -175,44 +178,77 @@
 )
 
 ;;; Code for cloneable.Cloneables.WithCloneableChild [itable.init]
-(global $java.lang.Cloneable.vtable@$cloneable.Cloneables.WithCloneableChild (ref $java.lang.Cloneable.vtable) 
+
+(global $java.lang.Cloneable.vtable@$cloneable.Cloneables.WithCloneableChild (ref $java.lang.Cloneable.vtable)
  (struct.new $java.lang.Cloneable.vtable
  )
+)
+(global $cloneable.Cloneables.WithCloneableChild.itable (ref $cloneable.Cloneables.WithCloneableChild.itable)
+ (struct.new $cloneable.Cloneables.WithCloneableChild.itable
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (global.get $java.lang.Cloneable.vtable@$cloneable.Cloneables.WithCloneableChild)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
  )
-(global $cloneable.Cloneables.WithCloneableChild.itable (ref $cloneable.Cloneables.WithCloneableChild.itable) (struct.new $cloneable.Cloneables.WithCloneableChild.itable
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (global.get $java.lang.Cloneable.vtable@$cloneable.Cloneables.WithCloneableChild)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
+)
 
 ;;; Code for cloneable.Cloneables [static fields]
-(global $f_$initialized__cloneable_Cloneables (mut i32) (i32.const 0))
-(global $f_$class__cloneable_Cloneables (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|cloneable.Cl...|__cloneable_Cloneables (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__cloneable_Cloneables (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__cloneable_Cloneables (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|cloneable.Cl...|__cloneable_Cloneables (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for cloneable.Cloneables.WithoutCloneable [static fields]
-(global $f_$initialized__cloneable_Cloneables_WithoutCloneable (mut i32) (i32.const 0))
-(global $f_$class__cloneable_Cloneables_WithoutCloneable (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|cloneable.Cl...|__cloneable_Cloneables_WithoutCloneable (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__cloneable_Cloneables_WithoutCloneable (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__cloneable_Cloneables_WithoutCloneable (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|cloneable.Cl...|__cloneable_Cloneables_WithoutCloneable (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for cloneable.Cloneables.WithCloneable [static fields]
-(global $f_$initialized__cloneable_Cloneables_WithCloneable (mut i32) (i32.const 0))
-(global $f_$class__cloneable_Cloneables_WithCloneable (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|cloneable.Cl...|__cloneable_Cloneables_WithCloneable (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__cloneable_Cloneables_WithCloneable (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__cloneable_Cloneables_WithCloneable (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|cloneable.Cl...|__cloneable_Cloneables_WithCloneable (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for cloneable.Cloneables.WithoutCloneableChild [static fields]
-(global $f_$initialized__cloneable_Cloneables_WithoutCloneableChild (mut i32) (i32.const 0))
-(global $f_$class__cloneable_Cloneables_WithoutCloneableChild (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|cloneable.Cl...|__cloneable_Cloneables_WithoutCloneableChild (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__cloneable_Cloneables_WithoutCloneableChild (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__cloneable_Cloneables_WithoutCloneableChild (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|cloneable.Cl...|__cloneable_Cloneables_WithoutCloneableChild (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for cloneable.Cloneables.WithCloneableChild [static fields]
-(global $f_$initialized__cloneable_Cloneables_WithCloneableChild (mut i32) (i32.const 0))
-(global $f_$class__cloneable_Cloneables_WithCloneableChild (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|cloneable.Cl...|__cloneable_Cloneables_WithCloneableChild (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__cloneable_Cloneables_WithCloneableChild (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__cloneable_Cloneables_WithCloneableChild (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|cloneable.Cl...|__cloneable_Cloneables_WithCloneableChild (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for cloneable.Cloneables [methods]
 

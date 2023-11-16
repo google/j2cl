@@ -111,20 +111,23 @@
 )
 
 ;;; Code for jsbridgeaccidentaloverride.MyJsType [itable.init]
-(global $jsbridgeaccidentaloverride.OtherInterface.vtable@$jsbridgeaccidentaloverride.MyJsType (ref $jsbridgeaccidentaloverride.OtherInterface.vtable) 
+
+(global $jsbridgeaccidentaloverride.OtherInterface.vtable@$jsbridgeaccidentaloverride.MyJsType (ref $jsbridgeaccidentaloverride.OtherInterface.vtable)
  (struct.new $jsbridgeaccidentaloverride.OtherInterface.vtable
   (ref.func $m_fun__int__int@jsbridgeaccidentaloverride.MyJsType)
  )
+)
+(global $jsbridgeaccidentaloverride.MyJsType.itable (ref $jsbridgeaccidentaloverride.MyJsType.itable)
+ (struct.new $jsbridgeaccidentaloverride.MyJsType.itable
+   (global.get $jsbridgeaccidentaloverride.OtherInterface.vtable@$jsbridgeaccidentaloverride.MyJsType)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
  )
-(global $jsbridgeaccidentaloverride.MyJsType.itable (ref $jsbridgeaccidentaloverride.MyJsType.itable) (struct.new $jsbridgeaccidentaloverride.MyJsType.itable
-  (global.get $jsbridgeaccidentaloverride.OtherInterface.vtable@$jsbridgeaccidentaloverride.MyJsType)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
+)
 
 ;;; Code for jsbridgeaccidentaloverride.SubJsType [vtable.init]
 (global $jsbridgeaccidentaloverride.SubJsType.vtable (ref $jsbridgeaccidentaloverride.SubJsType.vtable)
@@ -141,50 +144,84 @@
 )
 
 ;;; Code for jsbridgeaccidentaloverride.SubJsType [itable.init]
-(global $jsbridgeaccidentaloverride.OtherInterface.vtable@$jsbridgeaccidentaloverride.SubJsType (ref $jsbridgeaccidentaloverride.OtherInterface.vtable) 
+
+(global $jsbridgeaccidentaloverride.OtherInterface.vtable@$jsbridgeaccidentaloverride.SubJsType (ref $jsbridgeaccidentaloverride.OtherInterface.vtable)
  (struct.new $jsbridgeaccidentaloverride.OtherInterface.vtable
   (ref.func $m_fun__int__int@jsbridgeaccidentaloverride.MyJsType)
  )
- )(global $jsbridgeaccidentaloverride.MyInterface.vtable@$jsbridgeaccidentaloverride.SubJsType (ref $jsbridgeaccidentaloverride.MyInterface.vtable) 
+)
+(global $jsbridgeaccidentaloverride.MyInterface.vtable@$jsbridgeaccidentaloverride.SubJsType (ref $jsbridgeaccidentaloverride.MyInterface.vtable)
  (struct.new $jsbridgeaccidentaloverride.MyInterface.vtable
   (ref.func $m_bar__int__int@jsbridgeaccidentaloverride.SubJsType)
   (ref.func $m_foo__int__int@jsbridgeaccidentaloverride.MyJsType)
  )
+)
+(global $jsbridgeaccidentaloverride.SubJsType.itable (ref $jsbridgeaccidentaloverride.SubJsType.itable)
+ (struct.new $jsbridgeaccidentaloverride.SubJsType.itable
+   (global.get $jsbridgeaccidentaloverride.OtherInterface.vtable@$jsbridgeaccidentaloverride.SubJsType)
+   (global.get $jsbridgeaccidentaloverride.MyInterface.vtable@$jsbridgeaccidentaloverride.SubJsType)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
  )
-(global $jsbridgeaccidentaloverride.SubJsType.itable (ref $jsbridgeaccidentaloverride.SubJsType.itable) (struct.new $jsbridgeaccidentaloverride.SubJsType.itable
-  (global.get $jsbridgeaccidentaloverride.OtherInterface.vtable@$jsbridgeaccidentaloverride.SubJsType)
-  (global.get $jsbridgeaccidentaloverride.MyInterface.vtable@$jsbridgeaccidentaloverride.SubJsType)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
+)
 
 ;;; Code for jsbridgeaccidentaloverride.Main [static fields]
-(global $f_$initialized__jsbridgeaccidentaloverride_Main (mut i32) (i32.const 0))
-(global $f_$class__jsbridgeaccidentaloverride_Main (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|jsbridgeacci...|__jsbridgeaccidentaloverride_Main (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__jsbridgeaccidentaloverride_Main (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__jsbridgeaccidentaloverride_Main (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|jsbridgeacci...|__jsbridgeaccidentaloverride_Main (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for jsbridgeaccidentaloverride.OtherInterface [static fields]
-(global $f_$initialized__jsbridgeaccidentaloverride_OtherInterface (mut i32) (i32.const 0))
-(global $f_$class__jsbridgeaccidentaloverride_OtherInterface (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|jsbridgeacci...|__jsbridgeaccidentaloverride_OtherInterface (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__jsbridgeaccidentaloverride_OtherInterface (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__jsbridgeaccidentaloverride_OtherInterface (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|jsbridgeacci...|__jsbridgeaccidentaloverride_OtherInterface (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for jsbridgeaccidentaloverride.MyJsType [static fields]
-(global $f_$initialized__jsbridgeaccidentaloverride_MyJsType (mut i32) (i32.const 0))
-(global $f_$class__jsbridgeaccidentaloverride_MyJsType (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|jsbridgeacci...|__jsbridgeaccidentaloverride_MyJsType (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__jsbridgeaccidentaloverride_MyJsType (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__jsbridgeaccidentaloverride_MyJsType (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|jsbridgeacci...|__jsbridgeaccidentaloverride_MyJsType (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for jsbridgeaccidentaloverride.MyInterface [static fields]
-(global $f_$initialized__jsbridgeaccidentaloverride_MyInterface (mut i32) (i32.const 0))
-(global $f_$class__jsbridgeaccidentaloverride_MyInterface (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|jsbridgeacci...|__jsbridgeaccidentaloverride_MyInterface (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__jsbridgeaccidentaloverride_MyInterface (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__jsbridgeaccidentaloverride_MyInterface (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|jsbridgeacci...|__jsbridgeaccidentaloverride_MyInterface (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for jsbridgeaccidentaloverride.SubJsType [static fields]
-(global $f_$initialized__jsbridgeaccidentaloverride_SubJsType (mut i32) (i32.const 0))
-(global $f_$class__jsbridgeaccidentaloverride_SubJsType (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|jsbridgeacci...|__jsbridgeaccidentaloverride_SubJsType (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__jsbridgeaccidentaloverride_SubJsType (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__jsbridgeaccidentaloverride_SubJsType (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|jsbridgeacci...|__jsbridgeaccidentaloverride_SubJsType (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for jsbridgeaccidentaloverride.OtherInterface [methods]
 

@@ -437,16 +437,23 @@ public class WasmOutputsGenerator {
 
       if (field.isCompileTimeConstant()) {
         builder.append(
-            format(" %s ", environment.getWasmType(field.getDescriptor().getTypeDescriptor())));
+            format(" %s", environment.getWasmType(field.getDescriptor().getTypeDescriptor())));
+        builder.indent();
+        builder.newLine();
         ExpressionTranspiler.render(field.getInitializer(), builder, environment);
+        builder.unindent();
       } else {
         builder.append(
             format(
-                " (mut %s) ", environment.getWasmType(field.getDescriptor().getTypeDescriptor())));
+                " (mut %s)", environment.getWasmType(field.getDescriptor().getTypeDescriptor())));
+        builder.indent();
+        builder.newLine();
         ExpressionTranspiler.render(
             field.getDescriptor().getTypeDescriptor().getDefaultValue(), builder, environment);
+        builder.unindent();
       }
 
+      builder.newLine();
       builder.append(")");
     }
     emitEndCodeComment(type, "static fields");
@@ -668,7 +675,13 @@ public class WasmOutputsGenerator {
 
     // Emit an empty itable that will be used for types that don't implement any interface.
     builder.newLine();
-    builder.append("(global $itable.empty (ref $itable) (struct.new_default $itable))");
+    builder.append("(global $itable.empty (ref $itable)");
+    builder.indent();
+    builder.newLine();
+    builder.append("(struct.new_default $itable)");
+    builder.unindent();
+    builder.newLine();
+    builder.append(")");
 
     // Populate all vtables.
     library
@@ -725,24 +738,27 @@ public class WasmOutputsGenerator {
         .filter(Objects::nonNull)
         .forEach(
             i -> {
+              builder.newLine();
               builder.append(
                   format(
-                      "(global %s (ref %s) ",
+                      "(global %s (ref %s)",
                       environment.getWasmInterfaceVtableGlobalName(i, typeDeclaration),
                       environment.getWasmVtableTypeName(i)));
               builder.indent();
               initializeInterfaceVtable(wasmTypeLayout, i);
-              builder.newLine();
               builder.unindent();
+              builder.newLine();
               builder.append(")");
             });
     builder.newLine();
     builder.append(
         format(
-            "(global %s (ref %s) (struct.new %s",
+            "(global %s (ref %s)",
             environment.getWasmItableGlobalName(typeDeclaration),
-            environment.getWasmItableTypeName(typeDeclaration),
             environment.getWasmItableTypeName(typeDeclaration)));
+    builder.indent();
+    builder.newLine();
+    builder.append(format("(struct.new %s", environment.getWasmItableTypeName(typeDeclaration)));
     builder.indent();
     stream(itableSlots)
         .forEach(
@@ -757,9 +773,12 @@ public class WasmOutputsGenerator {
                       " (global.get %s)",
                       environment.getWasmInterfaceVtableGlobalName(i, typeDeclaration)));
             });
-    builder.newLine();
-    builder.append("))");
     builder.unindent();
+    builder.newLine();
+    builder.append(")");
+    builder.unindent();
+    builder.newLine();
+    builder.append(")");
     emitEndCodeComment(typeDeclaration, "itable.init");
   }
 
@@ -922,10 +941,14 @@ public class WasmOutputsGenerator {
     builder.newLine();
     builder.append(
         format(
-            "(global %s (ref %s) (array.new_default %s (i32.const 0)))",
-            environment.getWasmEmptyArrayGlobalName(arrayTypeDescriptor),
-            wasmArrayTypeName,
-            wasmArrayTypeName));
+            "(global %s (ref %s)",
+            environment.getWasmEmptyArrayGlobalName(arrayTypeDescriptor), wasmArrayTypeName));
+    builder.indent();
+    builder.newLine();
+    builder.append(format("(array.new_default %s (i32.const 0))", wasmArrayTypeName));
+    builder.unindent();
+    builder.newLine();
+    builder.append(")");
     builder.newLine();
   }
 

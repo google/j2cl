@@ -72,28 +72,33 @@
 )
 
 ;;; Code for interfacejsbridge.InterfaceImpl [itable.init]
-(global $interfacejsbridge.SubInterface.vtable@$interfacejsbridge.InterfaceImpl (ref $interfacejsbridge.SubInterface.vtable) 
+
+(global $interfacejsbridge.SubInterface.vtable@$interfacejsbridge.InterfaceImpl (ref $interfacejsbridge.SubInterface.vtable)
  (struct.new $interfacejsbridge.SubInterface.vtable
   (ref.func $m_foo__int__int@interfacejsbridge.InterfaceImpl)
  )
- )(global $interfacejsbridge.MyJsInterface.vtable@$interfacejsbridge.InterfaceImpl (ref $interfacejsbridge.MyJsInterface.vtable) 
+)
+(global $interfacejsbridge.MyJsInterface.vtable@$interfacejsbridge.InterfaceImpl (ref $interfacejsbridge.MyJsInterface.vtable)
  (struct.new $interfacejsbridge.MyJsInterface.vtable
   (ref.func $m_foo__int__int@interfacejsbridge.InterfaceImpl)
  )
- )(global $interfacejsbridge.MyInterface.vtable@$interfacejsbridge.InterfaceImpl (ref $interfacejsbridge.MyInterface.vtable) 
+)
+(global $interfacejsbridge.MyInterface.vtable@$interfacejsbridge.InterfaceImpl (ref $interfacejsbridge.MyInterface.vtable)
  (struct.new $interfacejsbridge.MyInterface.vtable
   (ref.func $m_foo__int__int@interfacejsbridge.InterfaceImpl)
  )
+)
+(global $interfacejsbridge.InterfaceImpl.itable (ref $interfacejsbridge.InterfaceImpl.itable)
+ (struct.new $interfacejsbridge.InterfaceImpl.itable
+   (global.get $interfacejsbridge.SubInterface.vtable@$interfacejsbridge.InterfaceImpl)
+   (global.get $interfacejsbridge.MyJsInterface.vtable@$interfacejsbridge.InterfaceImpl)
+   (global.get $interfacejsbridge.MyInterface.vtable@$interfacejsbridge.InterfaceImpl)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
  )
-(global $interfacejsbridge.InterfaceImpl.itable (ref $interfacejsbridge.InterfaceImpl.itable) (struct.new $interfacejsbridge.InterfaceImpl.itable
-  (global.get $interfacejsbridge.SubInterface.vtable@$interfacejsbridge.InterfaceImpl)
-  (global.get $interfacejsbridge.MyJsInterface.vtable@$interfacejsbridge.InterfaceImpl)
-  (global.get $interfacejsbridge.MyInterface.vtable@$interfacejsbridge.InterfaceImpl)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
+)
 
 ;;; Code for interfacejsbridge.Main [vtable.init]
 (global $interfacejsbridge.Main.vtable (ref $interfacejsbridge.Main.vtable)
@@ -108,29 +113,59 @@
 )
 
 ;;; Code for interfacejsbridge.MyJsInterface [static fields]
-(global $f_$initialized__interfacejsbridge_MyJsInterface (mut i32) (i32.const 0))
-(global $f_$class__interfacejsbridge_MyJsInterface (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|interfacejsb...|__interfacejsbridge_MyJsInterface (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__interfacejsbridge_MyJsInterface (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__interfacejsbridge_MyJsInterface (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|interfacejsb...|__interfacejsbridge_MyJsInterface (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for interfacejsbridge.MyInterface [static fields]
-(global $f_$initialized__interfacejsbridge_MyInterface (mut i32) (i32.const 0))
-(global $f_$class__interfacejsbridge_MyInterface (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|interfacejsb...|__interfacejsbridge_MyInterface (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__interfacejsbridge_MyInterface (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__interfacejsbridge_MyInterface (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|interfacejsb...|__interfacejsbridge_MyInterface (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for interfacejsbridge.SubInterface [static fields]
-(global $f_$initialized__interfacejsbridge_SubInterface (mut i32) (i32.const 0))
-(global $f_$class__interfacejsbridge_SubInterface (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|interfacejsb...|__interfacejsbridge_SubInterface (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__interfacejsbridge_SubInterface (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__interfacejsbridge_SubInterface (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|interfacejsb...|__interfacejsbridge_SubInterface (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for interfacejsbridge.InterfaceImpl [static fields]
-(global $f_$initialized__interfacejsbridge_InterfaceImpl (mut i32) (i32.const 0))
-(global $f_$class__interfacejsbridge_InterfaceImpl (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|interfacejsb...|__interfacejsbridge_InterfaceImpl (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__interfacejsbridge_InterfaceImpl (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__interfacejsbridge_InterfaceImpl (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|interfacejsb...|__interfacejsbridge_InterfaceImpl (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for interfacejsbridge.Main [static fields]
-(global $f_$initialized__interfacejsbridge_Main (mut i32) (i32.const 0))
-(global $f_$class__interfacejsbridge_Main (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|interfacejsb...|__interfacejsbridge_Main (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__interfacejsbridge_Main (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__interfacejsbridge_Main (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|interfacejsb...|__interfacejsbridge_Main (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for interfacejsbridge.MyJsInterface [methods]
 

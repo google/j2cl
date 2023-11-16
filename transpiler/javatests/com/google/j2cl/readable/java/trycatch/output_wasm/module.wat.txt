@@ -86,31 +86,48 @@
 )
 
 ;;; Code for trycatch.TryCatch.ClosableThing [itable.init]
-(global $java.lang.AutoCloseable.vtable@$trycatch.TryCatch.ClosableThing (ref $java.lang.AutoCloseable.vtable) 
+
+(global $java.lang.AutoCloseable.vtable@$trycatch.TryCatch.ClosableThing (ref $java.lang.AutoCloseable.vtable)
  (struct.new $java.lang.AutoCloseable.vtable
   (ref.func $m_close__void@trycatch.TryCatch.ClosableThing)
  )
+)
+(global $trycatch.TryCatch.ClosableThing.itable (ref $trycatch.TryCatch.ClosableThing.itable)
+ (struct.new $trycatch.TryCatch.ClosableThing.itable
+   (global.get $java.lang.AutoCloseable.vtable@$trycatch.TryCatch.ClosableThing)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
  )
-(global $trycatch.TryCatch.ClosableThing.itable (ref $trycatch.TryCatch.ClosableThing.itable) (struct.new $trycatch.TryCatch.ClosableThing.itable
-  (global.get $java.lang.AutoCloseable.vtable@$trycatch.TryCatch.ClosableThing)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
+)
 
 ;;; Code for trycatch.TryCatch [static fields]
-(global $f_closableThing__trycatch_TryCatch_ (mut (ref null $trycatch.TryCatch.ClosableThing)) (ref.null $trycatch.TryCatch.ClosableThing))
-(global $f_$initialized__trycatch_TryCatch (mut i32) (i32.const 0))
-(global $f_$class__trycatch_TryCatch (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|trycatch.Try...|__trycatch_TryCatch (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_closableThing__trycatch_TryCatch_ (mut (ref null $trycatch.TryCatch.ClosableThing))
+ (ref.null $trycatch.TryCatch.ClosableThing)
+)
+(global $f_$initialized__trycatch_TryCatch (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__trycatch_TryCatch (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|trycatch.Try...|__trycatch_TryCatch (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for trycatch.TryCatch.ClosableThing [static fields]
-(global $f_$initialized__trycatch_TryCatch_ClosableThing (mut i32) (i32.const 0))
-(global $f_$class__trycatch_TryCatch_ClosableThing (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|trycatch.Try...|__trycatch_TryCatch_ClosableThing (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__trycatch_TryCatch_ClosableThing (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__trycatch_TryCatch_ClosableThing (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|trycatch.Try...|__trycatch_TryCatch_ClosableThing (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for trycatch.TryCatch [methods]
 

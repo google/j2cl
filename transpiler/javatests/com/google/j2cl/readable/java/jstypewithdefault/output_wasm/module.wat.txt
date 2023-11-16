@@ -43,30 +43,45 @@
 )
 
 ;;; Code for jstypewithdefault.SomeJsType [itable.init]
-(global $jstypewithdefault.Interface.vtable@$jstypewithdefault.SomeJsType (ref $jstypewithdefault.Interface.vtable) 
+
+(global $jstypewithdefault.Interface.vtable@$jstypewithdefault.SomeJsType (ref $jstypewithdefault.Interface.vtable)
  (struct.new $jstypewithdefault.Interface.vtable
   (ref.func $m_defaultMethod__void@jstypewithdefault.SomeJsType)
  )
+)
+(global $jstypewithdefault.SomeJsType.itable (ref $jstypewithdefault.SomeJsType.itable)
+ (struct.new $jstypewithdefault.SomeJsType.itable
+   (global.get $jstypewithdefault.Interface.vtable@$jstypewithdefault.SomeJsType)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
  )
-(global $jstypewithdefault.SomeJsType.itable (ref $jstypewithdefault.SomeJsType.itable) (struct.new $jstypewithdefault.SomeJsType.itable
-  (global.get $jstypewithdefault.Interface.vtable@$jstypewithdefault.SomeJsType)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
+)
 
 ;;; Code for jstypewithdefault.SomeJsType [static fields]
-(global $f_$initialized__jstypewithdefault_SomeJsType (mut i32) (i32.const 0))
-(global $f_$class__jstypewithdefault_SomeJsType (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|jstypewithde...|__jstypewithdefault_SomeJsType (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__jstypewithdefault_SomeJsType (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__jstypewithdefault_SomeJsType (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|jstypewithde...|__jstypewithdefault_SomeJsType (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for jstypewithdefault.Interface [static fields]
-(global $f_$initialized__jstypewithdefault_Interface (mut i32) (i32.const 0))
-(global $f_$class__jstypewithdefault_Interface (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|jstypewithde...|__jstypewithdefault_Interface (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__jstypewithdefault_Interface (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__jstypewithdefault_Interface (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|jstypewithde...|__jstypewithdefault_Interface (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for jstypewithdefault.Interface [methods]
 

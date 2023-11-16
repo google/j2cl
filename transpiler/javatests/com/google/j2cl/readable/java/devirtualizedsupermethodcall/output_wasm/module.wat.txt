@@ -80,19 +80,22 @@
 )
 
 ;;; Code for devirtualizedsupermethodcall.SubNumber [itable.init]
-(global $java.io.Serializable.vtable@$devirtualizedsupermethodcall.SubNumber (ref $java.io.Serializable.vtable) 
+
+(global $java.io.Serializable.vtable@$devirtualizedsupermethodcall.SubNumber (ref $java.io.Serializable.vtable)
  (struct.new $java.io.Serializable.vtable
  )
+)
+(global $devirtualizedsupermethodcall.SubNumber.itable (ref $devirtualizedsupermethodcall.SubNumber.itable)
+ (struct.new $devirtualizedsupermethodcall.SubNumber.itable
+   (global.get $java.io.Serializable.vtable@$devirtualizedsupermethodcall.SubNumber)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
  )
-(global $devirtualizedsupermethodcall.SubNumber.itable (ref $devirtualizedsupermethodcall.SubNumber.itable) (struct.new $devirtualizedsupermethodcall.SubNumber.itable
-  (global.get $java.io.Serializable.vtable@$devirtualizedsupermethodcall.SubNumber)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
+)
 
 ;;; Code for devirtualizedsupermethodcall.FooCallsSuperObjectMethod [vtable.init]
 (global $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable (ref $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable)
@@ -118,19 +121,37 @@
 )
 
 ;;; Code for devirtualizedsupermethodcall.SubNumber [static fields]
-(global $f_$initialized__devirtualizedsupermethodcall_SubNumber (mut i32) (i32.const 0))
-(global $f_$class__devirtualizedsupermethodcall_SubNumber (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|devirtualize...|__devirtualizedsupermethodcall_SubNumber (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__devirtualizedsupermethodcall_SubNumber (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__devirtualizedsupermethodcall_SubNumber (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|devirtualize...|__devirtualizedsupermethodcall_SubNumber (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for devirtualizedsupermethodcall.FooCallsSuperObjectMethod [static fields]
-(global $f_$initialized__devirtualizedsupermethodcall_FooCallsSuperObjectMethod (mut i32) (i32.const 0))
-(global $f_$class__devirtualizedsupermethodcall_FooCallsSuperObjectMethod (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|devirtualize...|__devirtualizedsupermethodcall_FooCallsSuperObjectMethod (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__devirtualizedsupermethodcall_FooCallsSuperObjectMethod (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__devirtualizedsupermethodcall_FooCallsSuperObjectMethod (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|devirtualize...|__devirtualizedsupermethodcall_FooCallsSuperObjectMethod (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for devirtualizedsupermethodcall.Main [static fields]
-(global $f_$initialized__devirtualizedsupermethodcall_Main (mut i32) (i32.const 0))
-(global $f_$class__devirtualizedsupermethodcall_Main (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|devirtualize...|__devirtualizedsupermethodcall_Main (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__devirtualizedsupermethodcall_Main (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__devirtualizedsupermethodcall_Main (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|devirtualize...|__devirtualizedsupermethodcall_Main (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for devirtualizedsupermethodcall.FooCallsSuperObjectMethod [methods]
 

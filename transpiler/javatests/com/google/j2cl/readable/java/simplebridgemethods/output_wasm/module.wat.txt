@@ -175,20 +175,23 @@
 )
 
 ;;; Code for simplebridgemethods.Task [itable.init]
-(global $simplebridgemethods.Callable.vtable@$simplebridgemethods.Task (ref $simplebridgemethods.Callable.vtable) 
+
+(global $simplebridgemethods.Callable.vtable@$simplebridgemethods.Task (ref $simplebridgemethods.Callable.vtable)
  (struct.new $simplebridgemethods.Callable.vtable
   (ref.func $m_call__java_lang_Object__void@simplebridgemethods.Task)
  )
+)
+(global $simplebridgemethods.Task.itable (ref $simplebridgemethods.Task.itable)
+ (struct.new $simplebridgemethods.Task.itable
+   (global.get $simplebridgemethods.Callable.vtable@$simplebridgemethods.Task)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
  )
-(global $simplebridgemethods.Task.itable (ref $simplebridgemethods.Task.itable) (struct.new $simplebridgemethods.Task.itable
-  (global.get $simplebridgemethods.Callable.vtable@$simplebridgemethods.Task)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
+)
 
 ;;; Code for simplebridgemethods.AnotherTask [vtable.init]
 (global $simplebridgemethods.AnotherTask.vtable (ref $simplebridgemethods.AnotherTask.vtable)
@@ -204,20 +207,23 @@
 )
 
 ;;; Code for simplebridgemethods.AnotherTask [itable.init]
-(global $simplebridgemethods.Callable.vtable@$simplebridgemethods.AnotherTask (ref $simplebridgemethods.Callable.vtable) 
+
+(global $simplebridgemethods.Callable.vtable@$simplebridgemethods.AnotherTask (ref $simplebridgemethods.Callable.vtable)
  (struct.new $simplebridgemethods.Callable.vtable
   (ref.func $m_call__java_lang_Object__void@simplebridgemethods.AnotherTask)
  )
+)
+(global $simplebridgemethods.AnotherTask.itable (ref $simplebridgemethods.AnotherTask.itable)
+ (struct.new $simplebridgemethods.AnotherTask.itable
+   (global.get $simplebridgemethods.Callable.vtable@$simplebridgemethods.AnotherTask)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
  )
-(global $simplebridgemethods.AnotherTask.itable (ref $simplebridgemethods.AnotherTask.itable) (struct.new $simplebridgemethods.AnotherTask.itable
-  (global.get $simplebridgemethods.Callable.vtable@$simplebridgemethods.AnotherTask)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
+)
 
 ;;; Code for simplebridgemethods.SimpleBridgeMethods [vtable.init]
 (global $simplebridgemethods.SimpleBridgeMethods.vtable (ref $simplebridgemethods.SimpleBridgeMethods.vtable)
@@ -231,39 +237,81 @@
 )
 
 ;;; Code for simplebridgemethods.Superclass [static fields]
-(global $f_$initialized__simplebridgemethods_Superclass (mut i32) (i32.const 0))
-(global $f_$class__simplebridgemethods_Superclass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|simplebridge...|__simplebridgemethods_Superclass (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__simplebridgemethods_Superclass (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__simplebridgemethods_Superclass (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|simplebridge...|__simplebridgemethods_Superclass (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for simplebridgemethods.Subclass [static fields]
-(global $f_$initialized__simplebridgemethods_Subclass (mut i32) (i32.const 0))
-(global $f_$class__simplebridgemethods_Subclass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|simplebridge...|__simplebridgemethods_Subclass (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__simplebridgemethods_Subclass (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__simplebridgemethods_Subclass (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|simplebridge...|__simplebridgemethods_Subclass (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for simplebridgemethods.AnotherSubclass [static fields]
-(global $f_$initialized__simplebridgemethods_AnotherSubclass (mut i32) (i32.const 0))
-(global $f_$class__simplebridgemethods_AnotherSubclass (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|simplebridge...|__simplebridgemethods_AnotherSubclass (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__simplebridgemethods_AnotherSubclass (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__simplebridgemethods_AnotherSubclass (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|simplebridge...|__simplebridgemethods_AnotherSubclass (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for simplebridgemethods.Callable [static fields]
-(global $f_$initialized__simplebridgemethods_Callable (mut i32) (i32.const 0))
-(global $f_$class__simplebridgemethods_Callable (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|simplebridge...|__simplebridgemethods_Callable (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__simplebridgemethods_Callable (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__simplebridgemethods_Callable (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|simplebridge...|__simplebridgemethods_Callable (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for simplebridgemethods.Task [static fields]
-(global $f_$initialized__simplebridgemethods_Task (mut i32) (i32.const 0))
-(global $f_$class__simplebridgemethods_Task (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|simplebridge...|__simplebridgemethods_Task (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__simplebridgemethods_Task (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__simplebridgemethods_Task (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|simplebridge...|__simplebridgemethods_Task (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for simplebridgemethods.AnotherTask [static fields]
-(global $f_$initialized__simplebridgemethods_AnotherTask (mut i32) (i32.const 0))
-(global $f_$class__simplebridgemethods_AnotherTask (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|simplebridge...|__simplebridgemethods_AnotherTask (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__simplebridgemethods_AnotherTask (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__simplebridgemethods_AnotherTask (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|simplebridge...|__simplebridgemethods_AnotherTask (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for simplebridgemethods.SimpleBridgeMethods [static fields]
-(global $f_$initialized__simplebridgemethods_SimpleBridgeMethods (mut i32) (i32.const 0))
-(global $f_$class__simplebridgemethods_SimpleBridgeMethods (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|simplebridge...|__simplebridgemethods_SimpleBridgeMethods (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__simplebridgemethods_SimpleBridgeMethods (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__simplebridgemethods_SimpleBridgeMethods (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|simplebridge...|__simplebridgemethods_SimpleBridgeMethods (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for simplebridgemethods.Callable [methods]
 

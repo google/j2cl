@@ -70,19 +70,22 @@
 )
 
 ;;; Code for implementsgenericinterface.GenericInterfaceGenericImpl [itable.init]
-(global $implementsgenericinterface.GenericInterface.vtable@$implementsgenericinterface.GenericInterfaceGenericImpl (ref $implementsgenericinterface.GenericInterface.vtable) 
+
+(global $implementsgenericinterface.GenericInterface.vtable@$implementsgenericinterface.GenericInterfaceGenericImpl (ref $implementsgenericinterface.GenericInterface.vtable)
  (struct.new $implementsgenericinterface.GenericInterface.vtable
  )
+)
+(global $implementsgenericinterface.GenericInterfaceGenericImpl.itable (ref $implementsgenericinterface.GenericInterfaceGenericImpl.itable)
+ (struct.new $implementsgenericinterface.GenericInterfaceGenericImpl.itable
+   (global.get $implementsgenericinterface.GenericInterface.vtable@$implementsgenericinterface.GenericInterfaceGenericImpl)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
  )
-(global $implementsgenericinterface.GenericInterfaceGenericImpl.itable (ref $implementsgenericinterface.GenericInterfaceGenericImpl.itable) (struct.new $implementsgenericinterface.GenericInterfaceGenericImpl.itable
-  (global.get $implementsgenericinterface.GenericInterface.vtable@$implementsgenericinterface.GenericInterfaceGenericImpl)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
+)
 
 ;;; Code for implementsgenericinterface.GenericInterfaceImpl [vtable.init]
 (global $implementsgenericinterface.GenericInterfaceImpl.vtable (ref $implementsgenericinterface.GenericInterfaceImpl.vtable)
@@ -96,39 +99,66 @@
 )
 
 ;;; Code for implementsgenericinterface.GenericInterfaceImpl [itable.init]
-(global $implementsgenericinterface.GenericInterface.vtable@$implementsgenericinterface.GenericInterfaceImpl (ref $implementsgenericinterface.GenericInterface.vtable) 
+
+(global $implementsgenericinterface.GenericInterface.vtable@$implementsgenericinterface.GenericInterfaceImpl (ref $implementsgenericinterface.GenericInterface.vtable)
  (struct.new $implementsgenericinterface.GenericInterface.vtable
  )
+)
+(global $implementsgenericinterface.GenericInterfaceImpl.itable (ref $implementsgenericinterface.GenericInterfaceImpl.itable)
+ (struct.new $implementsgenericinterface.GenericInterfaceImpl.itable
+   (global.get $implementsgenericinterface.GenericInterface.vtable@$implementsgenericinterface.GenericInterfaceImpl)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
  )
-(global $implementsgenericinterface.GenericInterfaceImpl.itable (ref $implementsgenericinterface.GenericInterfaceImpl.itable) (struct.new $implementsgenericinterface.GenericInterfaceImpl.itable
-  (global.get $implementsgenericinterface.GenericInterface.vtable@$implementsgenericinterface.GenericInterfaceImpl)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
+)
 
 ;;; Code for implementsgenericinterface.GenericInterface [static fields]
-(global $f_$initialized__implementsgenericinterface_GenericInterface (mut i32) (i32.const 0))
-(global $f_$class__implementsgenericinterface_GenericInterface (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|implementsge...|__implementsgenericinterface_GenericInterface (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__implementsgenericinterface_GenericInterface (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__implementsgenericinterface_GenericInterface (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|implementsge...|__implementsgenericinterface_GenericInterface (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for implementsgenericinterface.GenericSubInterface [static fields]
-(global $f_$initialized__implementsgenericinterface_GenericSubInterface (mut i32) (i32.const 0))
-(global $f_$class__implementsgenericinterface_GenericSubInterface (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|implementsge...|__implementsgenericinterface_GenericSubInterface (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__implementsgenericinterface_GenericSubInterface (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__implementsgenericinterface_GenericSubInterface (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|implementsge...|__implementsgenericinterface_GenericSubInterface (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for implementsgenericinterface.GenericInterfaceGenericImpl [static fields]
-(global $f_$initialized__implementsgenericinterface_GenericInterfaceGenericImpl (mut i32) (i32.const 0))
-(global $f_$class__implementsgenericinterface_GenericInterfaceGenericImpl (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|implementsge...|__implementsgenericinterface_GenericInterfaceGenericImpl (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__implementsgenericinterface_GenericInterfaceGenericImpl (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__implementsgenericinterface_GenericInterfaceGenericImpl (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|implementsge...|__implementsgenericinterface_GenericInterfaceGenericImpl (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for implementsgenericinterface.GenericInterfaceImpl [static fields]
-(global $f_$initialized__implementsgenericinterface_GenericInterfaceImpl (mut i32) (i32.const 0))
-(global $f_$class__implementsgenericinterface_GenericInterfaceImpl (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|implementsge...|__implementsgenericinterface_GenericInterfaceImpl (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__implementsgenericinterface_GenericInterfaceImpl (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__implementsgenericinterface_GenericInterfaceImpl (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|implementsge...|__implementsgenericinterface_GenericInterfaceImpl (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for implementsgenericinterface.GenericInterface [methods]
 

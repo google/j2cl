@@ -95,20 +95,23 @@
 )
 
 ;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay.1 [itable.init]
-(global $jsoverlay.Main.Intf.vtable@$jsoverlay.Main.NativeJsTypeWithOverlay.1 (ref $jsoverlay.Main.Intf.vtable) 
+
+(global $jsoverlay.Main.Intf.vtable@$jsoverlay.Main.NativeJsTypeWithOverlay.1 (ref $jsoverlay.Main.Intf.vtable)
  (struct.new $jsoverlay.Main.Intf.vtable
   (ref.func $m_run__void@jsoverlay.Main.NativeJsTypeWithOverlay.1)
  )
+)
+(global $jsoverlay.Main.NativeJsTypeWithOverlay.1.itable (ref $jsoverlay.Main.NativeJsTypeWithOverlay.1.itable)
+ (struct.new $jsoverlay.Main.NativeJsTypeWithOverlay.1.itable
+   (global.get $jsoverlay.Main.Intf.vtable@$jsoverlay.Main.NativeJsTypeWithOverlay.1)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
  )
-(global $jsoverlay.Main.NativeJsTypeWithOverlay.1.itable (ref $jsoverlay.Main.NativeJsTypeWithOverlay.1.itable) (struct.new $jsoverlay.Main.NativeJsTypeWithOverlay.1.itable
-  (global.get $jsoverlay.Main.Intf.vtable@$jsoverlay.Main.NativeJsTypeWithOverlay.1)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
+)
 
 ;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay [vtable.init]
 (global $jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay.vtable (ref $jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay.vtable)
@@ -118,36 +121,72 @@
 )
 
 ;;; Code for jsoverlay.Main [static fields]
-(global $f_$initialized__jsoverlay_Main (mut i32) (i32.const 0))
-(global $f_$class__jsoverlay_Main (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|10|__jsoverlay_Main (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
-(global $f_$string_|jsoverlay.Main|__jsoverlay_Main (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__jsoverlay_Main (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__jsoverlay_Main (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|10|__jsoverlay_Main (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
+(global $f_$string_|jsoverlay.Main|__jsoverlay_Main (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for jsoverlay.Main.NativeJsTypeInterfaceWithOverlay [static fields]
 
 ;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay.1 [static fields]
-(global $f_$initialized__jsoverlay_Main_NativeJsTypeWithOverlay_1 (mut i32) (i32.const 0))
-(global $f_$class__jsoverlay_Main_NativeJsTypeWithOverlay_1 (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|jsoverlay.Ma...|__jsoverlay_Main_NativeJsTypeWithOverlay_1 (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__jsoverlay_Main_NativeJsTypeWithOverlay_1 (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__jsoverlay_Main_NativeJsTypeWithOverlay_1 (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|jsoverlay.Ma...|__jsoverlay_Main_NativeJsTypeWithOverlay_1 (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay [static fields]
 
 ;;; Code for jsoverlay.Main.Intf [static fields]
-(global $f_$initialized__jsoverlay_Main_Intf (mut i32) (i32.const 0))
-(global $f_$class__jsoverlay_Main_Intf (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|jsoverlay.Ma...|__jsoverlay_Main_Intf (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__jsoverlay_Main_Intf (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__jsoverlay_Main_Intf (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|jsoverlay.Ma...|__jsoverlay_Main_Intf (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay [static fields]
-(global $f_staticField__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
-(global $f_$initialized__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay (mut i32) (i32.const 0))
-(global $f_$class__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|jsoverlay.Ma...|__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_staticField__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay (mut (ref null $java.lang.Object))
+ (ref.null $java.lang.Object)
+)
+(global $f_$initialized__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|jsoverlay.Ma...|__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay [static fields]
-(global $f_staticField__jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
-(global $f_$initialized__jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay (mut i32) (i32.const 0))
-(global $f_$class__jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|jsoverlay.Ma...|__jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_staticField__jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay (mut (ref null $java.lang.Object))
+ (ref.null $java.lang.Object)
+)
+(global $f_$initialized__jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|jsoverlay.Ma...|__jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for jsoverlay.Main.NativeJsTypeInterfaceWithOverlay [methods]
 

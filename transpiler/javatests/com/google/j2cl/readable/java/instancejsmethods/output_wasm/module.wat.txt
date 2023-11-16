@@ -130,20 +130,23 @@
 )
 
 ;;; Code for instancejsmethods.Child [itable.init]
-(global $instancejsmethods.MyInterface.vtable@$instancejsmethods.Child (ref $instancejsmethods.MyInterface.vtable) 
+
+(global $instancejsmethods.MyInterface.vtable@$instancejsmethods.Child (ref $instancejsmethods.MyInterface.vtable)
  (struct.new $instancejsmethods.MyInterface.vtable
   (ref.func $m_intfFoo__int@instancejsmethods.Child)
  )
+)
+(global $instancejsmethods.Child.itable (ref $instancejsmethods.Child.itable)
+ (struct.new $instancejsmethods.Child.itable
+   (global.get $instancejsmethods.MyInterface.vtable@$instancejsmethods.Child)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
  )
-(global $instancejsmethods.Child.itable (ref $instancejsmethods.Child.itable) (struct.new $instancejsmethods.Child.itable
-  (global.get $instancejsmethods.MyInterface.vtable@$instancejsmethods.Child)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
+)
 
 ;;; Code for instancejsmethods.Main [vtable.init]
 (global $instancejsmethods.Main.vtable (ref $instancejsmethods.Main.vtable)
@@ -158,29 +161,59 @@
 )
 
 ;;; Code for instancejsmethods.MyInterface [static fields]
-(global $f_$initialized__instancejsmethods_MyInterface (mut i32) (i32.const 0))
-(global $f_$class__instancejsmethods_MyInterface (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|instancejsme...|__instancejsmethods_MyInterface (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__instancejsmethods_MyInterface (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__instancejsmethods_MyInterface (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|instancejsme...|__instancejsmethods_MyInterface (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for instancejsmethods.SuperParent [static fields]
-(global $f_$initialized__instancejsmethods_SuperParent (mut i32) (i32.const 0))
-(global $f_$class__instancejsmethods_SuperParent (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|instancejsme...|__instancejsmethods_SuperParent (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__instancejsmethods_SuperParent (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__instancejsmethods_SuperParent (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|instancejsme...|__instancejsmethods_SuperParent (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for instancejsmethods.Parent [static fields]
-(global $f_$initialized__instancejsmethods_Parent (mut i32) (i32.const 0))
-(global $f_$class__instancejsmethods_Parent (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|instancejsme...|__instancejsmethods_Parent (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__instancejsmethods_Parent (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__instancejsmethods_Parent (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|instancejsme...|__instancejsmethods_Parent (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for instancejsmethods.Child [static fields]
-(global $f_$initialized__instancejsmethods_Child (mut i32) (i32.const 0))
-(global $f_$class__instancejsmethods_Child (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|instancejsme...|__instancejsmethods_Child (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__instancejsmethods_Child (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__instancejsmethods_Child (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|instancejsme...|__instancejsmethods_Child (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for instancejsmethods.Main [static fields]
-(global $f_$initialized__instancejsmethods_Main (mut i32) (i32.const 0))
-(global $f_$class__instancejsmethods_Main (mut (ref null $java.lang.Class)) (ref.null $java.lang.Class))
-(global $f_$string_|instancejsme...|__instancejsmethods_Main (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__instancejsmethods_Main (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__instancejsmethods_Main (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|instancejsme...|__instancejsmethods_Main (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 
 ;;; Code for instancejsmethods.MyInterface [methods]
 
