@@ -33,7 +33,7 @@ public class JsMethodExample {
 
   abstract static class Base<T> {
     @JsMethod
-    public void m(T t) {}
+    void m(T t) {}
   }
 
   interface I {
@@ -43,19 +43,21 @@ public class JsMethodExample {
 
   // Regression test for b/124227197
   static class Sub extends Base<String> implements I {
-    // This should not be a JsMethod.
     public void m(String s) {}
   }
 
   @JsType
   static class SubJsType extends Base<String> {
-    // This should not be a JsMethod.
     public void m(String s) {}
   }
 
   @JsType
+  static class SubGenericsJsType<T> extends Base<T> {
+    public void m(T s) {}
+  }
+
+  @JsType
   static class SubJsTypeWithRenamedJsMethod extends Base<String> {
-    // This should not be a JsMethod.
     @JsMethod(name = "renamedM")
     public void m(String s) {}
   }

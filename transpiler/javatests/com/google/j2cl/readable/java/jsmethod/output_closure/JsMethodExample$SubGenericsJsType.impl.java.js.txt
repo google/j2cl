@@ -1,0 +1,46 @@
+goog.module('jsmethod.JsMethodExample.SubGenericsJsType$impl');
+
+const Base = goog.require('jsmethod.JsMethodExample.Base$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ * @extends {Base<T>}
+ */
+class SubGenericsJsType extends Base {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!SubGenericsJsType<T>} */
+ static $create__() {
+  SubGenericsJsType.$clinit();
+  let $instance = new SubGenericsJsType();
+  $instance.$ctor__jsmethod_JsMethodExample_SubGenericsJsType__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsmethod_JsMethodExample_SubGenericsJsType__void() {
+  this.$ctor__jsmethod_JsMethodExample_Base__void();
+ }
+ /** @override */
+ m(/** T */ s) {}
+ /** @nodts */
+ static $clinit() {
+  SubGenericsJsType.$clinit = () =>{};
+  SubGenericsJsType.$loadModules();
+  Base.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SubGenericsJsType;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(SubGenericsJsType, 'jsmethod.JsMethodExample$SubGenericsJsType');
+
+exports = SubGenericsJsType;
+
+//# sourceMappingURL=JsMethodExample$SubGenericsJsType.js.map

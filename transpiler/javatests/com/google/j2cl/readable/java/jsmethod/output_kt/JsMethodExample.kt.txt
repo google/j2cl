@@ -34,11 +34,8 @@ open class JsMethodExample {
  external open fun <T: ArrayList<String?>?> testMethod(): T
 
  abstract class Base<T> internal constructor() {
-  @ObjCName("m")
   @JsMethod
-  open fun m(
-   @ObjCName("withId") t: T
-  ) {}
+  internal open fun m_pp_jsmethod(t: T) {}
  }
 
  fun interface I {
@@ -51,17 +48,48 @@ open class JsMethodExample {
 
  open class Sub internal constructor(): JsMethodExample.Base<String?>(), JsMethodExample.I {
   open override fun m(s: String?) {}
+
+  internal open override fun m_pp_jsmethod(arg0: String?) {
+   this.m(arg0)
+  }
  }
 
  @JsType
  open class SubJsType internal constructor(): JsMethodExample.Base<String?>() {
-  open override fun m(s: String?) {}
+  @ObjCName("m")
+  public open fun m(
+   @ObjCName("withNSString") s: String?
+  ) {}
+
+  open override fun m_pp_jsmethod(arg0: String?) {
+   this.m(arg0)
+  }
+ }
+
+ @JsType
+ open class SubGenericsJsType<T> internal constructor(): JsMethodExample.Base<T>() {
+  @ObjCName("m")
+  public open fun m(
+   @ObjCName("withId") s: T
+  ) {}
+
+  open override fun m_pp_jsmethod(arg0: T) {
+   this.m(arg0)
+  }
  }
 
  @JsType
  open class SubJsTypeWithRenamedJsMethod internal constructor(): JsMethodExample.Base<String?>() {
+  @ObjCName("m")
   @JsMethod(name = "renamedM")
-  open override fun m(s: String?) {}
+  public open fun m(
+   @ObjCName("withNSString") s: String?
+  ) {}
+
+  @JsMethod(name = "renamedM")
+  open override fun m_pp_jsmethod(arg0: String?) {
+   this.m(arg0)
+  }
  }
 
  interface InterfaceWithMethod {
