@@ -167,7 +167,7 @@ public final class ExpressionTranspiler {
 
         // After the header is emitted, emit the rest of the arrow function.
         sourceBuilder.append(" =>");
-        new StatementTranspiler(sourceBuilder, environment).renderStatement(expression.getBody());
+        StatementTranspiler.render(expression.getBody(), environment, sourceBuilder);
 
         return false;
       }

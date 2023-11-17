@@ -43,31 +43,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Transforms Statements to JavaScript source strings.
- */
+/** Transforms Statements to JavaScript source strings. */
 public class StatementTranspiler {
-  SourceBuilder builder;
-  ClosureGenerationEnvironment environment;
 
-  public StatementTranspiler(SourceBuilder builder, ClosureGenerationEnvironment environment) {
-    this.builder = builder;
-    this.environment = environment;
-  }
+  public static void render(
+      Statement statement,
+      final ClosureGenerationEnvironment environment,
+      final SourceBuilder builder) {
 
-  public void renderStatements(Collection<Statement> statements) {
-    statements.forEach(
-        s -> {
-          builder.newLine();
-          renderStatement(s);
-        });
-  }
-
-  public void renderStatement(Statement statement) {
     class SourceTransformer extends AbstractVisitor {
-      private void render(Node node) {
-        node.accept(this);
-      }
 
       @Override
       public boolean enterAssertStatement(AssertStatement assertStatement) {
@@ -337,13 +321,20 @@ public class StatementTranspiler {
         return false;
       }
 
-      @Override
-      public String toString() {
-        return builder.build();
+      private void render(Node node) {
+        node.accept(this);
       }
 
       private void renderExpression(Expression expression) {
         ExpressionTranspiler.render(expression, environment, builder);
+      }
+
+      private void renderStatements(Collection<Statement> statements) {
+        statements.forEach(
+            s -> {
+              builder.newLine();
+              render(s);
+            });
       }
 
       private void renderSeparated(String separator, List<? extends Expression> expressions) {
@@ -356,6 +347,8 @@ public class StatementTranspiler {
       }
     }
 
-    statement.accept(new SourceTransformer());
+    new SourceTransformer().render(statement);
   }
+
+  private StatementTranspiler() {}
 }
