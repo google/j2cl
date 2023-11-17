@@ -70,8 +70,6 @@ open class Parent<T: Error?> internal constructor(): SuperParent<T, Number?>() {
 open class BridgeMethod: Parent<AssertionError?>(), SomeInterface<AssertionError?, Number?> {
  open override fun foo(a: AssertionError?, n: Number?) {}
 
- open override fun bar(t: Number?) {}
-
  @ObjCName("fun")
  open fun `fun`(
   @ObjCName("withNSNumber") t: Number?

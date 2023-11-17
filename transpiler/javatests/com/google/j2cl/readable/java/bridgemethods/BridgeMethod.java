@@ -48,6 +48,7 @@ public class BridgeMethod extends Parent<AssertionError>
   @Override
   public void foo(AssertionError a, Number n) {}
 
+  @J2ktIncompatible // accidental override in Kotlin
   @Override
   public void bar(Number t) {} // no bridge method for Parent.bar(T), same signature.
 

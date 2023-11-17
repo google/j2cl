@@ -1,0 +1,34 @@
+goog.module('bridgemethods.J2ktIncompatible$impl');
+
+const Annotation = goog.require('java.lang.annotation.Annotation$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @extends {Annotation}
+ */
+class J2ktIncompatible {
+ /** @nodts */
+ static $clinit() {
+  J2ktIncompatible.$clinit = () =>{};
+  J2ktIncompatible.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  Annotation.$markImplementor(ctor);
+  ctor.prototype.$implements__bridgemethods_J2ktIncompatible = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__bridgemethods_J2ktIncompatible;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+J2ktIncompatible.$markImplementor(/**@type {Function}*/ (J2ktIncompatible));
+$Util.$setClassMetadataForInterface(J2ktIncompatible, 'bridgemethods.J2ktIncompatible');
+
+exports = J2ktIncompatible;
+
+//# sourceMappingURL=J2ktIncompatible.js.map
