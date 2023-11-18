@@ -31,7 +31,7 @@ import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.WasmEntryPointBridgesCreator;
-import com.google.j2cl.transpiler.backend.wasm.WasmOutputsGenerator;
+import com.google.j2cl.transpiler.backend.wasm.WasmGeneratorStage;
 import com.google.j2cl.transpiler.frontend.common.PackageInfoCache;
 import com.google.j2cl.transpiler.frontend.jdt.JdtEnvironment;
 import com.google.j2cl.transpiler.frontend.jdt.JdtParser;
@@ -110,7 +110,7 @@ final class BazelJ2wasmExportsGenerator extends BazelWorker {
                   .flatMap(t -> t.getDeclaredMethodDescriptors().stream())
                   .collect(toImmutableList()));
 
-      var generator = new WasmOutputsGenerator(out, /* libraryInfoOutputPath= */ null, problems);
+      var generator = new WasmGeneratorStage(out, /* libraryInfoOutputPath= */ null, problems);
 
       generator.generateMethods(exportedMethods);
       problems.abortIfHasErrors();

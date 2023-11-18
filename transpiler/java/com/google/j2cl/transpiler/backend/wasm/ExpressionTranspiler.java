@@ -68,7 +68,9 @@ import java.util.List;
 final class ExpressionTranspiler {
 
   public static void renderWithUnusedResult(
-      Expression expression, SourceBuilder sourceBuilder, WasmGenerationEnvironment environment) {
+      Expression expression,
+      final SourceBuilder sourceBuilder,
+      final WasmGenerationEnvironment environment) {
     if (returnsVoid(expression)) {
       render(expression, sourceBuilder, environment);
     } else {

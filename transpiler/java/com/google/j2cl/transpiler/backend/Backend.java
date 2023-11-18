@@ -20,7 +20,7 @@ import com.google.j2cl.common.Problems;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.backend.closure.OutputGeneratorStage;
 import com.google.j2cl.transpiler.backend.kotlin.KotlinGeneratorStage;
-import com.google.j2cl.transpiler.backend.wasm.WasmOutputsGenerator;
+import com.google.j2cl.transpiler.backend.wasm.WasmGeneratorStage;
 import com.google.j2cl.transpiler.passes.AddAbstractMethodStubs;
 import com.google.j2cl.transpiler.passes.AddBridgeMethods;
 import com.google.j2cl.transpiler.passes.AddDisambiguatingSuperMethodForwardingStubs;
@@ -344,7 +344,7 @@ public enum Backend {
   WASM {
     @Override
     public void generateOutputs(BackendOptions options, Library library, Problems problems) {
-      new WasmOutputsGenerator(options.getOutput(), options.getLibraryInfoOutput(), problems)
+      new WasmGeneratorStage(options.getOutput(), options.getLibraryInfoOutput(), problems)
           .generateMonolithicOutput(library);
     }
 
@@ -482,7 +482,7 @@ public enum Backend {
   WASM_MODULAR {
     @Override
     public void generateOutputs(BackendOptions options, Library library, Problems problems) {
-      new WasmOutputsGenerator(options.getOutput(), options.getLibraryInfoOutput(), problems)
+      new WasmGeneratorStage(options.getOutput(), options.getLibraryInfoOutput(), problems)
           .generateModularOutput(library);
     }
 
