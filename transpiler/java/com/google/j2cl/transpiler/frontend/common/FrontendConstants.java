@@ -47,5 +47,8 @@ public final class FrontendConstants {
   public static final String DO_NOT_AUTOBOX_ANNOTATION_NAME =
       "javaemul.internal.annotations.DoNotAutobox";
 
+  public static final String JS_EXPORT_ANNOTATION_NAME =
+      "com.kohlschutter.jacline.annotations.JsExport";
+
   private FrontendConstants() {}
 }

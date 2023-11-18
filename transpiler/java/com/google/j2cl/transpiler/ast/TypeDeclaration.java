@@ -278,6 +278,9 @@ public abstract class TypeDeclaration
   /** Returns whether the described type has the JUnit @RunWith annotation. */
   public abstract boolean isAnnotatedWithJUnitRunWith();
 
+  /** Returns whether the described type has the "JsExport" annotation. */
+  public abstract boolean isAnnotatedWithJsExport();
+
   @Memoized
   public boolean isJsFunctionImplementation() {
     return isClass()
@@ -791,6 +794,7 @@ public abstract class TypeDeclaration
         .setAnnotatedWithAutoValue(false)
         .setAnnotatedWithAutoValueBuilder(false)
         .setAnnotatedWithJUnitRunWith(false)
+        .setAnnotatedWithJsExport(false)
         .setJsFunctionInterface(false)
         .setJsType(false)
         .setLocal(false)
@@ -854,6 +858,8 @@ public abstract class TypeDeclaration
     public abstract Builder setAnnotatedWithAutoValueBuilder(boolean annotatedWithAutoValueBuilder);
 
     public abstract Builder setAnnotatedWithJUnitRunWith(boolean annotatedWithJUnitRunWith);
+
+    public abstract Builder setAnnotatedWithJsExport(boolean annotatedWithJsExport);
 
     public abstract Builder setJsFunctionInterface(boolean isJsFunctionInterface);
 

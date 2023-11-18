@@ -19,6 +19,7 @@ import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.DO_NO
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_ASYNC_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_CONSTRUCTOR_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_ENUM_ANNOTATION_NAME;
+import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_EXPORT_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_FUNCTION_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_IGNORE_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_METHOD_ANNOTATION_NAME;
@@ -34,6 +35,7 @@ import static java.util.Arrays.stream;
 import java.util.Optional;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IBinding;
+import org.eclipse.jdt.core.dom.IMemberValuePairBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.PackageDeclaration;
@@ -99,9 +101,18 @@ public class JsInteropAnnotationUtils {
         methodBinding.getAnnotations(), JS_OVERLAY_ANNOTATION_NAME);
   }
 
+  public static IAnnotationBinding getJsExportAnnotation(IBinding methodOrTypeBinding) {
+    return JdtAnnotationUtils.findAnnotationBindingByName(
+        methodOrTypeBinding.getAnnotations(), JS_EXPORT_ANNOTATION_NAME);
+  }
+
   public static IAnnotationBinding getJsPackageAnnotation(ITypeBinding packageBinding) {
     return JdtAnnotationUtils.findAnnotationBindingByName(
         packageBinding.getAnnotations(), JS_PACKAGE_ANNOTATION_NAME);
+  }
+
+  public static boolean isJsExport(IBinding typeBinding) {
+    return getJsExportAnnotation(typeBinding) != null;
   }
 
   public static boolean isJsPackageAnnotation(IAnnotationBinding annotation) {

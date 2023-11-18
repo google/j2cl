@@ -176,6 +176,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     renderClassBody();
     renderLoadTimeStatements();
     renderNativeSource();
+    renderExportClassSymbol();
   }
 
   private void renderImports() {
@@ -380,6 +381,10 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       jsDocBuilder.append(" @nodts");
     }
 
+    if (methodDescriptor.getJsInfo().isJsExport()) {
+      jsDocBuilder.append(" @export");
+    }
+
     // TODO(b/280315375): Remove the kotlin special case due to disagreement between how we the
     //  classes in the type model vs their implementation.
     if (methodDescriptor.isBridge()
@@ -495,6 +500,32 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       nativeSourceLine++;
       currentByteOffset += line.length() + 1;
     }
+  }
+
+  private void renderExportClassSymbol() {
+    if (!type.isJsExport()) {
+      return;
+    }
+    String qualifiedName = type.getQualifiedJsName();
+    String alias = environment.aliasForType(type.getDeclaration());
+
+    // we don't use exportSymbol since it uses execScript at runtime, which is unnecessary here
+    // sourceBuilder.appendln("goog.exportSymbol('" + qualifiedName + "', (" + alias + "));");
+
+    String[] nameParts = qualifiedName.split("\\.");
+    sourceBuilder.appendln("(function(x) {");
+    sourceBuilder.indent();
+    int remaining = nameParts.length;
+    for (String part : nameParts) {
+      if (--remaining == 0) {
+        break;
+      }
+      sourceBuilder.appendln("x = (x['" + part + "'] = x['" + part + "'] || {});");
+    }
+    sourceBuilder.appendln("x = (x['" + nameParts[nameParts.length - 1] + "'] = (" + alias
+        + ") || {})");
+    sourceBuilder.unindent();
+    sourceBuilder.appendln("})(globalThis)");
   }
 
   private void renderExports() {

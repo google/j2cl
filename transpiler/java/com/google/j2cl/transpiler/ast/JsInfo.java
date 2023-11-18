@@ -42,6 +42,8 @@ public abstract class JsInfo {
 
   public abstract boolean isJsAsync();
 
+  public abstract boolean isJsExport();
+
   /**
    * Returns true if the JsInfo where computed from a JsInterop annotation defined explicitly on the
    * member.
@@ -72,6 +74,7 @@ public abstract class JsInfo {
         // Default values.
         .setJsOverlay(false)
         .setJsAsync(false)
+        .setJsExport(false)
         .setHasJsMemberAnnotation(false);
   }
 
@@ -88,6 +91,8 @@ public abstract class JsInfo {
     public abstract Builder setJsOverlay(boolean isJsOverlay);
 
     public abstract Builder setJsAsync(boolean isJsAsync);
+
+    public abstract Builder setJsExport(boolean isJsExport);
 
     public abstract Builder setHasJsMemberAnnotation(boolean hasJsMemberAnnotation);
 

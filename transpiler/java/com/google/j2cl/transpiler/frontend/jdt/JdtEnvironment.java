@@ -1203,6 +1203,7 @@ public class JdtEnvironment {
             .setAnnotatedWithAutoValue(isAnnotatedWithAutoValue(typeBinding))
             .setAnnotatedWithAutoValueBuilder(isAnnotatedWithAutoValueBuilder(typeBinding))
             .setAnnotatedWithJUnitRunWith(isAnnotatedWithJUnitRunWith(typeBinding))
+            .setAnnotatedWithJsExport(JsInteropAnnotationUtils.isJsExport(typeBinding))
             .setJsType(JsInteropUtils.isJsType(typeBinding))
             .setJsEnumInfo(JsInteropUtils.getJsEnumInfo(typeBinding))
             .setWasmInfo(getWasmInfo(typeBinding))

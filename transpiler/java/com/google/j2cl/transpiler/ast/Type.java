@@ -120,6 +120,10 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     return typeDeclaration.isJsEnum();
   }
 
+  public boolean isJsExport() {
+    return typeDeclaration.isAnnotatedWithJsExport();
+  }
+
   public boolean isJsFunctionInterface() {
     return typeDeclaration.isJsFunctionInterface();
   }
