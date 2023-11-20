@@ -18,6 +18,8 @@ package com.google.j2cl.transpiler.ast;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.j2cl.common.StringUtils.capitalize;
+import static java.util.Arrays.asList;
+import static java.util.Arrays.stream;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
@@ -25,7 +27,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors.BootstrapType;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.OptionalInt;
@@ -58,7 +59,7 @@ public final class RuntimeMethods {
 
   /** Create a call to an Arrays method. */
   public static MethodCall createArraysMethodCall(String methodName, Expression... arguments) {
-    return createArraysMethodCall(methodName, Arrays.asList(arguments));
+    return createArraysMethodCall(methodName, asList(arguments));
   }
 
   /** Create a call to an Arrays method. */
@@ -280,7 +281,7 @@ public final class RuntimeMethods {
 
   /** Create a call to an Equality method. */
   public static MethodCall createEqualityMethodCall(String methodName, Expression... arguments) {
-    return createEqualityMethodCall(methodName, Arrays.asList(arguments));
+    return createEqualityMethodCall(methodName, asList(arguments));
   }
 
   /** Create a call to an Equality method. */
@@ -293,7 +294,7 @@ public final class RuntimeMethods {
   public static MethodCall createExceptionsMethodCall(String methodName, Expression... arguments) {
     return MethodCall.Builder.from(
             TypeDescriptors.get().javaemulInternalExceptions.getMethodDescriptorByName(methodName))
-        .setArguments(Arrays.asList(arguments))
+        .setArguments(asList(arguments))
         .build();
   }
 
@@ -302,7 +303,7 @@ public final class RuntimeMethods {
     return MethodCall.Builder.from(
             TypeDescriptors.get().javaLangThrowable.getMethodDescriptorByName("privateInitError"))
         .setQualifier(instance)
-        .setArguments(Arrays.asList(arguments))
+        .setArguments(asList(arguments))
         .build();
   }
 
@@ -374,7 +375,7 @@ public final class RuntimeMethods {
 
   /** Create a call to an LongUtils method. */
   public static MethodCall createLongUtilsMethodCall(String methodName, Expression... arguments) {
-    return createLongUtilsMethodCall(methodName, Arrays.asList(arguments));
+    return createLongUtilsMethodCall(methodName, asList(arguments));
   }
 
   /** Create a call to an LongUtils method. */
@@ -406,7 +407,7 @@ public final class RuntimeMethods {
 
   /** Create a call to a native Long method. */
   public static MethodCall createNativeLongMethodCall(String methodName, Expression... arguments) {
-    return createNativeLongMethodCall(methodName, Arrays.asList(arguments));
+    return createNativeLongMethodCall(methodName, asList(arguments));
   }
 
   /** Create a call to an native Long method. */
@@ -507,7 +508,7 @@ public final class RuntimeMethods {
 
   /** Create a call to a Util method. */
   public static MethodCall createUtilMethodCall(String methodName, Expression... arguments) {
-    return createUtilMethodCall(methodName, Arrays.asList(arguments));
+    return createUtilMethodCall(methodName, asList(arguments));
   }
 
   /** Create a call to an Util method. */
@@ -775,7 +776,7 @@ public final class RuntimeMethods {
 
       public Builder setParameters(TypeDescriptor... parameterTypes) {
         return setParameterDescriptors(
-            Arrays.stream(parameterTypes)
+            stream(parameterTypes)
                 .map(p -> ParameterDescriptor.newBuilder().setTypeDescriptor(p).build())
                 .toArray(ParameterDescriptor[]::new));
       }
