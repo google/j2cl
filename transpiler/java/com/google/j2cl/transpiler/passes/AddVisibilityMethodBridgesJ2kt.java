@@ -20,12 +20,13 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.JsInfo;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.Variable;
-import com.google.j2cl.transpiler.ast.Visibility;
 import java.util.List;
 
 /** Add bridge for public or protected methods which override package-private ones. */
@@ -46,20 +47,27 @@ public class AddVisibilityMethodBridgesJ2kt extends NormalizationPass {
   }
 
   private static Method createBridgeMethod(Type type, MethodDescriptor targetMethod) {
+    MethodDescriptor originMethod =
+        targetMethod.getJavaOverriddenMethodDescriptors().stream()
+            .filter(md -> md.getVisibility().isPackagePrivate())
+            .findFirst()
+            .orElseThrow();
+
     List<Variable> parameters =
-        AstUtils.createParameterVariables(targetMethod.getParameterTypeDescriptors());
+        AstUtils.createParameterVariables(originMethod.getParameterTypeDescriptors());
 
     ImmutableList<Expression> arguments =
         parameters.stream().map(Variable::createReference).collect(toImmutableList());
 
     return Method.newBuilder()
         .setMethodDescriptor(
-            MethodDescriptor.Builder.from(targetMethod)
+            MethodDescriptor.Builder.from(originMethod)
                 .setDeclarationDescriptor(null)
                 .setEnclosingTypeDescriptor(type.getTypeDescriptor())
-                .setVisibility(Visibility.PACKAGE_PRIVATE)
                 .setNative(false)
                 .setAbstract(false)
+                .setOriginalJsInfo(JsInfo.NONE)
+                .makeBridge(MethodOrigin.GENERALIZING_BRIDGE, originMethod, targetMethod)
                 .build())
         .setParameters(parameters)
         .addStatements(
