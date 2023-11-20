@@ -362,12 +362,16 @@ private fun Renderer.constructorInvocationSource(method: Method): Source =
     }
     .orEmpty()
 
-internal val MethodDescriptor.isKtOverride: Boolean
+internal val MemberDescriptor.isKtOverride: Boolean
   get() =
-    isJavaOverride &&
-      !directlyOverridesJavaObjectClone &&
-      (javaOverriddenMethodDescriptors.any { it.enclosingTypeDescriptor.isInterface } ||
-        !needsVisibilityBridge(this))
+    when (this) {
+      is MethodDescriptor ->
+        isJavaOverride &&
+          !directlyOverridesJavaObjectClone &&
+          (javaOverriddenMethodDescriptors.any { it.enclosingTypeDescriptor.isInterface } ||
+            !needsVisibilityBridge(this))
+      else -> false
+    }
 
 private val MethodDescriptor.directlyOverridesJavaObjectClone: Boolean
   get() =

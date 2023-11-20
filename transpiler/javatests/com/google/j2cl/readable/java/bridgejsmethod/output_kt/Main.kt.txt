@@ -95,7 +95,6 @@ open class Main {
 
  @ObjCName("J2ktBridgejsmethodMain_B", exact = true)
  open class B: Main.A<String?>() {
-  @JsMethod
   open override fun `fun`(s: String?): String? {
    return s
   }
@@ -147,7 +146,7 @@ open class Main {
 
  @ObjCName("J2ktBridgejsmethodMain_L", exact = true)
  open class L<L1>: Main.K<String?, L1>() {
-  @JsMethod
+  @JsMethod(name = "fun")
   open override fun fun_pp_bridgejsmethod(string: String?, l1: L1) {}
  }
 
@@ -203,7 +202,6 @@ open class Main {
  }
 
  open inner class Parent<T: Main.Parent<*>?> internal constructor(): Main.GrandParent<T>() {
-  @JsMethod
   open override fun jsMethod(t: T) {}
 
   open override fun method(t: T) {}
@@ -212,7 +210,6 @@ open class Main {
  open inner class ChildWithoutOverrides internal constructor(): Main.Parent<Main.ChildWithoutOverrides?>() {}
 
  open inner class ChildWithOverrides<T: Main.ChildWithOverrides<T>?> internal constructor(): Main.Parent<T>() {
-  @JsMethod
   open override fun jsMethod(t: T) {}
 
   open override fun method(t: T) {}

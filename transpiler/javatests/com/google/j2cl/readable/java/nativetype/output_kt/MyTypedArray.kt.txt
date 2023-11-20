@@ -20,6 +20,7 @@ package nativetype
 import javaemul.lang.*
 import jsinterop.annotations.JsOverlay
 import jsinterop.annotations.JsPackage
+import jsinterop.annotations.JsProperty
 import jsinterop.annotations.JsType
 import kotlin.Int
 import kotlin.OptIn
@@ -32,6 +33,7 @@ import kotlin.native.ObjCName
 @JsType(name = "Array", namespace = JsPackage.GLOBAL, isNative = true)
 open class MyTypedArray<T> {
  @JvmField
+ @JsProperty(name = "length")
  internal var length_private_2: Int = 0
 
  @ObjCName("size")

@@ -54,26 +54,11 @@ internal fun Renderer.jsInteropAnnotationsSource(parameterDescriptor: ParameterD
     ?.let { annotation(topLevelQualifiedNameSource("jsinterop.annotations.JsOptional")) }
     .orEmpty()
 
-private fun Renderer.jsPropertyAnnotationSource(fieldDescriptor: FieldDescriptor): Source =
-  fieldDescriptor
-    .takeIf { it.hasJsPropertyAnnotation }
-    ?.let { jsPropertyAnnotationSource(it.jsInfo.jsName, it.jsInfo.jsNamespace) }
+private fun Renderer.jsPropertyAnnotationSource(memberDescriptor: MemberDescriptor): Source =
+  memberDescriptor
+    .takeIf { it.isJsProperty }
+    ?.let { jsInteropAnnotationSource(memberDescriptor, "jsinterop.annotations.JsProperty") }
     .orEmpty()
-
-private fun Renderer.jsPropertyAnnotationSource(methodDescriptor: MethodDescriptor): Source =
-  // Emit an annotation only if the original java method had a `JsProperty` annotation defined on
-  // it.
-  methodDescriptor
-    .takeIf { it.hasJsPropertyAnnotation }
-    ?.let { jsPropertyAnnotationSource(it.originalJsInfo.jsName, it.originalJsInfo.jsNamespace) }
-    .orEmpty()
-
-private fun Renderer.jsPropertyAnnotationSource(jsName: String?, jsNamespace: String?): Source =
-  annotation(
-    topLevelQualifiedNameSource("jsinterop.annotations.JsProperty"),
-    nameParameterSource(jsName),
-    namespaceParameterSource(jsNamespace)
-  )
 
 private fun Renderer.jsIgnoreAnnotationSource(memberDescriptor: MemberDescriptor): Source =
   memberDescriptor
@@ -94,14 +79,37 @@ private fun Renderer.jsConstructorAnnotationSource(methodDescriptor: MethodDescr
     .orEmpty()
 
 private fun Renderer.jsMethodAnnotationSource(methodDescriptor: MethodDescriptor): Source =
-  // Emit an annotation only if the original java method had a `JsMethod` annotation defined on it.
   methodDescriptor
-    .takeIf { it.hasJsMethodAnnotation }
+    .takeIf { it.isJsMethod }
+    ?.let { jsInteropAnnotationSource(methodDescriptor, "jsinterop.annotations.JsMethod") }
+    .orEmpty()
+
+/**
+ * Render the `annotationQualifiedName` annotation if the member had an annotation in the source or
+ * if it requires one to restore its jsname.
+ */
+private fun Renderer.jsInteropAnnotationSource(
+  memberDescriptor: MemberDescriptor,
+  annotationQualifiedName: String
+): Source =
+  memberDescriptor
+    .takeIf {
+      it.originalJsInfo.hasJsMemberAnnotation ||
+        // If the name is mangled but it overrides a member (which means that one was already
+        // mangled) then the annotation is already emitted in the overridden member.
+        (it.isKtNameMangled && !it.isKtOverride)
+    }
     ?.let {
+      val nameParameterValue =
+        it.originalJsInfo.jsName
+          // if there is no name specified in the original annotation but the name is mangled in
+          // Kotlin, use the simpleJsName otherwise do not emit any name.
+          ?: if (it.isKtNameMangled) it.simpleJsName else null
+
       annotation(
-        topLevelQualifiedNameSource("jsinterop.annotations.JsMethod"),
-        nameParameterSource(it.jsInfo.jsName),
-        namespaceParameterSource(it.jsInfo.jsNamespace)
+        topLevelQualifiedNameSource(annotationQualifiedName),
+        nameParameterSource(nameParameterValue),
+        namespaceParameterSource(it.originalJsInfo.jsNamespace)
       )
     }
     .orEmpty()
@@ -180,18 +188,8 @@ private fun isNativeParameterSource(value: Boolean): Source =
 private fun booleanParameterSource(name: String, value: Boolean, defaultValue: Boolean): Source =
   value.takeIf { it != defaultValue }?.let { assignment(source(name), literal(it)) }.orEmpty()
 
-private val MethodDescriptor.hasJsPropertyAnnotation
-  get() =
-    originalJsInfo.hasJsMemberAnnotation &&
-      (originalJsInfo.jsMemberType == JsMemberType.GETTER ||
-        originalJsInfo.jsMemberType == JsMemberType.SETTER)
-
-private val MethodDescriptor.hasJsMethodAnnotation
-  get() = originalJsInfo.hasJsMemberAnnotation && originalJsInfo.jsMemberType == JsMemberType.METHOD
-
 private val MethodDescriptor.hasJsConstructorAnnotation
-  get() =
-    originalJsInfo.hasJsMemberAnnotation && originalJsInfo.jsMemberType == JsMemberType.CONSTRUCTOR
+  get() = originalJsInfo.hasJsMemberAnnotation && isJsConstructor
 
 private val MemberDescriptor.hasJsIgnoreAnnotation
   get() =
@@ -204,5 +202,5 @@ private val MemberDescriptor.hasJsIgnoreAnnotation
       ktVisibility == KtVisibility.PUBLIC &&
       originalJsInfo.jsMemberType == JsMemberType.NONE
 
-private val FieldDescriptor.hasJsPropertyAnnotation
-  get() = originalJsInfo.hasJsMemberAnnotation && isJsProperty
+private val MemberDescriptor.isKtNameMangled: Boolean
+  get() = name != ktMangledName

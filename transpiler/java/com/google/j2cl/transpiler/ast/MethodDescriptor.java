@@ -412,6 +412,11 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .build();
   }
 
+  @Override
+  public boolean isJsProperty() {
+    return isJsPropertySetter() || isJsPropertyGetter();
+  }
+
   /**
    * Returns {@code true} if the method has a JsFunction calling contract in JavaScript.
    *

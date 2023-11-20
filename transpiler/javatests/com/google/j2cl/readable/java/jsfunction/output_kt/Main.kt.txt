@@ -127,17 +127,17 @@ open class Main {
 
  internal open fun <T> acceptsVarargsJsFunctionWithParemetrizedType_pp_jsfunction(x: Main.JsFunctionVarargsGenerics<MutableList<T>?>?) {}
 
- @JsMethod
+ @JsMethod(name = "acceptsVarargsJsFunctionWithTypeVariableInVarargs")
  internal open fun <T> acceptsVarargsJsFunctionWithTypeVariableInVarargs_pp_jsfunction(vararg x: Main.JsFunctionVarargsGenerics<T>?) {
   val x_1: Array<Main.JsFunctionVarargsGenerics<T>?>? = x as Array<Main.JsFunctionVarargsGenerics<T>?>?
  }
 
- @JsMethod
+ @JsMethod(name = "acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs")
  internal open fun <T> acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs_pp_jsfunction(vararg x: Main.JsFunctionVarargsGenerics<MutableList<T>?>?) {
   val x_1: Array<Main.JsFunctionVarargsGenerics<MutableList<T>?>?>? = x as Array<Main.JsFunctionVarargsGenerics<MutableList<T>?>?>?
  }
 
- @JsMethod
+ @JsMethod(name = "acceptsJsFunctionInVarargs")
  internal open fun acceptsJsFunctionInVarargs_pp_jsfunction(vararg x: Main.SimpleJsFunction?) {
   val x_1: Array<Main.SimpleJsFunction?>? = x as Array<Main.SimpleJsFunction?>?
  }
@@ -200,11 +200,11 @@ open class Main {
   ) {}
 
   @JvmStatic
-  @JsProperty
+  @JsProperty(name = "parametricJsFunction")
   internal fun setParametricJsFunction_private_2(fn: Main.ParametricJsFunction<Any?>?) {}
 
   @JvmStatic
-  @JsProperty
+  @JsProperty(name = "parametricJsFunction")
   internal fun getParametricJsFunction_private_2(): Main.ParametricJsFunction<Any?>? {
    return null
   }
@@ -450,7 +450,7 @@ open class Main {
   @JvmField
   internal var function_pp_jsfunction: Main.ParametricJsFunction<String?>? = null
 
-  @JsProperty
+  @JsProperty(name = "function")
   internal open fun getFunction_pp_jsfunction(): Main.ParametricJsFunction<String?>? {
    return null
   }

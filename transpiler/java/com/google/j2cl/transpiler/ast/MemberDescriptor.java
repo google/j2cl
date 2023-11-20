@@ -162,6 +162,8 @@ public abstract class MemberDescriptor
     return getJsInfo().getJsMemberType() == JsMemberType.SETTER;
   }
 
+  public abstract boolean isJsProperty();
+
   public boolean isJsMethod() {
     return getJsInfo().getJsMemberType() == JsMemberType.METHOD;
   }

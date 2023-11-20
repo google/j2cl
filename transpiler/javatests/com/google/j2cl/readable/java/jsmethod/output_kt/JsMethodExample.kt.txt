@@ -34,7 +34,7 @@ open class JsMethodExample {
  external open fun <T: ArrayList<String?>?> testMethod(): T
 
  abstract class Base<T> internal constructor() {
-  @JsMethod
+  @JsMethod(name = "m")
   internal open fun m_pp_jsmethod(t: T) {}
  }
 

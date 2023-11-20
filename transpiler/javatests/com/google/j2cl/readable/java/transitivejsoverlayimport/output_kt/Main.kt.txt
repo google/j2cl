@@ -54,7 +54,7 @@ open class NonNativeLower: NonNativeUpper {
 
 @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
 open class Transitive internal constructor() {
- @JsProperty
+ @JsProperty(name = "jsProperty")
  internal external fun getJsProperty_pp_transitivejsoverlayimport(): Int
 
  @JsOverlay
