@@ -107,6 +107,38 @@ public class OptionalTest extends TestCase {
     assertTrue("Consumer not executed", mutableFlag[0]);
   }
 
+  public void testIfPresentOrElse() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when NPE on dereference is supported
+      return;
+    }
+
+    // empty case
+    empty.ifPresentOrElse(null, () -> {}); // should not fail as per JavaDoc
+    empty.ifPresentOrElse(wrapped -> fail("Empty Optional should not execute consumer"), () -> {});
+
+    // non-empty case
+    try {
+      present.ifPresentOrElse(null, () -> {});
+      fail("Non-Empty Optional must throw NullPointerException if consumer is null");
+    } catch (NullPointerException e) {
+      // expected
+    }
+
+    present.ifPresentOrElse(
+        (wrapped) -> {
+          assertSame(REFERENCE, wrapped);
+          mutableFlag[0] = true;
+        },
+        () -> fail("Non-Empty Optional should not call empty consumer"));
+    assertTrue("Consumer not executed", mutableFlag[0]);
+    mutableFlag[0] = false;
+    empty.ifPresentOrElse(
+        (wrapped) -> fail("Empty Optional should not call non-empty consumer"),
+        () -> mutableFlag[0] = true);
+    assertTrue("Consumer not executed", mutableFlag[0]);
+  }
+
   public void testFilter() {
     if (isWasm()) {
       // TODO(b/183769034): Re-enable when NPE on dereference is supported

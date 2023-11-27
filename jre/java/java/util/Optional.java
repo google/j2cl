@@ -72,6 +72,14 @@ public final class Optional<T> {
     }
   }
 
+  public void ifPresentOrElse(Consumer<? super T> consumer, Runnable emptyConsumer) {
+    if (isPresent()) {
+      consumer.accept(ref);
+    } else {
+      emptyConsumer.run();
+    }
+  }
+
   public Optional<T> filter(Predicate<? super T> predicate) {
     checkNotNull(predicate);
     if (!isPresent() || predicate.test(ref)) {
