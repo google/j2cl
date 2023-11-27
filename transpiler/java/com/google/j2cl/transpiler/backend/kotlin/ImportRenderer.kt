@@ -33,7 +33,7 @@ internal fun Renderer.importsSource(): Source = newLineSeparated(imports().map {
 private fun defaultImports() = setOf(starImport("javaemul", "lang"))
 
 private fun Renderer.imports(): List<Import> =
-  defaultImports().plus(environment.imports()).sortedWith(lexicographicalOrder())
+  defaultImports().plus(environment.imports).sortedWith(lexicographicalOrder())
 
 private fun Import.source(): Source =
   spaceSeparated(

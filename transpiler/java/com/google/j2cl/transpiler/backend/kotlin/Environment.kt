@@ -18,35 +18,38 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.transpiler.ast.HasName
 import com.google.j2cl.transpiler.backend.kotlin.ast.Import
 
-/** Code generation environment. */
+/**
+ * Code generation environment.
+ *
+ * @property nameToIdentifierMap a map from named node to rendered identifier string
+ * @property identifierSet a set of used identifier strings, which potentially shadow imports
+ * @property importedSimpleNameToQualifiedNameMap a mutable map from simple name string to qualified
+ *   name string of types to be imported, filled-in during code generation
+ * @property importedOptInQualifiedNames a mutable set with imported qualified names for [@OptIn]
+ *   annotation, filled-in during code generation
+ */
 internal data class Environment(
-  /** Name to identifier mapping. */
   private val nameToIdentifierMap: Map<HasName, String> = emptyMap(),
-
-  /** A set of used identifiers, which potentially shadow imports. */
   private val identifierSet: Set<String> = emptySet(),
-
-  /** Mutable map from simple name to qualified name of types to be imported. */
   val importedSimpleNameToQualifiedNameMap: MutableMap<String, String> = mutableMapOf(),
-
-  /** Mutable map with imported classes for OptIn annotation. */
   val importedOptInQualifiedNames: MutableSet<String> = mutableSetOf()
 ) {
-  /** Returns identifier for the given name */
+  /** Returns identifier for the given named node. */
   fun identifier(hasName: HasName): String =
     nameToIdentifierMap[hasName] ?: error("No such identifier: $hasName")
 
   /** Returns whether the given identifier is used. */
   fun containsIdentifier(identifier: String): Boolean = identifierSet.contains(identifier)
-}
 
-/** Returns a list of collected imports. */
-internal fun Environment.imports(): List<Import> =
-  importedSimpleNameToQualifiedNameMap.entries.map { (simpleName, qualifiedName) ->
-    Import(
-      qualifiedName.qualifiedNameComponents(),
-      simpleName
-        .takeUnless { it == qualifiedName.qualifiedNameToSimpleName() }
-        ?.let { Import.Suffix.WithAlias(it) }
-    )
-  }
+  /** A list of collected imports. */
+  internal val imports: List<Import>
+    get() =
+      importedSimpleNameToQualifiedNameMap.entries.map { (simpleName, qualifiedName) ->
+        Import(
+          qualifiedName.qualifiedNameComponents(),
+          simpleName
+            .takeUnless { it == qualifiedName.qualifiedNameToSimpleName() }
+            ?.let { Import.Suffix.WithAlias(it) }
+        )
+      }
+}
