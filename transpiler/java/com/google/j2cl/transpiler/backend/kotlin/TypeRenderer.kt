@@ -175,7 +175,7 @@ internal fun Renderer.forTypeBody(type: Type): Renderer =
   copy(
     currentType = type,
     renderThisReferenceWithLabel = false,
-    localNames = localNames + type.localNames
+    localNames = localNames + type.localNamesSet
   )
 
 private fun Renderer.enumValuesSource(type: Type): Source =

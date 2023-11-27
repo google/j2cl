@@ -94,10 +94,10 @@ internal fun Renderer.qualifiedNameSource(
           qualifiedNameSource(enclosingTypeDescriptor),
           identifierSource(typeDeclaration.ktSimpleName())
         )
-      else -> topLevelQualifiedNameSource(typeDescriptor.ktQualifiedName())
+      else -> topLevelQualifiedNameSource(typeDescriptor.ktQualifiedName)
     }
   } else {
-    topLevelQualifiedNameSource(typeDescriptor.ktQualifiedName())
+    topLevelQualifiedNameSource(typeDescriptor.ktQualifiedName)
   }
 
 /**

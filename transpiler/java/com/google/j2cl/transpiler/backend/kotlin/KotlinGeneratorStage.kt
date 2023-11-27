@@ -76,7 +76,7 @@ class KotlinGeneratorStage(private val output: OutputUtils.Output, private val p
       Renderer(
         environment,
         problems,
-        topLevelQualifiedNames = compilationUnit.topLevelQualifiedNames
+        topLevelQualifiedNames = compilationUnit.topLevelQualifiedNamesSet
       )
 
     // Render types, collecting qualified names to import
