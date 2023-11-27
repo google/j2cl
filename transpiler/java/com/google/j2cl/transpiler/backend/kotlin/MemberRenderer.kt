@@ -142,7 +142,7 @@ private fun Renderer.fieldSource(field: Field): Source {
   val typeDescriptor = fieldDescriptor.typeDescriptor
   val isConst = field.isCompileTimeConstant && field.isStatic
   val isJvmField =
-    !currentType!!.jvmFieldsAreNotLegal &&
+    !currentType!!.jvmFieldsAreIllegal &&
       !isConst &&
       !field.isKtLateInit &&
       fieldDescriptor.ktVisibility != KtVisibility.PRIVATE
