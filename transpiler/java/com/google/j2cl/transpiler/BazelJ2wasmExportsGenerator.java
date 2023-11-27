@@ -32,7 +32,6 @@ import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.WasmEntryPointBridgesCreator;
 import com.google.j2cl.transpiler.backend.wasm.WasmGeneratorStage;
-import com.google.j2cl.transpiler.frontend.common.PackageInfoCache;
 import com.google.j2cl.transpiler.frontend.jdt.JdtEnvironment;
 import com.google.j2cl.transpiler.frontend.jdt.JdtParser;
 import java.io.File;
@@ -95,7 +94,6 @@ final class BazelJ2wasmExportsGenerator extends BazelWorker {
               .collect(ImmutableList.toImmutableList());
       var environment = new JdtEnvironment(parser);
 
-      PackageInfoCache.init(classPathEntries, problems);
       environment.initWellKnownTypes(
           bindings.stream()
               .filter(t -> wellKnownTypeNames.contains(t.getBinaryName()))
