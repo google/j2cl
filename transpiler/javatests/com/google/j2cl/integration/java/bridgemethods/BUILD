@@ -13,5 +13,8 @@ integration_test(
     srcs = glob(["*.java"]),
     # TODO(b/256681746): Improve TestUtils to detect Kotlin and fix the test.
     enable_kt_native = False,
+    # TODO(b/246332093): Enable when bridge for parametrized method are
+    #  generated correctly.
+    enable_kt_web = False,
     suppress = ["JSC_TYPE_MISMATCH"],
 )
