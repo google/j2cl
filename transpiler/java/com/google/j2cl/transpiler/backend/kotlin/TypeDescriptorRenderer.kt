@@ -39,6 +39,13 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
+/**
+ * Returns source for the given type descriptor.
+ *
+ * @param typeDescriptor the type descriptor to get the source for
+ * @param asSuperType whether to use bridge name for the super-type
+ * @param projectRawToWildcards whether to project raw types to use wildcards
+ */
 internal fun Renderer.typeDescriptorSource(
   typeDescriptor: TypeDescriptor,
   asSuperType: Boolean = false,
@@ -51,9 +58,16 @@ internal fun Renderer.typeDescriptorSource(
     )
     .source(typeDescriptor.withImplicitNullability)
 
+/** Returns source for the given list of type arguments. */
 internal fun Renderer.typeArgumentsSource(typeArguments: List<TypeArgument>): Source =
   TypeDescriptorRenderer(this).argumentsSource(typeArguments)
 
+/**
+ * Returns source containing qualified name for the given type descriptor.
+ *
+ * @param typeDescriptor the type descriptor to get the source for
+ * @param asSuperType whether to use bridge name for the super-type
+ */
 internal fun Renderer.qualifiedNameSource(
   typeDescriptor: TypeDescriptor,
   asSuperType: Boolean = false
@@ -86,19 +100,19 @@ internal fun Renderer.qualifiedNameSource(
     topLevelQualifiedNameSource(typeDescriptor.ktQualifiedName())
   }
 
-/** Type descriptor renderer. */
+/**
+ * Type descriptor renderer, contains options for rendering type descriptor sources.
+ *
+ * @property renderer the underlying renderer
+ * @property seenTypeVariables a set of seen type variables used to detect recursion
+ * @property asSuperType whether to render a super-type, using bridge name if present
+ * @property projectRawToWildcards whether to project raw types to wildcards, or bounds
+ */
 private data class TypeDescriptorRenderer(
-  /** The underlying renderer. */
   val renderer: Renderer,
-
-  /** Set of seen type variables used to detect recursion. */
   val seenTypeVariables: Set<TypeVariable> = setOf(),
-
   // TODO(b/246842682): Remove when bridge types are materialized as TypeDescriptors
-  /** Whether to render a super-type, using bridge name if present. */
   val asSuperType: Boolean = false,
-
-  /** Whether to project RAW types to wildcards, or bounds. */
   val projectRawToWildcards: Boolean = false
 ) {
   /** Renderer for child type descriptors, including: arguments, bounds, intersections, etc... */
