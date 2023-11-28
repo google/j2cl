@@ -998,6 +998,26 @@ public class StringTest extends TestCase {
     }
   }
 
+  public void testRepeat() {
+    // Empty results
+    assertEquals("", "a".repeat(0));
+    assertEquals("", "".repeat(0));
+    assertEquals("", "".repeat(10));
+
+    // Normal cases
+    assertEquals("aaaaaaaaaa", "a".repeat(10));
+    assertEquals("abc", "abc".repeat(1));
+    assertEquals("abcabc", "abc".repeat(2));
+
+    // Invalid calls
+    try {
+      String unused = "abc".repeat(-1);
+      fail("Repeating a negative count should throw an exception.");
+    } catch (IllegalArgumentException ex) {
+      // expected.
+    }
+  }
+
   public void testReplace() {
     String axax = String.valueOf(new char[] {'a', 'x', 'a', 'x'});
     String aaaa = String.valueOf(new char[] {'a', 'a', 'a', 'a'});

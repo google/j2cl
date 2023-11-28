@@ -16,6 +16,7 @@
 
 package java.lang;
 
+import static javaemul.internal.InternalPreconditions.checkArgument;
 import static javaemul.internal.InternalPreconditions.checkCriticalStringBounds;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 import static javaemul.internal.InternalPreconditions.checkPositionIndexes;
@@ -539,8 +540,13 @@ public final class String implements Comparable<String>, CharSequence, Serializa
     return ignoreCase ? left.equalsIgnoreCase(right) : left.equals(right);
   }
 
-  public boolean regionMatches(int toffset, String other, int ooffset, int len) {
-    return regionMatches(false, toffset, other, ooffset, len);
+  public boolean regionMatches(int toffset, String other, int offset, int len) {
+    return regionMatches(false, toffset, other, offset, len);
+  }
+
+  public String repeat(int count) {
+    checkArgument(count >= 0);
+    return new String(value.repeat(count));
   }
 
   public String replace(char from, char to) {
@@ -761,6 +767,8 @@ public final class String implements Comparable<String>, CharSequence, Serializa
     int lastIndexOf(NativeString str);
 
     int lastIndexOf(NativeString str, int start);
+
+    NativeString repeat(int count);
 
     NativeString replace(NativeRegExp regex, NativeString replace);
 

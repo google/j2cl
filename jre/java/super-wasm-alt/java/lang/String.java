@@ -16,6 +16,7 @@
  */
 package java.lang;
 
+import static javaemul.internal.InternalPreconditions.checkArgument;
 import static javaemul.internal.InternalPreconditions.checkCriticalStringBounds;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 import static javaemul.internal.InternalPreconditions.checkPositionIndexes;
@@ -597,6 +598,11 @@ public final class String implements Serializable, Comparable<String>, CharSeque
         : isRegionEqual(value, offset + thisStart, string.value, string.offset + start, length);
   }
 
+  public String repeat(int count) {
+    checkArgument(count >= 0);
+    return fromJsString(toJsString().repeat(count));
+  }
+
   public String replace(char oldChar, char newChar) {
     char[] buffer = value;
     int thisOffset = offset;
@@ -1005,6 +1011,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     NativeString toLowerCase();
 
     NativeString toUpperCase();
+
+    NativeString repeat(int count);
 
     NativeString toLocaleLowerCase();
 
