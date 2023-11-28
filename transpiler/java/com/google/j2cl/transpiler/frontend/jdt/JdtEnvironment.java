@@ -18,6 +18,9 @@ package com.google.j2cl.transpiler.frontend.jdt;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.HAS_NO_SIDE_EFFECTS_ANNOTATION_NAME;
+import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.UNCHECKED_CAST_ANNOTATION_NAME;
+import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.WASM_ANNOTATION_NAME;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.FluentIterable;
@@ -249,7 +252,7 @@ public class JdtEnvironment {
 
   /** Returns true if the binding is annotated with @UncheckedCast. */
   public static boolean hasUncheckedCastAnnotation(IBinding binding) {
-    return JdtAnnotationUtils.hasAnnotation(binding, "javaemul.internal.annotations.UncheckedCast");
+    return JdtAnnotationUtils.hasAnnotation(binding, UNCHECKED_CAST_ANNOTATION_NAME);
   }
 
   /** Helper method to work around JDT habit of returning raw collections. */
@@ -949,14 +952,14 @@ public class JdtEnvironment {
   private static String getWasmInfo(ITypeBinding binding) {
     return JdtAnnotationUtils.getStringAttribute(
         JdtAnnotationUtils.findAnnotationBindingByName(
-            binding.getAnnotations(), "javaemul.internal.annotations.Wasm"),
+            binding.getAnnotations(), WASM_ANNOTATION_NAME),
         "value");
   }
 
   private static String getWasmInfo(IMethodBinding binding) {
     return JdtAnnotationUtils.getStringAttribute(
         JdtAnnotationUtils.findAnnotationBindingByName(
-            binding.getAnnotations(), "javaemul.internal.annotations.Wasm"),
+            binding.getAnnotations(), WASM_ANNOTATION_NAME),
         "value");
   }
 
@@ -1272,7 +1275,6 @@ public class JdtEnvironment {
   }
 
   private static boolean isAnnotatedWithHasNoSideEffects(IMethodBinding methodBinding) {
-    return JdtAnnotationUtils.hasAnnotation(
-        methodBinding, "javaemul.internal.annotations.HasNoSideEffects");
+    return JdtAnnotationUtils.hasAnnotation(methodBinding, HAS_NO_SIDE_EFFECTS_ANNOTATION_NAME);
   }
 }

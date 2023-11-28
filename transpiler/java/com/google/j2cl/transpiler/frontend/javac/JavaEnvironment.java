@@ -17,6 +17,8 @@ package com.google.j2cl.transpiler.frontend.javac;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.HAS_NO_SIDE_EFFECTS_ANNOTATION_NAME;
+import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.UNCHECKED_CAST_ANNOTATION_NAME;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
@@ -880,12 +882,12 @@ class JavaEnvironment {
 
   /** Returns true if the element is annotated with @UncheckedCast. */
   private static boolean hasUncheckedCastAnnotation(Element element) {
-    return AnnotationUtils.hasAnnotation(element, "javaemul.internal.annotations.UncheckedCast");
+    return AnnotationUtils.hasAnnotation(element, UNCHECKED_CAST_ANNOTATION_NAME);
   }
 
   /** Returns true if the element is annotated with @HasNoSideEffects. */
   private static boolean isAnnotatedWithHasNoSideEffects(Element element) {
-    return AnnotationUtils.hasAnnotation(element, "javaemul.internal.annotations.HasNoSideEffects");
+    return AnnotationUtils.hasAnnotation(element, HAS_NO_SIDE_EFFECTS_ANNOTATION_NAME);
   }
 
   private boolean isJavaLangObjectOverride(MethodSymbol method) {

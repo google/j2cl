@@ -47,5 +47,13 @@ public final class FrontendConstants {
   public static final String DO_NOT_AUTOBOX_ANNOTATION_NAME =
       "javaemul.internal.annotations.DoNotAutobox";
 
+  public static final String UNCHECKED_CAST_ANNOTATION_NAME =
+      "javaemul.internal.annotations.UncheckedCast";
+
+  public static final String HAS_NO_SIDE_EFFECTS_ANNOTATION_NAME =
+      "javaemul.internal.annotations.HasNoSideEffects";
+
+  public static final String WASM_ANNOTATION_NAME = "javaemul.internal.annotations.Wasm";
+
   private FrontendConstants() {}
 }
