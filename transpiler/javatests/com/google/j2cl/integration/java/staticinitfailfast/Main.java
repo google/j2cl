@@ -21,7 +21,7 @@ import jsinterop.annotations.JsMethod;
 
 public class Main {
 
-  // Note that this shouldn't be insantiable from Java.
+  // Note that this shouldn't be insantiable from JavaScript.
   static class Foo {}
 
   @JsMethod
