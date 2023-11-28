@@ -180,15 +180,15 @@ open class Main {
   ELEVEN(11);
 
   @JvmField
-  internal var value_private_2: Int = 0
+  internal var value: Int = 0
 
   @ObjCName("getValue")
   fun getValue(): Int {
-   return this.value_private_2
+   return this.value
   }
 
   constructor(value: Int) {
-   this.value_private_2 = value
+   this.value = value
   }
  }
 
@@ -198,15 +198,15 @@ open class Main {
   THREE("THREE");
 
   @JvmField
-  internal var value_private_2: String? = null
+  internal var value: String? = null
 
   @ObjCName("getValue")
   fun getValue(): String? {
-   return this.value_private_2
+   return this.value
   }
 
   constructor(value: String?) {
-   this.value_private_2 = value
+   this.value = value
   }
  }
 
@@ -216,15 +216,15 @@ open class Main {
   THREE("THREE");
 
   @JvmField
-  internal var value_private_2: String
+  internal var value: String
 
   @ObjCName("getValue")
   fun getValue(): String? {
-   return this.value_private_2
+   return this.value
   }
 
   constructor(value: String?) {
-   this.value_private_2 = value!!
+   this.value = value!!
   }
  }
 

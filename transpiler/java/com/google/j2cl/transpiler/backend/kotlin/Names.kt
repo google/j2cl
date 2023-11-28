@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
+import com.google.j2cl.transpiler.ast.AstUtils
 import com.google.j2cl.transpiler.ast.CompilationUnit
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.Field
@@ -48,7 +49,7 @@ internal val CompilationUnit.topLevelQualifiedNamesSet: Set<String>
 
 /** Kotlin mangled name for this member descriptor. */
 internal val MemberDescriptor.ktMangledName: String
-  get() = ktName + ktNameSuffix
+  get() = if (AstUtils.isJsEnumCustomValueField(this)) name!! else ktName + ktNameSuffix
 
 /** Kotlin name suffix for this member descriptor. */
 private val MemberDescriptor.ktNameSuffix: String
