@@ -26,16 +26,20 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
+/** Returns file header source of [compilationUnit]. */
 internal fun Renderer.fileHeaderSource(compilationUnit: CompilationUnit): Source =
-  newLineSeparated(fileCommentSource(compilationUnit), fileAnnotationsSource())
+  newLineSeparated(fileCommentSource(compilationUnit), fileAnnotationsSource)
 
+/** Returns file comment source for [compilationUnit]. */
 private fun fileCommentSource(compilationUnit: CompilationUnit) =
   source("// Generated from \"${compilationUnit.packageRelativePath}\"")
 
-private fun Renderer.fileAnnotationsSource(): Source =
-  newLineSeparated(fileOptInAnnotationSource, suppressFileAnnotationsSource)
+/** Returns file annotations source. */
+private val Renderer.fileAnnotationsSource: Source
+  get() = newLineSeparated(fileOptInAnnotationSource, suppressFileAnnotationSource)
 
-private val Renderer.suppressFileAnnotationsSource: Source
+/** Returns source with file suppress annotation. */
+private val Renderer.suppressFileAnnotationSource: Source
   get() =
     fileAnnotation(
       topLevelQualifiedNameSource("kotlin.Suppress"),
@@ -57,14 +61,17 @@ private val Renderer.suppressFileAnnotationsSource: Source
         .map { literal(it) }
     )
 
+/** Returns source with package declaration and imports for [compilationUnit]. */
 internal fun Renderer.packageAndImportsSource(compilationUnit: CompilationUnit): Source =
   emptyLineSeparated(packageSource(compilationUnit), importsSource())
 
+/** Returns package declaration source for [compilationUnit]. */
 private fun packageSource(compilationUnit: CompilationUnit): Source =
   compilationUnit.packageName
     .takeIf { it.isNotEmpty() }
     ?.let { spaceSeparated(PACKAGE_KEYWORD, qualifiedIdentifierSource(it)) }
     .orEmpty()
 
+/** Returns source with types declared in [compilationUnit]. */
 internal fun Renderer.typesSource(compilationUnit: CompilationUnit): Source =
   emptyLineSeparated(compilationUnit.types.map(::typeSource))
