@@ -28,22 +28,31 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLine
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
-internal fun Renderer.importsSource(): Source = newLineSeparated(imports().map { it.source() })
+/** Source with rendered imports. */
+internal val Renderer.importsSource: Source
+  get() = newLineSeparated(imports.map { it.source })
 
-private fun defaultImports() = setOf(starImport("javaemul", "lang"))
+/** A set of default imports. */
+private val defaultImports: Set<Import>
+  get() = setOf(starImport("javaemul", "lang"))
 
-private fun Renderer.imports(): List<Import> =
-  defaultImports().plus(environment.imports).sortedWith(lexicographicalOrder())
+/** A list of imports to render. */
+private val Renderer.imports: List<Import>
+  get() = defaultImports.plus(environment.imports).sortedWith(lexicographicalOrder())
 
-private fun Import.source(): Source =
-  spaceSeparated(
-    IMPORT_KEYWORD,
-    join(dotSeparated(pathComponents.map(::identifierSource)), suffixOrNull?.source().orEmpty())
-  )
+/** Source for this import. */
+private val Import.source: Source
+  get() =
+    spaceSeparated(
+      IMPORT_KEYWORD,
+      join(dotSeparated(pathComponents.map(::identifierSource)), suffixOrNull?.source.orEmpty())
+    )
 
-private fun Import.Suffix.source(): Source =
-  when (this) {
-    is Import.Suffix.WithAlias ->
-      join(Source.SPACE, spaceSeparated(AS_KEYWORD, identifierSource(alias)))
-    is Import.Suffix.WithStar -> join(Source.DOT, STAR_OPERATOR)
-  }
+/** A source with import suffix. */
+private val Import.Suffix.source: Source
+  get() =
+    when (this) {
+      is Import.Suffix.WithAlias ->
+        join(Source.SPACE, spaceSeparated(AS_KEYWORD, identifierSource(alias)))
+      is Import.Suffix.WithStar -> join(Source.DOT, STAR_OPERATOR)
+    }

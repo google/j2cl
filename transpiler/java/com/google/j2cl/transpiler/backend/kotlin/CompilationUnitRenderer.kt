@@ -63,7 +63,7 @@ private val Renderer.suppressFileAnnotationSource: Source
 
 /** Returns source with package declaration and imports for [compilationUnit]. */
 internal fun Renderer.packageAndImportsSource(compilationUnit: CompilationUnit): Source =
-  emptyLineSeparated(packageSource(compilationUnit), importsSource())
+  emptyLineSeparated(packageSource(compilationUnit), importsSource)
 
 /** Returns package declaration source for [compilationUnit]. */
 private fun packageSource(compilationUnit: CompilationUnit): Source =
