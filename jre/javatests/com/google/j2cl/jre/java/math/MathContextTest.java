@@ -16,6 +16,7 @@
 package com.google.j2cl.jre.java.math;
 
 import com.google.j2cl.jre.java.util.EmulTestBase;
+import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
@@ -99,7 +100,10 @@ public class MathContextTest extends EmulTestBase {
       fail("Expected IllegalArgumentException");
     } catch (IllegalArgumentException expected) {
     }
-    
+  }
+
+  @J2ktIncompatible // Not nullable according to Jspecify
+  public void testMathContextSingleArgConstructorNull() {
     try {
       new MathContext(null);
       fail("Expected NullPointerException");

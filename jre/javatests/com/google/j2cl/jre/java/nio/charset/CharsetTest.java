@@ -17,6 +17,7 @@
 package com.google.j2cl.jre.java.nio.charset;
 
 import com.google.j2cl.jre.java.util.EmulTestBase;
+import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
 import java.nio.charset.UnsupportedCharsetException;
@@ -36,6 +37,7 @@ public class CharsetTest extends EmulTestBase {
     assertEquals("UTF-8", Charset.forName("utf-8").name());
   }
 
+  @J2ktIncompatible // Not nullable according to Jspecify
   public void testForName_null() {
     try {
       Charset.forName(null);

@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.jre.java.io;
 
+import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Arrays;
@@ -39,6 +40,7 @@ public abstract class OutputStreamBaseTest extends TestCase {
    */
   protected abstract byte[] getBytesWritten();
 
+  @J2ktIncompatible // Not nullable according to jspecify.
   public void testWriteArrayUsingNullArrayObject() throws IOException {
     final OutputStream outputStream = createDefaultOutputStream();
     try {
@@ -111,6 +113,7 @@ public abstract class OutputStreamBaseTest extends TestCase {
     assertTrue(Arrays.equals(expected, getBytesWritten()));
   }
 
+  @J2ktIncompatible // Not nullable according to Jspecify
   public void testWriteArrayUsingNullArrayObjectAndNoOffset() throws IOException {
     final OutputStream outputStream = createDefaultOutputStream();
     try {
