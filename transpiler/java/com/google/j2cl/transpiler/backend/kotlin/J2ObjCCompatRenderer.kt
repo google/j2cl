@@ -39,11 +39,13 @@ import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.ast.companionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.ast.declaration
 import com.google.j2cl.transpiler.backend.kotlin.ast.toCompanionObjectOrNull
+import com.google.j2cl.transpiler.backend.kotlin.common.backslashEscapedString
 import com.google.j2cl.transpiler.backend.kotlin.common.buildList
 import com.google.j2cl.transpiler.backend.kotlin.common.code
+import com.google.j2cl.transpiler.backend.kotlin.common.inSingleQuotes
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.common.runIf
-import com.google.j2cl.transpiler.backend.kotlin.common.titleCase
+import com.google.j2cl.transpiler.backend.kotlin.common.titleCased
 import com.google.j2cl.transpiler.backend.kotlin.objc.Dependency
 import com.google.j2cl.transpiler.backend.kotlin.objc.Import
 import com.google.j2cl.transpiler.backend.kotlin.objc.Renderer
@@ -320,7 +322,7 @@ private fun MethodDescriptor.functionName(objCNames: MethodObjCNames, prefix: St
       parameterName.plus(
         objCNames.parameterNames
           .mapIndexed { index, name ->
-            name.letIf(index == 0) { it.titleCase.letIf(isConstructor) { "With$it" } }.plus("_")
+            name.letIf(index == 0) { it.titleCased.letIf(isConstructor) { "With$it" } }.plus("_")
           }
           .joinToString("")
       )
@@ -353,7 +355,7 @@ private val MethodObjCNames.objCSelector: String
   get() =
     methodName.plus(
       parameterNames
-        .mapIndexed { index, name -> name.letIf(index == 0) { it.titleCase } + ":" }
+        .mapIndexed { index, name -> name.letIf(index == 0) { it.titleCased } + ":" }
         .joinToString("")
     )
 
@@ -507,18 +509,21 @@ private fun literalRenderer(boolean: Boolean): Renderer<Source> =
   rendererOf(source(if (boolean) "true" else "false"))
 
 private fun literalRenderer(char: Char): Renderer<Source> =
-  char.code.let { code ->
-    if (code in 0x20..0x7E) {
-
-      when (char) {
-        '\'' -> rendererOf(source("'\\''"))
-        '\\' -> rendererOf(source("'\\\\'"))
-        else -> rendererOf(source("'$char'"))
+  rendererOf(
+    source(
+      char.code.let { code ->
+        if (code in 0x20..0x7E) {
+          when (char) {
+            '\'',
+            '\\' -> char.backslashEscapedString
+            else -> char.toString()
+          }.inSingleQuotes
+        } else {
+          String.format("0x%04x", code)
+        }
       }
-    } else {
-      rendererOf(source(String.format("0x%04x", code)))
-    }
-  }
+    )
+  )
 
 private fun literalRenderer(byte: Byte): Renderer<Source> = rendererOf(source("$byte"))
 

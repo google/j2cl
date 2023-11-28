@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Google Inc.
+ * Copyright 2023 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -15,12 +15,15 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin.common
 
-// TODO(b/204366308): Remove after switch to Kotlin 1.5.
-/** Returns code of this char. */
-@Suppress("DEPRECATION")
-val Char.code: Int
-  get() = toInt()
+import com.google.common.truth.Truth.assertThat
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 
-/** Returns string with this character backslash escaped. */
-val Char.backslashEscapedString: String
-  get() = "\\$this"
+@RunWith(JUnit4::class)
+class CharsTest {
+  @Test
+  fun charBackslashEscaped() {
+    assertThat('a'.backslashEscapedString).isEqualTo("\\a")
+  }
+}

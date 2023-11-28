@@ -39,7 +39,7 @@ import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionObject
 import com.google.j2cl.transpiler.backend.kotlin.ast.declaration
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.common.mapFirst
-import com.google.j2cl.transpiler.backend.kotlin.common.titleCase
+import com.google.j2cl.transpiler.backend.kotlin.common.titleCased
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
@@ -233,7 +233,7 @@ private val TypeDeclaration.objCPackagePrefix: String
   get() = packageName?.objCPackagePrefix ?: ""
 
 private val String.objCPackagePrefix: String
-  get() = split('.').joinToString(separator = "") { it.titleCase.objCName }
+  get() = split('.').joinToString(separator = "") { it.titleCased.objCName }
 
 internal val String.objCName
   get() = replace('$', '_')
@@ -281,7 +281,7 @@ private fun TypeVariable.variableObjCName(useId: Boolean): String =
   upperBoundTypeDescriptor.objCName(useId = useId)
 
 private val Variable.objCName: String
-  get() = typeDescriptor.objCName(useId = true).titleCase
+  get() = typeDescriptor.objCName(useId = true).titleCased
 
 internal val FieldDescriptor.objCName: String
   get() = name!!.objCName.escapeJ2ObjCKeyword.letIf(!isEnumConstant) { it + "_" }

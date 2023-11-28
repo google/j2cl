@@ -16,6 +16,8 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.backend.kotlin.common.code
+import com.google.j2cl.transpiler.backend.kotlin.common.inDoubleQuotes
+import com.google.j2cl.transpiler.backend.kotlin.common.inSingleQuotes
 
 /**
  * Returns escape identifier for this char if present
@@ -60,8 +62,10 @@ private val String.escapedString: String
     // Surrogate pairs must be escaped separately in Kotlin, so escaping each Char separately is OK.
     StringBuilder().also { builder -> forEach { builder.append(it.escapedString) } }.toString()
 
+/** Returns string with literal representation of this char. */
 internal val Char.literalString: String
-  get() = "'$escapedString'"
+  get() = escapedString.inSingleQuotes
 
+/** Returns string with literal representation of this string. */
 internal val String.literalString: String
-  get() = "\"$escapedString\""
+  get() = escapedString.inDoubleQuotes
