@@ -116,7 +116,7 @@ public class Main {
     assertTrue(o.toString().equals(OK_STRING));
     assertTrue(o.equals(NativeEnum.ACCEPT));
     assertTrue(o.equals(OK_STRING));
-    assertTrue(v.equals(StringNativeEnum.OK));
+    assertTrue(o.equals(StringNativeEnum.OK));
 
     assertFalse(v instanceof Enum);
     assertTrue((Object) v instanceof String);
