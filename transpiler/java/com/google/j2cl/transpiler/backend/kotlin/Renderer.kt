@@ -15,30 +15,25 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
-import com.google.j2cl.common.Problems
 import com.google.j2cl.transpiler.ast.Type
 
-/** Renderer of the Kotlin source code. */
+/**
+ * Provides context for rendering Kotlin source code.
+ *
+ * @property environment rendering environment
+ * @property currentReturnLabelIdentifier optional label to render in return statements
+ * @property currentType currently rendered type, or null if not rendering a type
+ * @property renderThisReferenceWithLabel whether to render this reference with explicit qualifier
+ * @property localNames a set of local names which are potentially shadowing imports
+ * @property topLevelQualifiedNames top-level qualified names, which will be rendered as simple name
+ *   without import
+ */
 internal data class Renderer(
-  /** Rendering environment. */
   val environment: Environment,
-
-  /** Rendering problems. */
-  val problems: Problems,
-
-  /** Label to render with the return statement. */
   val currentReturnLabelIdentifier: String? = null,
-
-  /** Currently rendered type. */
   val currentType: Type? = null,
-
-  /** Whether to render this reference with explicit qualifier. */
   // TODO(b/252138814): Remove when KT-54349 is fixed
   val renderThisReferenceWithLabel: Boolean = false,
-
-  /** A set of local names which are potentially shadowing imports. */
   val localNames: Set<String> = setOf(),
-
-  /** Top-level qualified names, which will be rendered as simple name without import. */
   val topLevelQualifiedNames: Set<String> = setOf()
 )
