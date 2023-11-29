@@ -11,6 +11,7 @@ kt_jvm_library(
     testonly = 1,
     srcs = [
         "CharsTest.kt",
+        "ListsTest.kt",
         "StringsTest.kt",
     ],
     deps = [
