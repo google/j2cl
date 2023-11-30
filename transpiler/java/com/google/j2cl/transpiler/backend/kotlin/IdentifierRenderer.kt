@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.HasName
 import com.google.j2cl.transpiler.backend.kotlin.ast.Keywords
+import com.google.j2cl.transpiler.backend.kotlin.common.inBackTicks
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.dotSeparated
@@ -34,9 +35,6 @@ internal val String.identifierString
         withoutDollars.inBackTicks
       }
     }
-
-internal val String.inBackTicks
-  get() = "`$this`"
 
 internal fun Renderer.topLevelQualifiedNameSource(
   qualifiedName: String,

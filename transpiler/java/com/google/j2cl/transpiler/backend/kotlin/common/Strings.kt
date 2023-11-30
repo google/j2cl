@@ -35,6 +35,10 @@ fun String.replaceFirstChar(fn: (Char) -> Char): String =
 val String.inSingleQuotes: String
   get() = "'$this'"
 
+/** Returns this string in back-ticks. */
+val String.inBackTicks: String
+  get() = "`$this`"
+
 /** Returns this string in double quotes. */
 val String.inDoubleQuotes: String
   get() = "\"$this\""

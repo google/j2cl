@@ -40,6 +40,11 @@ class StringsTest {
   }
 
   @Test
+  fun stringInBackTicks() {
+    assertThat("foo".inBackTicks).isEqualTo("`foo`")
+  }
+
+  @Test
   fun stringInSingleQuotes() {
     assertThat("foo".inSingleQuotes).isEqualTo("'foo'")
   }

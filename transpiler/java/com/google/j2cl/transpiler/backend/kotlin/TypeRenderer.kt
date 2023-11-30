@@ -36,6 +36,7 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.NATIVE_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.OPEN_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.ast.Keywords
 import com.google.j2cl.transpiler.backend.kotlin.ast.Visibility as KtVisibility
+import com.google.j2cl.transpiler.backend.kotlin.common.inBackTicks
 import com.google.j2cl.transpiler.backend.kotlin.objc.comment
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
