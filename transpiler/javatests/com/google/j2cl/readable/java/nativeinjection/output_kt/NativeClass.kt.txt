@@ -38,6 +38,10 @@ open class NativeClass {
   @ObjCName("nativeStaticMethod")
   @JsMethod
   external fun nativeStaticMethod(): NativeClass?
+
+  @JvmStatic
+  @JsMethod(name = "notPublicNativeStaticMethod")
+  internal external fun notPublicNativeStaticMethod_pp_nativeinjection(): NativeClass?
  }
 
  @ObjCName("J2ktNativeinjectionNativeClass_InnerClass", exact = true)

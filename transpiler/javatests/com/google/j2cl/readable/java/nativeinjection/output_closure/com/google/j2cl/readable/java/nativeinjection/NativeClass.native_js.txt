@@ -29,3 +29,13 @@ NativeClass.prototype.nativeInstanceMethod = function() {
 NativeClass.nativeStaticMethod = function() {
   return null;
 };
+
+/**
+ * Replaces the native static method 'notPublicNativeStaticMethod' in
+ * NativeClass.
+ * @return {NativeClass}
+ * @public
+ */
+NativeClass.notPublicNativeStaticMethod = function() {
+  return null;
+};

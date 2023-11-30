@@ -23,6 +23,8 @@ class NativeClass extends j_l_Object {
  // native nativeInstanceMethod() 
  // /** @return {NativeClass} */
  // native static nativeStaticMethod() 
+ // /** @return {NativeClass} */
+ // native static notPublicNativeStaticMethod() 
  /** @nodts */
  static $clinit() {
   NativeClass.$clinit = () =>{};
@@ -72,6 +74,16 @@ NativeClass.prototype.nativeInstanceMethod = function() {
  * @public
  */
 NativeClass.nativeStaticMethod = function() {
+  return null;
+};
+
+/**
+ * Replaces the native static method 'notPublicNativeStaticMethod' in
+ * NativeClass.
+ * @return {NativeClass}
+ * @public
+ */
+NativeClass.notPublicNativeStaticMethod = function() {
   return null;
 };
 

@@ -24,6 +24,9 @@ public class NativeClass {
   @JsMethod
   public static native NativeClass nativeStaticMethod();
 
+  @JsMethod
+  static native NativeClass notPublicNativeStaticMethod();
+
   public static class InnerClass {
     @JsMethod
     public native String nativeInstanceMethod();
