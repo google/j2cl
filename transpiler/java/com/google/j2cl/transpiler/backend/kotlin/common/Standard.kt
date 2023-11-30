@@ -15,6 +15,11 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin.common
 
-fun <T> T.letIf(condition: Boolean, fn: (T) -> T): T = if (condition) fn(this) else this
+/** Returns this object if [condition] is true, otherwise the result of applying [fn]. */
+inline fun <T> T.letIf(condition: Boolean, fn: (T) -> T): T = if (condition) fn(this) else this
 
-fun <T> T.runIf(condition: Boolean, fn: T.() -> T): T = if (condition) fn() else this
+/** Returns this object if [condition] is true, otherwise the result of applying [fn]. */
+inline fun <T> T.runIf(condition: Boolean, fn: T.() -> T): T = if (condition) fn() else this
+
+/** Returns this object if it's not null, otherwise the result of [fn]. */
+inline fun <T> T?.orIfNull(fn: () -> T): T = this ?: fn()

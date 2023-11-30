@@ -38,6 +38,17 @@ private fun fileCommentSource(compilationUnit: CompilationUnit) =
 private val Renderer.fileAnnotationsSource: Source
   get() = newLineSeparated(fileOptInAnnotationSource, suppressFileAnnotationSource)
 
+private fun Renderer.fileOptInAnnotationSource(features: List<Source>): Source =
+  fileAnnotation(topLevelQualifiedNameSource("kotlin.OptIn"), features)
+
+internal val Renderer.fileOptInAnnotationSource: Source
+  get() =
+    environment.importedOptInQualifiedNamesSet
+      .takeIf { it.isNotEmpty() }
+      ?.map { KotlinSource.classLiteral(topLevelQualifiedNameSource(it)) }
+      ?.let { fileOptInAnnotationSource(it) }
+      .orEmpty()
+
 /** Returns source with file suppress annotation. */
 private val Renderer.suppressFileAnnotationSource: Source
   get() =

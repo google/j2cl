@@ -19,6 +19,7 @@ import com.google.j2cl.transpiler.ast.HasName
 import com.google.j2cl.transpiler.backend.kotlin.ast.Keywords
 import com.google.j2cl.transpiler.backend.kotlin.common.inBackTicks
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
+import com.google.j2cl.transpiler.backend.kotlin.common.orIfNull
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.dotSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
@@ -40,50 +41,20 @@ internal fun Renderer.topLevelQualifiedNameSource(
   qualifiedName: String,
   optInQualifiedName: String? = null
 ): Source =
-  qualifiedToNonAliasedSimpleName(qualifiedName)
-    .let { simpleName ->
-      if (simpleName != null) {
-        identifierSource(simpleName)
-      } else {
-        qualifiedIdentifierSource(qualifiedName)
-      }
+  qualifiedName.qualifiedNameToSimpleName().let { simpleName ->
+    if (localNames.contains(simpleName) || environment.containsIdentifier(simpleName)) {
+      qualifiedIdentifierSource(qualifiedName)
+    } else {
+      environment
+        .qualifiedToNonAliasedSimpleName(qualifiedName)
+        ?.let { identifierSource(it) }
+        .orIfNull { qualifiedIdentifierSource(qualifiedName) }
+        .also { optInQualifiedName?.let { environment.addOptInQualifiedName(it) } }
     }
-    .also { optInQualifiedName?.let { environment.importedOptInQualifiedNames.add(it) } }
+  }
 
 internal fun Renderer.extensionMemberQualifiedNameSource(qualifiedName: String): Source =
-  identifierSource(qualifiedToSimpleName(qualifiedName))
-
-internal fun Renderer.qualifiedToSimpleName(qualifiedName: String): String =
-  qualifiedToNonAliasedSimpleName(qualifiedName) ?: qualifiedToAliasedSimpleName(qualifiedName)
-
-internal fun Renderer.qualifiedToNonAliasedSimpleName(qualifiedName: String): String? {
-  val simpleName = qualifiedName.qualifiedNameToSimpleName()
-  if (localNames.contains(simpleName) || environment.containsIdentifier(simpleName)) {
-    return null
-  }
-  if (topLevelQualifiedNames.contains(qualifiedName)) {
-    return simpleName
-  }
-  val importMap = environment.importedSimpleNameToQualifiedNameMap
-  val importedQualifiedName = importMap[simpleName]
-  if (importedQualifiedName == null) {
-    if (topLevelQualifiedNames.any { it.qualifiedNameToSimpleName() == simpleName }) {
-      return null
-    }
-    importMap[simpleName] = qualifiedName
-    return simpleName
-  }
-  if (importedQualifiedName == qualifiedName) {
-    return simpleName
-  }
-  return null
-}
-
-internal fun Renderer.qualifiedToAliasedSimpleName(qualifiedName: String): String {
-  return qualifiedName.qualifiedNameToAlias().also {
-    environment.importedSimpleNameToQualifiedNameMap[it] = qualifiedName
-  }
-}
+  identifierSource(environment.qualifiedToSimpleName(qualifiedName))
 
 internal fun qualifiedIdentifierSource(identifier: String): Source =
   dotSeparated(identifier.qualifiedNameComponents().map(::identifierSource))

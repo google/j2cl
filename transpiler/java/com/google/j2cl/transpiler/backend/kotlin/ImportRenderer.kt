@@ -38,7 +38,7 @@ private val defaultImports: Set<Import>
 
 /** A list of imports to render. */
 private val Renderer.imports: List<Import>
-  get() = defaultImports.plus(environment.imports).sortedWith(lexicographicalOrder())
+  get() = defaultImports.plus(environment.importsSet).sortedWith(lexicographicalOrder())
 
 /** Source for this import. */
 private val Import.source: Source

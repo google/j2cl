@@ -34,6 +34,5 @@ internal data class Renderer(
   val currentType: Type? = null,
   // TODO(b/252138814): Remove when KT-54349 is fixed
   val renderThisReferenceWithLabel: Boolean = false,
-  val localNames: Set<String> = setOf(),
-  val topLevelQualifiedNames: Set<String> = setOf()
+  val localNames: Set<String> = setOf()
 )

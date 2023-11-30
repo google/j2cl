@@ -23,16 +23,20 @@ import com.google.j2cl.transpiler.backend.kotlin.ast.Import
  *
  * @property nameToIdentifierMap a map from named node to rendered identifier string
  * @property identifierSet a set of used identifier strings, which potentially shadow imports
- * @property importedSimpleNameToQualifiedNameMap a mutable map from simple name string to qualified
- *   name string of types to be imported, filled-in during code generation
- * @property importedOptInQualifiedNames a mutable set with imported qualified names for [@OptIn]
- *   annotation, filled-in during code generation
+ * @property importedSimpleNameToQualifiedNameMutableMap a mutable map from simple name string to
+ *   qualified name string of types to be imported, filled-in during code generation
+ * @property importedOptInQualifiedNamesMutableSet a mutable set with imported qualified names for
+ *   [@OptIn] annotation, filled-in during code generation
+ * @property topLevelQualifiedNamesSet top-level qualified names, which will be rendered as simple
+ *   name without import
  */
 internal data class Environment(
   private val nameToIdentifierMap: Map<HasName, String> = emptyMap(),
   private val identifierSet: Set<String> = emptySet(),
-  val importedSimpleNameToQualifiedNameMap: MutableMap<String, String> = mutableMapOf(),
-  val importedOptInQualifiedNames: MutableSet<String> = mutableSetOf()
+  private val importedSimpleNameToQualifiedNameMutableMap: MutableMap<String, String> =
+    mutableMapOf(),
+  private val importedOptInQualifiedNamesMutableSet: MutableSet<String> = mutableSetOf(),
+  private val topLevelQualifiedNamesSet: Set<String> = setOf()
 ) {
   /** Returns identifier for the given named node. */
   fun identifier(hasName: HasName): String =
@@ -41,15 +45,57 @@ internal data class Environment(
   /** Returns whether the given identifier is used. */
   fun containsIdentifier(identifier: String): Boolean = identifierSet.contains(identifier)
 
-  /** A list of collected imports. */
-  internal val imports: List<Import>
+  /** A set of collected imports. */
+  val importsSet: Set<Import>
     get() =
-      importedSimpleNameToQualifiedNameMap.entries.map { (simpleName, qualifiedName) ->
-        Import(
-          qualifiedName.qualifiedNameComponents(),
-          simpleName
-            .takeUnless { it == qualifiedName.qualifiedNameToSimpleName() }
-            ?.let { Import.Suffix.WithAlias(it) }
-        )
+      importedSimpleNameToQualifiedNameMutableMap.entries
+        .map { (simpleName, qualifiedName) ->
+          Import(
+            qualifiedName.qualifiedNameComponents(),
+            simpleName
+              .takeUnless { it == qualifiedName.qualifiedNameToSimpleName() }
+              ?.let { Import.Suffix.WithAlias(it) }
+          )
+        }
+        .toSet()
+
+  /** A set of collected opt-in qualified names. */
+  val importedOptInQualifiedNamesSet: Set<String>
+    get() = importedOptInQualifiedNamesMutableSet.toSet()
+
+  /** Converts the given qualified name to a simple name, aliasing if necessary. */
+  fun qualifiedToSimpleName(qualifiedName: String): String =
+    qualifiedToNonAliasedSimpleName(qualifiedName) ?: qualifiedToAliasedSimpleName(qualifiedName)
+
+  /** Converts the given qualified name to non-aliased simple name, or null if alias is required. */
+  fun qualifiedToNonAliasedSimpleName(qualifiedName: String): String? {
+    val simpleName = qualifiedName.qualifiedNameToSimpleName()
+    if (topLevelQualifiedNamesSet.contains(qualifiedName)) {
+      return simpleName
+    }
+    val importMap = importedSimpleNameToQualifiedNameMutableMap
+    val importedQualifiedName = importMap[simpleName]
+    if (importedQualifiedName == null) {
+      if (topLevelQualifiedNamesSet.any { it.qualifiedNameToSimpleName() == simpleName }) {
+        return null
       }
+      importMap[simpleName] = qualifiedName
+      return simpleName
+    }
+    if (importedQualifiedName == qualifiedName) {
+      return simpleName
+    }
+    return null
+  }
+
+  /** Adds the given opt-in qualified name. */
+  fun addOptInQualifiedName(optInQualifiedName: String) {
+    importedOptInQualifiedNamesMutableSet.add(optInQualifiedName)
+  }
+
+  private fun qualifiedToAliasedSimpleName(qualifiedName: String): String {
+    return qualifiedName.qualifiedNameToAlias().also {
+      importedSimpleNameToQualifiedNameMutableMap[it] = qualifiedName
+    }
+  }
 }

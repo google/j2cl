@@ -31,8 +31,6 @@ import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.ast.Visibility
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotation
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.assignment
-import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.classLiteral
-import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.fileAnnotation
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.literal
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionObject
@@ -43,17 +41,6 @@ import com.google.j2cl.transpiler.backend.kotlin.common.titleCased
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
-
-private fun Renderer.fileOptInAnnotationSource(features: List<Source>): Source =
-  fileAnnotation(topLevelQualifiedNameSource("kotlin.OptIn"), features)
-
-internal val Renderer.fileOptInAnnotationSource: Source
-  get() =
-    environment.importedOptInQualifiedNames
-      .takeIf { it.isNotEmpty() }
-      ?.map { classLiteral(topLevelQualifiedNameSource(it)) }
-      ?.let { fileOptInAnnotationSource(it) }
-      .orEmpty()
 
 internal fun Renderer.objCNameAnnotationSource(name: String, exact: Boolean? = null): Source =
   annotation(
