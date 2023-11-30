@@ -49,6 +49,9 @@ public class JsMethodExample {
   @JsType
   static class SubJsType extends Base<String> {
     public void m(String s) {}
+
+    // not a JsMethod
+    static void n() {}
   }
 
   @JsType
