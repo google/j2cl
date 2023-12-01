@@ -61,6 +61,7 @@ _J2KT_JVM_PACKAGES = [
 
 # Packages that j2cl_library macro will generate j2kt web packages by default.
 _J2KT_WEB_PACKAGES = [
+    "samples/box2d/src/main/java",
     "transpiler/javatests/com/google/j2cl/integration/java",
     "transpiler/javatests/com/google/j2cl/readable/java",
 ]
