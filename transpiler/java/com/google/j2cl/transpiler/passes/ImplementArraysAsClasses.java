@@ -34,7 +34,6 @@ import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.NewArray;
-import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.Type;
@@ -276,10 +275,9 @@ public class ImplementArraysAsClasses extends NormalizationPass {
                     arrayTypeDescriptor.getComponentTypeDescriptor().isPrimitive()
                         ? arrayTypeDescriptor
                         : TypeDescriptors.get().javaLangObjectArray);
-            return NewInstance.Builder.from(
+            return MethodCall.Builder.from(
                     TypeDescriptors.getWasmArrayType(arrayTypeDescriptor)
-                        .getMethodDescriptor(
-                            MethodDescriptor.CONSTRUCTOR_METHOD_NAME, nativeArrayTypeDescriptor))
+                        .getMethodDescriptor("newWithLiteral", nativeArrayTypeDescriptor))
                 .setArguments(
                     new ArrayLiteral(nativeArrayTypeDescriptor, arrayLiteral.getValueExpressions()))
                 .build();
