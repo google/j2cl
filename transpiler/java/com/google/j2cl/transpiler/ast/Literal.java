@@ -15,12 +15,31 @@
  */
 package com.google.j2cl.transpiler.ast;
 
+import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 
 /** Abstract superclass for value literal expressions. */
 @Visitable
 public abstract class Literal extends Expression {
+
+  public static Literal fromValue(Object constantValue, TypeDescriptor typeDescriptor) {
+    if (constantValue instanceof Boolean) {
+      return BooleanLiteral.get((boolean) constantValue);
+    }
+    if (constantValue instanceof Number) {
+      return new NumberLiteral(typeDescriptor.toUnboxedType(), (Number) constantValue);
+    }
+    if (constantValue instanceof Character) {
+      return NumberLiteral.fromChar((Character) constantValue);
+    }
+    if (constantValue instanceof String) {
+      return new StringLiteral((String) constantValue);
+    }
+    throw new InternalCompilerError(
+        "Unexpected type for compile time constant: %s", constantValue.getClass().getSimpleName());
+  }
+
   @Override
   public boolean isIdempotent() {
     return true;
@@ -52,21 +71,5 @@ public abstract class Literal extends Expression {
   @Override
   Node acceptInternal(Processor processor) {
     return Visitor_Literal.visit(processor, this);
-  }
-
-  public static Literal fromValue(Object value, TypeDescriptor typeDescriptor) {
-    if (value instanceof Boolean) {
-      return (boolean) value ? BooleanLiteral.get(true) : BooleanLiteral.get(false);
-    }
-    if (value instanceof Number) {
-      return new NumberLiteral(typeDescriptor.toUnboxedType(), (Number) value);
-    }
-    if (value instanceof Character) {
-      return NumberLiteral.fromChar((Character) value);
-    }
-    if (value instanceof String) {
-      return new StringLiteral((String) value);
-    }
-    throw new IllegalArgumentException("Unexpected type " + typeDescriptor);
   }
 }

@@ -56,6 +56,23 @@ public class StringLiteral extends Literal {
   }
 
   @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof StringLiteral)) {
+      return false;
+    }
+    StringLiteral that = (StringLiteral) o;
+    return value.equals(that.value);
+  }
+
+  @Override
+  public int hashCode() {
+    return value.hashCode();
+  }
+
+  @Override
   public StringLiteral clone() {
     // String literals are value types do not need to actually clone.
     return this;

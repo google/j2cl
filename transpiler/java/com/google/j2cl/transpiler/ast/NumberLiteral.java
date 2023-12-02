@@ -21,6 +21,7 @@ import static com.google.common.base.Preconditions.checkState;
 import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
+import java.util.Objects;
 
 /** Number literal node. */
 @Visitable
@@ -85,6 +86,23 @@ public class NumberLiteral extends Literal {
   @Override
   public PrimitiveTypeDescriptor getTypeDescriptor() {
     return typeDescriptor;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof NumberLiteral)) {
+      return false;
+    }
+    NumberLiteral that = (NumberLiteral) o;
+    return Objects.equals(typeDescriptor, that.typeDescriptor) && Objects.equals(value, that.value);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(typeDescriptor, value);
   }
 
   @Override
