@@ -20,19 +20,15 @@ import com.google.j2cl.transpiler.ast.Type
 /**
  * Provides context for rendering Kotlin source code.
  *
- * @property environment rendering environment
+ * @property nameRenderer the underlying name renderer
  * @property currentReturnLabelIdentifier optional label to render in return statements
  * @property currentType currently rendered type, or null if not rendering a type
  * @property renderThisReferenceWithLabel whether to render this reference with explicit qualifier
- * @property localNames a set of local names which are potentially shadowing imports
- * @property topLevelQualifiedNames top-level qualified names, which will be rendered as simple name
- *   without import
  */
 internal data class Renderer(
-  val environment: Environment,
+  val nameRenderer: NameRenderer,
   val currentReturnLabelIdentifier: String? = null,
   val currentType: Type? = null,
   // TODO(b/252138814): Remove when KT-54349 is fixed
-  val renderThisReferenceWithLabel: Boolean = false,
-  val localNames: Set<String> = setOf()
+  val renderThisReferenceWithLabel: Boolean = false
 )

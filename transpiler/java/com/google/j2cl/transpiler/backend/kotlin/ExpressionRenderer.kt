@@ -169,17 +169,17 @@ private fun Renderer.arrayLiteralSource(arrayLiteral: ArrayLiteral): Source =
   arrayLiteral.typeDescriptor.typeArgument.let { typeArgument ->
     join(
       when (typeArgument.typeDescriptor) {
-        PrimitiveTypes.BOOLEAN -> topLevelQualifiedNameSource("kotlin.booleanArrayOf")
-        PrimitiveTypes.CHAR -> topLevelQualifiedNameSource("kotlin.charArrayOf")
-        PrimitiveTypes.BYTE -> topLevelQualifiedNameSource("kotlin.byteArrayOf")
-        PrimitiveTypes.SHORT -> topLevelQualifiedNameSource("kotlin.shortArrayOf")
-        PrimitiveTypes.INT -> topLevelQualifiedNameSource("kotlin.intArrayOf")
-        PrimitiveTypes.LONG -> topLevelQualifiedNameSource("kotlin.longArrayOf")
-        PrimitiveTypes.FLOAT -> topLevelQualifiedNameSource("kotlin.floatArrayOf")
-        PrimitiveTypes.DOUBLE -> topLevelQualifiedNameSource("kotlin.doubleArrayOf")
+        PrimitiveTypes.BOOLEAN -> nameRenderer.topLevelQualifiedNameSource("kotlin.booleanArrayOf")
+        PrimitiveTypes.CHAR -> nameRenderer.topLevelQualifiedNameSource("kotlin.charArrayOf")
+        PrimitiveTypes.BYTE -> nameRenderer.topLevelQualifiedNameSource("kotlin.byteArrayOf")
+        PrimitiveTypes.SHORT -> nameRenderer.topLevelQualifiedNameSource("kotlin.shortArrayOf")
+        PrimitiveTypes.INT -> nameRenderer.topLevelQualifiedNameSource("kotlin.intArrayOf")
+        PrimitiveTypes.LONG -> nameRenderer.topLevelQualifiedNameSource("kotlin.longArrayOf")
+        PrimitiveTypes.FLOAT -> nameRenderer.topLevelQualifiedNameSource("kotlin.floatArrayOf")
+        PrimitiveTypes.DOUBLE -> nameRenderer.topLevelQualifiedNameSource("kotlin.doubleArrayOf")
         else ->
           join(
-            topLevelQualifiedNameSource("kotlin.arrayOf"),
+            nameRenderer.topLevelQualifiedNameSource("kotlin.arrayOf"),
             typeArgumentsSource(listOf(typeArgument))
           )
       },
@@ -227,7 +227,7 @@ private fun Renderer.castExpressionSource(castExpression: CastExpression): Sourc
       dotSeparated(
         inParentheses(expressionSource(castExpression.expression)),
         spaceSeparated(
-          extensionMemberQualifiedNameSource("kotlin.let"),
+          nameRenderer.extensionMemberQualifiedNameSource("kotlin.let"),
           inInlineCurlyBrackets(
             semicolonSeparated(
               castTypeDescriptor.intersectionTypeDescriptors
@@ -392,7 +392,7 @@ private fun Renderer.jsDocCastExpressionSource(expression: JsDocCastExpression):
 
 private fun Renderer.instanceOfTestTypeDescriptorSource(typeDescriptor: TypeDescriptor): Source =
   if (typeDescriptor is ArrayTypeDescriptor && !typeDescriptor.isPrimitiveArray) {
-    join(topLevelQualifiedNameSource("kotlin.Array"), inAngleBrackets(source("*")))
+    join(nameRenderer.topLevelQualifiedNameSource("kotlin.Array"), inAngleBrackets(source("*")))
   } else {
     typeDescriptorSource(typeDescriptor.toNonNullable(), projectRawToWildcards = true)
   }
@@ -414,11 +414,11 @@ private fun stringLiteralSource(stringLiteral: StringLiteral): Source = literal(
 
 private fun Renderer.typeLiteralSource(typeLiteral: TypeLiteral): Source =
   dotSeparated(
-    classLiteral(qualifiedNameSource(typeLiteral.referencedTypeDescriptor)),
+    classLiteral(nameRenderer.qualifiedNameSource(typeLiteral.referencedTypeDescriptor)),
     if (typeLiteral.referencedTypeDescriptor.isPrimitive) {
-      nonNull(extensionMemberQualifiedNameSource("kotlin.jvm.javaPrimitiveType"))
+      nonNull(nameRenderer.extensionMemberQualifiedNameSource("kotlin.jvm.javaPrimitiveType"))
     } else {
-      extensionMemberQualifiedNameSource("kotlin.jvm.javaObjectType")
+      nameRenderer.extensionMemberQualifiedNameSource("kotlin.jvm.javaObjectType")
     }
   )
 
@@ -443,14 +443,14 @@ private fun Renderer.methodInvocationSource(expression: MethodCall): Source =
           // getExtension(extension) call.
           1 ->
             join(
-              extensionMemberQualifiedNameSource("com.google.protobuf.kotlin.get"),
+              nameRenderer.extensionMemberQualifiedNameSource("com.google.protobuf.kotlin.get"),
               invocationSource(expression)
             )
           // getExtension(extension, index) call.
           2 ->
             dotSeparated(
               join(
-                extensionMemberQualifiedNameSource("com.google.protobuf.kotlin.get"),
+                nameRenderer.extensionMemberQualifiedNameSource("com.google.protobuf.kotlin.get"),
                 inParentheses(expressionSource(expression.arguments[0]))
               ),
               join(source("get"), inParentheses(expressionSource(expression.arguments[1])))
@@ -461,7 +461,7 @@ private fun Renderer.methodInvocationSource(expression: MethodCall): Source =
         identifierSource(computeProtobufPropertyName(expression.target.name!!))
       methodDescriptor.isProtoExtensionChecker() ->
         join(
-          extensionMemberQualifiedNameSource("com.google.protobuf.kotlin.contains"),
+          nameRenderer.extensionMemberQualifiedNameSource("com.google.protobuf.kotlin.contains"),
           invocationSource(expression)
         )
       else ->
@@ -491,7 +491,7 @@ internal fun Renderer.invocationSource(invocation: Invocation) =
 
 private fun Renderer.multiExpressionSource(multiExpression: MultiExpression): Source =
   spaceSeparated(
-    extensionMemberQualifiedNameSource("kotlin.run"),
+    nameRenderer.extensionMemberQualifiedNameSource("kotlin.run"),
     block(newLineSeparated(multiExpression.expressions.map(::expressionSource)))
   )
 
@@ -521,7 +521,7 @@ private fun Renderer.newArraySource(
           else
             spaceSeparated(
               join(
-                topLevelQualifiedNameSource("kotlin.Array"),
+                nameRenderer.topLevelQualifiedNameSource("kotlin.Array"),
                 typeArgumentsSource(listOf(typeArgument)),
                 inParentheses(expressionSource(firstDimension))
               ),
@@ -543,7 +543,7 @@ private fun Renderer.primitiveArrayOfSource(
   dimension: Expression
 ): Source =
   join(
-    topLevelQualifiedNameSource(
+    nameRenderer.topLevelQualifiedNameSource(
       when (componentTypeDescriptor) {
         PrimitiveTypes.BOOLEAN -> "kotlin.BooleanArray"
         PrimitiveTypes.CHAR -> "kotlin.CharArray"
@@ -563,12 +563,12 @@ private fun Renderer.arrayOfNullsSource(typeArgument: TypeArgument, dimension: E
   join(
     if (typeArgument.typeDescriptor.isNullable) {
       join(
-        extensionMemberQualifiedNameSource("kotlin.arrayOfNulls"),
+        nameRenderer.extensionMemberQualifiedNameSource("kotlin.arrayOfNulls"),
         typeArgumentsSource(listOf(typeArgument.toNonNullable()))
       )
     } else {
       join(
-        extensionMemberQualifiedNameSource("javaemul.lang.uninitializedArrayOf"),
+        nameRenderer.extensionMemberQualifiedNameSource("javaemul.lang.uninitializedArrayOf"),
         typeArgumentsSource(listOf(typeArgument))
       )
     },
@@ -606,7 +606,7 @@ private fun Renderer.newInstanceTypeDescriptorSource(
       if (typeDeclaration.isCapturingEnclosingInstance) {
         identifierSource(typeDeclaration.ktSimpleName(asSuperType = true))
       } else {
-        qualifiedNameSource(typeDescriptor, asSuperType = true)
+        nameRenderer.qualifiedNameSource(typeDescriptor, asSuperType = true)
       },
       invocationTypeArgumentsSource(typeDescriptor.typeArguments())
     )
@@ -652,7 +652,7 @@ private fun Renderer.superReferenceSource(
   join(
     SUPER_KEYWORD,
     superTypeDescriptor
-      ?.let { inAngleBrackets(qualifiedNameSource(it, asSuperType = true)) }
+      ?.let { inAngleBrackets(nameRenderer.qualifiedNameSource(it, asSuperType = true)) }
       .orEmpty(),
     qualifierTypeDescriptor?.let { labelReferenceSource(it) }.orEmpty()
   )
@@ -685,7 +685,7 @@ private fun Renderer.variableDeclarationExpressionSource(
   )
 
 private fun Renderer.variableReferenceSource(variableReference: VariableReference): Source =
-  nameSource(variableReference.target)
+  nameRenderer.nameSource(variableReference.target)
 
 private fun Renderer.variableDeclarationFragmentSource(
   fragment: VariableDeclarationFragment
@@ -697,7 +697,7 @@ private fun Renderer.variableDeclarationFragmentSource(
 
 private fun Renderer.variableSource(variable: Variable): Source =
   colonSeparated(
-    nameSource(variable),
+    nameRenderer.nameSource(variable),
     variable.typeDescriptor
       .takeIf { it.isKtDenotableNonWildcard }
       ?.let { typeDescriptorSource(it) }
@@ -713,9 +713,9 @@ private fun Renderer.qualifierSource(memberReference: MemberReference): Source =
         val ktCompanionQualifiedName =
           enclosingTypeDescriptor.typeDeclaration.ktCompanionQualifiedName
         if (ktCompanionQualifiedName != null) {
-          topLevelQualifiedNameSource(ktCompanionQualifiedName)
+          nameRenderer.topLevelQualifiedNameSource(ktCompanionQualifiedName)
         } else {
-          qualifiedNameSource(enclosingTypeDescriptor)
+          nameRenderer.qualifiedNameSource(enclosingTypeDescriptor)
         }
       } else {
         Source.EMPTY

@@ -29,7 +29,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSe
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
 /** Source with rendered imports. */
-internal val Renderer.importsSource: Source
+internal val NameRenderer.importsSource: Source
   get() = newLineSeparated(imports.map { it.source })
 
 /** A set of default imports. */
@@ -37,7 +37,7 @@ private val defaultImports: Set<Import>
   get() = setOf(starImport("javaemul", "lang"))
 
 /** A list of imports to render. */
-private val Renderer.imports: List<Import>
+private val NameRenderer.imports: List<Import>
   get() = defaultImports.plus(environment.importsSet).sortedWith(lexicographicalOrder())
 
 /** Source for this import. */

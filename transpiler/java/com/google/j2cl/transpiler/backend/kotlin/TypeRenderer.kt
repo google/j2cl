@@ -57,7 +57,7 @@ internal fun Renderer.typeSource(type: Type): Source =
       nativeTypeSource(typeDeclaration)
     } else {
       newLineSeparated(
-        objCAnnotationSource(typeDeclaration),
+        nameRenderer.objCAnnotationSource(typeDeclaration),
         jsInteropAnnotationsSource(typeDeclaration),
         spaceSeparated(
           inheritanceModifierSource(typeDeclaration),
@@ -174,9 +174,9 @@ internal fun Renderer.typeBodySource(type: Type): Source =
 
 internal fun Renderer.forTypeBody(type: Type): Renderer =
   copy(
+    nameRenderer = nameRenderer.copy(localNames = nameRenderer.localNames + type.localNamesSet),
     currentType = type,
-    renderThisReferenceWithLabel = false,
-    localNames = localNames + type.localNamesSet
+    renderThisReferenceWithLabel = false
   )
 
 private fun Renderer.enumValuesSource(type: Type): Source =
@@ -187,7 +187,7 @@ private fun Renderer.enumValueSource(field: Field): Source =
     .let { it as NewInstance }
     .let { newInstance ->
       newLineSeparated(
-        objCAnnotationSource(field.descriptor),
+        nameRenderer.objCAnnotationSource(field.descriptor),
         jsInteropAnnotationsSource(field.descriptor),
         spaceSeparated(
           join(

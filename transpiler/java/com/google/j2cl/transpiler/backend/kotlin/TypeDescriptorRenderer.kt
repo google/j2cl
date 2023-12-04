@@ -52,7 +52,7 @@ internal fun Renderer.typeDescriptorSource(
   projectRawToWildcards: Boolean = false
 ): Source =
   TypeDescriptorRenderer(
-      this,
+      nameRenderer,
       asSuperType = asSuperType,
       projectRawToWildcards = projectRawToWildcards
     )
@@ -60,45 +60,7 @@ internal fun Renderer.typeDescriptorSource(
 
 /** Returns source for the given list of type arguments. */
 internal fun Renderer.typeArgumentsSource(typeArguments: List<TypeArgument>): Source =
-  TypeDescriptorRenderer(this).argumentsSource(typeArguments)
-
-/**
- * Returns source containing qualified name for the given type descriptor.
- *
- * @param typeDescriptor the type descriptor to get the source for
- * @param asSuperType whether to use bridge name for the super-type
- */
-internal fun Renderer.qualifiedNameSource(
-  typeDescriptor: TypeDescriptor,
-  asSuperType: Boolean = false
-): Source =
-  if (typeDescriptor is DeclaredTypeDescriptor) {
-    val typeDeclaration = typeDescriptor.typeDeclaration
-    val enclosingTypeDescriptor = typeDescriptor.enclosingTypeDescriptor
-    val nativeQualifiedName = typeDeclaration.ktNativeQualifiedName
-    val bridgeQualifiedName = typeDeclaration.ktBridgeQualifiedName
-    when {
-      asSuperType ->
-        // Use fully-qualified bridge name if present
-        bridgeQualifiedName?.let { topLevelQualifiedNameSource(it) }
-          ?: qualifiedNameSource(typeDescriptor)
-      typeDeclaration.isLocal ->
-        // Use simple name for local types
-        identifierSource(typeDescriptor.typeDeclaration.ktSimpleName())
-      nativeQualifiedName != null ->
-        // Use fully-qualified native name if present
-        topLevelQualifiedNameSource(nativeQualifiedName)
-      enclosingTypeDescriptor != null ->
-        // Use fully-qualified name for top-level type, and simple name for inner types
-        dotSeparated(
-          qualifiedNameSource(enclosingTypeDescriptor),
-          identifierSource(typeDeclaration.ktSimpleName())
-        )
-      else -> topLevelQualifiedNameSource(typeDescriptor.ktQualifiedName)
-    }
-  } else {
-    topLevelQualifiedNameSource(typeDescriptor.ktQualifiedName)
-  }
+  TypeDescriptorRenderer(nameRenderer).argumentsSource(typeArguments)
 
 /**
  * Type descriptor renderer, contains options for rendering type descriptor sources.
@@ -109,7 +71,7 @@ internal fun Renderer.qualifiedNameSource(
  * @property projectRawToWildcards whether to project raw types to wildcards, or bounds
  */
 private data class TypeDescriptorRenderer(
-  val renderer: Renderer,
+  val nameRenderer: NameRenderer,
   val seenTypeVariables: Set<TypeVariable> = setOf(),
   // TODO(b/246842682): Remove when bridge types are materialized as TypeDescriptors
   val asSuperType: Boolean = false,
@@ -123,7 +85,7 @@ private data class TypeDescriptorRenderer(
     when (typeDescriptor) {
       is ArrayTypeDescriptor -> arraySource(typeDescriptor)
       is DeclaredTypeDescriptor -> declaredSource(typeDescriptor)
-      is PrimitiveTypeDescriptor -> renderer.qualifiedNameSource(typeDescriptor)
+      is PrimitiveTypeDescriptor -> nameRenderer.qualifiedNameSource(typeDescriptor)
       is TypeVariable -> variableSource(typeDescriptor)
       is IntersectionTypeDescriptor -> intersectionSource(typeDescriptor)
       else -> throw InternalCompilerError("Unexpected ${typeDescriptor::class.java.simpleName}")
@@ -131,7 +93,7 @@ private data class TypeDescriptorRenderer(
 
   fun arraySource(arrayTypeDescriptor: ArrayTypeDescriptor): Source =
     join(
-      renderer.qualifiedNameSource(arrayTypeDescriptor),
+      nameRenderer.qualifiedNameSource(arrayTypeDescriptor),
       arrayTypeDescriptor.componentTypeDescriptor.let {
         Source.emptyUnless(!it.isPrimitive) { inAngleBrackets(child.source(it)) }
       },
@@ -144,7 +106,7 @@ private data class TypeDescriptorRenderer(
     val isStatic = !typeDeclaration.isCapturingEnclosingInstance
     return join(
       if (typeDeclaration.isLocal || enclosingTypeDescriptor == null || isStatic) {
-        renderer.qualifiedNameSource(declaredTypeDescriptor, asSuperType)
+        nameRenderer.qualifiedNameSource(declaredTypeDescriptor, asSuperType)
       } else {
         dotSeparated(
           child.declaredSource(enclosingTypeDescriptor.toNonNullable()),
@@ -188,9 +150,16 @@ private data class TypeDescriptorRenderer(
             }
           }
         } else {
-          join(renderer.nameSource(typeVariable.toNullable()), nullableSuffixSource(typeVariable))
+          join(
+              nameRenderer.nameSource(typeVariable.toNullable()),
+              nullableSuffixSource(typeVariable)
+            )
             .letIf(typeVariable.hasAmpersandAny) {
-              infix(it, INTERSECTION_OPERATOR, renderer.topLevelQualifiedNameSource("kotlin.Any"))
+              infix(
+                it,
+                INTERSECTION_OPERATOR,
+                nameRenderer.topLevelQualifiedNameSource("kotlin.Any")
+              )
             }
         }
       }

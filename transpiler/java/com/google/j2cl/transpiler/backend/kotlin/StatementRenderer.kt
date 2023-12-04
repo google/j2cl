@@ -100,7 +100,7 @@ internal fun Renderer.statementSource(statement: Statement): Source =
 private fun Renderer.assertStatementSource(assertStatement: AssertStatement): Source =
   spaceSeparated(
     join(
-      extensionMemberQualifiedNameSource("kotlin.assert"),
+      nameRenderer.extensionMemberQualifiedNameSource("kotlin.assert"),
       inParentheses(expressionSource(assertStatement.expression))
     ),
     assertStatement.message?.let { block(expressionSource(it)) }.orEmpty()
@@ -115,7 +115,7 @@ private fun Renderer.continueStatementSource(continueStatement: ContinueStatemen
   join(CONTINUE_KEYWORD, continueStatement.labelReference?.let(::labelReferenceSource).orEmpty())
 
 private fun Renderer.labelReferenceSource(labelReference: LabelReference): Source =
-  at(nameSource(labelReference.target))
+  at(nameRenderer.nameSource(labelReference.target))
 
 private fun Renderer.doWhileStatementSource(doWhileStatement: DoWhileStatement): Source =
   spaceSeparated(
@@ -133,7 +133,7 @@ private fun Renderer.forEachStatementSource(forEachStatement: ForEachStatement):
     FOR_KEYWORD,
     inParentheses(
       infix(
-        nameSource(forEachStatement.loopVariable),
+        nameRenderer.nameSource(forEachStatement.loopVariable),
         IN_KEYWORD,
         expressionSource(forEachStatement.iterableExpression)
       )
@@ -167,7 +167,7 @@ private fun Renderer.fieldDeclarationStatementSource(
 
 private fun Renderer.labeledStatementSource(labelStatement: LabeledStatement): Source =
   spaceSeparated(
-    join(nameSource(labelStatement.label), AT_OPERATOR),
+    join(nameRenderer.nameSource(labelStatement.label), AT_OPERATOR),
     labelStatement.statement.let { statementSource(it).letIf(it is LabeledStatement) { block(it) } }
   )
 
@@ -224,7 +224,7 @@ private fun Renderer.synchronizedStatementSource(
 ): Source =
   spaceSeparated(
     join(
-      extensionMemberQualifiedNameSource("kotlin.synchronized"),
+      nameRenderer.extensionMemberQualifiedNameSource("kotlin.synchronized"),
       inParentheses(expressionSource(synchronizedStatement.expression))
     ),
     statementSource(synchronizedStatement.body)
@@ -273,6 +273,8 @@ private fun Renderer.catchClauseSource(
 ): Source =
   spaceSeparated(
     CATCH_KEYWORD,
-    inParentheses(colonSeparated(nameSource(variable), typeDescriptorSource(type.toNonNullable()))),
+    inParentheses(
+      colonSeparated(nameRenderer.nameSource(variable), typeDescriptorSource(type.toNonNullable()))
+    ),
     blockSource(body)
   )

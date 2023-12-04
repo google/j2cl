@@ -78,7 +78,7 @@ internal fun Renderer.source(member: Member): Source =
 
 private fun Renderer.source(companionObject: CompanionObject): Source =
   newLineSeparated(
-    objCAnnotationSource(companionObject),
+    nameRenderer.objCAnnotationSource(companionObject),
     spaceSeparated(
       COMPANION_KEYWORD,
       OBJECT_KEYWORD,
@@ -150,7 +150,7 @@ private fun Renderer.fieldSource(field: Field): Source {
 
   return newLineSeparated(
     Source.emptyUnless(isJvmField) { jvmFieldAnnotationSource() },
-    objCAnnotationSource(fieldDescriptor),
+    nameRenderer.objCAnnotationSource(fieldDescriptor),
     jsInteropAnnotationsSource(fieldDescriptor),
     spaceSeparated(
       visibilityModifierSource(field.descriptor),
@@ -163,7 +163,7 @@ private fun Renderer.fieldSource(field: Field): Source {
       ),
       initializer(
         if (initializer == null && field.isNative) {
-          topLevelQualifiedNameSource("kotlin.js.definedExternally")
+          nameRenderer.topLevelQualifiedNameSource("kotlin.js.definedExternally")
         } else {
           initializer?.let(::expressionSource).orEmpty()
         }
@@ -173,17 +173,17 @@ private fun Renderer.fieldSource(field: Field): Source {
 }
 
 private fun Renderer.jvmFieldAnnotationSource(): Source =
-  annotation(topLevelQualifiedNameSource("kotlin.jvm.JvmField"))
+  annotation(nameRenderer.topLevelQualifiedNameSource("kotlin.jvm.JvmField"))
 
 private fun Renderer.jvmStaticAnnotationSource(): Source =
-  annotation(topLevelQualifiedNameSource("kotlin.jvm.JvmStatic"))
+  annotation(nameRenderer.topLevelQualifiedNameSource("kotlin.jvm.JvmStatic"))
 
 private fun Renderer.jvmThrowsAnnotationSource(methodDescriptor: MethodDescriptor): Source =
   methodDescriptor.exceptionTypeDescriptors
     .takeIf { it.isNotEmpty() }
     ?.let { exceptionTypeDescriptors ->
       annotation(
-        topLevelQualifiedNameSource("kotlin.jvm.Throws"),
+        nameRenderer.topLevelQualifiedNameSource("kotlin.jvm.Throws"),
         exceptionTypeDescriptors.map {
           classLiteral(typeDescriptorSource(it.toRawTypeDescriptor().toNonNullable()))
         }
@@ -196,7 +196,7 @@ private fun Renderer.nativeThrowsAnnotationSource(methodDescriptor: MethodDescri
     .takeIf { it.isThrows }
     ?.let {
       annotation(
-        topLevelQualifiedNameSource("javaemul.lang.NativeThrows"),
+        nameRenderer.topLevelQualifiedNameSource("javaemul.lang.NativeThrows"),
         classLiteral(typeDescriptorSource(TypeDescriptors.get().javaLangThrowable.toNonNullable()))
       )
     }
@@ -213,7 +213,7 @@ private fun Renderer.methodHeaderSource(method: Method): Source =
     val methodObjCNames = method.toObjCNames()
     newLineSeparated(
       Source.emptyUnless(methodDescriptor.isStatic) { jvmStaticAnnotationSource() },
-      objCAnnotationSource(methodDescriptor, methodObjCNames),
+      nameRenderer.objCAnnotationSource(methodDescriptor, methodObjCNames),
       jsInteropAnnotationsSource(methodDescriptor),
       jvmThrowsAnnotationSource(methodDescriptor),
       nativeThrowsAnnotationSource(methodDescriptor),
@@ -336,9 +336,9 @@ private fun Renderer.parameterSource(
     }
   return spaceSeparated(
     Source.emptyUnless(parameterDescriptor.isVarargs) { VARARG_KEYWORD },
-    objCParameterName?.let { objCNameAnnotationSource(it) }.orEmpty(),
+    objCParameterName?.let { nameRenderer.objCNameAnnotationSource(it) }.orEmpty(),
     jsInteropAnnotationsSource(parameterDescriptor),
-    colonSeparated(nameSource(parameter), typeDescriptorSource(renderedTypeDescriptor))
+    colonSeparated(nameRenderer.nameSource(parameter), typeDescriptorSource(renderedTypeDescriptor))
   )
 }
 

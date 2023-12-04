@@ -42,7 +42,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
-internal fun Renderer.objCNameAnnotationSource(name: String, exact: Boolean? = null): Source =
+internal fun NameRenderer.objCNameAnnotationSource(name: String, exact: Boolean? = null): Source =
   annotation(
     topLevelQualifiedNameSource(
       "kotlin.native.ObjCName",
@@ -52,17 +52,17 @@ internal fun Renderer.objCNameAnnotationSource(name: String, exact: Boolean? = n
     exact?.let { parameterSource("exact", literal(it)) }.orEmpty()
   )
 
-internal fun Renderer.objCAnnotationSource(typeDeclaration: TypeDeclaration): Source =
+internal fun NameRenderer.objCAnnotationSource(typeDeclaration: TypeDeclaration): Source =
   Source.emptyUnless(typeDeclaration.needsObjCNameAnnotation) {
     objCNameAnnotationSource(typeDeclaration.objCName, exact = true)
   }
 
-internal fun Renderer.objCAnnotationSource(companionObject: CompanionObject): Source =
+internal fun NameRenderer.objCAnnotationSource(companionObject: CompanionObject): Source =
   Source.emptyUnless(companionObject.needsObjCNameAnnotation) {
     objCNameAnnotationSource(companionObject.declaration.objCName, exact = true)
   }
 
-internal fun Renderer.objCAnnotationSource(
+internal fun NameRenderer.objCAnnotationSource(
   methodDescriptor: MethodDescriptor,
   methodObjCNames: MethodObjCNames?
 ): Source =
@@ -70,7 +70,7 @@ internal fun Renderer.objCAnnotationSource(
     methodObjCNames?.methodName?.let { objCNameAnnotationSource(it) }.orEmpty()
   }
 
-internal fun Renderer.objCAnnotationSource(fieldDescriptor: FieldDescriptor): Source =
+internal fun NameRenderer.objCAnnotationSource(fieldDescriptor: FieldDescriptor): Source =
   Source.emptyUnless(fieldDescriptor.needsObjCNameAnnotations) {
     objCNameAnnotationSource(fieldDescriptor.objCName)
   }

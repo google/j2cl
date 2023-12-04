@@ -39,13 +39,13 @@ private val Renderer.fileAnnotationsSource: Source
   get() = newLineSeparated(fileOptInAnnotationSource, suppressFileAnnotationSource)
 
 private fun Renderer.fileOptInAnnotationSource(features: List<Source>): Source =
-  fileAnnotation(topLevelQualifiedNameSource("kotlin.OptIn"), features)
+  fileAnnotation(nameRenderer.topLevelQualifiedNameSource("kotlin.OptIn"), features)
 
 internal val Renderer.fileOptInAnnotationSource: Source
   get() =
-    environment.importedOptInQualifiedNamesSet
+    nameRenderer.environment.importedOptInQualifiedNamesSet
       .takeIf { it.isNotEmpty() }
-      ?.map { KotlinSource.classLiteral(topLevelQualifiedNameSource(it)) }
+      ?.map { KotlinSource.classLiteral(nameRenderer.topLevelQualifiedNameSource(it)) }
       ?.let { fileOptInAnnotationSource(it) }
       .orEmpty()
 
@@ -53,7 +53,7 @@ internal val Renderer.fileOptInAnnotationSource: Source
 private val Renderer.suppressFileAnnotationSource: Source
   get() =
     fileAnnotation(
-      topLevelQualifiedNameSource("kotlin.Suppress"),
+      nameRenderer.topLevelQualifiedNameSource("kotlin.Suppress"),
       listOf(
           "ALWAYS_NULL",
           "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -74,7 +74,7 @@ private val Renderer.suppressFileAnnotationSource: Source
 
 /** Returns source with package declaration and imports for [compilationUnit]. */
 internal fun Renderer.packageAndImportsSource(compilationUnit: CompilationUnit): Source =
-  emptyLineSeparated(packageSource(compilationUnit), importsSource)
+  emptyLineSeparated(packageSource(compilationUnit), nameRenderer.importsSource)
 
 /** Returns package declaration source for [compilationUnit]. */
 private fun packageSource(compilationUnit: CompilationUnit): Source =

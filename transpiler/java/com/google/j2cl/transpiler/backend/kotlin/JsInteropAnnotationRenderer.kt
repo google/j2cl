@@ -51,7 +51,9 @@ internal fun Renderer.jsInteropAnnotationsSource(methodDescriptor: MethodDescrip
 internal fun Renderer.jsInteropAnnotationsSource(parameterDescriptor: ParameterDescriptor): Source =
   parameterDescriptor
     .takeIf { it.isJsOptional }
-    ?.let { annotation(topLevelQualifiedNameSource("jsinterop.annotations.JsOptional")) }
+    ?.let {
+      annotation(nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsOptional"))
+    }
     .orEmpty()
 
 private fun Renderer.jsPropertyAnnotationSource(memberDescriptor: MemberDescriptor): Source =
@@ -63,19 +65,23 @@ private fun Renderer.jsPropertyAnnotationSource(memberDescriptor: MemberDescript
 private fun Renderer.jsIgnoreAnnotationSource(memberDescriptor: MemberDescriptor): Source =
   memberDescriptor
     .takeIf { it.hasJsIgnoreAnnotation }
-    ?.let { annotation(topLevelQualifiedNameSource("jsinterop.annotations.JsIgnore")) }
+    ?.let { annotation(nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsIgnore")) }
     .orEmpty()
 
 private fun Renderer.jsOverlayAnnotationSource(memberDescriptor: MemberDescriptor): Source =
   memberDescriptor
     .takeIf { it.isJsOverlay }
-    ?.let { annotation(topLevelQualifiedNameSource("jsinterop.annotations.JsOverlay")) }
+    ?.let {
+      annotation(nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsOverlay"))
+    }
     .orEmpty()
 
 private fun Renderer.jsConstructorAnnotationSource(methodDescriptor: MethodDescriptor): Source =
   methodDescriptor
     .takeIf { it.hasJsConstructorAnnotation }
-    ?.let { annotation(topLevelQualifiedNameSource("jsinterop.annotations.JsConstructor")) }
+    ?.let {
+      annotation(nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsConstructor"))
+    }
     .orEmpty()
 
 private fun Renderer.jsMethodAnnotationSource(methodDescriptor: MethodDescriptor): Source =
@@ -107,7 +113,7 @@ private fun Renderer.jsInteropAnnotationSource(
           ?: if (it.isKtNameMangled) it.simpleJsName else null
 
       annotation(
-        topLevelQualifiedNameSource(annotationQualifiedName),
+        nameRenderer.topLevelQualifiedNameSource(annotationQualifiedName),
         nameParameterSource(nameParameterValue),
         namespaceParameterSource(it.originalJsInfo.jsNamespace)
       )
@@ -117,7 +123,9 @@ private fun Renderer.jsInteropAnnotationSource(
 private fun Renderer.jsFunctionAnnotationSource(typeDeclaration: TypeDeclaration): Source =
   typeDeclaration
     .takeIf { it.isJsFunctionInterface }
-    ?.let { annotation(topLevelQualifiedNameSource("jsinterop.annotations.JsFunction")) }
+    ?.let {
+      annotation(nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsFunction"))
+    }
     .orEmpty()
 
 private fun Renderer.jsEnumAnnotationSource(typeDeclaration: TypeDeclaration): Source =
@@ -125,7 +133,7 @@ private fun Renderer.jsEnumAnnotationSource(typeDeclaration: TypeDeclaration): S
     .takeIf { it.isJsEnum }
     ?.let {
       annotation(
-        topLevelQualifiedNameSource("jsinterop.annotations.JsEnum"),
+        nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsEnum"),
         nameParameterSource(it),
         namespaceParameterSource(it),
         isNativeParameterSource(it.isNative),
@@ -143,7 +151,7 @@ private fun Renderer.jsTypeAnnotationSource(typeDeclaration: TypeDeclaration): S
     .takeIf { it.isJsType }
     ?.let {
       annotation(
-        topLevelQualifiedNameSource("jsinterop.annotations.JsType"),
+        nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsType"),
         nameParameterSource(it),
         namespaceParameterSource(it),
         isNativeParameterSource(it.isNative)
@@ -178,7 +186,7 @@ private fun Renderer.namespaceSource(namespace: String): Source =
 
 private fun Renderer.globalNamespaceSource(): Source =
   dotSeparated(
-    topLevelQualifiedNameSource("jsinterop.annotations.JsPackage"),
+    nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsPackage"),
     identifierSource("GLOBAL")
   )
 

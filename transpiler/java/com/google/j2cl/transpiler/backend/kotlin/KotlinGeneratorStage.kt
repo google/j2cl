@@ -73,7 +73,9 @@ class KotlinGeneratorStage(private val output: OutputUtils.Output, private val p
         topLevelQualifiedNamesSet = compilationUnit.topLevelQualifiedNamesSet
       )
 
-    val renderer = Renderer(environment)
+    val nameRenderer = NameRenderer(environment)
+
+    val renderer = Renderer(nameRenderer)
 
     // Render types, collecting qualified names to import
     val typesSource = renderer.typesSource(compilationUnit)
