@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.backend.wasm;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static java.lang.String.format;
 import static java.util.Comparator.comparingInt;
 
@@ -35,6 +36,7 @@ import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.HasName;
 import com.google.j2cl.transpiler.ast.Library;
+import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.NameDeclaration;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
@@ -49,6 +51,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 /** Allows mapping of middle end constructors to the backend. */
 class WasmGenerationEnvironment {
@@ -283,6 +286,28 @@ class WasmGenerationEnvironment {
     return prefix + "." + methodDescriptor.getMangledName();
   }
 
+  /** Returns the methods that need intrinsic declaration indexed by the name of the import. */
+  ImmutableMap<String, MethodDescriptor> collectMethodsNeedingIntrinsicDeclarations() {
+    return library
+        .streamTypes()
+        .flatMap(t -> t.getMethods().stream())
+        .map(Method::getDescriptor)
+        .filter(MethodDescriptor::isSideEffectFree)
+        .collect(
+            toImmutableMap(
+                this::getNoSideEffectWrapperFunctionName, Function.identity(), (a, b) -> a));
+  }
+
+  /** Returns methods that need a wasm function type declaration indexed by the name of the type. */
+  ImmutableMap<String, MethodDescriptor> collectMethodsThatNeedTypeDeclarations() {
+    return library
+        .streamTypes()
+        .flatMap(t -> t.getMethods().stream())
+        .map(Method::getDescriptor)
+        .filter(MethodDescriptor::isPolymorphic)
+        .collect(toImmutableMap(this::getFunctionTypeName, Function.identity(), (a, b) -> a));
+  }
+
   private final Map<TypeDeclaration, Integer> slotByInterfaceTypeDeclaration = new HashMap<>();
 
   public String getInterfaceSlotFieldName(TypeDeclaration typeDeclaration) {
@@ -359,14 +384,12 @@ class WasmGenerationEnvironment {
     return jsImports.getMethodImports().get(methodDescriptor);
   }
 
-  WasmGenerationEnvironment(Library library, Imports jsImports) {
-    this(library, jsImports, /* isModular= */ false);
-  }
-
   private boolean isModular;
+  private Library library;
 
   WasmGenerationEnvironment(Library library, Imports jsImports, boolean isModular) {
     this.isModular = isModular;
+    this.library = library;
 
     // Resolve variable names into unique wasm identifiers.
     library
@@ -403,6 +426,10 @@ class WasmGenerationEnvironment {
     }
 
     this.jsImports = jsImports;
+  }
+
+  WasmGenerationEnvironment(Library library, Imports jsImports) {
+    this(library, jsImports, /* isModular= */ false);
   }
 
   private WasmTypeLayout getWasmLayout(TypeDeclaration typeDeclaration) {

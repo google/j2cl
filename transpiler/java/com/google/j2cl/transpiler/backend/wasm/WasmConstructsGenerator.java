@@ -43,10 +43,8 @@ import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -122,7 +120,7 @@ public class WasmConstructsGenerator {
     builder.append("(rec");
     builder.indent();
 
-    emitDynamicDispatchMethodTypes(library);
+    emitDynamicDispatchMethodTypes();
     emitItableSupportTypes();
     emitNativeArrayTypes(usedNativeArrayTypes);
     emitForEachType(library, this::renderMonolithicTypeStructs, "type definition");
@@ -151,21 +149,11 @@ public class WasmConstructsGenerator {
   }
 
   /** Emit the type for all function signatures that will be needed to reference vtable methods. */
-  void emitDynamicDispatchMethodTypes(Library library) {
-    Set<String> emittedFunctionTypeNames = new HashSet<>();
-    library
-        .streamTypes()
-        .flatMap(t -> t.getMethods().stream())
-        .map(Method::getDescriptor)
-        .filter(MethodDescriptor::isPolymorphic)
-        .forEach(m -> emitFunctionType(emittedFunctionTypeNames, m));
+  void emitDynamicDispatchMethodTypes() {
+    environment.collectMethodsThatNeedTypeDeclarations().forEach(this::emitFunctionType);
   }
 
-  private void emitFunctionType(Set<String> emittedFunctionTypeNames, MethodDescriptor m) {
-    String typeName = environment.getFunctionTypeName(m);
-    if (!emittedFunctionTypeNames.add(typeName)) {
-      return;
-    }
+  void emitFunctionType(String typeName, MethodDescriptor m) {
     builder.newLine();
     builder.append(format("(type %s (func", typeName));
     emitFunctionParameterTypes(m);
@@ -179,7 +167,7 @@ public class WasmConstructsGenerator {
    * <p>In order to communicate information to binaryen, binaryen provides intrinsic methods that
    * need to be imported.
    */
-  void emitImportsForBinaryenIntrinsics(Library library) {
+  void emitImportsForBinaryenIntrinsics() {
 
     // Emit the intrinsic for calls with no side effects. The intrinsic method exported name is
     // "call.without.effects" and can be used to convey to binaryen that a certain function call
@@ -187,21 +175,12 @@ public class WasmConstructsGenerator {
     // Since the mechanism itself is a call, it needs to be correctly typed. As a result for each
     // different function type that appears in the AST as part of no-side-effect call, an import
     // with the right function type definition needs to be created.
-    Set<String> emittedFunctionTypeNames = new HashSet<>();
-    library
-        .streamTypes()
-        .flatMap(t -> t.getMethods().stream())
-        .map(Method::getDescriptor)
-        .filter(MethodDescriptor::isSideEffectFree)
-        .forEach(m -> emitBinaryenIntrinsicImport(emittedFunctionTypeNames, m));
+    environment
+        .collectMethodsNeedingIntrinsicDeclarations()
+        .forEach(this::emitBinaryenIntrinsicImport);
   }
 
-  private void emitBinaryenIntrinsicImport(
-      Set<String> emittedFunctionTypeNames, MethodDescriptor m) {
-    String typeName = environment.getNoSideEffectWrapperFunctionName(m);
-    if (!emittedFunctionTypeNames.add(typeName)) {
-      return;
-    }
+  void emitBinaryenIntrinsicImport(String typeName, MethodDescriptor m) {
     builder.newLine();
     builder.append(
         format(
@@ -230,6 +209,22 @@ public class WasmConstructsGenerator {
     if (!TypeDescriptors.isPrimitiveVoid(returnTypeDescriptor)) {
       builder.append(format(" (result %s)", environment.getWasmType(returnTypeDescriptor)));
     }
+  }
+
+  void emitExceptionTag() {
+    // Declare a tag that will be used for Java exceptions. The tag has a single parameter that is
+    // the Throwable object being thrown by the throw instruction.
+    // The throw instruction will refer to this tag and will expect a single element in the stack
+    // with the type $java.lang.Throwable.
+    // TODO(b/277970998): Decide how to handle this hard coded import w.r.t. import generation.
+    builder.newLine();
+    builder.append(
+        "(import \"imports\" \"j2wasm.ExceptionUtils.tag\" (tag $exception.event (param"
+            + " externref)))");
+    // Add an export that uses the tag to workarund binaryen assuming the tag is never instantiated.
+    builder.append(
+        "(func $keep_tag_alive_hack (export \"_tag_hack_\") (param $param externref)  "
+            + "(throw $exception.event (local.get $param)))");
   }
 
   private void renderMonolithicTypeStructs(Type type) {

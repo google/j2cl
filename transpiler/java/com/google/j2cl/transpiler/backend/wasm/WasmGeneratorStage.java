@@ -80,7 +80,7 @@ public class WasmGeneratorStage {
     emitToFile(
         "types.wat",
         generator -> {
-          generator.emitDynamicDispatchMethodTypes(library);
+          generator.emitDynamicDispatchMethodTypes();
           generator.emitNativeArrayTypes(usedNativeArrayTypes);
           generator.emitForEachType(
               library, generator::renderModularTypeStructs, "type definition");
@@ -139,19 +139,7 @@ public class WasmGeneratorStage {
     // Emit all types at the beginning of the module.
     generator.emitLibraryRecGroup(library, usedNativeArrayTypes);
 
-    // Declare a tag that will be used for Java exceptions. The tag has a single parameter that is
-    // the Throwable object being thrown by the throw instruction.
-    // The throw instruction will refer to this tag and will expect a single element in the stack
-    // with the type $java.lang.Throwable.
-    // TODO(b/277970998): Decide how to handle this hard coded import w.r.t. import generation.
-    builder.newLine();
-    builder.append(
-        "(import \"imports\" \"j2wasm.ExceptionUtils.tag\" (tag $exception.event (param"
-            + " externref)))");
-    // Add an export that uses the tag to workarund binaryen assuming the tag is never instantiated.
-    builder.append(
-        "(func $keep_tag_alive_hack (export \"_tag_hack_\") (param $param externref)  "
-            + "(throw $exception.event (local.get $param)))");
+    generator.emitExceptionTag();
 
     // Emit all the globals, e.g. vtable instances, etc.
     generator.emitDataSegments(library);
@@ -160,7 +148,7 @@ public class WasmGeneratorStage {
     generator.emitGlobals(library);
 
     // Emit intrinsics imports
-    generator.emitImportsForBinaryenIntrinsics(library);
+    generator.emitImportsForBinaryenIntrinsics();
 
     // Last, emit all methods at the very end so that the synthetic code generated above does
     // not inherit an incorrect source position.
