@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.CompilationUnit
+import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.PACKAGE_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.fileAnnotation
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.literal
@@ -26,63 +27,83 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
-/** Returns file header source of [compilationUnit]. */
-internal fun Renderer.fileHeaderSource(compilationUnit: CompilationUnit): Source =
-  newLineSeparated(fileCommentSource(compilationUnit), fileAnnotationsSource)
+/**
+ * Compilation unit renderer.
+ *
+ * @param nameRenderer the underlying name renderer
+ */
+internal data class CompilationUnitRenderer(val nameRenderer: NameRenderer) {
 
-/** Returns file comment source for [compilationUnit]. */
-private fun fileCommentSource(compilationUnit: CompilationUnit) =
-  source("// Generated from \"${compilationUnit.packageRelativePath}\"")
+  /** Returns source for the given compilation unit. */
+  fun source(compilationUnit: CompilationUnit): Source {
+    // Render types, collecting qualified names to import
+    val typesSource = typesSource(compilationUnit)
 
-/** Returns file annotations source. */
-private val Renderer.fileAnnotationsSource: Source
-  get() = newLineSeparated(fileOptInAnnotationSource, suppressFileAnnotationSource)
+    // Render file header, collecting qualified names to import
+    val fileHeaderSource = fileHeaderSource(compilationUnit)
 
-private fun Renderer.fileOptInAnnotationSource(features: List<Source>): Source =
-  fileAnnotation(nameRenderer.topLevelQualifiedNameSource("kotlin.OptIn"), features)
+    // Render package and collected imports
+    val packageAndImportsSource = packageAndImportsSource(compilationUnit)
 
-internal val Renderer.fileOptInAnnotationSource: Source
-  get() =
-    nameRenderer.environment.importedOptInQualifiedNamesSet
+    val completeSource = emptyLineSeparated(fileHeaderSource, packageAndImportsSource, typesSource)
+
+    return completeSource.plus(Source.NEW_LINE)
+  }
+
+  private fun fileHeaderSource(compilationUnit: CompilationUnit): Source =
+    newLineSeparated(fileCommentSource(compilationUnit), fileAnnotationsSource())
+
+  private fun packageAndImportsSource(compilationUnit: CompilationUnit): Source =
+    emptyLineSeparated(packageSource(compilationUnit), nameRenderer.importsSource)
+
+  private fun typesSource(compilationUnit: CompilationUnit): Source =
+    emptyLineSeparated(compilationUnit.types.map(::typeSource))
+
+  private fun fileCommentSource(compilationUnit: CompilationUnit) =
+    source("// Generated from \"${compilationUnit.packageRelativePath}\"")
+
+  private fun fileAnnotationsSource(): Source =
+    newLineSeparated(fileOptInAnnotationSource, suppressFileAnnotationsSource)
+
+  private fun fileOptInAnnotationSource(features: List<Source>): Source =
+    fileAnnotation(nameRenderer.topLevelQualifiedNameSource("kotlin.OptIn"), features)
+
+  private val fileOptInAnnotationSource: Source
+    get() =
+      nameRenderer.environment.importedOptInQualifiedNamesSet
+        .takeIf { it.isNotEmpty() }
+        ?.map { KotlinSource.classLiteral(nameRenderer.topLevelQualifiedNameSource(it)) }
+        ?.let { fileOptInAnnotationSource(it) }
+        .orEmpty()
+
+  private val suppressFileAnnotationsSource: Source
+    get() =
+      fileAnnotation(
+        nameRenderer.topLevelQualifiedNameSource("kotlin.Suppress"),
+        listOf(
+            "ALWAYS_NULL",
+            "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+            "REPEATED_BOUND",
+            "SENSELESS_COMPARISON",
+            "UNCHECKED_CAST",
+            "UNNECESSARY_LATEINIT",
+            "UNNECESSARY_NOT_NULL_ASSERTION",
+            "UNREACHABLE_CODE",
+            "UNUSED_PARAMETER",
+            "UNUSED_VARIABLE",
+            "USELESS_CAST",
+            "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+            "VARIABLE_WITH_REDUNDANT_INITIALIZER"
+          )
+          .map { literal(it) }
+      )
+
+  private fun packageSource(compilationUnit: CompilationUnit): Source =
+    compilationUnit.packageName
       .takeIf { it.isNotEmpty() }
-      ?.map { KotlinSource.classLiteral(nameRenderer.topLevelQualifiedNameSource(it)) }
-      ?.let { fileOptInAnnotationSource(it) }
+      ?.let { spaceSeparated(PACKAGE_KEYWORD, qualifiedIdentifierSource(it)) }
       .orEmpty()
 
-/** Returns source with file suppress annotation. */
-private val Renderer.suppressFileAnnotationSource: Source
-  get() =
-    fileAnnotation(
-      nameRenderer.topLevelQualifiedNameSource("kotlin.Suppress"),
-      listOf(
-          "ALWAYS_NULL",
-          "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
-          "REPEATED_BOUND",
-          "SENSELESS_COMPARISON",
-          "UNCHECKED_CAST",
-          "UNNECESSARY_LATEINIT",
-          "UNNECESSARY_NOT_NULL_ASSERTION",
-          "UNREACHABLE_CODE",
-          "UNUSED_PARAMETER",
-          "UNUSED_VARIABLE",
-          "USELESS_CAST",
-          "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
-          "VARIABLE_WITH_REDUNDANT_INITIALIZER"
-        )
-        .map { literal(it) }
-    )
-
-/** Returns source with package declaration and imports for [compilationUnit]. */
-internal fun Renderer.packageAndImportsSource(compilationUnit: CompilationUnit): Source =
-  emptyLineSeparated(packageSource(compilationUnit), nameRenderer.importsSource)
-
-/** Returns package declaration source for [compilationUnit]. */
-private fun packageSource(compilationUnit: CompilationUnit): Source =
-  compilationUnit.packageName
-    .takeIf { it.isNotEmpty() }
-    ?.let { spaceSeparated(PACKAGE_KEYWORD, qualifiedIdentifierSource(it)) }
-    .orEmpty()
-
-/** Returns source with types declared in [compilationUnit]. */
-internal fun Renderer.typesSource(compilationUnit: CompilationUnit): Source =
-  emptyLineSeparated(compilationUnit.types.map(::typeSource))
+  private fun typeSource(type: Type): Source =
+    Renderer(nameRenderer, currentType = type).typeSource(type)
+}
