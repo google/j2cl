@@ -1,8 +1,8 @@
 """Common utilities for creating J2CL targets and providers."""
 
-load(":provider.bzl", "J2clInfo")
-load(":j2cl_js_common.bzl", "J2CL_JS_TOOLCHAIN_ATTRS", "create_js_lib_struct", "j2cl_js_provider")
 load("@bazel_skylib//rules:common_settings.bzl", "BuildSettingInfo")
+load(":j2cl_js_common.bzl", "J2CL_JS_TOOLCHAIN_ATTRS", "create_js_lib_struct", "j2cl_js_provider")
+load(":provider.bzl", "J2clInfo")
 
 def _get_jsinfo_provider(j2cl_info):
     return j2cl_info._private_.js_info
