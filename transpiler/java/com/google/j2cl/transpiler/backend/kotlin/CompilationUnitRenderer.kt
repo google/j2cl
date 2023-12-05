@@ -104,6 +104,5 @@ internal data class CompilationUnitRenderer(val nameRenderer: NameRenderer) {
       ?.let { spaceSeparated(PACKAGE_KEYWORD, qualifiedIdentifierSource(it)) }
       .orEmpty()
 
-  private fun typeSource(type: Type): Source =
-    Renderer(nameRenderer, currentType = type).typeSource(type)
+  private fun typeSource(type: Type): Source = TypeRenderer(nameRenderer).typeSource(type)
 }

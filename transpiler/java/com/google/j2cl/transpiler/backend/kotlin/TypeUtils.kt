@@ -20,6 +20,7 @@ import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.backend.kotlin.ast.Member as KtMember
+import com.google.j2cl.transpiler.backend.kotlin.ast.Visibility
 import com.google.j2cl.transpiler.backend.kotlin.ast.toCompanionObjectOrNull
 
 /** Returns a list of type descriptors declared on this type. */
@@ -60,3 +61,7 @@ internal val Type.jvmFieldsAreIllegal
       members.filterIsInstance<Field>().let { fields ->
         fields.any { it.isCompileTimeConstant } && fields.any { !it.isCompileTimeConstant }
       }
+
+internal val Type.needExplicitPrimaryConstructor: Boolean
+  get() =
+    isClass && !hasConstructors && declaration.visibility.memberKtVisibility != Visibility.PUBLIC

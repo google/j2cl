@@ -48,7 +48,6 @@ private val Import.source: Source
       join(dotSeparated(pathComponents.map(::identifierSource)), suffixOrNull?.source.orEmpty())
     )
 
-/** A source with import suffix. */
 private val Import.Suffix.source: Source
   get() =
     when (this) {

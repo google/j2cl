@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Google Inc.
+ * Copyright 2021 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -22,7 +22,7 @@ import com.google.j2cl.transpiler.backend.kotlin.common.orIfNull
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 
 /**
- * Renderer of Kotlin names.
+ * Renderer of Kotlin names, with import resolution and alias generation.
  *
  * @property environment rendering environment
  * @property localNames a set of local names which are potentially shadowing imports

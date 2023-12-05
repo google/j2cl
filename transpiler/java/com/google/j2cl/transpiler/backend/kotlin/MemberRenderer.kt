@@ -69,14 +69,14 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLine
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
-internal fun Renderer.source(member: Member): Source =
+internal fun TypeRenderer.source(member: Member): Source =
   when (member) {
     is Member.WithCompanionObject -> source(member.companionObject)
     is Member.WithJavaMember -> memberSource(member.javaMember)
     is Member.WithType -> typeSource(member.type)
   }
 
-private fun Renderer.source(companionObject: CompanionObject): Source =
+private fun TypeRenderer.source(companionObject: CompanionObject): Source =
   newLineSeparated(
     nameRenderer.objCAnnotationSource(companionObject),
     spaceSeparated(
@@ -86,7 +86,7 @@ private fun Renderer.source(companionObject: CompanionObject): Source =
     )
   )
 
-private fun Renderer.memberSource(member: JavaMember): Source =
+private fun TypeRenderer.memberSource(member: JavaMember): Source =
   when (member) {
     is Method -> methodSource(member)
     is Field -> fieldSource(member)
@@ -94,7 +94,7 @@ private fun Renderer.memberSource(member: JavaMember): Source =
     else -> throw InternalCompilerError("Unhandled ${member::class}")
   }
 
-private fun Renderer.methodSource(method: Method): Source =
+private fun TypeRenderer.methodSource(method: Method): Source =
   method.renderedStatements.let { statements ->
     // Don't render primary constructor if it's empty.
     Source.emptyUnless(!isKtPrimaryConstructor(method) || !statements.isEmpty()) {
@@ -133,16 +133,16 @@ private val Method.renderedStatements: List<Statement>
     )
   }
 
-private fun Renderer.isKtPrimaryConstructor(method: Method): Boolean =
-  method == currentType!!.ktPrimaryConstructor
+private fun TypeRenderer.isKtPrimaryConstructor(method: Method): Boolean =
+  method == currentBodyType?.ktPrimaryConstructor
 
-private fun Renderer.fieldSource(field: Field): Source {
+private fun TypeRenderer.fieldSource(field: Field): Source {
   val fieldDescriptor = field.descriptor
   val isFinal = fieldDescriptor.isFinal
   val typeDescriptor = fieldDescriptor.typeDescriptor
   val isConst = field.isCompileTimeConstant && field.isStatic
   val isJvmField =
-    !currentType!!.jvmFieldsAreIllegal &&
+    !jvmFieldsAreIllegal &&
       !isConst &&
       !field.isKtLateInit &&
       fieldDescriptor.ktVisibility != KtVisibility.PRIVATE
@@ -159,7 +159,7 @@ private fun Renderer.fieldSource(field: Field): Source {
       if (isFinal) VAL_KEYWORD else VAR_KEYWORD,
       colonSeparated(
         identifierSource(fieldDescriptor.ktMangledName),
-        typeDescriptorSource(typeDescriptor)
+        nameRenderer.typeDescriptorSource(typeDescriptor)
       ),
       initializer(
         if (initializer == null && field.isNative) {
@@ -172,40 +172,45 @@ private fun Renderer.fieldSource(field: Field): Source {
   )
 }
 
-private fun Renderer.jvmFieldAnnotationSource(): Source =
+private val TypeRenderer.jvmFieldsAreIllegal: Boolean
+  get() = currentBodyType?.jvmFieldsAreIllegal ?: false
+
+private fun TypeRenderer.jvmFieldAnnotationSource(): Source =
   annotation(nameRenderer.topLevelQualifiedNameSource("kotlin.jvm.JvmField"))
 
-private fun Renderer.jvmStaticAnnotationSource(): Source =
+private fun TypeRenderer.jvmStaticAnnotationSource(): Source =
   annotation(nameRenderer.topLevelQualifiedNameSource("kotlin.jvm.JvmStatic"))
 
-private fun Renderer.jvmThrowsAnnotationSource(methodDescriptor: MethodDescriptor): Source =
+private fun TypeRenderer.jvmThrowsAnnotationSource(methodDescriptor: MethodDescriptor): Source =
   methodDescriptor.exceptionTypeDescriptors
     .takeIf { it.isNotEmpty() }
     ?.let { exceptionTypeDescriptors ->
       annotation(
         nameRenderer.topLevelQualifiedNameSource("kotlin.jvm.Throws"),
         exceptionTypeDescriptors.map {
-          classLiteral(typeDescriptorSource(it.toRawTypeDescriptor().toNonNullable()))
+          classLiteral(nameRenderer.typeDescriptorSource(it.toRawTypeDescriptor().toNonNullable()))
         }
       )
     }
     .orEmpty()
 
-private fun Renderer.nativeThrowsAnnotationSource(methodDescriptor: MethodDescriptor): Source =
+private fun TypeRenderer.nativeThrowsAnnotationSource(methodDescriptor: MethodDescriptor): Source =
   methodDescriptor.ktInfo
     .takeIf { it.isThrows }
     ?.let {
       annotation(
         nameRenderer.topLevelQualifiedNameSource("javaemul.lang.NativeThrows"),
-        classLiteral(typeDescriptorSource(TypeDescriptors.get().javaLangThrowable.toNonNullable()))
+        classLiteral(
+          nameRenderer.typeDescriptorSource(TypeDescriptors.get().javaLangThrowable.toNonNullable())
+        )
       )
     }
     .orEmpty()
 
-private fun Renderer.initializerBlockSource(initializerBlock: InitializerBlock): Source =
+private fun TypeRenderer.initializerBlockSource(initializerBlock: InitializerBlock): Source =
   spaceSeparated(INIT_KEYWORD, statementSource(initializerBlock.block))
 
-private fun Renderer.methodHeaderSource(method: Method): Source =
+private fun TypeRenderer.methodHeaderSource(method: Method): Source =
   if (isKtPrimaryConstructor(method)) {
     INIT_KEYWORD
   } else {
@@ -235,7 +240,7 @@ private fun Renderer.methodHeaderSource(method: Method): Source =
     )
   }
 
-internal fun Renderer.methodHeaderSource(functionExpression: FunctionExpression): Source =
+internal fun TypeRenderer.methodHeaderSource(functionExpression: FunctionExpression): Source =
   functionExpression.descriptor.let { methodDescriptor ->
     newLineSeparated(
       spaceSeparated(
@@ -252,7 +257,7 @@ internal fun Renderer.methodHeaderSource(functionExpression: FunctionExpression)
     )
   }
 
-private fun Renderer.methodKindAndNameSource(methodDescriptor: MethodDescriptor): Source =
+private fun TypeRenderer.methodKindAndNameSource(methodDescriptor: MethodDescriptor): Source =
   if (methodDescriptor.isConstructor) {
     CONSTRUCTOR_KEYWORD
   } else {
@@ -289,7 +294,7 @@ private val MethodDescriptor.inheritanceModifierSource
       else -> Source.EMPTY
     }
 
-internal fun Renderer.methodParametersSource(
+internal fun TypeRenderer.methodParametersSource(
   method: MethodLike,
   objCParameterNames: List<String>? = null
 ): Source {
@@ -322,7 +327,7 @@ internal fun Renderer.methodParametersSource(
   }
 }
 
-private fun Renderer.parameterSource(
+private fun TypeRenderer.parameterSource(
   parameterDescriptor: ParameterDescriptor,
   parameter: Variable,
   objCParameterName: String? = null
@@ -338,17 +343,20 @@ private fun Renderer.parameterSource(
     Source.emptyUnless(parameterDescriptor.isVarargs) { VARARG_KEYWORD },
     objCParameterName?.let { nameRenderer.objCNameAnnotationSource(it) }.orEmpty(),
     jsInteropAnnotationsSource(parameterDescriptor),
-    colonSeparated(nameRenderer.nameSource(parameter), typeDescriptorSource(renderedTypeDescriptor))
+    colonSeparated(
+      nameRenderer.nameSource(parameter),
+      nameRenderer.typeDescriptorSource(renderedTypeDescriptor)
+    )
   )
 }
 
-internal fun Renderer.methodReturnTypeSource(methodDescriptor: MethodDescriptor): Source =
+internal fun TypeRenderer.methodReturnTypeSource(methodDescriptor: MethodDescriptor): Source =
   methodDescriptor.returnTypeDescriptor
     .takeIf { it != PrimitiveTypes.VOID }
-    ?.let { typeDescriptorSource(it) }
+    ?.let { nameRenderer.typeDescriptorSource(it) }
     .orEmpty()
 
-private fun Renderer.constructorInvocationSource(method: Method): Source =
+private fun TypeRenderer.constructorInvocationSource(method: Method): Source =
   getConstructorInvocation(method)
     ?.let { constructorInvocation ->
       join(
