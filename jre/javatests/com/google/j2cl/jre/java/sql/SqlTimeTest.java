@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.jre.java.sql;
 
+import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.sql.Time;
 import junit.framework.TestCase;
 
@@ -79,14 +80,17 @@ public class SqlTimeTest extends TestCase {
     }
   }
 
-  public void testParse() {
+  @J2ktIncompatible // Not nullable according to Jspecify
+  public void testParseNull() {
     try {
       Time.parse(null);
       fail("Should have thrown exception");
     } catch (IllegalArgumentException e) {
       // Expected
     }
+  }
 
+  public void testParse() {
     try {
       Time.parse("");
     } catch (IllegalArgumentException e) {

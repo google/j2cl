@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.jre.java.util;
 
+import com.google.j2cl.jre.testing.J2ktIncompatible;
 import com.google.j2cl.jre.testing.TestUtils;
 import java.util.ArrayList;
 import java.util.Date;
@@ -358,15 +359,18 @@ public class DateTest extends TestCase {
     assertEquals(dateWithThirtyDays.getDate(), newDayNum - numDaysInOldMonth);
   }
 
-  /** Testing for public static long java.util.Date.parse(java.lang.String). */
-  public void testParse() {
+  @J2ktIncompatible // Not nullable according to Jspecify
+  public void testParseNull() {
     try {
       Date.parse(null);
       fail("Should have thrown exception");
     } catch (IllegalArgumentException e) {
       // Expected
     }
+  }
 
+  /** Testing for public static long java.util.Date.parse(java.lang.String). */
+  public void testParse() {
     try {
       Date.parse("");
     } catch (IllegalArgumentException e) {

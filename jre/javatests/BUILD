@@ -52,8 +52,10 @@ j2kt_native_library(
     srcs = [
         "com/google/j2cl/jre/BigDecimalSuite.java",
         "com/google/j2cl/jre/BigIntegerSuite.java",
+        "com/google/j2cl/jre/DateTimeSuite.java",
         "com/google/j2cl/jre/EmulSuite.java",
         "com/google/j2cl/jre/java/util/ComparatorTest.java",
+        "com/google/j2cl/jre/java/util/DateTest.java",
         "com/google/j2cl/jre/java/util/EmulTestBase.java",
         "com/google/j2cl/jre/java/util/ObjectsTest.java",
         "com/google/j2cl/jre/java/util/RandomTest.java",
@@ -66,6 +68,7 @@ j2kt_native_library(
         "com/google/j2cl/jre/java/math/*.java",
         "com/google/j2cl/jre/java/nio/charset/*.java",
         "com/google/j2cl/jre/java/security/*.java",
+        "com/google/j2cl/jre/java/sql/*.java",
     ]),
     deps = [
         "//jre/java:javaemul_internal_annotations-j2kt-native",
@@ -151,6 +154,7 @@ j2cl_multi_test(
 
 j2cl_multi_test(
     name = "DateTimeSuite",
+    enable_kt_native = True,
     test_class = "com.google.j2cl.jre.DateTimeSuite",
     deps = [":emul_tests_lib"],
 )
