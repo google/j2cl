@@ -812,11 +812,21 @@ public abstract class TypeDeclaration
 
   // TODO(b/181615162): This is a temporary hack to be able to reuse bridging logic in Closure
   // and Wasm.
-  private static final ThreadLocal<Boolean> ignoreJsEnumAnnotations =
-      ThreadLocal.withInitial(() -> false);
+  private static final ThreadLocal<IgnoreJsEnumsType> ignoreJsEnumAnnotations =
+      ThreadLocal.withInitial(() -> IgnoreJsEnumsType.NONE);
 
   public static void setIgnoreJsEnumAnnotations() {
-    ignoreJsEnumAnnotations.set(true);
+    ignoreJsEnumAnnotations.set(IgnoreJsEnumsType.ALL);
+  }
+
+  public static void setIgnoreNativeJsEnumAnnotations() {
+    ignoreJsEnumAnnotations.set(IgnoreJsEnumsType.NATIVE_ONLY);
+  }
+
+  private enum IgnoreJsEnumsType {
+    NONE,
+    NATIVE_ONLY,
+    ALL
   }
 
   /** Builder for a TypeDeclaration. */
@@ -947,6 +957,8 @@ public abstract class TypeDeclaration
 
     abstract Optional<JsEnumInfo> getJsEnumInfo();
 
+    abstract boolean isNative();
+
     abstract Kind getKind();
 
     abstract boolean isAnnotation();
@@ -960,14 +972,28 @@ public abstract class TypeDeclaration
       if (getKind() == Kind.ENUM && getJsEnumInfo().isPresent()) {
         // Users can write code that marks a class or an interface as JsEnum that will be rejected
         // by JsInteropRestrictionsChecker; skip JsEnum processing here in that case.
-
-        if (ignoreJsEnumAnnotations.get()) {
-          setJsEnumInfo(null);
-        } else {
-          // The actual supertype for JsEnums is Object. JsEnum don't really extend Enum
-          // and modeling that fact in the type model allows passes that query assignability (e.g.
-          // to implement casts, instance ofs and JsEnum boxing etc.) to get the right answer.
-          setSuperTypeDescriptorFactory(() -> TypeDescriptors.get().javaLangObject);
+        switch (ignoreJsEnumAnnotations.get()) {
+          case ALL:
+            setJsEnumInfo(null);
+            break;
+          case NATIVE_ONLY:
+            // TODO(b/288145698): Support native JsEnum.
+            if (isNative()) {
+              setJsEnumInfo(null);
+              break;
+            }
+            // fall through
+          default:
+            // The actual supertype for JsEnums is Object. JsEnum don't really extend Enum
+            // and modeling that fact in the type model allows passes that query assignability (e.g.
+            // to implement casts, instance ofs and JsEnum boxing etc.) to get the right answer.
+            if (getKind() == Kind.ENUM) {
+              // Users can write code that marks an interface as JsEnum that will be rejected
+              // by JsInteropRestrictionsChecker, but we need to preserve our invariants that
+              // interfaces don't have supertype.
+              setSuperTypeDescriptorFactory(() -> TypeDescriptors.get().javaLangObject);
+            }
+            break;
         }
       }
 

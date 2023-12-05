@@ -40,6 +40,8 @@ public interface BackendOptions {
 
   boolean getWasmRemoveAssertStatement();
 
+  boolean getWasmEnableNonNativeJsEnum();
+
   boolean getOptimizeAutoValue();
 
   boolean getEmitReadableLibraryInfo();
