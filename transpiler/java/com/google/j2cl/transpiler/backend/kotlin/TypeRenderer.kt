@@ -16,22 +16,16 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.AstUtils.getConstructorInvocation
-import com.google.j2cl.transpiler.ast.Field
-import com.google.j2cl.transpiler.ast.FieldDescriptor
 import com.google.j2cl.transpiler.ast.Method
-import com.google.j2cl.transpiler.ast.NewInstance
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangEnum
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
-import com.google.j2cl.transpiler.backend.kotlin.ast.Keywords
-import com.google.j2cl.transpiler.backend.kotlin.common.inBackTicks
 import com.google.j2cl.transpiler.backend.kotlin.objc.comment
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.colonSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaAndNewLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.emptyLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParentheses
@@ -44,17 +38,8 @@ import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
  * Provides context for rendering Kotlin types.
  *
  * @property nameRenderer underlying name renderer
- * @property currentBodyType type of currently rendered type body, or null if not rendering a body
- * @property currentReturnLabelIdentifier optional label to render in return statements
- * @property renderThisReferenceWithLabel whether to render this reference with explicit qualifier
  */
-internal data class TypeRenderer(
-  val nameRenderer: NameRenderer,
-  val currentBodyType: Type? = null,
-  val currentReturnLabelIdentifier: String? = null,
-  // TODO(b/252138814): Remove when KT-54349 is fixed
-  val renderThisReferenceWithLabel: Boolean = false
-) {
+internal data class TypeRenderer(val nameRenderer: NameRenderer) {
   /** Returns source for the given type. */
   fun typeSource(type: Type): Source =
     type.declaration.let { typeDeclaration ->
@@ -63,7 +48,7 @@ internal data class TypeRenderer(
       } else {
         newLineSeparated(
           nameRenderer.objCAnnotationSource(typeDeclaration),
-          jsInteropAnnotationsSource(typeDeclaration),
+          nameRenderer.jsInteropAnnotationsSource(typeDeclaration),
           spaceSeparated(
             inheritanceModifierSource(typeDeclaration),
             classModifiersSource(typeDeclaration),
@@ -75,28 +60,26 @@ internal data class TypeRenderer(
               ),
               superTypesSource(type)
             ),
-            whereClauseSource(typeDeclaration.typeParameterDescriptors),
+            nameRenderer.whereClauseSource(typeDeclaration.typeParameterDescriptors),
             typeBodySource(type)
           )
         )
       }
     }
 
+  private fun memberRenderer(type: Type): MemberRenderer =
+    MemberRenderer(nameRenderer.plusLocalNames(type.localNamesSet), type)
+
   /** Returns source with body of the given type. */
   fun typeBodySource(type: Type): Source =
-    copy(
-        nameRenderer = nameRenderer.run { copy(localNames = localNames + type.localNamesSet) },
-        currentBodyType = type,
-        renderThisReferenceWithLabel = false
-      )
-      .run {
-        block(
-          emptyLineSeparated(
-            Source.emptyUnless(type.isEnum) { enumValuesSource(type) },
-            emptyLineSeparated(type.ktMembers.map { source(it) })
-          )
+    memberRenderer(type).run {
+      block(
+        emptyLineSeparated(
+          Source.emptyUnless(type.isEnum) { memberRenderer(type).enumValuesSource(type) },
+          emptyLineSeparated(type.ktMembers.map { memberRenderer(type).source(it) })
         )
-      }
+      )
+    }
 
   private fun ktPrimaryConstructorSource(type: Type): Source {
     val ktPrimaryConstructor = type.ktPrimaryConstructor
@@ -104,10 +87,11 @@ internal data class TypeRenderer(
       ktPrimaryConstructor != null ->
         join(
           KotlinSource.CONSTRUCTOR_KEYWORD,
-          methodParametersSource(
-            ktPrimaryConstructor,
-            ktPrimaryConstructor.toObjCNames()?.parameterNames
-          )
+          memberRenderer(type)
+            .methodParametersSource(
+              ktPrimaryConstructor,
+              ktPrimaryConstructor.toObjCNames()?.parameterNames
+            )
         )
       type.needExplicitPrimaryConstructor ->
         // Implicit constructors needs to follow the visiblity transpilation rules for members that
@@ -123,7 +107,7 @@ internal data class TypeRenderer(
   private fun typeDeclarationSource(declaration: TypeDeclaration): Source =
     join(
       identifierSource(declaration.ktSimpleName),
-      typeParametersSource(declaration.directlyDeclaredTypeParameterDescriptors)
+      nameRenderer.typeParametersSource(declaration.directlyDeclaredTypeParameterDescriptors)
     )
 
   private fun superTypesSource(type: Type): Source =
@@ -144,35 +128,13 @@ internal data class TypeRenderer(
       if (!type.hasConstructors) {
         inParentheses(Source.EMPTY)
       } else {
-        type.ktPrimaryConstructor?.let { constructorInvocationSource(it) }.orEmpty()
+        type.ktPrimaryConstructor?.let { constructorInvocationSource(type, it) }.orEmpty()
       }
     }
 
-  private fun constructorInvocationSource(method: Method): Source =
-    getConstructorInvocation(method)?.let { invocationSource(it) } ?: inParentheses(Source.EMPTY)
-
-  private fun enumValuesSource(type: Type): Source =
-    commaAndNewLineSeparated(type.enumFields.map(::enumValueSource)).plus(Source.SEMICOLON)
-
-  private fun enumValueSource(field: Field): Source =
-    field.initializer
-      .let { it as NewInstance }
-      .let { newInstance ->
-        newLineSeparated(
-          nameRenderer.objCAnnotationSource(field.descriptor),
-          jsInteropAnnotationsSource(field.descriptor),
-          spaceSeparated(
-            join(
-              field.descriptor.enumValueDeclarationNameSource,
-              newInstance.arguments
-                .takeIf { it.isNotEmpty() }
-                ?.let { invocationSource(newInstance) }
-                .orEmpty()
-            ),
-            newInstance.anonymousInnerClass?.let(::typeBodySource).orEmpty()
-          )
-        )
-      }
+  private fun constructorInvocationSource(type: Type, method: Method): Source =
+    getConstructorInvocation(method)?.let { memberRenderer(type).invocationSource(it) }
+      ?: inParentheses(Source.EMPTY)
 
   private companion object {
     fun classModifiersSource(typeDeclaration: TypeDeclaration): Source =
@@ -207,15 +169,5 @@ internal data class TypeRenderer(
 
     fun funModifierSource(typeDeclaration: TypeDeclaration): Source =
       Source.emptyUnless(typeDeclaration.isKtFunctionalInterface) { KotlinSource.FUN_KEYWORD }
-
-    val FieldDescriptor.enumValueDeclarationNameSource: Source
-      get() =
-        name!!.let {
-          if (Keywords.isForbiddenInEnumValueDeclaration(it)) {
-            Source.source(it.inBackTicks)
-          } else {
-            identifierSource(it)
-          }
-        }
   }
 }

@@ -31,6 +31,9 @@ internal data class NameRenderer(
   val environment: Environment,
   val localNames: Set<String> = setOf()
 ) {
+  fun plusLocalNames(localNames: Collection<String>): NameRenderer =
+    copy(localNames = this.localNames + localNames)
+
   /** Returns source containing name of the given node. */
   fun nameSource(hasName: HasName) = identifierSource(environment.identifier(hasName))
 

@@ -31,10 +31,10 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inAngle
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
-internal fun TypeRenderer.typeParametersSource(typeVariables: List<TypeVariable>): Source =
+internal fun NameRenderer.typeParametersSource(typeVariables: List<TypeVariable>): Source =
   commaSeparated(typeVariables.map(::typeParameterSource)).ifNotEmpty { inAngleBrackets(it) }
 
-internal fun TypeRenderer.whereClauseSource(typeVariables: List<TypeVariable>): Source =
+internal fun NameRenderer.whereClauseSource(typeVariables: List<TypeVariable>): Source =
   whereClauseSource(
     commaSeparated(typeVariables.map { it.whereClauseItems }.flatten().map { source(it) })
   )
@@ -49,16 +49,16 @@ internal val TypeVariable.upperBoundTypeDescriptors: List<TypeDescriptor>
       .filter { !it.isImplicitUpperBound }
       .map { it.runIf(!it.canBeNullableAsBound) { toNonNullable() } }
 
-private fun TypeRenderer.typeParameterSource(typeVariable: TypeVariable): Source =
+private fun NameRenderer.typeParameterSource(typeVariable: TypeVariable): Source =
   spaceSeparated(
     typeParameterVarianceSource(typeVariable),
-    colonSeparated(nameRenderer.nameSource(typeVariable), typeParameterBoundSource(typeVariable))
+    colonSeparated(nameSource(typeVariable), typeParameterBoundSource(typeVariable))
   )
 
-private fun TypeRenderer.typeParameterBoundSource(typeVariable: TypeVariable): Source =
+private fun NameRenderer.typeParameterBoundSource(typeVariable: TypeVariable): Source =
   typeVariable.upperBoundTypeDescriptors
     .singleOrNull()
-    ?.let { nameRenderer.typeDescriptorSource(it, projectRawToWildcards = true) }
+    ?.let { typeDescriptorSource(it, projectRawToWildcards = true) }
     .orEmpty()
 
 private fun typeParameterVarianceSource(typeVariable: TypeVariable): Source =
@@ -77,8 +77,8 @@ private val TypeVariable.whereClauseItems: List<WhereClauseItem>
   get() =
     upperBoundTypeDescriptors.takeIf { it.size > 1 }?.map { WhereClauseItem(this, it) } ?: listOf()
 
-private fun TypeRenderer.source(whereClauseItem: WhereClauseItem): Source =
+private fun NameRenderer.source(whereClauseItem: WhereClauseItem): Source =
   colonSeparated(
-    nameRenderer.nameSource(whereClauseItem.hasName),
-    nameRenderer.typeDescriptorSource(whereClauseItem.boundTypeDescriptor)
+    nameSource(whereClauseItem.hasName),
+    typeDescriptorSource(whereClauseItem.boundTypeDescriptor)
   )

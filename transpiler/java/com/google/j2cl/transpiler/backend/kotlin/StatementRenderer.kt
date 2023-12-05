@@ -72,10 +72,10 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
-internal fun TypeRenderer.statementsSource(statements: List<Statement>): Source =
+internal fun MemberRenderer.statementsSource(statements: List<Statement>): Source =
   newLineSeparated(statements.map(::statementSource))
 
-internal fun TypeRenderer.statementSource(statement: Statement): Source =
+internal fun MemberRenderer.statementSource(statement: Statement): Source =
   when (statement) {
     is AssertStatement -> assertStatementSource(statement)
     is Block -> blockSource(statement)
@@ -97,7 +97,7 @@ internal fun TypeRenderer.statementSource(statement: Statement): Source =
     else -> throw InternalCompilerError("Unexpected ${statement::class.java.simpleName}")
   }
 
-private fun TypeRenderer.assertStatementSource(assertStatement: AssertStatement): Source =
+private fun MemberRenderer.assertStatementSource(assertStatement: AssertStatement): Source =
   spaceSeparated(
     join(
       nameRenderer.extensionMemberQualifiedNameSource("kotlin.assert"),
@@ -106,19 +106,19 @@ private fun TypeRenderer.assertStatementSource(assertStatement: AssertStatement)
     assertStatement.message?.let { block(expressionSource(it)) }.orEmpty()
   )
 
-private fun TypeRenderer.blockSource(block: Block): Source =
+private fun MemberRenderer.blockSource(block: Block): Source =
   block(statementsSource(block.statements))
 
-private fun TypeRenderer.breakStatementSource(breakStatement: BreakStatement): Source =
+private fun MemberRenderer.breakStatementSource(breakStatement: BreakStatement): Source =
   join(BREAK_KEYWORD, breakStatement.labelReference?.let(::labelReferenceSource).orEmpty())
 
-private fun TypeRenderer.continueStatementSource(continueStatement: ContinueStatement): Source =
+private fun MemberRenderer.continueStatementSource(continueStatement: ContinueStatement): Source =
   join(CONTINUE_KEYWORD, continueStatement.labelReference?.let(::labelReferenceSource).orEmpty())
 
-private fun TypeRenderer.labelReferenceSource(labelReference: LabelReference): Source =
+private fun MemberRenderer.labelReferenceSource(labelReference: LabelReference): Source =
   at(nameRenderer.nameSource(labelReference.target))
 
-private fun TypeRenderer.doWhileStatementSource(doWhileStatement: DoWhileStatement): Source =
+private fun MemberRenderer.doWhileStatementSource(doWhileStatement: DoWhileStatement): Source =
   spaceSeparated(
     DO_KEYWORD,
     statementSource(doWhileStatement.body),
@@ -126,11 +126,11 @@ private fun TypeRenderer.doWhileStatementSource(doWhileStatement: DoWhileStateme
     inParentheses(expressionSource(doWhileStatement.conditionExpression))
   )
 
-private fun TypeRenderer.expressionStatementSource(
+private fun MemberRenderer.expressionStatementSource(
   expressionStatement: ExpressionStatement
 ): Source = expressionSource(expressionStatement.expression)
 
-private fun TypeRenderer.forEachStatementSource(forEachStatement: ForEachStatement): Source =
+private fun MemberRenderer.forEachStatementSource(forEachStatement: ForEachStatement): Source =
   spaceSeparated(
     FOR_KEYWORD,
     inParentheses(
@@ -143,7 +143,7 @@ private fun TypeRenderer.forEachStatementSource(forEachStatement: ForEachStateme
     statementSource(forEachStatement.body)
   )
 
-private fun TypeRenderer.ifStatementSource(ifStatement: IfStatement): Source =
+private fun MemberRenderer.ifStatementSource(ifStatement: IfStatement): Source =
   spaceSeparated(
     IF_KEYWORD,
     inParentheses(expressionSource(ifStatement.conditionExpression)),
@@ -151,7 +151,7 @@ private fun TypeRenderer.ifStatementSource(ifStatement: IfStatement): Source =
     ifStatement.elseStatement?.let { spaceSeparated(ELSE_KEYWORD, statementSource(it)) }.orEmpty()
   )
 
-private fun TypeRenderer.fieldDeclarationStatementSource(
+private fun MemberRenderer.fieldDeclarationStatementSource(
   declaration: FieldDeclarationStatement
 ): Source =
   declaration.fieldDescriptor.let { fieldDescriptor ->
@@ -167,23 +167,23 @@ private fun TypeRenderer.fieldDeclarationStatementSource(
     )
   }
 
-private fun TypeRenderer.labeledStatementSource(labelStatement: LabeledStatement): Source =
+private fun MemberRenderer.labeledStatementSource(labelStatement: LabeledStatement): Source =
   spaceSeparated(
     join(nameRenderer.nameSource(labelStatement.label), AT_OPERATOR),
     labelStatement.statement.let { statementSource(it).letIf(it is LabeledStatement) { block(it) } }
   )
 
-private fun TypeRenderer.localClassDeclarationStatementSource(
+private fun MemberRenderer.localClassDeclarationStatementSource(
   localClassDeclarationStatement: LocalClassDeclarationStatement
-): Source = typeSource(localClassDeclarationStatement.localClass)
+): Source = typeRenderer.typeSource(localClassDeclarationStatement.localClass)
 
-private fun TypeRenderer.returnStatementSource(returnStatement: ReturnStatement): Source =
+private fun MemberRenderer.returnStatementSource(returnStatement: ReturnStatement): Source =
   spaceSeparated(
     join(RETURN_KEYWORD, currentReturnLabelIdentifier?.let { labelReference(it) }.orEmpty()),
     returnStatement.expression?.let(::expressionSource).orEmpty()
   )
 
-private fun TypeRenderer.switchStatementSource(switchStatement: SwitchStatement): Source =
+private fun MemberRenderer.switchStatementSource(switchStatement: SwitchStatement): Source =
   spaceSeparated(
     WHEN_KEYWORD,
     inParentheses(expressionSource(switchStatement.switchExpression)),
@@ -221,7 +221,7 @@ private fun TypeRenderer.switchStatementSource(switchStatement: SwitchStatement)
     )
   )
 
-private fun TypeRenderer.synchronizedStatementSource(
+private fun MemberRenderer.synchronizedStatementSource(
   synchronizedStatement: SynchronizedStatement
 ): Source =
   spaceSeparated(
@@ -232,17 +232,17 @@ private fun TypeRenderer.synchronizedStatementSource(
     statementSource(synchronizedStatement.body)
   )
 
-private fun TypeRenderer.whileStatementSource(whileStatement: WhileStatement): Source =
+private fun MemberRenderer.whileStatementSource(whileStatement: WhileStatement): Source =
   spaceSeparated(
     WHILE_KEYWORD,
     inParentheses(expressionSource(whileStatement.conditionExpression)),
     statementSource(whileStatement.body)
   )
 
-private fun TypeRenderer.throwStatementSource(throwStatement: ThrowStatement): Source =
+private fun MemberRenderer.throwStatementSource(throwStatement: ThrowStatement): Source =
   spaceSeparated(THROW_KEYWORD, expressionSource(throwStatement.expression))
 
-private fun TypeRenderer.tryStatementSource(tryStatement: TryStatement): Source =
+private fun MemberRenderer.tryStatementSource(tryStatement: TryStatement): Source =
   spaceSeparated(
     TRY_KEYWORD,
     statementSource(tryStatement.body),
@@ -260,7 +260,7 @@ private val TypeDescriptor.catchTypeDescriptors
       listOf(this)
     }
 
-private fun TypeRenderer.catchClauseSource(catchClause: CatchClause): Source =
+private fun MemberRenderer.catchClauseSource(catchClause: CatchClause): Source =
   spaceSeparated(
     // Duplicate catch block for each type in the union, which are not available in Kotlin.
     catchClause.exceptionVariable.typeDescriptor.catchTypeDescriptors.map {
@@ -268,7 +268,7 @@ private fun TypeRenderer.catchClauseSource(catchClause: CatchClause): Source =
     }
   )
 
-private fun TypeRenderer.catchClauseSource(
+private fun MemberRenderer.catchClauseSource(
   variable: Variable,
   type: TypeDescriptor,
   body: Block
