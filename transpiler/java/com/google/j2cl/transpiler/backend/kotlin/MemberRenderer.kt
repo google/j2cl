@@ -84,6 +84,9 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
   private val expressionRenderer: ExpressionRenderer
     get() = ExpressionRenderer(nameRenderer, enclosingType)
 
+  private val jsInteropAnnotationRenderer: JsInteropAnnotationRenderer
+    get() = JsInteropAnnotationRenderer(nameRenderer)
+
   fun source(member: Member): Source =
     when (member) {
       is Member.WithCompanionObject -> source(member.companionObject)
@@ -148,7 +151,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
     return newLineSeparated(
       Source.emptyUnless(isJvmField) { jvmFieldAnnotationSource() },
       nameRenderer.objCAnnotationSource(fieldDescriptor),
-      nameRenderer.jsInteropAnnotationsSource(fieldDescriptor),
+      jsInteropAnnotationRenderer.jsInteropAnnotationsSource(fieldDescriptor),
       spaceSeparated(
         field.descriptor.visibilityModifierSource,
         Source.emptyUnless(isConst) { CONST_KEYWORD },
@@ -190,7 +193,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
       newLineSeparated(
         Source.emptyUnless(methodDescriptor.isStatic) { jvmStaticAnnotationSource() },
         nameRenderer.objCAnnotationSource(methodDescriptor, methodObjCNames),
-        nameRenderer.jsInteropAnnotationsSource(methodDescriptor),
+        jsInteropAnnotationRenderer.jsInteropAnnotationsSource(methodDescriptor),
         memberDescriptorRenderer.jvmThrowsAnnotationSource(methodDescriptor),
         memberDescriptorRenderer.nativeThrowsAnnotationSource(methodDescriptor),
         spaceSeparated(
@@ -273,7 +276,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
     return spaceSeparated(
       Source.emptyUnless(parameterDescriptor.isVarargs) { VARARG_KEYWORD },
       objCParameterName?.let { nameRenderer.objCNameAnnotationSource(it) }.orEmpty(),
-      nameRenderer.jsInteropAnnotationsSource(parameterDescriptor),
+      jsInteropAnnotationRenderer.jsInteropAnnotationsSource(parameterDescriptor),
       colonSeparated(
         nameRenderer.nameSource(parameter),
         nameRenderer.typeDescriptorSource(renderedTypeDescriptor)
@@ -304,7 +307,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
       .let { newInstance ->
         newLineSeparated(
           nameRenderer.objCAnnotationSource(field.descriptor),
-          nameRenderer.jsInteropAnnotationsSource(field.descriptor),
+          jsInteropAnnotationRenderer.jsInteropAnnotationsSource(field.descriptor),
           spaceSeparated(
             join(
               field.descriptor.enumValueDeclarationNameSource,
