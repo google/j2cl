@@ -69,22 +69,20 @@ import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
  *
  * @property nameRenderer underlying name renderer
  * @property enclosingType enclosing type
- * @property currentReturnLabelIdentifier optional label to render in return statements
- * @property renderThisReferenceWithLabel whether to render this reference with explicit qualifier
  */
-internal data class MemberRenderer(
-  val nameRenderer: NameRenderer,
-  val enclosingType: Type,
-  val currentReturnLabelIdentifier: String? = null,
-  // TODO(b/252138814): Remove when KT-54349 is fixed
-  val renderThisReferenceWithLabel: Boolean = false
-) {
+internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosingType: Type) {
   /** Returns renderer for enclosed types. */
-  internal val typeRenderer: TypeRenderer
+  private val typeRenderer: TypeRenderer
     get() = TypeRenderer(nameRenderer)
 
-  internal val memberDescriptorRenderer: MemberDescriptorRenderer
+  private val memberDescriptorRenderer: MemberDescriptorRenderer
     get() = MemberDescriptorRenderer(nameRenderer)
+
+  private val statementRenderer: StatementRenderer
+    get() = StatementRenderer(nameRenderer, enclosingType)
+
+  private val expressionRenderer: ExpressionRenderer
+    get() = ExpressionRenderer(nameRenderer, enclosingType)
 
   fun source(member: Member): Source =
     when (member) {
@@ -124,9 +122,7 @@ internal data class MemberRenderer(
                 Source.emptyUnless(method.descriptor.isKtProperty) {
                   join(GET_KEYWORD, inParentheses(Source.EMPTY))
                 },
-                copy(currentReturnLabelIdentifier = null).run {
-                  block(statementsSource(statements))
-                }
+                block(statementRenderer.statementsSource(statements))
               )
             }
           }
@@ -166,7 +162,7 @@ internal data class MemberRenderer(
           if (initializer == null && field.isNative) {
             nameRenderer.topLevelQualifiedNameSource("kotlin.js.definedExternally")
           } else {
-            initializer?.let(::expressionSource).orEmpty()
+            initializer?.let { expressionRenderer.expressionSource(it) }.orEmpty()
           }
         )
       )
@@ -183,7 +179,7 @@ internal data class MemberRenderer(
     annotation(nameRenderer.topLevelQualifiedNameSource("kotlin.jvm.JvmStatic"))
 
   private fun initializerBlockSource(initializerBlock: InitializerBlock): Source =
-    spaceSeparated(INIT_KEYWORD, statementSource(initializerBlock.block))
+    spaceSeparated(INIT_KEYWORD, statementRenderer.statementSource(initializerBlock.block))
 
   private fun methodHeaderSource(method: Method): Source =
     if (isKtPrimaryConstructor(method)) {
@@ -294,7 +290,7 @@ internal data class MemberRenderer(
           } else {
             SUPER_KEYWORD
           },
-          invocationSource(constructorInvocation)
+          expressionRenderer.invocationSource(constructorInvocation)
         )
       }
       .orEmpty()
@@ -314,7 +310,7 @@ internal data class MemberRenderer(
               field.descriptor.enumValueDeclarationNameSource,
               newInstance.arguments
                 .takeIf { it.isNotEmpty() }
-                ?.let { invocationSource(newInstance) }
+                ?.let { expressionRenderer.invocationSource(newInstance) }
                 .orEmpty()
             ),
             newInstance.anonymousInnerClass?.let { typeRenderer.typeBodySource(it) }.orEmpty()
