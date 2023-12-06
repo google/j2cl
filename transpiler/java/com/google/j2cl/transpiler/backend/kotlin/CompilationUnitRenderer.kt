@@ -50,11 +50,14 @@ internal data class CompilationUnitRenderer(val nameRenderer: NameRenderer) {
     return completeSource.plus(Source.NEW_LINE)
   }
 
+  private val importRenderer: ImportRenderer
+    get() = ImportRenderer(nameRenderer)
+
   private fun fileHeaderSource(compilationUnit: CompilationUnit): Source =
     newLineSeparated(fileCommentSource(compilationUnit), fileAnnotationsSource())
 
   private fun packageAndImportsSource(compilationUnit: CompilationUnit): Source =
-    emptyLineSeparated(packageSource(compilationUnit), nameRenderer.importsSource)
+    emptyLineSeparated(packageSource(compilationUnit), importRenderer.importsSource)
 
   private fun typesSource(compilationUnit: CompilationUnit): Source =
     emptyLineSeparated(compilationUnit.types.map(::typeSource))

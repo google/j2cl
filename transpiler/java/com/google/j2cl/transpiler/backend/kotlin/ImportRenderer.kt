@@ -28,30 +28,40 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLine
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
-/** Source with rendered imports. */
-internal val NameRenderer.importsSource: Source
-  get() = newLineSeparated(imports.map { it.source })
+/**
+ * Kotlin import renderer.
+ *
+ * @property nameRenderer underlying name renderer
+ */
+internal data class ImportRenderer(val nameRenderer: NameRenderer) {
+  /** Source with rendered imports. */
+  val importsSource: Source
+    get() = newLineSeparated(imports.map { it.source })
 
-/** A set of default imports. */
-private val defaultImports: Set<Import>
-  get() = setOf(starImport("javaemul", "lang"))
+  /** A set of default imports. */
+  private val defaultImports: Set<Import>
+    get() = setOf(starImport("javaemul", "lang"))
 
-/** A list of imports to render. */
-private val NameRenderer.imports: List<Import>
-  get() = defaultImports.plus(environment.importsSet).sortedWith(lexicographicalOrder())
+  /** A list of imports to render. */
+  private val imports: List<Import>
+    get() =
+      defaultImports.plus(nameRenderer.environment.importsSet).sortedWith(lexicographicalOrder())
 
-/** Source for this import. */
-private val Import.source: Source
-  get() =
-    spaceSeparated(
-      IMPORT_KEYWORD,
-      join(dotSeparated(pathComponents.map(::identifierSource)), suffixOrNull?.source.orEmpty())
-    )
+  companion object {
+    /** Source for this import. */
+    private val Import.source: Source
+      get() =
+        spaceSeparated(
+          IMPORT_KEYWORD,
+          join(dotSeparated(pathComponents.map(::identifierSource)), suffixOrNull?.source.orEmpty())
+        )
 
-private val Import.Suffix.source: Source
-  get() =
-    when (this) {
-      is Import.Suffix.WithAlias ->
-        join(Source.SPACE, spaceSeparated(AS_KEYWORD, identifierSource(alias)))
-      is Import.Suffix.WithStar -> join(Source.DOT, STAR_OPERATOR)
-    }
+    private val Import.Suffix.source: Source
+      get() =
+        when (this) {
+          is Import.Suffix.WithAlias ->
+            join(Source.SPACE, spaceSeparated(AS_KEYWORD, identifierSource(alias)))
+          is Import.Suffix.WithStar -> join(Source.DOT, STAR_OPERATOR)
+        }
+  }
+}
