@@ -49,6 +49,9 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
   private val jsInteropAnnotationRenderer: JsInteropAnnotationRenderer
     get() = JsInteropAnnotationRenderer(nameRenderer)
 
+  private val objCNameRenderer: ObjCNameRenderer
+    get() = ObjCNameRenderer(nameRenderer)
+
   /** Returns source for the given type. */
   fun typeSource(type: Type): Source =
     type.declaration.let { typeDeclaration ->
@@ -56,7 +59,7 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
         nativeTypeSource(typeDeclaration)
       } else {
         newLineSeparated(
-          nameRenderer.objCAnnotationSource(typeDeclaration),
+          objCNameRenderer.objCAnnotationSource(typeDeclaration),
           jsInteropAnnotationRenderer.jsInteropAnnotationsSource(typeDeclaration),
           spaceSeparated(
             inheritanceModifierSource(typeDeclaration),

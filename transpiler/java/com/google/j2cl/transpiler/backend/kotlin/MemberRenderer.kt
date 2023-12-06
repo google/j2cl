@@ -87,6 +87,9 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
   private val jsInteropAnnotationRenderer: JsInteropAnnotationRenderer
     get() = JsInteropAnnotationRenderer(nameRenderer)
 
+  private val objCNameRenderer: ObjCNameRenderer
+    get() = ObjCNameRenderer(nameRenderer)
+
   fun source(member: Member): Source =
     when (member) {
       is Member.WithCompanionObject -> source(member.companionObject)
@@ -96,7 +99,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
 
   private fun source(companionObject: CompanionObject): Source =
     newLineSeparated(
-      nameRenderer.objCAnnotationSource(companionObject),
+      objCNameRenderer.objCAnnotationSource(companionObject),
       spaceSeparated(
         COMPANION_KEYWORD,
         OBJECT_KEYWORD,
@@ -150,7 +153,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
 
     return newLineSeparated(
       Source.emptyUnless(isJvmField) { jvmFieldAnnotationSource() },
-      nameRenderer.objCAnnotationSource(fieldDescriptor),
+      objCNameRenderer.objCAnnotationSource(fieldDescriptor),
       jsInteropAnnotationRenderer.jsInteropAnnotationsSource(fieldDescriptor),
       spaceSeparated(
         field.descriptor.visibilityModifierSource,
@@ -192,7 +195,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
       val methodObjCNames = method.toObjCNames()
       newLineSeparated(
         Source.emptyUnless(methodDescriptor.isStatic) { jvmStaticAnnotationSource() },
-        nameRenderer.objCAnnotationSource(methodDescriptor, methodObjCNames),
+        objCNameRenderer.objCAnnotationSource(methodDescriptor, methodObjCNames),
         jsInteropAnnotationRenderer.jsInteropAnnotationsSource(methodDescriptor),
         memberDescriptorRenderer.jvmThrowsAnnotationSource(methodDescriptor),
         memberDescriptorRenderer.nativeThrowsAnnotationSource(methodDescriptor),
@@ -275,7 +278,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
       }
     return spaceSeparated(
       Source.emptyUnless(parameterDescriptor.isVarargs) { VARARG_KEYWORD },
-      objCParameterName?.let { nameRenderer.objCNameAnnotationSource(it) }.orEmpty(),
+      objCParameterName?.let { objCNameRenderer.objCNameAnnotationSource(it) }.orEmpty(),
       jsInteropAnnotationRenderer.jsInteropAnnotationsSource(parameterDescriptor),
       colonSeparated(
         nameRenderer.nameSource(parameter),
@@ -306,7 +309,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
       .let { it as NewInstance }
       .let { newInstance ->
         newLineSeparated(
-          nameRenderer.objCAnnotationSource(field.descriptor),
+          objCNameRenderer.objCAnnotationSource(field.descriptor),
           jsInteropAnnotationRenderer.jsInteropAnnotationsSource(field.descriptor),
           spaceSeparated(
             join(
