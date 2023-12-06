@@ -20,27 +20,20 @@ import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.AstUtils
 import com.google.j2cl.transpiler.ast.AstUtils.getConstructorInvocation
 import com.google.j2cl.transpiler.ast.Field
-import com.google.j2cl.transpiler.ast.FieldDescriptor
 import com.google.j2cl.transpiler.ast.FunctionExpression
 import com.google.j2cl.transpiler.ast.InitializerBlock
 import com.google.j2cl.transpiler.ast.Member as JavaMember
-import com.google.j2cl.transpiler.ast.MemberDescriptor
 import com.google.j2cl.transpiler.ast.Method
-import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor
 import com.google.j2cl.transpiler.ast.MethodLike
 import com.google.j2cl.transpiler.ast.NewInstance
-import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.ReturnStatement
 import com.google.j2cl.transpiler.ast.Statement
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDescriptors
 import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.COMPANION_KEYWORD
-import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.CONSTRUCTOR_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.CONST_KEYWORD
-import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.EXTERNAL_KEYWORD
-import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.FUN_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.GET_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.INIT_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.LATEINIT_KEYWORD
@@ -52,13 +45,13 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.VAL_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.VARARG_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.VAR_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotation
-import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.classLiteral
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.initializer
+import com.google.j2cl.transpiler.backend.kotlin.MemberDescriptorRenderer.Companion.enumValueDeclarationNameSource
+import com.google.j2cl.transpiler.backend.kotlin.MemberDescriptorRenderer.Companion.methodModifiersSource
+import com.google.j2cl.transpiler.backend.kotlin.MemberDescriptorRenderer.Companion.visibilityModifierSource
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionObject
-import com.google.j2cl.transpiler.backend.kotlin.ast.Keywords
 import com.google.j2cl.transpiler.backend.kotlin.ast.Member
 import com.google.j2cl.transpiler.backend.kotlin.ast.Visibility as KtVisibility
-import com.google.j2cl.transpiler.backend.kotlin.common.inBackTicks
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.colonSeparated
@@ -89,6 +82,9 @@ internal data class MemberRenderer(
   /** Returns renderer for enclosed types. */
   internal val typeRenderer: TypeRenderer
     get() = TypeRenderer(nameRenderer)
+
+  internal val memberDescriptorRenderer: MemberDescriptorRenderer
+    get() = MemberDescriptorRenderer(nameRenderer)
 
   fun source(member: Member): Source =
     when (member) {
@@ -186,36 +182,6 @@ internal data class MemberRenderer(
   private fun jvmStaticAnnotationSource(): Source =
     annotation(nameRenderer.topLevelQualifiedNameSource("kotlin.jvm.JvmStatic"))
 
-  private fun jvmThrowsAnnotationSource(methodDescriptor: MethodDescriptor): Source =
-    methodDescriptor.exceptionTypeDescriptors
-      .takeIf { it.isNotEmpty() }
-      ?.let { exceptionTypeDescriptors ->
-        annotation(
-          nameRenderer.topLevelQualifiedNameSource("kotlin.jvm.Throws"),
-          exceptionTypeDescriptors.map {
-            classLiteral(
-              nameRenderer.typeDescriptorSource(it.toRawTypeDescriptor().toNonNullable())
-            )
-          }
-        )
-      }
-      .orEmpty()
-
-  private fun nativeThrowsAnnotationSource(methodDescriptor: MethodDescriptor): Source =
-    methodDescriptor.ktInfo
-      .takeIf { it.isThrows }
-      ?.let {
-        annotation(
-          nameRenderer.topLevelQualifiedNameSource("javaemul.lang.NativeThrows"),
-          classLiteral(
-            nameRenderer.typeDescriptorSource(
-              TypeDescriptors.get().javaLangThrowable.toNonNullable()
-            )
-          )
-        )
-      }
-      .orEmpty()
-
   private fun initializerBlockSource(initializerBlock: InitializerBlock): Source =
     spaceSeparated(INIT_KEYWORD, statementSource(initializerBlock.block))
 
@@ -229,19 +195,19 @@ internal data class MemberRenderer(
         Source.emptyUnless(methodDescriptor.isStatic) { jvmStaticAnnotationSource() },
         nameRenderer.objCAnnotationSource(methodDescriptor, methodObjCNames),
         nameRenderer.jsInteropAnnotationsSource(methodDescriptor),
-        jvmThrowsAnnotationSource(methodDescriptor),
-        nativeThrowsAnnotationSource(methodDescriptor),
+        memberDescriptorRenderer.jvmThrowsAnnotationSource(methodDescriptor),
+        memberDescriptorRenderer.nativeThrowsAnnotationSource(methodDescriptor),
         spaceSeparated(
           methodDescriptor.methodModifiersSource,
           colonSeparated(
             join(
-              methodKindAndNameSource(methodDescriptor),
+              memberDescriptorRenderer.methodKindAndNameSource(methodDescriptor),
               methodParametersSource(method, methodObjCNames?.parameterNames)
             ),
             if (methodDescriptor.isConstructor) {
               constructorInvocationSource(method)
             } else {
-              methodReturnTypeSource(methodDescriptor)
+              memberDescriptorRenderer.methodReturnTypeSource(methodDescriptor)
             }
           ),
           nameRenderer.whereClauseSource(methodDescriptor.typeParameterTypeDescriptors)
@@ -256,24 +222,13 @@ internal data class MemberRenderer(
           OVERRIDE_KEYWORD,
           colonSeparated(
             join(
-              methodKindAndNameSource(methodDescriptor),
+              memberDescriptorRenderer.methodKindAndNameSource(methodDescriptor),
               methodParametersSource(functionExpression)
             ),
-            methodReturnTypeSource(methodDescriptor)
+            memberDescriptorRenderer.methodReturnTypeSource(methodDescriptor)
           ),
           nameRenderer.whereClauseSource(methodDescriptor.typeParameterTypeDescriptors)
         )
-      )
-    }
-
-  private fun methodKindAndNameSource(methodDescriptor: MethodDescriptor): Source =
-    if (methodDescriptor.isConstructor) {
-      CONSTRUCTOR_KEYWORD
-    } else {
-      spaceSeparated(
-        if (methodDescriptor.isKtProperty) VAL_KEYWORD else FUN_KEYWORD,
-        nameRenderer.typeParametersSource(methodDescriptor.typeParameterTypeDescriptors),
-        identifierSource(methodDescriptor.ktMangledName)
       )
     }
 
@@ -330,12 +285,6 @@ internal data class MemberRenderer(
     )
   }
 
-  private fun methodReturnTypeSource(methodDescriptor: MethodDescriptor): Source =
-    methodDescriptor.returnTypeDescriptor
-      .takeIf { it != PrimitiveTypes.VOID }
-      ?.let { nameRenderer.typeDescriptorSource(it) }
-      .orEmpty()
-
   private fun constructorInvocationSource(method: Method): Source =
     getConstructorInvocation(method)
       ?.let { constructorInvocation ->
@@ -373,7 +322,7 @@ internal data class MemberRenderer(
         )
       }
 
-  private companion object {
+  companion object {
     val Method.renderedStatements: List<Statement>
       get() {
         if (!descriptor.isKtDisabled) {
@@ -391,39 +340,5 @@ internal data class MemberRenderer(
             .build()
         )
       }
-
-    val MethodDescriptor.methodModifiersSource: Source
-      get() =
-        spaceSeparated(
-          visibilityModifierSource,
-          Source.emptyUnless(!enclosingTypeDescriptor.typeDeclaration.isInterface) {
-            spaceSeparated(
-              Source.emptyUnless(isNative) { EXTERNAL_KEYWORD },
-              inheritanceModifierSource
-            )
-          },
-          Source.emptyUnless(isKtOverride) { OVERRIDE_KEYWORD }
-        )
-
-    val MemberDescriptor.visibilityModifierSource: Source
-      get() = ktVisibility.takeUnless { it == inferredKtVisibility }?.source.orEmpty()
-
-    val MethodDescriptor.inheritanceModifierSource
-      get() =
-        when {
-          isAbstract -> KotlinSource.ABSTRACT_KEYWORD
-          isOpen -> KotlinSource.OPEN_KEYWORD
-          else -> Source.EMPTY
-        }
-
-    val FieldDescriptor.enumValueDeclarationNameSource: Source
-      get() =
-        name!!.let {
-          if (Keywords.isForbiddenInEnumValueDeclaration(it)) {
-            Source.source(it.inBackTicks)
-          } else {
-            identifierSource(it)
-          }
-        }
   }
 }
