@@ -344,8 +344,8 @@ public enum Backend {
   WASM {
     @Override
     public void generateOutputs(BackendOptions options, Library library, Problems problems) {
-      new WasmGeneratorStage(options.getOutput(), options.getLibraryInfoOutput(), problems)
-          .generateMonolithicOutput(library);
+      WasmGeneratorStage.generateMonolithicOutput(
+          library, options.getOutput(), options.getLibraryInfoOutput(), problems);
     }
 
     @Override
@@ -482,8 +482,8 @@ public enum Backend {
   WASM_MODULAR {
     @Override
     public void generateOutputs(BackendOptions options, Library library, Problems problems) {
-      new WasmGeneratorStage(options.getOutput(), options.getLibraryInfoOutput(), problems)
-          .generateModularOutput(library);
+      WasmGeneratorStage.generateModularOutput(
+          library, options.getOutput(), options.getLibraryInfoOutput(), problems);
     }
 
     @Override

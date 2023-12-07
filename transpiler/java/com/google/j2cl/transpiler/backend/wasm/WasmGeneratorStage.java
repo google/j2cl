@@ -52,13 +52,18 @@ public class WasmGeneratorStage {
   private final Path libraryInfoOutputPath;
   private WasmGenerationEnvironment environment;
 
-  public WasmGeneratorStage(Output output, Path libraryInfoOutputPath, Problems problems) {
+  private WasmGeneratorStage(Output output, Path libraryInfoOutputPath, Problems problems) {
     this.output = output;
     this.libraryInfoOutputPath = libraryInfoOutputPath;
     this.problems = problems;
   }
 
-  public void generateModularOutput(Library library) {
+  public static void generateModularOutput(
+      Library library, Output output, Path libraryInfoOutputPath, Problems problems) {
+    new WasmGeneratorStage(output, libraryInfoOutputPath, problems).generateModularOutput(library);
+  }
+
+  private void generateModularOutput(Library library) {
     if (libraryInfoOutputPath != null) {
       OutputUtils.writeToFile(libraryInfoOutputPath, new byte[0], problems);
     }
@@ -110,7 +115,13 @@ public class WasmGeneratorStage {
     output.write(filename, content);
   }
 
-  public void generateMonolithicOutput(Library library) {
+  public static void generateMonolithicOutput(
+      Library library, Output output, Path libraryInfoOutputPath, Problems problems) {
+    new WasmGeneratorStage(output, libraryInfoOutputPath, problems)
+        .generateMonolithicOutput(library);
+  }
+
+  private void generateMonolithicOutput(Library library) {
     copyJavaSources(library);
     generateWasmModule(library);
     generateJsImportsFile();
@@ -160,7 +171,12 @@ public class WasmGeneratorStage {
     output.write("namemap", emitNameMapping(library));
   }
 
-  public void generateMethods(List<Method> methods) {
+  public static void generateMethods(List<Method> methods, Output output, Problems problems) {
+    new WasmGeneratorStage(output, /* libraryInfoOutputPath= */ null, problems)
+        .generateMethods(methods);
+  }
+
+  private void generateMethods(List<Method> methods) {
     if (methods.isEmpty()) {
       return;
     }

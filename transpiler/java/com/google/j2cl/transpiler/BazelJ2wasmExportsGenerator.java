@@ -108,9 +108,7 @@ final class BazelJ2wasmExportsGenerator extends BazelWorker {
                   .flatMap(t -> t.getDeclaredMethodDescriptors().stream())
                   .collect(toImmutableList()));
 
-      var generator = new WasmGeneratorStage(out, /* libraryInfoOutputPath= */ null, problems);
-
-      generator.generateMethods(exportedMethods);
+      WasmGeneratorStage.generateMethods(exportedMethods, out, problems);
       problems.abortIfHasErrors();
     }
   }
