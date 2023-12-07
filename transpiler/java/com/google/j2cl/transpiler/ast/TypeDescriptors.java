@@ -152,6 +152,18 @@ public class TypeDescriptors {
   @QualifiedBinaryName("javaemul.internal.Enums$BoxedComparableLightEnum")
   public DeclaredTypeDescriptor javaemulInternalBoxedComparableLightEnum;
 
+  @Nullable
+  @QualifiedBinaryName("javaemul.internal.Enums$BoxedIntegerEnum")
+  public DeclaredTypeDescriptor javaemulInternalBoxedIntegerEnum;
+
+  @Nullable
+  @QualifiedBinaryName("javaemul.internal.Enums$BoxedComparableIntegerEnum")
+  public DeclaredTypeDescriptor javaemulInternalBoxedComparableIntegerEnum;
+
+  @Nullable
+  @QualifiedBinaryName("javaemul.internal.Enums$BoxedStringEnum")
+  public DeclaredTypeDescriptor javaemulInternalBoxedStringEnum;
+
   @Nullable public DeclaredTypeDescriptor javaemulInternalConstructor;
   @Nullable public DeclaredTypeDescriptor javaemulInternalPlatform;
   public DeclaredTypeDescriptor javaemulInternalExceptions;
@@ -419,6 +431,9 @@ public class TypeDescriptors {
 
   public static TypeDescriptor getEnumBoxType(TypeDescriptor typeDescriptor) {
     checkState(AstUtils.isNonNativeJsEnum(typeDescriptor));
+    if (TypeDescriptors.get().javaemulInternalBoxedComparableLightEnum == null) {
+      return getEnumBoxTypeNonparameterized(typeDescriptor);
+    }
     TypeDescriptor boxType =
         typeDescriptor.getJsEnumInfo().supportsComparable()
             ? TypeDescriptors.get().javaemulInternalBoxedComparableLightEnum
@@ -428,6 +443,19 @@ public class TypeDescriptors {
             ImmutableMap.of(
                 Iterables.getOnlyElement(boxType.getAllTypeVariables()), typeDescriptor));
     return typeDescriptor.isNullable() ? specializedType : specializedType.toNonNullable();
+  }
+
+  private static TypeDescriptor getEnumBoxTypeNonparameterized(TypeDescriptor typeDescriptor) {
+    TypeDescriptor valueType = AstUtils.getJsEnumValueFieldType(typeDescriptor);
+    boolean supportsComparable = typeDescriptor.getJsEnumInfo().supportsComparable();
+    if (isPrimitiveInt(valueType)) {
+      return supportsComparable
+          ? TypeDescriptors.get().javaemulInternalBoxedComparableIntegerEnum
+          : TypeDescriptors.get().javaemulInternalBoxedIntegerEnum;
+    } else if (isJavaLangString(valueType)) {
+      return TypeDescriptors.get().javaemulInternalBoxedStringEnum;
+    }
+    throw new IllegalArgumentException("Unknown enum type: " + valueType.getReadableDescription());
   }
 
   /** Gets the type descriptor representing a native string. */
@@ -570,6 +598,10 @@ public class TypeDescriptors {
   /** Return java implementation class for an array */
   public static DeclaredTypeDescriptor getWasmArrayType(ArrayTypeDescriptor arrayTypeDescriptor) {
     TypeDescriptor componentTypeDescriptor = arrayTypeDescriptor.getComponentTypeDescriptor();
+
+    if (AstUtils.isNonNativeJsEnumArray(arrayTypeDescriptor)) {
+      componentTypeDescriptor = AstUtils.getJsEnumValueFieldType(componentTypeDescriptor);
+    }
 
     if (!componentTypeDescriptor.isPrimitive()) {
       return TypeDescriptors.get().javaemulInternalWasmArrayOfObject;

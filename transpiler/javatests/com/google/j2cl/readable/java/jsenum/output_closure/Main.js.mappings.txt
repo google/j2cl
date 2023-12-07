@@ -107,10 +107,24 @@
 [ComparableJsEnum.ONE.equals(o);] => [$Objects.m_equals__java_lang_Object__java_lang_Object__boolean(/**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay)), o);] "jsenum.Main.testJsEnumAutoboxingSpecialMethods"
 [o.equals(ComparableJsEnum.ZERO);] => [$Objects.m_equals__java_lang_Object__java_lang_Object__boolean(o, /**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ZERO, $Overlay)));] "jsenum.Main.testJsEnumAutoboxingSpecialMethods"
 [StringJsEnum.ONE.equals(jsEnum);] => [$Objects.m_equals__java_lang_Object__java_lang_Object__boolean(/**@type {$Enums_BoxedLightEnum<!StringJsEnum>}*/ ($Enums.box(StringJsEnum.ONE, StringJsEnum_$Overlay)), /**@type {$Enums_BoxedComparableLightEnum<?ComparableJsEnum>}*/ ($Enums.boxComparable(jsEnum, $Overlay)));] "jsenum.Main.testJsEnumAutoboxingSpecialMethods"
+[boxingPassthrough(ComparableJsEnum.ONE).equals(boxingPassthrough(ComparableJsEnum.ONE));] => [$Enums.equals(/**@type {?ComparableJsEnum}*/ ($Enums.unbox(Main.m_boxingPassthrough__java_lang_Object__java_lang_Object(/**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay))), $Overlay)), /**@type {?ComparableJsEnum}*/ ($Enums.unbox(Main.m_boxingPassthrough__java_lang_Object__java_lang_Object(/**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay))), $Overlay)));] "jsenum.Main.testJsEnumAutoboxingSpecialMethods"
+[boxingPassthrough(ComparableJsEnum.ONE).equals(boxingPassthrough(StringJsEnum.ONE));] => [$Objects.m_equals__java_lang_Object__java_lang_Object__boolean(/**@type {$Enums_BoxedComparableLightEnum<?ComparableJsEnum>}*/ ($Enums.boxComparable(/**@type {?ComparableJsEnum}*/ ($Enums.unbox(Main.m_boxingPassthrough__java_lang_Object__java_lang_Object(/**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay))), $Overlay)), $Overlay)), /**@type {$Enums_BoxedLightEnum<?StringJsEnum>}*/ ($Enums.box(/**@type {?StringJsEnum}*/ ($Enums.unbox(Main.m_boxingPassthrough__java_lang_Object__java_lang_Object(/**@type {$Enums_BoxedLightEnum<!StringJsEnum>}*/ ($Enums.box(StringJsEnum.ONE, StringJsEnum_$Overlay))), StringJsEnum_$Overlay)), StringJsEnum_$Overlay)));] "jsenum.Main.testJsEnumAutoboxingSpecialMethods"
 [acceptsJsFunctionSupplier] => [m_acceptsJsFunctionSupplier__jsenum_Main_JsFunctionSuppiler__void]
 [supplier] => [supplier] "supplier"
 [acceptsSupplierOfSupplier] => [m_acceptsSupplierOfSupplier__jsenum_Main_Supplier__void]
 [supplier] => [supplier] "supplier"
+[testReturnsAndParameters] => [m_testReturnsAndParameters__void]
+[ComparableJsEnum returnedValue = returnsJsEnum();] => [let returnedValue = Main.m_returnsJsEnum__jsenum_Main_ComparableJsEnum();] "jsenum.Main.testReturnsAndParameters"
+[returnedValue] => [returnedValue] "returnedValue"
+[ComparableJsEnum returnedNullValue = returnsNullJsEnum();] => [let returnedNullValue = Main.m_returnsNullJsEnum__jsenum_Main_ComparableJsEnum();] "jsenum.Main.testReturnsAndParameters"
+[returnedNullValue] => [returnedNullValue] "returnedNullValue"
+[takesJsEnum(ComparableJsEnum.ONE);] => [Main.m_takesJsEnum__jsenum_Main_ComparableJsEnum__void(ComparableJsEnum.ONE);] "jsenum.Main.testReturnsAndParameters"
+[returnsJsEnum] => [m_returnsJsEnum__jsenum_Main_ComparableJsEnum]
+[return ComparableJsEnum.ONE;] => [return ComparableJsEnum.ONE;] "jsenum.Main.returnsJsEnum"
+[returnsNullJsEnum] => [m_returnsNullJsEnum__jsenum_Main_ComparableJsEnum]
+[return null;] => [return /**@type {?ComparableJsEnum}*/ ($Enums.unbox(null, $Overlay));] "jsenum.Main.returnsNullJsEnum"
+[takesJsEnum] => [m_takesJsEnum__jsenum_Main_ComparableJsEnum__void]
+[value] => [value] "value"
 [testBoxUnboxWithTypeInference] => [m_testBoxUnboxWithTypeInference__void]
 [TemplatedField<ComparableJsEnum> templatedField =
         new TemplatedField<ComparableJsEnum>(ComparableJsEnum.ONE);] => [let templatedField = /**@type {!TemplatedField<$Enums_BoxedComparableLightEnum<?ComparableJsEnum>>}*/ (TemplatedField.$create__java_lang_Object(/**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay))));] "jsenum.Main.testBoxUnboxWithTypeInference"

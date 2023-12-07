@@ -980,6 +980,7 @@ public abstract class TypeDeclaration
             // TODO(b/288145698): Support native JsEnum.
             if (isNative()) {
               setJsEnumInfo(null);
+              setNative(false);
               break;
             }
             // fall through

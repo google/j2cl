@@ -23,6 +23,17 @@
   ))
  )
 
+ ;;; Code for libraryinfo.Main.MyJsEnum.$Overlay [type definition]
+ (type $libraryinfo.Main.MyJsEnum.$Overlay (sub (struct
+  (field $vtable (ref $libraryinfo.Main.MyJsEnum.$Overlay.vtable))
+  (field $itable (ref $itable))
+  ))
+ )
+ (type $libraryinfo.Main.MyJsEnum.$Overlay.vtable (sub (struct
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+  ))
+ )
+
  ;;; Code for libraryinfo.Main [type definition]
  (type $libraryinfo.Main (sub $java.lang.Object (struct
   (field $vtable (ref $libraryinfo.Main.vtable))
@@ -108,6 +119,8 @@
  (field $slot6 (ref null struct))
  )))
 
+ ;;; Code for libraryinfo.Main.MyJsEnum [type definition]
+
  ;;; Code for libraryinfo.Main.MyJsType [type definition]
  (type $libraryinfo.Main.MyJsType (sub $java.lang.Object (struct
   (field $vtable (ref $libraryinfo.Main.MyJsType.vtable))
@@ -142,38 +155,6 @@
   (field $m_instanceMethod__void_$pp_libraryinfo (ref $function.m_instanceMethod__void_$pp_libraryinfo))
   ))
  )
-
- ;;; Code for libraryinfo.Main.MyJsEnum [type definition]
- (type $libraryinfo.Main.MyJsEnum (sub $java.lang.Enum (struct
-  (field $vtable (ref $libraryinfo.Main.MyJsEnum.vtable))
-  (field $itable (ref $libraryinfo.Main.MyJsEnum.itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
-  (field $f_ordinal__java_lang_Enum_ (mut i32))
-  ))
- )
- (type $libraryinfo.Main.MyJsEnum.vtable (sub $java.lang.Enum.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_compareTo__java_lang_Object__int (ref $function.m_compareTo__java_lang_Object__int))
-  (field $m_compareTo__java_lang_Enum__int (ref $function.m_compareTo__java_lang_Enum__int))
-  (field $m_getDeclaringClass__java_lang_Class (ref $function.m_getDeclaringClass__java_lang_Class))
-  (field $m_name__java_lang_String (ref $function.m_name__java_lang_String))
-  (field $m_ordinal__int (ref $function.m_ordinal__int))
-  ))
- )
- (type $libraryinfo.Main.MyJsEnum.itable (sub $java.lang.Enum.itable (struct
- (field $slot0 (ref $java.io.Serializable.vtable))
- (field $slot1 (ref $java.lang.Comparable.vtable))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
- )))
 
  ;;; Code for libraryinfo.Main.MyEnum [type definition]
  (type $libraryinfo.Main.MyEnum (sub $java.lang.Enum (struct
@@ -292,45 +273,6 @@
  )
 )
 
-;;; Code for libraryinfo.Main.MyJsEnum [vtable.init]
-(global $libraryinfo.Main.MyJsEnum.vtable (ref $libraryinfo.Main.MyJsEnum.vtable)
- (struct.new $libraryinfo.Main.MyJsEnum.vtable
-  (ref.func $$getClassImpl__java_lang_Class@libraryinfo.Main.MyJsEnum)
-  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Enum)
-  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
-  (ref.func $m_hashCode__int@java.lang.Enum)
-  (ref.func $m_toString__java_lang_String@java.lang.Enum)
-  (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
-  (ref.func $m_compareTo__java_lang_Enum__int@java.lang.Enum)
-  (ref.func $m_getDeclaringClass__java_lang_Class@java.lang.Enum)
-  (ref.func $m_name__java_lang_String@java.lang.Enum)
-  (ref.func $m_ordinal__int@java.lang.Enum)
- )
-)
-
-;;; Code for libraryinfo.Main.MyJsEnum [itable.init]
-
-(global $java.io.Serializable.vtable@$libraryinfo.Main.MyJsEnum (ref $java.io.Serializable.vtable)
- (struct.new $java.io.Serializable.vtable
- )
-)
-(global $java.lang.Comparable.vtable@$libraryinfo.Main.MyJsEnum (ref $java.lang.Comparable.vtable)
- (struct.new $java.lang.Comparable.vtable
-  (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
- )
-)
-(global $libraryinfo.Main.MyJsEnum.itable (ref $libraryinfo.Main.MyJsEnum.itable)
- (struct.new $libraryinfo.Main.MyJsEnum.itable
-   (global.get $java.io.Serializable.vtable@$libraryinfo.Main.MyJsEnum)
-   (global.get $java.lang.Comparable.vtable@$libraryinfo.Main.MyJsEnum)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
- )
-)
-
 ;;; Code for libraryinfo.Main.MyEnum [vtable.init]
 (global $libraryinfo.Main.MyEnum.vtable (ref $libraryinfo.Main.MyEnum.vtable)
  (struct.new $libraryinfo.Main.MyEnum.vtable
@@ -390,6 +332,13 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_instanceMethod__void_$pp_libraryinfo@libraryinfo.Main.Foo)
+ )
+)
+
+;;; Code for libraryinfo.Main.MyJsEnum.$Overlay [vtable.init]
+(global $libraryinfo.Main.MyJsEnum.$Overlay.vtable (ref $libraryinfo.Main.MyJsEnum.$Overlay.vtable)
+ (struct.new $libraryinfo.Main.MyJsEnum.$Overlay.vtable
+  (ref.func $$getClassImpl__java_lang_Class@libraryinfo.Main.MyJsEnum.$Overlay)
  )
 )
 
@@ -490,32 +439,6 @@
  (ref.null $java.lang.String)
 )
 
-;;; Code for libraryinfo.Main.MyJsEnum [static fields]
-(global $f_A__libraryinfo_Main_MyJsEnum (mut (ref null $libraryinfo.Main.MyJsEnum))
- (ref.null $libraryinfo.Main.MyJsEnum)
-)
-(global $f_B__libraryinfo_Main_MyJsEnum (mut (ref null $libraryinfo.Main.MyJsEnum))
- (ref.null $libraryinfo.Main.MyJsEnum)
-)
-(global $f_C__libraryinfo_Main_MyJsEnum (mut (ref null $libraryinfo.Main.MyJsEnum))
- (ref.null $libraryinfo.Main.MyJsEnum)
-)
-(global $f_namesToValuesMap__libraryinfo_Main_MyJsEnum_ (mut (ref null $java.lang.Object))
- (ref.null $java.lang.Object)
-)
-(global $f_$initialized__libraryinfo_Main_MyJsEnum (mut i32)
- (i32.const 0)
-)
-(global $f_$class__libraryinfo_Main_MyJsEnum (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $f_$string_|A|__libraryinfo_Main_MyJsEnum (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-(global $f_$string_|libraryinfo....|__libraryinfo_Main_MyJsEnum (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
 ;;; Code for libraryinfo.Main.MyEnum [static fields]
 (global $f_FOO__libraryinfo_Main_MyEnum (mut (ref null $libraryinfo.Main.MyEnum))
  (ref.null $libraryinfo.Main.MyEnum)
@@ -561,6 +484,17 @@
  (ref.null $java.lang.Class)
 )
 (global $f_$string_|libraryinfo....|__libraryinfo_Main_Foo (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
+
+;;; Code for libraryinfo.Main.MyJsEnum.$Overlay [static fields]
+(global $f_$initialized__libraryinfo_Main_MyJsEnum_$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__libraryinfo_Main_MyJsEnum_$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|libraryinfo....|__libraryinfo_Main_MyJsEnum_$Overlay (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -737,6 +671,63 @@
    )
   )
   (return (global.get $f_$string_|libraryinfo....|__libraryinfo_Main_Function))
+ )
+)
+
+;;; Code for libraryinfo.Main.MyJsEnum.$Overlay [methods]
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void@libraryinfo.Main.MyJsEnum.$Overlay
+ ;;@ libraryinfo/Main.java:59:7
+ (block
+  ;;@ libraryinfo/Main.java:59:7
+  (if (global.get $f_$initialized__libraryinfo_Main_MyJsEnum_$Overlay)
+   (then
+    ;;@ libraryinfo/Main.java:59:7
+    (return )
+   )
+  )
+  ;;@ libraryinfo/Main.java:59:7
+  (global.set $f_$initialized__libraryinfo_Main_MyJsEnum_$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@libraryinfo.Main.MyJsEnum.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  (if (ref.is_null (global.get $f_$class__libraryinfo_Main_MyJsEnum_$Overlay))
+   (then
+    (global.set $f_$class__libraryinfo_Main_MyJsEnum_$Overlay (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|libraryinfo....|__java_lang_String (ref.func $$getString_|libraryinfo....|__java_lang_String@libraryinfo.Main.MyJsEnum.$Overlay) )))
+   )
+  )
+  (return (global.get $f_$class__libraryinfo_Main_MyJsEnum_$Overlay))
+ )
+)
+
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@libraryinfo.Main.MyJsEnum.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $libraryinfo.Main.MyJsEnum.$Overlay))
+ (local.set $this (ref.cast (ref $libraryinfo.Main.MyJsEnum.$Overlay) (local.get $this.untyped)))
+ (block
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@libraryinfo.Main.MyJsEnum.$Overlay) ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@libraryinfo.Main.MyJsEnum.$Overlay)
+
+;;; String $Overlay.$getString_|libraryinfo....|()
+(func $$getString_|libraryinfo....|__java_lang_String@libraryinfo.Main.MyJsEnum.$Overlay
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.is_null (global.get $f_$string_|libraryinfo....|__libraryinfo_Main_MyJsEnum_$Overlay))
+   (then
+    (global.set $f_$string_|libraryinfo....|__libraryinfo_Main_MyJsEnum_$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "libraryinfo.Main$MyJsEnum$$Overlay")))
+   )
+  )
+  (return (global.get $f_$string_|libraryinfo....|__libraryinfo_Main_MyJsEnum_$Overlay))
  )
 )
 
@@ -1221,6 +1212,8 @@
  )
 )
 
+;;; Code for libraryinfo.Main.MyJsEnum [methods]
+
 ;;; Code for libraryinfo.Main.MyJsType [methods]
 
 ;;; MyJsType MyJsType.$create()
@@ -1408,151 +1401,6 @@
    )
   )
   (return (global.get $f_$string_|libraryinfo....|__libraryinfo_Main_Foo))
- )
-)
-
-;;; Code for libraryinfo.Main.MyJsEnum [methods]
-
-;;; MyJsEnum MyJsEnum.$create(String $name, int $ordinal)
-(func $$create__java_lang_String__int@libraryinfo.Main.MyJsEnum
- (param $$name (ref null $java.lang.String))
- (param $$ordinal i32)
- (result (ref null $libraryinfo.Main.MyJsEnum))
- ;;@ libraryinfo/Main.java:59:7
- (local $$instance (ref null $libraryinfo.Main.MyJsEnum))
- (block
-  ;;@ libraryinfo/Main.java:59:7
-  (local.set $$instance (struct.new $libraryinfo.Main.MyJsEnum (ref.as_non_null (global.get $libraryinfo.Main.MyJsEnum.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.MyJsEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
-  ;;@ libraryinfo/Main.java:59:7
-  (call $$ctor__java_lang_String__int__void_$p_libraryinfo_Main_MyJsEnum@libraryinfo.Main.MyJsEnum (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
-  ;;@ libraryinfo/Main.java:59:7
-  (return (local.get $$instance))
- )
-)
-
-;;; void MyJsEnum.$ctor(String $name, int $ordinal)
-(func $$ctor__java_lang_String__int__void_$p_libraryinfo_Main_MyJsEnum@libraryinfo.Main.MyJsEnum
- (param $this (ref null $libraryinfo.Main.MyJsEnum))
- (param $$name (ref null $java.lang.String))
- (param $$ordinal i32)
- ;;@ libraryinfo/Main.java:59:7
- (block
-  ;;@ libraryinfo/Main.java:59:7
-  (struct.set $java.lang.Enum $f_name__java_lang_Enum_ (local.get $this) (local.get $$name))
-  ;;@ libraryinfo/Main.java:59:7
-  (struct.set $java.lang.Enum $f_ordinal__java_lang_Enum_ (local.get $this) (local.get $$ordinal))
-  ;;@ libraryinfo/Main.java:59:7
-  (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
- )
-)
-
-;;; MyJsEnum MyJsEnum.valueOf(String name)
-(func $m_valueOf__java_lang_String__libraryinfo_Main_MyJsEnum@libraryinfo.Main.MyJsEnum
- (param $name (ref null $java.lang.String))
- (result (ref null $libraryinfo.Main.MyJsEnum))
- ;;@ libraryinfo/Main.java:59:7
- (block
-  ;;@ libraryinfo/Main.java:59:7
-  (call $$clinit__void@libraryinfo.Main.MyJsEnum )
-  ;;@ libraryinfo/Main.java:59:7
-  (if (ref.is_null (global.get $f_namesToValuesMap__libraryinfo_Main_MyJsEnum_))
-   (then
-    (block
-     ;;@ libraryinfo/Main.java:59:7
-     (global.set $f_namesToValuesMap__libraryinfo_Main_MyJsEnum_ (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values__arrayOf_libraryinfo_Main_MyJsEnum@libraryinfo.Main.MyJsEnum )))
-    )
-   )
-  )
-  ;;@ libraryinfo/Main.java:59:7
-  (return (ref.cast (ref null $libraryinfo.Main.MyJsEnum) (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__libraryinfo_Main_MyJsEnum_))))
- )
-)
-
-;;; MyJsEnum[] MyJsEnum.values()
-(func $m_values__arrayOf_libraryinfo_Main_MyJsEnum@libraryinfo.Main.MyJsEnum
- (result (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ libraryinfo/Main.java:59:7
- (block
-  ;;@ libraryinfo/Main.java:59:7
-  (call $$clinit__void@libraryinfo.Main.MyJsEnum )
-  ;;@ libraryinfo/Main.java:59:7
-  (return (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array (global.get $f_A__libraryinfo_Main_MyJsEnum)(global.get $f_B__libraryinfo_Main_MyJsEnum)(global.get $f_C__libraryinfo_Main_MyJsEnum))))
- )
-)
-
-;;; void MyJsEnum.$clinit()
-(func $$clinit__void@libraryinfo.Main.MyJsEnum
- ;;@ libraryinfo/Main.java:59:7
- (block
-  ;;@ libraryinfo/Main.java:59:7
-  (if (global.get $f_$initialized__libraryinfo_Main_MyJsEnum)
-   (then
-    ;;@ libraryinfo/Main.java:59:7
-    (return )
-   )
-  )
-  ;;@ libraryinfo/Main.java:59:7
-  (global.set $f_$initialized__libraryinfo_Main_MyJsEnum (i32.const 1))
-  ;;@ libraryinfo/Main.java:59:7
-  (call $$clinit__void@java.lang.Enum )
-  ;;@ libraryinfo/Main.java:60:4
-  (global.set $f_A__libraryinfo_Main_MyJsEnum (call $$create__java_lang_String__int@libraryinfo.Main.MyJsEnum (call $function.no.side.effects.$getString_|A|__java_lang_String (ref.func $$getString_|A|__java_lang_String@libraryinfo.Main.MyJsEnum) )(i32.const 0)))
-  ;;@ libraryinfo/Main.java:61:4
-  (global.set $f_B__libraryinfo_Main_MyJsEnum (call $$create__java_lang_String__int@libraryinfo.Main.MyJsEnum (call $function.no.side.effects.$getString_|B|__java_lang_String (ref.func $$getString_|B|__java_lang_String@java.lang.Byte) )(i32.const 1)))
-  ;;@ libraryinfo/Main.java:62:4
-  (global.set $f_C__libraryinfo_Main_MyJsEnum (call $$create__java_lang_String__int@libraryinfo.Main.MyJsEnum (call $function.no.side.effects.$getString_|C|__java_lang_String (ref.func $$getString_|C|__java_lang_String@java.lang.Character) )(i32.const 2)))
- )
-)
-
-;;; Class<T> MyJsEnum.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@libraryinfo.Main.MyJsEnum
- (result (ref null $java.lang.Class))
- (block
-  (if (ref.is_null (global.get $f_$class__libraryinfo_Main_MyJsEnum))
-   (then
-    (global.set $f_$class__libraryinfo_Main_MyJsEnum (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|libraryinfo....|__java_lang_String (ref.func $$getString_|libraryinfo....|__java_lang_String@libraryinfo.Main.MyJsEnum) )))
-   )
-  )
-  (return (global.get $f_$class__libraryinfo_Main_MyJsEnum))
- )
-)
-
-;;; Class<?> MyJsEnum.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@libraryinfo.Main.MyJsEnum
- (type $function.$getClassImpl__java_lang_Class)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $libraryinfo.Main.MyJsEnum))
- (local.set $this (ref.cast (ref $libraryinfo.Main.MyJsEnum) (local.get $this.untyped)))
- (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@libraryinfo.Main.MyJsEnum) ))
- )
-)
-(elem declare func $$getClassImpl__java_lang_Class@libraryinfo.Main.MyJsEnum)
-
-;;; String MyJsEnum.$getString_|A|()
-(func $$getString_|A|__java_lang_String@libraryinfo.Main.MyJsEnum
- (result (ref null $java.lang.String))
- (block
-  (if (ref.is_null (global.get $f_$string_|A|__libraryinfo_Main_MyJsEnum))
-   (then
-    (global.set $f_$string_|A|__libraryinfo_Main_MyJsEnum (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "A")))
-   )
-  )
-  (return (global.get $f_$string_|A|__libraryinfo_Main_MyJsEnum))
- )
-)
-
-;;; String MyJsEnum.$getString_|libraryinfo....|()
-(func $$getString_|libraryinfo....|__java_lang_String@libraryinfo.Main.MyJsEnum
- (result (ref null $java.lang.String))
- (block
-  (if (ref.is_null (global.get $f_$string_|libraryinfo....|__libraryinfo_Main_MyJsEnum))
-   (then
-    (global.set $f_$string_|libraryinfo....|__libraryinfo_Main_MyJsEnum (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "libraryinfo.Main$MyJsEnum")))
-   )
-  )
-  (return (global.get $f_$string_|libraryinfo....|__libraryinfo_Main_MyJsEnum))
  )
 )
 

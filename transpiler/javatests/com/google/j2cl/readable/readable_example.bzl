@@ -106,6 +106,7 @@ def readable_example(
             name = "readable_wasm",
             deps = [":readable-j2wasm"],
             entry_points = wasm_entry_points,
+            internal_transpiler_args = ["-experimentalWasmEnableNonNativeJsEnum"],
         )
 
         _readable_diff_test(

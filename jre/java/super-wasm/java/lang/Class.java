@@ -15,6 +15,8 @@ package java.lang;
 
 import java.io.Serializable;
 import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.Map;
 import javaemul.internal.annotations.HasNoSideEffects;
 import jsinterop.annotations.JsMethod;
 
@@ -42,6 +44,9 @@ public final class Class<T> implements Type, Serializable {
   private final Class<?> leafType;
   /** * Class objects for arrays of this type, created lazily. */
   private Class<?>[] arrayTypes;
+
+  /** Cache of boxed JsEnum values, created lazily. */
+  private Map<Object, Object> jsEnumsCache;
 
   private Class(
       boolean isEnum,
@@ -165,6 +170,14 @@ public final class Class<T> implements Type, Serializable {
 
   @JsMethod(namespace = "j2wasm.StringUtils")
   private static native String generateClassName();
+
+  @HasNoSideEffects
+  public Map<Object, Object> getJsEnumsCache() {
+    if (jsEnumsCache == null) {
+      jsEnumsCache = new HashMap<>();
+    }
+    return jsEnumsCache;
+  }
 
   private static String repeatString(String str, int count) {
     String rv = "";
