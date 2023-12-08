@@ -277,4 +277,18 @@ public class Main {
       return null;
     }
   }
+
+  @JsEnum
+  public enum SomeJsEnum {
+    A;
+  }
+
+  private static <T> T varargsConsumer(T... args) {
+    return args[0];
+  }
+
+  private static void testVarargs() {
+    varargsConsumer(SomeJsEnum.A, SomeJsEnum.A);
+    Consumer<SomeJsEnum> consumer = Main::varargsConsumer;
+  }
 }

@@ -78,6 +78,17 @@
   ))
  )
 
+ ;;; Code for jsenum.Main.SomeJsEnum.$Overlay [type definition]
+ (type $jsenum.Main.SomeJsEnum.$Overlay (sub (struct
+  (field $vtable (ref $jsenum.Main.SomeJsEnum.$Overlay.vtable))
+  (field $itable (ref $itable))
+  ))
+ )
+ (type $jsenum.Main.SomeJsEnum.$Overlay.vtable (sub (struct
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+  ))
+ )
+
  ;;; Code for jsenum.Main [type definition]
  (type $jsenum.Main (sub $java.lang.Object (struct
   (field $vtable (ref $jsenum.Main.vtable))
@@ -224,6 +235,32 @@
  (field $slot6 (ref null struct))
  )))
 
+ ;;; Code for jsenum.Main.$LambdaImplementor$6 [type definition]
+ (type $jsenum.Main.$LambdaImplementor$6 (sub $java.lang.Object (struct
+  (field $vtable (ref $jsenum.Main.$LambdaImplementor$6.vtable))
+  (field $itable (ref $jsenum.Main.$LambdaImplementor$6.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  ))
+ )
+ (type $jsenum.Main.$LambdaImplementor$6.vtable (sub $java.lang.Object.vtable (struct
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_accept__java_lang_Object__void (ref $function.m_accept__java_lang_Object__void))
+  ))
+ )
+ (type $jsenum.Main.$LambdaImplementor$6.itable (sub $itable (struct
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref $jsenum.Main.Consumer.vtable))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+ )))
+
  ;;; Code for jsenum.Main.ComparableJsEnum [type definition]
 
  ;;; Code for jsenum.Main.IntJsEnum [type definition]
@@ -294,6 +331,8 @@
  (field $slot5 (ref null struct))
  (field $slot6 (ref null struct))
  )))
+
+ ;;; Code for jsenum.Main.SomeJsEnum [type definition]
 
  ;;; Code for jsenum.Main.NativeStringEnum [type definition]
  (type $jsenum.Main.NativeStringEnum (sub $java.lang.Enum (struct
@@ -551,6 +590,37 @@
  )
 )
 
+;;; Code for jsenum.Main.$LambdaImplementor$6 [vtable.init]
+(global $jsenum.Main.$LambdaImplementor$6.vtable (ref $jsenum.Main.$LambdaImplementor$6.vtable)
+ (struct.new $jsenum.Main.$LambdaImplementor$6.vtable
+  (ref.func $$getClassImpl__java_lang_Class@jsenum.Main.$LambdaImplementor$6)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_accept__java_lang_Object__void@jsenum.Main.$LambdaImplementor$6)
+ )
+)
+
+;;; Code for jsenum.Main.$LambdaImplementor$6 [itable.init]
+
+(global $jsenum.Main.Consumer.vtable@$jsenum.Main.$LambdaImplementor$6 (ref $jsenum.Main.Consumer.vtable)
+ (struct.new $jsenum.Main.Consumer.vtable
+  (ref.func $m_accept__java_lang_Object__void@jsenum.Main.$LambdaImplementor$6)
+ )
+)
+(global $jsenum.Main.$LambdaImplementor$6.itable (ref $jsenum.Main.$LambdaImplementor$6.itable)
+ (struct.new $jsenum.Main.$LambdaImplementor$6.itable
+   (ref.null struct)
+   (global.get $jsenum.Main.Consumer.vtable@$jsenum.Main.$LambdaImplementor$6)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+ )
+)
+
 ;;; Code for jsenum.Main.NativeStringEnum [vtable.init]
 (global $jsenum.Main.NativeStringEnum.vtable (ref $jsenum.Main.NativeStringEnum.vtable)
  (struct.new $jsenum.Main.NativeStringEnum.vtable
@@ -775,6 +845,13 @@
  )
 )
 
+;;; Code for jsenum.Main.SomeJsEnum.$Overlay [vtable.init]
+(global $jsenum.Main.SomeJsEnum.$Overlay.vtable (ref $jsenum.Main.SomeJsEnum.$Overlay.vtable)
+ (struct.new $jsenum.Main.SomeJsEnum.$Overlay.vtable
+  (ref.func $$getClassImpl__java_lang_Class@jsenum.Main.SomeJsEnum.$Overlay)
+ )
+)
+
 ;;; Code for jsenum.Main [static fields]
 (global $f_$initialized__jsenum_Main (mut i32)
  (i32.const 0)
@@ -847,6 +924,17 @@
  (ref.null $java.lang.Class)
 )
 (global $f_$string_|jsenum.Main_...|__jsenum_Main_$LambdaImplementor$5 (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
+
+;;; Code for jsenum.Main.$LambdaImplementor$6 [static fields]
+(global $f_$initialized__jsenum_Main_$LambdaImplementor$6 (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__jsenum_Main_$LambdaImplementor$6 (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|jsenum.Main_...|__jsenum_Main_$LambdaImplementor$6 (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -1021,6 +1109,17 @@
  (ref.null $java.lang.Class)
 )
 (global $f_$string_|jsenum.Main_...|__jsenum_Main_JsEnumWithRenamedProperties_$Overlay (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
+
+;;; Code for jsenum.Main.SomeJsEnum.$Overlay [static fields]
+(global $f_$initialized__jsenum_Main_SomeJsEnum_$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $f_$class__jsenum_Main_SomeJsEnum_$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $f_$string_|jsenum.Main_...|__jsenum_Main_SomeJsEnum_$Overlay (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -1550,6 +1649,63 @@
  )
 )
 
+;;; Code for jsenum.Main.SomeJsEnum.$Overlay [methods]
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void@jsenum.Main.SomeJsEnum.$Overlay
+ ;;@ jsenum/Main.java:282:14
+ (block
+  ;;@ jsenum/Main.java:282:14
+  (if (global.get $f_$initialized__jsenum_Main_SomeJsEnum_$Overlay)
+   (then
+    ;;@ jsenum/Main.java:282:14
+    (return )
+   )
+  )
+  ;;@ jsenum/Main.java:282:14
+  (global.set $f_$initialized__jsenum_Main_SomeJsEnum_$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@jsenum.Main.SomeJsEnum.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  (if (ref.is_null (global.get $f_$class__jsenum_Main_SomeJsEnum_$Overlay))
+   (then
+    (global.set $f_$class__jsenum_Main_SomeJsEnum_$Overlay (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsenum.Main_...|__java_lang_String (ref.func $$getString_|jsenum.Main_...|__java_lang_String@jsenum.Main.SomeJsEnum.$Overlay) )))
+   )
+  )
+  (return (global.get $f_$class__jsenum_Main_SomeJsEnum_$Overlay))
+ )
+)
+
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsenum.Main.SomeJsEnum.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jsenum.Main.SomeJsEnum.$Overlay))
+ (local.set $this (ref.cast (ref $jsenum.Main.SomeJsEnum.$Overlay) (local.get $this.untyped)))
+ (block
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsenum.Main.SomeJsEnum.$Overlay) ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@jsenum.Main.SomeJsEnum.$Overlay)
+
+;;; String $Overlay.$getString_|jsenum.Main_...|()
+(func $$getString_|jsenum.Main_...|__java_lang_String@jsenum.Main.SomeJsEnum.$Overlay
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.is_null (global.get $f_$string_|jsenum.Main_...|__jsenum_Main_SomeJsEnum_$Overlay))
+   (then
+    (global.set $f_$string_|jsenum.Main_...|__jsenum_Main_SomeJsEnum_$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsenum.Main$SomeJsEnum$$Overlay")))
+   )
+  )
+  (return (global.get $f_$string_|jsenum.Main_...|__jsenum_Main_SomeJsEnum_$Overlay))
+ )
+)
+
 ;;; Code for jsenum.Main [methods]
 
 ;;; Main Main.$create()
@@ -1923,6 +2079,31 @@
   (call $$clinit__void@jsenum.Main )
   ;;@ jsenum/Main.java:229:4
   (drop (call $$create__java_util_Optional@jsenum.Main.Foo (call $m_of__java_lang_Object__java_util_Optional@java.util.Optional (call $m_boxInteger__int__java_lang_Class__javaemul_internal_Enums_BoxedIntegerEnum@javaemul.internal.Enums (i32.const -1)(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsenum.Main.IntJsEnum.$Overlay) )))))
+ )
+)
+
+;;; T Main.varargsConsumer(T... args)
+(func $m_varargsConsumer__arrayOf_java_lang_Object__java_lang_Object@jsenum.Main
+ (param $args (ref null $javaemul.internal.WasmArray.OfObject))
+ (result (ref null $java.lang.Object))
+ ;;@ jsenum/Main.java:286:23
+ (block
+  ;;@ jsenum/Main.java:286:50
+  (call $$clinit__void@jsenum.Main )
+  ;;@ jsenum/Main.java:287:4
+  (return (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject (local.get $args)) (i32.const 0)))
+ )
+)
+
+;;; void Main.testVarargs()
+(func $m_testVarargs__void@jsenum.Main
+ ;;@ jsenum/Main.java:290:22
+ (local $consumer (ref null $java.lang.Object))
+ (block
+  ;;@ jsenum/Main.java:291:4
+  (drop (call $m_varargsConsumer__arrayOf_java_lang_Object__java_lang_Object@jsenum.Main (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array (call $m_boxComparableInteger__int__java_lang_Class__javaemul_internal_Enums_BoxedComparableIntegerEnum@javaemul.internal.Enums (i32.const 0)(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsenum.Main.SomeJsEnum.$Overlay) ))(call $m_boxComparableInteger__int__java_lang_Class__javaemul_internal_Enums_BoxedComparableIntegerEnum@javaemul.internal.Enums (i32.const 0)(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsenum.Main.SomeJsEnum.$Overlay) ))))))
+  ;;@ jsenum/Main.java:292:4
+  (local.set $consumer (call $$create__@jsenum.Main.$LambdaImplementor$6 ))
  )
 )
 
@@ -2528,6 +2709,110 @@
  )
 )
 
+;;; Code for jsenum.Main.$LambdaImplementor$6 [methods]
+
+;;; <anonymous> implements Consumer<T><T> <anonymous> implements Consumer<T>.$create()
+(func $$create__@jsenum.Main.$LambdaImplementor$6
+ (result (ref null $jsenum.Main.$LambdaImplementor$6))
+ ;;@ jsenum/Main.java:292:36
+ (local $$instance (ref null $jsenum.Main.$LambdaImplementor$6))
+ (block
+  ;;@ jsenum/Main.java:292:36
+  (call $$clinit__void@jsenum.Main.$LambdaImplementor$6 )
+  ;;@ jsenum/Main.java:292:36
+  (local.set $$instance (struct.new $jsenum.Main.$LambdaImplementor$6 (ref.as_non_null (global.get $jsenum.Main.$LambdaImplementor$6.vtable)) (ref.as_non_null (global.get $jsenum.Main.$LambdaImplementor$6.itable)) (i32.const 0)))
+  ;;@ jsenum/Main.java:292:36
+  (call $$ctor__void_$p_jsenum_Main_$LambdaImplementor$6@jsenum.Main.$LambdaImplementor$6 (ref.as_non_null (local.get $$instance)))
+  ;;@ jsenum/Main.java:292:36
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> implements Consumer<T>.$ctor()
+(func $$ctor__void_$p_jsenum_Main_$LambdaImplementor$6@jsenum.Main.$LambdaImplementor$6
+ (param $this (ref null $jsenum.Main.$LambdaImplementor$6))
+ ;;@ jsenum/Main.java:292:36
+ (block
+  ;;@ jsenum/Main.java:292:36
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void <anonymous> implements Consumer<T>.accept(T arg0)
+(func $m_accept__java_lang_Object__void@jsenum.Main.$LambdaImplementor$6
+ (type $function.m_accept__java_lang_Object__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ ;;@ jsenum/Main.java:292:36
+ (local $arg0_1 i32)
+ (local $this (ref null $jsenum.Main.$LambdaImplementor$6))
+ (local.set $this (ref.cast (ref $jsenum.Main.$LambdaImplementor$6) (local.get $this.untyped)))
+ (block
+  ;;@ jsenum/Main.java:292:36
+  (local.set $arg0_1 (call $m_unboxInteger__java_lang_Object__java_lang_Class__int@javaemul.internal.Enums (local.get $arg0)(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsenum.Main.SomeJsEnum.$Overlay) )))
+  ;;@ jsenum/Main.java:292:36
+  (drop (call $m_varargsConsumer__arrayOf_java_lang_Object__java_lang_Object@jsenum.Main (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array (call $m_boxComparableInteger__int__java_lang_Class__javaemul_internal_Enums_BoxedComparableIntegerEnum@javaemul.internal.Enums (local.get $arg0_1)(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsenum.Main.SomeJsEnum.$Overlay) ))))))
+ )
+)
+(elem declare func $m_accept__java_lang_Object__void@jsenum.Main.$LambdaImplementor$6)
+
+;;; void <anonymous> implements Consumer<T>.$clinit()
+(func $$clinit__void@jsenum.Main.$LambdaImplementor$6
+ ;;@ jsenum/Main.java:292:36
+ (block
+  ;;@ jsenum/Main.java:292:36
+  (if (global.get $f_$initialized__jsenum_Main_$LambdaImplementor$6)
+   (then
+    ;;@ jsenum/Main.java:292:36
+    (return )
+   )
+  )
+  ;;@ jsenum/Main.java:292:36
+  (global.set $f_$initialized__jsenum_Main_$LambdaImplementor$6 (i32.const 1))
+  ;;@ jsenum/Main.java:292:36
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<T> <anonymous> implements Consumer<T>.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class@jsenum.Main.$LambdaImplementor$6
+ (result (ref null $java.lang.Class))
+ (block
+  (if (ref.is_null (global.get $f_$class__jsenum_Main_$LambdaImplementor$6))
+   (then
+    (global.set $f_$class__jsenum_Main_$LambdaImplementor$6 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsenum.Main_...|__java_lang_String (ref.func $$getString_|jsenum.Main_...|__java_lang_String@jsenum.Main.$LambdaImplementor$6) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+   )
+  )
+  (return (global.get $f_$class__jsenum_Main_$LambdaImplementor$6))
+ )
+)
+
+;;; Class<?> <anonymous> implements Consumer<T>.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsenum.Main.$LambdaImplementor$6
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jsenum.Main.$LambdaImplementor$6))
+ (local.set $this (ref.cast (ref $jsenum.Main.$LambdaImplementor$6) (local.get $this.untyped)))
+ (block
+  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsenum.Main.$LambdaImplementor$6) ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@jsenum.Main.$LambdaImplementor$6)
+
+;;; String <anonymous> implements Consumer<T>.$getString_|jsenum.Main_...|()
+(func $$getString_|jsenum.Main_...|__java_lang_String@jsenum.Main.$LambdaImplementor$6
+ (result (ref null $java.lang.String))
+ (block
+  (if (ref.is_null (global.get $f_$string_|jsenum.Main_...|__jsenum_Main_$LambdaImplementor$6))
+   (then
+    (global.set $f_$string_|jsenum.Main_...|__jsenum_Main_$LambdaImplementor$6 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsenum.Main$$LambdaImplementor$6")))
+   )
+  )
+  (return (global.get $f_$string_|jsenum.Main_...|__jsenum_Main_$LambdaImplementor$6))
+ )
+)
+
 ;;; Code for jsenum.Main.ComparableJsEnum [methods]
 
 ;;; Code for jsenum.Main.IntJsEnum [methods]
@@ -2844,6 +3129,8 @@
   (return (global.get $f_$string_|jsenum.Main_...|__jsenum_Main_SupplierConsumerImpl))
  )
 )
+
+;;; Code for jsenum.Main.SomeJsEnum [methods]
 
 ;;; Code for jsenum.Main.NativeStringEnum [methods]
 

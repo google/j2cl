@@ -145,6 +145,18 @@
     new Foo<>(Optional.of(IntJsEnum.MINUSONE));
   }] => [Main.$clinit();] "jsenum.Main.boxingWithGenerics"
 [new Foo<>(Optional.of(IntJsEnum.MINUSONE));] => [Foo.$create__java_util_Optional(/**@type {Optional<$Enums_BoxedLightEnum<?IntJsEnum>>}*/ (Optional.m_of__java_lang_Object__java_util_Optional(/**@type {$Enums_BoxedLightEnum<!IntJsEnum>}*/ ($Enums.box(IntJsEnum.MINUSONE, IntJsEnum_$Overlay)))));] "jsenum.Main.boxingWithGenerics"
+[varargsConsumer] => [m_varargsConsumer__arrayOf_java_lang_Object__java_lang_Object]
+[args] => [args] "args"
+[return args[0];] => [return args[0];] "jsenum.Main.varargsConsumer"
+[testVarargs] => [m_testVarargs__void]
+[varargsConsumer(SomeJsEnum.A, SomeJsEnum.A);] => [Main.m_varargsConsumer__arrayOf_java_lang_Object__java_lang_Object([/**@type {$Enums_BoxedComparableLightEnum<!SomeJsEnum>}*/ ($Enums.boxComparable(SomeJsEnum.A, SomeJsEnum_$Overlay)), /**@type {$Enums_BoxedComparableLightEnum<!SomeJsEnum>}*/ ($Enums.boxComparable(SomeJsEnum.A, SomeJsEnum_$Overlay))]);] "jsenum.Main.testVarargs"
+[Consumer<SomeJsEnum> consumer = Main::varargsConsumer;] => [let consumer = Consumer.$adapt((arg0) =>{
+   let arg0_1 = /**@type {?SomeJsEnum}*/ ($Enums.unbox(arg0, SomeJsEnum_$Overlay));
+   Main.m_varargsConsumer__arrayOf_java_lang_Object__java_lang_Object([/**@type {$Enums_BoxedComparableLightEnum<?SomeJsEnum>}*/ ($Enums.boxComparable(arg0_1, SomeJsEnum_$Overlay))]);
+  });] "jsenum.Main.testVarargs"
+[consumer] => [consumer] "consumer"
+[Main::varargsConsumer] => [let arg0_1 = /**@type {?SomeJsEnum}*/ ($Enums.unbox(arg0, SomeJsEnum_$Overlay));] "jsenum.Main.<lambda in testVarargs>"
+[Main::varargsConsumer] => [Main.m_varargsConsumer__arrayOf_java_lang_Object__java_lang_Object([/**@type {$Enums_BoxedComparableLightEnum<?SomeJsEnum>}*/ ($Enums.boxComparable(arg0_1, SomeJsEnum_$Overlay))]);] "jsenum.Main.<lambda in testVarargs>"
 [Main] => [$clinit]
 [Main] => [Main.$clinit = () =>{};] "jsenum.Main.<clinit>"
 [Main] => [Main.$loadModules();] "jsenum.Main.<clinit>"

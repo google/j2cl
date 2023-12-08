@@ -14,6 +14,8 @@ let Foo = goog.forwardDeclare('jsenum.Main.Foo$impl');
 let IntJsEnum = goog.forwardDeclare('jsenum.Main.IntJsEnum$impl');
 let IntJsEnum_$Overlay = goog.forwardDeclare('jsenum.Main.IntJsEnum.$Overlay$impl');
 let NativeStringEnum = goog.forwardDeclare('jsenum.Main.NonNullableStringJsEnum');
+let SomeJsEnum = goog.forwardDeclare('jsenum.Main.SomeJsEnum$impl');
+let SomeJsEnum_$Overlay = goog.forwardDeclare('jsenum.Main.SomeJsEnum.$Overlay$impl');
 let StringJsEnum = goog.forwardDeclare('jsenum.Main.StringJsEnum$impl');
 let StringJsEnum_$Overlay = goog.forwardDeclare('jsenum.Main.StringJsEnum.$Overlay$impl');
 let Supplier = goog.forwardDeclare('jsenum.Main.Supplier$impl');
@@ -150,6 +152,18 @@ class Main extends j_l_Object {
   Main.$clinit();
   Foo.$create__java_util_Optional(/**@type {Optional<$Enums_BoxedLightEnum<?IntJsEnum>>}*/ (Optional.m_of__java_lang_Object__java_util_Optional(/**@type {$Enums_BoxedLightEnum<!IntJsEnum>}*/ ($Enums.box(IntJsEnum.MINUSONE, IntJsEnum_$Overlay)))));
  }
+ /** @nodts @template T @return {T} */
+ static m_varargsConsumer__arrayOf_java_lang_Object__java_lang_Object(/** Array<T> */ args) {
+  return args[0];
+ }
+ /** @nodts */
+ static m_testVarargs__void() {
+  Main.m_varargsConsumer__arrayOf_java_lang_Object__java_lang_Object([/**@type {$Enums_BoxedComparableLightEnum<!SomeJsEnum>}*/ ($Enums.boxComparable(SomeJsEnum.A, SomeJsEnum_$Overlay)), /**@type {$Enums_BoxedComparableLightEnum<!SomeJsEnum>}*/ ($Enums.boxComparable(SomeJsEnum.A, SomeJsEnum_$Overlay))]);
+  let consumer = Consumer.$adapt((arg0) =>{
+   let arg0_1 = /**@type {?SomeJsEnum}*/ ($Enums.unbox(arg0, SomeJsEnum_$Overlay));
+   Main.m_varargsConsumer__arrayOf_java_lang_Object__java_lang_Object([/**@type {$Enums_BoxedComparableLightEnum<?SomeJsEnum>}*/ ($Enums.boxComparable(arg0_1, SomeJsEnum_$Overlay))]);
+  });
+ }
  /** @nodts */
  static $clinit() {
   Main.$clinit = () =>{};
@@ -174,6 +188,8 @@ class Main extends j_l_Object {
   IntJsEnum = goog.module.get('jsenum.Main.IntJsEnum$impl');
   IntJsEnum_$Overlay = goog.module.get('jsenum.Main.IntJsEnum.$Overlay$impl');
   NativeStringEnum = goog.module.get('jsenum.Main.NonNullableStringJsEnum');
+  SomeJsEnum = goog.module.get('jsenum.Main.SomeJsEnum$impl');
+  SomeJsEnum_$Overlay = goog.module.get('jsenum.Main.SomeJsEnum.$Overlay$impl');
   StringJsEnum = goog.module.get('jsenum.Main.StringJsEnum$impl');
   StringJsEnum_$Overlay = goog.module.get('jsenum.Main.StringJsEnum.$Overlay$impl');
   Supplier = goog.module.get('jsenum.Main.Supplier$impl');

@@ -2,8 +2,11 @@
 
 #import <Foundation/NSObjCRuntime.h>
 
+#import "third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h"
+
 @class J2ktJsenumMain;
 @class J2ktJsenumMainCompanion;
+@class J2ktJsenumMain_SomeJsEnum;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -13,6 +16,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_INLINE void JsenumMain_testJsEnumSwitch(void) {
  [J2ktJsenumMainCompanion.shared testJsEnumSwitch];
+}
+
+@compatibility_alias JsenumMain_SomeJsEnum J2ktJsenumMain_SomeJsEnum;
+
+typedef NS_ENUM(jint, JsenumMain_SomeJsEnum_Enum) {
+ JsenumMain_SomeJsEnum_Enum_A = 0,
+};
+
+NS_INLINE J2ktJsenumMain_SomeJsEnum* JsenumMain_SomeJsEnum_get_A(void) {
+ return J2ktJsenumMain_SomeJsEnum.A;
 }
 
 NS_ASSUME_NONNULL_END
