@@ -337,4 +337,16 @@ open class Main {
   @ObjCName("A")
   A;
  }
+
+ open class BaseVarargs<T> {
+  internal constructor(vararg args: T) {
+   val args_1: Array<T>? = args as Array<T>?
+  }
+ }
+
+ open class SubtypeVarargs: Main.BaseVarargs<Main.SomeJsEnum?> {
+  internal constructor(): super(Main.SomeJsEnum.A, Main.SomeJsEnum.A)
+ }
+
+ open class SubtypeImplicitVarargs internal constructor(): Main.BaseVarargs<Main.SomeJsEnum?>() {}
 }

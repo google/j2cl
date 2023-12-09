@@ -1,0 +1,42 @@
+goog.module('jsenum.Main.BaseVarargs$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ */
+class BaseVarargs extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!BaseVarargs<T>} */
+ static $create__arrayOf_java_lang_Object(/** Array<T> */ args) {
+  let $instance = new BaseVarargs();
+  $instance.$ctor__jsenum_Main_BaseVarargs__arrayOf_java_lang_Object__void(args);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsenum_Main_BaseVarargs__arrayOf_java_lang_Object__void(/** Array<T> */ args) {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  BaseVarargs.$clinit = () =>{};
+  BaseVarargs.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof BaseVarargs;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(BaseVarargs, 'jsenum.Main$BaseVarargs');
+
+exports = BaseVarargs;
+
+//# sourceMappingURL=Main$BaseVarargs.js.map

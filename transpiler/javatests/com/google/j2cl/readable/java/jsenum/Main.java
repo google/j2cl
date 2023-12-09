@@ -287,6 +287,18 @@ public class Main {
     return args[0];
   }
 
+  private static class BaseVarargs<T> {
+    BaseVarargs(T... args) {}
+  }
+
+  private static class SubtypeVarargs extends BaseVarargs<SomeJsEnum> {
+    SubtypeVarargs() {
+      super(SomeJsEnum.A, SomeJsEnum.A);
+    }
+  }
+
+  private static class SubtypeImplicitVarargs extends BaseVarargs<SomeJsEnum> {}
+
   private static void testVarargs() {
     varargsConsumer(SomeJsEnum.A, SomeJsEnum.A);
     Consumer<SomeJsEnum> consumer = Main::varargsConsumer;

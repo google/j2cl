@@ -1,0 +1,51 @@
+goog.module('jsenum.Main.SubtypeVarargs$impl');
+
+const BaseVarargs = goog.require('jsenum.Main.BaseVarargs$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let SomeJsEnum = goog.forwardDeclare('jsenum.Main.SomeJsEnum$impl');
+let $Overlay = goog.forwardDeclare('jsenum.Main.SomeJsEnum.$Overlay$impl');
+let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
+let $Enums_BoxedComparableLightEnum = goog.forwardDeclare('vmbootstrap.Enums.BoxedComparableLightEnum$impl');
+
+/**
+ * @extends {BaseVarargs<$Enums_BoxedComparableLightEnum<?SomeJsEnum>>}
+ */
+class SubtypeVarargs extends BaseVarargs {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!SubtypeVarargs} */
+ static $create__() {
+  let $instance = new SubtypeVarargs();
+  $instance.$ctor__jsenum_Main_SubtypeVarargs__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsenum_Main_SubtypeVarargs__void() {
+  this.$ctor__jsenum_Main_BaseVarargs__arrayOf_java_lang_Object__void([/**@type {$Enums_BoxedComparableLightEnum<!SomeJsEnum>}*/ ($Enums.boxComparable(SomeJsEnum.A, $Overlay)), /**@type {$Enums_BoxedComparableLightEnum<!SomeJsEnum>}*/ ($Enums.boxComparable(SomeJsEnum.A, $Overlay))]);
+ }
+ /** @nodts */
+ static $clinit() {
+  SubtypeVarargs.$clinit = () =>{};
+  SubtypeVarargs.$loadModules();
+  BaseVarargs.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SubtypeVarargs;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  SomeJsEnum = goog.module.get('jsenum.Main.SomeJsEnum$impl');
+  $Overlay = goog.module.get('jsenum.Main.SomeJsEnum.$Overlay$impl');
+  $Enums = goog.module.get('vmbootstrap.Enums$impl');
+ }
+}
+$Util.$setClassMetadata(SubtypeVarargs, 'jsenum.Main$SubtypeVarargs');
+
+exports = SubtypeVarargs;
+
+//# sourceMappingURL=Main$SubtypeVarargs.js.map

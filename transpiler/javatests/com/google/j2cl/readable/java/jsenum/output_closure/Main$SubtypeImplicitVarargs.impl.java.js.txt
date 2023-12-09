@@ -1,0 +1,45 @@
+goog.module('jsenum.Main.SubtypeImplicitVarargs$impl');
+
+const BaseVarargs = goog.require('jsenum.Main.BaseVarargs$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let SomeJsEnum = goog.forwardDeclare('jsenum.Main.SomeJsEnum$impl');
+let $Enums_BoxedComparableLightEnum = goog.forwardDeclare('vmbootstrap.Enums.BoxedComparableLightEnum$impl');
+
+/**
+ * @extends {BaseVarargs<$Enums_BoxedComparableLightEnum<?SomeJsEnum>>}
+ */
+class SubtypeImplicitVarargs extends BaseVarargs {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!SubtypeImplicitVarargs} */
+ static $create__() {
+  let $instance = new SubtypeImplicitVarargs();
+  $instance.$ctor__jsenum_Main_SubtypeImplicitVarargs__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsenum_Main_SubtypeImplicitVarargs__void() {
+  this.$ctor__jsenum_Main_BaseVarargs__arrayOf_java_lang_Object__void([]);
+ }
+ /** @nodts */
+ static $clinit() {
+  SubtypeImplicitVarargs.$clinit = () =>{};
+  SubtypeImplicitVarargs.$loadModules();
+  BaseVarargs.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SubtypeImplicitVarargs;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(SubtypeImplicitVarargs, 'jsenum.Main$SubtypeImplicitVarargs');
+
+exports = SubtypeImplicitVarargs;
+
+//# sourceMappingURL=Main$SubtypeImplicitVarargs.js.map
