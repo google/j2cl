@@ -1106,6 +1106,34 @@ public final class AstUtils {
     return typeDescriptor.getDefaultValue();
   }
 
+  /** Inserts type-consistency casts for JsEnum values when used as their value type. */
+  public static Expression castJsEnumToValue(
+      Expression jsEnumExpression, TypeDescriptor valueTypeDescriptor) {
+    checkArgument(jsEnumExpression.getTypeDescriptor().isJsEnum());
+    // In order to preserve type consistency, expressions like
+    //
+    //     getEnum()  // where getEnum() returns MyJsEnum.
+    //
+    // will be rewritten as
+    //
+    //     /** @type {int} */ ((MyJsEnum) getEnum())
+    //
+    // The inner Java cast to MyJsEnum guarantees that any conversion for getEnum() is preserved
+    // (e.g. erasure casts if getEnum() returned T and was specialized to MyJsEnum in the calling
+    // context; this allows the expression to be unboxed if needed).
+    // The outer JsDoc cast guarantees that the expression is treated as of being the type of value
+    // and conversions such as boxing are correctly preserved (e.g. if the expression was assigned
+    // to an Integer variable).
+    return JsDocCastExpression.newBuilder()
+        .setCastType(valueTypeDescriptor)
+        .setExpression(
+            CastExpression.newBuilder()
+                .setCastTypeDescriptor(jsEnumExpression.getTypeDescriptor())
+                .setExpression(jsEnumExpression)
+                .build())
+        .build();
+  }
+
   /** Returns a list of null values. */
   public static List<Expression> createListOfNullValues(int size) {
     return Collections.nCopies(size, TypeDescriptors.get().javaLangObject.getNullValue());

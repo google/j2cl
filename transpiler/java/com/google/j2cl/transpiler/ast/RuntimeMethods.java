@@ -328,36 +328,15 @@ public final class RuntimeMethods {
               .javaemulInternalEnums
               .getMethodDescriptorByName(methodName + getEnumsMethodSuffix(enumTypeDescriptor));
       arguments =
-          stream(arguments).map(RuntimeMethods::castJsEnumToValue).toArray(Expression[]::new);
+          stream(arguments)
+              .map(
+                  arg ->
+                      AstUtils.castJsEnumToValue(
+                          arg, AstUtils.getJsEnumValueFieldType(arg.getTypeDescriptor())))
+              .toArray(Expression[]::new);
     }
 
     return MethodCall.Builder.from(methodDescriptor).setArguments(arguments).build();
-  }
-
-  private static Expression castJsEnumToValue(Expression jsEnumExpression) {
-    // Preserve type consistency by inserting two casts. If we have the following expression
-    //
-    //     getEnum()
-    //
-    // It is changed to:
-    //
-    //     /** @type {int} */ ((MyJsEnum) getEnum())
-    //
-    // The inner Java cast to MyJsEnum guarantees that any conversion for getEnum() is preserved.
-    // (e.g. in the case of erasure casts if getEnum() returned T and was specialized to MyJsEnum in
-    // the calling context, this allows unboxing to take place).
-    // The outer JsDoc cast guarantees that the expression is treated as of being the type of value
-    // and conversions such as boxing are correctly preserved (e.g. if the expression was assigned
-    // to an Integer variable).
-    return JsDocCastExpression.newBuilder()
-        .setCastType(AstUtils.getJsEnumValueFieldType(jsEnumExpression.getTypeDescriptor()))
-        .setExpression(
-            CastExpression.newBuilder()
-                .setCastTypeDescriptor(jsEnumExpression.getTypeDescriptor())
-                // AstUtils.getJsEnumValueFieldType(jsEnumExpression.getTypeDescriptor()))
-                .setExpression(jsEnumExpression)
-                .build())
-        .build();
   }
 
   private static String getEnumsMethodSuffix(TypeDescriptor toTypeDescriptor) {
