@@ -548,6 +548,15 @@ public abstract class TypeDeclaration
    */
   @Memoized
   public DeclaredTypeDescriptor toRawTypeDescriptor() {
+    if (getTypeParameterDescriptors().isEmpty()) {
+      // The type does not declare any type variables, the raw type should equivalent to the
+      // unparameterized type. Return the nullable version explicitly since the unparameterized
+      // type descriptor is created with the default nullability of the scope.
+      return toUnparameterizedTypeDescriptor().toNullable();
+    }
+
+    // TODO(b/315520047): Evaluate whether this deep recursive construction of raw types is correct
+    // or if the raw types should always be equivalent to the unparameterized type.
     return DeclaredTypeDescriptor.newBuilder()
         .setTypeDeclaration(this)
         .setEnclosingTypeDescriptor(
