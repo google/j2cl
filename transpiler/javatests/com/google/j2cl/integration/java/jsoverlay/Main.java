@@ -19,12 +19,12 @@ import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 public class Main {
   @JsType(isNative = true, namespace = "test.foo")
   static class NativeJsTypeWithOverlay {
-    @JsOverlay public static final int COMPILE_TIME_CONSTANT = 1;
     @JsOverlay public static Object staticField = new Object();
     public native int m();
 
@@ -59,6 +59,11 @@ public class Main {
     }
   }
 
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+  static class NativeJsTypeWithOverlayConstant {
+    @JsOverlay public static final int COMPILE_TIME_CONSTANT = 1;
+  }
+
   @JsType(isNative = true, namespace = "test.foo")
   static final class NativeFinalJsTypeWithOverlay {
     public native int e();
@@ -83,7 +88,7 @@ public class Main {
     NativeJsTypeWithOverlay object = new NativeJsTypeWithOverlay();
     assertTrue(6 == object.callM());
     assertTrue(20 == NativeJsTypeWithOverlay.fun(4, 5));
-    assertTrue(1 == NativeJsTypeWithOverlay.COMPILE_TIME_CONSTANT);
+    assertTrue(1 == NativeJsTypeWithOverlayConstant.COMPILE_TIME_CONSTANT);
     assertTrue(object.getStaticField() != null);
     assertTrue(NativeJsTypeWithOverlay.staticField != null);
     NativeJsTypeWithOverlay.staticField = null;

@@ -24,8 +24,6 @@ public class Main {
 
   @JsType(isNative = true, namespace = "test.foo")
   public interface NativeJsTypeInterfaceWithOverlay {
-    @JsOverlay String COMPILE_TIME_CONSTANT = "10";
-
     @JsOverlay Object staticField = new Object();
 
     int m();
@@ -45,8 +43,6 @@ public class Main {
   @JsType(isNative = true, namespace = "test.foo")
   public static class NativeJsTypeWithOverlay {
     public static int nonJsOverlayField;
-
-    @JsOverlay public static final int COMPILE_TIME_CONSTANT = 10;
 
     @JsOverlay public static Object staticField = new Object();
 
@@ -100,6 +96,12 @@ public class Main {
     public static void overlay(NativeJsTypeWithOverlay o) {}
   }
 
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+  static class NativeJsTypeWithOverlayConstant {
+    @JsOverlay public static final int COMPILE_TIME_CONSTANT = 10;
+    @JsOverlay public static final String STRING_COMPILE_TIME_CONSTANT = "10";
+  }
+
   @JsFunction
   private interface Intf {
     void run();
@@ -113,13 +115,14 @@ public class Main {
     NativeJsTypeWithOverlay.bar();
     n.foo();
     int a =
-        NativeJsTypeWithOverlay.COMPILE_TIME_CONSTANT + NativeJsTypeWithOverlay.nonJsOverlayField;
+        NativeJsTypeWithOverlayConstant.COMPILE_TIME_CONSTANT
+            + NativeJsTypeWithOverlay.nonJsOverlayField;
     NativeJsTypeWithOverlay.staticField = null;
     NativeJsTypeWithOverlay.varargs(1, 2, 3);
     n.baz();
 
     String b =
-        NativeJsTypeInterfaceWithOverlay.COMPILE_TIME_CONSTANT
+        NativeJsTypeWithOverlayConstant.STRING_COMPILE_TIME_CONSTANT
             + NativeJsTypeInterfaceWithOverlay.staticField;
   }
 

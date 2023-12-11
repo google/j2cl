@@ -42,11 +42,11 @@ open class Main {
   Main.NativeJsTypeWithOverlay.n()
   Main.NativeJsTypeWithOverlay.bar_private_2()
   n!!.foo_private_2()
-  val a: Int = Main.NativeJsTypeWithOverlay.COMPILE_TIME_CONSTANT + Main.NativeJsTypeWithOverlay.nonJsOverlayField
+  val a: Int = Main.NativeJsTypeWithOverlayConstant.COMPILE_TIME_CONSTANT + Main.NativeJsTypeWithOverlay.nonJsOverlayField
   Main.NativeJsTypeWithOverlay.staticField = null
   Main.NativeJsTypeWithOverlay.varargs(1, 2, 3)
   n!!.baz_private_2()
-  val b: String? = Main.NativeJsTypeInterfaceWithOverlay.COMPILE_TIME_CONSTANT + Main.NativeJsTypeInterfaceWithOverlay.staticField
+  val b: String? = Main.NativeJsTypeWithOverlayConstant.STRING_COMPILE_TIME_CONSTANT + Main.NativeJsTypeInterfaceWithOverlay.staticField
  }
 
  @ObjCName("testOverlayInterface")
@@ -82,10 +82,7 @@ open class Main {
 
   @ObjCName("J2ktJsoverlayMain_NativeJsTypeInterfaceWithOverlayCompanion", exact = true)
   companion object {
-   @ObjCName("COMPILE_TIME_CONSTANT_")
-   @JsOverlay
-   const val COMPILE_TIME_CONSTANT: String = "10"
-
+   @JvmField
    @ObjCName("staticField_")
    @JsOverlay
    val staticField: Any? = Any()
@@ -138,10 +135,6 @@ open class Main {
    @ObjCName("nonJsOverlayField_")
    var nonJsOverlayField: Int = 0
 
-   @ObjCName("COMPILE_TIME_CONSTANT_")
-   @JsOverlay
-   const val COMPILE_TIME_CONSTANT: Int = 10
-
    @JvmField
    @ObjCName("staticField_")
    @JsOverlay
@@ -179,6 +172,17 @@ open class Main {
    fun overlay(
     @ObjCName("withJsoverlayMain_NativeJsTypeWithOverlay") o: Main.NativeJsTypeWithOverlay?
    ) {}
+  }
+ }
+
+ @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
+ open class NativeJsTypeWithOverlayConstant internal constructor() {
+  companion object {
+   @JsOverlay
+   const val COMPILE_TIME_CONSTANT: Int = 10
+
+   @JsOverlay
+   const val STRING_COMPILE_TIME_CONSTANT: String = "10"
   }
  }
 
