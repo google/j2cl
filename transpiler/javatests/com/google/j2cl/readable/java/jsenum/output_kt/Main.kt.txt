@@ -32,7 +32,6 @@ import kotlin.Int
 import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
-import kotlin.arrayOf
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
@@ -155,7 +154,7 @@ open class Main {
    var unboxed: Main.ComparableJsEnum? = templatedField!!.getValue_pp_jsenum()
    unboxed = templatedField!!.value_pp_jsenum
    templatedField!!.value_pp_jsenum = Main.ComparableJsEnum.ONE
-   Arrays.asList<Main.ComparableJsEnum>(*(arrayOf<Any?>(Main.ComparableJsEnum.ONE) as Array<Main.ComparableJsEnum>)!!)
+   Arrays.asList<Main.ComparableJsEnum>(Main.ComparableJsEnum.ONE)
    templatedField!!.getValue_pp_jsenum()!!.ordinal
    val b: Boolean = Main.ComparableJsEnum.ONE === Main.boxingPassthrough_private_2<Main.ComparableJsEnum?>(Main.ComparableJsEnum.ONE)
   }

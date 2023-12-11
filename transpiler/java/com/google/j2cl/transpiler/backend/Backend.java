@@ -32,6 +32,7 @@ import com.google.j2cl.transpiler.passes.ConvertMethodReferencesToLambdas;
 import com.google.j2cl.transpiler.passes.CreateImplicitConstructors;
 import com.google.j2cl.transpiler.passes.DevirtualizeBoxedTypesAndJsFunctionImplementations;
 import com.google.j2cl.transpiler.passes.DevirtualizeMethodCalls;
+import com.google.j2cl.transpiler.passes.ErasePackagedJsEnumVarargs;
 import com.google.j2cl.transpiler.passes.ExpandCompoundAssignments;
 import com.google.j2cl.transpiler.passes.ExtractNonIdempotentExpressions;
 import com.google.j2cl.transpiler.passes.FilloutMissingSourceMapInformation;
@@ -197,6 +198,7 @@ public enum Backend {
           // depend on Expression.isEffectivelyInvariant it can take advantage.
           MakeVariablesFinal::new,
           ConvertMethodReferencesToLambdas::new,
+          ErasePackagedJsEnumVarargs::new,
           ResolveImplicitInstanceQualifiers::new,
           () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ true),
           RestoreVariableScoping::new,
@@ -359,6 +361,7 @@ public enum Backend {
           // removed.
           MakeVariablesFinal::new,
           ConvertMethodReferencesToLambdas::new,
+          ErasePackagedJsEnumVarargs::new,
           ResolveImplicitInstanceQualifiers::new,
           () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ false),
           NormalizeSuperMemberReferences::new,
@@ -507,6 +510,7 @@ public enum Backend {
           // removed.
           MakeVariablesFinal::new,
           ConvertMethodReferencesToLambdas::new,
+          ErasePackagedJsEnumVarargs::new,
           ResolveImplicitInstanceQualifiers::new,
           () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ false),
           NormalizeSuperMemberReferences::new,

@@ -901,24 +901,6 @@ public final class AstUtils {
         Iterables.getLast(methodDescriptor.getParameterDescriptors());
     ArrayTypeDescriptor varargsTypeDescriptor =
         (ArrayTypeDescriptor) varargsParameterDescriptor.getTypeDescriptor();
-
-    if (AstUtils.isNonNativeJsEnum(varargsTypeDescriptor.getComponentTypeDescriptor())) {
-      // TODO(b/118615488): remove this when BoxedLightEnums are surfaces to J2CL.
-      //
-      // Here we create an array using the bound of declarated type T[] instead of the actual
-      // inferred type JsEnum[] since non-native JsEnum arrays are forbidden.
-      // We have chosen this workaround instead of banning T[] when T is inferred to be a non-native
-      // JsEnum. It is quite uncommon to have code that observes the implications of using a
-      // array of the supertype in the implicit array creation due to varargs, instead of an array
-      // of the inferred subtype. Making this choice allows the use of common varargs APIs such as
-      // Arrays.asList() with JsEnum values.
-      varargsTypeDescriptor =
-          (ArrayTypeDescriptor)
-              Iterables.getLast(
-                      methodDescriptor.getDeclarationDescriptor().getParameterDescriptors())
-                  .getTypeDescriptor()
-                  .toRawTypeDescriptor();
-    }
     if (arguments.size() < parametersLength) {
       // no argument for the varargs, add an empty array.
       return new ArrayLiteral(varargsTypeDescriptor);
@@ -936,6 +918,61 @@ public final class AstUtils {
               : arguments.get(i));
     }
     return new ArrayLiteral(varargsTypeDescriptor, valueExpressions);
+  }
+
+  /**
+   * For method calls with varargs, erases the array component of the vararg if it's specialized to
+   * a JsEnum type.
+   *
+   * <p>Calls with varargs should have already be packed into an array literal before this is
+   * called.
+   *
+   * <p>For example: {@code foo(nonVararg, new SomeJsEnum[] {SomeJsEnum.A, SomeJsEnum.B}} would be
+   * rewritten to {@code foo(nonVararg, new Object[] {SomeJsEnum.A, SomeJsEnum.B}}.
+   */
+  public static MethodCall maybeEraseJsEnumVarargsArrayType(MethodCall methodCall) {
+    if (!methodCall.getTarget().isVarargs()) {
+      return methodCall;
+    }
+
+    checkArgument(
+        methodCall.getTarget().getParameterDescriptors().size() == methodCall.getArguments().size(),
+        "maybeEraseJsEnumVarargsArrayType should only be called after varargs have been packaged"
+            + " into an array literal.");
+
+    Expression lastArgument = Iterables.getLast(methodCall.getArguments());
+    var varargsTypeDescriptor =
+        (ArrayTypeDescriptor)
+            Iterables.getLast(methodCall.getTarget().getParameterDescriptors()).getTypeDescriptor();
+
+    if (!isNonNativeJsEnum(varargsTypeDescriptor.getComponentTypeDescriptor())
+        || !(lastArgument instanceof ArrayLiteral)) {
+      return methodCall;
+    }
+
+    var updatedArguments =
+        new ArrayList<>(methodCall.getArguments().subList(0, methodCall.getArguments().size() - 1));
+
+    // TODO(b/118615488): remove this when BoxedLightEnums are surfaces to J2CL.
+    //
+    // Here we create an array using the bound of declarated type T[] instead of the actual
+    // inferred type JsEnum[] since non-native JsEnum arrays are forbidden.
+    // We have chosen this workaround instead of banning T[] when T is inferred to be a
+    // non-native
+    // JsEnum. It is quite uncommon to have code that observes the implications of using a
+    // array of the supertype in the implicit array creation due to varargs, instead of an
+    // array
+    // of the inferred subtype. Making this choice allows the use of common varargs APIs
+    // such as
+    // Arrays.asList() with JsEnum values.
+    var parameterDeclaration =
+        Iterables.getLast(
+            methodCall.getTarget().getDeclarationDescriptor().getParameterDescriptors());
+    updatedArguments.add(
+        new ArrayLiteral(
+            (ArrayTypeDescriptor) parameterDeclaration.getTypeDescriptor().toRawTypeDescriptor(),
+            ((ArrayLiteral) lastArgument).getValueExpressions()));
+    return MethodCall.Builder.from(methodCall).setArguments(updatedArguments).build();
   }
 
   /** Whether the function is the identity function. */

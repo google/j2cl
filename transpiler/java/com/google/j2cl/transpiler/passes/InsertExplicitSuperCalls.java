@@ -65,6 +65,7 @@ public class InsertExplicitSuperCalls extends NormalizationPass {
         MethodCall.Builder.from(superConstructor)
             .setArguments(AstUtils.maybePackageVarargs(superConstructor, ImmutableList.of()))
             .build();
+    superMethodCall = AstUtils.maybeEraseJsEnumVarargsArrayType(superMethodCall);
 
     constructor
         .getBody()
