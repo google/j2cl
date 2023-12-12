@@ -55,7 +55,7 @@ public class InsertExternConversionsWasm extends NormalizationPass {
 
           @Override
           public Expression rewriteInvocation(Invocation invocation) {
-            if (!isNative(invocation.getTarget())) {
+            if (!isJavaScriptMethod(invocation.getTarget())) {
               return invocation;
             }
             return insertWasmExternConversions(invocation);
@@ -84,7 +84,7 @@ public class InsertExternConversionsWasm extends NormalizationPass {
   }
 
   private static MethodDescriptor rewriteMethodDescriptor(MethodDescriptor descriptor) {
-    if (!isNative(descriptor)) {
+    if (!isJavaScriptMethod(descriptor)) {
       return descriptor;
     }
     return descriptor.transform(
@@ -105,7 +105,10 @@ public class InsertExternConversionsWasm extends NormalizationPass {
     return typeDescriptor;
   }
 
-  private static boolean isNative(MethodDescriptor descriptor) {
+  private static boolean isJavaScriptMethod(MethodDescriptor descriptor) {
+    if (descriptor.getWasmInfo() != null) {
+      return false;
+    }
     return descriptor.isNative()
         // TODO(b/264676817): Consider refactoring to have MethodDescriptor.isNative return true for
         // native constructors, or exposing isNativeConstructor from MethodDescriptor.
