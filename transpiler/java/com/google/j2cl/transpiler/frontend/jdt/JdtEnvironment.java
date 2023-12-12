@@ -26,6 +26,7 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.ArrayLength;
@@ -54,6 +55,7 @@ import com.google.j2cl.transpiler.ast.Visibility;
 import com.google.j2cl.transpiler.frontend.common.Nullability;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -91,8 +93,17 @@ public class JdtEnvironment {
 
   private final PackageAnnotationsResolver packageAnnotationsResolver;
 
-  public JdtEnvironment(JdtParser jdtParser) {
+  /**
+   * Creates a JdtEnvironment to allow construction of type model objects from Java sources and
+   * classfiles.
+   *
+   * <p>Note that creating the environment also initializes the well known type descriptors, which
+   * might be all that is needed by the caller.
+   */
+  @CanIgnoreReturnValue
+  public JdtEnvironment(JdtParser jdtParser, Collection<String> wellKnownTypesBinaryNames) {
     this.packageAnnotationsResolver = PackageAnnotationsResolver.create(Stream.of(), jdtParser);
+    this.initWellKnownTypes(jdtParser.resolveBindings(wellKnownTypesBinaryNames));
   }
 
   public JdtEnvironment(PackageAnnotationsResolver packageAnnotationsResolver) {
@@ -985,11 +996,12 @@ public class JdtEnvironment {
     }
     TypeDescriptors.SingletonBuilder builder = new TypeDescriptors.SingletonBuilder();
     // Add well-known reference types.`
-    resolveBindings(typesToResolve).forEach(builder::addReferenceType);
+    createDescriptorsFromBindings(typesToResolve).forEach(builder::addReferenceType);
     builder.buildSingleton();
   }
 
-  public List<DeclaredTypeDescriptor> resolveBindings(Iterable<ITypeBinding> typeBindings) {
+  public List<DeclaredTypeDescriptor> createDescriptorsFromBindings(
+      Iterable<ITypeBinding> typeBindings) {
     var builder = ImmutableList.<DeclaredTypeDescriptor>builder();
     for (ITypeBinding typeBinding : typeBindings) {
       builder.add(createDeclaredTypeDescriptor(typeBinding));

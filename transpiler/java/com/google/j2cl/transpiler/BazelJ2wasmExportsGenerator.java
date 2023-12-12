@@ -92,13 +92,10 @@ final class BazelJ2wasmExportsGenerator extends BazelWorker {
               // not be complete and cannot be fully resolved to descriptors.
               .filter(not(ITypeBinding::isAnnotation))
               .collect(ImmutableList.toImmutableList());
-      var environment = new JdtEnvironment(parser);
+      var environment = new JdtEnvironment(parser, wellKnownTypeNames);
 
-      environment.initWellKnownTypes(
-          bindings.stream()
-              .filter(t -> wellKnownTypeNames.contains(t.getBinaryName()))
-              .collect(toImmutableList()));
-      List<DeclaredTypeDescriptor> typeDescriptors = environment.resolveBindings(bindings);
+      List<DeclaredTypeDescriptor> typeDescriptors =
+          environment.createDescriptorsFromBindings(bindings);
 
       var entryPointBridgeCreator = new WasmEntryPointBridgesCreator(entryPointPatterns, problems);
 
