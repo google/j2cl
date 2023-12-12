@@ -41,7 +41,7 @@ public class BooleanOptimizationTest {
 
   @JsMethod
   public boolean boxedComp() {
-    return Boolean.TRUE == Boolean.TRUE;
+    return Boolean.valueOf(true) == Boolean.valueOf(true);
   }
 
   @JsProperty
@@ -50,5 +50,18 @@ public class BooleanOptimizationTest {
   @Test
   public void boxedCompOptimizes() {
     assertFunctionMatches(getBoxedComp(), "return !0;");
+  }
+
+  @JsMethod
+  public boolean booleanFieldComp() {
+    return Boolean.TRUE == Boolean.TRUE;
+  }
+
+  @JsProperty
+  private native Object getBooleanFieldComp();
+
+  @Test
+  public void booleanFieldCompOptimizes() {
+    assertFunctionMatches(getBooleanFieldComp(), "return !0;");
   }
 }
