@@ -19,8 +19,13 @@ import static java.util.function.Predicate.not;
 
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
+import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
+import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Library;
+import com.google.j2cl.transpiler.ast.MethodCall;
+import com.google.j2cl.transpiler.ast.StringLiteral;
+import com.google.j2cl.transpiler.ast.StringLiteralGettersCreator;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.protobuf.util.JsonFormat;
 import java.io.IOException;
@@ -44,6 +49,11 @@ public final class SummaryBuilder {
   SummaryBuilder(Library library, WasmGenerationEnvironment environment, Problems problems) {
     this.environment = environment;
 
+    summaryTypeHierarchy(library);
+    summarizeStringLiterals(library);
+  }
+
+  private void summaryTypeHierarchy(Library library) {
     library
         .streamTypes()
         .sorted(Comparator.comparing(t -> t.getDeclaration().getClassHierarchyDepth()))
@@ -77,6 +87,34 @@ public final class SummaryBuilder {
     String typeName = environment.getTypeSignature(typeDescriptor);
     // Note that the IDs start from '1' to reserve '0' for NULL_TYPE.
     return declaredTypes.computeIfAbsent(typeName, x -> declaredTypes.size() + 1);
+  }
+
+  private void summarizeStringLiterals(Library library) {
+    // Replace stringliterals with the name of the literal getter method that will be synthesized
+    // by the bundler.
+    var stringLiteralGetterCreator = new StringLiteralGettersCreator();
+    library.accept(
+        new AbstractRewriter() {
+          @Override
+          public Expression rewriteStringLiteral(StringLiteral stringLiteral) {
+            return MethodCall.Builder.from(
+                    stringLiteralGetterCreator.getOrCreateLiteralMethod(
+                        getCurrentType(), stringLiteral, /* synthesizeMethod= */ false))
+                .build();
+          }
+        });
+
+    stringLiteralGetterCreator
+        .getLiteralMethodByString()
+        .forEach(
+            (s, m) ->
+                summary.addStringLiteral(
+                    StringLiteralInfo.newBuilder()
+                        .setLiteral(s)
+                        .setEnclosingTypeName(
+                            m.getEnclosingTypeDescriptor().getQualifiedBinaryName())
+                        .setMethodName(m.getName())
+                        .build()));
   }
 
   private Summary build() {

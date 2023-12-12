@@ -145,7 +145,7 @@ public class WasmConstructsGenerator {
     builder.append(")))");
   }
 
-  void emitGlobals(Library library) {
+  public void emitGlobals(Library library) {
     emitStaticFieldGlobals(library);
   }
 
@@ -348,7 +348,7 @@ public class WasmConstructsGenerator {
         .forEach(this::renderMethod);
   }
 
-  void renderMethod(Method method) {
+  public void renderMethod(Method method) {
     MethodDescriptor methodDescriptor = method.getDescriptor();
     // TODO(b/264676817): Consider refactoring to have MethodDescriptor.isNative return true for
     // native constructors, or exposing isNativeConstructor from MethodDescriptor.

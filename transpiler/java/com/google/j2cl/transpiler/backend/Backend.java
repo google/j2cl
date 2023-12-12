@@ -596,7 +596,6 @@ public enum Backend {
           NormalizeInstantiationThroughFactoryMethods::new,
           ImplementStaticInitializationViaConditionChecks::new,
           ImplementClassMetadataViaGetters::new,
-          ImplementStringCompileTimeConstants::new,
           NormalizeArrayCreationsWasm::new,
           InsertCastOnArrayAccess::new,
           options.getWasmRemoveAssertStatement()

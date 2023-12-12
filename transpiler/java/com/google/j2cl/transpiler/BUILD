@@ -86,9 +86,14 @@ java_library(
         "//third_party:args4j",
         "//third_party:auto_value",
         "//third_party:guava",
+        # TODO(b/294284380): Make this independent of the frontend.
+        "//third_party:jdt-core",
         "//transpiler/java/com/google/j2cl/common",
         "//transpiler/java/com/google/j2cl/common/bazel",
+        "//transpiler/java/com/google/j2cl/transpiler/ast",
+        "//transpiler/java/com/google/j2cl/transpiler/backend/wasm",
         "//transpiler/java/com/google/j2cl/transpiler/backend/wasm:summary_java_proto",
+        "//transpiler/java/com/google/j2cl/transpiler/frontend/jdt",
     ],
 )
 

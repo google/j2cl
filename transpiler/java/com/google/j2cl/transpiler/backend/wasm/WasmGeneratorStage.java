@@ -52,6 +52,14 @@ public class WasmGeneratorStage {
   private final Path libraryInfoOutputPath;
   private WasmGenerationEnvironment environment;
 
+  /** Returns a generator stage that can emit code as strings. */
+  public WasmGeneratorStage(Library library, Problems problems) {
+    this(null, null, problems);
+    this.environment =
+        new WasmGenerationEnvironment(
+            library, JsImportsGenerator.collectImports(library, problems), /* isModular= */ true);
+  }
+
   private WasmGeneratorStage(Output output, Path libraryInfoOutputPath, Problems problems) {
     this.output = output;
     this.libraryInfoOutputPath = libraryInfoOutputPath;
@@ -102,14 +110,18 @@ public class WasmGeneratorStage {
     generateJsImportsFile();
   }
 
-  private void emitToFile(String filename, Consumer<WasmConstructsGenerator> emitter) {
+  public String emitToString(Consumer<WasmConstructsGenerator> emitter) {
     SourceBuilder builder = new SourceBuilder();
     WasmConstructsGenerator generator = new WasmConstructsGenerator(environment, builder);
 
     emitter.accept(generator);
 
-    String content = builder.build();
-      if (content.isEmpty()) {
+    return builder.build();
+  }
+
+  private void emitToFile(String filename, Consumer<WasmConstructsGenerator> emitter) {
+    String content = emitToString(emitter);
+    if (content.isEmpty()) {
       return;
     }
     output.write(filename, content);
@@ -171,12 +183,13 @@ public class WasmGeneratorStage {
     output.write("namemap", emitNameMapping(library));
   }
 
-  public static void generateMethods(List<Method> methods, Output output, Problems problems) {
+  public static void generateWasmExportMethods(
+      List<Method> methods, Output output, Problems problems) {
     new WasmGeneratorStage(output, /* libraryInfoOutputPath= */ null, problems)
-        .generateMethods(methods);
+        .generateWasmExportMethods(methods);
   }
 
-  private void generateMethods(List<Method> methods) {
+  private void generateWasmExportMethods(List<Method> methods) {
     if (methods.isEmpty()) {
       return;
     }

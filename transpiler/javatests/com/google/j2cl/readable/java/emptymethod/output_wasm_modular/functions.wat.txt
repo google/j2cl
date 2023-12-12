@@ -81,17 +81,4 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@emptymethod.EmptyMethod)
-
-;;; String EmptyMethod.$getString_|emptymethod....|()
-(func $$getString_|emptymethod....|__java_lang_String@emptymethod.EmptyMethod
- (result (ref null $java.lang.String))
- (block
-  (if (ref.is_null (global.get $f_$string_|emptymethod....|__emptymethod_EmptyMethod))
-   (then
-    (global.set $f_$string_|emptymethod....|__emptymethod_EmptyMethod (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "emptymethod.EmptyMethod")))
-   )
-  )
-  (return (global.get $f_$string_|emptymethod....|__emptymethod_EmptyMethod))
- )
-)
 ;;; End of code for emptymethod.EmptyMethod [methods]

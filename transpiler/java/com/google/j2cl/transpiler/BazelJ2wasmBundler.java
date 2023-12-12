@@ -20,20 +20,37 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.lang.String.format;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Streams;
 import com.google.common.io.Files;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
+import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.bazel.BazelWorker;
 import com.google.j2cl.common.bazel.FileCache;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.Library;
+import com.google.j2cl.transpiler.ast.Method;
+import com.google.j2cl.transpiler.ast.MethodCall;
+import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.ReturnStatement;
+import com.google.j2cl.transpiler.ast.StringLiteral;
+import com.google.j2cl.transpiler.ast.StringLiteralGettersCreator;
+import com.google.j2cl.transpiler.ast.TypeDeclaration;
+import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.backend.wasm.Summary;
 import com.google.j2cl.transpiler.backend.wasm.TypeHierarchyInfo;
+import com.google.j2cl.transpiler.backend.wasm.WasmGeneratorStage;
+import com.google.j2cl.transpiler.frontend.jdt.JdtEnvironment;
+import com.google.j2cl.transpiler.frontend.jdt.JdtParser;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -66,6 +83,13 @@ final class BazelJ2wasmBundler extends BazelWorker {
       usage = "Directory or zip into which to place the bundled output.")
   Path output;
 
+  @Option(
+      name = "-classpath",
+      required = true,
+      metaVar = "<path>",
+      usage = "Specifies where to find all the class files for the application.")
+  String classPath;
+
   @Override
   protected void run(Problems problems) {
     createBundle(problems);
@@ -74,6 +98,30 @@ final class BazelJ2wasmBundler extends BazelWorker {
   private void createBundle(Problems problems) {
     var typeGraph = new TypeGraph();
     var classes = typeGraph.build(getSummaries());
+
+    // Create an environment to initialize the well known type descriptors to be able to synthesize
+    // code.
+    // TODO(b/294284380): consider removing JDT and manually synthesizing required types.
+    var classPathEntries = Splitter.on(File.pathSeparatorChar).splitToList(this.classPath);
+    new JdtEnvironment(
+        new JdtParser(classPathEntries, problems), TypeDescriptors.getWellKnownTypeNames());
+
+    // Synthesize globals and methods for string literals.
+    var stringLiteralsCompilationUnit = synthesizeStringLiteralGetters();
+
+    var library =
+        Library.newBuilder()
+            .setCompilationUnits(ImmutableList.of(stringLiteralsCompilationUnit))
+            .build();
+
+    var generatorStage = new WasmGeneratorStage(library, problems);
+
+    Stream<String> literalGetterMethods =
+        stringLiteralsCompilationUnit.getTypes().stream()
+            .flatMap(t -> t.getMethods().stream())
+            .map(m -> generatorStage.emitToString(g -> g.renderMethod(m)));
+
+    String literalGlobals = generatorStage.emitToString(g -> g.emitGlobals(library));
 
     ImmutableList<String> moduleContents =
         Streams.concat(
@@ -85,10 +133,84 @@ final class BazelJ2wasmBundler extends BazelWorker {
                 getModuleParts("data"),
                 getModuleParts("globals"),
                 classes.stream().map(TypeGraph.Type::getItableInitialization),
-                getModuleParts("functions"))
+                Stream.of(literalGlobals),
+                getModuleParts("functions"),
+                literalGetterMethods)
             .collect(toImmutableList());
 
     writeToFile(output.toString(), moduleContents, problems);
+  }
+
+  private CompilationUnit synthesizeStringLiteralGetters() {
+
+    var compilationUnit = CompilationUnit.createSynthetic("wasm.stringliterals");
+
+    var stringLiteralHolder =
+        new com.google.j2cl.transpiler.ast.Type(
+            SourcePosition.NONE,
+            TypeDeclaration.newBuilder()
+                .setClassComponents(
+                    ImmutableList.of("wasm", "stringLiteral", "StringLiteralHolder"))
+                .setKind(Kind.CLASS)
+                .build());
+
+    var stringLiteralGetterCreator = new StringLiteralGettersCreator();
+    Map<TypeDeclaration, com.google.j2cl.transpiler.ast.Type> typesByDeclaration =
+        new LinkedHashMap<>();
+    getSummaries()
+        .flatMap(s -> s.getStringLiteralList().stream())
+        .forEach(
+            s -> {
+              // Get descriptor for the getter and synthesize the method logic if it is the
+              // first time it was found.
+              MethodDescriptor m =
+                  stringLiteralGetterCreator.getOrCreateLiteralMethod(
+                      stringLiteralHolder,
+                      new StringLiteral(s.getLiteral()),
+                      /* synthesizeMethod= */ true);
+
+              // Synthesize the forwarding logic.
+              String qualifiedBinaryName = s.getEnclosingTypeName();
+              TypeDeclaration typeDeclaration =
+                  TypeDeclaration.newBuilder()
+                      .setClassComponents(Arrays.asList(qualifiedBinaryName.split("\\.")))
+                      .setKind(Kind.CLASS)
+                      .build();
+              var type =
+                  typesByDeclaration.computeIfAbsent(
+                      typeDeclaration,
+                      t -> {
+                        var newType =
+                            new com.google.j2cl.transpiler.ast.Type(SourcePosition.NONE, t);
+                        compilationUnit.addType(newType);
+                        return newType;
+                      });
+
+              Method forwarderMethod =
+                  synthesizeForwardingMethod(m, typeDeclaration, s.getMethodName());
+              type.addMember(forwarderMethod);
+            });
+    return compilationUnit;
+  }
+
+  private static Method synthesizeForwardingMethod(
+      MethodDescriptor literalGetter, TypeDeclaration fromType, String forwardingMethodName) {
+    MethodDescriptor forwarderDescriptor =
+        MethodDescriptor.newBuilder()
+            .setEnclosingTypeDescriptor(fromType.toUnparameterizedTypeDescriptor())
+            .setName(forwardingMethodName)
+            .setStatic(true)
+            .setReturnTypeDescriptor(TypeDescriptors.get().javaLangString)
+            .build();
+    return Method.newBuilder()
+        .setMethodDescriptor(forwarderDescriptor)
+        .setStatements(
+            ReturnStatement.newBuilder()
+                .setExpression(MethodCall.Builder.from(literalGetter).build())
+                .setSourcePosition(SourcePosition.NONE)
+                .build())
+        .setSourcePosition(SourcePosition.NONE)
+        .build();
   }
 
   /** Represents the inheritance structure of the whole application. */
