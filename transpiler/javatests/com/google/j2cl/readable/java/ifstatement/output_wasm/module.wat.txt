@@ -2,7 +2,7 @@
  (type $ifstatement.IfStatement (sub $java.lang.Object (struct
   (field $vtable (ref $ifstatement.IfStatement.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $ifstatement.IfStatement.vtable (sub $java.lang.Object.vtable (struct
@@ -28,13 +28,13 @@
 )
 
 ;;; Code for ifstatement.IfStatement [static fields]
-(global $f_$initialized__ifstatement_IfStatement (mut i32)
+(global $$class-initialized@ifstatement.IfStatement (mut i32)
  (i32.const 0)
 )
-(global $f_$class__ifstatement_IfStatement (mut (ref null $java.lang.Class))
+(global $$class@ifstatement.IfStatement (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|ifstatement....|__ifstatement_IfStatement (mut (ref null $java.lang.String))
+(global $$string_|ifstatement....|@ifstatement.IfStatement (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -126,14 +126,14 @@
  ;;@ ifstatement/IfStatement.java:18:13
  (block
   ;;@ ifstatement/IfStatement.java:18:13
-  (if (global.get $f_$initialized__ifstatement_IfStatement)
+  (if (global.get $$class-initialized@ifstatement.IfStatement)
    (then
     ;;@ ifstatement/IfStatement.java:18:13
     (return )
    )
   )
   ;;@ ifstatement/IfStatement.java:18:13
-  (global.set $f_$initialized__ifstatement_IfStatement (i32.const 1))
+  (global.set $$class-initialized@ifstatement.IfStatement (i32.const 1))
   ;;@ ifstatement/IfStatement.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -143,12 +143,12 @@
 (func $$getClassMetadata__java_lang_Class@ifstatement.IfStatement
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__ifstatement_IfStatement))
+  (if (ref.is_null (global.get $$class@ifstatement.IfStatement))
    (then
-    (global.set $f_$class__ifstatement_IfStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|ifstatement....|__java_lang_String (ref.func $$getString_|ifstatement....|__java_lang_String@ifstatement.IfStatement) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@ifstatement.IfStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|ifstatement....|__java_lang_String (ref.func $$getString_|ifstatement....|__java_lang_String@ifstatement.IfStatement) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__ifstatement_IfStatement))
+  (return (global.get $$class@ifstatement.IfStatement))
  )
 )
 
@@ -169,11 +169,11 @@
 (func $$getString_|ifstatement....|__java_lang_String@ifstatement.IfStatement
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|ifstatement....|__ifstatement_IfStatement))
+  (if (ref.is_null (global.get $$string_|ifstatement....|@ifstatement.IfStatement))
    (then
-    (global.set $f_$string_|ifstatement....|__ifstatement_IfStatement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "ifstatement.IfStatement")))
+    (global.set $$string_|ifstatement....|@ifstatement.IfStatement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "ifstatement.IfStatement")))
    )
   )
-  (return (global.get $f_$string_|ifstatement....|__ifstatement_IfStatement))
+  (return (global.get $$string_|ifstatement....|@ifstatement.IfStatement))
  )
 )

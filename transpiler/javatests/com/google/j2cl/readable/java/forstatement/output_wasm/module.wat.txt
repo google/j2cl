@@ -2,7 +2,7 @@
  (type $forstatement.ForStatement (sub $java.lang.Object (struct
   (field $vtable (ref $forstatement.ForStatement.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $forstatement.ForStatement.vtable (sub $java.lang.Object.vtable (struct
@@ -34,13 +34,13 @@
 )
 
 ;;; Code for forstatement.ForStatement [static fields]
-(global $f_$initialized__forstatement_ForStatement (mut i32)
+(global $$class-initialized@forstatement.ForStatement (mut i32)
  (i32.const 0)
 )
-(global $f_$class__forstatement_ForStatement (mut (ref null $java.lang.Class))
+(global $$class@forstatement.ForStatement (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|forstatement...|__forstatement_ForStatement (mut (ref null $java.lang.String))
+(global $$string_|forstatement...|@forstatement.ForStatement (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -315,14 +315,14 @@
  ;;@ forstatement/ForStatement.java:18:13
  (block
   ;;@ forstatement/ForStatement.java:18:13
-  (if (global.get $f_$initialized__forstatement_ForStatement)
+  (if (global.get $$class-initialized@forstatement.ForStatement)
    (then
     ;;@ forstatement/ForStatement.java:18:13
     (return )
    )
   )
   ;;@ forstatement/ForStatement.java:18:13
-  (global.set $f_$initialized__forstatement_ForStatement (i32.const 1))
+  (global.set $$class-initialized@forstatement.ForStatement (i32.const 1))
   ;;@ forstatement/ForStatement.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -332,12 +332,12 @@
 (func $$getClassMetadata__java_lang_Class@forstatement.ForStatement
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__forstatement_ForStatement))
+  (if (ref.is_null (global.get $$class@forstatement.ForStatement))
    (then
-    (global.set $f_$class__forstatement_ForStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|forstatement...|__java_lang_String (ref.func $$getString_|forstatement...|__java_lang_String@forstatement.ForStatement) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@forstatement.ForStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|forstatement...|__java_lang_String (ref.func $$getString_|forstatement...|__java_lang_String@forstatement.ForStatement) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__forstatement_ForStatement))
+  (return (global.get $$class@forstatement.ForStatement))
  )
 )
 
@@ -358,11 +358,11 @@
 (func $$getString_|forstatement...|__java_lang_String@forstatement.ForStatement
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|forstatement...|__forstatement_ForStatement))
+  (if (ref.is_null (global.get $$string_|forstatement...|@forstatement.ForStatement))
    (then
-    (global.set $f_$string_|forstatement...|__forstatement_ForStatement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "forstatement.ForStatement")))
+    (global.set $$string_|forstatement...|@forstatement.ForStatement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "forstatement.ForStatement")))
    )
   )
-  (return (global.get $f_$string_|forstatement...|__forstatement_ForStatement))
+  (return (global.get $$string_|forstatement...|@forstatement.ForStatement))
  )
 )

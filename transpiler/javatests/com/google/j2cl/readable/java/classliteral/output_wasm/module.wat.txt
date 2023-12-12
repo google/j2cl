@@ -2,7 +2,7 @@
  (type $classliteral.ClassLiteral (sub $java.lang.Object (struct
   (field $vtable (ref $classliteral.ClassLiteral.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $classliteral.ClassLiteral.vtable (sub $java.lang.Object.vtable (struct
@@ -28,13 +28,13 @@
 )
 
 ;;; Code for classliteral.ClassLiteral [static fields]
-(global $f_$initialized__classliteral_ClassLiteral (mut i32)
+(global $$class-initialized@classliteral.ClassLiteral (mut i32)
  (i32.const 0)
 )
-(global $f_$class__classliteral_ClassLiteral (mut (ref null $java.lang.Class))
+(global $$class@classliteral.ClassLiteral (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|classliteral...|__classliteral_ClassLiteral (mut (ref null $java.lang.String))
+(global $$string_|classliteral...|@classliteral.ClassLiteral (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -327,14 +327,14 @@
  ;;@ classliteral/ClassLiteral.java:18:13
  (block
   ;;@ classliteral/ClassLiteral.java:18:13
-  (if (global.get $f_$initialized__classliteral_ClassLiteral)
+  (if (global.get $$class-initialized@classliteral.ClassLiteral)
    (then
     ;;@ classliteral/ClassLiteral.java:18:13
     (return )
    )
   )
   ;;@ classliteral/ClassLiteral.java:18:13
-  (global.set $f_$initialized__classliteral_ClassLiteral (i32.const 1))
+  (global.set $$class-initialized@classliteral.ClassLiteral (i32.const 1))
   ;;@ classliteral/ClassLiteral.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -344,12 +344,12 @@
 (func $$getClassMetadata__java_lang_Class@classliteral.ClassLiteral
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__classliteral_ClassLiteral))
+  (if (ref.is_null (global.get $$class@classliteral.ClassLiteral))
    (then
-    (global.set $f_$class__classliteral_ClassLiteral (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|classliteral...|__java_lang_String (ref.func $$getString_|classliteral...|__java_lang_String@classliteral.ClassLiteral) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@classliteral.ClassLiteral (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|classliteral...|__java_lang_String (ref.func $$getString_|classliteral...|__java_lang_String@classliteral.ClassLiteral) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__classliteral_ClassLiteral))
+  (return (global.get $$class@classliteral.ClassLiteral))
  )
 )
 
@@ -370,11 +370,11 @@
 (func $$getString_|classliteral...|__java_lang_String@classliteral.ClassLiteral
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|classliteral...|__classliteral_ClassLiteral))
+  (if (ref.is_null (global.get $$string_|classliteral...|@classliteral.ClassLiteral))
    (then
-    (global.set $f_$string_|classliteral...|__classliteral_ClassLiteral (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "classliteral.ClassLiteral")))
+    (global.set $$string_|classliteral...|@classliteral.ClassLiteral (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "classliteral.ClassLiteral")))
    )
   )
-  (return (global.get $f_$string_|classliteral...|__classliteral_ClassLiteral))
+  (return (global.get $$string_|classliteral...|@classliteral.ClassLiteral))
  )
 )

@@ -2,7 +2,7 @@
  (type $systemgetproperty.Main (sub $java.lang.Object (struct
   (field $vtable (ref $systemgetproperty.Main.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $systemgetproperty.Main.vtable (sub $java.lang.Object.vtable (struct
@@ -26,22 +26,22 @@
 )
 
 ;;; Code for systemgetproperty.Main [static fields]
-(global $f_$initialized__systemgetproperty_Main (mut i32)
+(global $$class-initialized@systemgetproperty.Main (mut i32)
  (i32.const 0)
 )
-(global $f_$class__systemgetproperty_Main (mut (ref null $java.lang.Class))
+(global $$class@systemgetproperty.Main (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|STRIPPED|__systemgetproperty_Main (mut (ref null $java.lang.String))
+(global $$string_|STRIPPED|@systemgetproperty.Main (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
-(global $f_$string_|SIMPLE|__systemgetproperty_Main (mut (ref null $java.lang.String))
+(global $$string_|SIMPLE|@systemgetproperty.Main (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
-(global $f_$string_|Foo|__systemgetproperty_Main (mut (ref null $java.lang.String))
+(global $$string_|Foo|@systemgetproperty.Main (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
-(global $f_$string_|systemgetpro...|__systemgetproperty_Main (mut (ref null $java.lang.String))
+(global $$string_|systemgetpro...|@systemgetproperty.Main (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -127,14 +127,14 @@
  ;;@ systemgetproperty/Main.java:18:13
  (block
   ;;@ systemgetproperty/Main.java:18:13
-  (if (global.get $f_$initialized__systemgetproperty_Main)
+  (if (global.get $$class-initialized@systemgetproperty.Main)
    (then
     ;;@ systemgetproperty/Main.java:18:13
     (return )
    )
   )
   ;;@ systemgetproperty/Main.java:18:13
-  (global.set $f_$initialized__systemgetproperty_Main (i32.const 1))
+  (global.set $$class-initialized@systemgetproperty.Main (i32.const 1))
   ;;@ systemgetproperty/Main.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -144,12 +144,12 @@
 (func $$getClassMetadata__java_lang_Class@systemgetproperty.Main
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__systemgetproperty_Main))
+  (if (ref.is_null (global.get $$class@systemgetproperty.Main))
    (then
-    (global.set $f_$class__systemgetproperty_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|systemgetpro...|__java_lang_String (ref.func $$getString_|systemgetpro...|__java_lang_String@systemgetproperty.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@systemgetproperty.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|systemgetpro...|__java_lang_String (ref.func $$getString_|systemgetpro...|__java_lang_String@systemgetproperty.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__systemgetproperty_Main))
+  (return (global.get $$class@systemgetproperty.Main))
  )
 )
 
@@ -170,12 +170,12 @@
 (func $$getString_|STRIPPED|__java_lang_String@systemgetproperty.Main
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|STRIPPED|__systemgetproperty_Main))
+  (if (ref.is_null (global.get $$string_|STRIPPED|@systemgetproperty.Main))
    (then
-    (global.set $f_$string_|STRIPPED|__systemgetproperty_Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "STRIPPED")))
+    (global.set $$string_|STRIPPED|@systemgetproperty.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "STRIPPED")))
    )
   )
-  (return (global.get $f_$string_|STRIPPED|__systemgetproperty_Main))
+  (return (global.get $$string_|STRIPPED|@systemgetproperty.Main))
  )
 )
 
@@ -183,12 +183,12 @@
 (func $$getString_|SIMPLE|__java_lang_String@systemgetproperty.Main
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|SIMPLE|__systemgetproperty_Main))
+  (if (ref.is_null (global.get $$string_|SIMPLE|@systemgetproperty.Main))
    (then
-    (global.set $f_$string_|SIMPLE|__systemgetproperty_Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "SIMPLE")))
+    (global.set $$string_|SIMPLE|@systemgetproperty.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "SIMPLE")))
    )
   )
-  (return (global.get $f_$string_|SIMPLE|__systemgetproperty_Main))
+  (return (global.get $$string_|SIMPLE|@systemgetproperty.Main))
  )
 )
 
@@ -196,12 +196,12 @@
 (func $$getString_|Foo|__java_lang_String@systemgetproperty.Main
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|Foo|__systemgetproperty_Main))
+  (if (ref.is_null (global.get $$string_|Foo|@systemgetproperty.Main))
    (then
-    (global.set $f_$string_|Foo|__systemgetproperty_Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "Foo")))
+    (global.set $$string_|Foo|@systemgetproperty.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "Foo")))
    )
   )
-  (return (global.get $f_$string_|Foo|__systemgetproperty_Main))
+  (return (global.get $$string_|Foo|@systemgetproperty.Main))
  )
 )
 
@@ -209,11 +209,11 @@
 (func $$getString_|systemgetpro...|__java_lang_String@systemgetproperty.Main
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|systemgetpro...|__systemgetproperty_Main))
+  (if (ref.is_null (global.get $$string_|systemgetpro...|@systemgetproperty.Main))
    (then
-    (global.set $f_$string_|systemgetpro...|__systemgetproperty_Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "systemgetproperty.Main")))
+    (global.set $$string_|systemgetpro...|@systemgetproperty.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "systemgetproperty.Main")))
    )
   )
-  (return (global.get $f_$string_|systemgetpro...|__systemgetproperty_Main))
+  (return (global.get $$string_|systemgetpro...|@systemgetproperty.Main))
  )
 )

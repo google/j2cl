@@ -2,7 +2,7 @@
  (type $genericconstructor.GenericConstructor (sub $java.lang.Object (struct
   (field $vtable (ref $genericconstructor.GenericConstructor.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $genericconstructor.GenericConstructor.vtable (sub $java.lang.Object.vtable (struct
@@ -28,13 +28,13 @@
 )
 
 ;;; Code for genericconstructor.GenericConstructor [static fields]
-(global $f_$initialized__genericconstructor_GenericConstructor (mut i32)
+(global $$class-initialized@genericconstructor.GenericConstructor (mut i32)
  (i32.const 0)
 )
-(global $f_$class__genericconstructor_GenericConstructor (mut (ref null $java.lang.Class))
+(global $$class@genericconstructor.GenericConstructor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|genericconst...|__genericconstructor_GenericConstructor (mut (ref null $java.lang.String))
+(global $$string_|genericconst...|@genericconstructor.GenericConstructor (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -121,14 +121,14 @@
  ;;@ genericconstructor/GenericConstructor.java:18:13
  (block
   ;;@ genericconstructor/GenericConstructor.java:18:13
-  (if (global.get $f_$initialized__genericconstructor_GenericConstructor)
+  (if (global.get $$class-initialized@genericconstructor.GenericConstructor)
    (then
     ;;@ genericconstructor/GenericConstructor.java:18:13
     (return )
    )
   )
   ;;@ genericconstructor/GenericConstructor.java:18:13
-  (global.set $f_$initialized__genericconstructor_GenericConstructor (i32.const 1))
+  (global.set $$class-initialized@genericconstructor.GenericConstructor (i32.const 1))
   ;;@ genericconstructor/GenericConstructor.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -138,12 +138,12 @@
 (func $$getClassMetadata__java_lang_Class@genericconstructor.GenericConstructor
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__genericconstructor_GenericConstructor))
+  (if (ref.is_null (global.get $$class@genericconstructor.GenericConstructor))
    (then
-    (global.set $f_$class__genericconstructor_GenericConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericconst...|__java_lang_String (ref.func $$getString_|genericconst...|__java_lang_String@genericconstructor.GenericConstructor) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@genericconstructor.GenericConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericconst...|__java_lang_String (ref.func $$getString_|genericconst...|__java_lang_String@genericconstructor.GenericConstructor) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__genericconstructor_GenericConstructor))
+  (return (global.get $$class@genericconstructor.GenericConstructor))
  )
 )
 
@@ -164,11 +164,11 @@
 (func $$getString_|genericconst...|__java_lang_String@genericconstructor.GenericConstructor
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|genericconst...|__genericconstructor_GenericConstructor))
+  (if (ref.is_null (global.get $$string_|genericconst...|@genericconstructor.GenericConstructor))
    (then
-    (global.set $f_$string_|genericconst...|__genericconstructor_GenericConstructor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "genericconstructor.GenericConstructor")))
+    (global.set $$string_|genericconst...|@genericconstructor.GenericConstructor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "genericconstructor.GenericConstructor")))
    )
   )
-  (return (global.get $f_$string_|genericconst...|__genericconstructor_GenericConstructor))
+  (return (global.get $$string_|genericconst...|@genericconstructor.GenericConstructor))
  )
 )

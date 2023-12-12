@@ -2,7 +2,7 @@
  (type $publicconstructor.PublicConstructor (sub $java.lang.Object (struct
   (field $vtable (ref $publicconstructor.PublicConstructor.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $publicconstructor.PublicConstructor.vtable (sub $java.lang.Object.vtable (struct
@@ -26,13 +26,13 @@
 )
 
 ;;; Code for publicconstructor.PublicConstructor [static fields]
-(global $f_$initialized__publicconstructor_PublicConstructor (mut i32)
+(global $$class-initialized@publicconstructor.PublicConstructor (mut i32)
  (i32.const 0)
 )
-(global $f_$class__publicconstructor_PublicConstructor (mut (ref null $java.lang.Class))
+(global $$class@publicconstructor.PublicConstructor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|publicconstr...|__publicconstructor_PublicConstructor (mut (ref null $java.lang.String))
+(global $$string_|publicconstr...|@publicconstructor.PublicConstructor (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -70,14 +70,14 @@
  ;;@ publicconstructor/PublicConstructor.java:18:13
  (block
   ;;@ publicconstructor/PublicConstructor.java:18:13
-  (if (global.get $f_$initialized__publicconstructor_PublicConstructor)
+  (if (global.get $$class-initialized@publicconstructor.PublicConstructor)
    (then
     ;;@ publicconstructor/PublicConstructor.java:18:13
     (return )
    )
   )
   ;;@ publicconstructor/PublicConstructor.java:18:13
-  (global.set $f_$initialized__publicconstructor_PublicConstructor (i32.const 1))
+  (global.set $$class-initialized@publicconstructor.PublicConstructor (i32.const 1))
   ;;@ publicconstructor/PublicConstructor.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -87,12 +87,12 @@
 (func $$getClassMetadata__java_lang_Class@publicconstructor.PublicConstructor
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__publicconstructor_PublicConstructor))
+  (if (ref.is_null (global.get $$class@publicconstructor.PublicConstructor))
    (then
-    (global.set $f_$class__publicconstructor_PublicConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|publicconstr...|__java_lang_String (ref.func $$getString_|publicconstr...|__java_lang_String@publicconstructor.PublicConstructor) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@publicconstructor.PublicConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|publicconstr...|__java_lang_String (ref.func $$getString_|publicconstr...|__java_lang_String@publicconstructor.PublicConstructor) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__publicconstructor_PublicConstructor))
+  (return (global.get $$class@publicconstructor.PublicConstructor))
  )
 )
 
@@ -113,11 +113,11 @@
 (func $$getString_|publicconstr...|__java_lang_String@publicconstructor.PublicConstructor
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|publicconstr...|__publicconstructor_PublicConstructor))
+  (if (ref.is_null (global.get $$string_|publicconstr...|@publicconstructor.PublicConstructor))
    (then
-    (global.set $f_$string_|publicconstr...|__publicconstructor_PublicConstructor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "publicconstructor.PublicConstructor")))
+    (global.set $$string_|publicconstr...|@publicconstructor.PublicConstructor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "publicconstructor.PublicConstructor")))
    )
   )
-  (return (global.get $f_$string_|publicconstr...|__publicconstructor_PublicConstructor))
+  (return (global.get $$string_|publicconstr...|@publicconstructor.PublicConstructor))
  )
 )

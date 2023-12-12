@@ -8,7 +8,7 @@
  (type $overridingmethods.Parent (sub $java.lang.Object (struct
   (field $vtable (ref $overridingmethods.Parent.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $overridingmethods.Parent.vtable (sub $java.lang.Object.vtable (struct
@@ -25,7 +25,7 @@
  (type $overridingmethods.Child (sub $overridingmethods.Parent (struct
   (field $vtable (ref $overridingmethods.Child.vtable))
   (field $itable (ref $overridingmethods.Child.itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $overridingmethods.Child.vtable (sub $overridingmethods.Parent.vtable (struct
@@ -93,35 +93,35 @@
 )
 
 ;;; Code for overridingmethods.SomeInterface [static fields]
-(global $f_$initialized__overridingmethods_SomeInterface (mut i32)
+(global $$class-initialized@overridingmethods.SomeInterface (mut i32)
  (i32.const 0)
 )
-(global $f_$class__overridingmethods_SomeInterface (mut (ref null $java.lang.Class))
+(global $$class@overridingmethods.SomeInterface (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|overridingme...|__overridingmethods_SomeInterface (mut (ref null $java.lang.String))
+(global $$string_|overridingme...|@overridingmethods.SomeInterface (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for overridingmethods.Parent [static fields]
-(global $f_$initialized__overridingmethods_Parent (mut i32)
+(global $$class-initialized@overridingmethods.Parent (mut i32)
  (i32.const 0)
 )
-(global $f_$class__overridingmethods_Parent (mut (ref null $java.lang.Class))
+(global $$class@overridingmethods.Parent (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|overridingme...|__overridingmethods_Parent (mut (ref null $java.lang.String))
+(global $$string_|overridingme...|@overridingmethods.Parent (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for overridingmethods.Child [static fields]
-(global $f_$initialized__overridingmethods_Child (mut i32)
+(global $$class-initialized@overridingmethods.Child (mut i32)
  (i32.const 0)
 )
-(global $f_$class__overridingmethods_Child (mut (ref null $java.lang.Class))
+(global $$class@overridingmethods.Child (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|overridingme...|__overridingmethods_Child (mut (ref null $java.lang.String))
+(global $$string_|overridingme...|@overridingmethods.Child (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -132,14 +132,14 @@
  ;;@ overridingmethods/Child.java:18:10
  (block
   ;;@ overridingmethods/Child.java:18:10
-  (if (global.get $f_$initialized__overridingmethods_SomeInterface)
+  (if (global.get $$class-initialized@overridingmethods.SomeInterface)
    (then
     ;;@ overridingmethods/Child.java:18:10
     (return )
    )
   )
   ;;@ overridingmethods/Child.java:18:10
-  (global.set $f_$initialized__overridingmethods_SomeInterface (i32.const 1))
+  (global.set $$class-initialized@overridingmethods.SomeInterface (i32.const 1))
  )
 )
 
@@ -147,12 +147,12 @@
 (func $$getClassMetadata__java_lang_Class@overridingmethods.SomeInterface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__overridingmethods_SomeInterface))
+  (if (ref.is_null (global.get $$class@overridingmethods.SomeInterface))
    (then
-    (global.set $f_$class__overridingmethods_SomeInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|overridingme...|__java_lang_String (ref.func $$getString_|overridingme...|__java_lang_String@overridingmethods.SomeInterface) )))
+    (global.set $$class@overridingmethods.SomeInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|overridingme...|__java_lang_String (ref.func $$getString_|overridingme...|__java_lang_String@overridingmethods.SomeInterface) )))
    )
   )
-  (return (global.get $f_$class__overridingmethods_SomeInterface))
+  (return (global.get $$class@overridingmethods.SomeInterface))
  )
 )
 
@@ -160,12 +160,12 @@
 (func $$getString_|overridingme...|__java_lang_String@overridingmethods.SomeInterface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|overridingme...|__overridingmethods_SomeInterface))
+  (if (ref.is_null (global.get $$string_|overridingme...|@overridingmethods.SomeInterface))
    (then
-    (global.set $f_$string_|overridingme...|__overridingmethods_SomeInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "overridingmethods.SomeInterface")))
+    (global.set $$string_|overridingme...|@overridingmethods.SomeInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "overridingmethods.SomeInterface")))
    )
   )
-  (return (global.get $f_$string_|overridingme...|__overridingmethods_SomeInterface))
+  (return (global.get $$string_|overridingme...|@overridingmethods.SomeInterface))
  )
 )
 
@@ -215,14 +215,14 @@
  ;;@ overridingmethods/Child.java:22:6
  (block
   ;;@ overridingmethods/Child.java:22:6
-  (if (global.get $f_$initialized__overridingmethods_Parent)
+  (if (global.get $$class-initialized@overridingmethods.Parent)
    (then
     ;;@ overridingmethods/Child.java:22:6
     (return )
    )
   )
   ;;@ overridingmethods/Child.java:22:6
-  (global.set $f_$initialized__overridingmethods_Parent (i32.const 1))
+  (global.set $$class-initialized@overridingmethods.Parent (i32.const 1))
   ;;@ overridingmethods/Child.java:22:6
   (call $$clinit__void@java.lang.Object )
  )
@@ -232,12 +232,12 @@
 (func $$getClassMetadata__java_lang_Class@overridingmethods.Parent
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__overridingmethods_Parent))
+  (if (ref.is_null (global.get $$class@overridingmethods.Parent))
    (then
-    (global.set $f_$class__overridingmethods_Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|overridingme...|__java_lang_String (ref.func $$getString_|overridingme...|__java_lang_String@overridingmethods.Parent) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@overridingmethods.Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|overridingme...|__java_lang_String (ref.func $$getString_|overridingme...|__java_lang_String@overridingmethods.Parent) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__overridingmethods_Parent))
+  (return (global.get $$class@overridingmethods.Parent))
  )
 )
 
@@ -258,12 +258,12 @@
 (func $$getString_|overridingme...|__java_lang_String@overridingmethods.Parent
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|overridingme...|__overridingmethods_Parent))
+  (if (ref.is_null (global.get $$string_|overridingme...|@overridingmethods.Parent))
    (then
-    (global.set $f_$string_|overridingme...|__overridingmethods_Parent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "overridingmethods.Parent")))
+    (global.set $$string_|overridingme...|@overridingmethods.Parent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "overridingmethods.Parent")))
    )
   )
-  (return (global.get $f_$string_|overridingme...|__overridingmethods_Parent))
+  (return (global.get $$string_|overridingme...|@overridingmethods.Parent))
  )
 )
 
@@ -325,14 +325,14 @@
  ;;@ overridingmethods/Child.java:26:13
  (block
   ;;@ overridingmethods/Child.java:26:13
-  (if (global.get $f_$initialized__overridingmethods_Child)
+  (if (global.get $$class-initialized@overridingmethods.Child)
    (then
     ;;@ overridingmethods/Child.java:26:13
     (return )
    )
   )
   ;;@ overridingmethods/Child.java:26:13
-  (global.set $f_$initialized__overridingmethods_Child (i32.const 1))
+  (global.set $$class-initialized@overridingmethods.Child (i32.const 1))
   ;;@ overridingmethods/Child.java:26:13
   (call $$clinit__void@overridingmethods.Parent )
  )
@@ -342,12 +342,12 @@
 (func $$getClassMetadata__java_lang_Class@overridingmethods.Child
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__overridingmethods_Child))
+  (if (ref.is_null (global.get $$class@overridingmethods.Child))
    (then
-    (global.set $f_$class__overridingmethods_Child (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|overridingme...|__java_lang_String (ref.func $$getString_|overridingme...|__java_lang_String@overridingmethods.Child) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@overridingmethods.Parent) )))
+    (global.set $$class@overridingmethods.Child (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|overridingme...|__java_lang_String (ref.func $$getString_|overridingme...|__java_lang_String@overridingmethods.Child) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@overridingmethods.Parent) )))
    )
   )
-  (return (global.get $f_$class__overridingmethods_Child))
+  (return (global.get $$class@overridingmethods.Child))
  )
 )
 
@@ -368,11 +368,11 @@
 (func $$getString_|overridingme...|__java_lang_String@overridingmethods.Child
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|overridingme...|__overridingmethods_Child))
+  (if (ref.is_null (global.get $$string_|overridingme...|@overridingmethods.Child))
    (then
-    (global.set $f_$string_|overridingme...|__overridingmethods_Child (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "overridingmethods.Child")))
+    (global.set $$string_|overridingme...|@overridingmethods.Child (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "overridingmethods.Child")))
    )
   )
-  (return (global.get $f_$string_|overridingme...|__overridingmethods_Child))
+  (return (global.get $$string_|overridingme...|@overridingmethods.Child))
  )
 )

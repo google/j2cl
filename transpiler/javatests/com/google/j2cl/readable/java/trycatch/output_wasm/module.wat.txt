@@ -2,7 +2,7 @@
  (type $trycatch.TryCatch (sub $java.lang.Object (struct
   (field $vtable (ref $trycatch.TryCatch.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $trycatch.TryCatch.vtable (sub $java.lang.Object.vtable (struct
@@ -29,7 +29,7 @@
  (type $trycatch.TryCatch.ClosableThing (sub $java.lang.Object (struct
   (field $vtable (ref $trycatch.TryCatch.ClosableThing.vtable))
   (field $itable (ref $trycatch.TryCatch.ClosableThing.itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $trycatch.TryCatch.ClosableThing.vtable (sub $java.lang.Object.vtable (struct
@@ -105,27 +105,27 @@
 )
 
 ;;; Code for trycatch.TryCatch [static fields]
-(global $f_closableThing__trycatch_TryCatch_ (mut (ref null $trycatch.TryCatch.ClosableThing))
+(global $closableThing@trycatch.TryCatch (mut (ref null $trycatch.TryCatch.ClosableThing))
  (ref.null $trycatch.TryCatch.ClosableThing)
 )
-(global $f_$initialized__trycatch_TryCatch (mut i32)
+(global $$class-initialized@trycatch.TryCatch (mut i32)
  (i32.const 0)
 )
-(global $f_$class__trycatch_TryCatch (mut (ref null $java.lang.Class))
+(global $$class@trycatch.TryCatch (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|trycatch.Try...|__trycatch_TryCatch (mut (ref null $java.lang.String))
+(global $$string_|trycatch.Try...|@trycatch.TryCatch (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for trycatch.TryCatch.ClosableThing [static fields]
-(global $f_$initialized__trycatch_TryCatch_ClosableThing (mut i32)
+(global $$class-initialized@trycatch.TryCatch.ClosableThing (mut i32)
  (i32.const 0)
 )
-(global $f_$class__trycatch_TryCatch_ClosableThing (mut (ref null $java.lang.Class))
+(global $$class@trycatch.TryCatch.ClosableThing (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|trycatch.Try...|__trycatch_TryCatch_ClosableThing (mut (ref null $java.lang.String))
+(global $$string_|trycatch.Try...|@trycatch.TryCatch.ClosableThing (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -622,7 +622,7 @@
         (try (do
          (block
           ;;@ trycatch/TryCatch.java:88:4
-          (local.set $$resource (global.get $f_closableThing__trycatch_TryCatch_))
+          (local.set $$resource (global.get $closableThing@trycatch.TryCatch))
           ;;@ trycatch/TryCatch.java:89:6
           (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (call $$create__@java.lang.Exception ))
           (unreachable)
@@ -839,18 +839,18 @@
  ;;@ trycatch/TryCatch.java:18:13
  (block
   ;;@ trycatch/TryCatch.java:18:13
-  (if (global.get $f_$initialized__trycatch_TryCatch)
+  (if (global.get $$class-initialized@trycatch.TryCatch)
    (then
     ;;@ trycatch/TryCatch.java:18:13
     (return )
    )
   )
   ;;@ trycatch/TryCatch.java:18:13
-  (global.set $f_$initialized__trycatch_TryCatch (i32.const 1))
+  (global.set $$class-initialized@trycatch.TryCatch (i32.const 1))
   ;;@ trycatch/TryCatch.java:18:13
   (call $$clinit__void@java.lang.Object )
   ;;@ trycatch/TryCatch.java:85:2
-  (global.set $f_closableThing__trycatch_TryCatch_ (call $$create__@trycatch.TryCatch.ClosableThing ))
+  (global.set $closableThing@trycatch.TryCatch (call $$create__@trycatch.TryCatch.ClosableThing ))
  )
 )
 
@@ -858,12 +858,12 @@
 (func $$getClassMetadata__java_lang_Class@trycatch.TryCatch
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__trycatch_TryCatch))
+  (if (ref.is_null (global.get $$class@trycatch.TryCatch))
    (then
-    (global.set $f_$class__trycatch_TryCatch (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|trycatch.Try...|__java_lang_String (ref.func $$getString_|trycatch.Try...|__java_lang_String@trycatch.TryCatch) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@trycatch.TryCatch (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|trycatch.Try...|__java_lang_String (ref.func $$getString_|trycatch.Try...|__java_lang_String@trycatch.TryCatch) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__trycatch_TryCatch))
+  (return (global.get $$class@trycatch.TryCatch))
  )
 )
 
@@ -884,12 +884,12 @@
 (func $$getString_|trycatch.Try...|__java_lang_String@trycatch.TryCatch
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|trycatch.Try...|__trycatch_TryCatch))
+  (if (ref.is_null (global.get $$string_|trycatch.Try...|@trycatch.TryCatch))
    (then
-    (global.set $f_$string_|trycatch.Try...|__trycatch_TryCatch (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "trycatch.TryCatch")))
+    (global.set $$string_|trycatch.Try...|@trycatch.TryCatch (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "trycatch.TryCatch")))
    )
   )
-  (return (global.get $f_$string_|trycatch.Try...|__trycatch_TryCatch))
+  (return (global.get $$string_|trycatch.Try...|@trycatch.TryCatch))
  )
 )
 
@@ -939,14 +939,14 @@
  ;;@ trycatch/TryCatch.java:61:15
  (block
   ;;@ trycatch/TryCatch.java:61:15
-  (if (global.get $f_$initialized__trycatch_TryCatch_ClosableThing)
+  (if (global.get $$class-initialized@trycatch.TryCatch.ClosableThing)
    (then
     ;;@ trycatch/TryCatch.java:61:15
     (return )
    )
   )
   ;;@ trycatch/TryCatch.java:61:15
-  (global.set $f_$initialized__trycatch_TryCatch_ClosableThing (i32.const 1))
+  (global.set $$class-initialized@trycatch.TryCatch.ClosableThing (i32.const 1))
   ;;@ trycatch/TryCatch.java:61:15
   (call $$clinit__void@java.lang.Object )
  )
@@ -956,12 +956,12 @@
 (func $$getClassMetadata__java_lang_Class@trycatch.TryCatch.ClosableThing
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__trycatch_TryCatch_ClosableThing))
+  (if (ref.is_null (global.get $$class@trycatch.TryCatch.ClosableThing))
    (then
-    (global.set $f_$class__trycatch_TryCatch_ClosableThing (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|trycatch.Try...|__java_lang_String (ref.func $$getString_|trycatch.Try...|__java_lang_String@trycatch.TryCatch.ClosableThing) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@trycatch.TryCatch.ClosableThing (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|trycatch.Try...|__java_lang_String (ref.func $$getString_|trycatch.Try...|__java_lang_String@trycatch.TryCatch.ClosableThing) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__trycatch_TryCatch_ClosableThing))
+  (return (global.get $$class@trycatch.TryCatch.ClosableThing))
  )
 )
 
@@ -982,11 +982,11 @@
 (func $$getString_|trycatch.Try...|__java_lang_String@trycatch.TryCatch.ClosableThing
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|trycatch.Try...|__trycatch_TryCatch_ClosableThing))
+  (if (ref.is_null (global.get $$string_|trycatch.Try...|@trycatch.TryCatch.ClosableThing))
    (then
-    (global.set $f_$string_|trycatch.Try...|__trycatch_TryCatch_ClosableThing (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "trycatch.TryCatch$ClosableThing")))
+    (global.set $$string_|trycatch.Try...|@trycatch.TryCatch.ClosableThing (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "trycatch.TryCatch$ClosableThing")))
    )
   )
-  (return (global.get $f_$string_|trycatch.Try...|__trycatch_TryCatch_ClosableThing))
+  (return (global.get $$string_|trycatch.Try...|@trycatch.TryCatch.ClosableThing))
  )
 )

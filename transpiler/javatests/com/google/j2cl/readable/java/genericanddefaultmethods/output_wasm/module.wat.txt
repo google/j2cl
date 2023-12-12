@@ -8,7 +8,7 @@
  (type $genericanddefaultmethods.GenericClass (sub $java.lang.Object (struct
   (field $vtable (ref $genericanddefaultmethods.GenericClass.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $genericanddefaultmethods.GenericClass.vtable (sub $java.lang.Object.vtable (struct
@@ -25,7 +25,7 @@
  (type $genericanddefaultmethods.ConcreteClass (sub $genericanddefaultmethods.GenericClass (struct
   (field $vtable (ref $genericanddefaultmethods.ConcreteClass.vtable))
   (field $itable (ref $genericanddefaultmethods.ConcreteClass.itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $genericanddefaultmethods.ConcreteClass.vtable (sub $genericanddefaultmethods.GenericClass.vtable (struct
@@ -93,41 +93,41 @@
 )
 
 ;;; Code for genericanddefaultmethods.InterfaceWithDefault [static fields]
-(global $f_$initialized__genericanddefaultmethods_InterfaceWithDefault (mut i32)
+(global $$class-initialized@genericanddefaultmethods.InterfaceWithDefault (mut i32)
  (i32.const 0)
 )
-(global $f_$class__genericanddefaultmethods_InterfaceWithDefault (mut (ref null $java.lang.Class))
+(global $$class@genericanddefaultmethods.InterfaceWithDefault (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|in_Interface...|__genericanddefaultmethods_InterfaceWithDefault (mut (ref null $java.lang.String))
+(global $$string_|in_Interface...|@genericanddefaultmethods.InterfaceWithDefault (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
-(global $f_$string_|genericandde...|__genericanddefaultmethods_InterfaceWithDefault (mut (ref null $java.lang.String))
+(global $$string_|genericandde...|@genericanddefaultmethods.InterfaceWithDefault (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for genericanddefaultmethods.GenericClass [static fields]
-(global $f_$initialized__genericanddefaultmethods_GenericClass (mut i32)
+(global $$class-initialized@genericanddefaultmethods.GenericClass (mut i32)
  (i32.const 0)
 )
-(global $f_$class__genericanddefaultmethods_GenericClass (mut (ref null $java.lang.Class))
+(global $$class@genericanddefaultmethods.GenericClass (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|in_GenericClass|__genericanddefaultmethods_GenericClass (mut (ref null $java.lang.String))
+(global $$string_|in_GenericClass|@genericanddefaultmethods.GenericClass (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
-(global $f_$string_|genericandde...|__genericanddefaultmethods_GenericClass (mut (ref null $java.lang.String))
+(global $$string_|genericandde...|@genericanddefaultmethods.GenericClass (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for genericanddefaultmethods.ConcreteClass [static fields]
-(global $f_$initialized__genericanddefaultmethods_ConcreteClass (mut i32)
+(global $$class-initialized@genericanddefaultmethods.ConcreteClass (mut i32)
  (i32.const 0)
 )
-(global $f_$class__genericanddefaultmethods_ConcreteClass (mut (ref null $java.lang.Class))
+(global $$class@genericanddefaultmethods.ConcreteClass (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|genericandde...|__genericanddefaultmethods_ConcreteClass (mut (ref null $java.lang.String))
+(global $$string_|genericandde...|@genericanddefaultmethods.ConcreteClass (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -144,7 +144,7 @@
    ;;@ genericanddefaultmethods/ConcreteClass.java:20:4
    (local.set $$qualifier (block (result (ref null $java.io.PrintStream))
     (call $$clinit__void@java.lang.System )
-    (global.get $f_out__java_lang_System)
+    (global.get $out@java.lang.System)
    ))
    ;;@ genericanddefaultmethods/ConcreteClass.java:20:4
    (call_ref $function.m_println__java_lang_String__void (ref.as_non_null (local.get $$qualifier))(call $function.no.side.effects.$getString_|in_Interface...|__java_lang_String (ref.func $$getString_|in_Interface...|__java_lang_String@genericanddefaultmethods.InterfaceWithDefault) )(struct.get $java.io.PrintStream.vtable $m_println__java_lang_String__void (struct.get $java.io.PrintStream $vtable(local.get $$qualifier))))
@@ -158,14 +158,14 @@
  ;;@ genericanddefaultmethods/ConcreteClass.java:18:10
  (block
   ;;@ genericanddefaultmethods/ConcreteClass.java:18:10
-  (if (global.get $f_$initialized__genericanddefaultmethods_InterfaceWithDefault)
+  (if (global.get $$class-initialized@genericanddefaultmethods.InterfaceWithDefault)
    (then
     ;;@ genericanddefaultmethods/ConcreteClass.java:18:10
     (return )
    )
   )
   ;;@ genericanddefaultmethods/ConcreteClass.java:18:10
-  (global.set $f_$initialized__genericanddefaultmethods_InterfaceWithDefault (i32.const 1))
+  (global.set $$class-initialized@genericanddefaultmethods.InterfaceWithDefault (i32.const 1))
  )
 )
 
@@ -173,12 +173,12 @@
 (func $$getClassMetadata__java_lang_Class@genericanddefaultmethods.InterfaceWithDefault
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__genericanddefaultmethods_InterfaceWithDefault))
+  (if (ref.is_null (global.get $$class@genericanddefaultmethods.InterfaceWithDefault))
    (then
-    (global.set $f_$class__genericanddefaultmethods_InterfaceWithDefault (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericandde...|__java_lang_String (ref.func $$getString_|genericandde...|__java_lang_String@genericanddefaultmethods.InterfaceWithDefault) )))
+    (global.set $$class@genericanddefaultmethods.InterfaceWithDefault (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericandde...|__java_lang_String (ref.func $$getString_|genericandde...|__java_lang_String@genericanddefaultmethods.InterfaceWithDefault) )))
    )
   )
-  (return (global.get $f_$class__genericanddefaultmethods_InterfaceWithDefault))
+  (return (global.get $$class@genericanddefaultmethods.InterfaceWithDefault))
  )
 )
 
@@ -186,12 +186,12 @@
 (func $$getString_|in_Interface...|__java_lang_String@genericanddefaultmethods.InterfaceWithDefault
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|in_Interface...|__genericanddefaultmethods_InterfaceWithDefault))
+  (if (ref.is_null (global.get $$string_|in_Interface...|@genericanddefaultmethods.InterfaceWithDefault))
    (then
-    (global.set $f_$string_|in_Interface...|__genericanddefaultmethods_InterfaceWithDefault (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "in InterfaceWithDefault")))
+    (global.set $$string_|in_Interface...|@genericanddefaultmethods.InterfaceWithDefault (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "in InterfaceWithDefault")))
    )
   )
-  (return (global.get $f_$string_|in_Interface...|__genericanddefaultmethods_InterfaceWithDefault))
+  (return (global.get $$string_|in_Interface...|@genericanddefaultmethods.InterfaceWithDefault))
  )
 )
 
@@ -199,12 +199,12 @@
 (func $$getString_|genericandde...|__java_lang_String@genericanddefaultmethods.InterfaceWithDefault
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|genericandde...|__genericanddefaultmethods_InterfaceWithDefault))
+  (if (ref.is_null (global.get $$string_|genericandde...|@genericanddefaultmethods.InterfaceWithDefault))
    (then
-    (global.set $f_$string_|genericandde...|__genericanddefaultmethods_InterfaceWithDefault (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "genericanddefaultmethods.InterfaceWithDefault")))
+    (global.set $$string_|genericandde...|@genericanddefaultmethods.InterfaceWithDefault (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "genericanddefaultmethods.InterfaceWithDefault")))
    )
   )
-  (return (global.get $f_$string_|genericandde...|__genericanddefaultmethods_InterfaceWithDefault))
+  (return (global.get $$string_|genericandde...|@genericanddefaultmethods.InterfaceWithDefault))
  )
 )
 
@@ -251,7 +251,7 @@
    ;;@ genericanddefaultmethods/ConcreteClass.java:26:4
    (local.set $$qualifier (block (result (ref null $java.io.PrintStream))
     (call $$clinit__void@java.lang.System )
-    (global.get $f_out__java_lang_System)
+    (global.get $out@java.lang.System)
    ))
    ;;@ genericanddefaultmethods/ConcreteClass.java:26:4
    (call_ref $function.m_println__java_lang_String__void (ref.as_non_null (local.get $$qualifier))(call $function.no.side.effects.$getString_|in_GenericClass|__java_lang_String (ref.func $$getString_|in_GenericClass|__java_lang_String@genericanddefaultmethods.GenericClass) )(struct.get $java.io.PrintStream.vtable $m_println__java_lang_String__void (struct.get $java.io.PrintStream $vtable(local.get $$qualifier))))
@@ -265,14 +265,14 @@
  ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
  (block
   ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
-  (if (global.get $f_$initialized__genericanddefaultmethods_GenericClass)
+  (if (global.get $$class-initialized@genericanddefaultmethods.GenericClass)
    (then
     ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
     (return )
    )
   )
   ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
-  (global.set $f_$initialized__genericanddefaultmethods_GenericClass (i32.const 1))
+  (global.set $$class-initialized@genericanddefaultmethods.GenericClass (i32.const 1))
   ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
   (call $$clinit__void@java.lang.Object )
  )
@@ -282,12 +282,12 @@
 (func $$getClassMetadata__java_lang_Class@genericanddefaultmethods.GenericClass
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__genericanddefaultmethods_GenericClass))
+  (if (ref.is_null (global.get $$class@genericanddefaultmethods.GenericClass))
    (then
-    (global.set $f_$class__genericanddefaultmethods_GenericClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericandde...|__java_lang_String (ref.func $$getString_|genericandde...|__java_lang_String@genericanddefaultmethods.GenericClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@genericanddefaultmethods.GenericClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericandde...|__java_lang_String (ref.func $$getString_|genericandde...|__java_lang_String@genericanddefaultmethods.GenericClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__genericanddefaultmethods_GenericClass))
+  (return (global.get $$class@genericanddefaultmethods.GenericClass))
  )
 )
 
@@ -308,12 +308,12 @@
 (func $$getString_|in_GenericClass|__java_lang_String@genericanddefaultmethods.GenericClass
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|in_GenericClass|__genericanddefaultmethods_GenericClass))
+  (if (ref.is_null (global.get $$string_|in_GenericClass|@genericanddefaultmethods.GenericClass))
    (then
-    (global.set $f_$string_|in_GenericClass|__genericanddefaultmethods_GenericClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "in GenericClass")))
+    (global.set $$string_|in_GenericClass|@genericanddefaultmethods.GenericClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "in GenericClass")))
    )
   )
-  (return (global.get $f_$string_|in_GenericClass|__genericanddefaultmethods_GenericClass))
+  (return (global.get $$string_|in_GenericClass|@genericanddefaultmethods.GenericClass))
  )
 )
 
@@ -321,12 +321,12 @@
 (func $$getString_|genericandde...|__java_lang_String@genericanddefaultmethods.GenericClass
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|genericandde...|__genericanddefaultmethods_GenericClass))
+  (if (ref.is_null (global.get $$string_|genericandde...|@genericanddefaultmethods.GenericClass))
    (then
-    (global.set $f_$string_|genericandde...|__genericanddefaultmethods_GenericClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "genericanddefaultmethods.GenericClass")))
+    (global.set $$string_|genericandde...|@genericanddefaultmethods.GenericClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "genericanddefaultmethods.GenericClass")))
    )
   )
-  (return (global.get $f_$string_|genericandde...|__genericanddefaultmethods_GenericClass))
+  (return (global.get $$string_|genericandde...|@genericanddefaultmethods.GenericClass))
  )
 )
 
@@ -379,14 +379,14 @@
  ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
  (block
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
-  (if (global.get $f_$initialized__genericanddefaultmethods_ConcreteClass)
+  (if (global.get $$class-initialized@genericanddefaultmethods.ConcreteClass)
    (then
     ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
     (return )
    )
   )
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
-  (global.set $f_$initialized__genericanddefaultmethods_ConcreteClass (i32.const 1))
+  (global.set $$class-initialized@genericanddefaultmethods.ConcreteClass (i32.const 1))
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
   (call $$clinit__void@genericanddefaultmethods.GenericClass )
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
@@ -398,12 +398,12 @@
 (func $$getClassMetadata__java_lang_Class@genericanddefaultmethods.ConcreteClass
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__genericanddefaultmethods_ConcreteClass))
+  (if (ref.is_null (global.get $$class@genericanddefaultmethods.ConcreteClass))
    (then
-    (global.set $f_$class__genericanddefaultmethods_ConcreteClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericandde...|__java_lang_String (ref.func $$getString_|genericandde...|__java_lang_String@genericanddefaultmethods.ConcreteClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@genericanddefaultmethods.GenericClass) )))
+    (global.set $$class@genericanddefaultmethods.ConcreteClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericandde...|__java_lang_String (ref.func $$getString_|genericandde...|__java_lang_String@genericanddefaultmethods.ConcreteClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@genericanddefaultmethods.GenericClass) )))
    )
   )
-  (return (global.get $f_$class__genericanddefaultmethods_ConcreteClass))
+  (return (global.get $$class@genericanddefaultmethods.ConcreteClass))
  )
 )
 
@@ -424,11 +424,11 @@
 (func $$getString_|genericandde...|__java_lang_String@genericanddefaultmethods.ConcreteClass
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|genericandde...|__genericanddefaultmethods_ConcreteClass))
+  (if (ref.is_null (global.get $$string_|genericandde...|@genericanddefaultmethods.ConcreteClass))
    (then
-    (global.set $f_$string_|genericandde...|__genericanddefaultmethods_ConcreteClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "genericanddefaultmethods.ConcreteClass")))
+    (global.set $$string_|genericandde...|@genericanddefaultmethods.ConcreteClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "genericanddefaultmethods.ConcreteClass")))
    )
   )
-  (return (global.get $f_$string_|genericandde...|__genericanddefaultmethods_ConcreteClass))
+  (return (global.get $$string_|genericandde...|@genericanddefaultmethods.ConcreteClass))
  )
 )

@@ -2,7 +2,7 @@
  (type $continuestatement.ContinueStatement (sub $java.lang.Object (struct
   (field $vtable (ref $continuestatement.ContinueStatement.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $continuestatement.ContinueStatement.vtable (sub $java.lang.Object.vtable (struct
@@ -28,13 +28,13 @@
 )
 
 ;;; Code for continuestatement.ContinueStatement [static fields]
-(global $f_$initialized__continuestatement_ContinueStatement (mut i32)
+(global $$class-initialized@continuestatement.ContinueStatement (mut i32)
  (i32.const 0)
 )
-(global $f_$class__continuestatement_ContinueStatement (mut (ref null $java.lang.Class))
+(global $$class@continuestatement.ContinueStatement (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|continuestat...|__continuestatement_ContinueStatement (mut (ref null $java.lang.String))
+(global $$string_|continuestat...|@continuestatement.ContinueStatement (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -96,14 +96,14 @@
  ;;@ continuestatement/ContinueStatement.java:18:13
  (block
   ;;@ continuestatement/ContinueStatement.java:18:13
-  (if (global.get $f_$initialized__continuestatement_ContinueStatement)
+  (if (global.get $$class-initialized@continuestatement.ContinueStatement)
    (then
     ;;@ continuestatement/ContinueStatement.java:18:13
     (return )
    )
   )
   ;;@ continuestatement/ContinueStatement.java:18:13
-  (global.set $f_$initialized__continuestatement_ContinueStatement (i32.const 1))
+  (global.set $$class-initialized@continuestatement.ContinueStatement (i32.const 1))
   ;;@ continuestatement/ContinueStatement.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -113,12 +113,12 @@
 (func $$getClassMetadata__java_lang_Class@continuestatement.ContinueStatement
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__continuestatement_ContinueStatement))
+  (if (ref.is_null (global.get $$class@continuestatement.ContinueStatement))
    (then
-    (global.set $f_$class__continuestatement_ContinueStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|continuestat...|__java_lang_String (ref.func $$getString_|continuestat...|__java_lang_String@continuestatement.ContinueStatement) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@continuestatement.ContinueStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|continuestat...|__java_lang_String (ref.func $$getString_|continuestat...|__java_lang_String@continuestatement.ContinueStatement) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__continuestatement_ContinueStatement))
+  (return (global.get $$class@continuestatement.ContinueStatement))
  )
 )
 
@@ -139,11 +139,11 @@
 (func $$getString_|continuestat...|__java_lang_String@continuestatement.ContinueStatement
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|continuestat...|__continuestatement_ContinueStatement))
+  (if (ref.is_null (global.get $$string_|continuestat...|@continuestatement.ContinueStatement))
    (then
-    (global.set $f_$string_|continuestat...|__continuestatement_ContinueStatement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "continuestatement.ContinueStatement")))
+    (global.set $$string_|continuestat...|@continuestatement.ContinueStatement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "continuestatement.ContinueStatement")))
    )
   )
-  (return (global.get $f_$string_|continuestat...|__continuestatement_ContinueStatement))
+  (return (global.get $$string_|continuestat...|@continuestatement.ContinueStatement))
  )
 )

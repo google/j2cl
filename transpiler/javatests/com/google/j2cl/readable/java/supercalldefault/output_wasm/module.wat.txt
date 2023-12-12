@@ -2,7 +2,7 @@
  (type $supercalldefault.SuperCallDefault (sub $java.lang.Object (struct
   (field $vtable (ref $supercalldefault.SuperCallDefault.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $supercalldefault.SuperCallDefault.vtable (sub $java.lang.Object.vtable (struct
@@ -26,13 +26,13 @@
 )
 
 ;;; Code for supercalldefault.SuperCallDefault [static fields]
-(global $f_$initialized__supercalldefault_SuperCallDefault (mut i32)
+(global $$class-initialized@supercalldefault.SuperCallDefault (mut i32)
  (i32.const 0)
 )
-(global $f_$class__supercalldefault_SuperCallDefault (mut (ref null $java.lang.Class))
+(global $$class@supercalldefault.SuperCallDefault (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|supercalldef...|__supercalldefault_SuperCallDefault (mut (ref null $java.lang.String))
+(global $$string_|supercalldef...|@supercalldefault.SuperCallDefault (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -70,14 +70,14 @@
  ;;@ supercalldefault/SuperCallDefault.java:18:13
  (block
   ;;@ supercalldefault/SuperCallDefault.java:18:13
-  (if (global.get $f_$initialized__supercalldefault_SuperCallDefault)
+  (if (global.get $$class-initialized@supercalldefault.SuperCallDefault)
    (then
     ;;@ supercalldefault/SuperCallDefault.java:18:13
     (return )
    )
   )
   ;;@ supercalldefault/SuperCallDefault.java:18:13
-  (global.set $f_$initialized__supercalldefault_SuperCallDefault (i32.const 1))
+  (global.set $$class-initialized@supercalldefault.SuperCallDefault (i32.const 1))
   ;;@ supercalldefault/SuperCallDefault.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -87,12 +87,12 @@
 (func $$getClassMetadata__java_lang_Class@supercalldefault.SuperCallDefault
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__supercalldefault_SuperCallDefault))
+  (if (ref.is_null (global.get $$class@supercalldefault.SuperCallDefault))
    (then
-    (global.set $f_$class__supercalldefault_SuperCallDefault (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|supercalldef...|__java_lang_String (ref.func $$getString_|supercalldef...|__java_lang_String@supercalldefault.SuperCallDefault) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@supercalldefault.SuperCallDefault (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|supercalldef...|__java_lang_String (ref.func $$getString_|supercalldef...|__java_lang_String@supercalldefault.SuperCallDefault) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__supercalldefault_SuperCallDefault))
+  (return (global.get $$class@supercalldefault.SuperCallDefault))
  )
 )
 
@@ -113,11 +113,11 @@
 (func $$getString_|supercalldef...|__java_lang_String@supercalldefault.SuperCallDefault
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|supercalldef...|__supercalldefault_SuperCallDefault))
+  (if (ref.is_null (global.get $$string_|supercalldef...|@supercalldefault.SuperCallDefault))
    (then
-    (global.set $f_$string_|supercalldef...|__supercalldefault_SuperCallDefault (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supercalldefault.SuperCallDefault")))
+    (global.set $$string_|supercalldef...|@supercalldefault.SuperCallDefault (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supercalldefault.SuperCallDefault")))
    )
   )
-  (return (global.get $f_$string_|supercalldef...|__supercalldefault_SuperCallDefault))
+  (return (global.get $$string_|supercalldef...|@supercalldefault.SuperCallDefault))
  )
 )

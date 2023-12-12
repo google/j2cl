@@ -2,8 +2,8 @@
  (type $initmethoddispatch.InitMethodDispatch (sub $java.lang.Object (struct
   (field $vtable (ref $initmethoddispatch.InitMethodDispatch.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $f_value__initmethoddispatch_InitMethodDispatch (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  (field $value@initmethoddispatch.InitMethodDispatch (mut i32))
   ))
  )
  (type $initmethoddispatch.InitMethodDispatch.vtable (sub $java.lang.Object.vtable (struct
@@ -27,13 +27,13 @@
 )
 
 ;;; Code for initmethoddispatch.InitMethodDispatch [static fields]
-(global $f_$initialized__initmethoddispatch_InitMethodDispatch (mut i32)
+(global $$class-initialized@initmethoddispatch.InitMethodDispatch (mut i32)
  (i32.const 0)
 )
-(global $f_$class__initmethoddispatch_InitMethodDispatch (mut (ref null $java.lang.Class))
+(global $$class@initmethoddispatch.InitMethodDispatch (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|initmethoddi...|__initmethoddispatch_InitMethodDispatch (mut (ref null $java.lang.String))
+(global $$string_|initmethoddi...|@initmethoddispatch.InitMethodDispatch (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -93,7 +93,7 @@
   ;;@ initmethoddispatch/InitMethodDispatch.java:27:28
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;;@ initmethoddispatch/InitMethodDispatch.java:28:4
-  (struct.set $initmethoddispatch.InitMethodDispatch $f_value__initmethoddispatch_InitMethodDispatch (local.get $this) (local.get $i))
+  (struct.set $initmethoddispatch.InitMethodDispatch $value@initmethoddispatch.InitMethodDispatch (local.get $this) (local.get $i))
  )
 )
 
@@ -102,14 +102,14 @@
  ;;@ initmethoddispatch/InitMethodDispatch.java:18:6
  (block
   ;;@ initmethoddispatch/InitMethodDispatch.java:18:6
-  (if (global.get $f_$initialized__initmethoddispatch_InitMethodDispatch)
+  (if (global.get $$class-initialized@initmethoddispatch.InitMethodDispatch)
    (then
     ;;@ initmethoddispatch/InitMethodDispatch.java:18:6
     (return )
    )
   )
   ;;@ initmethoddispatch/InitMethodDispatch.java:18:6
-  (global.set $f_$initialized__initmethoddispatch_InitMethodDispatch (i32.const 1))
+  (global.set $$class-initialized@initmethoddispatch.InitMethodDispatch (i32.const 1))
   ;;@ initmethoddispatch/InitMethodDispatch.java:18:6
   (call $$clinit__void@java.lang.Object )
  )
@@ -119,12 +119,12 @@
 (func $$getClassMetadata__java_lang_Class@initmethoddispatch.InitMethodDispatch
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__initmethoddispatch_InitMethodDispatch))
+  (if (ref.is_null (global.get $$class@initmethoddispatch.InitMethodDispatch))
    (then
-    (global.set $f_$class__initmethoddispatch_InitMethodDispatch (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|initmethoddi...|__java_lang_String (ref.func $$getString_|initmethoddi...|__java_lang_String@initmethoddispatch.InitMethodDispatch) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@initmethoddispatch.InitMethodDispatch (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|initmethoddi...|__java_lang_String (ref.func $$getString_|initmethoddi...|__java_lang_String@initmethoddispatch.InitMethodDispatch) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__initmethoddispatch_InitMethodDispatch))
+  (return (global.get $$class@initmethoddispatch.InitMethodDispatch))
  )
 )
 
@@ -145,11 +145,11 @@
 (func $$getString_|initmethoddi...|__java_lang_String@initmethoddispatch.InitMethodDispatch
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|initmethoddi...|__initmethoddispatch_InitMethodDispatch))
+  (if (ref.is_null (global.get $$string_|initmethoddi...|@initmethoddispatch.InitMethodDispatch))
    (then
-    (global.set $f_$string_|initmethoddi...|__initmethoddispatch_InitMethodDispatch (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "initmethoddispatch.InitMethodDispatch")))
+    (global.set $$string_|initmethoddi...|@initmethoddispatch.InitMethodDispatch (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "initmethoddispatch.InitMethodDispatch")))
    )
   )
-  (return (global.get $f_$string_|initmethoddi...|__initmethoddispatch_InitMethodDispatch))
+  (return (global.get $$string_|initmethoddi...|@initmethoddispatch.InitMethodDispatch))
  )
 )

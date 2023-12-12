@@ -48,7 +48,7 @@
  (type $typewildcards.GenericType (sub $java.lang.Object (struct
   (field $vtable (ref $typewildcards.GenericType.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $typewildcards.GenericType.vtable (sub $java.lang.Object.vtable (struct
@@ -65,7 +65,7 @@
  (type $typewildcards.Bar (sub $java.lang.Object (struct
   (field $vtable (ref $typewildcards.Bar.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $typewildcards.Bar.vtable (sub $java.lang.Object.vtable (struct
@@ -81,7 +81,7 @@
  (type $typewildcards.RecursiveType (sub $java.lang.Object (struct
   (field $vtable (ref $typewildcards.RecursiveType.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $typewildcards.RecursiveType.vtable (sub $java.lang.Object.vtable (struct
@@ -97,7 +97,7 @@
  (type $typewildcards.TypeWildCards (sub $java.lang.Object (struct
   (field $vtable (ref $typewildcards.TypeWildCards.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $typewildcards.TypeWildCards.vtable (sub $java.lang.Object.vtable (struct
@@ -123,7 +123,7 @@
  (type $typewildcards.TypeWildCards.$LambdaImplementor$1 (sub $java.lang.Object (struct
   (field $vtable (ref $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable))
   (field $itable (ref $typewildcards.TypeWildCards.$LambdaImplementor$1.itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable (sub $java.lang.Object.vtable (struct
@@ -149,8 +149,8 @@
  (type $typewildcards.TypeWildCards.A (sub $java.lang.Object (struct
   (field $vtable (ref $typewildcards.TypeWildCards.A.vtable))
   (field $itable (ref $typewildcards.TypeWildCards.A.itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $f_f__typewildcards_TypeWildCards_A (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  (field $f@typewildcards.TypeWildCards.A (mut i32))
   ))
  )
  (type $typewildcards.TypeWildCards.A.vtable (sub $java.lang.Object.vtable (struct
@@ -176,8 +176,8 @@
  (type $typewildcards.TypeWildCards.Element (sub $java.lang.Object (struct
   (field $vtable (ref $typewildcards.TypeWildCards.Element.vtable))
   (field $itable (ref $typewildcards.TypeWildCards.Element.itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $$outer_this__typewildcards_TypeWildCards_Element (mut (ref null $typewildcards.TypeWildCards)))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  (field $$outer_this@typewildcards.TypeWildCards.Element (mut (ref null $typewildcards.TypeWildCards)))
   ))
  )
  (type $typewildcards.TypeWildCards.Element.vtable (sub $java.lang.Object.vtable (struct
@@ -204,8 +204,8 @@
  (type $typewildcards.TypeWildCards.OtherElement (sub $java.lang.Object (struct
   (field $vtable (ref $typewildcards.TypeWildCards.OtherElement.vtable))
   (field $itable (ref $typewildcards.TypeWildCards.OtherElement.itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $$outer_this__typewildcards_TypeWildCards_OtherElement (mut (ref null $typewildcards.TypeWildCards)))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  (field $$outer_this@typewildcards.TypeWildCards.OtherElement (mut (ref null $typewildcards.TypeWildCards)))
   ))
  )
  (type $typewildcards.TypeWildCards.OtherElement.vtable (sub $java.lang.Object.vtable (struct
@@ -232,7 +232,7 @@
  (type $typewildcards.TypeWildCards.MultipleGenerics (sub $java.lang.Object (struct
   (field $vtable (ref $typewildcards.TypeWildCards.MultipleGenerics.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $typewildcards.TypeWildCards.MultipleGenerics.vtable (sub $java.lang.Object.vtable (struct
@@ -248,7 +248,7 @@
  (type $typewildcards.RecursiveSubtype (sub $typewildcards.RecursiveType (struct
   (field $vtable (ref $typewildcards.RecursiveSubtype.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $typewildcards.RecursiveSubtype.vtable (sub $typewildcards.RecursiveType.vtable (struct
@@ -264,9 +264,9 @@
  (type $typewildcards.TypeWildCards.SubOtherElement (sub $typewildcards.TypeWildCards.OtherElement (struct
   (field $vtable (ref $typewildcards.TypeWildCards.SubOtherElement.vtable))
   (field $itable (ref $typewildcards.TypeWildCards.SubOtherElement.itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $$outer_this__typewildcards_TypeWildCards_OtherElement (mut (ref null $typewildcards.TypeWildCards)))
-  (field $$outer_this__typewildcards_TypeWildCards_SubOtherElement (mut (ref null $typewildcards.TypeWildCards)))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  (field $$outer_this@typewildcards.TypeWildCards.OtherElement (mut (ref null $typewildcards.TypeWildCards)))
+  (field $$outer_this@typewildcards.TypeWildCards.SubOtherElement (mut (ref null $typewildcards.TypeWildCards)))
   ))
  )
  (type $typewildcards.TypeWildCards.SubOtherElement.vtable (sub $typewildcards.TypeWildCards.OtherElement.vtable (struct
@@ -293,8 +293,8 @@
  (type $typewildcards.TypeWildCards.Foo (sub $typewildcards.GenericType (struct
   (field $vtable (ref $typewildcards.TypeWildCards.Foo.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $$outer_this__typewildcards_TypeWildCards_Foo (mut (ref null $typewildcards.TypeWildCards)))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  (field $$outer_this@typewildcards.TypeWildCards.Foo (mut (ref null $typewildcards.TypeWildCards)))
   ))
  )
  (type $typewildcards.TypeWildCards.Foo.vtable (sub $typewildcards.GenericType.vtable (struct
@@ -459,228 +459,228 @@
 )
 
 ;;; Code for typewildcards.Function [static fields]
-(global $f_$initialized__typewildcards_Function (mut i32)
+(global $$class-initialized@typewildcards.Function (mut i32)
  (i32.const 0)
 )
-(global $f_$class__typewildcards_Function (mut (ref null $java.lang.Class))
+(global $$class@typewildcards.Function (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|typewildcard...|__typewildcards_Function (mut (ref null $java.lang.String))
+(global $$string_|typewildcard...|@typewildcards.Function (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for typewildcards.List [static fields]
-(global $f_$initialized__typewildcards_List (mut i32)
+(global $$class-initialized@typewildcards.List (mut i32)
  (i32.const 0)
 )
-(global $f_$class__typewildcards_List (mut (ref null $java.lang.Class))
+(global $$class@typewildcards.List (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|typewildcard...|__typewildcards_List (mut (ref null $java.lang.String))
+(global $$string_|typewildcard...|@typewildcards.List (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for typewildcards.GenericType [static fields]
-(global $f_$initialized__typewildcards_GenericType (mut i32)
+(global $$class-initialized@typewildcards.GenericType (mut i32)
  (i32.const 0)
 )
-(global $f_$class__typewildcards_GenericType (mut (ref null $java.lang.Class))
+(global $$class@typewildcards.GenericType (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|typewildcard...|__typewildcards_GenericType (mut (ref null $java.lang.String))
+(global $$string_|typewildcard...|@typewildcards.GenericType (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for typewildcards.Bar [static fields]
-(global $f_$initialized__typewildcards_Bar (mut i32)
+(global $$class-initialized@typewildcards.Bar (mut i32)
  (i32.const 0)
 )
-(global $f_$class__typewildcards_Bar (mut (ref null $java.lang.Class))
+(global $$class@typewildcards.Bar (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|typewildcard...|__typewildcards_Bar (mut (ref null $java.lang.String))
+(global $$string_|typewildcard...|@typewildcards.Bar (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for typewildcards.RecursiveType [static fields]
-(global $f_$initialized__typewildcards_RecursiveType (mut i32)
+(global $$class-initialized@typewildcards.RecursiveType (mut i32)
  (i32.const 0)
 )
-(global $f_$class__typewildcards_RecursiveType (mut (ref null $java.lang.Class))
+(global $$class@typewildcards.RecursiveType (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|typewildcard...|__typewildcards_RecursiveType (mut (ref null $java.lang.String))
+(global $$string_|typewildcard...|@typewildcards.RecursiveType (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for typewildcards.DeepRecursiveType [static fields]
-(global $f_$initialized__typewildcards_DeepRecursiveType (mut i32)
+(global $$class-initialized@typewildcards.DeepRecursiveType (mut i32)
  (i32.const 0)
 )
-(global $f_$class__typewildcards_DeepRecursiveType (mut (ref null $java.lang.Class))
+(global $$class@typewildcards.DeepRecursiveType (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|typewildcard...|__typewildcards_DeepRecursiveType (mut (ref null $java.lang.String))
+(global $$string_|typewildcard...|@typewildcards.DeepRecursiveType (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for typewildcards.RecursiveSubtype [static fields]
-(global $f_$initialized__typewildcards_RecursiveSubtype (mut i32)
+(global $$class-initialized@typewildcards.RecursiveSubtype (mut i32)
  (i32.const 0)
 )
-(global $f_$class__typewildcards_RecursiveSubtype (mut (ref null $java.lang.Class))
+(global $$class@typewildcards.RecursiveSubtype (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|typewildcard...|__typewildcards_RecursiveSubtype (mut (ref null $java.lang.String))
+(global $$string_|typewildcard...|@typewildcards.RecursiveSubtype (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for typewildcards.TypeWildCards [static fields]
-(global $f_listWithWildcard__typewildcards_TypeWildCards (mut (ref null $java.lang.Object))
+(global $listWithWildcard@typewildcards.TypeWildCards (mut (ref null $java.lang.Object))
  (ref.null $java.lang.Object)
 )
-(global $f_valMultipleGenerics__typewildcards_TypeWildCards (mut (ref null $typewildcards.TypeWildCards.MultipleGenerics))
+(global $valMultipleGenerics@typewildcards.TypeWildCards (mut (ref null $typewildcards.TypeWildCards.MultipleGenerics))
  (ref.null $typewildcards.TypeWildCards.MultipleGenerics)
 )
-(global $f_$initialized__typewildcards_TypeWildCards (mut i32)
+(global $$class-initialized@typewildcards.TypeWildCards (mut i32)
  (i32.const 0)
 )
-(global $f_$class__typewildcards_TypeWildCards (mut (ref null $java.lang.Class))
+(global $$class@typewildcards.TypeWildCards (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|typewildcard...|__typewildcards_TypeWildCards (mut (ref null $java.lang.String))
+(global $$string_|typewildcard...|@typewildcards.TypeWildCards (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for typewildcards.TypeWildCards.$LambdaImplementor$1 [static fields]
-(global $f_$initialized__typewildcards_TypeWildCards_$LambdaImplementor$1 (mut i32)
+(global $$class-initialized@typewildcards.TypeWildCards.$LambdaImplementor$1 (mut i32)
  (i32.const 0)
 )
-(global $f_$class__typewildcards_TypeWildCards_$LambdaImplementor$1 (mut (ref null $java.lang.Class))
+(global $$class@typewildcards.TypeWildCards.$LambdaImplementor$1 (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|typewildcard...|__typewildcards_TypeWildCards_$LambdaImplementor$1 (mut (ref null $java.lang.String))
+(global $$string_|typewildcard...|@typewildcards.TypeWildCards.$LambdaImplementor$1 (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for typewildcards.TypeWildCards.X [static fields]
-(global $f_$initialized__typewildcards_TypeWildCards_X (mut i32)
+(global $$class-initialized@typewildcards.TypeWildCards.X (mut i32)
  (i32.const 0)
 )
-(global $f_$class__typewildcards_TypeWildCards_X (mut (ref null $java.lang.Class))
+(global $$class@typewildcards.TypeWildCards.X (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|typewildcard...|__typewildcards_TypeWildCards_X (mut (ref null $java.lang.String))
+(global $$string_|typewildcard...|@typewildcards.TypeWildCards.X (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for typewildcards.TypeWildCards.Y [static fields]
-(global $f_$initialized__typewildcards_TypeWildCards_Y (mut i32)
+(global $$class-initialized@typewildcards.TypeWildCards.Y (mut i32)
  (i32.const 0)
 )
-(global $f_$class__typewildcards_TypeWildCards_Y (mut (ref null $java.lang.Class))
+(global $$class@typewildcards.TypeWildCards.Y (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|typewildcard...|__typewildcards_TypeWildCards_Y (mut (ref null $java.lang.String))
+(global $$string_|typewildcard...|@typewildcards.TypeWildCards.Y (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for typewildcards.TypeWildCards.A [static fields]
-(global $f_$initialized__typewildcards_TypeWildCards_A (mut i32)
+(global $$class-initialized@typewildcards.TypeWildCards.A (mut i32)
  (i32.const 0)
 )
-(global $f_$class__typewildcards_TypeWildCards_A (mut (ref null $java.lang.Class))
+(global $$class@typewildcards.TypeWildCards.A (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|typewildcard...|__typewildcards_TypeWildCards_A (mut (ref null $java.lang.String))
+(global $$string_|typewildcard...|@typewildcards.TypeWildCards.A (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for typewildcards.TypeWildCards.IntegerSupplier [static fields]
-(global $f_$initialized__typewildcards_TypeWildCards_IntegerSupplier (mut i32)
+(global $$class-initialized@typewildcards.TypeWildCards.IntegerSupplier (mut i32)
  (i32.const 0)
 )
-(global $f_$class__typewildcards_TypeWildCards_IntegerSupplier (mut (ref null $java.lang.Class))
+(global $$class@typewildcards.TypeWildCards.IntegerSupplier (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|typewildcard...|__typewildcards_TypeWildCards_IntegerSupplier (mut (ref null $java.lang.String))
+(global $$string_|typewildcard...|@typewildcards.TypeWildCards.IntegerSupplier (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for typewildcards.TypeWildCards.HasKey [static fields]
-(global $f_$initialized__typewildcards_TypeWildCards_HasKey (mut i32)
+(global $$class-initialized@typewildcards.TypeWildCards.HasKey (mut i32)
  (i32.const 0)
 )
-(global $f_$class__typewildcards_TypeWildCards_HasKey (mut (ref null $java.lang.Class))
+(global $$class@typewildcards.TypeWildCards.HasKey (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|typewildcard...|__typewildcards_TypeWildCards_HasKey (mut (ref null $java.lang.String))
+(global $$string_|typewildcard...|@typewildcards.TypeWildCards.HasKey (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for typewildcards.TypeWildCards.Element [static fields]
-(global $f_$initialized__typewildcards_TypeWildCards_Element (mut i32)
+(global $$class-initialized@typewildcards.TypeWildCards.Element (mut i32)
  (i32.const 0)
 )
-(global $f_$class__typewildcards_TypeWildCards_Element (mut (ref null $java.lang.Class))
+(global $$class@typewildcards.TypeWildCards.Element (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|typewildcard...|__typewildcards_TypeWildCards_Element (mut (ref null $java.lang.String))
+(global $$string_|typewildcard...|@typewildcards.TypeWildCards.Element (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for typewildcards.TypeWildCards.OtherElement [static fields]
-(global $f_$initialized__typewildcards_TypeWildCards_OtherElement (mut i32)
+(global $$class-initialized@typewildcards.TypeWildCards.OtherElement (mut i32)
  (i32.const 0)
 )
-(global $f_$class__typewildcards_TypeWildCards_OtherElement (mut (ref null $java.lang.Class))
+(global $$class@typewildcards.TypeWildCards.OtherElement (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|typewildcard...|__typewildcards_TypeWildCards_OtherElement (mut (ref null $java.lang.String))
+(global $$string_|typewildcard...|@typewildcards.TypeWildCards.OtherElement (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for typewildcards.TypeWildCards.SubOtherElement [static fields]
-(global $f_$initialized__typewildcards_TypeWildCards_SubOtherElement (mut i32)
+(global $$class-initialized@typewildcards.TypeWildCards.SubOtherElement (mut i32)
  (i32.const 0)
 )
-(global $f_$class__typewildcards_TypeWildCards_SubOtherElement (mut (ref null $java.lang.Class))
+(global $$class@typewildcards.TypeWildCards.SubOtherElement (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|typewildcard...|__typewildcards_TypeWildCards_SubOtherElement (mut (ref null $java.lang.String))
+(global $$string_|typewildcard...|@typewildcards.TypeWildCards.SubOtherElement (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for typewildcards.TypeWildCards.Foo [static fields]
-(global $f_$initialized__typewildcards_TypeWildCards_Foo (mut i32)
+(global $$class-initialized@typewildcards.TypeWildCards.Foo (mut i32)
  (i32.const 0)
 )
-(global $f_$class__typewildcards_TypeWildCards_Foo (mut (ref null $java.lang.Class))
+(global $$class@typewildcards.TypeWildCards.Foo (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|typewildcard...|__typewildcards_TypeWildCards_Foo (mut (ref null $java.lang.String))
+(global $$string_|typewildcard...|@typewildcards.TypeWildCards.Foo (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for typewildcards.TypeWildCards.RecursiveInterface [static fields]
-(global $f_$initialized__typewildcards_TypeWildCards_RecursiveInterface (mut i32)
+(global $$class-initialized@typewildcards.TypeWildCards.RecursiveInterface (mut i32)
  (i32.const 0)
 )
-(global $f_$class__typewildcards_TypeWildCards_RecursiveInterface (mut (ref null $java.lang.Class))
+(global $$class@typewildcards.TypeWildCards.RecursiveInterface (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|typewildcard...|__typewildcards_TypeWildCards_RecursiveInterface (mut (ref null $java.lang.String))
+(global $$string_|typewildcard...|@typewildcards.TypeWildCards.RecursiveInterface (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for typewildcards.TypeWildCards.MultipleGenerics [static fields]
-(global $f_$initialized__typewildcards_TypeWildCards_MultipleGenerics (mut i32)
+(global $$class-initialized@typewildcards.TypeWildCards.MultipleGenerics (mut i32)
  (i32.const 0)
 )
-(global $f_$class__typewildcards_TypeWildCards_MultipleGenerics (mut (ref null $java.lang.Class))
+(global $$class@typewildcards.TypeWildCards.MultipleGenerics (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|typewildcard...|__typewildcards_TypeWildCards_MultipleGenerics (mut (ref null $java.lang.String))
+(global $$string_|typewildcard...|@typewildcards.TypeWildCards.MultipleGenerics (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -691,14 +691,14 @@
  ;;@ typewildcards/TypeWildCards.java:18:10
  (block
   ;;@ typewildcards/TypeWildCards.java:18:10
-  (if (global.get $f_$initialized__typewildcards_Function)
+  (if (global.get $$class-initialized@typewildcards.Function)
    (then
     ;;@ typewildcards/TypeWildCards.java:18:10
     (return )
    )
   )
   ;;@ typewildcards/TypeWildCards.java:18:10
-  (global.set $f_$initialized__typewildcards_Function (i32.const 1))
+  (global.set $$class-initialized@typewildcards.Function (i32.const 1))
  )
 )
 
@@ -706,12 +706,12 @@
 (func $$getClassMetadata__java_lang_Class@typewildcards.Function
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__typewildcards_Function))
+  (if (ref.is_null (global.get $$class@typewildcards.Function))
    (then
-    (global.set $f_$class__typewildcards_Function (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.Function) )))
+    (global.set $$class@typewildcards.Function (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.Function) )))
    )
   )
-  (return (global.get $f_$class__typewildcards_Function))
+  (return (global.get $$class@typewildcards.Function))
  )
 )
 
@@ -719,12 +719,12 @@
 (func $$getString_|typewildcard...|__java_lang_String@typewildcards.Function
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|typewildcard...|__typewildcards_Function))
+  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.Function))
    (then
-    (global.set $f_$string_|typewildcard...|__typewildcards_Function (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.Function")))
+    (global.set $$string_|typewildcard...|@typewildcards.Function (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.Function")))
    )
   )
-  (return (global.get $f_$string_|typewildcard...|__typewildcards_Function))
+  (return (global.get $$string_|typewildcard...|@typewildcards.Function))
  )
 )
 
@@ -735,14 +735,14 @@
  ;;@ typewildcards/TypeWildCards.java:22:10
  (block
   ;;@ typewildcards/TypeWildCards.java:22:10
-  (if (global.get $f_$initialized__typewildcards_List)
+  (if (global.get $$class-initialized@typewildcards.List)
    (then
     ;;@ typewildcards/TypeWildCards.java:22:10
     (return )
    )
   )
   ;;@ typewildcards/TypeWildCards.java:22:10
-  (global.set $f_$initialized__typewildcards_List (i32.const 1))
+  (global.set $$class-initialized@typewildcards.List (i32.const 1))
  )
 )
 
@@ -750,12 +750,12 @@
 (func $$getClassMetadata__java_lang_Class@typewildcards.List
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__typewildcards_List))
+  (if (ref.is_null (global.get $$class@typewildcards.List))
    (then
-    (global.set $f_$class__typewildcards_List (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.List) )))
+    (global.set $$class@typewildcards.List (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.List) )))
    )
   )
-  (return (global.get $f_$class__typewildcards_List))
+  (return (global.get $$class@typewildcards.List))
  )
 )
 
@@ -763,12 +763,12 @@
 (func $$getString_|typewildcard...|__java_lang_String@typewildcards.List
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|typewildcard...|__typewildcards_List))
+  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.List))
    (then
-    (global.set $f_$string_|typewildcard...|__typewildcards_List (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.List")))
+    (global.set $$string_|typewildcard...|@typewildcards.List (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.List")))
    )
   )
-  (return (global.get $f_$string_|typewildcard...|__typewildcards_List))
+  (return (global.get $$string_|typewildcard...|@typewildcards.List))
  )
 )
 
@@ -779,14 +779,14 @@
  ;;@ typewildcards/TypeWildCards.java:36:10
  (block
   ;;@ typewildcards/TypeWildCards.java:36:10
-  (if (global.get $f_$initialized__typewildcards_DeepRecursiveType)
+  (if (global.get $$class-initialized@typewildcards.DeepRecursiveType)
    (then
     ;;@ typewildcards/TypeWildCards.java:36:10
     (return )
    )
   )
   ;;@ typewildcards/TypeWildCards.java:36:10
-  (global.set $f_$initialized__typewildcards_DeepRecursiveType (i32.const 1))
+  (global.set $$class-initialized@typewildcards.DeepRecursiveType (i32.const 1))
  )
 )
 
@@ -794,12 +794,12 @@
 (func $$getClassMetadata__java_lang_Class@typewildcards.DeepRecursiveType
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__typewildcards_DeepRecursiveType))
+  (if (ref.is_null (global.get $$class@typewildcards.DeepRecursiveType))
    (then
-    (global.set $f_$class__typewildcards_DeepRecursiveType (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.DeepRecursiveType) )))
+    (global.set $$class@typewildcards.DeepRecursiveType (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.DeepRecursiveType) )))
    )
   )
-  (return (global.get $f_$class__typewildcards_DeepRecursiveType))
+  (return (global.get $$class@typewildcards.DeepRecursiveType))
  )
 )
 
@@ -807,12 +807,12 @@
 (func $$getString_|typewildcard...|__java_lang_String@typewildcards.DeepRecursiveType
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|typewildcard...|__typewildcards_DeepRecursiveType))
+  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.DeepRecursiveType))
    (then
-    (global.set $f_$string_|typewildcard...|__typewildcards_DeepRecursiveType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.DeepRecursiveType")))
+    (global.set $$string_|typewildcard...|@typewildcards.DeepRecursiveType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.DeepRecursiveType")))
    )
   )
-  (return (global.get $f_$string_|typewildcard...|__typewildcards_DeepRecursiveType))
+  (return (global.get $$string_|typewildcard...|@typewildcards.DeepRecursiveType))
  )
 )
 
@@ -823,14 +823,14 @@
  ;;@ typewildcards/TypeWildCards.java:71:20
  (block
   ;;@ typewildcards/TypeWildCards.java:71:20
-  (if (global.get $f_$initialized__typewildcards_TypeWildCards_X)
+  (if (global.get $$class-initialized@typewildcards.TypeWildCards.X)
    (then
     ;;@ typewildcards/TypeWildCards.java:71:20
     (return )
    )
   )
   ;;@ typewildcards/TypeWildCards.java:71:20
-  (global.set $f_$initialized__typewildcards_TypeWildCards_X (i32.const 1))
+  (global.set $$class-initialized@typewildcards.TypeWildCards.X (i32.const 1))
  )
 )
 
@@ -838,12 +838,12 @@
 (func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.X
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__typewildcards_TypeWildCards_X))
+  (if (ref.is_null (global.get $$class@typewildcards.TypeWildCards.X))
    (then
-    (global.set $f_$class__typewildcards_TypeWildCards_X (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.X) )))
+    (global.set $$class@typewildcards.TypeWildCards.X (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.X) )))
    )
   )
-  (return (global.get $f_$class__typewildcards_TypeWildCards_X))
+  (return (global.get $$class@typewildcards.TypeWildCards.X))
  )
 )
 
@@ -851,12 +851,12 @@
 (func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.X
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|typewildcard...|__typewildcards_TypeWildCards_X))
+  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.X))
    (then
-    (global.set $f_$string_|typewildcard...|__typewildcards_TypeWildCards_X (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$X")))
+    (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.X (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$X")))
    )
   )
-  (return (global.get $f_$string_|typewildcard...|__typewildcards_TypeWildCards_X))
+  (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.X))
  )
 )
 
@@ -867,14 +867,14 @@
  ;;@ typewildcards/TypeWildCards.java:75:20
  (block
   ;;@ typewildcards/TypeWildCards.java:75:20
-  (if (global.get $f_$initialized__typewildcards_TypeWildCards_Y)
+  (if (global.get $$class-initialized@typewildcards.TypeWildCards.Y)
    (then
     ;;@ typewildcards/TypeWildCards.java:75:20
     (return )
    )
   )
   ;;@ typewildcards/TypeWildCards.java:75:20
-  (global.set $f_$initialized__typewildcards_TypeWildCards_Y (i32.const 1))
+  (global.set $$class-initialized@typewildcards.TypeWildCards.Y (i32.const 1))
  )
 )
 
@@ -882,12 +882,12 @@
 (func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.Y
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__typewildcards_TypeWildCards_Y))
+  (if (ref.is_null (global.get $$class@typewildcards.TypeWildCards.Y))
    (then
-    (global.set $f_$class__typewildcards_TypeWildCards_Y (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.Y) )))
+    (global.set $$class@typewildcards.TypeWildCards.Y (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.Y) )))
    )
   )
-  (return (global.get $f_$class__typewildcards_TypeWildCards_Y))
+  (return (global.get $$class@typewildcards.TypeWildCards.Y))
  )
 )
 
@@ -895,12 +895,12 @@
 (func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.Y
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|typewildcard...|__typewildcards_TypeWildCards_Y))
+  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.Y))
    (then
-    (global.set $f_$string_|typewildcard...|__typewildcards_TypeWildCards_Y (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$Y")))
+    (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.Y (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$Y")))
    )
   )
-  (return (global.get $f_$string_|typewildcard...|__typewildcards_TypeWildCards_Y))
+  (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.Y))
  )
 )
 
@@ -911,14 +911,14 @@
  ;;@ typewildcards/TypeWildCards.java:97:19
  (block
   ;;@ typewildcards/TypeWildCards.java:97:19
-  (if (global.get $f_$initialized__typewildcards_TypeWildCards_IntegerSupplier)
+  (if (global.get $$class-initialized@typewildcards.TypeWildCards.IntegerSupplier)
    (then
     ;;@ typewildcards/TypeWildCards.java:97:19
     (return )
    )
   )
   ;;@ typewildcards/TypeWildCards.java:97:19
-  (global.set $f_$initialized__typewildcards_TypeWildCards_IntegerSupplier (i32.const 1))
+  (global.set $$class-initialized@typewildcards.TypeWildCards.IntegerSupplier (i32.const 1))
  )
 )
 
@@ -926,12 +926,12 @@
 (func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.IntegerSupplier
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__typewildcards_TypeWildCards_IntegerSupplier))
+  (if (ref.is_null (global.get $$class@typewildcards.TypeWildCards.IntegerSupplier))
    (then
-    (global.set $f_$class__typewildcards_TypeWildCards_IntegerSupplier (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.IntegerSupplier) )))
+    (global.set $$class@typewildcards.TypeWildCards.IntegerSupplier (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.IntegerSupplier) )))
    )
   )
-  (return (global.get $f_$class__typewildcards_TypeWildCards_IntegerSupplier))
+  (return (global.get $$class@typewildcards.TypeWildCards.IntegerSupplier))
  )
 )
 
@@ -939,12 +939,12 @@
 (func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.IntegerSupplier
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|typewildcard...|__typewildcards_TypeWildCards_IntegerSupplier))
+  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.IntegerSupplier))
    (then
-    (global.set $f_$string_|typewildcard...|__typewildcards_TypeWildCards_IntegerSupplier (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$IntegerSupplier")))
+    (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.IntegerSupplier (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$IntegerSupplier")))
    )
   )
-  (return (global.get $f_$string_|typewildcard...|__typewildcards_TypeWildCards_IntegerSupplier))
+  (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.IntegerSupplier))
  )
 )
 
@@ -955,14 +955,14 @@
  ;;@ typewildcards/TypeWildCards.java:101:19
  (block
   ;;@ typewildcards/TypeWildCards.java:101:19
-  (if (global.get $f_$initialized__typewildcards_TypeWildCards_HasKey)
+  (if (global.get $$class-initialized@typewildcards.TypeWildCards.HasKey)
    (then
     ;;@ typewildcards/TypeWildCards.java:101:19
     (return )
    )
   )
   ;;@ typewildcards/TypeWildCards.java:101:19
-  (global.set $f_$initialized__typewildcards_TypeWildCards_HasKey (i32.const 1))
+  (global.set $$class-initialized@typewildcards.TypeWildCards.HasKey (i32.const 1))
  )
 )
 
@@ -970,12 +970,12 @@
 (func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.HasKey
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__typewildcards_TypeWildCards_HasKey))
+  (if (ref.is_null (global.get $$class@typewildcards.TypeWildCards.HasKey))
    (then
-    (global.set $f_$class__typewildcards_TypeWildCards_HasKey (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.HasKey) )))
+    (global.set $$class@typewildcards.TypeWildCards.HasKey (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.HasKey) )))
    )
   )
-  (return (global.get $f_$class__typewildcards_TypeWildCards_HasKey))
+  (return (global.get $$class@typewildcards.TypeWildCards.HasKey))
  )
 )
 
@@ -983,12 +983,12 @@
 (func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.HasKey
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|typewildcard...|__typewildcards_TypeWildCards_HasKey))
+  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.HasKey))
    (then
-    (global.set $f_$string_|typewildcard...|__typewildcards_TypeWildCards_HasKey (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$HasKey")))
+    (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.HasKey (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$HasKey")))
    )
   )
-  (return (global.get $f_$string_|typewildcard...|__typewildcards_TypeWildCards_HasKey))
+  (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.HasKey))
  )
 )
 
@@ -999,14 +999,14 @@
  ;;@ typewildcards/TypeWildCards.java:141:12
  (block
   ;;@ typewildcards/TypeWildCards.java:141:12
-  (if (global.get $f_$initialized__typewildcards_TypeWildCards_RecursiveInterface)
+  (if (global.get $$class-initialized@typewildcards.TypeWildCards.RecursiveInterface)
    (then
     ;;@ typewildcards/TypeWildCards.java:141:12
     (return )
    )
   )
   ;;@ typewildcards/TypeWildCards.java:141:12
-  (global.set $f_$initialized__typewildcards_TypeWildCards_RecursiveInterface (i32.const 1))
+  (global.set $$class-initialized@typewildcards.TypeWildCards.RecursiveInterface (i32.const 1))
  )
 )
 
@@ -1014,12 +1014,12 @@
 (func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.RecursiveInterface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__typewildcards_TypeWildCards_RecursiveInterface))
+  (if (ref.is_null (global.get $$class@typewildcards.TypeWildCards.RecursiveInterface))
    (then
-    (global.set $f_$class__typewildcards_TypeWildCards_RecursiveInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.RecursiveInterface) )))
+    (global.set $$class@typewildcards.TypeWildCards.RecursiveInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.RecursiveInterface) )))
    )
   )
-  (return (global.get $f_$class__typewildcards_TypeWildCards_RecursiveInterface))
+  (return (global.get $$class@typewildcards.TypeWildCards.RecursiveInterface))
  )
 )
 
@@ -1027,12 +1027,12 @@
 (func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.RecursiveInterface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|typewildcard...|__typewildcards_TypeWildCards_RecursiveInterface))
+  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.RecursiveInterface))
    (then
-    (global.set $f_$string_|typewildcard...|__typewildcards_TypeWildCards_RecursiveInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$RecursiveInterface")))
+    (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.RecursiveInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$RecursiveInterface")))
    )
   )
-  (return (global.get $f_$string_|typewildcard...|__typewildcards_TypeWildCards_RecursiveInterface))
+  (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.RecursiveInterface))
  )
 )
 
@@ -1085,14 +1085,14 @@
  ;;@ typewildcards/TypeWildCards.java:24:6
  (block
   ;;@ typewildcards/TypeWildCards.java:24:6
-  (if (global.get $f_$initialized__typewildcards_GenericType)
+  (if (global.get $$class-initialized@typewildcards.GenericType)
    (then
     ;;@ typewildcards/TypeWildCards.java:24:6
     (return )
    )
   )
   ;;@ typewildcards/TypeWildCards.java:24:6
-  (global.set $f_$initialized__typewildcards_GenericType (i32.const 1))
+  (global.set $$class-initialized@typewildcards.GenericType (i32.const 1))
   ;;@ typewildcards/TypeWildCards.java:24:6
   (call $$clinit__void@java.lang.Object )
  )
@@ -1102,12 +1102,12 @@
 (func $$getClassMetadata__java_lang_Class@typewildcards.GenericType
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__typewildcards_GenericType))
+  (if (ref.is_null (global.get $$class@typewildcards.GenericType))
    (then
-    (global.set $f_$class__typewildcards_GenericType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.GenericType) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@typewildcards.GenericType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.GenericType) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__typewildcards_GenericType))
+  (return (global.get $$class@typewildcards.GenericType))
  )
 )
 
@@ -1128,12 +1128,12 @@
 (func $$getString_|typewildcard...|__java_lang_String@typewildcards.GenericType
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|typewildcard...|__typewildcards_GenericType))
+  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.GenericType))
    (then
-    (global.set $f_$string_|typewildcard...|__typewildcards_GenericType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.GenericType")))
+    (global.set $$string_|typewildcard...|@typewildcards.GenericType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.GenericType")))
    )
   )
-  (return (global.get $f_$string_|typewildcard...|__typewildcards_GenericType))
+  (return (global.get $$string_|typewildcard...|@typewildcards.GenericType))
  )
 )
 
@@ -1171,14 +1171,14 @@
  ;;@ typewildcards/TypeWildCards.java:30:6
  (block
   ;;@ typewildcards/TypeWildCards.java:30:6
-  (if (global.get $f_$initialized__typewildcards_Bar)
+  (if (global.get $$class-initialized@typewildcards.Bar)
    (then
     ;;@ typewildcards/TypeWildCards.java:30:6
     (return )
    )
   )
   ;;@ typewildcards/TypeWildCards.java:30:6
-  (global.set $f_$initialized__typewildcards_Bar (i32.const 1))
+  (global.set $$class-initialized@typewildcards.Bar (i32.const 1))
   ;;@ typewildcards/TypeWildCards.java:30:6
   (call $$clinit__void@java.lang.Object )
  )
@@ -1188,12 +1188,12 @@
 (func $$getClassMetadata__java_lang_Class@typewildcards.Bar
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__typewildcards_Bar))
+  (if (ref.is_null (global.get $$class@typewildcards.Bar))
    (then
-    (global.set $f_$class__typewildcards_Bar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.Bar) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@typewildcards.Bar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.Bar) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__typewildcards_Bar))
+  (return (global.get $$class@typewildcards.Bar))
  )
 )
 
@@ -1214,12 +1214,12 @@
 (func $$getString_|typewildcard...|__java_lang_String@typewildcards.Bar
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|typewildcard...|__typewildcards_Bar))
+  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.Bar))
    (then
-    (global.set $f_$string_|typewildcard...|__typewildcards_Bar (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.Bar")))
+    (global.set $$string_|typewildcard...|@typewildcards.Bar (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.Bar")))
    )
   )
-  (return (global.get $f_$string_|typewildcard...|__typewildcards_Bar))
+  (return (global.get $$string_|typewildcard...|@typewildcards.Bar))
  )
 )
 
@@ -1259,14 +1259,14 @@
  ;;@ typewildcards/TypeWildCards.java:32:6
  (block
   ;;@ typewildcards/TypeWildCards.java:32:6
-  (if (global.get $f_$initialized__typewildcards_RecursiveType)
+  (if (global.get $$class-initialized@typewildcards.RecursiveType)
    (then
     ;;@ typewildcards/TypeWildCards.java:32:6
     (return )
    )
   )
   ;;@ typewildcards/TypeWildCards.java:32:6
-  (global.set $f_$initialized__typewildcards_RecursiveType (i32.const 1))
+  (global.set $$class-initialized@typewildcards.RecursiveType (i32.const 1))
   ;;@ typewildcards/TypeWildCards.java:32:6
   (call $$clinit__void@java.lang.Object )
  )
@@ -1276,12 +1276,12 @@
 (func $$getClassMetadata__java_lang_Class@typewildcards.RecursiveType
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__typewildcards_RecursiveType))
+  (if (ref.is_null (global.get $$class@typewildcards.RecursiveType))
    (then
-    (global.set $f_$class__typewildcards_RecursiveType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.RecursiveType) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@typewildcards.RecursiveType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.RecursiveType) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__typewildcards_RecursiveType))
+  (return (global.get $$class@typewildcards.RecursiveType))
  )
 )
 
@@ -1302,12 +1302,12 @@
 (func $$getString_|typewildcard...|__java_lang_String@typewildcards.RecursiveType
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|typewildcard...|__typewildcards_RecursiveType))
+  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.RecursiveType))
    (then
-    (global.set $f_$string_|typewildcard...|__typewildcards_RecursiveType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.RecursiveType")))
+    (global.set $$string_|typewildcard...|@typewildcards.RecursiveType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.RecursiveType")))
    )
   )
-  (return (global.get $f_$string_|typewildcard...|__typewildcards_RecursiveType))
+  (return (global.get $$string_|typewildcard...|@typewildcards.RecursiveType))
  )
 )
 
@@ -1467,7 +1467,7 @@
   ;;@ typewildcards/TypeWildCards.java:86:68
   (call $$clinit__void@typewildcards.TypeWildCards )
   ;;@ typewildcards/TypeWildCards.java:87:4
-  (local.set $i (struct.get $typewildcards.TypeWildCards.A $f_f__typewildcards_TypeWildCards_A (local.get $t)))
+  (local.set $i (struct.get $typewildcards.TypeWildCards.A $f@typewildcards.TypeWildCards.A (local.get $t)))
   ;;@ typewildcards/TypeWildCards.java:88:4
   (call_ref $function.m_m__void (ref.as_non_null (local.get $t))(struct.get $typewildcards.TypeWildCards.A.vtable $m_m__void (struct.get $typewildcards.TypeWildCards.A $vtable(local.get $t))))
  )
@@ -1483,7 +1483,7 @@
   ;;@ typewildcards/TypeWildCards.java:91:84
   (call $$clinit__void@typewildcards.TypeWildCards )
   ;;@ typewildcards/TypeWildCards.java:92:4
-  (local.set $i (struct.get $typewildcards.TypeWildCards.A $f_f__typewildcards_TypeWildCards_A (local.get $t)))
+  (local.set $i (struct.get $typewildcards.TypeWildCards.A $f@typewildcards.TypeWildCards.A (local.get $t)))
   ;;@ typewildcards/TypeWildCards.java:93:4
   (call_ref $function.m_m__void (ref.as_non_null (local.get $t))(struct.get $typewildcards.TypeWildCards.A.vtable $m_m__void (struct.get $typewildcards.TypeWildCards.A $vtable(local.get $t))))
   (block
@@ -1593,20 +1593,20 @@
  ;;@ typewildcards/TypeWildCards.java:44:13
  (block
   ;;@ typewildcards/TypeWildCards.java:44:13
-  (if (global.get $f_$initialized__typewildcards_TypeWildCards)
+  (if (global.get $$class-initialized@typewildcards.TypeWildCards)
    (then
     ;;@ typewildcards/TypeWildCards.java:44:13
     (return )
    )
   )
   ;;@ typewildcards/TypeWildCards.java:44:13
-  (global.set $f_$initialized__typewildcards_TypeWildCards (i32.const 1))
+  (global.set $$class-initialized@typewildcards.TypeWildCards (i32.const 1))
   ;;@ typewildcards/TypeWildCards.java:44:13
   (call $$clinit__void@java.lang.Object )
   ;;@ typewildcards/TypeWildCards.java:160:2
-  (global.set $f_listWithWildcard__typewildcards_TypeWildCards (ref.null $java.lang.Object))
+  (global.set $listWithWildcard@typewildcards.TypeWildCards (ref.null $java.lang.Object))
   ;;@ typewildcards/TypeWildCards.java:161:2
-  (global.set $f_valMultipleGenerics__typewildcards_TypeWildCards (call $m_createMultipleGenerics__typewildcards_List__typewildcards_TypeWildCards_MultipleGenerics@typewildcards.TypeWildCards (global.get $f_listWithWildcard__typewildcards_TypeWildCards)))
+  (global.set $valMultipleGenerics@typewildcards.TypeWildCards (call $m_createMultipleGenerics__typewildcards_List__typewildcards_TypeWildCards_MultipleGenerics@typewildcards.TypeWildCards (global.get $listWithWildcard@typewildcards.TypeWildCards)))
  )
 )
 
@@ -1614,12 +1614,12 @@
 (func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__typewildcards_TypeWildCards))
+  (if (ref.is_null (global.get $$class@typewildcards.TypeWildCards))
    (then
-    (global.set $f_$class__typewildcards_TypeWildCards (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@typewildcards.TypeWildCards (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__typewildcards_TypeWildCards))
+  (return (global.get $$class@typewildcards.TypeWildCards))
  )
 )
 
@@ -1640,12 +1640,12 @@
 (func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|typewildcard...|__typewildcards_TypeWildCards))
+  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards))
    (then
-    (global.set $f_$string_|typewildcard...|__typewildcards_TypeWildCards (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards")))
+    (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards")))
    )
   )
-  (return (global.get $f_$string_|typewildcard...|__typewildcards_TypeWildCards))
+  (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards))
  )
 )
 
@@ -1713,14 +1713,14 @@
  ;;@ typewildcards/TypeWildCards.java:127:12
  (block
   ;;@ typewildcards/TypeWildCards.java:127:12
-  (if (global.get $f_$initialized__typewildcards_TypeWildCards_$LambdaImplementor$1)
+  (if (global.get $$class-initialized@typewildcards.TypeWildCards.$LambdaImplementor$1)
    (then
     ;;@ typewildcards/TypeWildCards.java:127:12
     (return )
    )
   )
   ;;@ typewildcards/TypeWildCards.java:127:12
-  (global.set $f_$initialized__typewildcards_TypeWildCards_$LambdaImplementor$1 (i32.const 1))
+  (global.set $$class-initialized@typewildcards.TypeWildCards.$LambdaImplementor$1 (i32.const 1))
   ;;@ typewildcards/TypeWildCards.java:127:12
   (call $$clinit__void@java.lang.Object )
  )
@@ -1730,12 +1730,12 @@
 (func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.$LambdaImplementor$1
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__typewildcards_TypeWildCards_$LambdaImplementor$1))
+  (if (ref.is_null (global.get $$class@typewildcards.TypeWildCards.$LambdaImplementor$1))
    (then
-    (global.set $f_$class__typewildcards_TypeWildCards_$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.$LambdaImplementor$1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@typewildcards.TypeWildCards.$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.$LambdaImplementor$1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__typewildcards_TypeWildCards_$LambdaImplementor$1))
+  (return (global.get $$class@typewildcards.TypeWildCards.$LambdaImplementor$1))
  )
 )
 
@@ -1756,12 +1756,12 @@
 (func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.$LambdaImplementor$1
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|typewildcard...|__typewildcards_TypeWildCards_$LambdaImplementor$1))
+  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.$LambdaImplementor$1))
    (then
-    (global.set $f_$string_|typewildcard...|__typewildcards_TypeWildCards_$LambdaImplementor$1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$$LambdaImplementor$1")))
+    (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.$LambdaImplementor$1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$$LambdaImplementor$1")))
    )
   )
-  (return (global.get $f_$string_|typewildcard...|__typewildcards_TypeWildCards_$LambdaImplementor$1))
+  (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.$LambdaImplementor$1))
  )
 )
 
@@ -1809,14 +1809,14 @@
  ;;@ typewildcards/TypeWildCards.java:79:23
  (block
   ;;@ typewildcards/TypeWildCards.java:79:23
-  (if (global.get $f_$initialized__typewildcards_TypeWildCards_A)
+  (if (global.get $$class-initialized@typewildcards.TypeWildCards.A)
    (then
     ;;@ typewildcards/TypeWildCards.java:79:23
     (return )
    )
   )
   ;;@ typewildcards/TypeWildCards.java:79:23
-  (global.set $f_$initialized__typewildcards_TypeWildCards_A (i32.const 1))
+  (global.set $$class-initialized@typewildcards.TypeWildCards.A (i32.const 1))
   ;;@ typewildcards/TypeWildCards.java:79:23
   (call $$clinit__void@java.lang.Object )
  )
@@ -1826,12 +1826,12 @@
 (func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.A
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__typewildcards_TypeWildCards_A))
+  (if (ref.is_null (global.get $$class@typewildcards.TypeWildCards.A))
    (then
-    (global.set $f_$class__typewildcards_TypeWildCards_A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.A) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@typewildcards.TypeWildCards.A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.A) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__typewildcards_TypeWildCards_A))
+  (return (global.get $$class@typewildcards.TypeWildCards.A))
  )
 )
 
@@ -1852,12 +1852,12 @@
 (func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.A
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|typewildcard...|__typewildcards_TypeWildCards_A))
+  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.A))
    (then
-    (global.set $f_$string_|typewildcard...|__typewildcards_TypeWildCards_A (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$A")))
+    (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.A (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$A")))
    )
   )
-  (return (global.get $f_$string_|typewildcard...|__typewildcards_TypeWildCards_A))
+  (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.A))
  )
 )
 
@@ -1870,7 +1870,7 @@
  ;;@ typewildcards/TypeWildCards.java:105:24
  (block
   ;;@ typewildcards/TypeWildCards.java:105:24
-  (struct.set $typewildcards.TypeWildCards.Element $$outer_this__typewildcards_TypeWildCards_Element (local.get $this) (local.get $$outer_this))
+  (struct.set $typewildcards.TypeWildCards.Element $$outer_this@typewildcards.TypeWildCards.Element (local.get $this) (local.get $$outer_this))
   ;;@ typewildcards/TypeWildCards.java:105:24
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -1881,14 +1881,14 @@
  ;;@ typewildcards/TypeWildCards.java:105:24
  (block
   ;;@ typewildcards/TypeWildCards.java:105:24
-  (if (global.get $f_$initialized__typewildcards_TypeWildCards_Element)
+  (if (global.get $$class-initialized@typewildcards.TypeWildCards.Element)
    (then
     ;;@ typewildcards/TypeWildCards.java:105:24
     (return )
    )
   )
   ;;@ typewildcards/TypeWildCards.java:105:24
-  (global.set $f_$initialized__typewildcards_TypeWildCards_Element (i32.const 1))
+  (global.set $$class-initialized@typewildcards.TypeWildCards.Element (i32.const 1))
   ;;@ typewildcards/TypeWildCards.java:105:24
   (call $$clinit__void@java.lang.Object )
  )
@@ -1898,12 +1898,12 @@
 (func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.Element
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__typewildcards_TypeWildCards_Element))
+  (if (ref.is_null (global.get $$class@typewildcards.TypeWildCards.Element))
    (then
-    (global.set $f_$class__typewildcards_TypeWildCards_Element (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.Element) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@typewildcards.TypeWildCards.Element (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.Element) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__typewildcards_TypeWildCards_Element))
+  (return (global.get $$class@typewildcards.TypeWildCards.Element))
  )
 )
 
@@ -1911,12 +1911,12 @@
 (func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.Element
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|typewildcard...|__typewildcards_TypeWildCards_Element))
+  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.Element))
    (then
-    (global.set $f_$string_|typewildcard...|__typewildcards_TypeWildCards_Element (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$Element")))
+    (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.Element (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$Element")))
    )
   )
-  (return (global.get $f_$string_|typewildcard...|__typewildcards_TypeWildCards_Element))
+  (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.Element))
  )
 )
 
@@ -1929,7 +1929,7 @@
  ;;@ typewildcards/TypeWildCards.java:107:24
  (block
   ;;@ typewildcards/TypeWildCards.java:107:24
-  (struct.set $typewildcards.TypeWildCards.OtherElement $$outer_this__typewildcards_TypeWildCards_OtherElement (local.get $this) (local.get $$outer_this))
+  (struct.set $typewildcards.TypeWildCards.OtherElement $$outer_this@typewildcards.TypeWildCards.OtherElement (local.get $this) (local.get $$outer_this))
   ;;@ typewildcards/TypeWildCards.java:107:24
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -1940,14 +1940,14 @@
  ;;@ typewildcards/TypeWildCards.java:107:24
  (block
   ;;@ typewildcards/TypeWildCards.java:107:24
-  (if (global.get $f_$initialized__typewildcards_TypeWildCards_OtherElement)
+  (if (global.get $$class-initialized@typewildcards.TypeWildCards.OtherElement)
    (then
     ;;@ typewildcards/TypeWildCards.java:107:24
     (return )
    )
   )
   ;;@ typewildcards/TypeWildCards.java:107:24
-  (global.set $f_$initialized__typewildcards_TypeWildCards_OtherElement (i32.const 1))
+  (global.set $$class-initialized@typewildcards.TypeWildCards.OtherElement (i32.const 1))
   ;;@ typewildcards/TypeWildCards.java:107:24
   (call $$clinit__void@java.lang.Object )
  )
@@ -1957,12 +1957,12 @@
 (func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.OtherElement
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__typewildcards_TypeWildCards_OtherElement))
+  (if (ref.is_null (global.get $$class@typewildcards.TypeWildCards.OtherElement))
    (then
-    (global.set $f_$class__typewildcards_TypeWildCards_OtherElement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.OtherElement) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@typewildcards.TypeWildCards.OtherElement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.OtherElement) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__typewildcards_TypeWildCards_OtherElement))
+  (return (global.get $$class@typewildcards.TypeWildCards.OtherElement))
  )
 )
 
@@ -1970,12 +1970,12 @@
 (func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.OtherElement
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|typewildcard...|__typewildcards_TypeWildCards_OtherElement))
+  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.OtherElement))
    (then
-    (global.set $f_$string_|typewildcard...|__typewildcards_TypeWildCards_OtherElement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$OtherElement")))
+    (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.OtherElement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$OtherElement")))
    )
   )
-  (return (global.get $f_$string_|typewildcard...|__typewildcards_TypeWildCards_OtherElement))
+  (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.OtherElement))
  )
 )
 
@@ -2013,14 +2013,14 @@
  ;;@ typewildcards/TypeWildCards.java:154:15
  (block
   ;;@ typewildcards/TypeWildCards.java:154:15
-  (if (global.get $f_$initialized__typewildcards_TypeWildCards_MultipleGenerics)
+  (if (global.get $$class-initialized@typewildcards.TypeWildCards.MultipleGenerics)
    (then
     ;;@ typewildcards/TypeWildCards.java:154:15
     (return )
    )
   )
   ;;@ typewildcards/TypeWildCards.java:154:15
-  (global.set $f_$initialized__typewildcards_TypeWildCards_MultipleGenerics (i32.const 1))
+  (global.set $$class-initialized@typewildcards.TypeWildCards.MultipleGenerics (i32.const 1))
   ;;@ typewildcards/TypeWildCards.java:154:15
   (call $$clinit__void@java.lang.Object )
  )
@@ -2030,12 +2030,12 @@
 (func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.MultipleGenerics
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__typewildcards_TypeWildCards_MultipleGenerics))
+  (if (ref.is_null (global.get $$class@typewildcards.TypeWildCards.MultipleGenerics))
    (then
-    (global.set $f_$class__typewildcards_TypeWildCards_MultipleGenerics (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.MultipleGenerics) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@typewildcards.TypeWildCards.MultipleGenerics (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.MultipleGenerics) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__typewildcards_TypeWildCards_MultipleGenerics))
+  (return (global.get $$class@typewildcards.TypeWildCards.MultipleGenerics))
  )
 )
 
@@ -2056,12 +2056,12 @@
 (func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.MultipleGenerics
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|typewildcard...|__typewildcards_TypeWildCards_MultipleGenerics))
+  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.MultipleGenerics))
    (then
-    (global.set $f_$string_|typewildcard...|__typewildcards_TypeWildCards_MultipleGenerics (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$MultipleGenerics")))
+    (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.MultipleGenerics (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$MultipleGenerics")))
    )
   )
-  (return (global.get $f_$string_|typewildcard...|__typewildcards_TypeWildCards_MultipleGenerics))
+  (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.MultipleGenerics))
  )
 )
 
@@ -2101,14 +2101,14 @@
  ;;@ typewildcards/TypeWildCards.java:38:6
  (block
   ;;@ typewildcards/TypeWildCards.java:38:6
-  (if (global.get $f_$initialized__typewildcards_RecursiveSubtype)
+  (if (global.get $$class-initialized@typewildcards.RecursiveSubtype)
    (then
     ;;@ typewildcards/TypeWildCards.java:38:6
     (return )
    )
   )
   ;;@ typewildcards/TypeWildCards.java:38:6
-  (global.set $f_$initialized__typewildcards_RecursiveSubtype (i32.const 1))
+  (global.set $$class-initialized@typewildcards.RecursiveSubtype (i32.const 1))
   ;;@ typewildcards/TypeWildCards.java:38:6
   (call $$clinit__void@typewildcards.RecursiveType )
  )
@@ -2118,12 +2118,12 @@
 (func $$getClassMetadata__java_lang_Class@typewildcards.RecursiveSubtype
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__typewildcards_RecursiveSubtype))
+  (if (ref.is_null (global.get $$class@typewildcards.RecursiveSubtype))
    (then
-    (global.set $f_$class__typewildcards_RecursiveSubtype (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.RecursiveSubtype) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typewildcards.RecursiveType) )))
+    (global.set $$class@typewildcards.RecursiveSubtype (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.RecursiveSubtype) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typewildcards.RecursiveType) )))
    )
   )
-  (return (global.get $f_$class__typewildcards_RecursiveSubtype))
+  (return (global.get $$class@typewildcards.RecursiveSubtype))
  )
 )
 
@@ -2144,12 +2144,12 @@
 (func $$getString_|typewildcard...|__java_lang_String@typewildcards.RecursiveSubtype
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|typewildcard...|__typewildcards_RecursiveSubtype))
+  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.RecursiveSubtype))
    (then
-    (global.set $f_$string_|typewildcard...|__typewildcards_RecursiveSubtype (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.RecursiveSubtype")))
+    (global.set $$string_|typewildcard...|@typewildcards.RecursiveSubtype (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.RecursiveSubtype")))
    )
   )
-  (return (global.get $f_$string_|typewildcard...|__typewildcards_RecursiveSubtype))
+  (return (global.get $$string_|typewildcard...|@typewildcards.RecursiveSubtype))
  )
 )
 
@@ -2162,7 +2162,7 @@
  ;;@ typewildcards/TypeWildCards.java:109:24
  (block
   ;;@ typewildcards/TypeWildCards.java:109:24
-  (struct.set $typewildcards.TypeWildCards.SubOtherElement $$outer_this__typewildcards_TypeWildCards_SubOtherElement (local.get $this) (local.get $$outer_this))
+  (struct.set $typewildcards.TypeWildCards.SubOtherElement $$outer_this@typewildcards.TypeWildCards.SubOtherElement (local.get $this) (local.get $$outer_this))
   ;;@ typewildcards/TypeWildCards.java:109:24
   (call $$ctor__typewildcards_TypeWildCards__void_$p_typewildcards_TypeWildCards_OtherElement@typewildcards.TypeWildCards.OtherElement (ref.as_non_null (local.get $this))(local.get $$outer_this))
  )
@@ -2173,14 +2173,14 @@
  ;;@ typewildcards/TypeWildCards.java:109:24
  (block
   ;;@ typewildcards/TypeWildCards.java:109:24
-  (if (global.get $f_$initialized__typewildcards_TypeWildCards_SubOtherElement)
+  (if (global.get $$class-initialized@typewildcards.TypeWildCards.SubOtherElement)
    (then
     ;;@ typewildcards/TypeWildCards.java:109:24
     (return )
    )
   )
   ;;@ typewildcards/TypeWildCards.java:109:24
-  (global.set $f_$initialized__typewildcards_TypeWildCards_SubOtherElement (i32.const 1))
+  (global.set $$class-initialized@typewildcards.TypeWildCards.SubOtherElement (i32.const 1))
   ;;@ typewildcards/TypeWildCards.java:109:24
   (call $$clinit__void@typewildcards.TypeWildCards.OtherElement )
  )
@@ -2190,12 +2190,12 @@
 (func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.SubOtherElement
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__typewildcards_TypeWildCards_SubOtherElement))
+  (if (ref.is_null (global.get $$class@typewildcards.TypeWildCards.SubOtherElement))
    (then
-    (global.set $f_$class__typewildcards_TypeWildCards_SubOtherElement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.SubOtherElement) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.OtherElement) )))
+    (global.set $$class@typewildcards.TypeWildCards.SubOtherElement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.SubOtherElement) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.OtherElement) )))
    )
   )
-  (return (global.get $f_$class__typewildcards_TypeWildCards_SubOtherElement))
+  (return (global.get $$class@typewildcards.TypeWildCards.SubOtherElement))
  )
 )
 
@@ -2203,12 +2203,12 @@
 (func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.SubOtherElement
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|typewildcard...|__typewildcards_TypeWildCards_SubOtherElement))
+  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.SubOtherElement))
    (then
-    (global.set $f_$string_|typewildcard...|__typewildcards_TypeWildCards_SubOtherElement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$SubOtherElement")))
+    (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.SubOtherElement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$SubOtherElement")))
    )
   )
-  (return (global.get $f_$string_|typewildcard...|__typewildcards_TypeWildCards_SubOtherElement))
+  (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.SubOtherElement))
  )
 )
 
@@ -2239,7 +2239,7 @@
  ;;@ typewildcards/TypeWildCards.java:133:8
  (block
   ;;@ typewildcards/TypeWildCards.java:133:8
-  (struct.set $typewildcards.TypeWildCards.Foo $$outer_this__typewildcards_TypeWildCards_Foo (local.get $this) (local.get $$outer_this))
+  (struct.set $typewildcards.TypeWildCards.Foo $$outer_this@typewildcards.TypeWildCards.Foo (local.get $this) (local.get $$outer_this))
   ;;@ typewildcards/TypeWildCards.java:133:8
   (call $$ctor__void_$p_typewildcards_GenericType@typewildcards.GenericType (ref.as_non_null (local.get $this)))
  )
@@ -2250,14 +2250,14 @@
  ;;@ typewildcards/TypeWildCards.java:133:8
  (block
   ;;@ typewildcards/TypeWildCards.java:133:8
-  (if (global.get $f_$initialized__typewildcards_TypeWildCards_Foo)
+  (if (global.get $$class-initialized@typewildcards.TypeWildCards.Foo)
    (then
     ;;@ typewildcards/TypeWildCards.java:133:8
     (return )
    )
   )
   ;;@ typewildcards/TypeWildCards.java:133:8
-  (global.set $f_$initialized__typewildcards_TypeWildCards_Foo (i32.const 1))
+  (global.set $$class-initialized@typewildcards.TypeWildCards.Foo (i32.const 1))
   ;;@ typewildcards/TypeWildCards.java:133:8
   (call $$clinit__void@typewildcards.GenericType )
  )
@@ -2267,12 +2267,12 @@
 (func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.Foo
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__typewildcards_TypeWildCards_Foo))
+  (if (ref.is_null (global.get $$class@typewildcards.TypeWildCards.Foo))
    (then
-    (global.set $f_$class__typewildcards_TypeWildCards_Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.Foo) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typewildcards.GenericType) )))
+    (global.set $$class@typewildcards.TypeWildCards.Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.Foo) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typewildcards.GenericType) )))
    )
   )
-  (return (global.get $f_$class__typewildcards_TypeWildCards_Foo))
+  (return (global.get $$class@typewildcards.TypeWildCards.Foo))
  )
 )
 
@@ -2293,11 +2293,11 @@
 (func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.Foo
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|typewildcard...|__typewildcards_TypeWildCards_Foo))
+  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.Foo))
    (then
-    (global.set $f_$string_|typewildcard...|__typewildcards_TypeWildCards_Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$Foo")))
+    (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$Foo")))
    )
   )
-  (return (global.get $f_$string_|typewildcard...|__typewildcards_TypeWildCards_Foo))
+  (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.Foo))
  )
 )

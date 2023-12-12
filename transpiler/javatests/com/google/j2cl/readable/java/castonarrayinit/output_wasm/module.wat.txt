@@ -2,7 +2,7 @@
  (type $castonarrayinit.CastOnArrayInit (sub $java.lang.Object (struct
   (field $vtable (ref $castonarrayinit.CastOnArrayInit.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $castonarrayinit.CastOnArrayInit.vtable (sub $java.lang.Object.vtable (struct
@@ -18,7 +18,7 @@
  (type $castonarrayinit.CastOnArrayInit.Foo (sub $java.lang.Object (struct
   (field $vtable (ref $castonarrayinit.CastOnArrayInit.Foo.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $castonarrayinit.CastOnArrayInit.Foo.vtable (sub $java.lang.Object.vtable (struct
@@ -53,24 +53,24 @@
 )
 
 ;;; Code for castonarrayinit.CastOnArrayInit [static fields]
-(global $f_$initialized__castonarrayinit_CastOnArrayInit (mut i32)
+(global $$class-initialized@castonarrayinit.CastOnArrayInit (mut i32)
  (i32.const 0)
 )
-(global $f_$class__castonarrayinit_CastOnArrayInit (mut (ref null $java.lang.Class))
+(global $$class@castonarrayinit.CastOnArrayInit (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|castonarrayi...|__castonarrayinit_CastOnArrayInit (mut (ref null $java.lang.String))
+(global $$string_|castonarrayi...|@castonarrayinit.CastOnArrayInit (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for castonarrayinit.CastOnArrayInit.Foo [static fields]
-(global $f_$initialized__castonarrayinit_CastOnArrayInit_Foo (mut i32)
+(global $$class-initialized@castonarrayinit.CastOnArrayInit.Foo (mut i32)
  (i32.const 0)
 )
-(global $f_$class__castonarrayinit_CastOnArrayInit_Foo (mut (ref null $java.lang.Class))
+(global $$class@castonarrayinit.CastOnArrayInit.Foo (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|castonarrayi...|__castonarrayinit_CastOnArrayInit_Foo (mut (ref null $java.lang.String))
+(global $$string_|castonarrayi...|@castonarrayinit.CastOnArrayInit.Foo (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -135,14 +135,14 @@
  ;;@ castonarrayinit/CastOnArrayInit.java:18:13
  (block
   ;;@ castonarrayinit/CastOnArrayInit.java:18:13
-  (if (global.get $f_$initialized__castonarrayinit_CastOnArrayInit)
+  (if (global.get $$class-initialized@castonarrayinit.CastOnArrayInit)
    (then
     ;;@ castonarrayinit/CastOnArrayInit.java:18:13
     (return )
    )
   )
   ;;@ castonarrayinit/CastOnArrayInit.java:18:13
-  (global.set $f_$initialized__castonarrayinit_CastOnArrayInit (i32.const 1))
+  (global.set $$class-initialized@castonarrayinit.CastOnArrayInit (i32.const 1))
   ;;@ castonarrayinit/CastOnArrayInit.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -152,12 +152,12 @@
 (func $$getClassMetadata__java_lang_Class@castonarrayinit.CastOnArrayInit
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__castonarrayinit_CastOnArrayInit))
+  (if (ref.is_null (global.get $$class@castonarrayinit.CastOnArrayInit))
    (then
-    (global.set $f_$class__castonarrayinit_CastOnArrayInit (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|castonarrayi...|__java_lang_String (ref.func $$getString_|castonarrayi...|__java_lang_String@castonarrayinit.CastOnArrayInit) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@castonarrayinit.CastOnArrayInit (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|castonarrayi...|__java_lang_String (ref.func $$getString_|castonarrayi...|__java_lang_String@castonarrayinit.CastOnArrayInit) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__castonarrayinit_CastOnArrayInit))
+  (return (global.get $$class@castonarrayinit.CastOnArrayInit))
  )
 )
 
@@ -178,12 +178,12 @@
 (func $$getString_|castonarrayi...|__java_lang_String@castonarrayinit.CastOnArrayInit
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|castonarrayi...|__castonarrayinit_CastOnArrayInit))
+  (if (ref.is_null (global.get $$string_|castonarrayi...|@castonarrayinit.CastOnArrayInit))
    (then
-    (global.set $f_$string_|castonarrayi...|__castonarrayinit_CastOnArrayInit (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "castonarrayinit.CastOnArrayInit")))
+    (global.set $$string_|castonarrayi...|@castonarrayinit.CastOnArrayInit (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "castonarrayinit.CastOnArrayInit")))
    )
   )
-  (return (global.get $f_$string_|castonarrayi...|__castonarrayinit_CastOnArrayInit))
+  (return (global.get $$string_|castonarrayi...|@castonarrayinit.CastOnArrayInit))
  )
 )
 
@@ -221,14 +221,14 @@
  ;;@ castonarrayinit/CastOnArrayInit.java:19:22
  (block
   ;;@ castonarrayinit/CastOnArrayInit.java:19:22
-  (if (global.get $f_$initialized__castonarrayinit_CastOnArrayInit_Foo)
+  (if (global.get $$class-initialized@castonarrayinit.CastOnArrayInit.Foo)
    (then
     ;;@ castonarrayinit/CastOnArrayInit.java:19:22
     (return )
    )
   )
   ;;@ castonarrayinit/CastOnArrayInit.java:19:22
-  (global.set $f_$initialized__castonarrayinit_CastOnArrayInit_Foo (i32.const 1))
+  (global.set $$class-initialized@castonarrayinit.CastOnArrayInit.Foo (i32.const 1))
   ;;@ castonarrayinit/CastOnArrayInit.java:19:22
   (call $$clinit__void@java.lang.Object )
  )
@@ -238,12 +238,12 @@
 (func $$getClassMetadata__java_lang_Class@castonarrayinit.CastOnArrayInit.Foo
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__castonarrayinit_CastOnArrayInit_Foo))
+  (if (ref.is_null (global.get $$class@castonarrayinit.CastOnArrayInit.Foo))
    (then
-    (global.set $f_$class__castonarrayinit_CastOnArrayInit_Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|castonarrayi...|__java_lang_String (ref.func $$getString_|castonarrayi...|__java_lang_String@castonarrayinit.CastOnArrayInit.Foo) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@castonarrayinit.CastOnArrayInit.Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|castonarrayi...|__java_lang_String (ref.func $$getString_|castonarrayi...|__java_lang_String@castonarrayinit.CastOnArrayInit.Foo) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__castonarrayinit_CastOnArrayInit_Foo))
+  (return (global.get $$class@castonarrayinit.CastOnArrayInit.Foo))
  )
 )
 
@@ -264,11 +264,11 @@
 (func $$getString_|castonarrayi...|__java_lang_String@castonarrayinit.CastOnArrayInit.Foo
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|castonarrayi...|__castonarrayinit_CastOnArrayInit_Foo))
+  (if (ref.is_null (global.get $$string_|castonarrayi...|@castonarrayinit.CastOnArrayInit.Foo))
    (then
-    (global.set $f_$string_|castonarrayi...|__castonarrayinit_CastOnArrayInit_Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "castonarrayinit.CastOnArrayInit$Foo")))
+    (global.set $$string_|castonarrayi...|@castonarrayinit.CastOnArrayInit.Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "castonarrayinit.CastOnArrayInit$Foo")))
    )
   )
-  (return (global.get $f_$string_|castonarrayi...|__castonarrayinit_CastOnArrayInit_Foo))
+  (return (global.get $$string_|castonarrayi...|@castonarrayinit.CastOnArrayInit.Foo))
  )
 )

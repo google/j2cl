@@ -13,8 +13,8 @@
  (type $packageinfosubpackage.Foo (sub $java.lang.Object (struct
   (field $vtable (ref $packageinfosubpackage.Foo.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $f_nativeBar__packageinfosubpackage_Foo_ (mut (ref null extern)))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  (field $nativeBar@packageinfosubpackage.Foo (mut (ref null extern)))
   ))
  )
  (type $packageinfosubpackage.Foo.vtable (sub $java.lang.Object.vtable (struct
@@ -32,7 +32,7 @@
  (type $packageinfosubpackage.subpackage.Bar (sub $java.lang.Object (struct
   (field $vtable (ref $packageinfosubpackage.subpackage.Bar.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $packageinfosubpackage.subpackage.Bar.vtable (sub $java.lang.Object.vtable (struct
@@ -74,37 +74,37 @@
 )
 
 ;;; Code for packageinfosubpackage.Foo [static fields]
-(global $f_$initialized__packageinfosubpackage_Foo (mut i32)
+(global $$class-initialized@packageinfosubpackage.Foo (mut i32)
  (i32.const 0)
 )
-(global $f_$class__packageinfosubpackage_Foo (mut (ref null $java.lang.Class))
+(global $$class@packageinfosubpackage.Foo (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|packageinfos...|__packageinfosubpackage_Foo (mut (ref null $java.lang.String))
+(global $$string_|packageinfos...|@packageinfosubpackage.Foo (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for packageinfosubpackage.Foo.NativeBar [static fields]
 
 ;;; Code for packageinfosubpackage.Foo.NativeBar.$Overlay [static fields]
-(global $f_$initialized__packageinfosubpackage_Foo_NativeBar_$Overlay (mut i32)
+(global $$class-initialized@packageinfosubpackage.Foo.NativeBar.$Overlay (mut i32)
  (i32.const 0)
 )
-(global $f_$class__packageinfosubpackage_Foo_NativeBar_$Overlay (mut (ref null $java.lang.Class))
+(global $$class@packageinfosubpackage.Foo.NativeBar.$Overlay (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|packageinfos...|__packageinfosubpackage_Foo_NativeBar_$Overlay (mut (ref null $java.lang.String))
+(global $$string_|packageinfos...|@packageinfosubpackage.Foo.NativeBar.$Overlay (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for packageinfosubpackage.subpackage.Bar [static fields]
-(global $f_$initialized__packageinfosubpackage_subpackage_Bar (mut i32)
+(global $$class-initialized@packageinfosubpackage.subpackage.Bar (mut i32)
  (i32.const 0)
 )
-(global $f_$class__packageinfosubpackage_subpackage_Bar (mut (ref null $java.lang.Class))
+(global $$class@packageinfosubpackage.subpackage.Bar (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|packageinfos...|__packageinfosubpackage_subpackage_Bar (mut (ref null $java.lang.String))
+(global $$string_|packageinfos...|@packageinfosubpackage.subpackage.Bar (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -115,14 +115,14 @@
  ;;@ packageinfosubpackage/Foo.java:23:23
  (block
   ;;@ packageinfosubpackage/Foo.java:23:23
-  (if (global.get $f_$initialized__packageinfosubpackage_Foo_NativeBar_$Overlay)
+  (if (global.get $$class-initialized@packageinfosubpackage.Foo.NativeBar.$Overlay)
    (then
     ;;@ packageinfosubpackage/Foo.java:23:23
     (return )
    )
   )
   ;;@ packageinfosubpackage/Foo.java:23:23
-  (global.set $f_$initialized__packageinfosubpackage_Foo_NativeBar_$Overlay (i32.const 1))
+  (global.set $$class-initialized@packageinfosubpackage.Foo.NativeBar.$Overlay (i32.const 1))
  )
 )
 
@@ -130,12 +130,12 @@
 (func $$getClassMetadata__java_lang_Class@packageinfosubpackage.Foo.NativeBar.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__packageinfosubpackage_Foo_NativeBar_$Overlay))
+  (if (ref.is_null (global.get $$class@packageinfosubpackage.Foo.NativeBar.$Overlay))
    (then
-    (global.set $f_$class__packageinfosubpackage_Foo_NativeBar_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|packageinfos...|__java_lang_String (ref.func $$getString_|packageinfos...|__java_lang_String@packageinfosubpackage.Foo.NativeBar.$Overlay) )(ref.null $java.lang.Class)))
+    (global.set $$class@packageinfosubpackage.Foo.NativeBar.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|packageinfos...|__java_lang_String (ref.func $$getString_|packageinfos...|__java_lang_String@packageinfosubpackage.Foo.NativeBar.$Overlay) )(ref.null $java.lang.Class)))
    )
   )
-  (return (global.get $f_$class__packageinfosubpackage_Foo_NativeBar_$Overlay))
+  (return (global.get $$class@packageinfosubpackage.Foo.NativeBar.$Overlay))
  )
 )
 
@@ -156,12 +156,12 @@
 (func $$getString_|packageinfos...|__java_lang_String@packageinfosubpackage.Foo.NativeBar.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|packageinfos...|__packageinfosubpackage_Foo_NativeBar_$Overlay))
+  (if (ref.is_null (global.get $$string_|packageinfos...|@packageinfosubpackage.Foo.NativeBar.$Overlay))
    (then
-    (global.set $f_$string_|packageinfos...|__packageinfosubpackage_Foo_NativeBar_$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "packageinfosubpackage.Foo$NativeBar$$Overlay")))
+    (global.set $$string_|packageinfos...|@packageinfosubpackage.Foo.NativeBar.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "packageinfosubpackage.Foo$NativeBar$$Overlay")))
    )
   )
-  (return (global.get $f_$string_|packageinfos...|__packageinfosubpackage_Foo_NativeBar_$Overlay))
+  (return (global.get $$string_|packageinfos...|@packageinfosubpackage.Foo.NativeBar.$Overlay))
  )
 )
 
@@ -202,7 +202,7 @@
  ;;@ packageinfosubpackage/Foo.java:20:13
  (block
   ;;@ packageinfosubpackage/Foo.java:28:2
-  (struct.set $packageinfosubpackage.Foo $f_nativeBar__packageinfosubpackage_Foo_ (local.get $this) (call $m_<init>__@packageinfosubpackage.Foo.NativeBar ))
+  (struct.set $packageinfosubpackage.Foo $nativeBar@packageinfosubpackage.Foo (local.get $this) (call $m_<init>__@packageinfosubpackage.Foo.NativeBar ))
  )
 )
 
@@ -211,14 +211,14 @@
  ;;@ packageinfosubpackage/Foo.java:20:13
  (block
   ;;@ packageinfosubpackage/Foo.java:20:13
-  (if (global.get $f_$initialized__packageinfosubpackage_Foo)
+  (if (global.get $$class-initialized@packageinfosubpackage.Foo)
    (then
     ;;@ packageinfosubpackage/Foo.java:20:13
     (return )
    )
   )
   ;;@ packageinfosubpackage/Foo.java:20:13
-  (global.set $f_$initialized__packageinfosubpackage_Foo (i32.const 1))
+  (global.set $$class-initialized@packageinfosubpackage.Foo (i32.const 1))
   ;;@ packageinfosubpackage/Foo.java:20:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -228,12 +228,12 @@
 (func $$getClassMetadata__java_lang_Class@packageinfosubpackage.Foo
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__packageinfosubpackage_Foo))
+  (if (ref.is_null (global.get $$class@packageinfosubpackage.Foo))
    (then
-    (global.set $f_$class__packageinfosubpackage_Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|packageinfos...|__java_lang_String (ref.func $$getString_|packageinfos...|__java_lang_String@packageinfosubpackage.Foo) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@packageinfosubpackage.Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|packageinfos...|__java_lang_String (ref.func $$getString_|packageinfos...|__java_lang_String@packageinfosubpackage.Foo) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__packageinfosubpackage_Foo))
+  (return (global.get $$class@packageinfosubpackage.Foo))
  )
 )
 
@@ -254,12 +254,12 @@
 (func $$getString_|packageinfos...|__java_lang_String@packageinfosubpackage.Foo
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|packageinfos...|__packageinfosubpackage_Foo))
+  (if (ref.is_null (global.get $$string_|packageinfos...|@packageinfosubpackage.Foo))
    (then
-    (global.set $f_$string_|packageinfos...|__packageinfosubpackage_Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "packageinfosubpackage.Foo")))
+    (global.set $$string_|packageinfos...|@packageinfosubpackage.Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "packageinfosubpackage.Foo")))
    )
   )
-  (return (global.get $f_$string_|packageinfos...|__packageinfosubpackage_Foo))
+  (return (global.get $$string_|packageinfos...|@packageinfosubpackage.Foo))
  )
 )
 
@@ -304,14 +304,14 @@
  ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
  (block
   ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
-  (if (global.get $f_$initialized__packageinfosubpackage_subpackage_Bar)
+  (if (global.get $$class-initialized@packageinfosubpackage.subpackage.Bar)
    (then
     ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
     (return )
    )
   )
   ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
-  (global.set $f_$initialized__packageinfosubpackage_subpackage_Bar (i32.const 1))
+  (global.set $$class-initialized@packageinfosubpackage.subpackage.Bar (i32.const 1))
   ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -321,12 +321,12 @@
 (func $$getClassMetadata__java_lang_Class@packageinfosubpackage.subpackage.Bar
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__packageinfosubpackage_subpackage_Bar))
+  (if (ref.is_null (global.get $$class@packageinfosubpackage.subpackage.Bar))
    (then
-    (global.set $f_$class__packageinfosubpackage_subpackage_Bar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|packageinfos...|__java_lang_String (ref.func $$getString_|packageinfos...|__java_lang_String@packageinfosubpackage.subpackage.Bar) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@packageinfosubpackage.subpackage.Bar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|packageinfos...|__java_lang_String (ref.func $$getString_|packageinfos...|__java_lang_String@packageinfosubpackage.subpackage.Bar) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__packageinfosubpackage_subpackage_Bar))
+  (return (global.get $$class@packageinfosubpackage.subpackage.Bar))
  )
 )
 
@@ -347,11 +347,11 @@
 (func $$getString_|packageinfos...|__java_lang_String@packageinfosubpackage.subpackage.Bar
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|packageinfos...|__packageinfosubpackage_subpackage_Bar))
+  (if (ref.is_null (global.get $$string_|packageinfos...|@packageinfosubpackage.subpackage.Bar))
    (then
-    (global.set $f_$string_|packageinfos...|__packageinfosubpackage_subpackage_Bar (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "packageinfosubpackage.subpackage.Bar")))
+    (global.set $$string_|packageinfos...|@packageinfosubpackage.subpackage.Bar (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "packageinfosubpackage.subpackage.Bar")))
    )
   )
-  (return (global.get $f_$string_|packageinfos...|__packageinfosubpackage_subpackage_Bar))
+  (return (global.get $$string_|packageinfos...|@packageinfosubpackage.subpackage.Bar))
  )
 )

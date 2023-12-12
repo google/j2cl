@@ -2,7 +2,7 @@
  (type $javascriptkeywords.JSKeyWords (sub $java.lang.Object (struct
   (field $vtable (ref $javascriptkeywords.JSKeyWords.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $javascriptkeywords.JSKeyWords.vtable (sub $java.lang.Object.vtable (struct
@@ -28,13 +28,13 @@
 )
 
 ;;; Code for javascriptkeywords.JSKeyWords [static fields]
-(global $f_$initialized__javascriptkeywords_JSKeyWords (mut i32)
+(global $$class-initialized@javascriptkeywords.JSKeyWords (mut i32)
  (i32.const 0)
 )
-(global $f_$class__javascriptkeywords_JSKeyWords (mut (ref null $java.lang.Class))
+(global $$class@javascriptkeywords.JSKeyWords (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|javascriptke...|__javascriptkeywords_JSKeyWords (mut (ref null $java.lang.String))
+(global $$string_|javascriptke...|@javascriptkeywords.JSKeyWords (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -91,14 +91,14 @@
  ;;@ javascriptkeywords/JSKeyWords.java:18:13
  (block
   ;;@ javascriptkeywords/JSKeyWords.java:18:13
-  (if (global.get $f_$initialized__javascriptkeywords_JSKeyWords)
+  (if (global.get $$class-initialized@javascriptkeywords.JSKeyWords)
    (then
     ;;@ javascriptkeywords/JSKeyWords.java:18:13
     (return )
    )
   )
   ;;@ javascriptkeywords/JSKeyWords.java:18:13
-  (global.set $f_$initialized__javascriptkeywords_JSKeyWords (i32.const 1))
+  (global.set $$class-initialized@javascriptkeywords.JSKeyWords (i32.const 1))
   ;;@ javascriptkeywords/JSKeyWords.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -108,12 +108,12 @@
 (func $$getClassMetadata__java_lang_Class@javascriptkeywords.JSKeyWords
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__javascriptkeywords_JSKeyWords))
+  (if (ref.is_null (global.get $$class@javascriptkeywords.JSKeyWords))
    (then
-    (global.set $f_$class__javascriptkeywords_JSKeyWords (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|javascriptke...|__java_lang_String (ref.func $$getString_|javascriptke...|__java_lang_String@javascriptkeywords.JSKeyWords) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@javascriptkeywords.JSKeyWords (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|javascriptke...|__java_lang_String (ref.func $$getString_|javascriptke...|__java_lang_String@javascriptkeywords.JSKeyWords) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__javascriptkeywords_JSKeyWords))
+  (return (global.get $$class@javascriptkeywords.JSKeyWords))
  )
 )
 
@@ -134,11 +134,11 @@
 (func $$getString_|javascriptke...|__java_lang_String@javascriptkeywords.JSKeyWords
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|javascriptke...|__javascriptkeywords_JSKeyWords))
+  (if (ref.is_null (global.get $$string_|javascriptke...|@javascriptkeywords.JSKeyWords))
    (then
-    (global.set $f_$string_|javascriptke...|__javascriptkeywords_JSKeyWords (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "javascriptkeywords.JSKeyWords")))
+    (global.set $$string_|javascriptke...|@javascriptkeywords.JSKeyWords (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "javascriptkeywords.JSKeyWords")))
    )
   )
-  (return (global.get $f_$string_|javascriptke...|__javascriptkeywords_JSKeyWords))
+  (return (global.get $$string_|javascriptke...|@javascriptkeywords.JSKeyWords))
  )
 )

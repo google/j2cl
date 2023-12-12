@@ -15,8 +15,8 @@
  (type $nestednativetype.NativeArray.1 (sub $java.lang.Object (struct
   (field $vtable (ref $nestednativetype.NativeArray.1.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $$outer_this__nestednativetype_NativeArray_1 (mut (ref null extern)))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  (field $$outer_this@nestednativetype.NativeArray.1 (mut (ref null extern)))
   ))
  )
  (type $nestednativetype.NativeArray.1.vtable (sub $java.lang.Object.vtable (struct
@@ -49,24 +49,24 @@
 ;;; Code for nestednativetype.NativeArray [static fields]
 
 ;;; Code for nestednativetype.NativeArray.1 [static fields]
-(global $f_$initialized__nestednativetype_NativeArray_1 (mut i32)
+(global $$class-initialized@nestednativetype.NativeArray.1 (mut i32)
  (i32.const 0)
 )
-(global $f_$class__nestednativetype_NativeArray_1 (mut (ref null $java.lang.Class))
+(global $$class@nestednativetype.NativeArray.1 (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|nestednative...|__nestednativetype_NativeArray_1 (mut (ref null $java.lang.String))
+(global $$string_|nestednative...|@nestednativetype.NativeArray.1 (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for nestednativetype.NativeArray.$Overlay [static fields]
-(global $f_$initialized__nestednativetype_NativeArray_$Overlay (mut i32)
+(global $$class-initialized@nestednativetype.NativeArray.$Overlay (mut i32)
  (i32.const 0)
 )
-(global $f_$class__nestednativetype_NativeArray_$Overlay (mut (ref null $java.lang.Class))
+(global $$class@nestednativetype.NativeArray.$Overlay (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|nestednative...|__nestednativetype_NativeArray_$Overlay (mut (ref null $java.lang.String))
+(global $$string_|nestednative...|@nestednativetype.NativeArray.$Overlay (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -90,14 +90,14 @@
  ;;@ nestednativetype/NativeArray.java:23:19
  (block
   ;;@ nestednativetype/NativeArray.java:23:19
-  (if (global.get $f_$initialized__nestednativetype_NativeArray_$Overlay)
+  (if (global.get $$class-initialized@nestednativetype.NativeArray.$Overlay)
    (then
     ;;@ nestednativetype/NativeArray.java:23:19
     (return )
    )
   )
   ;;@ nestednativetype/NativeArray.java:23:19
-  (global.set $f_$initialized__nestednativetype_NativeArray_$Overlay (i32.const 1))
+  (global.set $$class-initialized@nestednativetype.NativeArray.$Overlay (i32.const 1))
  )
 )
 
@@ -105,12 +105,12 @@
 (func $$getClassMetadata__java_lang_Class@nestednativetype.NativeArray.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__nestednativetype_NativeArray_$Overlay))
+  (if (ref.is_null (global.get $$class@nestednativetype.NativeArray.$Overlay))
    (then
-    (global.set $f_$class__nestednativetype_NativeArray_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nestednative...|__java_lang_String (ref.func $$getString_|nestednative...|__java_lang_String@nestednativetype.NativeArray.$Overlay) )(ref.null $java.lang.Class)))
+    (global.set $$class@nestednativetype.NativeArray.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nestednative...|__java_lang_String (ref.func $$getString_|nestednative...|__java_lang_String@nestednativetype.NativeArray.$Overlay) )(ref.null $java.lang.Class)))
    )
   )
-  (return (global.get $f_$class__nestednativetype_NativeArray_$Overlay))
+  (return (global.get $$class@nestednativetype.NativeArray.$Overlay))
  )
 )
 
@@ -131,12 +131,12 @@
 (func $$getString_|nestednative...|__java_lang_String@nestednativetype.NativeArray.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|nestednative...|__nestednativetype_NativeArray_$Overlay))
+  (if (ref.is_null (global.get $$string_|nestednative...|@nestednativetype.NativeArray.$Overlay))
    (then
-    (global.set $f_$string_|nestednative...|__nestednativetype_NativeArray_$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nestednativetype.NativeArray$$Overlay")))
+    (global.set $$string_|nestednative...|@nestednativetype.NativeArray.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nestednativetype.NativeArray$$Overlay")))
    )
   )
-  (return (global.get $f_$string_|nestednative...|__nestednativetype_NativeArray_$Overlay))
+  (return (global.get $$string_|nestednative...|@nestednativetype.NativeArray.$Overlay))
  )
 )
 
@@ -174,7 +174,7 @@
  ;;@ nestednativetype/NativeArray.java:26:24
  (block
   ;;@ nestednativetype/NativeArray.java:26:24
-  (struct.set $nestednativetype.NativeArray.1 $$outer_this__nestednativetype_NativeArray_1 (local.get $this) (local.get $$outer_this))
+  (struct.set $nestednativetype.NativeArray.1 $$outer_this@nestednativetype.NativeArray.1 (local.get $this) (local.get $$outer_this))
   ;;@ nestednativetype/NativeArray.java:26:24
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -185,14 +185,14 @@
  ;;@ nestednativetype/NativeArray.java:26:24
  (block
   ;;@ nestednativetype/NativeArray.java:26:24
-  (if (global.get $f_$initialized__nestednativetype_NativeArray_1)
+  (if (global.get $$class-initialized@nestednativetype.NativeArray.1)
    (then
     ;;@ nestednativetype/NativeArray.java:26:24
     (return )
    )
   )
   ;;@ nestednativetype/NativeArray.java:26:24
-  (global.set $f_$initialized__nestednativetype_NativeArray_1 (i32.const 1))
+  (global.set $$class-initialized@nestednativetype.NativeArray.1 (i32.const 1))
   ;;@ nestednativetype/NativeArray.java:26:24
   (call $$clinit__void@java.lang.Object )
  )
@@ -202,12 +202,12 @@
 (func $$getClassMetadata__java_lang_Class@nestednativetype.NativeArray.1
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__nestednativetype_NativeArray_1))
+  (if (ref.is_null (global.get $$class@nestednativetype.NativeArray.1))
    (then
-    (global.set $f_$class__nestednativetype_NativeArray_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nestednative...|__java_lang_String (ref.func $$getString_|nestednative...|__java_lang_String@nestednativetype.NativeArray.1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@nestednativetype.NativeArray.1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nestednative...|__java_lang_String (ref.func $$getString_|nestednative...|__java_lang_String@nestednativetype.NativeArray.1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__nestednativetype_NativeArray_1))
+  (return (global.get $$class@nestednativetype.NativeArray.1))
  )
 )
 
@@ -228,11 +228,11 @@
 (func $$getString_|nestednative...|__java_lang_String@nestednativetype.NativeArray.1
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|nestednative...|__nestednativetype_NativeArray_1))
+  (if (ref.is_null (global.get $$string_|nestednative...|@nestednativetype.NativeArray.1))
    (then
-    (global.set $f_$string_|nestednative...|__nestednativetype_NativeArray_1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nestednativetype.NativeArray$1")))
+    (global.set $$string_|nestednative...|@nestednativetype.NativeArray.1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nestednativetype.NativeArray$1")))
    )
   )
-  (return (global.get $f_$string_|nestednative...|__nestednativetype_NativeArray_1))
+  (return (global.get $$string_|nestednative...|@nestednativetype.NativeArray.1))
  )
 )

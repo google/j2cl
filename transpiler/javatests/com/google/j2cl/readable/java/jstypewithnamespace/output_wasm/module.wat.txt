@@ -2,7 +2,7 @@
  (type $jstypewithnamespace.JsTypeWithNamespace (sub $java.lang.Object (struct
   (field $vtable (ref $jstypewithnamespace.JsTypeWithNamespace.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $jstypewithnamespace.JsTypeWithNamespace.vtable (sub $java.lang.Object.vtable (struct
@@ -26,13 +26,13 @@
 )
 
 ;;; Code for jstypewithnamespace.JsTypeWithNamespace [static fields]
-(global $f_$initialized__jstypewithnamespace_JsTypeWithNamespace (mut i32)
+(global $$class-initialized@jstypewithnamespace.JsTypeWithNamespace (mut i32)
  (i32.const 0)
 )
-(global $f_$class__jstypewithnamespace_JsTypeWithNamespace (mut (ref null $java.lang.Class))
+(global $$class@jstypewithnamespace.JsTypeWithNamespace (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|jstypewithna...|__jstypewithnamespace_JsTypeWithNamespace (mut (ref null $java.lang.String))
+(global $$string_|jstypewithna...|@jstypewithnamespace.JsTypeWithNamespace (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -70,14 +70,14 @@
  ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
  (block
   ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
-  (if (global.get $f_$initialized__jstypewithnamespace_JsTypeWithNamespace)
+  (if (global.get $$class-initialized@jstypewithnamespace.JsTypeWithNamespace)
    (then
     ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
     (return )
    )
   )
   ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
-  (global.set $f_$initialized__jstypewithnamespace_JsTypeWithNamespace (i32.const 1))
+  (global.set $$class-initialized@jstypewithnamespace.JsTypeWithNamespace (i32.const 1))
   ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -87,12 +87,12 @@
 (func $$getClassMetadata__java_lang_Class@jstypewithnamespace.JsTypeWithNamespace
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__jstypewithnamespace_JsTypeWithNamespace))
+  (if (ref.is_null (global.get $$class@jstypewithnamespace.JsTypeWithNamespace))
    (then
-    (global.set $f_$class__jstypewithnamespace_JsTypeWithNamespace (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jstypewithna...|__java_lang_String (ref.func $$getString_|jstypewithna...|__java_lang_String@jstypewithnamespace.JsTypeWithNamespace) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@jstypewithnamespace.JsTypeWithNamespace (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jstypewithna...|__java_lang_String (ref.func $$getString_|jstypewithna...|__java_lang_String@jstypewithnamespace.JsTypeWithNamespace) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__jstypewithnamespace_JsTypeWithNamespace))
+  (return (global.get $$class@jstypewithnamespace.JsTypeWithNamespace))
  )
 )
 
@@ -113,11 +113,11 @@
 (func $$getString_|jstypewithna...|__java_lang_String@jstypewithnamespace.JsTypeWithNamespace
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|jstypewithna...|__jstypewithnamespace_JsTypeWithNamespace))
+  (if (ref.is_null (global.get $$string_|jstypewithna...|@jstypewithnamespace.JsTypeWithNamespace))
    (then
-    (global.set $f_$string_|jstypewithna...|__jstypewithnamespace_JsTypeWithNamespace (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jstypewithnamespace.JsTypeWithNamespace")))
+    (global.set $$string_|jstypewithna...|@jstypewithnamespace.JsTypeWithNamespace (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jstypewithnamespace.JsTypeWithNamespace")))
    )
   )
-  (return (global.get $f_$string_|jstypewithna...|__jstypewithnamespace_JsTypeWithNamespace))
+  (return (global.get $$string_|jstypewithna...|@jstypewithnamespace.JsTypeWithNamespace))
  )
 )

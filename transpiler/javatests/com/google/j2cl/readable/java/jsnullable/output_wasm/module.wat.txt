@@ -2,14 +2,14 @@
  (type $jsnullable.Main (sub $java.lang.Object (struct
   (field $vtable (ref $jsnullable.Main.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $f_f10__jsnullable_Main_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
-  (field $f_f1__jsnullable_Main_ (mut (ref null $java.lang.String)))
-  (field $f_f2__jsnullable_Main_ (mut (ref null $java.lang.String)))
-  (field $f_f4__jsnullable_Main_ (mut (ref null $java.lang.Object)))
-  (field $f_f5__jsnullable_Main_ (mut (ref null $java.lang.Object)))
-  (field $f_f6__jsnullable_Main_ (mut (ref null $java.lang.Object)))
-  (field $f_f9__jsnullable_Main_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  (field $f10@jsnullable.Main (mut (ref null $javaemul.internal.WasmArray.OfObject)))
+  (field $f1@jsnullable.Main (mut (ref null $java.lang.String)))
+  (field $f2@jsnullable.Main (mut (ref null $java.lang.String)))
+  (field $f4@jsnullable.Main (mut (ref null $java.lang.Object)))
+  (field $f5@jsnullable.Main (mut (ref null $java.lang.Object)))
+  (field $f6@jsnullable.Main (mut (ref null $java.lang.Object)))
+  (field $f9@jsnullable.Main (mut (ref null $javaemul.internal.WasmArray.OfObject)))
   ))
  )
  (type $jsnullable.Main.vtable (sub $java.lang.Object.vtable (struct
@@ -33,16 +33,16 @@
 )
 
 ;;; Code for jsnullable.Main [static fields]
-(global $f_$initialized__jsnullable_Main (mut i32)
+(global $$class-initialized@jsnullable.Main (mut i32)
  (i32.const 0)
 )
-(global $f_$class__jsnullable_Main (mut (ref null $java.lang.Class))
+(global $$class@jsnullable.Main (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|Hello|__jsnullable_Main (mut (ref null $java.lang.String))
+(global $$string_|Hello|@jsnullable.Main (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
-(global $f_$string_|jsnullable.Main|__jsnullable_Main (mut (ref null $java.lang.String))
+(global $$string_|jsnullable.Main|@jsnullable.Main (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -93,19 +93,19 @@
  ;;@ jsnullable/Main.java:24:13
  (block
   ;;@ jsnullable/Main.java:25:2
-  (struct.set $jsnullable.Main $f_f1__jsnullable_Main_ (local.get $this) (call $function.no.side.effects.$getString_|Hello|__java_lang_String (ref.func $$getString_|Hello|__java_lang_String@jsnullable.Main) ))
+  (struct.set $jsnullable.Main $f1@jsnullable.Main (local.get $this) (call $function.no.side.effects.$getString_|Hello|__java_lang_String (ref.func $$getString_|Hello|__java_lang_String@jsnullable.Main) ))
   ;;@ jsnullable/Main.java:26:2
-  (struct.set $jsnullable.Main $f_f2__jsnullable_Main_ (local.get $this) (ref.null $java.lang.String))
+  (struct.set $jsnullable.Main $f2@jsnullable.Main (local.get $this) (ref.null $java.lang.String))
   ;;@ jsnullable/Main.java:27:2
-  (struct.set $jsnullable.Main $f_f4__jsnullable_Main_ (local.get $this) (call $$create__@java.util.ArrayList ))
+  (struct.set $jsnullable.Main $f4@jsnullable.Main (local.get $this) (call $$create__@java.util.ArrayList ))
   ;;@ jsnullable/Main.java:28:2
-  (struct.set $jsnullable.Main $f_f5__jsnullable_Main_ (local.get $this) (call $$create__@java.util.ArrayList ))
+  (struct.set $jsnullable.Main $f5@jsnullable.Main (local.get $this) (call $$create__@java.util.ArrayList ))
   ;;@ jsnullable/Main.java:29:2
-  (struct.set $jsnullable.Main $f_f6__jsnullable_Main_ (local.get $this) (call $$create__@java.util.ArrayList ))
+  (struct.set $jsnullable.Main $f6@jsnullable.Main (local.get $this) (call $$create__@java.util.ArrayList ))
   ;;@ jsnullable/Main.java:31:2
-  (struct.set $jsnullable.Main $f_f9__jsnullable_Main_ (local.get $this) (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array )))
+  (struct.set $jsnullable.Main $f9@jsnullable.Main (local.get $this) (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array )))
   ;;@ jsnullable/Main.java:33:2
-  (struct.set $jsnullable.Main $f_f10__jsnullable_Main_ (local.get $this) (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array )))
+  (struct.set $jsnullable.Main $f10@jsnullable.Main (local.get $this) (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array )))
  )
 )
 
@@ -114,14 +114,14 @@
  ;;@ jsnullable/Main.java:24:13
  (block
   ;;@ jsnullable/Main.java:24:13
-  (if (global.get $f_$initialized__jsnullable_Main)
+  (if (global.get $$class-initialized@jsnullable.Main)
    (then
     ;;@ jsnullable/Main.java:24:13
     (return )
    )
   )
   ;;@ jsnullable/Main.java:24:13
-  (global.set $f_$initialized__jsnullable_Main (i32.const 1))
+  (global.set $$class-initialized@jsnullable.Main (i32.const 1))
   ;;@ jsnullable/Main.java:24:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -131,12 +131,12 @@
 (func $$getClassMetadata__java_lang_Class@jsnullable.Main
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__jsnullable_Main))
+  (if (ref.is_null (global.get $$class@jsnullable.Main))
    (then
-    (global.set $f_$class__jsnullable_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsnullable.Main|__java_lang_String (ref.func $$getString_|jsnullable.Main|__java_lang_String@jsnullable.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@jsnullable.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsnullable.Main|__java_lang_String (ref.func $$getString_|jsnullable.Main|__java_lang_String@jsnullable.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__jsnullable_Main))
+  (return (global.get $$class@jsnullable.Main))
  )
 )
 
@@ -157,12 +157,12 @@
 (func $$getString_|Hello|__java_lang_String@jsnullable.Main
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|Hello|__jsnullable_Main))
+  (if (ref.is_null (global.get $$string_|Hello|@jsnullable.Main))
    (then
-    (global.set $f_$string_|Hello|__jsnullable_Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "Hello")))
+    (global.set $$string_|Hello|@jsnullable.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "Hello")))
    )
   )
-  (return (global.get $f_$string_|Hello|__jsnullable_Main))
+  (return (global.get $$string_|Hello|@jsnullable.Main))
  )
 )
 
@@ -170,11 +170,11 @@
 (func $$getString_|jsnullable.Main|__java_lang_String@jsnullable.Main
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|jsnullable.Main|__jsnullable_Main))
+  (if (ref.is_null (global.get $$string_|jsnullable.Main|@jsnullable.Main))
    (then
-    (global.set $f_$string_|jsnullable.Main|__jsnullable_Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsnullable.Main")))
+    (global.set $$string_|jsnullable.Main|@jsnullable.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsnullable.Main")))
    )
   )
-  (return (global.get $f_$string_|jsnullable.Main|__jsnullable_Main))
+  (return (global.get $$string_|jsnullable.Main|@jsnullable.Main))
  )
 )

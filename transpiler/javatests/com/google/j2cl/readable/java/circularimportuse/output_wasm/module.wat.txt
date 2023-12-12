@@ -2,7 +2,7 @@
  (type $circularimportuse.Left (sub $java.lang.Object (struct
   (field $vtable (ref $circularimportuse.Left.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $circularimportuse.Left.vtable (sub $java.lang.Object.vtable (struct
@@ -19,7 +19,7 @@
  (type $circularimportuse.Main (sub $java.lang.Object (struct
   (field $vtable (ref $circularimportuse.Main.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $circularimportuse.Main.vtable (sub $java.lang.Object.vtable (struct
@@ -35,7 +35,7 @@
  (type $circularimportuse.Right (sub $java.lang.Object (struct
   (field $vtable (ref $circularimportuse.Right.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $circularimportuse.Right.vtable (sub $java.lang.Object.vtable (struct
@@ -84,35 +84,35 @@
 )
 
 ;;; Code for circularimportuse.Left [static fields]
-(global $f_$initialized__circularimportuse_Left (mut i32)
+(global $$class-initialized@circularimportuse.Left (mut i32)
  (i32.const 0)
 )
-(global $f_$class__circularimportuse_Left (mut (ref null $java.lang.Class))
+(global $$class@circularimportuse.Left (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|circularimpo...|__circularimportuse_Left (mut (ref null $java.lang.String))
+(global $$string_|circularimpo...|@circularimportuse.Left (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for circularimportuse.Main [static fields]
-(global $f_$initialized__circularimportuse_Main (mut i32)
+(global $$class-initialized@circularimportuse.Main (mut i32)
  (i32.const 0)
 )
-(global $f_$class__circularimportuse_Main (mut (ref null $java.lang.Class))
+(global $$class@circularimportuse.Main (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|circularimpo...|__circularimportuse_Main (mut (ref null $java.lang.String))
+(global $$string_|circularimpo...|@circularimportuse.Main (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for circularimportuse.Right [static fields]
-(global $f_$initialized__circularimportuse_Right (mut i32)
+(global $$class-initialized@circularimportuse.Right (mut i32)
  (i32.const 0)
 )
-(global $f_$class__circularimportuse_Right (mut (ref null $java.lang.Class))
+(global $$class@circularimportuse.Right (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|circularimpo...|__circularimportuse_Right (mut (ref null $java.lang.String))
+(global $$string_|circularimpo...|@circularimportuse.Right (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -165,14 +165,14 @@
  ;;@ circularimportuse/Left.java:18:13
  (block
   ;;@ circularimportuse/Left.java:18:13
-  (if (global.get $f_$initialized__circularimportuse_Left)
+  (if (global.get $$class-initialized@circularimportuse.Left)
    (then
     ;;@ circularimportuse/Left.java:18:13
     (return )
    )
   )
   ;;@ circularimportuse/Left.java:18:13
-  (global.set $f_$initialized__circularimportuse_Left (i32.const 1))
+  (global.set $$class-initialized@circularimportuse.Left (i32.const 1))
   ;;@ circularimportuse/Left.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -182,12 +182,12 @@
 (func $$getClassMetadata__java_lang_Class@circularimportuse.Left
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__circularimportuse_Left))
+  (if (ref.is_null (global.get $$class@circularimportuse.Left))
    (then
-    (global.set $f_$class__circularimportuse_Left (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|circularimpo...|__java_lang_String (ref.func $$getString_|circularimpo...|__java_lang_String@circularimportuse.Left) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@circularimportuse.Left (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|circularimpo...|__java_lang_String (ref.func $$getString_|circularimpo...|__java_lang_String@circularimportuse.Left) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__circularimportuse_Left))
+  (return (global.get $$class@circularimportuse.Left))
  )
 )
 
@@ -208,12 +208,12 @@
 (func $$getString_|circularimpo...|__java_lang_String@circularimportuse.Left
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|circularimpo...|__circularimportuse_Left))
+  (if (ref.is_null (global.get $$string_|circularimpo...|@circularimportuse.Left))
    (then
-    (global.set $f_$string_|circularimpo...|__circularimportuse_Left (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "circularimportuse.Left")))
+    (global.set $$string_|circularimpo...|@circularimportuse.Left (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "circularimportuse.Left")))
    )
   )
-  (return (global.get $f_$string_|circularimpo...|__circularimportuse_Left))
+  (return (global.get $$string_|circularimpo...|@circularimportuse.Left))
  )
 )
 
@@ -267,14 +267,14 @@
  ;;@ circularimportuse/Main.java:18:13
  (block
   ;;@ circularimportuse/Main.java:18:13
-  (if (global.get $f_$initialized__circularimportuse_Main)
+  (if (global.get $$class-initialized@circularimportuse.Main)
    (then
     ;;@ circularimportuse/Main.java:18:13
     (return )
    )
   )
   ;;@ circularimportuse/Main.java:18:13
-  (global.set $f_$initialized__circularimportuse_Main (i32.const 1))
+  (global.set $$class-initialized@circularimportuse.Main (i32.const 1))
   ;;@ circularimportuse/Main.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -284,12 +284,12 @@
 (func $$getClassMetadata__java_lang_Class@circularimportuse.Main
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__circularimportuse_Main))
+  (if (ref.is_null (global.get $$class@circularimportuse.Main))
    (then
-    (global.set $f_$class__circularimportuse_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|circularimpo...|__java_lang_String (ref.func $$getString_|circularimpo...|__java_lang_String@circularimportuse.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@circularimportuse.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|circularimpo...|__java_lang_String (ref.func $$getString_|circularimpo...|__java_lang_String@circularimportuse.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__circularimportuse_Main))
+  (return (global.get $$class@circularimportuse.Main))
  )
 )
 
@@ -310,12 +310,12 @@
 (func $$getString_|circularimpo...|__java_lang_String@circularimportuse.Main
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|circularimpo...|__circularimportuse_Main))
+  (if (ref.is_null (global.get $$string_|circularimpo...|@circularimportuse.Main))
    (then
-    (global.set $f_$string_|circularimpo...|__circularimportuse_Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "circularimportuse.Main")))
+    (global.set $$string_|circularimpo...|@circularimportuse.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "circularimportuse.Main")))
    )
   )
-  (return (global.get $f_$string_|circularimpo...|__circularimportuse_Main))
+  (return (global.get $$string_|circularimpo...|@circularimportuse.Main))
  )
 )
 
@@ -368,14 +368,14 @@
  ;;@ circularimportuse/Right.java:18:13
  (block
   ;;@ circularimportuse/Right.java:18:13
-  (if (global.get $f_$initialized__circularimportuse_Right)
+  (if (global.get $$class-initialized@circularimportuse.Right)
    (then
     ;;@ circularimportuse/Right.java:18:13
     (return )
    )
   )
   ;;@ circularimportuse/Right.java:18:13
-  (global.set $f_$initialized__circularimportuse_Right (i32.const 1))
+  (global.set $$class-initialized@circularimportuse.Right (i32.const 1))
   ;;@ circularimportuse/Right.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -385,12 +385,12 @@
 (func $$getClassMetadata__java_lang_Class@circularimportuse.Right
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__circularimportuse_Right))
+  (if (ref.is_null (global.get $$class@circularimportuse.Right))
    (then
-    (global.set $f_$class__circularimportuse_Right (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|circularimpo...|__java_lang_String (ref.func $$getString_|circularimpo...|__java_lang_String@circularimportuse.Right) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@circularimportuse.Right (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|circularimpo...|__java_lang_String (ref.func $$getString_|circularimpo...|__java_lang_String@circularimportuse.Right) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__circularimportuse_Right))
+  (return (global.get $$class@circularimportuse.Right))
  )
 )
 
@@ -411,11 +411,11 @@
 (func $$getString_|circularimpo...|__java_lang_String@circularimportuse.Right
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|circularimpo...|__circularimportuse_Right))
+  (if (ref.is_null (global.get $$string_|circularimpo...|@circularimportuse.Right))
    (then
-    (global.set $f_$string_|circularimpo...|__circularimportuse_Right (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "circularimportuse.Right")))
+    (global.set $$string_|circularimpo...|@circularimportuse.Right (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "circularimportuse.Right")))
    )
   )
-  (return (global.get $f_$string_|circularimpo...|__circularimportuse_Right))
+  (return (global.get $$string_|circularimpo...|@circularimportuse.Right))
  )
 )

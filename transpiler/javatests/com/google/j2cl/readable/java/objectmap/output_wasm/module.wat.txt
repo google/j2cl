@@ -21,13 +21,13 @@
 ;;; Code for objectmap.ObjectMap [static fields]
 
 ;;; Code for objectmap.ObjectMap.$Overlay [static fields]
-(global $f_$initialized__objectmap_ObjectMap_$Overlay (mut i32)
+(global $$class-initialized@objectmap.ObjectMap.$Overlay (mut i32)
  (i32.const 0)
 )
-(global $f_$class__objectmap_ObjectMap_$Overlay (mut (ref null $java.lang.Class))
+(global $$class@objectmap.ObjectMap.$Overlay (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|objectmap.Ob...|__objectmap_ObjectMap_$Overlay (mut (ref null $java.lang.String))
+(global $$string_|objectmap.Ob...|@objectmap.ObjectMap.$Overlay (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -62,14 +62,14 @@
  ;;@ objectmap/ObjectMap.java:23:13
  (block
   ;;@ objectmap/ObjectMap.java:23:13
-  (if (global.get $f_$initialized__objectmap_ObjectMap_$Overlay)
+  (if (global.get $$class-initialized@objectmap.ObjectMap.$Overlay)
    (then
     ;;@ objectmap/ObjectMap.java:23:13
     (return )
    )
   )
   ;;@ objectmap/ObjectMap.java:23:13
-  (global.set $f_$initialized__objectmap_ObjectMap_$Overlay (i32.const 1))
+  (global.set $$class-initialized@objectmap.ObjectMap.$Overlay (i32.const 1))
  )
 )
 
@@ -77,12 +77,12 @@
 (func $$getClassMetadata__java_lang_Class@objectmap.ObjectMap.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__objectmap_ObjectMap_$Overlay))
+  (if (ref.is_null (global.get $$class@objectmap.ObjectMap.$Overlay))
    (then
-    (global.set $f_$class__objectmap_ObjectMap_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|objectmap.Ob...|__java_lang_String (ref.func $$getString_|objectmap.Ob...|__java_lang_String@objectmap.ObjectMap.$Overlay) )(ref.null $java.lang.Class)))
+    (global.set $$class@objectmap.ObjectMap.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|objectmap.Ob...|__java_lang_String (ref.func $$getString_|objectmap.Ob...|__java_lang_String@objectmap.ObjectMap.$Overlay) )(ref.null $java.lang.Class)))
    )
   )
-  (return (global.get $f_$class__objectmap_ObjectMap_$Overlay))
+  (return (global.get $$class@objectmap.ObjectMap.$Overlay))
  )
 )
 
@@ -103,12 +103,12 @@
 (func $$getString_|objectmap.Ob...|__java_lang_String@objectmap.ObjectMap.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|objectmap.Ob...|__objectmap_ObjectMap_$Overlay))
+  (if (ref.is_null (global.get $$string_|objectmap.Ob...|@objectmap.ObjectMap.$Overlay))
    (then
-    (global.set $f_$string_|objectmap.Ob...|__objectmap_ObjectMap_$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "objectmap.ObjectMap$$Overlay")))
+    (global.set $$string_|objectmap.Ob...|@objectmap.ObjectMap.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "objectmap.ObjectMap$$Overlay")))
    )
   )
-  (return (global.get $f_$string_|objectmap.Ob...|__objectmap_ObjectMap_$Overlay))
+  (return (global.get $$string_|objectmap.Ob...|@objectmap.ObjectMap.$Overlay))
  )
 )
 

@@ -8,8 +8,8 @@
  (type $varargs.Varargs (sub $java.lang.Object (struct
   (field $vtable (ref $varargs.Varargs.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $f_args__varargs_Varargs_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  (field $args@varargs.Varargs (mut (ref null $javaemul.internal.WasmArray.OfObject)))
   ))
  )
  (type $varargs.Varargs.vtable (sub $java.lang.Object.vtable (struct
@@ -31,8 +31,8 @@
  (type $varargs.Varargs.$LambdaImplementor$1 (sub $java.lang.Object (struct
   (field $vtable (ref $varargs.Varargs.$LambdaImplementor$1.vtable))
   (field $itable (ref $varargs.Varargs.$LambdaImplementor$1.itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $$outer_this__varargs_Varargs_$LambdaImplementor$1 (mut (ref null $varargs.Varargs)))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  (field $$outer_this@varargs.Varargs.$LambdaImplementor$1 (mut (ref null $varargs.Varargs)))
   ))
  )
  (type $varargs.Varargs.$LambdaImplementor$1.vtable (sub $java.lang.Object.vtable (struct
@@ -58,8 +58,8 @@
  (type $varargs.Child (sub $varargs.Varargs (struct
   (field $vtable (ref $varargs.Child.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $f_args__varargs_Varargs_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  (field $args@varargs.Varargs (mut (ref null $javaemul.internal.WasmArray.OfObject)))
   ))
  )
  (type $varargs.Child.vtable (sub $varargs.Varargs.vtable (struct
@@ -143,46 +143,46 @@
 )
 
 ;;; Code for varargs.Varargs [static fields]
-(global $f_$initialized__varargs_Varargs (mut i32)
+(global $$class-initialized@varargs.Varargs (mut i32)
  (i32.const 0)
 )
-(global $f_$class__varargs_Varargs (mut (ref null $java.lang.Class))
+(global $$class@varargs.Varargs (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|varargs.Varargs|__varargs_Varargs (mut (ref null $java.lang.String))
+(global $$string_|varargs.Varargs|@varargs.Varargs (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for varargs.Child [static fields]
-(global $f_$initialized__varargs_Child (mut i32)
+(global $$class-initialized@varargs.Child (mut i32)
  (i32.const 0)
 )
-(global $f_$class__varargs_Child (mut (ref null $java.lang.Class))
+(global $$class@varargs.Child (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|varargs.Child|__varargs_Child (mut (ref null $java.lang.String))
+(global $$string_|varargs.Child|@varargs.Child (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for varargs.Varargs.$LambdaImplementor$1 [static fields]
-(global $f_$initialized__varargs_Varargs_$LambdaImplementor$1 (mut i32)
+(global $$class-initialized@varargs.Varargs.$LambdaImplementor$1 (mut i32)
  (i32.const 0)
 )
-(global $f_$class__varargs_Varargs_$LambdaImplementor$1 (mut (ref null $java.lang.Class))
+(global $$class@varargs.Varargs.$LambdaImplementor$1 (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|varargs.Vara...|__varargs_Varargs_$LambdaImplementor$1 (mut (ref null $java.lang.String))
+(global $$string_|varargs.Vara...|@varargs.Varargs.$LambdaImplementor$1 (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for varargs.Varargs.FunctionalInterface [static fields]
-(global $f_$initialized__varargs_Varargs_FunctionalInterface (mut i32)
+(global $$class-initialized@varargs.Varargs.FunctionalInterface (mut i32)
  (i32.const 0)
 )
-(global $f_$class__varargs_Varargs_FunctionalInterface (mut (ref null $java.lang.Class))
+(global $$class@varargs.Varargs.FunctionalInterface (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|varargs.Vara...|__varargs_Varargs_FunctionalInterface (mut (ref null $java.lang.String))
+(global $$string_|varargs.Vara...|@varargs.Varargs.FunctionalInterface (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -193,14 +193,14 @@
  ;;@ varargs/Varargs.java:21:12
  (block
   ;;@ varargs/Varargs.java:21:12
-  (if (global.get $f_$initialized__varargs_Varargs_FunctionalInterface)
+  (if (global.get $$class-initialized@varargs.Varargs.FunctionalInterface)
    (then
     ;;@ varargs/Varargs.java:21:12
     (return )
    )
   )
   ;;@ varargs/Varargs.java:21:12
-  (global.set $f_$initialized__varargs_Varargs_FunctionalInterface (i32.const 1))
+  (global.set $$class-initialized@varargs.Varargs.FunctionalInterface (i32.const 1))
  )
 )
 
@@ -208,12 +208,12 @@
 (func $$getClassMetadata__java_lang_Class@varargs.Varargs.FunctionalInterface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__varargs_Varargs_FunctionalInterface))
+  (if (ref.is_null (global.get $$class@varargs.Varargs.FunctionalInterface))
    (then
-    (global.set $f_$class__varargs_Varargs_FunctionalInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|varargs.Vara...|__java_lang_String (ref.func $$getString_|varargs.Vara...|__java_lang_String@varargs.Varargs.FunctionalInterface) )))
+    (global.set $$class@varargs.Varargs.FunctionalInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|varargs.Vara...|__java_lang_String (ref.func $$getString_|varargs.Vara...|__java_lang_String@varargs.Varargs.FunctionalInterface) )))
    )
   )
-  (return (global.get $f_$class__varargs_Varargs_FunctionalInterface))
+  (return (global.get $$class@varargs.Varargs.FunctionalInterface))
  )
 )
 
@@ -221,12 +221,12 @@
 (func $$getString_|varargs.Vara...|__java_lang_String@varargs.Varargs.FunctionalInterface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|varargs.Vara...|__varargs_Varargs_FunctionalInterface))
+  (if (ref.is_null (global.get $$string_|varargs.Vara...|@varargs.Varargs.FunctionalInterface))
    (then
-    (global.set $f_$string_|varargs.Vara...|__varargs_Varargs_FunctionalInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "varargs.Varargs$FunctionalInterface")))
+    (global.set $$string_|varargs.Vara...|@varargs.Varargs.FunctionalInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "varargs.Varargs$FunctionalInterface")))
    )
   )
-  (return (global.get $f_$string_|varargs.Vara...|__varargs_Varargs_FunctionalInterface))
+  (return (global.get $$string_|varargs.Vara...|@varargs.Varargs.FunctionalInterface))
  )
 )
 
@@ -338,7 +338,7 @@
  (local.set $this (ref.cast (ref $varargs.Varargs) (local.get $this.untyped)))
  (block
   ;;@ varargs/Varargs.java:40:4
-  (struct.set $varargs.Varargs $f_args__varargs_Varargs_ (local.get $this) (local.get $args))
+  (struct.set $varargs.Varargs $args@varargs.Varargs (local.get $this) (local.get $args))
  )
 )
 (elem declare func $m_testAssignment__arrayOf_java_lang_Object__void@varargs.Varargs)
@@ -415,14 +415,14 @@
  ;;@ varargs/Varargs.java:20:13
  (block
   ;;@ varargs/Varargs.java:20:13
-  (if (global.get $f_$initialized__varargs_Varargs)
+  (if (global.get $$class-initialized@varargs.Varargs)
    (then
     ;;@ varargs/Varargs.java:20:13
     (return )
    )
   )
   ;;@ varargs/Varargs.java:20:13
-  (global.set $f_$initialized__varargs_Varargs (i32.const 1))
+  (global.set $$class-initialized@varargs.Varargs (i32.const 1))
   ;;@ varargs/Varargs.java:20:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -432,12 +432,12 @@
 (func $$getClassMetadata__java_lang_Class@varargs.Varargs
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__varargs_Varargs))
+  (if (ref.is_null (global.get $$class@varargs.Varargs))
    (then
-    (global.set $f_$class__varargs_Varargs (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|varargs.Varargs|__java_lang_String (ref.func $$getString_|varargs.Varargs|__java_lang_String@varargs.Varargs) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@varargs.Varargs (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|varargs.Varargs|__java_lang_String (ref.func $$getString_|varargs.Varargs|__java_lang_String@varargs.Varargs) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__varargs_Varargs))
+  (return (global.get $$class@varargs.Varargs))
  )
 )
 
@@ -458,12 +458,12 @@
 (func $$getString_|varargs.Varargs|__java_lang_String@varargs.Varargs
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|varargs.Varargs|__varargs_Varargs))
+  (if (ref.is_null (global.get $$string_|varargs.Varargs|@varargs.Varargs))
    (then
-    (global.set $f_$string_|varargs.Varargs|__varargs_Varargs (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "varargs.Varargs")))
+    (global.set $$string_|varargs.Varargs|@varargs.Varargs (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "varargs.Varargs")))
    )
   )
-  (return (global.get $f_$string_|varargs.Varargs|__varargs_Varargs))
+  (return (global.get $$string_|varargs.Varargs|@varargs.Varargs))
  )
 )
 
@@ -494,7 +494,7 @@
  ;;@ varargs/Varargs.java:60:17
  (block
   ;;@ varargs/Varargs.java:60:17
-  (struct.set $varargs.Varargs.$LambdaImplementor$1 $$outer_this__varargs_Varargs_$LambdaImplementor$1 (local.get $this) (local.get $$outer_this))
+  (struct.set $varargs.Varargs.$LambdaImplementor$1 $$outer_this@varargs.Varargs.$LambdaImplementor$1 (local.get $this) (local.get $$outer_this))
   ;;@ varargs/Varargs.java:60:17
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -510,7 +510,7 @@
  (local.set $this (ref.cast (ref $varargs.Varargs.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
   ;;@ varargs/Varargs.java:60:23
-  (struct.set $varargs.Varargs $f_args__varargs_Varargs_ (struct.get $varargs.Varargs.$LambdaImplementor$1 $$outer_this__varargs_Varargs_$LambdaImplementor$1 (local.get $this)) (local.get $it))
+  (struct.set $varargs.Varargs $args@varargs.Varargs (struct.get $varargs.Varargs.$LambdaImplementor$1 $$outer_this@varargs.Varargs.$LambdaImplementor$1 (local.get $this)) (local.get $it))
  )
 )
 (elem declare func $m_apply__arrayOf_java_lang_String__void@varargs.Varargs.$LambdaImplementor$1)
@@ -520,14 +520,14 @@
  ;;@ varargs/Varargs.java:60:17
  (block
   ;;@ varargs/Varargs.java:60:17
-  (if (global.get $f_$initialized__varargs_Varargs_$LambdaImplementor$1)
+  (if (global.get $$class-initialized@varargs.Varargs.$LambdaImplementor$1)
    (then
     ;;@ varargs/Varargs.java:60:17
     (return )
    )
   )
   ;;@ varargs/Varargs.java:60:17
-  (global.set $f_$initialized__varargs_Varargs_$LambdaImplementor$1 (i32.const 1))
+  (global.set $$class-initialized@varargs.Varargs.$LambdaImplementor$1 (i32.const 1))
   ;;@ varargs/Varargs.java:60:17
   (call $$clinit__void@java.lang.Object )
  )
@@ -537,12 +537,12 @@
 (func $$getClassMetadata__java_lang_Class@varargs.Varargs.$LambdaImplementor$1
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__varargs_Varargs_$LambdaImplementor$1))
+  (if (ref.is_null (global.get $$class@varargs.Varargs.$LambdaImplementor$1))
    (then
-    (global.set $f_$class__varargs_Varargs_$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|varargs.Vara...|__java_lang_String (ref.func $$getString_|varargs.Vara...|__java_lang_String@varargs.Varargs.$LambdaImplementor$1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@varargs.Varargs.$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|varargs.Vara...|__java_lang_String (ref.func $$getString_|varargs.Vara...|__java_lang_String@varargs.Varargs.$LambdaImplementor$1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__varargs_Varargs_$LambdaImplementor$1))
+  (return (global.get $$class@varargs.Varargs.$LambdaImplementor$1))
  )
 )
 
@@ -563,12 +563,12 @@
 (func $$getString_|varargs.Vara...|__java_lang_String@varargs.Varargs.$LambdaImplementor$1
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|varargs.Vara...|__varargs_Varargs_$LambdaImplementor$1))
+  (if (ref.is_null (global.get $$string_|varargs.Vara...|@varargs.Varargs.$LambdaImplementor$1))
    (then
-    (global.set $f_$string_|varargs.Vara...|__varargs_Varargs_$LambdaImplementor$1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "varargs.Varargs$$LambdaImplementor$1")))
+    (global.set $$string_|varargs.Vara...|@varargs.Varargs.$LambdaImplementor$1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "varargs.Varargs$$LambdaImplementor$1")))
    )
   )
-  (return (global.get $f_$string_|varargs.Vara...|__varargs_Varargs_$LambdaImplementor$1))
+  (return (global.get $$string_|varargs.Vara...|@varargs.Varargs.$LambdaImplementor$1))
  )
 )
 
@@ -606,14 +606,14 @@
  ;;@ varargs/Varargs.java:64:6
  (block
   ;;@ varargs/Varargs.java:64:6
-  (if (global.get $f_$initialized__varargs_Child)
+  (if (global.get $$class-initialized@varargs.Child)
    (then
     ;;@ varargs/Varargs.java:64:6
     (return )
    )
   )
   ;;@ varargs/Varargs.java:64:6
-  (global.set $f_$initialized__varargs_Child (i32.const 1))
+  (global.set $$class-initialized@varargs.Child (i32.const 1))
   ;;@ varargs/Varargs.java:64:6
   (call $$clinit__void@varargs.Varargs )
  )
@@ -623,12 +623,12 @@
 (func $$getClassMetadata__java_lang_Class@varargs.Child
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__varargs_Child))
+  (if (ref.is_null (global.get $$class@varargs.Child))
    (then
-    (global.set $f_$class__varargs_Child (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|varargs.Child|__java_lang_String (ref.func $$getString_|varargs.Child|__java_lang_String@varargs.Child) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@varargs.Varargs) )))
+    (global.set $$class@varargs.Child (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|varargs.Child|__java_lang_String (ref.func $$getString_|varargs.Child|__java_lang_String@varargs.Child) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@varargs.Varargs) )))
    )
   )
-  (return (global.get $f_$class__varargs_Child))
+  (return (global.get $$class@varargs.Child))
  )
 )
 
@@ -649,11 +649,11 @@
 (func $$getString_|varargs.Child|__java_lang_String@varargs.Child
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|varargs.Child|__varargs_Child))
+  (if (ref.is_null (global.get $$string_|varargs.Child|@varargs.Child))
    (then
-    (global.set $f_$string_|varargs.Child|__varargs_Child (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "varargs.Child")))
+    (global.set $$string_|varargs.Child|@varargs.Child (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "varargs.Child")))
    )
   )
-  (return (global.get $f_$string_|varargs.Child|__varargs_Child))
+  (return (global.get $$string_|varargs.Child|@varargs.Child))
  )
 )

@@ -2,7 +2,7 @@
  (type $staticfieldaccesslevels.StaticFieldAccessLevels (sub $java.lang.Object (struct
   (field $vtable (ref $staticfieldaccesslevels.StaticFieldAccessLevels.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $staticfieldaccesslevels.StaticFieldAccessLevels.vtable (sub $java.lang.Object.vtable (struct
@@ -28,25 +28,25 @@
 )
 
 ;;; Code for staticfieldaccesslevels.StaticFieldAccessLevels [static fields]
-(global $f_a__staticfieldaccesslevels_StaticFieldAccessLevels (mut i32)
+(global $a@staticfieldaccesslevels.StaticFieldAccessLevels (mut i32)
  (i32.const 0)
 )
-(global $f_b__staticfieldaccesslevels_StaticFieldAccessLevels_ (mut i32)
+(global $b@staticfieldaccesslevels.StaticFieldAccessLevels (mut i32)
  (i32.const 0)
 )
-(global $f_c__staticfieldaccesslevels_StaticFieldAccessLevels (mut (ref null $java.lang.Object))
+(global $c@staticfieldaccesslevels.StaticFieldAccessLevels (mut (ref null $java.lang.Object))
  (ref.null $java.lang.Object)
 )
-(global $f_d__staticfieldaccesslevels_StaticFieldAccessLevels (mut i32)
+(global $d@staticfieldaccesslevels.StaticFieldAccessLevels (mut i32)
  (i32.const 0)
 )
-(global $f_$initialized__staticfieldaccesslevels_StaticFieldAccessLevels (mut i32)
+(global $$class-initialized@staticfieldaccesslevels.StaticFieldAccessLevels (mut i32)
  (i32.const 0)
 )
-(global $f_$class__staticfieldaccesslevels_StaticFieldAccessLevels (mut (ref null $java.lang.Class))
+(global $$class@staticfieldaccesslevels.StaticFieldAccessLevels (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|staticfielda...|__staticfieldaccesslevels_StaticFieldAccessLevels (mut (ref null $java.lang.String))
+(global $$string_|staticfielda...|@staticfieldaccesslevels.StaticFieldAccessLevels (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -89,7 +89,7 @@
  (local.set $this (ref.cast (ref $staticfieldaccesslevels.StaticFieldAccessLevels) (local.get $this.untyped)))
  (block
   ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:25:4
-  (return (if (result i32) (global.get $f_b__staticfieldaccesslevels_StaticFieldAccessLevels_) (then (global.get $f_a__staticfieldaccesslevels_StaticFieldAccessLevels)) (else (global.get $f_d__staticfieldaccesslevels_StaticFieldAccessLevels))))
+  (return (if (result i32) (global.get $b@staticfieldaccesslevels.StaticFieldAccessLevels) (then (global.get $a@staticfieldaccesslevels.StaticFieldAccessLevels)) (else (global.get $d@staticfieldaccesslevels.StaticFieldAccessLevels))))
  )
 )
 (elem declare func $m_test__int@staticfieldaccesslevels.StaticFieldAccessLevels)
@@ -99,14 +99,14 @@
  ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:18:13
  (block
   ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:18:13
-  (if (global.get $f_$initialized__staticfieldaccesslevels_StaticFieldAccessLevels)
+  (if (global.get $$class-initialized@staticfieldaccesslevels.StaticFieldAccessLevels)
    (then
     ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:18:13
     (return )
    )
   )
   ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:18:13
-  (global.set $f_$initialized__staticfieldaccesslevels_StaticFieldAccessLevels (i32.const 1))
+  (global.set $$class-initialized@staticfieldaccesslevels.StaticFieldAccessLevels (i32.const 1))
   ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -116,12 +116,12 @@
 (func $$getClassMetadata__java_lang_Class@staticfieldaccesslevels.StaticFieldAccessLevels
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__staticfieldaccesslevels_StaticFieldAccessLevels))
+  (if (ref.is_null (global.get $$class@staticfieldaccesslevels.StaticFieldAccessLevels))
    (then
-    (global.set $f_$class__staticfieldaccesslevels_StaticFieldAccessLevels (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|staticfielda...|__java_lang_String (ref.func $$getString_|staticfielda...|__java_lang_String@staticfieldaccesslevels.StaticFieldAccessLevels) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@staticfieldaccesslevels.StaticFieldAccessLevels (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|staticfielda...|__java_lang_String (ref.func $$getString_|staticfielda...|__java_lang_String@staticfieldaccesslevels.StaticFieldAccessLevels) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__staticfieldaccesslevels_StaticFieldAccessLevels))
+  (return (global.get $$class@staticfieldaccesslevels.StaticFieldAccessLevels))
  )
 )
 
@@ -142,11 +142,11 @@
 (func $$getString_|staticfielda...|__java_lang_String@staticfieldaccesslevels.StaticFieldAccessLevels
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|staticfielda...|__staticfieldaccesslevels_StaticFieldAccessLevels))
+  (if (ref.is_null (global.get $$string_|staticfielda...|@staticfieldaccesslevels.StaticFieldAccessLevels))
    (then
-    (global.set $f_$string_|staticfielda...|__staticfieldaccesslevels_StaticFieldAccessLevels (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "staticfieldaccesslevels.StaticFieldAccessLevels")))
+    (global.set $$string_|staticfielda...|@staticfieldaccesslevels.StaticFieldAccessLevels (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "staticfieldaccesslevels.StaticFieldAccessLevels")))
    )
   )
-  (return (global.get $f_$string_|staticfielda...|__staticfieldaccesslevels_StaticFieldAccessLevels))
+  (return (global.get $$string_|staticfielda...|@staticfieldaccesslevels.StaticFieldAccessLevels))
  )
 )

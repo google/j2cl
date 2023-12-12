@@ -255,6 +255,7 @@ class WasmGenerationEnvironment {
   String getMethodImplementationName(MethodDescriptor methodDescriptor) {
     methodDescriptor = methodDescriptor.getDeclarationDescriptor();
     return "$"
+        // TODO(b/315893220): Improve method names to avoid repetition of the enclosing type.
         + methodDescriptor.getMangledName()
         + "@"
         + methodDescriptor.getEnclosingTypeDescriptor().getQualifiedSourceName();
@@ -265,7 +266,10 @@ class WasmGenerationEnvironment {
   }
 
   String getFieldName(FieldDescriptor fieldDescriptor) {
-    return "$" + fieldDescriptor.getMangledName();
+    return "$"
+        + fieldDescriptor.getName()
+        + "@"
+        + fieldDescriptor.getEnclosingTypeDescriptor().getQualifiedSourceName();
   }
 
   /** Returns true if the field is the WasmArray.OfNNN.elements. */

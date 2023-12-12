@@ -17,7 +17,7 @@
  (type $gwtincompatible.Interface.ClassWithAbstractMethod (sub $java.lang.Object (struct
   (field $vtable (ref $gwtincompatible.Interface.ClassWithAbstractMethod.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $gwtincompatible.Interface.ClassWithAbstractMethod.vtable (sub $java.lang.Object.vtable (struct
@@ -33,7 +33,7 @@
  (type $gwtincompatible.Implementor (sub $gwtincompatible.Interface.ClassWithAbstractMethod (struct
   (field $vtable (ref $gwtincompatible.Implementor.vtable))
   (field $itable (ref $gwtincompatible.Implementor.itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $gwtincompatible.Implementor.vtable (sub $gwtincompatible.Interface.ClassWithAbstractMethod.vtable (struct
@@ -59,9 +59,9 @@
  (type $gwtincompatible.Implementor.SomeEnum (sub $java.lang.Enum (struct
   (field $vtable (ref $gwtincompatible.Implementor.SomeEnum.vtable))
   (field $itable (ref $gwtincompatible.Implementor.SomeEnum.itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
-  (field $f_ordinal__java_lang_Enum_ (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  (field $name@java.lang.Enum (mut (ref null $java.lang.String)))
+  (field $ordinal@java.lang.Enum (mut i32))
   ))
  )
  (type $gwtincompatible.Implementor.SomeEnum.vtable (sub $java.lang.Enum.vtable (struct
@@ -92,9 +92,9 @@
  (type $gwtincompatible.Implementor.SomeEnum.1 (sub $gwtincompatible.Implementor.SomeEnum (struct
   (field $vtable (ref $gwtincompatible.Implementor.SomeEnum.1.vtable))
   (field $itable (ref $gwtincompatible.Implementor.SomeEnum.1.itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
-  (field $f_ordinal__java_lang_Enum_ (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  (field $name@java.lang.Enum (mut (ref null $java.lang.String)))
+  (field $ordinal@java.lang.Enum (mut i32))
   ))
  )
  (type $gwtincompatible.Implementor.SomeEnum.1.vtable (sub $gwtincompatible.Implementor.SomeEnum.vtable (struct
@@ -196,88 +196,88 @@
 )
 
 ;;; Code for gwtincompatible.GwtIncompatible [static fields]
-(global $f_$initialized__gwtincompatible_GwtIncompatible (mut i32)
+(global $$class-initialized@gwtincompatible.GwtIncompatible (mut i32)
  (i32.const 0)
 )
-(global $f_$class__gwtincompatible_GwtIncompatible (mut (ref null $java.lang.Class))
+(global $$class@gwtincompatible.GwtIncompatible (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|gwtincompati...|__gwtincompatible_GwtIncompatible (mut (ref null $java.lang.String))
+(global $$string_|gwtincompati...|@gwtincompatible.GwtIncompatible (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for gwtincompatible.Implementor [static fields]
-(global $f_$initialized__gwtincompatible_Implementor (mut i32)
+(global $$class-initialized@gwtincompatible.Implementor (mut i32)
  (i32.const 0)
 )
-(global $f_$class__gwtincompatible_Implementor (mut (ref null $java.lang.Class))
+(global $$class@gwtincompatible.Implementor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|gwtincompati...|__gwtincompatible_Implementor (mut (ref null $java.lang.String))
+(global $$string_|gwtincompati...|@gwtincompatible.Implementor (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for gwtincompatible.Implementor.SomeEnum.1 [static fields]
-(global $f_$initialized__gwtincompatible_Implementor_SomeEnum_1 (mut i32)
+(global $$class-initialized@gwtincompatible.Implementor.SomeEnum.1 (mut i32)
  (i32.const 0)
 )
-(global $f_$class__gwtincompatible_Implementor_SomeEnum_1 (mut (ref null $java.lang.Class))
+(global $$class@gwtincompatible.Implementor.SomeEnum.1 (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|gwtincompati...|__gwtincompatible_Implementor_SomeEnum_1 (mut (ref null $java.lang.String))
+(global $$string_|gwtincompati...|@gwtincompatible.Implementor.SomeEnum.1 (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for gwtincompatible.Implementor.SomeEnum [static fields]
-(global $f_COMPATIBLE__gwtincompatible_Implementor_SomeEnum (mut (ref null $gwtincompatible.Implementor.SomeEnum))
+(global $COMPATIBLE@gwtincompatible.Implementor.SomeEnum (mut (ref null $gwtincompatible.Implementor.SomeEnum))
  (ref.null $gwtincompatible.Implementor.SomeEnum)
 )
-(global $f_namesToValuesMap__gwtincompatible_Implementor_SomeEnum_ (mut (ref null $java.lang.Object))
+(global $namesToValuesMap@gwtincompatible.Implementor.SomeEnum (mut (ref null $java.lang.Object))
  (ref.null $java.lang.Object)
 )
-(global $f_$initialized__gwtincompatible_Implementor_SomeEnum (mut i32)
+(global $$class-initialized@gwtincompatible.Implementor.SomeEnum (mut i32)
  (i32.const 0)
 )
-(global $f_$class__gwtincompatible_Implementor_SomeEnum (mut (ref null $java.lang.Class))
+(global $$class@gwtincompatible.Implementor.SomeEnum (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|COMPATIBLE|__gwtincompatible_Implementor_SomeEnum (mut (ref null $java.lang.String))
+(global $$string_|COMPATIBLE|@gwtincompatible.Implementor.SomeEnum (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
-(global $f_$string_|gwtincompati...|__gwtincompatible_Implementor_SomeEnum (mut (ref null $java.lang.String))
+(global $$string_|gwtincompati...|@gwtincompatible.Implementor.SomeEnum (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for gwtincompatible.Interface [static fields]
-(global $f_$initialized__gwtincompatible_Interface (mut i32)
+(global $$class-initialized@gwtincompatible.Interface (mut i32)
  (i32.const 0)
 )
-(global $f_$class__gwtincompatible_Interface (mut (ref null $java.lang.Class))
+(global $$class@gwtincompatible.Interface (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|gwtincompati...|__gwtincompatible_Interface (mut (ref null $java.lang.String))
+(global $$string_|gwtincompati...|@gwtincompatible.Interface (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for gwtincompatible.Interface.NestedInterface [static fields]
-(global $f_$initialized__gwtincompatible_Interface_NestedInterface (mut i32)
+(global $$class-initialized@gwtincompatible.Interface.NestedInterface (mut i32)
  (i32.const 0)
 )
-(global $f_$class__gwtincompatible_Interface_NestedInterface (mut (ref null $java.lang.Class))
+(global $$class@gwtincompatible.Interface.NestedInterface (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|gwtincompati...|__gwtincompatible_Interface_NestedInterface (mut (ref null $java.lang.String))
+(global $$string_|gwtincompati...|@gwtincompatible.Interface.NestedInterface (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for gwtincompatible.Interface.ClassWithAbstractMethod [static fields]
-(global $f_$initialized__gwtincompatible_Interface_ClassWithAbstractMethod (mut i32)
+(global $$class-initialized@gwtincompatible.Interface.ClassWithAbstractMethod (mut i32)
  (i32.const 0)
 )
-(global $f_$class__gwtincompatible_Interface_ClassWithAbstractMethod (mut (ref null $java.lang.Class))
+(global $$class@gwtincompatible.Interface.ClassWithAbstractMethod (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|gwtincompati...|__gwtincompatible_Interface_ClassWithAbstractMethod (mut (ref null $java.lang.String))
+(global $$string_|gwtincompati...|@gwtincompatible.Interface.ClassWithAbstractMethod (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -288,14 +288,14 @@
  ;;@ gwtincompatible/GwtIncompatible.java:25:18
  (block
   ;;@ gwtincompatible/GwtIncompatible.java:25:18
-  (if (global.get $f_$initialized__gwtincompatible_GwtIncompatible)
+  (if (global.get $$class-initialized@gwtincompatible.GwtIncompatible)
    (then
     ;;@ gwtincompatible/GwtIncompatible.java:25:18
     (return )
    )
   )
   ;;@ gwtincompatible/GwtIncompatible.java:25:18
-  (global.set $f_$initialized__gwtincompatible_GwtIncompatible (i32.const 1))
+  (global.set $$class-initialized@gwtincompatible.GwtIncompatible (i32.const 1))
  )
 )
 
@@ -303,12 +303,12 @@
 (func $$getClassMetadata__java_lang_Class@gwtincompatible.GwtIncompatible
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__gwtincompatible_GwtIncompatible))
+  (if (ref.is_null (global.get $$class@gwtincompatible.GwtIncompatible))
    (then
-    (global.set $f_$class__gwtincompatible_GwtIncompatible (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|gwtincompati...|__java_lang_String (ref.func $$getString_|gwtincompati...|__java_lang_String@gwtincompatible.GwtIncompatible) )))
+    (global.set $$class@gwtincompatible.GwtIncompatible (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|gwtincompati...|__java_lang_String (ref.func $$getString_|gwtincompati...|__java_lang_String@gwtincompatible.GwtIncompatible) )))
    )
   )
-  (return (global.get $f_$class__gwtincompatible_GwtIncompatible))
+  (return (global.get $$class@gwtincompatible.GwtIncompatible))
  )
 )
 
@@ -316,12 +316,12 @@
 (func $$getString_|gwtincompati...|__java_lang_String@gwtincompatible.GwtIncompatible
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|gwtincompati...|__gwtincompatible_GwtIncompatible))
+  (if (ref.is_null (global.get $$string_|gwtincompati...|@gwtincompatible.GwtIncompatible))
    (then
-    (global.set $f_$string_|gwtincompati...|__gwtincompatible_GwtIncompatible (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "gwtincompatible.GwtIncompatible")))
+    (global.set $$string_|gwtincompati...|@gwtincompatible.GwtIncompatible (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "gwtincompatible.GwtIncompatible")))
    )
   )
-  (return (global.get $f_$string_|gwtincompati...|__gwtincompatible_GwtIncompatible))
+  (return (global.get $$string_|gwtincompati...|@gwtincompatible.GwtIncompatible))
  )
 )
 
@@ -332,14 +332,14 @@
  ;;@ gwtincompatible/Interface.java:18:10
  (block
   ;;@ gwtincompatible/Interface.java:18:10
-  (if (global.get $f_$initialized__gwtincompatible_Interface)
+  (if (global.get $$class-initialized@gwtincompatible.Interface)
    (then
     ;;@ gwtincompatible/Interface.java:18:10
     (return )
    )
   )
   ;;@ gwtincompatible/Interface.java:18:10
-  (global.set $f_$initialized__gwtincompatible_Interface (i32.const 1))
+  (global.set $$class-initialized@gwtincompatible.Interface (i32.const 1))
  )
 )
 
@@ -347,12 +347,12 @@
 (func $$getClassMetadata__java_lang_Class@gwtincompatible.Interface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__gwtincompatible_Interface))
+  (if (ref.is_null (global.get $$class@gwtincompatible.Interface))
    (then
-    (global.set $f_$class__gwtincompatible_Interface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|gwtincompati...|__java_lang_String (ref.func $$getString_|gwtincompati...|__java_lang_String@gwtincompatible.Interface) )))
+    (global.set $$class@gwtincompatible.Interface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|gwtincompati...|__java_lang_String (ref.func $$getString_|gwtincompati...|__java_lang_String@gwtincompatible.Interface) )))
    )
   )
-  (return (global.get $f_$class__gwtincompatible_Interface))
+  (return (global.get $$class@gwtincompatible.Interface))
  )
 )
 
@@ -360,12 +360,12 @@
 (func $$getString_|gwtincompati...|__java_lang_String@gwtincompatible.Interface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|gwtincompati...|__gwtincompatible_Interface))
+  (if (ref.is_null (global.get $$string_|gwtincompati...|@gwtincompatible.Interface))
    (then
-    (global.set $f_$string_|gwtincompati...|__gwtincompatible_Interface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "gwtincompatible.Interface")))
+    (global.set $$string_|gwtincompati...|@gwtincompatible.Interface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "gwtincompatible.Interface")))
    )
   )
-  (return (global.get $f_$string_|gwtincompati...|__gwtincompatible_Interface))
+  (return (global.get $$string_|gwtincompati...|@gwtincompatible.Interface))
  )
 )
 
@@ -376,14 +376,14 @@
  ;;@ gwtincompatible/Interface.java:22:12
  (block
   ;;@ gwtincompatible/Interface.java:22:12
-  (if (global.get $f_$initialized__gwtincompatible_Interface_NestedInterface)
+  (if (global.get $$class-initialized@gwtincompatible.Interface.NestedInterface)
    (then
     ;;@ gwtincompatible/Interface.java:22:12
     (return )
    )
   )
   ;;@ gwtincompatible/Interface.java:22:12
-  (global.set $f_$initialized__gwtincompatible_Interface_NestedInterface (i32.const 1))
+  (global.set $$class-initialized@gwtincompatible.Interface.NestedInterface (i32.const 1))
  )
 )
 
@@ -391,12 +391,12 @@
 (func $$getClassMetadata__java_lang_Class@gwtincompatible.Interface.NestedInterface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__gwtincompatible_Interface_NestedInterface))
+  (if (ref.is_null (global.get $$class@gwtincompatible.Interface.NestedInterface))
    (then
-    (global.set $f_$class__gwtincompatible_Interface_NestedInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|gwtincompati...|__java_lang_String (ref.func $$getString_|gwtincompati...|__java_lang_String@gwtincompatible.Interface.NestedInterface) )))
+    (global.set $$class@gwtincompatible.Interface.NestedInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|gwtincompati...|__java_lang_String (ref.func $$getString_|gwtincompati...|__java_lang_String@gwtincompatible.Interface.NestedInterface) )))
    )
   )
-  (return (global.get $f_$class__gwtincompatible_Interface_NestedInterface))
+  (return (global.get $$class@gwtincompatible.Interface.NestedInterface))
  )
 )
 
@@ -404,12 +404,12 @@
 (func $$getString_|gwtincompati...|__java_lang_String@gwtincompatible.Interface.NestedInterface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|gwtincompati...|__gwtincompatible_Interface_NestedInterface))
+  (if (ref.is_null (global.get $$string_|gwtincompati...|@gwtincompatible.Interface.NestedInterface))
    (then
-    (global.set $f_$string_|gwtincompati...|__gwtincompatible_Interface_NestedInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "gwtincompatible.Interface$NestedInterface")))
+    (global.set $$string_|gwtincompati...|@gwtincompatible.Interface.NestedInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "gwtincompatible.Interface$NestedInterface")))
    )
   )
-  (return (global.get $f_$string_|gwtincompati...|__gwtincompatible_Interface_NestedInterface))
+  (return (global.get $$string_|gwtincompati...|@gwtincompatible.Interface.NestedInterface))
  )
 )
 
@@ -430,14 +430,14 @@
  ;;@ gwtincompatible/Interface.java:27:17
  (block
   ;;@ gwtincompatible/Interface.java:27:17
-  (if (global.get $f_$initialized__gwtincompatible_Interface_ClassWithAbstractMethod)
+  (if (global.get $$class-initialized@gwtincompatible.Interface.ClassWithAbstractMethod)
    (then
     ;;@ gwtincompatible/Interface.java:27:17
     (return )
    )
   )
   ;;@ gwtincompatible/Interface.java:27:17
-  (global.set $f_$initialized__gwtincompatible_Interface_ClassWithAbstractMethod (i32.const 1))
+  (global.set $$class-initialized@gwtincompatible.Interface.ClassWithAbstractMethod (i32.const 1))
   ;;@ gwtincompatible/Interface.java:27:17
   (call $$clinit__void@java.lang.Object )
  )
@@ -447,12 +447,12 @@
 (func $$getClassMetadata__java_lang_Class@gwtincompatible.Interface.ClassWithAbstractMethod
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__gwtincompatible_Interface_ClassWithAbstractMethod))
+  (if (ref.is_null (global.get $$class@gwtincompatible.Interface.ClassWithAbstractMethod))
    (then
-    (global.set $f_$class__gwtincompatible_Interface_ClassWithAbstractMethod (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|gwtincompati...|__java_lang_String (ref.func $$getString_|gwtincompati...|__java_lang_String@gwtincompatible.Interface.ClassWithAbstractMethod) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@gwtincompatible.Interface.ClassWithAbstractMethod (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|gwtincompati...|__java_lang_String (ref.func $$getString_|gwtincompati...|__java_lang_String@gwtincompatible.Interface.ClassWithAbstractMethod) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__gwtincompatible_Interface_ClassWithAbstractMethod))
+  (return (global.get $$class@gwtincompatible.Interface.ClassWithAbstractMethod))
  )
 )
 
@@ -460,12 +460,12 @@
 (func $$getString_|gwtincompati...|__java_lang_String@gwtincompatible.Interface.ClassWithAbstractMethod
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|gwtincompati...|__gwtincompatible_Interface_ClassWithAbstractMethod))
+  (if (ref.is_null (global.get $$string_|gwtincompati...|@gwtincompatible.Interface.ClassWithAbstractMethod))
    (then
-    (global.set $f_$string_|gwtincompati...|__gwtincompatible_Interface_ClassWithAbstractMethod (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "gwtincompatible.Interface$ClassWithAbstractMethod")))
+    (global.set $$string_|gwtincompati...|@gwtincompatible.Interface.ClassWithAbstractMethod (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "gwtincompatible.Interface$ClassWithAbstractMethod")))
    )
   )
-  (return (global.get $f_$string_|gwtincompati...|__gwtincompatible_Interface_ClassWithAbstractMethod))
+  (return (global.get $$string_|gwtincompati...|@gwtincompatible.Interface.ClassWithAbstractMethod))
  )
 )
 
@@ -518,14 +518,14 @@
  ;;@ gwtincompatible/Implementor.java:18:13
  (block
   ;;@ gwtincompatible/Implementor.java:18:13
-  (if (global.get $f_$initialized__gwtincompatible_Implementor)
+  (if (global.get $$class-initialized@gwtincompatible.Implementor)
    (then
     ;;@ gwtincompatible/Implementor.java:18:13
     (return )
    )
   )
   ;;@ gwtincompatible/Implementor.java:18:13
-  (global.set $f_$initialized__gwtincompatible_Implementor (i32.const 1))
+  (global.set $$class-initialized@gwtincompatible.Implementor (i32.const 1))
   ;;@ gwtincompatible/Implementor.java:18:13
   (call $$clinit__void@gwtincompatible.Interface.ClassWithAbstractMethod )
  )
@@ -535,12 +535,12 @@
 (func $$getClassMetadata__java_lang_Class@gwtincompatible.Implementor
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__gwtincompatible_Implementor))
+  (if (ref.is_null (global.get $$class@gwtincompatible.Implementor))
    (then
-    (global.set $f_$class__gwtincompatible_Implementor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|gwtincompati...|__java_lang_String (ref.func $$getString_|gwtincompati...|__java_lang_String@gwtincompatible.Implementor) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@gwtincompatible.Interface.ClassWithAbstractMethod) )))
+    (global.set $$class@gwtincompatible.Implementor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|gwtincompati...|__java_lang_String (ref.func $$getString_|gwtincompati...|__java_lang_String@gwtincompatible.Implementor) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@gwtincompatible.Interface.ClassWithAbstractMethod) )))
    )
   )
-  (return (global.get $f_$class__gwtincompatible_Implementor))
+  (return (global.get $$class@gwtincompatible.Implementor))
  )
 )
 
@@ -561,12 +561,12 @@
 (func $$getString_|gwtincompati...|__java_lang_String@gwtincompatible.Implementor
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|gwtincompati...|__gwtincompatible_Implementor))
+  (if (ref.is_null (global.get $$string_|gwtincompati...|@gwtincompatible.Implementor))
    (then
-    (global.set $f_$string_|gwtincompati...|__gwtincompatible_Implementor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "gwtincompatible.Implementor")))
+    (global.set $$string_|gwtincompati...|@gwtincompatible.Implementor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "gwtincompatible.Implementor")))
    )
   )
-  (return (global.get $f_$string_|gwtincompati...|__gwtincompatible_Implementor))
+  (return (global.get $$string_|gwtincompati...|@gwtincompatible.Implementor))
  )
 )
 
@@ -580,9 +580,9 @@
  ;;@ gwtincompatible/Implementor.java:36:7
  (block
   ;;@ gwtincompatible/Implementor.java:36:7
-  (struct.set $java.lang.Enum $f_name__java_lang_Enum_ (local.get $this) (local.get $$name))
+  (struct.set $java.lang.Enum $name@java.lang.Enum (local.get $this) (local.get $$name))
   ;;@ gwtincompatible/Implementor.java:36:7
-  (struct.set $java.lang.Enum $f_ordinal__java_lang_Enum_ (local.get $this) (local.get $$ordinal))
+  (struct.set $java.lang.Enum $ordinal@java.lang.Enum (local.get $this) (local.get $$ordinal))
   ;;@ gwtincompatible/Implementor.java:36:7
   (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
  )
@@ -597,16 +597,16 @@
   ;;@ gwtincompatible/Implementor.java:36:7
   (call $$clinit__void@gwtincompatible.Implementor.SomeEnum )
   ;;@ gwtincompatible/Implementor.java:36:7
-  (if (ref.is_null (global.get $f_namesToValuesMap__gwtincompatible_Implementor_SomeEnum_))
+  (if (ref.is_null (global.get $namesToValuesMap@gwtincompatible.Implementor.SomeEnum))
    (then
     (block
      ;;@ gwtincompatible/Implementor.java:36:7
-     (global.set $f_namesToValuesMap__gwtincompatible_Implementor_SomeEnum_ (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values__arrayOf_gwtincompatible_Implementor_SomeEnum@gwtincompatible.Implementor.SomeEnum )))
+     (global.set $namesToValuesMap@gwtincompatible.Implementor.SomeEnum (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values__arrayOf_gwtincompatible_Implementor_SomeEnum@gwtincompatible.Implementor.SomeEnum )))
     )
    )
   )
   ;;@ gwtincompatible/Implementor.java:36:7
-  (return (ref.cast (ref null $gwtincompatible.Implementor.SomeEnum) (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__gwtincompatible_Implementor_SomeEnum_))))
+  (return (ref.cast (ref null $gwtincompatible.Implementor.SomeEnum) (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $namesToValuesMap@gwtincompatible.Implementor.SomeEnum))))
  )
 )
 
@@ -618,7 +618,7 @@
   ;;@ gwtincompatible/Implementor.java:36:7
   (call $$clinit__void@gwtincompatible.Implementor.SomeEnum )
   ;;@ gwtincompatible/Implementor.java:36:7
-  (return (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array (global.get $f_COMPATIBLE__gwtincompatible_Implementor_SomeEnum))))
+  (return (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array (global.get $COMPATIBLE@gwtincompatible.Implementor.SomeEnum))))
  )
 )
 
@@ -627,18 +627,18 @@
  ;;@ gwtincompatible/Implementor.java:36:7
  (block
   ;;@ gwtincompatible/Implementor.java:36:7
-  (if (global.get $f_$initialized__gwtincompatible_Implementor_SomeEnum)
+  (if (global.get $$class-initialized@gwtincompatible.Implementor.SomeEnum)
    (then
     ;;@ gwtincompatible/Implementor.java:36:7
     (return )
    )
   )
   ;;@ gwtincompatible/Implementor.java:36:7
-  (global.set $f_$initialized__gwtincompatible_Implementor_SomeEnum (i32.const 1))
+  (global.set $$class-initialized@gwtincompatible.Implementor.SomeEnum (i32.const 1))
   ;;@ gwtincompatible/Implementor.java:36:7
   (call $$clinit__void@java.lang.Enum )
   ;;@ gwtincompatible/Implementor.java:37:4
-  (global.set $f_COMPATIBLE__gwtincompatible_Implementor_SomeEnum (call $$create__java_lang_String__int@gwtincompatible.Implementor.SomeEnum.1 (call $function.no.side.effects.$getString_|COMPATIBLE|__java_lang_String (ref.func $$getString_|COMPATIBLE|__java_lang_String@gwtincompatible.Implementor.SomeEnum) )(i32.const 0)))
+  (global.set $COMPATIBLE@gwtincompatible.Implementor.SomeEnum (call $$create__java_lang_String__int@gwtincompatible.Implementor.SomeEnum.1 (call $function.no.side.effects.$getString_|COMPATIBLE|__java_lang_String (ref.func $$getString_|COMPATIBLE|__java_lang_String@gwtincompatible.Implementor.SomeEnum) )(i32.const 0)))
  )
 )
 
@@ -646,12 +646,12 @@
 (func $$getClassMetadata__java_lang_Class@gwtincompatible.Implementor.SomeEnum
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__gwtincompatible_Implementor_SomeEnum))
+  (if (ref.is_null (global.get $$class@gwtincompatible.Implementor.SomeEnum))
    (then
-    (global.set $f_$class__gwtincompatible_Implementor_SomeEnum (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|gwtincompati...|__java_lang_String (ref.func $$getString_|gwtincompati...|__java_lang_String@gwtincompatible.Implementor.SomeEnum) )))
+    (global.set $$class@gwtincompatible.Implementor.SomeEnum (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|gwtincompati...|__java_lang_String (ref.func $$getString_|gwtincompati...|__java_lang_String@gwtincompatible.Implementor.SomeEnum) )))
    )
   )
-  (return (global.get $f_$class__gwtincompatible_Implementor_SomeEnum))
+  (return (global.get $$class@gwtincompatible.Implementor.SomeEnum))
  )
 )
 
@@ -659,12 +659,12 @@
 (func $$getString_|COMPATIBLE|__java_lang_String@gwtincompatible.Implementor.SomeEnum
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|COMPATIBLE|__gwtincompatible_Implementor_SomeEnum))
+  (if (ref.is_null (global.get $$string_|COMPATIBLE|@gwtincompatible.Implementor.SomeEnum))
    (then
-    (global.set $f_$string_|COMPATIBLE|__gwtincompatible_Implementor_SomeEnum (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "COMPATIBLE")))
+    (global.set $$string_|COMPATIBLE|@gwtincompatible.Implementor.SomeEnum (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "COMPATIBLE")))
    )
   )
-  (return (global.get $f_$string_|COMPATIBLE|__gwtincompatible_Implementor_SomeEnum))
+  (return (global.get $$string_|COMPATIBLE|@gwtincompatible.Implementor.SomeEnum))
  )
 )
 
@@ -672,12 +672,12 @@
 (func $$getString_|gwtincompati...|__java_lang_String@gwtincompatible.Implementor.SomeEnum
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|gwtincompati...|__gwtincompatible_Implementor_SomeEnum))
+  (if (ref.is_null (global.get $$string_|gwtincompati...|@gwtincompatible.Implementor.SomeEnum))
    (then
-    (global.set $f_$string_|gwtincompati...|__gwtincompatible_Implementor_SomeEnum (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "gwtincompatible.Implementor$SomeEnum")))
+    (global.set $$string_|gwtincompati...|@gwtincompatible.Implementor.SomeEnum (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "gwtincompatible.Implementor$SomeEnum")))
    )
   )
-  (return (global.get $f_$string_|gwtincompati...|__gwtincompatible_Implementor_SomeEnum))
+  (return (global.get $$string_|gwtincompati...|@gwtincompatible.Implementor.SomeEnum))
  )
 )
 
@@ -731,14 +731,14 @@
  ;;@ gwtincompatible/Implementor.java:37:15
  (block
   ;;@ gwtincompatible/Implementor.java:37:15
-  (if (global.get $f_$initialized__gwtincompatible_Implementor_SomeEnum_1)
+  (if (global.get $$class-initialized@gwtincompatible.Implementor.SomeEnum.1)
    (then
     ;;@ gwtincompatible/Implementor.java:37:15
     (return )
    )
   )
   ;;@ gwtincompatible/Implementor.java:37:15
-  (global.set $f_$initialized__gwtincompatible_Implementor_SomeEnum_1 (i32.const 1))
+  (global.set $$class-initialized@gwtincompatible.Implementor.SomeEnum.1 (i32.const 1))
   ;;@ gwtincompatible/Implementor.java:37:15
   (call $$clinit__void@gwtincompatible.Implementor.SomeEnum )
  )
@@ -748,12 +748,12 @@
 (func $$getClassMetadata__java_lang_Class@gwtincompatible.Implementor.SomeEnum.1
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__gwtincompatible_Implementor_SomeEnum_1))
+  (if (ref.is_null (global.get $$class@gwtincompatible.Implementor.SomeEnum.1))
    (then
-    (global.set $f_$class__gwtincompatible_Implementor_SomeEnum_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|gwtincompati...|__java_lang_String (ref.func $$getString_|gwtincompati...|__java_lang_String@gwtincompatible.Implementor.SomeEnum.1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@gwtincompatible.Implementor.SomeEnum) )))
+    (global.set $$class@gwtincompatible.Implementor.SomeEnum.1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|gwtincompati...|__java_lang_String (ref.func $$getString_|gwtincompati...|__java_lang_String@gwtincompatible.Implementor.SomeEnum.1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@gwtincompatible.Implementor.SomeEnum) )))
    )
   )
-  (return (global.get $f_$class__gwtincompatible_Implementor_SomeEnum_1))
+  (return (global.get $$class@gwtincompatible.Implementor.SomeEnum.1))
  )
 )
 
@@ -774,11 +774,11 @@
 (func $$getString_|gwtincompati...|__java_lang_String@gwtincompatible.Implementor.SomeEnum.1
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|gwtincompati...|__gwtincompatible_Implementor_SomeEnum_1))
+  (if (ref.is_null (global.get $$string_|gwtincompati...|@gwtincompatible.Implementor.SomeEnum.1))
    (then
-    (global.set $f_$string_|gwtincompati...|__gwtincompatible_Implementor_SomeEnum_1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "gwtincompatible.Implementor$SomeEnum$1")))
+    (global.set $$string_|gwtincompati...|@gwtincompatible.Implementor.SomeEnum.1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "gwtincompatible.Implementor$SomeEnum$1")))
    )
   )
-  (return (global.get $f_$string_|gwtincompati...|__gwtincompatible_Implementor_SomeEnum_1))
+  (return (global.get $$string_|gwtincompati...|@gwtincompatible.Implementor.SomeEnum.1))
  )
 )

@@ -20,7 +20,7 @@
  (type $interfacejsbridge.InterfaceImpl (sub $java.lang.Object (struct
   (field $vtable (ref $interfacejsbridge.InterfaceImpl.vtable))
   (field $itable (ref $interfacejsbridge.InterfaceImpl.itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $interfacejsbridge.InterfaceImpl.vtable (sub $java.lang.Object.vtable (struct
@@ -46,7 +46,7 @@
  (type $interfacejsbridge.Main (sub $java.lang.Object (struct
   (field $vtable (ref $interfacejsbridge.Main.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $interfacejsbridge.Main.vtable (sub $java.lang.Object.vtable (struct
@@ -113,57 +113,57 @@
 )
 
 ;;; Code for interfacejsbridge.MyJsInterface [static fields]
-(global $f_$initialized__interfacejsbridge_MyJsInterface (mut i32)
+(global $$class-initialized@interfacejsbridge.MyJsInterface (mut i32)
  (i32.const 0)
 )
-(global $f_$class__interfacejsbridge_MyJsInterface (mut (ref null $java.lang.Class))
+(global $$class@interfacejsbridge.MyJsInterface (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|interfacejsb...|__interfacejsbridge_MyJsInterface (mut (ref null $java.lang.String))
+(global $$string_|interfacejsb...|@interfacejsbridge.MyJsInterface (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for interfacejsbridge.MyInterface [static fields]
-(global $f_$initialized__interfacejsbridge_MyInterface (mut i32)
+(global $$class-initialized@interfacejsbridge.MyInterface (mut i32)
  (i32.const 0)
 )
-(global $f_$class__interfacejsbridge_MyInterface (mut (ref null $java.lang.Class))
+(global $$class@interfacejsbridge.MyInterface (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|interfacejsb...|__interfacejsbridge_MyInterface (mut (ref null $java.lang.String))
+(global $$string_|interfacejsb...|@interfacejsbridge.MyInterface (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for interfacejsbridge.SubInterface [static fields]
-(global $f_$initialized__interfacejsbridge_SubInterface (mut i32)
+(global $$class-initialized@interfacejsbridge.SubInterface (mut i32)
  (i32.const 0)
 )
-(global $f_$class__interfacejsbridge_SubInterface (mut (ref null $java.lang.Class))
+(global $$class@interfacejsbridge.SubInterface (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|interfacejsb...|__interfacejsbridge_SubInterface (mut (ref null $java.lang.String))
+(global $$string_|interfacejsb...|@interfacejsbridge.SubInterface (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for interfacejsbridge.InterfaceImpl [static fields]
-(global $f_$initialized__interfacejsbridge_InterfaceImpl (mut i32)
+(global $$class-initialized@interfacejsbridge.InterfaceImpl (mut i32)
  (i32.const 0)
 )
-(global $f_$class__interfacejsbridge_InterfaceImpl (mut (ref null $java.lang.Class))
+(global $$class@interfacejsbridge.InterfaceImpl (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|interfacejsb...|__interfacejsbridge_InterfaceImpl (mut (ref null $java.lang.String))
+(global $$string_|interfacejsb...|@interfacejsbridge.InterfaceImpl (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for interfacejsbridge.Main [static fields]
-(global $f_$initialized__interfacejsbridge_Main (mut i32)
+(global $$class-initialized@interfacejsbridge.Main (mut i32)
  (i32.const 0)
 )
-(global $f_$class__interfacejsbridge_Main (mut (ref null $java.lang.Class))
+(global $$class@interfacejsbridge.Main (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|interfacejsb...|__interfacejsbridge_Main (mut (ref null $java.lang.String))
+(global $$string_|interfacejsb...|@interfacejsbridge.Main (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -174,14 +174,14 @@
  ;;@ interfacejsbridge/InterfaceImpl.java:21:10
  (block
   ;;@ interfacejsbridge/InterfaceImpl.java:21:10
-  (if (global.get $f_$initialized__interfacejsbridge_MyJsInterface)
+  (if (global.get $$class-initialized@interfacejsbridge.MyJsInterface)
    (then
     ;;@ interfacejsbridge/InterfaceImpl.java:21:10
     (return )
    )
   )
   ;;@ interfacejsbridge/InterfaceImpl.java:21:10
-  (global.set $f_$initialized__interfacejsbridge_MyJsInterface (i32.const 1))
+  (global.set $$class-initialized@interfacejsbridge.MyJsInterface (i32.const 1))
  )
 )
 
@@ -189,12 +189,12 @@
 (func $$getClassMetadata__java_lang_Class@interfacejsbridge.MyJsInterface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__interfacejsbridge_MyJsInterface))
+  (if (ref.is_null (global.get $$class@interfacejsbridge.MyJsInterface))
    (then
-    (global.set $f_$class__interfacejsbridge_MyJsInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfacejsb...|__java_lang_String (ref.func $$getString_|interfacejsb...|__java_lang_String@interfacejsbridge.MyJsInterface) )))
+    (global.set $$class@interfacejsbridge.MyJsInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfacejsb...|__java_lang_String (ref.func $$getString_|interfacejsb...|__java_lang_String@interfacejsbridge.MyJsInterface) )))
    )
   )
-  (return (global.get $f_$class__interfacejsbridge_MyJsInterface))
+  (return (global.get $$class@interfacejsbridge.MyJsInterface))
  )
 )
 
@@ -202,12 +202,12 @@
 (func $$getString_|interfacejsb...|__java_lang_String@interfacejsbridge.MyJsInterface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|interfacejsb...|__interfacejsbridge_MyJsInterface))
+  (if (ref.is_null (global.get $$string_|interfacejsb...|@interfacejsbridge.MyJsInterface))
    (then
-    (global.set $f_$string_|interfacejsb...|__interfacejsbridge_MyJsInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfacejsbridge.MyJsInterface")))
+    (global.set $$string_|interfacejsb...|@interfacejsbridge.MyJsInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfacejsbridge.MyJsInterface")))
    )
   )
-  (return (global.get $f_$string_|interfacejsb...|__interfacejsbridge_MyJsInterface))
+  (return (global.get $$string_|interfacejsb...|@interfacejsbridge.MyJsInterface))
  )
 )
 
@@ -218,14 +218,14 @@
  ;;@ interfacejsbridge/InterfaceImpl.java:25:10
  (block
   ;;@ interfacejsbridge/InterfaceImpl.java:25:10
-  (if (global.get $f_$initialized__interfacejsbridge_MyInterface)
+  (if (global.get $$class-initialized@interfacejsbridge.MyInterface)
    (then
     ;;@ interfacejsbridge/InterfaceImpl.java:25:10
     (return )
    )
   )
   ;;@ interfacejsbridge/InterfaceImpl.java:25:10
-  (global.set $f_$initialized__interfacejsbridge_MyInterface (i32.const 1))
+  (global.set $$class-initialized@interfacejsbridge.MyInterface (i32.const 1))
  )
 )
 
@@ -233,12 +233,12 @@
 (func $$getClassMetadata__java_lang_Class@interfacejsbridge.MyInterface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__interfacejsbridge_MyInterface))
+  (if (ref.is_null (global.get $$class@interfacejsbridge.MyInterface))
    (then
-    (global.set $f_$class__interfacejsbridge_MyInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfacejsb...|__java_lang_String (ref.func $$getString_|interfacejsb...|__java_lang_String@interfacejsbridge.MyInterface) )))
+    (global.set $$class@interfacejsbridge.MyInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfacejsb...|__java_lang_String (ref.func $$getString_|interfacejsb...|__java_lang_String@interfacejsbridge.MyInterface) )))
    )
   )
-  (return (global.get $f_$class__interfacejsbridge_MyInterface))
+  (return (global.get $$class@interfacejsbridge.MyInterface))
  )
 )
 
@@ -246,12 +246,12 @@
 (func $$getString_|interfacejsb...|__java_lang_String@interfacejsbridge.MyInterface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|interfacejsb...|__interfacejsbridge_MyInterface))
+  (if (ref.is_null (global.get $$string_|interfacejsb...|@interfacejsbridge.MyInterface))
    (then
-    (global.set $f_$string_|interfacejsb...|__interfacejsbridge_MyInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfacejsbridge.MyInterface")))
+    (global.set $$string_|interfacejsb...|@interfacejsbridge.MyInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfacejsbridge.MyInterface")))
    )
   )
-  (return (global.get $f_$string_|interfacejsb...|__interfacejsbridge_MyInterface))
+  (return (global.get $$string_|interfacejsb...|@interfacejsbridge.MyInterface))
  )
 )
 
@@ -262,14 +262,14 @@
  ;;@ interfacejsbridge/InterfaceImpl.java:29:10
  (block
   ;;@ interfacejsbridge/InterfaceImpl.java:29:10
-  (if (global.get $f_$initialized__interfacejsbridge_SubInterface)
+  (if (global.get $$class-initialized@interfacejsbridge.SubInterface)
    (then
     ;;@ interfacejsbridge/InterfaceImpl.java:29:10
     (return )
    )
   )
   ;;@ interfacejsbridge/InterfaceImpl.java:29:10
-  (global.set $f_$initialized__interfacejsbridge_SubInterface (i32.const 1))
+  (global.set $$class-initialized@interfacejsbridge.SubInterface (i32.const 1))
  )
 )
 
@@ -277,12 +277,12 @@
 (func $$getClassMetadata__java_lang_Class@interfacejsbridge.SubInterface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__interfacejsbridge_SubInterface))
+  (if (ref.is_null (global.get $$class@interfacejsbridge.SubInterface))
    (then
-    (global.set $f_$class__interfacejsbridge_SubInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfacejsb...|__java_lang_String (ref.func $$getString_|interfacejsb...|__java_lang_String@interfacejsbridge.SubInterface) )))
+    (global.set $$class@interfacejsbridge.SubInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfacejsb...|__java_lang_String (ref.func $$getString_|interfacejsb...|__java_lang_String@interfacejsbridge.SubInterface) )))
    )
   )
-  (return (global.get $f_$class__interfacejsbridge_SubInterface))
+  (return (global.get $$class@interfacejsbridge.SubInterface))
  )
 )
 
@@ -290,12 +290,12 @@
 (func $$getString_|interfacejsb...|__java_lang_String@interfacejsbridge.SubInterface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|interfacejsb...|__interfacejsbridge_SubInterface))
+  (if (ref.is_null (global.get $$string_|interfacejsb...|@interfacejsbridge.SubInterface))
    (then
-    (global.set $f_$string_|interfacejsb...|__interfacejsbridge_SubInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfacejsbridge.SubInterface")))
+    (global.set $$string_|interfacejsb...|@interfacejsbridge.SubInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfacejsbridge.SubInterface")))
    )
   )
-  (return (global.get $f_$string_|interfacejsb...|__interfacejsbridge_SubInterface))
+  (return (global.get $$string_|interfacejsb...|@interfacejsbridge.SubInterface))
  )
 )
 
@@ -349,14 +349,14 @@
  ;;@ interfacejsbridge/InterfaceImpl.java:34:13
  (block
   ;;@ interfacejsbridge/InterfaceImpl.java:34:13
-  (if (global.get $f_$initialized__interfacejsbridge_InterfaceImpl)
+  (if (global.get $$class-initialized@interfacejsbridge.InterfaceImpl)
    (then
     ;;@ interfacejsbridge/InterfaceImpl.java:34:13
     (return )
    )
   )
   ;;@ interfacejsbridge/InterfaceImpl.java:34:13
-  (global.set $f_$initialized__interfacejsbridge_InterfaceImpl (i32.const 1))
+  (global.set $$class-initialized@interfacejsbridge.InterfaceImpl (i32.const 1))
   ;;@ interfacejsbridge/InterfaceImpl.java:34:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -366,12 +366,12 @@
 (func $$getClassMetadata__java_lang_Class@interfacejsbridge.InterfaceImpl
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__interfacejsbridge_InterfaceImpl))
+  (if (ref.is_null (global.get $$class@interfacejsbridge.InterfaceImpl))
    (then
-    (global.set $f_$class__interfacejsbridge_InterfaceImpl (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfacejsb...|__java_lang_String (ref.func $$getString_|interfacejsb...|__java_lang_String@interfacejsbridge.InterfaceImpl) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@interfacejsbridge.InterfaceImpl (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfacejsb...|__java_lang_String (ref.func $$getString_|interfacejsb...|__java_lang_String@interfacejsbridge.InterfaceImpl) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__interfacejsbridge_InterfaceImpl))
+  (return (global.get $$class@interfacejsbridge.InterfaceImpl))
  )
 )
 
@@ -392,12 +392,12 @@
 (func $$getString_|interfacejsb...|__java_lang_String@interfacejsbridge.InterfaceImpl
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|interfacejsb...|__interfacejsbridge_InterfaceImpl))
+  (if (ref.is_null (global.get $$string_|interfacejsb...|@interfacejsbridge.InterfaceImpl))
    (then
-    (global.set $f_$string_|interfacejsb...|__interfacejsbridge_InterfaceImpl (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfacejsbridge.InterfaceImpl")))
+    (global.set $$string_|interfacejsb...|@interfacejsbridge.InterfaceImpl (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfacejsbridge.InterfaceImpl")))
    )
   )
-  (return (global.get $f_$string_|interfacejsb...|__interfacejsbridge_InterfaceImpl))
+  (return (global.get $$string_|interfacejsb...|@interfacejsbridge.InterfaceImpl))
  )
 )
 
@@ -467,14 +467,14 @@
  ;;@ interfacejsbridge/Main.java:18:13
  (block
   ;;@ interfacejsbridge/Main.java:18:13
-  (if (global.get $f_$initialized__interfacejsbridge_Main)
+  (if (global.get $$class-initialized@interfacejsbridge.Main)
    (then
     ;;@ interfacejsbridge/Main.java:18:13
     (return )
    )
   )
   ;;@ interfacejsbridge/Main.java:18:13
-  (global.set $f_$initialized__interfacejsbridge_Main (i32.const 1))
+  (global.set $$class-initialized@interfacejsbridge.Main (i32.const 1))
   ;;@ interfacejsbridge/Main.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -484,12 +484,12 @@
 (func $$getClassMetadata__java_lang_Class@interfacejsbridge.Main
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__interfacejsbridge_Main))
+  (if (ref.is_null (global.get $$class@interfacejsbridge.Main))
    (then
-    (global.set $f_$class__interfacejsbridge_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfacejsb...|__java_lang_String (ref.func $$getString_|interfacejsb...|__java_lang_String@interfacejsbridge.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@interfacejsbridge.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfacejsb...|__java_lang_String (ref.func $$getString_|interfacejsb...|__java_lang_String@interfacejsbridge.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__interfacejsbridge_Main))
+  (return (global.get $$class@interfacejsbridge.Main))
  )
 )
 
@@ -510,11 +510,11 @@
 (func $$getString_|interfacejsb...|__java_lang_String@interfacejsbridge.Main
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|interfacejsb...|__interfacejsbridge_Main))
+  (if (ref.is_null (global.get $$string_|interfacejsb...|@interfacejsbridge.Main))
    (then
-    (global.set $f_$string_|interfacejsb...|__interfacejsbridge_Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfacejsbridge.Main")))
+    (global.set $$string_|interfacejsb...|@interfacejsbridge.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfacejsbridge.Main")))
    )
   )
-  (return (global.get $f_$string_|interfacejsb...|__interfacejsbridge_Main))
+  (return (global.get $$string_|interfacejsb...|@interfacejsbridge.Main))
  )
 )

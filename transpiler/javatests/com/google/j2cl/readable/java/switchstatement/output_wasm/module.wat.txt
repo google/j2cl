@@ -2,7 +2,7 @@
  (type $switchstatement.SwitchStatement (sub $java.lang.Object (struct
   (field $vtable (ref $switchstatement.SwitchStatement.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $switchstatement.SwitchStatement.vtable (sub $java.lang.Object.vtable (struct
@@ -19,9 +19,9 @@
  (type $switchstatement.Numbers (sub $java.lang.Enum (struct
   (field $vtable (ref $switchstatement.Numbers.vtable))
   (field $itable (ref $switchstatement.Numbers.itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
-  (field $f_ordinal__java_lang_Enum_ (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  (field $name@java.lang.Enum (mut (ref null $java.lang.String)))
+  (field $ordinal@java.lang.Enum (mut i32))
   ))
  )
  (type $switchstatement.Numbers.vtable (sub $java.lang.Enum.vtable (struct
@@ -99,51 +99,51 @@
 )
 
 ;;; Code for switchstatement.Numbers [static fields]
-(global $f_ONE__switchstatement_Numbers (mut (ref null $switchstatement.Numbers))
+(global $ONE@switchstatement.Numbers (mut (ref null $switchstatement.Numbers))
  (ref.null $switchstatement.Numbers)
 )
-(global $f_TWO__switchstatement_Numbers (mut (ref null $switchstatement.Numbers))
+(global $TWO@switchstatement.Numbers (mut (ref null $switchstatement.Numbers))
  (ref.null $switchstatement.Numbers)
 )
-(global $f_THREE__switchstatement_Numbers (mut (ref null $switchstatement.Numbers))
+(global $THREE@switchstatement.Numbers (mut (ref null $switchstatement.Numbers))
  (ref.null $switchstatement.Numbers)
 )
-(global $f_namesToValuesMap__switchstatement_Numbers_ (mut (ref null $java.lang.Object))
+(global $namesToValuesMap@switchstatement.Numbers (mut (ref null $java.lang.Object))
  (ref.null $java.lang.Object)
 )
-(global $f_$initialized__switchstatement_Numbers (mut i32)
+(global $$class-initialized@switchstatement.Numbers (mut i32)
  (i32.const 0)
 )
-(global $f_$class__switchstatement_Numbers (mut (ref null $java.lang.Class))
+(global $$class@switchstatement.Numbers (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|ONE|__switchstatement_Numbers (mut (ref null $java.lang.String))
+(global $$string_|ONE|@switchstatement.Numbers (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
-(global $f_$string_|TWO|__switchstatement_Numbers (mut (ref null $java.lang.String))
+(global $$string_|TWO|@switchstatement.Numbers (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
-(global $f_$string_|THREE|__switchstatement_Numbers (mut (ref null $java.lang.String))
+(global $$string_|THREE|@switchstatement.Numbers (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
-(global $f_$string_|switchstatem...|__switchstatement_Numbers (mut (ref null $java.lang.String))
+(global $$string_|switchstatem...|@switchstatement.Numbers (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for switchstatement.SwitchStatement [static fields]
-(global $f_$initialized__switchstatement_SwitchStatement (mut i32)
+(global $$class-initialized@switchstatement.SwitchStatement (mut i32)
  (i32.const 0)
 )
-(global $f_$class__switchstatement_SwitchStatement (mut (ref null $java.lang.Class))
+(global $$class@switchstatement.SwitchStatement (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|one|__switchstatement_SwitchStatement (mut (ref null $java.lang.String))
+(global $$string_|one|@switchstatement.SwitchStatement (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
-(global $f_$string_|two|__switchstatement_SwitchStatement (mut (ref null $java.lang.String))
+(global $$string_|two|@switchstatement.SwitchStatement (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
-(global $f_$string_|switchstatem...|__switchstatement_SwitchStatement (mut (ref null $java.lang.String))
+(global $$string_|switchstatem...|@switchstatement.SwitchStatement (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -263,7 +263,7 @@
     (local.set $$expression_1 (block (result i32)
      (local.set $$qualifier (block (result (ref null $switchstatement.Numbers))
       (call $$clinit__void@switchstatement.Numbers )
-      (global.get $f_ONE__switchstatement_Numbers)
+      (global.get $ONE@switchstatement.Numbers)
      ))
      (call_ref $function.m_ordinal__int (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $$qualifier))))
     ))
@@ -1287,14 +1287,14 @@
  ;;@ switchstatement/SwitchStatement.java:24:13
  (block
   ;;@ switchstatement/SwitchStatement.java:24:13
-  (if (global.get $f_$initialized__switchstatement_SwitchStatement)
+  (if (global.get $$class-initialized@switchstatement.SwitchStatement)
    (then
     ;;@ switchstatement/SwitchStatement.java:24:13
     (return )
    )
   )
   ;;@ switchstatement/SwitchStatement.java:24:13
-  (global.set $f_$initialized__switchstatement_SwitchStatement (i32.const 1))
+  (global.set $$class-initialized@switchstatement.SwitchStatement (i32.const 1))
   ;;@ switchstatement/SwitchStatement.java:24:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -1304,12 +1304,12 @@
 (func $$getClassMetadata__java_lang_Class@switchstatement.SwitchStatement
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__switchstatement_SwitchStatement))
+  (if (ref.is_null (global.get $$class@switchstatement.SwitchStatement))
    (then
-    (global.set $f_$class__switchstatement_SwitchStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|switchstatem...|__java_lang_String (ref.func $$getString_|switchstatem...|__java_lang_String@switchstatement.SwitchStatement) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@switchstatement.SwitchStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|switchstatem...|__java_lang_String (ref.func $$getString_|switchstatem...|__java_lang_String@switchstatement.SwitchStatement) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__switchstatement_SwitchStatement))
+  (return (global.get $$class@switchstatement.SwitchStatement))
  )
 )
 
@@ -1330,12 +1330,12 @@
 (func $$getString_|one|__java_lang_String@switchstatement.SwitchStatement
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|one|__switchstatement_SwitchStatement))
+  (if (ref.is_null (global.get $$string_|one|@switchstatement.SwitchStatement))
    (then
-    (global.set $f_$string_|one|__switchstatement_SwitchStatement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "one")))
+    (global.set $$string_|one|@switchstatement.SwitchStatement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "one")))
    )
   )
-  (return (global.get $f_$string_|one|__switchstatement_SwitchStatement))
+  (return (global.get $$string_|one|@switchstatement.SwitchStatement))
  )
 )
 
@@ -1343,12 +1343,12 @@
 (func $$getString_|two|__java_lang_String@switchstatement.SwitchStatement
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|two|__switchstatement_SwitchStatement))
+  (if (ref.is_null (global.get $$string_|two|@switchstatement.SwitchStatement))
    (then
-    (global.set $f_$string_|two|__switchstatement_SwitchStatement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "two")))
+    (global.set $$string_|two|@switchstatement.SwitchStatement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "two")))
    )
   )
-  (return (global.get $f_$string_|two|__switchstatement_SwitchStatement))
+  (return (global.get $$string_|two|@switchstatement.SwitchStatement))
  )
 )
 
@@ -1356,12 +1356,12 @@
 (func $$getString_|switchstatem...|__java_lang_String@switchstatement.SwitchStatement
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|switchstatem...|__switchstatement_SwitchStatement))
+  (if (ref.is_null (global.get $$string_|switchstatem...|@switchstatement.SwitchStatement))
    (then
-    (global.set $f_$string_|switchstatem...|__switchstatement_SwitchStatement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "switchstatement.SwitchStatement")))
+    (global.set $$string_|switchstatem...|@switchstatement.SwitchStatement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "switchstatement.SwitchStatement")))
    )
   )
-  (return (global.get $f_$string_|switchstatem...|__switchstatement_SwitchStatement))
+  (return (global.get $$string_|switchstatem...|@switchstatement.SwitchStatement))
  )
 )
 
@@ -1392,9 +1392,9 @@
  ;;@ switchstatement/SwitchStatement.java:18:5
  (block
   ;;@ switchstatement/SwitchStatement.java:18:5
-  (struct.set $java.lang.Enum $f_name__java_lang_Enum_ (local.get $this) (local.get $$name))
+  (struct.set $java.lang.Enum $name@java.lang.Enum (local.get $this) (local.get $$name))
   ;;@ switchstatement/SwitchStatement.java:18:5
-  (struct.set $java.lang.Enum $f_ordinal__java_lang_Enum_ (local.get $this) (local.get $$ordinal))
+  (struct.set $java.lang.Enum $ordinal@java.lang.Enum (local.get $this) (local.get $$ordinal))
   ;;@ switchstatement/SwitchStatement.java:18:5
   (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
  )
@@ -1409,16 +1409,16 @@
   ;;@ switchstatement/SwitchStatement.java:18:5
   (call $$clinit__void@switchstatement.Numbers )
   ;;@ switchstatement/SwitchStatement.java:18:5
-  (if (ref.is_null (global.get $f_namesToValuesMap__switchstatement_Numbers_))
+  (if (ref.is_null (global.get $namesToValuesMap@switchstatement.Numbers))
    (then
     (block
      ;;@ switchstatement/SwitchStatement.java:18:5
-     (global.set $f_namesToValuesMap__switchstatement_Numbers_ (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values__arrayOf_switchstatement_Numbers@switchstatement.Numbers )))
+     (global.set $namesToValuesMap@switchstatement.Numbers (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values__arrayOf_switchstatement_Numbers@switchstatement.Numbers )))
     )
    )
   )
   ;;@ switchstatement/SwitchStatement.java:18:5
-  (return (ref.cast (ref null $switchstatement.Numbers) (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__switchstatement_Numbers_))))
+  (return (ref.cast (ref null $switchstatement.Numbers) (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $namesToValuesMap@switchstatement.Numbers))))
  )
 )
 
@@ -1430,7 +1430,7 @@
   ;;@ switchstatement/SwitchStatement.java:18:5
   (call $$clinit__void@switchstatement.Numbers )
   ;;@ switchstatement/SwitchStatement.java:18:5
-  (return (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array (global.get $f_ONE__switchstatement_Numbers)(global.get $f_TWO__switchstatement_Numbers)(global.get $f_THREE__switchstatement_Numbers))))
+  (return (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array (global.get $ONE@switchstatement.Numbers)(global.get $TWO@switchstatement.Numbers)(global.get $THREE@switchstatement.Numbers))))
  )
 )
 
@@ -1439,22 +1439,22 @@
  ;;@ switchstatement/SwitchStatement.java:18:5
  (block
   ;;@ switchstatement/SwitchStatement.java:18:5
-  (if (global.get $f_$initialized__switchstatement_Numbers)
+  (if (global.get $$class-initialized@switchstatement.Numbers)
    (then
     ;;@ switchstatement/SwitchStatement.java:18:5
     (return )
    )
   )
   ;;@ switchstatement/SwitchStatement.java:18:5
-  (global.set $f_$initialized__switchstatement_Numbers (i32.const 1))
+  (global.set $$class-initialized@switchstatement.Numbers (i32.const 1))
   ;;@ switchstatement/SwitchStatement.java:18:5
   (call $$clinit__void@java.lang.Enum )
   ;;@ switchstatement/SwitchStatement.java:19:2
-  (global.set $f_ONE__switchstatement_Numbers (call $$create__java_lang_String__int@switchstatement.Numbers (call $function.no.side.effects.$getString_|ONE|__java_lang_String (ref.func $$getString_|ONE|__java_lang_String@switchstatement.Numbers) )(i32.const 0)))
+  (global.set $ONE@switchstatement.Numbers (call $$create__java_lang_String__int@switchstatement.Numbers (call $function.no.side.effects.$getString_|ONE|__java_lang_String (ref.func $$getString_|ONE|__java_lang_String@switchstatement.Numbers) )(i32.const 0)))
   ;;@ switchstatement/SwitchStatement.java:20:2
-  (global.set $f_TWO__switchstatement_Numbers (call $$create__java_lang_String__int@switchstatement.Numbers (call $function.no.side.effects.$getString_|TWO|__java_lang_String (ref.func $$getString_|TWO|__java_lang_String@switchstatement.Numbers) )(i32.const 1)))
+  (global.set $TWO@switchstatement.Numbers (call $$create__java_lang_String__int@switchstatement.Numbers (call $function.no.side.effects.$getString_|TWO|__java_lang_String (ref.func $$getString_|TWO|__java_lang_String@switchstatement.Numbers) )(i32.const 1)))
   ;;@ switchstatement/SwitchStatement.java:21:2
-  (global.set $f_THREE__switchstatement_Numbers (call $$create__java_lang_String__int@switchstatement.Numbers (call $function.no.side.effects.$getString_|THREE|__java_lang_String (ref.func $$getString_|THREE|__java_lang_String@switchstatement.Numbers) )(i32.const 2)))
+  (global.set $THREE@switchstatement.Numbers (call $$create__java_lang_String__int@switchstatement.Numbers (call $function.no.side.effects.$getString_|THREE|__java_lang_String (ref.func $$getString_|THREE|__java_lang_String@switchstatement.Numbers) )(i32.const 2)))
  )
 )
 
@@ -1462,12 +1462,12 @@
 (func $$getClassMetadata__java_lang_Class@switchstatement.Numbers
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__switchstatement_Numbers))
+  (if (ref.is_null (global.get $$class@switchstatement.Numbers))
    (then
-    (global.set $f_$class__switchstatement_Numbers (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|switchstatem...|__java_lang_String (ref.func $$getString_|switchstatem...|__java_lang_String@switchstatement.Numbers) )))
+    (global.set $$class@switchstatement.Numbers (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|switchstatem...|__java_lang_String (ref.func $$getString_|switchstatem...|__java_lang_String@switchstatement.Numbers) )))
    )
   )
-  (return (global.get $f_$class__switchstatement_Numbers))
+  (return (global.get $$class@switchstatement.Numbers))
  )
 )
 
@@ -1488,12 +1488,12 @@
 (func $$getString_|ONE|__java_lang_String@switchstatement.Numbers
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|ONE|__switchstatement_Numbers))
+  (if (ref.is_null (global.get $$string_|ONE|@switchstatement.Numbers))
    (then
-    (global.set $f_$string_|ONE|__switchstatement_Numbers (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "ONE")))
+    (global.set $$string_|ONE|@switchstatement.Numbers (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "ONE")))
    )
   )
-  (return (global.get $f_$string_|ONE|__switchstatement_Numbers))
+  (return (global.get $$string_|ONE|@switchstatement.Numbers))
  )
 )
 
@@ -1501,12 +1501,12 @@
 (func $$getString_|TWO|__java_lang_String@switchstatement.Numbers
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|TWO|__switchstatement_Numbers))
+  (if (ref.is_null (global.get $$string_|TWO|@switchstatement.Numbers))
    (then
-    (global.set $f_$string_|TWO|__switchstatement_Numbers (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "TWO")))
+    (global.set $$string_|TWO|@switchstatement.Numbers (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "TWO")))
    )
   )
-  (return (global.get $f_$string_|TWO|__switchstatement_Numbers))
+  (return (global.get $$string_|TWO|@switchstatement.Numbers))
  )
 )
 
@@ -1514,12 +1514,12 @@
 (func $$getString_|THREE|__java_lang_String@switchstatement.Numbers
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|THREE|__switchstatement_Numbers))
+  (if (ref.is_null (global.get $$string_|THREE|@switchstatement.Numbers))
    (then
-    (global.set $f_$string_|THREE|__switchstatement_Numbers (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "THREE")))
+    (global.set $$string_|THREE|@switchstatement.Numbers (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "THREE")))
    )
   )
-  (return (global.get $f_$string_|THREE|__switchstatement_Numbers))
+  (return (global.get $$string_|THREE|@switchstatement.Numbers))
  )
 )
 
@@ -1527,11 +1527,11 @@
 (func $$getString_|switchstatem...|__java_lang_String@switchstatement.Numbers
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|switchstatem...|__switchstatement_Numbers))
+  (if (ref.is_null (global.get $$string_|switchstatem...|@switchstatement.Numbers))
    (then
-    (global.set $f_$string_|switchstatem...|__switchstatement_Numbers (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "switchstatement.Numbers")))
+    (global.set $$string_|switchstatem...|@switchstatement.Numbers (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "switchstatement.Numbers")))
    )
   )
-  (return (global.get $f_$string_|switchstatem...|__switchstatement_Numbers))
+  (return (global.get $$string_|switchstatem...|@switchstatement.Numbers))
  )
 )

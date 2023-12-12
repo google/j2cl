@@ -24,7 +24,7 @@
  (type $staticjsmembers.StaticJsMembers (sub $java.lang.Object (struct
   (field $vtable (ref $staticjsmembers.StaticJsMembers.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $staticjsmembers.StaticJsMembers.vtable (sub $java.lang.Object.vtable (struct
@@ -68,19 +68,19 @@
 )
 
 ;;; Code for staticjsmembers.StaticJsMembers [static fields]
-(global $f_field1__staticjsmembers_StaticJsMembers (mut i32)
+(global $field1@staticjsmembers.StaticJsMembers (mut i32)
  (i32.const 0)
 )
-(global $f_field2__staticjsmembers_StaticJsMembers (mut i32)
+(global $field2@staticjsmembers.StaticJsMembers (mut i32)
  (i32.const 0)
 )
-(global $f_$initialized__staticjsmembers_StaticJsMembers (mut i32)
+(global $$class-initialized@staticjsmembers.StaticJsMembers (mut i32)
  (i32.const 0)
 )
-(global $f_$class__staticjsmembers_StaticJsMembers (mut (ref null $java.lang.Class))
+(global $$class@staticjsmembers.StaticJsMembers (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|staticjsmemb...|__staticjsmembers_StaticJsMembers (mut (ref null $java.lang.String))
+(global $$string_|staticjsmemb...|@staticjsmembers.StaticJsMembers (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -89,24 +89,24 @@
 ;;; Code for staticjsmembers.StaticJsMembers.Extern [static fields]
 
 ;;; Code for staticjsmembers.StaticJsMembers.Native.$Overlay [static fields]
-(global $f_$initialized__staticjsmembers_StaticJsMembers_Native_$Overlay (mut i32)
+(global $$class-initialized@staticjsmembers.StaticJsMembers.Native.$Overlay (mut i32)
  (i32.const 0)
 )
-(global $f_$class__staticjsmembers_StaticJsMembers_Native_$Overlay (mut (ref null $java.lang.Class))
+(global $$class@staticjsmembers.StaticJsMembers.Native.$Overlay (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|staticjsmemb...|__staticjsmembers_StaticJsMembers_Native_$Overlay (mut (ref null $java.lang.String))
+(global $$string_|staticjsmemb...|@staticjsmembers.StaticJsMembers.Native.$Overlay (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for staticjsmembers.StaticJsMembers.Extern.$Overlay [static fields]
-(global $f_$initialized__staticjsmembers_StaticJsMembers_Extern_$Overlay (mut i32)
+(global $$class-initialized@staticjsmembers.StaticJsMembers.Extern.$Overlay (mut i32)
  (i32.const 0)
 )
-(global $f_$class__staticjsmembers_StaticJsMembers_Extern_$Overlay (mut (ref null $java.lang.Class))
+(global $$class@staticjsmembers.StaticJsMembers.Extern.$Overlay (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|staticjsmemb...|__staticjsmembers_StaticJsMembers_Extern_$Overlay (mut (ref null $java.lang.String))
+(global $$string_|staticjsmemb...|@staticjsmembers.StaticJsMembers.Extern.$Overlay (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -117,14 +117,14 @@
  ;;@ staticjsmembers/StaticJsMembers.java:33:22
  (block
   ;;@ staticjsmembers/StaticJsMembers.java:33:22
-  (if (global.get $f_$initialized__staticjsmembers_StaticJsMembers_Native_$Overlay)
+  (if (global.get $$class-initialized@staticjsmembers.StaticJsMembers.Native.$Overlay)
    (then
     ;;@ staticjsmembers/StaticJsMembers.java:33:22
     (return )
    )
   )
   ;;@ staticjsmembers/StaticJsMembers.java:33:22
-  (global.set $f_$initialized__staticjsmembers_StaticJsMembers_Native_$Overlay (i32.const 1))
+  (global.set $$class-initialized@staticjsmembers.StaticJsMembers.Native.$Overlay (i32.const 1))
  )
 )
 
@@ -132,12 +132,12 @@
 (func $$getClassMetadata__java_lang_Class@staticjsmembers.StaticJsMembers.Native.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__staticjsmembers_StaticJsMembers_Native_$Overlay))
+  (if (ref.is_null (global.get $$class@staticjsmembers.StaticJsMembers.Native.$Overlay))
    (then
-    (global.set $f_$class__staticjsmembers_StaticJsMembers_Native_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|staticjsmemb...|__java_lang_String (ref.func $$getString_|staticjsmemb...|__java_lang_String@staticjsmembers.StaticJsMembers.Native.$Overlay) )(ref.null $java.lang.Class)))
+    (global.set $$class@staticjsmembers.StaticJsMembers.Native.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|staticjsmemb...|__java_lang_String (ref.func $$getString_|staticjsmemb...|__java_lang_String@staticjsmembers.StaticJsMembers.Native.$Overlay) )(ref.null $java.lang.Class)))
    )
   )
-  (return (global.get $f_$class__staticjsmembers_StaticJsMembers_Native_$Overlay))
+  (return (global.get $$class@staticjsmembers.StaticJsMembers.Native.$Overlay))
  )
 )
 
@@ -158,12 +158,12 @@
 (func $$getString_|staticjsmemb...|__java_lang_String@staticjsmembers.StaticJsMembers.Native.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|staticjsmemb...|__staticjsmembers_StaticJsMembers_Native_$Overlay))
+  (if (ref.is_null (global.get $$string_|staticjsmemb...|@staticjsmembers.StaticJsMembers.Native.$Overlay))
    (then
-    (global.set $f_$string_|staticjsmemb...|__staticjsmembers_StaticJsMembers_Native_$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "staticjsmembers.StaticJsMembers$Native$$Overlay")))
+    (global.set $$string_|staticjsmemb...|@staticjsmembers.StaticJsMembers.Native.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "staticjsmembers.StaticJsMembers$Native$$Overlay")))
    )
   )
-  (return (global.get $f_$string_|staticjsmemb...|__staticjsmembers_StaticJsMembers_Native_$Overlay))
+  (return (global.get $$string_|staticjsmemb...|@staticjsmembers.StaticJsMembers.Native.$Overlay))
  )
 )
 
@@ -174,14 +174,14 @@
  ;;@ staticjsmembers/StaticJsMembers.java:48:22
  (block
   ;;@ staticjsmembers/StaticJsMembers.java:48:22
-  (if (global.get $f_$initialized__staticjsmembers_StaticJsMembers_Extern_$Overlay)
+  (if (global.get $$class-initialized@staticjsmembers.StaticJsMembers.Extern.$Overlay)
    (then
     ;;@ staticjsmembers/StaticJsMembers.java:48:22
     (return )
    )
   )
   ;;@ staticjsmembers/StaticJsMembers.java:48:22
-  (global.set $f_$initialized__staticjsmembers_StaticJsMembers_Extern_$Overlay (i32.const 1))
+  (global.set $$class-initialized@staticjsmembers.StaticJsMembers.Extern.$Overlay (i32.const 1))
  )
 )
 
@@ -189,12 +189,12 @@
 (func $$getClassMetadata__java_lang_Class@staticjsmembers.StaticJsMembers.Extern.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__staticjsmembers_StaticJsMembers_Extern_$Overlay))
+  (if (ref.is_null (global.get $$class@staticjsmembers.StaticJsMembers.Extern.$Overlay))
    (then
-    (global.set $f_$class__staticjsmembers_StaticJsMembers_Extern_$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|staticjsmemb...|__java_lang_String (ref.func $$getString_|staticjsmemb...|__java_lang_String@staticjsmembers.StaticJsMembers.Extern.$Overlay) )(ref.null $java.lang.Class)))
+    (global.set $$class@staticjsmembers.StaticJsMembers.Extern.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|staticjsmemb...|__java_lang_String (ref.func $$getString_|staticjsmemb...|__java_lang_String@staticjsmembers.StaticJsMembers.Extern.$Overlay) )(ref.null $java.lang.Class)))
    )
   )
-  (return (global.get $f_$class__staticjsmembers_StaticJsMembers_Extern_$Overlay))
+  (return (global.get $$class@staticjsmembers.StaticJsMembers.Extern.$Overlay))
  )
 )
 
@@ -215,12 +215,12 @@
 (func $$getString_|staticjsmemb...|__java_lang_String@staticjsmembers.StaticJsMembers.Extern.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|staticjsmemb...|__staticjsmembers_StaticJsMembers_Extern_$Overlay))
+  (if (ref.is_null (global.get $$string_|staticjsmemb...|@staticjsmembers.StaticJsMembers.Extern.$Overlay))
    (then
-    (global.set $f_$string_|staticjsmemb...|__staticjsmembers_StaticJsMembers_Extern_$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "staticjsmembers.StaticJsMembers$Extern$$Overlay")))
+    (global.set $$string_|staticjsmemb...|@staticjsmembers.StaticJsMembers.Extern.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "staticjsmembers.StaticJsMembers$Extern$$Overlay")))
    )
   )
-  (return (global.get $f_$string_|staticjsmemb...|__staticjsmembers_StaticJsMembers_Extern_$Overlay))
+  (return (global.get $$string_|staticjsmemb...|@staticjsmembers.StaticJsMembers.Extern.$Overlay))
  )
 )
 
@@ -358,9 +358,9 @@
   ;;@ staticjsmembers/StaticJsMembers.java:93:4
   (drop (call $m_max__double__double__double@staticjsmembers.StaticJsMembers (f64.const 1.0)(f64.const 2.0)))
   ;;@ staticjsmembers/StaticJsMembers.java:95:4
-  (local.set $n (global.get $f_field1__staticjsmembers_StaticJsMembers))
+  (local.set $n (global.get $field1@staticjsmembers.StaticJsMembers))
   ;;@ staticjsmembers/StaticJsMembers.java:96:4
-  (local.set $n (global.get $f_field2__staticjsmembers_StaticJsMembers))
+  (local.set $n (global.get $field2@staticjsmembers.StaticJsMembers))
   ;;@ staticjsmembers/StaticJsMembers.java:97:4
   (local.set $n (call $f_field3__int@staticjsmembers.StaticJsMembers.Native ))
   ;;@ staticjsmembers/StaticJsMembers.java:98:4
@@ -382,14 +382,14 @@
  ;;@ staticjsmembers/StaticJsMembers.java:25:13
  (block
   ;;@ staticjsmembers/StaticJsMembers.java:25:13
-  (if (global.get $f_$initialized__staticjsmembers_StaticJsMembers)
+  (if (global.get $$class-initialized@staticjsmembers.StaticJsMembers)
    (then
     ;;@ staticjsmembers/StaticJsMembers.java:25:13
     (return )
    )
   )
   ;;@ staticjsmembers/StaticJsMembers.java:25:13
-  (global.set $f_$initialized__staticjsmembers_StaticJsMembers (i32.const 1))
+  (global.set $$class-initialized@staticjsmembers.StaticJsMembers (i32.const 1))
   ;;@ staticjsmembers/StaticJsMembers.java:25:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -399,12 +399,12 @@
 (func $$getClassMetadata__java_lang_Class@staticjsmembers.StaticJsMembers
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__staticjsmembers_StaticJsMembers))
+  (if (ref.is_null (global.get $$class@staticjsmembers.StaticJsMembers))
    (then
-    (global.set $f_$class__staticjsmembers_StaticJsMembers (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|staticjsmemb...|__java_lang_String (ref.func $$getString_|staticjsmemb...|__java_lang_String@staticjsmembers.StaticJsMembers) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@staticjsmembers.StaticJsMembers (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|staticjsmemb...|__java_lang_String (ref.func $$getString_|staticjsmemb...|__java_lang_String@staticjsmembers.StaticJsMembers) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__staticjsmembers_StaticJsMembers))
+  (return (global.get $$class@staticjsmembers.StaticJsMembers))
  )
 )
 
@@ -425,12 +425,12 @@
 (func $$getString_|staticjsmemb...|__java_lang_String@staticjsmembers.StaticJsMembers
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|staticjsmemb...|__staticjsmembers_StaticJsMembers))
+  (if (ref.is_null (global.get $$string_|staticjsmemb...|@staticjsmembers.StaticJsMembers))
    (then
-    (global.set $f_$string_|staticjsmemb...|__staticjsmembers_StaticJsMembers (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "staticjsmembers.StaticJsMembers")))
+    (global.set $$string_|staticjsmemb...|@staticjsmembers.StaticJsMembers (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "staticjsmembers.StaticJsMembers")))
    )
   )
-  (return (global.get $f_$string_|staticjsmemb...|__staticjsmembers_StaticJsMembers))
+  (return (global.get $$string_|staticjsmemb...|@staticjsmembers.StaticJsMembers))
  )
 )
 

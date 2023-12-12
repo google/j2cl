@@ -2,7 +2,7 @@
  (type $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace (sub $java.lang.Object (struct
   (field $vtable (ref $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.vtable (sub $java.lang.Object.vtable (struct
@@ -18,7 +18,7 @@
  (type $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass (sub $java.lang.Object (struct
   (field $vtable (ref $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.vtable (sub $java.lang.Object.vtable (struct
@@ -53,24 +53,24 @@
 )
 
 ;;; Code for jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace [static fields]
-(global $f_$initialized__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace (mut i32)
+(global $$class-initialized@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace (mut i32)
  (i32.const 0)
 )
-(global $f_$class__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace (mut (ref null $java.lang.Class))
+(global $$class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|jstypeinnerc...|__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace (mut (ref null $java.lang.String))
+(global $$string_|jstypeinnerc...|@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass [static fields]
-(global $f_$initialized__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace_InnerClass (mut i32)
+(global $$class-initialized@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass (mut i32)
  (i32.const 0)
 )
-(global $f_$class__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace_InnerClass (mut (ref null $java.lang.Class))
+(global $$class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|jstypeinnerc...|__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace_InnerClass (mut (ref null $java.lang.String))
+(global $$string_|jstypeinnerc...|@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -108,14 +108,14 @@
  ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:20:13
  (block
   ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:20:13
-  (if (global.get $f_$initialized__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace)
+  (if (global.get $$class-initialized@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace)
    (then
     ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:20:13
     (return )
    )
   )
   ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:20:13
-  (global.set $f_$initialized__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace (i32.const 1))
+  (global.set $$class-initialized@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace (i32.const 1))
   ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:20:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -125,12 +125,12 @@
 (func $$getClassMetadata__java_lang_Class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace))
+  (if (ref.is_null (global.get $$class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace))
    (then
-    (global.set $f_$class__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jstypeinnerc...|__java_lang_String (ref.func $$getString_|jstypeinnerc...|__java_lang_String@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jstypeinnerc...|__java_lang_String (ref.func $$getString_|jstypeinnerc...|__java_lang_String@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace))
+  (return (global.get $$class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace))
  )
 )
 
@@ -151,12 +151,12 @@
 (func $$getString_|jstypeinnerc...|__java_lang_String@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|jstypeinnerc...|__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace))
+  (if (ref.is_null (global.get $$string_|jstypeinnerc...|@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace))
    (then
-    (global.set $f_$string_|jstypeinnerc...|__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace")))
+    (global.set $$string_|jstypeinnerc...|@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace")))
    )
   )
-  (return (global.get $f_$string_|jstypeinnerc...|__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace))
+  (return (global.get $$string_|jstypeinnerc...|@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace))
  )
 )
 
@@ -194,14 +194,14 @@
  ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:23:15
  (block
   ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:23:15
-  (if (global.get $f_$initialized__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace_InnerClass)
+  (if (global.get $$class-initialized@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass)
    (then
     ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:23:15
     (return )
    )
   )
   ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:23:15
-  (global.set $f_$initialized__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace_InnerClass (i32.const 1))
+  (global.set $$class-initialized@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass (i32.const 1))
   ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:23:15
   (call $$clinit__void@java.lang.Object )
  )
@@ -211,12 +211,12 @@
 (func $$getClassMetadata__java_lang_Class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace_InnerClass))
+  (if (ref.is_null (global.get $$class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass))
    (then
-    (global.set $f_$class__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace_InnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jstypeinnerc...|__java_lang_String (ref.func $$getString_|jstypeinnerc...|__java_lang_String@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jstypeinnerc...|__java_lang_String (ref.func $$getString_|jstypeinnerc...|__java_lang_String@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace_InnerClass))
+  (return (global.get $$class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass))
  )
 )
 
@@ -237,11 +237,11 @@
 (func $$getString_|jstypeinnerc...|__java_lang_String@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|jstypeinnerc...|__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace_InnerClass))
+  (if (ref.is_null (global.get $$string_|jstypeinnerc...|@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass))
    (then
-    (global.set $f_$string_|jstypeinnerc...|__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace_InnerClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace$InnerClass")))
+    (global.set $$string_|jstypeinnerc...|@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace$InnerClass")))
    )
   )
-  (return (global.get $f_$string_|jstypeinnerc...|__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace_InnerClass))
+  (return (global.get $$string_|jstypeinnerc...|@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass))
  )
 )

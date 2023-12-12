@@ -2,7 +2,7 @@
  (type $objcnametype.ObjCNameType (sub $java.lang.Object (struct
   (field $vtable (ref $objcnametype.ObjCNameType.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $objcnametype.ObjCNameType.vtable (sub $java.lang.Object.vtable (struct
@@ -26,13 +26,13 @@
 )
 
 ;;; Code for objcnametype.ObjCNameType [static fields]
-(global $f_$initialized__objcnametype_ObjCNameType (mut i32)
+(global $$class-initialized@objcnametype.ObjCNameType (mut i32)
  (i32.const 0)
 )
-(global $f_$class__objcnametype_ObjCNameType (mut (ref null $java.lang.Class))
+(global $$class@objcnametype.ObjCNameType (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|objcnametype...|__objcnametype_ObjCNameType (mut (ref null $java.lang.String))
+(global $$string_|objcnametype...|@objcnametype.ObjCNameType (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -70,14 +70,14 @@
  ;;@ objcnametype/ObjCNameType.java:18:13
  (block
   ;;@ objcnametype/ObjCNameType.java:18:13
-  (if (global.get $f_$initialized__objcnametype_ObjCNameType)
+  (if (global.get $$class-initialized@objcnametype.ObjCNameType)
    (then
     ;;@ objcnametype/ObjCNameType.java:18:13
     (return )
    )
   )
   ;;@ objcnametype/ObjCNameType.java:18:13
-  (global.set $f_$initialized__objcnametype_ObjCNameType (i32.const 1))
+  (global.set $$class-initialized@objcnametype.ObjCNameType (i32.const 1))
   ;;@ objcnametype/ObjCNameType.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -87,12 +87,12 @@
 (func $$getClassMetadata__java_lang_Class@objcnametype.ObjCNameType
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__objcnametype_ObjCNameType))
+  (if (ref.is_null (global.get $$class@objcnametype.ObjCNameType))
    (then
-    (global.set $f_$class__objcnametype_ObjCNameType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|objcnametype...|__java_lang_String (ref.func $$getString_|objcnametype...|__java_lang_String@objcnametype.ObjCNameType) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@objcnametype.ObjCNameType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|objcnametype...|__java_lang_String (ref.func $$getString_|objcnametype...|__java_lang_String@objcnametype.ObjCNameType) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__objcnametype_ObjCNameType))
+  (return (global.get $$class@objcnametype.ObjCNameType))
  )
 )
 
@@ -113,11 +113,11 @@
 (func $$getString_|objcnametype...|__java_lang_String@objcnametype.ObjCNameType
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|objcnametype...|__objcnametype_ObjCNameType))
+  (if (ref.is_null (global.get $$string_|objcnametype...|@objcnametype.ObjCNameType))
    (then
-    (global.set $f_$string_|objcnametype...|__objcnametype_ObjCNameType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "objcnametype.ObjCNameType")))
+    (global.set $$string_|objcnametype...|@objcnametype.ObjCNameType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "objcnametype.ObjCNameType")))
    )
   )
-  (return (global.get $f_$string_|objcnametype...|__objcnametype_ObjCNameType))
+  (return (global.get $$string_|objcnametype...|@objcnametype.ObjCNameType))
  )
 )

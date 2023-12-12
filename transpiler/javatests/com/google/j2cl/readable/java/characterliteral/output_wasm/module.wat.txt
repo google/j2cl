@@ -2,7 +2,7 @@
  (type $characterliteral.CharacterLiteral (sub $java.lang.Object (struct
   (field $vtable (ref $characterliteral.CharacterLiteral.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $characterliteral.CharacterLiteral.vtable (sub $java.lang.Object.vtable (struct
@@ -28,13 +28,13 @@
 )
 
 ;;; Code for characterliteral.CharacterLiteral [static fields]
-(global $f_$initialized__characterliteral_CharacterLiteral (mut i32)
+(global $$class-initialized@characterliteral.CharacterLiteral (mut i32)
  (i32.const 0)
 )
-(global $f_$class__characterliteral_CharacterLiteral (mut (ref null $java.lang.Class))
+(global $$class@characterliteral.CharacterLiteral (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|characterlit...|__characterliteral_CharacterLiteral (mut (ref null $java.lang.String))
+(global $$string_|characterlit...|@characterliteral.CharacterLiteral (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -329,14 +329,14 @@
  ;;@ characterliteral/CharacterLiteral.java:18:13
  (block
   ;;@ characterliteral/CharacterLiteral.java:18:13
-  (if (global.get $f_$initialized__characterliteral_CharacterLiteral)
+  (if (global.get $$class-initialized@characterliteral.CharacterLiteral)
    (then
     ;;@ characterliteral/CharacterLiteral.java:18:13
     (return )
    )
   )
   ;;@ characterliteral/CharacterLiteral.java:18:13
-  (global.set $f_$initialized__characterliteral_CharacterLiteral (i32.const 1))
+  (global.set $$class-initialized@characterliteral.CharacterLiteral (i32.const 1))
   ;;@ characterliteral/CharacterLiteral.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -346,12 +346,12 @@
 (func $$getClassMetadata__java_lang_Class@characterliteral.CharacterLiteral
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__characterliteral_CharacterLiteral))
+  (if (ref.is_null (global.get $$class@characterliteral.CharacterLiteral))
    (then
-    (global.set $f_$class__characterliteral_CharacterLiteral (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|characterlit...|__java_lang_String (ref.func $$getString_|characterlit...|__java_lang_String@characterliteral.CharacterLiteral) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@characterliteral.CharacterLiteral (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|characterlit...|__java_lang_String (ref.func $$getString_|characterlit...|__java_lang_String@characterliteral.CharacterLiteral) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__characterliteral_CharacterLiteral))
+  (return (global.get $$class@characterliteral.CharacterLiteral))
  )
 )
 
@@ -372,11 +372,11 @@
 (func $$getString_|characterlit...|__java_lang_String@characterliteral.CharacterLiteral
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|characterlit...|__characterliteral_CharacterLiteral))
+  (if (ref.is_null (global.get $$string_|characterlit...|@characterliteral.CharacterLiteral))
    (then
-    (global.set $f_$string_|characterlit...|__characterliteral_CharacterLiteral (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "characterliteral.CharacterLiteral")))
+    (global.set $$string_|characterlit...|@characterliteral.CharacterLiteral (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "characterliteral.CharacterLiteral")))
    )
   )
-  (return (global.get $f_$string_|characterlit...|__characterliteral_CharacterLiteral))
+  (return (global.get $$string_|characterlit...|@characterliteral.CharacterLiteral))
  )
 )

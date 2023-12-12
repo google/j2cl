@@ -2,11 +2,11 @@
  (type $instancefieldaccesslevels.InstanceFieldAccessLevels (sub $java.lang.Object (struct
   (field $vtable (ref $instancefieldaccesslevels.InstanceFieldAccessLevels.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $f_a__instancefieldaccesslevels_InstanceFieldAccessLevels (mut i32))
-  (field $f_b__instancefieldaccesslevels_InstanceFieldAccessLevels_ (mut i8))
-  (field $f_c__instancefieldaccesslevels_InstanceFieldAccessLevels (mut (ref null $java.lang.Object)))
-  (field $f_d__instancefieldaccesslevels_InstanceFieldAccessLevels (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  (field $a@instancefieldaccesslevels.InstanceFieldAccessLevels (mut i32))
+  (field $b@instancefieldaccesslevels.InstanceFieldAccessLevels (mut i8))
+  (field $c@instancefieldaccesslevels.InstanceFieldAccessLevels (mut (ref null $java.lang.Object)))
+  (field $d@instancefieldaccesslevels.InstanceFieldAccessLevels (mut i32))
   ))
  )
  (type $instancefieldaccesslevels.InstanceFieldAccessLevels.vtable (sub $java.lang.Object.vtable (struct
@@ -30,13 +30,13 @@
 )
 
 ;;; Code for instancefieldaccesslevels.InstanceFieldAccessLevels [static fields]
-(global $f_$initialized__instancefieldaccesslevels_InstanceFieldAccessLevels (mut i32)
+(global $$class-initialized@instancefieldaccesslevels.InstanceFieldAccessLevels (mut i32)
  (i32.const 0)
 )
-(global $f_$class__instancefieldaccesslevels_InstanceFieldAccessLevels (mut (ref null $java.lang.Class))
+(global $$class@instancefieldaccesslevels.InstanceFieldAccessLevels (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|instancefiel...|__instancefieldaccesslevels_InstanceFieldAccessLevels (mut (ref null $java.lang.String))
+(global $$string_|instancefiel...|@instancefieldaccesslevels.InstanceFieldAccessLevels (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -74,14 +74,14 @@
  ;;@ instancefieldaccesslevels/InstanceFieldAccessLevels.java:18:13
  (block
   ;;@ instancefieldaccesslevels/InstanceFieldAccessLevels.java:18:13
-  (if (global.get $f_$initialized__instancefieldaccesslevels_InstanceFieldAccessLevels)
+  (if (global.get $$class-initialized@instancefieldaccesslevels.InstanceFieldAccessLevels)
    (then
     ;;@ instancefieldaccesslevels/InstanceFieldAccessLevels.java:18:13
     (return )
    )
   )
   ;;@ instancefieldaccesslevels/InstanceFieldAccessLevels.java:18:13
-  (global.set $f_$initialized__instancefieldaccesslevels_InstanceFieldAccessLevels (i32.const 1))
+  (global.set $$class-initialized@instancefieldaccesslevels.InstanceFieldAccessLevels (i32.const 1))
   ;;@ instancefieldaccesslevels/InstanceFieldAccessLevels.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -91,12 +91,12 @@
 (func $$getClassMetadata__java_lang_Class@instancefieldaccesslevels.InstanceFieldAccessLevels
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__instancefieldaccesslevels_InstanceFieldAccessLevels))
+  (if (ref.is_null (global.get $$class@instancefieldaccesslevels.InstanceFieldAccessLevels))
    (then
-    (global.set $f_$class__instancefieldaccesslevels_InstanceFieldAccessLevels (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instancefiel...|__java_lang_String (ref.func $$getString_|instancefiel...|__java_lang_String@instancefieldaccesslevels.InstanceFieldAccessLevels) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@instancefieldaccesslevels.InstanceFieldAccessLevels (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instancefiel...|__java_lang_String (ref.func $$getString_|instancefiel...|__java_lang_String@instancefieldaccesslevels.InstanceFieldAccessLevels) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__instancefieldaccesslevels_InstanceFieldAccessLevels))
+  (return (global.get $$class@instancefieldaccesslevels.InstanceFieldAccessLevels))
  )
 )
 
@@ -117,11 +117,11 @@
 (func $$getString_|instancefiel...|__java_lang_String@instancefieldaccesslevels.InstanceFieldAccessLevels
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|instancefiel...|__instancefieldaccesslevels_InstanceFieldAccessLevels))
+  (if (ref.is_null (global.get $$string_|instancefiel...|@instancefieldaccesslevels.InstanceFieldAccessLevels))
    (then
-    (global.set $f_$string_|instancefiel...|__instancefieldaccesslevels_InstanceFieldAccessLevels (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instancefieldaccesslevels.InstanceFieldAccessLevels")))
+    (global.set $$string_|instancefiel...|@instancefieldaccesslevels.InstanceFieldAccessLevels (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instancefieldaccesslevels.InstanceFieldAccessLevels")))
    )
   )
-  (return (global.get $f_$string_|instancefiel...|__instancefieldaccesslevels_InstanceFieldAccessLevels))
+  (return (global.get $$string_|instancefiel...|@instancefieldaccesslevels.InstanceFieldAccessLevels))
  )
 )

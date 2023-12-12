@@ -2,7 +2,7 @@
  (type $breakstatement.BreakStatement (sub $java.lang.Object (struct
   (field $vtable (ref $breakstatement.BreakStatement.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $breakstatement.BreakStatement.vtable (sub $java.lang.Object.vtable (struct
@@ -28,13 +28,13 @@
 )
 
 ;;; Code for breakstatement.BreakStatement [static fields]
-(global $f_$initialized__breakstatement_BreakStatement (mut i32)
+(global $$class-initialized@breakstatement.BreakStatement (mut i32)
  (i32.const 0)
 )
-(global $f_$class__breakstatement_BreakStatement (mut (ref null $java.lang.Class))
+(global $$class@breakstatement.BreakStatement (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|breakstateme...|__breakstatement_BreakStatement (mut (ref null $java.lang.String))
+(global $$string_|breakstateme...|@breakstatement.BreakStatement (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -96,14 +96,14 @@
  ;;@ breakstatement/BreakStatement.java:18:13
  (block
   ;;@ breakstatement/BreakStatement.java:18:13
-  (if (global.get $f_$initialized__breakstatement_BreakStatement)
+  (if (global.get $$class-initialized@breakstatement.BreakStatement)
    (then
     ;;@ breakstatement/BreakStatement.java:18:13
     (return )
    )
   )
   ;;@ breakstatement/BreakStatement.java:18:13
-  (global.set $f_$initialized__breakstatement_BreakStatement (i32.const 1))
+  (global.set $$class-initialized@breakstatement.BreakStatement (i32.const 1))
   ;;@ breakstatement/BreakStatement.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -113,12 +113,12 @@
 (func $$getClassMetadata__java_lang_Class@breakstatement.BreakStatement
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__breakstatement_BreakStatement))
+  (if (ref.is_null (global.get $$class@breakstatement.BreakStatement))
    (then
-    (global.set $f_$class__breakstatement_BreakStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|breakstateme...|__java_lang_String (ref.func $$getString_|breakstateme...|__java_lang_String@breakstatement.BreakStatement) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@breakstatement.BreakStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|breakstateme...|__java_lang_String (ref.func $$getString_|breakstateme...|__java_lang_String@breakstatement.BreakStatement) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__breakstatement_BreakStatement))
+  (return (global.get $$class@breakstatement.BreakStatement))
  )
 )
 
@@ -139,11 +139,11 @@
 (func $$getString_|breakstateme...|__java_lang_String@breakstatement.BreakStatement
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|breakstateme...|__breakstatement_BreakStatement))
+  (if (ref.is_null (global.get $$string_|breakstateme...|@breakstatement.BreakStatement))
    (then
-    (global.set $f_$string_|breakstateme...|__breakstatement_BreakStatement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "breakstatement.BreakStatement")))
+    (global.set $$string_|breakstateme...|@breakstatement.BreakStatement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "breakstatement.BreakStatement")))
    )
   )
-  (return (global.get $f_$string_|breakstateme...|__breakstatement_BreakStatement))
+  (return (global.get $$string_|breakstateme...|@breakstatement.BreakStatement))
  )
 )

@@ -2,7 +2,7 @@
  (type $emptyclass.EmptyClass (sub $java.lang.Object (struct
   (field $vtable (ref $emptyclass.EmptyClass.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $emptyclass.EmptyClass.vtable (sub $java.lang.Object.vtable (struct
@@ -26,13 +26,13 @@
 )
 
 ;;; Code for emptyclass.EmptyClass [static fields]
-(global $f_$initialized__emptyclass_EmptyClass (mut i32)
+(global $$class-initialized@emptyclass.EmptyClass (mut i32)
  (i32.const 0)
 )
-(global $f_$class__emptyclass_EmptyClass (mut (ref null $java.lang.Class))
+(global $$class@emptyclass.EmptyClass (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|emptyclass.E...|__emptyclass_EmptyClass (mut (ref null $java.lang.String))
+(global $$string_|emptyclass.E...|@emptyclass.EmptyClass (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -70,14 +70,14 @@
  ;;@ emptyclass/EmptyClass.java:18:13
  (block
   ;;@ emptyclass/EmptyClass.java:18:13
-  (if (global.get $f_$initialized__emptyclass_EmptyClass)
+  (if (global.get $$class-initialized@emptyclass.EmptyClass)
    (then
     ;;@ emptyclass/EmptyClass.java:18:13
     (return )
    )
   )
   ;;@ emptyclass/EmptyClass.java:18:13
-  (global.set $f_$initialized__emptyclass_EmptyClass (i32.const 1))
+  (global.set $$class-initialized@emptyclass.EmptyClass (i32.const 1))
   ;;@ emptyclass/EmptyClass.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -87,12 +87,12 @@
 (func $$getClassMetadata__java_lang_Class@emptyclass.EmptyClass
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__emptyclass_EmptyClass))
+  (if (ref.is_null (global.get $$class@emptyclass.EmptyClass))
    (then
-    (global.set $f_$class__emptyclass_EmptyClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|emptyclass.E...|__java_lang_String (ref.func $$getString_|emptyclass.E...|__java_lang_String@emptyclass.EmptyClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@emptyclass.EmptyClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|emptyclass.E...|__java_lang_String (ref.func $$getString_|emptyclass.E...|__java_lang_String@emptyclass.EmptyClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__emptyclass_EmptyClass))
+  (return (global.get $$class@emptyclass.EmptyClass))
  )
 )
 
@@ -113,11 +113,11 @@
 (func $$getString_|emptyclass.E...|__java_lang_String@emptyclass.EmptyClass
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|emptyclass.E...|__emptyclass_EmptyClass))
+  (if (ref.is_null (global.get $$string_|emptyclass.E...|@emptyclass.EmptyClass))
    (then
-    (global.set $f_$string_|emptyclass.E...|__emptyclass_EmptyClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "emptyclass.EmptyClass")))
+    (global.set $$string_|emptyclass.E...|@emptyclass.EmptyClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "emptyclass.EmptyClass")))
    )
   )
-  (return (global.get $f_$string_|emptyclass.E...|__emptyclass_EmptyClass))
+  (return (global.get $$string_|emptyclass.E...|@emptyclass.EmptyClass))
  )
 )

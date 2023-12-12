@@ -2,7 +2,7 @@
  (type $nestedinstanceinnerclass.OuterClass (sub $java.lang.Object (struct
   (field $vtable (ref $nestedinstanceinnerclass.OuterClass.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $nestedinstanceinnerclass.OuterClass.vtable (sub $java.lang.Object.vtable (struct
@@ -19,10 +19,10 @@
  (type $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (sub $java.lang.Object (struct
   (field $vtable (ref $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass (mut (ref null $nestedinstanceinnerclass.OuterClass.InnerClass)))
-  (field $f_x__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass (mut (ref null $nestedinstanceinnerclass.OuterClass.InnerClass)))
-  (field $f_y__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass (mut (ref null $nestedinstanceinnerclass.OuterClass)))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  (field $$outer_this@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (mut (ref null $nestedinstanceinnerclass.OuterClass.InnerClass)))
+  (field $x@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (mut (ref null $nestedinstanceinnerclass.OuterClass.InnerClass)))
+  (field $y@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (mut (ref null $nestedinstanceinnerclass.OuterClass)))
   ))
  )
  (type $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable (sub $java.lang.Object.vtable (struct
@@ -38,8 +38,8 @@
  (type $nestedinstanceinnerclass.OuterClass.InnerClass (sub $java.lang.Object (struct
   (field $vtable (ref $nestedinstanceinnerclass.OuterClass.InnerClass.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass (mut (ref null $nestedinstanceinnerclass.OuterClass)))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  (field $$outer_this@nestedinstanceinnerclass.OuterClass.InnerClass (mut (ref null $nestedinstanceinnerclass.OuterClass)))
   ))
  )
  (type $nestedinstanceinnerclass.OuterClass.InnerClass.vtable (sub $java.lang.Object.vtable (struct
@@ -86,35 +86,35 @@
 )
 
 ;;; Code for nestedinstanceinnerclass.OuterClass [static fields]
-(global $f_$initialized__nestedinstanceinnerclass_OuterClass (mut i32)
+(global $$class-initialized@nestedinstanceinnerclass.OuterClass (mut i32)
  (i32.const 0)
 )
-(global $f_$class__nestedinstanceinnerclass_OuterClass (mut (ref null $java.lang.Class))
+(global $$class@nestedinstanceinnerclass.OuterClass (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|nestedinstan...|__nestedinstanceinnerclass_OuterClass (mut (ref null $java.lang.String))
+(global $$string_|nestedinstan...|@nestedinstanceinnerclass.OuterClass (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass [static fields]
-(global $f_$initialized__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass (mut i32)
+(global $$class-initialized@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (mut i32)
  (i32.const 0)
 )
-(global $f_$class__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass (mut (ref null $java.lang.Class))
+(global $$class@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|nestedinstan...|__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass (mut (ref null $java.lang.String))
+(global $$string_|nestedinstan...|@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for nestedinstanceinnerclass.OuterClass.InnerClass [static fields]
-(global $f_$initialized__nestedinstanceinnerclass_OuterClass_InnerClass (mut i32)
+(global $$class-initialized@nestedinstanceinnerclass.OuterClass.InnerClass (mut i32)
  (i32.const 0)
 )
-(global $f_$class__nestedinstanceinnerclass_OuterClass_InnerClass (mut (ref null $java.lang.Class))
+(global $$class@nestedinstanceinnerclass.OuterClass.InnerClass (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|nestedinstan...|__nestedinstanceinnerclass_OuterClass_InnerClass (mut (ref null $java.lang.String))
+(global $$string_|nestedinstan...|@nestedinstanceinnerclass.OuterClass.InnerClass (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -166,14 +166,14 @@
  ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
  (block
   ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
-  (if (global.get $f_$initialized__nestedinstanceinnerclass_OuterClass)
+  (if (global.get $$class-initialized@nestedinstanceinnerclass.OuterClass)
    (then
     ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
     (return )
    )
   )
   ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
-  (global.set $f_$initialized__nestedinstanceinnerclass_OuterClass (i32.const 1))
+  (global.set $$class-initialized@nestedinstanceinnerclass.OuterClass (i32.const 1))
   ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -183,12 +183,12 @@
 (func $$getClassMetadata__java_lang_Class@nestedinstanceinnerclass.OuterClass
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__nestedinstanceinnerclass_OuterClass))
+  (if (ref.is_null (global.get $$class@nestedinstanceinnerclass.OuterClass))
    (then
-    (global.set $f_$class__nestedinstanceinnerclass_OuterClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nestedinstan...|__java_lang_String (ref.func $$getString_|nestedinstan...|__java_lang_String@nestedinstanceinnerclass.OuterClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@nestedinstanceinnerclass.OuterClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nestedinstan...|__java_lang_String (ref.func $$getString_|nestedinstan...|__java_lang_String@nestedinstanceinnerclass.OuterClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__nestedinstanceinnerclass_OuterClass))
+  (return (global.get $$class@nestedinstanceinnerclass.OuterClass))
  )
 )
 
@@ -209,12 +209,12 @@
 (func $$getString_|nestedinstan...|__java_lang_String@nestedinstanceinnerclass.OuterClass
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|nestedinstan...|__nestedinstanceinnerclass_OuterClass))
+  (if (ref.is_null (global.get $$string_|nestedinstan...|@nestedinstanceinnerclass.OuterClass))
    (then
-    (global.set $f_$string_|nestedinstan...|__nestedinstanceinnerclass_OuterClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nestedinstanceinnerclass.OuterClass")))
+    (global.set $$string_|nestedinstan...|@nestedinstanceinnerclass.OuterClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nestedinstanceinnerclass.OuterClass")))
    )
   )
-  (return (global.get $f_$string_|nestedinstan...|__nestedinstanceinnerclass_OuterClass))
+  (return (global.get $$string_|nestedinstan...|@nestedinstanceinnerclass.OuterClass))
  )
 )
 
@@ -245,7 +245,7 @@
  ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
  (block
   ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
-  (struct.set $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass $$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass (local.get $this) (local.get $$outer_this))
+  (struct.set $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass $$outer_this@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (local.get $this) (local.get $$outer_this))
   ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
@@ -259,9 +259,9 @@
  ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
  (block
   ;;@ nestedinstanceinnerclass/OuterClass.java:21:6
-  (struct.set $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass $f_x__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass (local.get $this) (struct.get $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass $$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass (local.get $this)))
+  (struct.set $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass $x@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (local.get $this) (struct.get $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass $$outer_this@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (local.get $this)))
   ;;@ nestedinstanceinnerclass/OuterClass.java:22:6
-  (struct.set $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass $f_y__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass (local.get $this) (struct.get $nestedinstanceinnerclass.OuterClass.InnerClass $$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass (struct.get $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass $$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass (local.get $this))))
+  (struct.set $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass $y@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (local.get $this) (struct.get $nestedinstanceinnerclass.OuterClass.InnerClass $$outer_this@nestedinstanceinnerclass.OuterClass.InnerClass (struct.get $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass $$outer_this@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (local.get $this))))
  )
 )
 
@@ -270,14 +270,14 @@
  ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
  (block
   ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
-  (if (global.get $f_$initialized__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass)
+  (if (global.get $$class-initialized@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass)
    (then
     ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
     (return )
    )
   )
   ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
-  (global.set $f_$initialized__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass (i32.const 1))
+  (global.set $$class-initialized@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (i32.const 1))
   ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
   (call $$clinit__void@java.lang.Object )
  )
@@ -287,12 +287,12 @@
 (func $$getClassMetadata__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass))
+  (if (ref.is_null (global.get $$class@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass))
    (then
-    (global.set $f_$class__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nestedinstan...|__java_lang_String (ref.func $$getString_|nestedinstan...|__java_lang_String@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nestedinstan...|__java_lang_String (ref.func $$getString_|nestedinstan...|__java_lang_String@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass))
+  (return (global.get $$class@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass))
  )
 )
 
@@ -313,12 +313,12 @@
 (func $$getString_|nestedinstan...|__java_lang_String@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|nestedinstan...|__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass))
+  (if (ref.is_null (global.get $$string_|nestedinstan...|@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass))
    (then
-    (global.set $f_$string_|nestedinstan...|__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nestedinstanceinnerclass.OuterClass$InnerClass$InnerInnerClass")))
+    (global.set $$string_|nestedinstan...|@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nestedinstanceinnerclass.OuterClass$InnerClass$InnerInnerClass")))
    )
   )
-  (return (global.get $f_$string_|nestedinstan...|__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass))
+  (return (global.get $$string_|nestedinstan...|@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass))
  )
 )
 
@@ -349,7 +349,7 @@
  ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
  (block
   ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
-  (struct.set $nestedinstanceinnerclass.OuterClass.InnerClass $$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass (local.get $this) (local.get $$outer_this))
+  (struct.set $nestedinstanceinnerclass.OuterClass.InnerClass $$outer_this@nestedinstanceinnerclass.OuterClass.InnerClass (local.get $this) (local.get $$outer_this))
   ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -360,14 +360,14 @@
  ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
  (block
   ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
-  (if (global.get $f_$initialized__nestedinstanceinnerclass_OuterClass_InnerClass)
+  (if (global.get $$class-initialized@nestedinstanceinnerclass.OuterClass.InnerClass)
    (then
     ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
     (return )
    )
   )
   ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
-  (global.set $f_$initialized__nestedinstanceinnerclass_OuterClass_InnerClass (i32.const 1))
+  (global.set $$class-initialized@nestedinstanceinnerclass.OuterClass.InnerClass (i32.const 1))
   ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
   (call $$clinit__void@java.lang.Object )
  )
@@ -377,12 +377,12 @@
 (func $$getClassMetadata__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__nestedinstanceinnerclass_OuterClass_InnerClass))
+  (if (ref.is_null (global.get $$class@nestedinstanceinnerclass.OuterClass.InnerClass))
    (then
-    (global.set $f_$class__nestedinstanceinnerclass_OuterClass_InnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nestedinstan...|__java_lang_String (ref.func $$getString_|nestedinstan...|__java_lang_String@nestedinstanceinnerclass.OuterClass.InnerClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@nestedinstanceinnerclass.OuterClass.InnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nestedinstan...|__java_lang_String (ref.func $$getString_|nestedinstan...|__java_lang_String@nestedinstanceinnerclass.OuterClass.InnerClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__nestedinstanceinnerclass_OuterClass_InnerClass))
+  (return (global.get $$class@nestedinstanceinnerclass.OuterClass.InnerClass))
  )
 )
 
@@ -403,11 +403,11 @@
 (func $$getString_|nestedinstan...|__java_lang_String@nestedinstanceinnerclass.OuterClass.InnerClass
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|nestedinstan...|__nestedinstanceinnerclass_OuterClass_InnerClass))
+  (if (ref.is_null (global.get $$string_|nestedinstan...|@nestedinstanceinnerclass.OuterClass.InnerClass))
    (then
-    (global.set $f_$string_|nestedinstan...|__nestedinstanceinnerclass_OuterClass_InnerClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nestedinstanceinnerclass.OuterClass$InnerClass")))
+    (global.set $$string_|nestedinstan...|@nestedinstanceinnerclass.OuterClass.InnerClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nestedinstanceinnerclass.OuterClass$InnerClass")))
    )
   )
-  (return (global.get $f_$string_|nestedinstan...|__nestedinstanceinnerclass_OuterClass_InnerClass))
+  (return (global.get $$string_|nestedinstan...|@nestedinstanceinnerclass.OuterClass.InnerClass))
  )
 )

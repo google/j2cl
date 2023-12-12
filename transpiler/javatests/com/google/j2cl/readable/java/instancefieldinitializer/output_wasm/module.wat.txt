@@ -2,9 +2,9 @@
  (type $instancefieldinitializer.InstanceFieldInitializer (sub $java.lang.Object (struct
   (field $vtable (ref $instancefieldinitializer.InstanceFieldInitializer.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $f_a__instancefieldinitializer_InstanceFieldInitializer (mut i32))
-  (field $f_b__instancefieldinitializer_InstanceFieldInitializer (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  (field $a@instancefieldinitializer.InstanceFieldInitializer (mut i32))
+  (field $b@instancefieldinitializer.InstanceFieldInitializer (mut i32))
   ))
  )
  (type $instancefieldinitializer.InstanceFieldInitializer.vtable (sub $java.lang.Object.vtable (struct
@@ -28,13 +28,13 @@
 )
 
 ;;; Code for instancefieldinitializer.InstanceFieldInitializer [static fields]
-(global $f_$initialized__instancefieldinitializer_InstanceFieldInitializer (mut i32)
+(global $$class-initialized@instancefieldinitializer.InstanceFieldInitializer (mut i32)
  (i32.const 0)
 )
-(global $f_$class__instancefieldinitializer_InstanceFieldInitializer (mut (ref null $java.lang.Class))
+(global $$class@instancefieldinitializer.InstanceFieldInitializer (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|instancefiel...|__instancefieldinitializer_InstanceFieldInitializer (mut (ref null $java.lang.String))
+(global $$string_|instancefiel...|@instancefieldinitializer.InstanceFieldInitializer (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -75,9 +75,9 @@
  ;;@ instancefieldinitializer/InstanceFieldInitializer.java:18:13
  (block
   ;;@ instancefieldinitializer/InstanceFieldInitializer.java:19:2
-  (struct.set $instancefieldinitializer.InstanceFieldInitializer $f_a__instancefieldinitializer_InstanceFieldInitializer (local.get $this) (i32.const 1))
+  (struct.set $instancefieldinitializer.InstanceFieldInitializer $a@instancefieldinitializer.InstanceFieldInitializer (local.get $this) (i32.const 1))
   ;;@ instancefieldinitializer/InstanceFieldInitializer.java:20:2
-  (struct.set $instancefieldinitializer.InstanceFieldInitializer $f_b__instancefieldinitializer_InstanceFieldInitializer (local.get $this) (i32.mul (struct.get $instancefieldinitializer.InstanceFieldInitializer $f_a__instancefieldinitializer_InstanceFieldInitializer (local.get $this)) (i32.const 2)))
+  (struct.set $instancefieldinitializer.InstanceFieldInitializer $b@instancefieldinitializer.InstanceFieldInitializer (local.get $this) (i32.mul (struct.get $instancefieldinitializer.InstanceFieldInitializer $a@instancefieldinitializer.InstanceFieldInitializer (local.get $this)) (i32.const 2)))
  )
 )
 
@@ -86,14 +86,14 @@
  ;;@ instancefieldinitializer/InstanceFieldInitializer.java:18:13
  (block
   ;;@ instancefieldinitializer/InstanceFieldInitializer.java:18:13
-  (if (global.get $f_$initialized__instancefieldinitializer_InstanceFieldInitializer)
+  (if (global.get $$class-initialized@instancefieldinitializer.InstanceFieldInitializer)
    (then
     ;;@ instancefieldinitializer/InstanceFieldInitializer.java:18:13
     (return )
    )
   )
   ;;@ instancefieldinitializer/InstanceFieldInitializer.java:18:13
-  (global.set $f_$initialized__instancefieldinitializer_InstanceFieldInitializer (i32.const 1))
+  (global.set $$class-initialized@instancefieldinitializer.InstanceFieldInitializer (i32.const 1))
   ;;@ instancefieldinitializer/InstanceFieldInitializer.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -103,12 +103,12 @@
 (func $$getClassMetadata__java_lang_Class@instancefieldinitializer.InstanceFieldInitializer
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__instancefieldinitializer_InstanceFieldInitializer))
+  (if (ref.is_null (global.get $$class@instancefieldinitializer.InstanceFieldInitializer))
    (then
-    (global.set $f_$class__instancefieldinitializer_InstanceFieldInitializer (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instancefiel...|__java_lang_String (ref.func $$getString_|instancefiel...|__java_lang_String@instancefieldinitializer.InstanceFieldInitializer) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@instancefieldinitializer.InstanceFieldInitializer (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instancefiel...|__java_lang_String (ref.func $$getString_|instancefiel...|__java_lang_String@instancefieldinitializer.InstanceFieldInitializer) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__instancefieldinitializer_InstanceFieldInitializer))
+  (return (global.get $$class@instancefieldinitializer.InstanceFieldInitializer))
  )
 )
 
@@ -129,11 +129,11 @@
 (func $$getString_|instancefiel...|__java_lang_String@instancefieldinitializer.InstanceFieldInitializer
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|instancefiel...|__instancefieldinitializer_InstanceFieldInitializer))
+  (if (ref.is_null (global.get $$string_|instancefiel...|@instancefieldinitializer.InstanceFieldInitializer))
    (then
-    (global.set $f_$string_|instancefiel...|__instancefieldinitializer_InstanceFieldInitializer (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instancefieldinitializer.InstanceFieldInitializer")))
+    (global.set $$string_|instancefiel...|@instancefieldinitializer.InstanceFieldInitializer (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instancefieldinitializer.InstanceFieldInitializer")))
    )
   )
-  (return (global.get $f_$string_|instancefiel...|__instancefieldinitializer_InstanceFieldInitializer))
+  (return (global.get $$string_|instancefiel...|@instancefieldinitializer.InstanceFieldInitializer))
  )
 )

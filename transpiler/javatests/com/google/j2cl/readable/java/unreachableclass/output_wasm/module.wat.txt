@@ -2,7 +2,7 @@
  (type $unreachableclass.Main (sub $java.lang.Object (struct
   (field $vtable (ref $unreachableclass.Main.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $unreachableclass.Main.vtable (sub $java.lang.Object.vtable (struct
@@ -18,8 +18,8 @@
  (type $unreachableclass.Main.1 (sub $java.lang.Object (struct
   (field $vtable (ref $unreachableclass.Main.1.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $$outer_this__unreachableclass_Main_1 (mut (ref null $unreachableclass.Main)))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  (field $$outer_this@unreachableclass.Main.1 (mut (ref null $unreachableclass.Main)))
   ))
  )
  (type $unreachableclass.Main.1.vtable (sub $java.lang.Object.vtable (struct
@@ -35,8 +35,8 @@
  (type $unreachableclass.Main.1A.1B (sub $java.lang.Object (struct
   (field $vtable (ref $unreachableclass.Main.1A.1B.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $$outer_this__unreachableclass_Main_1A_1B (mut (ref null $unreachableclass.Main.1A)))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  (field $$outer_this@unreachableclass.Main.1A.1B (mut (ref null $unreachableclass.Main.1A)))
   ))
  )
  (type $unreachableclass.Main.1A.1B.vtable (sub $java.lang.Object.vtable (struct
@@ -52,8 +52,8 @@
  (type $unreachableclass.Main.1A (sub $java.lang.Object (struct
   (field $vtable (ref $unreachableclass.Main.1A.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $$outer_this__unreachableclass_Main_1A (mut (ref null $unreachableclass.Main)))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  (field $$outer_this@unreachableclass.Main.1A (mut (ref null $unreachableclass.Main)))
   ))
  )
  (type $unreachableclass.Main.1A.vtable (sub $java.lang.Object.vtable (struct
@@ -112,46 +112,46 @@
 )
 
 ;;; Code for unreachableclass.Main [static fields]
-(global $f_$initialized__unreachableclass_Main (mut i32)
+(global $$class-initialized@unreachableclass.Main (mut i32)
  (i32.const 0)
 )
-(global $f_$class__unreachableclass_Main (mut (ref null $java.lang.Class))
+(global $$class@unreachableclass.Main (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|unreachablec...|__unreachableclass_Main (mut (ref null $java.lang.String))
+(global $$string_|unreachablec...|@unreachableclass.Main (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for unreachableclass.Main.1 [static fields]
-(global $f_$initialized__unreachableclass_Main_1 (mut i32)
+(global $$class-initialized@unreachableclass.Main.1 (mut i32)
  (i32.const 0)
 )
-(global $f_$class__unreachableclass_Main_1 (mut (ref null $java.lang.Class))
+(global $$class@unreachableclass.Main.1 (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|unreachablec...|__unreachableclass_Main_1 (mut (ref null $java.lang.String))
+(global $$string_|unreachablec...|@unreachableclass.Main.1 (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for unreachableclass.Main.1A.1B [static fields]
-(global $f_$initialized__unreachableclass_Main_1A_1B (mut i32)
+(global $$class-initialized@unreachableclass.Main.1A.1B (mut i32)
  (i32.const 0)
 )
-(global $f_$class__unreachableclass_Main_1A_1B (mut (ref null $java.lang.Class))
+(global $$class@unreachableclass.Main.1A.1B (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|unreachablec...|__unreachableclass_Main_1A_1B (mut (ref null $java.lang.String))
+(global $$string_|unreachablec...|@unreachableclass.Main.1A.1B (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for unreachableclass.Main.1A [static fields]
-(global $f_$initialized__unreachableclass_Main_1A (mut i32)
+(global $$class-initialized@unreachableclass.Main.1A (mut i32)
  (i32.const 0)
 )
-(global $f_$class__unreachableclass_Main_1A (mut (ref null $java.lang.Class))
+(global $$class@unreachableclass.Main.1A (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|unreachablec...|__unreachableclass_Main_1A (mut (ref null $java.lang.String))
+(global $$string_|unreachablec...|@unreachableclass.Main.1A (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -234,14 +234,14 @@
  ;;@ unreachableclass/Main.java:18:13
  (block
   ;;@ unreachableclass/Main.java:18:13
-  (if (global.get $f_$initialized__unreachableclass_Main)
+  (if (global.get $$class-initialized@unreachableclass.Main)
    (then
     ;;@ unreachableclass/Main.java:18:13
     (return )
    )
   )
   ;;@ unreachableclass/Main.java:18:13
-  (global.set $f_$initialized__unreachableclass_Main (i32.const 1))
+  (global.set $$class-initialized@unreachableclass.Main (i32.const 1))
   ;;@ unreachableclass/Main.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -251,12 +251,12 @@
 (func $$getClassMetadata__java_lang_Class@unreachableclass.Main
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__unreachableclass_Main))
+  (if (ref.is_null (global.get $$class@unreachableclass.Main))
    (then
-    (global.set $f_$class__unreachableclass_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|unreachablec...|__java_lang_String (ref.func $$getString_|unreachablec...|__java_lang_String@unreachableclass.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@unreachableclass.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|unreachablec...|__java_lang_String (ref.func $$getString_|unreachablec...|__java_lang_String@unreachableclass.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__unreachableclass_Main))
+  (return (global.get $$class@unreachableclass.Main))
  )
 )
 
@@ -277,12 +277,12 @@
 (func $$getString_|unreachablec...|__java_lang_String@unreachableclass.Main
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|unreachablec...|__unreachableclass_Main))
+  (if (ref.is_null (global.get $$string_|unreachablec...|@unreachableclass.Main))
    (then
-    (global.set $f_$string_|unreachablec...|__unreachableclass_Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "unreachableclass.Main")))
+    (global.set $$string_|unreachablec...|@unreachableclass.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "unreachableclass.Main")))
    )
   )
-  (return (global.get $f_$string_|unreachablec...|__unreachableclass_Main))
+  (return (global.get $$string_|unreachablec...|@unreachableclass.Main))
  )
 )
 
@@ -313,7 +313,7 @@
  ;;@ unreachableclass/Main.java:30:19
  (block
   ;;@ unreachableclass/Main.java:30:19
-  (struct.set $unreachableclass.Main.1 $$outer_this__unreachableclass_Main_1 (local.get $this) (local.get $$outer_this))
+  (struct.set $unreachableclass.Main.1 $$outer_this@unreachableclass.Main.1 (local.get $this) (local.get $$outer_this))
   ;;@ unreachableclass/Main.java:30:19
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -324,14 +324,14 @@
  ;;@ unreachableclass/Main.java:30:19
  (block
   ;;@ unreachableclass/Main.java:30:19
-  (if (global.get $f_$initialized__unreachableclass_Main_1)
+  (if (global.get $$class-initialized@unreachableclass.Main.1)
    (then
     ;;@ unreachableclass/Main.java:30:19
     (return )
    )
   )
   ;;@ unreachableclass/Main.java:30:19
-  (global.set $f_$initialized__unreachableclass_Main_1 (i32.const 1))
+  (global.set $$class-initialized@unreachableclass.Main.1 (i32.const 1))
   ;;@ unreachableclass/Main.java:30:19
   (call $$clinit__void@java.lang.Object )
  )
@@ -341,12 +341,12 @@
 (func $$getClassMetadata__java_lang_Class@unreachableclass.Main.1
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__unreachableclass_Main_1))
+  (if (ref.is_null (global.get $$class@unreachableclass.Main.1))
    (then
-    (global.set $f_$class__unreachableclass_Main_1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|unreachablec...|__java_lang_String (ref.func $$getString_|unreachablec...|__java_lang_String@unreachableclass.Main.1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@unreachableclass.Main.1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|unreachablec...|__java_lang_String (ref.func $$getString_|unreachablec...|__java_lang_String@unreachableclass.Main.1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__unreachableclass_Main_1))
+  (return (global.get $$class@unreachableclass.Main.1))
  )
 )
 
@@ -367,12 +367,12 @@
 (func $$getString_|unreachablec...|__java_lang_String@unreachableclass.Main.1
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|unreachablec...|__unreachableclass_Main_1))
+  (if (ref.is_null (global.get $$string_|unreachablec...|@unreachableclass.Main.1))
    (then
-    (global.set $f_$string_|unreachablec...|__unreachableclass_Main_1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "unreachableclass.Main$1")))
+    (global.set $$string_|unreachablec...|@unreachableclass.Main.1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "unreachableclass.Main$1")))
    )
   )
-  (return (global.get $f_$string_|unreachablec...|__unreachableclass_Main_1))
+  (return (global.get $$string_|unreachablec...|@unreachableclass.Main.1))
  )
 )
 
@@ -403,7 +403,7 @@
  ;;@ unreachableclass/Main.java:24:16
  (block
   ;;@ unreachableclass/Main.java:24:16
-  (struct.set $unreachableclass.Main.1A.1B $$outer_this__unreachableclass_Main_1A_1B (local.get $this) (local.get $$outer_this))
+  (struct.set $unreachableclass.Main.1A.1B $$outer_this@unreachableclass.Main.1A.1B (local.get $this) (local.get $$outer_this))
   ;;@ unreachableclass/Main.java:24:16
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -422,14 +422,14 @@
  ;;@ unreachableclass/Main.java:24:16
  (block
   ;;@ unreachableclass/Main.java:24:16
-  (if (global.get $f_$initialized__unreachableclass_Main_1A_1B)
+  (if (global.get $$class-initialized@unreachableclass.Main.1A.1B)
    (then
     ;;@ unreachableclass/Main.java:24:16
     (return )
    )
   )
   ;;@ unreachableclass/Main.java:24:16
-  (global.set $f_$initialized__unreachableclass_Main_1A_1B (i32.const 1))
+  (global.set $$class-initialized@unreachableclass.Main.1A.1B (i32.const 1))
   ;;@ unreachableclass/Main.java:24:16
   (call $$clinit__void@java.lang.Object )
  )
@@ -439,12 +439,12 @@
 (func $$getClassMetadata__java_lang_Class@unreachableclass.Main.1A.1B
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__unreachableclass_Main_1A_1B))
+  (if (ref.is_null (global.get $$class@unreachableclass.Main.1A.1B))
    (then
-    (global.set $f_$class__unreachableclass_Main_1A_1B (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|unreachablec...|__java_lang_String (ref.func $$getString_|unreachablec...|__java_lang_String@unreachableclass.Main.1A.1B) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@unreachableclass.Main.1A.1B (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|unreachablec...|__java_lang_String (ref.func $$getString_|unreachablec...|__java_lang_String@unreachableclass.Main.1A.1B) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__unreachableclass_Main_1A_1B))
+  (return (global.get $$class@unreachableclass.Main.1A.1B))
  )
 )
 
@@ -465,12 +465,12 @@
 (func $$getString_|unreachablec...|__java_lang_String@unreachableclass.Main.1A.1B
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|unreachablec...|__unreachableclass_Main_1A_1B))
+  (if (ref.is_null (global.get $$string_|unreachablec...|@unreachableclass.Main.1A.1B))
    (then
-    (global.set $f_$string_|unreachablec...|__unreachableclass_Main_1A_1B (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "unreachableclass.Main$1A$1B")))
+    (global.set $$string_|unreachablec...|@unreachableclass.Main.1A.1B (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "unreachableclass.Main$1A$1B")))
    )
   )
-  (return (global.get $f_$string_|unreachablec...|__unreachableclass_Main_1A_1B))
+  (return (global.get $$string_|unreachablec...|@unreachableclass.Main.1A.1B))
  )
 )
 
@@ -501,7 +501,7 @@
  ;;@ unreachableclass/Main.java:22:12
  (block
   ;;@ unreachableclass/Main.java:22:12
-  (struct.set $unreachableclass.Main.1A $$outer_this__unreachableclass_Main_1A (local.get $this) (local.get $$outer_this))
+  (struct.set $unreachableclass.Main.1A $$outer_this@unreachableclass.Main.1A (local.get $this) (local.get $$outer_this))
   ;;@ unreachableclass/Main.java:22:12
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -524,14 +524,14 @@
  ;;@ unreachableclass/Main.java:22:12
  (block
   ;;@ unreachableclass/Main.java:22:12
-  (if (global.get $f_$initialized__unreachableclass_Main_1A)
+  (if (global.get $$class-initialized@unreachableclass.Main.1A)
    (then
     ;;@ unreachableclass/Main.java:22:12
     (return )
    )
   )
   ;;@ unreachableclass/Main.java:22:12
-  (global.set $f_$initialized__unreachableclass_Main_1A (i32.const 1))
+  (global.set $$class-initialized@unreachableclass.Main.1A (i32.const 1))
   ;;@ unreachableclass/Main.java:22:12
   (call $$clinit__void@java.lang.Object )
  )
@@ -541,12 +541,12 @@
 (func $$getClassMetadata__java_lang_Class@unreachableclass.Main.1A
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__unreachableclass_Main_1A))
+  (if (ref.is_null (global.get $$class@unreachableclass.Main.1A))
    (then
-    (global.set $f_$class__unreachableclass_Main_1A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|unreachablec...|__java_lang_String (ref.func $$getString_|unreachablec...|__java_lang_String@unreachableclass.Main.1A) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@unreachableclass.Main.1A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|unreachablec...|__java_lang_String (ref.func $$getString_|unreachablec...|__java_lang_String@unreachableclass.Main.1A) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__unreachableclass_Main_1A))
+  (return (global.get $$class@unreachableclass.Main.1A))
  )
 )
 
@@ -567,11 +567,11 @@
 (func $$getString_|unreachablec...|__java_lang_String@unreachableclass.Main.1A
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|unreachablec...|__unreachableclass_Main_1A))
+  (if (ref.is_null (global.get $$string_|unreachablec...|@unreachableclass.Main.1A))
    (then
-    (global.set $f_$string_|unreachablec...|__unreachableclass_Main_1A (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "unreachableclass.Main$1A")))
+    (global.set $$string_|unreachablec...|@unreachableclass.Main.1A (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "unreachableclass.Main$1A")))
    )
   )
-  (return (global.get $f_$string_|unreachablec...|__unreachableclass_Main_1A))
+  (return (global.get $$string_|unreachablec...|@unreachableclass.Main.1A))
  )
 )

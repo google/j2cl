@@ -128,7 +128,8 @@ public class ImplementStaticInitializationViaConditionChecks
         .setStatic(true)
         .setEnclosingTypeDescriptor(typeDescriptor)
         .setTypeDescriptor(PrimitiveTypes.BOOLEAN)
-        .setName("$initialized")
+        // Note that we are using an identifier that is not valid in Java.
+        .setName("$class-initialized")
         .build();
   }
 }

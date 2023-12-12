@@ -2,7 +2,7 @@
  (type $devirtualizedsupermethodcall.FooCallsSuperObjectMethod (sub $java.lang.Object (struct
   (field $vtable (ref $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable (sub $java.lang.Object.vtable (struct
@@ -18,7 +18,7 @@
  (type $devirtualizedsupermethodcall.Main (sub $java.lang.Object (struct
   (field $vtable (ref $devirtualizedsupermethodcall.Main.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $devirtualizedsupermethodcall.Main.vtable (sub $java.lang.Object.vtable (struct
@@ -35,7 +35,7 @@
  (type $devirtualizedsupermethodcall.SubNumber (sub $java.lang.Number (struct
   (field $vtable (ref $devirtualizedsupermethodcall.SubNumber.vtable))
   (field $itable (ref $devirtualizedsupermethodcall.SubNumber.itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $devirtualizedsupermethodcall.SubNumber.vtable (sub $java.lang.Number.vtable (struct
@@ -121,35 +121,35 @@
 )
 
 ;;; Code for devirtualizedsupermethodcall.SubNumber [static fields]
-(global $f_$initialized__devirtualizedsupermethodcall_SubNumber (mut i32)
+(global $$class-initialized@devirtualizedsupermethodcall.SubNumber (mut i32)
  (i32.const 0)
 )
-(global $f_$class__devirtualizedsupermethodcall_SubNumber (mut (ref null $java.lang.Class))
+(global $$class@devirtualizedsupermethodcall.SubNumber (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|devirtualize...|__devirtualizedsupermethodcall_SubNumber (mut (ref null $java.lang.String))
+(global $$string_|devirtualize...|@devirtualizedsupermethodcall.SubNumber (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for devirtualizedsupermethodcall.FooCallsSuperObjectMethod [static fields]
-(global $f_$initialized__devirtualizedsupermethodcall_FooCallsSuperObjectMethod (mut i32)
+(global $$class-initialized@devirtualizedsupermethodcall.FooCallsSuperObjectMethod (mut i32)
  (i32.const 0)
 )
-(global $f_$class__devirtualizedsupermethodcall_FooCallsSuperObjectMethod (mut (ref null $java.lang.Class))
+(global $$class@devirtualizedsupermethodcall.FooCallsSuperObjectMethod (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|devirtualize...|__devirtualizedsupermethodcall_FooCallsSuperObjectMethod (mut (ref null $java.lang.String))
+(global $$string_|devirtualize...|@devirtualizedsupermethodcall.FooCallsSuperObjectMethod (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for devirtualizedsupermethodcall.Main [static fields]
-(global $f_$initialized__devirtualizedsupermethodcall_Main (mut i32)
+(global $$class-initialized@devirtualizedsupermethodcall.Main (mut i32)
  (i32.const 0)
 )
-(global $f_$class__devirtualizedsupermethodcall_Main (mut (ref null $java.lang.Class))
+(global $$class@devirtualizedsupermethodcall.Main (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|devirtualize...|__devirtualizedsupermethodcall_Main (mut (ref null $java.lang.String))
+(global $$string_|devirtualize...|@devirtualizedsupermethodcall.Main (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -202,14 +202,14 @@
  ;;@ devirtualizedsupermethodcall/Main.java:40:6
  (block
   ;;@ devirtualizedsupermethodcall/Main.java:40:6
-  (if (global.get $f_$initialized__devirtualizedsupermethodcall_FooCallsSuperObjectMethod)
+  (if (global.get $$class-initialized@devirtualizedsupermethodcall.FooCallsSuperObjectMethod)
    (then
     ;;@ devirtualizedsupermethodcall/Main.java:40:6
     (return )
    )
   )
   ;;@ devirtualizedsupermethodcall/Main.java:40:6
-  (global.set $f_$initialized__devirtualizedsupermethodcall_FooCallsSuperObjectMethod (i32.const 1))
+  (global.set $$class-initialized@devirtualizedsupermethodcall.FooCallsSuperObjectMethod (i32.const 1))
   ;;@ devirtualizedsupermethodcall/Main.java:40:6
   (call $$clinit__void@java.lang.Object )
  )
@@ -219,12 +219,12 @@
 (func $$getClassMetadata__java_lang_Class@devirtualizedsupermethodcall.FooCallsSuperObjectMethod
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__devirtualizedsupermethodcall_FooCallsSuperObjectMethod))
+  (if (ref.is_null (global.get $$class@devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
    (then
-    (global.set $f_$class__devirtualizedsupermethodcall_FooCallsSuperObjectMethod (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|devirtualize...|__java_lang_String (ref.func $$getString_|devirtualize...|__java_lang_String@devirtualizedsupermethodcall.FooCallsSuperObjectMethod) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@devirtualizedsupermethodcall.FooCallsSuperObjectMethod (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|devirtualize...|__java_lang_String (ref.func $$getString_|devirtualize...|__java_lang_String@devirtualizedsupermethodcall.FooCallsSuperObjectMethod) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__devirtualizedsupermethodcall_FooCallsSuperObjectMethod))
+  (return (global.get $$class@devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
  )
 )
 
@@ -245,12 +245,12 @@
 (func $$getString_|devirtualize...|__java_lang_String@devirtualizedsupermethodcall.FooCallsSuperObjectMethod
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|devirtualize...|__devirtualizedsupermethodcall_FooCallsSuperObjectMethod))
+  (if (ref.is_null (global.get $$string_|devirtualize...|@devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
    (then
-    (global.set $f_$string_|devirtualize...|__devirtualizedsupermethodcall_FooCallsSuperObjectMethod (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "devirtualizedsupermethodcall.FooCallsSuperObjectMethod")))
+    (global.set $$string_|devirtualize...|@devirtualizedsupermethodcall.FooCallsSuperObjectMethod (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "devirtualizedsupermethodcall.FooCallsSuperObjectMethod")))
    )
   )
-  (return (global.get $f_$string_|devirtualize...|__devirtualizedsupermethodcall_FooCallsSuperObjectMethod))
+  (return (global.get $$string_|devirtualize...|@devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
  )
 )
 
@@ -318,14 +318,14 @@
  ;;@ devirtualizedsupermethodcall/Main.java:47:13
  (block
   ;;@ devirtualizedsupermethodcall/Main.java:47:13
-  (if (global.get $f_$initialized__devirtualizedsupermethodcall_Main)
+  (if (global.get $$class-initialized@devirtualizedsupermethodcall.Main)
    (then
     ;;@ devirtualizedsupermethodcall/Main.java:47:13
     (return )
    )
   )
   ;;@ devirtualizedsupermethodcall/Main.java:47:13
-  (global.set $f_$initialized__devirtualizedsupermethodcall_Main (i32.const 1))
+  (global.set $$class-initialized@devirtualizedsupermethodcall.Main (i32.const 1))
   ;;@ devirtualizedsupermethodcall/Main.java:47:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -335,12 +335,12 @@
 (func $$getClassMetadata__java_lang_Class@devirtualizedsupermethodcall.Main
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__devirtualizedsupermethodcall_Main))
+  (if (ref.is_null (global.get $$class@devirtualizedsupermethodcall.Main))
    (then
-    (global.set $f_$class__devirtualizedsupermethodcall_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|devirtualize...|__java_lang_String (ref.func $$getString_|devirtualize...|__java_lang_String@devirtualizedsupermethodcall.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@devirtualizedsupermethodcall.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|devirtualize...|__java_lang_String (ref.func $$getString_|devirtualize...|__java_lang_String@devirtualizedsupermethodcall.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__devirtualizedsupermethodcall_Main))
+  (return (global.get $$class@devirtualizedsupermethodcall.Main))
  )
 )
 
@@ -361,12 +361,12 @@
 (func $$getString_|devirtualize...|__java_lang_String@devirtualizedsupermethodcall.Main
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|devirtualize...|__devirtualizedsupermethodcall_Main))
+  (if (ref.is_null (global.get $$string_|devirtualize...|@devirtualizedsupermethodcall.Main))
    (then
-    (global.set $f_$string_|devirtualize...|__devirtualizedsupermethodcall_Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "devirtualizedsupermethodcall.Main")))
+    (global.set $$string_|devirtualize...|@devirtualizedsupermethodcall.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "devirtualizedsupermethodcall.Main")))
    )
   )
-  (return (global.get $f_$string_|devirtualize...|__devirtualizedsupermethodcall_Main))
+  (return (global.get $$string_|devirtualize...|@devirtualizedsupermethodcall.Main))
  )
 )
 
@@ -464,14 +464,14 @@
  ;;@ devirtualizedsupermethodcall/Main.java:18:6
  (block
   ;;@ devirtualizedsupermethodcall/Main.java:18:6
-  (if (global.get $f_$initialized__devirtualizedsupermethodcall_SubNumber)
+  (if (global.get $$class-initialized@devirtualizedsupermethodcall.SubNumber)
    (then
     ;;@ devirtualizedsupermethodcall/Main.java:18:6
     (return )
    )
   )
   ;;@ devirtualizedsupermethodcall/Main.java:18:6
-  (global.set $f_$initialized__devirtualizedsupermethodcall_SubNumber (i32.const 1))
+  (global.set $$class-initialized@devirtualizedsupermethodcall.SubNumber (i32.const 1))
   ;;@ devirtualizedsupermethodcall/Main.java:18:6
   (call $$clinit__void@java.lang.Number )
  )
@@ -481,12 +481,12 @@
 (func $$getClassMetadata__java_lang_Class@devirtualizedsupermethodcall.SubNumber
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__devirtualizedsupermethodcall_SubNumber))
+  (if (ref.is_null (global.get $$class@devirtualizedsupermethodcall.SubNumber))
    (then
-    (global.set $f_$class__devirtualizedsupermethodcall_SubNumber (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|devirtualize...|__java_lang_String (ref.func $$getString_|devirtualize...|__java_lang_String@devirtualizedsupermethodcall.SubNumber) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Number) )))
+    (global.set $$class@devirtualizedsupermethodcall.SubNumber (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|devirtualize...|__java_lang_String (ref.func $$getString_|devirtualize...|__java_lang_String@devirtualizedsupermethodcall.SubNumber) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Number) )))
    )
   )
-  (return (global.get $f_$class__devirtualizedsupermethodcall_SubNumber))
+  (return (global.get $$class@devirtualizedsupermethodcall.SubNumber))
  )
 )
 
@@ -507,11 +507,11 @@
 (func $$getString_|devirtualize...|__java_lang_String@devirtualizedsupermethodcall.SubNumber
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|devirtualize...|__devirtualizedsupermethodcall_SubNumber))
+  (if (ref.is_null (global.get $$string_|devirtualize...|@devirtualizedsupermethodcall.SubNumber))
    (then
-    (global.set $f_$string_|devirtualize...|__devirtualizedsupermethodcall_SubNumber (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "devirtualizedsupermethodcall.SubNumber")))
+    (global.set $$string_|devirtualize...|@devirtualizedsupermethodcall.SubNumber (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "devirtualizedsupermethodcall.SubNumber")))
    )
   )
-  (return (global.get $f_$string_|devirtualize...|__devirtualizedsupermethodcall_SubNumber))
+  (return (global.get $$string_|devirtualize...|@devirtualizedsupermethodcall.SubNumber))
  )
 )

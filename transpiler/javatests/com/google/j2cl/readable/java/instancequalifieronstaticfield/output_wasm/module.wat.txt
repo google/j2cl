@@ -2,7 +2,7 @@
  (type $instancequalifieronstaticfield.InstanceQualifiers (sub $java.lang.Object (struct
   (field $vtable (ref $instancequalifieronstaticfield.InstanceQualifiers.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $instancequalifieronstaticfield.InstanceQualifiers.vtable (sub $java.lang.Object.vtable (struct
@@ -26,19 +26,19 @@
 )
 
 ;;; Code for instancequalifieronstaticfield.InstanceQualifiers [static fields]
-(global $f_staticField__instancequalifieronstaticfield_InstanceQualifiers (mut i32)
+(global $staticField@instancequalifieronstaticfield.InstanceQualifiers (mut i32)
  (i32.const 0)
 )
-(global $f_sideEffectCount__instancequalifieronstaticfield_InstanceQualifiers (mut i32)
+(global $sideEffectCount@instancequalifieronstaticfield.InstanceQualifiers (mut i32)
  (i32.const 0)
 )
-(global $f_$initialized__instancequalifieronstaticfield_InstanceQualifiers (mut i32)
+(global $$class-initialized@instancequalifieronstaticfield.InstanceQualifiers (mut i32)
  (i32.const 0)
 )
-(global $f_$class__instancequalifieronstaticfield_InstanceQualifiers (mut (ref null $java.lang.Class))
+(global $$class@instancequalifieronstaticfield.InstanceQualifiers (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|instancequal...|__instancequalifieronstaticfield_InstanceQualifiers (mut (ref null $java.lang.String))
+(global $$string_|instancequal...|@instancequalifieronstaticfield.InstanceQualifiers (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -79,7 +79,7 @@
   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:22:37
   (call $$clinit__void@instancequalifieronstaticfield.InstanceQualifiers )
   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:23:4
-  (return (global.get $f_staticField__instancequalifieronstaticfield_InstanceQualifiers))
+  (return (global.get $staticField@instancequalifieronstaticfield.InstanceQualifiers))
  )
 )
 
@@ -110,37 +110,37 @@
   (local.set $i (i32.const 0))
   (block
    ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:35:6
-   (global.set $f_staticField__instancequalifieronstaticfield_InstanceQualifiers (i32.const 100))
+   (global.set $staticField@instancequalifieronstaticfield.InstanceQualifiers (i32.const 100))
   )
   (block
    ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:39:6
-   (global.set $f_staticField__instancequalifieronstaticfield_InstanceQualifiers (i32.const 100))
+   (global.set $staticField@instancequalifieronstaticfield.InstanceQualifiers (i32.const 100))
    (block
     ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:40:6
     (drop (call $m_getStaticInstanceQualifiers__instancequalifieronstaticfield_InstanceQualifiers@instancequalifieronstaticfield.InstanceQualifiers ))
     ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:40:6
-    (global.set $f_staticField__instancequalifieronstaticfield_InstanceQualifiers (i32.const 300))
+    (global.set $staticField@instancequalifieronstaticfield.InstanceQualifiers (i32.const 300))
    )
   )
   (block
    ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:44:6
-   (local.set $i (global.get $f_staticField__instancequalifieronstaticfield_InstanceQualifiers))
+   (local.set $i (global.get $staticField@instancequalifieronstaticfield.InstanceQualifiers))
    ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:45:6
    (local.set $i (call $m_getStaticValue__int@instancequalifieronstaticfield.InstanceQualifiers ))
    ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:46:6
    (local.set $i (block (result i32)
     (drop (call $m_getStaticInstanceQualifiers__instancequalifieronstaticfield_InstanceQualifiers@instancequalifieronstaticfield.InstanceQualifiers ))
-    (global.get $f_staticField__instancequalifieronstaticfield_InstanceQualifiers)
+    (global.get $staticField@instancequalifieronstaticfield.InstanceQualifiers)
    ))
   )
   (block
    ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:50:6
-   (global.set $f_staticField__instancequalifieronstaticfield_InstanceQualifiers (i32.add (global.get $f_staticField__instancequalifieronstaticfield_InstanceQualifiers) (i32.const 100)))
+   (global.set $staticField@instancequalifieronstaticfield.InstanceQualifiers (i32.add (global.get $staticField@instancequalifieronstaticfield.InstanceQualifiers) (i32.const 100)))
    (block
     ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:51:6
     (drop (call $m_getStaticInstanceQualifiers__instancequalifieronstaticfield_InstanceQualifiers@instancequalifieronstaticfield.InstanceQualifiers ))
     ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:51:6
-    (global.set $f_staticField__instancequalifieronstaticfield_InstanceQualifiers (i32.add (global.get $f_staticField__instancequalifieronstaticfield_InstanceQualifiers) (i32.const 100)))
+    (global.set $staticField@instancequalifieronstaticfield.InstanceQualifiers (i32.add (global.get $staticField@instancequalifieronstaticfield.InstanceQualifiers) (i32.const 100)))
    )
   )
   (block
@@ -150,7 +150,7 @@
     ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:55:6
     (drop (call $m_getStaticInstanceQualifiers__instancequalifieronstaticfield_InstanceQualifiers@instancequalifieronstaticfield.InstanceQualifiers ))
     ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:55:6
-    (global.set $f_staticField__instancequalifieronstaticfield_InstanceQualifiers (i32.add (global.get $f_staticField__instancequalifieronstaticfield_InstanceQualifiers) (block (result i32)
+    (global.set $staticField@instancequalifieronstaticfield.InstanceQualifiers (i32.add (global.get $staticField@instancequalifieronstaticfield.InstanceQualifiers) (block (result i32)
      (drop (call $m_getStaticInstanceQualifiers__instancequalifieronstaticfield_InstanceQualifiers@instancequalifieronstaticfield.InstanceQualifiers ))
      (drop (call $m_getStaticInstanceQualifiers__instancequalifieronstaticfield_InstanceQualifiers@instancequalifieronstaticfield.InstanceQualifiers ))
      (call $m_getStaticValue__int@instancequalifieronstaticfield.InstanceQualifiers )
@@ -165,20 +165,20 @@
  ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:18:13
  (block
   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:18:13
-  (if (global.get $f_$initialized__instancequalifieronstaticfield_InstanceQualifiers)
+  (if (global.get $$class-initialized@instancequalifieronstaticfield.InstanceQualifiers)
    (then
     ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:18:13
     (return )
    )
   )
   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:18:13
-  (global.set $f_$initialized__instancequalifieronstaticfield_InstanceQualifiers (i32.const 1))
+  (global.set $$class-initialized@instancequalifieronstaticfield.InstanceQualifiers (i32.const 1))
   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:18:13
   (call $$clinit__void@java.lang.Object )
   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:19:2
-  (global.set $f_staticField__instancequalifieronstaticfield_InstanceQualifiers (i32.const 100))
+  (global.set $staticField@instancequalifieronstaticfield.InstanceQualifiers (i32.const 100))
   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:20:2
-  (global.set $f_sideEffectCount__instancequalifieronstaticfield_InstanceQualifiers (i32.const 0))
+  (global.set $sideEffectCount@instancequalifieronstaticfield.InstanceQualifiers (i32.const 0))
  )
 )
 
@@ -186,12 +186,12 @@
 (func $$getClassMetadata__java_lang_Class@instancequalifieronstaticfield.InstanceQualifiers
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__instancequalifieronstaticfield_InstanceQualifiers))
+  (if (ref.is_null (global.get $$class@instancequalifieronstaticfield.InstanceQualifiers))
    (then
-    (global.set $f_$class__instancequalifieronstaticfield_InstanceQualifiers (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instancequal...|__java_lang_String (ref.func $$getString_|instancequal...|__java_lang_String@instancequalifieronstaticfield.InstanceQualifiers) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@instancequalifieronstaticfield.InstanceQualifiers (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instancequal...|__java_lang_String (ref.func $$getString_|instancequal...|__java_lang_String@instancequalifieronstaticfield.InstanceQualifiers) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__instancequalifieronstaticfield_InstanceQualifiers))
+  (return (global.get $$class@instancequalifieronstaticfield.InstanceQualifiers))
  )
 )
 
@@ -212,11 +212,11 @@
 (func $$getString_|instancequal...|__java_lang_String@instancequalifieronstaticfield.InstanceQualifiers
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|instancequal...|__instancequalifieronstaticfield_InstanceQualifiers))
+  (if (ref.is_null (global.get $$string_|instancequal...|@instancequalifieronstaticfield.InstanceQualifiers))
    (then
-    (global.set $f_$string_|instancequal...|__instancequalifieronstaticfield_InstanceQualifiers (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instancequalifieronstaticfield.InstanceQualifiers")))
+    (global.set $$string_|instancequal...|@instancequalifieronstaticfield.InstanceQualifiers (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instancequalifieronstaticfield.InstanceQualifiers")))
    )
   )
-  (return (global.get $f_$string_|instancequal...|__instancequalifieronstaticfield_InstanceQualifiers))
+  (return (global.get $$string_|instancequal...|@instancequalifieronstaticfield.InstanceQualifiers))
  )
 )

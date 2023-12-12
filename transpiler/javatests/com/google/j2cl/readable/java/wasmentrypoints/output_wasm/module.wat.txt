@@ -2,7 +2,7 @@
  (type $wasmentrypoints.WasmEntryPoints (sub $java.lang.Object (struct
   (field $vtable (ref $wasmentrypoints.WasmEntryPoints.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $wasmentrypoints.WasmEntryPoints.vtable (sub $java.lang.Object.vtable (struct
@@ -26,13 +26,13 @@
 )
 
 ;;; Code for wasmentrypoints.WasmEntryPoints [static fields]
-(global $f_$initialized__wasmentrypoints_WasmEntryPoints (mut i32)
+(global $$class-initialized@wasmentrypoints.WasmEntryPoints (mut i32)
  (i32.const 0)
 )
-(global $f_$class__wasmentrypoints_WasmEntryPoints (mut (ref null $java.lang.Class))
+(global $$class@wasmentrypoints.WasmEntryPoints (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|wasmentrypoi...|__wasmentrypoints_WasmEntryPoints (mut (ref null $java.lang.String))
+(global $$string_|wasmentrypoi...|@wasmentrypoints.WasmEntryPoints (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -112,14 +112,14 @@
  ;;@ wasmentrypoints/WasmEntryPoints.java:18:13
  (block
   ;;@ wasmentrypoints/WasmEntryPoints.java:18:13
-  (if (global.get $f_$initialized__wasmentrypoints_WasmEntryPoints)
+  (if (global.get $$class-initialized@wasmentrypoints.WasmEntryPoints)
    (then
     ;;@ wasmentrypoints/WasmEntryPoints.java:18:13
     (return )
    )
   )
   ;;@ wasmentrypoints/WasmEntryPoints.java:18:13
-  (global.set $f_$initialized__wasmentrypoints_WasmEntryPoints (i32.const 1))
+  (global.set $$class-initialized@wasmentrypoints.WasmEntryPoints (i32.const 1))
   ;;@ wasmentrypoints/WasmEntryPoints.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -129,12 +129,12 @@
 (func $$getClassMetadata__java_lang_Class@wasmentrypoints.WasmEntryPoints
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__wasmentrypoints_WasmEntryPoints))
+  (if (ref.is_null (global.get $$class@wasmentrypoints.WasmEntryPoints))
    (then
-    (global.set $f_$class__wasmentrypoints_WasmEntryPoints (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|wasmentrypoi...|__java_lang_String (ref.func $$getString_|wasmentrypoi...|__java_lang_String@wasmentrypoints.WasmEntryPoints) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@wasmentrypoints.WasmEntryPoints (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|wasmentrypoi...|__java_lang_String (ref.func $$getString_|wasmentrypoi...|__java_lang_String@wasmentrypoints.WasmEntryPoints) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__wasmentrypoints_WasmEntryPoints))
+  (return (global.get $$class@wasmentrypoints.WasmEntryPoints))
  )
 )
 
@@ -155,12 +155,12 @@
 (func $$getString_|wasmentrypoi...|__java_lang_String@wasmentrypoints.WasmEntryPoints
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|wasmentrypoi...|__wasmentrypoints_WasmEntryPoints))
+  (if (ref.is_null (global.get $$string_|wasmentrypoi...|@wasmentrypoints.WasmEntryPoints))
    (then
-    (global.set $f_$string_|wasmentrypoi...|__wasmentrypoints_WasmEntryPoints (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "wasmentrypoints.WasmEntryPoints")))
+    (global.set $$string_|wasmentrypoi...|@wasmentrypoints.WasmEntryPoints (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "wasmentrypoints.WasmEntryPoints")))
    )
   )
-  (return (global.get $f_$string_|wasmentrypoi...|__wasmentrypoints_WasmEntryPoints))
+  (return (global.get $$string_|wasmentrypoi...|@wasmentrypoints.WasmEntryPoints))
  )
 )
 

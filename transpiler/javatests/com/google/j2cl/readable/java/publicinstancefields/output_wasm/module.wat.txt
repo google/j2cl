@@ -2,9 +2,9 @@
  (type $publicinstancefields.PublicInstanceFields (sub $java.lang.Object (struct
   (field $vtable (ref $publicinstancefields.PublicInstanceFields.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $f_a__publicinstancefields_PublicInstanceFields (mut i32))
-  (field $f_b__publicinstancefields_PublicInstanceFields (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  (field $a@publicinstancefields.PublicInstanceFields (mut i32))
+  (field $b@publicinstancefields.PublicInstanceFields (mut i32))
   ))
  )
  (type $publicinstancefields.PublicInstanceFields.vtable (sub $java.lang.Object.vtable (struct
@@ -28,13 +28,13 @@
 )
 
 ;;; Code for publicinstancefields.PublicInstanceFields [static fields]
-(global $f_$initialized__publicinstancefields_PublicInstanceFields (mut i32)
+(global $$class-initialized@publicinstancefields.PublicInstanceFields (mut i32)
  (i32.const 0)
 )
-(global $f_$class__publicinstancefields_PublicInstanceFields (mut (ref null $java.lang.Class))
+(global $$class@publicinstancefields.PublicInstanceFields (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|publicinstan...|__publicinstancefields_PublicInstanceFields (mut (ref null $java.lang.String))
+(global $$string_|publicinstan...|@publicinstancefields.PublicInstanceFields (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -75,7 +75,7 @@
  ;;@ publicinstancefields/PublicInstanceFields.java:18:13
  (block
   ;;@ publicinstancefields/PublicInstanceFields.java:19:2
-  (struct.set $publicinstancefields.PublicInstanceFields $f_a__publicinstancefields_PublicInstanceFields (local.get $this) (i32.const 1))
+  (struct.set $publicinstancefields.PublicInstanceFields $a@publicinstancefields.PublicInstanceFields (local.get $this) (i32.const 1))
  )
 )
 
@@ -84,14 +84,14 @@
  ;;@ publicinstancefields/PublicInstanceFields.java:18:13
  (block
   ;;@ publicinstancefields/PublicInstanceFields.java:18:13
-  (if (global.get $f_$initialized__publicinstancefields_PublicInstanceFields)
+  (if (global.get $$class-initialized@publicinstancefields.PublicInstanceFields)
    (then
     ;;@ publicinstancefields/PublicInstanceFields.java:18:13
     (return )
    )
   )
   ;;@ publicinstancefields/PublicInstanceFields.java:18:13
-  (global.set $f_$initialized__publicinstancefields_PublicInstanceFields (i32.const 1))
+  (global.set $$class-initialized@publicinstancefields.PublicInstanceFields (i32.const 1))
   ;;@ publicinstancefields/PublicInstanceFields.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -101,12 +101,12 @@
 (func $$getClassMetadata__java_lang_Class@publicinstancefields.PublicInstanceFields
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__publicinstancefields_PublicInstanceFields))
+  (if (ref.is_null (global.get $$class@publicinstancefields.PublicInstanceFields))
    (then
-    (global.set $f_$class__publicinstancefields_PublicInstanceFields (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|publicinstan...|__java_lang_String (ref.func $$getString_|publicinstan...|__java_lang_String@publicinstancefields.PublicInstanceFields) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@publicinstancefields.PublicInstanceFields (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|publicinstan...|__java_lang_String (ref.func $$getString_|publicinstan...|__java_lang_String@publicinstancefields.PublicInstanceFields) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__publicinstancefields_PublicInstanceFields))
+  (return (global.get $$class@publicinstancefields.PublicInstanceFields))
  )
 )
 
@@ -127,11 +127,11 @@
 (func $$getString_|publicinstan...|__java_lang_String@publicinstancefields.PublicInstanceFields
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|publicinstan...|__publicinstancefields_PublicInstanceFields))
+  (if (ref.is_null (global.get $$string_|publicinstan...|@publicinstancefields.PublicInstanceFields))
    (then
-    (global.set $f_$string_|publicinstan...|__publicinstancefields_PublicInstanceFields (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "publicinstancefields.PublicInstanceFields")))
+    (global.set $$string_|publicinstan...|@publicinstancefields.PublicInstanceFields (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "publicinstancefields.PublicInstanceFields")))
    )
   )
-  (return (global.get $f_$string_|publicinstan...|__publicinstancefields_PublicInstanceFields))
+  (return (global.get $$string_|publicinstan...|@publicinstancefields.PublicInstanceFields))
  )
 )

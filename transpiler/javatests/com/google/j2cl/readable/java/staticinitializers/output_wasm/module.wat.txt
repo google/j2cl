@@ -2,7 +2,7 @@
  (type $staticinitializers.StaticInitializers (sub $java.lang.Object (struct
   (field $vtable (ref $staticinitializers.StaticInitializers.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $staticinitializers.StaticInitializers.vtable (sub $java.lang.Object.vtable (struct
@@ -26,22 +26,22 @@
 )
 
 ;;; Code for staticinitializers.StaticInitializers [static fields]
-(global $f_a__staticinitializers_StaticInitializers (mut i32)
+(global $a@staticinitializers.StaticInitializers (mut i32)
  (i32.const 0)
 )
-(global $f_b__staticinitializers_StaticInitializers (mut i32)
+(global $b@staticinitializers.StaticInitializers (mut i32)
  (i32.const 0)
 )
-(global $f_c__staticinitializers_StaticInitializers (mut i32)
+(global $c@staticinitializers.StaticInitializers (mut i32)
  (i32.const 0)
 )
-(global $f_$initialized__staticinitializers_StaticInitializers (mut i32)
+(global $$class-initialized@staticinitializers.StaticInitializers (mut i32)
  (i32.const 0)
 )
-(global $f_$class__staticinitializers_StaticInitializers (mut (ref null $java.lang.Class))
+(global $$class@staticinitializers.StaticInitializers (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|staticinitia...|__staticinitializers_StaticInitializers (mut (ref null $java.lang.String))
+(global $$string_|staticinitia...|@staticinitializers.StaticInitializers (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -81,26 +81,26 @@
  (local $duplicated_1 i32)
  (block
   ;;@ staticinitializers/StaticInitializers.java:18:13
-  (if (global.get $f_$initialized__staticinitializers_StaticInitializers)
+  (if (global.get $$class-initialized@staticinitializers.StaticInitializers)
    (then
     ;;@ staticinitializers/StaticInitializers.java:18:13
     (return )
    )
   )
   ;;@ staticinitializers/StaticInitializers.java:18:13
-  (global.set $f_$initialized__staticinitializers_StaticInitializers (i32.const 1))
+  (global.set $$class-initialized@staticinitializers.StaticInitializers (i32.const 1))
   ;;@ staticinitializers/StaticInitializers.java:18:13
   (call $$clinit__void@java.lang.Object )
   ;;@ staticinitializers/StaticInitializers.java:19:2
-  (global.set $f_a__staticinitializers_StaticInitializers (i32.const 5))
+  (global.set $a@staticinitializers.StaticInitializers (i32.const 5))
   ;;@ staticinitializers/StaticInitializers.java:21:2
-  (global.set $f_b__staticinitializers_StaticInitializers (i32.mul (global.get $f_a__staticinitializers_StaticInitializers) (i32.const 2)))
+  (global.set $b@staticinitializers.StaticInitializers (i32.mul (global.get $a@staticinitializers.StaticInitializers) (i32.const 2)))
   ;;@ staticinitializers/StaticInitializers.java:26:4
-  (global.set $f_a__staticinitializers_StaticInitializers (i32.const 10))
+  (global.set $a@staticinitializers.StaticInitializers (i32.const 10))
   ;;@ staticinitializers/StaticInitializers.java:27:4
-  (global.set $f_c__staticinitializers_StaticInitializers (i32.add (global.get $f_a__staticinitializers_StaticInitializers) (global.get $f_b__staticinitializers_StaticInitializers)))
+  (global.set $c@staticinitializers.StaticInitializers (i32.add (global.get $a@staticinitializers.StaticInitializers) (global.get $b@staticinitializers.StaticInitializers)))
   ;;@ staticinitializers/StaticInitializers.java:28:4
-  (local.set $duplicated (global.get $f_c__staticinitializers_StaticInitializers))
+  (local.set $duplicated (global.get $c@staticinitializers.StaticInitializers))
   ;;@ staticinitializers/StaticInitializers.java:32:4
   (local.set $duplicated_1 (i32.const 1))
  )
@@ -110,12 +110,12 @@
 (func $$getClassMetadata__java_lang_Class@staticinitializers.StaticInitializers
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__staticinitializers_StaticInitializers))
+  (if (ref.is_null (global.get $$class@staticinitializers.StaticInitializers))
    (then
-    (global.set $f_$class__staticinitializers_StaticInitializers (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|staticinitia...|__java_lang_String (ref.func $$getString_|staticinitia...|__java_lang_String@staticinitializers.StaticInitializers) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@staticinitializers.StaticInitializers (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|staticinitia...|__java_lang_String (ref.func $$getString_|staticinitia...|__java_lang_String@staticinitializers.StaticInitializers) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__staticinitializers_StaticInitializers))
+  (return (global.get $$class@staticinitializers.StaticInitializers))
  )
 )
 
@@ -136,11 +136,11 @@
 (func $$getString_|staticinitia...|__java_lang_String@staticinitializers.StaticInitializers
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|staticinitia...|__staticinitializers_StaticInitializers))
+  (if (ref.is_null (global.get $$string_|staticinitia...|@staticinitializers.StaticInitializers))
    (then
-    (global.set $f_$string_|staticinitia...|__staticinitializers_StaticInitializers (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "staticinitializers.StaticInitializers")))
+    (global.set $$string_|staticinitia...|@staticinitializers.StaticInitializers (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "staticinitializers.StaticInitializers")))
    )
   )
-  (return (global.get $f_$string_|staticinitia...|__staticinitializers_StaticInitializers))
+  (return (global.get $$string_|staticinitia...|@staticinitializers.StaticInitializers))
  )
 )

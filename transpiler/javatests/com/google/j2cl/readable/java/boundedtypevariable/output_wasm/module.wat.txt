@@ -2,7 +2,7 @@
  (type $boundedtypevariable.BoundedTypeVariable (sub $java.lang.Object (struct
   (field $vtable (ref $boundedtypevariable.BoundedTypeVariable.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $boundedtypevariable.BoundedTypeVariable.vtable (sub $java.lang.Object.vtable (struct
@@ -26,13 +26,13 @@
 )
 
 ;;; Code for boundedtypevariable.BoundedTypeVariable [static fields]
-(global $f_$initialized__boundedtypevariable_BoundedTypeVariable (mut i32)
+(global $$class-initialized@boundedtypevariable.BoundedTypeVariable (mut i32)
  (i32.const 0)
 )
-(global $f_$class__boundedtypevariable_BoundedTypeVariable (mut (ref null $java.lang.Class))
+(global $$class@boundedtypevariable.BoundedTypeVariable (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|boundedtypev...|__boundedtypevariable_BoundedTypeVariable (mut (ref null $java.lang.String))
+(global $$string_|boundedtypev...|@boundedtypevariable.BoundedTypeVariable (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -70,14 +70,14 @@
  ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
  (block
   ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
-  (if (global.get $f_$initialized__boundedtypevariable_BoundedTypeVariable)
+  (if (global.get $$class-initialized@boundedtypevariable.BoundedTypeVariable)
    (then
     ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
     (return )
    )
   )
   ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
-  (global.set $f_$initialized__boundedtypevariable_BoundedTypeVariable (i32.const 1))
+  (global.set $$class-initialized@boundedtypevariable.BoundedTypeVariable (i32.const 1))
   ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -87,12 +87,12 @@
 (func $$getClassMetadata__java_lang_Class@boundedtypevariable.BoundedTypeVariable
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__boundedtypevariable_BoundedTypeVariable))
+  (if (ref.is_null (global.get $$class@boundedtypevariable.BoundedTypeVariable))
    (then
-    (global.set $f_$class__boundedtypevariable_BoundedTypeVariable (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|boundedtypev...|__java_lang_String (ref.func $$getString_|boundedtypev...|__java_lang_String@boundedtypevariable.BoundedTypeVariable) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@boundedtypevariable.BoundedTypeVariable (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|boundedtypev...|__java_lang_String (ref.func $$getString_|boundedtypev...|__java_lang_String@boundedtypevariable.BoundedTypeVariable) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__boundedtypevariable_BoundedTypeVariable))
+  (return (global.get $$class@boundedtypevariable.BoundedTypeVariable))
  )
 )
 
@@ -113,11 +113,11 @@
 (func $$getString_|boundedtypev...|__java_lang_String@boundedtypevariable.BoundedTypeVariable
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|boundedtypev...|__boundedtypevariable_BoundedTypeVariable))
+  (if (ref.is_null (global.get $$string_|boundedtypev...|@boundedtypevariable.BoundedTypeVariable))
    (then
-    (global.set $f_$string_|boundedtypev...|__boundedtypevariable_BoundedTypeVariable (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "boundedtypevariable.BoundedTypeVariable")))
+    (global.set $$string_|boundedtypev...|@boundedtypevariable.BoundedTypeVariable (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "boundedtypevariable.BoundedTypeVariable")))
    )
   )
-  (return (global.get $f_$string_|boundedtypev...|__boundedtypevariable_BoundedTypeVariable))
+  (return (global.get $$string_|boundedtypev...|@boundedtypevariable.BoundedTypeVariable))
  )
 )

@@ -2,7 +2,7 @@
  (type $aptgeneratordep.Dummy (sub $java.lang.Object (struct
   (field $vtable (ref $aptgeneratordep.Dummy.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $aptgeneratordep.Dummy.vtable (sub $java.lang.Object.vtable (struct
@@ -18,7 +18,7 @@
  (type $aptgeneratordep.Foo (sub $java.lang.Object (struct
   (field $vtable (ref $aptgeneratordep.Foo.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $aptgeneratordep.Foo.vtable (sub $java.lang.Object.vtable (struct
@@ -53,24 +53,24 @@
 )
 
 ;;; Code for aptgeneratordep.Dummy [static fields]
-(global $f_$initialized__aptgeneratordep_Dummy (mut i32)
+(global $$class-initialized@aptgeneratordep.Dummy (mut i32)
  (i32.const 0)
 )
-(global $f_$class__aptgeneratordep_Dummy (mut (ref null $java.lang.Class))
+(global $$class@aptgeneratordep.Dummy (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|aptgenerator...|__aptgeneratordep_Dummy (mut (ref null $java.lang.String))
+(global $$string_|aptgenerator...|@aptgeneratordep.Dummy (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for aptgeneratordep.Foo [static fields]
-(global $f_$initialized__aptgeneratordep_Foo (mut i32)
+(global $$class-initialized@aptgeneratordep.Foo (mut i32)
  (i32.const 0)
 )
-(global $f_$class__aptgeneratordep_Foo (mut (ref null $java.lang.Class))
+(global $$class@aptgeneratordep.Foo (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|aptgenerator...|__aptgeneratordep_Foo (mut (ref null $java.lang.String))
+(global $$string_|aptgenerator...|@aptgeneratordep.Foo (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -108,14 +108,14 @@
  ;;@ aptgeneratordep/Dummy.java:3:13
  (block
   ;;@ aptgeneratordep/Dummy.java:3:13
-  (if (global.get $f_$initialized__aptgeneratordep_Dummy)
+  (if (global.get $$class-initialized@aptgeneratordep.Dummy)
    (then
     ;;@ aptgeneratordep/Dummy.java:3:13
     (return )
    )
   )
   ;;@ aptgeneratordep/Dummy.java:3:13
-  (global.set $f_$initialized__aptgeneratordep_Dummy (i32.const 1))
+  (global.set $$class-initialized@aptgeneratordep.Dummy (i32.const 1))
   ;;@ aptgeneratordep/Dummy.java:3:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -125,12 +125,12 @@
 (func $$getClassMetadata__java_lang_Class@aptgeneratordep.Dummy
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__aptgeneratordep_Dummy))
+  (if (ref.is_null (global.get $$class@aptgeneratordep.Dummy))
    (then
-    (global.set $f_$class__aptgeneratordep_Dummy (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|aptgenerator...|__java_lang_String (ref.func $$getString_|aptgenerator...|__java_lang_String@aptgeneratordep.Dummy) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@aptgeneratordep.Dummy (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|aptgenerator...|__java_lang_String (ref.func $$getString_|aptgenerator...|__java_lang_String@aptgeneratordep.Dummy) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__aptgeneratordep_Dummy))
+  (return (global.get $$class@aptgeneratordep.Dummy))
  )
 )
 
@@ -151,12 +151,12 @@
 (func $$getString_|aptgenerator...|__java_lang_String@aptgeneratordep.Dummy
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|aptgenerator...|__aptgeneratordep_Dummy))
+  (if (ref.is_null (global.get $$string_|aptgenerator...|@aptgeneratordep.Dummy))
    (then
-    (global.set $f_$string_|aptgenerator...|__aptgeneratordep_Dummy (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "aptgeneratordep.Dummy")))
+    (global.set $$string_|aptgenerator...|@aptgeneratordep.Dummy (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "aptgeneratordep.Dummy")))
    )
   )
-  (return (global.get $f_$string_|aptgenerator...|__aptgeneratordep_Dummy))
+  (return (global.get $$string_|aptgenerator...|@aptgeneratordep.Dummy))
  )
 )
 
@@ -213,14 +213,14 @@
  ;;@ aptgeneratordep/Foo.java:18:13
  (block
   ;;@ aptgeneratordep/Foo.java:18:13
-  (if (global.get $f_$initialized__aptgeneratordep_Foo)
+  (if (global.get $$class-initialized@aptgeneratordep.Foo)
    (then
     ;;@ aptgeneratordep/Foo.java:18:13
     (return )
    )
   )
   ;;@ aptgeneratordep/Foo.java:18:13
-  (global.set $f_$initialized__aptgeneratordep_Foo (i32.const 1))
+  (global.set $$class-initialized@aptgeneratordep.Foo (i32.const 1))
   ;;@ aptgeneratordep/Foo.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -230,12 +230,12 @@
 (func $$getClassMetadata__java_lang_Class@aptgeneratordep.Foo
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__aptgeneratordep_Foo))
+  (if (ref.is_null (global.get $$class@aptgeneratordep.Foo))
    (then
-    (global.set $f_$class__aptgeneratordep_Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|aptgenerator...|__java_lang_String (ref.func $$getString_|aptgenerator...|__java_lang_String@aptgeneratordep.Foo) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@aptgeneratordep.Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|aptgenerator...|__java_lang_String (ref.func $$getString_|aptgenerator...|__java_lang_String@aptgeneratordep.Foo) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__aptgeneratordep_Foo))
+  (return (global.get $$class@aptgeneratordep.Foo))
  )
 )
 
@@ -256,11 +256,11 @@
 (func $$getString_|aptgenerator...|__java_lang_String@aptgeneratordep.Foo
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|aptgenerator...|__aptgeneratordep_Foo))
+  (if (ref.is_null (global.get $$string_|aptgenerator...|@aptgeneratordep.Foo))
    (then
-    (global.set $f_$string_|aptgenerator...|__aptgeneratordep_Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "aptgeneratordep.Foo")))
+    (global.set $$string_|aptgenerator...|@aptgeneratordep.Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "aptgeneratordep.Foo")))
    )
   )
-  (return (global.get $f_$string_|aptgenerator...|__aptgeneratordep_Foo))
+  (return (global.get $$string_|aptgenerator...|@aptgeneratordep.Foo))
  )
 )

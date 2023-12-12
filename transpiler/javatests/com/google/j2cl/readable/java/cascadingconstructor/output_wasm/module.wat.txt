@@ -2,9 +2,9 @@
  (type $cascadingconstructor.CascadingConstructor (sub $java.lang.Object (struct
   (field $vtable (ref $cascadingconstructor.CascadingConstructor.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $f_a__cascadingconstructor_CascadingConstructor_ (mut i32))
-  (field $f_b__cascadingconstructor_CascadingConstructor_ (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  (field $a@cascadingconstructor.CascadingConstructor (mut i32))
+  (field $b@cascadingconstructor.CascadingConstructor (mut i32))
   ))
  )
  (type $cascadingconstructor.CascadingConstructor.vtable (sub $java.lang.Object.vtable (struct
@@ -28,13 +28,13 @@
 )
 
 ;;; Code for cascadingconstructor.CascadingConstructor [static fields]
-(global $f_$initialized__cascadingconstructor_CascadingConstructor (mut i32)
+(global $$class-initialized@cascadingconstructor.CascadingConstructor (mut i32)
  (i32.const 0)
 )
-(global $f_$class__cascadingconstructor_CascadingConstructor (mut (ref null $java.lang.Class))
+(global $$class@cascadingconstructor.CascadingConstructor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|cascadingcon...|__cascadingconstructor_CascadingConstructor (mut (ref null $java.lang.String))
+(global $$string_|cascadingcon...|@cascadingconstructor.CascadingConstructor (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -67,9 +67,9 @@
   ;;@ cascadingconstructor/CascadingConstructor.java:22:45
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;;@ cascadingconstructor/CascadingConstructor.java:23:4
-  (struct.set $cascadingconstructor.CascadingConstructor $f_a__cascadingconstructor_CascadingConstructor_ (local.get $this) (local.get $a))
+  (struct.set $cascadingconstructor.CascadingConstructor $a@cascadingconstructor.CascadingConstructor (local.get $this) (local.get $a))
   ;;@ cascadingconstructor/CascadingConstructor.java:24:4
-  (struct.set $cascadingconstructor.CascadingConstructor $f_b__cascadingconstructor_CascadingConstructor_ (local.get $this) (local.get $b))
+  (struct.set $cascadingconstructor.CascadingConstructor $b@cascadingconstructor.CascadingConstructor (local.get $this) (local.get $b))
  )
 )
 
@@ -107,14 +107,14 @@
  ;;@ cascadingconstructor/CascadingConstructor.java:18:13
  (block
   ;;@ cascadingconstructor/CascadingConstructor.java:18:13
-  (if (global.get $f_$initialized__cascadingconstructor_CascadingConstructor)
+  (if (global.get $$class-initialized@cascadingconstructor.CascadingConstructor)
    (then
     ;;@ cascadingconstructor/CascadingConstructor.java:18:13
     (return )
    )
   )
   ;;@ cascadingconstructor/CascadingConstructor.java:18:13
-  (global.set $f_$initialized__cascadingconstructor_CascadingConstructor (i32.const 1))
+  (global.set $$class-initialized@cascadingconstructor.CascadingConstructor (i32.const 1))
   ;;@ cascadingconstructor/CascadingConstructor.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -124,12 +124,12 @@
 (func $$getClassMetadata__java_lang_Class@cascadingconstructor.CascadingConstructor
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__cascadingconstructor_CascadingConstructor))
+  (if (ref.is_null (global.get $$class@cascadingconstructor.CascadingConstructor))
    (then
-    (global.set $f_$class__cascadingconstructor_CascadingConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cascadingcon...|__java_lang_String (ref.func $$getString_|cascadingcon...|__java_lang_String@cascadingconstructor.CascadingConstructor) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@cascadingconstructor.CascadingConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cascadingcon...|__java_lang_String (ref.func $$getString_|cascadingcon...|__java_lang_String@cascadingconstructor.CascadingConstructor) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__cascadingconstructor_CascadingConstructor))
+  (return (global.get $$class@cascadingconstructor.CascadingConstructor))
  )
 )
 
@@ -150,11 +150,11 @@
 (func $$getString_|cascadingcon...|__java_lang_String@cascadingconstructor.CascadingConstructor
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|cascadingcon...|__cascadingconstructor_CascadingConstructor))
+  (if (ref.is_null (global.get $$string_|cascadingcon...|@cascadingconstructor.CascadingConstructor))
    (then
-    (global.set $f_$string_|cascadingcon...|__cascadingconstructor_CascadingConstructor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cascadingconstructor.CascadingConstructor")))
+    (global.set $$string_|cascadingcon...|@cascadingconstructor.CascadingConstructor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cascadingconstructor.CascadingConstructor")))
    )
   )
-  (return (global.get $f_$string_|cascadingcon...|__cascadingconstructor_CascadingConstructor))
+  (return (global.get $$string_|cascadingcon...|@cascadingconstructor.CascadingConstructor))
  )
 )

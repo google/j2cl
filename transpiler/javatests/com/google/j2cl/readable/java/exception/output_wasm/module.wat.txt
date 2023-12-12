@@ -2,14 +2,14 @@
  (type $exception.MyException (sub $java.lang.Exception (struct
   (field $vtable (ref $exception.MyException.vtable))
   (field $itable (ref $exception.MyException.itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $f_backingJsObject__java_lang_Throwable_ (mut (ref null $java.lang.Object)))
-  (field $f_cause__java_lang_Throwable_ (mut (ref null $java.lang.Throwable)))
-  (field $f_detailMessage__java_lang_Throwable_ (mut (ref null $java.lang.String)))
-  (field $f_disableStackTrace__java_lang_Throwable_ (mut i8))
-  (field $f_disableSuppression__java_lang_Throwable_ (mut i8))
-  (field $f_stackTrace__java_lang_Throwable_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
-  (field $f_suppressedExceptions__java_lang_Throwable_ (mut (ref null $java.util.ArrayList)))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  (field $backingJsObject@java.lang.Throwable (mut (ref null $java.lang.Object)))
+  (field $cause@java.lang.Throwable (mut (ref null $java.lang.Throwable)))
+  (field $detailMessage@java.lang.Throwable (mut (ref null $java.lang.String)))
+  (field $disableStackTrace@java.lang.Throwable (mut i8))
+  (field $disableSuppression@java.lang.Throwable (mut i8))
+  (field $stackTrace@java.lang.Throwable (mut (ref null $javaemul.internal.WasmArray.OfObject)))
+  (field $suppressedExceptions@java.lang.Throwable (mut (ref null $java.util.ArrayList)))
   ))
  )
  (type $exception.MyException.vtable (sub $java.lang.Exception.vtable (struct
@@ -47,14 +47,14 @@
  (type $exception.MyJsException (sub $java.lang.Exception (struct
   (field $vtable (ref $exception.MyJsException.vtable))
   (field $itable (ref $exception.MyJsException.itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $f_backingJsObject__java_lang_Throwable_ (mut (ref null $java.lang.Object)))
-  (field $f_cause__java_lang_Throwable_ (mut (ref null $java.lang.Throwable)))
-  (field $f_detailMessage__java_lang_Throwable_ (mut (ref null $java.lang.String)))
-  (field $f_disableStackTrace__java_lang_Throwable_ (mut i8))
-  (field $f_disableSuppression__java_lang_Throwable_ (mut i8))
-  (field $f_stackTrace__java_lang_Throwable_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
-  (field $f_suppressedExceptions__java_lang_Throwable_ (mut (ref null $java.util.ArrayList)))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  (field $backingJsObject@java.lang.Throwable (mut (ref null $java.lang.Object)))
+  (field $cause@java.lang.Throwable (mut (ref null $java.lang.Throwable)))
+  (field $detailMessage@java.lang.Throwable (mut (ref null $java.lang.String)))
+  (field $disableStackTrace@java.lang.Throwable (mut i8))
+  (field $disableSuppression@java.lang.Throwable (mut i8))
+  (field $stackTrace@java.lang.Throwable (mut (ref null $javaemul.internal.WasmArray.OfObject)))
+  (field $suppressedExceptions@java.lang.Throwable (mut (ref null $java.util.ArrayList)))
   ))
  )
  (type $exception.MyJsException.vtable (sub $java.lang.Exception.vtable (struct
@@ -173,24 +173,24 @@
 )
 
 ;;; Code for exception.MyException [static fields]
-(global $f_$initialized__exception_MyException (mut i32)
+(global $$class-initialized@exception.MyException (mut i32)
  (i32.const 0)
 )
-(global $f_$class__exception_MyException (mut (ref null $java.lang.Class))
+(global $$class@exception.MyException (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|exception.My...|__exception_MyException (mut (ref null $java.lang.String))
+(global $$string_|exception.My...|@exception.MyException (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for exception.MyJsException [static fields]
-(global $f_$initialized__exception_MyJsException (mut i32)
+(global $$class-initialized@exception.MyJsException (mut i32)
  (i32.const 0)
 )
-(global $f_$class__exception_MyJsException (mut (ref null $java.lang.Class))
+(global $$class@exception.MyJsException (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|exception.My...|__exception_MyJsException (mut (ref null $java.lang.String))
+(global $$string_|exception.My...|@exception.MyJsException (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -261,14 +261,14 @@
  ;;@ exception/MyException.java:18:12
  (block
   ;;@ exception/MyException.java:18:12
-  (if (global.get $f_$initialized__exception_MyException)
+  (if (global.get $$class-initialized@exception.MyException)
    (then
     ;;@ exception/MyException.java:18:12
     (return )
    )
   )
   ;;@ exception/MyException.java:18:12
-  (global.set $f_$initialized__exception_MyException (i32.const 1))
+  (global.set $$class-initialized@exception.MyException (i32.const 1))
   ;;@ exception/MyException.java:18:12
   (call $$clinit__void@java.lang.Exception )
  )
@@ -278,12 +278,12 @@
 (func $$getClassMetadata__java_lang_Class@exception.MyException
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__exception_MyException))
+  (if (ref.is_null (global.get $$class@exception.MyException))
    (then
-    (global.set $f_$class__exception_MyException (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|exception.My...|__java_lang_String (ref.func $$getString_|exception.My...|__java_lang_String@exception.MyException) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Exception) )))
+    (global.set $$class@exception.MyException (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|exception.My...|__java_lang_String (ref.func $$getString_|exception.My...|__java_lang_String@exception.MyException) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Exception) )))
    )
   )
-  (return (global.get $f_$class__exception_MyException))
+  (return (global.get $$class@exception.MyException))
  )
 )
 
@@ -304,12 +304,12 @@
 (func $$getString_|exception.My...|__java_lang_String@exception.MyException
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|exception.My...|__exception_MyException))
+  (if (ref.is_null (global.get $$string_|exception.My...|@exception.MyException))
    (then
-    (global.set $f_$string_|exception.My...|__exception_MyException (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "exception.MyException")))
+    (global.set $$string_|exception.My...|@exception.MyException (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "exception.MyException")))
    )
   )
-  (return (global.get $f_$string_|exception.My...|__exception_MyException))
+  (return (global.get $$string_|exception.My...|@exception.MyException))
  )
 )
 
@@ -380,14 +380,14 @@
  ;;@ exception/MyJsException.java:22:12
  (block
   ;;@ exception/MyJsException.java:22:12
-  (if (global.get $f_$initialized__exception_MyJsException)
+  (if (global.get $$class-initialized@exception.MyJsException)
    (then
     ;;@ exception/MyJsException.java:22:12
     (return )
    )
   )
   ;;@ exception/MyJsException.java:22:12
-  (global.set $f_$initialized__exception_MyJsException (i32.const 1))
+  (global.set $$class-initialized@exception.MyJsException (i32.const 1))
   ;;@ exception/MyJsException.java:22:12
   (call $$clinit__void@java.lang.Exception )
  )
@@ -397,12 +397,12 @@
 (func $$getClassMetadata__java_lang_Class@exception.MyJsException
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__exception_MyJsException))
+  (if (ref.is_null (global.get $$class@exception.MyJsException))
    (then
-    (global.set $f_$class__exception_MyJsException (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|exception.My...|__java_lang_String (ref.func $$getString_|exception.My...|__java_lang_String@exception.MyJsException) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Exception) )))
+    (global.set $$class@exception.MyJsException (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|exception.My...|__java_lang_String (ref.func $$getString_|exception.My...|__java_lang_String@exception.MyJsException) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Exception) )))
    )
   )
-  (return (global.get $f_$class__exception_MyJsException))
+  (return (global.get $$class@exception.MyJsException))
  )
 )
 
@@ -423,11 +423,11 @@
 (func $$getString_|exception.My...|__java_lang_String@exception.MyJsException
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|exception.My...|__exception_MyJsException))
+  (if (ref.is_null (global.get $$string_|exception.My...|@exception.MyJsException))
    (then
-    (global.set $f_$string_|exception.My...|__exception_MyJsException (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "exception.MyJsException")))
+    (global.set $$string_|exception.My...|@exception.MyJsException (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "exception.MyJsException")))
    )
   )
-  (return (global.get $f_$string_|exception.My...|__exception_MyJsException))
+  (return (global.get $$string_|exception.My...|@exception.MyJsException))
  )
 )

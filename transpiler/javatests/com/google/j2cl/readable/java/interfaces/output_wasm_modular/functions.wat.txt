@@ -36,14 +36,14 @@
  ;;@ interfaces/Main.java:20:12
  (block
   ;;@ interfaces/Main.java:20:12
-  (if (global.get $f_$initialized__interfaces_Main_Interface)
+  (if (global.get $$class-initialized@interfaces.Main.Interface)
    (then
     ;;@ interfaces/Main.java:20:12
     (return )
    )
   )
   ;;@ interfaces/Main.java:20:12
-  (global.set $f_$initialized__interfaces_Main_Interface (i32.const 1))
+  (global.set $$class-initialized@interfaces.Main.Interface (i32.const 1))
  )
 )
 
@@ -51,12 +51,12 @@
 (func $$getClassMetadata__java_lang_Class@interfaces.Main.Interface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__interfaces_Main_Interface))
+  (if (ref.is_null (global.get $$class@interfaces.Main.Interface))
    (then
-    (global.set $f_$class__interfaces_Main_Interface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.M...|__java_lang_String (ref.func $$getString_|interfaces.M...|__java_lang_String@interfaces.Main.Interface) )))
+    (global.set $$class@interfaces.Main.Interface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.M...|__java_lang_String (ref.func $$getString_|interfaces.M...|__java_lang_String@interfaces.Main.Interface) )))
    )
   )
-  (return (global.get $f_$class__interfaces_Main_Interface))
+  (return (global.get $$class@interfaces.Main.Interface))
  )
 )
 ;;; End of code for interfaces.Main.Interface [methods]
@@ -79,14 +79,14 @@
  ;;@ interfaces/Main.java:35:12
  (block
   ;;@ interfaces/Main.java:35:12
-  (if (global.get $f_$initialized__interfaces_Main_SubInterface)
+  (if (global.get $$class-initialized@interfaces.Main.SubInterface)
    (then
     ;;@ interfaces/Main.java:35:12
     (return )
    )
   )
   ;;@ interfaces/Main.java:35:12
-  (global.set $f_$initialized__interfaces_Main_SubInterface (i32.const 1))
+  (global.set $$class-initialized@interfaces.Main.SubInterface (i32.const 1))
   ;;@ interfaces/Main.java:35:12
   (call $$clinit__void@interfaces.Main.Interface )
  )
@@ -96,12 +96,12 @@
 (func $$getClassMetadata__java_lang_Class@interfaces.Main.SubInterface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__interfaces_Main_SubInterface))
+  (if (ref.is_null (global.get $$class@interfaces.Main.SubInterface))
    (then
-    (global.set $f_$class__interfaces_Main_SubInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.M...|__java_lang_String (ref.func $$getString_|interfaces.M...|__java_lang_String@interfaces.Main.SubInterface) )))
+    (global.set $$class@interfaces.Main.SubInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.M...|__java_lang_String (ref.func $$getString_|interfaces.M...|__java_lang_String@interfaces.Main.SubInterface) )))
    )
   )
-  (return (global.get $f_$class__interfaces_Main_SubInterface))
+  (return (global.get $$class@interfaces.Main.SubInterface))
  )
 )
 ;;; End of code for interfaces.Main.SubInterface [methods]
@@ -166,14 +166,14 @@
  ;;@ interfaces/Main.java:18:13
  (block
   ;;@ interfaces/Main.java:18:13
-  (if (global.get $f_$initialized__interfaces_Main)
+  (if (global.get $$class-initialized@interfaces.Main)
    (then
     ;;@ interfaces/Main.java:18:13
     (return )
    )
   )
   ;;@ interfaces/Main.java:18:13
-  (global.set $f_$initialized__interfaces_Main (i32.const 1))
+  (global.set $$class-initialized@interfaces.Main (i32.const 1))
   ;;@ interfaces/Main.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -183,12 +183,12 @@
 (func $$getClassMetadata__java_lang_Class@interfaces.Main
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__interfaces_Main))
+  (if (ref.is_null (global.get $$class@interfaces.Main))
    (then
-    (global.set $f_$class__interfaces_Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.Main|__java_lang_String (ref.func $$getString_|interfaces.Main|__java_lang_String@interfaces.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@interfaces.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.Main|__java_lang_String (ref.func $$getString_|interfaces.Main|__java_lang_String@interfaces.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__interfaces_Main))
+  (return (global.get $$class@interfaces.Main))
  )
 )
 
@@ -232,7 +232,7 @@
  ;;@ interfaces/Main.java:41:8
  (block
   ;;@ interfaces/Main.java:41:8
-  (struct.set $interfaces.Main.Implementor $$outer_this__interfaces_Main_Implementor (local.get $this) (local.get $$outer_this))
+  (struct.set $interfaces.Main.Implementor $$outer_this@interfaces.Main.Implementor (local.get $this) (local.get $$outer_this))
   ;;@ interfaces/Main.java:41:8
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -285,14 +285,14 @@
  ;;@ interfaces/Main.java:41:8
  (block
   ;;@ interfaces/Main.java:41:8
-  (if (global.get $f_$initialized__interfaces_Main_Implementor)
+  (if (global.get $$class-initialized@interfaces.Main.Implementor)
    (then
     ;;@ interfaces/Main.java:41:8
     (return )
    )
   )
   ;;@ interfaces/Main.java:41:8
-  (global.set $f_$initialized__interfaces_Main_Implementor (i32.const 1))
+  (global.set $$class-initialized@interfaces.Main.Implementor (i32.const 1))
   ;;@ interfaces/Main.java:41:8
   (call $$clinit__void@java.lang.Object )
   ;;@ interfaces/Main.java:41:8
@@ -306,12 +306,12 @@
 (func $$getClassMetadata__java_lang_Class@interfaces.Main.Implementor
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__interfaces_Main_Implementor))
+  (if (ref.is_null (global.get $$class@interfaces.Main.Implementor))
    (then
-    (global.set $f_$class__interfaces_Main_Implementor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.M...|__java_lang_String (ref.func $$getString_|interfaces.M...|__java_lang_String@interfaces.Main.Implementor) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@interfaces.Main.Implementor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.M...|__java_lang_String (ref.func $$getString_|interfaces.M...|__java_lang_String@interfaces.Main.Implementor) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__interfaces_Main_Implementor))
+  (return (global.get $$class@interfaces.Main.Implementor))
  )
 )
 
@@ -337,7 +337,7 @@
  ;;@ interfaces/Main.java:47:17
  (block
   ;;@ interfaces/Main.java:47:17
-  (struct.set $interfaces.Main.AbstractImplementor $$outer_this__interfaces_Main_AbstractImplementor (local.get $this) (local.get $$outer_this))
+  (struct.set $interfaces.Main.AbstractImplementor $$outer_this@interfaces.Main.AbstractImplementor (local.get $this) (local.get $$outer_this))
   ;;@ interfaces/Main.java:47:17
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -378,14 +378,14 @@
  ;;@ interfaces/Main.java:47:17
  (block
   ;;@ interfaces/Main.java:47:17
-  (if (global.get $f_$initialized__interfaces_Main_AbstractImplementor)
+  (if (global.get $$class-initialized@interfaces.Main.AbstractImplementor)
    (then
     ;;@ interfaces/Main.java:47:17
     (return )
    )
   )
   ;;@ interfaces/Main.java:47:17
-  (global.set $f_$initialized__interfaces_Main_AbstractImplementor (i32.const 1))
+  (global.set $$class-initialized@interfaces.Main.AbstractImplementor (i32.const 1))
   ;;@ interfaces/Main.java:47:17
   (call $$clinit__void@java.lang.Object )
   ;;@ interfaces/Main.java:47:17
@@ -397,12 +397,12 @@
 (func $$getClassMetadata__java_lang_Class@interfaces.Main.AbstractImplementor
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__interfaces_Main_AbstractImplementor))
+  (if (ref.is_null (global.get $$class@interfaces.Main.AbstractImplementor))
    (then
-    (global.set $f_$class__interfaces_Main_AbstractImplementor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.M...|__java_lang_String (ref.func $$getString_|interfaces.M...|__java_lang_String@interfaces.Main.AbstractImplementor) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@interfaces.Main.AbstractImplementor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.M...|__java_lang_String (ref.func $$getString_|interfaces.M...|__java_lang_String@interfaces.Main.AbstractImplementor) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__interfaces_Main_AbstractImplementor))
+  (return (global.get $$class@interfaces.Main.AbstractImplementor))
  )
 )
 ;;; End of code for interfaces.Main.AbstractImplementor [methods]

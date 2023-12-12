@@ -2,8 +2,8 @@
  (type $instanceinitializers.InstanceInitializers (sub $java.lang.Object (struct
   (field $vtable (ref $instanceinitializers.InstanceInitializers.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $f_field__instanceinitializers_InstanceInitializers (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  (field $field@instanceinitializers.InstanceInitializers (mut i32))
   ))
  )
  (type $instanceinitializers.InstanceInitializers.vtable (sub $java.lang.Object.vtable (struct
@@ -27,13 +27,13 @@
 )
 
 ;;; Code for instanceinitializers.InstanceInitializers [static fields]
-(global $f_$initialized__instanceinitializers_InstanceInitializers (mut i32)
+(global $$class-initialized@instanceinitializers.InstanceInitializers (mut i32)
  (i32.const 0)
 )
-(global $f_$class__instanceinitializers_InstanceInitializers (mut (ref null $java.lang.Class))
+(global $$class@instanceinitializers.InstanceInitializers (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|instanceinit...|__instanceinitializers_InstanceInitializers (mut (ref null $java.lang.String))
+(global $$string_|instanceinit...|@instanceinitializers.InstanceInitializers (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -74,9 +74,9 @@
  ;;@ instanceinitializers/InstanceInitializers.java:18:13
  (block
   ;;@ instanceinitializers/InstanceInitializers.java:19:2
-  (struct.set $instanceinitializers.InstanceInitializers $f_field__instanceinitializers_InstanceInitializers (local.get $this) (i32.const 1))
+  (struct.set $instanceinitializers.InstanceInitializers $field@instanceinitializers.InstanceInitializers (local.get $this) (i32.const 1))
   ;;@ instanceinitializers/InstanceInitializers.java:22:4
-  (struct.set $instanceinitializers.InstanceInitializers $f_field__instanceinitializers_InstanceInitializers (local.get $this) (i32.const 2))
+  (struct.set $instanceinitializers.InstanceInitializers $field@instanceinitializers.InstanceInitializers (local.get $this) (i32.const 2))
  )
 )
 
@@ -85,14 +85,14 @@
  ;;@ instanceinitializers/InstanceInitializers.java:18:13
  (block
   ;;@ instanceinitializers/InstanceInitializers.java:18:13
-  (if (global.get $f_$initialized__instanceinitializers_InstanceInitializers)
+  (if (global.get $$class-initialized@instanceinitializers.InstanceInitializers)
    (then
     ;;@ instanceinitializers/InstanceInitializers.java:18:13
     (return )
    )
   )
   ;;@ instanceinitializers/InstanceInitializers.java:18:13
-  (global.set $f_$initialized__instanceinitializers_InstanceInitializers (i32.const 1))
+  (global.set $$class-initialized@instanceinitializers.InstanceInitializers (i32.const 1))
   ;;@ instanceinitializers/InstanceInitializers.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -102,12 +102,12 @@
 (func $$getClassMetadata__java_lang_Class@instanceinitializers.InstanceInitializers
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__instanceinitializers_InstanceInitializers))
+  (if (ref.is_null (global.get $$class@instanceinitializers.InstanceInitializers))
    (then
-    (global.set $f_$class__instanceinitializers_InstanceInitializers (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instanceinit...|__java_lang_String (ref.func $$getString_|instanceinit...|__java_lang_String@instanceinitializers.InstanceInitializers) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@instanceinitializers.InstanceInitializers (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instanceinit...|__java_lang_String (ref.func $$getString_|instanceinit...|__java_lang_String@instanceinitializers.InstanceInitializers) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__instanceinitializers_InstanceInitializers))
+  (return (global.get $$class@instanceinitializers.InstanceInitializers))
  )
 )
 
@@ -128,11 +128,11 @@
 (func $$getString_|instanceinit...|__java_lang_String@instanceinitializers.InstanceInitializers
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|instanceinit...|__instanceinitializers_InstanceInitializers))
+  (if (ref.is_null (global.get $$string_|instanceinit...|@instanceinitializers.InstanceInitializers))
    (then
-    (global.set $f_$string_|instanceinit...|__instanceinitializers_InstanceInitializers (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instanceinitializers.InstanceInitializers")))
+    (global.set $$string_|instanceinit...|@instanceinitializers.InstanceInitializers (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instanceinitializers.InstanceInitializers")))
    )
   )
-  (return (global.get $f_$string_|instanceinit...|__instanceinitializers_InstanceInitializers))
+  (return (global.get $$string_|instanceinit...|@instanceinitializers.InstanceInitializers))
  )
 )

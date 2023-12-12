@@ -2,8 +2,8 @@
  (type $supercallnondefault.Parent (sub $java.lang.Object (struct
   (field $vtable (ref $supercallnondefault.Parent.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $f_field__supercallnondefault_Parent (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  (field $field@supercallnondefault.Parent (mut i32))
   ))
  )
  (type $supercallnondefault.Parent.vtable (sub $java.lang.Object.vtable (struct
@@ -19,8 +19,8 @@
  (type $supercallnondefault.Child (sub $supercallnondefault.Parent (struct
   (field $vtable (ref $supercallnondefault.Child.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  (field $f_field__supercallnondefault_Parent (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  (field $field@supercallnondefault.Parent (mut i32))
   ))
  )
  (type $supercallnondefault.Child.vtable (sub $supercallnondefault.Parent.vtable (struct
@@ -55,24 +55,24 @@
 )
 
 ;;; Code for supercallnondefault.Parent [static fields]
-(global $f_$initialized__supercallnondefault_Parent (mut i32)
+(global $$class-initialized@supercallnondefault.Parent (mut i32)
  (i32.const 0)
 )
-(global $f_$class__supercallnondefault_Parent (mut (ref null $java.lang.Class))
+(global $$class@supercallnondefault.Parent (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|supercallnon...|__supercallnondefault_Parent (mut (ref null $java.lang.String))
+(global $$string_|supercallnon...|@supercallnondefault.Parent (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
 ;;; Code for supercallnondefault.Child [static fields]
-(global $f_$initialized__supercallnondefault_Child (mut i32)
+(global $$class-initialized@supercallnondefault.Child (mut i32)
  (i32.const 0)
 )
-(global $f_$class__supercallnondefault_Child (mut (ref null $java.lang.Class))
+(global $$class@supercallnondefault.Child (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|supercallnon...|__supercallnondefault_Child (mut (ref null $java.lang.String))
+(global $$string_|supercallnon...|@supercallnondefault.Child (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -105,7 +105,7 @@
   ;;@ supercallnondefault/Child.java:21:23
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;;@ supercallnondefault/Child.java:22:4
-  (struct.set $supercallnondefault.Parent $f_field__supercallnondefault_Parent (local.get $this) (local.get $f))
+  (struct.set $supercallnondefault.Parent $field@supercallnondefault.Parent (local.get $this) (local.get $f))
  )
 )
 
@@ -114,14 +114,14 @@
  ;;@ supercallnondefault/Child.java:18:6
  (block
   ;;@ supercallnondefault/Child.java:18:6
-  (if (global.get $f_$initialized__supercallnondefault_Parent)
+  (if (global.get $$class-initialized@supercallnondefault.Parent)
    (then
     ;;@ supercallnondefault/Child.java:18:6
     (return )
    )
   )
   ;;@ supercallnondefault/Child.java:18:6
-  (global.set $f_$initialized__supercallnondefault_Parent (i32.const 1))
+  (global.set $$class-initialized@supercallnondefault.Parent (i32.const 1))
   ;;@ supercallnondefault/Child.java:18:6
   (call $$clinit__void@java.lang.Object )
  )
@@ -131,12 +131,12 @@
 (func $$getClassMetadata__java_lang_Class@supercallnondefault.Parent
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__supercallnondefault_Parent))
+  (if (ref.is_null (global.get $$class@supercallnondefault.Parent))
    (then
-    (global.set $f_$class__supercallnondefault_Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|supercallnon...|__java_lang_String (ref.func $$getString_|supercallnon...|__java_lang_String@supercallnondefault.Parent) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@supercallnondefault.Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|supercallnon...|__java_lang_String (ref.func $$getString_|supercallnon...|__java_lang_String@supercallnondefault.Parent) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__supercallnondefault_Parent))
+  (return (global.get $$class@supercallnondefault.Parent))
  )
 )
 
@@ -157,12 +157,12 @@
 (func $$getString_|supercallnon...|__java_lang_String@supercallnondefault.Parent
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|supercallnon...|__supercallnondefault_Parent))
+  (if (ref.is_null (global.get $$string_|supercallnon...|@supercallnondefault.Parent))
    (then
-    (global.set $f_$string_|supercallnon...|__supercallnondefault_Parent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supercallnondefault.Parent")))
+    (global.set $$string_|supercallnon...|@supercallnondefault.Parent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supercallnondefault.Parent")))
    )
   )
-  (return (global.get $f_$string_|supercallnon...|__supercallnondefault_Parent))
+  (return (global.get $$string_|supercallnon...|@supercallnondefault.Parent))
  )
 )
 
@@ -202,14 +202,14 @@
  ;;@ supercallnondefault/Child.java:26:13
  (block
   ;;@ supercallnondefault/Child.java:26:13
-  (if (global.get $f_$initialized__supercallnondefault_Child)
+  (if (global.get $$class-initialized@supercallnondefault.Child)
    (then
     ;;@ supercallnondefault/Child.java:26:13
     (return )
    )
   )
   ;;@ supercallnondefault/Child.java:26:13
-  (global.set $f_$initialized__supercallnondefault_Child (i32.const 1))
+  (global.set $$class-initialized@supercallnondefault.Child (i32.const 1))
   ;;@ supercallnondefault/Child.java:26:13
   (call $$clinit__void@supercallnondefault.Parent )
  )
@@ -219,12 +219,12 @@
 (func $$getClassMetadata__java_lang_Class@supercallnondefault.Child
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__supercallnondefault_Child))
+  (if (ref.is_null (global.get $$class@supercallnondefault.Child))
    (then
-    (global.set $f_$class__supercallnondefault_Child (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|supercallnon...|__java_lang_String (ref.func $$getString_|supercallnon...|__java_lang_String@supercallnondefault.Child) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@supercallnondefault.Parent) )))
+    (global.set $$class@supercallnondefault.Child (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|supercallnon...|__java_lang_String (ref.func $$getString_|supercallnon...|__java_lang_String@supercallnondefault.Child) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@supercallnondefault.Parent) )))
    )
   )
-  (return (global.get $f_$class__supercallnondefault_Child))
+  (return (global.get $$class@supercallnondefault.Child))
  )
 )
 
@@ -245,11 +245,11 @@
 (func $$getString_|supercallnon...|__java_lang_String@supercallnondefault.Child
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|supercallnon...|__supercallnondefault_Child))
+  (if (ref.is_null (global.get $$string_|supercallnon...|@supercallnondefault.Child))
    (then
-    (global.set $f_$string_|supercallnon...|__supercallnondefault_Child (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supercallnondefault.Child")))
+    (global.set $$string_|supercallnon...|@supercallnondefault.Child (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supercallnondefault.Child")))
    )
   )
-  (return (global.get $f_$string_|supercallnon...|__supercallnondefault_Child))
+  (return (global.get $$string_|supercallnon...|@supercallnondefault.Child))
  )
 )

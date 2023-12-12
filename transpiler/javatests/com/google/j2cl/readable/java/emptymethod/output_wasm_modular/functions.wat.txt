@@ -43,14 +43,14 @@
  ;;@ emptymethod/EmptyMethod.java:18:13
  (block
   ;;@ emptymethod/EmptyMethod.java:18:13
-  (if (global.get $f_$initialized__emptymethod_EmptyMethod)
+  (if (global.get $$class-initialized@emptymethod.EmptyMethod)
    (then
     ;;@ emptymethod/EmptyMethod.java:18:13
     (return )
    )
   )
   ;;@ emptymethod/EmptyMethod.java:18:13
-  (global.set $f_$initialized__emptymethod_EmptyMethod (i32.const 1))
+  (global.set $$class-initialized@emptymethod.EmptyMethod (i32.const 1))
   ;;@ emptymethod/EmptyMethod.java:18:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -60,12 +60,12 @@
 (func $$getClassMetadata__java_lang_Class@emptymethod.EmptyMethod
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__emptymethod_EmptyMethod))
+  (if (ref.is_null (global.get $$class@emptymethod.EmptyMethod))
    (then
-    (global.set $f_$class__emptymethod_EmptyMethod (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|emptymethod....|__java_lang_String (ref.func $$getString_|emptymethod....|__java_lang_String@emptymethod.EmptyMethod) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@emptymethod.EmptyMethod (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|emptymethod....|__java_lang_String (ref.func $$getString_|emptymethod....|__java_lang_String@emptymethod.EmptyMethod) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__emptymethod_EmptyMethod))
+  (return (global.get $$class@emptymethod.EmptyMethod))
  )
 )
 

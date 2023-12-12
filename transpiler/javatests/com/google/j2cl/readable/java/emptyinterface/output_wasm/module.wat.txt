@@ -4,13 +4,13 @@
  )
 
 ;;; Code for emptyinterface.EmptyInterface [static fields]
-(global $f_$initialized__emptyinterface_EmptyInterface (mut i32)
+(global $$class-initialized@emptyinterface.EmptyInterface (mut i32)
  (i32.const 0)
 )
-(global $f_$class__emptyinterface_EmptyInterface (mut (ref null $java.lang.Class))
+(global $$class@emptyinterface.EmptyInterface (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|emptyinterfa...|__emptyinterface_EmptyInterface (mut (ref null $java.lang.String))
+(global $$string_|emptyinterfa...|@emptyinterface.EmptyInterface (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -21,14 +21,14 @@
  ;;@ emptyinterface/EmptyInterface.java:18:17
  (block
   ;;@ emptyinterface/EmptyInterface.java:18:17
-  (if (global.get $f_$initialized__emptyinterface_EmptyInterface)
+  (if (global.get $$class-initialized@emptyinterface.EmptyInterface)
    (then
     ;;@ emptyinterface/EmptyInterface.java:18:17
     (return )
    )
   )
   ;;@ emptyinterface/EmptyInterface.java:18:17
-  (global.set $f_$initialized__emptyinterface_EmptyInterface (i32.const 1))
+  (global.set $$class-initialized@emptyinterface.EmptyInterface (i32.const 1))
  )
 )
 
@@ -36,12 +36,12 @@
 (func $$getClassMetadata__java_lang_Class@emptyinterface.EmptyInterface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__emptyinterface_EmptyInterface))
+  (if (ref.is_null (global.get $$class@emptyinterface.EmptyInterface))
    (then
-    (global.set $f_$class__emptyinterface_EmptyInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|emptyinterfa...|__java_lang_String (ref.func $$getString_|emptyinterfa...|__java_lang_String@emptyinterface.EmptyInterface) )))
+    (global.set $$class@emptyinterface.EmptyInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|emptyinterfa...|__java_lang_String (ref.func $$getString_|emptyinterfa...|__java_lang_String@emptyinterface.EmptyInterface) )))
    )
   )
-  (return (global.get $f_$class__emptyinterface_EmptyInterface))
+  (return (global.get $$class@emptyinterface.EmptyInterface))
  )
 )
 
@@ -49,11 +49,11 @@
 (func $$getString_|emptyinterfa...|__java_lang_String@emptyinterface.EmptyInterface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|emptyinterfa...|__emptyinterface_EmptyInterface))
+  (if (ref.is_null (global.get $$string_|emptyinterfa...|@emptyinterface.EmptyInterface))
    (then
-    (global.set $f_$string_|emptyinterfa...|__emptyinterface_EmptyInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "emptyinterface.EmptyInterface")))
+    (global.set $$string_|emptyinterfa...|@emptyinterface.EmptyInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "emptyinterface.EmptyInterface")))
    )
   )
-  (return (global.get $f_$string_|emptyinterfa...|__emptyinterface_EmptyInterface))
+  (return (global.get $$string_|emptyinterfa...|@emptyinterface.EmptyInterface))
  )
 )

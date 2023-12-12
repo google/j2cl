@@ -2,7 +2,7 @@
  (type $inferreturn.InferReturn (sub $java.lang.Object (struct
   (field $vtable (ref $inferreturn.InferReturn.vtable))
   (field $itable (ref $itable))
-  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
   ))
  )
  (type $inferreturn.InferReturn.vtable (sub $java.lang.Object.vtable (struct
@@ -26,16 +26,16 @@
 )
 
 ;;; Code for inferreturn.InferReturn [static fields]
-(global $f_$initialized__inferreturn_InferReturn (mut i32)
+(global $$class-initialized@inferreturn.InferReturn (mut i32)
  (i32.const 0)
 )
-(global $f_$class__inferreturn_InferReturn (mut (ref null $java.lang.Class))
+(global $$class@inferreturn.InferReturn (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $f_$string_|foo|__inferreturn_InferReturn (mut (ref null $java.lang.String))
+(global $$string_|foo|@inferreturn.InferReturn (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
-(global $f_$string_|inferreturn....|__inferreturn_InferReturn (mut (ref null $java.lang.String))
+(global $$string_|inferreturn....|@inferreturn.InferReturn (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -173,14 +173,14 @@
  ;;@ inferreturn/InferReturn.java:21:13
  (block
   ;;@ inferreturn/InferReturn.java:21:13
-  (if (global.get $f_$initialized__inferreturn_InferReturn)
+  (if (global.get $$class-initialized@inferreturn.InferReturn)
    (then
     ;;@ inferreturn/InferReturn.java:21:13
     (return )
    )
   )
   ;;@ inferreturn/InferReturn.java:21:13
-  (global.set $f_$initialized__inferreturn_InferReturn (i32.const 1))
+  (global.set $$class-initialized@inferreturn.InferReturn (i32.const 1))
   ;;@ inferreturn/InferReturn.java:21:13
   (call $$clinit__void@java.lang.Object )
  )
@@ -190,12 +190,12 @@
 (func $$getClassMetadata__java_lang_Class@inferreturn.InferReturn
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $f_$class__inferreturn_InferReturn))
+  (if (ref.is_null (global.get $$class@inferreturn.InferReturn))
    (then
-    (global.set $f_$class__inferreturn_InferReturn (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|inferreturn....|__java_lang_String (ref.func $$getString_|inferreturn....|__java_lang_String@inferreturn.InferReturn) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (global.set $$class@inferreturn.InferReturn (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|inferreturn....|__java_lang_String (ref.func $$getString_|inferreturn....|__java_lang_String@inferreturn.InferReturn) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
    )
   )
-  (return (global.get $f_$class__inferreturn_InferReturn))
+  (return (global.get $$class@inferreturn.InferReturn))
  )
 )
 
@@ -216,12 +216,12 @@
 (func $$getString_|foo|__java_lang_String@inferreturn.InferReturn
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|foo|__inferreturn_InferReturn))
+  (if (ref.is_null (global.get $$string_|foo|@inferreturn.InferReturn))
    (then
-    (global.set $f_$string_|foo|__inferreturn_InferReturn (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "foo")))
+    (global.set $$string_|foo|@inferreturn.InferReturn (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "foo")))
    )
   )
-  (return (global.get $f_$string_|foo|__inferreturn_InferReturn))
+  (return (global.get $$string_|foo|@inferreturn.InferReturn))
  )
 )
 
@@ -229,11 +229,11 @@
 (func $$getString_|inferreturn....|__java_lang_String@inferreturn.InferReturn
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $f_$string_|inferreturn....|__inferreturn_InferReturn))
+  (if (ref.is_null (global.get $$string_|inferreturn....|@inferreturn.InferReturn))
    (then
-    (global.set $f_$string_|inferreturn....|__inferreturn_InferReturn (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "inferreturn.InferReturn")))
+    (global.set $$string_|inferreturn....|@inferreturn.InferReturn (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "inferreturn.InferReturn")))
    )
   )
-  (return (global.get $f_$string_|inferreturn....|__inferreturn_InferReturn))
+  (return (global.get $$string_|inferreturn....|@inferreturn.InferReturn))
  )
 )
