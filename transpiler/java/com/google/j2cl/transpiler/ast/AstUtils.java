@@ -1027,6 +1027,7 @@ public final class AstUtils {
       FieldDescriptor fieldDescriptor) {
     checkArgument(fieldDescriptor.isStatic());
     return FieldDescriptor.Builder.from(fieldDescriptor)
+        .setName("$ordinal_" + fieldDescriptor.getName())
         .setEnumConstant(false)
         .setCompileTimeConstant(true)
         .setSynthetic(true)

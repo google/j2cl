@@ -49,23 +49,24 @@ public abstract class FieldDescriptor extends MemberDescriptor {
 
   /** Whether this field originates in the source code or is synthetic. */
   public enum FieldOrigin implements MemberDescriptor.Origin {
-    SOURCE("f_"),
-    SYNTHETIC_OUTER_FIELD("$outer_"),
-    SYNTHETIC_CAPTURE_FIELD("$captured_"),
-    SYNTHETIC_BACKING_FIELD("$static_"),
-    SYNTHETIC_ORDINAL_FIELD("$ordinal_"),
-    SYNTHETIC_INSTANCE_OF_SUPPORT_FIELD(""),
+    SOURCE,
+    SYNTHETIC_OUTER_FIELD,
+    SYNTHETIC_CAPTURE_FIELD,
+    SYNTHETIC_BACKING_FIELD,
+    SYNTHETIC_ORDINAL_FIELD,
+    SYNTHETIC_INSTANCE_OF_SUPPORT_FIELD,
     ;
-
-    private final String prefix;
-
-    FieldOrigin(String prefix) {
-      this.prefix = prefix;
-    }
 
     @Override
     public String getPrefix() {
-      return prefix;
+      switch (this) {
+          // User written methods and bridges need to be mangled the same way.
+        case SOURCE:
+          return "f_";
+          // Don't prefix the rest, they all start with "$"
+        default:
+          return "";
+      }
     }
 
     @Override
