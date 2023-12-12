@@ -25,8 +25,8 @@ import javaemul.internal.Platform;
  */
 public final class Boolean implements Comparable<Boolean>, Serializable {
 
-  public static final Boolean FALSE = false;
-  public static final Boolean TRUE = true;
+  public static final Boolean FALSE = new Boolean(false, 0);
+  public static final Boolean TRUE = new Boolean(true, 0);
 
   public static final Class<Boolean> TYPE = boolean.class;
 
@@ -63,7 +63,7 @@ public final class Boolean implements Comparable<Boolean>, Serializable {
     // Note that we are not doing a simple new Boolean(b). For historic reasons it is possible
     // that the provided 'b' is not a real boolean value. We are also avoiding '!!b' since it is
     // safe to optimize it back to 'b' in a Java context.
-    return b ? new Boolean(true) : new Boolean(false);
+    return b ? TRUE : FALSE;
   }
 
   public static Boolean valueOf(String s) {
@@ -72,6 +72,11 @@ public final class Boolean implements Comparable<Boolean>, Serializable {
 
   // Note that 'value' field is special and used for unboxing by the J2CL transpiler.
   private final boolean value;
+
+  // Private constructor that avoid clinit for in-class calls and prevent clinit cycle.
+  private Boolean(boolean value, int ignored) {
+    this.value = value;
+  }
 
   public Boolean(boolean value) {
     this.value = value;

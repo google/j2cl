@@ -63,11 +63,15 @@ public class BooleanTest extends TestCase {
 
   public void testValueOf() {
     assertTrue(Boolean.valueOf(btrue));
+    assertSame(Boolean.valueOf(btrue), Boolean.valueOf(btrue));
     assertTrue(Boolean.valueOf(true1));
+    assertSame(Boolean.valueOf(true1), Boolean.valueOf(true1));
     assertTrue(Boolean.valueOf(true2));
     assertTrue(Boolean.valueOf(true3));
     assertFalse(Boolean.valueOf(bfalse));
+    assertSame(Boolean.valueOf(bfalse), Boolean.valueOf(bfalse));
     assertFalse(Boolean.valueOf(false1));
+    assertSame(Boolean.valueOf(false1), Boolean.valueOf(false1));
     assertFalse(Boolean.valueOf(false2));
     assertFalse(Boolean.valueOf(false3));
     assertFalse(Boolean.valueOf(false4));
