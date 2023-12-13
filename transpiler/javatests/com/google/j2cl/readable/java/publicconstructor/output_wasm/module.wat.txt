@@ -45,7 +45,7 @@
  (local $$instance (ref null $publicconstructor.PublicConstructor))
  (block
   ;;@ publicconstructor/PublicConstructor.java:19:9
-  (call $$clinit__void@publicconstructor.PublicConstructor )
+  (call $$clinit__void_<once>_@publicconstructor.PublicConstructor )
   ;;@ publicconstructor/PublicConstructor.java:19:9
   (local.set $$instance (struct.new $publicconstructor.PublicConstructor (ref.as_non_null (global.get $publicconstructor.PublicConstructor.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ publicconstructor/PublicConstructor.java:19:9
@@ -66,7 +66,7 @@
 )
 
 ;;; void PublicConstructor.$clinit()
-(func $$clinit__void@publicconstructor.PublicConstructor
+(func $$clinit__void_<once>_@publicconstructor.PublicConstructor
  ;;@ publicconstructor/PublicConstructor.java:18:13
  (block
   ;;@ publicconstructor/PublicConstructor.java:18:13
@@ -79,7 +79,7 @@
   ;;@ publicconstructor/PublicConstructor.java:18:13
   (global.set $$class-initialized@publicconstructor.PublicConstructor (i32.const 1))
   ;;@ publicconstructor/PublicConstructor.java:18:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 

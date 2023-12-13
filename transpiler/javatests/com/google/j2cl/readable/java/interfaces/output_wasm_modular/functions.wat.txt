@@ -27,12 +27,12 @@
  ;;@ interfaces/Main.java:32:16
  (block
   ;;@ interfaces/Main.java:32:40
-  (call $$clinit__void@interfaces.Main.Interface )
+  (call $$clinit__void_<once>_@interfaces.Main.Interface )
  )
 )
 
 ;;; void Interface.$clinit()
-(func $$clinit__void@interfaces.Main.Interface
+(func $$clinit__void_<once>_@interfaces.Main.Interface
  ;;@ interfaces/Main.java:20:12
  (block
   ;;@ interfaces/Main.java:20:12
@@ -75,7 +75,7 @@
 (elem declare func $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface)
 
 ;;; void SubInterface.$clinit()
-(func $$clinit__void@interfaces.Main.SubInterface
+(func $$clinit__void_<once>_@interfaces.Main.SubInterface
  ;;@ interfaces/Main.java:35:12
  (block
   ;;@ interfaces/Main.java:35:12
@@ -88,7 +88,7 @@
   ;;@ interfaces/Main.java:35:12
   (global.set $$class-initialized@interfaces.Main.SubInterface (i32.const 1))
   ;;@ interfaces/Main.java:35:12
-  (call $$clinit__void@interfaces.Main.Interface )
+  (call $$clinit__void_<once>_@interfaces.Main.Interface )
  )
 )
 
@@ -114,7 +114,7 @@
  (local $$instance (ref null $interfaces.Main))
  (block
   ;;@ interfaces/Main.java:18:13
-  (call $$clinit__void@interfaces.Main )
+  (call $$clinit__void_<once>_@interfaces.Main )
   ;;@ interfaces/Main.java:18:13
   (local.set $$instance (struct.new $interfaces.Main (ref.as_non_null (global.get $interfaces.Main.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ interfaces/Main.java:18:13
@@ -162,7 +162,7 @@
 (elem declare func $m_testInterfaceMembers__void_$pp_interfaces@interfaces.Main)
 
 ;;; void Main.$clinit()
-(func $$clinit__void@interfaces.Main
+(func $$clinit__void_<once>_@interfaces.Main
  ;;@ interfaces/Main.java:18:13
  (block
   ;;@ interfaces/Main.java:18:13
@@ -175,7 +175,7 @@
   ;;@ interfaces/Main.java:18:13
   (global.set $$class-initialized@interfaces.Main (i32.const 1))
   ;;@ interfaces/Main.java:18:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -215,7 +215,7 @@
  (local $$instance (ref null $interfaces.Main.Implementor))
  (block
   ;;@ interfaces/Main.java:41:8
-  (call $$clinit__void@interfaces.Main.Implementor )
+  (call $$clinit__void_<once>_@interfaces.Main.Implementor )
   ;;@ interfaces/Main.java:41:8
   (local.set $$instance (struct.new $interfaces.Main.Implementor (ref.as_non_null (global.get $interfaces.Main.Implementor.vtable)) (ref.as_non_null (global.get $interfaces.Main.Implementor.itable)) (i32.const 0) (ref.null $interfaces.Main)))
   ;;@ interfaces/Main.java:41:8
@@ -281,7 +281,7 @@
 (elem declare func $m_defaultMethod__java_lang_String__void@interfaces.Main.Implementor)
 
 ;;; void Implementor.$clinit()
-(func $$clinit__void@interfaces.Main.Implementor
+(func $$clinit__void_<once>_@interfaces.Main.Implementor
  ;;@ interfaces/Main.java:41:8
  (block
   ;;@ interfaces/Main.java:41:8
@@ -294,11 +294,11 @@
   ;;@ interfaces/Main.java:41:8
   (global.set $$class-initialized@interfaces.Main.Implementor (i32.const 1))
   ;;@ interfaces/Main.java:41:8
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
   ;;@ interfaces/Main.java:41:8
-  (call $$clinit__void@interfaces.Main.SubInterface )
+  (call $$clinit__void_<once>_@interfaces.Main.SubInterface )
   ;;@ interfaces/Main.java:41:8
-  (call $$clinit__void@interfaces.Main.Interface )
+  (call $$clinit__void_<once>_@interfaces.Main.Interface )
  )
 )
 
@@ -374,7 +374,7 @@
 (elem declare func $m_defaultMethod__java_lang_String__void@interfaces.Main.AbstractImplementor)
 
 ;;; void AbstractImplementor.$clinit()
-(func $$clinit__void@interfaces.Main.AbstractImplementor
+(func $$clinit__void_<once>_@interfaces.Main.AbstractImplementor
  ;;@ interfaces/Main.java:47:17
  (block
   ;;@ interfaces/Main.java:47:17
@@ -387,9 +387,9 @@
   ;;@ interfaces/Main.java:47:17
   (global.set $$class-initialized@interfaces.Main.AbstractImplementor (i32.const 1))
   ;;@ interfaces/Main.java:47:17
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
   ;;@ interfaces/Main.java:47:17
-  (call $$clinit__void@interfaces.Main.SubInterface )
+  (call $$clinit__void_<once>_@interfaces.Main.SubInterface )
  )
 )
 

@@ -83,7 +83,7 @@
  (local $$instance (ref null $srcjar.Foo))
  (block
   ;;@ srcjar/Foo.java:21:13
-  (call $$clinit__void@srcjar.Foo )
+  (call $$clinit__void_<once>_@srcjar.Foo )
   ;;@ srcjar/Foo.java:21:13
   (local.set $$instance (struct.new $srcjar.Foo (ref.as_non_null (global.get $srcjar.Foo.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ srcjar/Foo.java:21:13
@@ -104,7 +104,7 @@
 )
 
 ;;; void Foo.$clinit()
-(func $$clinit__void@srcjar.Foo
+(func $$clinit__void_<once>_@srcjar.Foo
  ;;@ srcjar/Foo.java:21:13
  (block
   ;;@ srcjar/Foo.java:21:13
@@ -117,7 +117,7 @@
   ;;@ srcjar/Foo.java:21:13
   (global.set $$class-initialized@srcjar.Foo (i32.const 1))
   ;;@ srcjar/Foo.java:21:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -169,7 +169,7 @@
  (local $$instance (ref null $srcjar.Srcjar))
  (block
   ;;@ srcjar/Srcjar.java:18:13
-  (call $$clinit__void@srcjar.Srcjar )
+  (call $$clinit__void_<once>_@srcjar.Srcjar )
   ;;@ srcjar/Srcjar.java:18:13
   (local.set $$instance (struct.new $srcjar.Srcjar (ref.as_non_null (global.get $srcjar.Srcjar.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ srcjar/Srcjar.java:18:13
@@ -195,14 +195,14 @@
  (local $foo (ref null $srcjar.Foo))
  (block
   ;;@ srcjar/Srcjar.java:20:28
-  (call $$clinit__void@srcjar.Srcjar )
+  (call $$clinit__void_<once>_@srcjar.Srcjar )
   ;;@ srcjar/Srcjar.java:21:4
   (local.set $foo (call $$create__@srcjar.Foo ))
  )
 )
 
 ;;; void Srcjar.$clinit()
-(func $$clinit__void@srcjar.Srcjar
+(func $$clinit__void_<once>_@srcjar.Srcjar
  ;;@ srcjar/Srcjar.java:18:13
  (block
   ;;@ srcjar/Srcjar.java:18:13
@@ -215,7 +215,7 @@
   ;;@ srcjar/Srcjar.java:18:13
   (global.set $$class-initialized@srcjar.Srcjar (i32.const 1))
   ;;@ srcjar/Srcjar.java:18:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 

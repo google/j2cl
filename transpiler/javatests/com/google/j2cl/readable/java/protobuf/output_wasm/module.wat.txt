@@ -133,7 +133,7 @@
  (local $$instance (ref null $protobuf.Protobuf))
  (block
   ;;@ protobuf/Protobuf.java:18:13
-  (call $$clinit__void@protobuf.Protobuf )
+  (call $$clinit__void_<once>_@protobuf.Protobuf )
   ;;@ protobuf/Protobuf.java:18:13
   (local.set $$instance (struct.new $protobuf.Protobuf (ref.as_non_null (global.get $protobuf.Protobuf.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ protobuf/Protobuf.java:18:13
@@ -183,7 +183,7 @@
 (elem declare func $m_test__void@protobuf.Protobuf)
 
 ;;; void Protobuf.$clinit()
-(func $$clinit__void@protobuf.Protobuf
+(func $$clinit__void_<once>_@protobuf.Protobuf
  ;;@ protobuf/Protobuf.java:18:13
  (block
   ;;@ protobuf/Protobuf.java:18:13
@@ -196,7 +196,7 @@
   ;;@ protobuf/Protobuf.java:18:13
   (global.set $$class-initialized@protobuf.Protobuf (i32.const 1))
   ;;@ protobuf/Protobuf.java:18:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -262,7 +262,7 @@
  ;;@ protobuf/MyMessage.java:30:26
  (block
   ;;@ protobuf/MyMessage.java:30:47
-  (call $$clinit__void@protobuf.MyMessage )
+  (call $$clinit__void_<once>_@protobuf.MyMessage )
   ;;@ protobuf/MyMessage.java:31:4
   (return (call $$create__int@protobuf.MyMessage (i32.const 0)))
  )
@@ -274,7 +274,7 @@
  ;;@ protobuf/MyMessage.java:34:24
  (block
   ;;@ protobuf/MyMessage.java:34:37
-  (call $$clinit__void@protobuf.MyMessage )
+  (call $$clinit__void_<once>_@protobuf.MyMessage )
   ;;@ protobuf/MyMessage.java:35:4
   (return (call $$create__@protobuf.MyMessage.Builder ))
  )
@@ -288,7 +288,7 @@
  (local $$instance (ref null $protobuf.MyMessage))
  (block
   ;;@ protobuf/MyMessage.java:38:10
-  (call $$clinit__void@protobuf.MyMessage )
+  (call $$clinit__void_<once>_@protobuf.MyMessage )
   ;;@ protobuf/MyMessage.java:38:10
   (local.set $$instance (struct.new $protobuf.MyMessage (ref.as_non_null (global.get $protobuf.MyMessage.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
   ;;@ protobuf/MyMessage.java:38:10
@@ -312,7 +312,7 @@
 )
 
 ;;; void MyMessage.$clinit()
-(func $$clinit__void@protobuf.MyMessage
+(func $$clinit__void_<once>_@protobuf.MyMessage
  ;;@ protobuf/MyMessage.java:22:13
  (block
   ;;@ protobuf/MyMessage.java:22:13
@@ -325,7 +325,7 @@
   ;;@ protobuf/MyMessage.java:22:13
   (global.set $$class-initialized@protobuf.MyMessage (i32.const 1))
   ;;@ protobuf/MyMessage.java:22:13
-  (call $$clinit__void@com.google.protobuf.GeneratedMessage )
+  (call $$clinit__void_<once>_@com.google.protobuf.GeneratedMessage )
  )
 )
 
@@ -425,7 +425,7 @@
  (local $$instance (ref null $protobuf.MyMessage.Builder))
  (block
   ;;@ protobuf/MyMessage.java:59:12
-  (call $$clinit__void@protobuf.MyMessage.Builder )
+  (call $$clinit__void_<once>_@protobuf.MyMessage.Builder )
   ;;@ protobuf/MyMessage.java:59:12
   (local.set $$instance (struct.new $protobuf.MyMessage.Builder (ref.as_non_null (global.get $protobuf.MyMessage.Builder.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
   ;;@ protobuf/MyMessage.java:59:12
@@ -446,7 +446,7 @@
 )
 
 ;;; void Builder.$clinit()
-(func $$clinit__void@protobuf.MyMessage.Builder
+(func $$clinit__void_<once>_@protobuf.MyMessage.Builder
  ;;@ protobuf/MyMessage.java:43:22
  (block
   ;;@ protobuf/MyMessage.java:43:22
@@ -459,7 +459,7 @@
   ;;@ protobuf/MyMessage.java:43:22
   (global.set $$class-initialized@protobuf.MyMessage.Builder (i32.const 1))
   ;;@ protobuf/MyMessage.java:43:22
-  (call $$clinit__void@com.google.protobuf.GeneratedMessage.Builder )
+  (call $$clinit__void_<once>_@com.google.protobuf.GeneratedMessage.Builder )
  )
 )
 

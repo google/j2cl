@@ -403,7 +403,7 @@
  (local $$instance (ref null $innerclassinheritance.ParentOuter))
  (block
   ;;@ innerclassinheritance/ChildClass.java:18:6
-  (call $$clinit__void@innerclassinheritance.ParentOuter )
+  (call $$clinit__void_<once>_@innerclassinheritance.ParentOuter )
   ;;@ innerclassinheritance/ChildClass.java:18:6
   (local.set $$instance (struct.new $innerclassinheritance.ParentOuter (ref.as_non_null (global.get $innerclassinheritance.ParentOuter.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
   ;;@ innerclassinheritance/ChildClass.java:18:6
@@ -436,7 +436,7 @@
 (elem declare func $m_funInParentOuter__void@innerclassinheritance.ParentOuter)
 
 ;;; void ParentOuter.$clinit()
-(func $$clinit__void@innerclassinheritance.ParentOuter
+(func $$clinit__void_<once>_@innerclassinheritance.ParentOuter
  ;;@ innerclassinheritance/ChildClass.java:18:6
  (block
   ;;@ innerclassinheritance/ChildClass.java:18:6
@@ -449,7 +449,7 @@
   ;;@ innerclassinheritance/ChildClass.java:18:6
   (global.set $$class-initialized@innerclassinheritance.ParentOuter (i32.const 1))
   ;;@ innerclassinheritance/ChildClass.java:18:6
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -501,7 +501,7 @@
  (local $$instance (ref null $innerclassinheritance.ParentInner))
  (block
   ;;@ innerclassinheritance/ChildClass.java:24:6
-  (call $$clinit__void@innerclassinheritance.ParentInner )
+  (call $$clinit__void_<once>_@innerclassinheritance.ParentInner )
   ;;@ innerclassinheritance/ChildClass.java:24:6
   (local.set $$instance (struct.new $innerclassinheritance.ParentInner (ref.as_non_null (global.get $innerclassinheritance.ParentInner.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
   ;;@ innerclassinheritance/ChildClass.java:24:6
@@ -534,7 +534,7 @@
 (elem declare func $m_funInParentInner__void@innerclassinheritance.ParentInner)
 
 ;;; void ParentInner.$clinit()
-(func $$clinit__void@innerclassinheritance.ParentInner
+(func $$clinit__void_<once>_@innerclassinheritance.ParentInner
  ;;@ innerclassinheritance/ChildClass.java:24:6
  (block
   ;;@ innerclassinheritance/ChildClass.java:24:6
@@ -547,7 +547,7 @@
   ;;@ innerclassinheritance/ChildClass.java:24:6
   (global.set $$class-initialized@innerclassinheritance.ParentInner (i32.const 1))
   ;;@ innerclassinheritance/ChildClass.java:24:6
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -599,7 +599,7 @@
  (local $$instance (ref null $innerclassinheritance.MultipleNestings))
  (block
   ;;@ innerclassinheritance/MultipleNestings.java:18:13
-  (call $$clinit__void@innerclassinheritance.MultipleNestings )
+  (call $$clinit__void_<once>_@innerclassinheritance.MultipleNestings )
   ;;@ innerclassinheritance/MultipleNestings.java:18:13
   (local.set $$instance (struct.new $innerclassinheritance.MultipleNestings (ref.as_non_null (global.get $innerclassinheritance.MultipleNestings.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ innerclassinheritance/MultipleNestings.java:18:13
@@ -632,7 +632,7 @@
 (elem declare func $m_funInM__void@innerclassinheritance.MultipleNestings)
 
 ;;; void MultipleNestings.$clinit()
-(func $$clinit__void@innerclassinheritance.MultipleNestings
+(func $$clinit__void_<once>_@innerclassinheritance.MultipleNestings
  ;;@ innerclassinheritance/MultipleNestings.java:18:13
  (block
   ;;@ innerclassinheritance/MultipleNestings.java:18:13
@@ -645,7 +645,7 @@
   ;;@ innerclassinheritance/MultipleNestings.java:18:13
   (global.set $$class-initialized@innerclassinheritance.MultipleNestings (i32.const 1))
   ;;@ innerclassinheritance/MultipleNestings.java:18:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -698,7 +698,7 @@
  (local $$instance (ref null $innerclassinheritance.MultipleNestings.Parent))
  (block
   ;;@ innerclassinheritance/MultipleNestings.java:19:15
-  (call $$clinit__void@innerclassinheritance.MultipleNestings.Parent )
+  (call $$clinit__void_<once>_@innerclassinheritance.MultipleNestings.Parent )
   ;;@ innerclassinheritance/MultipleNestings.java:19:15
   (local.set $$instance (struct.new $innerclassinheritance.MultipleNestings.Parent (ref.as_non_null (global.get $innerclassinheritance.MultipleNestings.Parent.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $innerclassinheritance.MultipleNestings)))
   ;;@ innerclassinheritance/MultipleNestings.java:19:15
@@ -734,7 +734,7 @@
 (elem declare func $m_fun__void@innerclassinheritance.MultipleNestings.Parent)
 
 ;;; void Parent.$clinit()
-(func $$clinit__void@innerclassinheritance.MultipleNestings.Parent
+(func $$clinit__void_<once>_@innerclassinheritance.MultipleNestings.Parent
  ;;@ innerclassinheritance/MultipleNestings.java:19:15
  (block
   ;;@ innerclassinheritance/MultipleNestings.java:19:15
@@ -747,7 +747,7 @@
   ;;@ innerclassinheritance/MultipleNestings.java:19:15
   (global.set $$class-initialized@innerclassinheritance.MultipleNestings.Parent (i32.const 1))
   ;;@ innerclassinheritance/MultipleNestings.java:19:15
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -799,7 +799,7 @@
  (local $$instance (ref null $innerclassinheritance.ChildClass))
  (block
   ;;@ innerclassinheritance/ChildClass.java:30:13
-  (call $$clinit__void@innerclassinheritance.ChildClass )
+  (call $$clinit__void_<once>_@innerclassinheritance.ChildClass )
   ;;@ innerclassinheritance/ChildClass.java:30:13
   (local.set $$instance (struct.new $innerclassinheritance.ChildClass (ref.as_non_null (global.get $innerclassinheritance.ChildClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (i32.const 0)))
   ;;@ innerclassinheritance/ChildClass.java:30:13
@@ -851,7 +851,7 @@
 (elem declare func $m_testLocalClass__void@innerclassinheritance.ChildClass)
 
 ;;; void ChildClass.$clinit()
-(func $$clinit__void@innerclassinheritance.ChildClass
+(func $$clinit__void_<once>_@innerclassinheritance.ChildClass
  ;;@ innerclassinheritance/ChildClass.java:30:13
  (block
   ;;@ innerclassinheritance/ChildClass.java:30:13
@@ -864,7 +864,7 @@
   ;;@ innerclassinheritance/ChildClass.java:30:13
   (global.set $$class-initialized@innerclassinheritance.ChildClass (i32.const 1))
   ;;@ innerclassinheritance/ChildClass.java:30:13
-  (call $$clinit__void@innerclassinheritance.ParentOuter )
+  (call $$clinit__void_<once>_@innerclassinheritance.ParentOuter )
  )
 )
 
@@ -917,7 +917,7 @@
  (local $$instance (ref null $innerclassinheritance.ChildClass.InnerClass))
  (block
   ;;@ innerclassinheritance/ChildClass.java:35:8
-  (call $$clinit__void@innerclassinheritance.ChildClass.InnerClass )
+  (call $$clinit__void_<once>_@innerclassinheritance.ChildClass.InnerClass )
   ;;@ innerclassinheritance/ChildClass.java:35:8
   (local.set $$instance (struct.new $innerclassinheritance.ChildClass.InnerClass (ref.as_non_null (global.get $innerclassinheritance.ChildClass.InnerClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (ref.null $innerclassinheritance.ChildClass) (i32.const 0)))
   ;;@ innerclassinheritance/ChildClass.java:35:8
@@ -1001,7 +1001,7 @@
 (elem declare func $m_testInnerClass__int@innerclassinheritance.ChildClass.InnerClass)
 
 ;;; void InnerClass.$clinit()
-(func $$clinit__void@innerclassinheritance.ChildClass.InnerClass
+(func $$clinit__void_<once>_@innerclassinheritance.ChildClass.InnerClass
  ;;@ innerclassinheritance/ChildClass.java:35:8
  (block
   ;;@ innerclassinheritance/ChildClass.java:35:8
@@ -1014,7 +1014,7 @@
   ;;@ innerclassinheritance/ChildClass.java:35:8
   (global.set $$class-initialized@innerclassinheritance.ChildClass.InnerClass (i32.const 1))
   ;;@ innerclassinheritance/ChildClass.java:35:8
-  (call $$clinit__void@innerclassinheritance.ParentInner )
+  (call $$clinit__void_<once>_@innerclassinheritance.ParentInner )
  )
 )
 
@@ -1067,7 +1067,7 @@
  (local $$instance (ref null $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2))
  (block
   ;;@ innerclassinheritance/MultipleNestings.java:31:17
-  (call $$clinit__void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 )
+  (call $$clinit__void_<once>_@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 )
   ;;@ innerclassinheritance/MultipleNestings.java:31:17
   (local.set $$instance (struct.new $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (ref.as_non_null (global.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $innerclassinheritance.MultipleNestings) (ref.null $innerclassinheritance.MultipleNestings.InnerClass1)))
   ;;@ innerclassinheritance/MultipleNestings.java:31:17
@@ -1131,7 +1131,7 @@
 (elem declare func $m_test__void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2)
 
 ;;; void InnerClass2.$clinit()
-(func $$clinit__void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2
+(func $$clinit__void_<once>_@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2
  ;;@ innerclassinheritance/MultipleNestings.java:31:17
  (block
   ;;@ innerclassinheritance/MultipleNestings.java:31:17
@@ -1144,7 +1144,7 @@
   ;;@ innerclassinheritance/MultipleNestings.java:31:17
   (global.set $$class-initialized@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (i32.const 1))
   ;;@ innerclassinheritance/MultipleNestings.java:31:17
-  (call $$clinit__void@innerclassinheritance.MultipleNestings.Parent )
+  (call $$clinit__void_<once>_@innerclassinheritance.MultipleNestings.Parent )
  )
 )
 
@@ -1197,7 +1197,7 @@
  (local $$instance (ref null $innerclassinheritance.MultipleNestings.InnerClass1))
  (block
   ;;@ innerclassinheritance/MultipleNestings.java:25:15
-  (call $$clinit__void@innerclassinheritance.MultipleNestings.InnerClass1 )
+  (call $$clinit__void_<once>_@innerclassinheritance.MultipleNestings.InnerClass1 )
   ;;@ innerclassinheritance/MultipleNestings.java:25:15
   (local.set $$instance (struct.new $innerclassinheritance.MultipleNestings.InnerClass1 (ref.as_non_null (global.get $innerclassinheritance.MultipleNestings.InnerClass1.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $innerclassinheritance.MultipleNestings) (ref.null $innerclassinheritance.MultipleNestings)))
   ;;@ innerclassinheritance/MultipleNestings.java:25:15
@@ -1233,7 +1233,7 @@
 (elem declare func $m_funInI1__void@innerclassinheritance.MultipleNestings.InnerClass1)
 
 ;;; void InnerClass1.$clinit()
-(func $$clinit__void@innerclassinheritance.MultipleNestings.InnerClass1
+(func $$clinit__void_<once>_@innerclassinheritance.MultipleNestings.InnerClass1
  ;;@ innerclassinheritance/MultipleNestings.java:25:15
  (block
   ;;@ innerclassinheritance/MultipleNestings.java:25:15
@@ -1246,7 +1246,7 @@
   ;;@ innerclassinheritance/MultipleNestings.java:25:15
   (global.set $$class-initialized@innerclassinheritance.MultipleNestings.InnerClass1 (i32.const 1))
   ;;@ innerclassinheritance/MultipleNestings.java:25:15
-  (call $$clinit__void@innerclassinheritance.MultipleNestings.Parent )
+  (call $$clinit__void_<once>_@innerclassinheritance.MultipleNestings.Parent )
  )
 )
 
@@ -1299,7 +1299,7 @@
  (local $$instance (ref null $innerclassinheritance.ChildClass.1LocalClass))
  (block
   ;;@ innerclassinheritance/ChildClass.java:73:10
-  (call $$clinit__void@innerclassinheritance.ChildClass.1LocalClass )
+  (call $$clinit__void_<once>_@innerclassinheritance.ChildClass.1LocalClass )
   ;;@ innerclassinheritance/ChildClass.java:73:10
   (local.set $$instance (struct.new $innerclassinheritance.ChildClass.1LocalClass (ref.as_non_null (global.get $innerclassinheritance.ChildClass.1LocalClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (i32.const 0) (ref.null $innerclassinheritance.ChildClass) (ref.null $java.lang.Object)))
   ;;@ innerclassinheritance/ChildClass.java:73:10
@@ -1369,7 +1369,7 @@
 )
 
 ;;; void LocalClass.$clinit()
-(func $$clinit__void@innerclassinheritance.ChildClass.1LocalClass
+(func $$clinit__void_<once>_@innerclassinheritance.ChildClass.1LocalClass
  ;;@ innerclassinheritance/ChildClass.java:73:10
  (block
   ;;@ innerclassinheritance/ChildClass.java:73:10
@@ -1382,7 +1382,7 @@
   ;;@ innerclassinheritance/ChildClass.java:73:10
   (global.set $$class-initialized@innerclassinheritance.ChildClass.1LocalClass (i32.const 1))
   ;;@ innerclassinheritance/ChildClass.java:73:10
-  (call $$clinit__void@innerclassinheritance.ChildClass )
+  (call $$clinit__void_<once>_@innerclassinheritance.ChildClass )
  )
 )
 

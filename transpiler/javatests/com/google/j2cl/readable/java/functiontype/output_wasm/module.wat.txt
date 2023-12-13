@@ -84,7 +84,7 @@
 ;;; Code for functiontype.Function [methods]
 
 ;;; void Function.$clinit()
-(func $$clinit__void@functiontype.Function
+(func $$clinit__void_<once>_@functiontype.Function
  ;;@ functiontype/FunctionImpl.java:18:10
  (block
   ;;@ functiontype/FunctionImpl.java:18:10
@@ -134,7 +134,7 @@
  (local $$instance (ref null $functiontype.FunctionImpl))
  (block
   ;;@ functiontype/FunctionImpl.java:20:13
-  (call $$clinit__void@functiontype.FunctionImpl )
+  (call $$clinit__void_<once>_@functiontype.FunctionImpl )
   ;;@ functiontype/FunctionImpl.java:20:13
   (local.set $$instance (struct.new $functiontype.FunctionImpl (ref.as_non_null (global.get $functiontype.FunctionImpl.vtable)) (ref.as_non_null (global.get $functiontype.FunctionImpl.itable)) (i32.const 0)))
   ;;@ functiontype/FunctionImpl.java:20:13
@@ -168,7 +168,7 @@
 (elem declare func $m_test__functiontype_Function__void@functiontype.FunctionImpl)
 
 ;;; void FunctionImpl.$clinit()
-(func $$clinit__void@functiontype.FunctionImpl
+(func $$clinit__void_<once>_@functiontype.FunctionImpl
  ;;@ functiontype/FunctionImpl.java:20:13
  (block
   ;;@ functiontype/FunctionImpl.java:20:13
@@ -181,7 +181,7 @@
   ;;@ functiontype/FunctionImpl.java:20:13
   (global.set $$class-initialized@functiontype.FunctionImpl (i32.const 1))
   ;;@ functiontype/FunctionImpl.java:20:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 

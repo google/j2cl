@@ -371,7 +371,7 @@
 (elem declare func $m_f__rawtype_RawType__void@rawtype.RawType.GenericSuperclass)
 
 ;;; void GenericSuperclass.$clinit()
-(func $$clinit__void@rawtype.RawType.GenericSuperclass
+(func $$clinit__void_<once>_@rawtype.RawType.GenericSuperclass
  ;;@ rawtype/RawType.java:47:12
  (block
   ;;@ rawtype/RawType.java:47:12
@@ -421,7 +421,7 @@
  (local $$instance (ref null $rawtype.RawType))
  (block
   ;;@ rawtype/RawType.java:19:6
-  (call $$clinit__void@rawtype.RawType )
+  (call $$clinit__void_<once>_@rawtype.RawType )
   ;;@ rawtype/RawType.java:19:6
   (local.set $$instance (struct.new $rawtype.RawType (ref.as_non_null (global.get $rawtype.RawType.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $rawtype.RawType.BoundDependentDirect) (ref.null $rawtype.RawType.BoundDependentIndirect) (ref.null $rawtype.RawType.BoundRecursively) (ref.null $rawtype.RawType.Bound) (ref.null $rawtype.RawType.Unbound)))
   ;;@ rawtype/RawType.java:19:6
@@ -462,7 +462,7 @@
 )
 
 ;;; void RawType.$clinit()
-(func $$clinit__void@rawtype.RawType
+(func $$clinit__void_<once>_@rawtype.RawType
  ;;@ rawtype/RawType.java:19:6
  (block
   ;;@ rawtype/RawType.java:19:6
@@ -475,7 +475,7 @@
   ;;@ rawtype/RawType.java:19:6
   (global.set $$class-initialized@rawtype.RawType (i32.const 1))
   ;;@ rawtype/RawType.java:19:6
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -527,7 +527,7 @@
  (local $$instance (ref null $rawtype.RawType.Unbound))
  (block
   ;;@ rawtype/RawType.java:26:15
-  (call $$clinit__void@rawtype.RawType.Unbound )
+  (call $$clinit__void_<once>_@rawtype.RawType.Unbound )
   ;;@ rawtype/RawType.java:26:15
   (local.set $$instance (struct.new $rawtype.RawType.Unbound (ref.as_non_null (global.get $rawtype.RawType.Unbound.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ rawtype/RawType.java:26:15
@@ -564,7 +564,7 @@
 (elem declare func $m_method__java_lang_Object__java_lang_Object_$pp_rawtype@rawtype.RawType.Unbound)
 
 ;;; void Unbound.$clinit()
-(func $$clinit__void@rawtype.RawType.Unbound
+(func $$clinit__void_<once>_@rawtype.RawType.Unbound
  ;;@ rawtype/RawType.java:26:15
  (block
   ;;@ rawtype/RawType.java:26:15
@@ -577,7 +577,7 @@
   ;;@ rawtype/RawType.java:26:15
   (global.set $$class-initialized@rawtype.RawType.Unbound (i32.const 1))
   ;;@ rawtype/RawType.java:26:15
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -629,7 +629,7 @@
  (local $$instance (ref null $rawtype.RawType.Bound))
  (block
   ;;@ rawtype/RawType.java:32:15
-  (call $$clinit__void@rawtype.RawType.Bound )
+  (call $$clinit__void_<once>_@rawtype.RawType.Bound )
   ;;@ rawtype/RawType.java:32:15
   (local.set $$instance (struct.new $rawtype.RawType.Bound (ref.as_non_null (global.get $rawtype.RawType.Bound.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ rawtype/RawType.java:32:15
@@ -650,7 +650,7 @@
 )
 
 ;;; void Bound.$clinit()
-(func $$clinit__void@rawtype.RawType.Bound
+(func $$clinit__void_<once>_@rawtype.RawType.Bound
  ;;@ rawtype/RawType.java:32:15
  (block
   ;;@ rawtype/RawType.java:32:15
@@ -663,7 +663,7 @@
   ;;@ rawtype/RawType.java:32:15
   (global.set $$class-initialized@rawtype.RawType.Bound (i32.const 1))
   ;;@ rawtype/RawType.java:32:15
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -715,7 +715,7 @@
  (local $$instance (ref null $rawtype.RawType.BoundRecursively))
  (block
   ;;@ rawtype/RawType.java:34:15
-  (call $$clinit__void@rawtype.RawType.BoundRecursively )
+  (call $$clinit__void_<once>_@rawtype.RawType.BoundRecursively )
   ;;@ rawtype/RawType.java:34:15
   (local.set $$instance (struct.new $rawtype.RawType.BoundRecursively (ref.as_non_null (global.get $rawtype.RawType.BoundRecursively.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ rawtype/RawType.java:34:15
@@ -736,7 +736,7 @@
 )
 
 ;;; void BoundRecursively.$clinit()
-(func $$clinit__void@rawtype.RawType.BoundRecursively
+(func $$clinit__void_<once>_@rawtype.RawType.BoundRecursively
  ;;@ rawtype/RawType.java:34:15
  (block
   ;;@ rawtype/RawType.java:34:15
@@ -749,7 +749,7 @@
   ;;@ rawtype/RawType.java:34:15
   (global.set $$class-initialized@rawtype.RawType.BoundRecursively (i32.const 1))
   ;;@ rawtype/RawType.java:34:15
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -801,7 +801,7 @@
  (local $$instance (ref null $rawtype.RawType.BoundDependentDirect))
  (block
   ;;@ rawtype/RawType.java:36:15
-  (call $$clinit__void@rawtype.RawType.BoundDependentDirect )
+  (call $$clinit__void_<once>_@rawtype.RawType.BoundDependentDirect )
   ;;@ rawtype/RawType.java:36:15
   (local.set $$instance (struct.new $rawtype.RawType.BoundDependentDirect (ref.as_non_null (global.get $rawtype.RawType.BoundDependentDirect.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ rawtype/RawType.java:36:15
@@ -822,7 +822,7 @@
 )
 
 ;;; void BoundDependentDirect.$clinit()
-(func $$clinit__void@rawtype.RawType.BoundDependentDirect
+(func $$clinit__void_<once>_@rawtype.RawType.BoundDependentDirect
  ;;@ rawtype/RawType.java:36:15
  (block
   ;;@ rawtype/RawType.java:36:15
@@ -835,7 +835,7 @@
   ;;@ rawtype/RawType.java:36:15
   (global.set $$class-initialized@rawtype.RawType.BoundDependentDirect (i32.const 1))
   ;;@ rawtype/RawType.java:36:15
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -887,7 +887,7 @@
  (local $$instance (ref null $rawtype.RawType.BoundDependentIndirect))
  (block
   ;;@ rawtype/RawType.java:38:15
-  (call $$clinit__void@rawtype.RawType.BoundDependentIndirect )
+  (call $$clinit__void_<once>_@rawtype.RawType.BoundDependentIndirect )
   ;;@ rawtype/RawType.java:38:15
   (local.set $$instance (struct.new $rawtype.RawType.BoundDependentIndirect (ref.as_non_null (global.get $rawtype.RawType.BoundDependentIndirect.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ rawtype/RawType.java:38:15
@@ -908,7 +908,7 @@
 )
 
 ;;; void BoundDependentIndirect.$clinit()
-(func $$clinit__void@rawtype.RawType.BoundDependentIndirect
+(func $$clinit__void_<once>_@rawtype.RawType.BoundDependentIndirect
  ;;@ rawtype/RawType.java:38:15
  (block
   ;;@ rawtype/RawType.java:38:15
@@ -921,7 +921,7 @@
   ;;@ rawtype/RawType.java:38:15
   (global.set $$class-initialized@rawtype.RawType.BoundDependentIndirect (i32.const 1))
   ;;@ rawtype/RawType.java:38:15
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -973,7 +973,7 @@
  (local $$instance (ref null $rawtype.RawType.RawSubclass))
  (block
   ;;@ rawtype/RawType.java:51:15
-  (call $$clinit__void@rawtype.RawType.RawSubclass )
+  (call $$clinit__void_<once>_@rawtype.RawType.RawSubclass )
   ;;@ rawtype/RawType.java:51:15
   (local.set $$instance (struct.new $rawtype.RawType.RawSubclass (ref.as_non_null (global.get $rawtype.RawType.RawSubclass.vtable)) (ref.as_non_null (global.get $rawtype.RawType.RawSubclass.itable)) (i32.const 0)))
   ;;@ rawtype/RawType.java:51:15
@@ -1007,7 +1007,7 @@
 (elem declare func $m_f__rawtype_RawType__void@rawtype.RawType.RawSubclass)
 
 ;;; void RawSubclass.$clinit()
-(func $$clinit__void@rawtype.RawType.RawSubclass
+(func $$clinit__void_<once>_@rawtype.RawType.RawSubclass
  ;;@ rawtype/RawType.java:51:15
  (block
   ;;@ rawtype/RawType.java:51:15
@@ -1020,9 +1020,9 @@
   ;;@ rawtype/RawType.java:51:15
   (global.set $$class-initialized@rawtype.RawType.RawSubclass (i32.const 1))
   ;;@ rawtype/RawType.java:51:15
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
   ;;@ rawtype/RawType.java:51:15
-  (call $$clinit__void@rawtype.RawType.GenericSuperclass )
+  (call $$clinit__void_<once>_@rawtype.RawType.GenericSuperclass )
  )
 )
 
@@ -1074,7 +1074,7 @@
  (local $$instance (ref null $rawtype.RawType.RawUnboundChild))
  (block
   ;;@ rawtype/RawType.java:40:15
-  (call $$clinit__void@rawtype.RawType.RawUnboundChild )
+  (call $$clinit__void_<once>_@rawtype.RawType.RawUnboundChild )
   ;;@ rawtype/RawType.java:40:15
   (local.set $$instance (struct.new $rawtype.RawType.RawUnboundChild (ref.as_non_null (global.get $rawtype.RawType.RawUnboundChild.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ rawtype/RawType.java:40:15
@@ -1111,7 +1111,7 @@
 (elem declare func $m_method__java_lang_Object__java_lang_Object_$pp_rawtype@rawtype.RawType.RawUnboundChild)
 
 ;;; void RawUnboundChild.$clinit()
-(func $$clinit__void@rawtype.RawType.RawUnboundChild
+(func $$clinit__void_<once>_@rawtype.RawType.RawUnboundChild
  ;;@ rawtype/RawType.java:40:15
  (block
   ;;@ rawtype/RawType.java:40:15
@@ -1124,7 +1124,7 @@
   ;;@ rawtype/RawType.java:40:15
   (global.set $$class-initialized@rawtype.RawType.RawUnboundChild (i32.const 1))
   ;;@ rawtype/RawType.java:40:15
-  (call $$clinit__void@rawtype.RawType.Unbound )
+  (call $$clinit__void_<once>_@rawtype.RawType.Unbound )
  )
 )
 

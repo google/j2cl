@@ -143,7 +143,7 @@
   (block
    ;;@ genericanddefaultmethods/ConcreteClass.java:20:4
    (local.set $$qualifier (block (result (ref null $java.io.PrintStream))
-    (call $$clinit__void@java.lang.System )
+    (call $$clinit__void_<once>_@java.lang.System )
     (global.get $out@java.lang.System)
    ))
    ;;@ genericanddefaultmethods/ConcreteClass.java:20:4
@@ -154,7 +154,7 @@
 (elem declare func $m_foo__java_lang_String__void@genericanddefaultmethods.InterfaceWithDefault)
 
 ;;; void InterfaceWithDefault.$clinit()
-(func $$clinit__void@genericanddefaultmethods.InterfaceWithDefault
+(func $$clinit__void_<once>_@genericanddefaultmethods.InterfaceWithDefault
  ;;@ genericanddefaultmethods/ConcreteClass.java:18:10
  (block
   ;;@ genericanddefaultmethods/ConcreteClass.java:18:10
@@ -217,7 +217,7 @@
  (local $$instance (ref null $genericanddefaultmethods.GenericClass))
  (block
   ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
-  (call $$clinit__void@genericanddefaultmethods.GenericClass )
+  (call $$clinit__void_<once>_@genericanddefaultmethods.GenericClass )
   ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
   (local.set $$instance (struct.new $genericanddefaultmethods.GenericClass (ref.as_non_null (global.get $genericanddefaultmethods.GenericClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
@@ -250,7 +250,7 @@
   (block
    ;;@ genericanddefaultmethods/ConcreteClass.java:26:4
    (local.set $$qualifier (block (result (ref null $java.io.PrintStream))
-    (call $$clinit__void@java.lang.System )
+    (call $$clinit__void_<once>_@java.lang.System )
     (global.get $out@java.lang.System)
    ))
    ;;@ genericanddefaultmethods/ConcreteClass.java:26:4
@@ -261,7 +261,7 @@
 (elem declare func $m_foo__java_lang_Object__void@genericanddefaultmethods.GenericClass)
 
 ;;; void GenericClass.$clinit()
-(func $$clinit__void@genericanddefaultmethods.GenericClass
+(func $$clinit__void_<once>_@genericanddefaultmethods.GenericClass
  ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
  (block
   ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
@@ -274,7 +274,7 @@
   ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
   (global.set $$class-initialized@genericanddefaultmethods.GenericClass (i32.const 1))
   ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -339,7 +339,7 @@
  (local $$instance (ref null $genericanddefaultmethods.ConcreteClass))
  (block
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
-  (call $$clinit__void@genericanddefaultmethods.ConcreteClass )
+  (call $$clinit__void_<once>_@genericanddefaultmethods.ConcreteClass )
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
   (local.set $$instance (struct.new $genericanddefaultmethods.ConcreteClass (ref.as_non_null (global.get $genericanddefaultmethods.ConcreteClass.vtable)) (ref.as_non_null (global.get $genericanddefaultmethods.ConcreteClass.itable)) (i32.const 0)))
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
@@ -375,7 +375,7 @@
 (elem declare func $m_foo__java_lang_String__void@genericanddefaultmethods.ConcreteClass)
 
 ;;; void ConcreteClass.$clinit()
-(func $$clinit__void@genericanddefaultmethods.ConcreteClass
+(func $$clinit__void_<once>_@genericanddefaultmethods.ConcreteClass
  ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
  (block
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
@@ -388,9 +388,9 @@
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
   (global.set $$class-initialized@genericanddefaultmethods.ConcreteClass (i32.const 1))
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
-  (call $$clinit__void@genericanddefaultmethods.GenericClass )
+  (call $$clinit__void_<once>_@genericanddefaultmethods.GenericClass )
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
-  (call $$clinit__void@genericanddefaultmethods.InterfaceWithDefault )
+  (call $$clinit__void_<once>_@genericanddefaultmethods.InterfaceWithDefault )
  )
 )
 

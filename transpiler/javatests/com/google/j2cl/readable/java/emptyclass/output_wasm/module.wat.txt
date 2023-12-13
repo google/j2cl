@@ -45,7 +45,7 @@
  (local $$instance (ref null $emptyclass.EmptyClass))
  (block
   ;;@ emptyclass/EmptyClass.java:18:13
-  (call $$clinit__void@emptyclass.EmptyClass )
+  (call $$clinit__void_<once>_@emptyclass.EmptyClass )
   ;;@ emptyclass/EmptyClass.java:18:13
   (local.set $$instance (struct.new $emptyclass.EmptyClass (ref.as_non_null (global.get $emptyclass.EmptyClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ emptyclass/EmptyClass.java:18:13
@@ -66,7 +66,7 @@
 )
 
 ;;; void EmptyClass.$clinit()
-(func $$clinit__void@emptyclass.EmptyClass
+(func $$clinit__void_<once>_@emptyclass.EmptyClass
  ;;@ emptyclass/EmptyClass.java:18:13
  (block
   ;;@ emptyclass/EmptyClass.java:18:13
@@ -79,7 +79,7 @@
   ;;@ emptyclass/EmptyClass.java:18:13
   (global.set $$class-initialized@emptyclass.EmptyClass (i32.const 1))
   ;;@ emptyclass/EmptyClass.java:18:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 

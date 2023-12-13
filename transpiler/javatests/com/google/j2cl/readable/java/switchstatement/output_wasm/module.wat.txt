@@ -156,7 +156,7 @@
  (local $$instance (ref null $switchstatement.SwitchStatement))
  (block
   ;;@ switchstatement/SwitchStatement.java:24:13
-  (call $$clinit__void@switchstatement.SwitchStatement )
+  (call $$clinit__void_<once>_@switchstatement.SwitchStatement )
   ;;@ switchstatement/SwitchStatement.java:24:13
   (local.set $$instance (struct.new $switchstatement.SwitchStatement (ref.as_non_null (global.get $switchstatement.SwitchStatement.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ switchstatement/SwitchStatement.java:24:13
@@ -262,7 +262,7 @@
     ;;@ switchstatement/SwitchStatement.java:55:4
     (local.set $$expression_1 (block (result i32)
      (local.set $$qualifier (block (result (ref null $switchstatement.Numbers))
-      (call $$clinit__void@switchstatement.Numbers )
+      (call $$clinit__void_<once>_@switchstatement.Numbers )
       (global.get $ONE@switchstatement.Numbers)
      ))
      (call_ref $function.m_ordinal__int (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $$qualifier))))
@@ -1283,7 +1283,7 @@
 )
 
 ;;; void SwitchStatement.$clinit()
-(func $$clinit__void@switchstatement.SwitchStatement
+(func $$clinit__void_<once>_@switchstatement.SwitchStatement
  ;;@ switchstatement/SwitchStatement.java:24:13
  (block
   ;;@ switchstatement/SwitchStatement.java:24:13
@@ -1296,7 +1296,7 @@
   ;;@ switchstatement/SwitchStatement.java:24:13
   (global.set $$class-initialized@switchstatement.SwitchStatement (i32.const 1))
   ;;@ switchstatement/SwitchStatement.java:24:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -1407,7 +1407,7 @@
  ;;@ switchstatement/SwitchStatement.java:18:5
  (block
   ;;@ switchstatement/SwitchStatement.java:18:5
-  (call $$clinit__void@switchstatement.Numbers )
+  (call $$clinit__void_<once>_@switchstatement.Numbers )
   ;;@ switchstatement/SwitchStatement.java:18:5
   (if (ref.is_null (global.get $namesToValuesMap@switchstatement.Numbers))
    (then
@@ -1428,14 +1428,14 @@
  ;;@ switchstatement/SwitchStatement.java:18:5
  (block
   ;;@ switchstatement/SwitchStatement.java:18:5
-  (call $$clinit__void@switchstatement.Numbers )
+  (call $$clinit__void_<once>_@switchstatement.Numbers )
   ;;@ switchstatement/SwitchStatement.java:18:5
   (return (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array (global.get $ONE@switchstatement.Numbers)(global.get $TWO@switchstatement.Numbers)(global.get $THREE@switchstatement.Numbers))))
  )
 )
 
 ;;; void Numbers.$clinit()
-(func $$clinit__void@switchstatement.Numbers
+(func $$clinit__void_<once>_@switchstatement.Numbers
  ;;@ switchstatement/SwitchStatement.java:18:5
  (block
   ;;@ switchstatement/SwitchStatement.java:18:5
@@ -1448,7 +1448,7 @@
   ;;@ switchstatement/SwitchStatement.java:18:5
   (global.set $$class-initialized@switchstatement.Numbers (i32.const 1))
   ;;@ switchstatement/SwitchStatement.java:18:5
-  (call $$clinit__void@java.lang.Enum )
+  (call $$clinit__void_<once>_@java.lang.Enum )
   ;;@ switchstatement/SwitchStatement.java:19:2
   (global.set $ONE@switchstatement.Numbers (call $$create__java_lang_String__int@switchstatement.Numbers (call $function.no.side.effects.$getString_|ONE|__java_lang_String (ref.func $$getString_|ONE|__java_lang_String@switchstatement.Numbers) )(i32.const 0)))
   ;;@ switchstatement/SwitchStatement.java:20:2

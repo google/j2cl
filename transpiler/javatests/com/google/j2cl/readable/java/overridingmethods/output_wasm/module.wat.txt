@@ -128,7 +128,7 @@
 ;;; Code for overridingmethods.SomeInterface [methods]
 
 ;;; void SomeInterface.$clinit()
-(func $$clinit__void@overridingmethods.SomeInterface
+(func $$clinit__void_<once>_@overridingmethods.SomeInterface
  ;;@ overridingmethods/Child.java:18:10
  (block
   ;;@ overridingmethods/Child.java:18:10
@@ -178,7 +178,7 @@
  (local $$instance (ref null $overridingmethods.Parent))
  (block
   ;;@ overridingmethods/Child.java:22:6
-  (call $$clinit__void@overridingmethods.Parent )
+  (call $$clinit__void_<once>_@overridingmethods.Parent )
   ;;@ overridingmethods/Child.java:22:6
   (local.set $$instance (struct.new $overridingmethods.Parent (ref.as_non_null (global.get $overridingmethods.Parent.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ overridingmethods/Child.java:22:6
@@ -211,7 +211,7 @@
 (elem declare func $m_fun__void@overridingmethods.Parent)
 
 ;;; void Parent.$clinit()
-(func $$clinit__void@overridingmethods.Parent
+(func $$clinit__void_<once>_@overridingmethods.Parent
  ;;@ overridingmethods/Child.java:22:6
  (block
   ;;@ overridingmethods/Child.java:22:6
@@ -224,7 +224,7 @@
   ;;@ overridingmethods/Child.java:22:6
   (global.set $$class-initialized@overridingmethods.Parent (i32.const 1))
   ;;@ overridingmethods/Child.java:22:6
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -276,7 +276,7 @@
  (local $$instance (ref null $overridingmethods.Child))
  (block
   ;;@ overridingmethods/Child.java:26:13
-  (call $$clinit__void@overridingmethods.Child )
+  (call $$clinit__void_<once>_@overridingmethods.Child )
   ;;@ overridingmethods/Child.java:26:13
   (local.set $$instance (struct.new $overridingmethods.Child (ref.as_non_null (global.get $overridingmethods.Child.vtable)) (ref.as_non_null (global.get $overridingmethods.Child.itable)) (i32.const 0)))
   ;;@ overridingmethods/Child.java:26:13
@@ -321,7 +321,7 @@
 (elem declare func $m_bar__void@overridingmethods.Child)
 
 ;;; void Child.$clinit()
-(func $$clinit__void@overridingmethods.Child
+(func $$clinit__void_<once>_@overridingmethods.Child
  ;;@ overridingmethods/Child.java:26:13
  (block
   ;;@ overridingmethods/Child.java:26:13
@@ -334,7 +334,7 @@
   ;;@ overridingmethods/Child.java:26:13
   (global.set $$class-initialized@overridingmethods.Child (i32.const 1))
   ;;@ overridingmethods/Child.java:26:13
-  (call $$clinit__void@overridingmethods.Parent )
+  (call $$clinit__void_<once>_@overridingmethods.Parent )
  )
 )
 

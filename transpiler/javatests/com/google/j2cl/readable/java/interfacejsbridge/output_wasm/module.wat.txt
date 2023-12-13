@@ -170,7 +170,7 @@
 ;;; Code for interfacejsbridge.MyJsInterface [methods]
 
 ;;; void MyJsInterface.$clinit()
-(func $$clinit__void@interfacejsbridge.MyJsInterface
+(func $$clinit__void_<once>_@interfacejsbridge.MyJsInterface
  ;;@ interfacejsbridge/InterfaceImpl.java:21:10
  (block
   ;;@ interfacejsbridge/InterfaceImpl.java:21:10
@@ -214,7 +214,7 @@
 ;;; Code for interfacejsbridge.MyInterface [methods]
 
 ;;; void MyInterface.$clinit()
-(func $$clinit__void@interfacejsbridge.MyInterface
+(func $$clinit__void_<once>_@interfacejsbridge.MyInterface
  ;;@ interfacejsbridge/InterfaceImpl.java:25:10
  (block
   ;;@ interfacejsbridge/InterfaceImpl.java:25:10
@@ -258,7 +258,7 @@
 ;;; Code for interfacejsbridge.SubInterface [methods]
 
 ;;; void SubInterface.$clinit()
-(func $$clinit__void@interfacejsbridge.SubInterface
+(func $$clinit__void_<once>_@interfacejsbridge.SubInterface
  ;;@ interfacejsbridge/InterfaceImpl.java:29:10
  (block
   ;;@ interfacejsbridge/InterfaceImpl.java:29:10
@@ -308,7 +308,7 @@
  (local $$instance (ref null $interfacejsbridge.InterfaceImpl))
  (block
   ;;@ interfacejsbridge/InterfaceImpl.java:34:13
-  (call $$clinit__void@interfacejsbridge.InterfaceImpl )
+  (call $$clinit__void_<once>_@interfacejsbridge.InterfaceImpl )
   ;;@ interfacejsbridge/InterfaceImpl.java:34:13
   (local.set $$instance (struct.new $interfacejsbridge.InterfaceImpl (ref.as_non_null (global.get $interfacejsbridge.InterfaceImpl.vtable)) (ref.as_non_null (global.get $interfacejsbridge.InterfaceImpl.itable)) (i32.const 0)))
   ;;@ interfacejsbridge/InterfaceImpl.java:34:13
@@ -345,7 +345,7 @@
 (elem declare func $m_foo__int__int@interfacejsbridge.InterfaceImpl)
 
 ;;; void InterfaceImpl.$clinit()
-(func $$clinit__void@interfacejsbridge.InterfaceImpl
+(func $$clinit__void_<once>_@interfacejsbridge.InterfaceImpl
  ;;@ interfacejsbridge/InterfaceImpl.java:34:13
  (block
   ;;@ interfacejsbridge/InterfaceImpl.java:34:13
@@ -358,7 +358,7 @@
   ;;@ interfacejsbridge/InterfaceImpl.java:34:13
   (global.set $$class-initialized@interfacejsbridge.InterfaceImpl (i32.const 1))
   ;;@ interfacejsbridge/InterfaceImpl.java:34:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -410,7 +410,7 @@
  (local $$instance (ref null $interfacejsbridge.Main))
  (block
   ;;@ interfacejsbridge/Main.java:18:13
-  (call $$clinit__void@interfacejsbridge.Main )
+  (call $$clinit__void_<once>_@interfacejsbridge.Main )
   ;;@ interfacejsbridge/Main.java:18:13
   (local.set $$instance (struct.new $interfacejsbridge.Main (ref.as_non_null (global.get $interfacejsbridge.Main.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ interfacejsbridge/Main.java:18:13
@@ -463,7 +463,7 @@
 (elem declare func $m_test__void@interfacejsbridge.Main)
 
 ;;; void Main.$clinit()
-(func $$clinit__void@interfacejsbridge.Main
+(func $$clinit__void_<once>_@interfacejsbridge.Main
  ;;@ interfacejsbridge/Main.java:18:13
  (block
   ;;@ interfacejsbridge/Main.java:18:13
@@ -476,7 +476,7 @@
   ;;@ interfacejsbridge/Main.java:18:13
   (global.set $$class-initialized@interfacejsbridge.Main (i32.const 1))
   ;;@ interfacejsbridge/Main.java:18:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 

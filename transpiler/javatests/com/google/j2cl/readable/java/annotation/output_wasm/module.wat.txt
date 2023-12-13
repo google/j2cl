@@ -113,7 +113,7 @@
 ;;; Code for annotation.Main.Foo [methods]
 
 ;;; void Foo.$clinit()
-(func $$clinit__void@annotation.Main.Foo
+(func $$clinit__void_<once>_@annotation.Main.Foo
  ;;@ annotation/Main.java:19:13
  (block
   ;;@ annotation/Main.java:19:13
@@ -157,7 +157,7 @@
 ;;; Code for annotation.Main.Zoo [methods]
 
 ;;; void Zoo.$clinit()
-(func $$clinit__void@annotation.Main.Zoo
+(func $$clinit__void_<once>_@annotation.Main.Zoo
  ;;@ annotation/Main.java:28:13
  (block
   ;;@ annotation/Main.java:28:13
@@ -207,7 +207,7 @@
  (local $$instance (ref null $annotation.Main))
  (block
   ;;@ annotation/Main.java:18:13
-  (call $$clinit__void@annotation.Main )
+  (call $$clinit__void_<once>_@annotation.Main )
   ;;@ annotation/Main.java:18:13
   (local.set $$instance (struct.new $annotation.Main (ref.as_non_null (global.get $annotation.Main.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ annotation/Main.java:18:13
@@ -228,7 +228,7 @@
 )
 
 ;;; void Main.$clinit()
-(func $$clinit__void@annotation.Main
+(func $$clinit__void_<once>_@annotation.Main
  ;;@ annotation/Main.java:18:13
  (block
   ;;@ annotation/Main.java:18:13
@@ -241,7 +241,7 @@
   ;;@ annotation/Main.java:18:13
   (global.set $$class-initialized@annotation.Main (i32.const 1))
   ;;@ annotation/Main.java:18:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -294,7 +294,7 @@
  (local $$instance (ref null $annotation.Main.Bar))
  (block
   ;;@ annotation/Main.java:30:8
-  (call $$clinit__void@annotation.Main.Bar )
+  (call $$clinit__void_<once>_@annotation.Main.Bar )
   ;;@ annotation/Main.java:30:8
   (local.set $$instance (struct.new $annotation.Main.Bar (ref.as_non_null (global.get $annotation.Main.Bar.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $annotation.Main)))
   ;;@ annotation/Main.java:30:8
@@ -338,7 +338,7 @@
 (elem declare func $m_baz__int_$pp_annotation@annotation.Main.Bar)
 
 ;;; void Bar.$clinit()
-(func $$clinit__void@annotation.Main.Bar
+(func $$clinit__void_<once>_@annotation.Main.Bar
  ;;@ annotation/Main.java:30:8
  (block
   ;;@ annotation/Main.java:30:8
@@ -351,7 +351,7 @@
   ;;@ annotation/Main.java:30:8
   (global.set $$class-initialized@annotation.Main.Bar (i32.const 1))
   ;;@ annotation/Main.java:30:8
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 

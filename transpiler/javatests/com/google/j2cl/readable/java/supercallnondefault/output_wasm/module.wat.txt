@@ -86,7 +86,7 @@
  (local $$instance (ref null $supercallnondefault.Parent))
  (block
   ;;@ supercallnondefault/Child.java:21:9
-  (call $$clinit__void@supercallnondefault.Parent )
+  (call $$clinit__void_<once>_@supercallnondefault.Parent )
   ;;@ supercallnondefault/Child.java:21:9
   (local.set $$instance (struct.new $supercallnondefault.Parent (ref.as_non_null (global.get $supercallnondefault.Parent.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
   ;;@ supercallnondefault/Child.java:21:9
@@ -110,7 +110,7 @@
 )
 
 ;;; void Parent.$clinit()
-(func $$clinit__void@supercallnondefault.Parent
+(func $$clinit__void_<once>_@supercallnondefault.Parent
  ;;@ supercallnondefault/Child.java:18:6
  (block
   ;;@ supercallnondefault/Child.java:18:6
@@ -123,7 +123,7 @@
   ;;@ supercallnondefault/Child.java:18:6
   (global.set $$class-initialized@supercallnondefault.Parent (i32.const 1))
   ;;@ supercallnondefault/Child.java:18:6
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -176,7 +176,7 @@
  (local $$instance (ref null $supercallnondefault.Child))
  (block
   ;;@ supercallnondefault/Child.java:27:9
-  (call $$clinit__void@supercallnondefault.Child )
+  (call $$clinit__void_<once>_@supercallnondefault.Child )
   ;;@ supercallnondefault/Child.java:27:9
   (local.set $$instance (struct.new $supercallnondefault.Child (ref.as_non_null (global.get $supercallnondefault.Child.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
   ;;@ supercallnondefault/Child.java:27:9
@@ -198,7 +198,7 @@
 )
 
 ;;; void Child.$clinit()
-(func $$clinit__void@supercallnondefault.Child
+(func $$clinit__void_<once>_@supercallnondefault.Child
  ;;@ supercallnondefault/Child.java:26:13
  (block
   ;;@ supercallnondefault/Child.java:26:13
@@ -211,7 +211,7 @@
   ;;@ supercallnondefault/Child.java:26:13
   (global.set $$class-initialized@supercallnondefault.Child (i32.const 1))
   ;;@ supercallnondefault/Child.java:26:13
-  (call $$clinit__void@supercallnondefault.Parent )
+  (call $$clinit__void_<once>_@supercallnondefault.Parent )
  )
 )
 

@@ -246,7 +246,7 @@
 ;;; Code for anonymousclass.SomeInterface [methods]
 
 ;;; void SomeInterface.$clinit()
-(func $$clinit__void@anonymousclass.SomeInterface
+(func $$clinit__void_<once>_@anonymousclass.SomeInterface
  ;;@ anonymousclass/AnonymousClass.java:59:10
  (block
   ;;@ anonymousclass/AnonymousClass.java:59:10
@@ -303,7 +303,7 @@
 )
 
 ;;; void SomeClass.$clinit()
-(func $$clinit__void@anonymousclass.SomeClass
+(func $$clinit__void_<once>_@anonymousclass.SomeClass
  ;;@ anonymousclass/AnonymousClass.java:18:15
  (block
   ;;@ anonymousclass/AnonymousClass.java:18:15
@@ -316,7 +316,7 @@
   ;;@ anonymousclass/AnonymousClass.java:18:15
   (global.set $$class-initialized@anonymousclass.SomeClass (i32.const 1))
   ;;@ anonymousclass/AnonymousClass.java:18:15
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -364,12 +364,12 @@
  ;;@ anonymousclass/AnonymousClass.java:29:14
  (block
   ;;@ anonymousclass/AnonymousClass.java:29:29
-  (call $$clinit__void@anonymousclass.SomeClassWithStaticMembers )
+  (call $$clinit__void_<once>_@anonymousclass.SomeClassWithStaticMembers )
  )
 )
 
 ;;; void SomeClassWithStaticMembers.$clinit()
-(func $$clinit__void@anonymousclass.SomeClassWithStaticMembers
+(func $$clinit__void_<once>_@anonymousclass.SomeClassWithStaticMembers
  ;;@ anonymousclass/AnonymousClass.java:24:15
  (block
   ;;@ anonymousclass/AnonymousClass.java:24:15
@@ -382,7 +382,7 @@
   ;;@ anonymousclass/AnonymousClass.java:24:15
   (global.set $$class-initialized@anonymousclass.SomeClassWithStaticMembers (i32.const 1))
   ;;@ anonymousclass/AnonymousClass.java:24:15
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -421,7 +421,7 @@
  (local $$instance (ref null $anonymousclass.AnonymousClass))
  (block
   ;;@ anonymousclass/AnonymousClass.java:32:13
-  (call $$clinit__void@anonymousclass.AnonymousClass )
+  (call $$clinit__void_<once>_@anonymousclass.AnonymousClass )
   ;;@ anonymousclass/AnonymousClass.java:32:13
   (local.set $$instance (struct.new $anonymousclass.AnonymousClass (ref.as_non_null (global.get $anonymousclass.AnonymousClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
   ;;@ anonymousclass/AnonymousClass.java:32:13
@@ -460,7 +460,7 @@
 (elem declare func $m_main__void@anonymousclass.AnonymousClass)
 
 ;;; void AnonymousClass.$clinit()
-(func $$clinit__void@anonymousclass.AnonymousClass
+(func $$clinit__void_<once>_@anonymousclass.AnonymousClass
  ;;@ anonymousclass/AnonymousClass.java:32:13
  (block
   ;;@ anonymousclass/AnonymousClass.java:32:13
@@ -473,7 +473,7 @@
   ;;@ anonymousclass/AnonymousClass.java:32:13
   (global.set $$class-initialized@anonymousclass.AnonymousClass (i32.const 1))
   ;;@ anonymousclass/AnonymousClass.java:32:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -527,7 +527,7 @@
  (local $$instance (ref null $anonymousclass.AnonymousClass.1))
  (block
   ;;@ anonymousclass/AnonymousClass.java:37:25
-  (call $$clinit__void@anonymousclass.AnonymousClass.1 )
+  (call $$clinit__void_<once>_@anonymousclass.AnonymousClass.1 )
   ;;@ anonymousclass/AnonymousClass.java:37:25
   (local.set $$instance (struct.new $anonymousclass.AnonymousClass.1 (ref.as_non_null (global.get $anonymousclass.AnonymousClass.1.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $anonymousclass.AnonymousClass) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ anonymousclass/AnonymousClass.java:37:25
@@ -581,7 +581,7 @@
 )
 
 ;;; void <anonymous> extends SomeClass.$clinit()
-(func $$clinit__void@anonymousclass.AnonymousClass.1
+(func $$clinit__void_<once>_@anonymousclass.AnonymousClass.1
  ;;@ anonymousclass/AnonymousClass.java:37:25
  (block
   ;;@ anonymousclass/AnonymousClass.java:37:25
@@ -594,7 +594,7 @@
   ;;@ anonymousclass/AnonymousClass.java:37:25
   (global.set $$class-initialized@anonymousclass.AnonymousClass.1 (i32.const 1))
   ;;@ anonymousclass/AnonymousClass.java:37:25
-  (call $$clinit__void@anonymousclass.SomeClass )
+  (call $$clinit__void_<once>_@anonymousclass.SomeClass )
  )
 )
 
@@ -661,7 +661,7 @@
  (local $$instance (ref null $anonymousclass.AnonymousClass.2))
  (block
   ;;@ anonymousclass/AnonymousClass.java:48:42
-  (call $$clinit__void@anonymousclass.AnonymousClass.2 )
+  (call $$clinit__void_<once>_@anonymousclass.AnonymousClass.2 )
   ;;@ anonymousclass/AnonymousClass.java:48:42
   (local.set $$instance (struct.new $anonymousclass.AnonymousClass.2 (ref.as_non_null (global.get $anonymousclass.AnonymousClass.2.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $anonymousclass.AnonymousClass) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ anonymousclass/AnonymousClass.java:48:42
@@ -715,7 +715,7 @@
 )
 
 ;;; void <anonymous> extends SomeClassWithStaticMembers.$clinit()
-(func $$clinit__void@anonymousclass.AnonymousClass.2
+(func $$clinit__void_<once>_@anonymousclass.AnonymousClass.2
  ;;@ anonymousclass/AnonymousClass.java:48:42
  (block
   ;;@ anonymousclass/AnonymousClass.java:48:42
@@ -728,7 +728,7 @@
   ;;@ anonymousclass/AnonymousClass.java:48:42
   (global.set $$class-initialized@anonymousclass.AnonymousClass.2 (i32.const 1))
   ;;@ anonymousclass/AnonymousClass.java:48:42
-  (call $$clinit__void@anonymousclass.SomeClassWithStaticMembers )
+  (call $$clinit__void_<once>_@anonymousclass.SomeClassWithStaticMembers )
  )
 )
 
@@ -781,7 +781,7 @@
  (local $$instance (ref null $anonymousclass.SomeInterface.1))
  (block
   ;;@ anonymousclass/AnonymousClass.java:61:23
-  (call $$clinit__void@anonymousclass.SomeInterface.1 )
+  (call $$clinit__void_<once>_@anonymousclass.SomeInterface.1 )
   ;;@ anonymousclass/AnonymousClass.java:61:23
   (local.set $$instance (struct.new $anonymousclass.SomeInterface.1 (ref.as_non_null (global.get $anonymousclass.SomeInterface.1.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ anonymousclass/AnonymousClass.java:61:23
@@ -818,7 +818,7 @@
 (elem declare func $m_foo__java_lang_String@anonymousclass.SomeInterface.1)
 
 ;;; void <anonymous> extends SomeClass.$clinit()
-(func $$clinit__void@anonymousclass.SomeInterface.1
+(func $$clinit__void_<once>_@anonymousclass.SomeInterface.1
  ;;@ anonymousclass/AnonymousClass.java:61:23
  (block
   ;;@ anonymousclass/AnonymousClass.java:61:23
@@ -831,7 +831,7 @@
   ;;@ anonymousclass/AnonymousClass.java:61:23
   (global.set $$class-initialized@anonymousclass.SomeInterface.1 (i32.const 1))
   ;;@ anonymousclass/AnonymousClass.java:61:23
-  (call $$clinit__void@anonymousclass.SomeClass )
+  (call $$clinit__void_<once>_@anonymousclass.SomeClass )
  )
 )
 

@@ -138,7 +138,7 @@
  (local $$instance (ref null $trycatch.TryCatch))
  (block
   ;;@ trycatch/TryCatch.java:18:13
-  (call $$clinit__void@trycatch.TryCatch )
+  (call $$clinit__void_<once>_@trycatch.TryCatch )
   ;;@ trycatch/TryCatch.java:18:13
   (local.set $$instance (struct.new $trycatch.TryCatch (ref.as_non_null (global.get $trycatch.TryCatch.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ trycatch/TryCatch.java:18:13
@@ -835,7 +835,7 @@
 (elem declare func $m_testThrowsParameterized__java_lang_Throwable__void@trycatch.TryCatch)
 
 ;;; void TryCatch.$clinit()
-(func $$clinit__void@trycatch.TryCatch
+(func $$clinit__void_<once>_@trycatch.TryCatch
  ;;@ trycatch/TryCatch.java:18:13
  (block
   ;;@ trycatch/TryCatch.java:18:13
@@ -848,7 +848,7 @@
   ;;@ trycatch/TryCatch.java:18:13
   (global.set $$class-initialized@trycatch.TryCatch (i32.const 1))
   ;;@ trycatch/TryCatch.java:18:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
   ;;@ trycatch/TryCatch.java:85:2
   (global.set $closableThing@trycatch.TryCatch (call $$create__@trycatch.TryCatch.ClosableThing ))
  )
@@ -902,7 +902,7 @@
  (local $$instance (ref null $trycatch.TryCatch.ClosableThing))
  (block
   ;;@ trycatch/TryCatch.java:61:15
-  (call $$clinit__void@trycatch.TryCatch.ClosableThing )
+  (call $$clinit__void_<once>_@trycatch.TryCatch.ClosableThing )
   ;;@ trycatch/TryCatch.java:61:15
   (local.set $$instance (struct.new $trycatch.TryCatch.ClosableThing (ref.as_non_null (global.get $trycatch.TryCatch.ClosableThing.vtable)) (ref.as_non_null (global.get $trycatch.TryCatch.ClosableThing.itable)) (i32.const 0)))
   ;;@ trycatch/TryCatch.java:61:15
@@ -935,7 +935,7 @@
 (elem declare func $m_close__void@trycatch.TryCatch.ClosableThing)
 
 ;;; void ClosableThing.$clinit()
-(func $$clinit__void@trycatch.TryCatch.ClosableThing
+(func $$clinit__void_<once>_@trycatch.TryCatch.ClosableThing
  ;;@ trycatch/TryCatch.java:61:15
  (block
   ;;@ trycatch/TryCatch.java:61:15
@@ -948,7 +948,7 @@
   ;;@ trycatch/TryCatch.java:61:15
   (global.set $$class-initialized@trycatch.TryCatch.ClosableThing (i32.const 1))
   ;;@ trycatch/TryCatch.java:61:15
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 

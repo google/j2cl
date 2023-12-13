@@ -172,6 +172,15 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public boolean isSyntheticInstanceOfSupportMember() {
       return this == SYNTHETIC_INSTANCE_OF_SUPPORT_METHOD;
     }
+
+    public boolean isOnceMethod() {
+      switch (this) {
+        case SYNTHETIC_CLASS_INITIALIZER:
+          return true;
+        default:
+          return false;
+      }
+    }
   }
 
   public static final String CONSTRUCTOR_METHOD_NAME = "<init>";

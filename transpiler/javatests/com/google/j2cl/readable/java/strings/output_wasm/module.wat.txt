@@ -116,7 +116,7 @@
  (local $$instance (ref null $strings.Strings))
  (block
   ;;@ strings/Strings.java:18:13
-  (call $$clinit__void@strings.Strings )
+  (call $$clinit__void_<once>_@strings.Strings )
   ;;@ strings/Strings.java:18:13
   (local.set $$instance (struct.new $strings.Strings (ref.as_non_null (global.get $strings.Strings.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.String)))
   ;;@ strings/Strings.java:18:13
@@ -340,7 +340,7 @@
 )
 
 ;;; void Strings.$clinit()
-(func $$clinit__void@strings.Strings
+(func $$clinit__void_<once>_@strings.Strings
  ;;@ strings/Strings.java:18:13
  (block
   ;;@ strings/Strings.java:18:13
@@ -353,7 +353,7 @@
   ;;@ strings/Strings.java:18:13
   (global.set $$class-initialized@strings.Strings (i32.const 1))
   ;;@ strings/Strings.java:18:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -509,7 +509,7 @@
  (local $$instance (ref null $strings.Strings.StringHolder))
  (block
   ;;@ strings/Strings.java:25:23
-  (call $$clinit__void@strings.Strings.StringHolder )
+  (call $$clinit__void_<once>_@strings.Strings.StringHolder )
   ;;@ strings/Strings.java:25:23
   (local.set $$instance (struct.new $strings.Strings.StringHolder (ref.as_non_null (global.get $strings.Strings.StringHolder.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.String)))
   ;;@ strings/Strings.java:25:23
@@ -542,7 +542,7 @@
 )
 
 ;;; void StringHolder.$clinit()
-(func $$clinit__void@strings.Strings.StringHolder
+(func $$clinit__void_<once>_@strings.Strings.StringHolder
  ;;@ strings/Strings.java:25:23
  (block
   ;;@ strings/Strings.java:25:23
@@ -555,7 +555,7 @@
   ;;@ strings/Strings.java:25:23
   (global.set $$class-initialized@strings.Strings.StringHolder (i32.const 1))
   ;;@ strings/Strings.java:25:23
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 

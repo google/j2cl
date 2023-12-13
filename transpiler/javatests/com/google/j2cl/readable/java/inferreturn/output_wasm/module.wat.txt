@@ -48,7 +48,7 @@
  (local $$instance (ref null $inferreturn.InferReturn))
  (block
   ;;@ inferreturn/InferReturn.java:21:13
-  (call $$clinit__void@inferreturn.InferReturn )
+  (call $$clinit__void_<once>_@inferreturn.InferReturn )
   ;;@ inferreturn/InferReturn.java:21:13
   (local.set $$instance (struct.new $inferreturn.InferReturn (ref.as_non_null (global.get $inferreturn.InferReturn.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ inferreturn/InferReturn.java:21:13
@@ -75,7 +75,7 @@
  ;;@ inferreturn/InferReturn.java:23:35
  (block
   ;;@ inferreturn/InferReturn.java:23:55
-  (call $$clinit__void@inferreturn.InferReturn )
+  (call $$clinit__void_<once>_@inferreturn.InferReturn )
   ;;@ inferreturn/InferReturn.java:24:4
   (return (call $$create__@inferreturn.InferReturn ))
  )
@@ -88,7 +88,7 @@
  ;;@ inferreturn/InferReturn.java:27:49
  (block
   ;;@ inferreturn/InferReturn.java:27:86
-  (call $$clinit__void@inferreturn.InferReturn )
+  (call $$clinit__void_<once>_@inferreturn.InferReturn )
   ;;@ inferreturn/InferReturn.java:28:4
   (if (i32.eqz (ref.is_null (local.get $foo)))
    (then
@@ -110,7 +110,7 @@
  (local $array (ref null $javaemul.internal.WasmArray.OfObject))
  (block
   ;;@ inferreturn/InferReturn.java:36:28
-  (call $$clinit__void@inferreturn.InferReturn )
+  (call $$clinit__void_<once>_@inferreturn.InferReturn )
   ;;@ inferreturn/InferReturn.java:37:4
   (local.set $list (call $m_newArrayList__java_lang_Object__java_util_ArrayList@inferreturn.InferReturn (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@inferreturn.InferReturn) )))
   ;;@ inferreturn/InferReturn.java:39:4
@@ -129,7 +129,7 @@
  ;;@ inferreturn/InferReturn.java:46:33
  (block
   ;;@ inferreturn/InferReturn.java:46:53
-  (call $$clinit__void@inferreturn.InferReturn )
+  (call $$clinit__void_<once>_@inferreturn.InferReturn )
   ;;@ inferreturn/InferReturn.java:47:4
   (return (call $$create__@java.util.ArrayList ))
  )
@@ -142,7 +142,7 @@
  ;;@ inferreturn/InferReturn.java:50:24
  (block
   ;;@ inferreturn/InferReturn.java:50:40
-  (call $$clinit__void@inferreturn.InferReturn )
+  (call $$clinit__void_<once>_@inferreturn.InferReturn )
   ;;@ inferreturn/InferReturn.java:51:4
   (return (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 0))))
  )
@@ -154,7 +154,7 @@
  ;;@ inferreturn/InferReturn.java:54:21
  (block
   ;;@ inferreturn/InferReturn.java:54:69
-  (call $$clinit__void@inferreturn.InferReturn )
+  (call $$clinit__void_<once>_@inferreturn.InferReturn )
  )
 )
 
@@ -164,12 +164,12 @@
  ;;@ inferreturn/InferReturn.java:58:21
  (block
   ;;@ inferreturn/InferReturn.java:58:56
-  (call $$clinit__void@inferreturn.InferReturn )
+  (call $$clinit__void_<once>_@inferreturn.InferReturn )
  )
 )
 
 ;;; void InferReturn.$clinit()
-(func $$clinit__void@inferreturn.InferReturn
+(func $$clinit__void_<once>_@inferreturn.InferReturn
  ;;@ inferreturn/InferReturn.java:21:13
  (block
   ;;@ inferreturn/InferReturn.java:21:13
@@ -182,7 +182,7 @@
   ;;@ inferreturn/InferReturn.java:21:13
   (global.set $$class-initialized@inferreturn.InferReturn (i32.const 1))
   ;;@ inferreturn/InferReturn.java:21:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 

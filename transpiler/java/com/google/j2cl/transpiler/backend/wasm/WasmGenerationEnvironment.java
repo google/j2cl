@@ -257,6 +257,7 @@ class WasmGenerationEnvironment {
     return "$"
         // TODO(b/315893220): Improve method names to avoid repetition of the enclosing type.
         + methodDescriptor.getMangledName()
+        + (methodDescriptor.getOrigin().isOnceMethod() ? "_<once>_" : "")
         + "@"
         + methodDescriptor.getEnclosingTypeDescriptor().getQualifiedSourceName();
   }

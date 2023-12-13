@@ -284,7 +284,7 @@
 ;;; Code for gwtincompatible.GwtIncompatible [methods]
 
 ;;; void GwtIncompatible.$clinit()
-(func $$clinit__void@gwtincompatible.GwtIncompatible
+(func $$clinit__void_<once>_@gwtincompatible.GwtIncompatible
  ;;@ gwtincompatible/GwtIncompatible.java:25:18
  (block
   ;;@ gwtincompatible/GwtIncompatible.java:25:18
@@ -328,7 +328,7 @@
 ;;; Code for gwtincompatible.Interface [methods]
 
 ;;; void Interface.$clinit()
-(func $$clinit__void@gwtincompatible.Interface
+(func $$clinit__void_<once>_@gwtincompatible.Interface
  ;;@ gwtincompatible/Interface.java:18:10
  (block
   ;;@ gwtincompatible/Interface.java:18:10
@@ -372,7 +372,7 @@
 ;;; Code for gwtincompatible.Interface.NestedInterface [methods]
 
 ;;; void NestedInterface.$clinit()
-(func $$clinit__void@gwtincompatible.Interface.NestedInterface
+(func $$clinit__void_<once>_@gwtincompatible.Interface.NestedInterface
  ;;@ gwtincompatible/Interface.java:22:12
  (block
   ;;@ gwtincompatible/Interface.java:22:12
@@ -426,7 +426,7 @@
 )
 
 ;;; void ClassWithAbstractMethod.$clinit()
-(func $$clinit__void@gwtincompatible.Interface.ClassWithAbstractMethod
+(func $$clinit__void_<once>_@gwtincompatible.Interface.ClassWithAbstractMethod
  ;;@ gwtincompatible/Interface.java:27:17
  (block
   ;;@ gwtincompatible/Interface.java:27:17
@@ -439,7 +439,7 @@
   ;;@ gwtincompatible/Interface.java:27:17
   (global.set $$class-initialized@gwtincompatible.Interface.ClassWithAbstractMethod (i32.const 1))
   ;;@ gwtincompatible/Interface.java:27:17
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -478,7 +478,7 @@
  (local $$instance (ref null $gwtincompatible.Implementor))
  (block
   ;;@ gwtincompatible/Implementor.java:18:13
-  (call $$clinit__void@gwtincompatible.Implementor )
+  (call $$clinit__void_<once>_@gwtincompatible.Implementor )
   ;;@ gwtincompatible/Implementor.java:18:13
   (local.set $$instance (struct.new $gwtincompatible.Implementor (ref.as_non_null (global.get $gwtincompatible.Implementor.vtable)) (ref.as_non_null (global.get $gwtincompatible.Implementor.itable)) (i32.const 0)))
   ;;@ gwtincompatible/Implementor.java:18:13
@@ -514,7 +514,7 @@
 (elem declare func $m_compatibleMethod__void@gwtincompatible.Implementor)
 
 ;;; void Implementor.$clinit()
-(func $$clinit__void@gwtincompatible.Implementor
+(func $$clinit__void_<once>_@gwtincompatible.Implementor
  ;;@ gwtincompatible/Implementor.java:18:13
  (block
   ;;@ gwtincompatible/Implementor.java:18:13
@@ -527,7 +527,7 @@
   ;;@ gwtincompatible/Implementor.java:18:13
   (global.set $$class-initialized@gwtincompatible.Implementor (i32.const 1))
   ;;@ gwtincompatible/Implementor.java:18:13
-  (call $$clinit__void@gwtincompatible.Interface.ClassWithAbstractMethod )
+  (call $$clinit__void_<once>_@gwtincompatible.Interface.ClassWithAbstractMethod )
  )
 )
 
@@ -595,7 +595,7 @@
  ;;@ gwtincompatible/Implementor.java:36:7
  (block
   ;;@ gwtincompatible/Implementor.java:36:7
-  (call $$clinit__void@gwtincompatible.Implementor.SomeEnum )
+  (call $$clinit__void_<once>_@gwtincompatible.Implementor.SomeEnum )
   ;;@ gwtincompatible/Implementor.java:36:7
   (if (ref.is_null (global.get $namesToValuesMap@gwtincompatible.Implementor.SomeEnum))
    (then
@@ -616,14 +616,14 @@
  ;;@ gwtincompatible/Implementor.java:36:7
  (block
   ;;@ gwtincompatible/Implementor.java:36:7
-  (call $$clinit__void@gwtincompatible.Implementor.SomeEnum )
+  (call $$clinit__void_<once>_@gwtincompatible.Implementor.SomeEnum )
   ;;@ gwtincompatible/Implementor.java:36:7
   (return (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array (global.get $COMPATIBLE@gwtincompatible.Implementor.SomeEnum))))
  )
 )
 
 ;;; void SomeEnum.$clinit()
-(func $$clinit__void@gwtincompatible.Implementor.SomeEnum
+(func $$clinit__void_<once>_@gwtincompatible.Implementor.SomeEnum
  ;;@ gwtincompatible/Implementor.java:36:7
  (block
   ;;@ gwtincompatible/Implementor.java:36:7
@@ -636,7 +636,7 @@
   ;;@ gwtincompatible/Implementor.java:36:7
   (global.set $$class-initialized@gwtincompatible.Implementor.SomeEnum (i32.const 1))
   ;;@ gwtincompatible/Implementor.java:36:7
-  (call $$clinit__void@java.lang.Enum )
+  (call $$clinit__void_<once>_@java.lang.Enum )
   ;;@ gwtincompatible/Implementor.java:37:4
   (global.set $COMPATIBLE@gwtincompatible.Implementor.SomeEnum (call $$create__java_lang_String__int@gwtincompatible.Implementor.SomeEnum.1 (call $function.no.side.effects.$getString_|COMPATIBLE|__java_lang_String (ref.func $$getString_|COMPATIBLE|__java_lang_String@gwtincompatible.Implementor.SomeEnum) )(i32.const 0)))
  )
@@ -692,7 +692,7 @@
  (local $$instance (ref null $gwtincompatible.Implementor.SomeEnum.1))
  (block
   ;;@ gwtincompatible/Implementor.java:37:15
-  (call $$clinit__void@gwtincompatible.Implementor.SomeEnum.1 )
+  (call $$clinit__void_<once>_@gwtincompatible.Implementor.SomeEnum.1 )
   ;;@ gwtincompatible/Implementor.java:37:15
   (local.set $$instance (struct.new $gwtincompatible.Implementor.SomeEnum.1 (ref.as_non_null (global.get $gwtincompatible.Implementor.SomeEnum.1.vtable)) (ref.as_non_null (global.get $gwtincompatible.Implementor.SomeEnum.1.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
   ;;@ gwtincompatible/Implementor.java:37:15
@@ -727,7 +727,7 @@
 (elem declare func $m_method__void_$pp_gwtincompatible@gwtincompatible.Implementor.SomeEnum.1)
 
 ;;; void <anonymous> extends SomeEnum.$clinit()
-(func $$clinit__void@gwtincompatible.Implementor.SomeEnum.1
+(func $$clinit__void_<once>_@gwtincompatible.Implementor.SomeEnum.1
  ;;@ gwtincompatible/Implementor.java:37:15
  (block
   ;;@ gwtincompatible/Implementor.java:37:15
@@ -740,7 +740,7 @@
   ;;@ gwtincompatible/Implementor.java:37:15
   (global.set $$class-initialized@gwtincompatible.Implementor.SomeEnum.1 (i32.const 1))
   ;;@ gwtincompatible/Implementor.java:37:15
-  (call $$clinit__void@gwtincompatible.Implementor.SomeEnum )
+  (call $$clinit__void_<once>_@gwtincompatible.Implementor.SomeEnum )
  )
 )
 

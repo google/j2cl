@@ -252,7 +252,7 @@
  (local $$instance (ref null $simplelocalclass.SimpleLocalClass))
  (block
   ;;@ simplelocalclass/SimpleLocalClass.java:18:13
-  (call $$clinit__void@simplelocalclass.SimpleLocalClass )
+  (call $$clinit__void_<once>_@simplelocalclass.SimpleLocalClass )
   ;;@ simplelocalclass/SimpleLocalClass.java:18:13
   (local.set $$instance (struct.new $simplelocalclass.SimpleLocalClass (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ simplelocalclass/SimpleLocalClass.java:18:13
@@ -325,7 +325,7 @@
 (elem declare func $m_foo__void@simplelocalclass.SimpleLocalClass)
 
 ;;; void SimpleLocalClass.$clinit()
-(func $$clinit__void@simplelocalclass.SimpleLocalClass
+(func $$clinit__void_<once>_@simplelocalclass.SimpleLocalClass
  ;;@ simplelocalclass/SimpleLocalClass.java:18:13
  (block
   ;;@ simplelocalclass/SimpleLocalClass.java:18:13
@@ -338,7 +338,7 @@
   ;;@ simplelocalclass/SimpleLocalClass.java:18:13
   (global.set $$class-initialized@simplelocalclass.SimpleLocalClass (i32.const 1))
   ;;@ simplelocalclass/SimpleLocalClass.java:18:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -393,7 +393,7 @@
  (local $$instance (ref null $simplelocalclass.SimpleLocalClass.1InnerClass))
  (block
   ;;@ simplelocalclass/SimpleLocalClass.java:21:10
-  (call $$clinit__void@simplelocalclass.SimpleLocalClass.1InnerClass )
+  (call $$clinit__void_<once>_@simplelocalclass.SimpleLocalClass.1InnerClass )
   ;;@ simplelocalclass/SimpleLocalClass.java:21:10
   (local.set $$instance (struct.new $simplelocalclass.SimpleLocalClass.1InnerClass (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (i32.const 0) (ref.null $simplelocalclass.SimpleLocalClass)))
   ;;@ simplelocalclass/SimpleLocalClass.java:21:10
@@ -438,7 +438,7 @@
 (elem declare func $m_fun__int@simplelocalclass.SimpleLocalClass.1InnerClass)
 
 ;;; void InnerClass.$clinit()
-(func $$clinit__void@simplelocalclass.SimpleLocalClass.1InnerClass
+(func $$clinit__void_<once>_@simplelocalclass.SimpleLocalClass.1InnerClass
  ;;@ simplelocalclass/SimpleLocalClass.java:21:10
  (block
   ;;@ simplelocalclass/SimpleLocalClass.java:21:10
@@ -451,7 +451,7 @@
   ;;@ simplelocalclass/SimpleLocalClass.java:21:10
   (global.set $$class-initialized@simplelocalclass.SimpleLocalClass.1InnerClass (i32.const 1))
   ;;@ simplelocalclass/SimpleLocalClass.java:21:10
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -504,7 +504,7 @@
  (local $$instance (ref null $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures))
  (block
   ;;@ simplelocalclass/SimpleLocalClass.java:29:10
-  (call $$clinit__void@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures )
+  (call $$clinit__void_<once>_@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures )
   ;;@ simplelocalclass/SimpleLocalClass.java:29:10
   (local.set $$instance (struct.new $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $simplelocalclass.SimpleLocalClass)))
   ;;@ simplelocalclass/SimpleLocalClass.java:29:10
@@ -528,7 +528,7 @@
 )
 
 ;;; void InnerClassWithoutCaptures.$clinit()
-(func $$clinit__void@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures
+(func $$clinit__void_<once>_@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures
  ;;@ simplelocalclass/SimpleLocalClass.java:29:10
  (block
   ;;@ simplelocalclass/SimpleLocalClass.java:29:10
@@ -541,7 +541,7 @@
   ;;@ simplelocalclass/SimpleLocalClass.java:29:10
   (global.set $$class-initialized@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (i32.const 1))
   ;;@ simplelocalclass/SimpleLocalClass.java:29:10
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -595,7 +595,7 @@
  (local $$instance (ref null $simplelocalclass.SimpleLocalClass.2InnerClass))
  (block
   ;;@ simplelocalclass/SimpleLocalClass.java:36:10
-  (call $$clinit__void@simplelocalclass.SimpleLocalClass.2InnerClass )
+  (call $$clinit__void_<once>_@simplelocalclass.SimpleLocalClass.2InnerClass )
   ;;@ simplelocalclass/SimpleLocalClass.java:36:10
   (local.set $$instance (struct.new $simplelocalclass.SimpleLocalClass.2InnerClass (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.2InnerClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (ref.null $simplelocalclass.SimpleLocalClass) (i32.const 0)))
   ;;@ simplelocalclass/SimpleLocalClass.java:36:10
@@ -634,7 +634,7 @@
 )
 
 ;;; void InnerClass.$clinit()
-(func $$clinit__void@simplelocalclass.SimpleLocalClass.2InnerClass
+(func $$clinit__void_<once>_@simplelocalclass.SimpleLocalClass.2InnerClass
  ;;@ simplelocalclass/SimpleLocalClass.java:36:10
  (block
   ;;@ simplelocalclass/SimpleLocalClass.java:36:10
@@ -647,7 +647,7 @@
   ;;@ simplelocalclass/SimpleLocalClass.java:36:10
   (global.set $$class-initialized@simplelocalclass.SimpleLocalClass.2InnerClass (i32.const 1))
   ;;@ simplelocalclass/SimpleLocalClass.java:36:10
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -700,7 +700,7 @@
  (local $$instance (ref null $simplelocalclass.SimpleLocalClass.1Abc$InnerClass))
  (block
   ;;@ simplelocalclass/SimpleLocalClass.java:43:10
-  (call $$clinit__void@simplelocalclass.SimpleLocalClass.1Abc$InnerClass )
+  (call $$clinit__void_<once>_@simplelocalclass.SimpleLocalClass.1Abc$InnerClass )
   ;;@ simplelocalclass/SimpleLocalClass.java:43:10
   (local.set $$instance (struct.new $simplelocalclass.SimpleLocalClass.1Abc$InnerClass (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $simplelocalclass.SimpleLocalClass)))
   ;;@ simplelocalclass/SimpleLocalClass.java:43:10
@@ -724,7 +724,7 @@
 )
 
 ;;; void Abc$InnerClass.$clinit()
-(func $$clinit__void@simplelocalclass.SimpleLocalClass.1Abc$InnerClass
+(func $$clinit__void_<once>_@simplelocalclass.SimpleLocalClass.1Abc$InnerClass
  ;;@ simplelocalclass/SimpleLocalClass.java:43:10
  (block
   ;;@ simplelocalclass/SimpleLocalClass.java:43:10
@@ -737,7 +737,7 @@
   ;;@ simplelocalclass/SimpleLocalClass.java:43:10
   (global.set $$class-initialized@simplelocalclass.SimpleLocalClass.1Abc$InnerClass (i32.const 1))
   ;;@ simplelocalclass/SimpleLocalClass.java:43:10
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -790,7 +790,7 @@
  (local $$instance (ref null $simplelocalclass.SimpleLocalClass.1Klm$InnerClass))
  (block
   ;;@ simplelocalclass/SimpleLocalClass.java:44:10
-  (call $$clinit__void@simplelocalclass.SimpleLocalClass.1Klm$InnerClass )
+  (call $$clinit__void_<once>_@simplelocalclass.SimpleLocalClass.1Klm$InnerClass )
   ;;@ simplelocalclass/SimpleLocalClass.java:44:10
   (local.set $$instance (struct.new $simplelocalclass.SimpleLocalClass.1Klm$InnerClass (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $simplelocalclass.SimpleLocalClass)))
   ;;@ simplelocalclass/SimpleLocalClass.java:44:10
@@ -814,7 +814,7 @@
 )
 
 ;;; void Klm$InnerClass.$clinit()
-(func $$clinit__void@simplelocalclass.SimpleLocalClass.1Klm$InnerClass
+(func $$clinit__void_<once>_@simplelocalclass.SimpleLocalClass.1Klm$InnerClass
  ;;@ simplelocalclass/SimpleLocalClass.java:44:10
  (block
   ;;@ simplelocalclass/SimpleLocalClass.java:44:10
@@ -827,7 +827,7 @@
   ;;@ simplelocalclass/SimpleLocalClass.java:44:10
   (global.set $$class-initialized@simplelocalclass.SimpleLocalClass.1Klm$InnerClass (i32.const 1))
   ;;@ simplelocalclass/SimpleLocalClass.java:44:10
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 

@@ -163,7 +163,7 @@
 ;;; Code for implementsgenericinterface.GenericInterface [methods]
 
 ;;; void GenericInterface.$clinit()
-(func $$clinit__void@implementsgenericinterface.GenericInterface
+(func $$clinit__void_<once>_@implementsgenericinterface.GenericInterface
  ;;@ implementsgenericinterface/GenericInterfaceImpl.java:18:10
  (block
   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:18:10
@@ -207,7 +207,7 @@
 ;;; Code for implementsgenericinterface.GenericSubInterface [methods]
 
 ;;; void GenericSubInterface.$clinit()
-(func $$clinit__void@implementsgenericinterface.GenericSubInterface
+(func $$clinit__void_<once>_@implementsgenericinterface.GenericSubInterface
  ;;@ implementsgenericinterface/GenericInterfaceImpl.java:20:10
  (block
   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:20:10
@@ -257,7 +257,7 @@
  (local $$instance (ref null $implementsgenericinterface.GenericInterfaceGenericImpl))
  (block
   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
-  (call $$clinit__void@implementsgenericinterface.GenericInterfaceGenericImpl )
+  (call $$clinit__void_<once>_@implementsgenericinterface.GenericInterfaceGenericImpl )
   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
   (local.set $$instance (struct.new $implementsgenericinterface.GenericInterfaceGenericImpl (ref.as_non_null (global.get $implementsgenericinterface.GenericInterfaceGenericImpl.vtable)) (ref.as_non_null (global.get $implementsgenericinterface.GenericInterfaceGenericImpl.itable)) (i32.const 0)))
   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
@@ -278,7 +278,7 @@
 )
 
 ;;; void GenericInterfaceGenericImpl.$clinit()
-(func $$clinit__void@implementsgenericinterface.GenericInterfaceGenericImpl
+(func $$clinit__void_<once>_@implementsgenericinterface.GenericInterfaceGenericImpl
  ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
  (block
   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
@@ -291,7 +291,7 @@
   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
   (global.set $$class-initialized@implementsgenericinterface.GenericInterfaceGenericImpl (i32.const 1))
   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -343,7 +343,7 @@
  (local $$instance (ref null $implementsgenericinterface.GenericInterfaceImpl))
  (block
   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
-  (call $$clinit__void@implementsgenericinterface.GenericInterfaceImpl )
+  (call $$clinit__void_<once>_@implementsgenericinterface.GenericInterfaceImpl )
   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
   (local.set $$instance (struct.new $implementsgenericinterface.GenericInterfaceImpl (ref.as_non_null (global.get $implementsgenericinterface.GenericInterfaceImpl.vtable)) (ref.as_non_null (global.get $implementsgenericinterface.GenericInterfaceImpl.itable)) (i32.const 0)))
   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
@@ -364,7 +364,7 @@
 )
 
 ;;; void GenericInterfaceImpl.$clinit()
-(func $$clinit__void@implementsgenericinterface.GenericInterfaceImpl
+(func $$clinit__void_<once>_@implementsgenericinterface.GenericInterfaceImpl
  ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
  (block
   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
@@ -377,7 +377,7 @@
   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
   (global.set $$class-initialized@implementsgenericinterface.GenericInterfaceImpl (i32.const 1))
   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 

@@ -259,7 +259,7 @@
  (local $$instance (ref null $cloneable.Cloneables))
  (block
   ;;@ cloneable/Cloneables.java:18:13
-  (call $$clinit__void@cloneable.Cloneables )
+  (call $$clinit__void_<once>_@cloneable.Cloneables )
   ;;@ cloneable/Cloneables.java:18:13
   (local.set $$instance (struct.new $cloneable.Cloneables (ref.as_non_null (global.get $cloneable.Cloneables.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ cloneable/Cloneables.java:18:13
@@ -280,7 +280,7 @@
 )
 
 ;;; void Cloneables.$clinit()
-(func $$clinit__void@cloneable.Cloneables
+(func $$clinit__void_<once>_@cloneable.Cloneables
  ;;@ cloneable/Cloneables.java:18:13
  (block
   ;;@ cloneable/Cloneables.java:18:13
@@ -293,7 +293,7 @@
   ;;@ cloneable/Cloneables.java:18:13
   (global.set $$class-initialized@cloneable.Cloneables (i32.const 1))
   ;;@ cloneable/Cloneables.java:18:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -345,7 +345,7 @@
  (local $$instance (ref null $cloneable.Cloneables.WithoutCloneable))
  (block
   ;;@ cloneable/Cloneables.java:19:22
-  (call $$clinit__void@cloneable.Cloneables.WithoutCloneable )
+  (call $$clinit__void_<once>_@cloneable.Cloneables.WithoutCloneable )
   ;;@ cloneable/Cloneables.java:19:22
   (local.set $$instance (struct.new $cloneable.Cloneables.WithoutCloneable (ref.as_non_null (global.get $cloneable.Cloneables.WithoutCloneable.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ cloneable/Cloneables.java:19:22
@@ -381,7 +381,7 @@
 (elem declare func $m_clone__java_lang_Object@cloneable.Cloneables.WithoutCloneable)
 
 ;;; void WithoutCloneable.$clinit()
-(func $$clinit__void@cloneable.Cloneables.WithoutCloneable
+(func $$clinit__void_<once>_@cloneable.Cloneables.WithoutCloneable
  ;;@ cloneable/Cloneables.java:19:22
  (block
   ;;@ cloneable/Cloneables.java:19:22
@@ -394,7 +394,7 @@
   ;;@ cloneable/Cloneables.java:19:22
   (global.set $$class-initialized@cloneable.Cloneables.WithoutCloneable (i32.const 1))
   ;;@ cloneable/Cloneables.java:19:22
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -446,7 +446,7 @@
  (local $$instance (ref null $cloneable.Cloneables.WithCloneable))
  (block
   ;;@ cloneable/Cloneables.java:27:22
-  (call $$clinit__void@cloneable.Cloneables.WithCloneable )
+  (call $$clinit__void_<once>_@cloneable.Cloneables.WithCloneable )
   ;;@ cloneable/Cloneables.java:27:22
   (local.set $$instance (struct.new $cloneable.Cloneables.WithCloneable (ref.as_non_null (global.get $cloneable.Cloneables.WithCloneable.vtable)) (ref.as_non_null (global.get $cloneable.Cloneables.WithCloneable.itable)) (i32.const 0)))
   ;;@ cloneable/Cloneables.java:27:22
@@ -482,7 +482,7 @@
 (elem declare func $m_clone__java_lang_Object@cloneable.Cloneables.WithCloneable)
 
 ;;; void WithCloneable.$clinit()
-(func $$clinit__void@cloneable.Cloneables.WithCloneable
+(func $$clinit__void_<once>_@cloneable.Cloneables.WithCloneable
  ;;@ cloneable/Cloneables.java:27:22
  (block
   ;;@ cloneable/Cloneables.java:27:22
@@ -495,7 +495,7 @@
   ;;@ cloneable/Cloneables.java:27:22
   (global.set $$class-initialized@cloneable.Cloneables.WithCloneable (i32.const 1))
   ;;@ cloneable/Cloneables.java:27:22
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -547,7 +547,7 @@
  (local $$instance (ref null $cloneable.Cloneables.WithoutCloneableChild))
  (block
   ;;@ cloneable/Cloneables.java:35:28
-  (call $$clinit__void@cloneable.Cloneables.WithoutCloneableChild )
+  (call $$clinit__void_<once>_@cloneable.Cloneables.WithoutCloneableChild )
   ;;@ cloneable/Cloneables.java:35:28
   (local.set $$instance (struct.new $cloneable.Cloneables.WithoutCloneableChild (ref.as_non_null (global.get $cloneable.Cloneables.WithoutCloneableChild.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ cloneable/Cloneables.java:35:28
@@ -583,7 +583,7 @@
 (elem declare func $m_clone__java_lang_Object@cloneable.Cloneables.WithoutCloneableChild)
 
 ;;; void WithoutCloneableChild.$clinit()
-(func $$clinit__void@cloneable.Cloneables.WithoutCloneableChild
+(func $$clinit__void_<once>_@cloneable.Cloneables.WithoutCloneableChild
  ;;@ cloneable/Cloneables.java:35:28
  (block
   ;;@ cloneable/Cloneables.java:35:28
@@ -596,7 +596,7 @@
   ;;@ cloneable/Cloneables.java:35:28
   (global.set $$class-initialized@cloneable.Cloneables.WithoutCloneableChild (i32.const 1))
   ;;@ cloneable/Cloneables.java:35:28
-  (call $$clinit__void@cloneable.Cloneables.WithoutCloneable )
+  (call $$clinit__void_<once>_@cloneable.Cloneables.WithoutCloneable )
  )
 )
 
@@ -648,7 +648,7 @@
  (local $$instance (ref null $cloneable.Cloneables.WithCloneableChild))
  (block
   ;;@ cloneable/Cloneables.java:42:28
-  (call $$clinit__void@cloneable.Cloneables.WithCloneableChild )
+  (call $$clinit__void_<once>_@cloneable.Cloneables.WithCloneableChild )
   ;;@ cloneable/Cloneables.java:42:28
   (local.set $$instance (struct.new $cloneable.Cloneables.WithCloneableChild (ref.as_non_null (global.get $cloneable.Cloneables.WithCloneableChild.vtable)) (ref.as_non_null (global.get $cloneable.Cloneables.WithCloneableChild.itable)) (i32.const 0)))
   ;;@ cloneable/Cloneables.java:42:28
@@ -684,7 +684,7 @@
 (elem declare func $m_clone__java_lang_Object@cloneable.Cloneables.WithCloneableChild)
 
 ;;; void WithCloneableChild.$clinit()
-(func $$clinit__void@cloneable.Cloneables.WithCloneableChild
+(func $$clinit__void_<once>_@cloneable.Cloneables.WithCloneableChild
  ;;@ cloneable/Cloneables.java:42:28
  (block
   ;;@ cloneable/Cloneables.java:42:28
@@ -697,7 +697,7 @@
   ;;@ cloneable/Cloneables.java:42:28
   (global.set $$class-initialized@cloneable.Cloneables.WithCloneableChild (i32.const 1))
   ;;@ cloneable/Cloneables.java:42:28
-  (call $$clinit__void@cloneable.Cloneables.WithCloneable )
+  (call $$clinit__void_<once>_@cloneable.Cloneables.WithCloneable )
  )
 )
 

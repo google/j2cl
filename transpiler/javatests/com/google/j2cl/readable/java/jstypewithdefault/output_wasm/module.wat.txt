@@ -95,7 +95,7 @@
 (elem declare func $m_defaultMethod__void@jstypewithdefault.Interface)
 
 ;;; void Interface.$clinit()
-(func $$clinit__void@jstypewithdefault.Interface
+(func $$clinit__void_<once>_@jstypewithdefault.Interface
  ;;@ jstypewithdefault/SomeJsType.java:23:10
  (block
   ;;@ jstypewithdefault/SomeJsType.java:23:10
@@ -145,7 +145,7 @@
  (local $$instance (ref null $jstypewithdefault.SomeJsType))
  (block
   ;;@ jstypewithdefault/SomeJsType.java:20:13
-  (call $$clinit__void@jstypewithdefault.SomeJsType )
+  (call $$clinit__void_<once>_@jstypewithdefault.SomeJsType )
   ;;@ jstypewithdefault/SomeJsType.java:20:13
   (local.set $$instance (struct.new $jstypewithdefault.SomeJsType (ref.as_non_null (global.get $jstypewithdefault.SomeJsType.vtable)) (ref.as_non_null (global.get $jstypewithdefault.SomeJsType.itable)) (i32.const 0)))
   ;;@ jstypewithdefault/SomeJsType.java:20:13
@@ -180,7 +180,7 @@
 (elem declare func $m_defaultMethod__void@jstypewithdefault.SomeJsType)
 
 ;;; void SomeJsType.$clinit()
-(func $$clinit__void@jstypewithdefault.SomeJsType
+(func $$clinit__void_<once>_@jstypewithdefault.SomeJsType
  ;;@ jstypewithdefault/SomeJsType.java:20:13
  (block
   ;;@ jstypewithdefault/SomeJsType.java:20:13
@@ -193,9 +193,9 @@
   ;;@ jstypewithdefault/SomeJsType.java:20:13
   (global.set $$class-initialized@jstypewithdefault.SomeJsType (i32.const 1))
   ;;@ jstypewithdefault/SomeJsType.java:20:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
   ;;@ jstypewithdefault/SomeJsType.java:20:13
-  (call $$clinit__void@jstypewithdefault.Interface )
+  (call $$clinit__void_<once>_@jstypewithdefault.Interface )
  )
 )
 

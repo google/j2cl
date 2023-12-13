@@ -336,7 +336,7 @@
 ;;; Code for genericmethod.GenericMethod.Consumer [methods]
 
 ;;; void Consumer.$clinit()
-(func $$clinit__void@genericmethod.GenericMethod.Consumer
+(func $$clinit__void_<once>_@genericmethod.GenericMethod.Consumer
  ;;@ genericmethod/GenericMethod.java:135:12
  (block
   ;;@ genericmethod/GenericMethod.java:135:12
@@ -380,7 +380,7 @@
 ;;; Code for genericmethod.GenericMethod.Supplier [methods]
 
 ;;; void Supplier.$clinit()
-(func $$clinit__void@genericmethod.GenericMethod.Supplier
+(func $$clinit__void_<once>_@genericmethod.GenericMethod.Supplier
  ;;@ genericmethod/GenericMethod.java:139:12
  (block
   ;;@ genericmethod/GenericMethod.java:139:12
@@ -430,7 +430,7 @@
  (local $$instance (ref null $genericmethod.GenericMethod))
  (block
   ;;@ genericmethod/GenericMethod.java:22:13
-  (call $$clinit__void@genericmethod.GenericMethod )
+  (call $$clinit__void_<once>_@genericmethod.GenericMethod )
   ;;@ genericmethod/GenericMethod.java:22:13
   (local.set $$instance (struct.new $genericmethod.GenericMethod (ref.as_non_null (global.get $genericmethod.GenericMethod.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ genericmethod/GenericMethod.java:22:13
@@ -620,7 +620,7 @@
  ;;@ genericmethod/GenericMethod.java:96:21
  (block
   ;;@ genericmethod/GenericMethod.java:96:53
-  (call $$clinit__void@genericmethod.GenericMethod )
+  (call $$clinit__void_<once>_@genericmethod.GenericMethod )
  )
 )
 
@@ -630,7 +630,7 @@
  ;;@ genericmethod/GenericMethod.java:98:21
  (block
   ;;@ genericmethod/GenericMethod.java:98:50
-  (call $$clinit__void@genericmethod.GenericMethod )
+  (call $$clinit__void_<once>_@genericmethod.GenericMethod )
  )
 )
 
@@ -650,7 +650,7 @@
  (local $$qualifier_4 (ref null $genericmethod.GenericMethod.SuperContainer))
  (block
   ;;@ genericmethod/GenericMethod.java:100:48
-  (call $$clinit__void@genericmethod.GenericMethod )
+  (call $$clinit__void_<once>_@genericmethod.GenericMethod )
   ;;@ genericmethod/GenericMethod.java:101:4
   (local.set $list (call $$create__@java.util.ArrayList ))
   ;;@ genericmethod/GenericMethod.java:102:4
@@ -709,7 +709,7 @@
  (local $$qualifier_4 (ref null $genericmethod.GenericMethod.SuperContainer))
  (block
   ;;@ genericmethod/GenericMethod.java:118:97
-  (call $$clinit__void@genericmethod.GenericMethod )
+  (call $$clinit__void_<once>_@genericmethod.GenericMethod )
   ;;@ genericmethod/GenericMethod.java:119:4
   (local.set $list (call $$create__@java.util.ArrayList ))
   ;;@ genericmethod/GenericMethod.java:120:4
@@ -759,7 +759,7 @@
  ;;@ genericmethod/GenericMethod.java:143:18
  (block
   ;;@ genericmethod/GenericMethod.java:143:76
-  (call $$clinit__void@genericmethod.GenericMethod )
+  (call $$clinit__void_<once>_@genericmethod.GenericMethod )
   ;;@ genericmethod/GenericMethod.java:144:4
   (call_ref $function.m_accept__java_lang_Object__void (ref.as_non_null (local.get $consumer))(local.get $v)(struct.get $genericmethod.GenericMethod.Consumer.vtable $m_accept__java_lang_Object__void (ref.null $genericmethod.GenericMethod.Consumer.vtable)))
  )
@@ -772,7 +772,7 @@
  ;;@ genericmethod/GenericMethod.java:147:15
  (block
   ;;@ genericmethod/GenericMethod.java:147:70
-  (call $$clinit__void@genericmethod.GenericMethod )
+  (call $$clinit__void_<once>_@genericmethod.GenericMethod )
   ;;@ genericmethod/GenericMethod.java:148:4
   (return (call_ref $function.m_get__java_lang_Object (ref.as_non_null (local.get $supplier))(struct.get $genericmethod.GenericMethod.Supplier.vtable $m_get__java_lang_Object (ref.null $genericmethod.GenericMethod.Supplier.vtable))))
  )
@@ -783,7 +783,7 @@
  ;;@ genericmethod/GenericMethod.java:151:33
  (block
   ;;@ genericmethod/GenericMethod.java:151:63
-  (call $$clinit__void@genericmethod.GenericMethod )
+  (call $$clinit__void_<once>_@genericmethod.GenericMethod )
  )
 )
 
@@ -792,14 +792,14 @@
  ;;@ genericmethod/GenericMethod.java:153:14
  (block
   ;;@ genericmethod/GenericMethod.java:153:56
-  (call $$clinit__void@genericmethod.GenericMethod )
+  (call $$clinit__void_<once>_@genericmethod.GenericMethod )
   ;;@ genericmethod/GenericMethod.java:154:4
   (call $m_methodWithBoundTypeVariable__void@genericmethod.GenericMethod )
  )
 )
 
 ;;; void GenericMethod.$clinit()
-(func $$clinit__void@genericmethod.GenericMethod
+(func $$clinit__void_<once>_@genericmethod.GenericMethod
  ;;@ genericmethod/GenericMethod.java:22:13
  (block
   ;;@ genericmethod/GenericMethod.java:22:13
@@ -812,7 +812,7 @@
   ;;@ genericmethod/GenericMethod.java:22:13
   (global.set $$class-initialized@genericmethod.GenericMethod (i32.const 1))
   ;;@ genericmethod/GenericMethod.java:22:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -877,7 +877,7 @@
  (local $$instance (ref null $genericmethod.GenericMethod.SuperContainer))
  (block
   ;;@ genericmethod/GenericMethod.java:78:15
-  (call $$clinit__void@genericmethod.GenericMethod.SuperContainer )
+  (call $$clinit__void_<once>_@genericmethod.GenericMethod.SuperContainer )
   ;;@ genericmethod/GenericMethod.java:78:15
   (local.set $$instance (struct.new $genericmethod.GenericMethod.SuperContainer (ref.as_non_null (global.get $genericmethod.GenericMethod.SuperContainer.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ genericmethod/GenericMethod.java:78:15
@@ -913,7 +913,7 @@
 (elem declare func $m_get__genericmethod_GenericMethod_Container_$pp_genericmethod@genericmethod.GenericMethod.SuperContainer)
 
 ;;; void SuperContainer.$clinit()
-(func $$clinit__void@genericmethod.GenericMethod.SuperContainer
+(func $$clinit__void_<once>_@genericmethod.GenericMethod.SuperContainer
  ;;@ genericmethod/GenericMethod.java:78:15
  (block
   ;;@ genericmethod/GenericMethod.java:78:15
@@ -926,7 +926,7 @@
   ;;@ genericmethod/GenericMethod.java:78:15
   (global.set $$class-initialized@genericmethod.GenericMethod.SuperContainer (i32.const 1))
   ;;@ genericmethod/GenericMethod.java:78:15
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -978,7 +978,7 @@
  (local $$instance (ref null $genericmethod.GenericMethod.Container))
  (block
   ;;@ genericmethod/GenericMethod.java:84:15
-  (call $$clinit__void@genericmethod.GenericMethod.Container )
+  (call $$clinit__void_<once>_@genericmethod.GenericMethod.Container )
   ;;@ genericmethod/GenericMethod.java:84:15
   (local.set $$instance (struct.new $genericmethod.GenericMethod.Container (ref.as_non_null (global.get $genericmethod.GenericMethod.Container.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ genericmethod/GenericMethod.java:84:15
@@ -1014,7 +1014,7 @@
 (elem declare func $m_get__genericmethod_GenericMethod_Content_$pp_genericmethod@genericmethod.GenericMethod.Container)
 
 ;;; void Container.$clinit()
-(func $$clinit__void@genericmethod.GenericMethod.Container
+(func $$clinit__void_<once>_@genericmethod.GenericMethod.Container
  ;;@ genericmethod/GenericMethod.java:84:15
  (block
   ;;@ genericmethod/GenericMethod.java:84:15
@@ -1027,7 +1027,7 @@
   ;;@ genericmethod/GenericMethod.java:84:15
   (global.set $$class-initialized@genericmethod.GenericMethod.Container (i32.const 1))
   ;;@ genericmethod/GenericMethod.java:84:15
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -1079,7 +1079,7 @@
  (local $$instance (ref null $genericmethod.GenericMethod.Content))
  (block
   ;;@ genericmethod/GenericMethod.java:90:15
-  (call $$clinit__void@genericmethod.GenericMethod.Content )
+  (call $$clinit__void_<once>_@genericmethod.GenericMethod.Content )
   ;;@ genericmethod/GenericMethod.java:90:15
   (local.set $$instance (struct.new $genericmethod.GenericMethod.Content (ref.as_non_null (global.get $genericmethod.GenericMethod.Content.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ genericmethod/GenericMethod.java:90:15
@@ -1115,7 +1115,7 @@
 (elem declare func $m_getProp__java_lang_String_$pp_genericmethod@genericmethod.GenericMethod.Content)
 
 ;;; void Content.$clinit()
-(func $$clinit__void@genericmethod.GenericMethod.Content
+(func $$clinit__void_<once>_@genericmethod.GenericMethod.Content
  ;;@ genericmethod/GenericMethod.java:90:15
  (block
   ;;@ genericmethod/GenericMethod.java:90:15
@@ -1128,7 +1128,7 @@
   ;;@ genericmethod/GenericMethod.java:90:15
   (global.set $$class-initialized@genericmethod.GenericMethod.Content (i32.const 1))
   ;;@ genericmethod/GenericMethod.java:90:15
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -1181,7 +1181,7 @@
  (local $$instance (ref null $genericmethod.GenericMethod.1))
  (block
   ;;@ genericmethod/GenericMethod.java:30:27
-  (call $$clinit__void@genericmethod.GenericMethod.1 )
+  (call $$clinit__void_<once>_@genericmethod.GenericMethod.1 )
   ;;@ genericmethod/GenericMethod.java:30:27
   (local.set $$instance (struct.new $genericmethod.GenericMethod.1 (ref.as_non_null (global.get $genericmethod.GenericMethod.1.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $genericmethod.GenericMethod)))
   ;;@ genericmethod/GenericMethod.java:30:27
@@ -1231,7 +1231,7 @@
 (elem declare func $m_fun2__java_lang_Object__void@genericmethod.GenericMethod.1)
 
 ;;; void <anonymous> extends GenericMethod<T>.$clinit()
-(func $$clinit__void@genericmethod.GenericMethod.1
+(func $$clinit__void_<once>_@genericmethod.GenericMethod.1
  ;;@ genericmethod/GenericMethod.java:30:27
  (block
   ;;@ genericmethod/GenericMethod.java:30:27
@@ -1244,7 +1244,7 @@
   ;;@ genericmethod/GenericMethod.java:30:27
   (global.set $$class-initialized@genericmethod.GenericMethod.1 (i32.const 1))
   ;;@ genericmethod/GenericMethod.java:30:27
-  (call $$clinit__void@genericmethod.GenericMethod )
+  (call $$clinit__void_<once>_@genericmethod.GenericMethod )
  )
 )
 
@@ -1297,7 +1297,7 @@
  (local $$instance (ref null $genericmethod.GenericMethod.1LocalClass))
  (block
   ;;@ genericmethod/GenericMethod.java:36:10
-  (call $$clinit__void@genericmethod.GenericMethod.1LocalClass )
+  (call $$clinit__void_<once>_@genericmethod.GenericMethod.1LocalClass )
   ;;@ genericmethod/GenericMethod.java:36:10
   (local.set $$instance (struct.new $genericmethod.GenericMethod.1LocalClass (ref.as_non_null (global.get $genericmethod.GenericMethod.1LocalClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $genericmethod.GenericMethod)))
   ;;@ genericmethod/GenericMethod.java:36:10
@@ -1347,7 +1347,7 @@
 (elem declare func $m_fun2__java_lang_Number__void@genericmethod.GenericMethod.1LocalClass)
 
 ;;; void LocalClass.$clinit()
-(func $$clinit__void@genericmethod.GenericMethod.1LocalClass
+(func $$clinit__void_<once>_@genericmethod.GenericMethod.1LocalClass
  ;;@ genericmethod/GenericMethod.java:36:10
  (block
   ;;@ genericmethod/GenericMethod.java:36:10
@@ -1360,7 +1360,7 @@
   ;;@ genericmethod/GenericMethod.java:36:10
   (global.set $$class-initialized@genericmethod.GenericMethod.1LocalClass (i32.const 1))
   ;;@ genericmethod/GenericMethod.java:36:10
-  (call $$clinit__void@genericmethod.GenericMethod )
+  (call $$clinit__void_<once>_@genericmethod.GenericMethod )
  )
 )
 

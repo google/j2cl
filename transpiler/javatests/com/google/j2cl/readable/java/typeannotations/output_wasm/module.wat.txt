@@ -347,7 +347,7 @@
 (elem declare func $m_m__java_util_List__java_util_List@typeannotations.ParametricType)
 
 ;;; void ParametricType.$clinit()
-(func $$clinit__void@typeannotations.ParametricType
+(func $$clinit__void_<once>_@typeannotations.ParametricType
  ;;@ typeannotations/ParametricType.java:23:10
  (block
   ;;@ typeannotations/ParametricType.java:23:10
@@ -417,7 +417,7 @@
 (elem declare func $m_m__java_util_List__java_util_List@typeannotations.AbstractType)
 
 ;;; void AbstractType.$clinit()
-(func $$clinit__void@typeannotations.AbstractType
+(func $$clinit__void_<once>_@typeannotations.AbstractType
  ;;@ typeannotations/TypeAnnotations.java:22:15
  (block
   ;;@ typeannotations/TypeAnnotations.java:22:15
@@ -430,9 +430,9 @@
   ;;@ typeannotations/TypeAnnotations.java:22:15
   (global.set $$class-initialized@typeannotations.AbstractType (i32.const 1))
   ;;@ typeannotations/TypeAnnotations.java:22:15
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
   ;;@ typeannotations/TypeAnnotations.java:22:15
-  (call $$clinit__void@typeannotations.ParametricType )
+  (call $$clinit__void_<once>_@typeannotations.ParametricType )
  )
 )
 
@@ -491,7 +491,7 @@
 (elem declare func $m_m__java_util_List__java_util_List@typeannotations.AbstractTypeNonNull)
 
 ;;; void AbstractTypeNonNull.$clinit()
-(func $$clinit__void@typeannotations.AbstractTypeNonNull
+(func $$clinit__void_<once>_@typeannotations.AbstractTypeNonNull
  ;;@ typeannotations/TypeAnnotations.java:26:15
  (block
   ;;@ typeannotations/TypeAnnotations.java:26:15
@@ -504,9 +504,9 @@
   ;;@ typeannotations/TypeAnnotations.java:26:15
   (global.set $$class-initialized@typeannotations.AbstractTypeNonNull (i32.const 1))
   ;;@ typeannotations/TypeAnnotations.java:26:15
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
   ;;@ typeannotations/TypeAnnotations.java:26:15
-  (call $$clinit__void@typeannotations.ParametricType )
+  (call $$clinit__void_<once>_@typeannotations.ParametricType )
  )
 )
 
@@ -545,7 +545,7 @@
  (local $$instance (ref null $typeannotations.Parent))
  (block
   ;;@ typeannotations/TypeAnnotations.java:30:6
-  (call $$clinit__void@typeannotations.Parent )
+  (call $$clinit__void_<once>_@typeannotations.Parent )
   ;;@ typeannotations/TypeAnnotations.java:30:6
   (local.set $$instance (struct.new $typeannotations.Parent (ref.as_non_null (global.get $typeannotations.Parent.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ typeannotations/TypeAnnotations.java:30:6
@@ -600,7 +600,7 @@
 (elem declare func $m_m__java_util_List__typeannotations_Parent__java_util_List@typeannotations.Parent)
 
 ;;; void Parent.$clinit()
-(func $$clinit__void@typeannotations.Parent
+(func $$clinit__void_<once>_@typeannotations.Parent
  ;;@ typeannotations/TypeAnnotations.java:30:6
  (block
   ;;@ typeannotations/TypeAnnotations.java:30:6
@@ -613,7 +613,7 @@
   ;;@ typeannotations/TypeAnnotations.java:30:6
   (global.set $$class-initialized@typeannotations.Parent (i32.const 1))
   ;;@ typeannotations/TypeAnnotations.java:30:6
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -665,7 +665,7 @@
  (local $$instance (ref null $typeannotations.TypeAnnotations))
  (block
   ;;@ typeannotations/TypeAnnotations.java:50:13
-  (call $$clinit__void@typeannotations.TypeAnnotations )
+  (call $$clinit__void_<once>_@typeannotations.TypeAnnotations )
   ;;@ typeannotations/TypeAnnotations.java:50:13
   (local.set $$instance (struct.new $typeannotations.TypeAnnotations (ref.as_non_null (global.get $typeannotations.TypeAnnotations.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ typeannotations/TypeAnnotations.java:50:13
@@ -691,14 +691,14 @@
  (local $list (ref null $java.lang.Object))
  (block
   ;;@ typeannotations/TypeAnnotations.java:51:28
-  (call $$clinit__void@typeannotations.TypeAnnotations )
+  (call $$clinit__void_<once>_@typeannotations.TypeAnnotations )
   ;;@ typeannotations/TypeAnnotations.java:53:4
   (local.set $list (call $$create__@java.util.ArrayList ))
  )
 )
 
 ;;; void TypeAnnotations.$clinit()
-(func $$clinit__void@typeannotations.TypeAnnotations
+(func $$clinit__void_<once>_@typeannotations.TypeAnnotations
  ;;@ typeannotations/TypeAnnotations.java:50:13
  (block
   ;;@ typeannotations/TypeAnnotations.java:50:13
@@ -711,7 +711,7 @@
   ;;@ typeannotations/TypeAnnotations.java:50:13
   (global.set $$class-initialized@typeannotations.TypeAnnotations (i32.const 1))
   ;;@ typeannotations/TypeAnnotations.java:50:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -763,7 +763,7 @@
  (local $$instance (ref null $typeannotations.ChildWithNullableParent))
  (block
   ;;@ typeannotations/TypeAnnotations.java:40:6
-  (call $$clinit__void@typeannotations.ChildWithNullableParent )
+  (call $$clinit__void_<once>_@typeannotations.ChildWithNullableParent )
   ;;@ typeannotations/TypeAnnotations.java:40:6
   (local.set $$instance (struct.new $typeannotations.ChildWithNullableParent (ref.as_non_null (global.get $typeannotations.ChildWithNullableParent.vtable)) (ref.as_non_null (global.get $typeannotations.ChildWithNullableParent.itable)) (i32.const 0)))
   ;;@ typeannotations/TypeAnnotations.java:40:6
@@ -834,7 +834,7 @@
 (elem declare func $m_m__java_util_List__java_util_List@typeannotations.ChildWithNullableParent)
 
 ;;; void ChildWithNullableParent.$clinit()
-(func $$clinit__void@typeannotations.ChildWithNullableParent
+(func $$clinit__void_<once>_@typeannotations.ChildWithNullableParent
  ;;@ typeannotations/TypeAnnotations.java:40:6
  (block
   ;;@ typeannotations/TypeAnnotations.java:40:6
@@ -847,9 +847,9 @@
   ;;@ typeannotations/TypeAnnotations.java:40:6
   (global.set $$class-initialized@typeannotations.ChildWithNullableParent (i32.const 1))
   ;;@ typeannotations/TypeAnnotations.java:40:6
-  (call $$clinit__void@typeannotations.Parent )
+  (call $$clinit__void_<once>_@typeannotations.Parent )
   ;;@ typeannotations/TypeAnnotations.java:40:6
-  (call $$clinit__void@typeannotations.ParametricType )
+  (call $$clinit__void_<once>_@typeannotations.ParametricType )
  )
 )
 
@@ -901,7 +901,7 @@
  (local $$instance (ref null $typeannotations.ChildWithNonNullableParent))
  (block
   ;;@ typeannotations/TypeAnnotations.java:45:6
-  (call $$clinit__void@typeannotations.ChildWithNonNullableParent )
+  (call $$clinit__void_<once>_@typeannotations.ChildWithNonNullableParent )
   ;;@ typeannotations/TypeAnnotations.java:45:6
   (local.set $$instance (struct.new $typeannotations.ChildWithNonNullableParent (ref.as_non_null (global.get $typeannotations.ChildWithNonNullableParent.vtable)) (ref.as_non_null (global.get $typeannotations.ChildWithNonNullableParent.itable)) (i32.const 0)))
   ;;@ typeannotations/TypeAnnotations.java:45:6
@@ -972,7 +972,7 @@
 (elem declare func $m_m__java_util_List__java_util_List@typeannotations.ChildWithNonNullableParent)
 
 ;;; void ChildWithNonNullableParent.$clinit()
-(func $$clinit__void@typeannotations.ChildWithNonNullableParent
+(func $$clinit__void_<once>_@typeannotations.ChildWithNonNullableParent
  ;;@ typeannotations/TypeAnnotations.java:45:6
  (block
   ;;@ typeannotations/TypeAnnotations.java:45:6
@@ -985,9 +985,9 @@
   ;;@ typeannotations/TypeAnnotations.java:45:6
   (global.set $$class-initialized@typeannotations.ChildWithNonNullableParent (i32.const 1))
   ;;@ typeannotations/TypeAnnotations.java:45:6
-  (call $$clinit__void@typeannotations.Parent )
+  (call $$clinit__void_<once>_@typeannotations.Parent )
   ;;@ typeannotations/TypeAnnotations.java:45:6
-  (call $$clinit__void@typeannotations.ParametricType )
+  (call $$clinit__void_<once>_@typeannotations.ParametricType )
  )
 )
 

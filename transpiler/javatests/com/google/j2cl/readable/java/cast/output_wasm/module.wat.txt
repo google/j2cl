@@ -614,7 +614,7 @@
 ;;; Code for cast.CastGenerics.A [methods]
 
 ;;; void A.$clinit()
-(func $$clinit__void@cast.CastGenerics.A
+(func $$clinit__void_<once>_@cast.CastGenerics.A
  ;;@ cast/CastGenerics.java:28:12
  (block
   ;;@ cast/CastGenerics.java:28:12
@@ -658,7 +658,7 @@
 ;;; Code for cast.CastGenerics.B [methods]
 
 ;;; void B.$clinit()
-(func $$clinit__void@cast.CastGenerics.B
+(func $$clinit__void_<once>_@cast.CastGenerics.B
  ;;@ cast/CastGenerics.java:32:12
  (block
   ;;@ cast/CastGenerics.java:32:12
@@ -702,7 +702,7 @@
 ;;; Code for cast.CastGenerics.Empty1 [methods]
 
 ;;; void Empty1.$clinit()
-(func $$clinit__void@cast.CastGenerics.Empty1
+(func $$clinit__void_<once>_@cast.CastGenerics.Empty1
  ;;@ cast/CastGenerics.java:121:12
  (block
   ;;@ cast/CastGenerics.java:121:12
@@ -746,7 +746,7 @@
 ;;; Code for cast.CastGenerics.Empty2 [methods]
 
 ;;; void Empty2.$clinit()
-(func $$clinit__void@cast.CastGenerics.Empty2
+(func $$clinit__void_<once>_@cast.CastGenerics.Empty2
  ;;@ cast/CastGenerics.java:123:12
  (block
   ;;@ cast/CastGenerics.java:123:12
@@ -796,7 +796,7 @@
  (local $$instance (ref null $cast.CastGenerics))
  (block
   ;;@ cast/CastGenerics.java:20:13
-  (call $$clinit__void@cast.CastGenerics )
+  (call $$clinit__void_<once>_@cast.CastGenerics )
   ;;@ cast/CastGenerics.java:20:13
   (local.set $$instance (struct.new $cast.CastGenerics (ref.as_non_null (global.get $cast.CastGenerics.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.Object)))
   ;;@ cast/CastGenerics.java:20:13
@@ -860,7 +860,7 @@
  (local $$qualifier_12 (ref null $cast.CastGenerics.Implementor))
  (block
   ;;@ cast/CastGenerics.java:50:70
-  (call $$clinit__void@cast.CastGenerics )
+  (call $$clinit__void_<once>_@cast.CastGenerics )
   ;;@ cast/CastGenerics.java:51:4
   (local.set $str (ref.cast (ref null $java.lang.String) (struct.get $cast.CastGenerics $field@cast.CastGenerics (call $$create__@cast.CastGenerics ))))
   ;;@ cast/CastGenerics.java:52:4
@@ -974,7 +974,7 @@
  (local $cc (ref null $cast.CastGenerics))
  (block
   ;;@ cast/CastGenerics.java:87:50
-  (call $$clinit__void@cast.CastGenerics )
+  (call $$clinit__void_<once>_@cast.CastGenerics )
   ;;@ cast/CastGenerics.java:88:4
   (local.set $o (call $$create__int@java.lang.Integer (i32.const 1)))
   ;;@ cast/CastGenerics.java:89:4
@@ -1079,14 +1079,14 @@
  ;;@ cast/CastGenerics.java:133:27
  (block
   ;;@ cast/CastGenerics.java:133:41
-  (call $$clinit__void@cast.CastGenerics )
+  (call $$clinit__void_<once>_@cast.CastGenerics )
   ;;@ cast/CastGenerics.java:134:4
   (return (call $$create__@cast.CastGenerics.1 ))
  )
 )
 
 ;;; void CastGenerics.$clinit()
-(func $$clinit__void@cast.CastGenerics
+(func $$clinit__void_<once>_@cast.CastGenerics
  ;;@ cast/CastGenerics.java:20:13
  (block
   ;;@ cast/CastGenerics.java:20:13
@@ -1099,7 +1099,7 @@
   ;;@ cast/CastGenerics.java:20:13
   (global.set $$class-initialized@cast.CastGenerics (i32.const 1))
   ;;@ cast/CastGenerics.java:20:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -1155,7 +1155,7 @@
 )
 
 ;;; void BaseImplementor.$clinit()
-(func $$clinit__void@cast.CastGenerics.BaseImplementor
+(func $$clinit__void_<once>_@cast.CastGenerics.BaseImplementor
  ;;@ cast/CastGenerics.java:36:32
  (block
   ;;@ cast/CastGenerics.java:36:32
@@ -1168,7 +1168,7 @@
   ;;@ cast/CastGenerics.java:36:32
   (global.set $$class-initialized@cast.CastGenerics.BaseImplementor (i32.const 1))
   ;;@ cast/CastGenerics.java:36:32
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -1241,7 +1241,7 @@
 (elem declare func $m_get__java_lang_Object_$pp_cast@cast.CastGenerics.Container)
 
 ;;; void Container.$clinit()
-(func $$clinit__void@cast.CastGenerics.Container
+(func $$clinit__void_<once>_@cast.CastGenerics.Container
  ;;@ cast/CastGenerics.java:44:23
  (block
   ;;@ cast/CastGenerics.java:44:23
@@ -1254,7 +1254,7 @@
   ;;@ cast/CastGenerics.java:44:23
   (global.set $$class-initialized@cast.CastGenerics.Container (i32.const 1))
   ;;@ cast/CastGenerics.java:44:23
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -1306,7 +1306,7 @@
  (local $$instance (ref null $cast.CastGenerics.Foo))
  (block
   ;;@ cast/CastGenerics.java:137:22
-  (call $$clinit__void@cast.CastGenerics.Foo )
+  (call $$clinit__void_<once>_@cast.CastGenerics.Foo )
   ;;@ cast/CastGenerics.java:137:22
   (local.set $$instance (struct.new $cast.CastGenerics.Foo (ref.as_non_null (global.get $cast.CastGenerics.Foo.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ cast/CastGenerics.java:137:22
@@ -1327,7 +1327,7 @@
 )
 
 ;;; void Foo.$clinit()
-(func $$clinit__void@cast.CastGenerics.Foo
+(func $$clinit__void_<once>_@cast.CastGenerics.Foo
  ;;@ cast/CastGenerics.java:137:22
  (block
   ;;@ cast/CastGenerics.java:137:22
@@ -1340,7 +1340,7 @@
   ;;@ cast/CastGenerics.java:137:22
   (global.set $$class-initialized@cast.CastGenerics.Foo (i32.const 1))
   ;;@ cast/CastGenerics.java:137:22
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -1393,7 +1393,7 @@
  (local $$instance (ref null $cast.CastGenerics.1Nested))
  (block
   ;;@ cast/CastGenerics.java:114:10
-  (call $$clinit__void@cast.CastGenerics.1Nested )
+  (call $$clinit__void_<once>_@cast.CastGenerics.1Nested )
   ;;@ cast/CastGenerics.java:114:10
   (local.set $$instance (struct.new $cast.CastGenerics.1Nested (ref.as_non_null (global.get $cast.CastGenerics.1Nested.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $cast.CastGenerics)))
   ;;@ cast/CastGenerics.java:114:10
@@ -1429,7 +1429,7 @@
 )
 
 ;;; void Nested.$clinit()
-(func $$clinit__void@cast.CastGenerics.1Nested
+(func $$clinit__void_<once>_@cast.CastGenerics.1Nested
  ;;@ cast/CastGenerics.java:114:10
  (block
   ;;@ cast/CastGenerics.java:114:10
@@ -1442,7 +1442,7 @@
   ;;@ cast/CastGenerics.java:114:10
   (global.set $$class-initialized@cast.CastGenerics.1Nested (i32.const 1))
   ;;@ cast/CastGenerics.java:114:10
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -1494,7 +1494,7 @@
  (local $$instance (ref null $cast.CastPrimitives))
  (block
   ;;@ cast/CastPrimitives.java:18:13
-  (call $$clinit__void@cast.CastPrimitives )
+  (call $$clinit__void_<once>_@cast.CastPrimitives )
   ;;@ cast/CastPrimitives.java:18:13
   (local.set $$instance (struct.new $cast.CastPrimitives (ref.as_non_null (global.get $cast.CastPrimitives.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ cast/CastPrimitives.java:18:13
@@ -2086,7 +2086,7 @@
 (elem declare func $m_testImplicitLongAssignmentCasts__void@cast.CastPrimitives)
 
 ;;; void CastPrimitives.$clinit()
-(func $$clinit__void@cast.CastPrimitives
+(func $$clinit__void_<once>_@cast.CastPrimitives
  ;;@ cast/CastPrimitives.java:18:13
  (block
   ;;@ cast/CastPrimitives.java:18:13
@@ -2099,7 +2099,7 @@
   ;;@ cast/CastPrimitives.java:18:13
   (global.set $$class-initialized@cast.CastPrimitives (i32.const 1))
   ;;@ cast/CastPrimitives.java:18:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -2152,7 +2152,7 @@
  (local $$instance (ref null $cast.CastPrimitives.IntValueHolder))
  (block
   ;;@ cast/CastPrimitives.java:224:4
-  (call $$clinit__void@cast.CastPrimitives.IntValueHolder )
+  (call $$clinit__void_<once>_@cast.CastPrimitives.IntValueHolder )
   ;;@ cast/CastPrimitives.java:224:4
   (local.set $$instance (struct.new $cast.CastPrimitives.IntValueHolder (ref.as_non_null (global.get $cast.CastPrimitives.IntValueHolder.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ cast/CastPrimitives.java:224:4
@@ -2174,7 +2174,7 @@
 )
 
 ;;; void IntValueHolder.$clinit()
-(func $$clinit__void@cast.CastPrimitives.IntValueHolder
+(func $$clinit__void_<once>_@cast.CastPrimitives.IntValueHolder
  ;;@ cast/CastPrimitives.java:223:23
  (block
   ;;@ cast/CastPrimitives.java:223:23
@@ -2187,7 +2187,7 @@
   ;;@ cast/CastPrimitives.java:223:23
   (global.set $$class-initialized@cast.CastPrimitives.IntValueHolder (i32.const 1))
   ;;@ cast/CastPrimitives.java:223:23
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -2240,7 +2240,7 @@
  (local $$instance (ref null $cast.CastPrimitives.LongValueHolder))
  (block
   ;;@ cast/CastPrimitives.java:228:4
-  (call $$clinit__void@cast.CastPrimitives.LongValueHolder )
+  (call $$clinit__void_<once>_@cast.CastPrimitives.LongValueHolder )
   ;;@ cast/CastPrimitives.java:228:4
   (local.set $$instance (struct.new $cast.CastPrimitives.LongValueHolder (ref.as_non_null (global.get $cast.CastPrimitives.LongValueHolder.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ cast/CastPrimitives.java:228:4
@@ -2262,7 +2262,7 @@
 )
 
 ;;; void LongValueHolder.$clinit()
-(func $$clinit__void@cast.CastPrimitives.LongValueHolder
+(func $$clinit__void_<once>_@cast.CastPrimitives.LongValueHolder
  ;;@ cast/CastPrimitives.java:227:23
  (block
   ;;@ cast/CastPrimitives.java:227:23
@@ -2275,7 +2275,7 @@
   ;;@ cast/CastPrimitives.java:227:23
   (global.set $$class-initialized@cast.CastPrimitives.LongValueHolder (i32.const 1))
   ;;@ cast/CastPrimitives.java:227:23
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -2327,7 +2327,7 @@
  (local $$instance (ref null $cast.Casts))
  (block
   ;;@ cast/Casts.java:20:13
-  (call $$clinit__void@cast.Casts )
+  (call $$clinit__void_<once>_@cast.Casts )
   ;;@ cast/Casts.java:20:13
   (local.set $$instance (struct.new $cast.Casts (ref.as_non_null (global.get $cast.Casts.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ cast/Casts.java:20:13
@@ -2653,7 +2653,7 @@
 (elem declare func $m_testPrecedence__void@cast.Casts)
 
 ;;; void Casts.$clinit()
-(func $$clinit__void@cast.Casts
+(func $$clinit__void_<once>_@cast.Casts
  ;;@ cast/Casts.java:20:13
  (block
   ;;@ cast/Casts.java:20:13
@@ -2666,7 +2666,7 @@
   ;;@ cast/Casts.java:20:13
   (global.set $$class-initialized@cast.Casts (i32.const 1))
   ;;@ cast/Casts.java:20:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -2745,7 +2745,7 @@
  (local $$instance (ref null $cast.Casts.Foo))
  (block
   ;;@ cast/Casts.java:80:16
-  (call $$clinit__void@cast.Casts.Foo )
+  (call $$clinit__void_<once>_@cast.Casts.Foo )
   ;;@ cast/Casts.java:80:16
   (local.set $$instance (struct.new $cast.Casts.Foo (ref.as_non_null (global.get $cast.Casts.Foo.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $cast.Casts) (ref.null $java.lang.Object)))
   ;;@ cast/Casts.java:80:16
@@ -2796,7 +2796,7 @@
 )
 
 ;;; void Foo.$clinit()
-(func $$clinit__void@cast.Casts.Foo
+(func $$clinit__void_<once>_@cast.Casts.Foo
  ;;@ cast/Casts.java:80:16
  (block
   ;;@ cast/Casts.java:80:16
@@ -2809,7 +2809,7 @@
   ;;@ cast/Casts.java:80:16
   (global.set $$class-initialized@cast.Casts.Foo (i32.const 1))
   ;;@ cast/Casts.java:80:16
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -2861,7 +2861,7 @@
  (local $$instance (ref null $cast.CastGenerics.1))
  (block
   ;;@ cast/CastGenerics.java:134:24
-  (call $$clinit__void@cast.CastGenerics.1 )
+  (call $$clinit__void_<once>_@cast.CastGenerics.1 )
   ;;@ cast/CastGenerics.java:134:24
   (local.set $$instance (struct.new $cast.CastGenerics.1 (ref.as_non_null (global.get $cast.CastGenerics.1.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ cast/CastGenerics.java:134:24
@@ -2882,7 +2882,7 @@
 )
 
 ;;; void <anonymous> extends Foo<T>.$clinit()
-(func $$clinit__void@cast.CastGenerics.1
+(func $$clinit__void_<once>_@cast.CastGenerics.1
  ;;@ cast/CastGenerics.java:134:24
  (block
   ;;@ cast/CastGenerics.java:134:24
@@ -2895,7 +2895,7 @@
   ;;@ cast/CastGenerics.java:134:24
   (global.set $$class-initialized@cast.CastGenerics.1 (i32.const 1))
   ;;@ cast/CastGenerics.java:134:24
-  (call $$clinit__void@cast.CastGenerics.Foo )
+  (call $$clinit__void_<once>_@cast.CastGenerics.Foo )
  )
 )
 
@@ -2990,7 +2990,7 @@
 (elem declare func $m_mB__void@cast.CastGenerics.Implementor)
 
 ;;; void Implementor.$clinit()
-(func $$clinit__void@cast.CastGenerics.Implementor
+(func $$clinit__void_<once>_@cast.CastGenerics.Implementor
  ;;@ cast/CastGenerics.java:38:23
  (block
   ;;@ cast/CastGenerics.java:38:23
@@ -3003,7 +3003,7 @@
   ;;@ cast/CastGenerics.java:38:23
   (global.set $$class-initialized@cast.CastGenerics.Implementor (i32.const 1))
   ;;@ cast/CastGenerics.java:38:23
-  (call $$clinit__void@cast.CastGenerics.BaseImplementor )
+  (call $$clinit__void_<once>_@cast.CastGenerics.BaseImplementor )
  )
 )
 

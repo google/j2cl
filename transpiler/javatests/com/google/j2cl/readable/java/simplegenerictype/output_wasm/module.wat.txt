@@ -51,7 +51,7 @@
  (local $$instance (ref null $simplegenerictype.SimpleGenericType))
  (block
   ;;@ simplegenerictype/SimpleGenericType.java:22:9
-  (call $$clinit__void@simplegenerictype.SimpleGenericType )
+  (call $$clinit__void_<once>_@simplegenerictype.SimpleGenericType )
   ;;@ simplegenerictype/SimpleGenericType.java:22:9
   (local.set $$instance (struct.new $simplegenerictype.SimpleGenericType (ref.as_non_null (global.get $simplegenerictype.SimpleGenericType.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ simplegenerictype/SimpleGenericType.java:22:9
@@ -93,7 +93,7 @@
 (elem declare func $m_test__void@simplegenerictype.SimpleGenericType)
 
 ;;; void SimpleGenericType.$clinit()
-(func $$clinit__void@simplegenerictype.SimpleGenericType
+(func $$clinit__void_<once>_@simplegenerictype.SimpleGenericType
  ;;@ simplegenerictype/SimpleGenericType.java:18:13
  (block
   ;;@ simplegenerictype/SimpleGenericType.java:18:13
@@ -106,7 +106,7 @@
   ;;@ simplegenerictype/SimpleGenericType.java:18:13
   (global.set $$class-initialized@simplegenerictype.SimpleGenericType (i32.const 1))
   ;;@ simplegenerictype/SimpleGenericType.java:18:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 

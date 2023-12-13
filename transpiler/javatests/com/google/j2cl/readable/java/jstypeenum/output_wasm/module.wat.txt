@@ -143,7 +143,7 @@
  ;;@ jstypeenum/Color.java:21:12
  (block
   ;;@ jstypeenum/Color.java:21:12
-  (call $$clinit__void@jstypeenum.Color )
+  (call $$clinit__void_<once>_@jstypeenum.Color )
   ;;@ jstypeenum/Color.java:21:12
   (if (ref.is_null (global.get $namesToValuesMap@jstypeenum.Color))
    (then
@@ -164,14 +164,14 @@
  ;;@ jstypeenum/Color.java:21:12
  (block
   ;;@ jstypeenum/Color.java:21:12
-  (call $$clinit__void@jstypeenum.Color )
+  (call $$clinit__void_<once>_@jstypeenum.Color )
   ;;@ jstypeenum/Color.java:21:12
   (return (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array (global.get $RED@jstypeenum.Color)(global.get $GREEN@jstypeenum.Color)(global.get $BLUE@jstypeenum.Color))))
  )
 )
 
 ;;; void Color.$clinit()
-(func $$clinit__void@jstypeenum.Color
+(func $$clinit__void_<once>_@jstypeenum.Color
  ;;@ jstypeenum/Color.java:21:12
  (block
   ;;@ jstypeenum/Color.java:21:12
@@ -184,7 +184,7 @@
   ;;@ jstypeenum/Color.java:21:12
   (global.set $$class-initialized@jstypeenum.Color (i32.const 1))
   ;;@ jstypeenum/Color.java:21:12
-  (call $$clinit__void@java.lang.Enum )
+  (call $$clinit__void_<once>_@java.lang.Enum )
   ;;@ jstypeenum/Color.java:22:2
   (global.set $RED@jstypeenum.Color (call $$create__java_lang_String__int@jstypeenum.Color (call $function.no.side.effects.$getString_|RED|__java_lang_String (ref.func $$getString_|RED|__java_lang_String@jstypeenum.Color) )(i32.const 0)))
   ;;@ jstypeenum/Color.java:23:2

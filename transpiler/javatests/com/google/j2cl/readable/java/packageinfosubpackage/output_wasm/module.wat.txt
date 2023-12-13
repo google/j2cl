@@ -111,7 +111,7 @@
 ;;; Code for packageinfosubpackage.Foo.NativeBar.$Overlay [methods]
 
 ;;; void $Overlay.$clinit()
-(func $$clinit__void@packageinfosubpackage.Foo.NativeBar.$Overlay
+(func $$clinit__void_<once>_@packageinfosubpackage.Foo.NativeBar.$Overlay
  ;;@ packageinfosubpackage/Foo.java:23:23
  (block
   ;;@ packageinfosubpackage/Foo.java:23:23
@@ -174,7 +174,7 @@
  (local $$instance (ref null $packageinfosubpackage.Foo))
  (block
   ;;@ packageinfosubpackage/Foo.java:20:13
-  (call $$clinit__void@packageinfosubpackage.Foo )
+  (call $$clinit__void_<once>_@packageinfosubpackage.Foo )
   ;;@ packageinfosubpackage/Foo.java:20:13
   (local.set $$instance (struct.new $packageinfosubpackage.Foo (ref.as_non_null (global.get $packageinfosubpackage.Foo.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null extern)))
   ;;@ packageinfosubpackage/Foo.java:20:13
@@ -207,7 +207,7 @@
 )
 
 ;;; void Foo.$clinit()
-(func $$clinit__void@packageinfosubpackage.Foo
+(func $$clinit__void_<once>_@packageinfosubpackage.Foo
  ;;@ packageinfosubpackage/Foo.java:20:13
  (block
   ;;@ packageinfosubpackage/Foo.java:20:13
@@ -220,7 +220,7 @@
   ;;@ packageinfosubpackage/Foo.java:20:13
   (global.set $$class-initialized@packageinfosubpackage.Foo (i32.const 1))
   ;;@ packageinfosubpackage/Foo.java:20:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -279,7 +279,7 @@
  (local $$instance (ref null $packageinfosubpackage.subpackage.Bar))
  (block
   ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
-  (call $$clinit__void@packageinfosubpackage.subpackage.Bar )
+  (call $$clinit__void_<once>_@packageinfosubpackage.subpackage.Bar )
   ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
   (local.set $$instance (struct.new $packageinfosubpackage.subpackage.Bar (ref.as_non_null (global.get $packageinfosubpackage.subpackage.Bar.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
@@ -300,7 +300,7 @@
 )
 
 ;;; void Bar.$clinit()
-(func $$clinit__void@packageinfosubpackage.subpackage.Bar
+(func $$clinit__void_<once>_@packageinfosubpackage.subpackage.Bar
  ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
  (block
   ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
@@ -313,7 +313,7 @@
   ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
   (global.set $$class-initialized@packageinfosubpackage.subpackage.Bar (i32.const 1))
   ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 

@@ -128,7 +128,7 @@
  (local $$instance (ref null $jsinnerclass.Main))
  (block
   ;;@ jsinnerclass/Main.java:20:13
-  (call $$clinit__void@jsinnerclass.Main )
+  (call $$clinit__void_<once>_@jsinnerclass.Main )
   ;;@ jsinnerclass/Main.java:20:13
   (local.set $$instance (struct.new $jsinnerclass.Main (ref.as_non_null (global.get $jsinnerclass.Main.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ jsinnerclass/Main.java:20:13
@@ -154,12 +154,12 @@
  ;;@ jsinnerclass/Main.java:42:21
  (block
   ;;@ jsinnerclass/Main.java:42:42
-  (call $$clinit__void@jsinnerclass.Main )
+  (call $$clinit__void_<once>_@jsinnerclass.Main )
  )
 )
 
 ;;; void Main.$clinit()
-(func $$clinit__void@jsinnerclass.Main
+(func $$clinit__void_<once>_@jsinnerclass.Main
  ;;@ jsinnerclass/Main.java:20:13
  (block
   ;;@ jsinnerclass/Main.java:20:13
@@ -172,7 +172,7 @@
   ;;@ jsinnerclass/Main.java:20:13
   (global.set $$class-initialized@jsinnerclass.Main (i32.const 1))
   ;;@ jsinnerclass/Main.java:20:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -225,7 +225,7 @@
  (local $$instance (ref null $jsinnerclass.Main.Outer.Inner))
  (block
   ;;@ jsinnerclass/Main.java:28:13
-  (call $$clinit__void@jsinnerclass.Main.Outer.Inner )
+  (call $$clinit__void_<once>_@jsinnerclass.Main.Outer.Inner )
   ;;@ jsinnerclass/Main.java:28:13
   (local.set $$instance (struct.new $jsinnerclass.Main.Outer.Inner (ref.as_non_null (global.get $jsinnerclass.Main.Outer.Inner.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $jsinnerclass.Main.Outer) (i32.const 0)))
   ;;@ jsinnerclass/Main.java:28:13
@@ -266,7 +266,7 @@
 (elem declare func $m_getB__int@jsinnerclass.Main.Outer.Inner)
 
 ;;; void Inner.$clinit()
-(func $$clinit__void@jsinnerclass.Main.Outer.Inner
+(func $$clinit__void_<once>_@jsinnerclass.Main.Outer.Inner
  ;;@ jsinnerclass/Main.java:25:17
  (block
   ;;@ jsinnerclass/Main.java:25:17
@@ -279,7 +279,7 @@
   ;;@ jsinnerclass/Main.java:25:17
   (global.set $$class-initialized@jsinnerclass.Main.Outer.Inner (i32.const 1))
   ;;@ jsinnerclass/Main.java:25:17
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -331,7 +331,7 @@
  (local $$instance (ref null $jsinnerclass.Main.Outer))
  (block
   ;;@ jsinnerclass/Main.java:21:15
-  (call $$clinit__void@jsinnerclass.Main.Outer )
+  (call $$clinit__void_<once>_@jsinnerclass.Main.Outer )
   ;;@ jsinnerclass/Main.java:21:15
   (local.set $$instance (struct.new $jsinnerclass.Main.Outer (ref.as_non_null (global.get $jsinnerclass.Main.Outer.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
   ;;@ jsinnerclass/Main.java:21:15
@@ -383,7 +383,7 @@
 )
 
 ;;; void Outer.$clinit()
-(func $$clinit__void@jsinnerclass.Main.Outer
+(func $$clinit__void_<once>_@jsinnerclass.Main.Outer
  ;;@ jsinnerclass/Main.java:21:15
  (block
   ;;@ jsinnerclass/Main.java:21:15
@@ -396,7 +396,7 @@
   ;;@ jsinnerclass/Main.java:21:15
   (global.set $$class-initialized@jsinnerclass.Main.Outer (i32.const 1))
   ;;@ jsinnerclass/Main.java:21:15
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 

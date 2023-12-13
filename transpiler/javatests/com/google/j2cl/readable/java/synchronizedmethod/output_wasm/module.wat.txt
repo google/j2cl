@@ -55,7 +55,7 @@
  (local $$instance (ref null $synchronizedmethod.SynchronizedMethod))
  (block
   ;;@ synchronizedmethod/SynchronizedMethod.java:18:13
-  (call $$clinit__void@synchronizedmethod.SynchronizedMethod )
+  (call $$clinit__void_<once>_@synchronizedmethod.SynchronizedMethod )
   ;;@ synchronizedmethod/SynchronizedMethod.java:18:13
   (local.set $$instance (struct.new $synchronizedmethod.SynchronizedMethod (ref.as_non_null (global.get $synchronizedmethod.SynchronizedMethod.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (i32.const 0)))
   ;;@ synchronizedmethod/SynchronizedMethod.java:18:13
@@ -96,7 +96,7 @@
  ;;@ synchronizedmethod/SynchronizedMethod.java:30:34
  (block
   ;;@ synchronizedmethod/SynchronizedMethod.java:30:49
-  (call $$clinit__void@synchronizedmethod.SynchronizedMethod )
+  (call $$clinit__void_<once>_@synchronizedmethod.SynchronizedMethod )
   ;;@ synchronizedmethod/SynchronizedMethod.java:31:4
   (global.set $sa@synchronizedmethod.SynchronizedMethod (i32.add (global.get $sa@synchronizedmethod.SynchronizedMethod) (i32.const 1)))
   ;;@ synchronizedmethod/SynchronizedMethod.java:32:4
@@ -105,7 +105,7 @@
 )
 
 ;;; void SynchronizedMethod.$clinit()
-(func $$clinit__void@synchronizedmethod.SynchronizedMethod
+(func $$clinit__void_<once>_@synchronizedmethod.SynchronizedMethod
  ;;@ synchronizedmethod/SynchronizedMethod.java:18:13
  (block
   ;;@ synchronizedmethod/SynchronizedMethod.java:18:13
@@ -118,7 +118,7 @@
   ;;@ synchronizedmethod/SynchronizedMethod.java:18:13
   (global.set $$class-initialized@synchronizedmethod.SynchronizedMethod (i32.const 1))
   ;;@ synchronizedmethod/SynchronizedMethod.java:18:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 

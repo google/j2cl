@@ -293,7 +293,7 @@
 ;;; Code for packageprivatemethods.package1.Interface [methods]
 
 ;;; void Interface.$clinit()
-(func $$clinit__void@packageprivatemethods.package1.Interface
+(func $$clinit__void_<once>_@packageprivatemethods.package1.Interface
  ;;@ packageprivatemethods/package1/Interface.java:18:17
  (block
   ;;@ packageprivatemethods/package1/Interface.java:18:17
@@ -343,7 +343,7 @@
  (local $$instance (ref null $packageprivatemethods.package1.SuperParent))
  (block
   ;;@ packageprivatemethods/package1/SuperParent.java:18:13
-  (call $$clinit__void@packageprivatemethods.package1.SuperParent )
+  (call $$clinit__void_<once>_@packageprivatemethods.package1.SuperParent )
   ;;@ packageprivatemethods/package1/SuperParent.java:18:13
   (local.set $$instance (struct.new $packageprivatemethods.package1.SuperParent (ref.as_non_null (global.get $packageprivatemethods.package1.SuperParent.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ packageprivatemethods/package1/SuperParent.java:18:13
@@ -432,7 +432,7 @@
 (elem declare func $m_exposedAbstractInParent__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent)
 
 ;;; void SuperParent.$clinit()
-(func $$clinit__void@packageprivatemethods.package1.SuperParent
+(func $$clinit__void_<once>_@packageprivatemethods.package1.SuperParent
  ;;@ packageprivatemethods/package1/SuperParent.java:18:13
  (block
   ;;@ packageprivatemethods/package1/SuperParent.java:18:13
@@ -445,7 +445,7 @@
   ;;@ packageprivatemethods/package1/SuperParent.java:18:13
   (global.set $$class-initialized@packageprivatemethods.package1.SuperParent (i32.const 1))
   ;;@ packageprivatemethods/package1/SuperParent.java:18:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -535,7 +535,7 @@
 (elem declare func $m_exposedAbstractInParent__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Parent)
 
 ;;; void Parent.$clinit()
-(func $$clinit__void@packageprivatemethods.package1.Parent
+(func $$clinit__void_<once>_@packageprivatemethods.package1.Parent
  ;;@ packageprivatemethods/package1/Parent.java:18:22
  (block
   ;;@ packageprivatemethods/package1/Parent.java:18:22
@@ -548,7 +548,7 @@
   ;;@ packageprivatemethods/package1/Parent.java:18:22
   (global.set $$class-initialized@packageprivatemethods.package1.Parent (i32.const 1))
   ;;@ packageprivatemethods/package1/Parent.java:18:22
-  (call $$clinit__void@packageprivatemethods.package1.SuperParent )
+  (call $$clinit__void_<once>_@packageprivatemethods.package1.SuperParent )
  )
 )
 
@@ -587,7 +587,7 @@
  (local $$instance (ref null $packageprivatemethods.package1.Child))
  (block
   ;;@ packageprivatemethods/package1/Child.java:18:13
-  (call $$clinit__void@packageprivatemethods.package1.Child )
+  (call $$clinit__void_<once>_@packageprivatemethods.package1.Child )
   ;;@ packageprivatemethods/package1/Child.java:18:13
   (local.set $$instance (struct.new $packageprivatemethods.package1.Child (ref.as_non_null (global.get $packageprivatemethods.package1.Child.vtable)) (ref.as_non_null (global.get $packageprivatemethods.package1.Child.itable)) (i32.const 0)))
   ;;@ packageprivatemethods/package1/Child.java:18:13
@@ -726,7 +726,7 @@
 (elem declare func $m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child)
 
 ;;; void Child.$clinit()
-(func $$clinit__void@packageprivatemethods.package1.Child
+(func $$clinit__void_<once>_@packageprivatemethods.package1.Child
  ;;@ packageprivatemethods/package1/Child.java:18:13
  (block
   ;;@ packageprivatemethods/package1/Child.java:18:13
@@ -739,7 +739,7 @@
   ;;@ packageprivatemethods/package1/Child.java:18:13
   (global.set $$class-initialized@packageprivatemethods.package1.Child (i32.const 1))
   ;;@ packageprivatemethods/package1/Child.java:18:13
-  (call $$clinit__void@packageprivatemethods.package1.Parent )
+  (call $$clinit__void_<once>_@packageprivatemethods.package1.Parent )
  )
 )
 
@@ -811,7 +811,7 @@
 (elem declare func $m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package2@packageprivatemethods.package2.SubParent)
 
 ;;; void SubParent.$clinit()
-(func $$clinit__void@packageprivatemethods.package2.SubParent
+(func $$clinit__void_<once>_@packageprivatemethods.package2.SubParent
  ;;@ packageprivatemethods/package2/SubParent.java:20:22
  (block
   ;;@ packageprivatemethods/package2/SubParent.java:20:22
@@ -824,7 +824,7 @@
   ;;@ packageprivatemethods/package2/SubParent.java:20:22
   (global.set $$class-initialized@packageprivatemethods.package2.SubParent (i32.const 1))
   ;;@ packageprivatemethods/package2/SubParent.java:20:22
-  (call $$clinit__void@packageprivatemethods.package1.Parent )
+  (call $$clinit__void_<once>_@packageprivatemethods.package1.Parent )
  )
 )
 
@@ -863,7 +863,7 @@
  (local $$instance (ref null $packageprivatemethods.package2.SubChild))
  (block
   ;;@ packageprivatemethods/package2/SubChild.java:20:13
-  (call $$clinit__void@packageprivatemethods.package2.SubChild )
+  (call $$clinit__void_<once>_@packageprivatemethods.package2.SubChild )
   ;;@ packageprivatemethods/package2/SubChild.java:20:13
   (local.set $$instance (struct.new $packageprivatemethods.package2.SubChild (ref.as_non_null (global.get $packageprivatemethods.package2.SubChild.vtable)) (ref.as_non_null (global.get $packageprivatemethods.package2.SubChild.itable)) (i32.const 0)))
   ;;@ packageprivatemethods/package2/SubChild.java:20:13
@@ -900,7 +900,7 @@
 (elem declare func $m_overrideInParentExposedInChild__int__int@packageprivatemethods.package2.SubChild)
 
 ;;; void SubChild.$clinit()
-(func $$clinit__void@packageprivatemethods.package2.SubChild
+(func $$clinit__void_<once>_@packageprivatemethods.package2.SubChild
  ;;@ packageprivatemethods/package2/SubChild.java:20:13
  (block
   ;;@ packageprivatemethods/package2/SubChild.java:20:13
@@ -913,7 +913,7 @@
   ;;@ packageprivatemethods/package2/SubChild.java:20:13
   (global.set $$class-initialized@packageprivatemethods.package2.SubChild (i32.const 1))
   ;;@ packageprivatemethods/package2/SubChild.java:20:13
-  (call $$clinit__void@packageprivatemethods.package1.Child )
+  (call $$clinit__void_<once>_@packageprivatemethods.package1.Child )
  )
 )
 

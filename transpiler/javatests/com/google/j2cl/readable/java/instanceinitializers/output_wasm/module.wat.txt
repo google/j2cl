@@ -46,7 +46,7 @@
  (local $$instance (ref null $instanceinitializers.InstanceInitializers))
  (block
   ;;@ instanceinitializers/InstanceInitializers.java:18:13
-  (call $$clinit__void@instanceinitializers.InstanceInitializers )
+  (call $$clinit__void_<once>_@instanceinitializers.InstanceInitializers )
   ;;@ instanceinitializers/InstanceInitializers.java:18:13
   (local.set $$instance (struct.new $instanceinitializers.InstanceInitializers (ref.as_non_null (global.get $instanceinitializers.InstanceInitializers.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
   ;;@ instanceinitializers/InstanceInitializers.java:18:13
@@ -81,7 +81,7 @@
 )
 
 ;;; void InstanceInitializers.$clinit()
-(func $$clinit__void@instanceinitializers.InstanceInitializers
+(func $$clinit__void_<once>_@instanceinitializers.InstanceInitializers
  ;;@ instanceinitializers/InstanceInitializers.java:18:13
  (block
   ;;@ instanceinitializers/InstanceInitializers.java:18:13
@@ -94,7 +94,7 @@
   ;;@ instanceinitializers/InstanceInitializers.java:18:13
   (global.set $$class-initialized@instanceinitializers.InstanceInitializers (i32.const 1))
   ;;@ instanceinitializers/InstanceInitializers.java:18:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 

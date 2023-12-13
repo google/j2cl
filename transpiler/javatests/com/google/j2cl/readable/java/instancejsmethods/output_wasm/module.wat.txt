@@ -218,7 +218,7 @@
 ;;; Code for instancejsmethods.MyInterface [methods]
 
 ;;; void MyInterface.$clinit()
-(func $$clinit__void@instancejsmethods.MyInterface
+(func $$clinit__void_<once>_@instancejsmethods.MyInterface
  ;;@ instancejsmethods/Main.java:20:10
  (block
   ;;@ instancejsmethods/Main.java:20:10
@@ -268,7 +268,7 @@
  (local $$instance (ref null $instancejsmethods.SuperParent))
  (block
   ;;@ instancejsmethods/Main.java:24:6
-  (call $$clinit__void@instancejsmethods.SuperParent )
+  (call $$clinit__void_<once>_@instancejsmethods.SuperParent )
   ;;@ instancejsmethods/Main.java:24:6
   (local.set $$instance (struct.new $instancejsmethods.SuperParent (ref.as_non_null (global.get $instancejsmethods.SuperParent.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ instancejsmethods/Main.java:24:6
@@ -323,7 +323,7 @@
 (elem declare func $m_bar__int__int__int@instancejsmethods.SuperParent)
 
 ;;; void SuperParent.$clinit()
-(func $$clinit__void@instancejsmethods.SuperParent
+(func $$clinit__void_<once>_@instancejsmethods.SuperParent
  ;;@ instancejsmethods/Main.java:24:6
  (block
   ;;@ instancejsmethods/Main.java:24:6
@@ -336,7 +336,7 @@
   ;;@ instancejsmethods/Main.java:24:6
   (global.set $$class-initialized@instancejsmethods.SuperParent (i32.const 1))
   ;;@ instancejsmethods/Main.java:24:6
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -388,7 +388,7 @@
  (local $$instance (ref null $instancejsmethods.Main))
  (block
   ;;@ instancejsmethods/Main.java:114:13
-  (call $$clinit__void@instancejsmethods.Main )
+  (call $$clinit__void_<once>_@instancejsmethods.Main )
   ;;@ instancejsmethods/Main.java:114:13
   (local.set $$instance (struct.new $instancejsmethods.Main (ref.as_non_null (global.get $instancejsmethods.Main.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ instancejsmethods/Main.java:114:13
@@ -464,7 +464,7 @@
  (local $c (ref null $instancejsmethods.Child))
  (block
   ;;@ instancejsmethods/Main.java:134:46
-  (call $$clinit__void@instancejsmethods.Main )
+  (call $$clinit__void_<once>_@instancejsmethods.Main )
   ;;@ instancejsmethods/Main.java:135:4
   (local.set $sp (call $$create__@instancejsmethods.SuperParent ))
   ;;@ instancejsmethods/Main.java:136:4
@@ -493,7 +493,7 @@
 )
 
 ;;; void Main.$clinit()
-(func $$clinit__void@instancejsmethods.Main
+(func $$clinit__void_<once>_@instancejsmethods.Main
  ;;@ instancejsmethods/Main.java:114:13
  (block
   ;;@ instancejsmethods/Main.java:114:13
@@ -506,7 +506,7 @@
   ;;@ instancejsmethods/Main.java:114:13
   (global.set $$class-initialized@instancejsmethods.Main (i32.const 1))
   ;;@ instancejsmethods/Main.java:114:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -558,7 +558,7 @@
  (local $$instance (ref null $instancejsmethods.Parent))
  (block
   ;;@ instancejsmethods/Main.java:34:6
-  (call $$clinit__void@instancejsmethods.Parent )
+  (call $$clinit__void_<once>_@instancejsmethods.Parent )
   ;;@ instancejsmethods/Main.java:34:6
   (local.set $$instance (struct.new $instancejsmethods.Parent (ref.as_non_null (global.get $instancejsmethods.Parent.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ instancejsmethods/Main.java:34:6
@@ -629,7 +629,7 @@
 (elem declare func $m_foo__int__int@instancejsmethods.Parent)
 
 ;;; void Parent.$clinit()
-(func $$clinit__void@instancejsmethods.Parent
+(func $$clinit__void_<once>_@instancejsmethods.Parent
  ;;@ instancejsmethods/Main.java:34:6
  (block
   ;;@ instancejsmethods/Main.java:34:6
@@ -642,7 +642,7 @@
   ;;@ instancejsmethods/Main.java:34:6
   (global.set $$class-initialized@instancejsmethods.Parent (i32.const 1))
   ;;@ instancejsmethods/Main.java:34:6
-  (call $$clinit__void@instancejsmethods.SuperParent )
+  (call $$clinit__void_<once>_@instancejsmethods.SuperParent )
  )
 )
 
@@ -694,7 +694,7 @@
  (local $$instance (ref null $instancejsmethods.Child))
  (block
   ;;@ instancejsmethods/Main.java:68:6
-  (call $$clinit__void@instancejsmethods.Child )
+  (call $$clinit__void_<once>_@instancejsmethods.Child )
   ;;@ instancejsmethods/Main.java:68:6
   (local.set $$instance (struct.new $instancejsmethods.Child (ref.as_non_null (global.get $instancejsmethods.Child.vtable)) (ref.as_non_null (global.get $instancejsmethods.Child.itable)) (i32.const 0)))
   ;;@ instancejsmethods/Main.java:68:6
@@ -780,7 +780,7 @@
 (elem declare func $m_intfFoo__int@instancejsmethods.Child)
 
 ;;; void Child.$clinit()
-(func $$clinit__void@instancejsmethods.Child
+(func $$clinit__void_<once>_@instancejsmethods.Child
  ;;@ instancejsmethods/Main.java:68:6
  (block
   ;;@ instancejsmethods/Main.java:68:6
@@ -793,7 +793,7 @@
   ;;@ instancejsmethods/Main.java:68:6
   (global.set $$class-initialized@instancejsmethods.Child (i32.const 1))
   ;;@ instancejsmethods/Main.java:68:6
-  (call $$clinit__void@instancejsmethods.Parent )
+  (call $$clinit__void_<once>_@instancejsmethods.Parent )
  )
 )
 

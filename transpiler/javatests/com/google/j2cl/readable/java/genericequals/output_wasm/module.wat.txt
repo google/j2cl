@@ -50,7 +50,7 @@
  (local $$instance (ref null $genericequals.GenericEquals))
  (block
   ;;@ genericequals/GenericEquals.java:23:9
-  (call $$clinit__void@genericequals.GenericEquals )
+  (call $$clinit__void_<once>_@genericequals.GenericEquals )
   ;;@ genericequals/GenericEquals.java:23:9
   (local.set $$instance (struct.new $genericequals.GenericEquals (ref.as_non_null (global.get $genericequals.GenericEquals.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $genericequals.GenericEquals) (ref.null $java.lang.Object)))
   ;;@ genericequals/GenericEquals.java:23:9
@@ -129,7 +129,7 @@
 (elem declare func $m_equals__java_lang_Object__boolean@genericequals.GenericEquals)
 
 ;;; void GenericEquals.$clinit()
-(func $$clinit__void@genericequals.GenericEquals
+(func $$clinit__void_<once>_@genericequals.GenericEquals
  ;;@ genericequals/GenericEquals.java:18:13
  (block
   ;;@ genericequals/GenericEquals.java:18:13
@@ -142,7 +142,7 @@
   ;;@ genericequals/GenericEquals.java:18:13
   (global.set $$class-initialized@genericequals.GenericEquals (i32.const 1))
   ;;@ genericequals/GenericEquals.java:18:13
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 

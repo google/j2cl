@@ -469,7 +469,7 @@
 (elem declare func $m_defaultGrandParent__void@supermethodcall.GrandParentInterface)
 
 ;;; void GrandParentInterface.$clinit()
-(func $$clinit__void@supermethodcall.GrandParentInterface
+(func $$clinit__void_<once>_@supermethodcall.GrandParentInterface
  ;;@ supermethodcall/Child.java:18:10
  (block
   ;;@ supermethodcall/Child.java:18:10
@@ -522,7 +522,7 @@
 (elem declare func $m_defaultParent__void@supermethodcall.ParentInterface)
 
 ;;; void ParentInterface.$clinit()
-(func $$clinit__void@supermethodcall.ParentInterface
+(func $$clinit__void_<once>_@supermethodcall.ParentInterface
  ;;@ supermethodcall/Child.java:22:10
  (block
   ;;@ supermethodcall/Child.java:22:10
@@ -575,7 +575,7 @@
 (elem declare func $m_m__void@supermethodcall.I1)
 
 ;;; void I1.$clinit()
-(func $$clinit__void@supermethodcall.I1
+(func $$clinit__void_<once>_@supermethodcall.I1
  ;;@ supermethodcall/Child.java:98:10
  (block
   ;;@ supermethodcall/Child.java:98:10
@@ -619,7 +619,7 @@
 ;;; Code for supermethodcall.I2 [methods]
 
 ;;; void I2.$clinit()
-(func $$clinit__void@supermethodcall.I2
+(func $$clinit__void_<once>_@supermethodcall.I2
  ;;@ supermethodcall/Child.java:102:10
  (block
   ;;@ supermethodcall/Child.java:102:10
@@ -663,7 +663,7 @@
 ;;; Code for supermethodcall.I3 [methods]
 
 ;;; void I3.$clinit()
-(func $$clinit__void@supermethodcall.I3
+(func $$clinit__void_<once>_@supermethodcall.I3
  ;;@ supermethodcall/Child.java:106:10
  (block
   ;;@ supermethodcall/Child.java:106:10
@@ -676,7 +676,7 @@
   ;;@ supermethodcall/Child.java:106:10
   (global.set $$class-initialized@supermethodcall.I3 (i32.const 1))
   ;;@ supermethodcall/Child.java:106:10
-  (call $$clinit__void@supermethodcall.I1 )
+  (call $$clinit__void_<once>_@supermethodcall.I1 )
  )
 )
 
@@ -715,7 +715,7 @@
  (local $$instance (ref null $supermethodcall.GrandParent))
  (block
   ;;@ supermethodcall/Child.java:26:6
-  (call $$clinit__void@supermethodcall.GrandParent )
+  (call $$clinit__void_<once>_@supermethodcall.GrandParent )
   ;;@ supermethodcall/Child.java:26:6
   (local.set $$instance (struct.new $supermethodcall.GrandParent (ref.as_non_null (global.get $supermethodcall.GrandParent.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ supermethodcall/Child.java:26:6
@@ -800,7 +800,7 @@
 (elem declare func $m_defaultGrandParent__void@supermethodcall.GrandParent)
 
 ;;; void GrandParent.$clinit()
-(func $$clinit__void@supermethodcall.GrandParent
+(func $$clinit__void_<once>_@supermethodcall.GrandParent
  ;;@ supermethodcall/Child.java:26:6
  (block
   ;;@ supermethodcall/Child.java:26:6
@@ -813,7 +813,7 @@
   ;;@ supermethodcall/Child.java:26:6
   (global.set $$class-initialized@supermethodcall.GrandParent (i32.const 1))
   ;;@ supermethodcall/Child.java:26:6
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -865,7 +865,7 @@
  (local $$instance (ref null $supermethodcall.Super))
  (block
   ;;@ supermethodcall/Child.java:108:6
-  (call $$clinit__void@supermethodcall.Super )
+  (call $$clinit__void_<once>_@supermethodcall.Super )
   ;;@ supermethodcall/Child.java:108:6
   (local.set $$instance (struct.new $supermethodcall.Super (ref.as_non_null (global.get $supermethodcall.Super.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ supermethodcall/Child.java:108:6
@@ -898,7 +898,7 @@
 (elem declare func $m_m__void@supermethodcall.Super)
 
 ;;; void Super.$clinit()
-(func $$clinit__void@supermethodcall.Super
+(func $$clinit__void_<once>_@supermethodcall.Super
  ;;@ supermethodcall/Child.java:108:6
  (block
   ;;@ supermethodcall/Child.java:108:6
@@ -911,7 +911,7 @@
   ;;@ supermethodcall/Child.java:108:6
   (global.set $$class-initialized@supermethodcall.Super (i32.const 1))
   ;;@ supermethodcall/Child.java:108:6
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
@@ -996,7 +996,7 @@
 (elem declare func $m_m__void@supermethodcall.SuperToStringTest)
 
 ;;; void SuperToStringTest.$clinit()
-(func $$clinit__void@supermethodcall.SuperToStringTest
+(func $$clinit__void_<once>_@supermethodcall.SuperToStringTest
  ;;@ supermethodcall/Child.java:118:15
  (block
   ;;@ supermethodcall/Child.java:118:15
@@ -1009,9 +1009,9 @@
   ;;@ supermethodcall/Child.java:118:15
   (global.set $$class-initialized@supermethodcall.SuperToStringTest (i32.const 1))
   ;;@ supermethodcall/Child.java:118:15
-  (call $$clinit__void@java.lang.Object )
+  (call $$clinit__void_<once>_@java.lang.Object )
   ;;@ supermethodcall/Child.java:118:15
-  (call $$clinit__void@supermethodcall.I1 )
+  (call $$clinit__void_<once>_@supermethodcall.I1 )
  )
 )
 
@@ -1050,7 +1050,7 @@
  (local $$instance (ref null $supermethodcall.Parent))
  (block
   ;;@ supermethodcall/Child.java:41:6
-  (call $$clinit__void@supermethodcall.Parent )
+  (call $$clinit__void_<once>_@supermethodcall.Parent )
   ;;@ supermethodcall/Child.java:41:6
   (local.set $$instance (struct.new $supermethodcall.Parent (ref.as_non_null (global.get $supermethodcall.Parent.vtable)) (ref.as_non_null (global.get $supermethodcall.Parent.itable)) (i32.const 0)))
   ;;@ supermethodcall/Child.java:41:6
@@ -1127,7 +1127,7 @@
 (elem declare func $m_defaultParent__void@supermethodcall.Parent)
 
 ;;; void Parent.$clinit()
-(func $$clinit__void@supermethodcall.Parent
+(func $$clinit__void_<once>_@supermethodcall.Parent
  ;;@ supermethodcall/Child.java:41:6
  (block
   ;;@ supermethodcall/Child.java:41:6
@@ -1140,9 +1140,9 @@
   ;;@ supermethodcall/Child.java:41:6
   (global.set $$class-initialized@supermethodcall.Parent (i32.const 1))
   ;;@ supermethodcall/Child.java:41:6
-  (call $$clinit__void@supermethodcall.GrandParent )
+  (call $$clinit__void_<once>_@supermethodcall.GrandParent )
   ;;@ supermethodcall/Child.java:41:6
-  (call $$clinit__void@supermethodcall.ParentInterface )
+  (call $$clinit__void_<once>_@supermethodcall.ParentInterface )
  )
 )
 
@@ -1194,7 +1194,7 @@
  (local $$instance (ref null $supermethodcall.Sub))
  (block
   ;;@ supermethodcall/Child.java:112:6
-  (call $$clinit__void@supermethodcall.Sub )
+  (call $$clinit__void_<once>_@supermethodcall.Sub )
   ;;@ supermethodcall/Child.java:112:6
   (local.set $$instance (struct.new $supermethodcall.Sub (ref.as_non_null (global.get $supermethodcall.Sub.vtable)) (ref.as_non_null (global.get $supermethodcall.Sub.itable)) (i32.const 0)))
   ;;@ supermethodcall/Child.java:112:6
@@ -1229,7 +1229,7 @@
 (elem declare func $m_m__void@supermethodcall.Sub)
 
 ;;; void Sub.$clinit()
-(func $$clinit__void@supermethodcall.Sub
+(func $$clinit__void_<once>_@supermethodcall.Sub
  ;;@ supermethodcall/Child.java:112:6
  (block
   ;;@ supermethodcall/Child.java:112:6
@@ -1242,9 +1242,9 @@
   ;;@ supermethodcall/Child.java:112:6
   (global.set $$class-initialized@supermethodcall.Sub (i32.const 1))
   ;;@ supermethodcall/Child.java:112:6
-  (call $$clinit__void@supermethodcall.Super )
+  (call $$clinit__void_<once>_@supermethodcall.Super )
   ;;@ supermethodcall/Child.java:112:6
-  (call $$clinit__void@supermethodcall.I1 )
+  (call $$clinit__void_<once>_@supermethodcall.I1 )
  )
 )
 
@@ -1296,7 +1296,7 @@
  (local $$instance (ref null $supermethodcall.Child))
  (block
   ;;@ supermethodcall/Child.java:58:13
-  (call $$clinit__void@supermethodcall.Child )
+  (call $$clinit__void_<once>_@supermethodcall.Child )
   ;;@ supermethodcall/Child.java:58:13
   (local.set $$instance (struct.new $supermethodcall.Child (ref.as_non_null (global.get $supermethodcall.Child.vtable)) (ref.as_non_null (global.get $supermethodcall.Child.itable)) (i32.const 0)))
   ;;@ supermethodcall/Child.java:58:13
@@ -1455,7 +1455,7 @@
 (elem declare func $m_parentWithChangingReturn__java_lang_Object@supermethodcall.Child)
 
 ;;; void Child.$clinit()
-(func $$clinit__void@supermethodcall.Child
+(func $$clinit__void_<once>_@supermethodcall.Child
  ;;@ supermethodcall/Child.java:58:13
  (block
   ;;@ supermethodcall/Child.java:58:13
@@ -1468,9 +1468,9 @@
   ;;@ supermethodcall/Child.java:58:13
   (global.set $$class-initialized@supermethodcall.Child (i32.const 1))
   ;;@ supermethodcall/Child.java:58:13
-  (call $$clinit__void@supermethodcall.Parent )
+  (call $$clinit__void_<once>_@supermethodcall.Parent )
   ;;@ supermethodcall/Child.java:58:13
-  (call $$clinit__void@supermethodcall.GrandParentInterface )
+  (call $$clinit__void_<once>_@supermethodcall.GrandParentInterface )
  )
 )
 
