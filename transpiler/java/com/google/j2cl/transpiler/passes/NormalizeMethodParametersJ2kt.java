@@ -72,6 +72,13 @@ public class NormalizeMethodParametersJ2kt extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Node rewriteMethod(Method method) {
+            // skip methods implemented in Javascript
+            if (method.getDescriptor().isNative()
+                || (method.getDescriptor().isJsConstructor()
+                    && method.getDescriptor().getEnclosingTypeDescriptor().isNative())) {
+              return method;
+            }
+
             // Redeclare vararg parameter if needed.
             RewriteItem varargRewriteItem = getVarargRewriteItem(method);
             if (varargRewriteItem != null) {
