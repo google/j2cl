@@ -26,6 +26,7 @@ import static jsenum.NativeEnums.nativeClinitCalled;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.function.Function;
@@ -764,15 +765,20 @@ public class Main {
     assertUnderlyingTypeEquals(Double.class, templatedField.value.ordinal());
 
     // Boxing/unboxing in varargs.
-    assertUnderlyingTypeEquals(Double.class, Arrays.asList(PlainJsEnum.ONE).get(0));
+    List<?> list = Arrays.asList(PlainJsEnum.ONE);
+    assertUnderlyingTypeEquals(PlainJsEnum.class, list.get(0));
+    unboxed = (PlainJsEnum) list.get(0);
+    assertUnderlyingTypeEquals(Double.class, unboxed);
 
     // TODO(b/118615488): Rewrite the following checks when JsEnum arrays are allowed.
     // In Java the varargs array will be of the inferred argument type. Since non native JsEnum
     // arrays are not allowed, the created array is of the declared type.
-    assertUnderlyingTypeEquals(Comparable[].class, varargsToComparableArray(PlainJsEnum.ONE));
-    assertUnderlyingTypeEquals(PlainJsEnum.class, varargsToComparableArray(PlainJsEnum.ONE)[0]);
-    assertUnderlyingTypeEquals(Object[].class, varargsToObjectArray(PlainJsEnum.ONE));
-    assertUnderlyingTypeEquals(PlainJsEnum.class, varargsToObjectArray(PlainJsEnum.ONE)[0]);
+    Object[] arr = varargsToComparableArray(PlainJsEnum.ONE);
+    assertUnderlyingTypeEquals(Comparable[].class, arr);
+    assertUnderlyingTypeEquals(PlainJsEnum.class, arr[0]);
+    arr = varargsToObjectArray(PlainJsEnum.ONE);
+    assertUnderlyingTypeEquals(Object[].class, arr);
+    assertUnderlyingTypeEquals(PlainJsEnum.class, arr[0]);
   }
 
   private static class TemplatedField<T> {
