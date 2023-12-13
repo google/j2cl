@@ -35,6 +35,7 @@ BINARYEN_LIB_SRCS = glob(
         "src/support/suffix_tree.cpp",
         "src/support/suffix_tree_node.cpp",
         "src/passes/hash-stringify-walker.cpp",
+        "src/passes/Outlining.cpp",
     ],
 ) + [
     ":WasmIntrinsics.cpp",
@@ -53,12 +54,16 @@ BINARYEN_LIB_HDRS = glob(
     ],
 ) + [":src/config.h"]
 
+BINARYEN_LIB_DEFINES = [
+    "SKIP_OUTLINING",
+]
+
 cc_library(
     name = "binaryen_lib",
     srcs = BINARYEN_LIB_SRCS,
     hdrs = BINARYEN_LIB_HDRS,
     copts = BINARYEN_COPTS,
-    defines = ["USE_STANDARD_GC_ENCODINGS"],
+    defines = ["USE_STANDARD_GC_ENCODINGS"] + BINARYEN_LIB_DEFINES,
     includes = ["src"],
     textual_hdrs = glob([
         "src/**/*.inc",
@@ -71,7 +76,7 @@ cc_library(
     srcs = BINARYEN_LIB_SRCS,
     hdrs = BINARYEN_LIB_HDRS,
     copts = BINARYEN_COPTS,
-    defines = ["USE_LEGACY_GC_ENCODINGS"],
+    defines = ["USE_LEGACY_GC_ENCODINGS"] + BINARYEN_LIB_DEFINES,
     includes = ["src"],
     textual_hdrs = glob([
         "src/**/*.inc",
