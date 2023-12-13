@@ -28,12 +28,10 @@ import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.MemberReference;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
-import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
-import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -191,38 +189,16 @@ public abstract class ImplementStaticInitializationBase extends NormalizationPas
       return false;
     }
 
-    return memberDescriptor.isStatic()
-        || memberDescriptor.isJsConstructor()
-        // non-private instance methods (except the synthetic ctor) of an optimized enum will
-        // trigger clinit, since the constructor will not.
-        || (triggersClinitInInstanceMethods(enclosingType) && isInstanceMethod(memberDescriptor));
+    return memberDescriptor.isStatic() || memberDescriptor.isJsConstructor();
   }
 
   private static boolean isEffectivelyPrivate(MemberDescriptor memberDescriptor) {
-    if (memberDescriptor.getVisibility().isPrivate()) {
-      return true;
-    }
-
-    // Note: Instance members can be polymorphic and accessed through the super types even the type
-    // itself is private so we need to be conservative while accounting type visibility.
-    return !memberDescriptor.isInstanceMember()
-        && memberDescriptor
+    return memberDescriptor.getVisibility().isPrivate()
+        || memberDescriptor
             .getEnclosingTypeDescriptor()
             .getTypeDeclaration()
             .getVisibility()
             .isPrivate();
-  }
-
-  private static boolean triggersClinitInInstanceMethods(Type type) {
-    return type.isOptimizedEnum()
-        || TypeDescriptors.isJavaLangEnum(type.getTypeDescriptor())
-        || TypeDescriptors.isJavaLangObject(type.getTypeDescriptor());
-  }
-
-  private static boolean isInstanceMethod(MemberDescriptor memberDescriptor) {
-    return memberDescriptor.isMethod()
-        && memberDescriptor.isInstanceMember()
-        && memberDescriptor.getOrigin() != MethodOrigin.SYNTHETIC_CTOR_FOR_CONSTRUCTOR;
   }
 
   private boolean isCalledFromOtherClasses(MemberDescriptor memberDescriptor) {
