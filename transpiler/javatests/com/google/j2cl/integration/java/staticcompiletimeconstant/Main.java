@@ -36,7 +36,7 @@ public class Main {
     public static final char CHAR_COMPILE_TIME_CONSTANT = 100;
     public static final boolean BOOLEAN_COMPILE_TIME_CONSTANT = true;
 
-    public static Object initialized = new Object();
+    public static Object initialized = 1; // Intention boxing to avoid binaryen optimization
 
     private static String init() {
       assertTrue(initialized == null);
@@ -69,7 +69,7 @@ public class Main {
     public static final char CHAR_COMPILE_TIME_CONSTANT = 100;
     public static final boolean BOOLEAN_COMPILE_TIME_CONSTANT = true;
 
-    public static Object initialized = new Object();
+    public static Object initialized = 1; // Intention boxing to avoid binaryen optimization
 
     private static String init() {
       assertTrue(initialized == null);

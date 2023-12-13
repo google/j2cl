@@ -25,7 +25,7 @@ class Parent {
 }
 
 public class Child extends Parent {
-  public static Object fieldInChild = new Object();
+  public static Object fieldInChild = 1; // Intention boxing to avoid binaryen optimization
 
   public static void test() {
     // Child.$clinit() has been called, so fieldInChild has been initialized.
