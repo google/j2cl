@@ -411,32 +411,48 @@ def j2wasm_application(name, defines = dict(), **kwargs):
         name = name,
         binaryen_args = [
             # Stage 1
+            # Optimization flags (affecting passes in general) included at the beginning of stage.
+            # Avoid inlining once functions to preserve their shape.
+            "--no-inline=*_<once>_*",
             # Specific list of passes: The order and count of these flags does
             # matter. First -O3 will be the slowest, so we isolate it in a
             # stage1 invocation (due to go/forge-limits for time).
             "-O3",
+            "--optimize-j2cl",
             "--gufa",
             "--unsubtyping",
             "-O3",
+            "--optimize-j2cl",
+            "-O3",
+            "--optimize-j2cl",
 
             # Stage 2
             _STAGE_SEPARATOR,
             # Optimization flags (affecting passes in general) included at the beginning of stage.
+            # Avoid inlining once functions to preserve their shape.
+            "--no-inline=*_<once>_*",
+            # TODO: might get more contraversal.
             "--partial-inlining-ifs=4",
             "-fimfs=50",
             # Specific list of passes:
             "--gufa",
             "--unsubtyping",
             "-O3",
+            "--optimize-j2cl",
             "-O3",
+            "--optimize-j2cl",
             "-O3",
+            "--optimize-j2cl",
             "--gufa",
             "--unsubtyping",
             "-O3",
+            "--optimize-j2cl",
 
             # Stage 3
             _STAGE_SEPARATOR,
             # Optimization flags (affecting passes in general) included at the beginning of stage.
+            # Only allow partial inlining since they only executed once.
+            "--no-full-inline=*_<once>_*",
             "--partial-inlining-ifs=4",
             "-fimfs=50",
             "--intrinsic-lowering",
@@ -444,9 +460,12 @@ def j2wasm_application(name, defines = dict(), **kwargs):
             "--unsubtyping",
             # Get several rounds of -O3 after intrinsic lowering.
             "-O3",
+            "--optimize-j2cl",
             "-O3",
+            "--optimize-j2cl",
             "--type-merging",
             "-O3",
+            "--optimize-j2cl",
             # Mark all types as 'final' that we can, to help VMs at runtime.
             "--type-finalizing",
         ],
