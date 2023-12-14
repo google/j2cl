@@ -26,6 +26,7 @@ import com.google.j2cl.transpiler.backend.kotlin.common.inBackTicks
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
+import java.lang.Boolean.getBoolean
 
 /**
  * Renderer of member descriptors.
@@ -67,7 +68,7 @@ internal data class MemberDescriptorRenderer(val nameRenderer: NameRenderer) {
 
   fun nativeThrowsAnnotationSource(methodDescriptor: MethodDescriptor): Source =
     methodDescriptor.ktInfo
-      .takeIf { it.isThrows }
+      .takeIf { it.isThrows && SHOULD_RENDER_NATIVE_THROWS }
       ?.let {
         KotlinSource.annotation(
           nameRenderer.topLevelQualifiedNameSource("javaemul.lang.NativeThrows"),
@@ -81,6 +82,10 @@ internal data class MemberDescriptorRenderer(val nameRenderer: NameRenderer) {
       .orEmpty()
 
   companion object {
+    // TODO(b/316324154): Remove when no longer necessary
+    val SHOULD_RENDER_NATIVE_THROWS: Boolean =
+      !getBoolean("com.google.j2cl.transpiler.backend.kotlin.isNativeThrowsDisabled")
+
     val MethodDescriptor.methodModifiersSource: Source
       get() =
         spaceSeparated(
