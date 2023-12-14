@@ -18,6 +18,7 @@ package java.util.logging;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
+import javaemul.internal.annotations.HasNoSideEffects;
 
 /**
  *  An emulation of the java.util.logging.Logger class. See
@@ -32,6 +33,8 @@ public class Logger {
   private static final boolean INFO_ENABLED;
   private static final boolean WARNING_ENABLED;
   private static final boolean SEVERE_ENABLED;
+
+  private static boolean handlersAdded;
 
   static {
     // '==' instead of equals makes it compile out faster.
@@ -56,6 +59,7 @@ public class Logger {
     return getLogger(GLOBAL_LOGGER_NAME);
   }
 
+  @HasNoSideEffects
   public static Logger getLogger(String name) {
     // Use shortcut if logging is disabled to avoid parent logger creations in LogManager
     if (LOGGING_OFF) {
@@ -84,6 +88,7 @@ public class Logger {
     if (LOGGING_OFF) {
       return;
     }
+    handlersAdded = true;
     handlers.add(handler);
   }
 
@@ -210,6 +215,11 @@ public class Logger {
   }
 
   public boolean isLoggable(Level messageLevel) {
+    if (!handlersAdded) {
+      // Shortcut if no handlers ever added. This also let the optimizers prune the related code.
+      // Ideally the app should just disable the logging in such cases but...
+      return false;
+    }
     if (ALL_ENABLED) {
       return messageLevel.intValue() >= getEffectiveLevel().intValue();
     } else if (INFO_ENABLED) {
