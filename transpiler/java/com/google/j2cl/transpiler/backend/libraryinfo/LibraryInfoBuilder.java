@@ -82,7 +82,7 @@ public final class LibraryInfoBuilder {
 
     for (DeclaredTypeDescriptor superInterfaceType : type.getSuperInterfaceTypeDescriptors()) {
       if (!superInterfaceType.isNative() && !superInterfaceType.isJsFunctionInterface()) {
-        typeInfoBuilder.addImplementsType(getTypeId(superInterfaceType));
+        typeInfoBuilder.addImplementsTypes(getTypeId(superInterfaceType));
       }
     }
 
@@ -170,8 +170,8 @@ public final class LibraryInfoBuilder {
           MemberInfo.newBuilder().setName("$js_entry$").setStatic(true).setJsAccessible(true));
     }
 
-    libraryInfo.addType(
-        typeInfoBuilder.addAllMember(
+    libraryInfo.addTypes(
+        typeInfoBuilder.addAllMembers(
             memberInfoBuilders.values().stream()
                 .map(MemberInfo.Builder::build)
                 .collect(toImmutableList())));
@@ -338,11 +338,11 @@ public final class LibraryInfoBuilder {
   }
 
   private LibraryInfo build() {
-    libraryInfo.clearTypeMap();
+    libraryInfo.clearTypeNames();
     String[] typeMap = new String[types.size() + 1];
     typeMap[NULL_TYPE] = "<no-type>";
     types.forEach((name, i) -> typeMap[i] = name);
-    libraryInfo.addAllTypeMap(Arrays.asList(typeMap));
+    libraryInfo.addAllTypeNames(Arrays.asList(typeMap));
     return libraryInfo.build();
   }
 

@@ -41,9 +41,7 @@ public final class SummaryBuilder {
   public static final int NULL_TYPE = 0;
 
   private final Summary.Builder summary = Summary.newBuilder();
-  private final Map<String, Integer> types = new HashMap<>();
-  private final Map<String, Integer> declaredTypes = new HashMap<>();
-
+  private final Map<String, Integer> typeIdByTypeName = new HashMap<>();
   private final WasmGenerationEnvironment environment;
 
   SummaryBuilder(Library library, WasmGenerationEnvironment environment, Problems problems) {
@@ -65,32 +63,31 @@ public final class SummaryBuilder {
       return;
     }
 
-    int typeId = getDeclaredTypeId(type.getTypeDescriptor());
+    int typeId = getTypeId(type.getTypeDescriptor());
 
-    TypeHierarchyInfo.Builder typeHierarchyInfoBuilder =
-        TypeHierarchyInfo.newBuilder().setDeclaredTypeId(typeId);
+    TypeInfo.Builder typeHierarchyInfoBuilder = TypeInfo.newBuilder().setTypeId(typeId);
 
     DeclaredTypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
     if (superTypeDescriptor != null && !superTypeDescriptor.isNative()) {
-      typeHierarchyInfoBuilder.setExtendsDeclaredTypeId(getDeclaredTypeId(superTypeDescriptor));
+      typeHierarchyInfoBuilder.setExtendsType(getTypeId(superTypeDescriptor));
     }
 
     type.getSuperInterfaceTypeDescriptors().stream()
         .filter(not(DeclaredTypeDescriptor::isNative))
         .filter(not(DeclaredTypeDescriptor::isJsFunctionInterface))
-        .forEach(t -> typeHierarchyInfoBuilder.addImplementsDeclaredTypeId(getDeclaredTypeId(t)));
+        .forEach(t -> typeHierarchyInfoBuilder.addImplementsTypes(getTypeId(t)));
 
-    summary.addType(typeHierarchyInfoBuilder.build());
+    summary.addTypes(typeHierarchyInfoBuilder.build());
   }
 
-  private int getDeclaredTypeId(DeclaredTypeDescriptor typeDescriptor) {
+  private int getTypeId(DeclaredTypeDescriptor typeDescriptor) {
     String typeName = environment.getTypeSignature(typeDescriptor);
     // Note that the IDs start from '1' to reserve '0' for NULL_TYPE.
-    return declaredTypes.computeIfAbsent(typeName, x -> declaredTypes.size() + 1);
+    return typeIdByTypeName.computeIfAbsent(typeName, x -> typeIdByTypeName.size() + 1);
   }
 
   private void summarizeStringLiterals(Library library) {
-    // Replace stringliterals with the name of the literal getter method that will be synthesized
+    // Replace string literals with the name of the literal getter method that will be synthesized
     // by the bundler.
     var stringLiteralGetterCreator = new StringLiteralGettersCreator();
     library.accept(
@@ -108,9 +105,9 @@ public final class SummaryBuilder {
         .getLiteralMethodByString()
         .forEach(
             (s, m) ->
-                summary.addStringLiteral(
+                summary.addStringLiterals(
                     StringLiteralInfo.newBuilder()
-                        .setLiteral(s)
+                        .setContent(s)
                         .setEnclosingTypeName(
                             m.getEnclosingTypeDescriptor().getQualifiedBinaryName())
                         .setMethodName(m.getName())
@@ -118,16 +115,13 @@ public final class SummaryBuilder {
   }
 
   private Summary build() {
-    summary.clearTypeReferenceMap();
-    String[] typeReferenceMap = new String[types.size()];
-    types.forEach((name, i) -> typeReferenceMap[i] = name);
-    summary.addAllTypeReferenceMap(Arrays.asList(typeReferenceMap));
-    String[] declaredTypeMap = new String[declaredTypes.size() + 1];
+    summary.clearTypeNames();
+    String[] typeNames = new String[typeIdByTypeName.size() + 1];
     // Add a spurious mapping for 0 for the cases where the type is absent, e.g. the supertype
     // of java.lang.Object.
-    declaredTypeMap[NULL_TYPE] = "<no-type>";
-    declaredTypes.forEach((name, i) -> declaredTypeMap[i] = name);
-    summary.addAllDeclaredTypeMap(Arrays.asList(declaredTypeMap));
+    typeNames[NULL_TYPE] = "<no-type>";
+    typeIdByTypeName.forEach((name, i) -> typeNames[i] = name);
+    summary.addAllTypeNames(Arrays.asList(typeNames));
     return summary.build();
   }
 

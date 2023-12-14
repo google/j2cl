@@ -1,25 +1,24 @@
 syntax = "proto3";
 
-package j2cl;
+package j2cl.wasm;
 
 option java_multiple_files = true;
 option java_package = "com.google.j2cl.transpiler.backend.wasm";
 
 message Summary {
-  repeated string declared_type_map = 1;
-  repeated string type_reference_map = 2;
-  repeated TypeHierarchyInfo type = 3;
-  repeated StringLiteralInfo string_literal = 4;
+  repeated string type_names = 1;
+  repeated TypeInfo types = 2;
+  repeated StringLiteralInfo string_literals = 3;
 }
 
-message TypeHierarchyInfo {
-  int32 declared_type_id = 1;
-  int32 extends_declared_type_id = 2;
-  repeated int32 implements_declared_type_id = 3;
+message TypeInfo {
+  int32 type_id = 1;
+  int32 extends_type = 2;
+  repeated int32 implements_types = 3;
 }
 
 message StringLiteralInfo {
-  string literal = 1;
+  string content = 1;
   string enclosing_type_name = 2;
   string method_name = 3;
 }

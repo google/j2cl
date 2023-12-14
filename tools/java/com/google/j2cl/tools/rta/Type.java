@@ -43,7 +43,7 @@ final class Type {
     type.implSourceFile = typeInfo.getImplSourceFilePath();
     type.isJsTypeInterface = typeInfo.getJstypeInterface();
     typeInfo
-        .getMemberList()
+        .getMembersList()
         .forEach(memberInfo -> type.addMember(Member.buildFrom(memberInfo, type)));
 
     return type;

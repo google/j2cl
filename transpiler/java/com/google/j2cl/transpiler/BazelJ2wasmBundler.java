@@ -41,7 +41,7 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.backend.wasm.Summary;
-import com.google.j2cl.transpiler.backend.wasm.TypeHierarchyInfo;
+import com.google.j2cl.transpiler.backend.wasm.TypeInfo;
 import com.google.j2cl.transpiler.backend.wasm.WasmGeneratorStage;
 import com.google.j2cl.transpiler.frontend.jdt.JdtEnvironment;
 import com.google.j2cl.transpiler.frontend.jdt.JdtParser;
@@ -158,7 +158,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
     Map<TypeDeclaration, com.google.j2cl.transpiler.ast.Type> typesByDeclaration =
         new LinkedHashMap<>();
     getSummaries()
-        .flatMap(s -> s.getStringLiteralList().stream())
+        .flatMap(s -> s.getStringLiteralsList().stream())
         .forEach(
             s -> {
               // Get descriptor for the getter and synthesize the method logic if it is the
@@ -166,7 +166,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
               MethodDescriptor m =
                   stringLiteralGetterCreator.getOrCreateLiteralMethod(
                       stringLiteralHolder,
-                      new StringLiteral(s.getLiteral()),
+                      new StringLiteral(s.getContent()),
                       /* synthesizeMethod= */ true);
 
               // Synthesize the forwarding logic.
@@ -227,17 +227,16 @@ final class BazelJ2wasmBundler extends BazelWorker {
       // Collect all types from all summaries.
       summaries.forEachOrdered(
           summary -> {
-            for (TypeHierarchyInfo typeHierarchyInfo : summary.getTypeList()) {
-              String name = summary.getDeclaredTypeMap(typeHierarchyInfo.getDeclaredTypeId());
+            for (TypeInfo typeHierarchyInfo : summary.getTypesList()) {
+              String name = summary.getTypeNames(typeHierarchyInfo.getTypeId());
               Type type = typesByName.computeIfAbsent(name, Type::new);
               classes.add(type);
-              if (typeHierarchyInfo.getExtendsDeclaredTypeId() != NO_TYPE_INDEX) {
-                String superTypeName =
-                    summary.getDeclaredTypeMap(typeHierarchyInfo.getExtendsDeclaredTypeId());
+              if (typeHierarchyInfo.getExtendsType() != NO_TYPE_INDEX) {
+                String superTypeName = summary.getTypeNames(typeHierarchyInfo.getExtendsType());
                 type.superType = checkNotNull(typesByName.get(superTypeName));
               }
-              for (int interfaceId : typeHierarchyInfo.getImplementsDeclaredTypeIdList()) {
-                String interfaceName = summary.getDeclaredTypeMap(interfaceId);
+              for (int interfaceId : typeHierarchyInfo.getImplementsTypesList()) {
+                String interfaceName = summary.getTypeNames(interfaceId);
                 Type interfaceType =
                     typesByName.computeIfAbsent(
                         interfaceName,

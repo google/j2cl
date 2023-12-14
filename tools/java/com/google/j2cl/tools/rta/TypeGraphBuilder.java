@@ -35,8 +35,8 @@ class TypeGraphBuilder {
 
     // Create all types and members.
     for (LibraryInfo libraryInfo : libraryInfos) {
-      for (TypeInfo typeInfo : libraryInfo.getTypeList()) {
-        Type type = Type.buildFrom(typeInfo, libraryInfo.getTypeMap(typeInfo.getTypeId()));
+      for (TypeInfo typeInfo : libraryInfo.getTypesList()) {
+        Type type = Type.buildFrom(typeInfo, libraryInfo.getTypeNames(typeInfo.getTypeId()));
         typesByName.put(type.getName(), type);
       }
     }
@@ -50,32 +50,32 @@ class TypeGraphBuilder {
   }
 
   private static void buildCrossReferences(Map<String, Type> typesByName, LibraryInfo libraryInfo) {
-    for (TypeInfo typeInfo : libraryInfo.getTypeList()) {
-      Type type = typesByName.get(libraryInfo.getTypeMap(typeInfo.getTypeId()));
+    for (TypeInfo typeInfo : libraryInfo.getTypesList()) {
+      Type type = typesByName.get(libraryInfo.getTypeNames(typeInfo.getTypeId()));
 
       int extendsId = typeInfo.getExtendsType();
       if (extendsId != LibraryInfoBuilder.NULL_TYPE) {
-        Type superClass = typesByName.get(libraryInfo.getTypeMap(extendsId));
+        Type superClass = typesByName.get(libraryInfo.getTypeNames(extendsId));
         superClass.addImmediateSubtype(type);
         type.setSuperClass(superClass);
       }
 
-      for (int implementsId : typeInfo.getImplementsTypeList()) {
-        Type superInterface = typesByName.get(libraryInfo.getTypeMap(implementsId));
+      for (int implementsId : typeInfo.getImplementsTypesList()) {
+        Type superInterface = typesByName.get(libraryInfo.getTypeNames(implementsId));
         superInterface.addImmediateSubtype(type);
         type.addSuperInterface(superInterface);
       }
 
-      for (MemberInfo memberInfo : typeInfo.getMemberList()) {
+      for (MemberInfo memberInfo : typeInfo.getMembersList()) {
         Member member = type.getMemberByName(memberInfo.getName());
 
         for (int referencedId : memberInfo.getReferencedTypesList()) {
-          Type referencedType = typesByName.get(libraryInfo.getTypeMap(referencedId));
+          Type referencedType = typesByName.get(libraryInfo.getTypeNames(referencedId));
           member.addReferencedType(checkNotNull(referencedType));
         }
 
         for (MethodInvocation methodInvocation : memberInfo.getInvokedMethodsList()) {
-          String enclosingTypeName = libraryInfo.getTypeMap(methodInvocation.getEnclosingType());
+          String enclosingTypeName = libraryInfo.getTypeNames(methodInvocation.getEnclosingType());
           String methodName = methodInvocation.getMethod();
 
           Type enclosingType = typesByName.get(enclosingTypeName);

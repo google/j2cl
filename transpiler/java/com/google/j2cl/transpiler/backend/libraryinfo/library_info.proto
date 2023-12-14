@@ -6,15 +6,15 @@ option java_multiple_files = true;
 option java_package = "com.google.j2cl.transpiler.backend.libraryinfo";
 
 message LibraryInfo {
-  repeated string type_map = 1;
-  repeated TypeInfo type = 2;
+  repeated string type_names = 1;
+  repeated TypeInfo types = 2;
 }
 
 message TypeInfo {
   int32 type_id = 1;
   int32 extends_type = 2;
-  repeated int32 implements_type = 3;
-  repeated MemberInfo member = 4;
+  repeated int32 implements_types = 3;
+  repeated MemberInfo members = 4;
   string header_source_file_path = 5;
   string impl_source_file_path = 6;
   bool jstype_interface = 7;
