@@ -67,6 +67,7 @@ public final class Class<T> implements Type, Serializable {
     this.leafType = leafType;
   }
 
+  @HasNoSideEffects
   public String getName() {
     if (isArray()) {
       String className = isPrimitive ? primitiveShortName : "L" + getClassName() + ";";
@@ -77,12 +78,14 @@ public final class Class<T> implements Type, Serializable {
 
   // J2CL doesn't follow JLS strictly here and provides an approximation that is good enough for
   // debugging and testing uses.
+  @HasNoSideEffects
   public String getCanonicalName() {
     return getClassName() + repeatString("[]", dimensionCount);
   }
 
   // J2CL doesn't follow JLS strictly here and provides an approximation that is good enough for
   // debugging and testing uses.
+  @HasNoSideEffects
   public String getSimpleName() {
     return stripToLastOccurrenceOf(stripToLastOccurrenceOf(getCanonicalName(), "."), "$");
   }
