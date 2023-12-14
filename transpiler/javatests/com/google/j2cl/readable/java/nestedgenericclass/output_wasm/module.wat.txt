@@ -445,10 +445,20 @@
 (func $$create__@nestedgenericclass.NestedGenericClass
  (result (ref null $nestedgenericclass.NestedGenericClass))
  ;;@ nestedgenericclass/NestedGenericClass.java:20:13
- (local $$instance (ref null $nestedgenericclass.NestedGenericClass))
  (block
   ;;@ nestedgenericclass/NestedGenericClass.java:20:13
   (call $$clinit__void_<once>_@nestedgenericclass.NestedGenericClass )
+  ;;@ nestedgenericclass/NestedGenericClass.java:20:13
+  (return (call $$create_$private__@nestedgenericclass.NestedGenericClass ))
+ )
+)
+
+;;; NestedGenericClass<T> NestedGenericClass.$create_$private()
+(func $$create_$private__@nestedgenericclass.NestedGenericClass
+ (result (ref null $nestedgenericclass.NestedGenericClass))
+ ;;@ nestedgenericclass/NestedGenericClass.java:20:13
+ (local $$instance (ref null $nestedgenericclass.NestedGenericClass))
+ (block
   ;;@ nestedgenericclass/NestedGenericClass.java:20:13
   (local.set $$instance (struct.new $nestedgenericclass.NestedGenericClass (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ nestedgenericclass/NestedGenericClass.java:20:13
@@ -516,7 +526,7 @@
  (local.set $this (ref.cast (ref $nestedgenericclass.NestedGenericClass) (local.get $this.untyped)))
  (block
   ;;@ nestedgenericclass/NestedGenericClass.java:59:4
-  (local.set $n (call $$create__@nestedgenericclass.NestedGenericClass ))
+  (local.set $n (call $$create_$private__@nestedgenericclass.NestedGenericClass ))
   ;;@ nestedgenericclass/NestedGenericClass.java:60:4
   (local.set $a (call $$create__nestedgenericclass_NestedGenericClass@nestedgenericclass.NestedGenericClass.A (local.get $n)))
   ;;@ nestedgenericclass/NestedGenericClass.java:61:4

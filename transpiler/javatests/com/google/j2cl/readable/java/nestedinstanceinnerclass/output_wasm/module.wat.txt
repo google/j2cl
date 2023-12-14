@@ -124,10 +124,20 @@
 (func $$create__@nestedinstanceinnerclass.OuterClass
  (result (ref null $nestedinstanceinnerclass.OuterClass))
  ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
- (local $$instance (ref null $nestedinstanceinnerclass.OuterClass))
  (block
   ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
   (call $$clinit__void_<once>_@nestedinstanceinnerclass.OuterClass )
+  ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
+  (return (call $$create_$private__@nestedinstanceinnerclass.OuterClass ))
+ )
+)
+
+;;; OuterClass OuterClass.$create_$private()
+(func $$create_$private__@nestedinstanceinnerclass.OuterClass
+ (result (ref null $nestedinstanceinnerclass.OuterClass))
+ ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
+ (local $$instance (ref null $nestedinstanceinnerclass.OuterClass))
+ (block
   ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
   (local.set $$instance (struct.new $nestedinstanceinnerclass.OuterClass (ref.as_non_null (global.get $nestedinstanceinnerclass.OuterClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
@@ -156,7 +166,7 @@
  (local.set $this (ref.cast (ref $nestedinstanceinnerclass.OuterClass) (local.get $this.untyped)))
  (block
   ;;@ nestedinstanceinnerclass/OuterClass.java:27:4
-  (drop (call $$create__nestedinstanceinnerclass_OuterClass_InnerClass@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (call $$create__nestedinstanceinnerclass_OuterClass@nestedinstanceinnerclass.OuterClass.InnerClass (call $$create__@nestedinstanceinnerclass.OuterClass ))))
+  (drop (call $$create__nestedinstanceinnerclass_OuterClass_InnerClass@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (call $$create__nestedinstanceinnerclass_OuterClass@nestedinstanceinnerclass.OuterClass.InnerClass (call $$create_$private__@nestedinstanceinnerclass.OuterClass ))))
  )
 )
 (elem declare func $m_test__void@nestedinstanceinnerclass.OuterClass)

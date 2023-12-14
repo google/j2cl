@@ -42,10 +42,20 @@
 (func $$create__@newinstance.NewInstanceExpr
  (result (ref null $newinstance.NewInstanceExpr))
  ;;@ newinstance/NewInstanceExpr.java:18:13
- (local $$instance (ref null $newinstance.NewInstanceExpr))
  (block
   ;;@ newinstance/NewInstanceExpr.java:18:13
   (call $$clinit__void_<once>_@newinstance.NewInstanceExpr )
+  ;;@ newinstance/NewInstanceExpr.java:18:13
+  (return (call $$create_$private__@newinstance.NewInstanceExpr ))
+ )
+)
+
+;;; NewInstanceExpr NewInstanceExpr.$create_$private()
+(func $$create_$private__@newinstance.NewInstanceExpr
+ (result (ref null $newinstance.NewInstanceExpr))
+ ;;@ newinstance/NewInstanceExpr.java:18:13
+ (local $$instance (ref null $newinstance.NewInstanceExpr))
+ (block
   ;;@ newinstance/NewInstanceExpr.java:18:13
   (local.set $$instance (struct.new $newinstance.NewInstanceExpr (ref.as_non_null (global.get $newinstance.NewInstanceExpr.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ newinstance/NewInstanceExpr.java:18:13
@@ -74,7 +84,7 @@
   ;;@ newinstance/NewInstanceExpr.java:19:41
   (call $$clinit__void_<once>_@newinstance.NewInstanceExpr )
   ;;@ newinstance/NewInstanceExpr.java:20:4
-  (local.set $a (call $$create__@newinstance.NewInstanceExpr ))
+  (local.set $a (call $$create_$private__@newinstance.NewInstanceExpr ))
  )
 )
 

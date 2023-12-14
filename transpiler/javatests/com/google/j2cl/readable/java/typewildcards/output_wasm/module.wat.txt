@@ -1575,14 +1575,25 @@
  )
 )
 
-;;; MultipleGenerics<D, String, List<D>> TypeWildCards.createMultipleGenerics(List<D> foo)
+;;; MultipleGenerics<D, String, List<D>> TypeWildCards.createMultipleGenerics(List<D> arg0)
 (func $m_createMultipleGenerics__typewildcards_List__typewildcards_TypeWildCards_MultipleGenerics@typewildcards.TypeWildCards
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $typewildcards.TypeWildCards.MultipleGenerics))
+ ;;@ typewildcards/TypeWildCards.java:156:50
+ (block
+  ;;@ typewildcards/TypeWildCards.java:156:50
+  (call $$clinit__void_<once>_@typewildcards.TypeWildCards )
+  ;;@ typewildcards/TypeWildCards.java:156:50
+  (return (call $m_createMultipleGenerics_$private__typewildcards_List__typewildcards_TypeWildCards_MultipleGenerics@typewildcards.TypeWildCards (local.get $arg0)))
+ )
+)
+
+;;; MultipleGenerics<D, String, List<D>> TypeWildCards.createMultipleGenerics_$private(List<D> foo)
+(func $m_createMultipleGenerics_$private__typewildcards_List__typewildcards_TypeWildCards_MultipleGenerics@typewildcards.TypeWildCards
  (param $foo (ref null $java.lang.Object))
  (result (ref null $typewildcards.TypeWildCards.MultipleGenerics))
  ;;@ typewildcards/TypeWildCards.java:156:50
  (block
-  ;;@ typewildcards/TypeWildCards.java:156:86
-  (call $$clinit__void_<once>_@typewildcards.TypeWildCards )
   ;;@ typewildcards/TypeWildCards.java:157:4
   (return (call $$create__@typewildcards.TypeWildCards.MultipleGenerics ))
  )
@@ -1606,7 +1617,7 @@
   ;;@ typewildcards/TypeWildCards.java:160:2
   (global.set $listWithWildcard@typewildcards.TypeWildCards (ref.null $java.lang.Object))
   ;;@ typewildcards/TypeWildCards.java:161:2
-  (global.set $valMultipleGenerics@typewildcards.TypeWildCards (call $m_createMultipleGenerics__typewildcards_List__typewildcards_TypeWildCards_MultipleGenerics@typewildcards.TypeWildCards (global.get $listWithWildcard@typewildcards.TypeWildCards)))
+  (global.set $valMultipleGenerics@typewildcards.TypeWildCards (call $m_createMultipleGenerics_$private__typewildcards_List__typewildcards_TypeWildCards_MultipleGenerics@typewildcards.TypeWildCards (global.get $listWithWildcard@typewildcards.TypeWildCards)))
  )
 )
 

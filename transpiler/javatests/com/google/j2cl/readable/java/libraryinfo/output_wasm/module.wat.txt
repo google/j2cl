@@ -737,10 +737,20 @@
 (func $$create__@libraryinfo.Main
  (result (ref null $libraryinfo.Main))
  ;;@ libraryinfo/Main.java:25:13
- (local $$instance (ref null $libraryinfo.Main))
  (block
   ;;@ libraryinfo/Main.java:25:13
   (call $$clinit__void_<once>_@libraryinfo.Main )
+  ;;@ libraryinfo/Main.java:25:13
+  (return (call $$create_$private__@libraryinfo.Main ))
+ )
+)
+
+;;; Main Main.$create_$private()
+(func $$create_$private__@libraryinfo.Main
+ (result (ref null $libraryinfo.Main))
+ ;;@ libraryinfo/Main.java:25:13
+ (local $$instance (ref null $libraryinfo.Main))
+ (block
   ;;@ libraryinfo/Main.java:25:13
   (local.set $$instance (struct.new $libraryinfo.Main (ref.as_non_null (global.get $libraryinfo.Main.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ libraryinfo/Main.java:25:13
@@ -768,7 +778,7 @@
   ;;@ libraryinfo/Main.java:80:34
   (call $$clinit__void_<once>_@libraryinfo.Main )
   ;;@ libraryinfo/Main.java:81:4
-  (call $m_execute__void_$p_libraryinfo_Main@libraryinfo.Main (ref.as_non_null (call $$create__@libraryinfo.Main )))
+  (call $m_execute__void_$p_libraryinfo_Main@libraryinfo.Main (ref.as_non_null (call $$create_$private__@libraryinfo.Main )))
   ;;@ libraryinfo/Main.java:83:4
   (local.set $jsFunction (call $$create__@libraryinfo.Main.FunctionImpl ))
   ;;@ libraryinfo/Main.java:84:4
@@ -1452,7 +1462,7 @@
    (then
     (block
      ;;@ libraryinfo/Main.java:65:7
-     (global.set $namesToValuesMap@libraryinfo.Main.MyEnum (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values__arrayOf_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum )))
+     (global.set $namesToValuesMap@libraryinfo.Main.MyEnum (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values_$private__arrayOf_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum )))
     )
    )
   )
@@ -1468,6 +1478,16 @@
  (block
   ;;@ libraryinfo/Main.java:65:7
   (call $$clinit__void_<once>_@libraryinfo.Main.MyEnum )
+  ;;@ libraryinfo/Main.java:65:7
+  (return (call $m_values_$private__arrayOf_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum ))
+ )
+)
+
+;;; MyEnum[] MyEnum.values_$private()
+(func $m_values_$private__arrayOf_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum
+ (result (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ libraryinfo/Main.java:65:7
+ (block
   ;;@ libraryinfo/Main.java:65:7
   (return (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array (global.get $FOO@libraryinfo.Main.MyEnum)(global.get $BAR@libraryinfo.Main.MyEnum))))
  )

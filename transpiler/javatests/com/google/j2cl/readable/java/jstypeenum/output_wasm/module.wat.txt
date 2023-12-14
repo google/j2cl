@@ -149,7 +149,7 @@
    (then
     (block
      ;;@ jstypeenum/Color.java:21:12
-     (global.set $namesToValuesMap@jstypeenum.Color (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values__arrayOf_jstypeenum_Color@jstypeenum.Color )))
+     (global.set $namesToValuesMap@jstypeenum.Color (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values_$private__arrayOf_jstypeenum_Color@jstypeenum.Color )))
     )
    )
   )
@@ -160,6 +160,18 @@
 
 ;;; Color[] Color.values()
 (func $m_values__arrayOf_jstypeenum_Color@jstypeenum.Color
+ (result (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ jstypeenum/Color.java:21:12
+ (block
+  ;;@ jstypeenum/Color.java:21:12
+  (call $$clinit__void_<once>_@jstypeenum.Color )
+  ;;@ jstypeenum/Color.java:21:12
+  (return (call $m_values_$private__arrayOf_jstypeenum_Color@jstypeenum.Color ))
+ )
+)
+
+;;; Color[] Color.values_$private()
+(func $m_values_$private__arrayOf_jstypeenum_Color@jstypeenum.Color
  (result (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ jstypeenum/Color.java:21:12
  (block

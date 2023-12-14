@@ -8211,21 +8211,42 @@
  (result (ref null $nullability.defaultnotnullable.TypeArgumentsInference.Pair))
  ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:25:56
  (block
-  ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:25:71
+  ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:25:56
   (call $$clinit__void_<once>_@nullability.defaultnotnullable.TypeArgumentsInference )
+  ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:25:56
+  (return (call $m_wildcardPair_$private__nullability_defaultnotnullable_TypeArgumentsInference_Pair@nullability.defaultnotnullable.TypeArgumentsInference ))
+ )
+)
+
+;;; Pair<K, ?> TypeArgumentsInference.wildcardPair_$private()
+(func $m_wildcardPair_$private__nullability_defaultnotnullable_TypeArgumentsInference_Pair@nullability.defaultnotnullable.TypeArgumentsInference
+ (result (ref null $nullability.defaultnotnullable.TypeArgumentsInference.Pair))
+ ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:25:56
+ (block
   ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:26:4
   (return (call $$create__@nullability.defaultnotnullable.TypeArgumentsInference.Pair ))
  )
 )
 
-;;; Pair<K, V> TypeArgumentsInference.pairIdentity(Pair<K, V> pair)
+;;; Pair<K, V> TypeArgumentsInference.pairIdentity(Pair<K, V> arg0)
 (func $m_pairIdentity__nullability_defaultnotnullable_TypeArgumentsInference_Pair__nullability_defaultnotnullable_TypeArgumentsInference_Pair@nullability.defaultnotnullable.TypeArgumentsInference
+ (param $arg0 (ref null $nullability.defaultnotnullable.TypeArgumentsInference.Pair))
+ (result (ref null $nullability.defaultnotnullable.TypeArgumentsInference.Pair))
+ ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:29:84
+ (block
+  ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:29:84
+  (call $$clinit__void_<once>_@nullability.defaultnotnullable.TypeArgumentsInference )
+  ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:29:84
+  (return (call $m_pairIdentity_$private__nullability_defaultnotnullable_TypeArgumentsInference_Pair__nullability_defaultnotnullable_TypeArgumentsInference_Pair@nullability.defaultnotnullable.TypeArgumentsInference (local.get $arg0)))
+ )
+)
+
+;;; Pair<K, V> TypeArgumentsInference.pairIdentity_$private(Pair<K, V> pair)
+(func $m_pairIdentity_$private__nullability_defaultnotnullable_TypeArgumentsInference_Pair__nullability_defaultnotnullable_TypeArgumentsInference_Pair@nullability.defaultnotnullable.TypeArgumentsInference
  (param $pair (ref null $nullability.defaultnotnullable.TypeArgumentsInference.Pair))
  (result (ref null $nullability.defaultnotnullable.TypeArgumentsInference.Pair))
  ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:29:84
  (block
-  ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:30:23
-  (call $$clinit__void_<once>_@nullability.defaultnotnullable.TypeArgumentsInference )
   ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:31:4
   (return (local.get $pair))
  )
@@ -8239,7 +8260,7 @@
   ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:34:82
   (call $$clinit__void_<once>_@nullability.defaultnotnullable.TypeArgumentsInference )
   ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:39:4
-  (return (call $m_pairIdentity__nullability_defaultnotnullable_TypeArgumentsInference_Pair__nullability_defaultnotnullable_TypeArgumentsInference_Pair@nullability.defaultnotnullable.TypeArgumentsInference (call $m_wildcardPair__nullability_defaultnotnullable_TypeArgumentsInference_Pair@nullability.defaultnotnullable.TypeArgumentsInference )))
+  (return (call $m_pairIdentity_$private__nullability_defaultnotnullable_TypeArgumentsInference_Pair__nullability_defaultnotnullable_TypeArgumentsInference_Pair@nullability.defaultnotnullable.TypeArgumentsInference (call $m_wildcardPair_$private__nullability_defaultnotnullable_TypeArgumentsInference_Pair@nullability.defaultnotnullable.TypeArgumentsInference )))
  )
 )
 
@@ -10720,13 +10741,23 @@
 )
 (elem declare func $m_unboundedWildCard__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__void_$pp_nullability_explicitnotnullable@nullability.explicitnotnullable.ExplicitNotNullable)
 
-;;; void ExplicitNotNullable.consume(T t)
+;;; void ExplicitNotNullable.consume(T arg0)
 (func $m_consume__java_lang_Object__void@nullability.explicitnotnullable.ExplicitNotNullable
+ (param $arg0 (ref null $java.lang.Object))
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:382:18
+ (block
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:382:18
+  (call $$clinit__void_<once>_@nullability.explicitnotnullable.ExplicitNotNullable )
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:382:18
+  (call $m_consume_$private__java_lang_Object__void@nullability.explicitnotnullable.ExplicitNotNullable (local.get $arg0))
+ )
+)
+
+;;; void ExplicitNotNullable.consume_$private(T t)
+(func $m_consume_$private__java_lang_Object__void@nullability.explicitnotnullable.ExplicitNotNullable
  (param $t (ref null $java.lang.Object))
  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:382:18
  (block
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:382:31
-  (call $$clinit__void_<once>_@nullability.explicitnotnullable.ExplicitNotNullable )
  )
 )
 
@@ -10738,7 +10769,7 @@
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:384:70
   (call $$clinit__void_<once>_@nullability.explicitnotnullable.ExplicitNotNullable )
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:385:4
-  (call $m_consume__java_lang_Object__void@nullability.explicitnotnullable.ExplicitNotNullable (local.get $c))
+  (call $m_consume_$private__java_lang_Object__void@nullability.explicitnotnullable.ExplicitNotNullable (local.get $c))
  )
 )
 
@@ -10801,14 +10832,25 @@
  )
 )
 
-;;; T ExplicitNotNullable.assertNotNull(T nullable)
+;;; T ExplicitNotNullable.assertNotNull(T arg0)
 (func $m_assertNotNull__java_lang_Object__java_lang_Object@nullability.explicitnotnullable.ExplicitNotNullable
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:433:15
+ (block
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:433:15
+  (call $$clinit__void_<once>_@nullability.explicitnotnullable.ExplicitNotNullable )
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:433:15
+  (return (call $m_assertNotNull_$private__java_lang_Object__java_lang_Object@nullability.explicitnotnullable.ExplicitNotNullable (local.get $arg0)))
+ )
+)
+
+;;; T ExplicitNotNullable.assertNotNull_$private(T nullable)
+(func $m_assertNotNull_$private__java_lang_Object__java_lang_Object@nullability.explicitnotnullable.ExplicitNotNullable
  (param $nullable (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:433:15
  (block
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:433:51
-  (call $$clinit__void_<once>_@nullability.explicitnotnullable.ExplicitNotNullable )
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:434:4
   (if (ref.is_null (local.get $nullable))
    (then
@@ -10833,7 +10875,7 @@
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:440:72
   (call $$clinit__void_<once>_@nullability.explicitnotnullable.ExplicitNotNullable )
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:441:4
-  (local.set $nonNull (ref.cast (ref null $java.lang.String) (call $m_assertNotNull__java_lang_Object__java_lang_Object@nullability.explicitnotnullable.ExplicitNotNullable (local.get $nullable))))
+  (local.set $nonNull (ref.cast (ref null $java.lang.String) (call $m_assertNotNull_$private__java_lang_Object__java_lang_Object@nullability.explicitnotnullable.ExplicitNotNullable (local.get $nullable))))
  )
 )
 
@@ -10846,7 +10888,7 @@
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:444:72
   (call $$clinit__void_<once>_@nullability.explicitnotnullable.ExplicitNotNullable )
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:445:4
-  (local.set $notNull (call $m_assertNotNull__java_lang_Object__java_lang_Object@nullability.explicitnotnullable.ExplicitNotNullable (local.get $nullable)))
+  (local.set $notNull (call $m_assertNotNull_$private__java_lang_Object__java_lang_Object@nullability.explicitnotnullable.ExplicitNotNullable (local.get $nullable)))
  )
 )
 
@@ -10859,7 +10901,7 @@
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:448:98
   (call $$clinit__void_<once>_@nullability.explicitnotnullable.ExplicitNotNullable )
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:449:4
-  (local.set $notNull (call $m_assertNotNull__java_lang_Object__java_lang_Object@nullability.explicitnotnullable.ExplicitNotNullable (local.get $nullable)))
+  (local.set $notNull (call $m_assertNotNull_$private__java_lang_Object__java_lang_Object@nullability.explicitnotnullable.ExplicitNotNullable (local.get $nullable)))
  )
 )
 

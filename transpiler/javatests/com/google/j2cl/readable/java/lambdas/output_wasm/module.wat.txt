@@ -4059,15 +4059,27 @@
 )
 (elem declare func $m_callParameterized__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error__java_lang_Error@lambdas.Lambdas)
 
-;;; Enum<T> Lambdas.callTypeVariableWithBounds(GenericFunctionalInterface<Enum<T>> intf, Enum<T> e)
+;;; Enum<T> Lambdas.callTypeVariableWithBounds(GenericFunctionalInterface<Enum<T>> arg0, Enum<T> arg1)
 (func $m_callTypeVariableWithBounds__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum__java_lang_Enum@lambdas.Lambdas
+ (param $arg0 (ref null $java.lang.Object))
+ (param $arg1 (ref null $java.lang.Enum))
+ (result (ref null $java.lang.Enum))
+ ;;@ lambdas/Lambdas.java:140:44
+ (block
+  ;;@ lambdas/Lambdas.java:140:44
+  (call $$clinit__void_<once>_@lambdas.Lambdas )
+  ;;@ lambdas/Lambdas.java:140:44
+  (return (call $m_callTypeVariableWithBounds_$private__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum__java_lang_Enum@lambdas.Lambdas (local.get $arg0)(local.get $arg1)))
+ )
+)
+
+;;; Enum<T> Lambdas.callTypeVariableWithBounds_$private(GenericFunctionalInterface<Enum<T>> intf, Enum<T> e)
+(func $m_callTypeVariableWithBounds_$private__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum__java_lang_Enum@lambdas.Lambdas
  (param $intf (ref null $java.lang.Object))
  (param $e (ref null $java.lang.Enum))
  (result (ref null $java.lang.Enum))
  ;;@ lambdas/Lambdas.java:140:44
  (block
-  ;;@ lambdas/Lambdas.java:141:59
-  (call $$clinit__void_<once>_@lambdas.Lambdas )
   ;;@ lambdas/Lambdas.java:142:4
   (return (ref.cast (ref null $java.lang.Enum) (call_ref $function.m_m__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $intf))(local.get $e)(struct.get $lambdas.Lambdas.GenericFunctionalInterface.vtable $m_m__java_lang_Object__java_lang_Object (ref.cast (ref $lambdas.Lambdas.GenericFunctionalInterface.vtable) (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $intf))))))))
  )
@@ -4103,7 +4115,7 @@
   ;;@ lambdas/Lambdas.java:168:4
   (drop (call_ref $function.m_callParameterized__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error__java_lang_Error (ref.as_non_null (local.get $this))(call $$create__@lambdas.Lambdas.$LambdaImplementor$14 )(call $$create__@java.lang.Error )(struct.get $lambdas.Lambdas.vtable $m_callParameterized__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error__java_lang_Error (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
   ;;@ lambdas/Lambdas.java:169:4
-  (drop (call $m_callTypeVariableWithBounds__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum__java_lang_Enum@lambdas.Lambdas (call $$create__@lambdas.Lambdas.$LambdaImplementor$15 )(ref.cast (ref null $java.lang.Enum) (ref.null $java.lang.Object))))
+  (drop (call $m_callTypeVariableWithBounds_$private__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum__java_lang_Enum@lambdas.Lambdas (call $$create__@lambdas.Lambdas.$LambdaImplementor$15 )(ref.cast (ref null $java.lang.Enum) (ref.null $java.lang.Object))))
   ;;@ lambdas/Lambdas.java:170:4
   (drop (call_ref $function.m_callWithBiFunction__lambdas_Lambdas_BiFunction__lambdas_Lambdas_GenericFunctionalInterface_$pp_lambdas (ref.as_non_null (local.get $this))(call $$create__@lambdas.Lambdas.$LambdaImplementor$16 )(struct.get $lambdas.Lambdas.vtable $m_callWithBiFunction__lambdas_Lambdas_BiFunction__lambdas_Lambdas_GenericFunctionalInterface_$pp_lambdas (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
   ;;@ lambdas/Lambdas.java:174:4

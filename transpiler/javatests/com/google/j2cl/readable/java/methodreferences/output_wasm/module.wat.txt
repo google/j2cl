@@ -2019,10 +2019,20 @@
 (func $$create__@methodreferences.MethodReferences
  (result (ref null $methodreferences.MethodReferences))
  ;;@ methodreferences/MethodReferences.java:20:13
- (local $$instance (ref null $methodreferences.MethodReferences))
  (block
   ;;@ methodreferences/MethodReferences.java:20:13
   (call $$clinit__void_<once>_@methodreferences.MethodReferences )
+  ;;@ methodreferences/MethodReferences.java:20:13
+  (return (call $$create_$private__@methodreferences.MethodReferences ))
+ )
+)
+
+;;; MethodReferences<T> MethodReferences.$create_$private()
+(func $$create_$private__@methodreferences.MethodReferences
+ (result (ref null $methodreferences.MethodReferences))
+ ;;@ methodreferences/MethodReferences.java:20:13
+ (local $$instance (ref null $methodreferences.MethodReferences))
+ (block
   ;;@ methodreferences/MethodReferences.java:20:13
   (local.set $$instance (struct.new $methodreferences.MethodReferences (ref.as_non_null (global.get $methodreferences.MethodReferences.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ methodreferences/MethodReferences.java:20:13
@@ -2047,8 +2057,18 @@
  (result (ref null $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:64:16
  (block
-  ;;@ methodreferences/MethodReferences.java:64:20
+  ;;@ methodreferences/MethodReferences.java:64:16
   (call $$clinit__void_<once>_@methodreferences.MethodReferences )
+  ;;@ methodreferences/MethodReferences.java:64:16
+  (return (call $m_m_$private__java_lang_Object@methodreferences.MethodReferences ))
+ )
+)
+
+;;; Object MethodReferences.m_$private()
+(func $m_m_$private__java_lang_Object@methodreferences.MethodReferences
+ (result (ref null $java.lang.Object))
+ ;;@ methodreferences/MethodReferences.java:64:16
+ (block
   ;;@ methodreferences/MethodReferences.java:65:4
   (return (call $$create__@java.lang.Object ))
  )
@@ -2132,7 +2152,7 @@
   (local.set $objectFactory (call $$create__@methodreferences.MethodReferences.$LambdaImplementor$3 ))
   ;;@ methodreferences/MethodReferences.java:88:4
   (local.set $objectFactory (block (result (ref null $methodreferences.MethodReferences.$LambdaImplementor$4))
-   (local.set $$$q (call $$create__@methodreferences.MethodReferences ))
+   (local.set $$$q (call $$create_$private__@methodreferences.MethodReferences ))
    (call $$create__methodreferences_MethodReferences@methodreferences.MethodReferences.$LambdaImplementor$4 (local.get $$$q))
   ))
   ;;@ methodreferences/MethodReferences.java:90:4
@@ -2147,7 +2167,7 @@
   (local.set $arrayProducer (call $$create__@methodreferences.MethodReferences.$LambdaImplementor$9 ))
   ;;@ methodreferences/MethodReferences.java:101:4
   (local.set $objectFactory (block (result (ref null $methodreferences.MethodReferences.$LambdaImplementor$10))
-   (local.set $$$q_1 (call $$create__@methodreferences.MethodReferences ))
+   (local.set $$$q_1 (call $$create_$private__@methodreferences.MethodReferences ))
    (call $$create__methodreferences_MethodReferences@methodreferences.MethodReferences.$LambdaImplementor$10 (local.get $$$q_1))
   ))
   ;;@ methodreferences/MethodReferences.java:103:4
@@ -2162,7 +2182,7 @@
   (local.set $jsobjectFactory (call $$create__@methodreferences.MethodReferences.$LambdaImplementor$15 ))
   ;;@ methodreferences/MethodReferences.java:112:4
   (local.set $jsobjectFactory (block (result (ref null $methodreferences.MethodReferences.$LambdaImplementor$16))
-   (local.set $$$q_2 (call $$create__@methodreferences.MethodReferences ))
+   (local.set $$$q_2 (call $$create_$private__@methodreferences.MethodReferences ))
    (call $$create__methodreferences_MethodReferences@methodreferences.MethodReferences.$LambdaImplementor$16 (local.get $$$q_2))
   ))
   ;;@ methodreferences/MethodReferences.java:114:4
@@ -2197,7 +2217,7 @@
   (call $$clinit__void_<once>_@java.lang.Object )
   ;;@ methodreferences/MethodReferences.java:76:2
   (global.set $staticStringProducer@methodreferences.MethodReferences (block (result (ref null $methodreferences.MethodReferences.$LambdaImplementor$1))
-   (local.set $$$q (call $m_m__java_lang_Object@methodreferences.MethodReferences ))
+   (local.set $$$q (call $m_m_$private__java_lang_Object@methodreferences.MethodReferences ))
    (call $$create__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$1 (local.get $$$q))
   ))
  )

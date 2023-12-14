@@ -42,16 +42,28 @@
 
 ;;; Code for simplegenerictype.SimpleGenericType [methods]
 
-;;; SimpleGenericType<T, S> SimpleGenericType.$create(T t, S s)
+;;; SimpleGenericType<T, S> SimpleGenericType.$create(T arg0, S arg1)
 (func $$create__java_lang_Object__java_lang_Object@simplegenerictype.SimpleGenericType
+ (param $arg0 (ref null $java.lang.Object))
+ (param $arg1 (ref null $java.lang.Object))
+ (result (ref null $simplegenerictype.SimpleGenericType))
+ ;;@ simplegenerictype/SimpleGenericType.java:22:9
+ (block
+  ;;@ simplegenerictype/SimpleGenericType.java:22:9
+  (call $$clinit__void_<once>_@simplegenerictype.SimpleGenericType )
+  ;;@ simplegenerictype/SimpleGenericType.java:22:9
+  (return (call $$create_$private__java_lang_Object__java_lang_Object@simplegenerictype.SimpleGenericType (local.get $arg0)(local.get $arg1)))
+ )
+)
+
+;;; SimpleGenericType<T, S> SimpleGenericType.$create_$private(T t, S s)
+(func $$create_$private__java_lang_Object__java_lang_Object@simplegenerictype.SimpleGenericType
  (param $t (ref null $java.lang.Object))
  (param $s (ref null $java.lang.Object))
  (result (ref null $simplegenerictype.SimpleGenericType))
  ;;@ simplegenerictype/SimpleGenericType.java:22:9
  (local $$instance (ref null $simplegenerictype.SimpleGenericType))
  (block
-  ;;@ simplegenerictype/SimpleGenericType.java:22:9
-  (call $$clinit__void_<once>_@simplegenerictype.SimpleGenericType )
   ;;@ simplegenerictype/SimpleGenericType.java:22:9
   (local.set $$instance (struct.new $simplegenerictype.SimpleGenericType (ref.as_non_null (global.get $simplegenerictype.SimpleGenericType.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ simplegenerictype/SimpleGenericType.java:22:9
@@ -87,7 +99,7 @@
  (local.set $this (ref.cast (ref $simplegenerictype.SimpleGenericType) (local.get $this.untyped)))
  (block
   ;;@ simplegenerictype/SimpleGenericType.java:28:4
-  (local.set $g (call $$create__java_lang_Object__java_lang_Object@simplegenerictype.SimpleGenericType (call $$create__@java.lang.Object )(call $$create__@java.lang.Error )))
+  (local.set $g (call $$create_$private__java_lang_Object__java_lang_Object@simplegenerictype.SimpleGenericType (call $$create__@java.lang.Object )(call $$create__@java.lang.Error )))
  )
 )
 (elem declare func $m_test__void@simplegenerictype.SimpleGenericType)

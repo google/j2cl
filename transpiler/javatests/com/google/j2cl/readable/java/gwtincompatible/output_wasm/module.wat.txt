@@ -601,7 +601,7 @@
    (then
     (block
      ;;@ gwtincompatible/Implementor.java:36:7
-     (global.set $namesToValuesMap@gwtincompatible.Implementor.SomeEnum (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values__arrayOf_gwtincompatible_Implementor_SomeEnum@gwtincompatible.Implementor.SomeEnum )))
+     (global.set $namesToValuesMap@gwtincompatible.Implementor.SomeEnum (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values_$private__arrayOf_gwtincompatible_Implementor_SomeEnum@gwtincompatible.Implementor.SomeEnum )))
     )
    )
   )
@@ -617,6 +617,16 @@
  (block
   ;;@ gwtincompatible/Implementor.java:36:7
   (call $$clinit__void_<once>_@gwtincompatible.Implementor.SomeEnum )
+  ;;@ gwtincompatible/Implementor.java:36:7
+  (return (call $m_values_$private__arrayOf_gwtincompatible_Implementor_SomeEnum@gwtincompatible.Implementor.SomeEnum ))
+ )
+)
+
+;;; SomeEnum[] SomeEnum.values_$private()
+(func $m_values_$private__arrayOf_gwtincompatible_Implementor_SomeEnum@gwtincompatible.Implementor.SomeEnum
+ (result (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ gwtincompatible/Implementor.java:36:7
+ (block
   ;;@ gwtincompatible/Implementor.java:36:7
   (return (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array (global.get $COMPATIBLE@gwtincompatible.Implementor.SomeEnum))))
  )

@@ -253,8 +253,20 @@
  )
 )
 
-;;; void StaticJsMembers.f1(int a)
+;;; void StaticJsMembers.f1(int arg0)
 (func $m_f1__int__void@staticjsmembers.StaticJsMembers
+ (param $arg0 i32)
+ ;;@ staticjsmembers/StaticJsMembers.java:51:21
+ (block
+  ;;@ staticjsmembers/StaticJsMembers.java:51:21
+  (call $$clinit__void_<once>_@staticjsmembers.StaticJsMembers )
+  ;;@ staticjsmembers/StaticJsMembers.java:51:21
+  (call $m_f1_$private__int__void@staticjsmembers.StaticJsMembers (local.get $arg0))
+ )
+)
+
+;;; void StaticJsMembers.f1_$private(int a)
+(func $m_f1_$private__int__void@staticjsmembers.StaticJsMembers
  (param $a i32)
  ;;@ staticjsmembers/StaticJsMembers.java:51:21
  (block
@@ -263,8 +275,20 @@
  )
 )
 
-;;; void StaticJsMembers.f2(int a)
+;;; void StaticJsMembers.f2(int arg0)
 (func $m_f2__int__void@staticjsmembers.StaticJsMembers
+ (param $arg0 i32)
+ ;;@ staticjsmembers/StaticJsMembers.java:54:21
+ (block
+  ;;@ staticjsmembers/StaticJsMembers.java:54:21
+  (call $$clinit__void_<once>_@staticjsmembers.StaticJsMembers )
+  ;;@ staticjsmembers/StaticJsMembers.java:54:21
+  (call $m_f2_$private__int__void@staticjsmembers.StaticJsMembers (local.get $arg0))
+ )
+)
+
+;;; void StaticJsMembers.f2_$private(int a)
+(func $m_f2_$private__int__void@staticjsmembers.StaticJsMembers
  (param $a i32)
  ;;@ staticjsmembers/StaticJsMembers.java:54:21
  (block
@@ -326,13 +350,13 @@
  (local.set $this (ref.cast (ref $staticjsmembers.StaticJsMembers) (local.get $this.untyped)))
  (block
   ;;@ staticjsmembers/StaticJsMembers.java:78:4
-  (call $m_f1__int__void@staticjsmembers.StaticJsMembers (i32.const 1))
+  (call $m_f1_$private__int__void@staticjsmembers.StaticJsMembers (i32.const 1))
   ;;@ staticjsmembers/StaticJsMembers.java:79:4
-  (call $m_f1__int__void@staticjsmembers.StaticJsMembers (i32.const 1))
+  (call $m_f1_$private__int__void@staticjsmembers.StaticJsMembers (i32.const 1))
   ;;@ staticjsmembers/StaticJsMembers.java:80:4
-  (call $m_f2__int__void@staticjsmembers.StaticJsMembers (i32.const 1))
+  (call $m_f2_$private__int__void@staticjsmembers.StaticJsMembers (i32.const 1))
   ;;@ staticjsmembers/StaticJsMembers.java:81:4
-  (call $m_f2__int__void@staticjsmembers.StaticJsMembers (i32.const 1))
+  (call $m_f2_$private__int__void@staticjsmembers.StaticJsMembers (i32.const 1))
   ;;@ staticjsmembers/StaticJsMembers.java:82:4
   (call $m_f3__double__void@staticjsmembers.StaticJsMembers (f64.const 1.1))
   ;;@ staticjsmembers/StaticJsMembers.java:83:4

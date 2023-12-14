@@ -527,7 +527,7 @@
    (then
     (block
      ;;@ deprecated/DeprecatedExample.java:55:7
-     (global.set $namesToValuesMap@deprecated.DeprecatedExample.DeprecatedEnum (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values__arrayOf_deprecated_DeprecatedExample_DeprecatedEnum@deprecated.DeprecatedExample.DeprecatedEnum )))
+     (global.set $namesToValuesMap@deprecated.DeprecatedExample.DeprecatedEnum (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values_$private__arrayOf_deprecated_DeprecatedExample_DeprecatedEnum@deprecated.DeprecatedExample.DeprecatedEnum )))
     )
    )
   )
@@ -538,6 +538,18 @@
 
 ;;; DeprecatedEnum[] DeprecatedEnum.values()
 (func $m_values__arrayOf_deprecated_DeprecatedExample_DeprecatedEnum@deprecated.DeprecatedExample.DeprecatedEnum
+ (result (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ deprecated/DeprecatedExample.java:55:7
+ (block
+  ;;@ deprecated/DeprecatedExample.java:55:7
+  (call $$clinit__void_<once>_@deprecated.DeprecatedExample.DeprecatedEnum )
+  ;;@ deprecated/DeprecatedExample.java:55:7
+  (return (call $m_values_$private__arrayOf_deprecated_DeprecatedExample_DeprecatedEnum@deprecated.DeprecatedExample.DeprecatedEnum ))
+ )
+)
+
+;;; DeprecatedEnum[] DeprecatedEnum.values_$private()
+(func $m_values_$private__arrayOf_deprecated_DeprecatedExample_DeprecatedEnum@deprecated.DeprecatedExample.DeprecatedEnum
  (result (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ deprecated/DeprecatedExample.java:55:7
  (block

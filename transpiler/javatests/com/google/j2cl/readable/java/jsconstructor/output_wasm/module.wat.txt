@@ -1755,16 +1755,28 @@
 
 ;;; Code for jsconstructor.JsConstructorClass.SubVarargs [methods]
 
-;;; SubVarargs SubVarargs.$create(Object i, int... args)
+;;; SubVarargs SubVarargs.$create(Object arg0, int... arg1)
 (func $$create__java_lang_Object__arrayOf_int@jsconstructor.JsConstructorClass.SubVarargs
+ (param $arg0 (ref null $java.lang.Object))
+ (param $arg1 (ref null $javaemul.internal.WasmArray.OfInt))
+ (result (ref null $jsconstructor.JsConstructorClass.SubVarargs))
+ ;;@ jsconstructor/JsConstructorClass.java:161:11
+ (block
+  ;;@ jsconstructor/JsConstructorClass.java:161:11
+  (call $$clinit__void_<once>_@jsconstructor.JsConstructorClass.SubVarargs )
+  ;;@ jsconstructor/JsConstructorClass.java:161:11
+  (return (call $$create_$private__java_lang_Object__arrayOf_int@jsconstructor.JsConstructorClass.SubVarargs (local.get $arg0)(local.get $arg1)))
+ )
+)
+
+;;; SubVarargs SubVarargs.$create_$private(Object i, int... args)
+(func $$create_$private__java_lang_Object__arrayOf_int@jsconstructor.JsConstructorClass.SubVarargs
  (param $i (ref null $java.lang.Object))
  (param $args (ref null $javaemul.internal.WasmArray.OfInt))
  (result (ref null $jsconstructor.JsConstructorClass.SubVarargs))
  ;;@ jsconstructor/JsConstructorClass.java:161:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.SubVarargs))
  (block
-  ;;@ jsconstructor/JsConstructorClass.java:161:11
-  (call $$clinit__void_<once>_@jsconstructor.JsConstructorClass.SubVarargs )
   ;;@ jsconstructor/JsConstructorClass.java:161:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.SubVarargs (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.SubVarargs.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
   ;;@ jsconstructor/JsConstructorClass.java:161:11
@@ -1786,15 +1798,26 @@
  )
 )
 
-;;; SubVarargs SubVarargs.$create(int j)
+;;; SubVarargs SubVarargs.$create(int arg0)
 (func $$create__int@jsconstructor.JsConstructorClass.SubVarargs
+ (param $arg0 i32)
+ (result (ref null $jsconstructor.JsConstructorClass.SubVarargs))
+ ;;@ jsconstructor/JsConstructorClass.java:165:11
+ (block
+  ;;@ jsconstructor/JsConstructorClass.java:165:11
+  (call $$clinit__void_<once>_@jsconstructor.JsConstructorClass.SubVarargs )
+  ;;@ jsconstructor/JsConstructorClass.java:165:11
+  (return (call $$create_$private__int@jsconstructor.JsConstructorClass.SubVarargs (local.get $arg0)))
+ )
+)
+
+;;; SubVarargs SubVarargs.$create_$private(int j)
+(func $$create_$private__int@jsconstructor.JsConstructorClass.SubVarargs
  (param $j i32)
  (result (ref null $jsconstructor.JsConstructorClass.SubVarargs))
  ;;@ jsconstructor/JsConstructorClass.java:165:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.SubVarargs))
  (block
-  ;;@ jsconstructor/JsConstructorClass.java:165:11
-  (call $$clinit__void_<once>_@jsconstructor.JsConstructorClass.SubVarargs )
   ;;@ jsconstructor/JsConstructorClass.java:165:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.SubVarargs (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.SubVarargs.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
   ;;@ jsconstructor/JsConstructorClass.java:165:11
@@ -1824,9 +1847,9 @@
   ;;@ jsconstructor/JsConstructorClass.java:169:38
   (call $$clinit__void_<once>_@jsconstructor.JsConstructorClass.SubVarargs )
   ;;@ jsconstructor/JsConstructorClass.java:170:6
-  (local.set $unusedS1 (call $$create__int@jsconstructor.JsConstructorClass.SubVarargs (i32.const 2)))
+  (local.set $unusedS1 (call $$create_$private__int@jsconstructor.JsConstructorClass.SubVarargs (i32.const 2)))
   ;;@ jsconstructor/JsConstructorClass.java:171:6
-  (local.set $unusedS2 (call $$create__java_lang_Object__arrayOf_int@jsconstructor.JsConstructorClass.SubVarargs (call $$create__@java.lang.Object )(call $m_newWithLiteral__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@jsconstructor.JsConstructorClass$SubVarargs-1 (i32.const 0) (i32.const 3)))))
+  (local.set $unusedS2 (call $$create_$private__java_lang_Object__arrayOf_int@jsconstructor.JsConstructorClass.SubVarargs (call $$create__@java.lang.Object )(call $m_newWithLiteral__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@jsconstructor.JsConstructorClass$SubVarargs-1 (i32.const 0) (i32.const 3)))))
  )
 )
 

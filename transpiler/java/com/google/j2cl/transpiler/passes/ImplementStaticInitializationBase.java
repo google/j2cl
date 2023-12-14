@@ -48,7 +48,6 @@ public abstract class ImplementStaticInitializationBase extends NormalizationPas
       if (type.isNative()) {
         continue;
       }
-      synthesizeClinitCallsInMethods(type);
       synthesizeSuperClinitCalls(type);
       // Apply the additional normalizations defined in subclasses.
       applyTo(type);
@@ -87,7 +86,7 @@ public abstract class ImplementStaticInitializationBase extends NormalizationPas
   }
 
   /** Add clinit calls to methods and (real js) constructors. */
-  private void synthesizeClinitCallsInMethods(Type type) {
+  public void synthesizeClinitCallsInMethods(Type type) {
     type.accept(
         new AbstractRewriter() {
           @Override

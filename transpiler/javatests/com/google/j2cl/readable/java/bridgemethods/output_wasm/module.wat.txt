@@ -4969,10 +4969,20 @@
 (func $$create__@bridgemethods.AccidentalOverrideBridge
  (result (ref null $bridgemethods.AccidentalOverrideBridge))
  ;;@ bridgemethods/BridgeMethod.java:96:6
- (local $$instance (ref null $bridgemethods.AccidentalOverrideBridge))
  (block
   ;;@ bridgemethods/BridgeMethod.java:96:6
   (call $$clinit__void_<once>_@bridgemethods.AccidentalOverrideBridge )
+  ;;@ bridgemethods/BridgeMethod.java:96:6
+  (return (call $$create_$private__@bridgemethods.AccidentalOverrideBridge ))
+ )
+)
+
+;;; AccidentalOverrideBridge AccidentalOverrideBridge.$create_$private()
+(func $$create_$private__@bridgemethods.AccidentalOverrideBridge
+ (result (ref null $bridgemethods.AccidentalOverrideBridge))
+ ;;@ bridgemethods/BridgeMethod.java:96:6
+ (local $$instance (ref null $bridgemethods.AccidentalOverrideBridge))
+ (block
   ;;@ bridgemethods/BridgeMethod.java:96:6
   (local.set $$instance (struct.new $bridgemethods.AccidentalOverrideBridge (ref.as_non_null (global.get $bridgemethods.AccidentalOverrideBridge.vtable)) (ref.as_non_null (global.get $bridgemethods.AccidentalOverrideBridge.itable)) (i32.const 0)))
   ;;@ bridgemethods/BridgeMethod.java:96:6
@@ -5002,7 +5012,7 @@
  (local.set $this (ref.cast (ref $bridgemethods.AccidentalOverrideBridge) (local.get $this.untyped)))
  (block
   ;;@ bridgemethods/BridgeMethod.java:100:4
-  (local.set $g (call $$create__@bridgemethods.AccidentalOverrideBridge ))
+  (local.set $g (call $$create_$private__@bridgemethods.AccidentalOverrideBridge ))
   ;;@ bridgemethods/BridgeMethod.java:101:4
   (drop (call_ref $function.m_get__java_lang_String__java_lang_String (ref.as_non_null (local.get $g))(call $function.no.side.effects.$getString_||__java_lang_String (ref.func $$getString_||__java_lang_String@java.lang.StackTraceElement) )(struct.get $bridgemethods.Getter.vtable $m_get__java_lang_String__java_lang_String (ref.cast (ref $bridgemethods.Getter.vtable) (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $g)))))))
  )

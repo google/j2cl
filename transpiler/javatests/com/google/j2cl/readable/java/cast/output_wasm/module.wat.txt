@@ -793,10 +793,20 @@
 (func $$create__@cast.CastGenerics
  (result (ref null $cast.CastGenerics))
  ;;@ cast/CastGenerics.java:20:13
- (local $$instance (ref null $cast.CastGenerics))
  (block
   ;;@ cast/CastGenerics.java:20:13
   (call $$clinit__void_<once>_@cast.CastGenerics )
+  ;;@ cast/CastGenerics.java:20:13
+  (return (call $$create_$private__@cast.CastGenerics ))
+ )
+)
+
+;;; CastGenerics<T, E> CastGenerics.$create_$private()
+(func $$create_$private__@cast.CastGenerics
+ (result (ref null $cast.CastGenerics))
+ ;;@ cast/CastGenerics.java:20:13
+ (local $$instance (ref null $cast.CastGenerics))
+ (block
   ;;@ cast/CastGenerics.java:20:13
   (local.set $$instance (struct.new $cast.CastGenerics (ref.as_non_null (global.get $cast.CastGenerics.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.Object)))
   ;;@ cast/CastGenerics.java:20:13
@@ -862,10 +872,10 @@
   ;;@ cast/CastGenerics.java:50:70
   (call $$clinit__void_<once>_@cast.CastGenerics )
   ;;@ cast/CastGenerics.java:51:4
-  (local.set $str (ref.cast (ref null $java.lang.String) (struct.get $cast.CastGenerics $field@cast.CastGenerics (call $$create__@cast.CastGenerics ))))
+  (local.set $str (ref.cast (ref null $java.lang.String) (struct.get $cast.CastGenerics $field@cast.CastGenerics (call $$create_$private__@cast.CastGenerics ))))
   ;;@ cast/CastGenerics.java:52:4
   (local.set $str (ref.cast (ref null $java.lang.String) (block (result (ref null $java.lang.Object))
-   (local.set $$qualifier (call $$create__@cast.CastGenerics ))
+   (local.set $$qualifier (call $$create_$private__@cast.CastGenerics ))
    (call_ref $function.m_method__java_lang_Object_$pp_cast (ref.as_non_null (local.get $$qualifier))(struct.get $cast.CastGenerics.vtable $m_method__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics $vtable(local.get $$qualifier))))
   )))
   ;;@ cast/CastGenerics.java:54:4

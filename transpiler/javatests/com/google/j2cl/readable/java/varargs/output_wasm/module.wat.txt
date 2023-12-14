@@ -265,10 +265,20 @@
 (func $$create__@varargs.Varargs
  (result (ref null $varargs.Varargs))
  ;;@ varargs/Varargs.java:29:9
- (local $$instance (ref null $varargs.Varargs))
  (block
   ;;@ varargs/Varargs.java:29:9
   (call $$clinit__void_<once>_@varargs.Varargs )
+  ;;@ varargs/Varargs.java:29:9
+  (return (call $$create_$private__@varargs.Varargs ))
+ )
+)
+
+;;; Varargs Varargs.$create_$private()
+(func $$create_$private__@varargs.Varargs
+ (result (ref null $varargs.Varargs))
+ ;;@ varargs/Varargs.java:29:9
+ (local $$instance (ref null $varargs.Varargs))
+ (block
   ;;@ varargs/Varargs.java:29:9
   (local.set $$instance (struct.new $varargs.Varargs (ref.as_non_null (global.get $varargs.Varargs.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject)))
   ;;@ varargs/Varargs.java:29:9
@@ -356,13 +366,23 @@
 )
 (elem declare func $m_testLambda__varargs_Varargs_FunctionalInterface__void@varargs.Varargs)
 
-;;; void Varargs.fun(T... elements)
+;;; void Varargs.fun(T... arg0)
 (func $m_fun__arrayOf_java_lang_Object__void@varargs.Varargs
+ (param $arg0 (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ varargs/Varargs.java:45:25
+ (block
+  ;;@ varargs/Varargs.java:45:25
+  (call $$clinit__void_<once>_@varargs.Varargs )
+  ;;@ varargs/Varargs.java:45:25
+  (call $m_fun_$private__arrayOf_java_lang_Object__void@varargs.Varargs (local.get $arg0))
+ )
+)
+
+;;; void Varargs.fun_$private(T... elements)
+(func $m_fun_$private__arrayOf_java_lang_Object__void@varargs.Varargs
  (param $elements (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ varargs/Varargs.java:45:25
  (block
-  ;;@ varargs/Varargs.java:45:44
-  (call $$clinit__void_<once>_@varargs.Varargs )
  )
 )
 
@@ -375,7 +395,7 @@
   ;;@ varargs/Varargs.java:47:39
   (call $$clinit__void_<once>_@varargs.Varargs )
   ;;@ varargs/Varargs.java:48:4
-  (call $m_fun__arrayOf_java_lang_Object__void@varargs.Varargs (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array (local.get $a)(local.get $b))))
+  (call $m_fun_$private__arrayOf_java_lang_Object__void@varargs.Varargs (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array (local.get $a)(local.get $b))))
  )
 )
 
@@ -389,7 +409,7 @@
  (local.set $this (ref.cast (ref $varargs.Varargs) (local.get $this.untyped)))
  (block
   ;;@ varargs/Varargs.java:52:4
-  (local.set $v (call $$create__@varargs.Varargs ))
+  (local.set $v (call $$create_$private__@varargs.Varargs ))
   ;;@ varargs/Varargs.java:53:4
   (call_ref $function.m_test__int__arrayOf_java_lang_Object__void (ref.as_non_null (local.get $v))(i32.const 1)(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array ))(struct.get $varargs.Varargs.vtable $m_test__int__arrayOf_java_lang_Object__void (struct.get $varargs.Varargs $vtable(local.get $v))))
   ;;@ varargs/Varargs.java:54:4

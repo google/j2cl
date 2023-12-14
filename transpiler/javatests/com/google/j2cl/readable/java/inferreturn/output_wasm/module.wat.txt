@@ -45,10 +45,20 @@
 (func $$create__@inferreturn.InferReturn
  (result (ref null $inferreturn.InferReturn))
  ;;@ inferreturn/InferReturn.java:21:13
- (local $$instance (ref null $inferreturn.InferReturn))
  (block
   ;;@ inferreturn/InferReturn.java:21:13
   (call $$clinit__void_<once>_@inferreturn.InferReturn )
+  ;;@ inferreturn/InferReturn.java:21:13
+  (return (call $$create_$private__@inferreturn.InferReturn ))
+ )
+)
+
+;;; InferReturn<T> InferReturn.$create_$private()
+(func $$create_$private__@inferreturn.InferReturn
+ (result (ref null $inferreturn.InferReturn))
+ ;;@ inferreturn/InferReturn.java:21:13
+ (local $$instance (ref null $inferreturn.InferReturn))
+ (block
   ;;@ inferreturn/InferReturn.java:21:13
   (local.set $$instance (struct.new $inferreturn.InferReturn (ref.as_non_null (global.get $inferreturn.InferReturn.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ inferreturn/InferReturn.java:21:13
@@ -68,16 +78,27 @@
  )
 )
 
-;;; InferReturn<T> InferReturn.inferGeneric(T foo)
+;;; InferReturn<T> InferReturn.inferGeneric(T arg0)
 (func $m_inferGeneric__java_lang_Object__inferreturn_InferReturn@inferreturn.InferReturn
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $inferreturn.InferReturn))
+ ;;@ inferreturn/InferReturn.java:23:35
+ (block
+  ;;@ inferreturn/InferReturn.java:23:35
+  (call $$clinit__void_<once>_@inferreturn.InferReturn )
+  ;;@ inferreturn/InferReturn.java:23:35
+  (return (call $m_inferGeneric_$private__java_lang_Object__inferreturn_InferReturn@inferreturn.InferReturn (local.get $arg0)))
+ )
+)
+
+;;; InferReturn<T> InferReturn.inferGeneric_$private(T foo)
+(func $m_inferGeneric_$private__java_lang_Object__inferreturn_InferReturn@inferreturn.InferReturn
  (param $foo (ref null $java.lang.Object))
  (result (ref null $inferreturn.InferReturn))
  ;;@ inferreturn/InferReturn.java:23:35
  (block
-  ;;@ inferreturn/InferReturn.java:23:55
-  (call $$clinit__void_<once>_@inferreturn.InferReturn )
   ;;@ inferreturn/InferReturn.java:24:4
-  (return (call $$create__@inferreturn.InferReturn ))
+  (return (call $$create_$private__@inferreturn.InferReturn ))
  )
 )
 
@@ -94,7 +115,7 @@
    (then
     (block
      ;;@ inferreturn/InferReturn.java:31:6
-     (return (call $m_inferGeneric__java_lang_Object__inferreturn_InferReturn@inferreturn.InferReturn (local.get $foo)))
+     (return (call $m_inferGeneric_$private__java_lang_Object__inferreturn_InferReturn@inferreturn.InferReturn (local.get $foo)))
     )
    )
   )
@@ -112,59 +133,101 @@
   ;;@ inferreturn/InferReturn.java:36:28
   (call $$clinit__void_<once>_@inferreturn.InferReturn )
   ;;@ inferreturn/InferReturn.java:37:4
-  (local.set $list (call $m_newArrayList__java_lang_Object__java_util_ArrayList@inferreturn.InferReturn (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@inferreturn.InferReturn) )))
+  (local.set $list (call $m_newArrayList_$private__java_lang_Object__java_util_ArrayList@inferreturn.InferReturn (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@inferreturn.InferReturn) )))
   ;;@ inferreturn/InferReturn.java:39:4
-  (call $m_acceptsArrayListOfObject__java_util_ArrayList__void@inferreturn.InferReturn (local.get $list))
+  (call $m_acceptsArrayListOfObject_$private__java_util_ArrayList__void@inferreturn.InferReturn (local.get $list))
   ;;@ inferreturn/InferReturn.java:41:4
-  (local.set $array (call $m_newArray__java_lang_Object__arrayOf_java_lang_Object@inferreturn.InferReturn (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@inferreturn.InferReturn) )))
+  (local.set $array (call $m_newArray_$private__java_lang_Object__arrayOf_java_lang_Object@inferreturn.InferReturn (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@inferreturn.InferReturn) )))
   ;;@ inferreturn/InferReturn.java:43:4
-  (call $m_acceptsArrayOfObject__arrayOf_java_lang_Object__void@inferreturn.InferReturn (local.get $array))
+  (call $m_acceptsArrayOfObject_$private__arrayOf_java_lang_Object__void@inferreturn.InferReturn (local.get $array))
  )
 )
 
-;;; ArrayList<V> InferReturn.newArrayList(V foo)
+;;; ArrayList<V> InferReturn.newArrayList(V arg0)
 (func $m_newArrayList__java_lang_Object__java_util_ArrayList@inferreturn.InferReturn
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.util.ArrayList))
+ ;;@ inferreturn/InferReturn.java:46:33
+ (block
+  ;;@ inferreturn/InferReturn.java:46:33
+  (call $$clinit__void_<once>_@inferreturn.InferReturn )
+  ;;@ inferreturn/InferReturn.java:46:33
+  (return (call $m_newArrayList_$private__java_lang_Object__java_util_ArrayList@inferreturn.InferReturn (local.get $arg0)))
+ )
+)
+
+;;; ArrayList<V> InferReturn.newArrayList_$private(V foo)
+(func $m_newArrayList_$private__java_lang_Object__java_util_ArrayList@inferreturn.InferReturn
  (param $foo (ref null $java.lang.Object))
  (result (ref null $java.util.ArrayList))
  ;;@ inferreturn/InferReturn.java:46:33
  (block
-  ;;@ inferreturn/InferReturn.java:46:53
-  (call $$clinit__void_<once>_@inferreturn.InferReturn )
   ;;@ inferreturn/InferReturn.java:47:4
   (return (call $$create__@java.util.ArrayList ))
  )
 )
 
-;;; V[] InferReturn.newArray(V foo)
+;;; V[] InferReturn.newArray(V arg0)
 (func $m_newArray__java_lang_Object__arrayOf_java_lang_Object@inferreturn.InferReturn
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ inferreturn/InferReturn.java:50:24
+ (block
+  ;;@ inferreturn/InferReturn.java:50:24
+  (call $$clinit__void_<once>_@inferreturn.InferReturn )
+  ;;@ inferreturn/InferReturn.java:50:24
+  (return (call $m_newArray_$private__java_lang_Object__arrayOf_java_lang_Object@inferreturn.InferReturn (local.get $arg0)))
+ )
+)
+
+;;; V[] InferReturn.newArray_$private(V foo)
+(func $m_newArray_$private__java_lang_Object__arrayOf_java_lang_Object@inferreturn.InferReturn
  (param $foo (ref null $java.lang.Object))
  (result (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ inferreturn/InferReturn.java:50:24
  (block
-  ;;@ inferreturn/InferReturn.java:50:40
-  (call $$clinit__void_<once>_@inferreturn.InferReturn )
   ;;@ inferreturn/InferReturn.java:51:4
   (return (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 0))))
  )
 )
 
-;;; void InferReturn.acceptsArrayListOfObject(ArrayList<Object> foo)
+;;; void InferReturn.acceptsArrayListOfObject(ArrayList<Object> arg0)
 (func $m_acceptsArrayListOfObject__java_util_ArrayList__void@inferreturn.InferReturn
- (param $foo (ref null $java.util.ArrayList))
+ (param $arg0 (ref null $java.util.ArrayList))
  ;;@ inferreturn/InferReturn.java:54:21
  (block
-  ;;@ inferreturn/InferReturn.java:54:69
+  ;;@ inferreturn/InferReturn.java:54:21
   (call $$clinit__void_<once>_@inferreturn.InferReturn )
+  ;;@ inferreturn/InferReturn.java:54:21
+  (call $m_acceptsArrayListOfObject_$private__java_util_ArrayList__void@inferreturn.InferReturn (local.get $arg0))
  )
 )
 
-;;; void InferReturn.acceptsArrayOfObject(Object[] foo)
+;;; void InferReturn.acceptsArrayListOfObject_$private(ArrayList<Object> foo)
+(func $m_acceptsArrayListOfObject_$private__java_util_ArrayList__void@inferreturn.InferReturn
+ (param $foo (ref null $java.util.ArrayList))
+ ;;@ inferreturn/InferReturn.java:54:21
+ (block
+ )
+)
+
+;;; void InferReturn.acceptsArrayOfObject(Object[] arg0)
 (func $m_acceptsArrayOfObject__arrayOf_java_lang_Object__void@inferreturn.InferReturn
+ (param $arg0 (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ inferreturn/InferReturn.java:58:21
+ (block
+  ;;@ inferreturn/InferReturn.java:58:21
+  (call $$clinit__void_<once>_@inferreturn.InferReturn )
+  ;;@ inferreturn/InferReturn.java:58:21
+  (call $m_acceptsArrayOfObject_$private__arrayOf_java_lang_Object__void@inferreturn.InferReturn (local.get $arg0))
+ )
+)
+
+;;; void InferReturn.acceptsArrayOfObject_$private(Object[] foo)
+(func $m_acceptsArrayOfObject_$private__arrayOf_java_lang_Object__void@inferreturn.InferReturn
  (param $foo (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ inferreturn/InferReturn.java:58:21
  (block
-  ;;@ inferreturn/InferReturn.java:58:56
-  (call $$clinit__void_<once>_@inferreturn.InferReturn )
  )
 )
 

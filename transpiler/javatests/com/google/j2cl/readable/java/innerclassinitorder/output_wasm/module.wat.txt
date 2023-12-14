@@ -1168,10 +1168,20 @@
 (func $$create__@innerclassinitorder.InnerClassInitOrder
  (result (ref null $innerclassinitorder.InnerClassInitOrder))
  ;;@ innerclassinitorder/InnerClassInitOrder.java:21:13
- (local $$instance (ref null $innerclassinitorder.InnerClassInitOrder))
  (block
   ;;@ innerclassinitorder/InnerClassInitOrder.java:21:13
   (call $$clinit__void_<once>_@innerclassinitorder.InnerClassInitOrder )
+  ;;@ innerclassinitorder/InnerClassInitOrder.java:21:13
+  (return (call $$create_$private__@innerclassinitorder.InnerClassInitOrder ))
+ )
+)
+
+;;; InnerClassInitOrder InnerClassInitOrder.$create_$private()
+(func $$create_$private__@innerclassinitorder.InnerClassInitOrder
+ (result (ref null $innerclassinitorder.InnerClassInitOrder))
+ ;;@ innerclassinitorder/InnerClassInitOrder.java:21:13
+ (local $$instance (ref null $innerclassinitorder.InnerClassInitOrder))
+ (block
   ;;@ innerclassinitorder/InnerClassInitOrder.java:21:13
   (local.set $$instance (struct.new $innerclassinitorder.InnerClassInitOrder (ref.as_non_null (global.get $innerclassinitorder.InnerClassInitOrder.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer)))
   ;;@ innerclassinitorder/InnerClassInitOrder.java:21:13
@@ -1466,7 +1476,7 @@
   ;;@ innerclassinitorder/InnerClassInitOrder.java:351:42
   (call $$clinit__void_<once>_@innerclassinitorder.InnerClassInitOrder )
   ;;@ innerclassinitorder/InnerClassInitOrder.java:352:4
-  (local.set $m (call $$create__@innerclassinitorder.InnerClassInitOrder ))
+  (local.set $m (call $$create_$private__@innerclassinitorder.InnerClassInitOrder ))
   ;;@ innerclassinitorder/InnerClassInitOrder.java:353:4
   (call_ref $function.m_testOuterThisFromSuperCall__void (ref.as_non_null (local.get $m))(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testOuterThisFromSuperCall__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
   ;;@ innerclassinitorder/InnerClassInitOrder.java:354:4

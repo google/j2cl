@@ -644,7 +644,7 @@
    (then
     (block
      ;;@ enums/Enum1.java:20:12
-     (global.set $namesToValuesMap@enums.Enum1 (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values__arrayOf_enums_Enum1@enums.Enum1 )))
+     (global.set $namesToValuesMap@enums.Enum1 (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values_$private__arrayOf_enums_Enum1@enums.Enum1 )))
     )
    )
   )
@@ -660,6 +660,16 @@
  (block
   ;;@ enums/Enum1.java:20:12
   (call $$clinit__void_<once>_@enums.Enum1 )
+  ;;@ enums/Enum1.java:20:12
+  (return (call $m_values_$private__arrayOf_enums_Enum1@enums.Enum1 ))
+ )
+)
+
+;;; Enum1[] Enum1.values_$private()
+(func $m_values_$private__arrayOf_enums_Enum1@enums.Enum1
+ (result (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ enums/Enum1.java:20:12
+ (block
   ;;@ enums/Enum1.java:20:12
   (return (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array (global.get $V1@enums.Enum1)(global.get $V2@enums.Enum1))))
  )
@@ -863,14 +873,25 @@
  )
 )
 
-;;; Enum2 Enum2.f(Object o)
+;;; Enum2 Enum2.f(Object arg0)
 (func $m_f__java_lang_Object__enums_Enum2@enums.Enum2
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $enums.Enum2))
+ ;;@ enums/Enum1.java:45:15
+ (block
+  ;;@ enums/Enum1.java:45:15
+  (call $$clinit__void_<once>_@enums.Enum2 )
+  ;;@ enums/Enum1.java:45:15
+  (return (call $m_f_$private__java_lang_Object__enums_Enum2@enums.Enum2 (local.get $arg0)))
+ )
+)
+
+;;; Enum2 Enum2.f_$private(Object o)
+(func $m_f_$private__java_lang_Object__enums_Enum2@enums.Enum2
  (param $o (ref null $java.lang.Object))
  (result (ref null $enums.Enum2))
  ;;@ enums/Enum1.java:45:15
  (block
-  ;;@ enums/Enum1.java:45:27
-  (call $$clinit__void_<once>_@enums.Enum2 )
   ;;@ enums/Enum1.java:46:4
   (return (ref.null $enums.Enum2))
  )
@@ -891,34 +912,45 @@
  (block
   ;;@ enums/Enum1.java:52:4
   (local.set $o1 (block (result i32)
-   (local.set $$qualifier (call $m_valueOf__java_lang_String__enums_Enum2@enums.Enum2 (ref.null $java.lang.String)))
+   (local.set $$qualifier (call $m_valueOf_$private__java_lang_String__enums_Enum2@enums.Enum2 (ref.null $java.lang.String)))
    (call_ref $function.m_ordinal__int (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $$qualifier))))
   ))
   ;;@ enums/Enum1.java:53:4
   (local.set $o2 (block (result i32)
-   (local.set $$qualifier_1 (call $m_valueOf__java_lang_String__enums_Enum2@enums.Enum2 (call $function.no.side.effects.$getString_|VALUE1|__java_lang_String (ref.func $$getString_|VALUE1|__java_lang_String@enums.Enum2) )))
+   (local.set $$qualifier_1 (call $m_valueOf_$private__java_lang_String__enums_Enum2@enums.Enum2 (call $function.no.side.effects.$getString_|VALUE1|__java_lang_String (ref.func $$getString_|VALUE1|__java_lang_String@enums.Enum2) )))
    (call_ref $function.m_ordinal__int (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $$qualifier_1))))
   ))
   ;;@ enums/Enum1.java:54:4
-  (local.set $l (array.len (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (call $m_values__arrayOf_enums_Enum2@enums.Enum2 ))))
+  (local.set $l (array.len (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (call $m_values_$private__arrayOf_enums_Enum2@enums.Enum2 ))))
  )
 )
 (elem declare func $m_specialMethods__void_$pp_enums@enums.Enum2)
 
-;;; Enum2 Enum2.valueOf(String name)
+;;; Enum2 Enum2.valueOf(String arg0)
 (func $m_valueOf__java_lang_String__enums_Enum2@enums.Enum2
- (param $name (ref null $java.lang.String))
+ (param $arg0 (ref null $java.lang.String))
  (result (ref null $enums.Enum2))
  ;;@ enums/Enum1.java:25:5
  (block
   ;;@ enums/Enum1.java:25:5
   (call $$clinit__void_<once>_@enums.Enum2 )
   ;;@ enums/Enum1.java:25:5
+  (return (call $m_valueOf_$private__java_lang_String__enums_Enum2@enums.Enum2 (local.get $arg0)))
+ )
+)
+
+;;; Enum2 Enum2.valueOf_$private(String name)
+(func $m_valueOf_$private__java_lang_String__enums_Enum2@enums.Enum2
+ (param $name (ref null $java.lang.String))
+ (result (ref null $enums.Enum2))
+ ;;@ enums/Enum1.java:25:5
+ (block
+  ;;@ enums/Enum1.java:25:5
   (if (ref.is_null (global.get $namesToValuesMap@enums.Enum2))
    (then
     (block
      ;;@ enums/Enum1.java:25:5
-     (global.set $namesToValuesMap@enums.Enum2 (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values__arrayOf_enums_Enum2@enums.Enum2 )))
+     (global.set $namesToValuesMap@enums.Enum2 (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values_$private__arrayOf_enums_Enum2@enums.Enum2 )))
     )
    )
   )
@@ -934,6 +966,16 @@
  (block
   ;;@ enums/Enum1.java:25:5
   (call $$clinit__void_<once>_@enums.Enum2 )
+  ;;@ enums/Enum1.java:25:5
+  (return (call $m_values_$private__arrayOf_enums_Enum2@enums.Enum2 ))
+ )
+)
+
+;;; Enum2[] Enum2.values_$private()
+(func $m_values_$private__arrayOf_enums_Enum2@enums.Enum2
+ (result (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ enums/Enum1.java:25:5
+ (block
   ;;@ enums/Enum1.java:25:5
   (return (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array (global.get $VALUE1@enums.Enum2)(global.get $VALUE2@enums.Enum2)(global.get $VALUE3@enums.Enum2)(global.get $VALUE4@enums.Enum2))))
  )
@@ -983,7 +1025,7 @@
   ;;@ enums/Enum1.java:29:2
   (global.set $VALUE4@enums.Enum2 (call $$create__java_lang_String__int__int@enums.Enum2.1 (call $function.no.side.effects.$getString_|VALUE4|__java_lang_String (ref.func $$getString_|VALUE4|__java_lang_String@enums.Enum2) )(i32.const 3)(i32.const 5)))
   ;;@ enums/Enum1.java:49:2
-  (global.set $C@enums.Enum2 (call $m_f__java_lang_Object__enums_Enum2@enums.Enum2 (call $$create__@java.lang.Object )))
+  (global.set $C@enums.Enum2 (call $m_f_$private__java_lang_Object__enums_Enum2@enums.Enum2 (call $$create__@java.lang.Object )))
  )
 )
 
@@ -1128,7 +1170,7 @@
    (then
     (block
      ;;@ enums/Enum1.java:58:5
-     (global.set $namesToValuesMap@enums.Enum3 (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values__arrayOf_enums_Enum3@enums.Enum3 )))
+     (global.set $namesToValuesMap@enums.Enum3 (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values_$private__arrayOf_enums_Enum3@enums.Enum3 )))
     )
    )
   )
@@ -1144,6 +1186,16 @@
  (block
   ;;@ enums/Enum1.java:58:5
   (call $$clinit__void_<once>_@enums.Enum3 )
+  ;;@ enums/Enum1.java:58:5
+  (return (call $m_values_$private__arrayOf_enums_Enum3@enums.Enum3 ))
+ )
+)
+
+;;; Enum3[] Enum3.values_$private()
+(func $m_values_$private__arrayOf_enums_Enum3@enums.Enum3
+ (result (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ enums/Enum1.java:58:5
+ (block
   ;;@ enums/Enum1.java:58:5
   (return (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array (global.get $VALUE1@enums.Enum3))))
  )

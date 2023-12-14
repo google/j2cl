@@ -342,10 +342,20 @@
 (func $$create__@cloneable.Cloneables.WithoutCloneable
  (result (ref null $cloneable.Cloneables.WithoutCloneable))
  ;;@ cloneable/Cloneables.java:19:22
- (local $$instance (ref null $cloneable.Cloneables.WithoutCloneable))
  (block
   ;;@ cloneable/Cloneables.java:19:22
   (call $$clinit__void_<once>_@cloneable.Cloneables.WithoutCloneable )
+  ;;@ cloneable/Cloneables.java:19:22
+  (return (call $$create_$private__@cloneable.Cloneables.WithoutCloneable ))
+ )
+)
+
+;;; WithoutCloneable WithoutCloneable.$create_$private()
+(func $$create_$private__@cloneable.Cloneables.WithoutCloneable
+ (result (ref null $cloneable.Cloneables.WithoutCloneable))
+ ;;@ cloneable/Cloneables.java:19:22
+ (local $$instance (ref null $cloneable.Cloneables.WithoutCloneable))
+ (block
   ;;@ cloneable/Cloneables.java:19:22
   (local.set $$instance (struct.new $cloneable.Cloneables.WithoutCloneable (ref.as_non_null (global.get $cloneable.Cloneables.WithoutCloneable.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ cloneable/Cloneables.java:19:22
@@ -375,7 +385,7 @@
  (local.set $this (ref.cast (ref $cloneable.Cloneables.WithoutCloneable) (local.get $this.untyped)))
  (block
   ;;@ cloneable/Cloneables.java:23:6
-  (return (call $$create__@cloneable.Cloneables.WithoutCloneable ))
+  (return (call $$create_$private__@cloneable.Cloneables.WithoutCloneable ))
  )
 )
 (elem declare func $m_clone__java_lang_Object@cloneable.Cloneables.WithoutCloneable)
@@ -443,10 +453,20 @@
 (func $$create__@cloneable.Cloneables.WithCloneable
  (result (ref null $cloneable.Cloneables.WithCloneable))
  ;;@ cloneable/Cloneables.java:27:22
- (local $$instance (ref null $cloneable.Cloneables.WithCloneable))
  (block
   ;;@ cloneable/Cloneables.java:27:22
   (call $$clinit__void_<once>_@cloneable.Cloneables.WithCloneable )
+  ;;@ cloneable/Cloneables.java:27:22
+  (return (call $$create_$private__@cloneable.Cloneables.WithCloneable ))
+ )
+)
+
+;;; WithCloneable WithCloneable.$create_$private()
+(func $$create_$private__@cloneable.Cloneables.WithCloneable
+ (result (ref null $cloneable.Cloneables.WithCloneable))
+ ;;@ cloneable/Cloneables.java:27:22
+ (local $$instance (ref null $cloneable.Cloneables.WithCloneable))
+ (block
   ;;@ cloneable/Cloneables.java:27:22
   (local.set $$instance (struct.new $cloneable.Cloneables.WithCloneable (ref.as_non_null (global.get $cloneable.Cloneables.WithCloneable.vtable)) (ref.as_non_null (global.get $cloneable.Cloneables.WithCloneable.itable)) (i32.const 0)))
   ;;@ cloneable/Cloneables.java:27:22
@@ -476,7 +496,7 @@
  (local.set $this (ref.cast (ref $cloneable.Cloneables.WithCloneable) (local.get $this.untyped)))
  (block
   ;;@ cloneable/Cloneables.java:31:6
-  (return (call $$create__@cloneable.Cloneables.WithCloneable ))
+  (return (call $$create_$private__@cloneable.Cloneables.WithCloneable ))
  )
 )
 (elem declare func $m_clone__java_lang_Object@cloneable.Cloneables.WithCloneable)
@@ -544,10 +564,20 @@
 (func $$create__@cloneable.Cloneables.WithoutCloneableChild
  (result (ref null $cloneable.Cloneables.WithoutCloneableChild))
  ;;@ cloneable/Cloneables.java:35:28
- (local $$instance (ref null $cloneable.Cloneables.WithoutCloneableChild))
  (block
   ;;@ cloneable/Cloneables.java:35:28
   (call $$clinit__void_<once>_@cloneable.Cloneables.WithoutCloneableChild )
+  ;;@ cloneable/Cloneables.java:35:28
+  (return (call $$create_$private__@cloneable.Cloneables.WithoutCloneableChild ))
+ )
+)
+
+;;; WithoutCloneableChild WithoutCloneableChild.$create_$private()
+(func $$create_$private__@cloneable.Cloneables.WithoutCloneableChild
+ (result (ref null $cloneable.Cloneables.WithoutCloneableChild))
+ ;;@ cloneable/Cloneables.java:35:28
+ (local $$instance (ref null $cloneable.Cloneables.WithoutCloneableChild))
+ (block
   ;;@ cloneable/Cloneables.java:35:28
   (local.set $$instance (struct.new $cloneable.Cloneables.WithoutCloneableChild (ref.as_non_null (global.get $cloneable.Cloneables.WithoutCloneableChild.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ cloneable/Cloneables.java:35:28
@@ -577,7 +607,7 @@
  (local.set $this (ref.cast (ref $cloneable.Cloneables.WithoutCloneableChild) (local.get $this.untyped)))
  (block
   ;;@ cloneable/Cloneables.java:38:6
-  (return (call $$create__@cloneable.Cloneables.WithoutCloneableChild ))
+  (return (call $$create_$private__@cloneable.Cloneables.WithoutCloneableChild ))
  )
 )
 (elem declare func $m_clone__java_lang_Object@cloneable.Cloneables.WithoutCloneableChild)
@@ -645,10 +675,20 @@
 (func $$create__@cloneable.Cloneables.WithCloneableChild
  (result (ref null $cloneable.Cloneables.WithCloneableChild))
  ;;@ cloneable/Cloneables.java:42:28
- (local $$instance (ref null $cloneable.Cloneables.WithCloneableChild))
  (block
   ;;@ cloneable/Cloneables.java:42:28
   (call $$clinit__void_<once>_@cloneable.Cloneables.WithCloneableChild )
+  ;;@ cloneable/Cloneables.java:42:28
+  (return (call $$create_$private__@cloneable.Cloneables.WithCloneableChild ))
+ )
+)
+
+;;; WithCloneableChild WithCloneableChild.$create_$private()
+(func $$create_$private__@cloneable.Cloneables.WithCloneableChild
+ (result (ref null $cloneable.Cloneables.WithCloneableChild))
+ ;;@ cloneable/Cloneables.java:42:28
+ (local $$instance (ref null $cloneable.Cloneables.WithCloneableChild))
+ (block
   ;;@ cloneable/Cloneables.java:42:28
   (local.set $$instance (struct.new $cloneable.Cloneables.WithCloneableChild (ref.as_non_null (global.get $cloneable.Cloneables.WithCloneableChild.vtable)) (ref.as_non_null (global.get $cloneable.Cloneables.WithCloneableChild.itable)) (i32.const 0)))
   ;;@ cloneable/Cloneables.java:42:28
@@ -678,7 +718,7 @@
  (local.set $this (ref.cast (ref $cloneable.Cloneables.WithCloneableChild) (local.get $this.untyped)))
  (block
   ;;@ cloneable/Cloneables.java:45:6
-  (return (call $$create__@cloneable.Cloneables.WithCloneableChild ))
+  (return (call $$create_$private__@cloneable.Cloneables.WithCloneableChild ))
  )
 )
 (elem declare func $m_clone__java_lang_Object@cloneable.Cloneables.WithCloneableChild)

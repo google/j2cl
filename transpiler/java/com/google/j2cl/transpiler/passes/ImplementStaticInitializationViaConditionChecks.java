@@ -15,10 +15,12 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BooleanLiteral;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
@@ -27,12 +29,17 @@ import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.IfStatement;
+import com.google.j2cl.transpiler.ast.Member;
 import com.google.j2cl.transpiler.ast.Method;
+import com.google.j2cl.transpiler.ast.MethodCall;
+import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.Type;
+import com.google.j2cl.transpiler.ast.Visibility;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -46,13 +53,35 @@ public class ImplementStaticInitializationViaConditionChecks
   @Override
   public void applyTo(Type type) {
     synthesizeClinitCallsOnFieldAccess(type);
+    synthesizeClinitCallsInMethods(type);
     synthesizeClinitMethod(type);
   }
 
   /** Add clinit calls to field accesses. */
   private void synthesizeClinitCallsOnFieldAccess(Type type) {
+    HashMap<MethodDescriptor, MethodDescriptor> neededPrivateMethodsByPublic = new HashMap<>();
     type.accept(
         new AbstractRewriter() {
+          @Override
+          public Expression rewriteMethodCall(MethodCall methodCall) {
+            // To avoid calling clinit when calling the methods on the same class, the non-private
+            // method is converted to private method call. Then later on (below) we will add these
+            // new private methods.
+
+            MethodDescriptor target = methodCall.getTarget();
+            if (target.isMemberOf(type.getDeclaration()) && triggersClinit(target, type)) {
+              checkState(target.isStatic());
+
+              // No need to call clinit when accessing the method from members in the enclosing
+              // type.
+              MethodDescriptor privateDescriptor = createPrivateDescriptor(target);
+              methodCall = MethodCall.Builder.from(methodCall).setTarget(privateDescriptor).build();
+              neededPrivateMethodsByPublic.put(
+                  target.getDeclarationDescriptor(), privateDescriptor.getDeclarationDescriptor());
+            }
+            return methodCall;
+          }
+
           @Override
           public Expression rewriteFieldAccess(FieldAccess fieldAccess) {
             FieldDescriptor target = fieldAccess.getTarget();
@@ -75,6 +104,35 @@ public class ImplementStaticInitializationViaConditionChecks
             return fieldAccess;
           }
         });
+
+    // Insert private methods needed and make the public ones bridge to them to trigger clinit.
+    List<Member> members = type.getMembers();
+    for (int i = 0; i < members.size(); i++) {
+      if (!members.get(i).isMethod()) {
+        continue;
+      }
+      Method method = (Method) members.get(i);
+      MethodDescriptor privateDescriptor =
+          neededPrivateMethodsByPublic.remove(method.getDescriptor());
+      if (privateDescriptor == null) {
+        continue;
+      }
+      Method newPublicMethod =
+          AstUtils.createForwardingMethod(
+              method.getSourcePosition(),
+              null,
+              method.getDescriptor(),
+              privateDescriptor,
+              "Bridge to private");
+      members.set(i, newPublicMethod);
+      members.add(++i, Method.Builder.from(method).setMethodDescriptor(privateDescriptor).build());
+    }
+    checkState(neededPrivateMethodsByPublic.isEmpty(), neededPrivateMethodsByPublic);
+  }
+
+  private static MethodDescriptor createPrivateDescriptor(MethodDescriptor descriptor) {
+    return descriptor.transform(
+        m -> m.setVisibility(Visibility.PRIVATE).setName(descriptor.getName() + "_$private"));
   }
 
   /** Implements the static initialization method ($clinit). */

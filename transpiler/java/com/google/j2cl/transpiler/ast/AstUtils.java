@@ -194,8 +194,6 @@ public final class AstUtils {
       MethodDescriptor toMethodDescriptor,
       String jsDocDescription,
       boolean isStaticDispatch) {
-    checkArgument(!fromMethodDescriptor.getEnclosingTypeDescriptor().isInterface());
-
     List<Variable> parameters =
         createParameterVariables(fromMethodDescriptor.getParameterTypeDescriptors());
 

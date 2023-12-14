@@ -90,10 +90,20 @@
 (func $$create__@instanceinnerclass.InstanceInnerClass
  (result (ref null $instanceinnerclass.InstanceInnerClass))
  ;;@ instanceinnerclass/InstanceInnerClass.java:18:13
- (local $$instance (ref null $instanceinnerclass.InstanceInnerClass))
  (block
   ;;@ instanceinnerclass/InstanceInnerClass.java:18:13
   (call $$clinit__void_<once>_@instanceinnerclass.InstanceInnerClass )
+  ;;@ instanceinnerclass/InstanceInnerClass.java:18:13
+  (return (call $$create_$private__@instanceinnerclass.InstanceInnerClass ))
+ )
+)
+
+;;; InstanceInnerClass InstanceInnerClass.$create_$private()
+(func $$create_$private__@instanceinnerclass.InstanceInnerClass
+ (result (ref null $instanceinnerclass.InstanceInnerClass))
+ ;;@ instanceinnerclass/InstanceInnerClass.java:18:13
+ (local $$instance (ref null $instanceinnerclass.InstanceInnerClass))
+ (block
   ;;@ instanceinnerclass/InstanceInnerClass.java:18:13
   (local.set $$instance (struct.new $instanceinnerclass.InstanceInnerClass (ref.as_non_null (global.get $instanceinnerclass.InstanceInnerClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
   ;;@ instanceinnerclass/InstanceInnerClass.java:18:13
@@ -134,7 +144,7 @@
  (local.set $this (ref.cast (ref $instanceinnerclass.InstanceInnerClass) (local.get $this.untyped)))
  (block
   ;;@ instanceinnerclass/InstanceInnerClass.java:34:4
-  (drop (call $$create__instanceinnerclass_InstanceInnerClass@instanceinnerclass.InstanceInnerClass.InnerClass (call $$create__@instanceinnerclass.InstanceInnerClass )))
+  (drop (call $$create__instanceinnerclass_InstanceInnerClass@instanceinnerclass.InstanceInnerClass.InnerClass (call $$create_$private__@instanceinnerclass.InstanceInnerClass )))
  )
 )
 (elem declare func $m_test__void@instanceinnerclass.InstanceInnerClass)

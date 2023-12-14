@@ -865,10 +865,20 @@
 (func $$create__@collisions.T
  (result (ref null $collisions.T))
  ;;@ collisions/goog.java:74:6
- (local $$instance (ref null $collisions.T))
  (block
   ;;@ collisions/goog.java:74:6
   (call $$clinit__void_<once>_@collisions.T )
+  ;;@ collisions/goog.java:74:6
+  (return (call $$create_$private__@collisions.T ))
+ )
+)
+
+;;; T<T> T.$create_$private()
+(func $$create_$private__@collisions.T
+ (result (ref null $collisions.T))
+ ;;@ collisions/goog.java:74:6
+ (local $$instance (ref null $collisions.T))
+ (block
   ;;@ collisions/goog.java:74:6
   (local.set $$instance (struct.new $collisions.T (ref.as_non_null (global.get $collisions.T.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ collisions/goog.java:74:6
@@ -916,7 +926,7 @@
  (block
   ;;@ collisions/goog.java:80:4
   (local.set $t (block (result (ref null $java.lang.Number))
-   (local.set $$qualifier (call $$create__@collisions.T ))
+   (local.set $$qualifier (call $$create_$private__@collisions.T ))
    (call_ref $function.m_m__java_lang_Number_$pp_collisions (ref.as_non_null (local.get $$qualifier))(struct.get $collisions.T.vtable $m_m__java_lang_Number_$pp_collisions (struct.get $collisions.T $vtable(local.get $$qualifier))))
   ))
   ;;@ collisions/goog.java:81:4

@@ -264,7 +264,7 @@
   ;;@ protobuf/MyMessage.java:30:47
   (call $$clinit__void_<once>_@protobuf.MyMessage )
   ;;@ protobuf/MyMessage.java:31:4
-  (return (call $$create__int@protobuf.MyMessage (i32.const 0)))
+  (return (call $$create_$private__int@protobuf.MyMessage (i32.const 0)))
  )
 )
 
@@ -280,15 +280,26 @@
  )
 )
 
-;;; MyMessage MyMessage.$create(int testField)
+;;; MyMessage MyMessage.$create(int arg0)
 (func $$create__int@protobuf.MyMessage
+ (param $arg0 i32)
+ (result (ref null $protobuf.MyMessage))
+ ;;@ protobuf/MyMessage.java:38:10
+ (block
+  ;;@ protobuf/MyMessage.java:38:10
+  (call $$clinit__void_<once>_@protobuf.MyMessage )
+  ;;@ protobuf/MyMessage.java:38:10
+  (return (call $$create_$private__int@protobuf.MyMessage (local.get $arg0)))
+ )
+)
+
+;;; MyMessage MyMessage.$create_$private(int testField)
+(func $$create_$private__int@protobuf.MyMessage
  (param $testField i32)
  (result (ref null $protobuf.MyMessage))
  ;;@ protobuf/MyMessage.java:38:10
  (local $$instance (ref null $protobuf.MyMessage))
  (block
-  ;;@ protobuf/MyMessage.java:38:10
-  (call $$clinit__void_<once>_@protobuf.MyMessage )
   ;;@ protobuf/MyMessage.java:38:10
   (local.set $$instance (struct.new $protobuf.MyMessage (ref.as_non_null (global.get $protobuf.MyMessage.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
   ;;@ protobuf/MyMessage.java:38:10

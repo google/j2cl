@@ -57,6 +57,7 @@ public class ImplementStaticInitializationViaClinitFunctionRedirection
     if (type.isJsEnum()) {
       return;
     }
+    synthesizeClinitCallsInMethods(type);
     synthesizeSettersAndGetters(type);
     synthesizeClinitMethod(type);
     synthesizeStaticFieldDeclaration(type);

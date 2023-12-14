@@ -1413,7 +1413,7 @@
    (then
     (block
      ;;@ switchstatement/SwitchStatement.java:18:5
-     (global.set $namesToValuesMap@switchstatement.Numbers (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values__arrayOf_switchstatement_Numbers@switchstatement.Numbers )))
+     (global.set $namesToValuesMap@switchstatement.Numbers (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values_$private__arrayOf_switchstatement_Numbers@switchstatement.Numbers )))
     )
    )
   )
@@ -1429,6 +1429,16 @@
  (block
   ;;@ switchstatement/SwitchStatement.java:18:5
   (call $$clinit__void_<once>_@switchstatement.Numbers )
+  ;;@ switchstatement/SwitchStatement.java:18:5
+  (return (call $m_values_$private__arrayOf_switchstatement_Numbers@switchstatement.Numbers ))
+ )
+)
+
+;;; Numbers[] Numbers.values_$private()
+(func $m_values_$private__arrayOf_switchstatement_Numbers@switchstatement.Numbers
+ (result (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ switchstatement/SwitchStatement.java:18:5
+ (block
   ;;@ switchstatement/SwitchStatement.java:18:5
   (return (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array (global.get $ONE@switchstatement.Numbers)(global.get $TWO@switchstatement.Numbers)(global.get $THREE@switchstatement.Numbers))))
  )
