@@ -92,6 +92,7 @@ internal data class CompilationUnitRenderer(val nameRenderer: NameRenderer) {
             "UNNECESSARY_LATEINIT",
             "UNNECESSARY_NOT_NULL_ASSERTION",
             "UNREACHABLE_CODE",
+            "UNUSED_ANONYMOUS_PARAMETER",
             "UNUSED_PARAMETER",
             "UNUSED_VARIABLE",
             "USELESS_CAST",
