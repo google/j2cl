@@ -39,3 +39,40 @@
  (ref.null $java.lang.Class)
 )
 ;;; End of code for interfaces.Main.AbstractImplementor [static fields]
+;;; Code for interfaces.Main [vtable.init]
+(global $interfaces.Main.vtable (ref $interfaces.Main.vtable)
+ (struct.new $interfaces.Main.vtable
+  (ref.func $$getClassImpl__java_lang_Class@interfaces.Main)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_testInterfaceMembers__void_$pp_interfaces@interfaces.Main)
+ )
+)
+;;; End of code for interfaces.Main [vtable.init]
+;;; Code for interfaces.Main.Implementor [vtable.init]
+(global $interfaces.Main.Implementor.vtable (ref $interfaces.Main.Implementor.vtable)
+ (struct.new $interfaces.Main.Implementor.vtable
+  (ref.func $$getClassImpl__java_lang_Class@interfaces.Main.Implementor)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Implementor)
+  (ref.func $m_interfaceMethod__void@interfaces.Main.Implementor)
+  (ref.func $m_defaultMethod__java_lang_String__void@interfaces.Main.Implementor)
+ )
+)
+(global $interfaces.Main.SubInterface.vtable@$interfaces.Main.Implementor (ref $interfaces.Main.SubInterface.vtable)
+ (struct.new $interfaces.Main.SubInterface.vtable
+  (ref.func $m_defaultMethod__java_lang_String__void@interfaces.Main.Implementor)
+ )
+)
+(global $interfaces.Main.Interface.vtable@$interfaces.Main.Implementor (ref $interfaces.Main.Interface.vtable)
+ (struct.new $interfaces.Main.Interface.vtable
+  (ref.func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Implementor)
+  (ref.func $m_interfaceMethod__void@interfaces.Main.Implementor)
+ )
+)
+;;; End of code for interfaces.Main.Implementor [vtable.init]

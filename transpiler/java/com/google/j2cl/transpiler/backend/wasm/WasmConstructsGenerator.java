@@ -45,7 +45,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -528,6 +527,11 @@ public class WasmConstructsGenerator {
     // TODO(b/183994530): Initialize dynamic dispatch tables lazily.
     builder.append(";;; Initialize dynamic dispatch tables.");
 
+    emitEmptyItableGlobal();
+    emitClassDispatchTables(library, /* emitItableInitialization= */ true);
+  }
+
+  public void emitEmptyItableGlobal() {
     // Emit an empty itable that will be used for types that don't implement any interface.
     builder.newLine();
     builder.append("(global $itable.empty (ref $itable)");
@@ -537,7 +541,9 @@ public class WasmConstructsGenerator {
     builder.unindent();
     builder.newLine();
     builder.append(")");
+  }
 
+  void emitClassDispatchTables(Library library, boolean emitItableInitialization) {
     // Populate all vtables.
     library
         .streamTypes()
@@ -547,17 +553,18 @@ public class WasmConstructsGenerator {
         .filter(not(TypeDeclaration::isAbstract))
         .filter(type -> type.getWasmInfo() == null)
         .filter(not(AstUtils::isNonNativeJsEnum))
-        .forEach(this::emitDispatchTablesInitialization);
+        .forEach(
+            t -> {
+              emitVtablesInitialization(t);
+              if (emitItableInitialization) {
+                emitItableInitialization(t);
+              }
+            });
     builder.newLine();
   }
 
-  private void emitDispatchTablesInitialization(TypeDeclaration typeDeclaration) {
-    emitClassVtableInitialization(typeDeclaration);
-    emitItableInitialization(typeDeclaration);
-  }
-
   /** Emits the code to initialize the class vtable structure for {@code typeDeclaration}. */
-  private void emitClassVtableInitialization(TypeDeclaration typeDeclaration) {
+  private void emitVtablesInitialization(TypeDeclaration typeDeclaration) {
     WasmTypeLayout wasmTypeLayout = environment.getWasmTypeLayout(typeDeclaration);
 
     emitBeginCodeComment(typeDeclaration, "vtable.init");
@@ -574,24 +581,9 @@ public class WasmConstructsGenerator {
     builder.unindent();
     builder.newLine();
     builder.append(")");
-    emitEndCodeComment(typeDeclaration, "vtable.init");
-  }
 
-  /** Emits the code to initialize the Itable array for {@code typeDeclaration}. */
-  private void emitItableInitialization(TypeDeclaration typeDeclaration) {
-    if (!typeDeclaration.implementsInterfaces()) {
-      return;
-    }
-    emitBeginCodeComment(typeDeclaration, "itable.init");
-
-    // Create the struct of interface vtables of the required size and store it in a global variable
-    // to be able to use it when objects of this class are instantiated.
-    builder.newLine();
-    // Emit globals for each interface vtable
-    WasmTypeLayout wasmTypeLayout = environment.getWasmTypeLayout(typeDeclaration);
-    TypeDeclaration[] itableSlots = getItableSlots(typeDeclaration);
-    stream(itableSlots)
-        .filter(Objects::nonNull)
+    typeDeclaration.getAllSuperTypesIncludingSelf().stream()
+        .filter(TypeDeclaration::isInterface)
         .forEach(
             i -> {
               builder.newLine();
@@ -606,6 +598,22 @@ public class WasmConstructsGenerator {
               builder.newLine();
               builder.append(")");
             });
+
+    emitEndCodeComment(typeDeclaration, "vtable.init");
+  }
+
+  /** Emits the code to initialize the Itable array for {@code typeDeclaration}. */
+  private void emitItableInitialization(TypeDeclaration typeDeclaration) {
+    if (!typeDeclaration.implementsInterfaces()) {
+      return;
+    }
+    emitBeginCodeComment(typeDeclaration, "itable.init");
+
+    // Create the struct of interface vtables of the required size and store it in a global variable
+    // to be able to use it when objects of this class are instantiated.
+    TypeDeclaration[] itableSlots = getItableSlots(typeDeclaration);
+    // Emit globals for each interface vtable
+
     builder.newLine();
     builder.append(
         format(

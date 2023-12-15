@@ -132,9 +132,6 @@
   (ref.func $m_compatibleMethod__void@gwtincompatible.Implementor)
  )
 )
-
-;;; Code for gwtincompatible.Implementor [itable.init]
-
 (global $gwtincompatible.Interface.vtable@$gwtincompatible.Implementor (ref $gwtincompatible.Interface.vtable)
  (struct.new $gwtincompatible.Interface.vtable
  )
@@ -143,6 +140,8 @@
  (struct.new $gwtincompatible.Interface.NestedInterface.vtable
  )
 )
+
+;;; Code for gwtincompatible.Implementor [itable.init]
 (global $gwtincompatible.Implementor.itable (ref $gwtincompatible.Implementor.itable)
  (struct.new $gwtincompatible.Implementor.itable
    (global.get $gwtincompatible.Interface.vtable@$gwtincompatible.Implementor)
@@ -171,18 +170,17 @@
   (ref.func $m_method__void_$pp_gwtincompatible@gwtincompatible.Implementor.SomeEnum.1)
  )
 )
-
-;;; Code for gwtincompatible.Implementor.SomeEnum.1 [itable.init]
-
-(global $java.io.Serializable.vtable@$gwtincompatible.Implementor.SomeEnum.1 (ref $java.io.Serializable.vtable)
- (struct.new $java.io.Serializable.vtable
- )
-)
 (global $java.lang.Comparable.vtable@$gwtincompatible.Implementor.SomeEnum.1 (ref $java.lang.Comparable.vtable)
  (struct.new $java.lang.Comparable.vtable
   (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
  )
 )
+(global $java.io.Serializable.vtable@$gwtincompatible.Implementor.SomeEnum.1 (ref $java.io.Serializable.vtable)
+ (struct.new $java.io.Serializable.vtable
+ )
+)
+
+;;; Code for gwtincompatible.Implementor.SomeEnum.1 [itable.init]
 (global $gwtincompatible.Implementor.SomeEnum.1.itable (ref $gwtincompatible.Implementor.SomeEnum.1.itable)
  (struct.new $gwtincompatible.Implementor.SomeEnum.1.itable
    (global.get $java.io.Serializable.vtable@$gwtincompatible.Implementor.SomeEnum.1)

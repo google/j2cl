@@ -40,13 +40,12 @@
   (ref.func $m_test__functiontype_Function__void@functiontype.FunctionImpl)
  )
 )
-
-;;; Code for functiontype.FunctionImpl [itable.init]
-
 (global $functiontype.Function.vtable@$functiontype.FunctionImpl (ref $functiontype.Function.vtable)
  (struct.new $functiontype.Function.vtable
  )
 )
+
+;;; Code for functiontype.FunctionImpl [itable.init]
 (global $functiontype.FunctionImpl.itable (ref $functiontype.FunctionImpl.itable)
  (struct.new $functiontype.FunctionImpl.itable
    (global.get $functiontype.Function.vtable@$functiontype.FunctionImpl)

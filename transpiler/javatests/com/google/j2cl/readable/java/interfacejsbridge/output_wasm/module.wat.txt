@@ -70,9 +70,6 @@
   (ref.func $m_foo__int__int@interfacejsbridge.InterfaceImpl)
  )
 )
-
-;;; Code for interfacejsbridge.InterfaceImpl [itable.init]
-
 (global $interfacejsbridge.SubInterface.vtable@$interfacejsbridge.InterfaceImpl (ref $interfacejsbridge.SubInterface.vtable)
  (struct.new $interfacejsbridge.SubInterface.vtable
   (ref.func $m_foo__int__int@interfacejsbridge.InterfaceImpl)
@@ -88,6 +85,8 @@
   (ref.func $m_foo__int__int@interfacejsbridge.InterfaceImpl)
  )
 )
+
+;;; Code for interfacejsbridge.InterfaceImpl [itable.init]
 (global $interfacejsbridge.InterfaceImpl.itable (ref $interfacejsbridge.InterfaceImpl.itable)
  (struct.new $interfacejsbridge.InterfaceImpl.itable
    (global.get $interfacejsbridge.SubInterface.vtable@$interfacejsbridge.InterfaceImpl)

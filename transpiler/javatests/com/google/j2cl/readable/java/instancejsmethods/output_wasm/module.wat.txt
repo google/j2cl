@@ -128,14 +128,13 @@
   (ref.func $m_intfFoo__int@instancejsmethods.Child)
  )
 )
-
-;;; Code for instancejsmethods.Child [itable.init]
-
 (global $instancejsmethods.MyInterface.vtable@$instancejsmethods.Child (ref $instancejsmethods.MyInterface.vtable)
  (struct.new $instancejsmethods.MyInterface.vtable
   (ref.func $m_intfFoo__int@instancejsmethods.Child)
  )
 )
+
+;;; Code for instancejsmethods.Child [itable.init]
 (global $instancejsmethods.Child.itable (ref $instancejsmethods.Child.itable)
  (struct.new $instancejsmethods.Child.itable
    (global.get $instancejsmethods.MyInterface.vtable@$instancejsmethods.Child)

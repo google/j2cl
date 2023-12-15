@@ -103,7 +103,12 @@ public class WasmGeneratorStage {
         "functions.wat",
         generator -> generator.emitForEachType(library, generator::renderTypeMethods, "methods"));
 
-    emitToFile("globals.wat", generator -> generator.emitGlobals(library));
+    emitToFile(
+        "globals.wat",
+        generator -> {
+          generator.emitGlobals(library);
+          generator.emitClassDispatchTables(library, /* emitItableInitialization= */ false);
+        });
 
     emitToFile("data.wat", generator -> generator.emitDataSegments(library));
 

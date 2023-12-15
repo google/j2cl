@@ -72,14 +72,13 @@
   (ref.func $m_bar__void@overridingmethods.Child)
  )
 )
-
-;;; Code for overridingmethods.Child [itable.init]
-
 (global $overridingmethods.SomeInterface.vtable@$overridingmethods.Child (ref $overridingmethods.SomeInterface.vtable)
  (struct.new $overridingmethods.SomeInterface.vtable
   (ref.func $m_bar__void@overridingmethods.Child)
  )
 )
+
+;;; Code for overridingmethods.Child [itable.init]
 (global $overridingmethods.Child.itable (ref $overridingmethods.Child.itable)
  (struct.new $overridingmethods.Child.itable
    (global.get $overridingmethods.SomeInterface.vtable@$overridingmethods.Child)
