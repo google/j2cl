@@ -21,11 +21,13 @@ import static com.google.common.base.Preconditions.checkState;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
+import java.util.Objects;
 import javax.annotation.Nullable;
 
 /** Field declaration node. */
 @Visitable
 public class Field extends Member {
+
   private final FieldDescriptor fieldDescriptor;
   @Visitable @Nullable Expression initializer;
   // TODO(b/112150736): generalize concept of the source position for names to members.
@@ -70,7 +72,17 @@ public class Field extends Member {
   public boolean isKtLateInit() {
     FieldDescriptor descriptor = getDescriptor();
     boolean isTestProperty =
-        descriptor.getEnclosingTypeDescriptor().getTypeDeclaration().isAnnotatedWithJUnitRunWith();
+        descriptor.getEnclosingTypeDescriptor().getTypeDeclaration().isAnnotatedWithJUnitRunWith()
+            || descriptor
+                .getEnclosingTypeDescriptor()
+                .getTypeDeclaration()
+                .getAllSuperTypesIncludingSelf()
+                .stream()
+                .anyMatch(
+                    type ->
+                        Objects.equals(type.getQualifiedSourceName(), "junit.framework.TestCase")
+                            || Objects.equals(type.getQualifiedSourceName(), "org.junit.TestCase"));
+
     return (descriptor.getKtInfo().isUninitializedWarningSuppressed() || isTestProperty)
         && !descriptor.isFinal()
         && !descriptor.getTypeDescriptor().isNullable()
