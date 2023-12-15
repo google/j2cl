@@ -20,6 +20,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsNonNull;
+import jsinterop.annotations.JsOptional;
 import org.jspecify.nullness.Nullable;
 
 public class DefaultNotNullable {
@@ -55,6 +56,11 @@ public class DefaultNotNullable {
 
   @JsMethod
   public void m3(String... args) {
+  }
+
+  @JsMethod
+  public String m4(String a, @JsOptional @Nullable String optional) {
+    return null;
   }
 
   interface ParameterizedInterface<T> {
@@ -124,6 +130,9 @@ public class DefaultNotNullable {
     void setNonNull(@JsNonNull N n) {}
 
     void setDefaultNullability(N n) {}
+
+    @JsMethod
+    void jsOptional(String a, @JsOptional @Nullable N optional) {}
   }
 
   static class ParameterizedNullable<N extends @Nullable Object> {

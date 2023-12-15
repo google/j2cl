@@ -22,6 +22,7 @@ import java.lang.RuntimeException
 import java.lang.Void
 import java.util.ArrayList
 import jsinterop.annotations.JsMethod
+import jsinterop.annotations.JsOptional
 import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
@@ -106,6 +107,15 @@ open class DefaultNotNullable {
   vararg @ObjCName("withNSStringArray") args: String
  ) {
   val args_1: Array<String> = args as Array<String>
+ }
+
+ @ObjCName("m4")
+ @JsMethod
+ open fun m4(
+  @ObjCName("withNSString") a: String,
+  @ObjCName("withNSString") @JsOptional optional: String?
+ ): String {
+  return null!!
  }
 
  internal open fun <T: DefaultNotNullable.NullableBound<T>?> methodWithNullableBound_pp_nullability_defaultnotnullable() {}
@@ -392,6 +402,9 @@ open class DefaultNotNullable {
   internal open fun setNonNull_pp_nullability_defaultnotnullable(n: N) {}
 
   internal open fun setDefaultNullability_pp_nullability_defaultnotnullable(n: N) {}
+
+  @JsMethod(name = "jsOptional")
+  internal open fun jsOptional_pp_nullability_defaultnotnullable(a: String, @JsOptional optional: N?) {}
  }
 
  open class ParameterizedNullable<N> {
