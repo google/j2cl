@@ -160,14 +160,15 @@
 )
 
 ;;; Class<T> MultipleConstructors.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@multipleconstructors.MultipleConstructors
+(func $$getClassMetadata__java_lang_Class_<once>_@multipleconstructors.MultipleConstructors
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@multipleconstructors.MultipleConstructors))
+  (if (i32.eqz (ref.is_null (global.get $$class@multipleconstructors.MultipleConstructors)))
    (then
-    (global.set $$class@multipleconstructors.MultipleConstructors (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|multiplecons...|__java_lang_String (ref.func $$getString_|multiplecons...|__java_lang_String@multipleconstructors.MultipleConstructors) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@multipleconstructors.MultipleConstructors))
    )
   )
+  (global.set $$class@multipleconstructors.MultipleConstructors (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|multiplecons...|__java_lang_String_<once>_@multipleconstructors.MultipleConstructors )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@multipleconstructors.MultipleConstructors))
  )
 )
@@ -180,20 +181,21 @@
  (local $this (ref null $multipleconstructors.MultipleConstructors))
  (local.set $this (ref.cast (ref $multipleconstructors.MultipleConstructors) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@multipleconstructors.MultipleConstructors) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@multipleconstructors.MultipleConstructors ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@multipleconstructors.MultipleConstructors)
 
 ;;; String MultipleConstructors.$getString_|multiplecons...|()
-(func $$getString_|multiplecons...|__java_lang_String@multipleconstructors.MultipleConstructors
+(func $$getString_|multiplecons...|__java_lang_String_<once>_@multipleconstructors.MultipleConstructors
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|multiplecons...|@multipleconstructors.MultipleConstructors))
+  (if (i32.eqz (ref.is_null (global.get $$string_|multiplecons...|@multipleconstructors.MultipleConstructors)))
    (then
-    (global.set $$string_|multiplecons...|@multipleconstructors.MultipleConstructors (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "multipleconstructors.MultipleConstructors")))
+    (return (global.get $$string_|multiplecons...|@multipleconstructors.MultipleConstructors))
    )
   )
+  (global.set $$string_|multiplecons...|@multipleconstructors.MultipleConstructors (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "multipleconstructors.MultipleConstructors")))
   (return (global.get $$string_|multiplecons...|@multipleconstructors.MultipleConstructors))
  )
 )

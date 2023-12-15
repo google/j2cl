@@ -123,14 +123,15 @@
 )
 
 ;;; Class<T> SynchronizedMethod.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@synchronizedmethod.SynchronizedMethod
+(func $$getClassMetadata__java_lang_Class_<once>_@synchronizedmethod.SynchronizedMethod
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@synchronizedmethod.SynchronizedMethod))
+  (if (i32.eqz (ref.is_null (global.get $$class@synchronizedmethod.SynchronizedMethod)))
    (then
-    (global.set $$class@synchronizedmethod.SynchronizedMethod (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|synchronized...|__java_lang_String (ref.func $$getString_|synchronized...|__java_lang_String@synchronizedmethod.SynchronizedMethod) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@synchronizedmethod.SynchronizedMethod))
    )
   )
+  (global.set $$class@synchronizedmethod.SynchronizedMethod (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|synchronized...|__java_lang_String_<once>_@synchronizedmethod.SynchronizedMethod )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@synchronizedmethod.SynchronizedMethod))
  )
 )
@@ -143,20 +144,21 @@
  (local $this (ref null $synchronizedmethod.SynchronizedMethod))
  (local.set $this (ref.cast (ref $synchronizedmethod.SynchronizedMethod) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@synchronizedmethod.SynchronizedMethod) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@synchronizedmethod.SynchronizedMethod ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@synchronizedmethod.SynchronizedMethod)
 
 ;;; String SynchronizedMethod.$getString_|synchronized...|()
-(func $$getString_|synchronized...|__java_lang_String@synchronizedmethod.SynchronizedMethod
+(func $$getString_|synchronized...|__java_lang_String_<once>_@synchronizedmethod.SynchronizedMethod
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|synchronized...|@synchronizedmethod.SynchronizedMethod))
+  (if (i32.eqz (ref.is_null (global.get $$string_|synchronized...|@synchronizedmethod.SynchronizedMethod)))
    (then
-    (global.set $$string_|synchronized...|@synchronizedmethod.SynchronizedMethod (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "synchronizedmethod.SynchronizedMethod")))
+    (return (global.get $$string_|synchronized...|@synchronizedmethod.SynchronizedMethod))
    )
   )
+  (global.set $$string_|synchronized...|@synchronizedmethod.SynchronizedMethod (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "synchronizedmethod.SynchronizedMethod")))
   (return (global.get $$string_|synchronized...|@synchronizedmethod.SynchronizedMethod))
  )
 )

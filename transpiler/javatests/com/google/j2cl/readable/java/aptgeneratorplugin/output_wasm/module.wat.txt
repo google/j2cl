@@ -122,14 +122,15 @@
 )
 
 ;;; Class<T> Dummy.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@aptgeneratorplugin.Dummy
+(func $$getClassMetadata__java_lang_Class_<once>_@aptgeneratorplugin.Dummy
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@aptgeneratorplugin.Dummy))
+  (if (i32.eqz (ref.is_null (global.get $$class@aptgeneratorplugin.Dummy)))
    (then
-    (global.set $$class@aptgeneratorplugin.Dummy (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|aptgenerator...|__java_lang_String (ref.func $$getString_|aptgenerator...|__java_lang_String@aptgeneratorplugin.Dummy) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@aptgeneratorplugin.Dummy))
    )
   )
+  (global.set $$class@aptgeneratorplugin.Dummy (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|aptgenerator...|__java_lang_String_<once>_@aptgeneratorplugin.Dummy )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@aptgeneratorplugin.Dummy))
  )
 )
@@ -142,20 +143,21 @@
  (local $this (ref null $aptgeneratorplugin.Dummy))
  (local.set $this (ref.cast (ref $aptgeneratorplugin.Dummy) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@aptgeneratorplugin.Dummy) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@aptgeneratorplugin.Dummy ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@aptgeneratorplugin.Dummy)
 
 ;;; String Dummy.$getString_|aptgenerator...|()
-(func $$getString_|aptgenerator...|__java_lang_String@aptgeneratorplugin.Dummy
+(func $$getString_|aptgenerator...|__java_lang_String_<once>_@aptgeneratorplugin.Dummy
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|aptgenerator...|@aptgeneratorplugin.Dummy))
+  (if (i32.eqz (ref.is_null (global.get $$string_|aptgenerator...|@aptgeneratorplugin.Dummy)))
    (then
-    (global.set $$string_|aptgenerator...|@aptgeneratorplugin.Dummy (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "aptgeneratorplugin.Dummy")))
+    (return (global.get $$string_|aptgenerator...|@aptgeneratorplugin.Dummy))
    )
   )
+  (global.set $$string_|aptgenerator...|@aptgeneratorplugin.Dummy (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "aptgeneratorplugin.Dummy")))
   (return (global.get $$string_|aptgenerator...|@aptgeneratorplugin.Dummy))
  )
 )
@@ -201,7 +203,7 @@
  (block
   ;;@ aptgeneratorplugin/Foo.java:23:4
   (return (block (result i32)
-   (local.set $$qualifier (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@aptgeneratorplugin.Dummy) ))
+   (local.set $$qualifier (call $$getClassMetadata__java_lang_Class_<once>_@aptgeneratorplugin.Dummy ))
    (call_ref $function.m_hashCode__int (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Object.vtable $m_hashCode__int (struct.get $java.lang.Object $vtable(local.get $$qualifier))))
   ))
  )
@@ -227,14 +229,15 @@
 )
 
 ;;; Class<T> Foo.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@aptgeneratorplugin.Foo
+(func $$getClassMetadata__java_lang_Class_<once>_@aptgeneratorplugin.Foo
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@aptgeneratorplugin.Foo))
+  (if (i32.eqz (ref.is_null (global.get $$class@aptgeneratorplugin.Foo)))
    (then
-    (global.set $$class@aptgeneratorplugin.Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|aptgenerator...|__java_lang_String (ref.func $$getString_|aptgenerator...|__java_lang_String@aptgeneratorplugin.Foo) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@aptgeneratorplugin.Foo))
    )
   )
+  (global.set $$class@aptgeneratorplugin.Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|aptgenerator...|__java_lang_String_<once>_@aptgeneratorplugin.Foo )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@aptgeneratorplugin.Foo))
  )
 )
@@ -247,20 +250,21 @@
  (local $this (ref null $aptgeneratorplugin.Foo))
  (local.set $this (ref.cast (ref $aptgeneratorplugin.Foo) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@aptgeneratorplugin.Foo) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@aptgeneratorplugin.Foo ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@aptgeneratorplugin.Foo)
 
 ;;; String Foo.$getString_|aptgenerator...|()
-(func $$getString_|aptgenerator...|__java_lang_String@aptgeneratorplugin.Foo
+(func $$getString_|aptgenerator...|__java_lang_String_<once>_@aptgeneratorplugin.Foo
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|aptgenerator...|@aptgeneratorplugin.Foo))
+  (if (i32.eqz (ref.is_null (global.get $$string_|aptgenerator...|@aptgeneratorplugin.Foo)))
    (then
-    (global.set $$string_|aptgenerator...|@aptgeneratorplugin.Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "aptgeneratorplugin.Foo")))
+    (return (global.get $$string_|aptgenerator...|@aptgeneratorplugin.Foo))
    )
   )
+  (global.set $$string_|aptgenerator...|@aptgeneratorplugin.Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "aptgeneratorplugin.Foo")))
   (return (global.get $$string_|aptgenerator...|@aptgeneratorplugin.Foo))
  )
 )

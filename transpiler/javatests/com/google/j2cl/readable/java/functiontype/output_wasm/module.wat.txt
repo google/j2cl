@@ -100,27 +100,29 @@
 )
 
 ;;; Class<T> Function.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@functiontype.Function
+(func $$getClassMetadata__java_lang_Class_<once>_@functiontype.Function
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@functiontype.Function))
+  (if (i32.eqz (ref.is_null (global.get $$class@functiontype.Function)))
    (then
-    (global.set $$class@functiontype.Function (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functiontype...|__java_lang_String (ref.func $$getString_|functiontype...|__java_lang_String@functiontype.Function) )))
+    (return (global.get $$class@functiontype.Function))
    )
   )
+  (global.set $$class@functiontype.Function (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|functiontype...|__java_lang_String_<once>_@functiontype.Function )))
   (return (global.get $$class@functiontype.Function))
  )
 )
 
 ;;; String Function.$getString_|functiontype...|()
-(func $$getString_|functiontype...|__java_lang_String@functiontype.Function
+(func $$getString_|functiontype...|__java_lang_String_<once>_@functiontype.Function
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|functiontype...|@functiontype.Function))
+  (if (i32.eqz (ref.is_null (global.get $$string_|functiontype...|@functiontype.Function)))
    (then
-    (global.set $$string_|functiontype...|@functiontype.Function (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "functiontype.Function")))
+    (return (global.get $$string_|functiontype...|@functiontype.Function))
    )
   )
+  (global.set $$string_|functiontype...|@functiontype.Function (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "functiontype.Function")))
   (return (global.get $$string_|functiontype...|@functiontype.Function))
  )
 )
@@ -186,14 +188,15 @@
 )
 
 ;;; Class<T> FunctionImpl.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@functiontype.FunctionImpl
+(func $$getClassMetadata__java_lang_Class_<once>_@functiontype.FunctionImpl
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@functiontype.FunctionImpl))
+  (if (i32.eqz (ref.is_null (global.get $$class@functiontype.FunctionImpl)))
    (then
-    (global.set $$class@functiontype.FunctionImpl (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functiontype...|__java_lang_String (ref.func $$getString_|functiontype...|__java_lang_String@functiontype.FunctionImpl) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@functiontype.FunctionImpl))
    )
   )
+  (global.set $$class@functiontype.FunctionImpl (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|functiontype...|__java_lang_String_<once>_@functiontype.FunctionImpl )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@functiontype.FunctionImpl))
  )
 )
@@ -206,20 +209,21 @@
  (local $this (ref null $functiontype.FunctionImpl))
  (local.set $this (ref.cast (ref $functiontype.FunctionImpl) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@functiontype.FunctionImpl) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@functiontype.FunctionImpl ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@functiontype.FunctionImpl)
 
 ;;; String FunctionImpl.$getString_|functiontype...|()
-(func $$getString_|functiontype...|__java_lang_String@functiontype.FunctionImpl
+(func $$getString_|functiontype...|__java_lang_String_<once>_@functiontype.FunctionImpl
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|functiontype...|@functiontype.FunctionImpl))
+  (if (i32.eqz (ref.is_null (global.get $$string_|functiontype...|@functiontype.FunctionImpl)))
    (then
-    (global.set $$string_|functiontype...|@functiontype.FunctionImpl (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "functiontype.FunctionImpl")))
+    (return (global.get $$string_|functiontype...|@functiontype.FunctionImpl))
    )
   )
+  (global.set $$string_|functiontype...|@functiontype.FunctionImpl (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "functiontype.FunctionImpl")))
   (return (global.get $$string_|functiontype...|@functiontype.FunctionImpl))
  )
 )

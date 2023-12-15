@@ -116,14 +116,15 @@
 )
 
 ;;; Class<T> InitMethodDispatch.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@initmethoddispatch.InitMethodDispatch
+(func $$getClassMetadata__java_lang_Class_<once>_@initmethoddispatch.InitMethodDispatch
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@initmethoddispatch.InitMethodDispatch))
+  (if (i32.eqz (ref.is_null (global.get $$class@initmethoddispatch.InitMethodDispatch)))
    (then
-    (global.set $$class@initmethoddispatch.InitMethodDispatch (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|initmethoddi...|__java_lang_String (ref.func $$getString_|initmethoddi...|__java_lang_String@initmethoddispatch.InitMethodDispatch) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@initmethoddispatch.InitMethodDispatch))
    )
   )
+  (global.set $$class@initmethoddispatch.InitMethodDispatch (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|initmethoddi...|__java_lang_String_<once>_@initmethoddispatch.InitMethodDispatch )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@initmethoddispatch.InitMethodDispatch))
  )
 )
@@ -136,20 +137,21 @@
  (local $this (ref null $initmethoddispatch.InitMethodDispatch))
  (local.set $this (ref.cast (ref $initmethoddispatch.InitMethodDispatch) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@initmethoddispatch.InitMethodDispatch) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@initmethoddispatch.InitMethodDispatch ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@initmethoddispatch.InitMethodDispatch)
 
 ;;; String InitMethodDispatch.$getString_|initmethoddi...|()
-(func $$getString_|initmethoddi...|__java_lang_String@initmethoddispatch.InitMethodDispatch
+(func $$getString_|initmethoddi...|__java_lang_String_<once>_@initmethoddispatch.InitMethodDispatch
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|initmethoddi...|@initmethoddispatch.InitMethodDispatch))
+  (if (i32.eqz (ref.is_null (global.get $$string_|initmethoddi...|@initmethoddispatch.InitMethodDispatch)))
    (then
-    (global.set $$string_|initmethoddi...|@initmethoddispatch.InitMethodDispatch (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "initmethoddispatch.InitMethodDispatch")))
+    (return (global.get $$string_|initmethoddi...|@initmethoddispatch.InitMethodDispatch))
    )
   )
+  (global.set $$string_|initmethoddi...|@initmethoddispatch.InitMethodDispatch (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "initmethoddispatch.InitMethodDispatch")))
   (return (global.get $$string_|initmethoddi...|@initmethoddispatch.InitMethodDispatch))
  )
 )

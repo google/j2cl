@@ -242,27 +242,29 @@
 )
 
 ;;; Class<T> OtherInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsbridgeaccidentaloverride.OtherInterface
+(func $$getClassMetadata__java_lang_Class_<once>_@jsbridgeaccidentaloverride.OtherInterface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsbridgeaccidentaloverride.OtherInterface))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsbridgeaccidentaloverride.OtherInterface)))
    (then
-    (global.set $$class@jsbridgeaccidentaloverride.OtherInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsbridgeacci...|__java_lang_String (ref.func $$getString_|jsbridgeacci...|__java_lang_String@jsbridgeaccidentaloverride.OtherInterface) )))
+    (return (global.get $$class@jsbridgeaccidentaloverride.OtherInterface))
    )
   )
+  (global.set $$class@jsbridgeaccidentaloverride.OtherInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jsbridgeacci...|__java_lang_String_<once>_@jsbridgeaccidentaloverride.OtherInterface )))
   (return (global.get $$class@jsbridgeaccidentaloverride.OtherInterface))
  )
 )
 
 ;;; String OtherInterface.$getString_|jsbridgeacci...|()
-(func $$getString_|jsbridgeacci...|__java_lang_String@jsbridgeaccidentaloverride.OtherInterface
+(func $$getString_|jsbridgeacci...|__java_lang_String_<once>_@jsbridgeaccidentaloverride.OtherInterface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsbridgeacci...|@jsbridgeaccidentaloverride.OtherInterface))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsbridgeacci...|@jsbridgeaccidentaloverride.OtherInterface)))
    (then
-    (global.set $$string_|jsbridgeacci...|@jsbridgeaccidentaloverride.OtherInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsbridgeaccidentaloverride.OtherInterface")))
+    (return (global.get $$string_|jsbridgeacci...|@jsbridgeaccidentaloverride.OtherInterface))
    )
   )
+  (global.set $$string_|jsbridgeacci...|@jsbridgeaccidentaloverride.OtherInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsbridgeaccidentaloverride.OtherInterface")))
   (return (global.get $$string_|jsbridgeacci...|@jsbridgeaccidentaloverride.OtherInterface))
  )
 )
@@ -286,27 +288,29 @@
 )
 
 ;;; Class<T> MyInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsbridgeaccidentaloverride.MyInterface
+(func $$getClassMetadata__java_lang_Class_<once>_@jsbridgeaccidentaloverride.MyInterface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsbridgeaccidentaloverride.MyInterface))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsbridgeaccidentaloverride.MyInterface)))
    (then
-    (global.set $$class@jsbridgeaccidentaloverride.MyInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsbridgeacci...|__java_lang_String (ref.func $$getString_|jsbridgeacci...|__java_lang_String@jsbridgeaccidentaloverride.MyInterface) )))
+    (return (global.get $$class@jsbridgeaccidentaloverride.MyInterface))
    )
   )
+  (global.set $$class@jsbridgeaccidentaloverride.MyInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jsbridgeacci...|__java_lang_String_<once>_@jsbridgeaccidentaloverride.MyInterface )))
   (return (global.get $$class@jsbridgeaccidentaloverride.MyInterface))
  )
 )
 
 ;;; String MyInterface.$getString_|jsbridgeacci...|()
-(func $$getString_|jsbridgeacci...|__java_lang_String@jsbridgeaccidentaloverride.MyInterface
+(func $$getString_|jsbridgeacci...|__java_lang_String_<once>_@jsbridgeaccidentaloverride.MyInterface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsbridgeacci...|@jsbridgeaccidentaloverride.MyInterface))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsbridgeacci...|@jsbridgeaccidentaloverride.MyInterface)))
    (then
-    (global.set $$string_|jsbridgeacci...|@jsbridgeaccidentaloverride.MyInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsbridgeaccidentaloverride.MyInterface")))
+    (return (global.get $$string_|jsbridgeacci...|@jsbridgeaccidentaloverride.MyInterface))
    )
   )
+  (global.set $$string_|jsbridgeacci...|@jsbridgeaccidentaloverride.MyInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsbridgeaccidentaloverride.MyInterface")))
   (return (global.get $$string_|jsbridgeacci...|@jsbridgeaccidentaloverride.MyInterface))
  )
 )
@@ -401,14 +405,15 @@
 )
 
 ;;; Class<T> Main.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsbridgeaccidentaloverride.Main
+(func $$getClassMetadata__java_lang_Class_<once>_@jsbridgeaccidentaloverride.Main
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsbridgeaccidentaloverride.Main))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsbridgeaccidentaloverride.Main)))
    (then
-    (global.set $$class@jsbridgeaccidentaloverride.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsbridgeacci...|__java_lang_String (ref.func $$getString_|jsbridgeacci...|__java_lang_String@jsbridgeaccidentaloverride.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@jsbridgeaccidentaloverride.Main))
    )
   )
+  (global.set $$class@jsbridgeaccidentaloverride.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsbridgeacci...|__java_lang_String_<once>_@jsbridgeaccidentaloverride.Main )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@jsbridgeaccidentaloverride.Main))
  )
 )
@@ -421,20 +426,21 @@
  (local $this (ref null $jsbridgeaccidentaloverride.Main))
  (local.set $this (ref.cast (ref $jsbridgeaccidentaloverride.Main) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsbridgeaccidentaloverride.Main) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsbridgeaccidentaloverride.Main ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsbridgeaccidentaloverride.Main)
 
 ;;; String Main.$getString_|jsbridgeacci...|()
-(func $$getString_|jsbridgeacci...|__java_lang_String@jsbridgeaccidentaloverride.Main
+(func $$getString_|jsbridgeacci...|__java_lang_String_<once>_@jsbridgeaccidentaloverride.Main
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsbridgeacci...|@jsbridgeaccidentaloverride.Main))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsbridgeacci...|@jsbridgeaccidentaloverride.Main)))
    (then
-    (global.set $$string_|jsbridgeacci...|@jsbridgeaccidentaloverride.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsbridgeaccidentaloverride.Main")))
+    (return (global.get $$string_|jsbridgeacci...|@jsbridgeaccidentaloverride.Main))
    )
   )
+  (global.set $$string_|jsbridgeacci...|@jsbridgeaccidentaloverride.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsbridgeaccidentaloverride.Main")))
   (return (global.get $$string_|jsbridgeacci...|@jsbridgeaccidentaloverride.Main))
  )
 )
@@ -535,14 +541,15 @@
 )
 
 ;;; Class<T> MyJsType.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsbridgeaccidentaloverride.MyJsType
+(func $$getClassMetadata__java_lang_Class_<once>_@jsbridgeaccidentaloverride.MyJsType
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsbridgeaccidentaloverride.MyJsType))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsbridgeaccidentaloverride.MyJsType)))
    (then
-    (global.set $$class@jsbridgeaccidentaloverride.MyJsType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsbridgeacci...|__java_lang_String (ref.func $$getString_|jsbridgeacci...|__java_lang_String@jsbridgeaccidentaloverride.MyJsType) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@jsbridgeaccidentaloverride.MyJsType))
    )
   )
+  (global.set $$class@jsbridgeaccidentaloverride.MyJsType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsbridgeacci...|__java_lang_String_<once>_@jsbridgeaccidentaloverride.MyJsType )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@jsbridgeaccidentaloverride.MyJsType))
  )
 )
@@ -555,20 +562,21 @@
  (local $this (ref null $jsbridgeaccidentaloverride.MyJsType))
  (local.set $this (ref.cast (ref $jsbridgeaccidentaloverride.MyJsType) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsbridgeaccidentaloverride.MyJsType) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsbridgeaccidentaloverride.MyJsType ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsbridgeaccidentaloverride.MyJsType)
 
 ;;; String MyJsType.$getString_|jsbridgeacci...|()
-(func $$getString_|jsbridgeacci...|__java_lang_String@jsbridgeaccidentaloverride.MyJsType
+(func $$getString_|jsbridgeacci...|__java_lang_String_<once>_@jsbridgeaccidentaloverride.MyJsType
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsbridgeacci...|@jsbridgeaccidentaloverride.MyJsType))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsbridgeacci...|@jsbridgeaccidentaloverride.MyJsType)))
    (then
-    (global.set $$string_|jsbridgeacci...|@jsbridgeaccidentaloverride.MyJsType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsbridgeaccidentaloverride.MyJsType")))
+    (return (global.get $$string_|jsbridgeacci...|@jsbridgeaccidentaloverride.MyJsType))
    )
   )
+  (global.set $$string_|jsbridgeacci...|@jsbridgeaccidentaloverride.MyJsType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsbridgeaccidentaloverride.MyJsType")))
   (return (global.get $$string_|jsbridgeacci...|@jsbridgeaccidentaloverride.MyJsType))
  )
 )
@@ -637,14 +645,15 @@
 )
 
 ;;; Class<T> SubJsType.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsbridgeaccidentaloverride.SubJsType
+(func $$getClassMetadata__java_lang_Class_<once>_@jsbridgeaccidentaloverride.SubJsType
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsbridgeaccidentaloverride.SubJsType))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsbridgeaccidentaloverride.SubJsType)))
    (then
-    (global.set $$class@jsbridgeaccidentaloverride.SubJsType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsbridgeacci...|__java_lang_String (ref.func $$getString_|jsbridgeacci...|__java_lang_String@jsbridgeaccidentaloverride.SubJsType) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsbridgeaccidentaloverride.MyJsType) )))
+    (return (global.get $$class@jsbridgeaccidentaloverride.SubJsType))
    )
   )
+  (global.set $$class@jsbridgeaccidentaloverride.SubJsType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsbridgeacci...|__java_lang_String_<once>_@jsbridgeaccidentaloverride.SubJsType )(call $$getClassMetadata__java_lang_Class_<once>_@jsbridgeaccidentaloverride.MyJsType )))
   (return (global.get $$class@jsbridgeaccidentaloverride.SubJsType))
  )
 )
@@ -657,20 +666,21 @@
  (local $this (ref null $jsbridgeaccidentaloverride.SubJsType))
  (local.set $this (ref.cast (ref $jsbridgeaccidentaloverride.SubJsType) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsbridgeaccidentaloverride.SubJsType) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsbridgeaccidentaloverride.SubJsType ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsbridgeaccidentaloverride.SubJsType)
 
 ;;; String SubJsType.$getString_|jsbridgeacci...|()
-(func $$getString_|jsbridgeacci...|__java_lang_String@jsbridgeaccidentaloverride.SubJsType
+(func $$getString_|jsbridgeacci...|__java_lang_String_<once>_@jsbridgeaccidentaloverride.SubJsType
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsbridgeacci...|@jsbridgeaccidentaloverride.SubJsType))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsbridgeacci...|@jsbridgeaccidentaloverride.SubJsType)))
    (then
-    (global.set $$string_|jsbridgeacci...|@jsbridgeaccidentaloverride.SubJsType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsbridgeaccidentaloverride.SubJsType")))
+    (return (global.get $$string_|jsbridgeacci...|@jsbridgeaccidentaloverride.SubJsType))
    )
   )
+  (global.set $$string_|jsbridgeacci...|@jsbridgeaccidentaloverride.SubJsType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsbridgeaccidentaloverride.SubJsType")))
   (return (global.get $$string_|jsbridgeacci...|@jsbridgeaccidentaloverride.SubJsType))
  )
 )

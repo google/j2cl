@@ -113,14 +113,15 @@
 )
 
 ;;; Class<T> DoWhileStatement.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@dowhilestatement.DoWhileStatement
+(func $$getClassMetadata__java_lang_Class_<once>_@dowhilestatement.DoWhileStatement
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@dowhilestatement.DoWhileStatement))
+  (if (i32.eqz (ref.is_null (global.get $$class@dowhilestatement.DoWhileStatement)))
    (then
-    (global.set $$class@dowhilestatement.DoWhileStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|dowhilestate...|__java_lang_String (ref.func $$getString_|dowhilestate...|__java_lang_String@dowhilestatement.DoWhileStatement) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@dowhilestatement.DoWhileStatement))
    )
   )
+  (global.set $$class@dowhilestatement.DoWhileStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|dowhilestate...|__java_lang_String_<once>_@dowhilestatement.DoWhileStatement )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@dowhilestatement.DoWhileStatement))
  )
 )
@@ -133,20 +134,21 @@
  (local $this (ref null $dowhilestatement.DoWhileStatement))
  (local.set $this (ref.cast (ref $dowhilestatement.DoWhileStatement) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@dowhilestatement.DoWhileStatement) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@dowhilestatement.DoWhileStatement ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@dowhilestatement.DoWhileStatement)
 
 ;;; String DoWhileStatement.$getString_|dowhilestate...|()
-(func $$getString_|dowhilestate...|__java_lang_String@dowhilestatement.DoWhileStatement
+(func $$getString_|dowhilestate...|__java_lang_String_<once>_@dowhilestatement.DoWhileStatement
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|dowhilestate...|@dowhilestatement.DoWhileStatement))
+  (if (i32.eqz (ref.is_null (global.get $$string_|dowhilestate...|@dowhilestatement.DoWhileStatement)))
    (then
-    (global.set $$string_|dowhilestate...|@dowhilestatement.DoWhileStatement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "dowhilestatement.DoWhileStatement")))
+    (return (global.get $$string_|dowhilestate...|@dowhilestatement.DoWhileStatement))
    )
   )
+  (global.set $$string_|dowhilestate...|@dowhilestatement.DoWhileStatement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "dowhilestatement.DoWhileStatement")))
   (return (global.get $$string_|dowhilestate...|@dowhilestatement.DoWhileStatement))
  )
 )

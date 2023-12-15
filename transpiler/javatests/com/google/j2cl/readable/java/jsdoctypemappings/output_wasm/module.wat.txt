@@ -370,27 +370,29 @@
 )
 
 ;;; Class<T> NativeFunction.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.NativeFunction
+(func $$getClassMetadata__java_lang_Class_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeFunction
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeFunction))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeFunction)))
    (then
-    (global.set $$class@jsdoctypemappings.JsDocTypeMappings.NativeFunction (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsdoctypemap...|__java_lang_String (ref.func $$getString_|jsdoctypemap...|__java_lang_String@jsdoctypemappings.JsDocTypeMappings.NativeFunction) )))
+    (return (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeFunction))
    )
   )
+  (global.set $$class@jsdoctypemappings.JsDocTypeMappings.NativeFunction (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jsdoctypemap...|__java_lang_String_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeFunction )))
   (return (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeFunction))
  )
 )
 
 ;;; String NativeFunction.$getString_|jsdoctypemap...|()
-(func $$getString_|jsdoctypemap...|__java_lang_String@jsdoctypemappings.JsDocTypeMappings.NativeFunction
+(func $$getString_|jsdoctypemap...|__java_lang_String_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeFunction
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeFunction))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeFunction)))
    (then
-    (global.set $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeFunction (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsdoctypemappings.JsDocTypeMappings$NativeFunction")))
+    (return (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeFunction))
    )
   )
+  (global.set $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeFunction (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsdoctypemappings.JsDocTypeMappings$NativeFunction")))
   (return (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeFunction))
  )
 )
@@ -430,14 +432,15 @@
 )
 
 ;;; Class<T> $Overlay.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay
+(func $$getClassMetadata__java_lang_Class_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay)))
    (then
-    (global.set $$class@jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsdoctypemap...|__java_lang_String (ref.func $$getString_|jsdoctypemap...|__java_lang_String@jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay) )(ref.null $java.lang.Class)))
+    (return (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay))
    )
   )
+  (global.set $$class@jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsdoctypemap...|__java_lang_String_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay )(ref.null $java.lang.Class)))
   (return (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay))
  )
 )
@@ -450,20 +453,21 @@
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay))
  (local.set $this (ref.cast (ref $jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay)
 
 ;;; String $Overlay.$getString_|jsdoctypemap...|()
-(func $$getString_|jsdoctypemap...|__java_lang_String@jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay
+(func $$getString_|jsdoctypemap...|__java_lang_String_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay)))
    (then
-    (global.set $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsdoctypemappings.JsDocTypeMappings$NativeType$$Overlay")))
+    (return (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay))
    )
   )
+  (global.set $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsdoctypemappings.JsDocTypeMappings$NativeType$$Overlay")))
   (return (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay))
  )
 )
@@ -487,27 +491,29 @@
 )
 
 ;;; Class<T> $Overlay.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.NativeNumber.$Overlay
+(func $$getClassMetadata__java_lang_Class_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeNumber.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeNumber.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeNumber.$Overlay)))
    (then
-    (global.set $$class@jsdoctypemappings.JsDocTypeMappings.NativeNumber.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsdoctypemap...|__java_lang_String (ref.func $$getString_|jsdoctypemap...|__java_lang_String@jsdoctypemappings.JsDocTypeMappings.NativeNumber.$Overlay) )))
+    (return (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeNumber.$Overlay))
    )
   )
+  (global.set $$class@jsdoctypemappings.JsDocTypeMappings.NativeNumber.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jsdoctypemap...|__java_lang_String_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeNumber.$Overlay )))
   (return (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeNumber.$Overlay))
  )
 )
 
 ;;; String $Overlay.$getString_|jsdoctypemap...|()
-(func $$getString_|jsdoctypemap...|__java_lang_String@jsdoctypemappings.JsDocTypeMappings.NativeNumber.$Overlay
+(func $$getString_|jsdoctypemap...|__java_lang_String_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeNumber.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeNumber.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeNumber.$Overlay)))
    (then
-    (global.set $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeNumber.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsdoctypemappings.JsDocTypeMappings$NativeNumber$$Overlay")))
+    (return (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeNumber.$Overlay))
    )
   )
+  (global.set $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeNumber.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsdoctypemappings.JsDocTypeMappings$NativeNumber$$Overlay")))
   (return (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeNumber.$Overlay))
  )
 )
@@ -531,27 +537,29 @@
 )
 
 ;;; Class<T> $Overlay.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.NativeBoolean.$Overlay
+(func $$getClassMetadata__java_lang_Class_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeBoolean.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeBoolean.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeBoolean.$Overlay)))
    (then
-    (global.set $$class@jsdoctypemappings.JsDocTypeMappings.NativeBoolean.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsdoctypemap...|__java_lang_String (ref.func $$getString_|jsdoctypemap...|__java_lang_String@jsdoctypemappings.JsDocTypeMappings.NativeBoolean.$Overlay) )))
+    (return (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeBoolean.$Overlay))
    )
   )
+  (global.set $$class@jsdoctypemappings.JsDocTypeMappings.NativeBoolean.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jsdoctypemap...|__java_lang_String_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeBoolean.$Overlay )))
   (return (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeBoolean.$Overlay))
  )
 )
 
 ;;; String $Overlay.$getString_|jsdoctypemap...|()
-(func $$getString_|jsdoctypemap...|__java_lang_String@jsdoctypemappings.JsDocTypeMappings.NativeBoolean.$Overlay
+(func $$getString_|jsdoctypemap...|__java_lang_String_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeBoolean.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeBoolean.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeBoolean.$Overlay)))
    (then
-    (global.set $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeBoolean.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsdoctypemappings.JsDocTypeMappings$NativeBoolean$$Overlay")))
+    (return (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeBoolean.$Overlay))
    )
   )
+  (global.set $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeBoolean.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsdoctypemappings.JsDocTypeMappings$NativeBoolean$$Overlay")))
   (return (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeBoolean.$Overlay))
  )
 )
@@ -575,27 +583,29 @@
 )
 
 ;;; Class<T> $Overlay.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.NativeString.$Overlay
+(func $$getClassMetadata__java_lang_Class_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeString.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeString.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeString.$Overlay)))
    (then
-    (global.set $$class@jsdoctypemappings.JsDocTypeMappings.NativeString.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsdoctypemap...|__java_lang_String (ref.func $$getString_|jsdoctypemap...|__java_lang_String@jsdoctypemappings.JsDocTypeMappings.NativeString.$Overlay) )))
+    (return (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeString.$Overlay))
    )
   )
+  (global.set $$class@jsdoctypemappings.JsDocTypeMappings.NativeString.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jsdoctypemap...|__java_lang_String_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeString.$Overlay )))
   (return (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeString.$Overlay))
  )
 )
 
 ;;; String $Overlay.$getString_|jsdoctypemap...|()
-(func $$getString_|jsdoctypemap...|__java_lang_String@jsdoctypemappings.JsDocTypeMappings.NativeString.$Overlay
+(func $$getString_|jsdoctypemap...|__java_lang_String_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeString.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeString.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeString.$Overlay)))
    (then
-    (global.set $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeString.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsdoctypemappings.JsDocTypeMappings$NativeString$$Overlay")))
+    (return (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeString.$Overlay))
    )
   )
+  (global.set $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeString.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsdoctypemappings.JsDocTypeMappings$NativeString$$Overlay")))
   (return (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeString.$Overlay))
  )
 )
@@ -619,27 +629,29 @@
 )
 
 ;;; Class<T> $Overlay.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.NativeNull.$Overlay
+(func $$getClassMetadata__java_lang_Class_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeNull.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeNull.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeNull.$Overlay)))
    (then
-    (global.set $$class@jsdoctypemappings.JsDocTypeMappings.NativeNull.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsdoctypemap...|__java_lang_String (ref.func $$getString_|jsdoctypemap...|__java_lang_String@jsdoctypemappings.JsDocTypeMappings.NativeNull.$Overlay) )))
+    (return (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeNull.$Overlay))
    )
   )
+  (global.set $$class@jsdoctypemappings.JsDocTypeMappings.NativeNull.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jsdoctypemap...|__java_lang_String_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeNull.$Overlay )))
   (return (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeNull.$Overlay))
  )
 )
 
 ;;; String $Overlay.$getString_|jsdoctypemap...|()
-(func $$getString_|jsdoctypemap...|__java_lang_String@jsdoctypemappings.JsDocTypeMappings.NativeNull.$Overlay
+(func $$getString_|jsdoctypemap...|__java_lang_String_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeNull.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeNull.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeNull.$Overlay)))
    (then
-    (global.set $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeNull.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsdoctypemappings.JsDocTypeMappings$NativeNull$$Overlay")))
+    (return (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeNull.$Overlay))
    )
   )
+  (global.set $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeNull.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsdoctypemappings.JsDocTypeMappings$NativeNull$$Overlay")))
   (return (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeNull.$Overlay))
  )
 )
@@ -663,27 +675,29 @@
 )
 
 ;;; Class<T> $Overlay.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.NativeUndefined.$Overlay
+(func $$getClassMetadata__java_lang_Class_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeUndefined.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeUndefined.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeUndefined.$Overlay)))
    (then
-    (global.set $$class@jsdoctypemappings.JsDocTypeMappings.NativeUndefined.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsdoctypemap...|__java_lang_String (ref.func $$getString_|jsdoctypemap...|__java_lang_String@jsdoctypemappings.JsDocTypeMappings.NativeUndefined.$Overlay) )))
+    (return (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeUndefined.$Overlay))
    )
   )
+  (global.set $$class@jsdoctypemappings.JsDocTypeMappings.NativeUndefined.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jsdoctypemap...|__java_lang_String_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeUndefined.$Overlay )))
   (return (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeUndefined.$Overlay))
  )
 )
 
 ;;; String $Overlay.$getString_|jsdoctypemap...|()
-(func $$getString_|jsdoctypemap...|__java_lang_String@jsdoctypemappings.JsDocTypeMappings.NativeUndefined.$Overlay
+(func $$getString_|jsdoctypemap...|__java_lang_String_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeUndefined.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeUndefined.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeUndefined.$Overlay)))
    (then
-    (global.set $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeUndefined.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsdoctypemappings.JsDocTypeMappings$NativeUndefined$$Overlay")))
+    (return (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeUndefined.$Overlay))
    )
   )
+  (global.set $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeUndefined.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsdoctypemappings.JsDocTypeMappings$NativeUndefined$$Overlay")))
   (return (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeUndefined.$Overlay))
  )
 )
@@ -707,27 +721,29 @@
 )
 
 ;;; Class<T> $Overlay.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.NativeVoid.$Overlay
+(func $$getClassMetadata__java_lang_Class_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeVoid.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeVoid.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeVoid.$Overlay)))
    (then
-    (global.set $$class@jsdoctypemappings.JsDocTypeMappings.NativeVoid.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsdoctypemap...|__java_lang_String (ref.func $$getString_|jsdoctypemap...|__java_lang_String@jsdoctypemappings.JsDocTypeMappings.NativeVoid.$Overlay) )))
+    (return (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeVoid.$Overlay))
    )
   )
+  (global.set $$class@jsdoctypemappings.JsDocTypeMappings.NativeVoid.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jsdoctypemap...|__java_lang_String_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeVoid.$Overlay )))
   (return (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeVoid.$Overlay))
  )
 )
 
 ;;; String $Overlay.$getString_|jsdoctypemap...|()
-(func $$getString_|jsdoctypemap...|__java_lang_String@jsdoctypemappings.JsDocTypeMappings.NativeVoid.$Overlay
+(func $$getString_|jsdoctypemap...|__java_lang_String_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeVoid.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeVoid.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeVoid.$Overlay)))
    (then
-    (global.set $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeVoid.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsdoctypemappings.JsDocTypeMappings$NativeVoid$$Overlay")))
+    (return (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeVoid.$Overlay))
    )
   )
+  (global.set $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeVoid.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsdoctypemappings.JsDocTypeMappings$NativeVoid$$Overlay")))
   (return (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeVoid.$Overlay))
  )
 )
@@ -751,27 +767,29 @@
 )
 
 ;;; Class<T> $Overlay.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.NativeStar.$Overlay
+(func $$getClassMetadata__java_lang_Class_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeStar.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeStar.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeStar.$Overlay)))
    (then
-    (global.set $$class@jsdoctypemappings.JsDocTypeMappings.NativeStar.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsdoctypemap...|__java_lang_String (ref.func $$getString_|jsdoctypemap...|__java_lang_String@jsdoctypemappings.JsDocTypeMappings.NativeStar.$Overlay) )))
+    (return (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeStar.$Overlay))
    )
   )
+  (global.set $$class@jsdoctypemappings.JsDocTypeMappings.NativeStar.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jsdoctypemap...|__java_lang_String_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeStar.$Overlay )))
   (return (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeStar.$Overlay))
  )
 )
 
 ;;; String $Overlay.$getString_|jsdoctypemap...|()
-(func $$getString_|jsdoctypemap...|__java_lang_String@jsdoctypemappings.JsDocTypeMappings.NativeStar.$Overlay
+(func $$getString_|jsdoctypemap...|__java_lang_String_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeStar.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeStar.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeStar.$Overlay)))
    (then
-    (global.set $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeStar.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsdoctypemappings.JsDocTypeMappings$NativeStar$$Overlay")))
+    (return (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeStar.$Overlay))
    )
   )
+  (global.set $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeStar.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsdoctypemappings.JsDocTypeMappings$NativeStar$$Overlay")))
   (return (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeStar.$Overlay))
  )
 )
@@ -795,27 +813,29 @@
 )
 
 ;;; Class<T> $Overlay.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.NativeWildcard.$Overlay
+(func $$getClassMetadata__java_lang_Class_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeWildcard.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeWildcard.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeWildcard.$Overlay)))
    (then
-    (global.set $$class@jsdoctypemappings.JsDocTypeMappings.NativeWildcard.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsdoctypemap...|__java_lang_String (ref.func $$getString_|jsdoctypemap...|__java_lang_String@jsdoctypemappings.JsDocTypeMappings.NativeWildcard.$Overlay) )))
+    (return (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeWildcard.$Overlay))
    )
   )
+  (global.set $$class@jsdoctypemappings.JsDocTypeMappings.NativeWildcard.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jsdoctypemap...|__java_lang_String_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeWildcard.$Overlay )))
   (return (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeWildcard.$Overlay))
  )
 )
 
 ;;; String $Overlay.$getString_|jsdoctypemap...|()
-(func $$getString_|jsdoctypemap...|__java_lang_String@jsdoctypemappings.JsDocTypeMappings.NativeWildcard.$Overlay
+(func $$getString_|jsdoctypemap...|__java_lang_String_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeWildcard.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeWildcard.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeWildcard.$Overlay)))
    (then
-    (global.set $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeWildcard.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsdoctypemappings.JsDocTypeMappings$NativeWildcard$$Overlay")))
+    (return (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeWildcard.$Overlay))
    )
   )
+  (global.set $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeWildcard.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsdoctypemappings.JsDocTypeMappings$NativeWildcard$$Overlay")))
   (return (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.NativeWildcard.$Overlay))
  )
 )
@@ -1360,14 +1380,15 @@
 )
 
 ;;; Class<T> JsDocTypeMappings.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsdoctypemappings.JsDocTypeMappings
+(func $$getClassMetadata__java_lang_Class_<once>_@jsdoctypemappings.JsDocTypeMappings
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsdoctypemappings.JsDocTypeMappings))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsdoctypemappings.JsDocTypeMappings)))
    (then
-    (global.set $$class@jsdoctypemappings.JsDocTypeMappings (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsdoctypemap...|__java_lang_String (ref.func $$getString_|jsdoctypemap...|__java_lang_String@jsdoctypemappings.JsDocTypeMappings) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@jsdoctypemappings.JsDocTypeMappings))
    )
   )
+  (global.set $$class@jsdoctypemappings.JsDocTypeMappings (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsdoctypemap...|__java_lang_String_<once>_@jsdoctypemappings.JsDocTypeMappings )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@jsdoctypemappings.JsDocTypeMappings))
  )
 )
@@ -1380,20 +1401,21 @@
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
  (local.set $this (ref.cast (ref $jsdoctypemappings.JsDocTypeMappings) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsdoctypemappings.JsDocTypeMappings) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsdoctypemappings.JsDocTypeMappings ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsdoctypemappings.JsDocTypeMappings)
 
 ;;; String JsDocTypeMappings.$getString_|jsdoctypemap...|()
-(func $$getString_|jsdoctypemap...|__java_lang_String@jsdoctypemappings.JsDocTypeMappings
+(func $$getString_|jsdoctypemap...|__java_lang_String_<once>_@jsdoctypemappings.JsDocTypeMappings
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings)))
    (then
-    (global.set $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsdoctypemappings.JsDocTypeMappings")))
+    (return (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings))
    )
   )
+  (global.set $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsdoctypemappings.JsDocTypeMappings")))
   (return (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings))
  )
 )
@@ -1457,14 +1479,15 @@
 )
 
 ;;; Class<T> ExportedType.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.ExportedType
+(func $$getClassMetadata__java_lang_Class_<once>_@jsdoctypemappings.JsDocTypeMappings.ExportedType
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsdoctypemappings.JsDocTypeMappings.ExportedType))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsdoctypemappings.JsDocTypeMappings.ExportedType)))
    (then
-    (global.set $$class@jsdoctypemappings.JsDocTypeMappings.ExportedType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsdoctypemap...|__java_lang_String (ref.func $$getString_|jsdoctypemap...|__java_lang_String@jsdoctypemappings.JsDocTypeMappings.ExportedType) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@jsdoctypemappings.JsDocTypeMappings.ExportedType))
    )
   )
+  (global.set $$class@jsdoctypemappings.JsDocTypeMappings.ExportedType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsdoctypemap...|__java_lang_String_<once>_@jsdoctypemappings.JsDocTypeMappings.ExportedType )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@jsdoctypemappings.JsDocTypeMappings.ExportedType))
  )
 )
@@ -1477,20 +1500,21 @@
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings.ExportedType))
  (local.set $this (ref.cast (ref $jsdoctypemappings.JsDocTypeMappings.ExportedType) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.ExportedType) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsdoctypemappings.JsDocTypeMappings.ExportedType ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.ExportedType)
 
 ;;; String ExportedType.$getString_|jsdoctypemap...|()
-(func $$getString_|jsdoctypemap...|__java_lang_String@jsdoctypemappings.JsDocTypeMappings.ExportedType
+(func $$getString_|jsdoctypemap...|__java_lang_String_<once>_@jsdoctypemappings.JsDocTypeMappings.ExportedType
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.ExportedType))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.ExportedType)))
    (then
-    (global.set $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.ExportedType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsdoctypemappings.JsDocTypeMappings$ExportedType")))
+    (return (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.ExportedType))
    )
   )
+  (global.set $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.ExportedType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsdoctypemappings.JsDocTypeMappings$ExportedType")))
   (return (global.get $$string_|jsdoctypemap...|@jsdoctypemappings.JsDocTypeMappings.ExportedType))
  )
 )

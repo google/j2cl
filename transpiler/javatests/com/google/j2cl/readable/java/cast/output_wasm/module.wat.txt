@@ -630,27 +630,29 @@
 )
 
 ;;; Class<T> A.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@cast.CastGenerics.A
+(func $$getClassMetadata__java_lang_Class_<once>_@cast.CastGenerics.A
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@cast.CastGenerics.A))
+  (if (i32.eqz (ref.is_null (global.get $$class@cast.CastGenerics.A)))
    (then
-    (global.set $$class@cast.CastGenerics.A (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cast.CastGen...|__java_lang_String (ref.func $$getString_|cast.CastGen...|__java_lang_String@cast.CastGenerics.A) )))
+    (return (global.get $$class@cast.CastGenerics.A))
    )
   )
+  (global.set $$class@cast.CastGenerics.A (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|cast.CastGen...|__java_lang_String_<once>_@cast.CastGenerics.A )))
   (return (global.get $$class@cast.CastGenerics.A))
  )
 )
 
 ;;; String A.$getString_|cast.CastGen...|()
-(func $$getString_|cast.CastGen...|__java_lang_String@cast.CastGenerics.A
+(func $$getString_|cast.CastGen...|__java_lang_String_<once>_@cast.CastGenerics.A
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|cast.CastGen...|@cast.CastGenerics.A))
+  (if (i32.eqz (ref.is_null (global.get $$string_|cast.CastGen...|@cast.CastGenerics.A)))
    (then
-    (global.set $$string_|cast.CastGen...|@cast.CastGenerics.A (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cast.CastGenerics$A")))
+    (return (global.get $$string_|cast.CastGen...|@cast.CastGenerics.A))
    )
   )
+  (global.set $$string_|cast.CastGen...|@cast.CastGenerics.A (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cast.CastGenerics$A")))
   (return (global.get $$string_|cast.CastGen...|@cast.CastGenerics.A))
  )
 )
@@ -674,27 +676,29 @@
 )
 
 ;;; Class<T> B.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@cast.CastGenerics.B
+(func $$getClassMetadata__java_lang_Class_<once>_@cast.CastGenerics.B
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@cast.CastGenerics.B))
+  (if (i32.eqz (ref.is_null (global.get $$class@cast.CastGenerics.B)))
    (then
-    (global.set $$class@cast.CastGenerics.B (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cast.CastGen...|__java_lang_String (ref.func $$getString_|cast.CastGen...|__java_lang_String@cast.CastGenerics.B) )))
+    (return (global.get $$class@cast.CastGenerics.B))
    )
   )
+  (global.set $$class@cast.CastGenerics.B (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|cast.CastGen...|__java_lang_String_<once>_@cast.CastGenerics.B )))
   (return (global.get $$class@cast.CastGenerics.B))
  )
 )
 
 ;;; String B.$getString_|cast.CastGen...|()
-(func $$getString_|cast.CastGen...|__java_lang_String@cast.CastGenerics.B
+(func $$getString_|cast.CastGen...|__java_lang_String_<once>_@cast.CastGenerics.B
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|cast.CastGen...|@cast.CastGenerics.B))
+  (if (i32.eqz (ref.is_null (global.get $$string_|cast.CastGen...|@cast.CastGenerics.B)))
    (then
-    (global.set $$string_|cast.CastGen...|@cast.CastGenerics.B (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cast.CastGenerics$B")))
+    (return (global.get $$string_|cast.CastGen...|@cast.CastGenerics.B))
    )
   )
+  (global.set $$string_|cast.CastGen...|@cast.CastGenerics.B (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cast.CastGenerics$B")))
   (return (global.get $$string_|cast.CastGen...|@cast.CastGenerics.B))
  )
 )
@@ -718,27 +722,29 @@
 )
 
 ;;; Class<T> Empty1.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@cast.CastGenerics.Empty1
+(func $$getClassMetadata__java_lang_Class_<once>_@cast.CastGenerics.Empty1
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@cast.CastGenerics.Empty1))
+  (if (i32.eqz (ref.is_null (global.get $$class@cast.CastGenerics.Empty1)))
    (then
-    (global.set $$class@cast.CastGenerics.Empty1 (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cast.CastGen...|__java_lang_String (ref.func $$getString_|cast.CastGen...|__java_lang_String@cast.CastGenerics.Empty1) )))
+    (return (global.get $$class@cast.CastGenerics.Empty1))
    )
   )
+  (global.set $$class@cast.CastGenerics.Empty1 (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|cast.CastGen...|__java_lang_String_<once>_@cast.CastGenerics.Empty1 )))
   (return (global.get $$class@cast.CastGenerics.Empty1))
  )
 )
 
 ;;; String Empty1.$getString_|cast.CastGen...|()
-(func $$getString_|cast.CastGen...|__java_lang_String@cast.CastGenerics.Empty1
+(func $$getString_|cast.CastGen...|__java_lang_String_<once>_@cast.CastGenerics.Empty1
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|cast.CastGen...|@cast.CastGenerics.Empty1))
+  (if (i32.eqz (ref.is_null (global.get $$string_|cast.CastGen...|@cast.CastGenerics.Empty1)))
    (then
-    (global.set $$string_|cast.CastGen...|@cast.CastGenerics.Empty1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cast.CastGenerics$Empty1")))
+    (return (global.get $$string_|cast.CastGen...|@cast.CastGenerics.Empty1))
    )
   )
+  (global.set $$string_|cast.CastGen...|@cast.CastGenerics.Empty1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cast.CastGenerics$Empty1")))
   (return (global.get $$string_|cast.CastGen...|@cast.CastGenerics.Empty1))
  )
 )
@@ -762,27 +768,29 @@
 )
 
 ;;; Class<T> Empty2.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@cast.CastGenerics.Empty2
+(func $$getClassMetadata__java_lang_Class_<once>_@cast.CastGenerics.Empty2
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@cast.CastGenerics.Empty2))
+  (if (i32.eqz (ref.is_null (global.get $$class@cast.CastGenerics.Empty2)))
    (then
-    (global.set $$class@cast.CastGenerics.Empty2 (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cast.CastGen...|__java_lang_String (ref.func $$getString_|cast.CastGen...|__java_lang_String@cast.CastGenerics.Empty2) )))
+    (return (global.get $$class@cast.CastGenerics.Empty2))
    )
   )
+  (global.set $$class@cast.CastGenerics.Empty2 (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|cast.CastGen...|__java_lang_String_<once>_@cast.CastGenerics.Empty2 )))
   (return (global.get $$class@cast.CastGenerics.Empty2))
  )
 )
 
 ;;; String Empty2.$getString_|cast.CastGen...|()
-(func $$getString_|cast.CastGen...|__java_lang_String@cast.CastGenerics.Empty2
+(func $$getString_|cast.CastGen...|__java_lang_String_<once>_@cast.CastGenerics.Empty2
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|cast.CastGen...|@cast.CastGenerics.Empty2))
+  (if (i32.eqz (ref.is_null (global.get $$string_|cast.CastGen...|@cast.CastGenerics.Empty2)))
    (then
-    (global.set $$string_|cast.CastGen...|@cast.CastGenerics.Empty2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cast.CastGenerics$Empty2")))
+    (return (global.get $$string_|cast.CastGen...|@cast.CastGenerics.Empty2))
    )
   )
+  (global.set $$string_|cast.CastGen...|@cast.CastGenerics.Empty2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cast.CastGenerics$Empty2")))
   (return (global.get $$string_|cast.CastGen...|@cast.CastGenerics.Empty2))
  )
 )
@@ -1114,14 +1122,15 @@
 )
 
 ;;; Class<T> CastGenerics.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@cast.CastGenerics
+(func $$getClassMetadata__java_lang_Class_<once>_@cast.CastGenerics
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@cast.CastGenerics))
+  (if (i32.eqz (ref.is_null (global.get $$class@cast.CastGenerics)))
    (then
-    (global.set $$class@cast.CastGenerics (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cast.CastGen...|__java_lang_String (ref.func $$getString_|cast.CastGen...|__java_lang_String@cast.CastGenerics) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@cast.CastGenerics))
    )
   )
+  (global.set $$class@cast.CastGenerics (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|cast.CastGen...|__java_lang_String_<once>_@cast.CastGenerics )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@cast.CastGenerics))
  )
 )
@@ -1134,20 +1143,21 @@
  (local $this (ref null $cast.CastGenerics))
  (local.set $this (ref.cast (ref $cast.CastGenerics) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cast.CastGenerics) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@cast.CastGenerics ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cast.CastGenerics)
 
 ;;; String CastGenerics.$getString_|cast.CastGen...|()
-(func $$getString_|cast.CastGen...|__java_lang_String@cast.CastGenerics
+(func $$getString_|cast.CastGen...|__java_lang_String_<once>_@cast.CastGenerics
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|cast.CastGen...|@cast.CastGenerics))
+  (if (i32.eqz (ref.is_null (global.get $$string_|cast.CastGen...|@cast.CastGenerics)))
    (then
-    (global.set $$string_|cast.CastGen...|@cast.CastGenerics (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cast.CastGenerics")))
+    (return (global.get $$string_|cast.CastGen...|@cast.CastGenerics))
    )
   )
+  (global.set $$string_|cast.CastGen...|@cast.CastGenerics (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cast.CastGenerics")))
   (return (global.get $$string_|cast.CastGen...|@cast.CastGenerics))
  )
 )
@@ -1183,27 +1193,29 @@
 )
 
 ;;; Class<T> BaseImplementor.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@cast.CastGenerics.BaseImplementor
+(func $$getClassMetadata__java_lang_Class_<once>_@cast.CastGenerics.BaseImplementor
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@cast.CastGenerics.BaseImplementor))
+  (if (i32.eqz (ref.is_null (global.get $$class@cast.CastGenerics.BaseImplementor)))
    (then
-    (global.set $$class@cast.CastGenerics.BaseImplementor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cast.CastGen...|__java_lang_String (ref.func $$getString_|cast.CastGen...|__java_lang_String@cast.CastGenerics.BaseImplementor) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@cast.CastGenerics.BaseImplementor))
    )
   )
+  (global.set $$class@cast.CastGenerics.BaseImplementor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|cast.CastGen...|__java_lang_String_<once>_@cast.CastGenerics.BaseImplementor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@cast.CastGenerics.BaseImplementor))
  )
 )
 
 ;;; String BaseImplementor.$getString_|cast.CastGen...|()
-(func $$getString_|cast.CastGen...|__java_lang_String@cast.CastGenerics.BaseImplementor
+(func $$getString_|cast.CastGen...|__java_lang_String_<once>_@cast.CastGenerics.BaseImplementor
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|cast.CastGen...|@cast.CastGenerics.BaseImplementor))
+  (if (i32.eqz (ref.is_null (global.get $$string_|cast.CastGen...|@cast.CastGenerics.BaseImplementor)))
    (then
-    (global.set $$string_|cast.CastGen...|@cast.CastGenerics.BaseImplementor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cast.CastGenerics$BaseImplementor")))
+    (return (global.get $$string_|cast.CastGen...|@cast.CastGenerics.BaseImplementor))
    )
   )
+  (global.set $$string_|cast.CastGen...|@cast.CastGenerics.BaseImplementor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cast.CastGenerics$BaseImplementor")))
   (return (global.get $$string_|cast.CastGen...|@cast.CastGenerics.BaseImplementor))
  )
 )
@@ -1269,14 +1281,15 @@
 )
 
 ;;; Class<T> Container.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@cast.CastGenerics.Container
+(func $$getClassMetadata__java_lang_Class_<once>_@cast.CastGenerics.Container
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@cast.CastGenerics.Container))
+  (if (i32.eqz (ref.is_null (global.get $$class@cast.CastGenerics.Container)))
    (then
-    (global.set $$class@cast.CastGenerics.Container (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cast.CastGen...|__java_lang_String (ref.func $$getString_|cast.CastGen...|__java_lang_String@cast.CastGenerics.Container) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@cast.CastGenerics.Container))
    )
   )
+  (global.set $$class@cast.CastGenerics.Container (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|cast.CastGen...|__java_lang_String_<once>_@cast.CastGenerics.Container )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@cast.CastGenerics.Container))
  )
 )
@@ -1289,20 +1302,21 @@
  (local $this (ref null $cast.CastGenerics.Container))
  (local.set $this (ref.cast (ref $cast.CastGenerics.Container) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cast.CastGenerics.Container) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@cast.CastGenerics.Container ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cast.CastGenerics.Container)
 
 ;;; String Container.$getString_|cast.CastGen...|()
-(func $$getString_|cast.CastGen...|__java_lang_String@cast.CastGenerics.Container
+(func $$getString_|cast.CastGen...|__java_lang_String_<once>_@cast.CastGenerics.Container
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|cast.CastGen...|@cast.CastGenerics.Container))
+  (if (i32.eqz (ref.is_null (global.get $$string_|cast.CastGen...|@cast.CastGenerics.Container)))
    (then
-    (global.set $$string_|cast.CastGen...|@cast.CastGenerics.Container (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cast.CastGenerics$Container")))
+    (return (global.get $$string_|cast.CastGen...|@cast.CastGenerics.Container))
    )
   )
+  (global.set $$string_|cast.CastGen...|@cast.CastGenerics.Container (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cast.CastGenerics$Container")))
   (return (global.get $$string_|cast.CastGen...|@cast.CastGenerics.Container))
  )
 )
@@ -1355,14 +1369,15 @@
 )
 
 ;;; Class<T> Foo.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@cast.CastGenerics.Foo
+(func $$getClassMetadata__java_lang_Class_<once>_@cast.CastGenerics.Foo
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@cast.CastGenerics.Foo))
+  (if (i32.eqz (ref.is_null (global.get $$class@cast.CastGenerics.Foo)))
    (then
-    (global.set $$class@cast.CastGenerics.Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cast.CastGen...|__java_lang_String (ref.func $$getString_|cast.CastGen...|__java_lang_String@cast.CastGenerics.Foo) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@cast.CastGenerics.Foo))
    )
   )
+  (global.set $$class@cast.CastGenerics.Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|cast.CastGen...|__java_lang_String_<once>_@cast.CastGenerics.Foo )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@cast.CastGenerics.Foo))
  )
 )
@@ -1375,20 +1390,21 @@
  (local $this (ref null $cast.CastGenerics.Foo))
  (local.set $this (ref.cast (ref $cast.CastGenerics.Foo) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cast.CastGenerics.Foo) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@cast.CastGenerics.Foo ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cast.CastGenerics.Foo)
 
 ;;; String Foo.$getString_|cast.CastGen...|()
-(func $$getString_|cast.CastGen...|__java_lang_String@cast.CastGenerics.Foo
+(func $$getString_|cast.CastGen...|__java_lang_String_<once>_@cast.CastGenerics.Foo
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|cast.CastGen...|@cast.CastGenerics.Foo))
+  (if (i32.eqz (ref.is_null (global.get $$string_|cast.CastGen...|@cast.CastGenerics.Foo)))
    (then
-    (global.set $$string_|cast.CastGen...|@cast.CastGenerics.Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cast.CastGenerics$Foo")))
+    (return (global.get $$string_|cast.CastGen...|@cast.CastGenerics.Foo))
    )
   )
+  (global.set $$string_|cast.CastGen...|@cast.CastGenerics.Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cast.CastGenerics$Foo")))
   (return (global.get $$string_|cast.CastGen...|@cast.CastGenerics.Foo))
  )
 )
@@ -1457,14 +1473,15 @@
 )
 
 ;;; Class<T> Nested.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@cast.CastGenerics.1Nested
+(func $$getClassMetadata__java_lang_Class_<once>_@cast.CastGenerics.1Nested
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@cast.CastGenerics.1Nested))
+  (if (i32.eqz (ref.is_null (global.get $$class@cast.CastGenerics.1Nested)))
    (then
-    (global.set $$class@cast.CastGenerics.1Nested (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cast.CastGen...|__java_lang_String (ref.func $$getString_|cast.CastGen...|__java_lang_String@cast.CastGenerics.1Nested) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@cast.CastGenerics.1Nested))
    )
   )
+  (global.set $$class@cast.CastGenerics.1Nested (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|cast.CastGen...|__java_lang_String_<once>_@cast.CastGenerics.1Nested )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@cast.CastGenerics.1Nested))
  )
 )
@@ -1477,20 +1494,21 @@
  (local $this (ref null $cast.CastGenerics.1Nested))
  (local.set $this (ref.cast (ref $cast.CastGenerics.1Nested) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cast.CastGenerics.1Nested) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@cast.CastGenerics.1Nested ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cast.CastGenerics.1Nested)
 
 ;;; String Nested.$getString_|cast.CastGen...|()
-(func $$getString_|cast.CastGen...|__java_lang_String@cast.CastGenerics.1Nested
+(func $$getString_|cast.CastGen...|__java_lang_String_<once>_@cast.CastGenerics.1Nested
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|cast.CastGen...|@cast.CastGenerics.1Nested))
+  (if (i32.eqz (ref.is_null (global.get $$string_|cast.CastGen...|@cast.CastGenerics.1Nested)))
    (then
-    (global.set $$string_|cast.CastGen...|@cast.CastGenerics.1Nested (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cast.CastGenerics$1Nested")))
+    (return (global.get $$string_|cast.CastGen...|@cast.CastGenerics.1Nested))
    )
   )
+  (global.set $$string_|cast.CastGen...|@cast.CastGenerics.1Nested (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cast.CastGenerics$1Nested")))
   (return (global.get $$string_|cast.CastGen...|@cast.CastGenerics.1Nested))
  )
 )
@@ -2114,14 +2132,15 @@
 )
 
 ;;; Class<T> CastPrimitives.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@cast.CastPrimitives
+(func $$getClassMetadata__java_lang_Class_<once>_@cast.CastPrimitives
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@cast.CastPrimitives))
+  (if (i32.eqz (ref.is_null (global.get $$class@cast.CastPrimitives)))
    (then
-    (global.set $$class@cast.CastPrimitives (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cast.CastPri...|__java_lang_String (ref.func $$getString_|cast.CastPri...|__java_lang_String@cast.CastPrimitives) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@cast.CastPrimitives))
    )
   )
+  (global.set $$class@cast.CastPrimitives (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|cast.CastPri...|__java_lang_String_<once>_@cast.CastPrimitives )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@cast.CastPrimitives))
  )
 )
@@ -2134,20 +2153,21 @@
  (local $this (ref null $cast.CastPrimitives))
  (local.set $this (ref.cast (ref $cast.CastPrimitives) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cast.CastPrimitives) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@cast.CastPrimitives ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cast.CastPrimitives)
 
 ;;; String CastPrimitives.$getString_|cast.CastPri...|()
-(func $$getString_|cast.CastPri...|__java_lang_String@cast.CastPrimitives
+(func $$getString_|cast.CastPri...|__java_lang_String_<once>_@cast.CastPrimitives
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|cast.CastPri...|@cast.CastPrimitives))
+  (if (i32.eqz (ref.is_null (global.get $$string_|cast.CastPri...|@cast.CastPrimitives)))
    (then
-    (global.set $$string_|cast.CastPri...|@cast.CastPrimitives (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cast.CastPrimitives")))
+    (return (global.get $$string_|cast.CastPri...|@cast.CastPrimitives))
    )
   )
+  (global.set $$string_|cast.CastPri...|@cast.CastPrimitives (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cast.CastPrimitives")))
   (return (global.get $$string_|cast.CastPri...|@cast.CastPrimitives))
  )
 )
@@ -2202,14 +2222,15 @@
 )
 
 ;;; Class<T> IntValueHolder.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@cast.CastPrimitives.IntValueHolder
+(func $$getClassMetadata__java_lang_Class_<once>_@cast.CastPrimitives.IntValueHolder
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@cast.CastPrimitives.IntValueHolder))
+  (if (i32.eqz (ref.is_null (global.get $$class@cast.CastPrimitives.IntValueHolder)))
    (then
-    (global.set $$class@cast.CastPrimitives.IntValueHolder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cast.CastPri...|__java_lang_String (ref.func $$getString_|cast.CastPri...|__java_lang_String@cast.CastPrimitives.IntValueHolder) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@cast.CastPrimitives.IntValueHolder))
    )
   )
+  (global.set $$class@cast.CastPrimitives.IntValueHolder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|cast.CastPri...|__java_lang_String_<once>_@cast.CastPrimitives.IntValueHolder )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@cast.CastPrimitives.IntValueHolder))
  )
 )
@@ -2222,20 +2243,21 @@
  (local $this (ref null $cast.CastPrimitives.IntValueHolder))
  (local.set $this (ref.cast (ref $cast.CastPrimitives.IntValueHolder) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cast.CastPrimitives.IntValueHolder) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@cast.CastPrimitives.IntValueHolder ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cast.CastPrimitives.IntValueHolder)
 
 ;;; String IntValueHolder.$getString_|cast.CastPri...|()
-(func $$getString_|cast.CastPri...|__java_lang_String@cast.CastPrimitives.IntValueHolder
+(func $$getString_|cast.CastPri...|__java_lang_String_<once>_@cast.CastPrimitives.IntValueHolder
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|cast.CastPri...|@cast.CastPrimitives.IntValueHolder))
+  (if (i32.eqz (ref.is_null (global.get $$string_|cast.CastPri...|@cast.CastPrimitives.IntValueHolder)))
    (then
-    (global.set $$string_|cast.CastPri...|@cast.CastPrimitives.IntValueHolder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cast.CastPrimitives$IntValueHolder")))
+    (return (global.get $$string_|cast.CastPri...|@cast.CastPrimitives.IntValueHolder))
    )
   )
+  (global.set $$string_|cast.CastPri...|@cast.CastPrimitives.IntValueHolder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cast.CastPrimitives$IntValueHolder")))
   (return (global.get $$string_|cast.CastPri...|@cast.CastPrimitives.IntValueHolder))
  )
 )
@@ -2290,14 +2312,15 @@
 )
 
 ;;; Class<T> LongValueHolder.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@cast.CastPrimitives.LongValueHolder
+(func $$getClassMetadata__java_lang_Class_<once>_@cast.CastPrimitives.LongValueHolder
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@cast.CastPrimitives.LongValueHolder))
+  (if (i32.eqz (ref.is_null (global.get $$class@cast.CastPrimitives.LongValueHolder)))
    (then
-    (global.set $$class@cast.CastPrimitives.LongValueHolder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cast.CastPri...|__java_lang_String (ref.func $$getString_|cast.CastPri...|__java_lang_String@cast.CastPrimitives.LongValueHolder) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@cast.CastPrimitives.LongValueHolder))
    )
   )
+  (global.set $$class@cast.CastPrimitives.LongValueHolder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|cast.CastPri...|__java_lang_String_<once>_@cast.CastPrimitives.LongValueHolder )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@cast.CastPrimitives.LongValueHolder))
  )
 )
@@ -2310,20 +2333,21 @@
  (local $this (ref null $cast.CastPrimitives.LongValueHolder))
  (local.set $this (ref.cast (ref $cast.CastPrimitives.LongValueHolder) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cast.CastPrimitives.LongValueHolder) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@cast.CastPrimitives.LongValueHolder ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cast.CastPrimitives.LongValueHolder)
 
 ;;; String LongValueHolder.$getString_|cast.CastPri...|()
-(func $$getString_|cast.CastPri...|__java_lang_String@cast.CastPrimitives.LongValueHolder
+(func $$getString_|cast.CastPri...|__java_lang_String_<once>_@cast.CastPrimitives.LongValueHolder
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|cast.CastPri...|@cast.CastPrimitives.LongValueHolder))
+  (if (i32.eqz (ref.is_null (global.get $$string_|cast.CastPri...|@cast.CastPrimitives.LongValueHolder)))
    (then
-    (global.set $$string_|cast.CastPri...|@cast.CastPrimitives.LongValueHolder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cast.CastPrimitives$LongValueHolder")))
+    (return (global.get $$string_|cast.CastPri...|@cast.CastPrimitives.LongValueHolder))
    )
   )
+  (global.set $$string_|cast.CastPri...|@cast.CastPrimitives.LongValueHolder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cast.CastPrimitives$LongValueHolder")))
   (return (global.get $$string_|cast.CastPri...|@cast.CastPrimitives.LongValueHolder))
  )
 )
@@ -2653,9 +2677,9 @@
  (local.set $this (ref.cast (ref $cast.Casts) (local.get $this.untyped)))
  (block
   ;;@ cast/Casts.java:118:4
-  (local.set $foo (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@cast.Casts) ))
+  (local.set $foo (call $$getString_|foo|__java_lang_String_<once>_@cast.Casts ))
   ;;@ cast/Casts.java:119:4
-  (local.set $bar (call $function.no.side.effects.$getString_|bar|__java_lang_String (ref.func $$getString_|bar|__java_lang_String@cast.Casts) ))
+  (local.set $bar (call $$getString_|bar|__java_lang_String_<once>_@cast.Casts ))
   ;;@ cast/Casts.java:120:4
   (local.set $s (ref.cast (ref null $java.lang.String) (if (result (ref null $java.lang.Object)) (i32.const 0) (then (local.get $foo)) (else (local.get $bar)))))
  )
@@ -2681,14 +2705,15 @@
 )
 
 ;;; Class<T> Casts.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@cast.Casts
+(func $$getClassMetadata__java_lang_Class_<once>_@cast.Casts
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@cast.Casts))
+  (if (i32.eqz (ref.is_null (global.get $$class@cast.Casts)))
    (then
-    (global.set $$class@cast.Casts (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cast.Casts|__java_lang_String (ref.func $$getString_|cast.Casts|__java_lang_String@cast.Casts) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@cast.Casts))
    )
   )
+  (global.set $$class@cast.Casts (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|cast.Casts|__java_lang_String_<once>_@cast.Casts )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@cast.Casts))
  )
 )
@@ -2701,46 +2726,49 @@
  (local $this (ref null $cast.Casts))
  (local.set $this (ref.cast (ref $cast.Casts) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cast.Casts) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@cast.Casts ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cast.Casts)
 
 ;;; String Casts.$getString_|foo|()
-(func $$getString_|foo|__java_lang_String@cast.Casts
+(func $$getString_|foo|__java_lang_String_<once>_@cast.Casts
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|foo|@cast.Casts))
+  (if (i32.eqz (ref.is_null (global.get $$string_|foo|@cast.Casts)))
    (then
-    (global.set $$string_|foo|@cast.Casts (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "foo")))
+    (return (global.get $$string_|foo|@cast.Casts))
    )
   )
+  (global.set $$string_|foo|@cast.Casts (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "foo")))
   (return (global.get $$string_|foo|@cast.Casts))
  )
 )
 
 ;;; String Casts.$getString_|bar|()
-(func $$getString_|bar|__java_lang_String@cast.Casts
+(func $$getString_|bar|__java_lang_String_<once>_@cast.Casts
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|bar|@cast.Casts))
+  (if (i32.eqz (ref.is_null (global.get $$string_|bar|@cast.Casts)))
    (then
-    (global.set $$string_|bar|@cast.Casts (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bar")))
+    (return (global.get $$string_|bar|@cast.Casts))
    )
   )
+  (global.set $$string_|bar|@cast.Casts (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bar")))
   (return (global.get $$string_|bar|@cast.Casts))
  )
 )
 
 ;;; String Casts.$getString_|cast.Casts|()
-(func $$getString_|cast.Casts|__java_lang_String@cast.Casts
+(func $$getString_|cast.Casts|__java_lang_String_<once>_@cast.Casts
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|cast.Casts|@cast.Casts))
+  (if (i32.eqz (ref.is_null (global.get $$string_|cast.Casts|@cast.Casts)))
    (then
-    (global.set $$string_|cast.Casts|@cast.Casts (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cast.Casts")))
+    (return (global.get $$string_|cast.Casts|@cast.Casts))
    )
   )
+  (global.set $$string_|cast.Casts|@cast.Casts (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cast.Casts")))
   (return (global.get $$string_|cast.Casts|@cast.Casts))
  )
 )
@@ -2824,14 +2852,15 @@
 )
 
 ;;; Class<T> Foo.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@cast.Casts.Foo
+(func $$getClassMetadata__java_lang_Class_<once>_@cast.Casts.Foo
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@cast.Casts.Foo))
+  (if (i32.eqz (ref.is_null (global.get $$class@cast.Casts.Foo)))
    (then
-    (global.set $$class@cast.Casts.Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cast.Casts_Foo|__java_lang_String (ref.func $$getString_|cast.Casts_Foo|__java_lang_String@cast.Casts.Foo) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@cast.Casts.Foo))
    )
   )
+  (global.set $$class@cast.Casts.Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|cast.Casts_Foo|__java_lang_String_<once>_@cast.Casts.Foo )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@cast.Casts.Foo))
  )
 )
@@ -2844,20 +2873,21 @@
  (local $this (ref null $cast.Casts.Foo))
  (local.set $this (ref.cast (ref $cast.Casts.Foo) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cast.Casts.Foo) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@cast.Casts.Foo ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cast.Casts.Foo)
 
 ;;; String Foo.$getString_|cast.Casts_Foo|()
-(func $$getString_|cast.Casts_Foo|__java_lang_String@cast.Casts.Foo
+(func $$getString_|cast.Casts_Foo|__java_lang_String_<once>_@cast.Casts.Foo
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|cast.Casts_Foo|@cast.Casts.Foo))
+  (if (i32.eqz (ref.is_null (global.get $$string_|cast.Casts_Foo|@cast.Casts.Foo)))
    (then
-    (global.set $$string_|cast.Casts_Foo|@cast.Casts.Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cast.Casts$Foo")))
+    (return (global.get $$string_|cast.Casts_Foo|@cast.Casts.Foo))
    )
   )
+  (global.set $$string_|cast.Casts_Foo|@cast.Casts.Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cast.Casts$Foo")))
   (return (global.get $$string_|cast.Casts_Foo|@cast.Casts.Foo))
  )
 )
@@ -2910,14 +2940,15 @@
 )
 
 ;;; Class<T> <anonymous> extends Foo<T>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@cast.CastGenerics.1
+(func $$getClassMetadata__java_lang_Class_<once>_@cast.CastGenerics.1
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@cast.CastGenerics.1))
+  (if (i32.eqz (ref.is_null (global.get $$class@cast.CastGenerics.1)))
    (then
-    (global.set $$class@cast.CastGenerics.1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cast.CastGen...|__java_lang_String (ref.func $$getString_|cast.CastGen...|__java_lang_String@cast.CastGenerics.1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cast.CastGenerics.Foo) )))
+    (return (global.get $$class@cast.CastGenerics.1))
    )
   )
+  (global.set $$class@cast.CastGenerics.1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|cast.CastGen...|__java_lang_String_<once>_@cast.CastGenerics.1 )(call $$getClassMetadata__java_lang_Class_<once>_@cast.CastGenerics.Foo )))
   (return (global.get $$class@cast.CastGenerics.1))
  )
 )
@@ -2930,20 +2961,21 @@
  (local $this (ref null $cast.CastGenerics.1))
  (local.set $this (ref.cast (ref $cast.CastGenerics.1) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cast.CastGenerics.1) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@cast.CastGenerics.1 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cast.CastGenerics.1)
 
 ;;; String <anonymous> extends Foo<T>.$getString_|cast.CastGen...|()
-(func $$getString_|cast.CastGen...|__java_lang_String@cast.CastGenerics.1
+(func $$getString_|cast.CastGen...|__java_lang_String_<once>_@cast.CastGenerics.1
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|cast.CastGen...|@cast.CastGenerics.1))
+  (if (i32.eqz (ref.is_null (global.get $$string_|cast.CastGen...|@cast.CastGenerics.1)))
    (then
-    (global.set $$string_|cast.CastGen...|@cast.CastGenerics.1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cast.CastGenerics$1")))
+    (return (global.get $$string_|cast.CastGen...|@cast.CastGenerics.1))
    )
   )
+  (global.set $$string_|cast.CastGen...|@cast.CastGenerics.1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cast.CastGenerics$1")))
   (return (global.get $$string_|cast.CastGen...|@cast.CastGenerics.1))
  )
 )
@@ -3018,14 +3050,15 @@
 )
 
 ;;; Class<T> Implementor.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@cast.CastGenerics.Implementor
+(func $$getClassMetadata__java_lang_Class_<once>_@cast.CastGenerics.Implementor
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@cast.CastGenerics.Implementor))
+  (if (i32.eqz (ref.is_null (global.get $$class@cast.CastGenerics.Implementor)))
    (then
-    (global.set $$class@cast.CastGenerics.Implementor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cast.CastGen...|__java_lang_String (ref.func $$getString_|cast.CastGen...|__java_lang_String@cast.CastGenerics.Implementor) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cast.CastGenerics.BaseImplementor) )))
+    (return (global.get $$class@cast.CastGenerics.Implementor))
    )
   )
+  (global.set $$class@cast.CastGenerics.Implementor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|cast.CastGen...|__java_lang_String_<once>_@cast.CastGenerics.Implementor )(call $$getClassMetadata__java_lang_Class_<once>_@cast.CastGenerics.BaseImplementor )))
   (return (global.get $$class@cast.CastGenerics.Implementor))
  )
 )
@@ -3038,20 +3071,21 @@
  (local $this (ref null $cast.CastGenerics.Implementor))
  (local.set $this (ref.cast (ref $cast.CastGenerics.Implementor) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cast.CastGenerics.Implementor) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@cast.CastGenerics.Implementor ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cast.CastGenerics.Implementor)
 
 ;;; String Implementor.$getString_|cast.CastGen...|()
-(func $$getString_|cast.CastGen...|__java_lang_String@cast.CastGenerics.Implementor
+(func $$getString_|cast.CastGen...|__java_lang_String_<once>_@cast.CastGenerics.Implementor
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|cast.CastGen...|@cast.CastGenerics.Implementor))
+  (if (i32.eqz (ref.is_null (global.get $$string_|cast.CastGen...|@cast.CastGenerics.Implementor)))
    (then
-    (global.set $$string_|cast.CastGen...|@cast.CastGenerics.Implementor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cast.CastGenerics$Implementor")))
+    (return (global.get $$string_|cast.CastGen...|@cast.CastGenerics.Implementor))
    )
   )
+  (global.set $$string_|cast.CastGen...|@cast.CastGenerics.Implementor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cast.CastGenerics$Implementor")))
   (return (global.get $$string_|cast.CastGen...|@cast.CastGenerics.Implementor))
  )
 )

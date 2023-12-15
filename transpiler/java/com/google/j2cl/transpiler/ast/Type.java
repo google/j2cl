@@ -341,9 +341,10 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
 
     // Synthesizes the getter:
     // $get<fieldName>() {
-    //   if (<fieldName> == null) {
-    //      <fieldName> = <initializationExpression>;
+    //   if (<fieldName> != null) {
+    //     return <fieldName>;
     //   }
+    //   <fieldName> = <initializationExpression>;
     //   return <fieldName>;
     // }
     addMember(
@@ -352,14 +353,20 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
             .addStatements(
                 IfStatement.newBuilder()
                     .setConditionExpression(
-                        FieldAccess.Builder.from(holderFieldDescriptor).build().infixEqualsNull())
-                    .setThenStatement(
-                        BinaryExpression.Builder.asAssignmentTo(holderFieldDescriptor)
-                            .setRightOperand(initializationExpression)
+                        FieldAccess.Builder.from(holderFieldDescriptor)
                             .build()
-                            .makeStatement(SourcePosition.NONE))
+                            .infixNotEqualsNull())
+                    .setThenStatement(
+                        ReturnStatement.newBuilder()
+                            .setExpression(FieldAccess.Builder.from(holderFieldDescriptor).build())
+                            .setSourcePosition(SourcePosition.NONE)
+                            .build())
                     .setSourcePosition(SourcePosition.NONE)
                     .build(),
+                BinaryExpression.Builder.asAssignmentTo(holderFieldDescriptor)
+                    .setRightOperand(initializationExpression)
+                    .build()
+                    .makeStatement(SourcePosition.NONE),
                 ReturnStatement.newBuilder()
                     .setExpression(FieldAccess.Builder.from(holderFieldDescriptor).build())
                     .setSourcePosition(SourcePosition.NONE)

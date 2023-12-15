@@ -84,14 +84,15 @@
 )
 
 ;;; Class<T> SuperCallDefault.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@supercalldefault.SuperCallDefault
+(func $$getClassMetadata__java_lang_Class_<once>_@supercalldefault.SuperCallDefault
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@supercalldefault.SuperCallDefault))
+  (if (i32.eqz (ref.is_null (global.get $$class@supercalldefault.SuperCallDefault)))
    (then
-    (global.set $$class@supercalldefault.SuperCallDefault (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|supercalldef...|__java_lang_String (ref.func $$getString_|supercalldef...|__java_lang_String@supercalldefault.SuperCallDefault) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@supercalldefault.SuperCallDefault))
    )
   )
+  (global.set $$class@supercalldefault.SuperCallDefault (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|supercalldef...|__java_lang_String_<once>_@supercalldefault.SuperCallDefault )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@supercalldefault.SuperCallDefault))
  )
 )
@@ -104,20 +105,21 @@
  (local $this (ref null $supercalldefault.SuperCallDefault))
  (local.set $this (ref.cast (ref $supercalldefault.SuperCallDefault) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@supercalldefault.SuperCallDefault) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@supercalldefault.SuperCallDefault ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@supercalldefault.SuperCallDefault)
 
 ;;; String SuperCallDefault.$getString_|supercalldef...|()
-(func $$getString_|supercalldef...|__java_lang_String@supercalldefault.SuperCallDefault
+(func $$getString_|supercalldef...|__java_lang_String_<once>_@supercalldefault.SuperCallDefault
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|supercalldef...|@supercalldefault.SuperCallDefault))
+  (if (i32.eqz (ref.is_null (global.get $$string_|supercalldef...|@supercalldefault.SuperCallDefault)))
    (then
-    (global.set $$string_|supercalldef...|@supercalldefault.SuperCallDefault (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supercalldefault.SuperCallDefault")))
+    (return (global.get $$string_|supercalldef...|@supercalldefault.SuperCallDefault))
    )
   )
+  (global.set $$string_|supercalldef...|@supercalldefault.SuperCallDefault (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supercalldefault.SuperCallDefault")))
   (return (global.get $$string_|supercalldef...|@supercalldefault.SuperCallDefault))
  )
 )

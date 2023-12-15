@@ -1146,27 +1146,29 @@
 )
 
 ;;; Class<T> I.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.I
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.I
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@bridgejsmethod.Main.I))
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgejsmethod.Main.I)))
    (then
-    (global.set $$class@bridgejsmethod.Main.I (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|__java_lang_String (ref.func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.I) )))
+    (return (global.get $$class@bridgejsmethod.Main.I))
    )
   )
+  (global.set $$class@bridgejsmethod.Main.I (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.I )))
   (return (global.get $$class@bridgejsmethod.Main.I))
  )
 )
 
 ;;; String I.$getString_|bridgejsmeth...|()
-(func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.I
+(func $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.I
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.I))
+  (if (i32.eqz (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.I)))
    (then
-    (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.I (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$I")))
+    (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.I))
    )
   )
+  (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.I (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$I")))
   (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.I))
  )
 )
@@ -1190,27 +1192,29 @@
 )
 
 ;;; Class<T> J.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.J
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.J
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@bridgejsmethod.Main.J))
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgejsmethod.Main.J)))
    (then
-    (global.set $$class@bridgejsmethod.Main.J (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|__java_lang_String (ref.func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.J) )))
+    (return (global.get $$class@bridgejsmethod.Main.J))
    )
   )
+  (global.set $$class@bridgejsmethod.Main.J (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.J )))
   (return (global.get $$class@bridgejsmethod.Main.J))
  )
 )
 
 ;;; String J.$getString_|bridgejsmeth...|()
-(func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.J
+(func $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.J
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.J))
+  (if (i32.eqz (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.J)))
    (then
-    (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.J (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$J")))
+    (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.J))
    )
   )
+  (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.J (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$J")))
   (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.J))
  )
 )
@@ -1234,27 +1238,29 @@
 )
 
 ;;; Class<T> G.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.G
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.G
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@bridgejsmethod.Main.G))
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgejsmethod.Main.G)))
    (then
-    (global.set $$class@bridgejsmethod.Main.G (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|__java_lang_String (ref.func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.G) )))
+    (return (global.get $$class@bridgejsmethod.Main.G))
    )
   )
+  (global.set $$class@bridgejsmethod.Main.G (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.G )))
   (return (global.get $$class@bridgejsmethod.Main.G))
  )
 )
 
 ;;; String G.$getString_|bridgejsmeth...|()
-(func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.G
+(func $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.G
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.G))
+  (if (i32.eqz (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.G)))
    (then
-    (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.G (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$G")))
+    (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.G))
    )
   )
+  (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.G (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$G")))
   (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.G))
  )
 )
@@ -1278,27 +1284,29 @@
 )
 
 ;;; Class<T> M.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.M
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.M
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@bridgejsmethod.Main.M))
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgejsmethod.Main.M)))
    (then
-    (global.set $$class@bridgejsmethod.Main.M (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|__java_lang_String (ref.func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.M) )))
+    (return (global.get $$class@bridgejsmethod.Main.M))
    )
   )
+  (global.set $$class@bridgejsmethod.Main.M (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.M )))
   (return (global.get $$class@bridgejsmethod.Main.M))
  )
 )
 
 ;;; String M.$getString_|bridgejsmeth...|()
-(func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.M
+(func $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.M
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.M))
+  (if (i32.eqz (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.M)))
    (then
-    (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.M (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$M")))
+    (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.M))
    )
   )
+  (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.M (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$M")))
   (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.M))
  )
 )
@@ -1322,27 +1330,29 @@
 )
 
 ;;; Class<T> P.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.P
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.P
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@bridgejsmethod.Main.P))
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgejsmethod.Main.P)))
    (then
-    (global.set $$class@bridgejsmethod.Main.P (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|__java_lang_String (ref.func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.P) )))
+    (return (global.get $$class@bridgejsmethod.Main.P))
    )
   )
+  (global.set $$class@bridgejsmethod.Main.P (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.P )))
   (return (global.get $$class@bridgejsmethod.Main.P))
  )
 )
 
 ;;; String P.$getString_|bridgejsmeth...|()
-(func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.P
+(func $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.P
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.P))
+  (if (i32.eqz (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.P)))
    (then
-    (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.P (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$P")))
+    (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.P))
    )
   )
+  (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.P (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$P")))
   (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.P))
  )
 )
@@ -1398,9 +1408,9 @@
   ;;@ bridgejsmethod/Main.java:166:4
   (local.set $b (call $$create__@bridgejsmethod.Main.B ))
   ;;@ bridgejsmethod/Main.java:167:4
-  (drop (call_ref $function.m_fun__java_lang_String__java_lang_String (ref.as_non_null (local.get $b))(call $function.no.side.effects.$getString_|abc|__java_lang_String (ref.func $$getString_|abc|__java_lang_String@bridgejsmethod.Main) )(struct.get $bridgejsmethod.Main.B.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgejsmethod.Main.B $vtable(local.get $b)))))
+  (drop (call_ref $function.m_fun__java_lang_String__java_lang_String (ref.as_non_null (local.get $b))(call $$getString_|abc|__java_lang_String_<once>_@bridgejsmethod.Main )(struct.get $bridgejsmethod.Main.B.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgejsmethod.Main.B $vtable(local.get $b)))))
   ;;@ bridgejsmethod/Main.java:168:4
-  (call_ref $function.m_bar__java_lang_String__void (ref.as_non_null (local.get $b))(call $function.no.side.effects.$getString_|abc|__java_lang_String (ref.func $$getString_|abc|__java_lang_String@bridgejsmethod.Main) )(struct.get $bridgejsmethod.Main.B.vtable $m_bar__java_lang_String__void (struct.get $bridgejsmethod.Main.B $vtable(local.get $b))))
+  (call_ref $function.m_bar__java_lang_String__void (ref.as_non_null (local.get $b))(call $$getString_|abc|__java_lang_String_<once>_@bridgejsmethod.Main )(struct.get $bridgejsmethod.Main.B.vtable $m_bar__java_lang_String__void (struct.get $bridgejsmethod.Main.B $vtable(local.get $b))))
   ;;@ bridgejsmethod/Main.java:169:4
   (local.set $c (call $$create__@bridgejsmethod.Main.C ))
   ;;@ bridgejsmethod/Main.java:170:4
@@ -1416,9 +1426,9 @@
   ;;@ bridgejsmethod/Main.java:175:4
   (local.set $e (call $$create__@bridgejsmethod.Main.E ))
   ;;@ bridgejsmethod/Main.java:176:4
-  (drop (call_ref $function.m_fun__java_lang_String__java_lang_String (ref.as_non_null (local.get $e))(call $function.no.side.effects.$getString_|abc|__java_lang_String (ref.func $$getString_|abc|__java_lang_String@bridgejsmethod.Main) )(struct.get $bridgejsmethod.Main.B.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgejsmethod.Main.B $vtable(local.get $e)))))
+  (drop (call_ref $function.m_fun__java_lang_String__java_lang_String (ref.as_non_null (local.get $e))(call $$getString_|abc|__java_lang_String_<once>_@bridgejsmethod.Main )(struct.get $bridgejsmethod.Main.B.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgejsmethod.Main.B $vtable(local.get $e)))))
   ;;@ bridgejsmethod/Main.java:177:4
-  (call_ref $function.m_bar__java_lang_String__void (ref.as_non_null (local.get $e))(call $function.no.side.effects.$getString_|abc|__java_lang_String (ref.func $$getString_|abc|__java_lang_String@bridgejsmethod.Main) )(struct.get $bridgejsmethod.Main.B.vtable $m_bar__java_lang_String__void (struct.get $bridgejsmethod.Main.B $vtable(local.get $e))))
+  (call_ref $function.m_bar__java_lang_String__void (ref.as_non_null (local.get $e))(call $$getString_|abc|__java_lang_String_<once>_@bridgejsmethod.Main )(struct.get $bridgejsmethod.Main.B.vtable $m_bar__java_lang_String__void (struct.get $bridgejsmethod.Main.B $vtable(local.get $e))))
   ;;@ bridgejsmethod/Main.java:178:4
   (local.set $h (call $$create__@bridgejsmethod.Main.H ))
   ;;@ bridgejsmethod/Main.java:179:4
@@ -1426,7 +1436,7 @@
   ;;@ bridgejsmethod/Main.java:180:4
   (local.set $l (call $$create__@bridgejsmethod.Main.L ))
   ;;@ bridgejsmethod/Main.java:181:4
-  (call_ref $function.m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod (ref.as_non_null (local.get $l))(call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@bridgejsmethod.Main) )(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))(struct.get $bridgejsmethod.Main.L.vtable $m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod (struct.get $bridgejsmethod.Main.L $vtable(local.get $l))))
+  (call_ref $function.m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod (ref.as_non_null (local.get $l))(call $$getString_|foo|__java_lang_String_<once>_@bridgejsmethod.Main )(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))(struct.get $bridgejsmethod.Main.L.vtable $m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod (struct.get $bridgejsmethod.Main.L $vtable(local.get $l))))
  )
 )
 
@@ -1449,14 +1459,15 @@
 )
 
 ;;; Class<T> Main.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@bridgejsmethod.Main))
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgejsmethod.Main)))
    (then
-    (global.set $$class@bridgejsmethod.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|__java_lang_String (ref.func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@bridgejsmethod.Main))
    )
   )
+  (global.set $$class@bridgejsmethod.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@bridgejsmethod.Main))
  )
 )
@@ -1469,46 +1480,49 @@
  (local $this (ref null $bridgejsmethod.Main))
  (local.set $this (ref.cast (ref $bridgejsmethod.Main) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@bridgejsmethod.Main)
 
 ;;; String Main.$getString_|abc|()
-(func $$getString_|abc|__java_lang_String@bridgejsmethod.Main
+(func $$getString_|abc|__java_lang_String_<once>_@bridgejsmethod.Main
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|abc|@bridgejsmethod.Main))
+  (if (i32.eqz (ref.is_null (global.get $$string_|abc|@bridgejsmethod.Main)))
    (then
-    (global.set $$string_|abc|@bridgejsmethod.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "abc")))
+    (return (global.get $$string_|abc|@bridgejsmethod.Main))
    )
   )
+  (global.set $$string_|abc|@bridgejsmethod.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "abc")))
   (return (global.get $$string_|abc|@bridgejsmethod.Main))
  )
 )
 
 ;;; String Main.$getString_|foo|()
-(func $$getString_|foo|__java_lang_String@bridgejsmethod.Main
+(func $$getString_|foo|__java_lang_String_<once>_@bridgejsmethod.Main
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|foo|@bridgejsmethod.Main))
+  (if (i32.eqz (ref.is_null (global.get $$string_|foo|@bridgejsmethod.Main)))
    (then
-    (global.set $$string_|foo|@bridgejsmethod.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "foo")))
+    (return (global.get $$string_|foo|@bridgejsmethod.Main))
    )
   )
+  (global.set $$string_|foo|@bridgejsmethod.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "foo")))
   (return (global.get $$string_|foo|@bridgejsmethod.Main))
  )
 )
 
 ;;; String Main.$getString_|bridgejsmeth...|()
-(func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main
+(func $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main))
+  (if (i32.eqz (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main)))
    (then
-    (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main")))
+    (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main))
    )
   )
+  (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main")))
   (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main))
  )
 )
@@ -1590,14 +1604,15 @@
 )
 
 ;;; Class<T> A.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.A
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.A
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@bridgejsmethod.Main.A))
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgejsmethod.Main.A)))
    (then
-    (global.set $$class@bridgejsmethod.Main.A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|__java_lang_String (ref.func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.A) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@bridgejsmethod.Main.A))
    )
   )
+  (global.set $$class@bridgejsmethod.Main.A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.A )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@bridgejsmethod.Main.A))
  )
 )
@@ -1610,20 +1625,21 @@
  (local $this (ref null $bridgejsmethod.Main.A))
  (local.set $this (ref.cast (ref $bridgejsmethod.Main.A) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.A) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.A ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@bridgejsmethod.Main.A)
 
 ;;; String A.$getString_|bridgejsmeth...|()
-(func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.A
+(func $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.A
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.A))
+  (if (i32.eqz (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.A)))
    (then
-    (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.A (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$A")))
+    (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.A))
    )
   )
+  (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.A (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$A")))
   (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.A))
  )
 )
@@ -1692,14 +1708,15 @@
 )
 
 ;;; Class<T> H.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.H
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.H
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@bridgejsmethod.Main.H))
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgejsmethod.Main.H)))
    (then
-    (global.set $$class@bridgejsmethod.Main.H (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|__java_lang_String (ref.func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.H) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@bridgejsmethod.Main.H))
    )
   )
+  (global.set $$class@bridgejsmethod.Main.H (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.H )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@bridgejsmethod.Main.H))
  )
 )
@@ -1712,20 +1729,21 @@
  (local $this (ref null $bridgejsmethod.Main.H))
  (local.set $this (ref.cast (ref $bridgejsmethod.Main.H) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.H) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.H ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@bridgejsmethod.Main.H)
 
 ;;; String H.$getString_|bridgejsmeth...|()
-(func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.H
+(func $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.H
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.H))
+  (if (i32.eqz (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.H)))
    (then
-    (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.H (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$H")))
+    (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.H))
    )
   )
+  (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.H (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$H")))
   (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.H))
  )
 )
@@ -1792,14 +1810,15 @@
 )
 
 ;;; Class<T> K.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.K
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.K
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@bridgejsmethod.Main.K))
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgejsmethod.Main.K)))
    (then
-    (global.set $$class@bridgejsmethod.Main.K (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|__java_lang_String (ref.func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.K) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@bridgejsmethod.Main.K))
    )
   )
+  (global.set $$class@bridgejsmethod.Main.K (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.K )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@bridgejsmethod.Main.K))
  )
 )
@@ -1812,20 +1831,21 @@
  (local $this (ref null $bridgejsmethod.Main.K))
  (local.set $this (ref.cast (ref $bridgejsmethod.Main.K) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.K) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.K ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@bridgejsmethod.Main.K)
 
 ;;; String K.$getString_|bridgejsmeth...|()
-(func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.K
+(func $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.K
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.K))
+  (if (i32.eqz (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.K)))
    (then
-    (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.K (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$K")))
+    (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.K))
    )
   )
+  (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.K (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$K")))
   (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.K))
  )
 )
@@ -1864,27 +1884,29 @@
 )
 
 ;;; Class<T> N.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.N
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.N
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@bridgejsmethod.Main.N))
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgejsmethod.Main.N)))
    (then
-    (global.set $$class@bridgejsmethod.Main.N (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|__java_lang_String (ref.func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.N) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@bridgejsmethod.Main.N))
    )
   )
+  (global.set $$class@bridgejsmethod.Main.N (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.N )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@bridgejsmethod.Main.N))
  )
 )
 
 ;;; String N.$getString_|bridgejsmeth...|()
-(func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.N
+(func $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.N
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.N))
+  (if (i32.eqz (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.N)))
    (then
-    (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.N (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$N")))
+    (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.N))
    )
   )
+  (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.N (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$N")))
   (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.N))
  )
 )
@@ -1923,27 +1945,29 @@
 )
 
 ;;; Class<T> Q.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.Q
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.Q
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@bridgejsmethod.Main.Q))
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgejsmethod.Main.Q)))
    (then
-    (global.set $$class@bridgejsmethod.Main.Q (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|__java_lang_String (ref.func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.Q) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@bridgejsmethod.Main.Q))
    )
   )
+  (global.set $$class@bridgejsmethod.Main.Q (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.Q )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@bridgejsmethod.Main.Q))
  )
 )
 
 ;;; String Q.$getString_|bridgejsmeth...|()
-(func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.Q
+(func $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.Q
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.Q))
+  (if (i32.eqz (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.Q)))
    (then
-    (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.Q (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$Q")))
+    (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.Q))
    )
   )
+  (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.Q (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$Q")))
   (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.Q))
  )
 )
@@ -2026,14 +2050,15 @@
 )
 
 ;;; Class<T> GrandParent.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.GrandParent
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.GrandParent
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@bridgejsmethod.Main.GrandParent))
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgejsmethod.Main.GrandParent)))
    (then
-    (global.set $$class@bridgejsmethod.Main.GrandParent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|__java_lang_String (ref.func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.GrandParent) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@bridgejsmethod.Main.GrandParent))
    )
   )
+  (global.set $$class@bridgejsmethod.Main.GrandParent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.GrandParent )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@bridgejsmethod.Main.GrandParent))
  )
 )
@@ -2046,20 +2071,21 @@
  (local $this (ref null $bridgejsmethod.Main.GrandParent))
  (local.set $this (ref.cast (ref $bridgejsmethod.Main.GrandParent) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.GrandParent) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.GrandParent ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@bridgejsmethod.Main.GrandParent)
 
 ;;; String GrandParent.$getString_|bridgejsmeth...|()
-(func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.GrandParent
+(func $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.GrandParent
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.GrandParent))
+  (if (i32.eqz (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.GrandParent)))
    (then
-    (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.GrandParent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$GrandParent")))
+    (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.GrandParent))
    )
   )
+  (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.GrandParent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$GrandParent")))
   (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.GrandParent))
  )
 )
@@ -2172,14 +2198,15 @@
 )
 
 ;;; Class<T> B.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.B
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.B
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@bridgejsmethod.Main.B))
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgejsmethod.Main.B)))
    (then
-    (global.set $$class@bridgejsmethod.Main.B (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|__java_lang_String (ref.func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.B) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.A) )))
+    (return (global.get $$class@bridgejsmethod.Main.B))
    )
   )
+  (global.set $$class@bridgejsmethod.Main.B (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.B )(call $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.A )))
   (return (global.get $$class@bridgejsmethod.Main.B))
  )
 )
@@ -2192,20 +2219,21 @@
  (local $this (ref null $bridgejsmethod.Main.B))
  (local.set $this (ref.cast (ref $bridgejsmethod.Main.B) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.B) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.B ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@bridgejsmethod.Main.B)
 
 ;;; String B.$getString_|bridgejsmeth...|()
-(func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.B
+(func $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.B
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.B))
+  (if (i32.eqz (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.B)))
    (then
-    (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.B (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$B")))
+    (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.B))
    )
   )
+  (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.B (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$B")))
   (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.B))
  )
 )
@@ -2290,14 +2318,15 @@
 )
 
 ;;; Class<T> C.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.C
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.C
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@bridgejsmethod.Main.C))
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgejsmethod.Main.C)))
    (then
-    (global.set $$class@bridgejsmethod.Main.C (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|__java_lang_String (ref.func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.C) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.A) )))
+    (return (global.get $$class@bridgejsmethod.Main.C))
    )
   )
+  (global.set $$class@bridgejsmethod.Main.C (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.C )(call $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.A )))
   (return (global.get $$class@bridgejsmethod.Main.C))
  )
 )
@@ -2310,20 +2339,21 @@
  (local $this (ref null $bridgejsmethod.Main.C))
  (local.set $this (ref.cast (ref $bridgejsmethod.Main.C) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.C) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.C ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@bridgejsmethod.Main.C)
 
 ;;; String C.$getString_|bridgejsmeth...|()
-(func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.C
+(func $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.C
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.C))
+  (if (i32.eqz (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.C)))
    (then
-    (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.C (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$C")))
+    (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.C))
    )
   )
+  (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.C (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$C")))
   (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.C))
  )
 )
@@ -2424,14 +2454,15 @@
 )
 
 ;;; Class<T> D.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.D
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.D
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@bridgejsmethod.Main.D))
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgejsmethod.Main.D)))
    (then
-    (global.set $$class@bridgejsmethod.Main.D (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|__java_lang_String (ref.func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.D) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.A) )))
+    (return (global.get $$class@bridgejsmethod.Main.D))
    )
   )
+  (global.set $$class@bridgejsmethod.Main.D (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.D )(call $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.A )))
   (return (global.get $$class@bridgejsmethod.Main.D))
  )
 )
@@ -2444,20 +2475,21 @@
  (local $this (ref null $bridgejsmethod.Main.D))
  (local.set $this (ref.cast (ref $bridgejsmethod.Main.D) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.D) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.D ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@bridgejsmethod.Main.D)
 
 ;;; String D.$getString_|bridgejsmeth...|()
-(func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.D
+(func $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.D
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.D))
+  (if (i32.eqz (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.D)))
    (then
-    (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.D (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$D")))
+    (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.D))
    )
   )
+  (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.D (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$D")))
   (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.D))
  )
 )
@@ -2558,14 +2590,15 @@
 )
 
 ;;; Class<T> F.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.F
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.F
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@bridgejsmethod.Main.F))
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgejsmethod.Main.F)))
    (then
-    (global.set $$class@bridgejsmethod.Main.F (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|__java_lang_String (ref.func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.F) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.A) )))
+    (return (global.get $$class@bridgejsmethod.Main.F))
    )
   )
+  (global.set $$class@bridgejsmethod.Main.F (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.F )(call $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.A )))
   (return (global.get $$class@bridgejsmethod.Main.F))
  )
 )
@@ -2578,20 +2611,21 @@
  (local $this (ref null $bridgejsmethod.Main.F))
  (local.set $this (ref.cast (ref $bridgejsmethod.Main.F) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.F) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.F ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@bridgejsmethod.Main.F)
 
 ;;; String F.$getString_|bridgejsmeth...|()
-(func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.F
+(func $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.F
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.F))
+  (if (i32.eqz (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.F)))
    (then
-    (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.F (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$F")))
+    (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.F))
    )
   )
+  (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.F (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$F")))
   (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.F))
  )
 )
@@ -2674,14 +2708,15 @@
 )
 
 ;;; Class<T> L.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.L
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.L
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@bridgejsmethod.Main.L))
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgejsmethod.Main.L)))
    (then
-    (global.set $$class@bridgejsmethod.Main.L (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|__java_lang_String (ref.func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.L) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.K) )))
+    (return (global.get $$class@bridgejsmethod.Main.L))
    )
   )
+  (global.set $$class@bridgejsmethod.Main.L (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.L )(call $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.K )))
   (return (global.get $$class@bridgejsmethod.Main.L))
  )
 )
@@ -2694,20 +2729,21 @@
  (local $this (ref null $bridgejsmethod.Main.L))
  (local.set $this (ref.cast (ref $bridgejsmethod.Main.L) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.L) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.L ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@bridgejsmethod.Main.L)
 
 ;;; String L.$getString_|bridgejsmeth...|()
-(func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.L
+(func $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.L
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.L))
+  (if (i32.eqz (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.L)))
    (then
-    (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.L (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$L")))
+    (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.L))
    )
   )
+  (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.L (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$L")))
   (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.L))
  )
 )
@@ -2779,14 +2815,15 @@
 )
 
 ;;; Class<T> O.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.O
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.O
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@bridgejsmethod.Main.O))
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgejsmethod.Main.O)))
    (then
-    (global.set $$class@bridgejsmethod.Main.O (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|__java_lang_String (ref.func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.O) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.N) )))
+    (return (global.get $$class@bridgejsmethod.Main.O))
    )
   )
+  (global.set $$class@bridgejsmethod.Main.O (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.O )(call $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.N )))
   (return (global.get $$class@bridgejsmethod.Main.O))
  )
 )
@@ -2799,20 +2836,21 @@
  (local $this (ref null $bridgejsmethod.Main.O))
  (local.set $this (ref.cast (ref $bridgejsmethod.Main.O) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.O) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.O ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@bridgejsmethod.Main.O)
 
 ;;; String O.$getString_|bridgejsmeth...|()
-(func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.O
+(func $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.O
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.O))
+  (if (i32.eqz (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.O)))
    (then
-    (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.O (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$O")))
+    (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.O))
    )
   )
+  (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.O (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$O")))
   (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.O))
  )
 )
@@ -2866,27 +2904,29 @@
 )
 
 ;;; Class<T> R.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.R
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.R
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@bridgejsmethod.Main.R))
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgejsmethod.Main.R)))
    (then
-    (global.set $$class@bridgejsmethod.Main.R (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|__java_lang_String (ref.func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.R) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.Q) )))
+    (return (global.get $$class@bridgejsmethod.Main.R))
    )
   )
+  (global.set $$class@bridgejsmethod.Main.R (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.R )(call $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.Q )))
   (return (global.get $$class@bridgejsmethod.Main.R))
  )
 )
 
 ;;; String R.$getString_|bridgejsmeth...|()
-(func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.R
+(func $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.R
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.R))
+  (if (i32.eqz (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.R)))
    (then
-    (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.R (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$R")))
+    (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.R))
    )
   )
+  (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.R (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$R")))
   (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.R))
  )
 )
@@ -2999,14 +3039,15 @@
 )
 
 ;;; Class<T> Parent.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.Parent
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.Parent
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@bridgejsmethod.Main.Parent))
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgejsmethod.Main.Parent)))
    (then
-    (global.set $$class@bridgejsmethod.Main.Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|__java_lang_String (ref.func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.Parent) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.GrandParent) )))
+    (return (global.get $$class@bridgejsmethod.Main.Parent))
    )
   )
+  (global.set $$class@bridgejsmethod.Main.Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.Parent )(call $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.GrandParent )))
   (return (global.get $$class@bridgejsmethod.Main.Parent))
  )
 )
@@ -3019,20 +3060,21 @@
  (local $this (ref null $bridgejsmethod.Main.Parent))
  (local.set $this (ref.cast (ref $bridgejsmethod.Main.Parent) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.Parent) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.Parent ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@bridgejsmethod.Main.Parent)
 
 ;;; String Parent.$getString_|bridgejsmeth...|()
-(func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.Parent
+(func $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.Parent
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.Parent))
+  (if (i32.eqz (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.Parent)))
    (then
-    (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.Parent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$Parent")))
+    (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.Parent))
    )
   )
+  (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.Parent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$Parent")))
   (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.Parent))
  )
 )
@@ -3117,14 +3159,15 @@
 )
 
 ;;; Class<T> ChildWithRenamedOverride.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.ChildWithRenamedOverride
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.ChildWithRenamedOverride
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@bridgejsmethod.Main.ChildWithRenamedOverride))
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgejsmethod.Main.ChildWithRenamedOverride)))
    (then
-    (global.set $$class@bridgejsmethod.Main.ChildWithRenamedOverride (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|__java_lang_String (ref.func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.ChildWithRenamedOverride) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.GrandParent) )))
+    (return (global.get $$class@bridgejsmethod.Main.ChildWithRenamedOverride))
    )
   )
+  (global.set $$class@bridgejsmethod.Main.ChildWithRenamedOverride (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.ChildWithRenamedOverride )(call $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.GrandParent )))
   (return (global.get $$class@bridgejsmethod.Main.ChildWithRenamedOverride))
  )
 )
@@ -3137,20 +3180,21 @@
  (local $this (ref null $bridgejsmethod.Main.ChildWithRenamedOverride))
  (local.set $this (ref.cast (ref $bridgejsmethod.Main.ChildWithRenamedOverride) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.ChildWithRenamedOverride) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.ChildWithRenamedOverride ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@bridgejsmethod.Main.ChildWithRenamedOverride)
 
 ;;; String ChildWithRenamedOverride.$getString_|bridgejsmeth...|()
-(func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.ChildWithRenamedOverride
+(func $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.ChildWithRenamedOverride
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.ChildWithRenamedOverride))
+  (if (i32.eqz (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.ChildWithRenamedOverride)))
    (then
-    (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.ChildWithRenamedOverride (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$ChildWithRenamedOverride")))
+    (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.ChildWithRenamedOverride))
    )
   )
+  (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.ChildWithRenamedOverride (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$ChildWithRenamedOverride")))
   (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.ChildWithRenamedOverride))
  )
 )
@@ -3203,14 +3247,15 @@
 )
 
 ;;; Class<T> E.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.E
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.E
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@bridgejsmethod.Main.E))
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgejsmethod.Main.E)))
    (then
-    (global.set $$class@bridgejsmethod.Main.E (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|__java_lang_String (ref.func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.E) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.B) )))
+    (return (global.get $$class@bridgejsmethod.Main.E))
    )
   )
+  (global.set $$class@bridgejsmethod.Main.E (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.E )(call $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.B )))
   (return (global.get $$class@bridgejsmethod.Main.E))
  )
 )
@@ -3223,20 +3268,21 @@
  (local $this (ref null $bridgejsmethod.Main.E))
  (local.set $this (ref.cast (ref $bridgejsmethod.Main.E) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.E) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.E ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@bridgejsmethod.Main.E)
 
 ;;; String E.$getString_|bridgejsmeth...|()
-(func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.E
+(func $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.E
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.E))
+  (if (i32.eqz (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.E)))
    (then
-    (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.E (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$E")))
+    (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.E))
    )
   )
+  (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.E (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$E")))
   (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.E))
  )
 )
@@ -3293,14 +3339,15 @@
 )
 
 ;;; Class<T> S.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.S
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.S
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@bridgejsmethod.Main.S))
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgejsmethod.Main.S)))
    (then
-    (global.set $$class@bridgejsmethod.Main.S (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|__java_lang_String (ref.func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.S) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.R) )))
+    (return (global.get $$class@bridgejsmethod.Main.S))
    )
   )
+  (global.set $$class@bridgejsmethod.Main.S (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.S )(call $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.R )))
   (return (global.get $$class@bridgejsmethod.Main.S))
  )
 )
@@ -3313,20 +3360,21 @@
  (local $this (ref null $bridgejsmethod.Main.S))
  (local.set $this (ref.cast (ref $bridgejsmethod.Main.S) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.S) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.S ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@bridgejsmethod.Main.S)
 
 ;;; String S.$getString_|bridgejsmeth...|()
-(func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.S
+(func $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.S
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.S))
+  (if (i32.eqz (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.S)))
    (then
-    (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.S (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$S")))
+    (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.S))
    )
   )
+  (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.S (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$S")))
   (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.S))
  )
 )
@@ -3383,14 +3431,15 @@
 )
 
 ;;; Class<T> ChildWithoutOverrides.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.ChildWithoutOverrides
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.ChildWithoutOverrides
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@bridgejsmethod.Main.ChildWithoutOverrides))
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgejsmethod.Main.ChildWithoutOverrides)))
    (then
-    (global.set $$class@bridgejsmethod.Main.ChildWithoutOverrides (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|__java_lang_String (ref.func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.ChildWithoutOverrides) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.Parent) )))
+    (return (global.get $$class@bridgejsmethod.Main.ChildWithoutOverrides))
    )
   )
+  (global.set $$class@bridgejsmethod.Main.ChildWithoutOverrides (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.ChildWithoutOverrides )(call $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.Parent )))
   (return (global.get $$class@bridgejsmethod.Main.ChildWithoutOverrides))
  )
 )
@@ -3403,20 +3452,21 @@
  (local $this (ref null $bridgejsmethod.Main.ChildWithoutOverrides))
  (local.set $this (ref.cast (ref $bridgejsmethod.Main.ChildWithoutOverrides) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.ChildWithoutOverrides) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.ChildWithoutOverrides ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@bridgejsmethod.Main.ChildWithoutOverrides)
 
 ;;; String ChildWithoutOverrides.$getString_|bridgejsmeth...|()
-(func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.ChildWithoutOverrides
+(func $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.ChildWithoutOverrides
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.ChildWithoutOverrides))
+  (if (i32.eqz (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.ChildWithoutOverrides)))
    (then
-    (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.ChildWithoutOverrides (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$ChildWithoutOverrides")))
+    (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.ChildWithoutOverrides))
    )
   )
+  (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.ChildWithoutOverrides (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$ChildWithoutOverrides")))
   (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.ChildWithoutOverrides))
  )
 )
@@ -3529,14 +3579,15 @@
 )
 
 ;;; Class<T> ChildWithOverrides.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.ChildWithOverrides
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.ChildWithOverrides
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@bridgejsmethod.Main.ChildWithOverrides))
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgejsmethod.Main.ChildWithOverrides)))
    (then
-    (global.set $$class@bridgejsmethod.Main.ChildWithOverrides (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|bridgejsmeth...|__java_lang_String (ref.func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.ChildWithOverrides) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.Parent) )))
+    (return (global.get $$class@bridgejsmethod.Main.ChildWithOverrides))
    )
   )
+  (global.set $$class@bridgejsmethod.Main.ChildWithOverrides (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.ChildWithOverrides )(call $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.Parent )))
   (return (global.get $$class@bridgejsmethod.Main.ChildWithOverrides))
  )
 )
@@ -3549,20 +3600,21 @@
  (local $this (ref null $bridgejsmethod.Main.ChildWithOverrides))
  (local.set $this (ref.cast (ref $bridgejsmethod.Main.ChildWithOverrides) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@bridgejsmethod.Main.ChildWithOverrides) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@bridgejsmethod.Main.ChildWithOverrides ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@bridgejsmethod.Main.ChildWithOverrides)
 
 ;;; String ChildWithOverrides.$getString_|bridgejsmeth...|()
-(func $$getString_|bridgejsmeth...|__java_lang_String@bridgejsmethod.Main.ChildWithOverrides
+(func $$getString_|bridgejsmeth...|__java_lang_String_<once>_@bridgejsmethod.Main.ChildWithOverrides
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.ChildWithOverrides))
+  (if (i32.eqz (ref.is_null (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.ChildWithOverrides)))
    (then
-    (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.ChildWithOverrides (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$ChildWithOverrides")))
+    (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.ChildWithOverrides))
    )
   )
+  (global.set $$string_|bridgejsmeth...|@bridgejsmethod.Main.ChildWithOverrides (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bridgejsmethod.Main$ChildWithOverrides")))
   (return (global.get $$string_|bridgejsmeth...|@bridgejsmethod.Main.ChildWithOverrides))
  )
 )

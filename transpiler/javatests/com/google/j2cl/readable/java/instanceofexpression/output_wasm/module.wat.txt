@@ -339,7 +339,7 @@
  (local.set $this (ref.cast (ref $instanceofexpression.InstanceofExpressions) (local.get $this.untyped)))
  (block
   ;;@ instanceofexpression/InstanceofExpressions.java:91:4
-  (local.set $b (ref.test (ref $java.lang.String) (if (result (ref null $java.lang.String)) (i32.const 0) (then (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@instanceofexpression.InstanceofExpressions) )) (else (call $function.no.side.effects.$getString_|bar|__java_lang_String (ref.func $$getString_|bar|__java_lang_String@instanceofexpression.InstanceofExpressions) )))))
+  (local.set $b (ref.test (ref $java.lang.String) (if (result (ref null $java.lang.String)) (i32.const 0) (then (call $$getString_|foo|__java_lang_String_<once>_@instanceofexpression.InstanceofExpressions )) (else (call $$getString_|bar|__java_lang_String_<once>_@instanceofexpression.InstanceofExpressions )))))
  )
 )
 (elem declare func $m_testPrecedence__void@instanceofexpression.InstanceofExpressions)
@@ -363,14 +363,15 @@
 )
 
 ;;; Class<T> InstanceofExpressions.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@instanceofexpression.InstanceofExpressions
+(func $$getClassMetadata__java_lang_Class_<once>_@instanceofexpression.InstanceofExpressions
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@instanceofexpression.InstanceofExpressions))
+  (if (i32.eqz (ref.is_null (global.get $$class@instanceofexpression.InstanceofExpressions)))
    (then
-    (global.set $$class@instanceofexpression.InstanceofExpressions (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instanceofex...|__java_lang_String (ref.func $$getString_|instanceofex...|__java_lang_String@instanceofexpression.InstanceofExpressions) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@instanceofexpression.InstanceofExpressions))
    )
   )
+  (global.set $$class@instanceofexpression.InstanceofExpressions (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|instanceofex...|__java_lang_String_<once>_@instanceofexpression.InstanceofExpressions )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@instanceofexpression.InstanceofExpressions))
  )
 )
@@ -383,46 +384,49 @@
  (local $this (ref null $instanceofexpression.InstanceofExpressions))
  (local.set $this (ref.cast (ref $instanceofexpression.InstanceofExpressions) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@instanceofexpression.InstanceofExpressions) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@instanceofexpression.InstanceofExpressions ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@instanceofexpression.InstanceofExpressions)
 
 ;;; String InstanceofExpressions.$getString_|foo|()
-(func $$getString_|foo|__java_lang_String@instanceofexpression.InstanceofExpressions
+(func $$getString_|foo|__java_lang_String_<once>_@instanceofexpression.InstanceofExpressions
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|foo|@instanceofexpression.InstanceofExpressions))
+  (if (i32.eqz (ref.is_null (global.get $$string_|foo|@instanceofexpression.InstanceofExpressions)))
    (then
-    (global.set $$string_|foo|@instanceofexpression.InstanceofExpressions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "foo")))
+    (return (global.get $$string_|foo|@instanceofexpression.InstanceofExpressions))
    )
   )
+  (global.set $$string_|foo|@instanceofexpression.InstanceofExpressions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "foo")))
   (return (global.get $$string_|foo|@instanceofexpression.InstanceofExpressions))
  )
 )
 
 ;;; String InstanceofExpressions.$getString_|bar|()
-(func $$getString_|bar|__java_lang_String@instanceofexpression.InstanceofExpressions
+(func $$getString_|bar|__java_lang_String_<once>_@instanceofexpression.InstanceofExpressions
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|bar|@instanceofexpression.InstanceofExpressions))
+  (if (i32.eqz (ref.is_null (global.get $$string_|bar|@instanceofexpression.InstanceofExpressions)))
    (then
-    (global.set $$string_|bar|@instanceofexpression.InstanceofExpressions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bar")))
+    (return (global.get $$string_|bar|@instanceofexpression.InstanceofExpressions))
    )
   )
+  (global.set $$string_|bar|@instanceofexpression.InstanceofExpressions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bar")))
   (return (global.get $$string_|bar|@instanceofexpression.InstanceofExpressions))
  )
 )
 
 ;;; String InstanceofExpressions.$getString_|instanceofex...|()
-(func $$getString_|instanceofex...|__java_lang_String@instanceofexpression.InstanceofExpressions
+(func $$getString_|instanceofex...|__java_lang_String_<once>_@instanceofexpression.InstanceofExpressions
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|instanceofex...|@instanceofexpression.InstanceofExpressions))
+  (if (i32.eqz (ref.is_null (global.get $$string_|instanceofex...|@instanceofexpression.InstanceofExpressions)))
    (then
-    (global.set $$string_|instanceofex...|@instanceofexpression.InstanceofExpressions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instanceofexpression.InstanceofExpressions")))
+    (return (global.get $$string_|instanceofex...|@instanceofexpression.InstanceofExpressions))
    )
   )
+  (global.set $$string_|instanceofex...|@instanceofexpression.InstanceofExpressions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instanceofexpression.InstanceofExpressions")))
   (return (global.get $$string_|instanceofex...|@instanceofexpression.InstanceofExpressions))
  )
 )
@@ -479,14 +483,15 @@
 )
 
 ;;; Class<T> <anonymous> implements Serializable.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@instanceofexpression.InstanceofExpressions.1
+(func $$getClassMetadata__java_lang_Class_<once>_@instanceofexpression.InstanceofExpressions.1
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@instanceofexpression.InstanceofExpressions.1))
+  (if (i32.eqz (ref.is_null (global.get $$class@instanceofexpression.InstanceofExpressions.1)))
    (then
-    (global.set $$class@instanceofexpression.InstanceofExpressions.1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instanceofex...|__java_lang_String (ref.func $$getString_|instanceofex...|__java_lang_String@instanceofexpression.InstanceofExpressions.1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@instanceofexpression.InstanceofExpressions.1))
    )
   )
+  (global.set $$class@instanceofexpression.InstanceofExpressions.1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|instanceofex...|__java_lang_String_<once>_@instanceofexpression.InstanceofExpressions.1 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@instanceofexpression.InstanceofExpressions.1))
  )
 )
@@ -499,20 +504,21 @@
  (local $this (ref null $instanceofexpression.InstanceofExpressions.1))
  (local.set $this (ref.cast (ref $instanceofexpression.InstanceofExpressions.1) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@instanceofexpression.InstanceofExpressions.1) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@instanceofexpression.InstanceofExpressions.1 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@instanceofexpression.InstanceofExpressions.1)
 
 ;;; String <anonymous> implements Serializable.$getString_|instanceofex...|()
-(func $$getString_|instanceofex...|__java_lang_String@instanceofexpression.InstanceofExpressions.1
+(func $$getString_|instanceofex...|__java_lang_String_<once>_@instanceofexpression.InstanceofExpressions.1
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|instanceofex...|@instanceofexpression.InstanceofExpressions.1))
+  (if (i32.eqz (ref.is_null (global.get $$string_|instanceofex...|@instanceofexpression.InstanceofExpressions.1)))
    (then
-    (global.set $$string_|instanceofex...|@instanceofexpression.InstanceofExpressions.1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instanceofexpression.InstanceofExpressions$1")))
+    (return (global.get $$string_|instanceofex...|@instanceofexpression.InstanceofExpressions.1))
    )
   )
+  (global.set $$string_|instanceofex...|@instanceofexpression.InstanceofExpressions.1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instanceofexpression.InstanceofExpressions$1")))
   (return (global.get $$string_|instanceofex...|@instanceofexpression.InstanceofExpressions.1))
  )
 )

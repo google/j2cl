@@ -236,14 +236,15 @@
 )
 
 ;;; Class<T> InterfaceDevirtualize.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@interfacedevirtualize.InterfaceDevirtualize
+(func $$getClassMetadata__java_lang_Class_<once>_@interfacedevirtualize.InterfaceDevirtualize
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@interfacedevirtualize.InterfaceDevirtualize))
+  (if (i32.eqz (ref.is_null (global.get $$class@interfacedevirtualize.InterfaceDevirtualize)))
    (then
-    (global.set $$class@interfacedevirtualize.InterfaceDevirtualize (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfacedev...|__java_lang_String (ref.func $$getString_|interfacedev...|__java_lang_String@interfacedevirtualize.InterfaceDevirtualize) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@interfacedevirtualize.InterfaceDevirtualize))
    )
   )
+  (global.set $$class@interfacedevirtualize.InterfaceDevirtualize (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|interfacedev...|__java_lang_String_<once>_@interfacedevirtualize.InterfaceDevirtualize )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@interfacedevirtualize.InterfaceDevirtualize))
  )
 )
@@ -256,20 +257,21 @@
  (local $this (ref null $interfacedevirtualize.InterfaceDevirtualize))
  (local.set $this (ref.cast (ref $interfacedevirtualize.InterfaceDevirtualize) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@interfacedevirtualize.InterfaceDevirtualize) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@interfacedevirtualize.InterfaceDevirtualize ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@interfacedevirtualize.InterfaceDevirtualize)
 
 ;;; String InterfaceDevirtualize.$getString_|interfacedev...|()
-(func $$getString_|interfacedev...|__java_lang_String@interfacedevirtualize.InterfaceDevirtualize
+(func $$getString_|interfacedev...|__java_lang_String_<once>_@interfacedevirtualize.InterfaceDevirtualize
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|interfacedev...|@interfacedevirtualize.InterfaceDevirtualize))
+  (if (i32.eqz (ref.is_null (global.get $$string_|interfacedev...|@interfacedevirtualize.InterfaceDevirtualize)))
    (then
-    (global.set $$string_|interfacedev...|@interfacedevirtualize.InterfaceDevirtualize (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfacedevirtualize.InterfaceDevirtualize")))
+    (return (global.get $$string_|interfacedev...|@interfacedevirtualize.InterfaceDevirtualize))
    )
   )
+  (global.set $$string_|interfacedev...|@interfacedevirtualize.InterfaceDevirtualize (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfacedevirtualize.InterfaceDevirtualize")))
   (return (global.get $$string_|interfacedev...|@interfacedevirtualize.InterfaceDevirtualize))
  )
 )

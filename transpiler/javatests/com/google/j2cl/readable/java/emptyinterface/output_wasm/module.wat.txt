@@ -33,27 +33,29 @@
 )
 
 ;;; Class<T> EmptyInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@emptyinterface.EmptyInterface
+(func $$getClassMetadata__java_lang_Class_<once>_@emptyinterface.EmptyInterface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@emptyinterface.EmptyInterface))
+  (if (i32.eqz (ref.is_null (global.get $$class@emptyinterface.EmptyInterface)))
    (then
-    (global.set $$class@emptyinterface.EmptyInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|emptyinterfa...|__java_lang_String (ref.func $$getString_|emptyinterfa...|__java_lang_String@emptyinterface.EmptyInterface) )))
+    (return (global.get $$class@emptyinterface.EmptyInterface))
    )
   )
+  (global.set $$class@emptyinterface.EmptyInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|emptyinterfa...|__java_lang_String_<once>_@emptyinterface.EmptyInterface )))
   (return (global.get $$class@emptyinterface.EmptyInterface))
  )
 )
 
 ;;; String EmptyInterface.$getString_|emptyinterfa...|()
-(func $$getString_|emptyinterfa...|__java_lang_String@emptyinterface.EmptyInterface
+(func $$getString_|emptyinterfa...|__java_lang_String_<once>_@emptyinterface.EmptyInterface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|emptyinterfa...|@emptyinterface.EmptyInterface))
+  (if (i32.eqz (ref.is_null (global.get $$string_|emptyinterfa...|@emptyinterface.EmptyInterface)))
    (then
-    (global.set $$string_|emptyinterfa...|@emptyinterface.EmptyInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "emptyinterface.EmptyInterface")))
+    (return (global.get $$string_|emptyinterfa...|@emptyinterface.EmptyInterface))
    )
   )
+  (global.set $$string_|emptyinterfa...|@emptyinterface.EmptyInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "emptyinterface.EmptyInterface")))
   (return (global.get $$string_|emptyinterfa...|@emptyinterface.EmptyInterface))
  )
 )

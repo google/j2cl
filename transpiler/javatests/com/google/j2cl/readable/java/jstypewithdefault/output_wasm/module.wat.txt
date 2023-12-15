@@ -111,27 +111,29 @@
 )
 
 ;;; Class<T> Interface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jstypewithdefault.Interface
+(func $$getClassMetadata__java_lang_Class_<once>_@jstypewithdefault.Interface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jstypewithdefault.Interface))
+  (if (i32.eqz (ref.is_null (global.get $$class@jstypewithdefault.Interface)))
    (then
-    (global.set $$class@jstypewithdefault.Interface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jstypewithde...|__java_lang_String (ref.func $$getString_|jstypewithde...|__java_lang_String@jstypewithdefault.Interface) )))
+    (return (global.get $$class@jstypewithdefault.Interface))
    )
   )
+  (global.set $$class@jstypewithdefault.Interface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jstypewithde...|__java_lang_String_<once>_@jstypewithdefault.Interface )))
   (return (global.get $$class@jstypewithdefault.Interface))
  )
 )
 
 ;;; String Interface.$getString_|jstypewithde...|()
-(func $$getString_|jstypewithde...|__java_lang_String@jstypewithdefault.Interface
+(func $$getString_|jstypewithde...|__java_lang_String_<once>_@jstypewithdefault.Interface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jstypewithde...|@jstypewithdefault.Interface))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jstypewithde...|@jstypewithdefault.Interface)))
    (then
-    (global.set $$string_|jstypewithde...|@jstypewithdefault.Interface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jstypewithdefault.Interface")))
+    (return (global.get $$string_|jstypewithde...|@jstypewithdefault.Interface))
    )
   )
+  (global.set $$string_|jstypewithde...|@jstypewithdefault.Interface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jstypewithdefault.Interface")))
   (return (global.get $$string_|jstypewithde...|@jstypewithdefault.Interface))
  )
 )
@@ -200,14 +202,15 @@
 )
 
 ;;; Class<T> SomeJsType.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jstypewithdefault.SomeJsType
+(func $$getClassMetadata__java_lang_Class_<once>_@jstypewithdefault.SomeJsType
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jstypewithdefault.SomeJsType))
+  (if (i32.eqz (ref.is_null (global.get $$class@jstypewithdefault.SomeJsType)))
    (then
-    (global.set $$class@jstypewithdefault.SomeJsType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jstypewithde...|__java_lang_String (ref.func $$getString_|jstypewithde...|__java_lang_String@jstypewithdefault.SomeJsType) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@jstypewithdefault.SomeJsType))
    )
   )
+  (global.set $$class@jstypewithdefault.SomeJsType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jstypewithde...|__java_lang_String_<once>_@jstypewithdefault.SomeJsType )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@jstypewithdefault.SomeJsType))
  )
 )
@@ -220,20 +223,21 @@
  (local $this (ref null $jstypewithdefault.SomeJsType))
  (local.set $this (ref.cast (ref $jstypewithdefault.SomeJsType) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jstypewithdefault.SomeJsType) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jstypewithdefault.SomeJsType ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jstypewithdefault.SomeJsType)
 
 ;;; String SomeJsType.$getString_|jstypewithde...|()
-(func $$getString_|jstypewithde...|__java_lang_String@jstypewithdefault.SomeJsType
+(func $$getString_|jstypewithde...|__java_lang_String_<once>_@jstypewithdefault.SomeJsType
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jstypewithde...|@jstypewithdefault.SomeJsType))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jstypewithde...|@jstypewithdefault.SomeJsType)))
    (then
-    (global.set $$string_|jstypewithde...|@jstypewithdefault.SomeJsType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jstypewithdefault.SomeJsType")))
+    (return (global.get $$string_|jstypewithde...|@jstypewithdefault.SomeJsType))
    )
   )
+  (global.set $$string_|jstypewithde...|@jstypewithdefault.SomeJsType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jstypewithdefault.SomeJsType")))
   (return (global.get $$string_|jstypewithde...|@jstypewithdefault.SomeJsType))
  )
 )

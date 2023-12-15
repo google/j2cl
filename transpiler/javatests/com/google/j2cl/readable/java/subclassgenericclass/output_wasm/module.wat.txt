@@ -160,14 +160,15 @@
 )
 
 ;;; Class<T> GenericClass.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@subclassgenericclass.GenericClass
+(func $$getClassMetadata__java_lang_Class_<once>_@subclassgenericclass.GenericClass
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@subclassgenericclass.GenericClass))
+  (if (i32.eqz (ref.is_null (global.get $$class@subclassgenericclass.GenericClass)))
    (then
-    (global.set $$class@subclassgenericclass.GenericClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|subclassgene...|__java_lang_String (ref.func $$getString_|subclassgene...|__java_lang_String@subclassgenericclass.GenericClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@subclassgenericclass.GenericClass))
    )
   )
+  (global.set $$class@subclassgenericclass.GenericClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|subclassgene...|__java_lang_String_<once>_@subclassgenericclass.GenericClass )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@subclassgenericclass.GenericClass))
  )
 )
@@ -180,20 +181,21 @@
  (local $this (ref null $subclassgenericclass.GenericClass))
  (local.set $this (ref.cast (ref $subclassgenericclass.GenericClass) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@subclassgenericclass.GenericClass) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@subclassgenericclass.GenericClass ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@subclassgenericclass.GenericClass)
 
 ;;; String GenericClass.$getString_|subclassgene...|()
-(func $$getString_|subclassgene...|__java_lang_String@subclassgenericclass.GenericClass
+(func $$getString_|subclassgene...|__java_lang_String_<once>_@subclassgenericclass.GenericClass
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|subclassgene...|@subclassgenericclass.GenericClass))
+  (if (i32.eqz (ref.is_null (global.get $$string_|subclassgene...|@subclassgenericclass.GenericClass)))
    (then
-    (global.set $$string_|subclassgene...|@subclassgenericclass.GenericClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "subclassgenericclass.GenericClass")))
+    (return (global.get $$string_|subclassgene...|@subclassgenericclass.GenericClass))
    )
   )
+  (global.set $$string_|subclassgene...|@subclassgenericclass.GenericClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "subclassgenericclass.GenericClass")))
   (return (global.get $$string_|subclassgene...|@subclassgenericclass.GenericClass))
  )
 )
@@ -246,14 +248,15 @@
 )
 
 ;;; Class<T> GenericSubclassGenericClass.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@subclassgenericclass.GenericSubclassGenericClass
+(func $$getClassMetadata__java_lang_Class_<once>_@subclassgenericclass.GenericSubclassGenericClass
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@subclassgenericclass.GenericSubclassGenericClass))
+  (if (i32.eqz (ref.is_null (global.get $$class@subclassgenericclass.GenericSubclassGenericClass)))
    (then
-    (global.set $$class@subclassgenericclass.GenericSubclassGenericClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|subclassgene...|__java_lang_String (ref.func $$getString_|subclassgene...|__java_lang_String@subclassgenericclass.GenericSubclassGenericClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@subclassgenericclass.GenericClass) )))
+    (return (global.get $$class@subclassgenericclass.GenericSubclassGenericClass))
    )
   )
+  (global.set $$class@subclassgenericclass.GenericSubclassGenericClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|subclassgene...|__java_lang_String_<once>_@subclassgenericclass.GenericSubclassGenericClass )(call $$getClassMetadata__java_lang_Class_<once>_@subclassgenericclass.GenericClass )))
   (return (global.get $$class@subclassgenericclass.GenericSubclassGenericClass))
  )
 )
@@ -266,20 +269,21 @@
  (local $this (ref null $subclassgenericclass.GenericSubclassGenericClass))
  (local.set $this (ref.cast (ref $subclassgenericclass.GenericSubclassGenericClass) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@subclassgenericclass.GenericSubclassGenericClass) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@subclassgenericclass.GenericSubclassGenericClass ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@subclassgenericclass.GenericSubclassGenericClass)
 
 ;;; String GenericSubclassGenericClass.$getString_|subclassgene...|()
-(func $$getString_|subclassgene...|__java_lang_String@subclassgenericclass.GenericSubclassGenericClass
+(func $$getString_|subclassgene...|__java_lang_String_<once>_@subclassgenericclass.GenericSubclassGenericClass
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|subclassgene...|@subclassgenericclass.GenericSubclassGenericClass))
+  (if (i32.eqz (ref.is_null (global.get $$string_|subclassgene...|@subclassgenericclass.GenericSubclassGenericClass)))
    (then
-    (global.set $$string_|subclassgene...|@subclassgenericclass.GenericSubclassGenericClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "subclassgenericclass.GenericSubclassGenericClass")))
+    (return (global.get $$string_|subclassgene...|@subclassgenericclass.GenericSubclassGenericClass))
    )
   )
+  (global.set $$string_|subclassgene...|@subclassgenericclass.GenericSubclassGenericClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "subclassgenericclass.GenericSubclassGenericClass")))
   (return (global.get $$string_|subclassgene...|@subclassgenericclass.GenericSubclassGenericClass))
  )
 )
@@ -332,14 +336,15 @@
 )
 
 ;;; Class<T> SubclassGenericClass.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@subclassgenericclass.SubclassGenericClass
+(func $$getClassMetadata__java_lang_Class_<once>_@subclassgenericclass.SubclassGenericClass
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@subclassgenericclass.SubclassGenericClass))
+  (if (i32.eqz (ref.is_null (global.get $$class@subclassgenericclass.SubclassGenericClass)))
    (then
-    (global.set $$class@subclassgenericclass.SubclassGenericClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|subclassgene...|__java_lang_String (ref.func $$getString_|subclassgene...|__java_lang_String@subclassgenericclass.SubclassGenericClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@subclassgenericclass.GenericClass) )))
+    (return (global.get $$class@subclassgenericclass.SubclassGenericClass))
    )
   )
+  (global.set $$class@subclassgenericclass.SubclassGenericClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|subclassgene...|__java_lang_String_<once>_@subclassgenericclass.SubclassGenericClass )(call $$getClassMetadata__java_lang_Class_<once>_@subclassgenericclass.GenericClass )))
   (return (global.get $$class@subclassgenericclass.SubclassGenericClass))
  )
 )
@@ -352,20 +357,21 @@
  (local $this (ref null $subclassgenericclass.SubclassGenericClass))
  (local.set $this (ref.cast (ref $subclassgenericclass.SubclassGenericClass) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@subclassgenericclass.SubclassGenericClass) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@subclassgenericclass.SubclassGenericClass ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@subclassgenericclass.SubclassGenericClass)
 
 ;;; String SubclassGenericClass.$getString_|subclassgene...|()
-(func $$getString_|subclassgene...|__java_lang_String@subclassgenericclass.SubclassGenericClass
+(func $$getString_|subclassgene...|__java_lang_String_<once>_@subclassgenericclass.SubclassGenericClass
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|subclassgene...|@subclassgenericclass.SubclassGenericClass))
+  (if (i32.eqz (ref.is_null (global.get $$string_|subclassgene...|@subclassgenericclass.SubclassGenericClass)))
    (then
-    (global.set $$string_|subclassgene...|@subclassgenericclass.SubclassGenericClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "subclassgenericclass.SubclassGenericClass")))
+    (return (global.get $$string_|subclassgene...|@subclassgenericclass.SubclassGenericClass))
    )
   )
+  (global.set $$string_|subclassgene...|@subclassgenericclass.SubclassGenericClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "subclassgenericclass.SubclassGenericClass")))
   (return (global.get $$string_|subclassgene...|@subclassgenericclass.SubclassGenericClass))
  )
 )

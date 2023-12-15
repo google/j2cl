@@ -133,11 +133,11 @@
   ;;@ inferreturn/InferReturn.java:36:28
   (call $$clinit__void_<once>_@inferreturn.InferReturn )
   ;;@ inferreturn/InferReturn.java:37:4
-  (local.set $list (call $m_newArrayList_$private__java_lang_Object__java_util_ArrayList@inferreturn.InferReturn (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@inferreturn.InferReturn) )))
+  (local.set $list (call $m_newArrayList_$private__java_lang_Object__java_util_ArrayList@inferreturn.InferReturn (call $$getString_|foo|__java_lang_String_<once>_@inferreturn.InferReturn )))
   ;;@ inferreturn/InferReturn.java:39:4
   (call $m_acceptsArrayListOfObject_$private__java_util_ArrayList__void@inferreturn.InferReturn (local.get $list))
   ;;@ inferreturn/InferReturn.java:41:4
-  (local.set $array (call $m_newArray_$private__java_lang_Object__arrayOf_java_lang_Object@inferreturn.InferReturn (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@inferreturn.InferReturn) )))
+  (local.set $array (call $m_newArray_$private__java_lang_Object__arrayOf_java_lang_Object@inferreturn.InferReturn (call $$getString_|foo|__java_lang_String_<once>_@inferreturn.InferReturn )))
   ;;@ inferreturn/InferReturn.java:43:4
   (call $m_acceptsArrayOfObject_$private__arrayOf_java_lang_Object__void@inferreturn.InferReturn (local.get $array))
  )
@@ -250,14 +250,15 @@
 )
 
 ;;; Class<T> InferReturn.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@inferreturn.InferReturn
+(func $$getClassMetadata__java_lang_Class_<once>_@inferreturn.InferReturn
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@inferreturn.InferReturn))
+  (if (i32.eqz (ref.is_null (global.get $$class@inferreturn.InferReturn)))
    (then
-    (global.set $$class@inferreturn.InferReturn (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|inferreturn....|__java_lang_String (ref.func $$getString_|inferreturn....|__java_lang_String@inferreturn.InferReturn) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@inferreturn.InferReturn))
    )
   )
+  (global.set $$class@inferreturn.InferReturn (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|inferreturn....|__java_lang_String_<once>_@inferreturn.InferReturn )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@inferreturn.InferReturn))
  )
 )
@@ -270,33 +271,35 @@
  (local $this (ref null $inferreturn.InferReturn))
  (local.set $this (ref.cast (ref $inferreturn.InferReturn) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@inferreturn.InferReturn) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@inferreturn.InferReturn ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@inferreturn.InferReturn)
 
 ;;; String InferReturn.$getString_|foo|()
-(func $$getString_|foo|__java_lang_String@inferreturn.InferReturn
+(func $$getString_|foo|__java_lang_String_<once>_@inferreturn.InferReturn
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|foo|@inferreturn.InferReturn))
+  (if (i32.eqz (ref.is_null (global.get $$string_|foo|@inferreturn.InferReturn)))
    (then
-    (global.set $$string_|foo|@inferreturn.InferReturn (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "foo")))
+    (return (global.get $$string_|foo|@inferreturn.InferReturn))
    )
   )
+  (global.set $$string_|foo|@inferreturn.InferReturn (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "foo")))
   (return (global.get $$string_|foo|@inferreturn.InferReturn))
  )
 )
 
 ;;; String InferReturn.$getString_|inferreturn....|()
-(func $$getString_|inferreturn....|__java_lang_String@inferreturn.InferReturn
+(func $$getString_|inferreturn....|__java_lang_String_<once>_@inferreturn.InferReturn
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|inferreturn....|@inferreturn.InferReturn))
+  (if (i32.eqz (ref.is_null (global.get $$string_|inferreturn....|@inferreturn.InferReturn)))
    (then
-    (global.set $$string_|inferreturn....|@inferreturn.InferReturn (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "inferreturn.InferReturn")))
+    (return (global.get $$string_|inferreturn....|@inferreturn.InferReturn))
    )
   )
+  (global.set $$string_|inferreturn....|@inferreturn.InferReturn (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "inferreturn.InferReturn")))
   (return (global.get $$string_|inferreturn....|@inferreturn.InferReturn))
  )
 )

@@ -345,14 +345,15 @@
 )
 
 ;;; Class<T> Asserts.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@localnamecollision.Asserts
+(func $$getClassMetadata__java_lang_Class_<once>_@localnamecollision.Asserts
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@localnamecollision.Asserts))
+  (if (i32.eqz (ref.is_null (global.get $$class@localnamecollision.Asserts)))
    (then
-    (global.set $$class@localnamecollision.Asserts (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localnamecol...|__java_lang_String (ref.func $$getString_|localnamecol...|__java_lang_String@localnamecollision.Asserts) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@localnamecollision.Asserts))
    )
   )
+  (global.set $$class@localnamecollision.Asserts (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|localnamecol...|__java_lang_String_<once>_@localnamecollision.Asserts )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@localnamecollision.Asserts))
  )
 )
@@ -365,20 +366,21 @@
  (local $this (ref null $localnamecollision.Asserts))
  (local.set $this (ref.cast (ref $localnamecollision.Asserts) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localnamecollision.Asserts) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@localnamecollision.Asserts ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localnamecollision.Asserts)
 
 ;;; String Asserts.$getString_|localnamecol...|()
-(func $$getString_|localnamecol...|__java_lang_String@localnamecollision.Asserts
+(func $$getString_|localnamecol...|__java_lang_String_<once>_@localnamecollision.Asserts
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|localnamecol...|@localnamecollision.Asserts))
+  (if (i32.eqz (ref.is_null (global.get $$string_|localnamecol...|@localnamecollision.Asserts)))
    (then
-    (global.set $$string_|localnamecol...|@localnamecollision.Asserts (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "localnamecollision.Asserts")))
+    (return (global.get $$string_|localnamecol...|@localnamecollision.Asserts))
    )
   )
+  (global.set $$string_|localnamecol...|@localnamecollision.Asserts (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "localnamecollision.Asserts")))
   (return (global.get $$string_|localnamecol...|@localnamecollision.Asserts))
  )
 )
@@ -460,14 +462,15 @@
 )
 
 ;;; Class<T> Class.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@localnamecollision.Class
+(func $$getClassMetadata__java_lang_Class_<once>_@localnamecollision.Class
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@localnamecollision.Class))
+  (if (i32.eqz (ref.is_null (global.get $$class@localnamecollision.Class)))
    (then
-    (global.set $$class@localnamecollision.Class (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localnamecol...|__java_lang_String (ref.func $$getString_|localnamecol...|__java_lang_String@localnamecollision.Class) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@localnamecollision.Class))
    )
   )
+  (global.set $$class@localnamecollision.Class (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|localnamecol...|__java_lang_String_<once>_@localnamecollision.Class )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@localnamecollision.Class))
  )
 )
@@ -480,20 +483,21 @@
  (local $this (ref null $localnamecollision.Class))
  (local.set $this (ref.cast (ref $localnamecollision.Class) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localnamecollision.Class) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@localnamecollision.Class ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localnamecollision.Class)
 
 ;;; String Class.$getString_|localnamecol...|()
-(func $$getString_|localnamecol...|__java_lang_String@localnamecollision.Class
+(func $$getString_|localnamecol...|__java_lang_String_<once>_@localnamecollision.Class
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|localnamecol...|@localnamecollision.Class))
+  (if (i32.eqz (ref.is_null (global.get $$string_|localnamecol...|@localnamecollision.Class)))
    (then
-    (global.set $$string_|localnamecol...|@localnamecollision.Class (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "localnamecollision.Class")))
+    (return (global.get $$string_|localnamecol...|@localnamecollision.Class))
    )
   )
+  (global.set $$string_|localnamecol...|@localnamecollision.Class (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "localnamecollision.Class")))
   (return (global.get $$string_|localnamecol...|@localnamecollision.Class))
  )
 )
@@ -620,14 +624,15 @@
 )
 
 ;;; Class<T> LocalNameCollision.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@localnamecollision.LocalNameCollision
+(func $$getClassMetadata__java_lang_Class_<once>_@localnamecollision.LocalNameCollision
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@localnamecollision.LocalNameCollision))
+  (if (i32.eqz (ref.is_null (global.get $$class@localnamecollision.LocalNameCollision)))
    (then
-    (global.set $$class@localnamecollision.LocalNameCollision (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localnamecol...|__java_lang_String (ref.func $$getString_|localnamecol...|__java_lang_String@localnamecollision.LocalNameCollision) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@localnamecollision.LocalNameCollision))
    )
   )
+  (global.set $$class@localnamecollision.LocalNameCollision (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|localnamecol...|__java_lang_String_<once>_@localnamecollision.LocalNameCollision )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@localnamecollision.LocalNameCollision))
  )
 )
@@ -640,20 +645,21 @@
  (local $this (ref null $localnamecollision.LocalNameCollision))
  (local.set $this (ref.cast (ref $localnamecollision.LocalNameCollision) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localnamecollision.LocalNameCollision) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@localnamecollision.LocalNameCollision ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localnamecollision.LocalNameCollision)
 
 ;;; String LocalNameCollision.$getString_|localnamecol...|()
-(func $$getString_|localnamecol...|__java_lang_String@localnamecollision.LocalNameCollision
+(func $$getString_|localnamecol...|__java_lang_String_<once>_@localnamecollision.LocalNameCollision
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|localnamecol...|@localnamecollision.LocalNameCollision))
+  (if (i32.eqz (ref.is_null (global.get $$string_|localnamecol...|@localnamecollision.LocalNameCollision)))
    (then
-    (global.set $$string_|localnamecol...|@localnamecollision.LocalNameCollision (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "localnamecollision.LocalNameCollision")))
+    (return (global.get $$string_|localnamecol...|@localnamecollision.LocalNameCollision))
    )
   )
+  (global.set $$string_|localnamecol...|@localnamecollision.LocalNameCollision (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "localnamecollision.LocalNameCollision")))
   (return (global.get $$string_|localnamecol...|@localnamecollision.LocalNameCollision))
  )
 )
@@ -723,14 +729,15 @@
 )
 
 ;;; Class<T> A.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@localnamecollision.A
+(func $$getClassMetadata__java_lang_Class_<once>_@localnamecollision.A
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@localnamecollision.A))
+  (if (i32.eqz (ref.is_null (global.get $$class@localnamecollision.A)))
    (then
-    (global.set $$class@localnamecollision.A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localnamecol...|__java_lang_String (ref.func $$getString_|localnamecol...|__java_lang_String@localnamecollision.A) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@localnamecollision.A))
    )
   )
+  (global.set $$class@localnamecollision.A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|localnamecol...|__java_lang_String_<once>_@localnamecollision.A )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@localnamecollision.A))
  )
 )
@@ -743,20 +750,21 @@
  (local $this (ref null $localnamecollision.A))
  (local.set $this (ref.cast (ref $localnamecollision.A) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localnamecollision.A) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@localnamecollision.A ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localnamecollision.A)
 
 ;;; String A.$getString_|localnamecol...|()
-(func $$getString_|localnamecol...|__java_lang_String@localnamecollision.A
+(func $$getString_|localnamecol...|__java_lang_String_<once>_@localnamecollision.A
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|localnamecol...|@localnamecollision.A))
+  (if (i32.eqz (ref.is_null (global.get $$string_|localnamecol...|@localnamecollision.A)))
    (then
-    (global.set $$string_|localnamecol...|@localnamecollision.A (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "localnamecollision.A")))
+    (return (global.get $$string_|localnamecol...|@localnamecollision.A))
    )
   )
+  (global.set $$string_|localnamecol...|@localnamecollision.A (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "localnamecollision.A")))
   (return (global.get $$string_|localnamecol...|@localnamecollision.A))
  )
 )
@@ -809,14 +817,15 @@
 )
 
 ;;; Class<T> B.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@localnamecollision.A.B
+(func $$getClassMetadata__java_lang_Class_<once>_@localnamecollision.A.B
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@localnamecollision.A.B))
+  (if (i32.eqz (ref.is_null (global.get $$class@localnamecollision.A.B)))
    (then
-    (global.set $$class@localnamecollision.A.B (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localnamecol...|__java_lang_String (ref.func $$getString_|localnamecol...|__java_lang_String@localnamecollision.A.B) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@localnamecollision.A.B))
    )
   )
+  (global.set $$class@localnamecollision.A.B (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|localnamecol...|__java_lang_String_<once>_@localnamecollision.A.B )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@localnamecollision.A.B))
  )
 )
@@ -829,20 +838,21 @@
  (local $this (ref null $localnamecollision.A.B))
  (local.set $this (ref.cast (ref $localnamecollision.A.B) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localnamecollision.A.B) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@localnamecollision.A.B ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localnamecollision.A.B)
 
 ;;; String B.$getString_|localnamecol...|()
-(func $$getString_|localnamecol...|__java_lang_String@localnamecollision.A.B
+(func $$getString_|localnamecol...|__java_lang_String_<once>_@localnamecollision.A.B
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|localnamecol...|@localnamecollision.A.B))
+  (if (i32.eqz (ref.is_null (global.get $$string_|localnamecol...|@localnamecollision.A.B)))
    (then
-    (global.set $$string_|localnamecol...|@localnamecollision.A.B (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "localnamecollision.A$B")))
+    (return (global.get $$string_|localnamecol...|@localnamecollision.A.B))
    )
   )
+  (global.set $$string_|localnamecol...|@localnamecollision.A.B (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "localnamecollision.A$B")))
   (return (global.get $$string_|localnamecol...|@localnamecollision.A.B))
  )
 )
@@ -910,14 +920,15 @@
 )
 
 ;;; Class<T> A.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@localnamecollision.package1.A
+(func $$getClassMetadata__java_lang_Class_<once>_@localnamecollision.package1.A
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@localnamecollision.package1.A))
+  (if (i32.eqz (ref.is_null (global.get $$class@localnamecollision.package1.A)))
    (then
-    (global.set $$class@localnamecollision.package1.A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localnamecol...|__java_lang_String (ref.func $$getString_|localnamecol...|__java_lang_String@localnamecollision.package1.A) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@localnamecollision.package1.A))
    )
   )
+  (global.set $$class@localnamecollision.package1.A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|localnamecol...|__java_lang_String_<once>_@localnamecollision.package1.A )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@localnamecollision.package1.A))
  )
 )
@@ -930,20 +941,21 @@
  (local $this (ref null $localnamecollision.package1.A))
  (local.set $this (ref.cast (ref $localnamecollision.package1.A) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localnamecollision.package1.A) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@localnamecollision.package1.A ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localnamecollision.package1.A)
 
 ;;; String A.$getString_|localnamecol...|()
-(func $$getString_|localnamecol...|__java_lang_String@localnamecollision.package1.A
+(func $$getString_|localnamecol...|__java_lang_String_<once>_@localnamecollision.package1.A
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|localnamecol...|@localnamecollision.package1.A))
+  (if (i32.eqz (ref.is_null (global.get $$string_|localnamecol...|@localnamecollision.package1.A)))
    (then
-    (global.set $$string_|localnamecol...|@localnamecollision.package1.A (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "localnamecollision.package1.A")))
+    (return (global.get $$string_|localnamecol...|@localnamecollision.package1.A))
    )
   )
+  (global.set $$string_|localnamecol...|@localnamecollision.package1.A (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "localnamecollision.package1.A")))
   (return (global.get $$string_|localnamecol...|@localnamecollision.package1.A))
  )
 )
@@ -1011,14 +1023,15 @@
 )
 
 ;;; Class<T> A.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@localnamecollision.package2.A
+(func $$getClassMetadata__java_lang_Class_<once>_@localnamecollision.package2.A
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@localnamecollision.package2.A))
+  (if (i32.eqz (ref.is_null (global.get $$class@localnamecollision.package2.A)))
    (then
-    (global.set $$class@localnamecollision.package2.A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localnamecol...|__java_lang_String (ref.func $$getString_|localnamecol...|__java_lang_String@localnamecollision.package2.A) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@localnamecollision.package2.A))
    )
   )
+  (global.set $$class@localnamecollision.package2.A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|localnamecol...|__java_lang_String_<once>_@localnamecollision.package2.A )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@localnamecollision.package2.A))
  )
 )
@@ -1031,20 +1044,21 @@
  (local $this (ref null $localnamecollision.package2.A))
  (local.set $this (ref.cast (ref $localnamecollision.package2.A) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localnamecollision.package2.A) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@localnamecollision.package2.A ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localnamecollision.package2.A)
 
 ;;; String A.$getString_|localnamecol...|()
-(func $$getString_|localnamecol...|__java_lang_String@localnamecollision.package2.A
+(func $$getString_|localnamecol...|__java_lang_String_<once>_@localnamecollision.package2.A
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|localnamecol...|@localnamecollision.package2.A))
+  (if (i32.eqz (ref.is_null (global.get $$string_|localnamecol...|@localnamecollision.package2.A)))
    (then
-    (global.set $$string_|localnamecol...|@localnamecollision.package2.A (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "localnamecollision.package2.A")))
+    (return (global.get $$string_|localnamecol...|@localnamecollision.package2.A))
    )
   )
+  (global.set $$string_|localnamecol...|@localnamecollision.package2.A (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "localnamecollision.package2.A")))
   (return (global.get $$string_|localnamecol...|@localnamecollision.package2.A))
  )
 )

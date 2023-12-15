@@ -122,14 +122,15 @@
 )
 
 ;;; Class<T> Foo.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@srcjar.Foo
+(func $$getClassMetadata__java_lang_Class_<once>_@srcjar.Foo
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@srcjar.Foo))
+  (if (i32.eqz (ref.is_null (global.get $$class@srcjar.Foo)))
    (then
-    (global.set $$class@srcjar.Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|srcjar.Foo|__java_lang_String (ref.func $$getString_|srcjar.Foo|__java_lang_String@srcjar.Foo) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@srcjar.Foo))
    )
   )
+  (global.set $$class@srcjar.Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|srcjar.Foo|__java_lang_String_<once>_@srcjar.Foo )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@srcjar.Foo))
  )
 )
@@ -142,20 +143,21 @@
  (local $this (ref null $srcjar.Foo))
  (local.set $this (ref.cast (ref $srcjar.Foo) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@srcjar.Foo) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@srcjar.Foo ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@srcjar.Foo)
 
 ;;; String Foo.$getString_|srcjar.Foo|()
-(func $$getString_|srcjar.Foo|__java_lang_String@srcjar.Foo
+(func $$getString_|srcjar.Foo|__java_lang_String_<once>_@srcjar.Foo
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|srcjar.Foo|@srcjar.Foo))
+  (if (i32.eqz (ref.is_null (global.get $$string_|srcjar.Foo|@srcjar.Foo)))
    (then
-    (global.set $$string_|srcjar.Foo|@srcjar.Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "srcjar.Foo")))
+    (return (global.get $$string_|srcjar.Foo|@srcjar.Foo))
    )
   )
+  (global.set $$string_|srcjar.Foo|@srcjar.Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "srcjar.Foo")))
   (return (global.get $$string_|srcjar.Foo|@srcjar.Foo))
  )
 )
@@ -220,14 +222,15 @@
 )
 
 ;;; Class<T> Srcjar.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@srcjar.Srcjar
+(func $$getClassMetadata__java_lang_Class_<once>_@srcjar.Srcjar
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@srcjar.Srcjar))
+  (if (i32.eqz (ref.is_null (global.get $$class@srcjar.Srcjar)))
    (then
-    (global.set $$class@srcjar.Srcjar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|srcjar.Srcjar|__java_lang_String (ref.func $$getString_|srcjar.Srcjar|__java_lang_String@srcjar.Srcjar) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@srcjar.Srcjar))
    )
   )
+  (global.set $$class@srcjar.Srcjar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|srcjar.Srcjar|__java_lang_String_<once>_@srcjar.Srcjar )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@srcjar.Srcjar))
  )
 )
@@ -240,20 +243,21 @@
  (local $this (ref null $srcjar.Srcjar))
  (local.set $this (ref.cast (ref $srcjar.Srcjar) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@srcjar.Srcjar) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@srcjar.Srcjar ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@srcjar.Srcjar)
 
 ;;; String Srcjar.$getString_|srcjar.Srcjar|()
-(func $$getString_|srcjar.Srcjar|__java_lang_String@srcjar.Srcjar
+(func $$getString_|srcjar.Srcjar|__java_lang_String_<once>_@srcjar.Srcjar
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|srcjar.Srcjar|@srcjar.Srcjar))
+  (if (i32.eqz (ref.is_null (global.get $$string_|srcjar.Srcjar|@srcjar.Srcjar)))
    (then
-    (global.set $$string_|srcjar.Srcjar|@srcjar.Srcjar (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "srcjar.Srcjar")))
+    (return (global.get $$string_|srcjar.Srcjar|@srcjar.Srcjar))
    )
   )
+  (global.set $$string_|srcjar.Srcjar|@srcjar.Srcjar (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "srcjar.Srcjar")))
   (return (global.get $$string_|srcjar.Srcjar|@srcjar.Srcjar))
  )
 )

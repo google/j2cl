@@ -99,15 +99,15 @@
   ;;@ compiletimeconstant/CompileTimeConstant.java:60:4
   (local.set $b (i32.const 1))
   ;;@ compiletimeconstant/CompileTimeConstant.java:61:4
-  (local.set $s (call $function.no.side.effects.$getString_|10000Tur_tle...|__java_lang_String (ref.func $$getString_|10000Tur_tle...|__java_lang_String@compiletimeconstant.CompileTimeConstant) ))
+  (local.set $s (call $$getString_|10000Tur_tle...|__java_lang_String_<once>_@compiletimeconstant.CompileTimeConstant ))
   ;;@ compiletimeconstant/CompileTimeConstant.java:62:4
-  (local.set $l (call $function.no.side.effects.$getString_|ThisIsALongS...|__java_lang_String (ref.func $$getString_|ThisIsALongS...|__java_lang_String@compiletimeconstant.CompileTimeConstant) ))
+  (local.set $l (call $$getString_|ThisIsALongS...|__java_lang_String_<once>_@compiletimeconstant.CompileTimeConstant ))
   ;;@ compiletimeconstant/CompileTimeConstant.java:63:4
-  (local.set $m (call $function.no.side.effects.$getString_|ThisIsALongS...|_1__java_lang_String (ref.func $$getString_|ThisIsALongS...|_1__java_lang_String@compiletimeconstant.CompileTimeConstant) ))
+  (local.set $m (call $$getString_|ThisIsALongS...|_1__java_lang_String_<once>_@compiletimeconstant.CompileTimeConstant ))
   ;;@ compiletimeconstant/CompileTimeConstant.java:64:4
-  (local.set $n (call $function.no.side.effects.$getString_|ThisIsALongS...|_2__java_lang_String (ref.func $$getString_|ThisIsALongS...|_2__java_lang_String@compiletimeconstant.CompileTimeConstant) ))
+  (local.set $n (call $$getString_|ThisIsALongS...|_2__java_lang_String_<once>_@compiletimeconstant.CompileTimeConstant ))
   ;;@ compiletimeconstant/CompileTimeConstant.java:65:4
-  (local.set $c (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@compiletimeconstant.CompileTimeConstant) ))
+  (local.set $c (call $$getClassMetadata__java_lang_Class_<once>_@compiletimeconstant.CompileTimeConstant ))
  )
 )
 
@@ -134,14 +134,15 @@
 )
 
 ;;; Class<T> CompileTimeConstant.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@compiletimeconstant.CompileTimeConstant
+(func $$getClassMetadata__java_lang_Class_<once>_@compiletimeconstant.CompileTimeConstant
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@compiletimeconstant.CompileTimeConstant))
+  (if (i32.eqz (ref.is_null (global.get $$class@compiletimeconstant.CompileTimeConstant)))
    (then
-    (global.set $$class@compiletimeconstant.CompileTimeConstant (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|compiletimec...|__java_lang_String (ref.func $$getString_|compiletimec...|__java_lang_String@compiletimeconstant.CompileTimeConstant) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@compiletimeconstant.CompileTimeConstant))
    )
   )
+  (global.set $$class@compiletimeconstant.CompileTimeConstant (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|compiletimec...|__java_lang_String_<once>_@compiletimeconstant.CompileTimeConstant )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@compiletimeconstant.CompileTimeConstant))
  )
 )
@@ -154,72 +155,77 @@
  (local $this (ref null $compiletimeconstant.CompileTimeConstant))
  (local.set $this (ref.cast (ref $compiletimeconstant.CompileTimeConstant) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@compiletimeconstant.CompileTimeConstant) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@compiletimeconstant.CompileTimeConstant ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@compiletimeconstant.CompileTimeConstant)
 
 ;;; String CompileTimeConstant.$getString_|10000Tur_tle...|()
-(func $$getString_|10000Tur_tle...|__java_lang_String@compiletimeconstant.CompileTimeConstant
+(func $$getString_|10000Tur_tle...|__java_lang_String_<once>_@compiletimeconstant.CompileTimeConstant
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|10000Tur_tle...|@compiletimeconstant.CompileTimeConstant))
+  (if (i32.eqz (ref.is_null (global.get $$string_|10000Tur_tle...|@compiletimeconstant.CompileTimeConstant)))
    (then
-    (global.set $$string_|10000Tur_tle...|@compiletimeconstant.CompileTimeConstant (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "10000Tur\"tleDo\'ve")))
+    (return (global.get $$string_|10000Tur_tle...|@compiletimeconstant.CompileTimeConstant))
    )
   )
+  (global.set $$string_|10000Tur_tle...|@compiletimeconstant.CompileTimeConstant (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "10000Tur\"tleDo\'ve")))
   (return (global.get $$string_|10000Tur_tle...|@compiletimeconstant.CompileTimeConstant))
  )
 )
 
 ;;; String CompileTimeConstant.$getString_|ThisIsALongS...|()
-(func $$getString_|ThisIsALongS...|__java_lang_String@compiletimeconstant.CompileTimeConstant
+(func $$getString_|ThisIsALongS...|__java_lang_String_<once>_@compiletimeconstant.CompileTimeConstant
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|ThisIsALongS...|@compiletimeconstant.CompileTimeConstant))
+  (if (i32.eqz (ref.is_null (global.get $$string_|ThisIsALongS...|@compiletimeconstant.CompileTimeConstant)))
    (then
-    (global.set $$string_|ThisIsALongS...|@compiletimeconstant.CompileTimeConstant (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "ThisIsALongString")))
+    (return (global.get $$string_|ThisIsALongS...|@compiletimeconstant.CompileTimeConstant))
    )
   )
+  (global.set $$string_|ThisIsALongS...|@compiletimeconstant.CompileTimeConstant (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "ThisIsALongString")))
   (return (global.get $$string_|ThisIsALongS...|@compiletimeconstant.CompileTimeConstant))
  )
 )
 
 ;;; String CompileTimeConstant.$getString_|ThisIsALongS...|_1()
-(func $$getString_|ThisIsALongS...|_1__java_lang_String@compiletimeconstant.CompileTimeConstant
+(func $$getString_|ThisIsALongS...|_1__java_lang_String_<once>_@compiletimeconstant.CompileTimeConstant
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|ThisIsALongS...|_1@compiletimeconstant.CompileTimeConstant))
+  (if (i32.eqz (ref.is_null (global.get $$string_|ThisIsALongS...|_1@compiletimeconstant.CompileTimeConstant)))
    (then
-    (global.set $$string_|ThisIsALongS...|_1@compiletimeconstant.CompileTimeConstant (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "ThisIsALongStringAlso")))
+    (return (global.get $$string_|ThisIsALongS...|_1@compiletimeconstant.CompileTimeConstant))
    )
   )
+  (global.set $$string_|ThisIsALongS...|_1@compiletimeconstant.CompileTimeConstant (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "ThisIsALongStringAlso")))
   (return (global.get $$string_|ThisIsALongS...|_1@compiletimeconstant.CompileTimeConstant))
  )
 )
 
 ;;; String CompileTimeConstant.$getString_|ThisIsALongS...|_2()
-(func $$getString_|ThisIsALongS...|_2__java_lang_String@compiletimeconstant.CompileTimeConstant
+(func $$getString_|ThisIsALongS...|_2__java_lang_String_<once>_@compiletimeconstant.CompileTimeConstant
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|ThisIsALongS...|_2@compiletimeconstant.CompileTimeConstant))
+  (if (i32.eqz (ref.is_null (global.get $$string_|ThisIsALongS...|_2@compiletimeconstant.CompileTimeConstant)))
    (then
-    (global.set $$string_|ThisIsALongS...|_2@compiletimeconstant.CompileTimeConstant (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "ThisIsALongStringAlsoButLonger")))
+    (return (global.get $$string_|ThisIsALongS...|_2@compiletimeconstant.CompileTimeConstant))
    )
   )
+  (global.set $$string_|ThisIsALongS...|_2@compiletimeconstant.CompileTimeConstant (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "ThisIsALongStringAlsoButLonger")))
   (return (global.get $$string_|ThisIsALongS...|_2@compiletimeconstant.CompileTimeConstant))
  )
 )
 
 ;;; String CompileTimeConstant.$getString_|compiletimec...|()
-(func $$getString_|compiletimec...|__java_lang_String@compiletimeconstant.CompileTimeConstant
+(func $$getString_|compiletimec...|__java_lang_String_<once>_@compiletimeconstant.CompileTimeConstant
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|compiletimec...|@compiletimeconstant.CompileTimeConstant))
+  (if (i32.eqz (ref.is_null (global.get $$string_|compiletimec...|@compiletimeconstant.CompileTimeConstant)))
    (then
-    (global.set $$string_|compiletimec...|@compiletimeconstant.CompileTimeConstant (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "compiletimeconstant.CompileTimeConstant")))
+    (return (global.get $$string_|compiletimec...|@compiletimeconstant.CompileTimeConstant))
    )
   )
+  (global.set $$string_|compiletimec...|@compiletimeconstant.CompileTimeConstant (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "compiletimeconstant.CompileTimeConstant")))
   (return (global.get $$string_|compiletimec...|@compiletimeconstant.CompileTimeConstant))
  )
 )

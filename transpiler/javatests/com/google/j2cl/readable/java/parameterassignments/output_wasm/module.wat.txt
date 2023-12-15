@@ -366,27 +366,29 @@
 )
 
 ;;; Class<T> Fn.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@parameterassignments.Main.Fn
+(func $$getClassMetadata__java_lang_Class_<once>_@parameterassignments.Main.Fn
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@parameterassignments.Main.Fn))
+  (if (i32.eqz (ref.is_null (global.get $$class@parameterassignments.Main.Fn)))
    (then
-    (global.set $$class@parameterassignments.Main.Fn (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|parameterass...|__java_lang_String (ref.func $$getString_|parameterass...|__java_lang_String@parameterassignments.Main.Fn) )))
+    (return (global.get $$class@parameterassignments.Main.Fn))
    )
   )
+  (global.set $$class@parameterassignments.Main.Fn (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|parameterass...|__java_lang_String_<once>_@parameterassignments.Main.Fn )))
   (return (global.get $$class@parameterassignments.Main.Fn))
  )
 )
 
 ;;; String Fn.$getString_|parameterass...|()
-(func $$getString_|parameterass...|__java_lang_String@parameterassignments.Main.Fn
+(func $$getString_|parameterass...|__java_lang_String_<once>_@parameterassignments.Main.Fn
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|parameterass...|@parameterassignments.Main.Fn))
+  (if (i32.eqz (ref.is_null (global.get $$string_|parameterass...|@parameterassignments.Main.Fn)))
    (then
-    (global.set $$string_|parameterass...|@parameterassignments.Main.Fn (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "parameterassignments.Main$Fn")))
+    (return (global.get $$string_|parameterass...|@parameterassignments.Main.Fn))
    )
   )
+  (global.set $$string_|parameterass...|@parameterassignments.Main.Fn (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "parameterassignments.Main$Fn")))
   (return (global.get $$string_|parameterass...|@parameterassignments.Main.Fn))
  )
 )
@@ -410,27 +412,29 @@
 )
 
 ;;; Class<T> FnPrimitiveVarargs.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@parameterassignments.Main.FnPrimitiveVarargs
+(func $$getClassMetadata__java_lang_Class_<once>_@parameterassignments.Main.FnPrimitiveVarargs
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@parameterassignments.Main.FnPrimitiveVarargs))
+  (if (i32.eqz (ref.is_null (global.get $$class@parameterassignments.Main.FnPrimitiveVarargs)))
    (then
-    (global.set $$class@parameterassignments.Main.FnPrimitiveVarargs (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|parameterass...|__java_lang_String (ref.func $$getString_|parameterass...|__java_lang_String@parameterassignments.Main.FnPrimitiveVarargs) )))
+    (return (global.get $$class@parameterassignments.Main.FnPrimitiveVarargs))
    )
   )
+  (global.set $$class@parameterassignments.Main.FnPrimitiveVarargs (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|parameterass...|__java_lang_String_<once>_@parameterassignments.Main.FnPrimitiveVarargs )))
   (return (global.get $$class@parameterassignments.Main.FnPrimitiveVarargs))
  )
 )
 
 ;;; String FnPrimitiveVarargs.$getString_|parameterass...|()
-(func $$getString_|parameterass...|__java_lang_String@parameterassignments.Main.FnPrimitiveVarargs
+(func $$getString_|parameterass...|__java_lang_String_<once>_@parameterassignments.Main.FnPrimitiveVarargs
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|parameterass...|@parameterassignments.Main.FnPrimitiveVarargs))
+  (if (i32.eqz (ref.is_null (global.get $$string_|parameterass...|@parameterassignments.Main.FnPrimitiveVarargs)))
    (then
-    (global.set $$string_|parameterass...|@parameterassignments.Main.FnPrimitiveVarargs (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "parameterassignments.Main$FnPrimitiveVarargs")))
+    (return (global.get $$string_|parameterass...|@parameterassignments.Main.FnPrimitiveVarargs))
    )
   )
+  (global.set $$string_|parameterass...|@parameterassignments.Main.FnPrimitiveVarargs (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "parameterassignments.Main$FnPrimitiveVarargs")))
   (return (global.get $$string_|parameterass...|@parameterassignments.Main.FnPrimitiveVarargs))
  )
 )
@@ -454,27 +458,29 @@
 )
 
 ;;; Class<T> FnObjectVarargs.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@parameterassignments.Main.FnObjectVarargs
+(func $$getClassMetadata__java_lang_Class_<once>_@parameterassignments.Main.FnObjectVarargs
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@parameterassignments.Main.FnObjectVarargs))
+  (if (i32.eqz (ref.is_null (global.get $$class@parameterassignments.Main.FnObjectVarargs)))
    (then
-    (global.set $$class@parameterassignments.Main.FnObjectVarargs (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|parameterass...|__java_lang_String (ref.func $$getString_|parameterass...|__java_lang_String@parameterassignments.Main.FnObjectVarargs) )))
+    (return (global.get $$class@parameterassignments.Main.FnObjectVarargs))
    )
   )
+  (global.set $$class@parameterassignments.Main.FnObjectVarargs (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|parameterass...|__java_lang_String_<once>_@parameterassignments.Main.FnObjectVarargs )))
   (return (global.get $$class@parameterassignments.Main.FnObjectVarargs))
  )
 )
 
 ;;; String FnObjectVarargs.$getString_|parameterass...|()
-(func $$getString_|parameterass...|__java_lang_String@parameterassignments.Main.FnObjectVarargs
+(func $$getString_|parameterass...|__java_lang_String_<once>_@parameterassignments.Main.FnObjectVarargs
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|parameterass...|@parameterassignments.Main.FnObjectVarargs))
+  (if (i32.eqz (ref.is_null (global.get $$string_|parameterass...|@parameterassignments.Main.FnObjectVarargs)))
    (then
-    (global.set $$string_|parameterass...|@parameterassignments.Main.FnObjectVarargs (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "parameterassignments.Main$FnObjectVarargs")))
+    (return (global.get $$string_|parameterass...|@parameterassignments.Main.FnObjectVarargs))
    )
   )
+  (global.set $$string_|parameterass...|@parameterassignments.Main.FnObjectVarargs (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "parameterassignments.Main$FnObjectVarargs")))
   (return (global.get $$string_|parameterass...|@parameterassignments.Main.FnObjectVarargs))
  )
 )
@@ -640,14 +646,15 @@
 )
 
 ;;; Class<T> Main.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@parameterassignments.Main
+(func $$getClassMetadata__java_lang_Class_<once>_@parameterassignments.Main
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@parameterassignments.Main))
+  (if (i32.eqz (ref.is_null (global.get $$class@parameterassignments.Main)))
    (then
-    (global.set $$class@parameterassignments.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|parameterass...|__java_lang_String (ref.func $$getString_|parameterass...|__java_lang_String@parameterassignments.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@parameterassignments.Main))
    )
   )
+  (global.set $$class@parameterassignments.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|parameterass...|__java_lang_String_<once>_@parameterassignments.Main )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@parameterassignments.Main))
  )
 )
@@ -660,20 +667,21 @@
  (local $this (ref null $parameterassignments.Main))
  (local.set $this (ref.cast (ref $parameterassignments.Main) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@parameterassignments.Main) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@parameterassignments.Main ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@parameterassignments.Main)
 
 ;;; String Main.$getString_|parameterass...|()
-(func $$getString_|parameterass...|__java_lang_String@parameterassignments.Main
+(func $$getString_|parameterass...|__java_lang_String_<once>_@parameterassignments.Main
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|parameterass...|@parameterassignments.Main))
+  (if (i32.eqz (ref.is_null (global.get $$string_|parameterass...|@parameterassignments.Main)))
    (then
-    (global.set $$string_|parameterass...|@parameterassignments.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "parameterassignments.Main")))
+    (return (global.get $$string_|parameterass...|@parameterassignments.Main))
    )
   )
+  (global.set $$string_|parameterass...|@parameterassignments.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "parameterassignments.Main")))
   (return (global.get $$string_|parameterass...|@parameterassignments.Main))
  )
 )
@@ -745,14 +753,15 @@
 )
 
 ;;; Class<T> <anonymous> implements Fn.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@parameterassignments.Main.$LambdaImplementor$1
+(func $$getClassMetadata__java_lang_Class_<once>_@parameterassignments.Main.$LambdaImplementor$1
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@parameterassignments.Main.$LambdaImplementor$1))
+  (if (i32.eqz (ref.is_null (global.get $$class@parameterassignments.Main.$LambdaImplementor$1)))
    (then
-    (global.set $$class@parameterassignments.Main.$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|parameterass...|__java_lang_String (ref.func $$getString_|parameterass...|__java_lang_String@parameterassignments.Main.$LambdaImplementor$1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@parameterassignments.Main.$LambdaImplementor$1))
    )
   )
+  (global.set $$class@parameterassignments.Main.$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|parameterass...|__java_lang_String_<once>_@parameterassignments.Main.$LambdaImplementor$1 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@parameterassignments.Main.$LambdaImplementor$1))
  )
 )
@@ -765,20 +774,21 @@
  (local $this (ref null $parameterassignments.Main.$LambdaImplementor$1))
  (local.set $this (ref.cast (ref $parameterassignments.Main.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@parameterassignments.Main.$LambdaImplementor$1) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@parameterassignments.Main.$LambdaImplementor$1 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@parameterassignments.Main.$LambdaImplementor$1)
 
 ;;; String <anonymous> implements Fn.$getString_|parameterass...|()
-(func $$getString_|parameterass...|__java_lang_String@parameterassignments.Main.$LambdaImplementor$1
+(func $$getString_|parameterass...|__java_lang_String_<once>_@parameterassignments.Main.$LambdaImplementor$1
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|parameterass...|@parameterassignments.Main.$LambdaImplementor$1))
+  (if (i32.eqz (ref.is_null (global.get $$string_|parameterass...|@parameterassignments.Main.$LambdaImplementor$1)))
    (then
-    (global.set $$string_|parameterass...|@parameterassignments.Main.$LambdaImplementor$1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "parameterassignments.Main$$LambdaImplementor$1")))
+    (return (global.get $$string_|parameterass...|@parameterassignments.Main.$LambdaImplementor$1))
    )
   )
+  (global.set $$string_|parameterass...|@parameterassignments.Main.$LambdaImplementor$1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "parameterassignments.Main$$LambdaImplementor$1")))
   (return (global.get $$string_|parameterass...|@parameterassignments.Main.$LambdaImplementor$1))
  )
 )
@@ -847,14 +857,15 @@
 )
 
 ;;; Class<T> <anonymous> implements FnPrimitiveVarargs.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@parameterassignments.Main.$LambdaImplementor$2
+(func $$getClassMetadata__java_lang_Class_<once>_@parameterassignments.Main.$LambdaImplementor$2
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@parameterassignments.Main.$LambdaImplementor$2))
+  (if (i32.eqz (ref.is_null (global.get $$class@parameterassignments.Main.$LambdaImplementor$2)))
    (then
-    (global.set $$class@parameterassignments.Main.$LambdaImplementor$2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|parameterass...|__java_lang_String (ref.func $$getString_|parameterass...|__java_lang_String@parameterassignments.Main.$LambdaImplementor$2) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@parameterassignments.Main.$LambdaImplementor$2))
    )
   )
+  (global.set $$class@parameterassignments.Main.$LambdaImplementor$2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|parameterass...|__java_lang_String_<once>_@parameterassignments.Main.$LambdaImplementor$2 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@parameterassignments.Main.$LambdaImplementor$2))
  )
 )
@@ -867,20 +878,21 @@
  (local $this (ref null $parameterassignments.Main.$LambdaImplementor$2))
  (local.set $this (ref.cast (ref $parameterassignments.Main.$LambdaImplementor$2) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@parameterassignments.Main.$LambdaImplementor$2) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@parameterassignments.Main.$LambdaImplementor$2 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@parameterassignments.Main.$LambdaImplementor$2)
 
 ;;; String <anonymous> implements FnPrimitiveVarargs.$getString_|parameterass...|()
-(func $$getString_|parameterass...|__java_lang_String@parameterassignments.Main.$LambdaImplementor$2
+(func $$getString_|parameterass...|__java_lang_String_<once>_@parameterassignments.Main.$LambdaImplementor$2
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|parameterass...|@parameterassignments.Main.$LambdaImplementor$2))
+  (if (i32.eqz (ref.is_null (global.get $$string_|parameterass...|@parameterassignments.Main.$LambdaImplementor$2)))
    (then
-    (global.set $$string_|parameterass...|@parameterassignments.Main.$LambdaImplementor$2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "parameterassignments.Main$$LambdaImplementor$2")))
+    (return (global.get $$string_|parameterass...|@parameterassignments.Main.$LambdaImplementor$2))
    )
   )
+  (global.set $$string_|parameterass...|@parameterassignments.Main.$LambdaImplementor$2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "parameterassignments.Main$$LambdaImplementor$2")))
   (return (global.get $$string_|parameterass...|@parameterassignments.Main.$LambdaImplementor$2))
  )
 )
@@ -949,14 +961,15 @@
 )
 
 ;;; Class<T> <anonymous> implements FnObjectVarargs.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@parameterassignments.Main.$LambdaImplementor$3
+(func $$getClassMetadata__java_lang_Class_<once>_@parameterassignments.Main.$LambdaImplementor$3
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@parameterassignments.Main.$LambdaImplementor$3))
+  (if (i32.eqz (ref.is_null (global.get $$class@parameterassignments.Main.$LambdaImplementor$3)))
    (then
-    (global.set $$class@parameterassignments.Main.$LambdaImplementor$3 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|parameterass...|__java_lang_String (ref.func $$getString_|parameterass...|__java_lang_String@parameterassignments.Main.$LambdaImplementor$3) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@parameterassignments.Main.$LambdaImplementor$3))
    )
   )
+  (global.set $$class@parameterassignments.Main.$LambdaImplementor$3 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|parameterass...|__java_lang_String_<once>_@parameterassignments.Main.$LambdaImplementor$3 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@parameterassignments.Main.$LambdaImplementor$3))
  )
 )
@@ -969,20 +982,21 @@
  (local $this (ref null $parameterassignments.Main.$LambdaImplementor$3))
  (local.set $this (ref.cast (ref $parameterassignments.Main.$LambdaImplementor$3) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@parameterassignments.Main.$LambdaImplementor$3) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@parameterassignments.Main.$LambdaImplementor$3 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@parameterassignments.Main.$LambdaImplementor$3)
 
 ;;; String <anonymous> implements FnObjectVarargs.$getString_|parameterass...|()
-(func $$getString_|parameterass...|__java_lang_String@parameterassignments.Main.$LambdaImplementor$3
+(func $$getString_|parameterass...|__java_lang_String_<once>_@parameterassignments.Main.$LambdaImplementor$3
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|parameterass...|@parameterassignments.Main.$LambdaImplementor$3))
+  (if (i32.eqz (ref.is_null (global.get $$string_|parameterass...|@parameterassignments.Main.$LambdaImplementor$3)))
    (then
-    (global.set $$string_|parameterass...|@parameterassignments.Main.$LambdaImplementor$3 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "parameterassignments.Main$$LambdaImplementor$3")))
+    (return (global.get $$string_|parameterass...|@parameterassignments.Main.$LambdaImplementor$3))
    )
   )
+  (global.set $$string_|parameterass...|@parameterassignments.Main.$LambdaImplementor$3 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "parameterassignments.Main$$LambdaImplementor$3")))
   (return (global.get $$string_|parameterass...|@parameterassignments.Main.$LambdaImplementor$3))
  )
 )
@@ -1063,14 +1077,15 @@
 )
 
 ;;; Class<T> SubMain.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@parameterassignments.Main.SubMain
+(func $$getClassMetadata__java_lang_Class_<once>_@parameterassignments.Main.SubMain
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@parameterassignments.Main.SubMain))
+  (if (i32.eqz (ref.is_null (global.get $$class@parameterassignments.Main.SubMain)))
    (then
-    (global.set $$class@parameterassignments.Main.SubMain (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|parameterass...|__java_lang_String (ref.func $$getString_|parameterass...|__java_lang_String@parameterassignments.Main.SubMain) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@parameterassignments.Main) )))
+    (return (global.get $$class@parameterassignments.Main.SubMain))
    )
   )
+  (global.set $$class@parameterassignments.Main.SubMain (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|parameterass...|__java_lang_String_<once>_@parameterassignments.Main.SubMain )(call $$getClassMetadata__java_lang_Class_<once>_@parameterassignments.Main )))
   (return (global.get $$class@parameterassignments.Main.SubMain))
  )
 )
@@ -1083,20 +1098,21 @@
  (local $this (ref null $parameterassignments.Main.SubMain))
  (local.set $this (ref.cast (ref $parameterassignments.Main.SubMain) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@parameterassignments.Main.SubMain) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@parameterassignments.Main.SubMain ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@parameterassignments.Main.SubMain)
 
 ;;; String SubMain.$getString_|parameterass...|()
-(func $$getString_|parameterass...|__java_lang_String@parameterassignments.Main.SubMain
+(func $$getString_|parameterass...|__java_lang_String_<once>_@parameterassignments.Main.SubMain
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|parameterass...|@parameterassignments.Main.SubMain))
+  (if (i32.eqz (ref.is_null (global.get $$string_|parameterass...|@parameterassignments.Main.SubMain)))
    (then
-    (global.set $$string_|parameterass...|@parameterassignments.Main.SubMain (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "parameterassignments.Main$SubMain")))
+    (return (global.get $$string_|parameterass...|@parameterassignments.Main.SubMain))
    )
   )
+  (global.set $$string_|parameterass...|@parameterassignments.Main.SubMain (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "parameterassignments.Main$SubMain")))
   (return (global.get $$string_|parameterass...|@parameterassignments.Main.SubMain))
  )
 )

@@ -177,14 +177,15 @@
 )
 
 ;;; Class<T> Main.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsinnerclass.Main
+(func $$getClassMetadata__java_lang_Class_<once>_@jsinnerclass.Main
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsinnerclass.Main))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsinnerclass.Main)))
    (then
-    (global.set $$class@jsinnerclass.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsinnerclass...|__java_lang_String (ref.func $$getString_|jsinnerclass...|__java_lang_String@jsinnerclass.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@jsinnerclass.Main))
    )
   )
+  (global.set $$class@jsinnerclass.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsinnerclass...|__java_lang_String_<once>_@jsinnerclass.Main )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@jsinnerclass.Main))
  )
 )
@@ -197,20 +198,21 @@
  (local $this (ref null $jsinnerclass.Main))
  (local.set $this (ref.cast (ref $jsinnerclass.Main) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsinnerclass.Main) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsinnerclass.Main ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsinnerclass.Main)
 
 ;;; String Main.$getString_|jsinnerclass...|()
-(func $$getString_|jsinnerclass...|__java_lang_String@jsinnerclass.Main
+(func $$getString_|jsinnerclass...|__java_lang_String_<once>_@jsinnerclass.Main
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsinnerclass...|@jsinnerclass.Main))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsinnerclass...|@jsinnerclass.Main)))
    (then
-    (global.set $$string_|jsinnerclass...|@jsinnerclass.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsinnerclass.Main")))
+    (return (global.get $$string_|jsinnerclass...|@jsinnerclass.Main))
    )
   )
+  (global.set $$string_|jsinnerclass...|@jsinnerclass.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsinnerclass.Main")))
   (return (global.get $$string_|jsinnerclass...|@jsinnerclass.Main))
  )
 )
@@ -284,14 +286,15 @@
 )
 
 ;;; Class<T> Inner.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsinnerclass.Main.Outer.Inner
+(func $$getClassMetadata__java_lang_Class_<once>_@jsinnerclass.Main.Outer.Inner
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsinnerclass.Main.Outer.Inner))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsinnerclass.Main.Outer.Inner)))
    (then
-    (global.set $$class@jsinnerclass.Main.Outer.Inner (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsinnerclass...|__java_lang_String (ref.func $$getString_|jsinnerclass...|__java_lang_String@jsinnerclass.Main.Outer.Inner) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@jsinnerclass.Main.Outer.Inner))
    )
   )
+  (global.set $$class@jsinnerclass.Main.Outer.Inner (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsinnerclass...|__java_lang_String_<once>_@jsinnerclass.Main.Outer.Inner )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@jsinnerclass.Main.Outer.Inner))
  )
 )
@@ -304,20 +307,21 @@
  (local $this (ref null $jsinnerclass.Main.Outer.Inner))
  (local.set $this (ref.cast (ref $jsinnerclass.Main.Outer.Inner) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsinnerclass.Main.Outer.Inner) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsinnerclass.Main.Outer.Inner ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsinnerclass.Main.Outer.Inner)
 
 ;;; String Inner.$getString_|jsinnerclass...|()
-(func $$getString_|jsinnerclass...|__java_lang_String@jsinnerclass.Main.Outer.Inner
+(func $$getString_|jsinnerclass...|__java_lang_String_<once>_@jsinnerclass.Main.Outer.Inner
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsinnerclass...|@jsinnerclass.Main.Outer.Inner))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsinnerclass...|@jsinnerclass.Main.Outer.Inner)))
    (then
-    (global.set $$string_|jsinnerclass...|@jsinnerclass.Main.Outer.Inner (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsinnerclass.Main$Outer$Inner")))
+    (return (global.get $$string_|jsinnerclass...|@jsinnerclass.Main.Outer.Inner))
    )
   )
+  (global.set $$string_|jsinnerclass...|@jsinnerclass.Main.Outer.Inner (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsinnerclass.Main$Outer$Inner")))
   (return (global.get $$string_|jsinnerclass...|@jsinnerclass.Main.Outer.Inner))
  )
 )
@@ -401,14 +405,15 @@
 )
 
 ;;; Class<T> Outer.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsinnerclass.Main.Outer
+(func $$getClassMetadata__java_lang_Class_<once>_@jsinnerclass.Main.Outer
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsinnerclass.Main.Outer))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsinnerclass.Main.Outer)))
    (then
-    (global.set $$class@jsinnerclass.Main.Outer (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsinnerclass...|__java_lang_String (ref.func $$getString_|jsinnerclass...|__java_lang_String@jsinnerclass.Main.Outer) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@jsinnerclass.Main.Outer))
    )
   )
+  (global.set $$class@jsinnerclass.Main.Outer (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsinnerclass...|__java_lang_String_<once>_@jsinnerclass.Main.Outer )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@jsinnerclass.Main.Outer))
  )
 )
@@ -421,20 +426,21 @@
  (local $this (ref null $jsinnerclass.Main.Outer))
  (local.set $this (ref.cast (ref $jsinnerclass.Main.Outer) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsinnerclass.Main.Outer) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsinnerclass.Main.Outer ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsinnerclass.Main.Outer)
 
 ;;; String Outer.$getString_|jsinnerclass...|()
-(func $$getString_|jsinnerclass...|__java_lang_String@jsinnerclass.Main.Outer
+(func $$getString_|jsinnerclass...|__java_lang_String_<once>_@jsinnerclass.Main.Outer
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsinnerclass...|@jsinnerclass.Main.Outer))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsinnerclass...|@jsinnerclass.Main.Outer)))
    (then
-    (global.set $$string_|jsinnerclass...|@jsinnerclass.Main.Outer (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsinnerclass.Main$Outer")))
+    (return (global.get $$string_|jsinnerclass...|@jsinnerclass.Main.Outer))
    )
   )
+  (global.set $$string_|jsinnerclass...|@jsinnerclass.Main.Outer (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsinnerclass.Main$Outer")))
   (return (global.get $$string_|jsinnerclass...|@jsinnerclass.Main.Outer))
  )
 )

@@ -485,27 +485,29 @@
 )
 
 ;;; Class<T> GrandParentInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@supermethodcall.GrandParentInterface
+(func $$getClassMetadata__java_lang_Class_<once>_@supermethodcall.GrandParentInterface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@supermethodcall.GrandParentInterface))
+  (if (i32.eqz (ref.is_null (global.get $$class@supermethodcall.GrandParentInterface)))
    (then
-    (global.set $$class@supermethodcall.GrandParentInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|supermethodc...|__java_lang_String (ref.func $$getString_|supermethodc...|__java_lang_String@supermethodcall.GrandParentInterface) )))
+    (return (global.get $$class@supermethodcall.GrandParentInterface))
    )
   )
+  (global.set $$class@supermethodcall.GrandParentInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|supermethodc...|__java_lang_String_<once>_@supermethodcall.GrandParentInterface )))
   (return (global.get $$class@supermethodcall.GrandParentInterface))
  )
 )
 
 ;;; String GrandParentInterface.$getString_|supermethodc...|()
-(func $$getString_|supermethodc...|__java_lang_String@supermethodcall.GrandParentInterface
+(func $$getString_|supermethodc...|__java_lang_String_<once>_@supermethodcall.GrandParentInterface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|supermethodc...|@supermethodcall.GrandParentInterface))
+  (if (i32.eqz (ref.is_null (global.get $$string_|supermethodc...|@supermethodcall.GrandParentInterface)))
    (then
-    (global.set $$string_|supermethodc...|@supermethodcall.GrandParentInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supermethodcall.GrandParentInterface")))
+    (return (global.get $$string_|supermethodc...|@supermethodcall.GrandParentInterface))
    )
   )
+  (global.set $$string_|supermethodc...|@supermethodcall.GrandParentInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supermethodcall.GrandParentInterface")))
   (return (global.get $$string_|supermethodc...|@supermethodcall.GrandParentInterface))
  )
 )
@@ -538,27 +540,29 @@
 )
 
 ;;; Class<T> ParentInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@supermethodcall.ParentInterface
+(func $$getClassMetadata__java_lang_Class_<once>_@supermethodcall.ParentInterface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@supermethodcall.ParentInterface))
+  (if (i32.eqz (ref.is_null (global.get $$class@supermethodcall.ParentInterface)))
    (then
-    (global.set $$class@supermethodcall.ParentInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|supermethodc...|__java_lang_String (ref.func $$getString_|supermethodc...|__java_lang_String@supermethodcall.ParentInterface) )))
+    (return (global.get $$class@supermethodcall.ParentInterface))
    )
   )
+  (global.set $$class@supermethodcall.ParentInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|supermethodc...|__java_lang_String_<once>_@supermethodcall.ParentInterface )))
   (return (global.get $$class@supermethodcall.ParentInterface))
  )
 )
 
 ;;; String ParentInterface.$getString_|supermethodc...|()
-(func $$getString_|supermethodc...|__java_lang_String@supermethodcall.ParentInterface
+(func $$getString_|supermethodc...|__java_lang_String_<once>_@supermethodcall.ParentInterface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|supermethodc...|@supermethodcall.ParentInterface))
+  (if (i32.eqz (ref.is_null (global.get $$string_|supermethodc...|@supermethodcall.ParentInterface)))
    (then
-    (global.set $$string_|supermethodc...|@supermethodcall.ParentInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supermethodcall.ParentInterface")))
+    (return (global.get $$string_|supermethodc...|@supermethodcall.ParentInterface))
    )
   )
+  (global.set $$string_|supermethodc...|@supermethodcall.ParentInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supermethodcall.ParentInterface")))
   (return (global.get $$string_|supermethodc...|@supermethodcall.ParentInterface))
  )
 )
@@ -591,27 +595,29 @@
 )
 
 ;;; Class<T> I1.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@supermethodcall.I1
+(func $$getClassMetadata__java_lang_Class_<once>_@supermethodcall.I1
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@supermethodcall.I1))
+  (if (i32.eqz (ref.is_null (global.get $$class@supermethodcall.I1)))
    (then
-    (global.set $$class@supermethodcall.I1 (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|supermethodc...|__java_lang_String (ref.func $$getString_|supermethodc...|__java_lang_String@supermethodcall.I1) )))
+    (return (global.get $$class@supermethodcall.I1))
    )
   )
+  (global.set $$class@supermethodcall.I1 (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|supermethodc...|__java_lang_String_<once>_@supermethodcall.I1 )))
   (return (global.get $$class@supermethodcall.I1))
  )
 )
 
 ;;; String I1.$getString_|supermethodc...|()
-(func $$getString_|supermethodc...|__java_lang_String@supermethodcall.I1
+(func $$getString_|supermethodc...|__java_lang_String_<once>_@supermethodcall.I1
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|supermethodc...|@supermethodcall.I1))
+  (if (i32.eqz (ref.is_null (global.get $$string_|supermethodc...|@supermethodcall.I1)))
    (then
-    (global.set $$string_|supermethodc...|@supermethodcall.I1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supermethodcall.I1")))
+    (return (global.get $$string_|supermethodc...|@supermethodcall.I1))
    )
   )
+  (global.set $$string_|supermethodc...|@supermethodcall.I1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supermethodcall.I1")))
   (return (global.get $$string_|supermethodc...|@supermethodcall.I1))
  )
 )
@@ -635,27 +641,29 @@
 )
 
 ;;; Class<T> I2.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@supermethodcall.I2
+(func $$getClassMetadata__java_lang_Class_<once>_@supermethodcall.I2
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@supermethodcall.I2))
+  (if (i32.eqz (ref.is_null (global.get $$class@supermethodcall.I2)))
    (then
-    (global.set $$class@supermethodcall.I2 (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|supermethodc...|__java_lang_String (ref.func $$getString_|supermethodc...|__java_lang_String@supermethodcall.I2) )))
+    (return (global.get $$class@supermethodcall.I2))
    )
   )
+  (global.set $$class@supermethodcall.I2 (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|supermethodc...|__java_lang_String_<once>_@supermethodcall.I2 )))
   (return (global.get $$class@supermethodcall.I2))
  )
 )
 
 ;;; String I2.$getString_|supermethodc...|()
-(func $$getString_|supermethodc...|__java_lang_String@supermethodcall.I2
+(func $$getString_|supermethodc...|__java_lang_String_<once>_@supermethodcall.I2
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|supermethodc...|@supermethodcall.I2))
+  (if (i32.eqz (ref.is_null (global.get $$string_|supermethodc...|@supermethodcall.I2)))
    (then
-    (global.set $$string_|supermethodc...|@supermethodcall.I2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supermethodcall.I2")))
+    (return (global.get $$string_|supermethodc...|@supermethodcall.I2))
    )
   )
+  (global.set $$string_|supermethodc...|@supermethodcall.I2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supermethodcall.I2")))
   (return (global.get $$string_|supermethodc...|@supermethodcall.I2))
  )
 )
@@ -681,27 +689,29 @@
 )
 
 ;;; Class<T> I3.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@supermethodcall.I3
+(func $$getClassMetadata__java_lang_Class_<once>_@supermethodcall.I3
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@supermethodcall.I3))
+  (if (i32.eqz (ref.is_null (global.get $$class@supermethodcall.I3)))
    (then
-    (global.set $$class@supermethodcall.I3 (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|supermethodc...|__java_lang_String (ref.func $$getString_|supermethodc...|__java_lang_String@supermethodcall.I3) )))
+    (return (global.get $$class@supermethodcall.I3))
    )
   )
+  (global.set $$class@supermethodcall.I3 (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|supermethodc...|__java_lang_String_<once>_@supermethodcall.I3 )))
   (return (global.get $$class@supermethodcall.I3))
  )
 )
 
 ;;; String I3.$getString_|supermethodc...|()
-(func $$getString_|supermethodc...|__java_lang_String@supermethodcall.I3
+(func $$getString_|supermethodc...|__java_lang_String_<once>_@supermethodcall.I3
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|supermethodc...|@supermethodcall.I3))
+  (if (i32.eqz (ref.is_null (global.get $$string_|supermethodc...|@supermethodcall.I3)))
    (then
-    (global.set $$string_|supermethodc...|@supermethodcall.I3 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supermethodcall.I3")))
+    (return (global.get $$string_|supermethodc...|@supermethodcall.I3))
    )
   )
+  (global.set $$string_|supermethodc...|@supermethodcall.I3 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supermethodcall.I3")))
   (return (global.get $$string_|supermethodc...|@supermethodcall.I3))
  )
 )
@@ -818,14 +828,15 @@
 )
 
 ;;; Class<T> GrandParent.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@supermethodcall.GrandParent
+(func $$getClassMetadata__java_lang_Class_<once>_@supermethodcall.GrandParent
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@supermethodcall.GrandParent))
+  (if (i32.eqz (ref.is_null (global.get $$class@supermethodcall.GrandParent)))
    (then
-    (global.set $$class@supermethodcall.GrandParent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|supermethodc...|__java_lang_String (ref.func $$getString_|supermethodc...|__java_lang_String@supermethodcall.GrandParent) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@supermethodcall.GrandParent))
    )
   )
+  (global.set $$class@supermethodcall.GrandParent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|supermethodc...|__java_lang_String_<once>_@supermethodcall.GrandParent )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@supermethodcall.GrandParent))
  )
 )
@@ -838,20 +849,21 @@
  (local $this (ref null $supermethodcall.GrandParent))
  (local.set $this (ref.cast (ref $supermethodcall.GrandParent) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@supermethodcall.GrandParent) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@supermethodcall.GrandParent ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@supermethodcall.GrandParent)
 
 ;;; String GrandParent.$getString_|supermethodc...|()
-(func $$getString_|supermethodc...|__java_lang_String@supermethodcall.GrandParent
+(func $$getString_|supermethodc...|__java_lang_String_<once>_@supermethodcall.GrandParent
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|supermethodc...|@supermethodcall.GrandParent))
+  (if (i32.eqz (ref.is_null (global.get $$string_|supermethodc...|@supermethodcall.GrandParent)))
    (then
-    (global.set $$string_|supermethodc...|@supermethodcall.GrandParent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supermethodcall.GrandParent")))
+    (return (global.get $$string_|supermethodc...|@supermethodcall.GrandParent))
    )
   )
+  (global.set $$string_|supermethodc...|@supermethodcall.GrandParent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supermethodcall.GrandParent")))
   (return (global.get $$string_|supermethodc...|@supermethodcall.GrandParent))
  )
 )
@@ -916,14 +928,15 @@
 )
 
 ;;; Class<T> Super.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@supermethodcall.Super
+(func $$getClassMetadata__java_lang_Class_<once>_@supermethodcall.Super
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@supermethodcall.Super))
+  (if (i32.eqz (ref.is_null (global.get $$class@supermethodcall.Super)))
    (then
-    (global.set $$class@supermethodcall.Super (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|supermethodc...|__java_lang_String (ref.func $$getString_|supermethodc...|__java_lang_String@supermethodcall.Super) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@supermethodcall.Super))
    )
   )
+  (global.set $$class@supermethodcall.Super (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|supermethodc...|__java_lang_String_<once>_@supermethodcall.Super )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@supermethodcall.Super))
  )
 )
@@ -936,20 +949,21 @@
  (local $this (ref null $supermethodcall.Super))
  (local.set $this (ref.cast (ref $supermethodcall.Super) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@supermethodcall.Super) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@supermethodcall.Super ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@supermethodcall.Super)
 
 ;;; String Super.$getString_|supermethodc...|()
-(func $$getString_|supermethodc...|__java_lang_String@supermethodcall.Super
+(func $$getString_|supermethodc...|__java_lang_String_<once>_@supermethodcall.Super
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|supermethodc...|@supermethodcall.Super))
+  (if (i32.eqz (ref.is_null (global.get $$string_|supermethodc...|@supermethodcall.Super)))
    (then
-    (global.set $$string_|supermethodc...|@supermethodcall.Super (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supermethodcall.Super")))
+    (return (global.get $$string_|supermethodc...|@supermethodcall.Super))
    )
   )
+  (global.set $$string_|supermethodc...|@supermethodcall.Super (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supermethodcall.Super")))
   (return (global.get $$string_|supermethodc...|@supermethodcall.Super))
  )
 )
@@ -1016,27 +1030,29 @@
 )
 
 ;;; Class<T> SuperToStringTest.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@supermethodcall.SuperToStringTest
+(func $$getClassMetadata__java_lang_Class_<once>_@supermethodcall.SuperToStringTest
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@supermethodcall.SuperToStringTest))
+  (if (i32.eqz (ref.is_null (global.get $$class@supermethodcall.SuperToStringTest)))
    (then
-    (global.set $$class@supermethodcall.SuperToStringTest (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|supermethodc...|__java_lang_String (ref.func $$getString_|supermethodc...|__java_lang_String@supermethodcall.SuperToStringTest) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@supermethodcall.SuperToStringTest))
    )
   )
+  (global.set $$class@supermethodcall.SuperToStringTest (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|supermethodc...|__java_lang_String_<once>_@supermethodcall.SuperToStringTest )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@supermethodcall.SuperToStringTest))
  )
 )
 
 ;;; String SuperToStringTest.$getString_|supermethodc...|()
-(func $$getString_|supermethodc...|__java_lang_String@supermethodcall.SuperToStringTest
+(func $$getString_|supermethodc...|__java_lang_String_<once>_@supermethodcall.SuperToStringTest
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|supermethodc...|@supermethodcall.SuperToStringTest))
+  (if (i32.eqz (ref.is_null (global.get $$string_|supermethodc...|@supermethodcall.SuperToStringTest)))
    (then
-    (global.set $$string_|supermethodc...|@supermethodcall.SuperToStringTest (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supermethodcall.SuperToStringTest")))
+    (return (global.get $$string_|supermethodc...|@supermethodcall.SuperToStringTest))
    )
   )
+  (global.set $$string_|supermethodc...|@supermethodcall.SuperToStringTest (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supermethodcall.SuperToStringTest")))
   (return (global.get $$string_|supermethodc...|@supermethodcall.SuperToStringTest))
  )
 )
@@ -1147,14 +1163,15 @@
 )
 
 ;;; Class<T> Parent.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@supermethodcall.Parent
+(func $$getClassMetadata__java_lang_Class_<once>_@supermethodcall.Parent
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@supermethodcall.Parent))
+  (if (i32.eqz (ref.is_null (global.get $$class@supermethodcall.Parent)))
    (then
-    (global.set $$class@supermethodcall.Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|supermethodc...|__java_lang_String (ref.func $$getString_|supermethodc...|__java_lang_String@supermethodcall.Parent) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@supermethodcall.GrandParent) )))
+    (return (global.get $$class@supermethodcall.Parent))
    )
   )
+  (global.set $$class@supermethodcall.Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|supermethodc...|__java_lang_String_<once>_@supermethodcall.Parent )(call $$getClassMetadata__java_lang_Class_<once>_@supermethodcall.GrandParent )))
   (return (global.get $$class@supermethodcall.Parent))
  )
 )
@@ -1167,20 +1184,21 @@
  (local $this (ref null $supermethodcall.Parent))
  (local.set $this (ref.cast (ref $supermethodcall.Parent) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@supermethodcall.Parent) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@supermethodcall.Parent ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@supermethodcall.Parent)
 
 ;;; String Parent.$getString_|supermethodc...|()
-(func $$getString_|supermethodc...|__java_lang_String@supermethodcall.Parent
+(func $$getString_|supermethodc...|__java_lang_String_<once>_@supermethodcall.Parent
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|supermethodc...|@supermethodcall.Parent))
+  (if (i32.eqz (ref.is_null (global.get $$string_|supermethodc...|@supermethodcall.Parent)))
    (then
-    (global.set $$string_|supermethodc...|@supermethodcall.Parent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supermethodcall.Parent")))
+    (return (global.get $$string_|supermethodc...|@supermethodcall.Parent))
    )
   )
+  (global.set $$string_|supermethodc...|@supermethodcall.Parent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supermethodcall.Parent")))
   (return (global.get $$string_|supermethodc...|@supermethodcall.Parent))
  )
 )
@@ -1249,14 +1267,15 @@
 )
 
 ;;; Class<T> Sub.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@supermethodcall.Sub
+(func $$getClassMetadata__java_lang_Class_<once>_@supermethodcall.Sub
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@supermethodcall.Sub))
+  (if (i32.eqz (ref.is_null (global.get $$class@supermethodcall.Sub)))
    (then
-    (global.set $$class@supermethodcall.Sub (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|supermethodc...|__java_lang_String (ref.func $$getString_|supermethodc...|__java_lang_String@supermethodcall.Sub) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@supermethodcall.Super) )))
+    (return (global.get $$class@supermethodcall.Sub))
    )
   )
+  (global.set $$class@supermethodcall.Sub (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|supermethodc...|__java_lang_String_<once>_@supermethodcall.Sub )(call $$getClassMetadata__java_lang_Class_<once>_@supermethodcall.Super )))
   (return (global.get $$class@supermethodcall.Sub))
  )
 )
@@ -1269,20 +1288,21 @@
  (local $this (ref null $supermethodcall.Sub))
  (local.set $this (ref.cast (ref $supermethodcall.Sub) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@supermethodcall.Sub) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@supermethodcall.Sub ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@supermethodcall.Sub)
 
 ;;; String Sub.$getString_|supermethodc...|()
-(func $$getString_|supermethodc...|__java_lang_String@supermethodcall.Sub
+(func $$getString_|supermethodc...|__java_lang_String_<once>_@supermethodcall.Sub
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|supermethodc...|@supermethodcall.Sub))
+  (if (i32.eqz (ref.is_null (global.get $$string_|supermethodc...|@supermethodcall.Sub)))
    (then
-    (global.set $$string_|supermethodc...|@supermethodcall.Sub (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supermethodcall.Sub")))
+    (return (global.get $$string_|supermethodc...|@supermethodcall.Sub))
    )
   )
+  (global.set $$string_|supermethodc...|@supermethodcall.Sub (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supermethodcall.Sub")))
   (return (global.get $$string_|supermethodc...|@supermethodcall.Sub))
  )
 )
@@ -1475,14 +1495,15 @@
 )
 
 ;;; Class<T> Child.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@supermethodcall.Child
+(func $$getClassMetadata__java_lang_Class_<once>_@supermethodcall.Child
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@supermethodcall.Child))
+  (if (i32.eqz (ref.is_null (global.get $$class@supermethodcall.Child)))
    (then
-    (global.set $$class@supermethodcall.Child (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|supermethodc...|__java_lang_String (ref.func $$getString_|supermethodc...|__java_lang_String@supermethodcall.Child) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@supermethodcall.Parent) )))
+    (return (global.get $$class@supermethodcall.Child))
    )
   )
+  (global.set $$class@supermethodcall.Child (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|supermethodc...|__java_lang_String_<once>_@supermethodcall.Child )(call $$getClassMetadata__java_lang_Class_<once>_@supermethodcall.Parent )))
   (return (global.get $$class@supermethodcall.Child))
  )
 )
@@ -1495,20 +1516,21 @@
  (local $this (ref null $supermethodcall.Child))
  (local.set $this (ref.cast (ref $supermethodcall.Child) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@supermethodcall.Child) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@supermethodcall.Child ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@supermethodcall.Child)
 
 ;;; String Child.$getString_|supermethodc...|()
-(func $$getString_|supermethodc...|__java_lang_String@supermethodcall.Child
+(func $$getString_|supermethodc...|__java_lang_String_<once>_@supermethodcall.Child
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|supermethodc...|@supermethodcall.Child))
+  (if (i32.eqz (ref.is_null (global.get $$string_|supermethodc...|@supermethodcall.Child)))
    (then
-    (global.set $$string_|supermethodc...|@supermethodcall.Child (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supermethodcall.Child")))
+    (return (global.get $$string_|supermethodc...|@supermethodcall.Child))
    )
   )
+  (global.set $$string_|supermethodc...|@supermethodcall.Child (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "supermethodcall.Child")))
   (return (global.get $$string_|supermethodc...|@supermethodcall.Child))
  )
 )

@@ -247,14 +247,15 @@
 )
 
 ;;; Class<T> $Overlay.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@importglobaljstypes.Date.NativeDate.$Overlay
+(func $$getClassMetadata__java_lang_Class_<once>_@importglobaljstypes.Date.NativeDate.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@importglobaljstypes.Date.NativeDate.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$class@importglobaljstypes.Date.NativeDate.$Overlay)))
    (then
-    (global.set $$class@importglobaljstypes.Date.NativeDate.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|importglobal...|__java_lang_String (ref.func $$getString_|importglobal...|__java_lang_String@importglobaljstypes.Date.NativeDate.$Overlay) )(ref.null $java.lang.Class)))
+    (return (global.get $$class@importglobaljstypes.Date.NativeDate.$Overlay))
    )
   )
+  (global.set $$class@importglobaljstypes.Date.NativeDate.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|importglobal...|__java_lang_String_<once>_@importglobaljstypes.Date.NativeDate.$Overlay )(ref.null $java.lang.Class)))
   (return (global.get $$class@importglobaljstypes.Date.NativeDate.$Overlay))
  )
 )
@@ -267,20 +268,21 @@
  (local $this (ref null $importglobaljstypes.Date.NativeDate.$Overlay))
  (local.set $this (ref.cast (ref $importglobaljstypes.Date.NativeDate.$Overlay) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@importglobaljstypes.Date.NativeDate.$Overlay) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@importglobaljstypes.Date.NativeDate.$Overlay ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@importglobaljstypes.Date.NativeDate.$Overlay)
 
 ;;; String $Overlay.$getString_|importglobal...|()
-(func $$getString_|importglobal...|__java_lang_String@importglobaljstypes.Date.NativeDate.$Overlay
+(func $$getString_|importglobal...|__java_lang_String_<once>_@importglobaljstypes.Date.NativeDate.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|importglobal...|@importglobaljstypes.Date.NativeDate.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$string_|importglobal...|@importglobaljstypes.Date.NativeDate.$Overlay)))
    (then
-    (global.set $$string_|importglobal...|@importglobaljstypes.Date.NativeDate.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "importglobaljstypes.Date$NativeDate$$Overlay")))
+    (return (global.get $$string_|importglobal...|@importglobaljstypes.Date.NativeDate.$Overlay))
    )
   )
+  (global.set $$string_|importglobal...|@importglobaljstypes.Date.NativeDate.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "importglobaljstypes.Date$NativeDate$$Overlay")))
   (return (global.get $$string_|importglobal...|@importglobaljstypes.Date.NativeDate.$Overlay))
  )
 )
@@ -308,27 +310,29 @@
 )
 
 ;;; Class<T> $Overlay.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@importglobaljstypes.Number.NativeFunction.$Overlay
+(func $$getClassMetadata__java_lang_Class_<once>_@importglobaljstypes.Number.NativeFunction.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@importglobaljstypes.Number.NativeFunction.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$class@importglobaljstypes.Number.NativeFunction.$Overlay)))
    (then
-    (global.set $$class@importglobaljstypes.Number.NativeFunction.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|importglobal...|__java_lang_String (ref.func $$getString_|importglobal...|__java_lang_String@importglobaljstypes.Number.NativeFunction.$Overlay) )))
+    (return (global.get $$class@importglobaljstypes.Number.NativeFunction.$Overlay))
    )
   )
+  (global.set $$class@importglobaljstypes.Number.NativeFunction.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|importglobal...|__java_lang_String_<once>_@importglobaljstypes.Number.NativeFunction.$Overlay )))
   (return (global.get $$class@importglobaljstypes.Number.NativeFunction.$Overlay))
  )
 )
 
 ;;; String $Overlay.$getString_|importglobal...|()
-(func $$getString_|importglobal...|__java_lang_String@importglobaljstypes.Number.NativeFunction.$Overlay
+(func $$getString_|importglobal...|__java_lang_String_<once>_@importglobaljstypes.Number.NativeFunction.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|importglobal...|@importglobaljstypes.Number.NativeFunction.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$string_|importglobal...|@importglobaljstypes.Number.NativeFunction.$Overlay)))
    (then
-    (global.set $$string_|importglobal...|@importglobaljstypes.Number.NativeFunction.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "importglobaljstypes.Number$NativeFunction$$Overlay")))
+    (return (global.get $$string_|importglobal...|@importglobaljstypes.Number.NativeFunction.$Overlay))
    )
   )
+  (global.set $$string_|importglobal...|@importglobaljstypes.Number.NativeFunction.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "importglobaljstypes.Number$NativeFunction$$Overlay")))
   (return (global.get $$string_|importglobal...|@importglobaljstypes.Number.NativeFunction.$Overlay))
  )
 )
@@ -352,27 +356,29 @@
 )
 
 ;;; Class<T> $Overlay.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@importglobaljstypes.Number.MyLiteralType.$Overlay
+(func $$getClassMetadata__java_lang_Class_<once>_@importglobaljstypes.Number.MyLiteralType.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@importglobaljstypes.Number.MyLiteralType.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$class@importglobaljstypes.Number.MyLiteralType.$Overlay)))
    (then
-    (global.set $$class@importglobaljstypes.Number.MyLiteralType.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|importglobal...|__java_lang_String (ref.func $$getString_|importglobal...|__java_lang_String@importglobaljstypes.Number.MyLiteralType.$Overlay) )))
+    (return (global.get $$class@importglobaljstypes.Number.MyLiteralType.$Overlay))
    )
   )
+  (global.set $$class@importglobaljstypes.Number.MyLiteralType.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|importglobal...|__java_lang_String_<once>_@importglobaljstypes.Number.MyLiteralType.$Overlay )))
   (return (global.get $$class@importglobaljstypes.Number.MyLiteralType.$Overlay))
  )
 )
 
 ;;; String $Overlay.$getString_|importglobal...|()
-(func $$getString_|importglobal...|__java_lang_String@importglobaljstypes.Number.MyLiteralType.$Overlay
+(func $$getString_|importglobal...|__java_lang_String_<once>_@importglobaljstypes.Number.MyLiteralType.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|importglobal...|@importglobaljstypes.Number.MyLiteralType.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$string_|importglobal...|@importglobaljstypes.Number.MyLiteralType.$Overlay)))
    (then
-    (global.set $$string_|importglobal...|@importglobaljstypes.Number.MyLiteralType.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "importglobaljstypes.Number$MyLiteralType$$Overlay")))
+    (return (global.get $$string_|importglobal...|@importglobaljstypes.Number.MyLiteralType.$Overlay))
    )
   )
+  (global.set $$string_|importglobal...|@importglobaljstypes.Number.MyLiteralType.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "importglobaljstypes.Number$MyLiteralType$$Overlay")))
   (return (global.get $$string_|importglobal...|@importglobaljstypes.Number.MyLiteralType.$Overlay))
  )
 )
@@ -396,14 +402,15 @@
 )
 
 ;;; Class<T> $Overlay.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@importglobaljstypes.RegExp.NativeRegExp.$Overlay
+(func $$getClassMetadata__java_lang_Class_<once>_@importglobaljstypes.RegExp.NativeRegExp.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@importglobaljstypes.RegExp.NativeRegExp.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$class@importglobaljstypes.RegExp.NativeRegExp.$Overlay)))
    (then
-    (global.set $$class@importglobaljstypes.RegExp.NativeRegExp.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|importglobal...|__java_lang_String (ref.func $$getString_|importglobal...|__java_lang_String@importglobaljstypes.RegExp.NativeRegExp.$Overlay) )(ref.null $java.lang.Class)))
+    (return (global.get $$class@importglobaljstypes.RegExp.NativeRegExp.$Overlay))
    )
   )
+  (global.set $$class@importglobaljstypes.RegExp.NativeRegExp.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|importglobal...|__java_lang_String_<once>_@importglobaljstypes.RegExp.NativeRegExp.$Overlay )(ref.null $java.lang.Class)))
   (return (global.get $$class@importglobaljstypes.RegExp.NativeRegExp.$Overlay))
  )
 )
@@ -416,20 +423,21 @@
  (local $this (ref null $importglobaljstypes.RegExp.NativeRegExp.$Overlay))
  (local.set $this (ref.cast (ref $importglobaljstypes.RegExp.NativeRegExp.$Overlay) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@importglobaljstypes.RegExp.NativeRegExp.$Overlay) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@importglobaljstypes.RegExp.NativeRegExp.$Overlay ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@importglobaljstypes.RegExp.NativeRegExp.$Overlay)
 
 ;;; String $Overlay.$getString_|importglobal...|()
-(func $$getString_|importglobal...|__java_lang_String@importglobaljstypes.RegExp.NativeRegExp.$Overlay
+(func $$getString_|importglobal...|__java_lang_String_<once>_@importglobaljstypes.RegExp.NativeRegExp.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|importglobal...|@importglobaljstypes.RegExp.NativeRegExp.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$string_|importglobal...|@importglobaljstypes.RegExp.NativeRegExp.$Overlay)))
    (then
-    (global.set $$string_|importglobal...|@importglobaljstypes.RegExp.NativeRegExp.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "importglobaljstypes.RegExp$NativeRegExp$$Overlay")))
+    (return (global.get $$string_|importglobal...|@importglobaljstypes.RegExp.NativeRegExp.$Overlay))
    )
   )
+  (global.set $$string_|importglobal...|@importglobaljstypes.RegExp.NativeRegExp.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "importglobaljstypes.RegExp$NativeRegExp$$Overlay")))
   (return (global.get $$string_|importglobal...|@importglobaljstypes.RegExp.NativeRegExp.$Overlay))
  )
 )
@@ -511,14 +519,15 @@
 )
 
 ;;; Class<T> Date.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@importglobaljstypes.Date
+(func $$getClassMetadata__java_lang_Class_<once>_@importglobaljstypes.Date
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@importglobaljstypes.Date))
+  (if (i32.eqz (ref.is_null (global.get $$class@importglobaljstypes.Date)))
    (then
-    (global.set $$class@importglobaljstypes.Date (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|importglobal...|__java_lang_String (ref.func $$getString_|importglobal...|__java_lang_String@importglobaljstypes.Date) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@importglobaljstypes.Date))
    )
   )
+  (global.set $$class@importglobaljstypes.Date (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|importglobal...|__java_lang_String_<once>_@importglobaljstypes.Date )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@importglobaljstypes.Date))
  )
 )
@@ -531,20 +540,21 @@
  (local $this (ref null $importglobaljstypes.Date))
  (local.set $this (ref.cast (ref $importglobaljstypes.Date) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@importglobaljstypes.Date) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@importglobaljstypes.Date ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@importglobaljstypes.Date)
 
 ;;; String Date.$getString_|importglobal...|()
-(func $$getString_|importglobal...|__java_lang_String@importglobaljstypes.Date
+(func $$getString_|importglobal...|__java_lang_String_<once>_@importglobaljstypes.Date
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|importglobal...|@importglobaljstypes.Date))
+  (if (i32.eqz (ref.is_null (global.get $$string_|importglobal...|@importglobaljstypes.Date)))
    (then
-    (global.set $$string_|importglobal...|@importglobaljstypes.Date (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "importglobaljstypes.Date")))
+    (return (global.get $$string_|importglobal...|@importglobaljstypes.Date))
    )
   )
+  (global.set $$string_|importglobal...|@importglobaljstypes.Date (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "importglobaljstypes.Date")))
   (return (global.get $$string_|importglobal...|@importglobaljstypes.Date))
  )
 )
@@ -650,14 +660,15 @@
 )
 
 ;;; Class<T> Number.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@importglobaljstypes.Number
+(func $$getClassMetadata__java_lang_Class_<once>_@importglobaljstypes.Number
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@importglobaljstypes.Number))
+  (if (i32.eqz (ref.is_null (global.get $$class@importglobaljstypes.Number)))
    (then
-    (global.set $$class@importglobaljstypes.Number (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|importglobal...|__java_lang_String (ref.func $$getString_|importglobal...|__java_lang_String@importglobaljstypes.Number) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@importglobaljstypes.Number))
    )
   )
+  (global.set $$class@importglobaljstypes.Number (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|importglobal...|__java_lang_String_<once>_@importglobaljstypes.Number )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@importglobaljstypes.Number))
  )
 )
@@ -670,20 +681,21 @@
  (local $this (ref null $importglobaljstypes.Number))
  (local.set $this (ref.cast (ref $importglobaljstypes.Number) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@importglobaljstypes.Number) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@importglobaljstypes.Number ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@importglobaljstypes.Number)
 
 ;;; String Number.$getString_|importglobal...|()
-(func $$getString_|importglobal...|__java_lang_String@importglobaljstypes.Number
+(func $$getString_|importglobal...|__java_lang_String_<once>_@importglobaljstypes.Number
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|importglobal...|@importglobaljstypes.Number))
+  (if (i32.eqz (ref.is_null (global.get $$string_|importglobal...|@importglobaljstypes.Number)))
    (then
-    (global.set $$string_|importglobal...|@importglobaljstypes.Number (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "importglobaljstypes.Number")))
+    (return (global.get $$string_|importglobal...|@importglobaljstypes.Number))
    )
   )
+  (global.set $$string_|importglobal...|@importglobaljstypes.Number (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "importglobaljstypes.Number")))
   (return (global.get $$string_|importglobal...|@importglobaljstypes.Number))
  )
 )
@@ -726,9 +738,9 @@
   ;;@ importglobaljstypes/RegExp.java:23:28
   (call $$clinit__void_<once>_@importglobaljstypes.RegExp )
   ;;@ importglobaljstypes/RegExp.java:24:4
-  (local.set $regExp (call $m_<init>__java_lang_String_NativeString@importglobaljstypes.RegExp.NativeRegExp (call $m_toJsString__java_lang_String__java_lang_String_NativeString@java.lang.String (call $function.no.side.effects.$getString_|teststring|__java_lang_String (ref.func $$getString_|teststring|__java_lang_String@importglobaljstypes.RegExp) ))))
+  (local.set $regExp (call $m_<init>__java_lang_String_NativeString@importglobaljstypes.RegExp.NativeRegExp (call $m_toJsString__java_lang_String__java_lang_String_NativeString@java.lang.String (call $$getString_|teststring|__java_lang_String_<once>_@importglobaljstypes.RegExp ))))
   ;;@ importglobaljstypes/RegExp.java:25:4
-  (drop (call $m_test__java_lang_String_NativeString__boolean@importglobaljstypes.RegExp.NativeRegExp (ref.as_non_null (local.get $regExp))(call $m_toJsString__java_lang_String__java_lang_String_NativeString@java.lang.String (call $function.no.side.effects.$getString_|restString|__java_lang_String (ref.func $$getString_|restString|__java_lang_String@importglobaljstypes.RegExp) ))))
+  (drop (call $m_test__java_lang_String_NativeString__boolean@importglobaljstypes.RegExp.NativeRegExp (ref.as_non_null (local.get $regExp))(call $m_toJsString__java_lang_String__java_lang_String_NativeString@java.lang.String (call $$getString_|restString|__java_lang_String_<once>_@importglobaljstypes.RegExp ))))
   ;;@ importglobaljstypes/RegExp.java:26:4
   (local.set $str (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (call $m_toString__java_lang_String_NativeString@importglobaljstypes.RegExp.NativeRegExp (ref.as_non_null (local.get $regExp)))))
  )
@@ -753,14 +765,15 @@
 )
 
 ;;; Class<T> RegExp.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@importglobaljstypes.RegExp
+(func $$getClassMetadata__java_lang_Class_<once>_@importglobaljstypes.RegExp
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@importglobaljstypes.RegExp))
+  (if (i32.eqz (ref.is_null (global.get $$class@importglobaljstypes.RegExp)))
    (then
-    (global.set $$class@importglobaljstypes.RegExp (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|importglobal...|__java_lang_String (ref.func $$getString_|importglobal...|__java_lang_String@importglobaljstypes.RegExp) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@importglobaljstypes.RegExp))
    )
   )
+  (global.set $$class@importglobaljstypes.RegExp (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|importglobal...|__java_lang_String_<once>_@importglobaljstypes.RegExp )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@importglobaljstypes.RegExp))
  )
 )
@@ -773,46 +786,49 @@
  (local $this (ref null $importglobaljstypes.RegExp))
  (local.set $this (ref.cast (ref $importglobaljstypes.RegExp) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@importglobaljstypes.RegExp) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@importglobaljstypes.RegExp ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@importglobaljstypes.RegExp)
 
 ;;; String RegExp.$getString_|teststring|()
-(func $$getString_|teststring|__java_lang_String@importglobaljstypes.RegExp
+(func $$getString_|teststring|__java_lang_String_<once>_@importglobaljstypes.RegExp
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|teststring|@importglobaljstypes.RegExp))
+  (if (i32.eqz (ref.is_null (global.get $$string_|teststring|@importglobaljstypes.RegExp)))
    (then
-    (global.set $$string_|teststring|@importglobaljstypes.RegExp (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "teststring")))
+    (return (global.get $$string_|teststring|@importglobaljstypes.RegExp))
    )
   )
+  (global.set $$string_|teststring|@importglobaljstypes.RegExp (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "teststring")))
   (return (global.get $$string_|teststring|@importglobaljstypes.RegExp))
  )
 )
 
 ;;; String RegExp.$getString_|restString|()
-(func $$getString_|restString|__java_lang_String@importglobaljstypes.RegExp
+(func $$getString_|restString|__java_lang_String_<once>_@importglobaljstypes.RegExp
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|restString|@importglobaljstypes.RegExp))
+  (if (i32.eqz (ref.is_null (global.get $$string_|restString|@importglobaljstypes.RegExp)))
    (then
-    (global.set $$string_|restString|@importglobaljstypes.RegExp (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "restString")))
+    (return (global.get $$string_|restString|@importglobaljstypes.RegExp))
    )
   )
+  (global.set $$string_|restString|@importglobaljstypes.RegExp (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "restString")))
   (return (global.get $$string_|restString|@importglobaljstypes.RegExp))
  )
 )
 
 ;;; String RegExp.$getString_|importglobal...|()
-(func $$getString_|importglobal...|__java_lang_String@importglobaljstypes.RegExp
+(func $$getString_|importglobal...|__java_lang_String_<once>_@importglobaljstypes.RegExp
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|importglobal...|@importglobaljstypes.RegExp))
+  (if (i32.eqz (ref.is_null (global.get $$string_|importglobal...|@importglobaljstypes.RegExp)))
    (then
-    (global.set $$string_|importglobal...|@importglobaljstypes.RegExp (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "importglobaljstypes.RegExp")))
+    (return (global.get $$string_|importglobal...|@importglobaljstypes.RegExp))
    )
   )
+  (global.set $$string_|importglobal...|@importglobaljstypes.RegExp (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "importglobaljstypes.RegExp")))
   (return (global.get $$string_|importglobal...|@importglobaljstypes.RegExp))
  )
 )

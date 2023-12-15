@@ -123,14 +123,15 @@
 )
 
 ;;; Class<T> SimpleGenericType.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@simplegenerictype.SimpleGenericType
+(func $$getClassMetadata__java_lang_Class_<once>_@simplegenerictype.SimpleGenericType
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@simplegenerictype.SimpleGenericType))
+  (if (i32.eqz (ref.is_null (global.get $$class@simplegenerictype.SimpleGenericType)))
    (then
-    (global.set $$class@simplegenerictype.SimpleGenericType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplegeneri...|__java_lang_String (ref.func $$getString_|simplegeneri...|__java_lang_String@simplegenerictype.SimpleGenericType) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@simplegenerictype.SimpleGenericType))
    )
   )
+  (global.set $$class@simplegenerictype.SimpleGenericType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|simplegeneri...|__java_lang_String_<once>_@simplegenerictype.SimpleGenericType )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@simplegenerictype.SimpleGenericType))
  )
 )
@@ -143,20 +144,21 @@
  (local $this (ref null $simplegenerictype.SimpleGenericType))
  (local.set $this (ref.cast (ref $simplegenerictype.SimpleGenericType) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simplegenerictype.SimpleGenericType) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@simplegenerictype.SimpleGenericType ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@simplegenerictype.SimpleGenericType)
 
 ;;; String SimpleGenericType.$getString_|simplegeneri...|()
-(func $$getString_|simplegeneri...|__java_lang_String@simplegenerictype.SimpleGenericType
+(func $$getString_|simplegeneri...|__java_lang_String_<once>_@simplegenerictype.SimpleGenericType
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|simplegeneri...|@simplegenerictype.SimpleGenericType))
+  (if (i32.eqz (ref.is_null (global.get $$string_|simplegeneri...|@simplegenerictype.SimpleGenericType)))
    (then
-    (global.set $$string_|simplegeneri...|@simplegenerictype.SimpleGenericType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "simplegenerictype.SimpleGenericType")))
+    (return (global.get $$string_|simplegeneri...|@simplegenerictype.SimpleGenericType))
    )
   )
+  (global.set $$string_|simplegeneri...|@simplegenerictype.SimpleGenericType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "simplegenerictype.SimpleGenericType")))
   (return (global.get $$string_|simplegeneri...|@simplegenerictype.SimpleGenericType))
  )
 )

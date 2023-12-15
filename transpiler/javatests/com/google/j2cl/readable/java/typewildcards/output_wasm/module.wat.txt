@@ -703,27 +703,29 @@
 )
 
 ;;; Class<T> Function.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@typewildcards.Function
+(func $$getClassMetadata__java_lang_Class_<once>_@typewildcards.Function
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@typewildcards.Function))
+  (if (i32.eqz (ref.is_null (global.get $$class@typewildcards.Function)))
    (then
-    (global.set $$class@typewildcards.Function (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.Function) )))
+    (return (global.get $$class@typewildcards.Function))
    )
   )
+  (global.set $$class@typewildcards.Function (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.Function )))
   (return (global.get $$class@typewildcards.Function))
  )
 )
 
 ;;; String Function.$getString_|typewildcard...|()
-(func $$getString_|typewildcard...|__java_lang_String@typewildcards.Function
+(func $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.Function
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.Function))
+  (if (i32.eqz (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.Function)))
    (then
-    (global.set $$string_|typewildcard...|@typewildcards.Function (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.Function")))
+    (return (global.get $$string_|typewildcard...|@typewildcards.Function))
    )
   )
+  (global.set $$string_|typewildcard...|@typewildcards.Function (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.Function")))
   (return (global.get $$string_|typewildcard...|@typewildcards.Function))
  )
 )
@@ -747,27 +749,29 @@
 )
 
 ;;; Class<T> List.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@typewildcards.List
+(func $$getClassMetadata__java_lang_Class_<once>_@typewildcards.List
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@typewildcards.List))
+  (if (i32.eqz (ref.is_null (global.get $$class@typewildcards.List)))
    (then
-    (global.set $$class@typewildcards.List (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.List) )))
+    (return (global.get $$class@typewildcards.List))
    )
   )
+  (global.set $$class@typewildcards.List (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.List )))
   (return (global.get $$class@typewildcards.List))
  )
 )
 
 ;;; String List.$getString_|typewildcard...|()
-(func $$getString_|typewildcard...|__java_lang_String@typewildcards.List
+(func $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.List
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.List))
+  (if (i32.eqz (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.List)))
    (then
-    (global.set $$string_|typewildcard...|@typewildcards.List (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.List")))
+    (return (global.get $$string_|typewildcard...|@typewildcards.List))
    )
   )
+  (global.set $$string_|typewildcard...|@typewildcards.List (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.List")))
   (return (global.get $$string_|typewildcard...|@typewildcards.List))
  )
 )
@@ -791,27 +795,29 @@
 )
 
 ;;; Class<T> DeepRecursiveType.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@typewildcards.DeepRecursiveType
+(func $$getClassMetadata__java_lang_Class_<once>_@typewildcards.DeepRecursiveType
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@typewildcards.DeepRecursiveType))
+  (if (i32.eqz (ref.is_null (global.get $$class@typewildcards.DeepRecursiveType)))
    (then
-    (global.set $$class@typewildcards.DeepRecursiveType (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.DeepRecursiveType) )))
+    (return (global.get $$class@typewildcards.DeepRecursiveType))
    )
   )
+  (global.set $$class@typewildcards.DeepRecursiveType (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.DeepRecursiveType )))
   (return (global.get $$class@typewildcards.DeepRecursiveType))
  )
 )
 
 ;;; String DeepRecursiveType.$getString_|typewildcard...|()
-(func $$getString_|typewildcard...|__java_lang_String@typewildcards.DeepRecursiveType
+(func $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.DeepRecursiveType
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.DeepRecursiveType))
+  (if (i32.eqz (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.DeepRecursiveType)))
    (then
-    (global.set $$string_|typewildcard...|@typewildcards.DeepRecursiveType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.DeepRecursiveType")))
+    (return (global.get $$string_|typewildcard...|@typewildcards.DeepRecursiveType))
    )
   )
+  (global.set $$string_|typewildcard...|@typewildcards.DeepRecursiveType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.DeepRecursiveType")))
   (return (global.get $$string_|typewildcard...|@typewildcards.DeepRecursiveType))
  )
 )
@@ -835,27 +841,29 @@
 )
 
 ;;; Class<T> X.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.X
+(func $$getClassMetadata__java_lang_Class_<once>_@typewildcards.TypeWildCards.X
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@typewildcards.TypeWildCards.X))
+  (if (i32.eqz (ref.is_null (global.get $$class@typewildcards.TypeWildCards.X)))
    (then
-    (global.set $$class@typewildcards.TypeWildCards.X (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.X) )))
+    (return (global.get $$class@typewildcards.TypeWildCards.X))
    )
   )
+  (global.set $$class@typewildcards.TypeWildCards.X (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.TypeWildCards.X )))
   (return (global.get $$class@typewildcards.TypeWildCards.X))
  )
 )
 
 ;;; String X.$getString_|typewildcard...|()
-(func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.X
+(func $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.TypeWildCards.X
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.X))
+  (if (i32.eqz (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.X)))
    (then
-    (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.X (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$X")))
+    (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.X))
    )
   )
+  (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.X (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$X")))
   (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.X))
  )
 )
@@ -879,27 +887,29 @@
 )
 
 ;;; Class<T> Y.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.Y
+(func $$getClassMetadata__java_lang_Class_<once>_@typewildcards.TypeWildCards.Y
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@typewildcards.TypeWildCards.Y))
+  (if (i32.eqz (ref.is_null (global.get $$class@typewildcards.TypeWildCards.Y)))
    (then
-    (global.set $$class@typewildcards.TypeWildCards.Y (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.Y) )))
+    (return (global.get $$class@typewildcards.TypeWildCards.Y))
    )
   )
+  (global.set $$class@typewildcards.TypeWildCards.Y (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.TypeWildCards.Y )))
   (return (global.get $$class@typewildcards.TypeWildCards.Y))
  )
 )
 
 ;;; String Y.$getString_|typewildcard...|()
-(func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.Y
+(func $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.TypeWildCards.Y
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.Y))
+  (if (i32.eqz (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.Y)))
    (then
-    (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.Y (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$Y")))
+    (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.Y))
    )
   )
+  (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.Y (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$Y")))
   (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.Y))
  )
 )
@@ -923,27 +933,29 @@
 )
 
 ;;; Class<T> IntegerSupplier.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.IntegerSupplier
+(func $$getClassMetadata__java_lang_Class_<once>_@typewildcards.TypeWildCards.IntegerSupplier
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@typewildcards.TypeWildCards.IntegerSupplier))
+  (if (i32.eqz (ref.is_null (global.get $$class@typewildcards.TypeWildCards.IntegerSupplier)))
    (then
-    (global.set $$class@typewildcards.TypeWildCards.IntegerSupplier (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.IntegerSupplier) )))
+    (return (global.get $$class@typewildcards.TypeWildCards.IntegerSupplier))
    )
   )
+  (global.set $$class@typewildcards.TypeWildCards.IntegerSupplier (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.TypeWildCards.IntegerSupplier )))
   (return (global.get $$class@typewildcards.TypeWildCards.IntegerSupplier))
  )
 )
 
 ;;; String IntegerSupplier.$getString_|typewildcard...|()
-(func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.IntegerSupplier
+(func $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.TypeWildCards.IntegerSupplier
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.IntegerSupplier))
+  (if (i32.eqz (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.IntegerSupplier)))
    (then
-    (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.IntegerSupplier (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$IntegerSupplier")))
+    (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.IntegerSupplier))
    )
   )
+  (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.IntegerSupplier (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$IntegerSupplier")))
   (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.IntegerSupplier))
  )
 )
@@ -967,27 +979,29 @@
 )
 
 ;;; Class<T> HasKey.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.HasKey
+(func $$getClassMetadata__java_lang_Class_<once>_@typewildcards.TypeWildCards.HasKey
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@typewildcards.TypeWildCards.HasKey))
+  (if (i32.eqz (ref.is_null (global.get $$class@typewildcards.TypeWildCards.HasKey)))
    (then
-    (global.set $$class@typewildcards.TypeWildCards.HasKey (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.HasKey) )))
+    (return (global.get $$class@typewildcards.TypeWildCards.HasKey))
    )
   )
+  (global.set $$class@typewildcards.TypeWildCards.HasKey (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.TypeWildCards.HasKey )))
   (return (global.get $$class@typewildcards.TypeWildCards.HasKey))
  )
 )
 
 ;;; String HasKey.$getString_|typewildcard...|()
-(func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.HasKey
+(func $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.TypeWildCards.HasKey
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.HasKey))
+  (if (i32.eqz (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.HasKey)))
    (then
-    (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.HasKey (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$HasKey")))
+    (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.HasKey))
    )
   )
+  (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.HasKey (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$HasKey")))
   (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.HasKey))
  )
 )
@@ -1011,27 +1025,29 @@
 )
 
 ;;; Class<T> RecursiveInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.RecursiveInterface
+(func $$getClassMetadata__java_lang_Class_<once>_@typewildcards.TypeWildCards.RecursiveInterface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@typewildcards.TypeWildCards.RecursiveInterface))
+  (if (i32.eqz (ref.is_null (global.get $$class@typewildcards.TypeWildCards.RecursiveInterface)))
    (then
-    (global.set $$class@typewildcards.TypeWildCards.RecursiveInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.RecursiveInterface) )))
+    (return (global.get $$class@typewildcards.TypeWildCards.RecursiveInterface))
    )
   )
+  (global.set $$class@typewildcards.TypeWildCards.RecursiveInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.TypeWildCards.RecursiveInterface )))
   (return (global.get $$class@typewildcards.TypeWildCards.RecursiveInterface))
  )
 )
 
 ;;; String RecursiveInterface.$getString_|typewildcard...|()
-(func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.RecursiveInterface
+(func $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.TypeWildCards.RecursiveInterface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.RecursiveInterface))
+  (if (i32.eqz (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.RecursiveInterface)))
    (then
-    (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.RecursiveInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$RecursiveInterface")))
+    (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.RecursiveInterface))
    )
   )
+  (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.RecursiveInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$RecursiveInterface")))
   (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.RecursiveInterface))
  )
 )
@@ -1099,14 +1115,15 @@
 )
 
 ;;; Class<T> GenericType.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@typewildcards.GenericType
+(func $$getClassMetadata__java_lang_Class_<once>_@typewildcards.GenericType
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@typewildcards.GenericType))
+  (if (i32.eqz (ref.is_null (global.get $$class@typewildcards.GenericType)))
    (then
-    (global.set $$class@typewildcards.GenericType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.GenericType) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@typewildcards.GenericType))
    )
   )
+  (global.set $$class@typewildcards.GenericType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.GenericType )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@typewildcards.GenericType))
  )
 )
@@ -1119,20 +1136,21 @@
  (local $this (ref null $typewildcards.GenericType))
  (local.set $this (ref.cast (ref $typewildcards.GenericType) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typewildcards.GenericType) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@typewildcards.GenericType ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@typewildcards.GenericType)
 
 ;;; String GenericType.$getString_|typewildcard...|()
-(func $$getString_|typewildcard...|__java_lang_String@typewildcards.GenericType
+(func $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.GenericType
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.GenericType))
+  (if (i32.eqz (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.GenericType)))
    (then
-    (global.set $$string_|typewildcard...|@typewildcards.GenericType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.GenericType")))
+    (return (global.get $$string_|typewildcard...|@typewildcards.GenericType))
    )
   )
+  (global.set $$string_|typewildcard...|@typewildcards.GenericType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.GenericType")))
   (return (global.get $$string_|typewildcard...|@typewildcards.GenericType))
  )
 )
@@ -1185,14 +1203,15 @@
 )
 
 ;;; Class<T> Bar.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@typewildcards.Bar
+(func $$getClassMetadata__java_lang_Class_<once>_@typewildcards.Bar
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@typewildcards.Bar))
+  (if (i32.eqz (ref.is_null (global.get $$class@typewildcards.Bar)))
    (then
-    (global.set $$class@typewildcards.Bar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.Bar) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@typewildcards.Bar))
    )
   )
+  (global.set $$class@typewildcards.Bar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.Bar )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@typewildcards.Bar))
  )
 )
@@ -1205,20 +1224,21 @@
  (local $this (ref null $typewildcards.Bar))
  (local.set $this (ref.cast (ref $typewildcards.Bar) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typewildcards.Bar) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@typewildcards.Bar ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@typewildcards.Bar)
 
 ;;; String Bar.$getString_|typewildcard...|()
-(func $$getString_|typewildcard...|__java_lang_String@typewildcards.Bar
+(func $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.Bar
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.Bar))
+  (if (i32.eqz (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.Bar)))
    (then
-    (global.set $$string_|typewildcard...|@typewildcards.Bar (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.Bar")))
+    (return (global.get $$string_|typewildcard...|@typewildcards.Bar))
    )
   )
+  (global.set $$string_|typewildcard...|@typewildcards.Bar (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.Bar")))
   (return (global.get $$string_|typewildcard...|@typewildcards.Bar))
  )
 )
@@ -1273,14 +1293,15 @@
 )
 
 ;;; Class<T> RecursiveType.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@typewildcards.RecursiveType
+(func $$getClassMetadata__java_lang_Class_<once>_@typewildcards.RecursiveType
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@typewildcards.RecursiveType))
+  (if (i32.eqz (ref.is_null (global.get $$class@typewildcards.RecursiveType)))
    (then
-    (global.set $$class@typewildcards.RecursiveType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.RecursiveType) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@typewildcards.RecursiveType))
    )
   )
+  (global.set $$class@typewildcards.RecursiveType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.RecursiveType )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@typewildcards.RecursiveType))
  )
 )
@@ -1293,20 +1314,21 @@
  (local $this (ref null $typewildcards.RecursiveType))
  (local.set $this (ref.cast (ref $typewildcards.RecursiveType) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typewildcards.RecursiveType) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@typewildcards.RecursiveType ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@typewildcards.RecursiveType)
 
 ;;; String RecursiveType.$getString_|typewildcard...|()
-(func $$getString_|typewildcard...|__java_lang_String@typewildcards.RecursiveType
+(func $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.RecursiveType
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.RecursiveType))
+  (if (i32.eqz (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.RecursiveType)))
    (then
-    (global.set $$string_|typewildcard...|@typewildcards.RecursiveType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.RecursiveType")))
+    (return (global.get $$string_|typewildcard...|@typewildcards.RecursiveType))
    )
   )
+  (global.set $$string_|typewildcard...|@typewildcards.RecursiveType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.RecursiveType")))
   (return (global.get $$string_|typewildcard...|@typewildcards.RecursiveType))
  )
 )
@@ -1622,14 +1644,15 @@
 )
 
 ;;; Class<T> TypeWildCards.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards
+(func $$getClassMetadata__java_lang_Class_<once>_@typewildcards.TypeWildCards
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@typewildcards.TypeWildCards))
+  (if (i32.eqz (ref.is_null (global.get $$class@typewildcards.TypeWildCards)))
    (then
-    (global.set $$class@typewildcards.TypeWildCards (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@typewildcards.TypeWildCards))
    )
   )
+  (global.set $$class@typewildcards.TypeWildCards (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.TypeWildCards )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@typewildcards.TypeWildCards))
  )
 )
@@ -1642,20 +1665,21 @@
  (local $this (ref null $typewildcards.TypeWildCards))
  (local.set $this (ref.cast (ref $typewildcards.TypeWildCards) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@typewildcards.TypeWildCards ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@typewildcards.TypeWildCards)
 
 ;;; String TypeWildCards.$getString_|typewildcard...|()
-(func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards
+(func $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.TypeWildCards
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards))
+  (if (i32.eqz (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards)))
    (then
-    (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards")))
+    (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards))
    )
   )
+  (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards")))
   (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards))
  )
 )
@@ -1738,14 +1762,15 @@
 )
 
 ;;; Class<T> <anonymous> implements Function<I, O>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.$LambdaImplementor$1
+(func $$getClassMetadata__java_lang_Class_<once>_@typewildcards.TypeWildCards.$LambdaImplementor$1
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@typewildcards.TypeWildCards.$LambdaImplementor$1))
+  (if (i32.eqz (ref.is_null (global.get $$class@typewildcards.TypeWildCards.$LambdaImplementor$1)))
    (then
-    (global.set $$class@typewildcards.TypeWildCards.$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.$LambdaImplementor$1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@typewildcards.TypeWildCards.$LambdaImplementor$1))
    )
   )
+  (global.set $$class@typewildcards.TypeWildCards.$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.TypeWildCards.$LambdaImplementor$1 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@typewildcards.TypeWildCards.$LambdaImplementor$1))
  )
 )
@@ -1758,20 +1783,21 @@
  (local $this (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
  (local.set $this (ref.cast (ref $typewildcards.TypeWildCards.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.$LambdaImplementor$1) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@typewildcards.TypeWildCards.$LambdaImplementor$1 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@typewildcards.TypeWildCards.$LambdaImplementor$1)
 
 ;;; String <anonymous> implements Function<I, O>.$getString_|typewildcard...|()
-(func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.$LambdaImplementor$1
+(func $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.TypeWildCards.$LambdaImplementor$1
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.$LambdaImplementor$1))
+  (if (i32.eqz (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.$LambdaImplementor$1)))
    (then
-    (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.$LambdaImplementor$1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$$LambdaImplementor$1")))
+    (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.$LambdaImplementor$1))
    )
   )
+  (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.$LambdaImplementor$1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$$LambdaImplementor$1")))
   (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.$LambdaImplementor$1))
  )
 )
@@ -1834,14 +1860,15 @@
 )
 
 ;;; Class<T> A.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.A
+(func $$getClassMetadata__java_lang_Class_<once>_@typewildcards.TypeWildCards.A
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@typewildcards.TypeWildCards.A))
+  (if (i32.eqz (ref.is_null (global.get $$class@typewildcards.TypeWildCards.A)))
    (then
-    (global.set $$class@typewildcards.TypeWildCards.A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.A) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@typewildcards.TypeWildCards.A))
    )
   )
+  (global.set $$class@typewildcards.TypeWildCards.A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.TypeWildCards.A )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@typewildcards.TypeWildCards.A))
  )
 )
@@ -1854,20 +1881,21 @@
  (local $this (ref null $typewildcards.TypeWildCards.A))
  (local.set $this (ref.cast (ref $typewildcards.TypeWildCards.A) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.A) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@typewildcards.TypeWildCards.A ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@typewildcards.TypeWildCards.A)
 
 ;;; String A.$getString_|typewildcard...|()
-(func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.A
+(func $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.TypeWildCards.A
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.A))
+  (if (i32.eqz (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.A)))
    (then
-    (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.A (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$A")))
+    (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.A))
    )
   )
+  (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.A (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$A")))
   (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.A))
  )
 )
@@ -1906,27 +1934,29 @@
 )
 
 ;;; Class<T> Element.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.Element
+(func $$getClassMetadata__java_lang_Class_<once>_@typewildcards.TypeWildCards.Element
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@typewildcards.TypeWildCards.Element))
+  (if (i32.eqz (ref.is_null (global.get $$class@typewildcards.TypeWildCards.Element)))
    (then
-    (global.set $$class@typewildcards.TypeWildCards.Element (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.Element) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@typewildcards.TypeWildCards.Element))
    )
   )
+  (global.set $$class@typewildcards.TypeWildCards.Element (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.TypeWildCards.Element )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@typewildcards.TypeWildCards.Element))
  )
 )
 
 ;;; String Element.$getString_|typewildcard...|()
-(func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.Element
+(func $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.TypeWildCards.Element
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.Element))
+  (if (i32.eqz (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.Element)))
    (then
-    (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.Element (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$Element")))
+    (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.Element))
    )
   )
+  (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.Element (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$Element")))
   (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.Element))
  )
 )
@@ -1965,27 +1995,29 @@
 )
 
 ;;; Class<T> OtherElement.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.OtherElement
+(func $$getClassMetadata__java_lang_Class_<once>_@typewildcards.TypeWildCards.OtherElement
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@typewildcards.TypeWildCards.OtherElement))
+  (if (i32.eqz (ref.is_null (global.get $$class@typewildcards.TypeWildCards.OtherElement)))
    (then
-    (global.set $$class@typewildcards.TypeWildCards.OtherElement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.OtherElement) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@typewildcards.TypeWildCards.OtherElement))
    )
   )
+  (global.set $$class@typewildcards.TypeWildCards.OtherElement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.TypeWildCards.OtherElement )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@typewildcards.TypeWildCards.OtherElement))
  )
 )
 
 ;;; String OtherElement.$getString_|typewildcard...|()
-(func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.OtherElement
+(func $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.TypeWildCards.OtherElement
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.OtherElement))
+  (if (i32.eqz (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.OtherElement)))
    (then
-    (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.OtherElement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$OtherElement")))
+    (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.OtherElement))
    )
   )
+  (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.OtherElement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$OtherElement")))
   (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.OtherElement))
  )
 )
@@ -2038,14 +2070,15 @@
 )
 
 ;;; Class<T> MultipleGenerics.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.MultipleGenerics
+(func $$getClassMetadata__java_lang_Class_<once>_@typewildcards.TypeWildCards.MultipleGenerics
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@typewildcards.TypeWildCards.MultipleGenerics))
+  (if (i32.eqz (ref.is_null (global.get $$class@typewildcards.TypeWildCards.MultipleGenerics)))
    (then
-    (global.set $$class@typewildcards.TypeWildCards.MultipleGenerics (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.MultipleGenerics) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@typewildcards.TypeWildCards.MultipleGenerics))
    )
   )
+  (global.set $$class@typewildcards.TypeWildCards.MultipleGenerics (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.TypeWildCards.MultipleGenerics )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@typewildcards.TypeWildCards.MultipleGenerics))
  )
 )
@@ -2058,20 +2091,21 @@
  (local $this (ref null $typewildcards.TypeWildCards.MultipleGenerics))
  (local.set $this (ref.cast (ref $typewildcards.TypeWildCards.MultipleGenerics) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.MultipleGenerics) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@typewildcards.TypeWildCards.MultipleGenerics ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@typewildcards.TypeWildCards.MultipleGenerics)
 
 ;;; String MultipleGenerics.$getString_|typewildcard...|()
-(func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.MultipleGenerics
+(func $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.TypeWildCards.MultipleGenerics
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.MultipleGenerics))
+  (if (i32.eqz (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.MultipleGenerics)))
    (then
-    (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.MultipleGenerics (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$MultipleGenerics")))
+    (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.MultipleGenerics))
    )
   )
+  (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.MultipleGenerics (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$MultipleGenerics")))
   (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.MultipleGenerics))
  )
 )
@@ -2126,14 +2160,15 @@
 )
 
 ;;; Class<T> RecursiveSubtype.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@typewildcards.RecursiveSubtype
+(func $$getClassMetadata__java_lang_Class_<once>_@typewildcards.RecursiveSubtype
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@typewildcards.RecursiveSubtype))
+  (if (i32.eqz (ref.is_null (global.get $$class@typewildcards.RecursiveSubtype)))
    (then
-    (global.set $$class@typewildcards.RecursiveSubtype (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.RecursiveSubtype) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typewildcards.RecursiveType) )))
+    (return (global.get $$class@typewildcards.RecursiveSubtype))
    )
   )
+  (global.set $$class@typewildcards.RecursiveSubtype (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.RecursiveSubtype )(call $$getClassMetadata__java_lang_Class_<once>_@typewildcards.RecursiveType )))
   (return (global.get $$class@typewildcards.RecursiveSubtype))
  )
 )
@@ -2146,20 +2181,21 @@
  (local $this (ref null $typewildcards.RecursiveSubtype))
  (local.set $this (ref.cast (ref $typewildcards.RecursiveSubtype) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typewildcards.RecursiveSubtype) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@typewildcards.RecursiveSubtype ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@typewildcards.RecursiveSubtype)
 
 ;;; String RecursiveSubtype.$getString_|typewildcard...|()
-(func $$getString_|typewildcard...|__java_lang_String@typewildcards.RecursiveSubtype
+(func $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.RecursiveSubtype
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.RecursiveSubtype))
+  (if (i32.eqz (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.RecursiveSubtype)))
    (then
-    (global.set $$string_|typewildcard...|@typewildcards.RecursiveSubtype (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.RecursiveSubtype")))
+    (return (global.get $$string_|typewildcard...|@typewildcards.RecursiveSubtype))
    )
   )
+  (global.set $$string_|typewildcard...|@typewildcards.RecursiveSubtype (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.RecursiveSubtype")))
   (return (global.get $$string_|typewildcard...|@typewildcards.RecursiveSubtype))
  )
 )
@@ -2198,27 +2234,29 @@
 )
 
 ;;; Class<T> SubOtherElement.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.SubOtherElement
+(func $$getClassMetadata__java_lang_Class_<once>_@typewildcards.TypeWildCards.SubOtherElement
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@typewildcards.TypeWildCards.SubOtherElement))
+  (if (i32.eqz (ref.is_null (global.get $$class@typewildcards.TypeWildCards.SubOtherElement)))
    (then
-    (global.set $$class@typewildcards.TypeWildCards.SubOtherElement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.SubOtherElement) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.OtherElement) )))
+    (return (global.get $$class@typewildcards.TypeWildCards.SubOtherElement))
    )
   )
+  (global.set $$class@typewildcards.TypeWildCards.SubOtherElement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.TypeWildCards.SubOtherElement )(call $$getClassMetadata__java_lang_Class_<once>_@typewildcards.TypeWildCards.OtherElement )))
   (return (global.get $$class@typewildcards.TypeWildCards.SubOtherElement))
  )
 )
 
 ;;; String SubOtherElement.$getString_|typewildcard...|()
-(func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.SubOtherElement
+(func $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.TypeWildCards.SubOtherElement
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.SubOtherElement))
+  (if (i32.eqz (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.SubOtherElement)))
    (then
-    (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.SubOtherElement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$SubOtherElement")))
+    (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.SubOtherElement))
    )
   )
+  (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.SubOtherElement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$SubOtherElement")))
   (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.SubOtherElement))
  )
 )
@@ -2275,14 +2313,15 @@
 )
 
 ;;; Class<T> Foo.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.Foo
+(func $$getClassMetadata__java_lang_Class_<once>_@typewildcards.TypeWildCards.Foo
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@typewildcards.TypeWildCards.Foo))
+  (if (i32.eqz (ref.is_null (global.get $$class@typewildcards.TypeWildCards.Foo)))
    (then
-    (global.set $$class@typewildcards.TypeWildCards.Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|typewildcard...|__java_lang_String (ref.func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.Foo) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typewildcards.GenericType) )))
+    (return (global.get $$class@typewildcards.TypeWildCards.Foo))
    )
   )
+  (global.set $$class@typewildcards.TypeWildCards.Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.TypeWildCards.Foo )(call $$getClassMetadata__java_lang_Class_<once>_@typewildcards.GenericType )))
   (return (global.get $$class@typewildcards.TypeWildCards.Foo))
  )
 )
@@ -2295,20 +2334,21 @@
  (local $this (ref null $typewildcards.TypeWildCards.Foo))
  (local.set $this (ref.cast (ref $typewildcards.TypeWildCards.Foo) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@typewildcards.TypeWildCards.Foo) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@typewildcards.TypeWildCards.Foo ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@typewildcards.TypeWildCards.Foo)
 
 ;;; String Foo.$getString_|typewildcard...|()
-(func $$getString_|typewildcard...|__java_lang_String@typewildcards.TypeWildCards.Foo
+(func $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.TypeWildCards.Foo
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.Foo))
+  (if (i32.eqz (ref.is_null (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.Foo)))
    (then
-    (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$Foo")))
+    (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.Foo))
    )
   )
+  (global.set $$string_|typewildcard...|@typewildcards.TypeWildCards.Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "typewildcards.TypeWildCards$Foo")))
   (return (global.get $$string_|typewildcard...|@typewildcards.TypeWildCards.Foo))
  )
 )

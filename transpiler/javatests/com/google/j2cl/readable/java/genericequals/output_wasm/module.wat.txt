@@ -147,14 +147,15 @@
 )
 
 ;;; Class<T> GenericEquals.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@genericequals.GenericEquals
+(func $$getClassMetadata__java_lang_Class_<once>_@genericequals.GenericEquals
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@genericequals.GenericEquals))
+  (if (i32.eqz (ref.is_null (global.get $$class@genericequals.GenericEquals)))
    (then
-    (global.set $$class@genericequals.GenericEquals (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericequal...|__java_lang_String (ref.func $$getString_|genericequal...|__java_lang_String@genericequals.GenericEquals) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@genericequals.GenericEquals))
    )
   )
+  (global.set $$class@genericequals.GenericEquals (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|genericequal...|__java_lang_String_<once>_@genericequals.GenericEquals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@genericequals.GenericEquals))
  )
 )
@@ -167,20 +168,21 @@
  (local $this (ref null $genericequals.GenericEquals))
  (local.set $this (ref.cast (ref $genericequals.GenericEquals) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@genericequals.GenericEquals) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@genericequals.GenericEquals ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@genericequals.GenericEquals)
 
 ;;; String GenericEquals.$getString_|genericequal...|()
-(func $$getString_|genericequal...|__java_lang_String@genericequals.GenericEquals
+(func $$getString_|genericequal...|__java_lang_String_<once>_@genericequals.GenericEquals
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|genericequal...|@genericequals.GenericEquals))
+  (if (i32.eqz (ref.is_null (global.get $$string_|genericequal...|@genericequals.GenericEquals)))
    (then
-    (global.set $$string_|genericequal...|@genericequals.GenericEquals (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "genericequals.GenericEquals")))
+    (return (global.get $$string_|genericequal...|@genericequals.GenericEquals))
    )
   )
+  (global.set $$string_|genericequal...|@genericequals.GenericEquals (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "genericequals.GenericEquals")))
   (return (global.get $$string_|genericequal...|@genericequals.GenericEquals))
  )
 )

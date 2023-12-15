@@ -84,14 +84,15 @@
 )
 
 ;;; Class<T> JsTypesWithConstructor.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jstypeswithconstructor.JsTypesWithConstructor
+(func $$getClassMetadata__java_lang_Class_<once>_@jstypeswithconstructor.JsTypesWithConstructor
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jstypeswithconstructor.JsTypesWithConstructor))
+  (if (i32.eqz (ref.is_null (global.get $$class@jstypeswithconstructor.JsTypesWithConstructor)))
    (then
-    (global.set $$class@jstypeswithconstructor.JsTypesWithConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jstypeswithc...|__java_lang_String (ref.func $$getString_|jstypeswithc...|__java_lang_String@jstypeswithconstructor.JsTypesWithConstructor) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@jstypeswithconstructor.JsTypesWithConstructor))
    )
   )
+  (global.set $$class@jstypeswithconstructor.JsTypesWithConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jstypeswithc...|__java_lang_String_<once>_@jstypeswithconstructor.JsTypesWithConstructor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@jstypeswithconstructor.JsTypesWithConstructor))
  )
 )
@@ -104,20 +105,21 @@
  (local $this (ref null $jstypeswithconstructor.JsTypesWithConstructor))
  (local.set $this (ref.cast (ref $jstypeswithconstructor.JsTypesWithConstructor) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jstypeswithconstructor.JsTypesWithConstructor) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jstypeswithconstructor.JsTypesWithConstructor ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jstypeswithconstructor.JsTypesWithConstructor)
 
 ;;; String JsTypesWithConstructor.$getString_|jstypeswithc...|()
-(func $$getString_|jstypeswithc...|__java_lang_String@jstypeswithconstructor.JsTypesWithConstructor
+(func $$getString_|jstypeswithc...|__java_lang_String_<once>_@jstypeswithconstructor.JsTypesWithConstructor
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jstypeswithc...|@jstypeswithconstructor.JsTypesWithConstructor))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jstypeswithc...|@jstypeswithconstructor.JsTypesWithConstructor)))
    (then
-    (global.set $$string_|jstypeswithc...|@jstypeswithconstructor.JsTypesWithConstructor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jstypeswithconstructor.JsTypesWithConstructor")))
+    (return (global.get $$string_|jstypeswithc...|@jstypeswithconstructor.JsTypesWithConstructor))
    )
   )
+  (global.set $$string_|jstypeswithc...|@jstypeswithconstructor.JsTypesWithConstructor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jstypeswithconstructor.JsTypesWithConstructor")))
   (return (global.get $$string_|jstypeswithc...|@jstypeswithconstructor.JsTypesWithConstructor))
  )
 )

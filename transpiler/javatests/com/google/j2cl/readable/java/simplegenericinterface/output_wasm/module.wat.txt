@@ -34,27 +34,29 @@
 )
 
 ;;; Class<T> SimpleGenericInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@simplegenericinterface.SimpleGenericInterface
+(func $$getClassMetadata__java_lang_Class_<once>_@simplegenericinterface.SimpleGenericInterface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@simplegenericinterface.SimpleGenericInterface))
+  (if (i32.eqz (ref.is_null (global.get $$class@simplegenericinterface.SimpleGenericInterface)))
    (then
-    (global.set $$class@simplegenericinterface.SimpleGenericInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplegeneri...|__java_lang_String (ref.func $$getString_|simplegeneri...|__java_lang_String@simplegenericinterface.SimpleGenericInterface) )))
+    (return (global.get $$class@simplegenericinterface.SimpleGenericInterface))
    )
   )
+  (global.set $$class@simplegenericinterface.SimpleGenericInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|simplegeneri...|__java_lang_String_<once>_@simplegenericinterface.SimpleGenericInterface )))
   (return (global.get $$class@simplegenericinterface.SimpleGenericInterface))
  )
 )
 
 ;;; String SimpleGenericInterface.$getString_|simplegeneri...|()
-(func $$getString_|simplegeneri...|__java_lang_String@simplegenericinterface.SimpleGenericInterface
+(func $$getString_|simplegeneri...|__java_lang_String_<once>_@simplegenericinterface.SimpleGenericInterface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|simplegeneri...|@simplegenericinterface.SimpleGenericInterface))
+  (if (i32.eqz (ref.is_null (global.get $$string_|simplegeneri...|@simplegenericinterface.SimpleGenericInterface)))
    (then
-    (global.set $$string_|simplegeneri...|@simplegenericinterface.SimpleGenericInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "simplegenericinterface.SimpleGenericInterface")))
+    (return (global.get $$string_|simplegeneri...|@simplegenericinterface.SimpleGenericInterface))
    )
   )
+  (global.set $$string_|simplegeneri...|@simplegenericinterface.SimpleGenericInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "simplegenericinterface.SimpleGenericInterface")))
   (return (global.get $$string_|simplegeneri...|@simplegenericinterface.SimpleGenericInterface))
  )
 )

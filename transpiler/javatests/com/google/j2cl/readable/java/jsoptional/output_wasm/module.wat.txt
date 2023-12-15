@@ -445,27 +445,29 @@
 )
 
 ;;; Class<T> Function.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsoptional.Main.Function
+(func $$getClassMetadata__java_lang_Class_<once>_@jsoptional.Main.Function
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsoptional.Main.Function))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsoptional.Main.Function)))
    (then
-    (global.set $$class@jsoptional.Main.Function (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsoptional.M...|__java_lang_String (ref.func $$getString_|jsoptional.M...|__java_lang_String@jsoptional.Main.Function) )))
+    (return (global.get $$class@jsoptional.Main.Function))
    )
   )
+  (global.set $$class@jsoptional.Main.Function (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jsoptional.M...|__java_lang_String_<once>_@jsoptional.Main.Function )))
   (return (global.get $$class@jsoptional.Main.Function))
  )
 )
 
 ;;; String Function.$getString_|jsoptional.M...|()
-(func $$getString_|jsoptional.M...|__java_lang_String@jsoptional.Main.Function
+(func $$getString_|jsoptional.M...|__java_lang_String_<once>_@jsoptional.Main.Function
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsoptional.M...|@jsoptional.Main.Function))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsoptional.M...|@jsoptional.Main.Function)))
    (then
-    (global.set $$string_|jsoptional.M...|@jsoptional.Main.Function (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsoptional.Main$Function")))
+    (return (global.get $$string_|jsoptional.M...|@jsoptional.Main.Function))
    )
   )
+  (global.set $$string_|jsoptional.M...|@jsoptional.Main.Function (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsoptional.Main$Function")))
   (return (global.get $$string_|jsoptional.M...|@jsoptional.Main.Function))
  )
 )
@@ -489,27 +491,29 @@
 )
 
 ;;; Class<T> I.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsoptional.Main.I
+(func $$getClassMetadata__java_lang_Class_<once>_@jsoptional.Main.I
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsoptional.Main.I))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsoptional.Main.I)))
    (then
-    (global.set $$class@jsoptional.Main.I (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsoptional.M...|__java_lang_String (ref.func $$getString_|jsoptional.M...|__java_lang_String@jsoptional.Main.I) )))
+    (return (global.get $$class@jsoptional.Main.I))
    )
   )
+  (global.set $$class@jsoptional.Main.I (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jsoptional.M...|__java_lang_String_<once>_@jsoptional.Main.I )))
   (return (global.get $$class@jsoptional.Main.I))
  )
 )
 
 ;;; String I.$getString_|jsoptional.M...|()
-(func $$getString_|jsoptional.M...|__java_lang_String@jsoptional.Main.I
+(func $$getString_|jsoptional.M...|__java_lang_String_<once>_@jsoptional.Main.I
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsoptional.M...|@jsoptional.Main.I))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsoptional.M...|@jsoptional.Main.I)))
    (then
-    (global.set $$string_|jsoptional.M...|@jsoptional.Main.I (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsoptional.Main$I")))
+    (return (global.get $$string_|jsoptional.M...|@jsoptional.Main.I))
    )
   )
+  (global.set $$string_|jsoptional.M...|@jsoptional.Main.I (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsoptional.Main$I")))
   (return (global.get $$string_|jsoptional.M...|@jsoptional.Main.I))
  )
 )
@@ -656,14 +660,15 @@
 )
 
 ;;; Class<T> Main.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsoptional.Main
+(func $$getClassMetadata__java_lang_Class_<once>_@jsoptional.Main
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsoptional.Main))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsoptional.Main)))
    (then
-    (global.set $$class@jsoptional.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsoptional.Main|__java_lang_String (ref.func $$getString_|jsoptional.Main|__java_lang_String@jsoptional.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@jsoptional.Main))
    )
   )
+  (global.set $$class@jsoptional.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsoptional.Main|__java_lang_String_<once>_@jsoptional.Main )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@jsoptional.Main))
  )
 )
@@ -676,20 +681,21 @@
  (local $this (ref null $jsoptional.Main))
  (local.set $this (ref.cast (ref $jsoptional.Main) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsoptional.Main) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsoptional.Main ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsoptional.Main)
 
 ;;; String Main.$getString_|jsoptional.Main|()
-(func $$getString_|jsoptional.Main|__java_lang_String@jsoptional.Main
+(func $$getString_|jsoptional.Main|__java_lang_String_<once>_@jsoptional.Main
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsoptional.Main|@jsoptional.Main))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsoptional.Main|@jsoptional.Main)))
    (then
-    (global.set $$string_|jsoptional.Main|@jsoptional.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsoptional.Main")))
+    (return (global.get $$string_|jsoptional.Main|@jsoptional.Main))
    )
   )
+  (global.set $$string_|jsoptional.Main|@jsoptional.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsoptional.Main")))
   (return (global.get $$string_|jsoptional.Main|@jsoptional.Main))
  )
 )
@@ -759,14 +765,15 @@
 )
 
 ;;; Class<T> <anonymous> implements Function.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsoptional.Main.$LambdaImplementor$1
+(func $$getClassMetadata__java_lang_Class_<once>_@jsoptional.Main.$LambdaImplementor$1
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsoptional.Main.$LambdaImplementor$1))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsoptional.Main.$LambdaImplementor$1)))
    (then
-    (global.set $$class@jsoptional.Main.$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsoptional.M...|__java_lang_String (ref.func $$getString_|jsoptional.M...|__java_lang_String@jsoptional.Main.$LambdaImplementor$1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@jsoptional.Main.$LambdaImplementor$1))
    )
   )
+  (global.set $$class@jsoptional.Main.$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsoptional.M...|__java_lang_String_<once>_@jsoptional.Main.$LambdaImplementor$1 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@jsoptional.Main.$LambdaImplementor$1))
  )
 )
@@ -779,20 +786,21 @@
  (local $this (ref null $jsoptional.Main.$LambdaImplementor$1))
  (local.set $this (ref.cast (ref $jsoptional.Main.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsoptional.Main.$LambdaImplementor$1) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsoptional.Main.$LambdaImplementor$1 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsoptional.Main.$LambdaImplementor$1)
 
 ;;; String <anonymous> implements Function.$getString_|jsoptional.M...|()
-(func $$getString_|jsoptional.M...|__java_lang_String@jsoptional.Main.$LambdaImplementor$1
+(func $$getString_|jsoptional.M...|__java_lang_String_<once>_@jsoptional.Main.$LambdaImplementor$1
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsoptional.M...|@jsoptional.Main.$LambdaImplementor$1))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsoptional.M...|@jsoptional.Main.$LambdaImplementor$1)))
    (then
-    (global.set $$string_|jsoptional.M...|@jsoptional.Main.$LambdaImplementor$1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsoptional.Main$$LambdaImplementor$1")))
+    (return (global.get $$string_|jsoptional.M...|@jsoptional.Main.$LambdaImplementor$1))
    )
   )
+  (global.set $$string_|jsoptional.M...|@jsoptional.Main.$LambdaImplementor$1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsoptional.Main$$LambdaImplementor$1")))
   (return (global.get $$string_|jsoptional.M...|@jsoptional.Main.$LambdaImplementor$1))
  )
 )
@@ -862,14 +870,15 @@
 )
 
 ;;; Class<T> AFunction.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsoptional.Main.AFunction
+(func $$getClassMetadata__java_lang_Class_<once>_@jsoptional.Main.AFunction
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsoptional.Main.AFunction))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsoptional.Main.AFunction)))
    (then
-    (global.set $$class@jsoptional.Main.AFunction (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsoptional.M...|__java_lang_String (ref.func $$getString_|jsoptional.M...|__java_lang_String@jsoptional.Main.AFunction) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@jsoptional.Main.AFunction))
    )
   )
+  (global.set $$class@jsoptional.Main.AFunction (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsoptional.M...|__java_lang_String_<once>_@jsoptional.Main.AFunction )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@jsoptional.Main.AFunction))
  )
 )
@@ -882,20 +891,21 @@
  (local $this (ref null $jsoptional.Main.AFunction))
  (local.set $this (ref.cast (ref $jsoptional.Main.AFunction) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsoptional.Main.AFunction) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsoptional.Main.AFunction ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsoptional.Main.AFunction)
 
 ;;; String AFunction.$getString_|jsoptional.M...|()
-(func $$getString_|jsoptional.M...|__java_lang_String@jsoptional.Main.AFunction
+(func $$getString_|jsoptional.M...|__java_lang_String_<once>_@jsoptional.Main.AFunction
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsoptional.M...|@jsoptional.Main.AFunction))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsoptional.M...|@jsoptional.Main.AFunction)))
    (then
-    (global.set $$string_|jsoptional.M...|@jsoptional.Main.AFunction (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsoptional.Main$AFunction")))
+    (return (global.get $$string_|jsoptional.M...|@jsoptional.Main.AFunction))
    )
   )
+  (global.set $$string_|jsoptional.M...|@jsoptional.Main.AFunction (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsoptional.Main$AFunction")))
   (return (global.get $$string_|jsoptional.M...|@jsoptional.Main.AFunction))
  )
 )
@@ -978,14 +988,15 @@
 )
 
 ;;; Class<T> TemplatedSubtype.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsoptional.Main.TemplatedSubtype
+(func $$getClassMetadata__java_lang_Class_<once>_@jsoptional.Main.TemplatedSubtype
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsoptional.Main.TemplatedSubtype))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsoptional.Main.TemplatedSubtype)))
    (then
-    (global.set $$class@jsoptional.Main.TemplatedSubtype (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsoptional.M...|__java_lang_String (ref.func $$getString_|jsoptional.M...|__java_lang_String@jsoptional.Main.TemplatedSubtype) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@jsoptional.Main.TemplatedSubtype))
    )
   )
+  (global.set $$class@jsoptional.Main.TemplatedSubtype (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsoptional.M...|__java_lang_String_<once>_@jsoptional.Main.TemplatedSubtype )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@jsoptional.Main.TemplatedSubtype))
  )
 )
@@ -998,20 +1009,21 @@
  (local $this (ref null $jsoptional.Main.TemplatedSubtype))
  (local.set $this (ref.cast (ref $jsoptional.Main.TemplatedSubtype) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsoptional.Main.TemplatedSubtype) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsoptional.Main.TemplatedSubtype ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsoptional.Main.TemplatedSubtype)
 
 ;;; String TemplatedSubtype.$getString_|jsoptional.M...|()
-(func $$getString_|jsoptional.M...|__java_lang_String@jsoptional.Main.TemplatedSubtype
+(func $$getString_|jsoptional.M...|__java_lang_String_<once>_@jsoptional.Main.TemplatedSubtype
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsoptional.M...|@jsoptional.Main.TemplatedSubtype))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsoptional.M...|@jsoptional.Main.TemplatedSubtype)))
    (then
-    (global.set $$string_|jsoptional.M...|@jsoptional.Main.TemplatedSubtype (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsoptional.Main$TemplatedSubtype")))
+    (return (global.get $$string_|jsoptional.M...|@jsoptional.Main.TemplatedSubtype))
    )
   )
+  (global.set $$string_|jsoptional.M...|@jsoptional.Main.TemplatedSubtype (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsoptional.Main$TemplatedSubtype")))
   (return (global.get $$string_|jsoptional.M...|@jsoptional.Main.TemplatedSubtype))
  )
 )
@@ -1100,14 +1112,15 @@
 )
 
 ;;; Class<T> SpecializedSubtype.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsoptional.Main.SpecializedSubtype
+(func $$getClassMetadata__java_lang_Class_<once>_@jsoptional.Main.SpecializedSubtype
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsoptional.Main.SpecializedSubtype))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsoptional.Main.SpecializedSubtype)))
    (then
-    (global.set $$class@jsoptional.Main.SpecializedSubtype (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsoptional.M...|__java_lang_String (ref.func $$getString_|jsoptional.M...|__java_lang_String@jsoptional.Main.SpecializedSubtype) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@jsoptional.Main.SpecializedSubtype))
    )
   )
+  (global.set $$class@jsoptional.Main.SpecializedSubtype (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsoptional.M...|__java_lang_String_<once>_@jsoptional.Main.SpecializedSubtype )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@jsoptional.Main.SpecializedSubtype))
  )
 )
@@ -1120,20 +1133,21 @@
  (local $this (ref null $jsoptional.Main.SpecializedSubtype))
  (local.set $this (ref.cast (ref $jsoptional.Main.SpecializedSubtype) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsoptional.Main.SpecializedSubtype) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsoptional.Main.SpecializedSubtype ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsoptional.Main.SpecializedSubtype)
 
 ;;; String SpecializedSubtype.$getString_|jsoptional.M...|()
-(func $$getString_|jsoptional.M...|__java_lang_String@jsoptional.Main.SpecializedSubtype
+(func $$getString_|jsoptional.M...|__java_lang_String_<once>_@jsoptional.Main.SpecializedSubtype
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsoptional.M...|@jsoptional.Main.SpecializedSubtype))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsoptional.M...|@jsoptional.Main.SpecializedSubtype)))
    (then
-    (global.set $$string_|jsoptional.M...|@jsoptional.Main.SpecializedSubtype (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsoptional.Main$SpecializedSubtype")))
+    (return (global.get $$string_|jsoptional.M...|@jsoptional.Main.SpecializedSubtype))
    )
   )
+  (global.set $$string_|jsoptional.M...|@jsoptional.Main.SpecializedSubtype (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsoptional.Main$SpecializedSubtype")))
   (return (global.get $$string_|jsoptional.M...|@jsoptional.Main.SpecializedSubtype))
  )
 )
@@ -1216,14 +1230,15 @@
 )
 
 ;;; Class<T> NonJsTypeSubtype.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsoptional.Main.NonJsTypeSubtype
+(func $$getClassMetadata__java_lang_Class_<once>_@jsoptional.Main.NonJsTypeSubtype
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsoptional.Main.NonJsTypeSubtype))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsoptional.Main.NonJsTypeSubtype)))
    (then
-    (global.set $$class@jsoptional.Main.NonJsTypeSubtype (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsoptional.M...|__java_lang_String (ref.func $$getString_|jsoptional.M...|__java_lang_String@jsoptional.Main.NonJsTypeSubtype) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@jsoptional.Main.NonJsTypeSubtype))
    )
   )
+  (global.set $$class@jsoptional.Main.NonJsTypeSubtype (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsoptional.M...|__java_lang_String_<once>_@jsoptional.Main.NonJsTypeSubtype )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@jsoptional.Main.NonJsTypeSubtype))
  )
 )
@@ -1236,20 +1251,21 @@
  (local $this (ref null $jsoptional.Main.NonJsTypeSubtype))
  (local.set $this (ref.cast (ref $jsoptional.Main.NonJsTypeSubtype) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsoptional.Main.NonJsTypeSubtype) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsoptional.Main.NonJsTypeSubtype ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsoptional.Main.NonJsTypeSubtype)
 
 ;;; String NonJsTypeSubtype.$getString_|jsoptional.M...|()
-(func $$getString_|jsoptional.M...|__java_lang_String@jsoptional.Main.NonJsTypeSubtype
+(func $$getString_|jsoptional.M...|__java_lang_String_<once>_@jsoptional.Main.NonJsTypeSubtype
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsoptional.M...|@jsoptional.Main.NonJsTypeSubtype))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsoptional.M...|@jsoptional.Main.NonJsTypeSubtype)))
    (then
-    (global.set $$string_|jsoptional.M...|@jsoptional.Main.NonJsTypeSubtype (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsoptional.Main$NonJsTypeSubtype")))
+    (return (global.get $$string_|jsoptional.M...|@jsoptional.Main.NonJsTypeSubtype))
    )
   )
+  (global.set $$string_|jsoptional.M...|@jsoptional.Main.NonJsTypeSubtype (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsoptional.Main$NonJsTypeSubtype")))
   (return (global.get $$string_|jsoptional.M...|@jsoptional.Main.NonJsTypeSubtype))
  )
 )

@@ -80,7 +80,7 @@
  (local $$stringBuilder (ref null $java.lang.StringBuilder))
  (block
   ;;@ valueofnullable/ValueOfNullable.java:19:2
-  (struct.set $valueofnullable.ValueOfNullable $nullableString@valueofnullable.ValueOfNullable (local.get $this) (call $function.no.side.effects.$getString_|b|__java_lang_String (ref.func $$getString_|b|__java_lang_String@valueofnullable.ValueOfNullable) ))
+  (struct.set $valueofnullable.ValueOfNullable $nullableString@valueofnullable.ValueOfNullable (local.get $this) (call $$getString_|b|__java_lang_String_<once>_@valueofnullable.ValueOfNullable ))
   ;;@ valueofnullable/ValueOfNullable.java:20:2
   (struct.set $valueofnullable.ValueOfNullable $someChar@valueofnullable.ValueOfNullable (local.get $this) (i32.const 97))
   ;;@ valueofnullable/ValueOfNullable.java:21:2
@@ -112,14 +112,15 @@
 )
 
 ;;; Class<T> ValueOfNullable.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@valueofnullable.ValueOfNullable
+(func $$getClassMetadata__java_lang_Class_<once>_@valueofnullable.ValueOfNullable
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@valueofnullable.ValueOfNullable))
+  (if (i32.eqz (ref.is_null (global.get $$class@valueofnullable.ValueOfNullable)))
    (then
-    (global.set $$class@valueofnullable.ValueOfNullable (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|valueofnulla...|__java_lang_String (ref.func $$getString_|valueofnulla...|__java_lang_String@valueofnullable.ValueOfNullable) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@valueofnullable.ValueOfNullable))
    )
   )
+  (global.set $$class@valueofnullable.ValueOfNullable (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|valueofnulla...|__java_lang_String_<once>_@valueofnullable.ValueOfNullable )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@valueofnullable.ValueOfNullable))
  )
 )
@@ -132,33 +133,35 @@
  (local $this (ref null $valueofnullable.ValueOfNullable))
  (local.set $this (ref.cast (ref $valueofnullable.ValueOfNullable) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@valueofnullable.ValueOfNullable) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@valueofnullable.ValueOfNullable ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@valueofnullable.ValueOfNullable)
 
 ;;; String ValueOfNullable.$getString_|b|()
-(func $$getString_|b|__java_lang_String@valueofnullable.ValueOfNullable
+(func $$getString_|b|__java_lang_String_<once>_@valueofnullable.ValueOfNullable
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|b|@valueofnullable.ValueOfNullable))
+  (if (i32.eqz (ref.is_null (global.get $$string_|b|@valueofnullable.ValueOfNullable)))
    (then
-    (global.set $$string_|b|@valueofnullable.ValueOfNullable (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "b")))
+    (return (global.get $$string_|b|@valueofnullable.ValueOfNullable))
    )
   )
+  (global.set $$string_|b|@valueofnullable.ValueOfNullable (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "b")))
   (return (global.get $$string_|b|@valueofnullable.ValueOfNullable))
  )
 )
 
 ;;; String ValueOfNullable.$getString_|valueofnulla...|()
-(func $$getString_|valueofnulla...|__java_lang_String@valueofnullable.ValueOfNullable
+(func $$getString_|valueofnulla...|__java_lang_String_<once>_@valueofnullable.ValueOfNullable
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|valueofnulla...|@valueofnullable.ValueOfNullable))
+  (if (i32.eqz (ref.is_null (global.get $$string_|valueofnulla...|@valueofnullable.ValueOfNullable)))
    (then
-    (global.set $$string_|valueofnulla...|@valueofnullable.ValueOfNullable (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "valueofnullable.ValueOfNullable")))
+    (return (global.get $$string_|valueofnulla...|@valueofnullable.ValueOfNullable))
    )
   )
+  (global.set $$string_|valueofnulla...|@valueofnullable.ValueOfNullable (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "valueofnullable.ValueOfNullable")))
   (return (global.get $$string_|valueofnulla...|@valueofnullable.ValueOfNullable))
  )
 )

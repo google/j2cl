@@ -178,27 +178,29 @@
 )
 
 ;;; Class<T> NonParametrized.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@functionalinterface.FunctionalInterfaces.NonParametrized
+(func $$getClassMetadata__java_lang_Class_<once>_@functionalinterface.FunctionalInterfaces.NonParametrized
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@functionalinterface.FunctionalInterfaces.NonParametrized))
+  (if (i32.eqz (ref.is_null (global.get $$class@functionalinterface.FunctionalInterfaces.NonParametrized)))
    (then
-    (global.set $$class@functionalinterface.FunctionalInterfaces.NonParametrized (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functionalin...|__java_lang_String (ref.func $$getString_|functionalin...|__java_lang_String@functionalinterface.FunctionalInterfaces.NonParametrized) )))
+    (return (global.get $$class@functionalinterface.FunctionalInterfaces.NonParametrized))
    )
   )
+  (global.set $$class@functionalinterface.FunctionalInterfaces.NonParametrized (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|functionalin...|__java_lang_String_<once>_@functionalinterface.FunctionalInterfaces.NonParametrized )))
   (return (global.get $$class@functionalinterface.FunctionalInterfaces.NonParametrized))
  )
 )
 
 ;;; String NonParametrized.$getString_|functionalin...|()
-(func $$getString_|functionalin...|__java_lang_String@functionalinterface.FunctionalInterfaces.NonParametrized
+(func $$getString_|functionalin...|__java_lang_String_<once>_@functionalinterface.FunctionalInterfaces.NonParametrized
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.NonParametrized))
+  (if (i32.eqz (ref.is_null (global.get $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.NonParametrized)))
    (then
-    (global.set $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.NonParametrized (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "functionalinterface.FunctionalInterfaces$NonParametrized")))
+    (return (global.get $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.NonParametrized))
    )
   )
+  (global.set $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.NonParametrized (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "functionalinterface.FunctionalInterfaces$NonParametrized")))
   (return (global.get $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.NonParametrized))
  )
 )
@@ -222,27 +224,29 @@
 )
 
 ;;; Class<T> Parametrized.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@functionalinterface.FunctionalInterfaces.Parametrized
+(func $$getClassMetadata__java_lang_Class_<once>_@functionalinterface.FunctionalInterfaces.Parametrized
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@functionalinterface.FunctionalInterfaces.Parametrized))
+  (if (i32.eqz (ref.is_null (global.get $$class@functionalinterface.FunctionalInterfaces.Parametrized)))
    (then
-    (global.set $$class@functionalinterface.FunctionalInterfaces.Parametrized (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functionalin...|__java_lang_String (ref.func $$getString_|functionalin...|__java_lang_String@functionalinterface.FunctionalInterfaces.Parametrized) )))
+    (return (global.get $$class@functionalinterface.FunctionalInterfaces.Parametrized))
    )
   )
+  (global.set $$class@functionalinterface.FunctionalInterfaces.Parametrized (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|functionalin...|__java_lang_String_<once>_@functionalinterface.FunctionalInterfaces.Parametrized )))
   (return (global.get $$class@functionalinterface.FunctionalInterfaces.Parametrized))
  )
 )
 
 ;;; String Parametrized.$getString_|functionalin...|()
-(func $$getString_|functionalin...|__java_lang_String@functionalinterface.FunctionalInterfaces.Parametrized
+(func $$getString_|functionalin...|__java_lang_String_<once>_@functionalinterface.FunctionalInterfaces.Parametrized
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.Parametrized))
+  (if (i32.eqz (ref.is_null (global.get $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.Parametrized)))
    (then
-    (global.set $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.Parametrized (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "functionalinterface.FunctionalInterfaces$Parametrized")))
+    (return (global.get $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.Parametrized))
    )
   )
+  (global.set $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.Parametrized (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "functionalinterface.FunctionalInterfaces$Parametrized")))
   (return (global.get $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.Parametrized))
  )
 )
@@ -266,27 +270,29 @@
 )
 
 ;;; Class<T> Specialized.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@functionalinterface.FunctionalInterfaces.Specialized
+(func $$getClassMetadata__java_lang_Class_<once>_@functionalinterface.FunctionalInterfaces.Specialized
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@functionalinterface.FunctionalInterfaces.Specialized))
+  (if (i32.eqz (ref.is_null (global.get $$class@functionalinterface.FunctionalInterfaces.Specialized)))
    (then
-    (global.set $$class@functionalinterface.FunctionalInterfaces.Specialized (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functionalin...|__java_lang_String (ref.func $$getString_|functionalin...|__java_lang_String@functionalinterface.FunctionalInterfaces.Specialized) )))
+    (return (global.get $$class@functionalinterface.FunctionalInterfaces.Specialized))
    )
   )
+  (global.set $$class@functionalinterface.FunctionalInterfaces.Specialized (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|functionalin...|__java_lang_String_<once>_@functionalinterface.FunctionalInterfaces.Specialized )))
   (return (global.get $$class@functionalinterface.FunctionalInterfaces.Specialized))
  )
 )
 
 ;;; String Specialized.$getString_|functionalin...|()
-(func $$getString_|functionalin...|__java_lang_String@functionalinterface.FunctionalInterfaces.Specialized
+(func $$getString_|functionalin...|__java_lang_String_<once>_@functionalinterface.FunctionalInterfaces.Specialized
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.Specialized))
+  (if (i32.eqz (ref.is_null (global.get $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.Specialized)))
    (then
-    (global.set $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.Specialized (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "functionalinterface.FunctionalInterfaces$Specialized")))
+    (return (global.get $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.Specialized))
    )
   )
+  (global.set $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.Specialized (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "functionalinterface.FunctionalInterfaces$Specialized")))
   (return (global.get $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.Specialized))
  )
 )
@@ -323,27 +329,29 @@
 )
 
 ;;; Class<T> WithDefaultMethod.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@functionalinterface.FunctionalInterfaces.WithDefaultMethod
+(func $$getClassMetadata__java_lang_Class_<once>_@functionalinterface.FunctionalInterfaces.WithDefaultMethod
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@functionalinterface.FunctionalInterfaces.WithDefaultMethod))
+  (if (i32.eqz (ref.is_null (global.get $$class@functionalinterface.FunctionalInterfaces.WithDefaultMethod)))
    (then
-    (global.set $$class@functionalinterface.FunctionalInterfaces.WithDefaultMethod (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functionalin...|__java_lang_String (ref.func $$getString_|functionalin...|__java_lang_String@functionalinterface.FunctionalInterfaces.WithDefaultMethod) )))
+    (return (global.get $$class@functionalinterface.FunctionalInterfaces.WithDefaultMethod))
    )
   )
+  (global.set $$class@functionalinterface.FunctionalInterfaces.WithDefaultMethod (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|functionalin...|__java_lang_String_<once>_@functionalinterface.FunctionalInterfaces.WithDefaultMethod )))
   (return (global.get $$class@functionalinterface.FunctionalInterfaces.WithDefaultMethod))
  )
 )
 
 ;;; String WithDefaultMethod.$getString_|functionalin...|()
-(func $$getString_|functionalin...|__java_lang_String@functionalinterface.FunctionalInterfaces.WithDefaultMethod
+(func $$getString_|functionalin...|__java_lang_String_<once>_@functionalinterface.FunctionalInterfaces.WithDefaultMethod
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.WithDefaultMethod))
+  (if (i32.eqz (ref.is_null (global.get $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.WithDefaultMethod)))
    (then
-    (global.set $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.WithDefaultMethod (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "functionalinterface.FunctionalInterfaces$WithDefaultMethod")))
+    (return (global.get $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.WithDefaultMethod))
    )
   )
+  (global.set $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.WithDefaultMethod (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "functionalinterface.FunctionalInterfaces$WithDefaultMethod")))
   (return (global.get $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.WithDefaultMethod))
  )
 )
@@ -367,27 +375,29 @@
 )
 
 ;;; Class<T> WithObjectMethods.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@functionalinterface.FunctionalInterfaces.WithObjectMethods
+(func $$getClassMetadata__java_lang_Class_<once>_@functionalinterface.FunctionalInterfaces.WithObjectMethods
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@functionalinterface.FunctionalInterfaces.WithObjectMethods))
+  (if (i32.eqz (ref.is_null (global.get $$class@functionalinterface.FunctionalInterfaces.WithObjectMethods)))
    (then
-    (global.set $$class@functionalinterface.FunctionalInterfaces.WithObjectMethods (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functionalin...|__java_lang_String (ref.func $$getString_|functionalin...|__java_lang_String@functionalinterface.FunctionalInterfaces.WithObjectMethods) )))
+    (return (global.get $$class@functionalinterface.FunctionalInterfaces.WithObjectMethods))
    )
   )
+  (global.set $$class@functionalinterface.FunctionalInterfaces.WithObjectMethods (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|functionalin...|__java_lang_String_<once>_@functionalinterface.FunctionalInterfaces.WithObjectMethods )))
   (return (global.get $$class@functionalinterface.FunctionalInterfaces.WithObjectMethods))
  )
 )
 
 ;;; String WithObjectMethods.$getString_|functionalin...|()
-(func $$getString_|functionalin...|__java_lang_String@functionalinterface.FunctionalInterfaces.WithObjectMethods
+(func $$getString_|functionalin...|__java_lang_String_<once>_@functionalinterface.FunctionalInterfaces.WithObjectMethods
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.WithObjectMethods))
+  (if (i32.eqz (ref.is_null (global.get $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.WithObjectMethods)))
    (then
-    (global.set $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.WithObjectMethods (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "functionalinterface.FunctionalInterfaces$WithObjectMethods")))
+    (return (global.get $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.WithObjectMethods))
    )
   )
+  (global.set $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.WithObjectMethods (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "functionalinterface.FunctionalInterfaces$WithObjectMethods")))
   (return (global.get $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.WithObjectMethods))
  )
 )
@@ -411,27 +421,29 @@
 )
 
 ;;; Class<T> WithParametrizedMethod.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@functionalinterface.FunctionalInterfaces.WithParametrizedMethod
+(func $$getClassMetadata__java_lang_Class_<once>_@functionalinterface.FunctionalInterfaces.WithParametrizedMethod
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@functionalinterface.FunctionalInterfaces.WithParametrizedMethod))
+  (if (i32.eqz (ref.is_null (global.get $$class@functionalinterface.FunctionalInterfaces.WithParametrizedMethod)))
    (then
-    (global.set $$class@functionalinterface.FunctionalInterfaces.WithParametrizedMethod (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functionalin...|__java_lang_String (ref.func $$getString_|functionalin...|__java_lang_String@functionalinterface.FunctionalInterfaces.WithParametrizedMethod) )))
+    (return (global.get $$class@functionalinterface.FunctionalInterfaces.WithParametrizedMethod))
    )
   )
+  (global.set $$class@functionalinterface.FunctionalInterfaces.WithParametrizedMethod (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|functionalin...|__java_lang_String_<once>_@functionalinterface.FunctionalInterfaces.WithParametrizedMethod )))
   (return (global.get $$class@functionalinterface.FunctionalInterfaces.WithParametrizedMethod))
  )
 )
 
 ;;; String WithParametrizedMethod.$getString_|functionalin...|()
-(func $$getString_|functionalin...|__java_lang_String@functionalinterface.FunctionalInterfaces.WithParametrizedMethod
+(func $$getString_|functionalin...|__java_lang_String_<once>_@functionalinterface.FunctionalInterfaces.WithParametrizedMethod
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.WithParametrizedMethod))
+  (if (i32.eqz (ref.is_null (global.get $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.WithParametrizedMethod)))
    (then
-    (global.set $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.WithParametrizedMethod (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "functionalinterface.FunctionalInterfaces$WithParametrizedMethod")))
+    (return (global.get $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.WithParametrizedMethod))
    )
   )
+  (global.set $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.WithParametrizedMethod (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "functionalinterface.FunctionalInterfaces$WithParametrizedMethod")))
   (return (global.get $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.WithParametrizedMethod))
  )
 )
@@ -455,27 +467,29 @@
 )
 
 ;;; Class<T> WithKtProperty.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@functionalinterface.FunctionalInterfaces.WithKtProperty
+(func $$getClassMetadata__java_lang_Class_<once>_@functionalinterface.FunctionalInterfaces.WithKtProperty
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@functionalinterface.FunctionalInterfaces.WithKtProperty))
+  (if (i32.eqz (ref.is_null (global.get $$class@functionalinterface.FunctionalInterfaces.WithKtProperty)))
    (then
-    (global.set $$class@functionalinterface.FunctionalInterfaces.WithKtProperty (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functionalin...|__java_lang_String (ref.func $$getString_|functionalin...|__java_lang_String@functionalinterface.FunctionalInterfaces.WithKtProperty) )))
+    (return (global.get $$class@functionalinterface.FunctionalInterfaces.WithKtProperty))
    )
   )
+  (global.set $$class@functionalinterface.FunctionalInterfaces.WithKtProperty (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|functionalin...|__java_lang_String_<once>_@functionalinterface.FunctionalInterfaces.WithKtProperty )))
   (return (global.get $$class@functionalinterface.FunctionalInterfaces.WithKtProperty))
  )
 )
 
 ;;; String WithKtProperty.$getString_|functionalin...|()
-(func $$getString_|functionalin...|__java_lang_String@functionalinterface.FunctionalInterfaces.WithKtProperty
+(func $$getString_|functionalin...|__java_lang_String_<once>_@functionalinterface.FunctionalInterfaces.WithKtProperty
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.WithKtProperty))
+  (if (i32.eqz (ref.is_null (global.get $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.WithKtProperty)))
    (then
-    (global.set $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.WithKtProperty (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "functionalinterface.FunctionalInterfaces$WithKtProperty")))
+    (return (global.get $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.WithKtProperty))
    )
   )
+  (global.set $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.WithKtProperty (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "functionalinterface.FunctionalInterfaces$WithKtProperty")))
   (return (global.get $$string_|functionalin...|@functionalinterface.FunctionalInterfaces.WithKtProperty))
  )
 )
@@ -528,14 +542,15 @@
 )
 
 ;;; Class<T> FunctionalInterfaces.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@functionalinterface.FunctionalInterfaces
+(func $$getClassMetadata__java_lang_Class_<once>_@functionalinterface.FunctionalInterfaces
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@functionalinterface.FunctionalInterfaces))
+  (if (i32.eqz (ref.is_null (global.get $$class@functionalinterface.FunctionalInterfaces)))
    (then
-    (global.set $$class@functionalinterface.FunctionalInterfaces (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|functionalin...|__java_lang_String (ref.func $$getString_|functionalin...|__java_lang_String@functionalinterface.FunctionalInterfaces) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@functionalinterface.FunctionalInterfaces))
    )
   )
+  (global.set $$class@functionalinterface.FunctionalInterfaces (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|functionalin...|__java_lang_String_<once>_@functionalinterface.FunctionalInterfaces )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@functionalinterface.FunctionalInterfaces))
  )
 )
@@ -548,20 +563,21 @@
  (local $this (ref null $functionalinterface.FunctionalInterfaces))
  (local.set $this (ref.cast (ref $functionalinterface.FunctionalInterfaces) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@functionalinterface.FunctionalInterfaces) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@functionalinterface.FunctionalInterfaces ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@functionalinterface.FunctionalInterfaces)
 
 ;;; String FunctionalInterfaces.$getString_|functionalin...|()
-(func $$getString_|functionalin...|__java_lang_String@functionalinterface.FunctionalInterfaces
+(func $$getString_|functionalin...|__java_lang_String_<once>_@functionalinterface.FunctionalInterfaces
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|functionalin...|@functionalinterface.FunctionalInterfaces))
+  (if (i32.eqz (ref.is_null (global.get $$string_|functionalin...|@functionalinterface.FunctionalInterfaces)))
    (then
-    (global.set $$string_|functionalin...|@functionalinterface.FunctionalInterfaces (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "functionalinterface.FunctionalInterfaces")))
+    (return (global.get $$string_|functionalin...|@functionalinterface.FunctionalInterfaces))
    )
   )
+  (global.set $$string_|functionalin...|@functionalinterface.FunctionalInterfaces (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "functionalinterface.FunctionalInterfaces")))
   (return (global.get $$string_|functionalin...|@functionalinterface.FunctionalInterfaces))
  )
 )

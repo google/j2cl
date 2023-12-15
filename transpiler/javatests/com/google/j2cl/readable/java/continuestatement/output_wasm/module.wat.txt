@@ -110,14 +110,15 @@
 )
 
 ;;; Class<T> ContinueStatement.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@continuestatement.ContinueStatement
+(func $$getClassMetadata__java_lang_Class_<once>_@continuestatement.ContinueStatement
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@continuestatement.ContinueStatement))
+  (if (i32.eqz (ref.is_null (global.get $$class@continuestatement.ContinueStatement)))
    (then
-    (global.set $$class@continuestatement.ContinueStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|continuestat...|__java_lang_String (ref.func $$getString_|continuestat...|__java_lang_String@continuestatement.ContinueStatement) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@continuestatement.ContinueStatement))
    )
   )
+  (global.set $$class@continuestatement.ContinueStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|continuestat...|__java_lang_String_<once>_@continuestatement.ContinueStatement )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@continuestatement.ContinueStatement))
  )
 )
@@ -130,20 +131,21 @@
  (local $this (ref null $continuestatement.ContinueStatement))
  (local.set $this (ref.cast (ref $continuestatement.ContinueStatement) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@continuestatement.ContinueStatement) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@continuestatement.ContinueStatement ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@continuestatement.ContinueStatement)
 
 ;;; String ContinueStatement.$getString_|continuestat...|()
-(func $$getString_|continuestat...|__java_lang_String@continuestatement.ContinueStatement
+(func $$getString_|continuestat...|__java_lang_String_<once>_@continuestatement.ContinueStatement
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|continuestat...|@continuestatement.ContinueStatement))
+  (if (i32.eqz (ref.is_null (global.get $$string_|continuestat...|@continuestatement.ContinueStatement)))
    (then
-    (global.set $$string_|continuestat...|@continuestatement.ContinueStatement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "continuestatement.ContinueStatement")))
+    (return (global.get $$string_|continuestat...|@continuestatement.ContinueStatement))
    )
   )
+  (global.set $$string_|continuestat...|@continuestatement.ContinueStatement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "continuestatement.ContinueStatement")))
   (return (global.get $$string_|continuestat...|@continuestatement.ContinueStatement))
  )
 )

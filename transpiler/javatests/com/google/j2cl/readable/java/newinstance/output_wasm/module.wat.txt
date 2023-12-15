@@ -107,14 +107,15 @@
 )
 
 ;;; Class<T> NewInstanceExpr.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@newinstance.NewInstanceExpr
+(func $$getClassMetadata__java_lang_Class_<once>_@newinstance.NewInstanceExpr
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@newinstance.NewInstanceExpr))
+  (if (i32.eqz (ref.is_null (global.get $$class@newinstance.NewInstanceExpr)))
    (then
-    (global.set $$class@newinstance.NewInstanceExpr (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|newinstance....|__java_lang_String (ref.func $$getString_|newinstance....|__java_lang_String@newinstance.NewInstanceExpr) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@newinstance.NewInstanceExpr))
    )
   )
+  (global.set $$class@newinstance.NewInstanceExpr (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|newinstance....|__java_lang_String_<once>_@newinstance.NewInstanceExpr )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@newinstance.NewInstanceExpr))
  )
 )
@@ -127,20 +128,21 @@
  (local $this (ref null $newinstance.NewInstanceExpr))
  (local.set $this (ref.cast (ref $newinstance.NewInstanceExpr) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@newinstance.NewInstanceExpr) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@newinstance.NewInstanceExpr ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@newinstance.NewInstanceExpr)
 
 ;;; String NewInstanceExpr.$getString_|newinstance....|()
-(func $$getString_|newinstance....|__java_lang_String@newinstance.NewInstanceExpr
+(func $$getString_|newinstance....|__java_lang_String_<once>_@newinstance.NewInstanceExpr
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|newinstance....|@newinstance.NewInstanceExpr))
+  (if (i32.eqz (ref.is_null (global.get $$string_|newinstance....|@newinstance.NewInstanceExpr)))
    (then
-    (global.set $$string_|newinstance....|@newinstance.NewInstanceExpr (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "newinstance.NewInstanceExpr")))
+    (return (global.get $$string_|newinstance....|@newinstance.NewInstanceExpr))
    )
   )
+  (global.set $$string_|newinstance....|@newinstance.NewInstanceExpr (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "newinstance.NewInstanceExpr")))
   (return (global.get $$string_|newinstance....|@newinstance.NewInstanceExpr))
  )
 )

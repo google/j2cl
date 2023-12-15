@@ -78,14 +78,15 @@
 )
 
 ;;; Class<T> $Overlay.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsmemberinnativetype.MyNativeType.$Overlay
+(func $$getClassMetadata__java_lang_Class_<once>_@jsmemberinnativetype.MyNativeType.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsmemberinnativetype.MyNativeType.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsmemberinnativetype.MyNativeType.$Overlay)))
    (then
-    (global.set $$class@jsmemberinnativetype.MyNativeType.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsmemberinna...|__java_lang_String (ref.func $$getString_|jsmemberinna...|__java_lang_String@jsmemberinnativetype.MyNativeType.$Overlay) )(ref.null $java.lang.Class)))
+    (return (global.get $$class@jsmemberinnativetype.MyNativeType.$Overlay))
    )
   )
+  (global.set $$class@jsmemberinnativetype.MyNativeType.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsmemberinna...|__java_lang_String_<once>_@jsmemberinnativetype.MyNativeType.$Overlay )(ref.null $java.lang.Class)))
   (return (global.get $$class@jsmemberinnativetype.MyNativeType.$Overlay))
  )
 )
@@ -98,20 +99,21 @@
  (local $this (ref null $jsmemberinnativetype.MyNativeType.$Overlay))
  (local.set $this (ref.cast (ref $jsmemberinnativetype.MyNativeType.$Overlay) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsmemberinnativetype.MyNativeType.$Overlay) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsmemberinnativetype.MyNativeType.$Overlay ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsmemberinnativetype.MyNativeType.$Overlay)
 
 ;;; String $Overlay.$getString_|jsmemberinna...|()
-(func $$getString_|jsmemberinna...|__java_lang_String@jsmemberinnativetype.MyNativeType.$Overlay
+(func $$getString_|jsmemberinna...|__java_lang_String_<once>_@jsmemberinnativetype.MyNativeType.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsmemberinna...|@jsmemberinnativetype.MyNativeType.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsmemberinna...|@jsmemberinnativetype.MyNativeType.$Overlay)))
    (then
-    (global.set $$string_|jsmemberinna...|@jsmemberinnativetype.MyNativeType.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsmemberinnativetype.MyNativeType$$Overlay")))
+    (return (global.get $$string_|jsmemberinna...|@jsmemberinnativetype.MyNativeType.$Overlay))
    )
   )
+  (global.set $$string_|jsmemberinna...|@jsmemberinnativetype.MyNativeType.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsmemberinnativetype.MyNativeType$$Overlay")))
   (return (global.get $$string_|jsmemberinna...|@jsmemberinnativetype.MyNativeType.$Overlay))
  )
 )

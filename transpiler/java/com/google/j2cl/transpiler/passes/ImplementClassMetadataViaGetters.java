@@ -234,7 +234,6 @@ public class ImplementClassMetadataViaGetters extends NormalizationPass {
         .setOrigin(MethodOrigin.SYNTHETIC_CLASS_LITERAL_GETTER)
         .setStatic(true)
         .setSynthetic(true)
-        .setSideEffectFree(true)
         .build();
   }
 }

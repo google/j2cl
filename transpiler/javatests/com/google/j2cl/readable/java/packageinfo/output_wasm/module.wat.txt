@@ -212,14 +212,15 @@
 )
 
 ;;; Class<T> Outer.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@packageinfo.Outer
+(func $$getClassMetadata__java_lang_Class_<once>_@packageinfo.Outer
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@packageinfo.Outer))
+  (if (i32.eqz (ref.is_null (global.get $$class@packageinfo.Outer)))
    (then
-    (global.set $$class@packageinfo.Outer (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|packageinfo....|__java_lang_String (ref.func $$getString_|packageinfo....|__java_lang_String@packageinfo.Outer) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@packageinfo.Outer))
    )
   )
+  (global.set $$class@packageinfo.Outer (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|packageinfo....|__java_lang_String_<once>_@packageinfo.Outer )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@packageinfo.Outer))
  )
 )
@@ -232,20 +233,21 @@
  (local $this (ref null $packageinfo.Outer))
  (local.set $this (ref.cast (ref $packageinfo.Outer) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@packageinfo.Outer) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@packageinfo.Outer ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@packageinfo.Outer)
 
 ;;; String Outer.$getString_|packageinfo....|()
-(func $$getString_|packageinfo....|__java_lang_String@packageinfo.Outer
+(func $$getString_|packageinfo....|__java_lang_String_<once>_@packageinfo.Outer
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|packageinfo....|@packageinfo.Outer))
+  (if (i32.eqz (ref.is_null (global.get $$string_|packageinfo....|@packageinfo.Outer)))
    (then
-    (global.set $$string_|packageinfo....|@packageinfo.Outer (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "packageinfo.Outer")))
+    (return (global.get $$string_|packageinfo....|@packageinfo.Outer))
    )
   )
+  (global.set $$string_|packageinfo....|@packageinfo.Outer (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "packageinfo.Outer")))
   (return (global.get $$string_|packageinfo....|@packageinfo.Outer))
  )
 )
@@ -302,14 +304,15 @@
 )
 
 ;;; Class<T> Inner.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@packageinfo.Outer.Inner
+(func $$getClassMetadata__java_lang_Class_<once>_@packageinfo.Outer.Inner
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@packageinfo.Outer.Inner))
+  (if (i32.eqz (ref.is_null (global.get $$class@packageinfo.Outer.Inner)))
    (then
-    (global.set $$class@packageinfo.Outer.Inner (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|packageinfo....|__java_lang_String (ref.func $$getString_|packageinfo....|__java_lang_String@packageinfo.Outer.Inner) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@packageinfo.Outer.Inner))
    )
   )
+  (global.set $$class@packageinfo.Outer.Inner (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|packageinfo....|__java_lang_String_<once>_@packageinfo.Outer.Inner )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@packageinfo.Outer.Inner))
  )
 )
@@ -322,20 +325,21 @@
  (local $this (ref null $packageinfo.Outer.Inner))
  (local.set $this (ref.cast (ref $packageinfo.Outer.Inner) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@packageinfo.Outer.Inner) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@packageinfo.Outer.Inner ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@packageinfo.Outer.Inner)
 
 ;;; String Inner.$getString_|packageinfo....|()
-(func $$getString_|packageinfo....|__java_lang_String@packageinfo.Outer.Inner
+(func $$getString_|packageinfo....|__java_lang_String_<once>_@packageinfo.Outer.Inner
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|packageinfo....|@packageinfo.Outer.Inner))
+  (if (i32.eqz (ref.is_null (global.get $$string_|packageinfo....|@packageinfo.Outer.Inner)))
    (then
-    (global.set $$string_|packageinfo....|@packageinfo.Outer.Inner (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "packageinfo.Outer$Inner")))
+    (return (global.get $$string_|packageinfo....|@packageinfo.Outer.Inner))
    )
   )
+  (global.set $$string_|packageinfo....|@packageinfo.Outer.Inner (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "packageinfo.Outer$Inner")))
   (return (global.get $$string_|packageinfo....|@packageinfo.Outer.Inner))
  )
 )
@@ -400,14 +404,15 @@
 )
 
 ;;; Class<T> Foo.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@packageinfo.subpackage.Foo
+(func $$getClassMetadata__java_lang_Class_<once>_@packageinfo.subpackage.Foo
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@packageinfo.subpackage.Foo))
+  (if (i32.eqz (ref.is_null (global.get $$class@packageinfo.subpackage.Foo)))
    (then
-    (global.set $$class@packageinfo.subpackage.Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|packageinfo....|__java_lang_String (ref.func $$getString_|packageinfo....|__java_lang_String@packageinfo.subpackage.Foo) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@packageinfo.subpackage.Foo))
    )
   )
+  (global.set $$class@packageinfo.subpackage.Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|packageinfo....|__java_lang_String_<once>_@packageinfo.subpackage.Foo )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@packageinfo.subpackage.Foo))
  )
 )
@@ -420,20 +425,21 @@
  (local $this (ref null $packageinfo.subpackage.Foo))
  (local.set $this (ref.cast (ref $packageinfo.subpackage.Foo) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@packageinfo.subpackage.Foo) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@packageinfo.subpackage.Foo ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@packageinfo.subpackage.Foo)
 
 ;;; String Foo.$getString_|packageinfo....|()
-(func $$getString_|packageinfo....|__java_lang_String@packageinfo.subpackage.Foo
+(func $$getString_|packageinfo....|__java_lang_String_<once>_@packageinfo.subpackage.Foo
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|packageinfo....|@packageinfo.subpackage.Foo))
+  (if (i32.eqz (ref.is_null (global.get $$string_|packageinfo....|@packageinfo.subpackage.Foo)))
    (then
-    (global.set $$string_|packageinfo....|@packageinfo.subpackage.Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "packageinfo.subpackage.Foo")))
+    (return (global.get $$string_|packageinfo....|@packageinfo.subpackage.Foo))
    )
   )
+  (global.set $$string_|packageinfo....|@packageinfo.subpackage.Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "packageinfo.subpackage.Foo")))
   (return (global.get $$string_|packageinfo....|@packageinfo.subpackage.Foo))
  )
 )
@@ -495,14 +501,15 @@
 )
 
 ;;; Class<T> Bar.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@packageinfo.thirdpartylib.Bar
+(func $$getClassMetadata__java_lang_Class_<once>_@packageinfo.thirdpartylib.Bar
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@packageinfo.thirdpartylib.Bar))
+  (if (i32.eqz (ref.is_null (global.get $$class@packageinfo.thirdpartylib.Bar)))
    (then
-    (global.set $$class@packageinfo.thirdpartylib.Bar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|packageinfo....|__java_lang_String (ref.func $$getString_|packageinfo....|__java_lang_String@packageinfo.thirdpartylib.Bar) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@packageinfo.thirdpartylib.Bar))
    )
   )
+  (global.set $$class@packageinfo.thirdpartylib.Bar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|packageinfo....|__java_lang_String_<once>_@packageinfo.thirdpartylib.Bar )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@packageinfo.thirdpartylib.Bar))
  )
 )
@@ -515,20 +522,21 @@
  (local $this (ref null $packageinfo.thirdpartylib.Bar))
  (local.set $this (ref.cast (ref $packageinfo.thirdpartylib.Bar) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@packageinfo.thirdpartylib.Bar) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@packageinfo.thirdpartylib.Bar ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@packageinfo.thirdpartylib.Bar)
 
 ;;; String Bar.$getString_|packageinfo....|()
-(func $$getString_|packageinfo....|__java_lang_String@packageinfo.thirdpartylib.Bar
+(func $$getString_|packageinfo....|__java_lang_String_<once>_@packageinfo.thirdpartylib.Bar
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|packageinfo....|@packageinfo.thirdpartylib.Bar))
+  (if (i32.eqz (ref.is_null (global.get $$string_|packageinfo....|@packageinfo.thirdpartylib.Bar)))
    (then
-    (global.set $$string_|packageinfo....|@packageinfo.thirdpartylib.Bar (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "packageinfo.thirdpartylib.Bar")))
+    (return (global.get $$string_|packageinfo....|@packageinfo.thirdpartylib.Bar))
    )
   )
+  (global.set $$string_|packageinfo....|@packageinfo.thirdpartylib.Bar (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "packageinfo.thirdpartylib.Bar")))
   (return (global.get $$string_|packageinfo....|@packageinfo.thirdpartylib.Bar))
  )
 )

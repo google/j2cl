@@ -140,14 +140,15 @@
 )
 
 ;;; Class<T> BlockScoping.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@blockscoping.BlockScoping
+(func $$getClassMetadata__java_lang_Class_<once>_@blockscoping.BlockScoping
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@blockscoping.BlockScoping))
+  (if (i32.eqz (ref.is_null (global.get $$class@blockscoping.BlockScoping)))
    (then
-    (global.set $$class@blockscoping.BlockScoping (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|blockscoping...|__java_lang_String (ref.func $$getString_|blockscoping...|__java_lang_String@blockscoping.BlockScoping) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@blockscoping.BlockScoping))
    )
   )
+  (global.set $$class@blockscoping.BlockScoping (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|blockscoping...|__java_lang_String_<once>_@blockscoping.BlockScoping )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@blockscoping.BlockScoping))
  )
 )
@@ -160,20 +161,21 @@
  (local $this (ref null $blockscoping.BlockScoping))
  (local.set $this (ref.cast (ref $blockscoping.BlockScoping) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@blockscoping.BlockScoping) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@blockscoping.BlockScoping ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@blockscoping.BlockScoping)
 
 ;;; String BlockScoping.$getString_|blockscoping...|()
-(func $$getString_|blockscoping...|__java_lang_String@blockscoping.BlockScoping
+(func $$getString_|blockscoping...|__java_lang_String_<once>_@blockscoping.BlockScoping
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|blockscoping...|@blockscoping.BlockScoping))
+  (if (i32.eqz (ref.is_null (global.get $$string_|blockscoping...|@blockscoping.BlockScoping)))
    (then
-    (global.set $$string_|blockscoping...|@blockscoping.BlockScoping (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "blockscoping.BlockScoping")))
+    (return (global.get $$string_|blockscoping...|@blockscoping.BlockScoping))
    )
   )
+  (global.set $$string_|blockscoping...|@blockscoping.BlockScoping (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "blockscoping.BlockScoping")))
   (return (global.get $$string_|blockscoping...|@blockscoping.BlockScoping))
  )
 )

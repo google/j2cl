@@ -1680,27 +1680,29 @@
 )
 
 ;;; Class<T> Producer.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.Producer
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.Producer
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@methodreferences.MethodReferences.Producer))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.Producer)))
    (then
-    (global.set $$class@methodreferences.MethodReferences.Producer (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|methodrefere...|__java_lang_String (ref.func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.Producer) )))
+    (return (global.get $$class@methodreferences.MethodReferences.Producer))
    )
   )
+  (global.set $$class@methodreferences.MethodReferences.Producer (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.Producer )))
   (return (global.get $$class@methodreferences.MethodReferences.Producer))
  )
 )
 
 ;;; String Producer.$getString_|methodrefere...|()
-(func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.Producer
+(func $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.Producer
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.Producer))
+  (if (i32.eqz (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.Producer)))
    (then
-    (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.Producer (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$Producer")))
+    (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.Producer))
    )
   )
+  (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.Producer (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$Producer")))
   (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.Producer))
  )
 )
@@ -1724,27 +1726,29 @@
 )
 
 ;;; Class<T> Predicate.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.Predicate
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.Predicate
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@methodreferences.MethodReferences.Predicate))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.Predicate)))
    (then
-    (global.set $$class@methodreferences.MethodReferences.Predicate (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|methodrefere...|__java_lang_String (ref.func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.Predicate) )))
+    (return (global.get $$class@methodreferences.MethodReferences.Predicate))
    )
   )
+  (global.set $$class@methodreferences.MethodReferences.Predicate (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.Predicate )))
   (return (global.get $$class@methodreferences.MethodReferences.Predicate))
  )
 )
 
 ;;; String Predicate.$getString_|methodrefere...|()
-(func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.Predicate
+(func $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.Predicate
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.Predicate))
+  (if (i32.eqz (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.Predicate)))
    (then
-    (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.Predicate (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$Predicate")))
+    (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.Predicate))
    )
   )
+  (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.Predicate (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$Predicate")))
   (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.Predicate))
  )
 )
@@ -1768,27 +1772,29 @@
 )
 
 ;;; Class<T> ArrayProducer.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.ArrayProducer
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.ArrayProducer
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@methodreferences.MethodReferences.ArrayProducer))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.ArrayProducer)))
    (then
-    (global.set $$class@methodreferences.MethodReferences.ArrayProducer (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|methodrefere...|__java_lang_String (ref.func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.ArrayProducer) )))
+    (return (global.get $$class@methodreferences.MethodReferences.ArrayProducer))
    )
   )
+  (global.set $$class@methodreferences.MethodReferences.ArrayProducer (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.ArrayProducer )))
   (return (global.get $$class@methodreferences.MethodReferences.ArrayProducer))
  )
 )
 
 ;;; String ArrayProducer.$getString_|methodrefere...|()
-(func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.ArrayProducer
+(func $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.ArrayProducer
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.ArrayProducer))
+  (if (i32.eqz (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.ArrayProducer)))
    (then
-    (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.ArrayProducer (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$ArrayProducer")))
+    (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.ArrayProducer))
    )
   )
+  (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.ArrayProducer (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$ArrayProducer")))
   (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.ArrayProducer))
  )
 )
@@ -1812,27 +1818,29 @@
 )
 
 ;;; Class<T> Function.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.Function
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.Function
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@methodreferences.MethodReferences.Function))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.Function)))
    (then
-    (global.set $$class@methodreferences.MethodReferences.Function (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|methodrefere...|__java_lang_String (ref.func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.Function) )))
+    (return (global.get $$class@methodreferences.MethodReferences.Function))
    )
   )
+  (global.set $$class@methodreferences.MethodReferences.Function (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.Function )))
   (return (global.get $$class@methodreferences.MethodReferences.Function))
  )
 )
 
 ;;; String Function.$getString_|methodrefere...|()
-(func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.Function
+(func $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.Function
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.Function))
+  (if (i32.eqz (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.Function)))
    (then
-    (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.Function (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$Function")))
+    (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.Function))
    )
   )
+  (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.Function (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$Function")))
   (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.Function))
  )
 )
@@ -1856,27 +1864,29 @@
 )
 
 ;;; Class<T> BiFunction.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.BiFunction
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.BiFunction
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@methodreferences.MethodReferences.BiFunction))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.BiFunction)))
    (then
-    (global.set $$class@methodreferences.MethodReferences.BiFunction (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|methodrefere...|__java_lang_String (ref.func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.BiFunction) )))
+    (return (global.get $$class@methodreferences.MethodReferences.BiFunction))
    )
   )
+  (global.set $$class@methodreferences.MethodReferences.BiFunction (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.BiFunction )))
   (return (global.get $$class@methodreferences.MethodReferences.BiFunction))
  )
 )
 
 ;;; String BiFunction.$getString_|methodrefere...|()
-(func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.BiFunction
+(func $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.BiFunction
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.BiFunction))
+  (if (i32.eqz (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.BiFunction)))
    (then
-    (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.BiFunction (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$BiFunction")))
+    (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.BiFunction))
    )
   )
+  (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.BiFunction (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$BiFunction")))
   (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.BiFunction))
  )
 )
@@ -1900,27 +1910,29 @@
 )
 
 ;;; Class<T> JsProducer.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.JsProducer
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.JsProducer
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@methodreferences.MethodReferences.JsProducer))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.JsProducer)))
    (then
-    (global.set $$class@methodreferences.MethodReferences.JsProducer (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|methodrefere...|__java_lang_String (ref.func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.JsProducer) )))
+    (return (global.get $$class@methodreferences.MethodReferences.JsProducer))
    )
   )
+  (global.set $$class@methodreferences.MethodReferences.JsProducer (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.JsProducer )))
   (return (global.get $$class@methodreferences.MethodReferences.JsProducer))
  )
 )
 
 ;;; String JsProducer.$getString_|methodrefere...|()
-(func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.JsProducer
+(func $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.JsProducer
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.JsProducer))
+  (if (i32.eqz (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.JsProducer)))
    (then
-    (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.JsProducer (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$JsProducer")))
+    (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.JsProducer))
    )
   )
+  (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.JsProducer (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$JsProducer")))
   (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.JsProducer))
  )
 )
@@ -1944,27 +1956,29 @@
 )
 
 ;;; Class<T> JsFunctionInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.JsFunctionInterface
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.JsFunctionInterface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@methodreferences.MethodReferences.JsFunctionInterface))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.JsFunctionInterface)))
    (then
-    (global.set $$class@methodreferences.MethodReferences.JsFunctionInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|methodrefere...|__java_lang_String (ref.func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.JsFunctionInterface) )))
+    (return (global.get $$class@methodreferences.MethodReferences.JsFunctionInterface))
    )
   )
+  (global.set $$class@methodreferences.MethodReferences.JsFunctionInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.JsFunctionInterface )))
   (return (global.get $$class@methodreferences.MethodReferences.JsFunctionInterface))
  )
 )
 
 ;;; String JsFunctionInterface.$getString_|methodrefere...|()
-(func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.JsFunctionInterface
+(func $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.JsFunctionInterface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.JsFunctionInterface))
+  (if (i32.eqz (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.JsFunctionInterface)))
    (then
-    (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.JsFunctionInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$JsFunctionInterface")))
+    (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.JsFunctionInterface))
    )
   )
+  (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.JsFunctionInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$JsFunctionInterface")))
   (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.JsFunctionInterface))
  )
 )
@@ -1988,27 +2002,29 @@
 )
 
 ;;; Class<T> JsBiFunction.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.JsBiFunction
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.JsBiFunction
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@methodreferences.MethodReferences.JsBiFunction))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.JsBiFunction)))
    (then
-    (global.set $$class@methodreferences.MethodReferences.JsBiFunction (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|methodrefere...|__java_lang_String (ref.func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.JsBiFunction) )))
+    (return (global.get $$class@methodreferences.MethodReferences.JsBiFunction))
    )
   )
+  (global.set $$class@methodreferences.MethodReferences.JsBiFunction (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.JsBiFunction )))
   (return (global.get $$class@methodreferences.MethodReferences.JsBiFunction))
  )
 )
 
 ;;; String JsBiFunction.$getString_|methodrefere...|()
-(func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.JsBiFunction
+(func $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.JsBiFunction
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.JsBiFunction))
+  (if (i32.eqz (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.JsBiFunction)))
    (then
-    (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.JsBiFunction (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$JsBiFunction")))
+    (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.JsBiFunction))
    )
   )
+  (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.JsBiFunction (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$JsBiFunction")))
   (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.JsBiFunction))
  )
 )
@@ -2224,14 +2240,15 @@
 )
 
 ;;; Class<T> MethodReferences.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@methodreferences.MethodReferences))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences)))
    (then
-    (global.set $$class@methodreferences.MethodReferences (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|methodrefere...|__java_lang_String (ref.func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@methodreferences.MethodReferences))
    )
   )
+  (global.set $$class@methodreferences.MethodReferences (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@methodreferences.MethodReferences))
  )
 )
@@ -2244,20 +2261,21 @@
  (local $this (ref null $methodreferences.MethodReferences))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences)
 
 ;;; String MethodReferences.$getString_|methodrefere...|()
-(func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences
+(func $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences))
+  (if (i32.eqz (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences)))
    (then
-    (global.set $$string_|methodrefere...|@methodreferences.MethodReferences (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences")))
+    (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences))
    )
   )
+  (global.set $$string_|methodrefere...|@methodreferences.MethodReferences (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences")))
   (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences))
  )
 )
@@ -2328,14 +2346,15 @@
 )
 
 ;;; Class<T> <anonymous> implements Producer<T>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$1
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$1
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$1))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$1)))
    (then
-    (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|methodrefere...|__java_lang_String (ref.func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$1))
    )
   )
+  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$1 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$1))
  )
 )
@@ -2348,20 +2367,21 @@
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$1))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$1) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$1 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$1)
 
 ;;; String <anonymous> implements Producer<T>.$getString_|methodrefere...|()
-(func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$1
+(func $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$1
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$1))
+  (if (i32.eqz (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$1)))
    (then
-    (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$1")))
+    (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$1))
    )
   )
+  (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$1")))
   (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$1))
  )
 )
@@ -2429,14 +2449,15 @@
 )
 
 ;;; Class<T> <anonymous> implements Producer<T>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$2
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$2
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$2))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$2)))
    (then
-    (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|methodrefere...|__java_lang_String (ref.func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$2) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$2))
    )
   )
+  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$2 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$2))
  )
 )
@@ -2449,20 +2470,21 @@
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$2))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$2) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$2) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$2 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$2)
 
 ;;; String <anonymous> implements Producer<T>.$getString_|methodrefere...|()
-(func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$2
+(func $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$2
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$2))
+  (if (i32.eqz (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$2)))
    (then
-    (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$2")))
+    (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$2))
    )
   )
+  (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$2")))
   (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$2))
  )
 )
@@ -2530,14 +2552,15 @@
 )
 
 ;;; Class<T> <anonymous> implements Producer<T>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$3
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$3
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$3))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$3)))
    (then
-    (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$3 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|methodrefere...|__java_lang_String (ref.func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$3) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$3))
    )
   )
+  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$3 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$3 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$3))
  )
 )
@@ -2550,20 +2573,21 @@
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$3))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$3) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$3) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$3 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$3)
 
 ;;; String <anonymous> implements Producer<T>.$getString_|methodrefere...|()
-(func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$3
+(func $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$3
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$3))
+  (if (i32.eqz (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$3)))
    (then
-    (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$3 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$3")))
+    (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$3))
    )
   )
+  (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$3 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$3")))
   (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$3))
  )
 )
@@ -2634,14 +2658,15 @@
 )
 
 ;;; Class<T> <anonymous> implements Producer<T>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$4
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$4
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$4))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$4)))
    (then
-    (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$4 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|methodrefere...|__java_lang_String (ref.func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$4) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$4))
    )
   )
+  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$4 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$4 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$4))
  )
 )
@@ -2654,20 +2679,21 @@
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$4))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$4) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$4) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$4 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$4)
 
 ;;; String <anonymous> implements Producer<T>.$getString_|methodrefere...|()
-(func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$4
+(func $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$4
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$4))
+  (if (i32.eqz (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$4)))
    (then
-    (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$4 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$4")))
+    (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$4))
    )
   )
+  (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$4 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$4")))
   (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$4))
  )
 )
@@ -2743,14 +2769,15 @@
 )
 
 ;;; Class<T> <anonymous> implements BiFunction<T, U, V>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$5
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$5
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$5))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$5)))
    (then
-    (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$5 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|methodrefere...|__java_lang_String (ref.func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$5) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$5))
    )
   )
+  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$5 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$5 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$5))
  )
 )
@@ -2763,20 +2790,21 @@
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$5))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$5) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$5) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$5 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$5)
 
 ;;; String <anonymous> implements BiFunction<T, U, V>.$getString_|methodrefere...|()
-(func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$5
+(func $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$5
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$5))
+  (if (i32.eqz (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$5)))
    (then
-    (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$5 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$5")))
+    (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$5))
    )
   )
+  (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$5 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$5")))
   (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$5))
  )
 )
@@ -2852,14 +2880,15 @@
 )
 
 ;;; Class<T> <anonymous> implements Function<T, U>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$6
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$6
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$6))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$6)))
    (then
-    (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$6 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|methodrefere...|__java_lang_String (ref.func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$6) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$6))
    )
   )
+  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$6 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$6 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$6))
  )
 )
@@ -2872,20 +2901,21 @@
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$6))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$6) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$6) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$6 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$6)
 
 ;;; String <anonymous> implements Function<T, U>.$getString_|methodrefere...|()
-(func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$6
+(func $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$6
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$6))
+  (if (i32.eqz (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$6)))
    (then
-    (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$6 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$6")))
+    (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$6))
    )
   )
+  (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$6 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$6")))
   (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$6))
  )
 )
@@ -2961,14 +2991,15 @@
 )
 
 ;;; Class<T> <anonymous> implements Predicate<T>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$7
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$7
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$7))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$7)))
    (then
-    (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$7 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|methodrefere...|__java_lang_String (ref.func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$7) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$7))
    )
   )
+  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$7 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$7 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$7))
  )
 )
@@ -2981,20 +3012,21 @@
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$7))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$7) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$7) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$7 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$7)
 
 ;;; String <anonymous> implements Predicate<T>.$getString_|methodrefere...|()
-(func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$7
+(func $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$7
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$7))
+  (if (i32.eqz (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$7)))
    (then
-    (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$7 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$7")))
+    (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$7))
    )
   )
+  (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$7 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$7")))
   (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$7))
  )
 )
@@ -3066,14 +3098,15 @@
 )
 
 ;;; Class<T> <anonymous> implements Producer<T>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$8
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$8
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$8))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$8)))
    (then
-    (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$8 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|methodrefere...|__java_lang_String (ref.func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$8) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$8))
    )
   )
+  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$8 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$8 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$8))
  )
 )
@@ -3086,20 +3119,21 @@
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$8))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$8) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$8) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$8 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$8)
 
 ;;; String <anonymous> implements Producer<T>.$getString_|methodrefere...|()
-(func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$8
+(func $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$8
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$8))
+  (if (i32.eqz (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$8)))
    (then
-    (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$8 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$8")))
+    (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$8))
    )
   )
+  (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$8 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$8")))
   (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$8))
  )
 )
@@ -3168,14 +3202,15 @@
 )
 
 ;;; Class<T> <anonymous> implements ArrayProducer<T>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$9
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$9
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$9))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$9)))
    (then
-    (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$9 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|methodrefere...|__java_lang_String (ref.func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$9) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$9))
    )
   )
+  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$9 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$9 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$9))
  )
 )
@@ -3188,20 +3223,21 @@
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$9))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$9) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$9) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$9 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$9)
 
 ;;; String <anonymous> implements ArrayProducer<T>.$getString_|methodrefere...|()
-(func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$9
+(func $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$9
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$9))
+  (if (i32.eqz (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$9)))
    (then
-    (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$9 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$9")))
+    (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$9))
    )
   )
+  (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$9 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$9")))
   (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$9))
  )
 )
@@ -3272,14 +3308,15 @@
 )
 
 ;;; Class<T> <anonymous> implements Producer<T>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$10
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$10
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$10))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$10)))
    (then
-    (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$10 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|methodrefere...|__java_lang_String (ref.func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$10) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$10))
    )
   )
+  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$10 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$10 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$10))
  )
 )
@@ -3292,20 +3329,21 @@
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$10))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$10) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$10) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$10 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$10)
 
 ;;; String <anonymous> implements Producer<T>.$getString_|methodrefere...|()
-(func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$10
+(func $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$10
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$10))
+  (if (i32.eqz (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$10)))
    (then
-    (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$10 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$10")))
+    (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$10))
    )
   )
+  (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$10 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$10")))
   (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$10))
  )
 )
@@ -3377,14 +3415,15 @@
 )
 
 ;;; Class<T> <anonymous> implements Function<T, U>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$11
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$11
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$11))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$11)))
    (then
-    (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$11 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|methodrefere...|__java_lang_String (ref.func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$11) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$11))
    )
   )
+  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$11 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$11 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$11))
  )
 )
@@ -3397,20 +3436,21 @@
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$11))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$11) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$11) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$11 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$11)
 
 ;;; String <anonymous> implements Function<T, U>.$getString_|methodrefere...|()
-(func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$11
+(func $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$11
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$11))
+  (if (i32.eqz (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$11)))
    (then
-    (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$11 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$11")))
+    (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$11))
    )
   )
+  (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$11 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$11")))
   (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$11))
  )
 )
@@ -3482,14 +3522,15 @@
 )
 
 ;;; Class<T> <anonymous> implements Function<T, U>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$12
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$12
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$12))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$12)))
    (then
-    (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$12 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|methodrefere...|__java_lang_String (ref.func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$12) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$12))
    )
   )
+  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$12 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$12 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$12))
  )
 )
@@ -3502,20 +3543,21 @@
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$12))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$12) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$12) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$12 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$12)
 
 ;;; String <anonymous> implements Function<T, U>.$getString_|methodrefere...|()
-(func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$12
+(func $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$12
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$12))
+  (if (i32.eqz (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$12)))
    (then
-    (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$12 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$12")))
+    (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$12))
    )
   )
+  (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$12 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$12")))
   (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$12))
  )
 )
@@ -3587,14 +3629,15 @@
 )
 
 ;;; Class<T> <anonymous> implements Producer<T>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$13
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$13
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$13))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$13)))
    (then
-    (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$13 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|methodrefere...|__java_lang_String (ref.func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$13) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$13))
    )
   )
+  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$13 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$13 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$13))
  )
 )
@@ -3607,20 +3650,21 @@
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$13))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$13) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$13) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$13 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$13)
 
 ;;; String <anonymous> implements Producer<T>.$getString_|methodrefere...|()
-(func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$13
+(func $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$13
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$13))
+  (if (i32.eqz (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$13)))
    (then
-    (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$13 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$13")))
+    (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$13))
    )
   )
+  (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$13 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$13")))
   (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$13))
  )
 )
@@ -3688,14 +3732,15 @@
 )
 
 ;;; Class<T> <anonymous> implements JsProducer<T>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$14
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$14
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$14))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$14)))
    (then
-    (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$14 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|methodrefere...|__java_lang_String (ref.func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$14) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$14))
    )
   )
+  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$14 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$14 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$14))
  )
 )
@@ -3708,20 +3753,21 @@
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$14))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$14) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$14) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$14 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$14)
 
 ;;; String <anonymous> implements JsProducer<T>.$getString_|methodrefere...|()
-(func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$14
+(func $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$14
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$14))
+  (if (i32.eqz (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$14)))
    (then
-    (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$14 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$14")))
+    (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$14))
    )
   )
+  (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$14 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$14")))
   (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$14))
  )
 )
@@ -3789,14 +3835,15 @@
 )
 
 ;;; Class<T> <anonymous> implements JsProducer<T>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$15
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$15
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$15))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$15)))
    (then
-    (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$15 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|methodrefere...|__java_lang_String (ref.func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$15) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$15))
    )
   )
+  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$15 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$15 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$15))
  )
 )
@@ -3809,20 +3856,21 @@
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$15))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$15) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$15) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$15 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$15)
 
 ;;; String <anonymous> implements JsProducer<T>.$getString_|methodrefere...|()
-(func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$15
+(func $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$15
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$15))
+  (if (i32.eqz (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$15)))
    (then
-    (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$15 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$15")))
+    (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$15))
    )
   )
+  (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$15 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$15")))
   (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$15))
  )
 )
@@ -3893,14 +3941,15 @@
 )
 
 ;;; Class<T> <anonymous> implements JsProducer<T>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$16
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$16
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$16))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$16)))
    (then
-    (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$16 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|methodrefere...|__java_lang_String (ref.func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$16) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$16))
    )
   )
+  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$16 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$16 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$16))
  )
 )
@@ -3913,20 +3962,21 @@
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$16))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$16) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$16) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$16 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$16)
 
 ;;; String <anonymous> implements JsProducer<T>.$getString_|methodrefere...|()
-(func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$16
+(func $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$16
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$16))
+  (if (i32.eqz (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$16)))
    (then
-    (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$16 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$16")))
+    (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$16))
    )
   )
+  (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$16 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$16")))
   (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$16))
  )
 )
@@ -3998,14 +4048,15 @@
 )
 
 ;;; Class<T> <anonymous> implements JsFunctionInterface<T, U>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$17
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$17
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$17))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$17)))
    (then
-    (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$17 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|methodrefere...|__java_lang_String (ref.func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$17) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$17))
    )
   )
+  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$17 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$17 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$17))
  )
 )
@@ -4018,20 +4069,21 @@
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$17))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$17) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$17) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$17 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$17)
 
 ;;; String <anonymous> implements JsFunctionInterface<T, U>.$getString_|methodrefere...|()
-(func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$17
+(func $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$17
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$17))
+  (if (i32.eqz (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$17)))
    (then
-    (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$17 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$17")))
+    (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$17))
    )
   )
+  (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$17 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$17")))
   (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$17))
  )
 )
@@ -4103,14 +4155,15 @@
 )
 
 ;;; Class<T> <anonymous> implements JsFunctionInterface<T, U>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$18
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$18
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$18))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$18)))
    (then
-    (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$18 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|methodrefere...|__java_lang_String (ref.func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$18) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$18))
    )
   )
+  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$18 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$18 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$18))
  )
 )
@@ -4123,20 +4176,21 @@
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$18))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$18) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$18) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$18 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$18)
 
 ;;; String <anonymous> implements JsFunctionInterface<T, U>.$getString_|methodrefere...|()
-(func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$18
+(func $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$18
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$18))
+  (if (i32.eqz (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$18)))
    (then
-    (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$18 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$18")))
+    (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$18))
    )
   )
+  (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$18 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$18")))
   (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$18))
  )
 )
@@ -4208,14 +4262,15 @@
 )
 
 ;;; Class<T> <anonymous> implements JsProducer<T>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$19
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$19
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$19))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$19)))
    (then
-    (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$19 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|methodrefere...|__java_lang_String (ref.func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$19) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$19))
    )
   )
+  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$19 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$19 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$19))
  )
 )
@@ -4228,20 +4283,21 @@
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$19))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$19) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$19) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$19 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$19)
 
 ;;; String <anonymous> implements JsProducer<T>.$getString_|methodrefere...|()
-(func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$19
+(func $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$19
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$19))
+  (if (i32.eqz (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$19)))
    (then
-    (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$19 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$19")))
+    (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$19))
    )
   )
+  (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$19 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$19")))
   (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$19))
  )
 )
@@ -4317,14 +4373,15 @@
 )
 
 ;;; Class<T> <anonymous> implements JsBiFunction<T, U, V>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$20
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$20
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$20))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$20)))
    (then
-    (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$20 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|methodrefere...|__java_lang_String (ref.func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$20) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$20))
    )
   )
+  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$20 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$20 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$20))
  )
 )
@@ -4337,20 +4394,21 @@
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$20))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$20) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$20) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$20 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$20)
 
 ;;; String <anonymous> implements JsBiFunction<T, U, V>.$getString_|methodrefere...|()
-(func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$20
+(func $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$20
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$20))
+  (if (i32.eqz (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$20)))
    (then
-    (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$20 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$20")))
+    (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$20))
    )
   )
+  (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$20 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$20")))
   (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$20))
  )
 )
@@ -4426,14 +4484,15 @@
 )
 
 ;;; Class<T> <anonymous> implements JsFunctionInterface<T, U>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$21
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$21
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$21))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$21)))
    (then
-    (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$21 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|methodrefere...|__java_lang_String (ref.func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$21) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$21))
    )
   )
+  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$21 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$21 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$21))
  )
 )
@@ -4446,20 +4505,21 @@
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$21))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$21) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$21) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$21 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$21)
 
 ;;; String <anonymous> implements JsFunctionInterface<T, U>.$getString_|methodrefere...|()
-(func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$21
+(func $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$21
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$21))
+  (if (i32.eqz (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$21)))
    (then
-    (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$21 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$21")))
+    (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$21))
    )
   )
+  (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$21 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$21")))
   (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$21))
  )
 )
@@ -4531,14 +4591,15 @@
 )
 
 ;;; Class<T> ObjectCapturingOuter.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.ObjectCapturingOuter
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.ObjectCapturingOuter
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@methodreferences.MethodReferences.ObjectCapturingOuter))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.ObjectCapturingOuter)))
    (then
-    (global.set $$class@methodreferences.MethodReferences.ObjectCapturingOuter (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|methodrefere...|__java_lang_String (ref.func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.ObjectCapturingOuter) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@methodreferences.MethodReferences.ObjectCapturingOuter))
    )
   )
+  (global.set $$class@methodreferences.MethodReferences.ObjectCapturingOuter (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.ObjectCapturingOuter )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@methodreferences.MethodReferences.ObjectCapturingOuter))
  )
 )
@@ -4551,20 +4612,21 @@
  (local $this (ref null $methodreferences.MethodReferences.ObjectCapturingOuter))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.ObjectCapturingOuter) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@methodreferences.MethodReferences.ObjectCapturingOuter) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.ObjectCapturingOuter ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.ObjectCapturingOuter)
 
 ;;; String ObjectCapturingOuter.$getString_|methodrefere...|()
-(func $$getString_|methodrefere...|__java_lang_String@methodreferences.MethodReferences.ObjectCapturingOuter
+(func $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.ObjectCapturingOuter
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.ObjectCapturingOuter))
+  (if (i32.eqz (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.ObjectCapturingOuter)))
    (then
-    (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.ObjectCapturingOuter (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$ObjectCapturingOuter")))
+    (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.ObjectCapturingOuter))
    )
   )
+  (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.ObjectCapturingOuter (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$ObjectCapturingOuter")))
   (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.ObjectCapturingOuter))
  )
 )

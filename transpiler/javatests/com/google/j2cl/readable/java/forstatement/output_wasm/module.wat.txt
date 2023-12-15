@@ -329,14 +329,15 @@
 )
 
 ;;; Class<T> ForStatement.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@forstatement.ForStatement
+(func $$getClassMetadata__java_lang_Class_<once>_@forstatement.ForStatement
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@forstatement.ForStatement))
+  (if (i32.eqz (ref.is_null (global.get $$class@forstatement.ForStatement)))
    (then
-    (global.set $$class@forstatement.ForStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|forstatement...|__java_lang_String (ref.func $$getString_|forstatement...|__java_lang_String@forstatement.ForStatement) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@forstatement.ForStatement))
    )
   )
+  (global.set $$class@forstatement.ForStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|forstatement...|__java_lang_String_<once>_@forstatement.ForStatement )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@forstatement.ForStatement))
  )
 )
@@ -349,20 +350,21 @@
  (local $this (ref null $forstatement.ForStatement))
  (local.set $this (ref.cast (ref $forstatement.ForStatement) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@forstatement.ForStatement) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@forstatement.ForStatement ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@forstatement.ForStatement)
 
 ;;; String ForStatement.$getString_|forstatement...|()
-(func $$getString_|forstatement...|__java_lang_String@forstatement.ForStatement
+(func $$getString_|forstatement...|__java_lang_String_<once>_@forstatement.ForStatement
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|forstatement...|@forstatement.ForStatement))
+  (if (i32.eqz (ref.is_null (global.get $$string_|forstatement...|@forstatement.ForStatement)))
    (then
-    (global.set $$string_|forstatement...|@forstatement.ForStatement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "forstatement.ForStatement")))
+    (return (global.get $$string_|forstatement...|@forstatement.ForStatement))
    )
   )
+  (global.set $$string_|forstatement...|@forstatement.ForStatement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "forstatement.ForStatement")))
   (return (global.get $$string_|forstatement...|@forstatement.ForStatement))
  )
 )

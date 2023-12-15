@@ -97,14 +97,15 @@
 )
 
 ;;; Class<T> AssertSimple.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@assertsimple.AssertSimple
+(func $$getClassMetadata__java_lang_Class_<once>_@assertsimple.AssertSimple
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@assertsimple.AssertSimple))
+  (if (i32.eqz (ref.is_null (global.get $$class@assertsimple.AssertSimple)))
    (then
-    (global.set $$class@assertsimple.AssertSimple (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|assertsimple...|__java_lang_String (ref.func $$getString_|assertsimple...|__java_lang_String@assertsimple.AssertSimple) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@assertsimple.AssertSimple))
    )
   )
+  (global.set $$class@assertsimple.AssertSimple (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|assertsimple...|__java_lang_String_<once>_@assertsimple.AssertSimple )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@assertsimple.AssertSimple))
  )
 )
@@ -117,33 +118,35 @@
  (local $this (ref null $assertsimple.AssertSimple))
  (local.set $this (ref.cast (ref $assertsimple.AssertSimple) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@assertsimple.AssertSimple) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@assertsimple.AssertSimple ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@assertsimple.AssertSimple)
 
 ;;; String AssertSimple.$getString_|Error_|()
-(func $$getString_|Error_|__java_lang_String@assertsimple.AssertSimple
+(func $$getString_|Error_|__java_lang_String_<once>_@assertsimple.AssertSimple
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|Error_|@assertsimple.AssertSimple))
+  (if (i32.eqz (ref.is_null (global.get $$string_|Error_|@assertsimple.AssertSimple)))
    (then
-    (global.set $$string_|Error_|@assertsimple.AssertSimple (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "Error!")))
+    (return (global.get $$string_|Error_|@assertsimple.AssertSimple))
    )
   )
+  (global.set $$string_|Error_|@assertsimple.AssertSimple (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "Error!")))
   (return (global.get $$string_|Error_|@assertsimple.AssertSimple))
  )
 )
 
 ;;; String AssertSimple.$getString_|assertsimple...|()
-(func $$getString_|assertsimple...|__java_lang_String@assertsimple.AssertSimple
+(func $$getString_|assertsimple...|__java_lang_String_<once>_@assertsimple.AssertSimple
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|assertsimple...|@assertsimple.AssertSimple))
+  (if (i32.eqz (ref.is_null (global.get $$string_|assertsimple...|@assertsimple.AssertSimple)))
    (then
-    (global.set $$string_|assertsimple...|@assertsimple.AssertSimple (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "assertsimple.AssertSimple")))
+    (return (global.get $$string_|assertsimple...|@assertsimple.AssertSimple))
    )
   )
+  (global.set $$string_|assertsimple...|@assertsimple.AssertSimple (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "assertsimple.AssertSimple")))
   (return (global.get $$string_|assertsimple...|@assertsimple.AssertSimple))
  )
 )

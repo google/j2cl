@@ -129,27 +129,29 @@
 )
 
 ;;; Class<T> Foo.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@annotation.Main.Foo
+(func $$getClassMetadata__java_lang_Class_<once>_@annotation.Main.Foo
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@annotation.Main.Foo))
+  (if (i32.eqz (ref.is_null (global.get $$class@annotation.Main.Foo)))
    (then
-    (global.set $$class@annotation.Main.Foo (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|annotation.M...|__java_lang_String (ref.func $$getString_|annotation.M...|__java_lang_String@annotation.Main.Foo) )))
+    (return (global.get $$class@annotation.Main.Foo))
    )
   )
+  (global.set $$class@annotation.Main.Foo (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|annotation.M...|__java_lang_String_<once>_@annotation.Main.Foo )))
   (return (global.get $$class@annotation.Main.Foo))
  )
 )
 
 ;;; String Foo.$getString_|annotation.M...|()
-(func $$getString_|annotation.M...|__java_lang_String@annotation.Main.Foo
+(func $$getString_|annotation.M...|__java_lang_String_<once>_@annotation.Main.Foo
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|annotation.M...|@annotation.Main.Foo))
+  (if (i32.eqz (ref.is_null (global.get $$string_|annotation.M...|@annotation.Main.Foo)))
    (then
-    (global.set $$string_|annotation.M...|@annotation.Main.Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "annotation.Main$Foo")))
+    (return (global.get $$string_|annotation.M...|@annotation.Main.Foo))
    )
   )
+  (global.set $$string_|annotation.M...|@annotation.Main.Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "annotation.Main$Foo")))
   (return (global.get $$string_|annotation.M...|@annotation.Main.Foo))
  )
 )
@@ -173,27 +175,29 @@
 )
 
 ;;; Class<T> Zoo.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@annotation.Main.Zoo
+(func $$getClassMetadata__java_lang_Class_<once>_@annotation.Main.Zoo
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@annotation.Main.Zoo))
+  (if (i32.eqz (ref.is_null (global.get $$class@annotation.Main.Zoo)))
    (then
-    (global.set $$class@annotation.Main.Zoo (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|annotation.M...|__java_lang_String (ref.func $$getString_|annotation.M...|__java_lang_String@annotation.Main.Zoo) )))
+    (return (global.get $$class@annotation.Main.Zoo))
    )
   )
+  (global.set $$class@annotation.Main.Zoo (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|annotation.M...|__java_lang_String_<once>_@annotation.Main.Zoo )))
   (return (global.get $$class@annotation.Main.Zoo))
  )
 )
 
 ;;; String Zoo.$getString_|annotation.M...|()
-(func $$getString_|annotation.M...|__java_lang_String@annotation.Main.Zoo
+(func $$getString_|annotation.M...|__java_lang_String_<once>_@annotation.Main.Zoo
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|annotation.M...|@annotation.Main.Zoo))
+  (if (i32.eqz (ref.is_null (global.get $$string_|annotation.M...|@annotation.Main.Zoo)))
    (then
-    (global.set $$string_|annotation.M...|@annotation.Main.Zoo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "annotation.Main$Zoo")))
+    (return (global.get $$string_|annotation.M...|@annotation.Main.Zoo))
    )
   )
+  (global.set $$string_|annotation.M...|@annotation.Main.Zoo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "annotation.Main$Zoo")))
   (return (global.get $$string_|annotation.M...|@annotation.Main.Zoo))
  )
 )
@@ -246,14 +250,15 @@
 )
 
 ;;; Class<T> Main.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@annotation.Main
+(func $$getClassMetadata__java_lang_Class_<once>_@annotation.Main
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@annotation.Main))
+  (if (i32.eqz (ref.is_null (global.get $$class@annotation.Main)))
    (then
-    (global.set $$class@annotation.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|annotation.Main|__java_lang_String (ref.func $$getString_|annotation.Main|__java_lang_String@annotation.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@annotation.Main))
    )
   )
+  (global.set $$class@annotation.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|annotation.Main|__java_lang_String_<once>_@annotation.Main )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@annotation.Main))
  )
 )
@@ -266,20 +271,21 @@
  (local $this (ref null $annotation.Main))
  (local.set $this (ref.cast (ref $annotation.Main) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@annotation.Main) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@annotation.Main ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@annotation.Main)
 
 ;;; String Main.$getString_|annotation.Main|()
-(func $$getString_|annotation.Main|__java_lang_String@annotation.Main
+(func $$getString_|annotation.Main|__java_lang_String_<once>_@annotation.Main
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|annotation.Main|@annotation.Main))
+  (if (i32.eqz (ref.is_null (global.get $$string_|annotation.Main|@annotation.Main)))
    (then
-    (global.set $$string_|annotation.Main|@annotation.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "annotation.Main")))
+    (return (global.get $$string_|annotation.Main|@annotation.Main))
    )
   )
+  (global.set $$string_|annotation.Main|@annotation.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "annotation.Main")))
   (return (global.get $$string_|annotation.Main|@annotation.Main))
  )
 )
@@ -356,14 +362,15 @@
 )
 
 ;;; Class<T> Bar.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@annotation.Main.Bar
+(func $$getClassMetadata__java_lang_Class_<once>_@annotation.Main.Bar
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@annotation.Main.Bar))
+  (if (i32.eqz (ref.is_null (global.get $$class@annotation.Main.Bar)))
    (then
-    (global.set $$class@annotation.Main.Bar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|annotation.M...|__java_lang_String (ref.func $$getString_|annotation.M...|__java_lang_String@annotation.Main.Bar) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@annotation.Main.Bar))
    )
   )
+  (global.set $$class@annotation.Main.Bar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|annotation.M...|__java_lang_String_<once>_@annotation.Main.Bar )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@annotation.Main.Bar))
  )
 )
@@ -376,20 +383,21 @@
  (local $this (ref null $annotation.Main.Bar))
  (local.set $this (ref.cast (ref $annotation.Main.Bar) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@annotation.Main.Bar) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@annotation.Main.Bar ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@annotation.Main.Bar)
 
 ;;; String Bar.$getString_|annotation.M...|()
-(func $$getString_|annotation.M...|__java_lang_String@annotation.Main.Bar
+(func $$getString_|annotation.M...|__java_lang_String_<once>_@annotation.Main.Bar
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|annotation.M...|@annotation.Main.Bar))
+  (if (i32.eqz (ref.is_null (global.get $$string_|annotation.M...|@annotation.Main.Bar)))
    (then
-    (global.set $$string_|annotation.M...|@annotation.Main.Bar (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "annotation.Main$Bar")))
+    (return (global.get $$string_|annotation.M...|@annotation.Main.Bar))
    )
   )
+  (global.set $$string_|annotation.M...|@annotation.Main.Bar (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "annotation.Main$Bar")))
   (return (global.get $$string_|annotation.M...|@annotation.Main.Bar))
  )
 )

@@ -119,14 +119,15 @@
 )
 
 ;;; Class<T> $Overlay.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@genericnativetype.BoundedJsArray.$Overlay
+(func $$getClassMetadata__java_lang_Class_<once>_@genericnativetype.BoundedJsArray.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@genericnativetype.BoundedJsArray.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$class@genericnativetype.BoundedJsArray.$Overlay)))
    (then
-    (global.set $$class@genericnativetype.BoundedJsArray.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericnativ...|__java_lang_String (ref.func $$getString_|genericnativ...|__java_lang_String@genericnativetype.BoundedJsArray.$Overlay) )(ref.null $java.lang.Class)))
+    (return (global.get $$class@genericnativetype.BoundedJsArray.$Overlay))
    )
   )
+  (global.set $$class@genericnativetype.BoundedJsArray.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|genericnativ...|__java_lang_String_<once>_@genericnativetype.BoundedJsArray.$Overlay )(ref.null $java.lang.Class)))
   (return (global.get $$class@genericnativetype.BoundedJsArray.$Overlay))
  )
 )
@@ -139,20 +140,21 @@
  (local $this (ref null $genericnativetype.BoundedJsArray.$Overlay))
  (local.set $this (ref.cast (ref $genericnativetype.BoundedJsArray.$Overlay) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@genericnativetype.BoundedJsArray.$Overlay) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@genericnativetype.BoundedJsArray.$Overlay ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@genericnativetype.BoundedJsArray.$Overlay)
 
 ;;; String $Overlay.$getString_|genericnativ...|()
-(func $$getString_|genericnativ...|__java_lang_String@genericnativetype.BoundedJsArray.$Overlay
+(func $$getString_|genericnativ...|__java_lang_String_<once>_@genericnativetype.BoundedJsArray.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|genericnativ...|@genericnativetype.BoundedJsArray.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$string_|genericnativ...|@genericnativetype.BoundedJsArray.$Overlay)))
    (then
-    (global.set $$string_|genericnativ...|@genericnativetype.BoundedJsArray.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "genericnativetype.BoundedJsArray$$Overlay")))
+    (return (global.get $$string_|genericnativ...|@genericnativetype.BoundedJsArray.$Overlay))
    )
   )
+  (global.set $$string_|genericnativ...|@genericnativetype.BoundedJsArray.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "genericnativetype.BoundedJsArray$$Overlay")))
   (return (global.get $$string_|genericnativ...|@genericnativetype.BoundedJsArray.$Overlay))
  )
 )
@@ -236,14 +238,15 @@
 )
 
 ;;; Class<T> BoundedJsArrays.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@genericnativetype.BoundedJsArrays
+(func $$getClassMetadata__java_lang_Class_<once>_@genericnativetype.BoundedJsArrays
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@genericnativetype.BoundedJsArrays))
+  (if (i32.eqz (ref.is_null (global.get $$class@genericnativetype.BoundedJsArrays)))
    (then
-    (global.set $$class@genericnativetype.BoundedJsArrays (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericnativ...|__java_lang_String (ref.func $$getString_|genericnativ...|__java_lang_String@genericnativetype.BoundedJsArrays) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@genericnativetype.BoundedJsArrays))
    )
   )
+  (global.set $$class@genericnativetype.BoundedJsArrays (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|genericnativ...|__java_lang_String_<once>_@genericnativetype.BoundedJsArrays )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@genericnativetype.BoundedJsArrays))
  )
 )
@@ -256,20 +259,21 @@
  (local $this (ref null $genericnativetype.BoundedJsArrays))
  (local.set $this (ref.cast (ref $genericnativetype.BoundedJsArrays) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@genericnativetype.BoundedJsArrays) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@genericnativetype.BoundedJsArrays ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@genericnativetype.BoundedJsArrays)
 
 ;;; String BoundedJsArrays.$getString_|genericnativ...|()
-(func $$getString_|genericnativ...|__java_lang_String@genericnativetype.BoundedJsArrays
+(func $$getString_|genericnativ...|__java_lang_String_<once>_@genericnativetype.BoundedJsArrays
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|genericnativ...|@genericnativetype.BoundedJsArrays))
+  (if (i32.eqz (ref.is_null (global.get $$string_|genericnativ...|@genericnativetype.BoundedJsArrays)))
    (then
-    (global.set $$string_|genericnativ...|@genericnativetype.BoundedJsArrays (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "genericnativetype.BoundedJsArrays")))
+    (return (global.get $$string_|genericnativ...|@genericnativetype.BoundedJsArrays))
    )
   )
+  (global.set $$string_|genericnativ...|@genericnativetype.BoundedJsArrays (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "genericnativetype.BoundedJsArrays")))
   (return (global.get $$string_|genericnativ...|@genericnativetype.BoundedJsArrays))
  )
 )

@@ -517,27 +517,29 @@
 )
 
 ;;; Class<T> JsTypeInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@libraryinfo.Main.JsTypeInterface
+(func $$getClassMetadata__java_lang_Class_<once>_@libraryinfo.Main.JsTypeInterface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@libraryinfo.Main.JsTypeInterface))
+  (if (i32.eqz (ref.is_null (global.get $$class@libraryinfo.Main.JsTypeInterface)))
    (then
-    (global.set $$class@libraryinfo.Main.JsTypeInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|libraryinfo....|__java_lang_String (ref.func $$getString_|libraryinfo....|__java_lang_String@libraryinfo.Main.JsTypeInterface) )))
+    (return (global.get $$class@libraryinfo.Main.JsTypeInterface))
    )
   )
+  (global.set $$class@libraryinfo.Main.JsTypeInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|libraryinfo....|__java_lang_String_<once>_@libraryinfo.Main.JsTypeInterface )))
   (return (global.get $$class@libraryinfo.Main.JsTypeInterface))
  )
 )
 
 ;;; String JsTypeInterface.$getString_|libraryinfo....|()
-(func $$getString_|libraryinfo....|__java_lang_String@libraryinfo.Main.JsTypeInterface
+(func $$getString_|libraryinfo....|__java_lang_String_<once>_@libraryinfo.Main.JsTypeInterface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|libraryinfo....|@libraryinfo.Main.JsTypeInterface))
+  (if (i32.eqz (ref.is_null (global.get $$string_|libraryinfo....|@libraryinfo.Main.JsTypeInterface)))
    (then
-    (global.set $$string_|libraryinfo....|@libraryinfo.Main.JsTypeInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "libraryinfo.Main$JsTypeInterface")))
+    (return (global.get $$string_|libraryinfo....|@libraryinfo.Main.JsTypeInterface))
    )
   )
+  (global.set $$string_|libraryinfo....|@libraryinfo.Main.JsTypeInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "libraryinfo.Main$JsTypeInterface")))
   (return (global.get $$string_|libraryinfo....|@libraryinfo.Main.JsTypeInterface))
  )
 )
@@ -561,27 +563,29 @@
 )
 
 ;;; Class<T> FunctionnalInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@libraryinfo.Main.FunctionnalInterface
+(func $$getClassMetadata__java_lang_Class_<once>_@libraryinfo.Main.FunctionnalInterface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@libraryinfo.Main.FunctionnalInterface))
+  (if (i32.eqz (ref.is_null (global.get $$class@libraryinfo.Main.FunctionnalInterface)))
    (then
-    (global.set $$class@libraryinfo.Main.FunctionnalInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|libraryinfo....|__java_lang_String (ref.func $$getString_|libraryinfo....|__java_lang_String@libraryinfo.Main.FunctionnalInterface) )))
+    (return (global.get $$class@libraryinfo.Main.FunctionnalInterface))
    )
   )
+  (global.set $$class@libraryinfo.Main.FunctionnalInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|libraryinfo....|__java_lang_String_<once>_@libraryinfo.Main.FunctionnalInterface )))
   (return (global.get $$class@libraryinfo.Main.FunctionnalInterface))
  )
 )
 
 ;;; String FunctionnalInterface.$getString_|libraryinfo....|()
-(func $$getString_|libraryinfo....|__java_lang_String@libraryinfo.Main.FunctionnalInterface
+(func $$getString_|libraryinfo....|__java_lang_String_<once>_@libraryinfo.Main.FunctionnalInterface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|libraryinfo....|@libraryinfo.Main.FunctionnalInterface))
+  (if (i32.eqz (ref.is_null (global.get $$string_|libraryinfo....|@libraryinfo.Main.FunctionnalInterface)))
    (then
-    (global.set $$string_|libraryinfo....|@libraryinfo.Main.FunctionnalInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "libraryinfo.Main$FunctionnalInterface")))
+    (return (global.get $$string_|libraryinfo....|@libraryinfo.Main.FunctionnalInterface))
    )
   )
+  (global.set $$string_|libraryinfo....|@libraryinfo.Main.FunctionnalInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "libraryinfo.Main$FunctionnalInterface")))
   (return (global.get $$string_|libraryinfo....|@libraryinfo.Main.FunctionnalInterface))
  )
 )
@@ -605,27 +609,29 @@
 )
 
 ;;; Class<T> JsAccessibleFunctionnalInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@libraryinfo.Main.JsAccessibleFunctionnalInterface
+(func $$getClassMetadata__java_lang_Class_<once>_@libraryinfo.Main.JsAccessibleFunctionnalInterface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@libraryinfo.Main.JsAccessibleFunctionnalInterface))
+  (if (i32.eqz (ref.is_null (global.get $$class@libraryinfo.Main.JsAccessibleFunctionnalInterface)))
    (then
-    (global.set $$class@libraryinfo.Main.JsAccessibleFunctionnalInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|libraryinfo....|__java_lang_String (ref.func $$getString_|libraryinfo....|__java_lang_String@libraryinfo.Main.JsAccessibleFunctionnalInterface) )))
+    (return (global.get $$class@libraryinfo.Main.JsAccessibleFunctionnalInterface))
    )
   )
+  (global.set $$class@libraryinfo.Main.JsAccessibleFunctionnalInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|libraryinfo....|__java_lang_String_<once>_@libraryinfo.Main.JsAccessibleFunctionnalInterface )))
   (return (global.get $$class@libraryinfo.Main.JsAccessibleFunctionnalInterface))
  )
 )
 
 ;;; String JsAccessibleFunctionnalInterface.$getString_|libraryinfo....|()
-(func $$getString_|libraryinfo....|__java_lang_String@libraryinfo.Main.JsAccessibleFunctionnalInterface
+(func $$getString_|libraryinfo....|__java_lang_String_<once>_@libraryinfo.Main.JsAccessibleFunctionnalInterface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|libraryinfo....|@libraryinfo.Main.JsAccessibleFunctionnalInterface))
+  (if (i32.eqz (ref.is_null (global.get $$string_|libraryinfo....|@libraryinfo.Main.JsAccessibleFunctionnalInterface)))
    (then
-    (global.set $$string_|libraryinfo....|@libraryinfo.Main.JsAccessibleFunctionnalInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "libraryinfo.Main$JsAccessibleFunctionnalInterface")))
+    (return (global.get $$string_|libraryinfo....|@libraryinfo.Main.JsAccessibleFunctionnalInterface))
    )
   )
+  (global.set $$string_|libraryinfo....|@libraryinfo.Main.JsAccessibleFunctionnalInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "libraryinfo.Main$JsAccessibleFunctionnalInterface")))
   (return (global.get $$string_|libraryinfo....|@libraryinfo.Main.JsAccessibleFunctionnalInterface))
  )
 )
@@ -649,27 +655,29 @@
 )
 
 ;;; Class<T> Function.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@libraryinfo.Main.Function
+(func $$getClassMetadata__java_lang_Class_<once>_@libraryinfo.Main.Function
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@libraryinfo.Main.Function))
+  (if (i32.eqz (ref.is_null (global.get $$class@libraryinfo.Main.Function)))
    (then
-    (global.set $$class@libraryinfo.Main.Function (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|libraryinfo....|__java_lang_String (ref.func $$getString_|libraryinfo....|__java_lang_String@libraryinfo.Main.Function) )))
+    (return (global.get $$class@libraryinfo.Main.Function))
    )
   )
+  (global.set $$class@libraryinfo.Main.Function (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|libraryinfo....|__java_lang_String_<once>_@libraryinfo.Main.Function )))
   (return (global.get $$class@libraryinfo.Main.Function))
  )
 )
 
 ;;; String Function.$getString_|libraryinfo....|()
-(func $$getString_|libraryinfo....|__java_lang_String@libraryinfo.Main.Function
+(func $$getString_|libraryinfo....|__java_lang_String_<once>_@libraryinfo.Main.Function
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|libraryinfo....|@libraryinfo.Main.Function))
+  (if (i32.eqz (ref.is_null (global.get $$string_|libraryinfo....|@libraryinfo.Main.Function)))
    (then
-    (global.set $$string_|libraryinfo....|@libraryinfo.Main.Function (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "libraryinfo.Main$Function")))
+    (return (global.get $$string_|libraryinfo....|@libraryinfo.Main.Function))
    )
   )
+  (global.set $$string_|libraryinfo....|@libraryinfo.Main.Function (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "libraryinfo.Main$Function")))
   (return (global.get $$string_|libraryinfo....|@libraryinfo.Main.Function))
  )
 )
@@ -693,14 +701,15 @@
 )
 
 ;;; Class<T> $Overlay.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@libraryinfo.Main.MyJsEnum.$Overlay
+(func $$getClassMetadata__java_lang_Class_<once>_@libraryinfo.Main.MyJsEnum.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@libraryinfo.Main.MyJsEnum.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$class@libraryinfo.Main.MyJsEnum.$Overlay)))
    (then
-    (global.set $$class@libraryinfo.Main.MyJsEnum.$Overlay (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|libraryinfo....|__java_lang_String (ref.func $$getString_|libraryinfo....|__java_lang_String@libraryinfo.Main.MyJsEnum.$Overlay) )))
+    (return (global.get $$class@libraryinfo.Main.MyJsEnum.$Overlay))
    )
   )
+  (global.set $$class@libraryinfo.Main.MyJsEnum.$Overlay (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|libraryinfo....|__java_lang_String_<once>_@libraryinfo.Main.MyJsEnum.$Overlay )))
   (return (global.get $$class@libraryinfo.Main.MyJsEnum.$Overlay))
  )
 )
@@ -713,20 +722,21 @@
  (local $this (ref null $libraryinfo.Main.MyJsEnum.$Overlay))
  (local.set $this (ref.cast (ref $libraryinfo.Main.MyJsEnum.$Overlay) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@libraryinfo.Main.MyJsEnum.$Overlay) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@libraryinfo.Main.MyJsEnum.$Overlay ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@libraryinfo.Main.MyJsEnum.$Overlay)
 
 ;;; String $Overlay.$getString_|libraryinfo....|()
-(func $$getString_|libraryinfo....|__java_lang_String@libraryinfo.Main.MyJsEnum.$Overlay
+(func $$getString_|libraryinfo....|__java_lang_String_<once>_@libraryinfo.Main.MyJsEnum.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|libraryinfo....|@libraryinfo.Main.MyJsEnum.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$string_|libraryinfo....|@libraryinfo.Main.MyJsEnum.$Overlay)))
    (then
-    (global.set $$string_|libraryinfo....|@libraryinfo.Main.MyJsEnum.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "libraryinfo.Main$MyJsEnum$$Overlay")))
+    (return (global.get $$string_|libraryinfo....|@libraryinfo.Main.MyJsEnum.$Overlay))
    )
   )
+  (global.set $$string_|libraryinfo....|@libraryinfo.Main.MyJsEnum.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "libraryinfo.Main$MyJsEnum$$Overlay")))
   (return (global.get $$string_|libraryinfo....|@libraryinfo.Main.MyJsEnum.$Overlay))
  )
 )
@@ -784,7 +794,7 @@
   ;;@ libraryinfo/Main.java:84:4
   (local.set $jsFunction (call $$create__@libraryinfo.Main.$LambdaImplementor$1 ))
   ;;@ libraryinfo/Main.java:85:4
-  (call_ref $function.m_apply__java_lang_String__void (ref.as_non_null (local.get $jsFunction))(call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@libraryinfo.Main) )(struct.get $libraryinfo.Main.Function.vtable $m_apply__java_lang_String__void (ref.cast (ref $libraryinfo.Main.Function.vtable) (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $jsFunction))))))
+  (call_ref $function.m_apply__java_lang_String__void (ref.as_non_null (local.get $jsFunction))(call $$getString_|foo|__java_lang_String_<once>_@libraryinfo.Main )(struct.get $libraryinfo.Main.Function.vtable $m_apply__java_lang_String__void (ref.cast (ref $libraryinfo.Main.Function.vtable) (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $jsFunction))))))
   ;;@ libraryinfo/Main.java:87:4
   (drop (call $$create__@libraryinfo.Main.MyJsType ))
   ;;@ libraryinfo/Main.java:89:4
@@ -835,7 +845,7 @@
   ;;@ libraryinfo/Main.java:114:4
   (call_ref $function.m_instanceMethod__void_$pp_libraryinfo (ref.as_non_null (local.get $foo))(struct.get $libraryinfo.Main.Foo.vtable $m_instanceMethod__void_$pp_libraryinfo (struct.get $libraryinfo.Main.Foo $vtable(local.get $foo))))
   ;;@ libraryinfo/Main.java:116:4
-  (local.set $clazz (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@libraryinfo.Main.Foo) ))
+  (local.set $clazz (call $$getClassMetadata__java_lang_Class_<once>_@libraryinfo.Main.Foo ))
  )
 )
 
@@ -855,19 +865,20 @@
   ;;@ libraryinfo/Main.java:25:13
   (call $$clinit__void_<once>_@java.lang.Object )
   ;;@ libraryinfo/Main.java:27:2
-  (global.set $STATIC_FIELD@libraryinfo.Main (call $function.no.side.effects.$getString_|STATIC_FIELD|__java_lang_String (ref.func $$getString_|STATIC_FIELD|__java_lang_String@libraryinfo.Main) ))
+  (global.set $STATIC_FIELD@libraryinfo.Main (call $$getString_|STATIC_FIELD|__java_lang_String_<once>_@libraryinfo.Main ))
  )
 )
 
 ;;; Class<T> Main.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@libraryinfo.Main
+(func $$getClassMetadata__java_lang_Class_<once>_@libraryinfo.Main
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@libraryinfo.Main))
+  (if (i32.eqz (ref.is_null (global.get $$class@libraryinfo.Main)))
    (then
-    (global.set $$class@libraryinfo.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|libraryinfo....|__java_lang_String (ref.func $$getString_|libraryinfo....|__java_lang_String@libraryinfo.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@libraryinfo.Main))
    )
   )
+  (global.set $$class@libraryinfo.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|libraryinfo....|__java_lang_String_<once>_@libraryinfo.Main )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@libraryinfo.Main))
  )
 )
@@ -880,46 +891,49 @@
  (local $this (ref null $libraryinfo.Main))
  (local.set $this (ref.cast (ref $libraryinfo.Main) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@libraryinfo.Main) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@libraryinfo.Main ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@libraryinfo.Main)
 
 ;;; String Main.$getString_|foo|()
-(func $$getString_|foo|__java_lang_String@libraryinfo.Main
+(func $$getString_|foo|__java_lang_String_<once>_@libraryinfo.Main
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|foo|@libraryinfo.Main))
+  (if (i32.eqz (ref.is_null (global.get $$string_|foo|@libraryinfo.Main)))
    (then
-    (global.set $$string_|foo|@libraryinfo.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "foo")))
+    (return (global.get $$string_|foo|@libraryinfo.Main))
    )
   )
+  (global.set $$string_|foo|@libraryinfo.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "foo")))
   (return (global.get $$string_|foo|@libraryinfo.Main))
  )
 )
 
 ;;; String Main.$getString_|STATIC_FIELD|()
-(func $$getString_|STATIC_FIELD|__java_lang_String@libraryinfo.Main
+(func $$getString_|STATIC_FIELD|__java_lang_String_<once>_@libraryinfo.Main
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|STATIC_FIELD|@libraryinfo.Main))
+  (if (i32.eqz (ref.is_null (global.get $$string_|STATIC_FIELD|@libraryinfo.Main)))
    (then
-    (global.set $$string_|STATIC_FIELD|@libraryinfo.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "STATIC_FIELD")))
+    (return (global.get $$string_|STATIC_FIELD|@libraryinfo.Main))
    )
   )
+  (global.set $$string_|STATIC_FIELD|@libraryinfo.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "STATIC_FIELD")))
   (return (global.get $$string_|STATIC_FIELD|@libraryinfo.Main))
  )
 )
 
 ;;; String Main.$getString_|libraryinfo....|()
-(func $$getString_|libraryinfo....|__java_lang_String@libraryinfo.Main
+(func $$getString_|libraryinfo....|__java_lang_String_<once>_@libraryinfo.Main
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|libraryinfo....|@libraryinfo.Main))
+  (if (i32.eqz (ref.is_null (global.get $$string_|libraryinfo....|@libraryinfo.Main)))
    (then
-    (global.set $$string_|libraryinfo....|@libraryinfo.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "libraryinfo.Main")))
+    (return (global.get $$string_|libraryinfo....|@libraryinfo.Main))
    )
   )
+  (global.set $$string_|libraryinfo....|@libraryinfo.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "libraryinfo.Main")))
   (return (global.get $$string_|libraryinfo....|@libraryinfo.Main))
  )
 )
@@ -987,14 +1001,15 @@
 )
 
 ;;; Class<T> <anonymous> implements Function.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@libraryinfo.Main.$LambdaImplementor$1
+(func $$getClassMetadata__java_lang_Class_<once>_@libraryinfo.Main.$LambdaImplementor$1
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@libraryinfo.Main.$LambdaImplementor$1))
+  (if (i32.eqz (ref.is_null (global.get $$class@libraryinfo.Main.$LambdaImplementor$1)))
    (then
-    (global.set $$class@libraryinfo.Main.$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|libraryinfo....|__java_lang_String (ref.func $$getString_|libraryinfo....|__java_lang_String@libraryinfo.Main.$LambdaImplementor$1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@libraryinfo.Main.$LambdaImplementor$1))
    )
   )
+  (global.set $$class@libraryinfo.Main.$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|libraryinfo....|__java_lang_String_<once>_@libraryinfo.Main.$LambdaImplementor$1 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@libraryinfo.Main.$LambdaImplementor$1))
  )
 )
@@ -1007,20 +1022,21 @@
  (local $this (ref null $libraryinfo.Main.$LambdaImplementor$1))
  (local.set $this (ref.cast (ref $libraryinfo.Main.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@libraryinfo.Main.$LambdaImplementor$1) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@libraryinfo.Main.$LambdaImplementor$1 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@libraryinfo.Main.$LambdaImplementor$1)
 
 ;;; String <anonymous> implements Function.$getString_|libraryinfo....|()
-(func $$getString_|libraryinfo....|__java_lang_String@libraryinfo.Main.$LambdaImplementor$1
+(func $$getString_|libraryinfo....|__java_lang_String_<once>_@libraryinfo.Main.$LambdaImplementor$1
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|libraryinfo....|@libraryinfo.Main.$LambdaImplementor$1))
+  (if (i32.eqz (ref.is_null (global.get $$string_|libraryinfo....|@libraryinfo.Main.$LambdaImplementor$1)))
    (then
-    (global.set $$string_|libraryinfo....|@libraryinfo.Main.$LambdaImplementor$1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "libraryinfo.Main$$LambdaImplementor$1")))
+    (return (global.get $$string_|libraryinfo....|@libraryinfo.Main.$LambdaImplementor$1))
    )
   )
+  (global.set $$string_|libraryinfo....|@libraryinfo.Main.$LambdaImplementor$1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "libraryinfo.Main$$LambdaImplementor$1")))
   (return (global.get $$string_|libraryinfo....|@libraryinfo.Main.$LambdaImplementor$1))
  )
 )
@@ -1085,14 +1101,15 @@
 )
 
 ;;; Class<T> <anonymous> extends Object.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@libraryinfo.Main.1
+(func $$getClassMetadata__java_lang_Class_<once>_@libraryinfo.Main.1
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@libraryinfo.Main.1))
+  (if (i32.eqz (ref.is_null (global.get $$class@libraryinfo.Main.1)))
    (then
-    (global.set $$class@libraryinfo.Main.1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|libraryinfo....|__java_lang_String (ref.func $$getString_|libraryinfo....|__java_lang_String@libraryinfo.Main.1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@libraryinfo.Main.1))
    )
   )
+  (global.set $$class@libraryinfo.Main.1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|libraryinfo....|__java_lang_String_<once>_@libraryinfo.Main.1 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@libraryinfo.Main.1))
  )
 )
@@ -1105,20 +1122,21 @@
  (local $this (ref null $libraryinfo.Main.1))
  (local.set $this (ref.cast (ref $libraryinfo.Main.1) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@libraryinfo.Main.1) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@libraryinfo.Main.1 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@libraryinfo.Main.1)
 
 ;;; String <anonymous> extends Object.$getString_|libraryinfo....|()
-(func $$getString_|libraryinfo....|__java_lang_String@libraryinfo.Main.1
+(func $$getString_|libraryinfo....|__java_lang_String_<once>_@libraryinfo.Main.1
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|libraryinfo....|@libraryinfo.Main.1))
+  (if (i32.eqz (ref.is_null (global.get $$string_|libraryinfo....|@libraryinfo.Main.1)))
    (then
-    (global.set $$string_|libraryinfo....|@libraryinfo.Main.1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "libraryinfo.Main$1")))
+    (return (global.get $$string_|libraryinfo....|@libraryinfo.Main.1))
    )
   )
+  (global.set $$string_|libraryinfo....|@libraryinfo.Main.1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "libraryinfo.Main$1")))
   (return (global.get $$string_|libraryinfo....|@libraryinfo.Main.1))
  )
 )
@@ -1184,14 +1202,15 @@
 )
 
 ;;; Class<T> FunctionImpl.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@libraryinfo.Main.FunctionImpl
+(func $$getClassMetadata__java_lang_Class_<once>_@libraryinfo.Main.FunctionImpl
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@libraryinfo.Main.FunctionImpl))
+  (if (i32.eqz (ref.is_null (global.get $$class@libraryinfo.Main.FunctionImpl)))
    (then
-    (global.set $$class@libraryinfo.Main.FunctionImpl (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|libraryinfo....|__java_lang_String (ref.func $$getString_|libraryinfo....|__java_lang_String@libraryinfo.Main.FunctionImpl) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@libraryinfo.Main.FunctionImpl))
    )
   )
+  (global.set $$class@libraryinfo.Main.FunctionImpl (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|libraryinfo....|__java_lang_String_<once>_@libraryinfo.Main.FunctionImpl )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@libraryinfo.Main.FunctionImpl))
  )
 )
@@ -1204,20 +1223,21 @@
  (local $this (ref null $libraryinfo.Main.FunctionImpl))
  (local.set $this (ref.cast (ref $libraryinfo.Main.FunctionImpl) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@libraryinfo.Main.FunctionImpl) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@libraryinfo.Main.FunctionImpl ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@libraryinfo.Main.FunctionImpl)
 
 ;;; String FunctionImpl.$getString_|libraryinfo....|()
-(func $$getString_|libraryinfo....|__java_lang_String@libraryinfo.Main.FunctionImpl
+(func $$getString_|libraryinfo....|__java_lang_String_<once>_@libraryinfo.Main.FunctionImpl
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|libraryinfo....|@libraryinfo.Main.FunctionImpl))
+  (if (i32.eqz (ref.is_null (global.get $$string_|libraryinfo....|@libraryinfo.Main.FunctionImpl)))
    (then
-    (global.set $$string_|libraryinfo....|@libraryinfo.Main.FunctionImpl (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "libraryinfo.Main$FunctionImpl")))
+    (return (global.get $$string_|libraryinfo....|@libraryinfo.Main.FunctionImpl))
    )
   )
+  (global.set $$string_|libraryinfo....|@libraryinfo.Main.FunctionImpl (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "libraryinfo.Main$FunctionImpl")))
   (return (global.get $$string_|libraryinfo....|@libraryinfo.Main.FunctionImpl))
  )
 )
@@ -1274,14 +1294,15 @@
 )
 
 ;;; Class<T> MyJsType.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@libraryinfo.Main.MyJsType
+(func $$getClassMetadata__java_lang_Class_<once>_@libraryinfo.Main.MyJsType
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@libraryinfo.Main.MyJsType))
+  (if (i32.eqz (ref.is_null (global.get $$class@libraryinfo.Main.MyJsType)))
    (then
-    (global.set $$class@libraryinfo.Main.MyJsType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|libraryinfo....|__java_lang_String (ref.func $$getString_|libraryinfo....|__java_lang_String@libraryinfo.Main.MyJsType) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@libraryinfo.Main.MyJsType))
    )
   )
+  (global.set $$class@libraryinfo.Main.MyJsType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|libraryinfo....|__java_lang_String_<once>_@libraryinfo.Main.MyJsType )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@libraryinfo.Main.MyJsType))
  )
 )
@@ -1294,20 +1315,21 @@
  (local $this (ref null $libraryinfo.Main.MyJsType))
  (local.set $this (ref.cast (ref $libraryinfo.Main.MyJsType) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@libraryinfo.Main.MyJsType) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@libraryinfo.Main.MyJsType ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@libraryinfo.Main.MyJsType)
 
 ;;; String MyJsType.$getString_|libraryinfo....|()
-(func $$getString_|libraryinfo....|__java_lang_String@libraryinfo.Main.MyJsType
+(func $$getString_|libraryinfo....|__java_lang_String_<once>_@libraryinfo.Main.MyJsType
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|libraryinfo....|@libraryinfo.Main.MyJsType))
+  (if (i32.eqz (ref.is_null (global.get $$string_|libraryinfo....|@libraryinfo.Main.MyJsType)))
    (then
-    (global.set $$string_|libraryinfo....|@libraryinfo.Main.MyJsType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "libraryinfo.Main$MyJsType")))
+    (return (global.get $$string_|libraryinfo....|@libraryinfo.Main.MyJsType))
    )
   )
+  (global.set $$string_|libraryinfo....|@libraryinfo.Main.MyJsType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "libraryinfo.Main$MyJsType")))
   (return (global.get $$string_|libraryinfo....|@libraryinfo.Main.MyJsType))
  )
 )
@@ -1376,14 +1398,15 @@
 )
 
 ;;; Class<T> Foo.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@libraryinfo.Main.Foo
+(func $$getClassMetadata__java_lang_Class_<once>_@libraryinfo.Main.Foo
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@libraryinfo.Main.Foo))
+  (if (i32.eqz (ref.is_null (global.get $$class@libraryinfo.Main.Foo)))
    (then
-    (global.set $$class@libraryinfo.Main.Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|libraryinfo....|__java_lang_String (ref.func $$getString_|libraryinfo....|__java_lang_String@libraryinfo.Main.Foo) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@libraryinfo.Main.Foo))
    )
   )
+  (global.set $$class@libraryinfo.Main.Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|libraryinfo....|__java_lang_String_<once>_@libraryinfo.Main.Foo )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@libraryinfo.Main.Foo))
  )
 )
@@ -1396,20 +1419,21 @@
  (local $this (ref null $libraryinfo.Main.Foo))
  (local.set $this (ref.cast (ref $libraryinfo.Main.Foo) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@libraryinfo.Main.Foo) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@libraryinfo.Main.Foo ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@libraryinfo.Main.Foo)
 
 ;;; String Foo.$getString_|libraryinfo....|()
-(func $$getString_|libraryinfo....|__java_lang_String@libraryinfo.Main.Foo
+(func $$getString_|libraryinfo....|__java_lang_String_<once>_@libraryinfo.Main.Foo
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|libraryinfo....|@libraryinfo.Main.Foo))
+  (if (i32.eqz (ref.is_null (global.get $$string_|libraryinfo....|@libraryinfo.Main.Foo)))
    (then
-    (global.set $$string_|libraryinfo....|@libraryinfo.Main.Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "libraryinfo.Main$Foo")))
+    (return (global.get $$string_|libraryinfo....|@libraryinfo.Main.Foo))
    )
   )
+  (global.set $$string_|libraryinfo....|@libraryinfo.Main.Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "libraryinfo.Main$Foo")))
   (return (global.get $$string_|libraryinfo....|@libraryinfo.Main.Foo))
  )
 )
@@ -1509,21 +1533,22 @@
   ;;@ libraryinfo/Main.java:65:7
   (call $$clinit__void_<once>_@java.lang.Enum )
   ;;@ libraryinfo/Main.java:66:4
-  (global.set $FOO@libraryinfo.Main.MyEnum (call $$create__java_lang_String__int@libraryinfo.Main.MyEnum (call $function.no.side.effects.$getString_|FOO|__java_lang_String (ref.func $$getString_|FOO|__java_lang_String@libraryinfo.Main.MyEnum) )(i32.const 0)))
+  (global.set $FOO@libraryinfo.Main.MyEnum (call $$create__java_lang_String__int@libraryinfo.Main.MyEnum (call $$getString_|FOO|__java_lang_String_<once>_@libraryinfo.Main.MyEnum )(i32.const 0)))
   ;;@ libraryinfo/Main.java:67:4
-  (global.set $BAR@libraryinfo.Main.MyEnum (call $$create__java_lang_String__int@libraryinfo.Main.MyEnum (call $function.no.side.effects.$getString_|BAR|__java_lang_String (ref.func $$getString_|BAR|__java_lang_String@libraryinfo.Main.MyEnum) )(i32.const 1)))
+  (global.set $BAR@libraryinfo.Main.MyEnum (call $$create__java_lang_String__int@libraryinfo.Main.MyEnum (call $$getString_|BAR|__java_lang_String_<once>_@libraryinfo.Main.MyEnum )(i32.const 1)))
  )
 )
 
 ;;; Class<T> MyEnum.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@libraryinfo.Main.MyEnum
+(func $$getClassMetadata__java_lang_Class_<once>_@libraryinfo.Main.MyEnum
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@libraryinfo.Main.MyEnum))
+  (if (i32.eqz (ref.is_null (global.get $$class@libraryinfo.Main.MyEnum)))
    (then
-    (global.set $$class@libraryinfo.Main.MyEnum (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|libraryinfo....|__java_lang_String (ref.func $$getString_|libraryinfo....|__java_lang_String@libraryinfo.Main.MyEnum) )))
+    (return (global.get $$class@libraryinfo.Main.MyEnum))
    )
   )
+  (global.set $$class@libraryinfo.Main.MyEnum (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|libraryinfo....|__java_lang_String_<once>_@libraryinfo.Main.MyEnum )))
   (return (global.get $$class@libraryinfo.Main.MyEnum))
  )
 )
@@ -1536,46 +1561,49 @@
  (local $this (ref null $libraryinfo.Main.MyEnum))
  (local.set $this (ref.cast (ref $libraryinfo.Main.MyEnum) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@libraryinfo.Main.MyEnum) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@libraryinfo.Main.MyEnum ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@libraryinfo.Main.MyEnum)
 
 ;;; String MyEnum.$getString_|FOO|()
-(func $$getString_|FOO|__java_lang_String@libraryinfo.Main.MyEnum
+(func $$getString_|FOO|__java_lang_String_<once>_@libraryinfo.Main.MyEnum
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|FOO|@libraryinfo.Main.MyEnum))
+  (if (i32.eqz (ref.is_null (global.get $$string_|FOO|@libraryinfo.Main.MyEnum)))
    (then
-    (global.set $$string_|FOO|@libraryinfo.Main.MyEnum (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "FOO")))
+    (return (global.get $$string_|FOO|@libraryinfo.Main.MyEnum))
    )
   )
+  (global.set $$string_|FOO|@libraryinfo.Main.MyEnum (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "FOO")))
   (return (global.get $$string_|FOO|@libraryinfo.Main.MyEnum))
  )
 )
 
 ;;; String MyEnum.$getString_|BAR|()
-(func $$getString_|BAR|__java_lang_String@libraryinfo.Main.MyEnum
+(func $$getString_|BAR|__java_lang_String_<once>_@libraryinfo.Main.MyEnum
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|BAR|@libraryinfo.Main.MyEnum))
+  (if (i32.eqz (ref.is_null (global.get $$string_|BAR|@libraryinfo.Main.MyEnum)))
    (then
-    (global.set $$string_|BAR|@libraryinfo.Main.MyEnum (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "BAR")))
+    (return (global.get $$string_|BAR|@libraryinfo.Main.MyEnum))
    )
   )
+  (global.set $$string_|BAR|@libraryinfo.Main.MyEnum (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "BAR")))
   (return (global.get $$string_|BAR|@libraryinfo.Main.MyEnum))
  )
 )
 
 ;;; String MyEnum.$getString_|libraryinfo....|()
-(func $$getString_|libraryinfo....|__java_lang_String@libraryinfo.Main.MyEnum
+(func $$getString_|libraryinfo....|__java_lang_String_<once>_@libraryinfo.Main.MyEnum
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|libraryinfo....|@libraryinfo.Main.MyEnum))
+  (if (i32.eqz (ref.is_null (global.get $$string_|libraryinfo....|@libraryinfo.Main.MyEnum)))
    (then
-    (global.set $$string_|libraryinfo....|@libraryinfo.Main.MyEnum (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "libraryinfo.Main$MyEnum")))
+    (return (global.get $$string_|libraryinfo....|@libraryinfo.Main.MyEnum))
    )
   )
+  (global.set $$string_|libraryinfo....|@libraryinfo.Main.MyEnum (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "libraryinfo.Main$MyEnum")))
   (return (global.get $$string_|libraryinfo....|@libraryinfo.Main.MyEnum))
  )
 )

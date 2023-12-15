@@ -325,14 +325,15 @@
 )
 
 ;;; Class<T> $Overlay.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@nativejstypes.Bar.$Overlay
+(func $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.Bar.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@nativejstypes.Bar.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$class@nativejstypes.Bar.$Overlay)))
    (then
-    (global.set $$class@nativejstypes.Bar.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nativejstype...|__java_lang_String (ref.func $$getString_|nativejstype...|__java_lang_String@nativejstypes.Bar.$Overlay) )(ref.null $java.lang.Class)))
+    (return (global.get $$class@nativejstypes.Bar.$Overlay))
    )
   )
+  (global.set $$class@nativejstypes.Bar.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.Bar.$Overlay )(ref.null $java.lang.Class)))
   (return (global.get $$class@nativejstypes.Bar.$Overlay))
  )
 )
@@ -345,20 +346,21 @@
  (local $this (ref null $nativejstypes.Bar.$Overlay))
  (local.set $this (ref.cast (ref $nativejstypes.Bar.$Overlay) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nativejstypes.Bar.$Overlay) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.Bar.$Overlay ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nativejstypes.Bar.$Overlay)
 
 ;;; String $Overlay.$getString_|nativejstype...|()
-(func $$getString_|nativejstype...|__java_lang_String@nativejstypes.Bar.$Overlay
+(func $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.Bar.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|nativejstype...|@nativejstypes.Bar.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$string_|nativejstype...|@nativejstypes.Bar.$Overlay)))
    (then
-    (global.set $$string_|nativejstype...|@nativejstypes.Bar.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nativejstypes.Bar$$Overlay")))
+    (return (global.get $$string_|nativejstype...|@nativejstypes.Bar.$Overlay))
    )
   )
+  (global.set $$string_|nativejstype...|@nativejstypes.Bar.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nativejstypes.Bar$$Overlay")))
   (return (global.get $$string_|nativejstype...|@nativejstypes.Bar.$Overlay))
  )
 )
@@ -382,14 +384,15 @@
 )
 
 ;;; Class<T> $Overlay.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@nativejstypes.BarInnerWithDotInName.$Overlay
+(func $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.BarInnerWithDotInName.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@nativejstypes.BarInnerWithDotInName.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$class@nativejstypes.BarInnerWithDotInName.$Overlay)))
    (then
-    (global.set $$class@nativejstypes.BarInnerWithDotInName.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nativejstype...|__java_lang_String (ref.func $$getString_|nativejstype...|__java_lang_String@nativejstypes.BarInnerWithDotInName.$Overlay) )(ref.null $java.lang.Class)))
+    (return (global.get $$class@nativejstypes.BarInnerWithDotInName.$Overlay))
    )
   )
+  (global.set $$class@nativejstypes.BarInnerWithDotInName.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.BarInnerWithDotInName.$Overlay )(ref.null $java.lang.Class)))
   (return (global.get $$class@nativejstypes.BarInnerWithDotInName.$Overlay))
  )
 )
@@ -402,20 +405,21 @@
  (local $this (ref null $nativejstypes.BarInnerWithDotInName.$Overlay))
  (local.set $this (ref.cast (ref $nativejstypes.BarInnerWithDotInName.$Overlay) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nativejstypes.BarInnerWithDotInName.$Overlay) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.BarInnerWithDotInName.$Overlay ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nativejstypes.BarInnerWithDotInName.$Overlay)
 
 ;;; String $Overlay.$getString_|nativejstype...|()
-(func $$getString_|nativejstype...|__java_lang_String@nativejstypes.BarInnerWithDotInName.$Overlay
+(func $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.BarInnerWithDotInName.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|nativejstype...|@nativejstypes.BarInnerWithDotInName.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$string_|nativejstype...|@nativejstypes.BarInnerWithDotInName.$Overlay)))
    (then
-    (global.set $$string_|nativejstype...|@nativejstypes.BarInnerWithDotInName.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nativejstypes.BarInnerWithDotInName$$Overlay")))
+    (return (global.get $$string_|nativejstype...|@nativejstypes.BarInnerWithDotInName.$Overlay))
    )
   )
+  (global.set $$string_|nativejstype...|@nativejstypes.BarInnerWithDotInName.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nativejstypes.BarInnerWithDotInName$$Overlay")))
   (return (global.get $$string_|nativejstype...|@nativejstypes.BarInnerWithDotInName.$Overlay))
  )
 )
@@ -439,14 +443,15 @@
 )
 
 ;;; Class<T> $Overlay.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay
+(func $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$class@nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay)))
    (then
-    (global.set $$class@nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nativejstype...|__java_lang_String (ref.func $$getString_|nativejstype...|__java_lang_String@nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay) )(ref.null $java.lang.Class)))
+    (return (global.get $$class@nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay))
    )
   )
+  (global.set $$class@nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay )(ref.null $java.lang.Class)))
   (return (global.get $$class@nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay))
  )
 )
@@ -459,20 +464,21 @@
  (local $this (ref null $nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay))
  (local.set $this (ref.cast (ref $nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay)
 
 ;;; String $Overlay.$getString_|nativejstype...|()
-(func $$getString_|nativejstype...|__java_lang_String@nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay
+(func $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|nativejstype...|@nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$string_|nativejstype...|@nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay)))
    (then
-    (global.set $$string_|nativejstype...|@nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nativejstypes.BarInnerWithDotInNameAndHasNamespace$$Overlay")))
+    (return (global.get $$string_|nativejstype...|@nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay))
    )
   )
+  (global.set $$string_|nativejstype...|@nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nativejstypes.BarInnerWithDotInNameAndHasNamespace$$Overlay")))
   (return (global.get $$string_|nativejstype...|@nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay))
  )
 )
@@ -496,14 +502,15 @@
 )
 
 ;;; Class<T> $Overlay.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@nativejstypes.Bar.Inner.$Overlay
+(func $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.Bar.Inner.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@nativejstypes.Bar.Inner.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$class@nativejstypes.Bar.Inner.$Overlay)))
    (then
-    (global.set $$class@nativejstypes.Bar.Inner.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nativejstype...|__java_lang_String (ref.func $$getString_|nativejstype...|__java_lang_String@nativejstypes.Bar.Inner.$Overlay) )(ref.null $java.lang.Class)))
+    (return (global.get $$class@nativejstypes.Bar.Inner.$Overlay))
    )
   )
+  (global.set $$class@nativejstypes.Bar.Inner.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.Bar.Inner.$Overlay )(ref.null $java.lang.Class)))
   (return (global.get $$class@nativejstypes.Bar.Inner.$Overlay))
  )
 )
@@ -516,20 +523,21 @@
  (local $this (ref null $nativejstypes.Bar.Inner.$Overlay))
  (local.set $this (ref.cast (ref $nativejstypes.Bar.Inner.$Overlay) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nativejstypes.Bar.Inner.$Overlay) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.Bar.Inner.$Overlay ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nativejstypes.Bar.Inner.$Overlay)
 
 ;;; String $Overlay.$getString_|nativejstype...|()
-(func $$getString_|nativejstype...|__java_lang_String@nativejstypes.Bar.Inner.$Overlay
+(func $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.Bar.Inner.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|nativejstype...|@nativejstypes.Bar.Inner.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$string_|nativejstype...|@nativejstypes.Bar.Inner.$Overlay)))
    (then
-    (global.set $$string_|nativejstype...|@nativejstypes.Bar.Inner.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nativejstypes.Bar$Inner$$Overlay")))
+    (return (global.get $$string_|nativejstype...|@nativejstypes.Bar.Inner.$Overlay))
    )
   )
+  (global.set $$string_|nativejstype...|@nativejstypes.Bar.Inner.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nativejstypes.Bar$Inner$$Overlay")))
   (return (global.get $$string_|nativejstype...|@nativejstypes.Bar.Inner.$Overlay))
  )
 )
@@ -553,14 +561,15 @@
 )
 
 ;;; Class<T> $Overlay.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@nativejstypes.Foo.$Overlay
+(func $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.Foo.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@nativejstypes.Foo.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$class@nativejstypes.Foo.$Overlay)))
    (then
-    (global.set $$class@nativejstypes.Foo.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nativejstype...|__java_lang_String (ref.func $$getString_|nativejstype...|__java_lang_String@nativejstypes.Foo.$Overlay) )(ref.null $java.lang.Class)))
+    (return (global.get $$class@nativejstypes.Foo.$Overlay))
    )
   )
+  (global.set $$class@nativejstypes.Foo.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.Foo.$Overlay )(ref.null $java.lang.Class)))
   (return (global.get $$class@nativejstypes.Foo.$Overlay))
  )
 )
@@ -573,20 +582,21 @@
  (local $this (ref null $nativejstypes.Foo.$Overlay))
  (local.set $this (ref.cast (ref $nativejstypes.Foo.$Overlay) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nativejstypes.Foo.$Overlay) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.Foo.$Overlay ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nativejstypes.Foo.$Overlay)
 
 ;;; String $Overlay.$getString_|nativejstype...|()
-(func $$getString_|nativejstype...|__java_lang_String@nativejstypes.Foo.$Overlay
+(func $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.Foo.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|nativejstype...|@nativejstypes.Foo.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$string_|nativejstype...|@nativejstypes.Foo.$Overlay)))
    (then
-    (global.set $$string_|nativejstype...|@nativejstypes.Foo.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nativejstypes.Foo$$Overlay")))
+    (return (global.get $$string_|nativejstype...|@nativejstypes.Foo.$Overlay))
    )
   )
+  (global.set $$string_|nativejstype...|@nativejstypes.Foo.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nativejstypes.Foo$$Overlay")))
   (return (global.get $$string_|nativejstype...|@nativejstypes.Foo.$Overlay))
  )
 )
@@ -610,14 +620,15 @@
 )
 
 ;;; Class<T> $Overlay.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@nativejstypes.Headers.$Overlay
+(func $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.Headers.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@nativejstypes.Headers.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$class@nativejstypes.Headers.$Overlay)))
    (then
-    (global.set $$class@nativejstypes.Headers.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nativejstype...|__java_lang_String (ref.func $$getString_|nativejstype...|__java_lang_String@nativejstypes.Headers.$Overlay) )(ref.null $java.lang.Class)))
+    (return (global.get $$class@nativejstypes.Headers.$Overlay))
    )
   )
+  (global.set $$class@nativejstypes.Headers.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.Headers.$Overlay )(ref.null $java.lang.Class)))
   (return (global.get $$class@nativejstypes.Headers.$Overlay))
  )
 )
@@ -630,20 +641,21 @@
  (local $this (ref null $nativejstypes.Headers.$Overlay))
  (local.set $this (ref.cast (ref $nativejstypes.Headers.$Overlay) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nativejstypes.Headers.$Overlay) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.Headers.$Overlay ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nativejstypes.Headers.$Overlay)
 
 ;;; String $Overlay.$getString_|nativejstype...|()
-(func $$getString_|nativejstype...|__java_lang_String@nativejstypes.Headers.$Overlay
+(func $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.Headers.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|nativejstype...|@nativejstypes.Headers.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$string_|nativejstype...|@nativejstypes.Headers.$Overlay)))
    (then
-    (global.set $$string_|nativejstype...|@nativejstypes.Headers.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nativejstypes.Headers$$Overlay")))
+    (return (global.get $$string_|nativejstype...|@nativejstypes.Headers.$Overlay))
    )
   )
+  (global.set $$string_|nativejstype...|@nativejstypes.Headers.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nativejstypes.Headers$$Overlay")))
   (return (global.get $$string_|nativejstype...|@nativejstypes.Headers.$Overlay))
  )
 )
@@ -667,14 +679,15 @@
 )
 
 ;;; Class<T> $Overlay.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@nativejstypes.Nullability.$Overlay
+(func $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.Nullability.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@nativejstypes.Nullability.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$class@nativejstypes.Nullability.$Overlay)))
    (then
-    (global.set $$class@nativejstypes.Nullability.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nativejstype...|__java_lang_String (ref.func $$getString_|nativejstype...|__java_lang_String@nativejstypes.Nullability.$Overlay) )(ref.null $java.lang.Class)))
+    (return (global.get $$class@nativejstypes.Nullability.$Overlay))
    )
   )
+  (global.set $$class@nativejstypes.Nullability.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.Nullability.$Overlay )(ref.null $java.lang.Class)))
   (return (global.get $$class@nativejstypes.Nullability.$Overlay))
  )
 )
@@ -687,20 +700,21 @@
  (local $this (ref null $nativejstypes.Nullability.$Overlay))
  (local.set $this (ref.cast (ref $nativejstypes.Nullability.$Overlay) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nativejstypes.Nullability.$Overlay) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.Nullability.$Overlay ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nativejstypes.Nullability.$Overlay)
 
 ;;; String $Overlay.$getString_|nativejstype...|()
-(func $$getString_|nativejstype...|__java_lang_String@nativejstypes.Nullability.$Overlay
+(func $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.Nullability.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|nativejstype...|@nativejstypes.Nullability.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$string_|nativejstype...|@nativejstypes.Nullability.$Overlay)))
    (then
-    (global.set $$string_|nativejstype...|@nativejstypes.Nullability.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nativejstypes.Nullability$$Overlay")))
+    (return (global.get $$string_|nativejstype...|@nativejstypes.Nullability.$Overlay))
    )
   )
+  (global.set $$string_|nativejstype...|@nativejstypes.Nullability.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nativejstypes.Nullability$$Overlay")))
   (return (global.get $$string_|nativejstype...|@nativejstypes.Nullability.$Overlay))
  )
 )
@@ -724,14 +738,15 @@
 )
 
 ;;; Class<T> $Overlay.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@nativejstypes.NullabilityNullMarked.$Overlay
+(func $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.NullabilityNullMarked.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@nativejstypes.NullabilityNullMarked.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$class@nativejstypes.NullabilityNullMarked.$Overlay)))
    (then
-    (global.set $$class@nativejstypes.NullabilityNullMarked.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nativejstype...|__java_lang_String (ref.func $$getString_|nativejstype...|__java_lang_String@nativejstypes.NullabilityNullMarked.$Overlay) )(ref.null $java.lang.Class)))
+    (return (global.get $$class@nativejstypes.NullabilityNullMarked.$Overlay))
    )
   )
+  (global.set $$class@nativejstypes.NullabilityNullMarked.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.NullabilityNullMarked.$Overlay )(ref.null $java.lang.Class)))
   (return (global.get $$class@nativejstypes.NullabilityNullMarked.$Overlay))
  )
 )
@@ -744,20 +759,21 @@
  (local $this (ref null $nativejstypes.NullabilityNullMarked.$Overlay))
  (local.set $this (ref.cast (ref $nativejstypes.NullabilityNullMarked.$Overlay) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nativejstypes.NullabilityNullMarked.$Overlay) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.NullabilityNullMarked.$Overlay ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nativejstypes.NullabilityNullMarked.$Overlay)
 
 ;;; String $Overlay.$getString_|nativejstype...|()
-(func $$getString_|nativejstype...|__java_lang_String@nativejstypes.NullabilityNullMarked.$Overlay
+(func $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.NullabilityNullMarked.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|nativejstype...|@nativejstypes.NullabilityNullMarked.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$string_|nativejstype...|@nativejstypes.NullabilityNullMarked.$Overlay)))
    (then
-    (global.set $$string_|nativejstype...|@nativejstypes.NullabilityNullMarked.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nativejstypes.NullabilityNullMarked$$Overlay")))
+    (return (global.get $$string_|nativejstype...|@nativejstypes.NullabilityNullMarked.$Overlay))
    )
   )
+  (global.set $$string_|nativejstype...|@nativejstypes.NullabilityNullMarked.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nativejstypes.NullabilityNullMarked$$Overlay")))
   (return (global.get $$string_|nativejstype...|@nativejstypes.NullabilityNullMarked.$Overlay))
  )
 )
@@ -1060,7 +1076,7 @@
   ;;@ nativejstypes/Main.java:55:4
   (local.set $header (call $m_<init>__@nativejstypes.Headers ))
   ;;@ nativejstypes/Main.java:56:4
-  (call $m_append__java_lang_String_NativeString__java_lang_String_NativeString__void@nativejstypes.Headers (ref.as_non_null (local.get $header))(call $m_toJsString__java_lang_String__java_lang_String_NativeString@java.lang.String (call $function.no.side.effects.$getString_|Content_Type|__java_lang_String (ref.func $$getString_|Content_Type|__java_lang_String@nativejstypes.Main) ))(call $m_toJsString__java_lang_String__java_lang_String_NativeString@java.lang.String (call $function.no.side.effects.$getString_|text_xml|__java_lang_String (ref.func $$getString_|text_xml|__java_lang_String@nativejstypes.Main) )))
+  (call $m_append__java_lang_String_NativeString__java_lang_String_NativeString__void@nativejstypes.Headers (ref.as_non_null (local.get $header))(call $m_toJsString__java_lang_String__java_lang_String_NativeString@java.lang.String (call $$getString_|Content_Type|__java_lang_String_<once>_@nativejstypes.Main ))(call $m_toJsString__java_lang_String__java_lang_String_NativeString@java.lang.String (call $$getString_|text_xml|__java_lang_String_<once>_@nativejstypes.Main )))
  )
 )
 
@@ -1097,14 +1113,15 @@
 )
 
 ;;; Class<T> Main.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@nativejstypes.Main
+(func $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.Main
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@nativejstypes.Main))
+  (if (i32.eqz (ref.is_null (global.get $$class@nativejstypes.Main)))
    (then
-    (global.set $$class@nativejstypes.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nativejstype...|__java_lang_String (ref.func $$getString_|nativejstype...|__java_lang_String@nativejstypes.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@nativejstypes.Main))
    )
   )
+  (global.set $$class@nativejstypes.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.Main )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@nativejstypes.Main))
  )
 )
@@ -1117,46 +1134,49 @@
  (local $this (ref null $nativejstypes.Main))
  (local.set $this (ref.cast (ref $nativejstypes.Main) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nativejstypes.Main) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.Main ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nativejstypes.Main)
 
 ;;; String Main.$getString_|Content_Type|()
-(func $$getString_|Content_Type|__java_lang_String@nativejstypes.Main
+(func $$getString_|Content_Type|__java_lang_String_<once>_@nativejstypes.Main
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|Content_Type|@nativejstypes.Main))
+  (if (i32.eqz (ref.is_null (global.get $$string_|Content_Type|@nativejstypes.Main)))
    (then
-    (global.set $$string_|Content_Type|@nativejstypes.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "Content-Type")))
+    (return (global.get $$string_|Content_Type|@nativejstypes.Main))
    )
   )
+  (global.set $$string_|Content_Type|@nativejstypes.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "Content-Type")))
   (return (global.get $$string_|Content_Type|@nativejstypes.Main))
  )
 )
 
 ;;; String Main.$getString_|text_xml|()
-(func $$getString_|text_xml|__java_lang_String@nativejstypes.Main
+(func $$getString_|text_xml|__java_lang_String_<once>_@nativejstypes.Main
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|text_xml|@nativejstypes.Main))
+  (if (i32.eqz (ref.is_null (global.get $$string_|text_xml|@nativejstypes.Main)))
    (then
-    (global.set $$string_|text_xml|@nativejstypes.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "text/xml")))
+    (return (global.get $$string_|text_xml|@nativejstypes.Main))
    )
   )
+  (global.set $$string_|text_xml|@nativejstypes.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "text/xml")))
   (return (global.get $$string_|text_xml|@nativejstypes.Main))
  )
 )
 
 ;;; String Main.$getString_|nativejstype...|()
-(func $$getString_|nativejstype...|__java_lang_String@nativejstypes.Main
+(func $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.Main
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|nativejstype...|@nativejstypes.Main))
+  (if (i32.eqz (ref.is_null (global.get $$string_|nativejstype...|@nativejstypes.Main)))
    (then
-    (global.set $$string_|nativejstype...|@nativejstypes.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nativejstypes.Main")))
+    (return (global.get $$string_|nativejstype...|@nativejstypes.Main))
    )
   )
+  (global.set $$string_|nativejstype...|@nativejstypes.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nativejstypes.Main")))
   (return (global.get $$string_|nativejstype...|@nativejstypes.Main))
  )
 )

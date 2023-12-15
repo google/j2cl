@@ -84,14 +84,15 @@
 )
 
 ;;; Class<T> BoundedTypeVariable.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@boundedtypevariable.BoundedTypeVariable
+(func $$getClassMetadata__java_lang_Class_<once>_@boundedtypevariable.BoundedTypeVariable
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@boundedtypevariable.BoundedTypeVariable))
+  (if (i32.eqz (ref.is_null (global.get $$class@boundedtypevariable.BoundedTypeVariable)))
    (then
-    (global.set $$class@boundedtypevariable.BoundedTypeVariable (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|boundedtypev...|__java_lang_String (ref.func $$getString_|boundedtypev...|__java_lang_String@boundedtypevariable.BoundedTypeVariable) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@boundedtypevariable.BoundedTypeVariable))
    )
   )
+  (global.set $$class@boundedtypevariable.BoundedTypeVariable (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|boundedtypev...|__java_lang_String_<once>_@boundedtypevariable.BoundedTypeVariable )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@boundedtypevariable.BoundedTypeVariable))
  )
 )
@@ -104,20 +105,21 @@
  (local $this (ref null $boundedtypevariable.BoundedTypeVariable))
  (local.set $this (ref.cast (ref $boundedtypevariable.BoundedTypeVariable) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@boundedtypevariable.BoundedTypeVariable) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@boundedtypevariable.BoundedTypeVariable ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@boundedtypevariable.BoundedTypeVariable)
 
 ;;; String BoundedTypeVariable.$getString_|boundedtypev...|()
-(func $$getString_|boundedtypev...|__java_lang_String@boundedtypevariable.BoundedTypeVariable
+(func $$getString_|boundedtypev...|__java_lang_String_<once>_@boundedtypevariable.BoundedTypeVariable
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|boundedtypev...|@boundedtypevariable.BoundedTypeVariable))
+  (if (i32.eqz (ref.is_null (global.get $$string_|boundedtypev...|@boundedtypevariable.BoundedTypeVariable)))
    (then
-    (global.set $$string_|boundedtypev...|@boundedtypevariable.BoundedTypeVariable (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "boundedtypevariable.BoundedTypeVariable")))
+    (return (global.get $$string_|boundedtypev...|@boundedtypevariable.BoundedTypeVariable))
    )
   )
+  (global.set $$string_|boundedtypev...|@boundedtypevariable.BoundedTypeVariable (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "boundedtypevariable.BoundedTypeVariable")))
   (return (global.get $$string_|boundedtypev...|@boundedtypevariable.BoundedTypeVariable))
  )
 )

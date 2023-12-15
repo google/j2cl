@@ -140,14 +140,15 @@
 )
 
 ;;; Class<T> IfStatement.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@ifstatement.IfStatement
+(func $$getClassMetadata__java_lang_Class_<once>_@ifstatement.IfStatement
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@ifstatement.IfStatement))
+  (if (i32.eqz (ref.is_null (global.get $$class@ifstatement.IfStatement)))
    (then
-    (global.set $$class@ifstatement.IfStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|ifstatement....|__java_lang_String (ref.func $$getString_|ifstatement....|__java_lang_String@ifstatement.IfStatement) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@ifstatement.IfStatement))
    )
   )
+  (global.set $$class@ifstatement.IfStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|ifstatement....|__java_lang_String_<once>_@ifstatement.IfStatement )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@ifstatement.IfStatement))
  )
 )
@@ -160,20 +161,21 @@
  (local $this (ref null $ifstatement.IfStatement))
  (local.set $this (ref.cast (ref $ifstatement.IfStatement) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@ifstatement.IfStatement) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@ifstatement.IfStatement ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@ifstatement.IfStatement)
 
 ;;; String IfStatement.$getString_|ifstatement....|()
-(func $$getString_|ifstatement....|__java_lang_String@ifstatement.IfStatement
+(func $$getString_|ifstatement....|__java_lang_String_<once>_@ifstatement.IfStatement
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|ifstatement....|@ifstatement.IfStatement))
+  (if (i32.eqz (ref.is_null (global.get $$string_|ifstatement....|@ifstatement.IfStatement)))
    (then
-    (global.set $$string_|ifstatement....|@ifstatement.IfStatement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "ifstatement.IfStatement")))
+    (return (global.get $$string_|ifstatement....|@ifstatement.IfStatement))
    )
   )
+  (global.set $$string_|ifstatement....|@ifstatement.IfStatement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "ifstatement.IfStatement")))
   (return (global.get $$string_|ifstatement....|@ifstatement.IfStatement))
  )
 )

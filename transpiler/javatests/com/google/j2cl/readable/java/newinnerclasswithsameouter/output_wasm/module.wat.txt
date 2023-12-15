@@ -203,14 +203,15 @@
 )
 
 ;;; Class<T> NewInnerClassWithSameOuter.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter
+(func $$getClassMetadata__java_lang_Class_<once>_@newinnerclasswithsameouter.NewInnerClassWithSameOuter
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@newinnerclasswithsameouter.NewInnerClassWithSameOuter))
+  (if (i32.eqz (ref.is_null (global.get $$class@newinnerclasswithsameouter.NewInnerClassWithSameOuter)))
    (then
-    (global.set $$class@newinnerclasswithsameouter.NewInnerClassWithSameOuter (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|newinnerclas...|__java_lang_String (ref.func $$getString_|newinnerclas...|__java_lang_String@newinnerclasswithsameouter.NewInnerClassWithSameOuter) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@newinnerclasswithsameouter.NewInnerClassWithSameOuter))
    )
   )
+  (global.set $$class@newinnerclasswithsameouter.NewInnerClassWithSameOuter (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|newinnerclas...|__java_lang_String_<once>_@newinnerclasswithsameouter.NewInnerClassWithSameOuter )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@newinnerclasswithsameouter.NewInnerClassWithSameOuter))
  )
 )
@@ -223,20 +224,21 @@
  (local $this (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter))
  (local.set $this (ref.cast (ref $newinnerclasswithsameouter.NewInnerClassWithSameOuter) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@newinnerclasswithsameouter.NewInnerClassWithSameOuter ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter)
 
 ;;; String NewInnerClassWithSameOuter.$getString_|newinnerclas...|()
-(func $$getString_|newinnerclas...|__java_lang_String@newinnerclasswithsameouter.NewInnerClassWithSameOuter
+(func $$getString_|newinnerclas...|__java_lang_String_<once>_@newinnerclasswithsameouter.NewInnerClassWithSameOuter
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|newinnerclas...|@newinnerclasswithsameouter.NewInnerClassWithSameOuter))
+  (if (i32.eqz (ref.is_null (global.get $$string_|newinnerclas...|@newinnerclasswithsameouter.NewInnerClassWithSameOuter)))
    (then
-    (global.set $$string_|newinnerclas...|@newinnerclasswithsameouter.NewInnerClassWithSameOuter (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "newinnerclasswithsameouter.NewInnerClassWithSameOuter")))
+    (return (global.get $$string_|newinnerclas...|@newinnerclasswithsameouter.NewInnerClassWithSameOuter))
    )
   )
+  (global.set $$string_|newinnerclas...|@newinnerclasswithsameouter.NewInnerClassWithSameOuter (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "newinnerclasswithsameouter.NewInnerClassWithSameOuter")))
   (return (global.get $$string_|newinnerclas...|@newinnerclasswithsameouter.NewInnerClassWithSameOuter))
  )
 )
@@ -309,14 +311,15 @@
 )
 
 ;;; Class<T> A.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A
+(func $$getClassMetadata__java_lang_Class_<once>_@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A))
+  (if (i32.eqz (ref.is_null (global.get $$class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A)))
    (then
-    (global.set $$class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|newinnerclas...|__java_lang_String (ref.func $$getString_|newinnerclas...|__java_lang_String@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A))
    )
   )
+  (global.set $$class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|newinnerclas...|__java_lang_String_<once>_@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A))
  )
 )
@@ -329,20 +332,21 @@
  (local $this (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A))
  (local.set $this (ref.cast (ref $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A)
 
 ;;; String A.$getString_|newinnerclas...|()
-(func $$getString_|newinnerclas...|__java_lang_String@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A
+(func $$getString_|newinnerclas...|__java_lang_String_<once>_@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|newinnerclas...|@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A))
+  (if (i32.eqz (ref.is_null (global.get $$string_|newinnerclas...|@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A)))
    (then
-    (global.set $$string_|newinnerclas...|@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "newinnerclasswithsameouter.NewInnerClassWithSameOuter$A")))
+    (return (global.get $$string_|newinnerclas...|@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A))
    )
   )
+  (global.set $$string_|newinnerclas...|@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "newinnerclasswithsameouter.NewInnerClassWithSameOuter$A")))
   (return (global.get $$string_|newinnerclas...|@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A))
  )
 )
@@ -399,14 +403,15 @@
 )
 
 ;;; Class<T> B.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B
+(func $$getClassMetadata__java_lang_Class_<once>_@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B))
+  (if (i32.eqz (ref.is_null (global.get $$class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B)))
    (then
-    (global.set $$class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|newinnerclas...|__java_lang_String (ref.func $$getString_|newinnerclas...|__java_lang_String@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B))
    )
   )
+  (global.set $$class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|newinnerclas...|__java_lang_String_<once>_@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B))
  )
 )
@@ -419,20 +424,21 @@
  (local $this (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B))
  (local.set $this (ref.cast (ref $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B)
 
 ;;; String B.$getString_|newinnerclas...|()
-(func $$getString_|newinnerclas...|__java_lang_String@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B
+(func $$getString_|newinnerclas...|__java_lang_String_<once>_@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|newinnerclas...|@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B))
+  (if (i32.eqz (ref.is_null (global.get $$string_|newinnerclas...|@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B)))
    (then
-    (global.set $$string_|newinnerclas...|@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "newinnerclasswithsameouter.NewInnerClassWithSameOuter$B")))
+    (return (global.get $$string_|newinnerclas...|@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B))
    )
   )
+  (global.set $$string_|newinnerclas...|@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "newinnerclasswithsameouter.NewInnerClassWithSameOuter$B")))
   (return (global.get $$string_|newinnerclas...|@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B))
  )
 )
@@ -489,14 +495,15 @@
 )
 
 ;;; Class<T> C.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C
+(func $$getClassMetadata__java_lang_Class_<once>_@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C))
+  (if (i32.eqz (ref.is_null (global.get $$class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C)))
    (then
-    (global.set $$class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|newinnerclas...|__java_lang_String (ref.func $$getString_|newinnerclas...|__java_lang_String@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C))
    )
   )
+  (global.set $$class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|newinnerclas...|__java_lang_String_<once>_@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C))
  )
 )
@@ -509,20 +516,21 @@
  (local $this (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C))
  (local.set $this (ref.cast (ref $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C)
 
 ;;; String C.$getString_|newinnerclas...|()
-(func $$getString_|newinnerclas...|__java_lang_String@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C
+(func $$getString_|newinnerclas...|__java_lang_String_<once>_@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|newinnerclas...|@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C))
+  (if (i32.eqz (ref.is_null (global.get $$string_|newinnerclas...|@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C)))
    (then
-    (global.set $$string_|newinnerclas...|@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "newinnerclasswithsameouter.NewInnerClassWithSameOuter$C")))
+    (return (global.get $$string_|newinnerclas...|@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C))
    )
   )
+  (global.set $$string_|newinnerclas...|@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "newinnerclasswithsameouter.NewInnerClassWithSameOuter$C")))
   (return (global.get $$string_|newinnerclas...|@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C))
  )
 )

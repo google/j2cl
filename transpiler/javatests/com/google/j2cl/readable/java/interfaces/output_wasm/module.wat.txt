@@ -241,27 +241,29 @@
 )
 
 ;;; Class<T> Interface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@interfaces.Main.Interface
+(func $$getClassMetadata__java_lang_Class_<once>_@interfaces.Main.Interface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@interfaces.Main.Interface))
+  (if (i32.eqz (ref.is_null (global.get $$class@interfaces.Main.Interface)))
    (then
-    (global.set $$class@interfaces.Main.Interface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.M...|__java_lang_String (ref.func $$getString_|interfaces.M...|__java_lang_String@interfaces.Main.Interface) )))
+    (return (global.get $$class@interfaces.Main.Interface))
    )
   )
+  (global.set $$class@interfaces.Main.Interface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|interfaces.M...|__java_lang_String_<once>_@interfaces.Main.Interface )))
   (return (global.get $$class@interfaces.Main.Interface))
  )
 )
 
 ;;; String Interface.$getString_|interfaces.M...|()
-(func $$getString_|interfaces.M...|__java_lang_String@interfaces.Main.Interface
+(func $$getString_|interfaces.M...|__java_lang_String_<once>_@interfaces.Main.Interface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|interfaces.M...|@interfaces.Main.Interface))
+  (if (i32.eqz (ref.is_null (global.get $$string_|interfaces.M...|@interfaces.Main.Interface)))
    (then
-    (global.set $$string_|interfaces.M...|@interfaces.Main.Interface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfaces.Main$Interface")))
+    (return (global.get $$string_|interfaces.M...|@interfaces.Main.Interface))
    )
   )
+  (global.set $$string_|interfaces.M...|@interfaces.Main.Interface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfaces.Main$Interface")))
   (return (global.get $$string_|interfaces.M...|@interfaces.Main.Interface))
  )
 )
@@ -299,27 +301,29 @@
 )
 
 ;;; Class<T> SubInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@interfaces.Main.SubInterface
+(func $$getClassMetadata__java_lang_Class_<once>_@interfaces.Main.SubInterface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@interfaces.Main.SubInterface))
+  (if (i32.eqz (ref.is_null (global.get $$class@interfaces.Main.SubInterface)))
    (then
-    (global.set $$class@interfaces.Main.SubInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.M...|__java_lang_String (ref.func $$getString_|interfaces.M...|__java_lang_String@interfaces.Main.SubInterface) )))
+    (return (global.get $$class@interfaces.Main.SubInterface))
    )
   )
+  (global.set $$class@interfaces.Main.SubInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|interfaces.M...|__java_lang_String_<once>_@interfaces.Main.SubInterface )))
   (return (global.get $$class@interfaces.Main.SubInterface))
  )
 )
 
 ;;; String SubInterface.$getString_|interfaces.M...|()
-(func $$getString_|interfaces.M...|__java_lang_String@interfaces.Main.SubInterface
+(func $$getString_|interfaces.M...|__java_lang_String_<once>_@interfaces.Main.SubInterface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|interfaces.M...|@interfaces.Main.SubInterface))
+  (if (i32.eqz (ref.is_null (global.get $$string_|interfaces.M...|@interfaces.Main.SubInterface)))
    (then
-    (global.set $$string_|interfaces.M...|@interfaces.Main.SubInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfaces.Main$SubInterface")))
+    (return (global.get $$string_|interfaces.M...|@interfaces.Main.SubInterface))
    )
   )
+  (global.set $$string_|interfaces.M...|@interfaces.Main.SubInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfaces.Main$SubInterface")))
   (return (global.get $$string_|interfaces.M...|@interfaces.Main.SubInterface))
  )
 )
@@ -399,14 +403,15 @@
 )
 
 ;;; Class<T> Main.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@interfaces.Main
+(func $$getClassMetadata__java_lang_Class_<once>_@interfaces.Main
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@interfaces.Main))
+  (if (i32.eqz (ref.is_null (global.get $$class@interfaces.Main)))
    (then
-    (global.set $$class@interfaces.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.Main|__java_lang_String (ref.func $$getString_|interfaces.Main|__java_lang_String@interfaces.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@interfaces.Main))
    )
   )
+  (global.set $$class@interfaces.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|interfaces.Main|__java_lang_String_<once>_@interfaces.Main )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@interfaces.Main))
  )
 )
@@ -419,20 +424,21 @@
  (local $this (ref null $interfaces.Main))
  (local.set $this (ref.cast (ref $interfaces.Main) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@interfaces.Main) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@interfaces.Main ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@interfaces.Main)
 
 ;;; String Main.$getString_|interfaces.Main|()
-(func $$getString_|interfaces.Main|__java_lang_String@interfaces.Main
+(func $$getString_|interfaces.Main|__java_lang_String_<once>_@interfaces.Main
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|interfaces.Main|@interfaces.Main))
+  (if (i32.eqz (ref.is_null (global.get $$string_|interfaces.Main|@interfaces.Main)))
    (then
-    (global.set $$string_|interfaces.Main|@interfaces.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfaces.Main")))
+    (return (global.get $$string_|interfaces.Main|@interfaces.Main))
    )
   )
+  (global.set $$string_|interfaces.Main|@interfaces.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfaces.Main")))
   (return (global.get $$string_|interfaces.Main|@interfaces.Main))
  )
 )
@@ -535,14 +541,15 @@
 )
 
 ;;; Class<T> Implementor.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@interfaces.Main.Implementor
+(func $$getClassMetadata__java_lang_Class_<once>_@interfaces.Main.Implementor
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@interfaces.Main.Implementor))
+  (if (i32.eqz (ref.is_null (global.get $$class@interfaces.Main.Implementor)))
    (then
-    (global.set $$class@interfaces.Main.Implementor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.M...|__java_lang_String (ref.func $$getString_|interfaces.M...|__java_lang_String@interfaces.Main.Implementor) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@interfaces.Main.Implementor))
    )
   )
+  (global.set $$class@interfaces.Main.Implementor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|interfaces.M...|__java_lang_String_<once>_@interfaces.Main.Implementor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@interfaces.Main.Implementor))
  )
 )
@@ -555,20 +562,21 @@
  (local $this (ref null $interfaces.Main.Implementor))
  (local.set $this (ref.cast (ref $interfaces.Main.Implementor) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@interfaces.Main.Implementor) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@interfaces.Main.Implementor ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@interfaces.Main.Implementor)
 
 ;;; String Implementor.$getString_|interfaces.M...|()
-(func $$getString_|interfaces.M...|__java_lang_String@interfaces.Main.Implementor
+(func $$getString_|interfaces.M...|__java_lang_String_<once>_@interfaces.Main.Implementor
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|interfaces.M...|@interfaces.Main.Implementor))
+  (if (i32.eqz (ref.is_null (global.get $$string_|interfaces.M...|@interfaces.Main.Implementor)))
    (then
-    (global.set $$string_|interfaces.M...|@interfaces.Main.Implementor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfaces.Main$Implementor")))
+    (return (global.get $$string_|interfaces.M...|@interfaces.Main.Implementor))
    )
   )
+  (global.set $$string_|interfaces.M...|@interfaces.Main.Implementor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfaces.Main$Implementor")))
   (return (global.get $$string_|interfaces.M...|@interfaces.Main.Implementor))
  )
 )
@@ -639,27 +647,29 @@
 )
 
 ;;; Class<T> AbstractImplementor.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@interfaces.Main.AbstractImplementor
+(func $$getClassMetadata__java_lang_Class_<once>_@interfaces.Main.AbstractImplementor
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@interfaces.Main.AbstractImplementor))
+  (if (i32.eqz (ref.is_null (global.get $$class@interfaces.Main.AbstractImplementor)))
    (then
-    (global.set $$class@interfaces.Main.AbstractImplementor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|interfaces.M...|__java_lang_String (ref.func $$getString_|interfaces.M...|__java_lang_String@interfaces.Main.AbstractImplementor) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@interfaces.Main.AbstractImplementor))
    )
   )
+  (global.set $$class@interfaces.Main.AbstractImplementor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|interfaces.M...|__java_lang_String_<once>_@interfaces.Main.AbstractImplementor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@interfaces.Main.AbstractImplementor))
  )
 )
 
 ;;; String AbstractImplementor.$getString_|interfaces.M...|()
-(func $$getString_|interfaces.M...|__java_lang_String@interfaces.Main.AbstractImplementor
+(func $$getString_|interfaces.M...|__java_lang_String_<once>_@interfaces.Main.AbstractImplementor
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|interfaces.M...|@interfaces.Main.AbstractImplementor))
+  (if (i32.eqz (ref.is_null (global.get $$string_|interfaces.M...|@interfaces.Main.AbstractImplementor)))
    (then
-    (global.set $$string_|interfaces.M...|@interfaces.Main.AbstractImplementor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfaces.Main$AbstractImplementor")))
+    (return (global.get $$string_|interfaces.M...|@interfaces.Main.AbstractImplementor))
    )
   )
+  (global.set $$string_|interfaces.M...|@interfaces.Main.AbstractImplementor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfaces.Main$AbstractImplementor")))
   (return (global.get $$string_|interfaces.M...|@interfaces.Main.AbstractImplementor))
  )
 )

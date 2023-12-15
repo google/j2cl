@@ -176,6 +176,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public boolean isOnceMethod() {
       switch (this) {
         case SYNTHETIC_CLASS_INITIALIZER:
+        case SYNTHETIC_CLASS_LITERAL_GETTER:
+        case SYNTHETIC_STRING_LITERAL_GETTER:
           return true;
         default:
           return false;

@@ -179,14 +179,15 @@
 )
 
 ;;; Class<T> LocalClassWithOuterGenerics.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics
+(func $$getClassMetadata__java_lang_Class_<once>_@localclasswithoutergenerics.LocalClassWithOuterGenerics
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@localclasswithoutergenerics.LocalClassWithOuterGenerics))
+  (if (i32.eqz (ref.is_null (global.get $$class@localclasswithoutergenerics.LocalClassWithOuterGenerics)))
    (then
-    (global.set $$class@localclasswithoutergenerics.LocalClassWithOuterGenerics (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclasswi...|__java_lang_String (ref.func $$getString_|localclasswi...|__java_lang_String@localclasswithoutergenerics.LocalClassWithOuterGenerics) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@localclasswithoutergenerics.LocalClassWithOuterGenerics))
    )
   )
+  (global.set $$class@localclasswithoutergenerics.LocalClassWithOuterGenerics (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|localclasswi...|__java_lang_String_<once>_@localclasswithoutergenerics.LocalClassWithOuterGenerics )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@localclasswithoutergenerics.LocalClassWithOuterGenerics))
  )
 )
@@ -199,20 +200,21 @@
  (local $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics))
  (local.set $this (ref.cast (ref $localclasswithoutergenerics.LocalClassWithOuterGenerics) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@localclasswithoutergenerics.LocalClassWithOuterGenerics ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics)
 
 ;;; String LocalClassWithOuterGenerics.$getString_|localclasswi...|()
-(func $$getString_|localclasswi...|__java_lang_String@localclasswithoutergenerics.LocalClassWithOuterGenerics
+(func $$getString_|localclasswi...|__java_lang_String_<once>_@localclasswithoutergenerics.LocalClassWithOuterGenerics
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|localclasswi...|@localclasswithoutergenerics.LocalClassWithOuterGenerics))
+  (if (i32.eqz (ref.is_null (global.get $$string_|localclasswi...|@localclasswithoutergenerics.LocalClassWithOuterGenerics)))
    (then
-    (global.set $$string_|localclasswi...|@localclasswithoutergenerics.LocalClassWithOuterGenerics (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "localclasswithoutergenerics.LocalClassWithOuterGenerics")))
+    (return (global.get $$string_|localclasswi...|@localclasswithoutergenerics.LocalClassWithOuterGenerics))
    )
   )
+  (global.set $$string_|localclasswi...|@localclasswithoutergenerics.LocalClassWithOuterGenerics (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "localclasswithoutergenerics.LocalClassWithOuterGenerics")))
   (return (global.get $$string_|localclasswi...|@localclasswithoutergenerics.LocalClassWithOuterGenerics))
  )
 )
@@ -278,14 +280,15 @@
 )
 
 ;;; Class<T> Bar.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar
+(func $$getClassMetadata__java_lang_Class_<once>_@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar))
+  (if (i32.eqz (ref.is_null (global.get $$class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar)))
    (then
-    (global.set $$class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclasswi...|__java_lang_String (ref.func $$getString_|localclasswi...|__java_lang_String@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar))
    )
   )
+  (global.set $$class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|localclasswi...|__java_lang_String_<once>_@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar))
  )
 )
@@ -298,20 +301,21 @@
  (local $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar))
  (local.set $this (ref.cast (ref $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar)
 
 ;;; String Bar.$getString_|localclasswi...|()
-(func $$getString_|localclasswi...|__java_lang_String@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar
+(func $$getString_|localclasswi...|__java_lang_String_<once>_@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|localclasswi...|@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar))
+  (if (i32.eqz (ref.is_null (global.get $$string_|localclasswi...|@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar)))
    (then
-    (global.set $$string_|localclasswi...|@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "localclasswithoutergenerics.LocalClassWithOuterGenerics$1Bar")))
+    (return (global.get $$string_|localclasswi...|@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar))
    )
   )
+  (global.set $$string_|localclasswi...|@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "localclasswithoutergenerics.LocalClassWithOuterGenerics$1Bar")))
   (return (global.get $$string_|localclasswi...|@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar))
  )
 )
@@ -379,14 +383,15 @@
 )
 
 ;;; Class<T> Baz.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz
+(func $$getClassMetadata__java_lang_Class_<once>_@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz))
+  (if (i32.eqz (ref.is_null (global.get $$class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz)))
    (then
-    (global.set $$class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclasswi...|__java_lang_String (ref.func $$getString_|localclasswi...|__java_lang_String@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz))
    )
   )
+  (global.set $$class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|localclasswi...|__java_lang_String_<once>_@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz))
  )
 )
@@ -399,20 +404,21 @@
  (local $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz))
  (local.set $this (ref.cast (ref $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz)
 
 ;;; String Baz.$getString_|localclasswi...|()
-(func $$getString_|localclasswi...|__java_lang_String@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz
+(func $$getString_|localclasswi...|__java_lang_String_<once>_@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|localclasswi...|@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz))
+  (if (i32.eqz (ref.is_null (global.get $$string_|localclasswi...|@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz)))
    (then
-    (global.set $$string_|localclasswi...|@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "localclasswithoutergenerics.LocalClassWithOuterGenerics$1Baz")))
+    (return (global.get $$string_|localclasswi...|@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz))
    )
   )
+  (global.set $$string_|localclasswi...|@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "localclasswithoutergenerics.LocalClassWithOuterGenerics$1Baz")))
   (return (global.get $$string_|localclasswi...|@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz))
  )
 )

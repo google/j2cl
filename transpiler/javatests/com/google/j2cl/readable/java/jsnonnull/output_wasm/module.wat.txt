@@ -405,27 +405,29 @@
 )
 
 ;;; Class<T> MyFunction.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsnonnull.Main.MyFunction
+(func $$getClassMetadata__java_lang_Class_<once>_@jsnonnull.Main.MyFunction
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsnonnull.Main.MyFunction))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsnonnull.Main.MyFunction)))
    (then
-    (global.set $$class@jsnonnull.Main.MyFunction (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsnonnull.Ma...|__java_lang_String (ref.func $$getString_|jsnonnull.Ma...|__java_lang_String@jsnonnull.Main.MyFunction) )))
+    (return (global.get $$class@jsnonnull.Main.MyFunction))
    )
   )
+  (global.set $$class@jsnonnull.Main.MyFunction (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jsnonnull.Ma...|__java_lang_String_<once>_@jsnonnull.Main.MyFunction )))
   (return (global.get $$class@jsnonnull.Main.MyFunction))
  )
 )
 
 ;;; String MyFunction.$getString_|jsnonnull.Ma...|()
-(func $$getString_|jsnonnull.Ma...|__java_lang_String@jsnonnull.Main.MyFunction
+(func $$getString_|jsnonnull.Ma...|__java_lang_String_<once>_@jsnonnull.Main.MyFunction
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsnonnull.Ma...|@jsnonnull.Main.MyFunction))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsnonnull.Ma...|@jsnonnull.Main.MyFunction)))
    (then
-    (global.set $$string_|jsnonnull.Ma...|@jsnonnull.Main.MyFunction (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsnonnull.Main$MyFunction")))
+    (return (global.get $$string_|jsnonnull.Ma...|@jsnonnull.Main.MyFunction))
    )
   )
+  (global.set $$string_|jsnonnull.Ma...|@jsnonnull.Main.MyFunction (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsnonnull.Main$MyFunction")))
   (return (global.get $$string_|jsnonnull.Ma...|@jsnonnull.Main.MyFunction))
  )
 )
@@ -449,27 +451,29 @@
 )
 
 ;;; Class<T> NonNullableTemplatedReturn.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsnonnull.Main.NonNullableTemplatedReturn
+(func $$getClassMetadata__java_lang_Class_<once>_@jsnonnull.Main.NonNullableTemplatedReturn
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsnonnull.Main.NonNullableTemplatedReturn))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsnonnull.Main.NonNullableTemplatedReturn)))
    (then
-    (global.set $$class@jsnonnull.Main.NonNullableTemplatedReturn (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsnonnull.Ma...|__java_lang_String (ref.func $$getString_|jsnonnull.Ma...|__java_lang_String@jsnonnull.Main.NonNullableTemplatedReturn) )))
+    (return (global.get $$class@jsnonnull.Main.NonNullableTemplatedReturn))
    )
   )
+  (global.set $$class@jsnonnull.Main.NonNullableTemplatedReturn (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jsnonnull.Ma...|__java_lang_String_<once>_@jsnonnull.Main.NonNullableTemplatedReturn )))
   (return (global.get $$class@jsnonnull.Main.NonNullableTemplatedReturn))
  )
 )
 
 ;;; String NonNullableTemplatedReturn.$getString_|jsnonnull.Ma...|()
-(func $$getString_|jsnonnull.Ma...|__java_lang_String@jsnonnull.Main.NonNullableTemplatedReturn
+(func $$getString_|jsnonnull.Ma...|__java_lang_String_<once>_@jsnonnull.Main.NonNullableTemplatedReturn
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsnonnull.Ma...|@jsnonnull.Main.NonNullableTemplatedReturn))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsnonnull.Ma...|@jsnonnull.Main.NonNullableTemplatedReturn)))
    (then
-    (global.set $$string_|jsnonnull.Ma...|@jsnonnull.Main.NonNullableTemplatedReturn (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsnonnull.Main$NonNullableTemplatedReturn")))
+    (return (global.get $$string_|jsnonnull.Ma...|@jsnonnull.Main.NonNullableTemplatedReturn))
    )
   )
+  (global.set $$string_|jsnonnull.Ma...|@jsnonnull.Main.NonNullableTemplatedReturn (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsnonnull.Main$NonNullableTemplatedReturn")))
   (return (global.get $$string_|jsnonnull.Ma...|@jsnonnull.Main.NonNullableTemplatedReturn))
  )
 )
@@ -493,27 +497,29 @@
 )
 
 ;;; Class<T> NonNullableTemplate.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsnonnull.Main.NonNullableTemplate
+(func $$getClassMetadata__java_lang_Class_<once>_@jsnonnull.Main.NonNullableTemplate
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsnonnull.Main.NonNullableTemplate))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsnonnull.Main.NonNullableTemplate)))
    (then
-    (global.set $$class@jsnonnull.Main.NonNullableTemplate (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsnonnull.Ma...|__java_lang_String (ref.func $$getString_|jsnonnull.Ma...|__java_lang_String@jsnonnull.Main.NonNullableTemplate) )))
+    (return (global.get $$class@jsnonnull.Main.NonNullableTemplate))
    )
   )
+  (global.set $$class@jsnonnull.Main.NonNullableTemplate (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jsnonnull.Ma...|__java_lang_String_<once>_@jsnonnull.Main.NonNullableTemplate )))
   (return (global.get $$class@jsnonnull.Main.NonNullableTemplate))
  )
 )
 
 ;;; String NonNullableTemplate.$getString_|jsnonnull.Ma...|()
-(func $$getString_|jsnonnull.Ma...|__java_lang_String@jsnonnull.Main.NonNullableTemplate
+(func $$getString_|jsnonnull.Ma...|__java_lang_String_<once>_@jsnonnull.Main.NonNullableTemplate
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsnonnull.Ma...|@jsnonnull.Main.NonNullableTemplate))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsnonnull.Ma...|@jsnonnull.Main.NonNullableTemplate)))
    (then
-    (global.set $$string_|jsnonnull.Ma...|@jsnonnull.Main.NonNullableTemplate (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsnonnull.Main$NonNullableTemplate")))
+    (return (global.get $$string_|jsnonnull.Ma...|@jsnonnull.Main.NonNullableTemplate))
    )
   )
+  (global.set $$string_|jsnonnull.Ma...|@jsnonnull.Main.NonNullableTemplate (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsnonnull.Main$NonNullableTemplate")))
   (return (global.get $$string_|jsnonnull.Ma...|@jsnonnull.Main.NonNullableTemplate))
  )
 )
@@ -564,7 +570,7 @@
  (local.set $this (ref.cast (ref $jsnonnull.Main) (local.get $this.untyped)))
  (block
   ;;@ jsnonnull/Main.java:46:4
-  (return (call $function.no.side.effects.$getString_||__java_lang_String (ref.func $$getString_||__java_lang_String@java.lang.StackTraceElement) ))
+  (return (call $$getString_||__java_lang_String_<once>_@java.lang.StackTraceElement ))
  )
 )
 (elem declare func $m_m1__java_lang_String__java_util_List__java_lang_String__java_lang_String@jsnonnull.Main)
@@ -581,7 +587,7 @@
  (local.set $this (ref.cast (ref $jsnonnull.Main) (local.get $this.untyped)))
  (block
   ;;@ jsnonnull/Main.java:50:4
-  (return (call $function.no.side.effects.$getString_||__java_lang_String (ref.func $$getString_||__java_lang_String@java.lang.StackTraceElement) ))
+  (return (call $$getString_||__java_lang_String_<once>_@java.lang.StackTraceElement ))
  )
 )
 (elem declare func $m_m2__java_lang_String__java_util_List__java_lang_String@jsnonnull.Main)
@@ -622,7 +628,7 @@
  ;;@ jsnonnull/Main.java:26:13
  (block
   ;;@ jsnonnull/Main.java:27:2
-  (struct.set $jsnonnull.Main $f1@jsnonnull.Main (local.get $this) (call $function.no.side.effects.$getString_|Hello|__java_lang_String (ref.func $$getString_|Hello|__java_lang_String@jsnonnull.Main) ))
+  (struct.set $jsnonnull.Main $f1@jsnonnull.Main (local.get $this) (call $$getString_|Hello|__java_lang_String_<once>_@jsnonnull.Main ))
   ;;@ jsnonnull/Main.java:28:2
   (struct.set $jsnonnull.Main $f2@jsnonnull.Main (local.get $this) (ref.null $java.lang.String))
   ;;@ jsnonnull/Main.java:29:2
@@ -663,14 +669,15 @@
 )
 
 ;;; Class<T> Main.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsnonnull.Main
+(func $$getClassMetadata__java_lang_Class_<once>_@jsnonnull.Main
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsnonnull.Main))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsnonnull.Main)))
    (then
-    (global.set $$class@jsnonnull.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsnonnull.Main|__java_lang_String (ref.func $$getString_|jsnonnull.Main|__java_lang_String@jsnonnull.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@jsnonnull.Main))
    )
   )
+  (global.set $$class@jsnonnull.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsnonnull.Main|__java_lang_String_<once>_@jsnonnull.Main )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@jsnonnull.Main))
  )
 )
@@ -683,33 +690,35 @@
  (local $this (ref null $jsnonnull.Main))
  (local.set $this (ref.cast (ref $jsnonnull.Main) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsnonnull.Main) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsnonnull.Main ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsnonnull.Main)
 
 ;;; String Main.$getString_|Hello|()
-(func $$getString_|Hello|__java_lang_String@jsnonnull.Main
+(func $$getString_|Hello|__java_lang_String_<once>_@jsnonnull.Main
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|Hello|@jsnonnull.Main))
+  (if (i32.eqz (ref.is_null (global.get $$string_|Hello|@jsnonnull.Main)))
    (then
-    (global.set $$string_|Hello|@jsnonnull.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "Hello")))
+    (return (global.get $$string_|Hello|@jsnonnull.Main))
    )
   )
+  (global.set $$string_|Hello|@jsnonnull.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "Hello")))
   (return (global.get $$string_|Hello|@jsnonnull.Main))
  )
 )
 
 ;;; String Main.$getString_|jsnonnull.Main|()
-(func $$getString_|jsnonnull.Main|__java_lang_String@jsnonnull.Main
+(func $$getString_|jsnonnull.Main|__java_lang_String_<once>_@jsnonnull.Main
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsnonnull.Main|@jsnonnull.Main))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsnonnull.Main|@jsnonnull.Main)))
    (then
-    (global.set $$string_|jsnonnull.Main|@jsnonnull.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsnonnull.Main")))
+    (return (global.get $$string_|jsnonnull.Main|@jsnonnull.Main))
    )
   )
+  (global.set $$string_|jsnonnull.Main|@jsnonnull.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsnonnull.Main")))
   (return (global.get $$string_|jsnonnull.Main|@jsnonnull.Main))
  )
 )
@@ -910,14 +919,15 @@
 )
 
 ;;; Class<T> StringComparator.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsnonnull.Main.StringComparator
+(func $$getClassMetadata__java_lang_Class_<once>_@jsnonnull.Main.StringComparator
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsnonnull.Main.StringComparator))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsnonnull.Main.StringComparator)))
    (then
-    (global.set $$class@jsnonnull.Main.StringComparator (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsnonnull.Ma...|__java_lang_String (ref.func $$getString_|jsnonnull.Ma...|__java_lang_String@jsnonnull.Main.StringComparator) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@jsnonnull.Main.StringComparator))
    )
   )
+  (global.set $$class@jsnonnull.Main.StringComparator (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsnonnull.Ma...|__java_lang_String_<once>_@jsnonnull.Main.StringComparator )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@jsnonnull.Main.StringComparator))
  )
 )
@@ -930,20 +940,21 @@
  (local $this (ref null $jsnonnull.Main.StringComparator))
  (local.set $this (ref.cast (ref $jsnonnull.Main.StringComparator) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsnonnull.Main.StringComparator) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsnonnull.Main.StringComparator ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsnonnull.Main.StringComparator)
 
 ;;; String StringComparator.$getString_|jsnonnull.Ma...|()
-(func $$getString_|jsnonnull.Ma...|__java_lang_String@jsnonnull.Main.StringComparator
+(func $$getString_|jsnonnull.Ma...|__java_lang_String_<once>_@jsnonnull.Main.StringComparator
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsnonnull.Ma...|@jsnonnull.Main.StringComparator))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsnonnull.Ma...|@jsnonnull.Main.StringComparator)))
    (then
-    (global.set $$string_|jsnonnull.Ma...|@jsnonnull.Main.StringComparator (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsnonnull.Main$StringComparator")))
+    (return (global.get $$string_|jsnonnull.Ma...|@jsnonnull.Main.StringComparator))
    )
   )
+  (global.set $$string_|jsnonnull.Ma...|@jsnonnull.Main.StringComparator (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsnonnull.Main$StringComparator")))
   (return (global.get $$string_|jsnonnull.Ma...|@jsnonnull.Main.StringComparator))
  )
 )
@@ -1144,14 +1155,15 @@
 )
 
 ;;; Class<T> NullableStringComparator.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsnonnull.Main.NullableStringComparator
+(func $$getClassMetadata__java_lang_Class_<once>_@jsnonnull.Main.NullableStringComparator
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsnonnull.Main.NullableStringComparator))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsnonnull.Main.NullableStringComparator)))
    (then
-    (global.set $$class@jsnonnull.Main.NullableStringComparator (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsnonnull.Ma...|__java_lang_String (ref.func $$getString_|jsnonnull.Ma...|__java_lang_String@jsnonnull.Main.NullableStringComparator) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@jsnonnull.Main.NullableStringComparator))
    )
   )
+  (global.set $$class@jsnonnull.Main.NullableStringComparator (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsnonnull.Ma...|__java_lang_String_<once>_@jsnonnull.Main.NullableStringComparator )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@jsnonnull.Main.NullableStringComparator))
  )
 )
@@ -1164,20 +1176,21 @@
  (local $this (ref null $jsnonnull.Main.NullableStringComparator))
  (local.set $this (ref.cast (ref $jsnonnull.Main.NullableStringComparator) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsnonnull.Main.NullableStringComparator) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsnonnull.Main.NullableStringComparator ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsnonnull.Main.NullableStringComparator)
 
 ;;; String NullableStringComparator.$getString_|jsnonnull.Ma...|()
-(func $$getString_|jsnonnull.Ma...|__java_lang_String@jsnonnull.Main.NullableStringComparator
+(func $$getString_|jsnonnull.Ma...|__java_lang_String_<once>_@jsnonnull.Main.NullableStringComparator
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsnonnull.Ma...|@jsnonnull.Main.NullableStringComparator))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsnonnull.Ma...|@jsnonnull.Main.NullableStringComparator)))
    (then
-    (global.set $$string_|jsnonnull.Ma...|@jsnonnull.Main.NullableStringComparator (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsnonnull.Main$NullableStringComparator")))
+    (return (global.get $$string_|jsnonnull.Ma...|@jsnonnull.Main.NullableStringComparator))
    )
   )
+  (global.set $$string_|jsnonnull.Ma...|@jsnonnull.Main.NullableStringComparator (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsnonnull.Main$NullableStringComparator")))
   (return (global.get $$string_|jsnonnull.Ma...|@jsnonnull.Main.NullableStringComparator))
  )
 )
@@ -1247,14 +1260,15 @@
 )
 
 ;;; Class<T> NonNullableStringSubNullableComparator.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsnonnull.Main.NonNullableStringSubNullableComparator
+(func $$getClassMetadata__java_lang_Class_<once>_@jsnonnull.Main.NonNullableStringSubNullableComparator
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsnonnull.Main.NonNullableStringSubNullableComparator))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsnonnull.Main.NonNullableStringSubNullableComparator)))
    (then
-    (global.set $$class@jsnonnull.Main.NonNullableStringSubNullableComparator (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsnonnull.Ma...|__java_lang_String (ref.func $$getString_|jsnonnull.Ma...|__java_lang_String@jsnonnull.Main.NonNullableStringSubNullableComparator) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsnonnull.Main.NullableStringComparator) )))
+    (return (global.get $$class@jsnonnull.Main.NonNullableStringSubNullableComparator))
    )
   )
+  (global.set $$class@jsnonnull.Main.NonNullableStringSubNullableComparator (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsnonnull.Ma...|__java_lang_String_<once>_@jsnonnull.Main.NonNullableStringSubNullableComparator )(call $$getClassMetadata__java_lang_Class_<once>_@jsnonnull.Main.NullableStringComparator )))
   (return (global.get $$class@jsnonnull.Main.NonNullableStringSubNullableComparator))
  )
 )
@@ -1267,20 +1281,21 @@
  (local $this (ref null $jsnonnull.Main.NonNullableStringSubNullableComparator))
  (local.set $this (ref.cast (ref $jsnonnull.Main.NonNullableStringSubNullableComparator) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsnonnull.Main.NonNullableStringSubNullableComparator) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsnonnull.Main.NonNullableStringSubNullableComparator ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsnonnull.Main.NonNullableStringSubNullableComparator)
 
 ;;; String NonNullableStringSubNullableComparator.$getString_|jsnonnull.Ma...|()
-(func $$getString_|jsnonnull.Ma...|__java_lang_String@jsnonnull.Main.NonNullableStringSubNullableComparator
+(func $$getString_|jsnonnull.Ma...|__java_lang_String_<once>_@jsnonnull.Main.NonNullableStringSubNullableComparator
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsnonnull.Ma...|@jsnonnull.Main.NonNullableStringSubNullableComparator))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsnonnull.Ma...|@jsnonnull.Main.NonNullableStringSubNullableComparator)))
    (then
-    (global.set $$string_|jsnonnull.Ma...|@jsnonnull.Main.NonNullableStringSubNullableComparator (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsnonnull.Main$NonNullableStringSubNullableComparator")))
+    (return (global.get $$string_|jsnonnull.Ma...|@jsnonnull.Main.NonNullableStringSubNullableComparator))
    )
   )
+  (global.set $$string_|jsnonnull.Ma...|@jsnonnull.Main.NonNullableStringSubNullableComparator (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsnonnull.Main$NonNullableStringSubNullableComparator")))
   (return (global.get $$string_|jsnonnull.Ma...|@jsnonnull.Main.NonNullableStringSubNullableComparator))
  )
 )

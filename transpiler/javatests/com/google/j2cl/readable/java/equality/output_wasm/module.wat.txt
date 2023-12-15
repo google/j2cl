@@ -132,14 +132,15 @@
 )
 
 ;;; Class<T> Equality.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@equality.Equality
+(func $$getClassMetadata__java_lang_Class_<once>_@equality.Equality
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@equality.Equality))
+  (if (i32.eqz (ref.is_null (global.get $$class@equality.Equality)))
    (then
-    (global.set $$class@equality.Equality (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|equality.Equ...|__java_lang_String (ref.func $$getString_|equality.Equ...|__java_lang_String@equality.Equality) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@equality.Equality))
    )
   )
+  (global.set $$class@equality.Equality (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|equality.Equ...|__java_lang_String_<once>_@equality.Equality )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@equality.Equality))
  )
 )
@@ -152,20 +153,21 @@
  (local $this (ref null $equality.Equality))
  (local.set $this (ref.cast (ref $equality.Equality) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@equality.Equality) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@equality.Equality ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@equality.Equality)
 
 ;;; String Equality.$getString_|equality.Equ...|()
-(func $$getString_|equality.Equ...|__java_lang_String@equality.Equality
+(func $$getString_|equality.Equ...|__java_lang_String_<once>_@equality.Equality
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|equality.Equ...|@equality.Equality))
+  (if (i32.eqz (ref.is_null (global.get $$string_|equality.Equ...|@equality.Equality)))
    (then
-    (global.set $$string_|equality.Equ...|@equality.Equality (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "equality.Equality")))
+    (return (global.get $$string_|equality.Equ...|@equality.Equality))
    )
   )
+  (global.set $$string_|equality.Equ...|@equality.Equality (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "equality.Equality")))
   (return (global.get $$string_|equality.Equ...|@equality.Equality))
  )
 )

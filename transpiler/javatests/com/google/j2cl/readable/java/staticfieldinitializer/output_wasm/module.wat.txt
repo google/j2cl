@@ -94,14 +94,15 @@
 )
 
 ;;; Class<T> StaticFieldInitializer.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@staticfieldinitializer.StaticFieldInitializer
+(func $$getClassMetadata__java_lang_Class_<once>_@staticfieldinitializer.StaticFieldInitializer
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@staticfieldinitializer.StaticFieldInitializer))
+  (if (i32.eqz (ref.is_null (global.get $$class@staticfieldinitializer.StaticFieldInitializer)))
    (then
-    (global.set $$class@staticfieldinitializer.StaticFieldInitializer (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|staticfieldi...|__java_lang_String (ref.func $$getString_|staticfieldi...|__java_lang_String@staticfieldinitializer.StaticFieldInitializer) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@staticfieldinitializer.StaticFieldInitializer))
    )
   )
+  (global.set $$class@staticfieldinitializer.StaticFieldInitializer (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|staticfieldi...|__java_lang_String_<once>_@staticfieldinitializer.StaticFieldInitializer )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@staticfieldinitializer.StaticFieldInitializer))
  )
 )
@@ -114,20 +115,21 @@
  (local $this (ref null $staticfieldinitializer.StaticFieldInitializer))
  (local.set $this (ref.cast (ref $staticfieldinitializer.StaticFieldInitializer) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@staticfieldinitializer.StaticFieldInitializer) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@staticfieldinitializer.StaticFieldInitializer ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@staticfieldinitializer.StaticFieldInitializer)
 
 ;;; String StaticFieldInitializer.$getString_|staticfieldi...|()
-(func $$getString_|staticfieldi...|__java_lang_String@staticfieldinitializer.StaticFieldInitializer
+(func $$getString_|staticfieldi...|__java_lang_String_<once>_@staticfieldinitializer.StaticFieldInitializer
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|staticfieldi...|@staticfieldinitializer.StaticFieldInitializer))
+  (if (i32.eqz (ref.is_null (global.get $$string_|staticfieldi...|@staticfieldinitializer.StaticFieldInitializer)))
    (then
-    (global.set $$string_|staticfieldi...|@staticfieldinitializer.StaticFieldInitializer (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "staticfieldinitializer.StaticFieldInitializer")))
+    (return (global.get $$string_|staticfieldi...|@staticfieldinitializer.StaticFieldInitializer))
    )
   )
+  (global.set $$string_|staticfieldi...|@staticfieldinitializer.StaticFieldInitializer (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "staticfieldinitializer.StaticFieldInitializer")))
   (return (global.get $$string_|staticfieldi...|@staticfieldinitializer.StaticFieldInitializer))
  )
 )

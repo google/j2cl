@@ -100,14 +100,15 @@
 )
 
 ;;; Class<T> InstanceFieldInitializer.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@instancefieldinitializer.InstanceFieldInitializer
+(func $$getClassMetadata__java_lang_Class_<once>_@instancefieldinitializer.InstanceFieldInitializer
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@instancefieldinitializer.InstanceFieldInitializer))
+  (if (i32.eqz (ref.is_null (global.get $$class@instancefieldinitializer.InstanceFieldInitializer)))
    (then
-    (global.set $$class@instancefieldinitializer.InstanceFieldInitializer (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instancefiel...|__java_lang_String (ref.func $$getString_|instancefiel...|__java_lang_String@instancefieldinitializer.InstanceFieldInitializer) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@instancefieldinitializer.InstanceFieldInitializer))
    )
   )
+  (global.set $$class@instancefieldinitializer.InstanceFieldInitializer (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|instancefiel...|__java_lang_String_<once>_@instancefieldinitializer.InstanceFieldInitializer )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@instancefieldinitializer.InstanceFieldInitializer))
  )
 )
@@ -120,20 +121,21 @@
  (local $this (ref null $instancefieldinitializer.InstanceFieldInitializer))
  (local.set $this (ref.cast (ref $instancefieldinitializer.InstanceFieldInitializer) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@instancefieldinitializer.InstanceFieldInitializer) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@instancefieldinitializer.InstanceFieldInitializer ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@instancefieldinitializer.InstanceFieldInitializer)
 
 ;;; String InstanceFieldInitializer.$getString_|instancefiel...|()
-(func $$getString_|instancefiel...|__java_lang_String@instancefieldinitializer.InstanceFieldInitializer
+(func $$getString_|instancefiel...|__java_lang_String_<once>_@instancefieldinitializer.InstanceFieldInitializer
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|instancefiel...|@instancefieldinitializer.InstanceFieldInitializer))
+  (if (i32.eqz (ref.is_null (global.get $$string_|instancefiel...|@instancefieldinitializer.InstanceFieldInitializer)))
    (then
-    (global.set $$string_|instancefiel...|@instancefieldinitializer.InstanceFieldInitializer (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instancefieldinitializer.InstanceFieldInitializer")))
+    (return (global.get $$string_|instancefiel...|@instancefieldinitializer.InstanceFieldInitializer))
    )
   )
+  (global.set $$string_|instancefiel...|@instancefieldinitializer.InstanceFieldInitializer (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instancefieldinitializer.InstanceFieldInitializer")))
   (return (global.get $$string_|instancefiel...|@instancefieldinitializer.InstanceFieldInitializer))
  )
 )

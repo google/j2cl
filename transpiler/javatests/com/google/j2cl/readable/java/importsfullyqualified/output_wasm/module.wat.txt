@@ -111,14 +111,15 @@
 )
 
 ;;; Class<T> ImportsFullyQualified.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@importsfullyqualified.ImportsFullyQualified
+(func $$getClassMetadata__java_lang_Class_<once>_@importsfullyqualified.ImportsFullyQualified
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@importsfullyqualified.ImportsFullyQualified))
+  (if (i32.eqz (ref.is_null (global.get $$class@importsfullyqualified.ImportsFullyQualified)))
    (then
-    (global.set $$class@importsfullyqualified.ImportsFullyQualified (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|importsfully...|__java_lang_String (ref.func $$getString_|importsfully...|__java_lang_String@importsfullyqualified.ImportsFullyQualified) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@importsfullyqualified.ImportsFullyQualified))
    )
   )
+  (global.set $$class@importsfullyqualified.ImportsFullyQualified (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|importsfully...|__java_lang_String_<once>_@importsfullyqualified.ImportsFullyQualified )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@importsfullyqualified.ImportsFullyQualified))
  )
 )
@@ -131,20 +132,21 @@
  (local $this (ref null $importsfullyqualified.ImportsFullyQualified))
  (local.set $this (ref.cast (ref $importsfullyqualified.ImportsFullyQualified) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@importsfullyqualified.ImportsFullyQualified) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@importsfullyqualified.ImportsFullyQualified ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@importsfullyqualified.ImportsFullyQualified)
 
 ;;; String ImportsFullyQualified.$getString_|importsfully...|()
-(func $$getString_|importsfully...|__java_lang_String@importsfullyqualified.ImportsFullyQualified
+(func $$getString_|importsfully...|__java_lang_String_<once>_@importsfullyqualified.ImportsFullyQualified
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|importsfully...|@importsfullyqualified.ImportsFullyQualified))
+  (if (i32.eqz (ref.is_null (global.get $$string_|importsfully...|@importsfullyqualified.ImportsFullyQualified)))
    (then
-    (global.set $$string_|importsfully...|@importsfullyqualified.ImportsFullyQualified (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "importsfullyqualified.ImportsFullyQualified")))
+    (return (global.get $$string_|importsfully...|@importsfullyqualified.ImportsFullyQualified))
    )
   )
+  (global.set $$string_|importsfully...|@importsfullyqualified.ImportsFullyQualified (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "importsfullyqualified.ImportsFullyQualified")))
   (return (global.get $$string_|importsfully...|@importsfullyqualified.ImportsFullyQualified))
  )
 )

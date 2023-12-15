@@ -436,27 +436,29 @@
 )
 
 ;;; Class<T> Getable.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@intersectiontype.Getable
+(func $$getClassMetadata__java_lang_Class_<once>_@intersectiontype.Getable
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@intersectiontype.Getable))
+  (if (i32.eqz (ref.is_null (global.get $$class@intersectiontype.Getable)))
    (then
-    (global.set $$class@intersectiontype.Getable (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|intersection...|__java_lang_String (ref.func $$getString_|intersection...|__java_lang_String@intersectiontype.Getable) )))
+    (return (global.get $$class@intersectiontype.Getable))
    )
   )
+  (global.set $$class@intersectiontype.Getable (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|intersection...|__java_lang_String_<once>_@intersectiontype.Getable )))
   (return (global.get $$class@intersectiontype.Getable))
  )
 )
 
 ;;; String Getable.$getString_|intersection...|()
-(func $$getString_|intersection...|__java_lang_String@intersectiontype.Getable
+(func $$getString_|intersection...|__java_lang_String_<once>_@intersectiontype.Getable
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|intersection...|@intersectiontype.Getable))
+  (if (i32.eqz (ref.is_null (global.get $$string_|intersection...|@intersectiontype.Getable)))
    (then
-    (global.set $$string_|intersection...|@intersectiontype.Getable (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "intersectiontype.Getable")))
+    (return (global.get $$string_|intersection...|@intersectiontype.Getable))
    )
   )
+  (global.set $$string_|intersection...|@intersectiontype.Getable (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "intersectiontype.Getable")))
   (return (global.get $$string_|intersection...|@intersectiontype.Getable))
  )
 )
@@ -480,27 +482,29 @@
 )
 
 ;;; Class<T> Setable.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@intersectiontype.Setable
+(func $$getClassMetadata__java_lang_Class_<once>_@intersectiontype.Setable
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@intersectiontype.Setable))
+  (if (i32.eqz (ref.is_null (global.get $$class@intersectiontype.Setable)))
    (then
-    (global.set $$class@intersectiontype.Setable (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|intersection...|__java_lang_String (ref.func $$getString_|intersection...|__java_lang_String@intersectiontype.Setable) )))
+    (return (global.get $$class@intersectiontype.Setable))
    )
   )
+  (global.set $$class@intersectiontype.Setable (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|intersection...|__java_lang_String_<once>_@intersectiontype.Setable )))
   (return (global.get $$class@intersectiontype.Setable))
  )
 )
 
 ;;; String Setable.$getString_|intersection...|()
-(func $$getString_|intersection...|__java_lang_String@intersectiontype.Setable
+(func $$getString_|intersection...|__java_lang_String_<once>_@intersectiontype.Setable
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|intersection...|@intersectiontype.Setable))
+  (if (i32.eqz (ref.is_null (global.get $$string_|intersection...|@intersectiontype.Setable)))
    (then
-    (global.set $$string_|intersection...|@intersectiontype.Setable (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "intersectiontype.Setable")))
+    (return (global.get $$string_|intersection...|@intersectiontype.Setable))
    )
   )
+  (global.set $$string_|intersection...|@intersectiontype.Setable (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "intersectiontype.Setable")))
   (return (global.get $$string_|intersection...|@intersectiontype.Setable))
  )
 )
@@ -524,27 +528,29 @@
 )
 
 ;;; Class<T> Serial.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@intersectiontype.Serial
+(func $$getClassMetadata__java_lang_Class_<once>_@intersectiontype.Serial
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@intersectiontype.Serial))
+  (if (i32.eqz (ref.is_null (global.get $$class@intersectiontype.Serial)))
    (then
-    (global.set $$class@intersectiontype.Serial (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|intersection...|__java_lang_String (ref.func $$getString_|intersection...|__java_lang_String@intersectiontype.Serial) )))
+    (return (global.get $$class@intersectiontype.Serial))
    )
   )
+  (global.set $$class@intersectiontype.Serial (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|intersection...|__java_lang_String_<once>_@intersectiontype.Serial )))
   (return (global.get $$class@intersectiontype.Serial))
  )
 )
 
 ;;; String Serial.$getString_|intersection...|()
-(func $$getString_|intersection...|__java_lang_String@intersectiontype.Serial
+(func $$getString_|intersection...|__java_lang_String_<once>_@intersectiontype.Serial
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|intersection...|@intersectiontype.Serial))
+  (if (i32.eqz (ref.is_null (global.get $$string_|intersection...|@intersectiontype.Serial)))
    (then
-    (global.set $$string_|intersection...|@intersectiontype.Serial (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "intersectiontype.Serial")))
+    (return (global.get $$string_|intersection...|@intersectiontype.Serial))
    )
   )
+  (global.set $$string_|intersection...|@intersectiontype.Serial (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "intersectiontype.Serial")))
   (return (global.get $$string_|intersection...|@intersectiontype.Serial))
  )
 )
@@ -568,27 +574,29 @@
 )
 
 ;;; Class<T> Cmp.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@intersectiontype.Cmp
+(func $$getClassMetadata__java_lang_Class_<once>_@intersectiontype.Cmp
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@intersectiontype.Cmp))
+  (if (i32.eqz (ref.is_null (global.get $$class@intersectiontype.Cmp)))
    (then
-    (global.set $$class@intersectiontype.Cmp (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|intersection...|__java_lang_String (ref.func $$getString_|intersection...|__java_lang_String@intersectiontype.Cmp) )))
+    (return (global.get $$class@intersectiontype.Cmp))
    )
   )
+  (global.set $$class@intersectiontype.Cmp (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|intersection...|__java_lang_String_<once>_@intersectiontype.Cmp )))
   (return (global.get $$class@intersectiontype.Cmp))
  )
 )
 
 ;;; String Cmp.$getString_|intersection...|()
-(func $$getString_|intersection...|__java_lang_String@intersectiontype.Cmp
+(func $$getString_|intersection...|__java_lang_String_<once>_@intersectiontype.Cmp
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|intersection...|@intersectiontype.Cmp))
+  (if (i32.eqz (ref.is_null (global.get $$string_|intersection...|@intersectiontype.Cmp)))
    (then
-    (global.set $$string_|intersection...|@intersectiontype.Cmp (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "intersectiontype.Cmp")))
+    (return (global.get $$string_|intersection...|@intersectiontype.Cmp))
    )
   )
+  (global.set $$string_|intersection...|@intersectiontype.Cmp (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "intersectiontype.Cmp")))
   (return (global.get $$string_|intersection...|@intersectiontype.Cmp))
  )
 )
@@ -612,27 +620,29 @@
 )
 
 ;;; Class<T> Cmp2.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@intersectiontype.Cmp2
+(func $$getClassMetadata__java_lang_Class_<once>_@intersectiontype.Cmp2
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@intersectiontype.Cmp2))
+  (if (i32.eqz (ref.is_null (global.get $$class@intersectiontype.Cmp2)))
    (then
-    (global.set $$class@intersectiontype.Cmp2 (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|intersection...|__java_lang_String (ref.func $$getString_|intersection...|__java_lang_String@intersectiontype.Cmp2) )))
+    (return (global.get $$class@intersectiontype.Cmp2))
    )
   )
+  (global.set $$class@intersectiontype.Cmp2 (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|intersection...|__java_lang_String_<once>_@intersectiontype.Cmp2 )))
   (return (global.get $$class@intersectiontype.Cmp2))
  )
 )
 
 ;;; String Cmp2.$getString_|intersection...|()
-(func $$getString_|intersection...|__java_lang_String@intersectiontype.Cmp2
+(func $$getString_|intersection...|__java_lang_String_<once>_@intersectiontype.Cmp2
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|intersection...|@intersectiontype.Cmp2))
+  (if (i32.eqz (ref.is_null (global.get $$string_|intersection...|@intersectiontype.Cmp2)))
    (then
-    (global.set $$string_|intersection...|@intersectiontype.Cmp2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "intersectiontype.Cmp2")))
+    (return (global.get $$string_|intersection...|@intersectiontype.Cmp2))
    )
   )
+  (global.set $$string_|intersection...|@intersectiontype.Cmp2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "intersectiontype.Cmp2")))
   (return (global.get $$string_|intersection...|@intersectiontype.Cmp2))
  )
 )
@@ -656,27 +666,29 @@
 )
 
 ;;; Class<T> EmptyA.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest.EmptyA
+(func $$getClassMetadata__java_lang_Class_<once>_@intersectiontype.IntersectionTypeTest.EmptyA
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@intersectiontype.IntersectionTypeTest.EmptyA))
+  (if (i32.eqz (ref.is_null (global.get $$class@intersectiontype.IntersectionTypeTest.EmptyA)))
    (then
-    (global.set $$class@intersectiontype.IntersectionTypeTest.EmptyA (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|intersection...|__java_lang_String (ref.func $$getString_|intersection...|__java_lang_String@intersectiontype.IntersectionTypeTest.EmptyA) )))
+    (return (global.get $$class@intersectiontype.IntersectionTypeTest.EmptyA))
    )
   )
+  (global.set $$class@intersectiontype.IntersectionTypeTest.EmptyA (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|intersection...|__java_lang_String_<once>_@intersectiontype.IntersectionTypeTest.EmptyA )))
   (return (global.get $$class@intersectiontype.IntersectionTypeTest.EmptyA))
  )
 )
 
 ;;; String EmptyA.$getString_|intersection...|()
-(func $$getString_|intersection...|__java_lang_String@intersectiontype.IntersectionTypeTest.EmptyA
+(func $$getString_|intersection...|__java_lang_String_<once>_@intersectiontype.IntersectionTypeTest.EmptyA
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|intersection...|@intersectiontype.IntersectionTypeTest.EmptyA))
+  (if (i32.eqz (ref.is_null (global.get $$string_|intersection...|@intersectiontype.IntersectionTypeTest.EmptyA)))
    (then
-    (global.set $$string_|intersection...|@intersectiontype.IntersectionTypeTest.EmptyA (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "intersectiontype.IntersectionTypeTest$EmptyA")))
+    (return (global.get $$string_|intersection...|@intersectiontype.IntersectionTypeTest.EmptyA))
    )
   )
+  (global.set $$string_|intersection...|@intersectiontype.IntersectionTypeTest.EmptyA (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "intersectiontype.IntersectionTypeTest$EmptyA")))
   (return (global.get $$string_|intersection...|@intersectiontype.IntersectionTypeTest.EmptyA))
  )
 )
@@ -700,27 +712,29 @@
 )
 
 ;;; Class<T> EmptyB.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest.EmptyB
+(func $$getClassMetadata__java_lang_Class_<once>_@intersectiontype.IntersectionTypeTest.EmptyB
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@intersectiontype.IntersectionTypeTest.EmptyB))
+  (if (i32.eqz (ref.is_null (global.get $$class@intersectiontype.IntersectionTypeTest.EmptyB)))
    (then
-    (global.set $$class@intersectiontype.IntersectionTypeTest.EmptyB (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|intersection...|__java_lang_String (ref.func $$getString_|intersection...|__java_lang_String@intersectiontype.IntersectionTypeTest.EmptyB) )))
+    (return (global.get $$class@intersectiontype.IntersectionTypeTest.EmptyB))
    )
   )
+  (global.set $$class@intersectiontype.IntersectionTypeTest.EmptyB (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|intersection...|__java_lang_String_<once>_@intersectiontype.IntersectionTypeTest.EmptyB )))
   (return (global.get $$class@intersectiontype.IntersectionTypeTest.EmptyB))
  )
 )
 
 ;;; String EmptyB.$getString_|intersection...|()
-(func $$getString_|intersection...|__java_lang_String@intersectiontype.IntersectionTypeTest.EmptyB
+(func $$getString_|intersection...|__java_lang_String_<once>_@intersectiontype.IntersectionTypeTest.EmptyB
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|intersection...|@intersectiontype.IntersectionTypeTest.EmptyB))
+  (if (i32.eqz (ref.is_null (global.get $$string_|intersection...|@intersectiontype.IntersectionTypeTest.EmptyB)))
    (then
-    (global.set $$string_|intersection...|@intersectiontype.IntersectionTypeTest.EmptyB (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "intersectiontype.IntersectionTypeTest$EmptyB")))
+    (return (global.get $$string_|intersection...|@intersectiontype.IntersectionTypeTest.EmptyB))
    )
   )
+  (global.set $$string_|intersection...|@intersectiontype.IntersectionTypeTest.EmptyB (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "intersectiontype.IntersectionTypeTest$EmptyB")))
   (return (global.get $$string_|intersection...|@intersectiontype.IntersectionTypeTest.EmptyB))
  )
 )
@@ -982,14 +996,15 @@
 )
 
 ;;; Class<T> IntersectionTypeTest.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest
+(func $$getClassMetadata__java_lang_Class_<once>_@intersectiontype.IntersectionTypeTest
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@intersectiontype.IntersectionTypeTest))
+  (if (i32.eqz (ref.is_null (global.get $$class@intersectiontype.IntersectionTypeTest)))
    (then
-    (global.set $$class@intersectiontype.IntersectionTypeTest (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|intersection...|__java_lang_String (ref.func $$getString_|intersection...|__java_lang_String@intersectiontype.IntersectionTypeTest) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@intersectiontype.IntersectionTypeTest))
    )
   )
+  (global.set $$class@intersectiontype.IntersectionTypeTest (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|intersection...|__java_lang_String_<once>_@intersectiontype.IntersectionTypeTest )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@intersectiontype.IntersectionTypeTest))
  )
 )
@@ -1002,20 +1017,21 @@
  (local $this (ref null $intersectiontype.IntersectionTypeTest))
  (local.set $this (ref.cast (ref $intersectiontype.IntersectionTypeTest) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@intersectiontype.IntersectionTypeTest ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@intersectiontype.IntersectionTypeTest)
 
 ;;; String IntersectionTypeTest.$getString_|intersection...|()
-(func $$getString_|intersection...|__java_lang_String@intersectiontype.IntersectionTypeTest
+(func $$getString_|intersection...|__java_lang_String_<once>_@intersectiontype.IntersectionTypeTest
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|intersection...|@intersectiontype.IntersectionTypeTest))
+  (if (i32.eqz (ref.is_null (global.get $$string_|intersection...|@intersectiontype.IntersectionTypeTest)))
    (then
-    (global.set $$string_|intersection...|@intersectiontype.IntersectionTypeTest (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "intersectiontype.IntersectionTypeTest")))
+    (return (global.get $$string_|intersection...|@intersectiontype.IntersectionTypeTest))
    )
   )
+  (global.set $$string_|intersection...|@intersectiontype.IntersectionTypeTest (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "intersectiontype.IntersectionTypeTest")))
   (return (global.get $$string_|intersection...|@intersectiontype.IntersectionTypeTest))
  )
 )
@@ -1083,14 +1099,15 @@
 )
 
 ;;; Class<T> <anonymous> implements Cmp.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1
+(func $$getClassMetadata__java_lang_Class_<once>_@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1))
+  (if (i32.eqz (ref.is_null (global.get $$class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1)))
    (then
-    (global.set $$class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|intersection...|__java_lang_String (ref.func $$getString_|intersection...|__java_lang_String@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1))
    )
   )
+  (global.set $$class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|intersection...|__java_lang_String_<once>_@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1))
  )
 )
@@ -1103,20 +1120,21 @@
  (local $this (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1))
  (local.set $this (ref.cast (ref $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1)
 
 ;;; String <anonymous> implements Cmp.$getString_|intersection...|()
-(func $$getString_|intersection...|__java_lang_String@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1
+(func $$getString_|intersection...|__java_lang_String_<once>_@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|intersection...|@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1))
+  (if (i32.eqz (ref.is_null (global.get $$string_|intersection...|@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1)))
    (then
-    (global.set $$string_|intersection...|@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "intersectiontype.IntersectionTypeTest$$LambdaImplementor$1")))
+    (return (global.get $$string_|intersection...|@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1))
    )
   )
+  (global.set $$string_|intersection...|@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "intersectiontype.IntersectionTypeTest$$LambdaImplementor$1")))
   (return (global.get $$string_|intersection...|@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1))
  )
 )
@@ -1185,14 +1203,15 @@
 )
 
 ;;; Class<T> <anonymous> implements Cmp2<T>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2
+(func $$getClassMetadata__java_lang_Class_<once>_@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2))
+  (if (i32.eqz (ref.is_null (global.get $$class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2)))
    (then
-    (global.set $$class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|intersection...|__java_lang_String (ref.func $$getString_|intersection...|__java_lang_String@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2))
    )
   )
+  (global.set $$class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|intersection...|__java_lang_String_<once>_@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2))
  )
 )
@@ -1205,20 +1224,21 @@
  (local $this (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2))
  (local.set $this (ref.cast (ref $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2)
 
 ;;; String <anonymous> implements Cmp2<T>.$getString_|intersection...|()
-(func $$getString_|intersection...|__java_lang_String@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2
+(func $$getString_|intersection...|__java_lang_String_<once>_@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|intersection...|@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2))
+  (if (i32.eqz (ref.is_null (global.get $$string_|intersection...|@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2)))
    (then
-    (global.set $$string_|intersection...|@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "intersectiontype.IntersectionTypeTest$$LambdaImplementor$2")))
+    (return (global.get $$string_|intersection...|@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2))
    )
   )
+  (global.set $$string_|intersection...|@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "intersectiontype.IntersectionTypeTest$$LambdaImplementor$2")))
   (return (global.get $$string_|intersection...|@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2))
  )
 )
@@ -1291,14 +1311,15 @@
 )
 
 ;;; Class<T> MapEntry.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest.MapEntry
+(func $$getClassMetadata__java_lang_Class_<once>_@intersectiontype.IntersectionTypeTest.MapEntry
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@intersectiontype.IntersectionTypeTest.MapEntry))
+  (if (i32.eqz (ref.is_null (global.get $$class@intersectiontype.IntersectionTypeTest.MapEntry)))
    (then
-    (global.set $$class@intersectiontype.IntersectionTypeTest.MapEntry (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|intersection...|__java_lang_String (ref.func $$getString_|intersection...|__java_lang_String@intersectiontype.IntersectionTypeTest.MapEntry) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@intersectiontype.IntersectionTypeTest.MapEntry))
    )
   )
+  (global.set $$class@intersectiontype.IntersectionTypeTest.MapEntry (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|intersection...|__java_lang_String_<once>_@intersectiontype.IntersectionTypeTest.MapEntry )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@intersectiontype.IntersectionTypeTest.MapEntry))
  )
 )
@@ -1311,20 +1332,21 @@
  (local $this (ref null $intersectiontype.IntersectionTypeTest.MapEntry))
  (local.set $this (ref.cast (ref $intersectiontype.IntersectionTypeTest.MapEntry) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest.MapEntry) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@intersectiontype.IntersectionTypeTest.MapEntry ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@intersectiontype.IntersectionTypeTest.MapEntry)
 
 ;;; String MapEntry.$getString_|intersection...|()
-(func $$getString_|intersection...|__java_lang_String@intersectiontype.IntersectionTypeTest.MapEntry
+(func $$getString_|intersection...|__java_lang_String_<once>_@intersectiontype.IntersectionTypeTest.MapEntry
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|intersection...|@intersectiontype.IntersectionTypeTest.MapEntry))
+  (if (i32.eqz (ref.is_null (global.get $$string_|intersection...|@intersectiontype.IntersectionTypeTest.MapEntry)))
    (then
-    (global.set $$string_|intersection...|@intersectiontype.IntersectionTypeTest.MapEntry (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "intersectiontype.IntersectionTypeTest$MapEntry")))
+    (return (global.get $$string_|intersection...|@intersectiontype.IntersectionTypeTest.MapEntry))
    )
   )
+  (global.set $$string_|intersection...|@intersectiontype.IntersectionTypeTest.MapEntry (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "intersectiontype.IntersectionTypeTest$MapEntry")))
   (return (global.get $$string_|intersection...|@intersectiontype.IntersectionTypeTest.MapEntry))
  )
 )
@@ -1375,14 +1397,15 @@
 )
 
 ;;; Class<T> A.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest.A
+(func $$getClassMetadata__java_lang_Class_<once>_@intersectiontype.IntersectionTypeTest.A
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@intersectiontype.IntersectionTypeTest.A))
+  (if (i32.eqz (ref.is_null (global.get $$class@intersectiontype.IntersectionTypeTest.A)))
    (then
-    (global.set $$class@intersectiontype.IntersectionTypeTest.A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|intersection...|__java_lang_String (ref.func $$getString_|intersection...|__java_lang_String@intersectiontype.IntersectionTypeTest.A) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@intersectiontype.IntersectionTypeTest.A))
    )
   )
+  (global.set $$class@intersectiontype.IntersectionTypeTest.A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|intersection...|__java_lang_String_<once>_@intersectiontype.IntersectionTypeTest.A )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@intersectiontype.IntersectionTypeTest.A))
  )
 )
@@ -1395,20 +1418,21 @@
  (local $this (ref null $intersectiontype.IntersectionTypeTest.A))
  (local.set $this (ref.cast (ref $intersectiontype.IntersectionTypeTest.A) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest.A) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@intersectiontype.IntersectionTypeTest.A ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@intersectiontype.IntersectionTypeTest.A)
 
 ;;; String A.$getString_|intersection...|()
-(func $$getString_|intersection...|__java_lang_String@intersectiontype.IntersectionTypeTest.A
+(func $$getString_|intersection...|__java_lang_String_<once>_@intersectiontype.IntersectionTypeTest.A
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|intersection...|@intersectiontype.IntersectionTypeTest.A))
+  (if (i32.eqz (ref.is_null (global.get $$string_|intersection...|@intersectiontype.IntersectionTypeTest.A)))
    (then
-    (global.set $$string_|intersection...|@intersectiontype.IntersectionTypeTest.A (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "intersectiontype.IntersectionTypeTest$A")))
+    (return (global.get $$string_|intersection...|@intersectiontype.IntersectionTypeTest.A))
    )
   )
+  (global.set $$string_|intersection...|@intersectiontype.IntersectionTypeTest.A (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "intersectiontype.IntersectionTypeTest$A")))
   (return (global.get $$string_|intersection...|@intersectiontype.IntersectionTypeTest.A))
  )
 )
@@ -1459,14 +1483,15 @@
 )
 
 ;;; Class<T> SomeConcreteType.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest.SomeConcreteType
+(func $$getClassMetadata__java_lang_Class_<once>_@intersectiontype.IntersectionTypeTest.SomeConcreteType
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@intersectiontype.IntersectionTypeTest.SomeConcreteType))
+  (if (i32.eqz (ref.is_null (global.get $$class@intersectiontype.IntersectionTypeTest.SomeConcreteType)))
    (then
-    (global.set $$class@intersectiontype.IntersectionTypeTest.SomeConcreteType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|intersection...|__java_lang_String (ref.func $$getString_|intersection...|__java_lang_String@intersectiontype.IntersectionTypeTest.SomeConcreteType) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@intersectiontype.IntersectionTypeTest.SomeConcreteType))
    )
   )
+  (global.set $$class@intersectiontype.IntersectionTypeTest.SomeConcreteType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|intersection...|__java_lang_String_<once>_@intersectiontype.IntersectionTypeTest.SomeConcreteType )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@intersectiontype.IntersectionTypeTest.SomeConcreteType))
  )
 )
@@ -1479,20 +1504,21 @@
  (local $this (ref null $intersectiontype.IntersectionTypeTest.SomeConcreteType))
  (local.set $this (ref.cast (ref $intersectiontype.IntersectionTypeTest.SomeConcreteType) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@intersectiontype.IntersectionTypeTest.SomeConcreteType) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@intersectiontype.IntersectionTypeTest.SomeConcreteType ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@intersectiontype.IntersectionTypeTest.SomeConcreteType)
 
 ;;; String SomeConcreteType.$getString_|intersection...|()
-(func $$getString_|intersection...|__java_lang_String@intersectiontype.IntersectionTypeTest.SomeConcreteType
+(func $$getString_|intersection...|__java_lang_String_<once>_@intersectiontype.IntersectionTypeTest.SomeConcreteType
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|intersection...|@intersectiontype.IntersectionTypeTest.SomeConcreteType))
+  (if (i32.eqz (ref.is_null (global.get $$string_|intersection...|@intersectiontype.IntersectionTypeTest.SomeConcreteType)))
    (then
-    (global.set $$string_|intersection...|@intersectiontype.IntersectionTypeTest.SomeConcreteType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "intersectiontype.IntersectionTypeTest$SomeConcreteType")))
+    (return (global.get $$string_|intersection...|@intersectiontype.IntersectionTypeTest.SomeConcreteType))
    )
   )
+  (global.set $$string_|intersection...|@intersectiontype.IntersectionTypeTest.SomeConcreteType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "intersectiontype.IntersectionTypeTest$SomeConcreteType")))
   (return (global.get $$string_|intersection...|@intersectiontype.IntersectionTypeTest.SomeConcreteType))
  )
 )

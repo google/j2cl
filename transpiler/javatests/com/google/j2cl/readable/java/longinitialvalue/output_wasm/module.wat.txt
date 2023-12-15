@@ -59,27 +59,29 @@
 )
 
 ;;; Class<T> LongInitialValue.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@longinitialvalue.LongInitialValue
+(func $$getClassMetadata__java_lang_Class_<once>_@longinitialvalue.LongInitialValue
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@longinitialvalue.LongInitialValue))
+  (if (i32.eqz (ref.is_null (global.get $$class@longinitialvalue.LongInitialValue)))
    (then
-    (global.set $$class@longinitialvalue.LongInitialValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|longinitialv...|__java_lang_String (ref.func $$getString_|longinitialv...|__java_lang_String@longinitialvalue.LongInitialValue) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@longinitialvalue.LongInitialValue))
    )
   )
+  (global.set $$class@longinitialvalue.LongInitialValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|longinitialv...|__java_lang_String_<once>_@longinitialvalue.LongInitialValue )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@longinitialvalue.LongInitialValue))
  )
 )
 
 ;;; String LongInitialValue.$getString_|longinitialv...|()
-(func $$getString_|longinitialv...|__java_lang_String@longinitialvalue.LongInitialValue
+(func $$getString_|longinitialv...|__java_lang_String_<once>_@longinitialvalue.LongInitialValue
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|longinitialv...|@longinitialvalue.LongInitialValue))
+  (if (i32.eqz (ref.is_null (global.get $$string_|longinitialv...|@longinitialvalue.LongInitialValue)))
    (then
-    (global.set $$string_|longinitialv...|@longinitialvalue.LongInitialValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "longinitialvalue.LongInitialValue")))
+    (return (global.get $$string_|longinitialv...|@longinitialvalue.LongInitialValue))
    )
   )
+  (global.set $$string_|longinitialv...|@longinitialvalue.LongInitialValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "longinitialvalue.LongInitialValue")))
   (return (global.get $$string_|longinitialv...|@longinitialvalue.LongInitialValue))
  )
 )

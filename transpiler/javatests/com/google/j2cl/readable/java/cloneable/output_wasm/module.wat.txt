@@ -298,14 +298,15 @@
 )
 
 ;;; Class<T> Cloneables.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@cloneable.Cloneables
+(func $$getClassMetadata__java_lang_Class_<once>_@cloneable.Cloneables
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@cloneable.Cloneables))
+  (if (i32.eqz (ref.is_null (global.get $$class@cloneable.Cloneables)))
    (then
-    (global.set $$class@cloneable.Cloneables (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cloneable.Cl...|__java_lang_String (ref.func $$getString_|cloneable.Cl...|__java_lang_String@cloneable.Cloneables) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@cloneable.Cloneables))
    )
   )
+  (global.set $$class@cloneable.Cloneables (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|cloneable.Cl...|__java_lang_String_<once>_@cloneable.Cloneables )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@cloneable.Cloneables))
  )
 )
@@ -318,20 +319,21 @@
  (local $this (ref null $cloneable.Cloneables))
  (local.set $this (ref.cast (ref $cloneable.Cloneables) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cloneable.Cloneables) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@cloneable.Cloneables ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cloneable.Cloneables)
 
 ;;; String Cloneables.$getString_|cloneable.Cl...|()
-(func $$getString_|cloneable.Cl...|__java_lang_String@cloneable.Cloneables
+(func $$getString_|cloneable.Cl...|__java_lang_String_<once>_@cloneable.Cloneables
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|cloneable.Cl...|@cloneable.Cloneables))
+  (if (i32.eqz (ref.is_null (global.get $$string_|cloneable.Cl...|@cloneable.Cloneables)))
    (then
-    (global.set $$string_|cloneable.Cl...|@cloneable.Cloneables (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cloneable.Cloneables")))
+    (return (global.get $$string_|cloneable.Cl...|@cloneable.Cloneables))
    )
   )
+  (global.set $$string_|cloneable.Cl...|@cloneable.Cloneables (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cloneable.Cloneables")))
   (return (global.get $$string_|cloneable.Cl...|@cloneable.Cloneables))
  )
 )
@@ -409,14 +411,15 @@
 )
 
 ;;; Class<T> WithoutCloneable.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@cloneable.Cloneables.WithoutCloneable
+(func $$getClassMetadata__java_lang_Class_<once>_@cloneable.Cloneables.WithoutCloneable
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@cloneable.Cloneables.WithoutCloneable))
+  (if (i32.eqz (ref.is_null (global.get $$class@cloneable.Cloneables.WithoutCloneable)))
    (then
-    (global.set $$class@cloneable.Cloneables.WithoutCloneable (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cloneable.Cl...|__java_lang_String (ref.func $$getString_|cloneable.Cl...|__java_lang_String@cloneable.Cloneables.WithoutCloneable) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@cloneable.Cloneables.WithoutCloneable))
    )
   )
+  (global.set $$class@cloneable.Cloneables.WithoutCloneable (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|cloneable.Cl...|__java_lang_String_<once>_@cloneable.Cloneables.WithoutCloneable )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@cloneable.Cloneables.WithoutCloneable))
  )
 )
@@ -429,20 +432,21 @@
  (local $this (ref null $cloneable.Cloneables.WithoutCloneable))
  (local.set $this (ref.cast (ref $cloneable.Cloneables.WithoutCloneable) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cloneable.Cloneables.WithoutCloneable) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@cloneable.Cloneables.WithoutCloneable ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cloneable.Cloneables.WithoutCloneable)
 
 ;;; String WithoutCloneable.$getString_|cloneable.Cl...|()
-(func $$getString_|cloneable.Cl...|__java_lang_String@cloneable.Cloneables.WithoutCloneable
+(func $$getString_|cloneable.Cl...|__java_lang_String_<once>_@cloneable.Cloneables.WithoutCloneable
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|cloneable.Cl...|@cloneable.Cloneables.WithoutCloneable))
+  (if (i32.eqz (ref.is_null (global.get $$string_|cloneable.Cl...|@cloneable.Cloneables.WithoutCloneable)))
    (then
-    (global.set $$string_|cloneable.Cl...|@cloneable.Cloneables.WithoutCloneable (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cloneable.Cloneables$WithoutCloneable")))
+    (return (global.get $$string_|cloneable.Cl...|@cloneable.Cloneables.WithoutCloneable))
    )
   )
+  (global.set $$string_|cloneable.Cl...|@cloneable.Cloneables.WithoutCloneable (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cloneable.Cloneables$WithoutCloneable")))
   (return (global.get $$string_|cloneable.Cl...|@cloneable.Cloneables.WithoutCloneable))
  )
 )
@@ -520,14 +524,15 @@
 )
 
 ;;; Class<T> WithCloneable.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@cloneable.Cloneables.WithCloneable
+(func $$getClassMetadata__java_lang_Class_<once>_@cloneable.Cloneables.WithCloneable
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@cloneable.Cloneables.WithCloneable))
+  (if (i32.eqz (ref.is_null (global.get $$class@cloneable.Cloneables.WithCloneable)))
    (then
-    (global.set $$class@cloneable.Cloneables.WithCloneable (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cloneable.Cl...|__java_lang_String (ref.func $$getString_|cloneable.Cl...|__java_lang_String@cloneable.Cloneables.WithCloneable) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@cloneable.Cloneables.WithCloneable))
    )
   )
+  (global.set $$class@cloneable.Cloneables.WithCloneable (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|cloneable.Cl...|__java_lang_String_<once>_@cloneable.Cloneables.WithCloneable )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@cloneable.Cloneables.WithCloneable))
  )
 )
@@ -540,20 +545,21 @@
  (local $this (ref null $cloneable.Cloneables.WithCloneable))
  (local.set $this (ref.cast (ref $cloneable.Cloneables.WithCloneable) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cloneable.Cloneables.WithCloneable) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@cloneable.Cloneables.WithCloneable ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cloneable.Cloneables.WithCloneable)
 
 ;;; String WithCloneable.$getString_|cloneable.Cl...|()
-(func $$getString_|cloneable.Cl...|__java_lang_String@cloneable.Cloneables.WithCloneable
+(func $$getString_|cloneable.Cl...|__java_lang_String_<once>_@cloneable.Cloneables.WithCloneable
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|cloneable.Cl...|@cloneable.Cloneables.WithCloneable))
+  (if (i32.eqz (ref.is_null (global.get $$string_|cloneable.Cl...|@cloneable.Cloneables.WithCloneable)))
    (then
-    (global.set $$string_|cloneable.Cl...|@cloneable.Cloneables.WithCloneable (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cloneable.Cloneables$WithCloneable")))
+    (return (global.get $$string_|cloneable.Cl...|@cloneable.Cloneables.WithCloneable))
    )
   )
+  (global.set $$string_|cloneable.Cl...|@cloneable.Cloneables.WithCloneable (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cloneable.Cloneables$WithCloneable")))
   (return (global.get $$string_|cloneable.Cl...|@cloneable.Cloneables.WithCloneable))
  )
 )
@@ -631,14 +637,15 @@
 )
 
 ;;; Class<T> WithoutCloneableChild.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@cloneable.Cloneables.WithoutCloneableChild
+(func $$getClassMetadata__java_lang_Class_<once>_@cloneable.Cloneables.WithoutCloneableChild
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@cloneable.Cloneables.WithoutCloneableChild))
+  (if (i32.eqz (ref.is_null (global.get $$class@cloneable.Cloneables.WithoutCloneableChild)))
    (then
-    (global.set $$class@cloneable.Cloneables.WithoutCloneableChild (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cloneable.Cl...|__java_lang_String (ref.func $$getString_|cloneable.Cl...|__java_lang_String@cloneable.Cloneables.WithoutCloneableChild) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cloneable.Cloneables.WithoutCloneable) )))
+    (return (global.get $$class@cloneable.Cloneables.WithoutCloneableChild))
    )
   )
+  (global.set $$class@cloneable.Cloneables.WithoutCloneableChild (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|cloneable.Cl...|__java_lang_String_<once>_@cloneable.Cloneables.WithoutCloneableChild )(call $$getClassMetadata__java_lang_Class_<once>_@cloneable.Cloneables.WithoutCloneable )))
   (return (global.get $$class@cloneable.Cloneables.WithoutCloneableChild))
  )
 )
@@ -651,20 +658,21 @@
  (local $this (ref null $cloneable.Cloneables.WithoutCloneableChild))
  (local.set $this (ref.cast (ref $cloneable.Cloneables.WithoutCloneableChild) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cloneable.Cloneables.WithoutCloneableChild) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@cloneable.Cloneables.WithoutCloneableChild ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cloneable.Cloneables.WithoutCloneableChild)
 
 ;;; String WithoutCloneableChild.$getString_|cloneable.Cl...|()
-(func $$getString_|cloneable.Cl...|__java_lang_String@cloneable.Cloneables.WithoutCloneableChild
+(func $$getString_|cloneable.Cl...|__java_lang_String_<once>_@cloneable.Cloneables.WithoutCloneableChild
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|cloneable.Cl...|@cloneable.Cloneables.WithoutCloneableChild))
+  (if (i32.eqz (ref.is_null (global.get $$string_|cloneable.Cl...|@cloneable.Cloneables.WithoutCloneableChild)))
    (then
-    (global.set $$string_|cloneable.Cl...|@cloneable.Cloneables.WithoutCloneableChild (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cloneable.Cloneables$WithoutCloneableChild")))
+    (return (global.get $$string_|cloneable.Cl...|@cloneable.Cloneables.WithoutCloneableChild))
    )
   )
+  (global.set $$string_|cloneable.Cl...|@cloneable.Cloneables.WithoutCloneableChild (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cloneable.Cloneables$WithoutCloneableChild")))
   (return (global.get $$string_|cloneable.Cl...|@cloneable.Cloneables.WithoutCloneableChild))
  )
 )
@@ -742,14 +750,15 @@
 )
 
 ;;; Class<T> WithCloneableChild.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@cloneable.Cloneables.WithCloneableChild
+(func $$getClassMetadata__java_lang_Class_<once>_@cloneable.Cloneables.WithCloneableChild
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@cloneable.Cloneables.WithCloneableChild))
+  (if (i32.eqz (ref.is_null (global.get $$class@cloneable.Cloneables.WithCloneableChild)))
    (then
-    (global.set $$class@cloneable.Cloneables.WithCloneableChild (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cloneable.Cl...|__java_lang_String (ref.func $$getString_|cloneable.Cl...|__java_lang_String@cloneable.Cloneables.WithCloneableChild) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cloneable.Cloneables.WithCloneable) )))
+    (return (global.get $$class@cloneable.Cloneables.WithCloneableChild))
    )
   )
+  (global.set $$class@cloneable.Cloneables.WithCloneableChild (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|cloneable.Cl...|__java_lang_String_<once>_@cloneable.Cloneables.WithCloneableChild )(call $$getClassMetadata__java_lang_Class_<once>_@cloneable.Cloneables.WithCloneable )))
   (return (global.get $$class@cloneable.Cloneables.WithCloneableChild))
  )
 )
@@ -762,20 +771,21 @@
  (local $this (ref null $cloneable.Cloneables.WithCloneableChild))
  (local.set $this (ref.cast (ref $cloneable.Cloneables.WithCloneableChild) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cloneable.Cloneables.WithCloneableChild) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@cloneable.Cloneables.WithCloneableChild ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cloneable.Cloneables.WithCloneableChild)
 
 ;;; String WithCloneableChild.$getString_|cloneable.Cl...|()
-(func $$getString_|cloneable.Cl...|__java_lang_String@cloneable.Cloneables.WithCloneableChild
+(func $$getString_|cloneable.Cl...|__java_lang_String_<once>_@cloneable.Cloneables.WithCloneableChild
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|cloneable.Cl...|@cloneable.Cloneables.WithCloneableChild))
+  (if (i32.eqz (ref.is_null (global.get $$string_|cloneable.Cl...|@cloneable.Cloneables.WithCloneableChild)))
    (then
-    (global.set $$string_|cloneable.Cl...|@cloneable.Cloneables.WithCloneableChild (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cloneable.Cloneables$WithCloneableChild")))
+    (return (global.get $$string_|cloneable.Cl...|@cloneable.Cloneables.WithCloneableChild))
    )
   )
+  (global.set $$string_|cloneable.Cl...|@cloneable.Cloneables.WithCloneableChild (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cloneable.Cloneables$WithCloneableChild")))
   (return (global.get $$string_|cloneable.Cl...|@cloneable.Cloneables.WithCloneableChild))
  )
 )

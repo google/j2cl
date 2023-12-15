@@ -84,14 +84,15 @@
 )
 
 ;;; Class<T> Main.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@exportimport.Main
+(func $$getClassMetadata__java_lang_Class_<once>_@exportimport.Main
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@exportimport.Main))
+  (if (i32.eqz (ref.is_null (global.get $$class@exportimport.Main)))
    (then
-    (global.set $$class@exportimport.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|exportimport...|__java_lang_String (ref.func $$getString_|exportimport...|__java_lang_String@exportimport.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@exportimport.Main))
    )
   )
+  (global.set $$class@exportimport.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|exportimport...|__java_lang_String_<once>_@exportimport.Main )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@exportimport.Main))
  )
 )
@@ -104,20 +105,21 @@
  (local $this (ref null $exportimport.Main))
  (local.set $this (ref.cast (ref $exportimport.Main) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@exportimport.Main) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@exportimport.Main ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@exportimport.Main)
 
 ;;; String Main.$getString_|exportimport...|()
-(func $$getString_|exportimport...|__java_lang_String@exportimport.Main
+(func $$getString_|exportimport...|__java_lang_String_<once>_@exportimport.Main
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|exportimport...|@exportimport.Main))
+  (if (i32.eqz (ref.is_null (global.get $$string_|exportimport...|@exportimport.Main)))
    (then
-    (global.set $$string_|exportimport...|@exportimport.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "exportimport.Main")))
+    (return (global.get $$string_|exportimport...|@exportimport.Main))
    )
   )
+  (global.set $$string_|exportimport...|@exportimport.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "exportimport.Main")))
   (return (global.get $$string_|exportimport...|@exportimport.Main))
  )
 )

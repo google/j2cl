@@ -67,7 +67,6 @@ public class StringLiteralGettersCreator {
         .setOrigin(MethodOrigin.SYNTHETIC_STRING_LITERAL_GETTER)
         .setStatic(true)
         .setSynthetic(true)
-        .setSideEffectFree(true)
         .build();
   }
 

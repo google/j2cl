@@ -117,14 +117,15 @@
 )
 
 ;;; Class<T> JsIgnoreExample.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jsignore.JsIgnoreExample
+(func $$getClassMetadata__java_lang_Class_<once>_@jsignore.JsIgnoreExample
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jsignore.JsIgnoreExample))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsignore.JsIgnoreExample)))
    (then
-    (global.set $$class@jsignore.JsIgnoreExample (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jsignore.JsI...|__java_lang_String (ref.func $$getString_|jsignore.JsI...|__java_lang_String@jsignore.JsIgnoreExample) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@jsignore.JsIgnoreExample))
    )
   )
+  (global.set $$class@jsignore.JsIgnoreExample (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsignore.JsI...|__java_lang_String_<once>_@jsignore.JsIgnoreExample )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@jsignore.JsIgnoreExample))
  )
 )
@@ -137,20 +138,21 @@
  (local $this (ref null $jsignore.JsIgnoreExample))
  (local.set $this (ref.cast (ref $jsignore.JsIgnoreExample) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jsignore.JsIgnoreExample) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsignore.JsIgnoreExample ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsignore.JsIgnoreExample)
 
 ;;; String JsIgnoreExample.$getString_|jsignore.JsI...|()
-(func $$getString_|jsignore.JsI...|__java_lang_String@jsignore.JsIgnoreExample
+(func $$getString_|jsignore.JsI...|__java_lang_String_<once>_@jsignore.JsIgnoreExample
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jsignore.JsI...|@jsignore.JsIgnoreExample))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsignore.JsI...|@jsignore.JsIgnoreExample)))
    (then
-    (global.set $$string_|jsignore.JsI...|@jsignore.JsIgnoreExample (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsignore.JsIgnoreExample")))
+    (return (global.get $$string_|jsignore.JsI...|@jsignore.JsIgnoreExample))
    )
   )
+  (global.set $$string_|jsignore.JsI...|@jsignore.JsIgnoreExample (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsignore.JsIgnoreExample")))
   (return (global.get $$string_|jsignore.JsI...|@jsignore.JsIgnoreExample))
  )
 )

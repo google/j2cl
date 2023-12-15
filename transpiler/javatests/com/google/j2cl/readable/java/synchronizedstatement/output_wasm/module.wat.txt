@@ -109,14 +109,15 @@
 )
 
 ;;; Class<T> SynchronizedStatement.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@synchronizedstatement.SynchronizedStatement
+(func $$getClassMetadata__java_lang_Class_<once>_@synchronizedstatement.SynchronizedStatement
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@synchronizedstatement.SynchronizedStatement))
+  (if (i32.eqz (ref.is_null (global.get $$class@synchronizedstatement.SynchronizedStatement)))
    (then
-    (global.set $$class@synchronizedstatement.SynchronizedStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|synchronized...|__java_lang_String (ref.func $$getString_|synchronized...|__java_lang_String@synchronizedstatement.SynchronizedStatement) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@synchronizedstatement.SynchronizedStatement))
    )
   )
+  (global.set $$class@synchronizedstatement.SynchronizedStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|synchronized...|__java_lang_String_<once>_@synchronizedstatement.SynchronizedStatement )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@synchronizedstatement.SynchronizedStatement))
  )
 )
@@ -129,20 +130,21 @@
  (local $this (ref null $synchronizedstatement.SynchronizedStatement))
  (local.set $this (ref.cast (ref $synchronizedstatement.SynchronizedStatement) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@synchronizedstatement.SynchronizedStatement) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@synchronizedstatement.SynchronizedStatement ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@synchronizedstatement.SynchronizedStatement)
 
 ;;; String SynchronizedStatement.$getString_|synchronized...|()
-(func $$getString_|synchronized...|__java_lang_String@synchronizedstatement.SynchronizedStatement
+(func $$getString_|synchronized...|__java_lang_String_<once>_@synchronizedstatement.SynchronizedStatement
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|synchronized...|@synchronizedstatement.SynchronizedStatement))
+  (if (i32.eqz (ref.is_null (global.get $$string_|synchronized...|@synchronizedstatement.SynchronizedStatement)))
    (then
-    (global.set $$string_|synchronized...|@synchronizedstatement.SynchronizedStatement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "synchronizedstatement.SynchronizedStatement")))
+    (return (global.get $$string_|synchronized...|@synchronizedstatement.SynchronizedStatement))
    )
   )
+  (global.set $$string_|synchronized...|@synchronizedstatement.SynchronizedStatement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "synchronizedstatement.SynchronizedStatement")))
   (return (global.get $$string_|synchronized...|@synchronizedstatement.SynchronizedStatement))
  )
 )

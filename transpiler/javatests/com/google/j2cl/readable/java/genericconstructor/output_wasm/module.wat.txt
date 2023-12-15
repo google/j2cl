@@ -158,14 +158,15 @@
 )
 
 ;;; Class<T> GenericConstructor.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@genericconstructor.GenericConstructor
+(func $$getClassMetadata__java_lang_Class_<once>_@genericconstructor.GenericConstructor
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@genericconstructor.GenericConstructor))
+  (if (i32.eqz (ref.is_null (global.get $$class@genericconstructor.GenericConstructor)))
    (then
-    (global.set $$class@genericconstructor.GenericConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|genericconst...|__java_lang_String (ref.func $$getString_|genericconst...|__java_lang_String@genericconstructor.GenericConstructor) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@genericconstructor.GenericConstructor))
    )
   )
+  (global.set $$class@genericconstructor.GenericConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|genericconst...|__java_lang_String_<once>_@genericconstructor.GenericConstructor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@genericconstructor.GenericConstructor))
  )
 )
@@ -178,20 +179,21 @@
  (local $this (ref null $genericconstructor.GenericConstructor))
  (local.set $this (ref.cast (ref $genericconstructor.GenericConstructor) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@genericconstructor.GenericConstructor) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@genericconstructor.GenericConstructor ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@genericconstructor.GenericConstructor)
 
 ;;; String GenericConstructor.$getString_|genericconst...|()
-(func $$getString_|genericconst...|__java_lang_String@genericconstructor.GenericConstructor
+(func $$getString_|genericconst...|__java_lang_String_<once>_@genericconstructor.GenericConstructor
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|genericconst...|@genericconstructor.GenericConstructor))
+  (if (i32.eqz (ref.is_null (global.get $$string_|genericconst...|@genericconstructor.GenericConstructor)))
    (then
-    (global.set $$string_|genericconst...|@genericconstructor.GenericConstructor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "genericconstructor.GenericConstructor")))
+    (return (global.get $$string_|genericconst...|@genericconstructor.GenericConstructor))
    )
   )
+  (global.set $$string_|genericconst...|@genericconstructor.GenericConstructor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "genericconstructor.GenericConstructor")))
   (return (global.get $$string_|genericconst...|@genericconstructor.GenericConstructor))
  )
 )

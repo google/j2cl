@@ -236,14 +236,15 @@
 )
 
 ;;; Class<T> LabeledStatement.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@labelstatement.LabeledStatement
+(func $$getClassMetadata__java_lang_Class_<once>_@labelstatement.LabeledStatement
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@labelstatement.LabeledStatement))
+  (if (i32.eqz (ref.is_null (global.get $$class@labelstatement.LabeledStatement)))
    (then
-    (global.set $$class@labelstatement.LabeledStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|labelstateme...|__java_lang_String (ref.func $$getString_|labelstateme...|__java_lang_String@labelstatement.LabeledStatement) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@labelstatement.LabeledStatement))
    )
   )
+  (global.set $$class@labelstatement.LabeledStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|labelstateme...|__java_lang_String_<once>_@labelstatement.LabeledStatement )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@labelstatement.LabeledStatement))
  )
 )
@@ -256,20 +257,21 @@
  (local $this (ref null $labelstatement.LabeledStatement))
  (local.set $this (ref.cast (ref $labelstatement.LabeledStatement) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@labelstatement.LabeledStatement) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@labelstatement.LabeledStatement ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@labelstatement.LabeledStatement)
 
 ;;; String LabeledStatement.$getString_|labelstateme...|()
-(func $$getString_|labelstateme...|__java_lang_String@labelstatement.LabeledStatement
+(func $$getString_|labelstateme...|__java_lang_String_<once>_@labelstatement.LabeledStatement
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|labelstateme...|@labelstatement.LabeledStatement))
+  (if (i32.eqz (ref.is_null (global.get $$string_|labelstateme...|@labelstatement.LabeledStatement)))
    (then
-    (global.set $$string_|labelstateme...|@labelstatement.LabeledStatement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "labelstatement.LabeledStatement")))
+    (return (global.get $$string_|labelstateme...|@labelstatement.LabeledStatement))
    )
   )
+  (global.set $$string_|labelstateme...|@labelstatement.LabeledStatement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "labelstatement.LabeledStatement")))
   (return (global.get $$string_|labelstateme...|@labelstatement.LabeledStatement))
  )
 )

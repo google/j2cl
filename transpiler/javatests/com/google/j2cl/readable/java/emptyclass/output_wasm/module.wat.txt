@@ -84,14 +84,15 @@
 )
 
 ;;; Class<T> EmptyClass.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@emptyclass.EmptyClass
+(func $$getClassMetadata__java_lang_Class_<once>_@emptyclass.EmptyClass
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@emptyclass.EmptyClass))
+  (if (i32.eqz (ref.is_null (global.get $$class@emptyclass.EmptyClass)))
    (then
-    (global.set $$class@emptyclass.EmptyClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|emptyclass.E...|__java_lang_String (ref.func $$getString_|emptyclass.E...|__java_lang_String@emptyclass.EmptyClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@emptyclass.EmptyClass))
    )
   )
+  (global.set $$class@emptyclass.EmptyClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|emptyclass.E...|__java_lang_String_<once>_@emptyclass.EmptyClass )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@emptyclass.EmptyClass))
  )
 )
@@ -104,20 +105,21 @@
  (local $this (ref null $emptyclass.EmptyClass))
  (local.set $this (ref.cast (ref $emptyclass.EmptyClass) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@emptyclass.EmptyClass) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@emptyclass.EmptyClass ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@emptyclass.EmptyClass)
 
 ;;; String EmptyClass.$getString_|emptyclass.E...|()
-(func $$getString_|emptyclass.E...|__java_lang_String@emptyclass.EmptyClass
+(func $$getString_|emptyclass.E...|__java_lang_String_<once>_@emptyclass.EmptyClass
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|emptyclass.E...|@emptyclass.EmptyClass))
+  (if (i32.eqz (ref.is_null (global.get $$string_|emptyclass.E...|@emptyclass.EmptyClass)))
    (then
-    (global.set $$string_|emptyclass.E...|@emptyclass.EmptyClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "emptyclass.EmptyClass")))
+    (return (global.get $$string_|emptyclass.E...|@emptyclass.EmptyClass))
    )
   )
+  (global.set $$string_|emptyclass.E...|@emptyclass.EmptyClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "emptyclass.EmptyClass")))
   (return (global.get $$string_|emptyclass.E...|@emptyclass.EmptyClass))
  )
 )

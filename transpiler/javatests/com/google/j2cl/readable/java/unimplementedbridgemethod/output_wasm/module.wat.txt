@@ -136,27 +136,29 @@
 )
 
 ;;; Class<T> I.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@unimplementedbridgemethod.I
+(func $$getClassMetadata__java_lang_Class_<once>_@unimplementedbridgemethod.I
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@unimplementedbridgemethod.I))
+  (if (i32.eqz (ref.is_null (global.get $$class@unimplementedbridgemethod.I)))
    (then
-    (global.set $$class@unimplementedbridgemethod.I (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|unimplemente...|__java_lang_String (ref.func $$getString_|unimplemente...|__java_lang_String@unimplementedbridgemethod.I) )))
+    (return (global.get $$class@unimplementedbridgemethod.I))
    )
   )
+  (global.set $$class@unimplementedbridgemethod.I (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|unimplemente...|__java_lang_String_<once>_@unimplementedbridgemethod.I )))
   (return (global.get $$class@unimplementedbridgemethod.I))
  )
 )
 
 ;;; String I.$getString_|unimplemente...|()
-(func $$getString_|unimplemente...|__java_lang_String@unimplementedbridgemethod.I
+(func $$getString_|unimplemente...|__java_lang_String_<once>_@unimplementedbridgemethod.I
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|unimplemente...|@unimplementedbridgemethod.I))
+  (if (i32.eqz (ref.is_null (global.get $$string_|unimplemente...|@unimplementedbridgemethod.I)))
    (then
-    (global.set $$string_|unimplemente...|@unimplementedbridgemethod.I (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "unimplementedbridgemethod.I")))
+    (return (global.get $$string_|unimplemente...|@unimplementedbridgemethod.I))
    )
   )
+  (global.set $$string_|unimplemente...|@unimplementedbridgemethod.I (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "unimplementedbridgemethod.I")))
   (return (global.get $$string_|unimplemente...|@unimplementedbridgemethod.I))
  )
 )
@@ -180,27 +182,29 @@
 )
 
 ;;; Class<T> J.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@unimplementedbridgemethod.J
+(func $$getClassMetadata__java_lang_Class_<once>_@unimplementedbridgemethod.J
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@unimplementedbridgemethod.J))
+  (if (i32.eqz (ref.is_null (global.get $$class@unimplementedbridgemethod.J)))
    (then
-    (global.set $$class@unimplementedbridgemethod.J (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|unimplemente...|__java_lang_String (ref.func $$getString_|unimplemente...|__java_lang_String@unimplementedbridgemethod.J) )))
+    (return (global.get $$class@unimplementedbridgemethod.J))
    )
   )
+  (global.set $$class@unimplementedbridgemethod.J (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|unimplemente...|__java_lang_String_<once>_@unimplementedbridgemethod.J )))
   (return (global.get $$class@unimplementedbridgemethod.J))
  )
 )
 
 ;;; String J.$getString_|unimplemente...|()
-(func $$getString_|unimplemente...|__java_lang_String@unimplementedbridgemethod.J
+(func $$getString_|unimplemente...|__java_lang_String_<once>_@unimplementedbridgemethod.J
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|unimplemente...|@unimplementedbridgemethod.J))
+  (if (i32.eqz (ref.is_null (global.get $$string_|unimplemente...|@unimplementedbridgemethod.J)))
    (then
-    (global.set $$string_|unimplemente...|@unimplementedbridgemethod.J (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "unimplementedbridgemethod.J")))
+    (return (global.get $$string_|unimplemente...|@unimplementedbridgemethod.J))
    )
   )
+  (global.set $$string_|unimplemente...|@unimplementedbridgemethod.J (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "unimplementedbridgemethod.J")))
   (return (global.get $$string_|unimplemente...|@unimplementedbridgemethod.J))
  )
 )
@@ -236,27 +240,29 @@
 )
 
 ;;; Class<T> Bar.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@unimplementedbridgemethod.Bar
+(func $$getClassMetadata__java_lang_Class_<once>_@unimplementedbridgemethod.Bar
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@unimplementedbridgemethod.Bar))
+  (if (i32.eqz (ref.is_null (global.get $$class@unimplementedbridgemethod.Bar)))
    (then
-    (global.set $$class@unimplementedbridgemethod.Bar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|unimplemente...|__java_lang_String (ref.func $$getString_|unimplemente...|__java_lang_String@unimplementedbridgemethod.Bar) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@unimplementedbridgemethod.Bar))
    )
   )
+  (global.set $$class@unimplementedbridgemethod.Bar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|unimplemente...|__java_lang_String_<once>_@unimplementedbridgemethod.Bar )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@unimplementedbridgemethod.Bar))
  )
 )
 
 ;;; String Bar.$getString_|unimplemente...|()
-(func $$getString_|unimplemente...|__java_lang_String@unimplementedbridgemethod.Bar
+(func $$getString_|unimplemente...|__java_lang_String_<once>_@unimplementedbridgemethod.Bar
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|unimplemente...|@unimplementedbridgemethod.Bar))
+  (if (i32.eqz (ref.is_null (global.get $$string_|unimplemente...|@unimplementedbridgemethod.Bar)))
    (then
-    (global.set $$string_|unimplemente...|@unimplementedbridgemethod.Bar (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "unimplementedbridgemethod.Bar")))
+    (return (global.get $$string_|unimplemente...|@unimplementedbridgemethod.Bar))
    )
   )
+  (global.set $$string_|unimplemente...|@unimplementedbridgemethod.Bar (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "unimplementedbridgemethod.Bar")))
   (return (global.get $$string_|unimplemente...|@unimplementedbridgemethod.Bar))
  )
 )
@@ -292,27 +298,29 @@
 )
 
 ;;; Class<T> Foo.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@unimplementedbridgemethod.Foo
+(func $$getClassMetadata__java_lang_Class_<once>_@unimplementedbridgemethod.Foo
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@unimplementedbridgemethod.Foo))
+  (if (i32.eqz (ref.is_null (global.get $$class@unimplementedbridgemethod.Foo)))
    (then
-    (global.set $$class@unimplementedbridgemethod.Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|unimplemente...|__java_lang_String (ref.func $$getString_|unimplemente...|__java_lang_String@unimplementedbridgemethod.Foo) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@unimplementedbridgemethod.Foo))
    )
   )
+  (global.set $$class@unimplementedbridgemethod.Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|unimplemente...|__java_lang_String_<once>_@unimplementedbridgemethod.Foo )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@unimplementedbridgemethod.Foo))
  )
 )
 
 ;;; String Foo.$getString_|unimplemente...|()
-(func $$getString_|unimplemente...|__java_lang_String@unimplementedbridgemethod.Foo
+(func $$getString_|unimplemente...|__java_lang_String_<once>_@unimplementedbridgemethod.Foo
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|unimplemente...|@unimplementedbridgemethod.Foo))
+  (if (i32.eqz (ref.is_null (global.get $$string_|unimplemente...|@unimplementedbridgemethod.Foo)))
    (then
-    (global.set $$string_|unimplemente...|@unimplementedbridgemethod.Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "unimplementedbridgemethod.Foo")))
+    (return (global.get $$string_|unimplemente...|@unimplementedbridgemethod.Foo))
    )
   )
+  (global.set $$string_|unimplemente...|@unimplementedbridgemethod.Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "unimplementedbridgemethod.Foo")))
   (return (global.get $$string_|unimplemente...|@unimplementedbridgemethod.Foo))
  )
 )

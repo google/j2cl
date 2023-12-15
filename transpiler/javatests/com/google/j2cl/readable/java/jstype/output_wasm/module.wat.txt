@@ -111,27 +111,29 @@
 )
 
 ;;; Class<T> $Overlay.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jstype.SomeJsType.Star.$Overlay
+(func $$getClassMetadata__java_lang_Class_<once>_@jstype.SomeJsType.Star.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jstype.SomeJsType.Star.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$class@jstype.SomeJsType.Star.$Overlay)))
    (then
-    (global.set $$class@jstype.SomeJsType.Star.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jstype.SomeJ...|__java_lang_String (ref.func $$getString_|jstype.SomeJ...|__java_lang_String@jstype.SomeJsType.Star.$Overlay) )))
+    (return (global.get $$class@jstype.SomeJsType.Star.$Overlay))
    )
   )
+  (global.set $$class@jstype.SomeJsType.Star.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jstype.SomeJ...|__java_lang_String_<once>_@jstype.SomeJsType.Star.$Overlay )))
   (return (global.get $$class@jstype.SomeJsType.Star.$Overlay))
  )
 )
 
 ;;; String $Overlay.$getString_|jstype.SomeJ...|()
-(func $$getString_|jstype.SomeJ...|__java_lang_String@jstype.SomeJsType.Star.$Overlay
+(func $$getString_|jstype.SomeJ...|__java_lang_String_<once>_@jstype.SomeJsType.Star.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jstype.SomeJ...|@jstype.SomeJsType.Star.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jstype.SomeJ...|@jstype.SomeJsType.Star.$Overlay)))
    (then
-    (global.set $$string_|jstype.SomeJ...|@jstype.SomeJsType.Star.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jstype.SomeJsType$Star$$Overlay")))
+    (return (global.get $$string_|jstype.SomeJ...|@jstype.SomeJsType.Star.$Overlay))
    )
   )
+  (global.set $$string_|jstype.SomeJ...|@jstype.SomeJsType.Star.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jstype.SomeJsType$Star$$Overlay")))
   (return (global.get $$string_|jstype.SomeJ...|@jstype.SomeJsType.Star.$Overlay))
  )
 )
@@ -155,27 +157,29 @@
 )
 
 ;;; Class<T> $Overlay.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jstype.SomeJsType.Wildcard.$Overlay
+(func $$getClassMetadata__java_lang_Class_<once>_@jstype.SomeJsType.Wildcard.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jstype.SomeJsType.Wildcard.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$class@jstype.SomeJsType.Wildcard.$Overlay)))
    (then
-    (global.set $$class@jstype.SomeJsType.Wildcard.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jstype.SomeJ...|__java_lang_String (ref.func $$getString_|jstype.SomeJ...|__java_lang_String@jstype.SomeJsType.Wildcard.$Overlay) )))
+    (return (global.get $$class@jstype.SomeJsType.Wildcard.$Overlay))
    )
   )
+  (global.set $$class@jstype.SomeJsType.Wildcard.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jstype.SomeJ...|__java_lang_String_<once>_@jstype.SomeJsType.Wildcard.$Overlay )))
   (return (global.get $$class@jstype.SomeJsType.Wildcard.$Overlay))
  )
 )
 
 ;;; String $Overlay.$getString_|jstype.SomeJ...|()
-(func $$getString_|jstype.SomeJ...|__java_lang_String@jstype.SomeJsType.Wildcard.$Overlay
+(func $$getString_|jstype.SomeJ...|__java_lang_String_<once>_@jstype.SomeJsType.Wildcard.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jstype.SomeJ...|@jstype.SomeJsType.Wildcard.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jstype.SomeJ...|@jstype.SomeJsType.Wildcard.$Overlay)))
    (then
-    (global.set $$string_|jstype.SomeJ...|@jstype.SomeJsType.Wildcard.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jstype.SomeJsType$Wildcard$$Overlay")))
+    (return (global.get $$string_|jstype.SomeJ...|@jstype.SomeJsType.Wildcard.$Overlay))
    )
   )
+  (global.set $$string_|jstype.SomeJ...|@jstype.SomeJsType.Wildcard.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jstype.SomeJsType$Wildcard$$Overlay")))
   (return (global.get $$string_|jstype.SomeJ...|@jstype.SomeJsType.Wildcard.$Overlay))
  )
 )
@@ -295,14 +299,15 @@
 )
 
 ;;; Class<T> SomeJsType.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@jstype.SomeJsType
+(func $$getClassMetadata__java_lang_Class_<once>_@jstype.SomeJsType
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@jstype.SomeJsType))
+  (if (i32.eqz (ref.is_null (global.get $$class@jstype.SomeJsType)))
    (then
-    (global.set $$class@jstype.SomeJsType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|jstype.SomeJ...|__java_lang_String (ref.func $$getString_|jstype.SomeJ...|__java_lang_String@jstype.SomeJsType) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@jstype.SomeJsType))
    )
   )
+  (global.set $$class@jstype.SomeJsType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jstype.SomeJ...|__java_lang_String_<once>_@jstype.SomeJsType )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@jstype.SomeJsType))
  )
 )
@@ -315,20 +320,21 @@
  (local $this (ref null $jstype.SomeJsType))
  (local.set $this (ref.cast (ref $jstype.SomeJsType) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@jstype.SomeJsType) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jstype.SomeJsType ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jstype.SomeJsType)
 
 ;;; String SomeJsType.$getString_|jstype.SomeJ...|()
-(func $$getString_|jstype.SomeJ...|__java_lang_String@jstype.SomeJsType
+(func $$getString_|jstype.SomeJ...|__java_lang_String_<once>_@jstype.SomeJsType
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|jstype.SomeJ...|@jstype.SomeJsType))
+  (if (i32.eqz (ref.is_null (global.get $$string_|jstype.SomeJ...|@jstype.SomeJsType)))
    (then
-    (global.set $$string_|jstype.SomeJ...|@jstype.SomeJsType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jstype.SomeJsType")))
+    (return (global.get $$string_|jstype.SomeJ...|@jstype.SomeJsType))
    )
   )
+  (global.set $$string_|jstype.SomeJ...|@jstype.SomeJsType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jstype.SomeJsType")))
   (return (global.get $$string_|jstype.SomeJ...|@jstype.SomeJsType))
  )
 )

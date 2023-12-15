@@ -3095,27 +3095,29 @@
 )
 
 ;;; Class<T> FunctionalInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.FunctionalInterface
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.FunctionalInterface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.FunctionalInterface))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.FunctionalInterface)))
    (then
-    (global.set $$class@lambdas.Lambdas.FunctionalInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.FunctionalInterface) )))
+    (return (global.get $$class@lambdas.Lambdas.FunctionalInterface))
    )
   )
+  (global.set $$class@lambdas.Lambdas.FunctionalInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.FunctionalInterface )))
   (return (global.get $$class@lambdas.Lambdas.FunctionalInterface))
  )
 )
 
 ;;; String FunctionalInterface.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.FunctionalInterface
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.FunctionalInterface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.FunctionalInterface))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.FunctionalInterface)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.FunctionalInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$FunctionalInterface")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.FunctionalInterface))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.FunctionalInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$FunctionalInterface")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.FunctionalInterface))
  )
 )
@@ -3139,27 +3141,29 @@
 )
 
 ;;; Class<T> Functional.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.Functional
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Functional
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.Functional))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.Functional)))
    (then
-    (global.set $$class@lambdas.Lambdas.Functional (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.Functional) )))
+    (return (global.get $$class@lambdas.Lambdas.Functional))
    )
   )
+  (global.set $$class@lambdas.Lambdas.Functional (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Functional )))
   (return (global.get $$class@lambdas.Lambdas.Functional))
  )
 )
 
 ;;; String Functional.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.Functional
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Functional
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Functional))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Functional)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.Functional (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$Functional")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Functional))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.Functional (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$Functional")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Functional))
  )
 )
@@ -3183,27 +3187,29 @@
 )
 
 ;;; Class<T> GenericFunctionalInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.GenericFunctionalInterface
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.GenericFunctionalInterface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.GenericFunctionalInterface))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.GenericFunctionalInterface)))
    (then
-    (global.set $$class@lambdas.Lambdas.GenericFunctionalInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.GenericFunctionalInterface) )))
+    (return (global.get $$class@lambdas.Lambdas.GenericFunctionalInterface))
    )
   )
+  (global.set $$class@lambdas.Lambdas.GenericFunctionalInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.GenericFunctionalInterface )))
   (return (global.get $$class@lambdas.Lambdas.GenericFunctionalInterface))
  )
 )
 
 ;;; String GenericFunctionalInterface.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.GenericFunctionalInterface
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.GenericFunctionalInterface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.GenericFunctionalInterface))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.GenericFunctionalInterface)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.GenericFunctionalInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$GenericFunctionalInterface")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.GenericFunctionalInterface))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.GenericFunctionalInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$GenericFunctionalInterface")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.GenericFunctionalInterface))
  )
 )
@@ -3240,27 +3246,29 @@
 )
 
 ;;; Class<T> BiFunction.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.BiFunction
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.BiFunction
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.BiFunction))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.BiFunction)))
    (then
-    (global.set $$class@lambdas.Lambdas.BiFunction (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.BiFunction) )))
+    (return (global.get $$class@lambdas.Lambdas.BiFunction))
    )
   )
+  (global.set $$class@lambdas.Lambdas.BiFunction (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.BiFunction )))
   (return (global.get $$class@lambdas.Lambdas.BiFunction))
  )
 )
 
 ;;; String BiFunction.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.BiFunction
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.BiFunction
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.BiFunction))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.BiFunction)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.BiFunction (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$BiFunction")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.BiFunction))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.BiFunction (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$BiFunction")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.BiFunction))
  )
 )
@@ -3296,27 +3304,29 @@
 )
 
 ;;; Class<T> Function.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.Function
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Function
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.Function))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.Function)))
    (then
-    (global.set $$class@lambdas.Lambdas.Function (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.Function) )))
+    (return (global.get $$class@lambdas.Lambdas.Function))
    )
   )
+  (global.set $$class@lambdas.Lambdas.Function (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Function )))
   (return (global.get $$class@lambdas.Lambdas.Function))
  )
 )
 
 ;;; String Function.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.Function
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Function
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Function))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Function)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.Function (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$Function")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Function))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.Function (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$Function")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Function))
  )
 )
@@ -3340,27 +3350,29 @@
 )
 
 ;;; Class<T> FunctionalInterfaceWithMethodReturningVoid.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid)))
    (then
-    (global.set $$class@lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid) )))
+    (return (global.get $$class@lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid))
    )
   )
+  (global.set $$class@lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid )))
   (return (global.get $$class@lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid))
  )
 )
 
 ;;; String FunctionalInterfaceWithMethodReturningVoid.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$FunctionalInterfaceWithMethodReturningVoid")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$FunctionalInterfaceWithMethodReturningVoid")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid))
  )
 )
@@ -3384,27 +3396,29 @@
 )
 
 ;;; Class<T> GenericJsFunction.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.GenericJsFunction
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.GenericJsFunction
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.GenericJsFunction))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.GenericJsFunction)))
    (then
-    (global.set $$class@lambdas.Lambdas.GenericJsFunction (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.GenericJsFunction) )))
+    (return (global.get $$class@lambdas.Lambdas.GenericJsFunction))
    )
   )
+  (global.set $$class@lambdas.Lambdas.GenericJsFunction (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.GenericJsFunction )))
   (return (global.get $$class@lambdas.Lambdas.GenericJsFunction))
  )
 )
 
 ;;; String GenericJsFunction.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.GenericJsFunction
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.GenericJsFunction
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.GenericJsFunction))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.GenericJsFunction)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.GenericJsFunction (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$GenericJsFunction")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.GenericJsFunction))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.GenericJsFunction (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$GenericJsFunction")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.GenericJsFunction))
  )
 )
@@ -3444,27 +3458,29 @@
 )
 
 ;;; Class<T> Equals.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.Equals
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Equals
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.Equals))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.Equals)))
    (then
-    (global.set $$class@lambdas.Lambdas.Equals (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.Equals) )))
+    (return (global.get $$class@lambdas.Lambdas.Equals))
    )
   )
+  (global.set $$class@lambdas.Lambdas.Equals (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Equals )))
   (return (global.get $$class@lambdas.Lambdas.Equals))
  )
 )
 
 ;;; String Equals.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.Equals
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Equals
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Equals))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Equals)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.Equals (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$Equals")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Equals))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.Equals (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$Equals")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Equals))
  )
 )
@@ -3490,27 +3506,29 @@
 )
 
 ;;; Class<T> JsSupplier.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.JsSupplier
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.JsSupplier
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.JsSupplier))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.JsSupplier)))
    (then
-    (global.set $$class@lambdas.Lambdas.JsSupplier (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.JsSupplier) )))
+    (return (global.get $$class@lambdas.Lambdas.JsSupplier))
    )
   )
+  (global.set $$class@lambdas.Lambdas.JsSupplier (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.JsSupplier )))
   (return (global.get $$class@lambdas.Lambdas.JsSupplier))
  )
 )
 
 ;;; String JsSupplier.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.JsSupplier
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.JsSupplier
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.JsSupplier))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.JsSupplier)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.JsSupplier (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$JsSupplier")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.JsSupplier))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.JsSupplier (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$JsSupplier")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.JsSupplier))
  )
 )
@@ -3544,27 +3562,29 @@
 )
 
 ;;; Class<T> JustADefaultT.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.JustADefaultT
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.JustADefaultT
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.JustADefaultT))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.JustADefaultT)))
    (then
-    (global.set $$class@lambdas.Lambdas.JustADefaultT (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.JustADefaultT) )))
+    (return (global.get $$class@lambdas.Lambdas.JustADefaultT))
    )
   )
+  (global.set $$class@lambdas.Lambdas.JustADefaultT (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.JustADefaultT )))
   (return (global.get $$class@lambdas.Lambdas.JustADefaultT))
  )
 )
 
 ;;; String JustADefaultT.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.JustADefaultT
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.JustADefaultT
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.JustADefaultT))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.JustADefaultT)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.JustADefaultT (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$JustADefaultT")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.JustADefaultT))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.JustADefaultT (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$JustADefaultT")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.JustADefaultT))
  )
 )
@@ -3598,27 +3618,29 @@
 )
 
 ;;; Class<T> JustADefaultS.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.JustADefaultS
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.JustADefaultS
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.JustADefaultS))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.JustADefaultS)))
    (then
-    (global.set $$class@lambdas.Lambdas.JustADefaultS (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.JustADefaultS) )))
+    (return (global.get $$class@lambdas.Lambdas.JustADefaultS))
    )
   )
+  (global.set $$class@lambdas.Lambdas.JustADefaultS (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.JustADefaultS )))
   (return (global.get $$class@lambdas.Lambdas.JustADefaultS))
  )
 )
 
 ;;; String JustADefaultS.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.JustADefaultS
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.JustADefaultS
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.JustADefaultS))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.JustADefaultS)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.JustADefaultS (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$JustADefaultS")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.JustADefaultS))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.JustADefaultS (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$JustADefaultS")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.JustADefaultS))
  )
 )
@@ -3651,27 +3673,29 @@
 )
 
 ;;; Class<T> MarkerWithDefaultMethod.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.MarkerWithDefaultMethod
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.MarkerWithDefaultMethod
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.MarkerWithDefaultMethod))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.MarkerWithDefaultMethod)))
    (then
-    (global.set $$class@lambdas.Lambdas.MarkerWithDefaultMethod (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.MarkerWithDefaultMethod) )))
+    (return (global.get $$class@lambdas.Lambdas.MarkerWithDefaultMethod))
    )
   )
+  (global.set $$class@lambdas.Lambdas.MarkerWithDefaultMethod (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.MarkerWithDefaultMethod )))
   (return (global.get $$class@lambdas.Lambdas.MarkerWithDefaultMethod))
  )
 )
 
 ;;; String MarkerWithDefaultMethod.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.MarkerWithDefaultMethod
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.MarkerWithDefaultMethod
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.MarkerWithDefaultMethod))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.MarkerWithDefaultMethod)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.MarkerWithDefaultMethod (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$MarkerWithDefaultMethod")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.MarkerWithDefaultMethod))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.MarkerWithDefaultMethod (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$MarkerWithDefaultMethod")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.MarkerWithDefaultMethod))
  )
 )
@@ -3695,27 +3719,29 @@
 )
 
 ;;; Class<T> Runnable.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.Runnable
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Runnable
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.Runnable))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.Runnable)))
    (then
-    (global.set $$class@lambdas.Lambdas.Runnable (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.Runnable) )))
+    (return (global.get $$class@lambdas.Lambdas.Runnable))
    )
   )
+  (global.set $$class@lambdas.Lambdas.Runnable (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Runnable )))
   (return (global.get $$class@lambdas.Lambdas.Runnable))
  )
 )
 
 ;;; String Runnable.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.Runnable
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Runnable
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Runnable))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Runnable)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.Runnable (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$Runnable")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Runnable))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.Runnable (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$Runnable")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Runnable))
  )
 )
@@ -3739,27 +3765,29 @@
 )
 
 ;;; Class<T> $Overlay.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.Thenable.$Overlay
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Thenable.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.Thenable.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.Thenable.$Overlay)))
    (then
-    (global.set $$class@lambdas.Lambdas.Thenable.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.Thenable.$Overlay) )))
+    (return (global.get $$class@lambdas.Lambdas.Thenable.$Overlay))
    )
   )
+  (global.set $$class@lambdas.Lambdas.Thenable.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Thenable.$Overlay )))
   (return (global.get $$class@lambdas.Lambdas.Thenable.$Overlay))
  )
 )
 
 ;;; String $Overlay.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.Thenable.$Overlay
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Thenable.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Thenable.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Thenable.$Overlay)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.Thenable.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$Thenable$$Overlay")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Thenable.$Overlay))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.Thenable.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$Thenable$$Overlay")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Thenable.$Overlay))
  )
 )
@@ -3783,27 +3811,29 @@
 )
 
 ;;; Class<T> $Overlay.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.AnotherThenable.$Overlay
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.AnotherThenable.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.AnotherThenable.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.AnotherThenable.$Overlay)))
    (then
-    (global.set $$class@lambdas.Lambdas.AnotherThenable.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.AnotherThenable.$Overlay) )))
+    (return (global.get $$class@lambdas.Lambdas.AnotherThenable.$Overlay))
    )
   )
+  (global.set $$class@lambdas.Lambdas.AnotherThenable.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.AnotherThenable.$Overlay )))
   (return (global.get $$class@lambdas.Lambdas.AnotherThenable.$Overlay))
  )
 )
 
 ;;; String $Overlay.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.AnotherThenable.$Overlay
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.AnotherThenable.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.AnotherThenable.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.AnotherThenable.$Overlay)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.AnotherThenable.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$AnotherThenable$$Overlay")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.AnotherThenable.$Overlay))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.AnotherThenable.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$AnotherThenable$$Overlay")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.AnotherThenable.$Overlay))
  )
 )
@@ -4276,14 +4306,15 @@
 )
 
 ;;; Class<T> Lambdas.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas)))
    (then
-    (global.set $$class@lambdas.Lambdas (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lambdas|__java_lang_String (ref.func $$getString_|lambdas.Lambdas|__java_lang_String@lambdas.Lambdas) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas))
    )
   )
+  (global.set $$class@lambdas.Lambdas (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lambdas|__java_lang_String_<once>_@lambdas.Lambdas )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas))
  )
 )
@@ -4296,20 +4327,21 @@
  (local $this (ref null $lambdas.Lambdas))
  (local.set $this (ref.cast (ref $lambdas.Lambdas) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas)
 
 ;;; String Lambdas.$getString_|lambdas.Lambdas|()
-(func $$getString_|lambdas.Lambdas|__java_lang_String@lambdas.Lambdas
+(func $$getString_|lambdas.Lambdas|__java_lang_String_<once>_@lambdas.Lambdas
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lambdas|@lambdas.Lambdas))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lambdas|@lambdas.Lambdas)))
    (then
-    (global.set $$string_|lambdas.Lambdas|@lambdas.Lambdas (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas")))
+    (return (global.get $$string_|lambdas.Lambdas|@lambdas.Lambdas))
    )
   )
+  (global.set $$string_|lambdas.Lambdas|@lambdas.Lambdas (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas")))
   (return (global.get $$string_|lambdas.Lambdas|@lambdas.Lambdas))
  )
 )
@@ -4378,14 +4410,15 @@
 )
 
 ;;; Class<T> <anonymous> implements FunctionalInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$1
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$1
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$1))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$1)))
    (then
-    (global.set $$class@lambdas.Lambdas.$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$1))
    )
   )
+  (global.set $$class@lambdas.Lambdas.$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$1 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$1))
  )
 )
@@ -4398,20 +4431,21 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$1))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$1) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$1 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$1)
 
 ;;; String <anonymous> implements FunctionalInterface.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$1
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$1
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$1))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$1)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$1")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$1))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$1")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$1))
  )
 )
@@ -4480,14 +4514,15 @@
 )
 
 ;;; Class<T> <anonymous> implements FunctionalInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$2
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$2
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$2))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$2)))
    (then
-    (global.set $$class@lambdas.Lambdas.$LambdaImplementor$2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$2) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$2))
    )
   )
+  (global.set $$class@lambdas.Lambdas.$LambdaImplementor$2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$2 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$2))
  )
 )
@@ -4500,20 +4535,21 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$2))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$2) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$2) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$2 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$2)
 
 ;;; String <anonymous> implements FunctionalInterface.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$2
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$2
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$2))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$2)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$2")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$2))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$2")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$2))
  )
 )
@@ -4586,14 +4622,15 @@
 )
 
 ;;; Class<T> <anonymous> implements FunctionalInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$3
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$3
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$3))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$3)))
    (then
-    (global.set $$class@lambdas.Lambdas.$LambdaImplementor$3 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$3) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$3))
    )
   )
+  (global.set $$class@lambdas.Lambdas.$LambdaImplementor$3 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$3 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$3))
  )
 )
@@ -4606,20 +4643,21 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$3))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$3) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$3) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$3 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$3)
 
 ;;; String <anonymous> implements FunctionalInterface.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$3
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$3
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$3))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$3)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$3 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$3")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$3))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$3 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$3")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$3))
  )
 )
@@ -4692,14 +4730,15 @@
 )
 
 ;;; Class<T> <anonymous> implements FunctionalInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$4
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$4
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$4))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$4)))
    (then
-    (global.set $$class@lambdas.Lambdas.$LambdaImplementor$4 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$4) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$4))
    )
   )
+  (global.set $$class@lambdas.Lambdas.$LambdaImplementor$4 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$4 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$4))
  )
 )
@@ -4712,20 +4751,21 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$4))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$4) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$4) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$4 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$4)
 
 ;;; String <anonymous> implements FunctionalInterface.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$4
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$4
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$4))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$4)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$4 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$4")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$4))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$4 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$4")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$4))
  )
 )
@@ -4805,14 +4845,15 @@
 )
 
 ;;; Class<T> <anonymous> implements FunctionalInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$5
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$5
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$5))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$5)))
    (then
-    (global.set $$class@lambdas.Lambdas.$LambdaImplementor$5 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$5) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$5))
    )
   )
+  (global.set $$class@lambdas.Lambdas.$LambdaImplementor$5 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$5 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$5))
  )
 )
@@ -4825,20 +4866,21 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$5))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$5) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$5) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$5 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$5)
 
 ;;; String <anonymous> implements FunctionalInterface.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$5
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$5
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$5))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$5)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$5 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$5")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$5))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$5 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$5")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$5))
  )
 )
@@ -4917,14 +4959,15 @@
 )
 
 ;;; Class<T> <anonymous> implements FunctionalInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$6
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$6
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$6))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$6)))
    (then
-    (global.set $$class@lambdas.Lambdas.$LambdaImplementor$6 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$6) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$6))
    )
   )
+  (global.set $$class@lambdas.Lambdas.$LambdaImplementor$6 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$6 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$6))
  )
 )
@@ -4937,20 +4980,21 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$6))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$6) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$6) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$6 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$6)
 
 ;;; String <anonymous> implements FunctionalInterface.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$6
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$6
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$6))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$6)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$6 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$6")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$6))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$6 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$6")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$6))
  )
 )
@@ -5019,14 +5063,15 @@
 )
 
 ;;; Class<T> <anonymous> implements FunctionalInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$7
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$7
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$7))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$7)))
    (then
-    (global.set $$class@lambdas.Lambdas.$LambdaImplementor$7 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$7) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$7))
    )
   )
+  (global.set $$class@lambdas.Lambdas.$LambdaImplementor$7 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$7 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$7))
  )
 )
@@ -5039,20 +5084,21 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$7))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$7) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$7) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$7 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$7)
 
 ;;; String <anonymous> implements FunctionalInterface.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$7
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$7
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$7))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$7)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$7 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$7")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$7))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$7 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$7")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$7))
  )
 )
@@ -5121,14 +5167,15 @@
 )
 
 ;;; Class<T> <anonymous> implements FunctionalInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$8
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$8
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$8))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$8)))
    (then
-    (global.set $$class@lambdas.Lambdas.$LambdaImplementor$8 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$8) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$8))
    )
   )
+  (global.set $$class@lambdas.Lambdas.$LambdaImplementor$8 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$8 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$8))
  )
 )
@@ -5141,20 +5188,21 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$8))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$8) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$8) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$8 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$8)
 
 ;;; String <anonymous> implements FunctionalInterface.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$8
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$8
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$8))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$8)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$8 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$8")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$8))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$8 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$8")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$8))
  )
 )
@@ -5227,14 +5275,15 @@
 )
 
 ;;; Class<T> <anonymous> implements FunctionalInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$9
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$9
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$9))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$9)))
    (then
-    (global.set $$class@lambdas.Lambdas.$LambdaImplementor$9 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$9) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$9))
    )
   )
+  (global.set $$class@lambdas.Lambdas.$LambdaImplementor$9 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$9 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$9))
  )
 )
@@ -5247,20 +5296,21 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$9))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$9) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$9) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$9 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$9)
 
 ;;; String <anonymous> implements FunctionalInterface.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$9
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$9
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$9))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$9)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$9 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$9")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$9))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$9 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$9")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$9))
  )
 )
@@ -5334,14 +5384,15 @@
 )
 
 ;;; Class<T> <anonymous> implements FunctionalInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$10
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$10
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$10))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$10)))
    (then
-    (global.set $$class@lambdas.Lambdas.$LambdaImplementor$10 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$10) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$10))
    )
   )
+  (global.set $$class@lambdas.Lambdas.$LambdaImplementor$10 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$10 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$10))
  )
 )
@@ -5354,20 +5405,21 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$10))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$10) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$10) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$10 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$10)
 
 ;;; String <anonymous> implements FunctionalInterface.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$10
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$10
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$10))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$10)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$10 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$10")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$10))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$10 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$10")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$10))
  )
 )
@@ -5440,14 +5492,15 @@
 )
 
 ;;; Class<T> <anonymous> implements Functional<T>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.1
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.1
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.1))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.1)))
    (then
-    (global.set $$class@lambdas.Lambdas.1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.1))
    )
   )
+  (global.set $$class@lambdas.Lambdas.1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.1 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.1))
  )
 )
@@ -5460,20 +5513,21 @@
  (local $this (ref null $lambdas.Lambdas.1))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.1) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.1) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.1 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.1)
 
 ;;; String <anonymous> implements Functional<T>.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.1
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.1
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.1))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.1)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$1")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.1))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$1")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.1))
  )
 )
@@ -5546,14 +5600,15 @@
 )
 
 ;;; Class<T> <anonymous> implements Functional<T>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$11
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$11
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$11))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$11)))
    (then
-    (global.set $$class@lambdas.Lambdas.$LambdaImplementor$11 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$11) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$11))
    )
   )
+  (global.set $$class@lambdas.Lambdas.$LambdaImplementor$11 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$11 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$11))
  )
 )
@@ -5566,20 +5621,21 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$11))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$11) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$11) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$11 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$11)
 
 ;;; String <anonymous> implements Functional<T>.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$11
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$11
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$11))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$11)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$11 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$11")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$11))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$11 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$11")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$11))
  )
 )
@@ -5648,14 +5704,15 @@
 )
 
 ;;; Class<T> <anonymous> implements Functional<T>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.2
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.2
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.2))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.2)))
    (then
-    (global.set $$class@lambdas.Lambdas.2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.2) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.2))
    )
   )
+  (global.set $$class@lambdas.Lambdas.2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.2 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.2))
  )
 )
@@ -5668,20 +5725,21 @@
  (local $this (ref null $lambdas.Lambdas.2))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.2) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.2) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.2 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.2)
 
 ;;; String <anonymous> implements Functional<T>.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.2
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.2
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.2))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.2)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$2")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.2))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$2")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.2))
  )
 )
@@ -5750,14 +5808,15 @@
 )
 
 ;;; Class<T> <anonymous> implements Functional<T>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$12
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$12
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$12))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$12)))
    (then
-    (global.set $$class@lambdas.Lambdas.$LambdaImplementor$12 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$12) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$12))
    )
   )
+  (global.set $$class@lambdas.Lambdas.$LambdaImplementor$12 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$12 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$12))
  )
 )
@@ -5770,20 +5829,21 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$12))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$12) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$12) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$12 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$12)
 
 ;;; String <anonymous> implements Functional<T>.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$12
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$12
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$12))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$12)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$12 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$12")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$12))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$12 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$12")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$12))
  )
 )
@@ -5855,14 +5915,15 @@
 )
 
 ;;; Class<T> <anonymous> implements GenericFunctionalInterface<T>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$13
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$13
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$13))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$13)))
    (then
-    (global.set $$class@lambdas.Lambdas.$LambdaImplementor$13 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$13) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$13))
    )
   )
+  (global.set $$class@lambdas.Lambdas.$LambdaImplementor$13 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$13 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$13))
  )
 )
@@ -5875,20 +5936,21 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$13))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$13) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$13) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$13 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$13)
 
 ;;; String <anonymous> implements GenericFunctionalInterface<T>.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$13
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$13
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$13))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$13)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$13 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$13")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$13))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$13 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$13")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$13))
  )
 )
@@ -5960,14 +6022,15 @@
 )
 
 ;;; Class<T> <anonymous> implements GenericFunctionalInterface<T>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$14
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$14
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$14))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$14)))
    (then
-    (global.set $$class@lambdas.Lambdas.$LambdaImplementor$14 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$14) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$14))
    )
   )
+  (global.set $$class@lambdas.Lambdas.$LambdaImplementor$14 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$14 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$14))
  )
 )
@@ -5980,20 +6043,21 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$14))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$14) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$14) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$14 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$14)
 
 ;;; String <anonymous> implements GenericFunctionalInterface<T>.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$14
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$14
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$14))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$14)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$14 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$14")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$14))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$14 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$14")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$14))
  )
 )
@@ -6065,14 +6129,15 @@
 )
 
 ;;; Class<T> <anonymous> implements GenericFunctionalInterface<T>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$15
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$15
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$15))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$15)))
    (then
-    (global.set $$class@lambdas.Lambdas.$LambdaImplementor$15 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$15) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$15))
    )
   )
+  (global.set $$class@lambdas.Lambdas.$LambdaImplementor$15 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$15 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$15))
  )
 )
@@ -6085,20 +6150,21 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$15))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$15) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$15) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$15 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$15)
 
 ;;; String <anonymous> implements GenericFunctionalInterface<T>.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$15
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$15
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$15))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$15)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$15 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$15")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$15))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$15 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$15")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$15))
  )
 )
@@ -6193,14 +6259,15 @@
 )
 
 ;;; Class<T> <anonymous> implements BiFunction<T, U, R>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$16
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$16
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$16))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$16)))
    (then
-    (global.set $$class@lambdas.Lambdas.$LambdaImplementor$16 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$16) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$16))
    )
   )
+  (global.set $$class@lambdas.Lambdas.$LambdaImplementor$16 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$16 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$16))
  )
 )
@@ -6213,20 +6280,21 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$16))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$16) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$16) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$16 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$16)
 
 ;;; String <anonymous> implements BiFunction<T, U, R>.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$16
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$16
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$16))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$16)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$16 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$16")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$16))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$16 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$16")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$16))
  )
 )
@@ -6320,14 +6388,15 @@
 )
 
 ;;; Class<T> <anonymous> implements BiFunction<T, U, R>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$17
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$17
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$17))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$17)))
    (then
-    (global.set $$class@lambdas.Lambdas.$LambdaImplementor$17 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$17) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$17))
    )
   )
+  (global.set $$class@lambdas.Lambdas.$LambdaImplementor$17 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$17 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$17))
  )
 )
@@ -6340,20 +6409,21 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$17))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$17) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$17) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$17 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$17)
 
 ;;; String <anonymous> implements BiFunction<T, U, R>.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$17
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$17
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$17))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$17)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$17 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$17")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$17))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$17 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$17")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$17))
  )
 )
@@ -6425,14 +6495,15 @@
 )
 
 ;;; Class<T> <anonymous> implements Function<T, R>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$18
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$18
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$18))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$18)))
    (then
-    (global.set $$class@lambdas.Lambdas.$LambdaImplementor$18 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$18) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$18))
    )
   )
+  (global.set $$class@lambdas.Lambdas.$LambdaImplementor$18 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$18 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$18))
  )
 )
@@ -6445,20 +6516,21 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$18))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$18) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$18) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$18 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$18)
 
 ;;; String <anonymous> implements Function<T, R>.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$18
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$18
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$18))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$18)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$18 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$18")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$18))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$18 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$18")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$18))
  )
 )
@@ -6530,14 +6602,15 @@
 )
 
 ;;; Class<T> <anonymous> implements Function<T, R>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$19
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$19
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$19))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$19)))
    (then
-    (global.set $$class@lambdas.Lambdas.$LambdaImplementor$19 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$19) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$19))
    )
   )
+  (global.set $$class@lambdas.Lambdas.$LambdaImplementor$19 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$19 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$19))
  )
 )
@@ -6550,20 +6623,21 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$19))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$19) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$19) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$19 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$19)
 
 ;;; String <anonymous> implements Function<T, R>.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$19
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$19
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$19))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$19)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$19 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$19")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$19))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$19 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$19")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$19))
  )
 )
@@ -6630,14 +6704,15 @@
 )
 
 ;;; Class<T> <anonymous> implements FunctionalInterfaceWithMethodReturningVoid.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$20
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$20
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$20))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$20)))
    (then
-    (global.set $$class@lambdas.Lambdas.$LambdaImplementor$20 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$20) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$20))
    )
   )
+  (global.set $$class@lambdas.Lambdas.$LambdaImplementor$20 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$20 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$20))
  )
 )
@@ -6650,20 +6725,21 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$20))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$20) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$20) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$20 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$20)
 
 ;;; String <anonymous> implements FunctionalInterfaceWithMethodReturningVoid.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$20
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$20
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$20))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$20)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$20 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$20")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$20))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$20 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$20")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$20))
  )
 )
@@ -6720,14 +6796,15 @@
 )
 
 ;;; Class<T> <anonymous> extends Object.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.3
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.3
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.3))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.3)))
    (then
-    (global.set $$class@lambdas.Lambdas.3 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.3) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.3))
    )
   )
+  (global.set $$class@lambdas.Lambdas.3 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.3 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.3))
  )
 )
@@ -6740,20 +6817,21 @@
  (local $this (ref null $lambdas.Lambdas.3))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.3) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.3) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.3 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.3)
 
 ;;; String <anonymous> extends Object.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.3
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.3
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.3))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.3)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.3 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$3")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.3))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.3 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$3")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.3))
  )
 )
@@ -6824,14 +6902,15 @@
 )
 
 ;;; Class<T> <anonymous> implements FunctionalInterfaceWithMethodReturningVoid.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$21
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$21
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$21))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$21)))
    (then
-    (global.set $$class@lambdas.Lambdas.$LambdaImplementor$21 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$21) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$21))
    )
   )
+  (global.set $$class@lambdas.Lambdas.$LambdaImplementor$21 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$21 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$21))
  )
 )
@@ -6844,20 +6923,21 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$21))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$21) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$21) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$21 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$21)
 
 ;;; String <anonymous> implements FunctionalInterfaceWithMethodReturningVoid.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$21
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$21
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$21))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$21)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$21 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$21")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$21))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$21 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$21")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$21))
  )
 )
@@ -6946,14 +7026,15 @@
 )
 
 ;;; Class<T> <anonymous> implements GenericFunctionalInterface<T>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$22
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$22
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$22))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$22)))
    (then
-    (global.set $$class@lambdas.Lambdas.$LambdaImplementor$22 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$22) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$22))
    )
   )
+  (global.set $$class@lambdas.Lambdas.$LambdaImplementor$22 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$22 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$22))
  )
 )
@@ -6966,20 +7047,21 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$22))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$22) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$22) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$22 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$22)
 
 ;;; String <anonymous> implements GenericFunctionalInterface<T>.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$22
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$22
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$22))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$22)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$22 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$22")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$22))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$22 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$22")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$22))
  )
 )
@@ -7068,14 +7150,15 @@
 )
 
 ;;; Class<T> <anonymous> implements GenericFunctionalInterface<T>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$23
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$23
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$23))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$23)))
    (then
-    (global.set $$class@lambdas.Lambdas.$LambdaImplementor$23 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$23) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$23))
    )
   )
+  (global.set $$class@lambdas.Lambdas.$LambdaImplementor$23 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$23 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$23))
  )
 )
@@ -7088,20 +7171,21 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$23))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$23) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$23) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$23 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$23)
 
 ;;; String <anonymous> implements GenericFunctionalInterface<T>.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$23
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$23
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$23))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$23)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$23 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$23")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$23))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$23 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$23")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$23))
  )
 )
@@ -7190,14 +7274,15 @@
 )
 
 ;;; Class<T> <anonymous> implements GenericFunctionalInterface<T>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$24
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$24
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$24))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$24)))
    (then
-    (global.set $$class@lambdas.Lambdas.$LambdaImplementor$24 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$24) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$24))
    )
   )
+  (global.set $$class@lambdas.Lambdas.$LambdaImplementor$24 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$24 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$24))
  )
 )
@@ -7210,20 +7295,21 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$24))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$24) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$24) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$24 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$24)
 
 ;;; String <anonymous> implements GenericFunctionalInterface<T>.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$24
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$24
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$24))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$24)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$24 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$24")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$24))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$24 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$24")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$24))
  )
 )
@@ -7333,14 +7419,15 @@
 )
 
 ;;; Class<T> <anonymous> implements BiFunction<T, U, R>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$25
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$25
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$25))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$25)))
    (then
-    (global.set $$class@lambdas.Lambdas.$LambdaImplementor$25 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$25) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$25))
    )
   )
+  (global.set $$class@lambdas.Lambdas.$LambdaImplementor$25 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$25 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$25))
  )
 )
@@ -7353,20 +7440,21 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$25))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$25) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$25) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$25 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$25)
 
 ;;; String <anonymous> implements BiFunction<T, U, R>.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$25
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$25
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$25))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$25)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$25 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$25")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$25))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$25 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$25")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$25))
  )
 )
@@ -7470,14 +7558,15 @@
 )
 
 ;;; Class<T> <anonymous> implements Iterable<T>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$26
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$26
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$26))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$26)))
    (then
-    (global.set $$class@lambdas.Lambdas.$LambdaImplementor$26 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$26) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$26))
    )
   )
+  (global.set $$class@lambdas.Lambdas.$LambdaImplementor$26 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$26 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$26))
  )
 )
@@ -7490,20 +7579,21 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$26))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$26) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$26) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$26 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$26)
 
 ;;; String <anonymous> implements Iterable<T>.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.$LambdaImplementor$26
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$26
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$26))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$26)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$26 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$26")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$26))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$26 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$$LambdaImplementor$26")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.$LambdaImplementor$26))
  )
 )
@@ -7599,14 +7689,15 @@
 )
 
 ;;; Class<T> <anonymous> implements BiFunction<T, U, R>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.BiFunction.$LambdaImplementor$27
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.BiFunction.$LambdaImplementor$27
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.BiFunction.$LambdaImplementor$27))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.BiFunction.$LambdaImplementor$27)))
    (then
-    (global.set $$class@lambdas.Lambdas.BiFunction.$LambdaImplementor$27 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.BiFunction.$LambdaImplementor$27) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.BiFunction.$LambdaImplementor$27))
    )
   )
+  (global.set $$class@lambdas.Lambdas.BiFunction.$LambdaImplementor$27 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.BiFunction.$LambdaImplementor$27 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.BiFunction.$LambdaImplementor$27))
  )
 )
@@ -7619,20 +7710,21 @@
  (local $this (ref null $lambdas.Lambdas.BiFunction.$LambdaImplementor$27))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.BiFunction.$LambdaImplementor$27) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.BiFunction.$LambdaImplementor$27) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.BiFunction.$LambdaImplementor$27 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.BiFunction.$LambdaImplementor$27)
 
 ;;; String <anonymous> implements BiFunction<T, U, R>.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.BiFunction.$LambdaImplementor$27
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.BiFunction.$LambdaImplementor$27
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.BiFunction.$LambdaImplementor$27))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.BiFunction.$LambdaImplementor$27)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.BiFunction.$LambdaImplementor$27 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$BiFunction$$LambdaImplementor$27")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.BiFunction.$LambdaImplementor$27))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.BiFunction.$LambdaImplementor$27 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$BiFunction$$LambdaImplementor$27")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.BiFunction.$LambdaImplementor$27))
  )
 )
@@ -7704,14 +7796,15 @@
 )
 
 ;;; Class<T> <anonymous> implements Function<T, R>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.Function.$LambdaImplementor$28
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Function.$LambdaImplementor$28
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.Function.$LambdaImplementor$28))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.Function.$LambdaImplementor$28)))
    (then
-    (global.set $$class@lambdas.Lambdas.Function.$LambdaImplementor$28 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.Function.$LambdaImplementor$28) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.Function.$LambdaImplementor$28))
    )
   )
+  (global.set $$class@lambdas.Lambdas.Function.$LambdaImplementor$28 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Function.$LambdaImplementor$28 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.Function.$LambdaImplementor$28))
  )
 )
@@ -7724,20 +7817,21 @@
  (local $this (ref null $lambdas.Lambdas.Function.$LambdaImplementor$28))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.Function.$LambdaImplementor$28) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.Function.$LambdaImplementor$28) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Function.$LambdaImplementor$28 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.Function.$LambdaImplementor$28)
 
 ;;; String <anonymous> implements Function<T, R>.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.Function.$LambdaImplementor$28
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Function.$LambdaImplementor$28
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Function.$LambdaImplementor$28))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Function.$LambdaImplementor$28)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.Function.$LambdaImplementor$28 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$Function$$LambdaImplementor$28")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Function.$LambdaImplementor$28))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.Function.$LambdaImplementor$28 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$Function$$LambdaImplementor$28")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Function.$LambdaImplementor$28))
  )
 )
@@ -7800,14 +7894,15 @@
 )
 
 ;;; Class<T> Parent.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.Parent
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Parent
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.Parent))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.Parent)))
    (then
-    (global.set $$class@lambdas.Lambdas.Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.Parent) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.Parent))
    )
   )
+  (global.set $$class@lambdas.Lambdas.Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Parent )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.Parent))
  )
 )
@@ -7820,20 +7915,21 @@
  (local $this (ref null $lambdas.Lambdas.Parent))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.Parent) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.Parent) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Parent ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.Parent)
 
 ;;; String Parent.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.Parent
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Parent
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Parent))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Parent)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.Parent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$Parent")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Parent))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.Parent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$Parent")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Parent))
  )
 )
@@ -7919,14 +8015,15 @@
 )
 
 ;;; Class<T> <anonymous> implements FunctionalInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29)))
    (then
-    (global.set $$class@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29))
    )
   )
+  (global.set $$class@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29))
  )
 )
@@ -7939,20 +8036,21 @@
  (local $this (ref null $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29)
 
 ;;; String <anonymous> implements FunctionalInterface.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$LambdaInSubClass$$LambdaImplementor$29")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$LambdaInSubClass$$LambdaImplementor$29")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29))
  )
 )
@@ -8021,14 +8119,15 @@
 )
 
 ;;; Class<T> IdentityFunction.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.IdentityFunction
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.IdentityFunction
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.IdentityFunction))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.IdentityFunction)))
    (then
-    (global.set $$class@lambdas.Lambdas.IdentityFunction (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.IdentityFunction) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.IdentityFunction))
    )
   )
+  (global.set $$class@lambdas.Lambdas.IdentityFunction (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.IdentityFunction )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.IdentityFunction))
  )
 )
@@ -8041,20 +8140,21 @@
  (local $this (ref null $lambdas.Lambdas.IdentityFunction))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.IdentityFunction) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.IdentityFunction) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.IdentityFunction ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.IdentityFunction)
 
 ;;; String IdentityFunction.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.IdentityFunction
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.IdentityFunction
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.IdentityFunction))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.IdentityFunction)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.IdentityFunction (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$IdentityFunction")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.IdentityFunction))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.IdentityFunction (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$IdentityFunction")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.IdentityFunction))
  )
 )
@@ -8125,14 +8225,15 @@
 )
 
 ;;; Class<T> <anonymous> implements Runnable.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.Outer.$LambdaImplementor$30
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Outer.$LambdaImplementor$30
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.Outer.$LambdaImplementor$30))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.Outer.$LambdaImplementor$30)))
    (then
-    (global.set $$class@lambdas.Lambdas.Outer.$LambdaImplementor$30 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.Outer.$LambdaImplementor$30) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.Outer.$LambdaImplementor$30))
    )
   )
+  (global.set $$class@lambdas.Lambdas.Outer.$LambdaImplementor$30 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Outer.$LambdaImplementor$30 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.Outer.$LambdaImplementor$30))
  )
 )
@@ -8145,20 +8246,21 @@
  (local $this (ref null $lambdas.Lambdas.Outer.$LambdaImplementor$30))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.Outer.$LambdaImplementor$30) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.Outer.$LambdaImplementor$30) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Outer.$LambdaImplementor$30 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.Outer.$LambdaImplementor$30)
 
 ;;; String <anonymous> implements Runnable.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.Outer.$LambdaImplementor$30
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Outer.$LambdaImplementor$30
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Outer.$LambdaImplementor$30))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Outer.$LambdaImplementor$30)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.Outer.$LambdaImplementor$30 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$Outer$$LambdaImplementor$30")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Outer.$LambdaImplementor$30))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.Outer.$LambdaImplementor$30 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$Outer$$LambdaImplementor$30")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Outer.$LambdaImplementor$30))
  )
 )
@@ -8242,14 +8344,15 @@
 )
 
 ;;; Class<T> Outer.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.Outer
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Outer
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.Outer))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.Outer)))
    (then
-    (global.set $$class@lambdas.Lambdas.Outer (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.Outer) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.Outer))
    )
   )
+  (global.set $$class@lambdas.Lambdas.Outer (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Outer )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.Outer))
  )
 )
@@ -8262,20 +8365,21 @@
  (local $this (ref null $lambdas.Lambdas.Outer))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.Outer) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.Outer) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Outer ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.Outer)
 
 ;;; String Outer.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.Outer
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Outer
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Outer))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Outer)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.Outer (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$Outer")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Outer))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.Outer (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$Outer")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Outer))
  )
 )
@@ -8344,14 +8448,15 @@
 )
 
 ;;; Class<T> Super.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.Super
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Super
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.Super))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.Super)))
    (then
-    (global.set $$class@lambdas.Lambdas.Super (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.Super) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.Super))
    )
   )
+  (global.set $$class@lambdas.Lambdas.Super (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Super )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.Super))
  )
 )
@@ -8364,20 +8469,21 @@
  (local $this (ref null $lambdas.Lambdas.Super))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.Super) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.Super) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Super ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.Super)
 
 ;;; String Super.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.Super
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Super
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Super))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Super)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.Super (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$Super")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Super))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.Super (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$Super")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Super))
  )
 )
@@ -8448,14 +8554,15 @@
 )
 
 ;;; Class<T> <anonymous> implements Runnable.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.Sub.1
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Sub.1
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.Sub.1))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.Sub.1)))
    (then
-    (global.set $$class@lambdas.Lambdas.Sub.1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.Sub.1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.Sub.1))
    )
   )
+  (global.set $$class@lambdas.Lambdas.Sub.1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Sub.1 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.Sub.1))
  )
 )
@@ -8468,20 +8575,21 @@
  (local $this (ref null $lambdas.Lambdas.Sub.1))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.Sub.1) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.Sub.1) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Sub.1 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.Sub.1)
 
 ;;; String <anonymous> implements Runnable.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.Sub.1
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Sub.1
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Sub.1))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Sub.1)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.Sub.1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$Sub$1")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Sub.1))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.Sub.1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$Sub$1")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Sub.1))
  )
 )
@@ -8552,14 +8660,15 @@
 )
 
 ;;; Class<T> <anonymous> implements Runnable.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$31
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$31
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$31))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$31)))
    (then
-    (global.set $$class@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$31 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$31) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$31))
    )
   )
+  (global.set $$class@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$31 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$31 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$31))
  )
 )
@@ -8572,20 +8681,21 @@
  (local $this (ref null $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$31))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$31) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$31) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$31 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$31)
 
 ;;; String <anonymous> implements Runnable.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$31
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$31
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$31))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$31)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$31 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$SubWithLambda$$LambdaImplementor$31")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$31))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$31 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$SubWithLambda$$LambdaImplementor$31")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$31))
  )
 )
@@ -8651,14 +8761,15 @@
 )
 
 ;;; Class<T> LambdaInSubClass.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.LambdaInSubClass
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.LambdaInSubClass
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.LambdaInSubClass))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.LambdaInSubClass)))
    (then
-    (global.set $$class@lambdas.Lambdas.LambdaInSubClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.LambdaInSubClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.Parent) )))
+    (return (global.get $$class@lambdas.Lambdas.LambdaInSubClass))
    )
   )
+  (global.set $$class@lambdas.Lambdas.LambdaInSubClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.LambdaInSubClass )(call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Parent )))
   (return (global.get $$class@lambdas.Lambdas.LambdaInSubClass))
  )
 )
@@ -8671,20 +8782,21 @@
  (local $this (ref null $lambdas.Lambdas.LambdaInSubClass))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.LambdaInSubClass) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.LambdaInSubClass) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.LambdaInSubClass ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.LambdaInSubClass)
 
 ;;; String LambdaInSubClass.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.LambdaInSubClass
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.LambdaInSubClass
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.LambdaInSubClass))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.LambdaInSubClass)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.LambdaInSubClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$LambdaInSubClass")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.LambdaInSubClass))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.LambdaInSubClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$LambdaInSubClass")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.LambdaInSubClass))
  )
 )
@@ -8756,14 +8868,15 @@
 )
 
 ;;; Class<T> Sub.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.Sub
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Sub
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.Sub))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.Sub)))
    (then
-    (global.set $$class@lambdas.Lambdas.Sub (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.Sub) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.Super) )))
+    (return (global.get $$class@lambdas.Lambdas.Sub))
    )
   )
+  (global.set $$class@lambdas.Lambdas.Sub (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Sub )(call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Super )))
   (return (global.get $$class@lambdas.Lambdas.Sub))
  )
 )
@@ -8776,20 +8889,21 @@
  (local $this (ref null $lambdas.Lambdas.Sub))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.Sub) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.Sub) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Sub ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.Sub)
 
 ;;; String Sub.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.Sub
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Sub
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Sub))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Sub)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.Sub (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$Sub")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Sub))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.Sub (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$Sub")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.Sub))
  )
 )
@@ -8861,14 +8975,15 @@
 )
 
 ;;; Class<T> SubWithLambda.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.SubWithLambda
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.SubWithLambda
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@lambdas.Lambdas.SubWithLambda))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.SubWithLambda)))
    (then
-    (global.set $$class@lambdas.Lambdas.SubWithLambda (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|lambdas.Lamb...|__java_lang_String (ref.func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.SubWithLambda) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.Super) )))
+    (return (global.get $$class@lambdas.Lambdas.SubWithLambda))
    )
   )
+  (global.set $$class@lambdas.Lambdas.SubWithLambda (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.SubWithLambda )(call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Super )))
   (return (global.get $$class@lambdas.Lambdas.SubWithLambda))
  )
 )
@@ -8881,20 +8996,21 @@
  (local $this (ref null $lambdas.Lambdas.SubWithLambda))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.SubWithLambda) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@lambdas.Lambdas.SubWithLambda) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.SubWithLambda ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.SubWithLambda)
 
 ;;; String SubWithLambda.$getString_|lambdas.Lamb...|()
-(func $$getString_|lambdas.Lamb...|__java_lang_String@lambdas.Lambdas.SubWithLambda
+(func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.SubWithLambda
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.SubWithLambda))
+  (if (i32.eqz (ref.is_null (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.SubWithLambda)))
    (then
-    (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.SubWithLambda (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$SubWithLambda")))
+    (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.SubWithLambda))
    )
   )
+  (global.set $$string_|lambdas.Lamb...|@lambdas.Lambdas.SubWithLambda (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "lambdas.Lambdas$SubWithLambda")))
   (return (global.get $$string_|lambdas.Lamb...|@lambdas.Lambdas.SubWithLambda))
  )
 )

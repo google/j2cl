@@ -162,14 +162,15 @@
 )
 
 ;;; Class<T> StaticJsMethodsWithClassNamespace.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace
+(func $$getClassMetadata__java_lang_Class_<once>_@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace))
+  (if (i32.eqz (ref.is_null (global.get $$class@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace)))
    (then
-    (global.set $$class@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|staticjsmeth...|__java_lang_String (ref.func $$getString_|staticjsmeth...|__java_lang_String@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace))
    )
   )
+  (global.set $$class@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|staticjsmeth...|__java_lang_String_<once>_@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace))
  )
 )
@@ -182,20 +183,21 @@
  (local $this (ref null $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace))
  (local.set $this (ref.cast (ref $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace)
 
 ;;; String StaticJsMethodsWithClassNamespace.$getString_|staticjsmeth...|()
-(func $$getString_|staticjsmeth...|__java_lang_String@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace
+(func $$getString_|staticjsmeth...|__java_lang_String_<once>_@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|staticjsmeth...|@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace))
+  (if (i32.eqz (ref.is_null (global.get $$string_|staticjsmeth...|@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace)))
    (then
-    (global.set $$string_|staticjsmeth...|@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace")))
+    (return (global.get $$string_|staticjsmeth...|@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace))
    )
   )
+  (global.set $$string_|staticjsmeth...|@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace")))
   (return (global.get $$string_|staticjsmeth...|@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace))
  )
 )
@@ -262,14 +264,15 @@
 )
 
 ;;; Class<T> ExternalCaller.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@staticjsmethodswithclassnamespace.ExternalCaller
+(func $$getClassMetadata__java_lang_Class_<once>_@staticjsmethodswithclassnamespace.ExternalCaller
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@staticjsmethodswithclassnamespace.ExternalCaller))
+  (if (i32.eqz (ref.is_null (global.get $$class@staticjsmethodswithclassnamespace.ExternalCaller)))
    (then
-    (global.set $$class@staticjsmethodswithclassnamespace.ExternalCaller (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|staticjsmeth...|__java_lang_String (ref.func $$getString_|staticjsmeth...|__java_lang_String@staticjsmethodswithclassnamespace.ExternalCaller) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@staticjsmethodswithclassnamespace.ExternalCaller))
    )
   )
+  (global.set $$class@staticjsmethodswithclassnamespace.ExternalCaller (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|staticjsmeth...|__java_lang_String_<once>_@staticjsmethodswithclassnamespace.ExternalCaller )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@staticjsmethodswithclassnamespace.ExternalCaller))
  )
 )
@@ -282,20 +285,21 @@
  (local $this (ref null $staticjsmethodswithclassnamespace.ExternalCaller))
  (local.set $this (ref.cast (ref $staticjsmethodswithclassnamespace.ExternalCaller) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@staticjsmethodswithclassnamespace.ExternalCaller) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@staticjsmethodswithclassnamespace.ExternalCaller ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@staticjsmethodswithclassnamespace.ExternalCaller)
 
 ;;; String ExternalCaller.$getString_|staticjsmeth...|()
-(func $$getString_|staticjsmeth...|__java_lang_String@staticjsmethodswithclassnamespace.ExternalCaller
+(func $$getString_|staticjsmeth...|__java_lang_String_<once>_@staticjsmethodswithclassnamespace.ExternalCaller
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|staticjsmeth...|@staticjsmethodswithclassnamespace.ExternalCaller))
+  (if (i32.eqz (ref.is_null (global.get $$string_|staticjsmeth...|@staticjsmethodswithclassnamespace.ExternalCaller)))
    (then
-    (global.set $$string_|staticjsmeth...|@staticjsmethodswithclassnamespace.ExternalCaller (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "staticjsmethodswithclassnamespace.ExternalCaller")))
+    (return (global.get $$string_|staticjsmeth...|@staticjsmethodswithclassnamespace.ExternalCaller))
    )
   )
+  (global.set $$string_|staticjsmeth...|@staticjsmethodswithclassnamespace.ExternalCaller (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "staticjsmethodswithclassnamespace.ExternalCaller")))
   (return (global.get $$string_|staticjsmeth...|@staticjsmethodswithclassnamespace.ExternalCaller))
  )
 )

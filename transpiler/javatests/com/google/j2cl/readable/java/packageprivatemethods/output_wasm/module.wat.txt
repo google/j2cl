@@ -309,27 +309,29 @@
 )
 
 ;;; Class<T> Interface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@packageprivatemethods.package1.Interface
+(func $$getClassMetadata__java_lang_Class_<once>_@packageprivatemethods.package1.Interface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@packageprivatemethods.package1.Interface))
+  (if (i32.eqz (ref.is_null (global.get $$class@packageprivatemethods.package1.Interface)))
    (then
-    (global.set $$class@packageprivatemethods.package1.Interface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|packagepriva...|__java_lang_String (ref.func $$getString_|packagepriva...|__java_lang_String@packageprivatemethods.package1.Interface) )))
+    (return (global.get $$class@packageprivatemethods.package1.Interface))
    )
   )
+  (global.set $$class@packageprivatemethods.package1.Interface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|packagepriva...|__java_lang_String_<once>_@packageprivatemethods.package1.Interface )))
   (return (global.get $$class@packageprivatemethods.package1.Interface))
  )
 )
 
 ;;; String Interface.$getString_|packagepriva...|()
-(func $$getString_|packagepriva...|__java_lang_String@packageprivatemethods.package1.Interface
+(func $$getString_|packagepriva...|__java_lang_String_<once>_@packageprivatemethods.package1.Interface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|packagepriva...|@packageprivatemethods.package1.Interface))
+  (if (i32.eqz (ref.is_null (global.get $$string_|packagepriva...|@packageprivatemethods.package1.Interface)))
    (then
-    (global.set $$string_|packagepriva...|@packageprivatemethods.package1.Interface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "packageprivatemethods.package1.Interface")))
+    (return (global.get $$string_|packagepriva...|@packageprivatemethods.package1.Interface))
    )
   )
+  (global.set $$string_|packagepriva...|@packageprivatemethods.package1.Interface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "packageprivatemethods.package1.Interface")))
   (return (global.get $$string_|packagepriva...|@packageprivatemethods.package1.Interface))
  )
 )
@@ -450,14 +452,15 @@
 )
 
 ;;; Class<T> SuperParent.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@packageprivatemethods.package1.SuperParent
+(func $$getClassMetadata__java_lang_Class_<once>_@packageprivatemethods.package1.SuperParent
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@packageprivatemethods.package1.SuperParent))
+  (if (i32.eqz (ref.is_null (global.get $$class@packageprivatemethods.package1.SuperParent)))
    (then
-    (global.set $$class@packageprivatemethods.package1.SuperParent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|packagepriva...|__java_lang_String (ref.func $$getString_|packagepriva...|__java_lang_String@packageprivatemethods.package1.SuperParent) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@packageprivatemethods.package1.SuperParent))
    )
   )
+  (global.set $$class@packageprivatemethods.package1.SuperParent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|packagepriva...|__java_lang_String_<once>_@packageprivatemethods.package1.SuperParent )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@packageprivatemethods.package1.SuperParent))
  )
 )
@@ -470,20 +473,21 @@
  (local $this (ref null $packageprivatemethods.package1.SuperParent))
  (local.set $this (ref.cast (ref $packageprivatemethods.package1.SuperParent) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@packageprivatemethods.package1.SuperParent) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@packageprivatemethods.package1.SuperParent ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@packageprivatemethods.package1.SuperParent)
 
 ;;; String SuperParent.$getString_|packagepriva...|()
-(func $$getString_|packagepriva...|__java_lang_String@packageprivatemethods.package1.SuperParent
+(func $$getString_|packagepriva...|__java_lang_String_<once>_@packageprivatemethods.package1.SuperParent
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|packagepriva...|@packageprivatemethods.package1.SuperParent))
+  (if (i32.eqz (ref.is_null (global.get $$string_|packagepriva...|@packageprivatemethods.package1.SuperParent)))
    (then
-    (global.set $$string_|packagepriva...|@packageprivatemethods.package1.SuperParent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "packageprivatemethods.package1.SuperParent")))
+    (return (global.get $$string_|packagepriva...|@packageprivatemethods.package1.SuperParent))
    )
   )
+  (global.set $$string_|packagepriva...|@packageprivatemethods.package1.SuperParent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "packageprivatemethods.package1.SuperParent")))
   (return (global.get $$string_|packagepriva...|@packageprivatemethods.package1.SuperParent))
  )
 )
@@ -553,27 +557,29 @@
 )
 
 ;;; Class<T> Parent.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@packageprivatemethods.package1.Parent
+(func $$getClassMetadata__java_lang_Class_<once>_@packageprivatemethods.package1.Parent
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@packageprivatemethods.package1.Parent))
+  (if (i32.eqz (ref.is_null (global.get $$class@packageprivatemethods.package1.Parent)))
    (then
-    (global.set $$class@packageprivatemethods.package1.Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|packagepriva...|__java_lang_String (ref.func $$getString_|packagepriva...|__java_lang_String@packageprivatemethods.package1.Parent) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@packageprivatemethods.package1.SuperParent) )))
+    (return (global.get $$class@packageprivatemethods.package1.Parent))
    )
   )
+  (global.set $$class@packageprivatemethods.package1.Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|packagepriva...|__java_lang_String_<once>_@packageprivatemethods.package1.Parent )(call $$getClassMetadata__java_lang_Class_<once>_@packageprivatemethods.package1.SuperParent )))
   (return (global.get $$class@packageprivatemethods.package1.Parent))
  )
 )
 
 ;;; String Parent.$getString_|packagepriva...|()
-(func $$getString_|packagepriva...|__java_lang_String@packageprivatemethods.package1.Parent
+(func $$getString_|packagepriva...|__java_lang_String_<once>_@packageprivatemethods.package1.Parent
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|packagepriva...|@packageprivatemethods.package1.Parent))
+  (if (i32.eqz (ref.is_null (global.get $$string_|packagepriva...|@packageprivatemethods.package1.Parent)))
    (then
-    (global.set $$string_|packagepriva...|@packageprivatemethods.package1.Parent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "packageprivatemethods.package1.Parent")))
+    (return (global.get $$string_|packagepriva...|@packageprivatemethods.package1.Parent))
    )
   )
+  (global.set $$string_|packagepriva...|@packageprivatemethods.package1.Parent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "packageprivatemethods.package1.Parent")))
   (return (global.get $$string_|packagepriva...|@packageprivatemethods.package1.Parent))
  )
 )
@@ -744,14 +750,15 @@
 )
 
 ;;; Class<T> Child.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@packageprivatemethods.package1.Child
+(func $$getClassMetadata__java_lang_Class_<once>_@packageprivatemethods.package1.Child
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@packageprivatemethods.package1.Child))
+  (if (i32.eqz (ref.is_null (global.get $$class@packageprivatemethods.package1.Child)))
    (then
-    (global.set $$class@packageprivatemethods.package1.Child (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|packagepriva...|__java_lang_String (ref.func $$getString_|packagepriva...|__java_lang_String@packageprivatemethods.package1.Child) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@packageprivatemethods.package1.Parent) )))
+    (return (global.get $$class@packageprivatemethods.package1.Child))
    )
   )
+  (global.set $$class@packageprivatemethods.package1.Child (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|packagepriva...|__java_lang_String_<once>_@packageprivatemethods.package1.Child )(call $$getClassMetadata__java_lang_Class_<once>_@packageprivatemethods.package1.Parent )))
   (return (global.get $$class@packageprivatemethods.package1.Child))
  )
 )
@@ -764,20 +771,21 @@
  (local $this (ref null $packageprivatemethods.package1.Child))
  (local.set $this (ref.cast (ref $packageprivatemethods.package1.Child) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@packageprivatemethods.package1.Child) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@packageprivatemethods.package1.Child ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@packageprivatemethods.package1.Child)
 
 ;;; String Child.$getString_|packagepriva...|()
-(func $$getString_|packagepriva...|__java_lang_String@packageprivatemethods.package1.Child
+(func $$getString_|packagepriva...|__java_lang_String_<once>_@packageprivatemethods.package1.Child
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|packagepriva...|@packageprivatemethods.package1.Child))
+  (if (i32.eqz (ref.is_null (global.get $$string_|packagepriva...|@packageprivatemethods.package1.Child)))
    (then
-    (global.set $$string_|packagepriva...|@packageprivatemethods.package1.Child (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "packageprivatemethods.package1.Child")))
+    (return (global.get $$string_|packagepriva...|@packageprivatemethods.package1.Child))
    )
   )
+  (global.set $$string_|packagepriva...|@packageprivatemethods.package1.Child (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "packageprivatemethods.package1.Child")))
   (return (global.get $$string_|packagepriva...|@packageprivatemethods.package1.Child))
  )
 )
@@ -829,27 +837,29 @@
 )
 
 ;;; Class<T> SubParent.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@packageprivatemethods.package2.SubParent
+(func $$getClassMetadata__java_lang_Class_<once>_@packageprivatemethods.package2.SubParent
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@packageprivatemethods.package2.SubParent))
+  (if (i32.eqz (ref.is_null (global.get $$class@packageprivatemethods.package2.SubParent)))
    (then
-    (global.set $$class@packageprivatemethods.package2.SubParent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|packagepriva...|__java_lang_String (ref.func $$getString_|packagepriva...|__java_lang_String@packageprivatemethods.package2.SubParent) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@packageprivatemethods.package1.Parent) )))
+    (return (global.get $$class@packageprivatemethods.package2.SubParent))
    )
   )
+  (global.set $$class@packageprivatemethods.package2.SubParent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|packagepriva...|__java_lang_String_<once>_@packageprivatemethods.package2.SubParent )(call $$getClassMetadata__java_lang_Class_<once>_@packageprivatemethods.package1.Parent )))
   (return (global.get $$class@packageprivatemethods.package2.SubParent))
  )
 )
 
 ;;; String SubParent.$getString_|packagepriva...|()
-(func $$getString_|packagepriva...|__java_lang_String@packageprivatemethods.package2.SubParent
+(func $$getString_|packagepriva...|__java_lang_String_<once>_@packageprivatemethods.package2.SubParent
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|packagepriva...|@packageprivatemethods.package2.SubParent))
+  (if (i32.eqz (ref.is_null (global.get $$string_|packagepriva...|@packageprivatemethods.package2.SubParent)))
    (then
-    (global.set $$string_|packagepriva...|@packageprivatemethods.package2.SubParent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "packageprivatemethods.package2.SubParent")))
+    (return (global.get $$string_|packagepriva...|@packageprivatemethods.package2.SubParent))
    )
   )
+  (global.set $$string_|packagepriva...|@packageprivatemethods.package2.SubParent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "packageprivatemethods.package2.SubParent")))
   (return (global.get $$string_|packagepriva...|@packageprivatemethods.package2.SubParent))
  )
 )
@@ -918,14 +928,15 @@
 )
 
 ;;; Class<T> SubChild.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@packageprivatemethods.package2.SubChild
+(func $$getClassMetadata__java_lang_Class_<once>_@packageprivatemethods.package2.SubChild
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@packageprivatemethods.package2.SubChild))
+  (if (i32.eqz (ref.is_null (global.get $$class@packageprivatemethods.package2.SubChild)))
    (then
-    (global.set $$class@packageprivatemethods.package2.SubChild (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|packagepriva...|__java_lang_String (ref.func $$getString_|packagepriva...|__java_lang_String@packageprivatemethods.package2.SubChild) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@packageprivatemethods.package1.Child) )))
+    (return (global.get $$class@packageprivatemethods.package2.SubChild))
    )
   )
+  (global.set $$class@packageprivatemethods.package2.SubChild (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|packagepriva...|__java_lang_String_<once>_@packageprivatemethods.package2.SubChild )(call $$getClassMetadata__java_lang_Class_<once>_@packageprivatemethods.package1.Child )))
   (return (global.get $$class@packageprivatemethods.package2.SubChild))
  )
 )
@@ -938,20 +949,21 @@
  (local $this (ref null $packageprivatemethods.package2.SubChild))
  (local.set $this (ref.cast (ref $packageprivatemethods.package2.SubChild) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@packageprivatemethods.package2.SubChild) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@packageprivatemethods.package2.SubChild ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@packageprivatemethods.package2.SubChild)
 
 ;;; String SubChild.$getString_|packagepriva...|()
-(func $$getString_|packagepriva...|__java_lang_String@packageprivatemethods.package2.SubChild
+(func $$getString_|packagepriva...|__java_lang_String_<once>_@packageprivatemethods.package2.SubChild
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|packagepriva...|@packageprivatemethods.package2.SubChild))
+  (if (i32.eqz (ref.is_null (global.get $$string_|packagepriva...|@packageprivatemethods.package2.SubChild)))
    (then
-    (global.set $$string_|packagepriva...|@packageprivatemethods.package2.SubChild (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "packageprivatemethods.package2.SubChild")))
+    (return (global.get $$string_|packagepriva...|@packageprivatemethods.package2.SubChild))
    )
   )
+  (global.set $$string_|packagepriva...|@packageprivatemethods.package2.SubChild (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "packageprivatemethods.package2.SubChild")))
   (return (global.get $$string_|packagepriva...|@packageprivatemethods.package2.SubChild))
  )
 )

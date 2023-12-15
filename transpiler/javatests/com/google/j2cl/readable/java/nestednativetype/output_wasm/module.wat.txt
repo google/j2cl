@@ -102,14 +102,15 @@
 )
 
 ;;; Class<T> $Overlay.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@nestednativetype.NativeArray.$Overlay
+(func $$getClassMetadata__java_lang_Class_<once>_@nestednativetype.NativeArray.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@nestednativetype.NativeArray.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$class@nestednativetype.NativeArray.$Overlay)))
    (then
-    (global.set $$class@nestednativetype.NativeArray.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nestednative...|__java_lang_String (ref.func $$getString_|nestednative...|__java_lang_String@nestednativetype.NativeArray.$Overlay) )(ref.null $java.lang.Class)))
+    (return (global.get $$class@nestednativetype.NativeArray.$Overlay))
    )
   )
+  (global.set $$class@nestednativetype.NativeArray.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nestednative...|__java_lang_String_<once>_@nestednativetype.NativeArray.$Overlay )(ref.null $java.lang.Class)))
   (return (global.get $$class@nestednativetype.NativeArray.$Overlay))
  )
 )
@@ -122,20 +123,21 @@
  (local $this (ref null $nestednativetype.NativeArray.$Overlay))
  (local.set $this (ref.cast (ref $nestednativetype.NativeArray.$Overlay) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nestednativetype.NativeArray.$Overlay) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nestednativetype.NativeArray.$Overlay ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nestednativetype.NativeArray.$Overlay)
 
 ;;; String $Overlay.$getString_|nestednative...|()
-(func $$getString_|nestednative...|__java_lang_String@nestednativetype.NativeArray.$Overlay
+(func $$getString_|nestednative...|__java_lang_String_<once>_@nestednativetype.NativeArray.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|nestednative...|@nestednativetype.NativeArray.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$string_|nestednative...|@nestednativetype.NativeArray.$Overlay)))
    (then
-    (global.set $$string_|nestednative...|@nestednativetype.NativeArray.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nestednativetype.NativeArray$$Overlay")))
+    (return (global.get $$string_|nestednative...|@nestednativetype.NativeArray.$Overlay))
    )
   )
+  (global.set $$string_|nestednative...|@nestednativetype.NativeArray.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nestednativetype.NativeArray$$Overlay")))
   (return (global.get $$string_|nestednative...|@nestednativetype.NativeArray.$Overlay))
  )
 )
@@ -199,14 +201,15 @@
 )
 
 ;;; Class<T> <anonymous> extends Object.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@nestednativetype.NativeArray.1
+(func $$getClassMetadata__java_lang_Class_<once>_@nestednativetype.NativeArray.1
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@nestednativetype.NativeArray.1))
+  (if (i32.eqz (ref.is_null (global.get $$class@nestednativetype.NativeArray.1)))
    (then
-    (global.set $$class@nestednativetype.NativeArray.1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|nestednative...|__java_lang_String (ref.func $$getString_|nestednative...|__java_lang_String@nestednativetype.NativeArray.1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@nestednativetype.NativeArray.1))
    )
   )
+  (global.set $$class@nestednativetype.NativeArray.1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nestednative...|__java_lang_String_<once>_@nestednativetype.NativeArray.1 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@nestednativetype.NativeArray.1))
  )
 )
@@ -219,20 +222,21 @@
  (local $this (ref null $nestednativetype.NativeArray.1))
  (local.set $this (ref.cast (ref $nestednativetype.NativeArray.1) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@nestednativetype.NativeArray.1) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nestednativetype.NativeArray.1 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nestednativetype.NativeArray.1)
 
 ;;; String <anonymous> extends Object.$getString_|nestednative...|()
-(func $$getString_|nestednative...|__java_lang_String@nestednativetype.NativeArray.1
+(func $$getString_|nestednative...|__java_lang_String_<once>_@nestednativetype.NativeArray.1
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|nestednative...|@nestednativetype.NativeArray.1))
+  (if (i32.eqz (ref.is_null (global.get $$string_|nestednative...|@nestednativetype.NativeArray.1)))
    (then
-    (global.set $$string_|nestednative...|@nestednativetype.NativeArray.1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nestednativetype.NativeArray$1")))
+    (return (global.get $$string_|nestednative...|@nestednativetype.NativeArray.1))
    )
   )
+  (global.set $$string_|nestednative...|@nestednativetype.NativeArray.1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nestednativetype.NativeArray$1")))
   (return (global.get $$string_|nestednative...|@nestednativetype.NativeArray.1))
  )
 )

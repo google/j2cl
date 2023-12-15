@@ -438,27 +438,29 @@
 )
 
 ;;; Class<T> MyInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@mixednestings.MyInterface
+(func $$getClassMetadata__java_lang_Class_<once>_@mixednestings.MyInterface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@mixednestings.MyInterface))
+  (if (i32.eqz (ref.is_null (global.get $$class@mixednestings.MyInterface)))
    (then
-    (global.set $$class@mixednestings.MyInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|mixednesting...|__java_lang_String (ref.func $$getString_|mixednesting...|__java_lang_String@mixednestings.MyInterface) )))
+    (return (global.get $$class@mixednestings.MyInterface))
    )
   )
+  (global.set $$class@mixednestings.MyInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|mixednesting...|__java_lang_String_<once>_@mixednestings.MyInterface )))
   (return (global.get $$class@mixednestings.MyInterface))
  )
 )
 
 ;;; String MyInterface.$getString_|mixednesting...|()
-(func $$getString_|mixednesting...|__java_lang_String@mixednestings.MyInterface
+(func $$getString_|mixednesting...|__java_lang_String_<once>_@mixednestings.MyInterface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|mixednesting...|@mixednestings.MyInterface))
+  (if (i32.eqz (ref.is_null (global.get $$string_|mixednesting...|@mixednestings.MyInterface)))
    (then
-    (global.set $$string_|mixednesting...|@mixednestings.MyInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "mixednestings.MyInterface")))
+    (return (global.get $$string_|mixednesting...|@mixednestings.MyInterface))
    )
   )
+  (global.set $$string_|mixednesting...|@mixednestings.MyInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "mixednestings.MyInterface")))
   (return (global.get $$string_|mixednesting...|@mixednestings.MyInterface))
  )
 )
@@ -542,14 +544,15 @@
 )
 
 ;;; Class<T> MixedNestings.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@mixednestings.MixedNestings
+(func $$getClassMetadata__java_lang_Class_<once>_@mixednestings.MixedNestings
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@mixednestings.MixedNestings))
+  (if (i32.eqz (ref.is_null (global.get $$class@mixednestings.MixedNestings)))
    (then
-    (global.set $$class@mixednestings.MixedNestings (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|mixednesting...|__java_lang_String (ref.func $$getString_|mixednesting...|__java_lang_String@mixednestings.MixedNestings) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@mixednestings.MixedNestings))
    )
   )
+  (global.set $$class@mixednestings.MixedNestings (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|mixednesting...|__java_lang_String_<once>_@mixednestings.MixedNestings )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@mixednestings.MixedNestings))
  )
 )
@@ -562,20 +565,21 @@
  (local $this (ref null $mixednestings.MixedNestings))
  (local.set $this (ref.cast (ref $mixednestings.MixedNestings) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@mixednestings.MixedNestings) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@mixednestings.MixedNestings ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@mixednestings.MixedNestings)
 
 ;;; String MixedNestings.$getString_|mixednesting...|()
-(func $$getString_|mixednesting...|__java_lang_String@mixednestings.MixedNestings
+(func $$getString_|mixednesting...|__java_lang_String_<once>_@mixednestings.MixedNestings
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|mixednesting...|@mixednestings.MixedNestings))
+  (if (i32.eqz (ref.is_null (global.get $$string_|mixednesting...|@mixednestings.MixedNestings)))
    (then
-    (global.set $$string_|mixednesting...|@mixednestings.MixedNestings (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "mixednestings.MixedNestings")))
+    (return (global.get $$string_|mixednesting...|@mixednestings.MixedNestings))
    )
   )
+  (global.set $$string_|mixednesting...|@mixednestings.MixedNestings (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "mixednestings.MixedNestings")))
   (return (global.get $$string_|mixednesting...|@mixednestings.MixedNestings))
  )
 )
@@ -648,14 +652,15 @@
 )
 
 ;;; Class<T> <anonymous> implements MyInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@mixednestings.MixedNestings.A.1B.1.1
+(func $$getClassMetadata__java_lang_Class_<once>_@mixednestings.MixedNestings.A.1B.1.1
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@mixednestings.MixedNestings.A.1B.1.1))
+  (if (i32.eqz (ref.is_null (global.get $$class@mixednestings.MixedNestings.A.1B.1.1)))
    (then
-    (global.set $$class@mixednestings.MixedNestings.A.1B.1.1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|mixednesting...|__java_lang_String (ref.func $$getString_|mixednesting...|__java_lang_String@mixednestings.MixedNestings.A.1B.1.1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@mixednestings.MixedNestings.A.1B.1.1))
    )
   )
+  (global.set $$class@mixednestings.MixedNestings.A.1B.1.1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|mixednesting...|__java_lang_String_<once>_@mixednestings.MixedNestings.A.1B.1.1 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@mixednestings.MixedNestings.A.1B.1.1))
  )
 )
@@ -668,20 +673,21 @@
  (local $this (ref null $mixednestings.MixedNestings.A.1B.1.1))
  (local.set $this (ref.cast (ref $mixednestings.MixedNestings.A.1B.1.1) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@mixednestings.MixedNestings.A.1B.1.1) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@mixednestings.MixedNestings.A.1B.1.1 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@mixednestings.MixedNestings.A.1B.1.1)
 
 ;;; String <anonymous> implements MyInterface.$getString_|mixednesting...|()
-(func $$getString_|mixednesting...|__java_lang_String@mixednestings.MixedNestings.A.1B.1.1
+(func $$getString_|mixednesting...|__java_lang_String_<once>_@mixednestings.MixedNestings.A.1B.1.1
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.1))
+  (if (i32.eqz (ref.is_null (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.1)))
    (then
-    (global.set $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "mixednestings.MixedNestings$A$1B$1$1")))
+    (return (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.1))
    )
   )
+  (global.set $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "mixednestings.MixedNestings$A$1B$1$1")))
   (return (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.1))
  )
 )
@@ -764,14 +770,15 @@
 )
 
 ;;; Class<T> <anonymous> implements MyInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1
+(func $$getClassMetadata__java_lang_Class_<once>_@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1))
+  (if (i32.eqz (ref.is_null (global.get $$class@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1)))
    (then
-    (global.set $$class@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|mixednesting...|__java_lang_String (ref.func $$getString_|mixednesting...|__java_lang_String@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1))
    )
   )
+  (global.set $$class@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|mixednesting...|__java_lang_String_<once>_@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1))
  )
 )
@@ -784,20 +791,21 @@
  (local $this (ref null $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1))
  (local.set $this (ref.cast (ref $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1)
 
 ;;; String <anonymous> implements MyInterface.$getString_|mixednesting...|()
-(func $$getString_|mixednesting...|__java_lang_String@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1
+(func $$getString_|mixednesting...|__java_lang_String_<once>_@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1))
+  (if (i32.eqz (ref.is_null (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1)))
    (then
-    (global.set $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "mixednestings.MixedNestings$A$1B$1$$LambdaImplementor$1")))
+    (return (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1))
    )
   )
+  (global.set $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "mixednestings.MixedNestings$A$1B$1$$LambdaImplementor$1")))
   (return (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1))
  )
 )
@@ -879,14 +887,15 @@
 )
 
 ;;; Class<T> <anonymous> implements MyInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2
+(func $$getClassMetadata__java_lang_Class_<once>_@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2))
+  (if (i32.eqz (ref.is_null (global.get $$class@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2)))
    (then
-    (global.set $$class@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|mixednesting...|__java_lang_String (ref.func $$getString_|mixednesting...|__java_lang_String@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2))
    )
   )
+  (global.set $$class@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|mixednesting...|__java_lang_String_<once>_@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2))
  )
 )
@@ -899,20 +908,21 @@
  (local $this (ref null $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2))
  (local.set $this (ref.cast (ref $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2)
 
 ;;; String <anonymous> implements MyInterface.$getString_|mixednesting...|()
-(func $$getString_|mixednesting...|__java_lang_String@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2
+(func $$getString_|mixednesting...|__java_lang_String_<once>_@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2))
+  (if (i32.eqz (ref.is_null (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2)))
    (then
-    (global.set $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "mixednestings.MixedNestings$A$1B$1$$LambdaImplementor$2")))
+    (return (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2))
    )
   )
+  (global.set $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "mixednestings.MixedNestings$A$1B$1$$LambdaImplementor$2")))
   (return (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2))
  )
 )
@@ -988,14 +998,15 @@
 )
 
 ;;; Class<T> <anonymous> implements MyInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@mixednestings.MixedNestings.A.1B.1
+(func $$getClassMetadata__java_lang_Class_<once>_@mixednestings.MixedNestings.A.1B.1
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@mixednestings.MixedNestings.A.1B.1))
+  (if (i32.eqz (ref.is_null (global.get $$class@mixednestings.MixedNestings.A.1B.1)))
    (then
-    (global.set $$class@mixednestings.MixedNestings.A.1B.1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|mixednesting...|__java_lang_String (ref.func $$getString_|mixednesting...|__java_lang_String@mixednestings.MixedNestings.A.1B.1) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@mixednestings.MixedNestings.A.1B.1))
    )
   )
+  (global.set $$class@mixednestings.MixedNestings.A.1B.1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|mixednesting...|__java_lang_String_<once>_@mixednestings.MixedNestings.A.1B.1 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@mixednestings.MixedNestings.A.1B.1))
  )
 )
@@ -1008,20 +1019,21 @@
  (local $this (ref null $mixednestings.MixedNestings.A.1B.1))
  (local.set $this (ref.cast (ref $mixednestings.MixedNestings.A.1B.1) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@mixednestings.MixedNestings.A.1B.1) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@mixednestings.MixedNestings.A.1B.1 ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@mixednestings.MixedNestings.A.1B.1)
 
 ;;; String <anonymous> implements MyInterface.$getString_|mixednesting...|()
-(func $$getString_|mixednesting...|__java_lang_String@mixednestings.MixedNestings.A.1B.1
+(func $$getString_|mixednesting...|__java_lang_String_<once>_@mixednestings.MixedNestings.A.1B.1
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1))
+  (if (i32.eqz (ref.is_null (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1)))
    (then
-    (global.set $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "mixednestings.MixedNestings$A$1B$1")))
+    (return (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1))
    )
   )
+  (global.set $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "mixednestings.MixedNestings$A$1B$1")))
   (return (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1))
  )
 )
@@ -1108,14 +1120,15 @@
 )
 
 ;;; Class<T> B.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@mixednestings.MixedNestings.A.1B
+(func $$getClassMetadata__java_lang_Class_<once>_@mixednestings.MixedNestings.A.1B
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@mixednestings.MixedNestings.A.1B))
+  (if (i32.eqz (ref.is_null (global.get $$class@mixednestings.MixedNestings.A.1B)))
    (then
-    (global.set $$class@mixednestings.MixedNestings.A.1B (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|mixednesting...|__java_lang_String (ref.func $$getString_|mixednesting...|__java_lang_String@mixednestings.MixedNestings.A.1B) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@mixednestings.MixedNestings.A.1B))
    )
   )
+  (global.set $$class@mixednestings.MixedNestings.A.1B (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|mixednesting...|__java_lang_String_<once>_@mixednestings.MixedNestings.A.1B )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@mixednestings.MixedNestings.A.1B))
  )
 )
@@ -1128,20 +1141,21 @@
  (local $this (ref null $mixednestings.MixedNestings.A.1B))
  (local.set $this (ref.cast (ref $mixednestings.MixedNestings.A.1B) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@mixednestings.MixedNestings.A.1B) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@mixednestings.MixedNestings.A.1B ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@mixednestings.MixedNestings.A.1B)
 
 ;;; String B.$getString_|mixednesting...|()
-(func $$getString_|mixednesting...|__java_lang_String@mixednestings.MixedNestings.A.1B
+(func $$getString_|mixednesting...|__java_lang_String_<once>_@mixednestings.MixedNestings.A.1B
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B))
+  (if (i32.eqz (ref.is_null (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B)))
    (then
-    (global.set $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "mixednestings.MixedNestings$A$1B")))
+    (return (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B))
    )
   )
+  (global.set $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "mixednestings.MixedNestings$A$1B")))
   (return (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B))
  )
 )
@@ -1229,14 +1243,15 @@
 )
 
 ;;; Class<T> A.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@mixednestings.MixedNestings.A
+(func $$getClassMetadata__java_lang_Class_<once>_@mixednestings.MixedNestings.A
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@mixednestings.MixedNestings.A))
+  (if (i32.eqz (ref.is_null (global.get $$class@mixednestings.MixedNestings.A)))
    (then
-    (global.set $$class@mixednestings.MixedNestings.A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|mixednesting...|__java_lang_String (ref.func $$getString_|mixednesting...|__java_lang_String@mixednestings.MixedNestings.A) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@mixednestings.MixedNestings.A))
    )
   )
+  (global.set $$class@mixednestings.MixedNestings.A (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|mixednesting...|__java_lang_String_<once>_@mixednestings.MixedNestings.A )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@mixednestings.MixedNestings.A))
  )
 )
@@ -1249,20 +1264,21 @@
  (local $this (ref null $mixednestings.MixedNestings.A))
  (local.set $this (ref.cast (ref $mixednestings.MixedNestings.A) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@mixednestings.MixedNestings.A) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@mixednestings.MixedNestings.A ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@mixednestings.MixedNestings.A)
 
 ;;; String A.$getString_|mixednesting...|()
-(func $$getString_|mixednesting...|__java_lang_String@mixednestings.MixedNestings.A
+(func $$getString_|mixednesting...|__java_lang_String_<once>_@mixednestings.MixedNestings.A
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A))
+  (if (i32.eqz (ref.is_null (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A)))
    (then
-    (global.set $$string_|mixednesting...|@mixednestings.MixedNestings.A (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "mixednestings.MixedNestings$A")))
+    (return (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A))
    )
   )
+  (global.set $$string_|mixednesting...|@mixednestings.MixedNestings.A (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "mixednestings.MixedNestings$A")))
   (return (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A))
  )
 )

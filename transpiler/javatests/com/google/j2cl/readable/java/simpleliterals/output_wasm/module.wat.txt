@@ -143,9 +143,9 @@
   ;;@ simpleliterals/SimpleLiterals.java:39:4
   (local.set $o (ref.null $java.lang.Object))
   ;;@ simpleliterals/SimpleLiterals.java:40:4
-  (local.set $str (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@simpleliterals.SimpleLiterals) ))
+  (local.set $str (call $$getString_|foo|__java_lang_String_<once>_@simpleliterals.SimpleLiterals ))
   ;;@ simpleliterals/SimpleLiterals.java:41:4
-  (local.set $c (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simpleliterals.SimpleLiterals) ))
+  (local.set $c (call $$getClassMetadata__java_lang_Class_<once>_@simpleliterals.SimpleLiterals ))
   ;;@ simpleliterals/SimpleLiterals.java:42:4
   (local.set $zeroF (f32.neg (f32.const 0.0)))
   ;;@ simpleliterals/SimpleLiterals.java:43:4
@@ -179,14 +179,15 @@
 )
 
 ;;; Class<T> SimpleLiterals.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@simpleliterals.SimpleLiterals
+(func $$getClassMetadata__java_lang_Class_<once>_@simpleliterals.SimpleLiterals
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@simpleliterals.SimpleLiterals))
+  (if (i32.eqz (ref.is_null (global.get $$class@simpleliterals.SimpleLiterals)))
    (then
-    (global.set $$class@simpleliterals.SimpleLiterals (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplelitera...|__java_lang_String (ref.func $$getString_|simplelitera...|__java_lang_String@simpleliterals.SimpleLiterals) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@simpleliterals.SimpleLiterals))
    )
   )
+  (global.set $$class@simpleliterals.SimpleLiterals (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|simplelitera...|__java_lang_String_<once>_@simpleliterals.SimpleLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@simpleliterals.SimpleLiterals))
  )
 )
@@ -199,33 +200,35 @@
  (local $this (ref null $simpleliterals.SimpleLiterals))
  (local.set $this (ref.cast (ref $simpleliterals.SimpleLiterals) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simpleliterals.SimpleLiterals) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@simpleliterals.SimpleLiterals ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@simpleliterals.SimpleLiterals)
 
 ;;; String SimpleLiterals.$getString_|foo|()
-(func $$getString_|foo|__java_lang_String@simpleliterals.SimpleLiterals
+(func $$getString_|foo|__java_lang_String_<once>_@simpleliterals.SimpleLiterals
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|foo|@simpleliterals.SimpleLiterals))
+  (if (i32.eqz (ref.is_null (global.get $$string_|foo|@simpleliterals.SimpleLiterals)))
    (then
-    (global.set $$string_|foo|@simpleliterals.SimpleLiterals (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "foo")))
+    (return (global.get $$string_|foo|@simpleliterals.SimpleLiterals))
    )
   )
+  (global.set $$string_|foo|@simpleliterals.SimpleLiterals (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "foo")))
   (return (global.get $$string_|foo|@simpleliterals.SimpleLiterals))
  )
 )
 
 ;;; String SimpleLiterals.$getString_|simplelitera...|()
-(func $$getString_|simplelitera...|__java_lang_String@simpleliterals.SimpleLiterals
+(func $$getString_|simplelitera...|__java_lang_String_<once>_@simpleliterals.SimpleLiterals
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|simplelitera...|@simpleliterals.SimpleLiterals))
+  (if (i32.eqz (ref.is_null (global.get $$string_|simplelitera...|@simpleliterals.SimpleLiterals)))
    (then
-    (global.set $$string_|simplelitera...|@simpleliterals.SimpleLiterals (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "simpleliterals.SimpleLiterals")))
+    (return (global.get $$string_|simplelitera...|@simpleliterals.SimpleLiterals))
    )
   )
+  (global.set $$string_|simplelitera...|@simpleliterals.SimpleLiterals (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "simpleliterals.SimpleLiterals")))
   (return (global.get $$string_|simplelitera...|@simpleliterals.SimpleLiterals))
  )
 )

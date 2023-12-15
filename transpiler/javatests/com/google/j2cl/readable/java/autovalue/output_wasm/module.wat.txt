@@ -1450,27 +1450,29 @@
 )
 
 ;;; Class<T> AutoValueJsType.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.AutoValueJsType
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValueJsType
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.AutoValueJsType))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.AutoValueJsType)))
    (then
-    (global.set $$class@autovalue.AutoValueJsType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValueJsType) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@autovalue.AutoValueJsType))
    )
   )
+  (global.set $$class@autovalue.AutoValueJsType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValueJsType )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@autovalue.AutoValueJsType))
  )
 )
 
 ;;; String AutoValueJsType.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValueJsType
+(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValueJsType
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValueJsType))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValueJsType)))
    (then
-    (global.set $$string_|autovalue.Au...|@autovalue.AutoValueJsType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValueJsType")))
+    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValueJsType))
    )
   )
+  (global.set $$string_|autovalue.Au...|@autovalue.AutoValueJsType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValueJsType")))
   (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValueJsType))
  )
 )
@@ -1526,27 +1528,29 @@
 )
 
 ;;; Class<T> AutoValueWithBuilder.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.AutoValueWithBuilder
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValueWithBuilder
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.AutoValueWithBuilder))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.AutoValueWithBuilder)))
    (then
-    (global.set $$class@autovalue.AutoValueWithBuilder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValueWithBuilder) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@autovalue.AutoValueWithBuilder))
    )
   )
+  (global.set $$class@autovalue.AutoValueWithBuilder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValueWithBuilder )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@autovalue.AutoValueWithBuilder))
  )
 )
 
 ;;; String AutoValueWithBuilder.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValueWithBuilder
+(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValueWithBuilder
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithBuilder))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithBuilder)))
    (then
-    (global.set $$string_|autovalue.Au...|@autovalue.AutoValueWithBuilder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValueWithBuilder")))
+    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithBuilder))
    )
   )
+  (global.set $$string_|autovalue.Au...|@autovalue.AutoValueWithBuilder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValueWithBuilder")))
   (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithBuilder))
  )
 )
@@ -1582,27 +1586,29 @@
 )
 
 ;;; Class<T> Builder.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.AutoValueWithBuilder.Builder
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValueWithBuilder.Builder
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.AutoValueWithBuilder.Builder))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.AutoValueWithBuilder.Builder)))
    (then
-    (global.set $$class@autovalue.AutoValueWithBuilder.Builder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValueWithBuilder.Builder) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@autovalue.AutoValueWithBuilder.Builder))
    )
   )
+  (global.set $$class@autovalue.AutoValueWithBuilder.Builder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValueWithBuilder.Builder )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@autovalue.AutoValueWithBuilder.Builder))
  )
 )
 
 ;;; String Builder.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValueWithBuilder.Builder
+(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValueWithBuilder.Builder
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithBuilder.Builder))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithBuilder.Builder)))
    (then
-    (global.set $$string_|autovalue.Au...|@autovalue.AutoValueWithBuilder.Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValueWithBuilder$Builder")))
+    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithBuilder.Builder))
    )
   )
+  (global.set $$string_|autovalue.Au...|@autovalue.AutoValueWithBuilder.Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValueWithBuilder$Builder")))
   (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithBuilder.Builder))
  )
 )
@@ -1642,7 +1648,7 @@
   ;;@ autovalue/AutoValueWithExtensions.java:36:42
   (call $$clinit__void_<once>_@autovalue.AutoValueWithExtensions )
   ;;@ autovalue/AutoValueWithExtensions.java:37:4
-  (return (call $$create__int__java_lang_String@autovalue.AutoValue_AutoValueWithExtensions (i32.const 42)(call $function.no.side.effects.$getString_|text|__java_lang_String (ref.func $$getString_|text|__java_lang_String@autovalue.AutoValueWithExtensions) )))
+  (return (call $$create__int__java_lang_String@autovalue.AutoValue_AutoValueWithExtensions (i32.const 42)(call $$getString_|text|__java_lang_String_<once>_@autovalue.AutoValueWithExtensions )))
  )
 )
 
@@ -1665,40 +1671,43 @@
 )
 
 ;;; Class<T> AutoValueWithExtensions.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.AutoValueWithExtensions
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValueWithExtensions
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.AutoValueWithExtensions))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.AutoValueWithExtensions)))
    (then
-    (global.set $$class@autovalue.AutoValueWithExtensions (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValueWithExtensions) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@autovalue.AutoValueWithExtensions))
    )
   )
+  (global.set $$class@autovalue.AutoValueWithExtensions (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValueWithExtensions )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@autovalue.AutoValueWithExtensions))
  )
 )
 
 ;;; String AutoValueWithExtensions.$getString_|text|()
-(func $$getString_|text|__java_lang_String@autovalue.AutoValueWithExtensions
+(func $$getString_|text|__java_lang_String_<once>_@autovalue.AutoValueWithExtensions
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|text|@autovalue.AutoValueWithExtensions))
+  (if (i32.eqz (ref.is_null (global.get $$string_|text|@autovalue.AutoValueWithExtensions)))
    (then
-    (global.set $$string_|text|@autovalue.AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "text")))
+    (return (global.get $$string_|text|@autovalue.AutoValueWithExtensions))
    )
   )
+  (global.set $$string_|text|@autovalue.AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "text")))
   (return (global.get $$string_|text|@autovalue.AutoValueWithExtensions))
  )
 )
 
 ;;; String AutoValueWithExtensions.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValueWithExtensions
+(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValueWithExtensions
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithExtensions))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithExtensions)))
    (then
-    (global.set $$string_|autovalue.Au...|@autovalue.AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValueWithExtensions")))
+    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithExtensions))
    )
   )
+  (global.set $$string_|autovalue.Au...|@autovalue.AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValueWithExtensions")))
   (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithExtensions))
  )
 )
@@ -1751,14 +1760,15 @@
 )
 
 ;;; Class<T> Parent.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.Parent
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.Parent
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.Parent))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.Parent)))
    (then
-    (global.set $$class@autovalue.Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Pa...|__java_lang_String (ref.func $$getString_|autovalue.Pa...|__java_lang_String@autovalue.Parent) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@autovalue.Parent))
    )
   )
+  (global.set $$class@autovalue.Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Pa...|__java_lang_String_<once>_@autovalue.Parent )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@autovalue.Parent))
  )
 )
@@ -1771,20 +1781,21 @@
  (local $this (ref null $autovalue.Parent))
  (local.set $this (ref.cast (ref $autovalue.Parent) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.Parent) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@autovalue.Parent ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.Parent)
 
 ;;; String Parent.$getString_|autovalue.Pa...|()
-(func $$getString_|autovalue.Pa...|__java_lang_String@autovalue.Parent
+(func $$getString_|autovalue.Pa...|__java_lang_String_<once>_@autovalue.Parent
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.Pa...|@autovalue.Parent))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Pa...|@autovalue.Parent)))
    (then
-    (global.set $$string_|autovalue.Pa...|@autovalue.Parent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.Parent")))
+    (return (global.get $$string_|autovalue.Pa...|@autovalue.Parent))
    )
   )
+  (global.set $$string_|autovalue.Pa...|@autovalue.Parent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.Parent")))
   (return (global.get $$string_|autovalue.Pa...|@autovalue.Parent))
  )
 )
@@ -1832,27 +1843,29 @@
 )
 
 ;;; Class<T> AutoValueWithGenerics.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.AutoValueWithGenerics
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValueWithGenerics
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.AutoValueWithGenerics))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.AutoValueWithGenerics)))
    (then
-    (global.set $$class@autovalue.AutoValueWithGenerics (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValueWithGenerics) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@autovalue.AutoValueWithGenerics))
    )
   )
+  (global.set $$class@autovalue.AutoValueWithGenerics (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValueWithGenerics )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@autovalue.AutoValueWithGenerics))
  )
 )
 
 ;;; String AutoValueWithGenerics.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValueWithGenerics
+(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValueWithGenerics
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithGenerics))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithGenerics)))
    (then
-    (global.set $$string_|autovalue.Au...|@autovalue.AutoValueWithGenerics (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValueWithGenerics")))
+    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithGenerics))
    )
   )
+  (global.set $$string_|autovalue.Au...|@autovalue.AutoValueWithGenerics (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValueWithGenerics")))
   (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithGenerics))
  )
 )
@@ -1888,27 +1901,29 @@
 )
 
 ;;; Class<T> BaseClass.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.BaseClass
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.BaseClass
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.BaseClass))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.BaseClass)))
    (then
-    (global.set $$class@autovalue.BaseClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Ba...|__java_lang_String (ref.func $$getString_|autovalue.Ba...|__java_lang_String@autovalue.BaseClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@autovalue.BaseClass))
    )
   )
+  (global.set $$class@autovalue.BaseClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Ba...|__java_lang_String_<once>_@autovalue.BaseClass )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@autovalue.BaseClass))
  )
 )
 
 ;;; String BaseClass.$getString_|autovalue.Ba...|()
-(func $$getString_|autovalue.Ba...|__java_lang_String@autovalue.BaseClass
+(func $$getString_|autovalue.Ba...|__java_lang_String_<once>_@autovalue.BaseClass
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.Ba...|@autovalue.BaseClass))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Ba...|@autovalue.BaseClass)))
    (then
-    (global.set $$string_|autovalue.Ba...|@autovalue.BaseClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.BaseClass")))
+    (return (global.get $$string_|autovalue.Ba...|@autovalue.BaseClass))
    )
   )
+  (global.set $$string_|autovalue.Ba...|@autovalue.BaseClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.BaseClass")))
   (return (global.get $$string_|autovalue.Ba...|@autovalue.BaseClass))
  )
 )
@@ -1964,27 +1979,29 @@
 )
 
 ;;; Class<T> DefaultConstructorAutoValue.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.DefaultConstructorAutoValue
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.DefaultConstructorAutoValue
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.DefaultConstructorAutoValue))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.DefaultConstructorAutoValue)))
    (then
-    (global.set $$class@autovalue.DefaultConstructorAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.De...|__java_lang_String (ref.func $$getString_|autovalue.De...|__java_lang_String@autovalue.DefaultConstructorAutoValue) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@autovalue.DefaultConstructorAutoValue))
    )
   )
+  (global.set $$class@autovalue.DefaultConstructorAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.De...|__java_lang_String_<once>_@autovalue.DefaultConstructorAutoValue )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@autovalue.DefaultConstructorAutoValue))
  )
 )
 
 ;;; String DefaultConstructorAutoValue.$getString_|autovalue.De...|()
-(func $$getString_|autovalue.De...|__java_lang_String@autovalue.DefaultConstructorAutoValue
+(func $$getString_|autovalue.De...|__java_lang_String_<once>_@autovalue.DefaultConstructorAutoValue
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.De...|@autovalue.DefaultConstructorAutoValue))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.De...|@autovalue.DefaultConstructorAutoValue)))
    (then
-    (global.set $$string_|autovalue.De...|@autovalue.DefaultConstructorAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.DefaultConstructorAutoValue")))
+    (return (global.get $$string_|autovalue.De...|@autovalue.DefaultConstructorAutoValue))
    )
   )
+  (global.set $$string_|autovalue.De...|@autovalue.DefaultConstructorAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.DefaultConstructorAutoValue")))
   (return (global.get $$string_|autovalue.De...|@autovalue.DefaultConstructorAutoValue))
  )
 )
@@ -2020,27 +2037,29 @@
 )
 
 ;;; Class<T> Builder.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.DefaultConstructorAutoValue.Builder
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.DefaultConstructorAutoValue.Builder
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.DefaultConstructorAutoValue.Builder))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.DefaultConstructorAutoValue.Builder)))
    (then
-    (global.set $$class@autovalue.DefaultConstructorAutoValue.Builder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.De...|__java_lang_String (ref.func $$getString_|autovalue.De...|__java_lang_String@autovalue.DefaultConstructorAutoValue.Builder) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@autovalue.DefaultConstructorAutoValue.Builder))
    )
   )
+  (global.set $$class@autovalue.DefaultConstructorAutoValue.Builder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.De...|__java_lang_String_<once>_@autovalue.DefaultConstructorAutoValue.Builder )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@autovalue.DefaultConstructorAutoValue.Builder))
  )
 )
 
 ;;; String Builder.$getString_|autovalue.De...|()
-(func $$getString_|autovalue.De...|__java_lang_String@autovalue.DefaultConstructorAutoValue.Builder
+(func $$getString_|autovalue.De...|__java_lang_String_<once>_@autovalue.DefaultConstructorAutoValue.Builder
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.De...|@autovalue.DefaultConstructorAutoValue.Builder))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.De...|@autovalue.DefaultConstructorAutoValue.Builder)))
    (then
-    (global.set $$string_|autovalue.De...|@autovalue.DefaultConstructorAutoValue.Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.DefaultConstructorAutoValue$Builder")))
+    (return (global.get $$string_|autovalue.De...|@autovalue.DefaultConstructorAutoValue.Builder))
    )
   )
+  (global.set $$string_|autovalue.De...|@autovalue.DefaultConstructorAutoValue.Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.DefaultConstructorAutoValue$Builder")))
   (return (global.get $$string_|autovalue.De...|@autovalue.DefaultConstructorAutoValue.Builder))
  )
 )
@@ -2098,27 +2117,29 @@
 )
 
 ;;; Class<T> DefaultNonEmptyConstructorAutoValue.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.DefaultNonEmptyConstructorAutoValue
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.DefaultNonEmptyConstructorAutoValue
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.DefaultNonEmptyConstructorAutoValue))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.DefaultNonEmptyConstructorAutoValue)))
    (then
-    (global.set $$class@autovalue.DefaultNonEmptyConstructorAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.De...|__java_lang_String (ref.func $$getString_|autovalue.De...|__java_lang_String@autovalue.DefaultNonEmptyConstructorAutoValue) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@autovalue.DefaultNonEmptyConstructorAutoValue))
    )
   )
+  (global.set $$class@autovalue.DefaultNonEmptyConstructorAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.De...|__java_lang_String_<once>_@autovalue.DefaultNonEmptyConstructorAutoValue )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@autovalue.DefaultNonEmptyConstructorAutoValue))
  )
 )
 
 ;;; String DefaultNonEmptyConstructorAutoValue.$getString_|autovalue.De...|()
-(func $$getString_|autovalue.De...|__java_lang_String@autovalue.DefaultNonEmptyConstructorAutoValue
+(func $$getString_|autovalue.De...|__java_lang_String_<once>_@autovalue.DefaultNonEmptyConstructorAutoValue
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.De...|@autovalue.DefaultNonEmptyConstructorAutoValue))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.De...|@autovalue.DefaultNonEmptyConstructorAutoValue)))
    (then
-    (global.set $$string_|autovalue.De...|@autovalue.DefaultNonEmptyConstructorAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.DefaultNonEmptyConstructorAutoValue")))
+    (return (global.get $$string_|autovalue.De...|@autovalue.DefaultNonEmptyConstructorAutoValue))
    )
   )
+  (global.set $$string_|autovalue.De...|@autovalue.DefaultNonEmptyConstructorAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.DefaultNonEmptyConstructorAutoValue")))
   (return (global.get $$string_|autovalue.De...|@autovalue.DefaultNonEmptyConstructorAutoValue))
  )
 )
@@ -2156,27 +2177,29 @@
 )
 
 ;;; Class<T> Builder.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.DefaultNonEmptyConstructorAutoValue.Builder
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.DefaultNonEmptyConstructorAutoValue.Builder
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.DefaultNonEmptyConstructorAutoValue.Builder))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.DefaultNonEmptyConstructorAutoValue.Builder)))
    (then
-    (global.set $$class@autovalue.DefaultNonEmptyConstructorAutoValue.Builder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.De...|__java_lang_String (ref.func $$getString_|autovalue.De...|__java_lang_String@autovalue.DefaultNonEmptyConstructorAutoValue.Builder) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@autovalue.DefaultNonEmptyConstructorAutoValue.Builder))
    )
   )
+  (global.set $$class@autovalue.DefaultNonEmptyConstructorAutoValue.Builder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.De...|__java_lang_String_<once>_@autovalue.DefaultNonEmptyConstructorAutoValue.Builder )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@autovalue.DefaultNonEmptyConstructorAutoValue.Builder))
  )
 )
 
 ;;; String Builder.$getString_|autovalue.De...|()
-(func $$getString_|autovalue.De...|__java_lang_String@autovalue.DefaultNonEmptyConstructorAutoValue.Builder
+(func $$getString_|autovalue.De...|__java_lang_String_<once>_@autovalue.DefaultNonEmptyConstructorAutoValue.Builder
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.De...|@autovalue.DefaultNonEmptyConstructorAutoValue.Builder))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.De...|@autovalue.DefaultNonEmptyConstructorAutoValue.Builder)))
    (then
-    (global.set $$string_|autovalue.De...|@autovalue.DefaultNonEmptyConstructorAutoValue.Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.DefaultNonEmptyConstructorAutoValue$Builder")))
+    (return (global.get $$string_|autovalue.De...|@autovalue.DefaultNonEmptyConstructorAutoValue.Builder))
    )
   )
+  (global.set $$string_|autovalue.De...|@autovalue.DefaultNonEmptyConstructorAutoValue.Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.DefaultNonEmptyConstructorAutoValue$Builder")))
   (return (global.get $$string_|autovalue.De...|@autovalue.DefaultNonEmptyConstructorAutoValue.Builder))
  )
 )
@@ -2212,27 +2235,29 @@
 )
 
 ;;; Class<T> EmptyAutoValue.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.EmptyAutoValue
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.EmptyAutoValue
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.EmptyAutoValue))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.EmptyAutoValue)))
    (then
-    (global.set $$class@autovalue.EmptyAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Em...|__java_lang_String (ref.func $$getString_|autovalue.Em...|__java_lang_String@autovalue.EmptyAutoValue) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@autovalue.EmptyAutoValue))
    )
   )
+  (global.set $$class@autovalue.EmptyAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Em...|__java_lang_String_<once>_@autovalue.EmptyAutoValue )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@autovalue.EmptyAutoValue))
  )
 )
 
 ;;; String EmptyAutoValue.$getString_|autovalue.Em...|()
-(func $$getString_|autovalue.Em...|__java_lang_String@autovalue.EmptyAutoValue
+(func $$getString_|autovalue.Em...|__java_lang_String_<once>_@autovalue.EmptyAutoValue
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.Em...|@autovalue.EmptyAutoValue))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Em...|@autovalue.EmptyAutoValue)))
    (then
-    (global.set $$string_|autovalue.Em...|@autovalue.EmptyAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.EmptyAutoValue")))
+    (return (global.get $$string_|autovalue.Em...|@autovalue.EmptyAutoValue))
    )
   )
+  (global.set $$string_|autovalue.Em...|@autovalue.EmptyAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.EmptyAutoValue")))
   (return (global.get $$string_|autovalue.Em...|@autovalue.EmptyAutoValue))
  )
 )
@@ -2268,27 +2293,29 @@
 )
 
 ;;; Class<T> Builder.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.EmptyAutoValue.Builder
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.EmptyAutoValue.Builder
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.EmptyAutoValue.Builder))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.EmptyAutoValue.Builder)))
    (then
-    (global.set $$class@autovalue.EmptyAutoValue.Builder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Em...|__java_lang_String (ref.func $$getString_|autovalue.Em...|__java_lang_String@autovalue.EmptyAutoValue.Builder) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@autovalue.EmptyAutoValue.Builder))
    )
   )
+  (global.set $$class@autovalue.EmptyAutoValue.Builder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Em...|__java_lang_String_<once>_@autovalue.EmptyAutoValue.Builder )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@autovalue.EmptyAutoValue.Builder))
  )
 )
 
 ;;; String Builder.$getString_|autovalue.Em...|()
-(func $$getString_|autovalue.Em...|__java_lang_String@autovalue.EmptyAutoValue.Builder
+(func $$getString_|autovalue.Em...|__java_lang_String_<once>_@autovalue.EmptyAutoValue.Builder
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.Em...|@autovalue.EmptyAutoValue.Builder))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Em...|@autovalue.EmptyAutoValue.Builder)))
    (then
-    (global.set $$string_|autovalue.Em...|@autovalue.EmptyAutoValue.Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.EmptyAutoValue$Builder")))
+    (return (global.get $$string_|autovalue.Em...|@autovalue.EmptyAutoValue.Builder))
    )
   )
+  (global.set $$string_|autovalue.Em...|@autovalue.EmptyAutoValue.Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.EmptyAutoValue$Builder")))
   (return (global.get $$string_|autovalue.Em...|@autovalue.EmptyAutoValue.Builder))
  )
 )
@@ -2313,7 +2340,7 @@
   ;;@ autovalue/SimpleAutoValue.java:42:34
   (call $$clinit__void_<once>_@autovalue.SimpleAutoValue )
   ;;@ autovalue/SimpleAutoValue.java:43:4
-  (return (call $$create__int__boolean__java_lang_String__java_lang_Double__java_lang_Double__arrayOf_int@autovalue.AutoValue_SimpleAutoValue (i32.const 42)(i32.const 1)(call $function.no.side.effects.$getString_|text|__java_lang_String (ref.func $$getString_|text|__java_lang_String@autovalue.AutoValueWithExtensions) )(call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 43.0))(call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 44.0))(call $m_newWithLiteral__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@autovalue.SimpleAutoValue-1 (i32.const 0) (i32.const 1)))))
+  (return (call $$create__int__boolean__java_lang_String__java_lang_Double__java_lang_Double__arrayOf_int@autovalue.AutoValue_SimpleAutoValue (i32.const 42)(i32.const 1)(call $$getString_|text|__java_lang_String_<once>_@autovalue.AutoValueWithExtensions )(call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 43.0))(call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 44.0))(call $m_newWithLiteral__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@autovalue.SimpleAutoValue-1 (i32.const 0) (i32.const 1)))))
  )
 )
 
@@ -2349,27 +2376,29 @@
 )
 
 ;;; Class<T> SimpleAutoValue.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.SimpleAutoValue
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.SimpleAutoValue
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.SimpleAutoValue))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.SimpleAutoValue)))
    (then
-    (global.set $$class@autovalue.SimpleAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Si...|__java_lang_String (ref.func $$getString_|autovalue.Si...|__java_lang_String@autovalue.SimpleAutoValue) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@autovalue.SimpleAutoValue))
    )
   )
+  (global.set $$class@autovalue.SimpleAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Si...|__java_lang_String_<once>_@autovalue.SimpleAutoValue )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@autovalue.SimpleAutoValue))
  )
 )
 
 ;;; String SimpleAutoValue.$getString_|autovalue.Si...|()
-(func $$getString_|autovalue.Si...|__java_lang_String@autovalue.SimpleAutoValue
+(func $$getString_|autovalue.Si...|__java_lang_String_<once>_@autovalue.SimpleAutoValue
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.Si...|@autovalue.SimpleAutoValue))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Si...|@autovalue.SimpleAutoValue)))
    (then
-    (global.set $$string_|autovalue.Si...|@autovalue.SimpleAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.SimpleAutoValue")))
+    (return (global.get $$string_|autovalue.Si...|@autovalue.SimpleAutoValue))
    )
   )
+  (global.set $$string_|autovalue.Si...|@autovalue.SimpleAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.SimpleAutoValue")))
   (return (global.get $$string_|autovalue.Si...|@autovalue.SimpleAutoValue))
  )
 )
@@ -2437,11 +2466,11 @@
   ;;@ autovalue/$$AutoValue_AutoValueWithExtensions.java:34:4
   (return (block (result (ref null $java.lang.String))
    (local.set $$stringBuilder (call $$create__@java.lang.StringBuilder ))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|_|__java_lang_String (ref.func $$getString_|_|__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|_|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref $function.m_append__int__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(struct.get $autovalue.$$AutoValue_AutoValueWithExtensions $intField@autovalue.$$AutoValue_AutoValueWithExtensions (local.get $this))(struct.get $java.lang.StringBuilder.vtable $m_append__int__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|__|__java_lang_String (ref.func $$getString_|__|__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|__|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(struct.get $autovalue.$$AutoValue_AutoValueWithExtensions $stringField@autovalue.$$AutoValue_AutoValueWithExtensions (local.get $this))(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|_|_1__java_lang_String (ref.func $$getString_|_|_1__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|_|_1__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))
   ))
  )
@@ -2530,66 +2559,71 @@
 )
 
 ;;; Class<T> $$AutoValue_AutoValueWithExtensions.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.$$AutoValue_AutoValueWithExtensions
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.$$AutoValue_AutoValueWithExtensions))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.$$AutoValue_AutoValueWithExtensions)))
    (then
-    (global.set $$class@autovalue.$$AutoValue_AutoValueWithExtensions (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.__...|__java_lang_String (ref.func $$getString_|autovalue.__...|__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValueWithExtensions) )))
+    (return (global.get $$class@autovalue.$$AutoValue_AutoValueWithExtensions))
    )
   )
+  (global.set $$class@autovalue.$$AutoValue_AutoValueWithExtensions (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.__...|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(call $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValueWithExtensions )))
   (return (global.get $$class@autovalue.$$AutoValue_AutoValueWithExtensions))
  )
 )
 
 ;;; String $$AutoValue_AutoValueWithExtensions.$getString_|_|()
-(func $$getString_|_|__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions
+(func $$getString_|_|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|_|@autovalue.$$AutoValue_AutoValueWithExtensions))
+  (if (i32.eqz (ref.is_null (global.get $$string_|_|@autovalue.$$AutoValue_AutoValueWithExtensions)))
    (then
-    (global.set $$string_|_|@autovalue.$$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "{")))
+    (return (global.get $$string_|_|@autovalue.$$AutoValue_AutoValueWithExtensions))
    )
   )
+  (global.set $$string_|_|@autovalue.$$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "{")))
   (return (global.get $$string_|_|@autovalue.$$AutoValue_AutoValueWithExtensions))
  )
 )
 
 ;;; String $$AutoValue_AutoValueWithExtensions.$getString_|__|()
-(func $$getString_|__|__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions
+(func $$getString_|__|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|__|@autovalue.$$AutoValue_AutoValueWithExtensions))
+  (if (i32.eqz (ref.is_null (global.get $$string_|__|@autovalue.$$AutoValue_AutoValueWithExtensions)))
    (then
-    (global.set $$string_|__|@autovalue.$$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const ", ")))
+    (return (global.get $$string_|__|@autovalue.$$AutoValue_AutoValueWithExtensions))
    )
   )
+  (global.set $$string_|__|@autovalue.$$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const ", ")))
   (return (global.get $$string_|__|@autovalue.$$AutoValue_AutoValueWithExtensions))
  )
 )
 
 ;;; String $$AutoValue_AutoValueWithExtensions.$getString_|_|_1()
-(func $$getString_|_|_1__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions
+(func $$getString_|_|_1__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|_|_1@autovalue.$$AutoValue_AutoValueWithExtensions))
+  (if (i32.eqz (ref.is_null (global.get $$string_|_|_1@autovalue.$$AutoValue_AutoValueWithExtensions)))
    (then
-    (global.set $$string_|_|_1@autovalue.$$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "}")))
+    (return (global.get $$string_|_|_1@autovalue.$$AutoValue_AutoValueWithExtensions))
    )
   )
+  (global.set $$string_|_|_1@autovalue.$$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "}")))
   (return (global.get $$string_|_|_1@autovalue.$$AutoValue_AutoValueWithExtensions))
  )
 )
 
 ;;; String $$AutoValue_AutoValueWithExtensions.$getString_|autovalue.__...|()
-(func $$getString_|autovalue.__...|__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions
+(func $$getString_|autovalue.__...|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.__...|@autovalue.$$AutoValue_AutoValueWithExtensions))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.__...|@autovalue.$$AutoValue_AutoValueWithExtensions)))
    (then
-    (global.set $$string_|autovalue.__...|@autovalue.$$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.$$AutoValue_AutoValueWithExtensions")))
+    (return (global.get $$string_|autovalue.__...|@autovalue.$$AutoValue_AutoValueWithExtensions))
    )
   )
+  (global.set $$string_|autovalue.__...|@autovalue.$$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.$$AutoValue_AutoValueWithExtensions")))
   (return (global.get $$string_|autovalue.__...|@autovalue.$$AutoValue_AutoValueWithExtensions))
  )
 )
@@ -2674,11 +2708,11 @@
   ;;@ autovalue/AutoValue_AutoValueJsType.java:34:4
   (return (block (result (ref null $java.lang.String))
    (local.set $$stringBuilder (call $$create__@java.lang.StringBuilder ))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|_|__java_lang_String (ref.func $$getString_|_|__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|_|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref $function.m_append__int__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(struct.get $autovalue.AutoValue_AutoValueJsType $field@autovalue.AutoValue_AutoValueJsType (local.get $this))(struct.get $java.lang.StringBuilder.vtable $m_append__int__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|__|__java_lang_String (ref.func $$getString_|__|__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|__|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref $function.m_append__int__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(struct.get $autovalue.AutoValue_AutoValueJsType $withJsMethod@autovalue.AutoValue_AutoValueJsType (local.get $this))(struct.get $java.lang.StringBuilder.vtable $m_append__int__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|_|_1__java_lang_String (ref.func $$getString_|_|_1__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|_|_1__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))
   ))
  )
@@ -2767,14 +2801,15 @@
 )
 
 ;;; Class<T> AutoValue_AutoValueJsType.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_AutoValueJsType
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_AutoValueJsType
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.AutoValue_AutoValueJsType))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.AutoValue_AutoValueJsType)))
    (then
-    (global.set $$class@autovalue.AutoValue_AutoValueJsType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_AutoValueJsType) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValueJsType) )))
+    (return (global.get $$class@autovalue.AutoValue_AutoValueJsType))
    )
   )
+  (global.set $$class@autovalue.AutoValue_AutoValueJsType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_AutoValueJsType )(call $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValueJsType )))
   (return (global.get $$class@autovalue.AutoValue_AutoValueJsType))
  )
 )
@@ -2787,20 +2822,21 @@
  (local $this (ref null $autovalue.AutoValue_AutoValueJsType))
  (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueJsType) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_AutoValueJsType) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_AutoValueJsType ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_AutoValueJsType)
 
 ;;; String AutoValue_AutoValueJsType.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_AutoValueJsType
+(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_AutoValueJsType
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueJsType))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueJsType)))
    (then
-    (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueJsType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_AutoValueJsType")))
+    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueJsType))
    )
   )
+  (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueJsType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_AutoValueJsType")))
   (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueJsType))
  )
 )
@@ -2885,11 +2921,11 @@
   ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:33:4
   (return (block (result (ref null $java.lang.String))
    (local.set $$stringBuilder (call $$create__@java.lang.StringBuilder ))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|_|__java_lang_String (ref.func $$getString_|_|__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|_|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref $function.m_append__boolean__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(struct.get_s $autovalue.AutoValue_AutoValueWithBuilder $booleanField@autovalue.AutoValue_AutoValueWithBuilder (local.get $this))(struct.get $java.lang.StringBuilder.vtable $m_append__boolean__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|__|__java_lang_String (ref.func $$getString_|__|__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|__|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref $function.m_append__java_lang_Object__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(struct.get $autovalue.AutoValue_AutoValueWithBuilder $nullableField@autovalue.AutoValue_AutoValueWithBuilder (local.get $this))(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_Object__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|_|_1__java_lang_String (ref.func $$getString_|_|_1__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|_|_1__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))
   ))
  )
@@ -2993,14 +3029,15 @@
 )
 
 ;;; Class<T> AutoValue_AutoValueWithBuilder.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_AutoValueWithBuilder
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_AutoValueWithBuilder
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.AutoValue_AutoValueWithBuilder))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.AutoValue_AutoValueWithBuilder)))
    (then
-    (global.set $$class@autovalue.AutoValue_AutoValueWithBuilder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_AutoValueWithBuilder) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValueWithBuilder) )))
+    (return (global.get $$class@autovalue.AutoValue_AutoValueWithBuilder))
    )
   )
+  (global.set $$class@autovalue.AutoValue_AutoValueWithBuilder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_AutoValueWithBuilder )(call $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValueWithBuilder )))
   (return (global.get $$class@autovalue.AutoValue_AutoValueWithBuilder))
  )
 )
@@ -3013,20 +3050,21 @@
  (local $this (ref null $autovalue.AutoValue_AutoValueWithBuilder))
  (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueWithBuilder) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_AutoValueWithBuilder) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_AutoValueWithBuilder ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_AutoValueWithBuilder)
 
 ;;; String AutoValue_AutoValueWithBuilder.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_AutoValueWithBuilder
+(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_AutoValueWithBuilder
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithBuilder))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithBuilder)))
    (then
-    (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithBuilder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_AutoValueWithBuilder")))
+    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithBuilder))
    )
   )
+  (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithBuilder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_AutoValueWithBuilder")))
   (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithBuilder))
  )
 )
@@ -3177,14 +3215,15 @@
 )
 
 ;;; Class<T> Builder.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_AutoValueWithBuilder.Builder
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_AutoValueWithBuilder.Builder
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.AutoValue_AutoValueWithBuilder.Builder))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.AutoValue_AutoValueWithBuilder.Builder)))
    (then
-    (global.set $$class@autovalue.AutoValue_AutoValueWithBuilder.Builder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_AutoValueWithBuilder.Builder) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValueWithBuilder.Builder) )))
+    (return (global.get $$class@autovalue.AutoValue_AutoValueWithBuilder.Builder))
    )
   )
+  (global.set $$class@autovalue.AutoValue_AutoValueWithBuilder.Builder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_AutoValueWithBuilder.Builder )(call $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValueWithBuilder.Builder )))
   (return (global.get $$class@autovalue.AutoValue_AutoValueWithBuilder.Builder))
  )
 )
@@ -3197,20 +3236,21 @@
  (local $this (ref null $autovalue.AutoValue_AutoValueWithBuilder.Builder))
  (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueWithBuilder.Builder) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_AutoValueWithBuilder.Builder) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_AutoValueWithBuilder.Builder ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_AutoValueWithBuilder.Builder)
 
 ;;; String Builder.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_AutoValueWithBuilder.Builder
+(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_AutoValueWithBuilder.Builder
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithBuilder.Builder))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithBuilder.Builder)))
    (then
-    (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithBuilder.Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_AutoValueWithBuilder$Builder")))
+    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithBuilder.Builder))
    )
   )
+  (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithBuilder.Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_AutoValueWithBuilder$Builder")))
   (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithBuilder.Builder))
  )
 )
@@ -3276,9 +3316,9 @@
   ;;@ autovalue/AutoValue_AutoValueWithGenerics.java:23:4
   (return (block (result (ref null $java.lang.String))
    (local.set $$stringBuilder (call $$create__@java.lang.StringBuilder ))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|_|__java_lang_String (ref.func $$getString_|_|__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|_|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref $function.m_append__boolean__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(struct.get_s $autovalue.AutoValue_AutoValueWithGenerics $booleanField@autovalue.AutoValue_AutoValueWithGenerics (local.get $this))(struct.get $java.lang.StringBuilder.vtable $m_append__boolean__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|_|_1__java_lang_String (ref.func $$getString_|_|_1__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|_|_1__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))
   ))
  )
@@ -3363,14 +3403,15 @@
 )
 
 ;;; Class<T> AutoValue_AutoValueWithGenerics.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_AutoValueWithGenerics
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_AutoValueWithGenerics
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.AutoValue_AutoValueWithGenerics))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.AutoValue_AutoValueWithGenerics)))
    (then
-    (global.set $$class@autovalue.AutoValue_AutoValueWithGenerics (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_AutoValueWithGenerics) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValueWithGenerics) )))
+    (return (global.get $$class@autovalue.AutoValue_AutoValueWithGenerics))
    )
   )
+  (global.set $$class@autovalue.AutoValue_AutoValueWithGenerics (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_AutoValueWithGenerics )(call $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValueWithGenerics )))
   (return (global.get $$class@autovalue.AutoValue_AutoValueWithGenerics))
  )
 )
@@ -3383,20 +3424,21 @@
  (local $this (ref null $autovalue.AutoValue_AutoValueWithGenerics))
  (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueWithGenerics) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_AutoValueWithGenerics) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_AutoValueWithGenerics ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_AutoValueWithGenerics)
 
 ;;; String AutoValue_AutoValueWithGenerics.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_AutoValueWithGenerics
+(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_AutoValueWithGenerics
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithGenerics))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithGenerics)))
    (then
-    (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithGenerics (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_AutoValueWithGenerics")))
+    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithGenerics))
    )
   )
+  (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithGenerics (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_AutoValueWithGenerics")))
   (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithGenerics))
  )
 )
@@ -3462,9 +3504,9 @@
   ;;@ autovalue/AutoValue_DefaultConstructorAutoValue.java:23:4
   (return (block (result (ref null $java.lang.String))
    (local.set $$stringBuilder (call $$create__@java.lang.StringBuilder ))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|_|__java_lang_String (ref.func $$getString_|_|__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|_|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref $function.m_append__boolean__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(struct.get_s $autovalue.AutoValue_DefaultConstructorAutoValue $booleanField@autovalue.AutoValue_DefaultConstructorAutoValue (local.get $this))(struct.get $java.lang.StringBuilder.vtable $m_append__boolean__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|_|_1__java_lang_String (ref.func $$getString_|_|_1__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|_|_1__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))
   ))
  )
@@ -3549,14 +3591,15 @@
 )
 
 ;;; Class<T> AutoValue_DefaultConstructorAutoValue.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_DefaultConstructorAutoValue
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_DefaultConstructorAutoValue
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.AutoValue_DefaultConstructorAutoValue))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.AutoValue_DefaultConstructorAutoValue)))
    (then
-    (global.set $$class@autovalue.AutoValue_DefaultConstructorAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_DefaultConstructorAutoValue) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.DefaultConstructorAutoValue) )))
+    (return (global.get $$class@autovalue.AutoValue_DefaultConstructorAutoValue))
    )
   )
+  (global.set $$class@autovalue.AutoValue_DefaultConstructorAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_DefaultConstructorAutoValue )(call $$getClassMetadata__java_lang_Class_<once>_@autovalue.DefaultConstructorAutoValue )))
   (return (global.get $$class@autovalue.AutoValue_DefaultConstructorAutoValue))
  )
 )
@@ -3569,20 +3612,21 @@
  (local $this (ref null $autovalue.AutoValue_DefaultConstructorAutoValue))
  (local.set $this (ref.cast (ref $autovalue.AutoValue_DefaultConstructorAutoValue) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_DefaultConstructorAutoValue) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_DefaultConstructorAutoValue ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_DefaultConstructorAutoValue)
 
 ;;; String AutoValue_DefaultConstructorAutoValue.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_DefaultConstructorAutoValue
+(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_DefaultConstructorAutoValue
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultConstructorAutoValue))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultConstructorAutoValue)))
    (then
-    (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultConstructorAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_DefaultConstructorAutoValue")))
+    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultConstructorAutoValue))
    )
   )
+  (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultConstructorAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_DefaultConstructorAutoValue")))
   (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultConstructorAutoValue))
  )
 )
@@ -3680,14 +3724,15 @@
 )
 
 ;;; Class<T> Builder.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_DefaultConstructorAutoValue.Builder
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_DefaultConstructorAutoValue.Builder
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.AutoValue_DefaultConstructorAutoValue.Builder))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.AutoValue_DefaultConstructorAutoValue.Builder)))
    (then
-    (global.set $$class@autovalue.AutoValue_DefaultConstructorAutoValue.Builder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_DefaultConstructorAutoValue.Builder) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.DefaultConstructorAutoValue.Builder) )))
+    (return (global.get $$class@autovalue.AutoValue_DefaultConstructorAutoValue.Builder))
    )
   )
+  (global.set $$class@autovalue.AutoValue_DefaultConstructorAutoValue.Builder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_DefaultConstructorAutoValue.Builder )(call $$getClassMetadata__java_lang_Class_<once>_@autovalue.DefaultConstructorAutoValue.Builder )))
   (return (global.get $$class@autovalue.AutoValue_DefaultConstructorAutoValue.Builder))
  )
 )
@@ -3700,20 +3745,21 @@
  (local $this (ref null $autovalue.AutoValue_DefaultConstructorAutoValue.Builder))
  (local.set $this (ref.cast (ref $autovalue.AutoValue_DefaultConstructorAutoValue.Builder) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_DefaultConstructorAutoValue.Builder) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_DefaultConstructorAutoValue.Builder ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_DefaultConstructorAutoValue.Builder)
 
 ;;; String Builder.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_DefaultConstructorAutoValue.Builder
+(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_DefaultConstructorAutoValue.Builder
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultConstructorAutoValue.Builder))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultConstructorAutoValue.Builder)))
    (then
-    (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultConstructorAutoValue.Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_DefaultConstructorAutoValue$Builder")))
+    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultConstructorAutoValue.Builder))
    )
   )
+  (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultConstructorAutoValue.Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_DefaultConstructorAutoValue$Builder")))
   (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultConstructorAutoValue.Builder))
  )
 )
@@ -3779,9 +3825,9 @@
   ;;@ autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:23:4
   (return (block (result (ref null $java.lang.String))
    (local.set $$stringBuilder (call $$create__@java.lang.StringBuilder ))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|_|__java_lang_String (ref.func $$getString_|_|__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|_|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref $function.m_append__boolean__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(struct.get_s $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue $booleanField@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue (local.get $this))(struct.get $java.lang.StringBuilder.vtable $m_append__boolean__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|_|_1__java_lang_String (ref.func $$getString_|_|_1__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|_|_1__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))
   ))
  )
@@ -3866,14 +3912,15 @@
 )
 
 ;;; Class<T> AutoValue_DefaultNonEmptyConstructorAutoValue.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue)))
    (then
-    (global.set $$class@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.DefaultNonEmptyConstructorAutoValue) )))
+    (return (global.get $$class@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue))
    )
   )
+  (global.set $$class@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue )(call $$getClassMetadata__java_lang_Class_<once>_@autovalue.DefaultNonEmptyConstructorAutoValue )))
   (return (global.get $$class@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue))
  )
 )
@@ -3886,20 +3933,21 @@
  (local $this (ref null $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue))
  (local.set $this (ref.cast (ref $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue)
 
 ;;; String AutoValue_DefaultNonEmptyConstructorAutoValue.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue
+(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue)))
    (then
-    (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue")))
+    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue))
    )
   )
+  (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue")))
   (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue))
  )
 )
@@ -3997,14 +4045,15 @@
 )
 
 ;;; Class<T> Builder.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder)))
    (then
-    (global.set $$class@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.DefaultNonEmptyConstructorAutoValue.Builder) )))
+    (return (global.get $$class@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder))
    )
   )
+  (global.set $$class@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder )(call $$getClassMetadata__java_lang_Class_<once>_@autovalue.DefaultNonEmptyConstructorAutoValue.Builder )))
   (return (global.get $$class@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder))
  )
 )
@@ -4017,20 +4066,21 @@
  (local $this (ref null $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder))
  (local.set $this (ref.cast (ref $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder)
 
 ;;; String Builder.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder
+(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder)))
    (then
-    (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue$Builder")))
+    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder))
    )
   )
+  (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue$Builder")))
   (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder))
  )
 )
@@ -4074,7 +4124,7 @@
  (local.set $this (ref.cast (ref $autovalue.AutoValue_EmptyAutoValue) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValue_EmptyAutoValue.java:14:4
-  (return (call $function.no.side.effects.$getString_|__|__java_lang_String (ref.func $$getString_|__|__java_lang_String@autovalue.AutoValue_EmptyAutoValue) ))
+  (return (call $$getString_|__|__java_lang_String_<once>_@autovalue.AutoValue_EmptyAutoValue ))
  )
 )
 (elem declare func $m_toString__java_lang_String@autovalue.AutoValue_EmptyAutoValue)
@@ -4150,14 +4200,15 @@
 )
 
 ;;; Class<T> AutoValue_EmptyAutoValue.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_EmptyAutoValue
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_EmptyAutoValue
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.AutoValue_EmptyAutoValue))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.AutoValue_EmptyAutoValue)))
    (then
-    (global.set $$class@autovalue.AutoValue_EmptyAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_EmptyAutoValue) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.EmptyAutoValue) )))
+    (return (global.get $$class@autovalue.AutoValue_EmptyAutoValue))
    )
   )
+  (global.set $$class@autovalue.AutoValue_EmptyAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_EmptyAutoValue )(call $$getClassMetadata__java_lang_Class_<once>_@autovalue.EmptyAutoValue )))
   (return (global.get $$class@autovalue.AutoValue_EmptyAutoValue))
  )
 )
@@ -4170,33 +4221,35 @@
  (local $this (ref null $autovalue.AutoValue_EmptyAutoValue))
  (local.set $this (ref.cast (ref $autovalue.AutoValue_EmptyAutoValue) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_EmptyAutoValue) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_EmptyAutoValue ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_EmptyAutoValue)
 
 ;;; String AutoValue_EmptyAutoValue.$getString_|__|()
-(func $$getString_|__|__java_lang_String@autovalue.AutoValue_EmptyAutoValue
+(func $$getString_|__|__java_lang_String_<once>_@autovalue.AutoValue_EmptyAutoValue
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|__|@autovalue.AutoValue_EmptyAutoValue))
+  (if (i32.eqz (ref.is_null (global.get $$string_|__|@autovalue.AutoValue_EmptyAutoValue)))
    (then
-    (global.set $$string_|__|@autovalue.AutoValue_EmptyAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "{}")))
+    (return (global.get $$string_|__|@autovalue.AutoValue_EmptyAutoValue))
    )
   )
+  (global.set $$string_|__|@autovalue.AutoValue_EmptyAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "{}")))
   (return (global.get $$string_|__|@autovalue.AutoValue_EmptyAutoValue))
  )
 )
 
 ;;; String AutoValue_EmptyAutoValue.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_EmptyAutoValue
+(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_EmptyAutoValue
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_EmptyAutoValue))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_EmptyAutoValue)))
    (then
-    (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_EmptyAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_EmptyAutoValue")))
+    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_EmptyAutoValue))
    )
   )
+  (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_EmptyAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_EmptyAutoValue")))
   (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_EmptyAutoValue))
  )
 )
@@ -4264,14 +4317,15 @@
 )
 
 ;;; Class<T> Builder.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_EmptyAutoValue.Builder
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_EmptyAutoValue.Builder
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.AutoValue_EmptyAutoValue.Builder))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.AutoValue_EmptyAutoValue.Builder)))
    (then
-    (global.set $$class@autovalue.AutoValue_EmptyAutoValue.Builder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_EmptyAutoValue.Builder) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.EmptyAutoValue.Builder) )))
+    (return (global.get $$class@autovalue.AutoValue_EmptyAutoValue.Builder))
    )
   )
+  (global.set $$class@autovalue.AutoValue_EmptyAutoValue.Builder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_EmptyAutoValue.Builder )(call $$getClassMetadata__java_lang_Class_<once>_@autovalue.EmptyAutoValue.Builder )))
   (return (global.get $$class@autovalue.AutoValue_EmptyAutoValue.Builder))
  )
 )
@@ -4284,20 +4338,21 @@
  (local $this (ref null $autovalue.AutoValue_EmptyAutoValue.Builder))
  (local.set $this (ref.cast (ref $autovalue.AutoValue_EmptyAutoValue.Builder) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_EmptyAutoValue.Builder) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_EmptyAutoValue.Builder ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_EmptyAutoValue.Builder)
 
 ;;; String Builder.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_EmptyAutoValue.Builder
+(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_EmptyAutoValue.Builder
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_EmptyAutoValue.Builder))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_EmptyAutoValue.Builder)))
    (then
-    (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_EmptyAutoValue.Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_EmptyAutoValue$Builder")))
+    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_EmptyAutoValue.Builder))
    )
   )
+  (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_EmptyAutoValue.Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_EmptyAutoValue$Builder")))
   (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_EmptyAutoValue.Builder))
  )
 )
@@ -4464,19 +4519,19 @@
   ;;@ autovalue/AutoValue_SimpleAutoValue.java:74:4
   (return (block (result (ref null $java.lang.String))
    (local.set $$stringBuilder (call $$create__@java.lang.StringBuilder ))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|_|__java_lang_String (ref.func $$getString_|_|__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|_|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref $function.m_append__int__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(struct.get $autovalue.AutoValue_SimpleAutoValue $intField@autovalue.AutoValue_SimpleAutoValue (local.get $this))(struct.get $java.lang.StringBuilder.vtable $m_append__int__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|__|__java_lang_String (ref.func $$getString_|__|__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|__|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref $function.m_append__boolean__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(struct.get_s $autovalue.AutoValue_SimpleAutoValue $booleanField@autovalue.AutoValue_SimpleAutoValue (local.get $this))(struct.get $java.lang.StringBuilder.vtable $m_append__boolean__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|__|__java_lang_String (ref.func $$getString_|__|__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|__|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(struct.get $autovalue.AutoValue_SimpleAutoValue $stringField@autovalue.AutoValue_SimpleAutoValue (local.get $this))(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|__|__java_lang_String (ref.func $$getString_|__|__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|__|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref $function.m_append__java_lang_Object__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(struct.get $autovalue.AutoValue_SimpleAutoValue $doubleField@autovalue.AutoValue_SimpleAutoValue (local.get $this))(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_Object__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|__|__java_lang_String (ref.func $$getString_|__|__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|__|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref $function.m_append__java_lang_Object__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(struct.get $autovalue.AutoValue_SimpleAutoValue $nullableField@autovalue.AutoValue_SimpleAutoValue (local.get $this))(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_Object__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|__|__java_lang_String (ref.func $$getString_|__|__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|__|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $m_toString__arrayOf_int__java_lang_String@java.util.Arrays (struct.get $autovalue.AutoValue_SimpleAutoValue $arrayField@autovalue.AutoValue_SimpleAutoValue (local.get $this)))(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|_|_1__java_lang_String (ref.func $$getString_|_|_1__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|_|_1__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))
   ))
  )
@@ -4581,14 +4636,15 @@
 )
 
 ;;; Class<T> AutoValue_SimpleAutoValue.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_SimpleAutoValue
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_SimpleAutoValue
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.AutoValue_SimpleAutoValue))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.AutoValue_SimpleAutoValue)))
    (then
-    (global.set $$class@autovalue.AutoValue_SimpleAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_SimpleAutoValue) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.SimpleAutoValue) )))
+    (return (global.get $$class@autovalue.AutoValue_SimpleAutoValue))
    )
   )
+  (global.set $$class@autovalue.AutoValue_SimpleAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_SimpleAutoValue )(call $$getClassMetadata__java_lang_Class_<once>_@autovalue.SimpleAutoValue )))
   (return (global.get $$class@autovalue.AutoValue_SimpleAutoValue))
  )
 )
@@ -4601,20 +4657,21 @@
  (local $this (ref null $autovalue.AutoValue_SimpleAutoValue))
  (local.set $this (ref.cast (ref $autovalue.AutoValue_SimpleAutoValue) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_SimpleAutoValue) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_SimpleAutoValue ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_SimpleAutoValue)
 
 ;;; String AutoValue_SimpleAutoValue.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_SimpleAutoValue
+(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_SimpleAutoValue
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_SimpleAutoValue))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_SimpleAutoValue)))
    (then
-    (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_SimpleAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_SimpleAutoValue")))
+    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_SimpleAutoValue))
    )
   )
+  (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_SimpleAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_SimpleAutoValue")))
   (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_SimpleAutoValue))
  )
 )
@@ -4665,27 +4722,29 @@
 )
 
 ;;; Class<T> AutoValueWithFields.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.AutoValueWithFields
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValueWithFields
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.AutoValueWithFields))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.AutoValueWithFields)))
    (then
-    (global.set $$class@autovalue.AutoValueWithFields (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValueWithFields) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.Parent) )))
+    (return (global.get $$class@autovalue.AutoValueWithFields))
    )
   )
+  (global.set $$class@autovalue.AutoValueWithFields (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValueWithFields )(call $$getClassMetadata__java_lang_Class_<once>_@autovalue.Parent )))
   (return (global.get $$class@autovalue.AutoValueWithFields))
  )
 )
 
 ;;; String AutoValueWithFields.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValueWithFields
+(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValueWithFields
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithFields))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithFields)))
    (then
-    (global.set $$string_|autovalue.Au...|@autovalue.AutoValueWithFields (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValueWithFields")))
+    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithFields))
    )
   )
+  (global.set $$string_|autovalue.Au...|@autovalue.AutoValueWithFields (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValueWithFields")))
   (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithFields))
  )
 )
@@ -4743,7 +4802,7 @@
  (local.set $this (ref.cast (ref $autovalue.AutoValueWithOverrides) (local.get $this.untyped)))
  (block
   ;;@ autovalue/AutoValueWithOverrides.java:36:4
-  (return (call $function.no.side.effects.$getString_|x|__java_lang_String (ref.func $$getString_|x|__java_lang_String@autovalue.AutoValueWithOverrides) ))
+  (return (call $$getString_|x|__java_lang_String_<once>_@autovalue.AutoValueWithOverrides ))
  )
 )
 (elem declare func $m_toString__java_lang_String@autovalue.AutoValueWithOverrides)
@@ -4767,40 +4826,43 @@
 )
 
 ;;; Class<T> AutoValueWithOverrides.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.AutoValueWithOverrides
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValueWithOverrides
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.AutoValueWithOverrides))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.AutoValueWithOverrides)))
    (then
-    (global.set $$class@autovalue.AutoValueWithOverrides (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValueWithOverrides) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.BaseClass) )))
+    (return (global.get $$class@autovalue.AutoValueWithOverrides))
    )
   )
+  (global.set $$class@autovalue.AutoValueWithOverrides (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValueWithOverrides )(call $$getClassMetadata__java_lang_Class_<once>_@autovalue.BaseClass )))
   (return (global.get $$class@autovalue.AutoValueWithOverrides))
  )
 )
 
 ;;; String AutoValueWithOverrides.$getString_|x|()
-(func $$getString_|x|__java_lang_String@autovalue.AutoValueWithOverrides
+(func $$getString_|x|__java_lang_String_<once>_@autovalue.AutoValueWithOverrides
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|x|@autovalue.AutoValueWithOverrides))
+  (if (i32.eqz (ref.is_null (global.get $$string_|x|@autovalue.AutoValueWithOverrides)))
    (then
-    (global.set $$string_|x|@autovalue.AutoValueWithOverrides (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "x")))
+    (return (global.get $$string_|x|@autovalue.AutoValueWithOverrides))
    )
   )
+  (global.set $$string_|x|@autovalue.AutoValueWithOverrides (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "x")))
   (return (global.get $$string_|x|@autovalue.AutoValueWithOverrides))
  )
 )
 
 ;;; String AutoValueWithOverrides.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValueWithOverrides
+(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValueWithOverrides
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithOverrides))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithOverrides)))
    (then
-    (global.set $$string_|autovalue.Au...|@autovalue.AutoValueWithOverrides (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValueWithOverrides")))
+    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithOverrides))
    )
   )
+  (global.set $$string_|autovalue.Au...|@autovalue.AutoValueWithOverrides (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValueWithOverrides")))
   (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithOverrides))
  )
 )
@@ -4836,27 +4898,29 @@
 )
 
 ;;; Class<T> ExtendingAutoValue.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.ExtendingAutoValue
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.ExtendingAutoValue
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.ExtendingAutoValue))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.ExtendingAutoValue)))
    (then
-    (global.set $$class@autovalue.ExtendingAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Ex...|__java_lang_String (ref.func $$getString_|autovalue.Ex...|__java_lang_String@autovalue.ExtendingAutoValue) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.BaseClass) )))
+    (return (global.get $$class@autovalue.ExtendingAutoValue))
    )
   )
+  (global.set $$class@autovalue.ExtendingAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Ex...|__java_lang_String_<once>_@autovalue.ExtendingAutoValue )(call $$getClassMetadata__java_lang_Class_<once>_@autovalue.BaseClass )))
   (return (global.get $$class@autovalue.ExtendingAutoValue))
  )
 )
 
 ;;; String ExtendingAutoValue.$getString_|autovalue.Ex...|()
-(func $$getString_|autovalue.Ex...|__java_lang_String@autovalue.ExtendingAutoValue
+(func $$getString_|autovalue.Ex...|__java_lang_String_<once>_@autovalue.ExtendingAutoValue
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.Ex...|@autovalue.ExtendingAutoValue))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Ex...|@autovalue.ExtendingAutoValue)))
    (then
-    (global.set $$string_|autovalue.Ex...|@autovalue.ExtendingAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.ExtendingAutoValue")))
+    (return (global.get $$string_|autovalue.Ex...|@autovalue.ExtendingAutoValue))
    )
   )
+  (global.set $$string_|autovalue.Ex...|@autovalue.ExtendingAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.ExtendingAutoValue")))
   (return (global.get $$string_|autovalue.Ex...|@autovalue.ExtendingAutoValue))
  )
 )
@@ -4919,27 +4983,29 @@
 )
 
 ;;; Class<T> GenericType.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.SimpleAutoValue.GenericType
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.SimpleAutoValue.GenericType
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.SimpleAutoValue.GenericType))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.SimpleAutoValue.GenericType)))
    (then
-    (global.set $$class@autovalue.SimpleAutoValue.GenericType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Si...|__java_lang_String (ref.func $$getString_|autovalue.Si...|__java_lang_String@autovalue.SimpleAutoValue.GenericType) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.util.AbstractCollection) )))
+    (return (global.get $$class@autovalue.SimpleAutoValue.GenericType))
    )
   )
+  (global.set $$class@autovalue.SimpleAutoValue.GenericType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Si...|__java_lang_String_<once>_@autovalue.SimpleAutoValue.GenericType )(call $$getClassMetadata__java_lang_Class_<once>_@java.util.AbstractCollection )))
   (return (global.get $$class@autovalue.SimpleAutoValue.GenericType))
  )
 )
 
 ;;; String GenericType.$getString_|autovalue.Si...|()
-(func $$getString_|autovalue.Si...|__java_lang_String@autovalue.SimpleAutoValue.GenericType
+(func $$getString_|autovalue.Si...|__java_lang_String_<once>_@autovalue.SimpleAutoValue.GenericType
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.Si...|@autovalue.SimpleAutoValue.GenericType))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Si...|@autovalue.SimpleAutoValue.GenericType)))
    (then
-    (global.set $$string_|autovalue.Si...|@autovalue.SimpleAutoValue.GenericType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.SimpleAutoValue$GenericType")))
+    (return (global.get $$string_|autovalue.Si...|@autovalue.SimpleAutoValue.GenericType))
    )
   )
+  (global.set $$string_|autovalue.Si...|@autovalue.SimpleAutoValue.GenericType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.SimpleAutoValue$GenericType")))
   (return (global.get $$string_|autovalue.Si...|@autovalue.SimpleAutoValue.GenericType))
  )
 )
@@ -4971,15 +5037,15 @@
   ;;@ autovalue/$AutoValue_AutoValueWithExtensions.java:13:4
   (return (block (result (ref null $java.lang.String))
    (local.set $$stringBuilder (call $$create__@java.lang.StringBuilder ))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|AutoValueWit...|__java_lang_String (ref.func $$getString_|AutoValueWit...|__java_lang_String@autovalue.$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|AutoValueWit...|__java_lang_String_<once>_@autovalue.$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref $function.m_append__int__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call_ref $function.m_getIntField__int (ref.as_non_null (local.get $this))(struct.get $autovalue.$$AutoValue_AutoValueWithExtensions.vtable $m_getIntField__int (struct.get $autovalue.$$AutoValue_AutoValueWithExtensions $vtable(local.get $this))))(struct.get $java.lang.StringBuilder.vtable $m_append__int__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|_|__java_lang_String (ref.func $$getString_|_|__java_lang_String@autovalue.$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|_|_1__java_lang_String (ref.func $$getString_|_|_1__java_lang_String@autovalue.$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|__stringFiel...|__java_lang_String (ref.func $$getString_|__stringFiel...|__java_lang_String@autovalue.$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|_|__java_lang_String_<once>_@autovalue.$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|_|_1__java_lang_String_<once>_@autovalue.$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|__stringFiel...|__java_lang_String_<once>_@autovalue.$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $m_format__java_lang_Object__int__java_lang_String@autovalue.$AutoValue_AutoValueWithExtensions (call_ref $function.m_getStringField__java_lang_String (ref.as_non_null (local.get $this))(struct.get $autovalue.$$AutoValue_AutoValueWithExtensions.vtable $m_getStringField__java_lang_String (struct.get $autovalue.$$AutoValue_AutoValueWithExtensions $vtable(local.get $this))))(i32.const 1))(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|_|__java_lang_String (ref.func $$getString_|_|__java_lang_String@autovalue.$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|_|_1__java_lang_String (ref.func $$getString_|_|_1__java_lang_String@autovalue.$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|_|_1__java_lang_String (ref.func $$getString_|_|_1__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|_|__java_lang_String_<once>_@autovalue.$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|_|_1__java_lang_String_<once>_@autovalue.$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|_|_1__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))
   ))
  )
@@ -5000,16 +5066,16 @@
    (then
     (block
      ;;@ autovalue/$AutoValue_AutoValueWithExtensions.java:22:6
-     (return (call $function.no.side.effects.$getString_|null|__java_lang_String (ref.func $$getString_|null|__java_lang_String@autovalue.$AutoValue_AutoValueWithExtensions) ))
+     (return (call $$getString_|null|__java_lang_String_<once>_@autovalue.$AutoValue_AutoValueWithExtensions ))
     )
    )
   )
   ;;@ autovalue/$AutoValue_AutoValueWithExtensions.java:24:4
   (return (block (result (ref null $java.lang.String))
    (local.set $$qualifier (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $value))(struct.get $java.lang.Object.vtable $m_toString__java_lang_String (struct.get $java.lang.Object $vtable(local.get $value)))))
-   (call_ref $function.m_replace__java_lang_CharSequence__java_lang_CharSequence__java_lang_String (ref.as_non_null (local.get $$qualifier))(call $function.no.side.effects.$getString_|_|_1__java_lang_String (ref.func $$getString_|_|_1__java_lang_String@autovalue.$AutoValue_AutoValueWithExtensions) )(block (result (ref null $java.lang.String))
+   (call_ref $function.m_replace__java_lang_CharSequence__java_lang_CharSequence__java_lang_String (ref.as_non_null (local.get $$qualifier))(call $$getString_|_|_1__java_lang_String_<once>_@autovalue.$AutoValue_AutoValueWithExtensions )(block (result (ref null $java.lang.String))
     (local.set $$stringBuilder (call $$create__@java.lang.StringBuilder ))
-    (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|_|_1__java_lang_String (ref.func $$getString_|_|_1__java_lang_String@autovalue.$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+    (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|_|_1__java_lang_String_<once>_@autovalue.$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
     (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$indent__int__java_lang_String@autovalue.$AutoValue_AutoValueWithExtensions (local.get $indentLevel))(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
     (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))
    )(struct.get $java.lang.String.vtable $m_replace__java_lang_CharSequence__java_lang_CharSequence__java_lang_String (struct.get $java.lang.String $vtable(local.get $$qualifier))))
@@ -5035,7 +5101,7 @@
     (block $LOOP.CONTINUE
      (block
       ;;@ autovalue/$AutoValue_AutoValueWithExtensions.java:30:6
-      (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $builder))(call $function.no.side.effects.$getString_|__|__java_lang_String (ref.func $$getString_|__|__java_lang_String@autovalue.$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $builder)))))
+      (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $builder))(call $$getString_|__|__java_lang_String_<once>_@autovalue.$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $builder)))))
      )
     )
     (local.set $i (i32.add (local.get $i) (i32.const 1)))
@@ -5066,105 +5132,113 @@
 )
 
 ;;; Class<T> $AutoValue_AutoValueWithExtensions.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.$AutoValue_AutoValueWithExtensions
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.$AutoValue_AutoValueWithExtensions
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.$AutoValue_AutoValueWithExtensions))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.$AutoValue_AutoValueWithExtensions)))
    (then
-    (global.set $$class@autovalue.$AutoValue_AutoValueWithExtensions (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue._A...|__java_lang_String (ref.func $$getString_|autovalue._A...|__java_lang_String@autovalue.$AutoValue_AutoValueWithExtensions) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.$$AutoValue_AutoValueWithExtensions) )))
+    (return (global.get $$class@autovalue.$AutoValue_AutoValueWithExtensions))
    )
   )
+  (global.set $$class@autovalue.$AutoValue_AutoValueWithExtensions (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue._A...|__java_lang_String_<once>_@autovalue.$AutoValue_AutoValueWithExtensions )(call $$getClassMetadata__java_lang_Class_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )))
   (return (global.get $$class@autovalue.$AutoValue_AutoValueWithExtensions))
  )
 )
 
 ;;; String $AutoValue_AutoValueWithExtensions.$getString_|AutoValueWit...|()
-(func $$getString_|AutoValueWit...|__java_lang_String@autovalue.$AutoValue_AutoValueWithExtensions
+(func $$getString_|AutoValueWit...|__java_lang_String_<once>_@autovalue.$AutoValue_AutoValueWithExtensions
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|AutoValueWit...|@autovalue.$AutoValue_AutoValueWithExtensions))
+  (if (i32.eqz (ref.is_null (global.get $$string_|AutoValueWit...|@autovalue.$AutoValue_AutoValueWithExtensions)))
    (then
-    (global.set $$string_|AutoValueWit...|@autovalue.$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "AutoValueWithExtensions {\n  intField = ")))
+    (return (global.get $$string_|AutoValueWit...|@autovalue.$AutoValue_AutoValueWithExtensions))
    )
   )
+  (global.set $$string_|AutoValueWit...|@autovalue.$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "AutoValueWithExtensions {\n  intField = ")))
   (return (global.get $$string_|AutoValueWit...|@autovalue.$AutoValue_AutoValueWithExtensions))
  )
 )
 
 ;;; String $AutoValue_AutoValueWithExtensions.$getString_|_|()
-(func $$getString_|_|__java_lang_String@autovalue.$AutoValue_AutoValueWithExtensions
+(func $$getString_|_|__java_lang_String_<once>_@autovalue.$AutoValue_AutoValueWithExtensions
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|_|@autovalue.$AutoValue_AutoValueWithExtensions))
+  (if (i32.eqz (ref.is_null (global.get $$string_|_|@autovalue.$AutoValue_AutoValueWithExtensions)))
    (then
-    (global.set $$string_|_|@autovalue.$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const ",")))
+    (return (global.get $$string_|_|@autovalue.$AutoValue_AutoValueWithExtensions))
    )
   )
+  (global.set $$string_|_|@autovalue.$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const ",")))
   (return (global.get $$string_|_|@autovalue.$AutoValue_AutoValueWithExtensions))
  )
 )
 
 ;;; String $AutoValue_AutoValueWithExtensions.$getString_|_|_1()
-(func $$getString_|_|_1__java_lang_String@autovalue.$AutoValue_AutoValueWithExtensions
+(func $$getString_|_|_1__java_lang_String_<once>_@autovalue.$AutoValue_AutoValueWithExtensions
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|_|_1@autovalue.$AutoValue_AutoValueWithExtensions))
+  (if (i32.eqz (ref.is_null (global.get $$string_|_|_1@autovalue.$AutoValue_AutoValueWithExtensions)))
    (then
-    (global.set $$string_|_|_1@autovalue.$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "\n")))
+    (return (global.get $$string_|_|_1@autovalue.$AutoValue_AutoValueWithExtensions))
    )
   )
+  (global.set $$string_|_|_1@autovalue.$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "\n")))
   (return (global.get $$string_|_|_1@autovalue.$AutoValue_AutoValueWithExtensions))
  )
 )
 
 ;;; String $AutoValue_AutoValueWithExtensions.$getString_|__stringFiel...|()
-(func $$getString_|__stringFiel...|__java_lang_String@autovalue.$AutoValue_AutoValueWithExtensions
+(func $$getString_|__stringFiel...|__java_lang_String_<once>_@autovalue.$AutoValue_AutoValueWithExtensions
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|__stringFiel...|@autovalue.$AutoValue_AutoValueWithExtensions))
+  (if (i32.eqz (ref.is_null (global.get $$string_|__stringFiel...|@autovalue.$AutoValue_AutoValueWithExtensions)))
    (then
-    (global.set $$string_|__stringFiel...|@autovalue.$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "  stringField = ")))
+    (return (global.get $$string_|__stringFiel...|@autovalue.$AutoValue_AutoValueWithExtensions))
    )
   )
+  (global.set $$string_|__stringFiel...|@autovalue.$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "  stringField = ")))
   (return (global.get $$string_|__stringFiel...|@autovalue.$AutoValue_AutoValueWithExtensions))
  )
 )
 
 ;;; String $AutoValue_AutoValueWithExtensions.$getString_|null|()
-(func $$getString_|null|__java_lang_String@autovalue.$AutoValue_AutoValueWithExtensions
+(func $$getString_|null|__java_lang_String_<once>_@autovalue.$AutoValue_AutoValueWithExtensions
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|null|@autovalue.$AutoValue_AutoValueWithExtensions))
+  (if (i32.eqz (ref.is_null (global.get $$string_|null|@autovalue.$AutoValue_AutoValueWithExtensions)))
    (then
-    (global.set $$string_|null|@autovalue.$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "null")))
+    (return (global.get $$string_|null|@autovalue.$AutoValue_AutoValueWithExtensions))
    )
   )
+  (global.set $$string_|null|@autovalue.$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "null")))
   (return (global.get $$string_|null|@autovalue.$AutoValue_AutoValueWithExtensions))
  )
 )
 
 ;;; String $AutoValue_AutoValueWithExtensions.$getString_|__|()
-(func $$getString_|__|__java_lang_String@autovalue.$AutoValue_AutoValueWithExtensions
+(func $$getString_|__|__java_lang_String_<once>_@autovalue.$AutoValue_AutoValueWithExtensions
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|__|@autovalue.$AutoValue_AutoValueWithExtensions))
+  (if (i32.eqz (ref.is_null (global.get $$string_|__|@autovalue.$AutoValue_AutoValueWithExtensions)))
    (then
-    (global.set $$string_|__|@autovalue.$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "  ")))
+    (return (global.get $$string_|__|@autovalue.$AutoValue_AutoValueWithExtensions))
    )
   )
+  (global.set $$string_|__|@autovalue.$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "  ")))
   (return (global.get $$string_|__|@autovalue.$AutoValue_AutoValueWithExtensions))
  )
 )
 
 ;;; String $AutoValue_AutoValueWithExtensions.$getString_|autovalue._A...|()
-(func $$getString_|autovalue._A...|__java_lang_String@autovalue.$AutoValue_AutoValueWithExtensions
+(func $$getString_|autovalue._A...|__java_lang_String_<once>_@autovalue.$AutoValue_AutoValueWithExtensions
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue._A...|@autovalue.$AutoValue_AutoValueWithExtensions))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue._A...|@autovalue.$AutoValue_AutoValueWithExtensions)))
    (then
-    (global.set $$string_|autovalue._A...|@autovalue.$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.$AutoValue_AutoValueWithExtensions")))
+    (return (global.get $$string_|autovalue._A...|@autovalue.$AutoValue_AutoValueWithExtensions))
    )
   )
+  (global.set $$string_|autovalue._A...|@autovalue.$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.$AutoValue_AutoValueWithExtensions")))
   (return (global.get $$string_|autovalue._A...|@autovalue.$AutoValue_AutoValueWithExtensions))
  )
 )
@@ -5212,9 +5286,9 @@
   ;;@ autovalue/$AutoValue_AutoValueWithFields.java:23:4
   (return (block (result (ref null $java.lang.String))
    (local.set $$stringBuilder (call $$create__@java.lang.StringBuilder ))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|_|__java_lang_String (ref.func $$getString_|_|__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|_|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref $function.m_append__int__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(struct.get $autovalue.$AutoValue_AutoValueWithFields $intField@autovalue.$AutoValue_AutoValueWithFields (local.get $this))(struct.get $java.lang.StringBuilder.vtable $m_append__int__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|_|_1__java_lang_String (ref.func $$getString_|_|_1__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|_|_1__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))
   ))
  )
@@ -5299,27 +5373,29 @@
 )
 
 ;;; Class<T> $AutoValue_AutoValueWithFields.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.$AutoValue_AutoValueWithFields
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.$AutoValue_AutoValueWithFields
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.$AutoValue_AutoValueWithFields))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.$AutoValue_AutoValueWithFields)))
    (then
-    (global.set $$class@autovalue.$AutoValue_AutoValueWithFields (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue._A...|__java_lang_String (ref.func $$getString_|autovalue._A...|__java_lang_String@autovalue.$AutoValue_AutoValueWithFields) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValueWithFields) )))
+    (return (global.get $$class@autovalue.$AutoValue_AutoValueWithFields))
    )
   )
+  (global.set $$class@autovalue.$AutoValue_AutoValueWithFields (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue._A...|__java_lang_String_<once>_@autovalue.$AutoValue_AutoValueWithFields )(call $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValueWithFields )))
   (return (global.get $$class@autovalue.$AutoValue_AutoValueWithFields))
  )
 )
 
 ;;; String $AutoValue_AutoValueWithFields.$getString_|autovalue._A...|()
-(func $$getString_|autovalue._A...|__java_lang_String@autovalue.$AutoValue_AutoValueWithFields
+(func $$getString_|autovalue._A...|__java_lang_String_<once>_@autovalue.$AutoValue_AutoValueWithFields
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue._A...|@autovalue.$AutoValue_AutoValueWithFields))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue._A...|@autovalue.$AutoValue_AutoValueWithFields)))
    (then
-    (global.set $$string_|autovalue._A...|@autovalue.$AutoValue_AutoValueWithFields (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.$AutoValue_AutoValueWithFields")))
+    (return (global.get $$string_|autovalue._A...|@autovalue.$AutoValue_AutoValueWithFields))
    )
   )
+  (global.set $$string_|autovalue._A...|@autovalue.$AutoValue_AutoValueWithFields (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.$AutoValue_AutoValueWithFields")))
   (return (global.get $$string_|autovalue._A...|@autovalue.$AutoValue_AutoValueWithFields))
  )
 )
@@ -5410,14 +5486,15 @@
 )
 
 ;;; Class<T> AutoValue_AutoValueWithOverrides.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_AutoValueWithOverrides
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_AutoValueWithOverrides
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.AutoValue_AutoValueWithOverrides))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.AutoValue_AutoValueWithOverrides)))
    (then
-    (global.set $$class@autovalue.AutoValue_AutoValueWithOverrides (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_AutoValueWithOverrides) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValueWithOverrides) )))
+    (return (global.get $$class@autovalue.AutoValue_AutoValueWithOverrides))
    )
   )
+  (global.set $$class@autovalue.AutoValue_AutoValueWithOverrides (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_AutoValueWithOverrides )(call $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValueWithOverrides )))
   (return (global.get $$class@autovalue.AutoValue_AutoValueWithOverrides))
  )
 )
@@ -5430,20 +5507,21 @@
  (local $this (ref null $autovalue.AutoValue_AutoValueWithOverrides))
  (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueWithOverrides) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_AutoValueWithOverrides) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_AutoValueWithOverrides ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_AutoValueWithOverrides)
 
 ;;; String AutoValue_AutoValueWithOverrides.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_AutoValueWithOverrides
+(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_AutoValueWithOverrides
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithOverrides))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithOverrides)))
    (then
-    (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithOverrides (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_AutoValueWithOverrides")))
+    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithOverrides))
    )
   )
+  (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithOverrides (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_AutoValueWithOverrides")))
   (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithOverrides))
  )
 )
@@ -5549,13 +5627,13 @@
   ;;@ autovalue/AutoValue_ExtendingAutoValue.java:43:4
   (return (block (result (ref null $java.lang.String))
    (local.set $$stringBuilder (call $$create__@java.lang.StringBuilder ))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|_|__java_lang_String (ref.func $$getString_|_|__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|_|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref $function.m_append__int__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(struct.get $autovalue.AutoValue_ExtendingAutoValue $baseField@autovalue.AutoValue_ExtendingAutoValue (local.get $this))(struct.get $java.lang.StringBuilder.vtable $m_append__int__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|__|__java_lang_String (ref.func $$getString_|__|__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|__|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref $function.m_append__boolean__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(struct.get_s $autovalue.AutoValue_ExtendingAutoValue $booleanField@autovalue.AutoValue_ExtendingAutoValue (local.get $this))(struct.get $java.lang.StringBuilder.vtable $m_append__boolean__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|__|__java_lang_String (ref.func $$getString_|__|__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|__|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(struct.get $autovalue.AutoValue_ExtendingAutoValue $stringField@autovalue.AutoValue_ExtendingAutoValue (local.get $this))(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|_|_1__java_lang_String (ref.func $$getString_|_|_1__java_lang_String@autovalue.$$AutoValue_AutoValueWithExtensions) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|_|_1__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))
   ))
  )
@@ -5648,14 +5726,15 @@
 )
 
 ;;; Class<T> AutoValue_ExtendingAutoValue.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_ExtendingAutoValue
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_ExtendingAutoValue
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.AutoValue_ExtendingAutoValue))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.AutoValue_ExtendingAutoValue)))
    (then
-    (global.set $$class@autovalue.AutoValue_ExtendingAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_ExtendingAutoValue) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.ExtendingAutoValue) )))
+    (return (global.get $$class@autovalue.AutoValue_ExtendingAutoValue))
    )
   )
+  (global.set $$class@autovalue.AutoValue_ExtendingAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_ExtendingAutoValue )(call $$getClassMetadata__java_lang_Class_<once>_@autovalue.ExtendingAutoValue )))
   (return (global.get $$class@autovalue.AutoValue_ExtendingAutoValue))
  )
 )
@@ -5668,20 +5747,21 @@
  (local $this (ref null $autovalue.AutoValue_ExtendingAutoValue))
  (local.set $this (ref.cast (ref $autovalue.AutoValue_ExtendingAutoValue) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_ExtendingAutoValue) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_ExtendingAutoValue ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_ExtendingAutoValue)
 
 ;;; String AutoValue_ExtendingAutoValue.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_ExtendingAutoValue
+(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_ExtendingAutoValue
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_ExtendingAutoValue))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_ExtendingAutoValue)))
    (then
-    (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_ExtendingAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_ExtendingAutoValue")))
+    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_ExtendingAutoValue))
    )
   )
+  (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_ExtendingAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_ExtendingAutoValue")))
   (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_ExtendingAutoValue))
  )
 )
@@ -5776,14 +5856,15 @@
 )
 
 ;;; Class<T> AutoValue_AutoValueWithExtensions.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_AutoValueWithExtensions
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_AutoValueWithExtensions
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.AutoValue_AutoValueWithExtensions))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.AutoValue_AutoValueWithExtensions)))
    (then
-    (global.set $$class@autovalue.AutoValue_AutoValueWithExtensions (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_AutoValueWithExtensions) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.$AutoValue_AutoValueWithExtensions) )))
+    (return (global.get $$class@autovalue.AutoValue_AutoValueWithExtensions))
    )
   )
+  (global.set $$class@autovalue.AutoValue_AutoValueWithExtensions (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_AutoValueWithExtensions )(call $$getClassMetadata__java_lang_Class_<once>_@autovalue.$AutoValue_AutoValueWithExtensions )))
   (return (global.get $$class@autovalue.AutoValue_AutoValueWithExtensions))
  )
 )
@@ -5796,20 +5877,21 @@
  (local $this (ref null $autovalue.AutoValue_AutoValueWithExtensions))
  (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueWithExtensions) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_AutoValueWithExtensions) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_AutoValueWithExtensions ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_AutoValueWithExtensions)
 
 ;;; String AutoValue_AutoValueWithExtensions.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_AutoValueWithExtensions
+(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_AutoValueWithExtensions
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithExtensions))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithExtensions)))
    (then
-    (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_AutoValueWithExtensions")))
+    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithExtensions))
    )
   )
+  (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_AutoValueWithExtensions")))
   (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithExtensions))
  )
 )
@@ -5902,14 +5984,15 @@
 )
 
 ;;; Class<T> AutoValue_AutoValueWithFields.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_AutoValueWithFields
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_AutoValueWithFields
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@autovalue.AutoValue_AutoValueWithFields))
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.AutoValue_AutoValueWithFields)))
    (then
-    (global.set $$class@autovalue.AutoValue_AutoValueWithFields (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|autovalue.Au...|__java_lang_String (ref.func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_AutoValueWithFields) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.$AutoValue_AutoValueWithFields) )))
+    (return (global.get $$class@autovalue.AutoValue_AutoValueWithFields))
    )
   )
+  (global.set $$class@autovalue.AutoValue_AutoValueWithFields (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_AutoValueWithFields )(call $$getClassMetadata__java_lang_Class_<once>_@autovalue.$AutoValue_AutoValueWithFields )))
   (return (global.get $$class@autovalue.AutoValue_AutoValueWithFields))
  )
 )
@@ -5922,20 +6005,21 @@
  (local $this (ref null $autovalue.AutoValue_AutoValueWithFields))
  (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueWithFields) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@autovalue.AutoValue_AutoValueWithFields) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_AutoValueWithFields ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_AutoValueWithFields)
 
 ;;; String AutoValue_AutoValueWithFields.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String@autovalue.AutoValue_AutoValueWithFields
+(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_AutoValueWithFields
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithFields))
+  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithFields)))
    (then
-    (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithFields (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_AutoValueWithFields")))
+    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithFields))
    )
   )
+  (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithFields (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_AutoValueWithFields")))
   (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithFields))
  )
 )

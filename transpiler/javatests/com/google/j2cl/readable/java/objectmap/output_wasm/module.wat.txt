@@ -74,14 +74,15 @@
 )
 
 ;;; Class<T> $Overlay.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@objectmap.ObjectMap.$Overlay
+(func $$getClassMetadata__java_lang_Class_<once>_@objectmap.ObjectMap.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@objectmap.ObjectMap.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$class@objectmap.ObjectMap.$Overlay)))
    (then
-    (global.set $$class@objectmap.ObjectMap.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|objectmap.Ob...|__java_lang_String (ref.func $$getString_|objectmap.Ob...|__java_lang_String@objectmap.ObjectMap.$Overlay) )(ref.null $java.lang.Class)))
+    (return (global.get $$class@objectmap.ObjectMap.$Overlay))
    )
   )
+  (global.set $$class@objectmap.ObjectMap.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|objectmap.Ob...|__java_lang_String_<once>_@objectmap.ObjectMap.$Overlay )(ref.null $java.lang.Class)))
   (return (global.get $$class@objectmap.ObjectMap.$Overlay))
  )
 )
@@ -94,20 +95,21 @@
  (local $this (ref null $objectmap.ObjectMap.$Overlay))
  (local.set $this (ref.cast (ref $objectmap.ObjectMap.$Overlay) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@objectmap.ObjectMap.$Overlay) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@objectmap.ObjectMap.$Overlay ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@objectmap.ObjectMap.$Overlay)
 
 ;;; String $Overlay.$getString_|objectmap.Ob...|()
-(func $$getString_|objectmap.Ob...|__java_lang_String@objectmap.ObjectMap.$Overlay
+(func $$getString_|objectmap.Ob...|__java_lang_String_<once>_@objectmap.ObjectMap.$Overlay
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|objectmap.Ob...|@objectmap.ObjectMap.$Overlay))
+  (if (i32.eqz (ref.is_null (global.get $$string_|objectmap.Ob...|@objectmap.ObjectMap.$Overlay)))
    (then
-    (global.set $$string_|objectmap.Ob...|@objectmap.ObjectMap.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "objectmap.ObjectMap$$Overlay")))
+    (return (global.get $$string_|objectmap.Ob...|@objectmap.ObjectMap.$Overlay))
    )
   )
+  (global.set $$string_|objectmap.Ob...|@objectmap.ObjectMap.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "objectmap.ObjectMap$$Overlay")))
   (return (global.get $$string_|objectmap.Ob...|@objectmap.ObjectMap.$Overlay))
  )
 )

@@ -103,7 +103,7 @@
   ;;@ wasmentrypoints/WasmEntryPoints.java:26:62
   (call $$clinit__void_<once>_@wasmentrypoints.WasmEntryPoints )
   ;;@ wasmentrypoints/WasmEntryPoints.java:27:4
-  (return (call $function.no.side.effects.$getString_||__java_lang_String (ref.func $$getString_||__java_lang_String@java.lang.StackTraceElement) ))
+  (return (call $$getString_||__java_lang_String_<once>_@java.lang.StackTraceElement ))
  )
 )
 
@@ -126,14 +126,15 @@
 )
 
 ;;; Class<T> WasmEntryPoints.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@wasmentrypoints.WasmEntryPoints
+(func $$getClassMetadata__java_lang_Class_<once>_@wasmentrypoints.WasmEntryPoints
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@wasmentrypoints.WasmEntryPoints))
+  (if (i32.eqz (ref.is_null (global.get $$class@wasmentrypoints.WasmEntryPoints)))
    (then
-    (global.set $$class@wasmentrypoints.WasmEntryPoints (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|wasmentrypoi...|__java_lang_String (ref.func $$getString_|wasmentrypoi...|__java_lang_String@wasmentrypoints.WasmEntryPoints) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@wasmentrypoints.WasmEntryPoints))
    )
   )
+  (global.set $$class@wasmentrypoints.WasmEntryPoints (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|wasmentrypoi...|__java_lang_String_<once>_@wasmentrypoints.WasmEntryPoints )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@wasmentrypoints.WasmEntryPoints))
  )
 )
@@ -146,20 +147,21 @@
  (local $this (ref null $wasmentrypoints.WasmEntryPoints))
  (local.set $this (ref.cast (ref $wasmentrypoints.WasmEntryPoints) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@wasmentrypoints.WasmEntryPoints) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@wasmentrypoints.WasmEntryPoints ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@wasmentrypoints.WasmEntryPoints)
 
 ;;; String WasmEntryPoints.$getString_|wasmentrypoi...|()
-(func $$getString_|wasmentrypoi...|__java_lang_String@wasmentrypoints.WasmEntryPoints
+(func $$getString_|wasmentrypoi...|__java_lang_String_<once>_@wasmentrypoints.WasmEntryPoints
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|wasmentrypoi...|@wasmentrypoints.WasmEntryPoints))
+  (if (i32.eqz (ref.is_null (global.get $$string_|wasmentrypoi...|@wasmentrypoints.WasmEntryPoints)))
    (then
-    (global.set $$string_|wasmentrypoi...|@wasmentrypoints.WasmEntryPoints (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "wasmentrypoints.WasmEntryPoints")))
+    (return (global.get $$string_|wasmentrypoi...|@wasmentrypoints.WasmEntryPoints))
    )
   )
+  (global.set $$string_|wasmentrypoi...|@wasmentrypoints.WasmEntryPoints (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "wasmentrypoints.WasmEntryPoints")))
   (return (global.get $$string_|wasmentrypoi...|@wasmentrypoints.WasmEntryPoints))
  )
 )

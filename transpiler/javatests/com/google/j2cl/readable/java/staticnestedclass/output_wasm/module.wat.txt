@@ -122,14 +122,15 @@
 )
 
 ;;; Class<T> StaticNestedClassParent.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@staticnestedclass.StaticNestedClassParent
+(func $$getClassMetadata__java_lang_Class_<once>_@staticnestedclass.StaticNestedClassParent
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@staticnestedclass.StaticNestedClassParent))
+  (if (i32.eqz (ref.is_null (global.get $$class@staticnestedclass.StaticNestedClassParent)))
    (then
-    (global.set $$class@staticnestedclass.StaticNestedClassParent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|staticnested...|__java_lang_String (ref.func $$getString_|staticnested...|__java_lang_String@staticnestedclass.StaticNestedClassParent) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@staticnestedclass.StaticNestedClassParent))
    )
   )
+  (global.set $$class@staticnestedclass.StaticNestedClassParent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|staticnested...|__java_lang_String_<once>_@staticnestedclass.StaticNestedClassParent )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@staticnestedclass.StaticNestedClassParent))
  )
 )
@@ -142,20 +143,21 @@
  (local $this (ref null $staticnestedclass.StaticNestedClassParent))
  (local.set $this (ref.cast (ref $staticnestedclass.StaticNestedClassParent) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@staticnestedclass.StaticNestedClassParent) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@staticnestedclass.StaticNestedClassParent ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@staticnestedclass.StaticNestedClassParent)
 
 ;;; String StaticNestedClassParent.$getString_|staticnested...|()
-(func $$getString_|staticnested...|__java_lang_String@staticnestedclass.StaticNestedClassParent
+(func $$getString_|staticnested...|__java_lang_String_<once>_@staticnestedclass.StaticNestedClassParent
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|staticnested...|@staticnestedclass.StaticNestedClassParent))
+  (if (i32.eqz (ref.is_null (global.get $$string_|staticnested...|@staticnestedclass.StaticNestedClassParent)))
    (then
-    (global.set $$string_|staticnested...|@staticnestedclass.StaticNestedClassParent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "staticnestedclass.StaticNestedClassParent")))
+    (return (global.get $$string_|staticnested...|@staticnestedclass.StaticNestedClassParent))
    )
   )
+  (global.set $$string_|staticnested...|@staticnestedclass.StaticNestedClassParent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "staticnestedclass.StaticNestedClassParent")))
   (return (global.get $$string_|staticnested...|@staticnestedclass.StaticNestedClassParent))
  )
 )
@@ -213,14 +215,15 @@
 )
 
 ;;; Class<T> StaticNestedClass.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@staticnestedclass.StaticNestedClassParent.StaticNestedClass
+(func $$getClassMetadata__java_lang_Class_<once>_@staticnestedclass.StaticNestedClassParent.StaticNestedClass
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@staticnestedclass.StaticNestedClassParent.StaticNestedClass))
+  (if (i32.eqz (ref.is_null (global.get $$class@staticnestedclass.StaticNestedClassParent.StaticNestedClass)))
    (then
-    (global.set $$class@staticnestedclass.StaticNestedClassParent.StaticNestedClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|staticnested...|__java_lang_String (ref.func $$getString_|staticnested...|__java_lang_String@staticnestedclass.StaticNestedClassParent.StaticNestedClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@staticnestedclass.StaticNestedClassParent.StaticNestedClass))
    )
   )
+  (global.set $$class@staticnestedclass.StaticNestedClassParent.StaticNestedClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|staticnested...|__java_lang_String_<once>_@staticnestedclass.StaticNestedClassParent.StaticNestedClass )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@staticnestedclass.StaticNestedClassParent.StaticNestedClass))
  )
 )
@@ -233,20 +236,21 @@
  (local $this (ref null $staticnestedclass.StaticNestedClassParent.StaticNestedClass))
  (local.set $this (ref.cast (ref $staticnestedclass.StaticNestedClassParent.StaticNestedClass) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@staticnestedclass.StaticNestedClassParent.StaticNestedClass) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@staticnestedclass.StaticNestedClassParent.StaticNestedClass ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@staticnestedclass.StaticNestedClassParent.StaticNestedClass)
 
 ;;; String StaticNestedClass.$getString_|staticnested...|()
-(func $$getString_|staticnested...|__java_lang_String@staticnestedclass.StaticNestedClassParent.StaticNestedClass
+(func $$getString_|staticnested...|__java_lang_String_<once>_@staticnestedclass.StaticNestedClassParent.StaticNestedClass
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|staticnested...|@staticnestedclass.StaticNestedClassParent.StaticNestedClass))
+  (if (i32.eqz (ref.is_null (global.get $$string_|staticnested...|@staticnestedclass.StaticNestedClassParent.StaticNestedClass)))
    (then
-    (global.set $$string_|staticnested...|@staticnestedclass.StaticNestedClassParent.StaticNestedClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "staticnestedclass.StaticNestedClassParent$StaticNestedClass")))
+    (return (global.get $$string_|staticnested...|@staticnestedclass.StaticNestedClassParent.StaticNestedClass))
    )
   )
+  (global.set $$string_|staticnested...|@staticnestedclass.StaticNestedClassParent.StaticNestedClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "staticnestedclass.StaticNestedClassParent$StaticNestedClass")))
   (return (global.get $$string_|staticnested...|@staticnestedclass.StaticNestedClassParent.StaticNestedClass))
  )
 )

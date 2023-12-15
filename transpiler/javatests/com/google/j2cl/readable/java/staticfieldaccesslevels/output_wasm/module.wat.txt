@@ -113,14 +113,15 @@
 )
 
 ;;; Class<T> StaticFieldAccessLevels.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@staticfieldaccesslevels.StaticFieldAccessLevels
+(func $$getClassMetadata__java_lang_Class_<once>_@staticfieldaccesslevels.StaticFieldAccessLevels
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@staticfieldaccesslevels.StaticFieldAccessLevels))
+  (if (i32.eqz (ref.is_null (global.get $$class@staticfieldaccesslevels.StaticFieldAccessLevels)))
    (then
-    (global.set $$class@staticfieldaccesslevels.StaticFieldAccessLevels (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|staticfielda...|__java_lang_String (ref.func $$getString_|staticfielda...|__java_lang_String@staticfieldaccesslevels.StaticFieldAccessLevels) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@staticfieldaccesslevels.StaticFieldAccessLevels))
    )
   )
+  (global.set $$class@staticfieldaccesslevels.StaticFieldAccessLevels (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|staticfielda...|__java_lang_String_<once>_@staticfieldaccesslevels.StaticFieldAccessLevels )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@staticfieldaccesslevels.StaticFieldAccessLevels))
  )
 )
@@ -133,20 +134,21 @@
  (local $this (ref null $staticfieldaccesslevels.StaticFieldAccessLevels))
  (local.set $this (ref.cast (ref $staticfieldaccesslevels.StaticFieldAccessLevels) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@staticfieldaccesslevels.StaticFieldAccessLevels) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@staticfieldaccesslevels.StaticFieldAccessLevels ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@staticfieldaccesslevels.StaticFieldAccessLevels)
 
 ;;; String StaticFieldAccessLevels.$getString_|staticfielda...|()
-(func $$getString_|staticfielda...|__java_lang_String@staticfieldaccesslevels.StaticFieldAccessLevels
+(func $$getString_|staticfielda...|__java_lang_String_<once>_@staticfieldaccesslevels.StaticFieldAccessLevels
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|staticfielda...|@staticfieldaccesslevels.StaticFieldAccessLevels))
+  (if (i32.eqz (ref.is_null (global.get $$string_|staticfielda...|@staticfieldaccesslevels.StaticFieldAccessLevels)))
    (then
-    (global.set $$string_|staticfielda...|@staticfieldaccesslevels.StaticFieldAccessLevels (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "staticfieldaccesslevels.StaticFieldAccessLevels")))
+    (return (global.get $$string_|staticfielda...|@staticfieldaccesslevels.StaticFieldAccessLevels))
    )
   )
+  (global.set $$string_|staticfielda...|@staticfieldaccesslevels.StaticFieldAccessLevels (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "staticfieldaccesslevels.StaticFieldAccessLevels")))
   (return (global.get $$string_|staticfielda...|@staticfieldaccesslevels.StaticFieldAccessLevels))
  )
 )

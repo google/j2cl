@@ -146,14 +146,15 @@
 )
 
 ;;; Class<T> LocalClassWithConstructor.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor
+(func $$getClassMetadata__java_lang_Class_<once>_@localclasswithconstructor.LocalClassWithConstructor
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@localclasswithconstructor.LocalClassWithConstructor))
+  (if (i32.eqz (ref.is_null (global.get $$class@localclasswithconstructor.LocalClassWithConstructor)))
    (then
-    (global.set $$class@localclasswithconstructor.LocalClassWithConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclasswi...|__java_lang_String (ref.func $$getString_|localclasswi...|__java_lang_String@localclasswithconstructor.LocalClassWithConstructor) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@localclasswithconstructor.LocalClassWithConstructor))
    )
   )
+  (global.set $$class@localclasswithconstructor.LocalClassWithConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|localclasswi...|__java_lang_String_<once>_@localclasswithconstructor.LocalClassWithConstructor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@localclasswithconstructor.LocalClassWithConstructor))
  )
 )
@@ -166,20 +167,21 @@
  (local $this (ref null $localclasswithconstructor.LocalClassWithConstructor))
  (local.set $this (ref.cast (ref $localclasswithconstructor.LocalClassWithConstructor) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@localclasswithconstructor.LocalClassWithConstructor ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor)
 
 ;;; String LocalClassWithConstructor.$getString_|localclasswi...|()
-(func $$getString_|localclasswi...|__java_lang_String@localclasswithconstructor.LocalClassWithConstructor
+(func $$getString_|localclasswi...|__java_lang_String_<once>_@localclasswithconstructor.LocalClassWithConstructor
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|localclasswi...|@localclasswithconstructor.LocalClassWithConstructor))
+  (if (i32.eqz (ref.is_null (global.get $$string_|localclasswi...|@localclasswithconstructor.LocalClassWithConstructor)))
    (then
-    (global.set $$string_|localclasswi...|@localclasswithconstructor.LocalClassWithConstructor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "localclasswithconstructor.LocalClassWithConstructor")))
+    (return (global.get $$string_|localclasswi...|@localclasswithconstructor.LocalClassWithConstructor))
    )
   )
+  (global.set $$string_|localclasswi...|@localclasswithconstructor.LocalClassWithConstructor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "localclasswithconstructor.LocalClassWithConstructor")))
   (return (global.get $$string_|localclasswi...|@localclasswithconstructor.LocalClassWithConstructor))
  )
 )
@@ -287,14 +289,15 @@
 )
 
 ;;; Class<T> LocalClass.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor.1LocalClass
+(func $$getClassMetadata__java_lang_Class_<once>_@localclasswithconstructor.LocalClassWithConstructor.1LocalClass
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@localclasswithconstructor.LocalClassWithConstructor.1LocalClass))
+  (if (i32.eqz (ref.is_null (global.get $$class@localclasswithconstructor.LocalClassWithConstructor.1LocalClass)))
    (then
-    (global.set $$class@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|localclasswi...|__java_lang_String (ref.func $$getString_|localclasswi...|__java_lang_String@localclasswithconstructor.LocalClassWithConstructor.1LocalClass) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@localclasswithconstructor.LocalClassWithConstructor.1LocalClass))
    )
   )
+  (global.set $$class@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|localclasswi...|__java_lang_String_<once>_@localclasswithconstructor.LocalClassWithConstructor.1LocalClass )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@localclasswithconstructor.LocalClassWithConstructor.1LocalClass))
  )
 )
@@ -307,20 +310,21 @@
  (local $this (ref null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass))
  (local.set $this (ref.cast (ref $localclasswithconstructor.LocalClassWithConstructor.1LocalClass) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor.1LocalClass) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@localclasswithconstructor.LocalClassWithConstructor.1LocalClass ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor.1LocalClass)
 
 ;;; String LocalClass.$getString_|localclasswi...|()
-(func $$getString_|localclasswi...|__java_lang_String@localclasswithconstructor.LocalClassWithConstructor.1LocalClass
+(func $$getString_|localclasswi...|__java_lang_String_<once>_@localclasswithconstructor.LocalClassWithConstructor.1LocalClass
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|localclasswi...|@localclasswithconstructor.LocalClassWithConstructor.1LocalClass))
+  (if (i32.eqz (ref.is_null (global.get $$string_|localclasswi...|@localclasswithconstructor.LocalClassWithConstructor.1LocalClass)))
    (then
-    (global.set $$string_|localclasswi...|@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "localclasswithconstructor.LocalClassWithConstructor$1LocalClass")))
+    (return (global.get $$string_|localclasswi...|@localclasswithconstructor.LocalClassWithConstructor.1LocalClass))
    )
   )
+  (global.set $$string_|localclasswi...|@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "localclasswithconstructor.LocalClassWithConstructor$1LocalClass")))
   (return (global.get $$string_|localclasswi...|@localclasswithconstructor.LocalClassWithConstructor.1LocalClass))
  )
 )

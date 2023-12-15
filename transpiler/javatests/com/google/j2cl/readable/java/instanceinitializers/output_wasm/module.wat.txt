@@ -99,14 +99,15 @@
 )
 
 ;;; Class<T> InstanceInitializers.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@instanceinitializers.InstanceInitializers
+(func $$getClassMetadata__java_lang_Class_<once>_@instanceinitializers.InstanceInitializers
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@instanceinitializers.InstanceInitializers))
+  (if (i32.eqz (ref.is_null (global.get $$class@instanceinitializers.InstanceInitializers)))
    (then
-    (global.set $$class@instanceinitializers.InstanceInitializers (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instanceinit...|__java_lang_String (ref.func $$getString_|instanceinit...|__java_lang_String@instanceinitializers.InstanceInitializers) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@instanceinitializers.InstanceInitializers))
    )
   )
+  (global.set $$class@instanceinitializers.InstanceInitializers (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|instanceinit...|__java_lang_String_<once>_@instanceinitializers.InstanceInitializers )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@instanceinitializers.InstanceInitializers))
  )
 )
@@ -119,20 +120,21 @@
  (local $this (ref null $instanceinitializers.InstanceInitializers))
  (local.set $this (ref.cast (ref $instanceinitializers.InstanceInitializers) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@instanceinitializers.InstanceInitializers) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@instanceinitializers.InstanceInitializers ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@instanceinitializers.InstanceInitializers)
 
 ;;; String InstanceInitializers.$getString_|instanceinit...|()
-(func $$getString_|instanceinit...|__java_lang_String@instanceinitializers.InstanceInitializers
+(func $$getString_|instanceinit...|__java_lang_String_<once>_@instanceinitializers.InstanceInitializers
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|instanceinit...|@instanceinitializers.InstanceInitializers))
+  (if (i32.eqz (ref.is_null (global.get $$string_|instanceinit...|@instanceinitializers.InstanceInitializers)))
    (then
-    (global.set $$string_|instanceinit...|@instanceinitializers.InstanceInitializers (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instanceinitializers.InstanceInitializers")))
+    (return (global.get $$string_|instanceinit...|@instanceinitializers.InstanceInitializers))
    )
   )
+  (global.set $$string_|instanceinit...|@instanceinitializers.InstanceInitializers (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instanceinitializers.InstanceInitializers")))
   (return (global.get $$string_|instanceinit...|@instanceinitializers.InstanceInitializers))
  )
 )

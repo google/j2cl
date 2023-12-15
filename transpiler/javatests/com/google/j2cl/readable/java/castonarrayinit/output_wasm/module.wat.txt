@@ -159,14 +159,15 @@
 )
 
 ;;; Class<T> CastOnArrayInit.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@castonarrayinit.CastOnArrayInit
+(func $$getClassMetadata__java_lang_Class_<once>_@castonarrayinit.CastOnArrayInit
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@castonarrayinit.CastOnArrayInit))
+  (if (i32.eqz (ref.is_null (global.get $$class@castonarrayinit.CastOnArrayInit)))
    (then
-    (global.set $$class@castonarrayinit.CastOnArrayInit (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|castonarrayi...|__java_lang_String (ref.func $$getString_|castonarrayi...|__java_lang_String@castonarrayinit.CastOnArrayInit) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@castonarrayinit.CastOnArrayInit))
    )
   )
+  (global.set $$class@castonarrayinit.CastOnArrayInit (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|castonarrayi...|__java_lang_String_<once>_@castonarrayinit.CastOnArrayInit )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@castonarrayinit.CastOnArrayInit))
  )
 )
@@ -179,20 +180,21 @@
  (local $this (ref null $castonarrayinit.CastOnArrayInit))
  (local.set $this (ref.cast (ref $castonarrayinit.CastOnArrayInit) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@castonarrayinit.CastOnArrayInit) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@castonarrayinit.CastOnArrayInit ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@castonarrayinit.CastOnArrayInit)
 
 ;;; String CastOnArrayInit.$getString_|castonarrayi...|()
-(func $$getString_|castonarrayi...|__java_lang_String@castonarrayinit.CastOnArrayInit
+(func $$getString_|castonarrayi...|__java_lang_String_<once>_@castonarrayinit.CastOnArrayInit
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|castonarrayi...|@castonarrayinit.CastOnArrayInit))
+  (if (i32.eqz (ref.is_null (global.get $$string_|castonarrayi...|@castonarrayinit.CastOnArrayInit)))
    (then
-    (global.set $$string_|castonarrayi...|@castonarrayinit.CastOnArrayInit (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "castonarrayinit.CastOnArrayInit")))
+    (return (global.get $$string_|castonarrayi...|@castonarrayinit.CastOnArrayInit))
    )
   )
+  (global.set $$string_|castonarrayi...|@castonarrayinit.CastOnArrayInit (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "castonarrayinit.CastOnArrayInit")))
   (return (global.get $$string_|castonarrayi...|@castonarrayinit.CastOnArrayInit))
  )
 )
@@ -245,14 +247,15 @@
 )
 
 ;;; Class<T> Foo.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@castonarrayinit.CastOnArrayInit.Foo
+(func $$getClassMetadata__java_lang_Class_<once>_@castonarrayinit.CastOnArrayInit.Foo
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@castonarrayinit.CastOnArrayInit.Foo))
+  (if (i32.eqz (ref.is_null (global.get $$class@castonarrayinit.CastOnArrayInit.Foo)))
    (then
-    (global.set $$class@castonarrayinit.CastOnArrayInit.Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|castonarrayi...|__java_lang_String (ref.func $$getString_|castonarrayi...|__java_lang_String@castonarrayinit.CastOnArrayInit.Foo) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@castonarrayinit.CastOnArrayInit.Foo))
    )
   )
+  (global.set $$class@castonarrayinit.CastOnArrayInit.Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|castonarrayi...|__java_lang_String_<once>_@castonarrayinit.CastOnArrayInit.Foo )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@castonarrayinit.CastOnArrayInit.Foo))
  )
 )
@@ -265,20 +268,21 @@
  (local $this (ref null $castonarrayinit.CastOnArrayInit.Foo))
  (local.set $this (ref.cast (ref $castonarrayinit.CastOnArrayInit.Foo) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@castonarrayinit.CastOnArrayInit.Foo) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@castonarrayinit.CastOnArrayInit.Foo ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@castonarrayinit.CastOnArrayInit.Foo)
 
 ;;; String Foo.$getString_|castonarrayi...|()
-(func $$getString_|castonarrayi...|__java_lang_String@castonarrayinit.CastOnArrayInit.Foo
+(func $$getString_|castonarrayi...|__java_lang_String_<once>_@castonarrayinit.CastOnArrayInit.Foo
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|castonarrayi...|@castonarrayinit.CastOnArrayInit.Foo))
+  (if (i32.eqz (ref.is_null (global.get $$string_|castonarrayi...|@castonarrayinit.CastOnArrayInit.Foo)))
    (then
-    (global.set $$string_|castonarrayi...|@castonarrayinit.CastOnArrayInit.Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "castonarrayinit.CastOnArrayInit$Foo")))
+    (return (global.get $$string_|castonarrayi...|@castonarrayinit.CastOnArrayInit.Foo))
    )
   )
+  (global.set $$string_|castonarrayi...|@castonarrayinit.CastOnArrayInit.Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "castonarrayinit.CastOnArrayInit$Foo")))
   (return (global.get $$string_|castonarrayi...|@castonarrayinit.CastOnArrayInit.Foo))
  )
 )

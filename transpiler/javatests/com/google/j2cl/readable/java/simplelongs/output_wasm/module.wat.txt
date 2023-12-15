@@ -224,14 +224,15 @@
 )
 
 ;;; Class<T> SimpleLongs.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@simplelongs.SimpleLongs
+(func $$getClassMetadata__java_lang_Class_<once>_@simplelongs.SimpleLongs
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@simplelongs.SimpleLongs))
+  (if (i32.eqz (ref.is_null (global.get $$class@simplelongs.SimpleLongs)))
    (then
-    (global.set $$class@simplelongs.SimpleLongs (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|simplelongs....|__java_lang_String (ref.func $$getString_|simplelongs....|__java_lang_String@simplelongs.SimpleLongs) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@simplelongs.SimpleLongs))
    )
   )
+  (global.set $$class@simplelongs.SimpleLongs (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|simplelongs....|__java_lang_String_<once>_@simplelongs.SimpleLongs )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@simplelongs.SimpleLongs))
  )
 )
@@ -244,20 +245,21 @@
  (local $this (ref null $simplelongs.SimpleLongs))
  (local.set $this (ref.cast (ref $simplelongs.SimpleLongs) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@simplelongs.SimpleLongs) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@simplelongs.SimpleLongs ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@simplelongs.SimpleLongs)
 
 ;;; String SimpleLongs.$getString_|simplelongs....|()
-(func $$getString_|simplelongs....|__java_lang_String@simplelongs.SimpleLongs
+(func $$getString_|simplelongs....|__java_lang_String_<once>_@simplelongs.SimpleLongs
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|simplelongs....|@simplelongs.SimpleLongs))
+  (if (i32.eqz (ref.is_null (global.get $$string_|simplelongs....|@simplelongs.SimpleLongs)))
    (then
-    (global.set $$string_|simplelongs....|@simplelongs.SimpleLongs (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "simplelongs.SimpleLongs")))
+    (return (global.get $$string_|simplelongs....|@simplelongs.SimpleLongs))
    )
   )
+  (global.set $$string_|simplelongs....|@simplelongs.SimpleLongs (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "simplelongs.SimpleLongs")))
   (return (global.get $$string_|simplelongs....|@simplelongs.SimpleLongs))
  )
 )

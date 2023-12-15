@@ -234,27 +234,29 @@
 )
 
 ;;; Class<T> MyInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@instancejsmethods.MyInterface
+(func $$getClassMetadata__java_lang_Class_<once>_@instancejsmethods.MyInterface
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@instancejsmethods.MyInterface))
+  (if (i32.eqz (ref.is_null (global.get $$class@instancejsmethods.MyInterface)))
    (then
-    (global.set $$class@instancejsmethods.MyInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instancejsme...|__java_lang_String (ref.func $$getString_|instancejsme...|__java_lang_String@instancejsmethods.MyInterface) )))
+    (return (global.get $$class@instancejsmethods.MyInterface))
    )
   )
+  (global.set $$class@instancejsmethods.MyInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|instancejsme...|__java_lang_String_<once>_@instancejsmethods.MyInterface )))
   (return (global.get $$class@instancejsmethods.MyInterface))
  )
 )
 
 ;;; String MyInterface.$getString_|instancejsme...|()
-(func $$getString_|instancejsme...|__java_lang_String@instancejsmethods.MyInterface
+(func $$getString_|instancejsme...|__java_lang_String_<once>_@instancejsmethods.MyInterface
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|instancejsme...|@instancejsmethods.MyInterface))
+  (if (i32.eqz (ref.is_null (global.get $$string_|instancejsme...|@instancejsmethods.MyInterface)))
    (then
-    (global.set $$string_|instancejsme...|@instancejsmethods.MyInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instancejsmethods.MyInterface")))
+    (return (global.get $$string_|instancejsme...|@instancejsmethods.MyInterface))
    )
   )
+  (global.set $$string_|instancejsme...|@instancejsmethods.MyInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instancejsmethods.MyInterface")))
   (return (global.get $$string_|instancejsme...|@instancejsmethods.MyInterface))
  )
 )
@@ -341,14 +343,15 @@
 )
 
 ;;; Class<T> SuperParent.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@instancejsmethods.SuperParent
+(func $$getClassMetadata__java_lang_Class_<once>_@instancejsmethods.SuperParent
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@instancejsmethods.SuperParent))
+  (if (i32.eqz (ref.is_null (global.get $$class@instancejsmethods.SuperParent)))
    (then
-    (global.set $$class@instancejsmethods.SuperParent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instancejsme...|__java_lang_String (ref.func $$getString_|instancejsme...|__java_lang_String@instancejsmethods.SuperParent) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@instancejsmethods.SuperParent))
    )
   )
+  (global.set $$class@instancejsmethods.SuperParent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|instancejsme...|__java_lang_String_<once>_@instancejsmethods.SuperParent )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@instancejsmethods.SuperParent))
  )
 )
@@ -361,20 +364,21 @@
  (local $this (ref null $instancejsmethods.SuperParent))
  (local.set $this (ref.cast (ref $instancejsmethods.SuperParent) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@instancejsmethods.SuperParent) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@instancejsmethods.SuperParent ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@instancejsmethods.SuperParent)
 
 ;;; String SuperParent.$getString_|instancejsme...|()
-(func $$getString_|instancejsme...|__java_lang_String@instancejsmethods.SuperParent
+(func $$getString_|instancejsme...|__java_lang_String_<once>_@instancejsmethods.SuperParent
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|instancejsme...|@instancejsmethods.SuperParent))
+  (if (i32.eqz (ref.is_null (global.get $$string_|instancejsme...|@instancejsmethods.SuperParent)))
    (then
-    (global.set $$string_|instancejsme...|@instancejsmethods.SuperParent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instancejsmethods.SuperParent")))
+    (return (global.get $$string_|instancejsme...|@instancejsmethods.SuperParent))
    )
   )
+  (global.set $$string_|instancejsme...|@instancejsmethods.SuperParent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instancejsmethods.SuperParent")))
   (return (global.get $$string_|instancejsme...|@instancejsmethods.SuperParent))
  )
 )
@@ -511,14 +515,15 @@
 )
 
 ;;; Class<T> Main.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@instancejsmethods.Main
+(func $$getClassMetadata__java_lang_Class_<once>_@instancejsmethods.Main
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@instancejsmethods.Main))
+  (if (i32.eqz (ref.is_null (global.get $$class@instancejsmethods.Main)))
    (then
-    (global.set $$class@instancejsmethods.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instancejsme...|__java_lang_String (ref.func $$getString_|instancejsme...|__java_lang_String@instancejsmethods.Main) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@instancejsmethods.Main))
    )
   )
+  (global.set $$class@instancejsmethods.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|instancejsme...|__java_lang_String_<once>_@instancejsmethods.Main )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@instancejsmethods.Main))
  )
 )
@@ -531,20 +536,21 @@
  (local $this (ref null $instancejsmethods.Main))
  (local.set $this (ref.cast (ref $instancejsmethods.Main) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@instancejsmethods.Main) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@instancejsmethods.Main ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@instancejsmethods.Main)
 
 ;;; String Main.$getString_|instancejsme...|()
-(func $$getString_|instancejsme...|__java_lang_String@instancejsmethods.Main
+(func $$getString_|instancejsme...|__java_lang_String_<once>_@instancejsmethods.Main
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|instancejsme...|@instancejsmethods.Main))
+  (if (i32.eqz (ref.is_null (global.get $$string_|instancejsme...|@instancejsmethods.Main)))
    (then
-    (global.set $$string_|instancejsme...|@instancejsmethods.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instancejsmethods.Main")))
+    (return (global.get $$string_|instancejsme...|@instancejsmethods.Main))
    )
   )
+  (global.set $$string_|instancejsme...|@instancejsmethods.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instancejsmethods.Main")))
   (return (global.get $$string_|instancejsme...|@instancejsmethods.Main))
  )
 )
@@ -647,14 +653,15 @@
 )
 
 ;;; Class<T> Parent.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@instancejsmethods.Parent
+(func $$getClassMetadata__java_lang_Class_<once>_@instancejsmethods.Parent
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@instancejsmethods.Parent))
+  (if (i32.eqz (ref.is_null (global.get $$class@instancejsmethods.Parent)))
    (then
-    (global.set $$class@instancejsmethods.Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instancejsme...|__java_lang_String (ref.func $$getString_|instancejsme...|__java_lang_String@instancejsmethods.Parent) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@instancejsmethods.SuperParent) )))
+    (return (global.get $$class@instancejsmethods.Parent))
    )
   )
+  (global.set $$class@instancejsmethods.Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|instancejsme...|__java_lang_String_<once>_@instancejsmethods.Parent )(call $$getClassMetadata__java_lang_Class_<once>_@instancejsmethods.SuperParent )))
   (return (global.get $$class@instancejsmethods.Parent))
  )
 )
@@ -667,20 +674,21 @@
  (local $this (ref null $instancejsmethods.Parent))
  (local.set $this (ref.cast (ref $instancejsmethods.Parent) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@instancejsmethods.Parent) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@instancejsmethods.Parent ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@instancejsmethods.Parent)
 
 ;;; String Parent.$getString_|instancejsme...|()
-(func $$getString_|instancejsme...|__java_lang_String@instancejsmethods.Parent
+(func $$getString_|instancejsme...|__java_lang_String_<once>_@instancejsmethods.Parent
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|instancejsme...|@instancejsmethods.Parent))
+  (if (i32.eqz (ref.is_null (global.get $$string_|instancejsme...|@instancejsmethods.Parent)))
    (then
-    (global.set $$string_|instancejsme...|@instancejsmethods.Parent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instancejsmethods.Parent")))
+    (return (global.get $$string_|instancejsme...|@instancejsmethods.Parent))
    )
   )
+  (global.set $$string_|instancejsme...|@instancejsmethods.Parent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instancejsmethods.Parent")))
   (return (global.get $$string_|instancejsme...|@instancejsmethods.Parent))
  )
 )
@@ -798,14 +806,15 @@
 )
 
 ;;; Class<T> Child.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@instancejsmethods.Child
+(func $$getClassMetadata__java_lang_Class_<once>_@instancejsmethods.Child
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@instancejsmethods.Child))
+  (if (i32.eqz (ref.is_null (global.get $$class@instancejsmethods.Child)))
    (then
-    (global.set $$class@instancejsmethods.Child (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|instancejsme...|__java_lang_String (ref.func $$getString_|instancejsme...|__java_lang_String@instancejsmethods.Child) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@instancejsmethods.Parent) )))
+    (return (global.get $$class@instancejsmethods.Child))
    )
   )
+  (global.set $$class@instancejsmethods.Child (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|instancejsme...|__java_lang_String_<once>_@instancejsmethods.Child )(call $$getClassMetadata__java_lang_Class_<once>_@instancejsmethods.Parent )))
   (return (global.get $$class@instancejsmethods.Child))
  )
 )
@@ -818,20 +827,21 @@
  (local $this (ref null $instancejsmethods.Child))
  (local.set $this (ref.cast (ref $instancejsmethods.Child) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@instancejsmethods.Child) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@instancejsmethods.Child ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@instancejsmethods.Child)
 
 ;;; String Child.$getString_|instancejsme...|()
-(func $$getString_|instancejsme...|__java_lang_String@instancejsmethods.Child
+(func $$getString_|instancejsme...|__java_lang_String_<once>_@instancejsmethods.Child
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|instancejsme...|@instancejsmethods.Child))
+  (if (i32.eqz (ref.is_null (global.get $$string_|instancejsme...|@instancejsmethods.Child)))
    (then
-    (global.set $$string_|instancejsme...|@instancejsmethods.Child (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instancejsmethods.Child")))
+    (return (global.get $$string_|instancejsme...|@instancejsmethods.Child))
    )
   )
+  (global.set $$string_|instancejsme...|@instancejsmethods.Child (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instancejsmethods.Child")))
   (return (global.get $$string_|instancejsme...|@instancejsmethods.Child))
  )
 )

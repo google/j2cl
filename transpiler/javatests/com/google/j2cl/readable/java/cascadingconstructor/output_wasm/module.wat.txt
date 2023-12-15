@@ -121,14 +121,15 @@
 )
 
 ;;; Class<T> CascadingConstructor.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class@cascadingconstructor.CascadingConstructor
+(func $$getClassMetadata__java_lang_Class_<once>_@cascadingconstructor.CascadingConstructor
  (result (ref null $java.lang.Class))
  (block
-  (if (ref.is_null (global.get $$class@cascadingconstructor.CascadingConstructor))
+  (if (i32.eqz (ref.is_null (global.get $$class@cascadingconstructor.CascadingConstructor)))
    (then
-    (global.set $$class@cascadingconstructor.CascadingConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $function.no.side.effects.$getString_|cascadingcon...|__java_lang_String (ref.func $$getString_|cascadingcon...|__java_lang_String@cascadingconstructor.CascadingConstructor) )(call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@java.lang.Object) )))
+    (return (global.get $$class@cascadingconstructor.CascadingConstructor))
    )
   )
+  (global.set $$class@cascadingconstructor.CascadingConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|cascadingcon...|__java_lang_String_<once>_@cascadingconstructor.CascadingConstructor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@cascadingconstructor.CascadingConstructor))
  )
 )
@@ -141,20 +142,21 @@
  (local $this (ref null $cascadingconstructor.CascadingConstructor))
  (local.set $this (ref.cast (ref $cascadingconstructor.CascadingConstructor) (local.get $this.untyped)))
  (block
-  (return (call $function.no.side.effects.$getClassMetadata__java_lang_Class (ref.func $$getClassMetadata__java_lang_Class@cascadingconstructor.CascadingConstructor) ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@cascadingconstructor.CascadingConstructor ))
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cascadingconstructor.CascadingConstructor)
 
 ;;; String CascadingConstructor.$getString_|cascadingcon...|()
-(func $$getString_|cascadingcon...|__java_lang_String@cascadingconstructor.CascadingConstructor
+(func $$getString_|cascadingcon...|__java_lang_String_<once>_@cascadingconstructor.CascadingConstructor
  (result (ref null $java.lang.String))
  (block
-  (if (ref.is_null (global.get $$string_|cascadingcon...|@cascadingconstructor.CascadingConstructor))
+  (if (i32.eqz (ref.is_null (global.get $$string_|cascadingcon...|@cascadingconstructor.CascadingConstructor)))
    (then
-    (global.set $$string_|cascadingcon...|@cascadingconstructor.CascadingConstructor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cascadingconstructor.CascadingConstructor")))
+    (return (global.get $$string_|cascadingcon...|@cascadingconstructor.CascadingConstructor))
    )
   )
+  (global.set $$string_|cascadingcon...|@cascadingconstructor.CascadingConstructor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cascadingconstructor.CascadingConstructor")))
   (return (global.get $$string_|cascadingcon...|@cascadingconstructor.CascadingConstructor))
  )
 )
