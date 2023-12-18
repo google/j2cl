@@ -61,9 +61,15 @@ def _impl_j2cl_library(ctx):
         },
     )
 
+    outputs = [
+        ctx.outputs.jar,
+    ]
+
     output_js = j2cl_provider._private_.output_js
-    output = [output_js, ctx.outputs.jar] if output_js else [ctx.outputs.jar]
-    extra_providers = [DefaultInfo(files = depset(output))]
+    if output_js:
+        outputs.append(output_js)
+
+    extra_providers = [DefaultInfo(files = depset(outputs))]
     if j2kt_provider:
         extra_providers.append(j2kt_provider)
 
