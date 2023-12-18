@@ -34,13 +34,13 @@ public class InstanceInitOrder {
     assertTrue(initStep++ == 3); // #3
   }
 
-  {
-    assertTrue(initStep++ == 4); // #4
-  }
-
   @JsConstructor
   public InstanceInitOrder() {
     assertTrue(initStep++ == 5); // #5
+  }
+
+  {
+    assertTrue(initStep++ == 4); // #4
   }
 
   public int initializeField1() {
