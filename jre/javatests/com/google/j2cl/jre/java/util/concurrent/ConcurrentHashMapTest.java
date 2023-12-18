@@ -10,22 +10,21 @@
 package com.google.j2cl.jre.java.util.concurrent;
 
 import com.google.j2cl.jre.java.util.EmulTestBase;
+import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import org.jspecify.nullness.NullMarked;
 
 /**
- * Tests for {@link java.util.concurrent.ConcurrentHashMap}.
- * It's adopted from tests from {@code
+ * Tests for {@link java.util.concurrent.ConcurrentHashMap}. It's adopted from tests from {@code
  * http://gee.cs.oswego.edu/cgi-bin/viewcvs.cgi/jsr166/src/test/tck/ConcurrentHashMapTest.java?view=markup}
  */
-// TODO(hhchan): Fix the type parameters (missing from the original test).
-@SuppressWarnings({"unchecked", "MismatchedQueryAndUpdateOfCollection"})
+@NullMarked
 public class ConcurrentHashMapTest extends EmulTestBase {
 
   private static final int ZERO = 0;
@@ -37,8 +36,8 @@ public class ConcurrentHashMapTest extends EmulTestBase {
   private static final int SIX = 6;
 
   /** Create a map from Integers 1-5 to Strings "A"-"E". */
-  private static ConcurrentHashMap map5() {
-    ConcurrentHashMap map = new ConcurrentHashMap(5);
+  private static ConcurrentHashMap<Integer, String> map5() {
+    ConcurrentHashMap<Integer, String> map = new ConcurrentHashMap<>(5);
     assertTrue(map.isEmpty());
     map.put(ONE, "A");
     map.put(TWO, "B");
@@ -52,15 +51,15 @@ public class ConcurrentHashMapTest extends EmulTestBase {
 
   /** clear removes all pairs */
   public void testClear() {
-    ConcurrentHashMap map = map5();
+    ConcurrentHashMap<Integer, String> map = map5();
     map.clear();
     assertEquals(0, map.size());
   }
 
   /** Maps with same contents are equal */
   public void testEquals() {
-    ConcurrentHashMap map1 = map5();
-    ConcurrentHashMap map2 = map5();
+    ConcurrentHashMap<Integer, String> map1 = map5();
+    ConcurrentHashMap<Integer, String> map2 = map5();
     assertEquals(map1, map2);
     assertEquals(map2, map1);
     map1.clear();
@@ -70,29 +69,29 @@ public class ConcurrentHashMapTest extends EmulTestBase {
 
   /** contains returns true for contained value */
   public void testContains() {
-    ConcurrentHashMap map = map5();
+    ConcurrentHashMap<Integer, String> map = map5();
     assertTrue(map.containsValue("A"));
     assertFalse(map.containsValue("Z"));
   }
 
   /** containsKey returns true for contained key */
   public void testContainsKey() {
-    ConcurrentHashMap map = map5();
+    ConcurrentHashMap<Integer, String> map = map5();
     assertTrue(map.containsKey(ONE));
     assertFalse(map.containsKey(ZERO));
   }
 
   /** containsValue returns true for held values */
   public void testContainsValue() {
-    ConcurrentHashMap map = map5();
+    ConcurrentHashMap<Integer, String> map = map5();
     assertTrue(map.containsValue("A"));
     assertFalse(map.containsValue("Z"));
   }
 
   /** enumeration returns an enumeration containing the correct elements */
   public void testEnumeration() {
-    ConcurrentHashMap map = map5();
-    Enumeration e = map.elements();
+    ConcurrentHashMap<Integer, String> map = map5();
+    Enumeration<String> e = map.elements();
     int count = 0;
     while (e.hasMoreElements()) {
       count++;
@@ -103,23 +102,23 @@ public class ConcurrentHashMapTest extends EmulTestBase {
 
   /** get returns the correct element at the given key, or null if not present */
   public void testGet() {
-    ConcurrentHashMap map = map5();
+    ConcurrentHashMap<Integer, String> map = map5();
     assertEquals("A", (String) map.get(ONE));
-    assertNull(map.get("anything"));
+    assertNull(map.get(42));
   }
 
   /** isEmpty is true of empty map and false for non-empty */
   public void testIsEmpty() {
-    ConcurrentHashMap empty = new ConcurrentHashMap();
-    ConcurrentHashMap map = map5();
+    ConcurrentHashMap<Integer, String> empty = new ConcurrentHashMap<>();
+    ConcurrentHashMap<Integer, String> map = map5();
     assertTrue(empty.isEmpty());
     assertFalse(map.isEmpty());
   }
 
   /** keys returns an enumeration containing all the keys from the map */
   public void testKeys() {
-    ConcurrentHashMap map = map5();
-    Enumeration e = map.keys();
+    ConcurrentHashMap<Integer, String> map = map5();
+    Enumeration<Integer> e = map.keys();
     int count = 0;
     while (e.hasMoreElements()) {
       count++;
@@ -130,8 +129,8 @@ public class ConcurrentHashMapTest extends EmulTestBase {
 
   /** keySet returns a Set containing all the keys */
   public void testKeySet() {
-    ConcurrentHashMap map = map5();
-    Set s = map.keySet();
+    ConcurrentHashMap<Integer, String> map = map5();
+    Set<Integer> s = map.keySet();
     assertEquals(5, s.size());
     assertTrue(s.contains(ONE));
     assertTrue(s.contains(TWO));
@@ -142,8 +141,8 @@ public class ConcurrentHashMapTest extends EmulTestBase {
 
   /** keySet.toArray returns contains all keys */
   public void testKeySetToArray() {
-    ConcurrentHashMap map = map5();
-    Set s = map.keySet();
+    ConcurrentHashMap<Integer, String> map = map5();
+    Set<Integer> s = map.keySet();
     Object[] ar = s.toArray();
     assertTrue(s.containsAll(Arrays.asList(ar)));
     assertEquals(5, ar.length);
@@ -153,10 +152,10 @@ public class ConcurrentHashMapTest extends EmulTestBase {
 
   /** Values.toArray contains all values */
   public void testValuesToArray() {
-    ConcurrentHashMap map = map5();
-    Collection v = map.values();
+    ConcurrentHashMap<Integer, String> map = map5();
+    Collection<String> v = map.values();
     Object[] ar = v.toArray();
-    ArrayList s = new ArrayList(Arrays.asList(ar));
+    ArrayList<Object> s = new ArrayList<>(Arrays.asList(ar));
     assertEquals(5, ar.length);
     assertTrue(s.contains("A"));
     assertTrue(s.contains("B"));
@@ -167,8 +166,8 @@ public class ConcurrentHashMapTest extends EmulTestBase {
 
   /** entrySet.toArray contains all entries */
   public void testEntrySetToArray() {
-    ConcurrentHashMap map = map5();
-    Set s = map.entrySet();
+    ConcurrentHashMap<Integer, String> map = map5();
+    Set<Map.Entry<Integer, String>> s = map.entrySet();
     Object[] ar = s.toArray();
     assertEquals(5, ar.length);
     for (int i = 0; i < 5; ++i) {
@@ -179,8 +178,8 @@ public class ConcurrentHashMapTest extends EmulTestBase {
 
   /** values collection contains all values */
   public void testValues() {
-    ConcurrentHashMap map = map5();
-    Collection s = map.values();
+    ConcurrentHashMap<Integer, String> map = map5();
+    Collection<String> s = map.values();
     assertEquals(5, s.size());
     assertTrue(s.contains("A"));
     assertTrue(s.contains("B"));
@@ -191,11 +190,10 @@ public class ConcurrentHashMapTest extends EmulTestBase {
 
   /** entrySet contains all pairs */
   public void testEntrySet() {
-    ConcurrentHashMap map = map5();
-    Set s = map.entrySet();
+    ConcurrentHashMap<Integer, String> map = map5();
+    Set<Map.Entry<Integer, String>> s = map.entrySet();
     assertEquals(5, s.size());
-    for (Object value : s) {
-      Entry e = (Entry) value;
+    for (Map.Entry<Integer, String> e : s) {
       assertTrue(
           (e.getKey().equals(ONE) && e.getValue().equals("A"))
               || (e.getKey().equals(TWO) && e.getValue().equals("B"))
@@ -207,8 +205,8 @@ public class ConcurrentHashMapTest extends EmulTestBase {
 
   /** putAll adds all key-value pairs from the given map */
   public void testPutAll() {
-    ConcurrentHashMap empty = new ConcurrentHashMap();
-    ConcurrentHashMap map = map5();
+    ConcurrentHashMap<Integer, String> empty = new ConcurrentHashMap<>();
+    ConcurrentHashMap<Integer, String> map = map5();
     empty.putAll(map);
     assertEquals(5, empty.size());
     assertTrue(empty.containsKey(ONE));
@@ -220,34 +218,34 @@ public class ConcurrentHashMapTest extends EmulTestBase {
 
   /** putIfAbsent works when the given key is not present */
   public void testPutIfAbsent() {
-    ConcurrentHashMap map = map5();
+    ConcurrentHashMap<Integer, String> map = map5();
     map.putIfAbsent(SIX, "Z");
     assertTrue(map.containsKey(SIX));
   }
 
   /** putIfAbsent does not add the pair if the key is already present */
   public void testPutIfAbsent2() {
-    ConcurrentHashMap map = map5();
+    ConcurrentHashMap<Integer, String> map = map5();
     assertEquals("A", map.putIfAbsent(ONE, "Z"));
   }
 
   /** replace fails when the given key is not present */
   public void testReplace() {
-    ConcurrentHashMap map = map5();
+    ConcurrentHashMap<Integer, String> map = map5();
     assertNull(map.replace(SIX, "Z"));
     assertFalse(map.containsKey(SIX));
   }
 
   /** replace succeeds if the key is already present */
   public void testReplace2() {
-    ConcurrentHashMap map = map5();
+    ConcurrentHashMap<Integer, String> map = map5();
     assertNotNull(map.replace(ONE, "Z"));
     assertEquals("Z", map.get(ONE));
   }
 
   /** replace value fails when the given key not mapped to expected value */
   public void testReplaceValue() {
-    ConcurrentHashMap map = map5();
+    ConcurrentHashMap<Integer, String> map = map5();
     assertEquals("A", map.get(ONE));
     assertFalse(map.replace(ONE, "Z", "Z"));
     assertEquals("A", map.get(ONE));
@@ -255,7 +253,7 @@ public class ConcurrentHashMapTest extends EmulTestBase {
 
   /** replace value succeeds when the given key mapped to expected value */
   public void testReplaceValue2() {
-    ConcurrentHashMap map = map5();
+    ConcurrentHashMap<Integer, String> map = map5();
     assertEquals("A", map.get(ONE));
     assertTrue(map.replace(ONE, "A", "Z"));
     assertEquals("Z", map.get(ONE));
@@ -263,7 +261,7 @@ public class ConcurrentHashMapTest extends EmulTestBase {
 
   /** remove removes the correct key-value pair from the map */
   public void testRemove() {
-    ConcurrentHashMap map = map5();
+    ConcurrentHashMap<Integer, String> map = map5();
     map.remove(FIVE);
     assertEquals(4, map.size());
     assertFalse(map.containsKey(FIVE));
@@ -271,7 +269,7 @@ public class ConcurrentHashMapTest extends EmulTestBase {
 
   /** remove(key,value) removes only if pair present */
   public void testRemove2() {
-    ConcurrentHashMap map = map5();
+    ConcurrentHashMap<Integer, String> map = map5();
     map.remove(FIVE, "E");
     assertEquals(4, map.size());
     assertFalse(map.containsKey(FIVE));
@@ -282,15 +280,15 @@ public class ConcurrentHashMapTest extends EmulTestBase {
 
   /** size returns the correct values */
   public void testSize() {
-    ConcurrentHashMap map = map5();
-    ConcurrentHashMap empty = new ConcurrentHashMap();
+    ConcurrentHashMap<Integer, String> map = map5();
+    ConcurrentHashMap<Integer, String> empty = new ConcurrentHashMap<>();
     assertEquals(0, empty.size());
     assertEquals(5, map.size());
   }
 
   /** toString contains toString of elements */
   public void testToString() {
-    ConcurrentHashMap map = map5();
+    ConcurrentHashMap<Integer, String> map = map5();
     String s = map.toString();
     for (int i = 1; i <= 5; ++i) {
       assertTrue(s.indexOf(String.valueOf(i)) >= 0);
@@ -302,16 +300,17 @@ public class ConcurrentHashMapTest extends EmulTestBase {
   /** Cannot create with only negative capacity */
   public void testConstructor() {
     try {
-      new ConcurrentHashMap(-1);
+      new ConcurrentHashMap<Integer, String>(-1);
       fail("Exception expected");
     } catch (IllegalArgumentException expected) {
     }
   }
 
   /** get(null) throws NPE */
+  @J2ktIncompatible // Non-nullable according to Jspecify
   public void testGet_NullPointerException() {
     try {
-      ConcurrentHashMap c = new ConcurrentHashMap(5);
+      ConcurrentHashMap<Integer, String> c = new ConcurrentHashMap<>(5);
       c.get(null);
       fail("Exception expected");
     } catch (NullPointerException expected) {
@@ -319,9 +318,10 @@ public class ConcurrentHashMapTest extends EmulTestBase {
   }
 
   /** containsKey(null) throws NPE */
+  @J2ktIncompatible // Non-nullable according to Jspecify
   public void testContainsKey_NullPointerException() {
     try {
-      ConcurrentHashMap c = new ConcurrentHashMap(5);
+      ConcurrentHashMap<Integer, String> c = new ConcurrentHashMap<>(5);
       c.containsKey(null);
       fail("Exception expected");
     } catch (NullPointerException expected) {
@@ -329,9 +329,10 @@ public class ConcurrentHashMapTest extends EmulTestBase {
   }
 
   /** containsValue(null) throws NPE */
+  @J2ktIncompatible // Non-nullable according to Jspecify
   public void testContainsValue_NullPointerException() {
     try {
-      ConcurrentHashMap c = new ConcurrentHashMap(5);
+      ConcurrentHashMap<Integer, String> c = new ConcurrentHashMap<>(5);
       c.containsValue(null);
       fail("Exception expected");
     } catch (NullPointerException expected) {
@@ -339,9 +340,10 @@ public class ConcurrentHashMapTest extends EmulTestBase {
   }
 
   /** contains(null) throws NPE */
+  @J2ktIncompatible // Non-nullable according to Jspecify
   public void testContains_NullPointerException() {
     try {
-      ConcurrentHashMap c = new ConcurrentHashMap(5);
+      ConcurrentHashMap<Integer, String> c = new ConcurrentHashMap<>(5);
       c.containsValue(null);
       fail("Exception expected");
     } catch (NullPointerException expected) {
@@ -349,9 +351,10 @@ public class ConcurrentHashMapTest extends EmulTestBase {
   }
 
   /** put(null,x) throws NPE */
+  @J2ktIncompatible // Non-nullable according to Jspecify
   public void testPut1_NullPointerException() {
     try {
-      ConcurrentHashMap c = new ConcurrentHashMap(5);
+      ConcurrentHashMap<Integer, String> c = new ConcurrentHashMap<>(5);
       c.put(null, "whatever");
       fail("Exception expected");
     } catch (NullPointerException expected) {
@@ -359,9 +362,10 @@ public class ConcurrentHashMapTest extends EmulTestBase {
   }
 
   /** put(x, null) throws NPE */
+  @J2ktIncompatible // Non-nullable according to Jspecify
   public void testPut2_NullPointerException() {
     try {
-      ConcurrentHashMap c = new ConcurrentHashMap(5);
+      ConcurrentHashMap<String, String> c = new ConcurrentHashMap<>(5);
       c.put("whatever", null);
       fail("Exception expected");
     } catch (NullPointerException expected) {
@@ -369,9 +373,10 @@ public class ConcurrentHashMapTest extends EmulTestBase {
   }
 
   /** putIfAbsent(null, x) throws NPE */
+  @J2ktIncompatible // Non-nullable according to Jspecify
   public void testPutIfAbsent1_NullPointerException() {
     try {
-      ConcurrentHashMap c = new ConcurrentHashMap(5);
+      ConcurrentHashMap<Integer, String> c = new ConcurrentHashMap<>(5);
       c.putIfAbsent(null, "whatever");
       fail("Exception expected");
     } catch (NullPointerException expected) {
@@ -379,9 +384,10 @@ public class ConcurrentHashMapTest extends EmulTestBase {
   }
 
   /** replace(null, x) throws NPE */
+  @J2ktIncompatible // Non-nullable according to Jspecify
   public void testReplace_NullPointerException() {
     try {
-      ConcurrentHashMap c = new ConcurrentHashMap(5);
+      ConcurrentHashMap<Integer, String> c = new ConcurrentHashMap<>(5);
       c.replace(null, "whatever");
       fail("Exception expected");
     } catch (NullPointerException expected) {
@@ -389,19 +395,21 @@ public class ConcurrentHashMapTest extends EmulTestBase {
   }
 
   /** replace(null, x, y) throws NPE */
+  @J2ktIncompatible // Non-nullable according to Jspecify
   public void testReplaceValue_NullPointerException() {
     try {
-      ConcurrentHashMap c = new ConcurrentHashMap(5);
-      c.replace(null, ONE, "whatever");
+      ConcurrentHashMap<Integer, Integer> c = new ConcurrentHashMap<>(5);
+      c.replace(null, ONE, 42);
       fail("Exception expected");
     } catch (NullPointerException expected) {
     }
   }
 
   /** putIfAbsent(x, null) throws NPE */
+  @J2ktIncompatible // Non-nullable according to Jspecify
   public void testPutIfAbsent2_NullPointerException() {
     try {
-      ConcurrentHashMap c = new ConcurrentHashMap(5);
+      ConcurrentHashMap<String, String> c = new ConcurrentHashMap<>(5);
       c.putIfAbsent("whatever", null);
       fail("Exception expected");
     } catch (NullPointerException expected) {
@@ -409,9 +417,10 @@ public class ConcurrentHashMapTest extends EmulTestBase {
   }
 
   /** replace(x, null) throws NPE */
+  @J2ktIncompatible // Non-nullable according to Jspecify
   public void testReplace2_NullPointerException() {
     try {
-      ConcurrentHashMap c = new ConcurrentHashMap(5);
+      ConcurrentHashMap<String, String> c = new ConcurrentHashMap<>(5);
       c.replace("whatever", null);
       fail("Exception expected");
     } catch (NullPointerException expected) {
@@ -419,9 +428,10 @@ public class ConcurrentHashMapTest extends EmulTestBase {
   }
 
   /** replace(x, null, y) throws NPE */
+  @J2ktIncompatible // Non-nullable according to Jspecify
   public void testReplaceValue2_NullPointerException() {
     try {
-      ConcurrentHashMap c = new ConcurrentHashMap(5);
+      ConcurrentHashMap<String, String> c = new ConcurrentHashMap<>(5);
       c.replace("whatever", null, "A");
       fail("Exception expected");
     } catch (NullPointerException expected) {
@@ -429,9 +439,10 @@ public class ConcurrentHashMapTest extends EmulTestBase {
   }
 
   /** replace(x, y, null) throws NPE */
+  @J2ktIncompatible // Non-nullable according to Jspecify
   public void testReplaceValue3_NullPointerException() {
     try {
-      ConcurrentHashMap c = new ConcurrentHashMap(5);
+      ConcurrentHashMap<String, Integer> c = new ConcurrentHashMap<>(5);
       c.replace("whatever", ONE, null);
       fail("Exception expected");
     } catch (NullPointerException expected) {
@@ -439,9 +450,10 @@ public class ConcurrentHashMapTest extends EmulTestBase {
   }
 
   /** remove(null) throws NPE */
+  @J2ktIncompatible // Non-nullable according to Jspecify
   public void testRemove1_NullPointerException() {
     try {
-      ConcurrentHashMap c = new ConcurrentHashMap(5);
+      ConcurrentHashMap<String, String> c = new ConcurrentHashMap<>(5);
       c.put("sadsdf", "asdads");
       c.remove(null);
       fail("Exception expected");
@@ -450,9 +462,10 @@ public class ConcurrentHashMapTest extends EmulTestBase {
   }
 
   /** remove(null, x) throws NPE */
+  @J2ktIncompatible // Non-nullable according to Jspecify
   public void testRemove2_NullPointerException() {
     try {
-      ConcurrentHashMap c = new ConcurrentHashMap(5);
+      ConcurrentHashMap<String, String> c = new ConcurrentHashMap<>(5);
       c.put("sadsdf", "asdads");
       c.remove(null, "whatever");
       fail("Exception expected");
@@ -461,9 +474,10 @@ public class ConcurrentHashMapTest extends EmulTestBase {
   }
 
   /** remove(x, null) returns false */
+  @J2ktIncompatible // Non-nullable according to Jspecify
   public void testRemove3() {
     try {
-      ConcurrentHashMap c = new ConcurrentHashMap(5);
+      ConcurrentHashMap<String, String> c = new ConcurrentHashMap<>(5);
       c.put("sadsdf", "asdads");
       assertFalse(c.remove("sadsdf", null));
     } catch (NullPointerException e) {
@@ -474,13 +488,13 @@ public class ConcurrentHashMapTest extends EmulTestBase {
   /** SetValue of an EntrySet entry sets value in the map. */
   public void testSetValueWriteThrough() {
     // Adapted from a bug report by Eric Zoerner
-    ConcurrentHashMap map = new ConcurrentHashMap(2);
+    ConcurrentHashMap<Integer, Integer> map = new ConcurrentHashMap<>(2);
     assertTrue(map.isEmpty());
     for (int i = 0; i < 20; i++) {
       map.put(new Integer(i), new Integer(i));
     }
     assertFalse(map.isEmpty());
-    Map.Entry entry1 = (Map.Entry) map.entrySet().iterator().next();
+    Map.Entry<Integer, Integer> entry1 = map.entrySet().iterator().next();
 
     if (entry1.getKey().equals(new Integer(16))) {
       // can't perform the test this time
@@ -491,7 +505,7 @@ public class ConcurrentHashMapTest extends EmulTestBase {
     // remove 16 (a different key) from map
     // which just happens to cause entry1 to be cloned in map
     map.remove(new Integer(16));
-    entry1.setValue("XYZ");
-    assertTrue(map.containsValue("XYZ")); // fails
+    entry1.setValue(42);
+    assertTrue(map.containsValue(42)); // fails
   }
 }

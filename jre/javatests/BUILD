@@ -27,6 +27,8 @@ j2cl_library(
     name = "emul_tests_lib",
     testonly = 1,
     srcs = SRCS,
+    # Safe here as this is for tests only and there are no downstream users.
+    experimental_enable_jspecify_support_do_not_enable_without_jspecify_static_checking_or_you_might_cause_an_outage = True,
     generate_build_test = False,
     javacopts = [
         "-Xep:DoNotCall:OFF",
@@ -52,6 +54,7 @@ j2kt_native_library(
     srcs = [
         "com/google/j2cl/jre/BigDecimalSuite.java",
         "com/google/j2cl/jre/BigIntegerSuite.java",
+        "com/google/j2cl/jre/ConcurrentSuite.java",
         "com/google/j2cl/jre/DateTimeSuite.java",
         "com/google/j2cl/jre/EmulSuite.java",
         "com/google/j2cl/jre/java/util/ComparatorTest.java",
@@ -69,6 +72,8 @@ j2kt_native_library(
         "com/google/j2cl/jre/java/nio/charset/*.java",
         "com/google/j2cl/jre/java/security/*.java",
         "com/google/j2cl/jre/java/sql/*.java",
+        "com/google/j2cl/jre/java/util/concurrent/*.java",
+        "com/google/j2cl/jre/java/util/concurrent/atomic/*.java",
     ]),
     deps = [
         "//jre/java:javaemul_internal_annotations-j2kt-native",
@@ -125,6 +130,7 @@ j2cl_multi_test(
 
 j2cl_multi_test(
     name = "Concurrent",
+    enable_kt_native = True,
     shard_count = 5,
     test_class = "com.google.j2cl.jre.ConcurrentSuite",
     deps = [":emul_tests_lib"],
