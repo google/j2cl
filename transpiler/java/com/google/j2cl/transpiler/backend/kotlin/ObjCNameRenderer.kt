@@ -36,10 +36,9 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
 
   fun objCNameAnnotationSource(name: String, exact: Boolean? = null): Source =
     annotation(
-      nameRenderer.topLevelQualifiedNameSource(
-        "kotlin.native.ObjCName",
-        optInQualifiedName = "kotlin.experimental.ExperimentalObjCName"
-      ),
+      nameRenderer.sourceWithOptInQualifiedName("kotlin.experimental.ExperimentalObjCName") {
+        topLevelQualifiedNameSource("kotlin.native.ObjCName")
+      },
       literal(name),
       exact?.let { parameterSource("exact", literal(it)) }.orEmpty()
     )

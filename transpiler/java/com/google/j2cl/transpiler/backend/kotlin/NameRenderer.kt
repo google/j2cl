@@ -41,12 +41,8 @@ internal data class NameRenderer(
    * Returns source for top-level qualified name.
    *
    * @param qualifiedName top-level qualified name
-   * @param optInQualifiedName name of opt-in required annotation, which must be included
    */
-  fun topLevelQualifiedNameSource(
-    qualifiedName: String,
-    optInQualifiedName: String? = null
-  ): Source =
+  fun topLevelQualifiedNameSource(qualifiedName: String): Source =
     qualifiedName.qualifiedNameToSimpleName().let { simpleName ->
       if (localNames.contains(simpleName) || environment.containsIdentifier(simpleName)) {
         qualifiedIdentifierSource(qualifiedName)
@@ -55,9 +51,19 @@ internal data class NameRenderer(
           .qualifiedToNonAliasedSimpleName(qualifiedName)
           ?.let { identifierSource(it) }
           .orIfNull { qualifiedIdentifierSource(qualifiedName) }
-          .also { optInQualifiedName?.let { environment.addOptInQualifiedName(it) } }
       }
     }
+
+  /**
+   * Returns source from the given function adding the required opt-in.
+   *
+   * @param optInQualifiedName qualified name of the opt-in
+   * @param fn function returning source which requires the given opt-in
+   */
+  fun sourceWithOptInQualifiedName(
+    optInQualifiedName: String,
+    fn: NameRenderer.() -> Source
+  ): Source = fn().also { environment.addOptInQualifiedName(optInQualifiedName) }
 
   /** Returns source for the given qualified name of extension member. */
   fun extensionMemberQualifiedNameSource(qualifiedName: String): Source =
