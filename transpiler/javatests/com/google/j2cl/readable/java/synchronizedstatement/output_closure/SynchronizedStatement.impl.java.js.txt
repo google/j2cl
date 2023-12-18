@@ -31,6 +31,55 @@ class SynchronizedStatement extends j_l_Object {
    this.f_b__synchronizedstatement_SynchronizedStatement_ = this.f_b__synchronizedstatement_SynchronizedStatement_ - 1 | 0;
   }
  }
+ /** @nodts @return {number} */
+ m_testReturn__int() {
+  let /** number */ $value;
+  {
+   $Util.$synchronized(this);
+   if (this.f_a__synchronizedstatement_SynchronizedStatement_ < 10) {
+    let /** number */ $value_1;
+    return ($value_1 = this.f_a__synchronizedstatement_SynchronizedStatement_, this.f_a__synchronizedstatement_SynchronizedStatement_ = this.f_a__synchronizedstatement_SynchronizedStatement_ + 1 | 0, $value_1);
+   }
+  }
+  return ($value = this.f_b__synchronizedstatement_SynchronizedStatement_, this.f_b__synchronizedstatement_SynchronizedStatement_ = this.f_b__synchronizedstatement_SynchronizedStatement_ - 1 | 0, $value);
+ }
+ /** @nodts */
+ m_testBreakAndContinue__void() {
+  while (true) {
+   {
+    $Util.$synchronized(this);
+    if (this.f_a__synchronizedstatement_SynchronizedStatement_ < 10) {
+     this.f_a__synchronizedstatement_SynchronizedStatement_ = this.f_a__synchronizedstatement_SynchronizedStatement_ + 1 | 0;
+     continue;
+    }
+    break;
+   }
+  }
+ }
+ /** @nodts @return {number} */
+ m_testInitialization__int() {
+  let /** number */ a;
+  {
+   $Util.$synchronized(this);
+   a = 0;
+  }
+  return a;
+ }
+ /** @nodts */
+ m_testIfStatementWithNonVoidBodyWithoutElse__void() {
+  {
+   $Util.$synchronized(this);
+   if (this.f_a__synchronizedstatement_SynchronizedStatement_ < 10) {
+    this.m_intMethod__int_$p_synchronizedstatement_SynchronizedStatement();
+   } else if (this.f_b__synchronizedstatement_SynchronizedStatement_ < 10) {
+    this.m_intMethod__int_$p_synchronizedstatement_SynchronizedStatement();
+   }
+  }
+ }
+ /** @nodts @return {number} */
+ m_intMethod__int_$p_synchronizedstatement_SynchronizedStatement() {
+  return 0;
+ }
  /** @nodts */
  static $clinit() {
   SynchronizedStatement.$clinit = () =>{};

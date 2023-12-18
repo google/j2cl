@@ -22,13 +22,32 @@ public class SynchronizedMethod {
   private static int sa;
   private static int sb;
 
-  public synchronized void method() {
+  public synchronized void testNonStatic() {
     a++;
     b--;
   }
 
-  public static synchronized void staticMethod() {
+  public static synchronized void testStatic() {
     sa++;
     sb--;
+  }
+
+  public synchronized int testReturn(boolean bool) {
+    if (bool) {
+      return a++;
+    }
+    return b--;
+  }
+
+  public synchronized void testIfStatementWithNonVoidBodyWithoutElse(boolean b1, boolean b2) {
+    if (b1) {
+      apply("foo");
+    } else if (b2) {
+      apply("bar");
+    }
+  }
+
+  private String apply(String string) {
+    return string;
   }
 }

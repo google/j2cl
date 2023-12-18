@@ -24,15 +24,36 @@ class SynchronizedMethod extends j_l_Object {
   this.$ctor__java_lang_Object__void();
  }
  /** @nodts */
- m_method__void() {
+ m_testNonStatic__void() {
   this.f_a__synchronizedmethod_SynchronizedMethod_ = this.f_a__synchronizedmethod_SynchronizedMethod_ + 1 | 0;
   this.f_b__synchronizedmethod_SynchronizedMethod_ = this.f_b__synchronizedmethod_SynchronizedMethod_ - 1 | 0;
  }
  /** @nodts */
- static m_staticMethod__void() {
+ static m_testStatic__void() {
   SynchronizedMethod.$clinit();
   SynchronizedMethod.f_sa__synchronizedmethod_SynchronizedMethod_ = SynchronizedMethod.f_sa__synchronizedmethod_SynchronizedMethod_ + 1 | 0;
   SynchronizedMethod.f_sb__synchronizedmethod_SynchronizedMethod_ = SynchronizedMethod.f_sb__synchronizedmethod_SynchronizedMethod_ - 1 | 0;
+ }
+ /** @nodts @return {number} */
+ m_testReturn__boolean__int(/** boolean */ bool) {
+  let /** number */ $value;
+  if (bool) {
+   let /** number */ $value_1;
+   return ($value_1 = this.f_a__synchronizedmethod_SynchronizedMethod_, this.f_a__synchronizedmethod_SynchronizedMethod_ = this.f_a__synchronizedmethod_SynchronizedMethod_ + 1 | 0, $value_1);
+  }
+  return ($value = this.f_b__synchronizedmethod_SynchronizedMethod_, this.f_b__synchronizedmethod_SynchronizedMethod_ = this.f_b__synchronizedmethod_SynchronizedMethod_ - 1 | 0, $value);
+ }
+ /** @nodts */
+ m_testIfStatementWithNonVoidBodyWithoutElse__boolean__boolean__void(/** boolean */ b1, /** boolean */ b2) {
+  if (b1) {
+   this.m_apply__java_lang_String__java_lang_String_$p_synchronizedmethod_SynchronizedMethod('foo');
+  } else if (b2) {
+   this.m_apply__java_lang_String__java_lang_String_$p_synchronizedmethod_SynchronizedMethod('bar');
+  }
+ }
+ /** @nodts @return {?string} */
+ m_apply__java_lang_String__java_lang_String_$p_synchronizedmethod_SynchronizedMethod(/** ?string */ string_1) {
+  return string_1;
  }
  /** @nodts */
  static $clinit() {

@@ -19,14 +19,18 @@
 package synchronizedmethod
 
 import javaemul.lang.*
+import kotlin.Boolean
 import kotlin.Int
 import kotlin.OptIn
+import kotlin.String
 import kotlin.Suppress
+import kotlin.Unit
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.javaObjectType
 import kotlin.native.ObjCName
+import kotlin.run
 import kotlin.synchronized
 
 @ObjCName("J2ktSynchronizedmethodSynchronizedMethod", exact = true)
@@ -37,12 +41,50 @@ open class SynchronizedMethod {
  @JvmField
  internal var b_private_2: Int = 0
 
- @ObjCName("method")
- open fun method() {
-  synchronized(this) {
+ @ObjCName("testNonStatic")
+ open fun testNonStatic() {
+  synchronized<Unit>(this) {
    this.a_private_2 = this.a_private_2 + 1
    this.b_private_2 = this.b_private_2 - 1
   }
+ }
+
+ @ObjCName("testReturn")
+ open fun testReturn(
+  @ObjCName("withBoolean") bool: Boolean
+ ): Int {
+  synchronized<Unit>(this) {
+   if (bool) {
+    return run {
+     val ___value: Int = this.a_private_2
+     this.a_private_2 = this.a_private_2 + 1
+     ___value
+    }
+   }
+   return run {
+    val ___value_1: Int = this.b_private_2
+    this.b_private_2 = this.b_private_2 - 1
+    ___value_1
+   }
+  }
+ }
+
+ @ObjCName("testIfStatementWithNonVoidBodyWithoutElse")
+ open fun testIfStatementWithNonVoidBodyWithoutElse(
+  @ObjCName("withBoolean") b1: Boolean,
+  @ObjCName("withBoolean") b2: Boolean
+ ) {
+  synchronized<Unit>(this) {
+   if (b1) {
+    this.apply_private_2("foo")
+   } else if (b2) {
+    this.apply_private_2("bar")
+   }
+  }
+ }
+
+ internal fun apply_private_2(string: String?): String? {
+  return string
  }
 
  @ObjCName("J2ktSynchronizedmethodSynchronizedMethodCompanion", exact = true)
@@ -54,9 +96,9 @@ open class SynchronizedMethod {
   internal var sb_private_2: Int = 0
 
   @JvmStatic
-  @ObjCName("staticMethod")
-  fun staticMethod() {
-   synchronized(SynchronizedMethod::class.javaObjectType) {
+  @ObjCName("testStatic")
+  fun testStatic() {
+   synchronized<Unit>(SynchronizedMethod::class.javaObjectType) {
     SynchronizedMethod.sa_private_2 = SynchronizedMethod.sa_private_2 + 1
     SynchronizedMethod.sb_private_2 = SynchronizedMethod.sb_private_2 - 1
    }

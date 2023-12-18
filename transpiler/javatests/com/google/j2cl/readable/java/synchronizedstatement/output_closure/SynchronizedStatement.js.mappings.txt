@@ -21,6 +21,77 @@
     }] => [$Util.$synchronized(this);] "synchronizedstatement.SynchronizedStatement.main"
 [a++;] => [this.f_a__synchronizedstatement_SynchronizedStatement_ = this.f_a__synchronizedstatement_SynchronizedStatement_ + 1 | 0;] "synchronizedstatement.SynchronizedStatement.main"
 [b--;] => [this.f_b__synchronizedstatement_SynchronizedStatement_ = this.f_b__synchronizedstatement_SynchronizedStatement_ - 1 | 0;] "synchronizedstatement.SynchronizedStatement.main"
+[testReturn] => [m_testReturn__int]
+[{
+    synchronized (this) {
+...    return b--;
+  }] => [let /** number */ $value;] "synchronizedstatement.SynchronizedStatement.testReturn"
+[synchronized (this) {
+      if (a < 10) {
+...      }
+    }] => [$Util.$synchronized(this);] "synchronizedstatement.SynchronizedStatement.testReturn"
+[if (a < 10) {
+        return a++;
+      }] => [if (this.f_a__synchronizedstatement_SynchronizedStatement_ < 10) {
+    let /** number */ $value_1;
+    return ($value_1 = this.f_a__synchronizedstatement_SynchronizedStatement_, this.f_a__synchronizedstatement_SynchronizedStatement_ = this.f_a__synchronizedstatement_SynchronizedStatement_ + 1 | 0, $value_1);
+   }] "synchronizedstatement.SynchronizedStatement.testReturn"
+[{
+        return a++;
+      }] => [let /** number */ $value_1;] "synchronizedstatement.SynchronizedStatement.testReturn"
+[return a++;] => [return ($value_1 = this.f_a__synchronizedstatement_SynchronizedStatement_, this.f_a__synchronizedstatement_SynchronizedStatement_ = this.f_a__synchronizedstatement_SynchronizedStatement_ + 1 | 0, $value_1);] "synchronizedstatement.SynchronizedStatement.testReturn"
+[return b--;] => [return ($value = this.f_b__synchronizedstatement_SynchronizedStatement_, this.f_b__synchronizedstatement_SynchronizedStatement_ = this.f_b__synchronizedstatement_SynchronizedStatement_ - 1 | 0, $value);] "synchronizedstatement.SynchronizedStatement.testReturn"
+[testBreakAndContinue] => [m_testBreakAndContinue__void]
+[while (true) {
+      synchronized (this) {
+...      }
+    }] => [while (true) {
+   {
+...   }
+  }] "synchronizedstatement.SynchronizedStatement.testBreakAndContinue"
+[synchronized (this) {
+        if (a < 10) {
+...        break;
+      }] => [$Util.$synchronized(this);] "synchronizedstatement.SynchronizedStatement.testBreakAndContinue"
+[if (a < 10) {
+          a++;
+          continue;
+        }] => [if (this.f_a__synchronizedstatement_SynchronizedStatement_ < 10) {
+     this.f_a__synchronizedstatement_SynchronizedStatement_ = this.f_a__synchronizedstatement_SynchronizedStatement_ + 1 | 0;
+     continue;
+    }] "synchronizedstatement.SynchronizedStatement.testBreakAndContinue"
+[a++;] => [this.f_a__synchronizedstatement_SynchronizedStatement_ = this.f_a__synchronizedstatement_SynchronizedStatement_ + 1 | 0;] "synchronizedstatement.SynchronizedStatement.testBreakAndContinue"
+[continue;] => [continue;] "synchronizedstatement.SynchronizedStatement.testBreakAndContinue"
+[break;] => [break;] "synchronizedstatement.SynchronizedStatement.testBreakAndContinue"
+[testInitialization] => [m_testInitialization__int]
+[int a;] => [let /** number */ a;] "synchronizedstatement.SynchronizedStatement.testInitialization"
+[a] => [a] "a"
+[synchronized (this) {
+      a = 0;
+    }] => [$Util.$synchronized(this);] "synchronizedstatement.SynchronizedStatement.testInitialization"
+[a = 0;] => [a = 0;] "synchronizedstatement.SynchronizedStatement.testInitialization"
+[return a;] => [return a;] "synchronizedstatement.SynchronizedStatement.testInitialization"
+[testIfStatementWithNonVoidBodyWithoutElse] => [m_testIfStatementWithNonVoidBodyWithoutElse__void]
+[synchronized (this) {
+      if (a < 10) {
+...      }
+    }] => [$Util.$synchronized(this);] "synchronizedstatement.SynchronizedStatement.testIfStatementWithNonVoidBodyWithoutElse"
+[if (a < 10) {
+        intMethod();
+...        intMethod();
+      }] => [if (this.f_a__synchronizedstatement_SynchronizedStatement_ < 10) {
+    this.m_intMethod__int_$p_synchronizedstatement_SynchronizedStatement();
+...    this.m_intMethod__int_$p_synchronizedstatement_SynchronizedStatement();
+   }] "synchronizedstatement.SynchronizedStatement.testIfStatementWithNonVoidBodyWithoutElse"
+[intMethod();] => [this.m_intMethod__int_$p_synchronizedstatement_SynchronizedStatement();] "synchronizedstatement.SynchronizedStatement.testIfStatementWithNonVoidBodyWithoutElse"
+[if (b < 10) {
+        intMethod();
+      }] => [if (this.f_b__synchronizedstatement_SynchronizedStatement_ < 10) {
+    this.m_intMethod__int_$p_synchronizedstatement_SynchronizedStatement();
+   }] "synchronizedstatement.SynchronizedStatement.testIfStatementWithNonVoidBodyWithoutElse"
+[intMethod();] => [this.m_intMethod__int_$p_synchronizedstatement_SynchronizedStatement();] "synchronizedstatement.SynchronizedStatement.testIfStatementWithNonVoidBodyWithoutElse"
+[intMethod] => [m_intMethod__int_$p_synchronizedstatement_SynchronizedStatement]
+[return 0;] => [return 0;] "synchronizedstatement.SynchronizedStatement.intMethod"
 [SynchronizedStatement] => [$clinit]
 [SynchronizedStatement] => [SynchronizedStatement.$clinit = () =>{};] "synchronizedstatement.SynchronizedStatement.<clinit>"
 [SynchronizedStatement] => [SynchronizedStatement.$loadModules();] "synchronizedstatement.SynchronizedStatement.<clinit>"

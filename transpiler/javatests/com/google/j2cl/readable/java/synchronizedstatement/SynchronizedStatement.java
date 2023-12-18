@@ -15,6 +15,8 @@
  */
 package synchronizedstatement;
 
+import javaemul.internal.annotations.KtDisabled;
+
 public class SynchronizedStatement {
   private int a;
   private int b;
@@ -24,5 +26,51 @@ public class SynchronizedStatement {
       a++;
       b--;
     }
+  }
+
+  public int testReturn() {
+    synchronized (this) {
+      if (a < 10) {
+        return a++;
+      }
+    }
+    return b--;
+  }
+
+  // It should be possible since Kotlin 2.1: https://youtrack.jetbrains.com/issue/KT-1436
+  @KtDisabled
+  public synchronized void testBreakAndContinue() {
+    while (true) {
+      synchronized (this) {
+        if (a < 10) {
+          a++;
+          continue;
+        }
+        break;
+      }
+    }
+  }
+
+  public int testInitialization() {
+    int a;
+    synchronized (this) {
+      a = 0;
+    }
+    // variable `a` should be initialized at this point
+    return a;
+  }
+
+  public void testIfStatementWithNonVoidBodyWithoutElse() {
+    synchronized (this) {
+      if (a < 10) {
+        intMethod();
+      } else if (b < 10) {
+        intMethod();
+      }
+    }
+  }
+
+  private int intMethod() {
+    return 0;
   }
 }

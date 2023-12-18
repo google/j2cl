@@ -65,6 +65,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.colonSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inAngleBrackets
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParentheses
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.infix
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.join
@@ -255,6 +256,7 @@ internal data class StatementRenderer(
     spaceSeparated(
       join(
         nameRenderer.extensionMemberQualifiedNameSource("kotlin.synchronized"),
+        inAngleBrackets(nameRenderer.topLevelQualifiedNameSource("kotlin.Unit")),
         inParentheses(expressionSource(synchronizedStatement.expression))
       ),
       statementSource(synchronizedStatement.body)

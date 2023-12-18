@@ -22,9 +22,11 @@ import javaemul.lang.*
 import kotlin.Int
 import kotlin.OptIn
 import kotlin.Suppress
+import kotlin.Unit
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
+import kotlin.run
 import kotlin.synchronized
 
 @ObjCName("J2ktSynchronizedstatementSynchronizedStatement", exact = true)
@@ -37,9 +39,54 @@ open class SynchronizedStatement {
 
  @ObjCName("main")
  open fun main() {
-  synchronized(this) {
+  synchronized<Unit>(this) {
    this.a_private_2 = this.a_private_2 + 1
    this.b_private_2 = this.b_private_2 - 1
   }
+ }
+
+ @ObjCName("testReturn")
+ open fun testReturn(): Int {
+  synchronized<Unit>(this) {
+   if (this.a_private_2 < 10) {
+    return run {
+     val ___value: Int = this.a_private_2
+     this.a_private_2 = this.a_private_2 + 1
+     ___value
+    }
+   }
+  }
+  return run {
+   val ___value_1: Int = this.b_private_2
+   this.b_private_2 = this.b_private_2 - 1
+   ___value_1
+  }
+ }
+
+ @ObjCName("testBreakAndContinue")
+ open fun testBreakAndContinue() {}
+
+ @ObjCName("testInitialization")
+ open fun testInitialization(): Int {
+  var a: Int = 0
+  synchronized<Unit>(this) {
+   a = 0
+  }
+  return a
+ }
+
+ @ObjCName("testIfStatementWithNonVoidBodyWithoutElse")
+ open fun testIfStatementWithNonVoidBodyWithoutElse() {
+  synchronized<Unit>(this) {
+   if (this.a_private_2 < 10) {
+    this.intMethod_private_2()
+   } else if (this.b_private_2 < 10) {
+    this.intMethod_private_2()
+   }
+  }
+ }
+
+ internal fun intMethod_private_2(): Int {
+  return 0
  }
 }

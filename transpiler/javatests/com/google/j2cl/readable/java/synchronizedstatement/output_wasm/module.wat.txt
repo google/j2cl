@@ -14,6 +14,10 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_main__void (ref $function.m_main__void))
+  (field $m_testBreakAndContinue__void (ref $function.m_testBreakAndContinue__void))
+  (field $m_testIfStatementWithNonVoidBodyWithoutElse__void (ref $function.m_testIfStatementWithNonVoidBodyWithoutElse__void))
+  (field $m_testInitialization__int (ref $function.m_testInitialization__int))
+  (field $m_testReturn__int (ref $function.m_testReturn__int))
   ))
  )
 
@@ -26,6 +30,10 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_main__void@synchronizedstatement.SynchronizedStatement)
+  (ref.func $m_testBreakAndContinue__void@synchronizedstatement.SynchronizedStatement)
+  (ref.func $m_testIfStatementWithNonVoidBodyWithoutElse__void@synchronizedstatement.SynchronizedStatement)
+  (ref.func $m_testInitialization__int@synchronizedstatement.SynchronizedStatement)
+  (ref.func $m_testReturn__int@synchronizedstatement.SynchronizedStatement)
  )
 )
 
@@ -45,16 +53,16 @@
 ;;; SynchronizedStatement SynchronizedStatement.$create()
 (func $$create__@synchronizedstatement.SynchronizedStatement
  (result (ref null $synchronizedstatement.SynchronizedStatement))
- ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
+ ;;@ synchronizedstatement/SynchronizedStatement.java:20:13
  (local $$instance (ref null $synchronizedstatement.SynchronizedStatement))
  (block
-  ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
+  ;;@ synchronizedstatement/SynchronizedStatement.java:20:13
   (call $$clinit__void_<once>_@synchronizedstatement.SynchronizedStatement )
-  ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
+  ;;@ synchronizedstatement/SynchronizedStatement.java:20:13
   (local.set $$instance (struct.new $synchronizedstatement.SynchronizedStatement (ref.as_non_null (global.get $synchronizedstatement.SynchronizedStatement.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (i32.const 0)))
-  ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
+  ;;@ synchronizedstatement/SynchronizedStatement.java:20:13
   (call $$ctor__void_$p_synchronizedstatement_SynchronizedStatement@synchronizedstatement.SynchronizedStatement (ref.as_non_null (local.get $$instance)))
-  ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
+  ;;@ synchronizedstatement/SynchronizedStatement.java:20:13
   (return (local.get $$instance))
  )
 )
@@ -62,9 +70,9 @@
 ;;; void SynchronizedStatement.$ctor()
 (func $$ctor__void_$p_synchronizedstatement_SynchronizedStatement@synchronizedstatement.SynchronizedStatement
  (param $this (ref null $synchronizedstatement.SynchronizedStatement))
- ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
+ ;;@ synchronizedstatement/SynchronizedStatement.java:20:13
  (block
-  ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
+  ;;@ synchronizedstatement/SynchronizedStatement.java:20:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -73,37 +81,188 @@
 (func $m_main__void@synchronizedstatement.SynchronizedStatement
  (type $function.m_main__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ synchronizedstatement/SynchronizedStatement.java:22:14
+ ;;@ synchronizedstatement/SynchronizedStatement.java:24:14
  (local $this (ref null $synchronizedstatement.SynchronizedStatement))
  (local.set $this (ref.cast (ref $synchronizedstatement.SynchronizedStatement) (local.get $this.untyped)))
  (block
-  ;;@ synchronizedstatement/SynchronizedStatement.java:23:4
-  ;;@ synchronizedstatement/SynchronizedStatement.java:23:4
+  ;;@ synchronizedstatement/SynchronizedStatement.java:25:4
+  ;;@ synchronizedstatement/SynchronizedStatement.java:25:4
   (drop (local.get $this))
   (block
-   ;;@ synchronizedstatement/SynchronizedStatement.java:24:6
+   ;;@ synchronizedstatement/SynchronizedStatement.java:26:6
    (struct.set $synchronizedstatement.SynchronizedStatement $a@synchronizedstatement.SynchronizedStatement (local.get $this) (i32.add (struct.get $synchronizedstatement.SynchronizedStatement $a@synchronizedstatement.SynchronizedStatement (local.get $this)) (i32.const 1)))
-   ;;@ synchronizedstatement/SynchronizedStatement.java:25:6
+   ;;@ synchronizedstatement/SynchronizedStatement.java:27:6
    (struct.set $synchronizedstatement.SynchronizedStatement $b@synchronizedstatement.SynchronizedStatement (local.get $this) (i32.sub (struct.get $synchronizedstatement.SynchronizedStatement $b@synchronizedstatement.SynchronizedStatement (local.get $this)) (i32.const 1)))
   )
  )
 )
 (elem declare func $m_main__void@synchronizedstatement.SynchronizedStatement)
 
+;;; int SynchronizedStatement.testReturn()
+(func $m_testReturn__int@synchronizedstatement.SynchronizedStatement
+ (type $function.m_testReturn__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ synchronizedstatement/SynchronizedStatement.java:31:13
+ (local $$value i32)
+ (local $$value_1 i32)
+ (local $this (ref null $synchronizedstatement.SynchronizedStatement))
+ (local.set $this (ref.cast (ref $synchronizedstatement.SynchronizedStatement) (local.get $this.untyped)))
+ (block
+  ;;@ synchronizedstatement/SynchronizedStatement.java:32:4
+  ;;@ synchronizedstatement/SynchronizedStatement.java:32:4
+  (drop (local.get $this))
+  (block
+   ;;@ synchronizedstatement/SynchronizedStatement.java:33:6
+   (if (i32.lt_s (struct.get $synchronizedstatement.SynchronizedStatement $a@synchronizedstatement.SynchronizedStatement (local.get $this)) (i32.const 10))
+    (then
+     (block
+      ;;@ synchronizedstatement/SynchronizedStatement.java:34:8
+      (return (block (result i32)
+       (local.set $$value (struct.get $synchronizedstatement.SynchronizedStatement $a@synchronizedstatement.SynchronizedStatement (local.get $this)))
+       (struct.set $synchronizedstatement.SynchronizedStatement $a@synchronizedstatement.SynchronizedStatement (local.get $this) (i32.add (struct.get $synchronizedstatement.SynchronizedStatement $a@synchronizedstatement.SynchronizedStatement (local.get $this)) (i32.const 1)))
+       (local.get $$value)
+      ))
+     )
+    )
+   )
+  )
+  ;;@ synchronizedstatement/SynchronizedStatement.java:37:4
+  (return (block (result i32)
+   (local.set $$value_1 (struct.get $synchronizedstatement.SynchronizedStatement $b@synchronizedstatement.SynchronizedStatement (local.get $this)))
+   (struct.set $synchronizedstatement.SynchronizedStatement $b@synchronizedstatement.SynchronizedStatement (local.get $this) (i32.sub (struct.get $synchronizedstatement.SynchronizedStatement $b@synchronizedstatement.SynchronizedStatement (local.get $this)) (i32.const 1)))
+   (local.get $$value_1)
+  ))
+ )
+)
+(elem declare func $m_testReturn__int@synchronizedstatement.SynchronizedStatement)
+
+;;; void SynchronizedStatement.testBreakAndContinue()
+(func $m_testBreakAndContinue__void@synchronizedstatement.SynchronizedStatement
+ (type $function.m_testBreakAndContinue__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ synchronizedstatement/SynchronizedStatement.java:42:27
+ (local $this (ref null $synchronizedstatement.SynchronizedStatement))
+ (local.set $this (ref.cast (ref $synchronizedstatement.SynchronizedStatement) (local.get $this.untyped)))
+ (block
+  ;;@ synchronizedstatement/SynchronizedStatement.java:43:4
+  (block $LOOP.BREAK
+   (loop
+    (block $LOOP.CONTINUE
+     (block
+      ;;@ synchronizedstatement/SynchronizedStatement.java:44:6
+      ;;@ synchronizedstatement/SynchronizedStatement.java:44:6
+      (drop (local.get $this))
+      (block
+       ;;@ synchronizedstatement/SynchronizedStatement.java:45:8
+       (if (i32.lt_s (struct.get $synchronizedstatement.SynchronizedStatement $a@synchronizedstatement.SynchronizedStatement (local.get $this)) (i32.const 10))
+        (then
+         (block
+          ;;@ synchronizedstatement/SynchronizedStatement.java:46:10
+          (struct.set $synchronizedstatement.SynchronizedStatement $a@synchronizedstatement.SynchronizedStatement (local.get $this) (i32.add (struct.get $synchronizedstatement.SynchronizedStatement $a@synchronizedstatement.SynchronizedStatement (local.get $this)) (i32.const 1)))
+          ;;@ synchronizedstatement/SynchronizedStatement.java:47:10
+          (br $LOOP.CONTINUE)
+         )
+        )
+       )
+       ;;@ synchronizedstatement/SynchronizedStatement.java:49:8
+       (br $LOOP.BREAK)
+      )
+     )
+    )
+    (br 0)
+   )
+  )
+ )
+)
+(elem declare func $m_testBreakAndContinue__void@synchronizedstatement.SynchronizedStatement)
+
+;;; int SynchronizedStatement.testInitialization()
+(func $m_testInitialization__int@synchronizedstatement.SynchronizedStatement
+ (type $function.m_testInitialization__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ synchronizedstatement/SynchronizedStatement.java:54:13
+ (local $a i32)
+ (local $this (ref null $synchronizedstatement.SynchronizedStatement))
+ (local.set $this (ref.cast (ref $synchronizedstatement.SynchronizedStatement) (local.get $this.untyped)))
+ (block
+  ;;@ synchronizedstatement/SynchronizedStatement.java:55:4
+  
+  ;;@ synchronizedstatement/SynchronizedStatement.java:56:4
+  ;;@ synchronizedstatement/SynchronizedStatement.java:56:4
+  (drop (local.get $this))
+  (block
+   ;;@ synchronizedstatement/SynchronizedStatement.java:57:6
+   (local.set $a (i32.const 0))
+  )
+  ;;@ synchronizedstatement/SynchronizedStatement.java:60:4
+  (return (local.get $a))
+ )
+)
+(elem declare func $m_testInitialization__int@synchronizedstatement.SynchronizedStatement)
+
+;;; void SynchronizedStatement.testIfStatementWithNonVoidBodyWithoutElse()
+(func $m_testIfStatementWithNonVoidBodyWithoutElse__void@synchronizedstatement.SynchronizedStatement
+ (type $function.m_testIfStatementWithNonVoidBodyWithoutElse__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ synchronizedstatement/SynchronizedStatement.java:63:14
+ (local $this (ref null $synchronizedstatement.SynchronizedStatement))
+ (local.set $this (ref.cast (ref $synchronizedstatement.SynchronizedStatement) (local.get $this.untyped)))
+ (block
+  ;;@ synchronizedstatement/SynchronizedStatement.java:64:4
+  ;;@ synchronizedstatement/SynchronizedStatement.java:64:4
+  (drop (local.get $this))
+  (block
+   ;;@ synchronizedstatement/SynchronizedStatement.java:65:6
+   (if (i32.lt_s (struct.get $synchronizedstatement.SynchronizedStatement $a@synchronizedstatement.SynchronizedStatement (local.get $this)) (i32.const 10))
+    (then
+     (block
+      ;;@ synchronizedstatement/SynchronizedStatement.java:66:8
+      (drop (call $m_intMethod__int_$p_synchronizedstatement_SynchronizedStatement@synchronizedstatement.SynchronizedStatement (ref.as_non_null (local.get $this))))
+     )
+    )(else
+     ;;@ synchronizedstatement/SynchronizedStatement.java:67:13
+     (if (i32.lt_s (struct.get $synchronizedstatement.SynchronizedStatement $b@synchronizedstatement.SynchronizedStatement (local.get $this)) (i32.const 10))
+      (then
+       (block
+        ;;@ synchronizedstatement/SynchronizedStatement.java:68:8
+        (drop (call $m_intMethod__int_$p_synchronizedstatement_SynchronizedStatement@synchronizedstatement.SynchronizedStatement (ref.as_non_null (local.get $this))))
+       )
+      )
+     )
+    )
+   )
+  )
+ )
+)
+(elem declare func $m_testIfStatementWithNonVoidBodyWithoutElse__void@synchronizedstatement.SynchronizedStatement)
+
+;;; int SynchronizedStatement.intMethod()
+(func $m_intMethod__int_$p_synchronizedstatement_SynchronizedStatement@synchronizedstatement.SynchronizedStatement
+ (param $this (ref null $synchronizedstatement.SynchronizedStatement))
+ (result i32)
+ ;;@ synchronizedstatement/SynchronizedStatement.java:73:14
+ (block
+  ;;@ synchronizedstatement/SynchronizedStatement.java:74:4
+  (return (i32.const 0))
+ )
+)
+
 ;;; void SynchronizedStatement.$clinit()
 (func $$clinit__void_<once>_@synchronizedstatement.SynchronizedStatement
- ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
+ ;;@ synchronizedstatement/SynchronizedStatement.java:20:13
  (block
-  ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
+  ;;@ synchronizedstatement/SynchronizedStatement.java:20:13
   (if (global.get $$class-initialized@synchronizedstatement.SynchronizedStatement)
    (then
-    ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
+    ;;@ synchronizedstatement/SynchronizedStatement.java:20:13
     (return )
    )
   )
-  ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
+  ;;@ synchronizedstatement/SynchronizedStatement.java:20:13
   (global.set $$class-initialized@synchronizedstatement.SynchronizedStatement (i32.const 1))
-  ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
+  ;;@ synchronizedstatement/SynchronizedStatement.java:20:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
