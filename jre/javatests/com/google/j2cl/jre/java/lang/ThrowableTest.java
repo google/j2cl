@@ -17,11 +17,13 @@ package com.google.j2cl.jre.java.lang;
 
 import static com.google.j2cl.jre.testing.TestUtils.isWasm;
 
+import com.google.j2cl.jre.testing.J2ktIncompatible;
 import junit.framework.TestCase;
 
 /** Unit tests for the GWT emulation of java.lang.Throwable class. */
 public class ThrowableTest extends TestCase {
 
+  @J2ktIncompatible // Currently unsupported
   public static void testStackTrace() {
     if (isWasm()) {
       // TODO(b/233263693): Add Throwable.getStackTrace support.
@@ -43,6 +45,7 @@ public class ThrowableTest extends TestCase {
     assertEquals(0, e.getStackTrace().length);
   }
 
+  @J2ktIncompatible // Currently unsupported
   public void testSetStackTrace() {
     Throwable throwable = new Throwable("stacktrace");
     throwable.fillInStackTrace();

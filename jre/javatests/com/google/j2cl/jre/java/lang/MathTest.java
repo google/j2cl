@@ -17,9 +17,15 @@
 package com.google.j2cl.jre.java.lang;
 
 import junit.framework.TestCase;
+import org.jspecify.nullness.NullMarked;
 
 /** Tests for JRE emulation of java.lang.Math. */
+@NullMarked
 public class MathTest extends TestCase {
+
+  private static void assertNegativeZero(String description, double x) {
+    assertTrue(description, isNegativeZero(x));
+  }
 
   private static void assertNegativeZero(double x) {
     assertTrue(isNegativeZero(x));
@@ -27,6 +33,11 @@ public class MathTest extends TestCase {
 
   private static void assertNegativeZero(float x) {
     assertTrue(isNegativeZero(x));
+  }
+
+  private static void assertPositiveZero(String description, double x) {
+    assertEquals(description, 0.0, x);
+    assertFalse(description, isNegativeZero(x));
   }
 
   private static void assertPositiveZero(double x) {
@@ -41,6 +52,10 @@ public class MathTest extends TestCase {
 
   private static void assertNaN(double x) {
     assertTrue(Double.isNaN(x));
+  }
+
+  private static void assertNaN(String description, double x) {
+    assertTrue(description + x, Double.isNaN(x));
   }
 
   private static void assertNaN(float x) {
@@ -461,16 +476,16 @@ public class MathTest extends TestCase {
   }
 
   public void testLog1p() {
-    assertNaN(Math.log1p(Double.NaN));
-    assertNaN(Math.log1p(-1.1));
-    assertNaN(Math.log1p(-2));
-    assertNaN(Math.log1p(Double.NEGATIVE_INFINITY));
-    assertEquals(Double.POSITIVE_INFINITY, Math.log1p(Double.POSITIVE_INFINITY));
-    assertEquals(Double.NEGATIVE_INFINITY, Math.log1p(-1));
-    assertEquals(Double.MIN_VALUE, Math.log1p(Double.MIN_VALUE), 1e-25);
-    assertEquals(709.782712893384, Math.log1p(Double.MAX_VALUE));
-    assertPositiveZero(Math.log1p(0.0));
-    assertNegativeZero(Math.log1p(-0.0));
+    assertNaN("log1p(NaN)", Math.log1p(Double.NaN));
+    assertNaN("log1p(-1.1)", Math.log1p(-1.1));
+    assertNaN("log1p(-2)", Math.log1p(-2));
+    assertNaN("log1p(-INF)", Math.log1p(Double.NEGATIVE_INFINITY));
+    assertEquals("log1p(INF)", Double.POSITIVE_INFINITY, Math.log1p(Double.POSITIVE_INFINITY));
+    assertEquals("log1p(-1)", Double.NEGATIVE_INFINITY, Math.log1p(-1));
+    assertEquals("log1p(MIN)", Double.MIN_VALUE, Math.log1p(Double.MIN_VALUE), 1e-25);
+    assertEquals("log1p(MAX)", 709.782712893384, Math.log1p(Double.MAX_VALUE));
+    assertPositiveZero("log1p(0.0)", Math.log1p(0.0));
+    assertNegativeZero("log1p(-0.0)", Math.log1p(-0.0));
 
     assertEquals(-0.693147180, Math.log1p(-0.5), 1e-7);
     assertEquals(1.313261687, Math.log1p(Math.E), 1e-7);
@@ -622,15 +637,15 @@ public class MathTest extends TestCase {
   }
 
   public void testPow() {
-    assertEquals(1, Math.pow(2, 0.0));
-    assertEquals(1, Math.pow(2, -0.0));
-    assertEquals(2, Math.pow(2, 1));
-    assertEquals(-2, Math.pow(-2, 1));
-    assertNaN(Math.pow(1, Double.NaN));
-    assertNaN(Math.pow(Double.NaN, Double.NaN));
-    assertNaN(Math.pow(Double.NaN, 1));
-    assertEquals(1, Math.pow(Double.NaN, 0.0));
-    assertEquals(1, Math.pow(Double.NaN, -0.0));
+    assertEquals("pow(2, 0)", 1.0, Math.pow(2, 0.0));
+    assertEquals("pow(2, -0)", 1.0, Math.pow(2, -0.0));
+    assertEquals("pow(2, 1)", 2.0, Math.pow(2, 1));
+    assertEquals("pow(-2, 1)", -2.0, Math.pow(-2, 1));
+    assertNaN("pow(1, NaN)", Math.pow(1, Double.NaN));
+    assertNaN("pow(NaN, NaN)", Math.pow(Double.NaN, Double.NaN));
+    assertNaN("pow(NaN, 1)", Math.pow(Double.NaN, 1));
+    assertEquals("pow(NaN, 0)", 1.0, Math.pow(Double.NaN, 0.0));
+    assertEquals("pow(NaN, -0)", 1.0, Math.pow(Double.NaN, -0.0));
     assertEquals(Double.POSITIVE_INFINITY, Math.pow(1.1, Double.POSITIVE_INFINITY));
     assertEquals(Double.POSITIVE_INFINITY, Math.pow(-1.1, Double.POSITIVE_INFINITY));
     assertEquals(Double.POSITIVE_INFINITY, Math.pow(0.9, Double.NEGATIVE_INFINITY));

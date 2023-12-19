@@ -177,7 +177,7 @@ public class CharacterTest extends TestCase {
   }
 
   public void testCodePoint() {
-    assertEquals(1, Character.charCount(65));
+    assertEquals("65 is a single character", 1, Character.charCount(65));
     assertEquals(2, Character.charCount(Character.MIN_SUPPLEMENTARY_CODE_POINT));
     char[] testPlain = new char[] { 'C', 'A', 'T' };
     char[] testUnicode = new char[] { 'C', '\uD801', '\uDF00', 'T' };
@@ -199,16 +199,16 @@ public class CharacterTest extends TestCase {
         Character.codePointBefore(unicodeSequence, 3));
     assertEquals("codePointBefore fails on second char of surrogate pair",
         0xDF00, Character.codePointBefore(testUnicode, 3, 2));
-    assertEquals("codePointCount(plain): ", 3,
-        Character.codePointCount(testPlain, 0, 3));
-    assertEquals("codePointCount(plain): ", 3,
-        Character.codePointCount(plainSequence, 0, 3));
+    assertEquals("codePointCount(testPlain): ", 3, Character.codePointCount(testPlain, 0, 3));
+    assertEquals(
+        "codePointCount(plainSequence): ", 3, Character.codePointCount(plainSequence, 0, 3));
     assertEquals("codePointCount(unicode): ", 3,
         Character.codePointCount(testUnicode, 0, 4));
     assertEquals("codePointCount(unicode): ", 3,
         Character.codePointCount(unicodeSequence, 0, 4));
-    assertEquals(1, Character.codePointCount(testPlain, 1, 1));
-    assertEquals(1, Character.codePointCount(plainSequence, 1, 2));
+    assertEquals("codePointCount(testPlain): ", 1, Character.codePointCount(testPlain, 1, 1));
+    assertEquals(
+        "codePoinntCount(plainSequence): ", 1, Character.codePointCount(plainSequence, 1, 2));
     assertEquals(1, Character.codePointCount(testUnicode, 1, 2));
     assertEquals(1, Character.codePointCount(unicodeSequence, 1, 3));
     assertEquals(2, Character.codePointCount(testUnicode, 2, 2));
@@ -223,8 +223,14 @@ public class CharacterTest extends TestCase {
         Character.offsetByCodePoints(testUnicode, 0, 4, 2, 1));
     assertEquals("offsetByCodePoints(2,1): ", 3,
         Character.offsetByCodePoints(unicodeSequence, 2, 1));
-    assertEquals(4, Character.offsetByCodePoints(testUnicode, 0, 4, 3, 1));
-    assertEquals(4, Character.offsetByCodePoints(unicodeSequence, 3, 1));
+    assertEquals(
+        "offsetByCodePoints(testUnicode, 0, 4, 3, 1)",
+        4,
+        Character.offsetByCodePoints(testUnicode, 0, 4, 3, 1));
+    assertEquals(
+        "offsetByCodePoints(unicodeSequence, 3, 1)",
+        4,
+        Character.offsetByCodePoints(unicodeSequence, 3, 1));
     assertEquals(1, Character.offsetByCodePoints(testUnicode, 0, 4, 2, -1));
     assertEquals(1, Character.offsetByCodePoints(unicodeSequence, 2, -1));
     assertEquals(1, Character.offsetByCodePoints(testUnicode, 0, 4, 3, -1));

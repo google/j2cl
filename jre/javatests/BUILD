@@ -57,6 +57,7 @@ j2kt_native_library(
         "com/google/j2cl/jre/ConcurrentSuite.java",
         "com/google/j2cl/jre/DateTimeSuite.java",
         "com/google/j2cl/jre/EmulSuite.java",
+        "com/google/j2cl/jre/LangSuite.java",
         "com/google/j2cl/jre/java/util/ComparatorTest.java",
         "com/google/j2cl/jre/java/util/DateTest.java",
         "com/google/j2cl/jre/java/util/EmulTestBase.java",
@@ -66,15 +67,20 @@ j2kt_native_library(
         "com/google/j2cl/jre/java/util/TestObject.java",
         "com/google/j2cl/jre/testing/J2ktIncompatible.java",
         "com/google/j2cl/jre/testing/TestUtils.java",
-    ] + glob([
-        "com/google/j2cl/jre/java/io/*.java",
-        "com/google/j2cl/jre/java/math/*.java",
-        "com/google/j2cl/jre/java/nio/charset/*.java",
-        "com/google/j2cl/jre/java/security/*.java",
-        "com/google/j2cl/jre/java/sql/*.java",
-        "com/google/j2cl/jre/java/util/concurrent/*.java",
-        "com/google/j2cl/jre/java/util/concurrent/atomic/*.java",
-    ]),
+    ] + glob(
+        [
+            "com/google/j2cl/jre/java/io/*.java",
+            "com/google/j2cl/jre/java/lang/*.java",
+            "com/google/j2cl/jre/java/lang/reflect/*.java",
+            "com/google/j2cl/jre/java/math/*.java",
+            "com/google/j2cl/jre/java/nio/charset/*.java",
+            "com/google/j2cl/jre/java/security/*.java",
+            "com/google/j2cl/jre/java/sql/*.java",
+            "com/google/j2cl/jre/java/util/concurrent/*.java",
+            "com/google/j2cl/jre/java/util/concurrent/atomic/*.java",
+        ],
+        exclude = JS_ONLY_SRCS,
+    ),
     deps = [
         "//jre/java:javaemul_internal_annotations-j2kt-native",
         "//third_party:junit-j2kt-native",
@@ -153,6 +159,7 @@ j2cl_multi_test(
 
 j2cl_multi_test(
     name = "Lang",
+    enable_kt_native = True,
     shard_count = 8,
     test_class = "com.google.j2cl.jre.LangSuite",
     deps = [":emul_tests_lib"],

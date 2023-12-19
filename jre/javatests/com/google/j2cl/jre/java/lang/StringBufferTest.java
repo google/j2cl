@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.jre.java.lang;
 
+import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.Locale;
 import junit.framework.TestCase;
 
@@ -94,9 +95,8 @@ public class StringBufferTest extends TestCase {
     assertEquals("-2147483648", x.toString());
   }
 
-  /**
-   * Check that capacity methods are present, even though they do nothing.
-   */
+  /** Check that capacity methods are present, even though they do nothing. */
+  @J2ktIncompatible // ensureCapacity(), capacity() and trimToSize() unsupported
   public void testCapacity() {
     StringBuffer buf = new StringBuffer();
     buf.ensureCapacity(100);
@@ -134,9 +134,8 @@ public class StringBufferTest extends TestCase {
     assertEquals("bfghi", haystack.toString());
   }
 
-  /**
-   * Tests toCharArray.
-   */
+  /** Tests toCharArray. */
+  @J2ktIncompatible // getChars() unsupported
   public void testGetChars() {
     StringBuffer x = new StringBuffer("ABCDEFGHIJ");
     char[] a1 = "abcdefghij".toCharArray();
@@ -222,9 +221,8 @@ public class StringBufferTest extends TestCase {
     assertEquals("12345", x.toString());
   }
 
-  /**
-   * This method tests <code>lastIndexOf</code>.
-   */
+  /** This method tests <code>lastIndexOf</code>. */
+  @J2ktIncompatible // lastIndexOf() unsupported
   public void testLastIndexOf() {
     StringBuffer x = new StringBuffer("abcdeabcdef");
     assertEquals(9, x.lastIndexOf("e"));
@@ -327,9 +325,8 @@ public class StringBufferTest extends TestCase {
     assertEqualsReverse("\uD801\uDC00_123_\uD802\uDC01", "\uD802\uDC01_321_\uD801\uDC00");
   }
 
-  /**
-   * This method tests <code>setLength</code>.
-   */
+  /** This method tests <code>setLength</code>. */
+  @J2ktIncompatible // setLength() unsupported
   public void testSetLength() {
     StringBuffer x = new StringBuffer("abcdefghi");
     x.setLength(20);
@@ -352,10 +349,10 @@ public class StringBufferTest extends TestCase {
   }
 
   /**
-   * A smoke test that StringBuilder's methods are available and basically work.
-   * The implementation is currently shared with StringBuffer, so all the tricky
-   * test cases are not repeated.
+   * A smoke test that StringBuilder's methods are available and basically work. The implementation
+   * is currently shared with StringBuffer, so all the tricky test cases are not repeated.
    */
+  @J2ktIncompatible // getChars() unsupported
   public void testStringBuilder() {
     StringBuilder bld = new StringBuilder();
     bld = new StringBuilder(100);
@@ -545,9 +542,8 @@ public class StringBufferTest extends TestCase {
     assertEquals("klm", bld.toString());
   }
 
-  /**
-   * This method tests <code>substring</code>.
-   */
+  /** This method tests <code>substring</code>. */
+  @J2ktIncompatible // substring() unsupported
   public void testSubstring() {
     StringBuffer haystack = new StringBuffer("abcdefghi");
     assertEquals("cd", haystack.substring(2, 4));

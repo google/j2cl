@@ -18,6 +18,7 @@ package com.google.j2cl.jre.java.lang;
 import static com.google.j2cl.jre.testing.TestUtils.isJvm;
 import static com.google.j2cl.jre.testing.TestUtils.isWasm;
 
+import com.google.j2cl.jre.testing.J2ktIncompatible;
 import com.google.j2cl.jre.testing.TestUtils;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
@@ -207,6 +208,15 @@ public class StringTest extends TestCase {
     }
   }
 
+  @J2ktIncompatible
+  public void testStringBufferConstructor() {
+    StringBuffer buf = new StringBuffer();
+    buf.append('c');
+    buf.append('a');
+    buf.append('t');
+    assertEquals("cat", new String(buf));
+  }
+
   public void testConstructor() {
     char[] chars = {'a', 'b', 'c', 'd', 'e', 'f'};
     String constant = String.valueOf(new char[] {'a', 'b', 'c', 'd', 'e', 'f'});
@@ -218,11 +228,6 @@ public class StringTest extends TestCase {
     assertEquals("", new String(new String(new String(new String(
         hideFromCompiler(""))))));
     assertEquals("", new String(new char[] {}));
-    StringBuffer buf = new StringBuffer();
-    buf.append('c');
-    buf.append('a');
-    buf.append('t');
-    assertEquals("cat", new String(buf));
     StringBuilder sb = new StringBuilder();
     sb.append('c');
     sb.append('a');
@@ -520,19 +525,19 @@ public class StringTest extends TestCase {
   public void testContains() {
     // at the beginning
     assertTrue(hideFromCompiler("abcdef").contains("ab"));
-    assertTrue(hideFromCompiler("abcdef").contains(new StringBuffer("ab")));
+    assertTrue(hideFromCompiler("abcdef").contains(new StringBuilder("ab")));
     // at the end
     assertTrue(hideFromCompiler("abcdef").contains("ef"));
-    assertTrue(hideFromCompiler("abcdef").contains(new StringBuffer("ef")));
+    assertTrue(hideFromCompiler("abcdef").contains(new StringBuilder("ef")));
     // in the middle
     assertTrue(hideFromCompiler("abcdef").contains("cd"));
-    assertTrue(hideFromCompiler("abcdef").contains(new StringBuffer("cd")));
+    assertTrue(hideFromCompiler("abcdef").contains(new StringBuilder("cd")));
     // the same
     assertTrue(hideFromCompiler("abcdef").contains("abcdef"));
-    assertTrue(hideFromCompiler("abcdef").contains(new StringBuffer("abcdef")));
+    assertTrue(hideFromCompiler("abcdef").contains(new StringBuilder("abcdef")));
     // not present
     assertFalse(hideFromCompiler("abcdef").contains("z"));
-    assertFalse(hideFromCompiler("abcdef").contains(new StringBuffer("z")));
+    assertFalse(hideFromCompiler("abcdef").contains(new StringBuilder("z")));
   }
 
   public void testEndsWith() {
@@ -657,16 +662,16 @@ public class StringTest extends TestCase {
 
   public void testContentEquals() throws Exception {
     String s = "abc";
-    assertTrue(s.contentEquals(new StringBuffer("abc")));
-    assertFalse(s.contentEquals(new StringBuffer("abd")));
-    assertTrue(s.contentEquals(new StringBuffer("ab").append("c")));
-    assertFalse(s.contentEquals(new StringBuffer("ab").append("d")));
+    assertTrue(s.contentEquals(new StringBuilder("abc")));
+    assertFalse(s.contentEquals(new StringBuilder("abd")));
+    assertTrue(s.contentEquals(new StringBuilder("ab").append("c")));
+    assertFalse(s.contentEquals(new StringBuilder("ab").append("d")));
 
     // Test also CharSequence overload.
-    assertTrue(s.contentEquals((CharSequence) new StringBuffer("abc")));
-    assertFalse(s.contentEquals((CharSequence) new StringBuffer("abd")));
-    assertTrue(s.contentEquals((CharSequence) new StringBuffer("ab").append("c")));
-    assertFalse(s.contentEquals((CharSequence) new StringBuffer("ab").append("d")));
+    assertTrue(s.contentEquals((CharSequence) new StringBuilder("abc")));
+    assertFalse(s.contentEquals((CharSequence) new StringBuilder("abd")));
+    assertTrue(s.contentEquals((CharSequence) new StringBuilder("ab").append("c")));
+    assertFalse(s.contentEquals((CharSequence) new StringBuilder("ab").append("d")));
   }
 
   public void testGetBytesAscii() {
@@ -762,8 +767,8 @@ public class StringTest extends TestCase {
     // Invalid surrogate pair -- missing the second codepoint.
     str = "\uD801";
     bytes = str.getBytes(encoding);
-    assertEquals(1, bytes.length);
-    assertEquals('?', bytes[0]);
+    assertEquals("Invalid surrogate pair length", 1, bytes.length);
+    assertEquals("Invalid surrogate pair translates to '?'", '?', bytes[0]);
 
     // Invalid surrogate pair -- invalid low surrogate.
     str = "\uD801 ";
@@ -1228,7 +1233,7 @@ public class StringTest extends TestCase {
         "\u001A\u001b\u001c\u001d\u001e\u001f\u0020\u0021 " + "abc");
 
     // JavaScript would trim \u2029 and other unicode whitespace type characters; but Java wont
-    trimRightAssertEquals("\u2029abc\u00a0","\u2029abc\u00a0");
+    trimRightAssertEquals("\u2029abc\u00a0", "\u2029abc\u00a0");
   }
 
   public void testUpperCase() {
@@ -1281,7 +1286,7 @@ public class StringTest extends TestCase {
    * TODO: insufficient, compiler now inlines.
    */
   public void trimRightAssertEquals(String left, String right) {
-    assertEquals(left, right.trim());
+    assertEquals("trimRightAssertEquals", left, right.trim());
   }
 
   /**
@@ -1290,7 +1295,7 @@ public class StringTest extends TestCase {
    * TODO: insufficient, compiler now inlines.
    */
   public void trimRightAssertSame(String left, String right) {
-    assertSame(left, right.trim());
+    assertSame("trimRightAssertSame", left, right.trim());
   }
 
   private static void compareList(String category, String[] desired, String[] got) {
