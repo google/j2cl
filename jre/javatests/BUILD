@@ -56,6 +56,7 @@ j2kt_native_library(
         "com/google/j2cl/jre/BigIntegerSuite.java",
         "com/google/j2cl/jre/ConcurrentSuite.java",
         "com/google/j2cl/jre/DateTimeSuite.java",
+        "com/google/j2cl/jre/EmulJava8Suite.java",
         "com/google/j2cl/jre/EmulSuite.java",
         "com/google/j2cl/jre/LangSuite.java",
         "com/google/j2cl/jre/java/util/ComparatorTest.java",
@@ -78,6 +79,10 @@ j2kt_native_library(
             "com/google/j2cl/jre/java/sql/*.java",
             "com/google/j2cl/jre/java/util/concurrent/*.java",
             "com/google/j2cl/jre/java/util/concurrent/atomic/*.java",
+            "com/google/j2cl/jre/java8/lang/*.java",
+            "com/google/j2cl/jre/java8/math/*.java",
+            "com/google/j2cl/jre/java8/util/*.java",
+            "com/google/j2cl/jre/java8/util/stream/*.java",
         ],
         exclude = JS_ONLY_SRCS,
     ),
@@ -152,6 +157,7 @@ j2cl_multi_test(
 
 j2cl_multi_test(
     name = "EmulJava8",
+    enable_kt_native = True,
     shard_count = 8,
     test_class = "com.google.j2cl.jre.EmulJava8Suite",
     deps = [":emul_tests_lib"],

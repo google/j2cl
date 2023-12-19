@@ -58,14 +58,16 @@ import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
+import org.jspecify.nullness.Nullable;
 
 /**
  * Tests {@link java.util.stream.Collectors}.
- * <p />
- * Methods that are presently only tested indirectly:
+ *
+ * <p>Methods that are presently only tested indirectly:
+ *
  * <ul>
- *   <li>reducing: counting, minBy/maxBy use this</li>
- *   <li>toCollection tested by toList (toSet now uses its own impl)</li>
+ *   <li>reducing: counting, minBy/maxBy use this
+ *   <li>toCollection tested by toList (toSet now uses its own impl)
  * </ul>
  */
 public class CollectorsTest extends EmulTestBase {
@@ -465,8 +467,10 @@ public class CollectorsTest extends EmulTestBase {
    * This method attempts to apply a collector to items as a stream might do, so that we can simply
    * verify the output. Taken from the Collector class's javadoc.
    */
-  private static <T, A, R> void applyItems(
-      R expected, Collector<T, A, R> collector, T t1, T t2, BiPredicate<R, R> equals) {
+  private static <
+          T extends @Nullable Object, A extends @Nullable Object, R extends @Nullable Object>
+      void applyItems(
+          R expected, Collector<T, A, R> collector, T t1, T t2, BiPredicate<R, R> equals) {
     assertTrue(
         "failed without splitting",
         equals.test(expected, applyItemsWithoutSplitting(collector, t1, t2)));
@@ -475,17 +479,19 @@ public class CollectorsTest extends EmulTestBase {
   }
 
   /**
-   * This method attempts to apply a collector to items as a stream might do, so that we
-   * can simply verify the output. Taken from the Collector class's javadoc.
+   * This method attempts to apply a collector to items as a stream might do, so that we can simply
+   * verify the output. Taken from the Collector class's javadoc.
    */
-  private static <T, A, R> void applyItems(R expected, Collector<T, A, R> collector, T t1, T t2) {
+  private static <
+          T extends @Nullable Object, A extends @Nullable Object, R extends @Nullable Object>
+      void applyItems(R expected, Collector<T, A, R> collector, T t1, T t2) {
     applyItems(expected, collector, t1, t2, Object::equals);
   }
 
-  /**
-   * Helper for applyItems.
-   */
-  private static <T, A, R> R applyItemsWithoutSplitting(Collector<T, A, R> collector, T t1, T t2) {
+  /** Helper for applyItems. */
+  private static <
+          T extends @Nullable Object, A extends @Nullable Object, R extends @Nullable Object>
+      R applyItemsWithoutSplitting(Collector<T, A, R> collector, T t1, T t2) {
     Supplier<A> supplier = collector.supplier();
     BiConsumer<A, T> accumulator = collector.accumulator();
     // unused in this impl
@@ -502,10 +508,10 @@ public class CollectorsTest extends EmulTestBase {
     return r1;
   }
 
-  /**
-   * Helper for applyItems.
-   */
-  private static <T, A, R> R applyItemsWithSplitting(Collector<T, A, R> collector, T t1, T t2) {
+  /** Helper for applyItems. */
+  private static <
+          T extends @Nullable Object, A extends @Nullable Object, R extends @Nullable Object>
+      R applyItemsWithSplitting(Collector<T, A, R> collector, T t1, T t2) {
     Supplier<A> supplier = collector.supplier();
     BiConsumer<A, T> accumulator = collector.accumulator();
     // actually used in this impl
@@ -522,13 +528,16 @@ public class CollectorsTest extends EmulTestBase {
     return r2;
   }
 
-  private static <T, A, R> void assertZeroItemsCollectedAs(
-      R expected, Collector<T, A, R> collector) {
+  private static <
+          T extends @Nullable Object, A extends @Nullable Object, R extends @Nullable Object>
+      void assertZeroItemsCollectedAs(R expected, Collector<T, A, R> collector) {
     assertZeroItemsCollectedAs(expected, collector, Object::equals);
   }
 
-  private static <T, A, R> void assertZeroItemsCollectedAs(
-      R expected, Collector<T, A, R> collector, BiPredicate<R, R> equals) {
+  private static <
+          T extends @Nullable Object, A extends @Nullable Object, R extends @Nullable Object>
+      void assertZeroItemsCollectedAs(
+          R expected, Collector<T, A, R> collector, BiPredicate<R, R> equals) {
     Supplier<A> supplier = collector.supplier();
     // unused in this impl
     BiConsumer<A, T> accumulator = collector.accumulator();
@@ -543,13 +552,16 @@ public class CollectorsTest extends EmulTestBase {
     assertTrue(equals, expected, actual);
   }
 
-  private static <T, A, R> void assertSingleItemCollectedAs(
-      R expected, Collector<T, A, R> collector, T item) {
+  private static <
+          T extends @Nullable Object, A extends @Nullable Object, R extends @Nullable Object>
+      void assertSingleItemCollectedAs(R expected, Collector<T, A, R> collector, T item) {
     assertSingleItemCollectedAs(expected, collector, item, Object::equals);
   }
 
-  private static <T, A, R> void assertSingleItemCollectedAs(
-      R expected, Collector<T, A, R> collector, T item, BiPredicate<R, R> equals) {
+  private static <
+          T extends @Nullable Object, A extends @Nullable Object, R extends @Nullable Object>
+      void assertSingleItemCollectedAs(
+          R expected, Collector<T, A, R> collector, T item, BiPredicate<R, R> equals) {
     Supplier<A> supplier = collector.supplier();
     BiConsumer<A, T> accumulator = collector.accumulator();
     // shouldn't really be used, just handy to poke the internals quick
@@ -570,7 +582,8 @@ public class CollectorsTest extends EmulTestBase {
     assertTrue(equals, expected, actual);
   }
 
-  private static <T, U> void assertTrue(BiPredicate<T, U> predicate, T expected, U actual) {
+  private static <T extends @Nullable Object, U extends @Nullable Object> void assertTrue(
+      BiPredicate<T, U> predicate, T expected, U actual) {
     assertTrue("expected= " + expected + ", actual=" + actual, predicate.test(expected, actual));
   }
 

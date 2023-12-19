@@ -19,16 +19,14 @@ import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
 
-/**
- * Tests for java.util.TreeMap Java 8 API emulation.
- */
+/** Tests for java.util.TreeMap Java 8 API emulation. */
 public class TreeMapTest extends AbstractJava8MapTest {
 
   public void testComparator() {
     TreeMap<Integer, Object> treeMap = new TreeMap<>(Comparator.naturalOrder());
     TreeMap<Integer, Object> secondTreeMap = new TreeMap<>(treeMap);
-    assertSame(Comparator.naturalOrder(), treeMap.comparator());
-    assertSame(Comparator.naturalOrder(), secondTreeMap.comparator());
+    assertSame(Comparator.<Integer>naturalOrder(), treeMap.comparator());
+    assertSame(Comparator.<Integer>naturalOrder(), secondTreeMap.comparator());
   }
 
   @Override

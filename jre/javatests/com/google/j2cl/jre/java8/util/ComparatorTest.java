@@ -16,22 +16,23 @@
 package com.google.j2cl.jre.java8.util;
 
 import com.google.j2cl.jre.java.util.EmulTestBase;
+import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import org.jspecify.nullness.Nullable;
 
-/**
- * Java 8 methods to test in java.util.Comparator.
- */
+/** Java 8 methods to test in java.util.Comparator. */
 public class ComparatorTest extends EmulTestBase {
 
+  @J2ktIncompatible // TODO(b/315311435): thenComparing not found for given type
   public void testThenComparing() {
     Supplier<String[]> strings = () -> new String[] {"1,b", "1,a", "2,a"};
     // expected sort results for 1st and 2nd char, each (f)orward or (r)everse
     String[] f1f2 = {"1,a", "1,b", "2,a"};
     String[] f1r2 = {"1,b", "1,a", "2,a"};
-    String[] f2f1 = {"1,a", "2,a" ,"1,b"};
+    String[] f2f1 = {"1,a", "2,a", "1,b"};
 
     // keyextractor
     assertSortedEquals(f1f2, strings,
@@ -104,35 +105,32 @@ public class ComparatorTest extends EmulTestBase {
   }
 
   public void testNullsFirst() {
-    Supplier<String[]> strings = () -> new String[]{"a", null, "c", null, "b"};
+    Supplier<@Nullable String[]> strings = () -> new @Nullable String[] {"a", null, "c", null, "b"};
     assertSortedEquals(
-        new String[] {null, null, "a", "b", "c"},
+        new @Nullable String[] {null, null, "a", "b", "c"},
         strings,
-        Comparator.nullsFirst(Comparator.naturalOrder())
-    );
+        Comparator.nullsFirst(Comparator.naturalOrder()));
     assertSortedEquals(
-        new String[] {null, null, "c", "b", "a"},
+        new @Nullable String[] {null, null, "c", "b", "a"},
         strings,
-        Comparator.nullsFirst(Comparator.reverseOrder())
-    );
+        Comparator.nullsFirst(Comparator.reverseOrder()));
   }
 
   public void testNullsLast() {
-    Supplier<String[]> strings = () -> new String[]{"a", null, "c", null, "b"};
+    Supplier<@Nullable String[]> strings = () -> new @Nullable String[] {"a", null, "c", null, "b"};
     assertSortedEquals(
-        new String[] {"a", "b", "c", null, null},
+        new @Nullable String[] {"a", "b", "c", null, null},
         strings,
-        Comparator.nullsLast(Comparator.naturalOrder())
-    );
+        Comparator.nullsLast(Comparator.naturalOrder()));
     assertSortedEquals(
-        new String[] {"c", "b", "a", null, null},
+        new @Nullable String[] {"c", "b", "a", null, null},
         strings,
-        Comparator.nullsLast(Comparator.reverseOrder())
-    );
+        Comparator.nullsLast(Comparator.reverseOrder()));
   }
 
-  private static void assertSortedEquals(String[] expected, Supplier<String[]> presort, Comparator<String> comparator) {
-    String[] presortedArray = presort.get();
+  private static <T extends @Nullable Object> void assertSortedEquals(
+      T[] expected, Supplier<T[]> presort, Comparator<T> comparator) {
+    T[] presortedArray = presort.get();
     Arrays.sort(presortedArray, comparator);
     assertEquals(expected, presortedArray);
   }

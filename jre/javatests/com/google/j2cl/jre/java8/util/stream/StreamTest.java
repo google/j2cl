@@ -35,10 +35,9 @@ import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
+import org.jspecify.nullness.Nullable;
 
-/**
- * Tests {@link Stream}.
- */
+/** Tests {@link Stream}. */
 public class StreamTest extends EmulTestBase {
 
   public void testEmptyStream() {
@@ -306,11 +305,12 @@ public class StreamTest extends EmulTestBase {
 
     // With null values.
     // all
-    assertTrue(Stream.of(null, "a", "b").anyMatch(s -> true));
+    // TODO(b/315476228): Remove explicit type here and below
+    assertTrue(Stream.<@Nullable String>of(null, "a", "b").anyMatch(s -> true));
     // some
-    assertTrue(Stream.of(null, "a", "b").anyMatch(s ->  s == null));
+    assertTrue(Stream.<@Nullable String>of(null, "a", "b").anyMatch(s -> s == null));
     // none
-    assertFalse(Stream.of(null, "a", "b").anyMatch(s -> false));
+    assertFalse(Stream.<@Nullable String>of(null, "a", "b").anyMatch(s -> false));
   }
 
   public void testAllMatch() {
@@ -323,11 +323,11 @@ public class StreamTest extends EmulTestBase {
 
     // With null values.
     // all
-    assertTrue(Stream.of(null, "a", "b").allMatch(s -> true));
+    assertTrue(Stream.<@Nullable String>of(null, "a", "b").allMatch(s -> true));
     // some
-    assertFalse(Stream.of(null, "a", "b").allMatch(s -> s != null));
+    assertFalse(Stream.<@Nullable String>of(null, "a", "b").allMatch(s -> s != null));
     // none
-    assertFalse(Stream.of(null, "a", "b").allMatch(s -> false));
+    assertFalse(Stream.<@Nullable String>of(null, "a", "b").allMatch(s -> false));
   }
 
   public void testNoneMatch() {
@@ -340,11 +340,11 @@ public class StreamTest extends EmulTestBase {
 
     // With null values.
     // all
-    assertFalse(Stream.of(null, "a", "b").noneMatch(s -> true));
+    assertFalse(Stream.<@Nullable String>of(null, "a", "b").noneMatch(s -> true));
     // some
-    assertFalse(Stream.of(null, "a", "b").noneMatch(s -> s == null));
+    assertFalse(Stream.<@Nullable String>of(null, "a", "b").noneMatch(s -> s == null));
     // none
-    assertTrue(Stream.of(null, "a", "b").noneMatch(s -> false));
+    assertTrue(Stream.<@Nullable String>of(null, "a", "b").noneMatch(s -> false));
   }
 
   public void testFlatMap() {

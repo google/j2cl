@@ -18,6 +18,7 @@ package com.google.j2cl.jre.java8.util;
 import static java.util.Arrays.asList;
 
 import com.google.j2cl.jre.java.util.EmulTestBase;
+import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -25,9 +26,7 @@ import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 
-/**
- * Tests for java.util.List implementing classes Java 8 API emulation.
- */
+/** Tests for java.util.List implementing classes Java 8 API emulation. */
 abstract class AbstractJava8ListTest extends EmulTestBase {
 
   public void testForeach() {
@@ -81,7 +80,8 @@ abstract class AbstractJava8ListTest extends EmulTestBase {
     assertEquals(asList("a", "b"), list);
   }
 
-  public void testReplaceAll() {
+  @J2ktIncompatible // Not nullable according to Jspecify
+  public void testReplaceAll_null() {
     List<String> list = createEmptyList();
 
     try {
@@ -89,6 +89,10 @@ abstract class AbstractJava8ListTest extends EmulTestBase {
       fail();
     } catch (NullPointerException expected) {
     }
+  }
+
+  public void testReplaceAll() {
+    List<String> list = createEmptyList();
 
     list.replaceAll(UnaryOperator.identity());
     assertTrue(list.isEmpty());

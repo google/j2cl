@@ -19,10 +19,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import org.jspecify.nullness.Nullable;
 
-/**
- * Tests for java.util.Map Java 8 API emulation.
- */
+/** Tests for java.util.Map Java 8 API emulation. */
 public class MapTest extends AbstractJava8MapTest {
 
   @Override
@@ -30,7 +29,8 @@ public class MapTest extends AbstractJava8MapTest {
     return new TestMap<>();
   }
 
-  private static class TestMap<K, V> implements Map<K, V> {
+  private static class TestMap<K extends @Nullable Object, V extends @Nullable Object>
+      implements Map<K, V> {
     private final Map<K, V> container = new HashMap<>();
 
     @Override
@@ -44,17 +44,17 @@ public class MapTest extends AbstractJava8MapTest {
     }
 
     @Override
-    public boolean containsKey(Object key) {
+    public boolean containsKey(@Nullable Object key) {
       return container.containsKey(key);
     }
 
     @Override
-    public boolean containsValue(Object value) {
+    public boolean containsValue(@Nullable Object value) {
       return container.containsValue(value);
     }
 
     @Override
-    public V get(Object key) {
+    public V get(@Nullable Object key) {
       return container.get(key);
     }
 
@@ -64,7 +64,7 @@ public class MapTest extends AbstractJava8MapTest {
     }
 
     @Override
-    public V remove(Object key) {
+    public V remove(@Nullable Object key) {
       return container.remove(key);
     }
 

@@ -25,22 +25,24 @@ import java.util.function.DoubleConsumer;
 import java.util.function.IntConsumer;
 import java.util.function.LongConsumer;
 import junit.framework.TestCase;
+import org.jspecify.nullness.Nullable;
 
 /** Tests for PrimitiveIterator JRE emulation. */
 public class PrimitiveIteratorTest extends TestCase {
 
   public void testForEachRemainingDoubleConsumer() {
     PrimitiveIterator.OfDouble it = createTestPrimitiveDoubleIterator();
-    it.forEachRemaining((Consumer<Double>) new JanusDoubleConsumer() {
-      @Override
-      public void accept(Double value) {
-        fail();
-      }
+    it.forEachRemaining(
+        (Consumer<@Nullable Double>)
+            new JanusDoubleConsumer() {
+              @Override
+              public void accept(@Nullable Double value) {
+                fail();
+              }
 
-      @Override
-      public void accept(double value) {
-      }
-    });
+              @Override
+              public void accept(double value) {}
+            });
   }
 
   public void testForEachRemainingDoubleConsumer_null() {
@@ -50,7 +52,7 @@ public class PrimitiveIteratorTest extends TestCase {
     }
 
     try {
-      createTestPrimitiveDoubleIterator().forEachRemaining((Consumer<Double>) null);
+      createTestPrimitiveDoubleIterator().forEachRemaining((Consumer<@Nullable Double>) null);
       fail();
     } catch (NullPointerException e) {
       // expected
@@ -66,16 +68,17 @@ public class PrimitiveIteratorTest extends TestCase {
 
   public void testForEachRemainingIntConsumer() {
     PrimitiveIterator.OfInt it = createTestPrimitiveIntIterator();
-    it.forEachRemaining((Consumer<Integer>) new JanusIntConsumer() {
-      @Override
-      public void accept(Integer value) {
-        fail();
-      }
+    it.forEachRemaining(
+        (Consumer<@Nullable Integer>)
+            new JanusIntConsumer() {
+              @Override
+              public void accept(@Nullable Integer value) {
+                fail();
+              }
 
-      @Override
-      public void accept(int value) {
-      }
-    });
+              @Override
+              public void accept(int value) {}
+            });
   }
 
   public void testForEachRemainingIntConsumer_null() {
@@ -85,7 +88,7 @@ public class PrimitiveIteratorTest extends TestCase {
     }
 
     try {
-      createTestPrimitiveIntIterator().forEachRemaining((Consumer<Integer>) null);
+      createTestPrimitiveIntIterator().forEachRemaining((Consumer<@Nullable Integer>) null);
       fail();
     } catch (NullPointerException e) {
       // expected
@@ -101,16 +104,17 @@ public class PrimitiveIteratorTest extends TestCase {
 
   public void testForEachRemainingLongConsumer() {
     PrimitiveIterator.OfLong it = createTestPrimitiveLongIterator();
-    it.forEachRemaining((Consumer<Long>) new JanusLongConsumer() {
-      @Override
-      public void accept(Long value) {
-        fail();
-      }
+    it.forEachRemaining(
+        (Consumer<@Nullable Long>)
+            new JanusLongConsumer() {
+              @Override
+              public void accept(@Nullable Long value) {
+                fail();
+              }
 
-      @Override
-      public void accept(long value) {
-      }
-    });
+              @Override
+              public void accept(long value) {}
+            });
   }
 
   public void testForEachRemainingLongConsumer_null() {
@@ -120,7 +124,7 @@ public class PrimitiveIteratorTest extends TestCase {
     }
 
     try {
-      createTestPrimitiveLongIterator().forEachRemaining((Consumer<Long>) null);
+      createTestPrimitiveLongIterator().forEachRemaining((Consumer<@Nullable Long>) null);
       fail();
     } catch (NullPointerException e) {
       // expected
@@ -179,10 +183,9 @@ public class PrimitiveIteratorTest extends TestCase {
     };
   }
 
-  private interface JanusDoubleConsumer extends Consumer<Double>, DoubleConsumer { }
+  private interface JanusDoubleConsumer extends Consumer<@Nullable Double>, DoubleConsumer {}
 
-  private interface JanusIntConsumer extends Consumer<Integer>, IntConsumer { }
+  private interface JanusIntConsumer extends Consumer<@Nullable Integer>, IntConsumer {}
 
-  private interface JanusLongConsumer extends Consumer<Long>, LongConsumer { }
-
+  private interface JanusLongConsumer extends Consumer<@Nullable Long>, LongConsumer {}
 }

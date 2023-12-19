@@ -20,10 +20,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import org.jspecify.nullness.Nullable;
 
-/**
- * Tests for java.util.Map implementing classes Java 8 API emulation.
- */
+/** Tests for java.util.Map implementing classes Java 8 API emulation. */
 abstract class AbstractJava8MapTest extends EmulTestBase {
 
   private Map<String, String> testSample;
@@ -35,7 +34,7 @@ abstract class AbstractJava8MapTest extends EmulTestBase {
   }
 
   public void testCompute() {
-    Map<String, String> map = createTestMap();
+    Map<String, @Nullable String> map = createTestMap();
 
     String value = map.compute("a", (k, v) -> k + " - " + v);
     assertEquals("a - A", value);
@@ -56,7 +55,7 @@ abstract class AbstractJava8MapTest extends EmulTestBase {
   }
 
   public void testComputeIfAbsent() {
-    Map<String, String> map = createTestMap();
+    Map<String, @Nullable String> map = createTestMap();
 
     String value = map.computeIfAbsent("a", k -> {
       fail();
@@ -79,7 +78,7 @@ abstract class AbstractJava8MapTest extends EmulTestBase {
   }
 
   public void testComputeIfPresent() {
-    Map<String, String> map = createTestMap();
+    Map<String, @Nullable String> map = createTestMap();
 
     String value = map.computeIfPresent("a", (k, v) -> k + " - " + v);
     assertEquals("a - A", value);
@@ -112,7 +111,7 @@ abstract class AbstractJava8MapTest extends EmulTestBase {
   }
 
   public void testGetOrDefault() {
-    Map<String, String> map = createTestMap();
+    Map<String, @Nullable String> map = createTestMap();
 
     String value = map.getOrDefault("a", null);
     assertEquals("A", value);
@@ -162,7 +161,7 @@ abstract class AbstractJava8MapTest extends EmulTestBase {
   }
 
   public void testPutIfAbsent() {
-    Map<String, String> map = createTestMap();
+    Map<String, @Nullable String> map = createTestMap();
 
     String oldValue = map.putIfAbsent("a", "a");
     assertEquals("A", oldValue);
@@ -182,7 +181,7 @@ abstract class AbstractJava8MapTest extends EmulTestBase {
   }
 
   public void testRemove() {
-    Map<String, String> map = createTestMap();
+    Map<String, @Nullable String> map = createTestMap();
 
     assertFalse(map.remove("a", "a"));
     assertTrue(map.containsKey("a"));
@@ -214,7 +213,7 @@ abstract class AbstractJava8MapTest extends EmulTestBase {
   }
 
   public void testReplace_Key_OldValue_NewValue() {
-    Map<String, String> map = createTestMap();
+    Map<String, @Nullable String> map = createTestMap();
 
     assertTrue(map.replace("a", "A", "a"));
     assertTrue(map.containsKey("a"));

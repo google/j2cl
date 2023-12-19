@@ -20,17 +20,16 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import org.jspecify.nullness.Nullable;
 
-/**
- * Tests for java.util.List Java 8 API emulation.
- */
+/** Tests for java.util.List Java 8 API emulation. */
 public class ListTest extends AbstractJava8ListTest {
   @Override
   protected List<String> createEmptyList() {
     return new TestList<>();
   }
 
-  private static class TestList<T> implements List<T> {
+  private static class TestList<T extends @Nullable Object> implements List<T> {
     private final List<T> container = new ArrayList<>();
 
     @Override
@@ -44,7 +43,7 @@ public class ListTest extends AbstractJava8ListTest {
     }
 
     @Override
-    public boolean contains(Object o) {
+    public boolean contains(@Nullable Object o) {
       return container.contains(o);
     }
 
@@ -54,12 +53,12 @@ public class ListTest extends AbstractJava8ListTest {
     }
 
     @Override
-    public Object[] toArray() {
+    public @Nullable Object[] toArray() {
       return container.toArray();
     }
 
     @Override
-    public <E> E[] toArray(E[] a) {
+    public <E extends @Nullable Object> E[] toArray(E[] a) {
       return container.toArray(a);
     }
 
@@ -69,7 +68,7 @@ public class ListTest extends AbstractJava8ListTest {
     }
 
     @Override
-    public boolean remove(Object o) {
+    public boolean remove(@Nullable Object o) {
       return container.remove(o);
     }
 
@@ -124,12 +123,12 @@ public class ListTest extends AbstractJava8ListTest {
     }
 
     @Override
-    public int indexOf(Object o) {
+    public int indexOf(@Nullable Object o) {
       return container.indexOf(o);
     }
 
     @Override
-    public int lastIndexOf(Object o) {
+    public int lastIndexOf(@Nullable Object o) {
       return container.lastIndexOf(o);
     }
 
