@@ -211,7 +211,7 @@ public class WasmConstructsGenerator {
     }
   }
 
-  void emitExceptionTag() {
+  public void emitExceptionTag() {
     // Declare a tag that will be used for Java exceptions. The tag has a single parameter that is
     // the Throwable object being thrown by the throw instruction.
     // The throw instruction will refer to this tag and will expect a single element in the stack
@@ -750,7 +750,7 @@ public class WasmConstructsGenerator {
     emitEndCodeComment("Native Array types");
   }
 
-  private void emitNativeArrayType(ArrayTypeDescriptor arrayTypeDescriptor) {
+  void emitNativeArrayType(ArrayTypeDescriptor arrayTypeDescriptor) {
     String wasmArrayTypeName = environment.getWasmTypeName(arrayTypeDescriptor);
     builder.newLine();
     builder.append(
@@ -766,7 +766,7 @@ public class WasmConstructsGenerator {
     emitEndCodeComment("Empty array singletons");
   }
 
-  private void emitEmptyArraySingleton(ArrayTypeDescriptor arrayTypeDescriptor) {
+  void emitEmptyArraySingleton(ArrayTypeDescriptor arrayTypeDescriptor) {
     String wasmArrayTypeName = environment.getWasmTypeName(arrayTypeDescriptor);
     // Emit a global empty array singleton to avoid allocating empty arrays. */
     builder.newLine();

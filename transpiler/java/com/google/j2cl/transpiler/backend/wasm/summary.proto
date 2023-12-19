@@ -9,6 +9,9 @@ message Summary {
   repeated string type_names = 1;
   repeated TypeInfo types = 2;
   repeated StringLiteralInfo string_literals = 3;
+  repeated SharedWasmSnippet type_snippets = 4;
+  repeated SharedWasmSnippet import_snippets = 5;
+  repeated SharedWasmSnippet global_snippets = 6;
 }
 
 message TypeInfo {
@@ -21,4 +24,9 @@ message StringLiteralInfo {
   string content = 1;
   string enclosing_type_name = 2;
   string method_name = 3;
+}
+
+message SharedWasmSnippet {
+  string key = 1;
+  string snippet = 2;
 }

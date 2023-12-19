@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static java.lang.String.format;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -40,8 +41,10 @@ import com.google.j2cl.transpiler.ast.StringLiteralGettersCreator;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.backend.wasm.SharedWasmSnippet;
 import com.google.j2cl.transpiler.backend.wasm.Summary;
 import com.google.j2cl.transpiler.backend.wasm.TypeInfo;
+import com.google.j2cl.transpiler.backend.wasm.WasmConstructsGenerator;
 import com.google.j2cl.transpiler.backend.wasm.WasmGeneratorStage;
 import com.google.j2cl.transpiler.frontend.jdt.JdtEnvironment;
 import com.google.j2cl.transpiler.frontend.jdt.JdtParser;
@@ -57,6 +60,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Stream;
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.Option;
@@ -127,18 +131,32 @@ final class BazelJ2wasmBundler extends BazelWorker {
         Streams.concat(
                 Stream.of("(rec"),
                 getModuleParts("types"),
+                getDeduppedWasmSnippets(Summary::getTypeSnippetsList),
                 Stream.of(typeGraph.getTopLevelItableStructDeclaration()),
                 classes.stream().map(TypeGraph.Type::getItableStructDeclaration),
                 Stream.of(")"),
                 getModuleParts("data"),
                 getModuleParts("globals"),
+                getDeduppedWasmSnippets(Summary::getGlobalSnippetsList),
                 classes.stream().map(TypeGraph.Type::getItableInitialization),
                 Stream.of(literalGlobals),
+                getDeduppedWasmSnippets(Summary::getImportSnippetsList),
+                Stream.of(generatorStage.emitToString(WasmConstructsGenerator::emitExceptionTag)),
                 getModuleParts("functions"),
                 literalGetterMethods)
             .collect(toImmutableList());
 
     writeToFile(output.toString(), moduleContents, problems);
+  }
+
+  private Stream<String> getDeduppedWasmSnippets(
+      Function<Summary, Collection<SharedWasmSnippet>> snippetGetter) {
+    return getSummaries()
+        .flatMap(s -> snippetGetter.apply(s).stream())
+        .collect(
+            toImmutableMap(SharedWasmSnippet::getKey, SharedWasmSnippet::getSnippet, (a, b) -> a))
+        .values()
+        .stream();
   }
 
   private CompilationUnit synthesizeStringLiteralGetters() {

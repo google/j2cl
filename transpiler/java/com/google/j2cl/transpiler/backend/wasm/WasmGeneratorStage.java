@@ -81,23 +81,41 @@ public class WasmGeneratorStage {
             library, JsImportsGenerator.collectImports(library, problems), /* isModular= */ true);
     SummaryBuilder summaryBuilder = new SummaryBuilder(library, environment, problems);
 
+    collectUsedNativeArrayTypes(library)
+        .forEach(
+            t -> {
+              summaryBuilder.addSharedTypeSnippet(
+                  environment.getWasmTypeName(t), emitToString(g -> g.emitNativeArrayType(t)));
+              summaryBuilder.addSharedGlobalSnippet(
+                  environment.getWasmEmptyArrayGlobalName(t),
+                  emitToString(g -> g.emitEmptyArraySingleton(t)));
+            });
+
+    environment
+        .collectMethodsThatNeedTypeDeclarations()
+        .forEach(
+            (k, m) ->
+                summaryBuilder.addSharedTypeSnippet(
+                    k, emitToString(g -> g.emitFunctionType(k, m))));
+    environment
+        .collectMethodsNeedingIntrinsicDeclarations()
+        .forEach(
+            (k, m) ->
+                summaryBuilder.addSharedImportSnippet(
+                    k, emitToString(g -> g.emitBinaryenIntrinsicImport(k, m))));
+
     // TODO(rluble): Introduce/use flags to emit the readable version of the summary. For now emit
     // summaries in both binary and text form for now.
     output.write("summary.txtpb", summaryBuilder.toJson(problems));
     output.write("summary.binpb", summaryBuilder.toByteArray());
 
-    List<ArrayTypeDescriptor> usedNativeArrayTypes = collectUsedNativeArrayTypes(library);
-
     copyJavaSources(library);
 
     emitToFile(
         "types.wat",
-        generator -> {
-          generator.emitDynamicDispatchMethodTypes();
-          generator.emitNativeArrayTypes(usedNativeArrayTypes);
-          generator.emitForEachType(
-              library, generator::renderModularTypeStructs, "type definition");
-        });
+        generator ->
+            generator.emitForEachType(
+                library, generator::renderModularTypeStructs, "type definition"));
 
     emitToFile(
         "functions.wat",

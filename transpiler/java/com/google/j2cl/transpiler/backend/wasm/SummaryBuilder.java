@@ -51,6 +51,18 @@ public final class SummaryBuilder {
     summarizeStringLiterals(library);
   }
 
+  void addSharedTypeSnippet(String key, String snippet) {
+    summary.addTypeSnippets(SharedWasmSnippet.newBuilder().setKey(key).setSnippet(snippet));
+  }
+
+  void addSharedGlobalSnippet(String key, String snippet) {
+    summary.addGlobalSnippets(SharedWasmSnippet.newBuilder().setKey(key).setSnippet(snippet));
+  }
+
+  void addSharedImportSnippet(String key, String snippet) {
+    summary.addImportSnippets(SharedWasmSnippet.newBuilder().setKey(key).setSnippet(snippet));
+  }
+
   private void summaryTypeHierarchy(Library library) {
     library
         .streamTypes()
