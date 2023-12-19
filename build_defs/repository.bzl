@@ -57,25 +57,6 @@ def _load_binaryen():
     )
 
     _github_repo(
-        name = "com_google_absl_py",
-        repo = "abseil/abseil-py",
-        tag = "pypi-v0.15.0",
-        sha256 = "39baf348f9358346dde9b021b54f7d2b02a416246f147f2329f59515b6b10c70",
-    )
-
-    # Six is a dependency of com_google_absl_py
-    http_archive(
-        name = "six_archive",
-        build_file = "@com_google_absl_py//third_party:six.BUILD",
-        strip_prefix = "six-1.10.0",
-        urls = [
-            "http://mirror.bazel.build/pypi.python.org/packages/source/s/six/six-1.10.0.tar.gz",
-            "https://pypi.python.org/packages/source/s/six/six-1.10.0.tar.gz",
-        ],
-        sha256 = "105f8d68616f8248e24bf0e9372ef04d3cc10104f1980f54d57b2ce73a5ad56a",
-    )
-
-    _github_repo(
         name="com_google_binaryen",
         repo = "WebAssembly/binaryen",
         tag = "da18e25f22afcd916171aae8511c7b6860d4d7cc",
