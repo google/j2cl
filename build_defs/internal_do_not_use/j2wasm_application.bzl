@@ -399,7 +399,7 @@ def j2wasm_application(name, defines = dict(), **kwargs):
         "J2WASM_DEBUG": "FALSE",
         "jre.checkedMode": "DISABLED",
         "jre.checks.checkLevel": "MINIMAL",
-        "jre.logging.logLevel": "SEVERE",
+        "jre.logging.logLevel": "OFF",
         "jre.logging.simpleConsoleHandler": "DISABLED",
         "jre.classMetadata": "STRIPPED",
     })
