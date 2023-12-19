@@ -256,6 +256,18 @@ public class ResolveCaptures extends NormalizationPass {
             boolean isDelegatingConstructor = AstUtils.hasThisCall(method);
             Map<Variable, Variable> parameterByCapturedVariable = new HashMap<>();
 
+            // If this is a JsConstructor, ensure we don't put any statements before the super()
+            // call.
+            int statementOffset =
+                method.getDescriptor().isJsConstructor()
+                        && getCurrentType().getSuperTypeDescriptor().hasJsConstructor()
+                    ? method
+                            .getBody()
+                            .getStatements()
+                            .indexOf(AstUtils.getConstructorInvocationStatement(method))
+                        + 1
+                    : 0;
+
             // Declare a parameter for each captured variable and initialize the backing field
             // only if this constructor is not a delegating constructor.
             int i = 0;
@@ -264,6 +276,7 @@ public class ResolveCaptures extends NormalizationPass {
                   addParameterAndInitializeBackingField(
                       methodBuilder,
                       i++,
+                      statementOffset,
                       getFieldDescriptorForCapture(typeDeclaration, variable),
                       isDelegatingConstructor,
                       // Keep the source position of the original variable to keep the name mapping.
@@ -271,12 +284,12 @@ public class ResolveCaptures extends NormalizationPass {
               parameterByCapturedVariable.put(variable, parameter);
             }
 
-            // add enclosing instance enclosingInstanceParameter and initialize it.
             Variable enclosingInstanceParameter =
                 typeDeclaration.isCapturingEnclosingInstance()
                     ? addParameterAndInitializeBackingField(
                         methodBuilder,
                         0,
+                        statementOffset,
                         getCurrentType()
                             .getTypeDescriptor()
                             .getFieldDescriptorForEnclosingInstance(),
@@ -296,6 +309,7 @@ public class ResolveCaptures extends NormalizationPass {
   private Variable addParameterAndInitializeBackingField(
       Method.Builder methodBuilder,
       int position,
+      int statementOffsetPosition,
       FieldDescriptor captureBackingField,
       boolean isDelegatingConstructor,
       SourcePosition sourcePosition) {
@@ -306,7 +320,7 @@ public class ResolveCaptures extends NormalizationPass {
     if (!isDelegatingConstructor) {
       // Assign the parameter to the backing field.
       methodBuilder.addStatement(
-          position,
+          statementOffsetPosition + position,
           BinaryExpression.Builder.asAssignmentTo(captureBackingField)
               .setRightOperand(parameter.createReference())
               .build()

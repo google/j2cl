@@ -149,6 +149,14 @@ public class JsConstructorClass {
     public H() {}
   }
 
+  public static class Outer {
+    /** Subclass of a JsConstructor that captures an enclosing class. */
+    public class I extends G {
+      @JsConstructor
+      public I() {}
+    }
+  }
+
   public static class Varargs extends A {
     @JsConstructor
     public Varargs(int... args) {

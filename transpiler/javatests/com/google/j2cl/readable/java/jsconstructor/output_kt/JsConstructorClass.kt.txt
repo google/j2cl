@@ -147,6 +147,12 @@ open class JsConstructorClass {
   constructor()
  }
 
+ @ObjCName("J2ktJsconstructorJsConstructorClass_Outer", exact = true)
+ open class Outer {
+  @ObjCName("J2ktJsconstructorJsConstructorClass_Outer_I", exact = true)
+  open inner class I constructor(): JsConstructorClass.G() {}
+ }
+
  @ObjCName("J2ktJsconstructorJsConstructorClass_Varargs", exact = true)
  open class Varargs: JsConstructorClass.A {
   @JsConstructor

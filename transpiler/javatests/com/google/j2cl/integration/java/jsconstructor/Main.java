@@ -68,5 +68,6 @@ public class Main {
 
     InstanceInitOrder.test();
     StaticInitOrder.test();
+    InnerClassCapture.test();
   }
 }
