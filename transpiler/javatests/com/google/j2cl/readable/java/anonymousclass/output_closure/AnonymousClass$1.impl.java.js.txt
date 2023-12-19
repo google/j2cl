@@ -12,31 +12,34 @@ class $1 extends SomeClass {
   /**@type {AnonymousClass} @nodts*/
   this.$outer_this__anonymousclass_AnonymousClass_1;
   /**@type {*} @nodts*/
-  this.f_object__anonymousclass_AnonymousClass_1;
-  /**@type {*} @nodts*/
   this.f_outer__anonymousclass_AnonymousClass_1;
+  /**@type {*} @nodts*/
+  this.f_other__anonymousclass_AnonymousClass_1;
+  /**@type {*} @nodts*/
+  this.$captured_a__anonymousclass_AnonymousClass_1;
  }
  /** @nodts @return {!$1} */
- static $create__anonymousclass_AnonymousClass__int(/** AnonymousClass */ $outer_this, /** number */ $_0) {
+ static $create__anonymousclass_AnonymousClass__java_lang_Object__int(/** AnonymousClass */ $outer_this, /** * */ $captured_a, /** number */ $_0) {
   $1.$clinit();
   let $instance = new $1();
-  $instance.$ctor__anonymousclass_AnonymousClass_1__anonymousclass_AnonymousClass__int__void($outer_this, $_0);
+  $instance.$ctor__anonymousclass_AnonymousClass_1__anonymousclass_AnonymousClass__java_lang_Object__int__void($outer_this, $captured_a, $_0);
   return $instance;
  }
  /** @nodts */
- $ctor__anonymousclass_AnonymousClass_1__anonymousclass_AnonymousClass__int__void(/** AnonymousClass */ $outer_this, /** number */ $_0) {
+ $ctor__anonymousclass_AnonymousClass_1__anonymousclass_AnonymousClass__java_lang_Object__int__void(/** AnonymousClass */ $outer_this, /** * */ $captured_a, /** number */ $_0) {
   this.$outer_this__anonymousclass_AnonymousClass_1 = $outer_this;
+  this.$captured_a__anonymousclass_AnonymousClass_1 = $captured_a;
   this.$ctor__anonymousclass_SomeClass__int__void($_0);
   this.$init__void_$p_anonymousclass_AnonymousClass_1();
  }
  /** @override @nodts @return {?string} */
  m_foo__java_lang_String() {
-  return 'a';
+  return '' + this.$outer_this__anonymousclass_AnonymousClass_1.f_i__anonymousclass_AnonymousClass;
  }
  /** @private @nodts */
  $init__void_$p_anonymousclass_AnonymousClass_1() {
-  this.f_object__anonymousclass_AnonymousClass_1 = this;
   this.f_outer__anonymousclass_AnonymousClass_1 = this.$outer_this__anonymousclass_AnonymousClass_1;
+  this.f_other__anonymousclass_AnonymousClass_1 = this.$captured_a__anonymousclass_AnonymousClass_1;
  }
  /** @nodts */
  static $clinit() {

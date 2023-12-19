@@ -1,11 +1,11 @@
 goog.module('anonymousclass.AnonymousClass.$2$impl');
 
-const SomeClassWithStaticMembers = goog.require('anonymousclass.SomeClassWithStaticMembers$impl');
+const SomeClass = goog.require('anonymousclass.SomeClass$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let AnonymousClass = goog.forwardDeclare('anonymousclass.AnonymousClass$impl');
 
-class $2 extends SomeClassWithStaticMembers {
+class $2 extends SomeClass {
  /** @protected @nodts */
  constructor() {
   super();
@@ -26,7 +26,7 @@ class $2 extends SomeClassWithStaticMembers {
  /** @nodts */
  $ctor__anonymousclass_AnonymousClass_2__anonymousclass_AnonymousClass__int__void(/** AnonymousClass */ $outer_this, /** number */ $_0) {
   this.$outer_this__anonymousclass_AnonymousClass_2 = $outer_this;
-  this.$ctor__anonymousclass_SomeClassWithStaticMembers__int__void($_0);
+  this.$ctor__anonymousclass_SomeClass__int__void($_0);
   this.$init__void_$p_anonymousclass_AnonymousClass_2();
  }
  /** @override @nodts @return {?string} */
@@ -42,7 +42,7 @@ class $2 extends SomeClassWithStaticMembers {
  static $clinit() {
   $2.$clinit = () =>{};
   $2.$loadModules();
-  SomeClassWithStaticMembers.$clinit();
+  SomeClass.$clinit();
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {

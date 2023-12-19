@@ -53,6 +53,25 @@ open class AnonymousClass {
  @JvmField
  internal var i_pp_anonymousclass: Int = 0
 
+ @JvmField
+ internal var o_pp_anonymousclass: Any? = null
+
+ constructor(
+  @ObjCName("Id") a: Any?
+ ) {
+  this.o_pp_anonymousclass = object : SomeClass(0) {
+   @JvmField
+   internal var outer_pp_anonymousclass: Any? = this@AnonymousClass
+
+   @JvmField
+   internal var other_pp_anonymousclass: Any? = a
+
+   override fun foo(): String? {
+    return "" + this@AnonymousClass.i_pp_anonymousclass
+   }
+  }
+ }
+
  @ObjCName("main")
  open fun main() {
   val instance: SomeClass? = object : SomeClass(this@AnonymousClass.i_pp_anonymousclass) {

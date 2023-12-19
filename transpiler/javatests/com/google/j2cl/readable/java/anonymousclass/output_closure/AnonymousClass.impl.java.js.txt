@@ -5,6 +5,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $1 = goog.forwardDeclare('anonymousclass.AnonymousClass.$1$impl');
 let $2 = goog.forwardDeclare('anonymousclass.AnonymousClass.$2$impl');
+let $3 = goog.forwardDeclare('anonymousclass.AnonymousClass.$3$impl');
 
 class AnonymousClass extends j_l_Object {
  /** @protected @nodts */
@@ -12,22 +13,25 @@ class AnonymousClass extends j_l_Object {
   super();
   /**@type {number} @nodts*/
   this.f_i__anonymousclass_AnonymousClass = 0;
+  /**@type {*} @nodts*/
+  this.f_o__anonymousclass_AnonymousClass;
  }
  /** @nodts @return {!AnonymousClass} */
- static $create__() {
+ static $create__java_lang_Object(/** * */ a) {
   AnonymousClass.$clinit();
   let $instance = new AnonymousClass();
-  $instance.$ctor__anonymousclass_AnonymousClass__void();
+  $instance.$ctor__anonymousclass_AnonymousClass__java_lang_Object__void(a);
   return $instance;
  }
  /** @nodts */
- $ctor__anonymousclass_AnonymousClass__void() {
+ $ctor__anonymousclass_AnonymousClass__java_lang_Object__void(/** * */ a) {
   this.$ctor__java_lang_Object__void();
+  this.f_o__anonymousclass_AnonymousClass = $1.$create__anonymousclass_AnonymousClass__java_lang_Object__int(this, a, 0);
  }
  /** @nodts */
  m_main__void() {
-  let instance = $1.$create__anonymousclass_AnonymousClass__int(this, this.f_i__anonymousclass_AnonymousClass);
-  let instanceWithStaticMembers = $2.$create__anonymousclass_AnonymousClass__int(this, this.f_i__anonymousclass_AnonymousClass);
+  let instance = $2.$create__anonymousclass_AnonymousClass__int(this, this.f_i__anonymousclass_AnonymousClass);
+  let instanceWithStaticMembers = $3.$create__anonymousclass_AnonymousClass__int(this, this.f_i__anonymousclass_AnonymousClass);
  }
  /** @nodts */
  static $clinit() {
@@ -44,6 +48,7 @@ class AnonymousClass extends j_l_Object {
  static $loadModules() {
   $1 = goog.module.get('anonymousclass.AnonymousClass.$1$impl');
   $2 = goog.module.get('anonymousclass.AnonymousClass.$2$impl');
+  $3 = goog.module.get('anonymousclass.AnonymousClass.$3$impl');
  }
 }
 $Util.$setClassMetadata(AnonymousClass, 'anonymousclass.AnonymousClass');

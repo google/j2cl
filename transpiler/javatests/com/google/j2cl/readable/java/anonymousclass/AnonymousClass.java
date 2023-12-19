@@ -31,6 +31,20 @@ abstract class SomeClassWithStaticMembers {
 
 public class AnonymousClass {
   int i;
+  Object o;
+
+  public AnonymousClass(Object a) {
+    o =
+        new SomeClass(0) {
+          Object outer = AnonymousClass.this;
+          Object other = a;
+
+          @Override
+          public String foo() {
+            return "" + i;
+          }
+        };
+  }
 
   public void main() {
     SomeClass instance =
