@@ -54,9 +54,7 @@ public class JsConstructorClass {
     }
   }
 
-  /**
-   * A regular class (no JsConstructor), which extends a JsConstructor class.
-   */
+  /** A class with JsConstructor, which extends a JsConstructor class. */
   public static class C extends B {
     public int fC = 1;
 
@@ -69,50 +67,6 @@ public class JsConstructorClass {
     public C(int x, int y) {
       this(x + y); // must call this(int);
       this.fC += 7;
-    }
-  }
-
-  /**
-   * A class with JsConstructor, which extends a JsConstructor class.
-   */
-  public static class D extends B {
-    public int fD = 8;
-
-    @JsConstructor
-    public D() {
-      super(9); // must call super(int), cannot call super().
-      this.fD += 10;
-    }
-
-    public D(int x) {
-      this(); // must call this().
-      this.fD += x;
-    }
-  }
-
-  /**
-   * A regular class (no JsConstructor), which extends a subclass of a JsConstructor class.
-   */
-  public static class E extends C {
-    public int fE = 11;
-
-    @JsConstructor
-    public E() {
-      super(10); // must call super(int), cannot call super(int, int).
-      this.fE += 12;
-    }
-  }
-
-  /**
-   * A JsConstructor class, which extends a subclass of a JsConstructor class.
-   */
-  public static class F extends C {
-    public int fF = 13;
-
-    @JsConstructor
-    public F(int x) {
-      super(x + 2); // must call super(int), cannot call super(int, int).
-      this.fF += x + 3;
     }
   }
 }

@@ -20,9 +20,6 @@ import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import jsconstructor.JsConstructorClass.A;
 import jsconstructor.JsConstructorClass.B;
 import jsconstructor.JsConstructorClass.C;
-import jsconstructor.JsConstructorClass.D;
-import jsconstructor.JsConstructorClass.E;
-import jsconstructor.JsConstructorClass.F;
 
 public class Main {
   public static void main(String... args) {
@@ -47,24 +44,6 @@ public class Main {
     assertEquals(61, c2.fA);
     assertEquals(5, c2.fB);
     assertEquals(14, c2.fC);
-    D d1 = new D();
-    assertEquals(10, d1.fA);
-    assertEquals(5, d1.fB);
-    assertEquals(18, d1.fD);
-    D d2 = new D(11);
-    assertEquals(10, d2.fA);
-    assertEquals(5, d2.fB);
-    assertEquals(29, d2.fD);
-    E e = new E();
-    assertEquals(21, e.fA);
-    assertEquals(5, e.fB);
-    assertEquals(7, e.fC);
-    assertEquals(23, e.fE);
-    F f = new F(12);
-    assertEquals(29, f.fA);
-    assertEquals(5, f.fB);
-    assertEquals(7, f.fC);
-    assertEquals(28, f.fF);
 
     InstanceInitOrder.test();
     StaticInitOrder.test();
