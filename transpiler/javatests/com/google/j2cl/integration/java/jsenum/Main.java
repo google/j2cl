@@ -19,6 +19,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertThrows;
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException;
+import static com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointerException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.Asserts.assertUnderlyingTypeEquals;
 import static com.google.j2cl.integration.testing.Asserts.fail;
@@ -72,6 +73,7 @@ public class Main {
     testAutoBoxing_intersectionCasts();
     testSpecializedSuperType();
     testSpecializedSuperTypeUnderlyingType();
+    testBoxingPartialInlining();
   }
 
   @Wasm("nop") // TODO(b/288145698): Support native JsEnum.
@@ -924,5 +926,24 @@ public class Main {
     // Make sure that boxed enums are not passing though here.
     assertTrue(o instanceof String || o instanceof Double || o instanceof Boolean);
     return o;
+  }
+
+  private static void testBoxingPartialInlining() {
+    // TODO(b/315214896) Check the size difference to see if cases such as these take advantage of
+    // partial inlining in Wasm to turn this into a simple null check, avoiding boxing.
+    PlainJsEnum nonnullJsEnum = PlainJsEnum.ONE;
+    checkNotNull(nonnullJsEnum);
+    // Use the local so it doesn't get removed.
+    assertTrue(nonnullJsEnum == PlainJsEnum.ONE);
+
+    PlainJsEnum nullJsEnum = null;
+    assertThrowsNullPointerException(() -> checkNotNull(nullJsEnum));
+    assertTrue(nullJsEnum == null);
+  }
+
+  private static void checkNotNull(Object obj) {
+    if (obj == null) {
+      throw new NullPointerException();
+    }
   }
 }
