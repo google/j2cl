@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.junit.integration;
 
-import static com.google.common.collect.ImmutableList.toImmutableList;
 import static org.junit.Assert.assertTrue;
 
 import com.google.common.base.Splitter;
@@ -175,18 +174,6 @@ public abstract class IntegrationTestBase {
       int startIndex = Iterables.indexOf(logs, x -> x.endsWith("  Start"));
       logs = logs.subList(startIndex, logs.size());
     }
-
-    // Rewrite zip paths into tree artifact paths so that both modes work.
-    // TODO(b/172518926): Remove once the switch to tree artifacts is complete.
-    logs =
-        logs.stream()
-            .map(
-                line ->
-                    line.replace(
-                        "jre/java/jre.js.zip!/",
-                        "jre/java/jre.js/"))
-            .collect(toImmutableList());
-
     return logs;
   }
 
