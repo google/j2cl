@@ -34,16 +34,6 @@ abstract class TestComparator extends TestObject {
     return makeComparator();
   }
 
-  /**
-   * There were no Comparators in version 1.x.
-   *
-   * @return 2
-   */
-  @Override
-  public int getCompatibilityVersion() {
-    return 2;
-  }
-
   public void reverseObjects(List list) {
     Collections.reverse(list);
   }
@@ -96,8 +86,6 @@ abstract class TestComparator extends TestObject {
     String colName = object.getClass().getName();
     colName = colName.substring(colName.lastIndexOf(".") + 1);
     retval.append(colName);
-    retval.append(".version");
-    retval.append(getCompatibilityVersion());
     retval.append(".obj");
     return retval.toString();
   }

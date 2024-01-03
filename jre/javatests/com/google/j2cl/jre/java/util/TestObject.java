@@ -27,23 +27,6 @@ package com.google.j2cl.jre.java.util;
  */
 abstract class TestObject extends EmulTestBase {
 
-  // current major release for Collections
-  public static final int COLLECTIONS_MAJOR_VERSION = 2;
-
-  /**
-   * This constant makes it possible for TestMap (and other subclasses, if necessary) to
-   * automatically check CVS for a versionX copy of a Serialized object, so we can make sure that
-   * compatibility is maintained. See, for example, TestMap.getCanonicalFullMapName(Map map).
-   * Subclasses can override this variable, indicating compatibility with earlier Collections
-   * versions. Defaults to 1, the earliest Collections version. (Note: some collections did not even
-   * exist in this version).
-   *
-   * @return 1
-   */
-  public int getCompatibilityVersion() {
-    return 1;
-  }
-
   /** Return a new, empty {@link Object} to used for testing. */
   public abstract Object makeObject();
 
@@ -84,9 +67,7 @@ abstract class TestObject extends EmulTestBase {
 
     colName = colName.substring(colName.lastIndexOf(".") + 1);
     retval.append(colName);
-    retval.append(".emptyCollection.version");
-    retval.append(getCompatibilityVersion());
-    retval.append(".obj");
+    retval.append(".emptyCollection.obj");
     return retval.toString();
   }
 
@@ -96,9 +77,7 @@ abstract class TestObject extends EmulTestBase {
     String colName = object.getClass().getName();
     colName = colName.substring(colName.lastIndexOf(".") + 1);
     retval.append(colName);
-    retval.append(".fullCollection.version");
-    retval.append(getCompatibilityVersion());
-    retval.append(".obj");
+    retval.append(".fullCollection.version.obj");
     return retval.toString();
   }
 
