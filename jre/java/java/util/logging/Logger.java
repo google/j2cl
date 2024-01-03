@@ -313,10 +313,7 @@ public class Logger {
   }
 
   private void actuallyLog(LogRecord record) {
-    for (Handler handler : getHandlers()) {
-      handler.publish(record);
-    }
-    Logger logger = getUseParentHandlers() ? getParent() : null;
+    Logger logger = this;
     while (logger != null) {
       for (Handler handler : logger.getHandlers()) {
         handler.publish(record);
