@@ -22,20 +22,20 @@ import junit.framework.TestCase;
 public class CharacterTest extends TestCase {
 
   private static class CharSequenceAdapter implements CharSequence {
-    private char[] charArray;
-    private int start;
-    private int end;
+    private final char[] charArray;
+    private final int start;
+    private final int end;
 
     public CharSequenceAdapter(char[] charArray) {
       this(charArray, 0, charArray.length);
     }
-    
+
     public CharSequenceAdapter(char[] charArray, int start, int end) {
       this.charArray = charArray;
       this.start = start;
       this.end = end;
     }
-    
+
     @Override
     public char charAt(int index) {
       return charArray[index + start];
@@ -47,18 +47,16 @@ public class CharacterTest extends TestCase {
     }
 
     @Override
-    public java.lang.CharSequence subSequence(int start, int end) {
-      return new CharSequenceAdapter(charArray, this.start + start,
-          this.start + end);
+    public CharSequence subSequence(int start, int end) {
+      return new CharSequenceAdapter(charArray, this.start + start, this.start + end);
     }
   }
 
   /**
-   * Helper class which applies some arbitrary char mutation function
-   * to a string and returns it.
+   * Helper class which applies some arbitrary char mutation function to a string and returns it.
    */
-  public abstract class Changer {
-    String original;
+  private abstract static class Changer {
+    final String original;
 
     public Changer(String o) {
       original = o;
@@ -67,19 +65,19 @@ public class CharacterTest extends TestCase {
     public abstract char change(char c);
 
     public String changed() {
-      StringBuffer buf = new StringBuffer();
+      StringBuilder buf = new StringBuilder();
       for (int i = 0; i < original.length(); i++) {
         buf.append(change(original.charAt(i)));
       }
       return buf.toString();
     }
   }
+
   /**
-   * Helper class which collects the set of characters which pass some
-   * arbitrary boolean function. 
+   * Helper class which collects the set of characters which pass some arbitrary boolean function.
    */
-  public abstract class Judge {
-    String original;
+  private abstract static class Judge {
+    final String original;
 
     public Judge(String o) {
       original = o;
@@ -98,7 +96,7 @@ public class CharacterTest extends TestCase {
     public abstract boolean pass(char c);
   }
 
-  class LowerCaseJudge extends Judge {
+  private static class LowerCaseJudge extends Judge {
     public LowerCaseJudge(String s) {
       super(s);
     }
@@ -109,7 +107,7 @@ public class CharacterTest extends TestCase {
     }
   }
 
-  class UpperCaseJudge extends Judge {
+  private static class UpperCaseJudge extends Judge {
     public UpperCaseJudge(String s) {
       super(s);
     }
@@ -120,57 +118,62 @@ public class CharacterTest extends TestCase {
     }
   }
 
-  public static String allChars;
-
-  public static final int NUM_CHARS_HANDLED = 127;
+  private static final int NUM_CHARS_HANDLED = 127;
+  private static final String ALL_CHARS;
 
   static {
-    StringBuffer b = new StringBuffer();
+    StringBuilder b = new StringBuilder();
     for (char c = 0; c < NUM_CHARS_HANDLED; c++) {
       b.append(c);
     }
-    allChars = b.toString();
+    ALL_CHARS = b.toString();
   }
 
-  Judge digitJudge = new Judge(allChars) {
-    @Override
-    public boolean pass(char c) {
-      return Character.isDigit(c);
-    }
-  };
-  Judge letterJudge = new Judge(allChars) {
-    @Override
-    public boolean pass(char c) {
-      return Character.isLetter(c);
-    }
-  };
-  Judge letterOrDigitJudge = new Judge(allChars) {
-    @Override
-    public boolean pass(char c) {
-      return Character.isLetterOrDigit(c);
-    }
-  };
-  Changer lowerCaseChanger = new Changer(allChars) {
-    @Override
-    public char change(char c) {
-      return Character.toLowerCase(c);
-    }
-  };
-  Judge lowerCaseJudge = new LowerCaseJudge(allChars);
-  Judge spaceJudge = new Judge(allChars) {
-    @Override
-    @SuppressWarnings("deprecation") // Character.isSpace()
-    public boolean pass(char c) {
-      return Character.isSpace(c); // suppress deprecation
-    }
-  };
-  Changer upperCaseChanger = new Changer(allChars) {
-    @Override
-    public char change(char c) {
-      return Character.toUpperCase(c);
-    }
-  };
-  Judge upperCaseJudge = new UpperCaseJudge(allChars);
+  private static final Judge digitJudge =
+      new Judge(ALL_CHARS) {
+        @Override
+        public boolean pass(char c) {
+          return Character.isDigit(c);
+        }
+      };
+  private static final Judge letterJudge =
+      new Judge(ALL_CHARS) {
+        @Override
+        public boolean pass(char c) {
+          return Character.isLetter(c);
+        }
+      };
+  private static final Judge letterOrDigitJudge =
+      new Judge(ALL_CHARS) {
+        @Override
+        public boolean pass(char c) {
+          return Character.isLetterOrDigit(c);
+        }
+      };
+  private static final Changer lowerCaseChanger =
+      new Changer(ALL_CHARS) {
+        @Override
+        public char change(char c) {
+          return Character.toLowerCase(c);
+        }
+      };
+  private static final Judge lowerCaseJudge = new LowerCaseJudge(ALL_CHARS);
+  private static final Judge spaceJudge =
+      new Judge(ALL_CHARS) {
+        @Override
+        @SuppressWarnings("deprecation") // Character.isSpace()
+        public boolean pass(char c) {
+          return Character.isSpace(c); // suppress deprecation
+        }
+      };
+  private static final Changer upperCaseChanger =
+      new Changer(ALL_CHARS) {
+        @Override
+        public char change(char c) {
+          return Character.toUpperCase(c);
+        }
+      };
+  private static final Judge upperCaseJudge = new UpperCaseJudge(ALL_CHARS);
 
   public void testCharValue() {
     assertEquals((char) 32, new Character((char) 32).charValue());
@@ -267,7 +270,7 @@ public class CharacterTest extends TestCase {
   public void testDigit() {
     assertEquals("wrong number of digits", 10, digitJudge.allPass().length());
   }
-  
+
   public void testSurrogates() {
     assertFalse(Character.isHighSurrogate('\uDF46'));
     assertTrue(Character.isLowSurrogate('\uDF46'));
