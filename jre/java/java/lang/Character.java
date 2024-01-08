@@ -99,20 +99,22 @@ public final class Character implements Comparable<Character>, Serializable {
     }
   }
 
-  /**
-   * Use nested class to avoid clinit on outer.
-   */
+  /** Use nested class to avoid clinit on outer. */
   private static class BoxedValues {
-    // Box values according to JLS - from \u0000 to \u007f
-    private static Character[] boxedValues = new Character[128];
+    private static final Character[] boxedValues;
+
+    static {
+      // Box values according to JLS - from \u0000 to \u007f
+      Character[] values = new Character[128];
+      for (char i = 0; i < 128; i++) {
+        values[i] = new Character(i);
+      }
+      boxedValues = values;
+    }
 
     @HasNoSideEffects
     private static Character get(char c) {
-      Character result = BoxedValues.boxedValues[c];
-      if (result == null) {
-        result = BoxedValues.boxedValues[c] = new Character(c);
-      }
-      return result;
+      return boxedValues[c];
     }
   }
 

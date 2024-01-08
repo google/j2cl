@@ -23,17 +23,20 @@ public final class Long extends Number implements Comparable<Long> {
 
   /** Use nested class to avoid clinit on outer. */
   static class BoxedValues {
-    // Box values according to JLS - between -128 and 127
-    static Long[] boxedValues = new Long[256];
+    private static final Long[] boxedValues;
+
+    static {
+      // Box values according to JLS - between -128 and 127
+      Long[] values = new Long[256];
+      for (int i = 0; i < 256; i++) {
+        values[i] = new Long(i - 128);
+      }
+      boxedValues = values;
+    }
 
     @HasNoSideEffects
-    private static Long get(long l) {
-      int rebase = (int) l + 128;
-      Long result = BoxedValues.boxedValues[rebase];
-      if (result == null) {
-        result = BoxedValues.boxedValues[rebase] = new Long(l);
-      }
-      return result;
+    private static Long get(int i) {
+      return boxedValues[i + 128];
     }
   }
 
@@ -184,7 +187,7 @@ public final class Long extends Number implements Comparable<Long> {
 
   public static Long valueOf(long l) {
     if (l > -129 && l < 128) {
-      return BoxedValues.get(l);
+      return BoxedValues.get((int) l);
     }
     return new Long(l);
   }

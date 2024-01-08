@@ -32,17 +32,20 @@ public final class Short extends Number implements Comparable<Short> {
    * Use nested class to avoid clinit on outer.
    */
   private static class BoxedValues {
-    // Box values according to JLS - between -128 and 127
-    private static Short[] boxedValues = new Short[256];
+    private static final Short[] boxedValues;
+
+    static {
+      // Box values according to JLS - between -128 and 127
+      Short[] values = new Short[256];
+      for (int i = 0; i < 256; i++) {
+        values[i] = new Short((short) (i - 128));
+      }
+      boxedValues = values;
+    }
 
     @HasNoSideEffects
     private static Short get(short s) {
-      int rebase = s + 128;
-      Short result = BoxedValues.boxedValues[rebase];
-      if (result == null) {
-        result = BoxedValues.boxedValues[rebase] = new Short(s);
-      }
-      return result;
+      return boxedValues[s + 128];
     }
   }
 
