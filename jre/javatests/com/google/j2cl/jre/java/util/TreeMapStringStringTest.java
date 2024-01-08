@@ -22,10 +22,10 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import org.jspecify.nullness.NullMarked;
 
-/**
- * Tests <code>TreeMap</code> with Strings and the natural comparator.
- */
+/** Tests <code>TreeMap</code> with Strings and the natural comparator. */
+@NullMarked
 public class TreeMapStringStringTest extends TreeMapTest<String, String> {
 
   public void testHeadMapClear() {

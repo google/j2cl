@@ -26,6 +26,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
+import org.jspecify.nullness.NullMarked;
+import org.jspecify.nullness.Nullable;
 
 /**
  * Tests base {@link java.util.Collection} methods and contracts.
@@ -104,6 +106,7 @@ import java.util.Set;
  * <p>
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
+@NullMarked
 abstract class TestCollection extends TestObject {
 
   //
@@ -191,7 +194,7 @@ abstract class TestCollection extends TestObject {
     // verification is a success.
 
     // copy each collection value into an array
-    Object[] confirmedValues = new Object[confirmedSize];
+    @Nullable Object[] confirmedValues = new @Nullable Object[confirmedSize];
 
     Iterator iter;
 
@@ -209,7 +212,7 @@ abstract class TestCollection extends TestObject {
     // the value with one in the confirmed array.
     iter = collection.iterator();
     while (iter.hasNext()) {
-      Object o = iter.next();
+      @Nullable Object o = iter.next();
       boolean match = false;
       for (int i = 0; i < confirmedSize; i++) {
         if (matched[i]) {
@@ -289,8 +292,8 @@ abstract class TestCollection extends TestObject {
    * override {@link #makeFullCollection()}, you <I>must</I> override this method to reflect the
    * contents of a full collection.
    */
-  protected Object[] getFullElements() {
-    ArrayList list = new ArrayList();
+  protected @Nullable Object[] getFullElements() {
+    ArrayList<@Nullable Object> list = new ArrayList<>();
 
     list.addAll(Arrays.asList(getFullNonNullElements()));
     list.add(4, null);

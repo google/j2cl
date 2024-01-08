@@ -15,14 +15,14 @@
  */
 package com.google.j2cl.jre.java.util;
 
+import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.Comparator;
 import java.util.NavigableMap;
+import org.jspecify.nullness.NullMarked;
 
-/**
- * Tests <code>TreeMap</code> with a <code>Comparator</code>.
- */
-public class TreeMapIntegerDoubleWithComparatorTest extends
-    TreeMapIntegerDoubleTest {
+/** Tests <code>TreeMap</code> with a <code>Comparator</code>. */
+@NullMarked
+public class TreeMapIntegerDoubleWithComparatorTest extends TreeMapIntegerDoubleTest {
   @Override
   protected NavigableMap<Integer, Double> createNavigableMap() {
     setComparator(new Comparator<Integer>() {
@@ -41,6 +41,8 @@ public class TreeMapIntegerDoubleWithComparatorTest extends
   }
 
   @Override
+  @J2ktIncompatible // Can't widen the generic type of the superclass (we would need to change to
+  // TreeMapTest<@Nullable Integer, Double> to support nullable keys)
   public boolean useNullKey() {
     return true;
   }

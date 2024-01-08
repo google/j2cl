@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.jre.java.util;
 
+import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -41,6 +42,7 @@ public class LinkedHashSetTest extends TestSet {
   }
 
   @SuppressWarnings("unchecked")
+  @J2ktIncompatible // b/317230935
   public void testClone() {
     LinkedHashSet<String> srcSet = new LinkedHashSet<String>();
     checkEmptyLinkedHashSetAssumptions(srcSet);
@@ -63,7 +65,7 @@ public class LinkedHashSetTest extends TestSet {
   }
 
   @Override
-  protected Set<?> makeEmptySet() {
+  protected Set makeEmptySet() {
     return new LinkedHashSet<Object>();
   }
 }

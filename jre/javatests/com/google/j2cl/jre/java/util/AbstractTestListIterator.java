@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
+import org.jspecify.nullness.NullMarked;
 
 /**
  * Abstract class for testing the ListIterator interface.
@@ -33,6 +34,7 @@ import java.util.NoSuchElementException;
  * how the list iterator operates by overriding the supportsXxx() methods if necessary.
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
+@NullMarked
 abstract class AbstractTestListIterator extends TestIterator {
 
   // -----------------------------------------------------------------------

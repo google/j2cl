@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.jre.java.util;
 
+import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -22,11 +23,14 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import org.jspecify.nullness.Nullable;
 
 /** Tests <code>LinkedHashMap</code>. */
 public class LinkedHashMapTest extends TestMap {
   // should be a method-level class, however to avoid serialization warning made
   // static instead.
+
+  @J2ktIncompatible // LinkedHashMap is final in J2kt; LRU unsupported
   static class TestRemoveEldestMap<K, V> extends LinkedHashMap<K, V> {
 
     public K expectedKey;
@@ -171,6 +175,7 @@ public class LinkedHashMapTest extends TestMap {
    * Test method for 'java.util.LinkedHashMap.clone()'
    */
   @SuppressWarnings("unchecked")
+  @J2ktIncompatible // b/317230935
   public void testClone() {
     LinkedHashMap<String, String> srcMap = new LinkedHashMap<String, String>();
     checkEmptyLinkedHashMapAssumptions(srcMap);
@@ -198,7 +203,7 @@ public class LinkedHashMapTest extends TestMap {
    * Test method for 'java.util.LinkedHashMap.containsKey(Object)'
    */
   public void testContainsKey() {
-    LinkedHashMap<String, Integer> hashMap = new LinkedHashMap<String, Integer>();
+    LinkedHashMap<@Nullable String, @Nullable Integer> hashMap = new LinkedHashMap<>();
     checkEmptyLinkedHashMapAssumptions(hashMap);
 
     assertFalse(hashMap.containsKey(KEY_TEST_CONTAINS_KEY));
@@ -216,7 +221,7 @@ public class LinkedHashMapTest extends TestMap {
    */
   @SuppressWarnings("CollectionIncompatibleType")
   public void testContainsValue() {
-    LinkedHashMap<String, Integer> hashMap = new LinkedHashMap<String, Integer>();
+    LinkedHashMap<@Nullable String, @Nullable Integer> hashMap = new LinkedHashMap<>();
     checkEmptyLinkedHashMapAssumptions(hashMap);
 
     assertFalse("check contains of empty map", hashMap.containsValue(VALUE_TEST_CONTAINS_KEY));
@@ -307,7 +312,7 @@ public class LinkedHashMapTest extends TestMap {
    * Test method for 'java.util.LinkedHashMap.get(Object)'.
    */
   public void testGet() {
-    LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>();
+    LinkedHashMap<@Nullable String, @Nullable String> hashMap = new LinkedHashMap<>();
     checkEmptyLinkedHashMapAssumptions(hashMap);
 
     assertNull(hashMap.get(KEY_TEST_GET));
@@ -505,6 +510,7 @@ public class LinkedHashMapTest extends TestMap {
     assertTrue(keyColl.contains(INTEGER_3));
   }
 
+  @J2ktIncompatible // LRU unsupported
   public void testLRU() {
     LinkedHashMap<String, String> m = new LinkedHashMap<String, String>(10, .5f, true);
     m.put("A", "A");
@@ -529,7 +535,7 @@ public class LinkedHashMapTest extends TestMap {
    * Test method for 'java.util.LinkedHashMap.put(Object, Object)'
    */
   public void testPut() {
-    LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>();
+    LinkedHashMap<@Nullable String, @Nullable String> hashMap = new LinkedHashMap<>();
     checkEmptyLinkedHashMapAssumptions(hashMap);
 
     assertNull(hashMap.put(KEY_TEST_PUT, VALUE_TEST_PUT_1));
@@ -603,7 +609,7 @@ public class LinkedHashMapTest extends TestMap {
 
   /** Test method for 'java.util.LinkedHashMap.remove(Object)'. */
   public void testRemove() {
-    LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>();
+    LinkedHashMap<@Nullable String, @Nullable String> hashMap = new LinkedHashMap<String, String>();
     checkEmptyLinkedHashMapAssumptions(hashMap);
 
     assertNull(hashMap.remove(null));
@@ -615,6 +621,7 @@ public class LinkedHashMapTest extends TestMap {
     assertNull(hashMap.remove(KEY_TEST_REMOVE));
   }
 
+  @J2ktIncompatible // see TestRemoveEldestMap
   public void testRemoveEldest() {
     TestRemoveEldestMap<String, String> m = new TestRemoveEldestMap<String, String>(false);
     m.put("A", "A");
@@ -634,6 +641,7 @@ public class LinkedHashMapTest extends TestMap {
     assertEquals(4, m.size());
   }
 
+  @J2ktIncompatible // see TestRemoveEldestMap
   public void testRemoveEldestMapLRU() {
     TestRemoveEldestMap<String, String> m = new TestRemoveEldestMap<String, String>(true);
     m.put("A", "A");
@@ -718,8 +726,8 @@ public class LinkedHashMapTest extends TestMap {
   }
 
   @Override
-  protected Map<?, ?> makeEmptyMap() {
-    return new LinkedHashMap<Object, Object>();
+  protected Map<@Nullable Object, @Nullable Object> makeEmptyMap() {
+    return new LinkedHashMap<@Nullable Object, @Nullable Object>();
   }
 
   private Iterator<Map.Entry<Number, Object>> iterateThrough(

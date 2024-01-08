@@ -15,17 +15,19 @@
  */
 package com.google.j2cl.jre.java.util;
 
+import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import org.jspecify.nullness.NullMarked;
 
-/**
- * Test LinkedList class.
- */
+/** Test LinkedList class. */
 @SuppressWarnings("unchecked")
+@NullMarked
 public class LinkedListTest extends ListTestBase {
 
+  @J2ktIncompatible // b/317043391
   private static final class LinkedListWithRemoveRange extends LinkedList {
     @Override
     public void removeRange(int fromIndex, int toIndex) {
@@ -469,6 +471,7 @@ public class LinkedListTest extends ListTestBase {
     checkListSizeAndContent(l, o1, o2, o3, o1, o3);
   }
 
+  @J2ktIncompatible // b/317043391
   public void testRemoveRange() {
     LinkedListWithRemoveRange l = new LinkedListWithRemoveRange();
     for (int i = 0; i < 10; i++) {

@@ -26,6 +26,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
+import org.jspecify.nullness.NullMarked;
+import org.jspecify.nullness.Nullable;
 
 /**
  * Tests base {@link java.util.List} methods and contracts.
@@ -36,6 +38,7 @@ import java.util.NoSuchElementException;
  * cases. Simply override the test case (method) your {@link List} fails.
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
+@NullMarked
 abstract class TestList extends TestCollection {
 
   /**
@@ -43,14 +46,14 @@ abstract class TestList extends TestCollection {
    *
    * @return an empty list for testing.
    */
-  protected abstract List makeEmptyList();
+  protected abstract List<@Nullable Object> makeEmptyList();
 
   /**
    * Return a new, full {@link List} to be used for testing.
    *
    * @return a full list for testing
    */
-  protected List makeFullList() {
+  protected List<@Nullable Object> makeFullList() {
     // only works if list supports optional "addAll(Collection)"
     List list = makeEmptyList();
     list.addAll(Arrays.asList(getFullElements()));
@@ -63,7 +66,7 @@ abstract class TestList extends TestCollection {
    * @return an empty list to be used for testing
    */
   @Override
-  protected final Collection makeCollection() {
+  protected final Collection<@Nullable Object> makeCollection() {
     return makeEmptyList();
   }
 
@@ -73,7 +76,7 @@ abstract class TestList extends TestCollection {
    * @return a full list to be used for testing
    */
   @Override
-  protected final Collection makeFullCollection() {
+  protected final Collection<@Nullable Object> makeFullCollection() {
     return makeFullList();
   }
 
@@ -100,8 +103,8 @@ abstract class TestList extends TestCollection {
    *
    * @return the collection field as a List
    */
-  protected List getList() {
-    return (List) collection;
+  protected List<@Nullable Object> getList() {
+    return (List<@Nullable Object>) collection;
   }
 
   /**
@@ -109,8 +112,8 @@ abstract class TestList extends TestCollection {
    *
    * @return the confirmed field as a List
    */
-  protected List getConfirmedList() {
-    return (List) confirmed;
+  protected List<@Nullable Object> getConfirmedList() {
+    return (List<@Nullable Object>) confirmed;
   }
 
   public class TestListIterator extends AbstractTestListIterator {
@@ -433,13 +436,13 @@ abstract class TestList extends TestCollection {
   /** Tests {@link List#equals(Object)}. */
   public void testListEquals() {
     resetEmpty();
-    List list = getList();
+    List<@Nullable Object> list = getList();
     assertTrue("Empty lists should be equal", list.equals(confirmed));
     verify();
     assertTrue("Empty list should equal self", list.equals(list));
     verify();
 
-    List list2 = Arrays.asList(getFullElements());
+    List<@Nullable Object> list2 = Arrays.asList(getFullElements());
     assertTrue("Empty list shouldn't equal full", !list.equals(list2));
     verify();
 

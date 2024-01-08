@@ -23,6 +23,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import org.jspecify.nullness.NullMarked;
+import org.jspecify.nullness.Nullable;
 
 /**
  * Tests base {@link java.util.Map} methods and contracts.
@@ -105,6 +107,7 @@ import java.util.Set;
  * {@link #useDuplicateValues()} and have it return <code>false</code>
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
+@NullMarked
 abstract class TestMap extends TestObject {
 
   // These instance variables are initialized with the reset method.
@@ -116,19 +119,19 @@ abstract class TestMap extends TestObject {
   // are still equal to the confirmed's collection views.
 
   /** Map created by reset(). */
-  protected Map map;
+  protected Map<@Nullable Object, @Nullable Object> map;
 
   /** Entry set of map created by reset(). */
-  protected Set entrySet;
+  protected Set<Map.Entry<@Nullable Object, @Nullable Object>> entrySet;
 
   /** Key set of map created by reset(). */
-  protected Set keySet;
+  protected Set<@Nullable Object> keySet;
 
   /** Values collection of map created by reset(). */
-  protected Collection collectionValues;
+  protected Collection<@Nullable Object> collectionValues;
 
   /** HashMap created by reset(). */
-  protected Map confirmed;
+  protected Map<@Nullable Object, @Nullable Object> confirmed;
 
   /**
    * Override if your map does not allow a <code>null</code> key. The default implementation returns
@@ -184,27 +187,28 @@ abstract class TestMap extends TestObject {
    * The default implementation constructs a set of String keys, and includes a single null key if
    * {@link #useNullKey()} returns <code>true</code>.
    */
-  protected Object[] getSampleKeys() {
-    Object[] result = {
-      "blah",
-      "foo",
-      "bar",
-      "baz",
-      "tmp",
-      "gosh",
-      "golly",
-      "gee",
-      "hello",
-      "goodbye",
-      "we'll",
-      "see",
-      "you",
-      "all",
-      "again",
-      "key",
-      "key2",
-      useNullKey() ? null : "nonnullkey"
-    };
+  protected @Nullable Object[] getSampleKeys() {
+    @Nullable Object[] result =
+        new @Nullable Object[] {
+          "blah",
+          "foo",
+          "bar",
+          "baz",
+          "tmp",
+          "gosh",
+          "golly",
+          "gee",
+          "hello",
+          "goodbye",
+          "we'll",
+          "see",
+          "you",
+          "all",
+          "again",
+          "key",
+          "key2",
+          useNullKey() ? null : "nonnullkey"
+        };
     return result;
   }
 
@@ -223,27 +227,28 @@ abstract class TestMap extends TestObject {
    * true</code>, and includes two values that are the same if {@link #useDuplicateValues()} returns
    * <code>true</code>.
    */
-  protected Object[] getSampleValues() {
-    Object[] result = {
-      "blahv",
-      "foov",
-      "barv",
-      "bazv",
-      "tmpv",
-      "goshv",
-      "gollyv",
-      "geev",
-      "hellov",
-      "goodbyev",
-      "we'llv",
-      "seev",
-      "youv",
-      "allv",
-      "againv",
-      useNullValue() ? null : "nonnullvalue",
-      "value",
-      useDuplicateValues() ? "value" : "value2",
-    };
+  protected @Nullable Object[] getSampleValues() {
+    @Nullable Object[] result =
+        new @Nullable Object[] {
+          "blahv",
+          "foov",
+          "barv",
+          "bazv",
+          "tmpv",
+          "goshv",
+          "gollyv",
+          "geev",
+          "hellov",
+          "goodbyev",
+          "we'llv",
+          "seev",
+          "youv",
+          "allv",
+          "againv",
+          useNullValue() ? null : "nonnullvalue",
+          "value",
+          useDuplicateValues() ? "value" : "value2",
+        };
     return result;
   }
 
@@ -256,27 +261,28 @@ abstract class TestMap extends TestObject {
    * and includes two values that are the same if {@link #useDuplicateValues()} returns <code>true
    * </code>.
    */
-  protected Object[] getNewSampleValues() {
-    Object[] result = {
-      useNullValue() ? null : "newnonnullvalue",
-      "newvalue",
-      useDuplicateValues() ? "newvalue" : "newvalue2",
-      "newblahv",
-      "newfoov",
-      "newbarv",
-      "newbazv",
-      "newtmpv",
-      "newgoshv",
-      "newgollyv",
-      "newgeev",
-      "newhellov",
-      "newgoodbyev",
-      "newwe'llv",
-      "newseev",
-      "newyouv",
-      "newallv",
-      "newagainv",
-    };
+  protected @Nullable Object[] getNewSampleValues() {
+    @Nullable Object[] result =
+        new @Nullable Object[] {
+          useNullValue() ? null : "newnonnullvalue",
+          "newvalue",
+          useDuplicateValues() ? "newvalue" : "newvalue2",
+          "newblahv",
+          "newfoov",
+          "newbarv",
+          "newbazv",
+          "newtmpv",
+          "newgoshv",
+          "newgollyv",
+          "newgeev",
+          "newhellov",
+          "newgoodbyev",
+          "newwe'llv",
+          "newseev",
+          "newyouv",
+          "newallv",
+          "newagainv",
+        };
     return result;
   }
 
@@ -286,8 +292,8 @@ abstract class TestMap extends TestObject {
    */
   protected void addSampleMappings(Map m) {
 
-    Object[] keys = getSampleKeys();
-    Object[] values = getSampleValues();
+    @Nullable Object[] keys = getSampleKeys();
+    @Nullable Object[] values = getSampleValues();
 
     for (int i = 0; i < keys.length; i++) {
       try {
@@ -322,9 +328,9 @@ abstract class TestMap extends TestObject {
   }
 
   /** Return a new, empty {@link Map} to be used for testing. */
-  protected abstract Map makeEmptyMap();
+  protected abstract Map<@Nullable Object, @Nullable Object> makeEmptyMap();
 
-  protected Map makeConfirmedMap() {
+  protected Map<@Nullable Object, @Nullable Object> makeConfirmedMap() {
     return new HashMap();
   }
 
@@ -346,17 +352,18 @@ abstract class TestMap extends TestObject {
 
   public void testSpecialKeysValues() {
     String[] keys = {"toString", "constructor", "__proto__", "", "null"};
-    Object[] values = {new Object(), new Object(), new Object(), new Object(), null};
+    @Nullable Object[] values =
+        new @Nullable Object[] {new Object(), new Object(), new Object(), new Object(), null};
 
     Map map = makeEmptyMap();
 
     assertMap(map, keys, values);
 
-    Object[] undefineds = new Object[values.length];
+    @Nullable Object[] undefineds = new @Nullable Object[values.length];
     assertMap(map, keys, undefineds);
   }
 
-  private void assertMap(Map map, String[] keys, Object[] values) {
+  private void assertMap(Map map, @Nullable String[] keys, @Nullable Object[] values) {
     assertEmptyMap(map, keys, values);
 
     // Fill the map with special keys/values.
@@ -379,7 +386,8 @@ abstract class TestMap extends TestObject {
     assertEmptyMap(map, keys, values);
   }
 
-  private static void assertEmptyMap(Map map, final String[] keys, final Object[] values) {
+  private static void assertEmptyMap(
+      Map map, final @Nullable String[] keys, final @Nullable Object[] values) {
     for (int i = 0; i < keys.length; i++) {
       assertFalse(keys[i], map.containsKey(keys[i]));
       assertFalse(keys[i], map.containsValue(values[i]));
@@ -396,8 +404,8 @@ abstract class TestMap extends TestObject {
    * useDuplicateValues() returns true.
    */
   public void testSampleMappings() {
-    Object[] keys = getSampleKeys();
-    Object[] values = getSampleValues();
+    @Nullable Object[] keys = getSampleKeys();
+    @Nullable Object[] values = getSampleValues();
     Object[] newValues = getNewSampleValues();
 
     assertNotNull("failure in test: Must have keys returned from " + "getSampleKeys.", keys);
@@ -741,7 +749,7 @@ abstract class TestMap extends TestObject {
       return;
     }
     resetFull();
-    Iterator<Map.Entry> it = map.entrySet().iterator();
+    Iterator<Map.Entry<@Nullable Object, @Nullable Object>> it = map.entrySet().iterator();
     final Map.Entry val = it.next();
     map.remove(val.getKey());
     try {
@@ -841,7 +849,7 @@ abstract class TestMap extends TestObject {
 
     // Have to implement manually; entrySet doesn't support addAll
     @Override
-    protected Object[] getFullElements() {
+    protected @Nullable Object[] getFullElements() {
       Object[] k = getSampleKeys();
       Object[] v = getSampleValues();
       return makeEntryArray(k, v);
@@ -856,13 +864,15 @@ abstract class TestMap extends TestObject {
     }
 
     @Override
-    protected Set makeEmptySet() {
-      return makeEmptyMap().entrySet();
+    protected Set<@Nullable Object> makeEmptySet() {
+      Object result = makeEmptyMap().entrySet();
+      return (Set<@Nullable Object>) result;
     }
 
     @Override
-    protected Set makeFullSet() {
-      return makeFullMap().entrySet();
+    protected Set<@Nullable Object> makeFullSet() {
+      Object result = makeFullMap().entrySet();
+      return (Set<@Nullable Object>) result;
     }
 
     @Override
@@ -904,7 +914,7 @@ abstract class TestMap extends TestObject {
     }
 
     @Override
-    protected Object[] getFullElements() {
+    protected @Nullable Object[] getFullElements() {
       return getSampleKeys();
     }
 
@@ -958,7 +968,7 @@ abstract class TestMap extends TestObject {
     public TestMapValues() {}
 
     @Override
-    protected Object[] getFullElements() {
+    protected @Nullable Object[] getFullElements() {
       return getSampleValues();
     }
 

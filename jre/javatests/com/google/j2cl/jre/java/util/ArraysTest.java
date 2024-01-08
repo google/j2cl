@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.jre.java.util;
 
+import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -125,10 +126,11 @@ public class ArraysTest extends EmulTestBase {
   }
 
   /**
-   * Tests if changes to the list created by {@link Arrays#asList(Object[])} are
-   * reflected in the original array.
+   * Tests if changes to the list created by {@link Arrays#asList(Object[])} are reflected in the
+   * original array.
    */
   @SuppressWarnings("unchecked")
+  @J2ktIncompatible // b/239034072
   public void testAsListBacking() {
     Object[] test1 = {0, 1, 2};
     List result1 = Arrays.asList(test1);

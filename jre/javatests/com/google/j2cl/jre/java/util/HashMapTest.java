@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.jre.java.util;
 
+import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -24,8 +25,11 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
+import org.jspecify.nullness.NullMarked;
+import org.jspecify.nullness.Nullable;
 
 /** Tests <code>HashMap</code>. */
+@NullMarked
 public class HashMapTest extends TestMap {
   private static final int CAPACITY_16 = 16;
   private static final int CAPACITY_NEG_ONE_HALF = -1;
@@ -155,6 +159,7 @@ public class HashMapTest extends TestMap {
   /*
    * Test method for 'java.util.HashMap.clone()'
    */
+  @J2ktIncompatible // b/317230935
   public void testClone() {
     HashMap<String, String> srcMap = new HashMap<String, String>();
     checkEmptyHashMapAssumptions(srcMap);
@@ -183,7 +188,7 @@ public class HashMapTest extends TestMap {
    * Test method for 'java.util.HashMap.containsKey(Object)'
    */
   public void testContainsKey() {
-    HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
+    HashMap<@Nullable String, @Nullable Integer> hashMap = new HashMap<>();
     checkEmptyHashMapAssumptions(hashMap);
 
     assertFalse(hashMap.containsKey(KEY_TEST_CONTAINS_KEY));
@@ -201,7 +206,7 @@ public class HashMapTest extends TestMap {
    */
   @SuppressWarnings("CollectionIncompatibleType")
   public void testContainsValue() {
-    HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
+    HashMap<@Nullable String, @Nullable Integer> hashMap = new HashMap<>();
     checkEmptyHashMapAssumptions(hashMap);
 
     assertFalse("check contains of empty map", hashMap.containsValue(VALUE_TEST_CONTAINS_KEY));
@@ -275,10 +280,10 @@ public class HashMapTest extends TestMap {
    * Used to test the entrySet entry's set method.
    */
   public void testEntrySetEntrySetterNull() {
-    HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
+    HashMap<@Nullable String, @Nullable Integer> hashMap = new HashMap<String, Integer>();
     hashMap.put(null, 2);
-    Set<Map.Entry<String, Integer>> entrySet = hashMap.entrySet();
-    Map.Entry<String, Integer> entry = entrySet.iterator().next();
+    Set<Map.Entry<@Nullable String, @Nullable Integer>> entrySet = hashMap.entrySet();
+    Map.Entry<@Nullable String, @Nullable Integer> entry = entrySet.iterator().next();
 
     entry.setValue(3);
     assertEquals(3, hashMap.get(null).intValue());
@@ -325,6 +330,7 @@ public class HashMapTest extends TestMap {
   /*
    * Test method for 'java.util.AbstractMap.equals(Object)'
    */
+  @J2ktIncompatible // b/317230935
   public void testEquals() {
     HashMap<String, String> hashMap = new HashMap<String, String>();
     checkEmptyHashMapAssumptions(hashMap);
@@ -339,6 +345,7 @@ public class HashMapTest extends TestMap {
   }
 
   @SuppressWarnings("unchecked")
+  @J2ktIncompatible // b/317230935
   private HashMap<String, String> cloneMap(HashMap<String, String> hashMap) {
     return (HashMap<String, String>) hashMap.clone();
   }
@@ -354,7 +361,7 @@ public class HashMapTest extends TestMap {
    * Test method for 'java.util.HashMap.get(Object)'.
    */
   public void testGet() {
-    HashMap<String, String> hashMap = new HashMap<String, String>();
+    HashMap<@Nullable String, @Nullable String> hashMap = new HashMap<>();
     checkEmptyHashMapAssumptions(hashMap);
 
     assertNull(hashMap.get(KEY_TEST_GET));
@@ -583,7 +590,7 @@ public class HashMapTest extends TestMap {
    * Test method for 'java.util.HashMap.put(Object, Object)'
    */
   public void testPut() {
-    HashMap<String, String> hashMap = new HashMap<String, String>();
+    HashMap<@Nullable String, @Nullable String> hashMap = new HashMap<>();
     checkEmptyHashMapAssumptions(hashMap);
 
     assertNull(hashMap.put(KEY_TEST_PUT, VALUE_TEST_PUT_1));
@@ -657,7 +664,7 @@ public class HashMapTest extends TestMap {
 
   /** Test method for 'java.util.HashMap.remove(Object)'. */
   public void testRemove() {
-    HashMap<String, String> hashMap = new HashMap<String, String>();
+    HashMap<@Nullable String, @Nullable String> hashMap = new HashMap<String, String>();
     checkEmptyHashMapAssumptions(hashMap);
 
     assertNull(hashMap.remove(null));

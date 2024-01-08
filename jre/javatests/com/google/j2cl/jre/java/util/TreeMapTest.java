@@ -19,6 +19,7 @@ import static com.google.j2cl.jre.testing.TestUtils.getJdkVersion;
 import static com.google.j2cl.jre.testing.TestUtils.isJvm;
 import static com.google.j2cl.jre.testing.TestUtils.isWasm;
 
+import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,6 +36,8 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import org.jspecify.nullness.NullMarked;
+import org.jspecify.nullness.Nullable;
 
 /**
  * Tests <code>TreeMap</code>.
@@ -42,6 +45,7 @@ import java.util.TreeMap;
  * @param <K> The key type for the underlying TreeMap
  * @param <V> The value type for the underlying TreeMap
  */
+@NullMarked
 abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
 
   private static class ConflictingKey implements Comparable<CharSequence> {
@@ -177,7 +181,7 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
   }
 
   /** comparator used when creating the SortedMap. */
-  private Comparator<K> comparator = null;
+  private @Nullable Comparator<K> comparator = null;
 
   private final boolean isClearSupported = true;
   private final boolean isNullKeySupported = true;
@@ -185,6 +189,26 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
   private final boolean isPutAllSupported = true;
   private final boolean isPutSupported = true;
   private final boolean isRemoveSupported = true;
+
+  @J2ktIncompatible // Non-nullable
+  public void testNull() {
+    NavigableMap<K, V> map = createNavigableMap();
+    K[] keys = getSortedKeys();
+
+    assertFalse(map.containsValue(null));
+    map.put(keys[0], null);
+    assertTrue(map.containsValue(null));
+
+    map.clear();
+
+    assertNull(map.floorEntry(null));
+    assertNull(map.floorKey(null));
+    assertNull(map.ceilingKey(null));
+    assertNull(map.higherEntry(null));
+    assertNull(map.higherKey(null));
+    assertNull(map.lowerKey(null));
+    assertNull(map.lowerEntry(null));
+  }
 
   public void testCeilingEntry() {
     K[] keys = getSortedKeys();
@@ -237,7 +261,6 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     }
     map.clear();
     assertNull(map.ceilingKey(keys[1]));
-    assertNull(map.ceilingKey(null));
   }
 
   /**
@@ -282,7 +305,7 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     // TODO (rlo) having .clone() in the code kills the test
     // SortedMap<K, V> clone = (SortedMap<K, V>)
     // map.clone();
-    // assertNotNull(clone);
+    // assertNote(clone);
     // testEquivalent(map, clone);
     //
     // // Check non-empty clone behavior
@@ -491,6 +514,8 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    *
    * @see java.util.Map#containsKey(Object)
    */
+  @J2ktIncompatible // Kotlin native comparators don't expose this behavior and currently we
+  // don't plan to emulate this.
   public void testContainsKey_throwsClassCastException() {
     if (isWasm()) {
       // TODO(b/183769034): Re-enable when CCE is supported
@@ -537,14 +562,13 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     V[] values = getValues();
     Map<K, V> map = createMap();
     assertFalse(map.containsValue(values[0]));
+
     map.put(keys[0], values[0]);
     assertEquals(1, map.values().size());
     assertTrue(map.containsValue(values[0]));
     assertFalse(map.containsValue(keys[0]));
     assertFalse(map.containsValue(values[1]));
-    assertFalse(map.containsValue(null));
-    map.put(keys[0], null);
-    assertTrue(map.containsValue(null));
+
     map.put(keys[0], values[0]);
     map.put(keys[1], values[1]);
     assertTrue(map.containsValue(values[1]));
@@ -556,6 +580,8 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    *
    * @see java.util.Map#containsValue(Object)
    */
+  @J2ktIncompatible // Kotlin native comparators don't expose this behavior and currently we
+  // don't plan to emulate this.
   public void testContainsValue_throwsClassCastException() {
     if (isWasm()) {
       // TODO(b/183769034): Re-enable when CCE is supported
@@ -823,7 +849,7 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     NavigableMap<K, V> master = createNavigableMap();
     NavigableMap<K, V> testMap = createNavigableMap();
 
-    master.put(keys[0], null);
+    master.put(keys[0], (V) getOtherValues()[0]);
     Object[] entry = master.entrySet().toArray();
     assertFalse(testMap.entrySet().contains(entry[0]));
 
@@ -831,7 +857,7 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     entry = master.entrySet().toArray();
     assertFalse(submap.entrySet().contains(entry[0]));
 
-    testMap.put(keys[0], null);
+    testMap.put(keys[0], (V) getOtherValues()[0]);
     assertTrue(testMap.entrySet().containsAll(master.entrySet()));
 
     master.clear();
@@ -1083,7 +1109,6 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     }
     map.clear();
     assertNull(map.floorEntry(keys[1]));
-    assertNull(map.floorEntry(null));
   }
 
   public void testFloorKey() {
@@ -1116,7 +1141,6 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
 
     map.clear();
     assertNull(map.floorKey(keys[1]));
-    assertNull(map.floorKey(null));
   }
 
   /**
@@ -1156,6 +1180,8 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    *
    * @see java.util.Map#get(Object)
    */
+  @J2ktIncompatible // Kotlin native comparators don't expose this behavior and currently we
+  // don't plan to emulate this.
   public void testGet_throwsClassCastException() {
     if (isWasm()) {
       // TODO(b/183769034): Re-enable when CCE is supported
@@ -1179,6 +1205,7 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    *
    * @see java.util.Map#get(Object)
    */
+  @J2ktIncompatible // b/317344586
   public void testGet_throwsNullPointerException() {
     K[] keys = getKeys();
     V[] values = getValues();
@@ -1509,6 +1536,8 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    * @see java.util.SortedMap#headMap(Object)
    */
   @SuppressWarnings("unchecked")
+  @J2ktIncompatible // Kotlin native comparators don't expose this behavior and currently we
+  // don't plan to emulate this.
   public void testHeadMap_throwsClassCastException() {
     if (isWasm()) {
       // TODO(b/183769034): Re-enable when CCE is supported
@@ -1623,7 +1652,7 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     }
     map.clear();
     assertNull(map.higherEntry(keys[1]));
-    assertNull(map.higherEntry(null));
+
   }
 
   public void testHigherKey() {
@@ -1653,7 +1682,6 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     }
     map.clear();
     assertNull(map.higherKey(keys[1]));
-    assertNull(map.higherKey(null));
   }
 
   /**
@@ -1889,7 +1917,6 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     }
     map.clear();
     assertNull(map.lowerEntry(keys[1]));
-    assertNull(map.lowerEntry(null));
   }
 
   public void testLowerKey() {
@@ -1921,9 +1948,9 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     }
     map.clear();
     assertNull(map.lowerKey(keys[1]));
-    assertNull(map.lowerKey(null));
   }
 
+  @SuppressWarnings("ModifyingCollectionWithItself")
   public void testNavigableKeySet() {
     K[] keys = getSortedKeys();
     V[] values = getSortedValues();
@@ -1945,6 +1972,13 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     }
     try {
       keySet.add(null);
+      fail("should throw UnsupportedOperationException");
+    } catch (UnsupportedOperationException expected) {
+    } catch (NullPointerException expected) {
+      // J2kt
+    }
+    try {
+      keySet.addAll(keySet);
       fail("should throw UnsupportedOperationException");
     } catch (UnsupportedOperationException expected) {
     }
@@ -2174,6 +2208,7 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    *
    * @see java.util.Map#put(Object, Object)
    */
+  @J2ktIncompatible
   public void testPut_nullKey() {
     K[] keys = getSortedKeys();
     V[] values = getSortedValues();
@@ -2312,6 +2347,8 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     }
   }
 
+  @J2ktIncompatible // Kotlin native comparators don't throw in this case and we don't want to
+  // wrap just for this.
   public void testPut_ComparableKey() {
     if (isWasm()) {
       // TODO(b/183769034): Re-enable when CCE is supported
@@ -2341,6 +2378,8 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    * @see java.util.Map#put(Object, Object)
    */
   @SuppressWarnings("unchecked")
+  @J2ktIncompatible // Kotlin native comparators don't expose this behavior and currently we
+  // don't plan to emulate this.
   public void testPut_throwsClassCastException_key() {
     if (isWasm()) {
       // TODO(b/183769034): Re-enable when CCE is supported
@@ -2368,6 +2407,8 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    * @see java.util.Map#put(Object, Object)
    */
   @SuppressWarnings("unchecked")
+  @J2ktIncompatible // Kotlin native comparators don't expose this behavior and currently we
+  // don't plan to emulate this.
   public void testPut_throwsClassCastException_value() {
     // The _throwsUnsupportedOperationException version of this test will
     // verify that the method is not supported.
@@ -2580,6 +2621,8 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    * @see java.util.Map#putAll(Map)
    */
   @SuppressWarnings("unchecked")
+  @J2ktIncompatible // Kotlin native comparators don't expose this behavior and currently we
+  // don't plan to emulate this.
   public void testPutAll_throwsClassCastException() {
     if (isWasm()) {
       // TODO(b/183769034): Re-enable when CCE is supported
@@ -2705,6 +2748,8 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    *
    * @see java.util.Map#remove(Object)
    */
+  @J2ktIncompatible // Kotlin native comparators don't expose this behavior and currently we
+  // don't plan to emulate this.
   public void testRemove_throwsClassCastException() {
     if (isWasm()) {
       // TODO(b/183769034): Re-enable when CCE is supported
@@ -2733,6 +2778,7 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    * @see java.util.Map#remove(Object)
    */
   @SuppressWarnings("unchecked")
+  @J2ktIncompatible // Unsuported
   public void testRemove_throwsNullPointerException() {
     K[] keys = getKeys();
     V[] values = getValues();
@@ -3047,6 +3093,8 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    * @see java.util.SortedMap#subMap(Object, Object)
    */
   @SuppressWarnings("unchecked")
+  @J2ktIncompatible // Kotlin native comparators don't expose this behavior and currently we
+  // don't plan to emulate this.
   public void testSubMap_throwsClassCastException() {
     if (isWasm()) {
       // TODO(b/183769034): Re-enable when CCE is supported
@@ -3256,6 +3304,8 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    * @see java.util.SortedMap#tailMap(Object)
    */
   @SuppressWarnings("unchecked")
+  @J2ktIncompatible // Kotlin native comparators don't expose this behavior and currently we
+  // don't plan to emulate this.
   public void testTailMap_throwsClassCastException() {
     if (isWasm()) {
       // TODO(b/183769034): Re-enable when CCE is supported
@@ -3487,7 +3537,7 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     return false;
   }
 
-  protected Comparator<K> getComparator() {
+  protected @Nullable Comparator<K> getComparator() {
     return comparator;
   }
 
@@ -3514,7 +3564,7 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     return createNavigableMap();
   }
 
-  protected void setComparator(Comparator<K> comparator) {
+  protected void setComparator(@Nullable Comparator<K> comparator) {
     this.comparator = comparator;
   }
 

@@ -28,18 +28,19 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Queue;
 import java.util.Set;
+import org.jspecify.nullness.NullMarked;
+import org.jspecify.nullness.Nullable;
 
-/**
- * Test various collections.
- */
+/** Test various collections. */
+@NullMarked
 public class CollectionsTest extends EmulTestBase {
 
   private interface ListImplProvider {
     List<Integer> copyOf(Collection<Integer> data);
   }
 
-  public static List<Integer> createRandomList() {
-    ArrayList<Integer> l = new ArrayList<Integer>();
+  public static List<@Nullable Integer> createRandomList() {
+    ArrayList<@Nullable Integer> l = new ArrayList<Integer>();
     l.add(new Integer(5));
     l.add(new Integer(2));
     l.add(new Integer(3));
@@ -48,8 +49,8 @@ public class CollectionsTest extends EmulTestBase {
     return l;
   }
 
-  public static List<String> createSortedList() {
-    ArrayList<String> l = new ArrayList<String>();
+  public static List<@Nullable String> createSortedList() {
+    ArrayList<@Nullable String> l = new ArrayList<String>();
     l.add("a");
     l.add("b");
     l.add("c");
@@ -206,11 +207,11 @@ public class CollectionsTest extends EmulTestBase {
   }
 
   public void testFill() {
-    List<String> a = createSortedList();
+    List<@Nullable String> a = createSortedList();
     Collections.fill(a, null);
-    assertEquals(new Object[a.size()], a);
+    assertEquals(new @Nullable Object[a.size()], a);
 
-    List<Integer> b = createRandomList();
+    List<@Nullable Integer> b = createRandomList();
     Collections.fill(b, null);
     assertEquals(new Object[b.size()], b);
   }

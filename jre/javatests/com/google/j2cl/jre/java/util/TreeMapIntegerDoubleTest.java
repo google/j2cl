@@ -15,9 +15,11 @@
  */
 package com.google.j2cl.jre.java.util;
 
-/**
- * Tests <code>TreeMap</code> with a <code>Comparator</code>.
- */
+import org.jspecify.nullness.NullMarked;
+import org.jspecify.nullness.Nullable;
+
+/** Tests <code>TreeMap</code> with a <code>Comparator</code>. */
+@NullMarked
 public class TreeMapIntegerDoubleTest extends TreeMapTest<Integer, Double> {
 
   @Override
@@ -71,12 +73,12 @@ public class TreeMapIntegerDoubleTest extends TreeMapTest<Integer, Double> {
   }
 
   @Override
-  protected Object[] getSampleKeys() {
+  protected @Nullable Object[] getSampleKeys() {
     return getKeys();
   }
 
   @Override
-  protected Object[] getSampleValues() {
+  protected @Nullable Object[] getSampleValues() {
     return getValues();
   }
 
@@ -91,7 +93,7 @@ public class TreeMapIntegerDoubleTest extends TreeMapTest<Integer, Double> {
   }
 
   @Override
-  protected Object[] getNewSampleValues() {
+  protected @Nullable Object[] getNewSampleValues() {
     return getValues2();
   }
 

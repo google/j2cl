@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.jre.java.util;
 
+import com.google.j2cl.jre.testing.J2ktIncompatible;
 import com.google.j2cl.jre.testing.TestUtils;
 import java.util.Arrays;
 import java.util.Collection;
@@ -23,8 +24,11 @@ import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import org.jspecify.nullness.NullMarked;
+import org.jspecify.nullness.Nullable;
 
 /** J2CL specific EmumSet test as it doesn't support getEnumConstants (b/30745420). */
+@NullMarked
 public class EnumSetTest extends TestSet {
   public EnumSetTest() {
     super("EnumSetTest");
@@ -99,7 +103,7 @@ public class EnumSetTest extends TestSet {
 
   @Override
   // Note that this method is badly named. It doesn't mean *all* elements.
-  protected Object[] getFullElements() {
+  protected @Nullable Object[] getFullElements() {
     return new Numbers[] {Numbers.One, Numbers.Two, Numbers.Three, Numbers.Four};
   }
 
@@ -163,6 +167,7 @@ public class EnumSetTest extends TestSet {
   // and it may or may not show the effects of any modifications to the set that occur while the
   // iteration is in progress.
   // J2CL doesn't conform to that and fail-fast during iteration.
+  @J2ktIncompatible
   public void testIterator_concurrentModification() {
     EnumSet<Numbers> partial = EnumSet.of(Numbers.One, Numbers.Two, Numbers.Three, Numbers.Five);
     Iterator<Numbers> expecteds = EnumSet.copyOf(partial).iterator();

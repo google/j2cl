@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.jre.java.util;
 
+import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -24,8 +25,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import junit.framework.TestCase;
+import org.jspecify.nullness.NullMarked;
 
 /** Tests EnumMap. */
+@NullMarked
 public class EnumMapTest extends TestCase {
 
   enum Numbers {
@@ -177,6 +180,7 @@ public class EnumMapTest extends TestCase {
     enumTests(Numbers.class, Numbers.values());
   }
 
+  @J2ktIncompatible
   public void testNulls() {
     EnumMap<Numbers, Integer> numbers = new EnumMap<>(Numbers.class);
 

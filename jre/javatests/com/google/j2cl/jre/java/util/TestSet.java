@@ -22,6 +22,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import org.jspecify.nullness.NullMarked;
 
 /**
  * Tests base {@link Set} methods and contracts.
@@ -36,6 +37,7 @@ import java.util.Set;
  * elements may be added; see {@link TestCollection} for more details.
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
+@NullMarked
 abstract class TestSet extends TestCollection {
 
   /**

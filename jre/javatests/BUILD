@@ -51,41 +51,7 @@ j2cl_library(
 j2kt_native_library(
     name = "emul_tests_lib-j2kt-native",
     testonly = 1,
-    srcs = [
-        "com/google/j2cl/jre/BigDecimalSuite.java",
-        "com/google/j2cl/jre/BigIntegerSuite.java",
-        "com/google/j2cl/jre/ConcurrentSuite.java",
-        "com/google/j2cl/jre/DateTimeSuite.java",
-        "com/google/j2cl/jre/EmulJava8Suite.java",
-        "com/google/j2cl/jre/EmulSuite.java",
-        "com/google/j2cl/jre/LangSuite.java",
-        "com/google/j2cl/jre/java/util/ComparatorTest.java",
-        "com/google/j2cl/jre/java/util/DateTest.java",
-        "com/google/j2cl/jre/java/util/EmulTestBase.java",
-        "com/google/j2cl/jre/java/util/ObjectsTest.java",
-        "com/google/j2cl/jre/java/util/RandomTest.java",
-        "com/google/j2cl/jre/java/util/TestComparator.java",
-        "com/google/j2cl/jre/java/util/TestObject.java",
-        "com/google/j2cl/jre/testing/J2ktIncompatible.java",
-        "com/google/j2cl/jre/testing/TestUtils.java",
-    ] + glob(
-        [
-            "com/google/j2cl/jre/java/io/*.java",
-            "com/google/j2cl/jre/java/lang/*.java",
-            "com/google/j2cl/jre/java/lang/reflect/*.java",
-            "com/google/j2cl/jre/java/math/*.java",
-            "com/google/j2cl/jre/java/nio/charset/*.java",
-            "com/google/j2cl/jre/java/security/*.java",
-            "com/google/j2cl/jre/java/sql/*.java",
-            "com/google/j2cl/jre/java/util/concurrent/*.java",
-            "com/google/j2cl/jre/java/util/concurrent/atomic/*.java",
-            "com/google/j2cl/jre/java8/lang/*.java",
-            "com/google/j2cl/jre/java8/math/*.java",
-            "com/google/j2cl/jre/java8/util/*.java",
-            "com/google/j2cl/jre/java8/util/stream/*.java",
-        ],
-        exclude = JS_ONLY_SRCS,
-    ),
+    srcs = SRCS,
     deps = [
         "//jre/java:javaemul_internal_annotations-j2kt-native",
         "//third_party:junit-j2kt-native",
@@ -118,7 +84,6 @@ java_test(
 
 j2cl_multi_test(
     name = "BigDecimal",
-    enable_kt_native = True,
     shard_count = 5,
     test_class = "com.google.j2cl.jre.BigDecimalSuite",
     deps = [":emul_tests_lib"],
@@ -126,7 +91,6 @@ j2cl_multi_test(
 
 j2cl_multi_test(
     name = "BigInteger",
-    enable_kt_native = True,
     shard_count = 8,
     test_class = "com.google.j2cl.jre.BigIntegerSuite",
     deps = [":emul_tests_lib"],
@@ -141,7 +105,6 @@ j2cl_multi_test(
 
 j2cl_multi_test(
     name = "Concurrent",
-    enable_kt_native = True,
     shard_count = 5,
     test_class = "com.google.j2cl.jre.ConcurrentSuite",
     deps = [":emul_tests_lib"],
@@ -149,7 +112,6 @@ j2cl_multi_test(
 
 j2cl_multi_test(
     name = "Emul",
-    enable_kt_native = True,
     shard_count = 8,
     test_class = "com.google.j2cl.jre.EmulSuite",
     deps = [":emul_tests_lib"],
@@ -157,7 +119,6 @@ j2cl_multi_test(
 
 j2cl_multi_test(
     name = "EmulJava8",
-    enable_kt_native = True,
     shard_count = 8,
     test_class = "com.google.j2cl.jre.EmulJava8Suite",
     deps = [":emul_tests_lib"],
@@ -165,7 +126,6 @@ j2cl_multi_test(
 
 j2cl_multi_test(
     name = "Lang",
-    enable_kt_native = True,
     shard_count = 8,
     test_class = "com.google.j2cl.jre.LangSuite",
     deps = [":emul_tests_lib"],
@@ -173,7 +133,6 @@ j2cl_multi_test(
 
 j2cl_multi_test(
     name = "DateTimeSuite",
-    enable_kt_native = True,
     test_class = "com.google.j2cl.jre.DateTimeSuite",
     deps = [":emul_tests_lib"],
 )
@@ -191,6 +150,7 @@ j2cl_library(
 
 j2cl_multi_test(
     name = "JsSuite",
+    enable_kt_native = False,
     enable_wasm = False,
     test_class = "com.google.j2cl.jre.JsSuite",
     deps = [":js_tests_lib"],

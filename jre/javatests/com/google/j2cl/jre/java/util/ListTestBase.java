@@ -20,18 +20,21 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.ListIterator;
+import org.jspecify.nullness.NullMarked;
+import org.jspecify.nullness.Nullable;
 
 /**
  * Tests List, and, by extension AbstractList. Uses inheritance to inherit all of Apache's TestList
  * and TestCollection.
  */
 @SuppressWarnings("unchecked")
+@NullMarked
 public abstract class ListTestBase extends TestArrayList {
 
   private static final boolean NO_OPTIMIZE_FALSE = false;
 
   public void testAddAll() {
-    List<Integer> list = makeEmptyList();
+    List<@Nullable Object> list = makeEmptyList();
     list.addAll(Arrays.asList(1, 2, 3, 4));
     list.addAll(2, Arrays.asList(21, 22));
 
@@ -354,7 +357,7 @@ public abstract class ListTestBase extends TestArrayList {
     }
   }
 
-  private void checkListSizeAndContent(List<Integer> in, int... expected) {
+  private <T extends @Nullable Object> void checkListSizeAndContent(List<T> in, int... expected) {
     assertEquals(expected.length, in.size());
     for (int i = 0; i < expected.length; i++) {
       assertEquals(expected[i], (int) in.get(i));
@@ -362,7 +365,7 @@ public abstract class ListTestBase extends TestArrayList {
   }
 
   private List<Integer> createListWithContent(int[] in) {
-    List<Integer> results = new ArrayList<Integer>();
+    List<Integer> results = new ArrayList<>();
     for (int i = 0; i < in.length; i++) {
       results.add(in[i]);
     }

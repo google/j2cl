@@ -26,9 +26,12 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import org.jspecify.nullness.NullMarked;
+import org.jspecify.nullness.Nullable;
 
 /** Tests <code>IdentityHashMap</code>. */
 @SuppressWarnings({"unchecked", "rawtypes"})
+@NullMarked
 public class IdentityHashMapTest extends TestMap {
 
   /**
@@ -37,7 +40,7 @@ public class IdentityHashMapTest extends TestMap {
    */
   private static class Foo {
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(@Nullable Object obj) {
       return obj instanceof Foo;
     }
 
@@ -228,18 +231,18 @@ public class IdentityHashMapTest extends TestMap {
    * Test method for 'java.util.IdentityHashMap.entrySet()'
    */
   public void testEntrySet() {
-    IdentityHashMap hashMap = new IdentityHashMap();
+    IdentityHashMap<Object, Object> hashMap = new IdentityHashMap<>();
     checkEmptyHashMapAssumptions(hashMap);
 
-    Set entrySet = hashMap.entrySet();
+    Set<Map.Entry<Object, Object>> entrySet = hashMap.entrySet();
     assertNotNull(entrySet);
 
     // Check that the entry set looks right
     hashMap.put(KEY_TEST_ENTRY_SET, VALUE_TEST_ENTRY_SET_1);
     entrySet = hashMap.entrySet();
     assertEquals(SIZE_ONE, entrySet.size());
-    Iterator itSet = entrySet.iterator();
-    Map.Entry entry = (Map.Entry) itSet.next();
+    Iterator<Map.Entry<Object, Object>> itSet = entrySet.iterator();
+    Map.Entry<Object, Object> entry = itSet.next();
     assertEquals(KEY_TEST_ENTRY_SET, entry.getKey());
     assertEquals(VALUE_TEST_ENTRY_SET_1, entry.getValue());
 
@@ -248,7 +251,7 @@ public class IdentityHashMapTest extends TestMap {
     entrySet = hashMap.entrySet();
     assertEquals(SIZE_ONE, entrySet.size());
     itSet = entrySet.iterator();
-    entry = (Map.Entry) itSet.next();
+    entry = itSet.next();
     assertEquals(KEY_TEST_ENTRY_SET, entry.getKey());
     assertEquals(VALUE_TEST_ENTRY_SET_2, entry.getValue());
 
@@ -261,11 +264,11 @@ public class IdentityHashMapTest extends TestMap {
    * Used to test the entrySet entry's set method.
    */
   public void testEntrySetEntrySetterNonString() {
-    HashMap hashMap = new HashMap();
+    HashMap<Object, Object> hashMap = new HashMap<>();
     Integer key = 1;
     hashMap.put(key, 2);
-    Set entrySet = hashMap.entrySet();
-    Entry entry = (Entry) entrySet.iterator().next();
+    Set<Entry<Object, Object>> entrySet = hashMap.entrySet();
+    Entry<Object, Object> entry = entrySet.iterator().next();
 
     entry.setValue(3);
     assertEquals(3, hashMap.get(key));
@@ -280,10 +283,10 @@ public class IdentityHashMapTest extends TestMap {
    * Used to test the entrySet entry's set method.
    */
   public void testEntrySetEntrySetterNull() {
-    HashMap hashMap = new HashMap();
+    HashMap<@Nullable Object, @Nullable Object> hashMap = new HashMap<>();
     hashMap.put(null, 2);
-    Set entrySet = hashMap.entrySet();
-    Entry entry = (Entry) entrySet.iterator().next();
+    Set<Map.Entry<@Nullable Object, @Nullable Object>> entrySet = hashMap.entrySet();
+    Entry<@Nullable Object, @Nullable Object> entry = (Entry) entrySet.iterator().next();
 
     entry.setValue(3);
     assertEquals(3, hashMap.get(null));
@@ -298,11 +301,11 @@ public class IdentityHashMapTest extends TestMap {
    * Used to test the entrySet entry's set method.
    */
   public void testEntrySetEntrySetterString() {
-    HashMap hashMap = new HashMap();
+    HashMap<String, String> hashMap = new HashMap<>();
     String key = "A";
     hashMap.put(key, "B");
-    Set entrySet = hashMap.entrySet();
-    Entry entry = (Entry) entrySet.iterator().next();
+    Set<Map.Entry<String, String>> entrySet = hashMap.entrySet();
+    Entry<String, String> entry = entrySet.iterator().next();
 
     entry.setValue("C");
     assertEquals("C", hashMap.get(key));
@@ -317,12 +320,12 @@ public class IdentityHashMapTest extends TestMap {
    * Used to test the entrySet remove method.
    */
   public void testEntrySetRemove() {
-    IdentityHashMap hashMap = new IdentityHashMap();
+    IdentityHashMap<String, String> hashMap = new IdentityHashMap<>();
     hashMap.put("A", "B");
-    IdentityHashMap dummy = new IdentityHashMap();
+    IdentityHashMap<String, String> dummy = new IdentityHashMap<>();
     dummy.put("A", "b");
-    Entry bogus = (Entry) dummy.entrySet().iterator().next();
-    Set entrySet = hashMap.entrySet();
+    Entry<String, String> bogus = dummy.entrySet().iterator().next();
+    Set<Entry<String, String>> entrySet = hashMap.entrySet();
     boolean removed = entrySet.remove(bogus);
     assertEquals(false, removed);
     assertEquals("B", hashMap.get("A"));
@@ -722,13 +725,13 @@ public class IdentityHashMapTest extends TestMap {
   }
 
   @Override
-  protected Map makeConfirmedMap() {
-    return new IdentityHashMap();
+  protected Map<@Nullable Object, @Nullable Object> makeConfirmedMap() {
+    return new IdentityHashMap<>();
   }
 
   @Override
-  protected Map makeEmptyMap() {
-    return new IdentityHashMap();
+  protected Map<@Nullable Object, @Nullable Object> makeEmptyMap() {
+    return new IdentityHashMap<>();
   }
 
   private Iterator iterateThrough(final IdentityHashMap expected) {

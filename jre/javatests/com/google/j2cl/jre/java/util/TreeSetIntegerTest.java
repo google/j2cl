@@ -18,10 +18,11 @@ package com.google.j2cl.jre.java.util;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.TreeSet;
+import org.jspecify.nullness.NullMarked;
+import org.jspecify.nullness.Nullable;
 
-/**
- * Tests <code>TreeSet</code> with a <code>Comparator</code>.
- */
+/** Tests <code>TreeSet</code> with a <code>Comparator</code>. */
+@NullMarked
 public class TreeSetIntegerTest extends TreeSetTest<Integer> {
 
   /**
@@ -37,11 +38,11 @@ public class TreeSetIntegerTest extends TreeSetTest<Integer> {
       this.extra = extra;
     }
   }
-  
-  private static class RecordCompare implements Comparator<Record> {
+
+  private static class RecordCompare implements Comparator<@Nullable Record> {
     // Handle nulls as less than any other key
     @Override
-    public int compare(Record r1, Record r2) {
+    public int compare(@Nullable Record r1, @Nullable Record r2) {
       if (r1 == null) {
         return r2 == null ? 0 : -1;
       }
@@ -56,12 +57,12 @@ public class TreeSetIntegerTest extends TreeSetTest<Integer> {
    * Verify nulls are handled properly.
    */
   public void testAdd_null() {
-    TreeSet<Record> set = new TreeSet<Record>(new RecordCompare());
+    TreeSet<@Nullable Record> set = new TreeSet<>(new RecordCompare());
     set.add(new Record(10, 1));
     set.add(new Record(2, 2));
     set.add(null);
     set.add(new Record(7, 7));
-    Iterator<Record> it = set.iterator();
+    Iterator<@Nullable Record> it = set.iterator();
     assertTrue(it.hasNext());
     assertNull(it.next());
     assertTrue(it.hasNext());

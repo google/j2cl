@@ -22,8 +22,11 @@ import java.util.Comparator;
 import java.util.NoSuchElementException;
 import java.util.PriorityQueue;
 import java.util.TreeSet;
+import org.jspecify.nullness.NullMarked;
+import org.jspecify.nullness.Nullable;
 
 /** Test PriorityQueue. */
+@NullMarked
 public class PriorityQueueTest extends TestCollection {
 
   public void testAdd() {
@@ -243,7 +246,7 @@ public class PriorityQueueTest extends TestCollection {
 
   /** Null elements are prohibited in PriorityQueue. */
   @Override
-  protected Object[] getFullElements() {
+  protected @Nullable Object[] getFullElements() {
     return new Integer[] {1, 2, 3, 4};
   }
 
@@ -264,6 +267,7 @@ public class PriorityQueueTest extends TestCollection {
 
   @Override
   protected Collection makeCollection() {
-    return new PriorityQueue();
+    // Cast from PriorityQueue<Object> to Collection<@Nullable Object>
+    return (Collection) new PriorityQueue();
   }
 }
