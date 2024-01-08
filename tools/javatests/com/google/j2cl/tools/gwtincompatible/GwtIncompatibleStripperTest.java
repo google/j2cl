@@ -161,6 +161,27 @@ public class GwtIncompatibleStripperTest {
   }
 
   @Test
+  public void testProcessAnnotationMember() {
+    String before =
+        Joiner.on("\n")
+            .join(
+                "public @interface Foo {",
+                "  public String m();",
+                "  @GwtIncompatible",
+                "  public String n();",
+                "}");
+    String after =
+        Joiner.on("\n")
+            .join(
+                "public @interface Foo {",
+                "  public String m();",
+                Strings.repeat(" ", "  @GwtIncompatible".length()),
+                Strings.repeat(" ", "  public String n();".length()),
+                "}");
+    assertEquals(after, GwtIncompatibleStripper.strip(before, "GwtIncompatible"));
+  }
+
+  @Test
   public void testProcessMultiple() {
     String before =
         Joiner.on("\n")

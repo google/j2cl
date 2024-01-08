@@ -20,6 +20,7 @@ import java.util.List;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.Annotation;
+import org.eclipse.jdt.core.dom.AnnotationTypeMemberDeclaration;
 import org.eclipse.jdt.core.dom.BodyDeclaration;
 import org.eclipse.jdt.core.dom.EnumConstantDeclaration;
 import org.eclipse.jdt.core.dom.FieldDeclaration;
@@ -47,6 +48,11 @@ public class AnnotatedNodeCollector extends ASTVisitor {
 
   @Override
   public boolean visit(MethodDeclaration methodDeclaration) {
+    return visitBodyDeclaration(methodDeclaration);
+  }
+
+  @Override
+  public boolean visit(AnnotationTypeMemberDeclaration methodDeclaration) {
     return visitBodyDeclaration(methodDeclaration);
   }
 
