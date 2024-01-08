@@ -1,0 +1,62 @@
+goog.module('overwrittentypevariables.ParameterizedTypeImpl$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const ParameterizedType = goog.require('overwrittentypevariables.ParameterizedType$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @implements {ParameterizedType<?string, Integer>}
+ */
+class ParameterizedTypeImpl extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!ParameterizedTypeImpl} */
+ static $create__() {
+  ParameterizedTypeImpl.$clinit();
+  let $instance = new ParameterizedTypeImpl();
+  $instance.$ctor__overwrittentypevariables_ParameterizedTypeImpl__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__overwrittentypevariables_ParameterizedTypeImpl__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {Integer} */
+ m_accept__java_lang_String__java_lang_Integer(/** ?string */ value) {
+  return Integer.m_valueOf__int__java_lang_Integer(1);
+ }
+ //Bridge method.
+ /** @final @override @nodts @return {Integer} */
+ m_accept__java_lang_Object__java_lang_Object(/** ?string */ arg0) {
+  return this.m_accept__java_lang_String__java_lang_Integer(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
+ }
+ /** @nodts */
+ static $clinit() {
+  ParameterizedTypeImpl.$clinit = () =>{};
+  ParameterizedTypeImpl.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ParameterizedTypeImpl;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+ParameterizedType.$markImplementor(ParameterizedTypeImpl);
+$Util.$setClassMetadata(ParameterizedTypeImpl, 'overwrittentypevariables.ParameterizedTypeImpl');
+
+exports = ParameterizedTypeImpl;
+
+//# sourceMappingURL=ParameterizedTypeImpl.js.map

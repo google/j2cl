@@ -1,0 +1,49 @@
+goog.module('overwrittentypevariables.ParameterizedType.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const ParameterizedType = goog.require('overwrittentypevariables.ParameterizedType$impl');
+
+/**
+ * @template F, T
+ * @implements {ParameterizedType<F, T>}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function(F):T */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function(F):T} @nodts*/
+  this.f_fn__overwrittentypevariables_ParameterizedType_$LambdaAdaptor;
+  this.$ctor__overwrittentypevariables_ParameterizedType_$LambdaAdaptor__overwrittentypevariables_ParameterizedType_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__overwrittentypevariables_ParameterizedType_$LambdaAdaptor__overwrittentypevariables_ParameterizedType_$JsFunction__void(/** ?function(F):T */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__overwrittentypevariables_ParameterizedType_$LambdaAdaptor = fn;
+ }
+ /** @override @nodts @return {T} */
+ m_accept__java_lang_Object__java_lang_Object(/** F */ arg0) {
+  let /** ?function(F):T */ $function;
+  return ($function = this.f_fn__overwrittentypevariables_ParameterizedType_$LambdaAdaptor, $function(arg0));
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+ParameterizedType.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'overwrittentypevariables.ParameterizedType$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=ParameterizedType$$LambdaAdaptor.js.map

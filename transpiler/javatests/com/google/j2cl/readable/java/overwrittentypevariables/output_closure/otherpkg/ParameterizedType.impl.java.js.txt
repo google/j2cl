@@ -1,0 +1,43 @@
+goog.module('overwrittentypevariables.otherpkg.ParameterizedType$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('overwrittentypevariables.otherpkg.ParameterizedType.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @template T, R
+ */
+class ParameterizedType {
+ /** @abstract @nodts @return {R} */
+ m_accept__java_lang_Object__java_lang_Object(/** T */ value) {}
+ /** @nodts @template T, R @return {ParameterizedType<T, R>} */
+ static $adapt(/** ?function(T):R */ fn) {
+  ParameterizedType.$clinit();
+  return /**@type {!$LambdaAdaptor<T, R>}*/ (new $LambdaAdaptor(fn));
+ }
+ /** @nodts */
+ static $clinit() {
+  ParameterizedType.$clinit = () =>{};
+  ParameterizedType.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__overwrittentypevariables_otherpkg_ParameterizedType = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__overwrittentypevariables_otherpkg_ParameterizedType;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('overwrittentypevariables.otherpkg.ParameterizedType.$LambdaAdaptor$impl');
+ }
+}
+ParameterizedType.$markImplementor(/**@type {Function}*/ (ParameterizedType));
+$Util.$setClassMetadataForInterface(ParameterizedType, 'overwrittentypevariables.otherpkg.ParameterizedType');
+
+exports = ParameterizedType;
+
+//# sourceMappingURL=ParameterizedType.js.map

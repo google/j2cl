@@ -9,6 +9,18 @@
   ))
  )
 
+ ;;; Code for overwrittentypevariables.ParameterizedType [type definition]
+ (type $overwrittentypevariables.ParameterizedType.vtable (sub (struct
+  (field $m_accept__java_lang_Object__java_lang_Object (ref $function.m_accept__java_lang_Object__java_lang_Object))
+  ))
+ )
+
+ ;;; Code for overwrittentypevariables.otherpkg.ParameterizedType [type definition]
+ (type $overwrittentypevariables.otherpkg.ParameterizedType.vtable (sub (struct
+  (field $m_accept__java_lang_Object__java_lang_Object (ref $function.m_accept__java_lang_Object__java_lang_Object))
+  ))
+ )
+
  ;;; Code for overwrittentypevariables.HashFunctions [type definition]
  (type $overwrittentypevariables.HashFunctions (sub $java.lang.Object (struct
   (field $vtable (ref $overwrittentypevariables.HashFunctions.vtable))
@@ -72,6 +84,33 @@
  (type $overwrittentypevariables.HashFunctions.2.itable (sub $itable (struct
  (field $slot0 (ref $overwrittentypevariables.HashFunction.vtable))
  (field $slot1 (ref $overwrittentypevariables.MyFunction.vtable))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+ )))
+
+ ;;; Code for overwrittentypevariables.ParameterizedTypeImpl [type definition]
+ (type $overwrittentypevariables.ParameterizedTypeImpl (sub $java.lang.Object (struct
+  (field $vtable (ref $overwrittentypevariables.ParameterizedTypeImpl.vtable))
+  (field $itable (ref $overwrittentypevariables.ParameterizedTypeImpl.itable))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  ))
+ )
+ (type $overwrittentypevariables.ParameterizedTypeImpl.vtable (sub $java.lang.Object.vtable (struct
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_accept__java_lang_Object__java_lang_Object (ref $function.m_accept__java_lang_Object__java_lang_Object))
+  (field $m_accept__java_lang_String__java_lang_Integer (ref $function.m_accept__java_lang_String__java_lang_Integer))
+  ))
+ )
+ (type $overwrittentypevariables.ParameterizedTypeImpl.itable (sub $itable (struct
+ (field $slot0 (ref $overwrittentypevariables.ParameterizedType.vtable))
+ (field $slot1 (ref $overwrittentypevariables.otherpkg.ParameterizedType.vtable))
  (field $slot2 (ref null struct))
  (field $slot3 (ref null struct))
  (field $slot4 (ref null struct))
@@ -160,6 +199,42 @@
  )
 )
 
+;;; Code for overwrittentypevariables.ParameterizedTypeImpl [vtable.init]
+(global $overwrittentypevariables.ParameterizedTypeImpl.vtable (ref $overwrittentypevariables.ParameterizedTypeImpl.vtable)
+ (struct.new $overwrittentypevariables.ParameterizedTypeImpl.vtable
+  (ref.func $$getClassImpl__java_lang_Class@overwrittentypevariables.ParameterizedTypeImpl)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_accept__java_lang_Object__java_lang_Object@overwrittentypevariables.ParameterizedTypeImpl)
+  (ref.func $m_accept__java_lang_String__java_lang_Integer@overwrittentypevariables.ParameterizedTypeImpl)
+ )
+)
+(global $overwrittentypevariables.ParameterizedType.vtable@$overwrittentypevariables.ParameterizedTypeImpl (ref $overwrittentypevariables.ParameterizedType.vtable)
+ (struct.new $overwrittentypevariables.ParameterizedType.vtable
+  (ref.func $m_accept__java_lang_Object__java_lang_Object@overwrittentypevariables.ParameterizedTypeImpl)
+ )
+)
+(global $overwrittentypevariables.otherpkg.ParameterizedType.vtable@$overwrittentypevariables.ParameterizedTypeImpl (ref $overwrittentypevariables.otherpkg.ParameterizedType.vtable)
+ (struct.new $overwrittentypevariables.otherpkg.ParameterizedType.vtable
+  (ref.func $m_accept__java_lang_Object__java_lang_Object@overwrittentypevariables.ParameterizedTypeImpl)
+ )
+)
+
+;;; Code for overwrittentypevariables.ParameterizedTypeImpl [itable.init]
+(global $overwrittentypevariables.ParameterizedTypeImpl.itable (ref $overwrittentypevariables.ParameterizedTypeImpl.itable)
+ (struct.new $overwrittentypevariables.ParameterizedTypeImpl.itable
+   (global.get $overwrittentypevariables.ParameterizedType.vtable@$overwrittentypevariables.ParameterizedTypeImpl)
+   (global.get $overwrittentypevariables.otherpkg.ParameterizedType.vtable@$overwrittentypevariables.ParameterizedTypeImpl)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+ )
+)
+
 ;;; Code for overwrittentypevariables.MyFunction [static fields]
 (global $$class-initialized@overwrittentypevariables.MyFunction (mut i32)
  (i32.const 0)
@@ -212,6 +287,39 @@
  (ref.null $java.lang.Class)
 )
 (global $$string_|overwrittent...|@overwrittentypevariables.HashFunctions.2 (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
+
+;;; Code for overwrittentypevariables.ParameterizedType [static fields]
+(global $$class-initialized@overwrittentypevariables.ParameterizedType (mut i32)
+ (i32.const 0)
+)
+(global $$class@overwrittentypevariables.ParameterizedType (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$string_|overwrittent...|@overwrittentypevariables.ParameterizedType (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
+
+;;; Code for overwrittentypevariables.ParameterizedTypeImpl [static fields]
+(global $$class-initialized@overwrittentypevariables.ParameterizedTypeImpl (mut i32)
+ (i32.const 0)
+)
+(global $$class@overwrittentypevariables.ParameterizedTypeImpl (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$string_|overwrittent...|@overwrittentypevariables.ParameterizedTypeImpl (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
+
+;;; Code for overwrittentypevariables.otherpkg.ParameterizedType [static fields]
+(global $$class-initialized@overwrittentypevariables.otherpkg.ParameterizedType (mut i32)
+ (i32.const 0)
+)
+(global $$class@overwrittentypevariables.otherpkg.ParameterizedType (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$string_|overwrittent...|@overwrittentypevariables.otherpkg.ParameterizedType (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -304,6 +412,98 @@
   )
   (global.set $$string_|overwrittent...|@overwrittentypevariables.HashFunction (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "overwrittentypevariables.HashFunction")))
   (return (global.get $$string_|overwrittent...|@overwrittentypevariables.HashFunction))
+ )
+)
+
+;;; Code for overwrittentypevariables.ParameterizedType [methods]
+
+;;; void ParameterizedType.$clinit()
+(func $$clinit__void_<once>_@overwrittentypevariables.ParameterizedType
+ ;;@ overwrittentypevariables/ParameterizedType.java:22:17
+ (block
+  ;;@ overwrittentypevariables/ParameterizedType.java:22:17
+  (if (global.get $$class-initialized@overwrittentypevariables.ParameterizedType)
+   (then
+    ;;@ overwrittentypevariables/ParameterizedType.java:22:17
+    (return )
+   )
+  )
+  ;;@ overwrittentypevariables/ParameterizedType.java:22:17
+  (global.set $$class-initialized@overwrittentypevariables.ParameterizedType (i32.const 1))
+ )
+)
+
+;;; Class<T> ParameterizedType.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@overwrittentypevariables.ParameterizedType
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@overwrittentypevariables.ParameterizedType)))
+   (then
+    (return (global.get $$class@overwrittentypevariables.ParameterizedType))
+   )
+  )
+  (global.set $$class@overwrittentypevariables.ParameterizedType (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|overwrittent...|__java_lang_String_<once>_@overwrittentypevariables.ParameterizedType )))
+  (return (global.get $$class@overwrittentypevariables.ParameterizedType))
+ )
+)
+
+;;; String ParameterizedType.$getString_|overwrittent...|()
+(func $$getString_|overwrittent...|__java_lang_String_<once>_@overwrittentypevariables.ParameterizedType
+ (result (ref null $java.lang.String))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$string_|overwrittent...|@overwrittentypevariables.ParameterizedType)))
+   (then
+    (return (global.get $$string_|overwrittent...|@overwrittentypevariables.ParameterizedType))
+   )
+  )
+  (global.set $$string_|overwrittent...|@overwrittentypevariables.ParameterizedType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "overwrittentypevariables.ParameterizedType")))
+  (return (global.get $$string_|overwrittent...|@overwrittentypevariables.ParameterizedType))
+ )
+)
+
+;;; Code for overwrittentypevariables.otherpkg.ParameterizedType [methods]
+
+;;; void ParameterizedType.$clinit()
+(func $$clinit__void_<once>_@overwrittentypevariables.otherpkg.ParameterizedType
+ ;;@ overwrittentypevariables/otherpkg/ParameterizedType.java:18:17
+ (block
+  ;;@ overwrittentypevariables/otherpkg/ParameterizedType.java:18:17
+  (if (global.get $$class-initialized@overwrittentypevariables.otherpkg.ParameterizedType)
+   (then
+    ;;@ overwrittentypevariables/otherpkg/ParameterizedType.java:18:17
+    (return )
+   )
+  )
+  ;;@ overwrittentypevariables/otherpkg/ParameterizedType.java:18:17
+  (global.set $$class-initialized@overwrittentypevariables.otherpkg.ParameterizedType (i32.const 1))
+ )
+)
+
+;;; Class<T> ParameterizedType.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@overwrittentypevariables.otherpkg.ParameterizedType
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@overwrittentypevariables.otherpkg.ParameterizedType)))
+   (then
+    (return (global.get $$class@overwrittentypevariables.otherpkg.ParameterizedType))
+   )
+  )
+  (global.set $$class@overwrittentypevariables.otherpkg.ParameterizedType (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|overwrittent...|__java_lang_String_<once>_@overwrittentypevariables.otherpkg.ParameterizedType )))
+  (return (global.get $$class@overwrittentypevariables.otherpkg.ParameterizedType))
+ )
+)
+
+;;; String ParameterizedType.$getString_|overwrittent...|()
+(func $$getString_|overwrittent...|__java_lang_String_<once>_@overwrittentypevariables.otherpkg.ParameterizedType
+ (result (ref null $java.lang.String))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$string_|overwrittent...|@overwrittentypevariables.otherpkg.ParameterizedType)))
+   (then
+    (return (global.get $$string_|overwrittent...|@overwrittentypevariables.otherpkg.ParameterizedType))
+   )
+  )
+  (global.set $$string_|overwrittent...|@overwrittentypevariables.otherpkg.ParameterizedType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "overwrittentypevariables.otherpkg.ParameterizedType")))
+  (return (global.get $$string_|overwrittent...|@overwrittentypevariables.otherpkg.ParameterizedType))
  )
 )
 
@@ -656,5 +856,125 @@
   )
   (global.set $$string_|overwrittent...|@overwrittentypevariables.HashFunctions.2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "overwrittentypevariables.HashFunctions$2")))
   (return (global.get $$string_|overwrittent...|@overwrittentypevariables.HashFunctions.2))
+ )
+)
+
+;;; Code for overwrittentypevariables.ParameterizedTypeImpl [methods]
+
+;;; ParameterizedTypeImpl ParameterizedTypeImpl.$create()
+(func $$create__@overwrittentypevariables.ParameterizedTypeImpl
+ (result (ref null $overwrittentypevariables.ParameterizedTypeImpl))
+ ;;@ overwrittentypevariables/ParameterizedType.java:28:6
+ (local $$instance (ref null $overwrittentypevariables.ParameterizedTypeImpl))
+ (block
+  ;;@ overwrittentypevariables/ParameterizedType.java:28:6
+  (call $$clinit__void_<once>_@overwrittentypevariables.ParameterizedTypeImpl )
+  ;;@ overwrittentypevariables/ParameterizedType.java:28:6
+  (local.set $$instance (struct.new $overwrittentypevariables.ParameterizedTypeImpl (ref.as_non_null (global.get $overwrittentypevariables.ParameterizedTypeImpl.vtable)) (ref.as_non_null (global.get $overwrittentypevariables.ParameterizedTypeImpl.itable)) (i32.const 0)))
+  ;;@ overwrittentypevariables/ParameterizedType.java:28:6
+  (call $$ctor__void_$p_overwrittentypevariables_ParameterizedTypeImpl@overwrittentypevariables.ParameterizedTypeImpl (ref.as_non_null (local.get $$instance)))
+  ;;@ overwrittentypevariables/ParameterizedType.java:28:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void ParameterizedTypeImpl.$ctor()
+(func $$ctor__void_$p_overwrittentypevariables_ParameterizedTypeImpl@overwrittentypevariables.ParameterizedTypeImpl
+ (param $this (ref null $overwrittentypevariables.ParameterizedTypeImpl))
+ ;;@ overwrittentypevariables/ParameterizedType.java:28:6
+ (block
+  ;;@ overwrittentypevariables/ParameterizedType.java:28:6
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; Integer ParameterizedTypeImpl.accept(String value)
+(func $m_accept__java_lang_String__java_lang_Integer@overwrittentypevariables.ParameterizedTypeImpl
+ (type $function.m_accept__java_lang_String__java_lang_Integer)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $value (ref null $java.lang.String))
+ (result (ref null $java.lang.Integer))
+ ;;@ overwrittentypevariables/ParameterizedType.java:30:17
+ (local $this (ref null $overwrittentypevariables.ParameterizedTypeImpl))
+ (local.set $this (ref.cast (ref $overwrittentypevariables.ParameterizedTypeImpl) (local.get $this.untyped)))
+ (block
+  ;;@ overwrittentypevariables/ParameterizedType.java:31:4
+  (return (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1)))
+ )
+)
+(elem declare func $m_accept__java_lang_String__java_lang_Integer@overwrittentypevariables.ParameterizedTypeImpl)
+
+;;; Integer ParameterizedTypeImpl.accept(F arg0)
+(func $m_accept__java_lang_Object__java_lang_Object@overwrittentypevariables.ParameterizedTypeImpl
+ (type $function.m_accept__java_lang_Object__java_lang_Object)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ overwrittentypevariables/ParameterizedType.java:28:6
+ (local $this (ref null $overwrittentypevariables.ParameterizedTypeImpl))
+ (local.set $this (ref.cast (ref $overwrittentypevariables.ParameterizedTypeImpl) (local.get $this.untyped)))
+ (block
+  ;;@ overwrittentypevariables/ParameterizedType.java:28:6
+  (return (call_ref $function.m_accept__java_lang_String__java_lang_Integer (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0))(struct.get $overwrittentypevariables.ParameterizedTypeImpl.vtable $m_accept__java_lang_String__java_lang_Integer (struct.get $overwrittentypevariables.ParameterizedTypeImpl $vtable(local.get $this)))))
+ )
+)
+(elem declare func $m_accept__java_lang_Object__java_lang_Object@overwrittentypevariables.ParameterizedTypeImpl)
+
+;;; void ParameterizedTypeImpl.$clinit()
+(func $$clinit__void_<once>_@overwrittentypevariables.ParameterizedTypeImpl
+ ;;@ overwrittentypevariables/ParameterizedType.java:28:6
+ (block
+  ;;@ overwrittentypevariables/ParameterizedType.java:28:6
+  (if (global.get $$class-initialized@overwrittentypevariables.ParameterizedTypeImpl)
+   (then
+    ;;@ overwrittentypevariables/ParameterizedType.java:28:6
+    (return )
+   )
+  )
+  ;;@ overwrittentypevariables/ParameterizedType.java:28:6
+  (global.set $$class-initialized@overwrittentypevariables.ParameterizedTypeImpl (i32.const 1))
+  ;;@ overwrittentypevariables/ParameterizedType.java:28:6
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> ParameterizedTypeImpl.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@overwrittentypevariables.ParameterizedTypeImpl
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@overwrittentypevariables.ParameterizedTypeImpl)))
+   (then
+    (return (global.get $$class@overwrittentypevariables.ParameterizedTypeImpl))
+   )
+  )
+  (global.set $$class@overwrittentypevariables.ParameterizedTypeImpl (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|overwrittent...|__java_lang_String_<once>_@overwrittentypevariables.ParameterizedTypeImpl )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@overwrittentypevariables.ParameterizedTypeImpl))
+ )
+)
+
+;;; Class<?> ParameterizedTypeImpl.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@overwrittentypevariables.ParameterizedTypeImpl
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $overwrittentypevariables.ParameterizedTypeImpl))
+ (local.set $this (ref.cast (ref $overwrittentypevariables.ParameterizedTypeImpl) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@overwrittentypevariables.ParameterizedTypeImpl ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@overwrittentypevariables.ParameterizedTypeImpl)
+
+;;; String ParameterizedTypeImpl.$getString_|overwrittent...|()
+(func $$getString_|overwrittent...|__java_lang_String_<once>_@overwrittentypevariables.ParameterizedTypeImpl
+ (result (ref null $java.lang.String))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$string_|overwrittent...|@overwrittentypevariables.ParameterizedTypeImpl)))
+   (then
+    (return (global.get $$string_|overwrittent...|@overwrittentypevariables.ParameterizedTypeImpl))
+   )
+  )
+  (global.set $$string_|overwrittent...|@overwrittentypevariables.ParameterizedTypeImpl (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "overwrittentypevariables.ParameterizedTypeImpl")))
+  (return (global.get $$string_|overwrittent...|@overwrittentypevariables.ParameterizedTypeImpl))
  )
 )

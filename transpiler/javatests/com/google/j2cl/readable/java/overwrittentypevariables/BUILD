@@ -9,5 +9,8 @@ package(
 )
 
 readable_example(
-    srcs = glob(["*.java"]),
+    srcs = glob([
+        "*.java",
+        "otherpkg/*.java",
+    ]),
 )
