@@ -102,7 +102,7 @@ public class InnerClassCapture {
     failedInCtor = false;
     Outer.InnerExtendsJsConstructor innerJsConstructor = outer.new InnerExtendsJsConstructor();
 
-    if (TestUtils.isJvm() || TestUtils.isJ2Kt()) {
+    if (TestUtils.isJvm() || TestUtils.isJ2Kt() || TestUtils.isWasm()) {
       assertFalse(failedInCtor);
       assertEquals(6, innerJsConstructor.getEnclosingValue());
     } else {

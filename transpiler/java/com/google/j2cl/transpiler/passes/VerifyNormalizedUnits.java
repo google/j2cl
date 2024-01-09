@@ -83,7 +83,7 @@ public class VerifyNormalizedUnits extends NormalizationPass {
 
           @Override
           public void exitMethod(Method method) {
-            verifyMemberUniqueness(method);
+            checkMember(method);
             // All native methods should be empty.
             checkState(!method.isNative() || method.getBody().getStatements().isEmpty());
             // Concrete types shouldn't have abstract methods
@@ -95,7 +95,7 @@ public class VerifyNormalizedUnits extends NormalizationPass {
 
           @Override
           public void exitField(Field field) {
-            verifyMemberUniqueness(field);
+            checkMember(field);
             if (verifyForWasm) {
               // This is only running for Wasm due to the transformations in Closure that result in
               // primitive long initializers to be method calls to the runtime.
@@ -108,6 +108,20 @@ public class VerifyNormalizedUnits extends NormalizationPass {
             }
             // Non-native enum fields have a non negative ordinal.
             checkState(field.isNative() || !field.isEnumField() || field.getEnumOrdinal() >= 0);
+          }
+
+          public void checkMember(Member member) {
+            verifyMemberUniqueness(member);
+            if (verifyForWasm) {
+              boolean isNative =
+                  member.isNative()
+                      // TODO(b/264676817): Consider refactoring to have MethodDescriptor.isNative
+                      // return true for native constructors, or exposing isNativeConstructor from
+                      // MethodDescriptor.
+                      || (member.isConstructor()
+                          && member.getDescriptor().getEnclosingTypeDescriptor().isNative());
+              checkState(isNative || !member.getDescriptor().isJsMember());
+            }
           }
 
           private final Map<String, MemberDescriptor> instanceMembersByMangledName =

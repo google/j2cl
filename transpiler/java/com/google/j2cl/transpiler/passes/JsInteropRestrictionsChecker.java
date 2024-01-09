@@ -1767,6 +1767,10 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkMethodParameters(Method method) {
+    if (checkWasmRestrictions) {
+      // TODO(b/317164851): Reconsider when all the .setIgnoreXXXX is rethought.
+      return;
+    }
     // TODO(rluble): When overriding is included in the AST representation, add the relevant checks,
     // i.e. that a parameter can not change from optional into non optional in an override.
     boolean hasOptionalParameters = false;

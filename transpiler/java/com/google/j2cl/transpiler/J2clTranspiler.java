@@ -18,6 +18,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.Uninterruptibles;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
@@ -75,6 +76,9 @@ class J2clTranspiler {
         // TODO(b/181615162): Remove hack that makes it possible to ignore JsEnum in Wasm.
         TypeDeclaration.setIgnoreJsEnumAnnotations();
       }
+      // TODO(b/317164851): Remove hack that makes jsinfo ignored for non-native types in Wasm.
+      FieldDescriptor.setIgnoreNonNativeJsInfo();
+      MethodDescriptor.setIgnoreNonNativeJsInfo();
       // TODO(b/178738483): Remove hack that makes it possible to ignore DoNotAutobox in Wasm.
       MethodDescriptor.ParameterDescriptor.setIgnoreDoNotAutoboxAnnotations();
     }

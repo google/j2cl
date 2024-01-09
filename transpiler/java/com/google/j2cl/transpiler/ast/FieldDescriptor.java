@@ -30,6 +30,14 @@ import javax.annotation.Nullable;
 @AutoValue
 public abstract class FieldDescriptor extends MemberDescriptor {
 
+  // TODO(b/317164851): Remove hack that makes jsinfo ignored for non-native types in Wasm.
+  private static final ThreadLocal<Boolean> ignoreNonNativeJsInfo =
+      ThreadLocal.withInitial(() -> false);
+
+  public static void setIgnoreNonNativeJsInfo() {
+    ignoreNonNativeJsInfo.set(true);
+  }
+
   public abstract TypeDescriptor getTypeDescriptor();
 
   @Override
@@ -271,11 +279,19 @@ public abstract class FieldDescriptor extends MemberDescriptor {
 
     abstract boolean isCompileTimeConstant();
 
+    abstract DeclaredTypeDescriptor getEnclosingTypeDescriptor();
+
     abstract FieldDescriptor autoBuild();
 
     public FieldDescriptor build() {
       checkState(getName().isPresent());
       checkState(getConstantValue() == null || isCompileTimeConstant());
+
+      boolean isNative = getEnclosingTypeDescriptor().isNative();
+      if (!isNative && ignoreNonNativeJsInfo.get()) {
+        setOriginalJsInfo(JsInfo.NONE);
+      }
+
       FieldDescriptor fieldDescriptor = autoBuild();
 
       return interner.intern(fieldDescriptor);

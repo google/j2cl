@@ -185,6 +185,14 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     }
   }
 
+  // TODO(b/317164851): Remove hack that makes jsinfo ignored for non-native types in Wasm.
+  private static final ThreadLocal<Boolean> ignoreNonNativeJsInfo =
+      ThreadLocal.withInitial(() -> false);
+
+  public static void setIgnoreNonNativeJsInfo() {
+    ignoreNonNativeJsInfo.set(true);
+  }
+
   public static final String CONSTRUCTOR_METHOD_NAME = "<init>";
   public static final String CTOR_METHOD_PREFIX = "$ctor";
   public static final String CREATE_METHOD_NAME = "$create";
@@ -1355,12 +1363,19 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     abstract boolean isConstructor();
 
+    abstract boolean isNative();
+
     abstract MethodDescriptor autoBuild();
 
     public MethodDescriptor build() {
       if (isConstructor()) {
         setReturnTypeDescriptor(getEnclosingTypeDescriptor().toNonNullable());
         setName(CONSTRUCTOR_METHOD_NAME);
+      }
+
+      boolean isNative = isNative() || getEnclosingTypeDescriptor().isNative();
+      if (!isNative && ignoreNonNativeJsInfo.get()) {
+        setOriginalJsInfo(JsInfo.NONE);
       }
 
       MethodDescriptor methodDescriptor = autoBuild();
