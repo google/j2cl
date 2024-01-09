@@ -35,6 +35,7 @@
  (local $x i32)
  (local $$qualifier (ref null $java.lang.String))
  (local $$qualifier_1 (ref null $java.lang.String))
+ (local $$qualifier_2 (ref null $java.lang.String))
  (block
   ;;@ systemgetproperty/Main.java:24:41
   (call $$clinit__void_<once>_@systemgetproperty.Main )
@@ -60,15 +61,20 @@
    (local.set $$qualifier_1 (nop (call $$getString_|jre.classMet...|__java_lang_String_<once>_@systemgetproperty.Main )(call $m_mightHaveSideEffects__java_lang_String@systemgetproperty.Main )))
    (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $$qualifier_1))(call $$getString_|SIMPLE|__java_lang_String_<once>_@systemgetproperty.Main )(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(local.get $$qualifier_1))))
   ))
+  ;;@ systemgetproperty/Main.java:34:4
+  (local.set $x (block (result i32)
+   (local.set $$qualifier_2 (nop (call $$getString_|unset.property|__java_lang_String_<once>_@systemgetproperty.Main )(call $m_mightHaveSideEffects__java_lang_String@systemgetproperty.Main )))
+   (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $$qualifier_2))(call $$getString_|foo|__java_lang_String_<once>_@systemgetproperty.Main )(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(local.get $$qualifier_2))))
+  ))
  )
 )
 
 ;;; String Main.mightHaveSideEffects()
 (func $m_mightHaveSideEffects__java_lang_String@systemgetproperty.Main
  (result (ref null $java.lang.String))
- ;;@ systemgetproperty/Main.java:36:24
+ ;;@ systemgetproperty/Main.java:37:24
  (block
-  ;;@ systemgetproperty/Main.java:37:4
+  ;;@ systemgetproperty/Main.java:38:4
   (return (call $$getString_|Foo|__java_lang_String_<once>_@systemgetproperty.Main ))
  )
 )

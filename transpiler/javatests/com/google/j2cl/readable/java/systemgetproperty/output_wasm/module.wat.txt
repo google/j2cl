@@ -38,6 +38,9 @@
 (global $$string_|SIMPLE|@systemgetproperty.Main (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
+(global $$string_|foo|@systemgetproperty.Main (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
 (global $$string_|Foo|@systemgetproperty.Main (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
@@ -81,6 +84,7 @@
  (local $x i32)
  (local $$qualifier (ref null $java.lang.String))
  (local $$qualifier_1 (ref null $java.lang.String))
+ (local $$qualifier_2 (ref null $java.lang.String))
  (block
   ;;@ systemgetproperty/Main.java:24:41
   (call $$clinit__void_<once>_@systemgetproperty.Main )
@@ -109,15 +113,20 @@
    ))
    (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $$qualifier_1))(call $$getString_|SIMPLE|__java_lang_String_<once>_@systemgetproperty.Main )(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(local.get $$qualifier_1))))
   ))
+  ;;@ systemgetproperty/Main.java:34:4
+  (local.set $x (block (result i32)
+   (local.set $$qualifier_2 (call $m_mightHaveSideEffects__java_lang_String@systemgetproperty.Main ))
+   (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $$qualifier_2))(call $$getString_|foo|__java_lang_String_<once>_@systemgetproperty.Main )(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(local.get $$qualifier_2))))
+  ))
  )
 )
 
 ;;; String Main.mightHaveSideEffects()
 (func $m_mightHaveSideEffects__java_lang_String@systemgetproperty.Main
  (result (ref null $java.lang.String))
- ;;@ systemgetproperty/Main.java:36:24
+ ;;@ systemgetproperty/Main.java:37:24
  (block
-  ;;@ systemgetproperty/Main.java:37:4
+  ;;@ systemgetproperty/Main.java:38:4
   (return (call $$getString_|Foo|__java_lang_String_<once>_@systemgetproperty.Main ))
  )
 )
@@ -192,6 +201,20 @@
   )
   (global.set $$string_|SIMPLE|@systemgetproperty.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "SIMPLE")))
   (return (global.get $$string_|SIMPLE|@systemgetproperty.Main))
+ )
+)
+
+;;; String Main.$getString_|foo|()
+(func $$getString_|foo|__java_lang_String_<once>_@systemgetproperty.Main
+ (result (ref null $java.lang.String))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$string_|foo|@systemgetproperty.Main)))
+   (then
+    (return (global.get $$string_|foo|@systemgetproperty.Main))
+   )
+  )
+  (global.set $$string_|foo|@systemgetproperty.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "foo")))
+  (return (global.get $$string_|foo|@systemgetproperty.Main))
  )
 )
 

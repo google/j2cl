@@ -53,6 +53,7 @@ open class Main {
    x = Main.propertyWithDefault_private_2!!.equals("SIMPLE")
    x = System.getProperty("jre.bar", "bar")!!.equals("bar")
    x = System.getProperty("jre.classMetadata", Main.mightHaveSideEffects_private_2())!!.equals("SIMPLE")
+   x = System.getProperty("unset.property", Main.mightHaveSideEffects_private_2())!!.equals("foo")
   }
 
   @JvmStatic

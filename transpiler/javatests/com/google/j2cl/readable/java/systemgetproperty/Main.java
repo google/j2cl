@@ -31,6 +31,7 @@ public class Main {
     x = propertyWithDefault.equals("SIMPLE");
     x = System.getProperty("jre.bar", "bar").equals("bar");
     x = System.getProperty("jre.classMetadata", mightHaveSideEffects()).equals("SIMPLE");
+    x = System.getProperty("unset.property", mightHaveSideEffects()).equals("foo");
   }
 
   private static String mightHaveSideEffects() {
