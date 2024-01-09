@@ -230,7 +230,7 @@ def main(argv):
     return -1
 
   print("Generating readable and build logs:")
-  if not args.nologs:
+  if not args.nologs and (js_readable_dirs or j2kt_web_readable_dirs):
     print("  Cleaning stale blaze outputs")
     blaze_clean()
 
