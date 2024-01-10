@@ -42,9 +42,9 @@ public class Varargs {
 
   public void testLambda(FunctionalInterface functionalInterface) {}
 
-  public static <T> void fun(T... elements) {}
+  public static <T extends Number> void fun(T... elements) {}
 
-  public static <E> void bar(E a, E b) {
+  public static <E extends Number> void bar(E a, E b) {
     fun(a, b);
   }
 

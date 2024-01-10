@@ -368,35 +368,35 @@
 (elem declare func $m_testLambda__varargs_Varargs_FunctionalInterface__void@varargs.Varargs)
 
 ;;; void Varargs.fun(T... arg0)
-(func $m_fun__arrayOf_java_lang_Object__void@varargs.Varargs
+(func $m_fun__arrayOf_java_lang_Number__void@varargs.Varargs
  (param $arg0 (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ varargs/Varargs.java:45:25
+ ;;@ varargs/Varargs.java:45:40
  (block
-  ;;@ varargs/Varargs.java:45:25
+  ;;@ varargs/Varargs.java:45:40
   (call $$clinit__void_<once>_@varargs.Varargs )
-  ;;@ varargs/Varargs.java:45:25
-  (call $m_fun_$private__arrayOf_java_lang_Object__void@varargs.Varargs (local.get $arg0))
+  ;;@ varargs/Varargs.java:45:40
+  (call $m_fun_$private__arrayOf_java_lang_Number__void@varargs.Varargs (local.get $arg0))
  )
 )
 
 ;;; void Varargs.fun_$private(T... elements)
-(func $m_fun_$private__arrayOf_java_lang_Object__void@varargs.Varargs
+(func $m_fun_$private__arrayOf_java_lang_Number__void@varargs.Varargs
  (param $elements (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ varargs/Varargs.java:45:25
+ ;;@ varargs/Varargs.java:45:40
  (block
  )
 )
 
 ;;; void Varargs.bar(E a, E b)
-(func $m_bar__java_lang_Object__java_lang_Object__void@varargs.Varargs
- (param $a (ref null $java.lang.Object))
- (param $b (ref null $java.lang.Object))
- ;;@ varargs/Varargs.java:47:25
+(func $m_bar__java_lang_Number__java_lang_Number__void@varargs.Varargs
+ (param $a (ref null $java.lang.Number))
+ (param $b (ref null $java.lang.Number))
+ ;;@ varargs/Varargs.java:47:40
  (block
-  ;;@ varargs/Varargs.java:47:39
+  ;;@ varargs/Varargs.java:47:54
   (call $$clinit__void_<once>_@varargs.Varargs )
   ;;@ varargs/Varargs.java:48:4
-  (call $m_fun_$private__arrayOf_java_lang_Object__void@varargs.Varargs (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array (local.get $a)(local.get $b))))
+  (call $m_fun_$private__arrayOf_java_lang_Number__void@varargs.Varargs (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array (local.get $a)(local.get $b))))
  )
 )
 

@@ -24,6 +24,7 @@ import kotlin.Any
 import kotlin.Array
 import kotlin.Cloneable
 import kotlin.Int
+import kotlin.Number
 import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
@@ -98,17 +99,17 @@ open class Varargs {
  companion object {
   @JvmStatic
   @ObjCName("fun")
-  fun <T> `fun`(
-   vararg @ObjCName("withNSObjectArray") elements: T
+  fun <T: Number?> `fun`(
+   vararg @ObjCName("withNSNumberArray") elements: T
   ) {
    val elements_1: Array<T>? = elements as Array<T>?
   }
 
   @JvmStatic
   @ObjCName("bar")
-  fun <E> bar(
-   @ObjCName("withId") a: E,
-   @ObjCName("withId") b: E
+  fun <E: Number?> bar(
+   @ObjCName("withNSNumber") a: E,
+   @ObjCName("withNSNumber") b: E
   ) {
    Varargs.`fun`<E>(a, b)
   }
