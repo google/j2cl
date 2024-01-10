@@ -63,4 +63,13 @@ public class ThrowableTest extends TestCase {
     assertEquals("TestClass.testMethod(fakefile:10)", trace[0].toString());
     assertEquals("TestClass.testCaller(fakefile2:97)", trace[1].toString());
   }
+
+  public void testExceptionToString() {
+    Throwable inner = new RuntimeException("inner");
+    assertEquals("outer", new RuntimeException("outer", inner).getMessage());
+
+    // Prefixed with the class name, but is obfuscated for j2wasm, so we just check for the
+    // ":" after the class name before the inner message.
+    assertTrue(new RuntimeException(inner).getMessage().endsWith(": inner"));
+  }
 }
