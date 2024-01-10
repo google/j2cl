@@ -15,10 +15,7 @@
  */
 package javapkg;
 
-// TODO(b/289049603): Kotlin compiler crashes with
-// "Companion object javapkg.PackageWithJavaPrefix$Companion cannot be interpreted" message.
-// However, it's already fixed in 1.9.20.
-// Move this file to "j2kt" when 1.9.20 toolchain is available for JVM and Native.
+// Checks that b/289049603 is fixed.
 public class PackageWithJavaPrefix {
   public static final int VALUE = 128;
 
