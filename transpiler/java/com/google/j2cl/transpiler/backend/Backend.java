@@ -120,6 +120,7 @@ import com.google.j2cl.transpiler.passes.NormalizeJsFunctionPropertyInvocations;
 import com.google.j2cl.transpiler.passes.NormalizeJsVarargs;
 import com.google.j2cl.transpiler.passes.NormalizeLabeledStatements;
 import com.google.j2cl.transpiler.passes.NormalizeLabels;
+import com.google.j2cl.transpiler.passes.NormalizeLambdaExpressionsJ2kt;
 import com.google.j2cl.transpiler.passes.NormalizeLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeLongs;
 import com.google.j2cl.transpiler.passes.NormalizeMethodParametersJ2kt;
@@ -670,6 +671,7 @@ public enum Backend {
           VerifyReferenceScoping::new,
 
           // Normalizations
+          NormalizeLambdaExpressionsJ2kt::new,
           AddDisambiguatingSuperMethodForwardingStubs::new,
           AddVisibilityMethodBridgesJ2kt::new,
           NormalizeSynchronizedMethods::new,

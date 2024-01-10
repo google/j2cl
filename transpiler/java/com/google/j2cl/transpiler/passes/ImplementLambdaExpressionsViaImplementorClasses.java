@@ -49,6 +49,10 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
 
   private int lambdaCounterPerCompilationUnit = 1;
 
+  protected boolean shouldRewrite(FunctionExpression functionExpression) {
+    return true;
+  }
+
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     // (1) Replace each functional expression with an instantiation of the corresponding lambda
@@ -57,6 +61,10 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
         new AbstractRewriter() {
           @Override
           public Node rewriteFunctionExpression(FunctionExpression functionExpression) {
+            if (!shouldRewrite(functionExpression)) {
+              return functionExpression;
+            }
+
             DeclaredTypeDescriptor enclosingTypeDescriptor = getCurrentType().getTypeDescriptor();
 
             // Normalize the super method calls inside the function expression to target the

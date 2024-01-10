@@ -83,7 +83,6 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.NOT_EQUAL_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.NOT_NULL_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.NOT_SAME_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.NULL_KEYWORD
-import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.OBJECT_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.OR_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.PLUS_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.REMAINDER_OPERATOR
@@ -290,15 +289,8 @@ internal data class ExpressionRenderer(
   private fun fieldAccessSource(fieldAccess: FieldAccess): Source =
     dotSeparated(qualifierSource(fieldAccess), identifierSource(fieldAccess.target.ktMangledName))
 
-  private val FunctionExpression.renderAsLambda: Boolean
-    get() = typeDescriptor.functionalInterface!!.typeDeclaration.isKtFunctionalInterface
-
   private fun functionExpressionSource(functionExpression: FunctionExpression): Source =
-    if (functionExpression.renderAsLambda) {
-      functionExpressionLambdaSource(functionExpression)
-    } else {
-      functionExpressionObjectSource(functionExpression)
-    }
+    functionExpressionLambdaSource(functionExpression)
 
   private fun functionExpressionLambdaSource(functionExpression: FunctionExpression): Source =
     spaceSeparated(
@@ -314,24 +306,6 @@ internal data class ExpressionRenderer(
             .typeDeclaration
             .returnLabelIdentifier
       )
-      .statementsSource(functionExpression.body.statements)
-
-  private fun functionExpressionObjectSource(functionExpression: FunctionExpression): Source =
-    spaceSeparated(
-      OBJECT_KEYWORD,
-      COLON,
-      newInstanceTypeDescriptorSource(functionExpression.typeDescriptor.functionalInterface!!),
-      block(
-        spaceSeparated(
-          memberRenderer.methodHeaderSource(functionExpression),
-          block(objectBodySource(functionExpression))
-        )
-      )
-    )
-
-  private fun objectBodySource(functionExpression: FunctionExpression): Source =
-    statementRenderer
-      .copy(renderThisReferenceWithLabel = true)
       .statementsSource(functionExpression.body.statements)
 
   private fun parametersSource(functionExpression: FunctionExpression): Source =
@@ -619,7 +593,9 @@ internal data class ExpressionRenderer(
     )
 
   private fun needsQualifier(thisReference: ThisReference): Boolean =
-    renderThisReferenceWithLabel || thisReference.isQualified
+    renderThisReferenceWithLabel ||
+      thisReference.isQualified ||
+      !thisReference.typeDescriptor.isSameBaseType(enclosingType.typeDescriptor)
 
   private fun labelReferenceSource(typeDescriptor: DeclaredTypeDescriptor): Source =
     at(identifierSource(typeDescriptor.typeDeclaration.ktSimpleName))
