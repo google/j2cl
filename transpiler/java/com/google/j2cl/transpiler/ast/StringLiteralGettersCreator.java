@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.ast;
 import com.google.common.base.Ascii;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,6 +36,7 @@ public class StringLiteralGettersCreator {
    * Returns the descriptor for the getter of {@code stringLiteral}, creating it if it did not
    * exist.
    */
+  @CanIgnoreReturnValue
   public MethodDescriptor getOrCreateLiteralMethod(
       Type type, StringLiteral stringLiteral, boolean synthesizeMethod) {
     String value = stringLiteral.getValue();

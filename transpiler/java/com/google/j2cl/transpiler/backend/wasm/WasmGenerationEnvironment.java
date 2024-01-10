@@ -56,7 +56,7 @@ import java.util.function.Function;
 import javax.annotation.Nullable;
 
 /** Allows mapping of middle end constructors to the backend. */
-class WasmGenerationEnvironment {
+public class WasmGenerationEnvironment {
 
   private static final ImmutableMap<PrimitiveTypeDescriptor, String> WASM_TYPES_BY_PRIMITIVE_TYPES =
       ImmutableMap.<PrimitiveTypeDescriptor, String>builder()
@@ -252,7 +252,7 @@ class WasmGenerationEnvironment {
    * <p>Note that these names need to be globally unique and are different than the names of the
    * slots in the vtable which maps nicely to our concept of mangled names.
    */
-  String getMethodImplementationName(MethodDescriptor methodDescriptor) {
+  public String getMethodImplementationName(MethodDescriptor methodDescriptor) {
     methodDescriptor = methodDescriptor.getDeclarationDescriptor();
     return "$"
         // TODO(b/315893220): Improve method names to avoid repetition of the enclosing type.

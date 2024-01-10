@@ -23,6 +23,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Streams;
 import com.google.common.io.Files;
 import com.google.j2cl.common.Problems;
@@ -30,18 +31,20 @@ import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.bazel.BazelWorker;
 import com.google.j2cl.common.bazel.FileCache;
+import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Method;
-import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.StringLiteralGettersCreator;
+import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.backend.wasm.SharedWasmSnippet;
+import com.google.j2cl.transpiler.backend.wasm.StringLiteralInfo;
 import com.google.j2cl.transpiler.backend.wasm.Summary;
 import com.google.j2cl.transpiler.backend.wasm.TypeInfo;
 import com.google.j2cl.transpiler.backend.wasm.WasmConstructsGenerator;
@@ -55,6 +58,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -64,6 +68,7 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.Option;
+import org.kohsuke.args4j.spi.MapOptionHandler;
 
 /** Runs The J2wasmBundler as a worker. */
 final class BazelJ2wasmBundler extends BazelWorker {
@@ -94,6 +99,9 @@ final class BazelJ2wasmBundler extends BazelWorker {
       usage = "Specifies where to find all the class files for the application.")
   String classPath;
 
+  @Option(name = "-define", handler = MapOptionHandler.class, hidden = true)
+  Map<String, String> defines = new HashMap<>();
+
   @Override
   protected void run(Problems problems) {
     createBundle(problems);
@@ -110,18 +118,18 @@ final class BazelJ2wasmBundler extends BazelWorker {
     new JdtEnvironment(
         new JdtParser(classPathEntries, problems), TypeDescriptors.getWellKnownTypeNames());
 
-    // Synthesize globals and methods for string literals.
-    var stringLiteralsCompilationUnit = synthesizeStringLiteralGetters();
+    var referencedPropertyKeys =
+        getSummaries()
+            .flatMap(s -> s.getPropertyKeysList().stream())
+            .collect(ImmutableSet.toImmutableSet());
 
-    var library =
-        Library.newBuilder()
-            .setCompilationUnits(ImmutableList.of(stringLiteralsCompilationUnit))
-            .build();
+    // Synthesize globals and methods for string literals.
+    synthesizeStringLiteralGetters(referencedPropertyKeys);
 
     var generatorStage = new WasmGeneratorStage(library, problems);
 
     Stream<String> literalGetterMethods =
-        stringLiteralsCompilationUnit.getTypes().stream()
+        compilationUnit.getTypes().stream()
             .flatMap(t -> t.getMethods().stream())
             .map(m -> generatorStage.emitToString(g -> g.renderMethod(m)));
 
@@ -159,9 +167,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
         .stream();
   }
 
-  private CompilationUnit synthesizeStringLiteralGetters() {
-
-    var compilationUnit = CompilationUnit.createSynthetic("wasm.stringliterals");
+  private void synthesizeStringLiteralGetters(Set<String> referencedPropertyKeys) {
 
     var stringLiteralHolder =
         new com.google.j2cl.transpiler.ast.Type(
@@ -173,42 +179,61 @@ final class BazelJ2wasmBundler extends BazelWorker {
                 .build());
 
     var stringLiteralGetterCreator = new StringLiteralGettersCreator();
-    Map<TypeDeclaration, com.google.j2cl.transpiler.ast.Type> typesByDeclaration =
-        new LinkedHashMap<>();
+
+    // Synthesize the getters and forwarding methods for the string literals in the code.
     getSummaries()
         .flatMap(s -> s.getStringLiteralsList().stream())
         .forEach(
             s -> {
               // Get descriptor for the getter and synthesize the method logic if it is the
               // first time it was found.
-              MethodDescriptor m =
-                  stringLiteralGetterCreator.getOrCreateLiteralMethod(
-                      stringLiteralHolder,
-                      new StringLiteral(s.getContent()),
-                      /* synthesizeMethod= */ true);
-
-              // Synthesize the forwarding logic.
-              String qualifiedBinaryName = s.getEnclosingTypeName();
-              TypeDeclaration typeDeclaration =
-                  TypeDeclaration.newBuilder()
-                      .setClassComponents(Arrays.asList(qualifiedBinaryName.split("\\.")))
-                      .setKind(Kind.CLASS)
-                      .build();
-              var type =
-                  typesByDeclaration.computeIfAbsent(
-                      typeDeclaration,
-                      t -> {
-                        var newType =
-                            new com.google.j2cl.transpiler.ast.Type(SourcePosition.NONE, t);
-                        compilationUnit.addType(newType);
-                        return newType;
-                      });
-
-              Method forwarderMethod =
-                  synthesizeForwardingMethod(m, typeDeclaration, s.getMethodName());
-              type.addMember(forwarderMethod);
+              synthesizeStringLiteralGetter(stringLiteralHolder, stringLiteralGetterCreator, s);
             });
-    return compilationUnit;
+
+    // Synthesize the getters and forwarding methods for the string literals that are values of
+    // system properties.
+    referencedPropertyKeys.forEach(
+        pk -> {
+          var value = defines.get(pk);
+          MethodDescriptor systemGetPropertyGetter = AstUtils.getSystemGetPropertyGetter(pk);
+          if (value == null) {
+            // Synthesize a getter that returns null.
+            synthesizeAbsentPropertyMethod(systemGetPropertyGetter);
+          } else {
+            synthesizeStringLiteralGetter(
+                stringLiteralHolder,
+                stringLiteralGetterCreator,
+                StringLiteralInfo.newBuilder()
+                    .setContent(value)
+                    .setMethodName(systemGetPropertyGetter.getName())
+                    .setEnclosingTypeName(
+                        systemGetPropertyGetter
+                            .getEnclosingTypeDescriptor()
+                            .getQualifiedSourceName())
+                    .build());
+          }
+        });
+  }
+
+  private void synthesizeStringLiteralGetter(
+      Type stringLiteralHolder,
+      StringLiteralGettersCreator stringLiteralGetterCreator,
+      StringLiteralInfo s) {
+    MethodDescriptor m =
+        stringLiteralGetterCreator.getOrCreateLiteralMethod(
+            stringLiteralHolder, new StringLiteral(s.getContent()), /* synthesizeMethod= */ true);
+
+    // Synthesize the forwarding logic.
+    String qualifiedBinaryTypeName = s.getEnclosingTypeName();
+    TypeDeclaration typeDeclaration =
+        TypeDeclaration.newBuilder()
+            .setClassComponents(Arrays.asList(qualifiedBinaryTypeName.split("\\.")))
+            .setKind(Kind.CLASS)
+            .build();
+    Type type = getType(typeDeclaration);
+
+    Method forwarderMethod = synthesizeForwardingMethod(m, typeDeclaration, s.getMethodName());
+    type.addMember(forwarderMethod);
   }
 
   private static Method synthesizeForwardingMethod(
@@ -220,15 +245,50 @@ final class BazelJ2wasmBundler extends BazelWorker {
             .setStatic(true)
             .setReturnTypeDescriptor(TypeDescriptors.get().javaLangString)
             .build();
-    return Method.newBuilder()
-        .setMethodDescriptor(forwarderDescriptor)
-        .setStatements(
-            ReturnStatement.newBuilder()
-                .setExpression(MethodCall.Builder.from(literalGetter).build())
-                .setSourcePosition(SourcePosition.NONE)
-                .build())
-        .setSourcePosition(SourcePosition.NONE)
-        .build();
+    return AstUtils.createForwardingMethod(
+        SourcePosition.NONE,
+        null,
+        forwarderDescriptor,
+        literalGetter,
+        /* jsDocDescription= */ null);
+  }
+
+  /** Synthesizes a method that returns null to implement absent properties. */
+  private void synthesizeAbsentPropertyMethod(MethodDescriptor propertyGetter) {
+    var typeDeclaration = propertyGetter.getEnclosingTypeDescriptor().getTypeDeclaration();
+    Type type = getType(typeDeclaration);
+    type.addMember(
+        Method.newBuilder()
+            .setMethodDescriptor(propertyGetter)
+            .setSourcePosition(SourcePosition.NONE)
+            .setStatements(
+                ReturnStatement.newBuilder()
+                    .setExpression(TypeDescriptors.get().javaLangString.getNullValue())
+                    .setSourcePosition(SourcePosition.NONE)
+                    .build())
+            .build());
+  }
+
+  /** Synthetic compilation unit for all types synthesized at bundling time. */
+  private CompilationUnit compilationUnit = CompilationUnit.createSynthetic("j2wasm-bundler");
+
+  /** Synthetic library all types synthesized at bundling time. */
+  private Library library =
+      Library.newBuilder().setCompilationUnits(ImmutableList.of(compilationUnit)).build();
+
+  private Map<TypeDeclaration, com.google.j2cl.transpiler.ast.Type> typesByDeclaration =
+      new LinkedHashMap<>();
+
+  private Type getType(TypeDeclaration typeDeclaration) {
+    var type =
+        typesByDeclaration.computeIfAbsent(
+            typeDeclaration,
+            t -> {
+              var newType = new Type(SourcePosition.NONE, t);
+              compilationUnit.addType(newType);
+              return newType;
+            });
+    return type;
   }
 
   /** Represents the inheritance structure of the whole application. */

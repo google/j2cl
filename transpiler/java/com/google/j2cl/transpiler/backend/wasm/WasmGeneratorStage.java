@@ -66,6 +66,10 @@ public class WasmGeneratorStage {
     this.problems = problems;
   }
 
+  public WasmGenerationEnvironment getEnvironment() {
+    return environment;
+  }
+
   public static void generateModularOutput(
       Library library, Output output, Path libraryInfoOutputPath, Problems problems) {
     new WasmGeneratorStage(output, libraryInfoOutputPath, problems).generateModularOutput(library);

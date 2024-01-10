@@ -28,6 +28,7 @@ import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.FieldDescriptor.FieldOrigin;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
+import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -1104,6 +1105,32 @@ public final class AstUtils {
     } else {
       return (DeclaredTypeDescriptor) valueTypeDescriptor;
     }
+  }
+
+  /** Return the static field that will hold the value for a system property. */
+  public static MethodDescriptor getSystemGetPropertyGetter(String systemPropertyString) {
+    return MethodDescriptor.newBuilder()
+        .setEnclosingTypeDescriptor(getSystemPropertyHolder().toUnparameterizedTypeDescriptor())
+        // TODO(rluble): Sanitize the system property string.
+        .setName(systemPropertyString)
+        .setReturnTypeDescriptor(TypeDescriptors.get().javaLangString)
+        .setStatic(true)
+        .setSynthetic(true)
+        .setVisibility(Visibility.PRIVATE)
+        .build();
+  }
+
+  /** Return the type descriptor for the holder of system properties. */
+  public static TypeDeclaration getSystemPropertyHolder() {
+    return TypeDeclaration.newBuilder()
+        .setClassComponents(ImmutableList.of("javaemul.internal.SystemPropertyPool"))
+        .setKind(Kind.INTERFACE)
+        .build();
+  }
+
+  /** Returns true if {@code methodCall} is a call to {@link System#getProperty}. */
+  public static boolean isSystemGetPropertyCall(MethodCall methodCall) {
+    return "java.lang.System.getProperty".equals(methodCall.getTarget().getQualifiedBinaryName());
   }
 
   /**

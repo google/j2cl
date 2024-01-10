@@ -121,6 +121,7 @@ def _impl_j2wasm_application(ctx):
     bundler_args = ctx.actions.args()
     bundler_args.add_all(all_modules, expand_directories = False)
     bundler_args.add_joined("-classpath", jre_jars, join_with = ctx.configuration.host_path_separator)
+    bundler_args.add_all(ctx.attr.defines, before_each = "-define")
     bundler_args.add("-output", ctx.outputs.bundle)
     ctx.actions.run(
         progress_message = "Bundling modules for Wasm %s" % ctx.label,

@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.passes;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.MethodCall;
@@ -41,7 +42,7 @@ public class ImplementSystemGetProperty extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Node rewriteMethodCall(MethodCall methodCall) {
-            if (!isSystemGetPropertyCall(methodCall)) {
+            if (!AstUtils.isSystemGetPropertyCall(methodCall)) {
               return methodCall;
             }
 
@@ -70,9 +71,5 @@ public class ImplementSystemGetProperty extends NormalizationPass {
             return expressionBuilder.build();
           }
         });
-  }
-
-  private static boolean isSystemGetPropertyCall(MethodCall methodCall) {
-    return "java.lang.System.getProperty".equals(methodCall.getTarget().getQualifiedBinaryName());
   }
 }

@@ -546,8 +546,6 @@ public enum Backend {
           MoveNestedClassesToTop::new,
           AddBridgeMethods::new,
           AddEnumImplicitMethods::new,
-          // TODO(b/283156060): Implement the modular version of System.getProperty.
-          // () -> new ImplementSystemGetProperty(options.getDefinesForWasm()),
           NormalizeTryWithResources::new,
           NormalizeCatchClauses::new,
           () -> new NormalizeEnumClasses(/* useMakeEnumNameIndirection= */ false),

@@ -15,24 +15,32 @@
  */
 package com.google.j2cl.transpiler.backend.wasm;
 
+import static com.google.j2cl.transpiler.ast.AstUtils.getSystemGetPropertyGetter;
+import static com.google.j2cl.transpiler.ast.AstUtils.isSystemGetPropertyCall;
 import static java.util.function.Predicate.not;
 
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.ConditionalExpression;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.MethodCall;
+import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.StringLiteralGettersCreator;
 import com.google.j2cl.transpiler.ast.Type;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.protobuf.util.JsonFormat;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import javax.annotation.Nullable;
 
 /** Summarizes information where global knowledge will be required for bundling. */
@@ -48,6 +56,7 @@ public final class SummaryBuilder {
     this.environment = environment;
 
     summaryTypeHierarchy(library);
+    summarizeSystemGetPropertyCalls(library);
     summarizeStringLiterals(library);
   }
 
@@ -96,6 +105,44 @@ public final class SummaryBuilder {
     String typeName = environment.getTypeSignature(typeDescriptor);
     // Note that the IDs start from '1' to reserve '0' for NULL_TYPE.
     return typeIdByTypeName.computeIfAbsent(typeName, x -> typeIdByTypeName.size() + 1);
+  }
+
+  private void summarizeSystemGetPropertyCalls(Library library) {
+    Set<String> referencedProperties = new LinkedHashSet<>();
+    library.accept(
+        /* processor= */ new AbstractRewriter() {
+          @Override
+          public Node rewriteMethodCall(MethodCall methodCall) {
+            if (!isSystemGetPropertyCall(methodCall)) {
+              return methodCall;
+            }
+
+            List<Expression> arguments = methodCall.getArguments();
+
+            // JsInteropRestrictionChecker enforces the first parameter is a StringLiteral.
+            String propertyKey = ((StringLiteral) arguments.get(0)).getValue();
+            referencedProperties.add(propertyKey);
+            boolean isRequired = arguments.size() != 2;
+
+            MethodCall propertyGetterCall =
+                MethodCall.Builder.from(getSystemGetPropertyGetter(propertyKey))
+                    .setSourcePosition(methodCall.getSourcePosition())
+                    .build();
+
+            if (isRequired) {
+              return propertyGetterCall;
+            }
+
+            Expression defaultValue = arguments.get(1);
+            return ConditionalExpression.newBuilder()
+                .setTypeDescriptor(TypeDescriptors.get().javaLangString)
+                .setConditionExpression(propertyGetterCall.clone().infixEqualsNull())
+                .setFalseExpression(propertyGetterCall)
+                .setTrueExpression(defaultValue)
+                .build();
+          }
+        });
+    summary.addAllPropertyKeys(referencedProperties);
   }
 
   private void summarizeStringLiterals(Library library) {
