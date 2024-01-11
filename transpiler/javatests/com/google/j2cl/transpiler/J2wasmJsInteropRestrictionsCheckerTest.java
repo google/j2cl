@@ -117,7 +117,7 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
             "Native JsType 'AlsoBuggy' cannot be assigned to 'Object'. (b/262009761)",
             "Native JsType 'Buggy' cannot be cast to 'Object'. (b/262009761)",
             "Native JsType 'Object' cannot be cast to 'Buggy'. (b/262009761)",
-            "Cannot access member of 'Object' with native JsType 'Buggy'. (b/288128177)");
+            "Cannot access member of 'Object' with Native JsType 'Buggy'. (b/262009761)");
   }
 
   public void testNonnativeTypeExtendNativeJsTypeFails() {
@@ -164,7 +164,8 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
             "  private static void acceptsNativeTypeVarargs(MyNativeType... p) {}",
             "  private static void acceptsNativeTypeVarargsArray(MyNativeType[]... p) {}",
             "  private static MyNativeType[] returnsNativeTypeArray() { return null; }",
-            "  private static <T> T[] returnsTArray(T t) { return null; }",
+            "  private static <T> T[] returnsTArray() { return null; }",
+            "  private static <T> T returnsT() { return null; }",
             "  T t;",
             "  private static void arrays() {",
             "    Object o = new MyNativeType[1];",
@@ -172,7 +173,8 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
             "    List<MyNativeType[]> list = null;",
             "    o = (MyNativeType[]) o;",
             "    if (o instanceof MyNativeType[]) {}",
-            "    MyNativeType e = returnsTArray(new MyNativeType())[0];",
+            "    MyNativeType e = Main.<MyNativeType>returnsTArray()[0];",
+            "    e = Main.<MyNativeType[]>returnsT()[0];",
             "    e = new Main<MyNativeType[]>().t[0];",
             "  }",
             "  private static <T extends MyNativeType> void createsTArray() {",
@@ -195,8 +197,12 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
             "Variable 'list' cannot be of type 'List<MyNativeType[]>'. (b/261079024)",
             "Cannot cast to Native type array 'MyNativeType[]'. (b/261079024)",
             "Cannot do instanceof against Native type array 'MyNativeType[]'. (b/261079024)",
-            "Returned type in call to method 'MyNativeType[] Main.returnsTArray(MyNativeType)'"
+            "Returned type in call to method 'MyNativeType[] Main.returnsTArray()'"
                 + " cannot be of type 'MyNativeType[]'. (b/261079024)",
+            "Returned type in call to method 'MyNativeType[] Main.returnsT()' cannot be of type"
+                + " 'MyNativeType[]'. (b/261079024)",
+            "Object creation 'new Main.<init>()' cannot be of type 'Main<MyNativeType[]>'."
+                + " (b/261079024)",
             "Reference to field 'Main<MyNativeType[]>.t' cannot be of type 'MyNativeType[]'."
                 + " (b/261079024)",
             "Variable 'arrGeneric' cannot be of type 'T[]'. (b/261079024)");
@@ -218,12 +224,16 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
             "  private static void acceptsNativeTypeList(List<MyNativeType> p) {}",
             "  private static void acceptsNativeTypeVarargsList(List<MyNativeType>... p) {}",
             "  private static List<MyNativeType> returnsNativeTypeList() { return null; }",
-            "  private static <T> List<T> returnsTList(T t) { return null; }",
+            "  private static <T> List<T> returnsTList() { return null; }",
+            "  private static <T> T returnsT() { return null; }",
+            "  private static <T> void acceptsT(T t) {}",
             "  private static void arrays() {",
             "    Object o = new ArrayList<MyNativeType>();",
             "    List<MyNativeType> arr = null;",
             "    o = (List<MyNativeType>) o;",
-            "    MyNativeType e = returnsTList(new MyNativeType()).get(0);",
+            "    MyNativeType e = Main.<MyNativeType>returnsTList().get(0);",
+            "    e = Main.<MyNativeType>returnsT();",
+            "    acceptsT(new MyNativeType());",
             "    e = new Main<MyNativeType>().tList.get(0);",
             "    e = new Main<List<MyNativeType>>().t.get(0);",
             "  }",
@@ -239,12 +249,17 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
                 + " (b/290992813)",
             "Variable 'arr' cannot be of type 'List<MyNativeType>'. (b/290992813)",
             "Cannot cast to type with Native type argument 'List<MyNativeType>'. (b/290992813)",
-            "Returned type in call to method 'List<MyNativeType> Main.returnsTList(MyNativeType)'"
+            "Returned type in call to method 'List<MyNativeType> Main.returnsTList()'"
                 + " cannot be of type 'List<MyNativeType>'. (b/290992813)",
+            "Returned type in call to method 'MyNativeType Main.returnsT()' cannot be of type"
+                + " 'MyNativeType'. (b/290992813)",
+            "Native JsType 'MyNativeType' cannot be assigned to 'T'. (b/262009761)",
             "Object creation 'new Main.<init>()' cannot be of type 'Main<MyNativeType>'."
                 + " (b/290992813)",
             "Object creation 'new Main.<init>()' cannot be of type 'Main<List<MyNativeType>>'."
                 + " (b/290992813)",
+            "Returned type in call to method 'MyNativeType List.get(int)' cannot be of type"
+                + " 'MyNativeType'. (b/290992813)",
             "Reference to field 'Main<MyNativeType>.tList' cannot be of type 'List<MyNativeType>'."
                 + " (b/290992813)",
             "Reference to field 'Main<List<MyNativeType>>.t' cannot be of type"

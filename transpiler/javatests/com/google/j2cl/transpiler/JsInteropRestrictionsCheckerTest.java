@@ -2318,6 +2318,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 + "of type 'MyJsEnum[]'. (b/118299062)",
             "Reference to field 'Main<MyJsEnum>.tArray' cannot be of type 'MyJsEnum[]'."
                 + " (b/118299062)",
+            "Object creation 'new Main.<init>()' cannot be of type 'Main<MyJsEnum[]>'."
+                + " (b/118299062)",
             "Reference to field 'Main<MyJsEnum[]>.t' cannot be of type 'MyJsEnum[]'."
                 + " (b/118299062)");
   }
