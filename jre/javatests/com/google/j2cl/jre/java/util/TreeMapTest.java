@@ -46,7 +46,7 @@ import org.jspecify.nullness.Nullable;
  * @param <V> The value type for the underlying TreeMap
  */
 @NullMarked
-abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
+abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Object> extends TestMap {
 
   private static class ConflictingKey implements Comparable<CharSequence> {
     private final String value;
@@ -80,7 +80,8 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    *
    * @param map
    */
-  private static <K, V> void _assertEmpty(Map<K, V> map) {
+  private static <K extends @Nullable Object, V extends @Nullable Object> void _assertEmpty(
+      Map<K, V> map) {
     assertNotNull(map);
     assertTrue(map.isEmpty());
     assertEquals(0, map.size());
@@ -97,7 +98,8 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    * @param expected
    * @param actual
    */
-  private static <T> void _assertEquals(Collection<T> expected, Collection<T> actual) {
+  private static <T extends @Nullable Object> void _assertEquals(
+      Collection<T> expected, Collection<T> actual) {
     // verify equivalence using collection interface
     assertEquals(expected.isEmpty(), actual.isEmpty());
     assertEquals(expected.size(), actual.size());
@@ -117,7 +119,8 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    * @param expected
    * @param actual
    */
-  private static <K, V> void _assertEquals(Map<K, V> expected, Map<K, V> actual) {
+  private static <K extends @Nullable Object, V extends @Nullable Object> void _assertEquals(
+      Map<K, V> expected, Map<K, V> actual) {
     assertEquals(expected.isEmpty(), actual.isEmpty());
     assertEquals(expected.size(), actual.size());
 
@@ -135,7 +138,8 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    * @param expected
    * @param actual
    */
-  private static <K, V> void _assertEquals(SortedMap<K, V> expected, SortedMap<K, V> actual) {
+  private static <K extends @Nullable Object, V extends @Nullable Object> void _assertEquals(
+      SortedMap<K, V> expected, SortedMap<K, V> actual) {
     _assertEquals(expected, (Map<K, V>) actual);
 
     // verify the order of the associated collections
@@ -151,11 +155,12 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    * @param value
    * @return
    */
-  private static <K, V> String makeEntryString(K key, V value) {
+  private static <K extends @Nullable Object, V extends @Nullable Object> String makeEntryString(
+      K key, V value) {
     return "{" + key + "=" + value + "}";
   }
 
-  private static <E> Collection<E> reverseCollection(Collection<E> c) {
+  private static <E extends @Nullable Object> Collection<E> reverseCollection(Collection<E> c) {
     List<E> reversedCollection = new ArrayList<E>(c);
     Collections.reverse(reversedCollection);
     return reversedCollection;
@@ -181,7 +186,7 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
   }
 
   /** comparator used when creating the SortedMap. */
-  private @Nullable Comparator<K> comparator = null;
+  private @Nullable Comparator<? super K> comparator = null;
 
   private final boolean isClearSupported = true;
   private final boolean isNullKeySupported = true;
@@ -344,7 +349,7 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
         new Comparator<K>() {
           @Override
           public int compare(K o1, K o2) {
-            return o1.compareTo(o2);
+            return ((Comparable<Object>) o1).compareTo(o2);
           }
         };
     treeMap = new TreeMap<>(customComparator);
@@ -452,7 +457,7 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     TreeMap<K, V> copyConstructed = new TreeMap<K, V>(sourceMap);
     _assertEquals(sourceMap, copyConstructed);
 
-    Comparator<K> comp = Collections.reverseOrder(getComparator());
+    Comparator<? super K> comp = Collections.reverseOrder(getComparator());
     TreeMap<K, V> reversedTreeMap = new TreeMap<K, V>(comp);
     reversedTreeMap.put(keys[0], values[0]);
     reversedTreeMap.put(keys[1], values[1]);
@@ -1205,7 +1210,6 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    *
    * @see java.util.Map#get(Object)
    */
-  @J2ktIncompatible // b/317344586
   public void testGet_throwsNullPointerException() {
     K[] keys = getKeys();
     V[] values = getValues();
@@ -1772,7 +1776,8 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     if (cmp != null) {
       Collections.sort(keys, cmp);
     } else {
-      Collections.sort(keys);
+      // Keys must be non-null and comparable if there's no comparator.
+      Collections.sort((List<Comparable>) keys);
     }
     Iterator<K> it = map.keySet().iterator();
     for (K key : keys) {
@@ -2208,7 +2213,6 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    *
    * @see java.util.Map#put(Object, Object)
    */
-  @J2ktIncompatible
   public void testPut_nullKey() {
     K[] keys = getSortedKeys();
     V[] values = getSortedValues();
@@ -2778,7 +2782,6 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    * @see java.util.Map#remove(Object)
    */
   @SuppressWarnings("unchecked")
-  @J2ktIncompatible // Unsuported
   public void testRemove_throwsNullPointerException() {
     K[] keys = getKeys();
     V[] values = getValues();
@@ -3537,7 +3540,7 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     return false;
   }
 
-  protected @Nullable Comparator<K> getComparator() {
+  protected @Nullable Comparator<? super K> getComparator() {
     return comparator;
   }
 
@@ -3564,7 +3567,7 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     return createNavigableMap();
   }
 
-  protected void setComparator(@Nullable Comparator<K> comparator) {
+  protected void setComparator(@Nullable Comparator<? super K> comparator) {
     this.comparator = comparator;
   }
 
