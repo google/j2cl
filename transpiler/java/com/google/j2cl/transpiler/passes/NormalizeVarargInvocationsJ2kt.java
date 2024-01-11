@@ -23,7 +23,6 @@ import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Invocation;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
-import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.Node;
 
 /** Normalize varargs invocations for Kotlin. */
@@ -40,23 +39,14 @@ public class NormalizeVarargInvocationsJ2kt extends NormalizationPass {
             }
             Expression lastArgument = Iterables.getLast(invocation.getArguments());
 
-            // If the last argument is an array literal, or an array creation with array literal,
-            // unwrap array literal, and pass the unwrapped arguments directly.
+            // If the last argument is an array literal, unwrap it and pass arguments directly.
             if (lastArgument instanceof ArrayLiteral) {
               return Invocation.Builder.from(invocation)
                   .replaceVarargsArgument(((ArrayLiteral) lastArgument).getValueExpressions())
                   .build();
             }
 
-            if (lastArgument instanceof NewArray) {
-              Expression initializer = ((NewArray) lastArgument).getInitializer();
-              if (initializer != null) {
-                return Invocation.Builder.from(invocation)
-                    .replaceVarargsArgument(((ArrayLiteral) initializer).getValueExpressions())
-                    .build();
-              }
-            }
-
+            // Otherwise, apply spread operator to the array.
             return MethodCall.Builder.from(invocation)
                 .replaceVarargsArgument(lastArgument.postfixNotNullAssertion().prefixSpread())
                 .build();

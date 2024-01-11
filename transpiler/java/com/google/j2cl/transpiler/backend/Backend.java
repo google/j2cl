@@ -679,7 +679,6 @@ public enum Backend {
           NormalizeInterfaces::new,
           NormalizeTryWithResources::new,
           NormalizeForEachStatementJ2kt::new,
-          NormalizeArrayCreationsJ2kt::new,
           NormalizeStaticMemberQualifiers::new,
           () -> new MoveVariableDeclarationsToEnclosingBlock(/* fromSwitchStatementsOnly= */ true),
           NormalizeMultiExpressions::new,
@@ -723,6 +722,7 @@ public enum Backend {
 
           // Passes that breaks the invariants for running ConversionContextVisitor related passes.
           NormalizeVarargInvocationsJ2kt::new,
+          NormalizeArrayCreationsJ2kt::new,
 
           // Verification
           VerifySingleAstReference::new,
