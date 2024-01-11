@@ -27,8 +27,8 @@ import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.bazel.BazelWorker;
-import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
+import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.WasmEntryPointBridgesCreator;
 import com.google.j2cl.transpiler.backend.wasm.WasmGeneratorStage;
@@ -72,6 +72,7 @@ final class BazelJ2wasmExportsGenerator extends BazelWorker {
 
   @Override
   protected void run(Problems problems) {
+    MethodDescriptor.setWasmManglingPatterns();
     try (Output out = OutputUtils.initOutput(this.output, problems)) {
       ImmutableList<EntryPointPattern> entryPointPatterns =
           this.wasmEntryPoints.stream().map(EntryPointPattern::from).collect(toImmutableList());
@@ -91,11 +92,10 @@ final class BazelJ2wasmExportsGenerator extends BazelWorker {
               // Methods in annotations can not be exported, and additionally the bindings might
               // not be complete and cannot be fully resolved to descriptors.
               .filter(not(ITypeBinding::isAnnotation))
-              .collect(ImmutableList.toImmutableList());
+              .collect(toImmutableList());
       var environment = new JdtEnvironment(parser, wellKnownTypeNames);
 
-      List<DeclaredTypeDescriptor> typeDescriptors =
-          environment.createDescriptorsFromBindings(bindings);
+      var typeDescriptors = environment.createDescriptorsFromBindings(bindings);
 
       var entryPointBridgeCreator = new WasmEntryPointBridgesCreator(entryPointPatterns, problems);
 
@@ -137,7 +137,7 @@ final class BazelJ2wasmExportsGenerator extends BazelWorker {
         String qualifiedSourceName = classInfo.getName().replace('$', '.');
 
         if (wasmEntryPoints.stream().anyMatch(e -> e.matchesClass(qualifiedSourceName))) {
-          binaryClassNames.add(qualifiedSourceName);
+          binaryClassNames.add(classInfo.getName());
         }
       }
     } catch (IOException e) {
