@@ -148,8 +148,16 @@ public final class InsertNotNullAssertions extends NormalizationPass {
                         && !TypeDescriptors.isJavaLangVoid(inferredTypeDescriptor)
                         && (!inferredTypeDescriptor.canBeNull()
                             || !actualTypeDescriptor.canBeNull())
-                    ? insertNotNullAssertion(expression)
+                    ? verifyAndInsertNotNullAssertion(expression)
                     : expression;
+              }
+
+              private Expression verifyAndInsertNotNullAssertion(Expression expression) {
+                if (expression instanceof NullLiteral) {
+                  getProblems().warning(getSourcePosition(), "Non-null assertion applied to null.");
+                }
+
+                return insertNotNullAssertion(expression);
               }
             }));
   }
