@@ -52,12 +52,12 @@ open class SuperParent internal constructor() {
 
 open class Parent internal constructor(): SuperParent() {
  @JsMethod(name = "sum")
- open override fun `fun`(a: Int, b: Int): Int {
+ override fun `fun`(a: Int, b: Int): Int {
   return a + b
  }
 
  @JsMethod
- open override fun bar(a: Int, b: Int): Int {
+ override fun bar(a: Int, b: Int): Int {
   return a * b
  }
 
@@ -71,21 +71,21 @@ open class Parent internal constructor(): SuperParent() {
 }
 
 open class Child internal constructor(): Parent(), MyInterface {
- open override fun `fun`(a: Int, b: Int): Int {
+ override fun `fun`(a: Int, b: Int): Int {
   return a + b + 1
  }
 
- open override fun bar(a: Int, b: Int): Int {
+ override fun bar(a: Int, b: Int): Int {
   return a * b + 1
  }
 
  @JsMethod(name = "myFoo")
- open override fun foo(a: Int): Int {
+ override fun foo(a: Int): Int {
   return a
  }
 
  @JsMethod
- open override fun intfFoo(): Int {
+ override fun intfFoo(): Int {
   return 1
  }
 }

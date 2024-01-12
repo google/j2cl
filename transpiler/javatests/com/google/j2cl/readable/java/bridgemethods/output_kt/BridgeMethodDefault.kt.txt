@@ -56,6 +56,6 @@ open class BridgeMethodDefault internal constructor() {
  open class B internal constructor(): BridgeMethodDefault.JJ {}
 
  open class C internal constructor(): BridgeMethodDefault.B() {
-  open override fun m(o: Any?) {}
+  override fun m(o: Any?) {}
  }
 }

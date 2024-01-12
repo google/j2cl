@@ -41,11 +41,11 @@ open class Parent internal constructor() {
 }
 
 open class Child internal constructor(): Parent(), SomeInterface {
- open override fun nonFinal() {}
+ override fun nonFinal() {}
 
- override fun finalInChild() {}
+ final override fun finalInChild() {}
 
- open override fun interfaceMethod() {}
+ override fun interfaceMethod() {}
 }
 
 class FinalChild internal constructor(): Parent(), SomeInterface {

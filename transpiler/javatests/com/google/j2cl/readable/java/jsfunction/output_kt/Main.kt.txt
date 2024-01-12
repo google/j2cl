@@ -436,7 +436,7 @@ open class Main {
 
  open class Implementor internal constructor(): Main.ApiWithMethodReturningParametricJsFunction {
   @JsMethod
-  open override fun <T> anApi(): Main.ParametricJsFunction<T>? {
+  override fun <T> anApi(): Main.ParametricJsFunction<T>? {
    return null as Main.ParametricJsFunction<T>?
   }
  }

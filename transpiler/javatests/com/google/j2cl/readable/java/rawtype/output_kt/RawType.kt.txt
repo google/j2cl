@@ -57,7 +57,7 @@ open class RawType internal constructor() {
  open class BoundDependentIndirect<A, B: RawType.Unbound<A>?> internal constructor() {}
 
  open class RawUnboundChild internal constructor(): RawType.Unbound<Any?>() {
-  open override fun method_pp_rawtype(o: Any?): Any? {
+  override fun method_pp_rawtype(o: Any?): Any? {
    return super<RawType.Unbound>.method_pp_rawtype(o)
   }
  }
@@ -70,6 +70,6 @@ open class RawType internal constructor() {
  }
 
  open class RawSubclass internal constructor(): RawType.GenericSuperclass<RawType?> {
-  open override fun f(t: RawType?) {}
+  override fun f(t: RawType?) {}
  }
 }

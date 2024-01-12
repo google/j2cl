@@ -140,9 +140,9 @@ open class CastGenerics<T, E: Number?> {
  abstract class BaseImplementor internal constructor(): CastGenerics.A, CastGenerics.B {}
 
  open class Implementor internal constructor(): CastGenerics.BaseImplementor() {
-  open override fun mA() {}
+  override fun mA() {}
 
-  open override fun mB() {}
+  override fun mB() {}
  }
 
  open class Container<T> internal constructor() {

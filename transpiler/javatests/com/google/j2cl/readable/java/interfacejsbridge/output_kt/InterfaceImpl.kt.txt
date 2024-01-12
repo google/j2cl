@@ -47,7 +47,7 @@ fun interface SubInterface: MyJsInterface, MyInterface {
 
 @ObjCName("J2ktInterfacejsbridgeInterfaceImpl", exact = true)
 open class InterfaceImpl: SubInterface {
- open override fun foo(a: Int): Int {
+ override fun foo(a: Int): Int {
   return 0
  }
 }

@@ -96,24 +96,24 @@ open class Main {
 
  @ObjCName("J2ktBridgejsmethodMain_B", exact = true)
  open class B: Main.A<String?>() {
-  open override fun `fun`(s: String?): String? {
+  override fun `fun`(s: String?): String? {
    return s
   }
 
   @JsMethod
-  open override fun bar(s: String?) {}
+  override fun bar(s: String?) {}
  }
 
  @ObjCName("J2ktBridgejsmethodMain_C", exact = true)
  open class C: Main.A<Int?>() {
-  open override fun `fun`(i: Int?): Int? {
+  override fun `fun`(i: Int?): Int? {
    return i
   }
  }
 
  @ObjCName("J2ktBridgejsmethodMain_D", exact = true)
  open class D: Main.A<Int?>(), Main.I<Int?> {
-  open override fun `fun`(i: Int?): Int? {
+  override fun `fun`(i: Int?): Int? {
    return i
   }
  }
@@ -135,7 +135,7 @@ open class Main {
  @ObjCName("J2ktBridgejsmethodMain_H", exact = true)
  open class H<V>: Main.G<V> {
   @JsMethod
-  open override fun enclose(value: V): V {
+  override fun enclose(value: V): V {
    return null as V
   }
  }
@@ -148,7 +148,7 @@ open class Main {
  @ObjCName("J2ktBridgejsmethodMain_L", exact = true)
  open class L<L1>: Main.K<String?, L1>() {
   @JsMethod(name = "fun")
-  open override fun fun_pp_bridgejsmethod(string: String?, l1: L1) {}
+  override fun fun_pp_bridgejsmethod(string: String?, l1: L1) {}
  }
 
  fun interface M {
@@ -165,7 +165,7 @@ open class Main {
   @JvmField
   internal var b_private_3: Main.B? = null
 
-  open override fun getB(): Main.B? {
+  override fun getB(): Main.B? {
    return this.b_private_3
   }
  }
@@ -182,7 +182,7 @@ open class Main {
 
  @JsType
  abstract inner class R internal constructor(): Main.Q() {
-  open override fun getKey(): String? {
+  override fun getKey(): String? {
    return null
   }
  }
@@ -203,21 +203,21 @@ open class Main {
  }
 
  open inner class Parent<T: Main.Parent<*>?> internal constructor(): Main.GrandParent<T>() {
-  open override fun jsMethod(t: T) {}
+  override fun jsMethod(t: T) {}
 
-  open override fun method(t: T) {}
+  override fun method(t: T) {}
  }
 
  open inner class ChildWithoutOverrides internal constructor(): Main.Parent<Main.ChildWithoutOverrides?>() {}
 
  open inner class ChildWithOverrides<T: Main.ChildWithOverrides<T>?> internal constructor(): Main.Parent<T>() {
-  open override fun jsMethod(t: T) {}
+  override fun jsMethod(t: T) {}
 
-  open override fun method(t: T) {}
+  override fun method(t: T) {}
  }
 
  open inner class ChildWithRenamedOverride internal constructor(): Main.GrandParent<Main.ChildWithRenamedOverride?>() {
   @JsMethod(name = "renamedJsMethod")
-  open override fun jsMethod(t: Main.ChildWithRenamedOverride?) {}
+  override fun jsMethod(t: Main.ChildWithRenamedOverride?) {}
  }
 }

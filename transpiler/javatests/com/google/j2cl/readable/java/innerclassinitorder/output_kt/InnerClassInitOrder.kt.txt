@@ -351,7 +351,7 @@ open class InnerClassInitOrder {
   open inner class OuterIsSuper constructor(
    @ObjCName("Int") i: Int
   ): InnerClassInitOrder.Outer(i) {
-   open override fun checkDispatch(): Int {
+   override fun checkDispatch(): Int {
     return 2
    }
 

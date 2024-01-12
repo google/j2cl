@@ -28,7 +28,7 @@ import packageprivatemethods.package1.SuperParent
 
 @ObjCName("J2ktPackageprivatemethodsPackage1Parent", exact = true)
 abstract class Parent: SuperParent() {
- open override fun overrideInParentExposedInChild_pp_packageprivatemethods_package1(a: Int): Int {
+ override fun overrideInParentExposedInChild_pp_packageprivatemethods_package1(a: Int): Int {
   return a
  }
 
@@ -39,7 +39,7 @@ abstract class Parent: SuperParent() {
   @ObjCName("withInt") c: Int
  ): Int
 
- open override fun exposedAbstractInParent_pp_packageprivatemethods_package1(arg0: Int, arg1: Int, arg2: Int): Int {
+ override fun exposedAbstractInParent_pp_packageprivatemethods_package1(arg0: Int, arg1: Int, arg2: Int): Int {
   return this.exposedAbstractInParent(arg0, arg1, arg2)
  }
 }

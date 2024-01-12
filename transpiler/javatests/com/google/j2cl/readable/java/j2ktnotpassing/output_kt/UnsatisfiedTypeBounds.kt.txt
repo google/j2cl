@@ -47,7 +47,7 @@ open class UnsatisfiedTypeBounds internal constructor() {
  interface Command {}
 
  open class FooCommand internal constructor(): UnsatisfiedTypeBounds.Foo<UnsatisfiedTypeBounds.FooCommand>, UnsatisfiedTypeBounds.Command {
-  open override fun get(): UnsatisfiedTypeBounds.FooCommand {
+  override fun get(): UnsatisfiedTypeBounds.FooCommand {
    return this
   }
  }

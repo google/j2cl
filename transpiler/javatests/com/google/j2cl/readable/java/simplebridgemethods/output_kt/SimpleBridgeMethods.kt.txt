@@ -34,7 +34,7 @@ open class Superclass<T: Error?> internal constructor() {
 }
 
 open class Subclass internal constructor(): Superclass<AssertionError?>() {
- open override fun m1(a: AssertionError?) {}
+ override fun m1(a: AssertionError?) {}
 }
 
 open class AnotherSubclass internal constructor(): Superclass<AssertionError?>() {}
@@ -47,11 +47,11 @@ fun interface Callable<V> {
 }
 
 open class Task<T> internal constructor(): Callable<T> {
- open override fun call(t: T) {}
+ override fun call(t: T) {}
 }
 
 open class AnotherTask<T: AssertionError?> internal constructor(): Callable<Superclass<T>?> {
- open override fun call(t: Superclass<T>?) {}
+ override fun call(t: Superclass<T>?) {}
 }
 
 @ObjCName("J2ktSimplebridgemethodsSimpleBridgeMethods", exact = true)

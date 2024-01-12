@@ -42,7 +42,7 @@ open class Cloneables {
  @ObjCName("J2ktCloneableCloneables_WithCloneable", exact = true)
  open class WithCloneable: Cloneable {
   @Throws(CloneNotSupportedException::class)
-  open override fun clone(): Any {
+  override fun clone(): Any {
    return Cloneables.WithCloneable()
   }
  }

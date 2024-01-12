@@ -77,19 +77,19 @@ open class ForEachStatement {
  }
 
  open class Exception1 internal constructor(): java.lang.Exception(), JavaIterable<String?> {
-  open override fun iterator(): MutableIterator<String?> {
+  override fun iterator(): MutableIterator<String?> {
    return null!!
   }
  }
 
  open class Exception2 internal constructor(): java.lang.Exception(), JavaIterable<Any?> {
-  open override fun iterator(): MutableIterator<Any?> {
+  override fun iterator(): MutableIterator<Any?> {
    return null!!
   }
  }
 
  open class IterableReturningTypeVariable<T: MutableIterator<Int?>> internal constructor(): JavaIterable<Int?> {
-  open override fun iterator(): T {
+  override fun iterator(): T {
    return null!!
   }
  }

@@ -272,7 +272,7 @@ open class Main {
  open class SubMain: Main {
   constructor(): super(10)
 
-  open override fun f3(m: Int, vararg numbers: Int): Int {
+  override fun f3(m: Int, vararg numbers: Int): Int {
    var a: Int = super<Main>.f3(1, 1, 2)
    a = a + super<Main>.f3(1)
    a = a + super<Main>.f3(1, *intArrayOf(1, 2)!!)

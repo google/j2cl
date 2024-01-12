@@ -49,9 +49,9 @@ open class JsMethodExample {
  }
 
  open class Sub internal constructor(): JsMethodExample.Base<String?>(), JsMethodExample.I {
-  open override fun m(s: String?) {}
+  override fun m(s: String?) {}
 
-  internal open override fun m_pp_jsmethod(arg0: String?) {
+  internal override fun m_pp_jsmethod(arg0: String?) {
    this.m(arg0)
   }
  }
@@ -63,7 +63,7 @@ open class JsMethodExample {
    @ObjCName("withNSString") s: String?
   ) {}
 
-  open override fun m_pp_jsmethod(arg0: String?) {
+  override fun m_pp_jsmethod(arg0: String?) {
    this.m(arg0)
   }
 
@@ -80,7 +80,7 @@ open class JsMethodExample {
    @ObjCName("withId") s: T
   ) {}
 
-  open override fun m_pp_jsmethod(arg0: T) {
+  override fun m_pp_jsmethod(arg0: T) {
    this.m(arg0)
   }
  }
@@ -93,7 +93,7 @@ open class JsMethodExample {
    @ObjCName("withNSString") s: String?
   ) {}
 
-  open override fun m_pp_jsmethod(arg0: String?) {
+  override fun m_pp_jsmethod(arg0: String?) {
    this.m(arg0)
   }
  }

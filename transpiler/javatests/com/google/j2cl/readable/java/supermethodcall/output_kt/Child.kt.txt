@@ -72,7 +72,7 @@ open class Parent internal constructor(): GrandParent(), ParentInterface {
   return null
  }
 
- open override fun defaultParent() {
+ override fun defaultParent() {
   super<GrandParent>.defaultParent()
   super<ParentInterface>.defaultParent()
  }
@@ -80,33 +80,33 @@ open class Parent internal constructor(): GrandParent(), ParentInterface {
 
 @ObjCName("J2ktSupermethodcallChild", exact = true)
 open class Child: Parent(), GrandParentInterface {
- open override fun parentSimplest() {
+ override fun parentSimplest() {
   super<Parent>.parentSimplest()
  }
 
- open override fun parentWithParams(foo: Int) {
+ override fun parentWithParams(foo: Int) {
   super<Parent>.parentWithParams(foo)
  }
 
- open override fun parentWithChangingReturn(): Child? {
+ override fun parentWithChangingReturn(): Child? {
   super<Parent>.parentWithChangingReturn()
   return this
  }
 
- open override fun grandParentSimplest() {
+ override fun grandParentSimplest() {
   super<Parent>.grandParentSimplest()
  }
 
- open override fun grandParentWithParams(foo: Int) {
+ override fun grandParentWithParams(foo: Int) {
   super<Parent>.grandParentWithParams(foo)
  }
 
- open override fun grandParentWithChangingReturn(): Child? {
+ override fun grandParentWithChangingReturn(): Child? {
   super<Parent>.grandParentWithChangingReturn()
   return this
  }
 
- open override fun defaultGrandParent() {
+ override fun defaultGrandParent() {
   super<Parent>.defaultGrandParent()
   super<GrandParentInterface>.defaultGrandParent()
  }
@@ -130,13 +130,13 @@ open class Super internal constructor() {
 }
 
 open class Sub internal constructor(): Super(), I2, I3 {
- open override fun m() {
+ override fun m() {
   super<I3>.m()
  }
 }
 
 abstract class SuperToStringTest internal constructor(): I1 {
- open override fun toString(): String {
+ override fun toString(): String {
   return super.toString()
  }
 }

@@ -30,25 +30,25 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
 open class SubNumber internal constructor(): JavaNumber() {
- open override fun toInt(): Int {
+ override fun toInt(): Int {
   return 0
  }
 
- open override fun toLong(): Long {
+ override fun toLong(): Long {
   return 0.toLong()
  }
 
- open override fun toFloat(): Float {
+ override fun toFloat(): Float {
   return 0.0f
  }
 
- open override fun toDouble(): Double {
+ override fun toDouble(): Double {
   return 0.0
  }
 }
 
 open class FooCallsSuperObjectMethod internal constructor() {
- open override fun hashCode(): Int {
+ override fun hashCode(): Int {
   return super.hashCode()
  }
 }

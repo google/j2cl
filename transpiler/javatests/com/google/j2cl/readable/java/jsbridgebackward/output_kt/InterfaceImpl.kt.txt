@@ -47,7 +47,7 @@ open class A internal constructor() {
 open class InterfaceImpl: A(), MyJsInterface {}
 
 open class SubInterfaceImpl internal constructor(): InterfaceImpl() {
- open override fun foo(a: Int): Int {
+ override fun foo(a: Int): Int {
   return 0
  }
 }

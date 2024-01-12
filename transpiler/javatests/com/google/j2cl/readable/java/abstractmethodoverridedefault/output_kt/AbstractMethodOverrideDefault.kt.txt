@@ -47,7 +47,7 @@ open class AbstractMethodOverrideDefault {
  }
 
  abstract class B internal constructor(): AbstractMethodOverrideDefault.A(), AbstractMethodOverrideDefault.J {
-  open override fun bar() {
+  override fun bar() {
    if (false) {
     this.bar()
    }
@@ -57,9 +57,9 @@ open class AbstractMethodOverrideDefault {
  }
 
  open class C internal constructor(): AbstractMethodOverrideDefault.A() {
-  open override fun foo() {}
+  override fun foo() {}
 
-  open override fun bar() {
+  override fun bar() {
    super<AbstractMethodOverrideDefault.A>.bar()
   }
  }

@@ -71,6 +71,7 @@ internal object KotlinSource {
   val ELSE_KEYWORD = source("else")
   val ENUM_KEYWORD = source("enum")
   val EXTERNAL_KEYWORD = source("external")
+  val FINAL_KEYWORD = source("final")
   val FINALLY_KEYWORD = source("finally")
   val FILE_KEYWORD = source("file")
   val FOR_KEYWORD = source("for")

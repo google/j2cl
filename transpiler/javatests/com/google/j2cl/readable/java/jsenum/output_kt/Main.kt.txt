@@ -307,9 +307,9 @@ open class Main {
  }
 
  open class SupplierConsumerImpl<T> internal constructor(): Main.Supplier<T>, Main.Consumer<T> {
-  open override fun accept(t: T) {}
+  override fun accept(t: T) {}
 
-  open override fun get(): T {
+  override fun get(): T {
    return null as T
   }
  }
@@ -324,9 +324,9 @@ open class Main {
  open class ComparableJsEnumSupplierConsumerImpl internal constructor(): Main.SupplierConsumerImpl<Main.ComparableJsEnum?>(), Main.ComparableJsEnumSupplierConsumer {}
 
  open class ComparableJsEnumSupplierConsumerImplWithOverrides internal constructor(): Main.SupplierConsumerImpl<Main.ComparableJsEnum?>(), Main.ComparableJsEnumSupplierConsumer {
-  open override fun accept(t: Main.ComparableJsEnum?) {}
+  override fun accept(t: Main.ComparableJsEnum?) {}
 
-  open override fun get(): Main.ComparableJsEnum? {
+  override fun get(): Main.ComparableJsEnum? {
    return null
   }
  }

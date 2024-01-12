@@ -204,47 +204,47 @@ open class Main {
 open class Subclass<V>: KTopLevel<V>, KInterface<V> {
  internal constructor(v: V): super(v)
 
- open override fun renamedMethod(): Int {
+ override fun renamedMethod(): Int {
   return super<KTopLevel>.renamedMethod()
  }
 
- open override val methodAsProperty: Int get() {
+ override val methodAsProperty: Int get() {
   return super<KTopLevel>.methodAsProperty
  }
 
- open override val nonGetMethodAsProperty: Int get() {
+ override val nonGetMethodAsProperty: Int get() {
   return super<KTopLevel>.nonGetMethodAsProperty
  }
 
- open override val renamedMethodAsProperty: Int get() {
+ override val renamedMethodAsProperty: Int get() {
   return super<KTopLevel>.renamedMethodAsProperty
  }
 
- open override val getRenamedMethodAsProperty: Int get() {
+ override val getRenamedMethodAsProperty: Int get() {
   return super<KTopLevel>.getRenamedMethodAsProperty
  }
 
- open override val isMethodAsProperty: Boolean get() {
+ override val isMethodAsProperty: Boolean get() {
   return super<KTopLevel>.isMethodAsProperty
  }
 
- open override val getstartingmethodAsProperty: Int get() {
+ override val getstartingmethodAsProperty: Int get() {
   return super<KTopLevel>.getstartingmethodAsProperty
  }
 
- open override fun interfaceMethod(v: V): Int {
+ override fun interfaceMethod(v: V): Int {
   return 0
  }
 
- open override fun renamedInterfaceMethod(v: V): Int {
+ override fun renamedInterfaceMethod(v: V): Int {
   return 0
  }
 
- open override val interfaceMethodAsProperty: Int get() {
+ override val interfaceMethodAsProperty: Int get() {
   return 0
  }
 
- open override val renamedInterfaceMethodAsProperty: Int get() {
+ override val renamedInterfaceMethodAsProperty: Int get() {
   return 0
  }
 }
@@ -252,53 +252,53 @@ open class Subclass<V>: KTopLevel<V>, KInterface<V> {
 open class Subsubclass<V>: Subclass<V> {
  internal constructor(v: V): super(v)
 
- open override fun renamedMethod(): Int {
+ override fun renamedMethod(): Int {
   return super<Subclass>.renamedMethod()
  }
 
- open override val methodAsProperty: Int get() {
+ override val methodAsProperty: Int get() {
   return super<Subclass>.methodAsProperty
  }
 
- open override val nonGetMethodAsProperty: Int get() {
+ override val nonGetMethodAsProperty: Int get() {
   return super<Subclass>.nonGetMethodAsProperty
  }
 
- open override val renamedMethodAsProperty: Int get() {
+ override val renamedMethodAsProperty: Int get() {
   return super<Subclass>.renamedMethodAsProperty
  }
 
- open override val getRenamedMethodAsProperty: Int get() {
+ override val getRenamedMethodAsProperty: Int get() {
   return super<Subclass>.getRenamedMethodAsProperty
  }
 
- open override val isMethodAsProperty: Boolean get() {
+ override val isMethodAsProperty: Boolean get() {
   return super<Subclass>.isMethodAsProperty
  }
 
- open override val getstartingmethodAsProperty: Int get() {
+ override val getstartingmethodAsProperty: Int get() {
   return super<Subclass>.getstartingmethodAsProperty
  }
 
- open override fun interfaceMethod(v: V): Int {
+ override fun interfaceMethod(v: V): Int {
   return 0
  }
 
- open override fun renamedInterfaceMethod(v: V): Int {
+ override fun renamedInterfaceMethod(v: V): Int {
   return 0
  }
 
- open override val interfaceMethodAsProperty: Int get() {
+ override val interfaceMethodAsProperty: Int get() {
   return 0
  }
 
- open override val renamedInterfaceMethodAsProperty: Int get() {
+ override val renamedInterfaceMethodAsProperty: Int get() {
   return 0
  }
 }
 
 open class BridgeSubclass internal constructor(): KBridge() {
- open override fun method() {
+ override fun method() {
   super<KBridge>.method()
  }
 }

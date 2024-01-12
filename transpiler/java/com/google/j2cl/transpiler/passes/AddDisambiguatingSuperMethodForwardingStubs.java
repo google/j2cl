@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static java.util.function.Predicate.not;
 
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.transpiler.ast.AstUtils;
@@ -85,6 +86,7 @@ public class AddDisambiguatingSuperMethodForwardingStubs extends NormalizationPa
       Map<String, MethodDescriptor> classMethodsBySignature) {
     typeDescriptor.getDeclaredMethodDescriptors().stream()
         .filter(MethodDescriptor::isPolymorphic)
+        .filter(not(MethodDescriptor::isFinal))
         // Skip package private methods here since if the program compiled in Java the class would
         // have inherited the default method.
         // TODO(b/204365899): The logic here needs to be revisited when the handling of visibility

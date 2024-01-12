@@ -28,11 +28,11 @@ import kotlin.native.ObjCName
 
 @ObjCName("J2ktGwtincompatibleImplementor", exact = true)
 open class Implementor: Interface.ClassWithAbstractMethod(), Interface, Interface.NestedInterface {
- open override fun incompatible() {}
+ override fun incompatible() {}
 
- open override fun nestedIncompatible() {}
+ override fun nestedIncompatible() {}
 
- open override fun incompatibleFromClass() {}
+ override fun incompatibleFromClass() {}
 
  @ObjCName("compatibleMethod")
  open fun compatibleMethod() {

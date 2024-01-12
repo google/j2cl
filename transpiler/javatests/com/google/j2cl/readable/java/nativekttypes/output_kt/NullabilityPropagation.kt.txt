@@ -108,65 +108,65 @@ class NullabilityPropagation {
  }
 
  open inner class Subtype internal constructor(): NullabilityPropagation.NullabilityToPropagate<String?, String>, NullabilityPropagation.Interface {
-  open override fun nullableString1(s: String?): String? {
+  override fun nullableString1(s: String?): String? {
    return s
   }
 
-  open override fun nullableString2(s: String?): String {
+  override fun nullableString2(s: String?): String {
    return s!!
   }
 
-  open override fun nonNullString1(s: String): String {
+  override fun nonNullString1(s: String): String {
    return s
   }
 
-  open override fun nonNullString2(s: String): String {
+  override fun nonNullString2(s: String): String {
    return s
   }
 
-  open override fun nullableExtendsNullable1(s: String?): String? {
+  override fun nullableExtendsNullable1(s: String?): String? {
    return s
   }
 
-  open override fun nullableExtendsNullable2(s: String?): String {
+  override fun nullableExtendsNullable2(s: String?): String {
    return s!!
   }
 
-  open override fun nonNullExtendsNullable1(s: String?): String? {
+  override fun nonNullExtendsNullable1(s: String?): String? {
    return s
   }
 
-  open override fun nonNullExtendsNullable2(s: String?): String {
+  override fun nonNullExtendsNullable2(s: String?): String {
    return s!!
   }
 
-  open override fun nullableExtendsNonNull1(s: String?): String? {
+  override fun nullableExtendsNonNull1(s: String?): String? {
    return s
   }
 
-  open override fun nullableExtendsNonNull2(s: String?): String {
+  override fun nullableExtendsNonNull2(s: String?): String {
    return s!!
   }
 
-  open override fun nonNullExtendsNonNull1(s: String): String {
+  override fun nonNullExtendsNonNull1(s: String): String {
    return s
   }
 
-  open override fun nonNullExtendsNonNull2(s: String): String {
+  override fun nonNullExtendsNonNull2(s: String): String {
    return s
   }
 
-  open override fun nonNullStringTransitive(s: String): String {
+  override fun nonNullStringTransitive(s: String): String {
    return s
   }
 
-  open override fun nonNullStringDoubleOverride(s: String): String {
+  override fun nonNullStringDoubleOverride(s: String): String {
    return s
   }
  }
 
  open inner class SubSubType internal constructor(): NullabilityPropagation.Subtype() {
-  open override fun nonNullStringTransitive(s: String): String {
+  override fun nonNullStringTransitive(s: String): String {
    return s
   }
  }

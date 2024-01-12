@@ -54,7 +54,7 @@ open class SuperParent<T, S> internal constructor() {
 }
 
 open class Parent<T: Error?> internal constructor(): SuperParent<T, Number?>() {
- open override fun foo(t: T, s: Number?) {}
+ override fun foo(t: T, s: Number?) {}
 
  @ObjCName("bar")
  open fun <T_1: Number?> bar(
@@ -69,7 +69,7 @@ open class Parent<T: Error?> internal constructor(): SuperParent<T, Number?>() {
 
 @ObjCName("J2ktBridgemethodsBridgeMethod", exact = true)
 open class BridgeMethod: Parent<AssertionError?>(), SomeInterface<AssertionError?, Number?> {
- open override fun foo(a: AssertionError?, n: Number?) {}
+ override fun foo(a: AssertionError?, n: Number?) {}
 
  @ObjCName("fun")
  open fun `fun`(
@@ -86,9 +86,9 @@ fun interface SomeOtherFooInterface<T> {
 }
 
 open class DualUnrelatedBridges internal constructor(): SomeInterface<String?, Double?>, SomeOtherFooInterface<String?> {
- open override fun foo(s: String?, n: Double?) {}
+ override fun foo(s: String?, n: Double?) {}
 
- open override fun foo(s: String?, n: Number?) {}
+ override fun foo(s: String?, n: Number?) {}
 }
 
 open class SuperDualUnrelatedAccidentalBridges internal constructor() {
@@ -185,9 +185,9 @@ open class TestCase102 internal constructor() {
  }
 
  open inner class C<B1> internal constructor(): TestCase102.B<B1>() {
-  open override fun set(value: String?) {}
+  override fun set(value: String?) {}
 
-  open override fun set(value: B1) {}
+  override fun set(value: B1) {}
  }
 }
 
@@ -198,7 +198,7 @@ open class ParameterizedParent<T: ParameterizedParent<T>?> internal constructor(
 }
 
 open class ReparametrerizedChild<E: ReparametrerizedChild<E>?> internal constructor(): ParameterizedParent<E>() {
- open override fun <S: E> m_pp_bridgemethods(t: S): S {
+ override fun <S: E> m_pp_bridgemethods(t: S): S {
   return null as S
  }
 }

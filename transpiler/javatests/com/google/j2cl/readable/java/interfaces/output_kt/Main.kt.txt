@@ -72,7 +72,7 @@ open class Main {
  }
 
  open inner class Implementor internal constructor(): Main.SubInterface, Main.Interface<String?> {
-  open override fun interfaceMethod() {}
+  override fun interfaceMethod() {}
  }
 
  abstract inner class AbstractImplementor internal constructor(): Main.SubInterface {}

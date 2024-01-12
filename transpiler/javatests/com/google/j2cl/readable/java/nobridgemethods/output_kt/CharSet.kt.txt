@@ -37,7 +37,7 @@ abstract class Map<K> internal constructor() {
 }
 
 open class TreeMap<K> internal constructor(): Map<K>() {
- open override fun getCeilingEntry(key: K): TreeMap.InnerEntry<K>? {
+ override fun getCeilingEntry(key: K): TreeMap.InnerEntry<K>? {
   return TreeMap.InnerEntry<K>()
  }
 

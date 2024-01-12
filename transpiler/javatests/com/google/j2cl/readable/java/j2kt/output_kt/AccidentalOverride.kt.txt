@@ -40,13 +40,13 @@ open class AccidentalOverride {
  }
 
  open inner class TestImplicitOverride internal constructor(): AccidentalOverride.SuperClass(), AccidentalOverride.Interface {
-  open override fun accidentalOverride() {
+  override fun accidentalOverride() {
    super<AccidentalOverride.SuperClass>.accidentalOverride()
   }
  }
 
  open inner class TestExplicitOverride internal constructor(): AccidentalOverride.SuperClass(), AccidentalOverride.Interface {
-  open override fun accidentalOverride() {
+  override fun accidentalOverride() {
    super<AccidentalOverride.SuperClass>.accidentalOverride()
   }
  }
@@ -59,13 +59,13 @@ open class AccidentalOverride {
  abstract inner class TestImplicitOverrideInAbstractClass internal constructor(): AccidentalOverride.SubClass(), AccidentalOverride.Interface {
   abstract override fun abstractAccidentalOverride()
 
-  open override fun accidentalOverride() {
+  override fun accidentalOverride() {
    super<AccidentalOverride.SubClass>.accidentalOverride()
   }
  }
 
  abstract inner class TestExplicitOverrideInAbstractClass internal constructor(): AccidentalOverride.SubClass(), AccidentalOverride.Interface {
-  open override fun accidentalOverride() {
+  override fun accidentalOverride() {
    super<AccidentalOverride.SubClass>.accidentalOverride()
   }
 

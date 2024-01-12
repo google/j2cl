@@ -34,14 +34,14 @@ fun interface Map<K, V> {
 }
 
 open class AbstractMap<K, V> internal constructor(): Map<K, V> {
- open override fun put(key: K, value: V): V {
+ override fun put(key: K, value: V): V {
   return value
  }
 }
 
 @ObjCName("J2ktBridgemethodsEnumMap", exact = true)
 open class EnumMap<K: Enum<K>, V>: AbstractMap<K, V>() {
- open override fun put(key: K, value: V): V {
+ override fun put(key: K, value: V): V {
   return value
  }
 }

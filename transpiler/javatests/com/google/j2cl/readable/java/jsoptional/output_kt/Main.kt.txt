@@ -129,17 +129,17 @@ open class Main {
 
  @JsType
  open class TemplatedSubtype<T: String?> internal constructor(): Main.I<T> {
-  open override fun m(t: T, @JsOptional o: Any?) {}
+  override fun m(t: T, @JsOptional o: Any?) {}
  }
 
  @JsType
  open inner class SpecializedSubtype constructor(
   @ObjCName("Id") @JsOptional a: Any?
  ): Main.I<String?> {
-  open override fun m(t: String?, @JsOptional o: Any?) {}
+  override fun m(t: String?, @JsOptional o: Any?) {}
  }
 
  open class NonJsTypeSubtype internal constructor(): Main.I<String?> {
-  open override fun m(t: String?, @JsOptional o: Any?) {}
+  override fun m(t: String?, @JsOptional o: Any?) {}
  }
 }

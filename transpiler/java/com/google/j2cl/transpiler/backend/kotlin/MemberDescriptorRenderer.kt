@@ -106,7 +106,8 @@ internal data class MemberDescriptorRenderer(val nameRenderer: NameRenderer) {
       get() =
         when {
           isAbstract -> KotlinSource.ABSTRACT_KEYWORD
-          isOpen -> KotlinSource.OPEN_KEYWORD
+          needsOpenModifier -> KotlinSource.OPEN_KEYWORD
+          needsFinalModifier -> KotlinSource.FINAL_KEYWORD
           else -> Source.EMPTY
         }
 

@@ -52,7 +52,7 @@ open class MyJsType: OtherInterface {
   return a + 1
  }
 
- open override fun `fun`(a: Int): Int {
+ override fun `fun`(a: Int): Int {
   return a - 1
  }
 }
@@ -70,7 +70,7 @@ interface MyInterface {
 }
 
 open class SubJsType internal constructor(): MyJsType(), MyInterface {
- open override fun bar(a: Int): Int {
+ override fun bar(a: Int): Int {
   return a + 2
  }
 }

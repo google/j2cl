@@ -116,21 +116,21 @@ open class Main {
 
  @ObjCName("J2ktJsnonnullMain_StringComparator", exact = true)
  open class StringComparator: Comparator<String> {
-  open override fun compare(a: String, b: String): Int {
+  override fun compare(a: String, b: String): Int {
    return 0
   }
  }
 
  @ObjCName("J2ktJsnonnullMain_NullableStringComparator", exact = true)
  open class NullableStringComparator: Comparator<String?> {
-  open override fun compare(a: String?, b: String?): Int {
+  override fun compare(a: String?, b: String?): Int {
    return 0
   }
  }
 
  @ObjCName("J2ktJsnonnullMain_NonNullableStringSubNullableComparator", exact = true)
  open class NonNullableStringSubNullableComparator: Main.NullableStringComparator() {
-  open override fun compare(a: String?, b: String?): Int {
+  override fun compare(a: String?, b: String?): Int {
    return 0
   }
  }

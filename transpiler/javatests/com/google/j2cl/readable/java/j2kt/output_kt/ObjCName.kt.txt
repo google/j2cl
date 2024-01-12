@@ -538,11 +538,11 @@ open class ObjCName {
 
  @kotlin.native.ObjCName("J2ktNewObjCName_SubCollection", exact = true)
  open class SubCollection<E>: JavaAbstractList<E>() {
-  open override fun get(index: Int): E {
+  override fun get(index: Int): E {
    return null as E
   }
 
-  open override val size: Int get() {
+  override val size: Int get() {
    return 0
   }
 
