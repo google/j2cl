@@ -16,17 +16,35 @@
 package overridingmethods;
 
 interface SomeInterface {
-  void bar();
+  void interfaceMethod();
 }
 
 class Parent {
-  public void fun() {}
+  public void nonFinal() {}
+
+  public void finalInChild() {}
+
+  public final void finalInParent() {}
 }
 
-public class Child extends Parent implements SomeInterface {
+class Child extends Parent implements SomeInterface {
   @Override
-  public void fun() {}
+  public void nonFinal() {}
 
   @Override
-  public void bar() {}
+  public final void finalInChild() {}
+
+  @Override
+  public void interfaceMethod() {}
+}
+
+final class FinalChild extends Parent implements SomeInterface {
+  @Override
+  public void nonFinal() {}
+
+  @Override
+  public void finalInChild() {}
+
+  @Override
+  public void interfaceMethod() {}
 }

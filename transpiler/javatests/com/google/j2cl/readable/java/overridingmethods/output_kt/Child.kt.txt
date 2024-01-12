@@ -25,18 +25,33 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
 fun interface SomeInterface {
- @ObjCName("bar")
- fun bar()
+ @ObjCName("interfaceMethod")
+ fun interfaceMethod()
 }
 
 open class Parent internal constructor() {
- @ObjCName("fun")
- open fun `fun`() {}
+ @ObjCName("nonFinal")
+ open fun nonFinal() {}
+
+ @ObjCName("finalInChild")
+ open fun finalInChild() {}
+
+ @ObjCName("finalInParent")
+ fun finalInParent() {}
 }
 
-@ObjCName("J2ktOverridingmethodsChild", exact = true)
-open class Child: Parent(), SomeInterface {
- open override fun `fun`() {}
+open class Child internal constructor(): Parent(), SomeInterface {
+ open override fun nonFinal() {}
 
- open override fun bar() {}
+ override fun finalInChild() {}
+
+ open override fun interfaceMethod() {}
+}
+
+class FinalChild internal constructor(): Parent(), SomeInterface {
+ override fun nonFinal() {}
+
+ override fun finalInChild() {}
+
+ override fun interfaceMethod() {}
 }

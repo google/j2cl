@@ -1,51 +1,52 @@
-goog.module('overridingmethods.Child$impl');
+goog.module('overridingmethods.FinalChild$impl');
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 const Parent = goog.require('overridingmethods.Parent$impl');
 const SomeInterface = goog.require('overridingmethods.SomeInterface$impl');
 
 /**
+ * @final
  * @implements {SomeInterface}
  */
-class Child extends Parent {
+class FinalChild extends Parent {
  /** @protected @nodts */
  constructor() {
   super();
  }
- /** @nodts @return {!Child} */
+ /** @nodts @return {!FinalChild} */
  static $create__() {
-  Child.$clinit();
-  let $instance = new Child();
-  $instance.$ctor__overridingmethods_Child__void();
+  FinalChild.$clinit();
+  let $instance = new FinalChild();
+  $instance.$ctor__overridingmethods_FinalChild__void();
   return $instance;
  }
  /** @nodts */
- $ctor__overridingmethods_Child__void() {
+ $ctor__overridingmethods_FinalChild__void() {
   this.$ctor__overridingmethods_Parent__void();
  }
  /** @override @nodts */
  m_nonFinal__void() {}
- /** @final @override @nodts */
+ /** @override @nodts */
  m_finalInChild__void() {}
  /** @override @nodts */
  m_interfaceMethod__void() {}
  /** @nodts */
  static $clinit() {
-  Child.$clinit = () =>{};
-  Child.$loadModules();
+  FinalChild.$clinit = () =>{};
+  FinalChild.$loadModules();
   Parent.$clinit();
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
-  return instance instanceof Child;
+  return instance instanceof FinalChild;
  }
  
  /** @nodts */
  static $loadModules() {}
 }
-SomeInterface.$markImplementor(Child);
-$Util.$setClassMetadata(Child, 'overridingmethods.Child');
+SomeInterface.$markImplementor(FinalChild);
+$Util.$setClassMetadata(FinalChild, 'overridingmethods.FinalChild');
 
-exports = Child;
+exports = FinalChild;
 
-//# sourceMappingURL=Child.js.map
+//# sourceMappingURL=FinalChild.js.map

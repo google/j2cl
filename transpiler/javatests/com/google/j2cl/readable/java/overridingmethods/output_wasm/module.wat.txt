@@ -1,6 +1,6 @@
  ;;; Code for overridingmethods.SomeInterface [type definition]
  (type $overridingmethods.SomeInterface.vtable (sub (struct
-  (field $m_bar__void (ref $function.m_bar__void))
+  (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
   ))
  )
 
@@ -17,7 +17,9 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_fun__void (ref $function.m_fun__void))
+  (field $m_finalInChild__void (ref $function.m_finalInChild__void))
+  (field $m_finalInParent__void (ref $function.m_finalInParent__void))
+  (field $m_nonFinal__void (ref $function.m_nonFinal__void))
   ))
  )
 
@@ -34,11 +36,42 @@
   (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_fun__void (ref $function.m_fun__void))
-  (field $m_bar__void (ref $function.m_bar__void))
+  (field $m_finalInChild__void (ref $function.m_finalInChild__void))
+  (field $m_finalInParent__void (ref $function.m_finalInParent__void))
+  (field $m_nonFinal__void (ref $function.m_nonFinal__void))
+  (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
   ))
  )
  (type $overridingmethods.Child.itable (sub $itable (struct
+ (field $slot0 (ref $overridingmethods.SomeInterface.vtable))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+ )))
+
+ ;;; Code for overridingmethods.FinalChild [type definition]
+ (type $overridingmethods.FinalChild (sub $overridingmethods.Parent (struct
+  (field $vtable (ref $overridingmethods.FinalChild.vtable))
+  (field $itable (ref $overridingmethods.FinalChild.itable))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  ))
+ )
+ (type $overridingmethods.FinalChild.vtable (sub $overridingmethods.Parent.vtable (struct
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_finalInChild__void (ref $function.m_finalInChild__void))
+  (field $m_finalInParent__void (ref $function.m_finalInParent__void))
+  (field $m_nonFinal__void (ref $function.m_nonFinal__void))
+  (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
+  ))
+ )
+ (type $overridingmethods.FinalChild.itable (sub $itable (struct
  (field $slot0 (ref $overridingmethods.SomeInterface.vtable))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -56,7 +89,9 @@
   (ref.func $m_getClass__java_lang_Class@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_fun__void@overridingmethods.Parent)
+  (ref.func $m_finalInChild__void@overridingmethods.Parent)
+  (ref.func $m_finalInParent__void@overridingmethods.Parent)
+  (ref.func $m_nonFinal__void@overridingmethods.Parent)
  )
 )
 
@@ -68,13 +103,15 @@
   (ref.func $m_getClass__java_lang_Class@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_fun__void@overridingmethods.Child)
-  (ref.func $m_bar__void@overridingmethods.Child)
+  (ref.func $m_finalInChild__void@overridingmethods.Child)
+  (ref.func $m_finalInParent__void@overridingmethods.Parent)
+  (ref.func $m_nonFinal__void@overridingmethods.Child)
+  (ref.func $m_interfaceMethod__void@overridingmethods.Child)
  )
 )
 (global $overridingmethods.SomeInterface.vtable@$overridingmethods.Child (ref $overridingmethods.SomeInterface.vtable)
  (struct.new $overridingmethods.SomeInterface.vtable
-  (ref.func $m_bar__void@overridingmethods.Child)
+  (ref.func $m_interfaceMethod__void@overridingmethods.Child)
  )
 )
 
@@ -82,6 +119,39 @@
 (global $overridingmethods.Child.itable (ref $overridingmethods.Child.itable)
  (struct.new $overridingmethods.Child.itable
    (global.get $overridingmethods.SomeInterface.vtable@$overridingmethods.Child)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+ )
+)
+
+;;; Code for overridingmethods.FinalChild [vtable.init]
+(global $overridingmethods.FinalChild.vtable (ref $overridingmethods.FinalChild.vtable)
+ (struct.new $overridingmethods.FinalChild.vtable
+  (ref.func $$getClassImpl__java_lang_Class@overridingmethods.FinalChild)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_finalInChild__void@overridingmethods.FinalChild)
+  (ref.func $m_finalInParent__void@overridingmethods.Parent)
+  (ref.func $m_nonFinal__void@overridingmethods.FinalChild)
+  (ref.func $m_interfaceMethod__void@overridingmethods.FinalChild)
+ )
+)
+(global $overridingmethods.SomeInterface.vtable@$overridingmethods.FinalChild (ref $overridingmethods.SomeInterface.vtable)
+ (struct.new $overridingmethods.SomeInterface.vtable
+  (ref.func $m_interfaceMethod__void@overridingmethods.FinalChild)
+ )
+)
+
+;;; Code for overridingmethods.FinalChild [itable.init]
+(global $overridingmethods.FinalChild.itable (ref $overridingmethods.FinalChild.itable)
+ (struct.new $overridingmethods.FinalChild.itable
+   (global.get $overridingmethods.SomeInterface.vtable@$overridingmethods.FinalChild)
    (ref.null struct)
    (ref.null struct)
    (ref.null struct)
@@ -121,6 +191,17 @@
  (ref.null $java.lang.Class)
 )
 (global $$string_|overridingme...|@overridingmethods.Child (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
+
+;;; Code for overridingmethods.FinalChild [static fields]
+(global $$class-initialized@overridingmethods.FinalChild (mut i32)
+ (i32.const 0)
+)
+(global $$class@overridingmethods.FinalChild (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$string_|overridingme...|@overridingmethods.FinalChild (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -199,9 +280,9 @@
  )
 )
 
-;;; void Parent.fun()
-(func $m_fun__void@overridingmethods.Parent
- (type $function.m_fun__void)
+;;; void Parent.nonFinal()
+(func $m_nonFinal__void@overridingmethods.Parent
+ (type $function.m_nonFinal__void)
  (param $this.untyped (ref $java.lang.Object))
  ;;@ overridingmethods/Child.java:23:14
  (local $this (ref null $overridingmethods.Parent))
@@ -209,7 +290,31 @@
  (block
  )
 )
-(elem declare func $m_fun__void@overridingmethods.Parent)
+(elem declare func $m_nonFinal__void@overridingmethods.Parent)
+
+;;; void Parent.finalInChild()
+(func $m_finalInChild__void@overridingmethods.Parent
+ (type $function.m_finalInChild__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ overridingmethods/Child.java:25:14
+ (local $this (ref null $overridingmethods.Parent))
+ (local.set $this (ref.cast (ref $overridingmethods.Parent) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_finalInChild__void@overridingmethods.Parent)
+
+;;; void Parent.finalInParent()
+(func $m_finalInParent__void@overridingmethods.Parent
+ (type $function.m_finalInParent__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ overridingmethods/Child.java:27:20
+ (local $this (ref null $overridingmethods.Parent))
+ (local.set $this (ref.cast (ref $overridingmethods.Parent) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_finalInParent__void@overridingmethods.Parent)
 
 ;;; void Parent.$clinit()
 (func $$clinit__void_<once>_@overridingmethods.Parent
@@ -275,16 +380,16 @@
 ;;; Child Child.$create()
 (func $$create__@overridingmethods.Child
  (result (ref null $overridingmethods.Child))
- ;;@ overridingmethods/Child.java:26:13
+ ;;@ overridingmethods/Child.java:30:6
  (local $$instance (ref null $overridingmethods.Child))
  (block
-  ;;@ overridingmethods/Child.java:26:13
+  ;;@ overridingmethods/Child.java:30:6
   (call $$clinit__void_<once>_@overridingmethods.Child )
-  ;;@ overridingmethods/Child.java:26:13
+  ;;@ overridingmethods/Child.java:30:6
   (local.set $$instance (struct.new $overridingmethods.Child (ref.as_non_null (global.get $overridingmethods.Child.vtable)) (ref.as_non_null (global.get $overridingmethods.Child.itable)) (i32.const 0)))
-  ;;@ overridingmethods/Child.java:26:13
+  ;;@ overridingmethods/Child.java:30:6
   (call $$ctor__void_$p_overridingmethods_Child@overridingmethods.Child (ref.as_non_null (local.get $$instance)))
-  ;;@ overridingmethods/Child.java:26:13
+  ;;@ overridingmethods/Child.java:30:6
   (return (local.get $$instance))
  )
 )
@@ -292,51 +397,63 @@
 ;;; void Child.$ctor()
 (func $$ctor__void_$p_overridingmethods_Child@overridingmethods.Child
  (param $this (ref null $overridingmethods.Child))
- ;;@ overridingmethods/Child.java:26:13
+ ;;@ overridingmethods/Child.java:30:6
  (block
-  ;;@ overridingmethods/Child.java:26:13
+  ;;@ overridingmethods/Child.java:30:6
   (call $$ctor__void_$p_overridingmethods_Parent@overridingmethods.Parent (ref.as_non_null (local.get $this)))
  )
 )
 
-;;; void Child.fun()
-(func $m_fun__void@overridingmethods.Child
- (type $function.m_fun__void)
+;;; void Child.nonFinal()
+(func $m_nonFinal__void@overridingmethods.Child
+ (type $function.m_nonFinal__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ overridingmethods/Child.java:28:14
+ ;;@ overridingmethods/Child.java:32:14
  (local $this (ref null $overridingmethods.Child))
  (local.set $this (ref.cast (ref $overridingmethods.Child) (local.get $this.untyped)))
  (block
  )
 )
-(elem declare func $m_fun__void@overridingmethods.Child)
+(elem declare func $m_nonFinal__void@overridingmethods.Child)
 
-;;; void Child.bar()
-(func $m_bar__void@overridingmethods.Child
- (type $function.m_bar__void)
+;;; void Child.finalInChild()
+(func $m_finalInChild__void@overridingmethods.Child
+ (type $function.m_finalInChild__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ overridingmethods/Child.java:31:14
+ ;;@ overridingmethods/Child.java:35:20
  (local $this (ref null $overridingmethods.Child))
  (local.set $this (ref.cast (ref $overridingmethods.Child) (local.get $this.untyped)))
  (block
  )
 )
-(elem declare func $m_bar__void@overridingmethods.Child)
+(elem declare func $m_finalInChild__void@overridingmethods.Child)
+
+;;; void Child.interfaceMethod()
+(func $m_interfaceMethod__void@overridingmethods.Child
+ (type $function.m_interfaceMethod__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ overridingmethods/Child.java:38:14
+ (local $this (ref null $overridingmethods.Child))
+ (local.set $this (ref.cast (ref $overridingmethods.Child) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_interfaceMethod__void@overridingmethods.Child)
 
 ;;; void Child.$clinit()
 (func $$clinit__void_<once>_@overridingmethods.Child
- ;;@ overridingmethods/Child.java:26:13
+ ;;@ overridingmethods/Child.java:30:6
  (block
-  ;;@ overridingmethods/Child.java:26:13
+  ;;@ overridingmethods/Child.java:30:6
   (if (global.get $$class-initialized@overridingmethods.Child)
    (then
-    ;;@ overridingmethods/Child.java:26:13
+    ;;@ overridingmethods/Child.java:30:6
     (return )
    )
   )
-  ;;@ overridingmethods/Child.java:26:13
+  ;;@ overridingmethods/Child.java:30:6
   (global.set $$class-initialized@overridingmethods.Child (i32.const 1))
-  ;;@ overridingmethods/Child.java:26:13
+  ;;@ overridingmethods/Child.java:30:6
   (call $$clinit__void_<once>_@overridingmethods.Parent )
  )
 )
@@ -379,5 +496,129 @@
   )
   (global.set $$string_|overridingme...|@overridingmethods.Child (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "overridingmethods.Child")))
   (return (global.get $$string_|overridingme...|@overridingmethods.Child))
+ )
+)
+
+;;; Code for overridingmethods.FinalChild [methods]
+
+;;; FinalChild FinalChild.$create()
+(func $$create__@overridingmethods.FinalChild
+ (result (ref null $overridingmethods.FinalChild))
+ ;;@ overridingmethods/Child.java:41:12
+ (local $$instance (ref null $overridingmethods.FinalChild))
+ (block
+  ;;@ overridingmethods/Child.java:41:12
+  (call $$clinit__void_<once>_@overridingmethods.FinalChild )
+  ;;@ overridingmethods/Child.java:41:12
+  (local.set $$instance (struct.new $overridingmethods.FinalChild (ref.as_non_null (global.get $overridingmethods.FinalChild.vtable)) (ref.as_non_null (global.get $overridingmethods.FinalChild.itable)) (i32.const 0)))
+  ;;@ overridingmethods/Child.java:41:12
+  (call $$ctor__void_$p_overridingmethods_FinalChild@overridingmethods.FinalChild (ref.as_non_null (local.get $$instance)))
+  ;;@ overridingmethods/Child.java:41:12
+  (return (local.get $$instance))
+ )
+)
+
+;;; void FinalChild.$ctor()
+(func $$ctor__void_$p_overridingmethods_FinalChild@overridingmethods.FinalChild
+ (param $this (ref null $overridingmethods.FinalChild))
+ ;;@ overridingmethods/Child.java:41:12
+ (block
+  ;;@ overridingmethods/Child.java:41:12
+  (call $$ctor__void_$p_overridingmethods_Parent@overridingmethods.Parent (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void FinalChild.nonFinal()
+(func $m_nonFinal__void@overridingmethods.FinalChild
+ (type $function.m_nonFinal__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ overridingmethods/Child.java:43:14
+ (local $this (ref null $overridingmethods.FinalChild))
+ (local.set $this (ref.cast (ref $overridingmethods.FinalChild) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_nonFinal__void@overridingmethods.FinalChild)
+
+;;; void FinalChild.finalInChild()
+(func $m_finalInChild__void@overridingmethods.FinalChild
+ (type $function.m_finalInChild__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ overridingmethods/Child.java:46:14
+ (local $this (ref null $overridingmethods.FinalChild))
+ (local.set $this (ref.cast (ref $overridingmethods.FinalChild) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_finalInChild__void@overridingmethods.FinalChild)
+
+;;; void FinalChild.interfaceMethod()
+(func $m_interfaceMethod__void@overridingmethods.FinalChild
+ (type $function.m_interfaceMethod__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ overridingmethods/Child.java:49:14
+ (local $this (ref null $overridingmethods.FinalChild))
+ (local.set $this (ref.cast (ref $overridingmethods.FinalChild) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_interfaceMethod__void@overridingmethods.FinalChild)
+
+;;; void FinalChild.$clinit()
+(func $$clinit__void_<once>_@overridingmethods.FinalChild
+ ;;@ overridingmethods/Child.java:41:12
+ (block
+  ;;@ overridingmethods/Child.java:41:12
+  (if (global.get $$class-initialized@overridingmethods.FinalChild)
+   (then
+    ;;@ overridingmethods/Child.java:41:12
+    (return )
+   )
+  )
+  ;;@ overridingmethods/Child.java:41:12
+  (global.set $$class-initialized@overridingmethods.FinalChild (i32.const 1))
+  ;;@ overridingmethods/Child.java:41:12
+  (call $$clinit__void_<once>_@overridingmethods.Parent )
+ )
+)
+
+;;; Class<T> FinalChild.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@overridingmethods.FinalChild
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@overridingmethods.FinalChild)))
+   (then
+    (return (global.get $$class@overridingmethods.FinalChild))
+   )
+  )
+  (global.set $$class@overridingmethods.FinalChild (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|overridingme...|__java_lang_String_<once>_@overridingmethods.FinalChild )(call $$getClassMetadata__java_lang_Class_<once>_@overridingmethods.Parent )))
+  (return (global.get $$class@overridingmethods.FinalChild))
+ )
+)
+
+;;; Class<?> FinalChild.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@overridingmethods.FinalChild
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $overridingmethods.FinalChild))
+ (local.set $this (ref.cast (ref $overridingmethods.FinalChild) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@overridingmethods.FinalChild ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@overridingmethods.FinalChild)
+
+;;; String FinalChild.$getString_|overridingme...|()
+(func $$getString_|overridingme...|__java_lang_String_<once>_@overridingmethods.FinalChild
+ (result (ref null $java.lang.String))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$string_|overridingme...|@overridingmethods.FinalChild)))
+   (then
+    (return (global.get $$string_|overridingme...|@overridingmethods.FinalChild))
+   )
+  )
+  (global.set $$string_|overridingme...|@overridingmethods.FinalChild (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "overridingmethods.FinalChild")))
+  (return (global.get $$string_|overridingme...|@overridingmethods.FinalChild))
  )
 )
