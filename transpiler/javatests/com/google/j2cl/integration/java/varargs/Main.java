@@ -28,6 +28,7 @@ import varargs.innerpackage.SuperWithNoPublicConstructors;
 public class Main {
   public static void main(String... args) {
     testVarargs_method();
+    testVarargs_method_null();
     testVarargs_constructor();
     testVarargs_superMethodCall();
     testVarargs_implicitSuperConstructorCall();
@@ -275,8 +276,11 @@ public class Main {
 
     int e = bar(i1, new Integer[] {}); // empty array for the varargs.
     assertTrue((e == 1));
+  }
 
-    int f = bar(i1, null); // null for the varargs.
+  private static void testVarargs_method_null() {
+    Integer i1 = new Integer(1);
+    int f = bar(i1, null);
     assertTrue((f == 1));
   }
 
