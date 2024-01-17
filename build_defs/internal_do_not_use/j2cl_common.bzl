@@ -349,6 +349,9 @@ DEFAULT_J2CL_KOTLINCOPTS = [
     # some instances, ex. a lambda within an inline member. See: b/263391416
     # TODO(b/264661698): Reduce to just serialization of inline functions.
     "-Xserialize-ir=all",
+    # Have kotlinc's IR lowering passes generate objects for SAM implementations.
+    # J2CL lowering passes cannot handle invokedynamic-based representations.
+    "-Xsam-conversions=class",
 ]
 
 J2CL_JAVA_TOOLCHAIN_ATTRS = {
