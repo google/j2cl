@@ -14,6 +14,7 @@
   (field $m_andThen__java_util_function_Function__java_util_function_Function (ref $function.m_andThen__java_util_function_Function__java_util_function_Function))
   (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
   (field $m_compose__java_util_function_Function__java_util_function_Function (ref $function.m_compose__java_util_function_Function__java_util_function_Function))
+  (field $m_apply__java_lang_Integer__java_lang_Integer (ref $function.m_apply__java_lang_Integer__java_lang_Integer))
   ))
  )
  (type $enums.Enum3.$LambdaImplementor$1.itable (sub $itable (struct
@@ -323,6 +324,7 @@
   (ref.func $m_andThen__java_util_function_Function__java_util_function_Function@enums.Enum3.$LambdaImplementor$1)
   (ref.func $m_apply__java_lang_Object__java_lang_Object@enums.Enum3.$LambdaImplementor$1)
   (ref.func $m_compose__java_util_function_Function__java_util_function_Function@enums.Enum3.$LambdaImplementor$1)
+  (ref.func $m_apply__java_lang_Integer__java_lang_Integer@enums.Enum3.$LambdaImplementor$1)
  )
 )
 (global $java.util.function.Function.vtable@$enums.Enum3.$LambdaImplementor$1 (ref $java.util.function.Function.vtable)
@@ -454,7 +456,7 @@
 
 ;;; Code for enums.Enum3.$LambdaImplementor$1 [methods]
 
-;;; <anonymous> implements Function<T, R><T, R> <anonymous> implements Function<T, R>.$create()
+;;; <anonymous> implements Function<Integer, Integer> <anonymous> implements Function<Integer, Integer>.$create()
 (func $$create__@enums.Enum3.$LambdaImplementor$1
  (result (ref null $enums.Enum3.$LambdaImplementor$1))
  ;;@ enums/Enum1.java:59:9
@@ -471,7 +473,7 @@
  )
 )
 
-;;; void <anonymous> implements Function<T, R>.$ctor()
+;;; void <anonymous> implements Function<Integer, Integer>.$ctor()
 (func $$ctor__void_$p_enums_Enum3_$LambdaImplementor$1@enums.Enum3.$LambdaImplementor$1
  (param $this (ref null $enums.Enum3.$LambdaImplementor$1))
  ;;@ enums/Enum1.java:59:9
@@ -481,26 +483,23 @@
  )
 )
 
-;;; R <anonymous> implements Function<T, R>.apply(T v)
-(func $m_apply__java_lang_Object__java_lang_Object@enums.Enum3.$LambdaImplementor$1
- (type $function.m_apply__java_lang_Object__java_lang_Object)
+;;; Integer <anonymous> implements Function<Integer, Integer>.apply(Integer v)
+(func $m_apply__java_lang_Integer__java_lang_Integer@enums.Enum3.$LambdaImplementor$1
+ (type $function.m_apply__java_lang_Integer__java_lang_Integer)
  (param $this.untyped (ref $java.lang.Object))
- (param $v (ref null $java.lang.Object))
- (result (ref null $java.lang.Object))
+ (param $v (ref null $java.lang.Integer))
+ (result (ref null $java.lang.Integer))
  ;;@ enums/Enum1.java:59:9
- (local $v_1 (ref null $java.lang.Integer))
  (local $this (ref null $enums.Enum3.$LambdaImplementor$1))
  (local.set $this (ref.cast (ref $enums.Enum3.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
-  ;;@ enums/Enum1.java:59:9
-  (local.set $v_1 (ref.cast (ref null $java.lang.Integer) (local.get $v)))
   ;;@ enums/Enum1.java:59:14
-  (return (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (i32.const 1) (call_ref $function.m_intValue__int (ref.as_non_null (local.get $v_1))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $v_1)))))))
+  (return (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (i32.const 1) (call_ref $function.m_intValue__int (ref.as_non_null (local.get $v))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $v)))))))
  )
 )
-(elem declare func $m_apply__java_lang_Object__java_lang_Object@enums.Enum3.$LambdaImplementor$1)
+(elem declare func $m_apply__java_lang_Integer__java_lang_Integer@enums.Enum3.$LambdaImplementor$1)
 
-;;; Function<T, V> <anonymous> implements Function<T, R>.andThen(Function<? super R, ? extends V> arg0)
+;;; Function<Integer, V> <anonymous> implements Function<Integer, Integer>.andThen(Function<? super Integer, ? extends V> arg0)
 (func $m_andThen__java_util_function_Function__java_util_function_Function@enums.Enum3.$LambdaImplementor$1
  (type $function.m_andThen__java_util_function_Function__java_util_function_Function)
  (param $this.untyped (ref $java.lang.Object))
@@ -516,7 +515,23 @@
 )
 (elem declare func $m_andThen__java_util_function_Function__java_util_function_Function@enums.Enum3.$LambdaImplementor$1)
 
-;;; Function<V, R> <anonymous> implements Function<T, R>.compose(Function<? super V, ? extends T> arg0)
+;;; Integer <anonymous> implements Function<Integer, Integer>.apply(T arg0)
+(func $m_apply__java_lang_Object__java_lang_Object@enums.Enum3.$LambdaImplementor$1
+ (type $function.m_apply__java_lang_Object__java_lang_Object)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ enums/Enum1.java:59:9
+ (local $this (ref null $enums.Enum3.$LambdaImplementor$1))
+ (local.set $this (ref.cast (ref $enums.Enum3.$LambdaImplementor$1) (local.get $this.untyped)))
+ (block
+  ;;@ enums/Enum1.java:59:9
+  (return (call_ref $function.m_apply__java_lang_Integer__java_lang_Integer (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Integer) (local.get $arg0))(struct.get $enums.Enum3.$LambdaImplementor$1.vtable $m_apply__java_lang_Integer__java_lang_Integer (struct.get $enums.Enum3.$LambdaImplementor$1 $vtable(local.get $this)))))
+ )
+)
+(elem declare func $m_apply__java_lang_Object__java_lang_Object@enums.Enum3.$LambdaImplementor$1)
+
+;;; Function<V, Integer> <anonymous> implements Function<Integer, Integer>.compose(Function<? super V, ? extends Integer> arg0)
 (func $m_compose__java_util_function_Function__java_util_function_Function@enums.Enum3.$LambdaImplementor$1
  (type $function.m_compose__java_util_function_Function__java_util_function_Function)
  (param $this.untyped (ref $java.lang.Object))
@@ -532,7 +547,7 @@
 )
 (elem declare func $m_compose__java_util_function_Function__java_util_function_Function@enums.Enum3.$LambdaImplementor$1)
 
-;;; void <anonymous> implements Function<T, R>.$clinit()
+;;; void <anonymous> implements Function<Integer, Integer>.$clinit()
 (func $$clinit__void_<once>_@enums.Enum3.$LambdaImplementor$1
  ;;@ enums/Enum1.java:59:9
  (block
@@ -552,7 +567,7 @@
  )
 )
 
-;;; Class<T> <anonymous> implements Function<T, R>.$getClassMetadata()
+;;; Class<T> <anonymous> implements Function<Integer, Integer>.$getClassMetadata()
 (func $$getClassMetadata__java_lang_Class_<once>_@enums.Enum3.$LambdaImplementor$1
  (result (ref null $java.lang.Class))
  (block
@@ -566,7 +581,7 @@
  )
 )
 
-;;; Class<?> <anonymous> implements Function<T, R>.$getClassImpl()
+;;; Class<?> <anonymous> implements Function<Integer, Integer>.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@enums.Enum3.$LambdaImplementor$1
  (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
@@ -579,7 +594,7 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@enums.Enum3.$LambdaImplementor$1)
 
-;;; String <anonymous> implements Function<T, R>.$getString_|enums.Enum3_...|()
+;;; String <anonymous> implements Function<Integer, Integer>.$getString_|enums.Enum3_...|()
 (func $$getString_|enums.Enum3_...|__java_lang_String_<once>_@enums.Enum3.$LambdaImplementor$1
  (result (ref null $java.lang.String))
  (block

@@ -133,6 +133,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
+  (field $m_apply__java_lang_Object__java_lang_Integer (ref $function.m_apply__java_lang_Object__java_lang_Integer))
   ))
  )
  (type $typewildcards.TypeWildCards.$LambdaImplementor$1.itable (sub $itable (struct
@@ -382,6 +383,7 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_apply__java_lang_Object__java_lang_Object@typewildcards.TypeWildCards.$LambdaImplementor$1)
+  (ref.func $m_apply__java_lang_Object__java_lang_Integer@typewildcards.TypeWildCards.$LambdaImplementor$1)
  )
 )
 (global $typewildcards.Function.vtable@$typewildcards.TypeWildCards.$LambdaImplementor$1 (ref $typewildcards.Function.vtable)
@@ -1684,7 +1686,7 @@
 
 ;;; Code for typewildcards.TypeWildCards.$LambdaImplementor$1 [methods]
 
-;;; <anonymous> implements Function<I, O><I, O> <anonymous> implements Function<I, O>.$create()
+;;; <anonymous> implements Function<? super Object, ? extends Integer> <anonymous> implements Function<? super Object, ? extends Integer>.$create()
 (func $$create__@typewildcards.TypeWildCards.$LambdaImplementor$1
  (result (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
  ;;@ typewildcards/TypeWildCards.java:127:12
@@ -1701,7 +1703,7 @@
  )
 )
 
-;;; void <anonymous> implements Function<I, O>.$ctor()
+;;; void <anonymous> implements Function<? super Object, ? extends Integer>.$ctor()
 (func $$ctor__void_$p_typewildcards_TypeWildCards_$LambdaImplementor$1@typewildcards.TypeWildCards.$LambdaImplementor$1
  (param $this (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
  ;;@ typewildcards/TypeWildCards.java:127:12
@@ -1711,12 +1713,12 @@
  )
 )
 
-;;; O <anonymous> implements Function<I, O>.apply(I a)
-(func $m_apply__java_lang_Object__java_lang_Object@typewildcards.TypeWildCards.$LambdaImplementor$1
- (type $function.m_apply__java_lang_Object__java_lang_Object)
+;;; ? extends Integer <anonymous> implements Function<? super Object, ? extends Integer>.apply(? super Object a)
+(func $m_apply__java_lang_Object__java_lang_Integer@typewildcards.TypeWildCards.$LambdaImplementor$1
+ (type $function.m_apply__java_lang_Object__java_lang_Integer)
  (param $this.untyped (ref $java.lang.Object))
  (param $a (ref null $java.lang.Object))
- (result (ref null $java.lang.Object))
+ (result (ref null $java.lang.Integer))
  ;;@ typewildcards/TypeWildCards.java:127:12
  (local $a_1 (ref null $java.lang.Object))
  (local $$qualifier (ref null $java.lang.Object))
@@ -1739,9 +1741,25 @@
   ))
  )
 )
+(elem declare func $m_apply__java_lang_Object__java_lang_Integer@typewildcards.TypeWildCards.$LambdaImplementor$1)
+
+;;; ? extends Integer <anonymous> implements Function<? super Object, ? extends Integer>.apply(I arg0)
+(func $m_apply__java_lang_Object__java_lang_Object@typewildcards.TypeWildCards.$LambdaImplementor$1
+ (type $function.m_apply__java_lang_Object__java_lang_Object)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ typewildcards/TypeWildCards.java:127:12
+ (local $this (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
+ (local.set $this (ref.cast (ref $typewildcards.TypeWildCards.$LambdaImplementor$1) (local.get $this.untyped)))
+ (block
+  ;;@ typewildcards/TypeWildCards.java:127:12
+  (return (call_ref $function.m_apply__java_lang_Object__java_lang_Integer (ref.as_non_null (local.get $this))(local.get $arg0)(struct.get $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable $m_apply__java_lang_Object__java_lang_Integer (struct.get $typewildcards.TypeWildCards.$LambdaImplementor$1 $vtable(local.get $this)))))
+ )
+)
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@typewildcards.TypeWildCards.$LambdaImplementor$1)
 
-;;; void <anonymous> implements Function<I, O>.$clinit()
+;;; void <anonymous> implements Function<? super Object, ? extends Integer>.$clinit()
 (func $$clinit__void_<once>_@typewildcards.TypeWildCards.$LambdaImplementor$1
  ;;@ typewildcards/TypeWildCards.java:127:12
  (block
@@ -1759,7 +1777,7 @@
  )
 )
 
-;;; Class<T> <anonymous> implements Function<I, O>.$getClassMetadata()
+;;; Class<T> <anonymous> implements Function<? super Object, ? extends Integer>.$getClassMetadata()
 (func $$getClassMetadata__java_lang_Class_<once>_@typewildcards.TypeWildCards.$LambdaImplementor$1
  (result (ref null $java.lang.Class))
  (block
@@ -1773,7 +1791,7 @@
  )
 )
 
-;;; Class<?> <anonymous> implements Function<I, O>.$getClassImpl()
+;;; Class<?> <anonymous> implements Function<? super Object, ? extends Integer>.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@typewildcards.TypeWildCards.$LambdaImplementor$1
  (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
@@ -1786,7 +1804,7 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@typewildcards.TypeWildCards.$LambdaImplementor$1)
 
-;;; String <anonymous> implements Function<I, O>.$getString_|typewildcard...|()
+;;; String <anonymous> implements Function<? super Object, ? extends Integer>.$getString_|typewildcard...|()
 (func $$getString_|typewildcard...|__java_lang_String_<once>_@typewildcards.TypeWildCards.$LambdaImplementor$1
  (result (ref null $java.lang.String))
  (block

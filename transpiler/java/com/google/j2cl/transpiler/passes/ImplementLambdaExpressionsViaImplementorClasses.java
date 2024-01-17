@@ -24,6 +24,7 @@ import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.LambdaImplementorTypeDescriptors;
+import com.google.j2cl.transpiler.ast.Member;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
@@ -34,6 +35,7 @@ import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import java.util.ArrayList;
@@ -70,15 +72,18 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
             // Normalize the super method calls inside the function expression to target the
             // enclosing class as a lambda.
             normalizeSuperMethodCalls(functionExpression, enclosingTypeDescriptor);
-
-            TypeDescriptor typeDescriptor = functionExpression.getTypeDescriptor();
             boolean capturesEnclosingInstance = functionExpression.isCapturingEnclosingInstance();
+
+            List<TypeVariable> enclosingTypeVariables =
+                getEnclosingTypeVariables(capturesEnclosingInstance);
+
             DeclaredTypeDescriptor implementorTypeDescriptor =
                 LambdaImplementorTypeDescriptors.createLambdaImplementorTypeDescriptor(
-                    typeDescriptor,
+                    functionExpression.getTypeDescriptor(),
                     enclosingTypeDescriptor,
                     lambdaCounterPerCompilationUnit++,
-                    capturesEnclosingInstance);
+                    capturesEnclosingInstance,
+                    enclosingTypeVariables);
 
             // new A$$LambdaImplementor(...)
             return NewInstance.newBuilder()
@@ -90,6 +95,21 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
                     createNewLambdaImplementorType(functionExpression, implementorTypeDescriptor))
                 .setTarget(AstUtils.createImplicitConstructorDescriptor(implementorTypeDescriptor))
                 .build();
+          }
+
+          private List<TypeVariable> getEnclosingTypeVariables(boolean capturesEnclosingInstance) {
+            Member currentMember = getCurrentMember();
+            List<TypeVariable> enclosingTypeVariables = new ArrayList<>();
+            if (currentMember instanceof Method) {
+              MethodDescriptor methodDescriptor = ((Method) currentMember).getDescriptor();
+              enclosingTypeVariables.addAll(methodDescriptor.getTypeParameterTypeDescriptors());
+            }
+
+            if (capturesEnclosingInstance) {
+              enclosingTypeVariables.addAll(
+                  getCurrentType().getDeclaration().getTypeParameterDescriptors());
+            }
+            return enclosingTypeVariables;
           }
         });
   }
@@ -157,8 +177,6 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
     //
 
     SourcePosition sourcePosition = functionExpression.getSourcePosition();
-    implementorTypeDescriptor = implementorTypeDescriptor.toUnparameterizedTypeDescriptor();
-
     Type lambdaImplementorType =
         new Type(sourcePosition, implementorTypeDescriptor.getTypeDeclaration());
 

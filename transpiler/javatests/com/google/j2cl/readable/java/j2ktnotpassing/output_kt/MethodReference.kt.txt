@@ -30,9 +30,9 @@ class MethodReference internal constructor() {
   @JvmStatic
   internal fun <T> foo_pp_j2ktnotpassing(inputs: MethodReference.Foo<out MethodReference.Foo<out T>?>?) {
    MethodReference.transform_pp_j2ktnotpassing(inputs, object : MethodReference.Function {
-    override fun <H> apply(arg0: T): R {
-     val arg0_1 = arg0 as T
-     return arg0_1!!.bar() as R
+    override fun <H> apply(arg0: in out MethodReference.Foo<out T>?): out MethodReference.Foo<out T>? {
+     val arg0_1 = (arg0 as in out MethodReference.Foo<out T>?) as out MethodReference.Foo<out T>?
+     return arg0_1!!.bar()
     }
    })
   }

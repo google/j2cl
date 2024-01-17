@@ -25,21 +25,15 @@ import java.util.List;
 /** Utility TypeDescriptors methods used to synthesize lambda implementors. */
 // TODO(b/63118697): Simplify this code once TD refactoring makes it easier to implement.
 public final class LambdaImplementorTypeDescriptors {
-  private static final String FUNCTIONAL_INTERFACE_IMPLEMENTOR_CLASS_NAME = "LambdaImplementor";
-
-  /** Returns the TypeDescriptor for lambda instances of the functional interface. */
-  public static DeclaredTypeDescriptor createLambdaImplementorTypeDescriptor(
-      TypeDescriptor typeDescriptor, DeclaredTypeDescriptor enclosingTypeDescriptor, int uniqueId) {
-    return createLambdaImplementorTypeDescriptor(
-        typeDescriptor, enclosingTypeDescriptor, uniqueId, false);
-  }
+  private static final String LAMBDA_IMPLEMENTOR_CLASS_NAME = "LambdaImplementor";
 
   /** Returns the TypeDescriptor for lambda instances of the functional interface. */
   public static DeclaredTypeDescriptor createLambdaImplementorTypeDescriptor(
       TypeDescriptor typeDescriptor,
       DeclaredTypeDescriptor enclosingTypeDescriptor,
       int uniqueId,
-      boolean capturesEnclosingInstance) {
+      boolean capturesEnclosingInstance,
+      List<TypeVariable> typeParameters) {
 
     DeclaredTypeDescriptor functionalInterfaceTypeDescriptor =
         typeDescriptor.getFunctionalInterface();
@@ -54,26 +48,22 @@ public final class LambdaImplementorTypeDescriptors {
                     .collect(toImmutableList())
             : ImmutableList.of((DeclaredTypeDescriptor) typeDescriptor);
 
-    ImmutableList<TypeDescriptor> typeArgumentDescriptors =
-        interfaceTypeDescriptors.stream()
-            .flatMap(i -> i.getTypeArgumentDescriptors().stream())
-            .collect(toImmutableList());
-
-    TypeDeclaration adaptorDeclaration =
+    TypeDeclaration implementorTypeDeclaration =
         createLambdaImplementorTypeDeclaration(
-            typeDescriptor.toUnparameterizedTypeDescriptor(),
-            enclosingTypeDescriptor.toUnparameterizedTypeDescriptor(),
-            TypeDescriptors.toUnparameterizedTypeDescriptors(interfaceTypeDescriptors),
+            typeDescriptor,
+            enclosingTypeDescriptor,
+            interfaceTypeDescriptors,
             uniqueId,
-            capturesEnclosingInstance);
+            capturesEnclosingInstance,
+            typeParameters);
 
     return DeclaredTypeDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
-        .setTypeDeclaration(adaptorDeclaration)
+        .setTypeDeclaration(implementorTypeDeclaration)
         .setTypeArgumentDescriptors(functionalInterfaceTypeDescriptor.getTypeArgumentDescriptors())
         .setSuperTypeDescriptorFactory(() -> TypeDescriptors.get().javaLangObject)
         .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.copyOf(interfaceTypeDescriptors))
-        .setTypeArgumentDescriptors(typeArgumentDescriptors)
+        .setTypeArgumentDescriptors(typeParameters)
         .setDeclaredMethodDescriptorsFactory(
             implementorTypeDescriptor ->
                 ImmutableList.of(getLambdaMethod(implementorTypeDescriptor)))
@@ -86,17 +76,13 @@ public final class LambdaImplementorTypeDescriptors {
       DeclaredTypeDescriptor enclosingTypeDescriptor,
       List<DeclaredTypeDescriptor> interfaceTypeDescriptors,
       int uniqueId,
-      boolean capturesEnclosingInstance) {
+      boolean capturesEnclosingInstance,
+      List<TypeVariable> typeParameters) {
 
     TypeDeclaration enclosingTypeDeclaration = enclosingTypeDescriptor.getTypeDeclaration();
     ImmutableList<String> classComponents =
         enclosingTypeDeclaration.synthesizeInnerClassComponents(
-            FUNCTIONAL_INTERFACE_IMPLEMENTOR_CLASS_NAME, uniqueId);
-
-    ImmutableList<TypeVariable> typeParameterDescriptors =
-        interfaceTypeDescriptors.stream()
-            .flatMap(i -> i.getTypeDeclaration().getTypeParameterDescriptors().stream())
-            .collect(toImmutableList());
+            LAMBDA_IMPLEMENTOR_CLASS_NAME, uniqueId);
 
     return TypeDeclaration.newBuilder()
         .setEnclosingTypeDeclaration(enclosingTypeDeclaration)
@@ -107,11 +93,15 @@ public final class LambdaImplementorTypeDescriptors {
                 ImmutableList.of(
                     getLambdaMethod(implementorTypeDeclaration.toUnparameterizedTypeDescriptor())))
         .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.copyOf(interfaceTypeDescriptors))
-        .setTypeParameterDescriptors(typeParameterDescriptors)
+        .setTypeParameterDescriptors(typeParameters)
         .setUnparameterizedTypeDescriptorFactory(
             () ->
                 createLambdaImplementorTypeDescriptor(
-                    lambdaTypeDescriptor, enclosingTypeDescriptor, uniqueId))
+                    lambdaTypeDescriptor,
+                    enclosingTypeDescriptor,
+                    uniqueId,
+                    capturesEnclosingInstance,
+                    typeParameters))
         .setVisibility(Visibility.PUBLIC)
         .setCapturingEnclosingInstance(capturesEnclosingInstance)
         .setKind(Kind.CLASS)
