@@ -55,6 +55,7 @@ public class Varargs {
     v.test(1, new Object[] {new Object()});
     v.test(1, new Object[] {});
     v.test(1, new Object[][] {});
+    v.test(1, null);
     v.testCloneable(new Object[][] {});
     v.testSerializable(new Object[][] {});
     v.testLambda(it -> args = it);

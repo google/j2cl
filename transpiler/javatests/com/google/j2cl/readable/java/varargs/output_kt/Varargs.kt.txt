@@ -88,6 +88,7 @@ open class Varargs {
   v!!.test(1, *arrayOf<Any?>(Any())!!)
   v!!.test(1, *arrayOf<Any?>()!!)
   v!!.test(1, *(arrayOf<Array<Any?>?>() as Array<Any?>?)!!)
+  v!!.test(1, *null!!)
   v!!.testCloneable(*(arrayOf<Array<Any?>?>() as Array<Cloneable?>?)!!)
   v!!.testSerializable(*(arrayOf<Array<Any?>?>() as Array<Serializable?>?)!!)
   v!!.testLambda(Varargs.FunctionalInterface { it: Array<out String?>? ->

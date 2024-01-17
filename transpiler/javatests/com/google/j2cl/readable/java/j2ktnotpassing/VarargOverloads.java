@@ -1,0 +1,89 @@
+/*
+ * Copyright 2024 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package j2ktnotpassing;
+
+// TODO(b/319620723): Move to j2kt readable when the bug is fixed.
+// Kotlin requires explicit overload conflict resolution for method calls with empty varargs.
+class VarargOverloads {
+  static class NewInstanceOverload {
+    NewInstanceOverload(int foo, Object... object) {}
+
+    NewInstanceOverload(int foo, String... object) {}
+
+    static void test() {
+      new NewInstanceOverload(0);
+    }
+  }
+
+  static class ThisConstructorCallOverload {
+    ThisConstructorCallOverload(Object... object) {}
+
+    ThisConstructorCallOverload(String... object) {}
+
+    ThisConstructorCallOverload(int foo) {
+      this();
+    }
+  }
+
+  static class SuperConstructorCallOverload {
+    SuperConstructorCallOverload(Object... object) {}
+
+    SuperConstructorCallOverload(String... object) {}
+
+    static class Explicit extends SuperConstructorCallOverload {
+      Explicit() {
+        super();
+      }
+    }
+
+    static class Implicit extends SuperConstructorCallOverload {
+      Implicit() {}
+    }
+
+    static class FromImplicitConstructor extends SuperConstructorCallOverload {}
+  }
+
+  static class MethodCallOverload {
+    void method(Object... object) {}
+
+    void method(String... object) {}
+
+    void test() {
+      method();
+    }
+  }
+
+  static class MethodCallOverloadInSubtype {
+    void method(Object... object) {}
+
+    static class Subtype extends MethodCallOverloadInSubtype {
+      void method(String... object) {}
+
+      void test() {
+        method();
+      }
+    }
+  }
+
+  enum EnumWithOverloadedConstructors {
+    CONSTRUCTOR_OVERLOAD,
+    SUPER_CONSTRUCTOR_OVERLOAD {};
+
+    EnumWithOverloadedConstructors(Object... args) {}
+
+    EnumWithOverloadedConstructors(String... args) {}
+  }
+}

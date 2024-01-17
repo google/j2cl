@@ -1,0 +1,120 @@
+// Generated from "j2ktnotpassing/VarargOverloads.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "REPEATED_BOUND",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER")
+
+package j2ktnotpassing
+
+import javaemul.lang.*
+import kotlin.Any
+import kotlin.Array
+import kotlin.Int
+import kotlin.String
+import kotlin.Suppress
+import kotlin.jvm.JvmStatic
+
+open class VarargOverloads internal constructor() {
+ open class NewInstanceOverload {
+  internal constructor(foo: Int, vararg `object`: Any?) {
+   val object_1: Array<Any?>? = `object` as Array<Any?>?
+  }
+
+  internal constructor(foo: Int, vararg `object`: String?) {
+   val object_1: Array<String?>? = `object` as Array<String?>?
+  }
+
+  companion object {
+   @JvmStatic
+   internal fun test_pp_j2ktnotpassing() {
+    VarargOverloads.NewInstanceOverload(0)
+   }
+  }
+ }
+
+ open class ThisConstructorCallOverload {
+  internal constructor(vararg `object`: Any?) {
+   val object_1: Array<Any?>? = `object` as Array<Any?>?
+  }
+
+  internal constructor(vararg `object`: String?) {
+   val object_1: Array<String?>? = `object` as Array<String?>?
+  }
+
+  internal constructor(foo: Int): this()
+ }
+
+ open class SuperConstructorCallOverload {
+  internal constructor(vararg `object`: Any?) {
+   val object_1: Array<Any?>? = `object` as Array<Any?>?
+  }
+
+  internal constructor(vararg `object`: String?) {
+   val object_1: Array<String?>? = `object` as Array<String?>?
+  }
+
+  open class Explicit: VarargOverloads.SuperConstructorCallOverload {
+   internal constructor(): super()
+  }
+
+  open class Implicit: VarargOverloads.SuperConstructorCallOverload {
+   internal constructor()
+  }
+
+  open class FromImplicitConstructor internal constructor(): VarargOverloads.SuperConstructorCallOverload() {}
+ }
+
+ open class MethodCallOverload internal constructor() {
+  internal open fun method_pp_j2ktnotpassing(vararg `object`: Any?) {
+   val object_1: Array<Any?>? = `object` as Array<Any?>?
+  }
+
+  internal open fun method_pp_j2ktnotpassing(vararg `object`: String?) {
+   val object_1: Array<String?>? = `object` as Array<String?>?
+  }
+
+  internal open fun test_pp_j2ktnotpassing() {
+   this.method_pp_j2ktnotpassing()
+  }
+ }
+
+ open class MethodCallOverloadInSubtype internal constructor() {
+  internal open fun method_pp_j2ktnotpassing(vararg `object`: Any?) {
+   val object_1: Array<Any?>? = `object` as Array<Any?>?
+  }
+
+  open class Subtype internal constructor(): VarargOverloads.MethodCallOverloadInSubtype() {
+   internal open fun method_pp_j2ktnotpassing(vararg `object`: String?) {
+    val object_1: Array<String?>? = `object` as Array<String?>?
+   }
+
+   internal open fun test_pp_j2ktnotpassing() {
+    this.method_pp_j2ktnotpassing()
+   }
+  }
+ }
+
+ enum class EnumWithOverloadedConstructors {
+  CONSTRUCTOR_OVERLOAD,
+  SUPER_CONSTRUCTOR_OVERLOAD {};
+
+  constructor(vararg args: Any?) {
+   val args_1: Array<Any?>? = args as Array<Any?>?
+  }
+
+  constructor(vararg args: String?) {
+   val args_1: Array<String?>? = args as Array<String?>?
+  }
+ }
+}
