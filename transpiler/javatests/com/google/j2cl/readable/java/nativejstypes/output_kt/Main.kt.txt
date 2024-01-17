@@ -34,6 +34,8 @@ import nativejstypes.Bar
 import nativejstypes.BarInnerWithDotInName
 import nativejstypes.Foo
 import nativejstypes.Headers
+import nativejstypes.TopLevel
+import nativejstypes.TopLevelNestedReference
 
 @ObjCName("J2ktNativejstypesMain", exact = true)
 open class Main {
@@ -103,6 +105,16 @@ open class Main {
    val unusedStr: String? = bar!!.toString()
    val unusedHash: Int = bar!!.hashCode()
    val unusedEq: Boolean = bar!!.equals(Any())
+  }
+
+  @JvmStatic
+  @ObjCName("testTopLevel")
+  fun testTopLevel() {
+   TopLevel.x = 2
+   val nested: TopLevel.Nested? = TopLevel.Nested()
+   nested!!.x = 3
+   val topLevelNestedReference: TopLevelNestedReference? = TopLevelNestedReference()
+   topLevelNestedReference!!.x = 4
   }
  }
 }

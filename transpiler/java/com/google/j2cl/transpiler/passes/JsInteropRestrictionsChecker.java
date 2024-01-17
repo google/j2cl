@@ -1102,7 +1102,16 @@ public class JsInteropRestrictionsChecker {
     }
 
     checkJsName(type);
-    checkJsNamespace(type);
+
+    String namespace = type.getJsNamespace();
+    // Permit empty namespaces on native JsTypes to represent a top-level non-extern type. This
+    // works since the first component of the name is always used as the last component of the
+    // import statement.
+    boolean isValidEmptyNamespace = namespace.isEmpty() && type.getDeclaration().isNative();
+
+    if (!isValidEmptyNamespace) {
+      checkJsNamespace(type);
+    }
   }
 
   private boolean checkQualifiedJsName(Member member) {

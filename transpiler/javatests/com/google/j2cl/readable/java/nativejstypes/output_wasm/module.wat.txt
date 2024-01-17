@@ -86,6 +86,39 @@
   ))
  )
 
+ ;;; Code for nativejstypes.TopLevel.$Overlay [type definition]
+ (type $nativejstypes.TopLevel.$Overlay (sub (struct
+  (field $vtable (ref $nativejstypes.TopLevel.$Overlay.vtable))
+  (field $itable (ref $itable))
+  ))
+ )
+ (type $nativejstypes.TopLevel.$Overlay.vtable (sub (struct
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+  ))
+ )
+
+ ;;; Code for nativejstypes.TopLevelNestedReference.$Overlay [type definition]
+ (type $nativejstypes.TopLevelNestedReference.$Overlay (sub (struct
+  (field $vtable (ref $nativejstypes.TopLevelNestedReference.$Overlay.vtable))
+  (field $itable (ref $itable))
+  ))
+ )
+ (type $nativejstypes.TopLevelNestedReference.$Overlay.vtable (sub (struct
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+  ))
+ )
+
+ ;;; Code for nativejstypes.TopLevel.Nested.$Overlay [type definition]
+ (type $nativejstypes.TopLevel.Nested.$Overlay (sub (struct
+  (field $vtable (ref $nativejstypes.TopLevel.Nested.$Overlay.vtable))
+  (field $itable (ref $itable))
+  ))
+ )
+ (type $nativejstypes.TopLevel.Nested.$Overlay.vtable (sub (struct
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+  ))
+ )
+
  ;;; Code for nativejstypes.Bar [type definition]
 
  ;;; Code for nativejstypes.BarInnerWithDotInName [type definition]
@@ -117,6 +150,12 @@
  ;;; Code for nativejstypes.Nullability [type definition]
 
  ;;; Code for nativejstypes.NullabilityNullMarked [type definition]
+
+ ;;; Code for nativejstypes.TopLevel [type definition]
+
+ ;;; Code for nativejstypes.TopLevelNestedReference [type definition]
+
+ ;;; Code for nativejstypes.TopLevel.Nested [type definition]
 
 ;;; Code for nativejstypes.Bar.$Overlay [vtable.init]
 (global $nativejstypes.Bar.$Overlay.vtable (ref $nativejstypes.Bar.$Overlay.vtable)
@@ -182,6 +221,27 @@
 (global $nativejstypes.NullabilityNullMarked.$Overlay.vtable (ref $nativejstypes.NullabilityNullMarked.$Overlay.vtable)
  (struct.new $nativejstypes.NullabilityNullMarked.$Overlay.vtable
   (ref.func $$getClassImpl__java_lang_Class@nativejstypes.NullabilityNullMarked.$Overlay)
+ )
+)
+
+;;; Code for nativejstypes.TopLevel.$Overlay [vtable.init]
+(global $nativejstypes.TopLevel.$Overlay.vtable (ref $nativejstypes.TopLevel.$Overlay.vtable)
+ (struct.new $nativejstypes.TopLevel.$Overlay.vtable
+  (ref.func $$getClassImpl__java_lang_Class@nativejstypes.TopLevel.$Overlay)
+ )
+)
+
+;;; Code for nativejstypes.TopLevelNestedReference.$Overlay [vtable.init]
+(global $nativejstypes.TopLevelNestedReference.$Overlay.vtable (ref $nativejstypes.TopLevelNestedReference.$Overlay.vtable)
+ (struct.new $nativejstypes.TopLevelNestedReference.$Overlay.vtable
+  (ref.func $$getClassImpl__java_lang_Class@nativejstypes.TopLevelNestedReference.$Overlay)
+ )
+)
+
+;;; Code for nativejstypes.TopLevel.Nested.$Overlay [vtable.init]
+(global $nativejstypes.TopLevel.Nested.$Overlay.vtable (ref $nativejstypes.TopLevel.Nested.$Overlay.vtable)
+ (struct.new $nativejstypes.TopLevel.Nested.$Overlay.vtable
+  (ref.func $$getClassImpl__java_lang_Class@nativejstypes.TopLevel.Nested.$Overlay)
  )
 )
 
@@ -303,6 +363,45 @@
  (ref.null $java.lang.Class)
 )
 (global $$string_|nativejstype...|@nativejstypes.NullabilityNullMarked.$Overlay (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
+
+;;; Code for nativejstypes.TopLevel [static fields]
+
+;;; Code for nativejstypes.TopLevelNestedReference [static fields]
+
+;;; Code for nativejstypes.TopLevel.Nested [static fields]
+
+;;; Code for nativejstypes.TopLevel.$Overlay [static fields]
+(global $$class-initialized@nativejstypes.TopLevel.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@nativejstypes.TopLevel.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$string_|nativejstype...|@nativejstypes.TopLevel.$Overlay (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
+
+;;; Code for nativejstypes.TopLevelNestedReference.$Overlay [static fields]
+(global $$class-initialized@nativejstypes.TopLevelNestedReference.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@nativejstypes.TopLevelNestedReference.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$string_|nativejstype...|@nativejstypes.TopLevelNestedReference.$Overlay (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
+
+;;; Code for nativejstypes.TopLevel.Nested.$Overlay [static fields]
+(global $$class-initialized@nativejstypes.TopLevel.Nested.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@nativejstypes.TopLevel.Nested.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$string_|nativejstype...|@nativejstypes.TopLevel.Nested.$Overlay (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -778,6 +877,183 @@
  )
 )
 
+;;; Code for nativejstypes.TopLevel.$Overlay [methods]
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void_<once>_@nativejstypes.TopLevel.$Overlay
+ ;;@ nativejstypes/TopLevel.java:21:6
+ (block
+  ;;@ nativejstypes/TopLevel.java:21:6
+  (if (global.get $$class-initialized@nativejstypes.TopLevel.$Overlay)
+   (then
+    ;;@ nativejstypes/TopLevel.java:21:6
+    (return )
+   )
+  )
+  ;;@ nativejstypes/TopLevel.java:21:6
+  (global.set $$class-initialized@nativejstypes.TopLevel.$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.TopLevel.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nativejstypes.TopLevel.$Overlay)))
+   (then
+    (return (global.get $$class@nativejstypes.TopLevel.$Overlay))
+   )
+  )
+  (global.set $$class@nativejstypes.TopLevel.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.TopLevel.$Overlay )(ref.null $java.lang.Class)))
+  (return (global.get $$class@nativejstypes.TopLevel.$Overlay))
+ )
+)
+
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nativejstypes.TopLevel.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nativejstypes.TopLevel.$Overlay))
+ (local.set $this (ref.cast (ref $nativejstypes.TopLevel.$Overlay) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.TopLevel.$Overlay ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nativejstypes.TopLevel.$Overlay)
+
+;;; String $Overlay.$getString_|nativejstype...|()
+(func $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.TopLevel.$Overlay
+ (result (ref null $java.lang.String))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$string_|nativejstype...|@nativejstypes.TopLevel.$Overlay)))
+   (then
+    (return (global.get $$string_|nativejstype...|@nativejstypes.TopLevel.$Overlay))
+   )
+  )
+  (global.set $$string_|nativejstype...|@nativejstypes.TopLevel.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nativejstypes.TopLevel$$Overlay")))
+  (return (global.get $$string_|nativejstype...|@nativejstypes.TopLevel.$Overlay))
+ )
+)
+
+;;; Code for nativejstypes.TopLevelNestedReference.$Overlay [methods]
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void_<once>_@nativejstypes.TopLevelNestedReference.$Overlay
+ ;;@ nativejstypes/TopLevel.java:33:6
+ (block
+  ;;@ nativejstypes/TopLevel.java:33:6
+  (if (global.get $$class-initialized@nativejstypes.TopLevelNestedReference.$Overlay)
+   (then
+    ;;@ nativejstypes/TopLevel.java:33:6
+    (return )
+   )
+  )
+  ;;@ nativejstypes/TopLevel.java:33:6
+  (global.set $$class-initialized@nativejstypes.TopLevelNestedReference.$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.TopLevelNestedReference.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nativejstypes.TopLevelNestedReference.$Overlay)))
+   (then
+    (return (global.get $$class@nativejstypes.TopLevelNestedReference.$Overlay))
+   )
+  )
+  (global.set $$class@nativejstypes.TopLevelNestedReference.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.TopLevelNestedReference.$Overlay )(ref.null $java.lang.Class)))
+  (return (global.get $$class@nativejstypes.TopLevelNestedReference.$Overlay))
+ )
+)
+
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nativejstypes.TopLevelNestedReference.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nativejstypes.TopLevelNestedReference.$Overlay))
+ (local.set $this (ref.cast (ref $nativejstypes.TopLevelNestedReference.$Overlay) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.TopLevelNestedReference.$Overlay ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nativejstypes.TopLevelNestedReference.$Overlay)
+
+;;; String $Overlay.$getString_|nativejstype...|()
+(func $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.TopLevelNestedReference.$Overlay
+ (result (ref null $java.lang.String))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$string_|nativejstype...|@nativejstypes.TopLevelNestedReference.$Overlay)))
+   (then
+    (return (global.get $$string_|nativejstype...|@nativejstypes.TopLevelNestedReference.$Overlay))
+   )
+  )
+  (global.set $$string_|nativejstype...|@nativejstypes.TopLevelNestedReference.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nativejstypes.TopLevelNestedReference$$Overlay")))
+  (return (global.get $$string_|nativejstype...|@nativejstypes.TopLevelNestedReference.$Overlay))
+ )
+)
+
+;;; Code for nativejstypes.TopLevel.Nested.$Overlay [methods]
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void_<once>_@nativejstypes.TopLevel.Nested.$Overlay
+ ;;@ nativejstypes/TopLevel.java:27:15
+ (block
+  ;;@ nativejstypes/TopLevel.java:27:15
+  (if (global.get $$class-initialized@nativejstypes.TopLevel.Nested.$Overlay)
+   (then
+    ;;@ nativejstypes/TopLevel.java:27:15
+    (return )
+   )
+  )
+  ;;@ nativejstypes/TopLevel.java:27:15
+  (global.set $$class-initialized@nativejstypes.TopLevel.Nested.$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.TopLevel.Nested.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nativejstypes.TopLevel.Nested.$Overlay)))
+   (then
+    (return (global.get $$class@nativejstypes.TopLevel.Nested.$Overlay))
+   )
+  )
+  (global.set $$class@nativejstypes.TopLevel.Nested.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.TopLevel.Nested.$Overlay )(ref.null $java.lang.Class)))
+  (return (global.get $$class@nativejstypes.TopLevel.Nested.$Overlay))
+ )
+)
+
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nativejstypes.TopLevel.Nested.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nativejstypes.TopLevel.Nested.$Overlay))
+ (local.set $this (ref.cast (ref $nativejstypes.TopLevel.Nested.$Overlay) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.TopLevel.Nested.$Overlay ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nativejstypes.TopLevel.Nested.$Overlay)
+
+;;; String $Overlay.$getString_|nativejstype...|()
+(func $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.TopLevel.Nested.$Overlay
+ (result (ref null $java.lang.String))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$string_|nativejstype...|@nativejstypes.TopLevel.Nested.$Overlay)))
+   (then
+    (return (global.get $$string_|nativejstype...|@nativejstypes.TopLevel.Nested.$Overlay))
+   )
+  )
+  (global.set $$string_|nativejstype...|@nativejstypes.TopLevel.Nested.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nativejstypes.TopLevel$Nested$$Overlay")))
+  (return (global.get $$string_|nativejstype...|@nativejstypes.TopLevel.Nested.$Overlay))
+ )
+)
+
 ;;; Code for nativejstypes.Bar [methods]
 
 ;;; Bar(int x, int y)
@@ -1094,6 +1370,27 @@
  )
 )
 
+;;; void Main.testTopLevel()
+(func $m_testTopLevel__void@nativejstypes.Main
+ ;;@ nativejstypes/Main.java:73:21
+ (local $nested (ref null extern))
+ (local $topLevelNestedReference (ref null extern))
+ (block
+  ;;@ nativejstypes/Main.java:73:36
+  (call $$clinit__void_<once>_@nativejstypes.Main )
+  ;;@ nativejstypes/Main.java:74:4
+  (call $f_x__int__void@nativejstypes.TopLevel (i32.const 2))
+  ;;@ nativejstypes/Main.java:76:4
+  (local.set $nested (call $m_<init>__@nativejstypes.TopLevel.Nested ))
+  ;;@ nativejstypes/Main.java:77:4
+  (call $f_x__int__void@nativejstypes.TopLevel.Nested (ref.as_non_null (local.get $nested))(i32.const 3))
+  ;;@ nativejstypes/Main.java:79:4
+  (local.set $topLevelNestedReference (call $m_<init>__@nativejstypes.TopLevelNestedReference ))
+  ;;@ nativejstypes/Main.java:80:4
+  (call $f_x__int__void@nativejstypes.TopLevelNestedReference (ref.as_non_null (local.get $topLevelNestedReference))(i32.const 4))
+ )
+)
+
 ;;; void Main.$clinit()
 (func $$clinit__void_<once>_@nativejstypes.Main
  ;;@ nativejstypes/Main.java:20:13
@@ -1217,4 +1514,54 @@
 (func $m_doesNotAcceptNull__java_lang_String_NativeString__void@nativejstypes.NullabilityNullMarked (import "imports" "nativejstypes.Nullability.doesNotAcceptNull$1") 
  (param $this (ref null extern))
  (param $arg (ref null string))
+)
+
+;;; Code for nativejstypes.TopLevel [methods]
+
+;;; int TopLevel.x()
+(func $f_x__int@nativejstypes.TopLevel (import "imports" "get toplevel.x") 
+ (result i32)
+)
+
+;;; void TopLevel.x(int value)
+(func $f_x__int__void@nativejstypes.TopLevel (import "imports" "set toplevel.x") 
+ (param $value i32)
+)
+
+;;; Code for nativejstypes.TopLevelNestedReference [methods]
+
+;;; TopLevelNestedReference()
+(func $m_<init>__@nativejstypes.TopLevelNestedReference (import "imports" "toplevel.Nested.constructor") 
+ (result (ref null extern))
+)
+
+;;; int TopLevelNestedReference.x()
+(func $f_x__int@nativejstypes.TopLevelNestedReference (import "imports" "get toplevel.Nested.x") 
+ (param $this (ref null extern))
+ (result i32)
+)
+
+;;; void TopLevelNestedReference.x(int value)
+(func $f_x__int__void@nativejstypes.TopLevelNestedReference (import "imports" "set toplevel.Nested.x") 
+ (param $this (ref null extern))
+ (param $value i32)
+)
+
+;;; Code for nativejstypes.TopLevel.Nested [methods]
+
+;;; Nested()
+(func $m_<init>__@nativejstypes.TopLevel.Nested (import "imports" "toplevel.Nested.constructor") 
+ (result (ref null extern))
+)
+
+;;; int Nested.x()
+(func $f_x__int@nativejstypes.TopLevel.Nested (import "imports" "get toplevel.Nested.x") 
+ (param $this (ref null extern))
+ (result i32)
+)
+
+;;; void Nested.x(int value)
+(func $f_x__int__void@nativejstypes.TopLevel.Nested (import "imports" "set toplevel.Nested.x") 
+ (param $this (ref null extern))
+ (param $value i32)
 )

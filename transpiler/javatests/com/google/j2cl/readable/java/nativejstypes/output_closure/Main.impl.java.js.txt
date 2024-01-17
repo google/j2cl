@@ -7,6 +7,8 @@ let Foo = goog.forwardDeclare('com.acme.MyFoo');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 let Bar = goog.forwardDeclare('nativejstypes.Bar');
 let $synthetic_nativejstypes_Bar = goog.forwardDeclare('nativejstypes.Bar');
+let TopLevel = goog.forwardDeclare('toplevel');
+let toplevel = goog.forwardDeclare('toplevel');
 let $JavaScriptObject = goog.forwardDeclare('vmbootstrap.JavaScriptObject$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
@@ -85,6 +87,15 @@ class Main extends j_l_Object {
   let unusedEq = $Objects.m_equals__java_lang_Object__java_lang_Object__boolean(bar, j_l_Object.$create__());
  }
  /** @nodts */
+ static m_testTopLevel__void() {
+  Main.$clinit();
+  TopLevel.x = 2;
+  let nested = new TopLevel.Nested();
+  nested.x = 3;
+  let topLevelNestedReference = new toplevel.Nested();
+  topLevelNestedReference.x = 4;
+ }
+ /** @nodts */
  static $clinit() {
   Main.$clinit = () =>{};
   Main.$loadModules();
@@ -101,6 +112,8 @@ class Main extends j_l_Object {
   Class = goog.module.get('java.lang.Class$impl');
   Bar = goog.module.get('nativejstypes.Bar');
   $synthetic_nativejstypes_Bar = goog.module.get('nativejstypes.Bar');
+  TopLevel = goog.module.get('toplevel');
+  toplevel = goog.module.get('toplevel');
   $JavaScriptObject = goog.module.get('vmbootstrap.JavaScriptObject$impl');
   $Objects = goog.module.get('vmbootstrap.Objects$impl');
  }

@@ -69,4 +69,14 @@ public class Main {
     int unusedHash = bar.hashCode();
     boolean unusedEq = bar.equals(new Object());
   }
+
+  public static void testTopLevel() {
+    TopLevel.x = 2;
+
+    TopLevel.Nested nested = new TopLevel.Nested();
+    nested.x = 3;
+
+    TopLevelNestedReference topLevelNestedReference = new TopLevelNestedReference();
+    topLevelNestedReference.x = 4;
+  }
 }

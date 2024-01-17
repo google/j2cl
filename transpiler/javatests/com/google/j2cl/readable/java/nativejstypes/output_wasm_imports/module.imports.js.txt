@@ -7,6 +7,8 @@ const j2wasm_StringUtils = goog.require('j2wasm.StringUtils');
 const nativejstypes_Bar = goog.require('nativejstypes.Bar');
 const nativejstypes_Bar_Inner = goog.require('nativejstypes.Bar.Inner');
 const nativejstypes_Nullability = goog.require('nativejstypes.Nullability');
+const toplevel = goog.require('toplevel');
+const toplevel_Nested = goog.require('toplevel.Nested');
 
 /** @return {!Object<string, !Object<string, !*>>} Wasm import object */
 function getImports() {
@@ -86,6 +88,8 @@ function getImports() {
    'get nativejstypes.Bar.f': () => nativejstypes_Bar.f,
    'get nativejstypes.Bar.x': (/** !nativejstypes_Bar */ $instance, ) => $instance.x,
    'get nativejstypes.Bar.y': (/** !nativejstypes_Bar */ $instance, ) => $instance.y,
+   'get toplevel.Nested.x': (/** !toplevel.Nested */ $instance, ) => $instance.x,
+   'get toplevel.x': () => toplevel.x,
    'j2wasm.CharUtils.charToLowerCase': j2wasm_CharUtils.charToLowerCase,
    'j2wasm.CharUtils.charToUpperCase': j2wasm_CharUtils.charToUpperCase,
    'j2wasm.CharUtils.codePointToLowerCase': j2wasm_CharUtils.codePointToLowerCase,
@@ -115,6 +119,8 @@ function getImports() {
    'set nativejstypes.Bar.f': (/** number */ value, ) => nativejstypes_Bar.f = value,
    'set nativejstypes.Bar.x': (/** !nativejstypes_Bar */ $instance, /** number */ value, ) => $instance.x = value,
    'set nativejstypes.Bar.y': (/** !nativejstypes_Bar */ $instance, /** number */ value, ) => $instance.y = value,
+   'set toplevel.Nested.x': (/** !toplevel.Nested */ $instance, /** number */ value, ) => $instance.x = value,
+   'set toplevel.x': (/** number */ value, ) => toplevel.x = value,
    'string.indexOf$1': (/** string */ $instance, /** string */ str, ) => $instance.indexOf(str, ),
    'string.indexOf$2': (/** string */ $instance, /** string */ str, /** number */ startIndex, ) => $instance.indexOf(str, startIndex, ),
    'string.lastIndexOf$1': (/** string */ $instance, /** string */ str, ) => $instance.lastIndexOf(str, ),
@@ -125,6 +131,7 @@ function getImports() {
    'string.toLocaleUpperCase': (/** string */ $instance, ) => $instance.toLocaleUpperCase(),
    'string.toLowerCase': (/** string */ $instance, ) => $instance.toLowerCase(),
    'string.toUpperCase': (/** string */ $instance, ) => $instance.toUpperCase(),
+   'toplevel.Nested.constructor': () => new toplevel.Nested(),
   }
  };
 }

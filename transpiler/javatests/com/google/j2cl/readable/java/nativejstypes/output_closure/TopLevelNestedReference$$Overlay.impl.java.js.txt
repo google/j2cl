@@ -1,0 +1,25 @@
+goog.module('nativejstypes.TopLevelNestedReference.$Overlay$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const toplevel = goog.require('toplevel');
+
+/** @nodts */
+class $Overlay {
+ /** @nodts */
+ static $clinit() {
+  $Overlay.$clinit = () =>{};
+  $Overlay.$loadModules();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof toplevel.Nested;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($Overlay, 'toplevel.Nested');
+
+exports = $Overlay;
+
+//# sourceMappingURL=TopLevelNestedReference$$Overlay.js.map

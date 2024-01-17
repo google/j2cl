@@ -87,6 +87,18 @@
 [unusedHash] => [unusedHash] "unusedHash"
 [boolean unusedEq = bar.equals(new Object());] => [let unusedEq = $Objects.m_equals__java_lang_Object__java_lang_Object__boolean(bar, j_l_Object.$create__());] "nativejstypes.Main.testNativeTypeObjectMethods"
 [unusedEq] => [unusedEq] "unusedEq"
+[testTopLevel] => [m_testTopLevel__void]
+[{
+    TopLevel.x = 2;
+...    topLevelNestedReference.x = 4;
+  }] => [Main.$clinit();] "nativejstypes.Main.testTopLevel"
+[TopLevel.x = 2;] => [TopLevel.x = 2;] "nativejstypes.Main.testTopLevel"
+[TopLevel.Nested nested = new TopLevel.Nested();] => [let nested = new TopLevel.Nested();] "nativejstypes.Main.testTopLevel"
+[nested] => [nested] "nested"
+[nested.x = 3;] => [nested.x = 3;] "nativejstypes.Main.testTopLevel"
+[TopLevelNestedReference topLevelNestedReference = new TopLevelNestedReference();] => [let topLevelNestedReference = new toplevel.Nested();] "nativejstypes.Main.testTopLevel"
+[topLevelNestedReference] => [topLevelNestedReference] "topLevelNestedReference"
+[topLevelNestedReference.x = 4;] => [topLevelNestedReference.x = 4;] "nativejstypes.Main.testTopLevel"
 [Main] => [$clinit]
 [Main] => [Main.$clinit = () =>{};] "nativejstypes.Main.<clinit>"
 [Main] => [Main.$loadModules();] "nativejstypes.Main.<clinit>"

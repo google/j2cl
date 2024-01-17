@@ -1406,6 +1406,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "   @JsMethod(namespace = JsPackage.GLOBAL) public static void m() {}",
             "   @JsProperty(namespace = JsPackage.GLOBAL) public static int n;",
             "}",
+            "@JsType(namespace = \"\") class NonNativeClass {}",
             "@JsEnum(isNative = true, namespace = \"=\") enum NativeEnum { }",
             "@JsEnum(namespace = \"^\") enum MyJsEnum { }")
         .assertErrorsWithoutSourcePosition(
@@ -1421,7 +1422,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "Non-native member 'JsTypeOnWindow.r' cannot declare a namespace.",
             "Non-native member 'void JsTypeOnWindow.s()' cannot declare a namespace.",
             "Non-native member 'void InvalidGlobal.m()' cannot declare a namespace.",
-            "Non-native member 'InvalidGlobal.n' cannot declare a namespace.");
+            "Non-native member 'InvalidGlobal.n' cannot declare a namespace.",
+            "'NonNativeClass' cannot have an empty namespace.");
   }
 
   public void testJsNameGlobalNamespacesSucceeds() {
@@ -1452,6 +1454,15 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = \"?\")",
             "interface Wildcard {",
             "}")
+        .assertNoWarnings();
+  }
+
+  public void testNativeJsTypeEmptyNamespaceSucceeds() {
+    assertTranspileSucceeds(
+            "test.Buggy",
+            "import jsinterop.annotations.*;",
+            "@JsType(isNative = true, namespace = \"\", name = \"a.c\")",
+            "class NativeOnTopLevelNamespace {}")
         .assertNoWarnings();
   }
 
