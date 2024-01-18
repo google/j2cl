@@ -35,9 +35,6 @@ public final class LambdaImplementorTypeDescriptors {
       boolean capturesEnclosingInstance,
       List<TypeVariable> typeParameters) {
 
-    DeclaredTypeDescriptor functionalInterfaceTypeDescriptor =
-        typeDescriptor.getFunctionalInterface();
-
     // Lambdas that implement several types, e.g. from an intersection cast, require that all
     // those types be declared type descriptors.
     List<DeclaredTypeDescriptor> interfaceTypeDescriptors =
@@ -60,7 +57,6 @@ public final class LambdaImplementorTypeDescriptors {
     return DeclaredTypeDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setTypeDeclaration(implementorTypeDeclaration)
-        .setTypeArgumentDescriptors(functionalInterfaceTypeDescriptor.getTypeArgumentDescriptors())
         .setSuperTypeDescriptorFactory(() -> TypeDescriptors.get().javaLangObject)
         .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.copyOf(interfaceTypeDescriptors))
         .setTypeArgumentDescriptors(typeParameters)
