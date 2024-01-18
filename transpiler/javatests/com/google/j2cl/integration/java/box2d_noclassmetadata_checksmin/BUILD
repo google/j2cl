@@ -21,6 +21,7 @@ integration_test(
         # Strip enum names:
         "--replace_strings=module$exports$nativebootstrap$Util$impl.$makeEnumName(?)",
     ],
+    enable_j2kt_web_size_report = True,
     tags = ["manual"],
     deps = [
         "//transpiler/javatests/com/google/j2cl/integration/java/box2d",
