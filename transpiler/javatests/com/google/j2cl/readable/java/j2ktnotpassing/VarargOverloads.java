@@ -19,9 +19,9 @@ package j2ktnotpassing;
 // Kotlin requires explicit overload conflict resolution for method calls with empty varargs.
 class VarargOverloads {
   static class NewInstanceOverload {
-    NewInstanceOverload(int foo, Object... object) {}
+    NewInstanceOverload(int foo, Object... objects) {}
 
-    NewInstanceOverload(int foo, String... object) {}
+    NewInstanceOverload(int foo, String... strings) {}
 
     static void test() {
       new NewInstanceOverload(0);
@@ -29,9 +29,9 @@ class VarargOverloads {
   }
 
   static class ThisConstructorCallOverload {
-    ThisConstructorCallOverload(Object... object) {}
+    ThisConstructorCallOverload(Object... objects) {}
 
-    ThisConstructorCallOverload(String... object) {}
+    ThisConstructorCallOverload(String... strings) {}
 
     ThisConstructorCallOverload(int foo) {
       this();
@@ -39,9 +39,9 @@ class VarargOverloads {
   }
 
   static class SuperConstructorCallOverload {
-    SuperConstructorCallOverload(Object... object) {}
+    SuperConstructorCallOverload(Object... objects) {}
 
-    SuperConstructorCallOverload(String... object) {}
+    SuperConstructorCallOverload(String... strings) {}
 
     static class Explicit extends SuperConstructorCallOverload {
       Explicit() {
@@ -57,9 +57,9 @@ class VarargOverloads {
   }
 
   static class MethodCallOverload {
-    void method(Object... object) {}
+    void method(Object... objects) {}
 
-    void method(String... object) {}
+    void method(String... strings) {}
 
     void test() {
       method();
@@ -67,10 +67,10 @@ class VarargOverloads {
   }
 
   static class MethodCallOverloadInSubtype {
-    void method(Object... object) {}
+    void method(Object... objects) {}
 
     static class Subtype extends MethodCallOverloadInSubtype {
-      void method(String... object) {}
+      void method(String... strings) {}
 
       void test() {
         method();
@@ -78,12 +78,34 @@ class VarargOverloads {
     }
   }
 
+  static class MethodCallVarargAndArrayArgs {
+    void method(Object... objects) {}
+
+    void method(String[] strings) {}
+
+    void test() {
+      method();
+    }
+  }
+
+  static class StaticMethodOverloadSubtypeCallTarget {
+    static void method(Object... objects) {}
+
+    static void method(String[] strings) {}
+
+    static class Subtype extends StaticMethodOverloadSubtypeCallTarget {}
+
+    void test() {
+      Subtype.method();
+    }
+  }
+
   enum EnumWithOverloadedConstructors {
     CONSTRUCTOR_OVERLOAD,
     SUPER_CONSTRUCTOR_OVERLOAD {};
 
-    EnumWithOverloadedConstructors(Object... args) {}
+    EnumWithOverloadedConstructors(Object... objects) {}
 
-    EnumWithOverloadedConstructors(String... args) {}
+    EnumWithOverloadedConstructors(String... strings) {}
   }
 }
