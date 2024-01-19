@@ -71,6 +71,12 @@ public class NormalizeVarargInvocationsJ2kt extends NormalizationPass {
     MethodDescriptor target = invocation.getTarget();
     DeclaredTypeDescriptor enclosingTypeDescriptor = target.getEnclosingTypeDescriptor();
 
+    // Don't unwrap varargs in enum constructor calls, as they are... a bit convoluted.
+    DeclaredTypeDescriptor superTypeDescriptor = enclosingTypeDescriptor.getSuperTypeDescriptor();
+    if (superTypeDescriptor != null && superTypeDescriptor.isEnum()) {
+      return false;
+    }
+
     // Collect method descriptors to look for overloads.
     Collection<MethodDescriptor> methodDescriptors =
         target.isInstanceMember()

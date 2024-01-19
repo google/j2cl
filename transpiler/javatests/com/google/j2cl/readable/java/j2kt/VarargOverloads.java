@@ -106,7 +106,8 @@ class VarargOverloads {
   }
 
   enum EnumWithOverloadedConstructors {
-    CONSTRUCTOR_OVERLOAD;
+    CONSTRUCTOR_OVERLOAD,
+    SUPER_CONSTRUCTOR_OVERLOAD {};
 
     EnumWithOverloadedConstructors(Object... objects) {}
 
