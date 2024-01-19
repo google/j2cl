@@ -48,6 +48,12 @@ class VarargOverloads {
         super();
       }
     }
+
+    static class Implicit extends SuperConstructorCallOverload {
+      Implicit() {}
+    }
+
+    static class FromImplicitConstructor extends SuperConstructorCallOverload {}
   }
 
   static class MethodCallOverload {

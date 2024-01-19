@@ -289,7 +289,7 @@ open class InnerClassInitOrder {
  }
 
  open class ESInnerSubclass: InnerClassInitOrder.ESOuter.ESInner {
-  internal constructor(outer: InnerClassInitOrder.ESOuter?): super()
+  internal constructor(outer: InnerClassInitOrder.ESOuter?)
 
   internal constructor(value: Int, outer: InnerClassInitOrder.ESOuter?): super(value)
  }
@@ -317,7 +317,7 @@ open class InnerClassInitOrder {
  }
 
  open class ESWGInnerSubclass: InnerClassInitOrder.ESWGOuter<String?>.ESWGInner {
-  internal constructor(outer: InnerClassInitOrder.ESWGOuter<String?>?): super()
+  internal constructor(outer: InnerClassInitOrder.ESWGOuter<String?>?)
 
   internal constructor(value: Int, outer: InnerClassInitOrder.ESWGOuter<String?>?): super(value)
  }
@@ -376,11 +376,9 @@ open class InnerClassInitOrder {
   }
 
   @ObjCName("J2ktInnerclassinitorderInnerClassInitOrder_Outer_TestQualifiedSuperCall", exact = true)
-  open class TestQualifiedSuperCall: InnerClassInitOrder.Outer.OuterIsNotSuper {
-   constructor(): super()
-  }
+  open class TestQualifiedSuperCall: InnerClassInitOrder.Outer.OuterIsNotSuper() {}
 
   @ObjCName("J2ktInnerclassinitorderInnerClassInitOrder_Outer_TestUnqualifiedSuperCall", exact = true)
-  open inner class TestUnqualifiedSuperCall constructor(): InnerClassInitOrder.Outer.OuterIsNotSuper() {}
+  open inner class TestUnqualifiedSuperCall: InnerClassInitOrder.Outer.OuterIsNotSuper() {}
  }
 }

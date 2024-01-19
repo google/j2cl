@@ -68,6 +68,14 @@ open class VarargOverloads internal constructor() {
   open class Explicit: VarargOverloads.SuperConstructorCallOverload {
    internal constructor(): super(*arrayOf<String?>()!!)
   }
+
+  open class Implicit: VarargOverloads.SuperConstructorCallOverload {
+   internal constructor(): super(*arrayOf<String?>()!!)
+  }
+
+  open class FromImplicitConstructor: VarargOverloads.SuperConstructorCallOverload {
+   internal constructor(): super(*arrayOf<String?>()!!)
+  }
  }
 
  open class MethodCallOverload internal constructor() {

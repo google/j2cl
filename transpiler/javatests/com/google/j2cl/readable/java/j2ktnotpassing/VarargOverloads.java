@@ -18,18 +18,6 @@ package j2ktnotpassing;
 // TODO(b/319620723): Move to j2kt readable when the bug is fixed.
 // Kotlin requires explicit overload conflict resolution for method calls with empty varargs.
 class VarargOverloads {
-  static class SuperConstructorCallOverload {
-    SuperConstructorCallOverload(Object... objects) {}
-
-    SuperConstructorCallOverload(String... strings) {}
-
-    static class Implicit extends SuperConstructorCallOverload {
-      Implicit() {}
-    }
-
-    static class FromImplicitConstructor extends SuperConstructorCallOverload {}
-  }
-
   enum EnumWithOverloadedConstructors {
     SUPER_CONSTRUCTOR_OVERLOAD {};
 

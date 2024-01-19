@@ -144,6 +144,8 @@ import com.google.j2cl.transpiler.passes.NormalizeVariableInitialization;
 import com.google.j2cl.transpiler.passes.OptimizeAnonymousInnerClassesToFunctionExpressions;
 import com.google.j2cl.transpiler.passes.OptimizeAutoValue;
 import com.google.j2cl.transpiler.passes.OptimizeEnums;
+import com.google.j2cl.transpiler.passes.OptimizeImplicitConstructors;
+import com.google.j2cl.transpiler.passes.OptimizeImplicitSuperCalls;
 import com.google.j2cl.transpiler.passes.PropagateConstants;
 import com.google.j2cl.transpiler.passes.PropagateJsEnumConstants;
 import com.google.j2cl.transpiler.passes.PropagateNullabilityJ2kt;
@@ -671,6 +673,8 @@ public enum Backend {
           VerifyReferenceScoping::new,
 
           // Normalizations
+          CreateImplicitConstructors::new,
+          InsertExplicitSuperCalls::new,
           NormalizeLambdaExpressionsJ2kt::new,
           AddDisambiguatingSuperMethodForwardingStubs::new,
           AddVisibilityMethodBridgesJ2kt::new,
@@ -723,6 +727,8 @@ public enum Backend {
           // Passes that breaks the invariants for running ConversionContextVisitor related passes.
           NormalizeVarargInvocationsJ2kt::new,
           NormalizeArrayCreationsJ2kt::new,
+          OptimizeImplicitSuperCalls::new,
+          OptimizeImplicitConstructors::new,
 
           // Verification
           VerifySingleAstReference::new,
