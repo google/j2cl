@@ -70,6 +70,7 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.DECREMENT_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.DIVIDE_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.ELSE_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.EQUAL_OPERATOR
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.GET_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.GREATER_EQUAL_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.GREATER_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.IF_KEYWORD
@@ -83,6 +84,7 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.NOT_EQUAL_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.NOT_NULL_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.NOT_SAME_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.NULL_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.OBJECT_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.OR_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.PLUS_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.REMAINDER_OPERATOR
@@ -392,7 +394,7 @@ internal data class ExpressionRenderer(
                   nameRenderer.extensionMemberQualifiedNameSource("com.google.protobuf.kotlin.get"),
                   inParentheses(expressionSource(expression.arguments[0]))
                 ),
-                join(source("get"), inParentheses(expressionSource(expression.arguments[1])))
+                join(GET_KEYWORD, inParentheses(expressionSource(expression.arguments[1])))
               )
             else -> error("illegal proto extension getter")
           }
@@ -520,7 +522,7 @@ internal data class ExpressionRenderer(
         qualifierSource(expression),
         spaceSeparated(
           Source.emptyUnless(expression.anonymousInnerClass != null) {
-            spaceSeparated(source("object"), COLON)
+            spaceSeparated(OBJECT_KEYWORD, COLON)
           },
           join(
             newInstanceTypeDescriptorSource(typeDescriptor),
