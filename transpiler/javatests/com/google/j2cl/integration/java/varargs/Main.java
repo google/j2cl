@@ -21,6 +21,7 @@ import static com.google.j2cl.integration.testing.TestUtils.isWasm;
 
 import java.util.ArrayList;
 import java.util.List;
+import javaemul.internal.annotations.KtDisabled;
 import varargs.innerpackage.SubclassWithImplicitConstructor;
 import varargs.innerpackage.SuperWithNoPublicConstructors;
 
@@ -106,11 +107,11 @@ public class Main {
     String which;
 
     SuperWithVarargsConstructors(Object... args) {
-      which = args.getClass().getComponentType().getSimpleName();
+      which = "Object";
     }
 
     SuperWithVarargsConstructors(String... args) {
-      which = args.getClass().getComponentType().getSimpleName();
+      which = "String";
     }
   }
 
@@ -144,12 +145,12 @@ public class Main {
         int value;
 
         Parent(Object... args) {
-          which = args.getClass().getComponentType().getSimpleName();
+          which = "Object";
           value = captured;
         }
 
         Parent(String... args) {
-          which = args.getClass().getComponentType().getSimpleName();
+          which = "String";
           value = captured;
         }
       }
@@ -206,12 +207,12 @@ public class Main {
       int value;
 
       Parent(T... args) {
-        which = args.getClass().getComponentType().getSimpleName();
+        which = "List";
         value = captured;
       }
 
       Parent(U... args) {
-        which = args.getClass().getComponentType().getSimpleName();
+        which = "ArrayList";
         value = captured;
       }
     }
@@ -234,11 +235,11 @@ public class Main {
     E(new String[0]) {};
 
     MyEnum(Object... args) {
-      which = args.getClass().getComponentType().getSimpleName();
+      which = "Object";
     }
 
     MyEnum(String... args) {
-      which = args.getClass().getComponentType().getSimpleName();
+      which = "String";
     }
 
     String which;
@@ -278,6 +279,8 @@ public class Main {
     assertTrue((e == 1));
   }
 
+  // TODO(b/319404022): Enable when passing null vararg argument is allowed.
+  @KtDisabled
   private static void testVarargs_method_null() {
     Integer i1 = new Integer(1);
     int f = bar(i1, null);
