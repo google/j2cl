@@ -1,0 +1,157 @@
+// Generated from "j2kt/VarargOverloads.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "REPEATED_BOUND",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER")
+
+package j2kt
+
+import javaemul.lang.*
+import kotlin.Any
+import kotlin.Array
+import kotlin.Int
+import kotlin.String
+import kotlin.Suppress
+import kotlin.arrayOf
+import kotlin.jvm.JvmStatic
+
+open class VarargOverloads internal constructor() {
+ open class NewInstanceOverload {
+  internal constructor(foo: Int, vararg objects: Any?) {
+   val objects_1: Array<Any?>? = objects as Array<Any?>?
+  }
+
+  internal constructor(foo: Int, vararg strings: String?) {
+   val strings_1: Array<String?>? = strings as Array<String?>?
+  }
+
+  companion object {
+   @JvmStatic
+   internal fun test_pp_j2kt() {
+    VarargOverloads.NewInstanceOverload(0, *arrayOf<String?>()!!)
+   }
+  }
+ }
+
+ open class ThisConstructorCallOverload {
+  internal constructor(vararg objects: Any?) {
+   val objects_1: Array<Any?>? = objects as Array<Any?>?
+  }
+
+  internal constructor(vararg strings: String?) {
+   val strings_1: Array<String?>? = strings as Array<String?>?
+  }
+
+  internal constructor(foo: Int): this(*arrayOf<String?>()!!)
+ }
+
+ open class SuperConstructorCallOverload {
+  internal constructor(vararg objects: Any?) {
+   val objects_1: Array<Any?>? = objects as Array<Any?>?
+  }
+
+  internal constructor(vararg strings: String?) {
+   val strings_1: Array<String?>? = strings as Array<String?>?
+  }
+
+  open class Explicit: VarargOverloads.SuperConstructorCallOverload {
+   internal constructor(): super(*arrayOf<String?>()!!)
+  }
+ }
+
+ open class MethodCallOverload internal constructor() {
+  internal open fun method_pp_j2kt(vararg objects: Any?) {
+   val objects_1: Array<Any?>? = objects as Array<Any?>?
+  }
+
+  internal open fun method_pp_j2kt(vararg strings: String?) {
+   val strings_1: Array<String?>? = strings as Array<String?>?
+  }
+
+  internal open fun test_pp_j2kt() {
+   this.method_pp_j2kt(*arrayOf<String?>()!!)
+  }
+ }
+
+ open class MethodCallOverloadInSubtype internal constructor() {
+  internal open fun method_pp_j2kt(vararg objects: Any?) {
+   val objects_1: Array<Any?>? = objects as Array<Any?>?
+  }
+
+  open class Subtype internal constructor(): VarargOverloads.MethodCallOverloadInSubtype() {
+   internal open fun method_pp_j2kt(vararg strings: String?) {
+    val strings_1: Array<String?>? = strings as Array<String?>?
+   }
+
+   internal open fun test_pp_j2kt() {
+    this.method_pp_j2kt(*arrayOf<String?>()!!)
+   }
+  }
+ }
+
+ open class MethodCallVarargAndArrayArgs internal constructor() {
+  internal open fun method_pp_j2kt(vararg objects: Any?) {
+   val objects_1: Array<Any?>? = objects as Array<Any?>?
+  }
+
+  internal open fun method_pp_j2kt(strings: Array<String?>?) {}
+
+  internal open fun test_pp_j2kt() {
+   this.method_pp_j2kt()
+  }
+ }
+
+ open class StaticMethodOverloadSubtypeCallTarget internal constructor() {
+  internal open fun test_pp_j2kt() {
+   VarargOverloads.StaticMethodOverloadSubtypeCallTarget.method_pp_j2kt()
+   VarargOverloads.StaticMethodOverloadSubtypeCallTarget.generalizedInSubtype_pp_j2kt()
+  }
+
+  companion object {
+   @JvmStatic
+   internal fun method_pp_j2kt(vararg objects: Any?) {
+    val objects_1: Array<Any?>? = objects as Array<Any?>?
+   }
+
+   @JvmStatic
+   internal fun method_pp_j2kt(strings: Array<String?>?) {}
+
+   @JvmStatic
+   internal fun generalizedInSubtype_pp_j2kt(vararg strings: String?) {
+    val strings_1: Array<String?>? = strings as Array<String?>?
+   }
+  }
+
+  open class Subtype internal constructor(): VarargOverloads.StaticMethodOverloadSubtypeCallTarget() {
+   companion object {
+    @JvmStatic
+    internal fun generalizedInSubtype_pp_j2kt(vararg objects: Any?) {
+     val objects_1: Array<Any?>? = objects as Array<Any?>?
+    }
+   }
+  }
+ }
+
+ enum class EnumWithOverloadedConstructors {
+  CONSTRUCTOR_OVERLOAD(*arrayOf<String?>()!!);
+
+  constructor(vararg objects: Any?) {
+   val objects_1: Array<Any?>? = objects as Array<Any?>?
+  }
+
+  constructor(vararg strings: String?) {
+   val strings_1: Array<String?>? = strings as Array<String?>?
+  }
+ }
+}

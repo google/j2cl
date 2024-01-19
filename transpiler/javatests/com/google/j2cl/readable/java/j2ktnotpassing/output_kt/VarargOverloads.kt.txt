@@ -20,41 +20,10 @@ package j2ktnotpassing
 import javaemul.lang.*
 import kotlin.Any
 import kotlin.Array
-import kotlin.Int
 import kotlin.String
 import kotlin.Suppress
-import kotlin.jvm.JvmStatic
 
 open class VarargOverloads internal constructor() {
- open class NewInstanceOverload {
-  internal constructor(foo: Int, vararg objects: Any?) {
-   val objects_1: Array<Any?>? = objects as Array<Any?>?
-  }
-
-  internal constructor(foo: Int, vararg strings: String?) {
-   val strings_1: Array<String?>? = strings as Array<String?>?
-  }
-
-  companion object {
-   @JvmStatic
-   internal fun test_pp_j2ktnotpassing() {
-    VarargOverloads.NewInstanceOverload(0)
-   }
-  }
- }
-
- open class ThisConstructorCallOverload {
-  internal constructor(vararg objects: Any?) {
-   val objects_1: Array<Any?>? = objects as Array<Any?>?
-  }
-
-  internal constructor(vararg strings: String?) {
-   val strings_1: Array<String?>? = strings as Array<String?>?
-  }
-
-  internal constructor(foo: Int): this()
- }
-
  open class SuperConstructorCallOverload {
   internal constructor(vararg objects: Any?) {
    val objects_1: Array<Any?>? = objects as Array<Any?>?
@@ -64,10 +33,6 @@ open class VarargOverloads internal constructor() {
    val strings_1: Array<String?>? = strings as Array<String?>?
   }
 
-  open class Explicit: VarargOverloads.SuperConstructorCallOverload {
-   internal constructor(): super()
-  }
-
   open class Implicit: VarargOverloads.SuperConstructorCallOverload {
    internal constructor()
   }
@@ -75,68 +40,7 @@ open class VarargOverloads internal constructor() {
   open class FromImplicitConstructor internal constructor(): VarargOverloads.SuperConstructorCallOverload() {}
  }
 
- open class MethodCallOverload internal constructor() {
-  internal open fun method_pp_j2ktnotpassing(vararg objects: Any?) {
-   val objects_1: Array<Any?>? = objects as Array<Any?>?
-  }
-
-  internal open fun method_pp_j2ktnotpassing(vararg strings: String?) {
-   val strings_1: Array<String?>? = strings as Array<String?>?
-  }
-
-  internal open fun test_pp_j2ktnotpassing() {
-   this.method_pp_j2ktnotpassing()
-  }
- }
-
- open class MethodCallOverloadInSubtype internal constructor() {
-  internal open fun method_pp_j2ktnotpassing(vararg objects: Any?) {
-   val objects_1: Array<Any?>? = objects as Array<Any?>?
-  }
-
-  open class Subtype internal constructor(): VarargOverloads.MethodCallOverloadInSubtype() {
-   internal open fun method_pp_j2ktnotpassing(vararg strings: String?) {
-    val strings_1: Array<String?>? = strings as Array<String?>?
-   }
-
-   internal open fun test_pp_j2ktnotpassing() {
-    this.method_pp_j2ktnotpassing()
-   }
-  }
- }
-
- open class MethodCallVarargAndArrayArgs internal constructor() {
-  internal open fun method_pp_j2ktnotpassing(vararg objects: Any?) {
-   val objects_1: Array<Any?>? = objects as Array<Any?>?
-  }
-
-  internal open fun method_pp_j2ktnotpassing(strings: Array<String?>?) {}
-
-  internal open fun test_pp_j2ktnotpassing() {
-   this.method_pp_j2ktnotpassing()
-  }
- }
-
- open class StaticMethodOverloadSubtypeCallTarget internal constructor() {
-  internal open fun test_pp_j2ktnotpassing() {
-   VarargOverloads.StaticMethodOverloadSubtypeCallTarget.method_pp_j2ktnotpassing()
-  }
-
-  companion object {
-   @JvmStatic
-   internal fun method_pp_j2ktnotpassing(vararg objects: Any?) {
-    val objects_1: Array<Any?>? = objects as Array<Any?>?
-   }
-
-   @JvmStatic
-   internal fun method_pp_j2ktnotpassing(strings: Array<String?>?) {}
-  }
-
-  open class Subtype internal constructor(): VarargOverloads.StaticMethodOverloadSubtypeCallTarget() {}
- }
-
  enum class EnumWithOverloadedConstructors {
-  CONSTRUCTOR_OVERLOAD,
   SUPER_CONSTRUCTOR_OVERLOAD {};
 
   constructor(vararg objects: Any?) {

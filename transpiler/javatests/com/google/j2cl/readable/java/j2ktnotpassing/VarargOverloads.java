@@ -18,36 +18,10 @@ package j2ktnotpassing;
 // TODO(b/319620723): Move to j2kt readable when the bug is fixed.
 // Kotlin requires explicit overload conflict resolution for method calls with empty varargs.
 class VarargOverloads {
-  static class NewInstanceOverload {
-    NewInstanceOverload(int foo, Object... objects) {}
-
-    NewInstanceOverload(int foo, String... strings) {}
-
-    static void test() {
-      new NewInstanceOverload(0);
-    }
-  }
-
-  static class ThisConstructorCallOverload {
-    ThisConstructorCallOverload(Object... objects) {}
-
-    ThisConstructorCallOverload(String... strings) {}
-
-    ThisConstructorCallOverload(int foo) {
-      this();
-    }
-  }
-
   static class SuperConstructorCallOverload {
     SuperConstructorCallOverload(Object... objects) {}
 
     SuperConstructorCallOverload(String... strings) {}
-
-    static class Explicit extends SuperConstructorCallOverload {
-      Explicit() {
-        super();
-      }
-    }
 
     static class Implicit extends SuperConstructorCallOverload {
       Implicit() {}
@@ -56,52 +30,7 @@ class VarargOverloads {
     static class FromImplicitConstructor extends SuperConstructorCallOverload {}
   }
 
-  static class MethodCallOverload {
-    void method(Object... objects) {}
-
-    void method(String... strings) {}
-
-    void test() {
-      method();
-    }
-  }
-
-  static class MethodCallOverloadInSubtype {
-    void method(Object... objects) {}
-
-    static class Subtype extends MethodCallOverloadInSubtype {
-      void method(String... strings) {}
-
-      void test() {
-        method();
-      }
-    }
-  }
-
-  static class MethodCallVarargAndArrayArgs {
-    void method(Object... objects) {}
-
-    void method(String[] strings) {}
-
-    void test() {
-      method();
-    }
-  }
-
-  static class StaticMethodOverloadSubtypeCallTarget {
-    static void method(Object... objects) {}
-
-    static void method(String[] strings) {}
-
-    static class Subtype extends StaticMethodOverloadSubtypeCallTarget {}
-
-    void test() {
-      Subtype.method();
-    }
-  }
-
   enum EnumWithOverloadedConstructors {
-    CONSTRUCTOR_OVERLOAD,
     SUPER_CONSTRUCTOR_OVERLOAD {};
 
     EnumWithOverloadedConstructors(Object... objects) {}
