@@ -71,7 +71,7 @@ def _create_target_info(target):
     blaze_target += ".js"
   if rule_kind == "_j2wasm_application":
     blaze_target += ".wasm"
-  elif rule_kind == "_size_report_rule":
+  elif rule_kind == "_size_report":
     # Size report targets doesn't need extension.
     pass
   elif rule_kind:
