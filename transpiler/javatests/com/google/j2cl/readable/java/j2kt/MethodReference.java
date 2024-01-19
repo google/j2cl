@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 // TODO(b/319346347): Move to j2kt when the bug is fixed.
-package j2ktnotpassing;
+package j2kt;
 
 final class MethodReference {
   static <T> void foo(final Foo<? extends Foo<? extends T>> inputs) {

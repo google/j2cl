@@ -421,9 +421,12 @@ internal data class ExpressionRenderer(
       }
     }
 
-  private fun invocationTypeArgumentsSource(typeArguments: List<TypeArgument>): Source =
+  private fun invocationTypeArgumentsSource(
+    typeArguments: List<TypeArgument>,
+    omitNonDenotable: Boolean = true
+  ): Source =
     typeArguments
-      .takeIf { it.isNotEmpty() && it.all(TypeArgument::isDenotable) }
+      .takeIf { it.isNotEmpty() && (it.all(TypeArgument::isDenotable) || !omitNonDenotable) }
       ?.let { nameRenderer.typeArgumentsSource(it) }
       .orEmpty()
 
@@ -525,7 +528,10 @@ internal data class ExpressionRenderer(
             spaceSeparated(OBJECT_KEYWORD, COLON)
           },
           join(
-            newInstanceTypeDescriptorSource(typeDescriptor),
+            newInstanceTypeDescriptorSource(
+              typeDescriptor,
+              omitNonDenotable = expression.anonymousInnerClass == null
+            ),
             // Render invocation arguments for classes only - interfaces don't need it.
             Source.emptyUnless(typeDescriptor.isClass) {
               // Explicit label is necessary to workaround
@@ -538,7 +544,10 @@ internal data class ExpressionRenderer(
       )
     }
 
-  private fun newInstanceTypeDescriptorSource(typeDescriptor: DeclaredTypeDescriptor): Source =
+  private fun newInstanceTypeDescriptorSource(
+    typeDescriptor: DeclaredTypeDescriptor,
+    omitNonDenotable: Boolean = true
+  ): Source =
     // Render qualified name if there's no qualifier, otherwise render simple name.
     typeDescriptor.typeDeclaration.let { typeDeclaration ->
       join(
@@ -547,7 +556,7 @@ internal data class ExpressionRenderer(
         } else {
           nameRenderer.qualifiedNameSource(typeDescriptor, asSuperType = true)
         },
-        invocationTypeArgumentsSource(typeDescriptor.typeArguments())
+        invocationTypeArgumentsSource(typeDescriptor.typeArguments(), omitNonDenotable)
       )
     }
 

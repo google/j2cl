@@ -650,6 +650,7 @@
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
   (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
+  (field $m_apply__java_lang_Enum__java_lang_Object (ref $function.m_apply__java_lang_Enum__java_lang_Object))
   ))
  )
  (type $lambdas.Lambdas.$LambdaImplementor$18.itable (sub $itable (struct
@@ -1821,6 +1822,7 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$18)
+  (ref.func $m_apply__java_lang_Enum__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$18)
  )
 )
 (global $lambdas.Lambdas.Function.vtable@$lambdas.Lambdas.$LambdaImplementor$18 (ref $lambdas.Lambdas.Function.vtable)
@@ -6476,7 +6478,7 @@
 
 ;;; Code for lambdas.Lambdas.$LambdaImplementor$18 [methods]
 
-;;; <anonymous> implements Function<? super T, ?><T> <anonymous> implements Function<? super T, ?>.$create()
+;;; <anonymous> implements Function<T, Object><T> <anonymous> implements Function<T, Object>.$create()
 (func $$create__@lambdas.Lambdas.$LambdaImplementor$18
  (result (ref null $lambdas.Lambdas.$LambdaImplementor$18))
  ;;@ lambdas/Lambdas.java:175:31
@@ -6493,7 +6495,7 @@
  )
 )
 
-;;; void <anonymous> implements Function<? super T, ?>.$ctor()
+;;; void <anonymous> implements Function<T, Object>.$ctor()
 (func $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$18@lambdas.Lambdas.$LambdaImplementor$18
  (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$18))
  ;;@ lambdas/Lambdas.java:175:31
@@ -6503,26 +6505,39 @@
  )
 )
 
-;;; ? <anonymous> implements Function<? super T, ?>.apply(? super T item)
-(func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$18
- (type $function.m_apply__java_lang_Object__java_lang_Object)
+;;; Object <anonymous> implements Function<T, Object>.apply(T item)
+(func $m_apply__java_lang_Enum__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$18
+ (type $function.m_apply__java_lang_Enum__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $item (ref null $java.lang.Object))
+ (param $item (ref null $java.lang.Enum))
  (result (ref null $java.lang.Object))
  ;;@ lambdas/Lambdas.java:175:31
- (local $item_1 (ref null $java.lang.Enum))
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$18))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$18) (local.get $this.untyped)))
  (block
-  ;;@ lambdas/Lambdas.java:175:31
-  (local.set $item_1 (ref.cast (ref null $java.lang.Enum) (local.get $item)))
   ;;@ lambdas/Lambdas.java:175:39
   (return (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.const 1)))
  )
 )
+(elem declare func $m_apply__java_lang_Enum__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$18)
+
+;;; Object <anonymous> implements Function<T, Object>.apply(T arg0)
+(func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$18
+ (type $function.m_apply__java_lang_Object__java_lang_Object)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ lambdas/Lambdas.java:175:31
+ (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$18))
+ (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$18) (local.get $this.untyped)))
+ (block
+  ;;@ lambdas/Lambdas.java:175:31
+  (return (call_ref $function.m_apply__java_lang_Enum__java_lang_Object (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Enum) (local.get $arg0))(struct.get $lambdas.Lambdas.$LambdaImplementor$18.vtable $m_apply__java_lang_Enum__java_lang_Object (struct.get $lambdas.Lambdas.$LambdaImplementor$18 $vtable(local.get $this)))))
+ )
+)
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$18)
 
-;;; void <anonymous> implements Function<? super T, ?>.$clinit()
+;;; void <anonymous> implements Function<T, Object>.$clinit()
 (func $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$18
  ;;@ lambdas/Lambdas.java:175:31
  (block
@@ -6540,7 +6555,7 @@
  )
 )
 
-;;; Class<T> <anonymous> implements Function<? super T, ?>.$getClassMetadata()
+;;; Class<T> <anonymous> implements Function<T, Object>.$getClassMetadata()
 (func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$18
  (result (ref null $java.lang.Class))
  (block
@@ -6554,7 +6569,7 @@
  )
 )
 
-;;; Class<?> <anonymous> implements Function<? super T, ?>.$getClassImpl()
+;;; Class<?> <anonymous> implements Function<T, Object>.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$18
  (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
@@ -6567,7 +6582,7 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$18)
 
-;;; String <anonymous> implements Function<? super T, ?>.$getString_|lambdas.Lamb...|()
+;;; String <anonymous> implements Function<T, Object>.$getString_|lambdas.Lamb...|()
 (func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$18
  (result (ref null $java.lang.String))
  (block
@@ -6583,7 +6598,7 @@
 
 ;;; Code for lambdas.Lambdas.$LambdaImplementor$19 [methods]
 
-;;; <anonymous> implements Function<Object, ?> <anonymous> implements Function<Object, ?>.$create()
+;;; <anonymous> implements Function<Object, Object> <anonymous> implements Function<Object, Object>.$create()
 (func $$create__@lambdas.Lambdas.$LambdaImplementor$19
  (result (ref null $lambdas.Lambdas.$LambdaImplementor$19))
  ;;@ lambdas/Lambdas.java:183:28
@@ -6600,7 +6615,7 @@
  )
 )
 
-;;; void <anonymous> implements Function<Object, ?>.$ctor()
+;;; void <anonymous> implements Function<Object, Object>.$ctor()
 (func $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$19@lambdas.Lambdas.$LambdaImplementor$19
  (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$19))
  ;;@ lambdas/Lambdas.java:183:28
@@ -6610,7 +6625,7 @@
  )
 )
 
-;;; ? <anonymous> implements Function<Object, ?>.apply(Object l)
+;;; Object <anonymous> implements Function<Object, Object>.apply(Object l)
 (func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$19
  (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
@@ -6626,7 +6641,7 @@
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$19)
 
-;;; void <anonymous> implements Function<Object, ?>.$clinit()
+;;; void <anonymous> implements Function<Object, Object>.$clinit()
 (func $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$19
  ;;@ lambdas/Lambdas.java:183:28
  (block
@@ -6644,7 +6659,7 @@
  )
 )
 
-;;; Class<T> <anonymous> implements Function<Object, ?>.$getClassMetadata()
+;;; Class<T> <anonymous> implements Function<Object, Object>.$getClassMetadata()
 (func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$19
  (result (ref null $java.lang.Class))
  (block
@@ -6658,7 +6673,7 @@
  )
 )
 
-;;; Class<?> <anonymous> implements Function<Object, ?>.$getClassImpl()
+;;; Class<?> <anonymous> implements Function<Object, Object>.$getClassImpl()
 (func $$getClassImpl__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$19
  (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
@@ -6671,7 +6686,7 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.$LambdaImplementor$19)
 
-;;; String <anonymous> implements Function<Object, ?>.$getString_|lambdas.Lamb...|()
+;;; String <anonymous> implements Function<Object, Object>.$getString_|lambdas.Lamb...|()
 (func $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$19
  (result (ref null $java.lang.String))
  (block

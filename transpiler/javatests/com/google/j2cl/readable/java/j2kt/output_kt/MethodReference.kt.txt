@@ -1,4 +1,4 @@
-// Generated from "j2ktnotpassing/MethodReference.java"
+// Generated from "j2kt/MethodReference.java"
 @file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
@@ -16,7 +16,7 @@
  "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
  "VARIABLE_WITH_REDUNDANT_INITIALIZER")
 
-package j2ktnotpassing
+package j2kt
 
 import javaemul.lang.*
 import kotlin.OptIn
@@ -28,17 +28,17 @@ import kotlin.native.ObjCName
 class MethodReference internal constructor() {
  companion object {
   @JvmStatic
-  internal fun <T> foo_pp_j2ktnotpassing(inputs: MethodReference.Foo<out MethodReference.Foo<out T>?>?) {
-   MethodReference.transform_pp_j2ktnotpassing(inputs, object : MethodReference.Function {
-    override fun <H> apply(arg0: in out MethodReference.Foo<out T>?): out MethodReference.Foo<out T>? {
-     val arg0_1 = (arg0 as in out MethodReference.Foo<out T>?) as out MethodReference.Foo<out T>?
+  internal fun <T> foo_pp_j2kt(inputs: MethodReference.Foo<out MethodReference.Foo<out T>?>?) {
+   MethodReference.transform_pp_j2kt(inputs, object : MethodReference.Function<MethodReference.Foo<out T>?, MethodReference.Foo<out T>?> {
+    override fun <H> apply(arg0: MethodReference.Foo<out T>?): MethodReference.Foo<out T>? {
+     val arg0_1 = arg0 as MethodReference.Foo<out T>?
      return arg0_1!!.bar()
     }
    })
   }
 
   @JvmStatic
-  internal fun <F, T> transform_pp_j2ktnotpassing(foo: MethodReference.Foo<F>?, function: MethodReference.Function<in F, out T>?) {}
+  internal fun <F, T> transform_pp_j2kt(foo: MethodReference.Foo<F>?, function: MethodReference.Function<in F, out T>?) {}
  }
 
  interface Function<T, R> {

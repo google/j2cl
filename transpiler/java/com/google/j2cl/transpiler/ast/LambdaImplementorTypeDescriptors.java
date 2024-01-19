@@ -16,11 +16,15 @@
 package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkState;
-import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Streams;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import java.util.List;
+import java.util.Map.Entry;
+import java.util.stream.Stream;
 
 /** Utility TypeDescriptors methods used to synthesize lambda implementors. */
 // TODO(b/63118697): Simplify this code once TD refactoring makes it easier to implement.
@@ -37,13 +41,16 @@ public final class LambdaImplementorTypeDescriptors {
 
     // Lambdas that implement several types, e.g. from an intersection cast, require that all
     // those types be declared type descriptors.
-    List<DeclaredTypeDescriptor> interfaceTypeDescriptors =
+    Stream<DeclaredTypeDescriptor> interfaceDescriptorsStream =
         typeDescriptor.isIntersection()
             ? ((IntersectionTypeDescriptor) typeDescriptor)
-                .getIntersectionTypeDescriptors().stream()
-                    .map(DeclaredTypeDescriptor.class::cast)
-                    .collect(toImmutableList())
-            : ImmutableList.of((DeclaredTypeDescriptor) typeDescriptor);
+                .getIntersectionTypeDescriptors().stream().map(DeclaredTypeDescriptor.class::cast)
+            : Stream.of((DeclaredTypeDescriptor) typeDescriptor);
+
+    ImmutableList<DeclaredTypeDescriptor> interfaceTypeDescriptors =
+        interfaceDescriptorsStream
+            .map(LambdaImplementorTypeDescriptors::sanitizeDescriptor)
+            .collect(ImmutableList.toImmutableList());
 
     TypeDeclaration implementorTypeDeclaration =
         createLambdaImplementorTypeDeclaration(
@@ -58,12 +65,50 @@ public final class LambdaImplementorTypeDescriptors {
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setTypeDeclaration(implementorTypeDeclaration)
         .setSuperTypeDescriptorFactory(() -> TypeDescriptors.get().javaLangObject)
-        .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.copyOf(interfaceTypeDescriptors))
+        .setInterfaceTypeDescriptorsFactory(() -> interfaceTypeDescriptors)
         .setTypeArgumentDescriptors(typeParameters)
         .setDeclaredMethodDescriptorsFactory(
             implementorTypeDescriptor ->
                 ImmutableList.of(getLambdaMethod(implementorTypeDescriptor)))
         .build();
+  }
+
+  /** Sanitize the type arguments of a declared type descriptor. */
+  private static DeclaredTypeDescriptor sanitizeDescriptor(DeclaredTypeDescriptor typeDescriptor) {
+    // TODO(b/321074964): Do a more general recursive sanitizing removing all non-denotable types.
+    var newTypeArguments =
+        typeDescriptor.getTypeArgumentDescriptors().stream()
+            .map(LambdaImplementorTypeDescriptors::toBounds)
+            .collect(ImmutableList.toImmutableList());
+
+    if (newTypeArguments.equals(typeDescriptor.getTypeArgumentDescriptors())) {
+      return typeDescriptor;
+    }
+
+    typeDescriptor = typeDescriptor.toUnparameterizedTypeDescriptor();
+
+    return (DeclaredTypeDescriptor)
+        typeDescriptor.specializeTypeVariables(
+            Streams.zip(
+                    typeDescriptor.getTypeDeclaration().getTypeParameterDescriptors().stream(),
+                    newTypeArguments.stream(),
+                    Maps::immutableEntry)
+                .collect(ImmutableMap.toImmutableMap(Entry::getKey, Entry::getValue)));
+  }
+
+  /** Projects wildcards and captures to their bounds. */
+  private static TypeDescriptor toBounds(TypeDescriptor typeDescriptor) {
+    if (!typeDescriptor.isTypeVariable()) {
+      return typeDescriptor;
+    }
+    TypeVariable typeVariable = (TypeVariable) typeDescriptor;
+
+    return typeVariable.isWildcardOrCapture()
+        ? toBounds(
+            typeVariable.getLowerBoundTypeDescriptor() != null
+                ? typeVariable.getLowerBoundTypeDescriptor()
+                : typeVariable.getUpperBoundTypeDescriptor())
+        : typeVariable;
   }
 
   /** Returns the TypeDeclaration for the LambdaAdaptor class. */
