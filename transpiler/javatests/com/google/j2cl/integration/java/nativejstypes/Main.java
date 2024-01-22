@@ -38,7 +38,7 @@ public class Main {
 
   public static void testGlobalNativeJsType() {
     Number number22 = new Number(2.2);
-    Number number10base2 = Number.parseInt("10", 2);
+    Double number10base2 = Number.parseInt("10", 2);
     assertTrue(number22.toFixed().equals(number10base2.toString()));
   }
 

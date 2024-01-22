@@ -24,7 +24,7 @@ import jsinterop.annotations.JsType;
 public class Number {
   public Number(double n) {}
 
-  public static native Number parseInt(String string, int base);
+  public static native Double parseInt(String string, int base);
 
   public native String toFixed();
 }
