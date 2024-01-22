@@ -725,6 +725,15 @@ public abstract class TypeDeclaration
     return getDeclaredFieldDescriptorsFactory().get(this);
   }
 
+  /**
+   * The list of fields declared in the type. Note: this does not include methods synthetic fields
+   * (like captures) nor supertype fields.
+   */
+  @Memoized
+  public ImmutableList<TypeDeclaration> getMemberTypeDeclarations() {
+    return getMemberTypeDeclarationsFactory().get();
+  }
+
   @Override
   public final String toString() {
     return getUniqueId();
@@ -765,6 +774,9 @@ public abstract class TypeDeclaration
 
   @Nullable
   abstract DescriptorFactory<ImmutableList<FieldDescriptor>> getDeclaredFieldDescriptorsFactory();
+
+  @Nullable
+  abstract Supplier<ImmutableList<TypeDeclaration>> getMemberTypeDeclarationsFactory();
 
   abstract Builder toBuilder();
 
@@ -809,6 +821,7 @@ public abstract class TypeDeclaration
         .setTypeParameterDescriptors(ImmutableList.of())
         .setDeclaredMethodDescriptorsFactory(() -> ImmutableList.of())
         .setDeclaredFieldDescriptorsFactory(() -> ImmutableList.of())
+        .setMemberTypeDeclarationsFactory(() -> ImmutableList.of())
         .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.of())
         .setEnclosingMethodDescriptorFactory(() -> null)
         .setUnparameterizedTypeDescriptorFactory(unparameterizedFactory)
@@ -954,6 +967,9 @@ public abstract class TypeDeclaration
       return setDeclaredFieldDescriptorsFactory(
           typeDescriptor -> declaredFieldDescriptorsFactory.get());
     }
+
+    public abstract Builder setMemberTypeDeclarationsFactory(
+        Supplier<ImmutableList<TypeDeclaration>> memberTypeDeclarationsFactory);
 
     // Builder accessors to aid construction.
     abstract Optional<String> getPackageName();

@@ -1237,10 +1237,19 @@ public class JdtEnvironment {
                         typeBinding, /* inNullMarkedScope= */ isNullMarked, TypeVariable.class)
                     .stream()
                     .map(TypeVariable::toNonNullable)
-                    .collect(ImmutableList.toImmutableList()))
+                    .collect(toImmutableList()))
             .setVisibility(getVisibility(typeBinding))
             .setDeclaredMethodDescriptorsFactory(declaredMethods)
             .setDeclaredFieldDescriptorsFactory(declaredFields)
+            .setMemberTypeDeclarationsFactory(
+                () -> {
+                  if (typeBinding.getDeclaredTypes() == null) {
+                    return ImmutableList.of();
+                  }
+                  return Arrays.stream(typeBinding.getDeclaredTypes())
+                      .map(this::createDeclarationForType)
+                      .collect(ImmutableList.toImmutableList());
+                })
             .setUnusableByJsSuppressed(
                 JsInteropAnnotationUtils.isUnusableByJsSuppressed(typeBinding))
             .setDeprecated(isDeprecated(typeBinding))
