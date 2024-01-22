@@ -2,6 +2,10 @@ transpiler/javatests/com/google/j2cl/integration/java/bridgemethods/bridgemethod
 #found   : *
 #required: (null|string)
 
+transpiler/javatests/com/google/j2cl/integration/java/bridgemethods/bridgemethods-j2cl.js/bridgemethods/Main.impl.java.js:78  actual parameter 1 of $1Parent.prototype.m_foo__java_lang_Object__java_lang_String does not match formal parameter
+#found   : *
+#required: (null|string)
+
 transpiler/javatests/com/google/j2cl/integration/java/bridgemethods/bridgemethods-j2cl.js/bridgemethods/Main.impl.java.js:121  assignment
 #found   : *
 #required: (null|string)
@@ -10,13 +14,27 @@ transpiler/javatests/com/google/j2cl/integration/java/bridgemethods/bridgemethod
 #found   : *
 #required: (null|string)
 
+transpiler/javatests/com/google/j2cl/integration/java/bridgemethods/bridgemethods-j2cl.js/bridgemethods/Main.impl.java.js:59  actual parameter 1 of $1Child.prototype.m_foo__java_lang_Object__java_lang_String does not match formal parameter
+#found   : *
+#required: (null|string)
+
 transpiler/javatests/com/google/j2cl/integration/java/morebridgemethods/morebridgemethods-j2cl.js/morebridgemethods/TestCaseHand2.impl.java.js:33  actual parameter 1 of module$exports$morebridgemethods$TestCaseHand2$B$impl.prototype.m_get__java_lang_Object__java_lang_String does not match formal parameter
 #found   : (null|string)
 #required: (module$exports$java$util$function$Consumer$impl<?>|null)
 
+transpiler/javatests/com/google/j2cl/integration/java/morebridgemethods/morebridgemethods-j2cl.js/morebridgemethods/TestCaseHand2.impl.java.js:33  actual parameter 1 of B.prototype.m_get__java_lang_Object__java_lang_String does not match formal parameter
+#found   : (null|string)
+#required: (Consumer<?>|null)
+
 transpiler/javatests/com/google/j2cl/integration/java/staticinitfailfast/staticinitfailfast-j2cl.js/staticinitfailfast/Main.impl.java.js:149  Access to protected property constructor of module$exports$staticinitfailfast$Main$Foo$impl not allowed here.
 
+transpiler/javatests/com/google/j2cl/integration/java/staticinitfailfast/staticinitfailfast-j2cl.js/staticinitfailfast/Main.impl.java.js:149  Access to protected property constructor of Foo not allowed here.
+
 transpiler/javatests/com/google/j2cl/integration/java/bridgejsmethod/bridgejsmethod-j2cl.js/bridgejsmethod/Main.impl.java.js:108  actual parameter 2 of module$exports$bridgejsmethod$Main$GrandChild$impl.prototype.m_m__java_lang_String__java_lang_Object__void does not match formal parameter
+#found   : *
+#required: (null|string)
+
+transpiler/javatests/com/google/j2cl/integration/java/bridgejsmethod/bridgejsmethod-j2cl.js/bridgejsmethod/Main.impl.java.js:108  actual parameter 2 of GrandChild.prototype.m_m__java_lang_String__java_lang_Object__void does not match formal parameter
 #found   : *
 #required: (null|string)
 
@@ -25,6 +43,14 @@ transpiler/javatests/com/google/j2cl/integration/java/bridgejsmethod/bridgejsmet
 #required: (null|string)
 
 transpiler/javatests/com/google/j2cl/integration/java/bridgejsmethod/bridgejsmethod-j2cl.js/bridgejsmethod/Main.impl.java.js:118  actual parameter 1 of module$exports$bridgejsmethod$Main$Child$impl.prototype.m does not match formal parameter
+#found   : *
+#required: (null|string)
+
+transpiler/javatests/com/google/j2cl/integration/java/bridgejsmethod/bridgejsmethod-j2cl.js/bridgejsmethod/Main.impl.java.js:115  actual parameter 2 of Child.prototype.m does not match formal parameter
+#found   : *
+#required: (null|string)
+
+transpiler/javatests/com/google/j2cl/integration/java/bridgejsmethod/bridgejsmethod-j2cl.js/bridgejsmethod/Main.impl.java.js:118  actual parameter 1 of Child.prototype.m does not match formal parameter
 #found   : *
 #required: (null|string)
 
@@ -60,3 +86,35 @@ transpiler/javatests/com/google/j2cl/integration/kotlin/primitivespecialization/
 transpiler/javatests/com/google/j2cl/integration/kotlin/primitivespecialization/primitvespecialization-j2cl.js/primitivespecialization/TestIntArrayIntList.impl.java.js:108  mismatch of the lastIndexOf property type and the type of the property it overrides from superclass module$exports$java$util$ArrayListBase$impl
 #original: function(this:module$exports$java$util$ArrayListBase$impl, *): number
 #override: function(this:module$exports$primitivespecialization$TestIntArrayIntList$impl, module$exports$java$lang$Integer$impl): number
+
+transpiler/javatests/com/google/j2cl/integration/kotlin/primitivespecialization/primitvespecialization-j2cl.js/primitivespecialization/TestIntArrayIntList.impl.java.js:88  mismatch of the contains property on type TestIntArrayIntList and the type of the property it overrides from interface Collection
+#original: function(this:Collection, *): boolean
+#override: function(this:TestIntArrayIntList, Integer): boolean
+
+transpiler/javatests/com/google/j2cl/integration/kotlin/primitivespecialization/primitvespecialization-j2cl.js/primitivespecialization/TestIntArrayIntList.impl.java.js:88  mismatch of the contains property type and the type of the property it overrides from superclass ArrayListBase
+#original: function(this:ArrayListBase, *): boolean
+#override: function(this:TestIntArrayIntList, Integer): boolean
+
+transpiler/javatests/com/google/j2cl/integration/kotlin/primitivespecialization/primitvespecialization-j2cl.js/primitivespecialization/TestIntArrayIntList.impl.java.js:93  mismatch of the remove property on type TestIntArrayIntList and the type of the property it overrides from interface Collection
+#original: function(this:Collection, *): boolean
+#override: function(this:TestIntArrayIntList, Integer): number
+
+transpiler/javatests/com/google/j2cl/integration/kotlin/primitivespecialization/primitvespecialization-j2cl.js/primitivespecialization/TestIntArrayIntList.impl.java.js:93  mismatch of the remove property type and the type of the property it overrides from superclass ArrayListBase
+#original: function(this:ArrayListBase, *): boolean
+#override: function(this:TestIntArrayIntList, Integer): number
+
+transpiler/javatests/com/google/j2cl/integration/kotlin/primitivespecialization/primitvespecialization-j2cl.js/primitivespecialization/TestIntArrayIntList.impl.java.js:103  mismatch of the indexOf property on type TestIntArrayIntList and the type of the property it overrides from interface List
+#original: function(this:Listl, *): number
+#override: function(this:TestIntArrayIntList, Integer): number
+
+transpiler/javatests/com/google/j2cl/integration/kotlin/primitivespecialization/primitvespecialization-j2cl.js/primitivespecialization/TestIntArrayIntList.impl.java.js:103  mismatch of the indexOf property type and the type of the property it overrides from superclass ArrayListBase
+#original: function(this:ArrayListBase, *): number
+#override: function(this:TestIntArrayIntList, Integer): number
+
+transpiler/javatests/com/google/j2cl/integration/kotlin/primitivespecialization/primitvespecialization-j2cl.js/primitivespecialization/TestIntArrayIntList.impl.java.js:108  mismatch of the lastIndexOf property on type TestIntArrayIntList and the type of the property it overrides from interface List
+#original: function(this:Listl, *): number
+#override: function(this:TestIntArrayIntList, Integer): number
+
+transpiler/javatests/com/google/j2cl/integration/kotlin/primitivespecialization/primitvespecialization-j2cl.js/primitivespecialization/TestIntArrayIntList.impl.java.js:108  mismatch of the lastIndexOf property type and the type of the property it overrides from superclass ArrayListBase
+#original: function(this:ArrayListBase, *): number
+#override: function(this:TestIntArrayIntList, Integer): number
