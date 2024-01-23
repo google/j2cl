@@ -43,6 +43,7 @@ class StacktraceAsserter {
 
   private static final ImmutableList<String> JS_TEST_INFRA_FRAMES =
       ImmutableList.of(
+          "new Promise (<anonymous>)",
           "javascript/closure/testing/testcase.js",
           "javascript/closure/testing/testrunner.js",
           "javascript/closure/promise/promise.js",
