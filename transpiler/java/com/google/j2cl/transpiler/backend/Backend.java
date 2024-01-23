@@ -675,6 +675,7 @@ public enum Backend {
           // Normalizations
           CreateImplicitConstructors::new,
           InsertExplicitSuperCalls::new,
+          NormalizeNullLiterals::new,
           NormalizeLambdaExpressionsJ2kt::new,
           AddDisambiguatingSuperMethodForwardingStubs::new,
           AddVisibilityMethodBridgesJ2kt::new,
