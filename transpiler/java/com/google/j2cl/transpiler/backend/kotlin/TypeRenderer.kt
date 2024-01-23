@@ -40,11 +40,14 @@ import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
  * @property nameRenderer underlying name renderer
  */
 internal data class TypeRenderer(val nameRenderer: NameRenderer) {
+  private fun NameRenderer.plusLocalNames(type: Type): NameRenderer =
+    plusLocalNames(type.localTypeNames).plusLocalNames(type.localFieldNames)
+
   private fun memberRenderer(type: Type): MemberRenderer =
-    MemberRenderer(nameRenderer.plusLocalNames(type.localNamesSet), type)
+    MemberRenderer(nameRenderer.plusLocalNames(type), type)
 
   private fun expressionRenderer(type: Type): ExpressionRenderer =
-    ExpressionRenderer(nameRenderer.plusLocalNames(type.localNamesSet), type)
+    ExpressionRenderer(nameRenderer.plusLocalNames(type), type)
 
   private val jsInteropAnnotationRenderer: JsInteropAnnotationRenderer
     get() = JsInteropAnnotationRenderer(nameRenderer)
