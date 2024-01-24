@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.HasName
+import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.backend.kotlin.common.orIfNull
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
@@ -25,14 +26,22 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source
  * Renderer of Kotlin names, with import resolution and alias generation.
  *
  * @property environment rendering environment
- * @property localNames a set of local names which are potentially shadowing imports
+ * @property localTypeNameMap a map from local names to qualified names
+ * @property localFieldNames a set of local field names
  */
 internal data class NameRenderer(
   val environment: Environment,
-  val localNames: Set<String> = setOf(),
+  val localTypeNameMap: Map<String, String> = mapOf(),
+  val localFieldNames: Set<String> = setOf(),
 ) {
-  fun plusLocalNames(localNames: Collection<String>): NameRenderer =
-    copy(localNames = this.localNames + localNames)
+  fun plusLocalNames(type: Type): NameRenderer =
+    plusLocalTypeNameMap(type.localTypeNameMap).plusLocalFieldNames(type.localFieldNames)
+
+  fun plusLocalTypeNameMap(localNameMap: Map<String, String>): NameRenderer =
+    copy(localTypeNameMap = this.localTypeNameMap + localNameMap)
+
+  fun plusLocalFieldNames(localNames: Set<String>): NameRenderer =
+    copy(localFieldNames = this.localFieldNames + localNames)
 
   /** Returns source containing name of the given node. */
   fun nameSource(hasName: HasName) = identifierSource(environment.identifier(hasName))
@@ -43,14 +52,36 @@ internal data class NameRenderer(
    * @param qualifiedName top-level qualified name
    */
   fun topLevelQualifiedNameSource(qualifiedName: String): Source =
+    topLevelSimpleNameOrNull(qualifiedName)
+      ?.let { identifierSource(it) }
+      .orIfNull { qualifiedIdentifierSource(qualifiedName) }
+
+  /**
+   * Returns simple name to use for the given top-level qualified name, or null if using simple name
+   * is not valid.
+   *
+   * @param qualifiedName top-level qualified name
+   * @return simple name or null
+   */
+  private fun topLevelSimpleNameOrNull(qualifiedName: String): String? =
     qualifiedName.qualifiedNameToSimpleName().let { simpleName ->
-      if (localNames.contains(simpleName) || environment.containsIdentifier(simpleName)) {
-        qualifiedIdentifierSource(qualifiedName)
-      } else {
-        environment
-          .qualifiedToNonAliasedSimpleName(qualifiedName)
-          ?.let { identifierSource(it) }
-          .orIfNull { qualifiedIdentifierSource(qualifiedName) }
+      when {
+        // Simple name shadowed by a field name.
+        localFieldNames.contains(simpleName) -> null
+
+        // Simple name shadowed by name in the environment.
+        environment.containsIdentifier(simpleName) -> null
+
+        // Look for local name, and use it if it refers to the same qualified name.
+        // Otherwise, take local name from environment, which will resolve imports.
+        else ->
+          localTypeNameMap[simpleName].let { localQualifiedName ->
+            if (localQualifiedName != null) {
+              simpleName.takeIf { localQualifiedName == qualifiedName }
+            } else {
+              environment.qualifiedToNonAliasedSimpleName(qualifiedName)
+            }
+          }
       }
     }
 

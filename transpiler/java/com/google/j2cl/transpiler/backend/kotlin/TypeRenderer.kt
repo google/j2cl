@@ -40,9 +40,6 @@ import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
  * @property nameRenderer underlying name renderer
  */
 internal data class TypeRenderer(val nameRenderer: NameRenderer) {
-  private fun NameRenderer.plusLocalNames(type: Type): NameRenderer =
-    plusLocalNames(type.localTypeNames).plusLocalNames(type.localFieldNames)
-
   private fun memberRenderer(type: Type): MemberRenderer =
     MemberRenderer(nameRenderer.plusLocalNames(type), type)
 

@@ -70,10 +70,10 @@ class KotlinGeneratorStage(private val output: OutputUtils.Output, private val p
       Environment(
         nameToIdentifierMap = nameToIdentifierMap,
         identifierSet = nameToIdentifierMap.values.toSet(),
-        topLevelQualifiedNamesSet = compilationUnit.topLevelQualifiedNamesSet,
       )
 
-    val nameRenderer = NameRenderer(environment)
+    val nameRenderer =
+      NameRenderer(environment).plusLocalTypeNameMap(compilationUnit.localTypeNames)
 
     val compilationUnitRenderer = CompilationUnitRenderer(nameRenderer)
 

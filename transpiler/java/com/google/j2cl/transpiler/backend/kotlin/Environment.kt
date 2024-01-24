@@ -36,7 +36,6 @@ internal data class Environment(
   private val importedSimpleNameToQualifiedNameMutableMap: MutableMap<String, String> =
     mutableMapOf(),
   private val importedOptInQualifiedNamesMutableSet: MutableSet<String> = mutableSetOf(),
-  private val topLevelQualifiedNamesSet: Set<String> = setOf(),
 ) {
   /** Returns identifier for the given named node. */
   fun identifier(hasName: HasName): String =
@@ -70,15 +69,9 @@ internal data class Environment(
   /** Converts the given qualified name to non-aliased simple name, or null if alias is required. */
   fun qualifiedToNonAliasedSimpleName(qualifiedName: String): String? {
     val simpleName = qualifiedName.qualifiedNameToSimpleName()
-    if (topLevelQualifiedNamesSet.contains(qualifiedName)) {
-      return simpleName
-    }
     val importMap = importedSimpleNameToQualifiedNameMutableMap
     val importedQualifiedName = importMap[simpleName]
     if (importedQualifiedName == null) {
-      if (topLevelQualifiedNamesSet.any { it.qualifiedNameToSimpleName() == simpleName }) {
-        return null
-      }
       importMap[simpleName] = qualifiedName
       return simpleName
     }

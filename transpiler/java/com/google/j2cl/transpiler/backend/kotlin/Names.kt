@@ -28,17 +28,34 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.Visibility
 
+/** Map entry from simple name to qualified name. */
+internal val TypeDeclaration.nameMapEntry: Pair<String, String>
+  get() = ktSimpleName to ktQualifiedName
+
+/** A map of member names used in this type. */
+internal val TypeDeclaration.memberTypeNameMap: Map<String, String>
+  get() = memberTypeDeclarations.mapNotNull { it.nameMapEntry }.let { mapOf(*it.toTypedArray()) }
+
+/** A map of local member names used in this type. */
+internal val TypeDeclaration.localTypeNameMap: Map<String, String>
+  get() = memberTypeNameMap.plus(nameMapEntry)
+
 /** A map of local names used in this type. */
-internal val Type.localTypeNames: Set<String>
-  get() = declaration.memberTypeDeclarations.mapNotNull { it.ktSimpleName }.toSet()
+internal val Type.localTypeNameMap: Map<String, String>
+  get() = declaration.localTypeNameMap
 
 /** A set of field names used in this type. */
 internal val Type.localFieldNames: Set<String>
   get() = fields.map { it.descriptor.ktName!! }.toSet()
 
 /** A set of top-level qualified name strings in this compilation unit. */
-internal val CompilationUnit.topLevelQualifiedNamesSet: Set<String>
-  get() = types.map { it.declaration }.filter { !it.isKtNative }.map { it.ktQualifiedName }.toSet()
+internal val CompilationUnit.localTypeNames: Map<String, String>
+  get() =
+    types
+      .map { it.declaration }
+      .filter { !it.isKtNative }
+      .map { it.ktSimpleName to it.ktQualifiedName }
+      .let { mapOf(*it.toTypedArray()) }
 
 /** Kotlin mangled name for this member descriptor. */
 internal val MemberDescriptor.ktMangledName: String
