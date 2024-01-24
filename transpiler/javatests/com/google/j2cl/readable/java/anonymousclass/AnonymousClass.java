@@ -15,6 +15,8 @@
  */
 package anonymousclass;
 
+import jsinterop.annotations.JsConstructor;
+
 abstract class SomeClass {
   public abstract String foo();
 
@@ -77,4 +79,21 @@ interface SomeInterface {
           return "a";
         }
       };
+}
+
+// Test case for b/321755877
+class JsConstructorClass {
+  @JsConstructor
+  JsConstructorClass(Object o) {}
+
+  JsConstructorClass() {
+    this(new Object() {});
+  }
+}
+
+class JsConstructorSubclass extends JsConstructorClass {
+  @JsConstructor
+  JsConstructorSubclass() {
+    super(new Object() {});
+  }
 }

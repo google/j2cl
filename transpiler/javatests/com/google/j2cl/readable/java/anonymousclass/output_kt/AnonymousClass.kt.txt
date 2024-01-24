@@ -19,6 +19,7 @@
 package anonymousclass
 
 import javaemul.lang.*
+import jsinterop.annotations.JsConstructor
 import kotlin.Any
 import kotlin.Int
 import kotlin.OptIn
@@ -108,4 +109,16 @@ interface SomeInterface {
    }
   }
  }
+}
+
+open class JsConstructorClass {
+ @JsConstructor
+ internal constructor(o: Any?)
+
+ internal constructor(): this(object : Any() {})
+}
+
+open class JsConstructorSubclass: JsConstructorClass {
+ @JsConstructor
+ internal constructor(): super(object : Any() {})
 }

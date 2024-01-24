@@ -1,0 +1,52 @@
+goog.module('anonymousclass.JsConstructorClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1 = goog.forwardDeclare('anonymousclass.JsConstructorClass.$1$impl');
+
+class JsConstructorClass extends j_l_Object {
+ //JsConstructor 'JsConstructorClass(Object)'.
+ 
+ constructor(/** * */ o) {
+  JsConstructorClass.$clinit();
+  super();
+  this.$ctor__anonymousclass_JsConstructorClass__java_lang_Object__void(o);
+ }
+ //Initialization from constructor 'JsConstructorClass(Object)'.
+ /** @nodts */
+ $ctor__anonymousclass_JsConstructorClass__java_lang_Object__void(/** * */ o) {
+  this.$ctor__java_lang_Object__void();
+ }
+ //Factory method corresponding to constructor 'JsConstructorClass()'.
+ /** @nodts @return {!JsConstructorClass} */
+ static $create__() {
+  JsConstructorClass.$clinit();
+  let $instance = new JsConstructorClass($1.$create__anonymousclass_JsConstructorClass(null));
+  $instance.$ctor__anonymousclass_JsConstructorClass__void();
+  return $instance;
+ }
+ //Initialization from constructor 'JsConstructorClass()'.
+ /** @nodts */
+ $ctor__anonymousclass_JsConstructorClass__void() {}
+ /** @nodts */
+ static $clinit() {
+  JsConstructorClass.$clinit = () =>{};
+  JsConstructorClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof JsConstructorClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1 = goog.module.get('anonymousclass.JsConstructorClass.$1$impl');
+ }
+}
+$Util.$setClassMetadata(JsConstructorClass, 'anonymousclass.JsConstructorClass');
+
+exports = JsConstructorClass;
+
+//# sourceMappingURL=JsConstructorClass.js.map

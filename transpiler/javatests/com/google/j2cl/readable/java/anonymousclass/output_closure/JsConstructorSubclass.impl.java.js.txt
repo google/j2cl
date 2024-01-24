@@ -1,0 +1,37 @@
+goog.module('anonymousclass.JsConstructorSubclass$impl');
+
+const JsConstructorClass = goog.require('anonymousclass.JsConstructorClass$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1 = goog.forwardDeclare('anonymousclass.JsConstructorSubclass.$1$impl');
+
+class JsConstructorSubclass extends JsConstructorClass {
+ 
+ constructor() {
+  JsConstructorSubclass.$clinit();
+  super($1.$create__anonymousclass_JsConstructorSubclass(null));
+  this.$ctor__anonymousclass_JsConstructorSubclass__void();
+ }
+ /** @nodts */
+ $ctor__anonymousclass_JsConstructorSubclass__void() {}
+ /** @nodts */
+ static $clinit() {
+  JsConstructorSubclass.$clinit = () =>{};
+  JsConstructorSubclass.$loadModules();
+  JsConstructorClass.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof JsConstructorSubclass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1 = goog.module.get('anonymousclass.JsConstructorSubclass.$1$impl');
+ }
+}
+$Util.$setClassMetadata(JsConstructorSubclass, 'anonymousclass.JsConstructorSubclass');
+
+exports = JsConstructorSubclass;
+
+//# sourceMappingURL=JsConstructorSubclass.js.map

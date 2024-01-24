@@ -56,6 +56,72 @@
   ))
  )
 
+ ;;; Code for anonymousclass.JsConstructorClass [type definition]
+ (type $anonymousclass.JsConstructorClass (sub $java.lang.Object (struct
+  (field $vtable (ref $anonymousclass.JsConstructorClass.vtable))
+  (field $itable (ref $itable))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  ))
+ )
+ (type $anonymousclass.JsConstructorClass.vtable (sub $java.lang.Object.vtable (struct
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  ))
+ )
+
+ ;;; Code for anonymousclass.JsConstructorClass.1 [type definition]
+ (type $anonymousclass.JsConstructorClass.1 (sub $java.lang.Object (struct
+  (field $vtable (ref $anonymousclass.JsConstructorClass.1.vtable))
+  (field $itable (ref $itable))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  (field $$outer_this@anonymousclass.JsConstructorClass.1 (mut (ref null $anonymousclass.JsConstructorClass)))
+  ))
+ )
+ (type $anonymousclass.JsConstructorClass.1.vtable (sub $java.lang.Object.vtable (struct
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  ))
+ )
+
+ ;;; Code for anonymousclass.JsConstructorSubclass.1 [type definition]
+ (type $anonymousclass.JsConstructorSubclass.1 (sub $java.lang.Object (struct
+  (field $vtable (ref $anonymousclass.JsConstructorSubclass.1.vtable))
+  (field $itable (ref $itable))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  (field $$outer_this@anonymousclass.JsConstructorSubclass.1 (mut (ref null $anonymousclass.JsConstructorSubclass)))
+  ))
+ )
+ (type $anonymousclass.JsConstructorSubclass.1.vtable (sub $java.lang.Object.vtable (struct
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  ))
+ )
+
+ ;;; Code for anonymousclass.JsConstructorSubclass [type definition]
+ (type $anonymousclass.JsConstructorSubclass (sub $anonymousclass.JsConstructorClass (struct
+  (field $vtable (ref $anonymousclass.JsConstructorSubclass.vtable))
+  (field $itable (ref $itable))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  ))
+ )
+ (type $anonymousclass.JsConstructorSubclass.vtable (sub $anonymousclass.JsConstructorClass.vtable (struct
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  ))
+ )
+
  ;;; Code for anonymousclass.AnonymousClass.1 [type definition]
  (type $anonymousclass.AnonymousClass.1 (sub $anonymousclass.SomeClass (struct
   (field $vtable (ref $anonymousclass.AnonymousClass.1.vtable))
@@ -146,6 +212,28 @@
  )
 )
 
+;;; Code for anonymousclass.JsConstructorClass [vtable.init]
+(global $anonymousclass.JsConstructorClass.vtable (ref $anonymousclass.JsConstructorClass.vtable)
+ (struct.new $anonymousclass.JsConstructorClass.vtable
+  (ref.func $$getClassImpl__java_lang_Class@anonymousclass.JsConstructorClass)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+
+;;; Code for anonymousclass.JsConstructorSubclass [vtable.init]
+(global $anonymousclass.JsConstructorSubclass.vtable (ref $anonymousclass.JsConstructorSubclass.vtable)
+ (struct.new $anonymousclass.JsConstructorSubclass.vtable
+  (ref.func $$getClassImpl__java_lang_Class@anonymousclass.JsConstructorSubclass)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+
 ;;; Code for anonymousclass.AnonymousClass.1 [vtable.init]
 (global $anonymousclass.AnonymousClass.1.vtable (ref $anonymousclass.AnonymousClass.1.vtable)
  (struct.new $anonymousclass.AnonymousClass.1.vtable
@@ -191,6 +279,28 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_foo__java_lang_String@anonymousclass.SomeInterface.1)
+ )
+)
+
+;;; Code for anonymousclass.JsConstructorClass.1 [vtable.init]
+(global $anonymousclass.JsConstructorClass.1.vtable (ref $anonymousclass.JsConstructorClass.1.vtable)
+ (struct.new $anonymousclass.JsConstructorClass.1.vtable
+  (ref.func $$getClassImpl__java_lang_Class@anonymousclass.JsConstructorClass.1)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+
+;;; Code for anonymousclass.JsConstructorSubclass.1 [vtable.init]
+(global $anonymousclass.JsConstructorSubclass.1.vtable (ref $anonymousclass.JsConstructorSubclass.1.vtable)
+ (struct.new $anonymousclass.JsConstructorSubclass.1.vtable
+  (ref.func $$getClassImpl__java_lang_Class@anonymousclass.JsConstructorSubclass.1)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
 )
 
@@ -241,6 +351,28 @@
  (ref.null $java.lang.String)
 )
 
+;;; Code for anonymousclass.JsConstructorClass [static fields]
+(global $$class-initialized@anonymousclass.JsConstructorClass (mut i32)
+ (i32.const 0)
+)
+(global $$class@anonymousclass.JsConstructorClass (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$string_|anonymouscla...|@anonymousclass.JsConstructorClass (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
+
+;;; Code for anonymousclass.JsConstructorSubclass [static fields]
+(global $$class-initialized@anonymousclass.JsConstructorSubclass (mut i32)
+ (i32.const 0)
+)
+(global $$class@anonymousclass.JsConstructorSubclass (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$string_|anonymouscla...|@anonymousclass.JsConstructorSubclass (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
+
 ;;; Code for anonymousclass.AnonymousClass.1 [static fields]
 (global $$class-initialized@anonymousclass.AnonymousClass.1 (mut i32)
  (i32.const 0)
@@ -288,22 +420,44 @@
  (ref.null $java.lang.String)
 )
 
+;;; Code for anonymousclass.JsConstructorClass.1 [static fields]
+(global $$class-initialized@anonymousclass.JsConstructorClass.1 (mut i32)
+ (i32.const 0)
+)
+(global $$class@anonymousclass.JsConstructorClass.1 (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$string_|anonymouscla...|@anonymousclass.JsConstructorClass.1 (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
+
+;;; Code for anonymousclass.JsConstructorSubclass.1 [static fields]
+(global $$class-initialized@anonymousclass.JsConstructorSubclass.1 (mut i32)
+ (i32.const 0)
+)
+(global $$class@anonymousclass.JsConstructorSubclass.1 (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$string_|anonymouscla...|@anonymousclass.JsConstructorSubclass.1 (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
+
 ;;; Code for anonymousclass.SomeInterface [methods]
 
 ;;; void SomeInterface.$clinit()
 (func $$clinit__void_<once>_@anonymousclass.SomeInterface
- ;;@ anonymousclass/AnonymousClass.java:73:10
+ ;;@ anonymousclass/AnonymousClass.java:75:10
  (block
-  ;;@ anonymousclass/AnonymousClass.java:73:10
+  ;;@ anonymousclass/AnonymousClass.java:75:10
   (if (global.get $$class-initialized@anonymousclass.SomeInterface)
    (then
-    ;;@ anonymousclass/AnonymousClass.java:73:10
+    ;;@ anonymousclass/AnonymousClass.java:75:10
     (return )
    )
   )
-  ;;@ anonymousclass/AnonymousClass.java:73:10
+  ;;@ anonymousclass/AnonymousClass.java:75:10
   (global.set $$class-initialized@anonymousclass.SomeInterface (i32.const 1))
-  ;;@ anonymousclass/AnonymousClass.java:74:2
+  ;;@ anonymousclass/AnonymousClass.java:76:2
   (global.set $implicitlyStatic@anonymousclass.SomeInterface (call $$create__int@anonymousclass.SomeInterface.1 (i32.const 1)))
  )
 )
@@ -342,27 +496,27 @@
 (func $$ctor__int__void_$p_anonymousclass_SomeClass@anonymousclass.SomeClass
  (param $this (ref null $anonymousclass.SomeClass))
  (param $i i32)
- ;;@ anonymousclass/AnonymousClass.java:21:2
+ ;;@ anonymousclass/AnonymousClass.java:23:2
  (block
-  ;;@ anonymousclass/AnonymousClass.java:21:19
+  ;;@ anonymousclass/AnonymousClass.java:23:19
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void SomeClass.$clinit()
 (func $$clinit__void_<once>_@anonymousclass.SomeClass
- ;;@ anonymousclass/AnonymousClass.java:18:15
+ ;;@ anonymousclass/AnonymousClass.java:20:15
  (block
-  ;;@ anonymousclass/AnonymousClass.java:18:15
+  ;;@ anonymousclass/AnonymousClass.java:20:15
   (if (global.get $$class-initialized@anonymousclass.SomeClass)
    (then
-    ;;@ anonymousclass/AnonymousClass.java:18:15
+    ;;@ anonymousclass/AnonymousClass.java:20:15
     (return )
    )
   )
-  ;;@ anonymousclass/AnonymousClass.java:18:15
+  ;;@ anonymousclass/AnonymousClass.java:20:15
   (global.set $$class-initialized@anonymousclass.SomeClass (i32.const 1))
-  ;;@ anonymousclass/AnonymousClass.java:18:15
+  ;;@ anonymousclass/AnonymousClass.java:20:15
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -401,36 +555,36 @@
 (func $$ctor__int__void_$p_anonymousclass_SomeClassWithStaticMembers@anonymousclass.SomeClassWithStaticMembers
  (param $this (ref null $anonymousclass.SomeClassWithStaticMembers))
  (param $i i32)
- ;;@ anonymousclass/AnonymousClass.java:27:2
+ ;;@ anonymousclass/AnonymousClass.java:29:2
  (block
-  ;;@ anonymousclass/AnonymousClass.java:27:36
+  ;;@ anonymousclass/AnonymousClass.java:29:36
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void SomeClassWithStaticMembers.staticMethod()
 (func $m_staticMethod__void@anonymousclass.SomeClassWithStaticMembers
- ;;@ anonymousclass/AnonymousClass.java:29:14
+ ;;@ anonymousclass/AnonymousClass.java:31:14
  (block
-  ;;@ anonymousclass/AnonymousClass.java:29:29
+  ;;@ anonymousclass/AnonymousClass.java:31:29
   (call $$clinit__void_<once>_@anonymousclass.SomeClassWithStaticMembers )
  )
 )
 
 ;;; void SomeClassWithStaticMembers.$clinit()
 (func $$clinit__void_<once>_@anonymousclass.SomeClassWithStaticMembers
- ;;@ anonymousclass/AnonymousClass.java:24:15
+ ;;@ anonymousclass/AnonymousClass.java:26:15
  (block
-  ;;@ anonymousclass/AnonymousClass.java:24:15
+  ;;@ anonymousclass/AnonymousClass.java:26:15
   (if (global.get $$class-initialized@anonymousclass.SomeClassWithStaticMembers)
    (then
-    ;;@ anonymousclass/AnonymousClass.java:24:15
+    ;;@ anonymousclass/AnonymousClass.java:26:15
     (return )
    )
   )
-  ;;@ anonymousclass/AnonymousClass.java:24:15
+  ;;@ anonymousclass/AnonymousClass.java:26:15
   (global.set $$class-initialized@anonymousclass.SomeClassWithStaticMembers (i32.const 1))
-  ;;@ anonymousclass/AnonymousClass.java:24:15
+  ;;@ anonymousclass/AnonymousClass.java:26:15
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -469,16 +623,16 @@
 (func $$create__java_lang_Object@anonymousclass.AnonymousClass
  (param $a (ref null $java.lang.Object))
  (result (ref null $anonymousclass.AnonymousClass))
- ;;@ anonymousclass/AnonymousClass.java:36:9
+ ;;@ anonymousclass/AnonymousClass.java:38:9
  (local $$instance (ref null $anonymousclass.AnonymousClass))
  (block
-  ;;@ anonymousclass/AnonymousClass.java:36:9
+  ;;@ anonymousclass/AnonymousClass.java:38:9
   (call $$clinit__void_<once>_@anonymousclass.AnonymousClass )
-  ;;@ anonymousclass/AnonymousClass.java:36:9
+  ;;@ anonymousclass/AnonymousClass.java:38:9
   (local.set $$instance (struct.new $anonymousclass.AnonymousClass (ref.as_non_null (global.get $anonymousclass.AnonymousClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object)))
-  ;;@ anonymousclass/AnonymousClass.java:36:9
+  ;;@ anonymousclass/AnonymousClass.java:38:9
   (call $$ctor__java_lang_Object__void_$p_anonymousclass_AnonymousClass@anonymousclass.AnonymousClass (ref.as_non_null (local.get $$instance))(local.get $a))
-  ;;@ anonymousclass/AnonymousClass.java:36:9
+  ;;@ anonymousclass/AnonymousClass.java:38:9
   (return (local.get $$instance))
  )
 )
@@ -487,11 +641,11 @@
 (func $$ctor__java_lang_Object__void_$p_anonymousclass_AnonymousClass@anonymousclass.AnonymousClass
  (param $this (ref null $anonymousclass.AnonymousClass))
  (param $a (ref null $java.lang.Object))
- ;;@ anonymousclass/AnonymousClass.java:36:9
+ ;;@ anonymousclass/AnonymousClass.java:38:9
  (block
-  ;;@ anonymousclass/AnonymousClass.java:36:34
+  ;;@ anonymousclass/AnonymousClass.java:38:34
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;;@ anonymousclass/AnonymousClass.java:37:4
+  ;;@ anonymousclass/AnonymousClass.java:39:4
   (struct.set $anonymousclass.AnonymousClass $o@anonymousclass.AnonymousClass (local.get $this) (call $$create__anonymousclass_AnonymousClass__java_lang_Object__int@anonymousclass.AnonymousClass.1 (local.get $this)(local.get $a)(i32.const 0)))
  )
 )
@@ -500,15 +654,15 @@
 (func $m_main__void@anonymousclass.AnonymousClass
  (type $function.m_main__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ anonymousclass/AnonymousClass.java:49:14
+ ;;@ anonymousclass/AnonymousClass.java:51:14
  (local $instance (ref null $anonymousclass.SomeClass))
  (local $instanceWithStaticMembers (ref null $anonymousclass.SomeClassWithStaticMembers))
  (local $this (ref null $anonymousclass.AnonymousClass))
  (local.set $this (ref.cast (ref $anonymousclass.AnonymousClass) (local.get $this.untyped)))
  (block
-  ;;@ anonymousclass/AnonymousClass.java:50:4
+  ;;@ anonymousclass/AnonymousClass.java:52:4
   (local.set $instance (call $$create__anonymousclass_AnonymousClass__int@anonymousclass.AnonymousClass.2 (local.get $this)(struct.get $anonymousclass.AnonymousClass $i@anonymousclass.AnonymousClass (local.get $this))))
-  ;;@ anonymousclass/AnonymousClass.java:61:4
+  ;;@ anonymousclass/AnonymousClass.java:63:4
   (local.set $instanceWithStaticMembers (call $$create__anonymousclass_AnonymousClass__int@anonymousclass.AnonymousClass.3 (local.get $this)(struct.get $anonymousclass.AnonymousClass $i@anonymousclass.AnonymousClass (local.get $this))))
  )
 )
@@ -516,18 +670,18 @@
 
 ;;; void AnonymousClass.$clinit()
 (func $$clinit__void_<once>_@anonymousclass.AnonymousClass
- ;;@ anonymousclass/AnonymousClass.java:32:13
+ ;;@ anonymousclass/AnonymousClass.java:34:13
  (block
-  ;;@ anonymousclass/AnonymousClass.java:32:13
+  ;;@ anonymousclass/AnonymousClass.java:34:13
   (if (global.get $$class-initialized@anonymousclass.AnonymousClass)
    (then
-    ;;@ anonymousclass/AnonymousClass.java:32:13
+    ;;@ anonymousclass/AnonymousClass.java:34:13
     (return )
    )
   )
-  ;;@ anonymousclass/AnonymousClass.java:32:13
+  ;;@ anonymousclass/AnonymousClass.java:34:13
   (global.set $$class-initialized@anonymousclass.AnonymousClass (i32.const 1))
-  ;;@ anonymousclass/AnonymousClass.java:32:13
+  ;;@ anonymousclass/AnonymousClass.java:34:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -573,6 +727,395 @@
  )
 )
 
+;;; Code for anonymousclass.JsConstructorClass [methods]
+
+;;; JsConstructorClass JsConstructorClass.$create(Object o)
+(func $$create__java_lang_Object@anonymousclass.JsConstructorClass
+ (param $o (ref null $java.lang.Object))
+ (result (ref null $anonymousclass.JsConstructorClass))
+ ;;@ anonymousclass/AnonymousClass.java:87:2
+ (local $$instance (ref null $anonymousclass.JsConstructorClass))
+ (block
+  ;;@ anonymousclass/AnonymousClass.java:87:2
+  (call $$clinit__void_<once>_@anonymousclass.JsConstructorClass )
+  ;;@ anonymousclass/AnonymousClass.java:87:2
+  (local.set $$instance (struct.new $anonymousclass.JsConstructorClass (ref.as_non_null (global.get $anonymousclass.JsConstructorClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  ;;@ anonymousclass/AnonymousClass.java:87:2
+  (call $$ctor__java_lang_Object__void_$p_anonymousclass_JsConstructorClass@anonymousclass.JsConstructorClass (ref.as_non_null (local.get $$instance))(local.get $o))
+  ;;@ anonymousclass/AnonymousClass.java:87:2
+  (return (local.get $$instance))
+ )
+)
+
+;;; void JsConstructorClass.$ctor(Object o)
+(func $$ctor__java_lang_Object__void_$p_anonymousclass_JsConstructorClass@anonymousclass.JsConstructorClass
+ (param $this (ref null $anonymousclass.JsConstructorClass))
+ (param $o (ref null $java.lang.Object))
+ ;;@ anonymousclass/AnonymousClass.java:87:2
+ (block
+  ;;@ anonymousclass/AnonymousClass.java:87:31
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; JsConstructorClass JsConstructorClass.$create()
+(func $$create__@anonymousclass.JsConstructorClass
+ (result (ref null $anonymousclass.JsConstructorClass))
+ ;;@ anonymousclass/AnonymousClass.java:89:2
+ (local $$instance (ref null $anonymousclass.JsConstructorClass))
+ (block
+  ;;@ anonymousclass/AnonymousClass.java:89:2
+  (call $$clinit__void_<once>_@anonymousclass.JsConstructorClass )
+  ;;@ anonymousclass/AnonymousClass.java:89:2
+  (local.set $$instance (struct.new $anonymousclass.JsConstructorClass (ref.as_non_null (global.get $anonymousclass.JsConstructorClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  ;;@ anonymousclass/AnonymousClass.java:89:2
+  (call $$ctor__void_$p_anonymousclass_JsConstructorClass@anonymousclass.JsConstructorClass (ref.as_non_null (local.get $$instance)))
+  ;;@ anonymousclass/AnonymousClass.java:89:2
+  (return (local.get $$instance))
+ )
+)
+
+;;; void JsConstructorClass.$ctor()
+(func $$ctor__void_$p_anonymousclass_JsConstructorClass@anonymousclass.JsConstructorClass
+ (param $this (ref null $anonymousclass.JsConstructorClass))
+ ;;@ anonymousclass/AnonymousClass.java:89:2
+ (block
+  ;;@ anonymousclass/AnonymousClass.java:90:4
+  (call $$ctor__java_lang_Object__void_$p_anonymousclass_JsConstructorClass@anonymousclass.JsConstructorClass (ref.as_non_null (local.get $this))(call $$create__anonymousclass_JsConstructorClass@anonymousclass.JsConstructorClass.1 (local.get $this)))
+ )
+)
+
+;;; void JsConstructorClass.$clinit()
+(func $$clinit__void_<once>_@anonymousclass.JsConstructorClass
+ ;;@ anonymousclass/AnonymousClass.java:85:6
+ (block
+  ;;@ anonymousclass/AnonymousClass.java:85:6
+  (if (global.get $$class-initialized@anonymousclass.JsConstructorClass)
+   (then
+    ;;@ anonymousclass/AnonymousClass.java:85:6
+    (return )
+   )
+  )
+  ;;@ anonymousclass/AnonymousClass.java:85:6
+  (global.set $$class-initialized@anonymousclass.JsConstructorClass (i32.const 1))
+  ;;@ anonymousclass/AnonymousClass.java:85:6
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> JsConstructorClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@anonymousclass.JsConstructorClass
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@anonymousclass.JsConstructorClass)))
+   (then
+    (return (global.get $$class@anonymousclass.JsConstructorClass))
+   )
+  )
+  (global.set $$class@anonymousclass.JsConstructorClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|anonymouscla...|__java_lang_String_<once>_@anonymousclass.JsConstructorClass )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@anonymousclass.JsConstructorClass))
+ )
+)
+
+;;; Class<?> JsConstructorClass.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@anonymousclass.JsConstructorClass
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $anonymousclass.JsConstructorClass))
+ (local.set $this (ref.cast (ref $anonymousclass.JsConstructorClass) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@anonymousclass.JsConstructorClass ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@anonymousclass.JsConstructorClass)
+
+;;; String JsConstructorClass.$getString_|anonymouscla...|()
+(func $$getString_|anonymouscla...|__java_lang_String_<once>_@anonymousclass.JsConstructorClass
+ (result (ref null $java.lang.String))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$string_|anonymouscla...|@anonymousclass.JsConstructorClass)))
+   (then
+    (return (global.get $$string_|anonymouscla...|@anonymousclass.JsConstructorClass))
+   )
+  )
+  (global.set $$string_|anonymouscla...|@anonymousclass.JsConstructorClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "anonymousclass.JsConstructorClass")))
+  (return (global.get $$string_|anonymouscla...|@anonymousclass.JsConstructorClass))
+ )
+)
+
+;;; Code for anonymousclass.JsConstructorClass.1 [methods]
+
+;;; <anonymous> extends Object <anonymous> extends Object.$create(JsConstructorClass $outer_this)
+(func $$create__anonymousclass_JsConstructorClass@anonymousclass.JsConstructorClass.1
+ (param $$outer_this (ref null $anonymousclass.JsConstructorClass))
+ (result (ref null $anonymousclass.JsConstructorClass.1))
+ ;;@ anonymousclass/AnonymousClass.java:90:22
+ (local $$instance (ref null $anonymousclass.JsConstructorClass.1))
+ (block
+  ;;@ anonymousclass/AnonymousClass.java:90:22
+  (call $$clinit__void_<once>_@anonymousclass.JsConstructorClass.1 )
+  ;;@ anonymousclass/AnonymousClass.java:90:22
+  (local.set $$instance (struct.new $anonymousclass.JsConstructorClass.1 (ref.as_non_null (global.get $anonymousclass.JsConstructorClass.1.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $anonymousclass.JsConstructorClass)))
+  ;;@ anonymousclass/AnonymousClass.java:90:22
+  (call $$ctor__anonymousclass_JsConstructorClass__void_$p_anonymousclass_JsConstructorClass_1@anonymousclass.JsConstructorClass.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  ;;@ anonymousclass/AnonymousClass.java:90:22
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> extends Object.$ctor(JsConstructorClass $outer_this)
+(func $$ctor__anonymousclass_JsConstructorClass__void_$p_anonymousclass_JsConstructorClass_1@anonymousclass.JsConstructorClass.1
+ (param $this (ref null $anonymousclass.JsConstructorClass.1))
+ (param $$outer_this (ref null $anonymousclass.JsConstructorClass))
+ ;;@ anonymousclass/AnonymousClass.java:90:22
+ (block
+  ;;@ anonymousclass/AnonymousClass.java:90:22
+  (struct.set $anonymousclass.JsConstructorClass.1 $$outer_this@anonymousclass.JsConstructorClass.1 (local.get $this) (local.get $$outer_this))
+  ;;@ anonymousclass/AnonymousClass.java:90:22
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void <anonymous> extends Object.$clinit()
+(func $$clinit__void_<once>_@anonymousclass.JsConstructorClass.1
+ ;;@ anonymousclass/AnonymousClass.java:90:22
+ (block
+  ;;@ anonymousclass/AnonymousClass.java:90:22
+  (if (global.get $$class-initialized@anonymousclass.JsConstructorClass.1)
+   (then
+    ;;@ anonymousclass/AnonymousClass.java:90:22
+    (return )
+   )
+  )
+  ;;@ anonymousclass/AnonymousClass.java:90:22
+  (global.set $$class-initialized@anonymousclass.JsConstructorClass.1 (i32.const 1))
+  ;;@ anonymousclass/AnonymousClass.java:90:22
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> <anonymous> extends Object.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@anonymousclass.JsConstructorClass.1
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@anonymousclass.JsConstructorClass.1)))
+   (then
+    (return (global.get $$class@anonymousclass.JsConstructorClass.1))
+   )
+  )
+  (global.set $$class@anonymousclass.JsConstructorClass.1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|anonymouscla...|__java_lang_String_<once>_@anonymousclass.JsConstructorClass.1 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@anonymousclass.JsConstructorClass.1))
+ )
+)
+
+;;; Class<?> <anonymous> extends Object.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@anonymousclass.JsConstructorClass.1
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $anonymousclass.JsConstructorClass.1))
+ (local.set $this (ref.cast (ref $anonymousclass.JsConstructorClass.1) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@anonymousclass.JsConstructorClass.1 ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@anonymousclass.JsConstructorClass.1)
+
+;;; String <anonymous> extends Object.$getString_|anonymouscla...|()
+(func $$getString_|anonymouscla...|__java_lang_String_<once>_@anonymousclass.JsConstructorClass.1
+ (result (ref null $java.lang.String))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$string_|anonymouscla...|@anonymousclass.JsConstructorClass.1)))
+   (then
+    (return (global.get $$string_|anonymouscla...|@anonymousclass.JsConstructorClass.1))
+   )
+  )
+  (global.set $$string_|anonymouscla...|@anonymousclass.JsConstructorClass.1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "anonymousclass.JsConstructorClass$1")))
+  (return (global.get $$string_|anonymouscla...|@anonymousclass.JsConstructorClass.1))
+ )
+)
+
+;;; Code for anonymousclass.JsConstructorSubclass.1 [methods]
+
+;;; <anonymous> extends Object <anonymous> extends Object.$create(JsConstructorSubclass $outer_this)
+(func $$create__anonymousclass_JsConstructorSubclass@anonymousclass.JsConstructorSubclass.1
+ (param $$outer_this (ref null $anonymousclass.JsConstructorSubclass))
+ (result (ref null $anonymousclass.JsConstructorSubclass.1))
+ ;;@ anonymousclass/AnonymousClass.java:97:23
+ (local $$instance (ref null $anonymousclass.JsConstructorSubclass.1))
+ (block
+  ;;@ anonymousclass/AnonymousClass.java:97:23
+  (call $$clinit__void_<once>_@anonymousclass.JsConstructorSubclass.1 )
+  ;;@ anonymousclass/AnonymousClass.java:97:23
+  (local.set $$instance (struct.new $anonymousclass.JsConstructorSubclass.1 (ref.as_non_null (global.get $anonymousclass.JsConstructorSubclass.1.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $anonymousclass.JsConstructorSubclass)))
+  ;;@ anonymousclass/AnonymousClass.java:97:23
+  (call $$ctor__anonymousclass_JsConstructorSubclass__void_$p_anonymousclass_JsConstructorSubclass_1@anonymousclass.JsConstructorSubclass.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  ;;@ anonymousclass/AnonymousClass.java:97:23
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> extends Object.$ctor(JsConstructorSubclass $outer_this)
+(func $$ctor__anonymousclass_JsConstructorSubclass__void_$p_anonymousclass_JsConstructorSubclass_1@anonymousclass.JsConstructorSubclass.1
+ (param $this (ref null $anonymousclass.JsConstructorSubclass.1))
+ (param $$outer_this (ref null $anonymousclass.JsConstructorSubclass))
+ ;;@ anonymousclass/AnonymousClass.java:97:23
+ (block
+  ;;@ anonymousclass/AnonymousClass.java:97:23
+  (struct.set $anonymousclass.JsConstructorSubclass.1 $$outer_this@anonymousclass.JsConstructorSubclass.1 (local.get $this) (local.get $$outer_this))
+  ;;@ anonymousclass/AnonymousClass.java:97:23
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void <anonymous> extends Object.$clinit()
+(func $$clinit__void_<once>_@anonymousclass.JsConstructorSubclass.1
+ ;;@ anonymousclass/AnonymousClass.java:97:23
+ (block
+  ;;@ anonymousclass/AnonymousClass.java:97:23
+  (if (global.get $$class-initialized@anonymousclass.JsConstructorSubclass.1)
+   (then
+    ;;@ anonymousclass/AnonymousClass.java:97:23
+    (return )
+   )
+  )
+  ;;@ anonymousclass/AnonymousClass.java:97:23
+  (global.set $$class-initialized@anonymousclass.JsConstructorSubclass.1 (i32.const 1))
+  ;;@ anonymousclass/AnonymousClass.java:97:23
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> <anonymous> extends Object.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@anonymousclass.JsConstructorSubclass.1
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@anonymousclass.JsConstructorSubclass.1)))
+   (then
+    (return (global.get $$class@anonymousclass.JsConstructorSubclass.1))
+   )
+  )
+  (global.set $$class@anonymousclass.JsConstructorSubclass.1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|anonymouscla...|__java_lang_String_<once>_@anonymousclass.JsConstructorSubclass.1 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@anonymousclass.JsConstructorSubclass.1))
+ )
+)
+
+;;; Class<?> <anonymous> extends Object.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@anonymousclass.JsConstructorSubclass.1
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $anonymousclass.JsConstructorSubclass.1))
+ (local.set $this (ref.cast (ref $anonymousclass.JsConstructorSubclass.1) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@anonymousclass.JsConstructorSubclass.1 ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@anonymousclass.JsConstructorSubclass.1)
+
+;;; String <anonymous> extends Object.$getString_|anonymouscla...|()
+(func $$getString_|anonymouscla...|__java_lang_String_<once>_@anonymousclass.JsConstructorSubclass.1
+ (result (ref null $java.lang.String))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$string_|anonymouscla...|@anonymousclass.JsConstructorSubclass.1)))
+   (then
+    (return (global.get $$string_|anonymouscla...|@anonymousclass.JsConstructorSubclass.1))
+   )
+  )
+  (global.set $$string_|anonymouscla...|@anonymousclass.JsConstructorSubclass.1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "anonymousclass.JsConstructorSubclass$1")))
+  (return (global.get $$string_|anonymouscla...|@anonymousclass.JsConstructorSubclass.1))
+ )
+)
+
+;;; Code for anonymousclass.JsConstructorSubclass [methods]
+
+;;; JsConstructorSubclass JsConstructorSubclass.$create()
+(func $$create__@anonymousclass.JsConstructorSubclass
+ (result (ref null $anonymousclass.JsConstructorSubclass))
+ ;;@ anonymousclass/AnonymousClass.java:96:2
+ (local $$instance (ref null $anonymousclass.JsConstructorSubclass))
+ (block
+  ;;@ anonymousclass/AnonymousClass.java:96:2
+  (call $$clinit__void_<once>_@anonymousclass.JsConstructorSubclass )
+  ;;@ anonymousclass/AnonymousClass.java:96:2
+  (local.set $$instance (struct.new $anonymousclass.JsConstructorSubclass (ref.as_non_null (global.get $anonymousclass.JsConstructorSubclass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  ;;@ anonymousclass/AnonymousClass.java:96:2
+  (call $$ctor__void_$p_anonymousclass_JsConstructorSubclass@anonymousclass.JsConstructorSubclass (ref.as_non_null (local.get $$instance)))
+  ;;@ anonymousclass/AnonymousClass.java:96:2
+  (return (local.get $$instance))
+ )
+)
+
+;;; void JsConstructorSubclass.$ctor()
+(func $$ctor__void_$p_anonymousclass_JsConstructorSubclass@anonymousclass.JsConstructorSubclass
+ (param $this (ref null $anonymousclass.JsConstructorSubclass))
+ ;;@ anonymousclass/AnonymousClass.java:96:2
+ (block
+  ;;@ anonymousclass/AnonymousClass.java:97:4
+  (call $$ctor__java_lang_Object__void_$p_anonymousclass_JsConstructorClass@anonymousclass.JsConstructorClass (ref.as_non_null (local.get $this))(call $$create__anonymousclass_JsConstructorSubclass@anonymousclass.JsConstructorSubclass.1 (local.get $this)))
+ )
+)
+
+;;; void JsConstructorSubclass.$clinit()
+(func $$clinit__void_<once>_@anonymousclass.JsConstructorSubclass
+ ;;@ anonymousclass/AnonymousClass.java:94:6
+ (block
+  ;;@ anonymousclass/AnonymousClass.java:94:6
+  (if (global.get $$class-initialized@anonymousclass.JsConstructorSubclass)
+   (then
+    ;;@ anonymousclass/AnonymousClass.java:94:6
+    (return )
+   )
+  )
+  ;;@ anonymousclass/AnonymousClass.java:94:6
+  (global.set $$class-initialized@anonymousclass.JsConstructorSubclass (i32.const 1))
+  ;;@ anonymousclass/AnonymousClass.java:94:6
+  (call $$clinit__void_<once>_@anonymousclass.JsConstructorClass )
+ )
+)
+
+;;; Class<T> JsConstructorSubclass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@anonymousclass.JsConstructorSubclass
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@anonymousclass.JsConstructorSubclass)))
+   (then
+    (return (global.get $$class@anonymousclass.JsConstructorSubclass))
+   )
+  )
+  (global.set $$class@anonymousclass.JsConstructorSubclass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|anonymouscla...|__java_lang_String_<once>_@anonymousclass.JsConstructorSubclass )(call $$getClassMetadata__java_lang_Class_<once>_@anonymousclass.JsConstructorClass )))
+  (return (global.get $$class@anonymousclass.JsConstructorSubclass))
+ )
+)
+
+;;; Class<?> JsConstructorSubclass.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@anonymousclass.JsConstructorSubclass
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $anonymousclass.JsConstructorSubclass))
+ (local.set $this (ref.cast (ref $anonymousclass.JsConstructorSubclass) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@anonymousclass.JsConstructorSubclass ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@anonymousclass.JsConstructorSubclass)
+
+;;; String JsConstructorSubclass.$getString_|anonymouscla...|()
+(func $$getString_|anonymouscla...|__java_lang_String_<once>_@anonymousclass.JsConstructorSubclass
+ (result (ref null $java.lang.String))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$string_|anonymouscla...|@anonymousclass.JsConstructorSubclass)))
+   (then
+    (return (global.get $$string_|anonymouscla...|@anonymousclass.JsConstructorSubclass))
+   )
+  )
+  (global.set $$string_|anonymouscla...|@anonymousclass.JsConstructorSubclass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "anonymousclass.JsConstructorSubclass")))
+  (return (global.get $$string_|anonymouscla...|@anonymousclass.JsConstructorSubclass))
+ )
+)
+
 ;;; Code for anonymousclass.AnonymousClass.1 [methods]
 
 ;;; <anonymous> extends SomeClass <anonymous> extends SomeClass.$create(AnonymousClass $outer_this, Object $captured_a, int $_0)
@@ -581,16 +1124,16 @@
  (param $$captured_a (ref null $java.lang.Object))
  (param $$_0 i32)
  (result (ref null $anonymousclass.AnonymousClass.1))
- ;;@ anonymousclass/AnonymousClass.java:38:25
+ ;;@ anonymousclass/AnonymousClass.java:40:25
  (local $$instance (ref null $anonymousclass.AnonymousClass.1))
  (block
-  ;;@ anonymousclass/AnonymousClass.java:38:25
+  ;;@ anonymousclass/AnonymousClass.java:40:25
   (call $$clinit__void_<once>_@anonymousclass.AnonymousClass.1 )
-  ;;@ anonymousclass/AnonymousClass.java:38:25
+  ;;@ anonymousclass/AnonymousClass.java:40:25
   (local.set $$instance (struct.new $anonymousclass.AnonymousClass.1 (ref.as_non_null (global.get $anonymousclass.AnonymousClass.1.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $anonymousclass.AnonymousClass) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
-  ;;@ anonymousclass/AnonymousClass.java:38:25
+  ;;@ anonymousclass/AnonymousClass.java:40:25
   (call $$ctor__anonymousclass_AnonymousClass__java_lang_Object__int__void_$p_anonymousclass_AnonymousClass_1@anonymousclass.AnonymousClass.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$captured_a)(local.get $$_0))
-  ;;@ anonymousclass/AnonymousClass.java:38:25
+  ;;@ anonymousclass/AnonymousClass.java:40:25
   (return (local.get $$instance))
  )
 )
@@ -601,15 +1144,15 @@
  (param $$outer_this (ref null $anonymousclass.AnonymousClass))
  (param $$captured_a (ref null $java.lang.Object))
  (param $$_0 i32)
- ;;@ anonymousclass/AnonymousClass.java:38:25
+ ;;@ anonymousclass/AnonymousClass.java:40:25
  (block
-  ;;@ anonymousclass/AnonymousClass.java:38:25
+  ;;@ anonymousclass/AnonymousClass.java:40:25
   (struct.set $anonymousclass.AnonymousClass.1 $$outer_this@anonymousclass.AnonymousClass.1 (local.get $this) (local.get $$outer_this))
-  ;;@ anonymousclass/AnonymousClass.java:36:31
+  ;;@ anonymousclass/AnonymousClass.java:38:31
   (struct.set $anonymousclass.AnonymousClass.1 $$captured_a@anonymousclass.AnonymousClass.1 (local.get $this) (local.get $$captured_a))
-  ;;@ anonymousclass/AnonymousClass.java:38:25
+  ;;@ anonymousclass/AnonymousClass.java:40:25
   (call $$ctor__int__void_$p_anonymousclass_SomeClass@anonymousclass.SomeClass (ref.as_non_null (local.get $this))(local.get $$_0))
-  ;;@ anonymousclass/AnonymousClass.java:38:25
+  ;;@ anonymousclass/AnonymousClass.java:40:25
   (call $$init__void_$p_anonymousclass_AnonymousClass_1@anonymousclass.AnonymousClass.1 (ref.as_non_null (local.get $this)))
  )
 )
@@ -619,11 +1162,11 @@
  (type $function.m_foo__java_lang_String)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.String))
- ;;@ anonymousclass/AnonymousClass.java:43:24
+ ;;@ anonymousclass/AnonymousClass.java:45:24
  (local $this (ref null $anonymousclass.AnonymousClass.1))
  (local.set $this (ref.cast (ref $anonymousclass.AnonymousClass.1) (local.get $this.untyped)))
  (block
-  ;;@ anonymousclass/AnonymousClass.java:44:12
+  ;;@ anonymousclass/AnonymousClass.java:46:12
   (return (call $m_valueOf__int__java_lang_String@java.lang.String (struct.get $anonymousclass.AnonymousClass $i@anonymousclass.AnonymousClass (struct.get $anonymousclass.AnonymousClass.1 $$outer_this@anonymousclass.AnonymousClass.1 (local.get $this)))))
  )
 )
@@ -632,29 +1175,29 @@
 ;;; void <anonymous> extends SomeClass.$init()
 (func $$init__void_$p_anonymousclass_AnonymousClass_1@anonymousclass.AnonymousClass.1
  (param $this (ref null $anonymousclass.AnonymousClass.1))
- ;;@ anonymousclass/AnonymousClass.java:38:25
+ ;;@ anonymousclass/AnonymousClass.java:40:25
  (block
-  ;;@ anonymousclass/AnonymousClass.java:39:10
+  ;;@ anonymousclass/AnonymousClass.java:41:10
   (struct.set $anonymousclass.AnonymousClass.1 $outer@anonymousclass.AnonymousClass.1 (local.get $this) (struct.get $anonymousclass.AnonymousClass.1 $$outer_this@anonymousclass.AnonymousClass.1 (local.get $this)))
-  ;;@ anonymousclass/AnonymousClass.java:40:10
+  ;;@ anonymousclass/AnonymousClass.java:42:10
   (struct.set $anonymousclass.AnonymousClass.1 $other@anonymousclass.AnonymousClass.1 (local.get $this) (struct.get $anonymousclass.AnonymousClass.1 $$captured_a@anonymousclass.AnonymousClass.1 (local.get $this)))
  )
 )
 
 ;;; void <anonymous> extends SomeClass.$clinit()
 (func $$clinit__void_<once>_@anonymousclass.AnonymousClass.1
- ;;@ anonymousclass/AnonymousClass.java:38:25
+ ;;@ anonymousclass/AnonymousClass.java:40:25
  (block
-  ;;@ anonymousclass/AnonymousClass.java:38:25
+  ;;@ anonymousclass/AnonymousClass.java:40:25
   (if (global.get $$class-initialized@anonymousclass.AnonymousClass.1)
    (then
-    ;;@ anonymousclass/AnonymousClass.java:38:25
+    ;;@ anonymousclass/AnonymousClass.java:40:25
     (return )
    )
   )
-  ;;@ anonymousclass/AnonymousClass.java:38:25
+  ;;@ anonymousclass/AnonymousClass.java:40:25
   (global.set $$class-initialized@anonymousclass.AnonymousClass.1 (i32.const 1))
-  ;;@ anonymousclass/AnonymousClass.java:38:25
+  ;;@ anonymousclass/AnonymousClass.java:40:25
   (call $$clinit__void_<once>_@anonymousclass.SomeClass )
  )
 )
@@ -707,16 +1250,16 @@
  (param $$outer_this (ref null $anonymousclass.AnonymousClass))
  (param $$_0 i32)
  (result (ref null $anonymousclass.AnonymousClass.2))
- ;;@ anonymousclass/AnonymousClass.java:51:25
+ ;;@ anonymousclass/AnonymousClass.java:53:25
  (local $$instance (ref null $anonymousclass.AnonymousClass.2))
  (block
-  ;;@ anonymousclass/AnonymousClass.java:51:25
+  ;;@ anonymousclass/AnonymousClass.java:53:25
   (call $$clinit__void_<once>_@anonymousclass.AnonymousClass.2 )
-  ;;@ anonymousclass/AnonymousClass.java:51:25
+  ;;@ anonymousclass/AnonymousClass.java:53:25
   (local.set $$instance (struct.new $anonymousclass.AnonymousClass.2 (ref.as_non_null (global.get $anonymousclass.AnonymousClass.2.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $anonymousclass.AnonymousClass) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
-  ;;@ anonymousclass/AnonymousClass.java:51:25
+  ;;@ anonymousclass/AnonymousClass.java:53:25
   (call $$ctor__anonymousclass_AnonymousClass__int__void_$p_anonymousclass_AnonymousClass_2@anonymousclass.AnonymousClass.2 (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$_0))
-  ;;@ anonymousclass/AnonymousClass.java:51:25
+  ;;@ anonymousclass/AnonymousClass.java:53:25
   (return (local.get $$instance))
  )
 )
@@ -726,13 +1269,13 @@
  (param $this (ref null $anonymousclass.AnonymousClass.2))
  (param $$outer_this (ref null $anonymousclass.AnonymousClass))
  (param $$_0 i32)
- ;;@ anonymousclass/AnonymousClass.java:51:25
+ ;;@ anonymousclass/AnonymousClass.java:53:25
  (block
-  ;;@ anonymousclass/AnonymousClass.java:51:25
+  ;;@ anonymousclass/AnonymousClass.java:53:25
   (struct.set $anonymousclass.AnonymousClass.2 $$outer_this@anonymousclass.AnonymousClass.2 (local.get $this) (local.get $$outer_this))
-  ;;@ anonymousclass/AnonymousClass.java:51:25
+  ;;@ anonymousclass/AnonymousClass.java:53:25
   (call $$ctor__int__void_$p_anonymousclass_SomeClass@anonymousclass.SomeClass (ref.as_non_null (local.get $this))(local.get $$_0))
-  ;;@ anonymousclass/AnonymousClass.java:51:25
+  ;;@ anonymousclass/AnonymousClass.java:53:25
   (call $$init__void_$p_anonymousclass_AnonymousClass_2@anonymousclass.AnonymousClass.2 (ref.as_non_null (local.get $this)))
  )
 )
@@ -742,11 +1285,11 @@
  (type $function.m_foo__java_lang_String)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.String))
- ;;@ anonymousclass/AnonymousClass.java:55:24
+ ;;@ anonymousclass/AnonymousClass.java:57:24
  (local $this (ref null $anonymousclass.AnonymousClass.2))
  (local.set $this (ref.cast (ref $anonymousclass.AnonymousClass.2) (local.get $this.untyped)))
  (block
-  ;;@ anonymousclass/AnonymousClass.java:56:12
+  ;;@ anonymousclass/AnonymousClass.java:58:12
   (return (call $$getString_|a|__java_lang_String_<once>_@anonymousclass.AnonymousClass.2 ))
  )
 )
@@ -755,29 +1298,29 @@
 ;;; void <anonymous> extends SomeClass.$init()
 (func $$init__void_$p_anonymousclass_AnonymousClass_2@anonymousclass.AnonymousClass.2
  (param $this (ref null $anonymousclass.AnonymousClass.2))
- ;;@ anonymousclass/AnonymousClass.java:51:25
+ ;;@ anonymousclass/AnonymousClass.java:53:25
  (block
-  ;;@ anonymousclass/AnonymousClass.java:52:10
+  ;;@ anonymousclass/AnonymousClass.java:54:10
   (struct.set $anonymousclass.AnonymousClass.2 $object@anonymousclass.AnonymousClass.2 (local.get $this) (local.get $this))
-  ;;@ anonymousclass/AnonymousClass.java:53:10
+  ;;@ anonymousclass/AnonymousClass.java:55:10
   (struct.set $anonymousclass.AnonymousClass.2 $outer@anonymousclass.AnonymousClass.2 (local.get $this) (struct.get $anonymousclass.AnonymousClass.2 $$outer_this@anonymousclass.AnonymousClass.2 (local.get $this)))
  )
 )
 
 ;;; void <anonymous> extends SomeClass.$clinit()
 (func $$clinit__void_<once>_@anonymousclass.AnonymousClass.2
- ;;@ anonymousclass/AnonymousClass.java:51:25
+ ;;@ anonymousclass/AnonymousClass.java:53:25
  (block
-  ;;@ anonymousclass/AnonymousClass.java:51:25
+  ;;@ anonymousclass/AnonymousClass.java:53:25
   (if (global.get $$class-initialized@anonymousclass.AnonymousClass.2)
    (then
-    ;;@ anonymousclass/AnonymousClass.java:51:25
+    ;;@ anonymousclass/AnonymousClass.java:53:25
     (return )
    )
   )
-  ;;@ anonymousclass/AnonymousClass.java:51:25
+  ;;@ anonymousclass/AnonymousClass.java:53:25
   (global.set $$class-initialized@anonymousclass.AnonymousClass.2 (i32.const 1))
-  ;;@ anonymousclass/AnonymousClass.java:51:25
+  ;;@ anonymousclass/AnonymousClass.java:53:25
   (call $$clinit__void_<once>_@anonymousclass.SomeClass )
  )
 )
@@ -844,16 +1387,16 @@
  (param $$outer_this (ref null $anonymousclass.AnonymousClass))
  (param $$_0 i32)
  (result (ref null $anonymousclass.AnonymousClass.3))
- ;;@ anonymousclass/AnonymousClass.java:62:42
+ ;;@ anonymousclass/AnonymousClass.java:64:42
  (local $$instance (ref null $anonymousclass.AnonymousClass.3))
  (block
-  ;;@ anonymousclass/AnonymousClass.java:62:42
+  ;;@ anonymousclass/AnonymousClass.java:64:42
   (call $$clinit__void_<once>_@anonymousclass.AnonymousClass.3 )
-  ;;@ anonymousclass/AnonymousClass.java:62:42
+  ;;@ anonymousclass/AnonymousClass.java:64:42
   (local.set $$instance (struct.new $anonymousclass.AnonymousClass.3 (ref.as_non_null (global.get $anonymousclass.AnonymousClass.3.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $anonymousclass.AnonymousClass) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
-  ;;@ anonymousclass/AnonymousClass.java:62:42
+  ;;@ anonymousclass/AnonymousClass.java:64:42
   (call $$ctor__anonymousclass_AnonymousClass__int__void_$p_anonymousclass_AnonymousClass_3@anonymousclass.AnonymousClass.3 (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$_0))
-  ;;@ anonymousclass/AnonymousClass.java:62:42
+  ;;@ anonymousclass/AnonymousClass.java:64:42
   (return (local.get $$instance))
  )
 )
@@ -863,13 +1406,13 @@
  (param $this (ref null $anonymousclass.AnonymousClass.3))
  (param $$outer_this (ref null $anonymousclass.AnonymousClass))
  (param $$_0 i32)
- ;;@ anonymousclass/AnonymousClass.java:62:42
+ ;;@ anonymousclass/AnonymousClass.java:64:42
  (block
-  ;;@ anonymousclass/AnonymousClass.java:62:42
+  ;;@ anonymousclass/AnonymousClass.java:64:42
   (struct.set $anonymousclass.AnonymousClass.3 $$outer_this@anonymousclass.AnonymousClass.3 (local.get $this) (local.get $$outer_this))
-  ;;@ anonymousclass/AnonymousClass.java:62:42
+  ;;@ anonymousclass/AnonymousClass.java:64:42
   (call $$ctor__int__void_$p_anonymousclass_SomeClassWithStaticMembers@anonymousclass.SomeClassWithStaticMembers (ref.as_non_null (local.get $this))(local.get $$_0))
-  ;;@ anonymousclass/AnonymousClass.java:62:42
+  ;;@ anonymousclass/AnonymousClass.java:64:42
   (call $$init__void_$p_anonymousclass_AnonymousClass_3@anonymousclass.AnonymousClass.3 (ref.as_non_null (local.get $this)))
  )
 )
@@ -879,11 +1422,11 @@
  (type $function.m_foo__java_lang_String)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.String))
- ;;@ anonymousclass/AnonymousClass.java:66:24
+ ;;@ anonymousclass/AnonymousClass.java:68:24
  (local $this (ref null $anonymousclass.AnonymousClass.3))
  (local.set $this (ref.cast (ref $anonymousclass.AnonymousClass.3) (local.get $this.untyped)))
  (block
-  ;;@ anonymousclass/AnonymousClass.java:67:12
+  ;;@ anonymousclass/AnonymousClass.java:69:12
   (return (call $$getString_|a|__java_lang_String_<once>_@anonymousclass.AnonymousClass.2 ))
  )
 )
@@ -892,29 +1435,29 @@
 ;;; void <anonymous> extends SomeClassWithStaticMembers.$init()
 (func $$init__void_$p_anonymousclass_AnonymousClass_3@anonymousclass.AnonymousClass.3
  (param $this (ref null $anonymousclass.AnonymousClass.3))
- ;;@ anonymousclass/AnonymousClass.java:62:42
+ ;;@ anonymousclass/AnonymousClass.java:64:42
  (block
-  ;;@ anonymousclass/AnonymousClass.java:63:10
+  ;;@ anonymousclass/AnonymousClass.java:65:10
   (struct.set $anonymousclass.AnonymousClass.3 $object@anonymousclass.AnonymousClass.3 (local.get $this) (local.get $this))
-  ;;@ anonymousclass/AnonymousClass.java:64:10
+  ;;@ anonymousclass/AnonymousClass.java:66:10
   (struct.set $anonymousclass.AnonymousClass.3 $outer@anonymousclass.AnonymousClass.3 (local.get $this) (struct.get $anonymousclass.AnonymousClass.3 $$outer_this@anonymousclass.AnonymousClass.3 (local.get $this)))
  )
 )
 
 ;;; void <anonymous> extends SomeClassWithStaticMembers.$clinit()
 (func $$clinit__void_<once>_@anonymousclass.AnonymousClass.3
- ;;@ anonymousclass/AnonymousClass.java:62:42
+ ;;@ anonymousclass/AnonymousClass.java:64:42
  (block
-  ;;@ anonymousclass/AnonymousClass.java:62:42
+  ;;@ anonymousclass/AnonymousClass.java:64:42
   (if (global.get $$class-initialized@anonymousclass.AnonymousClass.3)
    (then
-    ;;@ anonymousclass/AnonymousClass.java:62:42
+    ;;@ anonymousclass/AnonymousClass.java:64:42
     (return )
    )
   )
-  ;;@ anonymousclass/AnonymousClass.java:62:42
+  ;;@ anonymousclass/AnonymousClass.java:64:42
   (global.set $$class-initialized@anonymousclass.AnonymousClass.3 (i32.const 1))
-  ;;@ anonymousclass/AnonymousClass.java:62:42
+  ;;@ anonymousclass/AnonymousClass.java:64:42
   (call $$clinit__void_<once>_@anonymousclass.SomeClassWithStaticMembers )
  )
 )
@@ -966,16 +1509,16 @@
 (func $$create__int@anonymousclass.SomeInterface.1
  (param $$_0 i32)
  (result (ref null $anonymousclass.SomeInterface.1))
- ;;@ anonymousclass/AnonymousClass.java:75:23
+ ;;@ anonymousclass/AnonymousClass.java:77:23
  (local $$instance (ref null $anonymousclass.SomeInterface.1))
  (block
-  ;;@ anonymousclass/AnonymousClass.java:75:23
+  ;;@ anonymousclass/AnonymousClass.java:77:23
   (call $$clinit__void_<once>_@anonymousclass.SomeInterface.1 )
-  ;;@ anonymousclass/AnonymousClass.java:75:23
+  ;;@ anonymousclass/AnonymousClass.java:77:23
   (local.set $$instance (struct.new $anonymousclass.SomeInterface.1 (ref.as_non_null (global.get $anonymousclass.SomeInterface.1.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ anonymousclass/AnonymousClass.java:75:23
+  ;;@ anonymousclass/AnonymousClass.java:77:23
   (call $$ctor__int__void_$p_anonymousclass_SomeInterface_1@anonymousclass.SomeInterface.1 (ref.as_non_null (local.get $$instance))(local.get $$_0))
-  ;;@ anonymousclass/AnonymousClass.java:75:23
+  ;;@ anonymousclass/AnonymousClass.java:77:23
   (return (local.get $$instance))
  )
 )
@@ -984,9 +1527,9 @@
 (func $$ctor__int__void_$p_anonymousclass_SomeInterface_1@anonymousclass.SomeInterface.1
  (param $this (ref null $anonymousclass.SomeInterface.1))
  (param $$_0 i32)
- ;;@ anonymousclass/AnonymousClass.java:75:23
+ ;;@ anonymousclass/AnonymousClass.java:77:23
  (block
-  ;;@ anonymousclass/AnonymousClass.java:75:23
+  ;;@ anonymousclass/AnonymousClass.java:77:23
   (call $$ctor__int__void_$p_anonymousclass_SomeClass@anonymousclass.SomeClass (ref.as_non_null (local.get $this))(local.get $$_0))
  )
 )
@@ -996,11 +1539,11 @@
  (type $function.m_foo__java_lang_String)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.String))
- ;;@ anonymousclass/AnonymousClass.java:76:22
+ ;;@ anonymousclass/AnonymousClass.java:78:22
  (local $this (ref null $anonymousclass.SomeInterface.1))
  (local.set $this (ref.cast (ref $anonymousclass.SomeInterface.1) (local.get $this.untyped)))
  (block
-  ;;@ anonymousclass/AnonymousClass.java:77:10
+  ;;@ anonymousclass/AnonymousClass.java:79:10
   (return (call $$getString_|a|__java_lang_String_<once>_@anonymousclass.AnonymousClass.2 ))
  )
 )
@@ -1008,18 +1551,18 @@
 
 ;;; void <anonymous> extends SomeClass.$clinit()
 (func $$clinit__void_<once>_@anonymousclass.SomeInterface.1
- ;;@ anonymousclass/AnonymousClass.java:75:23
+ ;;@ anonymousclass/AnonymousClass.java:77:23
  (block
-  ;;@ anonymousclass/AnonymousClass.java:75:23
+  ;;@ anonymousclass/AnonymousClass.java:77:23
   (if (global.get $$class-initialized@anonymousclass.SomeInterface.1)
    (then
-    ;;@ anonymousclass/AnonymousClass.java:75:23
+    ;;@ anonymousclass/AnonymousClass.java:77:23
     (return )
    )
   )
-  ;;@ anonymousclass/AnonymousClass.java:75:23
+  ;;@ anonymousclass/AnonymousClass.java:77:23
   (global.set $$class-initialized@anonymousclass.SomeInterface.1 (i32.const 1))
-  ;;@ anonymousclass/AnonymousClass.java:75:23
+  ;;@ anonymousclass/AnonymousClass.java:77:23
   (call $$clinit__void_<once>_@anonymousclass.SomeClass )
  )
 )
