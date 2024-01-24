@@ -71,13 +71,13 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
             colonSeparated(
               spaceSeparated(
                 typeDeclarationSource(typeDeclaration),
-                ktPrimaryConstructorSource(type)
+                ktPrimaryConstructorSource(type),
               ),
-              superTypesSource(type)
+              superTypesSource(type),
             ),
             nameRenderer.whereClauseSource(typeDeclaration.typeParameterDescriptors),
-            typeBodySource(type)
-          )
+            typeBodySource(type),
+          ),
         )
       }
     }
@@ -88,7 +88,7 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
       block(
         emptyLineSeparated(
           Source.emptyUnless(type.isEnum) { memberRenderer(type).enumValuesSource(type) },
-          emptyLineSeparated(type.ktMembers.map { memberRenderer(type).source(it) })
+          emptyLineSeparated(type.ktMembers.map { memberRenderer(type).source(it) }),
         )
       )
     }
@@ -102,15 +102,15 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
           memberRenderer(type)
             .methodParametersSource(
               ktPrimaryConstructor,
-              ktPrimaryConstructor.toObjCNames()?.parameterNames
-            )
+              ktPrimaryConstructor.toObjCNames()?.parameterNames,
+            ),
         )
       type.needExplicitPrimaryConstructor ->
         // Implicit constructors needs to follow the visiblity transpilation rules for members that
         // are different than the visibility transpilation rules for the class.
         spaceSeparated(
           type.declaration.visibility.memberKtVisibility.source,
-          join(KotlinSource.CONSTRUCTOR_KEYWORD, inParentheses(Source.EMPTY))
+          join(KotlinSource.CONSTRUCTOR_KEYWORD, inParentheses(Source.EMPTY)),
         )
       else -> Source.EMPTY
     }
@@ -119,7 +119,7 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
   private fun typeDeclarationSource(declaration: TypeDeclaration): Source =
     join(
       identifierSource(declaration.ktSimpleName),
-      nameRenderer.typeParametersSource(declaration.directlyDeclaredTypeParameterDescriptors)
+      nameRenderer.typeParametersSource(declaration.directlyDeclaredTypeParameterDescriptors),
     )
 
   private fun superTypesSource(type: Type): Source =
@@ -132,7 +132,7 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
   private fun superTypeSource(type: Type, superTypeDescriptor: TypeDescriptor): Source =
     join(
       nameRenderer.typeDescriptorSource(superTypeDescriptor.toNonNullable(), asSuperType = true),
-      superTypeInvocationSource(type, superTypeDescriptor)
+      superTypeInvocationSource(type, superTypeDescriptor),
     )
 
   private fun superTypeInvocationSource(type: Type, superTypeDescriptor: TypeDescriptor): Source =
@@ -157,7 +157,7 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
         spaceSeparated(
           KotlinSource.NATIVE_KEYWORD,
           KotlinSource.CLASS_KEYWORD,
-          identifierSource(type.ktSimpleName)
+          identifierSource(type.ktSimpleName),
         )
       )
 

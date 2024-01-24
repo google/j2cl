@@ -97,9 +97,9 @@ internal data class CompilationUnitRenderer(val nameRenderer: NameRenderer) {
             "UNUSED_VARIABLE",
             "USELESS_CAST",
             "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
-            "VARIABLE_WITH_REDUNDANT_INITIALIZER"
+            "VARIABLE_WITH_REDUNDANT_INITIALIZER",
           )
-          .map { literal(it) }
+          .map { literal(it) },
       )
 
   private fun packageSource(compilationUnit: CompilationUnit): Source =

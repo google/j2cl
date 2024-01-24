@@ -59,6 +59,6 @@ object Keywords {
       "val",
       "var",
       "when",
-      "while"
+      "while",
     )
 }

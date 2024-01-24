@@ -41,7 +41,7 @@ internal data class MemberDescriptorRenderer(val nameRenderer: NameRenderer) {
       spaceSeparated(
         if (methodDescriptor.isKtProperty) KotlinSource.VAL_KEYWORD else KotlinSource.FUN_KEYWORD,
         nameRenderer.typeParametersSource(methodDescriptor.typeParameterTypeDescriptors),
-        identifierSource(methodDescriptor.ktMangledName)
+        identifierSource(methodDescriptor.ktMangledName),
       )
     }
 
@@ -61,7 +61,7 @@ internal data class MemberDescriptorRenderer(val nameRenderer: NameRenderer) {
             KotlinSource.classLiteral(
               nameRenderer.typeDescriptorSource(it.toRawTypeDescriptor().toNonNullable())
             )
-          }
+          },
         )
       }
       .orEmpty()
@@ -76,7 +76,7 @@ internal data class MemberDescriptorRenderer(val nameRenderer: NameRenderer) {
             nameRenderer.typeDescriptorSource(
               TypeDescriptors.get().javaLangThrowable.toNonNullable()
             )
-          )
+          ),
         )
       }
       .orEmpty()
@@ -93,10 +93,10 @@ internal data class MemberDescriptorRenderer(val nameRenderer: NameRenderer) {
           Source.emptyUnless(!enclosingTypeDescriptor.typeDeclaration.isInterface) {
             spaceSeparated(
               Source.emptyUnless(isNative) { KotlinSource.EXTERNAL_KEYWORD },
-              inheritanceModifierSource
+              inheritanceModifierSource,
             )
           },
-          Source.emptyUnless(isKtOverride) { KotlinSource.OVERRIDE_KEYWORD }
+          Source.emptyUnless(isKtOverride) { KotlinSource.OVERRIDE_KEYWORD },
         )
 
     val MemberDescriptor.visibilityModifierSource: Source

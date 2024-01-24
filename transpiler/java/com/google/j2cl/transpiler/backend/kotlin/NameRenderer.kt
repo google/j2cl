@@ -29,7 +29,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source
  */
 internal data class NameRenderer(
   val environment: Environment,
-  val localNames: Set<String> = setOf()
+  val localNames: Set<String> = setOf(),
 ) {
   fun plusLocalNames(localNames: Collection<String>): NameRenderer =
     copy(localNames = this.localNames + localNames)
@@ -62,7 +62,7 @@ internal data class NameRenderer(
    */
   fun sourceWithOptInQualifiedName(
     optInQualifiedName: String,
-    fn: NameRenderer.() -> Source
+    fn: NameRenderer.() -> Source,
   ): Source = fn().also { environment.addOptInQualifiedName(optInQualifiedName) }
 
   /** Returns source for the given qualified name of extension member. */
@@ -96,7 +96,7 @@ internal data class NameRenderer(
           // Use fully-qualified name for top-level type, and simple name for inner types
           Source.dotSeparated(
             qualifiedNameSource(enclosingTypeDescriptor),
-            identifierSource(typeDeclaration.ktSimpleName())
+            identifierSource(typeDeclaration.ktSimpleName()),
           )
         else -> topLevelQualifiedNameSource(typeDescriptor.ktQualifiedName)
       }

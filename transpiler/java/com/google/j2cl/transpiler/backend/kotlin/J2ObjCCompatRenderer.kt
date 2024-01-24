@@ -158,7 +158,7 @@ private val Type.nsEnumTypedefRenderer: Renderer<Source>
     nsEnumTypedef(
       name = declaration.objCEnumName,
       type = jintTypeRenderer,
-      values = enumFields.map { it.descriptor.objCEnumName }
+      values = enumFields.map { it.descriptor.objCEnumName },
     )
 
 private val FieldDescriptor.propertyQualifierRenderer: Renderer<Source>
@@ -188,7 +188,7 @@ private val FieldDescriptor.getFunctionRenderer: Renderer<Source>
       modifiers = listOf(nsInline),
       returnType = typeDescriptor.objCRenderer,
       name = getFunctionName,
-      statements = listOf(returnStatement(getExpressionRenderer))
+      statements = listOf(returnStatement(getExpressionRenderer)),
     )
 
 private val FieldDescriptor.getFunctionName: String
@@ -212,7 +212,7 @@ private val FieldDescriptor.setFunctionRenderer: Renderer<Source>
       returnType = PrimitiveTypes.VOID.objCRenderer,
       name = setFunctionName,
       parameters = listOf(setParameterRenderer),
-      statements = listOf(setStatementRenderer)
+      statements = listOf(setStatementRenderer),
     )
 
 private val FieldDescriptor.setFunctionName: String
@@ -294,7 +294,7 @@ private fun Method.functionRenderers(objCNames: MethodObjCNames): List<Renderer<
   if (isConstructor) {
     listOf(
       functionRenderer(objCNames, prefix = "create_"),
-      functionRenderer(objCNames, prefix = "new_")
+      functionRenderer(objCNames, prefix = "new_"),
     )
   } else {
     listOf(functionRenderer(objCNames))
@@ -302,14 +302,14 @@ private fun Method.functionRenderers(objCNames: MethodObjCNames): List<Renderer<
 
 private fun Method.functionRenderer(
   objCNames: MethodObjCNames,
-  prefix: String = ""
+  prefix: String = "",
 ): Renderer<Source> =
   functionDeclaration(
     modifiers = listOf(nsInline),
     returnType = descriptor.returnTypeDescriptor.objCRenderer,
     name = descriptor.functionName(objCNames, prefix),
     parameters = parameters.map { it.renderer },
-    statements = statementRenderers(objCNames.escapeObjCMethod(isConstructor))
+    statements = statementRenderers(objCNames.escapeObjCMethod(isConstructor)),
   )
 
 private fun MethodDescriptor.functionName(objCNames: MethodObjCNames, prefix: String = ""): String =
@@ -340,7 +340,7 @@ private fun Method.methodCallRenderer(objCNames: MethodObjCNames): Renderer<Sour
   methodCall(
     target = methodCallTargetRenderer,
     name = objCNames.objCSelector,
-    arguments = parameters.map { it.nameRenderer }
+    arguments = parameters.map { it.nameRenderer },
   )
 
 private val Method.methodCallTargetRenderer: Renderer<Source>

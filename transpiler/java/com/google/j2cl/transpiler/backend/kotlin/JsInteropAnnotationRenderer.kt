@@ -105,7 +105,7 @@ internal data class JsInteropAnnotationRenderer(val nameRenderer: NameRenderer) 
    */
   private fun jsInteropAnnotationSource(
     memberDescriptor: MemberDescriptor,
-    annotationQualifiedName: String
+    annotationQualifiedName: String,
   ): Source =
     memberDescriptor
       .takeIf {
@@ -124,7 +124,7 @@ internal data class JsInteropAnnotationRenderer(val nameRenderer: NameRenderer) 
         annotation(
           nameRenderer.topLevelQualifiedNameSource(annotationQualifiedName),
           nameParameterSource(nameParameterValue),
-          namespaceParameterSource(it.originalJsInfo.jsNamespace)
+          namespaceParameterSource(it.originalJsInfo.jsNamespace),
         )
       }
       .orEmpty()
@@ -149,8 +149,8 @@ internal data class JsInteropAnnotationRenderer(val nameRenderer: NameRenderer) 
           booleanParameterSource(
             "hasCustomValue",
             checkNotNull(it.jsEnumInfo).hasCustomValue(),
-            false
-          )
+            false,
+          ),
         )
       }
       .orEmpty()
@@ -163,7 +163,7 @@ internal data class JsInteropAnnotationRenderer(val nameRenderer: NameRenderer) 
           nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsType"),
           nameParameterSource(it),
           namespaceParameterSource(it),
-          isNativeParameterSource(it.isNative)
+          isNativeParameterSource(it.isNative),
         )
       }
       .orEmpty()
@@ -187,7 +187,7 @@ internal data class JsInteropAnnotationRenderer(val nameRenderer: NameRenderer) 
   private fun globalNamespaceSource(): Source =
     dotSeparated(
       nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsPackage"),
-      identifierSource("GLOBAL")
+      identifierSource("GLOBAL"),
     )
 
   companion object {
@@ -206,7 +206,7 @@ internal data class JsInteropAnnotationRenderer(val nameRenderer: NameRenderer) 
     private fun booleanParameterSource(
       name: String,
       value: Boolean,
-      defaultValue: Boolean
+      defaultValue: Boolean,
     ): Source =
       value.takeIf { it != defaultValue }?.let { assignment(source(name), literal(it)) }.orEmpty()
 

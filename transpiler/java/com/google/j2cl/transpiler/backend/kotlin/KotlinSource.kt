@@ -179,7 +179,7 @@ internal object KotlinSource {
         } else {
           indented(inNewLine(commaAndNewLineSeparated(parameters)))
         }
-      )
+      ),
     )
 
   fun fileAnnotation(name: Source, parameters: List<Source>): Source =

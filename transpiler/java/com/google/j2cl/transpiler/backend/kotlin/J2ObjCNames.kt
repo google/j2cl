@@ -53,7 +53,7 @@ private val nsObjectMessages =
     "superclass",
     "toManyRelationshipKeys",
     "toOneRelationshipKeys",
-    "version"
+    "version",
   )
 
 // Taken from
@@ -737,5 +737,5 @@ private val j2ObjCKeywords =
     "scale",
 
     // Syntactic sugar for Objective-C block types
-    "block_type"
+    "block_type",
   )

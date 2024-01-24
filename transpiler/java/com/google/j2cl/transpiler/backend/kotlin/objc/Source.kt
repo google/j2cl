@@ -47,13 +47,13 @@ fun defineAlias(alias: Source, target: Source) = macroDefine(spaceSeparated(alia
 fun dependenciesSource(dependencies: Iterable<Dependency>): Source =
   emptyLineSeparated(
     importsSource(dependencies.imports()),
-    forwardDeclarationsSource(dependencies.forwardDeclarations())
+    forwardDeclarationsSource(dependencies.forwardDeclarations()),
   )
 
 fun importsSource(imports: List<Import>): Source =
   emptyLineSeparated(
     newLineSeparated(imports.filter { !it.isLocal }.sortedBy { it.path }.map { it.source }),
-    newLineSeparated(imports.filter { it.isLocal }.sortedBy { it.path }.map { it.source })
+    newLineSeparated(imports.filter { it.isLocal }.sortedBy { it.path }.map { it.source }),
   )
 
 fun forwardDeclarationsSource(forwardDeclarations: List<ForwardDeclaration>): Source =
@@ -88,7 +88,7 @@ val Import.source: Source
         } else {
           inAngleBrackets(it)
         }
-      }
+      },
     )
 
 val Renderer<Source>.sourceWithDependencies: Source

@@ -24,7 +24,7 @@ data class CompanionObject(
   val enclosingTypeDeclaration: TypeDeclaration,
 
   /** The list of members inside this companion object. */
-  val members: List<Member>
+  val members: List<Member>,
 )
 
 /** Returns the declaration of this companion object. */

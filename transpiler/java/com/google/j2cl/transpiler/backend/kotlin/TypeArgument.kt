@@ -33,7 +33,7 @@ import com.google.j2cl.transpiler.backend.kotlin.common.runIf
  */
 internal data class TypeArgument(
   val declarationTypeVariable: TypeVariable,
-  val typeDescriptor: TypeDescriptor
+  val typeDescriptor: TypeDescriptor,
 )
 
 private fun TypeArgument.makeNonNull() = copy(typeDescriptor = typeDescriptor.makeNonNull())
@@ -51,14 +51,14 @@ internal fun DeclaredTypeDescriptor.typeArguments(
 ): List<TypeArgument> =
   typeDeclaration.directlyDeclaredTypeParameterDescriptors.zip(
     directlyDeclaredNonRawTypeArgumentDescriptors(projectToWildcards = projectRawToWildcards),
-    ::typeArgument
+    ::typeArgument,
   )
 
 internal val MethodDescriptor.typeArguments: List<TypeArgument>
   get() =
     declarationDescriptor.typeParameterTypeDescriptors.zip(
       typeArgumentTypeDescriptors,
-      ::typeArgument
+      ::typeArgument,
     )
 
 private fun typeArgument(declarationTypeParameter: TypeVariable, typeDescriptor: TypeDescriptor) =

@@ -53,7 +53,7 @@ internal data class ImportRenderer(val nameRenderer: NameRenderer) {
       get() =
         spaceSeparated(
           IMPORT_KEYWORD,
-          join(dotSeparated(pathComponents.map(::identifierSource)), suffixOrNull?.source.orEmpty())
+          join(dotSeparated(pathComponents.map(::identifierSource)), suffixOrNull?.source.orEmpty()),
         )
 
     private val Import.Suffix.source: Source

@@ -87,14 +87,14 @@ internal data class StatementRenderer(
   val enclosingType: Type,
   val currentReturnLabelIdentifier: String? = null,
   // TODO(b/252138814): Remove when KT-54349 is fixed
-  val renderThisReferenceWithLabel: Boolean = false
+  val renderThisReferenceWithLabel: Boolean = false,
 ) {
   private val expressionRenderer: ExpressionRenderer
     get() =
       ExpressionRenderer(
         nameRenderer,
         enclosingType,
-        renderThisReferenceWithLabel = renderThisReferenceWithLabel
+        renderThisReferenceWithLabel = renderThisReferenceWithLabel,
       )
 
   private val typeRenderer: TypeRenderer
@@ -132,9 +132,9 @@ internal data class StatementRenderer(
     spaceSeparated(
       join(
         nameRenderer.extensionMemberQualifiedNameSource("kotlin.assert"),
-        inParentheses(expressionSource(assertStatement.expression))
+        inParentheses(expressionSource(assertStatement.expression)),
       ),
-      assertStatement.message?.let { block(expressionSource(it)) }.orEmpty()
+      assertStatement.message?.let { block(expressionSource(it)) }.orEmpty(),
     )
 
   private fun blockSource(block: Block): Source = block(statementsSource(block.statements))
@@ -153,7 +153,7 @@ internal data class StatementRenderer(
       DO_KEYWORD,
       statementSource(doWhileStatement.body),
       WHILE_KEYWORD,
-      inParentheses(expressionSource(doWhileStatement.conditionExpression))
+      inParentheses(expressionSource(doWhileStatement.conditionExpression)),
     )
 
   private fun expressionStatementSource(expressionStatement: ExpressionStatement): Source =
@@ -166,10 +166,10 @@ internal data class StatementRenderer(
         infix(
           nameRenderer.nameSource(forEachStatement.loopVariable),
           IN_KEYWORD,
-          expressionSource(forEachStatement.iterableExpression)
+          expressionSource(forEachStatement.iterableExpression),
         )
       ),
-      statementSource(forEachStatement.body)
+      statementSource(forEachStatement.body),
     )
 
   private fun ifStatementSource(ifStatement: IfStatement): Source =
@@ -177,7 +177,7 @@ internal data class StatementRenderer(
       IF_KEYWORD,
       inParentheses(expressionSource(ifStatement.conditionExpression)),
       statementSource(ifStatement.thenStatement),
-      ifStatement.elseStatement?.let { spaceSeparated(ELSE_KEYWORD, statementSource(it)) }.orEmpty()
+      ifStatement.elseStatement?.let { spaceSeparated(ELSE_KEYWORD, statementSource(it)) }.orEmpty(),
     )
 
   private fun fieldDeclarationStatementSource(declaration: FieldDeclarationStatement): Source =
@@ -187,10 +187,10 @@ internal data class StatementRenderer(
         assignment(
           colonSeparated(
             identifierSource(fieldDescriptor.name!!),
-            nameRenderer.typeDescriptorSource(fieldDescriptor.typeDescriptor)
+            nameRenderer.typeDescriptorSource(fieldDescriptor.typeDescriptor),
           ),
-          expressionSource(declaration.expression)
-        )
+          expressionSource(declaration.expression),
+        ),
       )
     }
 
@@ -199,7 +199,7 @@ internal data class StatementRenderer(
       join(nameRenderer.nameSource(labelStatement.label), AT_OPERATOR),
       labelStatement.statement.let {
         statementSource(it).letIf(it is LabeledStatement) { block(it) }
-      }
+      },
     )
 
   private fun localClassDeclarationStatementSource(
@@ -209,7 +209,7 @@ internal data class StatementRenderer(
   private fun returnStatementSource(returnStatement: ReturnStatement): Source =
     spaceSeparated(
       join(RETURN_KEYWORD, currentReturnLabelIdentifier?.let { labelReference(it) }.orEmpty()),
-      returnStatement.expression?.let(::expressionSource).orEmpty()
+      returnStatement.expression?.let(::expressionSource).orEmpty(),
     )
 
   private fun switchStatementSource(switchStatement: SwitchStatement): Source =
@@ -239,7 +239,7 @@ internal data class StatementRenderer(
                   infix(
                       commaSeparated(caseExpressions.map(::expressionSource)),
                       ARROW_OPERATOR,
-                      block(statementsSource(caseStatements))
+                      block(statementsSource(caseStatements)),
                     )
                     .also { caseExpressions.clear() }
                 } else {
@@ -249,7 +249,7 @@ internal data class StatementRenderer(
             }
           }
         )
-      )
+      ),
     )
 
   private fun synchronizedStatementSource(synchronizedStatement: SynchronizedStatement): Source =
@@ -257,16 +257,16 @@ internal data class StatementRenderer(
       join(
         nameRenderer.extensionMemberQualifiedNameSource("kotlin.synchronized"),
         inAngleBrackets(nameRenderer.topLevelQualifiedNameSource("kotlin.Unit")),
-        inParentheses(expressionSource(synchronizedStatement.expression))
+        inParentheses(expressionSource(synchronizedStatement.expression)),
       ),
-      statementSource(synchronizedStatement.body)
+      statementSource(synchronizedStatement.body),
     )
 
   private fun whileStatementSource(whileStatement: WhileStatement): Source =
     spaceSeparated(
       WHILE_KEYWORD,
       inParentheses(expressionSource(whileStatement.conditionExpression)),
-      statementSource(whileStatement.body)
+      statementSource(whileStatement.body),
     )
 
   private fun throwStatementSource(throwStatement: ThrowStatement): Source =
@@ -279,7 +279,7 @@ internal data class StatementRenderer(
       spaceSeparated(tryStatement.catchClauses.map(::catchClauseSource)),
       tryStatement.finallyBlock
         ?.let { spaceSeparated(FINALLY_KEYWORD, statementSource(it)) }
-        .orEmpty()
+        .orEmpty(),
     )
 
   private fun catchClauseSource(catchClause: CatchClause): Source =
@@ -296,10 +296,10 @@ internal data class StatementRenderer(
       inParentheses(
         colonSeparated(
           nameRenderer.nameSource(variable),
-          nameRenderer.typeDescriptorSource(type.toNonNullable())
+          nameRenderer.typeDescriptorSource(type.toNonNullable()),
         )
       ),
-      blockSource(body)
+      blockSource(body),
     )
 
   companion object {

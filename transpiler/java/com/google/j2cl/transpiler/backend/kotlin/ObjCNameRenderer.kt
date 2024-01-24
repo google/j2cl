@@ -40,7 +40,7 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
         topLevelQualifiedNameSource("kotlin.native.ObjCName")
       },
       literal(name),
-      exact?.let { parameterSource("exact", literal(it)) }.orEmpty()
+      exact?.let { parameterSource("exact", literal(it)) }.orEmpty(),
     )
 
   fun objCAnnotationSource(typeDeclaration: TypeDeclaration): Source =
@@ -55,7 +55,7 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
 
   fun objCAnnotationSource(
     methodDescriptor: MethodDescriptor,
-    methodObjCNames: MethodObjCNames?
+    methodObjCNames: MethodObjCNames?,
   ): Source =
     Source.emptyUnless(!methodDescriptor.isConstructor) {
       methodObjCNames?.methodName?.let { objCNameAnnotationSource(it) }.orEmpty()

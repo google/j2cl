@@ -65,11 +65,11 @@ class Renderer<out V>(
     fun <I1, I2, O> combine(
       renderer1: Renderer<I1>,
       renderer2: Renderer<I2>,
-      fn: (I1, I2) -> O
+      fn: (I1, I2) -> O,
     ): Renderer<O> = Renderer { dependencies ->
       fn(
         renderer1.renderAddingDependenciesTo(dependencies),
-        renderer2.renderAddingDependenciesTo(dependencies)
+        renderer2.renderAddingDependenciesTo(dependencies),
       )
     }
 
@@ -81,12 +81,12 @@ class Renderer<out V>(
       renderer1: Renderer<I1>,
       renderer2: Renderer<I2>,
       renderer3: Renderer<I3>,
-      fn: (I1, I2, I3) -> O
+      fn: (I1, I2, I3) -> O,
     ): Renderer<O> = Renderer { dependencies ->
       fn(
         renderer1.renderAddingDependenciesTo(dependencies),
         renderer2.renderAddingDependenciesTo(dependencies),
-        renderer3.renderAddingDependenciesTo(dependencies)
+        renderer3.renderAddingDependenciesTo(dependencies),
       )
     }
 
@@ -99,13 +99,13 @@ class Renderer<out V>(
       renderer2: Renderer<I2>,
       renderer3: Renderer<I3>,
       renderer4: Renderer<I4>,
-      fn: (I1, I2, I3, I4) -> O
+      fn: (I1, I2, I3, I4) -> O,
     ): Renderer<O> = Renderer { dependencies ->
       fn(
         renderer1.renderAddingDependenciesTo(dependencies),
         renderer2.renderAddingDependenciesTo(dependencies),
         renderer3.renderAddingDependenciesTo(dependencies),
-        renderer4.renderAddingDependenciesTo(dependencies)
+        renderer4.renderAddingDependenciesTo(dependencies),
       )
     }
 

@@ -23,7 +23,7 @@ data class Import(
   val pathComponents: List<String>,
 
   /** The optional suffix. */
-  val suffixOrNull: Suffix? = null
+  val suffixOrNull: Suffix? = null,
 ) {
   /** Returns true if this is a star import. */
   private val isStar: Boolean

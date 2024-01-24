@@ -103,8 +103,8 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
       spaceSeparated(
         COMPANION_KEYWORD,
         OBJECT_KEYWORD,
-        block(emptyLineSeparated(companionObject.members.map { source(it) }))
-      )
+        block(emptyLineSeparated(companionObject.members.map { source(it) })),
+      ),
     )
 
   private fun memberSource(member: JavaMember): Source =
@@ -128,10 +128,10 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
                 Source.emptyUnless(method.descriptor.isKtProperty) {
                   join(GET_KEYWORD, inParentheses(Source.EMPTY))
                 },
-                block(statementRenderer.statementsSource(statements))
+                block(statementRenderer.statementsSource(statements)),
               )
             }
-          }
+          },
         )
       }
     }
@@ -162,7 +162,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
         if (isFinal) VAL_KEYWORD else VAR_KEYWORD,
         colonSeparated(
           identifierSource(fieldDescriptor.ktMangledName),
-          nameRenderer.typeDescriptorSource(typeDescriptor)
+          nameRenderer.typeDescriptorSource(typeDescriptor),
         ),
         initializer(
           if (initializer == null && field.isNative) {
@@ -170,8 +170,8 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
           } else {
             initializer?.let { expressionRenderer.expressionSource(it) }.orEmpty()
           }
-        )
-      )
+        ),
+      ),
     )
   }
 
@@ -204,16 +204,16 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
           colonSeparated(
             join(
               memberDescriptorRenderer.methodKindAndNameSource(methodDescriptor),
-              methodParametersSource(method, methodObjCNames?.parameterNames)
+              methodParametersSource(method, methodObjCNames?.parameterNames),
             ),
             if (methodDescriptor.isConstructor) {
               constructorInvocationSource(method)
             } else {
               memberDescriptorRenderer.methodReturnTypeSource(methodDescriptor)
-            }
+            },
           ),
-          nameRenderer.whereClauseSource(methodDescriptor.typeParameterTypeDescriptors)
-        )
+          nameRenderer.whereClauseSource(methodDescriptor.typeParameterTypeDescriptors),
+        ),
       )
     }
 
@@ -225,11 +225,11 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
           colonSeparated(
             join(
               memberDescriptorRenderer.methodKindAndNameSource(methodDescriptor),
-              methodParametersSource(functionExpression)
+              methodParametersSource(functionExpression),
             ),
-            memberDescriptorRenderer.methodReturnTypeSource(methodDescriptor)
+            memberDescriptorRenderer.methodReturnTypeSource(methodDescriptor),
           ),
-          nameRenderer.whereClauseSource(methodDescriptor.typeParameterTypeDescriptors)
+          nameRenderer.whereClauseSource(methodDescriptor.typeParameterTypeDescriptors),
         )
       )
     }
@@ -252,13 +252,13 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
                   parameterSource(
                     parameterDescriptors[index],
                     parameters[index],
-                    objCParameterNames?.get(index)
-                  )
+                    objCParameterNames?.get(index),
+                  ),
                 )
               }
-            )
+            ),
           ),
-          optionalNewLineSource
+          optionalNewLineSource,
         )
       )
     }
@@ -267,7 +267,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
   private fun parameterSource(
     parameterDescriptor: ParameterDescriptor,
     parameter: Variable,
-    objCParameterName: String? = null
+    objCParameterName: String? = null,
   ): Source {
     val parameterTypeDescriptor = parameterDescriptor.typeDescriptor
     val renderedTypeDescriptor =
@@ -282,8 +282,8 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
       jsInteropAnnotationRenderer.jsInteropAnnotationsSource(parameterDescriptor),
       colonSeparated(
         nameRenderer.nameSource(parameter),
-        nameRenderer.typeDescriptorSource(renderedTypeDescriptor)
-      )
+        nameRenderer.typeDescriptorSource(renderedTypeDescriptor),
+      ),
     )
   }
 
@@ -296,7 +296,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
           } else {
             SUPER_KEYWORD
           },
-          expressionRenderer.invocationSource(constructorInvocation)
+          expressionRenderer.invocationSource(constructorInvocation),
         )
       }
       .orEmpty()
@@ -317,10 +317,10 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
               newInstance.arguments
                 .takeIf { it.isNotEmpty() }
                 ?.let { expressionRenderer.invocationSource(newInstance) }
-                .orEmpty()
+                .orEmpty(),
             ),
-            newInstance.anonymousInnerClass?.let { typeRenderer.typeBodySource(it) }.orEmpty()
-          )
+            newInstance.anonymousInnerClass?.let { typeRenderer.typeBodySource(it) }.orEmpty(),
+          ),
         )
       }
 

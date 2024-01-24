@@ -132,7 +132,7 @@ internal data class ExpressionRenderer(
   val nameRenderer: NameRenderer,
   val enclosingType: Type,
   // TODO(b/252138814): Remove when KT-54349 is fixed
-  val renderThisReferenceWithLabel: Boolean = false
+  val renderThisReferenceWithLabel: Boolean = false,
 ) {
   private val typeRenderer: TypeRenderer
     get() = TypeRenderer(nameRenderer)
@@ -142,7 +142,7 @@ internal data class ExpressionRenderer(
       StatementRenderer(
         nameRenderer,
         enclosingType,
-        renderThisReferenceWithLabel = renderThisReferenceWithLabel
+        renderThisReferenceWithLabel = renderThisReferenceWithLabel,
       )
 
   private val memberRenderer: MemberRenderer
@@ -183,15 +183,15 @@ internal data class ExpressionRenderer(
     join(
       expressionInParensSource(
         qualifier,
-        Precedence.MEMBER_ACCESS.requiresParensOnLeft(qualifier.precedence)
+        Precedence.MEMBER_ACCESS.requiresParensOnLeft(qualifier.precedence),
       ),
-      inSquareBrackets(expressionSource(argument))
+      inSquareBrackets(expressionSource(argument)),
     )
 
   private fun arrayLengthSource(arrayLength: ArrayLength): Source =
     dotSeparated(
       leftSubExpressionSource(arrayLength.precedence, arrayLength.arrayExpression),
-      SIZE_IDENTIFIER
+      SIZE_IDENTIFIER,
     )
 
   private fun arrayLiteralSource(arrayLiteral: ArrayLiteral): Source =
@@ -210,10 +210,10 @@ internal data class ExpressionRenderer(
           else ->
             join(
               nameRenderer.topLevelQualifiedNameSource("kotlin.arrayOf"),
-              nameRenderer.typeArgumentsSource(listOf(typeArgument))
+              nameRenderer.typeArgumentsSource(listOf(typeArgument)),
             )
         },
-        inParentheses(commaSeparated(arrayLiteral.valueExpressions.map(this::expressionSource)))
+        inParentheses(commaSeparated(arrayLiteral.valueExpressions.map(this::expressionSource))),
       )
     }
 
@@ -221,7 +221,7 @@ internal data class ExpressionRenderer(
     infix(
       leftOperandSource(expression),
       expression.operator.ktSource(expression.useEquality),
-      rightOperandSource(expression)
+      rightOperandSource(expression),
     )
 
   private fun leftOperandSource(expression: BinaryExpression): Source =
@@ -258,13 +258,13 @@ internal data class ExpressionRenderer(
                   .map { asExpression(IT_KEYWORD, castTypeDescriptorSource(it)) }
                   .plus(IT_KEYWORD)
               )
-            )
-          )
+            ),
+          ),
         )
       } else {
         asExpression(
           leftSubExpressionSource(castExpression.precedence, castExpression.expression),
-          castTypeDescriptorSource(castExpression.castTypeDescriptor)
+          castTypeDescriptorSource(castExpression.castTypeDescriptor),
         )
       }
     }
@@ -282,7 +282,7 @@ internal data class ExpressionRenderer(
       inParentheses(expressionSource(conditionalExpression.conditionExpression)),
       expressionSource(conditionalExpression.trueExpression),
       ELSE_KEYWORD,
-      expressionSource(conditionalExpression.falseExpression)
+      expressionSource(conditionalExpression.falseExpression),
     )
 
   private fun expressionWithCommentSource(expressionWithComment: ExpressionWithComment): Source =
@@ -297,7 +297,7 @@ internal data class ExpressionRenderer(
   private fun functionExpressionLambdaSource(functionExpression: FunctionExpression): Source =
     spaceSeparated(
       newInstanceTypeDescriptorSource(functionExpression.typeDescriptor.functionalInterface!!),
-      block(parametersSource(functionExpression), lambdaBodySource(functionExpression))
+      block(parametersSource(functionExpression), lambdaBodySource(functionExpression)),
     )
 
   private fun lambdaBodySource(functionExpression: FunctionExpression): Source =
@@ -318,7 +318,7 @@ internal data class ExpressionRenderer(
   private fun instanceOfExpressionSource(instanceOfExpression: InstanceOfExpression): Source =
     isExpression(
       leftSubExpressionSource(instanceOfExpression.precedence, instanceOfExpression.expression),
-      instanceOfTestTypeDescriptorSource(instanceOfExpression.testTypeDescriptor)
+      instanceOfTestTypeDescriptorSource(instanceOfExpression.testTypeDescriptor),
     )
 
   private fun jsDocExpressionSource(expression: JsDocExpression): Source =
@@ -333,7 +333,7 @@ internal data class ExpressionRenderer(
     } else {
       nameRenderer.typeDescriptorSource(
         typeDescriptor.toNonNullable(),
-        projectRawToWildcards = true
+        projectRawToWildcards = true,
       )
     }
 
@@ -360,7 +360,7 @@ internal data class ExpressionRenderer(
         nonNull(nameRenderer.extensionMemberQualifiedNameSource("kotlin.jvm.javaPrimitiveType"))
       } else {
         nameRenderer.extensionMemberQualifiedNameSource("kotlin.jvm.javaObjectType")
-      }
+      },
     )
 
   private fun numberLiteralSource(numberLiteral: NumberLiteral): Source =
@@ -385,16 +385,16 @@ internal data class ExpressionRenderer(
             1 ->
               join(
                 nameRenderer.extensionMemberQualifiedNameSource("com.google.protobuf.kotlin.get"),
-                invocationSource(expression)
+                invocationSource(expression),
               )
             // getExtension(extension, index) call.
             2 ->
               dotSeparated(
                 join(
                   nameRenderer.extensionMemberQualifiedNameSource("com.google.protobuf.kotlin.get"),
-                  inParentheses(expressionSource(expression.arguments[0]))
+                  inParentheses(expressionSource(expression.arguments[0])),
                 ),
-                join(GET_KEYWORD, inParentheses(expressionSource(expression.arguments[1])))
+                join(GET_KEYWORD, inParentheses(expressionSource(expression.arguments[1]))),
               )
             else -> error("illegal proto extension getter")
           }
@@ -403,7 +403,7 @@ internal data class ExpressionRenderer(
         methodDescriptor.isProtoExtensionChecker() ->
           join(
             nameRenderer.extensionMemberQualifiedNameSource("com.google.protobuf.kotlin.contains"),
-            invocationSource(expression)
+            invocationSource(expression),
           )
         else ->
           join(
@@ -413,17 +413,17 @@ internal data class ExpressionRenderer(
               ?.let {
                 join(
                   invocationTypeArgumentsSource(methodDescriptor.typeArguments),
-                  invocationSource(expression)
+                  invocationSource(expression),
                 )
               }
-              .orEmpty()
+              .orEmpty(),
           )
       }
     }
 
   private fun invocationTypeArgumentsSource(
     typeArguments: List<TypeArgument>,
-    omitNonDenotable: Boolean = true
+    omitNonDenotable: Boolean = true,
   ): Source =
     typeArguments
       .takeIf { it.isNotEmpty() && (it.all(TypeArgument::isDenotable) || !omitNonDenotable) }
@@ -436,20 +436,20 @@ internal data class ExpressionRenderer(
   private fun multiExpressionSource(multiExpression: MultiExpression): Source =
     spaceSeparated(
       nameRenderer.extensionMemberQualifiedNameSource("kotlin.run"),
-      block(newLineSeparated(multiExpression.expressions.map(this::expressionSource)))
+      block(newLineSeparated(multiExpression.expressions.map(this::expressionSource))),
     )
 
   private fun newArraySource(newArray: NewArray): Source =
     newArraySource(
       newArray.typeDescriptor,
       newArray.dimensionExpressions.first(),
-      newArray.dimensionExpressions.drop(1)
+      newArray.dimensionExpressions.drop(1),
     )
 
   private fun newArraySource(
     arrayTypeDescriptor: ArrayTypeDescriptor,
     firstDimension: Expression,
-    remainingDimensions: List<Expression>
+    remainingDimensions: List<Expression>,
   ): Source =
     arrayTypeDescriptor.typeArgument.let { typeArgument ->
       typeArgument.typeDescriptor.let { componentTypeDescriptor ->
@@ -467,15 +467,15 @@ internal data class ExpressionRenderer(
                 join(
                   nameRenderer.topLevelQualifiedNameSource("kotlin.Array"),
                   nameRenderer.typeArgumentsSource(listOf(typeArgument)),
-                  inParentheses(expressionSource(firstDimension))
+                  inParentheses(expressionSource(firstDimension)),
                 ),
                 block(
                   newArraySource(
                     componentTypeDescriptor as ArrayTypeDescriptor,
                     nextDimension,
-                    remainingDimensions.drop(1)
+                    remainingDimensions.drop(1),
                   )
-                )
+                ),
               )
           }
         }
@@ -484,7 +484,7 @@ internal data class ExpressionRenderer(
 
   private fun primitiveArrayOfSource(
     componentTypeDescriptor: PrimitiveTypeDescriptor,
-    dimension: Expression
+    dimension: Expression,
   ): Source =
     join(
       nameRenderer.topLevelQualifiedNameSource(
@@ -500,7 +500,7 @@ internal data class ExpressionRenderer(
           else -> throw InternalCompilerError("renderPrimitiveArrayOf($componentTypeDescriptor)")
         }
       ),
-      inParentheses(expressionSource(dimension))
+      inParentheses(expressionSource(dimension)),
     )
 
   private fun arrayOfNullsSource(typeArgument: TypeArgument, dimension: Expression): Source =
@@ -508,15 +508,15 @@ internal data class ExpressionRenderer(
       if (typeArgument.typeDescriptor.isNullable) {
         join(
           nameRenderer.extensionMemberQualifiedNameSource("kotlin.arrayOfNulls"),
-          nameRenderer.typeArgumentsSource(listOf(typeArgument.toNonNullable()))
+          nameRenderer.typeArgumentsSource(listOf(typeArgument.toNonNullable())),
         )
       } else {
         join(
           nameRenderer.extensionMemberQualifiedNameSource("javaemul.lang.uninitializedArrayOf"),
-          nameRenderer.typeArgumentsSource(listOf(typeArgument))
+          nameRenderer.typeArgumentsSource(listOf(typeArgument)),
         )
       },
-      inParentheses(expressionSource(dimension))
+      inParentheses(expressionSource(dimension)),
     )
 
   private fun newInstanceSource(expression: NewInstance): Source =
@@ -530,23 +530,23 @@ internal data class ExpressionRenderer(
           join(
             newInstanceTypeDescriptorSource(
               typeDescriptor,
-              omitNonDenotable = expression.anonymousInnerClass == null
+              omitNonDenotable = expression.anonymousInnerClass == null,
             ),
             // Render invocation arguments for classes only - interfaces don't need it.
             Source.emptyUnless(typeDescriptor.isClass) {
               // Explicit label is necessary to workaround
               // https://youtrack.jetbrains.com/issue/KT-54349
               copy(renderThisReferenceWithLabel = true).invocationSource(expression)
-            }
+            },
           ),
-          expression.anonymousInnerClass?.let { typeRenderer.typeBodySource(it) }.orEmpty()
-        )
+          expression.anonymousInnerClass?.let { typeRenderer.typeBodySource(it) }.orEmpty(),
+        ),
       )
     }
 
   private fun newInstanceTypeDescriptorSource(
     typeDescriptor: DeclaredTypeDescriptor,
-    omitNonDenotable: Boolean = true
+    omitNonDenotable: Boolean = true,
   ): Source =
     // Render qualified name if there's no qualifier, otherwise render simple name.
     typeDescriptor.typeDeclaration.let { typeDeclaration ->
@@ -556,14 +556,14 @@ internal data class ExpressionRenderer(
         } else {
           nameRenderer.qualifiedNameSource(typeDescriptor, asSuperType = true)
         },
-        invocationTypeArgumentsSource(typeDescriptor.typeArguments(), omitNonDenotable)
+        invocationTypeArgumentsSource(typeDescriptor.typeArguments(), omitNonDenotable),
       )
     }
 
   private fun postfixExpressionSource(expression: PostfixExpression): Source =
     join(
       leftSubExpressionSource(expression.precedence, expression.operand),
-      expression.operator.ktSource
+      expression.operator.ktSource,
     )
 
   private fun prefixExpressionSource(expression: PrefixExpression): Source =
@@ -584,14 +584,14 @@ internal data class ExpressionRenderer(
 
   private fun superReferenceSource(
     superTypeDescriptor: DeclaredTypeDescriptor?,
-    qualifierTypeDescriptor: DeclaredTypeDescriptor?
+    qualifierTypeDescriptor: DeclaredTypeDescriptor?,
   ): Source =
     join(
       SUPER_KEYWORD,
       superTypeDescriptor
         ?.let { inAngleBrackets(nameRenderer.qualifiedNameSource(it, asSuperType = true)) }
         .orEmpty(),
-      qualifierTypeDescriptor?.let { labelReferenceSource(it) }.orEmpty()
+      qualifierTypeDescriptor?.let { labelReferenceSource(it) }.orEmpty(),
     )
 
   private fun thisReferenceSource(thisReference: ThisReference): Source =
@@ -600,7 +600,7 @@ internal data class ExpressionRenderer(
       thisReference
         .takeIf { needsQualifier(it) }
         ?.let { labelReferenceSource(it.typeDescriptor) }
-        .orEmpty()
+        .orEmpty(),
     )
 
   private fun needsQualifier(thisReference: ThisReference): Boolean =
@@ -618,7 +618,7 @@ internal data class ExpressionRenderer(
       expression.fragments.map {
         spaceSeparated(
           if (it.variable.isFinal) VAL_KEYWORD else VAR_KEYWORD,
-          variableDeclarationFragmentSource(it)
+          variableDeclarationFragmentSource(it),
         )
       }
     )
@@ -629,7 +629,7 @@ internal data class ExpressionRenderer(
   private fun variableDeclarationFragmentSource(fragment: VariableDeclarationFragment): Source =
     spaceSeparated(
       variableSource(fragment.variable),
-      initializer(fragment.initializer?.let(this::expressionSource).orEmpty())
+      initializer(fragment.initializer?.let(this::expressionSource).orEmpty()),
     )
 
   private fun variableSource(variable: Variable): Source =
@@ -638,7 +638,7 @@ internal data class ExpressionRenderer(
       variable.typeDescriptor
         .takeIf { it.isKtDenotableNonWildcard }
         ?.let { nameRenderer.typeDescriptorSource(it) }
-        .orEmpty()
+        .orEmpty(),
     )
 
   private fun leftSubExpressionSource(precedence: Precedence, operand: Expression) =
@@ -676,7 +676,7 @@ internal data class ExpressionRenderer(
                   // Don't render <Any> (see: KT-54346)
                   ?.takeIf { !isJavaLangObject(it) },
               qualifierTypeDescriptor =
-                qualifierTypeDescriptor.takeIf { it.typeDeclaration != enclosingType.declaration }
+                qualifierTypeDescriptor.takeIf { it.typeDeclaration != enclosingType.declaration },
             )
           }
         } else if (memberReference.isLocalNewInstance) {

@@ -81,7 +81,7 @@ internal fun DeclaredTypeDescriptor.directSuperTypeForMethodCall(
 
 internal fun TypeDescriptor.contains(
   typeVariable: TypeVariable,
-  seenTypeVariables: Set<TypeVariable> = setOf()
+  seenTypeVariables: Set<TypeVariable> = setOf(),
 ): Boolean =
   when (this) {
     is DeclaredTypeDescriptor ->

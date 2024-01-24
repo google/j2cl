@@ -102,7 +102,7 @@ private fun Method.toConstructorObjCNames(): MethodObjCNames =
         parameters.mapIndexed { index, parameter ->
           parameter.objCName.letIf(index != 0) { "with$it" }
         }
-      }
+      },
     )
   }
 
@@ -111,7 +111,7 @@ private fun Method.toNonConstructorObjCNames(): MethodObjCNames =
     if (objectiveCName == null || parameters.isEmpty()) {
       MethodObjCNames(
         objectiveCName ?: descriptor.ktName.escapeJ2ObjCKeyword,
-        parameters.map { "with${it.objCName}" }
+        parameters.map { "with${it.objCName}" },
       )
     } else {
       val objCParameterNames = objectiveCName.objCMethodParameterNames
@@ -127,7 +127,7 @@ private fun Method.toNonConstructorObjCNames(): MethodObjCNames =
             ?: (firstObjCParameterName.length / 2)
         MethodObjCNames(
           firstObjCParameterName.substring(0, splitIndex),
-          objCParameterNames.mapFirst { it.substring(splitIndex) }
+          objCParameterNames.mapFirst { it.substring(splitIndex) },
         )
       }
     }
@@ -249,7 +249,7 @@ internal fun MethodObjCNames.escapeObjCMethod(isConstructor: Boolean): MethodObj
       methodName
         .letIf(parameterNames.isEmpty()) { it.escapeObjCKeyword }
         .letIf(!isConstructor) { it.escapeReservedObjCPrefixWith("do") },
-    parameterNames = parameterNames.letIf(isConstructor) { it.mapFirst { "With$it" } }
+    parameterNames = parameterNames.letIf(isConstructor) { it.mapFirst { "With$it" } },
   )
 
 // Taken from GitHub:
@@ -364,5 +364,5 @@ private val objCKeywords =
     "using",
     "virtual",
     "wchar_t",
-    "xor_eq"
+    "xor_eq",
   )

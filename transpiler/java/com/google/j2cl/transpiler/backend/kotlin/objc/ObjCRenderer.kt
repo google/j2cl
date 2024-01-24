@@ -80,7 +80,7 @@ fun nsEnumTypedef(name: String, type: Renderer<Source>, values: List<String>): R
               assignment(source(name), source("$index")) + Source.COMMA
             }
           )
-        )
+        ),
       )
     )
   }
@@ -90,7 +90,7 @@ fun functionDeclaration(
   returnType: Renderer<Source>,
   name: String,
   parameters: List<Renderer<Source>> = listOf(),
-  statements: List<Renderer<Source>> = listOf()
+  statements: List<Renderer<Source>> = listOf(),
 ): Renderer<Source> =
   combine(modifiers.flatten(), returnType, parameters.flatten(), statements.flatten()) {
     modifierSources,
@@ -102,16 +102,16 @@ fun functionDeclaration(
       returnTypeSource,
       join(
         source(name),
-        inParentheses(commaSeparated(parameterSources).ifEmpty { source("void") })
+        inParentheses(commaSeparated(parameterSources).ifEmpty { source("void") }),
       ),
-      block(newLineSeparated(statementSources))
+      block(newLineSeparated(statementSources)),
     )
   }
 
 fun methodCall(
   target: Renderer<Source>,
   name: String,
-  arguments: List<Renderer<Source>> = listOf()
+  arguments: List<Renderer<Source>> = listOf(),
 ): Renderer<Source> =
   combine(target, arguments.flatten()) { targetSource, argumentSources ->
     inSquareBrackets(
@@ -123,7 +123,7 @@ fun methodCall(
             name.dropLast(1).split(":").zip(argumentSources).map {
               parameter(source(it.first), it.second)
             }
-          )
+          ),
       )
     )
   }

@@ -52,7 +52,7 @@ internal val TypeVariable.upperBoundTypeDescriptors: List<TypeDescriptor>
 private fun NameRenderer.typeParameterSource(typeVariable: TypeVariable): Source =
   spaceSeparated(
     typeParameterVarianceSource(typeVariable),
-    colonSeparated(nameSource(typeVariable), typeParameterBoundSource(typeVariable))
+    colonSeparated(nameSource(typeVariable), typeParameterBoundSource(typeVariable)),
   )
 
 private fun NameRenderer.typeParameterBoundSource(typeVariable: TypeVariable): Source =
@@ -80,5 +80,5 @@ private val TypeVariable.whereClauseItems: List<WhereClauseItem>
 private fun NameRenderer.source(whereClauseItem: WhereClauseItem): Source =
   colonSeparated(
     nameSource(whereClauseItem.hasName),
-    typeDescriptorSource(whereClauseItem.boundTypeDescriptor)
+    typeDescriptorSource(whereClauseItem.boundTypeDescriptor),
   )

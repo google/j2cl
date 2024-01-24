@@ -49,12 +49,12 @@ import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 internal fun NameRenderer.typeDescriptorSource(
   typeDescriptor: TypeDescriptor,
   asSuperType: Boolean = false,
-  projectRawToWildcards: Boolean = false
+  projectRawToWildcards: Boolean = false,
 ): Source =
   TypeDescriptorRenderer(
       this,
       asSuperType = asSuperType,
-      projectRawToWildcards = projectRawToWildcards
+      projectRawToWildcards = projectRawToWildcards,
     )
     .source(typeDescriptor.withImplicitNullability)
 
@@ -75,7 +75,7 @@ internal data class TypeDescriptorRenderer(
   private val seenTypeVariables: Set<TypeVariable> = setOf(),
   // TODO(b/246842682): Remove when bridge types are materialized as TypeDescriptors
   private val asSuperType: Boolean = false,
-  private val projectRawToWildcards: Boolean = false
+  private val projectRawToWildcards: Boolean = false,
 ) {
   /** Returns source for the given type descriptor. */
   fun source(typeDescriptor: TypeDescriptor): Source =
@@ -105,7 +105,7 @@ internal data class TypeDescriptorRenderer(
       arrayTypeDescriptor.componentTypeDescriptor.let {
         Source.emptyUnless(!it.isPrimitive) { inAngleBrackets(child.source(it)) }
       },
-      nullableSuffixSource(arrayTypeDescriptor)
+      nullableSuffixSource(arrayTypeDescriptor),
     )
 
   private fun declaredSource(declaredTypeDescriptor: DeclaredTypeDescriptor): Source {
@@ -118,11 +118,11 @@ internal data class TypeDescriptorRenderer(
       } else {
         dotSeparated(
           child.declaredSource(enclosingTypeDescriptor.toNonNullable()),
-          identifierSource(typeDeclaration.ktSimpleName(asSuperType))
+          identifierSource(typeDeclaration.ktSimpleName(asSuperType)),
         )
       },
       argumentsSource(declaredTypeDescriptor),
-      nullableSuffixSource(declaredTypeDescriptor)
+      nullableSuffixSource(declaredTypeDescriptor),
     )
   }
 
@@ -155,13 +155,13 @@ internal data class TypeDescriptorRenderer(
         } else {
           join(
               nameRenderer.nameSource(typeVariable.toNullable()),
-              nullableSuffixSource(typeVariable)
+              nullableSuffixSource(typeVariable),
             )
             .letIf(typeVariable.hasAmpersandAny) {
               infix(
                 it,
                 INTERSECTION_OPERATOR,
-                nameRenderer.topLevelQualifiedNameSource("kotlin.Any")
+                nameRenderer.topLevelQualifiedNameSource("kotlin.Any"),
               )
             }
         }
