@@ -1,0 +1,1 @@
+# Temporary placeholder to stop compiling kotlin code in open-source.
