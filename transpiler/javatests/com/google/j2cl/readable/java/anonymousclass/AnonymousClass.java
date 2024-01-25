@@ -87,13 +87,15 @@ class JsConstructorClass {
   JsConstructorClass(Object o) {}
 
   JsConstructorClass() {
-    this(new Object() {});
+    this(trueVar ? new Object() {} : null);
   }
+
+  static boolean trueVar = true;
 }
 
 class JsConstructorSubclass extends JsConstructorClass {
   @JsConstructor
   JsConstructorSubclass() {
-    super(new Object() {});
+    super(trueVar ? new Object() {} : null);
   }
 }

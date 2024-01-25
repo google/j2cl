@@ -22,18 +22,27 @@ class JsConstructorClass extends j_l_Object {
  /** @nodts @return {!JsConstructorClass} */
  static $create__() {
   JsConstructorClass.$clinit();
-  let $instance = new JsConstructorClass($1.$create__anonymousclass_JsConstructorClass(null));
+  let $instance = new JsConstructorClass(JsConstructorClass.$static_trueVar__anonymousclass_JsConstructorClass ? $1.$create__anonymousclass_JsConstructorClass(null) : null);
   $instance.$ctor__anonymousclass_JsConstructorClass__void();
   return $instance;
  }
  //Initialization from constructor 'JsConstructorClass()'.
  /** @nodts */
  $ctor__anonymousclass_JsConstructorClass__void() {}
+ /** @nodts @return {boolean} */
+ static get f_trueVar__anonymousclass_JsConstructorClass() {
+  return (JsConstructorClass.$clinit(), JsConstructorClass.$static_trueVar__anonymousclass_JsConstructorClass);
+ }
+ /** @nodts */
+ static set f_trueVar__anonymousclass_JsConstructorClass(/** boolean */ value) {
+  (JsConstructorClass.$clinit(), JsConstructorClass.$static_trueVar__anonymousclass_JsConstructorClass = value);
+ }
  /** @nodts */
  static $clinit() {
   JsConstructorClass.$clinit = () =>{};
   JsConstructorClass.$loadModules();
   j_l_Object.$clinit();
+  JsConstructorClass.$static_trueVar__anonymousclass_JsConstructorClass = true;
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
@@ -45,6 +54,8 @@ class JsConstructorClass extends j_l_Object {
   $1 = goog.module.get('anonymousclass.JsConstructorClass.$1$impl');
  }
 }
+/**@private {boolean} @nodts*/
+JsConstructorClass.$static_trueVar__anonymousclass_JsConstructorClass = false;
 $Util.$setClassMetadata(JsConstructorClass, 'anonymousclass.JsConstructorClass');
 
 exports = JsConstructorClass;

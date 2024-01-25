@@ -21,6 +21,7 @@ package anonymousclass
 import javaemul.lang.*
 import jsinterop.annotations.JsConstructor
 import kotlin.Any
+import kotlin.Boolean
 import kotlin.Int
 import kotlin.OptIn
 import kotlin.String
@@ -115,10 +116,15 @@ open class JsConstructorClass {
  @JsConstructor
  internal constructor(o: Any?)
 
- internal constructor(): this(object : Any() {})
+ internal constructor(): this(if (JsConstructorClass.trueVar_pp_anonymousclass) object : Any() {} else null)
+
+ companion object {
+  @JvmField
+  internal var trueVar_pp_anonymousclass: Boolean = true
+ }
 }
 
 open class JsConstructorSubclass: JsConstructorClass {
  @JsConstructor
- internal constructor(): super(object : Any() {})
+ internal constructor(): super(if (JsConstructorClass.trueVar_pp_anonymousclass) object : Any() {} else null)
 }
