@@ -94,14 +94,17 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
     val ktPrimaryConstructor = type.ktPrimaryConstructor
     return when {
       ktPrimaryConstructor != null ->
-        join(
-          KotlinSource.CONSTRUCTOR_KEYWORD,
-          memberRenderer(type)
-            .methodParametersSource(
-              ktPrimaryConstructor,
-              ktPrimaryConstructor.toObjCNames()?.parameterNames,
-            ),
-        )
+        memberRenderer(type).run {
+          ktPrimaryConstructor.toObjCNames().let { objCNames ->
+            spaceSeparated(
+              annotationsSource(ktPrimaryConstructor.descriptor, objCNames),
+              join(
+                KotlinSource.CONSTRUCTOR_KEYWORD,
+                methodParametersSource(ktPrimaryConstructor, objCNames?.parameterNames),
+              ),
+            )
+          }
+        }
       type.needExplicitPrimaryConstructor ->
         // Implicit constructors needs to follow the visiblity transpilation rules for members that
         // are different than the visibility transpilation rules for the class.

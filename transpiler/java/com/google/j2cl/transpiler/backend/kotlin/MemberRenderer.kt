@@ -20,10 +20,10 @@ import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.AstUtils
 import com.google.j2cl.transpiler.ast.AstUtils.getConstructorInvocation
 import com.google.j2cl.transpiler.ast.Field
-import com.google.j2cl.transpiler.ast.FunctionExpression
 import com.google.j2cl.transpiler.ast.InitializerBlock
 import com.google.j2cl.transpiler.ast.Member as JavaMember
 import com.google.j2cl.transpiler.ast.Method
+import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor
 import com.google.j2cl.transpiler.ast.MethodLike
 import com.google.j2cl.transpiler.ast.NewInstance
@@ -38,7 +38,6 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.GET_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.INIT_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.LATEINIT_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.OBJECT_KEYWORD
-import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.OVERRIDE_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.SUPER_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.THIS_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.VAL_KEYWORD
@@ -195,10 +194,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
       val methodObjCNames = method.toObjCNames()
       newLineSeparated(
         Source.emptyUnless(methodDescriptor.isStatic) { jvmStaticAnnotationSource() },
-        objCNameRenderer.objCAnnotationSource(methodDescriptor, methodObjCNames),
-        jsInteropAnnotationRenderer.jsInteropAnnotationsSource(methodDescriptor),
-        memberDescriptorRenderer.jvmThrowsAnnotationSource(methodDescriptor),
-        memberDescriptorRenderer.nativeThrowsAnnotationSource(methodDescriptor),
+        annotationsSource(methodDescriptor, methodObjCNames),
         spaceSeparated(
           methodDescriptor.methodModifiersSource,
           colonSeparated(
@@ -217,22 +213,13 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
       )
     }
 
-  fun methodHeaderSource(functionExpression: FunctionExpression): Source =
-    functionExpression.descriptor.let { methodDescriptor ->
-      newLineSeparated(
-        spaceSeparated(
-          OVERRIDE_KEYWORD,
-          colonSeparated(
-            join(
-              memberDescriptorRenderer.methodKindAndNameSource(methodDescriptor),
-              methodParametersSource(functionExpression),
-            ),
-            memberDescriptorRenderer.methodReturnTypeSource(methodDescriptor),
-          ),
-          nameRenderer.whereClauseSource(methodDescriptor.typeParameterTypeDescriptors),
-        )
-      )
-    }
+  fun annotationsSource(methodDescriptor: MethodDescriptor, methodObjCNames: MethodObjCNames?) =
+    newLineSeparated(
+      objCNameRenderer.objCAnnotationSource(methodDescriptor, methodObjCNames),
+      jsInteropAnnotationRenderer.jsInteropAnnotationsSource(methodDescriptor),
+      memberDescriptorRenderer.jvmThrowsAnnotationSource(methodDescriptor),
+      memberDescriptorRenderer.nativeThrowsAnnotationSource(methodDescriptor),
+    )
 
   fun methodParametersSource(method: MethodLike, objCParameterNames: List<String>? = null): Source {
     val methodDescriptor = method.descriptor
