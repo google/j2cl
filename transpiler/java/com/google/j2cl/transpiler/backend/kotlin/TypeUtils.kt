@@ -37,6 +37,8 @@ internal val Type.ktPrimaryConstructor: Method?
     constructors.singleOrNull()?.takeIf {
       // Render primary constructors for inner classes only, where it's necessary.
       // Don't do it all classes, because Kotlin does not allow using `return` inside `init {}`.
+      // It's also necessary because of: https://youtrack.jetbrains.com/issue/KT-65299
+      // TODO(b/322331738): Remove special handling of primary constructors when the bug is fixed.
       it.descriptor.enclosingTypeDescriptor.typeDeclaration.isKtInner
     }
 

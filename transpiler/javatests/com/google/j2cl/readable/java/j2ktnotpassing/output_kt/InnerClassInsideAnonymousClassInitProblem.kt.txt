@@ -1,0 +1,55 @@
+// Generated from "j2ktnotpassing/InnerClassInsideAnonymousClassInitProblem.java"
+@file:OptIn(ExperimentalObjCName::class)
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "REPEATED_BOUND",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER")
+
+package j2ktnotpassing
+
+import javaemul.lang.*
+import kotlin.Any
+import kotlin.Float
+import kotlin.Int
+import kotlin.OptIn
+import kotlin.Suppress
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.jvm.JvmField
+import kotlin.native.ObjCName
+
+@ObjCName("J2ktJ2ktnotpassingInnerClassInsideAnonymousClassInitProblem", exact = true)
+open class InnerClassInsideAnonymousClassInitProblem {
+ @ObjCName("J2ktJ2ktnotpassingInnerClassInsideAnonymousClassInitProblemCompanion", exact = true)
+ companion object {
+  @JvmField
+  internal val obj_pp_j2ktnotpassing: Any = object : Any() {
+   open inner class InnerClassWithTwoConstructors {
+    @JvmField
+    internal val i_pp_j2ktnotpassing: Int
+
+    internal constructor(i: Int) {
+     this.i_pp_j2ktnotpassing = i
+    }
+
+    internal constructor(i: Float) {
+     this.i_pp_j2ktnotpassing = i.toInt()
+    }
+
+    internal open val property_pp_j2ktnotpassing: Int get() {
+     return this.i_pp_j2ktnotpassing
+    }
+   }
+  }
+ }
+}
