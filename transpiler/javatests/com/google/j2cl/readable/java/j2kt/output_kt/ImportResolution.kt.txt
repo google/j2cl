@@ -49,12 +49,20 @@ open class ImportResolution {
  }
 
  open class Child internal constructor(): ImportResolution.Parent() {
+  override fun testJavaLang_pp_j2kt(string: kotlin.String?) {
+   string!!.java_trim()
+  }
+
   override fun testLocal_pp_j2kt(string: ImportResolution.Parent.String?) {
    string!!.local_pp_j2kt()
   }
  }
 
  open class GrandChild internal constructor(): ImportResolution.Child() {
+  override fun testJavaLang_pp_j2kt(string: kotlin.String?) {
+   string!!.java_trim()
+  }
+
   override fun testLocal_pp_j2kt(string: ImportResolution.Parent.String?) {
    string!!.local_pp_j2kt()
   }

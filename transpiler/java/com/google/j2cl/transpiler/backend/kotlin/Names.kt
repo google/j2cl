@@ -38,7 +38,11 @@ internal val TypeDeclaration.memberTypeNameMap: Map<String, String>
 
 /** A map of local member names used in this type. */
 internal val TypeDeclaration.localTypeNameMap: Map<String, String>
-  get() = memberTypeNameMap.plus(nameMapEntry)
+  get() = superTypesMemberNameMap.plus(memberTypeNameMap).plus(nameMapEntry)
+
+/** A map of local names from super type members. */
+internal val TypeDeclaration.superTypesMemberNameMap: Map<String, String>
+  get() = superTypeDeclaration?.run { superTypesMemberNameMap.plus(memberTypeNameMap) } ?: mapOf()
 
 /** A map of local names used in this type. */
 internal val Type.localTypeNameMap: Map<String, String>

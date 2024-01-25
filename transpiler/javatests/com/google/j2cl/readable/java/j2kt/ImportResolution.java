@@ -40,12 +40,22 @@ public class ImportResolution {
 
   static class Child extends Parent {
     @Override
+    void testJavaLang(java.lang.String string) {
+      string.trim();
+    }
+
+    @Override
     void testLocal(String string) {
       string.local();
     }
   }
 
   static class GrandChild extends Child {
+    @Override
+    void testJavaLang(java.lang.String string) {
+      string.trim();
+    }
+
     @Override
     void testLocal(String string) {
       string.local();
