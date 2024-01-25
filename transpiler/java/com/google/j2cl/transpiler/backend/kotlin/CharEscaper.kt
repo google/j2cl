@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
-import com.google.j2cl.transpiler.backend.kotlin.common.code
 import com.google.j2cl.transpiler.backend.kotlin.common.inDoubleQuotes
 import com.google.j2cl.transpiler.backend.kotlin.common.inSingleQuotes
 

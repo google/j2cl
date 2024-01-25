@@ -40,8 +40,6 @@ import com.google.j2cl.transpiler.backend.kotlin.ast.companionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.ast.declaration
 import com.google.j2cl.transpiler.backend.kotlin.ast.toCompanionObjectOrNull
 import com.google.j2cl.transpiler.backend.kotlin.common.backslashEscapedString
-import com.google.j2cl.transpiler.backend.kotlin.common.buildList
-import com.google.j2cl.transpiler.backend.kotlin.common.code
 import com.google.j2cl.transpiler.backend.kotlin.common.inSingleQuotes
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.common.runIf

@@ -15,8 +15,6 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin.ast
 
-import com.google.j2cl.transpiler.backend.kotlin.common.minOrNull
-
 /** Kotlin visibility. */
 enum class Visibility {
   PUBLIC,

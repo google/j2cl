@@ -23,8 +23,6 @@ import com.google.j2cl.transpiler.ast.FunctionExpression
 import com.google.j2cl.transpiler.ast.HasName
 import com.google.j2cl.transpiler.ast.Library
 import com.google.j2cl.transpiler.backend.common.UniqueNamesResolver.computeUniqueNames
-import com.google.j2cl.transpiler.backend.kotlin.common.buildMap
-import com.google.j2cl.transpiler.backend.kotlin.common.buildSet
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 
 /**

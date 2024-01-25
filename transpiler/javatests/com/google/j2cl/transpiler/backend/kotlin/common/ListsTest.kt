@@ -23,22 +23,6 @@ import org.junit.runners.JUnit4
 @RunWith(JUnit4::class)
 class ListsTest {
   @Test
-  fun buildList() {
-    assertThat(buildList<String> {}).containsExactly()
-
-    assertThat(buildList { add("a") }).containsExactly("a").inOrder()
-
-    assertThat(
-        buildList {
-          add("a")
-          add("b")
-        }
-      )
-      .containsExactly("a", "b")
-      .inOrder()
-  }
-
-  @Test
   fun listMapFirst() {
     assertThat(listOf<String>().mapFirst { it.uppercase() }).containsExactly()
     assertThat(listOf("a").mapFirst { it.uppercase() }).containsExactly("A").inOrder()
