@@ -137,10 +137,18 @@ public class OptimizeEnums extends NormalizationPass {
       return false;
     }
 
+    // Only optimize the cases where the instantiation appears directly in the initializer. Do not
+    // optimize if the initialization was extracted into a method by the Kotlin frontend.
+    if (type.getEnumFields().stream()
+        .map(Field::getInitializer)
+        .anyMatch(init -> !(init instanceof NewInstance))) {
+      return false;
+    }
+
     // We can only optimize enums where compile time constants are used to initialize enum fields.
     return type.getEnumFields().stream()
         .map(Field::getInitializer)
-        // We only expect ctor calls.
+        // We only expect ctor calls at this point.
         .map(NewInstance.class::cast)
         .flatMap(c -> c.getArguments().stream())
         .allMatch(Expression::isCompileTimeConstant);
