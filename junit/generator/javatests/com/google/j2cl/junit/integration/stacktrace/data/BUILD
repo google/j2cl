@@ -1,9 +1,9 @@
-load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
 load(
     "//junit/generator/javatests/com/google/j2cl/junit/integration:j2cl_junit_integration_test.bzl",
     "j2cl_test_integration_test_data",
     "java_and_j2cl_library",
 )
+load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],
@@ -70,6 +70,15 @@ j2cl_test_integration_test_data(
     platforms = [
         "CLOSURE",
         "WASM",
+    ],
+    deps = [":base"],
+)
+
+j2cl_test_integration_test_data(
+    name = "SimpleKotlinThrowingStacktraceTest",
+    extra_defs = ["--inline_functions=false"],
+    platforms = [
+        "CLOSURE",
     ],
     deps = [":base"],
 )

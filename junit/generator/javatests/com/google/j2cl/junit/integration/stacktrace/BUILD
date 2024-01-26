@@ -57,3 +57,13 @@ j2cl_test_integration_test(
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:SimpleThrowingStacktraceTest",
     ],
 )
+
+j2cl_test_integration_test(
+    name = "KotlinStacktraceIntegrationTest",
+    extra_data = [
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:stacktrace-files",
+    ],
+    test_data = [
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:SimpleKotlinThrowingStacktraceTest",
+    ],
+)
