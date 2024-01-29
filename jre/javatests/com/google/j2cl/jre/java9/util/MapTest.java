@@ -18,6 +18,8 @@ package com.google.j2cl.jre.java9.util;
 import static org.junit.Assert.assertThrows;
 
 import com.google.j2cl.jre.java.util.EmulTestBase;
+
+import java.util.HashMap;
 import java.util.Map;
 
 /** Tests for java.util.Map Java 9 API emulation. */
@@ -134,6 +136,42 @@ public class MapTest extends EmulTestBase {
         () ->
             Map.of(
                 "a", 1, "b", 2, "c", 3, "d", 4, "e", 5, "f", 6, "g", 7, "h", 8, "i", 9, "a", 10));
+  }
+
+    public void testCopyOf() {
+    assertIsImmutableMapOf(Map.copyOf(Map.of("a", 1)), "a");
+
+    HashMap<String, Integer> hashMap = new HashMap<>();
+    hashMap.put("a", 1);
+    Map<String, Integer> copy = Map.copyOf(hashMap);
+    assertIsImmutableMapOf(copy, "a");
+
+    // verify that mutating the original has no effect on the copy
+    hashMap.put("b", 2);
+    assertFalse(copy.containsKey("b"));
+    assertEquals(1, copy.size());
+
+    hashMap.put("a", 5);
+    assertEquals(1, (int) copy.get("a"));
+
+    // ensure that null values result in a NPE
+    HashMap<String, Integer> mapWithNullKey = new HashMap<>();
+    mapWithNullKey.put(null, 1);
+    try {
+      Map.copyOf(mapWithNullKey);
+      fail("expected NullPointerException from copyOf with a null key");
+    } catch (NullPointerException ignored) {
+      // expected
+    }
+
+    HashMap<String, Integer> mapWithNullValue = new HashMap<>();
+    mapWithNullValue.put("key", null);
+    try {
+      Map.copyOf(mapWithNullValue);
+      fail("expected NullPointerException from copyOf with a null value");
+    } catch (NullPointerException ignored) {
+      // expected
+    }
   }
 
   private static void assertIsImmutableMapOf(Map<String, Integer> map, String... contents) {

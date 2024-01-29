@@ -15,6 +15,11 @@
  */
 package java.util;
 
+import static javaemul.internal.InternalPreconditions.checkArgument;
+import static javaemul.internal.InternalPreconditions.checkNotNull;
+
+import java.util.stream.Collectors;
+
 import jsinterop.annotations.JsIgnore;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
@@ -105,5 +110,9 @@ public interface Set<E> extends Collection<E> {
   @Override
   default Spliterator<E> spliterator() {
     return Spliterators.spliterator(this, Spliterator.DISTINCT);
+  }
+
+  static <E> Set<E> copyOf(Collection<? extends E> coll) {
+    return coll.stream().collect(Collectors.toUnmodifiableSet());
   }
 }

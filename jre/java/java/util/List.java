@@ -19,6 +19,8 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import java.util.function.UnaryOperator;
 import javaemul.internal.ArrayHelper;
+import java.util.stream.Collectors;
+
 import jsinterop.annotations.JsIgnore;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsNonNull;
@@ -164,4 +166,8 @@ public interface List<E> extends Collection<E> {
   }
 
   @JsNonNull List<E> subList(int fromIndex, int toIndex);
+
+  static <E> List<E> copyOf(Collection<? extends E> coll) {
+    return coll.stream().collect(Collectors.toUnmodifiableList());
+  }
 }
