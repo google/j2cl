@@ -22,6 +22,7 @@ import java.io.Serializable;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import jsinterop.annotations.JsIgnore;
 import jsinterop.annotations.JsNonNull;
@@ -415,4 +416,10 @@ public interface Map<K, V> {
 
   // Note: Explicit equals override helps an experimental JSpecify nullness checker.
   boolean equals(Object o);
+  static <K,V> Map<K,V> copyOf(Map<? extends K,? extends V> map) {
+    // TODO if the given map is immutable and has no nulls, return it
+    return map.entrySet().stream().collect(Collectors.toUnmodifiableMap(Entry::getKey,
+        Entry::getValue));
+  }
+
 }
