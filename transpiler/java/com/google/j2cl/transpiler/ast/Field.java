@@ -72,7 +72,7 @@ public class Field extends Member {
   public boolean isKtLateInit() {
     FieldDescriptor descriptor = getDescriptor();
     boolean isTestProperty =
-        descriptor.getEnclosingTypeDescriptor().getTypeDeclaration().isAnnotatedWithJUnitRunWith()
+        descriptor.getEnclosingTypeDescriptor().getTypeDeclaration().isTestClass()
             || descriptor
                 .getEnclosingTypeDescriptor()
                 .getTypeDeclaration()

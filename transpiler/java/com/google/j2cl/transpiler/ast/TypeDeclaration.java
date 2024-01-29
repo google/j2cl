@@ -91,7 +91,7 @@ public abstract class TypeDeclaration
   }
 
   /**
-   * Returns the unqualified simple source name as written in the souce, {@code null} if the class
+   * Returns the unqualified simple source name as written in the source, {@code null} if the class
    * does not have a name, i.e. it is an anonymous class or a synthetic class.
    */
   @Nullable
@@ -275,8 +275,11 @@ public abstract class TypeDeclaration
   /** Returns whether the described type has the @AutoValue.Builder annotation. */
   public abstract boolean isAnnotatedWithAutoValueBuilder();
 
-  /** Returns whether the described type has the JUnit @RunWith annotation. */
-  public abstract boolean isAnnotatedWithJUnitRunWith();
+  /**
+   * Returns whether the described type is a test class, i.e. has the JUnit @RunWith annotation
+   * or @RunParameterized annotation.
+   */
+  public abstract boolean isTestClass();
 
   @Memoized
   public boolean isJsFunctionImplementation() {
@@ -509,7 +512,7 @@ public abstract class TypeDeclaration
   @Memoized
   public boolean hasOverlayImplementationType() {
     // TODO(b/116825224): this should just be
-    //           isJsEnum() || isNative() || isJsFunctionInteface() && declaresJsOverlayMembers.
+    //           isJsEnum() || isNative() || isJsFunctionInterface() && declaresJsOverlayMembers.
     // but there are some synthetic type descriptors created by
     // TypeDescriptors.createNativeGlobalTypeDescriptor that do are marked native and confuse the
     // rewriting of overlay references.
@@ -589,7 +592,7 @@ public abstract class TypeDeclaration
 
   /**
    * Returns the fully package qualified source name like "com.google.common.Outer.Inner". Used in
-   * places where original name is useful (like aliasing, identifying the corressponding java type,
+   * places where original name is useful (like aliasing, identifying the corresponding java type,
    * Debug/Error output, etc.
    */
   @Memoized
@@ -811,7 +814,7 @@ public abstract class TypeDeclaration
         .setAnnotatedWithFunctionalInterface(false)
         .setAnnotatedWithAutoValue(false)
         .setAnnotatedWithAutoValueBuilder(false)
-        .setAnnotatedWithJUnitRunWith(false)
+        .setTestClass(false)
         .setJsFunctionInterface(false)
         .setJsType(false)
         .setLocal(false)
@@ -885,7 +888,7 @@ public abstract class TypeDeclaration
 
     public abstract Builder setAnnotatedWithAutoValueBuilder(boolean annotatedWithAutoValueBuilder);
 
-    public abstract Builder setAnnotatedWithJUnitRunWith(boolean annotatedWithJUnitRunWith);
+    public abstract Builder setTestClass(boolean isTestClass);
 
     public abstract Builder setJsFunctionInterface(boolean isJsFunctionInterface);
 
