@@ -17,12 +17,12 @@ package com.google.j2cl.junit.integration;
 
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.truth.Truth.assertThat;
-import static com.google.common.truth.Truth8.assertThat;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.truth.Truth8;
 import com.google.j2cl.junit.integration.IntegrationTestBase.TestMode;
 import java.util.List;
 import java.util.Map;
@@ -75,7 +75,7 @@ public class TestAsserter {
       // TODO(b/32608089): jsunit_test does not report number of tests correctly
       testCount = 1;
       // Since total number of tests cannot be asserted; ensure nummber of succeeds is correct.
-      assertThat(consoleLogs.stream().filter(x -> x.contains(": PASSED"))).hasSize(succeeds);
+      Truth8.assertThat(consoleLogs.stream().filter(x -> x.contains(": PASSED"))).hasSize(succeeds);
     } else if (testMode.isJ2kt()) {
       // J2KT JVM tests run with JUnit 4 which counts errors as failures, the log will shows
       // "Failures" instead of "Errors".
