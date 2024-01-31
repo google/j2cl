@@ -16,26 +16,19 @@
 package com.google.j2cl.transpiler.passes;
 
 import com.google.j2cl.transpiler.ast.FunctionExpression;
-import com.google.j2cl.transpiler.ast.MethodDescriptor;
 
 /**
  * Convert lambda expressions to implementor classes for interfaces which are not functional in
- * Kotlin.
+ * Kotlin as Kotlin doesn't allow lambda implementation in such cases.
  */
 public class NormalizeLambdaExpressionsJ2kt
     extends ImplementLambdaExpressionsViaImplementorClasses {
   @Override
   protected boolean shouldRewrite(FunctionExpression functionExpression) {
-    MethodDescriptor methodDescriptor =
-        functionExpression
-            .getTypeDescriptor()
-            .getFunctionalInterface()
-            .getTypeDeclaration()
-            .toUnparameterizedTypeDescriptor()
-            .getSingleAbstractMethodDescriptor();
-    boolean isKtFunctionalInterface =
-        !methodDescriptor.isKtProperty()
-            && methodDescriptor.getTypeParameterTypeDescriptors().isEmpty();
-    return !isKtFunctionalInterface;
+    return !functionExpression
+        .getTypeDescriptor()
+        .getFunctionalInterface()
+        .getTypeDeclaration()
+        .isKtFunctionalInterface();
   }
 }

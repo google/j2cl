@@ -26,6 +26,7 @@ import com.google.j2cl.transpiler.passes.AddBridgeMethods;
 import com.google.j2cl.transpiler.passes.AddDisambiguatingSuperMethodForwardingStubs;
 import com.google.j2cl.transpiler.passes.AddEntryPointBridgesWasm;
 import com.google.j2cl.transpiler.passes.AddEnumImplicitMethods;
+import com.google.j2cl.transpiler.passes.AddJavaLangObjectForwardingMethods;
 import com.google.j2cl.transpiler.passes.AddNothingReturnStatements;
 import com.google.j2cl.transpiler.passes.AddVisibilityMethodBridgesJ2kt;
 import com.google.j2cl.transpiler.passes.ConvertMethodReferencesToLambdas;
@@ -676,6 +677,7 @@ public enum Backend {
           CreateImplicitConstructors::new,
           InsertExplicitSuperCalls::new,
           NormalizeLambdaExpressionsJ2kt::new,
+          AddJavaLangObjectForwardingMethods::new,
           AddDisambiguatingSuperMethodForwardingStubs::new,
           AddVisibilityMethodBridgesJ2kt::new,
           NormalizeSynchronizedMethods::new,

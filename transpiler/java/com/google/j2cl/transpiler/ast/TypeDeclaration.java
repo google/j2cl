@@ -263,6 +263,36 @@ public abstract class TypeDeclaration
 
   public abstract boolean isFinal();
 
+  // TODO(b/322906767): Remove when the bug is fixed.
+  private static final boolean PRESERVE_EQUALS_FOR_JSTYPE_INTERFACE =
+      "true"
+          .equals(
+              System.getProperty(
+                  "com.google.j2cl.transpiler.backend.kotlin.preserveEqualsForJsTypeInterface"));
+
+  public boolean isKtFunctionalInterface() {
+    if (!isFunctionalInterface()) {
+      return false;
+    }
+
+    if (getAllSuperTypesIncludingSelf().stream()
+        .filter(TypeDeclaration::isInterface)
+        // TODO(b/317299672): Remove JsType special casing since should preserve all of them for
+        // migration purposes.
+        .filter(t -> PRESERVE_EQUALS_FOR_JSTYPE_INTERFACE && t.isJsType())
+        .flatMap(t -> t.getDeclaredMethodDescriptors().stream())
+        .anyMatch(MethodDescriptor::isOrOverridesJavaLangObjectMethod)) {
+      // If the interface has an explicit {@code java.lang.Object} method, it is not considered to
+      // be functional in Kotlin.
+      return false;
+    }
+
+    MethodDescriptor methodDescriptor =
+        toUnparameterizedTypeDescriptor().getSingleAbstractMethodDescriptor();
+    return !methodDescriptor.isKtProperty()
+        && methodDescriptor.getTypeParameterTypeDescriptors().isEmpty();
+  }
+
   /** Returns whether the described type is a functional interface (JLS 9.8). */
   public abstract boolean isFunctionalInterface();
 

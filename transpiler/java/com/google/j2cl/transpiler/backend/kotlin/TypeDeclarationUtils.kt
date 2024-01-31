@@ -50,13 +50,6 @@ internal val TypeDeclaration.canBeNullableAsBound: Boolean
     !hasRecursiveTypeBounds() ||
       typeParameterDescriptors.all { it.upperBoundTypeDescriptor.isNullable }
 
-internal val TypeDeclaration.isKtFunctionalInterface
-  get() =
-    isFunctionalInterface &&
-      toUnparameterizedTypeDescriptor().singleAbstractMethodDescriptor!!.let { methodDescriptor ->
-        !methodDescriptor.isKtProperty && methodDescriptor.typeParameterTypeDescriptors.isEmpty()
-      }
-
 internal val TypeDeclaration.isKtInner: Boolean
   get() =
     enclosingTypeDeclaration != null &&
