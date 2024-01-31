@@ -56,83 +56,98 @@ def _impl_j2wasm_application(ctx):
     outputs = []
 
     transpile_out = ctx.actions.declare_directory(ctx.label.name + "_out")
-    args = ctx.actions.args()
-    args.use_param_file("@%s", use_always = True)
-    args.set_param_file_format("multiline")
-    args.add_joined("-classpath", classpath, join_with = ctx.configuration.host_path_separator)
-    args.add("-output", transpile_out.path)
-    args.add("-experimentalBackend", "WASM")
-    args.add_all(ctx.attr.entry_points, before_each = "-experimentalGenerateWasmExport")
-    args.add_all(ctx.attr.defines, before_each = "-experimentalDefineForWasm")
-    args.add_all(ctx.attr.transpiler_args)
 
-    args.add_all(srcs)
+    if not ctx.attr.use_modular_pipeline:
+        # Monolithic pipeline.
+        args = ctx.actions.args()
+        args.use_param_file("@%s", use_always = True)
+        args.set_param_file_format("multiline")
+        args.add_joined("-classpath", classpath, join_with = ctx.configuration.host_path_separator)
+        args.add("-output", transpile_out.path)
+        args.add("-experimentalBackend", "WASM")
+        args.add_all(ctx.attr.entry_points, before_each = "-experimentalGenerateWasmExport")
+        args.add_all(ctx.attr.defines, before_each = "-experimentalDefineForWasm")
+        args.add_all(ctx.attr.transpiler_args)
 
-    ctx.actions.run(
-        progress_message = "Transpiling to Wasm %s" % ctx.label,
-        inputs = depset(transitive = [srcs, classpath]),
-        outputs = [transpile_out],
-        executable = ctx.executable._j2cl_transpiler,
-        arguments = [args],
-        env = dict(LANG = "en_US.UTF-8"),
-        execution_requirements = {"supports-workers": "1"},
-        mnemonic = "J2wasmTranspile",
-    )
+        args.add_all(srcs)
 
-    # Link the wat file for the named output
-    ctx.actions.run_shell(
-        inputs = [transpile_out],
-        outputs = [ctx.outputs.wat],
-        # TODO(b/176105504): Link instead copying when Blaze native tree support lands.
-        command = "cp %s/module.wat %s" % (transpile_out.path, ctx.outputs.wat.path),
-        mnemonic = "J2wasm",
-    )
+        ctx.actions.run(
+            progress_message = "Transpiling to Wasm %s" % ctx.label,
+            inputs = depset(transitive = [srcs, classpath]),
+            outputs = [transpile_out],
+            executable = ctx.executable._j2cl_transpiler,
+            arguments = [args],
+            env = dict(LANG = "en_US.UTF-8"),
+            execution_requirements = {"supports-workers": "1"},
+            mnemonic = "J2wasmTranspile",
+        )
 
-    # Link the imports JS file for the named output.
-    ctx.actions.run_shell(
-        inputs = [transpile_out],
-        outputs = [ctx.outputs.jsimports],
-        # TODO(b/176105504): Link instead copying when Blaze native tree support lands.
-        command = "cp %s/imports.txt %s" % (transpile_out.path, ctx.outputs.jsimports.path),
-        mnemonic = "J2wasm",
-    )
+        # Link the wat file for the named output
+        ctx.actions.run_shell(
+            inputs = [transpile_out],
+            outputs = [ctx.outputs.wat],
+            # TODO(b/176105504): Link instead copying when Blaze native tree support lands.
+            command = "cp %s/module.wat %s" % (transpile_out.path, ctx.outputs.wat.path),
+            mnemonic = "J2wasm",
+        )
 
-    # Create a module for exports.
-    exports_module_output = ctx.actions.declare_directory(ctx.label.name + ".exports")
-    exporter_args = ctx.actions.args()
-    exporter_args.add_joined("-classpath", _get_all_classjars(deps).to_list(), join_with = ctx.configuration.host_path_separator)
-    exporter_args.add("-output", exports_module_output.path)
-    exporter_args.add_all(ctx.attr.entry_points, before_each = "-entryPointPattern")
-    ctx.actions.run(
-        progress_message = "Generating Wasm Exports %s" % ctx.label,
-        inputs = _get_all_classjars(deps),
-        outputs = [exports_module_output],
-        executable = ctx.executable._export_generator,
-        arguments = [exporter_args],
-        env = dict(LANG = "en_US.UTF-8"),
-        execution_requirements = {"supports-workers": "1"},
-        mnemonic = "J2wasm",
-    )
+        # Link the imports JS file for the named output.
+        ctx.actions.run_shell(
+            inputs = [transpile_out],
+            outputs = [ctx.outputs.jsimports],
+            # TODO(b/176105504): Link instead copying when Blaze native tree support lands.
+            command = "cp %s/imports.txt %s" % (transpile_out.path, ctx.outputs.jsimports.path),
+            mnemonic = "J2wasm",
+        )
+    else:
+        # Modular pipeline.
 
-    all_modules = module_outputs.to_list() + [exports_module_output]
-    jre_jars = ctx.attr._jre[J2wasmInfo]._private_.java_info.compile_jars.to_list()
+        # Create a module for exports.
+        exports_module_output = ctx.actions.declare_directory(ctx.label.name + ".exports")
+        exporter_args = ctx.actions.args()
+        exporter_args.add_joined("-classpath", _get_all_classjars(deps).to_list(), join_with = ctx.configuration.host_path_separator)
+        exporter_args.add("-output", exports_module_output.path)
+        exporter_args.add_all(ctx.attr.entry_points, before_each = "-entryPointPattern")
+        ctx.actions.run(
+            progress_message = "Generating Wasm Exports %s" % ctx.label,
+            inputs = _get_all_classjars(deps),
+            outputs = [exports_module_output],
+            executable = ctx.executable._export_generator,
+            arguments = [exporter_args],
+            env = dict(LANG = "en_US.UTF-8"),
+            execution_requirements = {"supports-workers": "1"},
+            mnemonic = "J2wasm",
+        )
 
-    # Bundle the module outputs.
-    bundler_args = ctx.actions.args()
-    bundler_args.add_all(all_modules, expand_directories = False)
-    bundler_args.add_joined("-classpath", jre_jars, join_with = ctx.configuration.host_path_separator)
-    bundler_args.add_all(ctx.attr.defines, before_each = "-define")
-    bundler_args.add("-output", ctx.outputs.bundle)
-    ctx.actions.run(
-        progress_message = "Bundling modules for Wasm %s" % ctx.label,
-        inputs = all_modules + jre_jars,
-        outputs = [ctx.outputs.bundle],
-        executable = ctx.executable._bundler,
-        arguments = [bundler_args],
-        env = dict(LANG = "en_US.UTF-8"),
-        execution_requirements = {"supports-workers": "1"},
-        mnemonic = "J2wasm",
-    )
+        all_modules = module_outputs.to_list() + [exports_module_output]
+        jre_jars = ctx.attr._jre[J2wasmInfo]._private_.java_info.compile_jars.to_list()
+
+        # Bundle the module outputs.
+        bundler_args = ctx.actions.args()
+        bundler_args.add_all(all_modules, expand_directories = False)
+        bundler_args.add_joined("-classpath", jre_jars, join_with = ctx.configuration.host_path_separator)
+        bundler_args.add_all(ctx.attr.defines, before_each = "-define")
+        bundler_args.add("-output", ctx.outputs.wat)
+        bundler_args.add("-jsimports", ctx.outputs.jsimports)
+        ctx.actions.run(
+            progress_message = "Bundling modules for Wasm %s" % ctx.label,
+            inputs = all_modules + jre_jars,
+            outputs = [ctx.outputs.wat, ctx.outputs.jsimports],
+            executable = ctx.executable._bundler,
+            arguments = [bundler_args],
+            env = dict(LANG = "en_US.UTF-8"),
+            execution_requirements = {"supports-workers": "1"},
+            mnemonic = "J2wasm",
+        )
+
+        # TODO(b/284654149): Remove once we only use the modular pipeline.
+        # Create the same output directory as monolithic pipeline since the
+        # code below relies on its existence.
+        ctx.actions.run_shell(
+            outputs = [transpile_out],
+            command = "mkdir %s" % transpile_out.path,
+            mnemonic = "J2wasm",
+        )
 
     debug_dir_name = ctx.label.name + "_debug"
     source_map_base_url = ctx.attr.source_map_base_url or debug_dir_name
@@ -324,6 +339,7 @@ _J2WASM_APP_ATTRS = {
     # TODO(b/296477606): Remove when symbol map file can be linked from the binary for debugging.
     "enable_debug_info": attr.bool(default = False),
     "use_legacy_wasm_spec": attr.bool(default = False),
+    "use_modular_pipeline": attr.bool(default = False),
     "_jre": attr.label(default = Label("//build_defs/internal_do_not_use:j2wasm_jre")),
     "_j2cl_transpiler": attr.label(
         cfg = "exec",
@@ -373,7 +389,6 @@ _j2wasm_application = rule(
         "srcmap": "%{name}.wasm.map",
         "jsimports": "%{name}.imports.js.txt",
         "symbolmap": "%{name}.symbols",
-        "bundle": "%{name}.bundle",
     },
 )
 

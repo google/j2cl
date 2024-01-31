@@ -93,6 +93,13 @@ final class BazelJ2wasmBundler extends BazelWorker {
   Path output;
 
   @Option(
+      name = "-jsimportsoutput",
+      required = true,
+      metaVar = "<path>",
+      usage = "Directory or zip into which to place the JavaScript imports output.")
+  Path jsimportPath;
+
+  @Option(
       name = "-classpath",
       required = true,
       metaVar = "<path>",
@@ -155,6 +162,8 @@ final class BazelJ2wasmBundler extends BazelWorker {
             .collect(toImmutableList());
 
     writeToFile(output.toString(), moduleContents, problems);
+    // TODO(b/283466423): Emit the jsimport code instead of this placeholder.
+    writeToFile(jsimportPath.toString(), ImmutableList.of(), problems);
   }
 
   private Stream<String> getDeduppedWasmSnippets(
