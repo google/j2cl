@@ -89,7 +89,10 @@ private fun Method.toConstructorObjCNames(): MethodObjCNames =
   descriptor.objectiveCName.let { objectiveCName ->
     MethodObjCNames(
       "init",
-      if (objectiveCName != null) {
+      if (
+        objectiveCName != null &&
+          (objectiveCName.contains(":") || objectiveCName.startsWith("initWith"))
+      ) {
         objectiveCName.objCMethodParameterNames.mapFirst {
           val prefix = "initWith"
           if (it.startsWith(prefix)) {
@@ -108,28 +111,29 @@ private fun Method.toConstructorObjCNames(): MethodObjCNames =
 
 private fun Method.toNonConstructorObjCNames(): MethodObjCNames =
   descriptor.objectiveCName.let { objectiveCName ->
-    if (objectiveCName == null || parameters.isEmpty()) {
+    if (objectiveCName == null || !objectiveCName.contains(":")) {
       MethodObjCNames(
         objectiveCName ?: descriptor.ktName.escapeJ2ObjCKeyword,
         parameters.map { "with${it.objCName}" },
       )
     } else {
       val objCParameterNames = objectiveCName.objCMethodParameterNames
-      val firstObjCParameterName = objCParameterNames.firstOrNull()
-      if (firstObjCParameterName == null) {
-        MethodObjCNames(objectiveCName, objCParameterNames)
-      } else {
-        // Split string by index of last uppercase or in half arbitrarily. Does not
-        // handle single character objc name.
-        check(firstObjCParameterName.length > 1)
-        val splitIndex =
-          firstObjCParameterName.indexOfLast { it.isUpperCase() }.takeIf { it > 0 }
-            ?: (firstObjCParameterName.length / 2)
-        MethodObjCNames(
-          firstObjCParameterName.substring(0, splitIndex),
-          objCParameterNames.mapFirst { it.substring(splitIndex) },
-        )
-      }
+      val firstObjCParameterName = objCParameterNames.first()
+      // Split string by one of:
+      // - first occurrence of "With",
+      // - index of last uppercase character,
+      // - in half arbitrarily.
+      // Does not handle single character objc name.
+      check(firstObjCParameterName.length > 1)
+      val splitIndex =
+        null
+          ?: firstObjCParameterName.indexOf("With").takeIf { it > 0 }
+          ?: firstObjCParameterName.indexOfLast { it.isUpperCase() }.takeIf { it > 0 }
+          ?: firstObjCParameterName.length.div(2)
+      MethodObjCNames(
+        firstObjCParameterName.substring(0, splitIndex),
+        objCParameterNames.mapFirst { it.substring(splitIndex) },
+      )
     }
   }
 

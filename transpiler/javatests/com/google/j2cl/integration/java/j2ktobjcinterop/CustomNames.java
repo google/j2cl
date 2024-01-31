@@ -25,15 +25,14 @@ public final class CustomNames {
   @ObjectiveCName("initWithIndex:name:")
   public CustomNames(int i, String s) {}
 
-  // TODO(b/321778713): Uncomment when the bug is fixed.
-  // @ObjectiveCName("init")
-  // public CustomNames() {}
+  @ObjectiveCName("init")
+  public CustomNames() {}
 
-  // @ObjectiveCName("init")
-  // public CustomNames(long i) {}
-  //
-  // @ObjectiveCName("init")
-  // public CustomNames(long i, String s) {}
+  @ObjectiveCName("init")
+  public CustomNames(long i) {}
+
+  @ObjectiveCName("init")
+  public CustomNames(long i, String s) {}
 
   @ObjectiveCName("custom")
   public void method() {}
@@ -44,10 +43,9 @@ public final class CustomNames {
   @ObjectiveCName("customWithIndex:name:")
   public void method(int i, String s) {}
 
-  // TODO(b/321778713): Uncomment when the bug is fixed.
-  // @ObjectiveCName("custom")
-  // public void method(long i) {}
-  //
-  // @ObjectiveCName("custom")
-  // public void method(long i, String s) {}
+  @ObjectiveCName("custom")
+  public void method(long i) {}
+
+  @ObjectiveCName("custom")
+  public void method(long i, String s) {}
 }

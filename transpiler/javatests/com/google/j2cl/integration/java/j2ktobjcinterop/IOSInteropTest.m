@@ -44,18 +44,16 @@
   obj = [[J2ktCustom alloc] initWithIndex:1];
   obj = [[J2ktCustom alloc] initWithIndex:1 name:@""];
 
-  // TODO(b/321778713): Uncomment when the bug is fixed.
-  // obj = [[J2ktCustom alloc] initialize];
-  // obj = [[J2ktCustom alloc] initializeWithLong:1];
-  // obj = [[J2ktCustom alloc] initializeWithLong:1 withNSString:@""];
+  obj = [[J2ktCustom alloc] init];
+  obj = [[J2ktCustom alloc] initWithLong:1];
+  obj = [[J2ktCustom alloc] initWithLong:1 withNSString:@""];
 
   [obj custom];
   [obj customWithIndex:1];
   [obj customWithIndex:1 name:@""];
 
-  // TODO(b/321778713): Uncomment when the bug is fixed.
-  // [obj customWithLong:1];
-  // [obj customWithLong:1 withNSString:@""];
+  [obj customWithLong:1];
+  [obj customWithLong:1 withNSString:@""];
 }
 
 @end
