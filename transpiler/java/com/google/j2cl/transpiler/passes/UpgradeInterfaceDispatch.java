@@ -17,21 +17,21 @@ package com.google.j2cl.transpiler.passes;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
-import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 
 /**
  * Upgrades the dispatch if the instance is not an interface type. This may happen if the type at
  * the call-site is an abstract class or if the implementation is a default method.
  */
-public final class UpgradeInterfaceDispatch extends LibraryNormalizationPass {
+public final class UpgradeInterfaceDispatch extends NormalizationPass {
 
   @Override
-  public void applyTo(Library library) {
+  public void applyTo(Type type) {
 
-    library.accept(
+    type.accept(
         new AbstractRewriter() {
           @Override
           public MethodCall rewriteMethodCall(MethodCall methodCall) {

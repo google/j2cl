@@ -22,16 +22,16 @@ import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
+import com.google.j2cl.transpiler.ast.Type;
 
 /** Rewrites null checks for JsEnum values for Wasm. */
-public class RewriteJsEnumNullChecks extends LibraryNormalizationPass {
+public class RewriteJsEnumNullChecks extends NormalizationPass {
 
   @Override
-  public void applyTo(Library library) {
-    library.accept(
+  public void applyTo(Type type) {
+    type.accept(
         new AbstractRewriter() {
           @Override
           public Expression rewriteBinaryExpression(BinaryExpression expression) {
