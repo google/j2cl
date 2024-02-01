@@ -1,0 +1,16 @@
+
+/** @return {!Object<string, !Object<string, !*>>} Wasm import object */
+function getImports() {
+ return {
+  'imports': {
+   'j2wasm.ExceptionUtils.tag': j2wasm_ExceptionUtils.tag,
+   'Date.constructor': () => new Date(),
+   'Date.getSeconds': (/** !Date */ $instance, ) => $instance.getSeconds(),
+   'Date.now': Date.now,
+   'Number.isInteger': Number.isInteger,
+   'RegExp.constructor$1': (/** string */ pattern, ) => new RegExp(pattern, ),
+   'RegExp.test$1': (/** !RegExp */ $instance, /** string */ value, ) => $instance.test(value, ),
+   'RegExp.toString': (/** !RegExp */ $instance, ) => $instance.toString(),
+  }
+ };
+}

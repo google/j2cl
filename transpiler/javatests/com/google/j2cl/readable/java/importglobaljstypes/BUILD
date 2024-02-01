@@ -13,6 +13,7 @@ readable_example(
     # Native JsType does not make sense for j2kt-native.
     build_kt_native_readables = False,
     generate_wasm_imports = True,
+    generate_wasm_modular = True,
     deps = [
         "//jre/java:javaemul_internal_annotations-j2cl",
         "//third_party:gwt-jsinterop-annotations-j2cl",
