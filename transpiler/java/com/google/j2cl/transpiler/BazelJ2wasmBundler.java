@@ -43,7 +43,7 @@ import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
-import com.google.j2cl.transpiler.backend.wasm.SharedWasmSnippet;
+import com.google.j2cl.transpiler.backend.wasm.SharedSnippet;
 import com.google.j2cl.transpiler.backend.wasm.StringLiteralInfo;
 import com.google.j2cl.transpiler.backend.wasm.Summary;
 import com.google.j2cl.transpiler.backend.wasm.TypeInfo;
@@ -146,16 +146,16 @@ final class BazelJ2wasmBundler extends BazelWorker {
         Streams.concat(
                 Stream.of("(rec"),
                 getModuleParts("types"),
-                getDeduppedWasmSnippets(Summary::getTypeSnippetsList),
+                getDeduppedSnippets(Summary::getTypeSnippetsList),
                 Stream.of(typeGraph.getTopLevelItableStructDeclaration()),
                 classes.stream().map(TypeGraph.Type::getItableStructDeclaration),
                 Stream.of(")"),
                 getModuleParts("data"),
                 getModuleParts("globals"),
-                getDeduppedWasmSnippets(Summary::getGlobalSnippetsList),
+                getDeduppedSnippets(Summary::getGlobalSnippetsList),
                 classes.stream().map(TypeGraph.Type::getItableInitialization),
                 Stream.of(literalGlobals),
-                getDeduppedWasmSnippets(Summary::getImportSnippetsList),
+                getDeduppedSnippets(Summary::getWasmImportSnippetsList),
                 Stream.of(generatorStage.emitToString(WasmConstructsGenerator::emitExceptionTag)),
                 getModuleParts("functions"),
                 literalGetterMethods)
@@ -166,12 +166,11 @@ final class BazelJ2wasmBundler extends BazelWorker {
     writeToFile(jsimportPath.toString(), ImmutableList.of(), problems);
   }
 
-  private Stream<String> getDeduppedWasmSnippets(
-      Function<Summary, Collection<SharedWasmSnippet>> snippetGetter) {
+  private Stream<String> getDeduppedSnippets(
+      Function<Summary, Collection<SharedSnippet>> snippetGetter) {
     return getSummaries()
         .flatMap(s -> snippetGetter.apply(s).stream())
-        .collect(
-            toImmutableMap(SharedWasmSnippet::getKey, SharedWasmSnippet::getSnippet, (a, b) -> a))
+        .collect(toImmutableMap(SharedSnippet::getKey, SharedSnippet::getSnippet, (a, b) -> a))
         .values()
         .stream();
   }

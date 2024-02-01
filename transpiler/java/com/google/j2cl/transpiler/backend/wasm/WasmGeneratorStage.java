@@ -105,7 +105,7 @@ public class WasmGeneratorStage {
         .collectMethodsNeedingIntrinsicDeclarations()
         .forEach(
             (k, m) ->
-                summaryBuilder.addSharedImportSnippet(
+                summaryBuilder.addSharedWasmImportSnippet(
                     k, emitToString(g -> g.emitBinaryenIntrinsicImport(k, m))));
 
     // TODO(rluble): Introduce/use flags to emit the readable version of the summary. For now emit

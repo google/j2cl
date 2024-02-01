@@ -61,15 +61,15 @@ public final class SummaryBuilder {
   }
 
   void addSharedTypeSnippet(String key, String snippet) {
-    summary.addTypeSnippets(SharedWasmSnippet.newBuilder().setKey(key).setSnippet(snippet));
+    summary.addTypeSnippets(SharedSnippet.newBuilder().setKey(key).setSnippet(snippet));
   }
 
   void addSharedGlobalSnippet(String key, String snippet) {
-    summary.addGlobalSnippets(SharedWasmSnippet.newBuilder().setKey(key).setSnippet(snippet));
+    summary.addGlobalSnippets(SharedSnippet.newBuilder().setKey(key).setSnippet(snippet));
   }
 
-  void addSharedImportSnippet(String key, String snippet) {
-    summary.addImportSnippets(SharedWasmSnippet.newBuilder().setKey(key).setSnippet(snippet));
+  void addSharedWasmImportSnippet(String key, String snippet) {
+    summary.addWasmImportSnippets(SharedSnippet.newBuilder().setKey(key).setSnippet(snippet));
   }
 
   private void summaryTypeHierarchy(Library library) {
