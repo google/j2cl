@@ -53,7 +53,7 @@
       int length = high - low;
 
       // insertion sort for small arrays
-      if (length < 7) {
+      if (length < 17) {
         insertionSort(array, low, high);
         return;
       }
@@ -85,12 +85,18 @@
      * @param high upper bound of range to sort
      */
     private static void insertionSort(%TYPE_NAME%[] array, int low, int high) {
-      for (int i = low + 1; i < high; ++i) {
-        for (int j = i; j > low && isGreaterThan(array[j - 1], array[j]); --j) {
-          %TYPE_NAME% t = array[j];
-          array[j] = array[j - 1];
-          array[j - 1] = t;
+     for (int i = low + 1; i < high; i++) {
+        %TYPE_NAME%  curr = array[i];
+        int j = i;
+        while (j > low) {
+          %TYPE_NAME%  prev = array[j - 1];
+          if (!isGreaterThan(prev, curr)) {
+            break;
+          }
+          array[j] = prev;
+          j--;
         }
+        array[j] = curr;
       }
     }
 

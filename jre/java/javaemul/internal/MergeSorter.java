@@ -44,7 +44,8 @@ final class MergeSorter {
     int length = high - low;
 
     // insertion sort for small arrays
-    if (length < 7) {
+    // TODO(goktug): Re-evaluate the cut point if we can use System.arrayCopy later down for copy.
+    if (length < 17) {
       insertionSort(array, low, high, comp);
       return;
     }
@@ -79,12 +80,18 @@ final class MergeSorter {
    * @param comp comparator to use
    */
   private static <T> void insertionSort(T[] array, int low, int high, Comparator<? super T> comp) {
-    for (int i = low + 1; i < high; ++i) {
-      for (int j = i; j > low && comp.compare(array[j - 1], array[j]) > 0; --j) {
-        T t = array[j];
-        array[j] = array[j - 1];
-        array[j - 1] = t;
+    for (int i = low + 1; i < high; i++) {
+      T curr = array[i];
+      int j = i;
+      while (j > low) {
+        T prev = array[j - 1];
+        if (comp.compare(prev, curr) <= 0) {
+          break;
+        }
+        array[j] = prev;
+        j--;
       }
+      array[j] = curr;
     }
   }
 
