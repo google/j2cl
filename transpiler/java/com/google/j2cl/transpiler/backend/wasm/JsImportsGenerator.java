@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.transpiler.backend.wasm;
 
-import static java.util.Comparator.comparing;
+import static com.google.common.collect.ImmutableMap.toImmutableMap;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableMap;
@@ -34,8 +34,10 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.backend.closure.ClosureGenerationEnvironment;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /** Generates a JavaScript imports mapping for the Wasm module. */
 final class JsImportsGenerator {
@@ -67,21 +69,42 @@ final class JsImportsGenerator {
   /** Generates the JavaScript code to support the imports. */
   public static void generateOutputs(Output output, Imports imports) {
     JsImportsGenerator importsGenerator = new JsImportsGenerator(imports);
-    importsGenerator.emitRequires();
-    importsGenerator.emitJsImports();
-    importsGenerator.writeOutput(output);
+    output.write(
+        "imports.txt",
+        generateOutputs(
+            importsGenerator.imports.getModuleImports(),
+            imports.getMethodImports().values().stream()
+                .collect(
+                    toImmutableMap(
+                        JsMethodImport::getImportKey,
+                        importsGenerator::createImportBody,
+                        (i1, i2) -> i1))));
   }
 
-  private void emitRequires() {
-    imports.getModuleImports().stream()
+  /** Generates the JavaScript code to support the imports. */
+  public static String generateOutputs(
+      Collection<String> requiredModules, Map<String, String> methodImports) {
+    SourceBuilder builder = new SourceBuilder();
+    emitRequires(builder, requiredModules);
+    emitJsImports(builder, methodImports);
+    builder.newLine(); // Ends in a new line for human readability.
+    return builder.build();
+  }
+
+  private static void emitRequires(SourceBuilder builder, Collection<String> requiredModules) {
+    requiredModules.stream()
         .sorted()
         .forEach(
-            imp -> {
-              builder.append(
-                  String.format(
-                      "const %s = goog.require('%s');", JsMethodImport.computeJsAlias(imp), imp));
+            i -> {
+              builder.append(createGoogRequire(i));
               builder.newLine();
             });
+  }
+
+  private static String createGoogRequire(String importedModule) {
+    return String.format(
+        "const %s = goog.require('%s');",
+        JsMethodImport.computeJsAlias(importedModule), importedModule);
   }
 
   /**
@@ -96,7 +119,7 @@ final class JsImportsGenerator {
    * }
    * }</pre>
    */
-  private void emitJsImports() {
+  private static void emitJsImports(SourceBuilder builder, Map<String, String> methodImports) {
     builder.newLine();
     builder.append("/** @return {!Object<string, !Object<string, !*>>} Wasm import object */");
     builder.newLine();
@@ -108,15 +131,17 @@ final class JsImportsGenerator {
     builder.newLine();
     builder.append(String.format("'%s': ", MODULE));
     builder.openBrace();
-    emitHardCodedJsImports();
-    imports.getMethodImports().values().stream()
-        .distinct()
-        .sorted(comparing(JsMethodImport::getImportKey))
+    // Add j2wasm.ExceptionUtils.tag. This is needed because the import is hardcoded in
+    // `generateWasmModule` and there is no corresponding code in the stb lib.
+    // TODO(b/277970998): Consider how to handle this.
+    builder.newLine();
+    builder.append("'j2wasm.ExceptionUtils.tag': j2wasm_ExceptionUtils.tag,");
+    methodImports.entrySet().stream()
+        .sorted(Entry.comparingByKey())
         .forEach(
-            imp -> {
+            i -> {
               builder.newLine();
-              builder.append(String.format("'%s': ", imp.getImportKey()));
-              emitImportBody(imp);
+              builder.append(String.format("'%s': %s", i.getKey(), i.getValue()));
               builder.append(",");
             });
     builder.closeBrace();
@@ -125,80 +150,67 @@ final class JsImportsGenerator {
     builder.closeBrace();
   }
 
-  private void emitHardCodedJsImports() {
-    // Add j2wasm.ExceptionUtils.tag. This is needed because the import is hardcoded in
-    // `generateWasmModule` and there is no corresponding code in the stb lib.
-    // TODO(b/277970998): Consider how to handle this.
-    builder.newLine();
-    builder.append("'j2wasm.ExceptionUtils.tag': j2wasm_ExceptionUtils.tag,");
-  }
-
-  private void emitImportBody(JsMethodImport methodImport) {
+  private String createImportBody(JsMethodImport methodImport) {
     if (methodImport.emitAsMethodReference()) {
-      builder.append(
-          AstUtils.buildQualifiedName(methodImport.getJsQualifier(), methodImport.getJsName()));
-      return;
+      return AstUtils.buildQualifiedName(methodImport.getJsQualifier(), methodImport.getJsName());
     }
 
-    emitLambdaExpression(methodImport);
+    return createLambdaExpressionCode(methodImport);
   }
 
-  private void emitLambdaExpression(JsMethodImport methodImport) {
+  private String createLambdaExpressionCode(JsMethodImport methodImport) {
+    StringBuilder sb = new StringBuilder();
     // Emit parameters
-    builder.append("(");
+    sb.append("(");
     if (methodImport.isInstance()) {
-      emitParameter(
-          new Variable.Builder()
-              .setName("$instance")
-              .setTypeDescriptor(
-                  methodImport
-                      .getMethod()
-                      .getDescriptor()
-                      .getEnclosingTypeDescriptor()
-                      .toNonNullable())
-              .build());
+      sb.append(
+          createParameterDefinition(
+              new Variable.Builder()
+                  .setName("$instance")
+                  .setTypeDescriptor(
+                      methodImport
+                          .getMethod()
+                          .getDescriptor()
+                          .getEnclosingTypeDescriptor()
+                          .toNonNullable())
+                  .build()));
     }
-    methodImport.getParameters().forEach(this::emitParameter);
-    builder.append(") => ");
+    methodImport.getParameters().forEach(v -> sb.append(createParameterDefinition(v)));
+    sb.append(") => ");
 
     // Emit function name
     if (methodImport.isConstructor()) {
-      builder.append(String.format("new %s", methodImport.getJsQualifier()));
+      sb.append(String.format("new %s", methodImport.getJsQualifier()));
     } else if (methodImport.isInstance()) {
-      builder.append(String.format("$instance.%s", methodImport.getJsName()));
+      sb.append(String.format("$instance.%s", methodImport.getJsName()));
     } else {
-      builder.append(
+      sb.append(
           AstUtils.buildQualifiedName(methodImport.getJsQualifier(), methodImport.getJsName()));
     }
 
     // Emit arguments
     if (methodImport.isPropertyGetter()) {
-      return;
+      return sb.toString();
     }
     if (methodImport.isPropertySetter()) {
-      builder.append(" = ");
-      builder.append(methodImport.getParameters().get(0).getName());
-      return;
+      sb.append(" = ");
+      sb.append(methodImport.getParameters().get(0).getName());
+      return sb.toString();
     }
-    builder.append("(");
+    sb.append("(");
     for (var parameter : methodImport.getParameters()) {
-      builder.append(parameter.getName() + ", ");
+      sb.append(parameter.getName() + ", ");
     }
-    builder.append(")");
+    sb.append(")");
+    return sb.toString();
   }
 
-  private void emitParameter(Variable parameter) {
-    builder.append(
-        String.format(
-            "/** %s */ %s, ",
-            // TODO(b/285407647): Make nullability consistent for parameterized types, etc.
-            closureEnvironment.getClosureTypeString(parameter.getTypeDescriptor().toNonNullable()),
-            parameter.getName()));
-  }
-
-  private void writeOutput(Output output) {
-    builder.newLine(); // Ends in a new line for human readability.
-    output.write("imports.txt", builder.build());
+  private String createParameterDefinition(Variable parameter) {
+    return String.format(
+        "/** %s */ %s, ",
+        // TODO(b/285407647): Make nullability consistent for parameterized types, etc.
+        closureEnvironment.getClosureTypeString(parameter.getTypeDescriptor().toNonNullable()),
+        parameter.getName());
   }
 
   private static class ImportCollector extends AbstractVisitor {
@@ -347,7 +359,6 @@ final class JsImportsGenerator {
     };
   }
 
-  private final SourceBuilder builder = new SourceBuilder();
   private final Imports imports;
 
   /** A minimal closure generation environment to reuse {@code ClosureTypesGenerator}. */
