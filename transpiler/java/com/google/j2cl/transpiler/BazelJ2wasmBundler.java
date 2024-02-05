@@ -43,6 +43,7 @@ import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.backend.wasm.JsImportsGenerator;
 import com.google.j2cl.transpiler.backend.wasm.SharedSnippet;
 import com.google.j2cl.transpiler.backend.wasm.StringLiteralInfo;
 import com.google.j2cl.transpiler.backend.wasm.Summary;
@@ -93,7 +94,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
   Path output;
 
   @Option(
-      name = "-jsimportsoutput",
+      name = "-jsimports",
       required = true,
       metaVar = "<path>",
       usage = "Directory or zip into which to place the JavaScript imports output.")
@@ -115,6 +116,11 @@ final class BazelJ2wasmBundler extends BazelWorker {
   }
 
   private void createBundle(Problems problems) {
+    emitModuleFile(problems);
+    emitJsImportsFile(problems);
+  }
+
+  private void emitModuleFile(Problems problems) {
     var typeGraph = new TypeGraph();
     var classes = typeGraph.build(getSummaries());
 
@@ -146,33 +152,34 @@ final class BazelJ2wasmBundler extends BazelWorker {
         Streams.concat(
                 Stream.of("(rec"),
                 getModuleParts("types"),
-                getDeduppedSnippets(Summary::getTypeSnippetsList),
+                streamDedupedValues(Summary::getTypeSnippetsList),
                 Stream.of(typeGraph.getTopLevelItableStructDeclaration()),
                 classes.stream().map(TypeGraph.Type::getItableStructDeclaration),
                 Stream.of(")"),
                 getModuleParts("data"),
                 getModuleParts("globals"),
-                getDeduppedSnippets(Summary::getGlobalSnippetsList),
+                streamDedupedValues(Summary::getGlobalSnippetsList),
                 classes.stream().map(TypeGraph.Type::getItableInitialization),
                 Stream.of(literalGlobals),
-                getDeduppedSnippets(Summary::getWasmImportSnippetsList),
+                streamDedupedValues(Summary::getWasmImportSnippetsList),
                 Stream.of(generatorStage.emitToString(WasmConstructsGenerator::emitExceptionTag)),
                 getModuleParts("functions"),
                 literalGetterMethods)
             .collect(toImmutableList());
 
     writeToFile(output.toString(), moduleContents, problems);
-    // TODO(b/283466423): Emit the jsimport code instead of this placeholder.
-    writeToFile(jsimportPath.toString(), ImmutableList.of(), problems);
   }
 
-  private Stream<String> getDeduppedSnippets(
+  private Stream<String> streamDedupedValues(
+      Function<Summary, Collection<SharedSnippet>> snippetGetter) {
+    return getDedupedSnippets(snippetGetter).values().stream();
+  }
+
+  private Map<String, String> getDedupedSnippets(
       Function<Summary, Collection<SharedSnippet>> snippetGetter) {
     return getSummaries()
         .flatMap(s -> snippetGetter.apply(s).stream())
-        .collect(toImmutableMap(SharedSnippet::getKey, SharedSnippet::getSnippet, (a, b) -> a))
-        .values()
-        .stream();
+        .collect(toImmutableMap(SharedSnippet::getKey, SharedSnippet::getSnippet, (i1, i2) -> i1));
   }
 
   private void synthesizeStringLiteralGetters(Set<String> referencedPropertyKeys) {
@@ -397,6 +404,21 @@ final class BazelJ2wasmBundler extends BazelWorker {
             || (superType != null && superType.implementsInterface(type));
       }
     }
+  }
+
+  private void emitJsImportsFile(Problems problems) {
+    Collection<String> requiredModules =
+        getSummaries()
+            .flatMap(s -> s.getJsImportRequiresList().stream())
+            .distinct()
+            .collect(ImmutableList.toImmutableList());
+
+    Map<String, String> jsImportsContents = getDedupedSnippets(Summary::getJsImportSnippetsList);
+
+    writeToFile(
+        jsimportPath.toString(),
+        ImmutableList.of(JsImportsGenerator.generateOutputs(requiredModules, jsImportsContents)),
+        problems);
   }
 
   private Stream<Summary> getSummaries() {

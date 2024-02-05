@@ -35,6 +35,7 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
+import com.google.j2cl.transpiler.backend.wasm.JsImportsGenerator.Imports;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -80,10 +81,14 @@ public class WasmGeneratorStage {
       OutputUtils.writeToFile(libraryInfoOutputPath, new byte[0], problems);
     }
 
-    environment =
-        new WasmGenerationEnvironment(
-            library, JsImportsGenerator.collectImports(library, problems), /* isModular= */ true);
+    Imports jsImports = JsImportsGenerator.collectImports(library, problems);
+    environment = new WasmGenerationEnvironment(library, jsImports, /* isModular= */ true);
     SummaryBuilder summaryBuilder = new SummaryBuilder(library, environment, problems);
+
+    JsImportsGenerator.collectImportSnippets(jsImports)
+        .forEach((key, value) -> summaryBuilder.addSharedJsImportSnippet(key, value));
+
+    jsImports.getModuleImports().forEach(summaryBuilder::addSharedJsImportRequireSnippet);
 
     collectUsedNativeArrayTypes(library)
         .forEach(

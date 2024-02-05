@@ -72,6 +72,14 @@ public final class SummaryBuilder {
     summary.addWasmImportSnippets(SharedSnippet.newBuilder().setKey(key).setSnippet(snippet));
   }
 
+  void addSharedJsImportSnippet(String key, String snippet) {
+    summary.addJsImportSnippets(SharedSnippet.newBuilder().setKey(key).setSnippet(snippet));
+  }
+
+  void addSharedJsImportRequireSnippet(String snippet) {
+    summary.addJsImportRequires(snippet);
+  }
+
   private void summaryTypeHierarchy(Library library) {
     library
         .streamTypes()

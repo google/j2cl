@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
+import static java.util.Comparator.comparing;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableMap;
@@ -40,11 +41,12 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 /** Generates a JavaScript imports mapping for the Wasm module. */
-final class JsImportsGenerator {
+public final class JsImportsGenerator {
 
   /** Top-level module name in the imports map containing all generated imports. */
   public static final String MODULE = "imports";
 
+  /** Represents the JavaScript imports for a the Wasm module. */
   @AutoValue
   public abstract static class Imports {
     public abstract ImmutableMap<MethodDescriptor, JsMethodImport> getMethodImports();
@@ -89,6 +91,17 @@ final class JsImportsGenerator {
     emitJsImports(builder, methodImports);
     builder.newLine(); // Ends in a new line for human readability.
     return builder.build();
+  }
+
+  /** Collects the import snippets indexed by their keys. */
+  static Map<String, String> collectImportSnippets(Imports imports) {
+    JsImportsGenerator importsGenerator = new JsImportsGenerator(imports);
+    return imports.getMethodImports().values().stream()
+        .distinct()
+        .sorted(comparing(JsMethodImport::getImportKey))
+        .collect(
+            toImmutableMap(
+                JsMethodImport::getImportKey, importsGenerator::createImportBody, (i1, i2) -> i1));
   }
 
   private static void emitRequires(SourceBuilder builder, Collection<String> requiredModules) {

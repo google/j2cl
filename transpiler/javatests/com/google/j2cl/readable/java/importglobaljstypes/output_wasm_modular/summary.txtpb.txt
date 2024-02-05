@@ -85,5 +85,27 @@
   "globalSnippets": [{
     "key": "$__emptyArray_$int.array",
     "snippet": "\n(global $__emptyArray_$int.array (ref $int.array)\n (array.new_default $int.array (i32.const 0))\n)\n"
+  }],
+  "jsImportSnippets": [{
+    "key": "Date.constructor",
+    "snippet": "() \u003d\u003e new Date()"
+  }, {
+    "key": "Date.getSeconds",
+    "snippet": "(/** !Date */ $instance, ) \u003d\u003e $instance.getSeconds()"
+  }, {
+    "key": "Date.now",
+    "snippet": "Date.now"
+  }, {
+    "key": "Number.isInteger",
+    "snippet": "Number.isInteger"
+  }, {
+    "key": "RegExp.constructor$1",
+    "snippet": "(/** string */ pattern, ) \u003d\u003e new RegExp(pattern, )"
+  }, {
+    "key": "RegExp.test$1",
+    "snippet": "(/** !RegExp */ $instance, /** string */ value, ) \u003d\u003e $instance.test(value, )"
+  }, {
+    "key": "RegExp.toString",
+    "snippet": "(/** !RegExp */ $instance, ) \u003d\u003e $instance.toString()"
   }]
 }
