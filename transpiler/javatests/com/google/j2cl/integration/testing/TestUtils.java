@@ -31,7 +31,15 @@ public final class TestUtils {
   }
 
   public static boolean isJ2Kt() {
-    return Platform.IS_J2KT;
+    return isJ2KtJvm() || isJ2KtNative();
+  }
+
+  public static boolean isJ2KtJvm() {
+    return Platform.IS_J2KT_JVM;
+  }
+
+  public static boolean isJ2KtNative() {
+    return Platform.IS_J2KT_NATIVE;
   }
 
   @SuppressWarnings({"TypeParameterUnusedInFormals", "unchecked"})

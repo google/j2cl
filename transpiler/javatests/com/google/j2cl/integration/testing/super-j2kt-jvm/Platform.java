@@ -16,9 +16,9 @@
 package com.google.j2cl.integration.testing;
 
 final class Platform {
-  static final boolean IS_WASM = true;
+  static final boolean IS_WASM = false;
 
-  static final boolean IS_J2KT_JVM = false;
+  static final boolean IS_J2KT_JVM = true;
 
   static final boolean IS_J2KT_NATIVE = false;
 
