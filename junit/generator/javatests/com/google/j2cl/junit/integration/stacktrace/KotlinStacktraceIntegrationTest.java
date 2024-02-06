@@ -34,7 +34,37 @@ public class KotlinStacktraceIntegrationTest extends IntegrationTestBase {
   }
 
   @Test
+  public void testAnonymousClasses() throws Exception {
+    runStacktraceTest("KotlinAnonymousClassesStacktraceTest");
+  }
+
+  @Test
   public void testSimpleThrowingMethod() throws Exception {
     runStacktraceTest("SimpleKotlinThrowingStacktraceTest");
+  }
+
+  @Test
+  public void testCustomException() throws Exception {
+    runStacktraceTest("KotlinCustomExceptionStacktraceTest");
+  }
+
+  @Test
+  public void testFillInStackTrace() throws Exception {
+    runStacktraceTest("KotlinFillInStacktraceTest");
+  }
+
+  @Test
+  public void testJsException() throws Exception {
+    runStacktraceTest("KotlinJsExceptionStacktraceTest");
+  }
+
+  @Test
+  public void testLambda() throws Exception {
+    runStacktraceTest("KotlinLambdaStacktraceTest");
+  }
+
+  @Test
+  public void testRecursive() throws Exception {
+    runStacktraceTest("KotlinRecursiveStacktraceTest");
   }
 }
