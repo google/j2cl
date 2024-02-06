@@ -143,7 +143,6 @@ def make_size_report(path_name, original_bundled_targets, original_opt_targets,
 
   print("  Closing report (%s)" % size_report_file.name)
   size_report_file.close()
-  repo_util.run_cmd("test -f ../.citc/p4_client_name && g4 reopen", shell=True)
 
 
 def get_files(test):

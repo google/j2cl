@@ -233,7 +233,10 @@ def run_cmd(cmd_args, cwd=None, include_stderr=False, shell=False):
     print("\nOUTPUT:\n============")
     print(output[1].decode("utf-8"))
     print("============\n")
-    raise Exception("cmd invocation FAILED: " + " ".join(cmd_args))
+    raise Exception(
+        "cmd invocation FAILED: "
+        + (cmd_args if isinstance(cmd_args, str) else " ".join(cmd_args))
+    )
 
   rv = output[0].decode("utf-8")
   if include_stderr:
