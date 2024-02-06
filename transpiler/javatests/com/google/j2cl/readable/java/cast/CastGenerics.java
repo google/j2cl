@@ -82,6 +82,17 @@ public class CastGenerics<T, E extends Number> {
     Container<Implementor> containerImplementor = null;
     containerImplementor.get().mA();
     containerImplementor.get().mB();
+
+    Container<A> strictlyA = null;
+    Object oA = strictlyA.get();
+    A a = strictlyA.get();
+
+    Container<? extends A> extendsA = null;
+    oA = extendsA.get();
+    a = extendsA.get();
+
+    Container<? super A> superA = null;
+    oA = superA.get();
   }
 
   public static void testCastToParamterizedType() {

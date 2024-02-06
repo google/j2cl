@@ -16,7 +16,7 @@
 [testErasureCast] => [m_testErasureCast__void]
 [{
     String str = new CastGenerics<String, Number>().field;
-...    containerImplementor.get().mB();
+...    oA = superA.get();
   }] => [CastGenerics.$clinit();] "cast.CastGenerics.testErasureCast"
 [String str = new CastGenerics<String, Number>().field;] => [let str = /**@type {?string}*/ ($Casts.$to(/**@type {!CastGenerics<?string, (Number|number)>}*/ (CastGenerics.$create__()).f_field__cast_CastGenerics, j_l_String));] "cast.CastGenerics.testErasureCast"
 [str] => [str] "str"
@@ -55,6 +55,19 @@
 [containerImplementor] => [containerImplementor] "containerImplementor"
 [containerImplementor.get().mA();] => [/**@type {Implementor}*/ ($Casts.$to(containerImplementor.m_get__java_lang_Object_$pp_cast(), Implementor)).m_mA__void();] "cast.CastGenerics.testErasureCast"
 [containerImplementor.get().mB();] => [/**@type {Implementor}*/ ($Casts.$to(containerImplementor.m_get__java_lang_Object_$pp_cast(), Implementor)).m_mB__void();] "cast.CastGenerics.testErasureCast"
+[Container<A> strictlyA = null;] => [let strictlyA = null;] "cast.CastGenerics.testErasureCast"
+[strictlyA] => [strictlyA] "strictlyA"
+[Object oA = strictlyA.get();] => [let oA = /**@type {A}*/ ($Casts.$to(strictlyA.m_get__java_lang_Object_$pp_cast(), A));] "cast.CastGenerics.testErasureCast"
+[oA] => [oA] "oA"
+[A a = strictlyA.get();] => [let a = /**@type {A}*/ ($Casts.$to(strictlyA.m_get__java_lang_Object_$pp_cast(), A));] "cast.CastGenerics.testErasureCast"
+[a] => [a] "a"
+[Container<? extends A> extendsA = null;] => [let extendsA = null;] "cast.CastGenerics.testErasureCast"
+[extendsA] => [extendsA] "extendsA"
+[oA = extendsA.get();] => [oA = extendsA.m_get__java_lang_Object_$pp_cast();] "cast.CastGenerics.testErasureCast"
+[a = extendsA.get();] => [a = /**@type {A}*/ ($Casts.$to(extendsA.m_get__java_lang_Object_$pp_cast(), A));] "cast.CastGenerics.testErasureCast"
+[Container<? super A> superA = null;] => [let superA = null;] "cast.CastGenerics.testErasureCast"
+[superA] => [superA] "superA"
+[oA = superA.get();] => [oA = superA.m_get__java_lang_Object_$pp_cast();] "cast.CastGenerics.testErasureCast"
 [testCastToParamterizedType] => [m_testCastToParamterizedType__void]
 [{
     Object o = new Integer(1);
