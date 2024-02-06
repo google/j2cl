@@ -51,7 +51,14 @@ j2cl_library(
 j2kt_native_library(
     name = "emul_tests_lib-j2kt-native",
     testonly = 1,
-    srcs = SRCS,
+    srcs = glob(
+        ["**/*.java"],
+        exclude = JS_ONLY_SRCS + [
+            "com/google/j2cl/jre/AllTests.java",
+            "com/google/j2cl/jre/EmulJava9Suite.java",
+            "com/google/j2cl/jre/java9/**/*.java",
+        ],
+    ),
     deps = [
         "//jre/java:javaemul_internal_annotations-j2kt-native",
         "//third_party:junit-j2kt-native",
@@ -121,6 +128,14 @@ j2cl_multi_test(
     name = "EmulJava8",
     shard_count = 8,
     test_class = "com.google.j2cl.jre.EmulJava8Suite",
+    deps = [":emul_tests_lib"],
+)
+
+j2cl_multi_test(
+    name = "EmulJava9",
+    enable_kt_native = False,
+    shard_count = 8,
+    test_class = "com.google.j2cl.jre.EmulJava9Suite",
     deps = [":emul_tests_lib"],
 )
 

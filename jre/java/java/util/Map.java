@@ -15,13 +15,13 @@
  */
 package java.util;
 
+import static javaemul.internal.InternalPreconditions.checkArgument;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import java.io.Serializable;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
-
 import jsinterop.annotations.JsIgnore;
 import jsinterop.annotations.JsNonNull;
 import jsinterop.annotations.JsType;
@@ -34,6 +34,143 @@ import jsinterop.annotations.JsType;
  */
 @JsType
 public interface Map<K, V> {
+
+  @JsIgnore
+  static <K, V> Map<K, V> of() {
+    return Collections.internalMapOf();
+  }
+
+  @JsIgnore
+  static <K, V> Map<K, V> of(K key, V value) {
+    return Collections.internalMapOf(key, value);
+  }
+
+  @JsIgnore
+  static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2) {
+    return Collections.internalMapOf(k1, v1, k2, v2);
+  }
+
+  @JsIgnore
+  static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3) {
+    return Collections.internalMapOf(k1, v1, k2, v2, k3, v3);
+  }
+
+  @JsIgnore
+  static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4) {
+    return Collections.internalMapOf(k1, v1, k2, v2, k3, v3, k4, v4);
+  }
+
+  @JsIgnore
+  static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5) {
+    return Collections.internalMapOf(k1, v1, k2, v2, k3, v3, k4, v4, k5, v5);
+  }
+
+  @JsIgnore
+  static <K, V> Map<K, V> of(
+      K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5, K k6, V v6) {
+    return Collections.internalMapOf(k1, v1, k2, v2, k3, v3, k4, v4, k5, v5, k6, v6);
+  }
+
+  @JsIgnore
+  static <K, V> Map<K, V> of(
+      K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7, V v7) {
+    return Collections.internalMapOf(k1, v1, k2, v2, k3, v3, k4, v4, k5, v5, k6, v6, k7, v7);
+  }
+
+  @JsIgnore
+  static <K, V> Map<K, V> of(
+      K k1,
+      V v1,
+      K k2,
+      V v2,
+      K k3,
+      V v3,
+      K k4,
+      V v4,
+      K k5,
+      V v5,
+      K k6,
+      V v6,
+      K k7,
+      V v7,
+      K k8,
+      V v8) {
+    return Collections.internalMapOf(
+        k1, v1, k2, v2, k3, v3, k4, v4, k5, v5, k6, v6, k7, v7, k8, v8);
+  }
+
+  @JsIgnore
+  static <K, V> Map<K, V> of(
+      K k1,
+      V v1,
+      K k2,
+      V v2,
+      K k3,
+      V v3,
+      K k4,
+      V v4,
+      K k5,
+      V v5,
+      K k6,
+      V v6,
+      K k7,
+      V v7,
+      K k8,
+      V v8,
+      K k9,
+      V v9) {
+    return Collections.internalMapOf(
+        k1, v1, k2, v2, k3, v3, k4, v4, k5, v5, k6, v6, k7, v7, k8, v8, k9, v9);
+  }
+
+  @JsIgnore
+  static <K, V> Map<K, V> of(
+      K k1,
+      V v1,
+      K k2,
+      V v2,
+      K k3,
+      V v3,
+      K k4,
+      V v4,
+      K k5,
+      V v5,
+      K k6,
+      V v6,
+      K k7,
+      V v7,
+      K k8,
+      V v8,
+      K k9,
+      V v9,
+      K k10,
+      V v10) {
+    return Collections.internalMapOf(
+        k1, v1, k2, v2, k3, v3, k4, v4, k5, v5, k6, v6, k7, v7, k8, v8, k9, v9, k10, v10);
+  }
+
+  @JsIgnore
+  static <K, V> Entry<K, V> entry(K key, V value) {
+    // This isn't quite consistent with the javadoc, since this is serializable, while entry()
+    // need not be serializable.
+    return new AbstractMap.SimpleImmutableEntry<>(checkNotNull(key), checkNotNull(value));
+  }
+
+  @JsIgnore
+  static <K, V> Map<K, V> ofEntries(Entry<? extends K, ? extends V>... entries) {
+    if (entries.length == 0) {
+      return Collections.emptyMap();
+    }
+
+    Map<K, V> map = new HashMap<>();
+    for (Entry<? extends K, ? extends V> entry : entries) {
+      checkNotNull(entry);
+      V old = map.put(checkNotNull(entry.getKey()), checkNotNull(entry.getValue()));
+      checkArgument(old == null, "Duplicate element");
+    }
+
+    return Collections.unmodifiableMap(map);
+  }
 
   /**
    * Represents an individual map entry.

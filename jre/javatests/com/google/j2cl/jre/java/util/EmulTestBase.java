@@ -15,9 +15,12 @@
  */
 package com.google.j2cl.jre.java.util;
 
+import static org.junit.Assert.assertThrows;
+
 import java.util.Arrays;
 import java.util.List;
 import junit.framework.TestCase;
+import org.junit.function.ThrowingRunnable;
 
 /** A common base class for emulation tests. */
 public class EmulTestBase extends TestCase {
@@ -54,4 +57,7 @@ public class EmulTestBase extends TestCase {
         Arrays.equals(expected, actual));
   }
 
+  public static void assertThrowsNullPointerException(ThrowingRunnable runnable) {
+    assertThrows(NullPointerException.class, runnable);
+  }
 }
