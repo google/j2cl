@@ -1043,12 +1043,15 @@ public class JdtEnvironment {
 
     TypeDeclaration typeDeclaration = createDeclarationForType(typeBinding.getTypeDeclaration());
 
+    DeclaredTypeDescriptor enclosingTypeDescriptor =
+        createDeclaredTypeDescriptor(typeBinding.getDeclaringClass(), inNullMarkedScope);
+
     // Compute these even later
     typeDescriptor =
         DeclaredTypeDescriptor.newBuilder()
             .setTypeDeclaration(typeDeclaration)
             .setEnclosingTypeDescriptor(
-                createDeclaredTypeDescriptor(typeBinding.getDeclaringClass()))
+                enclosingTypeDescriptor != null ? enclosingTypeDescriptor.toNonNullable() : null)
             // Create the super types in the @NullMarked context of the type
             .setSuperTypeDescriptorFactory(
                 () ->
