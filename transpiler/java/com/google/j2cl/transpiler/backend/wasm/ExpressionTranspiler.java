@@ -343,7 +343,9 @@ final class ExpressionTranspiler {
           return false;
         }
 
-        sourceBuilder.append(format("(array.new_fixed %s ", arrayType));
+        sourceBuilder.append(
+            format(
+                "(array.new_fixed %s %d ", arrayType, arrayLiteral.getValueExpressions().size()));
         arrayLiteral.getValueExpressions().forEach(this::render);
         sourceBuilder.append(")");
         return false;
