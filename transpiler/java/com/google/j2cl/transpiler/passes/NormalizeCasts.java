@@ -73,15 +73,7 @@ public class NormalizeCasts extends NormalizationPass {
   }
 
   private static boolean canRemoveCast(TypeDescriptor castTypeDescriptor, Expression expression) {
-    boolean isStaticallyGuaranteedToHoldAtRuntime =
-        expression instanceof NullLiteral
-            || expression
-                .getDeclaredTypeDescriptor()
-                .toRawTypeDescriptor()
-                .isAssignableTo(castTypeDescriptor);
-    return castTypeDescriptor.isNoopCast()
-        || isStaticallyGuaranteedToHoldAtRuntime
-        || isRedundantCast(castTypeDescriptor, expression);
+    return castTypeDescriptor.isNoopCast() || isRedundantCast(castTypeDescriptor, expression);
   }
 
   /**
@@ -105,6 +97,9 @@ public class NormalizeCasts extends NormalizationPass {
    *  </code></pre>
    */
   private static boolean isRedundantCast(TypeDescriptor typeDescriptor, Expression expression) {
+    if (isAssignableTo(typeDescriptor, expression)) {
+      return true;
+    }
     expression = skipPassThroughExpressions(expression);
 
     if (expression instanceof CastExpression) {
@@ -112,7 +107,15 @@ public class NormalizeCasts extends NormalizationPass {
       return castExpression.getTypeDescriptor().isAssignableTo(typeDescriptor)
           || isRedundantCast(typeDescriptor, castExpression.getExpression());
     }
-    return false;
+    return isAssignableTo(typeDescriptor, expression);
+  }
+
+  private static boolean isAssignableTo(TypeDescriptor castTypeDescriptor, Expression expression) {
+    return expression instanceof NullLiteral
+        || expression
+            .getDeclaredTypeDescriptor()
+            .toRawTypeDescriptor()
+            .isAssignableTo(castTypeDescriptor);
   }
 
   private static Expression skipPassThroughExpressions(Expression expression) {
@@ -122,6 +125,22 @@ public class NormalizeCasts extends NormalizationPass {
     }
     if (expression instanceof JsDocCastExpression) {
       return skipPassThroughExpressions(((JsDocCastExpression) expression).getExpression());
+    }
+    if (expression instanceof MethodCall) {
+      var methodCall = (MethodCall) expression;
+
+      // Look through InternalPreconditions.<T>checkNotNull(T obj) calls as it's a direct
+      // pass through of the provided parameter. Therefore we should see if the parameter is already
+      // of the type that the result is being cast to.
+      // TODO(b/324068627): we should bring Kotlin !! into the J2CL AST as a postfix not-null
+      //   operation. We can that look through those operations rather than special casing a
+      //   particular method call.
+      if (TypeDescriptors.get()
+          .javaemulInternalPreconditions
+          .getMethodDescriptor("checkNotNull", TypeDescriptors.get().javaLangObject)
+          .isSameMember(methodCall.getTarget().getDeclarationDescriptor())) {
+        return skipPassThroughExpressions(Iterables.getLast(methodCall.getArguments()));
+      }
     }
     return expression;
   }
