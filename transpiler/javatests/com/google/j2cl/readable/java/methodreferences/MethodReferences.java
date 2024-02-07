@@ -120,5 +120,9 @@ public class MethodReferences<T> {
     JsBiFunction<MethodReferences<T>, Number, Boolean> jsbiFunction = MethodReferences::sameAs;
 
     JsFunctionInterface<Number, Boolean> jsFunctionWithParameters = this::sameAs;
+
+    // These are all redundant casts that should be removable, even after the method references is
+    // rewritten as a lambda.
+    objectFactory = (Producer<Object>) ((Object) ((Producer<?>) MethodReferences::m));
   }
 }

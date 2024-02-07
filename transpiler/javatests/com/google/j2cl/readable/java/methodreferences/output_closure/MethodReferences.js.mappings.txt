@@ -23,7 +23,7 @@
 [main] => [m_main__void_$pp_methodreferences]
 [{
     Producer<Object> objectFactory = Object::new;
-...    JsFunctionInterface<Number, Boolean> jsFunctionWithParameters = this::sameAs;
+...    objectFactory = (Producer<Object>) ((Object) ((Producer<?>) MethodReferences::m));
   }] => [let /** !MethodReferences<T> */ $$q, /** !MethodReferences<*> */ $$q_1, /** !MethodReferences<*> */ $$q_2;] "methodreferences.MethodReferences.main"
 [Producer<Object> objectFactory = Object::new;] => [let objectFactory = Producer.$adapt(() =>{
    return j_l_Object.$create__();
@@ -140,6 +140,10 @@
 [jsFunctionWithParameters] => [jsFunctionWithParameters] "jsFunctionWithParameters"
 [this::sameAs] => [let arg0_18 = /**@type {(Number|number)}*/ ($Casts.$to(arg0_17, Number));] "methodreferences.MethodReferences.<lambda in main>"
 [this::sameAs] => [return this.m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences(arg0_18);] "methodreferences.MethodReferences.<lambda in main>"
+[objectFactory = (Producer<Object>) ((Object) ((Producer<?>) MethodReferences::m));] => [objectFactory = /**@type {Producer<*>}*/ ($Casts.$to(Producer.$adapt(() =>{
+   return MethodReferences.m_m__java_lang_Object();
+  }), Producer));] "methodreferences.MethodReferences.main"
+[MethodReferences::m] => [return MethodReferences.m_m__java_lang_Object();] "methodreferences.MethodReferences.<lambda in main>"
 [static Producer<String> staticStringProducer = m()::toString;] => [get f_staticStringProducer__methodreferences_MethodReferences]
 [static Producer<String> staticStringProducer = m()::toString;] => [return (MethodReferences.$clinit(), MethodReferences.$static_staticStringProducer__methodreferences_MethodReferences);] "methodreferences.MethodReferences.<synthetic: getter>"
 [static Producer<String> staticStringProducer = m()::toString;] => [set f_staticStringProducer__methodreferences_MethodReferences]

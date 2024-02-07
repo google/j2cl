@@ -121,6 +121,9 @@ open class MethodReferences<T> {
   val jsFunctionWithParameters: MethodReferences.JsFunctionInterface<Number?, Boolean?>? = MethodReferences.JsFunctionInterface<Number?, Boolean?> { arg0_9: Number? ->
    return@JsFunctionInterface this.sameAs_pp_methodreferences(arg0_9)
   }
+  objectFactory = ((MethodReferences.Producer {
+   return@Producer MethodReferences.m_pp_methodreferences()
+  } as MethodReferences.Producer<*>?) as Any?) as MethodReferences.Producer<Any?>?
  }
 
  @ObjCName("J2ktMethodreferencesMethodReferencesCompanion", exact = true)

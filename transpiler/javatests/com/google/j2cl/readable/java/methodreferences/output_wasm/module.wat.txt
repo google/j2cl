@@ -634,6 +634,32 @@
  (field $slot6 (ref null struct))
  )))
 
+ ;;; Code for methodreferences.MethodReferences.$LambdaImplementor$22 [type definition]
+ (type $methodreferences.MethodReferences.$LambdaImplementor$22 (sub $java.lang.Object (struct
+  (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$22.vtable))
+  (field $itable (ref $methodreferences.MethodReferences.$LambdaImplementor$22.itable))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  ))
+ )
+ (type $methodreferences.MethodReferences.$LambdaImplementor$22.vtable (sub $java.lang.Object.vtable (struct
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_produce__java_lang_Object (ref $function.m_produce__java_lang_Object))
+  ))
+ )
+ (type $methodreferences.MethodReferences.$LambdaImplementor$22.itable (sub $itable (struct
+ (field $slot0 (ref $methodreferences.MethodReferences.Producer.vtable))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+ )))
+
  ;;; Code for methodreferences.MethodReferences.ObjectCapturingOuter [type definition]
  (type $methodreferences.MethodReferences.ObjectCapturingOuter (sub $java.lang.Object (struct
   (field $vtable (ref $methodreferences.MethodReferences.ObjectCapturingOuter.vtable))
@@ -1310,6 +1336,36 @@
  )
 )
 
+;;; Code for methodreferences.MethodReferences.$LambdaImplementor$22 [vtable.init]
+(global $methodreferences.MethodReferences.$LambdaImplementor$22.vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$22.vtable)
+ (struct.new $methodreferences.MethodReferences.$LambdaImplementor$22.vtable
+  (ref.func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$22)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$22)
+ )
+)
+(global $methodreferences.MethodReferences.Producer.vtable@$methodreferences.MethodReferences.$LambdaImplementor$22 (ref $methodreferences.MethodReferences.Producer.vtable)
+ (struct.new $methodreferences.MethodReferences.Producer.vtable
+  (ref.func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$22)
+ )
+)
+
+;;; Code for methodreferences.MethodReferences.$LambdaImplementor$22 [itable.init]
+(global $methodreferences.MethodReferences.$LambdaImplementor$22.itable (ref $methodreferences.MethodReferences.$LambdaImplementor$22.itable)
+ (struct.new $methodreferences.MethodReferences.$LambdaImplementor$22.itable
+   (global.get $methodreferences.MethodReferences.Producer.vtable@$methodreferences.MethodReferences.$LambdaImplementor$22)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+   (ref.null struct)
+ )
+)
+
 ;;; Code for methodreferences.MethodReferences.ObjectCapturingOuter [vtable.init]
 (global $methodreferences.MethodReferences.ObjectCapturingOuter.vtable (ref $methodreferences.MethodReferences.ObjectCapturingOuter.vtable)
  (struct.new $methodreferences.MethodReferences.ObjectCapturingOuter.vtable
@@ -1564,6 +1620,17 @@
  (ref.null $java.lang.Class)
 )
 (global $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$21 (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
+
+;;; Code for methodreferences.MethodReferences.$LambdaImplementor$22 [static fields]
+(global $$class-initialized@methodreferences.MethodReferences.$LambdaImplementor$22 (mut i32)
+ (i32.const 0)
+)
+(global $$class@methodreferences.MethodReferences.$LambdaImplementor$22 (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$22 (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -2216,6 +2283,8 @@
   (local.set $jsbiFunction (call $$create__@methodreferences.MethodReferences.$LambdaImplementor$20 ))
   ;;@ methodreferences/MethodReferences.java:122:4
   (local.set $jsFunctionWithParameters (call $$create__methodreferences_MethodReferences@methodreferences.MethodReferences.$LambdaImplementor$21 (local.get $this)))
+  ;;@ methodreferences/MethodReferences.java:126:4
+  (local.set $objectFactory (call $$create__@methodreferences.MethodReferences.$LambdaImplementor$22 ))
  )
 )
 (elem declare func $m_main__void_$pp_methodreferences@methodreferences.MethodReferences)
@@ -4699,6 +4768,109 @@
   )
   (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$21 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$21")))
   (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$21))
+ )
+)
+
+;;; Code for methodreferences.MethodReferences.$LambdaImplementor$22 [methods]
+
+;;; <anonymous> implements Producer<Object> <anonymous> implements Producer<Object>.$create()
+(func $$create__@methodreferences.MethodReferences.$LambdaImplementor$22
+ (result (ref null $methodreferences.MethodReferences.$LambdaImplementor$22))
+ ;;@ methodreferences/MethodReferences.java:126:64
+ (local $$instance (ref null $methodreferences.MethodReferences.$LambdaImplementor$22))
+ (block
+  ;;@ methodreferences/MethodReferences.java:126:64
+  (call $$clinit__void_<once>_@methodreferences.MethodReferences.$LambdaImplementor$22 )
+  ;;@ methodreferences/MethodReferences.java:126:64
+  (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$22 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$22.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$22.itable)) (i32.const 0)))
+  ;;@ methodreferences/MethodReferences.java:126:64
+  (call $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$22@methodreferences.MethodReferences.$LambdaImplementor$22 (ref.as_non_null (local.get $$instance)))
+  ;;@ methodreferences/MethodReferences.java:126:64
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> implements Producer<Object>.$ctor()
+(func $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$22@methodreferences.MethodReferences.$LambdaImplementor$22
+ (param $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$22))
+ ;;@ methodreferences/MethodReferences.java:126:64
+ (block
+  ;;@ methodreferences/MethodReferences.java:126:64
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; Object <anonymous> implements Producer<Object>.produce()
+(func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$22
+ (type $function.m_produce__java_lang_Object)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ methodreferences/MethodReferences.java:126:64
+ (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$22))
+ (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$22) (local.get $this.untyped)))
+ (block
+  ;;@ methodreferences/MethodReferences.java:126:64
+  (return (call $m_m__java_lang_Object@methodreferences.MethodReferences ))
+ )
+)
+(elem declare func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$22)
+
+;;; void <anonymous> implements Producer<Object>.$clinit()
+(func $$clinit__void_<once>_@methodreferences.MethodReferences.$LambdaImplementor$22
+ ;;@ methodreferences/MethodReferences.java:126:64
+ (block
+  ;;@ methodreferences/MethodReferences.java:126:64
+  (if (global.get $$class-initialized@methodreferences.MethodReferences.$LambdaImplementor$22)
+   (then
+    ;;@ methodreferences/MethodReferences.java:126:64
+    (return )
+   )
+  )
+  ;;@ methodreferences/MethodReferences.java:126:64
+  (global.set $$class-initialized@methodreferences.MethodReferences.$LambdaImplementor$22 (i32.const 1))
+  ;;@ methodreferences/MethodReferences.java:126:64
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> <anonymous> implements Producer<Object>.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$22
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$22)))
+   (then
+    (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$22))
+   )
+  )
+  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$22 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$22 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$22))
+ )
+)
+
+;;; Class<?> <anonymous> implements Producer<Object>.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$22
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$22))
+ (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$22) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$22 ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$22)
+
+;;; String <anonymous> implements Producer<Object>.$getString_|methodrefere...|()
+(func $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$22
+ (result (ref null $java.lang.String))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$22)))
+   (then
+    (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$22))
+   )
+  )
+  (global.set $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$22 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "methodreferences.MethodReferences$$LambdaImplementor$22")))
+  (return (global.get $$string_|methodrefere...|@methodreferences.MethodReferences.$LambdaImplementor$22))
  )
 )
 
