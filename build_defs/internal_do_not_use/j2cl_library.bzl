@@ -66,6 +66,9 @@ _J2KT_WEB_PACKAGES = [
     "transpiler/javatests/com/google/j2cl/readable/java",
 ]
 
+_J2KT_WEB_DISABLED_TARGETS = [
+]
+
 # Packages that j2cl rule will generate j2kt native packages by default. Used to simplify test
 # rules.
 _J2KT_NATIVE_PACKAGES = [
@@ -163,7 +166,7 @@ def j2cl_library(
         args.get("srcs") and any([s for s in args.get("srcs") if s.endswith(".kt")])
     )
 
-    is_j2kt_web_allowed = any([p for p in _J2KT_WEB_PACKAGES if native.package_name().startswith(p)])
+    is_j2kt_web_allowed = any([p for p in _J2KT_WEB_PACKAGES if native.package_name().startswith(p) and target_name not in _J2KT_WEB_DISABLED_TARGETS])
 
     # These arguments should not be set by the user.
     args["j2cl_transpiler_override"] = None
