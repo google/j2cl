@@ -17,42 +17,51 @@ package strictequality;
 
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.TestUtils.getUndefined;
+import static com.google.j2cl.integration.testing.TestUtils.isJ2Kt;
 import static com.google.j2cl.integration.testing.TestUtils.isJavaScript;
-import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 
 public class Main {
   public static void main(String... args) {
     testEqualityIsStrict();
     testEqualityIsStrict_regression();
-    testBoxedAndDevirtualizedTypes();
+    testBoxingConstructors();
+    testBoxingValueOf();
     testStringLiteralIdentityAcrossCompilationBoundaries();
   }
 
-  @SuppressWarnings({"EqualsIncompatibleType", "BoxedPrimitiveEquality"})
-  private static void testBoxedAndDevirtualizedTypes() {
-    // These tests are JavaScript specific.
-    if (!isJavaScript()) {
+  @SuppressWarnings("BoxedPrimitiveEquality")
+  private static void testBoxingConstructors() {
+    if (isJ2Kt()) {
+      // Can't honor in J2KT; corresponding constructors are not exposed in Kotlin/Native.
       return;
     }
+
     assertTrue(new Character((char) 1) != new Character((char) 1));
-    assertTrue(Character.valueOf((char) 1) == Character.valueOf((char) 1));
-
     assertTrue(new Byte((byte) 1) != new Byte((byte) 1));
-    assertTrue(Byte.valueOf((byte) 1) == Byte.valueOf((byte) 1));
-
+    assertTrue(new Short((byte) 1) != new Short((byte) 1));
     assertTrue(new Integer(1) != new Integer(1));
-    assertTrue(Integer.valueOf(1) == Integer.valueOf(1));
+    assertTrue(new Long(1L) != new Long(1L));
 
-    // assertTrue(new String("asdf") != new String("asdf")); // can't honor, it's native JS string
+    if (!isJavaScript()) {
+      // Can't honor in JS; these constructors return native objects in JS.
+      assertTrue(new String("asdf") != new String("asdf"));
+      assertTrue(new Boolean(true) != new Boolean(true));
+      assertTrue(new Float(1) != new Float(1));
+      assertTrue(new Double(1) != new Double(1));
+    }
+  }
+
+  @SuppressWarnings("BoxedPrimitiveEquality")
+  private static void testBoxingValueOf() {
+    assertTrue(Character.valueOf((char) 1) == Character.valueOf((char) 1));
+    assertTrue(Byte.valueOf((byte) 1) == Byte.valueOf((byte) 1));
+    assertTrue(Integer.valueOf(1) == Integer.valueOf(1));
+    assertTrue(Boolean.valueOf(true) == Boolean.valueOf(true));
     assertTrue(String.valueOf("asdf") == String.valueOf("asdf"));
 
-    // assertTrue(new Boolean(true) != new Boolean(true)); // can't honor, it's native JS boolean
-    assertTrue(Boolean.valueOf(true) == Boolean.valueOf(true));
-
-    if (!isJvm()) {
-      // assertTrue(new Double(1) != new Double(1)); // can't honor, it's native JS double
-      assertTrue(
-          Double.valueOf(1) == Double.valueOf(1)); // different from Java, it's native JS double
+    if (isJavaScript()) {
+      // Can't honor in JS; these constructors return native objects in JS.
+      assertTrue(Double.valueOf(1) == Double.valueOf(1));
     }
   }
 
