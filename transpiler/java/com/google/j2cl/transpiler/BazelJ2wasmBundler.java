@@ -18,12 +18,13 @@ package com.google.j2cl.transpiler;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
+import static com.google.common.collect.ImmutableSet.toImmutableSet;
 import static java.lang.String.format;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Streams;
 import com.google.common.io.Files;
 import com.google.j2cl.common.Problems;
@@ -39,7 +40,6 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.StringLiteralGettersCreator;
-import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
@@ -131,9 +131,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
         new JdtParser(classPathEntries, problems), TypeDescriptors.getWellKnownTypeNames());
 
     var referencedPropertyKeys =
-        getSummaries()
-            .flatMap(s -> s.getPropertyKeysList().stream())
-            .collect(ImmutableSet.toImmutableSet());
+        getSummaries().flatMap(s -> s.getPropertyKeysList().stream()).collect(toImmutableSet());
 
     // Synthesize globals and methods for string literals.
     synthesizeStringLiteralGetters(referencedPropertyKeys);
@@ -176,7 +174,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
     return getDedupedSnippets(snippetGetter).values().stream();
   }
 
-  private Map<String, String> getDedupedSnippets(
+  private ImmutableMap<String, String> getDedupedSnippets(
       Function<Summary, Collection<SharedSnippet>> snippetGetter) {
     return getSummaries()
         .flatMap(s -> snippetGetter.apply(s).stream())
@@ -200,11 +198,10 @@ final class BazelJ2wasmBundler extends BazelWorker {
     getSummaries()
         .flatMap(s -> s.getStringLiteralsList().stream())
         .forEach(
-            s -> {
-              // Get descriptor for the getter and synthesize the method logic if it is the
-              // first time it was found.
-              synthesizeStringLiteralGetter(stringLiteralHolder, stringLiteralGetterCreator, s);
-            });
+            s ->
+                // Get descriptor for the getter and synthesize the method logic if it is the
+                // first time it was found.
+                synthesizeStringLiteralGetter(stringLiteralHolder, stringLiteralGetterCreator, s));
 
     // Synthesize the getters and forwarding methods for the string literals that are values of
     // system properties.
@@ -232,7 +229,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
   }
 
   private void synthesizeStringLiteralGetter(
-      Type stringLiteralHolder,
+      com.google.j2cl.transpiler.ast.Type stringLiteralHolder,
       StringLiteralGettersCreator stringLiteralGetterCreator,
       StringLiteralInfo s) {
     MethodDescriptor m =
@@ -246,7 +243,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
             .setClassComponents(Arrays.asList(qualifiedBinaryTypeName.split("\\.")))
             .setKind(Kind.CLASS)
             .build();
-    Type type = getType(typeDeclaration);
+    com.google.j2cl.transpiler.ast.Type type = getType(typeDeclaration);
 
     Method forwarderMethod = synthesizeForwardingMethod(m, typeDeclaration, s.getMethodName());
     type.addMember(forwarderMethod);
@@ -272,7 +269,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
   /** Synthesizes a method that returns null to implement absent properties. */
   private void synthesizeAbsentPropertyMethod(MethodDescriptor propertyGetter) {
     var typeDeclaration = propertyGetter.getEnclosingTypeDescriptor().getTypeDeclaration();
-    Type type = getType(typeDeclaration);
+    com.google.j2cl.transpiler.ast.Type type = getType(typeDeclaration);
     type.addMember(
         Method.newBuilder()
             .setMethodDescriptor(propertyGetter)
@@ -286,20 +283,20 @@ final class BazelJ2wasmBundler extends BazelWorker {
   }
 
   /** Synthetic compilation unit for all types synthesized at bundling time. */
-  private CompilationUnit compilationUnit = CompilationUnit.createSynthetic("j2wasm-bundler");
+  private final CompilationUnit compilationUnit = CompilationUnit.createSynthetic("j2wasm-bundler");
 
   /** Synthetic library all types synthesized at bundling time. */
-  private Library library =
+  private final Library library =
       Library.newBuilder().setCompilationUnits(ImmutableList.of(compilationUnit)).build();
 
-  private Map<TypeDeclaration, com.google.j2cl.transpiler.ast.Type> typesByDeclaration =
+  private final Map<TypeDeclaration, com.google.j2cl.transpiler.ast.Type> typesByDeclaration =
       new LinkedHashMap<>();
 
-  private Type getType(TypeDeclaration typeDeclaration) {
+  private com.google.j2cl.transpiler.ast.Type getType(TypeDeclaration typeDeclaration) {
     return typesByDeclaration.computeIfAbsent(
         typeDeclaration,
         t -> {
-          var newType = new Type(SourcePosition.NONE, t);
+          var newType = new com.google.j2cl.transpiler.ast.Type(SourcePosition.NONE, t);
           compilationUnit.addType(newType);
           return newType;
         });
@@ -321,26 +318,24 @@ final class BazelJ2wasmBundler extends BazelWorker {
     }
 
     private void addToTypeGraph(Summary summary) {
-      for (TypeInfo typeHierarchyInfo : summary.getTypesList()) {
-        String name = summary.getTypeNames(typeHierarchyInfo.getTypeId());
-        TypeGraph.Type type = typesByName.computeIfAbsent(name, TypeGraph.Type::new);
+      for (int interfaceId : summary.getInterfacesList()) {
+        var interfaceName = summary.getTypeNames(interfaceId);
+        var interfaceType = new TypeGraph.Type(interfaceName);
+        typesByName.put(interfaceName, interfaceType);
+        interfaces.add(interfaceType);
+      }
+
+      for (TypeInfo typeInfo : summary.getTypesList()) {
+        var name = summary.getTypeNames(typeInfo.getTypeId());
+        var type = typesByName.computeIfAbsent(name, TypeGraph.Type::new);
         classes.add(type);
-        if (typeHierarchyInfo.getExtendsType() != NO_TYPE_INDEX) {
-          String superTypeName = summary.getTypeNames(typeHierarchyInfo.getExtendsType());
+        if (typeInfo.getExtendsType() != NO_TYPE_INDEX) {
+          String superTypeName = summary.getTypeNames(typeInfo.getExtendsType());
           type.superType = checkNotNull(typesByName.get(superTypeName));
         }
-        for (int interfaceId : typeHierarchyInfo.getImplementsTypesList()) {
+        for (int interfaceId : typeInfo.getImplementsTypesList()) {
           String interfaceName = summary.getTypeNames(interfaceId);
-          TypeGraph.Type interfaceType =
-              typesByName.computeIfAbsent(
-                  interfaceName,
-                  n -> {
-                    var newInterfaceType = new TypeGraph.Type(n);
-                    // Add the interface to the global list of interfaces, where the index in
-                    // the list corresponds to the slot in the itable.
-                    interfaces.add(newInterfaceType);
-                    return newInterfaceType;
-                  });
+          var interfaceType = typesByName.get(interfaceName);
           type.implementedInterfaces.add(interfaceType);
         }
       }
@@ -390,7 +385,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
                 "(type %s.itable (sub %s (struct \n",
                 name, superType != null ? superType.name + ".itable" : "$itable"));
 
-        for (TypeGraph.Type i : interfaces) {
+        for (var i : interfaces) {
           sb.append(
               format(
                   "  (field %s (ref %s))\n",
@@ -424,13 +419,13 @@ final class BazelJ2wasmBundler extends BazelWorker {
   }
 
   private void emitJsImportsFile(Problems problems) {
-    Collection<String> requiredModules =
+    var requiredModules =
         getSummaries()
             .flatMap(s -> s.getJsImportRequiresList().stream())
             .distinct()
-            .collect(ImmutableList.toImmutableList());
+            .collect(toImmutableList());
 
-    Map<String, String> jsImportsContents = getDedupedSnippets(Summary::getJsImportSnippetsList);
+    var jsImportsContents = getDedupedSnippets(Summary::getJsImportSnippetsList);
 
     writeToFile(
         jsimportPath.toString(),

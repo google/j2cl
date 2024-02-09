@@ -88,7 +88,13 @@ public final class SummaryBuilder {
   }
 
   private void addType(Type type) {
+    if (type.isNative()) {
+      return;
+    }
+
     if (type.isInterface()) {
+      int typeId = getTypeId(type.getTypeDescriptor());
+      summary.addInterfaces(typeId);
       return;
     }
 
