@@ -88,7 +88,10 @@ public final class SummaryBuilder {
   }
 
   private void addType(Type type) {
-    if (type.isNative()) {
+    if (type.isNative()
+        || type.isOverlayImplementation()
+        || type.getDeclaration().getWasmInfo() != null) {
+      // none of these types have generated vtables so they need to be ignored in the summary.
       return;
     }
 
@@ -100,7 +103,8 @@ public final class SummaryBuilder {
 
     int typeId = getTypeId(type.getTypeDescriptor());
 
-    TypeInfo.Builder typeHierarchyInfoBuilder = TypeInfo.newBuilder().setTypeId(typeId);
+    TypeInfo.Builder typeHierarchyInfoBuilder =
+        TypeInfo.newBuilder().setTypeId(typeId).setAbstract(type.getDeclaration().isAbstract());
 
     DeclaredTypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
     if (superTypeDescriptor != null && !superTypeDescriptor.isNative()) {

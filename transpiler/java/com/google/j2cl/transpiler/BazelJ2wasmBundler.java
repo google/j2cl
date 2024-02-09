@@ -327,7 +327,8 @@ final class BazelJ2wasmBundler extends BazelWorker {
 
       for (TypeInfo typeInfo : summary.getTypesList()) {
         var name = summary.getTypeNames(typeInfo.getTypeId());
-        var type = typesByName.computeIfAbsent(name, TypeGraph.Type::new);
+        var type =
+            typesByName.computeIfAbsent(name, n -> new TypeGraph.Type(n, typeInfo.getAbstract()));
         classes.add(type);
         if (typeInfo.getExtendsType() != NO_TYPE_INDEX) {
           String superTypeName = summary.getTypeNames(typeInfo.getExtendsType());
@@ -372,9 +373,15 @@ final class BazelJ2wasmBundler extends BazelWorker {
       private final String name;
       private Type superType;
       private final Set<Type> implementedInterfaces = new HashSet<>();
+      private final boolean isAbstract;
+
+      public Type(String name, boolean isAbstract) {
+        this.name = name;
+        this.isAbstract = isAbstract;
+      }
 
       public Type(String name) {
-        this.name = name;
+        this(name, false);
       }
 
       /** Emits the itable struct type for a class. */
@@ -396,6 +403,11 @@ final class BazelJ2wasmBundler extends BazelWorker {
       }
 
       public String getItableInitialization() {
+        if (isAbstract) {
+          // Abstract classes don't have itable instances.
+          return "";
+        }
+
         StringBuilder sb = new StringBuilder();
         sb.append(
             format("(global %s.itable (ref %s.itable) (struct.new %s.itable \n", name, name, name));
