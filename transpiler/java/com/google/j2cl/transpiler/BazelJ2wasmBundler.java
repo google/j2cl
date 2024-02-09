@@ -121,8 +121,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
   }
 
   private void emitModuleFile(Problems problems) {
-    var typeGraph = new TypeGraph();
-    var classes = typeGraph.build(getSummaries());
+    var typeGraph = new TypeGraph(getSummaries());
 
     // Create an environment to initialize the well known type descriptors to be able to synthesize
     // code.
@@ -150,21 +149,23 @@ final class BazelJ2wasmBundler extends BazelWorker {
 
     ImmutableList<String> moduleContents =
         Streams.concat(
-                Stream.of("(rec"),
+                Stream.of("(module (rec"),
                 getModuleParts("types"),
                 streamDedupedValues(Summary::getTypeSnippetsList),
                 Stream.of(typeGraph.getTopLevelItableStructDeclaration()),
-                classes.stream().map(TypeGraph.Type::getItableStructDeclaration),
+                typeGraph.getClasses().stream().map(TypeGraph.Type::getItableStructDeclaration),
                 Stream.of(")"),
                 getModuleParts("data"),
                 getModuleParts("globals"),
                 streamDedupedValues(Summary::getGlobalSnippetsList),
-                classes.stream().map(TypeGraph.Type::getItableInitialization),
+                Stream.of(typeGraph.getEmptyItableStructDeclaration()),
+                typeGraph.getClasses().stream().map(TypeGraph.Type::getItableInitialization),
                 Stream.of(literalGlobals),
                 streamDedupedValues(Summary::getWasmImportSnippetsList),
                 Stream.of(generatorStage.emitToString(WasmConstructsGenerator::emitExceptionTag)),
                 getModuleParts("functions"),
-                literalGetterMethods)
+                literalGetterMethods,
+                Stream.of(")"))
             .collect(toImmutableList());
 
     writeToFile(output.toString(), moduleContents, problems);
@@ -295,15 +296,13 @@ final class BazelJ2wasmBundler extends BazelWorker {
       new LinkedHashMap<>();
 
   private Type getType(TypeDeclaration typeDeclaration) {
-    var type =
-        typesByDeclaration.computeIfAbsent(
-            typeDeclaration,
-            t -> {
-              var newType = new Type(SourcePosition.NONE, t);
-              compilationUnit.addType(newType);
-              return newType;
-            });
-    return type;
+    return typesByDeclaration.computeIfAbsent(
+        typeDeclaration,
+        t -> {
+          var newType = new Type(SourcePosition.NONE, t);
+          compilationUnit.addType(newType);
+          return newType;
+        });
   }
 
   /** Represents the inheritance structure of the whole application. */
@@ -311,50 +310,64 @@ final class BazelJ2wasmBundler extends BazelWorker {
 
     private static final int NO_TYPE_INDEX = 0;
     // The list of all interfaces.
-    private final List<Type> interfaces = new ArrayList<>();
+    private final List<TypeGraph.Type> classes = new ArrayList<>();
+    // The list of all classes.
+    private final List<TypeGraph.Type> interfaces = new ArrayList<>();
+    private final Map<String, TypeGraph.Type> typesByName = new LinkedHashMap<>();
 
-    public Collection<Type> build(Stream<Summary> summaries) {
-      Map<String, Type> typesByName = new LinkedHashMap<>();
-      List<Type> classes = new ArrayList<>();
-
+    private TypeGraph(Stream<Summary> summaries) {
       // Collect all types from all summaries.
-      summaries.forEachOrdered(
-          summary -> {
-            for (TypeInfo typeHierarchyInfo : summary.getTypesList()) {
-              String name = summary.getTypeNames(typeHierarchyInfo.getTypeId());
-              Type type = typesByName.computeIfAbsent(name, Type::new);
-              classes.add(type);
-              if (typeHierarchyInfo.getExtendsType() != NO_TYPE_INDEX) {
-                String superTypeName = summary.getTypeNames(typeHierarchyInfo.getExtendsType());
-                type.superType = checkNotNull(typesByName.get(superTypeName));
-              }
-              for (int interfaceId : typeHierarchyInfo.getImplementsTypesList()) {
-                String interfaceName = summary.getTypeNames(interfaceId);
-                Type interfaceType =
-                    typesByName.computeIfAbsent(
-                        interfaceName,
-                        n -> {
-                          var newInterfaceType = new Type(n);
-                          // Add the interface to the global list of interfaces, where the index in
-                          // the list corresponds to the slot in the itable.
-                          interfaces.add(newInterfaceType);
-                          return newInterfaceType;
-                        });
-                type.implementedInterfaces.add(interfaceType);
-              }
-            }
-          });
+      summaries.forEachOrdered(this::addToTypeGraph);
+    }
 
+    private void addToTypeGraph(Summary summary) {
+      for (TypeInfo typeHierarchyInfo : summary.getTypesList()) {
+        String name = summary.getTypeNames(typeHierarchyInfo.getTypeId());
+        TypeGraph.Type type = typesByName.computeIfAbsent(name, TypeGraph.Type::new);
+        classes.add(type);
+        if (typeHierarchyInfo.getExtendsType() != NO_TYPE_INDEX) {
+          String superTypeName = summary.getTypeNames(typeHierarchyInfo.getExtendsType());
+          type.superType = checkNotNull(typesByName.get(superTypeName));
+        }
+        for (int interfaceId : typeHierarchyInfo.getImplementsTypesList()) {
+          String interfaceName = summary.getTypeNames(interfaceId);
+          TypeGraph.Type interfaceType =
+              typesByName.computeIfAbsent(
+                  interfaceName,
+                  n -> {
+                    var newInterfaceType = new TypeGraph.Type(n);
+                    // Add the interface to the global list of interfaces, where the index in
+                    // the list corresponds to the slot in the itable.
+                    interfaces.add(newInterfaceType);
+                    return newInterfaceType;
+                  });
+          type.implementedInterfaces.add(interfaceType);
+        }
+      }
+    }
+
+    List<TypeGraph.Type> getClasses() {
       return classes;
     }
 
     /** Emits the top-level itable struct. */
     String getTopLevelItableStructDeclaration() {
       StringBuilder sb = new StringBuilder();
-      sb.append("(type $itable (sub \n");
+      sb.append("(type $itable (sub (struct\n");
       // In the unoptimized itables each interface has its own slot.
-      for (Type i : interfaces) {
-        sb.append(format("  (field $%s (ref null struct)\n", i.name));
+      for (TypeGraph.Type i : interfaces) {
+        sb.append(format("  (field %s (ref null struct))\n", i.name));
+      }
+      sb.append(")))\n");
+      return sb.toString();
+    }
+
+    public String getEmptyItableStructDeclaration() {
+      StringBuilder sb = new StringBuilder();
+      sb.append("(global $itable.empty (ref $itable) (struct.new $itable \n");
+
+      for (TypeGraph.Type unused : interfaces) {
+        sb.append("(ref.null struct)\n");
       }
       sb.append("))\n");
       return sb.toString();
@@ -374,16 +387,16 @@ final class BazelJ2wasmBundler extends BazelWorker {
         StringBuilder sb = new StringBuilder();
         sb.append(
             format(
-                "(type %s.itable (sub $%s \n",
-                name, superType != null ? superType.name + ".itable" : "itable"));
+                "(type %s.itable (sub %s (struct \n",
+                name, superType != null ? superType.name + ".itable" : "$itable"));
 
-        for (Type i : interfaces) {
+        for (TypeGraph.Type i : interfaces) {
           sb.append(
               format(
-                  "  (field $%s (ref %s))\n",
-                  i.name, implementsInterface(i) ? i.name : "null struct"));
+                  "  (field %s (ref %s))\n",
+                  i.name, implementsInterface(i) ? i.name + ".vtable" : "null struct"));
         }
-        sb.append("))\n");
+        sb.append(")))\n");
         return sb.toString();
       }
 
@@ -393,7 +406,11 @@ final class BazelJ2wasmBundler extends BazelWorker {
             format("(global %s.itable (ref %s.itable) (struct.new %s.itable \n", name, name, name));
 
         for (Type ifce : interfaces) {
-          sb.append(format("  %s\n", implementsInterface(ifce) ? ifce.name : "(ref.null struct)"));
+          if (implementsInterface(ifce)) {
+            sb.append(format("(global.get %s.vtable@%s)\n", ifce.name, name));
+          } else {
+            sb.append("(ref.null struct)\n");
+          }
         }
         sb.append("))\n");
         return sb.toString();
