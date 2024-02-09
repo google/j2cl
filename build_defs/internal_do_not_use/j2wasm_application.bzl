@@ -140,12 +140,11 @@ def _impl_j2wasm_application(ctx):
             mnemonic = "J2wasm",
         )
 
-        # TODO(b/284654149): Remove once we only use the modular pipeline.
-        # Create the same output directory as monolithic pipeline since the
-        # code below relies on its existence.
+        # TODO(b/324326274): Replace the dummy action with the generation of the name mapping.
         ctx.actions.run_shell(
+            inputs = [],
             outputs = [transpile_out],
-            command = "mkdir %s" % transpile_out.path,
+            command = "mkdir -p %s && touch %s/namemap" % (transpile_out.path, transpile_out.path),
             mnemonic = "J2wasm",
         )
 
