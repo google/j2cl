@@ -108,6 +108,20 @@ public class OptionalDoubleTest extends TestCase {
     assertTrue("Consumer not executed", mutableFlag[0]);
   }
 
+  public void testIfPresentOrElse() {
+    OptionalDouble.of(10.0).ifPresentOrElse(value -> {
+      assertEquals(10.0, value);
+      mutableFlag[0] = true;
+    }, () -> fail("should not call empty action"));
+    assertTrue(mutableFlag[0]);
+
+    mutableFlag[0] = false;
+    OptionalDouble.empty().ifPresentOrElse(ignore -> {
+      fail("Should not call present action");
+    }, () -> mutableFlag[0] = true);
+    assertTrue(mutableFlag[0]);
+  }
+
   public void testOrElse() {
     // empty case
     assertEquals(OTHER_REFERENCE, empty.orElse(OTHER_REFERENCE));

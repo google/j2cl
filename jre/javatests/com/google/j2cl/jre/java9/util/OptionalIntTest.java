@@ -24,21 +24,6 @@ import java.util.stream.Stream;
  * Tests for java.util.OptionalInt Java 9 API emulation.
  */
 public class OptionalIntTest extends EmulTestBase {
-  public void testIfPresentOrElse() {
-    int[] called = {0};
-    OptionalInt.of(10).ifPresentOrElse(value -> {
-      assertEquals(10, value);
-      called[0]++;
-    }, () -> {
-      fail("should not call empty action");
-    });
-    assertEquals(1, called[0]);
-    called[0] = 0;
-    OptionalInt.empty().ifPresentOrElse(ignore -> {
-      fail("Should not call present action");
-    }, () -> called[0]++);
-    assertEquals(1, called[0]);
-  }
 
   public void testStream() {
     assertEquals(0, OptionalInt.empty().stream().count());

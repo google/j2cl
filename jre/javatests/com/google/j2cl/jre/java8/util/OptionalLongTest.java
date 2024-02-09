@@ -107,6 +107,20 @@ public class OptionalLongTest extends TestCase {
     assertTrue("Consumer not executed", mutableFlag[0]);
   }
 
+  public void testIfPresentOrElse() {
+    OptionalLong.of(10).ifPresentOrElse(value -> {
+      assertEquals(10, value);
+      mutableFlag[0] = true;
+    }, () -> fail("should not call empty action"));
+    assertTrue(mutableFlag[0]);
+
+    mutableFlag[0] = false;
+    OptionalLong.empty().ifPresentOrElse(ignore -> {
+      fail("Should not call present action");
+    }, () -> mutableFlag[0] = true);
+    assertTrue(mutableFlag[0]);
+  }
+
   public void testOrElse() {
     // empty case
     assertEquals(OTHER_REFERENCE, empty.orElse(OTHER_REFERENCE));

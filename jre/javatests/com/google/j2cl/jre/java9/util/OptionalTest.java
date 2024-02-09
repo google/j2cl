@@ -24,21 +24,6 @@ import java.util.stream.Stream;
  * Tests for java.util.Optional Java 9 API emulation.
  */
 public class OptionalTest extends EmulTestBase {
-  public void testIfPresentOrElse() {
-    int[] called = {0};
-    Optional.of("value").ifPresentOrElse(value -> {
-      assertEquals("value", value);
-      called[0]++;
-    }, () -> {
-      fail("should not call empty action");
-    });
-    assertEquals(1, called[0]);
-    called[0] = 0;
-    Optional.empty().ifPresentOrElse(ignore -> {
-      fail("Should not call present action");
-    }, () -> called[0]++);
-    assertEquals(1, called[0]);
-  }
 
   public void testOr() {
     Optional<String> or = Optional.of("value").or(() -> Optional.of("replacement"));

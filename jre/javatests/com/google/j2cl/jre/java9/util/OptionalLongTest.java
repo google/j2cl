@@ -24,21 +24,6 @@ import java.util.stream.Stream;
  * Tests for java.util.OptionalLong Java 9 API emulation.
  */
 public class OptionalLongTest extends EmulTestBase {
-  public void testIfPresentOrElse() {
-    int[] called = {0};
-    OptionalLong.of(10).ifPresentOrElse(value -> {
-      assertEquals(10, value);
-      called[0]++;
-    }, () -> {
-      fail("should not call empty action");
-    });
-    assertEquals(1, called[0]);
-    called[0] = 0;
-    OptionalLong.empty().ifPresentOrElse(ignore -> {
-      fail("Should not call present action");
-    }, () -> called[0]++);
-    assertEquals(1, called[0]);
-  }
 
   public void testStream() {
     assertEquals(0, OptionalLong.empty().stream().count());
