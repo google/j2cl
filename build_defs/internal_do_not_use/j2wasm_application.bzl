@@ -481,6 +481,12 @@ def j2wasm_application(name, defines = dict(), **kwargs):
             "--type-merging",
             "-O3",
             "--optimize-j2cl",
+
+            # Re-inline string.const globals and follow up clean-ups
+            "--propagate-globals-globally",
+            "--remove-unused-module-elements",
+            "--reorder-globals",
+
             # Mark all types as 'final' that we can, to help VMs at runtime.
             "--type-finalizing",
         ],
