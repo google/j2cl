@@ -140,11 +140,6 @@ public class OptionalTest extends TestCase {
   }
 
   public void testIfPresentOrElse() {
-    if (isWasm()) {
-      // TODO(b/183769034): Re-enable when NPE on dereference is supported
-      return;
-    }
-
     // empty case
     empty.ifPresentOrElse(wrapped -> fail("Empty Optional should not execute consumer"), () -> {});
 
