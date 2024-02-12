@@ -32,7 +32,17 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Nullable;
 
-/** Propagates compile time constant fields. */
+/**
+ * Propagates constant fields.
+ *
+ * <p>This pass propagates fields that are either compile time constants or that are final static
+ * fields initialized to a string or class literal.
+ *
+ * <p>Some static final fields end up being initialized to string literal as a result of previous
+ * passes. E.g. System.getProperty calls get rewritten into literals and might become the
+ * initializers of a static final fields. In fact this is the approach that has the checks in
+ * InternalPreconditions removed in optimized builds at generation time.
+ */
 public class PropagateConstants extends LibraryNormalizationPass {
 
   @Override

@@ -25,13 +25,13 @@ import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
+import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.FieldDescriptor.FieldOrigin;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
-import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
@@ -115,14 +115,15 @@ public class NormalizeJsEnums extends NormalizationPass {
     checkState(field.isEnumField());
 
     List<Expression> arguments = ((NewInstance) field.getInitializer()).getArguments();
-    if (field.getDescriptor().getEnclosingTypeDescriptor().getJsEnumInfo().hasCustomValue()) {
+    FieldDescriptor fieldDescriptor = field.getDescriptor();
+    if (fieldDescriptor.getEnclosingTypeDescriptor().getJsEnumInfo().hasCustomValue()) {
       checkState(arguments.size() == 3);
       Expression constantValue = arguments.get(2);
       checkState(constantValue.isCompileTimeConstant());
       return constantValue;
     } else {
       checkState(arguments.size() == 2);
-      return NumberLiteral.fromInt(field.getEnumOrdinal());
+      return fieldDescriptor.getEnumOrdinalValue();
     }
   }
 

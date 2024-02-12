@@ -15,10 +15,12 @@
  */
 package com.google.j2cl.transpiler.ast;
 
+import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.Map;
 import java.util.Optional;
@@ -134,6 +136,7 @@ public abstract class FieldDescriptor extends MemberDescriptor {
         || getOrigin() == FieldOrigin.SYNTHETIC_OUTER_FIELD;
   }
 
+  @Override
   public boolean isJsProperty() {
     return getJsInfo().getJsMemberType() == JsMemberType.PROPERTY;
   }
@@ -173,6 +176,20 @@ public abstract class FieldDescriptor extends MemberDescriptor {
   @Override
   public String getMangledName() {
     return computePropertyMangledName();
+  }
+
+  @Memoized
+  public Literal getEnumOrdinalValue() {
+    checkState(isEnumConstant());
+    if (!isDeclaration()) {
+      return getDeclarationDescriptor().getEnumOrdinalValue();
+    }
+
+    return checkNotNull(
+        getEnclosingTypeDescriptor()
+            .getTypeDeclaration()
+            .getOrdinalValueByEnumFieldName()
+            .get(getName()));
   }
 
   @Override
@@ -264,6 +281,7 @@ public abstract class FieldDescriptor extends MemberDescriptor {
 
     public abstract Builder setOrigin(FieldOrigin fieldOrigin);
 
+    @CanIgnoreReturnValue
     public Builder setDeclarationDescriptor(FieldDescriptor declarationFieldDescriptor) {
       return setDeclarationDescriptorOrNullIfSelf(declarationFieldDescriptor);
     }

@@ -1029,6 +1029,7 @@ public final class AstUtils {
         .setName("$ordinal_" + fieldDescriptor.getName())
         .setEnumConstant(false)
         .setCompileTimeConstant(true)
+        .setConstantValue(fieldDescriptor.getEnumOrdinalValue())
         .setSynthetic(true)
         .setTypeDescriptor(PrimitiveTypes.INT)
         .setOriginalJsInfo(JsInfo.NONE)

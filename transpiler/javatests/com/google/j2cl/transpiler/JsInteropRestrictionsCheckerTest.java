@@ -227,7 +227,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  public static final int display = 0;",
             "}")
         .assertErrorsWithoutSourcePosition(
-            "'Buggy.show' and 'Buggy.display' cannot both use the same "
+            "'Buggy.display' and 'Buggy.show' cannot both use the same "
                 + "JavaScript name 'show'.");
   }
 

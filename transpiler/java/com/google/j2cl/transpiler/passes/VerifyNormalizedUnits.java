@@ -106,8 +106,6 @@ public class VerifyNormalizedUnits extends NormalizationPass {
               // JsEnum only contains the enum fields.
               checkState(!getCurrentType().isJsEnum() || field.isStatic());
             }
-            // Non-native enum fields have a non negative ordinal.
-            checkState(field.isNative() || !field.isEnumField() || field.getEnumOrdinal() >= 0);
           }
 
           public void checkMember(Member member) {

@@ -87,11 +87,12 @@ public class NormalizeSwitchStatements extends NormalizationPass {
       return switchCase;
     }
 
-    FieldAccess enumField = (FieldAccess) switchCase.getCaseExpression();
+    FieldAccess enumFieldAccess = (FieldAccess) switchCase.getCaseExpression();
     return SwitchCase.Builder.from(switchCase)
         .setCaseExpression(
-            FieldAccess.Builder.from(enumField)
-                .setTarget(AstUtils.getEnumOrdinalConstantFieldDescriptor(enumField.getTarget()))
+            FieldAccess.Builder.from(enumFieldAccess)
+                .setTarget(
+                    AstUtils.getEnumOrdinalConstantFieldDescriptor(enumFieldAccess.getTarget()))
                 .build())
         .build();
   }

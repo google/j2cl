@@ -24,6 +24,7 @@ import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Streams;
 import com.google.j2cl.common.ThreadLocalInterner;
@@ -756,6 +757,19 @@ public abstract class TypeDeclaration
   @Memoized
   public ImmutableList<FieldDescriptor> getDeclaredFieldDescriptors() {
     return getDeclaredFieldDescriptorsFactory().get(this);
+  }
+
+  @Memoized
+  ImmutableMap<String, Literal> getOrdinalValueByEnumFieldName() {
+    ImmutableMap.Builder<String, Literal> immutableMapBuilder = ImmutableMap.builder();
+    int ordinal = 0;
+    for (FieldDescriptor fieldDescriptor : getDeclaredFieldDescriptors()) {
+      if (!fieldDescriptor.isEnumConstant()) {
+        continue;
+      }
+      immutableMapBuilder.put(fieldDescriptor.getName(), NumberLiteral.fromInt(ordinal++));
+    }
+    return immutableMapBuilder.buildOrThrow();
   }
 
   /**

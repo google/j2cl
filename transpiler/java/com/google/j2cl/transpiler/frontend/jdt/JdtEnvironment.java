@@ -56,6 +56,7 @@ import com.google.j2cl.transpiler.frontend.common.Nullability;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -1029,18 +1030,6 @@ public class JdtEnvironment {
     }
     checkArgument(typeBinding.isClass() || typeBinding.isInterface() || typeBinding.isEnum());
 
-    Supplier<ImmutableList<MethodDescriptor>> declaredMethods =
-        () ->
-            Arrays.stream(typeBinding.getDeclaredMethods())
-                .map(this::createMethodDescriptor)
-                .collect(toImmutableList());
-
-    Supplier<ImmutableList<FieldDescriptor>> declaredFields =
-        () ->
-            Arrays.stream(typeBinding.getDeclaredFields())
-                .map(this::createFieldDescriptor)
-                .collect(toImmutableList());
-
     TypeDeclaration typeDeclaration = createDeclarationForType(typeBinding.getTypeDeclaration());
 
     DeclaredTypeDescriptor enclosingTypeDescriptor =
@@ -1065,8 +1054,10 @@ public class JdtEnvironment {
                         DeclaredTypeDescriptor.class))
             .setTypeArgumentDescriptors(
                 getTypeArgumentTypeDescriptors(typeBinding, inNullMarkedScope))
-            .setDeclaredFieldDescriptorsFactory(declaredFields)
-            .setDeclaredMethodDescriptorsFactory(declaredMethods)
+            .setDeclaredFieldDescriptorsFactory(
+                () -> createFieldDescriptorsOrderedById(typeBinding.getDeclaredFields()))
+            .setDeclaredMethodDescriptorsFactory(
+                () -> createMethodDescriptors(typeBinding.getDeclaredMethods()))
             .setSingleAbstractMethodDescriptorFactory(() -> getFunctionInterfaceMethod(typeBinding))
             .build();
     putTypeDescriptorInCache(inNullMarkedScope, typeBinding, typeDescriptor);
@@ -1175,19 +1166,6 @@ public class JdtEnvironment {
     boolean isAbstract = isAbstract(typeBinding);
     boolean isFinal = isFinal(typeBinding);
 
-    Supplier<ImmutableList<MethodDescriptor>> declaredMethods =
-        () ->
-            Arrays.stream(typeBinding.getDeclaredMethods())
-                .map(this::createMethodDescriptor)
-                .collect(toImmutableList());
-    ;
-
-    Supplier<ImmutableList<FieldDescriptor>> declaredFields =
-        () ->
-            Arrays.stream(typeBinding.getDeclaredFields())
-                .map(this::createFieldDescriptor)
-                .collect(toImmutableList());
-
     boolean isNullMarked = isNullMarked(typeBinding);
     IBinding declaringMemberBinding = getDeclaringMethodOrFieldBinding(typeBinding);
 
@@ -1242,23 +1220,41 @@ public class JdtEnvironment {
                     .map(TypeVariable::toNonNullable)
                     .collect(toImmutableList()))
             .setVisibility(getVisibility(typeBinding))
-            .setDeclaredMethodDescriptorsFactory(declaredMethods)
-            .setDeclaredFieldDescriptorsFactory(declaredFields)
+            .setDeclaredMethodDescriptorsFactory(
+                () -> createMethodDescriptors(typeBinding.getDeclaredMethods()))
+            .setDeclaredFieldDescriptorsFactory(
+                () -> createFieldDescriptorsOrderedById(typeBinding.getDeclaredFields()))
             .setMemberTypeDeclarationsFactory(
-                () -> {
-                  if (typeBinding.getDeclaredTypes() == null) {
-                    return ImmutableList.of();
-                  }
-                  return Arrays.stream(typeBinding.getDeclaredTypes())
-                      .map(this::createDeclarationForType)
-                      .collect(ImmutableList.toImmutableList());
-                })
+                () -> createTypeDeclarations(typeBinding.getDeclaredTypes()))
             .setUnusableByJsSuppressed(
                 JsInteropAnnotationUtils.isUnusableByJsSuppressed(typeBinding))
             .setDeprecated(isDeprecated(typeBinding))
             .build();
     cachedTypeDeclarationByTypeBinding.put(typeBinding, typeDeclaration);
     return typeDeclaration;
+  }
+
+  private ImmutableList<MethodDescriptor> createMethodDescriptors(IMethodBinding[] methodBindings) {
+    return Arrays.stream(methodBindings)
+        .map(this::createMethodDescriptor)
+        .collect(toImmutableList());
+  }
+
+  private ImmutableList<FieldDescriptor> createFieldDescriptorsOrderedById(
+      IVariableBinding[] fieldBindings) {
+    return Arrays.stream(fieldBindings)
+        .sorted(Comparator.comparing(IVariableBinding::getVariableId))
+        .map(this::createFieldDescriptor)
+        .collect(toImmutableList());
+  }
+
+  private ImmutableList<TypeDeclaration> createTypeDeclarations(ITypeBinding[] typeBindings) {
+    if (typeBindings == null) {
+      return ImmutableList.of();
+    }
+    return Arrays.stream(typeBindings)
+        .map(this::createDeclarationForType)
+        .collect(ImmutableList.toImmutableList());
   }
 
   private boolean isNullMarked(ITypeBinding typeBinding) {

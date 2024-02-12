@@ -29,7 +29,6 @@ import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
-import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.StringLiteral;
@@ -150,23 +149,20 @@ public class NormalizeEnumClasses extends NormalizationPass {
 
   /** Creates constant static fields to hold the enum ordinal constants. */
   private static void createEnumOrdinalConstants(Type type) {
-    int currentOrdinal = 0;
-    for (Field enumField : type.getEnumFields()) {
-      enumField.setEnumOrdinal(currentOrdinal);
+    // Traverse in reverse order so that the ordinal constant fields are inserted in ascending
+    // ordinal order.
+    for (Field enumField : type.getEnumFields().reverse()) {
 
-      FieldDescriptor ordinalConstantFieldDescriptor =
-          AstUtils.getEnumOrdinalConstantFieldDescriptor(enumField.getDescriptor());
+      FieldDescriptor enumFieldDescriptor = enumField.getDescriptor();
       // Create a constant field to hold the ordinal for the current enum value.
       type.addMember(
-          // These field need to be defined at the beginning because they can be referenced by enum
+          // These fields need to be defined at the beginning because they can be referenced by enum
           // constant initializers that are already part of the load time statements.
-          currentOrdinal,
-          Field.Builder.from(ordinalConstantFieldDescriptor)
+          0,
+          Field.Builder.from(AstUtils.getEnumOrdinalConstantFieldDescriptor(enumFieldDescriptor))
               .setSourcePosition(enumField.getSourcePosition())
-              .setInitializer(NumberLiteral.fromInt(enumField.getEnumOrdinal()))
+              .setInitializer(enumFieldDescriptor.getEnumOrdinalValue())
               .build());
-
-      currentOrdinal++;
     }
   }
 
