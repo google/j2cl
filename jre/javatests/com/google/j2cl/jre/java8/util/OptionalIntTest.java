@@ -107,6 +107,24 @@ public class OptionalIntTest extends TestCase {
     assertTrue("Consumer not executed", mutableFlag[0]);
   }
 
+  public void testIfPresentOrElse() {
+    // empty case
+    empty.ifPresentOrElse(
+        (wrapped) -> fail("Empty Optional should not call non-empty consumer"),
+        () -> mutableFlag[0] = true);
+    assertTrue("Consumer not executed", mutableFlag[0]);
+
+    // non-empty case
+    mutableFlag[0] = false;
+    present.ifPresentOrElse(
+        (wrapped) -> {
+          assertEquals(REFERENCE, wrapped);
+          mutableFlag[0] = true;
+        },
+        () -> fail("Non-Empty Optional should not call empty consumer"));
+    assertTrue("Consumer not executed", mutableFlag[0]);
+  }
+
   public void testOrElse() {
     // empty case
     assertEquals(OTHER_REFERENCE, empty.orElse(OTHER_REFERENCE));

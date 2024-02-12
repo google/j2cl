@@ -141,20 +141,19 @@ public class OptionalTest extends TestCase {
 
   public void testIfPresentOrElse() {
     // empty case
-    empty.ifPresentOrElse(wrapped -> fail("Empty Optional should not execute consumer"), () -> {});
+    empty.ifPresentOrElse(
+        (wrapped) -> fail("Empty Optional should not call non-empty consumer"),
+        () -> mutableFlag[0] = true);
+    assertTrue("Consumer not executed", mutableFlag[0]);
 
     // non-empty case
+    mutableFlag[0] = false;
     present.ifPresentOrElse(
         (wrapped) -> {
           assertSame(REFERENCE, wrapped);
           mutableFlag[0] = true;
         },
         () -> fail("Non-Empty Optional should not call empty consumer"));
-    assertTrue("Consumer not executed", mutableFlag[0]);
-    mutableFlag[0] = false;
-    empty.ifPresentOrElse(
-        (wrapped) -> fail("Empty Optional should not call non-empty consumer"),
-        () -> mutableFlag[0] = true);
     assertTrue("Consumer not executed", mutableFlag[0]);
   }
 

@@ -15,11 +15,12 @@
  */
 package java.util;
 
+import static javaemul.internal.InternalPreconditions.checkCriticalElement;
+
 import java.util.function.LongConsumer;
 import java.util.function.LongSupplier;
 import java.util.function.Supplier;
-
-import static javaemul.internal.InternalPreconditions.checkCriticalElement;
+import java.util.stream.LongStream;
 
 /**
  * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/OptionalLong.html">
@@ -65,6 +66,14 @@ public final class OptionalLong {
     }
   }
 
+  public void ifPresentOrElse(LongConsumer action, Runnable emptyAction) {
+    if (present) {
+      action.accept(ref);
+    } else {
+      emptyAction.run();
+    }
+  }
+
   public long orElse(long other) {
     return present ? ref : other;
   }
@@ -78,6 +87,14 @@ public final class OptionalLong {
       return ref;
     }
     throw exceptionSupplier.get();
+  }
+
+  public LongStream stream() {
+    if (present) {
+      return LongStream.of(ref);
+    } else {
+      return LongStream.empty();
+    }
   }
 
   @Override
