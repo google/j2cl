@@ -13,14 +13,14 @@
 [try {
     } catch (RuntimeException e) {
 ...      new Object() {};
-    }] => [try {} catch (__$exc) {
-   __$exc = $Exceptions.toJava(__$exc);
+    }] => [try {} catch (__$jsexc) {
+   let __$exc = $Exceptions.toJava(__$jsexc);
 ...   }
   }] "unreachableclass.Main.<init>"
 [{
       class A {
 ...      new Object() {};
-    }] => [__$exc = $Exceptions.toJava(__$exc);] "unreachableclass.Main.<init>"
+    }] => [let __$exc = $Exceptions.toJava(__$jsexc);] "unreachableclass.Main.<init>"
 [{
       class A {
 ...      new Object() {};

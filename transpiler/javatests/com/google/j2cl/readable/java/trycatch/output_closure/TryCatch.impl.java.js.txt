@@ -34,8 +34,8 @@ class TryCatch extends j_l_Object {
  m_testMultiCatch__void() {
   try {
    throw $Exceptions.toJs(ClassCastException.$create__());
-  } catch (__$exc) {
-   __$exc = $Exceptions.toJava(__$exc);
+  } catch (__$jsexc) {
+   let __$exc = $Exceptions.toJava(__$jsexc);
    if (NullPointerException.$isInstance(__$exc) || ClassCastException.$isInstance(__$exc)) {
     let e = /**@type {(NullPointerException|ClassCastException)}*/ (__$exc);
     throw $Exceptions.toJs(e);
@@ -51,20 +51,20 @@ class TryCatch extends j_l_Object {
  m_testEmptyThrowableCatch__void() {
   try {
    throw $Exceptions.toJs(ClassCastException.$create__());
-  } catch (__$exc) {}
+  } catch (__$jsexc) {}
   try {
    throw $Exceptions.toJs(ClassCastException.$create__());
-  } catch (__$exc_1) {
-   __$exc_1 = $Exceptions.toJava(__$exc_1);
-   if (Exception.$isInstance(__$exc_1)) {} else {}
+  } catch (__$jsexc_1) {
+   let __$exc = $Exceptions.toJava(__$jsexc_1);
+   if (Exception.$isInstance(__$exc)) {} else {}
   }
  }
  /** @nodts */
  m_testEmptyThrowableRethrow__void() {
   try {
    throw $Exceptions.toJs(ClassCastException.$create__());
-  } catch (__$exc) {
-   __$exc = $Exceptions.toJava(__$exc);
+  } catch (__$jsexc) {
+   let __$exc = $Exceptions.toJava(__$jsexc);
    {
     let e = /**@type {Throwable}*/ (__$exc);
     throw $Exceptions.toJs(e);
@@ -87,8 +87,8 @@ class TryCatch extends j_l_Object {
     thing = ClosableThing.$create__();
     thing2 = ClosableThing.$create__();
     throw $Exceptions.toJs(Exception.$create__());
-   } catch (__$exc) {
-    __$exc = $Exceptions.toJava(__$exc);
+   } catch (__$jsexc) {
+    let __$exc = $Exceptions.toJava(__$jsexc);
     {
      let $exceptionFromTry = /**@type {Throwable}*/ (__$exc);
      $primaryExc = $exceptionFromTry;
@@ -101,8 +101,8 @@ class TryCatch extends j_l_Object {
      throw $Exceptions.toJs($primaryExc);
     }
    }
-  } catch (__$exc_1) {
-   __$exc_1 = $Exceptions.toJava(__$exc_1);
+  } catch (__$jsexc_1) {
+   let __$exc_1 = $Exceptions.toJava(__$jsexc_1);
    if (Exception.$isInstance(__$exc_1)) {} else {
     throw $Exceptions.toJs(__$exc_1);
    }
@@ -120,8 +120,8 @@ class TryCatch extends j_l_Object {
     $resource = thing;
     $resource_1 = thing2;
     throw $Exceptions.toJs(Exception.$create__());
-   } catch (__$exc) {
-    __$exc = $Exceptions.toJava(__$exc);
+   } catch (__$jsexc) {
+    let __$exc = $Exceptions.toJava(__$jsexc);
     {
      let $exceptionFromTry = /**@type {Throwable}*/ (__$exc);
      $primaryExc = $exceptionFromTry;
@@ -134,8 +134,8 @@ class TryCatch extends j_l_Object {
      throw $Exceptions.toJs($primaryExc);
     }
    }
-  } catch (__$exc_1) {
-   __$exc_1 = $Exceptions.toJava(__$exc_1);
+  } catch (__$jsexc_1) {
+   let __$exc_1 = $Exceptions.toJava(__$jsexc_1);
    if (Exception.$isInstance(__$exc_1)) {} else {
     throw $Exceptions.toJs(__$exc_1);
    }
@@ -149,8 +149,8 @@ class TryCatch extends j_l_Object {
    try {
     $resource = TryCatch.f_closableThing__trycatch_TryCatch_;
     throw $Exceptions.toJs(Exception.$create__());
-   } catch (__$exc) {
-    __$exc = $Exceptions.toJava(__$exc);
+   } catch (__$jsexc) {
+    let __$exc = $Exceptions.toJava(__$jsexc);
     {
      let $exceptionFromTry = /**@type {Throwable}*/ (__$exc);
      $primaryExc = $exceptionFromTry;
@@ -162,8 +162,8 @@ class TryCatch extends j_l_Object {
      throw $Exceptions.toJs($primaryExc);
     }
    }
-  } catch (__$exc_1) {
-   __$exc_1 = $Exceptions.toJava(__$exc_1);
+  } catch (__$jsexc_1) {
+   let __$exc_1 = $Exceptions.toJava(__$jsexc_1);
    if (Exception.$isInstance(__$exc_1)) {} else {
     throw $Exceptions.toJs(__$exc_1);
    }
@@ -173,14 +173,14 @@ class TryCatch extends j_l_Object {
  m_testNestedTryCatch__void() {
   try {
    throw $Exceptions.toJs(Exception.$create__());
-  } catch (__$exc) {
-   __$exc = $Exceptions.toJava(__$exc);
+  } catch (__$jsexc) {
+   let __$exc = $Exceptions.toJava(__$jsexc);
    if (Exception.$isInstance(__$exc)) {
     let ae = /**@type {Exception}*/ (__$exc);
     try {
      throw $Exceptions.toJs(Exception.$create__());
-    } catch (__$exc_1) {
-     __$exc_1 = $Exceptions.toJava(__$exc_1);
+    } catch (__$jsexc_1) {
+     let __$exc_1 = $Exceptions.toJava(__$jsexc_1);
      if (Exception.$isInstance(__$exc_1)) {} else {
       throw $Exceptions.toJs(__$exc_1);
      }

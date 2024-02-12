@@ -43,7 +43,7 @@
 [throw new Exception();] => [throw $Exceptions.toJs(Exception.$create__());] "foreachstatement.ForEachStatement.testMulticatch"
 [{
       for (Object o : e) {}
-    }] => [__$exc = $Exceptions.toJava(__$exc);] "foreachstatement.ForEachStatement.testMulticatch"
+    }] => [let __$exc = $Exceptions.toJava(__$jsexc);] "foreachstatement.ForEachStatement.testMulticatch"
 [{
       for (Object o : e) {}
     }] => [if (Exception1.$isInstance(__$exc) || Exception2.$isInstance(__$exc)) {

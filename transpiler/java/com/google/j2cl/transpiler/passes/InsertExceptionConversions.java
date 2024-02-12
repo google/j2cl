@@ -16,14 +16,15 @@
 package com.google.j2cl.transpiler.passes;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
-import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.CatchClause;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
-import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.ThrowStatement;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.ast.Variable;
+import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 
 /**
  * Adds Java Throwable to JavaScript Error conversion.
@@ -58,25 +59,33 @@ public class InsertExceptionConversions extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Node rewriteCatchClause(CatchClause catchClause) {
-            if (catchClause.getBody().isNoop()) {
-              return catchClause;
-            }
-
-            MethodCall toJavaCall =
-                RuntimeMethods.createExceptionsMethodCall(
-                    "toJava", catchClause.getExceptionVariable().createReference());
-
-            Expression assignment =
-                BinaryExpression.Builder.asAssignmentTo(catchClause.getExceptionVariable())
-                    .setRightOperand(toJavaCall)
+            Variable jsExceptionVariable =
+                Variable.newBuilder()
+                    .setName("__$jsexc")
+                    .setTypeDescriptor(TypeDescriptors.get().nativeObject)
                     .build();
 
-            catchClause
-                .getBody()
-                .getStatements()
-                .add(0, assignment.makeStatement(catchClause.getBody().getSourcePosition()));
+            CatchClause newCatchClause =
+                CatchClause.newBuilder()
+                    .setExceptionVariable(jsExceptionVariable)
+                    .setBody(catchClause.getBody())
+                    .build();
 
-            return catchClause;
+            if (!catchClause.getBody().isNoop()) {
+              MethodCall toJavaCall =
+                  RuntimeMethods.createExceptionsMethodCall(
+                      "toJava", jsExceptionVariable.createReference());
+              Variable javaExceptionVariable = catchClause.getExceptionVariable();
+              VariableDeclarationExpression declaration =
+                  VariableDeclarationExpression.newBuilder()
+                      .addVariableDeclaration(javaExceptionVariable, toJavaCall)
+                      .build();
+              newCatchClause
+                  .getBody()
+                  .getStatements()
+                  .add(0, declaration.makeStatement(catchClause.getBody().getSourcePosition()));
+            }
+            return newCatchClause;
           }
 
           @Override

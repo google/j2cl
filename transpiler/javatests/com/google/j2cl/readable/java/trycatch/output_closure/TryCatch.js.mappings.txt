@@ -19,7 +19,7 @@
 [throw new ClassCastException();] => [throw $Exceptions.toJs(ClassCastException.$create__());] "trycatch.TryCatch.testMultiCatch"
 [{
       throw e;
-    }] => [__$exc = $Exceptions.toJava(__$exc);] "trycatch.TryCatch.testMultiCatch"
+    }] => [let __$exc = $Exceptions.toJava(__$jsexc);] "trycatch.TryCatch.testMultiCatch"
 [{
       throw e;
     }] => [if (NullPointerException.$isInstance(__$exc) || ClassCastException.$isInstance(__$exc)) {
@@ -51,22 +51,22 @@
 ...      // expected empty body.
     }] => [try {
    throw $Exceptions.toJs(ClassCastException.$create__());
-  } catch (__$exc) {}] "trycatch.TryCatch.testEmptyThrowableCatch"
+  } catch (__$jsexc) {}] "trycatch.TryCatch.testEmptyThrowableCatch"
 [throw new ClassCastException();] => [throw $Exceptions.toJs(ClassCastException.$create__());] "trycatch.TryCatch.testEmptyThrowableCatch"
 [try {
       throw new ClassCastException();
 ...      // expected empty body.
     }] => [try {
    throw $Exceptions.toJs(ClassCastException.$create__());
-...   if (Exception.$isInstance(__$exc_1)) {} else {}
+...   if (Exception.$isInstance(__$exc)) {} else {}
   }] "trycatch.TryCatch.testEmptyThrowableCatch"
 [throw new ClassCastException();] => [throw $Exceptions.toJs(ClassCastException.$create__());] "trycatch.TryCatch.testEmptyThrowableCatch"
 [{
       // expected empty body.
-    }] => [__$exc_1 = $Exceptions.toJava(__$exc_1);] "trycatch.TryCatch.testEmptyThrowableCatch"
+    }] => [let __$exc = $Exceptions.toJava(__$jsexc_1);] "trycatch.TryCatch.testEmptyThrowableCatch"
 [{
       // expected empty body.
-    }] => [if (Exception.$isInstance(__$exc_1)) {} else {}] "trycatch.TryCatch.testEmptyThrowableCatch"
+    }] => [if (Exception.$isInstance(__$exc)) {} else {}] "trycatch.TryCatch.testEmptyThrowableCatch"
 [testEmptyThrowableRethrow] => [m_testEmptyThrowableRethrow__void]
 [try {
       throw new ClassCastException();
@@ -78,7 +78,7 @@
 [throw new ClassCastException();] => [throw $Exceptions.toJs(ClassCastException.$create__());] "trycatch.TryCatch.testEmptyThrowableRethrow"
 [{
       throw e;
-    }] => [__$exc = $Exceptions.toJava(__$exc);] "trycatch.TryCatch.testEmptyThrowableRethrow"
+    }] => [let __$exc = $Exceptions.toJava(__$jsexc);] "trycatch.TryCatch.testEmptyThrowableRethrow"
 [{
       throw e;
     }] => [let e = /**@type {Throwable}*/ (__$exc);] "trycatch.TryCatch.testEmptyThrowableRethrow"
@@ -133,7 +133,7 @@
 [try (ClosableThing thing = new ClosableThing();
         ClosableThing thing2 = new ClosableThing()) {
 ...      // expected empty body.
-    }] => [__$exc = $Exceptions.toJava(__$exc);] "trycatch.TryCatch.testTryWithResource"
+    }] => [let __$exc = $Exceptions.toJava(__$jsexc);] "trycatch.TryCatch.testTryWithResource"
 [try (ClosableThing thing = new ClosableThing();
         ClosableThing thing2 = new ClosableThing()) {
 ...      // expected empty body.
@@ -166,7 +166,7 @@
     }] => [throw $Exceptions.toJs($primaryExc);] "trycatch.TryCatch.testTryWithResource"
 [{
       // expected empty body.
-    }] => [__$exc_1 = $Exceptions.toJava(__$exc_1);] "trycatch.TryCatch.testTryWithResource"
+    }] => [let __$exc_1 = $Exceptions.toJava(__$jsexc_1);] "trycatch.TryCatch.testTryWithResource"
 [{
       // expected empty body.
     }] => [if (Exception.$isInstance(__$exc_1)) {} else {
@@ -218,7 +218,7 @@
 [try (thing; thing2) {
       throw new Exception();
 ...      // expected empty body.
-    }] => [__$exc = $Exceptions.toJava(__$exc);] "trycatch.TryCatch.testTryWithResourceJava9"
+    }] => [let __$exc = $Exceptions.toJava(__$jsexc);] "trycatch.TryCatch.testTryWithResourceJava9"
 [try (thing; thing2) {
       throw new Exception();
 ...      // expected empty body.
@@ -251,7 +251,7 @@
     }] => [throw $Exceptions.toJs($primaryExc);] "trycatch.TryCatch.testTryWithResourceJava9"
 [{
       // expected empty body.
-    }] => [__$exc_1 = $Exceptions.toJava(__$exc_1);] "trycatch.TryCatch.testTryWithResourceJava9"
+    }] => [let __$exc_1 = $Exceptions.toJava(__$jsexc_1);] "trycatch.TryCatch.testTryWithResourceJava9"
 [{
       // expected empty body.
     }] => [if (Exception.$isInstance(__$exc_1)) {} else {
@@ -291,7 +291,7 @@
 [try (closableThing) {
       throw new Exception();
 ...      // expected empty body
-    }] => [__$exc = $Exceptions.toJava(__$exc);] "trycatch.TryCatch.testTryWithResouceOnStaticField"
+    }] => [let __$exc = $Exceptions.toJava(__$jsexc);] "trycatch.TryCatch.testTryWithResouceOnStaticField"
 [try (closableThing) {
       throw new Exception();
 ...      // expected empty body
@@ -320,7 +320,7 @@
     }] => [throw $Exceptions.toJs($primaryExc);] "trycatch.TryCatch.testTryWithResouceOnStaticField"
 [{
       // expected empty body
-    }] => [__$exc_1 = $Exceptions.toJava(__$exc_1);] "trycatch.TryCatch.testTryWithResouceOnStaticField"
+    }] => [let __$exc_1 = $Exceptions.toJava(__$jsexc_1);] "trycatch.TryCatch.testTryWithResouceOnStaticField"
 [{
       // expected empty body
     }] => [if (Exception.$isInstance(__$exc_1)) {} else {
@@ -341,7 +341,7 @@
 [{
       try {
 ...      }
-    }] => [__$exc = $Exceptions.toJava(__$exc);] "trycatch.TryCatch.testNestedTryCatch"
+    }] => [let __$exc = $Exceptions.toJava(__$jsexc);] "trycatch.TryCatch.testNestedTryCatch"
 [{
       try {
 ...      }
@@ -364,7 +364,7 @@
 [throw new Exception();] => [throw $Exceptions.toJs(Exception.$create__());] "trycatch.TryCatch.testNestedTryCatch"
 [{
         // expected empty body.
-      }] => [__$exc_1 = $Exceptions.toJava(__$exc_1);] "trycatch.TryCatch.testNestedTryCatch"
+      }] => [let __$exc_1 = $Exceptions.toJava(__$jsexc_1);] "trycatch.TryCatch.testNestedTryCatch"
 [{
         // expected empty body.
       }] => [if (Exception.$isInstance(__$exc_1)) {} else {
