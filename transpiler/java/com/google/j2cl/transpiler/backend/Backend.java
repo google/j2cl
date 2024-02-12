@@ -469,13 +469,14 @@ public enum Backend {
           // extracted. After extracting qualifiers, we must again normalize multi-expressions.
           ExtractNonIdempotentExpressions::new,
           NormalizeMultiExpressions::new,
-          InsertExternConversionsWasm::new,
           () -> new AddEntryPointBridgesWasm(options.getWasmEntryPointPatterns()),
           ImplementFinallyViaControlFlow::new,
 
           // Needs to run at the end as the types in the ast will be invalid after the pass.
           ImplementArraysAsClasses::new,
+          InsertExceptionConversions::new,
           InsertExceptionConversionsWasm::new,
+          InsertExternConversionsWasm::new,
           RemoveCustomIsInstanceMethods::new,
           RemoveNoopStatements::new,
           UpgradeInterfaceDispatch::new,
@@ -616,12 +617,13 @@ public enum Backend {
           // extracted. After extracting qualifiers, we must again normalize multi-expressions.
           ExtractNonIdempotentExpressions::new,
           NormalizeMultiExpressions::new,
-          InsertExternConversionsWasm::new,
           ImplementFinallyViaControlFlow::new,
 
           // Needs to run at the end as the types in the ast will be invalid after the pass.
           ImplementArraysAsClasses::new,
+          InsertExceptionConversions::new,
           InsertExceptionConversionsWasm::new,
+          InsertExternConversionsWasm::new,
 
           // TODO(b/283154656): Fork the instantiation code for the modular pipeline.
           // NormalizeInstantiationThroughFactoryMethods::new,

@@ -420,6 +420,7 @@
 (func $m_testMulticatch__void_$p_foreachstatement_ForEachStatement@foreachstatement.ForEachStatement
  (param $this (ref null $foreachstatement.ForEachStatement))
  ;;@ foreachstatement/ForEachStatement.java:44:15
+ (local $__$jsexc (ref null extern))
  (local $__$exc (ref null $java.lang.Throwable))
  (local $e (ref null $java.lang.Exception))
  (local $$iterator (ref null $java.lang.Object))
@@ -430,12 +431,14 @@
   (try (do
    (block
     ;;@ foreachstatement/ForEachStatement.java:46:6
-    (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (call $$create__@java.lang.Exception ))
+    (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (call $$create__@java.lang.Exception )))
     (unreachable)
    )
   ) (catch $exception.event (block
-   (local.set $__$exc (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
+   (local.set $__$jsexc (pop externref))
    (block
+    ;;@ foreachstatement/ForEachStatement.java:47:40
+    (local.set $__$exc (call $m_toJava__javaemul_internal_WasmExtern__java_lang_Throwable@javaemul.internal.Exceptions (local.get $__$jsexc)))
     ;;@ foreachstatement/ForEachStatement.java:47:40
     (if (if (result i32) (ref.test (ref $foreachstatement.ForEachStatement.Exception1) (local.get $__$exc)) (then (i32.const 1)) (else (ref.test (ref $foreachstatement.ForEachStatement.Exception2) (local.get $__$exc))))
      (then
@@ -463,7 +466,7 @@
      )(else
       (block
        ;;@ foreachstatement/ForEachStatement.java:47:40
-       (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $__$exc))
+       (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (local.get $__$exc)))
        (unreachable)
       )
      )

@@ -15,20 +15,34 @@
  */
 package javaemul.internal;
 
+import javaemul.internal.Exceptions.JsErrorWrapper;
+import javaemul.internal.annotations.Wasm;
+import jsinterop.annotations.JsMethod;
+
 /** Backend-specific utils for Throwable. */
 public final class ThrowableUtils {
 
   /** Gets the Java {@link Throwable} of the specified js {@code Error}. */
   public static Throwable getJavaThrowable(Object e) {
-    // Wasm doesn't yet support conversion from JS errors.
-    throw new UnsupportedOperationException();
+    return internalize(getJavaThrowableImpl(((JsErrorWrapper) e).error));
   }
 
+  @Wasm("extern.internalize")
+  public static native <T> T internalize(WasmExtern t);
+
   /** Sets the Java {@link Throwable} of the specified js {@code Error}. */
-  public static void setJavaThrowable(Object error, Throwable javaThrowable) {
-    // We are currently not linking the error back so this is no-op.
-    // In the future if JS errors become accessible from Wasm, we should reconsider this.
+  public static void setJavaThrowable(Object e, Throwable javaThrowable) {
+    setJavaThrowableImpl(((JsErrorWrapper) e).error, externalize(javaThrowable));
   }
+
+  @Wasm("extern.externalize")
+  public static native WasmExtern externalize(Throwable t);
+
+  @JsMethod(name = "setJavaThrowable", namespace = "j2wasm.ExceptionUtils")
+  private static native void setJavaThrowableImpl(WasmExtern error, WasmExtern javaThrowable);
+
+  @JsMethod(name = "getJavaThrowable", namespace = "j2wasm.ExceptionUtils")
+  private static native WasmExtern getJavaThrowableImpl(WasmExtern error);
 
   /** JavaScript {@code Error}. Placeholder in Wasm. */
   public static class NativeError {

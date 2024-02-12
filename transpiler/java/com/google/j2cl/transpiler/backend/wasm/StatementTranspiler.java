@@ -418,12 +418,10 @@ final class StatementTranspiler {
           builder.append(") (catch $exception.event (block");
           builder.indent();
           builder.newLine();
-          // Use non-nullable `ref.cast` since the exception in a catch can never be null.
           builder.append(
               String.format(
-                  "(local.set %s (ref.cast (ref %s) (extern.internalize (pop externref))))",
-                  environment.getDeclarationName(catchClause.getExceptionVariable()),
-                  environment.getWasmTypeName(TypeDescriptors.get().javaLangThrowable)));
+                  "(local.set %s (pop externref))",
+                  environment.getDeclarationName(catchClause.getExceptionVariable())));
           render(catchClause.getBody());
           builder.unindent();
           builder.newLine();

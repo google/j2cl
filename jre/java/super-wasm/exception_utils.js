@@ -15,29 +15,61 @@
 goog.module('j2wasm.ExceptionUtils');
 
 /** @type {!WebAssembly.Tag} */
-const tag = new WebAssembly.Tag({parameters: ['externref']});
+const tag = WebAssembly.JSTag;
 
 /**
- * @param {*} param
- * @param {string} message
- * @return {!WebAssembly.Exception}.
+ * @param {string} param
+ * @return {!Error}.
  */
-function create(param, message) {
-  const e = new WebAssembly.Exception(tag, [param], {traceStack: true});
-  // Message is not a standard property on WebAssembly.Exception
-  e["message"] = message;
-  return e;
+function create(param) {
+  return new Error(param);
 }
 
 /**
- * @param {!WebAssembly.Exception} e
+ * @param {!Error} e
+ * @return {string}
+ */
+function toString(e) {
+  return "" + e;
+}
+
+/**
+ * @param {!Error} e
  */
 function throwException(e) {
   throw e;
 }
 
+/**
+ * @param {?} error
+ * @param {?} throwable
+ * @public
+ */
+function setJavaThrowable(error, throwable) {
+  if (error instanceof Object) {
+    try {
+      // This may throw exception (e.g. frozen object) in strict mode.
+      error["__j2wasm$exception"] = throwable;
+    } catch (ignored) {}
+  }
+}
+
+/**
+ * @param {?} error
+ * @return {?} throwable
+ * @public
+ */
+function getJavaThrowable(error) {
+  // Note that we use a different name for the property to avoid collisions with
+  // the property used by the J2CL/Closure runtime.
+  return error["__j2wasm$exception"] ?? null;
+}
+
 exports = {
   tag,
   create,
-  throwException
+  toString,
+  throwException,
+  setJavaThrowable,
+  getJavaThrowable,
 };

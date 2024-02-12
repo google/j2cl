@@ -162,6 +162,7 @@
  (type $function.m_testMultiCatch__void)
  (param $this.untyped (ref $java.lang.Object))
  ;;@ trycatch/TryCatch.java:20:14
+ (local $__$jsexc (ref null extern))
  (local $__$exc (ref null $java.lang.Throwable))
  (local $e (ref null $java.lang.RuntimeException))
  (local $r (ref null $java.lang.RuntimeException))
@@ -172,12 +173,14 @@
   (try (do
    (block
     ;;@ trycatch/TryCatch.java:22:6
-    (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (call $$create__@java.lang.ClassCastException ))
+    (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (call $$create__@java.lang.ClassCastException )))
     (unreachable)
    )
   ) (catch $exception.event (block
-   (local.set $__$exc (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
+   (local.set $__$jsexc (pop externref))
    (block
+    ;;@ trycatch/TryCatch.java:23:58
+    (local.set $__$exc (call $m_toJava__javaemul_internal_WasmExtern__java_lang_Throwable@javaemul.internal.Exceptions (local.get $__$jsexc)))
     ;;@ trycatch/TryCatch.java:23:58
     (if (if (result i32) (ref.test (ref $java.lang.NullPointerException) (local.get $__$exc)) (then (i32.const 1)) (else (ref.test (ref $java.lang.ClassCastException) (local.get $__$exc))))
      (then
@@ -185,7 +188,7 @@
        ;;@ trycatch/TryCatch.java:23:58
        (local.set $e (ref.cast (ref null $java.lang.RuntimeException) (local.get $__$exc)))
        ;;@ trycatch/TryCatch.java:24:6
-       (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $e))
+       (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (local.get $e)))
        (unreachable)
       )
      )(else
@@ -201,7 +204,7 @@
        )(else
         (block
          ;;@ trycatch/TryCatch.java:23:58
-         (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $__$exc))
+         (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (local.get $__$exc)))
          (unreachable)
         )
        )
@@ -219,8 +222,9 @@
  (type $function.m_testEmptyThrowableCatch__void)
  (param $this.untyped (ref $java.lang.Object))
  ;;@ trycatch/TryCatch.java:30:14
+ (local $__$jsexc (ref null extern))
+ (local $__$jsexc_1 (ref null extern))
  (local $__$exc (ref null $java.lang.Throwable))
- (local $__$exc_1 (ref null $java.lang.Throwable))
  (local $this (ref null $trycatch.TryCatch))
  (local.set $this (ref.cast (ref $trycatch.TryCatch) (local.get $this.untyped)))
  (block
@@ -228,11 +232,11 @@
   (try (do
    (block
     ;;@ trycatch/TryCatch.java:32:6
-    (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (call $$create__@java.lang.ClassCastException ))
+    (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (call $$create__@java.lang.ClassCastException )))
     (unreachable)
    )
   ) (catch $exception.event (block
-   (local.set $__$exc (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
+   (local.set $__$jsexc (pop externref))
    (block
    )
   )))
@@ -240,14 +244,16 @@
   (try (do
    (block
     ;;@ trycatch/TryCatch.java:38:6
-    (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (call $$create__@java.lang.ClassCastException ))
+    (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (call $$create__@java.lang.ClassCastException )))
     (unreachable)
    )
   ) (catch $exception.event (block
-   (local.set $__$exc_1 (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
+   (local.set $__$jsexc_1 (pop externref))
    (block
     ;;@ trycatch/TryCatch.java:39:26
-    (if (ref.test (ref $java.lang.Exception) (local.get $__$exc_1))
+    (local.set $__$exc (call $m_toJava__javaemul_internal_WasmExtern__java_lang_Throwable@javaemul.internal.Exceptions (local.get $__$jsexc_1)))
+    ;;@ trycatch/TryCatch.java:39:26
+    (if (ref.test (ref $java.lang.Exception) (local.get $__$exc))
      (then
       (block
       )
@@ -267,6 +273,7 @@
  (type $function.m_testEmptyThrowableRethrow__void)
  (param $this.untyped (ref $java.lang.Object))
  ;;@ trycatch/TryCatch.java:46:14
+ (local $__$jsexc (ref null extern))
  (local $__$exc (ref null $java.lang.Throwable))
  (local $e (ref null $java.lang.Throwable))
  (local $this (ref null $trycatch.TryCatch))
@@ -276,17 +283,19 @@
   (try (do
    (block
     ;;@ trycatch/TryCatch.java:48:6
-    (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (call $$create__@java.lang.ClassCastException ))
+    (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (call $$create__@java.lang.ClassCastException )))
     (unreachable)
    )
   ) (catch $exception.event (block
-   (local.set $__$exc (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
+   (local.set $__$jsexc (pop externref))
    (block
+    ;;@ trycatch/TryCatch.java:49:26
+    (local.set $__$exc (call $m_toJava__javaemul_internal_WasmExtern__java_lang_Throwable@javaemul.internal.Exceptions (local.get $__$jsexc)))
     (block
      ;;@ trycatch/TryCatch.java:49:26
      (local.set $e (ref.cast (ref null $java.lang.Throwable) (local.get $__$exc)))
      ;;@ trycatch/TryCatch.java:50:6
-     (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $e))
+     (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (local.get $e)))
      (unreachable)
     )
    )
@@ -302,6 +311,7 @@
  ;;@ trycatch/TryCatch.java:54:14
  (local $exitSelector.0 i32)
  (local $savedThrown.0 (ref null $java.lang.Throwable))
+ (local $__$jsexc (ref null extern))
  (local $t (ref null $java.lang.Throwable))
  (local $this (ref null $trycatch.TryCatch))
  (local.set $this (ref.cast (ref $trycatch.TryCatch) (local.get $this.untyped)))
@@ -320,8 +330,9 @@
       )
      )
     ) (catch $exception.event (block
-     (local.set $t (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
+     (local.set $__$jsexc (pop externref))
      (block
+      (local.set $t (call $m_toJava__javaemul_internal_WasmExtern__java_lang_Throwable@javaemul.internal.Exceptions (local.get $__$jsexc)))
       ;;@ trycatch/TryCatch.java:55:4
       (local.set $savedThrown.0 (local.get $t))
       ;;@ trycatch/TryCatch.java:55:4
@@ -335,7 +346,7 @@
    (if (i32.eqz (ref.is_null (local.get $savedThrown.0)))
     (then
      ;;@ trycatch/TryCatch.java:55:4
-     (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $savedThrown.0))
+     (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (local.get $savedThrown.0)))
      (unreachable)
     )
    )
@@ -354,9 +365,12 @@
  (local $thing2 (ref null $trycatch.TryCatch.ClosableThing))
  (local $exitSelector.0 i32)
  (local $savedThrown.0 (ref null $java.lang.Throwable))
+ (local $__$jsexc (ref null extern))
  (local $__$exc (ref null $java.lang.Throwable))
  (local $$exceptionFromTry (ref null $java.lang.Throwable))
+ (local $__$jsexc_1 (ref null extern))
  (local $t (ref null $java.lang.Throwable))
+ (local $__$jsexc_2 (ref null extern))
  (local $__$exc_1 (ref null $java.lang.Throwable))
  (local $this (ref null $trycatch.TryCatch))
  (local.set $this (ref.cast (ref $trycatch.TryCatch) (local.get $this.untyped)))
@@ -386,27 +400,30 @@
           ;;@ trycatch/TryCatch.java:67:4
           (local.set $thing2 (call $$create__@trycatch.TryCatch.ClosableThing ))
           ;;@ trycatch/TryCatch.java:69:6
-          (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (call $$create__@java.lang.Exception ))
+          (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (call $$create__@java.lang.Exception )))
           (unreachable)
          )
         ) (catch $exception.event (block
-         (local.set $__$exc (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
+         (local.set $__$jsexc (pop externref))
          (block
+          ;;@ trycatch/TryCatch.java:67:4
+          (local.set $__$exc (call $m_toJava__javaemul_internal_WasmExtern__java_lang_Throwable@javaemul.internal.Exceptions (local.get $__$jsexc)))
           (block
            ;;@ trycatch/TryCatch.java:67:4
            (local.set $$exceptionFromTry (ref.cast (ref null $java.lang.Throwable) (local.get $__$exc)))
            ;;@ trycatch/TryCatch.java:67:4
            (local.set $$primaryExc (local.get $$exceptionFromTry))
            ;;@ trycatch/TryCatch.java:67:4
-           (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $$exceptionFromTry))
+           (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (local.get $$exceptionFromTry)))
            (unreachable)
           )
          )
         )))
        )
       ) (catch $exception.event (block
-       (local.set $t (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
+       (local.set $__$jsexc_1 (pop externref))
        (block
+        (local.set $t (call $m_toJava__javaemul_internal_WasmExtern__java_lang_Throwable@javaemul.internal.Exceptions (local.get $__$jsexc_1)))
         ;;@ trycatch/TryCatch.java:67:4
         (local.set $savedThrown.0 (local.get $t))
         ;;@ trycatch/TryCatch.java:67:4
@@ -425,7 +442,7 @@
       (if (i32.eqz (ref.is_null (local.get $$primaryExc)))
        (then
         ;;@ trycatch/TryCatch.java:67:4
-        (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $$primaryExc))
+        (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (local.get $$primaryExc)))
         (unreachable)
        )
       )
@@ -434,15 +451,17 @@
      (if (i32.eqz (ref.is_null (local.get $savedThrown.0)))
       (then
        ;;@ trycatch/TryCatch.java:67:4
-       (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $savedThrown.0))
+       (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (local.get $savedThrown.0)))
        (unreachable)
       )
      )
     )
    )
   ) (catch $exception.event (block
-   (local.set $__$exc_1 (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
+   (local.set $__$jsexc_2 (pop externref))
    (block
+    ;;@ trycatch/TryCatch.java:70:26
+    (local.set $__$exc_1 (call $m_toJava__javaemul_internal_WasmExtern__java_lang_Throwable@javaemul.internal.Exceptions (local.get $__$jsexc_2)))
     ;;@ trycatch/TryCatch.java:70:26
     (if (ref.test (ref $java.lang.Exception) (local.get $__$exc_1))
      (then
@@ -451,7 +470,7 @@
      )(else
       (block
        ;;@ trycatch/TryCatch.java:70:26
-       (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $__$exc_1))
+       (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (local.get $__$exc_1)))
        (unreachable)
       )
      )
@@ -474,9 +493,12 @@
  (local $$resource_1 (ref null $trycatch.TryCatch.ClosableThing))
  (local $exitSelector.0 i32)
  (local $savedThrown.0 (ref null $java.lang.Throwable))
+ (local $__$jsexc (ref null extern))
  (local $__$exc (ref null $java.lang.Throwable))
  (local $$exceptionFromTry (ref null $java.lang.Throwable))
+ (local $__$jsexc_1 (ref null extern))
  (local $t (ref null $java.lang.Throwable))
+ (local $__$jsexc_2 (ref null extern))
  (local $__$exc_1 (ref null $java.lang.Throwable))
  (local $this (ref null $trycatch.TryCatch))
  (local.set $this (ref.cast (ref $trycatch.TryCatch) (local.get $this.untyped)))
@@ -510,27 +532,30 @@
           ;;@ trycatch/TryCatch.java:78:4
           (local.set $$resource_1 (local.get $thing2))
           ;;@ trycatch/TryCatch.java:79:6
-          (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (call $$create__@java.lang.Exception ))
+          (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (call $$create__@java.lang.Exception )))
           (unreachable)
          )
         ) (catch $exception.event (block
-         (local.set $__$exc (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
+         (local.set $__$jsexc (pop externref))
          (block
+          ;;@ trycatch/TryCatch.java:78:4
+          (local.set $__$exc (call $m_toJava__javaemul_internal_WasmExtern__java_lang_Throwable@javaemul.internal.Exceptions (local.get $__$jsexc)))
           (block
            ;;@ trycatch/TryCatch.java:78:4
            (local.set $$exceptionFromTry (ref.cast (ref null $java.lang.Throwable) (local.get $__$exc)))
            ;;@ trycatch/TryCatch.java:78:4
            (local.set $$primaryExc (local.get $$exceptionFromTry))
            ;;@ trycatch/TryCatch.java:78:4
-           (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $$exceptionFromTry))
+           (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (local.get $$exceptionFromTry)))
            (unreachable)
           )
          )
         )))
        )
       ) (catch $exception.event (block
-       (local.set $t (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
+       (local.set $__$jsexc_1 (pop externref))
        (block
+        (local.set $t (call $m_toJava__javaemul_internal_WasmExtern__java_lang_Throwable@javaemul.internal.Exceptions (local.get $__$jsexc_1)))
         ;;@ trycatch/TryCatch.java:78:4
         (local.set $savedThrown.0 (local.get $t))
         ;;@ trycatch/TryCatch.java:78:4
@@ -549,7 +574,7 @@
       (if (i32.eqz (ref.is_null (local.get $$primaryExc)))
        (then
         ;;@ trycatch/TryCatch.java:78:4
-        (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $$primaryExc))
+        (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (local.get $$primaryExc)))
         (unreachable)
        )
       )
@@ -558,15 +583,17 @@
      (if (i32.eqz (ref.is_null (local.get $savedThrown.0)))
       (then
        ;;@ trycatch/TryCatch.java:78:4
-       (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $savedThrown.0))
+       (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (local.get $savedThrown.0)))
        (unreachable)
       )
      )
     )
    )
   ) (catch $exception.event (block
-   (local.set $__$exc_1 (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
+   (local.set $__$jsexc_2 (pop externref))
    (block
+    ;;@ trycatch/TryCatch.java:80:26
+    (local.set $__$exc_1 (call $m_toJava__javaemul_internal_WasmExtern__java_lang_Throwable@javaemul.internal.Exceptions (local.get $__$jsexc_2)))
     ;;@ trycatch/TryCatch.java:80:26
     (if (ref.test (ref $java.lang.Exception) (local.get $__$exc_1))
      (then
@@ -575,7 +602,7 @@
      )(else
       (block
        ;;@ trycatch/TryCatch.java:80:26
-       (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $__$exc_1))
+       (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (local.get $__$exc_1)))
        (unreachable)
       )
      )
@@ -595,9 +622,12 @@
  (local $$resource (ref null $trycatch.TryCatch.ClosableThing))
  (local $exitSelector.0 i32)
  (local $savedThrown.0 (ref null $java.lang.Throwable))
+ (local $__$jsexc (ref null extern))
  (local $__$exc (ref null $java.lang.Throwable))
  (local $$exceptionFromTry (ref null $java.lang.Throwable))
+ (local $__$jsexc_1 (ref null extern))
  (local $t (ref null $java.lang.Throwable))
+ (local $__$jsexc_2 (ref null extern))
  (local $__$exc_1 (ref null $java.lang.Throwable))
  (local $this (ref null $trycatch.TryCatch))
  (local.set $this (ref.cast (ref $trycatch.TryCatch) (local.get $this.untyped)))
@@ -623,27 +653,30 @@
           ;;@ trycatch/TryCatch.java:88:4
           (local.set $$resource (global.get $closableThing@trycatch.TryCatch))
           ;;@ trycatch/TryCatch.java:89:6
-          (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (call $$create__@java.lang.Exception ))
+          (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (call $$create__@java.lang.Exception )))
           (unreachable)
          )
         ) (catch $exception.event (block
-         (local.set $__$exc (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
+         (local.set $__$jsexc (pop externref))
          (block
+          ;;@ trycatch/TryCatch.java:88:4
+          (local.set $__$exc (call $m_toJava__javaemul_internal_WasmExtern__java_lang_Throwable@javaemul.internal.Exceptions (local.get $__$jsexc)))
           (block
            ;;@ trycatch/TryCatch.java:88:4
            (local.set $$exceptionFromTry (ref.cast (ref null $java.lang.Throwable) (local.get $__$exc)))
            ;;@ trycatch/TryCatch.java:88:4
            (local.set $$primaryExc (local.get $$exceptionFromTry))
            ;;@ trycatch/TryCatch.java:88:4
-           (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $$exceptionFromTry))
+           (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (local.get $$exceptionFromTry)))
            (unreachable)
           )
          )
         )))
        )
       ) (catch $exception.event (block
-       (local.set $t (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
+       (local.set $__$jsexc_1 (pop externref))
        (block
+        (local.set $t (call $m_toJava__javaemul_internal_WasmExtern__java_lang_Throwable@javaemul.internal.Exceptions (local.get $__$jsexc_1)))
         ;;@ trycatch/TryCatch.java:88:4
         (local.set $savedThrown.0 (local.get $t))
         ;;@ trycatch/TryCatch.java:88:4
@@ -660,7 +693,7 @@
       (if (i32.eqz (ref.is_null (local.get $$primaryExc)))
        (then
         ;;@ trycatch/TryCatch.java:88:4
-        (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $$primaryExc))
+        (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (local.get $$primaryExc)))
         (unreachable)
        )
       )
@@ -669,15 +702,17 @@
      (if (i32.eqz (ref.is_null (local.get $savedThrown.0)))
       (then
        ;;@ trycatch/TryCatch.java:88:4
-       (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $savedThrown.0))
+       (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (local.get $savedThrown.0)))
        (unreachable)
       )
      )
     )
    )
   ) (catch $exception.event (block
-   (local.set $__$exc_1 (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
+   (local.set $__$jsexc_2 (pop externref))
    (block
+    ;;@ trycatch/TryCatch.java:90:26
+    (local.set $__$exc_1 (call $m_toJava__javaemul_internal_WasmExtern__java_lang_Throwable@javaemul.internal.Exceptions (local.get $__$jsexc_2)))
     ;;@ trycatch/TryCatch.java:90:26
     (if (ref.test (ref $java.lang.Exception) (local.get $__$exc_1))
      (then
@@ -686,7 +721,7 @@
      )(else
       (block
        ;;@ trycatch/TryCatch.java:90:26
-       (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $__$exc_1))
+       (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (local.get $__$exc_1)))
        (unreachable)
       )
      )
@@ -702,8 +737,10 @@
  (type $function.m_testNestedTryCatch__void)
  (param $this.untyped (ref $java.lang.Object))
  ;;@ trycatch/TryCatch.java:95:14
+ (local $__$jsexc (ref null extern))
  (local $__$exc (ref null $java.lang.Throwable))
  (local $ae (ref null $java.lang.Exception))
+ (local $__$jsexc_1 (ref null extern))
  (local $__$exc_1 (ref null $java.lang.Throwable))
  (local $this (ref null $trycatch.TryCatch))
  (local.set $this (ref.cast (ref $trycatch.TryCatch) (local.get $this.untyped)))
@@ -712,12 +749,14 @@
   (try (do
    (block
     ;;@ trycatch/TryCatch.java:97:6
-    (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (call $$create__@java.lang.Exception ))
+    (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (call $$create__@java.lang.Exception )))
     (unreachable)
    )
   ) (catch $exception.event (block
-   (local.set $__$exc (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
+   (local.set $__$jsexc (pop externref))
    (block
+    ;;@ trycatch/TryCatch.java:98:27
+    (local.set $__$exc (call $m_toJava__javaemul_internal_WasmExtern__java_lang_Throwable@javaemul.internal.Exceptions (local.get $__$jsexc)))
     ;;@ trycatch/TryCatch.java:98:27
     (if (ref.test (ref $java.lang.Exception) (local.get $__$exc))
      (then
@@ -728,12 +767,14 @@
        (try (do
         (block
          ;;@ trycatch/TryCatch.java:100:8
-         (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (call $$create__@java.lang.Exception ))
+         (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (call $$create__@java.lang.Exception )))
          (unreachable)
         )
        ) (catch $exception.event (block
-        (local.set $__$exc_1 (ref.cast (ref $java.lang.Throwable) (extern.internalize (pop externref))))
+        (local.set $__$jsexc_1 (pop externref))
         (block
+         ;;@ trycatch/TryCatch.java:101:29
+         (local.set $__$exc_1 (call $m_toJava__javaemul_internal_WasmExtern__java_lang_Throwable@javaemul.internal.Exceptions (local.get $__$jsexc_1)))
          ;;@ trycatch/TryCatch.java:101:29
          (if (ref.test (ref $java.lang.Exception) (local.get $__$exc_1))
           (then
@@ -742,7 +783,7 @@
           )(else
            (block
             ;;@ trycatch/TryCatch.java:101:29
-            (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $__$exc_1))
+            (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (local.get $__$exc_1)))
             (unreachable)
            )
           )
@@ -753,7 +794,7 @@
      )(else
       (block
        ;;@ trycatch/TryCatch.java:98:27
-       (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $__$exc))
+       (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (local.get $__$exc)))
        (unreachable)
       )
      )
@@ -773,7 +814,7 @@
  (local.set $this (ref.cast (ref $trycatch.TryCatch) (local.get $this.untyped)))
  (block
   ;;@ trycatch/TryCatch.java:108:4
-  (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (ref.cast (ref null $java.lang.Exception) (call $m_getT__java_lang_Object__java_lang_Object_$p_trycatch_TryCatch@trycatch.TryCatch (ref.as_non_null (local.get $this))(call $$create__@java.lang.Exception ))))
+  (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (ref.cast (ref null $java.lang.Exception) (call $m_getT__java_lang_Object__java_lang_Object_$p_trycatch_TryCatch@trycatch.TryCatch (ref.as_non_null (local.get $this))(call $$create__@java.lang.Exception )))))
   (unreachable)
  )
 )
@@ -800,7 +841,7 @@
  (local.set $this (ref.cast (ref $trycatch.TryCatch) (local.get $this.untyped)))
  (block
   ;;@ trycatch/TryCatch.java:116:4
-  (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (call $m_getThrowable__java_lang_Throwable_$p_trycatch_TryCatch@trycatch.TryCatch (ref.as_non_null (local.get $this))))
+  (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (call $m_getThrowable__java_lang_Throwable_$p_trycatch_TryCatch@trycatch.TryCatch (ref.as_non_null (local.get $this)))))
   (unreachable)
  )
 )
@@ -827,7 +868,7 @@
  (local.set $this (ref.cast (ref $trycatch.TryCatch) (local.get $this.untyped)))
  (block
   ;;@ trycatch/TryCatch.java:124:4
-  (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $throwable))
+  (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (local.get $throwable)))
   (unreachable)
  )
 )

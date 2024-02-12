@@ -15,7 +15,6 @@
  */
 package javaemul.internal;
 
-import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
 
@@ -43,28 +42,36 @@ class Exceptions {
     return currentException;
   }
 
-  private static class JsErrorWrapper {
-    private final WasmExtern error;
+  static class JsErrorWrapper {
+    final WasmExtern error;
 
     JsErrorWrapper(WasmExtern error) {
       this.error = error;
     }
+
+    public String toString() {
+      return toString(error);
+    }
+
+    @JsMethod(name = "toString", namespace = "j2wasm.ExceptionUtils")
+    private static native String toString(WasmExtern error);
   }
 
   public static JsErrorWrapper createJsError(Throwable t) {
-    return new JsErrorWrapper(createError(externalize(t), t.toString()));
+    return new JsErrorWrapper(createError(t.toString()));
   }
 
-  @Wasm("extern.externalize")
-  private static native WasmExtern externalize(Throwable t);
-
   @JsMethod(name = "create", namespace = "j2wasm.ExceptionUtils")
-  private static native WasmExtern createError(WasmExtern throwable, String message);
+  private static native WasmExtern createError(String errorMessage);
 
-  public static void throwJsError(Throwable t) {
-    throwError(((JsErrorWrapper) t.getBackingJsObject()).error);
+  public static Throwable toJava(WasmExtern e) {
+    return Throwable.of(new JsErrorWrapper(e));
+  }
+
+  public static WasmExtern toJs(Throwable t) {
+    return ((JsErrorWrapper) t.getBackingJsObject()).error;
   }
 
   @JsMethod(name = "throwException", namespace = "j2wasm.ExceptionUtils")
-  private static native void throwError(WasmExtern object);
+  public static native void throwJsError(WasmExtern e);
 }

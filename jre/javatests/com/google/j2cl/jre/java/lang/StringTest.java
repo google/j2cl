@@ -17,6 +17,7 @@ package com.google.j2cl.jre.java.lang;
 
 import static com.google.j2cl.jre.testing.TestUtils.isJvm;
 import static com.google.j2cl.jre.testing.TestUtils.isWasm;
+import static org.junit.Assert.assertThrows;
 
 import com.google.j2cl.jre.testing.J2ktIncompatible;
 import com.google.j2cl.jre.testing.TestUtils;
@@ -929,6 +930,11 @@ public class StringTest extends TestCase {
     assertFalse("11f.1", hideFromCompiler("ab").matches("|none"));
     assertFalse("11f.2", hideFromCompiler("anoneb").matches("|none"));
     assertTrue("12t", hideFromCompiler("none").matches("^|none$"));
+  }
+
+  @SuppressWarnings("InvalidPatternSyntax")
+  public void testMatch_badRegex() {
+    assertThrows(RuntimeException.class, () -> hideFromCompiler("").matches("+"));
   }
 
   public void testNull() {
