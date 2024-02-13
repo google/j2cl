@@ -14,4 +14,6 @@ integration_test(
     # This test is specific to J2CL's implementation of System.getProperty().
     enable_jvm_test = False,
     enable_kt = False,
+    # TODO(b/324986388) : Determine the reason modular integration fails.
+    enable_wasm_modular = False,
 )

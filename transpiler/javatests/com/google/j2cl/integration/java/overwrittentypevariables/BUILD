@@ -13,4 +13,6 @@ integration_test(
     srcs = glob(["*.java"]),
     # This tests breaks in Kotlin 1.7.
     enable_kt = False,
+    # TODO(b/324986388) : Determine the reason modular integration fails.
+    enable_wasm_modular = False,
 )

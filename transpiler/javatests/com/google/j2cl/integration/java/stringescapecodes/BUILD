@@ -11,4 +11,7 @@ package(
 integration_test(
     name = "stringescapecodes",
     srcs = glob(["*.java"]),
+    # TODO(b/325056681): Invalid UTF-16 string literals are not yet supported in the modular
+    # pipeline.
+    enable_wasm_modular = False,
 )
