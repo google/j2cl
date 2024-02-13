@@ -94,6 +94,7 @@ java_library(
         "//transpiler/java/com/google/j2cl/transpiler/backend/wasm",
         "//transpiler/java/com/google/j2cl/transpiler/backend/wasm:summary_java_proto",
         "//transpiler/java/com/google/j2cl/transpiler/frontend/jdt",
+        "//transpiler/java/com/google/j2cl/transpiler/passes",
     ],
 )
 

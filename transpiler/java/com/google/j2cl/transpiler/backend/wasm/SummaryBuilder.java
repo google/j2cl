@@ -186,7 +186,7 @@ public final class SummaryBuilder {
                     StringLiteralInfo.newBuilder()
                         .setContent(s)
                         .setEnclosingTypeName(
-                            m.getEnclosingTypeDescriptor().getQualifiedBinaryName())
+                            m.getEnclosingTypeDescriptor().getQualifiedSourceName())
                         .setMethodName(m.getName())
                         .build()));
   }

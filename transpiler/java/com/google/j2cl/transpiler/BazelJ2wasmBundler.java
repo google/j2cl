@@ -37,6 +37,7 @@ import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.StringLiteralGettersCreator;
@@ -52,6 +53,7 @@ import com.google.j2cl.transpiler.backend.wasm.WasmConstructsGenerator;
 import com.google.j2cl.transpiler.backend.wasm.WasmGeneratorStage;
 import com.google.j2cl.transpiler.frontend.jdt.JdtEnvironment;
 import com.google.j2cl.transpiler.frontend.jdt.JdtParser;
+import com.google.j2cl.transpiler.passes.RewriteReferenceEqualityOperations;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -192,6 +194,8 @@ final class BazelJ2wasmBundler extends BazelWorker {
                 .setKind(Kind.CLASS)
                 .build());
 
+    compilationUnit.addType(stringLiteralHolder);
+
     var stringLiteralGetterCreator = new StringLiteralGettersCreator();
 
     // Synthesize the getters and forwarding methods for the string literals in the code.
@@ -226,6 +230,9 @@ final class BazelJ2wasmBundler extends BazelWorker {
                     .build());
           }
         });
+
+    // Perform the rewriting on the newly synthesized string literal getters.
+    new RewriteReferenceEqualityOperations().applyTo(compilationUnit);
   }
 
   private void synthesizeStringLiteralGetter(
@@ -255,6 +262,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
         MethodDescriptor.newBuilder()
             .setEnclosingTypeDescriptor(fromType.toUnparameterizedTypeDescriptor())
             .setName(forwardingMethodName)
+            .setOrigin(MethodOrigin.SYNTHETIC_STRING_LITERAL_GETTER)
             .setStatic(true)
             .setReturnTypeDescriptor(TypeDescriptors.get().javaLangString)
             .build();
