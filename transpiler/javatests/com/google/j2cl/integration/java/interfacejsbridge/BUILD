@@ -11,6 +11,4 @@ package(
 integration_test(
     name = "interfacejsbridge",
     srcs = glob(["*.java"]),
-    # TODO(b/324986388) : Determine the reason modular integration fails.
-    enable_wasm_modular = False,
 )

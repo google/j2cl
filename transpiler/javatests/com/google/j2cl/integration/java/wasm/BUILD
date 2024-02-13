@@ -26,7 +26,6 @@ integration_test(
     srcs = glob(["*.java"]),
     # Contains features which are only applicable for Wasm.
     enable_jvm_test = False,
-    enable_kt = False,
-    # TODO(b/324986388) : Determine the reason modular integration fails.
+    enable_kt = False,  # TODO(b/325056024): jsenums are not yet supported in the modular pipeline
     enable_wasm_modular = False,
 )

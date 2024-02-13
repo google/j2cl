@@ -31,6 +31,7 @@ import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.StringLiteralGettersCreator;
 import com.google.j2cl.transpiler.ast.Type;
+import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.protobuf.util.JsonFormat;
 import java.io.IOException;
@@ -111,10 +112,13 @@ public final class SummaryBuilder {
       typeHierarchyInfoBuilder.setExtendsType(getTypeId(superTypeDescriptor));
     }
 
-    type.getSuperInterfaceTypeDescriptors().stream()
-        .filter(not(DeclaredTypeDescriptor::isNative))
-        .filter(not(DeclaredTypeDescriptor::isJsFunctionInterface))
-        .forEach(t -> typeHierarchyInfoBuilder.addImplementsTypes(getTypeId(t)));
+    type.getDeclaration().getAllSuperTypesIncludingSelf().stream()
+        .filter(TypeDeclaration::isInterface)
+        .filter(not(TypeDeclaration::isNative))
+        .forEach(
+            t ->
+                typeHierarchyInfoBuilder.addImplementsTypes(
+                    getTypeId(t.toUnparameterizedTypeDescriptor())));
 
     summary.addTypes(typeHierarchyInfoBuilder.build());
   }

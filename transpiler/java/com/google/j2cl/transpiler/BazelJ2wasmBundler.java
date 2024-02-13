@@ -432,8 +432,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
       }
 
       private boolean implementsInterface(Type type) {
-        return implementedInterfaces.contains(type)
-            || (superType != null && superType.implementsInterface(type));
+        return implementedInterfaces.contains(type);
       }
     }
   }
