@@ -1113,8 +1113,9 @@ public final class AstUtils {
     return MethodDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(getSystemPropertyHolder().toUnparameterizedTypeDescriptor())
         // TODO(rluble): Sanitize the system property string.
-        .setName(systemPropertyString)
+        .setName("$" + systemPropertyString)
         .setReturnTypeDescriptor(TypeDescriptors.get().javaLangString)
+        .setOrigin(MethodOrigin.SYNTHETIC_STRING_LITERAL_GETTER)
         .setStatic(true)
         .setSynthetic(true)
         .setVisibility(Visibility.PRIVATE)
