@@ -11,6 +11,8 @@ package(
 integration_test(
     name = "nullability",
     srcs = glob(["*.java"]),
+    # TODO(b/324940602): Enable when TestUtils.isJ2ktWeb() is implemented.
+    enable_kt_web = False,
     enable_nullability = True,
     deps = ["//third_party:jspecify_annotations"],
 )

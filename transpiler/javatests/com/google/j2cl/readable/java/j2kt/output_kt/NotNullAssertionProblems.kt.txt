@@ -1,0 +1,71 @@
+// Generated from "j2kt/NotNullAssertionProblems.java"
+@file:OptIn(ExperimentalObjCName::class)
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "REPEATED_BOUND",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER")
+
+package j2kt
+
+import javaemul.lang.*
+import kotlin.Any
+import kotlin.Array
+import kotlin.OptIn
+import kotlin.String
+import kotlin.Suppress
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
+
+@ObjCName("J2ktJ2ktNotNullAssertionProblems", exact = true)
+open class NotNullAssertionProblems {
+ @ObjCName("test")
+ open fun test() {
+  NotNullAssertionProblems.accept1<Any>(null!!)
+  NotNullAssertionProblems.accept2<String>("foo", null!!)
+  NotNullAssertionProblems.accept2<String>("foo", NotNullAssertionProblems.nullableString()!!)
+  NotNullAssertionProblems.acceptVararg<String>("foo", null!!)
+  NotNullAssertionProblems.acceptVararg<String>("foo", NotNullAssertionProblems.nullableString()!!)
+ }
+
+ @ObjCName("J2ktJ2ktNotNullAssertionProblemsCompanion", exact = true)
+ companion object {
+  @JvmStatic
+  @ObjCName("accept1")
+  fun <T> accept1(
+   @ObjCName("withId") t: T
+  ) {}
+
+  @JvmStatic
+  @ObjCName("accept2")
+  fun <T> accept2(
+   @ObjCName("withId") t1: T,
+   @ObjCName("withId") t2: T
+  ) {}
+
+  @JvmStatic
+  @ObjCName("acceptVararg")
+  fun <T> acceptVararg(
+   vararg @ObjCName("withNSObjectArray") varargs: T
+  ) {
+   val varargs_1: Array<T> = varargs as Array<T>
+  }
+
+  @JvmStatic
+  @ObjCName("nullableString")
+  fun nullableString(): String? {
+   return null
+  }
+ }
+}
