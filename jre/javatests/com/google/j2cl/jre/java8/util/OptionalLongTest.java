@@ -184,6 +184,18 @@ public class OptionalLongTest extends TestCase {
     }));
   }
 
+  public void testOrElseThrowNoArgs() {
+    try {
+      OptionalLong.empty().orElseThrow();
+      fail("Expected NoSuchElementException from empty Optional: orElseThrow");
+    } catch (NoSuchElementException ignore) {
+      // expected
+    }
+
+    long value = OptionalLong.of(10L).orElseThrow();
+    assertEquals(10L, value);
+  }
+
   public void testEquals() {
     // empty case
     assertFalse(empty.equals(null));

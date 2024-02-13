@@ -370,6 +370,18 @@ public class OptionalTest extends TestCase {
     }));
   }
 
+  public void testOrElseThrowNoArgs() {
+    try {
+      Optional.empty().orElseThrow();
+      fail("Expected NoSuchElementException from empty Optional: orElseThrow");
+    } catch (NoSuchElementException ignore) {
+      // expected
+    }
+
+    String value = Optional.of("value").orElseThrow();
+    assertEquals("value", value);
+  }
+
   public void testEquals() {
     // empty case
     assertFalse(empty.equals(null));

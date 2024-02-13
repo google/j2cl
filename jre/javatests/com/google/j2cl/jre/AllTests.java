@@ -29,7 +29,6 @@ import org.junit.runners.Suite.SuiteClasses;
   EmulSuite.class,
   EmulJava8Suite.class,
   EmulJava9Suite.class,
-  EmulJava10Suite.class,
   LangSuite.class,
 })
 public class AllTests {}

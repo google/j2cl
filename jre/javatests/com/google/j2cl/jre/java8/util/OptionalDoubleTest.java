@@ -184,6 +184,18 @@ public class OptionalDoubleTest extends TestCase {
     }));
   }
 
+  public void testOrElseThrowNoArgs() {
+    try {
+      OptionalDouble.empty().orElseThrow();
+      fail("Expected NoSuchElementException from empty Optional: orElseThrow");
+    } catch (NoSuchElementException ignore) {
+      // expected
+    }
+
+    double value = OptionalDouble.of(10.0).orElseThrow();
+    assertEquals(10.0, value);
+  }
+
   public void testEquals() {
     // empty case
     assertFalse(empty.equals(null));
