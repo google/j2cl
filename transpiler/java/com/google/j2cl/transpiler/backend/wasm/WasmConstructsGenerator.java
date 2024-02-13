@@ -218,9 +218,7 @@ public class WasmConstructsGenerator {
     // with the type $java.lang.Throwable.
     // TODO(b/277970998): Decide how to handle this hard coded import w.r.t. import generation.
     builder.newLine();
-    builder.append(
-        "(import \"imports\" \"j2wasm.ExceptionUtils.tag\" (tag $exception.event (param"
-            + " externref)))");
+    builder.append("(import \"WebAssembly\" \"JSTag\" (tag $exception.event (param externref)))");
     // Add an export that uses the tag to workarund binaryen assuming the tag is never instantiated.
     builder.append(
         "(func $keep_tag_alive_hack (export \"_tag_hack_\") (param $param externref)  "

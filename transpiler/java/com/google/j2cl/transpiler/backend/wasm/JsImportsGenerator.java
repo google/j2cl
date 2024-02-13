@@ -142,13 +142,13 @@ public final class JsImportsGenerator {
     builder.append("return ");
     builder.openBrace();
     builder.newLine();
-    builder.append(String.format("'%s': ", MODULE));
-    builder.openBrace();
-    // Add j2wasm.ExceptionUtils.tag. This is needed because the import is hardcoded in
+    // Add WebAssembly module. This is needed because the import is hardcoded in
     // `generateWasmModule` and there is no corresponding code in the stb lib.
     // TODO(b/277970998): Consider how to handle this.
+    builder.append("'WebAssembly': WebAssembly,");
     builder.newLine();
-    builder.append("'j2wasm.ExceptionUtils.tag': j2wasm_ExceptionUtils.tag,");
+    builder.append(String.format("'%s': ", MODULE));
+    builder.openBrace();
     methodImports.entrySet().stream()
         .sorted(Entry.comparingByKey())
         .forEach(

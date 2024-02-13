@@ -9,8 +9,8 @@ const j2wasm_StringUtils = goog.require('j2wasm.StringUtils');
 /** @return {!Object<string, !Object<string, !*>>} Wasm import object */
 function getImports() {
  return {
+  'WebAssembly': WebAssembly,
   'imports': {
-   'j2wasm.ExceptionUtils.tag': j2wasm_ExceptionUtils.tag,
    'Date.UTC': Date.UTC,
    'Date.constructor': () => new Date(),
    'Date.constructor$1': (/** number */ milliseconds, ) => new Date(milliseconds, ),

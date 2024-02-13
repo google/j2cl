@@ -14,8 +14,6 @@
 
 goog.module('j2wasm.ExceptionUtils');
 
-/** @type {!WebAssembly.Tag} */
-const tag = WebAssembly.JSTag;
 
 /**
  * @param {string} param
@@ -66,7 +64,6 @@ function getJavaThrowable(error) {
 }
 
 exports = {
-  tag,
   create,
   toString,
   throwException,
