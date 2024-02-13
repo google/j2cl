@@ -147,6 +147,7 @@ import com.google.j2cl.transpiler.passes.OptimizeAutoValue;
 import com.google.j2cl.transpiler.passes.OptimizeEnums;
 import com.google.j2cl.transpiler.passes.OptimizeImplicitConstructors;
 import com.google.j2cl.transpiler.passes.OptimizeImplicitSuperCalls;
+import com.google.j2cl.transpiler.passes.PropagateCompileTimeConstants;
 import com.google.j2cl.transpiler.passes.PropagateConstants;
 import com.google.j2cl.transpiler.passes.PropagateJsEnumConstants;
 import com.google.j2cl.transpiler.passes.PropagateNullabilityJ2kt;
@@ -569,13 +570,12 @@ public enum Backend {
           NormalizeSwitchStatements::new,
           // Propagate constants needs to run after NormalizeSwitchStatements since it introduces
           // field references to constant fields.
-          PropagateConstants::new,
+          PropagateCompileTimeConstants::new,
           StaticallyEvaluateStringConcatenation::new,
           StaticallyEvaluateStringComparison::new,
           ImplementStringConcatenation::new,
           // Must run after NormalizeSwitchStatements, ImplementStringConcatenation.
           InsertJsEnumBoxingAndUnboxingConversions::new,
-          PropagateJsEnumConstants::new,
           InsertNarrowingReferenceConversions::new,
           () -> new InsertUnboxingConversions(/* areBooleanAndDoubleBoxed= */ true),
           () -> new InsertBoxingConversions(/* areBooleanAndDoubleBoxed= */ true),
