@@ -28,8 +28,4 @@ public class NullPointerException extends JsException {
   public NullPointerException(String message) {
     super(message);
   }
-
-  NullPointerException(Object typeError) {
-    super(typeError);
-  }
 }

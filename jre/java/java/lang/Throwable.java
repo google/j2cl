@@ -84,22 +84,14 @@ public class Throwable implements Serializable {
     }
   }
 
-  Throwable(Object backingJsObject) {
-    this(String.valueOf(backingJsObject));
-  }
-
   // Called by transpiler. Do not remove!
   void privateInitError(Object error) {
-    setBackingJsObject(error);
+    this.backingJsObject = error;
+    ThrowableUtils.setJavaThrowable(error, this);
   }
 
   public Object getBackingJsObject() {
     return backingJsObject;
-  }
-
-  private void setBackingJsObject(Object backingJsObject) {
-    this.backingJsObject = backingJsObject;
-    ThrowableUtils.setJavaThrowable(backingJsObject, this);
   }
 
   /** Call to add an exception that was suppressed. Used by try-with-resources. */
@@ -249,6 +241,10 @@ public class Throwable implements Serializable {
     }
 
     // If the JS error is being seen for the first time, map it best corresponding Java exception.
-    return e instanceof NativeTypeError ? new NullPointerException(e) : new JsException(e);
+    Throwable t = e instanceof NativeTypeError ? new NullPointerException() : new JsException();
+    // Adjust the backing JS object to point to the wrapper JS error.
+    t.detailMessage = String.valueOf(e);
+    t.privateInitError(e);
+    return t;
   }
 }

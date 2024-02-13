@@ -22,25 +22,11 @@ package java.lang;
  */
 public class JsException extends RuntimeException {
 
-  private static final Object UNINITIALIZED = "__noinit__";
-
-  private Object backingJsObject = UNINITIALIZED;
-
-  protected JsException(Object backingJsObject) {
-    super(backingJsObject);
-    this.backingJsObject = backingJsObject;
-  }
-
   JsException(String msg) {
     super(msg);
   }
 
   JsException() {
     super();
-  }
-
-  @Override
-  void privateInitError(Object error) {
-    super.privateInitError(backingJsObject == UNINITIALIZED ? error : backingJsObject);
   }
 }
