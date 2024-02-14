@@ -186,14 +186,13 @@ public class OptionalIntTest extends TestCase {
 
   public void testOrElseThrowNoArgs() {
     try {
-      OptionalInt.empty().orElseThrow();
+      empty.orElseThrow();
       fail("Expected NoSuchElementException from empty Optional: orElseThrow");
     } catch (NoSuchElementException ignore) {
       // expected
     }
 
-    int value = OptionalInt.of(10).orElseThrow();
-    assertEquals(10, value);
+    assertEquals(10, present.orElseThrow());
   }
 
   public void testEquals() {
