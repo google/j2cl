@@ -1,0 +1,149 @@
+[SourceMap] => [SourceMap]
+[SourceMap] => [constructor]
+[i] => [i] "i"
+[SourceMap] => [SourceMap.$clinit();] "sourcemap.SourceMap.<init>"
+[SourceMap] => [super();] "sourcemap.SourceMap.<init>"
+[SourceMap] => [/**@type {number} @nodts*/
+  this.f_uninitializedInstanceField__sourcemap_SourceMap_ = 0;] "sourcemap.SourceMap.<init>"
+[uninitializedInstanceField] => [f_uninitializedInstanceField__sourcemap_SourceMap_]
+[SourceMap] => [/**@type {?string} @nodts*/
+  this.f_uninitializedInstanceField2__sourcemap_SourceMap_;] "sourcemap.SourceMap.<init>"
+[uninitializedInstanceField2] => [f_uninitializedInstanceField2__sourcemap_SourceMap_]
+[SourceMap] => [/**@type {number} @nodts*/
+  this.f_initializedInstanceField__sourcemap_SourceMap_ = 0;] "sourcemap.SourceMap.<init>"
+[initializedInstanceField] => [f_initializedInstanceField__sourcemap_SourceMap_]
+[SourceMap] => [this.$ctor__sourcemap_SourceMap__int__void(i);] "sourcemap.SourceMap.<init>"
+[SourceMap] => [$ctor__sourcemap_SourceMap__int__void]
+[i] => [i] "i"
+[{}] => [this.$ctor__java_util_ArrayList__void();] "sourcemap.SourceMap.<init>"
+[{}] => [this.$init__void_$p_sourcemap_SourceMap();] "sourcemap.SourceMap.<init>"
+[SourceMap] => [$create__int__java_lang_String]
+[uninitializedInstanceField] => [uninitializedInstanceField] "uninitializedInstanceField"
+[uninitializedInstanceField2] => [uninitializedInstanceField2] "uninitializedInstanceField2"
+[SourceMap] => [let $instance = new SourceMap(2);] "sourcemap.SourceMap.<synthetic: ctor_create>"
+[SourceMap] => [$instance.$ctor__sourcemap_SourceMap__int__java_lang_String__void(uninitializedInstanceField, uninitializedInstanceField2);] "sourcemap.SourceMap.<synthetic: ctor_create>"
+[SourceMap] => [return $instance;] "sourcemap.SourceMap.<synthetic: ctor_create>"
+[SourceMap] => [$ctor__sourcemap_SourceMap__int__java_lang_String__void]
+[uninitializedInstanceField] => [uninitializedInstanceField] "uninitializedInstanceField"
+[uninitializedInstanceField2] => [uninitializedInstanceField2] "uninitializedInstanceField2"
+[testStatements] => [m_testStatements__int__int__int__int__int_$p_sourcemap_SourceMap]
+[a] => [a] "a"
+[b] => [b] "b"
+[times] => [times] "times"
+[number] => [number_1] "number"
+[int value = 0;] => [let value = 0;] "sourcemap.SourceMap.testStatements"
+[value] => [value] "value"
+[for (int i = 0; i < times; i++) {
+      value++;
+    }] => [for (let i = 0; i < times; i = i + 1 | 0) {
+   value = value + 1 | 0;
+  }] "sourcemap.SourceMap.testStatements"
+[i] => [i] "i"
+[value++;] => [value = value + 1 | 0;] "sourcemap.SourceMap.testStatements"
+[if (number % 2 == 0) {
+      value += 1;
+...      value += 2;
+    }] => [if ($Primitives.coerceDivision(number_1 % 2) == 0) {
+   value = value + 1 | 0;
+...   value = value + 2 | 0;
+  }] "sourcemap.SourceMap.testStatements"
+[value += 1;] => [value = value + 1 | 0;] "sourcemap.SourceMap.testStatements"
+[value += 2;] => [value = value + 2 | 0;] "sourcemap.SourceMap.testStatements"
+[while (b > 0 && b < 100) {
+      b -= 10;
+    }] => [while (b > 0 && b < 100) {
+   b = b - 10 | 0;
+  }] "sourcemap.SourceMap.testStatements"
+[b -= 10;] => [b = b - 10 | 0;] "sourcemap.SourceMap.testStatements"
+[value += a + b;] => [value = value + (a + b) | 0;] "sourcemap.SourceMap.testStatements"
+[outerLoop: // Label for the outer loop
+    for (int i = 0; i <= 2; i++) {
+...      }
+    }] => [outerLoop: for (let i_1 = 0; i_1 <= 2; i_1 = i_1 + 1 | 0) {
+   switch (number_1) {
+...   }
+  }] "sourcemap.SourceMap.testStatements"
+[for (int i = 0; i <= 2; i++) {
+      switch (number) {
+...      }
+    }] => [for (let i_1 = 0; i_1 <= 2; i_1 = i_1 + 1 | 0) {
+   switch (number_1) {
+...   }
+  }] "sourcemap.SourceMap.testStatements"
+[i] => [i_1] "i"
+[switch (number) {
+        case 1:
+...          break outerLoop;
+      }] => [switch (number_1) {
+    case 1:
+...     break outerLoop;
+   }] "sourcemap.SourceMap.testStatements"
+[value += 5;] => [value = value + 5 | 0;] "sourcemap.SourceMap.testStatements"
+[break;] => [break;] "sourcemap.SourceMap.testStatements"
+[value += 2;] => [value = value + 2 | 0;] "sourcemap.SourceMap.testStatements"
+[break outerLoop;] => [break outerLoop;] "sourcemap.SourceMap.testStatements"
+[break outerLoop;] => [break outerLoop;] "sourcemap.SourceMap.testStatements"
+[if (i == 1) {
+        break;
+      }] => [if (i_1 == 1) {
+    break;
+   }] "sourcemap.SourceMap.testStatements"
+[break;] => [break;] "sourcemap.SourceMap.testStatements"
+[return value;] => [return value;] "sourcemap.SourceMap.testStatements"
+[testLambda] => [m_testLambda__int__void_$p_sourcemap_SourceMap]
+[n] => [n] "n"
+[{
+    Function<Integer, Integer> f = i -> i + 1;
+    Supplier<Integer> f2 = new ArrayList()::size;
+  }] => [let /** !ArrayList */ $$q;] "sourcemap.SourceMap.testLambda"
+[Function<Integer, Integer> f = i -> i + 1;] => [let f = j_u_function_Function.$adapt((i) =>{
+   let i_1 = /**@type {Integer}*/ ($Casts.$to(i, Integer));
+   return Integer.m_valueOf__int__java_lang_Integer(i_1.m_intValue__int() + 1 | 0);
+  });] "sourcemap.SourceMap.testLambda"
+[f] => [f] "f"
+[i] => [i] "i"
+[i -> i + 1] => [let i_1 = /**@type {Integer}*/ ($Casts.$to(i, Integer));] "sourcemap.SourceMap.<lambda in testLambda>"
+[i] => [i_1] "i"
+[i + 1] => [return Integer.m_valueOf__int__java_lang_Integer(i_1.m_intValue__int() + 1 | 0);] "sourcemap.SourceMap.<lambda in testLambda>"
+[Supplier<Integer> f2 = new ArrayList()::size;] => [let f2 = ($$q = /**@type {!ArrayList}*/ (ArrayList.$create__()), Supplier.$adapt(() =>{
+   return Integer.m_valueOf__int__java_lang_Integer($$q.size());
+  }));] "sourcemap.SourceMap.testLambda"
+[f2] => [f2] "f2"
+[new ArrayList()::size] => [return Integer.m_valueOf__int__java_lang_Integer($$q.size());] "sourcemap.SourceMap.<lambda in testLambda>"
+[SourceMap] => [$init__void_$p_sourcemap_SourceMap]
+[uninitializedInstanceField = 1000;] => [this.f_uninitializedInstanceField__sourcemap_SourceMap_ = 1000;] "sourcemap.SourceMap.<init>"
+[if (uninitializedInstanceField == 1000) {
+      uninitializedInstanceField2 = "Hello!";
+...      uninitializedInstanceField2 = "World!";
+    }] => [if (this.f_uninitializedInstanceField__sourcemap_SourceMap_ == 1000) {
+   this.f_uninitializedInstanceField2__sourcemap_SourceMap_ = 'Hello!';
+...   this.f_uninitializedInstanceField2__sourcemap_SourceMap_ = 'World!';
+  }] "sourcemap.SourceMap.<init>"
+[uninitializedInstanceField2 = "Hello!";] => [this.f_uninitializedInstanceField2__sourcemap_SourceMap_ = 'Hello!';] "sourcemap.SourceMap.<init>"
+[uninitializedInstanceField2 = "World!";] => [this.f_uninitializedInstanceField2__sourcemap_SourceMap_ = 'World!';] "sourcemap.SourceMap.<init>"
+[private int initializedInstanceField = 2;] => [this.f_initializedInstanceField__sourcemap_SourceMap_ = 2;] "sourcemap.SourceMap.<init>"
+[static double uninitializedStaticField;] => [get f_uninitializedStaticField__sourcemap_SourceMap]
+[static double uninitializedStaticField;] => [return (SourceMap.$clinit(), SourceMap.$static_uninitializedStaticField__sourcemap_SourceMap);] "sourcemap.SourceMap.<synthetic: getter>"
+[static double uninitializedStaticField;] => [set f_uninitializedStaticField__sourcemap_SourceMap]
+[static double uninitializedStaticField;] => [(SourceMap.$clinit(), SourceMap.$static_uninitializedStaticField__sourcemap_SourceMap = value);] "sourcemap.SourceMap.<synthetic: setter>"
+[static String initializedStaticField = "Hello";] => [get f_initializedStaticField__sourcemap_SourceMap]
+[static String initializedStaticField = "Hello";] => [return (SourceMap.$clinit(), SourceMap.$static_initializedStaticField__sourcemap_SourceMap);] "sourcemap.SourceMap.<synthetic: getter>"
+[static String initializedStaticField = "Hello";] => [set f_initializedStaticField__sourcemap_SourceMap]
+[static String initializedStaticField = "Hello";] => [(SourceMap.$clinit(), SourceMap.$static_initializedStaticField__sourcemap_SourceMap = value);] "sourcemap.SourceMap.<synthetic: setter>"
+[SourceMap] => [$clinit]
+[SourceMap] => [SourceMap.$clinit = () =>{};] "sourcemap.SourceMap.<clinit>"
+[SourceMap] => [SourceMap.$loadModules();] "sourcemap.SourceMap.<clinit>"
+[SourceMap] => [ArrayList.$clinit();] "sourcemap.SourceMap.<clinit>"
+[SourceMap] => [List.$clinit();] "sourcemap.SourceMap.<clinit>"
+[uninitializedStaticField = 10.0;] => [SourceMap.$static_uninitializedStaticField__sourcemap_SourceMap = 10;] "sourcemap.SourceMap.<clinit>"
+[static String initializedStaticField = "Hello";] => [SourceMap.$static_initializedStaticField__sourcemap_SourceMap = 'Hello';] "sourcemap.SourceMap.<clinit>"
+[if (uninitializedStaticField == 10.0) {
+      initializedStaticField = "World";
+    }] => [if (SourceMap.$static_uninitializedStaticField__sourcemap_SourceMap == 10) {
+   SourceMap.$static_initializedStaticField__sourcemap_SourceMap = 'World';
+  }] "sourcemap.SourceMap.<clinit>"
+[initializedStaticField = "World";] => [SourceMap.$static_initializedStaticField__sourcemap_SourceMap = 'World';] "sourcemap.SourceMap.<clinit>"
+[SourceMap] => [/**@private {number} @nodts*/
+SourceMap.$static_uninitializedStaticField__sourcemap_SourceMap = 0;]
+[SourceMap] => [/**@private {?string} @nodts*/
+SourceMap.$static_initializedStaticField__sourcemap_SourceMap;]

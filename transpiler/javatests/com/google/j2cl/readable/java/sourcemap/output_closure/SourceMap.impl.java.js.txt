@@ -1,0 +1,153 @@
+goog.module('sourcemap.SourceMap$impl');
+
+const ArrayList = goog.require('java.util.ArrayList$impl');
+const List = goog.require('java.util.List$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+let j_u_function_Function = goog.forwardDeclare('java.util.function.Function$impl');
+let Supplier = goog.forwardDeclare('java.util.function.Supplier$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
+
+/**
+ * @template T
+ * @extends {ArrayList<T>}
+ * @implements {List<T>}
+ */
+class SourceMap extends ArrayList {
+ //JsConstructor 'SourceMap(int)'.
+ 
+ constructor(/** number */ i) {
+  SourceMap.$clinit();
+  super();
+  /**@type {number} @nodts*/
+  this.f_uninitializedInstanceField__sourcemap_SourceMap_ = 0;
+  /**@type {?string} @nodts*/
+  this.f_uninitializedInstanceField2__sourcemap_SourceMap_;
+  /**@type {number} @nodts*/
+  this.f_initializedInstanceField__sourcemap_SourceMap_ = 0;
+  this.$ctor__sourcemap_SourceMap__int__void(i);
+ }
+ //Initialization from constructor 'SourceMap(int)'.
+ /** @nodts */
+ $ctor__sourcemap_SourceMap__int__void(/** number */ i) {
+  this.$ctor__java_util_ArrayList__void();
+  this.$init__void_$p_sourcemap_SourceMap();
+ }
+ //Factory method corresponding to constructor 'SourceMap(int, String)'.
+ /** @nodts @template T @return {!SourceMap<T>} */
+ static $create__int__java_lang_String(/** number */ uninitializedInstanceField, /** ?string */ uninitializedInstanceField2) {
+  let $instance = new SourceMap(2);
+  $instance.$ctor__sourcemap_SourceMap__int__java_lang_String__void(uninitializedInstanceField, uninitializedInstanceField2);
+  return $instance;
+ }
+ //Initialization from constructor 'SourceMap(int, String)'.
+ /** @nodts */
+ $ctor__sourcemap_SourceMap__int__java_lang_String__void(/** number */ uninitializedInstanceField, /** ?string */ uninitializedInstanceField2) {}
+ /** @nodts @return {number} */
+ m_testStatements__int__int__int__int__int_$p_sourcemap_SourceMap(/** number */ a, /** number */ b, /** number */ times, /** number */ number_1) {
+  let value = 0;
+  for (let i = 0; i < times; i = i + 1 | 0) {
+   value = value + 1 | 0;
+  }
+  if ($Primitives.coerceDivision(number_1 % 2) == 0) {
+   value = value + 1 | 0;
+  } else {
+   value = value + 2 | 0;
+  }
+  while (b > 0 && b < 100) {
+   b = b - 10 | 0;
+  }
+  value = value + (a + b) | 0;
+  outerLoop: for (let i_1 = 0; i_1 <= 2; i_1 = i_1 + 1 | 0) {
+   switch (number_1) {
+    case 1: 
+     value = value + 5 | 0;
+     break;
+    case 2: 
+     value = value + 2 | 0;
+     break outerLoop;
+    case 3: 
+     break outerLoop;
+   }
+   if (i_1 == 1) {
+    break;
+   }
+  }
+  return value;
+ }
+ /** @nodts */
+ m_testLambda__int__void_$p_sourcemap_SourceMap(/** number */ n) {
+  let /** !ArrayList */ $$q;
+  let f = j_u_function_Function.$adapt((i) =>{
+   let i_1 = /**@type {Integer}*/ ($Casts.$to(i, Integer));
+   return Integer.m_valueOf__int__java_lang_Integer(i_1.m_intValue__int() + 1 | 0);
+  });
+  let f2 = ($$q = /**@type {!ArrayList}*/ (ArrayList.$create__()), Supplier.$adapt(() =>{
+   return Integer.m_valueOf__int__java_lang_Integer($$q.size());
+  }));
+ }
+ /** @private @nodts */
+ $init__void_$p_sourcemap_SourceMap() {
+  this.f_uninitializedInstanceField__sourcemap_SourceMap_ = 1000;
+  if (this.f_uninitializedInstanceField__sourcemap_SourceMap_ == 1000) {
+   this.f_uninitializedInstanceField2__sourcemap_SourceMap_ = 'Hello!';
+  } else {
+   this.f_uninitializedInstanceField2__sourcemap_SourceMap_ = 'World!';
+  }
+  this.f_initializedInstanceField__sourcemap_SourceMap_ = 2;
+ }
+ /** @nodts @return {number} */
+ static get f_uninitializedStaticField__sourcemap_SourceMap() {
+  return (SourceMap.$clinit(), SourceMap.$static_uninitializedStaticField__sourcemap_SourceMap);
+ }
+ /** @nodts */
+ static set f_uninitializedStaticField__sourcemap_SourceMap(/** number */ value) {
+  (SourceMap.$clinit(), SourceMap.$static_uninitializedStaticField__sourcemap_SourceMap = value);
+ }
+ /** @nodts @return {?string} */
+ static get f_initializedStaticField__sourcemap_SourceMap() {
+  return (SourceMap.$clinit(), SourceMap.$static_initializedStaticField__sourcemap_SourceMap);
+ }
+ /** @nodts */
+ static set f_initializedStaticField__sourcemap_SourceMap(/** ?string */ value) {
+  (SourceMap.$clinit(), SourceMap.$static_initializedStaticField__sourcemap_SourceMap = value);
+ }
+ /** @nodts */
+ static $clinit() {
+  SourceMap.$clinit = () =>{};
+  SourceMap.$loadModules();
+  ArrayList.$clinit();
+  List.$clinit();
+  SourceMap.$static_uninitializedStaticField__sourcemap_SourceMap = 10;
+  SourceMap.$static_initializedStaticField__sourcemap_SourceMap = 'Hello';
+  if (SourceMap.$static_uninitializedStaticField__sourcemap_SourceMap == 10) {
+   SourceMap.$static_initializedStaticField__sourcemap_SourceMap = 'World';
+  }
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SourceMap;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  j_u_function_Function = goog.module.get('java.util.function.Function$impl');
+  Supplier = goog.module.get('java.util.function.Supplier$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
+ }
+}
+/**@private {number} @nodts*/
+SourceMap.$static_uninitializedStaticField__sourcemap_SourceMap = 0;
+/**@private {?string} @nodts*/
+SourceMap.$static_initializedStaticField__sourcemap_SourceMap;
+List.$markImplementor(SourceMap);
+$Util.$setClassMetadata(SourceMap, 'sourcemap.SourceMap');
+
+exports = SourceMap;
+
+//# sourceMappingURL=SourceMap.js.map
