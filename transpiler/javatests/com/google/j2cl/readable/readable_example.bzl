@@ -39,6 +39,7 @@ def readable_example(
         j2cl_library_tags = [],
         javacopts = [],
         generate_js_readables = True,
+        generate_readable_source_maps = False,
         generate_wasm_readables = True,
         generate_wasm_imports = False,
         generate_wasm_modular = False,
@@ -61,13 +62,9 @@ def readable_example(
       **kwargs: passes to j2cl_library
     """
 
-    readable_source_maps = True
     if any([src for src in srcs if src.endswith(".kt")]):
         # J2KT doesn't make sense for Kotlin Frontend.
         generate_kt_readables = False
-
-        # TODO(b/217479735): Kotlin sources don't currently generate useful source maps
-        readable_source_maps = False
 
         # Wasm is currently not planned for Kotlin Frontend.
         generate_wasm_readables = False
@@ -84,7 +81,7 @@ def readable_example(
         plugins = plugins,
         generate_build_test = False,
         tags = j2cl_library_tags + ["manual"],
-        readable_source_maps = readable_source_maps,
+        readable_source_maps = generate_readable_source_maps,
         readable_library_info = generate_library_info,
         generate_j2kt_jvm_library = None if generate_kt_readables else False,
         generate_j2kt_native_library = None if build_kt_native_readables else False,
