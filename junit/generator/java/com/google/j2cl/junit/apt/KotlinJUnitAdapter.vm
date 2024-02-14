@@ -28,7 +28,7 @@ private fun afterClass() {
 
 class ${testClass.jsUnitAdapterClassName()} {
 
-  lateinit var actualTest : ${testClass.qualifiedName()}
+  val actualTest: ${testClass.qualifiedName()}
 
   init {
     ## Add try catch here for afterClass is guaranteed to run even if the
