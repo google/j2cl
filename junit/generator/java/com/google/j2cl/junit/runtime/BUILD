@@ -19,6 +19,17 @@ closure_js_library(
 )
 
 j2cl_library(
+    name = "jsunit_helpers-j2cl",
+    testonly = 1,
+    srcs = ["JsUnitHelpers.java"],
+    visibility = ["//build_defs/internal_do_not_use:__pkg__"],
+    deps = [
+        "//:jsinterop-annotations-j2cl",
+        "//third_party:closure_testcase",
+    ],
+)
+
+j2cl_library(
     name = "testcase_violator-j2cl",
     testonly = 1,
     srcs = ["TestCaseViolator.java"],

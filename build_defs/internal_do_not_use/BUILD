@@ -2,6 +2,8 @@
 #   Build rules used by J2CL and BUILD targets used by the rules.
 
 load(":j2cl_library.bzl", "j2cl_library")
+load(":j2kt_library.bzl", "j2kt_jvm_library", "j2kt_native_library")
+load(":j2wasm_library.bzl", "j2wasm_library")
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],
@@ -92,10 +94,35 @@ j2cl_library(
     ],
 )
 
+j2kt_native_library(
+    name = "internal_junit_runtime-j2kt-native",
+    testonly = 1,
+    exports = [
+        "//junit/generator/java/com/google/j2cl/junit/runtime:testcase_violator-j2kt-native",
+    ],
+)
+
+j2kt_jvm_library(
+    name = "internal_junit_runtime-j2kt-jvm",
+    testonly = 1,
+    exports = [
+        "//junit/generator/java/com/google/j2cl/junit/runtime:testcase_violator-j2kt-jvm",
+    ],
+)
+
+j2wasm_library(
+    name = "internal_junit_runtime-j2wasm",
+    testonly = 1,
+    exports = [
+        "//junit/generator/java/com/google/j2cl/junit/runtime:testcase_violator-j2wasm",
+    ],
+)
+
 j2cl_library(
     name = "internal_junit_runtime",
     testonly = 1,
     exports = [
+        "//junit/generator/java/com/google/j2cl/junit/runtime:jsunit_helpers-j2cl",
         "//junit/generator/java/com/google/j2cl/junit/runtime:testcase_violator-j2cl",
     ],
 )
