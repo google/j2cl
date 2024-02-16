@@ -2,13 +2,11 @@ goog.module('jsvarargs.Main.SubVarargsConstructorClass$impl');
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
-
 class SubVarargsConstructorClass extends Object {
  
  constructor(/** number */ i, .../** ...* */ args) {
   SubVarargsConstructorClass.$clinit();
-  super(...InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(args));
+  super(...args);
   this.$ctor__jsvarargs_Main_SubVarargsConstructorClass__int__arrayOf_java_lang_Object__void(i, args);
  }
  /** @nodts */
@@ -24,9 +22,7 @@ class SubVarargsConstructorClass extends Object {
  }
  
  /** @nodts */
- static $loadModules() {
-  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
- }
+ static $loadModules() {}
 }
 $Util.$setClassMetadata(SubVarargsConstructorClass, 'jsvarargs.Main$SubVarargsConstructorClass');
 
