@@ -16,14 +16,11 @@
 package com.google.j2cl.transpiler.passes;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
-import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.Type;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Rewrites the rare short form array literal initializers (like "int[] foo = {1, 2, 3};") into the
@@ -31,27 +28,15 @@ import java.util.Set;
  */
 public class NormalizeArrayLiterals extends NormalizationPass {
 
-  private final Set<ArrayLiteral> longFormArrayLiterals = new HashSet<>();
-
   @Override
   public void applyTo(Type type) {
-    // Collect long form array literals
-    type.accept(
-        new AbstractVisitor() {
-          @Override
-          public void exitNewArray(NewArray newArray) {
-            if (newArray.getInitializer() instanceof ArrayLiteral) {
-              longFormArrayLiterals.add((ArrayLiteral) newArray.getInitializer());
-            }
-          }
-        });
 
     // Rewrite short form array literals
     type.accept(
         new AbstractRewriter() {
           @Override
           public Node rewriteArrayLiteral(ArrayLiteral arrayLiteral) {
-            if (longFormArrayLiterals.contains(arrayLiteral)) {
+            if (getParent() instanceof NewArray) {
               return arrayLiteral;
             }
 
