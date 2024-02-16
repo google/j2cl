@@ -28,7 +28,7 @@ public class Variable extends NameDeclaration
     implements Cloneable<Variable>, HasUnusableByJsSuppression {
   private TypeDescriptor typeDescriptor;
   private boolean isFinal;
-  private final boolean isParameter;
+  private boolean isParameter;
   private final SourcePosition sourcePosition;
   private final boolean isUnusableByJsSuppressed;
 
@@ -57,6 +57,10 @@ public class Variable extends NameDeclaration
 
   public void setFinal(boolean isFinal) {
     this.isFinal = isFinal;
+  }
+
+  public void setParameter(boolean isParameter) {
+    this.isParameter = isParameter;
   }
 
   public boolean isFinal() {

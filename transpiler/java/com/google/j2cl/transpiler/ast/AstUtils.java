@@ -608,6 +608,7 @@ public final class AstUtils {
           Variable.newBuilder()
               .setName(parameterName)
               .setTypeDescriptor(parameterTypeDescriptor)
+              .setParameter(true)
               .build());
       index++;
     }

@@ -46,6 +46,7 @@ import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.TypeLiteral;
 import com.google.j2cl.transpiler.ast.UnaryExpression;
+import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import java.util.HashMap;
 import java.util.Map;
@@ -92,6 +93,7 @@ public class VerifyNormalizedUnits extends NormalizationPass {
                 !method.isAbstract()
                     || getCurrentType().isAbstract()
                     || getCurrentType().isInterface());
+            checkState(method.getParameters().stream().allMatch(Variable::isParameter));
           }
 
           @Override
@@ -282,6 +284,9 @@ public class VerifyNormalizedUnits extends NormalizationPass {
             if (variableDeclarationExpression.getFragments().isEmpty()) {
               throw new IllegalStateException();
             }
+            checkState(
+                variableDeclarationExpression.getFragments().stream()
+                    .allMatch(f -> !f.getVariable().isParameter()));
           }
 
           @Override

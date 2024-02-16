@@ -78,6 +78,7 @@ public class NormalizeFunctionExpressions extends NormalizationPass {
 
         Variable newParameter =
             Variable.Builder.from(parameter).setTypeDescriptor(targetType).build();
+        parameter.setParameter(false);
 
         // InferredType oldPar = (InferredType) newPar;
         Statement castToOldParameter =
