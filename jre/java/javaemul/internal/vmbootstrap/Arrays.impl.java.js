@@ -212,47 +212,11 @@ class Arrays {
    * @public
    */
   static $init(array, leafType, opt_dimensionCount) {
-    return Arrays.$initInternal_(
-        array, /** @type {!Constructor} */ (leafType), leafType.$isInstance,
-        opt_dimensionCount || 1);
-  }
-
-  /**
-   * @param {!Array<*>} array
-   * @param {!Constructor} leafType
-   * @param {!Function} leafTypeIsInstance
-   * @param {number} dimensionCount
-   * @return {!Array<*>}
-   * @private
-   */
-  static $initInternal_(array, leafType, leafTypeIsInstance, dimensionCount) {
-    return Arrays.$initRecursiveInternal_(
+    return Arrays.$stampTypeInternal_(
         array,
-        Arrays.$createMetadata_(leafType, leafTypeIsInstance, dimensionCount)
-
-    );
-  }
-
-  /**
-   * @param {!Array<*>} array
-   * @param {!Arrays.Metadata_} metadata
-   * @return {!Array<*>}
-   * @private
-   */
-  static $initRecursiveInternal_(array, metadata) {
-    array.$$arrayMetadata = metadata;
-
-    if (metadata.dimensionCount > 1) {
-      let subComponentMetadata = Arrays.$createSubComponentMetadata_(metadata);
-      for (let i = 0; i < array.length; i++) {
-        let nestedArray = /** @type {?Array<*>} */ (array[i]);
-        if (nestedArray) {
-          Arrays.$initRecursiveInternal_(nestedArray, subComponentMetadata);
-        }
-      }
-    }
-
-    return array;
+        Arrays.$createMetadata_(
+            /** @type {!Constructor} */ (leafType), leafType.$isInstance,
+            opt_dimensionCount || 1));
   }
 
   /**

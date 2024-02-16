@@ -19,11 +19,14 @@ import static com.google.j2cl.integration.testing.Asserts.assertThrowsArrayStore
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointerException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
+import com.google.j2cl.integration.testing.TestUtils;
+
 public class Main {
   public static void main(String... args) {
     testOneDimensionalLiteral();
     testOneDimensionalLiteral_empty();
     testOneDimensionalLiteral_terse();
+    testOneDimensionalLiteral_subclassInInitializer();
     testTwoDimensionalLiteral();
     testTwoDimensionalLiteral_partial();
     testTwoDimensionalLiteral_unbalanced();
@@ -56,6 +59,17 @@ public class Main {
     assertTrue(terseLiteral[0] == 0);
     assertTrue(terseLiteral[1] == 1);
     assertTrue(terseLiteral[2] == 2);
+  }
+
+  private static void testOneDimensionalLiteral_subclassInInitializer() {
+    // TODO(b/184675805) : Remove once the bug is fixed.
+    if (TestUtils.isWasm()) {
+      return;
+    }
+
+    Object[][] arrayContainer = new Object[][] {new String[1]};
+    assertTrue(arrayContainer[0].getClass() == new String[0].getClass());
+    assertThrowsArrayStoreException(() -> arrayContainer[0][0] = new Object());
   }
 
   private static void testTwoDimensionalLiteral() {
