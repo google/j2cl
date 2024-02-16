@@ -39,7 +39,11 @@ def _compile(
     if not has_kotlin_srcs:
         if kotlincopts:
             fail("kotlincopts not allowed without kotlin sources")
-
+    print("##################################")
+    print("the srcs ######" + str(srcs))
+    for dep in deps:
+        print("the deps #########" + str(dep))
+    print("###################################")
     jvm_deps, js_deps = split_deps(deps)
     jvm_exports, js_exports = split_deps(exports)
 
@@ -146,16 +150,21 @@ def split_srcs(srcs):
     return (jvm_srcs, js_srcs)
 
 def split_deps(deps):
-    """ Split the provider deps into Jvm and JS groups. """
+    """ Split the provider deps into pJvm and JS groups. """
     jvm_deps = []
     js_deps = []
+
     for d in deps:
         # There is no good way to test if a provider is of a particular type so here we are
         # checking existence of a property that is expected to be inside the provider.
-        if hasattr(d, "_is_j2cl_provider"):
-            # This is a j2cl provider.
-            jvm_deps.append(d._private_.java_info)
-            js_deps.append(d._private_.js_info)
+        print(  "the depis**********p*" + str(type(d)))
+        if J2clInfo in d:
+            d2 = d[J2clInfo]
+            print(  "the depis**of d2********p*" + str(d)+"........"+str(d2))
+            if hasattr(d2, "_is_j2cl_provider"):
+                # This is a j2cl provider.
+                jvm_deps.append(d2._private_.java_info)
+            js_deps.append(d)
         else:
             # This is a js provider
             js_deps.append(d)

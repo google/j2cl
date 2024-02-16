@@ -47,7 +47,8 @@ def _impl_j2cl_library(ctx):
     # TODO(b/240682589): Setup a way for users to safely pass in flags.
     if (len(ctx.attr.kotlincopts) and not ctx.label.package.startswith("")):
         fail("kotlincopts can only be internally set by J2CL")
-
+    for dep in ctx.attr.deps:
+        print("the dep is ))))" + str(type(dep)))
     j2cl_provider = j2cl_common.compile(
         ctx,
         srcs = srcs,
@@ -100,7 +101,8 @@ def _j2cl_or_js_providers_of(deps):
     return [_j2cl_or_js_provider_of(d) for d in deps]
 
 def _j2cl_or_js_provider_of(dep):
-    return dep[J2clInfo] if J2clInfo in dep else dep
+    print("the type of dep in provider is" + str(type(dep)) + str(dep))
+    return dep
 
 def _javaplugin_providers_of(deps):
     plugin_provider = getattr(java_common, "JavaPluginInfo") if hasattr(java_common, "JavaPluginInfo") else JavaInfo
@@ -148,7 +150,7 @@ j2cl_library = rule(
 )
 
 def _impl_java_import(ctx):
-    return j2cl_common.create_js_lib_struct(
+    a = j2cl_common.create_js_lib_struct(
         J2clInfo(
             _private_ = struct(
                 java_info = ctx.attr.jar[JavaInfo],
@@ -158,6 +160,8 @@ def _impl_java_import(ctx):
             _is_j2cl_provider = 1,
         ),
     )
+    print("the a is &&&&&&&&" + str(a))
+    return a
 
 _J2CL_IMPORT_ATTRS = {
     "jar": attr.label(providers = [JavaInfo]),

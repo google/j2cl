@@ -13,11 +13,9 @@ def load_j2cl_repo_deps():
         ],
     )
 
-    _github_repo(
+    native.local_repository(
         name = "io_bazel_rules_closure",
-        repo = "bazelbuild/rules_closure",
-        tag = "248f0e4a2bfd6063e88278be081d55715ecd298c",
-        sha256 = "f5318f5c06bc02270852359812555cfda87b34e4002c855ba25a5a81ff551ac9",
+        path = "../../rules_closure",
     )
 
     # TODO(goktug): Consider moving to setup_j2cl_workspace after licences migration
@@ -46,7 +44,6 @@ def load_j2cl_repo_deps():
     _load_binaryen()
 
 def _load_binaryen():
-
     PY_VERSION = "0.23.1"
 
     http_archive(
@@ -57,10 +54,10 @@ def _load_binaryen():
     )
 
     _github_repo(
-        name="com_google_binaryen",
+        name = "com_google_binaryen",
         repo = "WebAssembly/binaryen",
-        tag = "88fe1b68e9e0eaec4b35336ed35c7ea44a762204",
-        sha256 = "e35c8ada3414d73c52d844f112518949f61a8f5335a37e6ed62e97a8d0a14e5d",
+        tag = "da18e25f22afcd916171aae8511c7b6860d4d7cc",
+        sha256 = "217dfa0366a8abd464b0e1ad5c50d0516a9cac9aac110f3f9daf44393859f446",
         patch_args = ["-p1"],
         build_file = "@com_google_j2cl//build_defs/internal_do_not_use/binaryen:BUILD.binaryen",
         patches = ["@com_google_j2cl//build_defs/internal_do_not_use/binaryen:generate_intrinsics.patch"],
