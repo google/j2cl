@@ -162,7 +162,7 @@ def split_deps(deps):
                 # This is a j2cl provider.
                 jvm_deps.append(j2cl_info._private_.java_info)
 
-        # This is a js provider
+        # This is a js target
         js_deps.append(d)
 
     return (jvm_deps, js_deps)

@@ -5,16 +5,12 @@ load(
     "CLOSURE_JS_TOOLCHAIN_ATTRS",
     "closure_js_binary",
     "closure_js_test",
-    #    "create_closure_js_library",
+    "create_closure_js_library",
     "web_library",
 )
 load(
     "@io_bazel_rules_closure//closure/private:defs.bzl",
     "ClosureJsLibraryInfo",
-)
-load(
-    "@io_bazel_rules_closure//closure/compiler:closure_js_library.bzl",
-    "create_closure_js_library",
 )
 load(":provider.bzl", "J2clInfo")
 
