@@ -157,14 +157,13 @@ def split_deps(deps):
         # There is no good way to test if a provider is of a particular type so here we are
         # checking existence of a property that is expected to be inside the provider.
         if J2clInfo in d:
-            d2 = d[J2clInfo]
-            if hasattr(d2, "_is_j2cl_provider"):
+            j2cl_info = d[J2clInfo]
+            if hasattr(j2cl_info, "_is_j2cl_provider"):
                 # This is a j2cl provider.
-                jvm_deps.append(d2._private_.java_info)
-            js_deps.append(d)
-        else:
-            # This is a js provider
-            js_deps.append(d)
+                jvm_deps.append(j2cl_info._private_.java_info)
+
+        # This is a js provider
+        js_deps.append(d)
 
     return (jvm_deps, js_deps)
 
