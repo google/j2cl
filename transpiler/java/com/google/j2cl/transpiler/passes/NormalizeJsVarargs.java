@@ -34,6 +34,7 @@ import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.Variable;
 import java.util.List;
+import javax.annotation.Nullable;
 
 /**
  * Implements JavaScript varargs calling convention by rewriting varargs calls and adding a preamble
@@ -128,21 +129,11 @@ public class NormalizeJsVarargs extends NormalizationPass {
       }
       Expression lastArgument = Iterables.getLast(invocation.getArguments());
 
-      // If the last argument is an array literal, or an array creation with array literal,
-      // unwrap array literal, and pass the unwrapped arguments directly.
-      if (lastArgument instanceof ArrayLiteral) {
+      List<Expression> extractedVarargsArguments = extractVarargsArguments(lastArgument);
+      if (extractedVarargsArguments != null) {
         return MethodCall.Builder.from(invocation)
-            .replaceVarargsArgument(((ArrayLiteral) lastArgument).getValueExpressions())
+            .replaceVarargsArgument(extractedVarargsArguments)
             .build();
-      }
-
-      if (lastArgument instanceof NewArray) {
-        Expression initializer = ((NewArray) lastArgument).getInitializer();
-        if (initializer != null) {
-          return MethodCall.Builder.from(invocation)
-              .replaceVarargsArgument(((ArrayLiteral) initializer).getValueExpressions())
-              .build();
-        }
       }
 
       // Pass the array expression with a spread. Note that in Java such array expression can be
@@ -153,4 +144,40 @@ public class NormalizeJsVarargs extends NormalizationPass {
           .build();
     }
   }
+
+  @Nullable
+  private static List<Expression> extractVarargsArguments(Expression expression) {
+    // If the last argument is an array literal, or an array creation with array literal, or a
+    // zero length array literal, extract it.
+    if (expression instanceof NewArray) {
+      expression = extractExplicitInitializer((NewArray) expression);
+    }
+
+    if (expression instanceof ArrayLiteral) {
+      return ((ArrayLiteral) expression).getValueExpressions();
+    }
+
+    return null;
+  }
+
+  /** Extracts an explicit initializer from a NewArray expression. */
+  @Nullable
+  private static Expression extractExplicitInitializer(NewArray newArray) {
+    Expression initializer = newArray.getInitializer();
+    if (initializer != null) {
+      return initializer;
+    }
+
+    if (newArray.getDimensionExpressions().get(0) instanceof NumberLiteral) {
+      NumberLiteral numberLiteral = (NumberLiteral) newArray.getDimensionExpressions().get(0);
+      if (numberLiteral.getValue().intValue() == 0) {
+        // This is newArray of zero length, even if it didn't have an initializer we can provide
+        // and empty array literal of the right type.
+        return new ArrayLiteral(newArray.getTypeDescriptor());
+      }
+    }
+
+    return null;
+  }
 }
+
