@@ -256,14 +256,16 @@ def _impl_j2wasm_application(ctx):
     )
 
     # Build a JS provider exposing the JS imports mapping.
-    js_info = j2cl_js_provider(
+    js_export_and_info = j2cl_js_provider(
         ctx,
         srcs = [js_module],
         deps = [d[J2wasmInfo]._private_.js_info for d in deps],
     )
-
+    js_export = js_export_and_info[0]
+    js_info = js_export_and_info[1]
     return create_wasm_js_lib_struct(
         js_info = js_info,
+        js_export = js_export,
         extra_providers =
             [
                 DefaultInfo(

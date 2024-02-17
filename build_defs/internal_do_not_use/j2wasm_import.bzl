@@ -12,6 +12,7 @@ load(":provider.bzl", "J2wasmInfo")
 
 def _j2wasm_import_impl(ctx):
     java_info = ctx.attr.jar[JavaInfo]
+    js_export_and_info = j2cl_js_provider(ctx)
     return [J2wasmInfo(
         _private_ = struct(
             transitive_srcs = depset(),
@@ -20,7 +21,8 @@ def _j2wasm_import_impl(ctx):
                 transitive_modules = depset(),
             ),
             java_info = java_info,
-            js_info = j2cl_js_provider(ctx),
+            js_info = js_export_and_info[1],
+            js_export = js_export_and_info[0],
         ),
         _is_j2cl_provider = 1,
     )]

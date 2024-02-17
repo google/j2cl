@@ -19,11 +19,10 @@ load(
 load(":provider.bzl", "J2clInfo")
 
 def create_js_lib_struct(j2cl_info, extra_providers = []):
-    print("the extra providers are" + str(extra_providers))
-    return [j2cl_info, j2cl_info._private_.js_info] + extra_providers
+    return [j2cl_info, j2cl_info._private_.js_info, j2cl_info._private_.js_export] + extra_providers
 
-def create_wasm_js_lib_struct(js_info, extra_providers = []):
-    return extra_providers + [js_info]
+def create_wasm_js_lib_struct(js_info, js_export, extra_providers = []):
+    return extra_providers + [js_info] + [js_export]
 
 def j2cl_js_provider(ctx, srcs = [], deps = [], exports = [], artifact_suffix = ""):
     """ Creates a js provider from provided sources, deps and exports. """
@@ -36,9 +35,6 @@ def j2cl_js_provider(ctx, srcs = [], deps = [], exports = [], artifact_suffix = 
     ]
     suppresses = default_j2cl_suppresses + getattr(ctx.attr, "js_suppress", [])
 
-    for dep in deps:
-        print("tffffffffff* " + str(type(dep)) + ", "+ str(dep[ClosureJsLibraryInfo]) + ",,,,"+str(dep[J2clInfo] if J2clInfo in dep else dep)+"the srcs are" + str(srcs))
-
     js = create_closure_js_library(
         ctx,
         srcs,
@@ -48,10 +44,8 @@ def j2cl_js_provider(ctx, srcs = [], deps = [], exports = [], artifact_suffix = 
         convention = "GOOGLE",
         artifact_suffix = artifact_suffix,
     )
-    print("the type of jsinfor in jscommon is" + str(type(js)))
-    print("the inf jsinfor in jscommon is" + str(js))
-    print("the js[1] in jscommon is" + str(js[1]))
-    return js[1]
+
+    return js
 
 def js_devserver(
         name,

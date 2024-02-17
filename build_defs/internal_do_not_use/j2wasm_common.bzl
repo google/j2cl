@@ -56,6 +56,7 @@ def _create_j2wasm_provider(j2cl_provider, deps):
             ),
             java_info = j2cl_provider._private_.java_info,
             js_info = j2cl_provider._private_.js_info,
+            js_export = j2cl_provider._private_.js_export,
             wasm_modular_info = struct(
                 transitive_modules = depset(
                     modular_output,
