@@ -16,12 +16,12 @@
 package sourcemap;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Comparator;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import jsinterop.annotations.JsConstructor;
 
-class SourceMap<T extends Number> extends ArrayList<T> implements List<T> {
+abstract class SourceMap<T extends Number> implements Comparator<T> {
 
   private int uninitializedInstanceField;
 
@@ -77,11 +77,12 @@ class SourceMap<T extends Number> extends ArrayList<T> implements List<T> {
       value += 2;
     }
 
-    while (b > 0 && b < 100) {
-      b -= 10;
+    int b2 = b;
+    while (b2 > 0 && b2 < 100) {
+      b2 -= 10;
     }
 
-    value += a + b;
+    value += a + b2;
 
     outerLoop: // Label for the outer loop
     for (int i = 0; i <= 2; i++) {

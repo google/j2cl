@@ -15,14 +15,8 @@
 [SourceMap] => [this.$ctor__sourcemap_SourceMap__int__void(i);] "sourcemap.SourceMap.<init>"
 [SourceMap] => [$ctor__sourcemap_SourceMap__int__void]
 [i] => [i] "i"
-[{}] => [this.$ctor__java_util_ArrayList__void();] "sourcemap.SourceMap.<init>"
+[{}] => [this.$ctor__java_lang_Object__void();] "sourcemap.SourceMap.<init>"
 [{}] => [this.$init__void_$p_sourcemap_SourceMap();] "sourcemap.SourceMap.<init>"
-[SourceMap] => [$create__int__java_lang_String]
-[uninitializedInstanceField] => [uninitializedInstanceField] "uninitializedInstanceField"
-[uninitializedInstanceField2] => [uninitializedInstanceField2] "uninitializedInstanceField2"
-[SourceMap] => [let $instance = new SourceMap(2);] "sourcemap.SourceMap.<synthetic: ctor_create>"
-[SourceMap] => [$instance.$ctor__sourcemap_SourceMap__int__java_lang_String__void(uninitializedInstanceField, uninitializedInstanceField2);] "sourcemap.SourceMap.<synthetic: ctor_create>"
-[SourceMap] => [return $instance;] "sourcemap.SourceMap.<synthetic: ctor_create>"
 [SourceMap] => [$ctor__sourcemap_SourceMap__int__java_lang_String__void]
 [uninitializedInstanceField] => [uninitializedInstanceField] "uninitializedInstanceField"
 [uninitializedInstanceField2] => [uninitializedInstanceField2] "uninitializedInstanceField2"
@@ -49,13 +43,15 @@
   }] "sourcemap.SourceMap.testStatements"
 [value += 1;] => [value = value + 1 | 0;] "sourcemap.SourceMap.testStatements"
 [value += 2;] => [value = value + 2 | 0;] "sourcemap.SourceMap.testStatements"
-[while (b > 0 && b < 100) {
-      b -= 10;
-    }] => [while (b > 0 && b < 100) {
-   b = b - 10 | 0;
+[int b2 = b;] => [let b2 = b;] "sourcemap.SourceMap.testStatements"
+[b2] => [b2] "b2"
+[while (b2 > 0 && b2 < 100) {
+      b2 -= 10;
+    }] => [while (b2 > 0 && b2 < 100) {
+   b2 = b2 - 10 | 0;
   }] "sourcemap.SourceMap.testStatements"
-[b -= 10;] => [b = b - 10 | 0;] "sourcemap.SourceMap.testStatements"
-[value += a + b;] => [value = value + (a + b) | 0;] "sourcemap.SourceMap.testStatements"
+[b2 -= 10;] => [b2 = b2 - 10 | 0;] "sourcemap.SourceMap.testStatements"
+[value += a + b2;] => [value = value + (a + b2) | 0;] "sourcemap.SourceMap.testStatements"
 [outerLoop: // Label for the outer loop
     for (int i = 0; i <= 2; i++) {
 ...      }
@@ -110,6 +106,20 @@
   }));] "sourcemap.SourceMap.testLambda"
 [f2] => [f2] "f2"
 [new ArrayList()::size] => [return Integer.m_valueOf__int__java_lang_Integer($$q.size());] "sourcemap.SourceMap.<lambda in testLambda>"
+[SourceMap] => [m_reversed__java_util_Comparator]
+[SourceMap] => [return /**@type {Comparator<T>}*/ (Comparator.m_reversed__$default__java_util_Comparator__java_util_Comparator(this));] "sourcemap.SourceMap.reversed"
+[SourceMap] => [m_thenComparing__java_util_Comparator__java_util_Comparator]
+[SourceMap] => [return /**@type {Comparator<T>}*/ (Comparator.m_thenComparing__$default__java_util_Comparator__java_util_Comparator__java_util_Comparator(this, arg0));] "sourcemap.SourceMap.thenComparing"
+[SourceMap] => [m_thenComparing__java_util_function_Function__java_util_Comparator]
+[SourceMap] => [return /**@type {Comparator<T>}*/ (Comparator.m_thenComparing__$default__java_util_Comparator__java_util_function_Function__java_util_Comparator(this, arg0));] "sourcemap.SourceMap.thenComparing"
+[SourceMap] => [m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator]
+[SourceMap] => [return /**@type {Comparator<T>}*/ (Comparator.m_thenComparing__$default__java_util_Comparator__java_util_function_Function__java_util_Comparator__java_util_Comparator(this, arg0, arg1));] "sourcemap.SourceMap.thenComparing"
+[SourceMap] => [m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator]
+[SourceMap] => [return /**@type {Comparator<T>}*/ (Comparator.m_thenComparingDouble__$default__java_util_Comparator__java_util_function_ToDoubleFunction__java_util_Comparator(this, arg0));] "sourcemap.SourceMap.thenComparingDouble"
+[SourceMap] => [m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator]
+[SourceMap] => [return /**@type {Comparator<T>}*/ (Comparator.m_thenComparingInt__$default__java_util_Comparator__java_util_function_ToIntFunction__java_util_Comparator(this, arg0));] "sourcemap.SourceMap.thenComparingInt"
+[SourceMap] => [m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator]
+[SourceMap] => [return /**@type {Comparator<T>}*/ (Comparator.m_thenComparingLong__$default__java_util_Comparator__java_util_function_ToLongFunction__java_util_Comparator(this, arg0));] "sourcemap.SourceMap.thenComparingLong"
 [SourceMap] => [$init__void_$p_sourcemap_SourceMap]
 [uninitializedInstanceField = 1000;] => [this.f_uninitializedInstanceField__sourcemap_SourceMap_ = 1000;] "sourcemap.SourceMap.<init>"
 [if (uninitializedInstanceField == 1000) {
@@ -133,8 +143,8 @@
 [SourceMap] => [$clinit]
 [SourceMap] => [SourceMap.$clinit = () =>{};] "sourcemap.SourceMap.<clinit>"
 [SourceMap] => [SourceMap.$loadModules();] "sourcemap.SourceMap.<clinit>"
-[SourceMap] => [ArrayList.$clinit();] "sourcemap.SourceMap.<clinit>"
-[SourceMap] => [List.$clinit();] "sourcemap.SourceMap.<clinit>"
+[SourceMap] => [j_l_Object.$clinit();] "sourcemap.SourceMap.<clinit>"
+[SourceMap] => [Comparator.$clinit();] "sourcemap.SourceMap.<clinit>"
 [uninitializedStaticField = 10.0;] => [SourceMap.$static_uninitializedStaticField__sourcemap_SourceMap = 10;] "sourcemap.SourceMap.<clinit>"
 [static String initializedStaticField = "Hello";] => [SourceMap.$static_initializedStaticField__sourcemap_SourceMap = 'Hello';] "sourcemap.SourceMap.<clinit>"
 [if (uninitializedStaticField == 10.0) {
