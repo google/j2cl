@@ -7,17 +7,16 @@ package(
 )
 
 kt_jvm_library(
-    name = "kotlin",
+    name = "lower",
     srcs = glob(["*.kt"]),
     deps = [
-        "//third_party:guava",
-        "//third_party:jdt-core",
+        "//java/com/google/common/collect",
+        # Temporary dependency for the differ in DebugUtils. Should be removed
+        # before the kotlin frontend is open-sourced.
+        "//java/com/google/wrappers/util/diff:rediff",
         "//third_party:kotlin_compiler",
-        "//transpiler/java/com/google/j2cl/common",
-        "//transpiler/java/com/google/j2cl/transpiler/ast",
         "//transpiler/java/com/google/j2cl/transpiler/frontend/common",
-        "//transpiler/java/com/google/j2cl/transpiler/frontend/jdt",
         "//transpiler/java/com/google/j2cl/transpiler/frontend/kotlin/ir",
-        "//transpiler/java/com/google/j2cl/transpiler/frontend/kotlin/lower",
+        "//third_party/kotlin/kotlin:kotlin_reflect",
     ],
 )
