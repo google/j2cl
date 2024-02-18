@@ -47,6 +47,11 @@ public class OptionalIntTest extends TestCase {
     assertTrue(present.isPresent());
   }
 
+  public void testIsEmpty() {
+    assertTrue(empty.isEmpty());
+    assertFalse(present.isEmpty());
+  }
+
   public void testGetAsInt() {
     // empty case
     try {

@@ -47,6 +47,11 @@ public class OptionalLongTest extends TestCase {
     assertTrue(present.isPresent());
   }
 
+  public void testIsEmpty() {
+    assertTrue(empty.isEmpty());
+    assertFalse(present.isEmpty());
+  }
+
   public void testGetAsLong() {
     // empty case
     try {

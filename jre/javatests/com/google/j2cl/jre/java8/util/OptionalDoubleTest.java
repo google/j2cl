@@ -48,6 +48,11 @@ public class OptionalDoubleTest extends TestCase {
     assertTrue(present.isPresent());
   }
 
+  public void testIsEmpty() {
+    assertTrue(empty.isEmpty());
+    assertFalse(present.isEmpty());
+  }
+
   public void testGetAsDouble() {
     // empty case
     try {
