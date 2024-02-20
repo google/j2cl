@@ -19,6 +19,7 @@ import com.google.j2cl.jre.testing.J2ktIncompatible;
 import com.google.j2cl.jre.testing.TestUtils;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.ConcurrentModificationException;
 import java.util.EnumSet;
 import java.util.Iterator;
@@ -160,6 +161,21 @@ public class EnumSetTest extends TestSet {
   public void testClone() {
     EnumSet<Numbers> nums = EnumSet.of(Numbers.One, Numbers.Zero);
     assertNotSame(nums, nums.clone());
+  }
+
+  public void testCopyOf_emptyCollection() {
+    try {
+      EnumSet<Numbers> enumSet = EnumSet.copyOf((List<Numbers>) Collections.EMPTY_LIST);
+      fail("Expected IllegalArgumentException");
+    } catch (IllegalArgumentException e) {
+      // Expected
+    }
+  }
+
+  public void testCopyOf_emptyEnumSet() {
+    EnumSet<Numbers> original = EnumSet.noneOf(Numbers.class);
+    EnumSet<Numbers> copy = EnumSet.copyOf(original);
+    assertTrue(copy.isEmpty());
   }
 
   // According to EnumSet Javadoc:

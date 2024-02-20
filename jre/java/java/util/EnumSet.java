@@ -73,7 +73,7 @@ public class EnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clonea
   }
 
   public static <E extends Enum<E>> EnumSet<E> copyOf(Collection<E> c) {
-    checkArgument(!c.isEmpty(), "Collection is empty");
+    checkArgument(c instanceof EnumSet || !c.isEmpty(), "Collection is empty");
     EnumSet<E> enumSet = new EnumSet();
     for (E e : c) {
       enumSet.add(e);
