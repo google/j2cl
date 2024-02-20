@@ -66,6 +66,14 @@ final class BazelJ2clBuilder extends BazelWorker {
   Path output;
 
   @Option(
+      name = "-targetLabel",
+      metaVar = "<target>",
+      usage =
+          "The Bazel target label that is being transpiled. Used for determining context-dependent"
+              + " behavior, like Kotlin friendship semantics.")
+  String targetLabel = null;
+
+  @Option(
       name = "-libraryinfooutput",
       metaVar = "<path>",
       usage = "Specifies the file into which to place the call graph.")
@@ -191,6 +199,7 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setNativeSources(allNativeSources)
         .setClasspaths(getPathEntries(this.classPath))
         .setOutput(output)
+        .setTargetLabel(targetLabel)
         .setLibraryInfoOutput(this.libraryInfoOutput)
         .setEmitReadableLibraryInfo(readableLibraryInfo)
         .setEmitReadableSourceMap(this.readableSourceMaps)

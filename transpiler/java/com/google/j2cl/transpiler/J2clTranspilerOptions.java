@@ -68,6 +68,8 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
 
     public abstract Builder setOutput(Output output);
 
+    public abstract Builder setTargetLabel(String targetLabel);
+
     public abstract Builder setLibraryInfoOutput(@Nullable Path path);
 
     public abstract Builder setEmitReadableLibraryInfo(boolean b);

@@ -22,6 +22,7 @@ import com.google.j2cl.common.SourceUtils.FileInfo
 import com.google.j2cl.transpiler.ast.CompilationUnit
 import com.google.j2cl.transpiler.frontend.jdt.JdtParser
 import com.google.j2cl.transpiler.frontend.jdt.PackageAnnotationsResolver
+import com.google.j2cl.transpiler.frontend.kotlin.BazelJarAutoFriends.addEligibleFriends
 import com.google.j2cl.transpiler.frontend.kotlin.lower.LoweringPasses
 import com.intellij.openapi.util.Disposer
 import java.io.File
@@ -54,7 +55,6 @@ import org.jetbrains.kotlin.codegen.CodegenFactory
 import org.jetbrains.kotlin.codegen.state.GenerationState
 import org.jetbrains.kotlin.config.CommonConfigurationKeys
 import org.jetbrains.kotlin.config.CompilerConfiguration
-import org.jetbrains.kotlin.config.JVMConfigurationKeys
 import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
 import org.jetbrains.kotlin.ir.util.IrMessageLogger
 import org.jetbrains.kotlin.load.kotlin.ModuleVisibilityManager
@@ -66,6 +66,7 @@ class KotlinParser(
   private val classpathEntries: List<String>,
   private val kotlincopts: List<String>,
   private val problems: Problems,
+  private val currentTarget: String?,
 ) {
 
   /** Returns a list of compilation units after Kotlinc parsing. */
@@ -85,16 +86,12 @@ class KotlinParser(
         // TODO(b/243860591): The disposable needs to be disposed once the transpilation is done.
         Disposer.newDisposable(),
         createCompilerConfiguration(sources),
-        EnvironmentConfigFiles.JVM_CONFIG_FILES
+        EnvironmentConfigFiles.JVM_CONFIG_FILES,
       )
 
-    // Register friend modules so that we do not trigger visibility errors. Ideally we wouldn't
-    // enforce these at all on the J2CL side, but the KotlinCoreEnvironment created above forces
-    // the enforcement for us.
-    val moduleVisibilityManager = ModuleVisibilityManager.SERVICE.getInstance(environment.project)
-    environment.configuration
-      .getList(JVMConfigurationKeys.FRIEND_PATHS)
-      .forEach(moduleVisibilityManager::addFriendPath)
+    // Register friend modules so that we do not trigger visibility errors.
+    ModuleVisibilityManager.SERVICE.getInstance(environment.project)
+      .addEligibleFriends(currentTarget, classpathEntries)
 
     // analyze() will return null if it failed analysis phase. Errors should have been collected
     // into Problems.
@@ -107,7 +104,7 @@ class KotlinParser(
           analysis.moduleDescriptor,
           analysis.bindingContext,
           environment.getSourceFiles(),
-          environment.configuration
+          environment.configuration,
         )
         .isIrBackend(true)
         .build()
@@ -130,7 +127,7 @@ class KotlinParser(
                 KotlinEnvironment(
                   pluginContext,
                   packageAnnotationsResolver,
-                  lowerings.jvmBackendContext
+                  lowerings.jvmBackendContext,
                 ),
                 IntrinsicMethods(pluginContext.irBuiltIns),
               )
@@ -141,21 +138,19 @@ class KotlinParser(
 
     JvmIrCodegenFactory(
         compilerConfiguration,
-        compilerConfiguration.get(CLIConfigurationKeys.PHASE_CONFIG)
+        compilerConfiguration.get(CLIConfigurationKeys.PHASE_CONFIG),
       )
       .convertToIr(
         CodegenFactory.IrConversionInput.fromGenerationStateAndFiles(
           state,
-          environment.getSourceFiles()
+          environment.getSourceFiles(),
         )
       )
 
     return compilationUnitBuilderExtension.compilationUnits
   }
 
-  private fun createCompilerConfiguration(
-    sources: List<FileInfo>,
-  ): CompilerConfiguration {
+  private fun createCompilerConfiguration(sources: List<FileInfo>): CompilerConfiguration {
     val arguments = createCompilerArguments(sources)
     val configuration = CompilerConfiguration()
 
@@ -169,7 +164,7 @@ class KotlinParser(
     // for others libraries we use the koltinc default name `main`
     configuration.put(
       CommonConfigurationKeys.MODULE_NAME,
-      arguments.moduleName ?: JvmProtoBufUtil.DEFAULT_MODULE_NAME
+      arguments.moduleName ?: JvmProtoBufUtil.DEFAULT_MODULE_NAME,
     )
 
     configuration.setupCommonArguments(arguments) { versionArray ->

@@ -17,10 +17,14 @@ package com.google.j2cl.transpiler.frontend;
 
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.SourceUtils.FileInfo;
+import javax.annotation.Nullable;
 
 /** Configuration for frontend. */
 public interface FrontendOptions {
   ImmutableList<FileInfo> getSources();
+
+  @Nullable
+  String getTargetLabel();
 
   ImmutableList<String> getClasspaths();
 

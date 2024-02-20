@@ -12,6 +12,7 @@ kt_jvm_library(
     deps = [
         "//third_party:guava",
         "//third_party:jdt-core",
+        "//third_party:kotlin_autofriends",
         "//third_party:kotlin_compiler",
         "//transpiler/java/com/google/j2cl/common",
         "//transpiler/java/com/google/j2cl/transpiler/ast",

@@ -292,6 +292,10 @@ def _j2cl_transpile(
     args.use_param_file("@%s", use_always = True)
     args.set_param_file_format("multiline")
     args.add_joined("-classpath", classpath, join_with = ctx.configuration.host_path_separator)
+
+    # Explicitly format this as Bazel target labels can start with a @, which
+    # can be misinterpreted as a flag file to load.
+    args.add(ctx.label, format = "-targetLabel=%s")
     args.add("-output", output_dir.path)
     args.add("-libraryinfooutput", library_info_output)
     args.add("-experimentalJavaFrontend", ctx.attr._java_frontend[BuildSettingInfo].value)

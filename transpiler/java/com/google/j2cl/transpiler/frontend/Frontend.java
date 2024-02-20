@@ -75,7 +75,11 @@ public enum Frontend {
         Constructor<?> parserCtor =
             Iterables.getOnlyElement(Arrays.asList(kotlinParser.getDeclaredConstructors()));
         Object parserInstance =
-            parserCtor.newInstance(options.getClasspaths(), options.getKotlincOptions(), problems);
+            parserCtor.newInstance(
+                options.getClasspaths(),
+                options.getKotlincOptions(),
+                problems,
+                options.getTargetLabel());
         @SuppressWarnings("unchecked")
         List<CompilationUnit> compilationUnits =
             (List<CompilationUnit>)
