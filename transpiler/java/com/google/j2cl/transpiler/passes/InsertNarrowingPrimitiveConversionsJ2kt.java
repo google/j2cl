@@ -15,19 +15,20 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveChar;
-
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewriter;
 
 /**
  * Inserts required narrowing primitive conversions for Kotlin.
  *
  * <p>In Kotlin, the conversion between char and integral types must be explicit. This pass will
- * insert explicit casts between char and integral primitive types.
+ * insert explicit casts between char and integral primitive types, as well as other mandatory
+ * narrowing casts.
  */
 public class InsertNarrowingPrimitiveConversionsJ2kt extends NormalizationPass {
 
@@ -42,6 +43,8 @@ public class InsertNarrowingPrimitiveConversionsJ2kt extends NormalizationPass {
                   TypeDescriptor actualTypeDescriptor,
                   Expression expression) {
                 TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
+                TypeDescriptor toTypeDescriptor = actualTypeDescriptor;
+
                 if (!fromTypeDescriptor.isPrimitive()) {
                   return expression;
                 }
@@ -50,16 +53,30 @@ public class InsertNarrowingPrimitiveConversionsJ2kt extends NormalizationPass {
                   return expression;
                 }
 
-                TypeDescriptor toTypeDescriptor = actualTypeDescriptor;
-                if (isPrimitiveChar(fromTypeDescriptor) == isPrimitiveChar(toTypeDescriptor)) {
-                  return expression;
-                }
-
-                return CastExpression.newBuilder()
-                    .setExpression(expression)
-                    .setCastTypeDescriptor(toTypeDescriptor)
-                    .build();
+                return shouldNarrow(fromTypeDescriptor, toTypeDescriptor)
+                    ? CastExpression.newBuilder()
+                        .setExpression(expression)
+                        .setCastTypeDescriptor(toTypeDescriptor)
+                        .build()
+                    : expression;
               }
             }));
+  }
+
+  private static boolean shouldNarrow(
+      TypeDescriptor fromTypeDescriptor, TypeDescriptor toTypeDescriptor) {
+
+    if (!TypeDescriptors.isNumericPrimitive(toTypeDescriptor)) {
+      // Non-primitive casts are not narrowing.
+      return false;
+    }
+
+    if (TypeDescriptors.isPrimitiveChar(fromTypeDescriptor)
+        || TypeDescriptors.isPrimitiveChar(toTypeDescriptor)) {
+      return true;
+    }
+
+    return ((PrimitiveTypeDescriptor) fromTypeDescriptor)
+        .isWiderThan((PrimitiveTypeDescriptor) toTypeDescriptor);
   }
 }
