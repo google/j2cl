@@ -1092,8 +1092,16 @@ public abstract class MethodDescriptor extends MemberDescriptor {
                     typeDescriptor.specializeTypeVariables(replacingTypeDescriptorByTypeVariable))
             .collect(toImmutableList());
 
+    ImmutableList<TypeDescriptor> specializedTypeArgumentDescriptors =
+        getTypeArgumentTypeDescriptors().stream()
+            .map(
+                typeDescriptor ->
+                    typeDescriptor.specializeTypeVariables(replacingTypeDescriptorByTypeVariable))
+            .collect(toImmutableList());
+
     return MethodDescriptor.Builder.from(this)
         .setDeclarationDescriptor(getDeclarationDescriptor())
+        .setTypeArgumentTypeDescriptors(specializedTypeArgumentDescriptors)
         .setReturnTypeDescriptor(specializedReturnTypeDescriptor)
         .updateParameterTypeDescriptors(specializedParameterTypeDescriptors)
         .setEnclosingTypeDescriptor(
