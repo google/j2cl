@@ -212,11 +212,26 @@ class Arrays {
    * @public
    */
   static $init(array, leafType, opt_dimensionCount) {
+    return Arrays.$initInternal_(
+        array,
+        /** @type {!Constructor} */ (leafType), leafType.$isInstance,
+        opt_dimensionCount);
+  }
+
+  /**
+   * @param {!Array<*>} array
+   * @param {!Constructor} leafType
+   * @param {!Function} leafTypeIsInstance
+   * @param {number=} opt_dimensionCount
+   * @return {!Array<*>}
+   * @private
+   */
+  static $initInternal_(
+      array, leafType, leafTypeIsInstance, opt_dimensionCount) {
     return Arrays.$stampTypeInternal_(
         array,
         Arrays.$createMetadata_(
-            /** @type {!Constructor} */ (leafType), leafType.$isInstance,
-            opt_dimensionCount || 1));
+            leafType, leafTypeIsInstance, opt_dimensionCount || 1));
   }
 
   /**
