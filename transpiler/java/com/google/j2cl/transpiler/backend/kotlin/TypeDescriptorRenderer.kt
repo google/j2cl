@@ -22,11 +22,14 @@ import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeVariable
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.CAPTURE_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.INTERSECTION_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.IN_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.NULLABLE_OPERATOR
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.OF_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.OUT_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.STAR_OPERATOR
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.blockComment
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.ampersandSeparated
@@ -139,19 +142,24 @@ internal data class TypeDescriptorRenderer(
     } else {
       withSeen(typeVariable).run {
         if (typeVariable.isWildcardOrCapture) {
-          typeVariable.lowerBoundTypeDescriptor.let { lowerBound ->
-            if (lowerBound != null) {
-              spaceSeparated(IN_KEYWORD, child.source(lowerBound))
-            } else {
-              typeVariable.upperBoundTypeDescriptor.let { upperBound ->
-                if (upperBound.isImplicitUpperBound) {
-                  source("*")
-                } else {
-                  spaceSeparated(OUT_KEYWORD, child.source(upperBound))
+          spaceSeparated(
+            Source.emptyUnless(typeVariable.isCapture) {
+              blockComment(spaceSeparated(CAPTURE_KEYWORD, OF_KEYWORD))
+            },
+            typeVariable.lowerBoundTypeDescriptor.let { lowerBound ->
+              if (lowerBound != null) {
+                spaceSeparated(IN_KEYWORD, child.source(lowerBound))
+              } else {
+                typeVariable.upperBoundTypeDescriptor.let { upperBound ->
+                  if (upperBound.isImplicitUpperBound) {
+                    source("*")
+                  } else {
+                    spaceSeparated(OUT_KEYWORD, child.source(upperBound))
+                  }
                 }
               }
-            }
-          }
+            },
+          )
         } else {
           join(
               nameRenderer.nameSource(typeVariable.toNullable()),

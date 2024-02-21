@@ -61,6 +61,7 @@ internal object KotlinSource {
   val ABSTRACT_KEYWORD = source("abstract")
   val AS_KEYWORD = source("as")
   val BREAK_KEYWORD = source("break")
+  val CAPTURE_KEYWORD = source("capture")
   val CATCH_KEYWORD = source("catch")
   val CLASS_KEYWORD = source("class")
   val COMPANION_KEYWORD = source("companion")
@@ -90,6 +91,7 @@ internal object KotlinSource {
   val NATIVE_KEYWORD = source("native")
   val NULL_KEYWORD = source("null")
   val OBJECT_KEYWORD = source("object")
+  val OF_KEYWORD = source("of")
   val OPEN_KEYWORD = source("open")
   val OUT_KEYWORD = source("out")
   val OVERRIDE_KEYWORD = source("override")
@@ -184,6 +186,8 @@ internal object KotlinSource {
 
   fun fileAnnotation(name: Source, parameters: List<Source>): Source =
     annotation(join(FILE_KEYWORD, COLON, name), parameters)
+
+  fun blockComment(source: Source): Source = spaceSeparated(source("/*"), source, source("*/"))
 }
 
 internal val Visibility.source: Source
