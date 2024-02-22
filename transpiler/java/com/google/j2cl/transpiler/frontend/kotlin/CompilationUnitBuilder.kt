@@ -915,7 +915,7 @@ class CompilationUnitBuilder(
       // Do not insert a checkNotNull call on primitives.
       argumentExpression
     } else {
-      RuntimeMethods.createCheckNotNullCall(argumentExpression, true)
+      argumentExpression.postfixNotNullAssertion()
     }
   }
 

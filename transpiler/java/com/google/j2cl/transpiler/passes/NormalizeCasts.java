@@ -34,6 +34,8 @@ import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
+import com.google.j2cl.transpiler.ast.PostfixExpression;
+import com.google.j2cl.transpiler.ast.PostfixOperator;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
@@ -126,21 +128,9 @@ public class NormalizeCasts extends NormalizationPass {
     if (expression instanceof JsDocCastExpression) {
       return skipPassThroughExpressions(((JsDocCastExpression) expression).getExpression());
     }
-    if (expression instanceof MethodCall) {
-      var methodCall = (MethodCall) expression;
-
-      // Look through InternalPreconditions.<T>checkNotNull(T obj) calls as it's a direct
-      // pass through of the provided parameter. Therefore we should see if the parameter is already
-      // of the type that the result is being cast to.
-      // TODO(b/324068627): we should bring Kotlin !! into the J2CL AST as a postfix not-null
-      //   operation. We can that look through those operations rather than special casing a
-      //   particular method call.
-      if (TypeDescriptors.get()
-          .javaemulInternalPreconditions
-          .getMethodDescriptor("checkNotNull", TypeDescriptors.get().javaLangObject)
-          .isSameMember(methodCall.getTarget().getDeclarationDescriptor())) {
-        return skipPassThroughExpressions(Iterables.getLast(methodCall.getArguments()));
-      }
+    if (expression instanceof PostfixExpression
+        && ((PostfixExpression) expression).getOperator() == PostfixOperator.NOT_NULL_ASSERTION) {
+      return skipPassThroughExpressions(((PostfixExpression) expression).getOperand());
     }
     return expression;
   }

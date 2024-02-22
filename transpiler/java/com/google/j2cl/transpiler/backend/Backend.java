@@ -50,6 +50,7 @@ import com.google.j2cl.transpiler.passes.ImplementInstanceOfs;
 import com.google.j2cl.transpiler.passes.ImplementJsFunctionCopyMethod;
 import com.google.j2cl.transpiler.passes.ImplementLambdaExpressionsViaImplementorClasses;
 import com.google.j2cl.transpiler.passes.ImplementLambdaExpressionsViaJsFunctionAdaptor;
+import com.google.j2cl.transpiler.passes.ImplementNotNullOperator;
 import com.google.j2cl.transpiler.passes.ImplementStaticInitializationViaClinitFunctionRedirection;
 import com.google.j2cl.transpiler.passes.ImplementStaticInitializationViaConditionChecks;
 import com.google.j2cl.transpiler.passes.ImplementStringCompileTimeConstants;
@@ -331,6 +332,7 @@ public enum Backend {
           RemoveUnneededJsDocCasts::new,
           NormalizeJsDocCastExpressions::new,
           NormalizeJsAwaitMethodInvocations::new,
+          ImplementNotNullOperator::new,
           RemoveUnreachableCode::new,
           RemoveNoopStatements::new,
 
