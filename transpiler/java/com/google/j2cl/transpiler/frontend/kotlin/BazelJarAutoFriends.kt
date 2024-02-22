@@ -31,7 +31,7 @@ internal object BazelJarAutoFriends {
     classPath: List<String>,
   ) {
     if (currentTarget == null) return
-    val currentLabel = BzlLabel.parse(currentTarget)
+    val currentLabel = BzlLabel.parseOrThrow(currentTarget)
     loadLabels(classPath.map(Path::of)).forEach { (depPath, depLabel) ->
       if (depLabel != null && AutoFriends.isEligibleFriend(currentLabel, depLabel)) {
         addFriendPath(depPath.toString())
