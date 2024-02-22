@@ -61,6 +61,7 @@ import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.PostfixExpression;
+import com.google.j2cl.transpiler.ast.PostfixOperator;
 import com.google.j2cl.transpiler.ast.PrefixExpression;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Statement;
@@ -604,6 +605,10 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     // unary numeric promotion context
     if (AstUtils.matchesUnaryNumericPromotionContext(postfixExpression)) {
       operand = contextRewriter.rewriteUnaryNumericPromotionContext(postfixExpression.getOperand());
+    } else if (postfixExpression.getOperator() == PostfixOperator.NOT_NULL_ASSERTION) {
+      operand =
+          contextRewriter.rewriteTypeConversionContext(
+              operand.getTypeDescriptor(), operand.getDeclaredTypeDescriptor(), operand);
     }
     if (operand == postfixExpression.getOperand()) {
       return postfixExpression;

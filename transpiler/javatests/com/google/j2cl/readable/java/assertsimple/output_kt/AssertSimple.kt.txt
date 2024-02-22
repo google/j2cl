@@ -49,13 +49,13 @@ open class AssertSimple {
    assert(1 + 2 == 3) {
     run {
      val tmp: Array<String?>? = args
-     if (tmp == null) "null" else tmp!!
+     if (tmp == null) "null" else tmp as Any
     }
    }
    assert(1 + 2 == 3) {
     run {
      val tmp_1: String? = args!![0]
-     if (tmp_1 == null) "null" else tmp_1!!
+     if (tmp_1 == null) "null" else tmp_1 as Any
     }
    }
    assert(1 + 2 == 3) {

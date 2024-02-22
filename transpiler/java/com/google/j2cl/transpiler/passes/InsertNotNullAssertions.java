@@ -56,6 +56,35 @@ import java.util.function.Function;
 public final class InsertNotNullAssertions extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
+    // Insert non-null assertions when converting from nullable to non-null type.
+    // We run this first before adding any other not null assertions since the surrounding context
+    // is obscured from this rewriter. If we ran this later we may emit double not-null assertions
+    // we would be unaware that we're already surrounded by one.
+    compilationUnit.accept(
+        new ConversionContextVisitor(
+            new ContextRewriter() {
+              @Override
+              public Expression rewriteTypeConversionContext(
+                  TypeDescriptor inferredTypeDescriptor,
+                  TypeDescriptor actualTypeDescriptor,
+                  Expression expression) {
+                return expression.canBeNull()
+                        && !TypeDescriptors.isJavaLangVoid(inferredTypeDescriptor)
+                        && (!inferredTypeDescriptor.canBeNull()
+                            || !actualTypeDescriptor.canBeNull())
+                    ? verifyAndInsertNotNullAssertion(expression)
+                    : expression;
+              }
+
+              private Expression verifyAndInsertNotNullAssertion(Expression expression) {
+                if (expression instanceof NullLiteral) {
+                  getProblems().warning(getSourcePosition(), "Non-null assertion applied to null.");
+                }
+
+                return insertNotNullAssertion(expression);
+              }
+            }));
+
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
@@ -134,32 +163,6 @@ public final class InsertNotNullAssertions extends NormalizationPass {
                 .build();
           }
         });
-
-    // Insert non-null assertions when converting from nullable to non-null type.
-    compilationUnit.accept(
-        new ConversionContextVisitor(
-            new ContextRewriter() {
-              @Override
-              public Expression rewriteTypeConversionContext(
-                  TypeDescriptor inferredTypeDescriptor,
-                  TypeDescriptor actualTypeDescriptor,
-                  Expression expression) {
-                return expression.canBeNull()
-                        && !TypeDescriptors.isJavaLangVoid(inferredTypeDescriptor)
-                        && (!inferredTypeDescriptor.canBeNull()
-                            || !actualTypeDescriptor.canBeNull())
-                    ? verifyAndInsertNotNullAssertion(expression)
-                    : expression;
-              }
-
-              private Expression verifyAndInsertNotNullAssertion(Expression expression) {
-                if (expression instanceof NullLiteral) {
-                  getProblems().warning(getSourcePosition(), "Non-null assertion applied to null.");
-                }
-
-                return insertNotNullAssertion(expression);
-              }
-            }));
   }
 
   private static boolean doesNotNeedNullCheck(Expression expression) {
@@ -172,6 +175,8 @@ public final class InsertNotNullAssertions extends NormalizationPass {
         || expression instanceof FunctionExpression
         || expression instanceof NewArray
         || (expression instanceof Literal && !(expression instanceof NullLiteral))
+        || (expression instanceof PostfixExpression
+            && ((PostfixExpression) expression).getOperator() == PostfixOperator.NOT_NULL_ASSERTION)
         || (expression instanceof FieldAccess
             && ((FieldAccess) expression).getTarget().isEnumConstant());
   }
@@ -189,10 +194,7 @@ public final class InsertNotNullAssertions extends NormalizationPass {
   }
 
   private static Expression insertNotNullAssertion(Expression expression) {
-    return PostfixExpression.newBuilder()
-        .setOperand(expression)
-        .setOperator(PostfixOperator.NOT_NULL_ASSERTION)
-        .build();
+    return expression.postfixNotNullAssertion();
   }
 
   private static Expression insertElvisIfNeeded(
