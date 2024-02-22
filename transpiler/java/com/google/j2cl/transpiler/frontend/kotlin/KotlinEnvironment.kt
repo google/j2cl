@@ -96,6 +96,7 @@ import org.jetbrains.kotlin.ir.types.defaultType
 import org.jetbrains.kotlin.ir.types.getArrayElementType
 import org.jetbrains.kotlin.ir.types.getClass
 import org.jetbrains.kotlin.ir.types.impl.IrSimpleTypeImpl
+import org.jetbrains.kotlin.ir.types.impl.makeTypeProjection
 import org.jetbrains.kotlin.ir.types.isAny
 import org.jetbrains.kotlin.ir.types.isMarkedNullable
 import org.jetbrains.kotlin.ir.types.isNullable
@@ -111,6 +112,7 @@ import org.jetbrains.kotlin.ir.util.isFacadeClass
 import org.jetbrains.kotlin.ir.util.isFakeOverride
 import org.jetbrains.kotlin.ir.util.isFromJava
 import org.jetbrains.kotlin.ir.util.isInterface
+import org.jetbrains.kotlin.ir.util.isKFunction
 import org.jetbrains.kotlin.ir.util.isLocal
 import org.jetbrains.kotlin.ir.util.isStatic
 import org.jetbrains.kotlin.ir.util.isTopLevel
@@ -414,7 +416,7 @@ class KotlinEnvironment(
     originalType: IrSimpleType,
     useDeclarationVariance: Boolean,
   ): DeclaredTypeDescriptor {
-    val irType = originalType.resolveBuiltinClass()
+    val irType = originalType.resolveBuiltinClass(useDeclarationVariance)
     val classDeclaration = checkNotNull(irType.getClass()) { "No valid type" }
     val nullableDefaultType = classDeclaration.defaultType.makeNullable()
 
@@ -742,14 +744,76 @@ class KotlinEnvironment(
       getTypeVariable(it.key.owner) to getReferenceTypeDescriptorForTypeArgument(it.value)
     }
 
-  private fun IrSimpleType.resolveBuiltinClass(): IrSimpleType {
+  private fun IrSimpleType.resolveBuiltinClass(
+    useDeclarationVariance: Boolean = true
+  ): IrSimpleType {
     val classSymbol = classOrNull ?: return this
     @OptIn(FirIncompatiblePluginAPI::class)
     val builtinClass = builtinsResolver.resolveClass(classSymbol) ?: return this
+
+    val originalTypeParams = classSymbol.owner.typeParameters
+    val replacementTypeParams = builtinClass.owner.typeParameters
+
+    check(
+      (originalTypeParams.size == replacementTypeParams.size &&
+        arguments.size == replacementTypeParams.size) || this.isKFunction()
+    ) {
+      """
+      |Mismatch in number of parameters for original type ${classSymbol.owner.kotlinFqName} mapped
+      |to type ${builtinClass.owner.kotlinFqName}.
+      |Original number of parameters: ${originalTypeParams.size}
+      |Replacement number of parameters: ${replacementTypeParams.size}
+      |Number of arguments: ${arguments.size}
+      """
+        .trimMargin()
+    }
+
+    // Rewrite the type arguments to account for mismatches in declaration variance, only if we
+    // would've respected the declaration variance.
+    val replacementArguments =
+      when {
+        !useDeclarationVariance -> arguments
+        // KFunction is a special case where there's a mismatch in the number of original type
+        // params,
+        // replacement type params, and number of arguments. We're not going to attempt to rewrite
+        // these.
+        isKFunction() -> arguments
+        else ->
+          remapDeclarationTypeVarianceOntoArguments(
+            arguments,
+            originalTypeParams,
+            replacementTypeParams,
+          )
+      }
+
     // Return a new copy of the type with the builtin class symbol in place of the original symbol.
-    return IrSimpleTypeImpl(builtinClass, nullability, arguments, annotations, abbreviation)
+    return IrSimpleTypeImpl(
+      builtinClass,
+      nullability,
+      replacementArguments,
+      annotations,
+      abbreviation,
+    )
   }
 }
+
+private fun remapDeclarationTypeVarianceOntoArguments(
+  arguments: List<IrTypeArgument>,
+  originalTypeParams: List<IrTypeParameter>,
+  replacementTypeParams: List<IrTypeParameter>,
+) =
+  arguments.mapIndexed { index, argument ->
+    if (
+      argument is IrTypeProjection &&
+        originalTypeParams[index].variance != Variance.INVARIANT &&
+        replacementTypeParams[index].variance == Variance.INVARIANT &&
+        argument.variance == Variance.INVARIANT
+    ) {
+      makeTypeProjection(argument.type, originalTypeParams[index].variance)
+    } else {
+      argument
+    }
+  }
 
 private fun DeclaredTypeDescriptor.withNullability(isNullable: Boolean): DeclaredTypeDescriptor {
   return if (isNullable) toNullable() else toNonNullable()
