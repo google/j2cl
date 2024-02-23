@@ -167,7 +167,10 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     protected Expression rewriteSwitchExpressionContext(Expression expression) {
       TypeDescriptor typeDescriptor = expression.getTypeDescriptor();
       if (!TypeDescriptors.isBoxedOrPrimitiveType(typeDescriptor)) {
-        return expression;
+        return rewriteTypeConversionContext(
+            typeDescriptor.toNonNullable(),
+            expression.getDeclaredTypeDescriptor().toNonNullable(),
+            expression);
       }
       return (TypeDescriptors.isJavaLangBoolean(typeDescriptor.toRawTypeDescriptor())
               || TypeDescriptors.isPrimitiveBoolean(typeDescriptor))

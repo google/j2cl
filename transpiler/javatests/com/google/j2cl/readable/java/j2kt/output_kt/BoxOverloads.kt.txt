@@ -179,8 +179,8 @@ open class BoxOverloads {
   fun testComparableOverload(
    @ObjCName("withJ2ktBoxOverloads_Generic") generic: BoxOverloads.Generic<Double>
   ) {
-   generic!!.comparableOverload(1.25)
-   generic!!.comparableOverload(Double.valueOf(1.25) as Comparable<Double>)
+   generic.comparableOverload(1.25)
+   generic.comparableOverload(Double.valueOf(1.25) as Comparable<Double>)
   }
  }
 

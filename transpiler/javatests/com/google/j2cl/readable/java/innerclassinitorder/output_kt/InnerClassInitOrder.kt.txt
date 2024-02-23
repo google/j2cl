@@ -75,9 +75,9 @@ open class InnerClassInitOrder {
   assert(2 == InnerClassInitOrder.P1<Any?>(2).value_pp_innerclassinitorder)
   val p2: InnerClassInitOrder.P1<*>.P2<*>? = (p1 as InnerClassInitOrder.P1<Any?>?)!!.P2<Any?>() as InnerClassInitOrder.P1<*>.P2<*>?
   assert(1 == (p2 as InnerClassInitOrder.P1<*>.P2<Any?>?)!!.value_pp_innerclassinitorder)
-  assert(2 == ((p1 as InnerClassInitOrder.P1<Any?>?)!!.P2<Any?>(2) as InnerClassInitOrder.P1<*>.P2<Any?>)!!.value_pp_innerclassinitorder)
-  assert(1 == ((p2 as InnerClassInitOrder.P1<*>.P2<Any?>?)!!.P3<Any?>() as InnerClassInitOrder.P1<*>.P2<*>.P3<Any?>)!!.value_pp_innerclassinitorder)
-  assert(2 == ((p2 as InnerClassInitOrder.P1<*>.P2<Any?>?)!!.P3<Any?>(2) as InnerClassInitOrder.P1<*>.P2<*>.P3<Any?>)!!.value_pp_innerclassinitorder)
+  assert(2 == ((p1 as InnerClassInitOrder.P1<Any?>?)!!.P2<Any?>(2) as InnerClassInitOrder.P1<*>.P2<Any?>).value_pp_innerclassinitorder)
+  assert(1 == ((p2 as InnerClassInitOrder.P1<*>.P2<Any?>?)!!.P3<Any?>() as InnerClassInitOrder.P1<*>.P2<*>.P3<Any?>).value_pp_innerclassinitorder)
+  assert(2 == ((p2 as InnerClassInitOrder.P1<*>.P2<Any?>?)!!.P3<Any?>(2) as InnerClassInitOrder.P1<*>.P2<*>.P3<Any?>).value_pp_innerclassinitorder)
  }
 
  @ObjCName("testInnerClassInitialization")

@@ -31,7 +31,7 @@ interface InterfaceWithDefault {
  fun foo(
   @ObjCName("withNSString") value: String?
  ) {
-  System.out!!.println("in InterfaceWithDefault")
+  System.out.println("in InterfaceWithDefault")
  }
 }
 
@@ -40,7 +40,7 @@ open class GenericClass<T> internal constructor() {
  open fun foo(
   @ObjCName("withId") value: T
  ) {
-  System.out!!.println("in GenericClass")
+  System.out.println("in GenericClass")
  }
 }
 

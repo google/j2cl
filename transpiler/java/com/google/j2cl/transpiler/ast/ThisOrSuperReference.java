@@ -61,4 +61,9 @@ public abstract class ThisOrSuperReference extends Expression {
   public Precedence getPrecedence() {
     return Precedence.HIGHEST;
   }
+
+  @Override
+  public boolean canBeNull() {
+    return false;
+  }
 }
