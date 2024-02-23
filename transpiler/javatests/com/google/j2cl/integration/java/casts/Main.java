@@ -83,7 +83,7 @@ public class Main {
     o = new Object[] {}; // Actually emits as the JS array literal "[]".
     o = (Object[]) o;
 
-    // Cast JS "$Arrays.$init([], Object, 2))" to Object[][]
+    // Cast JS "$Arrays.stampType([], Object, 2))" to Object[][]
     o = new Object[][] {};
     o = (Object[][]) o;
   }

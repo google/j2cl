@@ -211,8 +211,8 @@ class Arrays {
    * @return {!Array<*>}
    * @public
    */
-  static $init(array, leafType, opt_dimensionCount) {
-    return Arrays.$initInternal_(
+  static $stampType(array, leafType, opt_dimensionCount) {
+    return Arrays.$stampTypeInternal_(
         array,
         /** @type {!Constructor} */ (leafType), leafType.$isInstance,
         opt_dimensionCount);
@@ -226,37 +226,10 @@ class Arrays {
    * @return {!Array<*>}
    * @private
    */
-  static $initInternal_(
+  static $stampTypeInternal_(
       array, leafType, leafTypeIsInstance, opt_dimensionCount) {
-    return Arrays.$stampTypeInternal_(
-        array,
-        Arrays.$createMetadata_(
-            leafType, leafTypeIsInstance, opt_dimensionCount || 1));
-  }
-
-  /**
-   * @param {!Array<*>} array
-   * @param {!Object} leafType
-   * @param {number} dimensionCount
-   * @return {!Array<*>}
-   * @public
-   */
-  static $stampType(array, leafType, dimensionCount) {
-    return Arrays.$stampTypeInternal_(
-        array,
-        Arrays.$createMetadata_(
-            /** @type {!Constructor} */ (leafType), leafType.$isInstance,
-            dimensionCount));
-  }
-
-  /**
-   * @param {!Array<*>} array
-   * @param {!Arrays.Metadata_} metadata
-   * @return {!Array<*>}
-   * @private
-   */
-  static $stampTypeInternal_(array, metadata) {
-    array.$$arrayMetadata = metadata;
+    array.$$arrayMetadata = Arrays.$createMetadata_(
+        leafType, leafTypeIsInstance, opt_dimensionCount || 1);
     return array;
   }
 

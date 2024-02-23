@@ -92,7 +92,7 @@ class Main extends j_l_Object {
  /** @nodts @return {?function(number, ...number):number} */
  m_testJsFunctionVarargs__jsfunction_Main_JsFunctionVarargs_$pp_jsfunction() {
   let f = (/** number */ i, .../** ...number */ numbers) =>{
-   $Arrays.$stampType(numbers, $$int, 1);
+   $Arrays.$stampType(numbers, $$int);
    let sum = i;
    for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
     let number_1 = $array[$index];
@@ -107,7 +107,7 @@ class Main extends j_l_Object {
  /** @nodts @return {?function(number, ...number):number} */
  m_testJsFunctionVarargsInnerClass__jsfunction_Main_JsFunctionVarargs_$pp_jsfunction() {
   return (/** number */ i, .../** ...number */ numbers) =>{
-   $Arrays.$stampType(numbers, $$int, 1);
+   $Arrays.$stampType(numbers, $$int);
    let sum = i;
    for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
     let number_1 = $array[$index];
@@ -132,19 +132,19 @@ class Main extends j_l_Object {
  m_acceptsVarargsJsFunctionWithParemetrizedType__jsfunction_Main_JsFunctionVarargsGenerics__void_$pp_jsfunction(/** ?function(number, ...List<T>):number */ x) {}
  /** @template T */
  acceptsVarargsJsFunctionWithTypeVariableInVarargs(.../** ...?function(number, ...T):number */ x) {
-  $Arrays.$stampType(x, $JavaScriptFunction, 1);
+  $Arrays.$stampType(x, $JavaScriptFunction);
  }
  /** @template T */
  acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs(.../** ...?function(number, ...List<T>):number */ x) {
-  $Arrays.$stampType(x, $JavaScriptFunction, 1);
+  $Arrays.$stampType(x, $JavaScriptFunction);
  }
  
  acceptsJsFunctionInVarargs(.../** ...?function():void */ x) {
-  $Arrays.$stampType(x, $JavaScriptFunction, 1);
+  $Arrays.$stampType(x, $JavaScriptFunction);
  }
  /** @nodts */
  m_testJsFunctionClassLiterals__void_$pp_jsfunction() {
-  let array = /**@type {!Array<?function():void>}*/ ($Arrays.$init([], $JavaScriptFunction));
+  let array = /**@type {!Array<?function():void>}*/ ($Arrays.$stampType([], $JavaScriptFunction));
   let o = Class.$get($JavaScriptFunction);
   o = Class.$get($JavaScriptFunction, 1);
  }

@@ -36,9 +36,9 @@ class Arrays extends j_l_Object {
   objects = new Array(0);
   objects = [null, null];
   let objects2d = /**@type {!Array<Array<*>>}*/ ($Arrays.$create([5, 10], j_l_Object));
-  objects2d = /**@type {!Array<Array<*>>}*/ ($Arrays.$init([[null, null], null], j_l_Object, 2));
+  objects2d = /**@type {!Array<Array<*>>}*/ ($Arrays.$stampType([[null, null], null], j_l_Object, 2));
   objects2d = /**@type {!Array<Array<*>>}*/ ($Arrays.$create([20, null], j_l_Object));
-  let arrayLiteral2d = /**@type {!Array<Array<*>>}*/ ($Arrays.$init([[null, null], null], j_l_Object, 2));
+  let arrayLiteral2d = /**@type {!Array<Array<*>>}*/ ($Arrays.$stampType([[null, null], null], j_l_Object, 2));
   let object = objects[0];
   object = objects2d[0][1];
   $Arrays.$set(objects, 0, null);
@@ -48,9 +48,9 @@ class Arrays extends j_l_Object {
  m_testJavaTypeArray__void() {
   let objects = /**@type {!Array<SomeObject>}*/ ($Arrays.$create([100], SomeObject));
   objects = /**@type {!Array<SomeObject>}*/ ($Arrays.$create([0], SomeObject));
-  objects = /**@type {!Array<SomeObject>}*/ ($Arrays.$init([null, null], SomeObject));
+  objects = /**@type {!Array<SomeObject>}*/ ($Arrays.$stampType([null, null], SomeObject));
   let objects2d = /**@type {!Array<Array<SomeObject>>}*/ ($Arrays.$create([5, 10], SomeObject));
-  objects2d = /**@type {!Array<Array<SomeObject>>}*/ ($Arrays.$init([/**@type {!Array<SomeObject>}*/ ($Arrays.$init([null, null], SomeObject)), null], SomeObject, 2));
+  objects2d = /**@type {!Array<Array<SomeObject>>}*/ ($Arrays.$stampType([/**@type {!Array<SomeObject>}*/ ($Arrays.$stampType([null, null], SomeObject)), null], SomeObject, 2));
   objects2d = /**@type {!Array<Array<SomeObject>>}*/ ($Arrays.$create([20, null], SomeObject));
   let someObject = objects[0];
   someObject = objects2d[0][1];
@@ -61,9 +61,9 @@ class Arrays extends j_l_Object {
  m_testIntArrays__void_$pp_array() {
   let ints = /**@type {!Array<number>}*/ ($Arrays.$create([100], $$int));
   ints = /**@type {!Array<number>}*/ ($Arrays.$create([0], $$int));
-  ints = /**@type {!Array<number>}*/ ($Arrays.$init([0, 1], $$int));
+  ints = /**@type {!Array<number>}*/ ($Arrays.$stampType([0, 1], $$int));
   let ints2d = /**@type {!Array<Array<number>>}*/ ($Arrays.$create([5, 10], $$int));
-  ints2d = /**@type {!Array<Array<number>>}*/ ($Arrays.$init([/**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $$int)), null], $$int, 2));
+  ints2d = /**@type {!Array<Array<number>>}*/ ($Arrays.$stampType([/**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2], $$int)), null], $$int, 2));
   ints2d = /**@type {!Array<Array<number>>}*/ ($Arrays.$create([20, null], $$int));
   let n = ints[0];
   n = ints2d[0][1];
@@ -75,15 +75,15 @@ class Arrays extends j_l_Object {
   $Arrays.$set(ints, b, b);
   ints = /**@type {!Array<number>}*/ ($Arrays.$create([c], $$int));
   $Arrays.$set(ints, c, c);
-  ints = /**@type {!Array<number>}*/ ($Arrays.$init([b, c], $$int));
+  ints = /**@type {!Array<number>}*/ ($Arrays.$stampType([b, c], $$int));
  }
  /** @nodts */
  m_testLongArrays__void_$pp_array() {
   let longs = /**@type {!Array<!$Long>}*/ ($Arrays.$create([100], $$long));
   longs = /**@type {!Array<!$Long>}*/ ($Arrays.$create([0], $$long));
-  longs = /**@type {!Array<!$Long>}*/ ($Arrays.$init([$Long.fromInt(0), $Long.fromInt(1)], $$long));
+  longs = /**@type {!Array<!$Long>}*/ ($Arrays.$stampType([$Long.fromInt(0), $Long.fromInt(1)], $$long));
   let longs2d = /**@type {!Array<Array<!$Long>>}*/ ($Arrays.$create([5, 10], $$long));
-  longs2d = /**@type {!Array<Array<!$Long>>}*/ ($Arrays.$init([/**@type {!Array<!$Long>}*/ ($Arrays.$init([$Long.fromInt(1), $Long.fromInt(2)], $$long)), null], $$long, 2));
+  longs2d = /**@type {!Array<Array<!$Long>>}*/ ($Arrays.$stampType([/**@type {!Array<!$Long>}*/ ($Arrays.$stampType([$Long.fromInt(1), $Long.fromInt(2)], $$long)), null], $$long, 2));
   longs2d = /**@type {!Array<Array<!$Long>>}*/ ($Arrays.$create([20, null], $$long));
   let n = longs[0];
   n = longs2d[0][1];
@@ -95,15 +95,15 @@ class Arrays extends j_l_Object {
   $Arrays.$set(longs, b, $Primitives.widenByteToLong(b));
   longs = /**@type {!Array<!$Long>}*/ ($Arrays.$create([c], $$long));
   $Arrays.$set(longs, c, $Primitives.widenCharToLong(c));
-  longs = /**@type {!Array<!$Long>}*/ ($Arrays.$init([$Primitives.widenByteToLong(b), $Primitives.widenCharToLong(c)], $$long));
+  longs = /**@type {!Array<!$Long>}*/ ($Arrays.$stampType([$Primitives.widenByteToLong(b), $Primitives.widenCharToLong(c)], $$long));
  }
  /** @nodts */
  m_testDevirtualizedTypeArrays__void_$pp_array() {
   let booleans = /**@type {!Array<?boolean>}*/ ($Arrays.$create([100], Boolean));
   booleans = /**@type {!Array<?boolean>}*/ ($Arrays.$create([0], Boolean));
-  booleans = /**@type {!Array<?boolean>}*/ ($Arrays.$init([true, false], Boolean));
+  booleans = /**@type {!Array<?boolean>}*/ ($Arrays.$stampType([true, false], Boolean));
   let booleans2d = /**@type {!Array<Array<?boolean>>}*/ ($Arrays.$create([5, 10], Boolean));
-  booleans2d = /**@type {!Array<Array<?boolean>>}*/ ($Arrays.$init([/**@type {!Array<?boolean>}*/ ($Arrays.$init([true, false], Boolean)), null], Boolean, 2));
+  booleans2d = /**@type {!Array<Array<?boolean>>}*/ ($Arrays.$stampType([/**@type {!Array<?boolean>}*/ ($Arrays.$stampType([true, false], Boolean)), null], Boolean, 2));
   booleans2d = /**@type {!Array<Array<?boolean>>}*/ ($Arrays.$create([20, null], Boolean));
   let b = Boolean.m_booleanValue__java_lang_Boolean__boolean(booleans[0]);
   b = Boolean.m_booleanValue__java_lang_Boolean__boolean(booleans2d[0][1]);
@@ -114,9 +114,9 @@ class Arrays extends j_l_Object {
  m_testStringArrays__void_$pp_array() {
   let strings = /**@type {!Array<?string>}*/ ($Arrays.$create([100], j_l_String));
   strings = /**@type {!Array<?string>}*/ ($Arrays.$create([0], j_l_String));
-  strings = /**@type {!Array<?string>}*/ ($Arrays.$init([null, null], j_l_String));
+  strings = /**@type {!Array<?string>}*/ ($Arrays.$stampType([null, null], j_l_String));
   let strings2d = /**@type {!Array<Array<?string>>}*/ ($Arrays.$create([5, 10], j_l_String));
-  strings2d = /**@type {!Array<Array<?string>>}*/ ($Arrays.$init([/**@type {!Array<?string>}*/ ($Arrays.$init([null, null], j_l_String)), null], j_l_String, 2));
+  strings2d = /**@type {!Array<Array<?string>>}*/ ($Arrays.$stampType([/**@type {!Array<?string>}*/ ($Arrays.$stampType([null, null], j_l_String)), null], j_l_String, 2));
   strings2d = /**@type {!Array<Array<?string>>}*/ ($Arrays.$create([20, null], j_l_String));
   let b = strings[0];
   b = strings2d[0][1];

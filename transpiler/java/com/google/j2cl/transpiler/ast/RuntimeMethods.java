@@ -57,6 +57,23 @@ public final class RuntimeMethods {
     return MethodCall.Builder.from(methodDescriptor).setArguments(expression).build();
   }
 
+  /** Create a call to the Arrays.$stampType method. */
+  public static MethodCall createArraysStampTypeMethodCall(
+      Expression array, ArrayTypeDescriptor arrayTypeDescriptor) {
+    var argumentsBuilder =
+        ImmutableList.<Expression>builder()
+            .add(
+                array,
+                arrayTypeDescriptor.getLeafTypeDescriptor().getMetadataConstructorReference());
+
+    int dimensionCount = arrayTypeDescriptor.getDimensions();
+    if (dimensionCount > 1) {
+      argumentsBuilder.add(NumberLiteral.fromInt(dimensionCount));
+    }
+
+    return createArraysMethodCall("$stampType", argumentsBuilder.build());
+  }
+
   /** Create a call to an Arrays method. */
   public static MethodCall createArraysMethodCall(String methodName, Expression... arguments) {
     return createArraysMethodCall(methodName, asList(arguments));
@@ -654,16 +671,6 @@ public final class RuntimeMethods {
                                           PrimitiveTypes.INT, TypeDescriptors.get().nativeFunction)
                                       .build())
                               .put(
-                                  "$init",
-                                  MethodInfo.newBuilder()
-                                      .setReturnType(TypeDescriptors.get().javaLangObjectArray)
-                                      .setParameters(
-                                          TypeDescriptors.get().javaLangObjectArray,
-                                          TypeDescriptors.get().javaLangObject,
-                                          PrimitiveTypes.INT)
-                                      .setRequiredParameters(2)
-                                      .build())
-                              .put(
                                   "$instanceIsOfType",
                                   MethodInfo.newBuilder()
                                       .setReturnType(TypeDescriptors.get().javaLangBoolean)
@@ -686,6 +693,7 @@ public final class RuntimeMethods {
                                           TypeDescriptors.get().javaLangObjectArray,
                                           TypeDescriptors.get().javaLangObject,
                                           PrimitiveTypes.DOUBLE)
+                                      .setRequiredParameters(2)
                                       .build())
                               .build())
                       .put(

@@ -24,12 +24,12 @@ class SubMain extends Main {
  }
  /** @override @return {number} */
  f3(/** number */ m, .../** ...number */ numbers) {
-  $Arrays.$stampType(numbers, $$int, 1);
+  $Arrays.$stampType(numbers, $$int);
   let a = super.f3(1, 1, 2);
   a = a + super.f3(1) | 0;
   a = a + super.f3(1, 1, 2) | 0;
   a = a + super.f3(1) | 0;
-  let ints = /**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $$int));
+  let ints = /**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2], $$int));
   a = a + super.f3(1, ...ints) | 0;
   return a;
  }

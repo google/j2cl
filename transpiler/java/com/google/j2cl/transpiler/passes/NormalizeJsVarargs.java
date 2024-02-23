@@ -31,7 +31,6 @@ import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
-import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.Variable;
 import java.util.List;
 import javax.annotation.Nullable;
@@ -99,18 +98,11 @@ public class NormalizeJsVarargs extends NormalizationPass {
       // TODO(b/36180242): avoid stamping if not needed.
       // stamp the rest (varargs) parameter.
       //   Arrays.stampType(varargsParameter, new arrayType[]...[]);
-
-      // Use the raw type as the stamped leaf type. So that we use the upper bound of a generic type
-      // parameter type instead of the type parameter itself.
       MethodCall arrayStampTypeMethodCall =
-          RuntimeMethods.createArraysMethodCall(
-              "$stampType",
-              varargsParameter.createReference(),
-              varargsStampTypeDescriptor.getLeafTypeDescriptor().getMetadataConstructorReference(),
-              NumberLiteral.fromInt(varargsStampTypeDescriptor.getDimensions()));
+          RuntimeMethods.createArraysStampTypeMethodCall(
+              varargsParameter.createReference(), varargsStampTypeDescriptor);
 
-      List<Statement> statements = body.getStatements();
-      statements.add(0, arrayStampTypeMethodCall.makeStatement(body.getSourcePosition()));
+      body.getStatements().add(0, arrayStampTypeMethodCall.makeStatement(body.getSourcePosition()));
     }
   }
 

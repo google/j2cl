@@ -41,7 +41,7 @@ class Varargs extends j_l_Object {
  //Initialization from constructor 'Varargs()'.
  /** @nodts */
  $ctor__varargs_Varargs__void() {
-  this.$ctor__varargs_Varargs__arrayOf_int__void(/**@type {!Array<number>}*/ ($Arrays.$init([1], $$int)));
+  this.$ctor__varargs_Varargs__arrayOf_int__void(/**@type {!Array<number>}*/ ($Arrays.$stampType([1], $$int)));
  }
  /** @nodts */
  m_test__int__arrayOf_java_lang_Object__void(/** number */ a, /** Array<*> */ args) {}
@@ -62,7 +62,7 @@ class Varargs extends j_l_Object {
  /** @nodts @template E */
  static m_bar__java_lang_Number__java_lang_Number__void(/** E */ a, /** E */ b) {
   Varargs.$clinit();
-  Varargs.m_fun__arrayOf_java_lang_Number__void(/**@type {!Array<E>}*/ ($Arrays.$init([a, b], Number)));
+  Varargs.m_fun__arrayOf_java_lang_Number__void(/**@type {!Array<E>}*/ ($Arrays.$stampType([a, b], Number)));
  }
  /** @nodts */
  m_main__void() {
@@ -71,10 +71,10 @@ class Varargs extends j_l_Object {
   v.m_test__int__arrayOf_java_lang_Object__void(1, [j_l_Object.$create__()]);
   v.m_test__int__arrayOf_java_lang_Object__void(1, [j_l_Object.$create__()]);
   v.m_test__int__arrayOf_java_lang_Object__void(1, []);
-  v.m_test__int__arrayOf_java_lang_Object__void(1, /**@type {!Array<Array<*>>}*/ ($Arrays.$init([], j_l_Object, 2)));
+  v.m_test__int__arrayOf_java_lang_Object__void(1, /**@type {!Array<Array<*>>}*/ ($Arrays.$stampType([], j_l_Object, 2)));
   v.m_test__int__arrayOf_java_lang_Object__void(1, null);
-  v.m_testCloneable__arrayOf_java_lang_Cloneable__void(/**@type {!Array<Array<*>>}*/ ($Arrays.$init([], j_l_Object, 2)));
-  v.m_testSerializable__arrayOf_java_io_Serializable__void(/**@type {!Array<Array<*>>}*/ ($Arrays.$init([], j_l_Object, 2)));
+  v.m_testCloneable__arrayOf_java_lang_Cloneable__void(/**@type {!Array<Array<*>>}*/ ($Arrays.$stampType([], j_l_Object, 2)));
+  v.m_testSerializable__arrayOf_java_io_Serializable__void(/**@type {!Array<Array<*>>}*/ ($Arrays.$stampType([], j_l_Object, 2)));
   v.m_testLambda__varargs_Varargs_FunctionalInterface__void(FunctionalInterface.$adapt((/** Array<?string> */ it) =>{
    this.f_args__varargs_Varargs_ = it;
   }));
