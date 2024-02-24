@@ -19,18 +19,27 @@ import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayAccess;
 import com.google.j2cl.transpiler.ast.ArrayLength;
+import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.AssertStatement;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.ConditionalExpression;
 import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.ForEachStatement;
-import com.google.j2cl.transpiler.ast.MemberReference;
+import com.google.j2cl.transpiler.ast.FunctionExpression;
+import com.google.j2cl.transpiler.ast.Literal;
+import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MultiExpression;
+import com.google.j2cl.transpiler.ast.NewArray;
+import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NullLiteral;
+import com.google.j2cl.transpiler.ast.PostfixExpression;
+import com.google.j2cl.transpiler.ast.PostfixOperator;
 import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
 import com.google.j2cl.transpiler.ast.SynchronizedStatement;
+import com.google.j2cl.transpiler.ast.ThisOrSuperReference;
 import com.google.j2cl.transpiler.ast.ThrowStatement;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
@@ -72,15 +81,10 @@ public final class InsertNotNullAssertions extends NormalizationPass {
                   getProblems().warning(getSourcePosition(), "Non-null assertion applied to null.");
                 }
 
-                return expression.postfixNotNullAssertion();
+                return insertNotNullAssertion(expression);
               }
             }));
 
-    // Insert null assertions if necessary on places where the construct requires them.
-    // TODO(b/236987392): Revisit when the bug is fixed. The context rewriter based traversal above
-    // should be enough to emit most of these assertions. But in the current state whether a
-    // construct requires a non-nullable expression is expressed by a non-nullable type which for
-    // type variables is not accurate.
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
@@ -108,6 +112,13 @@ public final class InsertNotNullAssertions extends NormalizationPass {
           }
 
           @Override
+          public Node rewriteFieldAccess(FieldAccess fieldAccess) {
+            return FieldAccess.Builder.from(fieldAccess)
+                .setQualifier(insertNotNullAssertionIfNeeded(fieldAccess.getQualifier()))
+                .build();
+          }
+
+          @Override
           public Node rewriteForEachStatement(ForEachStatement forEachStatement) {
             return ForEachStatement.Builder.from(forEachStatement)
                 .setIterableExpression(
@@ -116,9 +127,16 @@ public final class InsertNotNullAssertions extends NormalizationPass {
           }
 
           @Override
-          public Node rewriteMemberReference(MemberReference memberReference) {
-            return MemberReference.Builder.from(memberReference)
-                .setQualifier(insertNotNullAssertionIfNeeded(memberReference.getQualifier()))
+          public Node rewriteMethodCall(MethodCall methodCall) {
+            return MethodCall.Builder.from(methodCall)
+                .setQualifier(insertNotNullAssertionIfNeeded(methodCall.getQualifier()))
+                .build();
+          }
+
+          @Override
+          public Node rewriteNewInstance(NewInstance newInstance) {
+            return NewInstance.Builder.from(newInstance)
+                .setQualifier(insertNotNullAssertionIfNeeded(newInstance.getQualifier()))
                 .build();
           }
 
@@ -147,19 +165,41 @@ public final class InsertNotNullAssertions extends NormalizationPass {
         });
   }
 
-  private static Expression insertNotNullAssertionIfNeeded(Expression expression) {
+  private static boolean doesNotNeedNullCheck(Expression expression) {
     // Don't insert null-check for expressions which are known to be non-null, regardless of
     // nullability annotations.
-    return expression != null && expression.canBeNull()
-        ? expression.postfixNotNullAssertion()
+    return doesNotNeedNullCheck(expression.getTypeDescriptor())
+        || expression instanceof ThisOrSuperReference
+        || expression instanceof NewInstance
+        || expression instanceof ArrayLiteral
+        || expression instanceof FunctionExpression
+        || expression instanceof NewArray
+        || (expression instanceof Literal && !(expression instanceof NullLiteral))
+        || (expression instanceof PostfixExpression
+            && ((PostfixExpression) expression).getOperator() == PostfixOperator.NOT_NULL_ASSERTION)
+        || (expression instanceof FieldAccess
+            && ((FieldAccess) expression).getTarget().isEnumConstant());
+  }
+
+  private static boolean doesNotNeedNullCheck(TypeDescriptor typeDescriptor) {
+    // Don't insert null-check for types which are known to be non-null, regardless of
+    // nullability annotations.
+    return typeDescriptor.isPrimitive();
+  }
+
+  private static Expression insertNotNullAssertionIfNeeded(Expression expression) {
+    return expression != null && !doesNotNeedNullCheck(expression)
+        ? insertNotNullAssertion(expression)
         : expression;
+  }
+
+  private static Expression insertNotNullAssertion(Expression expression) {
+    return expression.postfixNotNullAssertion();
   }
 
   private static Expression insertElvisIfNeeded(
       Expression expression, Expression nonNullExpression) {
-    // Don't insert null-check for expressions which are known to be non-null, regardless of
-    // nullability annotations.
-    if (expression == null || !expression.canBeNull()) {
+    if (expression == null || doesNotNeedNullCheck(expression)) {
       return expression;
     }
 

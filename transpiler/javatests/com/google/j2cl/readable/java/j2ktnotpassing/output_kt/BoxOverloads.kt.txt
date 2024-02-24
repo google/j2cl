@@ -56,9 +56,9 @@ open class BoxOverloads {
   fun testGenericBoxedOverload(
    @ObjCName("withJ2ktnotpassingBoxOverloads_Generic") generic: BoxOverloads.Generic<Double>
   ) {
-   generic.overload(1.25)
-   generic.overload(Double.valueOf(1.25))
-   generic.overload(1.toDouble())
+   generic!!.overload(1.25)
+   generic!!.overload(Double.valueOf(1.25))
+   generic!!.overload(1.toDouble())
   }
  }
 

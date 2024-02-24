@@ -132,11 +132,6 @@ public class FunctionExpression extends Expression implements MethodLike {
   }
 
   @Override
-  public boolean canBeNull() {
-    return false;
-  }
-
-  @Override
   public String getReadableDescription() {
     return "<lambda>";
   }

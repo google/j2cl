@@ -83,11 +83,6 @@ public class NewArray extends Expression {
   }
 
   @Override
-  public boolean canBeNull() {
-    return false;
-  }
-
-  @Override
   public NewArray clone() {
     return NewArray.newBuilder()
         .setTypeDescriptor(typeDescriptor)

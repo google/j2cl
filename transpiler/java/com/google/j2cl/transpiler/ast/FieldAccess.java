@@ -83,13 +83,6 @@ public class FieldAccess extends MemberReference {
   }
 
   @Override
-  public boolean canBeNull() {
-    return !getTarget().isEnumConstant()
-        && !getTarget().isCompileTimeConstant()
-        && super.canBeNull();
-  }
-
-  @Override
   public FieldAccess clone() {
     return new FieldAccess(AstUtils.clone(qualifier), getTarget(), sourcePosition);
   }

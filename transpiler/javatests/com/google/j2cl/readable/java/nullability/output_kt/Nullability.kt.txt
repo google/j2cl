@@ -124,70 +124,70 @@ open class Nullability {
  companion object {
   @JvmStatic
   internal fun <T: String?> testDefaultNullabilityBounds_pp_nullability(defaultNullability: Nullability.ParameterizedDefaultNullability<T>?) {
-   defaultNullability!!.getNonNullable_pp_nullability().length
+   defaultNullability!!.getNonNullable_pp_nullability()!!.length
    defaultNullability!!.getNullable_pp_nullability()!!.length
    defaultNullability!!.getDefaultNullability_pp_nullability()!!.length
   }
 
   @JvmStatic
   internal fun <T: String?> testDefaultNullabilityBounds_pp_nullability(nullable: Nullability.ParameterizedNullable<T>?) {
-   nullable!!.getNonNullable_pp_nullability().length
+   nullable!!.getNonNullable_pp_nullability()!!.length
    nullable!!.getNullable_pp_nullability()!!.length
    nullable!!.getDefaultNullability_pp_nullability()!!.length
   }
 
   @JvmStatic
   internal fun <T: String?> testNullableBounds_pp_nullability(defaultNullability: Nullability.ParameterizedDefaultNullability<T>?) {
-   defaultNullability!!.getNonNullable_pp_nullability().length
+   defaultNullability!!.getNonNullable_pp_nullability()!!.length
    defaultNullability!!.getNullable_pp_nullability()!!.length
    defaultNullability!!.getDefaultNullability_pp_nullability()!!.length
   }
 
   @JvmStatic
   internal fun <T: String?> testNullableBounds_pp_nullability(nullable: Nullability.ParameterizedNullable<T>?) {
-   nullable!!.getNonNullable_pp_nullability().length
+   nullable!!.getNonNullable_pp_nullability()!!.length
    nullable!!.getNullable_pp_nullability()!!.length
    nullable!!.getDefaultNullability_pp_nullability()!!.length
   }
 
   @JvmStatic
   internal fun <T: String> testNonNullableBounds_pp_nullability(defaultNullability: Nullability.ParameterizedDefaultNullability<T>?) {
-   defaultNullability!!.getNonNullable_pp_nullability().length
+   defaultNullability!!.getNonNullable_pp_nullability()!!.length
    defaultNullability!!.getNullable_pp_nullability()!!.length
    defaultNullability!!.getDefaultNullability_pp_nullability()!!.length
   }
 
   @JvmStatic
   internal fun <T: String> testNonNullableBounds_pp_nullability(nullable: Nullability.ParameterizedNullable<T>?) {
-   nullable!!.getNonNullable_pp_nullability().length
+   nullable!!.getNonNullable_pp_nullability()!!.length
    nullable!!.getNullable_pp_nullability()!!.length
    nullable!!.getDefaultNullability_pp_nullability()!!.length
   }
 
   @JvmStatic
   internal fun <T: String> testNonNullableBounds_pp_nullability(nonNullable: Nullability.ParameterizedNonNullable<T>?) {
-   nonNullable!!.getNonNullable_pp_nullability().length
+   nonNullable!!.getNonNullable_pp_nullability()!!.length
    nonNullable!!.getNullable_pp_nullability()!!.length
-   nonNullable!!.getDefaultNullability_pp_nullability().length
+   nonNullable!!.getDefaultNullability_pp_nullability()!!.length
   }
 
   @JvmStatic
   internal fun testDefaultNullabilityWildcards_pp_nullability(nonNullable: Nullability.ParameterizedDefaultNullability<out String?>?) {
-   (nonNullable as Nullability.ParameterizedDefaultNullability<String?>?)!!.getNonNullable_pp_nullability().length
+   (nonNullable as Nullability.ParameterizedDefaultNullability<String?>?)!!.getNonNullable_pp_nullability()!!.length
    (nonNullable as Nullability.ParameterizedDefaultNullability<String?>?)!!.getNullable_pp_nullability()!!.length
    (nonNullable as Nullability.ParameterizedDefaultNullability<String?>?)!!.getDefaultNullability_pp_nullability()!!.length
   }
 
   @JvmStatic
   internal fun testDefaultNullabilityWildcards_pp_nullability(nonNullable: Nullability.ParameterizedNullable<out String?>?) {
-   (nonNullable as Nullability.ParameterizedNullable<String?>?)!!.getNonNullable_pp_nullability().length
+   (nonNullable as Nullability.ParameterizedNullable<String?>?)!!.getNonNullable_pp_nullability()!!.length
    (nonNullable as Nullability.ParameterizedNullable<String?>?)!!.getNullable_pp_nullability()!!.length
    (nonNullable as Nullability.ParameterizedNullable<String?>?)!!.getDefaultNullability_pp_nullability()!!.length
   }
 
   @JvmStatic
   internal fun testDefaultNullabilityWildcards_pp_nullability(nonNullable: Nullability.ParameterizedNonNullable<out String>?) {
-   (nonNullable as Nullability.ParameterizedNonNullable<String>?)!!.getNonNullable_pp_nullability().length
+   (nonNullable as Nullability.ParameterizedNonNullable<String>?)!!.getNonNullable_pp_nullability()!!.length
    (nonNullable as Nullability.ParameterizedNonNullable<String>?)!!.getNullable_pp_nullability()!!.length
    (nonNullable as Nullability.ParameterizedNonNullable<String>?)!!.getDefaultNullability_pp_nullability()!!.length
   }

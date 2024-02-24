@@ -45,7 +45,7 @@ open class ImplicitParenthesis {
    var boxedInt: Int? = null
    primitiveInt = 5
    boxedInt = Int(10)
-   primitiveInt = (if (primitiveInt == 5) Int(15) else Int(30)).toInt()
+   primitiveInt = (if (primitiveInt == 5) Int(15) else Int(30))!!.toInt()
    assert(primitiveInt == 15)
    primitiveInt = 5
    boxedInt = Int(10)

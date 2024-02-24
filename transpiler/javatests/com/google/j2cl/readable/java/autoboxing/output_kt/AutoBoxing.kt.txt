@@ -527,7 +527,7 @@ open class AutoBoxing {
    }
    l = Local<Long?>().toLong_pp_autoboxing(Long.valueOf(11L))
    assert(l == 11L)
-   val i: Int = Int.valueOf(10).toInt()
+   val i: Int = Int.valueOf(10)!!.toInt()
   }
  }
 }

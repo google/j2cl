@@ -30,7 +30,7 @@ open class UnsatisfiedTypeBounds internal constructor() {
  companion object {
   @JvmStatic
   internal fun <T: Any> methodWithTypeConstraints_pp_j2ktnotpassing(helper: UnsatisfiedTypeBounds.Helper<T>, foo: UnsatisfiedTypeBounds.Foo<out T>): T {
-   return foo.get()
+   return foo!!.get()
   }
 
   @JvmStatic

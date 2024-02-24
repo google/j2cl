@@ -59,7 +59,7 @@ abstract class Ordering<T> internal constructor() {
  companion object {
   @JvmStatic
   internal fun <E> reversed_pp_j2ktnotpassing(ordering: Ordering<in E>): Ordering<in E> {
-   return ordering.reverse_pp_j2ktnotpassing<E>()
+   return ordering!!.reverse_pp_j2ktnotpassing<E>()
   }
  }
 }
