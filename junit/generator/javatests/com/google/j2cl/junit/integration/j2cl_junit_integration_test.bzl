@@ -131,9 +131,6 @@ def j2cl_test_integration_test_data(
             runtime_deps = [":%s-lib-j2wasm" % name],
             extra_defs = extra_defs,
             optimize = False,
-            javacopts = [
-                "-XepOpt:CheckReturnValue:CheckAllConstructors=false",  # b/226969262
-            ],
         )
 
         j2wasm_test(
@@ -145,9 +142,6 @@ def j2cl_test_integration_test_data(
             extra_defs = extra_defs,
             optimize = True,
             wasm_defs = {"jre.classMetadata": "SIMPLE"},
-            javacopts = [
-                "-XepOpt:CheckReturnValue:CheckAllConstructors=false",  # b/226969262
-            ],
         )
     if "CLOSURE" in platforms:
         j2cl_test(
@@ -159,9 +153,6 @@ def j2cl_test_integration_test_data(
             runtime_deps = [":%s-lib-j2cl" % name],
             enable_rta = enable_rta,
             extra_defs = extra_defs,
-            javacopts = [
-                "-XepOpt:CheckReturnValue:CheckAllConstructors=false",  # b/226969262
-            ],
         )
 
         j2cl_test(
@@ -172,9 +163,6 @@ def j2cl_test_integration_test_data(
             runtime_deps = [":%s-lib-j2cl" % name],
             enable_rta = enable_rta,
             extra_defs = extra_defs,
-            javacopts = [
-                "-XepOpt:CheckReturnValue:CheckAllConstructors=false",  # b/226969262
-            ],
         )
     if "J2KT" in platforms:
         j2kt_jvm_test(
@@ -184,9 +172,6 @@ def j2cl_test_integration_test_data(
             test_class = test_class,
             runtime_deps = [":%s-lib-j2kt-jvm" % name],
             extra_defs = extra_defs,
-            javacopts = [
-                "-XepOpt:CheckReturnValue:CheckAllConstructors=false",  # b/226969262
-            ],
         )
 
         j2kt_native_test(
@@ -195,17 +180,11 @@ def j2cl_test_integration_test_data(
             test_class = test_class,
             runtime_deps = [":%s-lib-j2kt-native" % name],
             extra_defs = extra_defs,
-            javacopts = [
-                "-XepOpt:CheckReturnValue:CheckAllConstructors=false",  # b/226969262
-            ],
         )
     native.java_test(
         name = name,
         tags = tags,
         runtime_deps = [":%s-lib" % name],
-        javacopts = [
-            "-XepOpt:CheckReturnValue:CheckAllConstructors=false",  # b/226969262
-        ],
     )
 
 def java_and_j2cl_library(

@@ -39,7 +39,6 @@ j2cl_library(
         "-Xep:SelfComparison:OFF",
         "-Xep:SelfEquality:OFF",
         "-Xep:SelfEquals:OFF",
-        "-XepOpt:CheckReturnValue:CheckAllConstructors=false",  # b/226969262
     ],
     deps = [
         "//jre/java:javaemul_internal_annotations-j2cl",
@@ -79,7 +78,6 @@ java_test(
         "-Xep:SelfEquality:OFF",
         "-Xep:SelfEquals:OFF",
         "-Xep:ReturnValueIgnored:OFF",
-        "-XepOpt:CheckReturnValue:CheckAllConstructors=false",  # b/226969262
     ],
     test_class = "com.google.j2cl.jre.AllTests",
     deps = [
