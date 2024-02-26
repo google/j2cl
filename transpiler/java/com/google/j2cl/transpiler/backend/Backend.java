@@ -160,6 +160,7 @@ import com.google.j2cl.transpiler.passes.RemoveNestedBlocks;
 import com.google.j2cl.transpiler.passes.RemoveNoopStatements;
 import com.google.j2cl.transpiler.passes.RemoveUnneededCasts;
 import com.google.j2cl.transpiler.passes.RemoveUnneededJsDocCasts;
+import com.google.j2cl.transpiler.passes.RemoveUnneededNotNullChecks;
 import com.google.j2cl.transpiler.passes.RemoveUnreachableCode;
 import com.google.j2cl.transpiler.passes.RemoveUnusedLabeledStatements;
 import com.google.j2cl.transpiler.passes.RemoveWasmAnnotatedMethodBodies;
@@ -332,6 +333,7 @@ public enum Backend {
           RemoveUnneededJsDocCasts::new,
           NormalizeJsDocCastExpressions::new,
           NormalizeJsAwaitMethodInvocations::new,
+          RemoveUnneededNotNullChecks::new,
           ImplementNotNullOperator::new,
           RemoveUnreachableCode::new,
           RemoveNoopStatements::new,
