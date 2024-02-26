@@ -11,6 +11,7 @@ let Empty1 = goog.forwardDeclare('cast.CastGenerics.Empty1$impl');
 let Empty2 = goog.forwardDeclare('cast.CastGenerics.Empty2$impl');
 let Foo = goog.forwardDeclare('cast.CastGenerics.Foo$impl');
 let Implementor = goog.forwardDeclare('cast.CastGenerics.Implementor$impl');
+let NullMarkedContainer = goog.forwardDeclare('cast.CastGenerics.NullMarkedContainer$impl');
 let Enum = goog.forwardDeclare('java.lang.Enum$impl');
 let Error = goog.forwardDeclare('java.lang.Error$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
@@ -81,6 +82,18 @@ class CastGenerics extends j_l_Object {
   a = /**@type {A}*/ ($Casts.$to(extendsA.m_get__java_lang_Object_$pp_cast(), A));
   let superA = null;
   oA = superA.m_get__java_lang_Object_$pp_cast();
+  let strictlyString = null;
+  str = /**@type {?string}*/ ($Casts.$to(strictlyString.m_get__java_lang_Object_$pp_cast(), j_l_String));
+  let extendsString = null;
+  str = /**@type {?string}*/ ($Casts.$to(extendsString.m_get__java_lang_Object_$pp_cast(), j_l_String));
+  let superString = null;
+  oA = superString.m_get__java_lang_Object_$pp_cast();
+ }
+ /** @nodts */
+ static m_testErasureCastInNullMarkedCode__void() {
+  CastGenerics.$clinit();
+  let container = /**@type {!NullMarkedContainer<string>}*/ (NullMarkedContainer.$create__java_lang_Object('abc'));
+  let s = /**@type {?string}*/ ($Casts.$to(container.m_get__java_lang_Object_$pp_cast(), j_l_String));
  }
  /** @nodts */
  static m_testCastToParamterizedType__void() {
@@ -139,6 +152,7 @@ class CastGenerics extends j_l_Object {
   Empty1 = goog.module.get('cast.CastGenerics.Empty1$impl');
   Empty2 = goog.module.get('cast.CastGenerics.Empty2$impl');
   Implementor = goog.module.get('cast.CastGenerics.Implementor$impl');
+  NullMarkedContainer = goog.module.get('cast.CastGenerics.NullMarkedContainer$impl');
   Enum = goog.module.get('java.lang.Enum$impl');
   Integer = goog.module.get('java.lang.Integer$impl');
   Number = goog.module.get('java.lang.Number$impl');

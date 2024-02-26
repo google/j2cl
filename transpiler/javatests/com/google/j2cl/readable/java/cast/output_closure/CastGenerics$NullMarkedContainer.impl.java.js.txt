@@ -1,0 +1,50 @@
+goog.module('cast.CastGenerics.NullMarkedContainer$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ */
+class NullMarkedContainer extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {T} @nodts*/
+  this.f_value__cast_CastGenerics_NullMarkedContainer_;
+ }
+ /** @nodts @template T @return {!NullMarkedContainer<T>} */
+ static $create__java_lang_Object(/** T */ value) {
+  NullMarkedContainer.$clinit();
+  let $instance = new NullMarkedContainer();
+  $instance.$ctor__cast_CastGenerics_NullMarkedContainer__java_lang_Object__void(value);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__cast_CastGenerics_NullMarkedContainer__java_lang_Object__void(/** T */ value) {
+  this.$ctor__java_lang_Object__void();
+  this.f_value__cast_CastGenerics_NullMarkedContainer_ = value;
+ }
+ /** @nodts @return {T} */
+ m_get__java_lang_Object_$pp_cast() {
+  return this.f_value__cast_CastGenerics_NullMarkedContainer_;
+ }
+ /** @nodts */
+ static $clinit() {
+  NullMarkedContainer.$clinit = () =>{};
+  NullMarkedContainer.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NullMarkedContainer;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(NullMarkedContainer, 'cast.CastGenerics$NullMarkedContainer');
+
+exports = NullMarkedContainer;
+
+//# sourceMappingURL=CastGenerics$NullMarkedContainer.js.map

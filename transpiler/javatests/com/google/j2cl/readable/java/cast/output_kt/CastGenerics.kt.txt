@@ -118,6 +118,19 @@ open class CastGenerics<T, E: Number?> {
    a = (extendsA as CastGenerics.Container<CastGenerics.A?>?)!!.get_pp_cast()
    val superA: CastGenerics.Container<in CastGenerics.A?>? = null
    oA = superA!!.get_pp_cast()
+   val strictlyString: CastGenerics.Container<String?>? = null
+   str = strictlyString!!.get_pp_cast()
+   val extendsString: CastGenerics.Container<out String?>? = null
+   str = (extendsString as CastGenerics.Container<String?>?)!!.get_pp_cast()
+   val superString: CastGenerics.Container<in String?>? = null
+   oA = superString!!.get_pp_cast()
+  }
+
+  @JvmStatic
+  @ObjCName("testErasureCastInNullMarkedCode")
+  fun testErasureCastInNullMarkedCode() {
+   val container: CastGenerics.NullMarkedContainer<out String>? = CastGenerics.NullMarkedContainer<String>("abc")
+   val s: String? = (container as CastGenerics.NullMarkedContainer<String>?)!!.get_pp_cast()
   }
 
   @JvmStatic
@@ -156,6 +169,19 @@ open class CastGenerics<T, E: Number?> {
  open class Container<T> internal constructor() {
   internal open fun get_pp_cast(): T {
    return null as T
+  }
+ }
+
+ open class NullMarkedContainer<T: Any> {
+  @JvmField
+  internal var value_private_2: T
+
+  internal constructor(value: T) {
+   this.value_private_2 = value
+  }
+
+  internal open fun get_pp_cast(): T {
+   return this.value_private_2
   }
  }
 
