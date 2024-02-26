@@ -10,7 +10,6 @@ j2cl_library(
     name = "jsaccessible_library",
     srcs = glob(["*.java"]),
     javacopts = [
-        "-XepOpt:CheckReturnValue:CheckAllConstructors=false",  # b/226969262
     ],
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

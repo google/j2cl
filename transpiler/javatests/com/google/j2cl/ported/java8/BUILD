@@ -21,7 +21,6 @@ j2cl_library(
         "-Xep:IdentityBinaryExpression:OFF",
         "-Xep:ClassCanBeStatic:OFF",
         "-Xep:MethodCanBeStatic:OFF",
-        "-XepOpt:CheckReturnValue:CheckAllConstructors=false",  # b/226969262
     ],
     deps = [
         "//third_party:gwt-jsinterop-annotations-j2cl",
