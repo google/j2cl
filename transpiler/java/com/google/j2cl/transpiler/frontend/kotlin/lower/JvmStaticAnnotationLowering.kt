@@ -5,6 +5,7 @@
 
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
+import com.google.j2cl.transpiler.frontend.kotlin.ir.isStaticJsMember
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
 import org.jetbrains.kotlin.backend.jvm.CachedFieldsForObjectInstances
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
@@ -35,7 +36,7 @@ internal class JvmStaticInObjectLowering(val context: JvmBackendContext) : FileL
     irFile.transformChildrenVoid(
       SingletonObjectJvmStaticTransformer(
         context.irBuiltIns,
-        context.cachedDeclarations.fieldsForObjectInstances
+        context.cachedDeclarations.fieldsForObjectInstances,
       )
     )
 }
@@ -67,12 +68,12 @@ private fun IrExpression.coerceToUnit(irBuiltIns: IrBuiltIns) =
     irBuiltIns.unitType,
     IrTypeOperator.IMPLICIT_COERCION_TO_UNIT,
     irBuiltIns.unitType,
-    this
+    this,
   )
 
 private fun IrMemberAccessExpression<*>.makeStatic(
   irBuiltIns: IrBuiltIns,
-  replaceCallee: IrSimpleFunction?
+  replaceCallee: IrSimpleFunction?,
 ): IrExpression {
   val receiver = dispatchReceiver ?: return this
   dispatchReceiver = null
@@ -91,7 +92,7 @@ private fun IrMemberAccessExpression<*>.makeStatic(
 
 class SingletonObjectJvmStaticTransformer(
   private val irBuiltIns: IrBuiltIns,
-  private val cachedFields: CachedFieldsForObjectInstances
+  private val cachedFields: CachedFieldsForObjectInstances,
 ) : IrElementTransformerVoid() {
   override fun visitClass(declaration: IrClass): IrStatement {
     if (declaration.isNonCompanionObject) {
@@ -103,7 +104,7 @@ class SingletonObjectJvmStaticTransformer(
             function.replaceThisByStaticReference(
               cachedFields,
               declaration,
-              oldDispatchReceiverParameter
+              oldDispatchReceiverParameter,
             )
           }
         }
@@ -211,8 +212,8 @@ private class CompanionObjectJvmStaticTransformer(val context: JvmBackendContext
               staticProxy.typeParameters.size,
               staticProxy.valueParameters.size,
               implFunRef.reflectionTarget,
-              implFunRef.origin
-            )
+              implFunRef.origin,
+            ),
           )
         }
         expression
@@ -264,7 +265,13 @@ private class CompanionObjectJvmStaticTransformer(val context: JvmBackendContext
   // END OF MODIFICATIONS.
 
   private fun shouldReplaceWithStaticCall(callee: IrSimpleFunction) =
-    callee.isJvmStaticInCompanion() &&
+    (callee.isJvmStaticInCompanion() &&
       callee.visibility == DescriptorVisibilities.PROTECTED &&
-      !callee.isInlineFunctionCall(context)
+      !callee.isInlineFunctionCall(context)) ||
+      // MODIFIED BY GOOGLE.
+      // The static function on the enclosing type is the function that is transpiled as a JsMethod.
+      // Redirecting the call to this method avoid issue around spread operator and JS vararg.
+      (callee.isJvmStaticInCompanion() &&
+        getStaticAndCompanionDeclaration(callee).first.isStaticJsMember())
+  // END OF MODIFICATIONS
 }

@@ -49,6 +49,7 @@ import org.jetbrains.kotlin.ir.types.isUnit
 import org.jetbrains.kotlin.ir.util.getAnnotation
 import org.jetbrains.kotlin.ir.util.isGetter
 import org.jetbrains.kotlin.ir.util.isSetter
+import org.jetbrains.kotlin.ir.util.isStatic
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
@@ -265,6 +266,11 @@ private fun IrDeclaration.isPublicMemberOfJsType(): Boolean {
     else -> throw AssertionError("Unexpected IrDeclaration")
   }
 }
+
+// Computing whether an instance method is a JsMethod requires looking at overridden methods, and
+// such computation is done in the J2CL type model. Therefore this method only checks whether a
+// static member is a JsMethod.
+fun IrFunction.isStaticJsMember() = isStatic && getJsMemberType() != JsMemberType.NONE
 
 private val JS_ASYNC_ANNOTATION_FQ_NAME: FqName = FqName(JS_ASYNC_ANNOTATION_NAME)
 private val JS_CONSTRUCTOR_ANNOTATION_FQ_NAME: FqName = FqName(JS_CONSTRUCTOR_ANNOTATION_NAME)
