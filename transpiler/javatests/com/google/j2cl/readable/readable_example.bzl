@@ -336,6 +336,5 @@ _j2kt_web_enabled_j2cl_library = rule(
     implementation = _j2kt_web_enabled_j2cl_library_impl,
     attrs = {
         "j2cl_library": attr.label(providers = [J2clInfo], cfg = _j2kt_web_transition),
-        "_allowlist_function_transition": attr.label(default = "@bazel_tools//tools/allowlists/function_transition_allowlist"),
     },
 )
