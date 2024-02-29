@@ -15,19 +15,27 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AssertStatement;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.MethodCall;
+import com.google.j2cl.transpiler.ast.IfStatement;
+import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.Statement;
-import com.google.j2cl.transpiler.ast.TypeDescriptors;
-import java.util.List;
 
 /** Replaces assert statements with the corresponding method call to the runtime. */
 public class ImplementAssertStatements extends NormalizationPass {
+
+  private final boolean useWasmDebugFlag;
+
+  public ImplementAssertStatements() {
+    this(false);
+  }
+
+  public ImplementAssertStatements(boolean useWasmDebugFlag) {
+    this.useWasmDebugFlag = useWasmDebugFlag;
+  }
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
@@ -35,26 +43,27 @@ public class ImplementAssertStatements extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Statement rewriteAssertStatement(AssertStatement assertStatement) {
-            if (assertStatement.getMessage() == null) {
-              return createAssertsMethodCallStatement(
-                  "$assert",
-                  ImmutableList.of(assertStatement.getExpression()),
-                  assertStatement.getSourcePosition());
+            SourcePosition sourcePosition = assertStatement.getSourcePosition();
+
+            Statement assertMethodCall =
+                implementAssertStatement(assertStatement).makeStatement(sourcePosition);
+            if (!useWasmDebugFlag) {
+              return assertMethodCall;
             }
-            return createAssertsMethodCallStatement(
-                "$assertWithMessage",
-                ImmutableList.of(assertStatement.getExpression(), assertStatement.getMessage()),
-                assertStatement.getSourcePosition());
+            return IfStatement.newBuilder()
+                .setConditionExpression(RuntimeMethods.createAreWasmAssertionsEnabledMethodCall())
+                .setThenStatement(assertMethodCall)
+                .setSourcePosition(sourcePosition)
+                .build();
           }
         });
   }
 
-  private static Statement createAssertsMethodCallStatement(
-      String methodName, List<Expression> arguments, SourcePosition sourcePosition) {
-    return MethodCall.Builder.from(
-            TypeDescriptors.get().javaemulInternalAsserts.getMethodDescriptorByName(methodName))
-        .setArguments(arguments)
-        .build()
-        .makeStatement(sourcePosition);
+  private static Expression implementAssertStatement(AssertStatement assertStatement) {
+    if (assertStatement.getMessage() == null) {
+      return RuntimeMethods.createAssertMethodCall(assertStatement.getExpression());
+    }
+    return RuntimeMethods.createAssertWithMessageMethodCall(
+        assertStatement.getExpression(), assertStatement.getMessage());
   }
 }

@@ -327,6 +327,13 @@
       ;;@ trycatch/TryCatch.java:55:4
       
       (block
+       ;;@ trycatch/TryCatch.java:56:6
+       (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+        (then
+         ;;@ trycatch/TryCatch.java:56:6
+         (call $$assert__boolean__void@javaemul.internal.Asserts (i32.const 1))
+        )
+       )
       )
      )
     ) (catch $exception.event (block

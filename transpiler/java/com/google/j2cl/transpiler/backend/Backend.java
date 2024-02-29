@@ -153,7 +153,6 @@ import com.google.j2cl.transpiler.passes.PropagateConstants;
 import com.google.j2cl.transpiler.passes.PropagateJsEnumConstants;
 import com.google.j2cl.transpiler.passes.PropagateNullabilityJ2kt;
 import com.google.j2cl.transpiler.passes.RecoverShortcutBooleanOperator;
-import com.google.j2cl.transpiler.passes.RemoveAssertStatements;
 import com.google.j2cl.transpiler.passes.RemoveCustomIsInstanceMethods;
 import com.google.j2cl.transpiler.passes.RemoveNativeTypes;
 import com.google.j2cl.transpiler.passes.RemoveNestedBlocks;
@@ -406,7 +405,6 @@ public enum Backend {
           MoveNestedClassesToTop::new,
           AddBridgeMethods::new,
           AddEnumImplicitMethods::new,
-          () -> new ImplementSystemGetProperty(options.getDefinesForWasm()),
           NormalizeTryWithResources::new,
           NormalizeCatchClauses::new,
           () -> new NormalizeEnumClasses(/* useMakeEnumNameIndirection= */ false),
@@ -417,6 +415,9 @@ public enum Backend {
           () -> new NormalizeShifts(/* narrowAllToInt= */ false),
           NormalizeStaticMemberQualifiers::new,
           NormalizeMultiExpressions::new,
+          // needs to run before ImplementSystemGetProperty
+          () -> new ImplementAssertStatements(/* useWasmDebugFlag= */ true),
+          () -> new ImplementSystemGetProperty(options.getDefinesForWasm()),
 
           // Rewrite operations that do not have direct support in wasm into ones that have.
           () -> new ExpandCompoundAssignments(/* expandAll= */ true),
@@ -458,9 +459,6 @@ public enum Backend {
           ImplementStringCompileTimeConstants::new,
           NormalizeArrayCreationsWasm::new,
           InsertCastOnArrayAccess::new,
-          options.getWasmRemoveAssertStatement()
-              ? RemoveAssertStatements::new
-              : ImplementAssertStatements::new,
 
           // Normalize multiexpressions before rewriting assignments so that whenever there is a
           // multiexpression, the result is used.
@@ -605,9 +603,7 @@ public enum Backend {
           ImplementClassMetadataViaGetters::new,
           NormalizeArrayCreationsWasm::new,
           InsertCastOnArrayAccess::new,
-          options.getWasmRemoveAssertStatement()
-              ? RemoveAssertStatements::new
-              : ImplementAssertStatements::new,
+          () -> new ImplementAssertStatements(/* useWasmDebugFlag= */ true),
 
           // Normalize multiexpressions before rewriting assignments so that whenever there is a
           // multiexpression, the result is used.

@@ -75,6 +75,48 @@
  (block
   ;;@ assertsimple/AssertSimple.java:19:41
   (call $$clinit__void_<once>_@assertsimple.AssertSimple )
+  ;;@ assertsimple/AssertSimple.java:20:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ assertsimple/AssertSimple.java:20:4
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (i32.add (i32.const 1) (i32.const 2)) (i32.const 3)))
+   )
+  )
+  ;;@ assertsimple/AssertSimple.java:21:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ assertsimple/AssertSimple.java:21:4
+    (call $$assertWithMessage__boolean__java_lang_Object__void@javaemul.internal.Asserts (i32.eq (i32.add (i32.const 1) (i32.const 2)) (i32.const 3))(call $$getString_|Error_|__java_lang_String_<once>_@assertsimple.AssertSimple ))
+   )
+  )
+  ;;@ assertsimple/AssertSimple.java:22:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ assertsimple/AssertSimple.java:22:4
+    (call $$assertWithMessage__boolean__java_lang_Object__void@javaemul.internal.Asserts (i32.eq (i32.add (i32.const 1) (i32.const 2)) (i32.const 3))(ref.null $java.lang.Object))
+   )
+  )
+  ;;@ assertsimple/AssertSimple.java:23:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ assertsimple/AssertSimple.java:23:4
+    (call $$assertWithMessage__boolean__java_lang_Object__void@javaemul.internal.Asserts (i32.eq (i32.add (i32.const 1) (i32.const 2)) (i32.const 3))(local.get $args))
+   )
+  )
+  ;;@ assertsimple/AssertSimple.java:24:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ assertsimple/AssertSimple.java:24:4
+    (call $$assertWithMessage__boolean__java_lang_Object__void@javaemul.internal.Asserts (i32.eq (i32.add (i32.const 1) (i32.const 2)) (i32.const 3))(ref.cast (ref null $java.lang.String) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $args)) (i32.const 0))))
+   )
+  )
+  ;;@ assertsimple/AssertSimple.java:25:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ assertsimple/AssertSimple.java:25:4
+    (call $$assertWithMessage__boolean__java_lang_Object__void@javaemul.internal.Asserts (i32.eq (i32.add (i32.const 1) (i32.const 2)) (i32.const 3))(call $$create__@java.lang.Object ))
+   )
+  )
  )
 )
 

@@ -320,6 +320,13 @@
  (local $this (ref null $localnamecollision.Asserts))
  (local.set $this (ref.cast (ref $localnamecollision.Asserts) (local.get $this.untyped)))
  (block
+  ;;@ localnamecollision/Asserts.java:20:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ localnamecollision/Asserts.java:20:4
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.ne (i32.const 5) (i32.const 4)))
+   )
+  )
   ;;@ localnamecollision/Asserts.java:21:4
   (return (i32.const 5))
  )
@@ -518,6 +525,7 @@
  (local $com_google_j2cl_readable_localnamecollision_package1_A i32)
  (local $com_google_j2cl_readable_localnamecollision_package2_A i32)
  (local $A i32)
+ (local $$qualifier (ref null $localnamecollision.Asserts))
  (local $this (ref null $localnamecollision.LocalNameCollision))
  (local.set $this (ref.cast (ref $localnamecollision.LocalNameCollision) (local.get $this.untyped)))
  (block
@@ -541,6 +549,16 @@
   (local.set $A (i32.const 1))
   ;;@ localnamecollision/LocalNameCollision.java:30:4
   (local.set $LocalNameCollision (if (result i32) (if (result i32) (if (result i32) (if (result i32) (ref.test (ref $localnamecollision.LocalNameCollision) (local.get $RuntimeException)) (then (i32.const 1)) (else (ref.test (ref $java.lang.RuntimeException) (local.get $RuntimeException)))) (then (i32.const 1)) (else (ref.test (ref $localnamecollision.package1.A) (local.get $RuntimeException)))) (then (i32.const 1)) (else (ref.test (ref $localnamecollision.package2.A) (local.get $RuntimeException)))) (then (i32.const 1)) (else (ref.test (ref $localnamecollision.Class) (local.get $RuntimeException)))))
+  ;;@ localnamecollision/LocalNameCollision.java:36:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ localnamecollision/LocalNameCollision.java:36:4
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (block (result i32)
+     (local.set $$qualifier (call $$create__@localnamecollision.Asserts ))
+     (call_ref $function.m_n__int_$pp_localnamecollision (ref.as_non_null (local.get $$qualifier))(struct.get $localnamecollision.Asserts.vtable $m_n__int_$pp_localnamecollision (struct.get $localnamecollision.Asserts $vtable(local.get $$qualifier))))
+    ) (i32.const 5)))
+   )
+  )
  )
 )
 (elem declare func $m_testClassLocalVarCollision__void@localnamecollision.LocalNameCollision)

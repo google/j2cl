@@ -1213,6 +1213,13 @@
  (block
   ;;@ innerclassinitorder/InnerClassInitOrder.java:61:4
   (drop (call $$create__innerclassinitorder_InnerClassInitOrder@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall (local.get $this)))
+  ;;@ innerclassinitorder/InnerClassInitOrder.java:62:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ innerclassinitorder/InnerClassInitOrder.java:62:4
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (struct.get $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder (local.get $this)) (i32.const 100)))
+   )
+  )
  )
 )
 (elem declare func $m_testOuterThisFromSuperCall__void@innerclassinitorder.InnerClassInitOrder)
@@ -1227,6 +1234,13 @@
  (block
   ;;@ innerclassinitorder/InnerClassInitOrder.java:66:4
   (drop (call $$create__innerclassinitorder_InnerClassInitOrder@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall (local.get $this)))
+  ;;@ innerclassinitorder/InnerClassInitOrder.java:67:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ innerclassinitorder/InnerClassInitOrder.java:67:4
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (struct.get $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder (local.get $this)) (i32.const 1100)))
+   )
+  )
  )
 )
 (elem declare func $m_testOuterThisFromThisCall__void@innerclassinitorder.InnerClassInitOrder)
@@ -1242,6 +1256,34 @@
  (block
   ;;@ innerclassinitorder/InnerClassInitOrder.java:186:4
   (local.set $o (call $$create__@innerclassinitorder.InnerClassInitOrder.ESOuter ))
+  ;;@ innerclassinitorder/InnerClassInitOrder.java:187:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ innerclassinitorder/InnerClassInitOrder.java:187:4
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (i32.const 1) (struct.get $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner $value@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner (call $$create__innerclassinitorder_InnerClassInitOrder_ESOuter@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner (local.get $o)))))
+   )
+  )
+  ;;@ innerclassinitorder/InnerClassInitOrder.java:188:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ innerclassinitorder/InnerClassInitOrder.java:188:4
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (i32.const 2) (struct.get $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner $value@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner (call $$create__innerclassinitorder_InnerClassInitOrder_ESOuter__int@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner (local.get $o)(i32.const 2)))))
+   )
+  )
+  ;;@ innerclassinitorder/InnerClassInitOrder.java:189:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ innerclassinitorder/InnerClassInitOrder.java:189:4
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (i32.const 1) (struct.get $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner $value@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner (call $$create__innerclassinitorder_InnerClassInitOrder_ESOuter@innerclassinitorder.InnerClassInitOrder.ESInnerSubclass (local.get $o)))))
+   )
+  )
+  ;;@ innerclassinitorder/InnerClassInitOrder.java:190:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ innerclassinitorder/InnerClassInitOrder.java:190:4
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (i32.const 2) (struct.get $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner $value@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner (call $$create__int__innerclassinitorder_InnerClassInitOrder_ESOuter@innerclassinitorder.InnerClassInitOrder.ESInnerSubclass (i32.const 2)(local.get $o)))))
+   )
+  )
  )
 )
 (elem declare func $m_testExtendsNested__void@innerclassinitorder.InnerClassInitOrder)
@@ -1257,6 +1299,34 @@
  (block
   ;;@ innerclassinitorder/InnerClassInitOrder.java:197:4
   (local.set $o (call $$create__@innerclassinitorder.InnerClassInitOrder.ESWGOuter ))
+  ;;@ innerclassinitorder/InnerClassInitOrder.java:198:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ innerclassinitorder/InnerClassInitOrder.java:198:4
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (i32.const 1) (struct.get $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner $value@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner (call $$create__innerclassinitorder_InnerClassInitOrder_ESWGOuter@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner (local.get $o)))))
+   )
+  )
+  ;;@ innerclassinitorder/InnerClassInitOrder.java:199:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ innerclassinitorder/InnerClassInitOrder.java:199:4
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (i32.const 2) (struct.get $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner $value@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner (call $$create__innerclassinitorder_InnerClassInitOrder_ESWGOuter__int@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner (local.get $o)(i32.const 2)))))
+   )
+  )
+  ;;@ innerclassinitorder/InnerClassInitOrder.java:200:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ innerclassinitorder/InnerClassInitOrder.java:200:4
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (i32.const 1) (struct.get $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner $value@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner (call $$create__innerclassinitorder_InnerClassInitOrder_ESWGOuter@innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass (local.get $o)))))
+   )
+  )
+  ;;@ innerclassinitorder/InnerClassInitOrder.java:201:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ innerclassinitorder/InnerClassInitOrder.java:201:4
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (i32.const 2) (struct.get $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner $value@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner (call $$create__int__innerclassinitorder_InnerClassInitOrder_ESWGOuter@innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass (i32.const 2)(local.get $o)))))
+   )
+  )
  )
 )
 (elem declare func $m_testExtendsNestedWithGenerics__void@innerclassinitorder.InnerClassInitOrder)
@@ -1273,8 +1343,50 @@
  (block
   ;;@ innerclassinitorder/InnerClassInitOrder.java:205:4
   (local.set $p1 (call $$create__@innerclassinitorder.InnerClassInitOrder.P1 ))
+  ;;@ innerclassinitorder/InnerClassInitOrder.java:206:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ innerclassinitorder/InnerClassInitOrder.java:206:4
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (i32.const 1) (struct.get $innerclassinitorder.InnerClassInitOrder.P1 $value@innerclassinitorder.InnerClassInitOrder.P1 (local.get $p1))))
+   )
+  )
+  ;;@ innerclassinitorder/InnerClassInitOrder.java:207:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ innerclassinitorder/InnerClassInitOrder.java:207:4
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (i32.const 2) (struct.get $innerclassinitorder.InnerClassInitOrder.P1 $value@innerclassinitorder.InnerClassInitOrder.P1 (call $$create__int@innerclassinitorder.InnerClassInitOrder.P1 (i32.const 2)))))
+   )
+  )
   ;;@ innerclassinitorder/InnerClassInitOrder.java:208:4
   (local.set $p2 (call $$create__innerclassinitorder_InnerClassInitOrder_P1@innerclassinitorder.InnerClassInitOrder.P1.P2 (local.get $p1)))
+  ;;@ innerclassinitorder/InnerClassInitOrder.java:209:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ innerclassinitorder/InnerClassInitOrder.java:209:4
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (i32.const 1) (struct.get $innerclassinitorder.InnerClassInitOrder.P1 $value@innerclassinitorder.InnerClassInitOrder.P1 (local.get $p2))))
+   )
+  )
+  ;;@ innerclassinitorder/InnerClassInitOrder.java:210:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ innerclassinitorder/InnerClassInitOrder.java:210:4
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (i32.const 2) (struct.get $innerclassinitorder.InnerClassInitOrder.P1 $value@innerclassinitorder.InnerClassInitOrder.P1 (call $$create__innerclassinitorder_InnerClassInitOrder_P1__int@innerclassinitorder.InnerClassInitOrder.P1.P2 (local.get $p1)(i32.const 2)))))
+   )
+  )
+  ;;@ innerclassinitorder/InnerClassInitOrder.java:211:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ innerclassinitorder/InnerClassInitOrder.java:211:4
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (i32.const 1) (struct.get $innerclassinitorder.InnerClassInitOrder.P1 $value@innerclassinitorder.InnerClassInitOrder.P1 (call $$create__innerclassinitorder_InnerClassInitOrder_P1_P2@innerclassinitorder.InnerClassInitOrder.P1.P2.P3 (local.get $p2)))))
+   )
+  )
+  ;;@ innerclassinitorder/InnerClassInitOrder.java:212:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ innerclassinitorder/InnerClassInitOrder.java:212:4
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (i32.const 2) (struct.get $innerclassinitorder.InnerClassInitOrder.P1 $value@innerclassinitorder.InnerClassInitOrder.P1 (call $$create__innerclassinitorder_InnerClassInitOrder_P1_P2__int@innerclassinitorder.InnerClassInitOrder.P1.P2.P3 (local.get $p2)(i32.const 2)))))
+   )
+  )
  )
 )
 (elem declare func $m_testInnerClassCtors__void@innerclassinitorder.InnerClassInitOrder)
@@ -1289,6 +1401,13 @@
  (block
   ;;@ innerclassinitorder/InnerClassInitOrder.java:216:4
   (drop (call $$create__innerclassinitorder_InnerClassInitOrder@innerclassinitorder.InnerClassInitOrder.InnerClass (local.get $this)))
+  ;;@ innerclassinitorder/InnerClassInitOrder.java:217:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ innerclassinitorder/InnerClassInitOrder.java:217:4
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (struct.get $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder (local.get $this)) (i32.const 1111)))
+   )
+  )
  )
 )
 (elem declare func $m_testInnerClassInitialization__void@innerclassinitorder.InnerClassInitOrder)
@@ -1346,6 +1465,13 @@
     (br 0)
    )
   )
+  ;;@ innerclassinitorder/InnerClassInitOrder.java:243:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ innerclassinitorder/InnerClassInitOrder.java:243:4
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (struct.get $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder (local.get $this)) (i32.const 1156)))
+   )
+  )
  )
 )
 (elem declare func $m_testInnerClassLoop__void@innerclassinitorder.InnerClassInitOrder)
@@ -1361,6 +1487,13 @@
  (block
   ;;@ innerclassinitorder/InnerClassInitOrder.java:308:4
   (local.set $x (call $$create__innerclassinitorder_InnerClassInitOrder_Outer@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (struct.get $innerclassinitorder.InnerClassInitOrder $outerIsSuper@innerclassinitorder.InnerClassInitOrder (local.get $this))))
+  ;;@ innerclassinitorder/InnerClassInitOrder.java:309:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ innerclassinitorder/InnerClassInitOrder.java:309:4
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (i32.const 2) (call_ref $function.m_getValue__int (ref.as_non_null (local.get $x))(struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.vtable $m_getValue__int (struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper $vtable(local.get $x))))))
+   )
+  )
  )
 )
 (elem declare func $m_testOuterIsNotSuper__void@innerclassinitorder.InnerClassInitOrder)
@@ -1376,6 +1509,13 @@
  (block
   ;;@ innerclassinitorder/InnerClassInitOrder.java:314:4
   (local.set $x (call $$create__innerclassinitorder_InnerClassInitOrder@innerclassinitorder.InnerClassInitOrder.2 (local.get $this)))
+  ;;@ innerclassinitorder/InnerClassInitOrder.java:316:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ innerclassinitorder/InnerClassInitOrder.java:316:4
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (i32.const 2) (call_ref $function.m_getValue__int (ref.as_non_null (local.get $x))(struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.vtable $m_getValue__int (struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper $vtable(local.get $x))))))
+   )
+  )
  )
 )
 (elem declare func $m_testOuterIsNotSuperAnon__void@innerclassinitorder.InnerClassInitOrder)
@@ -1391,6 +1531,13 @@
  (block
   ;;@ innerclassinitorder/InnerClassInitOrder.java:320:4
   (local.set $x (call $$create__@innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall ))
+  ;;@ innerclassinitorder/InnerClassInitOrder.java:321:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ innerclassinitorder/InnerClassInitOrder.java:321:4
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (i32.const 2) (call_ref $function.m_getValue__int (ref.as_non_null (local.get $x))(struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.vtable $m_getValue__int (struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper $vtable(local.get $x))))))
+   )
+  )
  )
 )
 (elem declare func $m_testQualifiedSuperCall__void@innerclassinitorder.InnerClassInitOrder)
@@ -1406,6 +1553,13 @@
  (block
   ;;@ innerclassinitorder/InnerClassInitOrder.java:325:4
   (local.set $x (call $$create__innerclassinitorder_InnerClassInitOrder@innerclassinitorder.InnerClassInitOrder.3 (local.get $this)))
+  ;;@ innerclassinitorder/InnerClassInitOrder.java:326:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ innerclassinitorder/InnerClassInitOrder.java:326:4
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (i32.const 2) (call_ref $function.m_getValue__int (ref.as_non_null (local.get $x))(struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.vtable $m_getValue__int (struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper $vtable(local.get $x))))))
+   )
+  )
  )
 )
 (elem declare func $m_testQualifiedSuperCallAnon__void@innerclassinitorder.InnerClassInitOrder)
@@ -1418,6 +1572,20 @@
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
  (local.set $this (ref.cast (ref $innerclassinitorder.InnerClassInitOrder) (local.get $this.untyped)))
  (block
+  ;;@ innerclassinitorder/InnerClassInitOrder.java:330:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ innerclassinitorder/InnerClassInitOrder.java:330:4
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (i32.const 1) (call_ref $function.m_checkDispatchFromSub1__int (ref.as_non_null (struct.get $innerclassinitorder.InnerClassInitOrder $outerIsSuper@innerclassinitorder.InnerClassInitOrder (local.get $this)))(struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.vtable $m_checkDispatchFromSub1__int (struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper $vtable(struct.get $innerclassinitorder.InnerClassInitOrder $outerIsSuper@innerclassinitorder.InnerClassInitOrder (local.get $this)))))))
+   )
+  )
+  ;;@ innerclassinitorder/InnerClassInitOrder.java:331:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ innerclassinitorder/InnerClassInitOrder.java:331:4
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (i32.const 1) (call_ref $function.m_checkDispatchFromSub2__int (ref.as_non_null (struct.get $innerclassinitorder.InnerClassInitOrder $outerIsSuper@innerclassinitorder.InnerClassInitOrder (local.get $this)))(struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.vtable $m_checkDispatchFromSub2__int (struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper $vtable(struct.get $innerclassinitorder.InnerClassInitOrder $outerIsSuper@innerclassinitorder.InnerClassInitOrder (local.get $this)))))))
+   )
+  )
  )
 )
 (elem declare func $m_testSuperDispatch__void@innerclassinitorder.InnerClassInitOrder)
@@ -1433,6 +1601,13 @@
  (block
   ;;@ innerclassinitorder/InnerClassInitOrder.java:335:4
   (local.set $x (call_ref $function.m_unqualifiedAlloc__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper (ref.as_non_null (struct.get $innerclassinitorder.InnerClassInitOrder $outerIsSuper@innerclassinitorder.InnerClassInitOrder (local.get $this)))(struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.vtable $m_unqualifiedAlloc__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper (struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper $vtable(struct.get $innerclassinitorder.InnerClassInitOrder $outerIsSuper@innerclassinitorder.InnerClassInitOrder (local.get $this))))))
+  ;;@ innerclassinitorder/InnerClassInitOrder.java:336:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ innerclassinitorder/InnerClassInitOrder.java:336:4
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (i32.const 2) (call_ref $function.m_getValue__int (ref.as_non_null (local.get $x))(struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.vtable $m_getValue__int (struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper $vtable(local.get $x))))))
+   )
+  )
  )
 )
 (elem declare func $m_testUnqualifiedAlloc__void@innerclassinitorder.InnerClassInitOrder)
@@ -1448,6 +1623,13 @@
  (block
   ;;@ innerclassinitorder/InnerClassInitOrder.java:340:4
   (local.set $x (call $$create__innerclassinitorder_InnerClassInitOrder_Outer@innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall (struct.get $innerclassinitorder.InnerClassInitOrder $outerIsSuper@innerclassinitorder.InnerClassInitOrder (local.get $this))))
+  ;;@ innerclassinitorder/InnerClassInitOrder.java:341:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ innerclassinitorder/InnerClassInitOrder.java:341:4
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (i32.const 2) (call_ref $function.m_getValue__int (ref.as_non_null (local.get $x))(struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.vtable $m_getValue__int (struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper $vtable(local.get $x))))))
+   )
+  )
  )
 )
 (elem declare func $m_testUnqualifiedSuperCall__void@innerclassinitorder.InnerClassInitOrder)
@@ -1463,6 +1645,13 @@
  (block
   ;;@ innerclassinitorder/InnerClassInitOrder.java:346:4
   (local.set $x (call $$create__innerclassinitorder_InnerClassInitOrder@innerclassinitorder.InnerClassInitOrder.4 (local.get $this)))
+  ;;@ innerclassinitorder/InnerClassInitOrder.java:348:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ innerclassinitorder/InnerClassInitOrder.java:348:4
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (i32.const 2) (call_ref $function.m_getValue__int (ref.as_non_null (local.get $x))(struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.vtable $m_getValue__int (struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper $vtable(local.get $x))))))
+   )
+  )
  )
 )
 (elem declare func $m_testUnqualifiedSuperCallAnon__void@innerclassinitorder.InnerClassInitOrder)

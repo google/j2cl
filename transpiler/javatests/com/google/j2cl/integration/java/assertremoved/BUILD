@@ -20,7 +20,5 @@ integration_test(
     # TODO(b/249154012): Turn this on when we can disable assertions on the JVM.
     enable_jvm_test = False,
     enable_kt = False,
-    # TODO(b/b/325055794): Removal of asserts not yet implemented in the modular pipeline
-    enable_wasm_modular = False,
     tags = ["manual"],
 )

@@ -490,7 +490,7 @@ def j2wasm_application(name, defines = dict(), **kwargs):
             # Mark all types as 'final' that we can, to help VMs at runtime.
             "--type-finalizing",
         ],
-        transpiler_args = transpiler_args + ["-experimentalWasmRemoveAssertStatement"],
+        transpiler_args = transpiler_args,
         defines = ["%s=%s" % (k, v) for (k, v) in optimized_defines.items()],
         **kwargs
     )

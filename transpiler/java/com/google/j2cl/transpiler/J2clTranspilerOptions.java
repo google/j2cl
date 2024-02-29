@@ -44,7 +44,6 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
   public static Builder newBuilder() {
     return new AutoValue_J2clTranspilerOptions.Builder()
         .setOptimizeAutoValue(false)
-        .setWasmRemoveAssertStatement(false)
         .setWasmEnableNonNativeJsEnum(false)
         .setNullMarkedSupported(false);
   }
@@ -92,8 +91,6 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
     abstract Builder setWasmEntryPointPatterns(ImmutableList<EntryPointPattern> entryPointSpecs);
 
     public abstract Builder setDefinesForWasm(ImmutableMap<String, String> definesForWasm);
-
-    public abstract Builder setWasmRemoveAssertStatement(boolean wasmRemoveAssertStatement);
 
     public abstract Builder setWasmEnableNonNativeJsEnum(boolean wasmEnableNonNativeJsEnum);
 

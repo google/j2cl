@@ -20,6 +20,15 @@ import jsinterop.annotations.JsType;
 /** Defines helper functions used for generating assert statements. */
 @JsType(namespace = "vmbootstrap")
 public class Asserts {
+
+  // TODO(b/203692803): Unify the mechanism to enable/disable assertions in the different platforms.
+  private static final boolean WASM_ASSERTIONS_ENABLED =
+      System.getProperty("J2WASM_DEBUG") == "TRUE";
+
+  public static boolean areWasmAssertionsEnabled() {
+    return WASM_ASSERTIONS_ENABLED;
+  }
+
   public static void $assert(boolean condition) {
     if (!condition) {
       throw new AssertionError();

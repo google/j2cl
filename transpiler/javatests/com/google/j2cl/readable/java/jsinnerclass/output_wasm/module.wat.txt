@@ -152,9 +152,20 @@
 (func $m_main__arrayOf_java_lang_String__void@jsinnerclass.Main
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ jsinnerclass/Main.java:42:21
+ (local $$qualifier (ref null $jsinnerclass.Main.Outer))
  (block
   ;;@ jsinnerclass/Main.java:42:42
   (call $$clinit__void_<once>_@jsinnerclass.Main )
+  ;;@ jsinnerclass/Main.java:43:4
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ jsinnerclass/Main.java:43:4
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (block (result i32)
+     (local.set $$qualifier (call $$create__@jsinnerclass.Main.Outer ))
+     (call_ref $function.m_method__int (ref.as_non_null (local.get $$qualifier))(struct.get $jsinnerclass.Main.Outer.vtable $m_method__int (struct.get $jsinnerclass.Main.Outer $vtable(local.get $$qualifier))))
+    ) (i32.const 5)))
+   )
+  )
  )
 )
 

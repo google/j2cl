@@ -393,6 +393,29 @@ public final class RuntimeMethods {
         .build();
   }
 
+  /** Create a call to Assert.$assert method. */
+  public static Expression createAssertMethodCall(Expression expression) {
+    return createAssertsMethodCall("$assert", ImmutableList.of(expression));
+  }
+
+  /** Create a call to Assert.$assertWithMessage method. */
+  public static Expression createAssertWithMessageMethodCall(
+      Expression expression, Expression message) {
+    return createAssertsMethodCall("$assertWithMessage", ImmutableList.of(expression, message));
+  }
+
+  /** Create a call to Asserts.areWasmAssertionsEnabled method. */
+  public static Expression createAreWasmAssertionsEnabledMethodCall() {
+    return createAssertsMethodCall("areWasmAssertionsEnabled", ImmutableList.of());
+  }
+
+  private static Expression createAssertsMethodCall(String methodName, List<Expression> arguments) {
+    return MethodCall.Builder.from(
+            TypeDescriptors.get().javaemulInternalAsserts.getMethodDescriptorByName(methodName))
+        .setArguments(arguments)
+        .build();
+  }
+
   /** Create a call to InternalPreconditions.checkNotNull method. */
   public static Expression createCheckNotNullCall(Expression argument) {
     return createCheckNotNullCall(argument, false);

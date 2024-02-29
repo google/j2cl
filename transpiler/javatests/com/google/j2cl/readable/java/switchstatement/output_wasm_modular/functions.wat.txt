@@ -180,7 +180,12 @@
     ;;@ switchstatement/SwitchStatement.java:75:8
     (local.set $i (i32.const 3))
     ;;@ switchstatement/SwitchStatement.java:76:8
-    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (local.get $i) (i32.const 3)))
+    (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+     (then
+      ;;@ switchstatement/SwitchStatement.java:76:8
+      (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (local.get $i) (i32.const 3)))
+     )
+    )
     ;;@ switchstatement/SwitchStatement.java:77:8
     (return )
    )
@@ -200,7 +205,12 @@
    )
   )
   ;;@ switchstatement/SwitchStatement.java:85:4
-  (call $$assert__boolean__void@javaemul.internal.Asserts (i32.const 0))
+  (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+   (then
+    ;;@ switchstatement/SwitchStatement.java:85:4
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.const 0))
+   )
+  )
  )
 )
 

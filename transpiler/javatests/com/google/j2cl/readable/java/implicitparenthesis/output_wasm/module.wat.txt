@@ -109,6 +109,13 @@
     (local.set $$qualifier (if (result (ref null $java.lang.Integer)) (i32.eq (local.get $primitiveInt) (i32.const 5)) (then (call $$create__int@java.lang.Integer (i32.const 15))) (else (call $$create__int@java.lang.Integer (i32.const 30)))))
     (call_ref $function.m_intValue__int (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier))))
    ))
+   ;;@ implicitparenthesis/ImplicitParenthesis.java:37:6
+   (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+    (then
+     ;;@ implicitparenthesis/ImplicitParenthesis.java:37:6
+     (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (local.get $primitiveInt) (i32.const 15)))
+    )
+   )
   )
   (block
    ;;@ implicitparenthesis/ImplicitParenthesis.java:42:6
@@ -123,6 +130,13 @@
     ))
     (call_ref $function.m_intValue__int (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_1))))
    ))
+   ;;@ implicitparenthesis/ImplicitParenthesis.java:45:6
+   (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+    (then
+     ;;@ implicitparenthesis/ImplicitParenthesis.java:45:6
+     (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (local.get $primitiveInt) (i32.const 15)))
+    )
+   )
   )
   (block
    ;;@ implicitparenthesis/ImplicitParenthesis.java:50:6
@@ -137,6 +151,13 @@
     ))
     (call_ref $function.m_intValue__int (ref.as_non_null (local.get $$qualifier_2))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_2))))
    ))
+   ;;@ implicitparenthesis/ImplicitParenthesis.java:53:6
+   (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+    (then
+     ;;@ implicitparenthesis/ImplicitParenthesis.java:53:6
+     (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (local.get $primitiveInt) (i32.const 5)))
+    )
+   )
   )
   (block
    ;;@ implicitparenthesis/ImplicitParenthesis.java:58:6
@@ -152,6 +173,13 @@
     ))
     (call_ref $function.m_intValue__int (ref.as_non_null (local.get $$qualifier_3))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_3))))
    ))
+   ;;@ implicitparenthesis/ImplicitParenthesis.java:61:6
+   (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+    (then
+     ;;@ implicitparenthesis/ImplicitParenthesis.java:61:6
+     (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (local.get $primitiveInt) (i32.const 10)))
+    )
+   )
   )
   (block
    ;;@ implicitparenthesis/ImplicitParenthesis.java:66:6
@@ -166,6 +194,13 @@
     ))
     (call_ref $function.m_intValue__int (ref.as_non_null (local.get $$qualifier_4))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_4))))
    ))
+   ;;@ implicitparenthesis/ImplicitParenthesis.java:69:6
+   (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+    (then
+     ;;@ implicitparenthesis/ImplicitParenthesis.java:69:6
+     (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (local.get $primitiveInt) (i32.const 11)))
+    )
+   )
   )
  )
 )
@@ -190,6 +225,13 @@
    (local.set $boxedInt (call $$create__int@java.lang.Integer (i32.const 10)))
    ;;@ implicitparenthesis/ImplicitParenthesis.java:84:6
    (local.set $primitiveInt (i32.sub (call_ref $function.m_intValue__int (ref.as_non_null (local.get $boxedInt))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxedInt)))) (local.get $primitiveInt)))
+   ;;@ implicitparenthesis/ImplicitParenthesis.java:85:6
+   (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+    (then
+     ;;@ implicitparenthesis/ImplicitParenthesis.java:85:6
+     (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (local.get $primitiveInt) (i32.const 5)))
+    )
+   )
   )
   (block
    ;;@ implicitparenthesis/ImplicitParenthesis.java:91:6
@@ -200,6 +242,13 @@
    (local.set $boxedBoolean (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.const 1)))
    ;;@ implicitparenthesis/ImplicitParenthesis.java:94:6
    (local.set $boxedBoolean (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.eq (call_ref $function.m_intValue__int (ref.as_non_null (local.get $boxedInt))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxedInt)))) (local.get $primitiveInt))))
+   ;;@ implicitparenthesis/ImplicitParenthesis.java:95:6
+   (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
+    (then
+     ;;@ implicitparenthesis/ImplicitParenthesis.java:95:6
+     (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (call_ref $function.m_booleanValue__boolean (ref.as_non_null (local.get $boxedBoolean))(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $boxedBoolean)))) (i32.const 0)))
+    )
+   )
   )
  )
 )

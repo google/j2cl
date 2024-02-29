@@ -77,6 +77,7 @@ public class TranspilerTester {
         .addArgs("-defineForWasm", "jre.logging.logLevel=ALL")
         .addArgs("-defineForWasm", "jre.logging.simpleConsoleHandler=ENABLED")
         .addArgs("-defineForWasm", "jre.classMetadata=SIMPLE")
+        .addArgs("-defineForWasm", "jre.assertions=ENABLED")
         .addSourcePathArg(
             "transpiler/javatests/com/google/j2cl/transpiler/jre_bundle-j2wasm_deploy-src.jar");
   }
