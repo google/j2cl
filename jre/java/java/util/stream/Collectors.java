@@ -334,12 +334,8 @@ public final class Collectors {
         mapSupplier,
         (map, item) -> {
           K key = keyMapper.apply(item);
-          U newValue = valueMapper.apply(item);
-          if (map.containsKey(key)) {
-            map.put(key, mergeFunction.apply(map.get(key), newValue));
-          } else {
-            map.put(key, newValue);
-          }
+          U value = valueMapper.apply(item);
+          map.merge(key, value, mergeFunction);
         },
         (m1, m2) -> mergeAll(m1, m2, mergeFunction),
         Collector.Characteristics.IDENTITY_FINISH);

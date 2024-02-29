@@ -16,6 +16,7 @@
 
 package com.google.j2cl.jre.java8.util.stream;
 
+import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.averagingDouble;
 import static java.util.stream.Collectors.averagingInt;
 import static java.util.stream.Collectors.averagingLong;
@@ -38,6 +39,7 @@ import static java.util.stream.Collectors.toMap;
 import static java.util.stream.Collectors.toSet;
 
 import com.google.j2cl.jre.java.util.EmulTestBase;
+import java.util.AbstractMap.SimpleImmutableEntry;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -58,6 +60,7 @@ import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
+import java.util.stream.Stream;
 import org.jspecify.nullness.Nullable;
 
 /**
@@ -440,6 +443,88 @@ public class CollectorsTest extends EmulTestBase {
     map.put("a", "a,a");
     applyItems(map, c, "a", "a");
     assertEquals(Arrays.asList("first: a", "second: a", "first: a", "second: a"), seen);
+  }
+
+  @SuppressWarnings({
+    "JdkCollectors", // test of a JDK Collector implementation
+    "UnnecessaryCast", // for nullness purposes: b/326255614
+  })
+  public void testMapRemovalFromMergeFunction() {
+    /*
+     * J2KT requires us to declare a BinaryOperator<@Nullable Integer> because we return null. (This
+     * makes our parameter types nullable, too, even though toMap will never pass a null argument.)
+     * We later cast it to BinaryOperator<Integer>, which is currently the type required by the J2KT
+     * signature for toMap. That signature should perhaps change, similar to how the signature for
+     * ImmutableMap.toImmutableMap should perhaps change, as discussed in
+     * https://github.com/google/guava/issues/6824.
+     */
+    BinaryOperator<@Nullable Integer> mergeFunction =
+        (a, b) -> {
+          int result = requireNonNull(a) + requireNonNull(b);
+          return result == 0 ? null : result;
+        };
+    Map<String, Integer> actual =
+        Stream.<Map.Entry<String, Integer>>of(
+                new SimpleImmutableEntry<>("a", 1),
+                new SimpleImmutableEntry<>("b", 2),
+                new SimpleImmutableEntry<>("b", -2),
+                new SimpleImmutableEntry<>("c", 3),
+                new SimpleImmutableEntry<>("c", -3),
+                new SimpleImmutableEntry<>("c", 7))
+            .collect(
+                toMap(
+                    Map.Entry::getKey,
+                    Map.Entry::getValue,
+                    (BinaryOperator<Integer>) mergeFunction));
+    Map<String, Integer> expected = new HashMap<>();
+    expected.put("a", 1);
+    expected.put("c", 7);
+    assertEquals(expected, actual);
+  }
+
+  @SuppressWarnings("JdkCollectors") // test of a JDK Collector implementation
+  public void testNullFromKeyFunction() {
+    Map<@Nullable Object, Integer> actual = Stream.of(1).collect(toMap(e -> null, e -> e));
+    Map<@Nullable Object, Integer> expected = new HashMap<>();
+    expected.put(null, 1);
+    assertEquals(expected, actual);
+  }
+
+  @SuppressWarnings("JdkCollectors") // test of a JDK Collector implementation
+  public void testNullFromValueFunction() {
+    try {
+      Stream.of(1).collect(toMap(e -> e, e -> null));
+      fail();
+    } catch (NullPointerException expected) {
+    }
+  }
+
+  @SuppressWarnings({
+    "JdkCollectors", // test of a JDK Collector implementation
+    "UnnecessaryCast", // for nullness purposes: b/326255614
+  })
+  public void testNullFromValueFunctionWhenMerging() {
+    /*
+     * J2KT's toMap is annotated to forbid a valueFunction that returns null, so the only way to
+     * return null is to cast away the nullness in the function type.
+     *
+     * (I'm surprised that J2KT doesn't object to the `e -> null` function in
+     * testNullFromValueFunction() above....)
+     */
+    Function<Map.Entry<?, @Nullable String>, @Nullable String> valueFunction = Map.Entry::getValue;
+    try {
+      Stream.<Map.Entry<String, @Nullable String>>of(
+              new SimpleImmutableEntry<>("a", "x"),
+              new SimpleImmutableEntry<>("a", "y"),
+              new SimpleImmutableEntry<>("a", null))
+          .collect(
+              toMap(
+                  Map.Entry::getKey,
+                  (Function<Map.Entry<?, @Nullable String>, String>) valueFunction,
+                  (a, b) -> a + b));
+      fail();
+    } catch (NullPointerException expected) {
+    }
   }
 
   public void testSet() {
