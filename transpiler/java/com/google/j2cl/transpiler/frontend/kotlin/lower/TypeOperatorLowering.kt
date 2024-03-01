@@ -95,35 +95,47 @@ internal class TypeOperatorLowering(private val backendContext: JvmBackendContex
       else ->
         with(builder) {
           // MODIFIED BY GOOGLE:
-          // Previously the type of the variable was always set to kotlin.Any causing a loss of
-          // type information.
+          // The original code uses a let block to perform a not null check as a statement and then
+          // return the cast value. We can simplify the output by instead rewriting it to:
+          //   f!! as Bar?
+          //
           // Original code:
           // irLetS(argument, irType = context.irBuiltIns.anyNType) { tmp ->
-          irLetS(argument) { tmp ->
-            // END OF MODIFICATIONS
-            val message = irString("null cannot be cast to non-null type ${type.render()}")
-            if (backendContext.config.unifiedNullChecks) {
-              // Avoid branching to improve code coverage (KT-27427).
-              // We have to generate a null check here, because even if argument is of non-null
-              // type, it can be uninitialized value, which is 'null' for reference types in JMM.
-              // Most of such null checks will never actually throw, but we can't do anything about
-              // it.
-              irBlock(resultType = type) {
-                +irCall(backendContext.ir.symbols.checkNotNullWithMessage).apply {
-                  putValueArgument(0, irGet(tmp.owner))
-                  putValueArgument(1, message)
-                }
-                +irAs(irGet(tmp.owner), type.makeNullable())
-              }
-            } else {
-              irIfNull(
-                type,
-                irGet(tmp.owner),
-                irCall(throwTypeCastException).apply { putValueArgument(0, message) },
-                irAs(irGet(tmp.owner), type.makeNullable()),
-              )
-            }
-          }
+          //   // END OF MODIFICATIONS
+          //   val message = irString("null cannot be cast to non-null type ${type.render()}")
+          //   if (backendContext.config.unifiedNullChecks) {
+          //     // Avoid branching to improve code coverage (KT-27427).
+          //     // We have to generate a null check here, because even if argument is of non-null
+          //     // type, it can be uninitialized value, which is 'null' for reference types in JMM.
+          //     // Most of such null checks will never actually throw, but we can't do anything
+          // about
+          //     // it.
+          //     irBlock(resultType = type) {
+          //       +irCall(backendContext.ir.symbols.checkNotNullWithMessage).apply {
+          //         putValueArgument(0, irGet(tmp.owner))
+          //         putValueArgument(1, message)
+          //       }
+          //       +irAs(irGet(tmp.owner), type.makeNullable())
+          //     }
+          //   } else {
+          //     irIfNull(
+          //       type,
+          //       irGet(tmp.owner),
+          //       irCall(throwTypeCastException).apply { putValueArgument(0, message) },
+          //       irAs(irGet(tmp.owner), type.makeNullable()),
+          //     )
+          //   }
+          // }
+          val transformedArgument = argument.transformVoid()
+          irAs(
+            irCall(context.irBuiltIns.checkNotNullSymbol).apply {
+              this.type = transformedArgument.type.makeNotNull()
+              putTypeArgument(0, transformedArgument.type.makeNotNull())
+              putValueArgument(0, transformedArgument)
+            },
+            type,
+          )
+          // END OF MODIFICATIONS
         }
     }
 
