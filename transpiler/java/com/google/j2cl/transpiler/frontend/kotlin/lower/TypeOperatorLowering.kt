@@ -64,7 +64,7 @@ internal class TypeOperatorLowering(private val backendContext: JvmBackendContex
             // END OF MODIFICATIONS
             context.oror(
               irEqualsNull(irGet(valueSymbol.owner)),
-              irIs(irGet(valueSymbol.owner), type.makeNotNull())
+              irIs(irGet(valueSymbol.owner), type.makeNotNull()),
             )
           }
         }
@@ -120,7 +120,7 @@ internal class TypeOperatorLowering(private val backendContext: JvmBackendContex
                 type,
                 irGet(tmp.owner),
                 irCall(throwTypeCastException).apply { putValueArgument(0, message) },
-                irAs(irGet(tmp.owner), type.makeNullable())
+                irAs(irGet(tmp.owner), type.makeNullable()),
               )
             }
           }
@@ -153,7 +153,7 @@ internal class TypeOperatorLowering(private val backendContext: JvmBackendContex
             if (
               !expression.argument.type.isSubtypeOf(
                 expression.type.makeNullable(),
-                backendContext.typeSystem
+                backendContext.typeSystem,
               )
             ) {
               +IrCompositeImpl(UNDEFINED_OFFSET, UNDEFINED_OFFSET, expression.type)
@@ -174,10 +174,8 @@ internal class TypeOperatorLowering(private val backendContext: JvmBackendContex
             // MODIFIED BY GOOGLE:
             // Previously the type of the variable was always set to kotlin.Any causing a loss of
             // type information.
-            irLetS(
-              expression.argument.transformVoid(),
-              IrStatementOrigin.SAFE_CALL,
-            ) { valueSymbol ->
+            irLetS(expression.argument.transformVoid(), IrStatementOrigin.SAFE_CALL) { valueSymbol
+              ->
               // END OF MODIFICATIONS
               // MODIFIED BY GOOGLE:
               // Ensure the "then" part is wrapped in an implicit cast. Later on this will ensure
@@ -187,14 +185,14 @@ internal class TypeOperatorLowering(private val backendContext: JvmBackendContex
                   if (valueSymbol.owner.type.isInlineClassType())
                     lowerCast(irGet(valueSymbol.owner), expression.typeOperand)
                   else irGet(valueSymbol.owner),
-                  expression.typeOperand.makeNotNull()
+                  expression.typeOperand.makeNotNull(),
                 )
               // END OF MODIFICATIONS
               irIfThenElse(
                 expression.type,
                 lowerInstanceOf(irGet(valueSymbol.owner), expression.typeOperand.makeNotNull()),
                 thenPart,
-                irNull(expression.type)
+                irNull(expression.type),
               )
             }
           }
@@ -203,45 +201,36 @@ internal class TypeOperatorLowering(private val backendContext: JvmBackendContex
         IrTypeOperator.NOT_INSTANCEOF ->
           irNot(lowerInstanceOf(expression.argument.transformVoid(), expression.typeOperand))
         IrTypeOperator.IMPLICIT_NOTNULL -> {
-          val owner = scope.scopeOwnerSymbol.owner
-          val source =
-            if (owner is IrFunction && owner.isDelegated()) {
-              "${owner.name.asString()}(...)"
-            } else {
-              val declarationParent = parent as? IrDeclaration
-              val sourceView = declarationParent?.let(::sourceViewFor)
-              val (startOffset, endOffset) = expression.extents()
-              if (sourceView?.validSourcePosition(startOffset, endOffset) == true) {
-                sourceView.subSequence(startOffset, endOffset).toString()
-              } else {
-                // Fallback for inconsistent line numbers
-                (declarationParent as? IrDeclarationWithName)?.name?.asString()
-                  ?: "Unknown Declaration"
-              }
-            }
-
-          val text = computeNotNullAssertionText(expression)
-
           // MODIFIED BY GOOGLE:
-          // Previously the type of the variable was always set to kotlin.Any causing a loss of
-          // type information.
-          irLetS(expression.argument.transformVoid()) {
-            // END OF MODIFICATIONS
-            valueSymbol ->
-            irComposite(resultType = expression.type) {
-              if (text != null) {
-                +irCall(checkExpressionValueIsNotNull).apply {
-                  putValueArgument(0, irGet(valueSymbol.owner))
-                  putValueArgument(1, irString(text.trimForRuntimeAssertion()))
-                }
-              } else {
-                +irCall(backendContext.ir.symbols.checkNotNull).apply {
-                  putValueArgument(0, irGet(valueSymbol.owner))
-                }
-              }
-              +irGet(valueSymbol.owner)
-            }
+          // The original implementation lowered these into a composite which applies a null check
+          // as a separate statement. Instead, we've opted to treat it like !! which just wraps the
+          // expression in a checkNotNull() call, greatly simplifying the output code.
+          //
+          // val text = computeNotNullAssertionText(expression)
+          //
+          // irLetS(expression.argument.transformVoid(), irType = context.irBuiltIns.anyNType) {
+          //   valueSymbol ->
+          //   irComposite(resultType = expression.type) {
+          //     if (text != null) {
+          //       +irCall(checkExpressionValueIsNotNull).apply {
+          //         putValueArgument(0, irGet(valueSymbol.owner))
+          //         putValueArgument(1, irString(text.trimForRuntimeAssertion()))
+          //       }
+          //     } else {
+          //       +irCall(backendContext.ir.symbols.checkNotNull).apply {
+          //         putValueArgument(0, irGet(valueSymbol.owner))
+          //       }
+          //     }
+          //     +irGet(valueSymbol.owner)
+          //   }
+          // }
+          val argument = expression.argument.transformVoid()
+          irCall(context.irBuiltIns.checkNotNullSymbol).apply {
+            type = expression.type
+            putTypeArgument(0, argument.type.makeNotNull())
+            putValueArgument(0, argument)
           }
+          // END OF MODIFICATIONS
         }
         else -> {
           expression.transformChildrenVoid()
