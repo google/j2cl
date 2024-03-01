@@ -16,6 +16,7 @@
 package com.google.j2cl.common;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Character.digit;
 import static java.util.stream.Collectors.joining;
 
 /** Utilities to produce Strings in code. */
@@ -27,6 +28,64 @@ public final class StringUtils {
       return string;
     }
     return string.substring(0, 1).toUpperCase() + string.substring(1);
+  }
+
+  /**
+   * Unescapes properly escaped Wtf16 strings.
+   *
+   * <p>Note: meant to be used as the inverse of escapeAsWtf16().
+   */
+  public static String unescapeWtf16(String string) {
+    StringBuilder unescapedStringBuilder = new StringBuilder();
+    char[] charArray = string.toCharArray();
+    for (int i = 0; i < charArray.length; i++) {
+      char c = charArray[i];
+      if (c == '\\') {
+        // escape sequence.
+        i++;
+        switch (charArray[i]) {
+          case 't':
+            unescapedStringBuilder.append('\t');
+            continue;
+          case 'n': // newline
+            unescapedStringBuilder.append('\n');
+            continue;
+          case 'r':
+            unescapedStringBuilder.append('\r');
+            continue;
+          case '"':
+            unescapedStringBuilder.append('\"');
+            continue;
+          case '\'':
+            unescapedStringBuilder.append('\'');
+            continue;
+          case '\\':
+            unescapedStringBuilder.append('\\');
+            continue;
+          case 'u':
+            unescapedStringBuilder.append(unescapeUnicode(charArray, i));
+            i += 4;
+            continue;
+          default:
+            throw new InternalCompilerError("Bad escaping " + string);
+        }
+      }
+      unescapedStringBuilder.append(c);
+    }
+    return unescapedStringBuilder.toString();
+  }
+
+  private static char unescapeUnicode(char[] charArray, int i) {
+    char value = 0;
+
+    for (int j = 0; j < 4; j++) {
+      int digit = digit(charArray[++i], 16);
+      if (digit < 0) {
+        throw new InternalCompilerError("Bad escaping " + new String(charArray));
+      }
+      value = (char) (value * 16 + digit);
+    }
+    return value;
   }
 
   public static String escapeAsWtf16(String string) {
@@ -84,6 +143,7 @@ public final class StringUtils {
         return "\\'";
       case 0x5c: // \
         return "\\\\";
+      default: // fall out
     }
 
     // The rest of the ascii range characters do not need escaping in either representation.

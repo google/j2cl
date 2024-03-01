@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static com.google.common.collect.ImmutableSet.toImmutableSet;
+import static com.google.j2cl.common.StringUtils.unescapeWtf16;
 import static java.lang.String.format;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -46,7 +47,6 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.backend.wasm.JsImportsGenerator;
 import com.google.j2cl.transpiler.backend.wasm.SharedSnippet;
-import com.google.j2cl.transpiler.backend.wasm.StringLiteralInfo;
 import com.google.j2cl.transpiler.backend.wasm.Summary;
 import com.google.j2cl.transpiler.backend.wasm.TypeInfo;
 import com.google.j2cl.transpiler.backend.wasm.WasmConstructsGenerator;
@@ -205,7 +205,12 @@ final class BazelJ2wasmBundler extends BazelWorker {
             s ->
                 // Get descriptor for the getter and synthesize the method logic if it is the
                 // first time it was found.
-                synthesizeStringLiteralGetter(stringLiteralHolder, stringLiteralGetterCreator, s));
+                synthesizeStringLiteralGetter(
+                    stringLiteralHolder,
+                    stringLiteralGetterCreator,
+                    s.getEnclosingTypeName(),
+                    s.getMethodName(),
+                    unescapeWtf16(s.getContent())));
 
     // Synthesize the getters and forwarding methods for the string literals that are values of
     // system properties.
@@ -220,14 +225,9 @@ final class BazelJ2wasmBundler extends BazelWorker {
             synthesizeStringLiteralGetter(
                 stringLiteralHolder,
                 stringLiteralGetterCreator,
-                StringLiteralInfo.newBuilder()
-                    .setContent(value)
-                    .setMethodName(systemGetPropertyGetter.getName())
-                    .setEnclosingTypeName(
-                        systemGetPropertyGetter
-                            .getEnclosingTypeDescriptor()
-                            .getQualifiedSourceName())
-                    .build());
+                systemGetPropertyGetter.getEnclosingTypeDescriptor().getQualifiedSourceName(),
+                systemGetPropertyGetter.getName(),
+                value);
           }
         });
 
@@ -238,21 +238,22 @@ final class BazelJ2wasmBundler extends BazelWorker {
   private void synthesizeStringLiteralGetter(
       com.google.j2cl.transpiler.ast.Type stringLiteralHolder,
       StringLiteralGettersCreator stringLiteralGetterCreator,
-      StringLiteralInfo s) {
+      String enclosingTypeQualifiedSourceName,
+      String methodName,
+      String stringValue) {
     MethodDescriptor m =
         stringLiteralGetterCreator.getOrCreateLiteralMethod(
-            stringLiteralHolder, new StringLiteral(s.getContent()), /* synthesizeMethod= */ true);
+            stringLiteralHolder, new StringLiteral(stringValue), /* synthesizeMethod= */ true);
 
     // Synthesize the forwarding logic.
-    String qualifiedBinaryTypeName = s.getEnclosingTypeName();
     TypeDeclaration typeDeclaration =
         TypeDeclaration.newBuilder()
-            .setClassComponents(Arrays.asList(qualifiedBinaryTypeName.split("\\.")))
+            .setClassComponents(Arrays.asList(enclosingTypeQualifiedSourceName.split("\\.")))
             .setKind(Kind.CLASS)
             .build();
     com.google.j2cl.transpiler.ast.Type type = getType(typeDeclaration);
 
-    Method forwarderMethod = synthesizeForwardingMethod(m, typeDeclaration, s.getMethodName());
+    Method forwarderMethod = synthesizeForwardingMethod(m, typeDeclaration, methodName);
     type.addMember(forwarderMethod);
   }
 

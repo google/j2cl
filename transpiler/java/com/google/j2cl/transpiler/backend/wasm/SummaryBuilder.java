@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.backend.wasm;
 
+import static com.google.j2cl.common.StringUtils.escapeAsWtf16;
 import static com.google.j2cl.transpiler.ast.AstUtils.getSystemGetPropertyGetter;
 import static com.google.j2cl.transpiler.ast.AstUtils.isSystemGetPropertyCall;
 import static java.util.function.Predicate.not;
@@ -188,7 +189,7 @@ public final class SummaryBuilder {
             (s, m) ->
                 summary.addStringLiterals(
                     StringLiteralInfo.newBuilder()
-                        .setContent(s)
+                        .setContent(escapeAsWtf16(s))
                         .setEnclosingTypeName(
                             m.getEnclosingTypeDescriptor().getQualifiedSourceName())
                         .setMethodName(m.getName())

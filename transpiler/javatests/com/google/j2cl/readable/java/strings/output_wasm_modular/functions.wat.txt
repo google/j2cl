@@ -1,0 +1,364 @@
+
+;;; Code for strings.Strings [methods]
+
+;;; Strings Strings.$create()
+(func $$create__@strings.Strings
+ (result (ref null $strings.Strings))
+ ;;@ strings/Strings.java:18:13
+ (local $$instance (ref null $strings.Strings))
+ (block
+  ;;@ strings/Strings.java:18:13
+  (call $$clinit__void_<once>_@strings.Strings )
+  ;;@ strings/Strings.java:18:13
+  (local.set $$instance (struct.new $strings.Strings (ref.as_non_null (global.get $strings.Strings.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.String)))
+  ;;@ strings/Strings.java:18:13
+  (call $$ctor__void_$p_strings_Strings@strings.Strings (ref.as_non_null (local.get $$instance)))
+  ;;@ strings/Strings.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Strings.$ctor()
+(func $$ctor__void_$p_strings_Strings@strings.Strings
+ (param $this (ref null $strings.Strings))
+ ;;@ strings/Strings.java:18:13
+ (block
+  ;;@ strings/Strings.java:18:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+  ;;@ strings/Strings.java:18:13
+  (call $$init__void_$p_strings_Strings@strings.Strings (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Strings.test()
+(func $m_test__void@strings.Strings
+ (type $function.m_test__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ strings/Strings.java:29:14
+ (local $s1 (ref null $java.lang.String))
+ (local $s2 (ref null $java.lang.String))
+ (local $s3 (ref null $java.lang.String))
+ (local $$stringBuilder (ref null $java.lang.StringBuilder))
+ (local $$stringBuilder_1 (ref null $java.lang.StringBuilder))
+ (local $$stringBuilder_2 (ref null $java.lang.StringBuilder))
+ (local $$stringBuilder_3 (ref null $java.lang.StringBuilder))
+ (local $$stringBuilder_4 (ref null $java.lang.StringBuilder))
+ (local $s4 (ref null $java.lang.String))
+ (local $c1 i32)
+ (local $c2 i32)
+ (local $$stringBuilder_5 (ref null $java.lang.StringBuilder))
+ (local $$stringBuilder_6 (ref null $java.lang.StringBuilder))
+ (local $$stringBuilder_7 (ref null $java.lang.StringBuilder))
+ (local $$stringBuilder_8 (ref null $java.lang.StringBuilder))
+ (local $$stringBuilder_9 (ref null $java.lang.StringBuilder))
+ (local $$stringBuilder_10 (ref null $java.lang.StringBuilder))
+ (local $$stringBuilder_11 (ref null $java.lang.StringBuilder))
+ (local $$stringBuilder_12 (ref null $java.lang.StringBuilder))
+ (local $$qualifier (ref null $strings.Strings.StringHolder))
+ (local $$stringBuilder_13 (ref null $java.lang.StringBuilder))
+ (local $$qualifier_1 (ref null $strings.Strings.StringHolder))
+ (local $$stringBuilder_14 (ref null $java.lang.StringBuilder))
+ (local $$qualifier_2 (ref null $strings.Strings.StringHolder))
+ (local $$stringBuilder_15 (ref null $java.lang.StringBuilder))
+ (local $$stringBuilder_16 (ref null $java.lang.StringBuilder))
+ (local $this (ref null $strings.Strings))
+ (local.set $this (ref.cast (ref $strings.Strings) (local.get $this.untyped)))
+ (block
+  ;;@ strings/Strings.java:31:4
+  (local.set $s1 (ref.null $java.lang.String))
+  ;;@ strings/Strings.java:32:4
+  (local.set $s2 (ref.null $java.lang.String))
+  ;;@ strings/Strings.java:33:4
+  (local.set $s3 (block (result (ref null $java.lang.String))
+   (local.set $$stringBuilder (call $$create__@java.lang.StringBuilder ))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(local.get $s1)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(local.get $s2)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))
+  ))
+  ;;@ strings/Strings.java:34:4
+  (local.set $s2 (block (result (ref null $java.lang.String))
+   (local.set $$stringBuilder_1 (call $$create__@java.lang.StringBuilder ))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_1))(local.get $s2)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_1)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_1))(local.get $s2)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_1)))))
+   (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder_1))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder_1))))
+  ))
+  ;;@ strings/Strings.java:35:4
+  (local.set $s1 (block (result (ref null $java.lang.String))
+   (local.set $$stringBuilder_2 (call $$create__@java.lang.StringBuilder ))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_2))(local.get $s1)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_2)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_2))(call $$getString_|a|__java_lang_String_<once>_@strings.Strings )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_2)))))
+   (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder_2))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder_2))))
+  ))
+  ;;@ strings/Strings.java:37:4
+  (local.set $s3 (block (result (ref null $java.lang.String))
+   (local.set $$stringBuilder_3 (call $$create__@java.lang.StringBuilder ))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_3))(local.get $s1)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_3)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_3))(local.get $s1)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_3)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_3))(local.get $s2)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_3)))))
+   (drop (call_ref $function.m_append__java_lang_Object__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_3))(ref.null $java.lang.Object)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_Object__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_3)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_3))(call $$getString_|a|__java_lang_String_<once>_@strings.Strings )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_3)))))
+   (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder_3))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder_3))))
+  ))
+  ;;@ strings/Strings.java:39:4
+  (local.set $s3 (block (result (ref null $java.lang.String))
+   (local.set $$stringBuilder_4 (call $$create__@java.lang.StringBuilder ))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_4))(call $$getString_|a|__java_lang_String_<once>_@strings.Strings )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_4)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_4))(local.get $s1)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_4)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_4))(local.get $s1)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_4)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_4))(local.get $s2)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_4)))))
+   (drop (call_ref $function.m_append__java_lang_Object__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_4))(ref.null $java.lang.Object)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_Object__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_4)))))
+   (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder_4))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder_4))))
+  ))
+  ;;@ strings/Strings.java:42:4
+  
+  ;;@ strings/Strings.java:43:4
+  (local.set $c1 (i32.const 70))
+  ;;@ strings/Strings.java:44:4
+  (local.set $c2 (i32.const 111))
+  ;;@ strings/Strings.java:45:4
+  (local.set $s4 (block (result (ref null $java.lang.String))
+   (local.set $$stringBuilder_5 (call $$create__@java.lang.StringBuilder ))
+   (drop (call_ref $function.m_append__int__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_5))(i32.add (local.get $c1) (local.get $c2))(struct.get $java.lang.StringBuilder.vtable $m_append__int__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_5)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_5))(call $$getString_|o|__java_lang_String_<once>_@strings.Strings )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_5)))))
+   (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder_5))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder_5))))
+  ))
+  ;;@ strings/Strings.java:46:4
+  (local.set $s4 (block (result (ref null $java.lang.String))
+   (local.set $$stringBuilder_6 (call $$create__@java.lang.StringBuilder ))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_6))(local.get $s4)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_6)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_6))(call $$getString_|1|__java_lang_String_<once>_@strings.Strings )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_6)))))
+   (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder_6))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder_6))))
+  ))
+  ;;@ strings/Strings.java:49:4
+  (local.set $s4 (block (result (ref null $java.lang.String))
+   (local.set $$stringBuilder_7 (call $$create__@java.lang.StringBuilder ))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_7))(local.get $s4)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_7)))))
+   (drop (call_ref $function.m_append__long__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_7))(i64.const 1)(struct.get $java.lang.StringBuilder.vtable $m_append__long__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_7)))))
+   (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder_7))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder_7))))
+  ))
+  ;;@ strings/Strings.java:50:4
+  (local.set $s4 (block (result (ref null $java.lang.String))
+   (local.set $$stringBuilder_8 (call $$create__@java.lang.StringBuilder ))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_8))(local.get $s4)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_8)))))
+   (drop (call_ref $function.m_append__char__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_8))(i32.const 67)(struct.get $java.lang.StringBuilder.vtable $m_append__char__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_8)))))
+   (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder_8))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder_8))))
+  ))
+  ;;@ strings/Strings.java:51:4
+  (local.set $s4 (block (result (ref null $java.lang.String))
+   (local.set $$stringBuilder_9 (call $$create__@java.lang.StringBuilder ))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_9))(local.get $s4)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_9)))))
+   (drop (call_ref $function.m_append__int__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_9))(i32.const 1)(struct.get $java.lang.StringBuilder.vtable $m_append__int__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_9)))))
+   (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder_9))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder_9))))
+  ))
+  ;;@ strings/Strings.java:52:4
+  (local.set $s4 (block (result (ref null $java.lang.String))
+   (local.set $$stringBuilder_10 (call $$create__@java.lang.StringBuilder ))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_10))(local.get $s4)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_10)))))
+   (drop (call_ref $function.m_append__double__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_10))(f64.const 1.0)(struct.get $java.lang.StringBuilder.vtable $m_append__double__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_10)))))
+   (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder_10))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder_10))))
+  ))
+  ;;@ strings/Strings.java:53:4
+  (local.set $s4 (block (result (ref null $java.lang.String))
+   (local.set $$stringBuilder_11 (call $$create__@java.lang.StringBuilder ))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_11))(local.get $s4)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_11)))))
+   (drop (call_ref $function.m_append__float__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_11))(f32.const 1.0)(struct.get $java.lang.StringBuilder.vtable $m_append__float__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_11)))))
+   (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder_11))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder_11))))
+  ))
+  ;;@ strings/Strings.java:54:4
+  (local.set $s4 (block (result (ref null $java.lang.String))
+   (local.set $$stringBuilder_12 (call $$create__@java.lang.StringBuilder ))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_12))(local.get $s4)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_12)))))
+   (drop (call_ref $function.m_append__short__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_12))(i32.const 1)(struct.get $java.lang.StringBuilder.vtable $m_append__short__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_12)))))
+   (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder_12))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder_12))))
+  ))
+  (block
+   ;;@ strings/Strings.java:56:4
+   (local.set $$qualifier (call $$create__@strings.Strings.StringHolder ))
+   ;;@ strings/Strings.java:56:4
+   (struct.set $strings.Strings.StringHolder $s@strings.Strings.StringHolder (local.get $$qualifier) (block (result (ref null $java.lang.String))
+    (local.set $$stringBuilder_13 (call $$create__@java.lang.StringBuilder ))
+    (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_13))(struct.get $strings.Strings.StringHolder $s@strings.Strings.StringHolder (local.get $$qualifier))(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_13)))))
+    (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_13))(local.get $s4)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_13)))))
+    (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder_13))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder_13))))
+   ))
+  )
+  (block
+   ;;@ strings/Strings.java:57:4
+   (local.set $$qualifier_1 (call $$create__@strings.Strings.StringHolder ))
+   ;;@ strings/Strings.java:57:4
+   (struct.set $strings.Strings.StringHolder $s@strings.Strings.StringHolder (local.get $$qualifier_1) (block (result (ref null $java.lang.String))
+    (local.set $$stringBuilder_14 (call $$create__@java.lang.StringBuilder ))
+    (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_14))(struct.get $strings.Strings.StringHolder $s@strings.Strings.StringHolder (local.get $$qualifier_1))(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_14)))))
+    (drop (call_ref $function.m_append__char__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_14))(local.get $c1)(struct.get $java.lang.StringBuilder.vtable $m_append__char__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_14)))))
+    (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder_14))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder_14))))
+   ))
+  )
+  (block
+   ;;@ strings/Strings.java:58:4
+   (local.set $$qualifier_2 (call $$create__@strings.Strings.StringHolder ))
+   ;;@ strings/Strings.java:58:4
+   (struct.set $strings.Strings.StringHolder $s@strings.Strings.StringHolder (local.get $$qualifier_2) (block (result (ref null $java.lang.String))
+    (local.set $$stringBuilder_15 (call $$create__@java.lang.StringBuilder ))
+    (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_15))(struct.get $strings.Strings.StringHolder $s@strings.Strings.StringHolder (local.get $$qualifier_2))(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_15)))))
+    (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_15))(call $$getString_|o|__java_lang_String_<once>_@strings.Strings )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_15)))))
+    (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder_15))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder_15))))
+   ))
+  )
+  ;;@ strings/Strings.java:60:4
+  (local.set $s1 (block (result (ref null $java.lang.String))
+   (local.set $$stringBuilder_16 (call $$create__@java.lang.StringBuilder ))
+   (drop (call_ref $function.m_append__int__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_16))(i32.add (i32.const 1) (i32.const 2))(struct.get $java.lang.StringBuilder.vtable $m_append__int__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_16)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder_16))(call $$getString_|s|__java_lang_String_<once>_@strings.Strings )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_16)))))
+   (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder_16))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder_16))))
+  ))
+  ;;@ strings/Strings.java:61:4
+  (local.set $s1 (call $$getString_|s12|__java_lang_String_<once>_@strings.Strings ))
+ )
+)
+(elem declare func $m_test__void@strings.Strings)
+
+;;; void Strings.$init()
+(func $$init__void_$p_strings_Strings@strings.Strings
+ (param $this (ref null $strings.Strings))
+ ;;@ strings/Strings.java:18:13
+ (block
+  ;;@ strings/Strings.java:19:2
+  (struct.set $strings.Strings $someString@strings.Strings (local.get $this) (call $$getString_|This_is_a_st...|__java_lang_String_<once>_@strings.Strings ))
+  ;;@ strings/Strings.java:21:2
+  (struct.set $strings.Strings $nonBmpChar@strings.Strings (local.get $this) (call $$getString_|_|__java_lang_String_<once>_@strings.Strings ))
+  ;;@ strings/Strings.java:22:2
+  (struct.set $strings.Strings $wideColon@strings.Strings (local.get $this) (call $$getString_|_|_1__java_lang_String_<once>_@strings.Strings ))
+ )
+)
+
+;;; void Strings.$clinit()
+(func $$clinit__void_<once>_@strings.Strings
+ ;;@ strings/Strings.java:18:13
+ (block
+  ;;@ strings/Strings.java:18:13
+  (if (global.get $$class-initialized@strings.Strings)
+   (then
+    ;;@ strings/Strings.java:18:13
+    (return )
+   )
+  )
+  ;;@ strings/Strings.java:18:13
+  (global.set $$class-initialized@strings.Strings (i32.const 1))
+  ;;@ strings/Strings.java:18:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> Strings.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@strings.Strings
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@strings.Strings)))
+   (then
+    (return (global.get $$class@strings.Strings))
+   )
+  )
+  (global.set $$class@strings.Strings (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|strings.Strings|__java_lang_String_<once>_@strings.Strings )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@strings.Strings))
+ )
+)
+
+;;; Class<?> Strings.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@strings.Strings
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $strings.Strings))
+ (local.set $this (ref.cast (ref $strings.Strings) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@strings.Strings ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@strings.Strings)
+;;; End of code for strings.Strings [methods]
+;;; Code for strings.Strings.StringHolder [methods]
+
+;;; StringHolder StringHolder.$create()
+(func $$create__@strings.Strings.StringHolder
+ (result (ref null $strings.Strings.StringHolder))
+ ;;@ strings/Strings.java:25:23
+ (local $$instance (ref null $strings.Strings.StringHolder))
+ (block
+  ;;@ strings/Strings.java:25:23
+  (call $$clinit__void_<once>_@strings.Strings.StringHolder )
+  ;;@ strings/Strings.java:25:23
+  (local.set $$instance (struct.new $strings.Strings.StringHolder (ref.as_non_null (global.get $strings.Strings.StringHolder.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.String)))
+  ;;@ strings/Strings.java:25:23
+  (call $$ctor__void_$p_strings_Strings_StringHolder@strings.Strings.StringHolder (ref.as_non_null (local.get $$instance)))
+  ;;@ strings/Strings.java:25:23
+  (return (local.get $$instance))
+ )
+)
+
+;;; void StringHolder.$ctor()
+(func $$ctor__void_$p_strings_Strings_StringHolder@strings.Strings.StringHolder
+ (param $this (ref null $strings.Strings.StringHolder))
+ ;;@ strings/Strings.java:25:23
+ (block
+  ;;@ strings/Strings.java:25:23
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+  ;;@ strings/Strings.java:25:23
+  (call $$init__void_$p_strings_Strings_StringHolder@strings.Strings.StringHolder (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void StringHolder.$init()
+(func $$init__void_$p_strings_Strings_StringHolder@strings.Strings.StringHolder
+ (param $this (ref null $strings.Strings.StringHolder))
+ ;;@ strings/Strings.java:25:23
+ (block
+  ;;@ strings/Strings.java:26:4
+  (struct.set $strings.Strings.StringHolder $s@strings.Strings.StringHolder (local.get $this) (call $$getString_|A|__java_lang_String_<once>_@strings.Strings.StringHolder ))
+ )
+)
+
+;;; void StringHolder.$clinit()
+(func $$clinit__void_<once>_@strings.Strings.StringHolder
+ ;;@ strings/Strings.java:25:23
+ (block
+  ;;@ strings/Strings.java:25:23
+  (if (global.get $$class-initialized@strings.Strings.StringHolder)
+   (then
+    ;;@ strings/Strings.java:25:23
+    (return )
+   )
+  )
+  ;;@ strings/Strings.java:25:23
+  (global.set $$class-initialized@strings.Strings.StringHolder (i32.const 1))
+  ;;@ strings/Strings.java:25:23
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> StringHolder.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@strings.Strings.StringHolder
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@strings.Strings.StringHolder)))
+   (then
+    (return (global.get $$class@strings.Strings.StringHolder))
+   )
+  )
+  (global.set $$class@strings.Strings.StringHolder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|strings.Stri...|__java_lang_String_<once>_@strings.Strings.StringHolder )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@strings.Strings.StringHolder))
+ )
+)
+
+;;; Class<?> StringHolder.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@strings.Strings.StringHolder
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $strings.Strings.StringHolder))
+ (local.set $this (ref.cast (ref $strings.Strings.StringHolder) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@strings.Strings.StringHolder ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@strings.Strings.StringHolder)
+;;; End of code for strings.Strings.StringHolder [methods]
