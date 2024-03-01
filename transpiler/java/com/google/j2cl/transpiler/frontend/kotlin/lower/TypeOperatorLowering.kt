@@ -134,6 +134,10 @@ internal class TypeOperatorLowering(private val backendContext: JvmBackendContex
       is IrGetClass,
       is IrConstructorCall -> true
       is IrCall -> this.symbol == backendContext.irBuiltIns.checkNotNullSymbol
+      // MODIFIED BY GOOGLE:
+      // A const expression is only null if it's literally null.
+      is IrConst<*> -> this.value != null
+      // END OF MODIFICATIONS
       else -> false
     }
 
