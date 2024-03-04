@@ -43,6 +43,11 @@ public class NullLiteral extends Literal {
   }
 
   @Override
+  public boolean canBeNull() {
+    return true;
+  }
+
+  @Override
   public NullLiteral clone() {
     // Null literals are value types do not need to actually clone.
     return this;

@@ -130,6 +130,12 @@ public class BinaryExpression extends Expression {
   }
 
   @Override
+  public boolean canBeNull() {
+    // Only plain assignments can return nulls.
+    return getOperator().isSimpleAssignment() && super.canBeNull();
+  }
+
+  @Override
   public BinaryExpression clone() {
     return newBuilder()
         .setLeftOperand(leftOperand.clone())

@@ -69,6 +69,12 @@ public abstract class UnaryExpression extends Expression {
   }
 
   @Override
+  public boolean canBeNull() {
+    // No unary expression can return null.
+    return false;
+  }
+
+  @Override
   Node acceptInternal(Processor processor) {
     return Visitor_UnaryExpression.visit(processor, this);
   }

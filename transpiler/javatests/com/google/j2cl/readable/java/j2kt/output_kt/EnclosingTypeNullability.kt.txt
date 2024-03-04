@@ -24,7 +24,7 @@ import kotlin.Suppress
 
 open class EnclosingTypeNullability internal constructor() {
  internal open fun test_pp_j2kt(foo: EnclosingTypeNullability.Outer<String>) {
-  val value: EnclosingTypeNullability.Outer<String>.Inner? = foo!!.getInner_pp_j2kt()
+  val value: EnclosingTypeNullability.Outer<String>.Inner? = foo.getInner_pp_j2kt()
  }
 
  class Outer<V> internal constructor() {

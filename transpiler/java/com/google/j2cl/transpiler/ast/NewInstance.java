@@ -48,6 +48,11 @@ public class NewInstance extends Invocation {
   }
 
   @Override
+  public boolean canBeNull() {
+    return false;
+  }
+
+  @Override
   public NewInstance clone() {
     // clone() can only be called after anonymous inner types are normalized away. Even if the
     // anonymous class was duplicated and the name changed, that would imply a semantic difference

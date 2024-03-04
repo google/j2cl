@@ -40,7 +40,7 @@ open class MultipleAbstractParents {
    val args_1: Array<String?>? = args as Array<String?>?
    assert(MultipleAbstractParents.ArrayList<String?>().getFoo(null)!!.equals("AbstractCollection"))
    assert(MultipleAbstractParents.StringList().getFoo(null)!!.equals("AbstractCollection"))
-   assert((MultipleAbstractParents.StringList() as MultipleAbstractParents.IStringList)!!.getFoo(null)!!.equals("AbstractCollection"))
+   assert((MultipleAbstractParents.StringList() as MultipleAbstractParents.IStringList).getFoo(null)!!.equals("AbstractCollection"))
   }
  }
 

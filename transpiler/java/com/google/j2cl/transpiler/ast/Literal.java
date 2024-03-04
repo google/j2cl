@@ -60,6 +60,11 @@ public abstract class Literal extends Expression {
     return true;
   }
 
+  @Override
+  public boolean canBeNull() {
+    return false;
+  }
+
   public abstract String getSourceText();
 
   @Override

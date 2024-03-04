@@ -51,12 +51,6 @@ public class PostfixExpression extends UnaryExpression {
         : super.getTypeDescriptor();
   }
 
-  // TODO(b/236987392): Remove this method {@code TypeDescriptor.canBeNull()} is fixed.
-  @Override
-  public boolean canBeNull() {
-    return super.canBeNull() && operator != PostfixOperator.NOT_NULL_ASSERTION;
-  }
-
   @Override
   public PostfixExpression clone() {
     return new PostfixExpression(getOperand().clone(), operator);

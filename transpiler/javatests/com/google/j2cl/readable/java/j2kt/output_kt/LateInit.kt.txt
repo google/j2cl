@@ -63,6 +63,6 @@ open class LateInit<T: Any> {
 
  @ObjCName("test")
  open fun test(): Int {
-  return this.publicField!!.length + this.privateField_private_2!!.length + this.initializedField_private_2!!.length + this.nullableField_private_2!!.length + this.finalField_private_2!!.length + this.primitiveField_private_2 + this.genericField_private_2!!.hashCode()
+  return this.publicField.length + this.privateField_private_2.length + this.initializedField_private_2.length + this.nullableField_private_2!!.length + this.finalField_private_2.length + this.primitiveField_private_2 + this.genericField_private_2.hashCode()
  }
 }

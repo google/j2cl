@@ -40,7 +40,7 @@ open class DefinitelyNotNull {
    @ObjCName("withId") a: T?,
    @ObjCName("withId") b: T?
   ): Boolean {
-   return equivalence!!.equivalent(a, b)
+   return equivalence.equivalent(a, b)
   }
  }
 
@@ -52,7 +52,7 @@ open class DefinitelyNotNull {
   companion object {
    @JvmStatic
    internal fun <E> reversed_pp_j2kt(ordering: DefinitelyNotNull.Ordering<in E>): DefinitelyNotNull.Ordering<in E> {
-    return ordering!!.reverse_pp_j2kt<E>()
+    return ordering.reverse_pp_j2kt<E>()
    }
   }
  }
