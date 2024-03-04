@@ -133,8 +133,19 @@ public final class ConversionContextVisitor extends AbstractRewriter {
       return expression;
     }
 
+    /**
+     * An {@code expression} is being used as if it was of a particular type where a non-nullable
+     * type is required..
+     */
+    protected Expression rewriteNonNullTypeConversionContext(
+        TypeDescriptor inferredTypeDescriptor,
+        TypeDescriptor actualTypeDescriptor,
+        Expression expression) {
+      return rewriteTypeConversionContext(
+          inferredTypeDescriptor.toNonNullable(), actualTypeDescriptor.toNonNullable(), expression);
+    }
+
     /** An {@code expression} that has been assigned to a field or variable of a particular type. */
-    @SuppressWarnings("unused")
     protected Expression rewriteAssignmentContext(
         TypeDescriptor inferredTypeDescriptor,
         TypeDescriptor actualTypeDescriptor,
@@ -167,10 +178,8 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     protected Expression rewriteSwitchExpressionContext(Expression expression) {
       TypeDescriptor typeDescriptor = expression.getTypeDescriptor();
       if (!TypeDescriptors.isBoxedOrPrimitiveType(typeDescriptor)) {
-        return rewriteTypeConversionContext(
-            typeDescriptor.toNonNullable(),
-            expression.getDeclaredTypeDescriptor().toNonNullable(),
-            expression);
+        return rewriteNonNullTypeConversionContext(
+            typeDescriptor, expression.getDeclaredTypeDescriptor(), expression);
       }
       return (TypeDescriptors.isJavaLangBoolean(typeDescriptor.toRawTypeDescriptor())
               || TypeDescriptors.isPrimitiveBoolean(typeDescriptor))
@@ -179,13 +188,13 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     }
 
     /** An {@code expression} that is used as a qualifier of a member of a particular type. */
-    @SuppressWarnings("unused")
     protected Expression rewriteMemberQualifierContext(
         TypeDescriptor inferredTypeDescriptor,
         TypeDescriptor actualTypeDescriptor,
         Expression expression) {
       // Handle generically as a type conversion context.
-      return rewriteTypeConversionContext(inferredTypeDescriptor, actualTypeDescriptor, expression);
+      return rewriteNonNullTypeConversionContext(
+          inferredTypeDescriptor, actualTypeDescriptor, expression);
     }
 
     /** An {@code argument} that is passed to a method as a parameter. */
@@ -234,8 +243,8 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     Expression expression = arrayAccess.getArrayExpression();
 
     Expression arrayExpression =
-        rewriteTypeConversionContextWithoutDeclaration(
-            expression.getTypeDescriptor().toNonNullable(), expression);
+        contextRewriter.rewriteNonNullTypeConversionContext(
+            expression.getTypeDescriptor(), expression.getDeclaredTypeDescriptor(), expression);
     // The index is always int so gets rewritten with unary numeric promotion context
     Expression indexExpression =
         contextRewriter.rewriteUnaryNumericPromotionContext(arrayAccess.getIndexExpression());
@@ -256,8 +265,8 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     Expression expression = arrayLength.getArrayExpression();
 
     Expression arrayExpression =
-        rewriteTypeConversionContextWithoutDeclaration(
-            expression.getTypeDescriptor().toNonNullable(), expression);
+        contextRewriter.rewriteNonNullTypeConversionContext(
+            expression.getTypeDescriptor(), expression.getDeclaredTypeDescriptor(), expression);
 
     if (arrayExpression == arrayLength.getArrayExpression()) {
       return arrayLength;
@@ -458,9 +467,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     }
 
     return contextRewriter.rewriteMemberQualifierContext(
-        enclosingTypeDescriptor.toNonNullable(),
-        declaredEnclosingTypeDescriptor.toNonNullable(),
-        qualifier);
+        enclosingTypeDescriptor, declaredEnclosingTypeDescriptor, qualifier);
   }
 
   @Override
@@ -481,10 +488,8 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   public ForEachStatement rewriteForEachStatement(ForEachStatement forEachStatement) {
     Expression expression = forEachStatement.getIterableExpression();
     Expression iterableExpression =
-        contextRewriter.rewriteTypeConversionContext(
-            expression.getTypeDescriptor().toNonNullable(),
-            expression.getDeclaredTypeDescriptor().toNonNullable(),
-            expression);
+        contextRewriter.rewriteNonNullTypeConversionContext(
+            expression.getTypeDescriptor(), expression.getDeclaredTypeDescriptor(), expression);
 
     if (iterableExpression == forEachStatement.getIterableExpression()) {
       return forEachStatement;
@@ -702,8 +707,9 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     // unary numeric promotion
     return SynchronizedStatement.Builder.from(synchronizedStatement)
         .setExpression(
-            rewriteTypeConversionContextWithoutDeclaration(
-                TypeDescriptors.get().javaLangObject.toNonNullable(),
+            contextRewriter.rewriteNonNullTypeConversionContext(
+                synchronizedStatement.getExpression().getTypeDescriptor(),
+                TypeDescriptors.get().javaLangObject,
                 synchronizedStatement.getExpression()))
         .build();
   }
@@ -713,8 +719,10 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     Expression expression = throwStatement.getExpression();
     return ThrowStatement.Builder.from(throwStatement)
         .setExpression(
-            rewriteTypeConversionContextWithoutDeclaration(
-                TypeDescriptors.get().javaLangThrowable.toNonNullable(), expression))
+            contextRewriter.rewriteNonNullTypeConversionContext(
+                TypeDescriptors.get().javaLangThrowable,
+                TypeDescriptors.get().javaLangThrowable,
+                expression))
         .build();
   }
 

@@ -17,23 +17,15 @@ package com.google.j2cl.transpiler.passes;
 
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
-import com.google.j2cl.transpiler.ast.ArrayAccess;
-import com.google.j2cl.transpiler.ast.ArrayLength;
 import com.google.j2cl.transpiler.ast.AssertStatement;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.ConditionalExpression;
 import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.ForEachStatement;
-import com.google.j2cl.transpiler.ast.HasSourcePosition;
-import com.google.j2cl.transpiler.ast.MemberReference;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.StringLiteral;
-import com.google.j2cl.transpiler.ast.SwitchStatement;
-import com.google.j2cl.transpiler.ast.SynchronizedStatement;
-import com.google.j2cl.transpiler.ast.ThrowStatement;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Variable;
@@ -75,6 +67,14 @@ public final class InsertNotNullAssertions extends NormalizationPass {
                     ? insertNotNullAssertionIfNeeded(getSourcePosition(), expression)
                     : expression;
               }
+
+              @Override
+              public Expression rewriteNonNullTypeConversionContext(
+                  TypeDescriptor inferredTypeDescriptor,
+                  TypeDescriptor actualTypeDescriptor,
+                  Expression expression) {
+                return insertNotNullAssertionIfNeeded(getSourcePosition(), expression);
+              }
             }));
 
     // Insert null assertions if necessary on places where the construct requires them.
@@ -90,76 +90,6 @@ public final class InsertNotNullAssertions extends NormalizationPass {
                 .setMessage(
                     insertElvisIfNeeded(assertStatement.getMessage(), new StringLiteral("null")))
                 .build();
-          }
-
-          @Override
-          public Node rewriteArrayAccess(ArrayAccess arrayAccess) {
-            return ArrayAccess.Builder.from(arrayAccess)
-                .setArrayExpression(
-                    insertNotNullAssertionIfNeeded(
-                        getSourcePosition(), arrayAccess.getArrayExpression()))
-                .build();
-          }
-
-          @Override
-          public Node rewriteArrayLength(ArrayLength arrayLength) {
-            return ArrayLength.Builder.from(arrayLength)
-                .setArrayExpression(
-                    insertNotNullAssertionIfNeeded(
-                        getSourcePosition(), arrayLength.getArrayExpression()))
-                .build();
-          }
-
-          @Override
-          public Node rewriteForEachStatement(ForEachStatement forEachStatement) {
-            return ForEachStatement.Builder.from(forEachStatement)
-                .setIterableExpression(
-                    insertNotNullAssertionIfNeeded(
-                        forEachStatement.getSourcePosition(),
-                        forEachStatement.getIterableExpression()))
-                .build();
-          }
-
-          @Override
-          public Node rewriteMemberReference(MemberReference memberReference) {
-            return MemberReference.Builder.from(memberReference)
-                .setQualifier(
-                    insertNotNullAssertionIfNeeded(
-                        getSourcePosition(), memberReference.getQualifier()))
-                .build();
-          }
-
-          @Override
-          public Node rewriteSwitchStatement(SwitchStatement switchStatement) {
-            return SwitchStatement.Builder.from(switchStatement)
-                .setSwitchExpression(
-                    insertNotNullAssertionIfNeeded(
-                        switchStatement.getSourcePosition(), switchStatement.getSwitchExpression()))
-                .build();
-          }
-
-          @Override
-          public Node rewriteSynchronizedStatement(SynchronizedStatement synchronizedStatement) {
-            return SynchronizedStatement.Builder.from(synchronizedStatement)
-                .setExpression(
-                    insertNotNullAssertionIfNeeded(
-                        synchronizedStatement.getSourcePosition(),
-                        synchronizedStatement.getExpression()))
-                .build();
-          }
-
-          @Override
-          public Node rewriteThrowStatement(ThrowStatement throwStatement) {
-            return ThrowStatement.Builder.from(throwStatement)
-                .setExpression(
-                    insertNotNullAssertionIfNeeded(
-                        throwStatement.getSourcePosition(), throwStatement.getExpression()))
-                .build();
-          }
-
-          private SourcePosition getSourcePosition() {
-            return ((HasSourcePosition) getParent(HasSourcePosition.class::isInstance))
-                .getSourcePosition();
           }
         });
   }
