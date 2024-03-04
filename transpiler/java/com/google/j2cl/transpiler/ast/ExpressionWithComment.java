@@ -62,6 +62,11 @@ public class ExpressionWithComment extends Expression {
   }
 
   @Override
+  public boolean canBeNull() {
+    return expression.canBeNull();
+  }
+
+  @Override
   Node acceptInternal(Processor processor) {
     return Visitor_ExpressionWithComment.visit(processor, this);
   }

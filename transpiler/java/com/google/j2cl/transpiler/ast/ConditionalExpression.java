@@ -66,6 +66,11 @@ public class ConditionalExpression extends Expression {
   }
 
   @Override
+  public boolean canBeNull() {
+    return trueExpression.canBeNull() || falseExpression.canBeNull();
+  }
+
+  @Override
   public ConditionalExpression clone() {
     return new ConditionalExpression(
         typeDescriptor,

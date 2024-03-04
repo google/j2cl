@@ -24,6 +24,7 @@ import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.ConditionalExpression;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ForEachStatement;
+import com.google.j2cl.transpiler.ast.HasSourcePosition;
 import com.google.j2cl.transpiler.ast.MemberReference;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MultiExpression;
@@ -37,9 +38,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
-import com.google.j2cl.transpiler.ast.VariableReference;
 import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewriter;
-import java.util.function.Function;
 
 /**
  * Inserts NOT_NULL_ASSERTION (!!) in places where Java performs implicit null-check, and when
@@ -60,15 +59,7 @@ public final class InsertNotNullAssertions extends NormalizationPass {
                   TypeDescriptor inferredTypeDescriptor,
                   TypeDescriptor actualTypeDescriptor,
                   Expression expression) {
-                return expression.canBeNull()
-                        && !TypeDescriptors.isJavaLangVoid(inferredTypeDescriptor)
-                        && (!inferredTypeDescriptor.canBeNull()
-                            || !actualTypeDescriptor.canBeNull())
-                    ? verifyAndInsertNotNullAssertion(expression)
-                    : expression;
-              }
 
-              private Expression verifyAndInsertNotNullAssertion(Expression expression) {
                 if (expression instanceof MethodCall
                     && !expression.getTypeDescriptor().canBeNull()) {
                   // Do not insert a null assertion if the return type of a call inferred to be
@@ -77,11 +68,12 @@ public final class InsertNotNullAssertions extends NormalizationPass {
                   // that takes advantage of that.
                   return expression;
                 }
-                if (expression instanceof NullLiteral) {
-                  getProblems().warning(getSourcePosition(), "Non-null assertion applied to null.");
-                }
 
-                return expression.postfixNotNullAssertion();
+                return !TypeDescriptors.isJavaLangVoid(inferredTypeDescriptor)
+                        && (!inferredTypeDescriptor.canBeNull()
+                            || !actualTypeDescriptor.canBeNull())
+                    ? insertNotNullAssertionIfNeeded(getSourcePosition(), expression)
+                    : expression;
               }
             }));
 
@@ -104,7 +96,8 @@ public final class InsertNotNullAssertions extends NormalizationPass {
           public Node rewriteArrayAccess(ArrayAccess arrayAccess) {
             return ArrayAccess.Builder.from(arrayAccess)
                 .setArrayExpression(
-                    insertNotNullAssertionIfNeeded(arrayAccess.getArrayExpression()))
+                    insertNotNullAssertionIfNeeded(
+                        getSourcePosition(), arrayAccess.getArrayExpression()))
                 .build();
           }
 
@@ -112,7 +105,8 @@ public final class InsertNotNullAssertions extends NormalizationPass {
           public Node rewriteArrayLength(ArrayLength arrayLength) {
             return ArrayLength.Builder.from(arrayLength)
                 .setArrayExpression(
-                    insertNotNullAssertionIfNeeded(arrayLength.getArrayExpression()))
+                    insertNotNullAssertionIfNeeded(
+                        getSourcePosition(), arrayLength.getArrayExpression()))
                 .build();
           }
 
@@ -120,14 +114,18 @@ public final class InsertNotNullAssertions extends NormalizationPass {
           public Node rewriteForEachStatement(ForEachStatement forEachStatement) {
             return ForEachStatement.Builder.from(forEachStatement)
                 .setIterableExpression(
-                    insertNotNullAssertionIfNeeded(forEachStatement.getIterableExpression()))
+                    insertNotNullAssertionIfNeeded(
+                        forEachStatement.getSourcePosition(),
+                        forEachStatement.getIterableExpression()))
                 .build();
           }
 
           @Override
           public Node rewriteMemberReference(MemberReference memberReference) {
             return MemberReference.Builder.from(memberReference)
-                .setQualifier(insertNotNullAssertionIfNeeded(memberReference.getQualifier()))
+                .setQualifier(
+                    insertNotNullAssertionIfNeeded(
+                        getSourcePosition(), memberReference.getQualifier()))
                 .build();
           }
 
@@ -135,7 +133,8 @@ public final class InsertNotNullAssertions extends NormalizationPass {
           public Node rewriteSwitchStatement(SwitchStatement switchStatement) {
             return SwitchStatement.Builder.from(switchStatement)
                 .setSwitchExpression(
-                    insertNotNullAssertionIfNeeded(switchStatement.getSwitchExpression()))
+                    insertNotNullAssertionIfNeeded(
+                        switchStatement.getSourcePosition(), switchStatement.getSwitchExpression()))
                 .build();
           }
 
@@ -143,32 +142,47 @@ public final class InsertNotNullAssertions extends NormalizationPass {
           public Node rewriteSynchronizedStatement(SynchronizedStatement synchronizedStatement) {
             return SynchronizedStatement.Builder.from(synchronizedStatement)
                 .setExpression(
-                    insertNotNullAssertionIfNeeded(synchronizedStatement.getExpression()))
+                    insertNotNullAssertionIfNeeded(
+                        synchronizedStatement.getSourcePosition(),
+                        synchronizedStatement.getExpression()))
                 .build();
           }
 
           @Override
           public Node rewriteThrowStatement(ThrowStatement throwStatement) {
             return ThrowStatement.Builder.from(throwStatement)
-                .setExpression(insertNotNullAssertionIfNeeded(throwStatement.getExpression()))
+                .setExpression(
+                    insertNotNullAssertionIfNeeded(
+                        throwStatement.getSourcePosition(), throwStatement.getExpression()))
                 .build();
+          }
+
+          private SourcePosition getSourcePosition() {
+            return ((HasSourcePosition) getParent(HasSourcePosition.class::isInstance))
+                .getSourcePosition();
           }
         });
   }
 
-  private static Expression insertNotNullAssertionIfNeeded(Expression expression) {
-    // Don't insert null-check for expressions which are known to be non-null, regardless of
-    // nullability annotations.
-    return expression != null && expression.canBeNull()
-        ? expression.postfixNotNullAssertion()
-        : expression;
+  private Expression insertNotNullAssertionIfNeeded(
+      SourcePosition sourcePosition, Expression expression) {
+    if (expression == null || !expression.canBeNull()) {
+      // Don't insert null-check for expressions which are known to be non-null, regardless of
+      // nullability annotations.
+      return expression;
+    }
+    if (expression instanceof NullLiteral) {
+      getProblems().warning(sourcePosition, "Non-null assertion applied to null.");
+    }
+
+    return expression.postfixNotNullAssertion();
   }
 
   private static Expression insertElvisIfNeeded(
       Expression expression, Expression nonNullExpression) {
-    // Don't insert null-check for expressions which are known to be non-null, regardless of
-    // nullability annotations.
     if (expression == null || !expression.canBeNull()) {
+      // Don't insert null-check for expressions which are known to be non-null, regardless of
+      // nullability annotations.
       return expression;
     }
 
@@ -176,44 +190,29 @@ public final class InsertNotNullAssertions extends NormalizationPass {
       return nonNullExpression;
     }
 
-    return introduceTemporaryVariableIfNeeded(
-        expression,
-        variable ->
-            ConditionalExpression.newBuilder()
-                .setConditionExpression(
-                    variable
-                        .createReference()
-                        .infixEquals(expression.getTypeDescriptor().getNullValue()))
-                .setTrueExpression(nonNullExpression)
-                .setFalseExpression(variable.createReference())
-                .setTypeDescriptor(TypeDescriptors.get().javaLangObject.toNonNullable())
-                .build());
-  }
-
-  private static Expression introduceTemporaryVariableIfNeeded(
-      Expression expression, Function<Variable, Expression> expressionBuilder) {
-    if (expression instanceof VariableReference) {
-      VariableReference variableReference = (VariableReference) expression;
-      Variable variable = variableReference.getTarget();
-      if (variable.isFinal()) {
-        return expressionBuilder.apply(variableReference.getTarget());
-      }
+    MultiExpression.Builder elvisExpressionBuilder = MultiExpression.newBuilder();
+    if (!expression.isIdempotent()) {
+      Variable elvisVariable =
+          Variable.newBuilder()
+              .setName("tmp")
+              .setFinal(true)
+              .setTypeDescriptor(expression.getTypeDescriptor())
+              .build();
+      elvisExpressionBuilder.addExpressions(
+          VariableDeclarationExpression.newBuilder()
+              .addVariableDeclaration(elvisVariable, expression)
+              .build());
+      expression = elvisVariable.createReference();
     }
 
-    Variable variable =
-        Variable.newBuilder()
-            .setFinal(true)
-            .setTypeDescriptor(expression.getTypeDescriptor())
-            .setName("tmp")
-            .setSourcePosition(SourcePosition.NONE)
-            .build();
-
-    return MultiExpression.newBuilder()
+    return elvisExpressionBuilder
         .addExpressions(
-            VariableDeclarationExpression.newBuilder()
-                .addVariableDeclaration(variable, expression)
-                .build(),
-            expressionBuilder.apply(variable))
+            ConditionalExpression.newBuilder()
+                .setConditionExpression(expression.infixEqualsNull())
+                .setTrueExpression(nonNullExpression)
+                .setFalseExpression(expression.clone())
+                .setTypeDescriptor(TypeDescriptors.get().javaLangObject.toNonNullable())
+                .build())
         .build();
   }
 }

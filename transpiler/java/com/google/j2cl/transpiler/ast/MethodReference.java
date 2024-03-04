@@ -74,6 +74,11 @@ public class MethodReference extends Expression {
   }
 
   @Override
+  public boolean canBeNull() {
+    return false;
+  }
+
+  @Override
   public MethodReference clone() {
     return MethodReference.newBuilder()
         .setTypeDescriptor(typeDescriptor)

@@ -63,6 +63,11 @@ public class ArrayCreationReference extends Expression {
   }
 
   @Override
+  public boolean canBeNull() {
+    return false;
+  }
+
+  @Override
   public ArrayCreationReference clone() {
     return ArrayCreationReference.newBuilder()
         .setTargetTypeDescriptor(targetTypeDescriptor)
